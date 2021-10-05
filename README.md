@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://clickhouse.com/learn">
-    <img alt="LearnClickHouse" src="https://clickhouse.com/images/logo-clickhouse.svg" width="60">
+    <img alt="LearnClickHouse" src="https://clickhouse.com/images/logo-clickhouse.svg" width="200">
   </a>
 </p>
 
