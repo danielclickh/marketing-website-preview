@@ -1,0 +1,123 @@
+
+<style>
+
+/* Gating Fade Out Styles */
+    .gate { display: none; }
+    .gated { height: 1000px; overflow-y: hidden; position: relative; }
+    .gated .gate { background: linear-gradient( rgba(37,53,64,0), rgba(37,53,64,1) ); display: block; height: 1000px; left: 0; position: absolute; right: 0; top: 0; z-index: 2; }
+    /* Gating CTA */
+    .gate_cta {
+            background: #F9FAFA;
+            border-radius: 6px;
+            margin: 0 auto;
+            max-width: 440px;
+            padding: 43px 33px;
+            position: relative;
+            top: 50%;
+            text-align: center;
+            transform: translateY(-50%);
+            width: 100%
+    }
+    .gate_cta button {
+            background: #3197D6;
+            border: none;
+            border-radius: 4px;
+            color: #FFF;
+            display: block;
+            font-size: 18px;
+            margin: 0 auto 18px;
+            padding: 13px 33px;
+    }
+    .gate_cta .gate-skip {
+            color: #93A1AF;
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 300;
+            text-decoration: none;
+    }
+    .gate_cta .gate-skip:hover {
+            text-decoration: underline;
+    }
+    .gate_cta h3 {
+            color: #253540;
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 0;
+            text-align: center;
+    }
+    .gate_cta input {
+            border: 1px solid #D6DDE3;
+            border-radius: 2px;
+            font-size: 18px;
+            margin-bottom: 23px;
+            padding: 13px;
+            width: 100%;
+    }
+    .gate_cta p {
+            font-size: 16px;
+            margin-bottom: 23px;
+            text-align: center;
+    }
+</style>
+
+<section>
+    <div class="content gated" >
+        <div class="gate" id="gate">
+            <div class="gate_cta">
+                    <h3>Welcome to Our House!</h3>
+                    <p>Please provide your email address so we can track your progress.</p>
+                    <form class="capture-email">
+                        <input id="email" type="email" placeholder="Enter your email" required />
+                        <button>Continue lesson...</button>
+                    </form>
+                    <p>You must have cookies enabled to view this lesson.</p>
+            </div>
+        </div>
+
+        {{ .Inner | markdownify }}
+    </div>
+</section>
+
+
+<script>
+    (function(){
+            gateCheck();
+            gateEvents();
+            var email = localStorage.getItem('email');
+            
+            // -------------------------------------------------------
+            // FUNCTIONS
+            // -------------------------------------------------------
+            function gateCheck() {
+                    // Gate is shown by default. Let's check if it should be removed
+                    var hideGate = localStorage.getItem('email-stored') || false;
+                    if (hideGate) {
+                            gateHide();
+                    }
+            }
+            function gateEvents() {
+                    // Handle form submission
+                    document.querySelector('.capture-email').addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            // Do something with the form data here...
+                            // Then...
+                            var email = document.getElementById("email").value;
+                            localStorage.setItem('email', email);
+                            
+                            // Save preference to localstorage
+                            gatePrevent();
+                            // Hide the gate immediately
+                            gateHide();
+                    });
+            }
+            function gateHide() {
+                    // Remove the .gated class from .content which hides the entire .gate div
+                    //document.querySelector('.content').classList.remove('gated');
+                    document.getElementById("gate").style.display = "none";
+            }
+            function gatePrevent() {
+                    // Prevent the gate from being shown from this point forward
+                    localStorage.setItem('email-stored', true);
+            }
+    })();
+</script>

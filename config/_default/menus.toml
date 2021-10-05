@@ -1,0 +1,18 @@
+[[main]]
+  name = "Getting Started"
+  url = "docs/gettingstarted"
+  weight = 10
+
+[[main]]
+  name = "ClickHouse"
+  url = "https://clickhouse.com/"
+  weight = 20
+
+
+
+
+
+
+
+
+

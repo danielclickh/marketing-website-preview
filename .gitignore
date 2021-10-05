@@ -1,0 +1,9 @@
+public
+resources
+# Local Netlify folder
+.netlify
+TODO
+content/.DS_Store
+content/docs/gettingstarted/images/.DS_Store
+content/docs/.DS_Store
+.DS_Store
