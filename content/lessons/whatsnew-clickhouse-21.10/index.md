@@ -233,5 +233,6 @@ This event has occurred for 210 artists.
 
 ***
 
-**What's next:** If you are new to ClickHouse, be sure to check out the <a href="../gettingstarted/">Getting Started</a> lesson. Also, be sure to checkout our other lessons on the <a href="../../index.html">ClickHouse Academy</a>.
+**What's next:** If you are new to ClickHouse, be sure to check out the <a href="../gettingstarted/">Getting Started</a> lesson. You can view all of our lessons on the <a href="../../index.html">Learn ClickHouse</a> home page
+
 
