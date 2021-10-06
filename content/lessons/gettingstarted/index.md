@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with ClickHouse"
-description: "By going through this lesson, you’ll learn how to run ClickHouse, define a database table, and insert some data."
+description: "By going through this tutorial, you will learn how to start up ClickHouse, create a new table, and insert some data."
 date: 2021-10-01
 lastmod: 2021-10-01
 draft: false

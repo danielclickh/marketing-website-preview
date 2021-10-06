@@ -1,6 +1,6 @@
 ---
 title: "What's New in ClickHouse 21.10"
-description: ""
+description: "Check out the new SQL operators, including INTERSECT and EXCEPT."
 lead: ""
 date: 
 lastmod: 

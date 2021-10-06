@@ -1,10 +1,10 @@
 ---
-title: "Inserting CSV Files into ClickHouse"
+title: "Using Kafka with ClickHouse"
 description: "Description..."
 lead: "Lead..."
 date: 
 lastmod: 
-draft: false
+draft: true
 images: []
 toc: true
 ---

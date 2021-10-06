@@ -1,6 +1,6 @@
 ---
 title: "Analyzing Covid-19 Data with Grafana and ClickHouse"
-description: ""
+description: "A tutorial on how to connect Grafana to ClickHouse to build visualizations and analyze data."
 lead: ""
 date: 
 lastmod: 

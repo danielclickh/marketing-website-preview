@@ -8,7 +8,7 @@ draft: false
 images: []
 
 custom_title_enabled: true
-custom_title_value: "Home - ClickHouse Academy"
+custom_title_value: "Home - Learn ClickHouse"
 ---
 
 

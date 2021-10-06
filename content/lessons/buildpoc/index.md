@@ -1,10 +1,10 @@
 ---
 title: "Building a POC"
-description: "By going through this tutorial, you’ll learn how to set up a simple ClickHouse cluster."
-lead: "By going through this tutorial, you’ll learn how to set up a simple ClickHouse cluster."
+description: "Description..."
+lead: ""
 date: 2020-10-13T15:21:01+02:00
 lastmod: 2020-10-13T15:21:01+02:00
-draft: false
+draft: true
 images: []
 toc: true
 ---
