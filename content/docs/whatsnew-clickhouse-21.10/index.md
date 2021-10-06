@@ -7,14 +7,11 @@ lastmod:
 draft: false
 images: []
 toc: true
+
+duration: "10-15 minutes"
+audience: "If you want to see how to use the new SQL operators in 21.10, this lesson is for you"
+
 ---
-
-{{< topimage >}}
-
-*** 
-**Duration:** 10-15 minutes
-
-**Audience:** If you want to see how to use the new SQL operators in 21.10, this lesson is for you.
 
 **Overview:** The latest release of ClickHouse 21.10 includes support for the subquery operators **INTERSECT**, **EXCEPT**, **ANY** and **ALL**. The operators are a great addition  - you just need to understand a few details about how they work. We will look at some Spotify data that contains the number of times a song was streamed per day.
 
@@ -190,7 +187,7 @@ The **ANY** operator compares a given value in one query with a set of values in
 
 1. Review the following query. Can you figure out which artist will get returned?
 ```sql
-select distinct Artist from spotify.songs where Streams == ANY (
+select distinct Artist from spotify.songs where Streams = ANY (
      select max(Streams) from spotify.songs group by Date
 ) 
 ```

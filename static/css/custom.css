@@ -30,3 +30,8 @@ hr {
     --bs-body-font-family: hind siliguri,sans-serif;
 }
 
+.anchor {
+    visibility: hidden;
+    padding-left: 0.5rem;
+    display: none;
+}

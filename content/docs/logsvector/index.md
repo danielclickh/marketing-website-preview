@@ -7,26 +7,23 @@ lastmod:
 draft: false
 images: []
 toc: true
+duration: "15 minutes"
+audience: "Anyone interested in ingesting log events into ClickHouse"
+
 ---
-
-{{< topimage >}}
-
-*** 
-**Duration:** 15 minutes
-
-**Audience:** Anyone interested in ingesting log events into ClickHouse.
 
 **Overview:** Being able to analyze your logs in real time is critical for production applications. Have you ever wondered if ClickHouse is good at storing and analyzing log data? Just checkout <a href="https://eng.uber.com/logging/" target="_blank">Uber's experience</a> with converting their logging infrastructure from ELK to ClickHouse. 
 
 In this lesson, we will get you started with ingesting logs from a file into into a ClickHouse table. We will be using the popular data pipeline <a href="https://vector.dev/docs/about/what-is-vector/" target="_blank">Vector</a>, which provides a simple, built-in mechanism for tailing a log file and sending it to ClickHouse.
 
+Let's get started!
+
+***
+
 **Prerequisites:** You will need **Docker** installed if you want to follow along.
 
 ***
 
-Let's get started!
-
-***
 
 
 ## 1. 
