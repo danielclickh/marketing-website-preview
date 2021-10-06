@@ -1,10 +1,10 @@
 ---
-title: "Using Kafka with ClickHouse"
+title: "Using ClickHouse for Log Data"
 description: "Description..."
 lead: "Lead..."
 date: 
 lastmod: 
-draft: false
+draft: true
 images: []
 toc: true
 ---

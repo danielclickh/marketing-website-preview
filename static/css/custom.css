@@ -35,3 +35,10 @@ hr {
     padding-left: 0.5rem;
     display: none;
 }
+
+.image-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+  }
