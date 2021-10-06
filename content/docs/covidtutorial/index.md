@@ -7,26 +7,21 @@ lastmod:
 draft: false
 images: []
 toc: true
+
+duration: "20 minutes"
+audience: "Anyone interested in learning how to connect Grafana to ClickHouse for building visualizations and dashboards"
+
 ---
 
-
-{{< topimage >}}
-
-***
-
-**Duration:** 20 minutes
-
-**Audience:** Anyone interested in learning how to connect Grafana to ClickHouse for building visualizations and dashboards.
-
 **Overview:** In this lesson, you will learn how to analyze data in ClickHouse using Grafana. The data is already indexed for you, so the focus will be on how to configure Grafana to connect to ClickHouse. 
+
+Let's get started!
 
 ***
 
 ### Prerequisites
 
 - You will need **Docker** installed and running so that you can start up a Docker Compose file
-
-Let's get started!
 
 *** 
 

@@ -6,15 +6,10 @@ lastmod: 2021-10-01
 draft: false
 images: []
 toc: true
+duration: "10 minutes"
+audience: "Anyone brand new to ClickHouse"
+
 ---
-
-{{< topimage >}}
-
-***
-
-**Duration:** 10 minutes
-
-**Audience:** Anyone brand new to ClickHouse
 
 **Overview:** In this lesson, you will get ClickHouse up and running on your local machine, create a new database and table, and insert some data into that table. 
 
@@ -26,7 +21,8 @@ Let's get started!
 
 - You will need a Linux or Mac OS X machine
 - Optionally, you can use Docker
-- ClickHouse *does not run on Windows*, so Windows users will need to either:
+- Windows users will need to either:
+  - run ClickHouse within the WSL (Windows Subsystem for Linux)
   - install <a href="https://docs.docker.com/desktop/windows/install/" target="_blank">Docker on Windows</a>
   - run Linux in a virtual machine using something like <a href="https://www.virtualbox.org/" target="_blank">VirtualBox</a>
   - create a Linux instance using your favorite cloud provider
@@ -52,8 +48,9 @@ cd clickhouse
 | MacOS x86_64      |  `curl -O 'https://builds.clickhouse.com/master/macos/clickhouse' && chmod a+x ./clickhouse`       |
 | MacOS Aarch64   | `curl -O 'https://builds.clickhouse.com/master/macos-aarch64/clickhouse' && chmod a+x ./clickhouse`        |
 | FreeBSD x86_64  | `curl -O 'https://builds.clickhouse.com/master/freebsd/clickhouse' && chmod a+x ./clickhouse`  |
+| Linux x86_64  | `curl -O 'https://builds.clickhouse.com/master/amd64/clickhouse' && chmod a+x ./clickhouse`  |
 | Linux AArch64  | `curl -O 'https://builds.clickhouse.com/master/aarch64/clickhouse' && chmod a+x ./clickhouse`  |
-| Docker | `docker run -d --name my-clickhouse-server --ulimit nofile=262144:262144 yandex/clickhouse-server` |
+| Docker | `docker run -d --name my-clickhouse-server --ulimit nofile=262144:262144 clickhouse/clickhouse-server` |
 
 
 {{% notice note %}}
@@ -275,7 +272,7 @@ The **clickhouse** binary includes a client app that connects to a ClickHouse se
 
 If you are using Docker, execute the following command to download and run the ClickHouse client image:
 ```bash
-docker run -it --rm --link my-clickhouse-server:clickhouse-server yandex/clickhouse-client --host clickhouse-server
+docker run -it --rm --link my-clickhouse-server:clickhouse-server clickhouse/clickhouse-client --host clickhouse-server
 ```
 
 2. You should now see the prompt for the ClickHouse client:
