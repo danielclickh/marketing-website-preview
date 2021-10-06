@@ -24,8 +24,6 @@ Let's get started!
 
 ***
 
-
-
 ## 1. 
 
 
