@@ -3,8 +3,8 @@
 ## Homepage
 title = "Home"
 titleSeparator = "-"
-titleAddition = "ClickHouse Academy"
-description = "ClickHouse Academy - Discover. Learn. Build. Select a learning module below to get started."
+titleAddition = "Learn ClickHouse"
+description = "Learn ClickHouse - Discover. Learn. Build. Select a learning module below to get started."
 
 # Add custom css files
 custom_css = ["css/custom.css", "css/prism.css"]

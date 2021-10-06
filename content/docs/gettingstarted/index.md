@@ -31,7 +31,7 @@ Let's get started!
 
 ## 1. Installing ClickHouse
 
-There are several ways to install ClickHouse, including DEB and RPM packages. We also provide several pre-built binaries that you can simply download and run. 
+There are several ways to install ClickHouse, including DEB and RPM packages. We also provide several pre-built binaries that you can simply download and run. Click on **Show instructions** to get started...
 
 {{< detail-tag "Show instructions" >}}
 
@@ -116,7 +116,7 @@ That's it! You now have the ClickHouse server up and running. Let's see how to i
 
 ## 3. The ClickHouse Play UI
 
-The ClickHouse server includes a UI for executing SQL commands. In this step you will see how to access the **Play UI** and run SQL commands.
+The ClickHouse server includes a **Play UI** for executing SQL commands. In this step you will see how to access the Play UI and run SQL commands.
 
 {{< detail-tag "Show instructions" >}}
 
@@ -170,10 +170,10 @@ create database gettingstarted
 show databases
 ```
 
-3. Creating a table is a bit different in that ClickHouse has its own data types, and every table must specify the **type** of table it is using the **Engine** property.
+3. Creating a table is a bit different in that ClickHouse has its own data types, and every table must specify an **Engine** property that determines the type of table to be created.
 
 {{% notice note %}}
-The **table engine** determines how and where the data is stored, which queries are supported, support for concurrency, and other details that you will need to gradually understand as you work with ClickHouse. For now, we will the **MergeTree** engine - a good choice starting point when you are not sure which engine you need.
+The **table engine** determines how and where the data is stored, which queries are supported, support for concurrency, and other details that you will need to gradually understand as you work with ClickHouse. For now, we will use the **MergeTree** engine - a good starting point when you are not sure which engine you need.
 {{% /notice %}}
 
 Run the following command to define a new **MergeTree** table named **clickstream** in the **gettingstarted** database:
@@ -198,10 +198,11 @@ Your table should look like the following:
 
 <img src="./images/describetable.png" width="600px" alt="" />
 
-Visit the <a href="https://clickhouse.com/docs/en/sql-reference/data-types/">docs</a> for more details on the various ClickHouse data types.
 
 {{% notice note %}}
-- The **String** type replaces the types VARCHAR, BLOB, CLOB, and others from other databases
+Visit the <a href="https://clickhouse.com/docs/en/sql-reference/data-types/">docs</a> for more details on the various ClickHouse data types, but here are a few notes about the data types in your new table:
+
+- The **String** type replaces VARCHAR, BLOB, CLOB and other string-like data types from other databases
 - **UInt64** is a 64-bit unsigned integer
 - **Date** is one of several ways to store dates in ClickHouse
 - If you know the precise length of all strings in a column, then use the **FixedString(_n_)** data type
@@ -261,11 +262,11 @@ select * from gettingstarted.clickstream where time_stamp >= toDate(1633193802)
 
 ## 6. The ClickHouse Client
 
-The **clickhouse** binary includes a client app that connects to a ClickHouse server and allows you to execute SQL commands from a shell or command line. The client is easy to start...
+The **clickhouse** binary includes a client app that connects to a ClickHouse server and allows you to execute SQL commands from a command line or shell script. The client is easy to start...
 
 {{< detail-tag "Show instructions" >}}
 
-1. If you are not using Docker, then run the following command from within the **clickhouse** folder where downloaded the binary:
+1. If you are not using Docker, then run the following command from within the **clickhouse** folder where you downloaded the binary:
 ```bash
 ./clickhouse client 
 ```
@@ -275,7 +276,7 @@ If you are using Docker, execute the following command to download and run the C
 docker run -it --rm --link my-clickhouse-server:clickhouse-server clickhouse/clickhouse-client --host clickhouse-server
 ```
 
-2. You should now see the prompt for the ClickHouse client:
+2. You should see the prompt for the ClickHouse client:
 ```bash
  $ ./clickhouse client
 ClickHouse client version 21.11.1.8277 (official build).
