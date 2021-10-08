@@ -1,6 +1,6 @@
 ---
-title: "What's New in ClickHouse 21.10"
-description: "You can now pass ClickHouse data to a custom script, materialize a new column, use positional arguments in your queries, and more."
+title: "What's New in ClickHouse 21.9"
+description: "Check out the new SQL operators, including INTERSECT and EXCEPT."
 lead: ""
 date: 
 lastmod: 
@@ -8,96 +8,90 @@ draft: false
 images: []
 toc: true
 
-duration: "15 minutes"
-audience: "Whether you are new to ClickHouse or a long-time user, you will find this lesson helpful in understanding the new features of ClickHouse 21.10"
+duration: "10-15 minutes"
+audience: "If you want to see how to use the new SQL operators in 21.9, this lesson is for you"
 
 ---
 
-**Overview:** In this lesson, you analyze some Hacker News comments using a Python script - a new feature in ClickHouse 21.10. You will also see how to define a new column based on values in other columns.
+**Overview:** The latest release of ClickHouse 21.9 includes support for the subquery operators **INTERSECT**, **EXCEPT**, **ANY** and **ALL**. The operators are a great addition  - you just need to understand a few details about how they work. We will look at some Spotify data that contains the number of times a song was streamed per day.
 
 Let's get started!
 
 ***
 
-**Prerequisites:** You will be running a Docker image that includes ClickHouse 21.10 and a sample dataset already indexed that contains some Hacker News comments, so you will need **Docker** installed if you want to follow along.
+**Prerequisites:** You will be running a Docker image that includes ClickHouse 21.9 and a sample dataset already indexed that contains streaming details from Spotify, so you will need **Docker** installed if you want to follow along.
 
 *** 
 
 
 ## 1. Startup ClickHouse 21.9
 
-We have built a Docker image that already has ClickHouse installed, along with an already-populated table - so the first step is get ClickHouse up and running: 
+We have built a Docker image that already has ClickHouse installed, along with a table that contains the Spotify data: 
 
 {{< detail-tag "Show instructions" >}}
 
-1. Assuming you have Docker installed, run the appropriate following command below for your environment to startup the Docker container:
+1. Assuming you have Docker installed, run the appropriate following command for your environment to startup the Docker container:
 
-##### On Linux, you need the `--network host` option:
+- On **Linux**, you will need to use the `--network host` option:
 ```bash
-docker run -it  --name clickhouse-hackernews -p 9000:9000 -p 9009:9009 -p 8123:8123 --network host --platform linux/amd64 --ulimit nofile=262144:262144 learnclickhouse/public-repo:clickhouse-hackernews-21.10
+# On Linux:
+docker run -it  --name clickhouse-spotify --network host -p 9000:9000 -p 9009:9009 -p 8123:8123 --platform linux/amd64 --ulimit nofile=262144:262144 learnclickhouse/public-repo:clickhouse-spotify-21.10
+
+# On all other environments
+docker run -it  --name clickhouse-spotify -p 9000:9000 -p 9009:9009 -p 8123:8123 --platform linux/amd64 --ulimit nofile=262144:262144 learnclickhouse/public-repo:clickhouse-spotify-21.10
 ```
 
-##### On all other environments:
-```bash
-docker run -it  --name clickhouse-hackernews -p 9000:9000 -p 9009:9009 -p 8123:8123 --platform linux/amd64 --ulimit nofile=262144:262144 learnclickhouse/public-repo:clickhouse-hackernews-21.10
-```
+2. Wait about 30 seconds for the **clickhouse-spotify** container to startup and also for the data to get inserted into the **spotify** database.
+{{< /detail-tag >}}
 
-2. Wait about 30 seconds for the **clickhouse-hackernews** container to startup and also for the data to get inserted into the **hackernews** table of the **default** database.
+*** 
 
-3. Point your web browser to <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>. You should see the embedded ClickHouse Play UI:
+## 2.  Open the ClickHouse SQL Interface
+
+Let's verify you have ClickHouse up and running and the data was inserted successfully.
+
+{{< detail-tag "Show instructions" >}}
+
+1. Point your web browser to <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>. You should see the embedded ClickHouse Play UI:
 
 <img src="./images/clickhouseui.png" width="600px" alt="" />
 
-4. Let's run a few queries to understand what the dataset looks like. Copy-and-paste the following query into the Play UI, then click the **Run** button (or press **Ctrl/Cmd+Enter**). You will see the column names and data types of the **hackernews** table:
+
+2. Let's run a few queries to understand what the dataset looks like. Copy-and-paste the following query into the UI, then click the **Run** button (or press **Ctrl/Cmd+Enter**):
 ```sql
-describe hackernews
+show tables in spotify
 ```
 
-5. Make sure you have 1,000 rows:
+You should see a table named **songs**.
+
+3. The following command shows the schema of **songs**:
 ```sql
-select count(*) from hackernews
+describe spotify.songs
 ```
 
-6. View some of the data in the table:
+4. View some of the data in the tables. This query displays 100 days' worth of streaming data:
 ```sql
-select * from hackernews limit 100
+select * from spotify.songs limit 100
 ```
 
-You are ready to try out some of the new features... 
+5. To see the most popular songs, sort by the **Streams** column:
+```sql
+select * from spotify.songs order by Streams desc
+```
+
+<img src="./images/topstreams.png" width="600px" alt="" />
+
+Aside from one good day for Taylor Swift , it looks like Kendrick Lamar, Post Malone and Drake have plenty of days where one of their songs was the most-listened to on that day (at least for 2017).
 
 {{< /detail-tag >}}
 
 *** 
 
-## 2. Positional Arguments 
+## 3.  The INTERSECT Operator
 
-It is considered a best practice to use column names in ORDER BY and GROUP BY clauses. For example, the following query groups by **foo** then **baz**:
-```sql
-SELECT foo, bar, baz
-FROM my_table
-GROUP BY foo, baz
-```
+**INTERSECT** does exactly what it sounds like it does: it takes two sets of data and returns their intersection. In other words, it compares to sets of rows and returns only the rows where all the columns are equal in both sets. 
 
-With positional arguments, the following query is identical to the previous query:
-```sql
-SELECT foo, bar, baz
-FROM my_table
-GROUP BY 1,3
-```
-
-Let's try it out...
-
-{{< detail-tag "Show instructions" >}}
-
-1. 
-    
-{{< /detail-tag >}}
-
-*** 
-
-## 3.  The Executable Table Engine
-
-ClickHouse 21.10 introduces two new table engines: **Executable** and **ExecutablePool**, which both allow you to execute a query and pass the results to a custom script that you write. Let's see how they work by looking at an example.
+Let's take a look at how it works.
 
 {{< detail-tag "Show instructions" >}}
 
