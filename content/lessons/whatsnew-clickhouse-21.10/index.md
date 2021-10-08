@@ -24,7 +24,7 @@ Let's get started!
 *** 
 
 
-## 1. Startup ClickHouse 21.9
+## 1. Startup ClickHouse 21.10
 
 We have built a Docker image that already has ClickHouse installed, along with an already-populated table - so the first step is get ClickHouse up and running: 
 
@@ -89,8 +89,47 @@ Let's try it out...
 
 {{< detail-tag "Show instructions" >}}
 
-1. 
-    
+{{% notice note %}}
+You need to set **enable_positional_arguments** equal to **1** in order to use positional arguments (they are disabled by default). If you are running multiple commands from the `clickhouse client`, then you can use `SET enable_positional_arguments=1;`. We are using the Play UI which does not allow multiple SQL commands, so we will need to configure that setting in a config file.
+{{% /notice %}}
+
+1. The Docker container has a volume that maps the local **my_config.xml** file to **/etc/clickhouse-server/users.d/my_config.xml**, which means its settings will get assigned when ClickHouse starts. Open **my_config.xml** and add the following XML:
+```xml
+<?xml version="1.0"?>
+<yandex>
+    <profiles>
+        <default>
+            <enable_positional_arguments>1</enable_positional_arguments>
+        </default>
+    </profiles>
+</yandex>
+```
+
+2. Restart your Docker container:
+```bash
+docker restart clickhouse-server
+```
+
+3. Verify that **enable_positional_arguments** is set properly. You should get **1** from the following query:
+```sql
+SELECT getSetting('enable_positional_arguments');
+```
+
+4. Run the following query, which sorts the top 20 stories by score, then date:
+```sql
+SELECT  score, time, title from hackernews order by score desc, time desc limit 20
+```
+
+<img src="./images/top20stories.png" width="600px" alt="Top 20 stories by score then date" />
+
+
+5. You can write an identical query using positional arguments:
+```sql
+SELECT  score, time, title from hackernews order by 1 desc, 2 desc limit 20
+```
+
+You should see the same 20 rows sorted in the same order as the previous query.
+
 {{< /detail-tag >}}
 
 *** 
@@ -101,65 +140,7 @@ ClickHouse 21.10 introduces two new table engines: **Executable** and **Executab
 
 {{< detail-tag "Show instructions" >}}
 
-1. Suppose we want to view artists who had songs with really good days of streaming vs. not-as-good days. In other words, a song that had some great days but also some slow days. The logic could possibly feel like the following SQL, but as you can see this particular query could not possibly have any hits: 
-```sql
-select * from spotify.songs where Streams <= 2000 and Streams >=1000000
-```
-
-2. Let's see how many times a song had more than 1,000,000 streams in a day:
-```sql
-select count(*) from spotify.songs where Streams >= 1000000
-```
-Notice you get 4,440 hits.
-
-3. Now let's see how many times a song had less than 2,000 streams in a day:
-```sql
-select count(*) from spotify.songs where Streams <= 2000
-```
-This happens much more frequently, with 134,666 hits.
-
-4. To use INTERSECT, you run two queries and the responses they have in common are returned. For equality, the responses of both queries must have the same number and data types of columns. Run the following query, noticing that the two queries select the same columns:
-```sql
-select TrackName,Artist from spotify.songs where Streams <= 2000 
-intersect
-select TrackName,Artist from spotify.songs where Streams >= 1000000 
-```
-
-You get 19,014 hits, which might seem contradictory because we know the second query only has 4,440 hits. But notice we selected **TrackName** and **Artist** multiple times in both queries, so for example if *Starboy* by **The Weeknd** appeared 20 times in one search and 100 times in the other, you would get 100 rows in the result.
-
-5. The result would be more interesting if we added **DISTINCT** to both queries. This would tell us how many songs had at least one day with more than 1,000,000 streams **and** at least one day with less than 2,000 streams:
-```sql
-select distinct TrackName,Artist from spotify.songs where Streams <= 2000 
-intersect
-select distinct TrackName,Artist from spotify.songs where Streams >= 1000000
-```
-
-This particular query returns 99 rows.
-
-6. If you want to sort the results, simply sort the first query. For example, the results in this query will be sorted by **TrackName**:
-```sql
-select distinct TrackName,Artist from spotify.songs where Streams <= 2000 order by TrackName
-intersect
-select distinct TrackName,Artist from spotify.songs where Streams >= 1000000
-```
-
-If you think about it, the Christmas songs on the list actually make sense - they probably don't get a lot of streams in April!
-
-<img src="./images/intersect.png" width="600px" alt="" />
-
-7. Notice that the columns selected in the two queries must have the same data types. The column names do not have to match, as long as the data types lineup (the order of columns in the SELECT clause matters). Try the following query:
-```sql
-select distinct TrackName,Artist,Date from spotify.songs where Streams <= 2000
-intersect
-select distinct TrackName,Artist,URL from spotify.songs where Streams >= 1000000
-```
-
-You get the following error:
-```
-Code: 386. DB::Exception: There is no supertype for types Date, String because some of them are String/FixedString and some of them are not. (NO_COMMON_TYPE) (version 21.10.1.8013 (official build))
-```
-
-The third column in the first query is a **Date** and the third column in the second query is a **String**, so the query fails.
+1. hello
 
 {{< /detail-tag >}}
 
@@ -167,18 +148,10 @@ The third column in the first query is a **Date** and the third column in the se
 
 ## 4.  The EXCEPT Operator
 
-The **EXCEPT** operator returns the rows that match the first query but throws out the rows that match the second query. Let's see how it works... 
-
 {{< detail-tag "Show instructions" >}}
 
-1. We have already seen in the INTERSECT example above that 99 songs have had good days and bad days. The following query returns songs that have topped 1,000,000 streams in a  day at least once, but have never had a day with less than 2,000 streams:
-```sql
-select distinct TrackName,Artist from spotify.songs where Streams >=1000000
-except
-select distinct TrackName,Artist from spotify.songs where Streams <= 2000
-```
 
-Notice you only get 15 hits.
+1. d
     
 {{< /detail-tag >}}
 
@@ -187,57 +160,15 @@ Notice you only get 15 hits.
 
 ## 5.  The ANY Operator
 
-The **ANY** operator compares a given value in one query with a set of values in a subquery. If the given value matches *any* of the hits in the subquery, then that row in the first query is returned. Like most situations, it is best understood by an example:
+
 
 {{< detail-tag "Show instructions" >}}
 
-1. Review the following query. Can you figure out which artist will get returned?
-```sql
-select distinct Artist from spotify.songs where Streams = ANY (
-     select max(Streams) from spotify.songs group by Date
-) 
-```
-
-2. Run the query above. You should get 13 artists:
-
-<img src="./images/anyoperator.png" width="600px" alt="" />
-
-
-3. What do the hits mean? Let's break it down...the subquery returns a set of numbers that represent the maximum number of streams in a day. The outer query looks for the **Artist** who had the maximum number of streams that day. Therefore, you seeing artist who, at some point in time, had a day in which one of their songs was the most-streamed song on Spotify.
+1. hello
     
 {{< /detail-tag >}}
 
 *** 
-
-## 6.  The ALL Operator
-
-The **ALL** operator has the same syntax as ANY, except the Boolean logic is different: for the ALL operator, the given value must match *all* of the values in the set of values returned by the subquery.
-
-{{< detail-tag "Show instructions" >}}
-
-1. Run the following query, which returns the average number of daily streams for each of the 16 regions:
-```sql
-select Region, avg(Streams) from spotify.songs group by Region
-```
-
-2. See if you can write a query that returns the artists who have had at least one song with more streams on a day than the average of all the 16 regions.
-
-{{< detail-tag "Show answer" >}}
-
-The following query is one solution:
-```sql 
-select distinct Artist from spotify.songs where Streams > ALL (
-    select avg(Streams) from spotify.songs group by Region
-)
-```
-
-This event has occurred for 210 artists.
-
-{{< /detail-tag >}}
-
-{{< /detail-tag >}}
-
-***
 
 **What's next:** If you are new to ClickHouse, be sure to check out the <a href="../gettingstarted/">Getting Started</a> lesson. You can view all of our lessons on the <a href="../../index.html">Learn ClickHouse</a> home page
 
