@@ -13,57 +13,83 @@ audience: "Whether you are new to ClickHouse or a long-time user, you will find 
 
 ---
 
-**Overview:** In this lesson, you analyze some Hacker News comments using a Python script - a new feature in ClickHouse 21.10. You will also see how to define a new column based on values in other columns.
+**Overview:** In this lesson, you analyze some Hacker News comments using a custom script - a new feature in ClickHouse 21.10. You will also see how to define a new column based on values in other columns.
 
 Let's get started!
 
 ***
 
-**Prerequisites:** You will be running a Docker image that includes ClickHouse 21.10 and a sample dataset already indexed that contains some Hacker News comments, so you will need **Docker** installed if you want to follow along.
+**Prerequisites:** You will be running a Docker Compose file that uses an image with ClickHouse 21.10, Python, and a sample dataset already indexed that contains some Hacker News comments and stories, so you will need **Docker** installed to be able to follow along.
 
 *** 
 
-
 ## 1. Startup ClickHouse 21.10
 
-We have built a Docker image that already has ClickHouse installed, along with an already-populated table - so the first step is get ClickHouse up and running: 
+The first step is get ClickHouse up and running: 
 
 {{< detail-tag "Show instructions" >}}
 
-1. Assuming you have Docker installed, run the appropriate following command below for your environment to startup the Docker container:
-
-##### On Linux, you need the `--network host` option:
+1. Start by creating a folder to work in. It doesn't matter what you call it, but for practical purposes we will call it **whatsnew**:
 ```bash
-docker run -it  --name clickhouse-hackernews -p 9000:9000 -p 9009:9009 -p 8123:8123 --network host --platform linux/amd64 --ulimit nofile=262144:262144 learnclickhouse/public-repo:clickhouse-hackernews-21.10
+mkdir ~/whatsnew
+cd whatsnew
 ```
 
-##### On all other environments:
-```bash
-docker run -it  --name clickhouse-hackernews -p 9000:9000 -p 9009:9009 -p 8123:8123 --platform linux/amd64 --ulimit nofile=262144:262144 learnclickhouse/public-repo:clickhouse-hackernews-21.10
+2. Create a new file named **docker-compose.yml** that contains the following:
+```yml
+version: '3.7'
+
+services:
+  clickhouse-server:
+    image: learnclickhouse/public-repo:clickhouse-hackernews-21.10
+    container_name: clickhouse-server
+    hostname: clickhouse-server
+    ports:
+      - "9000:9000"
+      - "8123:8123"
+      - "9009:9009"
+#    volumes:
+#      - ./my_config.xml:/etc/clickhouse-server/users.d/my_config.xml
+#      - ./my_functions.xml:/etc/clickhouse-server/users.d/my_functions.xml
+    restart: always
+    tty: true
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    cap_add:
+    - IPC_LOCK
 ```
 
-2. Wait about 30 seconds for the **clickhouse-hackernews** container to startup and also for the data to get inserted into the **hackernews** table of the **default** database.
+Notice the volumes are commented out - you will uncomment those later.
 
-3. Point your web browser to <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>. You should see the embedded ClickHouse Play UI:
+3. Start up the **docker-compose.yml** file;
+```bash
+docker-compose up -d
+```
+
+4. Wait about 30 seconds for the **clickhouse-server** container to startup, and also for the data to get inserted into the **hackernews** table of the **default** database.
+
+5. Point your web browser to <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>. You should see the embedded ClickHouse Play UI:
 
 <img src="./images/clickhouseui.png" width="600px" alt="" />
 
-4. Let's run a few queries to understand what the dataset looks like. Copy-and-paste the following query into the Play UI, then click the **Run** button (or press **Ctrl/Cmd+Enter**). You will see the column names and data types of the **hackernews** table:
+6. Let's run a few queries to understand what the dataset looks like. Copy-and-paste the following query into the Play UI, then click the **Run** button (or press **Ctrl/Cmd+Enter**). You will see the column names and data types of the **hackernews** table:
 ```sql
 describe hackernews
 ```
 
-5. Make sure you have 1,000 rows:
+7. Make sure you have 1,125 rows:
 ```sql
 select count(*) from hackernews
 ```
 
-6. View some of the data in the table:
+8. View some of the data in the table:
 ```sql
 select * from hackernews limit 100
 ```
 
-You are ready to try out some of the new features... 
+You are now ready to try out some of the new features... 
 
 {{< /detail-tag >}}
 
@@ -90,10 +116,10 @@ Let's try it out...
 {{< detail-tag "Show instructions" >}}
 
 {{% notice note %}}
-You need to set **enable_positional_arguments** equal to **1** in order to use positional arguments (they are disabled by default). If you are running multiple commands from the `clickhouse client`, then you can use `SET enable_positional_arguments=1;`. We are using the Play UI which does not allow multiple SQL commands, so we will need to configure that setting in a config file.
+You need to set **enable_positional_arguments** to **1** in order to use positional arguments (they are disabled by default). You can use `SET enable_positional_arguments=1;`, but we are using the Play UI which does not allow multiple SQL commands, so we will need to configure that setting in a config file.
 {{% /notice %}}
 
-1. The Docker container has a volume that maps the local **my_config.xml** file to **/etc/clickhouse-server/users.d/my_config.xml**, which means its settings will get assigned when ClickHouse starts. Open **my_config.xml** and add the following XML:
+1. To set the **enable_positional_arguments** property, we will take advantage of the **users.d** folder where config files are automatically loaded at startup. Create a new file named **my_config.xml** that contains the following and save it in your **~/whatsnew/** folder (where you saved **docker-compose.yml**):
 ```xml
 <?xml version="1.0"?>
 <yandex>
@@ -105,12 +131,17 @@ You need to set **enable_positional_arguments** equal to **1** in order to use p
 </yandex>
 ```
 
-2. Restart your Docker container:
-```bash
-docker restart clickhouse-server
+2. Uncomment the **volume** setting in your **docker-compose.yml** file:
+```yml
+
 ```
 
-3. Verify that **enable_positional_arguments** is set properly. You should get **1** from the following query:
+3. Restart your Docker container by running the following command in the **~/whatsnew** folder:
+```bash
+docker-compose up -d
+```
+
+4. Verify that **enable_positional_arguments** is set properly by running the following command in the Play UI. You should get **1** for a response:
 ```sql
 SELECT getSetting('enable_positional_arguments');
 ```
@@ -123,7 +154,7 @@ SELECT  score, time, title from hackernews order by score desc, time desc limit 
 <img src="./images/top20stories.png" width="600px" alt="Top 20 stories by score then date" />
 
 
-5. You can write an identical query using positional arguments:
+5. The following query is identical, but uses positional arguments:
 ```sql
 SELECT  score, time, title from hackernews order by 1 desc, 2 desc limit 20
 ```
