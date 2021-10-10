@@ -199,7 +199,7 @@ Complete the following steps to download and insert the data into your ClickHous
 cat owid-covid-data.csv | ./clickhouse client --query "INSERT INTO covid19db.daily_totals FORMAT CSV"
 ```
 
-3. Run the following command to verify it worked and view some of the data:
+3. Now run the following command to verify it worked and view some of the data:
 ```sql
 ./clickhouse client --query "SELECT * FROM covid19db.daily_totals LIMIT 100"
 ```
