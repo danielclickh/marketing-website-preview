@@ -349,7 +349,9 @@ Having the logs in ClickHouse is great, but storing each event as a single strin
 
     <img src="./images/mv.png" width="400px" alt="" />
 
-By using Vector, which only required a simple install and quick configuration, we can send logs from an Nginx server to a table in ClickHouse. By using a clever materialized view, we can parse those logs into columns for easier analytics. 
+***
+
+**Summary:** By using Vector, which only required a simple install and quick configuration, we can send logs from an Nginx server to a table in ClickHouse. By using a clever materialized view, we can parse those logs into columns for easier analytics. 
 
 {{< /detail-tag >}}
 
