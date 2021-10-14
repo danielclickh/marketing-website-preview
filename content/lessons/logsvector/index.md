@@ -7,7 +7,7 @@ lastmod:
 draft: false
 images: []
 toc: true
-duration: "15 minutes"
+duration: "20-25 minutes"
 audience: "Anyone interested in ingesting log events into ClickHouse"
 
 ---
@@ -270,9 +270,91 @@ Congrats - you did it! Notice how easy it would be to tail your own log file - j
     
 {{< /detail-tag >}}
 
+***
+
+## 6. Parse the Logs
+
+Having the logs in ClickHouse is great, but storing each event has a single string does not allow for much data analysis. Let's see how to parse the log events using a materialized view.
+
+{{< detail-tag "Show instructions" >}}
+
+1. A **materialized view** (MV, for short) is a new table based on an existing table, and when a row is added to the existing table, it is also added to the materialized view. We want the MV to be a parsed representation of the log events in **access_logs**, which look like:
+    ```bash
+    192.168.208.1 - - [12/Oct/2021:15:32:43 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
+    ```
+
+    There are various functions in ClickHouse to parse the string, but for starters let's take a look at **splitByWhitespace** - which parses a string by whitespace and returns each token in an array. To demonstrate, run the following command:
+    ```sql
+    SELECT splitByWhitespace('192.168.208.1 - - [12/Oct/2021:15:32:43 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"')
+    ```
+
+    Notice the response is pretty close to what we want! A few of the strings have some extra characters, and the referer agent (the browser details) did not need to be parsed, but we will resolve that in the next step.
+
+2. Similar to **splitByWhitespace**, the **splitByRegexp** function splits a string into an array based on a regular expression. Run the following command, and notice that the response is two strings, and that the second string returned is the user agent successfully parsed from the log:
+    ```sql
+    SELECT splitByRegexp('\S \d+ "([^"]*)"', '192.168.208.1 - - [12/Oct/2021:15:32:43 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"')
+    ```
+
+3. Before looking at the final **CREATE MATERIALIZED VIEW** command, let's view a couple more functions used to cleanup the data. For example, the `RequestMethod` looks like **"GET** with an unwanted double-quote. Run the following **trim** function, which removes the double quote:
+    ```sql
+    SELECT trim(LEADING '"' FROM '"GET')
+    ```
+
+4. The time string has a leading square bracket, and also is not in a format that ClickHouse can parse into a date. However, if we change the separater from a `:` to a `,` then the parsing works great:
+    ```sql
+    SELECT parseDateTimeBestEffort(replaceOne(trim(LEADING '[' FROM '[12/Oct/2021:15:32:43'), ':', ' '))
+    ```
+
+5. We are now ready to define our materialized view. Our definition includes **POPULATE AS**, which means the existing rows in **access_logs** will be processed and inserted right away. Run the following SQL statement:
+    ```sql
+    CREATE MATERIALIZED VIEW nginxdb.access_logs_view
+    (
+        RemoteAddr String,
+        Client String,
+        RemoteUser String,
+        TimeLocal DateTime,
+        RequestMethod String,
+        Request String,
+        HttpVersion String,
+        Status Int32,
+        BytesSent Int64,
+        UserAgent String
+    )
+    ENGINE = MergeTree()
+    ORDER BY RemoteAddr
+    POPULATE AS
+    WITH 
+        splitByWhitespace(message) as split,
+        splitByRegexp('\S \d+ "([^"]*)"', message) as referer
+    SELECT
+        split[1] AS RemoteAddr,
+        split[2] AS Client,
+        split[3] AS RemoteUser,
+        parseDateTimeBestEffort(replaceOne(trim(LEADING '[' FROM split[4]), ':', ' ')) AS TimeLocal,
+        trim(LEADING '"' FROM split[6]) AS RequestMethod,
+        split[7] AS Request,
+        trim(TRAILING '"' FROM split[8]) AS HttpVersion,
+        split[9] AS Status,
+        split[10] AS BytesSent,
+        trim(BOTH '"' from referer[2]) AS UserAgent
+    FROM 
+        (SELECT message FROM nginxdb.access_logs)
+    ```
+
+6. Now verify it worked. You should see the access logs nicely parsed into columns:
+    ```sql
+    SELECT * FROM nginxdb.access_logs_view
+    ```
+
+    <img src="./images/mv.png" width="400px" alt="" />
+
+
+{{< /detail-tag >}}
+
 *** 
 
 **What's next:** Check out the following lessons to continue your journey: 
 
+- <a href="../covidtutorial-grafana">Learn how to visualize your data using Grafana</a>
 - <a href="../whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
 - You can view all of our lessons on the <a href="../../index.html">Learn ClickHouse</a> home page
