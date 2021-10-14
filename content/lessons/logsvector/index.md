@@ -26,7 +26,7 @@ Let's get started!
 
 ## 1. Startup ClickHouse
 
-We have provided a Docker Compose file with ClickHouse in one container, and Nginx and Vector running on a second container...
+We have provided a Docker Compose file with ClickHouse in one container, and Nginx and Vector running in a second container...
 
 {{< detail-tag "Show instructions" >}}
 
@@ -71,7 +71,6 @@ We have provided a Docker Compose file with ClickHouse in one container, and Ngi
         - "8383:8383"
         #volumes:
         #  - ./nginx.conf:/etc/nginx/nginx.conf
-        #  - ./website:/usr/share/nginx/html
         #  - './vector.toml:/vector/config/vector.toml'
     ```
 
@@ -79,7 +78,9 @@ We have provided a Docker Compose file with ClickHouse in one container, and Ngi
 The **clickhouse-server-21.9** image is a simple install of ClickHouse 21.9, and the **nginx-with-vector** image extends **nginx** and contains a downloaded and unzipped install of Vector.
 {{% /notice %}}
 
-3. Notice the **docker-compose.yml** file has three volumes defined but commented out. You will define the files for those mount points as you work through the lesson. From a terminal, run the following command from the folder where you created **docker-compose.yml**:
+3. Notice the **docker-compose.yml** file has two files mounted but commented out. You will define the files for those mount points as you work through the lesson. 
+
+4. From a terminal, run the following command from the folder where you created **docker-compose.yml**:
     ```bash
     docker-compose up &
     ```
@@ -98,7 +99,7 @@ Let's define a table to store the log events...
 
 1. Open the Play UI at <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>:
 
-<img src="./images/playui.png" width="600px" alt="" />
+    <img src="./images/playui.png" width="600px" alt="" />
 
 2. Run the following SQL in the Play UI to define a database named **nginxdb**:
     ```sql
@@ -183,7 +184,7 @@ Access logs will be sent to **/var/log/nginx/my_access.log** using the **combine
 
 4. Verify Nginx is running by viewing its default home page at <a href="http://localhost/" target="_blank">http://localhost/</a>:
 
-<img src="./images/nginx.png" width="400px" alt="" />
+    <img src="./images/nginx.png" width="400px" alt="" />
 
 5. Refresh the home page a few times to generate some log events in the access log.
 
@@ -199,7 +200,7 @@ Access logs will be sent to **/var/log/nginx/my_access.log** using the **combine
     192.168.208.1 - - [12/Oct/2021:03:31:49 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
     ```
 
-You are ready to send those log events to your table in ClickHouse...
+You are now ready to send those log events to your table in ClickHouse...
 
 {{< /detail-tag >}}
 
@@ -274,7 +275,7 @@ Congrats - you did it! Notice how easy it would be to tail your own log file - j
 
 ## 6. Parse the Logs
 
-Having the logs in ClickHouse is great, but storing each event has a single string does not allow for much data analysis. Let's see how to parse the log events using a materialized view.
+Having the logs in ClickHouse is great, but storing each event as a single string does not allow for much data analysis. Let's see how to parse the log events using a materialized view.
 
 {{< detail-tag "Show instructions" >}}
 
@@ -288,9 +289,9 @@ Having the logs in ClickHouse is great, but storing each event has a single stri
     SELECT splitByWhitespace('192.168.208.1 - - [12/Oct/2021:15:32:43 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"')
     ```
 
-    Notice the response is pretty close to what we want! A few of the strings have some extra characters, and the referer agent (the browser details) did not need to be parsed, but we will resolve that in the next step.
+    Notice the response is pretty close to what we want! A few of the strings have some extra characters, and the user agent (the browser details) did not need to be parsed, but we will resolve that in the next step.
 
-2. Similar to **splitByWhitespace**, the **splitByRegexp** function splits a string into an array based on a regular expression. Run the following command, and notice that the response is two strings, and that the second string returned is the user agent successfully parsed from the log:
+2. Similar to **splitByWhitespace**, the **splitByRegexp** function splits a string into an array based on a regular expression. Run the following command, which returns two strings. Notice the second string returned is the user agent successfully parsed from the log:
     ```sql
     SELECT splitByRegexp('\S \d+ "([^"]*)"', '192.168.208.1 - - [12/Oct/2021:15:32:43 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"')
     ```
@@ -348,6 +349,7 @@ Having the logs in ClickHouse is great, but storing each event has a single stri
 
     <img src="./images/mv.png" width="400px" alt="" />
 
+By using Vector, which only required a simple install and quick configuration, we can send logs from an Nginx server to a table in ClickHouse. By using a clever materialized view, we can parse those logs into columns for easier analytics. 
 
 {{< /detail-tag >}}
 
