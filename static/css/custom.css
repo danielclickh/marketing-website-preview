@@ -47,3 +47,18 @@ ol li  {
     margin-top: 3rem;
     margin-bottom: 1rem;
 }
+
+.col-lg-5 {
+    background-color: white;
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+    font-size: calc(0.75rem + 0.3vw);
+}
+
+.h4 {
+    font-size: calc(1.0rem + 0.3vw);
+}
+
+.section.section-sm {
+    background-color: aliceblue;
+}
