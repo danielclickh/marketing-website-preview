@@ -8,7 +8,7 @@ draft: false
 images: []
 toc: true
 
-duration: "30-40 minutes"
+duration: "30 minutes"
 audience: "Whether you are new to ClickHouse or a long-time user, you will find this lesson helpful in understanding the new features of ClickHouse 21.10"
 
 ---
@@ -19,13 +19,13 @@ Let's get started!
 
 ***
 
-**Prerequisites:** You will be running a Docker Compose file that uses an image with ClickHouse 21.10, Python, and a sample dataset already indexed that contains some Hacker News comments and stories, so you will need **Docker** installed to be able to follow along.
+**Prerequisites:** You will run a Docker Compose file with an image containing ClickHouse 21.10, Python, and a sample dataset already inserted into a table that contains some Hacker News comments and stories, so you will need **Docker** installed to be able to follow along.
 
 *** 
 
 ## 1. Startup ClickHouse 21.10
 
-The first step is get ClickHouse up and running: 
+The first step is to get ClickHouse up and running: 
 
 {{< detail-tag "Show instructions" >}}
 
@@ -41,34 +41,36 @@ The first step is get ClickHouse up and running:
 
     services:
         clickhouse-server:
-        image: learnclickhouse/public-repo:clickhouse-hackernews-21.10
-        container_name: clickhouse-server
-        hostname: clickhouse-server
-        ports:
-            - "9000:9000"
-            - "8123:8123"
-            - "9009:9009"
-        # volumes:
-        #   - ./my_config.xml:/etc/clickhouse-server/users.d/my_config.xml
-        #   - ./remove_stopwords.py:/var/lib/clickhouse/user_scripts/remove_stopwords.py
-        #   - ./log_query_config.xml:/etc/clickhouse-server/users.d/log_query_config.xml
-        tty: true
-        ulimits:
-            nofile:
-            soft: 262144
-            hard: 262144
-        cap_add:
-        - IPC_LOCK
+            image: learnclickhouse/public-repo:clickhouse-hackernews-21.10
+            container_name: clickhouse-server
+            hostname: clickhouse-server
+            ports:
+                - "9000:9000"
+                - "8123:8123"
+                - "9009:9009"
+            # volumes:
+            #   - ./my_config.xml:/etc/clickhouse-server/users.d/my_config.xml
+            #   - ./remove_stopwords.py:/var/lib/clickhouse/user_scripts/remove_stopwords.py
+            #   - ./log_query_config.xml:/etc/clickhouse-server/users.d/log_query_config.xml
+            tty: true
+            ulimits:
+                nofile:
+                    soft: 262144
+                    hard: 262144
+            cap_add:
+            - IPC_LOCK
     ```
 
+{{% notice note %}}
 Notice the volumes are commented out - you will uncomment those later.
+{{% /notice %}}
 
 3. Start up the **docker-compose.yml** file;
     ```bash
-    docker-compose up &
+    docker-compose up -d
     ```
 
-4. Wait about 30 seconds for the **clickhouse-server** container to startup, and also for the data to get inserted into the **hackernews** table of the **default** database.
+4. Wait about 30 seconds for the **clickhouse-server** container to startup and for the data to get inserted into the **hackernews** table of the **default** database.
 
 5. Point your web browser to <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>. You should see the embedded ClickHouse Play UI:
 
@@ -98,18 +100,16 @@ You are now ready to try out some of the new features...
 ## 2. Positional Arguments 
 
 It is considered a best practice to use column names in ORDER BY and GROUP BY clauses. For example, the following query groups by **foo** then **baz**:
-    ```sql
+
     SELECT foo, bar, baz
     FROM my_table
     GROUP BY foo, baz
-    ```
 
 With positional arguments, the following query is identical to the previous query:
-    ```sql
+
     SELECT foo, bar, baz
     FROM my_table
     GROUP BY 1,3
-    ```
 
 Let's try it out...
 
@@ -146,7 +146,7 @@ You need to set **enable_positional_arguments** to **1** in order to use positio
 
 4. Verify that **enable_positional_arguments** is set properly by running the following command in the Play UI. You should get **1** for a response:
     ```sql
-    SELECT getSetting('enable_positional_arguments');
+    SELECT getSetting('enable_positional_arguments')
     ```
 
 4. Run the following query, which sorts the top 20 stories by score, then date:
@@ -162,7 +162,7 @@ You need to set **enable_positional_arguments** to **1** in order to use positio
     SELECT  score, time, title from hackernews order by 1 desc, 2 desc limit 20
     ```
 
-You should see the same 20 rows sorted in the same order as the previous query.
+    You should see the same 20 rows sorted in the same order as the previous query.
 
 {{< /detail-tag >}}
 
@@ -170,7 +170,7 @@ You should see the same 20 rows sorted in the same order as the previous query.
 
 ## 3.  The Executable Table Engine
 
-ClickHouse 21.10 introduces two new table engines: **Executable** and **ExecutablePool**, which both allow you to create a new table that is built by streaming the response of a query to a custom script. Let's see how they work by looking at an example that removes English stopwords from the Hacker News comments.
+ClickHouse 21.10 introduces two new table engines: **Executable** and **ExecutablePool**, which both allow you to create a new table that is built by streaming the records from a query response through a custom script. Let's see how they work by looking at an example that removes English stopwords from the Hacker News comments using the Python NLTK package.
 
 {{< detail-tag "Show instructions" >}}
 
@@ -180,7 +180,7 @@ ClickHouse 21.10 introduces two new table engines: **Executable** and **Executab
     ```
 
 {{% notice note %}}
-Notice that the **comments_no_stopwords** table is built by streaming the **text** column of **hackernews** to the **my_python.py** script. The table is not populated yet, so we will write the script next. It will be populated when you run a **SELECT** query.
+Notice that the **comments_no_stopwords** table is built by streaming the **text** column of **hackernews** to the **remove_stopwords.py** script. The table is not populated yet, so we will write the script next. It will be populated when you run a **SELECT** query.
 {{% /notice %}}
 
 2. ClickHouse looks in the **user_scripts** folder for your custom scripts, which on Linux is (typically) in **/var/lib/clickhouse/user_scripts**. The **docker-compose.yml** file has a volume that mounts **remove_stopwords.py** to the **user_scripts** folder, so create a new file named **remove_stopwords.py** in the **whatsnew** folder.
@@ -209,34 +209,39 @@ Notice that the **comments_no_stopwords** table is built by streaming the **text
         main()
     ```
 
-4. Notice inside **main()** there is a **for** loop that reads from **stdin**:
+4. Make sure the Python file is executable:
+    ```bash
+    chmod +x remove_stopwords.py
+    ```
+
+5. Notice inside **main()** there is a **for** loop that reads from **stdin**:
     ```python
     for comment in sys.stdin:
     ```
-    The results of **SELECT text FROM hackernews** from the table definition are streamed to **remove_stopwords.py** via the standard input, sending a block of rows (about 64k) at a time. 
+    The results of **SELECT text FROM hackernews** (as defined in the table definition) are streamed to **remove_stopwords.py** via the standard input, sending a block of rows (about 64k) at a time. 
 
-5. Notice that for each row sent to **remove_stopwords.py**, the **comment** (which is the value of the **text** field in **hackernews**) is tokenized into words, then the stopwords are removed:
+6. Notice that for each row sent to **remove_stopwords.py**, the **comment** (which is the value of the **text** field in **hackernews**) is tokenized into words, then the stopwords are removed:
     ```python
     words_in_comment = word_tokenize(comment)
     comment_no_stopwords = [word for word in words_in_comment if word.lower() not in stopwords]
     ```
 
-6. How does the script write data back to the ClickHouse table? By printing tab-delimited rows to **stdout**. The output of the following line of code gets inserted into the **comments_no_stopwords** table in the **value** column (which you will notice in the table definition):
+7. How does the script write data back to the ClickHouse table? By printing tab-delimited rows to **stdout**. The output of the following line of code gets inserted into the **comments_no_stopwords** table in the **value** column (which you will notice in the table definition):
     ```python
     print( ' '.join(comment_no_stopwords) + "\n" )
     ```
 
-7. Uncomment the following volume in **docker-compose.yml**:
+8. Uncomment the following volume in **docker-compose.yml**:
     ```bash
        - ./remove_stopwords.py:/var/lib/clickhouse/user_scripts/remove_stopwords.py
     ```
 
-8. Restart your Docker container by running the following command in the **~/whatsnew** folder:
+9. Restart your Docker container by running the following command in the **~/whatsnew** folder:
     ```bash
     docker-compose up -d
     ```
 
-9. Your Python script still has not executed yet...but it will when you run a query on the **comments_no_stopwords** table. Run the following query, and it should execute fairly quickly since **hackernews** only has about 1,100 rows:
+10. Your Python script still has not executed yet...but it will when you run a query on the **comments_no_stopwords** table. Run the following query, and it should execute fairly quickly since **hackernews** only has about 1,100 rows:
     ```sql
     select * from comments_no_stopwords
     ```
@@ -245,7 +250,7 @@ Notice that the **comments_no_stopwords** table is built by streaming the **text
 Use the **max_command_execution_time** property to specify a maximum execution time (in seconds) before throwing an exception. The default is 0, which means your script could run indefinitely.
 {{% /notice %}}
 
-10. In the response, you should see the Hacker News comments, but without any stopwords. They will look like the following - notice stopwords like "the", "is", "and" and so on are removed from the text:
+11. In the response, you should see the Hacker News comments, but without any stopwords. They will look like the following - notice stopwords like "the", "is", "and" and so on are removed from the text:
     ```bash
     installed iOS4 iPhone 3G saw crawl becoming iPaperWeight . horribly slow launching every app keyboard slow unusable.
     ```
@@ -327,10 +332,10 @@ If you set **log_queries_probability** to **0**, no queries will get logged in *
 
 ## 5.  Materialize a Column
 
-When you add a new column to a table that involves a computation, you might want to **materialize the column** - which performs the computation for all the columns all at once using the **MATERIALIZE COLUMN** command.
+When you add a new column to a table that involves a computation, you might want to **_materialize the column_** - which performs the computation for all the columns all at once using the **MATERIALIZE COLUMN** command.
 
 {{% notice note %}}
-If you do not materialize the column, then the values are computed at the time of a SELECT. That may work well for some use cases, but by materializing the column at definition time, you can increase the performance of your queries because all the columns will already have performed the computation.
+If you do not materialize the column, then the values are computed at the time of a SELECT. That may work well for some use cases, but by materializing the column at definition time, you can increase the performance of your queries because all the row will already have performed the computation.
 {{% /notice %}}
 
 {{< detail-tag "Show instructions" >}}
