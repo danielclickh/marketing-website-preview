@@ -98,18 +98,18 @@ You are now ready to try out some of the new features...
 ## 2. Positional Arguments 
 
 It is considered a best practice to use column names in ORDER BY and GROUP BY clauses. For example, the following query groups by **foo** then **baz**:
-```sql
-SELECT foo, bar, baz
-FROM my_table
-GROUP BY foo, baz
-```
+    ```sql
+    SELECT foo, bar, baz
+    FROM my_table
+    GROUP BY foo, baz
+    ```
 
 With positional arguments, the following query is identical to the previous query:
-```sql
-SELECT foo, bar, baz
-FROM my_table
-GROUP BY 1,3
-```
+    ```sql
+    SELECT foo, bar, baz
+    FROM my_table
+    GROUP BY 1,3
+    ```
 
 Let's try it out...
 
@@ -327,12 +327,34 @@ If you set **log_queries_probability** to **0**, no queries will get logged in *
 
 ## 5.  Materialize a Column
 
+When you add a new column to a table that involves a computation, you might want to **materialize the column** - which performs the computation for all the columns all at once using the **MATERIALIZE COLUMN** command.
 
+{{% notice note %}}
+If you do not materialize the column, then the values are computed at the time of a SELECT. That may work well for some use cases, but by materializing the column at definition time, you can increase the performance of your queries because all the columns will already have performed the computation.
+{{% /notice %}}
 
 {{< detail-tag "Show instructions" >}}
 
-1. hello
+1. Let's add a column to the **hackernews** table that computes the length of the comment string (the column named **text**). Start by adding a new column and defining a default value:
+    ```sql
+    ALTER TABLE hackernews ADD COLUMN comment_length UInt64 MATERIALIZED length(text)
+    ```
     
+2. Note that this command returns immediately, because it simply adds a new column named **comment_length** to the schema. The actual computation has not occurred yet.
+
+3. Run the following command to materialize the **comment_length** column, which means the length of **text** will be computed for all rows in **hackernews**:
+    ```sql
+    ALTER TABLE hackernews MATERIALIZE COLUMN comment_length
+    ```
+
+4. Let's verify it worked:
+    ```sql
+    select text, comment_length from hackernews limit 10
+    ```
+
+    You should see the **text** column along with a **comment_length** column containing the number of characters in **text**.
+
+
 {{< /detail-tag >}}
 
 *** 
