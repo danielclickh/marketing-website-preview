@@ -17,7 +17,7 @@ Let's get started!
 
 ***
 
-### Prerequisites
+**Prerequisites:** 
 
 - You will need a Linux or Mac OS X machine
 - Optionally, you can use Docker
