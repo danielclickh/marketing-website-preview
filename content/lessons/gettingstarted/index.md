@@ -313,5 +313,5 @@ Congratulations!! You have now started your ClickHouse journey...
 
 **What's next:** Welcome to the ClickHouse neighborhood! Check out the following lessons to continue your journey: 
 
-- <a href="../../lessons/whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
+- <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
 - You can view all of our lessons on the <a href="../../index.html">Learn ClickHouse</a> home page
