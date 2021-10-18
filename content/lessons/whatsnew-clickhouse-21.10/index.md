@@ -1,6 +1,6 @@
 ---
 title: "What's New in ClickHouse 21.10"
-description: "User-defined functions (UDFs), materialized columns, positional arguments, the **Executable** table engine, and more."
+description: "Materialized columns, positional arguments, the **Executable** table engine, and more."
 lead: ""
 date: 
 lastmod: 
