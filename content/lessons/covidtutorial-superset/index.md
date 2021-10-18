@@ -360,4 +360,4 @@ Congratulations on connecting Superset to ClickHouse!! You have opened up a whol
 
 - If you are new to ClickHouse, be sure to go through the <a href="../gettingstarted">Getting Started</a> module
 - <a href="../whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
-- You can view all of our lessons on the <a href="../../index.html">ClickHouse Academy</a> home page
+- You can view all of our lessons on the <a href="../../index.html">Learn ClickHouse</a> home page
