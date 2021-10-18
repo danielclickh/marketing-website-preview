@@ -1,4 +1,4 @@
-baseurl = "https://clickhouselearn.github.io/home/"
+baseurl = "https://clickhouse.com/learn/"
 canonifyURLs = true
 disableAliases = true
 disableHugoGeneratorInject = true
