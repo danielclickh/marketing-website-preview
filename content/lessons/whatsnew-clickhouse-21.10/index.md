@@ -345,16 +345,11 @@ If you do not materialize the column, then the values are computed at the time o
     ALTER TABLE hackernews ADD COLUMN comment_length UInt64 MATERIALIZED length(text)
     ```
     
-2. Note that this command returns immediately, because it simply adds a new column named **comment_length** to the schema. The actual computation has not occurred yet.
+2. Note that this command returns immediately because it is an asynchronous operation. The new **comment_length** column is being populated in the background, but it runs quickly on our particular dataset.
 
-3. Run the following command to materialize the **comment_length** column, which means the length of **text** will be computed for all rows in **hackernews**:
+3. Run the following query to view the new column:
     ```sql
-    ALTER TABLE hackernews MATERIALIZE COLUMN comment_length
-    ```
-
-4. Let's verify it worked:
-    ```sql
-    select text, comment_length from hackernews limit 10
+    select text, comment_length from hackernews limit 50
     ```
 
     You should see the **text** column along with a **comment_length** column containing the number of characters in **text**.
