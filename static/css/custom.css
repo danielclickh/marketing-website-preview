@@ -63,7 +63,7 @@ ol li  {
     background-color: aliceblue;
 }
 
-.col-lg-5 {
+.docs-sidebar {
     flex: unset;
     width: 10%;
 }
