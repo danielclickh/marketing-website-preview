@@ -62,3 +62,8 @@ ol li  {
 .section.section-sm {
     background-color: aliceblue;
 }
+
+.col-lg-5 {
+    flex: unset;
+    width: 10%;
+}
