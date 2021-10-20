@@ -1,5 +1,5 @@
 ---
-title : "Home"
+title : "Home - Learn ClickHouse"
 description: "Discover. Learn. Build."
 lead: "Discover. Learn. Build."
 date: 2020-10-06T08:47:36+00:00
@@ -10,5 +10,3 @@ images: []
 custom_title_enabled: true
 custom_title_value: "Home - Learn ClickHouse"
 ---
-
-
