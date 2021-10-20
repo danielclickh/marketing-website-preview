@@ -38,6 +38,7 @@
 			<hr/>
 			<p><strong>Duration:</strong> {{ .Params.duration | safeHTML }}</p>
 			<p><strong>Audience:</strong> {{ .Params.audience | safeHTML }}</p>
+			<p><strong>Issues/Questions:</strong> Contact us at <a href="mailto:learn@clickhouse.com">learn@clickhouse.com</a> </p>
 			{{ if ne .Params.toc false -}}
 			<nav class="d-xl-none" aria-label="Quaternary navigation">
 				{{ partial "sidebar/docs-toc.html" . }}
@@ -50,7 +51,10 @@
 			{{ if not .Site.Params.options.collapsibleSidebar -}}
 				{{ partial "main/docs-navigation.html" . }}
 			{{ else -}}
-				<div class="my-n3"></div>
+				<div class="my-n3">
+					<br/>
+					<p><strong>We hope you found this learning module helpful and informative!</strong> Please feel free to contact us at <a href="mailto:learn@clickhouse.com">learn@clickhouse.com</a> with any issues, questions, feedback, or ideas for future learning modules.</p>
+				</div>
 			{{ end -}}
 		</main>
 	</div>
