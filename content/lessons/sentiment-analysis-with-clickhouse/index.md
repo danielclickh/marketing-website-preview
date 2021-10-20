@@ -82,7 +82,7 @@ The first step is to get ClickHouse up and running:
     ```
 
 {{% notice note %}}
-The **text** column contains the comments, stories, polls and other posts on Hacker News' website. That is the column we will be doing sentiment analysis on.
+The **text** column contains the comments, stories, polls and other posts from the Hacker News website. That is the column we will be doing sentiment analysis on.
 {{% /notice %}}
 
 
@@ -93,56 +93,16 @@ The **text** column contains the comments, stories, polls and other posts on Hac
 
 ## 2. The ExecutablePool Engine
 
+ClickHouse 21.10 introduced two new table engines: **Executable** and **ExecutablePool**. They allow you to create a new table whose rows are output from a script that you define (by writing rows to **stdout**). The input can be either streamed from the result of a query from another table (which the script reads through **stdin**), or the script can input data from anywhere! 
 
 Let's try it out...
 
 {{< detail-tag "Show instructions" >}}
 
 
-1. To set the **enable_positional_arguments** property, we will take advantage of the **users.d** folder - where config files are automatically loaded at startup. Create a new file named **my_config.xml** that contains the following XML and save it in your **~/whatsnew/** folder (where you saved **docker-compose.yml**):
-    ```xml
-    <?xml version="1.0"?>
-    <yandex>
-        <profiles>
-            <default>
-                <enable_positional_arguments>1</enable_positional_arguments>
-            </default>
-        </profiles>
-    </yandex>
-    ```
-
-2. Uncomment the **volume** setting in your **docker-compose.yml** file that mounts your local **my_config.xml** to **/etc/clickhouse-server/users.d/**:
-    ```yml
-    volumes:
-      - ./my_config.xml:/etc/clickhouse-server/users.d/my_config.xml
-    ```
-
-3. Restart your Docker container by running the following command in the **~/whatsnew** folder:
-    ```bash
-    docker-compose up -d
-    ```
-
-    The `-d` option runs the containers in the background and hides the output - feel free to omit that option if you want to view the log output.
-
-4. Verify that **enable_positional_arguments** is set properly by running the following command in the Play UI. You should get **1** for a response:
-    ```sql
-    SELECT getSetting('enable_positional_arguments')
-    ```
-
-4. Run the following query, which sorts the top 20 stories by score, then date:
-    ```sql
-    SELECT  score, time, title from hackernews order by score desc, time desc limit 20
-    ```
-
-    <img src="./images/top20stories.png" width="600px" alt="Top 20 stories by score then date" />
+1. Let's start with a Python script that reads data from **stdin**, performs sentiment analysis on each record, then outputs the results to **stdout**. Create a new file named **sentiment.py** and save it in your **~/sentiment** folder. Copy-and-paste the following into **sentiment.py**:
 
 
-5. The following query is identical, but uses positional arguments:
-    ```sql
-    SELECT  score, time, title from hackernews order by 1 desc, 2 desc limit 20
-    ```
-
-    You should see the same 20 rows sorted in the same order as the previous query.
 
 {{< /detail-tag >}}
 
