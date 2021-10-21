@@ -168,7 +168,68 @@ You need to set **enable_positional_arguments** to **1** in order to use positio
 
 *** 
 
-## 3.  The Executable Table Engine
+## 3.  Creating User-Defined Functions (UDFs)
+
+You can now create user defined functions (UDFs) in ClickHouse as lambda expressions using the **CREATE FUNCTION** command. The name of your function must be unique among user-defined and system functions, recursion is not allowed, and all variables used by a function must be specified in its parameter list.
+
+Let's work through an example...
+
+{{< detail-tag "Show instructions" >}}
+
+1. Run the following **CREATE FUNCTION** command:
+    ```sql
+    CREATE FUNCTION long_comment AS (comment) -> if(length(comment) >= 1000, 1, 0)
+    ```
+
+2. The name of the function is **long_comment**, and it returns 1 if the length of the given string is greater than or equal to 1,000 characters; otherwise it returns 0. 
+
+{{% notice note %}}
+The parameters are listed in parentheses in the **AS** clause. The **comment_length** function has a single parameter named **comment**.
+{{% /notice %}}
+
+3. You can now use **comment_length** just like any other UDF or system function. For example:
+    ```sql
+    SELECT * FROM hackernews WHERE long_comment(text) = 1 
+    ```
+
+4. Note that the **if** statement in **long_comment** is actually not necessary because the **length** function already returns 0 or 1. Let's simplify our function definition, but keep in mind that you can not modify a function definition: you have to delete the function and create a new one. Start by deleting **long_comment**:
+    ```sql
+    DROP FUNCTION long_comment
+    ```
+
+5. Now redefine the function as:
+    ```sql
+    CREATE FUNCTION long_comment AS (comment) -> length(comment) >= 1000
+    ```
+
+6. The query could have also been simpler to begin with:
+    ```sql
+    SELECT * FROM hackernews WHERE long_comment(text)
+    ```
+
+7. Note that ClickHouse saves your UDF in a text file in the **user_defined** folder of your installation. For example, in the environment you are using here, the **CREATE FUNCTION** command for **long_comment** is saved in **/var/lib/clickhouse/user_defined/function_long_comment.sql**. You can verify by running the following command:
+    ```bash
+    docker exec clickhouse-server cat /var/lib/clickhouse/user_defined/function_long_comment.sql
+    ```
+
+    You should see the following SQL:
+    ```bash
+    CREATE FUNCTION long_comment AS comment -> (length(comment) >= 1000)
+    ```
+    
+{{% notice note %}}
+Visit the documentation for <a href="https://clickhouse.com/docs/en/sql-reference/statements/create/function/" target="_blank">more details on defining UDFs</a>.
+{{% /notice %}}
+
+
+
+
+
+{{< /detail-tag >}}
+
+*** 
+
+## 4.  The Executable Table Engine
 
 ClickHouse 21.10 introduces two new table engines: **Executable** and **ExecutablePool**, which both allow you to create a new table that is built by streaming the records from a query response through a custom script. Let's see how they work by looking at an example that removes English stopwords from the Hacker News comments using the Python NLTK package.
 
@@ -263,7 +324,7 @@ If you have millions (or billions) of rows, check out **ExecutablePool** - which
 
 *** 
 
-## 4.  Limiting the Query Log
+## 5.  Limiting the Query Log
 
 When you submit a query to ClickHouse, the start and end time of the query is logged in a table named **system.query_log**. If your application is processing a large number of queries per second, then logging those query details can add a lot of load to your system. With the new **log_queries_probability** property, you can reduce that load by only logging a subset of those queries. Let's see how it works...
 
@@ -330,7 +391,7 @@ If you set **log_queries_probability** to **0**, no queries will get logged in *
 
 *** 
 
-## 5.  Materialize a Column
+## 6.  Materialize a Column
 
 When you add a new column to a table that involves a computation, you might want to **_materialize the column_** - which performs the computation for all the columns all at once using the **MATERIALIZE COLUMN** command.
 
