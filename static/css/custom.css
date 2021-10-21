@@ -73,3 +73,7 @@ ol li  {
     flex-direction: column;
     justify-content: space-between;
 }
+
+.img-top-padding {
+    padding-top: 50px;
+}
