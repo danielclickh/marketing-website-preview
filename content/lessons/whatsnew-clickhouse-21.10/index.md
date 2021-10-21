@@ -192,7 +192,7 @@ The parameters are listed in parentheses in the **AS** clause. The **comment_len
     SELECT * FROM hackernews WHERE long_comment(text) = 1 
     ```
 
-4. Note that the **if** statement in **long_comment** is actually not necessary because the **length** function already returns 0 or 1. Let's simplify our function definition, but keep in mind that you can not modify a function definition: you have to delete the function and create a new one. Start by deleting **long_comment**:
+4. Note that the **if** statement in **long_comment** is actually not necessary because the Boolean expression already returns 0 or 1. Let's simplify our function definition, but keep in mind that you can not modify a function definition: you have to delete the function and create a new one. Start by deleting **long_comment**:
     ```sql
     DROP FUNCTION long_comment
     ```
