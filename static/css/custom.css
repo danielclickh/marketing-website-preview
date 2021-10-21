@@ -67,3 +67,9 @@ ol li  {
     flex: unset;
     width: 10%;
 }
+
+.col-lg-5 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

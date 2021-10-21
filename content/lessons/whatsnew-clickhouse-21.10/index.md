@@ -232,7 +232,7 @@ Notice that the **comments_no_stopwords** table is built by streaming the **text
     ```
 
 8. Uncomment the following volume in **docker-compose.yml**:
-    ```bash
+    ```yml
        - ./remove_stopwords.py:/var/lib/clickhouse/user_scripts/remove_stopwords.py
     ```
 

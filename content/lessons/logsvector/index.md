@@ -148,16 +148,9 @@ We certainly do not want to spend too much time explaining Nginx, but we also do
     http {
         include       /etc/nginx/mime.types;
         default_type  application/octet-stream;
-
         access_log  /var/log/nginx/my_access.log combined;
-
         sendfile        on;
-        #tcp_nopush     on;
-
         keepalive_timeout  65;
-
-        #gzip  on;
-
         include /etc/nginx/conf.d/*.conf;
     }
     ```
