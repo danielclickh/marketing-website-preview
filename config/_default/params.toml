@@ -7,7 +7,7 @@ titleAddition = "Learn ClickHouse"
 description = "Learn ClickHouse - Discover. Learn. Build. Select a learning module below to get started."
 
 # Add custom css files
-#custom_css = ["css/custom.css", "css/prism.css"]
+custom_css = ["css/custom.css", "css/prism.css"]
 custom_js = ["js/custom.js", "js/prism.js"]
 
 ## Open Graph
