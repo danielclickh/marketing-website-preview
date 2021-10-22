@@ -10,9 +10,9 @@
     {{ block "head/favicons" . }}{{ partial "head/favicons.html" . }}{{ end }}
 
     {{ range .Site.Params.custom_css -}}
-      <link rel="stylesheet" href="{{ . | absURL }}">
+      <link rel="stylesheet" href="{{ . | relURL }}">
     {{- end }}    
     {{ range .Site.Params.custom_js -}}
-      <script src="{{ . | absURL }}"></script>
+      <script src="{{ . | relURL }}"></script>
     {{- end }}    
 </head>
