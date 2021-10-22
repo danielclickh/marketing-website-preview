@@ -77,3 +77,8 @@ ol li  {
 .img-top-padding {
     padding-top: 50px;
 }
+
+pre code {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.9em;
+}
