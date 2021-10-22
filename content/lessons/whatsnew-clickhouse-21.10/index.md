@@ -83,15 +83,15 @@ Notice the volumes are commented out - you will uncomment those later.
 
 7. Make sure you have 1,125 rows:
     ```sql
-    select count(*) from hackernews
+    SELECT count(*) FROM hackernews
     ```
 
 8. View some of the data in the table:
     ```sql
-    select * from hackernews limit 100
+    SELECT * FROM hackernews LIMIT 100
     ```
 
-You are now ready to try out some of the new features... 
+    You are now ready to try out some of the new features... 
 
 {{< /detail-tag >}}
 
@@ -151,7 +151,7 @@ You need to set **enable_positional_arguments** to **1** in order to use positio
 
 4. Run the following query, which sorts the top 20 stories by score, then date:
     ```sql
-    SELECT  score, time, title from hackernews order by score desc, time desc limit 20
+    SELECT  score, time, title FROM hackernews ORDER BY score DESC, time DESC LIMIT 20
     ```
 
     <img src="./images/top20stories.png" width="600px" alt="Top 20 stories by score then date" />
@@ -159,7 +159,7 @@ You need to set **enable_positional_arguments** to **1** in order to use positio
 
 5. The following query is identical, but uses positional arguments:
     ```sql
-    SELECT  score, time, title from hackernews order by 1 desc, 2 desc limit 20
+    SELECT  score, time, title FROM hackernews ORDER BY 1 DESC, 2 DESC LIMIT 20
     ```
 
     You should see the same 20 rows sorted in the same order as the previous query.
@@ -184,10 +184,10 @@ Let's work through an example...
 2. The name of the function is **long_comment**, and it returns 1 if the length of the given string is greater than or equal to 1,000 characters; otherwise it returns 0. 
 
 {{% notice note %}}
-The parameters are listed in parentheses in the **AS** clause. The **comment_length** function has a single parameter named **comment**.
+The parameters are listed in parentheses in the **AS** clause. The **long_comment** function has a single parameter named **comment**.
 {{% /notice %}}
 
-3. You can now use **comment_length** just like any other UDF or system function. For example:
+3. You can now use **long_comment** just like any other UDF or system function. For example:
     ```sql
     SELECT * FROM hackernews WHERE long_comment(text) = 1 
     ```
@@ -231,17 +231,22 @@ Visit the documentation for <a href="https://clickhouse.com/docs/en/sql-referenc
 
 ## 4.  The Executable Table Engine
 
-ClickHouse 21.10 introduces two new table engines: **Executable** and **ExecutablePool**, which both allow you to create a new table that is built by streaming the records from a query response through a custom script. Let's see how they work by looking at an example that removes English stopwords from the Hacker News comments using the Python NLTK package.
+ClickHouse 21.10 introduces two new table engines: **Executable** and **ExecutablePool**, which both allow you to create a new table that is built by streaming data through a custom script. Let's see how they work by looking at an example that removes English stopwords from the Hacker News comments using the Python NLTK package.
 
 {{< detail-tag "Show instructions" >}}
 
 1. When you define an **Executable** table, you specify a script to execute and also a query to specify the records to be processed by the script. For example, run the following **CREATE TABLE** command that defines a new table named **comments_no_stopwords**:
     ```sql
-    CREATE TABLE comments_no_stopwords (value String) ENGINE = Executable('remove_stopwords.py', 'TabSeparated', (SELECT text FROM hackernews));
+    CREATE TABLE comments_no_stopwords (value String) 
+    ENGINE = Executable(
+        'remove_stopwords.py', 
+        'TabSeparated', 
+        (SELECT text FROM hackernews)
+    );
     ```
 
 {{% notice note %}}
-Notice that the **comments_no_stopwords** table is built by streaming the **text** column of **hackernews** to the **remove_stopwords.py** script. The table is not populated yet, so we will write the script next. It will be populated when you run a **SELECT** query.
+Notice that the **comments_no_stopwords** table is built by streaming the **text** column of **hackernews** to the **remove_stopwords.py** script. We will write the script next. 
 {{% /notice %}}
 
 2. ClickHouse looks in the **user_scripts** folder for your custom scripts, which on Linux is (typically) in **/var/lib/clickhouse/user_scripts**. The **docker-compose.yml** file has a volume that mounts **remove_stopwords.py** to the **user_scripts** folder, so create a new file named **remove_stopwords.py** in the **whatsnew** folder.
@@ -302,22 +307,19 @@ Notice that the **comments_no_stopwords** table is built by streaming the **text
     docker-compose up -d
     ```
 
-10. Your Python script still has not executed yet...but it will when you run a query on the **comments_no_stopwords** table. Run the following query, and it should execute fairly quickly since **hackernews** only has about 1,100 rows:
+10. Run the following query to view the contents of your new table:
     ```sql
-    select * from comments_no_stopwords
+    SELECT * FROM comments_no_stopwords
     ```
 
-{{% notice note %}}
-Use the **max_command_execution_time** property to specify a maximum execution time (in seconds) before throwing an exception. The default is 0, which means your script could run indefinitely.
-{{% /notice %}}
+    In the response, you should see the Hacker News comments, but without any stopwords. They will look like the following - notice stopwords like "the", "is", "and" and so on are removed from the text:
 
-11. In the response, you should see the Hacker News comments, but without any stopwords. They will look like the following - notice stopwords like "the", "is", "and" and so on are removed from the text:
     ```bash
     installed iOS4 iPhone 3G saw crawl becoming iPaperWeight . horribly slow launching every app keyboard slow unusable.
     ```
 
 {{% notice note %}}
-If you have millions (or billions) of rows, check out **ExecutablePool** - which runs a pool of persistent processes specified by the **pool_size** property.
+The **Executable** table fires up your script whenever is needed. If you are invoking the scripts often, you can improve performance by using **ExecutablePool** - which keeps a pool of persistent processes running all the time. 
 {{% /notice %}}
 
 {{< /detail-tag >}}
@@ -333,19 +335,19 @@ When you submit a query to ClickHouse, the start and end time of the query is lo
 
 1. Run the following query to view the **system.query_log** table:
     ```sql
-    select * from system.query_log
+    SELECT * FROM system.query_log
     ```
 
-You should see all the queries that you have executed so far in this lesson. Notice that successful queries have two entries in the table: **QueryStart** and **QueryFinish**.
+    You should see all the queries that you have executed so far in this lesson. Notice that successful queries have two entries in the table: **QueryStart** and **QueryFinish**.
 
 2. Sort the results so that the most recent logs appear first:
     ```sql
-    select * from system.query_log order by event_time_microseconds desc
+    SELECT * FROM system.query_log ORDER BY event_time_microseconds DESC
     ```
 
 3. The default value of **log_queries_probability** is **1**, which means 100% of queries will be logged. Run the following query three times, then look in the **system.query_log** table - you will see that all 3 executions were logged.
     ```sql
-    SELECT  max(score) as max_score, toDate(time) as day, any(title) as any_title from hackernews group by day order by max_score desc limit 10
+    SELECT  max(score) AS max_score, toDate(time) AS day, any(title) AS any_title FROM hackernews GROUP BY day ORDER BY max_score DESC LIMIT 10
     ```
 
 4. Now let's change the value of **log_queries_probability** to 0.25, so that only 25% of queries get logged. Create a new file named **log_query_config.xml** and save it in your **~/whatsnew/** folder:
@@ -372,12 +374,12 @@ You should see all the queries that you have executed so far in this lesson. Not
 
 7. Run the following query 10 times - a simple query that returns 20 random rows:
     ```sql
-    SELECT  * from hackernews order by rand() limit 20
+    SELECT  * FROM hackernews ORDER BY rand() LIMIT 20
     ```
 
 8. View the **system.query_log** table again:
     ```sql
-    select * from system.query_log order by event_time_microseconds desc
+    SELECT * FROM system.query_log ORDER BY event_time_microseconds DESC
     ```
 
     Notice that only 3 of the 10 queries were logged. 
@@ -396,21 +398,22 @@ If you set **log_queries_probability** to **0**, no queries will get logged in *
 When you add a new column to a table that involves a computation, you might want to **_materialize the column_** - which performs the computation for all the columns all at once using the **MATERIALIZE COLUMN** command.
 
 {{% notice note %}}
-If you do not materialize the column, then the values are computed at the time of a SELECT. That may work well for some use cases, but by materializing the column at definition time, you can increase the performance of your queries because all the row will already have performed the computation.
+If you do not materialize the column, then the values are computed at the time of a SELECT. That may work well for some use cases, but by materializing the column at definition time, you can increase the performance of your queries because all the rows will already have performed the computation.
 {{% /notice %}}
 
 {{< detail-tag "Show instructions" >}}
 
 1. Let's add a column to the **hackernews** table that computes the length of the comment string (the column named **text**). Start by adding a new column and defining a default value:
     ```sql
-    ALTER TABLE hackernews ADD COLUMN comment_length UInt64 MATERIALIZED length(text)
+    ALTER TABLE hackernews 
+    ADD COLUMN comment_length UInt64 MATERIALIZED length(text)
     ```
     
 2. Note that this command returns immediately because it is an asynchronous operation. The new **comment_length** column is being populated in the background, but it runs quickly on our particular dataset.
 
 3. Run the following query to view the new column:
     ```sql
-    select text, comment_length from hackernews limit 50
+    SELECT text, comment_length FROM hackernews LIMIT 50
     ```
 
     You should see the **text** column along with a **comment_length** column containing the number of characters in **text**.
