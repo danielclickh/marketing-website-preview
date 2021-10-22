@@ -13,7 +13,7 @@ audience: "Whether you are new to ClickHouse or a long-time user, you will find 
 
 ---
 
-**Overview:** In this lesson, we will use a table of Hacker News stories and comments to demonstrate some of the new features of ClickHouse 21.10, including **Eexecutable** table engines, materialized columns, positional arguments, and throttling the number of events sent to the query log.
+**Overview:** In this lesson, we will use a table of Hacker News stories and comments to demonstrate some of the new features of ClickHouse 21.10, including **Executable** table engines, materialized columns, positional arguments, and throttling the number of events sent to the query log.
 
 Let's get started!
 
