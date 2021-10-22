@@ -1,7 +1,6 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' style-src 'self' 'unsafe-inline'; https:; manifest-src 'self'">
 
     <link rel="shortcut icon" href="https://clickhouse.com/favicon.ico" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,9 +10,11 @@
     {{ block "head/seo" . }}{{ partial "head/seo.html" . }}{{ end }}
     {{ block "head/favicons" . }}{{ partial "head/favicons.html" . }}{{ end }}
 
-    <link rel="stylesheet" href="https://clickhouse.com/learn/css/custom.css">
-    <link rel="stylesheet" href="https://clickhouse.com/learn/css/prism.css">
 
+
+    {{ range .Site.Params.custom_css -}}
+      <link rel="stylesheet" href="{{ . | relURL }}">
+    {{- end }}    
     {{ range .Site.Params.custom_js -}}
       <script src="{{ . | relURL }}"></script>
     {{- end }}    
