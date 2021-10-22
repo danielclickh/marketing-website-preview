@@ -126,7 +126,7 @@ The ClickHouse server includes a **Play UI** for executing SQL commands. In this
 
 2. You can simply type in SQL commands and click the **Run** button to execute them. For example, run the following command to view the pre-defined databases:
 ```sql
-show databases
+SHOW DATABASES
 ```
 
 You should see 4 databases:
@@ -138,7 +138,7 @@ The **default** database is initially empty and is used for executing commands t
 
 3. Run the following command to view the `system` table names:
 ```sql
-show tables in system
+SHOW TABLES IN system
 ```
 
 Notice there are over 60 tables. 
@@ -162,12 +162,12 @@ Defining a database will look very familiar. Defining a table involves some Clic
 
 1. You use the **CREATE DATABASE** command to create a new database. Run the following command in the Play UI to define a new database named **gettingstarted**:
 ```sql
-create database gettingstarted
+CREATE DATABASE gettingstarted
 ```
 
 2. You should see **gettingstarted** now in the list of databases:
 ```sql
-show databases
+SHOW DATABASES
 ```
 
 3. Creating a table is a bit different in that ClickHouse has its own data types, and every table must specify an **Engine** property that determines the type of table to be created.
@@ -191,7 +191,7 @@ ORDER BY (time_stamp)
 
 4. Verify **clickstream** was created successfully:
 ```sql
-describe gettingstarted.clickstream
+DESCRIBE gettingstarted.clickstream
 ```
 
 Your table should look like the following:
@@ -222,22 +222,22 @@ Now that you have a table ready to go, let's insert some data...
 
 1. A "typical" SQL **INSERT** can be used:
 ```sql
-insert into gettingstarted.clickstream values ('customer1', '2021-10-02', 'add_to_cart', 'US', 568239 ) 
+INSERT INTO gettingstarted.clickstream VALUES ('customer1', '2021-10-02', 'add_to_cart', 'US', 568239 ) 
 ```
 
 2. You can also specify column names (always a best practice):
 ```sql
-insert into gettingstarted.clickstream (customer_id, time_stamp, click_event_type) values ('customer2', '2021-10-30', 'remove_from_cart' ) 
+INSERT INTO gettingstarted.clickstream (customer_id, time_stamp, click_event_type) VALUES ('customer2', '2021-10-30', 'remove_from_cart' ) 
 ```
 
 3. There is even an **EXCEPT** option for excluding columns:
 ```sql
-insert into gettingstarted.clickstream (* EXCEPT(country_code)) values ('customer3', '2021-11-07', 'checkout', 307493 ) 
+INSERT INTO gettingstarted.clickstream (* EXCEPT(country_code)) VALUES ('customer3', '2021-11-07', 'checkout', 307493 ) 
 ```
 
 4. You should now have three rows in your table:
 ```sql
-select * from gettingstarted.clickstream
+SELECT * FROM gettingstarted.clickstream
 ```
 
 <img src="./images/selecttable.png" width="600px" alt="" />
@@ -246,9 +246,9 @@ select * from gettingstarted.clickstream
 
 6. Play around with the Play UI and run a few **SELECT** commands to see how similar ClickHouse commands are with SQL. Here are a few examples to try out:
 ```sql
-select * from gettingstarted.clickstream where country_code = 'US'
-select source_id from gettingstarted.clickstream where time_stamp >= '2021-11-01'
-select * from gettingstarted.clickstream where time_stamp >= toDate(1633193802)
+SELECT * FROM gettingstarted.clickstream WHERE country_code = 'US'
+SELECT source_id FROM gettingstarted.clickstream WHERE time_stamp >= '2021-11-01'
+SELECT * FROM gettingstarted.clickstream WHERE time_stamp >= toDate(1633193802)
 ```
 
 {{% notice note %}}
@@ -288,7 +288,7 @@ my-host :)
 
 3. Now you can run queries as expected with any database client:
 ```sql
-select * from gettingstarted.clickstream where click_event_type = 'checkout'
+SELECT * FROM gettingstarted.clickstream WHERE click_event_type = 'checkout'
 ```
 
 4. To exit the client, enter **exit**:
