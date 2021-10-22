@@ -79,6 +79,10 @@ ol li  {
 }
 
 pre code {
-    padding: 0.5rem 0.5rem;
+    padding: 0rem 0rem;
     font-size: 0.9em;
+}
+
+.hljs {
+    padding: 0 0;
 }
