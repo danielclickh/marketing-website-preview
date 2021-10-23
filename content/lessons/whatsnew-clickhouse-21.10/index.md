@@ -74,7 +74,7 @@ Notice the volumes are commented out - you will uncomment those later.
 
 5. Point your web browser to <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>. You should see the embedded ClickHouse Play UI:
 
-    <img src="./images/clickhouseui.png" width="600px" alt="" />
+<img src="./images/playui.png" width="100%" alt="" />
 
 6. Let's run a few queries to understand what the dataset looks like. Copy-and-paste the following query into the Play UI, then click the **Run** button (or press **Ctrl/Cmd+Enter**). You will see the column names and data types of the **hackernews** table:
     ```sql
@@ -149,17 +149,18 @@ You need to set **enable_positional_arguments** to **1** in order to use positio
     SELECT getSetting('enable_positional_arguments')
     ```
 
-4. Run the following query, which sorts the top 20 stories by score, then date:
+5. Run the following query, which sorts the top 20 stories by score, then date:
     ```sql
-    SELECT  score, time, title FROM hackernews ORDER BY score DESC, time DESC LIMIT 20
+    SELECT  score, time, title 
+    FROM hackernews 
+    ORDER BY score DESC, time DESC LIMIT 20
     ```
 
-    <img src="./images/top20stories.png" width="600px" alt="Top 20 stories by score then date" />
-
-
-5. The following query is identical, but uses positional arguments:
+6. The following query is identical, but uses positional arguments:
     ```sql
-    SELECT  score, time, title FROM hackernews ORDER BY 1 DESC, 2 DESC LIMIT 20
+    SELECT  score, time, title 
+    FROM hackernews 
+    ORDER BY 1 DESC, 2 DESC LIMIT 20
     ```
 
     You should see the same 20 rows sorted in the same order as the previous query.
