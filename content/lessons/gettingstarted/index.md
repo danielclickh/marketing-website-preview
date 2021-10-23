@@ -130,9 +130,12 @@ The ClickHouse server includes a **Play UI** for executing SQL commands. In this
     ```
 
     You should see 4 databases:
+
 <img src="./images/databases.png" width="100%" alt="" />
 
-    The **default** database is initially empty and is used for executing commands that do not specify a database. The **system** database is where ClickHouse stores the details about your ClickHouse deployment. 
+{{% notice note %}}
+The **default** database is initially empty and is used for executing commands that do not specify a database. The **system** database is where ClickHouse stores the details about your ClickHouse deployment. 
+{{% /notice %}}
 
 3. Run the following command to view the `system` table names:
     ```sql
@@ -192,6 +195,7 @@ The **table engine** determines how and where the data is stored, which queries 
     ```
 
     Your table should look like the following:
+
 <img src="./images/describetable.png" width="100%" alt="" />
 
 
