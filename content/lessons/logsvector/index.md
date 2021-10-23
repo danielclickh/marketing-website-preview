@@ -82,10 +82,10 @@ The **clickhouse-server-21.9** image is a simple install of ClickHouse 21.9, and
 
 4. From a terminal, run the following command from the folder where you created **docker-compose.yml**:
     ```bash
-    docker-compose up &
+    docker-compose up -d
     ```
 
-The two containers will start up fairly quickly.
+    The two containers will start up fairly quickly.
 
 {{< /detail-tag >}}
 
@@ -99,21 +99,20 @@ Let's define a table to store the log events...
 
 1. Open the Play UI at <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>:
 
-    <img src="./images/playui.png" width="600px" alt="" />
+    <img src="./images/playui.png" width="100%" alt="" />
 
 2. Run the following SQL in the Play UI to define a database named **nginxdb**:
     ```sql
-    CREATE DATABASE IF NOT EXISTS nginxdb;
+    CREATE DATABASE IF NOT EXISTS nginxdb
     ```
 
 3. For starters, we are just going to insert the entire log event as a single string. Obviously this is not great format for performing analytics on the log data, but we will figure that part out later using materialized views. Run the following SQL to create a new table named **access_logs**:
     ```sql
     CREATE TABLE IF NOT EXISTS  nginxdb.access_logs (
-        `message` String
+        message String
     ) 
     ENGINE = MergeTree()
     ORDER BY tuple()
-    ;
     ```
 
 {{% notice note %}}
@@ -128,7 +127,7 @@ That's it - ClickHouse is ready...next you will setup Nginx.
 
 ## 3.  Configure Nginx
 
-We certainly do not want to spend too much time explaining Nginx, but we also do not want to hide all the details, so in this step we will provide you enough details get Nginx logging configured. 
+We certainly do not want to spend too much time explaining Nginx, but we also do not want to hide all the details, so in this step we will provide you with enough details to get Nginx logging configured. 
 
 {{< detail-tag "Show instructions" >}}
 
@@ -157,7 +156,7 @@ We certainly do not want to spend too much time explaining Nginx, but we also do
 
 {{% notice note %}}
 The key setting of interest is:
-```bash
+```html
 access_log  /var/log/nginx/my_access.log combined;
 ```
 
@@ -172,16 +171,16 @@ Access logs will be sent to **/var/log/nginx/my_access.log** using the **combine
 
 3. Run **docker-compose up** again to pick up the changes:
     ```bash
-    docker-compose up &
+    docker-compose up -d
     ```
 
 4. Verify Nginx is running by viewing its default home page at <a href="http://localhost/" target="_blank">http://localhost/</a>:
 
-    <img src="./images/nginx.png" width="400px" alt="" />
+<img src="./images/nginx.png" width="100%" alt="" />
 
 5. Refresh the home page a few times to generate some log events in the access log.
 
-6. Use the following command to cat the **my_access.log** file and verify access events are getting logged there successfully:
+6. Use the following command to **cat** the **my_access.log** file and verify access events are getting logged there successfully:
     ```bash
     docker exec nginx-with-vector cat /var/log/nginx/my_access.log
     ```
@@ -193,7 +192,7 @@ Access logs will be sent to **/var/log/nginx/my_access.log** using the **combine
     192.168.208.1 - - [12/Oct/2021:03:31:49 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
     ```
 
-You are now ready to send those log events to your table in ClickHouse...
+    You are now ready to send those log events to your table in ClickHouse...
 
 {{< /detail-tag >}}
 
@@ -235,10 +234,10 @@ Notice that the **source** is of type **file** and tails the end of **my_access.
 
 3. Run **docker-compose up** again to pick up the changes:
     ```bash
-    docker-compose up &
+    docker-compose up -d
     ```
 
-That's it. You will verify it worked in the next step. If you want more details on configuring Vector, <a href="https://vector.dev/docs/" target="_blank">visit the Vector documentation</a>.
+    That's it. You will verify it worked in the next step. If you want more details on configuring Vector, <a href="https://vector.dev/docs/" target="_blank">visit the Vector documentation</a>.
 
 {{< /detail-tag >}}
 
@@ -258,7 +257,8 @@ Let's verify the access logs are being inserted into ClickHouse...
     ```
 
     You should see the access logs in the table:
-    <img src="./images/logs.png" width="400px" alt="" />
+
+<img src="./images/logs.png" width="100%" alt="" />
 
 Congrats - you did it! Notice how easy it would be to tail your own log file - just install Vector on the machine with the log file and configure the **source** to point to your log file.
     
@@ -289,12 +289,12 @@ Having the logs in ClickHouse is great, but storing each event as a single strin
     SELECT splitByRegexp('\S \d+ "([^"]*)"', '192.168.208.1 - - [12/Oct/2021:15:32:43 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"')
     ```
 
-3. Before looking at the final **CREATE MATERIALIZED VIEW** command, let's view a couple more functions used to cleanup the data. For example, the `RequestMethod` looks like **"GET** with an unwanted double-quote. Run the following **trim** function, which removes the double quote:
+3. Before looking at the final **CREATE MATERIALIZED VIEW** command, let's view a couple more functions used to cleanup the data. For example, the **RequestMethod** looks like **"GET** with an unwanted double-quote. Run the following **trim** function, which removes the double quote:
     ```sql
     SELECT trim(LEADING '"' FROM '"GET')
     ```
 
-4. The time string has a leading square bracket, and also is not in a format that ClickHouse can parse into a date. However, if we change the separater from a `:` to a `,` then the parsing works great:
+4. The time string has a leading square bracket, and also is not in a format that ClickHouse can parse into a date. However, if we change the separater from a colon (**:**) to a comma (**,**) then the parsing works great:
     ```sql
     SELECT parseDateTimeBestEffort(replaceOne(trim(LEADING '[' FROM '[12/Oct/2021:15:32:43'), ':', ' '))
     ```
@@ -340,7 +340,13 @@ Having the logs in ClickHouse is great, but storing each event as a single strin
     SELECT * FROM nginxdb.access_logs_view
     ```
 
-    <img src="./images/mv.png" width="400px" alt="" />
+<img src="./images/mv.png" width="100%" alt="" />
+
+Well done! You now have logs streaming from the Nginx access log directly into ClickHouse. 
+
+{{% notice note %}}
+The lesson above stored the data in two tables, but you could change the initial **nginxdb.access_logs** table to use the **Null** table engine - the parsed data will still end up in the **nginxdb.access_logs_view** table, but the raw data will not be stored in a table.
+{{% /notice %}}
 
 ***
 
@@ -353,5 +359,5 @@ Having the logs in ClickHouse is great, but storing each event as a single strin
 **What's next:** Check out the following lessons to continue your journey: 
 
 - <a href="../covidtutorial-grafana">Learn how to visualize your data using Grafana</a>
-- <a href="../whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
-- You can view all of our lessons on the <a href="../../index.html">Learn ClickHouse</a> home page
+- Check out <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
+- View all of our lessons on the <a href="../../index.html">Learn ClickHouse</a> home page
