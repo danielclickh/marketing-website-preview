@@ -33,13 +33,13 @@ We have built a Docker image that already has ClickHouse installed, along with a
 1. Assuming you have Docker installed, run the appropriate following command for your environment to startup the Docker container:
 
 - On **Linux**, you will need to use the `--network host` option:
-```bash
-# On Linux:
-docker run -it  --name clickhouse-spotify --network host -p 9000:9000 -p 9009:9009 -p 8123:8123 --platform linux/amd64 --ulimit nofile=262144:262144 learnclickhouse/public-repo:clickhouse-spotify-21.10
+    ```bash
+    # On Linux:
+    docker run -it  --name clickhouse-spotify --network host -p 9000:9000 -p 9009:9009 -p 8123:8123 --platform linux/amd64 --ulimit nofile=262144:262144 learnclickhouse/public-repo:clickhouse-spotify-21.10
 
-# On all other environments
-docker run -it  --name clickhouse-spotify -p 9000:9000 -p 9009:9009 -p 8123:8123 --platform linux/amd64 --ulimit nofile=262144:262144 learnclickhouse/public-repo:clickhouse-spotify-21.10
-```
+    # On all other environments
+    docker run -it  --name clickhouse-spotify -p 9000:9000 -p 9009:9009 -p 8123:8123 --platform linux/amd64 --ulimit nofile=262144:262144 learnclickhouse/public-repo:clickhouse-spotify-21.10
+    ```
 
 2. Wait about 30 seconds for the **clickhouse-spotify** container to startup and also for the data to get inserted into the **spotify** database.
 {{< /detail-tag >}}
@@ -54,32 +54,32 @@ Let's verify you have ClickHouse up and running and the data was inserted succes
 
 1. Point your web browser to <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>. You should see the embedded ClickHouse Play UI:
 
-<img src="./images/clickhouseui.png" width="600px" alt="" />
+<img src="./images/clickhouseui.png" width="100%" alt="" />
 
 
 2. Let's run a few queries to understand what the dataset looks like. Copy-and-paste the following query into the UI, then click the **Run** button (or press **Ctrl/Cmd+Enter**):
-```sql
-show tables in spotify
-```
+    ```sql
+    show tables in spotify
+    ```
 
-You should see a table named **songs**.
+    You should see a table named **songs**.
 
 3. The following command shows the schema of **songs**:
-```sql
-describe spotify.songs
-```
+    ```sql
+    describe spotify.songs
+    ```
 
 4. View some of the data in the tables. This query displays 100 days' worth of streaming data:
-```sql
-select * from spotify.songs limit 100
-```
+    ```sql
+    select * from spotify.songs limit 100
+    ```
 
 5. To see the most popular songs, sort by the **Streams** column:
-```sql
-select * from spotify.songs order by Streams desc
-```
+    ```sql
+    select * from spotify.songs order by Streams desc
+    ```
 
-<img src="./images/topstreams.png" width="600px" alt="" />
+<img src="./images/topstreams.png" width="100%" alt="" />
 
 Aside from one good day for Taylor Swift , it looks like Kendrick Lamar, Post Malone and Drake have plenty of days where one of their songs was the most-listened to on that day (at least for 2017).
 
@@ -96,64 +96,77 @@ Let's take a look at how it works.
 {{< detail-tag "Show instructions" >}}
 
 1. Suppose we want to view artists who had songs with really good days of streaming vs. not-as-good days. In other words, a song that had some great days but also some slow days. The logic could possibly feel like the following SQL, but as you can see this particular query could not possibly have any hits: 
-```sql
-select * from spotify.songs where Streams <= 2000 and Streams >=1000000
-```
+    ```sql
+    select * from spotify.songs 
+    where Streams <= 2000 and Streams >=1000000
+    ```
 
 2. Let's see how many times a song had more than 1,000,000 streams in a day:
-```sql
-select count(*) from spotify.songs where Streams >= 1000000
-```
-Notice you get 4,440 hits.
+    ```sql
+    select count(*) from spotify.songs 
+    where Streams >= 1000000
+    ```
+
+    Notice you get 4,440 hits.
 
 3. Now let's see how many times a song had less than 2,000 streams in a day:
-```sql
-select count(*) from spotify.songs where Streams <= 2000
-```
-This happens much more frequently, with 134,666 hits.
+    ```sql
+    select count(*) from spotify.songs 
+    where Streams <= 2000
+    ```
+
+    This happens much more frequently, with 134,666 hits.
 
 4. To use INTERSECT, you run two queries and the responses they have in common are returned. For equality, the responses of both queries must have the same number and data types of columns. Run the following query, noticing that the two queries select the same columns:
-```sql
-select TrackName,Artist from spotify.songs where Streams <= 2000 
-intersect
-select TrackName,Artist from spotify.songs where Streams >= 1000000 
-```
+    ```sql
+    select TrackName,Artist from spotify.songs 
+    where Streams <= 2000 
+    intersect
+    select TrackName,Artist from spotify.songs 
+    where Streams >= 1000000 
+    ```
 
-You get 19,014 hits, which might seem contradictory because we know the second query only has 4,440 hits. But notice we selected **TrackName** and **Artist** multiple times in both queries, so for example if *Starboy* by **The Weeknd** appeared 20 times in one search and 100 times in the other, you would get 100 rows in the result.
+    You get 19,014 hits, which might seem contradictory because we know the second query only has 4,440 hits. But notice we selected **TrackName** and **Artist** multiple times in both queries, so for example if *Starboy* by **The Weeknd** appeared 20 times in one search and 100 times in the other, you would get 100 rows in the result.
 
 5. The result would be more interesting if we added **DISTINCT** to both queries. This would tell us how many songs had at least one day with more than 1,000,000 streams **and** at least one day with less than 2,000 streams:
-```sql
-select distinct TrackName,Artist from spotify.songs where Streams <= 2000 
-intersect
-select distinct TrackName,Artist from spotify.songs where Streams >= 1000000
-```
+    ```sql
+    select distinct TrackName,Artist from spotify.songs 
+    where Streams <= 2000 
+    intersect
+    select distinct TrackName,Artist from spotify.songs 
+    where Streams >= 1000000
+    ```
 
-This particular query returns 99 rows.
+    This particular query returns 99 rows.
 
 6. If you want to sort the results, simply sort the first query. For example, the results in this query will be sorted by **TrackName**:
-```sql
-select distinct TrackName,Artist from spotify.songs where Streams <= 2000 order by TrackName
-intersect
-select distinct TrackName,Artist from spotify.songs where Streams >= 1000000
-```
+    ```sql
+    select distinct TrackName,Artist from spotify.songs 
+    where Streams <= 2000 order by TrackName
+    intersect
+    select distinct TrackName,Artist from spotify.songs 
+    where Streams >= 1000000
+    ```
 
-If you think about it, the Christmas songs on the list actually make sense - they probably don't get a lot of streams in April!
+    If you think about it, the Christmas songs on the list actually make sense - they probably don't get a lot of streams in April!
 
-<img src="./images/intersect.png" width="600px" alt="" />
+<img src="./images/intersect.png" width="100%" alt="" />
 
 7. Notice that the columns selected in the two queries must have the same data types. The column names do not have to match, as long as the data types lineup (the order of columns in the SELECT clause matters). Try the following query:
-```sql
-select distinct TrackName,Artist,Date from spotify.songs where Streams <= 2000
-intersect
-select distinct TrackName,Artist,URL from spotify.songs where Streams >= 1000000
-```
+    ```sql
+    select distinct TrackName,Artist,Date from spotify.songs 
+    where Streams <= 2000
+    intersect
+    select distinct TrackName,Artist,URL from spotify.songs 
+    where Streams >= 1000000
+    ```
 
-You get the following error:
-```
-Code: 386. DB::Exception: There is no supertype for types Date, String because some of them are String/FixedString and some of them are not. (NO_COMMON_TYPE) (version 21.10.1.8013 (official build))
-```
+    You get the following error:
+    ```
+    Code: 386. DB::Exception: There is no supertype for types Date, String because some of them are String/FixedString and some of them are not. (NO_COMMON_TYPE) (version 21.10.1.8013 (official build))
+    ```
 
-The third column in the first query is a **Date** and the third column in the second query is a **String**, so the query fails.
+    The third column in the first query is a **Date** and the third column in the second query is a **String**, so the query fails.
 
 {{< /detail-tag >}}
 
@@ -166,13 +179,13 @@ The **EXCEPT** operator returns the rows that match the first query but throws o
 {{< detail-tag "Show instructions" >}}
 
 1. We have already seen in the INTERSECT example above that 99 songs have had good days and bad days. The following query returns songs that have topped 1,000,000 streams in a  day at least once, but have never had a day with less than 2,000 streams:
-```sql
-select distinct TrackName,Artist from spotify.songs where Streams >=1000000
-except
-select distinct TrackName,Artist from spotify.songs where Streams <= 2000
-```
+    ```sql
+    select distinct TrackName,Artist from spotify.songs where Streams >=1000000
+    except
+    select distinct TrackName,Artist from spotify.songs where Streams <= 2000
+    ```
 
-Notice you only get 15 hits.
+    Notice you only get 15 hits.
     
 {{< /detail-tag >}}
 
@@ -186,15 +199,15 @@ The **ANY** operator compares a given value in one query with a set of values in
 {{< detail-tag "Show instructions" >}}
 
 1. Review the following query. Can you figure out which artist will get returned?
-```sql
-select distinct Artist from spotify.songs where Streams = ANY (
-     select max(Streams) from spotify.songs group by Date
-) 
-```
+    ```sql
+    select distinct Artist from spotify.songs where Streams = ANY (
+        select max(Streams) from spotify.songs group by Date
+    ) 
+    ```
 
 2. Run the query above. You should get 13 artists:
 
-<img src="./images/anyoperator.png" width="600px" alt="" />
+<img src="./images/anyoperator.png" width="100%" alt="" />
 
 
 3. What do the hits mean? Let's break it down...the subquery returns a set of numbers that represent the maximum number of streams in a day. The outer query looks for the **Artist** who had the maximum number of streams that day. Therefore, you seeing artist who, at some point in time, had a day in which one of their songs was the most-streamed song on Spotify.
@@ -210,16 +223,17 @@ The **ALL** operator has the same syntax as ANY, except the Boolean logic is dif
 {{< detail-tag "Show instructions" >}}
 
 1. Run the following query, which returns the average number of daily streams for each of the 16 regions:
-```sql
-select Region, avg(Streams) from spotify.songs group by Region
-```
+    ```sql
+    select Region, avg(Streams) from spotify.songs group by Region
+    ```
 
 2. See if you can write a query that returns the artists who have had at least one song with more streams on a day than the average of all the 16 regions.
 
 {{< detail-tag "Show answer" >}}
 
 The following query is one solution:
-```sql 
+
+```sql
 select distinct Artist from spotify.songs where Streams > ALL (
     select avg(Streams) from spotify.songs group by Region
 )
@@ -233,6 +247,10 @@ This event has occurred for 210 artists.
 
 ***
 
-**What's next:** If you are new to ClickHouse, be sure to check out the <a href="../gettingstarted/">Getting Started</a> lesson. You can view all of our lessons on the <a href="../../index.html">Learn ClickHouse</a> home page
+**What's next:** Check out the following lessons to continue your journey: 
+
+- <a href="../covidtutorial-grafana">Learn how to visualize your data using Grafana</a>
+- Check out <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
+- View all of our lessons on the <a href="../../index.html">Learn ClickHouse</a> home page
 
 
