@@ -59,24 +59,25 @@ Let's verify you have ClickHouse up and running and the data was inserted succes
 
 2. Let's run a few queries to understand what the dataset looks like. Copy-and-paste the following query into the UI, then click the **Run** button (or press **Ctrl/Cmd+Enter**):
     ```sql
-    show tables in spotify
+    SHOW TABLES IN spotify
     ```
 
     You should see a table named **songs**.
 
 3. The following command shows the schema of **songs**:
     ```sql
-    describe spotify.songs
+    DESCRIBE spotify.songs
     ```
 
 4. View some of the data in the tables. This query displays 100 days' worth of streaming data:
     ```sql
-    select * from spotify.songs limit 100
+    SELECT * FROM spotify.songs LIMIT 100
     ```
 
 5. To see the most popular songs, sort by the **Streams** column:
     ```sql
-    select * from spotify.songs order by Streams desc
+    SELECT * FROM spotify.songs 
+    ORDER BY Streams DESC
     ```
 
 <img src="./images/topstreams.png" width="100%" alt="" />
@@ -97,55 +98,55 @@ Let's take a look at how it works.
 
 1. Suppose we want to view artists who had songs with really good days of streaming vs. not-as-good days. In other words, a song that had some great days but also some slow days. The logic could possibly feel like the following SQL, but as you can see this particular query could not possibly have any hits: 
     ```sql
-    select * from spotify.songs 
-    where Streams <= 2000 and Streams >=1000000
+    SELECT * FROM spotify.songs 
+    WHERE Streams <= 2000 AND Streams >=1000000
     ```
 
 2. Let's see how many times a song had more than 1,000,000 streams in a day:
     ```sql
-    select count(*) from spotify.songs 
-    where Streams >= 1000000
+    SELECT count(*) FROM spotify.songs 
+    WHERE Streams >= 1000000
     ```
 
     Notice you get 4,440 hits.
 
 3. Now let's see how many times a song had less than 2,000 streams in a day:
     ```sql
-    select count(*) from spotify.songs 
-    where Streams <= 2000
+    SELECT count(*) FROM spotify.songs 
+    WHERE Streams <= 2000
     ```
 
     This happens much more frequently, with 134,666 hits.
 
 4. To use INTERSECT, you run two queries and the responses they have in common are returned. For equality, the responses of both queries must have the same number and data types of columns. Run the following query, noticing that the two queries select the same columns:
     ```sql
-    select TrackName,Artist from spotify.songs 
-    where Streams <= 2000 
-    intersect
-    select TrackName,Artist from spotify.songs 
-    where Streams >= 1000000 
+    SELECT TrackName,Artist FROM spotify.songs 
+    WHERE Streams <= 2000 
+    INTERSECT
+    SELECT TrackName,Artist FROM spotify.songs 
+    WHERE Streams >= 1000000 
     ```
 
     You get 19,014 hits, which might seem contradictory because we know the second query only has 4,440 hits. But notice we selected **TrackName** and **Artist** multiple times in both queries, so for example if *Starboy* by **The Weeknd** appeared 20 times in one search and 100 times in the other, you would get 100 rows in the result.
 
 5. The result would be more interesting if we added **DISTINCT** to both queries. This would tell us how many songs had at least one day with more than 1,000,000 streams **and** at least one day with less than 2,000 streams:
     ```sql
-    select distinct TrackName,Artist from spotify.songs 
-    where Streams <= 2000 
-    intersect
-    select distinct TrackName,Artist from spotify.songs 
-    where Streams >= 1000000
+    SELECT DISTINCT TrackName,Artist FROM spotify.songs 
+    WHERE Streams <= 2000 
+    INTERSECT
+    SELECT DISTINCT TrackName,Artist FROM spotify.songs 
+    WHERE Streams >= 1000000
     ```
 
     This particular query returns 99 rows.
 
 6. If you want to sort the results, simply sort the first query. For example, the results in this query will be sorted by **TrackName**:
     ```sql
-    select distinct TrackName,Artist from spotify.songs 
-    where Streams <= 2000 order by TrackName
-    intersect
-    select distinct TrackName,Artist from spotify.songs 
-    where Streams >= 1000000
+    SELECT DISTINCT TrackName,Artist FROM spotify.songs 
+    WHERE Streams <= 2000 ORDER BY TrackName
+    INTERSECT
+    SELECT DISTINCT TrackName,Artist FROM spotify.songs 
+    WHERE Streams >= 1000000
     ```
 
     If you think about it, the Christmas songs on the list actually make sense - they probably don't get a lot of streams in April!
@@ -154,11 +155,11 @@ Let's take a look at how it works.
 
 7. Notice that the columns selected in the two queries must have the same data types. The column names do not have to match, as long as the data types lineup (the order of columns in the SELECT clause matters). Try the following query:
     ```sql
-    select distinct TrackName,Artist,Date from spotify.songs 
-    where Streams <= 2000
-    intersect
-    select distinct TrackName,Artist,URL from spotify.songs 
-    where Streams >= 1000000
+    SELECT DISTINCT TrackName,Artist,Date FROM spotify.songs 
+    WHERE Streams <= 2000
+    INTERSECT
+    SELECT DISTINCT TrackName,Artist,URL FROM spotify.songs 
+    WHERE Streams >= 1000000
     ```
 
     You get the following error:
@@ -180,9 +181,11 @@ The **EXCEPT** operator returns the rows that match the first query but throws o
 
 1. We have already seen in the INTERSECT example above that 99 songs have had good days and bad days. The following query returns songs that have topped 1,000,000 streams in a  day at least once, but have never had a day with less than 2,000 streams:
     ```sql
-    select distinct TrackName,Artist from spotify.songs where Streams >=1000000
-    except
-    select distinct TrackName,Artist from spotify.songs where Streams <= 2000
+    SELECT DISTINCT TrackName,Artist FROM spotify.songs 
+    WHERE Streams >=1000000
+    EXCEPT
+    SELECT DISTINCT TrackName,Artist FROM spotify.songs 
+    WHERE Streams <= 2000
     ```
 
     Notice you only get 15 hits.
@@ -200,8 +203,9 @@ The **ANY** operator compares a given value in one query with a set of values in
 
 1. Review the following query. Can you figure out which artist will get returned?
     ```sql
-    select distinct Artist from spotify.songs where Streams = ANY (
-        select max(Streams) from spotify.songs group by Date
+    SELECT DISTINCT Artist FROM spotify.songs 
+    WHERE Streams = ANY (
+        SELECT max(Streams) FROM spotify.songs GROUP BY Date
     ) 
     ```
 
@@ -224,7 +228,7 @@ The **ALL** operator has the same syntax as ANY, except the Boolean logic is dif
 
 1. Run the following query, which returns the average number of daily streams for each of the 16 regions:
     ```sql
-    select Region, avg(Streams) from spotify.songs group by Region
+    SELECT Region, avg(Streams) FROM spotify.songs GROUP BY Region
     ```
 
 2. See if you can write a query that returns the artists who have had at least one song with more streams on a day than the average of all the 16 regions.
@@ -234,8 +238,9 @@ The **ALL** operator has the same syntax as ANY, except the Boolean logic is dif
 The following query is one solution:
 
 ```sql
-select distinct Artist from spotify.songs where Streams > ALL (
-    select avg(Streams) from spotify.songs group by Region
+SELECT DISTINCT Artist FROM spotify.songs 
+WHERE Streams > ALL (
+    SELECT avg(Streams) FROM spotify.songs GROUP BY Region
 )
 ```
 
