@@ -68,17 +68,17 @@ The first step is to get ClickHouse up and running:
 
 5. Let's run a few queries to understand what the dataset looks like. Copy-and-paste the following query into the Play UI, then click the **Run** button (or press **Ctrl/Cmd+Enter**). You will see the column names and data types of the **hackernews** table:
     ```sql
-    describe hackernews
+    DESCRIBE hackernews
     ```
 
 6. Make sure you have 1,679,361 rows:
     ```sql
-    select count(*) from hackernews
+    SELECT count(*) FROM hackernews
     ```
 
 8. View some of the data in the table:
     ```sql
-    select * from hackernews limit 100
+    SELECT * FROM hackernews LIMIT 100
     ```
 
 {{% notice note %}}
