@@ -70,7 +70,7 @@ You will startup a **docker-compose.yml** file that has ClickHouse 21.10 and a u
             restart: always
             environment:
                 POSTGRES_PASSWORD: password
-            command: [ "postgres", "-c", "wal_level=logical", "-c", "max_replication_slots=2"]    
+            command: [ "postgres", "-c", "wal_level=logical", "-c", "max_replication_slots=4"]    
     ```
 
 3. From a terminal, run the following command from the **~/postgres** folder where you created **docker-compose.yml**:
