@@ -72,7 +72,7 @@ You are going to run a preconfigured ClickHouse server in a Docker container tha
     docker-compose up
     ```
 
-4. It will take a minute - the entrypoint script has a delay to ensure that ClickHouse starts up before the database is created and populated. After about 30 seconds, <a href="http://localhost:8123/play" target="_blank">open the Play UI</a> and run the following command:
+4. The entrypoint script has a delay to ensure that ClickHouse starts up before the database is created and populated. After about 30 seconds, <a href="http://localhost:8123/play" target="_blank">open the Play UI</a> and run the following command:
     ```sql
     SHOW TABLES IN TPCD
     ```
@@ -85,7 +85,7 @@ You are going to run a preconfigured ClickHouse server in a Docker container tha
 The TPC-H dataset is used for benchmarking purposes and is freely available at <a href="http://www.tpc.org/tpch/" target="_blank">http://www.tpc.org/tpch/</a>. 
 {{% /notice %}}
 
-5. The dataset consists or products for sale, suppliers, customers and orders. Feel free to browse the contents of the various tables:
+5. The dataset consists or products for sale, suppliers, customers and orders. Feel free to browse the contents of the various tables. For example:
     ```sql
     SELECT * FROM TPCD.ORDERS LIMIT 100
     ```
@@ -96,11 +96,16 @@ The TPC-H dataset is used for benchmarking purposes and is freely available at <
 
 ## 2.  Download the JDBC Driver
 
-The Tableau connector is an extension of the ClickHouse JDBC driver, so we will download the JDBC driver first.
+The Tableau connector is an extension of the ClickHouse JDBC driver, so you need to download the JDBC driver and save it in the correct folder.
 
 {{< detail-tag "Show instructions" >}}
 
-1. Download the latest version of the ClickHouse JDBC driver at <a href="" target="_blank">https://github.com/ClickHouse/clickhouse-jdbc/releases/</a>. For this particular tutorial, <a href="https://github.com/ClickHouse/clickhouse-jdbc/releases/download/v0.3.1-patch/clickhouse-jdbc-0.3.1-patch-shaded.jar">this driver was used</a>. Make sure you download the **clickhouse-jdbc-x.x.x-shaded.jar** JAR file.
+1. Download the latest version of the ClickHouse JDBC driver at <a href="" target="_blank">https://github.com/ClickHouse/clickhouse-jdbc/releases/</a>. (We used <a href="https://github.com/ClickHouse/clickhouse-jdbc/releases/download/v0.3.1-patch/clickhouse-jdbc-0.3.1-patch-shaded.jar">this version of the driver</a> for this tutorial.) 
+
+{{% notice note %}}
+Make sure you download the **clickhouse-jdbc-x.x.x-shaded.jar** JAR file.
+{{% /notice %}}
+
 
 2. Store the JDBC driver in the following folder (based on your OS):
 
@@ -123,7 +128,7 @@ ANALYTIKA PLUS has built a handy connector for simplifying connections to ClickH
 
 {{< detail-tag "Show instructions" >}}
 
-1. The connector is built in a **taco** file (short for **Ta**bleau **Co**nnector). Download the latest version at <a href="https://github.com/analytikaplus/clickhouse-tableau-connector-jdbc/releases/" target="_blank">https://github.com/analytikaplus/clickhouse-tableau-connector-jdbc/releases/</a>. For this lesson, we downloaded **v0.1.1** of **clickhouse_jdbc.taco**.
+1. The connector is built in a **taco** file (short for **Ta**bleau **Co**nnector). Download the latest version at <a href="https://github.com/analytikaplus/clickhouse-tableau-connector-jdbc/releases/" target="_blank">https://github.com/analytikaplus/clickhouse-tableau-connector-jdbc/releases/</a>. (For this lesson, we downloaded **v0.1.1** of **clickhouse_jdbc.taco**.)
 
 2. Store **clickhouse_jdbc.taco** in the following folder (based on your OS):
 
@@ -141,7 +146,7 @@ The connector is now ready to go.
 
 ## 4.  Configure a ClickHouse data source in Tableau
 
-Now that you have the driver and connector in the approriate folders on your machine, let's see how to define a data source in Tableau that connects to the **tpcd** database in ClickHouse.
+Now that you have the driver and connector in the approriate folders on your machine, let's see how to define a data source in Tableau that connects to the **TPCD** database in ClickHouse.
 
 {{< detail-tag "Show instructions" >}}
 
@@ -181,7 +186,7 @@ Our ClickHouse database is named **TPCD**, but you must set the **Database** to 
 
 <img src="./images/tpcdschema.png" width="100%" alt="Select TPCD for the Schema" border="1px" />
 
-You are now ready to build some visualizations in Tableau.
+You are now ready to build some visualizations in Tableau!
 
 {{< /detail-tag >}}
 
@@ -190,7 +195,7 @@ You are now ready to build some visualizations in Tableau.
 
 ## 5. Building Visualizations in Tableau
 
-Now that have a ClickHouse data source configured in Tableau, let's visualize the data!
+Now that have a ClickHouse data source configured in Tableau, let's visualize the data...
 
 {{< detail-tag "Show instructions" >}}
 
@@ -201,11 +206,11 @@ Now that have a ClickHouse data source configured in Tableau, let's visualize th
 2. Click the **Update Now** button and 100 rows from **CUSTOMER** will populate the table.
 
 
-3. Drag the **ORDERS** table into the workbook, then set **Custkey** as the relationship field:
+3. Drag the **ORDERS** table into the workbook, then set **Custkey** as the relationship field between the two tables:
 
 <img src="./images/workbook2.png" width="100%" alt="" border="1px" />
 
-4. Select the **Sheet 1** tab at the bottom of the workbook.
+4. You now have the **ORDERS** and **LINEITEM** tables associated with each other as your data source, so you can use this relationship to answer questions about the data. Select the **Sheet 1** tab at the bottom of the workbook.
 
 <img src="./images/workbook3.png" width="100%" alt="" border="1px" />
 
@@ -214,8 +219,30 @@ Now that have a ClickHouse data source configured in Tableau, let's visualize th
 
 <img src="./images/workbook4.png" width="100%" alt="" border="1px" />
 
+Not a very exciting line chart, but the dataset was generated by a script and built for testing query performance, so you will notice there is not a lot of variations in the simulated orders of the TCPD data.
+
+6. Suppose you want to know the average order amount (in dollars) by quarter and also by shipping mode (air, mail, ship, truck, etc.):
+
+    - Click the **New Worksheet** tab create a new sheet
+    - Drag **OrderDate** from **ORDERS** into **Columns** and change it from **Year** to **Quarter**
+    - Drag **Shipmode** from **LINEITEM** into **Rows** 
+
+You should see the following:
+
+<img src="./images/workbook5.png" width="100%" alt="" border="1px" />
+
+7. The **Abc** values are just filling in the space until you drag a metric onto the table. Drag **Totalprice** from **ORDERS** onto the table. Notice the default calculation is to **SUM** the **Totalpricess**:
+
+<img src="./images/workbook6.png" width="100%" alt="" border="1px" />
+
+8. Click on **SUM** and change the **Measure** to **Average**. From the same dropdown menu, select **Format** change the **Numbers** to **Currency (Standard)**:
+
+<img src="./images/workbook7.png" width="100%" alt="" border="1px" />
+
+  Well done! You have successfully connected Tableau to ClickHouse, and you have opened up a whole world of possibilities for analyzing and visualizing your ClickHouse data.
+
 {{% notice note %}}
-Tableau is great, and we love that it connects to nicely to ClickHouse! If you are new to Tableau, <a href="https://help.tableau.com/current/pro/desktop/en-us/gettingstarted_overview.htm" target="_blank">check out their documentation</a> for help on building dashboards and visualizations.
+Tableau is great, and we love that it connects so nicely to ClickHouse! If you are new to Tableau, <a href="https://help.tableau.com/current/pro/desktop/en-us/gettingstarted_overview.htm" target="_blank">check out their documentation</a> for help on building dashboards and visualizations.
 {{% /notice %}}
 
 {{< /detail-tag >}}
@@ -223,7 +250,10 @@ Tableau is great, and we love that it connects to nicely to ClickHouse! If you a
 *** 
 
 
-You can connect Tableau to ClickHouse using the generic ODBC/JDBC ClickHouse driver, but we really like how this tool from ANALYTIKA PLUS simplifies the process of setting up the connection. If you have any issues with the connector, feel free to reach out to ANALYTIKA PLUS on <a href="https://github.com/analytikaplus/clickhouse-tableau-connector-jdbc/issues" target="_blank">GitHub</a>.
+**Summary:** You can connect Tableau to ClickHouse using the generic ODBC/JDBC ClickHouse driver, but we really like how this tool from ANALYTIKA PLUS simplifies the process of setting up the connection. If you have any issues with the connector, feel free to reach out to ANALYTIKA PLUS on <a href="https://github.com/analytikaplus/clickhouse-tableau-connector-jdbc/issues" target="_blank">GitHub</a>.
+
+*** 
+
 
 **What's next:** Check out the following lessons to continue your journey: 
 
