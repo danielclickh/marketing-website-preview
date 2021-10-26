@@ -149,7 +149,7 @@ Now that you have the driver and connector in the approriate folders on your mac
 
 2. From the left-side menu, click on **More** under the **To a Server** section. If everything worked properly, you should see **ClickHouse (JDBC) by ANALYTIKA PLUS** in the list of installed connectors:
 
-<img src="./images/connecttoserver.png" width="100%" alt="" />
+<img src="./images/connecttoserver.png" width="100%" alt="ClickHouse (JDBC) by ANALYTIKA PLUS" />
 
 
 3. Click on **ClickHouse (JDBC) by ANALYTIKA PLUS**  and a dialog window pops up. Enter the following details:
@@ -158,24 +158,70 @@ Now that you have the driver and connector in the approriate folders on your mac
     | ----------- | ----------- |
     | Server      |  **localhost**  |
     | Port   |  **8123** |
-    | Database |  **TPCD** (case sensitive) |
+    | Database |  **default** |
     | Username | **default** |
     | Password | *leave blank* |
 
 <br/>
 
-Your settings shoud look like:
-
+Your settings should look like:
 
 <img src="./images/clickhousesettings.png" width="100%" alt="ClickHouse Settings" />
 
-4. Click the **Sign In** button and you should see the **TPCD** database appear in a new workbook:
+{{% notice note %}}
+Our ClickHouse database is named **TPCD**, but you must set the **Database** to **default** in the dialog above, then select **TPCD** for the **Schema** in the next step. (This is likely due to a bug in the connector, so this behavior could change, but for now you must use **default** as the database.)
+{{% /notice %}}
 
-<img src="./images/newworkbook.png" width="100%" alt="ClickHouse Settings" />
+4. Click the **Sign In** button and you should see a new Tableau workbook:
 
-5. That's it!! You should see the **TPCD** tables and be able to build any type of visualization or table that you want in Tableau.
+<img src="./images/newworkbook.png" width="100%" alt="New Workbook" border="1px" />
+
+
+5. Select **TPCD** from the **Schema** dropdown and you should see the list of tables in **TPCD**:
+
+<img src="./images/tpcdschema.png" width="100%" alt="Select TPCD for the Schema" border="1px" />
+
+You are now ready to build some visualizations in Tableau.
+
+{{< /detail-tag >}}
 
 ***
+
+
+## 5. Building Visualizations in Tableau
+
+Now that have a ClickHouse data source configured in Tableau, let's visualize the data!
+
+{{< detail-tag "Show instructions" >}}
+
+1. Drag the **CUSTOMER** table onto the workbook. Notice the columns appear, but the data table is empty:
+
+<img src="./images/workbook1.png" width="100%" alt="" border="1px" />
+
+2. Click the **Update Now** button and 100 rows from **CUSTOMER** will populate the table.
+
+
+3. Drag the **ORDERS** table into the workbook, then set **Custkey** as the relationship field:
+
+<img src="./images/workbook2.png" width="100%" alt="" border="1px" />
+
+4. Select the **Sheet 1** tab at the bottom of the workbook.
+
+<img src="./images/workbook3.png" width="100%" alt="" border="1px" />
+
+
+5. Suppose you want to know how many specific items were ordered each year. Drag **Orderdate** from **ORDERS** into the **Columns** section (the horizontal field), then drag **Quantity** from **LINEITEM** into the **Rows**. Tableau will generate the following line chart:
+
+<img src="./images/workbook4.png" width="100%" alt="" border="1px" />
+
+{{% notice note %}}
+Tableau is great, and we love that it connects to nicely to ClickHouse! If you are new to Tableau, <a href="https://help.tableau.com/current/pro/desktop/en-us/gettingstarted_overview.htm" target="_blank">check out their documentation</a> for help on building dashboards and visualizations.
+{{% /notice %}}
+
+{{< /detail-tag >}}
+
+*** 
+
 
 You can connect Tableau to ClickHouse using the generic ODBC/JDBC ClickHouse driver, but we really like how this tool from ANALYTIKA PLUS simplifies the process of setting up the connection. If you have any issues with the connector, feel free to reach out to ANALYTIKA PLUS on <a href="https://github.com/analytikaplus/clickhouse-tableau-connector-jdbc/issues" target="_blank">GitHub</a>.
 
