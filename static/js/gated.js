@@ -38,3 +38,10 @@ function gated(){
             localStorage.setItem('email-stored', true);
     }
 }
+
+window.onload=function() {
+    var gatedsection = document.getElementById("gatedsection");
+    if(gatedsection) {
+        gated();
+    }
+}
