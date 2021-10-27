@@ -1,6 +1,6 @@
 ---
-title: "Analyzing Covid-19 Data with Grafana and ClickHouse"
-description: "A tutorial on how to connect Grafana to ClickHouse to build visualizations and analyze data."
+title: "Using AWS S3 with ClickHouse"
+description: "You can insert data from S3 files into a ClickHouse table, and write data from a ClickHouse table to a file in S3."
 lead: ""
 date: 
 lastmod: 
@@ -9,11 +9,11 @@ images: []
 toc: true
 
 duration: "20 minutes"
-audience: "Anyone interested in learning how to connect Grafana to ClickHouse for building visualizations and dashboards"
+audience: "New users to ClickHouse you want to connect AWS S3 to ClickHouse"
 
 ---
 
-**Overview:** In this lesson, you will learn how to analyze data in ClickHouse using Grafana. The data is already indexed for you, so the focus will be on how to configure Grafana to connect to ClickHouse. 
+**Overview:** In this lesson, you will learn how to use the S3 table engine and S3 function in ClickHouse to read and write data between S3 and ClickHouse. 
 
 Let's get started!
 
@@ -21,7 +21,7 @@ Let's get started!
 
 ### Prerequisites
 
-- You will need **Docker** installed and running so that you can start up a Docker Compose file
+- You will need ClickHouse installed and running if you want to follow along (see step 1 of our <a href="https://clickhouse.com/learn/lessons/gettingstarted" target="_blank">Getting Started lesson</a>), as well as an AWS account if you want to write to a file in S3.
 
 *** 
 
