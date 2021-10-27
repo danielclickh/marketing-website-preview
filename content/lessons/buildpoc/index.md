@@ -379,7 +379,7 @@ In this section, you will define a new dashboard and add charts (visualizations)
 
 {{< /detail-tag >}}
 
-{{% gated %}}
+{{% /gated %}}
 
 
 
