@@ -15,7 +15,7 @@ audience: "Anyone interested in learning how to connect Superset to ClickHouse f
 
 **Overview:** This tutorial is more of a journey...it has many moving parts to get to the final result - which is the ability to analyze data using ClickHouse and Superset. But the end result is worth the effort! You will insert some Covid-19 data in a CSV format into ClickHouse, then analyze the data visually using charts in Superset:
 
-<img src="./images/dashboard.png" width="100%" alt="Superset Dashboard" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-superset/images/dashboard.png" width="100%" alt="Superset Dashboard" />
 
 Let's get started!
 
@@ -272,7 +272,7 @@ superset run -p 8088 --with-threads --reload --debugger
 
 10. Open your web browser to <a href="http://localhost:8088" target="_blank">http://localhost:8088</a>. Login and you will see the welcome page for Superset:
 
-<img src="./images/login.png" width="100%" alt="Superset Welcome Page" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-superset/images/login.png" width="100%" alt="Superset Welcome Page" />
 
 {{< /detail-tag >}}
 
@@ -286,10 +286,10 @@ Now that you have both ClickHouse and Superset up and running, let's connect the
 {{< detail-tag "Show instructions" >}}
 
 1. Select **Data** from the top menu and then **Databases** from the drop-down menu. You do not have any databases defined yet, but notice there is a button to add a new one - click it:
-<img src="./images/newdatabase.png" width="100%" alt="Add Database" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-superset/images/newdatabase.png" width="100%" alt="Add Database" />
 
 2. In the first step of the wizard that starts, select **ClickHouse** as the type of database:
-<img src="./images/selectclickhouse.png" width="100%" alt="Type of Database" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-superset/images/selectclickhouse.png" width="100%" alt="Type of Database" />
 
 3. Enter "**Covid19 Database**" for the **DISPLAY NAME**.
 
@@ -299,14 +299,14 @@ clickhouse+native://default@localhost/covid19db
 ```
 
 5. Try the **TEST CONNECTION** button and verify that Superset is connecting to your ClickHouse database properly:
-<img src="./images/dbconnection.png" width="100%" alt="Test Connection" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-superset/images/dbconnection.png" width="100%" alt="Test Connection" />
 
 6. Click the **CONNECT** button to complete the setup wizard, and you should now see your **Covid19 Database** in the list of databases.
 
 7. To define new charts (visualizations) in Superset, you need to define the source of the data used in the charts - which is accomplished using **_datasets_**. From the top menu in Superset, select **Data**, then **Datasets** from the drop-down menu. You should see an empty list - let's define one!
 
 8. Click the button for adding a dataset. Select your new database as the datasource, **covid19db** for the schema, and **daily_totals** for the table:
-<img src="./images/newdataset.png" width="100%" alt="Add Dataset" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-superset/images/newdataset.png" width="100%" alt="Add Dataset" />
 
 9. Click the **ADD** button at the bottom of the dialog window and you should see **daily_totals** in the list of datasets. Congratulations!! You are ready to build a dashboard and analyze the data.
 
@@ -327,25 +327,25 @@ In this section, you will define a new dashboard and add charts (visualizations)
 1. Let's start by creating a new dashboard to display our charts. From the top menu in Superset, select **Dashboards**. You should see an empty list.
 
 2. Click the button in the upper-right to add a new dashboard. Name it **Covid-19 Dashboard** and click the **SAVE** button:
-<img src="./images/newdashboard.png" width="100%" alt="New Dashboard" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-superset/images/newdashboard.png" width="100%" alt="New Dashboard" />
 
 3. Now let's create a new chart. Select **Charts** from the top menu and click the button to add a new chart. You will be shown a lot of options. For starters, select the **Big Number** chart. You will need to also choose a dataset, so select **daily_totals** from the **CHOOSE A DATASET** drop-down. When you are ready, click the **CREATE NEW CHART** button in the bottom-right corner:
-<img src="./images/newchart.png" width="100%" alt="New Chart" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-superset/images/newchart.png" width="100%" alt="New Chart" />
 
 4. You need to add a metric. Let's display the total number of the `new_cases` field. Notice there is a column named **DATA** and a section named **Query** with a **METRIC** field that currently has a red warning (because it is not defined yet). Click where it says **Add metric** and a small dialog window appears:
-<img src="./images/bignumber1.png" width="100%" alt="Add Metric" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-superset/images/bignumber1.png" width="100%" alt="Add Metric" />
 
 
 5. Select the **SIMPLE** tab, then select **new_cases** for the column and **SUM** for the aggregation:
-<img src="./images/bignumber2.png" width="100%" alt="Sum of new_cases" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-superset/images/bignumber2.png" width="100%" alt="Sum of new_cases" />
 
 
 6. To view the actual number, click the **RUN QUERY** button. You will see a big number!
-<img src="./images/bignumber3.png" width="100%" alt="Sum of new_cases" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-superset/images/bignumber3.png" width="100%" alt="Sum of new_cases" />
 
 7. Change the title to **Total New Cases**, then click the **SAVE** button. Select **Covid-19 Dashboard** under the **ADD TO DASHBOARD** drop-down, then select **SAVE & GO TO DASHBOARD**. This will save the chart, add it to the dashboard, and display the dashboard:
-<img src="./images/bignumber4.png" width="100%" alt="Save the Chart" />
-<img src="./images/bignumber5.png" width="100%" alt="Add Chart to Dashboard" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-superset/images/bignumber4.png" width="100%" alt="Save the Chart" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-superset/images/bignumber5.png" width="100%" alt="Add Chart to Dashboard" />
 
 8. That's it! You have successfully built a dashboard in Superset based on data in ClickHouse. Feel free to play around with Superset and add more charts to your dashboard.
 
