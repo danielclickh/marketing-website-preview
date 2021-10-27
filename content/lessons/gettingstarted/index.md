@@ -122,7 +122,7 @@ The ClickHouse server includes a **Play UI** for executing SQL commands. In this
 
 1. Go to <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a> to access the Play UI:
 
-<img src="./images/playui.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/gettingstarted/images/playui.png" width="100%" alt="" />
 
 2. You can simply type in SQL commands and click the **Run** button to execute them. For example, run the following command to view the pre-defined databases:
     ```sql
@@ -131,7 +131,7 @@ The ClickHouse server includes a **Play UI** for executing SQL commands. In this
 
     You should see 4 databases:
 
-<img src="./images/databases.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/gettingstarted/images/databases.png" width="100%" alt="" />
 
 {{% notice note %}}
 The **default** database is initially empty and is used for executing commands that do not specify a database. The **system** database is where ClickHouse stores the details about your ClickHouse deployment. 
@@ -196,7 +196,7 @@ The **table engine** determines how and where the data is stored, which queries 
 
     Your table should look like the following:
 
-<img src="./images/describetable.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/gettingstarted/images/describetable.png" width="100%" alt="" />
 
 
 {{% notice note %}}
@@ -243,7 +243,7 @@ Now that you have a table ready to go, let's insert some data...
     SELECT * FROM gettingstarted.clickstream
     ```
 
-<img src="./images/selecttable.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/gettingstarted/images/selecttable.png" width="100%" alt="" />
 
 5. You probably have data in different formats that needs to be inserted into ClickHouse. For details on all the various supported input formats, <a href="https://clickhouse.com/docs/en/interfaces/formats/" target="_blank">check out the formats in the ClickHouse documentation</a>.
 
@@ -327,4 +327,4 @@ Congratulations!! You have now started your ClickHouse journey...
 - The <a href="https://clickhouse.com/learn/lessons/logsvector">Ingest Nginx Logs into ClickHouse using Vector</a> lesson demonstrates how to stream a log file into ClickHouse
 - The <a href="https://clickhouse.com/learn/lessons/covidtutorial-grafana">Analyzing Covid-19 Data with Grafana and ClickHouse</a> lesson demonstrates how to connect Grafana to ClickHouse to analyze your data
 - Check out <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
-- View all of our lessons on the <a href="../../index.html">Learn ClickHouse</a> home page
+- View all of our lessons on the <a href="https://clickhouse.com/learn/">Learn ClickHouse</a> home page

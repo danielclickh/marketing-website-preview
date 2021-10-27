@@ -99,7 +99,7 @@ Let's define a table to store the log events...
 
 1. Open the Play UI at <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>:
 
-    <img src="./images/playui.png" width="100%" alt="" />
+    <img src="https://clickhouse.com/learn/lessons/logsvector/images/playui.png" width="100%" alt="" />
 
 2. Run the following SQL in the Play UI to define a database named **nginxdb**:
     ```sql
@@ -176,7 +176,7 @@ Access logs will be sent to **/var/log/nginx/my_access.log** using the **combine
 
 4. Verify Nginx is running by viewing its default home page at <a href="http://localhost/" target="_blank">http://localhost/</a>:
 
-<img src="./images/nginx.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/logsvector/images/nginx.png" width="100%" alt="" />
 
 5. Refresh the home page a few times to generate some log events in the access log.
 
@@ -258,7 +258,7 @@ Let's verify the access logs are being inserted into ClickHouse...
 
     You should see the access logs in the table:
 
-<img src="./images/logs.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/logsvector/images/logs.png" width="100%" alt="" />
 
 Congrats - you did it! Notice how easy it would be to tail your own log file - just install Vector on the machine with the log file and configure the **source** to point to your log file.
     
@@ -340,7 +340,7 @@ Having the logs in ClickHouse is great, but storing each event as a single strin
     SELECT * FROM nginxdb.access_logs_view
     ```
 
-<img src="./images/mv.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/logsvector/images/mv.png" width="100%" alt="" />
 
 Well done! You now have logs streaming from the Nginx access log directly into ClickHouse. 
 
@@ -358,6 +358,6 @@ The lesson above stored the data in two tables, but you could change the initial
 
 **What's next:** Check out the following lessons to continue your journey: 
 
-- <a href="../covidtutorial-grafana">Learn how to visualize your data using Grafana</a>
+- <a href="https://clickhouse.com/learn/lessons/covidtutorial-grafana">Learn how to visualize your data using Grafana</a>
 - Check out <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
-- View all of our lessons on the <a href="../../index.html">Learn ClickHouse</a> home page
+- View all of our lessons on the <a href="https://clickhouse.com/learn/">Learn ClickHouse</a> home page

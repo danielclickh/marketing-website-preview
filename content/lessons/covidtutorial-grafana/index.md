@@ -93,7 +93,7 @@ As you can see, the **grafana** image is just being pulled from Grafana's Docker
 
 You should see 118,603 rows:
 
-<img src="./images/selectcount.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/selectcount.png" width="100%" alt="" />
 
 {{< /detail-tag >}}
 
@@ -137,11 +137,11 @@ Before Grafana can talk to ClickHouse, you need to install the appropriate Grafa
 
 1. Login to Grafana at <a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a>. The username and password are both **admin**. You will be prompted to change the password - but notice there is a link to skip that step if desired.
 
-<img src="./images/grafanalogin.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/grafanalogin.png" width="100%" alt="" />
 
 2. Select the **Configuration** menu (the gear icon in the left column) and select **Data sources**. Select the **Add data source** button and search for ClickHouse - notice the list is empty:
 
-<img src="./images/datasources.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/datasources.png" width="100%" alt="" />
 
 3. You need to install the Grafana plugin for ClickHouse, which can be done from the command line. Run the following command to connect to the **grafana** Docker container:
     ```bash
@@ -165,7 +165,7 @@ Before Grafana can talk to ClickHouse, you need to install the appropriate Grafa
 
 7. To verify the plugin is working, go back to Grafana and reload the <a href="http://localhost:3000/datasources" target="_blank">page for defining data sources</a>. This time when you select the **Add data source** button - you should see ClickHouse in the list:
 
-<img src="./images/verifyplugin.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/verifyplugin.png" width="100%" alt="" />
 
 In the next step, you will define a new data source for ClickHouse.
 
@@ -181,7 +181,7 @@ Now that you have the ClickHouse plugin installed, let's define a data source in
 
 1. From the **Add data source** page in Grafana, click the **Select** button next to ClickHouse. The following dialog appears:
 
-<img src="./images/datasource1.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/datasource1.png" width="100%" alt="" />
 
 2. Enter the following values:
 
@@ -192,11 +192,11 @@ and make sure the **Default** option is selected.
 
 3. Scroll down and click the **Save and test** button. You should see a **Data source is working** message:
 
-<img src="./images/datasource2.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/datasource2.png" width="100%" alt="" />
 
 4. Click the **Back** button and your new data source should appear on the list:
 
-<img src="./images/datasource3.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/datasource3.png" width="100%" alt="" />
 
 You are now ready to build a dashboard!
 
@@ -213,17 +213,17 @@ You are now ready to build a dashboard!
 
 1. From the menu, click on the **Dashboards** menu and select the **Manage** icon. Then select the **New Dashboard** button: 
 
-<img src="./images/newdashboard.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/newdashboard.png" width="100%" alt="" />
 
 2. Dashboards are initially empty. Click the **Add an empty panel** button to create a new panel.
 
 3. Using the time picker, change the time interval to the last 2 years:
 
-<img src="./images/dashboard1.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/dashboard1.png" width="100%" alt="" />
 
 4. Next you will select a database table. Make sure the **Data source** is **my-clickhouse-ds**, then click the **Edit** icon (the one that looks like a pencil):
 
-<img src="./images/dashboard2.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/dashboard2.png" width="100%" alt="" />
 
 5. Modify the query as follows:
 
@@ -231,37 +231,37 @@ You are now ready to build a dashboard!
 - select **daily_totals** for the table
 - select **Column:DateTime64** for the data type and **time_stamp** as the field for the time selector
 
-<img src="./images/dashboard3.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/dashboard3.png" width="100%" alt="" />
 
 6. Click the **Go to Query** button to view the query. Notice the metric is a simple **count()**, and the line chart should populate with the number of daily events. Change the name of the panel to **Number of Events** then click the **Apply** button:
 
-<img src="./images/dashboard4.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/dashboard4.png" width="100%" alt="" />
 
 7. The panel will appear on your new dashboard:
 
-<img src="./images/dashboard5.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/dashboard5.png" width="100%" alt="" />
 
 8. Add another panel, but this time change the query to show the number of new cases every day:
 
-<img src="./images/dashboard6.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/dashboard6.png" width="100%" alt="" />
 
 9. Name the panel **Daily New Cases** and click **Apply** to add it to your dashboard:
 
-<img src="./images/dashboard7.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/dashboard7.png" width="100%" alt="" />
 
 10. You can add multiple query results on the same panel. From the dashboard, click on the name **Daily New Cases** and select **Edit** from the drop-down menu to return back to the **Edit panel** page.
 
 11. Click the **+ Query** button below the first query:
 
-<img src="./images/dashboard8.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/dashboard8.png" width="100%" alt="" />
 
 12. Instead of **count()**, compute the **SUM(new_tests_smoothed)** for query B:
 
-<img src="./images/dashboard9.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/dashboard9.png" width="100%" alt="" />
 
 13. Change the name to **Daily New Cases vs. Tests** and click **Apply** to view the updated panel:
 
-<img src="./images/dashboard10.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/dashboard10.png" width="100%" alt="" />
 
 14. By the way, you can save your dashboard by clicking the **Save dashboard** icon in the top-right toolbar - you will be prompted for a name as well.
 
@@ -278,5 +278,5 @@ Congratulations on connecting Grafana to ClickHouse!! You have opened up a whole
 
 - The <a href="https://clickhouse.com/learn/lessons/logsvector">Ingest Nginx Logs into ClickHouse using Vector</a> lesson demonstrates how to stream a log file into ClickHouse
 - Check out <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
-- View all of our lessons on the <a href="../../index.html">Learn ClickHouse</a> home page
+- View all of our lessons on the <a href="https://clickhouse.com/learn/">Learn ClickHouse</a> home page
 
