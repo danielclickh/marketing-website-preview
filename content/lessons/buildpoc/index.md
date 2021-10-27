@@ -4,7 +4,7 @@ description: "Description..."
 lead: ""
 date: 2020-10-13T15:21:01+02:00
 lastmod: 2020-10-13T15:21:01+02:00
-draft: true
+draft: false
 images: []
 toc: true
 ---
@@ -36,6 +36,10 @@ Let's get started!
 ### Prerequisites
 
 The assumption is that you are new to ClickHouse. You will be installing ClickHouse and Superset on your local machine. ClickHouse does not run on Windows, so if you do not have a Linux or Mac OS X system, then you will need to either run Linux in a virtual machine using something like [VirtualBox](https://www.virtualbox.org/), or create a Linux instance using your favorite cloud provider.
+
+
+{{% gated %}}
+
 
 *** 
 
@@ -375,7 +379,15 @@ In this section, you will define a new dashboard and add charts (visualizations)
 
 {{< /detail-tag >}}
 
+{{% gated %}}
+
+
 
 ***
 
-<button class="btn btn-primary btn-lg"  id="markcomplete">Mark as complete</button>
+**What's next:** Check out the following lessons to continue your journey: 
+
+- The <a href="https://clickhouse.com/learn/lessons/logsvector">Ingest Nginx Logs into ClickHouse using Vector</a> lesson demonstrates how to stream a log file into ClickHouse
+- Check out <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
+- View all of our lessons on the <a href="../../index.html">Learn ClickHouse</a> home page
+
