@@ -74,7 +74,7 @@ Notice the volumes are commented out - you will uncomment those later.
 
 5. Point your web browser to <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>. You should see the embedded ClickHouse Play UI:
 
-<img src="./images/playui.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10/images/playui.png" width="100%" alt="" />
 
 6. Let's run a few queries to understand what the dataset looks like. Copy-and-paste the following query into the Play UI, then click the **Run** button (or press **Ctrl/Cmd+Enter**). You will see the column names and data types of the **hackernews** table:
     ```sql
@@ -424,6 +424,6 @@ If you do not materialize the column, then the values are computed at the time o
 
 *** 
 
-**What's next:** If you are new to ClickHouse, be sure to check out the <a href="../gettingstarted/">Getting Started</a> lesson. You can view all of our lessons on the <a href="https://clickhouse.com/learn/">Learn ClickHouse</a> home page
+**What's next:** If you are new to ClickHouse, be sure to check out the <a href="https://clickhouse.com/learn/lessons/gettingstarted/">Getting Started</a> lesson. You can view all of our lessons on the <a href="https://clickhouse.com/learn/">Learn ClickHouse</a> home page.
 
 

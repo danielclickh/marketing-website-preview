@@ -54,7 +54,7 @@ Let's verify you have ClickHouse up and running and the data was inserted succes
 
 1. Point your web browser to <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>. You should see the embedded ClickHouse Play UI:
 
-<img src="./images/clickhouseui.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.9/images/clickhouseui.png" width="100%" alt="" />
 
 
 2. Let's run a few queries to understand what the dataset looks like. Copy-and-paste the following query into the UI, then click the **Run** button (or press **Ctrl/Cmd+Enter**):
@@ -80,7 +80,7 @@ Let's verify you have ClickHouse up and running and the data was inserted succes
     ORDER BY Streams DESC
     ```
 
-<img src="./images/topstreams.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.9/images/topstreams.png" width="100%" alt="" />
 
 Aside from one good day for Taylor Swift , it looks like Kendrick Lamar, Post Malone and Drake have plenty of days where one of their songs was the most-listened to on that day (at least for 2017).
 
@@ -151,7 +151,7 @@ Let's take a look at how it works.
 
     If you think about it, the Christmas songs on the list actually make sense - they probably don't get a lot of streams in April!
 
-<img src="./images/intersect.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.9/images/intersect.png" width="100%" alt="" />
 
 7. Notice that the columns selected in the two queries must have the same data types. The column names do not have to match, as long as the data types lineup (the order of columns in the SELECT clause matters). Try the following query:
     ```sql
@@ -211,7 +211,7 @@ The **ANY** operator compares a given value in one query with a set of values in
 
 2. Run the query above. You should get 13 artists:
 
-<img src="./images/anyoperator.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.9/images/anyoperator.png" width="100%" alt="" />
 
 
 3. What do the hits mean? Let's break it down...the subquery returns a set of numbers that represent the maximum number of streams in a day. The outer query looks for the **Artist** who had the maximum number of streams that day. Therefore, you seeing artist who, at some point in time, had a day in which one of their songs was the most-streamed song on Spotify.
@@ -256,6 +256,6 @@ This event has occurred for 210 artists.
 
 - <a href="../covidtutorial-grafana">Learn how to visualize your data using Grafana</a>
 - Check out <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
-- View all of our lessons on the <a href="../../index.html">Learn ClickHouse</a> home page
+- View all of our lessons on the <a href="https://clickhouse.com/learn/">Learn ClickHouse</a> home page
 
 
