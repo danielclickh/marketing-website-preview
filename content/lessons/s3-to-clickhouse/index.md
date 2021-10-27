@@ -80,6 +80,8 @@ The S3 table function is similar to the S3 table engine - let's look at the diff
 
 {{< /detail-tag >}}
 
+***
+
 {{% /gated %}}
 
 ***
