@@ -8,7 +8,7 @@ description = "Learn ClickHouse - Discover. Learn. Build. Select a learning modu
 
 # Add custom css files
 custom_css = [ "css/custom.css", "css/highlight.css"]
-custom_js = ["js/highlight.js", "js/custom.js", "js/gated.js"]
+custom_js = ["js/highlight.js", "js/custom.js",  "js/init.js", "js/lrs.js", "js/tincan.js"]
 
 ## Open Graph
 images = ["logo.png"]

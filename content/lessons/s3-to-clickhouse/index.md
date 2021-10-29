@@ -24,7 +24,6 @@ Let's get started!
 - You will need ClickHouse installed and running if you want to follow along (see step 1 of our <a href="https://clickhouse.com/learn/lessons/gettingstarted" target="_blank">Getting Started lesson</a>), as well as an AWS account if you want to write to a file in S3.
 
 
-{{% gated %}}
 
 *** 
 
@@ -82,7 +81,6 @@ The S3 table function is similar to the S3 table engine - let's look at the diff
 
 ***
 
-{{% /gated %}}
 
 ***
 
