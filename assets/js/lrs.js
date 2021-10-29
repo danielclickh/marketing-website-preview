@@ -2,7 +2,6 @@
 @module TinCan
 **/
 
-
 /**
  * 
  * @returns a new TinCan.LRS object that connects to the configured Learning Record Store
@@ -117,6 +116,7 @@ function lesson_attempted(lesson_name) {
         }, 
         //We only want this event to fire once
         { once: true })
-      })
+      });
+      
 };
 
