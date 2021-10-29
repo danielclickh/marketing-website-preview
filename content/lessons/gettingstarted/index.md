@@ -33,7 +33,7 @@ Let's get started!
 
 There are several ways to install ClickHouse, including DEB and RPM packages. We also provide several pre-built binaries that you can simply download and run. Click on **Show instructions** to get started...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "1" >}}
 
 1. In this lesson, you download a pre-built binary of ClickHouse. Start by opening a terminal and creating a new folder for ClickHouse to run in:
     ```bash
@@ -66,7 +66,7 @@ You will start ClickHouse in the next step, unless you used the Docker command -
 
 The **clickhouse** binary is used to run both the server and the client. Let's start up the server...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "2" >}}
 
 
 1. Run the following command to start the ClickHouse server:
@@ -118,7 +118,7 @@ The **clickhouse** binary is used to run both the server and the client. Let's s
 
 The ClickHouse server includes a **Play UI** for executing SQL commands. In this step you will see how to access the Play UI and run SQL commands.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "3" >}}
 
 1. Go to <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a> to access the Play UI:
 
@@ -158,7 +158,7 @@ ClickHouse supports an extended SQL-like language that you will quickly become c
 
 Defining a database will look very familiar. Defining a table involves some ClickHouse-specific details.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "4" >}}
 
 
 1. You use the **CREATE DATABASE** command to create a new database. Run the following command in the Play UI to define a new database named **gettingstarted**:
@@ -217,7 +217,7 @@ Visit the <a href="https://clickhouse.com/docs/en/sql-reference/data-types/" tar
 
 Now that you have a table ready to go, let's insert some data...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "5" >}}
 
 
 1. A "typical" SQL **INSERT** can be used:
@@ -273,7 +273,7 @@ Now that you have a table ready to go, let's insert some data...
 
 The **clickhouse** binary includes a client app that connects to a ClickHouse server and allows you to execute SQL commands from a command line or shell script. The client is easy to start...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "6" >}}
 
 1. If you are not using Docker, then run the following command from within the **clickhouse** folder where you downloaded the binary:
     ```bash

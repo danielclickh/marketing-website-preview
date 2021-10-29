@@ -28,7 +28,7 @@ Let's get started!
 
 We have provided a Docker Compose file with ClickHouse in one container, and Nginx and Vector running in a second container...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "1" >}}
 
 1. Let's start by creating a local folder to work in (feel free to name the folder anything you like):
     ```bash
@@ -95,7 +95,7 @@ The **clickhouse-server-21.9** image is a simple install of ClickHouse 21.9, and
 
 Let's define a table to store the log events...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "2" >}}
 
 1. Open the Play UI at <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>:
 
@@ -129,7 +129,7 @@ That's it - ClickHouse is ready...next you will setup Nginx.
 
 We certainly do not want to spend too much time explaining Nginx, but we also do not want to hide all the details, so in this step we will provide you with enough details to get Nginx logging configured. 
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "3" >}}
 
 1. In the **~/clickhouse-nginx** folder, create a new file named **nginx.conf** that looks like the following:
     ```bash
@@ -202,7 +202,7 @@ Access logs will be sent to **/var/log/nginx/my_access.log** using the **combine
 
 Vector collects, transforms and routes logs, metrics, and traces (referred to as **sources**) to lots of different vendors (referred to as **sinks**), including out-of-the-box compatibility with ClickHouse. Sources and sinks are defined in a configuration file named **vector.toml**. Let's define one now for your Nginx logs.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "4" >}}
 
 1. In the **~/clickhouse-nginx** folder, create a new file named **vector.toml** that looks like the following:
     ```bash
@@ -247,7 +247,7 @@ Notice that the **source** is of type **file** and tails the end of **my_access.
 
 Let's verify the access logs are being inserted into ClickHouse...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "5" >}}
 
 1. Reload the home page at <a href="http://localhost/" target="_blank">http://localhost/</a> a few times. 
 
@@ -270,7 +270,7 @@ Congrats - you did it! Notice how easy it would be to tail your own log file - j
 
 Having the logs in ClickHouse is great, but storing each event as a single string does not allow for much data analysis. Let's see how to parse the log events using a materialized view.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "6" >}}
 
 1. A **materialized view** (MV, for short) is a new table based on an existing table, and when a row is added to the existing table, it is also added to the materialized view. We want the MV to be a parsed representation of the log events in **access_logs**, which look like:
     ```bash

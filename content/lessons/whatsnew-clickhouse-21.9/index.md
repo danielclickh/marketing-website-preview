@@ -28,7 +28,7 @@ Let's get started!
 
 We have built a Docker image that already has ClickHouse installed, along with a table that contains the Spotify data: 
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "1" >}}
 
 1. Assuming you have Docker installed, run the appropriate following command for your environment to startup the Docker container:
 
@@ -50,7 +50,7 @@ We have built a Docker image that already has ClickHouse installed, along with a
 
 Let's verify you have ClickHouse up and running and the data was inserted successfully.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "2" >}}
 
 1. Point your web browser to <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>. You should see the embedded ClickHouse Play UI:
 
@@ -94,7 +94,7 @@ Aside from one good day for Taylor Swift , it looks like Kendrick Lamar, Post Ma
 
 Let's take a look at how it works.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "3" >}}
 
 1. Suppose we want to view artists who had songs with really good days of streaming vs. not-as-good days. In other words, a song that had some great days but also some slow days. The logic could possibly feel like the following SQL, but as you can see this particular query could not possibly have any hits: 
     ```sql
@@ -177,7 +177,7 @@ Let's take a look at how it works.
 
 The **EXCEPT** operator returns the rows that match the first query but throws out the rows that match the second query. Let's see how it works... 
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "4" >}}
 
 1. We have already seen in the INTERSECT example above that 99 songs have had good days and bad days. The following query returns songs that have topped 1,000,000 streams in a  day at least once, but have never had a day with less than 2,000 streams:
     ```sql
@@ -199,7 +199,7 @@ The **EXCEPT** operator returns the rows that match the first query but throws o
 
 The **ANY** operator compares a given value in one query with a set of values in a subquery. If the given value matches *any* of the hits in the subquery, then that row in the first query is returned. Like most situations, it is best understood by an example:
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "5" >}}
 
 1. Review the following query. Can you figure out which artist will get returned?
     ```sql
@@ -224,7 +224,7 @@ The **ANY** operator compares a given value in one query with a set of values in
 
 The **ALL** operator has the same syntax as ANY, except the Boolean logic is different: for the ALL operator, the given value must match *all* of the values in the set of values returned by the subquery.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "6" >}}
 
 1. Run the following query, which returns the average number of daily streams for each of the 16 regions:
     ```sql

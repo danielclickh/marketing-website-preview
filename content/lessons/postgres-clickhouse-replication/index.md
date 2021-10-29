@@ -25,7 +25,7 @@ Let's get started!
 
 You will startup a **docker-compose.yml** file that has ClickHouse 21.10 and a uses the latest **postgres** image.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "1" >}}
 
 1. Let's start by creating a local folder to work in (feel free to name the folder anything you like):
     ```bash
@@ -90,7 +90,7 @@ Notice that the startup command for **postgres** sets **wal_level** to **logical
 
 Let's define the table in Postgres to be replicated...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "2" >}}
 
 1. On **Linux** or **Windows**, run the following command to connect to Posgres using **psql**:
     ```bash
@@ -142,7 +142,7 @@ You have two options for replicating Postgres tables to ClickHouse:
 
 We will take a look at the database engine, but both are configured similarly.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "3" >}}
 
 1. In a new terminal, run the following command to connect to your ClickHouse container:
     ```bash
@@ -200,7 +200,7 @@ The **MaterializedPostgreSQL** engine parameters are:
 
 Let's see what happens when you add data to the Postgres table...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "4" >}}
 
 
 1. From the **psql** prompt, add two new rows to the **orders** table in Postgres:

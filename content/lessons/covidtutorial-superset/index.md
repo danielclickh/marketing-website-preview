@@ -37,7 +37,7 @@ You will be installing ClickHouse and Superset on your local machine.
 
 There are several ways to install ClickHouse, including DEB and RPM packages. In this tutorial, we will simply download a pre-built binary and execute it. For simplicity, I performed all of the tasks in my home directory.   
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "1" >}}
 
  1. Start by opening a terminal and creating a folder for the ClickHouse binary:
     ```bash
@@ -63,7 +63,7 @@ There are several ways to install ClickHouse, including DEB and RPM packages. In
 
 Complete the following steps to startup the ClickHouse server and use the ClickHouse client to define a new database and table.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "2" >}}
 
 1. First, you need to start the ClickHouse server:
     ```bash
@@ -174,7 +174,7 @@ The Covid-19 data contains daily numbers from countries all over the world and w
 
 Complete the following steps to download and insert the data into your ClickHouse table.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "3" >}}
 
  1. <a href="./data/owid-covid-data.csv.zip" target="_blank">Download the owid-covid-data.csv.zip</a> file into your **~/clickhouse** folder (for convenience) and **unzip it**.
 
@@ -215,7 +215,7 @@ You should 100 rows of mostly-numeric Covid-19 data from various countries.
 
 In this step, you will install and run Superset in a Python virtual environment:
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "4" >}}
 
 1. Make a new subfolder in your home folder:
 ```bash
@@ -283,7 +283,7 @@ superset run -p 8088 --with-threads --reload --debugger
 
 Now that you have both ClickHouse and Superset up and running, let's connect the two of them:
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "5" >}}
 
 1. Select **Data** from the top menu and then **Databases** from the drop-down menu. You do not have any databases defined yet, but notice there is a button to add a new one - click it:
 <img src="https://clickhouse.com/learn/lessons/covidtutorial-superset/images/newdatabase.png" width="100%" alt="Add Database" />
@@ -322,7 +322,7 @@ If you are familiar with Superset, then you will feel right at home with this ne
 In this section, you will define a new dashboard and add charts (visualizations) to it. 
 
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "6" >}}
 
 1. Let's start by creating a new dashboard to display our charts. From the top menu in Superset, select **Dashboards**. You should see an empty list.
 

@@ -30,7 +30,7 @@ Let's get started!
 
 You are going to run a preconfigured ClickHouse server in a Docker container that has some data in it already.  
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "1" >}}
 
 1. Let's start by creating a local folder to work in (feel free to name the folder anything you like):
     ```bash
@@ -98,7 +98,7 @@ The TPC-H dataset is used for benchmarking purposes and is freely available at <
 
 The Tableau connector is an extension of the ClickHouse JDBC driver, so you need to download the JDBC driver and save it in the correct folder.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "2" >}}
 
 1. Download the latest version of the ClickHouse JDBC driver at <a href="" target="_blank">https://github.com/ClickHouse/clickhouse-jdbc/releases/</a>. (We used <a href="https://github.com/ClickHouse/clickhouse-jdbc/releases/download/v0.3.1-patch/clickhouse-jdbc-0.3.1-patch-shaded.jar">this version of the driver</a> for this tutorial.) 
 
@@ -126,7 +126,7 @@ Make sure you download the **clickhouse-jdbc-x.x.x-shaded.jar** JAR file.
 
 ANALYTIKA PLUS has built a handy connector for simplifying connections to ClickHouse from Tableau. You can <a href="https://github.com/analytikaplus/clickhouse-tableau-connector-jdbc" target="_blank"> view the details of the project in Github</a>. Follow these steps to download the connector...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "3" >}}
 
 1. The connector is built in a **taco** file (short for **Ta**bleau **Co**nnector). Download the latest version at <a href="https://github.com/analytikaplus/clickhouse-tableau-connector-jdbc/releases/" target="_blank">https://github.com/analytikaplus/clickhouse-tableau-connector-jdbc/releases/</a>. (For this lesson, we downloaded **v0.1.1** of **clickhouse_jdbc.taco**.)
 
@@ -148,7 +148,7 @@ The connector is now ready to go.
 
 Now that you have the driver and connector in the approriate folders on your machine, let's see how to define a data source in Tableau that connects to the **TPCD** database in ClickHouse.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "4" >}}
 
 1. Start Tableau. (If you already had it running, then restart it.)
 
@@ -197,7 +197,7 @@ You are now ready to build some visualizations in Tableau!
 
 Now that have a ClickHouse data source configured in Tableau, let's visualize the data...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "5" >}}
 
 1. Drag the **CUSTOMER** table onto the workbook. Notice the columns appear, but the data table is empty:
 
