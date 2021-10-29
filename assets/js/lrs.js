@@ -22,7 +22,7 @@ function getLRS() {
         return lrs;
     }
     catch (ex) {
-        //console.log("Failed to setup LRS object: ", ex);
+        console.log("Failed to setup LRS object: ", ex);
         return null;
     }
 };
@@ -77,12 +77,12 @@ function sendStatement(p_user,p_verb,p_id) {
                         return;
                     }
 
-                    //console.log("Failed to save statement: " + err);
+                    console.log("Failed to save statement: " + err);
                     // TODO: do something with error, didn't save statement
                     return;
                 }
 
-                //console.log("Statement saved");
+                console.log("Statement saved");
                 // TOOO: do something with success (possibly ignore)
             }
         }
@@ -120,3 +120,4 @@ function lesson_attempted(lesson_name) {
         { once: true })
       })
 };
+
