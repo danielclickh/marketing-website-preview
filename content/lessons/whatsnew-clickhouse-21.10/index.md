@@ -253,7 +253,7 @@ Notice that the **comments_no_stopwords** table is built by streaming the **text
 2. ClickHouse looks in the **user_scripts** folder for your custom scripts, which on Linux is (typically) in **/var/lib/clickhouse/user_scripts**. The **docker-compose.yml** file has a volume that mounts **remove_stopwords.py** to the **user_scripts** folder, so create a new file named **remove_stopwords.py** in the **whatsnew** folder.
 
 3. Copy-and-paste the following Python into **remove_stopwords.py**. We will discuss the important pieces next:
-    ```python
+    ```
     #!/usr/local/bin/python
 
     import sys
@@ -282,19 +282,19 @@ Notice that the **comments_no_stopwords** table is built by streaming the **text
     ```
 
 5. Notice inside **main()** there is a **for** loop that reads from **stdin**:
-    ```python
+    ```
     for comment in sys.stdin:
     ```
     The results of **SELECT text FROM hackernews** (as defined in the table definition) are streamed to **remove_stopwords.py** via the standard input, sending a block of rows (about 64k) at a time. 
 
 6. Notice that for each row sent to **remove_stopwords.py**, the **comment** (which is the value of the **text** field in **hackernews**) is tokenized into words, then the stopwords are removed:
-    ```python
+    ```
     words_in_comment = word_tokenize(comment)
     comment_no_stopwords = [word for word in words_in_comment if word.lower() not in stopwords]
     ```
 
 7. How does the script write data back to the ClickHouse table? By printing tab-delimited rows to **stdout**. The output of the following line of code gets inserted into the **comments_no_stopwords** table in the **value** column (which you will notice in the table definition):
-    ```python
+    ```
     print( ' '.join(comment_no_stopwords) + "\n" )
     ```
 
