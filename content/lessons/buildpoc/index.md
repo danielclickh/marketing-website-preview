@@ -7,387 +7,359 @@ lastmod: 2020-10-13T15:21:01+02:00
 draft: false
 images: []
 toc: true
+gated: true
+duration: "20-25 minutes"
+audience: "Anyone who need to see if ClickHouse is a good fit for their use case"
 ---
 
-**Duration:** 45-60 minutes
 
-**Audience:** Anyone interested in learning how to install ClickHouse, ingest some data, and view and analyze that data using Apache Superset.
+**Overview:** Being able to analyze your logs in real time is critical for production applications. Have you ever wondered if ClickHouse is good at storing and analyzing log data? Just checkout <a href="https://eng.uber.com/logging/" target="_blank">Uber's experience</a> with converting their logging infrastructure from ELK to ClickHouse. 
 
-
-{{< alert icon="💡" text="You can change the commands in the scripts section of `./package.json`." />}}
-
-This tutorial is more of a journey...it has many moving parts to get to the final result - which is the ability to analyze data using ClickHouse and Superset. But the end result is worth the effort! I found some Covid-19 data in a CSV format, ingested it into ClickHouse, then analyzed the data visually using charts in Superset:
-
-<img src="./images/dashboard.png" width="600px" alt="Apache Superset Dashboard" />
-
-This lesson covers the following tasks:
-
-1. Installing ClickHouse 
-2. Defining a database and table
-3. Ingesting CSV files into ClickHouse 
-4. Installing Superset
-5. Connecting Superset to ClickHouse
-6. Creating charts and a dashboard in Superset
+In this lesson, we will get you started with ingesting access logs from Nginx into into a ClickHouse table. We will be using the popular data pipeline <a href="https://vector.dev/docs/about/what-is-vector/" target="_blank">Vector</a>, which provides a simple, built-in mechanism for tailing a log file and sending it to ClickHouse. The steps below would be similar for tailing any type of log file.
 
 Let's get started!
 
 ***
 
-### Prerequisites
+**Prerequisites:** You will need **Docker** installed if you want to follow along.
 
-The assumption is that you are new to ClickHouse. You will be installing ClickHouse and Superset on your local machine. ClickHouse does not run on Windows, so if you do not have a Linux or Mac OS X system, then you will need to either run Linux in a virtual machine using something like [VirtualBox](https://www.virtualbox.org/), or create a Linux instance using your favorite cloud provider.
+***
+
+## 1. Startup ClickHouse
+
+We have provided a Docker Compose file with ClickHouse in one container, and Nginx and Vector running in a second container...
+
+{{< detail-tag "Show instructions" "1" >}}
+
+1. Let's start by creating a local folder to work in (feel free to name the folder anything you like):
+    ```bash
+    mkdir ~/clickhouse-nginx
+    cd ~/clickhouse-nginx
+    ```
+
+2. Create a new file named **docker-compose.yml**, and copy-and-paste the following into it:
+    ```yml
+    version: '3.7'
+    services:
+    clickhouse-server:
+        image: learnclickhouse/public-repo:clickhouse-server-21.9
+        container_name: clickhouse-server
+        hostname: clickhouse-server
+        ports:
+        - "9000:9000"
+        - "8123:8123"
+        - "9009:9009"
+        restart: always
+        tty: true
+        ulimits:
+        memlock:
+            soft: -1
+            hard: -1
+        nofile:
+            soft: 262144
+            hard: 262144
+        cap_add:
+        - IPC_LOCK
 
 
-{{% gated %}}
+    nginx-with-vector:
+        image: learnclickhouse/public-repo:nginx-vector-21.9
+        container_name: nginx-with-vector
+        restart: unless-stopped
+        ports:
+        - 80:80
+        - 443:443
+        - "8383:8383"
+        #volumes:
+        #  - ./nginx.conf:/etc/nginx/nginx.conf
+        #  - './vector.toml:/vector/config/vector.toml'
+    ```
 
+{{% notice note %}}
+The **clickhouse-server-21.9** image is a simple install of ClickHouse 21.9, and the **nginx-with-vector** image extends **nginx** and contains a downloaded and unzipped install of Vector.
+{{% /notice %}}
+
+3. Notice the **docker-compose.yml** file has two files mounted but commented out. You will define the files for those mount points as you work through the lesson. 
+
+4. From a terminal, run the following command from the folder where you created **docker-compose.yml**:
+    ```bash
+    docker-compose up -d
+    ```
+
+    The two containers will start up fairly quickly.
+
+{{< /detail-tag >}}
 
 *** 
 
+## 2. Create a database and table
 
-## 1. Installing ClickHouse
+Let's define a table to store the log events...
 
-  There are several ways to install ClickHouse, including DEB and RPM packages. In this tutorial, we will simply download a pre-built binary and execute it. For simplicity, I performed all of the tasks in my home directory. 
+{{< detail-tag "Show instructions" "Create a database and table" >}}
 
-{{< detail-tag "Show instructions" >}}
+1. Open the Play UI at <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>:
 
-1. Start by opening a terminal and creating a folder for the ClickHouse binary:
+    <img src="https://clickhouse.com/learn/lessons/logsvector/images/playui.png" width="100%" alt="" />
+
+2. Run the following SQL in the Play UI to define a database named **nginxdb**:
+    ```sql
+    CREATE DATABASE IF NOT EXISTS nginxdb
+    ```
+
+3. For starters, we are just going to insert the entire log event as a single string. Obviously this is not great format for performing analytics on the log data, but we will figure that part out later using materialized views. Run the following SQL to create a new table named **access_logs**:
+    ```sql
+    CREATE TABLE IF NOT EXISTS  nginxdb.access_logs (
+        message String
+    ) 
+    ENGINE = MergeTree()
+    ORDER BY tuple()
+    ```
+
+{{% notice note %}}
+There is not really a need for a primary key, so that is why **ORDER BY** is set to **tuple()**.
+{{% /notice %}}
+
+That's it - ClickHouse is ready...next you will setup Nginx.
+
+{{< /detail-tag >}}
+
+*** 
+
+## 3.  Configure Nginx
+
+We certainly do not want to spend too much time explaining Nginx, but we also do not want to hide all the details, so in this step we will provide you with enough details to get Nginx logging configured. 
+
+{{< detail-tag "Show instructions" "Configure Nginx" >}}
+
+1. In the **~/clickhouse-nginx** folder, create a new file named **nginx.conf** that looks like the following:
+    ```bash
+    user  nginx;
+    worker_processes  auto;
+
+    error_log  /var/log/nginx/error.log notice;
+    pid        /var/run/nginx.pid;
+
+    events {
+        worker_connections  1024;
+    }
+
+
+    http {
+        include       /etc/nginx/mime.types;
+        default_type  application/octet-stream;
+        access_log  /var/log/nginx/my_access.log combined;
+        sendfile        on;
+        keepalive_timeout  65;
+        include /etc/nginx/conf.d/*.conf;
+    }
+    ```
+
+{{% notice note %}}
+The key setting of interest is:
+```html
+access_log  /var/log/nginx/my_access.log combined;
 ```
-mkdir clickhouse
-cd clickhouse
-```
 
-2. Find your OS in the following table, then copy-and-paste the command to download a pre-built ClickHouse binary and make it executable:
-<table>
-    <thead>
-        <tr>
-            <th>OS</th>
-            <th>Run this command:</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>MacOS x86_64</td>
-            <td>
-            ```
-            curl -O 'https://builds.clickhouse.tech/master/macos/clickhouse' && chmod a+x ./clickhouse
-            ```
-            </td>
-        </tr>
-        <tr>
-            <td>MacOS Aarch64</td>
-            <td>
-            ```
-            curl -O 'https://builds.clickhouse.tech/master/macos-aarch64/clickhouse' && chmod a+x ./clickhouse
-            ```
-            </td>
-        </tr> 
-        <tr>
-            <td>FreeBSD x86_64</td>
-            <td>
-            ```
-            curl -O 'https://builds.clickhouse.tech/master/freebsd/clickhouse' && chmod a+x ./clickhouse
-            ```
-            </td>
-        </tr>
-        <tr>
-            <td>Linux AArch64</td>
-            <td>
-            ```
-            curl -O 'https://builds.clickhouse.tech/master/aarch64/clickhouse' && chmod a+x ./clickhouse
-            ```
-            </td>
-        </tr>        
-    </tbody>
-</table>
+Access logs will be sent to **/var/log/nginx/my_access.log** using the **combined** format.
+{{% /notice %}}
+
+2. Uncomment the **volume** setting in **docker-compose.yml** for the **nginx.conf** file:
+    ```yml
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf 
+    ```
+
+3. Run **docker-compose up** again to pick up the changes:
+    ```bash
+    docker-compose up -d
+    ```
+
+4. Verify Nginx is running by viewing its default home page at <a href="http://localhost/" target="_blank">http://localhost/</a>:
+
+<img src="https://clickhouse.com/learn/lessons/logsvector/images/nginx.png" width="100%" alt="" />
+
+5. Refresh the home page a few times to generate some log events in the access log.
+
+6. Use the following command to **cat** the **my_access.log** file and verify access events are getting logged there successfully:
+    ```bash
+    docker exec nginx-with-vector cat /var/log/nginx/my_access.log
+    ```
+
+    You should see entries similar to the following:
+    ```bash
+    192.168.208.1 - - [12/Oct/2021:03:31:44 +0000] "GET / HTTP/1.1" 200 615 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
+    192.168.208.1 - - [12/Oct/2021:03:31:44 +0000] "GET /favicon.ico HTTP/1.1" 404 555 "http://localhost/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
+    192.168.208.1 - - [12/Oct/2021:03:31:49 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
+    ```
+
+    You are now ready to send those log events to your table in ClickHouse...
+
+{{< /detail-tag >}}
+
+*** 
+
+## 4.  Configure Vector
+
+Vector collects, transforms and routes logs, metrics, and traces (referred to as **sources**) to lots of different vendors (referred to as **sinks**), including out-of-the-box compatibility with ClickHouse. Sources and sinks are defined in a configuration file named **vector.toml**. Let's define one now for your Nginx logs.
+
+{{< detail-tag "Show instructions" "Configure Vector" >}}
+
+1. In the **~/clickhouse-nginx** folder, create a new file named **vector.toml** that looks like the following:
+    ```bash
+    [sources.nginx_logs]
+    type = "file"
+    include = [ "/var/log/nginx/my_access.log" ]
+    read_from = "end"
+
+
+    [sinks.clickhouse]
+    type = "clickhouse"
+    inputs = ["nginx_logs"]
+    endpoint = "http://clickhouse-server:8123"
+    database = "nginxdb"
+    table = "access_logs"
+    skip_unknown_fields = true
+    ```
+
+{{% notice note %}}
+Notice that the **source** is of type **file** and tails the end of **my_access.log**, and the **sink** is the **access_logs** table you defined earlier in your ClickHouse database.
+{{% /notice %}}
+
+2. Uncomment the **volumes** setting in **docker-compose.yml** for the **vector.toml** file:
+    ```bash
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./vector.toml:/vector/config/vector.toml   
+    ```
+
+3. Run **docker-compose up** again to pick up the changes:
+    ```bash
+    docker-compose up -d
+    ```
+
+    That's it. You will verify it worked in the next step. If you want more details on configuring Vector, <a href="https://vector.dev/docs/" target="_blank">visit the Vector documentation</a>.
+
+{{< /detail-tag >}}
+
+*** 
+
+## 5. View the logs in ClickHouse
+
+Let's verify the access logs are being inserted into ClickHouse...
+
+{{< detail-tag "Show instructions" "View the logs in ClickHouse" >}}
+
+1. Reload the home page at <a href="http://localhost/" target="_blank">http://localhost/</a> a few times. 
+
+2. From <a href="http://localhost:8123/play" target="_blank">the Play UI</a>, run the following query:
+    ```sql
+    SELECT * FROM nginxdb.access_logs
+    ```
+
+    You should see the access logs in the table:
+
+<img src="https://clickhouse.com/learn/lessons/logsvector/images/logs.png" width="100%" alt="" />
+
+Congrats - you did it! Notice how easy it would be to tail your own log file - just install Vector on the machine with the log file and configure the **source** to point to your log file.
     
 {{< /detail-tag >}}
 
+***
+
+## 6. Parse the Logs
+
+Having the logs in ClickHouse is great, but storing each event as a single string does not allow for much data analysis. Let's see how to parse the log events using a materialized view.
+
+{{< detail-tag "Show instructions" "Parse the logs" >}}
+
+1. A **materialized view** (MV, for short) is a new table based on an existing table, and when a row is added to the existing table, it is also added to the materialized view. We want the MV to be a parsed representation of the log events in **access_logs**, which look like:
+    ```bash
+    192.168.208.1 - - [12/Oct/2021:15:32:43 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
+    ```
+
+    There are various functions in ClickHouse to parse the string, but for starters let's take a look at **splitByWhitespace** - which parses a string by whitespace and returns each token in an array. To demonstrate, run the following command:
+    ```sql
+    SELECT splitByWhitespace('192.168.208.1 - - [12/Oct/2021:15:32:43 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"')
+    ```
+
+    Notice the response is pretty close to what we want! A few of the strings have some extra characters, and the user agent (the browser details) did not need to be parsed, but we will resolve that in the next step.
+
+2. Similar to **splitByWhitespace**, the **splitByRegexp** function splits a string into an array based on a regular expression. Run the following command, which returns two strings. Notice the second string returned is the user agent successfully parsed from the log:
+    ```sql
+    SELECT splitByRegexp('\S \d+ "([^"]*)"', '192.168.208.1 - - [12/Oct/2021:15:32:43 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"')
+    ```
+
+3. Before looking at the final **CREATE MATERIALIZED VIEW** command, let's view a couple more functions used to cleanup the data. For example, the **RequestMethod** looks like **"GET** with an unwanted double-quote. Run the following **trim** function, which removes the double quote:
+    ```sql
+    SELECT trim(LEADING '"' FROM '"GET')
+    ```
+
+4. The time string has a leading square bracket, and also is not in a format that ClickHouse can parse into a date. However, if we change the separater from a colon (**:**) to a comma (**,**) then the parsing works great:
+    ```sql
+    SELECT parseDateTimeBestEffort(replaceOne(trim(LEADING '[' FROM '[12/Oct/2021:15:32:43'), ':', ' '))
+    ```
+
+5. We are now ready to define our materialized view. Our definition includes **POPULATE AS**, which means the existing rows in **access_logs** will be processed and inserted right away. Run the following SQL statement:
+    ```sql
+    CREATE MATERIALIZED VIEW nginxdb.access_logs_view
+    (
+        RemoteAddr String,
+        Client String,
+        RemoteUser String,
+        TimeLocal DateTime,
+        RequestMethod String,
+        Request String,
+        HttpVersion String,
+        Status Int32,
+        BytesSent Int64,
+        UserAgent String
+    )
+    ENGINE = MergeTree()
+    ORDER BY RemoteAddr
+    POPULATE AS
+    WITH 
+        splitByWhitespace(message) as split,
+        splitByRegexp('\S \d+ "([^"]*)"', message) as referer
+    SELECT
+        split[1] AS RemoteAddr,
+        split[2] AS Client,
+        split[3] AS RemoteUser,
+        parseDateTimeBestEffort(replaceOne(trim(LEADING '[' FROM split[4]), ':', ' ')) AS TimeLocal,
+        trim(LEADING '"' FROM split[6]) AS RequestMethod,
+        split[7] AS Request,
+        trim(TRAILING '"' FROM split[8]) AS HttpVersion,
+        split[9] AS Status,
+        split[10] AS BytesSent,
+        trim(BOTH '"' from referer[2]) AS UserAgent
+    FROM 
+        (SELECT message FROM nginxdb.access_logs)
+    ```
+
+6. Now verify it worked. You should see the access logs nicely parsed into columns:
+    ```sql
+    SELECT * FROM nginxdb.access_logs_view
+    ```
+
+<img src="https://clickhouse.com/learn/lessons/logsvector/images/mv.png" width="100%" alt="" />
+
+Well done! You now have logs streaming from the Nginx access log directly into ClickHouse. 
+
+{{% notice note %}}
+The lesson above stored the data in two tables, but you could change the initial **nginxdb.access_logs** table to use the **Null** table engine - the parsed data will still end up in the **nginxdb.access_logs_view** table, but the raw data will not be stored in a table.
+{{% /notice %}}
+
+***
+
+**Summary:** By using Vector, which only required a simple install and quick configuration, we can send logs from an Nginx server to a table in ClickHouse. By using a clever materialized view, we can parse those logs into columns for easier analytics. 
+
+{{< /detail-tag >}}
 
 *** 
 
-## 2. Defining a database and table
-
-Complete the following steps to startup the ClickHouse server and use the ClickHouse client to define a new database and table.
-
-{{< detail-tag "Show instructions" >}}
-
-
-1. First, you need to start the ClickHouse server:
-```
-./clickhouse server
-```
-
-2. It won't take long for ClickHouse to start - but wait for the following message:
-```
-<Information> Application: Ready for connections.
-```
-
-3. In a new terminal, `cd` into the `clickhouse` folder and use the `clickhouse client` to define a new database named `covid19db`. Notice this command demonstrates how to submit a SQL command to ClickHouse from the command line:
-```
-cd clickhouse 
-./clickhouse client --query "CREATE DATABASE covid19db"
-```
-
-4. The Covid-19 data has over 60 columns, and most of them are decimal numbers. It's a lot of information, but it allows us to answer a lot of questions about the pandemic. But because the schema is large, we are not going to send it using the `--query` flag. You will now learn how to submit a SQL command that is saved in a text file to a ClickHouse database. Start by creating a new text file in your home folder named `~/daily_totals.sql` that contains the following `CREATE TABLE` command:
-```
-CREATE TABLE IF NOT EXISTS  covid19db.daily_totals (
-    `iso_code` String, 
-    `continent` String, 
-    `location` String, 	
-    `date` Date, 
-    `total_cases` Float32, 
-    `new_cases` Float32, 
-    `new_cases_smoothed` Float32, 
-    `total_deaths` Float32, 
-    `new_deaths` Float32, 
-    `new_deaths_smoothed` Float32, 
-    `total_cases_per_million` Float32, 
-    `new_cases_per_million` Float32, 
-    `new_cases_smoothed_per_million` Float32, 
-    `total_deaths_per_million` Float32, 
-    `new_deaths_per_million` Float32,
-    `new_deaths_smoothed_per_million` Float32, 
-    `reproduction_rate` Float32,
-    `icu_patients` Float32, 
-    `icu_patients_per_million` Float32, 
-    `hosp_patients` Float32, 
-    `hosp_patients_per_million` Float32, 
-    `weekly_icu_admissions` Float32, 
-    `weekly_icu_admissions_per_million` Float32, 
-    `weekly_hosp_admissions` Float32, 
-    `weekly_hosp_admissions_per_million` Float32,
-    `new_tests` Float32, 
-    `total_tests` Float32, 
-    `total_tests_per_thousand` Float32, 
-    `new_tests_per_thousand` Float32, 
-    `new_tests_smoothed` Float32, 
-    `new_tests_smoothed_per_thousand` Float32,
-    `positive_rate` Float32, 
-    `tests_per_case` Float32,
-    `tests_units` Float32, 
-    `total_vaccinations` Float32, 
-    `people_vaccinated` Float32, 
-    `people_fully_vaccinated` Float32, 
-    `total_boosters` Float32, 
-    `new_vaccinations` Float32, 
-    `new_vaccinations_smoothed` Float32, 
-    `total_vaccinations_per_hundred` Float32,
-    `people_vaccinated_per_hundred` Float32, 
-    `people_fully_vaccinated_per_hundred` Float32,
-    `total_boosters_per_hundred` Float32, 
-    `new_vaccinations_smoothed_per_million` Float32, 
-    `stringency_index` Float32, 
-    `population` Float32, 
-    `population_density` Float32, 
-    `median_age` Float32, 
-    `aged_65_older` Float32, 
-    `aged_70_older` Float32, 
-    `gdp_per_capita` Float32, 
-    `extreme_poverty` Float32,
-    `cardiovasc_death_rate` Float32, 
-    `diabetes_prevalence` Float32,
-    `female_smokers` Float32, 
-    `male_smokers` Float32, 	
-    `handwashing_facilities` Float32, 
-    `hospital_beds_per_thousand` Float32, 
-    `life_expectancy` Float32, 
-    `human_development_index` Float32, 
-    `excess_mortality_cumulative` Float32,
-    `excess_mortality` Float32
-) 
-ENGINE = MergeTree()
-ORDER BY (date)
-```
-
-5. Now run the following command from the `clickhouse` folder, which executes the command in `daily_tables.sql`:
-```
-./clickhouse client < ../daily_totals.sql
-```
-
-6. Verify the table exists by viewing its details:
-```
-./clickhouse client --query "DESCRIBE covid19db.daily_totals"
-```
-You should see the names and data types of all the columns in `daily_totals`.
-
-{{< /detail-tag >}}
-
-
-***
-
-## 3. Ingesting CSV files into ClickHouse 
-
-The Covid-19 data contains daily numbers from countries all over the world and was downloaded from Github here: [https://github.com/owid/covid-19-data/tree/master/public/data](https://github.com/owid/covid-19-data/tree/master/public/data). But...for some reason they decided to add random string values in some of the numeric columns, so those have been removed in the file below. [Click here to download the CSV file.](TODO - upload file somewhere)
-
-Complete the following steps to download and insert the data into your ClickHouse table.
-
-{{< detail-tag "Show instructions" >}}
-
-
-1. Download the following `owid-covid-data.txt` file into your `~/clickhouse` folder (for convenience): [TODO: upload file to S3](link_to_S3)
-
-2. To insert the data into your table, run the following command:
-```
-cat owid-covid-data.csv | ./clickhouse client --query "INSERT INTO covid19db.daily_totals FORMAT CSV"
-```
-
-{{< /detail-tag >}}
-
-***
-
-## 4. Installing Superset
-
-You can install Apache Superset using Docker, but for some reason the Superset container would not let me define a new dataset for a ClickHouse table. (The database connection worked, but the dataset did not - so it was not possible to build any charts.) 
-
-Therefore, I simply (but tediously) ran the following commands to install and run Superset in a Python virtual environment:
-
-{{< detail-tag "Show instructions" >}}
-
-1. Make a new subfolder in your home folder:
-```
-mkdir superset
-cd superset
-```
-
-2. Make sure you have `virtualenv` installed:
-```
-pip install virtualenv
-```
-
-3. Create a new virtual environment:
-```
-python3 -m venv venv
-. venv/bin/activate
-```
-
-4. Make sure `pip` and `setuptools` are up-to-date:
-```
-pip install --upgrade setuptools pip
-```
-
-5. Install Apache Superset:
-```
-pip install apache-superset
-```
-
-6. Install the Superset database:
-```
-superset db upgrade
-```
-
-7. Create an admin user. I just used `admin` for both the username and password:
-```
-export FLASK_APP=superset
-superset fab create-admin
-```
-
-8. The following command creates the defaults roles and permissions:
-```
-superset init
-```
-
-9. Don't miss this step! It installs the ClickHouse database driver for Superset, as well as a SQLAlchemy dialect that is needed by Superset:
-```
-pip install clickhouse-driver==0.2.0 && pip install clickhouse-sqlalchemy==0.1.6
-```
-
-9. And now you are finally ready to start Superset. Feel free to choose a different port if needed:
-```
-superset run -p 8088 --with-threads --reload --debugger
-```
-
-10. Open your web browser to <a href="http://localhost:8088" target="_blank">http://localhost:8088</a>. Login and you will see the welcome page for Superset:
-<img src="./images/login.png" width="600px" alt="Apache Superset Welcome Page" />
-
-
-{{< /detail-tag >}}
-
-
-***
-
-## 5. Connecting Superset to ClickHouse
-
-Now that you have both ClickHouse and Superset up and running, let's connect the two of them:
-
-{{< detail-tag "Show instructions" >}}
-
-1. Select **Data** from the top menu and then **Databases** from the drop-down menu. You do not have any databases defined yet, but notice there is a button to add a new one - click it:
-<img src="./images/newdatabase.png" width="600px" alt="Add Database" />
-
-2. In the first step of the wizard that starts, select **ClickHouse** as the type of database:
-<img src="./images/selectclickhouse.png" width="600px" alt="Type of Database" />
-
-3. Enter "**Covid19 Database**" for the **DISPLAY NAME**.
-
-4. Enter the following URI in the **SQLALCHEMY URI** field. The `default` before the `@` is actually the `usernmae:password` for ClickHouse. In this tutorial we did not define a ClickHouse user, and the `default` user does not have a password.
-```
-clickhouse+native://default@localhost/covid19db
-```
-
-5. Try the **TEST CONNECTION** button and verify that Superset is connecting to your ClickHouse database properly:
-<img src="./images/dbconnection.png" width="600px" alt="Test Connection" />
-
-
-6. Click the **CONNECT** button to complete the setup wizard, and you should now see your **Covid19 Database** in the list of databases.
-
-7. To define new charts (visualizations) in Superset, you need to define the source of the data used in the charts - which is accomplished using *datasets*. From the top menu in Superset, select **Data**, then **Datasets** from the drop-down menu. You should see an empty list - let's define one!
-
-8. Click the button for adding a dataset. Select your new database as the datasource, **covid19db** for the schema, and **daily_totals** for the table:
-<img src="./images/newdataset.png" width="600px" alt="Add Dataset" />
-
-
-9. Click the **ADD** button at the bottom of the dialog window and you should see **daily_totals** in the list of datasets. Congratulations!! You are ready to build a dashboard and analyze the data.
-
-{{< /detail-tag >}}
-
-
-***
-
-## 6. Creating charts and a dashboard in Superset
-
-If you are familiar with Superset, then you will feel right at home with this next section. If you are new to Superset, well...it's like a lot of the other cool visualization tools out there in the world - it doesn't take long to get started, but the details and nuances get learned over time as you use the tool. 
-
-In this section, you will define a new dashboard and add charts (visualizations) to it. 
-
-{{< detail-tag "Show instructions" >}}
-
-1. Let's start by creating a new dashboard to display our charts. From the top menu in Superset, select **Dashboards**. You should see an empty list.
-
-2. Click the button in the upper-right to add a new dashboard. Name it **Covid-19 Dashboard** and click the **SAVE** button:
-<img src="./images/newdashboard.png" width="600px" alt="New Dashboard" />
-
-3. Now let's create a new chart. Select **Charts** from the top menu and click the button to add a new chart. You will be shown a lot of options. For starters, select the **Big Number** chart. You will need to also choose a dataset, so select **daily_totals** from the **CHOOSE A DATASET** drop-down. When you are ready, click the **CREATE NEW CHART** button in the bottom-right corner:
-<img src="./images/newchart.png" width="600px" alt="New Chart" />
-
-
-4. You need to add a metric. Let's display the total number of the `new_cases` field. Notice there is a column named **DATA** and a section named **Query** with a **METRIC** field that currently has a red warning (because it is not defined yet). Click where it says **Add metric** and a small dialog window appears:
-<img src="./images/bignumber1.png" width="600px" alt="Add Metric" />
-
-
-5. Select the **SIMPLE** tab, then select **new_cases** for the column and **SUM** for the aggregation:
-<img src="./images/bignumber2.png" width="600px" alt="Sum of new_cases" />
-
-
-6. To view the actual number, click the **RUN QUERY** button. You will see a big number!
-<img src="./images/bignumber3.png" width="600px" alt="Run Query" />
-
-
-7. Change the title to **Total New Cases**, then click the **SAVE** button. Select **Covid-19 Dashboard** under the **ADD TO DASHBOARD** drop-down, then select **SAVE & GO TO DASHBOARD**. This will save the chart, add it to the dashboard, and display the dashboard:
-<img src="./images/bignumber4.png" width="600px" alt="Save the Chart" />
-<img src="./images/bignumber5.png" width="600px" alt="Show Dashboard" />
-
-
-{{< /detail-tag >}}
-
-{{% /gated %}}
-
-
-
-***
 
 **What's next:** Check out the following lessons to continue your journey: 
 
-- The <a href="https://clickhouse.com/learn/lessons/logsvector">Ingest Nginx Logs into ClickHouse using Vector</a> lesson demonstrates how to stream a log file into ClickHouse
+- <a href="https://clickhouse.com/learn/lessons/covidtutorial-grafana">Learn how to visualize your data using Grafana</a>
 - Check out <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
-- View all of our lessons on the <a href="../../index.html">Learn ClickHouse</a> home page
-
+- View all of our lessons on the <a href="https://clickhouse.com/learn/">Learn ClickHouse</a> home page

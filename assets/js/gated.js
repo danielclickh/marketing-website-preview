@@ -11,7 +11,7 @@ function gated(){
             var hideGate = localStorage.getItem('email-stored') || false;
             if (hideGate) {
                     gateHide();
-            }
+            } 
     }
     function gateEvents() {
             // Handle form submission
@@ -39,9 +39,3 @@ function gated(){
     }
 }
 
-window.onload=function() {
-    var gatedsection = document.getElementById("gatedsection");
-    if(gatedsection) {
-        gated();
-    }
-}
