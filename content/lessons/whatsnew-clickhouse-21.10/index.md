@@ -27,7 +27,7 @@ Let's get started!
 
 The first step is to get ClickHouse up and running: 
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "1" >}}
 
 1. Start by creating a folder to work in. It doesn't matter what you call it, but for practical purposes we will call it **whatsnew**:
     ```bash
@@ -113,7 +113,7 @@ With positional arguments, the following query is identical to the previous quer
 
 Let's try it out...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "2" >}}
 
 {{% notice note %}}
 You need to set **enable_positional_arguments** to **1** in order to use positional arguments (they are disabled by default). You can use `SET enable_positional_arguments=1;`, but this lesson uses the Play UI which does not allow multiple SQL commands, so we will need to configure this setting in a config file.
@@ -175,7 +175,7 @@ You can now create user defined functions (UDFs) in ClickHouse as lambda express
 
 Let's work through an example...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "3" >}}
 
 1. Run the following **CREATE FUNCTION** command:
     ```sql
@@ -234,7 +234,7 @@ Visit the documentation for <a href="https://clickhouse.com/docs/en/sql-referenc
 
 ClickHouse 21.10 introduces two new table engines: **Executable** and **ExecutablePool**, which both allow you to create a new table that is built by streaming data through a custom script. Let's see how they work by looking at an example that removes English stopwords from the Hacker News comments using the Python NLTK package.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "4" >}}
 
 1. When you define an **Executable** table, you specify a script to execute and also a query to specify the records to be processed by the script. For example, run the following **CREATE TABLE** command that defines a new table named **comments_no_stopwords**:
     ```sql
@@ -331,7 +331,7 @@ The **Executable** table fires up your script whenever is needed. If you are inv
 
 When you submit a query to ClickHouse, the start and end time of the query is logged in a table named **system.query_log**. If your application is processing a large number of queries per second, then logging those query details can add a lot of load to your system. With the new **log_queries_probability** property, you can reduce that load by only logging a subset of those queries. Let's see how it works...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "5" >}}
 
 
 1. Run the following query to view the **system.query_log** table:
@@ -402,7 +402,7 @@ When you add a new column to a table that involves a computation, you might want
 If you do not materialize the column, then the values are computed at the time of a SELECT. That may work well for some use cases, but by materializing the column at definition time, you can increase the performance of your queries because all the rows will already have performed the computation.
 {{% /notice %}}
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "6" >}}
 
 1. Let's add a column to the **hackernews** table that computes the length of the comment string (the column named **text**). Start by adding a new column and defining a default value:
     ```sql

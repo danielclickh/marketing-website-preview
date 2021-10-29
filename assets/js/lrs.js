@@ -13,7 +13,8 @@ function getLRS() {
     try {
         lrs = new TinCan.LRS(
             {
-                endpoint: "https://clickhouse-learn-1301877958.us-east-2.elb.amazonaws.com/data/xAPI",
+                endpoint: "https://clickhouse.com/learn/data/xAPI",
+                //endpoint: "http://3.15.84.174/data/xAPI",
                 username: "f556e4764fb8518a15124adceea926295b34958f",
                 password: "6cf5e6cd1c0fa2a34c33d3457b5f80d75324607b",
                 allowFail: false
@@ -105,14 +106,12 @@ function getUserEmail() {
  */
 function lesson_attempted(lesson_name) {
     var email = getUserEmail();
-    var counter = 1;
 
     sendStatement(email, "attempted", lesson_name.concat("/0"));
     document.querySelectorAll('details').forEach(item => {
         item.addEventListener('toggle', event => {
           if (item.open) {
-              sendStatement(email,'attempted',lesson_name.concat("/").concat(counter));
-              counter++;
+              sendStatement(email,'attempted',lesson_name.concat("/").concat(item.id));
               //item.removeEventListener('toggle',arguments.callee);
           }
         }, 

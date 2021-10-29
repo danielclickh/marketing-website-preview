@@ -29,7 +29,7 @@ Let's get started!
 
 You are going to run a preconfigured ClickHouse server in a Docker container that will already have the Covid-19 data inserted into a table, and in a different Docker container you are going to run an out-of-the-box Grafana instance.  
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "1" >}}
 
 1. Let's start by creating a local folder to work in (feel free to name the folder anything you like):
     ```bash
@@ -103,7 +103,7 @@ You should see 118,603 rows:
 
  Now that you have ClickHouse running, let's take a look at the Covid-19 data that was inserted.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "2" >}}
 
 1. The **covid19db** database has a single table named **daily_totals**. <a href="http://localhost:8123/play" target="_blank">From the Play UI</a>, run the following command to view the schema of **daily_totals**:
     ```sql
@@ -133,7 +133,7 @@ Feel free to run some queries to get a better sense of the data - it has a lot o
 
 Before Grafana can talk to ClickHouse, you need to install the appropriate Grafana plugin...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "3" >}}
 
 1. Login to Grafana at <a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a>. The username and password are both **admin**. You will be prompted to change the password - but notice there is a link to skip that step if desired.
 
@@ -177,7 +177,7 @@ In the next step, you will define a new data source for ClickHouse.
 
 Now that you have the ClickHouse plugin installed, let's define a data source in Grafana that connects to the **covid19db** database.
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "4" >}}
 
 1. From the **Add data source** page in Grafana, click the **Select** button next to ClickHouse. The following dialog appears:
 
@@ -209,7 +209,7 @@ You are now ready to build a dashboard!
 
  Now that you have a **data source** configured, let's build a dashboard...
 
-{{< detail-tag "Show instructions" >}}
+{{< detail-tag "Show instructions" "5" >}}
 
 1. From the menu, click on the **Dashboards** menu and select the **Manage** icon. Then select the **New Dashboard** button: 
 
