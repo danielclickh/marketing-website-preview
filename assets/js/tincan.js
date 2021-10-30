@@ -8424,7 +8424,6 @@ TinCan client library
         // which only applies in a browser setting
         //
         this._IEModeConversion = __IEModeConversion;
-
         urlParts = this.endpoint.toLowerCase().match(/([A-Za-z]+:)\/\/([^:\/]+):?(\d+)?(\/.*)?$/);
         if (urlParts === null) {
             log("[error] LRS invalid: failed to divide URL parts", LOG_SRC);
