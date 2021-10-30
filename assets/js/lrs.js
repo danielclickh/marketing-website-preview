@@ -13,7 +13,7 @@ function getLRS() {
         lrs = new TinCan.LRS(
             {
                 endpoint: "https://clickhouse.com/learn/data/xAPI",
-                //endpoint: "http://3.15.84.174/data/xAPI",
+                //endpoint: "https://clickhouse-learn-1216121469.us-east-2.elb.amazonaws.com/data/xAPI",
                 username: "f556e4764fb8518a15124adceea926295b34958f",
                 password: "6cf5e6cd1c0fa2a34c33d3457b5f80d75324607b",
                 allowFail: false
@@ -37,6 +37,9 @@ function getLRS() {
 function getStatement(p_user,p_verb,p_id) {
 
     full_verb = "http://adlnet.gov/expapi/verbs/".concat(p_verb);
+    if(p_user === undefined) {
+        p_user = "learn@clickhouse.com";
+    }
     full_user = "mailto:".concat(p_user);
     full_id = "http://clickhouse.com/".concat(p_id);
 
@@ -117,6 +120,6 @@ function lesson_attempted(lesson_name) {
         //We only want this event to fire once
         { once: true })
       });
-      
+
 };
 
