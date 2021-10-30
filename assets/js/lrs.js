@@ -12,7 +12,7 @@ function getLRS() {
     try {
         lrs = new TinCan.LRS(
             {
-                endpoint: "http://ec2-18-222-223-240.us-east-2.compute.amazonaws.com/data/xAPI",
+                endpoint: "http://clickhouse.com/learn/data/xAPI",
                 //endpoint: "https://clickhouse-learn-1216121469.us-east-2.elb.amazonaws.com/data/xAPI",
                 username: "f556e4764fb8518a15124adceea926295b34958f",
                 password: "6cf5e6cd1c0fa2a34c33d3457b5f80d75324607b",
