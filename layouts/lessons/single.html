@@ -2,7 +2,6 @@
 
 	<input type="hidden" id="lesson_name" value="{{ .Params.title | safeHTML }}" />
 	<input type="hidden" id="gated" value="{{ .Params.gated | safeHTML }}" />
-	{{ if .Params.gated -}}
 		<div id="gate_cta" class="gate_cta">
 				<h3>Welcome to Our House!</h3>
 				<p>Come on in and stay a while!! We would love to introduce ourselves and say "Hello".</p>
@@ -13,7 +12,6 @@
 				</form>
 				<p class="cookies">You must have cookies enabled to view this lesson.</p>
 		</div>
-	{{ end -}}
 
 	 <div class="row flex-xl-nowrap">
 		<div class="col-lg-5 col-xl-4 docs-sidebar">
