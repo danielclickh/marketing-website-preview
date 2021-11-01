@@ -34,18 +34,23 @@ function isGated()
     // Setup a hanlder that stores the email address and hides the div
     document.querySelector('.capture-email').addEventListener('submit', function(e) {
             e.preventDefault();
+            //Hide the modal window
+            gateddiv.style.display = "none";
+            
             //Retrieve the value from the form
             var email = document.getElementById("email").value;
+            //We have a new email, so let's send that detail to the LRS
+            sendStatement(email, "registered", lesson_name.concat("/registered"));
+
             //Save the email to a cookie
             localStorage.setItem('email', email);
             localStorage.setItem('email-stored', true);
             localStorage.setItem('opted-out', false);
-            //We have a new email, so let's send that detail to the LRS
-            console.log('sending registered event');
-            console.log(email.concat(lesson_name));
-            sendStatement(email, "registered", lesson_name.concat("/registered"));
-            // It's easier to just reload the page to pickup the changes
-            location.reload();    
+
+            //The event handling for each details section needs to change
+            setupDetailElements(email, lesson_name, true);
+
+
     });
 }
 
@@ -147,6 +152,25 @@ function getUserEmail() {
     }
 }
 
+function setupDetailElements(email, lesson_name, remove_existing) {
+    //Add an event handler to each "Show Instructions" section
+    document.querySelectorAll('details').forEach(item => {
+
+        if(remove_existing) {
+            //We need to overwrite the event handlers, which can be done by cloning the item
+            item = item.cloneNode(true);
+        }
+        // Send an event each time an instruction is opened
+        item.addEventListener('toggle', event => {
+        if (item.open) {
+            sendStatement(email,'attempted',lesson_name.concat("/").concat(item.id));
+            //item.removeEventListener('toggle',arguments.callee);
+            }
+        }, 
+        //We only want this event to fire once
+        { once: true })
+    });
+}
 
 /**
  * This function executes when the page is loaded, so we are calling that an "attempt"
@@ -166,7 +190,7 @@ function lesson_attempted(lesson_name) {
     //Let's see if the page is gated
     console.log(document.getElementById("gated").value);
     console.log(isGated());
-    
+
     if(document.getElementById("gated").value && isGated()) {
         //We need their email address before showing any instructions
         document.querySelectorAll('details').forEach(item => {
@@ -178,18 +202,7 @@ function lesson_attempted(lesson_name) {
             {once: false})
         });
     } else {
-        //Add an event handler to each "Show Instructions" section
-        document.querySelectorAll('details').forEach(item => {
-            // Send an event each time an instruction is opened
-            item.addEventListener('toggle', event => {
-            if (item.open) {
-                sendStatement(email,'attempted',lesson_name.concat("/").concat(item.id));
-                //item.removeEventListener('toggle',arguments.callee);
-                }
-            }, 
-            //We only want this event to fire once
-            { once: true })
-        });
+        setupDetailElements(email, lesson_name, false);
     } 
 };
 
