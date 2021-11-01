@@ -167,7 +167,6 @@ function lesson_attempted(lesson_name) {
         document.querySelectorAll('details').forEach(item => {
             //Don't let the details block be opened
             item.addEventListener('click', event => {
-                console.log("sorry...page is gated");
                 event.preventDefault();
                 gated(event, lesson_name);
             },
