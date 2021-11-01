@@ -32,6 +32,7 @@ function isEmailSet()
             //Save the email to a cookie
             localStorage.setItem('email', email);
             localStorage.setItem('email-stored', true);
+            sendStatement(email, "registered", lesson_name.concat("/registered"));
             // It's easier to just reload the page to pickup the changes
             location.reload();    
     });
