@@ -7,7 +7,7 @@ function isGated()
     if(localStorage.getItem('email-stored') || localStorage.getItem('opted-out')) {
         return false;
     } else {
-        return true;
+        return false;
     }    
 }
 
