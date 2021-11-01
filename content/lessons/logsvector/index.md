@@ -7,6 +7,7 @@ lastmod:
 draft: false
 images: []
 toc: true
+gated: false
 duration: "20-25 minutes"
 audience: "Anyone interested in ingesting log events into ClickHouse"
 
