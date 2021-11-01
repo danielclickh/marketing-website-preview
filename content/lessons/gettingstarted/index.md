@@ -8,6 +8,7 @@ images: []
 toc: true
 duration: "10 minutes"
 audience: "Anyone brand new to ClickHouse"
+gated: false
 
 ---
 

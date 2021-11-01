@@ -7,6 +7,7 @@ lastmod:
 draft: false
 images: []
 toc: true
+gated: false
 
 duration: "20 minutes"
 audience: "Anyone interested in learning how to connect Grafana to ClickHouse for building visualizations and dashboards"

@@ -7,6 +7,7 @@ lastmod:
 draft: false
 images: []
 toc: true
+gated: false
 
 duration: "10-15 minutes"
 audience: "If you want to see how to use the new SQL operators in 21.9, this lesson is for you"
