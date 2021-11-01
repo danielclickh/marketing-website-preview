@@ -7,6 +7,7 @@ lastmod:
 draft: false
 images: []
 toc: true
+gated: false
 
 duration: "30 minutes"
 audience: "Anyone interested in learning how to connect Superset to ClickHouse for building visualizations and dashboards. The assumption is that you are new to ClickHouse."

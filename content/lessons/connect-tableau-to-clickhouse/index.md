@@ -7,6 +7,7 @@ lastmod:
 draft: false
 images: []
 toc: true
+gated: false
 
 duration: "10 minutes"
 audience: "Anyone interested in learning how to connect Tableau to ClickHouse"

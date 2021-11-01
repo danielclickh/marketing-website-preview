@@ -7,6 +7,7 @@ lastmod:
 draft: false
 images: []
 toc: true
+gated: false
 
 duration: "20 minutes"
 audience: "New users to ClickHouse you want to connect AWS S3 to ClickHouse"

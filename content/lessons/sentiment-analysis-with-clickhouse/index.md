@@ -7,6 +7,7 @@ lastmod:
 draft: false
 images: []
 toc: true
+gated: false
 
 duration: "30 minutes"
 audience: "Anyone interested in learning how to incorporate Python with ClickHouse using the new Executable table engine"
