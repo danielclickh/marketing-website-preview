@@ -41,6 +41,8 @@ function isGated()
             localStorage.setItem('email-stored', true);
             localStorage.setItem('opted-out', false);
             //We have a new email, so let's send that detail to the LRS
+            console.log('sending registered event');
+            console.log(email.concat(lesson_name));
             sendStatement(email, "registered", lesson_name.concat("/registered"));
             // It's easier to just reload the page to pickup the changes
             location.reload();    
@@ -163,6 +165,8 @@ function lesson_attempted(lesson_name) {
 
     //Let's see if the page is gated
     console.log(document.getElementById("gated").value);
+    console.log(isGated());
+    
     if(document.getElementById("gated").value && isGated()) {
         //We need their email address before showing any instructions
         document.querySelectorAll('details').forEach(item => {
