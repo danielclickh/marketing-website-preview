@@ -3,81 +3,18 @@
 	<input type="hidden" id="lesson_name" value="{{ .Params.title | safeHTML }}" />
 	{{ if .Params.gated -}}
 		<input type="hidden" id="gated" value="true" />
-		<style>
-				.gate_cta {
-						display: none;
-						top: 100px;
-						left: 10px;
-						background: #ffcc00;
-						border-radius: 6px;
-						margin: 0 auto;
-						max-width: 440px;
-						padding: 43px 33px;
-						position: absolute;
-						text-align: center;
-						width: 100%;
-						z-index: 10;
-				}
-				.gate_cta button {
-						background: #257af4;
-						border: none;
-						border-radius: 4px;
-						color: #FFF;
-						display: block;
-						font-size: 18px;
-						margin: 0 auto 18px;
-						padding: 13px 33px;
-				}
-				.gate_cta .gate-skip {
-						color: #93A1AF;
-						display: inline-block;
-						font-size: 12px;
-						font-weight: 300;
-						text-decoration: none;
-				}
-				.gate_cta .gate-skip:hover {
-						text-decoration: underline;
-				}
-				.gate_cta h3 {
-						color: #253540;
-						font-size: 26px;
-						font-weight: 600;
-						margin-bottom: 0;
-						text-align: center;
-				}
-				.gate_cta input {
-						border: 1px solid #D6DDE3;
-						border-radius: 2px;
-						font-size: 18px;
-						margin-bottom: 23px;
-						padding: 13px;
-						width: 100%;
-				}
-				.gate_cta p {
-						font-size: 16px;
-						margin-bottom: 23px;
-						text-align: center;
-				}
-		</style>		
 		<div id="gate_cta" class="gate_cta">
 				<h3>Welcome to Our House!</h3>
-				<p>Take your coat off and stay a while! Please enter an email address to continue.</p>
+				<p>Come on in and stay a while!! We would love to introduce ourselves and say "Hello".</p>
 				<form class="capture-email">
 					<input id="email" type="email" placeholder="Enter your work email..." required />
 					<button>Continue lesson</button>
+					<a href="#" class="gate-skip">No thanks</a>
 				</form>
-				<p>You must have cookies enabled to view this lesson.</p>
+				<p class="cookies">You must have cookies enabled to view this lesson.</p>
 		</div>
 	{{ end -}}
 
-	<style>
-		.center {
-			display: block;
-			margin-left: auto;
-			margin-right: auto;
-			width: 35%;
-		}
-	 </style>
 	 <div class="row flex-xl-nowrap">
 		<div class="col-lg-5 col-xl-4 docs-sidebar">
 			<nav class="docs-links" aria-label="Main navigation">
