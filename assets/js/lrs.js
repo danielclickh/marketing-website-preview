@@ -162,6 +162,7 @@ function lesson_attempted(lesson_name) {
     }
 
     //Let's see if the page is gated
+    console.log(document.getElementById("gated").value);
     if(document.getElementById("gated").value && isGated()) {
         //We need their email address before showing any instructions
         document.querySelectorAll('details').forEach(item => {
