@@ -2,49 +2,39 @@
 @module TinCan
 **/
 
+function isEmailSet()
+{
+    // localStorage.removeItem('email-stored');
+    // localStorage.removeItem('email');
+    if(localStorage.getItem('email-stored')) {
+        return true;
+    } else {
+        return false;
+    }    
+}
+
 /**
  * Displays a popup window prompting the visitor for their work email address
  * @returns n/a
  */
- function gated(){
+ function gated(event){
+    // Figure out where the mouse was clicked and popup the dialog there
+    var gateddiv = document.getElementById("gate_cta");
+    gateddiv.style.top = ''.concat(event.pageY-50).concat('px');
+    gateddiv.style.left = ''.concat(event.pageX).concat('px');
+    gateddiv.style.display = "block";
 
-    //If there email exists, we do not need to gate the page
-    if(!localStorage.getItem('email-stored')) {
-        console.log('email is not stored');
-        return true;
-    } else {
-        console.log('email is stored');
-        var email = localStorage.getItem('email');
-        console.log(email);
-        return false;
-    }
-
-    // function promptForEmail() {
-    //         // Handle form submission
-    //         document.querySelector('.capture-email').addEventListener('submit', function(e) {
-    //                 e.preventDefault();
-    //                 // Do something with the form data here...
-    //                 // Then...
-    //                 var email = document.getElementById("email").value;
-    //                 localStorage.setItem('email', email);
-                    
-    //                 // Save preference to localstorage
-    //                 gatePrevent();
-    //                 // Hide the gate immediately
-    //                 gateHide();
-    //         });
-    // }
-    
-    // function gateHide() {
-    //         // Remove the .gated class from .content which hides the entire .gate div
-    //         //document.querySelector('.content').classList.remove('gated');
-    //         document.getElementById("gate").style.display = "none";
-    // }
-    // function gatePrevent() {
-    //         // Prevent the gate from being shown from this point forward
-    //         localStorage.setItem('email-stored', true);
-    // }
-    
+    // Setup a hanlder that stores the email address and hides the div
+    document.querySelector('.capture-email').addEventListener('submit', function(e) {
+            e.preventDefault();
+            //Retrieve the value from the form
+            var email = document.getElementById("email").value;
+            //Save the email to a cookie
+            localStorage.setItem('email', email);
+            localStorage.setItem('email-stored', true);
+            // It's easier to just reload the page to pickup the changes
+            location.reload();    
+    });
 }
 
 
@@ -154,7 +144,6 @@ function getUserEmail() {
  * @param {The name of the lesson being loaded} lesson_name
  */
 function lesson_attempted(lesson_name) {
-
     //The visitor's email address might be already stored in a cookie
     var email = getUserEmail();
 
@@ -166,14 +155,14 @@ function lesson_attempted(lesson_name) {
     }
 
     //Let's see if the page is gated
-    if(document.getElementById("gated").value && gated()) {
+    if(document.getElementById("gated").value && !isEmailSet()) {
         //We need their email address before showing any instructions
         document.querySelectorAll('details').forEach(item => {
             //Don't let the details block be opened
             item.addEventListener('click', event => {
                 console.log("sorry...page is gated");
                 event.preventDefault();
-                gated();
+                gated(event);
             },
             {once: false})
         });
