@@ -32,6 +32,7 @@ function isEmailSet()
             //Save the email to a cookie
             localStorage.setItem('email', email);
             localStorage.setItem('email-stored', true);
+            //We have a new email, so let's send that detail to the LRS
             sendStatement(email, "registered", lesson_name.concat("/registered"));
             // It's easier to just reload the page to pickup the changes
             location.reload();    
