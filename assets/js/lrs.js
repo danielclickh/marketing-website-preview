@@ -17,7 +17,7 @@ function isEmailSet()
  * Displays a popup window prompting the visitor for their work email address
  * @returns n/a
  */
- function gated(event){
+ function gated(event, lesson_name){
     // Figure out where the mouse was clicked and popup the dialog there
     var gateddiv = document.getElementById("gate_cta");
     gateddiv.style.top = ''.concat(event.pageY-50).concat('px');
@@ -164,7 +164,7 @@ function lesson_attempted(lesson_name) {
             item.addEventListener('click', event => {
                 console.log("sorry...page is gated");
                 event.preventDefault();
-                gated(event);
+                gated(event, lesson_name);
             },
             {once: false})
         });
