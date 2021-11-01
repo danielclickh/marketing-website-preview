@@ -84,3 +84,70 @@ table {
 .more-spacing {
     padding: 20px;
 }
+
+.gate_cta {
+    display: none;
+    top: 100px;
+    left: 10px;
+    background: #ffcc00;
+    border-radius: 6px;
+    margin: 0 auto;
+    max-width: 440px;
+    padding: 43px 33px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 10;
+}
+.gate_cta button {
+    background: #257af4;
+    border: none;
+    border-radius: 4px;
+    color: #FFF;
+    display: block;
+    font-size: 18px;
+    margin: 0 auto 18px;
+    padding: 13px 33px;
+}
+.gate_cta .gate-skip {
+    color: #000000;
+    display: inline-block;
+    font-size: 16px;
+    text-decoration: none;
+}
+.gate_cta .gate-skip:hover {
+    text-decoration: underline;
+}
+.gate_cta h3 {
+    color: #253540;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 0;
+    text-align: center;
+}
+.gate_cta input {
+    border: 1px solid #D6DDE3;
+    border-radius: 2px;
+    font-size: 18px;
+    margin-bottom: 23px;
+    padding: 13px;
+    width: 100%;
+}
+.gate_cta p {
+    font-size: 16px;
+    margin-bottom: 23px;
+    text-align: center;
+}
+.gate_cta .cookies {
+    font-size: 12px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+}

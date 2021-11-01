@@ -2,14 +2,12 @@
 @module TinCan
 **/
 
-function isEmailSet()
+function isGated()
 {
-    // localStorage.removeItem('email-stored');
-    // localStorage.removeItem('email');
-    if(localStorage.getItem('email-stored')) {
-        return true;
-    } else {
+    if(localStorage.getItem('email-stored') || localStorage.getItem('opted-out')) {
         return false;
+    } else {
+        return true;
     }    
 }
 
@@ -18,6 +16,15 @@ function isEmailSet()
  * @returns n/a
  */
  function gated(event, lesson_name){
+     // Give them the option to not enter an email address
+     document.querySelector('.gate-skip').addEventListener('click', function(e) {
+        e.preventDefault();
+        // Save preference to localstorage
+        localStorage.setItem('email-stored', false);
+        localStorage.setItem('opted-out', true);
+        location.reload();
+    });
+
     // Figure out where the mouse was clicked and popup the dialog there
     var gateddiv = document.getElementById("gate_cta");
     gateddiv.style.top = ''.concat(event.pageY-50).concat('px');
@@ -32,6 +39,7 @@ function isEmailSet()
             //Save the email to a cookie
             localStorage.setItem('email', email);
             localStorage.setItem('email-stored', true);
+            localStorage.setItem('opted-out', false);
             //We have a new email, so let's send that detail to the LRS
             sendStatement(email, "registered", lesson_name.concat("/registered"));
             // It's easier to just reload the page to pickup the changes
@@ -123,9 +131,6 @@ function sendStatement(p_user,p_verb,p_id) {
                     // TODO: do something with error, didn't save statement
                     return;
                 }
-
-                console.log("Statement saved");
-                // TOOO: do something with success (possibly ignore)
             }
         }
     );
@@ -157,7 +162,7 @@ function lesson_attempted(lesson_name) {
     }
 
     //Let's see if the page is gated
-    if(document.getElementById("gated").value && !isEmailSet()) {
+    if(document.getElementById("gated").value && isGated()) {
         //We need their email address before showing any instructions
         document.querySelectorAll('details').forEach(item => {
             //Don't let the details block be opened
