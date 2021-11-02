@@ -4,18 +4,20 @@
 
 function isGated()
 {
-    if(localStorage.getItem('email-stored') || localStorage.getItem('opted-out')) {
+    if(localStorage.getItem('email-stored') == null && localStorage.getItem('opted-out') == null) {
+        return true;
+    } else if(localStorage.getItem('email-stored') || localStorage.getItem('opted-out')) {
         return false;
     } else {
-        return false;
-    }    
+        return true;
+    }
 }
 
 /**
  * Displays a popup window prompting the visitor for their work email address
  * @returns n/a
  */
- function gated(event, lesson_name){
+function gated(event, lesson_name){
      // Give them the option to not enter an email address
      document.querySelector('.gate-skip').addEventListener('click', function(e) {
         e.preventDefault();
@@ -158,7 +160,7 @@ function setupDetailElements(email, lesson_name, remove_existing) {
 
         if(remove_existing) {
             //We need to overwrite the event handlers, which can be done by cloning the item
-            item = item.cloneNode(true);
+            item.replaceWith(item.cloneNode(true));
         }
         // Send an event each time an instruction is opened
         item.addEventListener('toggle', event => {
@@ -191,7 +193,7 @@ function lesson_attempted(lesson_name) {
     console.log(document.getElementById("gated").value);
     console.log(isGated());
 
-    if(document.getElementById("gated").value && isGated()) {
+    if(document.getElementById("gated").value === "true" && isGated()) {
         //We need their email address before showing any instructions
         document.querySelectorAll('details').forEach(item => {
             //Don't let the details block be opened
