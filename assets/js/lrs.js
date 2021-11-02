@@ -24,7 +24,10 @@ function gated(event, lesson_name){
         // Save preference to localstorage
         localStorage.setItem('email-stored', false);
         localStorage.setItem('opted-out', true);
-        location.reload();
+        // Let's record this event in the LRS
+        sendStatement("learn@clickhouse.com", "optedout", lesson_name.concat("/optedout"));
+        //The event handling for each details section needs to change
+        setupDetailElements(email, lesson_name, true);
     });
 
     // Figure out where the mouse was clicked and popup the dialog there
@@ -55,8 +58,6 @@ function gated(event, lesson_name){
 
     });
 }
-
-
 
 /**
  * 
