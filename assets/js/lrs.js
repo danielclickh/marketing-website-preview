@@ -18,9 +18,18 @@ function isGated()
  * @returns n/a
  */
 function gated(event, lesson_name){
-     // Give them the option to not enter an email address
-     document.querySelector('.gate-skip').addEventListener('click', function(e) {
+    // Figure out where the mouse was clicked and popup the dialog there
+    var gateddiv = document.getElementById("gate_cta");
+    gateddiv.style.top = ''.concat(event.pageY-50).concat('px');
+    gateddiv.style.left = ''.concat(event.pageX).concat('px');
+    gateddiv.style.display = "block";     // Give them the option to not enter an email address
+
+
+    document.querySelector('.gate-skip').addEventListener('click', function(e) {
         e.preventDefault();
+        //Hide the modal window
+        gateddiv.style.display = "none";
+
         // Save preference to localstorage
         localStorage.setItem('email-stored', false);
         localStorage.setItem('opted-out', true);
@@ -29,12 +38,6 @@ function gated(event, lesson_name){
         //The event handling for each details section needs to change
         setupDetailElements(email, lesson_name, true);
     });
-
-    // Figure out where the mouse was clicked and popup the dialog there
-    var gateddiv = document.getElementById("gate_cta");
-    gateddiv.style.top = ''.concat(event.pageY-50).concat('px');
-    gateddiv.style.left = ''.concat(event.pageX).concat('px');
-    gateddiv.style.display = "block";
 
     // Setup a hanlder that stores the email address and hides the div
     document.querySelector('.capture-email').addEventListener('submit', function(e) {
