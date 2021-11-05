@@ -52,7 +52,7 @@ We have built a Docker image that already has ClickHouse installed, along with a
 
 3. Point your web browser to <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>. You should see the embedded ClickHouse Play UI:
 
-<img src="images/clickhouseui.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/clickhouseui.png" width="100%" alt="" />
 
 
 4. Let's run a few queries to understand what the dataset looks like. Copy-and-paste the following query into the UI, then click the **Run** button (or press **Ctrl/Cmd+Enter**):
@@ -78,7 +78,7 @@ We have built a Docker image that already has ClickHouse installed, along with a
     ORDER BY Streams DESC
     ```
 
-<img src="images/topstreams.png" width="100%" alt="Top streams for Spotify" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/topstreams.png" width="100%" alt="Top streams for Spotify" />
 
 It looks like 2017 was a good year Kendrick Lamar, Post Malone, Taylor Swift and Drake.
 
@@ -146,15 +146,15 @@ It appears that the Docker image from Metabase does not run on the new M1 Macs, 
 
 3. Once Metabase is running, access it at <a href="http://localhost:3000/" target="_blank">http://localhost:3000</a>. You will see the welcome screen:
 
-<img src="images/metabasewelcome.png" width="100%" alt="Welcome to Metabase" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/metabasewelcome.png" width="100%" alt="Welcome to Metabase" border="1px" />
 
 4. You will be asked a bunch of questions - so work your way through the initial setup wizard. When prompted to select a database, you need to click on "**I'll add my data later**":
 
-<img src="images/addlater.png" width="100%" alt="Add Database Later" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/addlater.png" width="100%" alt="Add Database Later" />
 
 5. Complete the setup to work your way into the app:
 
-<img src="images/mainscreen.png" width="100%" alt="Metabase Main Screen" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/mainscreen.png" width="100%" alt="Metabase Main Screen" />
 
 
 {{< /detail-tag >}}
@@ -172,24 +172,24 @@ Let's see how to connect Metabase to the Spotify database in ClickHouse.
 
 2. Click on **Add a database**:
 
-<img src="images/add-database.png" width="100%" alt="Add a database" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/add-database.png" width="100%" alt="Add a database" border="1px" />
 
 3. If your driver installation worked, you will see **ClickHouse** in the **Database type**. Select **ClickHouse** and add the following settings (**leave the password field blank**):
 
-<img src="images/connect-settings.png" width="100%" alt="Connection settings" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/connect-settings.png" width="100%" alt="Connection settings" border="1px" />
 
 
 4. Select the **Save** button at the bottom and you should see a confirmation that the database was added:
 
-<img src="images/database-added.png" width="100%" alt="Database is added" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/database-added.png" width="100%" alt="Database is added" />
 
 5. Click the **Explore this data** button and Metabase will scan your database and build some visualizations based on the content. When it's ready, click on **A look at your Songs table**:
 
-<img src="images/metabot.png" width="100%" alt="Metabot" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/metabot.png" width="100%" alt="Metabot" border="1px" />
 
 6. Notice the default dashboard pulled some of the more obvious metrics from the **songs** table:
 
-<img src="images/default-dashboard.png" width="100%" alt="Default dashboard" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/default-dashboard.png" width="100%" alt="Default dashboard" border="1px" />
 
 7. Save the auto-generated dashboard by clicking the **Save this** button. The dashboard will be saved as **A look at your Songs table**.
 
@@ -205,53 +205,53 @@ Let's build a dashboard of our own.
 
 1. Click the large **+** icon in the top-right corner and select **New dashboard**. Name it **Spotify Dashboard**:
 
-<img src="images/new-dashboard.png" width="100%" alt="New dashboard" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/new-dashboard.png" width="100%" alt="New dashboard" border="1px" />
 
 2. Metabase cleverly refers to their visualizations as **_questions_**. To add a visualization, select the **Ask a question** button in the top-right area of the toolbar:
 
-<img src="images/ask-question.png" width="100%" alt="Ask a question" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/ask-question.png" width="100%" alt="Ask a question" border="1px" />
 
 3. Let's display a simple table that lists the artists with the most number of streams. Select **Simple question** and you will be prompted for a data source. Select **My ClickHouse Database**, then select the **Songs** table:
 
-<img src="images/songs-table.png" width="100%" alt="The songs table" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/songs-table.png" width="100%" alt="The songs table" border="1px" />
 
 4. You will see a table view of some of the records. We need to group by artist to answer our question, so click the **Summarize** button:
 
-<img src="images/summarize-button.png" width="100%" alt="Click the Summarize button" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/summarize-button.png" width="100%" alt="Click the Summarize button" border="1px" />
 
 5. Change the metric to **Sum** and select the **Streams** field. (You will see a sum of all streams!) Select **Artist** to **Group by** and a table view of all streams by artist appears:
 
-<img src="images/groupby-artist.png" width="100%" alt="Group by artist" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/groupby-artist.png" width="100%" alt="Group by artist" border="1px" />
 
 6. Notice the ordering is currently by artist. Click on the top of the **Sum of Streams** column and change it to sort descending, then click the **Save** button:
 
-<img src="images/save-button.png" width="100%" alt="Save button" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/save-button.png" width="100%" alt="Save button" border="1px" />
 
 7. Give your question a name:
 
-<img src="images/save-question.png" width="100%" alt="Save question" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/save-question.png" width="100%" alt="Save question" border="1px" />
 
 8. When prompted, save the question to your **Spotify Dashboard** and you will be taken to that dashboard:
 
-<img src="images/spotify-dashboard.png" width="100%" alt="Spotify dashboard" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/spotify-dashboard.png" width="100%" alt="Spotify dashboard" border="1px" />
 
 9. Following the same steps, create a line chart that answers **_"What are the average number of streams per day?"_**:
 
-<img src="images/avg-streams.png" width="100%" alt="Average streams" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/avg-streams.png" width="100%" alt="Average streams" border="1px" />
 
 10. Create a simple metric for **_the total number of streams all-time_**:
 
-<img src="images/total-streams.png" width="100%" alt="Total streams" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/total-streams.png" width="100%" alt="Total streams" border="1px" />
 
 11. Let's figure out how Taylor Swift did for the month of October, 2017. Ask a new question, but select **Custom question** this time. Select the **Songs** table from your ClickHouse database.
 
 12. You will see the following screen. Add two filters: **Artist** is **Taylor Swift**, and **Date** field is between **10/01/2017** and **10/31/2017**. Click the **Summarize** button and change the metric to be the sum of the **Streams** field, then **group the results by day**:
 
-<img src="images/taylorswift1.png" width="100%" alt="Taylor Swift" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/taylorswift1.png" width="100%" alt="Taylor Swift" border="1px" />
 
 13. Select the **Visualize** button to view the resulting line chart:
 
-<img src="images/taylorswift2.png" width="100%" alt="Taylor Swift" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/taylorswift2.png" width="100%" alt="Taylor Swift" border="1px" />
 
 14. Save and add the line chart to your Spotify dashboard.
 
@@ -267,13 +267,13 @@ Let's build a dashboard of our own.
     ) 
     ```
 
-<img src="images/native-query.png" width="100%" alt="Taylor Swift" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/native-query.png" width="100%" alt="Taylor Swift" border="1px" />
 
 18. Click the **Play** button (see the screenshot above) and the results will appear in a table.
 
 19. **Save** it to your Spotify dashboard:
 
-<img src="images/final-dashboard.png" width="100%" alt="Taylor Swift" border="1px" />
+<img src="https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/images/final-dashboard.png" width="100%" alt="Taylor Swift" border="1px" />
 
 20. Now that have a feel for both Metabase and the Spotify dataset, feel free to play around and answer as many questions as you can.
 
