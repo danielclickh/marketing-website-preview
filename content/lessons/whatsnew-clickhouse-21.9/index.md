@@ -35,10 +35,11 @@ We have built a Docker image that already has ClickHouse installed, along with a
 
 - On **Linux**, you will need to use the `--network host` option:
     ```bash
-    # On Linux:
     docker run -it  --name clickhouse-spotify --network host -p 9000:9000 -p 9009:9009 -p 8123:8123 --platform linux/amd64 --ulimit nofile=262144:262144 learnclickhouse/public-repo:clickhouse-spotify-21.10
+    ```
 
-    # On all other environments
+    On all other environments, use this command:
+    ```bash
     docker run -it  --name clickhouse-spotify -p 9000:9000 -p 9009:9009 -p 8123:8123 --platform linux/amd64 --ulimit nofile=262144:262144 learnclickhouse/public-repo:clickhouse-spotify-21.10
     ```
 
@@ -215,7 +216,7 @@ The **ANY** operator compares a given value in one query with a set of values in
 <img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.9/images/anyoperator.png" width="100%" alt="" />
 
 
-3. What do the hits mean? Let's break it down...the subquery returns a set of numbers that represent the maximum number of streams in a day. The outer query looks for the **Artist** who had the maximum number of streams that day. Therefore, you seeing artist who, at some point in time, had a day in which one of their songs was the most-streamed song on Spotify.
+3. What do the hits mean? Let's break it down...the subquery returns a set of numbers that represent the maximum number of streams in a day. The outer query looks for the **Artist** who had the maximum number of streams that day. Therefore, you are seeing the artist who, at some point in time, had a day in which one of their songs was the most-streamed song on Spotify.
     
 {{< /detail-tag >}}
 
