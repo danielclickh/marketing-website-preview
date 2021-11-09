@@ -63,6 +63,32 @@ function gated(event, lesson_name){
 }
 
 /**
+ * Returns a new, random email address if there are no cookies found,
+ * or returns a previously generated email address from a cookie
+ * 
+ * @returns an email address that is meaningless but useful for tracking purposes 
+ * */
+function getFakeEmail() {
+    var email = localStorage.getItem('email');
+    if(email == null ) {
+        //store and return a new email address
+        email = '';
+        var characters = 'bcdfghjklmnpqrstvwxz';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < 8; i++ ) {
+            email += characters.charAt(Math.floor(Math.random() * charactersLength));
+         }
+         
+         email += '@clickhouse.com';
+         localStorage.setItem('email', email);
+         return email;
+    } else {
+        //return the discovered email address
+        return email;
+    }
+}
+
+/**
  * 
  * @returns a new TinCan.LRS object that connects to the configured Learning Record Store
  */
@@ -205,6 +231,9 @@ function lesson_attempted(lesson_name) {
             {once: false})
         });
     } else {
+        //Generate a random email address and save it as a cookie
+        //so we can track their engagement anonymously
+        email = getFakeEmail();
         setupDetailElements(email, lesson_name, false);
     } 
 };
