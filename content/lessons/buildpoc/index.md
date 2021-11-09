@@ -4,10 +4,10 @@ description: "Description..."
 lead: ""
 date: 2020-10-13T15:21:01+02:00
 lastmod: 2020-10-13T15:21:01+02:00
-draft: false
+draft: true
 images: []
 toc: true
-gated: true
+gated: false
 duration: "20-25 minutes"
 audience: "Anyone who need to see if ClickHouse is a good fit for their use case"
 ---

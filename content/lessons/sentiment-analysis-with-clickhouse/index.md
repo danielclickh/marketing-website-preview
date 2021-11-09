@@ -20,11 +20,11 @@ Let's get started!
 
 ***
 
-**Prerequisites:** You will run a Docker Compose file with an image containing ClickHouse 21.10, Python, and a sample dataset already inserted into a table that contains Hacker News comments and stories, so you will need **Docker** installed to be able to follow along.
+**Prerequisites:** You will run a Docker Compose file with an image containing ClickHouse 21.11, Python, and a sample dataset already inserted into a table that contains Hacker News comments and stories, so you will need **Docker** installed to be able to follow along.
 
 *** 
 
-## 1. Startup ClickHouse 21.10
+## 1. Startup ClickHouse 21.11
 
 The first step is to get ClickHouse up and running: 
 
@@ -42,7 +42,7 @@ The first step is to get ClickHouse up and running:
 
     services:
         clickhouse-nlp:
-            image: learnclickhouse/public-repo:clickhouse-nlp-21.10
+            image: learnclickhouse/public-repo:clickhouse-nlp-21.11
             container_name: clickhouse-nlp
             hostname: clickhouse-nlp
             ports:
