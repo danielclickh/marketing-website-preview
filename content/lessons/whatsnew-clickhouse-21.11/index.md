@@ -199,15 +199,18 @@ ClickHouse can call any external executable program or script to process data. Y
 
 {{< detail-tag "Show instructions" "3" >}}
 
-1. UDFs are configured in XML config files. Let's define a simple function to demonstrate how UDFs are deployed. Create a new file in the **~/whatsnew-21.11** folder named **my_function.xml** that contains the following:
+1. UDFs are configured in XML config files. Let's define a simple function to demonstrate how UDFs are deployed. Create a new file in the **~/whatsnew-21.11** folder named **get_ip_function.xml** that contains the following function, which takes in a hostname and returns the first IP address returned from the **host** command:
     ```xml
     <functions>
         <function>
             <type>executable</type>
-            <name>get_disk_usage</name>
-            <return_type>UInt64</return_type>
+            <name>get_ip</name>
+            <argument>
+                <type>String</type>
+            </argument>
+            <return_type>String</return_type>
             <format>TabSeparated</format>
-            <command>df -m | grep overlay | awk {'printf $3'}</command>
+            <command>read line; host $line | awk '/has address/ { print $4;exit }'</command>
             <lifetime>0</lifetime>
         </function>
     </functions>
@@ -217,9 +220,9 @@ ClickHouse can call any external executable program or script to process data. Y
 There is a setting in **config.xml** named **user_defined_executable_functions_config** that is set to ***_function.xml**, which means that either 1) your function config files need to end in **_function.xml** or 2) you need to redefine this property.
 {{% /notice %}}
 
-2. Your XML file needs to be stored in the **user_files** folder of your ClickHouse server, which for our deployment is in **/var/lib/clickhouse**. Run the following command to copy the function's XML config into the **user_files** folder on the ClickHouse server:
+2. Run the following command to copy the function's XML config into the **config** folder on the ClickHouse server:
     ```bash
-    docker cp my_function.xml clickhouse-server:/etc/clickhouse-server
+    docker cp get_ip_function.xml clickhouse-server:/etc/clickhouse-server
     ```
 
 3. At the Play UI, run the following command to have ClickHouse load your new function:
@@ -229,13 +232,19 @@ There is a setting in **config.xml** named **user_defined_executable_functions_c
 
 4. Run the following command to verify it worked - your function should return:
     ```sql
-    SELECT * FROM system.functions WHERE name = 'get_disk_usage'
+    SELECT * FROM system.functions WHERE name = 'get_ip'
     ```
 
 5. Test your function with the following command:
     ```sql
-    SELECT get_disk_usage()
+    select get_ip('clickhouse.com')
     ```
+
+<img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.11/images/get_ip.png" width="100%" alt="get_ip function" />
+
+{{% notice note %}}
+UDFs open up your ClickHouse data to a whole new world of features, because the executable script can be written in any language. <a href="https://clickhouse.com/docs/en/sql-reference/functions/#executable-user-defined-functions" target="_blank">Check out the documentation</a> for more details on define and use executable UDFs.
+{{% /notice %}}
 
 {{< /detail-tag >}}
 
