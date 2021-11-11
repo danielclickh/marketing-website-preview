@@ -220,22 +220,27 @@ ClickHouse can call any external executable program or script to process data. Y
 There is a setting in **config.xml** named **user_defined_executable_functions_config** that is set to ***_function.xml**, which means that either 1) your function config files need to end in **_function.xml** or 2) you need to redefine this property.
 {{% /notice %}}
 
-2. Run the following command to copy the function's XML config into the **config** folder on the ClickHouse server:
+2. Run the following command to install the **host** program on the **clickhouse-server** container:
+    ```bash
+    docker exec -it clickhouse-server bash -c "apt-get update; apt-get -y install host"
+    ```
+
+3. Run the following command to copy the function's XML config into the **config** folder on the ClickHouse server:
     ```bash
     docker cp get_ip_function.xml clickhouse-server:/etc/clickhouse-server
     ```
 
-3. At the Play UI, run the following command to have ClickHouse load your new function:
+4. At the Play UI, run the following command to have ClickHouse load your new function:
     ```bash
     SYSTEM RELOAD FUNCTIONS
     ```
 
-4. Run the following command to verify it worked - your function should return:
+5. Run the following command to verify it worked - your function should return:
     ```sql
     SELECT * FROM system.functions WHERE name = 'get_ip'
     ```
 
-5. Test your function with the following command:
+6. Test your function with the following command:
     ```sql
     select get_ip('clickhouse.com')
     ```
