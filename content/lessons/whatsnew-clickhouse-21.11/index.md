@@ -76,7 +76,7 @@ Let's startup ClickHouse 21.11 using a Docker Compose file...
 
 4. Point your web browser to <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>. You should see the embedded ClickHouse Play UI:
 
-<img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10/images/playui.png" width="100%" alt="" />
+<img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.11/images/playui.png" width="100%" alt="" />
 
 5. Feel free to run a few queries to understand what the dataset looks like. (**NOTE:** The startup script has a 15-second sleep in it to make sure everything starts up properly before inserting data...so you may have to wait a moment.) Copy-and-paste the following query into the Play UI, then click the **Run** button (or press **Ctrl/Cmd+Enter**). You will see the column names and data types of the **hackernews** table:
     ```sql
@@ -346,12 +346,12 @@ There is a new **system** table named **session_log** that logs all successul an
 
     You should see a list of **LoginSuccess** and **Logout** events:
 
-<img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10/images/session_log.png" width="100%" alt="Session Log Table" />
+<img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.11/images/session_log.png" width="100%" alt="Session Log Table" />
 
 
 2. It is easy to generate a failed login attempt. In the Play UI, change the username from **default** to **nobody** (or anything) and run the query again:
 
-<img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10/images/change_user.png" width="100%" alt="Change User" />
+<img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.11/images/change_user.png" width="100%" alt="Change User" />
 
 You should see an authentication failed error.
 
@@ -362,7 +362,7 @@ You should see an authentication failed error.
 
 Your failed login should appear in the results:
 
-<img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10/images/failed_login.png" width="100%" alt="Failed Login" />
+<img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.11/images/failed_login.png" width="100%" alt="Failed Login" />
 
 
 {{< /detail-tag >}}
