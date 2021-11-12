@@ -78,7 +78,7 @@ Let's startup ClickHouse 21.11 using a Docker Compose file...
 
 <img src="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.11/images/playui.png" width="100%" alt="" />
 
-5. Feel free to run a few queries to understand what the dataset looks like. (**NOTE:** The startup script has a 15-second sleep in it to make sure everything starts up properly before inserting data...so you may have to wait a moment.) Copy-and-paste the following query into the Play UI, then click the **Run** button (or press **Ctrl/Cmd+Enter**). You will see the column names and data types of the **hackernews** table:
+5. Feel free to run a few queries to understand what the dataset looks like. (**NOTE:** The startup script has a 15-second sleep in it to make sure everything starts up properly before inserting data...so you may have to wait a moment.) Copy-and-paste the following query into the Play UI, then click the **Run** button (or press **Ctrl/Cmd+Enter**). You will see the column names and data types of the **songs** table:
     ```sql
     describe spotify.songs
     ```
@@ -112,7 +112,7 @@ What's new is that you can now run **clickhouse-local** in **_interactive mode_*
     docker exec -it clickhouse-server /bin/bash
     ```
 
-2. Start **clickhouse-local** in interactive mode by _not_ specifying a **--query** or **--queries_file** option. Run the following command:
+2. Start **clickhouse-local** in interactive mode by _not_ specifying a `--query` or `--queries_file` option. Run the following command:
     ```bash
     clickhouse-local
     ```
