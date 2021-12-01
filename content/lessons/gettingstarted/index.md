@@ -36,7 +36,7 @@ There are several ways to install ClickHouse, including DEB and RPM packages. We
 
 {{< detail-tag "Show instructions" "1" >}}
 
-1. In this lesson, you download a pre-built binary of ClickHouse. Start by opening a terminal and creating a new folder for ClickHouse to run in:
+1. In this lesson, you will download a pre-built binary of ClickHouse. Start by opening a terminal and creating a new folder for ClickHouse to run in:
     ```bash
     mkdir clickhouse
     cd clickhouse
