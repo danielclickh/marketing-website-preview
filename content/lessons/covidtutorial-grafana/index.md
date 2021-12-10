@@ -118,7 +118,7 @@ You should see 118,603 rows:
 
 3. The following query shows the number of new cases by day in the United States, with the highest totals first:
     ```sql
-    SELECT new_cases, date 
+    SELECT new_cases 
     FROM covid19db.daily_totals 
     WHERE location = 'United States' 
     ORDER BY new_cases DESC
