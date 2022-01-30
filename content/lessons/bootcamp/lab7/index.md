@@ -5,9 +5,6 @@ date: 2022-01-25
 lastmod: 2022-01-25
 draft: false
 images: []
-menu:
-  docs:
-    parent: "labs"
 
 ---
 
