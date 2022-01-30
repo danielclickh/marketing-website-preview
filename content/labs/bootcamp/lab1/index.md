@@ -5,7 +5,9 @@ date: 2021-11-17T13:50:40-07:00
 lastmod: 2021-11-17T13:50:40-07:00
 draft: false
 images: []
-
+menu:
+  docs:
+    parent: "labs"
 ---
 
 ## 1. Start ClickHouse
