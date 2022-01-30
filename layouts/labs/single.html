@@ -2,17 +2,6 @@
 
 	<input type="hidden" id="lesson_name" value="{{ .Params.title | safeHTML }}" />
 	<input type="hidden" id="gated" value="{{ .Params.gated | safeHTML }}" />
-		<div id="gate_cta" class="gate_cta">
-				<h3>Welcome to Our House!</h3>
-				<p>Come on in and stay a while!! We would love to introduce ourselves and say "Hello".</p>
-				<form class="capture-email">
-					<input id="email" type="email" placeholder="Enter your work email..." required />
-					<button>Continue lesson</button>
-					<a href="#" class="gate-skip">No thanks</a>
-				</form>
-				<p class="cookies">You must have cookies enabled to view this lesson.</p>
-		</div>
-
 	 <div class="row flex-xl-nowrap">
 		<div class="col-lg-5 col-xl-4 docs-sidebar">
 			<nav class="docs-links" aria-label="Main navigation">
@@ -42,9 +31,6 @@
 			<h1>{{ .Title }}</h1>
 			<p class="lead">{{ .Params.lead | safeHTML }}</p>
 			<hr/>
-			<p><strong>Duration:</strong> {{ .Params.duration | safeHTML }}</p>
-			<p><strong>Audience:</strong> {{ .Params.audience | safeHTML }}</p>		
-			<p><strong>Issues/Questions:</strong> Contact us at <a href="mailto:learn@clickhouse.com">learn@clickhouse.com</a> </p>
 			{{ if ne .Params.toc false -}}
 			<nav class="d-xl-none" aria-label="Quaternary navigation">
 				{{ partial "sidebar/docs-toc.html" . }}
