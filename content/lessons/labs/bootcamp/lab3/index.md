@@ -13,6 +13,8 @@ menu:
 
 ## 1. Transforming Data During Insertion
 
+0. The first dataset you are going to ingest is some Hacker News comments saved in a tab-separated text file. Start by <a href="https://learnclickhouse.s3.us-east-2.amazonaws.com/datasets/comments.tsv">downloading the comments.tsv file</a> and save it in your **~/labs/bootcamp** folder.
+
 1. View the contents of the **comments.tsv** file. It consists of comments from the Hacker News website and has the following format:
 
 | id | type | author | timestamp | comment | children |
