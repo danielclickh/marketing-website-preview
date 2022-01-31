@@ -168,7 +168,7 @@ CREATE DATABASE bootcamp
 
 1. Right now, your table is stored in 10 parts (most likely). Run the following command, which forces a merge to occur:
     ```sql
-    OPTIMIZE TABLE my_table
+    OPTIMIZE TABLE bootcamp.my_table
     ```
 
 2. View the contents of the `data/bootcamp/my_table` folder. You should see a new directory that ends in a **1** instead of a **0**. The **1** represents a merge counter, and that is the folder where your merged data resides now.
