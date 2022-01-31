@@ -1,5 +1,5 @@
 baseurl = "https://clickhouse.com/learn/"
-canonifyURLs = true
+canonifyURLs = false
 disableAliases = true
 disableHugoGeneratorInject = true
 enableEmoji = true
