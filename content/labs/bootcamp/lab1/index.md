@@ -104,6 +104,8 @@ The **store** folder is where ClickHouse stores the data in your tables. Each ta
 
 ## 2. Define a MergeTree Table
 
+0. In this step, you will create a database and table. ClickHouse has a UI (called **Play**) that allows you to easily submit queries. Open the UI at <a href="http://localhost:8123/play" target="_blank">http://localhost:8123/play</a>
+
 1. Create a new database named **bootcamp**.
 
     {{< detail-tag >}}
