@@ -2,7 +2,7 @@
 
 [[main]]
   name = "Getting Started"
-  url = "https://clickhouse.com/learn/lessons/gettingstarted"
+  url = "/lessons/gettingstarted"
   weight = 10
 
 [[main]]
