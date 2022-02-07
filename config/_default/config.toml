@@ -1,6 +1,6 @@
 baseurl = "https://clickhouse.com/learn/"
 canonifyURLs = true
-relativeURLs = true
+relativeURLs = false
 
 
 disableAliases = true
