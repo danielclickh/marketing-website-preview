@@ -16,37 +16,37 @@
   name = "Getting Started"
   weight = 100
   identifier = "getting-started"
-  url = "/docs/en/getting-started/index/"
+  url = "../docs/en/getting-started/index/"
 
 [[docs]]
   name = "Inserting Data"
   weight = 130
   identifier = "insert-data"
-  url = "/docs/en/insert-data/"
+  url = "../docs/en/insert-data/"
 
 [[docs]]
   name = "Querying Data"
   weight = 140
   identifier = "query-data"
-  url = "/docs/en/query-data/"
+  url = "../docs/en/query-data/"
 
 [[docs]]
   name = "Integrations"
   weight = 200
   identifier = "integration"
-  url = "/docs/en/integration/"
+  url = "../docs/en/integration/"
 
 [[docs]]
   name = "User Guides"
   weight = 300
   identifier = "user-guide"
-  url = "/docs/en/user-guide/"
+  url = "../docs/en/user-guide/"
 
 [[docs]]
   name = "Reference Guides"
   weight = 400
   identifier = "reference"
-  url = "/docs/en/reference/"
+  url = "../docs/en/reference/"
 
 
 
@@ -54,4 +54,4 @@
   name = "About ClickHouse"
   weight = 500
   identifier = "about"
-  url = "/docs/whats-new/index"
+  url = "../docs/whats-new/index"
