@@ -1,3 +1,4 @@
+/*
 .btn-toggle::before {
     content: unset;
 }
@@ -6,6 +7,7 @@
     text-transform: unset;
     font-weight: 600;
 }
+*/
 
 .header-logo {
     margin-right: 1em;
@@ -29,10 +31,12 @@ hr {
     background-color: darkgrey;
 }
 
-/* This one I need to verify doesn't have a ripple effect on mobile devices, */
+/* This one I need to verify doesn't have a ripple effect on mobile devices, 
 .container-xxl {
     max-width: unset;
 }
+*/
+
 :root {
     --bs-body-font-family: hind siliguri,sans-serif;
 }
@@ -70,18 +74,21 @@ ol li  {
     background-color: aliceblue;
 }
 
+
 .docs-sidebar {
-    flex: unset;
-    width: 18%;
-    background-color: rgba(245,247,249,1.00);
+/*     flex: unset;  */
+    width: 100%;  
+
+    /*    background-color: rgba(245,247,249,1.00); */
     border-radius: 0;
-    padding-right: unset;
-    margin: 0;
+  /*  padding-right: unset; */
+/*    margin: 0;
     border-right-color: darkgray;
     border-right-style: solid;
     border-right-width: 1px;
-
+*/
 }
+
 
 .col-lg-5 {
     display: flex;
