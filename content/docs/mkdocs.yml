@@ -1,0 +1,591 @@
+site_name: 'ClickHouse Documentation'
+site_url: https://clickhouse.com/docs/
+docs_dir: !ENV [LANGUAGE, 'en']
+repo_url: https://github.com/ClickHouse/ClickHouse
+
+theme: 
+  name: material
+  favicon: https://clickhouse.com/favicon.ico
+  logo: https://clickhouse.com/images/logo.svg
+  icon:
+    alternate: fontawesome/solid/language  
+  palette:
+    primary: black
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - navigation.indexes
+  font:
+    text: Hind Siliguri
+    code: IBM Plex Mono
+
+# Extensions
+markdown_extensions:
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - pymdownx.superfences
+  - pymdownx.keys
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      base_path: _includes
+  - admonition
+  - meta
+  - def_list
+  - attr_list
+  - pymdownx.saneheaders
+  - tables
+  - footnotes
+  - markdown_include.include:
+      base_path: _includes
+
+plugins:
+  - macros
+  - search:
+      separator: '[\s\-\.]+'
+  - material-relative-language-selector:
+      root_domain: true
+      
+
+copyright: Copyright &copy; 2016-2022 ClickHouse, Inc.
+
+nav:
+    - Getting Started: 
+        - What is ClickHouse?: index.md
+        - Installing ClickHouse: getting-started/install.md
+        - Connecting to ClickHouse: 
+            - interfaces/index.md
+            - Command-Line Client: interfaces/cli.md
+            - Native TCP Interface: interfaces/tcp.md
+            - HTTP Interface: interfaces/http.md
+            - gRPC Interface: interfaces/grpc.md
+            - MySQL Interface: interfaces/mysql.md
+            - Input and Output Formats: interfaces/formats.md
+            - JDBC Driver: interfaces/jdbc.md
+            - ODBC Driver: interfaces/odbc.md
+            - C++ Client Library: interfaces/cpp.md
+            - Third-Party Interfaces:
+                - interfaces/third-party/index.md
+                - Client Libraries: interfaces/third-party/client-libraries.md
+                - Integrations: interfaces/third-party/integrations.md
+                - Visual Interfaces: interfaces/third-party/gui.md
+                - Proxies: interfaces/third-party/proxy.md
+        - Create a New Database: getting-started/create-a-database.md
+        - Create a New Table: getting-started/create-a-table.md
+        - Example Datasets:
+            - getting-started/example-datasets/index.md
+            - Github Events: getting-started/example-datasets/github-events.md
+            - Yandex.Metrica Data: getting-started/example-datasets/metrica.md
+            - Recipes Dataset: getting-started/example-datasets/recipes.md
+            - Star Schema Benchmark: getting-started/example-datasets/star-schema.md
+            - WikiStat: getting-started/example-datasets/wikistat.md
+            - Terabyte Click Logs from Criteo: getting-started/example-datasets/criteo.md
+            - AMPLab Big Data Benchmark: getting-started/example-datasets/amplab-benchmark.md
+            - Brown University Benchmark: getting-started/example-datasets/brown-benchmark.md
+            - New York Taxi Data: getting-started/example-datasets/nyc-taxi.md
+            - OpenSky: getting-started/example-datasets/opensky.md
+            - UK Property Price Paid: getting-started/example-datasets/uk-price-paid.md
+            - Cell Towers: getting-started/example-datasets/cell-towers.md
+            - Menus: getting-started/example-datasets/menus.md
+            - On Time: getting-started/example-datasets/ontime.md
+        - Tutorial: getting-started/tutorial.md
+        - Playground: getting-started/playground.md
+    - SQL Reference: 
+        - sql-reference/index.md
+        - Syntax: sql-reference/syntax.md
+        - Statements: 
+            - sql-reference/statements/index.md
+            - SELECT: 
+                - sql-reference/statements/select/index.md
+                - ALL: sql-reference/statements/select/all.md
+                - ARRAY JOIN: sql-reference/statements/select/array-join.md
+                - DISTINCT: sql-reference/statements/select/distinct.md
+                - EXCEPT: sql-reference/statements/select/except.md
+                - FORMAT: sql-reference/statements/select/format.md
+                - FROM: sql-reference/statements/select/from.md
+                - GROUP BY: sql-reference/statements/select/group-by.md
+                - HAVING: sql-reference/statements/select/having.md
+                - INTERSECT: sql-reference/statements/select/intersect.md
+                - INTO OUTFILE: sql-reference/statements/select/into-outfile.md
+                - JOIN: sql-reference/statements/select/join.md
+                - LIMIT BY: sql-reference/statements/select/limit-by.md
+                - LIMIT: sql-reference/statements/select/limit.md
+                - OFFSET: sql-reference/statements/select/offset.md
+                - ORDER BY: sql-reference/statements/select/order-by.md
+                - PREWHERE: sql-reference/statements/select/prewhere.md
+                - SAMPLE: sql-reference/statements/select/sample.md
+                - UNION: sql-reference/statements/select/union.md
+                - WHERE: sql-reference/statements/select/where.md
+                - WITH: sql-reference/statements/select/with.md
+            - INSERT INTO: sql-reference/statements/insert-into.md
+            - ATTACH: sql-reference/statements/attach.md
+            - CREATE: 
+                - sql-reference/statements/create/index.md
+                - DATABASE: sql-reference/statements/create/database.md
+                - TABLE: sql-reference/statements/create/table.md
+                - VIEW: sql-reference/statements/create/view.md
+                - DICTIONARY: sql-reference/statements/create/dictionary.md
+                - FUNCTION: sql-reference/statements/create/function.md
+                - USER: sql-reference/statements/create/user.md
+                - ROLE: sql-reference/statements/create/role.md
+                - ROW POLICY:  sql-reference/statements/create/row-policy.md
+                - QUOTA: sql-reference/statements/create/quota.md
+                - SETTINGS PROFILE: sql-reference/statements/create/settings-profile.md
+            - ALTER:
+                - ALTER: sql-reference/statements/alter/index.md
+                - COLUMN: sql-reference/statements/alter/column.md
+                - PARTITION: sql-reference/statements/alter/partition.md
+                - SETTING: sql-reference/statements/alter/setting.md
+                - DELETE: sql-reference/statements/alter/delete.md
+                - UPDATE: sql-reference/statements/alter/update.md
+                - ORDER BY: sql-reference/statements/alter/order-by.md
+                - SAMPLE BY: sql-reference/statements/alter/sample-by.md
+                - INDEX: sql-reference/statements/alter/index/index.md
+                - CONSTRAINT: sql-reference/statements/alter/constraint.md
+                - TTL: sql-reference/statements/alter/ttl.md
+                - USER: sql-reference/statements/alter/user.md
+                - QUOTA: sql-reference/statements/alter/quota.md
+                - ROLE: sql-reference/statements/alter/role.md
+                - ROW POLICY: sql-reference/statements/alter/row-policy.md
+                - SETTINGS PROFILE: sql-reference/statements/alter/settings-profile.md
+                - PROJECTION: sql-reference/statements/alter/projection.md
+                - VIEW: sql-reference/statements/alter/view.md
+                - COMMENT: sql-reference/statements/alter/comment.md
+            - SYSTEM: sql-reference/statements/system.md
+            - SHOW: sql-reference/statements/show.md
+            - GRANT: sql-reference/statements/grant.md
+            - EXPLAIN: sql-reference/statements/explain.md
+            - REVOKE: sql-reference/statements/revoke.md
+            - CHECK: sql-reference/statements/check-table.md
+            - DESCRIBE: sql-reference/statements/describe-table.md
+            - DETACH: sql-reference/statements/detach.md
+            - DROP: sql-reference/statements/drop.md
+            - EXISTS: sql-reference/statements/exists.md
+            - KILL: sql-reference/statements/kill.md
+            - OPTIMIZE: sql-reference/statements/optimize.md
+            - RENAME: sql-reference/statements/rename.md
+            - EXCHANGE: sql-reference/statements/exchange.md
+            - SET: sql-reference/statements/set.md
+            - SET ROLE: sql-reference/statements/set-role.md
+            - TRUNCATE: sql-reference/statements/truncate.md
+            - USE: sql-reference/statements/use.md
+            - WATCH: sql-reference/statements/watch.md
+        - Data Types:
+            - sql-reference/data-types/index.md
+            - AggregateFunction: sql-reference/data-types/aggregatefunction.md
+            - Array(T): sql-reference/data-types/array.md
+            - Boolean: sql-reference/data-types/boolean.md
+            - Date: sql-reference/data-types/date.md
+            - Date32: sql-reference/data-types/date32.md
+            - DateTime: sql-reference/data-types/datetime.md
+            - DateTime64: sql-reference/data-types/datetime64.md
+            - Decimal: sql-reference/data-types/decimal.md
+            - Enum: sql-reference/data-types/enum.md
+            - FixedString(N): sql-reference/data-types/fixedstring.md
+            - Float32, Float64: sql-reference/data-types/float.md
+            - Geo: sql-reference/data-types/geo.md
+            - UInt8, UInt16, UInt32, UInt64, UInt256, Int8, Int16, Int32, Int64, Int128, Int256: sql-reference/data-types/int-uint.md
+            - LowCardinality: sql-reference/data-types/lowcardinality.md
+            - Map: sql-reference/data-types/map.md
+            - Multiword Type Names: sql-reference/data-types/multiword-types.md
+            - Nullable: sql-reference/data-types/nullable.md
+            - SimpleAggregateFunction: sql-reference/data-types/simpleaggregatefunction.md
+            - String: sql-reference/data-types/string.md
+            - Tuple: sql-reference/data-types/tuple.md
+            - UUID: sql-reference/data-types/uuid.md
+            - Domains:
+                - sql-reference/data-types/domains/index.md
+                - IPv4: sql-reference/data-types/domains/ipv4.md
+                - IPv6: sql-reference/data-types/domains/ipv6.md
+            - Nested Data Structures:
+                - Nested(name1 Type1, Name2 Type2, ...): sql-reference/data-types/nested-data-structures/nested.md
+            - Special Data Types:
+                - sql-reference/data-types/special-data-types/index.md
+                - Expression: sql-reference/data-types/special-data-types/expression.md
+                - Interval: sql-reference/data-types/special-data-types/interval.md
+                - Nothing: sql-reference/data-types/special-data-types/nothing.md
+                - Set: sql-reference/data-types/special-data-types/set.md
+        - Functions:
+            - sql-reference/functions/index.md
+            - Arithmetic: sql-reference/functions/arithmetic-functions.md
+            - Arrays: sql-reference/functions/array-functions.md
+            - arrayJoin: sql-reference/functions/array-join.md
+            - Bit: sql-reference/functions/bit-functions.md
+            - Bitmap: sql-reference/functions/bitmap-functions.md
+            - Comparison: sql-reference/functions/comparison-functions.md
+            - Conditional: sql-reference/functions/conditional-functions.md
+            - Dates and Times: sql-reference/functions/date-time-functions.md
+            - Encoding: sql-reference/functions/encoding-functions.md
+            - Encryption: sql-reference/functions/encryption-functions.md
+            - External Dictionaries: sql-reference/functions/ext-dict-functions.md
+            - Files: sql-reference/functions/files.md
+            - Nullable: sql-reference/functions/functions-for-nulls.md
+            - Hash: sql-reference/functions/hash-functions.md
+            - IN Operator: sql-reference/functions/in-functions.md
+            - Introspection: sql-reference/functions/introspection.md
+            - IP Addresses: sql-reference/functions/ip-address-functions.md
+            - JSON: sql-reference/functions/json-functions.md
+            - Logical: sql-reference/functions/logical-functions.md
+            - Machine Learning: sql-reference/functions/machine-learning-functions.md
+            - Mathematical: sql-reference/functions/math-functions.md
+            - NLP: sql-reference/functions/nlp-functions.md
+            - Other: sql-reference/functions/other-functions.md
+            - Pseudo-Random Numbers: sql-reference/functions/random-functions.md
+            - Rounding: sql-reference/functions/rounding-functions.md
+            - Splitting and Merging Strings and Arrays: sql-reference/functions/splitting-merging-functions.md
+            - Strings: sql-reference/functions/string-functions.md
+            - For Replacing in Strings: sql-reference/functions/string-replace-functions.md
+            - For Searching in Strings: sql-reference/functions/string-search-functions.md
+            - Tuples: sql-reference/functions/tuple-functions.md
+            - Working with Maps: sql-reference/functions/tuple-map-functions.md
+            - Type Conversion: sql-reference/functions/type-conversion-functions.md
+            - URLs: sql-reference/functions/url-functions.md
+            - UUID: sql-reference/functions/uuid-functions.md
+            - Yandex.Metrica Dictionaries: sql-reference/functions/ym-dict-functions.md
+            - Time Window: sql-reference/functions/time-window-functions.md
+            - Geo:
+                - Geographical Coordinates: sql-reference/functions/geo/coordinates.md
+                - Geohash: sql-reference/functions/geo/geohash.md
+                - H3 Indexes: sql-reference/functions/geo/h3.md
+                - S2 Geometry: sql-reference/functions/geo/s2.md
+        - Operators:
+            - sql-reference/operators/index.md
+            - EXISTS: sql-reference/operators/exists.md
+            - IN Operators: sql-reference/operators/in.md
+        - Table Functions:
+            - sql-reference/table-functions/index.md
+            - cluster: sql-reference/table-functions/cluster.md
+            - dictionary: sql-reference/table-functions/dictionary.md
+            - file: sql-reference/table-functions/file.md
+            - generateRandom: sql-reference/table-functions/generate.md
+            - hdfs: sql-reference/table-functions/hdfs.md
+            - hdfsCluster: sql-reference/table-functions/hdfsCluster.md
+            - input: sql-reference/table-functions/input.md
+            - jdbc: sql-reference/table-functions/jdbc.md
+            - merge: sql-reference/table-functions/merge.md
+            - mysql: sql-reference/table-functions/mysql.md
+            - null: sql-reference/table-functions/null.md
+            - numbers: sql-reference/table-functions/numbers.md
+            - odbc: sql-reference/table-functions/odbc.md
+            - postgresql: sql-reference/table-functions/postgresql.md
+            - remote: sql-reference/table-functions/remote.md
+            - s3: sql-reference/table-functions/s3.md
+            - s3Cluster: sql-reference/table-functions/s3Cluster.md
+            - sqlite: sql-reference/table-functions/sqlite.md
+            - url: sql-reference/table-functions/url.md
+            - view: sql-reference/table-functions/view.md
+        - Aggregate Functions:
+            - sql-reference/aggregate-functions/index.md
+            - Reference:
+                - sql-reference/aggregate-functions/reference/index.md
+                - any: sql-reference/aggregate-functions/reference/any.md
+                - anyHeavy: sql-reference/aggregate-functions/reference/anyheavy.md
+                - anyLast: sql-reference/aggregate-functions/reference/anylast.md
+                - argMax: sql-reference/aggregate-functions/reference/argmax.md
+                - argMin: sql-reference/aggregate-functions/reference/argmin.md
+                - avg: sql-reference/aggregate-functions/reference/avg.md
+                - avgWeighted: sql-reference/aggregate-functions/reference/avgweighted.md
+                - categoricalInformationValue: sql-reference/aggregate-functions/reference/categoricalinformationvalue.md
+                - corr: sql-reference/aggregate-functions/reference/corr.md
+                - count: sql-reference/aggregate-functions/reference/count.md
+                - covarPop: sql-reference/aggregate-functions/reference/covarpop.md
+                - covarSamp: sql-reference/aggregate-functions/reference/covarsamp.md
+                - deltaSum: sql-reference/aggregate-functions/reference/deltasum.md
+                - deltaSumTimestamp: sql-reference/aggregate-functions/reference/deltasumtimestamp.md
+                - entropy: sql-reference/aggregate-functions/reference/entropy.md
+                - exponentialMovingAverage: sql-reference/aggregate-functions/reference/exponentialmovingaverage.md
+                - groupArray: sql-reference/aggregate-functions/reference/grouparray.md
+                - groupArrayInsertAt: sql-reference/aggregate-functions/reference/grouparrayinsertat.md
+                - groupArrayMovingAvg: sql-reference/aggregate-functions/reference/grouparraymovingavg.md
+                - groupArrayMovingSum: sql-reference/aggregate-functions/reference/grouparraymovingsum.md
+                - groupArraySample: sql-reference/aggregate-functions/reference/grouparraysample.md
+                - groupBitAnd: sql-reference/aggregate-functions/reference/groupbitand.md
+                - groupBitmap: sql-reference/aggregate-functions/reference/groupbitmap.md
+                - groupBitmapAnd: sql-reference/aggregate-functions/reference/groupbitmapand.md
+                - groupBitmapOr: sql-reference/aggregate-functions/reference/groupbitmapor.md
+                - groupBitmapXor: sql-reference/aggregate-functions/reference/groupbitmapxor.md
+                - groupBitOr: sql-reference/aggregate-functions/reference/groupbitor.md
+                - groupBitXor: sql-reference/aggregate-functions/reference/groupbitxor.md
+                - groupUniqArray: sql-reference/aggregate-functions/reference/groupuniqarray.md
+                - intervalLengthSum: sql-reference/aggregate-functions/reference/intervalLengthSum.md
+                - kurtPop: sql-reference/aggregate-functions/reference/kurtpop.md
+                - kurtSamp: sql-reference/aggregate-functions/reference/kurtsamp.md
+                - mannWhitneyUTest: sql-reference/aggregate-functions/reference/mannwhitneyutest.md
+                - max: sql-reference/aggregate-functions/reference/max.md
+                - maxMap: sql-reference/aggregate-functions/reference/maxmap.md
+                - median: sql-reference/aggregate-functions/reference/median.md
+                - min: sql-reference/aggregate-functions/reference/min.md
+                - minMap: sql-reference/aggregate-functions/reference/minmap.md
+                - quantile: sql-reference/aggregate-functions/reference/quantile.md
+                - quantileBFloat16: sql-reference/aggregate-functions/reference/quantilebfloat16.md
+                - quantileDeterministic: sql-reference/aggregate-functions/reference/quantiledeterministic.md
+                - quantileExact Functions: sql-reference/aggregate-functions/reference/quantileexact.md
+                - quantileExactWeighted: sql-reference/aggregate-functions/reference/quantileexactweighted.md
+                - quantiles Functions: sql-reference/aggregate-functions/reference/quantiles.md
+                - quantileTDigest: sql-reference/aggregate-functions/reference/quantiletdigest.md
+                - quantileTDigestWeighted: sql-reference/aggregate-functions/reference/quantiletdigestweighted.md
+                - quantileTiming: sql-reference/aggregate-functions/reference/quantiletiming.md
+                - quantileTimingWeighted: sql-reference/aggregate-functions/reference/quantiletimingweighted.md
+                - rankCorr: sql-reference/aggregate-functions/reference/rankCorr.md
+                - simpleLinearRegression: sql-reference/aggregate-functions/reference/simplelinearregression.md
+                - skewPop: sql-reference/aggregate-functions/reference/skewpop.md
+                - skewSamp: sql-reference/aggregate-functions/reference/skewsamp.md
+                - sparkbar: sql-reference/aggregate-functions/reference/sparkbar.md
+                - stddevPop: sql-reference/aggregate-functions/reference/stddevpop.md
+                - stddevSamp: sql-reference/aggregate-functions/reference/stddevsamp.md
+                - stochasticLinearRegression: sql-reference/aggregate-functions/reference/stochasticlinearregression.md
+                - stochasticLogisticRegression: sql-reference/aggregate-functions/reference/stochasticlogisticregression.md
+                - studentTTest: sql-reference/aggregate-functions/reference/studentttest.md
+                - sum: sql-reference/aggregate-functions/reference/sum.md
+                - sumCount: sql-reference/aggregate-functions/reference/sumcount.md
+                - sumKahan: sql-reference/aggregate-functions/reference/sumkahan.md
+                - sumMap: sql-reference/aggregate-functions/reference/summap.md
+                - sumWithOverflow: sql-reference/aggregate-functions/reference/sumwithoverflow.md
+                - topK: sql-reference/aggregate-functions/reference/topk.md
+                - topKWeighted: sql-reference/aggregate-functions/reference/topkweighted.md
+                - uniq: sql-reference/aggregate-functions/reference/uniq.md
+                - uniqCombined: sql-reference/aggregate-functions/reference/uniqcombined.md
+                - uniqCombined64: sql-reference/aggregate-functions/reference/uniqcombined64.md
+                - uniqExact: sql-reference/aggregate-functions/reference/uniqexact.md
+                - uniqHLL12: sql-reference/aggregate-functions/reference/uniqhll12.md
+                - uniqTheta: sql-reference/aggregate-functions/reference/uniqthetasketch.md
+                - varPop(x): sql-reference/aggregate-functions/reference/varpop.md
+                - varSamp: sql-reference/aggregate-functions/reference/varsamp.md
+                - welchTTest: sql-reference/aggregate-functions/reference/welchttest.md
+        - Window Functions: sql-reference/window-functions/index.md        
+        - Dictionaries:
+            - sql-reference/dictionaries/index.md
+            - Internal Dictionaries: sql-reference/dictionaries/internal-dicts.md
+            - External Dictionaries:
+                - sql-reference/dictionaries/external-dictionaries/external-dicts.md
+                - Configuring an External Dictionary: sql-reference/dictionaries/external-dictionaries/external-dicts-dict.md
+                - Storing Dictionaries in Memory: sql-reference/dictionaries/external-dictionaries/external-dicts-dict-layout.md
+                - Dictionary Updates: sql-reference/dictionaries/external-dictionaries/external-dicts-dict-lifetime.md
+                - Sources of External Dictionaries: sql-reference/dictionaries/external-dictionaries/external-dicts-dict-sources.md
+                - Dictionary Key and Fields: sql-reference/dictionaries/external-dictionaries/external-dicts-dict-structure.md
+                - Hierarchical dictionaries: sql-reference/dictionaries/external-dictionaries/external-dicts-dict-hierarchical.md
+                - Polygon Dictionaries With Grids: sql-reference/dictionaries/external-dictionaries/external-dicts-dict-polygon.md
+        - Combinators: sql-reference/aggregate-functions/combinators.md
+        - Parametric: sql-reference/aggregate-functions/parametric-functions.md
+        - ANSI Compatibility: sql-reference/ansi.md
+        - Distributed DDL: sql-reference/distributed-ddl.md
+    - Connecting a UI Tool:
+        - Metabase: https://clickhouse.com/learn/lessons/connect-metabase-to-clickhouse/" target="_blank
+        - Superset: https://clickhouse.com/learn/lessons/covidtutorial-superset/" target="_blank
+        - Grafana: https://clickhouse.com/learn/lessons/covidtutorial-grafana/" target="_blank
+        - Tableau: https://clickhouse.com/learn/lessons/connect-tableau-to-clickhouse" target="_blank
+    - Operations:
+        - operations/index.md
+        - System Requirements: operations/requirements.md
+        - Configuration Files: operations/configuration-files.md
+        - Defining Settings:
+            - operations/settings/index.md
+            - List of Common Settings: operations/settings/settings.md
+            - Settings Profiles: operations/settings/settings-profiles.md
+            - Permissions for Queries: operations/settings/permissions-for-queries.md
+            - Restrictions on Query Complexity: operations/settings/query-complexity.md
+            - Constraints on Settings: operations/settings/constraints-on-settings.md
+            - User Settings: operations/settings/settings-users.md
+            - MergeTree Tables Settings: operations/settings/merge-tree-settings.md
+        - Monitoring: operations/monitoring.md
+        - Secured Communication with Zookeeper: operations/ssl-zookeeper.md
+        - Data Backup: operations/backup.md
+        - Quotas: operations/quotas.md
+        - Server Configuration Parameters:
+            - operations/server-configuration-parameters/index.md
+            - Server Settings: operations/server-configuration-parameters/settings.md
+        - Testing Hardware: operations/performance-test.md
+        - Optimizing Performance: 
+            - operations/optimizing-performance/index.md
+            - Sampling Query Profiler: operations/optimizing-performance/sampling-query-profiler.md
+        - Troubleshooting: operations/troubleshooting.md
+        - Upgrading ClickHouse: operations/update.md
+        - Access Control and Account Management: operations/access-rights.md
+        - External User Authenticators and Directories:
+            - operations/external-authenticators/index.md
+            - Kerberos: operations/external-authenticators/kerberos.md
+            - LDAP: operations/external-authenticators/ldap.md
+        - Caches: operations/caches.md
+        - ClickHouse Keeper: operations/clickhouse-keeper.md
+        - OpenTelemetry Support: operations/opentelemetry.md
+        - External Disks for Storing Data: operations/storing-data.md
+        - Usage Recommendations: operations/tips.md
+        - Utilities:
+            - operations/utilities/index.md
+            - clickhouse-benchmark: operations/utilities/clickhouse-benchmark.md
+            - clickhouse-compressor: operations/utilities/clickhouse-compressor.md
+            - clickhouse-copier: operations/utilities/clickhouse-copier.md
+            - clickhouse-format: operations/utilities/clickhouse-format.md
+            - clickhouse-local: operations/utilities/clickhouse-local.md
+            - clickhouse-obfuscator: operations/utilities/clickhouse-obfuscator.md
+            - clickhouse-odbc-bridge: operations/utilities/odbc-bridge.md
+    - Reference Guide:
+        - Database Engines:
+            - engines/database-engines/index.md
+            - Atomic: engines/database-engines/atomic.md
+            - Lazy: engines/database-engines/lazy.md
+            - MaterializedMySQL: engines/database-engines/materialized-mysql.md
+            - MaterializedPostgreSQL: engines/database-engines/materialized-postgresql.md
+            - MySQL: engines/database-engines/mysql.md
+            - PostgreSQL: engines/database-engines/postgresql.md
+            - Replicated: engines/database-engines/replicated.md
+            - SQLite: engines/database-engines/sqlite.md
+        - Table Engines:
+            - engines/table-engines/index.md
+            - MergeTree Family:
+                - engines/table-engines/mergetree-family/index.md
+                - MergeTree: engines/table-engines/mergetree-family/mergetree.md
+                - ReplicatedMergeTree: engines/table-engines/mergetree-family/replication.md
+                - AggregatingMergeTree: engines/table-engines/mergetree-family/aggregatingmergetree.md
+                - CollapsingMergeTree: engines/table-engines/mergetree-family/collapsingmergetree.md
+                - Custom Partitioning Key: engines/table-engines/mergetree-family/custom-partitioning-key.md
+                - GraphiteMergeTree: engines/table-engines/mergetree-family/graphitemergetree.md
+                - ReplacingMergeTree: engines/table-engines/mergetree-family/replacingmergetree.md
+                - SummingMergeTree: engines/table-engines/mergetree-family/summingmergetree.md
+                - VersionedCollapsingMergeTree: engines/table-engines/mergetree-family/versionedcollapsingmergetree.md
+            - Log Family:
+                - engines/table-engines/log-family/index.md
+                - Log: engines/table-engines/log-family/log.md
+                - StripeLog: engines/table-engines/log-family/stripelog.md
+                - TinyLog: engines/table-engines/log-family/tinylog.md
+            - Integrations:
+                - engines/table-engines/integrations/index.md
+                - ExternalDistributed: engines/table-engines/integrations/ExternalDistributed.md
+                - EmbeddedRocksDB: engines/table-engines/integrations/embedded-rocksdb.md
+                - HDFS: engines/table-engines/integrations/hdfs.md
+                - JDBC: engines/table-engines/integrations/jdbc.md
+                - Kafka: engines/table-engines/integrations/kafka.md
+                - MaterializedPostgreSQL: engines/table-engines/integrations/materialized-postgresql.md
+                - MongoDB: engines/table-engines/integrations/mongodb.md
+                - MySQL: engines/table-engines/integrations/mysql.md
+                - ODBC: engines/table-engines/integrations/odbc.md
+                - PostgreSQL: engines/table-engines/integrations/postgresql.md
+                - RabbitMQ: engines/table-engines/integrations/rabbitmq.md
+                - S3: engines/table-engines/integrations/s3.md
+                - SQLite: engines/table-engines/integrations/sqlite.md
+            - Special:
+                - engines/table-engines/special/index.md
+                - Buffer: engines/table-engines/special/buffer.md
+                - Dictionary: engines/table-engines/special/dictionary.md
+                - Distributed: engines/table-engines/special/distributed.md
+                - External Data: engines/table-engines/special/external-data.md
+                - File: engines/table-engines/special/file.md
+                - GenerateRandom: engines/table-engines/special/generate.md
+                - Join: engines/table-engines/special/join.md
+                - MaterializedView: engines/table-engines/special/materializedview.md
+                - Memory: engines/table-engines/special/memory.md
+                - Merge: engines/table-engines/special/merge.md
+                - Null: engines/table-engines/special/null.md
+                - Set: engines/table-engines/special/set.md
+                - URL: engines/table-engines/special/url.md
+                - View: engines/table-engines/special/view.md
+        - System Tables: 
+            - operations/system-tables/index.md
+            - INFORMATION_SCHEMA: operations/system-tables/information_schema.md
+            - system.asynchronous_metric_log: operations/system-tables/asynchronous_metric_log.md
+            - system.asynchronous_metrics: operations/system-tables/asynchronous_metrics.md
+            - system.clusters: operations/system-tables/clusters.md
+            - system.columns: operations/system-tables/columns.md
+            - system.contributors: operations/system-tables/contributors.md
+            - system.crash_log: operations/system-tables/crash-log.md
+            - system.current_roles: operations/system-tables/current-roles.md
+            - system.data_skipping_indices: operations/system-tables/data_skipping_indices.md
+            - system.data_type_families: operations/system-tables/data_type_families.md
+            - system.databases: operations/system-tables/databases.md
+            - system.detached_parts: operations/system-tables/detached_parts.md
+            - system.dictionaries: operations/system-tables/dictionaries.md
+            - system.disks: operations/system-tables/disks.md
+            - system.distributed_ddl_queue: operations/system-tables/distributed_ddl_queue.md
+            - system.distribution_queue: operations/system-tables/distribution_queue.md
+            - system.enabled_roles: operations/system-tables/enabled-roles.md
+            - system.errors: operations/system-tables/errors.md
+            - system.events: operations/system-tables/events.md
+            - system.functions: operations/system-tables/functions.md
+            - system.grants: operations/system-tables/grants.md
+            - system.graphite_retentions: operations/system-tables/graphite_retentions.md
+            - system.licenses: operations/system-tables/licenses.md
+            - system.merge_tree_settings: operations/system-tables/merge_tree_settings.md
+            - system.merges: operations/system-tables/merges.md
+            - system.metric_log: operations/system-tables/metric_log.md
+            - system.metrics: operations/system-tables/metrics.md
+            - system.mutations: operations/system-tables/mutations.md
+            - system.numbers: operations/system-tables/numbers.md
+            - system.numbers_mt: operations/system-tables/numbers_mt.md
+            - system.one: operations/system-tables/one.md
+            - system.opentelemetry_span_log: operations/system-tables/opentelemetry_span_log.md
+            - system.part_log: operations/system-tables/part_log.md
+            - system.parts: operations/system-tables/parts.md
+            - system.parts_columns: operations/system-tables/parts_columns.md
+            - system.processes: operations/system-tables/processes.md
+            - system.query_log: operations/system-tables/query_log.md
+            - system.query_thread_log: operations/system-tables/query_thread_log.md
+            - system.query_views_log: operations/system-tables/query_views_log.md
+            - system.quota_limits: operations/system-tables/quota_limits.md
+            - system.quota_usage: operations/system-tables/quota_usage.md
+            - system.quotas: operations/system-tables/quotas.md
+            - system.quotas_usage: operations/system-tables/quotas_usage.md
+            - system.replicas: operations/system-tables/replicas.md
+            - system.replicated_fetches: operations/system-tables/replicated_fetches.md
+            - system.replication_queue: operations/system-tables/replication_queue.md
+            - system.role_grants: operations/system-tables/role-grants.md
+            - system.roles: operations/system-tables/roles.md
+            - system.row_policies: operations/system-tables/row_policies.md
+            - system.session_log: operations/system-tables/session_log.md
+            - system.settings: operations/system-tables/settings.md
+            - system.settings_profile_elements: operations/system-tables/settings_profile_elements.md
+            - system.settings_profiles: operations/system-tables/settings_profiles.md
+            - system.stack_trace: operations/system-tables/stack_trace.md
+            - system.storage_policies: operations/system-tables/storage_policies.md
+            - system.table_engines: operations/system-tables/table_engines.md
+            - system.tables: operations/system-tables/tables.md
+            - system.text_log: operations/system-tables/text_log.md
+            - system.time_zones: operations/system-tables/time_zones.md
+            - system.trace_log: operations/system-tables/trace_log.md
+            - system.users: operations/system-tables/users.md
+            - system.zookeeper: operations/system-tables/zookeeper.md
+            - system.zookeeper_log: operations/system-tables/zookeeper_log.md
+        - Guides:
+            - guides/index.md
+            - Applying CatBoost Models: guides/apply-catboost-model.md
+    - FAQ:
+        - faq/index.md
+        - General: faq/general/index.md
+        - Integration: faq/integration/index.md
+        - Operations: faq/operations/index.md
+        - Use Cases: faq/use-cases/index.md
+    - About ClickHouse:
+        - Changelog: 
+            - 2021: whats-new/changelog/index.md
+            - 2020: whats-new/changelog/2020.md
+            - 2019: whats-new/changelog/2019.md
+            - 2018: whats-new/changelog/2018.md
+            - 2017: whats-new/changelog/2017.md
+        - Security Changelog: whats-new/security-changelog.md
+        - Roadmap: whats-new/roadmap.md
+        - History: introduction/history.md
+        - Distinctive Features: introduction/distinctive-features.md
+        - Performance: introduction/performance.md
+        - Adopters: introduction/adopters.md
+        - Commercial: 
+            - commercial/index.md
+            - Cloud: commercial/cloud.md
+            - Support: commercial/support.md
+        - Contributing: 
+            - For Beginners: development/developer-instruction.md
+            - Architecture Overview: development/architecture.md
+            - Continuous Integration Checks: development/continuous-integration.md
+            - Build on Linux: development/build.md
+            - Build on Mac OS X: development/build-osx.md
+            - Build on Linux for Mac OS X: development/build-cross-osx.md
+            - Build on Linux for AARCH64 (ARM64): development/build-cross-arm.md
+            - Build on Linux for RISC-V 64: development/build-cross-riscv.md
+            - C++ Guide: development/style.md
+            - Testing: development/tests.md            
+            - Third-Party Libraries Used: development/contrib.md
+            - Source Code Browser: development/browse-code.md
+#            - CMake in ClickHouse: development/cmake-in-clickhouse.md
+            - How to add test queries to ClickHouse CI: development/adding_test_queries.md

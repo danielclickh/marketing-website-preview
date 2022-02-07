@@ -1,6 +1,8 @@
+
+
 [[main]]
   name = "Getting Started"
-  url = "lessons/gettingstarted"
+  url = "https://clickhouse.com/learn/lessons/gettingstarted"
   weight = 10
 
 [[main]]
@@ -10,9 +12,46 @@
 
 
 
+[[docs]]
+  name = "Getting Started"
+  weight = 100
+  identifier = "getting-started"
+  url = "/docs/en/getting-started/index/"
+
+[[docs]]
+  name = "Inserting Data"
+  weight = 130
+  identifier = "insert-data"
+  url = "/docs/en/insert-data/"
+
+[[docs]]
+  name = "Querying Data"
+  weight = 140
+  identifier = "query-data"
+  url = "/docs/en/query-data/"
+
+[[docs]]
+  name = "Integrations"
+  weight = 200
+  identifier = "integration"
+  url = "/docs/en/integration/"
+
+[[docs]]
+  name = "User Guides"
+  weight = 300
+  identifier = "user-guide"
+  url = "/docs/en/user-guide/"
+
+[[docs]]
+  name = "Reference Guides"
+  weight = 400
+  identifier = "reference"
+  url = "/docs/en/reference/"
 
 
 
-
-
-
+[[docs]]
+  name = "About ClickHouse"
+  weight = 500
+  identifier = "about"
+  url = "/docs/whats-new/index"
