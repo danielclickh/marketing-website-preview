@@ -1,5 +1,5 @@
 baseurl = "https://clickhouse.com/"
-canonifyURLs = false
+canonifyURLs = true
 relativeURLs = true
 
 
@@ -13,8 +13,8 @@ paginate = 7
 rssLimit = 10
 
 # Add custom CSS and JavaScript files here 
-custom_css = ["css/custom.css"]
-custom_js = ["js/custom.js"]
+# custom_css = ["css/custom.css"]
+# custom_js = ["js/custom.js"]
 
 # add redirects/headers
 [outputs]
