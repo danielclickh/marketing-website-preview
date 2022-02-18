@@ -155,11 +155,13 @@ function sendStatement(p_user,p_verb,p_id) {
     var lrs = getLRS();
     var statement = getStatement(p_user,p_verb,p_id);
 
-    analytics.track(p_verb, {
-        user: p_user,
-        id: p_id,
-        just: 'testing'
-    });
+    if(!!analytics) {
+        analytics.track(p_verb, {
+            user: p_user,
+            id: p_id,
+            just: 'testing'
+        });
+    }
 
     lrs.saveStatement(
         statement,
