@@ -256,8 +256,8 @@ This event has occurred for 210 artists.
 
 **What's next:** Check out the following lessons to continue your journey: 
 
-- <a href="../covidtutorial-grafana">Learn how to visualize your data using Grafana</a>
-- Check out <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
+- <a href="https://clickhouse.com/learn/lessonscovidtutorial-grafana/">Learn how to visualize your data using Grafana</a>
+- Check out <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10/">What's New in ClickHouse 21.10</a>
 - View all of our lessons on the <a href="https://clickhouse.com/learn/">Learn ClickHouse</a> home page
 
 

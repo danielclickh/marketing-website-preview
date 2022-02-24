@@ -157,9 +157,9 @@ function sendStatement(p_user,p_verb,p_id) {
 
     if(!!analytics) {
         analytics.track(p_verb, {
+            action: p_verb,
             user: p_user,
-            id: p_id,
-            just: 'testing'
+            id: p_id
         });
     }
 

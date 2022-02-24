@@ -258,7 +258,7 @@ Tableau is great, and we love that it connects so nicely to ClickHouse! If you a
 
 **What's next:** Check out the following lessons to continue your journey: 
 
-- The <a href="https://clickhouse.com/learn/lessons/logsvector">Ingest Nginx Logs into ClickHouse using Vector</a> lesson demonstrates how to stream a log file into ClickHouse
-- Check out <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
+- The <a href="https://clickhouse.com/learn/lessons/logsvector/">Ingest Nginx Logs into ClickHouse using Vector</a> lesson demonstrates how to stream a log file into ClickHouse
+- Check out <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10/">What's New in ClickHouse 21.10</a>
 - View all of our lessons on the <a href="https://clickhouse.com/learn/lessons/">Learn ClickHouse</a> home page
 

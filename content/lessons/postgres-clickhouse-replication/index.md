@@ -224,7 +224,7 @@ Let's see what happens when you add data to the Postgres table...
 
 **What's next:** Well done! Notice how easy replication is achieved - the **MaterializedPostgreSQL** is doing all the work for you. Check out the following lessons to continue your journey: 
 
-- The <a href="https://clickhouse.com/learn/lessons/logsvector">Ingest Nginx Logs into ClickHouse using Vector</a> lesson demonstrates how to stream a log file into ClickHouse
-- The <a href="https://clickhouse.com/learn/lessons/covidtutorial-grafana">Analyzing Covid-19 Data with Grafana and ClickHouse</a> lesson demonstrates how to connect Grafana to ClickHouse to analyze your data
-- Check out <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10">What's New in ClickHouse 21.10</a>
+- The <a href="https://clickhouse.com/learn/lessons/logsvector/">Ingest Nginx Logs into ClickHouse using Vector</a> lesson demonstrates how to stream a log file into ClickHouse
+- The <a href="https://clickhouse.com/learn/lessons/covidtutorial-grafana/">Analyzing Covid-19 Data with Grafana and ClickHouse</a> lesson demonstrates how to connect Grafana to ClickHouse to analyze your data
+- Check out <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.10/">What's New in ClickHouse 21.10</a>
 - View all of our lessons on the <a href="https://clickhouse.com/learn/">Learn ClickHouse</a> home page
