@@ -155,16 +155,7 @@ function sendStatement(p_user,p_verb,p_id) {
     var lrs = getLRS();
     var statement = getStatement(p_user,p_verb,p_id);
 
-    // This code was sending events to Segment, but we are not testing that anymore
-    // so commenting out for now
-/*    if(!!analytics) {
-        analytics.track(p_verb, {
-            action: p_verb,
-            user: p_user,
-            id: p_id
-        });
-    }
-*/
+
     lrs.saveStatement(
         statement,
         {
