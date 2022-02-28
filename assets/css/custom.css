@@ -74,6 +74,14 @@ ol li  {
     background-color: aliceblue;
 }
 
+.banner {
+    background-color: aliceblue;
+}
+
+.section {
+    padding-top: 1rem;
+}
+
 
 .docs-sidebar {
 /*     flex: unset;  */
