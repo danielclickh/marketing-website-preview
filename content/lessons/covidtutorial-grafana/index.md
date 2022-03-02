@@ -69,8 +69,6 @@ You are going to run a preconfigured ClickHouse server in a Docker container tha
         hostname: grafana
         ports:
           - "3000:3000"
-        environment:
-          - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=vertamedia-clickhouse-datasource
         restart: always
         deploy:
           resources:
@@ -151,7 +149,7 @@ Before Grafana can talk to ClickHouse, you need to install the appropriate Grafa
 
 4. At the prompt, install the plugin with the following command:
     ```bash
-    grafana-cli plugins install vertamedia-clickhouse-datasource
+    grafana-cli plugins install grafana-clickhouse-datasource
     ```
 
 5. Notice you need to restart Grafana before the plugin is available. Start by typing in **exit** to get out of the Docker container:
@@ -186,10 +184,11 @@ Now that you have the ClickHouse plugin installed, let's define a data source in
 
 2. Enter the following values:
 
-- **Name:** `my-clickhouse-ds`
-- **URL:** `http://clickhouse-covid19:8123`
-
-and make sure the **Default** option is selected.
+- **Name:** `ClickHouse`
+- **Server address:** `clickhouse-covid19`
+- **Server port:** `9000`
+- **Username:** `default`
+- **Password:** leave empty - there is no default password for ClickHouse
 
 3. Scroll down and click the **Save and test** button. You should see a **Data source is working** message:
 
@@ -212,11 +211,11 @@ You are now ready to build a dashboard!
 
 {{< detail-tag "Show instructions" "5" >}}
 
-1. From the menu, click on the **Dashboards** menu and select the **Manage** icon. Then select the **New Dashboard** button: 
+1. From the menu, click on the **Dashboards** menu and select the **Browse** menu item. Then select the **New Dashboard** button: 
 
 <img src="https://clickhouse.com/learn/lessons/covidtutorial-grafana/images/newdashboard.png" width="100%" alt="" />
 
-2. Dashboards are initially empty. Click the **Add an empty panel** button to create a new panel.
+2. Dashboards are initially empty. Click the **Add a new panel** button to create a new panel.
 
 3. Using the time picker, change the time interval to the last 2 years:
 
