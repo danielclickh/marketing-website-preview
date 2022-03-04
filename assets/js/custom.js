@@ -11,14 +11,14 @@
             });
         } catch(e) { }
         
-/*        if (!is_single_page) {
+       if (!is_single_page) {
             $('head').each(function(_, element) {
                $(element).append(
                    '<script async src="https://www.googletagmanager.com/gtag/js?id=G-KF1LLRTQ5Q"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag(\'js\', new Date());gtag(\'config\', \'G-KF1LLRTQ5Q\');</script>'
                );
             });
         }
-*/
+
     });
 
     var n = d.getElementsByTagName("script")[0],
