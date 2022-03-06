@@ -2,7 +2,7 @@
 
 [[main]]
   name = "Getting Started"
-  url = "/lessons/gettingstarted/"
+  url = "/gettingstarted/"
   weight = 10
 
 [[main]]
