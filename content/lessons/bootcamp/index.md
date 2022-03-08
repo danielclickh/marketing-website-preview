@@ -1,5 +1,5 @@
 ---
-title: "Bootcamp"
+title: "Getting Started: Using ClickHouse"
 description: "Install ClickHouse and get it up and running"
 lead: "Install ClickHouse and get it up and running"
 date: 
