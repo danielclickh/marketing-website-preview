@@ -16,6 +16,6 @@ jobs:
       - name: Trigger workflow in clickhouse-docs
         uses: mvasigh/dispatch-action@main
         with:
-          token: ${{ secrets.DEPLOY_DOCS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           repo: ClickHouse/clickhouse-docs
           event_type: docs_push
