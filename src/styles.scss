@@ -1,1 +1,97 @@
-/* You can add global styles to this file, and also import other style files */
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use 'node_modules/@angular/material' as mat;
+// Plus imports for other components in your app.
+@use 'node_modules/@angular/material/theming' as theming;
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+
+@include mat.core();
+@import '~@angular/material/theming';
+@import 'mixins';
+
+//noinspection CssInvalidFunction
+$custom-typography: mat-typography-config(
+  $font-family: 'Inter'
+);
+
+//noinspection SassScssResolvedByNameOnly
+@include angular-material-typography($custom-typography);
+
+$clickhouse-palette: (
+  50: #FFF9E0,
+  100: #FFF0B3,
+  200: #FFE680,
+  300: #FFDB4D,
+  400: #FFD426,
+  500: #FFB200,
+  600: #FFC700,
+  700: #FFC000,
+  800: #FFB900,
+  900: #DB8300,
+  A100: #FFFFFF,
+  A200: #FFFAF2,
+  A400: #FFE8BF,
+  A700: #FFDFA6,
+  contrast: (
+    50: theming.$dark-primary-text,
+    100: theming.$dark-primary-text,
+    200: theming.$dark-primary-text,
+    300: theming.$dark-primary-text,
+    400: theming.$dark-primary-text,
+    500: theming.$light-primary-text,
+    600: theming.$dark-primary-text,
+    700: theming.$light-primary-text,
+    800: theming.$light-primary-text,
+    900: theming.$light-primary-text,
+    A100: theming.$dark-primary-text,
+    A200: theming.$light-primary-text,
+    A400: theming.$light-primary-text,
+    A700: theming.$light-primary-text,
+  )
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$web-primary: mat.define-palette($clickhouse-palette);
+$web-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$web-warn: mat.define-palette(mat.$red-palette);
+
+$web-theme: mat.define-light-theme((
+  color: (
+    primary: $web-primary,
+    accent: $web-accent,
+    warn: $web-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($web-theme);
+
+
+html, body {
+  height: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: Inter, sans-serif;
+}
+
+.container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-right: 32px;
+  padding-left: 32px;
+}
