@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {HeaderService} from "./header.service";
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,10 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() {
+  constructor(private readonly headerService: HeaderService) {
+    headerService.getHeaderData().then(res => {
+      console.log('Result', res);
+    });
   }
 
   ngOnInit(): void {

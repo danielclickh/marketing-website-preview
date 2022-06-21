@@ -11,7 +11,8 @@ export class HomepageComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+
   }
 
 }
