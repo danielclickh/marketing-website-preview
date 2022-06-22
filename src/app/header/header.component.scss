@@ -1,0 +1,102 @@
+@import 'colors';
+@import 'mixins';
+
+.header {
+  height: 64px;
+  width: 100%;
+  background: $bg1;
+  color: $fg1;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.03);
+
+  .container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    .logo_container {
+      flex: 0 0 170px;
+      display: flex;
+      align-items: center;
+
+      .icon {
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 34px;
+        height: 34px;
+        margin-right: 12px;
+      }
+
+      .text {
+        font-family: "Hind Siliguri", sans-serif;
+        font-size: 24px;
+        line-height: 29px;
+        font-weight: 500;
+      }
+    }
+
+    .nav_container {
+      flex: 1 1 auto;
+      display: flex;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+
+      // Top nav item
+      & > * {
+        @extend .opacity_transition;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 21px;
+
+        &:not(:last-child) {
+          margin-right: 40px;
+        }
+      }
+
+      .top_level_item_with_submenu {
+        cursor: pointer;
+
+        .menu_arrow {
+          width: 10px;
+          height: 6px;
+          position: relative;
+          top: -1px;
+          margin-left: 8px;
+        }
+      }
+    }
+
+    .buttons_container {
+      flex: 0 0 140px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      .moon, .sun {
+        cursor: pointer;
+        @extend .opacity_transition;
+
+        &.active {
+          opacity: 0.7;
+          cursor: default;
+        }
+      }
+
+      .sun {
+        width: 20px;
+        height: 21px;
+        margin-right: 16px;
+      }
+
+      .moon {
+        width: 20px;
+        height: 18px;
+      }
+
+      .cta_button {
+        margin-left: 24px;
+      }
+    }
+  }
+
+}

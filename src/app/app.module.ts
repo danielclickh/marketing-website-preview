@@ -8,6 +8,11 @@ import {HeaderComponent} from './header/header.component';
 import {HomepageComponent} from './homepage/homepage.component';
 import {HomepageLayoutComponent} from './homepage-layout/homepage-layout.component';
 import {FooterComponent} from './footer/footer.component';
+import {StrapiCssImageDirective} from './common/directives/strapi-css-image.directive';
+import {ThemeService} from "./common/services/theme.service";
+import {MatIconModule} from "@angular/material/icon";
+import {HttpClientModule} from "@angular/common/http";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -15,15 +20,23 @@ import {FooterComponent} from './footer/footer.component';
     HeaderComponent,
     HomepageComponent,
     HomepageLayoutComponent,
-    FooterComponent
+    FooterComponent,
+    StrapiCssImageDirective
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatIconModule,
+    HttpClientModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
+  constructor(private readonly themeService: ThemeService) {
+    themeService.initializeIcons();
+  }
 }

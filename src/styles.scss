@@ -10,6 +10,7 @@
 @include mat.core();
 @import '~@angular/material/theming';
 @import 'mixins';
+@import 'colors';
 
 //noinspection CssInvalidFunction
 $custom-typography: mat-typography-config(
@@ -85,6 +86,15 @@ html, body {
 body {
   box-sizing: border-box;
   font-family: Inter, sans-serif;
+  background-color: $bg1;
+  color: $fg1;
+  transition: background 200ms, color 200ms;
+}
+
+a {
+  text-decoration: none;
+  color: $fg1;
+  @extend .opacity_transition;
 }
 
 .container {
@@ -94,4 +104,17 @@ body {
   box-sizing: border-box;
   padding-right: 32px;
   padding-left: 32px;
+}
+
+.button.mat-flat-button {
+  border-radius: 8px;
+  background: $primary;
+  color: $fg2;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 0;
+  height: 40px;
+  min-width: auto;
+  padding-left: 24px;
+  padding-right: 24px;
 }

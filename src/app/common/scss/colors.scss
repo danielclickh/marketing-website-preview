@@ -1,0 +1,18 @@
+.dark {
+  --bg1: #2F2C3A;
+  --fg1: #FFFFFF;
+  --fg2: #443F51;
+  --primary: #FFB200;
+}
+
+.light {
+  --bg1: #FFFFFF;
+  --fg1: #2F2C3A;
+  --fg2: #FFFFFF;
+  --primary: #FFB200;
+}
+
+$bg1: var(--bg1);
+$fg1: var(--fg1);
+$fg2: var(--fg2);
+$primary: var(--primary);

@@ -1,1 +1,38 @@
-header works
+<div *ngIf="headerDataPromise | async as headerData" class="header">
+  <div class="container">
+    <a class="logo_container" routerLink="/">
+      <div [strapiCssImage]="headerData.logoIconUrl" class="icon"></div>
+      <div class="text">ClickHouse</div>
+    </a>
+
+    <div class="nav_container">
+      <div *ngFor="let topMenuItem of headerData.menuItems; trackBy: trackById" class="top_level_menu_item_container">
+        <a *ngIf="!topMenuItem.menuItems.length"
+           [href]="topMenuItem.href"
+           [target]="topMenuItem.target"
+           class="top_level_item_without_submenu">
+          {{topMenuItem.name}}
+        </a>
+        <div
+          *ngIf="topMenuItem.menuItems.length"
+          class="top_level_item_with_submenu">
+          {{topMenuItem.name}}
+          <mat-icon class="menu_arrow" svgIcon="menu_arrow"></mat-icon>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="themeObs | async as theme" class="buttons_container">
+      <mat-icon (click)="switchTheme('light');" [ngClass]="{active: theme === 'light'}" class="sun"
+                svgIcon="sun"></mat-icon>
+      <mat-icon (click)="switchTheme('dark')" [ngClass]="{active: theme === 'dark'}" class="moon"
+                svgIcon="moon"></mat-icon>
+      <a *ngIf="headerData.ctaButton as ctaButton"
+         [href]=ctaButton.href
+         [target]="ctaButton.target"
+         class="cta_button">
+        <button class="button" mat-flat-button>{{ctaButton.text}}</button>
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,8 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {HeaderService} from "./header.service";
+import {CpTheme, ThemeService} from "../common/services/theme.service";
+import {trackById} from '../common/utils/AngularUtils';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-header',
@@ -7,15 +10,17 @@ import {HeaderService} from "./header.service";
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+  readonly trackById = trackById;
+  headerDataPromise = this.headerService.getHeaderData();
+  themeObs: Observable<CpTheme>;
 
-  constructor(private readonly headerService: HeaderService) {
-    headerService.getHeaderData().then(res => {
-      console.log('Result', res);
-    });
+  constructor(private readonly headerService: HeaderService,
+              private readonly themeService: ThemeService) {
+    this.themeObs = themeService.observeTheme();
   }
 
-  ngOnInit(): void {
+  switchTheme(theme: CpTheme) {
+    this.themeService.setTheme(theme, true);
   }
-
 }
