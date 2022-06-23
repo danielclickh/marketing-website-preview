@@ -1,4 +1,6 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {HomepageService} from "./homepage.service";
+import {ThemeService} from "../common/services/theme.service";
 
 @Component({
   selector: 'app-homepage',
@@ -6,13 +8,11 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
   styleUrls: ['./homepage.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomepageComponent implements OnInit {
+export class HomepageComponent {
+  homepageDataPromise = this.homepageService.getHomepageData();
+  themeObs = this.themeService.observeTheme();
 
-  constructor() {
+  constructor(private readonly homepageService: HomepageService,
+              private readonly themeService: ThemeService) {
   }
-
-  async ngOnInit() {
-
-  }
-
 }

@@ -1,0 +1,68 @@
+@import 'colors';
+
+.homepage {
+  .hero {
+    position: relative;
+    height: 580px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .background_overlay {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, $gradient1 0%, $gradient2 100%);
+    }
+
+    .background_icon {
+      position: absolute;
+      z-index: 2;
+      bottom: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      background-position: right bottom;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    & > .container {
+      position: relative;
+      z-index: 3;
+      max-width: 880px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .title {
+        font-weight: 700;
+        font-size: 68px;
+        line-height: 70px;
+        text-align: center;
+        color: $fg1;
+        text-shadow: 0 0 12px rgba(68, 63, 81, 0.1);
+      }
+
+      .description {
+        margin-top: 24px;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        color: $fg3;
+      }
+
+      .cta_button {
+        margin-top: 24px;
+
+        .button {
+          height: 47px;
+        }
+      }
+    }
+  }
+}

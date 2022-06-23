@@ -1,1 +1,19 @@
-Hello there
+<ng-container *ngIf="themeObs | async as theme">
+  <div *ngIf="homepageDataPromise | async as homepageData" class="homepage">
+    <div *ngIf="homepageData.hero as hero" class="hero">
+      <div class="background_overlay"></div>
+      <div [strapiCssImage]="theme === 'dark' ? hero.darkBackgroundIconUrl : hero.lightBackgroundIconUrl"
+           class="background_icon"></div>
+      <div class="container">
+        <div [innerHTML]="hero.title" class="title"></div>
+        <div class="description">{{hero.description}}</div>
+        <a *ngIf="hero.ctaButton as ctaButton"
+           [href]=ctaButton.href
+           [target]="ctaButton.target"
+           class="cta_button">
+          <button class="button" mat-flat-button>{{ctaButton.text}}</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</ng-container>

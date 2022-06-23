@@ -5,6 +5,9 @@
   --fg2: #443F51;
   --fg3: #B0B4BC;
   --primary: #FFB200;
+  --gradient1: #37334300;
+  --gradient2: #373343;
+
 }
 
 .light {
@@ -14,6 +17,8 @@
   --fg2: #FFFFFF;
   --fg3: #6D7386;
   --primary: #FFB200;
+  --gradient1: #f6f7fa00;
+  --gradient2: #F6F7FA;
 }
 
 $bg1: var(--bg1);
@@ -22,3 +27,5 @@ $fg1: var(--fg1);
 $fg2: var(--fg2);
 $fg3: var(--fg3);
 $primary: var(--primary);
+$gradient1: var(--gradient1);
+$gradient2: var(--gradient2);

@@ -1,11 +1,4 @@
-import {LinkTarget, StrapiEntry} from "../common/protocol/strapi.protocol";
-
-export interface HeaderCtaButton {
-  id: number;
-  href: string;
-  target: LinkTarget
-  text: string;
-}
+import {LinkTarget, StrapiButton, StrapiEntry} from "../common/protocol/strapi.protocol";
 
 export interface HeaderTopNavItem {
   id: number;
@@ -25,7 +18,7 @@ export interface HeaderTopNavSubItem {
 }
 
 export interface HeaderData extends StrapiEntry {
-  ctaButton: HeaderCtaButton;
+  ctaButton: StrapiButton;
   menuItems: Array<HeaderTopNavItem>;
   logoIconId: string;
 }

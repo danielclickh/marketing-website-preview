@@ -6,3 +6,10 @@ export interface StrapiEntry {
   publishedAt: string;
   updatedAt: string;
 }
+
+export interface StrapiButton {
+  id: number;
+  href: string;
+  target: LinkTarget
+  text: string;
+}
