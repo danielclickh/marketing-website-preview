@@ -32,10 +32,30 @@
         </div>
       </div>
 
-      <div class="container about_clickhouse">
-        hello there
-      </div>
+      <div *ngIf="homepageData.aboutClickhouse as aboutClickhouse" class="container about_clickhouse">
+        <div class="section_title">{{aboutClickhouse.title}}</div>
+        <div class="features">
+          <div *ngFor="let feature of aboutClickhouse.features; trackBy: trackById" class="feature">
+            <div class="icon_wrapper">
+              <mat-icon [svgIcon]="feature.iconSvgId" class="icon"></mat-icon>
+            </div>
+            <div class="data">
+              <div class="title">{{feature.title}}</div>
+              <div class="description">{{feature.description}}</div>
+            </div>
+          </div>
+        </div>
+        <a *ngIf="aboutClickhouse.allFeaturesButton as button"
+           [href]="button.href"
+           [target]="button.target"
+           class="see_all_features_button">
+          <button class="empty_button">
+            {{button.text}}
+            <mat-icon class="icon" svgIcon="right_arrow"></mat-icon>
+          </button>
+        </a>
 
+      </div>
     </div>
 
 

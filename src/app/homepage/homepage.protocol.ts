@@ -17,6 +17,20 @@ export interface HomepageHero {
   highlights: Array<HomepageHeroHighlight>;
 }
 
+export interface HomepageAboutClickhouse {
+  title: string;
+  features: Array<HomepageAboutClickhouseFeature>;
+  allFeaturesButton: StrapiButton;
+}
+
+export interface HomepageAboutClickhouseFeature {
+  id: string;
+  title: string;
+  description: string;
+  iconSvgId: string;
+}
+
 export interface HomepageData {
   hero: HomepageHero;
+  aboutClickhouse: HomepageAboutClickhouse;
 }
