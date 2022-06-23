@@ -67,75 +67,89 @@
     }
   }
 
-  .hero_highlights {
-    position: absolute;
-    bottom: -138px;
-    left: 0;
-    width: 100%;
+  .second_section {
+    position: relative;
     z-index: 4;
+    background: $bg3;
+    width: 100%;
+    display: inline-block;
+    padding-bottom: 70px;
 
-    & > .container {
-      display: flex;
-      justify-content: center;
+    .hero_highlights {
+      margin-top: -168px;
+      left: 0;
+      width: 100%;
+      z-index: 4;
 
-      .hero_highlight {
-        position: relative;
-        max-width: 300px;
-        width: 100%;
-        min-height: 298px;
-        background: $bg2;
-        border-radius: 8px;
-        padding: 24px;
-        box-sizing: border-box;
-        text-align: center;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.13);
+      & > .container {
+        display: flex;
+        justify-content: center;
 
-        &:not(:last-child) {
-          margin-right: 100px;
-        }
-
-        .title {
-          font-weight: 700;
-          font-size: 20px;
-          line-height: 24px;
-          text-align: center;
-        }
-
-        .separator {
-          height: 5px;
+        .hero_highlight {
+          position: relative;
+          max-width: 300px;
+          width: 100%;
+          min-height: 298px;
+          background: $bg2;
           border-radius: 8px;
-          background: $primary;
-          width: 79px;
-          margin: 16px auto 30px;
-        }
+          padding: 24px;
+          box-sizing: border-box;
+          text-align: center;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.13);
 
-        .description {
-          font-size: 14px;
-          line-height: 21px;
-          padding-bottom: 50px;
-        }
+          &:not(:last-child) {
+            margin-right: 100px;
+          }
 
-        .cta_button {
-          position: absolute;
-          bottom: 24px;
-          left: 50%;
-          margin-left: auto;
-          margin-right: auto;
-          transform: translateX(-50%);
-
-          .empty_button {
-            font-size: 16px;
+          .title {
+            font-weight: 700;
+            font-size: 20px;
             line-height: 24px;
+            text-align: center;
+          }
 
-            .icon {
-              width: 16px;
-              height: 10px;
-              margin-left: 5px;
-              line-height: 0;
+          .separator {
+            height: 5px;
+            border-radius: 8px;
+            background: $primary;
+            width: 79px;
+            margin: 16px auto 30px;
+          }
+
+          .description {
+            font-size: 14px;
+            line-height: 21px;
+            padding-bottom: 50px;
+          }
+
+          .cta_button {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            transform: translateX(-50%);
+
+            .empty_button {
+              font-size: 16px;
+              line-height: 24px;
+
+              .icon {
+                width: 16px;
+                height: 10px;
+                margin-left: 5px;
+                line-height: 0;
+              }
             }
           }
         }
       }
     }
+
+
+    .about_clickhouse {
+      margin-top: 72px;
+    }
   }
+
 }
