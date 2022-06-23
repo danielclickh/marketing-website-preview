@@ -94,7 +94,6 @@ body {
 a {
   text-decoration: none;
   color: $fg1;
-  @extend .opacity_transition;
 }
 
 .container {
@@ -106,10 +105,8 @@ a {
   padding-left: 32px;
 }
 
-.button.mat-flat-button {
+.button {
   border-radius: 8px;
-  background: $primary;
-  color: $fg2;
   font-weight: 600;
   font-size: 14px;
   line-height: 0;
@@ -117,6 +114,27 @@ a {
   min-width: auto;
   padding-left: 24px;
   padding-right: 24px;
+  cursor: pointer;
+  transition: all 150ms;
+  opacity: 1;
+  border: none;
+
+  &:hover {
+    text-decoration: underline;
+    transform: translateY(-3px);
+  }
+
+  &:active {
+    filter: brightness(90%);
+  }
+}
+
+.primary_button {
+  @extend .button;
+  background: $primary;
+  color: $fg2;
+
+
 }
 
 .mat-menu-panel {
