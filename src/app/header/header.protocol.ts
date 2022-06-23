@@ -21,11 +21,11 @@ export interface HeaderTopNavSubItem {
   href: string;
   target: LinkTarget;
   name: string;
-  iconUrl?: string;
+  iconId?: string;
 }
 
 export interface HeaderData extends StrapiEntry {
   ctaButton: HeaderCtaButton;
   menuItems: Array<HeaderTopNavItem>;
-  logoIconUrl: string;
+  logoIconId: string;
 }

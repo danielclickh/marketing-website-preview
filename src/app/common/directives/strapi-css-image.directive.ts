@@ -11,8 +11,8 @@ export class StrapiCssImageDirective implements AfterViewInit {
   constructor(private readonly elRef: ElementRef) {
   }
 
-  ngAfterViewInit() {
-    this.elRef.nativeElement.style.backgroundImage = `url('${environment.strapiBaseUrl}${this.strapiCssImage}')`;
+  async ngAfterViewInit() {
+    const url = environment.strapiBaseUrl + this.strapiCssImage;
+    this.elRef.nativeElement.style.backgroundImage = `url('${url}')`;
   }
-
 }

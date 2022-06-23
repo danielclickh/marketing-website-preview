@@ -3,6 +3,7 @@ import {HeaderService} from "./header.service";
 import {CpTheme, ThemeService} from "../common/services/theme.service";
 import {trackById} from '../common/utils/AngularUtils';
 import {Observable} from "rxjs";
+import {HeaderTopNavItem} from "./header.protocol";
 
 @Component({
   selector: 'app-header',
@@ -22,5 +23,9 @@ export class HeaderComponent {
 
   switchTheme(theme: CpTheme) {
     this.themeService.setTheme(theme, true);
+  }
+
+  isMenuWithIcons(topMenuItem: HeaderTopNavItem): boolean {
+    return topMenuItem.menuItems.every(item => !!item.iconId);
   }
 }

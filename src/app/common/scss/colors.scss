@@ -1,18 +1,24 @@
 .dark {
   --bg1: #2F2C3A;
+  --bg2: #373343;
   --fg1: #FFFFFF;
   --fg2: #443F51;
+  --fg3: #B0B4BC;
   --primary: #FFB200;
 }
 
 .light {
   --bg1: #FFFFFF;
+  --bg2: #F6F7FA;
   --fg1: #2F2C3A;
   --fg2: #FFFFFF;
+  --fg3: #6D7386;
   --primary: #FFB200;
 }
 
 $bg1: var(--bg1);
+$bg2: var(--bg2);
 $fg1: var(--fg1);
 $fg2: var(--fg2);
+$fg3: var(--fg3);
 $primary: var(--primary);

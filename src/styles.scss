@@ -98,7 +98,7 @@ a {
 }
 
 .container {
-  max-width: 1280px;
+  max-width: calc(1280px + (32px * 2));
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
@@ -117,4 +117,23 @@ a {
   min-width: auto;
   padding-left: 24px;
   padding-right: 24px;
+}
+
+.mat-menu-panel {
+  margin-top: 12px;
+  margin-left: -30px;
+  background: $bg1;
+  color: $fg1;
+  max-width: initial !important;
+
+  .mat-menu-content:not(:empty) {
+    padding-top: 0;
+    padding-bottom: 0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+}
+
+svg {
+  fill: currentColor;
 }

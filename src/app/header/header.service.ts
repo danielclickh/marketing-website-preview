@@ -24,13 +24,12 @@ export class HeaderService {
     const data: any = res.data;
     const attributes = data.attributes;
     const ctaButtonData = attributes.ctaButton;
-
     return {
       id: data.id,
       createdAt: attributes.createdAt,
       publishedAt: attributes.publishedAt,
       updatedAt: attributes.updatedAt,
-      logoIconUrl: attributes.logoIcon.data.attributes.url,
+      logoIconId: this.strapiService.registerSvgIcon(attributes.logoIcon)!,
       menuItems: attributes.menuItems.map((topMenuItem: any) => {
         return {
           id: topMenuItem.id,
@@ -44,7 +43,7 @@ export class HeaderService {
               href: subMenuItem.href,
               target: subMenuItem.target,
               name: subMenuItem.name,
-              iconUrl: subMenuItem.iconUrl
+              iconId: this.strapiService.registerSvgIcon(subMenuItem.icon)
             }
           })
         }

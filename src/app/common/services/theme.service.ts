@@ -78,4 +78,8 @@ export class ThemeService {
     }
     return localStorage.getItem('ch_theme') as CpTheme | undefined;
   }
+
+  registerIcon(hash: string, url: string) {
+    this.matIconRegistry.addSvgIcon(hash, this.domSanitizer.bypassSecurityTrustResourceUrl(url));
+  }
 }

@@ -1,7 +1,7 @@
 <div *ngIf="headerDataPromise | async as headerData" class="header">
   <div class="container">
     <a class="logo_container" routerLink="/">
-      <div [strapiCssImage]="headerData.logoIconUrl" class="icon"></div>
+      <mat-icon [svgIcon]="headerData.logoIconId" class="icon"></mat-icon>
       <div class="text">ClickHouse</div>
     </a>
 
@@ -15,10 +15,39 @@
         </a>
         <div
           *ngIf="topMenuItem.menuItems.length"
-          class="top_level_item_with_submenu">
+          [matMenuTriggerFor]="subMenu" class="top_level_item_with_submenu">
           {{topMenuItem.name}}
           <mat-icon class="menu_arrow" svgIcon="menu_arrow"></mat-icon>
+
         </div>
+        <mat-menu #subMenu="matMenu" xPosition="after">
+          <div *ngIf="isMenuWithIcons(topMenuItem)" class="sub_menu menu_with_icons">
+            <a *ngFor="let subMenuItem of topMenuItem.menuItems"
+               [href]="subMenuItem.href"
+               [target]="subMenuItem.target"
+               class="sub_menu_item menu_with_icon_item">
+              <div class="icon_wrapper">
+                <mat-icon [svgIcon]="subMenuItem.iconId!" class="icon"></mat-icon>
+              </div>
+
+              <div class="menu_data">
+                <div class="name">{{subMenuItem.name}}</div>
+                <div class="description">{{subMenuItem.description}}</div>
+              </div>
+            </a>
+
+          </div>
+
+          <div *ngIf="!isMenuWithIcons(topMenuItem)" class="sub_menu menu_with_item_list">
+            <a
+              *ngFor="let subMenuItem of topMenuItem.menuItems"
+              [href]="subMenuItem.href"
+              [target]="subMenuItem.target"
+              class="sub_menu_item">
+              {{subMenuItem.name}}
+            </a>
+          </div>
+        </mat-menu>
       </div>
     </div>
 

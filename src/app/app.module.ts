@@ -13,6 +13,7 @@ import {ThemeService} from "./common/services/theme.service";
 import {MatIconModule} from "@angular/material/icon";
 import {HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {MatButtonModule} from "@angular/material/button";
     MatIconModule,
     HttpClientModule,
     MatButtonModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
