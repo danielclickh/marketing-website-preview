@@ -96,6 +96,10 @@ a {
   color: $fg1;
 }
 
+button {
+  font-family: Inter, sans-serif;
+}
+
 .container {
   max-width: calc(1280px + (32px * 2));
   width: 100%;
@@ -109,7 +113,6 @@ a {
   border-radius: 8px;
   font-weight: 600;
   font-size: 14px;
-  line-height: 0;
   height: 40px;
   min-width: auto;
   padding-left: 24px;
@@ -133,8 +136,17 @@ a {
   @extend .button;
   background: $primary;
   color: $fg2;
+}
 
-
+.empty_button {
+  @extend .button;
+  font-weight: 500;
+  background: transparent;
+  color: $fg1;
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .mat-menu-panel {

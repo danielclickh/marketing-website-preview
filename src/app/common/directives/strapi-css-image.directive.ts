@@ -13,7 +13,6 @@ export class StrapiCssImageDirective implements OnChanges {
 
 
   ngOnChanges() {
-    console.log('Changes!!');
     const url = environment.strapiBaseUrl + this.strapiCssImage;
     this.elRef.nativeElement.style.backgroundImage = `url('${url}')`;
   }

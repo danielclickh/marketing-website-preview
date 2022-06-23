@@ -16,20 +16,22 @@ export class HomepageService {
         'hero.ctaButton',
         'hero.darkBackgroundIcon',
         'hero.lightBackgroundIcon',
+        'hero.highlights'
       ]
     });
 
     const data: any = res.data;
     const attributes = data.attributes;
     const hero = attributes.hero;
-    console.log(hero);
+    console.log('Hero: ', hero);
     return {
       hero: {
         darkBackgroundIconUrl: hero.darkBackgroundIcon.data.attributes.url,
         lightBackgroundIconUrl: hero.lightBackgroundIcon.data.attributes.url,
         title: hero.title,
         description: hero.description,
-        ctaButton: hero.ctaButton
+        ctaButton: hero.ctaButton,
+        highlights: hero.highlights
       }
     };
   }
