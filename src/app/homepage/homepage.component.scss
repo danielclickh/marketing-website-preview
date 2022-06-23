@@ -164,12 +164,13 @@
       .see_all_features_button {
         align-self: center;
         margin-top: 64px;
-        color: $fg4;
 
         .empty_button {
           font-weight: 500;
           font-size: 16px;
           line-height: 24px;
+          color: $fg4;
+
 
           .icon {
             margin-left: 16px;
@@ -201,6 +202,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            box-sizing: border-box;
+            padding-top: 4px;
 
             .icon {
               height: 38px;
