@@ -21,6 +21,11 @@ export class HomepageService {
         'aboutClickhouse.features',
         'aboutClickhouse.features.iconSvg',
         'aboutClickhouse.allFeaturesButton',
+        'customerStories',
+        'customerStories.logos',
+        'customerStories.logos.darkLogoPng',
+        'customerStories.logos.lightLogoPng',
+        'customerStories.ctaButton',
       ]
     });
 
@@ -28,6 +33,7 @@ export class HomepageService {
     const attributes = data.attributes;
     const hero = attributes.hero;
     const aboutClickhouse = attributes.aboutClickhouse;
+    const customerStories = attributes.customerStories;
     console.log('Homepage data: ', attributes);
     const result = {
       hero: {
@@ -47,6 +53,20 @@ export class HomepageService {
             title: feature.title,
             description: feature.description,
             iconSvgId: this.strapiService.registerSvgIcon(feature.iconSvg)
+          }
+        })
+      },
+      customerStories: {
+        title: customerStories.title,
+        description: customerStories.description,
+        ctaButton: customerStories.ctaButton,
+        logos: customerStories.logos.map((logo: any) => {
+          return {
+            id: logo.id,
+            darkLogoPngUrl: logo.darkLogoPng.data.attributes.url,
+            lightLogoPngUrl: logo.lightLogoPng.data.attributes.url,
+            href: logo.href,
+            target: logo.target
           }
         })
       }

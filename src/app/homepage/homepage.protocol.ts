@@ -23,6 +23,21 @@ export interface HomepageAboutClickhouse {
   allFeaturesButton: StrapiButton;
 }
 
+export interface HomepageCustomerStories {
+  title: string;
+  description: string;
+  logos: Array<HomepageCustomerStoryLogo>;
+  ctaButton: StrapiButton;
+}
+
+export interface HomepageCustomerStoryLogo {
+  id: string;
+  darkLogoPngUrl: string;
+  lightLogoPngUrl: string;
+  href: string;
+  target: LinkTarget;
+}
+
 export interface HomepageAboutClickhouseFeature {
   id: string;
   title: string;
@@ -33,4 +48,5 @@ export interface HomepageAboutClickhouseFeature {
 export interface HomepageData {
   hero: HomepageHero;
   aboutClickhouse: HomepageAboutClickhouse;
+  customerStories: HomepageCustomerStories;
 }

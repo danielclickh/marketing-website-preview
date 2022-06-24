@@ -54,10 +54,29 @@
             <mat-icon class="icon" svgIcon="right_arrow"></mat-icon>
           </button>
         </a>
-
       </div>
     </div>
 
-
+    <div *ngIf="homepageData.customerStories as customerStories" class="customer_stories_section">
+      <div class="container">
+        <div class="title">{{customerStories.title}}</div>
+        <div class="description">{{customerStories.description}}</div>
+        <div class="logos">
+          <a *ngFor="let logo of customerStories.logos; trackBy: trackById" [href]="logo.href" [target]="logo.target"
+             class="logo_wrapper">
+            <div [strapiCssImage]="theme === 'dark' ? logo.darkLogoPngUrl : logo.lightLogoPngUrl" class="logo"></div>
+          </a>
+        </div>
+        <a *ngIf="customerStories.ctaButton as button"
+           [href]="button.href"
+           [target]="button.target"
+           class="cta_button">
+          <button class="empty_button">
+            {{button.text}}
+            <mat-icon class="icon" svgIcon="right_arrow"></mat-icon>
+          </button>
+        </a>
+      </div>
+    </div>
   </div>
 </ng-container>

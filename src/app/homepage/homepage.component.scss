@@ -1,5 +1,22 @@
 @import 'colors';
 
+.section_button {
+  align-self: center;
+
+  .empty_button {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+
+    .icon {
+      margin-left: 16px;
+      width: 16px;
+      height: 10px;
+      line-height: 0;
+    }
+  }
+}
+
 .homepage {
   .hero {
     position: relative;
@@ -162,25 +179,12 @@
       }
 
       .see_all_features_button {
-        align-self: center;
+        @extend .section_button;
         margin-top: 64px;
 
         .empty_button {
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 24px;
           color: $fg4;
-
-
-          .icon {
-            margin-left: 16px;
-            width: 16px;
-            height: 10px;
-            line-height: 0;
-          }
         }
-
-
       }
 
       .features {
@@ -231,4 +235,68 @@
     }
   }
 
+  .customer_stories_section {
+    background: $bg2;
+    padding-top: 70px;
+    padding-bottom: 70px;
+
+
+    & > .container {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+
+      .title {
+        font-weight: 700;
+        font-size: 38px;
+        line-height: 46px;
+        margin-bottom: 16px;
+      }
+
+      .description {
+        color: $fg3;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 42px;
+      }
+
+      .logos {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 64px;
+
+        .logo_wrapper {
+          background: $bg1;
+          width: 200px;
+          height: 90px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 16px;
+          transition: box-shadow 300ms;
+
+          &:hover {
+            box-shadow: 0 0 #0000, 0 0 #0000, 0 20px 25px -5px rgba(0, 0, 0, .1), 0 8px 10px -6px rgba(0, 0, 0, .1);
+          }
+
+          &:not(:last-child) {
+            margin-right: 30px;
+          }
+
+          .logo {
+            width: 136px;
+            height: 40px;
+            background-position: center center;
+            background-size: contain;
+            background-repeat: no-repeat;
+          }
+        }
+      }
+
+      .cta_button {
+        @extend .section_button;
+      }
+    }
+  }
 }
