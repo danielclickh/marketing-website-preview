@@ -8,6 +8,8 @@
   --fg4: #FFFFFF;
   --fg5: #B0B4BC;
   --primary: #FFB200;
+  --warningBg: #FFEFCA;
+  --warningFg: #C78F0F;
   --gradient1: #37334300;
   --gradient2: #373343;
 
@@ -23,6 +25,8 @@
   --fg4: #FFFFFF;
   --fg5: #F6F7FA;
   --primary: #FFB200;
+  --warningBg: #FFEFCA;
+  --warningFg: #C78F0F;
   --gradient1: #f6f7fa00;
   --gradient2: #F6F7FA;
 }
@@ -36,5 +40,7 @@ $fg3: var(--fg3);
 $fg4: var(--fg4);
 $fg5: var(--fg5);
 $primary: var(--primary);
+$warningBg: var(--warningBg);
+$warningFg: var(--warningFg);
 $gradient1: var(--gradient1);
 $gradient2: var(--gradient2);

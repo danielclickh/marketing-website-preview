@@ -22,6 +22,7 @@ export class ThemeService {
     {name: 'moon', svgRelativePath: 'moon.svg'},
     {name: 'sun', svgRelativePath: 'sun.svg'},
     {name: 'right_arrow', svgRelativePath: 'right_arrow.svg'},
+    {name: 'check_icon', svgRelativePath: 'check_icon.svg'},
   ];
 
   constructor(private matIconRegistry: MatIconRegistry,

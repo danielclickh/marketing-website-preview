@@ -23,6 +23,23 @@ export interface HomepageAboutClickhouse {
   allFeaturesButton: StrapiButton;
 }
 
+export interface HomepageClickhouseCloud {
+  pretitle: string;
+  title: string;
+  description: string;
+  items: Array<HomepageClickhouseCloudItem>;
+  primaryButton: StrapiButton;
+  secondaryButton: StrapiButton;
+}
+
+export interface HomepageClickhouseCloudItem {
+  id: string;
+  title: string;
+  description: string;
+  bullets: Array<string>;
+  screenshotPngUrl: string;
+}
+
 export interface HomepageCustomerStories {
   title: string;
   description: string;
@@ -49,4 +66,5 @@ export interface HomepageData {
   hero: HomepageHero;
   aboutClickhouse: HomepageAboutClickhouse;
   customerStories: HomepageCustomerStories;
+  clickhouseCloud: HomepageClickhouseCloud;
 }

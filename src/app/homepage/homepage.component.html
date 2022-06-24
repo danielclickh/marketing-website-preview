@@ -78,5 +78,51 @@
         </a>
       </div>
     </div>
+
+    <div *ngIf="homepageData.clickhouseCloud as clickhouseCloud" class="clickhouse_cloud_section">
+      <div class="container">
+        <div class="section_metadata">
+          <div class="pretitle">{{clickhouseCloud.pretitle}}</div>
+          <div class="title">{{clickhouseCloud.title}}</div>
+          <div class="description">{{clickhouseCloud.description}}</div>
+        </div>
+        <div class="items">
+          <div *ngFor="let item of clickhouseCloud.items; trackBy: trackById" class="item">
+            <div class="metadata">
+              <div class="title">{{item.title}}</div>
+              <div class="description">{{item.description}}</div>
+              <div *ngFor="let bullet of item.bullets" class="bullets">
+                <div class="bullet">
+                  <mat-icon class="icon" svgIcon="check_icon"></mat-icon>
+                  {{bullet}}</div>
+              </div>
+            </div>
+            <div [strapiCssImage]="item.screenshotPngUrl" class="screenshot"></div>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <a *ngIf="clickhouseCloud.primaryButton as button"
+             [href]="button.href"
+             [target]="button.target"
+             class="primary_button_wrapper button_wrapper">
+            <button class="primary_button">
+              {{button.text}}
+            </button>
+          </a>
+
+          <a *ngIf="clickhouseCloud.secondaryButton as button"
+             [href]="button.href"
+             [target]="button.target"
+             class="secondary_button_wrapper button_wrapper">
+            <button class="primary_button">
+              {{button.text}}
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
+
+
 </ng-container>
