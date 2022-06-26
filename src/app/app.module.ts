@@ -14,6 +14,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
 import {MatMenuModule} from "@angular/material/menu";
+import {GettingStartedComponent} from './common/sections/getting-started/getting-started.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import {MatMenuModule} from "@angular/material/menu";
     HomepageComponent,
     HomepageLayoutComponent,
     FooterComponent,
-    StrapiCssImageDirective
+    StrapiCssImageDirective,
+    GettingStartedComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
@@ -32,6 +35,7 @@ import {MatMenuModule} from "@angular/material/menu";
     HttpClientModule,
     MatButtonModule,
     MatMenuModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

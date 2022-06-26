@@ -30,9 +30,11 @@
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4",
-    "strapi-sdk-js": "^2.2.0"
+    "strapi-sdk-js": "^2.2.0",
+    "marked": "^4.0.17"
   },
   "devDependencies": {
+    "@types/marked": "^4.0.3",
     "@angular-devkit/build-angular": "~13.3.6",
     "@angular/cli": "~13.3.6",
     "@angular/compiler-cli": "~13.3.0",

@@ -138,6 +138,13 @@ button {
   color: $fg2;
 }
 
+.stroked_button {
+  @extend .button;
+  background: transparent;
+  border: 1px solid $primary;
+  color: $fg2;
+}
+
 .empty_button {
   @extend .button;
   font-weight: 500;

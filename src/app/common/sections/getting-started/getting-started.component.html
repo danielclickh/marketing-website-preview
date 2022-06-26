@@ -1,0 +1,37 @@
+<div *ngIf="gettingStartedDataPromise | async as gettingStarted" class="getting_started dark">
+  <div class="container">
+    <div class="section_metadata">
+      <div class="pretitle">{{gettingStarted.pretitle}}</div>
+      <div class="title">{{gettingStarted.title}}</div>
+      <div class="description">{{gettingStarted.description}}</div>
+    </div>
+    <div class="buttons">
+      <a *ngIf="gettingStarted.quickStartButton as button"
+         [href]="button.href"
+         [target]="button.target"
+         class="stroked_button_wrapper button_wrapper">
+        <button class="stroked_button">
+          {{button.text}}
+        </button>
+      </a>
+      <a *ngIf="gettingStarted.cloudButton as button"
+         [href]="button.href"
+         [target]="button.target"
+         class="button_wrapper">
+        <button class="primary_button">
+          {{button.text}}
+        </button>
+      </a>
+    </div>
+
+    <mat-tab-group (selectedTabChange)="undefined"
+                   animationDuration="0ms"
+                   class="platforms">
+      <mat-tab *ngFor="let platform of gettingStarted.platforms" [label]="platform.name"
+               class="instructions_wrapper">
+        <div class="instructions">{{platform.instructions}}</div>
+      </mat-tab>
+    </mat-tab-group>
+    <div [innerHTML]="gettingStarted.bottomText" class="bottom_text"></div>
+  </div>
+</div>
