@@ -41,18 +41,49 @@
     justify-content: center;
 
     .button_wrapper {
-      &:not(:last-child) {
-        margin-right: 24px;
-      }
-
       button {
         width: 290px;
       }
     }
 
-    .stroked_button_wrapper {
-      button {
-        color: $fg1;
+    .stroked_button_wrapper_with_chevron {
+      position: relative;
+      margin-right: 24px;
+
+      .chupchik1 {
+        width: 0;
+        height: 0;
+        border-left: 26px solid transparent;
+        border-right: 26px solid transparent;
+        border-bottom: 21px solid $bg5;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -50px;
+        z-index: 3;
+      }
+
+      .chupchik2 {
+        width: 0;
+        height: 0;
+        border-left: 25px solid transparent;
+        border-right: 25px solid transparent;
+        border-bottom: 20px solid $bg4;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -50px;
+        z-index: 3;
+      }
+
+      .stroked_button_wrapper {
+        position: relative;
+
+        button {
+          color: $fg1;
+        }
+
+
       }
     }
   }
@@ -66,6 +97,11 @@
     margin-bottom: 24px;
 
     ::ng-deep {
+
+      .mat-tab-header-pagination-chevron {
+        border-color: $fg1;
+      }
+
       .mat-tab-labels {
         justify-content: flex-start;
         padding: 0 37px;
@@ -109,6 +145,8 @@
     line-height: 21px;
 
     ::ng-deep {
+      color: $fg1;
+
       a {
         color: $primary;
 

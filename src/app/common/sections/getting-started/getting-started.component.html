@@ -6,14 +6,19 @@
       <div class="description">{{gettingStarted.description}}</div>
     </div>
     <div class="buttons">
-      <a *ngIf="gettingStarted.quickStartButton as button"
-         [href]="button.href"
-         [target]="button.target"
-         class="stroked_button_wrapper button_wrapper">
-        <button class="stroked_button">
-          {{button.text}}
-        </button>
-      </a>
+      <div class="stroked_button_wrapper_with_chevron">
+        <div class="chupchik1"></div>
+        <div class="chupchik2"></div>
+        <a *ngIf="gettingStarted.quickStartButton as button"
+           [href]="button.href"
+           [target]="button.target"
+           class="stroked_button_wrapper button_wrapper">
+
+          <button class="stroked_button">
+            {{button.text}}
+          </button>
+        </a>
+      </div>
       <a *ngIf="gettingStarted.cloudButton as button"
          [href]="button.href"
          [target]="button.target"
