@@ -423,4 +423,83 @@
       }
     }
   }
+
+  .clickhouse_testimonials_section {
+    background: $bg2;
+    padding: 70px 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .section_metadata {
+      max-width: 865px;
+      margin: 0 auto;
+      width: 100%;
+      text-align: center;
+
+      .pretitle {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+        color: $primary;
+        margin-bottom: 12px;
+      }
+
+      .title {
+        font-weight: 700;
+        font-size: 38px;
+        line-height: 46px;
+        margin-bottom: 16px;
+        color: $fg1;
+      }
+
+      .description {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        color: $fg3;
+        margin-bottom: 24px;
+      }
+
+      .icon {
+        width: 146px;
+        height: 78px;
+        line-height: 0;
+        margin-bottom: 38px;
+      }
+    }
+
+    .testimonials {
+      .testimonial {
+        margin-bottom: 24px;
+
+        .title {
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 27px;
+          color: $fg1;
+          margin-bottom: 1px;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .author {
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+          color: $fg3;
+        }
+      }
+    }
+
+    .bottom_icon {
+      width: 24px;
+      height: 23px;
+      color: $primary;
+      margin-top: 3px;
+    }
+  }
 }

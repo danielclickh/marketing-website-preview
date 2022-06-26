@@ -32,6 +32,23 @@ export interface HomepageClickhouseCloud {
   secondaryButton: StrapiButton;
 }
 
+export interface HomepageTestimonials {
+  pretitle: string;
+  title: string;
+  description: string;
+  testimonialsIconSvgId: string;
+  bottomIconSvgId: string;
+  items: Array<HomepageTestimonialItem>;
+}
+
+export interface HomepageTestimonialItem {
+  id: string;
+  title: string;
+  author: string;
+  href: string;
+  target: LinkTarget;
+}
+
 export interface HomepageClickhouseCloudItem {
   id: string;
   title: string;
@@ -67,4 +84,5 @@ export interface HomepageData {
   aboutClickhouse: HomepageAboutClickhouse;
   customerStories: HomepageCustomerStories;
   clickhouseCloud: HomepageClickhouseCloud;
+  testimonials: HomepageTestimonials;
 }

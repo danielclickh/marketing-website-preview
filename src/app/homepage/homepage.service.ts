@@ -32,6 +32,10 @@ export class HomepageService {
         'clickhouseCloudItems',
         'clickhouseCloudItems.bullets',
         'clickhouseCloudItems.screenshotPng',
+        'testimonials',
+        'testimonials.testimonialsIconSvg',
+        'testimonials.bottomIconSvg',
+        'testimonials.testimonialItems',
       ]
     });
 
@@ -42,6 +46,7 @@ export class HomepageService {
     const customerStories = attributes.customerStories;
     const clickhouseCloud = attributes.clickhouseCloud;
     const clickhouseCloudItems = attributes.clickhouseCloudItems;
+    const testimonials = attributes.testimonials;
     console.log('Homepage data: ', attributes);
     const result = {
       hero: {
@@ -91,6 +96,23 @@ export class HomepageService {
             description: item.description,
             bullets: item.bullets.map((bullet: any) => bullet.text),
             screenshotPngUrl: item.screenshotPng.data.attributes.url
+          }
+        })
+      },
+
+      testimonials: {
+        pretitle: testimonials.pretitle,
+        title: testimonials.title,
+        description: testimonials.description,
+        testimonialsIconSvgId: this.strapiService.registerSvgIcon(testimonials.testimonialsIconSvg)!,
+        bottomIconSvgId: this.strapiService.registerSvgIcon(testimonials.bottomIconSvg)!,
+        items: testimonials.testimonialItems.map((item: any) => {
+          return {
+            id: item.id,
+            title: item.title,
+            author: item.author,
+            href: item.href,
+            target: item.target
           }
         })
       }

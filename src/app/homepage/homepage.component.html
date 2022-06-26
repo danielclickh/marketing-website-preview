@@ -122,6 +122,24 @@
         </div>
       </div>
     </div>
+
+    <div *ngIf="homepageData.testimonials as testimonials" class="clickhouse_testimonials_section">
+      <div class="container">
+        <div class="section_metadata">
+          <div class="pretitle">{{testimonials.pretitle}}</div>
+          <div class="title">{{testimonials.title}}</div>
+          <div class="description">{{testimonials.description}}</div>
+          <mat-icon [svgIcon]="testimonials.testimonialsIconSvgId" class="icon"></mat-icon>
+        </div>
+        <div class="testimonials">
+          <div *ngFor="let testimonial of testimonials.items; trackBy: trackById" class="testimonial">
+            <a [href]="testimonial.href" [target]="testimonial.target" class="title">{{testimonial.title}}</a>
+            <div class="author">{{testimonial.author}}</div>
+          </div>
+        </div>
+        <mat-icon [svgIcon]="testimonials.bottomIconSvgId" class="bottom_icon"></mat-icon>
+      </div>
+    </div>
   </div>
 
 
