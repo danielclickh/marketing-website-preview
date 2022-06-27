@@ -1,5 +1,6 @@
 .dark {
   color: var(--fg1);
+  --headerBg: 47, 44, 58;
   --bg1: #2F2C3A;
   --bg2: #373343;
   --bg3: #443F51;
@@ -20,6 +21,7 @@
 
 .light {
   color: var(--fg1);
+  --headerBg: 255, 255, 255;
   --bg1: #FFFFFF;
   --bg2: #F6F7FA;
   --bg3: #443F51;
@@ -37,6 +39,7 @@
   --gradient2: #F6F7FA;
 }
 
+$headerBg: var(--headerBg);
 $bg1: var(--bg1);
 $bg2: var(--bg2);
 $bg3: var(--bg3);
