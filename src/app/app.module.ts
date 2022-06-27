@@ -16,6 +16,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatMenuModule} from "@angular/material/menu";
 import {GettingStartedComponent} from './common/sections/getting-started/getting-started.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import {FormsModule} from "@angular/forms";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import {MatTabsModule} from "@angular/material/tabs";
     MatButtonModule,
     MatMenuModule,
     MatTabsModule,
+    FormsModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

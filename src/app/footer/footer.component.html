@@ -27,8 +27,9 @@
         <div class="title">{{newsletterForm.title}}</div>
         <div class="description">{{newsletterForm.description}}</div>
         <div class="input_and_button_container">
-          <input [placeholder]="newsletterForm.inputLabel" class="email_input" type="email"/>
-          <button class="primary_button">{{newsletterForm.buttonLabel}}</button>
+          <input [(ngModel)]="newsletterEmail" [placeholder]="newsletterForm.inputLabel" class="email_input seed_input"
+                 type="email"/>
+          <button (click)="submitNewsletterForm()" class="primary_button">{{newsletterForm.buttonLabel}}</button>
         </div>
       </div>
       <div *ngIf="footerData.socialLinks as socialLinks" class="social_links_container">
@@ -41,7 +42,6 @@
             <div [strapiCssImage]="socialLink.iconSvgUrl" class="icon"></div>
           </a>
         </div>
-
       </div>
     </div>
   </div>

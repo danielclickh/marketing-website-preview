@@ -182,3 +182,33 @@ svg {
   background-clip: text;
   color: transparent;
 }
+
+.seed_input {
+  position: relative;
+  z-index: 1;
+  padding: 0 10px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  min-height: 41px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: 1px solid #E6E6E6;
+  transition-property: background-image, background-size, background-color;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  transition-duration: 300ms;
+  background-color: #FCFCFC;
+  background-size: 0, 100%;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(0deg, #ffb200, #ffb200 2px, transparent 0, transparent);
+
+  &:focus, &.active {
+    outline: none;
+    background-size: 100%, 100%;
+    background-color: #FFFFFF;
+  }
+}
+
+.mat-simple-snackbar-action {
+  color: $primary;
+}
