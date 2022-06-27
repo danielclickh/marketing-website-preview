@@ -1,4 +1,6 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ThemeService} from "../common/services/theme.service";
+import {FooterService} from "./footer.service";
 
 @Component({
   selector: 'app-footer',
@@ -6,12 +8,10 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
   styleUrls: ['./footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
+  footerDataPromise = this.footerService.getFooterData();
 
-  constructor() {
+  constructor(private readonly footerService: FooterService,
+              private readonly themeService: ThemeService) {
   }
-
-  ngOnInit(): void {
-  }
-
 }

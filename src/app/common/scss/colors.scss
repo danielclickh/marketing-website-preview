@@ -1,4 +1,5 @@
 .dark {
+  color: var(--fg1);
   --bg1: #2F2C3A;
   --bg2: #373343;
   --bg3: #443F51;
@@ -18,6 +19,7 @@
 }
 
 .light {
+  color: var(--fg1);
   --bg1: #FFFFFF;
   --bg2: #F6F7FA;
   --bg3: #443F51;

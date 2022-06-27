@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {ThemeService} from "../../services/theme.service";
-import {trackById} from '../../utils/AngularUtils';
 import {GettingStartedService} from "./getting-started.service";
 
 @Component({
@@ -10,9 +9,7 @@ import {GettingStartedService} from "./getting-started.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GettingStartedComponent {
-  trackById = trackById;
   gettingStartedDataPromise = this.gettingStartedService.getGettingStartedData();
-  themeObs = this.themeService.observeTheme();
 
   constructor(private readonly gettingStartedService: GettingStartedService,
               private readonly themeService: ThemeService) {
