@@ -22,3 +22,10 @@ export interface HeaderData extends StrapiEntry {
   menuItems: Array<HeaderTopNavItem>;
   logoIconId: string;
 }
+
+export interface RegularNavItem {
+  id: number;
+  name: string;
+  href: string;
+  target: LinkTarget;
+}

@@ -12,7 +12,7 @@
   backdrop-filter: blur(16px);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
 
-  .container {
+  & > .container {
     display: flex;
     align-items: center;
     height: 100%;
@@ -57,6 +57,12 @@
         }
       }
 
+      .top_level_menu_item_container {
+        @include customBreakpointCss('max-width: 890px') {
+          display: none;
+        }
+      }
+
       .top_level_item_with_submenu {
         cursor: pointer;
 
@@ -71,6 +77,9 @@
     }
 
     .buttons_container {
+      @include customBreakpointCss('max-width: 890px') {
+        display: none;
+      }
       flex: 0 0 220px;
       display: flex;
       justify-content: flex-end;
@@ -99,6 +108,80 @@
 
       .cta_button {
         margin-left: 24px;
+      }
+    }
+
+    .hamburger_menu_button {
+      display: none;
+      @include customBreakpointCss('max-width: 890px') {
+        display: block;
+      }
+    }
+
+    .mobile_menu {
+      position: absolute;
+      width: calc(100% - 16px);
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: $bg1;
+      border-radius: 8px;
+      padding: 32px 0;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 21px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 6px 4px -4px rgba(0, 0, 0, 0.1);
+
+      .close_button {
+        position: absolute;
+        top: 5px;
+        right: 25px;
+      }
+
+      .items_with_icons {
+        .item_with_icon {
+          display: flex;
+          align-items: center;
+
+          &:not(:last-child) {
+            margin-bottom: 24px;
+          }
+
+          .icon {
+            text-align: left;
+            margin-right: 24px;
+            width: 32px;
+            height: 32px;
+          }
+        }
+      }
+
+      .regular_items {
+        .container {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-gap: 16px;
+        }
+      }
+
+      .separator {
+        width: 100%;
+        height: 1px;
+        background: $bg2;
+        margin-top: 32px;
+        margin-bottom: 32px;
+      }
+
+      .cta_button_container {
+        margin-top: 24px;
+
+        .cta_button {
+          display: block;
+
+          .primary_button {
+            width: 100%;
+          }
+        }
       }
     }
   }

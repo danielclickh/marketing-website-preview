@@ -3,7 +3,7 @@ import {HeaderService} from "./header.service";
 import {CpTheme, ThemeService} from "../common/services/theme.service";
 import {trackById} from '../common/utils/AngularUtils';
 import {Observable} from "rxjs";
-import {HeaderTopNavItem} from "./header.protocol";
+import {HeaderTopNavItem, HeaderTopNavSubItem, RegularNavItem} from "./header.protocol";
 
 @Component({
   selector: 'app-header',
@@ -15,6 +15,7 @@ export class HeaderComponent {
   readonly trackById = trackById;
   headerDataPromise = this.headerService.getHeaderData();
   themeObs: Observable<CpTheme>;
+  mobileMenuVisible = false;
 
   constructor(private readonly headerService: HeaderService,
               private readonly themeService: ThemeService) {
@@ -27,5 +28,30 @@ export class HeaderComponent {
 
   isMenuWithIcons(topMenuItem: HeaderTopNavItem): boolean {
     return topMenuItem.menuItems.every(item => !!item.iconId);
+  }
+
+  getMenuItemsWithIcons(menuItems: Array<HeaderTopNavItem>): Array<HeaderTopNavSubItem> {
+    const result = [];
+    for (const topLevelItem of menuItems) {
+      result.push(...topLevelItem.menuItems.filter(i => !!i.iconId));
+    }
+    return result;
+  }
+
+  getRegularMenuItems(menuItems: Array<HeaderTopNavItem>): Array<RegularNavItem> {
+    const result = [];
+    for (const topLevelItem of menuItems) {
+      if (!topLevelItem.menuItems.length) {
+        result.push(topLevelItem as RegularNavItem);
+      } else {
+        result.push(...topLevelItem.menuItems.filter(i => !i.iconId));
+      }
+
+    }
+    return result;
+  }
+
+  toggleMobileMenu() {
+    this.mobileMenuVisible = !this.mobileMenuVisible;
   }
 }

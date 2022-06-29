@@ -6,7 +6,8 @@
     </a>
 
     <div class="nav_container">
-      <div *ngFor="let topMenuItem of headerData.menuItems; trackBy: trackById" class="top_level_menu_item_container">
+      <div *ngFor="let topMenuItem of headerData.menuItems; trackBy: trackById"
+           class="top_level_menu_item_container">
         <a *ngIf="!topMenuItem.menuItems.length"
            [href]="topMenuItem.href"
            [target]="topMenuItem.target"
@@ -62,6 +63,54 @@
          class="cta_button">
         <button class="primary_button">{{ctaButton.text}}</button>
       </a>
+    </div>
+
+    <button (click)="toggleMobileMenu()" class="hamburger_menu_button" mat-icon-button>
+      <mat-icon class="icon" svgIcon="hamburger_menu"></mat-icon>
+    </button>
+
+    <div *ngIf="mobileMenuVisible" class="mobile_menu">
+      <button (click)="toggleMobileMenu()" class="close_button" mat-icon-button>
+        <mat-icon class="icon" svgIcon="x_icon"></mat-icon>
+      </button>
+
+      <div class="items_with_icons">
+        <div class="container">
+          <a (click)="toggleMobileMenu()"
+             *ngFor="let item of getMenuItemsWithIcons(headerData.menuItems); trackBy: trackById"
+             [href]="item.href"
+             [target]="item.target"
+             class="item_with_icon">
+            <mat-icon [svgIcon]="item.iconId!" class="icon"></mat-icon>
+            {{item.name}}
+          </a>
+        </div>
+      </div>
+      <div class="separator"></div>
+      <div class="regular_items">
+        <div class="container">
+          <a (click)="toggleMobileMenu()"
+             *ngFor="let item of getRegularMenuItems(headerData.menuItems); trackBy: trackById"
+             [href]="item.href"
+             [target]="item.target"
+             class="regular_item">
+            {{item.name}}
+          </a>
+        </div>
+      </div>
+      <div class="container cta_button_container">
+        <a (click)="toggleMobileMenu()"
+           *ngIf="headerData.ctaButton as ctaButton"
+           [href]=ctaButton.href
+           [target]="ctaButton.target"
+           class="cta_button">
+          <button class="primary_button">{{ctaButton.text}}</button>
+        </a>
+      </div>
+
+      <div>
+
+      </div>
     </div>
   </div>
 </div>
