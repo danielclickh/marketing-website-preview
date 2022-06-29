@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   strapiBaseUrl: 'http://localhost:1337',
   workatoApiBaseUrl: 'https://apim.workato.com/clickhouse/marketing-api-v0-1/form',
-  workatoToken: '401a2f6bc5cb9a273e9aa43c086b09aaacd40b88f8a70f27583372a51f374b56'
+  workatoToken: 'b5825bafb02a8e854ac7252952d2394f73aa39dc39cc5228d63490ced2926b5a'
 };
 
 /*
