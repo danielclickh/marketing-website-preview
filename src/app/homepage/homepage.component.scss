@@ -1,4 +1,5 @@
 @import 'colors';
+@import 'mixins';
 
 .section_button {
   align-self: center;
@@ -48,7 +49,6 @@
     }
 
     & > .container {
-      padding-top: 178px;
       position: relative;
       z-index: 3;
       max-width: 880px;
@@ -56,7 +56,12 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding-top: 178px;
       padding-bottom: 285px;
+      @include customBreakpointCss('max-width: 890px') {
+        padding-top: 113px;
+        padding-bottom: 250px;
+      }
 
       .title {
         font-weight: 700;
@@ -65,6 +70,10 @@
         text-align: center;
         color: $fg1;
         text-shadow: 0 0 12px rgba(68, 63, 81, 0.1);
+        @include customBreakpointCss('max-width: 890px') {
+          font-size: 28px;
+          line-height: 34px;
+        }
       }
 
       .description {
@@ -73,6 +82,10 @@
         line-height: 24px;
         text-align: center;
         color: $fg3;
+        @include customBreakpointCss('max-width: 890px') {
+          font-size: 16px;
+          line-height: 24px;
+        }
       }
 
       .cta_button {
@@ -101,7 +114,13 @@
 
       & > .container {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+        max-width: 1160px;
+        margin-left: auto;
+        margin-right: auto;
+        @include customBreakpointCss('max-width: 1010px') {
+          display: block;
+        }
 
         .hero_highlight {
           position: relative;
@@ -115,9 +134,16 @@
           text-align: center;
           box-shadow: 0 4px 14px rgba(0, 0, 0, 0.13);
 
-          &:not(:last-child) {
-            margin-right: 100px;
+          @include customBreakpointCss('max-width: 1010px') {
+            max-width: 100%;
+
+            &:not(:last-child) {
+              margin-right: 0;
+            }
+
+            margin-bottom: 40px;
           }
+
 
           .title {
             font-weight: 700;
@@ -176,6 +202,11 @@
         line-height: 27px;
         color: $primary;
         margin-bottom: 27px;
+
+        @include customBreakpointCss('max-width: 890px') {
+          font-size: 16px;
+          line-height: 19px;
+        }
       }
 
       .see_all_features_button {
@@ -192,6 +223,14 @@
         grid-template-columns: repeat(3, 1fr);
         grid-column-gap: 64px;
         grid-row-gap: 47px;
+
+        @include customBreakpointCss('max-width: 1010px') {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include customBreakpointCss('max-width: 710px') {
+          grid-template-columns: repeat(1, 1fr);
+        }
 
         .feature {
           display: flex;
@@ -251,6 +290,10 @@
         font-size: 38px;
         line-height: 46px;
         margin-bottom: 16px;
+        @include customBreakpointCss('max-width: 890px') {
+          font-size: 20px;
+          line-height: 24px;
+        }
       }
 
       .description {
@@ -259,12 +302,21 @@
         font-size: 16px;
         line-height: 24px;
         margin-bottom: 42px;
+
+        @include customBreakpointCss('max-width: 890px') {
+          font-size: 16px;
+          line-height: 24px;
+        }
       }
 
       .logos {
         display: flex;
         justify-content: center;
         margin-bottom: 64px;
+
+        @include customBreakpointCss('max-width: 890px') {
+          display: block;
+        }
 
         .logo_wrapper {
           background: $bg1;
@@ -282,6 +334,15 @@
 
           &:not(:last-child) {
             margin-right: 30px;
+          }
+
+
+          @include customBreakpointCss('max-width: 890px') {
+            &:not(:last-child) {
+              margin-bottom: 16px;
+            }
+            margin-left: auto;
+            margin-right: auto !important;
           }
 
           .logo {
@@ -324,6 +385,11 @@
         line-height: 46px;
         margin-bottom: 16px;
         color: $fg1;
+
+        @include customBreakpointCss('max-width: 890px') {
+          font-size: 20px;
+          line-height: 24px;
+        }
       }
 
       .description {
@@ -351,12 +417,28 @@
           direction: rtl;
         }
 
+        @include customBreakpointCss('max-width: 890px') {
+          grid-template-columns: repeat(1, 1fr);
+
+          margin-left: auto;
+          margin-right: auto;
+
+          &:nth-child(even) {
+            direction: inherit;
+          }
+        }
+
         .screenshot {
           background-size: contain;
           background-repeat: no-repeat;
           background-position: top center;
           height: 100%;
           width: 100%;
+
+          .screenshot_filler {
+            width: 100%;
+            visibility: hidden;
+          }
         }
 
         .title {
@@ -398,22 +480,31 @@
     }
 
     .buttons {
-      margin-top: 64px;
       width: 100%;
-      display: flex;
-      justify-content: center;
+      display: grid;
+      margin: 64px auto 0;
+      grid-column-gap: 42px;
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 542px;
+
+      @include customBreakpointCss('max-width: 890px') {
+        grid-column-gap: 16px;
+      }
 
       .button_wrapper {
-        &:not(:last-child) {
-          margin-right: 42px;
-        }
+        width: 100%;
 
         .primary_button {
-          height: 47px;
           font-weight: 600;
           font-size: 16px;
           line-height: 23px;
-          width: 250px;
+          width: 100%;
+          @include customBreakpointCss('max-width: 890px') {
+            height: auto;
+            padding: 10px;
+            font-size: 14px;
+            line-height: 21px;
+          }
         }
       }
 

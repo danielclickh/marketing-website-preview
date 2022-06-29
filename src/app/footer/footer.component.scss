@@ -1,4 +1,5 @@
 @import 'colors';
+@import 'mixins';
 
 .footer {
   padding: 58px 0;
@@ -17,20 +18,48 @@
       display: flex;
       justify-content: space-between;
 
+      @include customBreakpointCss('max-width: 890px') {
+        display: block;
+      }
+
       .top_menu {
+        @include customBreakpointCss('max-width: 890px') {
+          &:not(:last-child) {
+            margin-bottom: 24px;
+          }
+        }
+
         .title {
           font-weight: 600;
           font-size: 14px;
           line-height: 17px;
           margin-bottom: 24px;
+          @include customBreakpointCss('max-width: 890px') {
+            margin-bottom: 16px;
+            font-size: 12px;
+          }
         }
 
         .links {
+          @include customBreakpointCss('max-width: 890px') {
+            display: flex;
+            flex-flow: row wrap;
+          }
+
           .footer_link {
             display: block;
             font-weight: 500;
             font-size: 14px;
             line-height: 21px;
+
+            @include customBreakpointCss('max-width: 890px') {
+              &:not(:last-child) {
+                margin-right: 16px;
+              }
+
+              font-weight: 400;
+              font-size: 12px;
+            }
 
             &:hover {
               text-decoration: underline;
@@ -49,10 +78,17 @@
       align-items: flex-start;
       margin-top: 40px;
 
+      @include customBreakpointCss('max-width: 890px') {
+        display: block;
+      }
+
       .logo_container {
         display: flex;
         align-items: center;
         margin-right: 43px;
+        @include customBreakpointCss('max-width: 890px') {
+          margin-bottom: 16px;
+        }
 
         .icon {
           background-size: contain;
@@ -74,6 +110,9 @@
         font-weight: 500;
         font-size: 14px;
         line-height: 21px;
+        @include customBreakpointCss('max-width: 890px') {
+          font-size: 12px;
+        }
       }
     }
   }
@@ -85,9 +124,16 @@
     margin-left: 94px;
     margin-right: 70px;
     transform: translateY(-23px);
+    @include customBreakpointCss('max-width: 890px') {
+      display: none;
+    }
   }
 
   .right {
+    @include customBreakpointCss('max-width: 890px') {
+      display: none;
+    }
+
     .newsletter_form {
       margin-bottom: 24px;
 

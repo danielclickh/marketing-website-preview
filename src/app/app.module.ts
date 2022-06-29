@@ -18,6 +18,7 @@ import {GettingStartedComponent} from './common/sections/getting-started/getting
 import {MatTabsModule} from "@angular/material/tabs";
 import {FormsModule} from "@angular/forms";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {StrapiImageUrlPipe} from './common/pipes/strapi-image-url.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     HomepageLayoutComponent,
     FooterComponent,
     StrapiCssImageDirective,
-    GettingStartedComponent
+    GettingStartedComponent,
+    StrapiImageUrlPipe
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
