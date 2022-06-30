@@ -48,7 +48,7 @@ export class HomepageService {
     const clickhouseCloudItems = attributes.clickhouseCloudItems;
     const testimonials = attributes.testimonials;
     console.log('Homepage data: ', attributes);
-    const result = {
+    const result: HomepageData = {
       hero: {
         darkBackgroundIconUrl: hero.darkBackgroundIcon.data.attributes.url,
         lightBackgroundIconUrl: hero.lightBackgroundIcon.data.attributes.url,

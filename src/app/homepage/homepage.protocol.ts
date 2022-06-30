@@ -1,4 +1,5 @@
 import {LinkTarget, StrapiButton} from "../common/protocol/strapi.protocol";
+import {Feature} from "../common/protocol/common.protocol";
 
 export interface HomepageHeroHighlight {
   title: string;
@@ -19,7 +20,7 @@ export interface HomepageHero {
 
 export interface HomepageAboutClickhouse {
   title: string;
-  features: Array<HomepageAboutClickhouseFeature>;
+  features: Array<Feature>;
   allFeaturesButton: StrapiButton;
 }
 
@@ -70,13 +71,6 @@ export interface HomepageCustomerStoryLogo {
   lightLogoPngUrl: string;
   href: string;
   target: LinkTarget;
-}
-
-export interface HomepageAboutClickhouseFeature {
-  id: string;
-  title: string;
-  description: string;
-  iconSvgId: string;
 }
 
 export interface HomepageData {

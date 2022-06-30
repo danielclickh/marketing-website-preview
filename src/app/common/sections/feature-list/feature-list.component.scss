@@ -1,0 +1,56 @@
+@import 'colors';
+@import 'mixins';
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 64px;
+  grid-row-gap: 47px;
+
+  @include customBreakpointCss('max-width: 1010px') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include customBreakpointCss('max-width: 710px') {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .feature {
+    display: flex;
+
+    .icon_wrapper {
+      flex: 0 0 64px;
+      height: 64px;
+      background: $bg2;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 6px 4px -4px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      margin-right: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding-top: 4px;
+
+      .icon {
+        height: 38px;
+        width: 38px;
+        line-height: 0;
+      }
+    }
+
+    .title {
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+      color: $fg4;
+      margin-bottom: 4px;
+    }
+
+    .description {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      color: $fg5;
+    }
+  }
+}

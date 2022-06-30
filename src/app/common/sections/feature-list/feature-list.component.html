@@ -1,0 +1,11 @@
+<div class="features">
+  <div *ngFor="let feature of features; trackBy: trackById" class="feature">
+    <div class="icon_wrapper">
+      <mat-icon [svgIcon]="feature.iconSvgId" class="icon"></mat-icon>
+    </div>
+    <div class="data">
+      <div class="title">{{feature.title}}</div>
+      <div class="description">{{feature.description}}</div>
+    </div>
+  </div>
+</div>
