@@ -1,5 +1,5 @@
 import {LinkTarget, StrapiButton} from "../common/protocol/strapi.protocol";
-import {Feature} from "../common/protocol/common.protocol";
+import {Feature, ScreenshotAndBullets} from "../common/protocol/common.protocol";
 
 export interface HomepageHeroHighlight {
   title: string;
@@ -28,7 +28,7 @@ export interface HomepageClickhouseCloud {
   pretitle: string;
   title: string;
   description: string;
-  items: Array<HomepageClickhouseCloudItem>;
+  items: Array<ScreenshotAndBullets>;
   primaryButton: StrapiButton;
   secondaryButton: StrapiButton;
 }
@@ -48,14 +48,6 @@ export interface HomepageTestimonialItem {
   author: string;
   href: string;
   target: LinkTarget;
-}
-
-export interface HomepageClickhouseCloudItem {
-  id: string;
-  title: string;
-  description: string;
-  bullets: Array<string>;
-  screenshotPngUrl: string;
 }
 
 export interface HomepageCustomerStories {

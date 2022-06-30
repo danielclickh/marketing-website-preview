@@ -76,23 +76,7 @@
           <div class="section_title">{{clickhouseCloud.title}}</div>
           <div class="section_description">{{clickhouseCloud.description}}</div>
         </div>
-        <div class="items">
-          <div *ngFor="let item of clickhouseCloud.items; trackBy: trackById" class="item">
-            <div class="metadata">
-              <div class="title">{{item.title}}</div>
-              <div class="description">{{item.description}}</div>
-              <div *ngFor="let bullet of item.bullets" class="bullets">
-                <div class="bullet">
-                  <mat-icon class="icon" svgIcon="check_icon"></mat-icon>
-                  {{bullet}}</div>
-              </div>
-            </div>
-            <div [strapiCssImage]="item.screenshotPngUrl" class="screenshot">
-              <img [src]="item.screenshotPngUrl | strapiImageUrl" class="screenshot_filler" src=""/>
-            </div>
-          </div>
-        </div>
-
+        <screenshot-and-bullets-list [screenshotAndBulletsList]="clickhouseCloud.items"></screenshot-and-bullets-list>
         <div class="buttons">
           <a *ngIf="clickhouseCloud.primaryButton as button"
              [href]="button.href"

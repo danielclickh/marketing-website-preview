@@ -4,3 +4,11 @@ export interface Feature {
   description: string;
   iconSvgId: string;
 }
+
+export interface ScreenshotAndBullets {
+  id: string;
+  title: string;
+  description: string;
+  bullets: Array<string>;
+  screenshotPngUrl: string;
+}

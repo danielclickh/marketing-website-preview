@@ -20,6 +20,9 @@ import {FormsModule} from "@angular/forms";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {StrapiImageUrlPipe} from './common/pipes/strapi-image-url.pipe';
 import {FeatureListComponent} from './common/sections/feature-list/feature-list.component';
+import {
+  ScreenshotAndBulletsListComponent
+} from './common/sections/screenshot-and-bullets-list/screenshot-and-bullets-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import {FeatureListComponent} from './common/sections/feature-list/feature-list.
     StrapiCssImageDirective,
     GettingStartedComponent,
     StrapiImageUrlPipe,
-    FeatureListComponent
+    FeatureListComponent,
+    ScreenshotAndBulletsListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
