@@ -1,5 +1,40 @@
 <ng-container *ngIf="themeObs | async as theme">
   <div *ngIf="cloudDataPromise | async as cloudData" class="cloud">
-    hello
+    <div *ngIf="cloudData.hero as hero" class="hero">
+      <div class="background_overlay"></div>
+      <div class="background_image_wrapper">
+        <mat-icon [svgIcon]="hero.backgroundSvgId" class="background_image"></mat-icon>
+      </div>
+      <div class="container">
+        <div class="left">
+          <div [innerHTML]="hero.title" class="title"></div>
+          <div class="description">{{hero.description}}</div>
+          <a *ngIf="hero.ctaButton as ctaButton"
+             [href]=ctaButton.href
+             [target]="ctaButton.target"
+             class="cta_button">
+            <button class="primary_button">{{ctaButton.text}}</button>
+          </a>
+
+          <div class="cloud_providers">
+            <div *ngFor="let cloudProvider of hero.cloudProviders" class="cloud_provider">
+              <div class="cloud_provider_title">{{cloudProvider.title}}</div>
+              <div class="logos">
+
+                <img
+                  *ngFor="let logo of theme === 'dark' ? cloudProvider.darkProviderPngUrls : cloudProvider.lightProviderPngUrls"
+                  [src]="logo | strapiImageUrl"
+                  class="logo"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <div [strapiCssImage]="hero.videoGifUrl" class="video_gif"></div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </ng-container>
