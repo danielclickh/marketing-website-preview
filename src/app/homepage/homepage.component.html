@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <div *ngIf="homepageData.aboutClickhouse as aboutClickhouse" class="container about_clickhouse">
+      <div *ngIf="homepageData.aboutClickhouse as aboutClickhouse" class="container about_clickhouse dark">
         <div class="section_title">{{aboutClickhouse.title}}</div>
         <feature-list [features]="aboutClickhouse.features"></feature-list>
         <a *ngIf="aboutClickhouse.allFeaturesButton as button"

@@ -20,21 +20,33 @@
             <div *ngFor="let cloudProvider of hero.cloudProviders" class="cloud_provider">
               <div class="cloud_provider_title">{{cloudProvider.title}}</div>
               <div class="logos">
-
                 <img
                   *ngFor="let logo of theme === 'dark' ? cloudProvider.darkProviderPngUrls : cloudProvider.lightProviderPngUrls"
                   [src]="logo | strapiImageUrl"
                   class="logo"
+                  alt="logo"
                 />
               </div>
             </div>
           </div>
         </div>
         <div class="right">
-          <div [strapiCssImage]="hero.videoGifUrl" class="video_gif"></div>
+          <img [src]="hero.videoGifUrl | strapiImageUrl" alt="video" class="video_gif"/>
         </div>
-
       </div>
+    </div>
+    <div class="features">
+      <div class="container">
+        <feature-list [features]="cloudData.features"></feature-list>
+      </div>
+    </div>
+
+    <div class="screenshot_and_bullets">
+      <div class="container">
+        <screenshot-and-bullets-list
+          [screenshotAndBulletsList]="cloudData.screenshotsAndBullets"></screenshot-and-bullets-list>
+      </div>
+
     </div>
   </div>
 </ng-container>

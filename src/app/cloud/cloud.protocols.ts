@@ -1,5 +1,5 @@
 import {StrapiButton} from "../common/protocol/strapi.protocol";
-import {Feature} from "../common/protocol/common.protocol";
+import {Feature, ScreenshotAndBullets} from "../common/protocol/common.protocol";
 
 export interface CloudProvider {
   title: string;
@@ -32,5 +32,6 @@ export interface CloudEarlyAccessForm {
 export interface CloudData {
   hero: CloudHero;
   features: Array<Feature>;
+  screenshotsAndBullets: Array<ScreenshotAndBullets>;
   earlyAccessForm: CloudEarlyAccessForm;
 }

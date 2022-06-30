@@ -22,6 +22,9 @@ export class CloudService {
         'hero.backgroundSvg',
         'features',
         'features.iconSvg',
+        'screenshotsAndBullets',
+        'screenshotsAndBullets.screenshotPng',
+        'screenshotsAndBullets.bullets',
         'earlyAccessForm',
         'earlyAccessForm.submitButton',
       ]
@@ -32,6 +35,7 @@ export class CloudService {
     const hero = attributes.hero;
     const features = attributes.features;
     const earlyAccessForm = attributes.earlyAccessForm;
+    const screenshotsAndBullets = attributes.screenshotsAndBullets;
     console.log('Cloud data: ', attributes);
     const result: CloudData = {
       hero: {
@@ -56,6 +60,16 @@ export class CloudService {
           iconSvgId: this.strapiService.registerSvgIcon(f.iconSvg)!
         }
       }),
+      screenshotsAndBullets: screenshotsAndBullets.map((s: any) => {
+        return {
+          id: s.id,
+          title: s.title,
+          description: s.description,
+          bullets: s.bullets.map((b: any) => b.text),
+          screenshotPngUrl: s.screenshotPng.data.attributes.url
+        }
+      }),
+
       earlyAccessForm: earlyAccessForm
     };
     console.log('result', result);
