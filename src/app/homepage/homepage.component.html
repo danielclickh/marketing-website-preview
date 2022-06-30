@@ -59,8 +59,8 @@
 
     <div *ngIf="homepageData.customerStories as customerStories" class="customer_stories_section">
       <div class="container">
-        <div class="title">{{customerStories.title}}</div>
-        <div class="description">{{customerStories.description}}</div>
+        <div class="section_title">{{customerStories.title}}</div>
+        <div class="section_description">{{customerStories.description}}</div>
         <div class="logos">
           <a *ngFor="let logo of customerStories.logos; trackBy: trackById" [href]="logo.href" [target]="logo.target"
              class="logo_wrapper">
@@ -83,8 +83,8 @@
       <div class="container">
         <div class="section_metadata">
           <div class="pretitle">{{clickhouseCloud.pretitle}}</div>
-          <div class="title">{{clickhouseCloud.title}}</div>
-          <div class="description">{{clickhouseCloud.description}}</div>
+          <div class="section_title">{{clickhouseCloud.title}}</div>
+          <div class="section_description">{{clickhouseCloud.description}}</div>
         </div>
         <div class="items">
           <div *ngFor="let item of clickhouseCloud.items; trackBy: trackById" class="item">
@@ -129,8 +129,8 @@
       <div class="container">
         <div class="section_metadata">
           <div class="pretitle">{{testimonials.pretitle}}</div>
-          <div class="title">{{testimonials.title}}</div>
-          <div class="description">{{testimonials.description}}</div>
+          <div class="section_title">{{testimonials.title}}</div>
+          <div class="section_description">{{testimonials.description}}</div>
           <mat-icon [svgIcon]="testimonials.testimonialsIconSvgId" class="icon"></mat-icon>
         </div>
         <div class="testimonials">

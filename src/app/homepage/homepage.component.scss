@@ -285,28 +285,12 @@
       display: flex;
       flex-direction: column;
 
-      .title {
-        font-weight: 700;
-        font-size: 38px;
-        line-height: 46px;
+      .section_title {
         margin-bottom: 16px;
-        @include customBreakpointCss('max-width: 890px') {
-          font-size: 20px;
-          line-height: 24px;
-        }
       }
 
-      .description {
-        color: $fg3;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
+      .section_description {
         margin-bottom: 42px;
-
-        @include customBreakpointCss('max-width: 890px') {
-          font-size: 16px;
-          line-height: 24px;
-        }
       }
 
       .logos {
@@ -372,31 +356,14 @@
       text-align: center;
 
       .pretitle {
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 19px;
-        color: $primary;
         margin-bottom: 12px;
       }
 
-      .title {
-        font-weight: 700;
-        font-size: 38px;
-        line-height: 46px;
+      .section_title {
         margin-bottom: 16px;
-        color: $fg1;
-
-        @include customBreakpointCss('max-width: 890px') {
-          font-size: 20px;
-          line-height: 24px;
-        }
       }
 
-      .description {
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
-        color: $fg3;
+      .section_description {
         margin-bottom: 92px;
       }
     }
@@ -530,26 +497,14 @@
       text-align: center;
 
       .pretitle {
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 19px;
-        color: $primary;
         margin-bottom: 12px;
       }
 
-      .title {
-        font-weight: 700;
-        font-size: 38px;
-        line-height: 46px;
+      .section_title {
         margin-bottom: 16px;
-        color: $fg1;
       }
 
-      .description {
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
-        color: $fg3;
+      .section_description {
         margin-bottom: 24px;
       }
 
