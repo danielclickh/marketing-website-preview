@@ -22,7 +22,6 @@ export class GettingStartedService {
 
     const data: any = res.data;
     const attributes = data.attributes;
-    console.log('Getting started data: ', attributes);
     const result = {
       pretitle: attributes.pretitle,
       title: attributes.title,
@@ -32,7 +31,6 @@ export class GettingStartedService {
       platforms: attributes.platforms,
       bottomText: marked.parse(attributes.bottomText),
     };
-    console.log('getting started result', result);
     return result;
   }
 }

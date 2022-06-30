@@ -25,7 +25,6 @@ export class FooterService {
 
     const data: any = res.data;
     const attributes = data.attributes;
-    console.log('Footer data: ', attributes);
     const result: FooterData = {
       copyrightText: attributes.copyrightText,
       logoSvgId: this.strapiService.registerSvgIcon(attributes.logoSvg)!,
@@ -44,7 +43,6 @@ export class FooterService {
         })
       }
     };
-    console.log('footer result', result);
     return result as FooterData;
   }
 }

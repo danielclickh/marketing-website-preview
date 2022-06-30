@@ -47,8 +47,7 @@ export class HomepageService {
     const clickhouseCloud = attributes.clickhouseCloud;
     const clickhouseCloudItems = attributes.clickhouseCloudItems;
     const testimonials = attributes.testimonials;
-    console.log('Homepage data: ', attributes);
-    const result: HomepageData = {
+    return {
       hero: {
         darkBackgroundIconUrl: hero.darkBackgroundIcon.data.attributes.url,
         lightBackgroundIconUrl: hero.lightBackgroundIcon.data.attributes.url,
@@ -117,7 +116,5 @@ export class HomepageService {
         })
       }
     };
-    console.log('result', result);
-    return result;
   }
 }

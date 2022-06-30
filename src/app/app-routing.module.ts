@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {FontsResolverService} from "./common/services/fonts-resolver.service";
 import {HomepageLayoutComponent} from "./homepage-layout/homepage-layout.component";
 import {HomepageComponent} from "./homepage/homepage.component";
+import {CloudComponent} from "./cloud/cloud.component";
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
         path: '',
         component: HomepageLayoutComponent,
         children: [
-          {path: '', component: HomepageComponent}
+          {path: '', component: HomepageComponent},
+          {path: 'cloud', component: CloudComponent}
         ]
       }
     ]

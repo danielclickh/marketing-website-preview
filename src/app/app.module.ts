@@ -23,6 +23,7 @@ import {FeatureListComponent} from './common/sections/feature-list/feature-list.
 import {
   ScreenshotAndBulletsListComponent
 } from './common/sections/screenshot-and-bullets-list/screenshot-and-bullets-list.component';
+import {CloudComponent} from './cloud/cloud.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {
     GettingStartedComponent,
     StrapiImageUrlPipe,
     FeatureListComponent,
-    ScreenshotAndBulletsListComponent
+    ScreenshotAndBulletsListComponent,
+    CloudComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
