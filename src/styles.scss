@@ -110,7 +110,7 @@ button {
 }
 
 .button {
-  border-radius: 8px;
+  border-radius: 8px !important;
   font-weight: 600;
   font-size: 14px;
   height: 39px;
@@ -129,6 +129,16 @@ button {
 
   &:active {
     filter: brightness(90%);
+  }
+
+  &:disabled {
+    filter: brightness(50%);
+    cursor: default;
+
+    &:hover {
+      text-decoration: auto;
+      transform: none;
+    }
   }
 }
 
@@ -183,6 +193,51 @@ svg {
   color: transparent;
 }
 
+.seed_form_element {
+  position: relative;
+
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
+
+  .seed_label, label {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    color: $fg1;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  input, textarea {
+    @extend .seed_input;
+  }
+
+  .seed_input_icon {
+    position: absolute;
+    top: 27px;
+    right: 2px;
+    z-index: 10;
+
+  }
+
+  .seed_error {
+    font-size: 12px;
+    color: #f44336;
+    margin-top: 4px;
+  }
+
+  input:-webkit-autofill, .seed_input:-webkit-autofill,
+  input:-webkit-autofill:hover, .seed_input:-webkit-autofill:hover,
+  input:-webkit-autofill:active, .seed_input:-webkit-autofill:active {
+    box-shadow: 0 0 0 30px #FCFCFC inset !important;
+  }
+
+  input:-webkit-autofill:focus, .seed_input:-webkit-autofill:focus {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -2px 0px #FFB200 !important;
+  }
+}
+
 .seed_input {
   position: relative;
   z-index: 1;
@@ -193,19 +248,25 @@ svg {
   min-height: 41px;
   box-sizing: border-box;
   border-radius: 6px;
-  border: 1px solid #E6E6E6;
+  border: 1px solid $bg7;
   transition-property: background-image, background-size, background-color;
   transition-timing-function: cubic-bezier(.4, 0, .2, 1);
   transition-duration: 300ms;
-  background-color: #FCFCFC;
+  background-color: $bg8;
+  color: $fg1;
   background-size: 0, 100%;
   background-repeat: no-repeat;
   background-image: linear-gradient(0deg, #ffb200, #ffb200 2px, transparent 0, transparent);
 
+  &.textarea {
+    padding: 10px;
+  }
+
   &:focus, &.active {
     outline: none;
     background-size: 100%, 100%;
-    background-color: #FFFFFF;
+    background-color: $bg1;
+
   }
 }
 

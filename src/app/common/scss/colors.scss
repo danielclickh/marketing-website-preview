@@ -7,11 +7,14 @@
   --bg4: #373343;
   --bg5: #585267;
   --bg6: #12101B;
+  --bg7: #443F51;
+  --bg8: #373343;
   --fg1: #FFFFFF;
   --fg2: #443F51;
   --fg3: #B0B4BC;
   --fg4: #FFFFFF;
   --fg5: #B0B4BC;
+
   --primary: #FFB200;
   --warningBg: #FFEFCA;
   --warningFg: #C78F0F;
@@ -29,6 +32,8 @@
   --bg4: #373343;
   --bg5: #585267;
   --bg6: #EFEFF2;
+  --bg7: rgba(109, 115, 134, 0.1);
+  --bg8: #FAFBFD;
   --fg1: #2F2C3A;
   --fg2: #FFFFFF;
   --fg3: #6D7386;
@@ -48,6 +53,8 @@ $bg3: var(--bg3);
 $bg4: var(--bg4);
 $bg5: var(--bg5);
 $bg6: var(--bg6);
+$bg7: var(--bg7);
+$bg8: var(--bg8);
 $fg1: var(--fg1);
 $fg2: var(--fg2);
 $fg3: var(--fg3);
