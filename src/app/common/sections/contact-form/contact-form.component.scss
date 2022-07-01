@@ -1,0 +1,58 @@
+@import 'colors';
+@import 'mixins';
+
+.form {
+  max-width: 628px;
+  width: 100%;
+  margin: 0 auto;
+
+  .first_and_last_name_inputs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 56px;
+
+    @include customBreakpointCss('max-width: 890px') {
+      grid-column-gap: 16px;
+    }
+  }
+
+  .seed_input {
+    width: 100%;
+  }
+
+  .textarea_container {
+    margin-bottom: 32px;
+
+    .textarea {
+      height: 120px;
+      resize: none;
+    }
+  }
+
+  .optional {
+    color: $fg3;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .bottom {
+    text-align: left;
+
+    .submit_button {
+      margin-bottom: 12px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+
+    .disclaimer {
+      text-align: center;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
+      color: $fg3;
+    }
+  }
+
+}

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {StrapiService} from "../common/services/strapi.service";
 import {CloudData} from "./cloud.protocols";
+import {marked} from "marked";
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,8 @@ export class CloudService {
         'screenshotsAndBullets.screenshotPng',
         'screenshotsAndBullets.bullets',
         'earlyAccessForm',
-        'earlyAccessForm.submitButton',
+        'earlyAccessForm.contactForm',
+        'earlyAccessForm.contactForm.submitButton',
       ]
     });
 
@@ -70,7 +72,12 @@ export class CloudService {
         }
       }),
 
-      earlyAccessForm: earlyAccessForm
+      earlyAccessForm: {
+        pretitle: earlyAccessForm.pretitle,
+        title: earlyAccessForm.title,
+        description: earlyAccessForm.description,
+        contactForm: {...earlyAccessForm.contactForm, disclaimer: marked.parse(earlyAccessForm.contactForm.disclaimer)}
+      }
     };
     console.log('result', result);
     return result;

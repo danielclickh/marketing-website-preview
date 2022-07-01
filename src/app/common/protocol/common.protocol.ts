@@ -1,3 +1,5 @@
+import {StrapiButton} from "./strapi.protocol";
+
 export interface Feature {
   id: string;
   title: string;
@@ -11,4 +13,14 @@ export interface ScreenshotAndBullets {
   description: string;
   bullets: Array<string>;
   screenshotPngUrl: string;
+}
+
+export interface ContactForm {
+  firstNameLabel: string;
+  lastNameLabel: string;
+  emailLabel: string;
+  companyLabel: string;
+  messageLabel: string;
+  submitButton: StrapiButton;
+  disclaimer: string;
 }

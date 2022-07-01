@@ -1,5 +1,5 @@
 import {StrapiButton} from "../common/protocol/strapi.protocol";
-import {Feature, ScreenshotAndBullets} from "../common/protocol/common.protocol";
+import {ContactForm, Feature, ScreenshotAndBullets} from "../common/protocol/common.protocol";
 
 export interface CloudProvider {
   title: string;
@@ -20,13 +20,7 @@ export interface CloudEarlyAccessForm {
   pretitle: string;
   title: string;
   description: string;
-  firstNameLabel: string;
-  lastNameLabel: string;
-  emailLabel: string;
-  companyLabel: string;
-  useCaseLabel: string;
-  submitButton: StrapiButton;
-  disclaimer: string;
+  contactForm: ContactForm;
 }
 
 export interface CloudData {

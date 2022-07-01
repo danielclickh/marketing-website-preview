@@ -24,6 +24,7 @@ import {
   ScreenshotAndBulletsListComponent
 } from './common/sections/screenshot-and-bullets-list/screenshot-and-bullets-list.component';
 import {CloudComponent} from './cloud/cloud.component';
+import {ContactFormComponent} from './common/sections/contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {CloudComponent} from './cloud/cloud.component';
     StrapiImageUrlPipe,
     FeatureListComponent,
     ScreenshotAndBulletsListComponent,
-    CloudComponent
+    CloudComponent,
+    ContactFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),

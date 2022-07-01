@@ -57,49 +57,7 @@
           <div class="section_description">{{earlyAccessForm.description}}</div>
         </div>
 
-        <form (ngSubmit)="onSubmit().then()" [formGroup]="form" class="form">
-          <div class="first_and_last_name_inputs">
-            <div class="seed_form_element">
-              <label class="seed_label">{{earlyAccessForm.firstNameLabel}}</label>
-              <input class="seed_input" formControlName="firstName" name="firstName" type="text">
-              <div *ngIf="!form.controls['firstName'].valid && form.controls['firstName'].touched" class="seed_error">
-                Invalid first name
-              </div>
-            </div>
-
-            <div class="seed_form_element">
-              <label class="seed_label">{{earlyAccessForm.lastNameLabel}}</label>
-              <input class="seed_input" formControlName="lastName" name="lastName" type="text">
-              <div *ngIf="!form.controls['lastName'].valid && form.controls['lastName'].touched" class="seed_error">
-                Invalid last name
-              </div>
-            </div>
-          </div>
-
-          <div class="seed_form_element">
-            <label class="seed_label">{{earlyAccessForm.emailLabel}}</label>
-            <input class="seed_input" formControlName="email" name="email" type="email">
-            <div *ngIf="!form.controls['email'].valid && form.controls['email'].touched" class="seed_error">
-              Invalid e-mail address
-            </div>
-          </div>
-
-          <div class="seed_form_element">
-            <label class="seed_label">{{earlyAccessForm.companyLabel}} <span class="optional">(Optional)</span></label>
-            <input class="seed_input" formControlName="company" name="company" type="text">
-          </div>
-
-          <div class="seed_form_element textarea_container">
-            <label class="seed_label">{{earlyAccessForm.useCaseLabel}} <span class="optional">(Optional)</span></label>
-            <textarea class="seed_input textarea" formControlName="useCase" name="useCase"></textarea>
-          </div>
-
-          <div class="bottom">
-            <button [disabled]="serverCallInProgress"
-                    class="submit_button primary_button">{{earlyAccessForm.submitButton.text}}</button>
-            <div class="disclaimer">{{earlyAccessForm.disclaimer}}</div>
-          </div>
-        </form>
+        <contact-form [contactForm]="earlyAccessForm.contactForm"></contact-form>
       </div>
     </div>
   </div>
