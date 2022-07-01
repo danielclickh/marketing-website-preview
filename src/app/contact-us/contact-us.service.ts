@@ -1,0 +1,34 @@
+import {Injectable} from '@angular/core';
+import {StrapiService} from "../common/services/strapi.service";
+import {ContactUsData} from "./contact-us.protocol";
+import {marked} from "marked";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ContactUsService {
+
+  constructor(private readonly strapiService: StrapiService) {
+  }
+
+  async getContactUsData(): Promise<ContactUsData> {
+    const res = await this.strapiService.getStrapi().find('contact-us', {
+      populate: [
+        'hero',
+        'hero.contactForm',
+      ]
+    });
+
+    const data: any = res.data;
+    const attributes = data.attributes;
+    const hero = attributes.hero;
+    const result: ContactUsData = {
+      hero: {
+        title: hero.title,
+        description: hero.description,
+        contactForm: {...hero.contactForm, disclaimer: marked.parse(hero.contactForm.disclaimer)}
+      }
+    };
+    return result;
+  }
+}

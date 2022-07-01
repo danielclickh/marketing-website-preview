@@ -38,8 +38,7 @@ export class CloudService {
     const features = attributes.features;
     const earlyAccessForm = attributes.earlyAccessForm;
     const screenshotsAndBullets = attributes.screenshotsAndBullets;
-    console.log('Cloud data: ', attributes);
-    const result: CloudData = {
+    return {
       hero: {
         title: hero.title,
         description: hero.description,
@@ -79,7 +78,5 @@ export class CloudService {
         contactForm: {...earlyAccessForm.contactForm, disclaimer: marked.parse(earlyAccessForm.contactForm.disclaimer)}
       }
     };
-    console.log('result', result);
-    return result;
   }
 }

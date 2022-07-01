@@ -4,6 +4,7 @@ import {FontsResolverService} from "./common/services/fonts-resolver.service";
 import {HomepageLayoutComponent} from "./homepage-layout/homepage-layout.component";
 import {HomepageComponent} from "./homepage/homepage.component";
 import {CloudComponent} from "./cloud/cloud.component";
+import {ContactUsComponent} from "./contact-us/contact-us.component";
 
 const routes: Routes = [
   {
@@ -17,7 +18,8 @@ const routes: Routes = [
         component: HomepageLayoutComponent,
         children: [
           {path: '', component: HomepageComponent},
-          {path: 'cloud', component: CloudComponent}
+          {path: 'cloud', component: CloudComponent},
+          {path: 'company/contact', component: ContactUsComponent}
         ]
       }
     ]

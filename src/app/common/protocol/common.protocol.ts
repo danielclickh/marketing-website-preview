@@ -1,5 +1,3 @@
-import {StrapiButton} from "./strapi.protocol";
-
 export interface Feature {
   id: string;
   title: string;
@@ -21,6 +19,6 @@ export interface ContactForm {
   emailLabel: string;
   companyLabel: string;
   messageLabel: string;
-  submitButton: StrapiButton;
+  submitButtonLabel: string;
   disclaimer: string;
 }

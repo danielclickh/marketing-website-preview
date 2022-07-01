@@ -1,0 +1,38 @@
+@import 'colors';
+@import 'mixins';
+
+.contact_us {
+  .hero {
+    background: $bg1;
+    padding-top: 70px;
+    padding-bottom: 70px;
+
+    .section_metadata {
+      text-align: center;
+
+      .title {
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 58px;
+        margin-bottom: 16px;
+      }
+
+      .description {
+        color: $fg3;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        margin-bottom: 56px;
+      }
+    }
+
+    .contact_form {
+      ::ng-deep {
+        .primary_button {
+          max-width: 286px;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

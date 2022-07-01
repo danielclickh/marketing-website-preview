@@ -7,9 +7,18 @@ export interface StrapiEntry {
   updatedAt: string;
 }
 
-export interface StrapiButton {
-  id: number;
+export interface StrapiLink {
   href: string;
   target: LinkTarget
+}
+
+export interface StrapiButton extends StrapiLink {
+  id: number;
   text: string;
+}
+
+export interface StrapiIconButton extends StrapiLink {
+  id: number;
+  darkIconPngUrl: string;
+  lightIconPngUrl: string;
 }

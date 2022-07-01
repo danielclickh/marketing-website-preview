@@ -25,6 +25,8 @@ import {
 } from './common/sections/screenshot-and-bullets-list/screenshot-and-bullets-list.component';
 import {CloudComponent} from './cloud/cloud.component';
 import {ContactFormComponent} from './common/sections/contact-form/contact-form.component';
+import {ContactUsComponent} from './contact-us/contact-us.component';
+import {GrowingCommunityComponent} from './common/sections/growing-community/growing-community.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import {ContactFormComponent} from './common/sections/contact-form/contact-form.
     FeatureListComponent,
     ScreenshotAndBulletsListComponent,
     CloudComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    ContactUsComponent,
+    GrowingCommunityComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),

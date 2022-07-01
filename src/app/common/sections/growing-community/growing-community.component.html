@@ -1,0 +1,15 @@
+<ng-container *ngIf="themeObs | async as theme">
+  <div *ngIf="growingCommunityDataPromise | async as growingCommunityData" class="growing_community">
+    <div class="container">
+      <div class="title">{{growingCommunityData.title}}</div>
+      <div class="logos">
+        <a *ngFor="let iconButton of growingCommunityData.iconButtons" [href]="iconButton.href"
+           [target]="iconButton.target"
+           class="logo_container">
+          <div [strapiCssImage]="theme === 'dark' ? iconButton.darkIconPngUrl : iconButton.lightIconPngUrl"
+               class="logo"></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</ng-container>
