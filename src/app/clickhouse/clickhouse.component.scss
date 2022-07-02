@@ -7,18 +7,37 @@
     padding-bottom: 125px;
     background: linear-gradient(180deg, $gradient1 0%, $gradient2 100%) $bg2;
 
+    @include customBreakpointCss('max-width: 890px') {
+      padding: 70px 0;
+    }
+
     & > .container {
       display: flex;
+
+      @include customBreakpointCss('max-width: 890px') {
+        justify-content: center;
+      }
 
       .left {
         margin-right: 59px;
         max-width: 55%;
+
+        @include customBreakpointCss('max-width: 890px') {
+          margin-right: 0;
+          max-width: 100%;
+          text-align: center;
+        }
 
         .title {
           font-weight: 700;
           font-size: 58px;
           line-height: 70px;
           margin-bottom: 24px;
+
+          @include customBreakpointCss('max-width: 890px') {
+            font-size: 40px;
+            line-height: 50px;
+          }
         }
 
         .description {
@@ -29,10 +48,18 @@
           width: 100%;
           color: $fg3;
           margin-bottom: 32px;
+          @include customBreakpointCss('max-width: 890px') {
+            margin-left: auto;
+            margin-right: auto;
+          }
         }
 
         .buttons {
           display: flex;
+
+          @include customBreakpointCss('max-width: 890px') {
+            justify-content: center;
+          }
 
           .main_button {
             margin-right: 19px;
@@ -88,6 +115,10 @@
       .right {
         display: flex;
         align-items: center;
+
+        @include customBreakpointCss('max-width: 890px') {
+          display: none;
+        }
 
         .background_image {
           width: 100%;
@@ -184,6 +215,9 @@
         .description_and_image {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
+          @include customBreakpointCss('max-width: 890px') {
+            grid-template-columns: 1fr;
+          }
           align-items: center;
 
           .description {
@@ -201,6 +235,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            @include customBreakpointCss('max-width: 890px') {
+              display: none;
+            }
 
             .image {
               height: 100%;
@@ -285,6 +322,9 @@
         grid-template-columns: 0.4fr 0.6fr;
         grid-column-gap: 70px;
         margin-bottom: 70px;
+        @include customBreakpointCss('max-width: 890px') {
+          grid-template-columns: 1fr;
+        }
 
         .image_container {
           display: flex;
@@ -292,6 +332,10 @@
           justify-content: center;
           width: 100%;
           height: 100%;
+
+          @include customBreakpointCss('max-width: 890px') {
+            display: none;
+          }
 
           .image {
             max-width: 246px;
