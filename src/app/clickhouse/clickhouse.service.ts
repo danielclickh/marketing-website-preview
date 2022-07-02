@@ -26,6 +26,7 @@ export class ClickhouseService {
         'features2.items',
         'features2.items.iconSvg',
         'features3',
+        'features3.mainItem',
         'features3.iconSvg',
         'features3.items',
         'features4',
@@ -81,7 +82,7 @@ export class ClickhouseService {
         items: features3.items
       },
       features4: features4,
-      features5: {...features5, iconSvg: this.strapiService.registerSvgIcon(features5.iconSvg)!},
+      features5: {...features5, iconSvgId: this.strapiService.registerSvgIcon(features5.iconSvg)!},
     }
   }
 }

@@ -52,8 +52,72 @@
             <div class="description">{{feature.description}}</div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div *ngIf="clickhouseData.features3 as features3" class="features3">
+      <div class="container">
+        <div class="main_item">
+          <div class="pretitle">{{features3.pretitle}}</div>
+          <div class="title">{{features3.mainItem.title}}</div>
+          <div class="description_and_image">
+            <div class="description">{{features3.mainItem.description}}</div>
+            <div class="image_container">
+              <mat-icon [svgIcon]="features3.iconSvgId" class="image"></mat-icon>
+            </div>
+
+          </div>
+        </div>
+        <div class="features">
+          <div *ngFor="let feature of features3.items" class="feature">
+            <div class="title">{{feature.title}}</div>
+            <div class="description">{{feature.description}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="clickhouseData.features4 as features4" class="features4">
+      <div class="container">
+        <div class="section_metadata">
+          <div class="pretitle">{{features4.pretitle}}</div>
+          <div class="section_title">{{features4.title}}</div>
+        </div>
+        <div class="features">
+          <div *ngFor="let feature of features4.items" class="feature">
+            <div class="title">{{feature.title}}</div>
+            <div class="description">{{feature.description}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="clickhouseData.features5 as features5" class="features5">
+      <div class="container">
+        <div class="image_and_content">
+          <div class="image_container">
+            <mat-icon [svgIcon]="features5.iconSvgId" class="image"></mat-icon>
+          </div>
+          <div class="content">
+            <div class="pretitle">{{features5.pretitle}}</div>
+            <div class="title">{{features5.title}}</div>
+            <div class="description">{{features5.description}}</div>
+          </div>
+        </div>
+        <div class="text_and_features">
+          <div class="title">{{features5.second_title}}</div>
+          <div class="description">{{features5.description}}</div>
+          <div class="features">
+            <div *ngFor="let feature of features5.items" class="feature">
+              <mat-icon class="icon" svgIcon="check_icon"></mat-icon>
+              <div class="text">{{feature.text}}</div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
+
+    <getting-started></getting-started>
   </div>
 </ng-container>
