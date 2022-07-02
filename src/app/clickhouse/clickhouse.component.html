@@ -1,0 +1,59 @@
+<ng-container *ngIf="themeObs | async as theme">
+  <div *ngIf="clickhouseDataPromise | async as clickhouseData" class="clickhouse">
+    <div *ngIf="clickhouseData.hero as hero" class="hero">
+      <div class="container">
+        <div class="left">
+          <div [innerHTML]="hero.title" class="title"></div>
+          <div class="description">{{hero.description}}</div>
+          <div class="buttons">
+            <a *ngIf="hero.mainButton as mainButton"
+               [href]=mainButton.href
+               [target]="mainButton.target"
+               class="main_button">
+              <button class="primary_button">{{mainButton.text}}</button>
+            </a>
+            <a *ngIf="hero.gitButton as gitButton"
+               [href]=gitButton.href
+               [target]="gitButton.target"
+               class="git_button">
+              <button class="primary_button light">
+                <div class="icon_wrapper">
+                  <div [strapiCssImage]="theme === 'dark' ? gitButton.darkIconPngUrl : gitButton.lightIconPngUrl"
+                       class="icon"></div>
+                </div>
+                <div class="text">{{gitButton.text}}</div>
+              </button>
+            </a>
+          </div>
+        </div>
+        <div class="right">
+          <img [src]="hero.backgroundPngUrl | strapiImageUrl" alt="background_image" class="background_image"/>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="clickhouseData.features1 as features1" class="features1">
+      <div class="container">
+        <div class="features_title">{{features1.title}}</div>
+        <feature-list [features]="features1.items" class="features"></feature-list>
+      </div>
+    </div>
+    <div *ngIf="clickhouseData.features2 as features2" class="features2">
+      <div class="container">
+        <div class="section_metadata">
+          <div class="pretitle">{{features2.pretitle}}</div>
+          <div class="section_title">{{features2.title}}</div>
+        </div>
+        <div class="features">
+          <div *ngFor="let feature of features2.items" class="feature">
+            <div class="title">
+              <mat-icon [svgIcon]="feature.iconSvgId" class="icon"></mat-icon>
+              {{feature.title}}
+            </div>
+            <div class="description">{{feature.description}}</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import Strapi from "strapi-sdk-js";
 import {environment} from "../../../environments/environment";
 import {ThemeService} from "./theme.service";
+import {StrapiImageObject} from "../protocol/strapi.protocol";
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class StrapiService {
     return this.strapi;
   }
 
-  registerSvgIcon(iconObject?: { data?: { attributes: { hash: string, url: string } } }): string | undefined {
+  registerSvgIcon(iconObject?: StrapiImageObject): string | undefined {
     const iconObjectAttrs = iconObject?.data?.attributes;
     if (!iconObjectAttrs) {
       return undefined;
@@ -34,5 +35,9 @@ export class StrapiService {
     const url = environment.strapiBaseUrl + iconObjectAttrs.url;
     this.themeService.registerIcon(iconObjectAttrs.hash, url);
     return iconObjectAttrs.hash + '';
+  }
+
+  extractImageUrl(image: StrapiImageObject): string | undefined {
+    return image.data?.attributes.url;
   }
 }

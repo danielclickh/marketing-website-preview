@@ -27,6 +27,7 @@ import {CloudComponent} from './cloud/cloud.component';
 import {ContactFormComponent} from './common/sections/contact-form/contact-form.component';
 import {ContactUsComponent} from './contact-us/contact-us.component';
 import {GrowingCommunityComponent} from './common/sections/growing-community/growing-community.component';
+import {ClickhouseComponent} from './clickhouse/clickhouse.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {GrowingCommunityComponent} from './common/sections/growing-community/gro
     CloudComponent,
     ContactFormComponent,
     ContactUsComponent,
-    GrowingCommunityComponent
+    GrowingCommunityComponent,
+    ClickhouseComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),

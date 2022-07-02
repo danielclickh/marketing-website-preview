@@ -5,6 +5,7 @@ import {HomepageLayoutComponent} from "./homepage-layout/homepage-layout.compone
 import {HomepageComponent} from "./homepage/homepage.component";
 import {CloudComponent} from "./cloud/cloud.component";
 import {ContactUsComponent} from "./contact-us/contact-us.component";
+import {ClickhouseComponent} from "./clickhouse/clickhouse.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
         children: [
           {path: '', component: HomepageComponent},
           {path: 'cloud', component: CloudComponent},
+          {path: 'clickhouse', component: ClickhouseComponent},
           {path: 'company/contact', component: ContactUsComponent}
         ]
       }
