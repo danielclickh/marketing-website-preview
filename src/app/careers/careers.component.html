@@ -15,5 +15,78 @@
         <div class="description">{{hero.paragraphText}}</div>
       </div>
     </div>
+    <div class="company_values_section">
+      <div class="container company_values">
+        <div *ngFor="let companyValue of careersData.companyValues" class="company_value">
+          <div class="text_wrapper">
+            <div class="title">{{companyValue.title}}</div>
+            <div class="description">{{companyValue.description}}</div>
+          </div>
+          <div class="icon_wrapper">
+            <mat-icon [svgIcon]="companyValue.iconSvgId" class="icon"></mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="getPositionsAndMetadata() as positionsAndMetadata" class="positions_and_metadata">
+      <div class="container">
+        <div class="section_title">{{careersData.positionsTitle}}</div>
+        <div class="filters_and_positions">
+          <div class="filters_container">
+            <div class="search_container">
+              <div class="icon_wrapper">
+                <mat-icon class="icon">search</mat-icon>
+              </div>
+
+              <input [(ngModel)]="searchText" class="seed_input search_input" type="text"/>
+            </div>
+            <div class="title_and_filters">
+              <div class="title">Office</div>
+              <div class="filters">
+                <div (click)="selectedOffice = undefined" [ngClass]="{active: selectedOffice === undefined}"
+                     class="filter">
+                  All
+                </div>
+                <div (click)="selectedOffice = office.id" *ngFor="let office of positionsAndMetadata.offices"
+                     [ngClass]="{active: selectedOffice === office.id}"
+                     class="filter">
+                  {{office.name}}
+                </div>
+              </div>
+            </div>
+
+            <div class="title_and_filters">
+              <div class="title">Department</div>
+              <div class="filters">
+                <div (click)="selectedDepartment = undefined" [ngClass]="{active: selectedDepartment === undefined}"
+                     class="filter">
+                  All
+                </div>
+                <div (click)="selectedDepartment = department.id"
+                     *ngFor="let department of positionsAndMetadata.departments"
+                     [ngClass]="{active: selectedDepartment === department.id}"
+                     class="filter">
+                  {{department.name}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngFor="let departmentAndPosition of positionsAndMetadata.positions" class="department_and_positions">
+            <div class="department">{{departmentAndPosition.department.name}}</div>
+            <div *ngIf="!departmentAndPosition.positions.length" class="no_results">No results</div>
+            <div class="positions">
+              <a *ngFor="let position of departmentAndPosition.positions"
+                 [href]="position.absolute_url" class="position"
+                 target="_blank">
+                <div class="title">{{position.title}}</div>
+                <div class="offices">{{getOfficeNames(position.offices)}}</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <getting-started></getting-started>
   </div>
 </ng-container>

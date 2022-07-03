@@ -24,7 +24,7 @@ export class ThemeService {
     {name: 'right_arrow', svgRelativePath: 'right_arrow.svg'},
     {name: 'check_icon', svgRelativePath: 'check_icon.svg'},
     {name: 'hamburger_menu', svgRelativePath: 'hamburger_menu.svg'},
-    {name: 'x_icon', svgRelativePath: 'x_icon.svg'},
+    {name: 'x_icon', svgRelativePath: 'x_icon.svg'}
   ];
 
   constructor(private matIconRegistry: MatIconRegistry,
