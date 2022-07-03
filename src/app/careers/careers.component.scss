@@ -73,6 +73,14 @@
           margin-bottom: 110px;
         }
 
+        @include customBreakpointCss('max-width: 890px') {
+          display: block;
+
+          &:not(:last-child) {
+            margin-bottom: 38px;
+          }
+        }
+
         &:nth-child(even) {
           direction: rtl;
         }
@@ -101,6 +109,9 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          @include customBreakpointCss('max-width: 890px') {
+            display: none;
+          }
 
           .icon {
             height: auto;
@@ -121,9 +132,17 @@
     .filters_and_positions {
       display: flex;
 
+      @include customBreakpointCss('max-width: 840px') {
+        display: block;
+      }
+
       .filters_container {
         flex: 0 0 260px;
         margin-right: 65px;
+        @include customBreakpointCss('max-width: 890px') {
+          margin-bottom: 38px;
+          margin-right: 0;
+        }
 
         .search_container {
           width: 100%;
@@ -132,6 +151,10 @@
           display: flex;
           align-items: center;
           margin-bottom: 69px;
+
+          @include customBreakpointCss('max-width: 890px') {
+            margin-bottom: 30px;
+          }
 
           .icon_wrapper {
             position: absolute;
