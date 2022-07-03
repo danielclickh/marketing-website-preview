@@ -28,6 +28,7 @@ import {ContactFormComponent} from './common/sections/contact-form/contact-form.
 import {ContactUsComponent} from './contact-us/contact-us.component';
 import {GrowingCommunityComponent} from './common/sections/growing-community/growing-community.component';
 import {ClickhouseComponent} from './clickhouse/clickhouse.component';
+import {CareersComponent} from './careers/careers.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {ClickhouseComponent} from './clickhouse/clickhouse.component';
     ContactFormComponent,
     ContactUsComponent,
     GrowingCommunityComponent,
-    ClickhouseComponent
+    ClickhouseComponent,
+    CareersComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),

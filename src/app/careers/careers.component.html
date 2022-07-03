@@ -1,0 +1,19 @@
+<ng-container *ngIf="themeObs | async as theme">
+  <div *ngIf="careersDataPromise | async as careersData" class="careers">
+    <div *ngIf="careersData.hero as hero" class="hero">
+      <div class="container title_container">
+        <div class="title">{{hero.title}}</div>
+        <div class="description">{{hero.description}}</div>
+      </div>
+      <div class="image_container">
+        <img *ngFor="let imageUrl of hero.companyImageUrls"
+             [src]="imageUrl | strapiImageUrl"
+             alt="company_image" class="image"/>
+      </div>
+      <div class="container paragraph_container">
+        <div class="title">{{hero.paragraphTitle}}</div>
+        <div class="description">{{hero.paragraphText}}</div>
+      </div>
+    </div>
+  </div>
+</ng-container>
