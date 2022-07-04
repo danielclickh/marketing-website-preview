@@ -43,11 +43,11 @@
             <div class="title_and_filters">
               <div class="title">Office</div>
               <div class="filters">
-                <div (click)="selectedOffice = undefined" [ngClass]="{active: selectedOffice === undefined}"
+                <div (click)="selectOffice(undefined)" [ngClass]="{active: selectedOffice === undefined}"
                      class="filter">
                   All
                 </div>
-                <div (click)="selectedOffice = office.id" *ngFor="let office of positionsAndMetadata.offices"
+                <div (click)="selectOffice(office.id)" *ngFor="let office of positionsAndMetadata.offices"
                      [ngClass]="{active: selectedOffice === office.id}"
                      class="filter">
                   {{office.name}}
@@ -58,11 +58,11 @@
             <div class="title_and_filters">
               <div class="title">Department</div>
               <div class="filters">
-                <div (click)="selectedDepartment = undefined" [ngClass]="{active: selectedDepartment === undefined}"
+                <div (click)="selectDepartment(undefined)" [ngClass]="{active: selectedDepartment === undefined}"
                      class="filter">
                   All
                 </div>
-                <div (click)="selectedDepartment = department.id"
+                <div (click)="selectDepartment(department.id)"
                      *ngFor="let department of positionsAndMetadata.departments"
                      [ngClass]="{active: selectedDepartment === department.id}"
                      class="filter">

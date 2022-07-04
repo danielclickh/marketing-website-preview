@@ -78,6 +78,16 @@ export class CareersComponent {
     }
   }
 
+  selectOffice(officeId: number | undefined) {
+    this.selectedOffice = officeId;
+    this.positionsAndMetadata = this.getPositionsAndMetadata();
+  }
+
+  selectDepartment(departmentId: number | undefined) {
+    this.selectedDepartment = departmentId;
+    this.positionsAndMetadata = this.getPositionsAndMetadata();
+  }
+
   getOfficeNames(offices: Array<PositionOffice>): string {
     return offices.map(office => office.name).join(', ');
   }
