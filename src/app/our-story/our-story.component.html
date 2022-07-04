@@ -1,0 +1,18 @@
+<ng-container *ngIf="themeObs | async as theme">
+  <div *ngIf="ourStoryDataPromise | async as ourStoryData" class="our_story">
+    <div *ngIf="ourStoryData.hero as hero" class="hero">
+      <div class="container">
+        <div class="title">{{hero.title}}</div>
+        <div class="description">{{hero.description}}</div>
+        <img [src]="hero.imagePngUrl | strapiImageUrl" alt="world_map" class="image"/>
+        <div class="offices">
+          <div *ngFor="let office of hero.offices" class="office">
+            <div [strapiCssImage]="office.flagPngUrl" class="flag"></div>
+            <div class="name">{{office.name}}</div>
+            <div class="location">{{office.location}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

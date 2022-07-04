@@ -1,0 +1,71 @@
+@import 'colors';
+@import 'mixins';
+
+.our_story {
+  .hero {
+    text-align: center;
+    padding: 70px 0;
+
+    .title {
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 58px;
+      margin-bottom: 20px;
+    }
+
+    .description {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 27px;
+      color: $fg3;
+      margin-bottom: 70px;
+      max-width: 656px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .image {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 60px;
+      width: 80%;
+    }
+
+    .offices {
+      display: flex;
+      max-width: 500px;
+      justify-content: space-between;
+      margin: 0 auto;
+
+      .office {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .flag {
+          width: 30px;
+          height: 18px;
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center center;
+          margin-bottom: 12px;
+        }
+
+        .name {
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 24px;
+          margin-bottom: 4px;
+        }
+
+        .location {
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+          color: $fg3;
+        }
+      }
+    }
+  }
+}
