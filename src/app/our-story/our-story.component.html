@@ -14,5 +14,23 @@
         </div>
       </div>
     </div>
+
+    <div *ngIf="ourStoryData.aboutUs as aboutUs" class="about_us">
+      <div class="container">
+        <div class="about_us_title">{{aboutUs.title}}</div>
+        <div class="items">
+          <div *ngFor="let item of aboutUs.items" class="item">
+            <div class="content_container">
+              <div *ngIf="item.title" class="title">{{item.title}}</div>
+              <div *ngIf="item.subtitle" class="subtitle">{{item.subtitle}}</div>
+              <div class="description">{{item.description}}</div>
+            </div>
+            <div class="image_container">
+              <img [src]="item.imagePngUrl | strapiImageUrl" alt="company_event_image" class="image"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </ng-container>
