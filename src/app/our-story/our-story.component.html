@@ -32,5 +32,18 @@
         </div>
       </div>
     </div>
+
+    <div *ngIf="ourStoryData.ourHistory as ourHistory" class="our_history">
+      <div class="container">
+        <div class="title">{{ourHistory.title}}</div>
+        <div class="items">
+          <div *ngFor="let item of ourHistory.items" class="item">
+            <div class="year">{{item.year}}</div>
+            <div class="text">{{item.text}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <getting-started></getting-started>
   </div>
 </ng-container>
