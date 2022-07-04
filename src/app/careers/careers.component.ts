@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnChanges, SimpleChanges} from '@angular/core';
 import {ThemeService} from "../common/services/theme.service";
 import {CareersService} from "./careers.service";
 import {Position, PositionOffice} from "./careers.protocol";
@@ -18,7 +18,7 @@ export interface PositionsAndMetadata {
   styleUrls: ['./careers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CareersComponent {
+export class CareersComponent implements OnChanges {
   careersDataPromise = this.careersService.getCareersData();
   themeObs = this.themeService.observeTheme();
   officeToPositionMap = new Map<number, Array<Position>>();
@@ -28,7 +28,6 @@ export class CareersComponent {
   searchText: string = '';
   private officeIdToNameMap = new Map<number, string>();
   private departmentIdToNameMap = new Map<number, string>();
-  positionsAndMetadata?: PositionsAndMetadata;
 
   constructor(private readonly careersService: CareersService,
               private readonly themeService: ThemeService,
@@ -36,7 +35,11 @@ export class CareersComponent {
     this.populatePositions().then()
   }
 
-  private getPositionsAndMetadata(): PositionsAndMetadata | undefined {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('Changes', changes);
+  }
+
+  getPositionsAndMetadata(): PositionsAndMetadata | undefined {
     if (this.departmentToPositionMap.size === 0) {
       return undefined;
     }
@@ -80,12 +83,10 @@ export class CareersComponent {
 
   selectOffice(officeId: number | undefined) {
     this.selectedOffice = officeId;
-    this.positionsAndMetadata = this.getPositionsAndMetadata();
   }
 
   selectDepartment(departmentId: number | undefined) {
     this.selectedDepartment = departmentId;
-    this.positionsAndMetadata = this.getPositionsAndMetadata();
   }
 
   getOfficeNames(offices: Array<PositionOffice>): string {
@@ -109,8 +110,6 @@ export class CareersComponent {
         this.departmentIdToNameMap.set(department.id, department.name);
       }
     }
-
-    this.positionsAndMetadata = this.getPositionsAndMetadata();
     this.cd.detectChanges();
   }
 }

@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="positionsAndMetadata" class="positions_and_metadata">
+    <div *ngIf="getPositionsAndMetadata() as positionsAndMetadata" class="positions_and_metadata">
       <div class="container">
         <div class="section_title">{{careersData.positionsTitle}}</div>
         <div class="filters_and_positions">
