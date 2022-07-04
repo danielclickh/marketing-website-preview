@@ -1,7 +1,16 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
 import {ThemeService} from "../common/services/theme.service";
 import {CareersService} from "./careers.service";
 import {Position, PositionOffice} from "./careers.protocol";
+
+export interface PositionsAndMetadata {
+  offices: Array<{ name: string; id: number }>;
+  departments: Array<{ name: string; id: number }>;
+  positions: Array<{
+    positions: Array<Position>;
+    department: { name: string; id: number };
+  }>
+}
 
 @Component({
   selector: 'app-careers',
@@ -19,14 +28,15 @@ export class CareersComponent {
   searchText: string = '';
   private officeIdToNameMap = new Map<number, string>();
   private departmentIdToNameMap = new Map<number, string>();
-  private positions = Array<Position>();
+  positionsAndMetadata?: PositionsAndMetadata;
 
   constructor(private readonly careersService: CareersService,
-              private readonly themeService: ThemeService) {
+              private readonly themeService: ThemeService,
+              private readonly cd: ChangeDetectorRef) {
     this.populatePositions().then()
   }
 
-  getPositionsAndMetadata() {
+  private getPositionsAndMetadata(): PositionsAndMetadata | undefined {
     if (this.departmentToPositionMap.size === 0) {
       return undefined;
     }
@@ -89,5 +99,8 @@ export class CareersComponent {
         this.departmentIdToNameMap.set(department.id, department.name);
       }
     }
+
+    this.positionsAndMetadata = this.getPositionsAndMetadata();
+    this.cd.detectChanges();
   }
 }
