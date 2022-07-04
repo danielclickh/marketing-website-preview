@@ -204,9 +204,10 @@
               width: 100%;
               border-radius: 8px;
               transition: filter 300ms;
+              background: $bg1;
 
               &:hover {
-                filter: brightness(0.8);
+                filter: brightness(0.9);
               }
 
               &.active {
@@ -252,7 +253,7 @@
             transition: filter 300ms;
 
             &:hover {
-              filter: brightness(1.2);
+              filter: brightness(0.9);
               border-bottom: 1px solid transparent;
             }
 
