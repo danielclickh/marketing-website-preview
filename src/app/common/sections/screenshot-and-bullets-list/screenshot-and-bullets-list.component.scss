@@ -45,6 +45,7 @@
     }
 
     .metadata {
+      direction: ltr;
       @include customBreakpointCss('max-width: 890px') {
         margin-bottom: 24px;
       }
