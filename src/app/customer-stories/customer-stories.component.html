@@ -36,5 +36,62 @@
         </div>
       </div>
     </div>
+    <div *ngIf="customerStoriesData.useCases as useCases" class="use_cases">
+      <div class="container">
+        <div class="section_metadata">
+          <div class="title">{{useCases.title}}</div>
+          <div class="description">{{useCases.description}}</div>
+        </div>
+        <div *ngIf="useCases.spotlight as spotlight" class="spotlight use_case">
+          <div class="left">
+            <div class="pretitle">{{useCases.spotlightTitle}}</div>
+            <div class="company_name">{{spotlight.companyName}}</div>
+            <div class="description">{{spotlight.description}}</div>
+            <a *ngIf="spotlight.ctaButton as ctaButton"
+               [href]=ctaButton.href
+               [target]="ctaButton.target"
+               class="cta_button">
+              <button class="primary_button">
+                {{ctaButton.text}}
+                <mat-icon class="icon" svgIcon="carousel_right_arrow"></mat-icon>
+              </button>
+            </a>
+          </div>
+
+          <div class="right">
+            <div [ngClass]="{dark: theme === 'dark', light: theme === 'light'}" class="hexagon">
+              <img [src]="(theme === 'dark' ? spotlight.darkLogoPngUrl : spotlight.lightLogoPngUrl) | strapiImageUrl"
+                   alt="logo"
+                   class="logo"/>
+            </div>
+          </div>
+        </div>
+        <div class="other_use_cases">
+          <div *ngFor="let useCase of useCases.items" class="use_case">
+            <img [src]="(theme === 'dark' ? useCase.darkLogoPngUrl : useCase.lightLogoPngUrl) | strapiImageUrl"
+                 alt="logo"
+                 class="logo"/>
+            <div class="description">{{useCase.description}}</div>
+            <div class="bullets">
+              <div *ngFor="let bullet of useCase.bullets" class="bullet">
+                <mat-icon class="icon" svgIcon="star"></mat-icon>
+                {{bullet.text}}
+              </div>
+            </div>
+            <a *ngIf="useCase.ctaButton as ctaButton"
+               [href]=ctaButton.href
+               [target]="ctaButton.target"
+               class="cta_button">
+              <button class="primary_button">
+                {{ctaButton.text}}
+                <mat-icon class="icon" svgIcon="carousel_right_arrow"></mat-icon>
+              </button>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <getting-started></getting-started>
   </div>
 </ng-container>

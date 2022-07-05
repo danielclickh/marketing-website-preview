@@ -30,7 +30,15 @@ export class CustomerStoriesService {
     const attributes = data.attributes;
     const hero = attributes.hero;
     const useCases = attributes.useCases;
-    const useCaseItems = attributes.useCaseItems;
+    const useCaseItems = attributes.useCaseItems.map((useCase: any) => {
+      return {
+        ...useCase,
+        darkLogoPngUrl: this.strapiService.extractImageUrl(useCase.darkLogoPng),
+        lightLogoPngUrl: this.strapiService.extractImageUrl(useCase.lightLogoPng)
+      }
+    });
+    const spotlight = useCaseItems.shift();
+
 
     return {
       hero: {
@@ -40,13 +48,9 @@ export class CustomerStoriesService {
         })
       },
       useCases: {
-        ...useCases, items: useCaseItems.map((useCase: any) => {
-          return {
-            ...useCase,
-            darkLogoPngUrl: this.strapiService.extractImageUrl(useCase.darkLogoPng),
-            lightLogoPngUrl: this.strapiService.extractImageUrl(useCase.lightLogoPng)
-          }
-        })
+        ...useCases,
+        spotlight,
+        items: useCaseItems
       },
     };
   }

@@ -25,6 +25,7 @@ export interface UseCases {
   title: string;
   description: string;
   spotlightTitle: string;
+  spotlight: UseCasesItem;
   items: Array<UseCasesItem>;
 }
 
