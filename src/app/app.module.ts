@@ -30,6 +30,8 @@ import {GrowingCommunityComponent} from './common/sections/growing-community/gro
 import {ClickhouseComponent} from './clickhouse/clickhouse.component';
 import {CareersComponent} from './careers/careers.component';
 import {OurStoryComponent} from './our-story/our-story.component';
+import {CustomerStoriesComponent} from "./customer-stories/customer-stories.component";
+
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import {OurStoryComponent} from './our-story/our-story.component';
     GrowingCommunityComponent,
     ClickhouseComponent,
     CareersComponent,
-    OurStoryComponent
+    OurStoryComponent,
+    CustomerStoriesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
