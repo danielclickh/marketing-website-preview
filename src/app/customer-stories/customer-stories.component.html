@@ -1,5 +1,40 @@
 <ng-container *ngIf="themeObs | async as theme">
-  <div *ngIf="customerStoriesDataPromise | async as customerStoriesData" class="use_cases">
-    hello
+  <div *ngIf="customerStoriesDataPromise | async as customerStoriesData" class="customer_stories">
+    <div *ngIf="customerStoriesData.hero as hero" class="hero">
+      <div class="container">
+        <div class="section_metadata">
+          <div class="title">{{hero.title}}</div>
+          <div class="description">{{hero.description}}</div>
+        </div>
+
+        <div class="testimonials_container">
+          <div class="carousel_left_arrow_container carousel_arrow_container">
+            <mat-icon (click)="previousPage()" *ngIf="paginationEnabled" class="icon"
+                      svgIcon="carousel_left_arrow"></mat-icon>
+          </div>
+          <div class="carousel">
+            <div *ngFor="let testimonial of getCurrentTestimonialsPage()" [@enterAnimation] class="testimonial">
+              <div [strapiCssImage]="testimonial.avatarUrl" class="avatar"></div>
+              <div class="review">“{{testimonial.review}}”</div>
+              <div class="author">{{testimonial.author}}</div>
+              <div class="role">{{testimonial.role}}</div>
+              <div class="rating_container">
+                <div class="no_rating_stars">
+                  <mat-icon *ngFor="let star of [1,2,3,4,5]" class="star" svgIcon="star"></mat-icon>
+                </div>
+                <div [style.width]="getPositiveRatingPercentage(testimonial.rating) + '%'"
+                     class="actual_rating_stars">
+                  <mat-icon *ngFor="let star of [1,2,3,4,5]" class="star" svgIcon="star"></mat-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel_right_arrow_container carousel_arrow_container">
+            <mat-icon (click)="nextPage()" *ngIf="paginationEnabled" class="icon"
+                      svgIcon="carousel_right_arrow"></mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </ng-container>

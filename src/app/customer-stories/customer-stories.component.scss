@@ -1,0 +1,149 @@
+@import 'colors';
+@import 'mixins';
+
+.customer_stories {
+  .hero {
+    padding: 70px 0;
+
+    .section_metadata {
+      text-align: center;
+      max-width: 696px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 59px;
+
+      .title {
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 58px;
+        margin-bottom: 20px;
+      }
+
+      .description {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        color: $fg3;
+      }
+    }
+
+    .testimonials_container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+
+      .carousel_arrow_container {
+        flex: 0 0 70px;
+        display: flex;
+        align-items: center;
+        margin-top: 55px;
+
+        .icon {
+          width: 27px;
+          height: 45px;
+          line-height: 0;
+          color: $fg3;
+          cursor: pointer;
+          transition: filter 300ms;
+
+          &:hover {
+            filter: brightness(0.6);
+          }
+        }
+
+      }
+
+      .carousel_left_arrow_container {
+        justify-content: flex-start;
+      }
+
+      .carousel_right_arrow_container {
+        justify-content: flex-end;
+      }
+
+
+      .carousel {
+        flex: 1 1 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 40px;
+
+        .testimonial {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          text-align: center;
+          max-width: 317px;
+
+          .avatar {
+            border-radius: 64px;
+            width: 64px;
+            height: 64px;
+            margin-bottom: 32px;
+            background-size: contain;
+          }
+
+          .review {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            margin-bottom: 24px;
+          }
+
+          .author {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            margin-bottom: 5px;
+          }
+
+          .role {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            color: $fg3;
+            margin-bottom: 10px;
+          }
+
+
+          .rating_container {
+            position: relative;
+
+            .star {
+              width: 18px;
+              height: 18px;
+              line-height: 0;
+
+              &:not(:last-child) {
+                margin-right: 5px;
+              }
+            }
+
+            .no_rating_stars {
+              .star {
+                color: $fg3;
+              }
+            }
+
+            .actual_rating_stars {
+              overflow: hidden;
+              white-space: nowrap;
+              position: absolute;
+              top: 0;
+              left: 0;
+              height: 100%;
+              z-index: 10;
+
+              .star {
+                color: $primary;
+              }
+            }
+          }
+
+        }
+
+      }
+    }
+  }
+}

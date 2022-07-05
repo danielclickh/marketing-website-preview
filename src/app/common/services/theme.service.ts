@@ -24,7 +24,11 @@ export class ThemeService {
     {name: 'right_arrow', svgRelativePath: 'right_arrow.svg'},
     {name: 'check_icon', svgRelativePath: 'check_icon.svg'},
     {name: 'hamburger_menu', svgRelativePath: 'hamburger_menu.svg'},
-    {name: 'x_icon', svgRelativePath: 'x_icon.svg'}
+    {name: 'x_icon', svgRelativePath: 'x_icon.svg'},
+    {name: 'carousel_left_arrow', svgRelativePath: 'carousel_left_arrow.svg'},
+    {name: 'carousel_right_arrow', svgRelativePath: 'carousel_right_arrow.svg'},
+    {name: 'star', svgRelativePath: 'star.svg'},
+    {name: 'hexagon', svgRelativePath: 'hexagon.svg'},
   ];
 
   constructor(private matIconRegistry: MatIconRegistry,
