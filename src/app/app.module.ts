@@ -31,6 +31,9 @@ import {ClickhouseComponent} from './clickhouse/clickhouse.component';
 import {CareersComponent} from './careers/careers.component';
 import {OurStoryComponent} from './our-story/our-story.component';
 import {CustomerStoriesComponent} from "./customer-stories/customer-stories.component";
+import {
+  CustomerStoriesTestimonialComponent
+} from './customer-stories/customer-stories-testimonial/customer-stories-testimonial.component';
 
 
 @NgModule({
@@ -52,7 +55,8 @@ import {CustomerStoriesComponent} from "./customer-stories/customer-stories.comp
     ClickhouseComponent,
     CareersComponent,
     OurStoryComponent,
-    CustomerStoriesComponent
+    CustomerStoriesComponent,
+    CustomerStoriesTestimonialComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),

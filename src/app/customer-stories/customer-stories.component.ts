@@ -2,23 +2,12 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/co
 import {ThemeService} from "../common/services/theme.service";
 import {CustomerStoriesService} from "./customer-stories.service";
 import {CustomerStoriesTestimonial} from "./customer-stories.protocol";
-import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-customer-stories',
   templateUrl: './customer-stories.component.html',
   styleUrls: ['./customer-stories.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger(
-      'enterAnimation', [
-        transition(':enter', [
-          style({opacity: 0}),
-          animate('500ms', style({opacity: 1}))
-        ])
-      ]
-    )
-  ],
 })
 export class CustomerStoriesComponent {
   customerStoriesDataPromise = this.customerStoriesService.getCustomerStoriesData();
@@ -48,10 +37,6 @@ export class CustomerStoriesComponent {
     }
     const startIndex = this.currentPage * 3;
     return this.allTestimonials.slice(startIndex, startIndex + 3);
-  }
-
-  getPositiveRatingPercentage(rating: number) {
-    return Math.floor(rating / 5 * 100);
   }
 
   private async initializeTestimonialPagination() {

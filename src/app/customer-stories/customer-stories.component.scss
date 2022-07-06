@@ -27,10 +27,30 @@
       }
     }
 
+    .all_testimonials_container {
+      display: none;
+
+      @include customBreakpointCss('max-width: 890px') {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .testimonial {
+          &:not(:last-child) {
+            margin-bottom: 70px;
+          }
+        }
+      }
+    }
+
     .testimonials_container {
       display: flex;
       align-items: flex-start;
       justify-content: center;
+
+      @include customBreakpointCss('max-width: 890px') {
+        display: none;
+      }
 
       .carousel_arrow_container {
         flex: 0 0 70px;
@@ -50,7 +70,6 @@
             filter: brightness(0.6);
           }
         }
-
       }
 
       .carousel_left_arrow_container {
@@ -67,80 +86,6 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-column-gap: 40px;
-
-        .testimonial {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: flex-start;
-          text-align: center;
-          max-width: 317px;
-
-          .avatar {
-            border-radius: 64px;
-            width: 64px;
-            height: 64px;
-            margin-bottom: 32px;
-            background-size: contain;
-          }
-
-          .review {
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 24px;
-            margin-bottom: 24px;
-          }
-
-          .author {
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 21px;
-            margin-bottom: 5px;
-          }
-
-          .role {
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 21px;
-            color: $fg3;
-            margin-bottom: 10px;
-          }
-
-
-          .rating_container {
-            position: relative;
-
-            .star {
-              width: 18px;
-              height: 18px;
-              line-height: 0;
-
-              &:not(:last-child) {
-                margin-right: 5px;
-              }
-            }
-
-            .no_rating_stars {
-              .star {
-                color: $fg3;
-              }
-            }
-
-            .actual_rating_stars {
-              overflow: hidden;
-              white-space: nowrap;
-              position: absolute;
-              top: 0;
-              left: 0;
-              height: 100%;
-              z-index: 10;
-
-              .star {
-                color: $primary;
-              }
-            }
-          }
-        }
       }
     }
   }
@@ -193,7 +138,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          background: $bg3;
+          background: $bg7;
           color: $fg1;
           font-weight: 600;
           font-size: 14px;
@@ -233,6 +178,10 @@
         top: -30px;
         height: calc(100% + 60px);
 
+        @include customBreakpointCss('max-width: 890px') {
+          display: none;
+        }
+
         .hexagon {
           color: $bg2;
           height: 100%;
@@ -264,6 +213,9 @@
       grid-template-columns: repeat(auto-fill, minmax(410px, 1fr));
       grid-gap: 36px;
       display: grid;
+      @include customBreakpointCss('max-width: 890px') {
+        grid-template-columns: 1fr
+      }
 
       .use_case {
         padding: 24px;
@@ -295,6 +247,7 @@
             .icon {
               line-height: 0;
               color: $primary;
+              flex: 0 0 20px;
               width: 20px;
               height: 20px;
               margin-right: 12px;
