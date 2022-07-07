@@ -19,16 +19,24 @@
     display: flex;
     justify-content: space-between;
 
+    @include customBreakpointCss('max-width: 600px') {
+      display: block;
+    }
+
     .event {
+      display: block;
 
       &:not(:last-child) {
         margin-right: 32px;
+        @include customBreakpointCss('max-width: 600px') {
+          margin-right: 0;
+          margin-bottom: 70px;
+        }
       }
 
       .thumbnail {
         width: 100%;
         margin-bottom: 11px;
-        max-height: 214px;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 6px 4px -4px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
       }
