@@ -27,6 +27,14 @@ export interface EventLocation {
   address: string;
 }
 
+export interface EventForm {
+  firstNameLabel: string;
+  lastNameLabel: string;
+  emailLabel: string;
+  submitButtonLabel: string;
+  type: 'recordedGatedContent' | 'eventRegistration';
+}
+
 export interface Event {
   id: number;
   title: string;
@@ -44,6 +52,7 @@ export interface Event {
   lightFeatureImagePngUrl: string;
   eventEnded: boolean;
   eventVideoUrl: string;
+  form: EventForm;
 }
 
 export interface NewsAndEventsHero {

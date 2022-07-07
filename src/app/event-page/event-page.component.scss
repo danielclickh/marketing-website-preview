@@ -1,0 +1,169 @@
+@import 'colors';
+@import 'mixins';
+
+.event_page {
+  .hero {
+    padding-top: 105px;
+    padding-bottom: 70px;
+
+    & > .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      @include customBreakpointCss('max-width: 1090px') {
+        display: block;
+      }
+
+      .left {
+        flex: 1 1 auto;
+        margin-right: 64px;
+        max-width: 529px;
+
+        @include customBreakpointCss('max-width: 1090px') {
+          margin-right: 0;
+          max-width: 800px;
+          margin-bottom: 64px;
+        }
+
+        &.no_form {
+          max-width: 800px;
+        }
+
+        .section_metadata {
+          margin-bottom: 79px;
+
+          .pretitle {
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 27px;
+            margin-bottom: 7px;
+          }
+
+          .title {
+            font-weight: 700;
+            font-size: 48px;
+            line-height: 58px;
+            margin-bottom: 19px;
+          }
+
+          .description {
+            white-space: pre-wrap;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            color: $fg3;
+          }
+        }
+
+        .hosted_by {
+          margin-bottom: 70px;
+
+          .title {
+            font-weight: 700;
+            font-size: 38px;
+            line-height: 46px;
+            margin-bottom: 31px;
+          }
+
+          .hosts {
+            grid-template-columns: repeat(auto-fill, minmax(212px, 1fr));
+            grid-gap: 24px;
+            display: grid;
+            grid-auto-columns: 1fr;
+
+            .host {
+              display: flex;
+
+              .avatar {
+                border-radius: 44px;
+                width: 44px;
+                height: 44px;
+                margin-right: 17px;
+                background-size: contain;
+                background-position: center center;
+                background-repeat: no-repeat;
+              }
+
+              .content {
+                .name {
+                  font-weight: 500;
+                  font-size: 14px;
+                  line-height: 21px;
+                  margin-bottom: 1px;
+                }
+
+                .role {
+                  font-weight: 500;
+                  font-size: 12px;
+                  line-height: 18px;
+                  color: $fg3;
+                }
+              }
+            }
+          }
+        }
+
+        .agenda {
+          .title {
+            font-weight: 700;
+            font-size: 38px;
+            line-height: 46px;
+            margin-bottom: 31px;
+          }
+
+          .agenda_items {
+            .agenda_item {
+              display: flex;
+              align-items: center;
+              font-weight: 500;
+              font-size: 16px;
+              line-height: 24px;
+
+              &:not(:last-child) {
+                margin-bottom: 7px;
+              }
+
+              .time {
+                flex: 0 0 72px;
+                color: $fg3;
+              }
+
+              .topic {
+                flex: 1 1 auto;
+              }
+            }
+          }
+        }
+      }
+
+      .right {
+        flex: 0 0 502px;
+
+        .form {
+          display: block;
+          background: $bg2;
+          width: 100%;
+          padding: 32px;
+          box-sizing: border-box;
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 6px 4px -4px rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
+
+          .seed_form_element {
+            width: 100%;
+            max-width: 332px;
+
+            .seed_input {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .recent_events {
+    padding: 70px 0;
+    background: $bg2;
+  }
+}

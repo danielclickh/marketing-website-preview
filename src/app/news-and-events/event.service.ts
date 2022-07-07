@@ -25,6 +25,7 @@ export class EventService {
         'location',
         'darkFeatureImagePng',
         'lightFeatureImagePng',
+        'form'
       ]
     });
 

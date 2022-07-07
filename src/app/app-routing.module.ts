@@ -10,6 +10,7 @@ import {CareersComponent} from "./careers/careers.component";
 import {OurStoryComponent} from "./our-story/our-story.component";
 import {CustomerStoriesComponent} from "./customer-stories/customer-stories.component";
 import {NewsAndEventsComponent} from "./news-and-events/news-and-events.component";
+import {EventPageComponent} from "./event-page/event-page.component";
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
           {path: 'company/careers', component: CareersComponent},
           {path: 'company/our-story', component: OurStoryComponent},
           {path: 'company/news-events', component: NewsAndEventsComponent},
+          {path: 'company/event/:eventId', component: EventPageComponent},
           {path: 'customer-stories', component: CustomerStoriesComponent},
         ]
       }

@@ -1,0 +1,71 @@
+<div *ngIf="event" class="event_page">
+  <div class="hero">
+    <div class="container">
+      <div [ngClass]="{ 'no_form': event.eventEnded }" class="left">
+        <div class="section_metadata">
+          <div class="pretitle">{{event.category}}</div>
+          <div class="title">{{event.title}}</div>
+          <div class="description">{{event.description}}</div>
+        </div>
+
+        <div *ngIf="event.hostedBy as hostedBy" class="hosted_by">
+          <div class="title">{{hostedBy.title}}</div>
+          <div class="hosts">
+            <div *ngFor="let host of hostedBy.hosts" class="host">
+              <div [strapiCssImage]="host.avatarPngUrl" class="avatar"></div>
+              <div class="content">
+                <div class="name">{{host.name}}</div>
+                <div class="role">{{host.role}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="event.agenda as agenda" class="agenda">
+          <div class="title">{{agenda.title}}</div>
+          <div class="agenda_items">
+            <div *ngFor="let agendaItem of agenda.items" class="agenda_item">
+              <div class="time">{{agendaItem.time}}</div>
+              <div class="topic">{{agendaItem.topic}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="event.form && !event.eventEnded" class="right">
+        <form (ngSubmit)="onSubmit().then()" *ngIf="form" [formGroup]="form" class="form">
+          <div *ngIf="event.form.type === 'eventRegistration'" class="seed_form_element">
+            <label class="seed_label">{{event.form.firstNameLabel}}</label>
+            <input class="seed_input" formControlName="firstName" name="firstName" type="text">
+            <div *ngIf="!form.controls['firstName'].valid && form.controls['firstName'].touched" class="seed_error">
+              Invalid first name
+            </div>
+          </div>
+
+          <div *ngIf="event.form.type === 'eventRegistration'" class="seed_form_element">
+            <label class="seed_label">{{event.form.lastNameLabel}}</label>
+            <input class="seed_input" formControlName="lastName" name="lastName" type="text">
+            <div *ngIf="!form.controls['lastName'].valid && form.controls['lastName'].touched" class="seed_error">
+              Invalid last name
+            </div>
+          </div>
+
+          <div class="seed_form_element">
+            <label class="seed_label">{{event.form.emailLabel}}</label>
+            <input class="seed_input" formControlName="email" name="email" type="email">
+            <div *ngIf="!form.controls['email'].valid && form.controls['email'].touched" class="seed_error">
+              Invalid e-mail address
+            </div>
+          </div>
+
+          <button [disabled]="serverCallInProgress"
+                  class="submit_button primary_button">{{event.form.submitButtonLabel}}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="recent_events">
+    <div class="container">
+      <recent-events [allEvents]="allEvents"></recent-events>
+    </div>
+  </div>
+  <getting-started></getting-started>
+</div>

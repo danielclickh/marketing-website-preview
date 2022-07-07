@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {firstValueFrom} from "rxjs";
 
-type WorkatoFormType = 'newsletter' | 'websiteContact';
+type WorkatoFormType = 'newsletter' | 'websiteContact' | 'eventRegistration' | 'recordedGatedContent';
 type WorkatoRequest = WorkatoNewsletterRequest;
 
 interface BaseWorkatoRequest {
@@ -25,6 +25,16 @@ interface WorkatoContactRequest extends BaseWorkatoRequest {
   message?: string;
 }
 
+interface WorkatoEventRegisterRequest extends BaseWorkatoRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
+interface WorkatoRecordedGatedContentRequest extends BaseWorkatoRequest {
+  email: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -44,6 +54,18 @@ export class WorkatoService {
                        message?: string): Promise<void> {
     const request: WorkatoContactRequest = {firstName, lastName, email, company, message};
     await this.submitWorkatoForm('websiteContact', request);
+  }
+
+  async eventRegistration(firstName: string,
+                          lastName: string,
+                          email: string): Promise<void> {
+    const request: WorkatoEventRegisterRequest = {firstName, lastName, email};
+    await this.submitWorkatoForm('eventRegistration', request);
+  }
+
+  async recordedGatedContent(email: string): Promise<void> {
+    const request: WorkatoRecordedGatedContentRequest = {email};
+    await this.submitWorkatoForm('recordedGatedContent', request);
   }
 
   private async submitWorkatoForm(formType: WorkatoFormType, request: WorkatoRequest) {

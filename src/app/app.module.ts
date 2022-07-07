@@ -37,6 +37,7 @@ import {
 import {NewsAndEventsComponent} from './news-and-events/news-and-events.component';
 import {RecentEventsComponent} from './news-and-events/recent-events/recent-events.component';
 import {NewsItemComponent} from './news-and-events/news-item/news-item.component';
+import {EventPageComponent} from './event-page/event-page.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import {NewsItemComponent} from './news-and-events/news-item/news-item.component
     CustomerStoriesTestimonialComponent,
     NewsAndEventsComponent,
     RecentEventsComponent,
-    NewsItemComponent
+    NewsItemComponent,
+    EventPageComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
