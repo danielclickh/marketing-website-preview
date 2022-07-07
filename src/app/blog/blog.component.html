@@ -1,0 +1,73 @@
+<ng-container *ngIf="themeObs | async as theme">
+  <div *ngIf="blogDataPromise | async as blogData" class="blog">
+    <div class="container">
+      <div class="main_section">
+        <div *ngIf="blogData.hero as hero" class="hero">
+          <div class="title">{{hero.title}}</div>
+          <div class="description">{{hero.description}}</div>
+        </div>
+        <div class="filters_and_posts">
+          <div class="left">
+            <div *ngIf="categories" class="filters_container">
+              <div class="search_container">
+                <div class="icon_wrapper">
+                  <mat-icon class="icon">search</mat-icon>
+                </div>
+                <input (ngModelChange)="filterBlogPosts()" [(ngModel)]="searchText" class="seed_input search_input"
+                       placeholder="Search" type="text"/>
+              </div>
+              <div class="title_and_filters">
+                <div class="title">Blog categories</div>
+                <div class="filters">
+                  <div (click)="selectCategory(undefined)" [ngClass]="{active: selectedCategory === undefined}"
+                       class="filter">
+                    View all
+                  </div>
+                  <div (click)="selectCategory(category)" *ngFor="let category of categories"
+                       [ngClass]="{active: selectedCategory === category}"
+                       class="filter">
+                    {{category}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="right">
+            <div *ngIf="filteredBlogPosts" class="posts">
+              <a *ngFor="let blogPost of filteredBlogPosts" [href]="'/blog/'+blogPost.id" class="post">
+                <div [strapiCssImage]="blogPost.thumbnailPngUrl" class="thumbnail"></div>
+                <div class="metadata">
+                  <div class="category">{{blogPost.category}}</div>
+                  <div class="title">{{blogPost.title}}</div>
+                  <div class="description">{{blogPost.shortDescription}}</div>
+                  <div *ngIf="blogPost.author as author" class="author">
+                    <div [strapiCssImage]="author.avatarPngUrl" class="avatar"></div>
+                    <div class="content">
+                      <div class="name">{{author.name}}</div>
+                      <div class="date">{{blogPost.publishedAt | date}}</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div *ngIf="blogData.newsletterForm as newsletterForm" class="newsletter_form_container">
+              <div class="text_container">
+                <div class="title">{{newsletterForm.title}}</div>
+                <div class="description">{{newsletterForm.description}}</div>
+              </div>
+              <div class="form_container">
+                <div class="input_and_button_container">
+                  <input [(ngModel)]="newsletterEmail" [placeholder]="newsletterForm.emailLabel"
+                         class="email_input seed_input"
+                         type="email"/>
+                  <button (click)="submitNewsletterForm()"
+                          class="primary_button">{{newsletterForm.submitButtonLabel}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -11,6 +11,7 @@ import {OurStoryComponent} from "./our-story/our-story.component";
 import {CustomerStoriesComponent} from "./customer-stories/customer-stories.component";
 import {NewsAndEventsComponent} from "./news-and-events/news-and-events.component";
 import {EventPageComponent} from "./event-page/event-page.component";
+import {BlogComponent} from "./blog/blog.component";
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
           {path: 'company/news-events', component: NewsAndEventsComponent},
           {path: 'company/event/:eventId', component: EventPageComponent},
           {path: 'customer-stories', component: CustomerStoriesComponent},
+          {path: 'blog', component: BlogComponent},
         ]
       }
     ]

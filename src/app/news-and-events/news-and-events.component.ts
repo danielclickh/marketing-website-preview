@@ -14,6 +14,5 @@ export class NewsAndEventsComponent {
 
   constructor(private readonly newsAndEventsService: NewsAndEventsService,
               private readonly themeService: ThemeService) {
-    this.newsAndEventsDataPromise.then(console.log);
   }
 }
