@@ -13,8 +13,43 @@
         </div>
       </div>
 
+      <div class="content_and_share_container">
+        <div [innerHTML]="blogPost.content" class="blog_post_content"></div>
 
-      <div [innerHTML]="blogPost.content" class="blog_post_content"></div>
+        <div class="share_post_container">
+          <div class="left">
+            <div class="text">Share this post</div>
+          </div>
+          <div class="right">
+            <div class="buttons">
+              <button (click)="copyToClipboard()" class="copy_link_button stroked_button">
+                <mat-icon class="icon" svgIcon="copy_link"></mat-icon>
+                Copy link
+              </button>
+
+              <a [href]="getTwitterLink()" class="icon_button_container" target="_blank">
+                <button class="icon_button stroked_button">
+                  <mat-icon class="icon" svgIcon="twitter"></mat-icon>
+                </button>
+              </a>
+
+              <a [href]="getFacebookLink()" class="icon_button_container" target="_blank">
+                <button class="icon_button stroked_button">
+                  <mat-icon class="icon" svgIcon="facebook"></mat-icon>
+                </button>
+              </a>
+
+              <a [href]="getLinkedinLink()" class="icon_button_container" target="_blank">
+                <button class="icon_button stroked_button">
+                  <mat-icon class="icon" svgIcon="linkedin"></mat-icon>
+                </button>
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 

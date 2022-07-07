@@ -28,7 +28,11 @@ export class ThemeService {
     {name: 'carousel_left_arrow', svgRelativePath: 'carousel_left_arrow.svg'},
     {name: 'carousel_right_arrow', svgRelativePath: 'carousel_right_arrow.svg'},
     {name: 'star', svgRelativePath: 'star.svg'},
-    {name: 'location', svgRelativePath: 'location.svg'}
+    {name: 'location', svgRelativePath: 'location.svg'},
+    {name: 'copy_link', svgRelativePath: 'copy_link.svg'},
+    {name: 'facebook', svgRelativePath: 'facebook.svg'},
+    {name: 'linkedin', svgRelativePath: 'linkedin.svg'},
+    {name: 'twitter', svgRelativePath: 'twitter.svg'},
   ];
 
   constructor(private matIconRegistry: MatIconRegistry,
