@@ -19,14 +19,6 @@ export interface BlogHero {
   description: string;
 }
 
-export interface BlogNewsletterForm {
-  title: string;
-  description: string;
-  emailLabel: string;
-  submitButtonLabel: string;
-}
-
 export interface BlogData {
   hero: BlogHero;
-  newsletterForm: BlogNewsletterForm;
 }

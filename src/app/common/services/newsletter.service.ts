@@ -2,14 +2,24 @@ import {Injectable} from '@angular/core';
 import {isEmail} from "../utils/ValidationUtils";
 import {WorkatoService} from "./workato.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {StrapiService} from "./strapi.service";
+import {NewsletterFormData} from "../protocol/common.protocol";
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsletterService {
 
-  constructor(private readonly workatoService: WorkatoService,
+  constructor(private readonly strapiService: StrapiService,
+              private readonly workatoService: WorkatoService,
               private readonly snackBar: MatSnackBar) {
+  }
+
+  async getNewsletterFormData(): Promise<NewsletterFormData> {
+    const newsletterFormData: any = await this.strapiService.getStrapi().find('newsletter-form', {
+      populate: '*'
+    });
+    return {...newsletterFormData.data.attributes}
   }
 
   async submitNewsletterForm(email?: string) {

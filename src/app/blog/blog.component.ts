@@ -2,7 +2,6 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/co
 import {ThemeService} from "../common/services/theme.service";
 import {BlogService} from "./blog.service";
 import {BlogPost} from "./blog.protocol";
-import {NewsletterService} from "../common/services/newsletter.service";
 
 
 @Component({
@@ -18,13 +17,12 @@ export class BlogComponent {
   searchText: string | undefined;
   selectedCategory: string | undefined;
   categories?: Array<string>;
-  newsletterEmail?: string;
+
   private blogPosts?: Array<BlogPost>;
 
   constructor(private readonly blogService: BlogService,
               private readonly themeService: ThemeService,
-              private readonly cd: ChangeDetectorRef,
-              private readonly newsletterService: NewsletterService) {
+              private readonly cd: ChangeDetectorRef) {
     this.initializePage().then();
   }
 
@@ -57,12 +55,6 @@ export class BlogComponent {
   selectCategory(category: string | undefined) {
     this.selectedCategory = category;
     this.filterBlogPosts();
-  }
-
-  async submitNewsletterForm() {
-    await this.newsletterService.submitNewsletterForm(this.newsletterEmail);
-    this.newsletterEmail = undefined;
-    this.cd.detectChanges();
   }
 
   private async initializePage() {

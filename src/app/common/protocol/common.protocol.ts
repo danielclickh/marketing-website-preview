@@ -22,3 +22,10 @@ export interface ContactForm {
   submitButtonLabel: string;
   disclaimer: string;
 }
+
+export interface NewsletterFormData {
+  title: string;
+  description: string;
+  emailLabel: string;
+  submitButtonLabel: string;
+}

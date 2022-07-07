@@ -50,21 +50,7 @@
                 </div>
               </a>
             </div>
-            <div *ngIf="blogData.newsletterForm as newsletterForm" class="newsletter_form_container">
-              <div class="text_container">
-                <div class="title">{{newsletterForm.title}}</div>
-                <div class="description">{{newsletterForm.description}}</div>
-              </div>
-              <div class="form_container">
-                <div class="input_and_button_container">
-                  <input [(ngModel)]="newsletterEmail" [placeholder]="newsletterForm.emailLabel"
-                         class="email_input seed_input"
-                         type="email"/>
-                  <button (click)="submitNewsletterForm()"
-                          class="primary_button">{{newsletterForm.submitButtonLabel}}</button>
-                </div>
-              </div>
-            </div>
+            <newsletter-form></newsletter-form>
           </div>
         </div>
       </div>

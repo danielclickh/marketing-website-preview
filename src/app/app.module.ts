@@ -40,6 +40,7 @@ import {NewsItemComponent} from './news-and-events/news-item/news-item.component
 import {EventPageComponent} from './event-page/event-page.component';
 import {BlogComponent} from './blog/blog.component';
 import {BlogPostPageComponent} from './blog/blog-post-page/blog-post-page.component';
+import {NewsletterFormComponent} from './common/sections/newsletter-form/newsletter-form.component';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import {BlogPostPageComponent} from './blog/blog-post-page/blog-post-page.compon
     NewsItemComponent,
     EventPageComponent,
     BlogComponent,
-    BlogPostPageComponent
+    BlogPostPageComponent,
+    NewsletterFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
