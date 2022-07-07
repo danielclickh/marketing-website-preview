@@ -33,5 +33,51 @@
         <recent-events></recent-events>
       </div>
     </div>
+
+    <div class="latest_news_and_events">
+      <div class="container">
+        <div class="left">
+          <div class="section_title">{{newsAndEventsData.latestNewsTitle}}</div>
+          <div class="news_items">
+            <news-item *ngFor="let newsItem of newsAndEventsData.newsItems" [item]="newsItem"
+                       class="news_item"></news-item>
+          </div>
+
+        </div>
+        <div class="right">
+          <div class="section_title">{{newsAndEventsData.upcomingEventsTitle}}</div>
+          <div class="events">
+            <a *ngFor="let event of newsAndEventsData.upcomingEvents"
+               [href]="'/company/event/'+event.id"
+               class="event"
+               target="_self">
+              <div class="thumbnail_container">
+                <div [strapiCssImage]="theme === 'dark' ? event.darkFeatureImagePngUrl : event.lightFeatureImagePngUrl"
+                     class="thumbnail"></div>
+              </div>
+              <div class="content">
+                <div class="title">{{event.title}}</div>
+                <div class="description">{{event.shortDescription}}</div>
+                <div class="location">
+                  <mat-icon class="icon" svgIcon="location"></mat-icon>
+                  <div class="city_and_country">{{event.location.city}}, {{event.location.country}}</div>
+                  <div class="separator"></div>
+                  <div class="date">{{event.utcDatetime | date}}</div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="press_releases">
+      <div class="container">
+        <div class="section_title">{{newsAndEventsData.pressReleasesTitle}}</div>
+        <div class="items">
+          <news-item *ngFor="let newsItem of newsAndEventsData.newsItems" [item]="newsItem"
+                     class="item"></news-item>
+        </div>
+      </div>
+    </div>
   </div>
 </ng-container>

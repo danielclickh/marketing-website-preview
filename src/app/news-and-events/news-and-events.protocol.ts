@@ -51,7 +51,7 @@ export interface NewsAndEventsHero {
   description: string;
 }
 
-interface NewsItem {
+export interface NewsItem {
   headline: string;
   shortIntro: string;
   publication: string;

@@ -27,7 +27,8 @@ export class ThemeService {
     {name: 'x_icon', svgRelativePath: 'x_icon.svg'},
     {name: 'carousel_left_arrow', svgRelativePath: 'carousel_left_arrow.svg'},
     {name: 'carousel_right_arrow', svgRelativePath: 'carousel_right_arrow.svg'},
-    {name: 'star', svgRelativePath: 'star.svg'}
+    {name: 'star', svgRelativePath: 'star.svg'},
+    {name: 'location', svgRelativePath: 'location.svg'}
   ];
 
   constructor(private matIconRegistry: MatIconRegistry,
