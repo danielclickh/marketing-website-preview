@@ -1,0 +1,22 @@
+<div *ngIf="blogPost" class="blog_post_page">
+  <div class="main_content">
+    <div class="container">
+      <div class="section_metadata">
+        <div class="category">{{blogPost.category}}</div>
+        <div class="title">{{blogPost.title}}</div>
+        <div *ngIf="blogPost.author as author" class="author">
+          <div [strapiCssImage]="author.avatarPngUrl" class="avatar"></div>
+          <div class="content">
+            <div class="name">{{author.name}}</div>
+            <div class="date">{{blogPost.publishedAt | date}}</div>
+          </div>
+        </div>
+      </div>
+
+
+      <div [innerHTML]="blogPost.content" class="blog_post_content"></div>
+    </div>
+  </div>
+
+  <getting-started></getting-started>
+</div>

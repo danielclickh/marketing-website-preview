@@ -1,0 +1,139 @@
+@import 'colors';
+@import 'mixins';
+
+.blog_post_page {
+  .main_content {
+    padding: 70px 0;
+
+    .section_metadata {
+      text-align: center;
+      margin-bottom: 84px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .category {
+        font-size: 16px;
+        line-height: 19px;
+        text-align: center;
+        color: $primary;
+        margin-bottom: 12px;
+      }
+
+      .title {
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 58px;
+        margin-bottom: 32px;
+        max-width: 608px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .author {
+        text-align: left;
+        display: flex;
+
+        .avatar {
+          width: 44px;
+          height: 44px;
+          border-radius: 44px;
+          margin-right: 17px;
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center center;
+        }
+
+        .content {
+          .name {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            margin-bottom: 1px;
+          }
+
+          .date {
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 18px;
+            color: $fg3;
+          }
+        }
+      }
+    }
+
+    .blog_post_content {
+      max-width: 764px;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+
+      ::ng-deep {
+        $commonMarginBottom: 36px;
+
+        h1, h2, h3, h4, h5, h6 {
+          &:not(:first-child) {
+            margin-top: $commonMarginBottom;
+          }
+
+          margin-bottom: $commonMarginBottom;
+        }
+
+        code {
+          box-sizing: border-box;
+          padding: 20px;
+          width: 100%;
+          background: $bg2;
+          border-radius: 8px;
+          border: 1px solid $bg3;
+          white-space: pre-wrap;
+          display: block;
+          font-family: monospace, sans-serif;
+          margin-bottom: $commonMarginBottom;
+        }
+
+        ul, ol {
+          margin-left: 26px;
+          margin-bottom: $commonMarginBottom;
+
+          li {
+            &:not(:last-child) {
+              margin-bottom: 10px;
+            }
+          }
+        }
+
+        blockquote {
+          box-sizing: border-box;
+          padding-left: 16px;
+          border-left: 4px solid #CBEABC;
+          color: $fg3;
+          font-weight: 600;
+          font-size: 20px;
+          line-height: 36px;
+          margin-bottom: $commonMarginBottom;
+        }
+
+        img {
+          max-width: 100%;
+        }
+
+        p {
+          &:not(:last-child) {
+            margin-bottom: $commonMarginBottom;
+          }
+        }
+
+        a {
+          color: $primary;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}

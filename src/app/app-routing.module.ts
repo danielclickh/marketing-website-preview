@@ -12,6 +12,7 @@ import {CustomerStoriesComponent} from "./customer-stories/customer-stories.comp
 import {NewsAndEventsComponent} from "./news-and-events/news-and-events.component";
 import {EventPageComponent} from "./event-page/event-page.component";
 import {BlogComponent} from "./blog/blog.component";
+import {BlogPostPageComponent} from "./blog/blog-post-page/blog-post-page.component";
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
           {path: 'company/event/:eventId', component: EventPageComponent},
           {path: 'customer-stories', component: CustomerStoriesComponent},
           {path: 'blog', component: BlogComponent},
+          {path: 'blog/:blogPostId', component: BlogPostPageComponent},
         ]
       }
     ]

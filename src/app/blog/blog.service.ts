@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {StrapiService} from "../common/services/strapi.service";
 import {BlogData, BlogPost} from "./blog.protocol";
 import {marked} from "marked";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -36,11 +37,14 @@ export class BlogService {
     const blogPostsData = blogPostsRes.data;
     return blogPostsData.map((blogWithAttributes: any) => {
       const blogPost = blogWithAttributes.attributes;
+      if (blogWithAttributes.id === 1) {
+        console.log(blogWithAttributes);
+      }
       return {
         id: blogWithAttributes.id,
         publishedAt: blogPost.publishedAt,
         ...blogPost,
-        content: marked.parse(blogPost.content),
+        content: marked.parse(blogPost.content, {baseUrl: environment.strapiBaseUrl}),
         author: {...blogPost.author, avatarPngUrl: this.strapiService.extractImageUrl(blogPost.author.avatarPng)},
         thumbnailPngUrl: this.strapiService.extractImageUrl(blogPost.thumbnailPng),
       };
