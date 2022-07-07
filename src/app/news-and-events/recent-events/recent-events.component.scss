@@ -1,0 +1,59 @@
+@import 'colors';
+@import 'mixins';
+
+.past_events {
+  .section_metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+
+    .title {
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 34px;
+    }
+  }
+
+  .events {
+    display: flex;
+    justify-content: space-between;
+
+    .event {
+
+      &:not(:last-child) {
+        margin-right: 32px;
+      }
+
+      .thumbnail {
+        width: 100%;
+        margin-bottom: 11px;
+        max-height: 214px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 6px 4px -4px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+
+      .category {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: $primary;
+        margin-bottom: 8px;
+      }
+
+      .title {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        margin-bottom: 4px;
+      }
+
+      .date {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 21px;
+        color: $fg3;
+      }
+    }
+  }
+}

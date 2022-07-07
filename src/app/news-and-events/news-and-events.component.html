@@ -1,5 +1,37 @@
 <ng-container *ngIf="themeObs | async as theme">
   <div *ngIf="newsAndEventsDataPromise | async as newsAndEventsData" class="news_and_events">
+    <div *ngIf="newsAndEventsData.hero as hero" class="hero">
+      <div class="container">
+        <div class="section_metadata">
+          <div class="title">{{hero.title}}</div>
+          <div class="description">{{hero.description}}</div>
+        </div>
+        <div *ngIf="newsAndEventsData.featuredEvent as featuredEvent" class="featured_event">
+          <div class="left">
+            <div class="pretitle">{{newsAndEventsData.featuredEventPretitle}} • {{featuredEvent.location.city}}</div>
+            <div class="title">{{featuredEvent.title}}</div>
+            <div class="short_description">{{featuredEvent.shortDescription}}</div>
 
+            <a [href]="'/company/event/'+featuredEvent.id"
+               class="cta_button"
+               target="self">
+              <button class="empty_button">
+                {{featuredEvent.viewMoreDetailsText}}
+                <mat-icon class="icon" svgIcon="right_arrow"></mat-icon>
+              </button>
+            </a>
+          </div>
+
+          <div class="right">
+            <img
+              [src]="(theme === 'dark' ? featuredEvent.darkFeatureImagePngUrl : featuredEvent.lightFeatureImagePngUrl) | strapiImageUrl"
+              alt="featured_image"
+              class="image"/>
+          </div>
+        </div>
+
+        <recent-events></recent-events>
+      </div>
+    </div>
   </div>
 </ng-container>

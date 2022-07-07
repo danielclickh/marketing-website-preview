@@ -1,13 +1,15 @@
 import {Injectable} from '@angular/core';
 import {StrapiService} from "../common/services/strapi.service";
-import {Event, NewsAndEventsData} from "./news-and-events.protocol";
+import {NewsAndEventsData} from "./news-and-events.protocol";
+import {EventService} from "./event.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsAndEventsService {
 
-  constructor(private readonly strapiService: StrapiService) {
+  constructor(private readonly strapiService: StrapiService,
+              private readonly eventService: EventService) {
   }
 
   async getNewsAndEventsData(): Promise<NewsAndEventsData> {
@@ -21,48 +23,18 @@ export class NewsAndEventsService {
       ]
     });
 
-    const eventsRes: any = await this.strapiService.getStrapi().find('events', {
-      sort: [
-        'utcDatetime:DESC'
-      ],
-      populate: [
-        'thumbnailPng',
-        'hostedBy',
-        'hostedBy.hosts',
-        'hostedBy.hosts.avatarPng',
-        'agenda',
-        'agenda.items',
-        'location',
-        'darkFeatureImagePng',
-        'lightFeatureImagePng',
-      ]
-    });
 
-    const eventsData = eventsRes.data;
-    const events: Array<Event> = eventsData.map((eventWithAttributes: any) => {
-      const event = eventWithAttributes.attributes;
-      return {
-        id: eventWithAttributes.id,
-        ...event,
-        thumbnailPngUrl: this.strapiService.extractImageUrl(event.thumbnailPng),
-        hostedBy: {
-          ...event.hostedBy,
-          hosts: event.hostedBy.hosts.map((host: any) => {
-            return {
-              ...host,
-              avatarPngUrl: this.strapiService.extractImageUrl(host.avatarPng)
-            }
-          })
-        },
-        darkFeatureImagePngUrl: this.strapiService.extractImageUrl(event.darkFeatureImagePng),
-        lightFeatureImagePngUrl: this.strapiService.extractImageUrl(event.lightFeatureImagePng),
-      };
-    })
-
+    const allEvents = await this.eventService.getEvents();
+    const upcomingEvents = this.eventService.extractUpcomingEvents(allEvents);
+    const pastEvents = this.eventService.extractPastEvents(allEvents);
+    const featuredEvent = upcomingEvents.shift();
     const attributes = newsRes.data.attributes;
+
     return {
       ...attributes,
-      events,
+      featuredEvent,
+      upcomingEvents,
+      pastEvents,
     };
   }
 }

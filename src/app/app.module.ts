@@ -35,6 +35,7 @@ import {
   CustomerStoriesTestimonialComponent
 } from './customer-stories/customer-stories-testimonial/customer-stories-testimonial.component';
 import {NewsAndEventsComponent} from './news-and-events/news-and-events.component';
+import {RecentEventsComponent} from './news-and-events/recent-events/recent-events.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import {NewsAndEventsComponent} from './news-and-events/news-and-events.componen
     OurStoryComponent,
     CustomerStoriesComponent,
     CustomerStoriesTestimonialComponent,
-    NewsAndEventsComponent
+    NewsAndEventsComponent,
+    RecentEventsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),

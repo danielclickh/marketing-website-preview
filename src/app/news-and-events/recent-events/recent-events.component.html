@@ -1,0 +1,13 @@
+<div *ngIf="pastEvents" class="past_events">
+  <div class="section_metadata">
+    <div class="title">Recent events</div>
+  </div>
+  <div class="events">
+    <a *ngFor="let event of pastEvents" [attr.href]="event.eventVideoUrl ?? undefined" class="event" target="_blank">
+      <img alt="thumbnail" class="thumbnail" src="/assets/images/clickhouse-webinar-tile.png"/>
+      <div class="category">{{event.category}}</div>
+      <div class="title">{{event.title}}</div>
+      <div class="date">{{event.datetimeAndTimezoneString}}</div>
+    </a>
+  </div>
+</div>

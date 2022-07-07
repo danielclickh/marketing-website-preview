@@ -32,8 +32,9 @@ export interface Event {
   title: string;
   shortDescription: string;
   description: string;
-  datetime: string;
-  timezone: string;
+  utcDatetime: string;
+  datetimeAndTimezoneString: string;
+  viewMoreDetailsText: string;
   category: string;
   thumbnailPngUrl: string;
   hostedBy: EventHostedBy;
@@ -41,6 +42,8 @@ export interface Event {
   location: EventLocation;
   darkFeatureImagePngUrl: string;
   lightFeatureImagePngUrl: string;
+  eventEnded: boolean;
+  eventVideoUrl: string;
 }
 
 export interface NewsAndEventsHero {
@@ -64,5 +67,7 @@ export interface NewsAndEventsData {
   pressReleasesTitle: string;
   newsItems: Array<NewsItem>;
   pressReleases: Array<NewsItem>;
-  events: Array<Event>;
+  featuredEvent?: Event;
+  upcomingEvents: Array<Event>;
+  pastEvents: Array<Event>;
 }
