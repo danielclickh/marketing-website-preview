@@ -14,13 +14,17 @@ export class RecentEventsComponent implements OnInit {
   @Input()
   allEvents?: Array<Event>;
 
+  @Input()
+  excludeEventId?: number;
+
   constructor(private readonly eventService: EventService,
               private readonly cd: ChangeDetectorRef) {
   }
 
   async ngOnInit() {
     const allEvents = this.allEvents ?? await this.eventService.getEvents();
-    const pastEvents = this.eventService.extractPastEvents(allEvents);
+    const pastEvents = this.eventService.extractPastEvents(allEvents)
+      .filter(event => event.id !== this.excludeEventId);
     this.pastEvents = pastEvents.slice(0, 3);
     this.cd.detectChanges();
   }

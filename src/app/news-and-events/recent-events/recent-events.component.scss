@@ -16,8 +16,13 @@
   }
 
   .events {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 11%;
+
+    @include customBreakpointCss('max-width: 1000px') {
+      grid-column-gap: 24px;
+    }
 
     @include customBreakpointCss('max-width: 600px') {
       display: block;
@@ -27,9 +32,7 @@
       display: block;
 
       &:not(:last-child) {
-        margin-right: 32px;
         @include customBreakpointCss('max-width: 600px') {
-          margin-right: 0;
           margin-bottom: 70px;
         }
       }
