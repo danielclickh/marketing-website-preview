@@ -51,4 +51,10 @@ export class BlogPostPageComponent implements OnInit {
     const escapedUrl = encodeURIComponent(window.location.href);
     return `${linkedinBaseUrl}?url=${escapedUrl}`;
   }
+
+  getOtherBlogPosts(): Array<BlogPost> {
+    return this.allBlogPosts!
+      .filter((post) => post.id !== this.blogPost!.id)
+      .slice(0, 3)
+  }
 }

@@ -50,7 +50,28 @@
 
         <newsletter-form></newsletter-form>
       </div>
-
+    </div>
+  </div>
+  <div class="recent_posts">
+    <div class="container">
+      <div class="section_metadata">
+        <div class="title">Recent posts</div>
+        <a class="all_posts_button" href="/blog">
+          <button class="empty_button">
+            All posts
+            <mat-icon class="icon" svgIcon="right_arrow"></mat-icon>
+          </button>
+        </a>
+      </div>
+      <div class="posts">
+        <a *ngFor="let post of getOtherBlogPosts()"
+           [href]="'/blog/'+post.id"
+           class="post">
+          <div [strapiCssImage]="post.thumbnailPngUrl" class="thumbnail"></div>
+          <div class="category">{{post.category}}</div>
+          <div class="title">{{post.title}}</div>
+        </a>
+      </div>
     </div>
   </div>
 
