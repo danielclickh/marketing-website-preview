@@ -47,19 +47,40 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "20kb",
+                  "maximumError": "40kb"
                 }
               ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "staging": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1mb",
+                  "maximumError": "3mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "20kb",
+                  "maximumError": "40kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
                 }
               ],
               "outputHashing": "all"
@@ -80,6 +101,9 @@
           "configurations": {
             "production": {
               "browserTarget": "website:build:production"
+            },
+            "staging": {
+              "browserTarget": "website:build:staging"
             },
             "development": {
               "browserTarget": "website:build:development"
@@ -135,6 +159,15 @@
                 }
               ]
             },
+            "staging": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
+            },
             "development": {
               "optimization": false,
               "sourceMap": true,
@@ -149,6 +182,10 @@
             "development": {
               "browserTarget": "website:build:development",
               "serverTarget": "website:server:development"
+            },
+            "staging": {
+              "browserTarget": "website:build:staging",
+              "serverTarget": "website:server:staging"
             },
             "production": {
               "browserTarget": "website:build:production",
@@ -168,6 +205,10 @@
             "production": {
               "browserTarget": "website:build:production",
               "serverTarget": "website:server:production"
+            },
+            "staging": {
+              "browserTarget": "website:build:staging",
+              "serverTarget": "website:server:staging"
             },
             "development": {
               "browserTarget": "website:build:development",

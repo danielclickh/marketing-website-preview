@@ -10,7 +10,8 @@
     "dev:ssr": "ng run website:serve-ssr",
     "serve:ssr": "node dist/website/server/main.js",
     "build:ssr": "ng build && ng run website:server",
-    "prerender": "ng run website:prerender"
+    "prerender": "ng run website:prerender",
+    "prerender-staging": "ng run website:prerender -c staging"
   },
   "private": true,
   "dependencies": {
