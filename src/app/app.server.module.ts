@@ -13,6 +13,6 @@ import {AppComponent} from './app.component';
 })
 export class AppServerModule {
   constructor(@Inject(INITIAL_CONFIG) private config: PlatformConfig) {
-    this.config.useAbsoluteUrl = true
+    //this.config.useAbsoluteUrl = true
   }
 }
