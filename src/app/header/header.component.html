@@ -1,6 +1,6 @@
 <div *ngIf="headerDataPromise | async as headerData" class="header">
   <div class="container">
-    <a class="logo_container" routerLink="/">
+    <a class="logo_container" href="/">
       <mat-icon [svgIcon]="headerData.logoIconId" class="icon"></mat-icon>
       <div class="text">ClickHouse</div>
     </a>
