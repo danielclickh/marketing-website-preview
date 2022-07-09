@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'website-staging',
       script: 'npm',
-      args: 'run serve:ssr',
+      args: 'run staging:ssr',
       env: {
         "NODE_ENV": "staging"
       }

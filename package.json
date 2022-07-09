@@ -8,6 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "dev:ssr": "ng run website:serve-ssr",
+    "staging:ssr": "ng run website:serve-ssr -c staging",
     "serve:ssr": "node dist/website/server/main.js",
     "build:ssr": "ng build && ng run website:server",
     "build:ssr:staging": "ng build -c staging && ng run website:server -c staging",
