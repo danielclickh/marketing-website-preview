@@ -3,7 +3,7 @@ import {environment} from "../../../environments/environment";
 import {ThemeService} from "./theme.service";
 import {StrapiImageObject} from "../protocol/strapi.protocol";
 import {HttpClient} from "@angular/common/http";
-import {firstValueFrom} from "rxjs";
+import {BehaviorSubject, filter, firstValueFrom, map, Observable, switchMap} from "rxjs";
 
 export interface StrapiFindParams {
   populate?: Array<string>;
@@ -12,7 +12,9 @@ export interface StrapiFindParams {
 
 export class StrapiClient {
 
-  constructor(private readonly httpClient: HttpClient) {
+  constructor(private readonly httpClient: HttpClient,
+              private readonly totalRequestsSubject: BehaviorSubject<number>,
+              private readonly inflightRequestsSubject: BehaviorSubject<number>) {
   }
 
   /**
@@ -20,28 +22,34 @@ export class StrapiClient {
    * '/api/blog-posts?sort[0]=publishedAt:DESC&populate[0]=author&populate[1]=author.avatarPng&populate[2]=thumbnailPng'
    */
   async find(contentType: string, params: StrapiFindParams): Promise<any> {
-    let url = `${environment.strapiBaseUrl}/api/${contentType}`;
-    const urlParams: Array<string> = [];
-    if (params.sort) {
-      for (let i = 0; i < params.sort.length; i++) {
-        const sortElement = params.sort[i];
-        const key = encodeURI(`sort[${i}]`);
-        const value = encodeURI(sortElement);
-        urlParams.push(`${key}=${value}`);
+    try {
+      this.inflightRequestsSubject.next(this.inflightRequestsSubject.value + 1);
+      this.totalRequestsSubject.next(this.totalRequestsSubject.value + 1);
+      let url = `${environment.strapiBaseUrl}/api/${contentType}`;
+      const urlParams: Array<string> = [];
+      if (params.sort) {
+        for (let i = 0; i < params.sort.length; i++) {
+          const sortElement = params.sort[i];
+          const key = encodeURI(`sort[${i}]`);
+          const value = encodeURI(sortElement);
+          urlParams.push(`${key}=${value}`);
+        }
       }
-    }
-    if (params.populate) {
-      for (let i = 0; i < params.populate.length; i++) {
-        const populateElement = params.populate[i];
-        const key = encodeURI(`populate[${i}]`);
-        const value = encodeURI(populateElement);
-        urlParams.push(`${key}=${value}`);
+      if (params.populate) {
+        for (let i = 0; i < params.populate.length; i++) {
+          const populateElement = params.populate[i];
+          const key = encodeURI(`populate[${i}]`);
+          const value = encodeURI(populateElement);
+          urlParams.push(`${key}=${value}`);
+        }
       }
+
+      url += `?${urlParams.join('&')}`
+
+      return await firstValueFrom(this.httpClient.get(url));
+    } finally {
+      this.inflightRequestsSubject.next(this.inflightRequestsSubject.value - 1);
     }
-
-    url += `?${urlParams.join('&')}`
-
-    return await firstValueFrom(this.httpClient.get(url));
   }
 }
 
@@ -49,10 +57,23 @@ export class StrapiClient {
   providedIn: 'root'
 })
 export class StrapiService {
-  private readonly strapiClient = new StrapiClient(this.httpClient);
+  private readonly requestCounterSubject = new BehaviorSubject(0);
+  private readonly inflightRequestsCounter = new BehaviorSubject(0);
+  private readonly strapiClient = new StrapiClient(this.httpClient, this.requestCounterSubject, this.inflightRequestsCounter);
 
   constructor(private readonly themeService: ThemeService,
               private readonly httpClient: HttpClient) {
+  }
+
+  observeNoInflightRequests(): Observable<boolean> {
+    return this.requestCounterSubject.pipe(
+      filter(totalRequests => totalRequests > 0),
+      switchMap(() => {
+        return this.inflightRequestsCounter.pipe(
+          map(inFlightRequests => inFlightRequests === 0)
+        )
+      })
+    )
   }
 
   getStrapi() {
