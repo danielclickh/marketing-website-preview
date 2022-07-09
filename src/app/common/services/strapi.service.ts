@@ -25,7 +25,7 @@ export class StrapiClient {
     try {
       this.inflightRequestsSubject.next(this.inflightRequestsSubject.value + 1);
       this.firstRequestSent.next(true);
-      let url = `${environment.strapiBaseUrl}/api/${contentType}`;
+      let url = `/api/${contentType}`;
       const urlParams: Array<string> = [];
       if (params.sort) {
         for (let i = 0; i < params.sort.length; i++) {
