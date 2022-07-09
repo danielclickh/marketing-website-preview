@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnChanges, SimpleChanges} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
 import {ThemeService} from "../common/services/theme.service";
 import {CareersService} from "./careers.service";
 import {Position, PositionOffice} from "./careers.protocol";
@@ -18,7 +18,7 @@ export interface PositionsAndMetadata {
   styleUrls: ['./careers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CareersComponent implements OnChanges {
+export class CareersComponent {
   careersDataPromise = this.careersService.getCareersData();
   themeObs = this.themeService.observeTheme();
   officeToPositionMap = new Map<number, Array<Position>>();
@@ -33,10 +33,6 @@ export class CareersComponent implements OnChanges {
               private readonly themeService: ThemeService,
               private readonly cd: ChangeDetectorRef) {
     this.populatePositions().then()
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('Changes', changes);
   }
 
   getPositionsAndMetadata(): PositionsAndMetadata | undefined {

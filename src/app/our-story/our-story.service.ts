@@ -41,7 +41,6 @@ export class OurStoryService {
     const ourHistory = attributes.ourHistory;
     const hiring = attributes.hiring;
     const team = attributes.team;
-    console.log('Our story attr', attributes);
 
     return {
       hero: {

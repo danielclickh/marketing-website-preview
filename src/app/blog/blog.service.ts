@@ -37,9 +37,6 @@ export class BlogService {
     const blogPostsData = blogPostsRes.data;
     return blogPostsData.map((blogWithAttributes: any) => {
       const blogPost = blogWithAttributes.attributes;
-      if (blogWithAttributes.id === 1) {
-        console.log(blogWithAttributes);
-      }
       return {
         id: blogWithAttributes.id,
         publishedAt: blogPost.publishedAt,

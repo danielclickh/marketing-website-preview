@@ -13,6 +13,7 @@
     "build:ssr": "ng build && ng run website:server",
     "build:ssr:staging": "ng build -c staging && ng run website:server -c staging",
     "prerender": "ng run website:prerender",
+    "prerender-dev": "ng run website:prerender -c development",
     "prerender-staging": "ng run website:prerender -c staging"
   },
   "private": true,
@@ -33,7 +34,6 @@
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4",
-    "strapi-sdk-js": "^2.2.0",
     "marked": "^4.0.17",
     "copy-to-clipboard": "^3.3.1"
   },

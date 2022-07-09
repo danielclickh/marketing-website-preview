@@ -17,7 +17,7 @@ export class NewsletterService {
 
   async getNewsletterFormData(): Promise<NewsletterFormData> {
     const newsletterFormData: any = await this.strapiService.getStrapi().find('newsletter-form', {
-      populate: '*'
+      populate: ['*']
     });
     return {...newsletterFormData.data.attributes}
   }
