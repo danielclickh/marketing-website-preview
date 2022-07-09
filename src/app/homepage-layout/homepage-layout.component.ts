@@ -1,7 +1,5 @@
-import {ChangeDetectionStrategy, Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, PLATFORM_ID} from '@angular/core';
 import {StrapiService} from "../common/services/strapi.service";
-import {isPlatformBrowser} from "@angular/common";
-import {of} from "rxjs";
 
 @Component({
   selector: 'app-homepage-layout',
@@ -9,20 +7,9 @@ import {of} from "rxjs";
   styleUrls: ['./homepage-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomepageLayoutComponent implements OnInit {
+export class HomepageLayoutComponent {
 
   constructor(private readonly strapiService: StrapiService,
               @Inject(PLATFORM_ID) private platformId: Object) {
-  }
-
-  ngOnInit(): void {
-  }
-
-  pageReady() {
-    if (isPlatformBrowser(this.platformId)) {
-      return this.strapiService.observeNoInflightRequests();
-    }
-
-    return of(false);
   }
 }

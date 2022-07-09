@@ -89,6 +89,7 @@ body {
   background-color: $bg1;
   color: $fg1;
   transition: background 200ms, color 200ms;
+  overflow-y: scroll;
 }
 
 a {

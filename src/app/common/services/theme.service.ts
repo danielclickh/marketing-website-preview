@@ -39,15 +39,24 @@ export class ThemeService {
               private domSanitizer: DomSanitizer,
               @Inject(PLATFORM_ID) private platformId: Object,
               @Inject(DOCUMENT) private document: Document) {
+  }
+
+  initialize() {
+    this.initializeIcons();
     this.setInitialTheme();
   }
 
   initializeIcons() {
     for (const icon of this.iconList) {
-      this.matIconRegistry.addSvgIcon(
-        icon.name,
-        this.domSanitizer.bypassSecurityTrustResourceUrl(`/assets/icons/${icon.svgRelativePath}`)
-      );
+      if (isPlatformBrowser(this.platformId)) {
+        this.matIconRegistry.addSvgIcon(
+          icon.name,
+          this.domSanitizer.bypassSecurityTrustResourceUrl(`/assets/icons/${icon.svgRelativePath}`)
+        );
+      } else {
+        /* Register empty icons for server-side-rendering to prevent errors */
+        this.matIconRegistry.addSvgIconLiteral(icon.name, this.domSanitizer.bypassSecurityTrustHtml('<svg></svg>'));
+      }
     }
   }
 

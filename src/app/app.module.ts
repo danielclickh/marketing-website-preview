@@ -91,6 +91,6 @@ import {NewsletterFormComponent} from './common/sections/newsletter-form/newslet
 export class AppModule {
 
   constructor(private readonly themeService: ThemeService) {
-    themeService.initializeIcons();
+    themeService.initialize();
   }
 }

@@ -3,7 +3,7 @@ import {environment} from "../../../environments/environment";
 import {ThemeService} from "./theme.service";
 import {StrapiImageObject} from "../protocol/strapi.protocol";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, filter, firstValueFrom, map, Observable, switchMap} from "rxjs";
+import {BehaviorSubject, combineLatest, filter, firstValueFrom, map, Observable, take} from "rxjs";
 
 export interface StrapiFindParams {
   populate?: Array<string>;
@@ -13,7 +13,7 @@ export interface StrapiFindParams {
 export class StrapiClient {
 
   constructor(private readonly httpClient: HttpClient,
-              private readonly totalRequestsSubject: BehaviorSubject<number>,
+              private readonly firstRequestSent: BehaviorSubject<boolean>,
               private readonly inflightRequestsSubject: BehaviorSubject<number>) {
   }
 
@@ -24,7 +24,7 @@ export class StrapiClient {
   async find(contentType: string, params: StrapiFindParams): Promise<any> {
     try {
       this.inflightRequestsSubject.next(this.inflightRequestsSubject.value + 1);
-      this.totalRequestsSubject.next(this.totalRequestsSubject.value + 1);
+      this.firstRequestSent.next(true);
       let url = `${environment.strapiBaseUrl}/api/${contentType}`;
       const urlParams: Array<string> = [];
       if (params.sort) {
@@ -45,7 +45,6 @@ export class StrapiClient {
       }
 
       url += `?${urlParams.join('&')}`
-
       return await firstValueFrom(this.httpClient.get(url));
     } finally {
       this.inflightRequestsSubject.next(this.inflightRequestsSubject.value - 1);
@@ -57,22 +56,21 @@ export class StrapiClient {
   providedIn: 'root'
 })
 export class StrapiService {
-  private readonly requestCounterSubject = new BehaviorSubject(0);
+  private readonly firstRequestSent = new BehaviorSubject(false);
   private readonly inflightRequestsCounter = new BehaviorSubject(0);
-  private readonly strapiClient = new StrapiClient(this.httpClient, this.requestCounterSubject, this.inflightRequestsCounter);
+  private readonly strapiClient = new StrapiClient(this.httpClient, this.firstRequestSent, this.inflightRequestsCounter);
 
   constructor(private readonly themeService: ThemeService,
               private readonly httpClient: HttpClient) {
   }
 
   observeNoInflightRequests(): Observable<boolean> {
-    return this.requestCounterSubject.pipe(
-      filter(totalRequests => totalRequests > 0),
-      switchMap(() => {
-        return this.inflightRequestsCounter.pipe(
-          map(inFlightRequests => inFlightRequests === 0)
-        )
-      })
+    return combineLatest([this.firstRequestSent, this.inflightRequestsCounter]).pipe(
+      filter(([firstRequestSent, inflightRequestCounter]) => !!firstRequestSent && inflightRequestCounter === 0),
+      map(([ignored, inflightRequestCounter]) => {
+        return inflightRequestCounter === 0
+      }),
+      take(1)
     )
   }
 
