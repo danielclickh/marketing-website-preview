@@ -37,7 +37,7 @@ export class ThemeService {
 
   constructor(private matIconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer,
-              @Inject(PLATFORM_ID) private platformId: Object,
+              @Inject(PLATFORM_ID) private platformId: object,
               @Inject(DOCUMENT) private document: Document) {
   }
 

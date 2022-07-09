@@ -1,9 +1,10 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {ThemeService} from "./theme.service";
 import {StrapiImageObject} from "../protocol/strapi.protocol";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, combineLatest, filter, firstValueFrom, map, Observable, take} from "rxjs";
+import {isPlatformServer} from "@angular/common";
 
 export interface StrapiFindParams {
   populate?: Array<string>;
@@ -14,7 +15,8 @@ export class StrapiClient {
 
   constructor(private readonly httpClient: HttpClient,
               private readonly firstRequestSent: BehaviorSubject<boolean>,
-              private readonly inflightRequestsSubject: BehaviorSubject<number>) {
+              private readonly inflightRequestsSubject: BehaviorSubject<number>,
+              private readonly platformId: object) {
   }
 
   /**
@@ -25,7 +27,11 @@ export class StrapiClient {
     try {
       this.inflightRequestsSubject.next(this.inflightRequestsSubject.value + 1);
       this.firstRequestSent.next(true);
-      let url = `/api/${contentType}`;
+      let baseUrl: string = environment.strapiBaseUrl;
+      if (isPlatformServer(this.platformId)) {
+        baseUrl = environment.ssrApiStrapiBaseUrl;
+      }
+      let url = `${baseUrl}/api/${contentType}`;
       const urlParams: Array<string> = [];
       if (params.sort) {
         for (let i = 0; i < params.sort.length; i++) {
@@ -58,10 +64,11 @@ export class StrapiClient {
 export class StrapiService {
   private readonly firstRequestSent = new BehaviorSubject(false);
   private readonly inflightRequestsCounter = new BehaviorSubject(0);
-  private readonly strapiClient = new StrapiClient(this.httpClient, this.firstRequestSent, this.inflightRequestsCounter);
+  private readonly strapiClient = new StrapiClient(this.httpClient, this.firstRequestSent, this.inflightRequestsCounter, this.platformId);
 
   constructor(private readonly themeService: ThemeService,
-              private readonly httpClient: HttpClient) {
+              private readonly httpClient: HttpClient,
+              @Inject(PLATFORM_ID) private platformId: object) {
   }
 
   observeNoInflightRequests(): Observable<boolean> {

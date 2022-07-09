@@ -7,7 +7,7 @@ import {isPlatformBrowser} from "@angular/common";
 })
 export class FontsResolverService implements Resolve<void> {
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {
   }
 
   async resolve(route: ActivatedRouteSnapshot,

@@ -10,6 +10,6 @@ import {StrapiService} from "../common/services/strapi.service";
 export class HomepageLayoutComponent {
 
   constructor(private readonly strapiService: StrapiService,
-              @Inject(PLATFORM_ID) private platformId: Object) {
+              @Inject(PLATFORM_ID) private platformId: object) {
   }
 }

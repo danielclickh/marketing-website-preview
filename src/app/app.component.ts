@@ -12,7 +12,7 @@ export class AppComponent {
   pageReady: Observable<boolean>;
 
   constructor(private readonly strapiService: StrapiService,
-              @Inject(PLATFORM_ID) private platformId: Object) {
+              @Inject(PLATFORM_ID) private platformId: object) {
     if (isPlatformBrowser(this.platformId)) {
       this.pageReady = this.strapiService.observeNoInflightRequests();
     } else {
