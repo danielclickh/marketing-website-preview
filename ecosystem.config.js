@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'website-staging',
       script: 'npm',
-      args: 'run build:ssr:staging',
+      args: 'run serve:ssr',
       env: {
         "NODE_ENV": "staging"
       }
@@ -12,7 +12,7 @@ module.exports = {
     {
       name: 'website-production',
       script: 'npm',
-      args: 'run build:ssr',
+      args: 'run serve:ssr',
       env: {
         "NODE_ENV": "production"
       }
