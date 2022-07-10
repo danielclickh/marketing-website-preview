@@ -72,16 +72,18 @@
             </div>
           </div>
 
-          <div *ngFor="let departmentAndPosition of positionsAndMetadata.positions" class="department_and_positions">
-            <div class="department">{{departmentAndPosition.department.name}}</div>
-            <div *ngIf="!departmentAndPosition.positions.length" class="no_results">No results</div>
-            <div class="positions">
-              <a *ngFor="let position of departmentAndPosition.positions"
-                 [href]="position.absolute_url" class="position"
-                 target="_blank">
-                <div class="title">{{position.title}}</div>
-                <div class="offices">{{getOfficeNames(position.offices)}}</div>
-              </a>
+          <div class="departments_and_positions">
+            <div *ngFor="let departmentAndPosition of positionsAndMetadata.positions" class="department_and_positions">
+              <div class="department">{{departmentAndPosition.department.name}}</div>
+              <div *ngIf="!departmentAndPosition.positions.length" class="no_results">No results</div>
+              <div class="positions">
+                <a *ngFor="let position of departmentAndPosition.positions"
+                   [href]="position.absolute_url" class="position"
+                   target="_blank">
+                  <div class="title">{{position.title}}</div>
+                  <div class="offices">{{getOfficeNames(position.offices)}}</div>
+                </a>
+              </div>
             </div>
           </div>
         </div>
