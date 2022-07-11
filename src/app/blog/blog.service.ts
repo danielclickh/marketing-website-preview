@@ -34,6 +34,7 @@ export class BlogService {
   async getBlogPosts(): Promise<Array<BlogPost>> {
     const blogPostsRes: any = await this.strapiService.getStrapi().find('blog-posts', {
       sort: [
+        'date:DESC',
         'publishedAt:DESC'
       ],
       populate: [

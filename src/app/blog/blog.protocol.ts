@@ -13,6 +13,7 @@ export interface BlogPost {
   thumbnailPngUrl: string;
   publishedAt: string;
   slug?: string;
+  date?: string;
 }
 
 export interface BlogHero {

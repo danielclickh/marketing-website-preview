@@ -44,7 +44,7 @@
                     <div [strapiCssImage]="author.avatarPngUrl" class="avatar"></div>
                     <div class="content">
                       <div class="name">{{author.name}}</div>
-                      <div class="date">{{blogPost.publishedAt | date}}</div>
+                      <div class="date">{{(blogPost.date || blogPost.publishedAt) | date}}</div>
                     </div>
                   </div>
                 </div>
