@@ -54,6 +54,7 @@ export interface Event {
   eventEnded: boolean;
   eventVideoUrl: string;
   form: EventForm;
+  featured: boolean;
 }
 
 export interface NewsAndEventsHero {

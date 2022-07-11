@@ -1,7 +1,7 @@
 <div *ngIf="event" class="event_page">
   <div class="hero">
     <div class="container">
-      <div [ngClass]="{ 'no_form': event.eventEnded }" class="left">
+      <div [ngClass]="{ 'no_form': event.eventEnded && event.form.type !== 'recordedGatedContent' }" class="left">
         <div class="section_metadata">
           <div class="pretitle">{{event.category}}</div>
           <div class="title">{{event.title}}</div>
@@ -30,7 +30,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="event.form && !event.eventEnded" class="right">
+      <div *ngIf="event.form && (!event.eventEnded || event.form.type === 'recordedGatedContent')" class="right">
         <form (ngSubmit)="onSubmit().then()" *ngIf="form" [formGroup]="form" class="form">
           <div *ngIf="event.form.type === 'eventRegistration'" class="seed_form_element">
             <label class="seed_label">{{event.form.firstNameLabel}}</label>
