@@ -105,11 +105,11 @@ export class WorkatoService {
       }
     ));
 
-    if (workatoResp && request.email) {
+    if (request.email) {
       const email = request.email;
       const firstName = request.firstName;
       const lastName = request.lastName;
-      this.segmentService.identify(email, firstName, lastName, workatoResp.cloudId ? workatoResp.cloudId : email);
+      this.segmentService.identify(email, firstName, lastName, workatoResp?.cloudId ? workatoResp.cloudId : email);
     }
   }
 
