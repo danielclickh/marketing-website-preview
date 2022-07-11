@@ -47,6 +47,7 @@ import {environment} from "../environments/environment";
 import {GoogleTagManagerService} from "angular-google-tag-manager";
 import {isPlatformBrowser} from "@angular/common";
 import {RedirectComponent} from './redirect/redirect.component';
+import {ExternalLinkDirective} from './common/directives/external-link.directive';
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import {RedirectComponent} from './redirect/redirect.component';
     BlogComponent,
     BlogPostPageComponent,
     NewsletterFormComponent,
-    RedirectComponent
+    RedirectComponent,
+    ExternalLinkDirective
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),

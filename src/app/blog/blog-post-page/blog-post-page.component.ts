@@ -1,9 +1,10 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {BlogPost} from "../blog.protocol";
 import {BlogService} from "../blog.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import copy from 'copy-to-clipboard';
+import {isPlatformServer} from "@angular/common";
 
 @Component({
   selector: 'app-blog-post-page',
@@ -18,7 +19,8 @@ export class BlogPostPageComponent implements OnInit {
   constructor(private readonly blogService: BlogService,
               private readonly activatedRoute: ActivatedRoute,
               private readonly cd: ChangeDetectorRef,
-              private readonly snackBar: MatSnackBar) {
+              private readonly snackBar: MatSnackBar,
+              @Inject(PLATFORM_ID) private platformId: string) {
   }
 
   async ngOnInit() {
@@ -35,18 +37,21 @@ export class BlogPostPageComponent implements OnInit {
   }
 
   getTwitterLink() {
+    if (isPlatformServer(this.platformId)) return '/';
     const twitterBaseUrl = "https://twitter.com/intent/tweet"
     const escapedUrl = encodeURIComponent(window.location.href);
     return `${twitterBaseUrl}?text=${escapedUrl}`;
   }
 
   getFacebookLink() {
+    if (isPlatformServer(this.platformId)) return '/';
     const facebookBaseUrl = "https://www.facebook.com/sharer/sharer.php"
     const escapedUrl = encodeURIComponent(window.location.href);
     return `${facebookBaseUrl}?u=${escapedUrl}`;
   }
 
   getLinkedinLink() {
+    if (isPlatformServer(this.platformId)) return '/';
     const linkedinBaseUrl = "https://www.linkedin.com/sharing/share-offsite/"
     const escapedUrl = encodeURIComponent(window.location.href);
     return `${linkedinBaseUrl}?url=${escapedUrl}`;
