@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {Inject, NgModule, PLATFORM_ID} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -43,6 +43,9 @@ import {BlogPostPageComponent} from './blog/blog-post-page/blog-post-page.compon
 import {NewsletterFormComponent} from './common/sections/newsletter-form/newsletter-form.component';
 import {UtmService} from "./common/services/utm.service";
 import {SegmentService} from "./common/services/segment.service";
+import {environment} from "../environments/environment";
+import {GoogleTagManagerService} from "angular-google-tag-manager";
+import {isPlatformBrowser} from "@angular/common";
 
 
 @NgModule({
@@ -87,14 +90,22 @@ import {SegmentService} from "./common/services/segment.service";
     MatSnackBarModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {provide: 'googleTagManagerId', useValue: environment.googleTagManagerId}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 
   constructor(private readonly segmentService: SegmentService,
               private readonly utmService: UtmService,
-              private readonly themeService: ThemeService) {
+              private readonly themeService: ThemeService,
+              private readonly googleTagManagerService: GoogleTagManagerService,
+              @Inject(PLATFORM_ID) private platformId: object) {
     themeService.initialize();
+
+    if (isPlatformBrowser(platformId)) {
+      googleTagManagerService.addGtmToDom().then();
+    }
   }
 }
