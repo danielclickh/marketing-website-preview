@@ -12,6 +12,7 @@ export interface BlogPost {
   author: BlogPostAuthor;
   thumbnailPngUrl: string;
   publishedAt: string;
+  slug?: string;
 }
 
 export interface BlogHero {

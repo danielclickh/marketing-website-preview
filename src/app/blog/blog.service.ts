@@ -12,6 +12,10 @@ export class BlogService {
   constructor(private readonly strapiService: StrapiService) {
   }
 
+  getBlogPostUrl(blogPost: BlogPost): string {
+    return `/blog/${blogPost.slug ? blogPost.slug : blogPost.id}`;
+  }
+
   async getBlogData(): Promise<BlogData> {
     const blogRes: any = await this.strapiService.getStrapi().find('blog', {
       populate: [

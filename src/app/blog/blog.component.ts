@@ -69,4 +69,8 @@ export class BlogComponent {
       .map(entry => entry[0])
     this.cd.detectChanges();
   }
+
+  getBlogPostUrl(blogPost: BlogPost) {
+    return this.blogService.getBlogPostUrl(blogPost);
+  }
 }

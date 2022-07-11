@@ -10,6 +10,10 @@ export class EventService {
   constructor(private readonly strapiService: StrapiService) {
   }
 
+  getEventUrl(event: Event): string {
+    return `/company/events/${event.slug ? event.slug : event.id}`;
+  }
+
   async getEvents(): Promise<Array<Event>> {
     const eventsRes: any = await this.strapiService.getStrapi().find('events', {
       sort: [

@@ -1,10 +1,11 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {EventService} from "../news-and-events/event.service";
 import {ActivatedRoute} from "@angular/router";
 import {Event} from "../news-and-events/news-and-events.protocol";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {WorkatoService} from "../common/services/workato.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: 'app-event-page',
@@ -24,17 +25,21 @@ export class EventPageComponent implements OnInit {
               private readonly cd: ChangeDetectorRef,
               private readonly formBuilder: FormBuilder,
               private readonly workatoService: WorkatoService,
-              private readonly snackBar: MatSnackBar,) {
+              private readonly snackBar: MatSnackBar,
+              @Inject(PLATFORM_ID) private platformId: object) {
 
   }
 
   async ngOnInit() {
     const allEvents = await this.eventService.getEvents();
-    const eventId = parseInt(this.activatedRoute.snapshot.params['eventId']);
+    const eventIdOrSlug = this.activatedRoute.snapshot.params['eventIdOrSlug'];
     this.allEvents = allEvents;
-    this.event = allEvents.find((e) => e.id === eventId);
+    this.event = allEvents.find((e) => e.slug === eventIdOrSlug || (!isNaN(eventIdOrSlug) && e.id === parseInt(eventIdOrSlug)));
+    if (this.event?.eventVideoUrl && isPlatformBrowser(this.platformId)) {
+      window.location.href = this.event.eventVideoUrl;
+      return;
+    }
     this.cd.detectChanges();
-
 
     const formLabels = this.event!.form;
     if (formLabels.type === 'recordedGatedContent') {

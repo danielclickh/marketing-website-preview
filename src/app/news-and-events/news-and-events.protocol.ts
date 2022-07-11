@@ -38,6 +38,7 @@ export interface EventForm {
 export interface Event {
   id: number;
   title: string;
+  slug?: string;
   shortDescription: string;
   description: string;
   utcDatetime: string;

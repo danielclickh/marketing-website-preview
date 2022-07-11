@@ -25,9 +25,9 @@ export class BlogPostPageComponent implements OnInit {
 
   async ngOnInit() {
     const allBlogPosts = await this.blogService.getBlogPosts();
-    const blogPostId = parseInt(this.activatedRoute.snapshot.params['blogPostId']);
+    const blogPostIdOrSlug = this.activatedRoute.snapshot.params['blogPostIdOrSlug'];
     this.allBlogPosts = allBlogPosts;
-    this.blogPost = allBlogPosts.find((e) => e.id === blogPostId);
+    this.blogPost = allBlogPosts.find((e) => e.slug === blogPostIdOrSlug || (!isNaN(blogPostIdOrSlug) && e.id === parseInt(blogPostIdOrSlug)));
     this.cd.detectChanges();
   }
 
@@ -61,5 +61,9 @@ export class BlogPostPageComponent implements OnInit {
     return this.allBlogPosts!
       .filter((post) => post.id !== this.blogPost!.id)
       .slice(0, 3)
+  }
+
+  getBlogPostUrl(blogPost: BlogPost) {
+    return this.blogService.getBlogPostUrl(blogPost);
   }
 }

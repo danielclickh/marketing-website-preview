@@ -28,4 +28,8 @@ export class RecentEventsComponent implements OnInit {
     this.pastEvents = pastEvents.slice(0, 3);
     this.cd.detectChanges();
   }
+
+  getEventUrl(event: Event) {
+    return this.eventService.getEventUrl(event);
+  }
 }

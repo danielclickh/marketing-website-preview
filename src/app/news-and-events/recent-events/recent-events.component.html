@@ -4,7 +4,7 @@
   </div>
   <div class="events">
     <a *ngFor="let event of pastEvents"
-       [attr.href]="event.eventVideoUrl ? event.eventVideoUrl : '/company/event/'+event.id"
+       [attr.href]="event.eventVideoUrl ? event.eventVideoUrl : getEventUrl(event)"
        [target]="event.eventVideoUrl ? '_blank' : '_self'"
        class="event">
       <img alt="thumbnail" class="thumbnail" src="/assets/images/clickhouse-webinar-tile.png"/>

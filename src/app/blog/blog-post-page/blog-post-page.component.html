@@ -65,7 +65,7 @@
       </div>
       <div class="posts">
         <a *ngFor="let post of getOtherBlogPosts()"
-           [href]="'/blog/'+post.id"
+           [href]="getBlogPostUrl(post)"
            class="post">
           <div [strapiCssImage]="post.thumbnailPngUrl" class="thumbnail"></div>
           <div class="category">{{post.category}}</div>

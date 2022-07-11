@@ -34,7 +34,7 @@
           </div>
           <div class="right">
             <div *ngIf="filteredBlogPosts" class="posts">
-              <a *ngFor="let blogPost of filteredBlogPosts" [href]="'/blog/'+blogPost.id" class="post">
+              <a *ngFor="let blogPost of filteredBlogPosts" [href]="getBlogPostUrl(blogPost)" class="post">
                 <div [strapiCssImage]="blogPost.thumbnailPngUrl" class="thumbnail"></div>
                 <div class="metadata">
                   <div class="category">{{blogPost.category}}</div>

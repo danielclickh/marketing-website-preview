@@ -12,7 +12,7 @@
             <div class="title">{{featuredEvent.title}}</div>
             <div class="short_description">{{featuredEvent.shortDescription}}</div>
 
-            <a [href]="'/company/event/'+featuredEvent.id"
+            <a [href]="getEventUrl(featuredEvent)"
                class="cta_button"
                target="self">
               <button class="empty_button">
@@ -48,7 +48,7 @@
           <div class="section_title">{{newsAndEventsData.upcomingEventsTitle}}</div>
           <div class="events">
             <a *ngFor="let event of newsAndEventsData.upcomingEvents"
-               [href]="'/company/event/'+event.id"
+               [href]="getEventUrl(event)"
                class="event"
                target="_self">
               <div class="thumbnail_container">
