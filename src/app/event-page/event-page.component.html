@@ -31,7 +31,10 @@
         </div>
       </div>
       <div *ngIf="event.form && (!event.eventEnded || event.form.type === 'recordedGatedContent')" class="right">
-        <form (ngSubmit)="onSubmit().then()" *ngIf="form" [formGroup]="form" class="form">
+        <iframe *ngIf="showVimeoVideo" [src]="getSafeVimeoUrl(event)" allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen="allowfullscreen" data-ready="true" frameborder="0" height="281"
+                loading="lazy" width="500"></iframe>
+        <form (ngSubmit)="onSubmit().then()" *ngIf="form && !showVimeoVideo" [formGroup]="form" class="form">
           <div *ngIf="event.form.type === 'eventRegistration'" class="seed_form_element">
             <label class="seed_label">{{event.form.firstNameLabel}}</label>
             <input class="seed_input" formControlName="firstName" name="firstName" type="text">

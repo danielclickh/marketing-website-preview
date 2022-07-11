@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {WorkatoService} from "../common/services/workato.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {isPlatformBrowser} from "@angular/common";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-event-page',
@@ -19,6 +20,7 @@ export class EventPageComponent implements OnInit {
 
   form?: FormGroup;
   serverCallInProgress = false;
+  showVimeoVideo = false;
 
   constructor(private readonly eventService: EventService,
               private readonly activatedRoute: ActivatedRoute,
@@ -26,7 +28,8 @@ export class EventPageComponent implements OnInit {
               private readonly formBuilder: FormBuilder,
               private readonly workatoService: WorkatoService,
               private readonly snackBar: MatSnackBar,
-              @Inject(PLATFORM_ID) private platformId: object) {
+              @Inject(PLATFORM_ID) private platformId: object,
+              protected domSanitizer: DomSanitizer) {
 
   }
 
@@ -67,6 +70,9 @@ export class EventPageComponent implements OnInit {
       const formLabels = this.event!.form;
       if (formLabels.type === 'recordedGatedContent') {
         await this.workatoService.recordedGatedContent(email);
+        if (this.event?.recordedVimeoUrl) {
+          this.showVimeoVideo = true;
+        }
       } else {
         await this.workatoService.eventRegistration(firstName, lastName, email);
       }
@@ -78,5 +84,9 @@ export class EventPageComponent implements OnInit {
 
     this.snackBar.open(`Thank you, you have been registered to the event`, 'Dismiss', {duration: 5000});
     this.form.reset();
+  }
+
+  getSafeVimeoUrl(event: Event) {
+    return this.domSanitizer.bypassSecurityTrustResourceUrl(event.recordedVimeoUrl!);
   }
 }
