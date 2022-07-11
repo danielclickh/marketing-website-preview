@@ -42,6 +42,7 @@ import {BlogComponent} from './blog/blog.component';
 import {BlogPostPageComponent} from './blog/blog-post-page/blog-post-page.component';
 import {NewsletterFormComponent} from './common/sections/newsletter-form/newsletter-form.component';
 import {UtmService} from "./common/services/utm.service";
+import {SegmentService} from "./common/services/segment.service";
 
 
 @NgModule({
@@ -91,7 +92,8 @@ import {UtmService} from "./common/services/utm.service";
 })
 export class AppModule {
 
-  constructor(private readonly utmService: UtmService,
+  constructor(private readonly segmentService: SegmentService,
+              private readonly utmService: UtmService,
               private readonly themeService: ThemeService) {
     themeService.initialize();
   }

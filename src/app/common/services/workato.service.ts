@@ -3,15 +3,26 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {firstValueFrom} from "rxjs";
 import {UtmService} from "./utm.service";
+import {SegmentService} from "./segment.service";
 
 type WorkatoFormType = 'newsletter' | 'websiteContact' | 'eventRegistration' | 'recordedGatedContent';
-type WorkatoRequest = WorkatoNewsletterRequest;
+type WorkatoRequest =
+  WorkatoContactRequest
+  | WorkatoNewsletterRequest
+  | WorkatoEventRegisterRequest
+  | WorkatoRecordedGatedContentRequest;
+
+export interface WorkatoResponse {
+  cloudId?: string;
+}
 
 interface BaseWorkatoRequest {
   url?: string;
-  utm_campaign?: string,
-  utm_medium?: string,
-  utm_source?: string,
+  utm_campaign?: string;
+  utm_medium?: string;
+  utm_source?: string;
+  firstName?: string;
+  lastName?: string;
 }
 
 interface WorkatoNewsletterRequest extends BaseWorkatoRequest {
@@ -41,7 +52,8 @@ interface WorkatoRecordedGatedContentRequest extends BaseWorkatoRequest {
 })
 export class WorkatoService {
   constructor(private readonly http: HttpClient,
-              private readonly utmService: UtmService) {
+              private readonly utmService: UtmService,
+              private readonly segmentService: SegmentService) {
   }
 
   async submitNewsletterForm(email: string): Promise<void> {
@@ -74,7 +86,7 @@ export class WorkatoService {
     const utmParams = this.utmService.getUtmParams();
     request = {...request, ...utmParams};
     request.url = window.location.href;
-    await firstValueFrom(this.http.post(
+    const workatoResp: WorkatoResponse = await firstValueFrom(this.http.post(
       `${environment.workatoApiBaseUrl}/${formType}`,
       request,
       {
@@ -83,5 +95,12 @@ export class WorkatoService {
         }
       }
     ));
+
+    if (workatoResp && workatoResp.cloudId && request.email) {
+      const email = request.email;
+      const firstName = request.firstName;
+      const lastName = request.lastName;
+      this.segmentService.identify(email, firstName, lastName, workatoResp.cloudId)
+    }
   }
 }
