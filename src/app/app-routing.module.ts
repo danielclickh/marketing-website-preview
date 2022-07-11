@@ -13,6 +13,7 @@ import {NewsAndEventsComponent} from "./news-and-events/news-and-events.componen
 import {EventPageComponent} from "./event-page/event-page.component";
 import {BlogComponent} from "./blog/blog.component";
 import {BlogPostPageComponent} from "./blog/blog-post-page/blog-post-page.component";
+import {RedirectComponent} from "./redirect/redirect.component";
 
 
 const routes: Routes = [
@@ -41,7 +42,7 @@ const routes: Routes = [
       }
     ]
   },
-  {path: '**', redirectTo: '/', pathMatch: 'full'},
+  {path: '**', component: RedirectComponent},
 ];
 
 @NgModule({

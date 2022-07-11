@@ -46,6 +46,7 @@ import {SegmentService} from "./common/services/segment.service";
 import {environment} from "../environments/environment";
 import {GoogleTagManagerService} from "angular-google-tag-manager";
 import {isPlatformBrowser} from "@angular/common";
+import {RedirectComponent} from './redirect/redirect.component';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import {isPlatformBrowser} from "@angular/common";
     EventPageComponent,
     BlogComponent,
     BlogPostPageComponent,
-    NewsletterFormComponent
+    NewsletterFormComponent,
+    RedirectComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
