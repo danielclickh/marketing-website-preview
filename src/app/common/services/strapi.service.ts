@@ -8,9 +8,37 @@ import {isPlatformServer} from "@angular/common";
 import {SeoMetadata} from "../protocol/common.protocol";
 import {Meta, Title} from "@angular/platform-browser";
 
+export type StrapiFilterOperator =
+  '$eq' |
+  '$ne' |
+  '$lt' |
+  '$lte' |
+  '$gt' |
+  '$gte' |
+  '$in' |
+  '$notIn' |
+  '$contains' |
+  '$notContains' |
+  '$containsi' |
+  '$notContainsi' |
+  '$null' |
+  '$notNull' |
+  '$between' |
+  '$startsWith' |
+  '$endsWith' |
+  '$or' |
+  '$and';
+
+export interface StrapiFilter {
+  field: string;
+  operator: StrapiFilterOperator;
+  value: string;
+}
+
 export interface StrapiFindParams {
   populate?: Array<string>;
   sort?: Array<string>;
+  filters?: Array<StrapiFilter>;
 }
 
 export class StrapiClient {
@@ -43,6 +71,13 @@ export class StrapiClient {
           urlParams.push(`${key}=${value}`);
         }
       }
+
+      if (params.filters) {
+        for (const filter of params.filters) {
+          urlParams.push(`filters[${filter.field}][${filter.operator}]=${filter.value}`);
+        }
+      }
+
       if (params.populate) {
         for (let i = 0; i < params.populate.length; i++) {
           const populateElement = params.populate[i];

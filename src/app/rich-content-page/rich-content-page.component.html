@@ -1,0 +1,14 @@
+<ng-container *ngIf="themeObs | async as theme">
+  <div *ngIf="richContentPageDataPromise | async as richContentPage" class="rich_content_page">
+    <div class="hero">
+      <div class="container">
+        <div class="title">{{richContentPage.title}}</div>
+      </div>
+    </div>
+    <div class="content_container">
+      <div class="container">
+        <div [innerHTML]="richContentPage.content" class="rich_content"></div>
+      </div>
+    </div>
+  </div>
+</ng-container>

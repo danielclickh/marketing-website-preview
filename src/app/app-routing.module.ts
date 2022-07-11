@@ -14,6 +14,7 @@ import {EventPageComponent} from "./event-page/event-page.component";
 import {BlogComponent} from "./blog/blog.component";
 import {BlogPostPageComponent} from "./blog/blog-post-page/blog-post-page.component";
 import {RedirectComponent} from "./redirect/redirect.component";
+import {RichContentPageComponent} from "./rich-content-page/rich-content-page.component";
 
 
 const routes: Routes = [
@@ -38,6 +39,14 @@ const routes: Routes = [
           {path: 'customer-stories', component: CustomerStoriesComponent},
           {path: 'blog', component: BlogComponent},
           {path: 'blog/:blogPostId', component: BlogPostPageComponent},
+          {path: 'legal/agreements/private-preview-terms-of-service', component: RichContentPageComponent},
+          {path: 'legal/agreements/security-addendum', component: RichContentPageComponent},
+          {path: 'legal/agreements/subprocessors', component: RichContentPageComponent},
+          {path: 'legal/agreements/data-processing-addendum', component: RichContentPageComponent},
+          {path: 'legal/agreements/private-preview-terms-of-service', component: RichContentPageComponent},
+          {path: 'legal/privacy-policy', component: RichContentPageComponent},
+          {path: 'trust/security', component: RichContentPageComponent},
+          {path: 'support/policy', component: RichContentPageComponent},
         ]
       }
     ]

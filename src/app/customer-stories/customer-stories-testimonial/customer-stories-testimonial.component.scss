@@ -41,6 +41,8 @@
 
 
   .rating_container {
+    // Hiding ratings per Tyler's request
+    display: none;
     position: relative;
 
     .star {
