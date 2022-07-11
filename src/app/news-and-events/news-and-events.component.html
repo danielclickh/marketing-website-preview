@@ -8,7 +8,7 @@
         </div>
         <div *ngIf="newsAndEventsData.featuredEvent as featuredEvent" class="featured_event">
           <div class="left">
-            <div class="pretitle">{{newsAndEventsData.featuredEventPretitle}} • {{featuredEvent.location.city}}</div>
+            <div class="pretitle">{{featuredEvent.category}} • {{featuredEvent.location.city}}</div>
             <div class="title">{{featuredEvent.title}}</div>
             <div class="short_description">{{featuredEvent.shortDescription}}</div>
 

@@ -75,7 +75,6 @@ export interface NewsAndEventsData {
   hero: NewsAndEventsHero;
   latestNewsTitle: string;
   upcomingEventsTitle: string;
-  featuredEventPretitle: string;
   pressReleasesTitle: string;
   newsItems: Array<NewsItem>;
   pressReleases: Array<NewsItem>;
