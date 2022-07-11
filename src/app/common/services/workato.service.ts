@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {firstValueFrom} from "rxjs";
+import {UtmService} from "./utm.service";
 
 type WorkatoFormType = 'newsletter' | 'websiteContact' | 'eventRegistration' | 'recordedGatedContent';
 type WorkatoRequest = WorkatoNewsletterRequest;
@@ -39,7 +40,8 @@ interface WorkatoRecordedGatedContentRequest extends BaseWorkatoRequest {
   providedIn: 'root'
 })
 export class WorkatoService {
-  constructor(private readonly http: HttpClient) {
+  constructor(private readonly http: HttpClient,
+              private readonly utmService: UtmService) {
   }
 
   async submitNewsletterForm(email: string): Promise<void> {
@@ -69,6 +71,8 @@ export class WorkatoService {
   }
 
   private async submitWorkatoForm(formType: WorkatoFormType, request: WorkatoRequest) {
+    const utmParams = this.utmService.getUtmParams();
+    request = {...request, ...utmParams};
     request.url = window.location.href;
     await firstValueFrom(this.http.post(
       `${environment.workatoApiBaseUrl}/${formType}`,

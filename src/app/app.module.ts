@@ -41,6 +41,7 @@ import {EventPageComponent} from './event-page/event-page.component';
 import {BlogComponent} from './blog/blog.component';
 import {BlogPostPageComponent} from './blog/blog-post-page/blog-post-page.component';
 import {NewsletterFormComponent} from './common/sections/newsletter-form/newsletter-form.component';
+import {UtmService} from "./common/services/utm.service";
 
 
 @NgModule({
@@ -90,7 +91,8 @@ import {NewsletterFormComponent} from './common/sections/newsletter-form/newslet
 })
 export class AppModule {
 
-  constructor(private readonly themeService: ThemeService) {
+  constructor(private readonly utmService: UtmService,
+              private readonly themeService: ThemeService) {
     themeService.initialize();
   }
 }
