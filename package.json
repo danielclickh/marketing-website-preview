@@ -34,7 +34,7 @@
     "rxjs": "^7.5.5",
     "tslib": "^2.4.0",
     "zone.js": "^0.11.6",
-    "marked": "^4.0.17",
+    "marked": "^4.0.18",
     "copy-to-clipboard": "^3.3.1",
     "angular-google-tag-manager": "^1.6.0"
   },
