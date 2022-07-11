@@ -5,6 +5,8 @@ import {StrapiImageObject} from "../protocol/strapi.protocol";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, combineLatest, filter, firstValueFrom, map, Observable, take} from "rxjs";
 import {isPlatformServer} from "@angular/common";
+import {SeoMetadata} from "../protocol/common.protocol";
+import {Meta, Title} from "@angular/platform-browser";
 
 export interface StrapiFindParams {
   populate?: Array<string>;
@@ -68,7 +70,49 @@ export class StrapiService {
 
   constructor(private readonly themeService: ThemeService,
               private readonly httpClient: HttpClient,
-              @Inject(PLATFORM_ID) private platformId: object) {
+              @Inject(PLATFORM_ID) private platformId: object,
+              private readonly meta: Meta,
+              private readonly title: Title) {
+  }
+
+  setSeoTags(rawSeo?: any) {
+    if (rawSeo === undefined) {
+      return;
+    }
+
+    const seoMetadata: SeoMetadata = {
+      ...rawSeo,
+      imageUrl: rawSeo.image ? this.extractImageUrl(rawSeo.image) : undefined
+    }
+
+    if (seoMetadata.title) {
+      this.title.setTitle(seoMetadata.title);
+      for (const tagName of ['og:title', 'twitter:title']) {
+        this.meta.addTag({name: tagName, content: seoMetadata.title});
+      }
+    }
+
+    if (seoMetadata.keywords) {
+      this.meta.addTag({name: 'keywords', content: seoMetadata.keywords});
+    }
+
+    if (seoMetadata.description) {
+      for (const tagName of ['description', 'twitter:description', 'og:description']) {
+        this.meta.addTag({name: tagName, content: seoMetadata.description});
+      }
+    }
+
+    if (seoMetadata.type) {
+      this.meta.addTag({name: 'og:type', content: seoMetadata.type});
+    }
+
+    if (seoMetadata.siteName) {
+      this.meta.addTag({name: 'og:site_name', content: seoMetadata.siteName});
+    }
+
+    if (seoMetadata.imageUrl) {
+      this.meta.addTag({name: 'og:image', content: seoMetadata.imageUrl});
+    }
   }
 
   observeNoInflightRequests(): Observable<boolean> {

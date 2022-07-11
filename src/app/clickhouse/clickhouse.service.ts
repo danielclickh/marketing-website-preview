@@ -34,7 +34,8 @@ export class ClickhouseService {
         'features5',
         'features5.iconSvg',
         'features5.items',
-
+        'seo',
+        'seo.image',
       ]
     });
 
@@ -46,6 +47,7 @@ export class ClickhouseService {
     const features3 = attributes.features3;
     const features4 = attributes.features4;
     const features5 = attributes.features5;
+    this.strapiService.setSeoTags(attributes.seo);
 
     return {
       hero: {

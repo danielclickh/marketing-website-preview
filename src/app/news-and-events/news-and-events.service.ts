@@ -20,6 +20,8 @@ export class NewsAndEventsService {
         'newsItems.ctaButton',
         'pressReleases',
         'pressReleases.ctaButton',
+        'seo',
+        'seo.image',
       ]
     });
 
@@ -29,6 +31,7 @@ export class NewsAndEventsService {
     const pastEvents = this.eventService.extractPastEvents(allEvents);
     const featuredEvent = upcomingEvents.shift();
     const attributes = newsRes.data.attributes;
+    this.strapiService.setSeoTags(attributes.seo);
 
     return {
       ...attributes,

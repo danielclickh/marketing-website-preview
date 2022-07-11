@@ -17,9 +17,14 @@ export class BlogService {
       populate: [
         'hero',
         'newsletterForm',
+        'seo',
+        'seo.image',
       ]
     });
-    return {...blogRes.data.attributes}
+
+    const attributes = {...blogRes.data.attributes};
+    this.strapiService.setSeoTags(attributes.seo);
+    return attributes;
   }
 
   async getBlogPosts(): Promise<Array<BlogPost>> {

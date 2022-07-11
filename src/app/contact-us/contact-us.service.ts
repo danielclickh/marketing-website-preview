@@ -16,19 +16,22 @@ export class ContactUsService {
       populate: [
         'hero',
         'hero.contactForm',
+        'seo',
+        'seo.image',
       ]
     });
 
     const data: any = res.data;
     const attributes = data.attributes;
     const hero = attributes.hero;
-    const result: ContactUsData = {
+    this.strapiService.setSeoTags(attributes.seo);
+
+    return {
       hero: {
         title: hero.title,
         description: hero.description,
         contactForm: {...hero.contactForm, disclaimer: marked.parse(hero.contactForm.disclaimer)}
       }
     };
-    return result;
   }
 }

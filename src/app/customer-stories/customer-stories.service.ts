@@ -23,6 +23,8 @@ export class CustomerStoriesService {
         'useCaseItems.lightLogoPng',
         'useCaseItems.bullets',
         'useCaseItems.ctaButton',
+        'seo',
+        'seo.image',
       ]
     });
 
@@ -39,7 +41,7 @@ export class CustomerStoriesService {
     });
     const spotlight = useCaseItems.shift();
 
-
+    this.strapiService.setSeoTags(attributes.seo);
     return {
       hero: {
         ...hero,

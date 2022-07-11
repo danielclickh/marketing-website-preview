@@ -31,6 +31,8 @@ export class OurStoryService {
         'team.investors.profileImagePng',
         'team.darkInvestorLogosPng',
         'team.lightInvestorLogosPng',
+        'seo',
+        'seo.image',
       ]
     });
 
@@ -41,6 +43,7 @@ export class OurStoryService {
     const ourHistory = attributes.ourHistory;
     const hiring = attributes.hiring;
     const team = attributes.team;
+    this.strapiService.setSeoTags(attributes.seo);
 
     return {
       hero: {

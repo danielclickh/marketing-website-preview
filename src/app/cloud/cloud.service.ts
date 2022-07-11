@@ -29,6 +29,8 @@ export class CloudService {
         'earlyAccessForm',
         'earlyAccessForm.contactForm',
         'earlyAccessForm.contactForm.submitButton',
+        'seo',
+        'seo.image',
       ]
     });
 
@@ -38,6 +40,8 @@ export class CloudService {
     const features = attributes.features;
     const earlyAccessForm = attributes.earlyAccessForm;
     const screenshotsAndBullets = attributes.screenshotsAndBullets;
+    this.strapiService.setSeoTags(attributes.seo);
+
     return {
       hero: {
         title: hero.title,

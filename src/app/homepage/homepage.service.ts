@@ -36,6 +36,8 @@ export class HomepageService {
         'testimonials.testimonialsIconSvg',
         'testimonials.bottomIconSvg',
         'testimonials.testimonialItems',
+        'seo',
+        'seo.image',
       ]
     });
 
@@ -47,6 +49,7 @@ export class HomepageService {
     const clickhouseCloud = attributes.clickhouseCloud;
     const clickhouseCloudItems = attributes.clickhouseCloudItems;
     const testimonials = attributes.testimonials;
+    this.strapiService.setSeoTags(attributes.seo);
     return {
       hero: {
         darkBackgroundIconUrl: hero.darkBackgroundIcon.data.attributes.url,

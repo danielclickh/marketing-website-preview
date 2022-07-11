@@ -19,7 +19,9 @@ export class CareersService {
         'hero',
         'hero.companyImages',
         'companyValues',
-        'companyValues.iconSvg'
+        'companyValues.iconSvg',
+        'seo',
+        'seo.image',
       ]
     });
 
@@ -27,6 +29,7 @@ export class CareersService {
     const attributes = data.attributes;
     const hero = attributes.hero;
     const companyValues = attributes.companyValues;
+    this.strapiService.setSeoTags(attributes.seo);
 
     return {
       hero: {

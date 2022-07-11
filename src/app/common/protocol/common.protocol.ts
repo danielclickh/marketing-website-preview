@@ -29,3 +29,12 @@ export interface NewsletterFormData {
   emailLabel: string;
   submitButtonLabel: string;
 }
+
+export interface SeoMetadata {
+  title?: string;
+  keywords?: string;
+  description?: string;
+  imageUrl?: string;
+  type?: string;
+  siteName?: string;
+}
