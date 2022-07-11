@@ -3,7 +3,6 @@ import {StrapiService} from "../common/services/strapi.service";
 import {Router} from "@angular/router";
 import {RichContentPageData} from "./rich-content-page.protocol";
 import {marked} from "marked";
-import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +26,6 @@ export class RichContentPageService {
 
     const data: any = res.data;
     const attributes = data[0].attributes;
-    return {...attributes, content: marked.parse(attributes.content, {baseUrl: environment.strapiBaseUrl})};
+    return {...attributes, content: marked.parse(attributes.content)};
   }
 }

@@ -42,12 +42,17 @@ const routes: Routes = [
           {path: 'blog/:blogPostIdOrSlug', component: BlogPostPageComponent},
           {path: 'legal/agreements/private-preview-terms-of-service', component: RichContentPageComponent},
           {path: 'legal/agreements/security-addendum', component: RichContentPageComponent},
+          {path: 'legal/cookie-policy', component: RichContentPageComponent},
+          {path: 'legal/legal/trademark-policy', component: RichContentPageComponent},
           {path: 'legal/agreements/subprocessors', component: RichContentPageComponent},
           {path: 'legal/agreements/data-processing-addendum', component: RichContentPageComponent},
           {path: 'legal/agreements/private-preview-terms-of-service', component: RichContentPageComponent},
           {path: 'legal/privacy-policy', component: RichContentPageComponent},
           {path: 'trust/security', component: RichContentPageComponent},
           {path: 'support/policy', component: RichContentPageComponent},
+          {path: 'support/platforms', component: RichContentPageComponent},
+          {path: 'support/program', component: RichContentPageComponent},
+          {path: 'support/agreement', component: RichContentPageComponent},
         ]
       }
     ]
