@@ -75,14 +75,13 @@ export class EventPageComponent implements OnInit {
         }
       } else {
         await this.workatoService.eventRegistration(firstName, lastName, email);
+        this.snackBar.open(`Thank you, you have been registered to the event`, 'Dismiss', {duration: 5000});
       }
 
     } finally {
       this.serverCallInProgress = false;
       this.cd.detectChanges();
     }
-
-    this.snackBar.open(`Thank you, you have been registered to the event`, 'Dismiss', {duration: 5000});
     this.form.reset();
   }
 
