@@ -43,7 +43,7 @@ const routes: Routes = [
           {path: 'legal/agreements/private-preview-terms-of-service', component: RichContentPageComponent},
           {path: 'legal/agreements/security-addendum', component: RichContentPageComponent},
           {path: 'legal/cookie-policy', component: RichContentPageComponent},
-          {path: 'legal/legal/trademark-policy', component: RichContentPageComponent},
+          {path: 'legal/trademark-policy', component: RichContentPageComponent},
           {path: 'legal/agreements/subprocessors', component: RichContentPageComponent},
           {path: 'legal/agreements/data-processing-addendum', component: RichContentPageComponent},
           {path: 'legal/agreements/private-preview-terms-of-service', component: RichContentPageComponent},
