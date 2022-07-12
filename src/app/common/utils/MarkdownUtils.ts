@@ -36,6 +36,7 @@ Showdown.extension('highlightjs', function () {
 const converter = new Showdown.Converter({
   noHeaderId: false,
   customizedHeaderId: true,
+  tables: true,
   extensions: ['highlightjs']
 
 });
