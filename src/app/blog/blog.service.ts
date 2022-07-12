@@ -1,14 +1,16 @@
 import {Injectable} from '@angular/core';
 import {StrapiService} from "../common/services/strapi.service";
 import {BlogData, BlogPost} from "./blog.protocol";
-import {marked} from "marked";
+import {convertMarkdown} from "../common/utils/MarkdownUtils";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogService {
 
-  constructor(private readonly strapiService: StrapiService) {
+  constructor(private readonly strapiService: StrapiService,
+              private domSanitizer: DomSanitizer) {
   }
 
   getBlogPostUrl(blogPost: BlogPost): string {
@@ -50,7 +52,7 @@ export class BlogService {
         id: blogWithAttributes.id,
         publishedAt: blogPost.publishedAt,
         ...blogPost,
-        content: marked.parse(blogPost.content),
+        content: convertMarkdown(blogPost.content),
         author: {...blogPost.author, avatarPngUrl: this.strapiService.extractImageUrl(blogPost.author.avatarPng)},
         thumbnailPngUrl: this.strapiService.extractImageUrl(blogPost.thumbnailPng),
       };

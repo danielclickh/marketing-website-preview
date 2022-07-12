@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {StrapiService} from "../common/services/strapi.service";
 import {Router} from "@angular/router";
 import {RichContentPageData} from "./rich-content-page.protocol";
-import {marked} from "marked";
+import {convertMarkdown} from "../common/utils/MarkdownUtils";
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,6 @@ export class RichContentPageService {
 
     const data: any = res.data;
     const attributes = data[0].attributes;
-    return {...attributes, content: marked.parse(attributes.content)};
+    return {...attributes, content: convertMarkdown(attributes.content)};
   }
 }

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {StrapiService} from "../common/services/strapi.service";
 import {CloudData} from "./cloud.protocols";
-import {marked} from "marked";
+import {convertMarkdown} from "../common/utils/MarkdownUtils";
 
 @Injectable({
   providedIn: 'root'
@@ -79,7 +79,10 @@ export class CloudService {
         pretitle: earlyAccessForm.pretitle,
         title: earlyAccessForm.title,
         description: earlyAccessForm.description,
-        contactForm: {...earlyAccessForm.contactForm, disclaimer: marked.parse(earlyAccessForm.contactForm.disclaimer)}
+        contactForm: {
+          ...earlyAccessForm.contactForm,
+          disclaimer: convertMarkdown(earlyAccessForm.contactForm.disclaimer)
+        }
       }
     };
   }

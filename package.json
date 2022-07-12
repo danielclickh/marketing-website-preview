@@ -34,12 +34,12 @@
     "rxjs": "^7.5.5",
     "tslib": "^2.4.0",
     "zone.js": "^0.11.6",
-    "marked": "^4.0.18",
     "copy-to-clipboard": "^3.3.1",
-    "angular-google-tag-manager": "^1.6.0"
+    "angular-google-tag-manager": "^1.6.0",
+    "showdown": "^2.1.0"
   },
   "devDependencies": {
-    "@types/marked": "^4.0.3",
+    "@types/showdown": "^2.0.0",
     "@angular-devkit/build-angular": "^14.0.5",
     "@angular/cli": "^14.0.5",
     "@angular/compiler-cli": "^14.0.5",

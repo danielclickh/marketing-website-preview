@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {StrapiService} from "../common/services/strapi.service";
 import {ContactUsData} from "./contact-us.protocol";
-import {marked} from "marked";
+import {convertMarkdown} from "../common/utils/MarkdownUtils";
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class ContactUsService {
       hero: {
         title: hero.title,
         description: hero.description,
-        contactForm: {...hero.contactForm, disclaimer: marked.parse(hero.contactForm.disclaimer)}
+        contactForm: {...hero.contactForm, disclaimer: convertMarkdown(hero.contactForm.disclaimer)}
       }
     };
   }

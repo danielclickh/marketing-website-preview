@@ -7,7 +7,7 @@
     </div>
     <div class="content_container">
       <div class="container">
-        <div [innerHTML]="richContentPage.content" class="rich_content"></div>
+        <div [innerHTML]="richContentPage.content | safeHtml" class="rich_content"></div>
       </div>
     </div>
   </div>

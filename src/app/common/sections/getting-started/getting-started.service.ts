@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {StrapiService} from "../../services/strapi.service";
 import {GettingStartedData} from "./getting-started.protocol";
-import {marked} from "marked";
+import {convertMarkdown} from "../../utils/MarkdownUtils";
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,7 @@ export class GettingStartedService {
       quickStartButton: attributes.quickStartButton,
       cloudButton: attributes.cloudButton,
       platforms: attributes.platforms,
-      bottomText: marked.parse(attributes.bottomText),
+      bottomText: convertMarkdown(attributes.bottomText),
     };
     return result;
   }
