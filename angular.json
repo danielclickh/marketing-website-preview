@@ -22,6 +22,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "copy-to-clipboard",
+              "showdown"
+            ],
             "outputPath": "dist/website/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
