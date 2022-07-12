@@ -166,6 +166,9 @@
         grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
         grid-column-gap: 148px;
         grid-row-gap: 70px;
+        @include customBreakpointCss('max-width: 600px') {
+          grid-template-columns: 1fr;
+        }
 
         .title {
           font-weight: 700;
@@ -254,6 +257,9 @@
         grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
         grid-column-gap: 64px;
         grid-row-gap: 64px;
+        @include customBreakpointCss('max-width: 600px') {
+          grid-template-columns: 1fr;
+        }
 
         .title {
           font-weight: 700;
@@ -294,6 +300,9 @@
         grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
         grid-column-gap: 148px;
         grid-row-gap: 70px;
+        @include customBreakpointCss('max-width: 600px') {
+          grid-template-columns: 1fr;
+        }
 
         .title {
           font-weight: 700;
@@ -388,6 +397,10 @@
           grid-column-gap: 100px;
           grid-row-gap: 16px;
           max-width: 1085px;
+
+          @include customBreakpointCss('max-width: 600px') {
+            grid-template-columns: 1fr;
+          }
 
           .feature {
             display: flex;
