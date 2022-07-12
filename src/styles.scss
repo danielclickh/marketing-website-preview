@@ -333,17 +333,28 @@ svg {
   }
 
   code {
-    box-sizing: border-box;
-    padding: 20px;
-    width: 100%;
     background: $bg2;
-    border-radius: 8px;
+    color: $primary;
     border: 1px solid $bg3;
-    white-space: pre-wrap;
-    display: block;
-    font-family: monospace, sans-serif;
-    margin-bottom: $commonMarginBottom;
+    padding: 5px;
   }
+
+  pre {
+    code {
+      box-sizing: border-box;
+      padding: 20px;
+      width: 100%;
+      background: $bg2;
+      color: $fg1;
+      border-radius: 8px;
+      border: 1px solid $bg3;
+      white-space: pre-wrap;
+      display: block;
+      font-family: monospace, sans-serif;
+      margin-bottom: $commonMarginBottom;
+    }
+  }
+
 
   ul, ol {
     margin-left: 26px;
