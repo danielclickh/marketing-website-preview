@@ -24,7 +24,9 @@ export class AnchorDirective implements OnInit {
     const anchorId = hash.replace('#', '');
     if (this.id === anchorId) {
       setTimeout(() => {
-        this.elementRef.nativeElement.scrollIntoView({behavior: 'smooth'});
+        const el = this.elementRef.nativeElement;
+        const y = el.getBoundingClientRect().top + window.scrollY - 70;
+        window.scrollTo({top: y, behavior: 'smooth'});
       }, 100);
     }
   }

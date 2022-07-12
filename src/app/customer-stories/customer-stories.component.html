@@ -37,7 +37,7 @@
           <div class="title">{{useCases.title}}</div>
           <div class="description">{{useCases.description}}</div>
         </div>
-        <div *ngIf="useCases.spotlight as spotlight" class="spotlight use_case">
+        <div *ngIf="useCases.spotlight as spotlight" [id]="spotlight.anchorId" anchor class="spotlight use_case">
           <div class="left">
             <div class="pretitle">{{useCases.spotlightTitle}}</div>
             <div class="company_name">{{spotlight.companyName}}</div>
@@ -62,7 +62,7 @@
           </div>
         </div>
         <div class="other_use_cases">
-          <div *ngFor="let useCase of useCases.items" class="use_case">
+          <div *ngFor="let useCase of useCases.items" [id]="useCase.anchorId" anchor class="use_case">
             <img [src]="(theme === 'dark' ? useCase.darkLogoPngUrl : useCase.lightLogoPngUrl) | strapiImageUrl"
                  alt="logo"
                  class="logo"/>

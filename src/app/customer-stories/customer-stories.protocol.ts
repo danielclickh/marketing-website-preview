@@ -19,6 +19,7 @@ export interface UseCasesItem {
   description: string;
   bullets: Array<UseCaseBullet>;
   ctaButton: StrapiButton;
+  anchorId: string;
 }
 
 export interface UseCases {
