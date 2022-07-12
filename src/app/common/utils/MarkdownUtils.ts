@@ -20,7 +20,7 @@ Showdown.extension('highlightjs', function () {
   function replacement(_wholeMatch: any, match: any, left: string, right: string) {
     // unescape match to prevent double escaping
     match = htmlDecode(match);
-    return left + hljs.highlightAuto(match).value + right;
+    return left + hljs.highlightAuto(match, ['javascript', 'sql', 'bash', 'cpp', 'typescript']).value + right;
   }
 
   return [
