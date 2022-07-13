@@ -25,7 +25,7 @@ export class ContactFormComponent {
       'firstName': ['', [Validators.required]],
       'lastName': ['', [Validators.required]],
       'email': ['', [Validators.required, Validators.email]],
-      'company': ['', []],
+      'company': ['', [Validators.required]],
       'useCase': ['', []]
     });
   }
