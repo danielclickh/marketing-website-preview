@@ -106,12 +106,41 @@
         }
       }
 
-      .copyright_text {
+      .bottom_links_container {
         font-weight: 500;
-        font-size: 14px;
-        line-height: 21px;
-        @include customBreakpointCss('max-width: 890px') {
-          font-size: 12px;
+        font-size: 12px;
+        line-height: 18px;
+        color: #F6F7FA;
+
+        .licensing_text {
+          margin-bottom: 12px;
+        }
+
+        .copyright_and_bottom_links {
+          display: flex;
+          align-items: center;
+
+          .copyright {
+            margin-right: 12px;
+          }
+
+          .bottom_links {
+            display: flex;
+
+            .bottom_link {
+              color: #F6F7FA;
+
+              &:hover {
+                text-decoration: underline;
+              }
+
+              &:not(:last-child) {
+                padding-right: 6px;
+                margin-right: 6px;
+                border-right: 1px solid #6D7386;
+              }
+            }
+          }
         }
       }
     }

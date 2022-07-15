@@ -19,25 +19,20 @@ export class FooterService {
         'socialLinks',
         'socialLinks.socialLinkItems',
         'socialLinks.socialLinkItems.iconSvg',
+        'bottomLinks'
       ]
     });
-
 
     const data: any = res.data;
     const attributes = data.attributes;
     const result: FooterData = {
-      copyrightText: attributes.copyrightText,
+      ...attributes,
       logoSvgId: this.strapiService.registerSvgIcon(attributes.logoSvg)!,
-      newsletterForm: attributes.newsletterForm,
-      topLevelFooterMenu: attributes.topLevelFooterMenu,
       socialLinks: {
-        id: attributes.socialLinks.id,
-        title: attributes.socialLinks.title,
+        ...attributes.socialLinks,
         items: attributes.socialLinks.socialLinkItems.map((socialLink: any) => {
           return {
-            id: socialLink.id,
-            href: socialLink.href,
-            target: socialLink.target,
+            ...socialLink,
             iconSvgUrl: socialLink.iconSvg.data.attributes.url,
           }
         })

@@ -1,11 +1,17 @@
-import {LinkTarget} from "../common/protocol/strapi.protocol";
+import {LinkTarget, StrapiLink} from "../common/protocol/strapi.protocol";
+
+export interface FooterBottomLink extends StrapiLink {
+  text: string;
+}
 
 export interface FooterData {
-  copyrightText: string;
+  licensingText: string;
+  copyright: string;
   logoSvgId: string;
   topLevelFooterMenu: Array<TopLevelFooterMenu>;
   newsletterForm: FooterNewsletterForm;
   socialLinks: FooterSocialLinks;
+  bottomLinks: Array<FooterBottomLink>;
 }
 
 export interface TopLevelFooterMenu {

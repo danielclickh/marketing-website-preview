@@ -18,7 +18,20 @@
           <mat-icon [svgIcon]="footerData.logoSvgId" class="icon"></mat-icon>
           <div class="text">ClickHouse</div>
         </div>
-        <div class="copyright_text">{{footerData.copyrightText}}</div>
+        <div class="bottom_links_container">
+          <div class="licensing_text">{{footerData.licensingText}}</div>
+          <div class="copyright_and_bottom_links">
+            <div class="copyright">{{footerData.copyright}}</div>
+            <div class="bottom_links">
+              <a *ngFor="let bottomLink of footerData.bottomLinks"
+                 [href]="bottomLink.href"
+                 [target]="bottomLink.target"
+                 class="bottom_link">
+                {{bottomLink.text}}
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="separator"></div>
