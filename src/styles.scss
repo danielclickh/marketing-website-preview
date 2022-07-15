@@ -400,3 +400,10 @@ svg {
     }
   }
 }
+
+// Firefox doesn't support backdrop-filter
+@-moz-document url-prefix() {
+  .header {
+    background: $bg1 !important;
+  }
+}
