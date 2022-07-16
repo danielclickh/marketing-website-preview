@@ -21,6 +21,7 @@ export interface ContactForm {
   messageLabel: string;
   submitButtonLabel: string;
   disclaimer: string;
+  thankYouMessage: string;
 }
 
 export interface NewsletterFormData {

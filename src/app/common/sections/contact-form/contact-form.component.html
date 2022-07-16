@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit().then()" [formGroup]="form" class="form">
+<form (ngSubmit)="onSubmit(contactForm.thankYouMessage).then()" [formGroup]="form" class="form">
   <div class="first_and_last_name_inputs">
     <div class="seed_form_element">
       <label class="seed_label">{{contactForm.firstNameLabel}}</label>

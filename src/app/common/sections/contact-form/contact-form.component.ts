@@ -30,7 +30,7 @@ export class ContactFormComponent {
     });
   }
 
-  async onSubmit() {
+  async onSubmit(thankYouMessage: string) {
     if (this.form.invalid) {
       this.snackBar.open('Please fill in all the required fields', 'Dismiss', {duration: 5000});
       return;
@@ -45,7 +45,7 @@ export class ContactFormComponent {
       this.cd.detectChanges();
     }
 
-    this.snackBar.open(`Thank you for applying for early access`, 'Dismiss', {duration: 5000});
+    this.snackBar.open(thankYouMessage, 'Dismiss', {duration: 5000});
     this.form.reset();
   }
 }
