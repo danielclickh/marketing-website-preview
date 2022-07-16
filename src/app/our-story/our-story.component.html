@@ -4,10 +4,10 @@
       <div class="container">
         <div class="title">{{hero.title}}</div>
         <div class="description">{{hero.description}}</div>
-        <img [src]="hero.imagePng.url | strapiImageUrl" alt="world_map" class="image"/>
+        <img [src]="hero.imagePng | strapiImageUrl" alt="world_map" class="image"/>
         <div class="offices">
           <div *ngFor="let office of hero.offices" class="office">
-            <div [strapiCssImage]="office.flagPng.url" class="flag"></div>
+            <div [strapiCssImage]="office.flagPng" class="flag"></div>
             <div class="name">{{office.name}}</div>
             <div class="location">{{office.location}}</div>
           </div>
@@ -26,7 +26,7 @@
               <div class="description">{{item.description}}</div>
             </div>
             <div class="image_container">
-              <img [src]="item.imagePng.url | strapiImageUrl" alt="company_event_image" class="image"/>
+              <img [src]="item.imagePng | strapiImageUrl: 'medium'" alt="company_event_image" class="image"/>
             </div>
           </div>
         </div>
@@ -66,7 +66,7 @@
           <div class="items founders_items">
             <div *ngFor="let item of team.founders" class="item founders_item">
               <div class="content">
-                <div [strapiCssImage]="item.profileImagePng.url" class="avatar founders_avatar"></div>
+                <div [strapiCssImage]="item.profileImagePng" class="avatar founders_avatar" size="small"></div>
                 <div class="name">{{item.name}}</div>
                 <div class="role">{{item.role}}</div>
               </div>
@@ -79,7 +79,7 @@
           <div class="items investors_items">
             <div *ngFor="let item of team.investors" class="item investors_item">
               <div class="content">
-                <div [strapiCssImage]="item.profileImagePng.url" class="avatar investors_avatar"></div>
+                <div [strapiCssImage]="item.profileImagePng" class="avatar investors_avatar" size="small"></div>
                 <div class="name">{{item.name}}</div>
                 <div class="role">{{item.role}}</div>
               </div>
@@ -88,7 +88,7 @@
         </div>
         <div class="logos">
           <div *ngFor="let logo of (theme === 'dark' ? team.darkInvestorLogosPng : team.lightInvestorLogosPng)"
-               [strapiCssImage]="logo.url"
+               [strapiCssImage]="logo" size="small"
                class="logo">
           </div>
         </div>

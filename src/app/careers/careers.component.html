@@ -7,7 +7,7 @@
       </div>
       <div class="image_container">
         <img *ngFor="let image of hero.companyImages"
-             [src]="image.url | strapiImageUrl"
+             [src]="image | strapiImageUrl: 'medium'"
              alt="company_image" class="image"/>
       </div>
       <div class="container paragraph_container">

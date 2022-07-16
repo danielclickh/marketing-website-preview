@@ -30,14 +30,20 @@
       width: 100%;
       overflow: hidden;
       flex-wrap: nowrap;
-      justify-content: center;
+      justify-content: flex-start;
       margin-bottom: 70px;
       position: relative;
+
 
       .image {
         &:not(:last-child) {
           margin-right: 7px;
         }
+      }
+
+      @include customBreakpointCss('max-width: 420px') {
+        justify-content: flex-start;
+        overflow: scroll;
       }
     }
 

@@ -1,5 +1,5 @@
 <div [@enterAnimation] class="testimonial">
-  <div [strapiCssImage]="testimonial.avatar.url" class="avatar"></div>
+  <div [strapiCssImage]="testimonial.avatar" class="avatar" size="small"></div>
   <div class="review">“{{testimonial.review}}”</div>
   <div class="author">{{testimonial.author}}</div>
   <div *ngIf="testimonial.role" class="role">{{testimonial.role}}</div>

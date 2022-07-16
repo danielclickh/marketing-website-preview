@@ -2,7 +2,7 @@
   <div *ngIf="homepageDataPromise | async as homepageData" class="homepage">
     <div *ngIf="homepageData.hero as hero" class="hero">
       <div class="background_overlay"></div>
-      <div [strapiCssImage]="theme === 'dark' ? hero.darkBackgroundIcon.url : hero.lightBackgroundIcon.url"
+      <div [strapiCssImage]="theme === 'dark' ? hero.darkBackgroundIcon : hero.lightBackgroundIcon"
            class="background_icon"></div>
       <div class="container">
         <div [innerHTML]="hero.title" class="title"></div>
@@ -54,7 +54,7 @@
         <div class="logos">
           <a *ngFor="let logo of customerStories.logos; trackBy: trackById" [href]="logo.href" [target]="logo.target"
              class="logo_wrapper">
-            <div [strapiCssImage]="theme === 'dark' ? logo.darkLogoPng.url : logo.lightLogoPng.url" class="logo"></div>
+            <div [strapiCssImage]="theme === 'dark' ? logo.darkLogoPng : logo.lightLogoPng" class="logo"></div>
           </a>
         </div>
         <a *ngIf="customerStories.ctaButton as button"

@@ -6,7 +6,7 @@
         <a *ngFor="let iconButton of growingCommunityData.iconButtons" [href]="iconButton.href"
            [target]="iconButton.target"
            class="logo_container">
-          <div [strapiCssImage]="theme === 'dark' ? iconButton.darkIconPng.url : iconButton.lightIconPng.url"
+          <div [strapiCssImage]="theme === 'dark' ? iconButton.darkIconPng : iconButton.lightIconPng"
                class="logo"></div>
         </a>
       </div>

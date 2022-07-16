@@ -56,7 +56,7 @@
 
           <div class="right">
             <div [ngClass]="{dark: theme === 'dark', light: theme === 'light'}" class="hexagon">
-              <img [src]="(theme === 'dark' ? spotlight.darkLogoPng.url : spotlight.lightLogoPng.url) | strapiImageUrl"
+              <img [src]="(theme === 'dark' ? spotlight.darkLogoPng : spotlight.lightLogoPng) | strapiImageUrl: 'small'"
                    alt="logo"
                    class="logo"/>
             </div>
@@ -64,7 +64,7 @@
         </div>
         <div class="other_use_cases">
           <div *ngFor="let useCase of customerStoriesData.useCaseItems" [id]="useCase.anchorId" anchor class="use_case">
-            <img [src]="(theme === 'dark' ? useCase.darkLogoPng.url : useCase.lightLogoPng.url) | strapiImageUrl"
+            <img [src]="(theme === 'dark' ? useCase.darkLogoPng : useCase.lightLogoPng) | strapiImageUrl: 'small'"
                  alt="logo"
                  class="logo"/>
             <div class="description">{{useCase.description}}</div>

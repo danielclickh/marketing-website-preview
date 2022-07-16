@@ -18,7 +18,7 @@
                class="git_button">
               <button class="primary_button light">
                 <div class="icon_wrapper">
-                  <div [strapiCssImage]="theme === 'dark' ? gitButton.darkIconPng.url : gitButton.lightIconPng.url"
+                  <div [strapiCssImage]="theme === 'dark' ? gitButton.darkIconPng : gitButton.lightIconPng"
                        class="icon"></div>
                 </div>
                 <div class="text">{{gitButton.text}}</div>
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="right">
-          <img [src]="hero.backgroundPng.url | strapiImageUrl" alt="background_image" class="background_image"/>
+          <img [src]="hero.backgroundPng | strapiImageUrl" alt="background_image" class="background_image"/>
         </div>
       </div>
     </div>

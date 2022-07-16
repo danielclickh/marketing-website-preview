@@ -24,7 +24,7 @@
 
           <div class="right">
             <img
-              [src]="(theme === 'dark' ? featuredEvent.darkFeatureImagePng.url : featuredEvent.lightFeatureImagePng.url) | strapiImageUrl"
+              [src]="(theme === 'dark' ? featuredEvent.darkFeatureImagePng : featuredEvent.lightFeatureImagePng) | strapiImageUrl: 'small'"
               alt="featured_image"
               class="image"/>
           </div>
@@ -53,7 +53,7 @@
                target="_self">
               <div class="thumbnail_container">
                 <div
-                  [strapiCssImage]="theme === 'dark' ? event.darkFeatureImagePng.url : event.lightFeatureImagePng.url"
+                  [strapiCssImage]="theme === 'dark' ? event.darkFeatureImagePng : event.lightFeatureImagePng"
                   class="thumbnail"></div>
               </div>
               <div class="content">

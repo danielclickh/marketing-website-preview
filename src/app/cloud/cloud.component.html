@@ -22,7 +22,7 @@
               <div class="logos">
                 <img
                   *ngFor="let logo of theme === 'dark' ? cloudProvider.darkProviderPngs : cloudProvider.lightProviderPngs"
-                  [src]="logo.url | strapiImageUrl"
+                  [src]="logo | strapiImageUrl"
                   class="logo"
                   alt="logo"
                 />
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="right">
-          <img [src]="hero.videoGif.url | strapiImageUrl" alt="video" class="video_gif"/>
+          <img [src]="hero.videoGif | strapiImageUrl" alt="video" class="video_gif"/>
         </div>
       </div>
     </div>

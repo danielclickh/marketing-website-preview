@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="screenshot_container">
-      <img [src]="item.screenshotPng.url | strapiImageUrl" class="screenshot"/>
+      <img [src]="item.screenshotPng | strapiImageUrl: 'medium'" class="screenshot"/>
     </div>
   </div>
 </div>

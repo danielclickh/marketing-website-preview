@@ -12,7 +12,7 @@
           <div class="title">{{hostedBy.title}}</div>
           <div class="hosts">
             <div *ngFor="let host of hostedBy.hosts" class="host">
-              <div [strapiCssImage]="host.avatarPng.url" class="avatar"></div>
+              <div [strapiCssImage]="host.avatarPng" class="avatar"></div>
               <div class="content">
                 <div class="name">{{host.name}}</div>
                 <div class="role">{{host.role}}</div>
