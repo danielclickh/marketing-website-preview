@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {BlogPost} from "../blog.protocol";
 import {BlogService} from "../blog.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -20,16 +20,20 @@ export class BlogPostPageComponent implements OnInit {
               private readonly activatedRoute: ActivatedRoute,
               private readonly cd: ChangeDetectorRef,
               private readonly snackBar: MatSnackBar,
+              private readonly router: Router,
               @Inject(PLATFORM_ID) private platformId: string) {
   }
 
   async ngOnInit() {
-    const allBlogPosts = await this.blogService.getBlogPosts();
     const blogPostIdOrSlug = this.activatedRoute.snapshot.params['blogPostIdOrSlug'];
-    this.allBlogPosts = allBlogPosts;
     const slug = isNaN(blogPostIdOrSlug) ? blogPostIdOrSlug : undefined;
     const id = !isNaN(blogPostIdOrSlug) ? parseInt(blogPostIdOrSlug) : undefined;
     this.blogPost = await this.blogService.getBlogPost(slug, id);
+    if (!this.blogPost) {
+      await this.router.navigateByUrl('/blog');
+      return;
+    }
+    this.allBlogPosts = await this.blogService.getBlogPosts();
     this.cd.detectChanges();
   }
 
