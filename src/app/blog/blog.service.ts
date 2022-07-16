@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {StrapiService} from "../common/services/strapi.service";
+import {StrapiFindParams, StrapiService} from "../common/services/strapi.service";
 import {BlogData, BlogPost} from "./blog.protocol";
 import {DomSanitizer} from "@angular/platform-browser";
 
@@ -40,9 +40,38 @@ export class BlogService {
       populate: [
         'author',
         'author.avatarPng',
-        'thumbnailPng'
+        'thumbnailPng',
+      ],
+
+      fields: [
+        'category',
+        'title',
+        'shortDescription',
+        'createdAt',
+        'updatedAt',
+        'publishedAt',
+        'slug',
+        'date',
       ]
+
     });
     return this.strapiService.convertStrapiObject(blogPostsRes.data);
+  }
+
+  async getBlogPost(slug?: string, id?: number): Promise<BlogPost> {
+    const params: StrapiFindParams = {
+      populate: [
+        'author',
+        'author.avatarPng',
+        'thumbnailPng',
+      ]
+    };
+    if (slug) {
+      params.filters = [{field: 'slug', operator: '$eq', value: slug}];
+    } else if (id !== undefined) {
+      params.filters = [{field: 'id', operator: '$eq', value: id}];
+    }
+    const blogPostsRes: any = await this.strapiService.getStrapi().find('blog-posts', params);
+    return this.strapiService.convertStrapiObject(blogPostsRes.data[0]);
   }
 }

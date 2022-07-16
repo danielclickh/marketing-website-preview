@@ -27,7 +27,9 @@ export class BlogPostPageComponent implements OnInit {
     const allBlogPosts = await this.blogService.getBlogPosts();
     const blogPostIdOrSlug = this.activatedRoute.snapshot.params['blogPostIdOrSlug'];
     this.allBlogPosts = allBlogPosts;
-    this.blogPost = allBlogPosts.find((e) => e.slug === blogPostIdOrSlug || (!isNaN(blogPostIdOrSlug) && e.id === parseInt(blogPostIdOrSlug)));
+    const slug = isNaN(blogPostIdOrSlug) ? blogPostIdOrSlug : undefined;
+    const id = !isNaN(blogPostIdOrSlug) ? parseInt(blogPostIdOrSlug) : undefined;
+    this.blogPost = await this.blogService.getBlogPost(slug, id);
     this.cd.detectChanges();
   }
 

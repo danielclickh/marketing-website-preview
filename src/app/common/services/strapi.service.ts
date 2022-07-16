@@ -31,13 +31,14 @@ export type StrapiFilterOperator =
 export interface StrapiFilter {
   field: string;
   operator: StrapiFilterOperator;
-  value: string;
+  value: string | number;
 }
 
 export interface StrapiFindParams {
   populate?: Array<string>;
   sort?: Array<string>;
   filters?: Array<StrapiFilter>;
+  fields?: Array<string>;
 }
 
 export class StrapiClient {
@@ -82,6 +83,15 @@ export class StrapiClient {
           const populateElement = params.populate[i];
           const key = encodeURI(`populate[${i}]`);
           const value = encodeURI(populateElement);
+          urlParams.push(`${key}=${value}`);
+        }
+      }
+
+      if (params.fields) {
+        for (let i = 0; i < params.fields.length; i++) {
+          const fieldsElement = params.fields[i];
+          const key = encodeURI(`fields[${i}]`);
+          const value = encodeURI(fieldsElement);
           urlParams.push(`${key}=${value}`);
         }
       }
