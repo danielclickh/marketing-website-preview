@@ -11,7 +11,7 @@
             <div *ngIf="categories" class="filters_container">
               <div class="search_container">
                 <div class="icon_wrapper">
-                  <mat-icon class="icon">search</mat-icon>
+                  <mat-icon class="icon" svgIcon="search"></mat-icon>
                 </div>
                 <input (input)="filterBlogPosts()" [(ngModel)]="searchText" class="seed_input search_input"
                        placeholder="Search" type="text"/>

@@ -33,6 +33,7 @@ export class ThemeService {
     {name: 'facebook', svgRelativePath: 'facebook.svg'},
     {name: 'linkedin', svgRelativePath: 'linkedin.svg'},
     {name: 'twitter', svgRelativePath: 'twitter.svg'},
+    {name: 'search', svgRelativePath: 'search.svg'},
   ];
 
   constructor(private matIconRegistry: MatIconRegistry,
