@@ -1,6 +1,6 @@
 import {Inject, NgModule, PLATFORM_ID} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
+import {TransferHttpCacheModule} from '@nguniversal/common';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -89,6 +89,7 @@ import {SafeHtmlPipe} from './common/pipes/safe-html.pipe';
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
+    TransferHttpCacheModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatIconModule,
