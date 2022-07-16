@@ -1,18 +1,18 @@
-import {StrapiButton, StrapiIconButton} from "../common/protocol/strapi.protocol";
-import {Feature} from "../common/protocol/common.protocol";
+import {StrapiButton, StrapiIconButton, StrapiImage} from "../common/protocol/strapi.protocol";
+import {Feature, SeoMetadata} from "../common/protocol/common.protocol";
 
 export interface ClickhouseHero {
   title: string;
   description: string;
   mainButton: StrapiButton;
   gitButton: StrapiIconButton;
-  backgroundPngUrl: string;
+  backgroundPng: StrapiImage;
 }
 
 export interface ClickhouseFeatures2Item {
   title: string;
   description: string;
-  iconSvgId: string;
+  iconSvg: StrapiImage;
 }
 
 export interface ClickhouseFeatures2 {
@@ -28,7 +28,7 @@ export interface ClickhouseFeatures3Item {
 
 export interface ClickhouseFeatures3 {
   pretitle: string;
-  iconSvgId: string;
+  iconSvg: StrapiImage;
   mainItem: ClickhouseFeatures3Item;
   items: Array<ClickhouseFeatures3Item>;
 }
@@ -52,7 +52,7 @@ export interface ClickhouseFeatures5 {
   pretitle: string;
   title: string;
   description: string;
-  iconSvgId: string;
+  iconSvg: StrapiImage;
   second_title: string;
   second_description: string;
   items: Array<ClickhouseFeatures5Item>;
@@ -70,4 +70,5 @@ export interface ClickhouseData {
   features3: ClickhouseFeatures3;
   features4: ClickhouseFeatures4;
   features5: ClickhouseFeatures5;
+  seo: SeoMetadata;
 }

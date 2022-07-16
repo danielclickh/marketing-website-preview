@@ -37,7 +37,8 @@
           <div class="title">{{useCases.title}}</div>
           <div class="description">{{useCases.description}}</div>
         </div>
-        <div *ngIf="useCases.spotlight as spotlight" [id]="spotlight.anchorId" anchor class="spotlight use_case">
+        <div *ngIf="customerStoriesData.spotlightUseCase as spotlight" [id]="spotlight.anchorId" anchor
+             class="spotlight use_case">
           <div class="left">
             <div class="pretitle">{{useCases.spotlightTitle}}</div>
             <div class="company_name">{{spotlight.companyName}}</div>
@@ -55,15 +56,15 @@
 
           <div class="right">
             <div [ngClass]="{dark: theme === 'dark', light: theme === 'light'}" class="hexagon">
-              <img [src]="(theme === 'dark' ? spotlight.darkLogoPngUrl : spotlight.lightLogoPngUrl) | strapiImageUrl"
+              <img [src]="(theme === 'dark' ? spotlight.darkLogoPng.url : spotlight.lightLogoPng.url) | strapiImageUrl"
                    alt="logo"
                    class="logo"/>
             </div>
           </div>
         </div>
         <div class="other_use_cases">
-          <div *ngFor="let useCase of useCases.items" [id]="useCase.anchorId" anchor class="use_case">
-            <img [src]="(theme === 'dark' ? useCase.darkLogoPngUrl : useCase.lightLogoPngUrl) | strapiImageUrl"
+          <div *ngFor="let useCase of customerStoriesData.useCaseItems" [id]="useCase.anchorId" anchor class="use_case">
+            <img [src]="(theme === 'dark' ? useCase.darkLogoPng.url : useCase.lightLogoPng.url) | strapiImageUrl"
                  alt="logo"
                  class="logo"/>
             <div class="description">{{useCase.description}}</div>

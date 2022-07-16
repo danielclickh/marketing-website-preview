@@ -27,13 +27,13 @@ export class HeaderComponent {
   }
 
   isMenuWithIcons(topMenuItem: HeaderTopNavItem): boolean {
-    return topMenuItem.menuItems.every(item => !!item.iconId);
+    return topMenuItem.menuItems.every(item => !!item.icon);
   }
 
   getMenuItemsWithIcons(menuItems: Array<HeaderTopNavItem>): Array<HeaderTopNavSubItem> {
     const result = [];
     for (const topLevelItem of menuItems) {
-      result.push(...topLevelItem.menuItems.filter(i => !!i.iconId));
+      result.push(...topLevelItem.menuItems.filter(i => !!i.icon));
     }
     return result;
   }
@@ -44,7 +44,7 @@ export class HeaderComponent {
       if (!topLevelItem.menuItems.length) {
         result.push(topLevelItem as RegularNavItem);
       } else {
-        result.push(...topLevelItem.menuItems.filter(i => !i.iconId));
+        result.push(...topLevelItem.menuItems.filter(i => !i.icon));
       }
 
     }

@@ -1,4 +1,4 @@
-import {ContactForm} from "../common/protocol/common.protocol";
+import {ContactForm, SeoMetadata} from "../common/protocol/common.protocol";
 
 export interface ContactUsHero {
   title: string;
@@ -8,4 +8,5 @@ export interface ContactUsHero {
 
 export interface ContactUsData {
   hero: ContactUsHero;
+  seo: SeoMetadata;
 }

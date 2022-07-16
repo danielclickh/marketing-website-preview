@@ -1,16 +1,22 @@
+import {StrapiImage} from "./strapi.protocol";
+
 export interface Feature {
   id: string;
   title: string;
   description: string;
-  iconSvgId: string;
+  iconSvg: StrapiImage;
+}
+
+export interface Bullet {
+  text: string;
 }
 
 export interface ScreenshotAndBullets {
   id: string;
   title: string;
   description: string;
-  bullets: Array<string>;
-  screenshotPngUrl: string;
+  bullets: Array<Bullet>;
+  screenshotPng: StrapiImage;
 }
 
 export interface ContactForm {

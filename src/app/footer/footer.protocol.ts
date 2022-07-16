@@ -1,4 +1,4 @@
-import {LinkTarget, StrapiLink} from "../common/protocol/strapi.protocol";
+import {LinkTarget, StrapiImage, StrapiLink} from "../common/protocol/strapi.protocol";
 
 export interface FooterBottomLink extends StrapiLink {
   text: string;
@@ -7,7 +7,7 @@ export interface FooterBottomLink extends StrapiLink {
 export interface FooterData {
   licensingText: string;
   copyright: string;
-  logoSvgId: string;
+  logoSvg: StrapiImage;
   topLevelFooterMenu: Array<TopLevelFooterMenu>;
   newsletterForm: FooterNewsletterForm;
   socialLinks: FooterSocialLinks;
@@ -38,11 +38,11 @@ export interface FooterNewsletterForm {
 export interface FooterSocialLinks {
   id: number;
   title: string;
-  items: Array<FooterSocialLink>;
+  socialLinkItems: Array<FooterSocialLink>;
 }
 
 export interface FooterSocialLink {
   href: string;
   target: string;
-  iconSvgUrl: string;
+  iconSvg: StrapiImage;
 }

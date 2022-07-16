@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {StrapiService} from "../common/services/strapi.service";
 import {ContactUsData} from "./contact-us.protocol";
-import {convertMarkdown} from "../common/utils/MarkdownUtils";
 
 @Injectable({
   providedIn: 'root'
@@ -21,17 +20,8 @@ export class ContactUsService {
       ]
     });
 
-    const data: any = res.data;
-    const attributes = data.attributes;
-    const hero = attributes.hero;
-    this.strapiService.setSeoTags(attributes.seo);
-
-    return {
-      hero: {
-        title: hero.title,
-        description: hero.description,
-        contactForm: {...hero.contactForm, disclaimer: convertMarkdown(hero.contactForm.disclaimer)}
-      }
-    };
+    const contactUsData = this.strapiService.convertStrapiObject<ContactUsData>(res.data);
+    this.strapiService.setSeoTags(contactUsData.seo);
+    return contactUsData;
   }
 }

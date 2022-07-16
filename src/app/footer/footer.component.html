@@ -15,7 +15,7 @@
 
       <div class="footer_logo_and_copyright">
         <div class="logo_container">
-          <mat-icon [svgIcon]="footerData.logoSvgId" class="icon"></mat-icon>
+          <mat-icon [svgIcon]="footerData.logoSvg.hash" class="icon"></mat-icon>
           <div class="text">ClickHouse</div>
         </div>
         <div class="bottom_links_container">
@@ -48,11 +48,11 @@
       <div *ngIf="footerData.socialLinks as socialLinks" class="social_links_container">
         <div class="title">{{socialLinks.title}}</div>
         <div class="social_links">
-          <a *ngFor="let socialLink of socialLinks.items"
+          <a *ngFor="let socialLink of socialLinks.socialLinkItems"
              [href]="socialLink.href"
              [target]="socialLink.target"
              class="social_link">
-            <div [strapiCssImage]="socialLink.iconSvgUrl" class="icon"></div>
+            <div [strapiCssImage]="socialLink.iconSvg.url" class="icon"></div>
           </a>
         </div>
       </div>

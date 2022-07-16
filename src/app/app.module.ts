@@ -51,6 +51,7 @@ import {ExternalLinkDirective} from './common/directives/external-link.directive
 import {RichContentPageComponent} from './rich-content-page/rich-content-page.component';
 import {AnchorDirective} from './common/directives/anchor.directive';
 import {SafeHtmlPipe} from './common/pipes/safe-html.pipe';
+import {MarkdownPipe} from './common/pipes/markdown.pipe';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import {SafeHtmlPipe} from './common/pipes/safe-html.pipe';
     ExternalLinkDirective,
     RichContentPageComponent,
     AnchorDirective,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    MarkdownPipe
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),

@@ -1,7 +1,8 @@
-import {StrapiButton} from "../common/protocol/strapi.protocol";
+import {StrapiButton, StrapiImage} from "../common/protocol/strapi.protocol";
+import {SeoMetadata} from "../common/protocol/common.protocol";
 
 export interface OurStoryOffices {
-  flagPngUrl: string;
+  flagPng: StrapiImage;
   name: string;
   location: string;
 }
@@ -10,7 +11,7 @@ export interface OurStoryAboutUsItem {
   title?: string;
   subtitle?: string;
   description: string;
-  imagePngUrl: string;
+  imagePng: StrapiImage;
 }
 
 export interface OurStoryAboutUs {
@@ -35,7 +36,7 @@ interface OurStoryHiring {
 }
 
 export interface OurStoryTeamMemberProfile {
-  profileImagePngUrl: string;
+  profileImagePng: StrapiImage;
   name: string;
   role: string;
 }
@@ -45,14 +46,14 @@ export interface OurStoryTeam {
   investorsTitle: string;
   founders: Array<OurStoryTeamMemberProfile>;
   investors: Array<OurStoryTeamMemberProfile>;
-  darkInvestorLogosPngUrls: Array<string>;
-  lightInvestorLogosPngUrls: Array<string>;
+  darkInvestorLogosPng: Array<StrapiImage>;
+  lightInvestorLogosPng: Array<StrapiImage>;
 }
 
 interface OurStoryHero {
   title: string;
   description: string;
-  imagePngUrl: string;
+  imagePng: StrapiImage;
   offices: Array<OurStoryOffices>;
 }
 
@@ -62,5 +63,5 @@ export interface OurStoryData {
   ourHistory: OurStoryOurHistory;
   hiring: OurStoryHiring;
   team: OurStoryTeam;
-
+  seo: SeoMetadata;
 }

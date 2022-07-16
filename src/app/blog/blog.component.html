@@ -35,13 +35,13 @@
           <div class="right">
             <div *ngIf="filteredBlogPosts" class="posts">
               <a *ngFor="let blogPost of filteredBlogPosts" [href]="getBlogPostUrl(blogPost)" class="post">
-                <div [strapiCssImage]="blogPost.thumbnailPngUrl" class="thumbnail"></div>
+                <div [strapiCssImage]="blogPost.thumbnailPng.url" class="thumbnail"></div>
                 <div class="metadata">
                   <div class="category">{{blogPost.category}}</div>
                   <div class="title">{{blogPost.title}}</div>
                   <div class="description">{{blogPost.shortDescription}}</div>
                   <div *ngIf="blogPost.author as author" class="author">
-                    <div [strapiCssImage]="author.avatarPngUrl" class="avatar"></div>
+                    <div [strapiCssImage]="author.avatarPng.url" class="avatar"></div>
                     <div class="content">
                       <div class="name">{{author.name}}</div>
                       <div class="date">{{(blogPost.date || blogPost.publishedAt) | date}}</div>

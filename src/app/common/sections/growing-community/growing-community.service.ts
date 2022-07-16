@@ -18,19 +18,6 @@ export class GrowingCommunityService {
       ]
     });
 
-    const data: any = res.data;
-    const attributes = data.attributes;
-    return {
-      title: attributes.title,
-      iconButtons: attributes.iconButtons.map((ib: any) => {
-        return {
-          id: ib.id,
-          href: ib.href,
-          target: ib.target,
-          darkIconPngUrl: ib.darkIconPng.data.attributes.url,
-          lightIconPngUrl: ib.lightIconPng.data.attributes.url,
-        }
-      })
-    };
+    return this.strapiService.convertStrapiObject(res.data);
   }
 }

@@ -33,26 +33,12 @@ export class EventService {
       ]
     });
 
+    const events = this.strapiService.convertStrapiObject<Array<Event>>(eventsRes.data);
     const now = Date.now();
-    const eventsData = eventsRes.data;
-    return eventsData.map((eventWithAttributes: any) => {
-      const event = eventWithAttributes.attributes;
+    return events.map((event: Event) => {
       return {
-        id: eventWithAttributes.id,
         ...event,
         eventEnded: new Date(event.utcDatetime).getTime() < now,
-        thumbnailPngUrl: this.strapiService.extractImageUrl(event.thumbnailPng),
-        hostedBy: {
-          ...event.hostedBy,
-          hosts: event.hostedBy.hosts.map((host: any) => {
-            return {
-              ...host,
-              avatarPngUrl: this.strapiService.extractImageUrl(host.avatarPng)
-            }
-          })
-        },
-        darkFeatureImagePngUrl: this.strapiService.extractImageUrl(event.darkFeatureImagePng),
-        lightFeatureImagePngUrl: this.strapiService.extractImageUrl(event.lightFeatureImagePng),
       };
     });
   }

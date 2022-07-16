@@ -7,7 +7,10 @@ export interface StrapiEntry {
   updatedAt: string;
 }
 
-export type StrapiImageObject = { data?: { attributes: { hash: string, url: string } } };
+export interface StrapiImage {
+  hash: string;
+  url: string;
+}
 
 export interface StrapiLink {
   href: string;
@@ -21,8 +24,8 @@ export interface StrapiButton extends StrapiLink {
 
 export interface StrapiIconButton extends StrapiLink {
   id: number;
-  darkIconPngUrl: string;
-  lightIconPngUrl: string;
+  darkIconPng: StrapiImage;
+  lightIconPng: StrapiImage;
   text?: string;
 }
 

@@ -25,7 +25,6 @@ export class NewsAndEventsService {
       ]
     });
 
-
     const allEvents = await this.eventService.getEvents();
     let featuredEvent: Event | undefined;
     let featuredEventIndex = allEvents.findIndex((e) => e.featured);
@@ -39,11 +38,12 @@ export class NewsAndEventsService {
       featuredEvent = upcomingEvents.shift();
     }
 
-    const attributes = newsRes.data.attributes;
-    this.strapiService.setSeoTags(attributes.seo);
+
+    const newsAndEventsData = this.strapiService.convertStrapiObject<NewsAndEventsData>(newsRes.data);
+    this.strapiService.setSeoTags(newsAndEventsData.seo);
 
     return {
-      ...attributes,
+      ...newsAndEventsData,
       featuredEvent,
       upcomingEvents,
       pastEvents,

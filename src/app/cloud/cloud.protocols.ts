@@ -1,10 +1,10 @@
-import {StrapiButton} from "../common/protocol/strapi.protocol";
-import {ContactForm, Feature, ScreenshotAndBullets} from "../common/protocol/common.protocol";
+import {StrapiButton, StrapiImage} from "../common/protocol/strapi.protocol";
+import {ContactForm, Feature, ScreenshotAndBullets, SeoMetadata} from "../common/protocol/common.protocol";
 
 export interface CloudProvider {
   title: string;
-  darkProviderPngUrls: Array<string>;
-  lightProviderPngUrls: Array<string>;
+  darkProviderPngs: Array<StrapiImage>;
+  lightProviderPngs: Array<StrapiImage>;
 }
 
 export interface CloudHero {
@@ -12,8 +12,8 @@ export interface CloudHero {
   description: string;
   ctaButton: StrapiButton;
   cloudProviders: Array<CloudProvider>;
-  videoGifUrl: string;
-  backgroundSvgId: string;
+  videoGif: StrapiImage;
+  backgroundSvg: StrapiImage;
 }
 
 export interface CloudEarlyAccessForm {
@@ -28,4 +28,5 @@ export interface CloudData {
   features: Array<Feature>;
   screenshotsAndBullets: Array<ScreenshotAndBullets>;
   earlyAccessForm: CloudEarlyAccessForm;
+  seo: SeoMetadata;
 }

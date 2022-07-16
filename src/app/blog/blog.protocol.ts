@@ -1,6 +1,9 @@
+import {SeoMetadata} from "../common/protocol/common.protocol";
+import {StrapiImage} from "../common/protocol/strapi.protocol";
+
 export interface BlogPostAuthor {
   name: string;
-  avatarPngUrl: string;
+  avatarPng: StrapiImage;
 }
 
 export interface BlogPost {
@@ -10,7 +13,7 @@ export interface BlogPost {
   shortDescription: string;
   content: string;
   author: BlogPostAuthor;
-  thumbnailPngUrl: string;
+  thumbnailPng: StrapiImage;
   publishedAt: string;
   slug?: string;
   date?: string;
@@ -23,4 +26,5 @@ export interface BlogHero {
 
 export interface BlogData {
   hero: BlogHero;
+  seo: SeoMetadata;
 }

@@ -6,8 +6,6 @@ import {CustomerStoriesData} from "./customer-stories.protocol";
   providedIn: 'root'
 })
 export class CustomerStoriesService {
-
-
   constructor(private readonly strapiService: StrapiService) {
   }
 
@@ -28,32 +26,9 @@ export class CustomerStoriesService {
       ]
     });
 
-    const data: any = res.data;
-    const attributes = data.attributes;
-    const hero = attributes.hero;
-    const useCases = attributes.useCases;
-    const useCaseItems = attributes.useCaseItems.map((useCase: any) => {
-      return {
-        ...useCase,
-        darkLogoPngUrl: this.strapiService.extractImageUrl(useCase.darkLogoPng),
-        lightLogoPngUrl: this.strapiService.extractImageUrl(useCase.lightLogoPng)
-      }
-    });
-    const spotlight = useCaseItems.shift();
-
-    this.strapiService.setSeoTags(attributes.seo);
-    return {
-      hero: {
-        ...hero,
-        testimonials: hero.testimonials.map((testimonial: any) => {
-          return {...testimonial, avatarUrl: this.strapiService.extractImageUrl(testimonial.avatar)}
-        })
-      },
-      useCases: {
-        ...useCases,
-        spotlight,
-        items: useCaseItems
-      },
-    };
+    const result = this.strapiService.convertStrapiObject<CustomerStoriesData>(res.data);
+    result.spotlightUseCase = result.useCaseItems.shift()!;
+    this.strapiService.setSeoTags(result.seo);
+    return result;
   }
 }

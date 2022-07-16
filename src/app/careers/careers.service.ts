@@ -25,22 +25,9 @@ export class CareersService {
       ]
     });
 
-    const data: any = res.data;
-    const attributes = data.attributes;
-    const hero = attributes.hero;
-    const companyValues = attributes.companyValues;
-    this.strapiService.setSeoTags(attributes.seo);
-
-    return {
-      hero: {
-        ...hero,
-        companyImageUrls: hero.companyImages.data.map((companyImage: any) => companyImage.attributes.url)
-      },
-      companyValues: companyValues.map((companyValue: any) => {
-        return {...companyValue, iconSvgId: this.strapiService.registerSvgIcon(companyValue.iconSvg)}
-      }),
-      positionsTitle: attributes.positionsTitle
-    }
+    const careersData = this.strapiService.convertStrapiObject<CareersData>(res.data);
+    this.strapiService.setSeoTags(careersData.seo);
+    return careersData;
   }
 
 

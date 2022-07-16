@@ -19,7 +19,7 @@ export class NewsletterService {
     const newsletterFormData: any = await this.strapiService.getStrapi().find('newsletter-form', {
       populate: ['*']
     });
-    return {...newsletterFormData.data.attributes}
+    return this.strapiService.convertStrapiObject(newsletterFormData.data);
   }
 
   async submitNewsletterForm(email?: string) {

@@ -3,7 +3,7 @@
     <div *ngIf="cloudData.hero as hero" class="hero">
       <div class="background_overlay"></div>
       <div class="background_image_wrapper">
-        <mat-icon [svgIcon]="hero.backgroundSvgId" class="background_image"></mat-icon>
+        <mat-icon [svgIcon]="hero.backgroundSvg.hash" class="background_image"></mat-icon>
       </div>
       <div class="container">
         <div class="left">
@@ -21,8 +21,8 @@
               <div class="cloud_provider_title">{{cloudProvider.title}}</div>
               <div class="logos">
                 <img
-                  *ngFor="let logo of theme === 'dark' ? cloudProvider.darkProviderPngUrls : cloudProvider.lightProviderPngUrls"
-                  [src]="logo | strapiImageUrl"
+                  *ngFor="let logo of theme === 'dark' ? cloudProvider.darkProviderPngs : cloudProvider.lightProviderPngs"
+                  [src]="logo.url | strapiImageUrl"
                   class="logo"
                   alt="logo"
                 />
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="right">
-          <img [src]="hero.videoGifUrl | strapiImageUrl" alt="video" class="video_gif"/>
+          <img [src]="hero.videoGif.url | strapiImageUrl" alt="video" class="video_gif"/>
         </div>
       </div>
     </div>

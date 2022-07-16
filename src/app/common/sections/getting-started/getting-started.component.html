@@ -38,6 +38,6 @@
         <div class="instructions">{{platform.instructions}}</div>
       </mat-tab>
     </mat-tab-group>
-    <div [innerHTML]="gettingStarted.bottomText" class="bottom_text"></div>
+    <div [innerHTML]="gettingStarted.bottomText | markdown" class="bottom_text"></div>
   </div>
 </div>

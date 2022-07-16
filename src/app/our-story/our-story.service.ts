@@ -36,42 +36,8 @@ export class OurStoryService {
       ]
     });
 
-    const data: any = res.data;
-    const attributes = data.attributes;
-    const hero = attributes.hero;
-    const aboutUs = attributes.aboutUs;
-    const ourHistory = attributes.ourHistory;
-    const hiring = attributes.hiring;
-    const team = attributes.team;
-    this.strapiService.setSeoTags(attributes.seo);
-
-    return {
-      hero: {
-        ...hero,
-        imagePngUrl: this.strapiService.extractImageUrl(hero.imagePng),
-        offices: hero.offices.map((office: any) => {
-          return {...office, flagPngUrl: this.strapiService.extractImageUrl(office.flagPng)};
-        })
-      },
-      aboutUs: {
-        ...aboutUs,
-        items: aboutUs.items.map((item: any) => {
-          return {...item, imagePngUrl: this.strapiService.extractImageUrl(item.imagePng)}
-        })
-      },
-      ourHistory,
-      hiring,
-      team: {
-        ...team,
-        founders: team.founders.map((founder: any) => {
-          return {...founder, profileImagePngUrl: this.strapiService.extractImageUrl(founder.profileImagePng)}
-        }),
-        investors: team.investors.map((investor: any) => {
-          return {...investor, profileImagePngUrl: this.strapiService.extractImageUrl(investor.profileImagePng)}
-        }),
-        darkInvestorLogosPngUrls: team.darkInvestorLogosPng.data.map((logo: any) => logo.attributes.url),
-        lightInvestorLogosPngUrls: team.lightInvestorLogosPng.data.map((logo: any) => logo.attributes.url),
-      }
-    };
+    const ourStoryData = this.strapiService.convertStrapiObject<OurStoryData>(res.data);
+    this.strapiService.setSeoTags(ourStoryData.seo);
+    return ourStoryData;
   }
 }

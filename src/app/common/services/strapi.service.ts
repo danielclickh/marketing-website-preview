@@ -1,7 +1,6 @@
 import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {ThemeService} from "./theme.service";
-import {StrapiImageObject} from "../protocol/strapi.protocol";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, combineLatest, filter, firstValueFrom, map, Observable, take} from "rxjs";
 import {isPlatformServer} from "@angular/common";
@@ -117,7 +116,7 @@ export class StrapiService {
 
     const seoMetadata: SeoMetadata = {
       ...rawSeo,
-      imageUrl: rawSeo.image ? this.extractImageUrl(rawSeo.image) : undefined
+      imageUrl: rawSeo.image ? rawSeo.image.url : undefined
     }
 
     if (seoMetadata.title) {
@@ -160,21 +159,59 @@ export class StrapiService {
     )
   }
 
+  convertStrapiObject<T>(strapiObject: any): T {
+    if (!strapiObject) {
+      return strapiObject;
+    }
+
+    if (Array.isArray(strapiObject)) {
+      return strapiObject.map(i => this.convertStrapiObject(i)) as unknown as T;
+    }
+
+    const result: any = {};
+    const objectContent = this.getStrapiObjectAttributes(strapiObject);
+    for (const entry of Object.entries(objectContent)) {
+      const field: string = entry[0];
+      const fieldValue: any = entry[1];
+
+      if (Array.isArray(fieldValue)) {
+        result[field] = fieldValue.map(i => this.convertStrapiObject(i));
+        continue;
+      }
+
+      if (typeof fieldValue === 'object' && fieldValue) {
+        if ('data' in fieldValue && Array.isArray(fieldValue.data)) {
+          result[field] = fieldValue.data.map((i: any) => this.convertStrapiObject(i));
+          continue;
+        }
+        let convertedObj: any = this.convertStrapiObject(fieldValue);
+        if ('data' in convertedObj && Object.keys(convertedObj).length === 1) {
+          convertedObj = convertedObj.data;
+        }
+
+        result[field] = convertedObj;
+        if (convertedObj?.ext === '.svg') {
+          const url = environment.strapiBaseUrl + convertedObj.url;
+          this.themeService.registerIcon(convertedObj.hash, url);
+        }
+        continue;
+      }
+
+      result[field] = fieldValue;
+    }
+
+    return result as T;
+  }
+
+  isStrapiObject(obj: any) {
+    return 'attributes' in obj && 'id' in obj;
+  }
+
+  getStrapiObjectAttributes(obj: any) {
+    return this.isStrapiObject(obj) ? {id: obj.id, ...obj.attributes} : obj;
+  }
+
   getStrapi() {
     return this.strapiClient;
-  }
-
-  registerSvgIcon(iconObject?: StrapiImageObject): string | undefined {
-    const iconObjectAttrs = iconObject?.data?.attributes;
-    if (!iconObjectAttrs) {
-      return undefined;
-    }
-    const url = environment.strapiBaseUrl + iconObjectAttrs.url;
-    this.themeService.registerIcon(iconObjectAttrs.hash, url);
-    return iconObjectAttrs.hash + '';
-  }
-
-  extractImageUrl(image: StrapiImageObject): string | undefined {
-    return image.data?.attributes.url;
   }
 }

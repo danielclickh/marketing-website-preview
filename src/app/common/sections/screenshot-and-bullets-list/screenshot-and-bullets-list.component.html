@@ -6,11 +6,11 @@
       <div *ngFor="let bullet of item.bullets" class="bullets">
         <div class="bullet">
           <mat-icon class="icon" svgIcon="check_icon"></mat-icon>
-          {{bullet}}</div>
+          {{bullet.text}}</div>
       </div>
     </div>
     <div class="screenshot_container">
-      <img [src]="item.screenshotPngUrl | strapiImageUrl" class="screenshot"/>
+      <img [src]="item.screenshotPng.url | strapiImageUrl" class="screenshot"/>
     </div>
   </div>
 </div>

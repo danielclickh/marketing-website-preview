@@ -6,8 +6,8 @@
         <div class="description">{{hero.description}}</div>
       </div>
       <div class="image_container">
-        <img *ngFor="let imageUrl of hero.companyImageUrls"
-             [src]="imageUrl | strapiImageUrl"
+        <img *ngFor="let image of hero.companyImages"
+             [src]="image.url | strapiImageUrl"
              alt="company_image" class="image"/>
       </div>
       <div class="container paragraph_container">
@@ -23,7 +23,7 @@
             <div class="description">{{companyValue.description}}</div>
           </div>
           <div class="icon_wrapper">
-            <mat-icon [svgIcon]="companyValue.iconSvgId" class="icon"></mat-icon>
+            <mat-icon [svgIcon]="companyValue.iconSvg.hash" class="icon"></mat-icon>
           </div>
         </div>
       </div>

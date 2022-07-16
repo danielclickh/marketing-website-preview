@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {StrapiService} from "../common/services/strapi.service";
 import {CloudData} from "./cloud.protocols";
-import {convertMarkdown} from "../common/utils/MarkdownUtils";
 
 @Injectable({
   providedIn: 'root'
@@ -34,56 +33,8 @@ export class CloudService {
       ]
     });
 
-    const data: any = res.data;
-    const attributes = data.attributes;
-    const hero = attributes.hero;
-    const features = attributes.features;
-    const earlyAccessForm = attributes.earlyAccessForm;
-    const screenshotsAndBullets = attributes.screenshotsAndBullets;
-    this.strapiService.setSeoTags(attributes.seo);
-
-    return {
-      hero: {
-        title: hero.title,
-        description: hero.description,
-        ctaButton: hero.ctaButton,
-        cloudProviders: hero.cloudProviders.map((cp: any) => {
-          return {
-            title: cp.title,
-            darkProviderPngUrls: cp.darkProviderPngs.data.map((i: any) => i.attributes.url),
-            lightProviderPngUrls: cp.lightProviderPngs.data.map((i: any) => i.attributes.url),
-          }
-        }),
-        videoGifUrl: hero.videoGif.data.attributes.url,
-        backgroundSvgId: this.strapiService.registerSvgIcon(hero.backgroundSvg)!
-      },
-      features: features.map((f: any) => {
-        return {
-          id: f.id,
-          title: f.title,
-          description: f.description,
-          iconSvgId: this.strapiService.registerSvgIcon(f.iconSvg)!
-        }
-      }),
-      screenshotsAndBullets: screenshotsAndBullets.map((s: any) => {
-        return {
-          id: s.id,
-          title: s.title,
-          description: s.description,
-          bullets: s.bullets.map((b: any) => b.text),
-          screenshotPngUrl: s.screenshotPng.data.attributes.url
-        }
-      }),
-
-      earlyAccessForm: {
-        pretitle: earlyAccessForm.pretitle,
-        title: earlyAccessForm.title,
-        description: earlyAccessForm.description,
-        contactForm: {
-          ...earlyAccessForm.contactForm,
-          disclaimer: convertMarkdown(earlyAccessForm.contactForm.disclaimer)
-        }
-      }
-    };
+    const cloudData = this.strapiService.convertStrapiObject<CloudData>(res.data);
+    this.strapiService.setSeoTags(cloudData.seo);
+    return cloudData;
   }
 }

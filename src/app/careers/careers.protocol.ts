@@ -1,7 +1,10 @@
+import {SeoMetadata} from "../common/protocol/common.protocol";
+import {StrapiImage} from "../common/protocol/strapi.protocol";
+
 export interface CareersHero {
   title: string;
   description: string;
-  companyImageUrls: Array<string>;
+  companyImages: Array<StrapiImage>;
   paragraphTitle: string;
   paragraphText: string;
 }
@@ -9,13 +12,14 @@ export interface CareersHero {
 export interface CareersCompanyValue {
   title: string;
   description: string;
-  iconSvgId: string;
+  iconSvg: StrapiImage;
 }
 
 export interface CareersData {
   hero: CareersHero;
   companyValues: Array<CareersCompanyValue>;
   positionsTitle: string;
+  seo: SeoMetadata;
 }
 
 

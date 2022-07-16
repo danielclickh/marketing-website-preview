@@ -39,52 +39,8 @@ export class ClickhouseService {
       ]
     });
 
-    const data: any = res.data;
-    const attributes = data.attributes;
-    const hero = attributes.hero;
-    const features1 = attributes.features1;
-    const features2 = attributes.features2;
-    const features3 = attributes.features3;
-    const features4 = attributes.features4;
-    const features5 = attributes.features5;
-    this.strapiService.setSeoTags(attributes.seo);
-
-    return {
-      hero: {
-        title: hero.title,
-        description: hero.description,
-        mainButton: hero.mainButton,
-        gitButton: {
-          id: hero.gitButton.id,
-          href: hero.gitButton.href,
-          target: hero.gitButton.target,
-          text: hero.gitButton.text,
-          darkIconPngUrl: this.strapiService.extractImageUrl(hero.gitButton.darkIconPng)!,
-          lightIconPngUrl: this.strapiService.extractImageUrl(hero.gitButton.darkIconPng)!,
-        },
-        backgroundPngUrl: this.strapiService.extractImageUrl(hero.backgroundPng)!
-      },
-
-      features1: {
-        ...features1, items: features1.items.map((item: any) => {
-          return {...item, iconSvgId: this.strapiService.registerSvgIcon(item.iconSvg)!}
-        })
-      },
-      features2: {
-        pretitle: features2.pretitle,
-        title: features2.title,
-        items: features2.items.map((item: any) => {
-          return {...item, iconSvgId: this.strapiService.registerSvgIcon(item.iconSvg)}
-        })
-      },
-      features3: {
-        pretitle: features3.pretitle,
-        iconSvgId: this.strapiService.registerSvgIcon(features3.iconSvg)!,
-        mainItem: features3.mainItem,
-        items: features3.items
-      },
-      features4: features4,
-      features5: {...features5, iconSvgId: this.strapiService.registerSvgIcon(features5.iconSvg)!},
-    }
+    const clickhouseData = this.strapiService.convertStrapiObject<ClickhouseData>(res.data);
+    this.strapiService.setSeoTags(clickhouseData.seo);
+    return clickhouseData;
   }
 }

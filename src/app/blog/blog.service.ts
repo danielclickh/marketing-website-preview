@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {StrapiService} from "../common/services/strapi.service";
 import {BlogData, BlogPost} from "./blog.protocol";
-import {convertMarkdown} from "../common/utils/MarkdownUtils";
 import {DomSanitizer} from "@angular/platform-browser";
 
 @Injectable({
@@ -27,9 +26,9 @@ export class BlogService {
       ]
     });
 
-    const attributes = {...blogRes.data.attributes};
-    this.strapiService.setSeoTags(attributes.seo);
-    return attributes;
+    const result = this.strapiService.convertStrapiObject<BlogData>(blogRes.data);
+    this.strapiService.setSeoTags(result.seo);
+    return result;
   }
 
   async getBlogPosts(): Promise<Array<BlogPost>> {
@@ -44,18 +43,6 @@ export class BlogService {
         'thumbnailPng'
       ]
     });
-
-    const blogPostsData = blogPostsRes.data;
-    return blogPostsData.map((blogWithAttributes: any) => {
-      const blogPost = blogWithAttributes.attributes;
-      return {
-        id: blogWithAttributes.id,
-        publishedAt: blogPost.publishedAt,
-        ...blogPost,
-        content: convertMarkdown(blogPost.content),
-        author: {...blogPost.author, avatarPngUrl: this.strapiService.extractImageUrl(blogPost.author.avatarPng)},
-        thumbnailPngUrl: this.strapiService.extractImageUrl(blogPost.thumbnailPng),
-      };
-    });
+    return this.strapiService.convertStrapiObject(blogPostsRes.data);
   }
 }

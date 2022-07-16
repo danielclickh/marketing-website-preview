@@ -5,7 +5,7 @@
         <div class="category">{{blogPost.category}}</div>
         <div class="title">{{blogPost.title}}</div>
         <div *ngIf="blogPost.author as author" class="author">
-          <div [strapiCssImage]="author.avatarPngUrl" class="avatar"></div>
+          <div [strapiCssImage]="author.avatarPng.url" class="avatar"></div>
           <div class="content">
             <div class="name">{{author.name}}</div>
             <div class="date">{{(blogPost.date || blogPost.publishedAt) | date}}</div>
@@ -14,7 +14,7 @@
       </div>
 
       <div class="content_and_share_container">
-        <div [innerHTML]="blogPost.content | safeHtml" class="blog_post_content rich_content"></div>
+        <div [innerHTML]="blogPost.content | markdown" class="blog_post_content rich_content"></div>
 
         <div class="share_post_container">
           <div class="left">
@@ -67,7 +67,7 @@
         <a *ngFor="let post of getOtherBlogPosts()"
            [href]="getBlogPostUrl(post)"
            class="post">
-          <div [strapiCssImage]="post.thumbnailPngUrl" class="thumbnail"></div>
+          <div [strapiCssImage]="post.thumbnailPng.url" class="thumbnail"></div>
           <div class="category">{{post.category}}</div>
           <div class="title">{{post.title}}</div>
         </a>

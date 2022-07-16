@@ -1,7 +1,7 @@
 <div *ngIf="headerDataPromise | async as headerData" class="header">
   <div class="container">
     <a class="logo_container" href="/">
-      <mat-icon [svgIcon]="headerData.logoIconId" class="icon"></mat-icon>
+      <mat-icon [svgIcon]="headerData.logoIcon.hash" class="icon"></mat-icon>
       <div class="text">ClickHouse</div>
     </a>
 
@@ -28,7 +28,7 @@
                [target]="subMenuItem.target"
                class="sub_menu_item menu_with_icon_item">
               <div class="icon_wrapper">
-                <mat-icon [svgIcon]="subMenuItem.iconId!" class="icon"></mat-icon>
+                <mat-icon [svgIcon]="subMenuItem.icon!.hash" class="icon"></mat-icon>
               </div>
 
               <div class="menu_data">
@@ -81,7 +81,7 @@
              [href]="item.href"
              [target]="item.target"
              class="item_with_icon">
-            <mat-icon [svgIcon]="item.iconId!" class="icon"></mat-icon>
+            <mat-icon [svgIcon]="item.icon!.hash" class="icon"></mat-icon>
             {{item.name}}
           </a>
         </div>

@@ -23,21 +23,6 @@ export class FooterService {
       ]
     });
 
-    const data: any = res.data;
-    const attributes = data.attributes;
-    const result: FooterData = {
-      ...attributes,
-      logoSvgId: this.strapiService.registerSvgIcon(attributes.logoSvg)!,
-      socialLinks: {
-        ...attributes.socialLinks,
-        items: attributes.socialLinks.socialLinkItems.map((socialLink: any) => {
-          return {
-            ...socialLink,
-            iconSvgUrl: socialLink.iconSvg.data.attributes.url,
-          }
-        })
-      }
-    };
-    return result as FooterData;
+    return this.strapiService.convertStrapiObject(res.data);
   }
 }

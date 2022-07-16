@@ -18,7 +18,7 @@
                class="git_button">
               <button class="primary_button light">
                 <div class="icon_wrapper">
-                  <div [strapiCssImage]="theme === 'dark' ? gitButton.darkIconPngUrl : gitButton.lightIconPngUrl"
+                  <div [strapiCssImage]="theme === 'dark' ? gitButton.darkIconPng.url : gitButton.lightIconPng.url"
                        class="icon"></div>
                 </div>
                 <div class="text">{{gitButton.text}}</div>
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="right">
-          <img [src]="hero.backgroundPngUrl | strapiImageUrl" alt="background_image" class="background_image"/>
+          <img [src]="hero.backgroundPng.url | strapiImageUrl" alt="background_image" class="background_image"/>
         </div>
       </div>
     </div>
@@ -46,7 +46,7 @@
         <div class="features">
           <div *ngFor="let feature of features2.items" class="feature">
             <div class="title">
-              <mat-icon [svgIcon]="feature.iconSvgId" class="icon"></mat-icon>
+              <mat-icon [svgIcon]="feature.iconSvg.hash" class="icon"></mat-icon>
               {{feature.title}}
             </div>
             <div class="description">{{feature.description}}</div>
@@ -63,7 +63,7 @@
           <div class="description_and_image">
             <div class="description">{{features3.mainItem.description}}</div>
             <div class="image_container">
-              <mat-icon [svgIcon]="features3.iconSvgId" class="image"></mat-icon>
+              <mat-icon [svgIcon]="features3.iconSvg.hash" class="image"></mat-icon>
             </div>
 
           </div>
@@ -96,7 +96,7 @@
       <div class="container">
         <div class="image_and_content">
           <div class="image_container">
-            <mat-icon [svgIcon]="features5.iconSvgId" class="image"></mat-icon>
+            <mat-icon [svgIcon]="features5.iconSvg.hash" class="image"></mat-icon>
           </div>
           <div class="content">
             <div class="pretitle">{{features5.pretitle}}</div>

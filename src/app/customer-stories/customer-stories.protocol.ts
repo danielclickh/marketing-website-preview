@@ -1,7 +1,8 @@
-import {StrapiButton} from "../common/protocol/strapi.protocol";
+import {StrapiButton, StrapiImage} from "../common/protocol/strapi.protocol";
+import {SeoMetadata} from "../common/protocol/common.protocol";
 
 export interface CustomerStoriesTestimonial {
-  avatarUrl: string;
+  avatar: StrapiImage;
   review: string;
   author: string;
   role: string;
@@ -14,8 +15,8 @@ export interface UseCaseBullet {
 
 export interface UseCasesItem {
   companyName: string;
-  darkLogoPngUrl: string;
-  lightLogoPngUrl: string;
+  darkLogoPng: StrapiImage;
+  lightLogoPng: StrapiImage;
   description: string;
   bullets: Array<UseCaseBullet>;
   ctaButton: StrapiButton;
@@ -26,8 +27,6 @@ export interface UseCases {
   title: string;
   description: string;
   spotlightTitle: string;
-  spotlight: UseCasesItem;
-  items: Array<UseCasesItem>;
 }
 
 export interface CustomerStoriesHero {
@@ -39,4 +38,7 @@ export interface CustomerStoriesHero {
 export interface CustomerStoriesData {
   hero: CustomerStoriesHero;
   useCases: UseCases;
+  spotlightUseCase: UseCasesItem;
+  useCaseItems: Array<UseCasesItem>;
+  seo: SeoMetadata;
 }

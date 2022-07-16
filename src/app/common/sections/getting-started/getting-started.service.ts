@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {StrapiService} from "../../services/strapi.service";
 import {GettingStartedData} from "./getting-started.protocol";
-import {convertMarkdown} from "../../utils/MarkdownUtils";
 
 @Injectable({
   providedIn: 'root'
@@ -19,18 +18,6 @@ export class GettingStartedService {
       ]
     });
 
-
-    const data: any = res.data;
-    const attributes = data.attributes;
-    const result = {
-      pretitle: attributes.pretitle,
-      title: attributes.title,
-      description: attributes.description,
-      quickStartButton: attributes.quickStartButton,
-      cloudButton: attributes.cloudButton,
-      platforms: attributes.platforms,
-      bottomText: convertMarkdown(attributes.bottomText),
-    };
-    return result;
+    return this.strapiService.convertStrapiObject<GettingStartedData>(res.data);
   }
 }

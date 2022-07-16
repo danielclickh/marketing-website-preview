@@ -1,11 +1,9 @@
-import {LinkTarget, StrapiButton} from "../common/protocol/strapi.protocol";
-import {Feature, ScreenshotAndBullets} from "../common/protocol/common.protocol";
+import {StrapiButton, StrapiImage, StrapiLink} from "../common/protocol/strapi.protocol";
+import {Feature, ScreenshotAndBullets, SeoMetadata} from "../common/protocol/common.protocol";
 
-export interface HomepageHeroHighlight {
+export interface HomepageHeroHighlight extends StrapiLink {
   title: string;
   description: string;
-  href: string;
-  target: LinkTarget;
   buttonText: string;
 }
 
@@ -13,8 +11,8 @@ export interface HomepageHero {
   title: string;
   description: string;
   ctaButton: StrapiButton;
-  darkBackgroundIconUrl: string;
-  lightBackgroundIconUrl: string;
+  darkBackgroundIcon: StrapiImage;
+  lightBackgroundIcon: StrapiImage;
   highlights: Array<HomepageHeroHighlight>;
 }
 
@@ -28,7 +26,6 @@ export interface HomepageClickhouseCloud {
   pretitle: string;
   title: string;
   description: string;
-  items: Array<ScreenshotAndBullets>;
   primaryButton: StrapiButton;
   secondaryButton: StrapiButton;
 }
@@ -37,17 +34,15 @@ export interface HomepageTestimonials {
   pretitle: string;
   title: string;
   description: string;
-  testimonialsIconSvgId: string;
-  bottomIconSvgId: string;
-  items: Array<HomepageTestimonialItem>;
+  testimonialsIconSvg: StrapiImage;
+  bottomIconSvg: StrapiImage;
+  testimonialItems: Array<HomepageTestimonialItem>;
 }
 
-export interface HomepageTestimonialItem {
+export interface HomepageTestimonialItem extends StrapiLink {
   id: string;
   title: string;
   author: string;
-  href: string;
-  target: LinkTarget;
 }
 
 export interface HomepageCustomerStories {
@@ -57,12 +52,10 @@ export interface HomepageCustomerStories {
   ctaButton: StrapiButton;
 }
 
-export interface HomepageCustomerStoryLogo {
+export interface HomepageCustomerStoryLogo extends StrapiLink {
   id: string;
-  darkLogoPngUrl: string;
-  lightLogoPngUrl: string;
-  href: string;
-  target: LinkTarget;
+  darkLogoPng: StrapiImage;
+  lightLogoPng: StrapiImage;
 }
 
 export interface HomepageData {
@@ -70,5 +63,7 @@ export interface HomepageData {
   aboutClickhouse: HomepageAboutClickhouse;
   customerStories: HomepageCustomerStories;
   clickhouseCloud: HomepageClickhouseCloud;
+  clickhouseCloudItems: Array<ScreenshotAndBullets>;
   testimonials: HomepageTestimonials;
+  seo: SeoMetadata;
 }

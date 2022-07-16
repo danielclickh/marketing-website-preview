@@ -1,9 +1,10 @@
-import {StrapiButton} from "../common/protocol/strapi.protocol";
+import {StrapiButton, StrapiImage} from "../common/protocol/strapi.protocol";
+import {SeoMetadata} from "../common/protocol/common.protocol";
 
 export interface EventHost {
   name: string;
   role: string;
-  avatarPngUrl: string;
+  avatarPng: StrapiImage;
 }
 
 export interface EventHostedBy {
@@ -45,12 +46,12 @@ export interface Event {
   datetimeAndTimezoneString: string;
   viewMoreDetailsText: string;
   category: string;
-  thumbnailPngUrl: string;
+  thumbnailPng: StrapiImage
   hostedBy: EventHostedBy;
   agenda?: EventAgenda;
   location: EventLocation;
-  darkFeatureImagePngUrl: string;
-  lightFeatureImagePngUrl: string;
+  darkFeatureImagePng: StrapiImage
+  lightFeatureImagePng: StrapiImage
   eventEnded: boolean;
   eventVideoUrl: string;
   form: EventForm;
@@ -81,4 +82,5 @@ export interface NewsAndEventsData {
   featuredEvent?: Event;
   upcomingEvents: Array<Event>;
   pastEvents: Array<Event>;
+  seo: SeoMetadata;
 }

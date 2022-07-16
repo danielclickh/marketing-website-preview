@@ -41,7 +41,7 @@
   <div class="bottom">
     <button [disabled]="serverCallInProgress"
             class="submit_button primary_button">{{contactForm.submitButtonLabel}}</button>
-    <div [innerHTML]="contactForm.disclaimer" class="disclaimer"></div>
+    <div [innerHTML]="contactForm.disclaimer | markdown" class="disclaimer"></div>
   </div>
 </form>
 

@@ -2,7 +2,7 @@
   <div *ngIf="homepageDataPromise | async as homepageData" class="homepage">
     <div *ngIf="homepageData.hero as hero" class="hero">
       <div class="background_overlay"></div>
-      <div [strapiCssImage]="theme === 'dark' ? hero.darkBackgroundIconUrl : hero.lightBackgroundIconUrl"
+      <div [strapiCssImage]="theme === 'dark' ? hero.darkBackgroundIcon.url : hero.lightBackgroundIcon.url"
            class="background_icon"></div>
       <div class="container">
         <div [innerHTML]="hero.title" class="title"></div>
@@ -54,7 +54,7 @@
         <div class="logos">
           <a *ngFor="let logo of customerStories.logos; trackBy: trackById" [href]="logo.href" [target]="logo.target"
              class="logo_wrapper">
-            <div [strapiCssImage]="theme === 'dark' ? logo.darkLogoPngUrl : logo.lightLogoPngUrl" class="logo"></div>
+            <div [strapiCssImage]="theme === 'dark' ? logo.darkLogoPng.url : logo.lightLogoPng.url" class="logo"></div>
           </a>
         </div>
         <a *ngIf="customerStories.ctaButton as button"
@@ -76,7 +76,8 @@
           <div class="section_title">{{clickhouseCloud.title}}</div>
           <div class="section_description">{{clickhouseCloud.description}}</div>
         </div>
-        <screenshot-and-bullets-list [screenshotAndBulletsList]="clickhouseCloud.items"></screenshot-and-bullets-list>
+        <screenshot-and-bullets-list
+          [screenshotAndBulletsList]="homepageData.clickhouseCloudItems"></screenshot-and-bullets-list>
         <div class="buttons">
           <a *ngIf="clickhouseCloud.primaryButton as button"
              [href]="button.href"
@@ -105,15 +106,15 @@
           <div class="pretitle">{{testimonials.pretitle}}</div>
           <div class="section_title">{{testimonials.title}}</div>
           <div class="section_description">{{testimonials.description}}</div>
-          <mat-icon [svgIcon]="testimonials.testimonialsIconSvgId" class="icon"></mat-icon>
+          <mat-icon [svgIcon]="testimonials.testimonialsIconSvg.hash" class="icon"></mat-icon>
         </div>
         <div class="testimonials">
-          <div *ngFor="let testimonial of testimonials.items; trackBy: trackById" class="testimonial">
+          <div *ngFor="let testimonial of testimonials.testimonialItems; trackBy: trackById" class="testimonial">
             <a [href]="testimonial.href" [target]="testimonial.target" class="title">{{testimonial.title}}</a>
             <div class="author">{{testimonial.author}}</div>
           </div>
         </div>
-        <mat-icon [svgIcon]="testimonials.bottomIconSvgId" class="bottom_icon"></mat-icon>
+        <mat-icon [svgIcon]="testimonials.bottomIconSvg.hash" class="bottom_icon"></mat-icon>
       </div>
     </div>
   </div>
