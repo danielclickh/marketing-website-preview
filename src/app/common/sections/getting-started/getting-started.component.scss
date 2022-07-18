@@ -22,6 +22,20 @@
 
     .section_description {
       margin-bottom: 33px;
+
+      ::ng-deep {
+        p:not(:last-child) {
+          margin-bottom: 10px;
+        }
+
+        a {
+          color: $primary;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
     }
   }
 

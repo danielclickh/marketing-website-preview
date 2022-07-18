@@ -4,7 +4,7 @@
     <div class="section_metadata">
       <div class="pretitle">{{gettingStarted.pretitle}}</div>
       <div class="section_title">{{gettingStarted.title}}</div>
-      <div class="section_description">{{gettingStarted.description}}</div>
+      <div [innerHTML]="gettingStarted.descriptionRichText | markdown" class="section_description"></div>
     </div>
     <div class="buttons">
       <div class="stroked_button_wrapper_with_chevron">

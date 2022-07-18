@@ -4,6 +4,7 @@ export interface GettingStartedData {
   pretitle: string;
   title: string;
   description: string;
+  descriptionRichText: string;
   quickStartButton: StrapiButton;
   cloudButton: StrapiButton;
   platforms: Array<GettingStartedPlatform>;
