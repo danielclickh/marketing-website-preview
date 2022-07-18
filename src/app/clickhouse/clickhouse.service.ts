@@ -15,6 +15,7 @@ export class ClickhouseService {
       populate: [
         'hero',
         'hero.mainButton',
+        'hero.secondaryButton',
         'hero.gitButton',
         'hero.gitButton.darkIconPng',
         'hero.gitButton.lightIconPng',

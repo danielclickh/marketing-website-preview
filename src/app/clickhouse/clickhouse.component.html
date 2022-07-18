@@ -12,18 +12,28 @@
                class="main_button">
               <button class="primary_button">{{mainButton.text}}</button>
             </a>
-            <a *ngIf="hero.gitButton as gitButton"
-               [href]=gitButton.href
-               [target]="gitButton.target"
-               class="git_button">
-              <button class="primary_button light">
-                <div class="icon_wrapper">
-                  <div [strapiCssImage]="theme === 'dark' ? gitButton.darkIconPng : gitButton.lightIconPng"
-                       class="icon"></div>
-                </div>
-                <div class="text">{{gitButton.text}}</div>
-              </button>
+
+            <a *ngIf="hero.secondaryButton as secondaryButton"
+               [href]=secondaryButton.href
+               [target]="secondaryButton.target"
+               class="secondary_button">
+              <button class="primary_button">{{secondaryButton.text}}</button>
             </a>
+
+            <ng-container *ngIf="!hero.secondaryButton">
+              <a *ngIf="hero.gitButton as gitButton"
+                 [href]=gitButton.href
+                 [target]="gitButton.target"
+                 class="git_button">
+                <button class="primary_button light">
+                  <div class="icon_wrapper">
+                    <div [strapiCssImage]="theme === 'dark' ? gitButton.darkIconPng : gitButton.lightIconPng"
+                         class="icon"></div>
+                  </div>
+                  <div class="text">{{gitButton.text}}</div>
+                </button>
+              </a>
+            </ng-container>
           </div>
         </div>
         <div class="right">

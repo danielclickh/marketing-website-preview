@@ -5,6 +5,7 @@ export interface ClickhouseHero {
   title: string;
   description: string;
   mainButton: StrapiButton;
+  secondaryButton: StrapiButton;
   gitButton: StrapiIconButton;
   backgroundPng: StrapiImage;
 }

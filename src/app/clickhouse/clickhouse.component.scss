@@ -67,6 +67,11 @@
             width: 100%;
           }
 
+          .secondary_button button {
+            background: $warningBg;
+            color: $warningFg;
+          }
+
           .git_button {
             min-width: 170px;
 
