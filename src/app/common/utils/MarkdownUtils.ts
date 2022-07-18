@@ -1,5 +1,4 @@
 import Showdown from 'showdown';
-import hljs from 'highlight.js';
 
 
 Showdown.extension('highlightjs', function () {
@@ -20,7 +19,10 @@ Showdown.extension('highlightjs', function () {
   function replacement(_wholeMatch: any, match: any, left: string, right: string) {
     // unescape match to prevent double escaping
     match = htmlDecode(match);
-    return left + hljs.highlightAuto(match, ['javascript', 'sql', 'bash', 'cpp', 'typescript']).value + right;
+    if (window) {
+      return left + (window as any).hljs.highlightAuto(match, ['javascript', 'sql', 'bash', 'cpp', 'typescript']).value + right;
+    }
+    return left + match + right;
   }
 
   return [
