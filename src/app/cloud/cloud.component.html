@@ -12,6 +12,7 @@
           <a *ngIf="hero.ctaButton as ctaButton"
              [href]=ctaButton.href
              [target]="ctaButton.target"
+             (click)="segmentService.trackGaEvent('click', ctaButton.text, 'website-hero')"
              class="cta_button">
             <button class="primary_button">{{ctaButton.text}}</button>
           </a>

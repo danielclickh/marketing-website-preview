@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {HomepageService} from "./homepage.service";
 import {ThemeService} from "../common/services/theme.service";
 import {trackById} from "../common/utils/AngularUtils";
+import {SegmentService} from "../common/services/segment.service";
 
 @Component({
   selector: 'app-homepage',
@@ -15,6 +16,7 @@ export class HomepageComponent {
   themeObs = this.themeService.observeTheme();
 
   constructor(private readonly homepageService: HomepageService,
-              private readonly themeService: ThemeService) {
+              private readonly themeService: ThemeService,
+              readonly segmentService: SegmentService) {
   }
 }

@@ -5,14 +5,16 @@
         <div *ngFor="let topMenu of footerData.topLevelFooterMenu" class="top_menu">
           <div class="title">{{topMenu.title}}</div>
           <div class="links">
-            <a *ngFor="let footerLink of topMenu.items" [href]="footerLink.href" [target]="footerLink.target"
+            <a (click)="segmentService.trackGaEvent('click', footerLink.name, 'website-nav')"
+               *ngFor="let footerLink of topMenu.items"
+               [href]="footerLink.href"
+               [target]="footerLink.target"
                class="footer_link">
               {{footerLink.name}}
             </a>
           </div>
         </div>
       </div>
-
       <div class="footer_logo_and_copyright">
         <div class="logo_container">
           <mat-icon [svgIcon]="footerData.logoSvg.hash" class="icon"></mat-icon>
@@ -26,6 +28,7 @@
               <a *ngFor="let bottomLink of footerData.bottomLinks"
                  [href]="bottomLink.href"
                  [target]="bottomLink.target"
+                 (click)="segmentService.trackGaEvent('click', bottomLink.text, 'website-nav')"
                  class="bottom_link">
                 {{bottomLink.text}}
               </a>

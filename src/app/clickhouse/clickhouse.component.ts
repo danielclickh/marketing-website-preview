@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {ThemeService} from "../common/services/theme.service";
 import {ClickhouseService} from "./clickhouse.service";
+import {SegmentService} from "../common/services/segment.service";
 
 @Component({
   selector: 'app-clickhouse',
@@ -13,7 +14,8 @@ export class ClickhouseComponent {
   themeObs = this.themeService.observeTheme();
 
   constructor(private readonly clickhouseService: ClickhouseService,
-              private readonly themeService: ThemeService) {
+              private readonly themeService: ThemeService,
+              readonly segmentService: SegmentService) {
   }
 
 }

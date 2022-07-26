@@ -16,8 +16,8 @@ export interface SegmentAnalytics {
   identify: (userId?: string, traits?: Record<string, any>, options?: Record<string, any>, callback?: () => void) => void;
 }
 
-export type SegmentCategory = '';
-export type SegmentEventType = '';
+export type SegmentCategory = 'website-nav' | 'website-hero';
+export type SegmentEventType = 'click' | 'Form Submitted';
 
 @Injectable({
   providedIn: 'root'
@@ -72,7 +72,7 @@ export class SegmentService {
     this.trackEvent(event, properties);
   }
 
-  private trackEvent(event: SegmentEventType, properties: Record<string, any>): void {
+  trackEvent(event: SegmentEventType, properties: Record<string, any>): void {
     if (isPlatformServer(this.platformId)) {
       return;
     }

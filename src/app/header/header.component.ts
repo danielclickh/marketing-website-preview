@@ -4,6 +4,7 @@ import {CpTheme, ThemeService} from "../common/services/theme.service";
 import {trackById} from '../common/utils/AngularUtils';
 import {Observable} from "rxjs";
 import {HeaderTopNavItem, HeaderTopNavSubItem, RegularNavItem} from "./header.protocol";
+import {SegmentService} from "../common/services/segment.service";
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,8 @@ export class HeaderComponent {
   mobileMenuVisible = false;
 
   constructor(private readonly headerService: HeaderService,
-              private readonly themeService: ThemeService) {
+              private readonly themeService: ThemeService,
+              readonly segmentService: SegmentService) {
     this.themeObs = themeService.observeTheme();
   }
 

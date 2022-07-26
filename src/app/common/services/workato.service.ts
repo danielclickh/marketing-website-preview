@@ -109,7 +109,13 @@ export class WorkatoService {
       const email = request.email;
       const firstName = request.firstName;
       const lastName = request.lastName;
-      this.segmentService.identify(email, firstName, lastName, workatoResp?.cloudId ? workatoResp.cloudId : email);
+      const userId = workatoResp?.cloudId ? workatoResp.cloudId : email;
+      this.segmentService.identify(email, firstName, lastName, userId);
+      this.segmentService.trackEvent('Form Submitted', {
+        email,
+        userId,
+        _mkt_trk: this.getMarketoCookie()
+      });
     }
   }
 

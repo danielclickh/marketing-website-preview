@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {ThemeService} from "../common/services/theme.service";
 import {CloudService} from "./cloud.service";
+import {SegmentService} from "../common/services/segment.service";
 
 @Component({
   selector: 'app-cloud',
@@ -13,6 +14,7 @@ export class CloudComponent {
   themeObs = this.themeService.observeTheme();
 
   constructor(private readonly cloudService: CloudService,
-              private readonly themeService: ThemeService) {
+              private readonly themeService: ThemeService,
+              readonly segmentService: SegmentService) {
   }
 }

@@ -9,6 +9,7 @@
             <a *ngIf="hero.mainButton as mainButton"
                [href]=mainButton.href
                [target]="mainButton.target"
+               (click)="segmentService.trackGaEvent('click', mainButton.text, 'website-hero')"
                class="main_button">
               <button class="primary_button">{{mainButton.text}}</button>
             </a>
@@ -16,6 +17,7 @@
             <a *ngIf="hero.secondaryButton as secondaryButton"
                [href]=secondaryButton.href
                [target]="secondaryButton.target"
+               (click)="segmentService.trackGaEvent('click', secondaryButton.text, 'website-hero')"
                class="secondary_button">
               <button class="primary_button">{{secondaryButton.text}}</button>
             </a>
@@ -24,6 +26,7 @@
               <a *ngIf="hero.gitButton as gitButton"
                  [href]=gitButton.href
                  [target]="gitButton.target"
+                 (click)="segmentService.trackGaEvent('click', gitButton.text!, 'website-hero')"
                  class="git_button">
                 <button class="primary_button light">
                   <div class="icon_wrapper">

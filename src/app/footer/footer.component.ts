@@ -3,6 +3,7 @@ import {FooterService} from "./footer.service";
 import {WorkatoService} from "../common/services/workato.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {NewsletterService} from "../common/services/newsletter.service";
+import {SegmentService} from "../common/services/segment.service";
 
 @Component({
   selector: 'app-footer',
@@ -18,7 +19,8 @@ export class FooterComponent {
               private readonly footerService: FooterService,
               private readonly workatoService: WorkatoService,
               private readonly snackBar: MatSnackBar,
-              private readonly cd: ChangeDetectorRef) {
+              private readonly cd: ChangeDetectorRef,
+              readonly segmentService: SegmentService) {
   }
 
   async submitNewsletterForm() {
