@@ -228,6 +228,12 @@
         display: flex;
         justify-content: center;
         flex-direction: column;
+        gap: 3px;
+
+        .description {
+          color: $fg3;
+          font-size: 14px;
+        }
       }
     }
   }
