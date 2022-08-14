@@ -2,6 +2,8 @@ import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {NavigationEnd, Router} from "@angular/router";
 import {isPlatformBrowser, isPlatformServer} from "@angular/common";
+import {CookiesConsentService} from "../../cookies-consent/cookies-consent.service";
+import {filter, take} from "rxjs";
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -10,7 +12,7 @@ export type SegmentProperties = Record<string, any>;
 // See reference in: https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/
 export interface SegmentAnalytics {
   _writeKey: string;
-  load: (key: string) => void;
+  load: (key: string, loadOptions?: any) => void;
   page: (category?: string, name?: string, properties?: Record<string, any>, options?: Record<string, any>, callback?: () => void) => void;
   track: (event?: string, properties?: Record<string, any>, options?: Record<string, any>, callback?: () => void) => void;
   identify: (userId?: string, traits?: Record<string, any>, options?: Record<string, any>, callback?: () => void) => void;
@@ -24,16 +26,23 @@ export type SegmentEventType = 'click' | 'Form Submitted';
 })
 export class SegmentService {
   constructor(@Inject(PLATFORM_ID) private platformId: object,
+              private readonly cookiesService: CookiesConsentService,
               private readonly router: Router) {
     if (isPlatformBrowser(platformId)) {
-      const analytics: SegmentAnalytics = this.getAnalytics();
-      analytics._writeKey = environment.segmentKey;
-      analytics.load(environment.segmentKey);
+      this.cookiesService.getUserConsent().pipe(
+        filter(consent => consent !== null),
+        take(1)
+      ).subscribe(consent => {
+        const analytics: SegmentAnalytics = this.getAnalytics();
+        analytics._writeKey = environment.segmentKey;
+        const loaOptions = consent? {} : { disableClientPersistence: true };
+        analytics.load(environment.segmentKey, loaOptions);
 
-      this.router.events.subscribe(value => {
-        if (value instanceof NavigationEnd) {
-          this.reportPageView();
-        }
+        this.router.events.subscribe(value => {
+          if (value instanceof NavigationEnd) {
+            this.reportPageView();
+          }
+        });
       });
     }
   }

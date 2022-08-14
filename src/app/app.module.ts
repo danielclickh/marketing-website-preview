@@ -52,6 +52,8 @@ import {RichContentPageComponent} from './rich-content-page/rich-content-page.co
 import {AnchorDirective} from './common/directives/anchor.directive';
 import {SafeHtmlPipe} from './common/pipes/safe-html.pipe';
 import {MarkdownPipe} from './common/pipes/markdown.pipe';
+import {CookiesConsentComponent} from "./cookies-consent/cookies-consent.component";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -87,7 +89,8 @@ import {MarkdownPipe} from './common/pipes/markdown.pipe';
     RichContentPageComponent,
     AnchorDirective,
     SafeHtmlPipe,
-    MarkdownPipe
+    MarkdownPipe,
+    CookiesConsentComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
@@ -102,6 +105,7 @@ import {MarkdownPipe} from './common/pipes/markdown.pipe';
     FormsModule,
     MatSnackBarModule,
     ReactiveFormsModule,
+    MatDialogModule,
   ],
   providers: [
     {provide: 'googleTagManagerId', useValue: environment.googleTagManagerId}
