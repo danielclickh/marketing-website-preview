@@ -51,6 +51,20 @@
       font-size: 14px;
       line-height: 21px;
       color: $fg3;
+
+      ::ng-deep {
+
+        a {
+          color: $fg3;
+          text-decoration: underline;
+
+          &:hover {
+            color: $primary;
+
+          }
+        }
+
+      }
     }
   }
 }

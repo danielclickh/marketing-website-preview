@@ -5,7 +5,7 @@
     </div>
     <div class="data">
       <div class="title">{{feature.title}}</div>
-      <div class="description">{{feature.description}}</div>
+      <div [innerHTML]="feature.description" class="description"></div>
     </div>
   </div>
 </div>
