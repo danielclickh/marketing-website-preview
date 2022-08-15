@@ -11,6 +11,7 @@
       <div class="category">{{event.category}}</div>
       <div class="title">{{event.title}}</div>
       <div *ngIf="event.form.type !== 'recordedGatedContent'" class="date">{{event.datetimeAndTimezoneString}}</div>
+      <div class="date">{{event.localDatetime | date:'long'}}</div>
     </a>
   </div>
 </div>
