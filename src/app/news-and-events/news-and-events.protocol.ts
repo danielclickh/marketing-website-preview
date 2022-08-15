@@ -42,7 +42,7 @@ export interface Event {
   slug?: string;
   shortDescription: string;
   description: string;
-  utcDatetime: string;
+  localDatetime: string;
   datetimeAndTimezoneString: string;
   viewMoreDetailsText: string;
   category: string;

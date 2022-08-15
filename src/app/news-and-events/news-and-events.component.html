@@ -64,7 +64,7 @@
                   <div class="city_and_country">{{event.location.city}}, {{event.location.country}}</div>
                   <div class="separator"></div>
                   <div *ngIf="event.form.type !== 'recordedGatedContent'"
-                       class="date">{{event.utcDatetime | date}}</div>
+                       class="date">{{event.localDatetime | date}}</div>
                 </div>
               </div>
             </a>

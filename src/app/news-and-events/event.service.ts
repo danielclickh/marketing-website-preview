@@ -17,7 +17,7 @@ export class EventService {
   async getEvents(): Promise<Array<Event>> {
     const eventsRes: any = await this.strapiService.getStrapi().find('events', {
       sort: [
-        'utcDatetime:DESC'
+        'localDatetime:DESC'
       ],
       populate: [
         'thumbnailPng',
@@ -38,7 +38,7 @@ export class EventService {
     return events.map((event: Event) => {
       return {
         ...event,
-        eventEnded: new Date(event.utcDatetime).getTime() < now,
+        eventEnded: new Date(event.localDatetime).getTime() < now,
       };
     });
   }
@@ -46,7 +46,7 @@ export class EventService {
   extractUpcomingEvents(events: Array<Event>): Array<Event> {
     return events
       .filter((event) => !event.eventEnded)
-      .sort((e1, e2) => new Date(e1.utcDatetime).getTime() - new Date(e2.utcDatetime).getTime());
+      .sort((e1, e2) => new Date(e1.localDatetime).getTime() - new Date(e2.localDatetime).getTime());
 
   }
 
