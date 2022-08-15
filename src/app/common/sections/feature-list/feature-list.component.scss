@@ -53,9 +53,17 @@
       color: $fg3;
 
       ::ng-deep {
-        a:hover {
+
+        a {
+          color: $fg3;
           text-decoration: underline;
+
+          &:hover {
+            color: $primary;
+
+          }
         }
+
       }
     }
   }
