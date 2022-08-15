@@ -1,8 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {CookiesConsentService} from "./cookies-consent.service";
-import {CpTheme, ThemeService} from "../common/services/theme.service";
 import {trackById} from '../common/utils/AngularUtils';
-import {Observable} from "rxjs";
 import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
@@ -13,15 +11,12 @@ import {MatDialogRef} from "@angular/material/dialog";
 })
 export class CookiesConsentComponent {
   readonly trackById = trackById;
-  themeObs: Observable<CpTheme>;
 
   constructor(private readonly cookiesService: CookiesConsentService,
-              private readonly themeService: ThemeService,
               public dialogRef: MatDialogRef<CookiesConsentComponent>,) {
-    this.themeObs = themeService.observeTheme();
   }
 
-  choseConsnet(consent: boolean): void {
+  choseConsent(consent: boolean): void {
     this.cookiesService.setUserConsent(consent);
     this.dialogRef.close();
   }
