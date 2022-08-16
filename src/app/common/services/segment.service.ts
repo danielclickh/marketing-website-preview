@@ -3,7 +3,6 @@ import {environment} from "../../../environments/environment";
 import {NavigationEnd, Router} from "@angular/router";
 import {isPlatformBrowser, isPlatformServer} from "@angular/common";
 import {CookiesConsentService} from "../../cookies-consent/cookies-consent.service";
-import {filter, take} from "rxjs";
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -29,21 +28,21 @@ export class SegmentService {
               private readonly cookiesService: CookiesConsentService,
               private readonly router: Router) {
     if (isPlatformBrowser(platformId)) {
-      this.cookiesService.getUserConsent().pipe(
-        filter(consent => consent !== null),
-        take(1)
-      ).subscribe(consent => {
-        const analytics: SegmentAnalytics = this.getAnalytics();
-        analytics._writeKey = environment.segmentKey;
-        const loaOptions = consent? {} : { disableClientPersistence: true };
-        analytics.load(environment.segmentKey, loaOptions);
+      // this.cookiesService.getUserConsent().pipe(
+      //   filter(consent => consent !== null),
+      //   take(1)
+      // ).subscribe(consent => {
+      const analytics: SegmentAnalytics = this.getAnalytics();
+      analytics._writeKey = environment.segmentKey;
+      // const loaOptions = consent? {} : { disableClientPersistence: true };
+      analytics.load(environment.segmentKey, {});
 
-        this.router.events.subscribe(value => {
-          if (value instanceof NavigationEnd) {
-            this.reportPageView();
-          }
-        });
+      this.router.events.subscribe(value => {
+        if (value instanceof NavigationEnd) {
+          this.reportPageView();
+        }
       });
+      // });
     }
   }
 

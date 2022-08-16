@@ -22,7 +22,7 @@ export class AppComponent {
       this.pageReady = this.strapiService.observeNoInflightRequests();
       this.cookiesService.getUserConsent().pipe(take(1)).subscribe(userConsent => {
         if (userConsent === null) {
-          this.showCookiesConsentDialog();
+          // this.showCookiesConsentDialog();
         }
       });
     } else {
