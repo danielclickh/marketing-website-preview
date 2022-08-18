@@ -34,10 +34,8 @@ export class EventPageComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const allEvents = await this.eventService.getEvents();
     const eventIdOrSlug = this.activatedRoute.snapshot.params['eventIdOrSlug'];
-    this.allEvents = allEvents;
-    this.event = allEvents.find((e) => e.slug === eventIdOrSlug || (!isNaN(eventIdOrSlug) && e.id === parseInt(eventIdOrSlug)));
+    this.event = await this.eventService.getEvent(eventIdOrSlug);
     if (this.event?.eventVideoUrl && isPlatformBrowser(this.platformId)) {
       window.location.href = this.event.eventVideoUrl;
       return;

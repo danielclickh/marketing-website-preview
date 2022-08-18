@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Event} from "./news-and-events.protocol";
-import {StrapiService} from "../common/services/strapi.service";
+import {StrapiFindParams, StrapiService} from "../common/services/strapi.service";
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +52,42 @@ export class EventService {
 
   extractPastEvents(events: Array<Event>) {
     return events.filter((event) => event.eventEnded);
+  }
+
+  async getEvent(eventIdOrSlug: string | number): Promise<Event> {
+    const params: StrapiFindParams = {
+      populate: [
+        'thumbnailPng',
+        'hostedBy',
+        'hostedBy.hosts',
+        'hostedBy.hosts.avatarPng',
+        'agenda',
+        'agenda.items',
+        'location',
+        'darkFeatureImagePng',
+        'lightFeatureImagePng',
+        'form'
+      ],
+
+      fields: [
+        'title',
+        'shortDescription',
+      ]
+    };
+    if (typeof eventIdOrSlug === 'string') {
+      params.filters = [{field: 'slug', operator: '$eq', value: eventIdOrSlug}];
+    } else if (eventIdOrSlug !== undefined) {
+      params.filters = [{field: 'id', operator: '$eq', value: eventIdOrSlug}];
+    }
+    const eventsRes: any = await this.strapiService.getStrapi().find('events', params);
+    const result = this.strapiService.convertStrapiObject<Event>(eventsRes.data[0]);
+    this.strapiService.setSeoTags({
+      title: result.title,
+      description: result.shortDescription,
+      type: 'website',
+      siteName: 'ClickHouse',
+      image: result.thumbnailPng,
+    });
+    return result;
   }
 }

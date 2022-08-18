@@ -64,6 +64,11 @@ export class BlogService {
         'author',
         'author.avatarPng',
         'thumbnailPng',
+      ],
+
+      fields: [
+        'title',
+        'shortDescription',
       ]
     };
     if (slug) {
@@ -72,6 +77,14 @@ export class BlogService {
       params.filters = [{field: 'id', operator: '$eq', value: id}];
     }
     const blogPostsRes: any = await this.strapiService.getStrapi().find('blog-posts', params);
-    return this.strapiService.convertStrapiObject(blogPostsRes.data[0]);
+    const result = this.strapiService.convertStrapiObject<BlogPost>(blogPostsRes.data[0]);
+    this.strapiService.setSeoTags({
+      title: result.title,
+      description: result.shortDescription,
+      type: 'website',
+      siteName: 'ClickHouse',
+      image: result.thumbnailPng,
+    });
+    return result;
   }
 }
