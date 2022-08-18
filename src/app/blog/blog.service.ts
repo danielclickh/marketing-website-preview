@@ -76,7 +76,7 @@ export class BlogService {
     this.strapiService.setSeoTags({
       title: result.title,
       description: result.shortDescription,
-      type: 'website',
+      type: 'article',
       siteName: 'ClickHouse',
       image: result.thumbnailPng,
     });
