@@ -67,11 +67,6 @@ export class EventService {
         'darkFeatureImagePng',
         'lightFeatureImagePng',
         'form'
-      ],
-
-      fields: [
-        'title',
-        'shortDescription',
       ]
     };
     if (typeof eventIdOrSlug === 'string') {
