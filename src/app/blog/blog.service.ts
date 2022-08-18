@@ -64,7 +64,7 @@ export class BlogService {
         'author',
         'author.avatarPng',
         'thumbnailPng',
-      ],
+      ]
     };
     if (slug) {
       params.filters = [{field: 'slug', operator: '$eq', value: slug}];
