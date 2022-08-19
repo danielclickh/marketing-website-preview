@@ -17,6 +17,7 @@ export interface BlogPost {
   publishedAt: string;
   slug?: string;
   date?: string;
+  keywords?: string;
 }
 
 export interface BlogHero {

@@ -75,6 +75,7 @@ export class BlogService {
     const result = this.strapiService.convertStrapiObject<BlogPost>(blogPostsRes.data[0]);
     this.strapiService.setSeoTags({
       title: result.title,
+      keywords: result.keywords,
       description: result.shortDescription,
       type: 'article',
       siteName: 'ClickHouse',

@@ -78,6 +78,7 @@ export class EventService {
     const result = this.strapiService.convertStrapiObject<Event>(eventsRes.data[0]);
     this.strapiService.setSeoTags({
       title: result.title,
+      keywords: result.keywords,
       description: result.shortDescription,
       type: 'website',
       siteName: 'ClickHouse',
