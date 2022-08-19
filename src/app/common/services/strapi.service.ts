@@ -132,30 +132,30 @@ export class StrapiService {
     if (seoMetadata.title) {
       this.title.setTitle(seoMetadata.title);
       for (const tagName of ['og:title', 'twitter:title']) {
-        this.meta.addTag({name: tagName, content: seoMetadata.title});
+        this.meta.updateTag({name: tagName, content: seoMetadata.title});
       }
     }
 
     if (seoMetadata.keywords) {
-      this.meta.addTag({name: 'keywords', content: seoMetadata.keywords});
+      this.meta.updateTag({name: 'keywords', content: seoMetadata.keywords});
     }
 
     if (seoMetadata.description) {
       for (const tagName of ['description', 'twitter:description', 'og:description']) {
-        this.meta.addTag({name: tagName, content: seoMetadata.description});
+        this.meta.updateTag({name: tagName, content: seoMetadata.description});
       }
     }
 
     if (seoMetadata.type) {
-      this.meta.addTag({name: 'og:type', content: seoMetadata.type});
+      this.meta.updateTag({name: 'og:type', content: seoMetadata.type});
     }
 
     if (seoMetadata.siteName) {
-      this.meta.addTag({name: 'og:site_name', content: seoMetadata.siteName});
+      this.meta.updateTag({name: 'og:site_name', content: seoMetadata.siteName});
     }
 
     if (seoMetadata.imageUrl) {
-      this.meta.addTag({name: 'og:image', content: seoMetadata.imageUrl});
+      this.meta.updateTag({name: 'og:image', content: seoMetadata.imageUrl});
     }
   }
 
