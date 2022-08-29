@@ -16,7 +16,8 @@
   --fg5: #B0B4BC;
 
   --primary: #FFB200;
-  --primary-link: #FFB200;
+  --primaryLink: #FFB200;
+  --primaryCode: #FFB200;
   --warningBg: #FFEFCA;
   --warningFg: #C78F0F;
   --gradient1: #37334300;
@@ -29,7 +30,7 @@
   --headerBg: 255, 255, 255;
   --bg1: #FFFFFF;
   --bg2: #F6F7FA;
-  --bg3: #443F51;
+  --bg3: #F0F0F0;
   --bg4: #373343;
   --bg5: #585267;
   --bg6: #EFEFF2;
@@ -41,7 +42,8 @@
   --fg4: #FFFFFF;
   --fg5: #F6F7FA;
   --primary: #FFB200;
-  --primary-link: #FF7000;
+  --primaryLink: #FF7000;
+  --primaryCode: #B27C00;
   --warningBg: #FFEFCA;
   --warningFg: #C78F0F;
   --gradient1: #f6f7fa00;
@@ -63,7 +65,8 @@ $fg3: var(--fg3);
 $fg4: var(--fg4);
 $fg5: var(--fg5);
 $primary: var(--primary);
-$primary-link: var(--primary-link);
+$primaryLink: var(--primaryLink);
+$primaryCode: var(--primaryCode);
 $warningBg: var(--warningBg);
 $warningFg: var(--warningFg);
 $gradient1: var(--gradient1);

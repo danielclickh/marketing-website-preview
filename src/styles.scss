@@ -335,7 +335,7 @@ svg {
 
   code {
     background: $bg2;
-    color: $primary;
+    color: $primaryCode;
     border: 1px solid $bg3;
     display: inline-block;
     padding: 0 5px;
@@ -393,7 +393,7 @@ svg {
   }
 
   a {
-    color: $primary-link;
+    color: $primaryLink;
 
     &:hover {
       text-decoration: underline;
