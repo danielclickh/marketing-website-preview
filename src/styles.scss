@@ -317,16 +317,15 @@ svg {
   }
 
   .code-with-play {
-    background-color: #222222;
+    background-color: $constDark;
     border-radius: 8px;
     padding: 24px;
-    color: $fg4;
+    color: $constWhite;
     display: flex;
     position: relative;
     white-space: pre-wrap;
 
     .code {
-      color: $fg4;
       margin-top: -24px;
       max-width: 98%;
     }
@@ -340,7 +339,7 @@ svg {
       font-size: 24px;
       top: 20px;
       right: 24px;
-      color: $fg4;
+      color: $constWhite;
       background: rgba(0,0,0,0.8);
       border-radius: 8px;
 
@@ -384,8 +383,8 @@ svg {
       box-sizing: border-box;
       padding: 20px;
       width: 100%;
-      background: #222222;
-      color: #FFFFFF;
+      background: $constDark;
+      color: $constWhite;
       border-radius: 8px;
       border: 1px solid $bg3;
       white-space: pre-wrap;

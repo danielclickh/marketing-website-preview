@@ -22,7 +22,8 @@
   --warningFg: #C78F0F;
   --gradient1: #37334300;
   --gradient2: #373343;
-
+  --constWhite: #FFFFFF;
+  --constDark: #222222;
 }
 
 .light {
@@ -41,6 +42,7 @@
   --fg3: #6D7386;
   --fg4: #FFFFFF;
   --fg5: #F6F7FA;
+
   --primary: #FFB200;
   --primaryLink: #C78F0F;
   --primaryCode: #6D7386;
@@ -48,6 +50,8 @@
   --warningFg: #C78F0F;
   --gradient1: #f6f7fa00;
   --gradient2: #F6F7FA;
+  --constWhite: #FFFFFF;
+  --constDark: #222222;
 }
 
 $headerBg: var(--headerBg);
@@ -71,3 +75,6 @@ $warningBg: var(--warningBg);
 $warningFg: var(--warningFg);
 $gradient1: var(--gradient1);
 $gradient2: var(--gradient2);
+$constWhite: var(--constWhite);
+$constDark: var(--constDark);
+
