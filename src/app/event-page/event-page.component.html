@@ -1,6 +1,17 @@
 <div *ngIf="event" class="event_page">
   <div class="hero">
+
+    <div *ngIf="event.form && (!event.eventEnded || event.form.type === 'recordedGatedContent')" class="top">
+      <div class="video_display">
+        <iframe *ngIf="showVimeoVideo" [src]="getSafeVimeoUrl(event)" allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen="allowfullscreen" data-ready="true" frameborder="0" height="545"
+          loading="lazy" width="968">
+        </iframe>
+      </div>
+    </div>
+
     <div class="container">
+
       <div [ngClass]="{ 'no_form': event.eventEnded && event.form.type !== 'recordedGatedContent' }" class="left">
         <div class="section_metadata">
           <div class="pretitle">{{event.category}}</div>
@@ -31,9 +42,17 @@
         </div>
       </div>
       <div *ngIf="event.form && (!event.eventEnded || event.form.type === 'recordedGatedContent')" class="right">
-        <iframe *ngIf="showVimeoVideo" [src]="getSafeVimeoUrl(event)" allow="autoplay; fullscreen; picture-in-picture"
-                allowfullscreen="allowfullscreen" data-ready="true" frameborder="0" height="281"
-                loading="lazy" width="500"></iframe>
+      
+        <div *ngIf="showVimeoVideo" class="subscribed">
+          <div class="success-container">
+            <div class="success_icon"><mat-icon class="icon"  svgIcon="check_icon"></mat-icon></div>
+            <div class="success_text">
+              <p>Successfully subscribed to event</p>
+              <p class="mobile-hint">(scroll up to view)</p>
+            </div>
+          </div>
+        </div>
+
         <form (ngSubmit)="onSubmit().then()" *ngIf="form && !showVimeoVideo" [formGroup]="form" class="form">
           <div *ngIf="event.form.type === 'eventRegistration'" class="seed_form_element">
             <label class="seed_label">{{event.form.firstNameLabel}}</label>
