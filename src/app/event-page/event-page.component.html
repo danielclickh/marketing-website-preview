@@ -1,12 +1,14 @@
 <div *ngIf="event" class="event_page">
   <div class="hero">
 
-    <div *ngIf="event.form && (!event.eventEnded || event.form.type === 'recordedGatedContent')" class="top">
+    <div *ngIf="showVimeoVideo && (!event.eventEnded || event.form.type === 'recordedGatedContent')">
+      <div class="top">
       <div class="video_display">
-        <iframe *ngIf="showVimeoVideo" [src]="getSafeVimeoUrl(event)" allow="autoplay; fullscreen; picture-in-picture"
+        <iframe [src]="getSafeVimeoUrl(event)" allow="autoplay; fullscreen; picture-in-picture"
           allowfullscreen="allowfullscreen" data-ready="true" frameborder="0" height="545"
           loading="lazy" width="968">
         </iframe>
+      </div>
       </div>
     </div>
 
