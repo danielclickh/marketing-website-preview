@@ -328,6 +328,7 @@ svg {
     .code {
       margin-top: -24px;
       max-width: 98%;
+      overflow-wrap: break-word;
     }
     
     .play-ui {
@@ -392,6 +393,7 @@ svg {
       font-family: monospace, sans-serif;
       margin-bottom: $commonMarginBottom;
       word-break: break-all;
+      overflow-wrap: break-word;
     }
   }
 
