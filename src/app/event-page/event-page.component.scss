@@ -6,6 +6,25 @@
     padding-top: 105px;
     padding-bottom: 70px;
 
+    .top {
+      max-width: 1344px;
+      width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+      padding: 0 32px 64px 32px;
+      display: flex;
+      justify-content: center;
+    
+      @include customBreakpointCss('max-width: 1090px') {
+        .video_display {
+          iframe {
+            max-width: 94%;
+            height: auto;
+          }
+        } 
+      }
+    }
+
     & > .container {
       display: flex;
       justify-content: space-between;
@@ -140,7 +159,7 @@
       .right {
         flex: 0 0 502px;
 
-        .form {
+        .form, .subscribed {
           display: block;
           background: $bg2;
           width: 100%;
@@ -155,6 +174,26 @@
 
             .seed_input {
               width: 100%;
+            }
+          }
+
+          .success-container {
+            display: flex;
+            .success_icon {
+              margin-right: 12px;
+            }
+            .success_text {
+              white-space: pre-wrap;
+              font-weight: 500;
+              font-size: 16px;
+              line-height: 24px;
+              color: $fg3;
+            }
+            .mobile-hint {
+              display: none;
+              @include customBreakpointCss('max-width: 1090px') {
+                display: flex;
+              }
             }
           }
         }
