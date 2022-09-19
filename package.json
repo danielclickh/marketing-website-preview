@@ -13,7 +13,7 @@
     "build:ssr": "ng build && ng run website:server",
     "build:ssr:staging": "ng build -c staging && ng run website:server:staging",
     "prerender": "ng run website:prerender",
-    "prerender-dev": "ng run website:prerender:development",
+    "prerender-dev": "ng run website:prerender:development --routes-file routes.txt",
     "prerender-staging": "ng run website:prerender:staging"
   },
   "private": true,
