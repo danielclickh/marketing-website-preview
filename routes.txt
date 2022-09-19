@@ -76,3 +76,17 @@
 /blog/whats-new-in-clickhouse-21-12
 /blog/whats-new-in-clickhouse-22-1
 /blog/yandex-opensources-click-house
+/company/events/v22-7-release-webinar
+/company/events/v22-6-release-webinar
+/company/events/v22-5-release-webinar
+/company/events/v22-4-release-webinar
+/company/events/v22-3-release-webinar
+/company/events/v22-2-release-webinar
+/company/events/v21-10-release-webinar
+/company/events/v21-11-release-webinar
+/company/events/v21-12-release-webinar
+/company/events/getting-started-with-clickhouse
+/company/events/v22-8-release-webinar
+/company/events/v22-9-release-webinar
+/company/events/aws-reinvent
+
