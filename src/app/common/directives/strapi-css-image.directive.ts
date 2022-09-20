@@ -1,11 +1,11 @@
-import {Directive, ElementRef, Input, OnChanges} from '@angular/core';
-import {environment} from "../../../environments/environment";
-import {StrapiImage} from "../protocol/strapi.protocol";
+import {Directive, ElementRef, Input, OnChanges, OnInit} from '@angular/core';
+import {environment} from '../../../environments/environment';
+import {StrapiImage} from '../protocol/strapi.protocol';
 
 @Directive({
   selector: '[strapiCssImage]'
 })
-export class StrapiCssImageDirective implements OnChanges {
+export class StrapiCssImageDirective implements OnInit, OnChanges {
   @Input()
   strapiCssImage!: StrapiImage | string;
 
@@ -15,8 +15,12 @@ export class StrapiCssImageDirective implements OnChanges {
   constructor(private readonly elRef: ElementRef) {
   }
 
+  ngOnInit(): void {
+    if (!this.strapiCssImage) throw new Error('strapiCssImage is required');
+  }
 
   ngOnChanges() {
+    if (!this.strapiCssImage) throw new Error('strapiCssImage is required');
     let imageOrUrl = this.strapiCssImage;
     if (typeof imageOrUrl === 'string') {
       if (!imageOrUrl.startsWith(environment.strapiBaseUrl)) {

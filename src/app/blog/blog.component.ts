@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
-import {ThemeService} from "../common/services/theme.service";
-import {BlogService} from "./blog.service";
-import {BlogPost} from "./blog.protocol";
+import {ThemeService} from '../common/services/theme.service';
+import {BlogService} from './blog.service';
+import {BlogPost} from './blog.protocol';
 
 
 @Component({
@@ -45,10 +45,10 @@ export class BlogComponent {
           const shortDescription = blogPost.shortDescription.toLowerCase();
           return title.includes(keyword) || shortDescription.includes(keyword);
         });
-      })
+      });
     }
 
-    this.filteredBlogPosts = filteredPosts;
+    this.filteredBlogPosts = validateBlogPosts(filteredPosts);
     this.cd.detectChanges();
   }
 
@@ -58,15 +58,15 @@ export class BlogComponent {
   }
 
   private async initializePage() {
-    this.blogPosts = await this.blogService.getBlogPosts();
+    this.blogPosts = validateBlogPosts(await this.blogService.getBlogPosts());
     this.filteredBlogPosts = [...this.blogPosts];
     const categoriesToCountMap = new Map<string, number>();
     for (const blogPost of this.blogPosts) {
-      categoriesToCountMap.set(blogPost.category, (categoriesToCountMap.get(blogPost.category) || 0) + 1)
+      categoriesToCountMap.set(blogPost.category, (categoriesToCountMap.get(blogPost.category) || 0) + 1);
     }
     this.categories = [...categoriesToCountMap.entries()]
       .sort((entry1, entry2) => entry2[1] - entry1[1])
-      .map(entry => entry[0])
+      .map(entry => entry[0]);
     this.cd.detectChanges();
   }
 
@@ -74,3 +74,18 @@ export class BlogComponent {
     return this.blogService.getBlogPostUrl(blogPost);
   }
 }
+
+/**
+ * Checks that blog posts have all required fields and can be rendered safely.
+ * Returns the original array if no critical problems found or throws an error.
+ */
+function validateBlogPosts(blogPosts: Array<BlogPost>): Array<BlogPost> {
+  if (blogPosts.some(p => !p.thumbnailPng)) {
+    throw new Error('Blog post with no thumbnail: ' + blogPosts.filter(b => !b.thumbnailPng).map(b => b.id).join(','));
+  }
+  if (blogPosts.some(p => !p.author.avatarPng)) {
+    console.warn('Warning: blog posts have no author avatar: ' + blogPosts.filter(b => !b.author.avatarPng).map(b => b.id).join(','));
+  }
+  return blogPosts;
+}
+
