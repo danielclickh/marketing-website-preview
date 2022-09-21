@@ -1,19 +1,6 @@
 #!/bin/bash
 
-ENV="../cms/.env"
-while [ $# -gt 0 ]; do
-  case "$1" in
-    --env=*)
-      ENV="${1#*=}"
-      ;;
-    *)
-      printf "***************************\n"
-      printf "* Error: Invalid argument.*\n"
-      printf "***************************\n"
-      exit 1
-  esac
-  shift
-done
+ENV="${ENV:-../cms/.env}"
 
 source $ENV
 ## Query Blog posts
