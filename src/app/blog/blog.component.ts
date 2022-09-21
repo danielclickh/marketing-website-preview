@@ -84,7 +84,8 @@ function validateBlogPosts(blogPosts: Array<BlogPost>): Array<BlogPost> {
     throw new Error('Blog post with no thumbnail: ' + blogPosts.filter(b => !b.thumbnailPng).map(b => b.id).join(','));
   }
   if (blogPosts.some(p => !p.author.avatarPng)) {
-    console.warn('Warning: blog posts have no author avatar: ' + blogPosts.filter(b => !b.author.avatarPng).map(b => b.id).join(','));
+    throw new Error('Blog posts have no author avatar: ' +
+      blogPosts.filter(b => !b.author.avatarPng).map(b => b.id).join(','));
   }
   return blogPosts;
 }
