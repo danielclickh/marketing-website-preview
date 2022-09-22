@@ -155,7 +155,9 @@ export class StrapiService {
     }
 
     if (seoMetadata.imageUrl) {
-      this.meta.updateTag({name: 'og:image', content: seoMetadata.imageUrl});
+      for (const tagName of ['og:image', 'twitter:image']) {
+        this.meta.updateTag({name: tagName, content: seoMetadata.imageUrl});
+      }
     }
   }
 
