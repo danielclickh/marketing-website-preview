@@ -54,6 +54,7 @@ import {SafeHtmlPipe} from './common/pipes/safe-html.pipe';
 import {MarkdownPipe} from './common/pipes/markdown.pipe';
 import {CookiesConsentComponent} from "./cookies-consent/cookies-consent.component";
 import {MatDialogModule} from "@angular/material/dialog";
+import {PricingComponent} from "./pricing/pricing.component";
 
 
 @NgModule({
@@ -91,6 +92,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     SafeHtmlPipe,
     MarkdownPipe,
     CookiesConsentComponent,
+    PricingComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
