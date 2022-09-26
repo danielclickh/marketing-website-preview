@@ -15,6 +15,7 @@ import {BlogComponent} from "./blog/blog.component";
 import {BlogPostPageComponent} from "./blog/blog-post-page/blog-post-page.component";
 import {RedirectComponent} from "./redirect/redirect.component";
 import {RichContentPageComponent} from "./rich-content-page/rich-content-page.component";
+import {PricingComponent} from "./pricing/pricing.component";
 
 
 const routes: Routes = [
@@ -53,6 +54,7 @@ const routes: Routes = [
           {path: 'support/platforms', component: RichContentPageComponent},
           {path: 'support/program', component: RichContentPageComponent},
           {path: 'support/agreement', component: RichContentPageComponent},
+          {path: 'pricing', component: PricingComponent},
         ]
       }
     ]

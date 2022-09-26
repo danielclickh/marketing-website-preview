@@ -1,0 +1,27 @@
+@import 'colors';
+@import 'mixins';
+
+.pricing {
+  .hero {
+    text-align: center;
+    padding: 70px 0;
+
+    .title {
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 58px;
+      margin-bottom: 20px;
+    }
+
+    .description {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 27px;
+      color: $fg3;
+      margin-bottom: 70px;
+      max-width: 656px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}

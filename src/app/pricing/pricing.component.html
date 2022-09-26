@@ -1,0 +1,10 @@
+<ng-container *ngIf="themeObs | async as theme" xmlns="http://www.w3.org/1999/html">
+  <div *ngIf="pricingDataPromise | async as pricingData" class="pricing">
+    <div *ngIf="pricingData.hero as hero" class="hero">
+      <div class="container">
+        <div class="title">{{hero.title}}</div>
+        <div class="description">{{hero.description}}</div>
+      </div>
+    </div>
+  </div>
+</ng-container>
