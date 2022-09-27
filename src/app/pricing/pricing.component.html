@@ -26,5 +26,20 @@
         <p [innerHTML]="hero.openSourceLink | markdown" class="open_source_link"></p>
       </div>
     </div>
+
+    <div *ngIf="pricingData.pricingPhilosophy as philosophy" class="philosophy">
+      <div class="container">
+        <div class="title">{{philosophy.title}}</div>
+        <div class="columns_wrapper">
+          <div *ngFor="let column of philosophy.columns" class="column">
+            <div class="header_row">
+              <img [src]="column.image | strapiImageUrl" alt="payment method" class="image"/>
+              <div class="column_title">{{column.header}}</div>
+            </div>
+            <div [innerHTML]="column.content | markdown" class="content"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </ng-container>

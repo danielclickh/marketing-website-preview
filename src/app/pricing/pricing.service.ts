@@ -14,8 +14,8 @@ export class PricingService {
       populate: [
         'hero',
         'pricingPhilosophy',
-        'pricingPhilosophy.column',
-        'pricingPhilosophy.column.image',
+        'pricingPhilosophy.columns',
+        'pricingPhilosophy.columns.image',
       ],
     });
 
