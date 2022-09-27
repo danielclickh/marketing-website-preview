@@ -4,6 +4,7 @@ import {StrapiImage} from "../common/protocol/strapi.protocol";
 interface PricingHero {
   title: string;
   description: string;
+  openSourceLink: string;
 }
 
 interface PlanBullet {
@@ -16,7 +17,7 @@ interface PlanActionButton {
   link: string;
 }
 
-interface PlanCard {
+export interface PricingPlanData {
   name: string;
   items: Array<PlanBullet>;
   actionButton: PlanActionButton;
@@ -35,7 +36,5 @@ interface PricingPhilosophy {
 
 export interface PricingData {
   hero: PricingHero;
-  plans: Array<PlanCard>;
-  openSourceLink: string;
   pricingPhilosophy: PricingPhilosophy;
 }

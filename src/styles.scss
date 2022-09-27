@@ -87,7 +87,7 @@ html, body {
 body {
   box-sizing: border-box;
   font-family: Inter, sans-serif;
-  background-color: $bg1;
+  background-color: $bg2;
   color: $fg1;
   transition: background 200ms, color 200ms;
   overflow-y: scroll;
@@ -330,7 +330,7 @@ svg {
       max-width: 98%;
       overflow-wrap: break-word;
     }
-    
+
     .play-ui {
       height: 32px;
       width: 32px;

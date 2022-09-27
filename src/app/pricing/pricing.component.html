@@ -4,11 +4,26 @@
       <div class="container">
         <div class="title">{{hero.title}}</div>
         <div class="description">{{hero.description}}</div>
-        <div class="plans_container">
-          <div *ngFor="let plan of pricingData.plans" class="plan_card">
-            <div class="title">{{plan.name}}</div>
+        <div *ngIf="pricingPlansDataPromise | async as pricingPlansData" class="plans_container">
+          <div *ngFor="let plan of pricingPlansData" class="plan_card">
+            <div class="top_marker"></div>
+            <div class="card_content">
+              <div class="title">{{plan.name}}</div>
+              <div class="plan_items">
+                <div *ngFor="let item of plan.items" class="row">
+                  <mat-icon *ngIf="item.isBulleted" class="icon" svgIcon="check_mark"></mat-icon>
+                  <p [innerHTML]="item.description | markdown" class="item_text"></p>
+                </div>
+              </div>
+              <a [href]="plan.actionButton.link" class="stroked_button_wrapper button_wrapper">
+                <button class="stroked_button">
+                  {{plan.actionButton.text}}
+                </button>
+              </a>
+            </div>
           </div>
         </div>
+        <p [innerHTML]="hero.openSourceLink | markdown" class="open_source_link"></p>
       </div>
     </div>
   </div>

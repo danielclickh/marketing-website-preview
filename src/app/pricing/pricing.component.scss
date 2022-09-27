@@ -32,14 +32,83 @@
       .plan_card {
         width: 400px;
         height: 575px;
+        background: $bg1;
+        padding: 40px;
+        border-width: 0 1px 1px 1px;
+        border-style: solid;
+        border-color: rgba(176, 180, 188, 0.1);
+
+        .top_marker {
+          position: relative;
+          top: -40px;
+          left: -40px;
+          width: calc(100% + 80px);
+          height: 5px;
+          background: $primary;
+          border-radius: 32px 32px 0 0;
+        }
+
+        .card_content {
+          display: flex;
+          flex-direction: column;
+          gap: 19px;
+          height: 100%;
+        }
 
         .title {
           font-weight: 700;
           font-size: 28px;
           line-height: 34px;
-          margin-bottom: 19px;
+        }
+
+        .plan_items {
+          margin-top: 40px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+
+          .row {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+
+            .icon {
+              width: 10.5px;
+              height: 9px;
+              font-size: 9px;
+            }
+
+            .item_text {
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 21px;
+              text-align: start;
+            }
+          }
+        }
+
+        .button_wrapper {
+          margin-top: auto;
+          width: 100%;
+
+          button {
+            height: auto;
+            padding: 10px;
+            width: 100%;
+          }
+
+          .stroked_button {
+            color: $fg1;
+            padding: 9px 24px;
+          }
         }
       }
+    }
+
+    .open_source_link {
+      margin-top: 48px;
+      color: $fg3;
     }
   }
 }

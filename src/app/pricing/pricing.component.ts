@@ -10,6 +10,7 @@ import {PricingService} from "./pricing.service";
 })
 export class PricingComponent {
   pricingDataPromise = this.pricingService.getPricingData();
+  pricingPlansDataPromise = this.pricingService.getPricingPlansData();
   themeObs = this.themeService.observeTheme();
 
   constructor(private readonly themeService: ThemeService,
