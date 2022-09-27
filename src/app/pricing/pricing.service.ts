@@ -12,10 +12,21 @@ export class PricingService {
 
   async getPricingData(): Promise<PricingData> {
     const res = await this.strapiService.getStrapi().find('pricing', {
-      populate: ['hero']
+      populate: [
+        'hero',
+        'plans',
+        'plans.item',
+        'plans.actionButton',
+        'pricingPhilosophy',
+        'pricingPhilosophy.column',
+        'pricingPhilosophy.column.image',
+      ],
+      fields: [
+        'openSourceLink'
+      ]
     });
 
-    const pricingData = this.strapiService.convertStrapiObject<OurStoryData>(res.data);
+    const pricingData = this.strapiService.convertStrapiObject<PricingData>(res.data);
     // this.strapiService.setSeoTags(ourStoryData.seo);
     return pricingData;
   }

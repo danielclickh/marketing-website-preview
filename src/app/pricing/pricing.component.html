@@ -4,6 +4,11 @@
       <div class="container">
         <div class="title">{{hero.title}}</div>
         <div class="description">{{hero.description}}</div>
+        <div class="plans_container">
+          <div *ngFor="let plan of pricingData.plans" class="plan_card">
+            <div class="title">{{plan.name}}</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
