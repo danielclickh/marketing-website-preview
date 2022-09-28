@@ -318,5 +318,9 @@
         }
       }
     }
+
+    .metered_pricing .container .controls_row {
+      grid-template-columns: 1fr;
+    }
   }
 }
