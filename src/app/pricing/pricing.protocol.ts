@@ -1,6 +1,22 @@
 import {SeoMetadata} from "../common/protocol/common.protocol";
 import {StrapiImage} from "../common/protocol/strapi.protocol";
 
+interface PricingDimension {
+  priceUSD: number;
+  meteringUnit: string;
+  meteringTooltip: string;
+}
+
+export interface RegionPricing {
+  cloudProvider: 'aws'|'gcp'|'azure';
+  region: string;
+  regionFlagPNG: StrapiImage;
+  storagePricing: PricingDimension;
+  computePricing: PricingDimension;
+  writePricing: PricingDimension;
+  readPricing: PricingDimension;
+}
+
 interface PricingHero {
   title: string;
   description: string;
@@ -50,20 +66,5 @@ export interface PricingData {
   pricingPhilosophy: PricingPhilosophy;
   meteredPricing: MeteredPricing;
   contactSection: PricingContactSection;
-}
-
-interface PricingDimension {
-  priceUSD: number;
-  meteringUnit: string;
-  meteringTooltip: string;
-}
-
-export interface RegionPricing {
-  cloudProvider: 'aws'|'gcp'|'azure';
-  region: string;
-  regionFlagPNG: StrapiImage;
-  storagePricing: PricingDimension;
-  computePricing: PricingDimension;
-  writePricing: PricingDimension;
-  readPricing: PricingDimension;
+  seo: SeoMetadata;
 }

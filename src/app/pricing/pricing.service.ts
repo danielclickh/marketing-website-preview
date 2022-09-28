@@ -19,11 +19,12 @@ export class PricingService {
         'meteredPricing',
         'contactSection',
         'contactSection.contactButton',
+        'seo',
       ],
     });
 
     const pricingData = this.strapiService.convertStrapiObject<PricingData>(res.data);
-    // this.strapiService.setSeoTags(ourStoryData.seo);
+    this.strapiService.setSeoTags(pricingData.seo);
     return pricingData;
   }
 
