@@ -7,6 +7,11 @@ interface PricingHero {
   openSourceLink: string;
 }
 
+interface MeteredPricing {
+  title: string;
+  subtitle: string;
+}
+
 interface PlanBullet {
   description: string;
   isBulleted: boolean;
@@ -37,4 +42,21 @@ interface PricingPhilosophy {
 export interface PricingData {
   hero: PricingHero;
   pricingPhilosophy: PricingPhilosophy;
+  meteredPricing: MeteredPricing;
+}
+
+interface PricingDimension {
+  priceUSD: number;
+  meteringUnit: string;
+  meteringTooltip: string;
+}
+
+export interface RegionPricing {
+  cloudProvider: 'aws'|'gcp'|'azure';
+  region: string;
+  regionFlagPNG: StrapiImage;
+  storagePricing: PricingDimension;
+  computePricing: PricingDimension;
+  writePricing: PricingDimension;
+  readPricing: PricingDimension;
 }

@@ -41,5 +41,67 @@
         </div>
       </div>
     </div>
+
+    <div *ngIf="pricingData.meteredPricing as meteredPricing" class="metered_pricing">
+      <div *ngIf="regionPricingDataObs | async as regionPricing" class="container">
+        <div class="title">{{meteredPricing.title}}</div>
+        <div [innerHTML]="meteredPricing.subtitle | markdown" class="subtitle"></div>
+        <div class="controls_row">
+          <div class="cloud_providers">
+            <mat-icon svgIcon="aws_logo" class="aws_logo"></mat-icon>
+            <div class="inactive_providers_wrapper">
+              <div class="inactive_logos">
+                <mat-icon svgIcon="gcp_logo" class="gcp_logo"></mat-icon>
+                <mat-icon svgIcon="azure_logo" class="azure_logo"></mat-icon>
+              </div>
+              <div class="inactive_message">Coming soon</div>
+            </div>
+          </div>
+          <div class="seed_select_wrapper">
+            <seed-select [options]="regionPricing" [template]="regionTemplate"></seed-select>
+          </div>
+        </div>
+        <div class="table_wrapper">
+          <table *ngIf="selectedRegion" class="region_pricing_table">
+            <thead>
+              <tr class="header_row row">
+                <th *ngFor="let header of regionPridingHeaders" class="cell">
+                  {{header}}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr class="row">
+              <td class="cell">Storage</td>
+              <td class="cell">${{selectedRegion.storagePricing.priceUSD}}</td>
+              <td class="cell">{{selectedRegion.storagePricing.meteringUnit}}</td>
+            </tr>
+            <tr class="row">
+              <td class="cell">Compute</td>
+              <td class="cell">${{selectedRegion.computePricing.priceUSD}}</td>
+              <td class="cell">{{selectedRegion.computePricing.meteringUnit}}</td>
+            </tr>
+            <tr class="row">
+              <td class="cell">Write</td>
+              <td class="cell">${{selectedRegion.writePricing.priceUSD}}</td>
+              <td class="cell">{{selectedRegion.writePricing.meteringUnit}}</td>
+            </tr>
+            <tr class="row">
+              <td class="cell">Read</td>
+              <td class="cell">${{selectedRegion.readPricing.priceUSD}}</td>
+              <td class="cell">{{selectedRegion.readPricing.meteringUnit}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </ng-container>
+
+<ng-template #regionTemplate let-item="item">
+  <div class="region_item">
+    <img [src]="item.value.regionFlagPNG | strapiImageUrl" alt="{{item.value.region}} flag" class="flag_icon"/>
+    <div class="region_name">{{item.value.region}}</div>
+  </div>
+</ng-template>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {StrapiService} from "../common/services/strapi.service";
-import {PricingData, PricingPlanData} from "./pricing.protocol";
+import {StrapiService} from '../common/services/strapi.service';
+import {PricingData, PricingPlanData, RegionPricing} from './pricing.protocol';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,7 @@ export class PricingService {
         'pricingPhilosophy',
         'pricingPhilosophy.columns',
         'pricingPhilosophy.columns.image',
+        'meteredPricing',
       ],
     });
 
@@ -35,8 +36,23 @@ export class PricingService {
       ]
     });
 
-    const pricingPlansData = this.strapiService.convertStrapiObject<Array<PricingPlanData>>(res.data);
-    // this.strapiService.setSeoTags(ourStoryData.seo);
-    return pricingPlansData;
+    return this.strapiService.convertStrapiObject<Array<PricingPlanData>>(res.data);
+  }
+
+  async getRegionPricingData(): Promise<Array<RegionPricing>> {
+    const res = await this.strapiService.getStrapi().find('pricing-per-regions', {
+      populate: [
+        'regionFlagPNG',
+        'storagePricing',
+        'computePricing',
+        'writePricing',
+        'readPricing',
+      ],
+      fields: [
+        'cloudProvider',
+        'region'
+      ]
+    });
+    return this.strapiService.convertStrapiObject<Array<RegionPricing>>(res.data);
   }
 }

@@ -24,6 +24,10 @@
   --gradient2: #373343;
   --constWhite: #FFFFFF;
   --constDark: #222222;
+
+  --seedSelectBg: rgba(176, 180, 188, 0.1);
+  --seedSelectBorder: rgba(176, 180, 188, 0.1);
+  --seedSelectIcon: url('../../../assets/icons/seed_arrow_dark.svg') center center no-repeat;
 }
 
 .light {
@@ -52,6 +56,10 @@
   --gradient2: #F6F7FA;
   --constWhite: #FFFFFF;
   --constDark: #222222;
+
+  --seedSelectBg: #FAFBFD;
+  --seedSelectBorder: rgba(109, 115, 134, 0.1);
+  --seedSelectIcon: url('../../../assets/icons/seed_arrow_light.svg') center center no-repeat;
 }
 
 $headerBg: var(--headerBg);
@@ -77,4 +85,7 @@ $gradient1: var(--gradient1);
 $gradient2: var(--gradient2);
 $constWhite: var(--constWhite);
 $constDark: var(--constDark);
+$seedSelectBg: var(--seedSelectBg);
+$seedSelectBorder: var(--seedSelectBorder);
+$seedSelectIcon: var(--seedSelectIcon);
 

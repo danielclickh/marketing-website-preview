@@ -55,6 +55,7 @@ import {MarkdownPipe} from './common/pipes/markdown.pipe';
 import {CookiesConsentComponent} from "./cookies-consent/cookies-consent.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {PricingComponent} from "./pricing/pricing.component";
+import {SeedSelectComponent} from "./seed-ui/seed-select/seed-select.component";
 
 
 @NgModule({
@@ -93,6 +94,7 @@ import {PricingComponent} from "./pricing/pricing.component";
     MarkdownPipe,
     CookiesConsentComponent,
     PricingComponent,
+    SeedSelectComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
