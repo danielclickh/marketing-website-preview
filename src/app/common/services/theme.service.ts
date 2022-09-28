@@ -38,6 +38,7 @@ export class ThemeService {
     {name: 'aws_logo', svgRelativePath: 'aws_logo.svg'},
     {name: 'azure_logo', svgRelativePath: 'azure_logo.svg'},
     {name: 'gcp_logo', svgRelativePath: 'gcp_logo.svg'},
+    {name: 'info', svgRelativePath: 'info.svg'},
   ];
 
   constructor(private matIconRegistry: MatIconRegistry,
