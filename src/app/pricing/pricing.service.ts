@@ -17,6 +17,8 @@ export class PricingService {
         'pricingPhilosophy.columns',
         'pricingPhilosophy.columns.image',
         'meteredPricing',
+        'contactSection',
+        'contactSection.contactButton',
       ],
     });
 

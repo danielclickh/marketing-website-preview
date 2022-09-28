@@ -14,6 +14,9 @@
 
 
 .pricing {
+  background: $bg2;
+  padding-bottom: 88px;
+
   .hero {
     text-align: center;
     padding: 88px 0;
@@ -125,7 +128,7 @@
     }
   }
 
-  .philosophy .container .title, .metered_pricing .container .title {
+  .philosophy .container .title, .metered_pricing .container .title, .contact_section .container .title {
     font-weight: 700;
     font-size: 38px;
     line-height: 46px;
@@ -184,7 +187,6 @@
 
   .metered_pricing {
     text-align: center;
-    margin-bottom: 72px;
 
     .container {
       padding: 80px 106px;
@@ -304,6 +306,35 @@
               }
             }
           }
+        }
+      }
+    }
+  }
+
+  .contact_section {
+    margin-top: 88px;
+
+    .container {
+      padding: 72px 80px;
+      background: #FFB200;
+      width: 1150px;
+      height: 342px;
+      border-radius: 8px;
+      color: #2F2C3A;
+
+      .subtitle {
+        margin-top: 32px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        max-width: 640px;
+        margin-bottom: 32px;
+      }
+
+      .contact_button {
+        button {
+          background: #2F2C3A;
+          color: #F6F7FA;
         }
       }
     }

@@ -17,7 +17,7 @@ interface PlanBullet {
   isBulleted: boolean;
 }
 
-interface PlanActionButton {
+interface pricingActionButton {
   text: string;
   link: string;
 }
@@ -25,7 +25,7 @@ interface PlanActionButton {
 export interface PricingPlanData {
   name: string;
   items: Array<PlanBullet>;
-  actionButton: PlanActionButton;
+  actionButton: pricingActionButton;
 }
 
 interface PhilosophyColumn {
@@ -39,10 +39,17 @@ interface PricingPhilosophy {
   columns: Array<PhilosophyColumn>;
 }
 
+interface PricingContactSection {
+  title: string;
+  subtitle: string;
+  contactButton: pricingActionButton;
+}
+
 export interface PricingData {
   hero: PricingHero;
   pricingPhilosophy: PricingPhilosophy;
   meteredPricing: MeteredPricing;
+  contactSection: PricingContactSection;
 }
 
 interface PricingDimension {
