@@ -16,15 +16,13 @@ export class RichContentPageService {
   async getRichContentPageData(): Promise<RichContentPageData> {
     const url = this.router.url
       .replace(/\?.*/g, '');
-    const res = await this.strapiService.getStrapi().find('rich-content-pages', {      
+    const res = await this.strapiService.getStrapi().find('rich-content-pages', {
       populate: ['*'],
       filters: [
         {field: 'url', operator: '$startsWith', value: url}
       ]
     });
 
-    const richContentPageData = this.strapiService.convertStrapiObject<RichContentPageData>(res.data?.[0]);
-    this.strapiService.setSeoTags(richContentPageData.seo);
-    return richContentPageData;
+    return this.strapiService.convertStrapiObject<RichContentPageData>(res.data?.[0]);
   }
 }

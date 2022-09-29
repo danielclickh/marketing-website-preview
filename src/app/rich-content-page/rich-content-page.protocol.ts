@@ -1,5 +1,3 @@
-import {SeoMetadata} from "../common/protocol/common.protocol";
-
 export interface RichContentPageData {
   title: string;
   url: string;
@@ -7,5 +5,4 @@ export interface RichContentPageData {
   left_content: string;
   right_content: string;
   full_width_content: string;
-  seo: SeoMetadata;
 }
