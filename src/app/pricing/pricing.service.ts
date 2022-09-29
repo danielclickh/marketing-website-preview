@@ -17,11 +17,14 @@ export class PricingService {
         'pricingPhilosophy.columns',
         'pricingPhilosophy.columns.image',
         'meteredPricing',
+        'contactSection',
+        'contactSection.contactButton',
+        'seo',
       ],
     });
 
     const pricingData = this.strapiService.convertStrapiObject<PricingData>(res.data);
-    // this.strapiService.setSeoTags(ourStoryData.seo);
+    this.strapiService.setSeoTags(pricingData.seo);
     return pricingData;
   }
 

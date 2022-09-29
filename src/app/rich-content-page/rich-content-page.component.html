@@ -8,6 +8,14 @@
     <div class="content_container">
       <div class="container">
         <div [innerHTML]="richContentPage.content | markdown" class="rich_content"></div>
+      
+        <div *ngIf="richContentPage.left_content" class="two_column_container">
+          <div *ngIf="richContentPage.left_content" [innerHTML]="richContentPage.left_content | markdown" class="rich_content column_content"></div>
+          <div *ngIf="richContentPage.right_content" [innerHTML]="richContentPage.right_content | markdown" class="rich_content column_content"></div>
+        </div>
+
+        <div *ngIf="richContentPage.full_width_content" [innerHTML]="richContentPage.full_width_content | markdown" class="rich_content full_width_content"></div>
+
       </div>
     </div>
   </div>

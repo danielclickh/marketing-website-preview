@@ -74,26 +74,70 @@
             <tr class="row">
               <td class="cell">Storage</td>
               <td class="cell">${{selectedRegion.storagePricing.priceUSD}}</td>
-              <td class="cell">{{selectedRegion.storagePricing.meteringUnit}}<a><mat-icon></mat-icon></a></td>
+              <td class="cell">
+                <div class="metering_unit_div">
+                  {{selectedRegion.storagePricing.meteringUnit}}
+                  <mat-icon svgIcon="info" class="info_icon"
+                            [matTooltip]="selectedRegion.storagePricing.meteringTooltip"
+                            matTooltipPosition='right'
+                  ></mat-icon>
+                </div>
+              </td>
             </tr>
             <tr class="row">
               <td class="cell">Compute</td>
               <td class="cell">${{selectedRegion.computePricing.priceUSD}}</td>
-              <td class="cell">{{selectedRegion.computePricing.meteringUnit}}</td>
+              <td class="cell">
+                <div class="metering_unit_div">
+                  {{selectedRegion.computePricing.meteringUnit}}
+                  <mat-icon svgIcon="info" class="info_icon"
+                            [matTooltip]="selectedRegion.computePricing.meteringTooltip"
+                            matTooltipPosition='right'
+                  ></mat-icon>
+                </div>
+              </td>
             </tr>
             <tr class="row">
               <td class="cell">Write</td>
               <td class="cell">${{selectedRegion.writePricing.priceUSD}}</td>
-              <td class="cell">{{selectedRegion.writePricing.meteringUnit}}</td>
+              <td class="cell">
+                <div class="metering_unit_div">
+                  {{selectedRegion.writePricing.meteringUnit}}
+                  <mat-icon svgIcon="info" class="info_icon"
+                            [matTooltip]="selectedRegion.writePricing.meteringTooltip"
+                            matTooltipPosition='right'
+                  ></mat-icon>
+                </div>
+              </td>
             </tr>
             <tr class="row">
               <td class="cell">Read</td>
               <td class="cell">${{selectedRegion.readPricing.priceUSD}}</td>
-              <td class="cell">{{selectedRegion.readPricing.meteringUnit}}</td>
+              <td class="cell">
+                <div class="metering_unit_div">
+                  {{selectedRegion.readPricing.meteringUnit}}
+                  <mat-icon svgIcon="info" class="info_icon"
+                            [matTooltip]="selectedRegion.readPricing.meteringTooltip"
+                            matTooltipPosition='right'
+                  ></mat-icon>
+                </div>
+              </td>
             </tr>
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+
+    <div *ngIf="pricingData.contactSection as contactSection" class="contact_section">
+      <div class="container">
+        <div class="title">{{contactSection.title}}</div>
+        <div class="subtitle">{{contactSection.subtitle}}</div>
+        <a [href]="contactSection.contactButton.link" class="contact_button">
+          <button class="primary_button">
+            {{contactSection.contactButton.text}}
+          </button>
+        </a>
       </div>
     </div>
   </div>
