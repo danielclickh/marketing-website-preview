@@ -56,6 +56,7 @@ import {CookiesConsentComponent} from "./cookies-consent/cookies-consent.compone
 import {MatDialogModule} from "@angular/material/dialog";
 import {PricingComponent} from "./pricing/pricing.component";
 import {SeedSelectComponent} from "./seed-ui/seed-select/seed-select.component";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -110,6 +111,7 @@ import {SeedSelectComponent} from "./seed-ui/seed-select/seed-select.component";
     MatSnackBarModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatTooltipModule,
   ],
   providers: [
     {provide: 'googleTagManagerId', useValue: environment.googleTagManagerId}
