@@ -2,8 +2,6 @@ import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {NavigationEnd, Router} from "@angular/router";
 import {isPlatformBrowser, isPlatformServer} from "@angular/common";
-import {CookiesConsentService} from "../../cookies-consent/cookies-consent.service";
-
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type SegmentProperties = Record<string, any>;
@@ -25,13 +23,8 @@ export type SegmentEventType = 'click' | 'Form Submitted';
 })
 export class SegmentService {
   constructor(@Inject(PLATFORM_ID) private platformId: object,
-              private readonly cookiesService: CookiesConsentService,
               private readonly router: Router) {
     if (isPlatformBrowser(platformId)) {
-      // this.cookiesService.getUserConsent().pipe(
-      //   filter(consent => consent !== null),
-      //   take(1)
-      // ).subscribe(consent => {
       const analytics: SegmentAnalytics = this.getAnalytics();
       analytics._writeKey = environment.segmentKey;
       // const loaOptions = consent? {} : { disableClientPersistence: true };
@@ -42,7 +35,6 @@ export class SegmentService {
           this.reportPageView();
         }
       });
-      // });
     }
   }
 
