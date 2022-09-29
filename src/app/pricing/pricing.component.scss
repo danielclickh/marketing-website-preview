@@ -87,15 +87,18 @@
           .row {
             display: flex;
             gap: 16px;
-            align-items: center;
 
-            .icon {
-              width: 10.5px;
-              height: 9px;
-              font-size: 9px;
+            .check_icon {
+              margin-top: 5px;
+              width: 10px;
+              height: 10px;
+              content: '';
+              background: url('../../assets/icons/check_mark.svg') center center no-repeat;
+              background-size: contain;
             }
 
             .item_text {
+              flex: 1;
               font-weight: 400;
               font-size: 14px;
               line-height: 21px;

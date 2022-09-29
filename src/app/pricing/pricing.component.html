@@ -11,7 +11,7 @@
               <div class="title">{{plan.name}}</div>
               <div class="plan_items">
                 <div *ngFor="let item of plan.items" class="row">
-                  <mat-icon *ngIf="item.isBulleted" class="icon" svgIcon="check_mark"></mat-icon>
+                  <div *ngIf="item.isBulleted" class="check_icon"></div>
                   <p [innerHTML]="item.description | markdown" class="item_text"></p>
                 </div>
               </div>
