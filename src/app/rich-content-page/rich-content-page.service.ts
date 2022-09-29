@@ -17,14 +17,7 @@ export class RichContentPageService {
     const url = this.router.url
       .replace(/\?.*/g, '');
     const res = await this.strapiService.getStrapi().find('rich-content-pages', {      
-      populate: [
-        'content',
-        'left_content',
-        'right_content',
-        'full_width_content',
-        'seo',
-        'seo.image',
-      ],
+      populate: ['*'],
       filters: [
         {field: 'url', operator: '$startsWith', value: url}
       ]
