@@ -220,10 +220,12 @@
         grid-column-gap: 80px;
         grid-row-gap: 32px;
         margin-top: 48px;
+        min-width: 320px;
 
         .cloud_providers {
           display: flex;
           gap: 19px;
+          justify-content: center;
 
           .aws_logo {
             width: 48px;
@@ -388,7 +390,7 @@
         height: 890px;
 
         .controls_row {
-          grid-template-columns: 1fr;
+          grid-template-columns: 1fr !important;
         }
 
         .cell {
