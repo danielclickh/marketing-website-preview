@@ -6,12 +6,13 @@ import {UtmService} from "./utm.service";
 import {SegmentService} from "./segment.service";
 import {isPlatformServer} from "@angular/common";
 
-type WorkatoFormType = 'newsletter' | 'websiteContact' | 'eventRegistration' | 'recordedGatedContent';
+type WorkatoFormType = 'newsletter' | 'websiteContact' | 'eventRegistration' | 'recordedGatedContent' | 'serviceUnavailableCountry'
 type WorkatoRequest =
   WorkatoContactRequest
   | WorkatoNewsletterRequest
   | WorkatoEventRegisterRequest
-  | WorkatoRecordedGatedContentRequest;
+  | WorkatoRecordedGatedContentRequest
+  | WorkatoServiceUnavailableCountryRequest;
 
 export interface WorkatoResponse {
   cloudId?: string;
@@ -28,6 +29,10 @@ interface BaseWorkatoRequest {
 }
 
 interface WorkatoNewsletterRequest extends BaseWorkatoRequest {
+  email: string;
+}
+
+interface WorkatoServiceUnavailableCountryRequest extends BaseWorkatoRequest {
   email: string;
 }
 
@@ -84,6 +89,11 @@ export class WorkatoService {
   async recordedGatedContent(email: string): Promise<void> {
     const request: WorkatoRecordedGatedContentRequest = {email};
     await this.submitWorkatoForm('recordedGatedContent', request);
+  }
+
+  async submitServiceUnavailableCountryForm(email: string): Promise<void> {
+    const request: WorkatoServiceUnavailableCountryRequest = {email};
+    await this.submitWorkatoForm('serviceUnavailableCountry', request);
   }
 
   private async submitWorkatoForm(formType: WorkatoFormType, request: WorkatoRequest) {

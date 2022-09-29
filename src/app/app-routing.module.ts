@@ -16,6 +16,7 @@ import {BlogPostPageComponent} from "./blog/blog-post-page/blog-post-page.compon
 import {RedirectComponent} from "./redirect/redirect.component";
 import {RichContentPageComponent} from "./rich-content-page/rich-content-page.component";
 import {PricingComponent} from "./pricing/pricing.component";
+import {ServiceUnavailableCountryComponent} from "./service-unavailable-country/service-unavailable-country.component";
 
 
 const routes: Routes = [
@@ -55,6 +56,7 @@ const routes: Routes = [
           {path: 'support/program', component: RichContentPageComponent},
           {path: 'support/agreement', component: RichContentPageComponent},
           {path: 'pricing', component: PricingComponent},
+          {path: 'service-unavailable-country', component: ServiceUnavailableCountryComponent},
         ]
       }
     ]
