@@ -365,6 +365,14 @@
       .plans_container {
         justify-items: center;
         grid-template-columns: 1fr;
+
+        .plan_card {
+          height: auto;
+
+          .button_wrapper {
+            margin-top: 46px;
+          }
+        }
       }
     }
 
