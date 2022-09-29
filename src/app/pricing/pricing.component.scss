@@ -46,7 +46,8 @@
       grid-row-gap: 32px;
 
       .plan_card {
-        width: 320px;
+        width: 100%;
+        max-width: 320px;
         height: 575px;
         background: $bg1;
         padding: 40px;
@@ -91,10 +92,8 @@
             .check_icon {
               margin-top: 5px;
               width: 10px;
-              height: 10px;
-              content: '';
-              background: url('../../assets/icons/check_mark.svg') center center no-repeat;
-              background-size: contain;
+              height: 9px;
+              font-size: 9px;
             }
 
             .item_text {
@@ -181,7 +180,8 @@
           font-weight: 400;
           font-size: 15px;
           line-height: 24px;
-          width: 400px;
+          width: 100%;
+          max-width: 400px;
           text-align: start;
         }
       }
@@ -194,11 +194,17 @@
     .container {
       padding: 80px 106px;
       background: $bg1;
-      width: 1150px;
+      max-width: 1150px;
+      width: 100%;
       height: 849.22px;
       margin-top: -149px;
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 6px 4px -4px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
+
+      .center_content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
       .subtitle {
         margin-top: 20px;
@@ -251,7 +257,8 @@
         }
 
         .seed_select_wrapper {
-          width: 400px;
+          width: 100%;
+          max-width: 400px;
         }
       }
 
@@ -260,6 +267,8 @@
         border: 1px solid $seedSelectBorder;
         overflow: hidden;
         margin-top: 48px;
+        width: 100%;
+        max-width: 780px;
 
         .region_pricing_table {
           border-collapse: collapse;
@@ -312,6 +321,7 @@
         }
       }
     }
+    }
   }
 
   .contact_section {
@@ -320,7 +330,8 @@
     .container {
       padding: 72px 80px;
       background: $primary;
-      width: 1150px;
+      width: 100%;
+      max-width: 1150px;
       height: 342px;
       border-radius: 8px;
       color: #2F2C3A;
@@ -346,6 +357,8 @@
 
 @media only screen and (max-width: 890px) {
   .pricing {
+    padding-bottom: 0;
+
     .hero {
       .plans_container {
         justify-items: center;
@@ -354,19 +367,55 @@
     }
 
     .philosophy {
-      .columns_wrapper {
-        grid-template-columns: 1fr;
+      .container {
+        padding: 0 32px;
 
-        .column {
-          .header_row {
-            grid-template-columns: 1fr;
+        .columns_wrapper {
+          grid-template-columns: 1fr;
+
+          .column {
+            .header_row {
+              grid-template-columns: 1fr;
+            }
           }
         }
       }
     }
 
-    .metered_pricing .container .controls_row {
-      grid-template-columns: 1fr;
+    .metered_pricing {
+      .container {
+        padding: 64px 32px;
+        height: 890px;
+
+        .controls_row {
+          grid-template-columns: 1fr;
+        }
+
+        .cell {
+          font-size: 13px !important;
+          padding: 0 10px !important;
+        }
+
+        .header_row .cell {
+          font-size: 11px !important;
+        }
+
+        .info_icon {
+          display: none;
+        }
+      }
     }
+
+    .contact_section {
+      margin-top: 0;
+
+      .container {
+        border-radius: 0;
+        height: 376px;
+        padding: 44px 24px;
+      }
+    }
+
+
   }
 }
