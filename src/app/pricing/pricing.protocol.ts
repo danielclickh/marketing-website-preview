@@ -1,9 +1,31 @@
 import {SeoMetadata} from "../common/protocol/common.protocol";
 import {StrapiImage} from "../common/protocol/strapi.protocol";
 
+interface PricingDimension {
+  priceUSD: number;
+  meteringUnit: string;
+  meteringTooltip: string;
+}
+
+export interface RegionPricing {
+  cloudProvider: 'aws'|'gcp'|'azure';
+  region: string;
+  regionFlagPNG: StrapiImage;
+  storagePricing: PricingDimension;
+  computePricing: PricingDimension;
+  writePricing: PricingDimension;
+  readPricing: PricingDimension;
+}
+
 interface PricingHero {
   title: string;
   description: string;
+  openSourceLink: string;
+}
+
+interface MeteredPricing {
+  title: string;
+  subtitle: string;
 }
 
 interface PlanBullet {
@@ -11,15 +33,15 @@ interface PlanBullet {
   isBulleted: boolean;
 }
 
-interface PlanActionButton {
+interface pricingActionButton {
   text: string;
   link: string;
 }
 
-interface PlanCard {
+export interface PricingPlanData {
   name: string;
   items: Array<PlanBullet>;
-  actionButton: PlanActionButton;
+  actionButton: pricingActionButton;
 }
 
 interface PhilosophyColumn {
@@ -33,9 +55,16 @@ interface PricingPhilosophy {
   columns: Array<PhilosophyColumn>;
 }
 
+interface PricingContactSection {
+  title: string;
+  subtitle: string;
+  contactButton: pricingActionButton;
+}
+
 export interface PricingData {
   hero: PricingHero;
-  plans: Array<PlanCard>;
-  openSourceLink: string;
   pricingPhilosophy: PricingPhilosophy;
+  meteredPricing: MeteredPricing;
+  contactSection: PricingContactSection;
+  seo: SeoMetadata;
 }

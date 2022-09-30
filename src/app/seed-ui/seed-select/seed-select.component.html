@@ -1,0 +1,22 @@
+<ng-template #defaultTemplate let-item="item">
+  {{item.label}}
+</ng-template>
+<div class="seed_select"
+     *ngIf="selectedOptionIndex >= 0 || label"
+     (click)="handleClick()"
+     [ngClass]="{active: optionsMenuOpen}">
+  <div class="seed_select_icon"></div>
+  <div class="selected_option">
+    <ng-template [ngTemplateOutletContext]="{item: options[selectedOptionIndex] || {label}}"
+                 [ngTemplateOutlet]="template || defaultTemplate"></ng-template>
+  </div>
+  <div class="seed_select_options" [ngClass]="{active: optionsMenuOpen}">
+    <div class="seed_select_option"
+         *ngFor="let option of options; let i = index;"
+         [ngClass]="{selected: i === selectedOptionIndex}"
+         (click)="selectOption(i)">
+      <ng-template [ngTemplateOutletContext]="{item: option}"
+                   [ngTemplateOutlet]="template || defaultTemplate"></ng-template>
+    </div>
+  </div>
+</div>

@@ -52,10 +52,11 @@ import {RichContentPageComponent} from './rich-content-page/rich-content-page.co
 import {AnchorDirective} from './common/directives/anchor.directive';
 import {SafeHtmlPipe} from './common/pipes/safe-html.pipe';
 import {MarkdownPipe} from './common/pipes/markdown.pipe';
-import {CookiesConsentComponent} from "./cookies-consent/cookies-consent.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {PricingComponent} from "./pricing/pricing.component";
 import {ServiceUnavailableCountryComponent} from "./service-unavailable-country/service-unavailable-country.component";
+import {SeedSelectComponent} from "./seed-ui/seed-select/seed-select.component";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -92,9 +93,9 @@ import {ServiceUnavailableCountryComponent} from "./service-unavailable-country/
     AnchorDirective,
     SafeHtmlPipe,
     MarkdownPipe,
-    CookiesConsentComponent,
     PricingComponent,
     ServiceUnavailableCountryComponent,
+    SeedSelectComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
@@ -110,6 +111,7 @@ import {ServiceUnavailableCountryComponent} from "./service-unavailable-country/
     MatSnackBarModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatTooltipModule,
   ],
   providers: [
     {provide: 'googleTagManagerId', useValue: environment.googleTagManagerId}

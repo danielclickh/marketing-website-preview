@@ -34,6 +34,11 @@ export class ThemeService {
     {name: 'linkedin', svgRelativePath: 'linkedin.svg'},
     {name: 'twitter', svgRelativePath: 'twitter.svg'},
     {name: 'search', svgRelativePath: 'search.svg'},
+    {name: 'check_mark', svgRelativePath: 'check_mark.svg'},
+    {name: 'aws_logo', svgRelativePath: 'aws_logo.svg'},
+    {name: 'azure_logo', svgRelativePath: 'azure_logo.svg'},
+    {name: 'gcp_logo', svgRelativePath: 'gcp_logo.svg'},
+    {name: 'info', svgRelativePath: 'info.svg'},
   ];
 
   constructor(private matIconRegistry: MatIconRegistry,

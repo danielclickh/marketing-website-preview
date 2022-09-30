@@ -330,7 +330,7 @@ svg {
       max-width: 98%;
       overflow-wrap: break-word;
     }
-    
+
     .play-ui {
       height: 32px;
       width: 32px;
@@ -443,5 +443,36 @@ svg {
 @-moz-document url-prefix() {
   .header {
     background: $bg1 !important;
+  }
+}
+
+// Cookie consent overrides
+
+#onetrust-consent-sdk #onetrust-banner-sdk {
+  background: $bg4;
+ 
+  &.otFloatingRoundedIcon {
+    left: 0%;
+    margin: 0 auto;
+  
+    .banner-content {
+      padding: 12px 0; 
+    }
+  }
+}
+
+#onetrust-cookie-btn-container {
+  display: none; // may not be allowed to do this
+}
+
+#onetrust-accept-btn-container, 
+#onetrust-reject-btn-container,
+#onetrust-pc-btn-container {
+  #onetrust-accept-btn-handler, 
+  #onetrust-reject-all-handler,
+  #onetrust-pc-btn-handler {
+    font-size: 14px;
+    border-radius: 8px;
+    padding: 6px 10px;
   }
 }

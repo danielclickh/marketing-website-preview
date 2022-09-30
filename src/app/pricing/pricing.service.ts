@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {StrapiService} from "../common/services/strapi.service";
-import {PricingData} from "./pricing.protocol";
-import {OurStoryData} from "../our-story/our-story.protocol";
+import {StrapiService} from '../common/services/strapi.service';
+import {PricingData, PricingPlanData, RegionPricing} from './pricing.protocol';
 
 @Injectable({
   providedIn: 'root'
@@ -14,20 +13,49 @@ export class PricingService {
     const res = await this.strapiService.getStrapi().find('pricing', {
       populate: [
         'hero',
-        'plans',
-        'plans.item',
-        'plans.actionButton',
         'pricingPhilosophy',
-        'pricingPhilosophy.column',
-        'pricingPhilosophy.column.image',
+        'pricingPhilosophy.columns',
+        'pricingPhilosophy.columns.image',
+        'meteredPricing',
+        'contactSection',
+        'contactSection.contactButton',
+        'seo',
       ],
-      fields: [
-        'openSourceLink'
-      ]
     });
 
     const pricingData = this.strapiService.convertStrapiObject<PricingData>(res.data);
-    // this.strapiService.setSeoTags(ourStoryData.seo);
+    this.strapiService.setSeoTags(pricingData.seo);
     return pricingData;
+  }
+
+  async getPricingPlansData(): Promise<Array<PricingPlanData>> {
+    const res = await this.strapiService.getStrapi().find('pricing-plans', {
+      populate: [
+        'actionButton',
+        'items',
+      ],
+      fields: [
+        'name'
+      ]
+    });
+
+    return this.strapiService.convertStrapiObject<Array<PricingPlanData>>(res.data);
+  }
+
+  async getRegionPricingData(): Promise<Array<RegionPricing>> {
+    const res = await this.strapiService.getStrapi().find('pricing-per-regions', {
+      populate: [
+        'regionFlagPNG',
+        'storagePricing',
+        'computePricing',
+        'writePricing',
+        'readPricing',
+      ],
+      fields: [
+        'cloudProvider',
+        'region'
+      ]
+    });
+    return this.strapiService.convertStrapiObject<Array<RegionPricing>>(res.data);
   }
 }
