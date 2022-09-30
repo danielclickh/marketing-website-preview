@@ -18,6 +18,7 @@ export class ServiceUnavailableCountryComponent {
 
   readonly form: FormGroup;
   serverCallInProgress = false;
+  submitSuccessfully = false;
 
   constructor(private readonly service: UnavailableCountryService,
     private readonly formBuilder: FormBuilder,
@@ -31,9 +32,9 @@ export class ServiceUnavailableCountryComponent {
       });
   }
 
-  async onSubmit(thankYouMessage: string) {
+  async onSubmit() {
     if (this.form.invalid) {
-      this.snackBar.open('Please fill in all the required fields', 'Dismiss', {duration: 5000});
+      this.snackBar.open('Please fill the email field.', 'Dismiss', {duration: 5000});
       return;
     }
 
@@ -43,10 +44,10 @@ export class ServiceUnavailableCountryComponent {
       await this.workatoService.submitServiceUnavailableCountryForm(email);
     } finally {
       this.serverCallInProgress = false;
+      this.submitSuccessfully = true;
       this.cd.detectChanges();
     }
 
-    this.snackBar.open(thankYouMessage, 'Dismiss', {duration: 5000});
     this.form.reset();
   }
 }

@@ -8,12 +8,16 @@
             <div class="description">{{card.description}}</div>
           </div>
           <div class="contact_form">
-            <form (ngSubmit)="onSubmit(card.contactForm.success).then()" [formGroup]="form" class="form">
+            <form (ngSubmit)="onSubmit().then()" [formGroup]="form" class="form">
               <div class="email">
                 <label class="seed_label">{{card.contactForm.emailLabel}}</label>
                 <input class="seed_input email_input" formControlName="email" name="email" type="email">
                 <div *ngIf="!form.controls['email'].valid && form.controls['email'].touched" class="seed_error">
                   Invalid e-mail address
+                </div>
+                <div *ngIf="submitSuccessfully" class="seed_success">
+                  <p></p>
+                  <p>{{card.contactForm.success}}</p>
                 </div>
               </div>
               <div class="bottom">
