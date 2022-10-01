@@ -59,7 +59,10 @@
               </div>
             </div>
             <div class="seed_select_wrapper">
-              <seed-select [options]="regionPricing" [template]="regionTemplate"></seed-select>
+              <seed-select [options]="regionPricing"
+                           [template]="regionTemplate"
+                           (selectionChange)="selectedRegion = $event.value"
+              ></seed-select>
             </div>
           </div>
           <div class="table_wrapper">
