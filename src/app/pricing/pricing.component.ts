@@ -32,5 +32,4 @@ export class PricingComponent {
   constructor(private readonly themeService: ThemeService,
               private readonly pricingService: PricingService) {
   }
-
 }

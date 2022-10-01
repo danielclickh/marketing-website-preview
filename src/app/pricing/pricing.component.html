@@ -139,14 +139,18 @@
 
     <div *ngIf="pricingData.contactSection as contactSection" class="contact_section">
       <div class="container">
-        <div class="title">{{contactSection.title}}</div>
-        <div class="subtitle">{{contactSection.subtitle}}</div>
-        <a [href]="contactSection.contactButton.link" class="contact_button">
-          <button class="primary_button">
-            {{contactSection.contactButton.text}}
-          </button>
-        </a>
-      </div>
+        <div class="left_content">
+          <div class="title">{{contactSection.title}}</div>
+          <div class="subtitle">{{contactSection.subtitle}}</div>
+          <a [href]="contactSection.contactButton.link" class="contact_button">
+            <button class="primary_button">
+              {{contactSection.contactButton.text}}
+            </button>
+          </a>
+        </div>
+        <div [strapiCssImage]="theme === 'dark' ? contactSection.excludeImageDark : contactSection.excludeImageLight"
+             class="cube_image"></div>
+        </div>
     </div>
   </div>
 </ng-container>
