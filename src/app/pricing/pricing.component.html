@@ -65,70 +65,73 @@
               ></seed-select>
             </div>
           </div>
-          <div class="table_wrapper">
-            <table *ngIf="selectedRegion" class="region_pricing_table">
-              <thead>
-                <tr class="header_row row">
-                  <th *ngFor="let header of regionPridingHeaders" class="cell">
-                    {{header}}
-                  </th>
+          <div>
+            <div class="table_wrapper">
+              <table *ngIf="selectedRegion" class="region_pricing_table">
+                <thead>
+                  <tr class="header_row row">
+                    <th *ngFor="let header of regionPridingHeaders" class="cell">
+                      {{header}}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr class="row">
+                  <td class="cell">Storage</td>
+                  <td class="cell">${{selectedRegion.storagePricing.priceUSD}}</td>
+                  <td class="cell">
+                    <div class="metering_unit_div">
+                      {{selectedRegion.storagePricing.meteringUnit}}
+                      <mat-icon svgIcon="info" class="info_icon"
+                                [matTooltip]="selectedRegion.storagePricing.meteringTooltip"
+                                matTooltipPosition='right'
+                      ></mat-icon>
+                    </div>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-              <tr class="row">
-                <td class="cell">Storage</td>
-                <td class="cell">${{selectedRegion.storagePricing.priceUSD}}</td>
-                <td class="cell">
-                  <div class="metering_unit_div">
-                    {{selectedRegion.storagePricing.meteringUnit}}
-                    <mat-icon svgIcon="info" class="info_icon"
-                              [matTooltip]="selectedRegion.storagePricing.meteringTooltip"
-                              matTooltipPosition='right'
-                    ></mat-icon>
-                  </div>
-                </td>
-              </tr>
-              <tr class="row">
-                <td class="cell">Compute</td>
-                <td class="cell">${{selectedRegion.computePricing.priceUSD}}</td>
-                <td class="cell">
-                  <div class="metering_unit_div">
-                    {{selectedRegion.computePricing.meteringUnit}}
-                    <mat-icon svgIcon="info" class="info_icon"
-                              [matTooltip]="selectedRegion.computePricing.meteringTooltip"
-                              matTooltipPosition='right'
-                    ></mat-icon>
-                  </div>
-                </td>
-              </tr>
-              <tr class="row">
-                <td class="cell">Write</td>
-                <td class="cell">${{selectedRegion.writePricing.priceUSD}}</td>
-                <td class="cell">
-                  <div class="metering_unit_div">
-                    {{selectedRegion.writePricing.meteringUnit}}
-                    <mat-icon svgIcon="info" class="info_icon"
-                              [matTooltip]="selectedRegion.writePricing.meteringTooltip"
-                              matTooltipPosition='right'
-                    ></mat-icon>
-                  </div>
-                </td>
-              </tr>
-              <tr class="row">
-                <td class="cell">Read</td>
-                <td class="cell">${{selectedRegion.readPricing.priceUSD}}</td>
-                <td class="cell">
-                  <div class="metering_unit_div">
-                    {{selectedRegion.readPricing.meteringUnit}}
-                    <mat-icon svgIcon="info" class="info_icon"
-                              [matTooltip]="selectedRegion.readPricing.meteringTooltip"
-                              matTooltipPosition='right'
-                    ></mat-icon>
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
+                <tr class="row">
+                  <td class="cell">Compute</td>
+                  <td class="cell">${{selectedRegion.computePricing.priceUSD}}</td>
+                  <td class="cell">
+                    <div class="metering_unit_div">
+                      {{selectedRegion.computePricing.meteringUnit}}
+                      <mat-icon svgIcon="info" class="info_icon"
+                                [matTooltip]="selectedRegion.computePricing.meteringTooltip"
+                                matTooltipPosition='right'
+                      ></mat-icon>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="row">
+                  <td class="cell">Write</td>
+                  <td class="cell">${{selectedRegion.writePricing.priceUSD}}</td>
+                  <td class="cell">
+                    <div class="metering_unit_div">
+                      {{selectedRegion.writePricing.meteringUnit}}
+                      <mat-icon svgIcon="info" class="info_icon"
+                                [matTooltip]="selectedRegion.writePricing.meteringTooltip"
+                                matTooltipPosition='right'
+                      ></mat-icon>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="row">
+                  <td class="cell">Read</td>
+                  <td class="cell">${{selectedRegion.readPricing.priceUSD}}</td>
+                  <td class="cell">
+                    <div class="metering_unit_div">
+                      {{selectedRegion.readPricing.meteringUnit}}
+                      <mat-icon svgIcon="info" class="info_icon"
+                                [matTooltip]="selectedRegion.readPricing.meteringTooltip"
+                                matTooltipPosition='right'
+                      ></mat-icon>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div [innerHTML]="meteredPricing.footerNote | markdown" class="metered_pricing_footer_note"></div>
           </div>
         </div>
       </div>

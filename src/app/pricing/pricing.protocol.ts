@@ -26,6 +26,7 @@ interface PricingHero {
 interface MeteredPricing {
   title: string;
   subtitle: string;
+  footerNote: string;
 }
 
 interface PlanBullet {
