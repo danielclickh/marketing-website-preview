@@ -18,17 +18,12 @@ export default function NotFound() {
               <h1 className="hero__title">
                 <Translate
                   id="theme.NotFound.title"
-                  description="The title of the 404 page">
+                  description="ClickHouse Learn 404 Page">
                   Page Not Found
                 </Translate>
               </h1>
               <p>
-                  We could not find what you're looking for! Our docs have recently gone through a major reorganization, so it is possilbe that
-                  the content still exists but the link was changed.
-                  Try the <a href="https://clickhouse.com/docs/en/home/">docs home page</a> or using the search bar above to find what you are looking for.
-              </p>
-              <p>
-                  Please open a Github issue at <a href="https://github.com/ClickHouse/clickhouse-docs/issues">https://github.com/ClickHouse/clickhouse-docs/issues</a> and let us know our link is broken.
+                  We could not find what you're looking for! Please start over at <a href="https://clickhouse.com/learn/">clickhouse.com/learn</a>
               </p>
             </div>
           </div>

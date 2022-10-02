@@ -17,7 +17,7 @@ export function ClickableTile(props: ButtonProps) {
 				<p className="description">{description}</p>
 				{background ? (
 					<img
-						src={`/docs/img/bg_${background}.svg`}
+						src={`/learn/img/bg_${background}.svg`}
 						alt={title}
 						className="clickable_tile_bg"
 					></img>

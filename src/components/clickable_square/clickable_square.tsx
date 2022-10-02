@@ -11,7 +11,7 @@ export function ClickableSquare(props: ButtonProps) {
 	return (
 		<>
 			<Link href={url} target="_self" className="clickable_square">
-				<img src={`/docs/img/integrations/logo_${title}.svg`} alt={title} />
+				<img src={`/learn/img/integrations/logo_${title}.svg`} alt={title} />
 			</Link>
 		</>
 	)
