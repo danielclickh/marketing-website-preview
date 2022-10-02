@@ -26,6 +26,7 @@ interface PricingHero {
 interface MeteredPricing {
   title: string;
   subtitle: string;
+  footerNote: string;
 }
 
 interface PlanBullet {
@@ -59,6 +60,8 @@ interface PricingContactSection {
   title: string;
   subtitle: string;
   contactButton: pricingActionButton;
+  excludeImageLight: StrapiImage;
+  excludeImageDark: StrapiImage;
 }
 
 export interface PricingData {

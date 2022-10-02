@@ -19,6 +19,8 @@ export class PricingService {
         'meteredPricing',
         'contactSection',
         'contactSection.contactButton',
+        'contactSection.excludeImageLight',
+        'contactSection.excludeImageDark',
         'seo',
       ],
     });

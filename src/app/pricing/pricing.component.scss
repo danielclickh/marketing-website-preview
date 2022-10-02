@@ -40,10 +40,8 @@
     }
 
     .plans_container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-column-gap: 32px;
-      grid-row-gap: 32px;
+      display: flex;
+      gap: 32px;
 
       .plan_card {
         width: 100%;
@@ -79,7 +77,6 @@
         }
 
         .plan_items {
-          margin-top: 40px;
           width: 100%;
           display: flex;
           flex-direction: column;
@@ -195,7 +192,6 @@
       background: $bg1;
       max-width: 1150px;
       width: 100%;
-      height: 849.22px;
       margin-top: -149px;
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 6px 4px -4px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
@@ -263,7 +259,7 @@
         }
       }
 
-      .table_wrapper {
+        .table_wrapper {
         border-radius: 8px;
         border: 1px solid $seedSelectBorder;
         overflow: hidden;
@@ -321,6 +317,15 @@
           }
         }
       }
+
+        .metered_pricing_footer_note {
+          margin-top: 16px;
+          font-size: 12px;
+          line-height: 18px;
+          color: $fg3;
+          max-width: 673px;
+          text-align: start;
+        }
     }
     }
   }
@@ -333,37 +338,53 @@
       background: $primary;
       width: 100%;
       max-width: 1150px;
-      height: 342px;
       border-radius: 8px;
       color: #2F2C3A;
+      display: flex;
 
-      .subtitle {
-        margin-top: 32px;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
-        max-width: 640px;
-        margin-bottom: 32px;
-      }
-
-      .contact_button {
-        button {
-          background: #2F2C3A;
-          color: #F6F7FA;
+      .left_content {
+        .subtitle {
+          margin-top: 32px;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+          max-width: 640px;
+          margin-bottom: 32px;
         }
+
+        .contact_button {
+          button {
+            background: #2F2C3A;
+            color: #F6F7FA;
+          }
+        }
+      }
+      .cube_image {
+        margin-left: auto;
+        height: 240px;
+        width: 240px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-right: -120px;
       }
     }
   }
 }
 
-@media only screen and (max-width: 890px) {
+@media only screen and (max-width: 1190px) {
+  .cube_image {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 950px) {
   .pricing {
     padding-bottom: 0;
 
     .hero {
       .plans_container {
-        justify-items: center;
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: center;
 
         .plan_card {
           height: auto;
@@ -394,7 +415,6 @@
     .metered_pricing {
       .container {
         padding: 64px 32px;
-        height: 890px;
 
         .controls_row {
           grid-template-columns: 1fr !important;
@@ -420,7 +440,6 @@
 
       .container {
         border-radius: 0;
-        height: 376px;
         padding: 44px 24px;
       }
     }
