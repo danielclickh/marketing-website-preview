@@ -452,6 +452,10 @@ svg {
   background-color: transparent;
 }
 
+#ot-sdk-btn-floating .ot-floating-button__front, #ot-sdk-btn-floating .ot-floating-button__back {
+  background-color: transparent!important;
+}
+
 #onetrust-consent-sdk #onetrust-banner-sdk {
   background: $bg4;
  
