@@ -25,7 +25,8 @@
   --constWhite: #FFFFFF;
   --constDark: #222222;
 
-  --seedSelectBg: rgba(176, 180, 188, 0.1);
+  --seedSelectBg: #2F2C3A;
+  --seedSelectHoverBG: #373343;
   --seedSelectBorder: rgba(176, 180, 188, 0.1);
   --seedSelectIcon: url('../../../assets/icons/seed_arrow_dark.svg') center center no-repeat;
 }
@@ -57,7 +58,8 @@
   --constWhite: #FFFFFF;
   --constDark: #222222;
 
-  --seedSelectBg: #FAFBFD;
+  --seedSelectBg: #FFFFFF;
+  --seedSelectHoverBG: #F6F7FA;
   --seedSelectBorder: rgba(109, 115, 134, 0.1);
   --seedSelectIcon: url('../../../assets/icons/seed_arrow_light.svg') center center no-repeat;
 }
