@@ -145,7 +145,9 @@ code {
 }
 
 .markdown h1:first-child {
-  font-size: 2.5rem !important;
+  font-size: 68px !important;
+  font-weight: 700;
+  text-align: center;
 }
 
 /* this is for breadcrumbs, except the current page (far right) */
@@ -715,3 +717,12 @@ footer.footer img {
   height: 100%;
 }
 
+article {
+  margin: auto;
+  width: 80%;
+  padding: 10px;
+}
+
+.gradient_title {
+  background-image:linear-gradient(to bottom,#ffc700,#ff7a00);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
