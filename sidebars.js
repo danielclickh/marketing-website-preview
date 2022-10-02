@@ -1,8 +1,9 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  english: [
+/*  english: [
     'index',
   ],
+*/
 };
 
 module.exports = sidebars;
