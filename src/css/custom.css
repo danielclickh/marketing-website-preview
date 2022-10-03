@@ -762,5 +762,8 @@ article {
 }
 
 .gradient_title {
-  background-image:linear-gradient(to bottom,#ffc700,#ff7a00);-webkit-background-clip:text;background-clip:text;color:transparent;
+  background-image:linear-gradient(to bottom,#ffc700,#ff7a00);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
 }
