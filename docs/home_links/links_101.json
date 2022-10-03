@@ -10,18 +10,18 @@
 		"url": "https://clickhouse.com/docs/en/integrations/data-ingestion/"
 	},
 	{
-		"title": "Visualize data",
-		"description": "Now that your data is in ClickHouse, it's time to analyze it",
-		"url": "https://clickhouse.com/docs/en/integrations/data-visualization/"
+		"title": "Understanding Primary Keys",
+		"description": "A deep dive into primary keys and how they are used to build the primary index",
+		"url": "https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes"
 	},
 	{
-		"title": "Optimize data",
-		"description": "Ways to improve the performance of your ClickHouse service",
-		"url": "https://clickhouse.com/docs/en/optimize/"
+		"title": "Using Data Skipping Indexes",
+		"description": "Skipping indexes enable ClickHouse to skip reading significant chunks of data that are guaranteed to have no matching values",
+		"url": "https://clickhouse.com/docs/en/guides/improving-query-performance/skipping-indexes"
 	},
 	{
-		"title": "Migrate data",
-		"description": "Importing your data from an external source into ClickHouse",
-		"url": "https://clickhouse.com/docs/en/integrations/migration/"
+		"title": "Integrate S3 with ClickHouse",
+		"description": "Everything you need to know about moving data between ClickHouse and S3",
+		"url": "https://clickhouse.com/docs/en/integrations/s3/s3-intro"
 	}
 ]
