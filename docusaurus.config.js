@@ -218,7 +218,24 @@ const config = {
 
   plugins: [
     'remark-docusaurus-tabs',
-  ],
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {from: '/lessons/gettingstarted',to: '/'},
+          {from: '/lessons/whatsnew-clickhouse-21.11',to: '/'},
+          {from: '/lessons/connect-metabase-to-clickhouse',to: '/'},
+          {from: '/lessons/covidtutorial-grafana',to: '/'},
+          {from: '/lessons/covidtutorial-superset',to: '/'},
+          {from: '/lessons/logsvector',to: '/'},
+          {from: '/lessons/whatsnew-clickhouse-21.10',to: '/'},
+          {from: '/lessons/whatsnew-clickhouse-21.9',to: '/'},
+          {from: '/lessons/postgres-clickhouse-replication',to: '/'},
+          {from: '/lessons/connect-tableau-to-clickhouse',to: '/'},
+        ]
+      },
+    ],
+  ]
 };
 
 module.exports = config;
