@@ -612,6 +612,16 @@ footer.footer img {
   margin-bottom: 32px;
 }
 
+.two_column_home_videos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  grid-gap: 24px;
+  column-gap: 32px;
+  row-gap: 1px;
+  margin-bottom: 32px;
+}
+
 @media screen and (max-width: 600px) {
   .two_column_home_list {
     grid-template-columns: repeat(1, minmax(0, 1fr))
@@ -626,6 +636,34 @@ footer.footer img {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   border: 2px solid transparent;
+}
+
+.sub_tile {
+  background: var(--c2);
+  position: relative;
+  border-radius: 8px;
+  padding: 16px 24px 2px 24px;
+  transition: all 0.3s ease-in-out;
+  border: 2px solid transparent;
+}
+
+.sub_tile .title, .sub_tile .description {
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+}
+
+.sub_tile .description {
+  font-size: 14px;
+  color: var(--c4);
+  max-width: 80%;
+}
+
+.sub_tile .clickable_tile_bg {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  background: transparent;
 }
 
 .clickable_tile:hover, .clickable_square:hover {
