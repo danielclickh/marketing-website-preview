@@ -52,7 +52,7 @@ const routes: Routes = [
           {path: 'legal/privacy-policy', component: RichContentPageComponent},
           {path: 'trust/security', component: RichContentPageComponent},
           {path: 'support/agreement', component: RichContentPageComponent},
-          {path: 'support/consulting-agreement', component: RichContentPageComponent},
+          {path: 'support/professional-services-agreement', component: RichContentPageComponent},
           {path: 'support/policy', component: RichContentPageComponent},
           {path: 'support/platforms', component: RichContentPageComponent},
           {path: 'support/program', component: RichContentPageComponent},
