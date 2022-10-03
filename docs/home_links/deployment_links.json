@@ -7,7 +7,7 @@
 		"vimeo_id": "751409158?h=54cfbce3b9"
 	},
 	{
-	"title": "Tutorial",
+	"title": "ClickHouse Tutorial",
 	"description": "Create a table, insert two million rows of data, then run queries on the dataset",
 	"url": "https://clickhouse.com/docs/en/getting-started/example-datasets/",
 	"background": "cloud"
