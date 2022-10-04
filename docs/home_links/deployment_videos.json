@@ -1,0 +1,26 @@
+[
+	{
+		"title": "Quick Start",
+		"vimeo_id": "751409158?h=54cfbce3b9"
+	},
+	{
+		"title": "Inserting Data into ClickHouse",
+		"vimeo_id": "754267391?h=71555a7bbf"
+	},
+	{
+		"title": "Migrating to ClickHouse",
+		"vimeo_id": "753082620?h=eb566c8c08"
+	},
+	{
+		"title": "Data Storage",
+		"vimeo_id": "756453548?h=de1a7323f4"
+	},
+	{
+		"title": "Primary Keys",
+		"vimeo_id": "756519004?h=4caedd49ac"
+	},
+	{
+		"title": "Partitions",
+		"vimeo_id": "750465042?h=bcde174fa1"
+	}
+]

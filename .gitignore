@@ -1,9 +1,18 @@
-public
-resources
-# Local Netlify folder
-.netlify
-TODO
-content/.DS_Store
-content/docs/gettingstarted/images/.DS_Store
-content/docs/.DS_Store
-.DS_Store
+node_modules
+.docusaurus
+.yarnbuild.out
+build
+docs/en/development
+docs/en/engines
+docs/en/getting-started
+docs/en/interfaces
+docs/en/operations
+docs/en/sql-reference
+docs/ru
+docs/zh
+docs/_clients
+
+**/.DS_Store
+run.sh
+cleanup.sh
+update.sh
