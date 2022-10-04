@@ -12,14 +12,13 @@
   }
 }
 
-
 .pricing {
   background: $bg2;
   padding-bottom: 88px;
 
   .hero {
     text-align: center;
-    padding: 88px 0;
+    padding: 70px 0;
 
     .title {
       font-weight: 700;
@@ -46,7 +45,7 @@
       .plan_card {
         width: 100%;
         max-width: 320px;
-        height: 575px;
+        height: 465px;
         background: $bg1;
         padding: 40px;
         border-width: 0 1px 1px 1px;
@@ -134,7 +133,7 @@
 
   .philosophy {
     text-align: center;
-    padding: 104px 0 265px 0;
+    padding: 70px 0 235px 0;
     background: $bg3;
     color: #FFFFFF;
 
@@ -143,7 +142,7 @@
     }
 
     .columns_wrapper {
-      margin-top: 72px;
+      margin-top: 64px;
       display: grid;
       align-items: center;
       grid-column-gap: 149px;
@@ -188,7 +187,7 @@
     text-align: center;
 
     .container {
-      padding: 80px 106px;
+      padding: 70px 106px;
       background: $bg1;
       max-width: 1150px;
       width: 100%;
