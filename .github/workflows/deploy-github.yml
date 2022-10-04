@@ -10,23 +10,27 @@ jobs:
   deploy:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
-#          cache: 'npm'
+          node-version: 18
 
       - name: Install dependencies
         run: npm install
 
-#      - name: Check for linting errors
-#        run: npm test
-
-      - name: Build production website
-        run: npm run build
+      # Install and build Docusaurus website
+      - name: Build Docusaurus website
+        run: |
+          npm install -g yarn
+          yarn install
+          export NODE_OPTIONS="--max_old_space_size=4096"
+          yarn build 2>&1 | tee -a yarnbuild.out
+          if grep -q Error yarnbuild.out; then { echo "Error in output" ; exit 1; } ; fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: ./build
+          enable_jekyll: false
+
