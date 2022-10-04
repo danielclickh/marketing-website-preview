@@ -5,6 +5,7 @@ interface PricingDimension {
   priceUSD: number;
   meteringUnit: string;
   meteringTooltip: string;
+  tieredPricing?: string;
 }
 
 export interface RegionPricing {

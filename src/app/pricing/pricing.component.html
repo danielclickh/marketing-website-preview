@@ -91,7 +91,10 @@
                 </tr>
                 <tr class="row">
                   <td class="cell">Compute</td>
-                  <td class="cell">${{selectedRegion.computePricing.priceUSD}}</td>
+                  <td class="cell">
+                    ${{selectedRegion.computePricing.priceUSD}}
+                    <div *ngIf="selectedRegion.computePricing.tieredPricing" class="tiered_pricing">{{selectedRegion.computePricing.tieredPricing}}</div>
+                  </td>
                   <td class="cell">
                     <div class="metering_unit_div">
                       {{selectedRegion.computePricing.meteringUnit}}
