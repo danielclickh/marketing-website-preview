@@ -72,12 +72,6 @@ const config = {
             ]
           },
           {
-            type: 'doc',
-            docId: 'index',
-            position: 'left',
-            label: 'Docs',
-          },
-          {
             position: 'left',
             label: 'Use Cases',
             to: 'https://clickhouse.com/customer-stories'
@@ -109,6 +103,17 @@ const config = {
               },
             ]
           },
+          {
+            position: 'left',
+            label: 'Docs',
+            to: 'https://clickhouse.com/docs/',
+          },
+          {
+            position: 'left',
+            label: 'Pricing',
+            to: 'https://clickhouse.com/pricing',
+          },
+
         ],
       },
       footer: {

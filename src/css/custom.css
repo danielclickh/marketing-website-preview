@@ -89,10 +89,11 @@
   font-family: Inter,sans-serif ;
  }
 
-.text--truncate {
-  font-family: Inter,sans-serif;
+ .navbar__title {
+  font-family: Hind Siliguri,sans-serif;
   font-size: 24px;
   font-weight: 500;
+  line-height: 29px;
 }
 
  /* hero settings */
@@ -494,6 +495,7 @@ footer.footer img {
   font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
   font-size: 14px;
   font-weight: 600;
+  line-height: 21px;
 }
 .search-result-match {
   font-size: 1.3rem;
@@ -767,3 +769,14 @@ article {
   background-clip:text;
   color:transparent;
 }
+
+/* spacing for the navbar items */
+@media (min-width: 997px) {
+  .navbar__item {
+    margin-left: 25px;
+  }
+}
+.navbar__brand {
+  margin-right: 10rem;
+}
+
