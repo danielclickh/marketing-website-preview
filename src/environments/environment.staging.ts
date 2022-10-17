@@ -1,4 +1,7 @@
-export const environment = {
+import {WebsiteEnvironment} from './environment-type';
+
+export const environment: WebsiteEnvironment = {
+  siteUrl: 'https://staging.clickhouse.com',
   production: false,
   ssrApiStrapiBaseUrl: 'http://localhost:1337', // This is used for the prerenderer
   strapiBaseUrl: '', // Keeping it empty because CloudFront redirects from /api to the CMS

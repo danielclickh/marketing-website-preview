@@ -1,4 +1,5 @@
 export const environment = {
+  siteUrl: 'https://clickhouse.com',
   production: true,
   ssrApiStrapiBaseUrl: 'http://localhost:1337', // This is used for the prerenderer
   strapiBaseUrl: '', // Keeping it empty because CloudFront redirects from /uploads to the CMS

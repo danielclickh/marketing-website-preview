@@ -2,7 +2,10 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
+import {WebsiteEnvironment} from './environment-type';
+
+export const environment: WebsiteEnvironment = {
+  siteUrl: 'http://localhost:4200',
   production: false,
   ssrApiStrapiBaseUrl: 'http://localhost:1337', // This is used for the prerenderer
   strapiBaseUrl: 'http://localhost:1337',

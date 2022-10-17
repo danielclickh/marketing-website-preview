@@ -1,10 +1,11 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {BlogPost} from "../blog.protocol";
-import {BlogService} from "../blog.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {ActivatedRoute, Router} from '@angular/router';
+import {BlogPost} from '../blog.protocol';
+import {BlogService} from '../blog.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import copy from 'copy-to-clipboard';
-import {isPlatformServer} from "@angular/common";
+import {isPlatformServer} from '@angular/common';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-blog-post-page',
@@ -13,7 +14,7 @@ import {isPlatformServer} from "@angular/common";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BlogPostPageComponent implements OnInit {
-  blogPost?: BlogPost
+  blogPost?: BlogPost;
   allBlogPosts?: Array<BlogPost>;
 
   constructor(private readonly blogService: BlogService,
@@ -39,37 +40,41 @@ export class BlogPostPageComponent implements OnInit {
 
   copyToClipboard(): void {
     this.snackBar.open('Copied to clipboard', 'Dismiss', {duration: 5000});
-    copy(window.location.href);
+    copy(this.pageUrl);
   }
 
   getTwitterLink() {
     if (isPlatformServer(this.platformId)) return '/';
-    const twitterBaseUrl = "https://twitter.com/intent/tweet"
-    const escapedUrl = encodeURIComponent(window.location.href);
+    const twitterBaseUrl = 'https://twitter.com/intent/tweet';
+    const escapedUrl = encodeURIComponent(this.pageUrl);
     return `${twitterBaseUrl}?text=${escapedUrl}`;
   }
 
   getFacebookLink() {
     if (isPlatformServer(this.platformId)) return '/';
-    const facebookBaseUrl = "https://www.facebook.com/sharer/sharer.php"
-    const escapedUrl = encodeURIComponent(window.location.href);
+    const facebookBaseUrl = 'https://www.facebook.com/sharer/sharer.php';
+    const escapedUrl = encodeURIComponent(this.pageUrl);
     return `${facebookBaseUrl}?u=${escapedUrl}`;
   }
 
   getLinkedinLink() {
     if (isPlatformServer(this.platformId)) return '/';
-    const linkedinBaseUrl = "https://www.linkedin.com/sharing/share-offsite/"
-    const escapedUrl = encodeURIComponent(window.location.href);
+    const linkedinBaseUrl = 'https://www.linkedin.com/sharing/share-offsite/';
+    const escapedUrl = encodeURIComponent(this.pageUrl);
     return `${linkedinBaseUrl}?url=${escapedUrl}`;
   }
 
   getOtherBlogPosts(): Array<BlogPost> {
     return this.allBlogPosts!
       .filter((post) => post.id !== this.blogPost!.id)
-      .slice(0, 3)
+      .slice(0, 3);
   }
 
   getBlogPostUrl(blogPost: BlogPost) {
     return this.blogService.getBlogPostUrl(blogPost);
+  }
+
+  private get pageUrl(): string {
+    return environment.siteUrl + this.router.url;
   }
 }
