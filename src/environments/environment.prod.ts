@@ -1,4 +1,6 @@
-export const environment = {
+import {WebsiteEnvironment} from './environment-type';
+
+export const environment: WebsiteEnvironment = {
   siteUrl: 'https://clickhouse.com',
   production: true,
   ssrApiStrapiBaseUrl: 'http://localhost:1337', // This is used for the prerenderer
