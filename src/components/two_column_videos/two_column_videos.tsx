@@ -18,6 +18,7 @@ export function TwoColumnVideos(props: ListProps) {
 					background={item.background}
 				/> */}
 				<div className="video_container">
+				    <a href={"#" + item.anchor}></a>
 					<iframe
 						className="video"
 						src={"https://player.vimeo.com/video/" + item.vimeo_id}
