@@ -1,9 +1,43 @@
 @import 'colors';
 @import 'mixins';
 
-.header {
+.top_banner {
   position: fixed;
   top: 0;
+  background: $primary;
+  color: $constDark;
+  display: flex;
+  width: 100%;
+  text-align: center;
+  height: 24px;
+  z-index: 20;
+  line-height: 1.7;
+  font-size: 14px;
+  font-weight: 500;
+
+  & > .text {
+    text-align: center;
+    width: 100%;
+
+    a {
+      color: $constDark;
+      cursor: pointer!important;
+  
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer!important;
+      }
+    }
+  }
+
+  @include customBreakpointCss('max-width: 768px') {
+    display: none;
+  }
+}
+
+.header {
+  position: fixed;
+  top: 24px;
   left: 0;
   z-index: 20;
   height: 64px;
@@ -11,6 +45,10 @@
   background: rgba($headerBg, 0.8);
   backdrop-filter: blur(16px);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+
+  @include customBreakpointCss('max-width: 768px') {
+    top: 0;
+  }
 
   & > .container {
     display: flex;
