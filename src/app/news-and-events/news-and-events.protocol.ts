@@ -42,6 +42,7 @@ export interface Event {
   slug?: string;
   shortDescription: string;
   description: string;
+  richDescription: string;
   localDatetime: string;
   datetimeAndTimezoneString: string;
   viewMoreDetailsText: string;

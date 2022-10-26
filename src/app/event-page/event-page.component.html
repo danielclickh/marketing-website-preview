@@ -18,7 +18,8 @@
         <div class="section_metadata">
           <div class="pretitle">{{event.category}}</div>
           <div class="title">{{event.title}}</div>
-          <div class="description">{{event.description}}</div>
+          <div *ngIf="!event.richDescription" class="description">{{event.description}}</div>
+          <div *ngIf="event.richDescription" class="description" [innerHTML]="event.richDescription | markdown"></div>
         </div>
 
         <div *ngIf="event.hostedBy as hostedBy" class="hosted_by">
@@ -44,7 +45,7 @@
         </div>
       </div>
       <div *ngIf="event.form && (!event.eventEnded || event.form.type === 'recordedGatedContent')" class="right">
-      
+
         <div *ngIf="showVimeoVideo" class="subscribed">
           <div class="success-container">
             <div class="success_icon"><mat-icon class="icon"  svgIcon="check_icon"></mat-icon></div>
