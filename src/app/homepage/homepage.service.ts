@@ -16,6 +16,7 @@ export class HomepageService {
         'hero.ctaButton',
         'hero.darkBackgroundIcon',
         'hero.lightBackgroundIcon',
+        'hero.advancedCallout',
         'hero.highlights',
         'aboutClickhouse',
         'aboutClickhouse.features',
