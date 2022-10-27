@@ -95,6 +95,66 @@
           height: 47px;
         }
       }
+
+      .advanced_cta {
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.13);
+        border-radius: 8px;
+        display: flex;
+        padding: 32px;
+        margin: 42px 0 0px;
+        background: $bg1;
+        max-width: 668px;
+      
+        @include customBreakpointCss('max-width: 890px') {
+          max-width: none;
+          width: 100%;
+          box-sizing: border-box;
+          padding-right: 32px;
+          padding-left: 32px
+        }
+
+        @include customBreakpointCss('max-width: 732px') {
+          flex-direction: column;
+          gap: 16px;
+          text-align: center;
+        }
+
+        .info_container {
+          border-right: 1px solid $bg7;
+          padding-right: 32px;
+
+          @include customBreakpointCss('max-width: 732px') {
+            border-right: none;
+            padding-right: 0;
+          }
+        }
+
+        .button_container {
+          display: flex;
+          flex-grow: 1;
+          padding-left: 32px;
+          align-items: center;
+          justify-content: center;
+
+          @include customBreakpointCss('max-width: 732px') {
+            padding-left: 0;
+          }
+        }
+
+        .cta_title {
+          font-size: 16px;
+          font-weight: 600;
+          margin-bottom: 4px;
+        }
+
+        .cta_description {
+          font-size: 16px;
+          font-weight: regular;
+          line-height: 24px;
+          color: $fg3;
+        }
+      }
+
     }
   }
 
