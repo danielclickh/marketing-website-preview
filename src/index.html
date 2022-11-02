@@ -20,7 +20,7 @@
   <script type="text/javascript">
     function OptanonWrapper() { }
   </script>
-  <!-- CookiePro Cookies Consent Notice end for clickhouse.com --> 
+  <!-- CookiePro Cookies Consent Notice end for clickhouse.com -->
 </head>
 <body>
 <!--suppress ES6ConvertVarToLetConst -->
@@ -69,6 +69,16 @@
         analytics._loadOptions = e
       };
       analytics.SNIPPET_VERSION = "4.15.3";
+    }
+
+    // change all clickouse.cloud link to clickhouse.cloud/?ajs_aid=<anonymous_id_from_segment>
+    const anchors = document.getElementsByTagName("a");
+    for (let i = 0; i < anchors.length; i++) {
+      if(anchors[i].href.includes('clickhouse.cloud')){
+        const searchParams = new URL(anchors[i].href).searchParams;
+        searchParams.set("ajs_aid", analytics.user().anonymousId())
+        anchors[i].href = `${anchors[i].href}?${searchParams.toString()}`
+      }
     }
   }();
 </script>
