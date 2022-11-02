@@ -14,8 +14,6 @@ export interface RegionPricing {
   regionFlagPNG: StrapiImage;
   storagePricing: PricingDimension;
   computePricing: PricingDimension;
-  writePricing: PricingDimension;
-  readPricing: PricingDimension;
 }
 
 interface PricingHero {

@@ -50,8 +50,6 @@ export class PricingService {
         'regionFlagPNG',
         'storagePricing',
         'computePricing',
-        'writePricing',
-        'readPricing',
       ],
       fields: [
         'cloudProvider',
