@@ -30,6 +30,8 @@
   --seedSelectHoverBG: #373343;
   --seedSelectBorder: rgba(176, 180, 188, 0.1);
   --seedSelectIcon: url('../../../assets/icons/seed_arrow_dark.svg') center center no-repeat;
+
+  --advancedCalloutBG: #373343;
 }
 
 .light {
@@ -64,6 +66,8 @@
   --seedSelectHoverBG: #F6F7FA;
   --seedSelectBorder: rgba(109, 115, 134, 0.1);
   --seedSelectIcon: url('../../../assets/icons/seed_arrow_light.svg') center center no-repeat;
+
+  --advancedCalloutBG: #FFFFFF;
 }
 
 $headerBg: var(--headerBg);
@@ -94,3 +98,4 @@ $seedSelectBg: var(--seedSelectBg);
 $seedSelectHoverBG: var(--seedSelectHoverBG);
 $seedSelectBorder: var(--seedSelectBorder);
 $seedSelectIcon: var(--seedSelectIcon);
+$advancedCalloutBG: var(--advancedCalloutBG);
