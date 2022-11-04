@@ -125,10 +125,6 @@
           if (anchors[i].href.includes("clickhouse.cloud")) {
             const url = new URL(anchors[i].href);
 
-            if (url.searchParams.has("ajs_aid")) {
-              return;
-            }
-
             url.searchParams.set("ajs_aid", analytics.user().anonymousId());
             anchors[i].href = url.href;
           }
