@@ -102,7 +102,7 @@
         display: flex;
         padding: 32px;
         margin: 42px 0 0px;
-        background: $bg1;
+        background: $advancedCalloutBG;
         max-width: 668px;
       
         @include customBreakpointCss('max-width: 890px') {
