@@ -1,77 +1,154 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Fast Open-Source OLAP DBMS - ClickHouse</title>
-  <base href="/">
-  <meta content="width=device-width, initial-scale=1" name="viewport">
-  <link href="favicon.ico" rel="icon" type="image/x-icon">
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        media="print"
-        onload="this.onload=null;this.removeAttribute('media');"
-        rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
-        media="print"
-        onload="this.onload=null;this.removeAttribute('media');"
-        rel="stylesheet">
-  <!-- CookiePro Cookies Consent Notice start for clickhouse.com -->
-  <script src="https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="dedccc4b-7ab2-47de-935c-073b23b1d9b7" ></script>
-  <script type="text/javascript">
-    function OptanonWrapper() { }
-  </script>
-  <!-- CookiePro Cookies Consent Notice end for clickhouse.com --> 
-</head>
-<body>
-<!--suppress ES6ConvertVarToLetConst -->
-<script>
-  // Setting the initial theme
-  try {
-    var theme = localStorage.getItem('ch_theme');
-    if (!theme) {
-      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    document.body.classList.remove('light', 'dark');
-    document.body.classList.add(theme);
-  } catch (e) {
-    console.error(e);
-  }
-</script>
+  <head>
+    <meta charset="utf-8" />
+    <title>Fast Open-Source OLAP DBMS - ClickHouse</title>
+    <base href="/" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link href="favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      media="print"
+      onload="this.onload=null;this.removeAttribute('media');"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+      media="print"
+      onload="this.onload=null;this.removeAttribute('media');"
+      rel="stylesheet"
+    />
+    <!-- CookiePro Cookies Consent Notice start for clickhouse.com -->
+    <script
+      src="https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js"
+      type="text/javascript"
+      charset="UTF-8"
+      data-domain-script="dedccc4b-7ab2-47de-935c-073b23b1d9b7"
+    ></script>
+    <script type="text/javascript">
+      function OptanonWrapper() {}
+    </script>
+    <!-- CookiePro Cookies Consent Notice end for clickhouse.com -->
+  </head>
+  <body>
+    <!--suppress ES6ConvertVarToLetConst -->
+    <script>
+      // Setting the initial theme
+      try {
+        var theme = localStorage.getItem("ch_theme");
+        if (!theme) {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+        document.body.classList.remove("light", "dark");
+        document.body.classList.add(theme);
+      } catch (e) {
+        console.error(e);
+      }
+    </script>
 
-<app-root></app-root>
+    <app-root></app-root>
 
-<!--suppress ES6ConvertVarToLetConst -->
-<script>
-  !function () {
-    var analytics = window.analytics = window.analytics || [];
-    if (!analytics.initialize) if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice."); else {
-      analytics.invoked = !0;
-      analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on", "addSourceMiddleware", "addIntegrationMiddleware", "setAnonymousId", "addDestinationMiddleware"];
-      analytics.factory = function (e) {
-        return function () {
-          var t = Array.prototype.slice.call(arguments);
-          t.unshift(e);
-          analytics.push(t);
-          return analytics
+    <!--suppress ES6ConvertVarToLetConst -->
+    <script>
+      !(function () {
+        var analytics = (window.analytics = window.analytics || []);
+        if (!analytics.initialize)
+          if (analytics.invoked)
+            window.console &&
+              console.error &&
+              console.error("Segment snippet included twice.");
+          else {
+            analytics.invoked = !0;
+            analytics.methods = [
+              "trackSubmit",
+              "trackClick",
+              "trackLink",
+              "trackForm",
+              "pageview",
+              "identify",
+              "reset",
+              "group",
+              "track",
+              "ready",
+              "alias",
+              "debug",
+              "page",
+              "once",
+              "off",
+              "on",
+              "addSourceMiddleware",
+              "addIntegrationMiddleware",
+              "setAnonymousId",
+              "addDestinationMiddleware",
+            ];
+            analytics.factory = function (e) {
+              return function () {
+                var t = Array.prototype.slice.call(arguments);
+                t.unshift(e);
+                analytics.push(t);
+                return analytics;
+              };
+            };
+            for (var e = 0; e < analytics.methods.length; e++) {
+              var key = analytics.methods[e];
+              analytics[key] = analytics.factory(key);
+            }
+            analytics.load = function (key, e) {
+              var t = document.createElement("script");
+              t.type = "text/javascript";
+              t.async = !0;
+              t.src =
+                "https://cdn.segment.com/analytics.js/v1/" +
+                key +
+                "/analytics.min.js";
+              var n = document.getElementsByTagName("script")[0];
+              n.parentNode.insertBefore(t, n);
+              analytics._loadOptions = e;
+            };
+            analytics.SNIPPET_VERSION = "4.15.3";
+          }
+      })();
+
+      /**
+       * Update clickhouse.cloud links to include anonymous id parameter
+       */
+      const changeClickhouseCloudLinks = () => {
+        if (!analytics.user) {
+          return;
+        }
+
+        const anchors = document.getElementsByTagName("a");
+        for (let i = 0; i < anchors.length; i++) {
+          if (anchors[i].href.includes("clickhouse.cloud")) {
+            const url = new URL(anchors[i].href);
+
+            url.searchParams.set("ajs_aid", analytics.user().anonymousId());
+            anchors[i].href = url.href;
+          }
         }
       };
-      for (var e = 0; e < analytics.methods.length; e++) {
-        var key = analytics.methods[e];
-        analytics[key] = analytics.factory(key)
-      }
-      analytics.load = function (key, e) {
-        var t = document.createElement("script");
-        t.type = "text/javascript";
-        t.async = !0;
-        t.src = "https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";
-        var n = document.getElementsByTagName("script")[0];
-        n.parentNode.insertBefore(t, n);
-        analytics._loadOptions = e
-      };
-      analytics.SNIPPET_VERSION = "4.15.3";
-    }
-  }();
-</script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
-</body>
+
+      window.addEventListener("DOMContentLoaded", function () {
+        const htmlNode = document.querySelector("html");
+
+        const observer = new MutationObserver(function (mutations) {
+          mutations.forEach(changeClickhouseCloudLinks);
+        });
+
+        const config = {
+          childList: true,
+          subtree: true,
+        };
+
+        observer.observe(htmlNode, config);
+      });
+    </script>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"
+    ></script>
+  </body>
 </html>
