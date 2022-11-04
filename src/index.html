@@ -111,15 +111,44 @@
             analytics.SNIPPET_VERSION = "4.15.3";
           }
       })();
-      // change all clickouse.cloud link to clickhouse.cloud/?ajs_aid=<anonymous_id_from_segment>
-      const anchors = document.getElementsByTagName("a");
-      for (let i = 0; i < anchors.length; i++) {
-        if (anchors[i].href.includes("clickhouse.cloud")) {
-          const searchParams = new URL(anchors[i].href).searchParams;
-          searchParams.set("ajs_aid", analytics.user().anonymousId());
-          anchors[i].href = `${anchors[i].href}?${searchParams.toString()}`;
+
+      /**
+       * Update clickhouse.cloud links to include anonymous id parameter
+       */
+      const changeClickhouseCloudLinks = () => {
+        if (!analytics.user) {
+          return;
         }
-      }
+
+        const anchors = document.getElementsByTagName("a");
+        for (let i = 0; i < anchors.length; i++) {
+          if (anchors[i].href.includes("clickhouse.cloud")) {
+            const searchParams = new URL(anchors[i].href).searchParams;
+
+            if (searchParams.has("ajs_aid")) {
+              return;
+            }
+
+            searchParams.set("ajs_aid", analytics.user().anonymousId());
+            anchors[i].href = `${anchors[i].href}?${searchParams.toString()}`;
+          }
+        }
+      };
+
+      window.addEventListener("DOMContentLoaded", function () {
+        const htmlNode = document.querySelector("html");
+
+        const observer = new MutationObserver(function (mutations) {
+          mutations.forEach(changeClickhouseCloudLinks);
+        });
+
+        const config = {
+          childList: true,
+          subtree: true,
+        };
+
+        observer.observe(htmlNode, config);
+      });
     </script>
     <script
       defer
