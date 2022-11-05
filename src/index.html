@@ -112,10 +112,21 @@
           }
       })();
 
+      const throttle = (callback, limit) => {
+        let inTrhottle;
+        return (...args) => {
+          if (!inTrhottle) {
+            callback.apply(null, args);
+            inTrhottle = true;
+            setTimeout(() => (inTrhottle = false), limit);
+          }
+        };
+      };
+
       /**
        * Update clickhouse.cloud links to include anonymous id parameter
        */
-      const changeClickhouseCloudLinks = () => {
+      const changeClickhouseCloudLinks = throttle(() => {
         if (!analytics.user) {
           return;
         }
@@ -129,18 +140,17 @@
             anchors[i].href = url.href;
           }
         }
-      };
+      }, 100);
 
       window.addEventListener("DOMContentLoaded", function () {
         const htmlNode = document.querySelector("html");
 
-        const observer = new MutationObserver(function (mutations) {
-          mutations.forEach(changeClickhouseCloudLinks);
-        });
+        const observer = new MutationObserver(changeClickhouseCloudLinks);
 
         const config = {
           childList: true,
           subtree: true,
+          attributes: false,
         };
 
         observer.observe(htmlNode, config);
