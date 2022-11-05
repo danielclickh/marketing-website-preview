@@ -129,7 +129,6 @@
        * Update clickhouse.cloud links to include anonymous id parameter
        */
       const changeClickhouseCloudLinks = throttle(() => {
-        console.log("changing links");
         if (!analytics.user) {
           return;
         }
