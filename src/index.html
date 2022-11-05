@@ -116,9 +116,11 @@
         let inTrhottle;
         return (...args) => {
           if (!inTrhottle) {
-            callback(args);
             inTrhottle = true;
-            setTimeout(() => (inTrhottle = false), limit);
+            setTimeout(() => {
+              inTrhottle = false;
+              callback(...args);
+            }, limit);
           }
         };
       };
@@ -127,6 +129,7 @@
        * Update clickhouse.cloud links to include anonymous id parameter
        */
       const changeClickhouseCloudLinks = throttle(() => {
+        console.log("changing links");
         if (!analytics.user) {
           return;
         }
