@@ -27,6 +27,10 @@ export class BlogPostPageComponent implements OnInit {
 
   async ngOnInit() {
     const blogPostIdOrSlug = this.activatedRoute.snapshot.params['blogPostIdOrSlug'];
+    if (blogPostIdOrSlug === 'en') {
+      await this.router.navigateByUrl('/blog');
+      return;
+    }
     const slug = isNaN(blogPostIdOrSlug) ? blogPostIdOrSlug : undefined;
     const id = !isNaN(blogPostIdOrSlug) ? parseInt(blogPostIdOrSlug) : undefined;
     this.blogPost = await this.blogService.getBlogPost(slug, id);
