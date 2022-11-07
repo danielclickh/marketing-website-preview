@@ -24,11 +24,14 @@
   --gradient2: #373343;
   --constWhite: #FFFFFF;
   --constDark: #222222;
+  --constPrimaryButtonText: #4B2A04;
 
   --seedSelectBg: #2F2C3A;
   --seedSelectHoverBG: #373343;
   --seedSelectBorder: rgba(176, 180, 188, 0.1);
   --seedSelectIcon: url('../../../assets/icons/seed_arrow_dark.svg') center center no-repeat;
+
+  --advancedCalloutBG: #373343;
 }
 
 .light {
@@ -57,11 +60,14 @@
   --gradient2: #F6F7FA;
   --constWhite: #FFFFFF;
   --constDark: #222222;
+  --constPrimaryButtonText: #4B2A04;
 
   --seedSelectBg: #FFFFFF;
   --seedSelectHoverBG: #F6F7FA;
   --seedSelectBorder: rgba(109, 115, 134, 0.1);
   --seedSelectIcon: url('../../../assets/icons/seed_arrow_light.svg') center center no-repeat;
+
+  --advancedCalloutBG: #FFFFFF;
 }
 
 $headerBg: var(--headerBg);
@@ -87,8 +93,9 @@ $gradient1: var(--gradient1);
 $gradient2: var(--gradient2);
 $constWhite: var(--constWhite);
 $constDark: var(--constDark);
+$constPrimaryButtonText: var(--constPrimaryButtonText);
 $seedSelectBg: var(--seedSelectBg);
 $seedSelectHoverBG: var(--seedSelectHoverBG);
 $seedSelectBorder: var(--seedSelectBorder);
 $seedSelectIcon: var(--seedSelectIcon);
-
+$advancedCalloutBG: var(--advancedCalloutBG);

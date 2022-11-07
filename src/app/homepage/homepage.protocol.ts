@@ -7,12 +7,19 @@ export interface HomepageHeroHighlight extends StrapiLink {
   buttonText: string;
 }
 
+export interface HomepageAdvancedCallout extends StrapiLink {
+  title: string;
+  description: string;
+  buttonText: string;
+}
+
 export interface HomepageHero {
   title: string;
   description: string;
   ctaButton: StrapiButton;
   darkBackgroundIcon: StrapiImage;
   lightBackgroundIcon: StrapiImage;
+  advancedCallout: HomepageAdvancedCallout;
   highlights: Array<HomepageHeroHighlight>;
 }
 
