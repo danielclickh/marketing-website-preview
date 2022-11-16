@@ -1,0 +1,1 @@
+export { SuiCard } from './basic_card';

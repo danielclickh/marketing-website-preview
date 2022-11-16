@@ -1,0 +1,1 @@
+export { SuiSimpleModal } from './simple_modal';

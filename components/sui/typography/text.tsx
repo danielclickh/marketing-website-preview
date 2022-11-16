@@ -1,0 +1,36 @@
+import { sizeCalculator, colourCalculator } from './calculator'
+
+export type TextProps = {
+  color?: string | undefined
+  dark_color?: string
+  size?: string
+  uppercase?: boolean
+  padding_0?: boolean
+  className: string
+}
+
+// @ts-ignore
+export const SuiText = ({ ...TextProps }) => {
+  const {
+    children,
+    color,
+    dark_color,
+    size,
+    weight,
+    uppercase,
+    padding_0,
+    className
+  } = TextProps
+  const padding = padding_0 ? 'py-0' : 'py-2'
+  const isUppercase = uppercase ? 'uppercase' : 'normal-case'
+
+  return (
+    <div
+      className={`${sizeCalculator(size)} ${className && className}
+        font-${weight ? weight : 'normal'} ${isUppercase} ${padding}
+        ${colourCalculator(color, 'text-web-light-c5 dark:text-web-dark-c5')} 
+      }`}>
+      {children}
+    </div>
+  )
+}
