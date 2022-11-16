@@ -1,0 +1,1 @@
+export { SuiSpacer } from './spacer';
