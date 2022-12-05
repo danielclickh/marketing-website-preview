@@ -1,0 +1,7 @@
+
+.category-tile {
+  @apply text-web-light-c4 dark: text-web-dark-c4 text-sm px-4 py-2 font-medium rounded-md cursor-pointer hover:text-web-light-c5 dark:hover:text-web-dark-c5 hover:bg-web-light-c2 hover:dark:bg-web-dark-c2 transition-all duration-500 ease-in-out transform;
+  &.active {
+    @apply bg-primary text-web-light-c1 dark:text-web-dark-c1;
+  }
+}

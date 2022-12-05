@@ -16,6 +16,7 @@ type ButtonProps = {
   border?: boolean
   borderColor?: string
   scroll?: boolean
+  target?: string
 }
 
 export function SuiButton(props: ButtonProps) {
@@ -91,10 +92,12 @@ export function SuiButton(props: ButtonProps) {
   return (
     <>
       {props.path ? (
-        <Link href={props.path} passHref scroll={props.scroll}>
-          <a>
-            <ButtonContent />
-          </a>
+        <Link
+          href={props.path}
+          passHref
+          scroll={props.scroll}
+          target={props.target}>
+          <ButtonContent />
         </Link>
       ) : (
         <ButtonContent />

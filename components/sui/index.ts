@@ -1,8 +1,9 @@
+'use client'
 export { SuiAlert } from './alerts'
 export { SuiBigStat } from './big_stat'
 export { SuiButton } from './buttons/button'
-export { SuiCard } from './cards/basic';
-export { SuiAlternateCard } from './cards/alternate';
+export { SuiCard } from './cards/basic'
+export { SuiAlternateCard } from './cards/alternate'
 export { LineChart } from './charts/default'
 export { SuiCheckbox } from './checkbox'
 export { SuiCodeblock } from './codeblock'

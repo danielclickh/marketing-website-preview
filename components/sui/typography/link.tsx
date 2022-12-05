@@ -13,8 +13,7 @@ export const SuiLink = ({ ...LinkProps }) => {
   const { children, href, onClick, color, size, weight } = LinkProps
 
   return (
-    <Link href={href}>
-      <a
+    <Link href={href}
         onClick={onClick}
         className={`
         ${sizeCalculator(size)}
@@ -25,7 +24,6 @@ export const SuiLink = ({ ...LinkProps }) => {
             'text-text-warning'
           )} duration-200 hover:underline`}>
         {children}
-      </a>
     </Link>
   )
 }

@@ -16,11 +16,11 @@ export function FeatureItem(props: FeatureItemProps) {
   const textColour = invert ? 'light_purple' : 'dark'
   return (
     <div
-      className='flex w-full md:w-1/3'
+      className='flex w-full gap-x-4'
       data-aos='fade-up'
       data-aos-offset={0}
       data-aos-delay={delay}>
-      <div className='flex w-1/5'>
+      <div className='flex w-1/5 items-center'>
         <div className='flex w-16 h-16 bg-web-light-c2 dark:bg-web-dark-c2 rounded-lg shadow-md justify-center items-center'>
           {icon}
         </div>
@@ -31,7 +31,7 @@ export function FeatureItem(props: FeatureItemProps) {
         </SuiTitle>
         <SuiSpacer size='xs' />
         <SuiText color={textColour} padding_0>
-          <p>{description}</p>
+          <p dangerouslySetInnerHTML={{ __html: description }} />
         </SuiText>
       </div>
     </div>

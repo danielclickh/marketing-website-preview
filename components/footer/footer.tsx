@@ -32,7 +32,7 @@ export function Footer() {
               </div>
             </div>
 
-            <div className='flex flex-col md:w-4/12 pb-6 md:pb-0 overflow-scroll'>
+            <div className='flex flex-col md:w-4/12 pb-6 md:pb-0'>
               <SuiTitle size='xxs' uppercase color='white'>
                 <h5>Resources</h5>
               </SuiTitle>

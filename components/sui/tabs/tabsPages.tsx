@@ -34,18 +34,14 @@ export function SuiTabsPages(props: TabProps) {
         <div className='border-b border-light-grey3 dark:border-dark-grey4'>
           <nav className='-mb-px flex space-x-8' aria-label='Tabs'>
             {props.tabs.map((tab) => (
-              <Link key={tab.name} href={tab.href}>
-                <a
-                  key={tab.name}
+              <Link key={tab.name} href={tab.href}
                   className={classNames(
                     tab.id == props.activeTab
                       ? 'border-primary text-text-darkest dark:text-text-lightest'
                       : 'border-transparent text-text-dark dark:text-text-light hover:text-text-darkest hover:border-light-grey5',
                     'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm'
-                  )}
-                  aria-current={tab.current ? 'page' : undefined}>
+                  )}aria-current={tab.current ? 'page' : undefined}>
                   {tab.name}
-                </a>
               </Link>
             ))}
           </nav>

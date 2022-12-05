@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'node_modules/aos/src/sass/aos.scss';
+$aos-distance: 12px; // It has to be above import
 
 html,
 body {
@@ -19,5 +21,67 @@ a {
   box-sizing: border-box;
 }
 
-$aos-distance: 12px; // It has to be above import
-@import 'node_modules/aos/src/sass/aos.scss';
+.feature-icon, .feature-icon image {
+  @apply max-w-full max-h-full flex items-center;
+}
+.advanced_cta {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.13);
+  border-radius: 8px;
+  display: flex;
+  padding: 32px;
+  margin: 42px 0 0px;
+  background: #373343;
+  @apply max-w-screen-sm;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+
+  @screen md {
+    max-width: none;
+    width: 100%;
+    box-sizing: border-box;
+    padding-right: 32px;
+    padding-left: 32px;
+
+  }
+
+  .info_container {
+    border-right: none;
+    padding-right: 0;
+
+    @screen md {
+      border-right: 1px solid rgba(109, 115, 134, 0.1);
+      ;
+      padding-right: 32px;
+
+    }
+  }
+
+  .button_container {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+
+    padding-left: 0;
+
+    @screen md {
+      padding-left: 32px;
+
+    }
+  }
+
+  .cta_title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .cta_description {
+    font-size: 16px;
+    font-weight: regular;
+    line-height: 24px;
+    color: #B0B4BC;
+  }
+}
+

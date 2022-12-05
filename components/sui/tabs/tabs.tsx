@@ -64,7 +64,7 @@ export const SuiTabs = ({ ...TabProps }) => {
           ))}
         </nav>
       </Tab.List>
-      <Tab.Panels className='flex overflow-scroll'>
+      <Tab.Panels className='flex overflow-auto'>
         {tabs.map((tab: any) => (
           <Tab.Panel key={tab.id}>
             <SuiText>{tab.content}</SuiText>

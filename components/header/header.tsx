@@ -1,8 +1,7 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
-import { useState, useEffect } from 'react'
+'use client'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
-import { SuiButton, SuiLink } from '../sui'
+import { SuiButton } from '../sui'
 
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
@@ -61,21 +60,12 @@ function classNames(...classes: any) {
 }
 
 export function Header() {
-  const [scroll, setScroll] = useState(false)
   const { theme, setTheme } = useTheme()
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', () =>
-        setScroll(window.pageYOffset > 50)
-      )
-    }
-  }, [])
 
   return (
     <Popover
       className={`bg-web-light-c1 dark:bg-web-dark-c1 shadow-sm  dark:border-b dark:border-web-dark-c2 pt-2 bg-opacity-100 dark:opacity-100 h-16 backdrop-blur-lg dark:backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300 ${
-        scroll ? 'pt-2 shadow-sm bg-opacity-80 dark:bg-opacity-80' : ''
+        true ? 'pt-2 shadow-sm bg-opacity-80 dark:bg-opacity-80' : ''
       }`}>
       <div className='container flex mx-auto md:pt-0 w-full px-4 mt-1 sm:px-8 2xl:px-0 max-w-7xl'>
         <div className='flex flex-col w-full'>
