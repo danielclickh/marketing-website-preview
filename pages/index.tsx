@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Script from 'next/script'
 import styles from '../styles/Home.module.css'
 
-const imagePrefix = process.env.NODE_ENV === 'development' ? '' : '/home'
+const imagePrefix = process.env.NODE_ENV === 'development' ? '' : 'https://clickhouselearn.github.io/home'
 
 export default function Home() {
   return (
