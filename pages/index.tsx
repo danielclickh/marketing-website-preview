@@ -127,18 +127,6 @@ export default function Home() {
         <div><div className='section-title' style={{marginBottom: '72px'}}>Upcoming live events</div></div>
         <div className='events-container'>
           <div className='event-item'>
-            <div className='event-item--image'><Image alt='image' src={`${imagePrefix}/cloud-onboarding.png`} width={360} height={270} /></div>
-            <div className='event-item--title'>Getting Started with ClickHouse Cloud</div>
-            <div className='event-item--description'>This 2-hour free, instructor-led training event gets you up and running with ClickHouse quickly using ClickHouse Cloud.</div>
-            <div className='event-item--details'>
-              <div className='event-item--date'><Image alt='image' src={`${imagePrefix}/icon-calendar.svg`} height={20} width={20} className='event-item--icon'/>November 29, 2022</div>
-              <div className='event-item--time'><Image alt='image' src={`${imagePrefix}/icon-clock.svg`} height={20} width={20} className='event-item--icon'/>8:00 - 10:00 a.m. PST</div>
-            </div>
-            <Link href='https://clickhouse.com/company/events/clickhouse-onboarding-workshop'>
-              <div className='event-item--register-cta'>Register now -&gt;</div>
-            </Link>
-          </div>
-          <div className='event-item'>
             <div className='event-item--image'><Image alt='image' src={`${imagePrefix}/clickhouse_workshop.png`}  width={342} height={196} /></div>
             <div className='event-item--title'>ClickHouse Workshop</div>
             <div className='event-item--description'>A deep dive into ClickHouse for developers and architects new to ClickHouse. This free, hands-on, live-training event covers modeling data, ingestion, views, analyzing data, manaaging data, optimizing ClickHouse, and more.</div>
