@@ -2,8 +2,10 @@
  * @type {import('next').NextConfig}
  */
 
+const debug = process.env.NODE_ENV !== 'production'
+
 const nextConfig = {
-  assetPrefix: 'https://clickhouse.com/learn/',
+  assetPrefix: debug ? '/' : 'https://clickhouse.com/learn/',
   images: {
     unoptimized: true
   },

@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
@@ -46,7 +50,6 @@ a {
 }
 
 .hero-container {
-  
   display: flex;
   /*justify-content: center;*/
   color: white;
@@ -57,8 +60,8 @@ a {
 
 .hero-background {
   background: linear-gradient(270.28deg, #443F51 0.18%, #23202D 99.84%);
-  min-height: 600px;
-  max-height: 600px;
+  height: 100%;
+  max-height: 55%;
   width: 100%;
   position: absolute;
   z-index: 1;
@@ -133,6 +136,9 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 10%;
+  width: 100%;
+  width: fill-available;
 }
 
 .section-category {
@@ -150,12 +156,27 @@ a {
 }
 
 .card-inner-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .card-inner-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1240px) {
+  .card-inner-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .card {
   border-radius: 8px;
-  margin-right: 40px;
+  margin-left: auto;
+  margin-right: auto;
   height: 438px;
   box-shadow: 5px 0px 10px rgba(104, 105, 111, 0.1), 0px 4px 4px rgba(88, 92, 98, 0.06);
   margin-right: 40px;
@@ -173,14 +194,15 @@ a {
   background-color: #F6F7FA;
 }
 
-/*.card:last-child {
-  margin-right: 0px;
-}*/
-
 .video-placeholder {
   background-color: rgb(53, 50, 65);
-  height: 460px;
-  width: 820px;
+  max-height: 460px;
+  max-width: 820px;
+  width: 100%;
+  width: fill-available;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  aspect-ratio: 820/460;
   margin-top: 80px;
   display: flex;
   justify-content: center;
@@ -319,16 +341,28 @@ a {
 
 .events-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 2rem 4rem;
+  max-width: 80%;
+  width: 100%;
+  width: fill-available;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .event-item {
-  width: 360px;
-  margin-right: 72px;
+  width: 100%;
+  width: fill-available;
 }
 
-.event-item:last-child {
-  margin-right: 0px;
+@media (min-width: 1024px) {
+  .events-container {
+    flex-direction: row;
+  }
+
+  .event-item {
+    width: 30%;
+  }
 }
 
 .event-item--image {
@@ -486,6 +520,10 @@ a {
 .newsletter--social--buttons {
   display: flex;
   flex-direction: row;
+}
+
+.flex {
+  display: flex;
 }
 
 /*@media (prefers-color-scheme: dark) {
