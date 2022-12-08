@@ -61,7 +61,7 @@ a {
 .hero-background {
   background: linear-gradient(270.28deg, #443F51 0.18%, #23202D 99.84%);
   height: 100%;
-  max-height: 55%;
+  max-height: 60%;
   width: 100%;
   position: absolute;
   z-index: 1;
@@ -69,13 +69,14 @@ a {
 
 .hero-content {
   text-align: center;
-  padding-top: 120px;
+  @apply w-full pt-16 md:pt-32 text-center;
   z-index: 2;
 }
 
 .hero-title {
-  font-size: 58px;
   font-weight: 700;
+  max-width: 80%;
+  @apply mx-auto text-5xl md:text-6xl mb-4;
 }
 
 .hero-title-gradient {
@@ -86,23 +87,34 @@ a {
 
 .hero-subtitle {
   color: white;
-  font-size: 18px;
-  line-height: 27px;
   text-align: center;
   font-weight: 400;
   margin-top: 16px;
+  max-width: 80%;
+  @apply mx-auto text-lg;
 }
 
 .button {
   height: 40px;
-  padding-left: 34px;
-  padding-right: 34px;
+  @apply px-3;
   font-weight: 600;
   background-color: #FFB200;
   border-radius: 8px;
   outline: none;
   border: none;
   color: rgb(75, 42, 4);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.stroked_button {
+  height: 40px;
+  @apply px-3;
+  font-weight: 600;
+  border: 1px solid #FFB200;
+  border-radius: 8px;
+  outline: none;
+  color: #2F2C3A;
   cursor: pointer;
   font-size: 14px;
 }
@@ -179,7 +191,6 @@ a {
   margin-right: auto;
   height: 438px;
   box-shadow: 5px 0px 10px rgba(104, 105, 111, 0.1), 0px 4px 4px rgba(88, 92, 98, 0.06);
-  margin-right: 40px;
   flex: 1;
   padding: 24px;
   min-width: 280px;
@@ -194,20 +205,27 @@ a {
   background-color: #F6F7FA;
 }
 
-.video-placeholder {
-  background-color: rgb(53, 50, 65);
+.video-placeholder{
   max-height: 460px;
   max-width: 820px;
   width: 100%;
   width: fill-available;
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
   aspect-ratio: 820/460;
   margin-top: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.video-placeholder > div {
+  background-color: rgba(53, 50, 65, 0.25);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 20px;
 }
 
 .card--icon-container {
@@ -293,26 +311,33 @@ a {
   padding-top: 120px;
   padding-bottom: 120px;
   background-color: #F6F7FA;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  @apply flex flex-col lg:flex-row justify-center;
+  @apply gap-y-4 gap-x-32;
 }
 
 .section-title {
   font-size: 48px;
   font-weight: 600;
+  @apply text-center md:text-left;
 }
 
 .section-learning-paths--cards {
-  display: flex;
+  @apply flex flex-wrap lg:flex-nowrap justify-center;
 }
 
 .section-description {
-  width: 360px;
+  @apply w-full text-center md:text-left;
   line-height: 24px;
-  fontSize: 16px;
+  font-size: 16px;
   font-weight: 400;
   color: #2F2C3A;
+  max-width: 80%;
+}
+.section-learning-paths .section-title,.section-learning-paths .section-description {
+  @apply text-left;
+}
+.section-description.text-align-center {
+  text-align: center !important;
 }
 
 .badge {
@@ -348,6 +373,7 @@ a {
   width: fill-available;
   margin-left: auto;
   margin-right: auto;
+  justify-content: center;
 }
 
 .event-item {
