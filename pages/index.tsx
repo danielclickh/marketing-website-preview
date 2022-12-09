@@ -18,7 +18,7 @@ export default function Home() {
         />
         <link
           rel='stylesheet'
-          href='https://fonts.googleapis.com/css?family=Inter:@400,600,700'
+          href='https://fonts.googleapis.com/css?family=Inter:@400,500,600,700'
         />
       </Head>
       <div>
