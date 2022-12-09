@@ -3,6 +3,7 @@
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import Link from "next/link";
+import Image from 'next/image'
 import DropdownIcon from "./DropdownIcon";
 
 const imagePrefix =
@@ -120,16 +121,17 @@ function classNames(...classes: any) {
 
 export default function Toolbar() {
   return (
-    <Popover className='bg-web-light-c1 dark:bg-web-dark-c1 shadow-sm  dark:border-b dark:border-web-dark-c2 pt-2 bg-opacity-100 dark:opacity-100 h-16 backdrop-blur-lg dark:backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300 pt-2 shadow-sm bg-opacity-80 dark:bg-opacity-80'>
+    <Popover className='bg-web-light-c1 shadow-sm pt-2 bg-opacity-100 h-16 backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300 pt-2 shadow-sm bg-opacity-80'>
       <div className='container flex mx-auto md:pt-0 w-full px-4 mt-1 sm:px-8 2xl:px-0 max-w-7xl'>
         <div className='flex flex-col w-full'>
           <div className='flex justify-between items-center w-full'>
             <div className='md:w-3/12'>
               <a href='https://clickhouse.com' className='flex w-auto'>
-                <img
+                <Image
+                  alt='logo'
                   src={`${imagePrefix}/logo.svg`}
-                  height='37px'
-                  width='37px'
+                  height={37}
+                  width={37}
                 />
                 <span className='logo-text'>ClickHouse</span>
               </a>
@@ -137,7 +139,7 @@ export default function Toolbar() {
             <div className='w-full flex justify-end items-center'>
               <div className='flex justify-between items-center md:justify-start'>
                 <div className='-mr-2 -my-2 md:hidden'>
-                  <Popover.Button className='bg-web-light-c1 dark:bg-web-dark-c1 rounded-md p-2 inline-flex items-center justify-center text-web-light-c5 dark:text-web-dark-c5 hover:text-web-light-c4 hover:dark:text-web-dark-c4 hover:bg-web-light-c2 hover:dark:bg-web-dark-c2 focus:outline-none'>
+                  <Popover.Button className='bg-web-light-c1 rounded-md p-2 inline-flex items-center justify-center text-web-light-c5 hover:text-web-light-c4 hover:bg-web-light-c2 focus:outline-none'>
                     <span className='sr-only'>Menu</span>
                     <svg
                       fill='none'
@@ -167,9 +169,9 @@ export default function Toolbar() {
                           <Popover.Button
                             className={classNames(
                               open
-                                ? "text-web-light-c4 dark:text-web-dark-c4"
-                                : "text-web-light-c5 dark:text-web-dark-c5 ease-in-out hover:text-web-light-c4 dark:hover:text-web-dark-c4",
-                              "group rounded-md inline-flex gap-x-2 items-center text-xs font-semibold focus:outline-none group-hover:text-web-light-c4 dark:group-hover:text-web-dark-c4 h-10"
+                                ? "text-web-light-c4"
+                                : "text-web-light-c5 ease-in-out hover:text-web-light-c4 ",
+                              "group rounded-md inline-flex gap-x-2 items-center text-sm font-medium focus:outline-none group-hover:text-web-light-c4 h-10"
                             )}
                           >
                             <span>Products</span>
@@ -186,23 +188,23 @@ export default function Toolbar() {
                             leaveTo='opacity-0 translate-y-1'
                           >
                             <Popover.Panel className='absolute z-10 -ml-4 mt-4 transform w-screen max-w-md lg:max-w-1xl'>
-                              <div className='rounded-lg shadow-lg border border-web-light-c2 dark:border-web-dark-c2 ring-0 ring-opacity-5 overflow-hidden'>
-                                <div className='relative grid gap-6 bg-web-light-c1 dark:bg-web-dark-c1 px-5 py-6 sm:gap-0 sm:p-0'>
+                              <div className='rounded-lg shadow-lg border border-web-light-c2 ring-0 ring-opacity-5 overflow-hidden'>
+                                <div className='relative grid gap-6 bg-web-light-c1 px-5 py-6 sm:gap-0 sm:p-0'>
                                   {products.map((item) => (
                                     <Link
                                       key={item.name}
                                       href={item.href}
                                       className='flex items-start'
                                     >
-                                      <div className='flex rounded-lg hover:bg-web-light-c2 hover:dark:bg-web-dark-c2 p-3 md:px-6 md:pt-4 cursor-pointer'>
-                                        <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md text-web-light-c5 dark:text-web-dark-c5 sm:h-12 sm:w-12 md:mr-4'>
+                                      <div className='flex rounded-lg hover:bg-web-light-c2 p-3 md:px-6 md:pt-4 cursor-pointer'>
+                                        <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md text-web-light-c5 sm:h-12 sm:w-12 md:mr-4'>
                                           {item.icon}
                                         </div>
                                         <div className=''>
-                                          <p className='text-sm font-semibold text-web-light-c5 dark:text-web-dark-c5'>
+                                          <p className='text-sm font-medium text-web-light-c5'>
                                             {item.name}
                                           </p>
-                                          <p className='mt-1 text-xs text-web-light-c4 dark:text-web-dark-c4'>
+                                          <p className='mt-1 text-sm text-web-light-c4'>
                                             {item.description}
                                           </p>
                                         </div>
@@ -216,7 +218,7 @@ export default function Toolbar() {
                         </>
                       )}
                     </Popover>
-                    <div className='hidden md:flex items-center text-xs font-semibold text-web-light-c5 dark:text-web-dark-c5 hover:text-web-light-c4 dark:hover:text-web-dark-c4 ease-in-out'>
+                    <div className='hidden md:flex items-center text-sm font-medium text-web-light-c5 hover:text-web-light-c4 ease-in-out'>
                       <Link href='https://clickhouse.com/customer-stories/'>
                         Use Cases
                       </Link>
@@ -228,9 +230,9 @@ export default function Toolbar() {
                           <Popover.Button
                             className={classNames(
                               open
-                                ? "text-web-light-c4 dark:text-web-dark-c4"
-                                : "text-web-light-c5 dark:text-web-dark-c5 ease-in-out hover:text-web-light-c4 dark:hover:text-web-dark-c4",
-                              "group rounded-md inline-flex gap-x-2 items-center text-xs font-semibold focus:outline-none group-hover:text-web-light-c4 dark:group-hover:text-web-dark-c4 h-10"
+                                ? "text-web-light-c4"
+                                : "text-web-light-c5 ease-in-out hover:text-web-light-c4",
+                              "group rounded-md inline-flex gap-x-2 items-center text-sm font-medium focus:outline-none group-hover:text-web-light-c4 h-10"
                             )}
                           >
                             <span>Company</span>
@@ -247,15 +249,15 @@ export default function Toolbar() {
                             leaveTo='opacity-0 translate-y-1'
                           >
                             <Popover.Panel className='absolute z-10 left-1/2 md:left-full leftransform -translate-x-1/2 mt-4 px-2 w-screen max-w-xs md:w-52 sm:px-0'>
-                              <div className='rounded-lg shadow-lg border border-web-light-c2 dark:border-web-dark-c2 ring-0 overflow-hidden'>
-                                <div className='relative grid gap-4 bg-web-light-c1 dark:bg-web-dark-c1 px-5 py-6 sm:gap-0 sm:p-0 sm:py-2'>
+                              <div className='rounded-lg shadow-lg border border-web-light-c2 ring-0 overflow-hidden'>
+                                <div className='relative grid gap-4 bg-web-light-c1 px-5 py-6 sm:gap-0 sm:p-0 sm:py-2'>
                                   {company.map((item) => (
                                     <a
                                       key={item.name}
                                       href={item.href}
-                                      className='py-2 px-6 block w-full hover:bg-web-light-c2 hover:dark:bg-web-dark-c2'
+                                      className='py-2 px-6 block w-full hover:bg-web-light-c2'
                                     >
-                                      <p className='text-xs font-semibold text-web-light-c5 dark:text-web-dark-c5 '>
+                                      <p className='text-sm font-medium text-web-light-c5'>
                                         {item.name}
                                       </p>
                                     </a>
@@ -274,9 +276,9 @@ export default function Toolbar() {
                           <Popover.Button
                             className={classNames(
                               open
-                                ? "text-web-light-c4 dark:text-web-dark-c4"
-                                : "text-web-light-c5 dark:text-web-dark-c5 ease-in-out hover:text-web-light-c4 dark:hover:text-web-dark-c4",
-                              "group rounded-md inline-flex gap-x-2 items-center text-xs font-semibold focus:outline-none group-hover:text-web-light-c4 dark:group-hover:text-web-dark-c4 h-10"
+                                ? "text-web-light-c4"
+                                : "text-web-light-c5 ease-in-out hover:text-web-light-c4",
+                              "group rounded-md inline-flex gap-x-2 items-center text-sm font-medium focus:outline-none group-hover:text-web-light-c4 h-10"
                             )}
                           >
                             <span>Learn</span>
@@ -293,15 +295,15 @@ export default function Toolbar() {
                             leaveTo='opacity-0 translate-y-1'
                           >
                             <Popover.Panel className='absolute z-10 left-1/2 md:left-full leftransform -translate-x-1/2 mt-4 px-2 w-screen max-w-xs md:w-52 sm:px-0'>
-                              <div className='rounded-lg shadow-lg border border-web-light-c2 dark:border-web-dark-c2 ring-0 overflow-hidden'>
-                                <div className='relative grid gap-4 bg-web-light-c1 dark:bg-web-dark-c1 px-5 py-6 sm:gap-0 sm:p-0 sm:py-2'>
+                              <div className='rounded-lg shadow-lg border border-web-light-c2 ring-0 overflow-hidden'>
+                                <div className='relative grid gap-4 bg-web-light-c1 px-5 py-6 sm:gap-0 sm:p-0 sm:py-2'>
                                   {learn.map((item) => (
                                     <a
                                       key={item.name}
                                       href={item.href}
-                                      className='py-2 px-6 block w-full hover:bg-web-light-c2 hover:dark:bg-web-dark-c2'
+                                      className='py-2 px-6 block w-full hover:bg-web-light-c2'
                                     >
-                                      <p className='text-xs font-semibold text-web-light-c5 dark:text-web-dark-c5 '>
+                                      <p className='text-sm font-medium text-web-light-c5'>
                                         {item.name}
                                       </p>
                                     </a>
@@ -313,7 +315,7 @@ export default function Toolbar() {
                         </>
                       )}
                     </Popover>
-                    <div className='hidden md:flex items-center text-xs font-semibold text-web-light-c5 dark:text-web-dark-c5 hover:text-web-light-c4 dark:hover:text-web-dark-c4 ease-in-out'>
+                    <div className='hidden md:flex items-center text-sm font-medium text-web-light-c5 hover:text-web-light-c4 ease-in-out'>
                       <Link href='https://clickhouse.com/pricing'>Pricing</Link>
                     </div>
                     <div className='md:flex justify-end gap-4 items-center text-sm'>
@@ -346,7 +348,7 @@ export default function Toolbar() {
                   focus
                   className='absolute top-0 z-10 inset-x-0 p-2 transition transform origin-top-right md:hidden'
                 >
-                  <div className='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-web-light-c1 dark:bg-web-dark-c1 divide-y-2 divide-web-light-c2 dark:divide-web-dark-c2'>
+                  <div className='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-web-light-c1 divide-y-2 divide-web-light-c2'>
                     <div className='pt-5 pb-6 px-5'>
                       <div className='flex items-top justify-between'>
                         <div className='mt-6'>
@@ -355,12 +357,12 @@ export default function Toolbar() {
                               <a
                                 key={item.name}
                                 href={item.href}
-                                className='-m-3 p-3 flex items-center rounded-lg hover:bg-web-light-c2 hover:dark:bg-web-dark-c2'
+                                className='-m-3 p-3 flex items-center rounded-lg hover:bg-web-light-c2'
                               >
-                                <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md text-web-light-c5 dark:text-web-dark-c5'>
+                                <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md text-web-light-c5'>
                                   {item.icon}
                                 </div>
-                                <div className='ml-4 text-sm font-semibold text-web-light-c5 dark:text-web-dark-c5'>
+                                <div className='ml-4 text-sm font-medium text-web-light-c5'>
                                   {item.name}
                                 </div>
                               </a>
@@ -368,7 +370,7 @@ export default function Toolbar() {
                           </nav>
                         </div>
                         <div className='-mr-2'>
-                          <Popover.Button className='bg-web-light-c1 dark:bg-web-dark-c2 rounded-md p-2 inline-flex gap-x-2 items-center justify-center text-web-light-c5 dark:text-web-dark-c5 hover:text-web-light-c4 dark:hover:text-web-dark-c4 ease-in-out focus:outline-none'>
+                          <Popover.Button className='bg-web-light-c1 rounded-md p-2 inline-flex gap-x-2 items-center justify-center text-web-light-c5 hover:text-web-light-c4 ease-in-out focus:outline-none'>
                             <span className='sr-only'>Close menu</span>
 
                             <svg
@@ -398,7 +400,7 @@ export default function Toolbar() {
                       <div className='grid grid-cols-2 gap-4'>
                         <Link
                           href='https://clickhouse.com/customer-stories/'
-                          className='text-sm font-semibold text-web-light-c5 dark:text-web-dark-c5'
+                          className='text-sm font-medium text-web-light-c5'
                         >
                           Use Cases
                         </Link>
@@ -407,7 +409,7 @@ export default function Toolbar() {
                           <a
                             key={item.name}
                             href={item.href}
-                            className='text-sm font-semibold text-web-light-c5 dark:text-web-dark-c5'
+                            className='text-sm font-medium text-web-light-c5'
                           >
                             {item.name}
                           </a>
@@ -416,14 +418,14 @@ export default function Toolbar() {
                           <a
                             key={item.name}
                             href={item.href}
-                            className='text-sm font-semibold text-web-light-c5 dark:text-web-dark-c5'
+                            className='text-sm font-medium text-web-light-c5'
                           >
                             {item.name}
                           </a>
                         ))}
                         <Link
                           href='https://clickhouse.com/pricing'
-                          className='text-sm font-semibold text-web-light-c5 dark:text-web-dark-c5'
+                          className='text-sm font-medium text-web-light-c5'
                         >
                           Pricing
                         </Link>
