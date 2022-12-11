@@ -9,9 +9,6 @@ import Image from 'next/image'
 import { Testimonial } from '../../components/testimonial'
 import { UseCase } from '../../components/use_case'
 import { LogoEbay } from '../../components/icons/logo_ebay'
-import { LogoCloudflare } from '../../components/icons/logo_cloudflare'
-import { LogoSpotify } from '../../components/icons/logo_spotify'
-import { LogoDeutche } from '../../components/icons/logo_deutche_bank'
 import { LogoUberHex } from '../../components/icons/logo_uber_hex'
 import { findOne } from '../../lib/api/strapi'
 
@@ -35,10 +32,15 @@ async function getData() {
 }
 
 async function CustomerStoriesPage() {
-  const { hero, useCases, spotlightUseCase: spotlight } = await getData()
+  const {
+    hero,
+    useCases,
+    spotlightUseCase: spotlight,
+    useCaseItems
+  } = await getData()
   return (
     <>
-      <div className='bg-web-light-c1 dark:bg-dark_hero_background pt-10'>
+      <div className='bg-white dark:bg-dark_hero_background pt-10'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
           <div
             className='flex flex-col text-center mx-auto pt-6'
@@ -98,7 +100,7 @@ async function CustomerStoriesPage() {
         </div>
       </div>
 
-      <div className='bg-web-light-c2 dark:bg-web-dark-c2 w-full pt-16 pb-24'>
+      <div className='bg-cultured dark:bg-onyx w-full pt-16 pb-24'>
         <div className='flex container mx-auto flex-col max-w-7xl px-6 2xl:px-0'>
           <SuiTitle size='lg'>
             <h2>{useCases.title}</h2>
@@ -109,10 +111,7 @@ async function CustomerStoriesPage() {
         </div>
 
         <div className='flex max-w-7xl mx-auto mt-6 space-x-12 px-6 2xl:px-0'>
-          <SuiPanel
-            color='bg-web-light-c1 dark:bg-web-dark-c1'
-            shadow
-            padding='xl'>
+          <SuiPanel color='bg-white dark:bg-gunmetal' shadow padding='xl'>
             <div className='flex flex-row'>
               <div className='flex flex-col  w-1/2'>
                 <SuiTitle
@@ -167,52 +166,17 @@ async function CustomerStoriesPage() {
         </div>
 
         <div className='flex flex-col md:flex-row max-w-7xl mx-auto mt-12 space-y-10 md:space-y-0 md:space-x-12 px-6 2xl:px-0'>
-          <UseCase
-            logo={<LogoEbay />}
-            description='eBay adopted ClickHouse for their real time OLAP events (Logs +
-              Metrics) infrastructure. The simplified architecture with
-              ClickHouse allowed them to reduce their DevOps activity and
-              troubleshooting, reduced the overall infrastructure by 90%, and
-              they saw a stronger integration with Grafana and ClickHouse for
-              visualization and alerting.'
-            bullet_one='Reduced DevOps activity and troubleshooting'
-            bullet_two='10 times less hardware'
-            bullet_three='Stronger integration with Grafana'
-            path='#'
-          />
-
-          <UseCase
-            logo={<LogoCloudflare />}
-            description='Cloudflare was having challenges scaling their CitusDB-based
-            system which had a high TCO and maintenance costs due to the
-            complex architecture. By moving their HTTP analytics data to
-            ClickHouse they were able to scale to 8M requests per second,
-            deleted 10’s of thousands of lines of code, reduced their MTTR,
-            and saw a 7x improvement on customer queries per second they
-            could serve.'
-            bullet_one='Scaled to 8M requests per second'
-            bullet_two='Reduced their MTTR'
-            bullet_three='7x improvement on query throughput'
-            path='#'
-          />
-        </div>
-        <div className='flex flex-col md:flex-row max-w-7xl mx-auto mt-12 space-y-10 md:space-y-0 md:space-x-12 px-6 2xl:px-0'>
-          <UseCase
-            logo={<LogoSpotify />}
-            description='Spotify’s A/B Experimentation platform is serving thousands of sub-second queries per second on petabyte-scale datasets with Clickhouse. They reduced the amount of low-variance work by an order of magnitude and enabled feature teams to self-serve insights by introducing a unified SQL interface for Data Platform and tools for automatic decision making for Experimentation.'
-            bullet_one='Reduced the amount of low-variance work'
-            bullet_two='Enabled feature teams to self-serve insights'
-            bullet_three='Tools for automatic decision making'
-            path='#'
-          />
-          <UseCase
-            logo={<LogoDeutche />}
-            description='ClickHouse helps serve the Client Analytics platform for reporting, deep data analysis as well as advanced data science to provide Deutsche Bank’s front office a clear view on their client’s activity and profitability.'
-            bullet_one='Platform for reporting and deep data analysis'
-            bullet_two='Advanced data science'
-            bullet_three='Provide clear view of client’s activity and profitability'
-            path='#'
-          />
+          {useCaseItems.map((useCase, index) => (
+            <UseCase
+              key={`usecase-${index}`}
+              logo={<LogoEbay />}
+              description={useCase.description}
+              bullets={useCase.bullets}
+              path={useCase?.ctaButton?.href}
+              btnText={useCase?.ctaButton?.text}
+              target={useCase?.ctaButton?.target}
+            />
+          ))}
         </div>
       </div>
     </>

@@ -14,7 +14,6 @@ type TabProps = {
     id: number
     name: string
     href: string
-    current: boolean
     content: ReactElement
   }[]
 }
@@ -48,7 +47,7 @@ export const SuiTabs = ({ ...TabProps }) => {
                   ? `border-primary ${colourCalculator(
                       color,
                       'text-text-darkest'
-                    )} focus:outline-none dark:text-text-lightest whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`
+                    )} focus:outline-none dark:text-white whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`
                   : `border-transparent ${colourCalculator(
                       activeColor,
                       'text-text-darkest'

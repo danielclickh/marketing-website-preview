@@ -1,7 +1,7 @@
 export default async function Head({ params }) {
   return (
     <>
-      <title>Blog • ClickHouse</title>
+      <title>Service Unavailable • ClickHouse</title>
     </>
   )
 }

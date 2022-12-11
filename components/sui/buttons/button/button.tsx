@@ -26,16 +26,16 @@ export function SuiButton(props: ButtonProps) {
         return `bg-primary ${
           props.textColor
             ? props.textColor
-            : 'text-text-lightest dark:text-text-darkest'
+            : 'text-white dark:text-text-darkest'
         }`
       case 'dark':
-        return 'bg-light-purple3 text-text-lightest'
+        return 'bg-arsenic text-white'
       case 'dark_alt':
-        return 'bg-light-purple2 text-text-lightest'
+        return 'bg-light-purple2 text-white'
       case 'empty':
-        return 'bg-transparent text-text-darkest dark:text-text-lightest'
+        return 'bg-transparent text-text-darkest dark:text-white'
       case 'ghost':
-        return 'bg-transparent text-text-darkest dark:text-text-lightest border border-light-grey5 dark:border-dark-grey4'
+        return 'bg-transparent text-text-darkest dark:text-white border border-light-grey5 dark:border-dark-grey4'
       case 'success':
         return 'bg-alerts-success-background text-alerts-success-text'
       case 'warning':
@@ -45,7 +45,7 @@ export function SuiButton(props: ButtonProps) {
       case 'xl':
         return 'text-base py-3 px-6'
       default:
-        return 'bg-primary text-text-lightest dark:text-text-darkest'
+        return 'bg-primary text-white dark:text-text-darkest'
     }
   }
 

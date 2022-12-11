@@ -50,7 +50,7 @@ export function SuiSimpleModal(props: Props) {
             leave='ease-in duration-200'
             leaveFrom='opacity-100 translate-y-0 sm:scale-100'
             leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'>
-            <div className='relative inline-block align-bottom bg-light-grey1 dark:bg-dark-grey4 rounded-lg text-left overflow-hidden shadow-xl dark:shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full md:max-w-3xl'>
+            <div className='relative inline-block align-bottom bg-white dark:bg-dark-grey4 rounded-lg text-left overflow-hidden shadow-xl dark:shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full md:max-w-3xl'>
               <div className='flex justify-between'>
                 <div className='flex flex-col w-full'>
                   <div className='px-8 pt-5 pb-4 sm:p-6 md:px-8 sm:pb-4'>
@@ -61,7 +61,7 @@ export function SuiSimpleModal(props: Props) {
                       {props.sidebar !== true && (
                         <button
                           type='button'
-                          className='rounded-md text-text-dark hover:text-text-darkest dark:text-text-light hover:dark:text-text-lightest'
+                          className='rounded-md text-text-dark hover:text-text-darkest dark:text-text-light hover:dark:text-white'
                           onClick={props.close}>
                           <span className='sr-only'>Close panel</span>
                           <XIcon className='h-6 w-6' aria-hidden='true' />
@@ -90,7 +90,7 @@ export function SuiSimpleModal(props: Props) {
                       </SuiTitle>
                       <button
                         type='button'
-                        className='rounded-md text-text-dark hover:text-text-darkest dark:text-text-light hover:dark:text-text-lightest flex-row-reverse'
+                        className='rounded-md text-text-dark hover:text-text-darkest dark:text-text-light hover:dark:text-white flex-row-reverse'
                         onClick={props.close}>
                         <span className='sr-only'>Close panel</span>
                         <XIcon className='h-6 w-6' aria-hidden='true' />

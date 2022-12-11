@@ -18,20 +18,21 @@ async function getData() {
 
 export default async function CareersPage() {
   const { hero, companyValues, positionsTitle } = await getData()
+  const { title, description, paragraphTitle, paragraphText } = hero
   return (
     <>
-      <div className='bg-web-light-c1 dark:bg-web-dark-c1 bg-cover pt-10'>
+      <div className='bg-white dark:bg-gunmetal bg-cover pt-10'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
           <div
             className='flex flex-col text-center mx-auto pt-6'
             data-aos='fade-up'>
             <SuiTitle size='web'>
-              <h1>{hero.title}</h1>
+              <h1>{title}</h1>
             </SuiTitle>
             <SuiSpacer size='sm' />
             <div className='max-w-2xl'>
               <SuiText size='lg' color='dark' weight='normal'>
-                <p>{hero.description}</p>
+                <p>{description}</p>
               </SuiText>
             </div>
           </div>
@@ -41,18 +42,18 @@ export default async function CareersPage() {
           <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 md:space-x-16 mb-12'>
             <div className='flex flex-col md:w-4/5'>
               <SuiTitle size='lg'>
-                <h2>{hero.paragraphTitle}</h2>
+                <h2>{paragraphTitle}</h2>
               </SuiTitle>
               <SuiSpacer size='md' />
               <SuiText size='lg'>
-                <p>{hero.paragraphText}</p>
+                <p>{paragraphText}</p>
               </SuiText>
             </div>
           </div>
         </div>
       </div>
 
-      <div className='w-full bg-web-light-c2 dark:bg-web-dark-c2 pt-12 pb-12'>
+      <div className='w-full bg-cultured dark:bg-onyx pt-12 pb-12'>
         {companyValues.map((companyValue) => (
           <div
             className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 md:space-x-16 mb-12 items-center'
@@ -78,7 +79,7 @@ export default async function CareersPage() {
         ))}
       </div>
 
-      <div className='w-full bg-web-light-c1 dark:bg-web-dark-c1 pt-16 pb-16'>
+      <div className='w-full bg-white dark:bg-gunmetal pt-16 pb-16'>
         <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 md:space-x-16 mb-12 items-center'>
           <div className='flex flex-col md:w-3/5'>
             <SuiTitle size='lg'>

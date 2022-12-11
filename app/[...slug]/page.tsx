@@ -1,6 +1,8 @@
 import React from 'react'
+import Markdown from '../../components/Markdown'
 import { findAll, getPathsValues } from '../../lib/api/strapi'
-import '../../styles/RichContentPage.module.scss'
+import styles from './RichContentPage.module.scss'
+
 interface RichContentPageProps {
   title: string
   content?: null | string
@@ -36,19 +38,18 @@ export default async function RichContentPage({ params }) {
     rightContent
   }: RichContentPageProps = await getData(params)
   return (
-    <div className='rich_content_page'>
-      <div className='hero'>
-        <div className='container'>
-          <div className='title'>{title}</div>
+    <div className={styles.rich_content_page}>
+      <div className={styles.hero}>
+        <div className='mx-auto container'>
+          <h1>{title}</h1>
         </div>
       </div>
-      <div className='content_container'>
-        <div className='container'>
+      <div className='content_container mb-16'>
+        <div className='mx-auto container'>
           {content && (
-            <div
-              className='rich_content'
-              dangerouslySetInnerHTML={{ __html: content }}
-            />
+            <div className='rich_content'>
+              <Markdown>{content}</Markdown>
+            </div>
           )}
 
           {(leftContent || rightContent) && (
@@ -57,25 +58,22 @@ export default async function RichContentPage({ params }) {
                 leftContent && rightContent ? 'two_column_container' : ''
               }>
               {leftContent && (
-                <div
-                  className='rich_content column_content'
-                  dangerouslySetInnerHTML={{ __html: leftContent }}
-                />
+                <div className='rich_content column_content'>
+                  <Markdown>{leftContent}</Markdown>
+                </div>
               )}
               {rightContent && (
-                <div
-                  className='rich_content column_content'
-                  dangerouslySetInnerHTML={{ __html: rightContent }}
-                />
+                <div className='rich_content column_content'>
+                  <Markdown>{rightContent}</Markdown>
+                </div>
               )}
             </div>
           )}
 
           {fullWidthContent && (
-            <div
-              className='rich_content full_width_content'
-              dangerouslySetInnerHTML={{ __html: fullWidthContent }}
-            />
+            <div className='rich_content full_width_content'>
+              <Markdown>{fullWidthContent}</Markdown>
+            </div>
           )}
         </div>
       </div>
@@ -87,7 +85,7 @@ export async function generateStaticParams() {
   const params = {
     fields: ['url']
   }
-  const paths = await getPathsValues('rich-content-pages', params, 'slug')
+  const paths = await getPathsValues('rich-content-pages', params, 'url', true)
 
   return paths
 }

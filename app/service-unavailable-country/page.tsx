@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
 import { findOne } from '../../lib/api/strapi'
-import markdownToHtml from '../../lib/markdown'
 import ServiceUnavailableForm from '../../components/ServiceUnavailableForm'
 
 async function getData() {
@@ -16,11 +15,6 @@ async function getData() {
     ]
   }
   const response = await findOne('service-unavailable-country', params)
-  if (response.contactForm.tosCheckboxRichText) {
-    response.contactForm.tosCheckboxRichText = await markdownToHtml(
-      response.contactForm.tosCheckboxRichText
-    )
-  }
   return response.card
 }
 

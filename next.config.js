@@ -11,6 +11,7 @@ module.exports = {
   },
   images: {
     loader: "default",
+    dangerouslyAllowSVG: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -24,6 +25,6 @@ module.exports = {
     localeDetection: false,
   },
   sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
+    includePaths: [path.join(__dirname, 'styles'), path.join(__dirname, 'app/**/*.module.scss'), path.join(__dirname, 'components/**/*.module.scss')],
   },
 }

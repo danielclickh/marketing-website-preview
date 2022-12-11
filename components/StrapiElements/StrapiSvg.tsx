@@ -1,22 +1,46 @@
 import React, { HTMLAttributes } from 'react'
+import Markdown from '../Markdown'
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-  url: string
+  src: {
+    data: {
+      attributes: {
+        url: string
+      }
+    }
+  }
 }
-async function StrapiSvg({ url, ...props }: Props) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}${url}`)
-  const svgText = await response.text()
-  // const { data: svgText } = useSWR(url, async () => {
-  // return svgText
-  // })
 
+export function StrapiSvgClient(props: Props) {
   return (
-    <div
-      dangerouslySetInnerHTML={{ __html: svgText }}
-      className='strapi-svg-container'
-      {...props}
-    />
+    <>
+      {/* @ts-expect-error Server Component */}
+      <StrapiSvg {...props} />
+    </>
   )
 }
 
-export default StrapiSvg
+export async function StrapiSvg({ src, ...props }: Props) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}${src.data.attributes.url}`
+  )
+  const svgText = await response.text()
+
+  // return (
+  //   <div
+  //     dangerouslySetInnerHTML={{ __html: svgText }}
+  //     className='strapi-svg-container'
+  //     {...props}
+  //   />
+  // )
+  return (
+    <Markdown
+      components={{
+        svg: ({ node, ...params }) => {
+          return <svg {...params} {...props} />
+        }
+      }}>
+      {svgText}
+    </Markdown>
+  )
+}

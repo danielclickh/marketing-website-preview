@@ -30,7 +30,7 @@ export const SuiTable = ({ ...TableProps }) => {
               <th
                 key={column.id}
                 scope='col'
-                className='pl-4 py-3.5 px-3 first:pr-3 text-left text-sm font-semibold text-text-darkest dark:text-text-lightest first:rounded-tl-md last:rounded-tr-md'>
+                className='pl-4 py-3.5 px-3 first:pr-3 text-left text-sm font-semibold text-text-darkest dark:text-white first:rounded-tl-md last:rounded-tr-md'>
                 {column.title}
               </th>
             ))}

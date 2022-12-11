@@ -1,0 +1,28 @@
+.rich_content_page {
+  .hero {
+    @apply py-16 px-0;
+      @apply flex items-center justify-center font-bold text-center max-w-screen-lg mx-auto;
+      h1 {
+
+        font-size: 54px;
+        line-height: 70px;
+      }
+  }
+
+  .content_container {
+    @apply pb-16;
+  }
+
+  .full_width_content {
+    @apply mx-auto my-16;
+  }
+
+  .two_column_container {
+    @apply mb-16 flex flex-col items-start justify-center md:flex-row;
+
+    .column_content {
+      @apply w-full md:w-1/2;
+    }
+    column-gap: 5%;
+  }
+}

@@ -11,26 +11,28 @@ type Props = {
   children: ReactNode
 }
 
-export default function BaseLayout({ children }: Props) {
+export default async function BaseLayout({ children }: Props) {
   // const pathname = usePathname()
   // const showCloud = pathname === '/service-unavailable-country'
+
   return (
     <html lang='en'>
       <head>
         <meta charSet='utf-8' />
         <base href='/' />
+        <title>Fast Open-Source OLAP DBMS - ClickHouse</title>
         <meta content='width=device-width, initial-scale=1' name='viewport' />
         <link href='favicon.ico' rel='icon' type='image/x-icon' />
-
-        <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-        <link rel='icon' type='image/png' href='/favicon.png' />
       </head>
       <body>
         <div className='flex flex-col'>
           <Providers>
+            {/* @ts-expect-error Server Component */}
             <Header />
             {children}
+            {/* @ts-expect-error Server Component */}
             <GetStarted showCloud={true} />
+            {/* @ts-expect-error Server Component */}
             <Footer />
           </Providers>
         </div>

@@ -16,19 +16,19 @@ export const sizeCalculator = (size: string) => {
 export const colourCalculator = (color: string, defaultColor: string) => {
   switch (color) {
     case 'darkest':
-      return 'text-web-light-c5 dark:text-web-dark-c5'
+      return 'text-gunmetal dark:text-white'
     case 'lightest':
-      return 'text-web-light-c1 dark:text-web-dark-c1'
+      return 'text-white dark:text-gunmetal'
     case 'white':
-      return 'text-web-light-c1'
+      return 'text-white'
     case 'offWhite':
-      return 'text-web-light-c2'
+      return 'text-cultured'
     case 'dark':
       return 'text-web-light-c4 dark:text-web-dark-c4'
     case 'neutral':
-      return 'text-web-light-c3 dark:text-web-dark-c3'
+      return 'text-arsenic dark:text-arsenic'
     case 'purple':
-      return 'text-text-purple'
+      return 'text-arsenic'
     case 'light_purple':
       return 'text-text-light_purple'
     case 'light':

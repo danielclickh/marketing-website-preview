@@ -1,6 +1,7 @@
 'use client'
 import React, { useRef, useState } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
+import Markdown from '../Markdown'
 
 type StatusType = {
   loading: boolean
@@ -81,10 +82,7 @@ function ServiceUnavailableForm({
         )}
       </div>
       <div className='bottom'>
-        <div
-          dangerouslySetInnerHTML={{ __html: tosCheckboxRichText }}
-          className='disclaimer'
-        />
+        <Markdown className='disclaimer'>{tosCheckboxRichText}</Markdown>
         <button
           disabled={
             status.loading || (emailRef.current?.value ?? '').length === 0

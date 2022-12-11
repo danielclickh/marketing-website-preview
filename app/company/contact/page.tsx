@@ -7,8 +7,8 @@ import {
   SuiTitle
 } from '../../../components/sui'
 
-import { SocialButton } from '../../../components/social_button'
 import { findOne } from '../../../lib/api/strapi'
+import GrowingCommunity from '../../../components/GrowingCommunity'
 
 async function getData() {
   const data = await findOne('contact-us', {
@@ -22,7 +22,7 @@ export default async function ContactPage() {
   const { title, description, contactForm } = await getData()
   return (
     <>
-      <div className='bg-web-light-c1 dark:bg-web-dark-c1 bg-cover pt-10'>
+      <div className='bg-white dark:bg-gunmetal bg-cover pt-10'>
         <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
           <div
             className='flex flex-col text-center mx-auto pt-6'
@@ -44,39 +44,39 @@ export default async function ContactPage() {
                 <div className='flex space-x-8'>
                   <SuiTextField
                     htmlFor='firstName'
-                    label='First name'
+                    label={contactForm.firstNameLabel}
                     className='w-full'
                   />
                   <SuiTextField
                     htmlFor='lastName'
-                    label='Last name'
+                    label={contactForm.lastNameLabel}
                     className='w-full'
                   />
                 </div>
                 <div className='flex w-full'>
                   <SuiTextField
                     htmlFor='email'
-                    label='Email'
+                    label={contactForm.emailLabel}
                     className='w-full'
                   />
                 </div>
                 <div className='flex'>
                   <SuiTextField
                     htmlFor='company'
-                    label='Company (Optional)'
+                    label={contactForm.companyLabel}
                     className='w-full'
                   />
                 </div>
                 <div className='flex'>
                   <SuiTextField
                     htmlFor='useCase'
-                    label='Tell us your use case (Optional)'
+                    label={contactForm.messageLabel}
                     className='w-full'
                   />
                 </div>
 
                 <div className='flex w-64 mx-auto'>
-                  <SuiButton title='Submit' />
+                  <SuiButton title={contactForm.submitButtonLabel} />
                 </div>
 
                 <div className='flex text-center'>
@@ -98,30 +98,8 @@ export default async function ContactPage() {
           </div>
         </div>
       </div>
-
-      <div className='w-full bg-web-light-c2 dark:bg-web-dark-c2 pt-16 pb-12'>
-        <div className='flex flex-col container mx-auto max-w-7xl px-8 2xl:px-0 mb-12'>
-          <SuiTitle size='lg'>
-            <h2>Join our growing community</h2>
-          </SuiTitle>
-          <div className='flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-6 pt-8'>
-            <SocialButton name='github' path='http://github.com' />
-            <SocialButton name='slack' path='http://slack.com' />
-            <SocialButton name='twitter' path='http://twitter.com' />
-            <SocialButton name='telegram' path='http://telegram.com' />
-            <SocialButton name='facebook' path='http://facebook.com' />
-          </div>
-          <div className='flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-6 pt-2 md:pt-8'>
-            <SocialButton name='linkedin' path='http://linkedin.com' />
-            <SocialButton name='google' path='http://google.com' />
-            <SocialButton name='youtube' path='http://youtube.com' />
-            <SocialButton
-              name='stackoverflow'
-              path='http://stackoverflow.com'
-            />
-          </div>
-        </div>
-      </div>
+      {/* @ts-expect-error Server Component */}
+      <GrowingCommunity />
     </>
   )
 }

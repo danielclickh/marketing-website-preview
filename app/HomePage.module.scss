@@ -1,4 +1,7 @@
-.advanced_cta {
+.home {
+  @apply bg-hero_background dark:bg-dark_hero_background bg-cover pt-10;
+  background: linear-gradient(180deg, rgba(246, 247, 250, 0) 0%, #F6F7FA 100%);
+  .advanced_cta {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.13);
   border-radius: 8px;
   display: flex;
@@ -21,11 +24,10 @@
   .info_container {
       border-right: none;
       padding-right: 0;
-@screen md {
-    border-right: 1px solid rgba(109, 115, 134, 0.1);;
-    padding-right: 32px;
-
-  }
+      @screen md {
+        border-right: 1px solid rgba(109, 115, 134, 0.1);;
+        padding-right: 32px;
+    }
   }
 
   .button_container {
@@ -53,4 +55,23 @@
     line-height: 24px;
     color: #B0B4BC;
   }
+  }
+}
+
+.companyCard {
+  @apply flex w-52 h-24 bg-white rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer;
+  @apply bg-[image:var(--image-url)] bg-no-repeat bg-center;
+
+  :global(.dark) {
+    @apply bg-gunmetal;
+  }
+
+  :global(.dark) {
+    @apply bg-[image:var(--dark-image-url)];
+  }
+}
+
+.companyCardDark {
+  @apply bg-gunmetal;
+  @apply bg-[image:var(--dark-image-url)];
 }

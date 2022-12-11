@@ -2,7 +2,6 @@ import React from 'react'
 import { SuiSpacer, SuiText, SuiTitle } from '../../components/sui'
 import { fetchAll, findOne } from '../../lib/api/strapi'
 import { BlogPost } from './types'
-import markdownToHtml from '../../lib/markdown'
 
 import BlogPostList from '../../components/BlogPostList'
 
@@ -28,9 +27,7 @@ async function getData() {
   const data = await fetchAll('blog-posts', blogsParams)
   const categories = new Set()
   for (let index = 0; index < data.length; index++) {
-    const blog = data[index]
-    categories.add(blog.category)
-    data[index].shortDescription = await markdownToHtml(blog.shortDescription)
+    categories.add(data[index].category)
   }
   return {
     title: hero.title,
@@ -44,7 +41,7 @@ export default async function BlogsPage() {
   const { blogs, categories, title, description } = await getData()
 
   return (
-    <div className='bg-web-light-c1 dark:bg-dark_hero_background pt-10'>
+    <div className='bg-white dark:bg-dark_hero_background pt-10'>
       <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
         <div
           className='flex flex-col text-center mx-auto pt-6'

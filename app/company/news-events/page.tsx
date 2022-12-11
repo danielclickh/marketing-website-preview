@@ -66,7 +66,7 @@ export default function News() {
               className='hover:underline'>
               Read more
             </SuiText>
-            <ArrowRightIcon className='ml-2 w-4 text-web-light-c6' />
+            <ArrowRightIcon className='ml-2 w-4 text-primary' />
           </div>
         </Link>
       </div>
@@ -75,7 +75,7 @@ export default function News() {
 
   return (
     <>
-      <div className='bg-web-light-c1 dark:bg-web-dark-c1 bg-cover pt-10'>
+      <div className='bg-white dark:bg-gunmetal bg-cover pt-10'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
           <div
             className='flex flex-col text-center mx-auto pt-6'
@@ -96,7 +96,7 @@ export default function News() {
 
           <div className='flex max-w-5xl mx-auto'>
             <SuiPanel
-              color='bg-web-light-c2 dark:bg-web-dark-c2'
+              color='bg-cultured dark:bg-onyx'
               shadow
               padding='lg'
               className='my-8'>
@@ -138,7 +138,7 @@ export default function News() {
           </div>
         </div>
       </div>
-      <div className='flex w-full bg-web-light-c1 dark:bg-web-dark-c1 pb-8'>
+      <div className='flex w-full bg-white dark:bg-gunmetal pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex justify-between pb-4'>
             <SuiTitle size='lg'>
@@ -162,7 +162,7 @@ export default function News() {
         </div>
       </div>
 
-      <div className='flex w-full bg-web-light-c2 dark:bg-web-dark-c2 pb-8'>
+      <div className='flex w-full bg-cultured dark:bg-onyx pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex flex-col md:flex-row justify-between pb-4 space-x-24'>
             <div className='flex flex-col md:w-1/2'>
@@ -235,7 +235,7 @@ export default function News() {
         </div>
       </div>
 
-      <div className='flex w-full bg-web-light-c1 dark:bg-web-dark-c1 pb-8'>
+      <div className='flex w-full bg-white dark:bg-gunmetal pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <SuiTitle size='lg'>
             <h4>Press</h4>

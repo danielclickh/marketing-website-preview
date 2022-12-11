@@ -40,7 +40,7 @@ export function SuiBigStat(props: BigStatProps) {
       <SuiPanel
         key={id}
         padding='sm'
-        color={color ? color : 'bg-light-grey1 dark:bg-dark-grey2'}
+        color={color ? color : 'bg-white dark:bg-dark-grey2'}
         border={border ? border : false}>
         <div className='flex flex-col'>
           <SuiText size='sm' color='dark' weight='semibold' padding_0>

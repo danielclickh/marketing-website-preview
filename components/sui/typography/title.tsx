@@ -41,10 +41,9 @@ export const SuiTitle = ({ ...TitleProps }) => {
 
   return (
     <div
-      className={`${colourCalculator(
-        color,
-        'text-web-light-c5'
-      )} dark:text-web-${dark_color ? dark_color : 'dark-c5'} ${className} ${
+      className={`${colourCalculator(color, 'text-gunmetal')} dark:text-web-${
+        dark_color ? dark_color : 'dark-c5'
+      } ${className} ${
         semibold ? 'font-semibold' : 'font-bold'
       } ${sizeCalculator(size)} ${uppercase && 'uppercase'}`}>
       {children}

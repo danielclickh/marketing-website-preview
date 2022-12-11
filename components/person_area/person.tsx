@@ -1,8 +1,9 @@
-import Image from 'next/image'
+import { StrapiImage } from '../StrapiElements'
+import { StrapiImageProps } from '../StrapiElements/StrapiImage'
 import { SuiText } from '../sui'
 
 type PersonProps = {
-  avatar: string
+  avatar: { data: { attributes: StrapiImageProps } }
   name: string
   job?: string
   small?: boolean
@@ -14,8 +15,8 @@ export function Person(props: PersonProps) {
   return (
     <div className='flex w-full flex-col text-center md:max-w-xs px-4'>
       <div>
-        <Image
-          src={`/our-story/${avatar}`}
+        <StrapiImage
+          src={avatar}
           alt={name}
           width={small ? '124' : '154'}
           height={small ? '124' : '154'}

@@ -5,7 +5,9 @@ const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/`
 export async function getPathsValues(
   pathName: string,
   obj: Record<string, any>,
-  paramName: string,
+  type = 'slug',
+  isDynamicUrl = false,
+  paramName = 'slug',
   list: any[] = [],
   pageNumber: number = 1
 ) {
@@ -17,9 +19,9 @@ export async function getPathsValues(
   }
   const { data, pagination } = await findAll(pathName, newParam)
   const urlList = data.map((page: Record<string, any>) => {
-    const slugList = page.url
-      .split('/')
-      .filter((slug: string) => slug.length > 0)
+    const slugList = isDynamicUrl
+      ? page[type].split('/').filter((slug: string) => slug.length > 0)
+      : page[type]
     return {
       [paramName]: slugList
     }
@@ -28,6 +30,8 @@ export async function getPathsValues(
     const newPages = await getPathsValues(
       pathName,
       obj,
+      isDynamicUrl,
+      type,
       pathName,
       urlList,
       pageNumber + 1
@@ -70,14 +74,8 @@ export async function findAll(pathName: string, params: Record<string, any>) {
   const response = await fetch(
     `${url}${pathName}${newParamString.length > 0 ? `?${newParamString}` : ''}`
   )
-  console.log('url', {
-    s: `${url}${pathName}${
-      newParamString.length > 0 ? `?${newParamString}` : ''
-    }`,
-    newParamString
-  })
+
   const { data, meta } = await response.json()
-  console.log('data', data)
   const dataList = data.map((content) => ({
     id: content.id,
     ...content.attributes
@@ -120,7 +118,9 @@ function isJSON(item: any) {
 }
 
 export async function findHeader(requestString: string) {
-  return await findOne(requestString, {
+  const headerData = await findOne(requestString, {
     populate: ['seo', 'seo.image']
   })
+
+  return headerData.seo
 }

@@ -44,13 +44,13 @@ export function SuiFlyout(props: Props) {
               leaveFrom='translate-x-0'
               leaveTo='translate-x-full'>
               <div className='pointer-events-auto w-screen max-w-md'>
-                <div className='flex h-full flex-col overflow-y-scroll bg-light-grey1 dark:bg-dark-grey4 py-6 shadow-xl'>
+                <div className='flex h-full flex-col overflow-y-scroll bg-white dark:bg-dark-grey4 py-6 shadow-xl'>
                   <div className='px-4 sm:px-6'>
                     <div className='flex items-center justify-between'>
                       <SuiTitle size='lg'>{props.title}</SuiTitle>
                       <button
                         type='button'
-                        className='rounded-md bg-light-grey-1  text-text-darkest dark:text-text-light hover:text-text-dark hover:dark:text-text-lightest'
+                        className='rounded-md bg-light-grey-1  text-text-darkest dark:text-text-light hover:text-text-dark hover:dark:text-white'
                         onClick={props.close}>
                         <span className='sr-only'>Close panel</span>
                         <XIcon className='h-6 w-6' aria-hidden='true' />

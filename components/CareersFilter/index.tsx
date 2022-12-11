@@ -26,36 +26,27 @@ const fetcher = async (url: string) => {
   const departments = new Map<string, JobType[]>()
   const offices = new Map<string, string>()
   positions.forEach((position) => {
-    const offices = position.offices.map((office) => {
+    const locationList: string[] = []
+    const officesByPositions = position.offices.map((office) => {
       offices.set(office.id, office.name)
+      locationList.push(office.name)
       return office.id
     })
-    const location = position.offices
-      .map((office) => office.name)
-      .join(', name')
     position.departments.forEach((department) => {
       const jobs = departments.get(department.name) ?? []
       jobs.push({
         url: position.absolute_url,
-        location,
+        location: locationList.join(', '),
         title: position.title,
-        offices
+        offices: officesByPositions
       })
       departments.set(department.name, jobs)
     })
   })
 
-  console.log('asasas', {
-    data: {
-      departments: convertMapToArray(departments),
-      offices: convertMapToArray(offices)
-    }
-  })
   return {
-    data: {
-      departments: convertMapToArray(departments),
-      offices: convertMapToArray(offices)
-    }
+    departments: convertMapToArray(departments),
+    offices: convertMapToArray(offices)
   }
 }
 
@@ -70,8 +61,7 @@ function CareersFilter() {
     fetcher
   )
 
-  console.log(data)
-  const [selectedOffice, setSelectedOffice] = useState<number | null>(null)
+  const [selectedOffice, setSelectedOffice] = useState<string | null>(null)
   const [selectedDepartment, setSelectedDepartment] = useState<string | null>(
     null
   )
@@ -84,23 +74,26 @@ function CareersFilter() {
     const filteredDepartment = selectedDepartment
       ? data.departments.filter(([name, _]) => selectedDepartment === name)
       : data.departments
+
     return filteredDepartment.map(([name, jobs]) => {
       return [
         name,
         selectedOffice
-          ? jobs.filter((job: JobType) => job.offices.includes(selectedOffice))
+          ? jobs.filter((job: JobType) =>
+              job.offices.includes(Number(selectedOffice))
+            )
           : jobs
       ]
     })
   }, [selectedOffice, selectedDepartment, data])
 
-  if (!data) {
-    return <div> Loading</div>
-  }
   if (error) {
     return <div>Issue fetching jobs</div>
   }
 
+  if (!data) {
+    return <div> Loading</div>
+  }
   return (
     <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 justify-between'>
       <div className='flex md:w-64 md:pr-8 pb-8 md:pb-0 flex-col'>
@@ -164,7 +157,7 @@ function CareersFilter() {
               {jobs.map((job: JobType) => (
                 <a
                   href={job.url}
-                  className='rounded-md pl-4 flex flex-col w-full cursor-pointer hover:bg-web-light-c2 hover:dark:bg-web-dark-c2 transition-all duration-300 ease-in-out transform'
+                  className='rounded-md pl-4 flex flex-col w-full cursor-pointer hover:bg-cultured hover:dark:bg-onyx transition-all duration-300 ease-in-out transform'
                   key={job.url}>
                   <SuiText size='lg'>
                     <p>

@@ -1,4 +1,6 @@
 import { ReactElement } from 'react'
+import Markdown from '../Markdown'
+import { StrapiSvg } from '../StrapiElements'
 import { SuiSpacer, SuiText, SuiTitle } from '../sui'
 
 type FeatureItemProps = {
@@ -20,9 +22,10 @@ export function FeatureItem(props: FeatureItemProps) {
       data-aos='fade-up'
       data-aos-offset={0}
       data-aos-delay={delay}>
-      <div className='flex w-1/5 items-center'>
-        <div className='flex w-16 h-16 bg-web-light-c2 dark:bg-web-dark-c2 rounded-lg shadow-md justify-center items-center'>
-          {icon}
+      <div className='flex w-1/5 items-start'>
+        <div className='flex w-16 h-16 bg-onyx rounded-lg shadow-md justify-center items-center'>
+          {/* @ts-expect-error Server Component */}
+          <StrapiSvg src={icon} className='feature-icon' />
         </div>
       </div>
       <div className='flex w-4/5 flex-col pl-2 pr-6'>
@@ -31,7 +34,7 @@ export function FeatureItem(props: FeatureItemProps) {
         </SuiTitle>
         <SuiSpacer size='xs' />
         <SuiText color={textColour} padding_0>
-          <p dangerouslySetInnerHTML={{ __html: description }} />
+          <Markdown>{description}</Markdown>
         </SuiText>
       </div>
     </div>
