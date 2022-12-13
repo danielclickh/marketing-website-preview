@@ -6,10 +6,7 @@ import {
   SuiTitle
 } from '../../components/sui'
 import Image from 'next/image'
-import { Testimonial } from '../../components/testimonial'
 import { UseCase } from '../../components/use_case'
-import { LogoEbay } from '../../components/icons/logo_ebay'
-import { LogoUberHex } from '../../components/icons/logo_uber_hex'
 import { findOne } from '../../lib/api/strapi'
 import GetStarted from '../../components/GetStarted'
 import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
