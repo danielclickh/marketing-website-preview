@@ -17,14 +17,15 @@ import {
 } from '../components/StrapiElements'
 import styles from './HomePage.module.scss'
 import Link from 'next/link'
+import BulletPoint from '../components/BulletPoint'
+import mainImage from '../public/sql_console_hero.png'
+import GetStarted from '../components/GetStarted'
 
 async function getData() {
   const params = {
     populate: [
       'hero',
       'hero.ctaButton',
-      'hero.darkBackgroundIcon',
-      'hero.lightBackgroundIcon',
       'hero.advancedCallout',
       'hero.highlights',
       'aboutClickhouse',
@@ -60,100 +61,91 @@ export default async function HomePage() {
     customerStories,
     clickhouseCloud,
     clickhouseCloudItems,
-    testimonials,
-    darkBackgroundIcon,
-    lightBackgroundIcon
+    testimonials
   } = await getData()
+
   return (
     <>
-      <style jsx>{`
-        .bg-home {
-          min-width: 100px;
-          min-height: 100px;
-        }
-      `}</style>
-      <div>
-        <div className='md:bg-no-repeat bg-right bg-opacity-100'>
-          <div className='flex container mx-auto flex-col md:flex-row max-w-7xl pb-60 pt-28 px-8 2xl:px-0'>
-            <div data-aos='fade-up' className='flex w-1/2'>
-              <div className='max-w-screen-md mx-auto md:mt-8 flex-col text-center'>
-                <SuiTitle size='max' color='darkest'>
-                  <h1>{hero.title}</h1>
-                </SuiTitle>
-                <div className='flex flex-row'>
-                  <div className='mt-6 max-w-3xl flex flex-col justify-center self-center'>
-                    <SuiText size='lg' color='dark' weight='normal'>
-                      <p>{hero.description}</p>
-                    </SuiText>
-                    {hero.ctaButton && (
-                      <SuiButton
-                        path={hero.ctaButton.href}
-                        size='md'
-                        title={hero.ctaButton.text}
-                      />
-                    )}
+      <div className='md:bg-no-repeat bg-right bg-opacity-100'>
+        <div className='flex container mx-auto flex-col md:flex-row max-w-7xl pb-60 pt-28 px-8 2xl:px-0'>
+          <div data-aos='fade-up' className='flex w-1/2'>
+            <div className='max-w-screen-md mx-auto md:mt-8 flex-col text-center'>
+              <SuiTitle size='max' color='darkest'>
+                <h1>{hero.title}</h1>
+              </SuiTitle>
+              <div className='flex flex-row'>
+                <div className='mt-6 max-w-3xl flex flex-col justify-center self-center'>
+                  <SuiText size='lg' color='dark' weight='normal'>
+                    <p>{hero.description}</p>
+                  </SuiText>
+                  {hero.ctaButton && (
+                    <SuiButton
+                      path={hero.ctaButton.href}
+                      size='md'
+                      title={hero.ctaButton.text}
+                    />
+                  )}
 
-                    {!hero.ctaButton && hero.advancedCallout && (
-                      <div className={styles.advanced_cta}>
-                        <div className={styles.info_container}>
-                          <div className={styles.cta_title}>
-                            {hero.advancedCallout.title}
-                          </div>
-                          <div className={styles.cta_description}>
-                            {hero.advancedCallout.description}
-                          </div>
+                  {!hero.ctaButton && hero.advancedCallout && (
+                    <div className={styles.advanced_cta}>
+                      <div className={styles.info_container}>
+                        <div className={styles.cta_title}>
+                          {hero.advancedCallout.title}
                         </div>
-                        <div className={styles.button_container}>
-                          <SuiButton
-                            path={hero.advancedCallout.href}
-                            size='sm'
-                            title={hero.advancedCallout.title}
-                            target={hero.advancedCallout.target}
-                          />
+                        <div className={styles.cta_description}>
+                          {hero.advancedCallout.description}
                         </div>
                       </div>
-                    )}
-                  </div>
-                  <div className='bg-home'>
-                    {/* <StrapiImage src={} fill /> */}
-                  </div>
+                      <div className={styles.button_container}>
+                        <SuiButton
+                          path={hero.advancedCallout.href}
+                          size='sm'
+                          title={hero.advancedCallout.title}
+                          target={hero.advancedCallout.target}
+                          className='w-auto'
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
-            <div className='w-1/2 bg-mountain_background dark:bg-dark_mountain_background'></div>
           </div>
-          <div className='flex flex-col md:flex-row container mx-auto justify-evenly max-w-7xl px-8 2xl:px-0'>
-            {hero.highlights.map((highlight) => (
-              <SuiPanel
-                key={highlight.title}
-                className='md:w-80 hover:bg-light-grey2 duration-300 ease-in-out hover:shadow-xl'
-                color='bg-cultured dark:bg-onyx'
-                shadow
-                border
-                padding='lg'>
-                <div className='flex flex-col text-center'>
-                  <SuiTitle size='md'>
-                    <h3>{highlight.title}</h3>
-                  </SuiTitle>
-                  <div className='bg-primary h-1 w-16 rounded-md flex mx-auto my-4' />
-                  <SuiText>
-                    <p>{highlight.description}</p>
-                  </SuiText>
-                  <SuiSpacer />
-                  <div>
-                    <SuiButton
-                      iconRight
-                      path={highlight.href}
-                      color='empty'
-                      title={highlight.buttonText}
-                      target={highlight.target}
-                      size='md'
-                    />
-                  </div>
+          <div className='w-1/2 object-fit'>
+            <Image src={mainImage} alt='HomePage Image' />
+          </div>
+        </div>
+        <div className='flex flex-col md:flex-row container mx-auto justify-evenly max-w-7xl px-8 2xl:px-0'>
+          {hero.highlights.map((highlight) => (
+            <SuiPanel
+              key={highlight.title}
+              className='md:w-80 hover:bg-light-grey2 duration-300 ease-in-out hover:shadow-xl'
+              color='bg-cultured dark:bg-onyx'
+              shadow
+              border
+              padding='lg'>
+              <div className='flex flex-col text-center'>
+                <SuiTitle size='md'>
+                  <h3>{highlight.title}</h3>
+                </SuiTitle>
+                <div className='bg-primary h-1 w-16 rounded-md flex mx-auto my-4' />
+                <SuiText>
+                  <p>{highlight.description}</p>
+                </SuiText>
+                <SuiSpacer />
+                <div>
+                  <SuiButton
+                    iconRight
+                    path={highlight.href}
+                    color='empty'
+                    title={highlight.buttonText}
+                    target={highlight.target}
+                    size='md'
+                  />
                 </div>
-              </SuiPanel>
-            ))}
-          </div>
+              </div>
+            </SuiPanel>
+          ))}
         </div>
       </div>
       <div className='w-full flex flex-col bg-arsenic'>
@@ -211,7 +203,7 @@ export default async function HomePage() {
               return (
                 <Link key={logo.href} href={logo.href} target={logo.target}>
                   <div
-                    className={`${styles.companyCard} dark:${styles.companyCardDark}`}
+                    className={`${styles.companyCard} dark:bg-gunmetal dark:bg-[image:var(--dark-image-url)]`}
                     style={style}
                   />
                 </Link>
@@ -266,28 +258,20 @@ export default async function HomePage() {
                 <SuiSpacer size='md' />
                 <div className='pl-10 md:pl-0'>
                   {clickhouseCloudItem.bullets.map((bullet) => (
-                    <div className='flex space-x-4 pb-2' key={bullet.text}>
-                      <Image
-                        src='/homepage/new/icon_check.svg'
-                        alt='ClickHouse is fast'
-                        width='32'
-                        height='32'
-                      />
-                      <SuiText size='lg' color='dark'>
-                        <p>{bullet.text}</p>
-                      </SuiText>
-                    </div>
+                    <BulletPoint key={bullet.text} text={bullet.text} />
                   ))}
                 </div>
               </div>
-              <div className='flex md:w-1/2 justify-center pt-4 items-center'>
-                <StrapiImage
-                  src={clickhouseCloudItem.screenshotPng}
-                  alt='ClickHouse Cloud is coming'
-                  size='large'
-                  className='h-fit w-full object-contain'
-                />
-              </div>
+              {clickhouseCloudItem.screenshotPng.data && (
+                <div className='flex md:w-1/2 justify-center pt-4 items-center'>
+                  <StrapiImage
+                    src={clickhouseCloudItem.screenshotPng.data}
+                    alt='ClickHouse Cloud is coming'
+                    size='large'
+                    className='h-fit w-full object-contain'
+                  />
+                </div>
+              )}
             </div>
           ))}
 
@@ -367,6 +351,7 @@ export default async function HomePage() {
           />
         </div>
       </div>
+      <GetStarted />
     </>
   )
 }

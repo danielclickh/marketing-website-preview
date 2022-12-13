@@ -39,7 +39,7 @@ function BlogPostList({ blogs, categories }: BlogPostListProps) {
         />
         <SuiSpacer size='lg' />
         <SuiTitle size='xxs'>
-          <h4>Blog categories</h4>ß
+          <h4>Blog categories</h4>
         </SuiTitle>
         <ul className='mt-4'>
           <li
@@ -61,19 +61,9 @@ function BlogPostList({ blogs, categories }: BlogPostListProps) {
           ))}
         </ul>
       </div>
-      <div className='grid grid-col- md:flex-row md:w-3/4 md:space-x-16 justify-center'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:w-3/4 md:gap-16 justify-center'>
         {blogList.map((blog) => (
-          <BlogPost
-            key={blog.id}
-            {...blog}
-            author_avatar='author_rich.png'
-            author_name='Rich Raposa'
-            date='May 3, 2022'
-            image='docs-post.png'
-            title='ClickHouse Docs have a new look and feel!'
-            tag='Product'
-            abstract='ClickHouse is impressively fast, in fact, that is core to our engineering ethos and the goals of the project. Understanding ClickHouse (or any new product) and using it effectively'
-          />
+          <BlogPost key={blog.id} {...blog} />
         ))}
       </div>
     </div>

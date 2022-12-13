@@ -16,7 +16,7 @@ export function Person(props: PersonProps) {
     <div className='flex w-full flex-col text-center md:max-w-xs px-4'>
       <div>
         <StrapiImage
-          src={avatar}
+          src={avatar.data}
           alt={name}
           width={small ? '124' : '154'}
           height={small ? '124' : '154'}

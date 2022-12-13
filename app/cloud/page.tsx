@@ -2,10 +2,10 @@ import { SuiButton, SuiSpacer, SuiText, SuiTitle } from '../../components/sui'
 import { FeatureItem } from '../../components/feature_item'
 
 import Image from 'next/image'
-import { IconAWS } from '../../components/icons/icon_aws'
 import { findOne } from '../../lib/api/strapi'
-import { StrapiImage } from '../../components/StrapiElements'
+import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
 import Markdown from '../../components/Markdown'
+import BulletPoint from '../../components/BulletPoint'
 
 async function getData() {
   const params = {
@@ -31,7 +31,7 @@ async function getData() {
 
 export default async function CloudPage() {
   const { hero, features, screenshotsAndBullets } = await getData()
-  const { title, description, ctaButton, cloudProviders } = hero
+  const { title, description, ctaButton, cloudProviders, videoGif } = hero
 
   return (
     <>
@@ -66,11 +66,24 @@ export default async function CloudPage() {
                       <div
                         className='pt-8 flex flex-col space-y-2'
                         key={cloudProvider.title}>
-                        <SuiTitle size='xxs' color='dark'>
+                        <SuiTitle size='xxs' color='dark' className='mb-5'>
                           <h5>{cloudProvider.title}</h5>
                         </SuiTitle>
-                        <div className='flex flex-row'>
-                          <IconAWS />
+                        <div className='flex flex-row items-start gap-6 h-10'>
+                          {cloudProvider.lightProviderPngs.data.map(
+                            (lightIconPng, index) => (
+                              <StrapiPicture
+                                key={`${cloudProvider.title}-${index}`}
+                                dark={
+                                  cloudProvider.darkProviderPngs.data[index]
+                                }
+                                light={lightIconPng}
+                                width='100'
+                                height='40'
+                                className='max-h-10 w-auto'
+                              />
+                            )
+                          )}
                         </div>
                       </div>
                     ))}
@@ -80,9 +93,9 @@ export default async function CloudPage() {
               <div className='hidden md:flex w-6/12 mx-auto px-8'>
                 <div>
                   <div className='mt-20'>
-                    <Image
-                      src='/cloud/cloud_demo_small.gif'
-                      alt='ClickHouse demot'
+                    <StrapiImage
+                      src={videoGif.data}
+                      alt='ClickHouse demo'
                       width='748'
                       height='428'
                       className='rounded-md'
@@ -111,7 +124,7 @@ export default async function CloudPage() {
         </div>
       </div>
 
-      <div className='flex w-full bg-cultured dark:bg-onyx pb-12'>
+      <div className='flex w-full bg-cultured dark:bg-onyx pb-12 gap-y-28'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0'>
           {screenshotsAndBullets.map((item, index) => (
             <div
@@ -127,24 +140,15 @@ export default async function CloudPage() {
                 </SuiText>
                 <SuiSpacer size='md' />
                 {item.bullets.map((bullet) => (
-                  <div
-                    className='flex space-x-4 pb-2'
-                    key={`${item.title}-${bullet.text}`}>
-                    <Image
-                      src='/homepage/new/icon_check.svg'
-                      alt='ClickHouse is fast'
-                      width='32'
-                      height='32'
-                    />
-                    <SuiText size='lg' color='dark'>
-                      <p>{bullet.text}</p>
-                    </SuiText>
-                  </div>
+                  <BulletPoint
+                    key={`${item.title}-${bullet.text}`}
+                    text={bullet.text}
+                  />
                 ))}
               </div>
               <div className='flex md:w-1/2 justify-center items-center'>
                 <StrapiImage
-                  src={item.screenshotPng}
+                  src={item.screenshotPng.data}
                   className='h-fit w-full object-contain'
                 />
               </div>

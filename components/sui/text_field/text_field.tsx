@@ -4,9 +4,11 @@ import { HTMLAttributes, InputHTMLAttributes } from 'react'
 interface TextFieldProps extends HTMLAttributes<HTMLInputElement> {
   htmlFor: string
   label?: string
+  name?: string
   placeholder?: string
   className?: string
   password?: boolean
+  error?: string
 }
 
 export function SuiTextField({
@@ -14,6 +16,7 @@ export function SuiTextField({
   label,
   htmlFor,
   password,
+  error,
   ...props
 }: TextFieldProps) {
   return (
@@ -36,6 +39,7 @@ export function SuiTextField({
           <EyeIcon className='w-4 relative -top-7 left-80 md:left-96 text-gray-400' />
         )}
       </div>
+      {error && <p className='text-red-500 text-xs italic'>{error}</p>}
     </div>
   )
 }

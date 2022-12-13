@@ -9,6 +9,8 @@ import {
 
 import { findOne } from '../../../lib/api/strapi'
 import GrowingCommunity from '../../../components/GrowingCommunity'
+import ContactForm from '../../../components/ContactForm'
+import GetStarted from '../../../components/GetStarted'
 
 async function getData() {
   const data = await findOne('contact-us', {
@@ -41,44 +43,7 @@ export default async function ContactPage() {
             <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-2 pb-8 text-center px-8 2xl:px-0'>
               <SuiSpacer size='xl' />
               <div className='w-full md:w-128 self-center text-left space-y-8'>
-                <div className='flex space-x-8'>
-                  <SuiTextField
-                    htmlFor='firstName'
-                    label={contactForm.firstNameLabel}
-                    className='w-full'
-                  />
-                  <SuiTextField
-                    htmlFor='lastName'
-                    label={contactForm.lastNameLabel}
-                    className='w-full'
-                  />
-                </div>
-                <div className='flex w-full'>
-                  <SuiTextField
-                    htmlFor='email'
-                    label={contactForm.emailLabel}
-                    className='w-full'
-                  />
-                </div>
-                <div className='flex'>
-                  <SuiTextField
-                    htmlFor='company'
-                    label={contactForm.companyLabel}
-                    className='w-full'
-                  />
-                </div>
-                <div className='flex'>
-                  <SuiTextField
-                    htmlFor='useCase'
-                    label={contactForm.messageLabel}
-                    className='w-full'
-                  />
-                </div>
-
-                <div className='flex w-64 mx-auto'>
-                  <SuiButton title={contactForm.submitButtonLabel} />
-                </div>
-
+                <ContactForm {...contactForm} />
                 <div className='flex text-center'>
                   <SuiText color='dark' size='sm'>
                     If you have any more thoughts or questions, feel free to
@@ -100,6 +65,7 @@ export default async function ContactPage() {
       </div>
       {/* @ts-expect-error Server Component */}
       <GrowingCommunity />
+      <GetStarted />
     </>
   )
 }

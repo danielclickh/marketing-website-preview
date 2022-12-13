@@ -1,3 +1,5 @@
+import { ImageProps } from 'next/image'
+
 interface BaseStrapiImage {
   hash: string
   url: string
@@ -13,7 +15,7 @@ export interface StrapiImageType extends BaseStrapiImage {
 export type SizeType = 'small' | 'medium' | 'large' | 'thumbnail'
 
 export interface StrapiImageProps extends Omit<ImageProps, 'alt' | 'src'> {
-  src: { data: { attributes: StrapiImageType } }
+  src: { attributes: StrapiImageType }
   size?: SizeType
   alt?: string
 }

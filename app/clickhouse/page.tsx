@@ -1,12 +1,11 @@
 import { SuiButton, SuiSpacer, SuiText, SuiTitle } from '../../components/sui'
 import { FeatureItem } from '../../components/feature_item'
-import Image from 'next/image'
 import { FeatureItemLarge } from '../../components/feature_item_large/feature_item_large'
-import { IconLinearLarge } from '../../components/icons/icon_linear_large'
-import { IconGitHub } from '../../components/icons/icon_github'
 import { findOne } from '../../lib/api/strapi'
 import Markdown from '../../components/Markdown'
-import { StrapiSvg } from '../../components/StrapiElements'
+import { StrapiImage, StrapiSvg } from '../../components/StrapiElements'
+import BulletPoint from '../../components/BulletPoint'
+import GetStarted from '../../components/GetStarted'
 
 async function getData() {
   const params = {
@@ -42,6 +41,8 @@ async function getData() {
 export default async function ClickHouseServerPage() {
   const { hero, features1, features2, features3, features4, features5 } =
     await getData()
+  const { title, description, backgroundPng, mainButton, secondaryButton } =
+    hero
   return (
     <>
       <div className='bg-hero_background dark:bg-dark_hero_background bg-cover pt-10'>
@@ -50,38 +51,38 @@ export default async function ClickHouseServerPage() {
             <div className='md:w-6/12 md:mt-16 flex-col text-center md:text-left'>
               <SuiTitle size='web'>
                 <h1>
-                  <Markdown>{hero.title}</Markdown>
+                  <Markdown>{title}</Markdown>
                 </h1>
               </SuiTitle>
               <div className='mt-6'>
                 <SuiText size='lg' color='dark' weight='normal'>
-                  <p className='md:pr-16'>{hero.description}</p>
+                  <p className='md:pr-16'>{description}</p>
                 </SuiText>
               </div>
               <div className='flex mt-6 justify-center md:justify-start space-x-4'>
-                <SuiButton size='md' path='#earlyaccess' title='Quick start' />
-                <a
-                  href='https://github.com/ClickHouse/ClickHouse'
-                  target='_blank'
-                  rel='noopener noreferrer'>
-                  <div className='flex bg-white dark:bg-gunmetal rounded-md shadow-md cursor-pointer hover:underline hover:transition-all hover:-translate-y-0.5'>
-                    <div className='bg-cultured dark:bg-onyx rounded-l-md flex justify-center items-center px-3 w-12 h-10'>
-                      <IconGitHub />
-                    </div>
-                    <div className='flex px-4 justify-center items-center'>
-                      <SuiText weight='medium'>
-                        <p>23k+ stars</p>
-                      </SuiText>
-                    </div>
-                  </div>
-                </a>
+                {mainButton && (
+                  <SuiButton
+                    size='md'
+                    path={mainButton.href}
+                    target={mainButton.target}
+                    title={mainButton.text}
+                  />
+                )}
+                {secondaryButton && (
+                  <SuiButton
+                    size='md'
+                    path={secondaryButton.href}
+                    target={secondaryButton.target}
+                    title={secondaryButton.text}
+                  />
+                )}
               </div>
             </div>
             <div className='hidden md:flex w-6/12 justify-center'>
               <div>
                 <div className='mx-auto flex px-8 mt-12'>
-                  <Image
-                    src='/clickhouse/illustration.png'
+                  <StrapiImage
+                    src={backgroundPng.data}
                     alt='ClickHouse is fast'
                     width='471'
                     height='360'
@@ -214,8 +215,8 @@ export default async function ClickHouseServerPage() {
       <div className='flex w-full bg-white dark:bg-gunmetal pb-20'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 px-8 2xl:px-0'>
           <div className='flex flex-col md:flex-row items-center'>
-            <div className='md:w-2/5 justify-center flex'>
-              <IconLinearLarge />
+            <div className='md:w-2/5 justify-center flex h-64 w-64'>
+              <StrapiSvg src={features5.iconSvg} className='h-full w-full' />
             </div>
 
             <div className='md:w-3/5'>
@@ -245,24 +246,17 @@ export default async function ClickHouseServerPage() {
 
             <div className='flex flex-col md:flex-row pt-4 flex-wrap'>
               {features5.items.map((feature) => (
-                <div
-                  className='flex space-x-4 pb-2 w-full md:w-1/2 lg:w-1/3'
-                  key={feature.text}>
-                  <Image
-                    src='/homepage/new/icon_check.svg'
-                    alt='ClickHouse is fast'
-                    width='32'
-                    height='32'
-                  />
-                  <SuiText size='lg'>
-                    <p>{feature.text}</p>
-                  </SuiText>
-                </div>
+                <BulletPoint
+                  key={feature.text}
+                  text={feature.text}
+                  className='w-full md:w-1/2 lg:w-1/3'
+                />
               ))}
             </div>
           </div>
         </div>
       </div>
+      <GetStarted />
     </>
   )
 }

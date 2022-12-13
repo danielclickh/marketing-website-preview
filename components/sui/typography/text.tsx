@@ -29,7 +29,7 @@ export const SuiText = ({ ...TextProps }) => {
       className={`${sizeCalculator(size)} ${className && className}
         font-${weight ? weight : 'normal'} ${isUppercase} ${padding}
         ${colourCalculator(color, 'text-gunmetal dark:text-white')} 
-      }`}>
+      `}>
       {children}
     </div>
   )

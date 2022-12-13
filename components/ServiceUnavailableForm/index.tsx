@@ -1,6 +1,7 @@
 'use client'
 import React, { useRef, useState } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
+import { validateEmail } from '../../lib/form'
 import Markdown from '../Markdown'
 
 type StatusType = {
@@ -8,8 +9,6 @@ type StatusType = {
   error?: string
   success?: boolean
 }
-const emailRegex =
-  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
 interface ServiceUnavailableFormProps {
   tosCheckboxRichText: string
@@ -35,7 +34,7 @@ function ServiceUnavailableForm({
         loading: false,
         error: 'Please fill the email field.'
       })
-    } else if (emailRef.current && emailRef.current.value.match(emailRegex)) {
+    } else if (validateEmail(emailRef.current?.value)) {
       submitWorkatoForm('serviceUnavailableCountry', {
         email: emailRef.current.value
       })

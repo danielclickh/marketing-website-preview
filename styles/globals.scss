@@ -27,10 +27,20 @@ body {
 
 .feature-icon {
   @apply w-9 h-9 flex items-center text-white;
+  * {
+    @apply text-white;
+  }
 }
 
 .gradient_title {
   @apply text-transparent bg-clip-text bg-gradient-to-b from-gradientTop to-gradientBottom;
+}
+
+.line-clamp {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 
@@ -153,3 +163,38 @@ body {
   }
 }
 
+.has-tooltip {
+  @apply relative w-fit;
+
+  .tooltip {
+    @apply invisible absolute left-full bottom-0 w-full;
+  }
+  
+  &:hover .tooltip {
+    @apply visible z-50;
+  }
+}
+
+.hexagon {
+    @apply w-72 absolute -top-5  z-50 mx-auto grid place-items-center bg-white dark:bg-onyx;
+    aspect-ratio: 1/1.1547;
+    clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+//     &:before {
+//     content: " ";
+//     width: 0; height: 0;
+//     border-bottom: 30px solid #6C6;
+//     border-left: 52px solid transparent;
+//     border-right: 52px solid transparent;
+//     position: absolute;
+//     top: -30px;
+// }
+// &:after {
+//     content: "";
+//     width: 0;
+//     position: absolute;
+//     bottom: -30px;
+//     border-top: 30px solid #6C6;
+//     border-left: 52px solid transparent;
+//     border-right: 52px solid transparent;
+// }
+}

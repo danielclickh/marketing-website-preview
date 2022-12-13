@@ -93,6 +93,11 @@ export async function findOne(pathName: string, params: Record<string, any>) {
   const response = await fetch(
     `${url}${pathName}${newParamString.length > 0 ? `?${newParamString}` : ''}`
   )
+
+  console.log(
+    'herer',
+    `${url}${pathName}${newParamString.length > 0 ? `?${newParamString}` : ''}`
+  )
   const { data } = await response.json()
 
   return {

@@ -1,21 +1,55 @@
-import 'server-only'
-import Image, { ImageProps } from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import React from 'react'
 import { transformStrapi } from '.'
-import { NormalImageProps, StrapiImageProps } from './types'
+import { StrapiImageProps } from './types'
 
-async function StrapiImage({ src: srcProp, size, ...props }: StrapiImageProps) {
-  const { src, ...image } = transformStrapi(srcProp.data.attributes, size)
-  const newSrc = await fetch(src as string)
-  return <Image src={src} {...image} {...props} />
+async function StrapiImageUrl({
+  src: srcProp,
+  size,
+  className,
+  alt = '',
+  width,
+  height,
+  ...props
+}: StrapiImageProps) {
+  if (typeof srcProp?.attributes?.url !== 'string') {
+    return null
+  }
+
+  const image = transformStrapi(srcProp.attributes, size)
+  if (
+    (image.width !== null && image.height !== null) ||
+    (width !== null && height !== null)
+  ) {
+    if (image.width === null || image.height === null) {
+      image.width = image.width ?? width
+      image.height = image.height ?? height
+    }
+
+    return (
+      <Image
+        src={image as StaticImageData}
+        alt={alt}
+        className={className}
+        unoptimized
+        {...props}
+      />
+    )
+  }
+
+  return (
+    <div className={`relative ${className}`}>
+      <Image alt={alt} src={image.src} fill unoptimized {...props} />
+    </div>
+  )
 }
 
-function StrapiImageUrl({ src, ...props }: NormalImageProps) {
+function StrapiImage(props: StrapiImageProps) {
   return (
-    <Image
-      src={`${process.env.NEXT_PUBLIC_STRAPI_URL ?? ''}${src}`}
-      {...props}
-    />
+    <>
+      {/* @ts-expect-error Server Component */}
+      <StrapiImageUrl {...props} />
+    </>
   )
 }
 

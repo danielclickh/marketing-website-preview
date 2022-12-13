@@ -1,0 +1,137 @@
+
+  .hero {
+    .top {
+      box-sizing: border-box;
+    }
+
+    & > .event-container {
+
+      .left {
+        .section_metadata {
+          margin-bottom: 79px;
+
+          .pretitle {
+            @apply text-lg font-semibold mb-2;
+          }
+
+          .title {
+            @apply text-5xl font-bold mb-5;
+          }
+
+          .description {
+            @apply text-base text-web-light-c4 dark:text-web-dark-c4 whitespace-pre-wrap font-medium;
+          }
+        }
+
+        .hosted_by {
+          @apply mb-16;
+
+          .title {
+            font-weight: 700;
+            font-size: 38px;
+            line-height: 46px;
+            margin-bottom: 31px;
+          }
+
+          .hosts {
+            grid-template-columns: repeat(auto-fill, minmax(212px, 1fr));
+            grid-gap: 24px;
+            display: grid;
+            grid-auto-columns: 1fr;
+
+            .host {
+              display: flex;
+
+              .avatar {
+                border-radius: 44px;
+                width: 44px;
+                height: 44px;
+                margin-right: 17px;
+                background-size: contain;
+                background-position: center center;
+                background-repeat: no-repeat;
+              }
+
+              .content {
+                .name {
+                  font-weight: 500;
+                  font-size: 14px;
+                  line-height: 21px;
+                  margin-bottom: 1px;
+                }
+
+                .role {
+                  font-weight: 500;
+                  font-size: 12px;
+                  line-height: 18px;
+                  @apply text-web-light-c4 dark:text-web-dark-c4;
+                }
+              }
+            }
+          }
+        }
+
+        .agenda {
+          .title {
+            font-weight: 700;
+            font-size: 38px;
+            line-height: 46px;
+            margin-bottom: 31px;
+          }
+
+          .agenda_items {
+            .agenda_item {
+              display: flex;
+              align-items: center;
+              font-weight: 500;
+              font-size: 16px;
+              line-height: 24px;
+
+              &:not(:last-child) {
+                margin-bottom: 7px;
+              }
+
+              .time {
+                flex: 0 0 72px;
+                  @apply text-web-light-c4 dark:text-web-dark-c4;
+              }
+
+            }
+          }
+        }
+      }
+
+      .right {
+        flex: 0 0 502px;
+
+        .form, .subscribed {
+          display: block;
+          @apply bg-cultured dark:bg-onyx;
+          width: 100%;
+          padding: 32px;
+          box-sizing: border-box;
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 6px 4px -4px rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
+
+          .seed_form_element {
+            width: 100%;
+            max-width: 332px;
+
+            .seed_input {
+              width: 100%;
+            }
+          }
+
+          .success-container {
+            @apply flex;
+            .success_icon {
+              margin-right: 12px;
+            }
+            .success_text {
+                  @apply text-base font-medium whitespace-pre-wrap text-web-light-c4 dark:text-web-dark-c4;
+            }
+          }
+        }
+      }
+    }
+  }

@@ -11,6 +11,9 @@ import { UseCase } from '../../components/use_case'
 import { LogoEbay } from '../../components/icons/logo_ebay'
 import { LogoUberHex } from '../../components/icons/logo_uber_hex'
 import { findOne } from '../../lib/api/strapi'
+import GetStarted from '../../components/GetStarted'
+import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
+import { StarIcon } from '@heroicons/react/solid'
 
 async function getData() {
   const result = await findOne('use-case', {
@@ -26,18 +29,19 @@ async function getData() {
       'useCaseItems.ctaButton'
     ]
   })
-  result.spotlightUseCase = (result.useCaseItems ?? []).shift()
+  result.spotlight = (result.useCaseItems ?? []).shift()
 
   return result
 }
 
 async function CustomerStoriesPage() {
   const {
-    hero,
+    hero: { title, description, testimonials },
+    spotlight,
     useCases,
-    spotlightUseCase: spotlight,
     useCaseItems
   } = await getData()
+
   return (
     <>
       <div className='bg-white dark:bg-dark_hero_background pt-10'>
@@ -46,12 +50,12 @@ async function CustomerStoriesPage() {
             className='flex flex-col text-center mx-auto pt-6'
             data-aos='fade-up'>
             <SuiTitle size='web'>
-              <h1>{hero.title}</h1>
+              <h1>{title}</h1>
             </SuiTitle>
             <SuiSpacer size='sm' />
             <div className='max-w-2xl'>
               <SuiText size='lg' color='dark' weight='normal'>
-                <p>{hero.description}</p>
+                <p>{description}</p>
               </SuiText>
             </div>
           </div>
@@ -65,30 +69,52 @@ async function CustomerStoriesPage() {
               className='cursor-pointer hover:opacity-60'
             />
 
-            <Testimonial
-              avatar='avatar-1.png'
-              name='Anders Mattias'
-              job='Founder of XCon'
-              quote='“ClickHouse is a joy to use! It saves me so much time and money
-            I can’t recommend it enough!”'
-              delay={200}
-            />
+            {testimonials.map((testimonial) => (
+              <div
+                className='flex w-full flex-col text-center md:max-w-xs px-4'
+                key={testimonial.author}
+                data-aos='fade-up'
+                data-aos-delay={200}>
+                <div>
+                  <StrapiImage
+                    src={testimonial.avatar.data}
+                    alt={testimonial.author}
+                    width='64'
+                    height='64'
+                  />
+                </div>
+                <SuiText size='lg'>
+                  <p>{testimonial.review}</p>
+                </SuiText>
+                <SuiText>
+                  <p>
+                    {' '}
+                    {testimonial.author}
+                    <br />
+                    {testimonial.role && (
+                      <span className='text-web-light-c4 dark:text-web-dark-c4'>
+                        {testimonial.role}
+                      </span>
+                    )}
+                  </p>
+                </SuiText>
+                <div
+                  className='flex justify-center mx-4 mt-2 relative whitespace-nowrap text-primary'
+                  data-rating={testimonial.rating}>
+                  <StarIcon className='w-4' />
+                  <StarIcon className='w-4' />
+                  <StarIcon className='w-4' />
+                  <StarIcon className='w-4' />
+                  <StarIcon className='w-4' />
+                  <div
+                    className='mix-blend-color top-0 right-0 absolute overflow-hidden h-full bg-white'
+                    style={{
+                      width: `${(5 - testimonial.rating) * 20}%`
+                    }}></div>
+                </div>
+              </div>
+            ))}
 
-            <Testimonial
-              avatar='avatar-2.png'
-              name='Ade Oliseh'
-              job='Software Engineer at Google'
-              quote='“ClickHouse is the OLAP I’ve been waiting for all my life”'
-              delay={300}
-            />
-
-            <Testimonial
-              avatar='avatar-3.png'
-              name='Jennifer Wu'
-              job='Founder of FirstArrow'
-              quote='“Switching to ClickHouse has completely changed my tech stack for the better. It’s a fantastic DBMS”'
-              delay={400}
-            />
             <Image
               src={`/customer-stories/arrow-right.svg`}
               alt='arrow-left'
@@ -109,67 +135,52 @@ async function CustomerStoriesPage() {
             <p>{useCases.description}</p>
           </SuiText>
         </div>
+        {spotlight && (
+          <div className='flex max-w-7xl mx-auto mt-6 space-x-12 px-6 2xl:px-0 relative'>
+            <SuiPanel color='bg-white dark:bg-gunmetal' shadow padding='xl'>
+              <div className='flex flex-row'>
+                <div className='flex flex-col  w-1/2'>
+                  <SuiTitle
+                    size='xxs'
+                    uppercase
+                    color='primary'
+                    dark_color='primary'>
+                    {useCases.spotlightTitle}
+                  </SuiTitle>
+                  <SuiSpacer size='xs' />
+                  <SuiTitle>{spotlight.companyName}</SuiTitle>
+                  <SuiText>{spotlight.description}</SuiText>
+                  {spotlight.ctaButton && (
+                    <div className='flex mt-8'>
+                      <SuiButton
+                        title={spotlight.ctaButton.text}
+                        path={spotlight.ctaButton.href}
+                        target={spotlight.ctaButton.target}
+                        color='dark'
+                      />
+                    </div>
+                  )}
+                </div>
 
-        <div className='flex max-w-7xl mx-auto mt-6 space-x-12 px-6 2xl:px-0'>
-          <SuiPanel color='bg-white dark:bg-gunmetal' shadow padding='xl'>
-            <div className='flex flex-row'>
-              <div className='flex flex-col  w-1/2'>
-                <SuiTitle
-                  size='xxs'
-                  uppercase
-                  color='primary'
-                  dark_color='primary'>
-                  Spotlight
-                </SuiTitle>
-                <SuiSpacer size='xs' />
-                <SuiTitle>Uber</SuiTitle>
-                <SuiText>
-                  Uber moved its logging platform to ClickHouse increasing
-                  developer productivity and overall reliability of the platform
-                  while seeing 3x data compression, 10x performance increase,
-                  and ½ the reduction in hardware cost.
-                </SuiText>
-                {/* <ul className='pb-4'>
-                  <li className='flex space-x-2'>
-                    <StarIcon className='w-5 text-primary' />
-                    <SuiText color='darkest'>
-                      <p>3x data compression</p>
-                    </SuiText>
-                  </li>
-                  <li className='flex space-x-2'>
-                    <StarIcon className='w-5 text-primary' />
-                    <SuiText color='darkest'>
-                      <p>10x performance increase</p>
-                    </SuiText>
-                  </li>
-                  <li className='flex space-x-2'>
-                    <StarIcon className='w-5 text-primary' />
-                    <SuiText color='darkest'>
-                      <p>½ the reduction in hardware cost</p>
-                    </SuiText>
-                  </li>
-                </ul> */}
-                <div className='flex mt-8'>
-                  <SuiButton
-                    title='Read the case study'
-                    path='#'
-                    color='dark'
-                  />
+                <div className='-mt-8 -mb-14 overflow-hidden mx-auto w-full max-w-xs'>
+                  <div className='hexagon'>
+                    <StrapiPicture
+                      light={spotlight.lightLogoPng.data}
+                      dark={spotlight.darkLogoPng.data}
+                      size='small'
+                    />
+                  </div>
                 </div>
               </div>
-
-              <div className='-mt-8 -mb-14 overflow-hidden mx-auto'>
-                <LogoUberHex />
-              </div>
-            </div>
-          </SuiPanel>
-        </div>
-
+            </SuiPanel>
+          </div>
+        )}
         <div className='flex flex-col md:flex-row max-w-7xl mx-auto mt-12 space-y-10 md:space-y-0 md:space-x-12 px-6 2xl:px-0'>
           {useCaseItems.map((useCase, index) => (
             <UseCase
               key={`usecase-${index}`}
-              logo={<LogoEbay />}
+              lightLogo={useCase.lightLogoPng}
+              darkLogo={useCase.darkLogoPng}
               description={useCase.description}
               bullets={useCase.bullets}
               path={useCase?.ctaButton?.href}
@@ -179,6 +190,7 @@ async function CustomerStoriesPage() {
           ))}
         </div>
       </div>
+      <GetStarted />
     </>
   )
 }

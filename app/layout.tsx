@@ -31,8 +31,6 @@ export default async function BaseLayout({ children }: Props) {
             <Header />
             {children}
             {/* @ts-expect-error Server Component */}
-            <GetStarted showCloud={true} />
-            {/* @ts-expect-error Server Component */}
             <Footer />
           </Providers>
         </div>

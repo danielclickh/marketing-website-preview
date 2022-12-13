@@ -5,10 +5,10 @@ import {
   SuiText,
   SuiTitle
 } from '../../../components/sui'
-import Image from 'next/image'
 import { Person } from '../../../components/person_area'
 import { findOne } from '../../../lib/api/strapi'
-import { StrapiImage } from '../../../components/StrapiElements'
+import { StrapiImage, StrapiPicture } from '../../../components/StrapiElements'
+import GetStarted from '../../../components/GetStarted'
 
 async function getData() {
   const params = {
@@ -40,6 +40,7 @@ async function getData() {
 
 export default async function OurStoryPage() {
   const { hero, aboutUs, ourHistory, hiring, team } = await getData()
+  const { title, description, imagePng, offices } = hero
   return (
     <>
       <div className='bg-white dark:bg-dark_hero_background bg-cover pt-10'>
@@ -48,29 +49,29 @@ export default async function OurStoryPage() {
             className='flex flex-col text-center mx-auto pt-6'
             data-aos='fade-up'>
             <SuiTitle size='web'>
-              <h1>{hero.title}</h1>
+              <h1>{title}</h1>
             </SuiTitle>
             <SuiSpacer size='sm' />
             <div className='max-w-xl'>
               <SuiText size='lg' color='dark' weight='normal'>
-                <p>{hero.description}</p>
+                <p>{description}</p>
               </SuiText>
             </div>
           </div>
           <div className='flex flex-col mx-auto py-8'>
             <StrapiImage
-              src={hero.imagePng}
+              src={imagePng.data}
               alt='ClickHouse around the world'
             />
             <div
               className='flex justify-center mt-8 md:space-x-32'
               data-aos='fade-up'>
-              {hero.offices.map((office) => (
+              {offices.map((office) => (
                 <div
                   className='flex flex-col w-44'
                   key={office.name + office.location}>
                   <StrapiImage
-                    src={office.flagPng}
+                    src={office.flagPng.data}
                     alt={`Image for ${office.name} ${office.location}`}
                   />
                   <div className='flex text-center justify-center'>
@@ -108,7 +109,7 @@ export default async function OurStoryPage() {
               </div>
             </div>
             <div className='flex flex-col md:w-2/5 mt-6 md:mt-12'>
-              <StrapiImage src={item.imagePng} />
+              <StrapiImage src={item.imagePng.data} />
             </div>
           </div>
         ))}
@@ -207,88 +208,19 @@ export default async function OurStoryPage() {
             ))}
           </div>
 
-          <div className='flex justify-evenly pt-12'>
-            <div>
-              <Image
-                src='/our-story/logo_index_ventures.svg'
-                alt='investor'
-                width='255'
-                height='90'
+          <div className='flex flex-wrap justify-evenly pt-12'>
+            {team.lightInvestorLogosPng.data.map((light, index) => (
+              <StrapiPicture
+                key={`investors-${index}`}
+                light={light}
+                dark={team.darkInvestorLogosPng.data[index]}
+                size='small'
               />
-            </div>
-            <div>
-              <Image
-                src='/our-story/logo_benchmark.svg'
-                alt='investor'
-                width='255'
-                height='90'
-              />
-            </div>
-            <div>
-              <Image
-                src='/our-story/logo_coatue.svg'
-                alt='investor'
-                width='255'
-                height='90'
-              />
-            </div>
-            <div>
-              <Image
-                src='/our-story/logo_altimeter.svg'
-                alt='investor'
-                width='255'
-                height='90'
-              />
-            </div>
-          </div>
-
-          <div className='flex justify-evenly pt-6'>
-            <div>
-              <Image
-                src='/our-story/logo_lightspeed.svg'
-                alt='investor'
-                width='255'
-                height='90'
-              />
-            </div>
-            <div>
-              <Image
-                src='/our-story/logo_redpoint.svg'
-                alt='investor'
-                width='255'
-                height='90'
-              />
-            </div>
-            <div>
-              <Image
-                src='/our-story/logo_almaz.svg'
-                alt='investor'
-                width='255'
-                height='90'
-              />
-            </div>
-            <div>
-              <Image
-                src='/our-story/logo_firstmark.svg'
-                alt='investor'
-                width='255'
-                height='90'
-              />
-            </div>
-          </div>
-
-          <div className='flex justify-evenly pt-6'>
-            <div>
-              <Image
-                src='/our-story/logo_leadedge.svg'
-                alt='investor'
-                width='255'
-                height='90'
-              />
-            </div>
+            ))}
           </div>
         </div>
       </div>
+      <GetStarted />
     </>
   )
 }

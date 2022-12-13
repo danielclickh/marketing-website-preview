@@ -17,6 +17,7 @@ type ButtonProps = {
   borderColor?: string
   scroll?: boolean
   target?: string
+  className?: string
 }
 
 export function SuiButton(props: ButtonProps) {
@@ -75,10 +76,12 @@ export function SuiButton(props: ButtonProps) {
           disabled={props.disabled ? true : false}
           className={`${opacityLevel} ${hoverEffects}
           ${sizeCalculator(props.size)} ${colorCalculator(props.color)}
-          ${props.textColor && props.textColor}
+          ${props.textColor ?? ''}
           ${
             props.borderColor && 'border ' + props.borderColor
-          } font-medium text-center w-full rounded-lg duration-300 whitespace-nowrap`}>
+          } font-medium text-center w-full rounded-lg duration-300 whitespace-nowrap ${
+            props.className ?? ''
+          }`}>
           <span className='flex justify-center'>
             {props.icon && <RefreshIcon className='w-4 mr-2' />}
             {props.title}

@@ -16,6 +16,8 @@ import { findAll, getPathsValues } from '../../../lib/api/strapi'
 import { BlogPost } from '../types'
 import Markdown from '../../../components/Markdown'
 import RecentBlog from './RecentBlog'
+import { StrapiImage } from '../../../components/StrapiElements'
+import GetStarted from '../../../components/GetStarted'
 
 interface BlogProps extends BlogPost {
   content: string
@@ -50,7 +52,6 @@ async function getData(slug: string): Promise<BlogProps> {
 export default async function BlogPage({ params }) {
   const { title, author, content, category, otherBlogs, date, publishedAt } =
     await getData(params.slug)
-  const avatar = author.avatarPng.data.attributes.url
   return (
     <>
       <div className='bg-white dark:bg-dark_hero_background pt-10'>
@@ -68,11 +69,12 @@ export default async function BlogPage({ params }) {
             <SuiSpacer size='lg' />
             <div className='flex flex-row space-x-4 pt-2 justify-center'>
               <div className='flex w-11 h-11'>
-                <Image
-                  src={avatar}
+                <StrapiImage
+                  src={author.avatarPng.data}
                   alt='author avatar'
                   width='44'
                   height='44'
+                  className='rounded-full h-11 w-11'
                 />
               </div>
               <div className='flex'>
@@ -184,6 +186,7 @@ export default async function BlogPage({ params }) {
           </div>
         </div>
       </div>
+      <GetStarted />
     </>
   )
 }

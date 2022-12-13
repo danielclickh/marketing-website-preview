@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import { findOne } from '../../lib/api/strapi'
 import Markdown from '../Markdown'
 import {
@@ -8,8 +9,11 @@ import {
   SuiText,
   SuiTitle
 } from '../sui'
+interface Props {
+  customHeader?: ReactNode
+}
 
-export default async function GetStarted({ showCloud = true }) {
+async function FetchGetStarted({ customHeader }: Props) {
   const {
     pretitle,
     title,
@@ -34,7 +38,11 @@ export default async function GetStarted({ showCloud = true }) {
     <div className='flex bg-light-purple2'>
       <div className='container mx-auto justify-center py-12 px-8 2xl:px-0  flex flex-col w-full max-w-7xl'>
         <div className='flex flex-col text-center md:w-5/12 mx-auto '>
-          {showCloud ? (
+          {customHeader ? (
+            <SuiTitle size='xl' color='white'>
+              <h3>{customHeader}</h3>
+            </SuiTitle>
+          ) : (
             <>
               <SuiTitle size='xs' color='primary'>
                 <h4>{pretitle}</h4>
@@ -47,10 +55,6 @@ export default async function GetStarted({ showCloud = true }) {
                 <Markdown>{descriptionRichText}</Markdown>
               </SuiText>
             </>
-          ) : (
-            <SuiTitle size='xl' color='white'>
-              <h3>Install ClickHouse Open Source for free</h3>
-            </SuiTitle>
           )}
           <SuiSpacer />
           <div className='flex flex-col-reverse gap-4 md:flex-row md:space-x-8 justify-center'>
@@ -101,5 +105,14 @@ export default async function GetStarted({ showCloud = true }) {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function GetStarted({ customHeader }: Props) {
+  return (
+    <>
+      {/* @ts-expect-error Server Component */}
+      <FetchGetStarted customHeader={customHeader} />
+    </>
   )
 }

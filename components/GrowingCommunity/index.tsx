@@ -33,8 +33,8 @@ async function GrowingCommunity() {
               target={iconButton.target}>
               <div className='flex w-full xl:w-52 bg-white dark:bg-gunmetal rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer'>
                 <StrapiPicture
-                  dark={iconButton.darkIconPng}
-                  light={iconButton.lightIconPng}
+                  dark={iconButton.darkIconPng.data}
+                  light={iconButton.lightIconPng.data}
                 />
               </div>
             </Link>
