@@ -6,6 +6,7 @@ import { findOne } from '../../lib/api/strapi'
 import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
 import Markdown from '../../components/Markdown'
 import BulletPoint from '../../components/BulletPoint'
+import CloudProviders from '../../components/CloudProviders'
 
 async function getData() {
   const params = {
@@ -31,7 +32,7 @@ async function getData() {
 
 export default async function CloudPage() {
   const { hero, features, screenshotsAndBullets } = await getData()
-  const { title, description, ctaButton, cloudProviders, videoGif } = hero
+  const { title, description, ctaButton, videoGif } = hero
 
   return (
     <>
@@ -61,33 +62,7 @@ export default async function CloudPage() {
                       />
                     </div>
                   )}
-                  <div className='flex space-x-6 justify-center md:justify-start'>
-                    {cloudProviders.map((cloudProvider) => (
-                      <div
-                        className='pt-8 flex flex-col space-y-2'
-                        key={cloudProvider.title}>
-                        <SuiTitle size='xxs' color='dark' className='mb-5'>
-                          <h5>{cloudProvider.title}</h5>
-                        </SuiTitle>
-                        <div className='flex flex-row items-start gap-6 h-10'>
-                          {cloudProvider.lightProviderPngs.data.map(
-                            (lightIconPng, index) => (
-                              <StrapiPicture
-                                key={`${cloudProvider.title}-${index}`}
-                                dark={
-                                  cloudProvider.darkProviderPngs.data[index]
-                                }
-                                light={lightIconPng}
-                                width='100'
-                                height='40'
-                                className='max-h-10 w-auto'
-                              />
-                            )
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  <CloudProviders />
                 </div>
               </div>
               <div className='hidden md:flex w-6/12 mx-auto px-8'>
@@ -108,7 +83,7 @@ export default async function CloudPage() {
           <div className='w-full mx-auto bg-strain_background bg-cover h-24 md:h-40 -mt-12 bg-no-repeat 2xl:h-52' />
         </div>
       </div>
-      <div className=' bg-arsenic'>
+      <div className='section-dark'>
         <div className='flex container mx-auto flex-col max-w-7xl  pb-16 px-4 sm:px-8 2xl:px-0 pt-16'>
           <div className='feature-container'>
             {features.map((feature) => (
@@ -124,7 +99,7 @@ export default async function CloudPage() {
         </div>
       </div>
 
-      <div className='flex w-full bg-cultured dark:bg-onyx pb-12 gap-y-28'>
+      <div className='flex w-full section-light-color pb-12 gap-y-28'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0'>
           {screenshotsAndBullets.map((item, index) => (
             <div

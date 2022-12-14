@@ -18,6 +18,7 @@ type ButtonProps = {
   scroll?: boolean
   target?: string
   className?: string
+  widthFull?: boolean
 }
 
 export function SuiButton(props: ButtonProps) {
@@ -25,9 +26,7 @@ export function SuiButton(props: ButtonProps) {
     switch (color) {
       case 'primary':
         return `bg-primary ${
-          props.textColor
-            ? props.textColor
-            : 'text-white dark:text-text-darkest'
+          props.textColor ? props.textColor : 'text-primary-text'
         }`
       case 'dark':
         return 'bg-arsenic text-white'
@@ -46,7 +45,7 @@ export function SuiButton(props: ButtonProps) {
       case 'xl':
         return 'text-base py-3 px-6'
       default:
-        return 'bg-primary text-white dark:text-text-darkest'
+        return 'bg-primary text-primary-text'
     }
   }
 
@@ -75,13 +74,14 @@ export function SuiButton(props: ButtonProps) {
           onClick={props.onClick}
           disabled={props.disabled ? true : false}
           className={`${opacityLevel} ${hoverEffects}
-          ${sizeCalculator(props.size)} ${colorCalculator(props.color)}
+          ${sizeCalculator(props.size)}
           ${props.textColor ?? ''}
           ${
             props.borderColor && 'border ' + props.borderColor
-          } font-medium text-center w-full rounded-lg duration-300 whitespace-nowrap ${
-            props.className ?? ''
-          }`}>
+          } font-semibold text-center ${
+            props.widthFull ? 'w-full' : 'w-auto'
+          } rounded-lg duration-300 whitespace-nowrap
+           ${colorCalculator(props.color)} ${props.className ?? ''}`}>
           <span className='flex justify-center'>
             {props.icon && <RefreshIcon className='w-4 mr-2' />}
             {props.title}

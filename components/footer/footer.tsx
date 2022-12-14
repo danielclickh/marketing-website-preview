@@ -9,6 +9,12 @@ import {
 import Link from 'next/link'
 import { findOne } from '../../lib/api/strapi'
 import { StrapiSvg } from '../StrapiElements'
+import { Hind_Siliguri } from '@next/font/google'
+const hind = Hind_Siliguri({
+  subsets: ['latin'],
+  weight: '400'
+})
+
 export async function Footer() {
   const {
     topLevelFooterMenu,
@@ -33,7 +39,7 @@ export async function Footer() {
   return (
     <div className='flex bg-onyx py-8 px-4 md:px-0'>
       <div className='container mx-auto md:flex justify-between max-w-7xl px-8 2xl:px-0 '>
-        <div className='flex flex-col md:w-8/12 md:border-r border-arsenic'>
+        <div className='flex flex-col md:border-r border-arsenic'>
           <div className='sitemap md:flex pt-4'>
             {topLevelFooterMenu.map((topMenu) => (
               <div
@@ -58,29 +64,33 @@ export async function Footer() {
               </div>
             ))}
           </div>
-          <div className='flex pt-12'>
+          <div className='flex pt-12 items-start md:flex-col lg:flex-row'>
             {logoSvg && (
-              <div className='flex md:w-64 mr-4 gap-x-3 items-center'>
-                <StrapiSvg src={logoSvg} {...logoSvg} />
-                <span className=''>ClickHouse</span>
+              <div className='flex md:w-64 mr-3 gap-x-3 items-center'>
+                <StrapiSvg src={logoSvg} {...logoSvg} width='25' height='25' />
+                <span className={`text-2xl text-white ${hind.className}`}>
+                  ClickHouse
+                </span>
               </div>
             )}
-            <div className='px-4 self-end'>
+            <div className='px-4 md:px-0 lg:px-4 self-end'>
               <SuiText size='sm' color='white' padding_0>
                 <p>{licensingText}</p>
               </SuiText>
-              <div className='copyright_and_bottom_links'>
+              <div className='copyright_and_bottom_links flex flex-col lg:flex-row gap-1 lg:items-center'>
                 <SuiTitle color='white' size='xxs'>
                   {copyright}
                 </SuiTitle>
-                <div className='bottom_links flex flex-wrap gap-4 divide-x divide-white'>
+                <div className='bottom_links flex divide-x divide-white'>
                   {bottomLinks.map((bottomLink) => (
                     <SuiLink
                       key={bottomLink.text}
                       href={bottomLink.href}
                       target={bottomLink.target}
+                      size='sm'
                       color='white'
-                      weight='normal'>
+                      weight='normal'
+                      className='px-1 leading-normal'>
                       {bottomLink.text}
                     </SuiLink>
                   ))}
@@ -89,7 +99,7 @@ export async function Footer() {
             </div>
           </div>
         </div>
-        <div className='hidden md:flex flex-col md:w-4/12 pl-12'>
+        <div className='hidden md:flex flex-col md:w-fit pl-12'>
           <SuiTitle size='xxs' color='white'>
             <h4>{newsletterForm.title}</h4>
           </SuiTitle>

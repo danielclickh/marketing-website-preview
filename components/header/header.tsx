@@ -1,4 +1,4 @@
-import { SuiButton } from '../sui'
+import { SuiButton, SuiLink } from '../sui'
 
 import { Fragment } from 'react'
 import {
@@ -15,6 +15,12 @@ import { StrapiSvg } from '../StrapiElements'
 import MenuItem from './MenuItem'
 import { findOne } from '../../lib/api/strapi'
 import styles from './Header.module.scss'
+import { Hind_Siliguri } from '@next/font/google'
+
+const hind = Hind_Siliguri({
+  subsets: ['latin'],
+  weight: '500'
+})
 
 export async function Header() {
   const { logoIcon, menuItems, ctaSecondaryButton, ctaButton } = await findOne(
@@ -37,29 +43,29 @@ export async function Header() {
         true ? 'shadow-sm bg-opacity-80 dark:bg-opacity-80' : ''
       }`}>
       <div className='text-center bg-primary text-raisin_black text-sm font-medium w-full'>
-        <a href='/blog/clickhouse-cloud-generally-available'>
-          ClickHouse Cloud is now GA! - Read More
-        </a>
+        <Link href='/company/events/clickhouse-workshop' className='non-link'>
+          Free ClickHouse Workshop - Sign up now
+        </Link>
       </div>
       <div className='pt-2 container flex mx-auto md:pt-0 w-full px-4 mt-1 sm:px-8 2xl:px-0 max-w-7xl h-16 items-center'>
         <div className='flex flex-col w-full'>
           <div className='flex justify-between items-center w-full'>
-            <a href='/' className='flex items-center gap-x-3'>
+            <Link href='/' className='flex items-center gap-x-3 non-link'>
               <StrapiSvg src={logoIcon} />
-              <span>ClickHouse</span>
-            </a>
+              <span className={`text-2xl ${hind.className}`}>ClickHouse</span>
+            </Link>
             <div className='flex justify-center'>
               <div className='flex justify-between items-center md:justify-start'>
-                <div className='-mr-2 -my-2 md:hidden'>
+                <div className='-mr-2 -my-2 min-[930px]:hidden'>
                   <PopoverButton className='bg-white dark:bg-gunmetal rounded-md p-2 inline-flex items-center justify-center text-gunmetal dark:text-white hover:text-web-light-c4 hover:dark:text-web-dark-c4 hover:bg-cultured hover:dark:bg-onyx focus:outline-none'>
                     <span className='sr-only'>Open menu</span>
                     <MenuIcon className='h-6 w-6' aria-hidden='true' />
                   </PopoverButton>
                 </div>
-                <div className='hidden md:flex-1 md:flex md:items-center md:justify-between'>
+                <div className='hidden md:flex-1 min-[930px]:flex min-[930px]:items-center min-[930px]:justify-between'>
                   <PopoverGroup
                     as='nav'
-                    className='flex items-center space-x-10'>
+                    className='flex items-center space-x-4 lg:space-x-10'>
                     {menuItems.map((menuItem) => {
                       if (menuItem.menuItems.length > 0) {
                         return (
@@ -68,12 +74,10 @@ export async function Header() {
                               <Link
                                 key={item.name}
                                 href={item.href}
-                                className='flex items-start'>
+                                className='flex items-start non-link'>
                                 <div
-                                  className={styles.menuItem}
-                                  data-icon={
-                                    typeof item.icon.data !== 'undefined'
-                                  }>
+                                  className={`${styles.menuItem} hover:bg-cultured dark:hover:bg-onyx`}
+                                  data-icon={item.icon.data ? 'true' : 'false'}>
                                   {item.icon.data && (
                                     <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md text-arsenic sm:h-12 sm:w-12 md:mr-4'>
                                       <StrapiSvg
@@ -103,23 +107,24 @@ export async function Header() {
                           key={menuItem.name}
                           href={menuItem.href}
                           target={menuItem.target}
-                          className='inline-flex items-center text-sm font-semibold text-gunmetal dark:text-white hover:text-web-light-c4 dark:hover:text-web-dark-c4 ease-in-out'>
+                          className='non-link inline-flex items-center text-sm font-semibold text-gunmetal dark:text-white hover:text-web-light-c4 dark:hover:text-web-dark-c4 ease-in-out'>
                           {menuItem.name}
                         </Link>
                       )
                     })}
-                    <div className='flex items-center'>
+                    <div className='flex items-center border-r border-cultured dark:border-onyx pr-2'>
                       <ThemeSwitcher />
                     </div>
 
-                    <div className='flex items-center md:ml-12'>
+                    <div className='flex items-center md:ml-12 space-x-2'>
                       {ctaSecondaryButton && (
-                        <SuiButton
-                          color='empty'
-                          path={ctaSecondaryButton.href}
-                          target={ctaSecondaryButton.target}
-                          title={ctaSecondaryButton.text}
-                        />
+                        <SuiLink
+                          href={ctaSecondaryButton.href}
+                          color='darkest'
+                          className='non-link'
+                          target={ctaSecondaryButton.target}>
+                          {ctaSecondaryButton.text}
+                        </SuiLink>
                       )}
                       {ctaButton && (
                         <SuiButton
@@ -143,30 +148,61 @@ export async function Header() {
                 leaveTo='opacity-0 scale-95'>
                 <PopoverPanel
                   focus
-                  className='absolute top-0 z-10 inset-x-0 p-2 transition transform origin-top-right md:hidden'>
+                  className='absolute top-0 z-10 inset-x-0 p-2 transition transform origin-top-right min-[930px]:hidden'>
                   <div className='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white dark:bg-gunmetal divide-y-2 divide-cultured dark:divide-onyx'>
                     <div className='pt-5 pb-6 px-5'>
                       <div className='flex items-top justify-between'>
-                        <div className='mt-6'>
-                          <nav className='grid gap-6'>
-                            {menuItems.map((menuItem) => {
+                        <div className='mt-6 w-full'>
+                          <nav className='grid gap-4 grid-cols-2 w-full'>
+                            {menuItems.map((menuItem, index) => {
+                              if (index === 0) {
+                                return (
+                                  <>
+                                    <div
+                                      key={menuItem.name}
+                                      className='flex flex-col col-span-2 gap-y-6 '>
+                                      {menuItem.menuItems.map((item) => (
+                                        <Link
+                                          key={item.name}
+                                          href={item.href}
+                                          target={item.target}
+                                          className='non-link w-full flex items-center text-base font-medium text-gunmetal dark:text-white relative'>
+                                          {item.icon.data && (
+                                            <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-web-light-c4 dark:text-web-dark-c4 mr-4'>
+                                              <StrapiSvg
+                                                className='h-10 w-10 text-gunmetal dark:text-white'
+                                                aria-hidden='true'
+                                                src={item.icon}
+                                              />
+                                            </div>
+                                          )}
+                                          <div className='text-base font-medium text-gunmetal dark:text-white'>
+                                            {item.name}
+                                          </div>
+                                        </Link>
+                                      ))}
+                                    </div>
+                                    <hr className={styles.mobileHeader} />
+                                  </>
+                                )
+                              }
                               if (menuItem.menuItems.length > 0) {
                                 return menuItem.menuItems.map((item) => (
                                   <Link
                                     key={item.name}
                                     href={item.href}
                                     target={item.target}
-                                    className='text-base font-medium text-gunmetal dark:text-white'>
-                                    <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-web-light-c4 dark:text-web-dark-c4'>
-                                      {item.icon.data && (
+                                    className='non-link w-full flex items-start text-base font-medium text-gunmetal dark:text-white relative'>
+                                    {item.icon.data && (
+                                      <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-web-light-c4 dark:text-web-dark-c4 mr-4'>
                                         <StrapiSvg
                                           className='h-10 w-10 text-gunmetal dark:text-white'
                                           aria-hidden='true'
                                           src={item.icon}
                                         />
-                                      )}
-                                    </div>
-                                    <div className='ml-4 text-base font-medium text-gunmetal dark:text-white'>
+                                      </div>
+                                    )}
+                                    <div className='text-base font-medium text-gunmetal dark:text-white'>
                                       {item.name}
                                     </div>
                                   </Link>
@@ -184,7 +220,7 @@ export async function Header() {
                             })}
                           </nav>
                         </div>
-                        <div className='-mr-2'>
+                        <div>
                           <PopoverButton className='bg-white dark:bg-onyx rounded-md p-2 inline-flex items-center justify-center text-gunmetal dark:text-white hover:text-web-light-c4 dark:hover:text-web-dark-c4 ease-in-out focus:outline-none'>
                             <span className='sr-only'>Close menu</span>
                             <XIcon className='h-6 w-6' aria-hidden='true' />
@@ -192,13 +228,26 @@ export async function Header() {
                         </div>
                       </div>
                     </div>
-                    <div className='py-6 px-5'>
-                      <div className='grid grid-cols-2 gap-4'></div>
-                      <div className='mt-6'>
+                    <div className='py-6 px-5 grid gap-4 w-full grid-cols-2'>
+                      {ctaSecondaryButton && (
                         <SuiButton
-                          path='https://clickhouse.cloud/signIn'
-                          title='Learn more'></SuiButton>
-                      </div>
+                          path={ctaSecondaryButton.href}
+                          target={ctaSecondaryButton.target}
+                          title={ctaSecondaryButton.text}
+                          widthFull
+                          className='bg-white'
+                          borderColor='border-primary'
+                        />
+                      )}
+                      {ctaButton && (
+                        <SuiButton
+                          path={ctaButton.href}
+                          target={ctaButton.target}
+                          title={ctaButton.text}
+                          widthFull
+                          className='w-full'
+                        />
+                      )}
                     </div>
                   </div>
                 </PopoverPanel>

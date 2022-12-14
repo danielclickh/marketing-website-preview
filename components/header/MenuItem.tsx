@@ -15,7 +15,7 @@ const MenuItem = ({ name, children }) => (
       <>
         <PopoverButton
           data-open={open}
-          className={`${styles.header_popover} group group-hover:text-web-light-c4 dark:group-hover:text-web-dark-c4`}>
+          className={`${styles.header_popover} group group-hover:text-web-light-c4 dark:group-hover:text-web-dark-c4 data-[open=true]:text-web-light-c4 data-[open=true]:dark:text-web-dark-c4  hover:text-web-light-c4 dark:hover:text-web-dark-c4`}>
           <span>{name}</span>
           <ChevronDownIcon
             className={classNames(

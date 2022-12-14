@@ -88,7 +88,7 @@ export default async function OurStoryPage() {
           </div>
         </div>
       </div>
-      <div className='bg-cultured dark:bg-onyx w-full pt-16 pb-12'>
+      <div className='section-light-color w-full pt-16 pb-12'>
         {aboutUs.items.map((item) => (
           <div
             key={item.title}
@@ -145,7 +145,7 @@ export default async function OurStoryPage() {
         </div>
       </div>
 
-      <div className='bg-cultured dark:bg-onyx w-full'>
+      <div className='section-light-color w-full'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
           <div className='flex flex-col text-center mx-auto pt-16'>
             <SuiTitle size='xl'>

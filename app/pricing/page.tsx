@@ -1,4 +1,5 @@
 import React from 'react'
+import CloudProviders from '../../components/CloudProviders'
 import Markdown from '../../components/Markdown'
 import PricingOptions from '../../components/PricingOptions'
 import { StrapiImage, transformStrapi } from '../../components/StrapiElements'
@@ -52,16 +53,17 @@ async function PricingPage() {
     <div className='pricing'>
       {hero && (
         <div className='hero'>
-          <div className='container'>
-            <div className='title'>{hero.title}</div>
+          <div className='container max-auto'>
+            <h1>{hero.title}</h1>
             <div className='description'>{hero.description}</div>
             {meteredPricing && (
               <div>
                 {pricingByRegion.length > 0 && (
                   <PricingOptions
                     pricingByRegion={pricingByRegion}
-                    pricingPlans={pricingPlans}
-                  />
+                    pricingPlans={pricingPlans}>
+                    <CloudProviders />
+                  </PricingOptions>
                 )}
                 <div className='pricing_footer_note'>
                   <Markdown>{meteredPricing.footerNote}</Markdown>

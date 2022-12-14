@@ -59,7 +59,43 @@
 }
 
 .companyCard {
-  @apply flex w-52 h-24 bg-white rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer;
+  @apply flex w-full sm:w-52 lg:w-full h-24 bg-white rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer;
   @apply bg-[image:var(--image-url)] bg-no-repeat bg-center;
 
 }
+
+
+        .heroScreenshotBg {
+          @apply pt-4 pl-4 h-auto relative;
+          &::before {
+            @apply w-11/12 h-5/6 absolute top-0 inset-x-0;
+            content: '';
+          background: linear-gradient(90deg, #FF9900 0.7%, #FFBE5B 99.07%);
+          border-radius: 8px;
+          transform: rotate(-1.92deg);
+          aspect-ratio: 2/1;
+          @screen lg {
+            @apply w-auto max-w-full;
+           margin: auto;
+
+          }
+
+          }
+        }
+
+        .heroScreenshot {
+          @apply top-2 relative m-0 h-full;
+          aspect-ratio: 2/1;
+
+          border-radius: 8px;
+          box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.05);
+          // transform: rotate(1.92deg);
+
+          @screen lg {
+          @apply w-auto left-1 top-1;
+          min-height: 24rem;
+          min-width: 48rem;
+          overflow-x: hidden;
+
+          }
+        }

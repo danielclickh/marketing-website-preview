@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import Markdown from '../Markdown'
 import { StrapiSvg } from '../StrapiElements'
-import { SuiSpacer, SuiText, SuiTitle } from '../sui'
+import { SuiSpacer, SuiText } from '../sui'
 
 type FeatureItemProps = {
   icon: ReactElement
@@ -14,7 +14,6 @@ type FeatureItemProps = {
 export function FeatureItem(props: FeatureItemProps) {
   const { icon, title, description, delay, invert } = props
 
-  const titleColour = invert ? 'lightest' : 'darkest'
   const textColour = invert ? 'light_purple' : 'dark'
   return (
     <div
@@ -29,9 +28,7 @@ export function FeatureItem(props: FeatureItemProps) {
         </div>
       </div>
       <div className='flex w-4/5 flex-col pl-2 pr-6'>
-        <SuiTitle semibold color={titleColour}>
-          <h3>{title}</h3>
-        </SuiTitle>
+        <h3 className='font-medium text-base md:text-ch-lg'>{title}</h3>
         <SuiSpacer size='xs' />
         <SuiText color={textColour} padding_0>
           <Markdown>{description}</Markdown>

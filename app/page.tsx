@@ -66,16 +66,20 @@ export default async function HomePage() {
 
   return (
     <>
-      <div className='md:bg-no-repeat bg-right bg-opacity-100'>
-        <div className='flex container mx-auto flex-col md:flex-row max-w-7xl pb-60 pt-28 px-8 2xl:px-0'>
-          <div data-aos='fade-up' className='flex w-1/2'>
-            <div className='max-w-screen-md mx-auto md:mt-8 flex-col text-center'>
+      <div className='md:bg-no-repeat bg-right bg-opacity-100 overflow-hidden'>
+        <div className='flex mx-auto flex-col lg:flex-row lg:items-stretch pb-44 pt-28 px-8 2xl:px-0 relative gap-24'>
+          <div data-aos='fade-up' className='flex w-full lg:w-3/5'>
+            <div className='max-w-screen-md mx-auto md:mt-8 flex-col text-center lg:text-left'>
               <SuiTitle size='max' color='darkest'>
                 <h1>{hero.title}</h1>
               </SuiTitle>
               <div className='flex flex-row'>
-                <div className='mt-6 max-w-3xl flex flex-col justify-center self-center'>
-                  <SuiText size='lg' color='dark' weight='normal'>
+                <div className='mt-6 max-w-3xl flex flex-col'>
+                  <SuiText
+                    size='lg'
+                    color='dark'
+                    weight='normal'
+                    className='text-left'>
                     <p>{hero.description}</p>
                   </SuiText>
                   {hero.ctaButton && (
@@ -83,6 +87,7 @@ export default async function HomePage() {
                       path={hero.ctaButton.href}
                       size='md'
                       title={hero.ctaButton.text}
+                      className='mr-auto'
                     />
                   )}
 
@@ -107,24 +112,28 @@ export default async function HomePage() {
                       </div>
                     </div>
                   )}
+                  <SuiText>{hero.ctaButtonSubtext}</SuiText>
                 </div>
               </div>
             </div>
           </div>
-          <div className='w-1/2 object-fit'>
-            <Image src={mainImage} alt='HomePage Image' />
+          <div
+            className={`w-full lg:w-2/5 object-fit md:object-contain ${styles.heroScreenshotBg}`}>
+            <Image
+              src={mainImage}
+              alt='HomePage Image'
+              className={styles.heroScreenshot}
+            />
           </div>
         </div>
-        <div className='flex flex-col md:flex-row container mx-auto justify-evenly max-w-7xl px-8 2xl:px-0'>
+        <div className='flex flex-col md:flex-row container mx-auto justify-evenly max-w-7xl px-8 2xl:px-0 mb-16 divide-y-2 md:divide-y-0 md:divide-x-2'>
           {hero.highlights.map((highlight) => (
             <SuiPanel
               key={highlight.title}
-              className='md:w-80 hover:bg-light-grey2 duration-300 ease-in-out hover:shadow-xl'
-              color='bg-cultured dark:bg-onyx'
-              shadow
-              border
-              padding='lg'>
-              <div className='flex flex-col text-center'>
+              className='w-full md:w-1/3 duration-300 ease-in-out rounded-none'
+              padding='lg'
+              color='empty'>
+              <div className='flex flex-col text-center justify-between h-full'>
                 <SuiTitle size='md'>
                   <h3>{highlight.title}</h3>
                 </SuiTitle>
@@ -148,7 +157,7 @@ export default async function HomePage() {
           ))}
         </div>
       </div>
-      <div className='w-full flex flex-col bg-arsenic'>
+      <div className='w-full flex flex-col section-dark'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat pb-8 px-8 2xl:px-0 pt-16'>
           <SuiTitle size='sm' color='primary' dark_color='primary'>
             {aboutClickhouse.title}
@@ -182,7 +191,7 @@ export default async function HomePage() {
         </div>
       </div>
 
-      <div className='flex w-full bg-cultured dark:bg-onyx'>
+      <div className='flex w-full section-light-color'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 xl:px-0'>
           <SuiTitle size='xl'>
             <h3>{customerStories.title}</h3>
@@ -191,7 +200,7 @@ export default async function HomePage() {
             <p>{customerStories.description}</p>
           </SuiText>
 
-          <div className='pt-12 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 self-center'>
+          <div className='container pt-12 flex flex-col sm:flex-row flex-wrap lg:grid lg:grid-cols-5 gap-4 md:gap-x-8 self-center items-center justify-center'>
             {customerStories.logos.map((logo) => {
               const style = {}
               style['--image-url'] = `url(${
@@ -275,16 +284,16 @@ export default async function HomePage() {
             </div>
           ))}
 
-          <div className='flex flex-col gap-4 md:flex-row md:space-x-8 justify-center pt-16'>
+          <div className='flex flex-col gap-4 md:flex-row md:gap-x-8 justify-center pt-16'>
             {clickhouseCloud.primaryButton && (
               <div className='w-full md:w-48'>
                 <SuiButton
                   color='primary'
-                  textColor='text-white'
                   borderColor='border-primary'
                   title={clickhouseCloud.primaryButton.text}
                   path={clickhouseCloud.primaryButton.href}
                   target={clickhouseCloud.primaryButton.target}
+                  widthFull
                 />
               </div>
             )}
@@ -296,6 +305,7 @@ export default async function HomePage() {
                   title={clickhouseCloud.secondaryButton.text}
                   path={clickhouseCloud.secondaryButton.href}
                   target={clickhouseCloud.secondaryButton.target}
+                  widthFull
                 />
               </div>
             )}
@@ -303,8 +313,8 @@ export default async function HomePage() {
         </div>
       </div>
 
-      <div className='flex w-full bg-cultured dark:bg-onyx'>
-        <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 2xl:px-0'>
+      <div className='flex w-full section-light-color'>
+        <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 2xl:px-0 items-center'>
           <SuiTitle size='sm' color='primary'>
             <h5>{testimonials.pretitle}</h5>
           </SuiTitle>
@@ -343,11 +353,9 @@ export default async function HomePage() {
               <SuiSpacer size='md' />
             </>
           ))}
-          <Image
-            src='/homepage/new/icon_star.svg'
-            alt='Experts'
-            width='32'
-            height='32'
+          <StrapiSvg
+            src={testimonials.bottomIconSvg}
+            className='text-primary'
           />
         </div>
       </div>

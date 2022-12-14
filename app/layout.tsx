@@ -6,10 +6,16 @@ import GetStarted from '../components/GetStarted'
 import { usePathname } from 'next/navigation'
 import { Providers } from './providers'
 import '../styles/globals.scss'
+import { Inter } from '@next/font/google'
 
 type Props = {
   children: ReactNode
 }
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter'
+})
 
 export default async function BaseLayout({ children }: Props) {
   // const pathname = usePathname()
@@ -24,7 +30,7 @@ export default async function BaseLayout({ children }: Props) {
         <meta content='width=device-width, initial-scale=1' name='viewport' />
         <link href='favicon.ico' rel='icon' type='image/x-icon' />
       </head>
-      <body>
+      <body className={`${inter.variable} font-sans`}>
         <div className='flex flex-col'>
           <Providers>
             {/* @ts-expect-error Server Component */}

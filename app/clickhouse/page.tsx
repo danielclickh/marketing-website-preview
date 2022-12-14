@@ -70,6 +70,7 @@ export default async function ClickHouseServerPage() {
                 )}
                 {secondaryButton && (
                   <SuiButton
+                    color='warning'
                     size='md'
                     path={secondaryButton.href}
                     target={secondaryButton.target}
@@ -94,7 +95,7 @@ export default async function ClickHouseServerPage() {
         </div>
         <div className='w-full mx-auto bg-strain_background bg-cover h-24 md:h-40 -mt-12 bg-no-repeat 2xl:h-52' />
       </div>
-      <div className=' bg-arsenic'>
+      <div className='section-dark'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-24 px-4 sm:px-8 2xl:px-0 pt-16'>
           <SuiTitle size='sm' color='primary' dark_color='primary'>
             {features1.title}
@@ -115,7 +116,7 @@ export default async function ClickHouseServerPage() {
           </div>
         </div>
       </div>
-      <div className='flex w-full bg-cultured dark:bg-onyx pb-20'>
+      <div className='flex w-full section-light-color pb-20'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0'>
           {features2.pretitle && (
             <>
@@ -183,7 +184,7 @@ export default async function ClickHouseServerPage() {
         </div>
       </div>
 
-      <div className='flex w-full bg-cultured dark:bg-onyx pb-20'>
+      <div className='flex w-full section-light-color pb-20'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 px-8 2xl:px-0'>
           {features4.pretitle && (
             <>

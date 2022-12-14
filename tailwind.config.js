@@ -9,15 +9,17 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans]
+        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        primary: '#FFB200',
+        primary: {
+          DEFAULT: '#FFB200',
+          text: '#4B2A04'
+        },
         cultured: '#F6F7FA',
         arsenic: '#443F51',
         gunmetal: '#2F2C3A',
         onyx: '#373343',
-
         gradientTop: '#FFC700',
         gradientBottom: '#FF7A00',
         primary_muted: '#E5A100',

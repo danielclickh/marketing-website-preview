@@ -94,10 +94,6 @@ export async function findOne(pathName: string, params: Record<string, any>) {
     `${url}${pathName}${newParamString.length > 0 ? `?${newParamString}` : ''}`
   )
 
-  console.log(
-    'herer',
-    `${url}${pathName}${newParamString.length > 0 ? `?${newParamString}` : ''}`
-  )
   const { data } = await response.json()
 
   return {

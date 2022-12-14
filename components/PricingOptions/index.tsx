@@ -2,30 +2,21 @@
 import { MinusIcon } from '@heroicons/react/outline'
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/solid'
 import React, { Fragment, useState } from 'react'
+import CloudProviders from '../CloudProviders'
 import { Listbox, Transition } from '../HeadlessUIClient'
 import Markdown from '../Markdown'
 import { StrapiImage } from '../StrapiElements'
 import { SuiButton } from '../sui'
 import ShowPricing from './ShowPricing'
 
-function PricingOptions({ pricingByRegion, pricingPlans }) {
+function PricingOptions({ pricingByRegion, pricingPlans, children }) {
   const [selectedRegion, setSelectedRegion] = useState(pricingByRegion[0])
   const totalLength = pricingByRegion.length
-  console.log({ selectedRegion, pricingByRegion })
   return (
     <>
       <div className='center_content'>
-        <div className='controls_row'>
-          {/* <div className="cloud_providers">
-                  <mat-icon svgIcon="aws_logo" className="aws_logo"></mat-icon>
-                  <div className="inactive_providers_wrapper">
-                    <div className="inactive_logos">
-                      <mat-icon svgIcon="gcp_logo" className="gcp_logo"></mat-icon>
-                      <mat-icon svgIcon="azure_logo" className="azure_logo"></mat-icon>
-                    </div>
-                    <div className="inactive_message">Coming soon</div>
-                  </div>
-                </div> */}
+        <div className='controls_row flex items-end'>
+          {children}
           <div className='seed_select_wrapper'>
             <Listbox value={selectedRegion} onChange={setSelectedRegion}>
               <div className='relative mt-1'>

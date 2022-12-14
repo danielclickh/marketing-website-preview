@@ -1,4 +1,19 @@
 @tailwind base;
+@layer base {
+  h1 {
+    @apply text-6xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  h3 {
+    @apply text-lg;
+  }
+  a:not(.non-link) {
+    @apply text-primary hover:underline;
+  }
+}
+
 @tailwind components;
 @tailwind utilities;
 @import 'node_modules/aos/src/sass/aos.scss';
@@ -10,11 +25,20 @@ body {
   margin: 0;
   font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
   Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  @apply mx-auto;
+  @apply mx-auto text-gunmetal dark:text-white;
 }
 
 * {
   box-sizing: border-box;
+}
+
+.section-light-color {
+  @apply bg-cultured dark:bg-onyx;
+
+}
+
+.section-dark {
+  @apply bg-arsenic text-white;
 }
 
 .feature-container {
@@ -22,7 +46,7 @@ body {
 }
 
 .large-feature-container {
-  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 space-y-4 md:space-y-0 gap-y-10 gap-x-12;
+  @apply grid grid-cols-1 md:grid-cols-2 space-y-4 md:space-y-0 gap-y-10 gap-x-12;
 }
 
 .feature-icon {
@@ -176,25 +200,7 @@ body {
 }
 
 .hexagon {
-    @apply w-72 absolute -top-5  z-50 mx-auto grid place-items-center bg-white dark:bg-onyx;
+    @apply w-72 absolute -top-16 z-50 mx-auto grid place-items-center bg-white dark:bg-onyx;
     aspect-ratio: 1/1.1547;
     clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
-//     &:before {
-//     content: " ";
-//     width: 0; height: 0;
-//     border-bottom: 30px solid #6C6;
-//     border-left: 52px solid transparent;
-//     border-right: 52px solid transparent;
-//     position: absolute;
-//     top: -30px;
-// }
-// &:after {
-//     content: "";
-//     width: 0;
-//     position: absolute;
-//     bottom: -30px;
-//     border-top: 30px solid #6C6;
-//     border-left: 52px solid transparent;
-//     border-right: 52px solid transparent;
-// }
 }

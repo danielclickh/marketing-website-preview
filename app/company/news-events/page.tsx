@@ -161,7 +161,7 @@ export default async function News() {
         <RecentEvents />
       </div>
 
-      <div className='flex w-full bg-cultured dark:bg-onyx pb-8'>
+      <div className='flex w-full section-light-color pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex flex-col md:flex-row justify-between pb-4 space-x-24'>
             <div className='flex flex-col md:w-1/2'>

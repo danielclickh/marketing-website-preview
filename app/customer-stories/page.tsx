@@ -5,12 +5,12 @@ import {
   SuiText,
   SuiTitle
 } from '../../components/sui'
-import Image from 'next/image'
 import { UseCase } from '../../components/use_case'
 import { findOne } from '../../lib/api/strapi'
 import GetStarted from '../../components/GetStarted'
 import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
 import { StarIcon } from '@heroicons/react/solid'
+import Carousel from './Carousel'
 
 async function getData() {
   const result = await findOne('use-case', {
@@ -57,73 +57,62 @@ async function CustomerStoriesPage() {
             </div>
           </div>
 
-          <div className='flex flex-col md:flex-row mt-20 md:justify-evenly pb-16'>
-            <Image
-              src={`/customer-stories/arrow-left.svg`}
-              alt='arrow-left'
-              width='94'
-              height='94'
-              className='cursor-pointer hover:opacity-60'
-            />
-
-            {testimonials.map((testimonial) => (
-              <div
-                className='flex w-full flex-col text-center md:max-w-xs px-4'
-                key={testimonial.author}
-                data-aos='fade-up'
-                data-aos-delay={200}>
-                <div>
-                  <StrapiImage
-                    src={testimonial.avatar.data}
-                    alt={testimonial.author}
-                    width='64'
-                    height='64'
-                  />
-                </div>
-                <SuiText size='lg'>
-                  <p>{testimonial.review}</p>
-                </SuiText>
-                <SuiText>
-                  <p>
-                    {' '}
-                    {testimonial.author}
-                    <br />
-                    {testimonial.role && (
-                      <span className='text-web-light-c4 dark:text-web-dark-c4'>
-                        {testimonial.role}
-                      </span>
-                    )}
-                  </p>
-                </SuiText>
+          <div className='flex flex-col md:flex-row mt-20 md:justify-evenly pb-16 2xl:container 2xl:mx-auto 2xl:px-0 py-3 px-10'>
+            <Carousel>
+              {testimonials.map((testimonial) => (
                 <div
-                  className='flex justify-center mx-4 mt-2 relative whitespace-nowrap text-primary'
-                  data-rating={testimonial.rating}>
-                  <StarIcon className='w-4' />
-                  <StarIcon className='w-4' />
-                  <StarIcon className='w-4' />
-                  <StarIcon className='w-4' />
-                  <StarIcon className='w-4' />
-                  <div
-                    className='mix-blend-color top-0 right-0 absolute overflow-hidden h-full bg-white'
-                    style={{
-                      width: `${(5 - testimonial.rating) * 20}%`
-                    }}></div>
+                  className='flex w-full max-w-xs flex-col text-center px-4'
+                  key={testimonial.author}
+                  data-aos='fade-up'
+                  data-aos-delay={200}>
+                  <div className='w-60 md:w-80 h-full flex flex-col justify-between'>
+                    <div>
+                      <StrapiImage
+                        src={testimonial.avatar.data}
+                        alt={testimonial.author}
+                        width='64'
+                        height='64'
+                        className='h-16 w-16 mx-auto'
+                      />
+                    </div>
+                    <SuiText size='lg'>
+                      <p>"{testimonial.review}"</p>
+                    </SuiText>
+                    <SuiText>
+                      <p>
+                        {' '}
+                        {testimonial.author}
+                        <br />
+                        {testimonial.role && (
+                          <span className='text-web-light-c4 dark:text-web-dark-c4'>
+                            {testimonial.role}
+                          </span>
+                        )}
+                      </p>
+                    </SuiText>
+                    <div
+                      className='flex justify-center mx-4 mt-2 relative whitespace-nowrap text-primary'
+                      data-rating={testimonial.rating}>
+                      <StarIcon className='w-4' />
+                      <StarIcon className='w-4' />
+                      <StarIcon className='w-4' />
+                      <StarIcon className='w-4' />
+                      <StarIcon className='w-4' />
+                      <div
+                        className='mix-blend-color top-0 right-0 absolute overflow-hidden h-full bg-white'
+                        style={{
+                          width: `${(5 - testimonial.rating) * 20}%`
+                        }}></div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
-
-            <Image
-              src={`/customer-stories/arrow-right.svg`}
-              alt='arrow-left'
-              width='94'
-              height='94'
-              className='cursor-pointer hover:opacity-60'
-            />
+              ))}
+            </Carousel>
           </div>
         </div>
       </div>
 
-      <div className='bg-cultured dark:bg-onyx w-full pt-16 pb-24'>
+      <div className='section-light-color w-full pt-16 pb-24'>
         <div className='flex container mx-auto flex-col max-w-7xl px-6 2xl:px-0'>
           <SuiTitle size='lg'>
             <h2>{useCases.title}</h2>
@@ -135,7 +124,7 @@ async function CustomerStoriesPage() {
         {spotlight && (
           <div className='flex max-w-7xl mx-auto mt-6 space-x-12 px-6 2xl:px-0 relative'>
             <SuiPanel color='bg-white dark:bg-gunmetal' shadow padding='xl'>
-              <div className='flex flex-row'>
+              <div className='flex flex-row drop-shadow-2xl'>
                 <div className='flex flex-col  w-1/2'>
                   <SuiTitle
                     size='xxs'
@@ -172,12 +161,12 @@ async function CustomerStoriesPage() {
             </SuiPanel>
           </div>
         )}
-        <div className='flex flex-col md:flex-row max-w-7xl mx-auto mt-12 space-y-10 md:space-y-0 md:space-x-12 px-6 2xl:px-0'>
+        <div className='grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto mt-12 gap-10 px-6 2xl:px-0'>
           {useCaseItems.map((useCase, index) => (
             <UseCase
               key={`usecase-${index}`}
-              lightLogo={useCase.lightLogoPng}
-              darkLogo={useCase.darkLogoPng}
+              lightLogo={useCase.lightLogoPng.data}
+              darkLogo={useCase.darkLogoPng.data}
               description={useCase.description}
               bullets={useCase.bullets}
               path={useCase?.ctaButton?.href}

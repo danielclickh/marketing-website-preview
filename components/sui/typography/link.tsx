@@ -10,20 +10,21 @@ export type LinkProps = {
 
 // @ts-ignore
 export const SuiLink = ({ ...LinkProps }) => {
-  const { children, href, onClick, color, size, weight } = LinkProps
+  const { children, href, onClick, color, size, weight, className } = LinkProps
 
   return (
-    <Link href={href}
-        onClick={onClick}
-        className={`
+    <Link
+      href={href}
+      onClick={onClick}
+      className={`
         ${sizeCalculator(size)}
         ${colourCalculator(color, 'text-text-warning')}
         font-${weight ? weight : 'semibold'}
           cursor-pointer hover:${colourCalculator(
             color,
             'text-text-warning'
-          )} duration-200 hover:underline`}>
-        {children}
+          )} duration-200 hover:underline ${className ?? ''}`}>
+      {children}
     </Link>
   )
 }
