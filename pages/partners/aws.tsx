@@ -5,7 +5,7 @@ import React from "react";
 const imagePrefix =
   process.env.NODE_ENV === "development" ? "" : "https://clickhouse.com/learn";
 
-function PartnersPage(props) {
+function PartnersPage() {
   return (
     <div className='min-h-screen pb-10 md:pb-20 mx-10'>
       <div className='flex flex-col md:flex-row-reverse container mx-auto gap-20 my-20 md:my-36 justify-center items-center'>
