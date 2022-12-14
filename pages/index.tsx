@@ -22,7 +22,6 @@ export default function Home() {
         />
       </Head>
       <div>
-        <Toolbar />
         <div className='hero-container'>
           <div className='hero-background' />
           <div className='hero-content'>
@@ -342,7 +341,6 @@ export default function Home() {
             </div>
           </Link>
         </div>
-        <Footer />
         <Script src='https://player.vimeo.com/api/player.js'></Script>
       </div>
     </>
