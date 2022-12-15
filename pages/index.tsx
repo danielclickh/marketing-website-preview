@@ -325,6 +325,94 @@ export default function Home() {
                 </div>
               </Link>
             </div>
+            <div className='event-item'>
+              <div className='event-item--image'>
+                <Image
+                  alt='image'
+                  src={`${imagePrefix}/clickhouse_workshop.png`}
+                  width={342}
+                  height={196}
+                />
+              </div>
+              <div className='event-item--title'>ClickHouse Workshop</div>
+              <div className='event-item--description'>
+                A deep dive into ClickHouse for developers and architects new to
+                ClickHouse. This free, hands-on, live-training event covers
+                modeling data, ingestion, views, analyzing data, manaaging data,
+                optimizing ClickHouse, and more.
+              </div>
+              <div className='event-item--details'>
+                <div className='event-item--date'>
+                  <Image
+                    alt='image'
+                    src={`${imagePrefix}/icon-calendar.svg`}
+                    height={20}
+                    width={20}
+                    className='event-item--icon'
+                  />
+                  January 4 &amp; 5, 2023
+                </div>
+                <div className='event-item--time'>
+                  <Image
+                    alt='image'
+                    src={`${imagePrefix}/icon-clock.svg`}
+                    height={20}
+                    width={20}
+                    className='event-item--icon'
+                  />
+                  9:00 a.m. - Noon PST both days
+                </div>
+              </div>
+              <Link href='https://clickhouse.com/company/events/clickhouse-onboarding-workshop'>
+                <div className='event-item--register-cta'>
+                  Register now -&gt;
+                </div>
+              </Link>
+            </div>
+            <div className='event-item'>
+              <div className='event-item--image'>
+                <Image
+                  alt='image'
+                  src={`${imagePrefix}/clickhouse_workshop.png`}
+                  width={342}
+                  height={196}
+                />
+              </div>
+              <div className='event-item--title'>ClickHouse Workshop</div>
+              <div className='event-item--description'>
+                A deep dive into ClickHouse for developers and architects new to
+                ClickHouse. This free, hands-on, live-training event covers
+                modeling data, ingestion, views, analyzing data, manaaging data,
+                optimizing ClickHouse, and more.
+              </div>
+              <div className='event-item--details'>
+                <div className='event-item--date'>
+                  <Image
+                    alt='image'
+                    src={`${imagePrefix}/icon-calendar.svg`}
+                    height={20}
+                    width={20}
+                    className='event-item--icon'
+                  />
+                  January 18 &amp; 19, 2023
+                </div>
+                <div className='event-item--time'>
+                  <Image
+                    alt='image'
+                    src={`${imagePrefix}/icon-clock.svg`}
+                    height={20}
+                    width={20}
+                    className='event-item--icon'
+                  />
+                  10:00 a.m. - 1:00 p.m. GMT (London) both days
+                </div>
+              </div>
+              <Link href='https://clickhouse.com/company/events/clickhouse-onboarding-workshop'>
+                <div className='event-item--register-cta'>
+                  Register now -&gt;
+                </div>
+              </Link>
+            </div>
           </div>
           <Link href='https://clickhouse.com/company/news-events'>
             <div style={{ marginTop: "70px", marginBottom: "150px" }}>
