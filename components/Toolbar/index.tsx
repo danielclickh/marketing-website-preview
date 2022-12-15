@@ -3,7 +3,7 @@
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import Link from "next/link";
-import Image from 'next/image'
+import Image from "next/image";
 import DropdownIcon from "./DropdownIcon";
 
 const imagePrefix =
@@ -171,7 +171,7 @@ export default function Toolbar() {
                               open
                                 ? "text-web-light-c4"
                                 : "text-web-light-c5 ease-in-out hover:text-web-light-c4 ",
-                              "group rounded-md inline-flex gap-x-2 items-center text-sm font-medium focus:outline-none group-hover:text-web-light-c4 h-10"
+                              "group rounded-md inline-flex gap-x-2 items-center text-sm font-semibold focus:outline-none group-hover:text-web-light-c4 h-10"
                             )}
                           >
                             <span>Products</span>
@@ -201,7 +201,7 @@ export default function Toolbar() {
                                           {item.icon}
                                         </div>
                                         <div className=''>
-                                          <p className='text-sm font-medium text-web-light-c5'>
+                                          <p className='text-sm font-semibold text-web-light-c5'>
                                             {item.name}
                                           </p>
                                           <p className='mt-1 text-sm text-web-light-c4'>
@@ -218,7 +218,7 @@ export default function Toolbar() {
                         </>
                       )}
                     </Popover>
-                    <div className='hidden md:flex items-center text-sm font-medium text-web-light-c5 hover:text-web-light-c4 ease-in-out'>
+                    <div className='hidden md:flex items-center text-sm font-semibold text-web-light-c5 hover:text-web-light-c4 ease-in-out'>
                       <Link href='https://clickhouse.com/customer-stories/'>
                         Use Cases
                       </Link>
@@ -232,7 +232,7 @@ export default function Toolbar() {
                               open
                                 ? "text-web-light-c4"
                                 : "text-web-light-c5 ease-in-out hover:text-web-light-c4",
-                              "group rounded-md inline-flex gap-x-2 items-center text-sm font-medium focus:outline-none group-hover:text-web-light-c4 h-10"
+                              "group rounded-md inline-flex gap-x-2 items-center text-sm font-semibold focus:outline-none group-hover:text-web-light-c4 h-10"
                             )}
                           >
                             <span>Company</span>
@@ -257,7 +257,7 @@ export default function Toolbar() {
                                       href={item.href}
                                       className='py-2 px-6 block w-full hover:bg-web-light-c2'
                                     >
-                                      <p className='text-sm font-medium text-web-light-c5'>
+                                      <p className='text-sm font-semibold text-web-light-c5'>
                                         {item.name}
                                       </p>
                                     </a>
@@ -278,7 +278,7 @@ export default function Toolbar() {
                               open
                                 ? "text-web-light-c4"
                                 : "text-web-light-c5 ease-in-out hover:text-web-light-c4",
-                              "group rounded-md inline-flex gap-x-2 items-center text-sm font-medium focus:outline-none group-hover:text-web-light-c4 h-10"
+                              "group rounded-md inline-flex gap-x-2 items-center text-sm font-semibold focus:outline-none group-hover:text-web-light-c4 h-10"
                             )}
                           >
                             <span>Learn</span>
@@ -303,7 +303,7 @@ export default function Toolbar() {
                                       href={item.href}
                                       className='py-2 px-6 block w-full hover:bg-web-light-c2'
                                     >
-                                      <p className='text-sm font-medium text-web-light-c5'>
+                                      <p className='text-sm font-semibold text-web-light-c5'>
                                         {item.name}
                                       </p>
                                     </a>
@@ -315,19 +315,13 @@ export default function Toolbar() {
                         </>
                       )}
                     </Popover>
-                    <div className='hidden md:flex items-center text-sm font-medium text-web-light-c5 hover:text-web-light-c4 ease-in-out'>
+                    <div className='hidden md:flex items-center text-sm font-semibold text-web-light-c5 hover:text-web-light-c4 ease-in-out'>
                       <Link href='https://clickhouse.com/pricing'>Pricing</Link>
                     </div>
                     <div className='md:flex justify-end gap-4 items-center text-sm'>
-                      <Link
-                        href='https://clickhouse.cloud/signUp'
-                        className='text-sm font-medium whitespace-nowrap pl-3 border-l border-web-slate'
-                      >
-                        Sign In
-                      </Link>
                       <button className='button'>
                         <Link href='https://clickhouse.cloud/signUp'>
-                          Get Started
+                          Start trial
                         </Link>
                       </button>
                     </div>
@@ -362,7 +356,7 @@ export default function Toolbar() {
                                 <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md text-web-light-c5'>
                                   {item.icon}
                                 </div>
-                                <div className='ml-4 text-sm font-medium text-web-light-c5'>
+                                <div className='ml-4 text-sm font-semibold text-web-light-c5'>
                                   {item.name}
                                 </div>
                               </a>
@@ -400,7 +394,7 @@ export default function Toolbar() {
                       <div className='grid grid-cols-2 gap-4'>
                         <Link
                           href='https://clickhouse.com/customer-stories/'
-                          className='text-sm font-medium text-web-light-c5'
+                          className='text-sm font-semibold text-web-light-c5'
                         >
                           Use Cases
                         </Link>
@@ -409,7 +403,7 @@ export default function Toolbar() {
                           <a
                             key={item.name}
                             href={item.href}
-                            className='text-sm font-medium text-web-light-c5'
+                            className='text-sm font-semibold text-web-light-c5'
                           >
                             {item.name}
                           </a>
@@ -418,14 +412,14 @@ export default function Toolbar() {
                           <a
                             key={item.name}
                             href={item.href}
-                            className='text-sm font-medium text-web-light-c5'
+                            className='text-sm font-semibold text-web-light-c5'
                           >
                             {item.name}
                           </a>
                         ))}
                         <Link
                           href='https://clickhouse.com/pricing'
-                          className='text-sm font-medium text-web-light-c5'
+                          className='text-sm font-semibold text-web-light-c5'
                         >
                           Pricing
                         </Link>
@@ -434,14 +428,6 @@ export default function Toolbar() {
                         _ngcontent-serverapp-c18=''
                         className='container cta_button_container flex gap-4 max-auto p-4'
                       >
-                        <a
-                          className='cta_button ng-star-inserted'
-                          target='_self'
-                          rel='external nofollow noopener'
-                          href='https://clickhouse.cloud/signIn'
-                        >
-                          <button className='stroked_button'>Sign in</button>
-                        </a>
                         <a
                           target='_self'
                           rel='external nofollow noopener'
