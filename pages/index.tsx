@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { Footer } from "../components/Footer";
-import Toolbar from "../components/Toolbar";
 const imagePrefix =
   process.env.NODE_ENV === "development" ? "" : "https://clickhouse.com/learn";
 
@@ -12,14 +11,6 @@ export default function Home() {
     <>
       <Head>
         <title>Learn | ClickHouse</title>
-        <link
-          rel='stylesheet'
-          href='https://fonts.googleapis.com/css?family=Hind+Siliguri:@700'
-        />
-        <link
-          rel='stylesheet'
-          href='https://fonts.googleapis.com/css?family=Inter:@400,500,600,700'
-        />
       </Head>
       <div>
         <div className='hero-container'>
