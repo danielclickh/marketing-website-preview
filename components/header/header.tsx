@@ -231,12 +231,12 @@ export async function Header() {
                     <div className='py-6 px-5 grid gap-4 w-full grid-cols-2'>
                       {ctaSecondaryButton && (
                         <SuiButton
+                          color='secondary'
                           path={ctaSecondaryButton.href}
                           target={ctaSecondaryButton.target}
                           title={ctaSecondaryButton.text}
                           widthFull
-                          className='bg-white'
-                          borderColor='border-primary'
+                          className='text-primary-text'
                         />
                       )}
                       {ctaButton && (

@@ -112,7 +112,7 @@ async function CustomerStoriesPage() {
         </div>
       </div>
 
-      <div className='section-light-color w-full pt-16 pb-24'>
+      <div className='container-light-color w-full pt-16 pb-24'>
         <div className='flex container mx-auto flex-col max-w-7xl px-6 2xl:px-0'>
           <SuiTitle size='lg'>
             <h2>{useCases.title}</h2>

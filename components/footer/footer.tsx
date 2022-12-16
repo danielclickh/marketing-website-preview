@@ -40,22 +40,23 @@ export async function Footer() {
     <div className='flex bg-onyx py-8 px-4 md:px-0'>
       <div className='container mx-auto md:flex justify-between max-w-7xl px-8 2xl:px-0 '>
         <div className='flex flex-col md:border-r border-arsenic'>
-          <div className='sitemap md:flex pt-4'>
+          <div className='sitemap lg:flex pt-4'>
             {topLevelFooterMenu.map((topMenu) => (
               <div
                 key={topMenu.title}
-                className='flex flex-col md:w-4/12 pb-6 md:pb-0'>
-                <SuiTitle size='xxs' uppercase color='white'>
+                className='flex flex-col lg:w-4/12 pb-6 lg:pb-0'>
+                <SuiTitle size='sm' uppercase color='white'>
                   <h5>{topMenu.title}</h5>
                 </SuiTitle>
                 <SuiSpacer />
-                <div className='flex flex-row md:flex-col space-x-4 md:space-x-0'>
+                <div className='flex flex-row flex-wrap lg:flex-col gap-x-4 lg:gap-x-0'>
                   {topMenu.items.map((footerLink) => (
                     <SuiLink
                       key={footerLink.name}
                       href={footerLink.href}
                       target={footerLink.target}
                       color='white'
+                      className='non-link'
                       weight='normal'>
                       {footerLink.name}
                     </SuiLink>
@@ -64,7 +65,7 @@ export async function Footer() {
               </div>
             ))}
           </div>
-          <div className='flex pt-12 items-start md:flex-col lg:flex-row'>
+          <div className='flex flex-col lg:pt-12 items-start lg:flex-row'>
             {logoSvg && (
               <div className='flex md:w-64 mr-3 gap-x-3 items-center'>
                 <StrapiSvg src={logoSvg} {...logoSvg} width='25' height='25' />
@@ -73,7 +74,7 @@ export async function Footer() {
                 </span>
               </div>
             )}
-            <div className='px-4 md:px-0 lg:px-4 self-end'>
+            <div className='pr-4 lg:pl-4 self-end'>
               <SuiText size='sm' color='white' padding_0>
                 <p>{licensingText}</p>
               </SuiText>
@@ -90,7 +91,7 @@ export async function Footer() {
                       size='sm'
                       color='white'
                       weight='normal'
-                      className='px-1 leading-normal'>
+                      className='non-link px-1 first:pl-0 leading-normal h-4 flex items-center'>
                       {bottomLink.text}
                     </SuiLink>
                   ))}
@@ -100,11 +101,11 @@ export async function Footer() {
           </div>
         </div>
         <div className='hidden md:flex flex-col md:w-fit pl-12'>
-          <SuiTitle size='xxs' color='white'>
-            <h4>{newsletterForm.title}</h4>
-          </SuiTitle>
-          <SuiText color='white'>
-            <p>{newsletterForm.description}</p>
+          <h4 className='text-xl font-bold text-white'>
+            {newsletterForm.title}
+          </h4>
+          <SuiText color='white' size='xs'>
+            {newsletterForm.description}
           </SuiText>
           <div className='flex align-middle items-center space-x-2'>
             <SuiTextField htmlFor='email' placeholder='Email address' />

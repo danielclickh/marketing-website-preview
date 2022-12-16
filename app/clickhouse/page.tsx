@@ -50,7 +50,7 @@ export default async function ClickHouseServerPage() {
           <div data-aos='fade-up' className='flex'>
             <div className='md:w-6/12 md:mt-16 flex-col text-center md:text-left'>
               <SuiTitle size='web'>
-                <h1>
+                <h1 className='text-6xl mb-0'>
                   <Markdown>{title}</Markdown>
                 </h1>
               </SuiTitle>
@@ -116,7 +116,7 @@ export default async function ClickHouseServerPage() {
           </div>
         </div>
       </div>
-      <div className='flex w-full section-light-color pb-20'>
+      <div className='flex w-full container-light-color pb-20'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0'>
           {features2.pretitle && (
             <>
@@ -184,7 +184,7 @@ export default async function ClickHouseServerPage() {
         </div>
       </div>
 
-      <div className='flex w-full section-light-color pb-20'>
+      <div className='flex w-full container-light-color pb-20'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 px-8 2xl:px-0'>
           {features4.pretitle && (
             <>

@@ -32,7 +32,7 @@ async function getData() {
 
 export default async function CloudPage() {
   const { hero, features, screenshotsAndBullets } = await getData()
-  const { title, description, ctaButton, videoGif } = hero
+  const { title, description, ctaButton, cloudProviders, videoGif } = hero
 
   return (
     <>
@@ -42,7 +42,7 @@ export default async function CloudPage() {
             <div data-aos='fade-up' className='flex'>
               <div className='w-11/12 mx-auto md:w-6/12 md:mt-16 flex-col text-center md:text-left'>
                 <SuiTitle size='web'>
-                  <h1>
+                  <h1 className='text-6xl mb-0'>
                     <Markdown>{title}</Markdown>
                   </h1>
                 </SuiTitle>
@@ -62,7 +62,33 @@ export default async function CloudPage() {
                       />
                     </div>
                   )}
-                  <CloudProviders />
+                  <div className='flex space-x-6 justify-center md:justify-start'>
+                    {cloudProviders.map((cloudProvider) => (
+                      <div
+                        className='pt-8 flex flex-col space-y-2'
+                        key={cloudProvider.title}>
+                        <SuiTitle size='xxs' color='dark' className='mb-5'>
+                          <h5>{cloudProvider.title}</h5>
+                        </SuiTitle>
+                        <div className='flex flex-row items-start gap-6 h-10'>
+                          {cloudProvider.lightProviderPngs.data.map(
+                            (lightIconPng, index) => (
+                              <StrapiPicture
+                                key={`${cloudProvider.title}-${index}`}
+                                dark={
+                                  cloudProvider.darkProviderPngs.data[index]
+                                }
+                                light={lightIconPng}
+                                width='100'
+                                height='40'
+                                className='max-h-10 w-auto'
+                              />
+                            )
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
               <div className='hidden md:flex w-6/12 mx-auto px-8'>
@@ -99,7 +125,7 @@ export default async function CloudPage() {
         </div>
       </div>
 
-      <div className='flex w-full section-light-color pb-12 gap-y-28'>
+      <div className='flex w-full container-light-color pb-12 gap-y-28'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0'>
           {screenshotsAndBullets.map((item, index) => (
             <div

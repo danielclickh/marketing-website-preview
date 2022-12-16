@@ -54,7 +54,7 @@ export default async function CareersPage() {
         </div>
       </div>
 
-      <div className='w-full section-light-color pt-12 pb-12'>
+      <div className='w-full container-light-color pt-12 pb-12'>
         {companyValues.map((companyValue) => (
           <div
             className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 md:space-x-16 mb-12 items-center'

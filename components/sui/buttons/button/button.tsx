@@ -25,9 +25,9 @@ export function SuiButton(props: ButtonProps) {
   const colorCalculator = (color: string | undefined) => {
     switch (color) {
       case 'primary':
-        return `bg-primary ${
-          props.textColor ? props.textColor : 'text-primary-text'
-        }`
+        return 'bg-primary text-primary-text'
+      case 'secondary':
+        return 'bg-transparent text-primary border border-primary'
       case 'dark':
         return 'bg-arsenic text-white'
       case 'dark_alt':
@@ -45,7 +45,9 @@ export function SuiButton(props: ButtonProps) {
       case 'xl':
         return 'text-base py-3 px-6'
       default:
-        return 'bg-primary text-primary-text'
+        return `bg-primary ${
+          props.textColor ? props.textColor : 'text-primary-text'
+        }`
     }
   }
 

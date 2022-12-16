@@ -1,10 +1,10 @@
 @tailwind base;
 @layer base {
   h1 {
-    @apply text-6xl;
+    @apply text-5xl font-bold mb-5;
   }
   h2 {
-    @apply text-xl;
+    @apply text-2xl;
   }
   h3 {
     @apply text-lg;
@@ -28,12 +28,16 @@ body {
   @apply mx-auto text-gunmetal dark:text-white;
 }
 
+[data-nextjs-scroll-focus-boundary] {
+  @apply h-full;
+}
+
 * {
   box-sizing: border-box;
 }
 
-.section-light-color {
-  @apply bg-cultured dark:bg-onyx;
+.container-light-color {
+  @apply bg-cultured dark:bg-onyx text-gunmetal dark:text-white;
 
 }
 

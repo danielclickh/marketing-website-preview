@@ -75,7 +75,6 @@ function ServiceUnavailableForm({
         )}
         {status?.success && (
           <div className='seed_success'>
-            <p></p>
             <p>{successMsg}</p>
           </div>
         )}

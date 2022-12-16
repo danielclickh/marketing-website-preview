@@ -88,7 +88,7 @@ export default async function OurStoryPage() {
           </div>
         </div>
       </div>
-      <div className='section-light-color w-full pt-16 pb-12'>
+      <div className='container-light-color w-full pt-16 pb-12'>
         {aboutUs.items.map((item) => (
           <div
             key={item.title}
@@ -128,7 +128,7 @@ export default async function OurStoryPage() {
                 className='flex flex-col md:flex-row items-center'
                 key={item.text}>
                 <div className='flex md:w-2/12 lg:w-1/12'>
-                  <div className='h-16 w-16 bg-cultured dark:bg-onyx rounded-full text-center items-center justify-center flex'>
+                  <div className='h-16 w-16 container-light-color rounded-full text-center items-center justify-center flex'>
                     <SuiTitle size='sm'>
                       <h5>{item.year}</h5>
                     </SuiTitle>
@@ -145,7 +145,7 @@ export default async function OurStoryPage() {
         </div>
       </div>
 
-      <div className='section-light-color w-full'>
+      <div className='container-light-color w-full'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
           <div className='flex flex-col text-center mx-auto pt-16'>
             <SuiTitle size='xl'>

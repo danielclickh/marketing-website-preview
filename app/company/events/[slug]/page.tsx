@@ -89,7 +89,7 @@ async function EventPage({ params: { slug } }) {
             </div>
           )}
         </EventsContainer>
-        <div className='bg-cultured dark:bg-onyx'>
+        <div className='container-light-color'>
           <RecentEvents excludeEventSlug={slug} />
         </div>
       </div>

@@ -46,11 +46,7 @@ export default async function RichContentPage({ params }) {
       </div>
       <div className='content_container mb-16'>
         <div className='mx-auto container'>
-          {content && (
-            <div className='rich_content'>
-              <Markdown>{content}</Markdown>
-            </div>
-          )}
+          {content && <Markdown>{content}</Markdown>}
 
           {(leftContent || rightContent) && (
             <div
@@ -58,22 +54,18 @@ export default async function RichContentPage({ params }) {
                 leftContent && rightContent ? 'two_column_container' : ''
               }>
               {leftContent && (
-                <div className='rich_content column_content'>
-                  <Markdown>{leftContent}</Markdown>
-                </div>
+                <Markdown className='column_content'>{leftContent}</Markdown>
               )}
               {rightContent && (
-                <div className='rich_content column_content'>
-                  <Markdown>{rightContent}</Markdown>
-                </div>
+                <Markdown className='column_content'>{rightContent}</Markdown>
               )}
             </div>
           )}
 
           {fullWidthContent && (
-            <div className='rich_content full_width_content'>
-              <Markdown>{fullWidthContent}</Markdown>
-            </div>
+            <Markdown className='full_width_content'>
+              {fullWidthContent}
+            </Markdown>
           )}
         </div>
       </div>

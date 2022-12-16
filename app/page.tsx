@@ -71,7 +71,7 @@ export default async function HomePage() {
           <div data-aos='fade-up' className='flex w-full lg:w-3/5'>
             <div className='max-w-screen-md mx-auto md:mt-8 flex-col text-center lg:text-left'>
               <SuiTitle size='max' color='darkest'>
-                <h1>{hero.title}</h1>
+                <h1 className='text-6xl mb-0'>{hero.title}</h1>
               </SuiTitle>
               <div className='flex flex-row'>
                 <div className='mt-6 max-w-3xl flex flex-col'>
@@ -191,7 +191,7 @@ export default async function HomePage() {
         </div>
       </div>
 
-      <div className='flex w-full section-light-color'>
+      <div className='flex w-full container-light-color'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 xl:px-0'>
           <SuiTitle size='xl'>
             <h3>{customerStories.title}</h3>
@@ -313,7 +313,7 @@ export default async function HomePage() {
         </div>
       </div>
 
-      <div className='flex w-full section-light-color'>
+      <div className='flex w-full container-light-color'>
         <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 2xl:px-0 items-center'>
           <SuiTitle size='sm' color='primary'>
             <h5>{testimonials.pretitle}</h5>
@@ -337,17 +337,15 @@ export default async function HomePage() {
           {testimonials.testimonialItems.map((testimonial) => (
             <>
               <SuiText size='md' weight='medium' color='dark'>
-                <p>
-                  <SuiLink
-                    href={testimonial.href}
-                    target={testimonial.target}
-                    size='sm'
-                    color='darkest'>
-                    {testimonial.title}
-                  </SuiLink>
-                  <br />
-                  {testimonial.author}
-                </p>
+                <SuiLink
+                  href={testimonial.href}
+                  target={testimonial.target}
+                  size='sm'
+                  color='darkest'>
+                  {testimonial.title}
+                </SuiLink>
+                <br />
+                {testimonial.author}
               </SuiText>
 
               <SuiSpacer size='md' />

@@ -20,7 +20,7 @@ async function GrowingCommunity() {
   const { title, iconButtons } = await getData()
 
   return (
-    <div className='w-full section-light-color pt-16 pb-12'>
+    <div className='w-full container-light-color pt-16 pb-12'>
       <div className='flex flex-col container mx-auto max-w-7xl px-8 2xl:px-0 mb-12'>
         <SuiTitle size='lg'>
           <h2>{title}</h2>
