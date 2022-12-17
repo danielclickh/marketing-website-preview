@@ -15,7 +15,7 @@ import RecentEvents from '../../../components/RecentEvents'
 const NewsItem = ({ source, date, title, abstract }) => {
   return (
     <div className='flex flex-col py-4'>
-      <SuiTitle size='xxs' color='dark'>
+      <SuiTitle size='xs' color='dark'>
         <h4>
           {source} • {date}
         </h4>
@@ -98,7 +98,7 @@ export default async function News() {
           <div
             className='flex flex-col text-center mx-auto pt-6'
             data-aos='fade-up'>
-            <SuiTitle size='web'>
+            <SuiTitle size='4xl'>
               <h1>{title}</h1>
             </SuiTitle>
             <SuiSpacer size='sm' />
@@ -118,7 +118,7 @@ export default async function News() {
                 className='my-8'>
                 <div className='flex flex-col md:flex-row'>
                   <div className='flex flex-col md:w-1/2'>
-                    <SuiTitle size='xxs' color='primary' dark_color='primary'>
+                    <SuiTitle size='xs' color='primary' dark_color='primary'>
                       <h4>
                         {featuredEvent.category} • {featuredEvent.location.city}
                       </h4>

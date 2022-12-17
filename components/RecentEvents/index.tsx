@@ -62,7 +62,7 @@ function RecentEvents({ excludeEventSlug }: { excludeEventSlug?: string }) {
             />
 
             <div className='flex flex-col px-4'>
-              <SuiTitle size='xxs' color='primary' dark_color='primary'>
+              <SuiTitle size='xs' color='primary' dark_color='primary'>
                 <h4>{event.category}</h4>
               </SuiTitle>
               <SuiSpacer size='xs' />

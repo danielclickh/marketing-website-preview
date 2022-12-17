@@ -47,7 +47,7 @@ export default async function BlogsPage() {
         <div
           className='flex flex-col text-center mx-auto pt-6'
           data-aos='fade-up'>
-          <SuiTitle size='web'>
+          <SuiTitle size='4xl'>
             <h1>{title}</h1>
           </SuiTitle>
           <SuiSpacer size='sm' />

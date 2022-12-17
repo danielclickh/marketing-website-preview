@@ -51,9 +51,7 @@ export function SuiHealth(props: HealthProps) {
   return (
     <div key={id} className='flex items-center space-x-4'>
       {IconCalculator(type)}
-      <SuiText size='md' weight='medium'>
-        {name}
-      </SuiText>
+      <SuiText weight='medium'>{name}</SuiText>
     </div>
   )
 }

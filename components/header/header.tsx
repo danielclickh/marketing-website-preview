@@ -43,14 +43,16 @@ export async function Header() {
         true ? 'shadow-sm bg-opacity-80 dark:bg-opacity-80' : ''
       }`}>
       <div className='text-center bg-primary text-raisin_black text-sm font-medium w-full'>
-        <Link href='/company/events/clickhouse-workshop' className='non-link'>
+        <Link href='/company/events/clickhouse-workshop'>
           Free ClickHouse Workshop - Sign up now
         </Link>
       </div>
       <div className='pt-2 container flex mx-auto md:pt-0 w-full px-4 mt-1 sm:px-8 2xl:px-0 max-w-7xl h-16 items-center'>
         <div className='flex flex-col w-full'>
           <div className='flex justify-between items-center w-full'>
-            <Link href='/' className='flex items-center gap-x-3 non-link'>
+            <Link
+              href='/'
+              className='flex items-center gap-x-3 hover:no-underline'>
               <StrapiSvg src={logoIcon} />
               <span className={`text-2xl ${hind.className}`}>ClickHouse</span>
             </Link>
@@ -74,7 +76,7 @@ export async function Header() {
                               <Link
                                 key={item.name}
                                 href={item.href}
-                                className='flex items-start non-link'>
+                                className='flex items-start hover:no-underline'>
                                 <div
                                   className={`${styles.menuItem} hover:bg-cultured dark:hover:bg-onyx`}
                                   data-icon={item.icon.data ? 'true' : 'false'}>
@@ -107,7 +109,7 @@ export async function Header() {
                           key={menuItem.name}
                           href={menuItem.href}
                           target={menuItem.target}
-                          className='non-link inline-flex items-center text-sm font-semibold text-gunmetal dark:text-white hover:text-web-light-c4 dark:hover:text-web-dark-c4 ease-in-out'>
+                          className='inline-flex hover:no-underline items-center text-sm font-semibold text-gunmetal dark:text-white hover:text-web-light-c4 dark:hover:text-web-dark-c4 ease-in-out'>
                           {menuItem.name}
                         </Link>
                       )
@@ -121,7 +123,6 @@ export async function Header() {
                         <SuiLink
                           href={ctaSecondaryButton.href}
                           color='darkest'
-                          className='non-link'
                           target={ctaSecondaryButton.target}>
                           {ctaSecondaryButton.text}
                         </SuiLink>
@@ -166,7 +167,7 @@ export async function Header() {
                                           key={item.name}
                                           href={item.href}
                                           target={item.target}
-                                          className='non-link w-full flex items-center text-base font-medium text-gunmetal dark:text-white relative'>
+                                          className='w-full hover:no-underline flex items-center text-base font-medium text-gunmetal dark:text-white relative'>
                                           {item.icon.data && (
                                             <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-web-light-c4 dark:text-web-dark-c4 mr-4'>
                                               <StrapiSvg
@@ -192,7 +193,7 @@ export async function Header() {
                                     key={item.name}
                                     href={item.href}
                                     target={item.target}
-                                    className='non-link w-full flex items-start text-base font-medium text-gunmetal dark:text-white relative'>
+                                    className='w-full hover:no-underline flex items-start text-base font-medium text-gunmetal dark:text-white relative'>
                                     {item.icon.data && (
                                       <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-web-light-c4 dark:text-web-dark-c4 mr-4'>
                                         <StrapiSvg
@@ -213,7 +214,7 @@ export async function Header() {
                                   key={menuItem.name}
                                   href={menuItem.href}
                                   target={menuItem.target}
-                                  className='text-base font-medium text-gunmetal dark:text-white'>
+                                  className='text-base hover:no-underline font-medium text-gunmetal dark:text-white'>
                                   {menuItem.name}
                                 </Link>
                               )

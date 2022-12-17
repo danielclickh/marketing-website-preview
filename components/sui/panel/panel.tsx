@@ -1,6 +1,7 @@
 type PanelProps = {
   color?: string
   shadow?: boolean
+  isRounded?: boolean
   border?: boolean
   padding?: string
   className?: string
@@ -37,9 +38,11 @@ export function SuiPanel(props: PanelProps) {
   return (
     <>
       <div
-        className={`${bgColour} ${shadow} ${border} ${className} w-full ${paddingCalculator(
+        className={`${bgColour} ${shadow} ${border} w-full ${paddingCalculator(
           props.padding
-        )} rounded-lg`}>
+        )}  duration-300 ease-in-out ${
+          props.isRounded ? 'rounded-lg' : 'rounded-none'
+        } ${className}`}>
         {props.children}
       </div>
     </>

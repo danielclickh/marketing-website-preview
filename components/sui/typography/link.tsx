@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { colourCalculator, sizeCalculator } from './calculator'
+import { colourCalculator } from './calculator'
 export type LinkProps = {
   href: string
   onClick?: any
@@ -17,7 +17,7 @@ export const SuiLink = ({ ...LinkProps }) => {
       href={href}
       onClick={onClick}
       className={`
-        ${sizeCalculator(size)}
+        text-${size}
         ${colourCalculator(color, 'text-text-warning')}
         font-${weight ? weight : 'semibold'}
           cursor-pointer hover:${colourCalculator(

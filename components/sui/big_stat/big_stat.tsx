@@ -43,7 +43,7 @@ export function SuiBigStat(props: BigStatProps) {
         color={color ? color : 'bg-white dark:bg-dark-grey2'}
         border={border ? border : false}>
         <div className='flex flex-col'>
-          <SuiText size='sm' color='dark' weight='semibold' padding_0>
+          <SuiText color='dark' weight='semibold' padding_0>
             {label}
           </SuiText>
           <div className='flex md:flex-col xl:flex-row'>

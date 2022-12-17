@@ -15,11 +15,8 @@ async function CloudProviders() {
   })
   return (
     <div className='flex space-x-6 justify-center md:justify-start'>
-      {cloudProviders.map((cloudProvider) => (
+      {cloudProviders.map((cloudProvider, index: number) => (
         <div className='pt-8 flex flex-col space-y-2' key={cloudProvider.title}>
-          <SuiTitle size='xxs' color='dark' className='mb-5'>
-            <h5>{cloudProvider.title}</h5>
-          </SuiTitle>
           <div className='flex flex-row items-start gap-6 h-10'>
             {cloudProvider.lightProviderPngs.data.map((lightIconPng, index) => (
               <StrapiPicture
@@ -32,6 +29,11 @@ async function CloudProviders() {
               />
             ))}
           </div>
+          {index !== 0 && (
+            <SuiTitle size='xs' color='dark' className='mb-5'>
+              <h5>{cloudProvider.title}</h5>
+            </SuiTitle>
+          )}
         </div>
       ))}
     </div>

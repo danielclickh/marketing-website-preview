@@ -41,7 +41,7 @@ export default async function CloudPage() {
           <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-20 md:px-8 2xl:px-0'>
             <div data-aos='fade-up' className='flex'>
               <div className='w-11/12 mx-auto md:w-6/12 md:mt-16 flex-col text-center md:text-left'>
-                <SuiTitle size='web'>
+                <SuiTitle size='4xl'>
                   <h1 className='text-6xl mb-0'>
                     <Markdown>{title}</Markdown>
                   </h1>
@@ -67,7 +67,7 @@ export default async function CloudPage() {
                       <div
                         className='pt-8 flex flex-col space-y-2'
                         key={cloudProvider.title}>
-                        <SuiTitle size='xxs' color='dark' className='mb-5'>
+                        <SuiTitle size='xs' color='dark' className='mb-5'>
                           <h5>{cloudProvider.title}</h5>
                         </SuiTitle>
                         <div className='flex flex-row items-start gap-6 h-10'>

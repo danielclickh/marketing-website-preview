@@ -22,13 +22,11 @@ function RecentBlog({ thumbnailPng, category, slug, title }) {
           )}
 
           <div className='px-6 py-6'>
-            <SuiTitle size='xxs' uppercase color='primary' hover>
+            <SuiTitle size='xs' uppercase color='primary' hover>
               <h5>{category}</h5>
             </SuiTitle>
             <SuiSpacer size='sm' />
-            <SuiTitle
-              size='md'
-              className='group-hover:underline cursor-pointer'>
+            <SuiTitle className='group-hover:underline cursor-pointer'>
               <h3>{title}</h3>
             </SuiTitle>
           </div>

@@ -67,10 +67,12 @@ export default async function HomePage() {
   return (
     <>
       <div className='md:bg-no-repeat bg-right bg-opacity-100 overflow-hidden'>
-        <div className='flex mx-auto flex-col lg:flex-row lg:items-stretch pb-44 pt-28 px-8 2xl:px-0 relative gap-24'>
-          <div data-aos='fade-up' className='flex w-full lg:w-3/5'>
-            <div className='max-w-screen-md mx-auto md:mt-8 flex-col text-center lg:text-left'>
-              <SuiTitle size='max' color='darkest'>
+        <div className='flex mx-auto flex-col lg:flex-row lg:items-stretch pb-20 lg:pb-44 pt-28 px-8 2xl:px-0 relative gap-24 justify-center'>
+          <div
+            data-aos='fade-up'
+            className='flex w-full lg:w-3/5 max-w-screen-sm mx-auto lg:mx-0'>
+            <div className=' mx-auto md:mr-0 md:mt-8 flex-col text-center lg:text-left'>
+              <SuiTitle size='4xl' color='darkest'>
                 <h1 className='text-6xl mb-0'>{hero.title}</h1>
               </SuiTitle>
               <div className='flex flex-row'>
@@ -112,7 +114,7 @@ export default async function HomePage() {
                       </div>
                     </div>
                   )}
-                  <SuiText>{hero.ctaButtonSubtext}</SuiText>
+                  <SuiText color='dark'>{hero.ctaButtonSubtext}</SuiText>
                 </div>
               </div>
             </div>
@@ -130,13 +132,13 @@ export default async function HomePage() {
           {hero.highlights.map((highlight) => (
             <SuiPanel
               key={highlight.title}
-              className='w-full md:w-1/3 duration-300 ease-in-out rounded-none'
+              className='w-full md:w-1/3'
               padding='lg'
               color='empty'>
               <div className='flex flex-col text-center justify-between h-full'>
-                <SuiTitle size='md'>
-                  <h3>{highlight.title}</h3>
-                </SuiTitle>
+                <h3 className='text-xl font-bold text-center px-6'>
+                  {highlight.title}
+                </h3>
                 <div className='bg-primary h-1 w-16 rounded-md flex mx-auto my-4' />
                 <SuiText>
                   <p>{highlight.description}</p>
@@ -159,7 +161,7 @@ export default async function HomePage() {
       </div>
       <div className='w-full flex flex-col section-dark'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat pb-8 px-8 2xl:px-0 pt-16'>
-          <SuiTitle size='sm' color='primary' dark_color='primary'>
+          <SuiTitle color='primary' dark_color='primary'>
             {aboutClickhouse.title}
           </SuiTitle>
 
@@ -193,7 +195,7 @@ export default async function HomePage() {
 
       <div className='flex w-full container-light-color'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 xl:px-0'>
-          <SuiTitle size='xl'>
+          <SuiTitle size='2xl'>
             <h3>{customerStories.title}</h3>
           </SuiTitle>
           <SuiText size='lg' color='dark' weight='normal'>
@@ -238,11 +240,11 @@ export default async function HomePage() {
 
       <div className='flex w-full bg-white dark:bg-gunmetal pb-20'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0'>
-          <SuiTitle size='sm' color='primary' dark_color='primary'>
+          <SuiTitle color='primary' dark_color='primary'>
             {clickhouseCloud.pretitle}
           </SuiTitle>
           <SuiSpacer size='sm' />
-          <SuiTitle size='xl'>
+          <SuiTitle size='2xl'>
             <h3>{clickhouseCloud.title}</h3>
           </SuiTitle>
 
@@ -315,11 +317,11 @@ export default async function HomePage() {
 
       <div className='flex w-full container-light-color'>
         <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 2xl:px-0 items-center'>
-          <SuiTitle size='sm' color='primary'>
+          <SuiTitle color='primary'>
             <h5>{testimonials.pretitle}</h5>
           </SuiTitle>
           <SuiSpacer size='sm' />
-          <SuiTitle size='xl'>
+          <SuiTitle size='2xl'>
             <h3>{testimonials.title}</h3>
           </SuiTitle>
           <SuiSpacer size='sm' />
@@ -336,11 +338,10 @@ export default async function HomePage() {
           <SuiSpacer size='md' />
           {testimonials.testimonialItems.map((testimonial) => (
             <>
-              <SuiText size='md' weight='medium' color='dark'>
+              <SuiText weight='medium' color='dark'>
                 <SuiLink
                   href={testimonial.href}
                   target={testimonial.target}
-                  size='sm'
                   color='darkest'>
                   {testimonial.title}
                 </SuiLink>

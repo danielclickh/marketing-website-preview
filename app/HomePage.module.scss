@@ -68,17 +68,13 @@
         .heroScreenshotBg {
           @apply pt-4 pl-4 h-auto relative;
           &::before {
-            @apply w-11/12 h-5/6 absolute top-0 inset-x-0;
+            @apply w-auto max-w-full absolute top-0 inset-x-0 m-auto ml-0;
+            height: 90%;
             content: '';
           background: linear-gradient(90deg, #FF9900 0.7%, #FFBE5B 99.07%);
           border-radius: 8px;
           transform: rotate(-1.92deg);
           aspect-ratio: 2/1;
-          @screen lg {
-            @apply w-auto max-w-full;
-           margin: auto;
-
-          }
 
           }
         }

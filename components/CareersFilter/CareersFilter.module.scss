@@ -1,7 +1,0 @@
-.left-bar-filter {
-  @apply text-sm px-4 py-2 font-medium rounded-md cursor-pointer transition-all duration-500 ease-in-out transform;
-  @apply text-web-light-c4 dark: text-web-dark-c4 hover:text-gunmetal dark:hover:text-white hover:bg-cultured hover:dark:bg-onyx;
-  &.selected {
-    @apply bg-primary text-white dark: text-gunmetal ;
-  }
-}

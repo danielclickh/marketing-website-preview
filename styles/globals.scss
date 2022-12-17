@@ -9,8 +9,8 @@
   h3 {
     @apply text-lg;
   }
-  a:not(.non-link) {
-    @apply text-primary hover:underline;
+  a {
+    @apply hover:underline;
   }
 }
 
@@ -183,11 +183,7 @@ body {
   }
 
   a {
-    @apply text-text-warning dark:text-primary;
-
-    &:hover {
-      text-decoration: underline;
-    }
+    @apply text-primary;
   }
 }
 

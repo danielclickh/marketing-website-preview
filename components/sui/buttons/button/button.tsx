@@ -19,6 +19,7 @@ type ButtonProps = {
   target?: string
   className?: string
   widthFull?: boolean
+  segment?: string
 }
 
 export function SuiButton(props: ButtonProps) {
@@ -83,7 +84,10 @@ export function SuiButton(props: ButtonProps) {
           } font-semibold text-center ${
             props.widthFull ? 'w-full' : 'w-auto'
           } rounded-lg duration-300 whitespace-nowrap
-           ${colorCalculator(props.color)} ${props.className ?? ''}`}>
+           ${colorCalculator(props.color)} ${props.className ?? ''}`}
+          onClick={() => {
+            // analytics.track('click', )
+          }}>
           <span className='flex justify-center'>
             {props.icon && <RefreshIcon className='w-4 mr-2' />}
             {props.title}

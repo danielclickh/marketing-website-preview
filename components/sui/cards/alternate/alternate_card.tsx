@@ -32,7 +32,7 @@ export function SuiAlternateCard(props: CardProps) {
       color={color}
       className='flex hover:shadow-md duration-300'>
       <div className='flex flex-col text-center'>
-        <SuiTitle size='md'>{title}</SuiTitle>
+        <SuiTitle>{title}</SuiTitle>
         <div className='bg-primary h-1.5 w-16 rounded-md flex mx-auto mt-4' />
         <SuiText color='dark'>{description}</SuiText>
         {buttonTitle && (

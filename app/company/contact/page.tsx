@@ -29,7 +29,7 @@ export default async function ContactPage() {
           <div
             className='flex flex-col text-center mx-auto pt-6'
             data-aos='fade-up'>
-            <SuiTitle size='web'>
+            <SuiTitle size='4xl'>
               <h1>{title}</h1>
             </SuiTitle>
             <SuiSpacer size='sm' />
@@ -45,14 +45,10 @@ export default async function ContactPage() {
               <div className='w-full md:w-128 self-center text-left space-y-8'>
                 <ContactForm {...contactForm} />
                 <div className='flex text-center'>
-                  <SuiText color='dark' size='sm'>
+                  <SuiText color='dark'>
                     If you have any more thoughts or questions, feel free to
                     contact the ClickHouse team directly at{' '}
-                    <SuiLink
-                      size='sm'
-                      href='#'
-                      weight='normal'
-                      className='pl-2'>
+                    <SuiLink href='#' weight='normal' className='pl-2'>
                       feedback@clickhouse.com
                     </SuiLink>
                     .

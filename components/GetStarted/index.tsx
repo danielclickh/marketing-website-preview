@@ -39,16 +39,16 @@ async function FetchGetStarted({ customHeader }: Props) {
       <div className='container mx-auto justify-center py-12 px-8 2xl:px-0  flex flex-col w-full max-w-7xl'>
         <div className='flex flex-col text-center md:w-5/12 mx-auto '>
           {customHeader ? (
-            <SuiTitle size='max' color='white'>
+            <SuiTitle size='4xl' color='white'>
               <h3>{customHeader}</h3>
             </SuiTitle>
           ) : (
             <>
-              <SuiTitle size='xs' color='primary'>
+              <SuiTitle size='sm' color='primary'>
                 <h4>{pretitle}</h4>
               </SuiTitle>
               <SuiSpacer />
-              <SuiTitle size='max' color='white'>
+              <SuiTitle size='4xl' color='white'>
                 <h3>{title}</h3>
               </SuiTitle>
               <SuiText size='lg' color='offWhite'>

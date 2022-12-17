@@ -1,6 +1,7 @@
 'use client'
 import React, { useMemo, useState } from 'react'
 import useSWR from 'swr'
+import CategorySelector from '../CategorySelector'
 import {
   SuiTextField,
   SuiSpacer,
@@ -52,7 +53,7 @@ const fetcher = async (url: string) => {
 
 type DataContent = null | {
   departments: DepartmentType[]
-  offices: [id: number, name: string][]
+  offices: [id: string, name: string][]
 }
 
 function CareersFilter() {
@@ -94,63 +95,49 @@ function CareersFilter() {
   if (!data) {
     return <div> Loading</div>
   }
+
+  const offices = data.offices.map(([officeId, officeName]) => ({
+    text: officeName,
+    onClick: () => setSelectedOffice(officeId),
+    selected: selectedOffice === officeId
+  }))
+  offices.unshift({
+    text: 'All',
+    onClick: () => setSelectedOffice(null),
+    selected: selectedOffice === null
+  })
+
+  const departments = data.departments.map(([name, _]) => ({
+    text: name,
+    onClick: () => setSelectedDepartment(name),
+    selected: selectedDepartment === name
+  }))
+  departments.unshift({
+    text: 'All',
+    onClick: () => setSelectedDepartment(null),
+    selected: selectedDepartment === null
+  })
+
   return (
     <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 justify-between'>
       <div className='flex md:w-64 md:pr-8 pb-8 md:pb-0 flex-col'>
         <SuiTextField placeholder='Search' htmlFor='search' />
         <SuiSpacer size='lg' />
-        <SuiTitle size='xxs'>
+        <SuiTitle size='xs'>
           <h4>Office</h4>
         </SuiTitle>
-        <ul className='mt-4'>
-          <li
-            className={`left-bar-filter ${
-              selectedOffice === null ? 'selected' : ''
-            }`}
-            onClick={() => setSelectedOffice(null)}>
-            All
-          </li>
-          {data.offices.map(([officeId, officeName]) => (
-            <li
-              className={`left-bar-filter ${
-                selectedOffice === officeId ? 'selected' : ''
-              }`}
-              key={officeId}
-              onClick={() => setSelectedOffice(officeId)}>
-              {officeName}
-            </li>
-          ))}
-        </ul>
-
+        <CategorySelector options={offices} />
         <SuiSpacer size='lg' />
-        <SuiTitle size='xxs'>
+        <SuiTitle size='xs'>
           <h4>Department</h4>
         </SuiTitle>
-        <ul className='mt-4'>
-          <li
-            className={`left-bar-filter ${
-              selectedDepartment === null ? 'selected' : ''
-            }`}
-            onClick={() => setSelectedDepartment(null)}>
-            All
-          </li>
-          {data.departments.map(([name, _]) => (
-            <li
-              className={`left-bar-filter ${
-                selectedDepartment === name ? 'selected' : ''
-              }`}
-              key={name}
-              onClick={() => setSelectedDepartment(name)}>
-              {name}
-            </li>
-          ))}
-        </ul>
+        <CategorySelector options={departments} />
       </div>
       <div className='flex flex-col md:flex-row md:w-3/4 md:space-x-16 justify-center'>
         <div className='flex flex-col space-y-6 w-full'>
           {filteredDepartments.map(([name, jobs]: [string, JobType[]]) => (
             <React.Fragment key={name}>
-              <SuiTitle size='sm'>
+              <SuiTitle>
                 <h4>{name}</h4>
               </SuiTitle>
               {jobs.length === 0 && <div>No results</div>}

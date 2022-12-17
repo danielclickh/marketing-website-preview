@@ -59,10 +59,10 @@ export default async function BlogPage({ params }) {
           <div
             className='flex flex-col text-center mx-auto pt-6 max-w-3xl'
             data-aos='fade-up'>
-            <SuiTitle size='sm' color='primary' dark_color='primary'>
+            <SuiTitle color='primary' dark_color='primary'>
               <h4>{category}</h4>
             </SuiTitle>
-            <SuiTitle size='web'>
+            <SuiTitle size='4xl'>
               <h1>{title}</h1>
             </SuiTitle>
 
@@ -96,15 +96,11 @@ export default async function BlogPage({ params }) {
             <SuiSpacer />
             <div className='flex justify-between items-center'>
               <div className='flex'>
-                <SuiText size='md' color='dark'>
-                  Share this post
-                </SuiText>
+                <SuiText color='dark'>Share this post</SuiText>
               </div>
               <div className='flex space-x-4'>
                 <div className='border border-light-grey4 rounded-lg px-2 hover:bg-light-grey3 cursor-pointer'>
-                  <SuiText size='md' color='dark'>
-                    Copy link
-                  </SuiText>
+                  <SuiText color='dark'>Copy link</SuiText>
                 </div>
                 <div className='border border-light-grey4 rounded-lg p-2 pb-0 hover:bg-light-grey3 cursor-pointer'>
                   <Image
@@ -166,7 +162,7 @@ export default async function BlogPage({ params }) {
       <div className='flex w-full container-light-color pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex justify-between pb-4'>
-            <SuiTitle size='md'>
+            <SuiTitle>
               <h4>Recent posts</h4>
             </SuiTitle>
 

@@ -46,7 +46,7 @@ async function CustomerStoriesPage() {
           <div
             className='flex flex-col text-center mx-auto pt-6'
             data-aos='fade-up'>
-            <SuiTitle size='web'>
+            <SuiTitle size='4xl'>
               <h1>{title}</h1>
             </SuiTitle>
             <SuiSpacer size='sm' />
@@ -127,7 +127,7 @@ async function CustomerStoriesPage() {
               <div className='flex flex-row drop-shadow-2xl'>
                 <div className='flex flex-col  w-1/2'>
                   <SuiTitle
-                    size='xxs'
+                    size='xs'
                     uppercase
                     color='primary'
                     dark_color='primary'>

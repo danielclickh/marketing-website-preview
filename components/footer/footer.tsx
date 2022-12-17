@@ -45,7 +45,7 @@ export async function Footer() {
               <div
                 key={topMenu.title}
                 className='flex flex-col lg:w-4/12 pb-6 lg:pb-0'>
-                <SuiTitle size='sm' uppercase color='white'>
+                <SuiTitle uppercase color='white'>
                   <h5>{topMenu.title}</h5>
                 </SuiTitle>
                 <SuiSpacer />
@@ -56,7 +56,6 @@ export async function Footer() {
                       href={footerLink.href}
                       target={footerLink.target}
                       color='white'
-                      className='non-link'
                       weight='normal'>
                       {footerLink.name}
                     </SuiLink>
@@ -75,11 +74,11 @@ export async function Footer() {
               </div>
             )}
             <div className='pr-4 lg:pl-4 self-end'>
-              <SuiText size='sm' color='white' padding_0>
+              <SuiText color='white' padding_0>
                 <p>{licensingText}</p>
               </SuiText>
               <div className='copyright_and_bottom_links flex flex-col lg:flex-row gap-1 lg:items-center'>
-                <SuiTitle color='white' size='xxs'>
+                <SuiTitle color='white' size='xs'>
                   {copyright}
                 </SuiTitle>
                 <div className='bottom_links flex divide-x divide-white'>
@@ -88,10 +87,9 @@ export async function Footer() {
                       key={bottomLink.text}
                       href={bottomLink.href}
                       target={bottomLink.target}
-                      size='sm'
                       color='white'
                       weight='normal'
-                      className='non-link px-1 first:pl-0 leading-normal h-4 flex items-center'>
+                      className='px-1 first:pl-0 leading-normal h-4 flex items-center'>
                       {bottomLink.text}
                     </SuiLink>
                   ))}
@@ -104,7 +102,7 @@ export async function Footer() {
           <h4 className='text-xl font-bold text-white'>
             {newsletterForm.title}
           </h4>
-          <SuiText color='white' size='xs'>
+          <SuiText color='white' size='sm'>
             {newsletterForm.description}
           </SuiText>
           <div className='flex align-middle items-center space-x-2'>
@@ -115,7 +113,7 @@ export async function Footer() {
           </div>
 
           <div className='flex flex-col pt-2'>
-            <SuiText color='white' size='xxs'>
+            <SuiText color='white' size='xs'>
               <p>{socialLinks.title}</p>
             </SuiText>
             <div className='flex space-x-4 pt-2'>
