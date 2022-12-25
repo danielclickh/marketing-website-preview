@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { use } from 'react'
 import { findAll } from '../../lib/api/strapi'
-import { SuiSpacer, SuiText, SuiTitle } from '../sui'
+import { SuiText, SuiTitle } from '../sui'
 
 function RecentEvents({ excludeEventSlug }: { excludeEventSlug?: string }) {
   const filters = {
@@ -37,11 +37,9 @@ function RecentEvents({ excludeEventSlug }: { excludeEventSlug?: string }) {
 
   return (
     <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
-      <div className='flex justify-between pb-4'>
-        <SuiTitle size='lg'>
-          <h4>Recent events</h4>
-        </SuiTitle>
-      </div>
+      <SuiTitle type='h3' className='pb-4 text-center'>
+        Recent events
+      </SuiTitle>
       <div className='flex flex-col md:flex-row md:space-x-16 space-y-6 md:space-y-0'>
         {data.map((event) => (
           <Link
@@ -62,13 +60,10 @@ function RecentEvents({ excludeEventSlug }: { excludeEventSlug?: string }) {
             />
 
             <div className='flex flex-col px-4'>
-              <SuiTitle size='xs' color='primary' dark_color='primary'>
-                <h4>{event.category}</h4>
+              <SuiTitle type='h6' color='primary' className='mb-1'>
+                {event.category}
               </SuiTitle>
-              <SuiSpacer size='xs' />
-              <SuiTitle>
-                <h3>{event.title}</h3>
-              </SuiTitle>
+              <SuiTitle type='h4'>{event.title}</SuiTitle>
               <SuiText color='dark' padding_0>
                 <p>
                   {event.form.type !== 'recordedGatedContent'

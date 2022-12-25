@@ -1,7 +1,6 @@
 import React from 'react'
-import { SuiSpacer, SuiText, SuiTitle } from '../../components/sui'
+import { SuiText, SuiTitle } from '../../components/sui'
 import { fetchAll, findOne } from '../../lib/api/strapi'
-import { BlogPost } from './types'
 
 import BlogPostList from '../../components/BlogPostList'
 import GetStarted from '../../components/GetStarted'
@@ -47,10 +46,9 @@ export default async function BlogsPage() {
         <div
           className='flex flex-col text-center mx-auto pt-6'
           data-aos='fade-up'>
-          <SuiTitle size='4xl'>
-            <h1>{title}</h1>
+          <SuiTitle type='h1' className='mb-2'>
+            {title}
           </SuiTitle>
-          <SuiSpacer size='sm' />
           <div className='max-w-2xl'>
             <SuiText size='lg' color='dark' weight='normal'>
               <p>{description}</p>

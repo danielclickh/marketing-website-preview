@@ -1,10 +1,4 @@
-import {
-  SuiButton,
-  SuiPanel,
-  SuiSpacer,
-  SuiText,
-  SuiTitle
-} from '../../components/sui'
+import { SuiButton, SuiPanel, SuiText, SuiTitle } from '../../components/sui'
 import { UseCase } from '../../components/use_case'
 import { findOne } from '../../lib/api/strapi'
 import GetStarted from '../../components/GetStarted'
@@ -46,10 +40,9 @@ async function CustomerStoriesPage() {
           <div
             className='flex flex-col text-center mx-auto pt-6'
             data-aos='fade-up'>
-            <SuiTitle size='4xl'>
-              <h1>{title}</h1>
+            <SuiTitle type='h1' className='mb-2'>
+              {title}
             </SuiTitle>
-            <SuiSpacer size='sm' />
             <div className='max-w-2xl'>
               <SuiText size='lg' color='dark' weight='normal'>
                 <p>{description}</p>
@@ -68,7 +61,7 @@ async function CustomerStoriesPage() {
                   <div className='w-60 md:w-80 h-full flex flex-col justify-between'>
                     <div>
                       <StrapiImage
-                        src={testimonial.avatar.data}
+                        {...testimonial.avatar.data.attributes}
                         alt={testimonial.author}
                         width='64'
                         height='64'
@@ -114,9 +107,7 @@ async function CustomerStoriesPage() {
 
       <div className='container-light-color w-full pt-16 pb-24'>
         <div className='flex container mx-auto flex-col max-w-7xl px-6 2xl:px-0'>
-          <SuiTitle size='lg'>
-            <h2>{useCases.title}</h2>
-          </SuiTitle>
+          <SuiTitle type='h3'>{useCases.title}</SuiTitle>
           <SuiText size='lg' color='dark'>
             <p>{useCases.description}</p>
           </SuiText>
@@ -126,15 +117,10 @@ async function CustomerStoriesPage() {
             <SuiPanel color='bg-white dark:bg-gunmetal' shadow padding='xl'>
               <div className='flex flex-row drop-shadow-2xl'>
                 <div className='flex flex-col  w-1/2'>
-                  <SuiTitle
-                    size='xs'
-                    uppercase
-                    color='primary'
-                    dark_color='primary'>
+                  <SuiTitle type='h6' color='primary' className='mb-1'>
                     {useCases.spotlightTitle}
                   </SuiTitle>
-                  <SuiSpacer size='xs' />
-                  <SuiTitle>{spotlight.companyName}</SuiTitle>
+                  <SuiTitle type='h4'>{spotlight.companyName}</SuiTitle>
                   <SuiText>{spotlight.description}</SuiText>
                   {spotlight.ctaButton && (
                     <div className='flex mt-8'>
@@ -151,9 +137,9 @@ async function CustomerStoriesPage() {
                 <div className='-mt-8 -mb-14 overflow-hidden mx-auto w-full max-w-xs'>
                   <div className='hexagon'>
                     <StrapiPicture
-                      light={spotlight.lightLogoPng.data}
-                      dark={spotlight.darkLogoPng.data}
-                      size='small'
+                      light={spotlight.lightLogoPng.data.attributes}
+                      dark={spotlight.darkLogoPng.data.attributes}
+                      sizes='small'
                     />
                   </div>
                 </div>

@@ -11,7 +11,7 @@ import {
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
 import ThemeSwitcher from './ThemeSwitcher'
-import { StrapiSvg } from '../StrapiElements'
+import { StrapiImage } from '../StrapiElements'
 import MenuItem from './MenuItem'
 import { findOne } from '../../lib/api/strapi'
 import styles from './Header.module.scss'
@@ -53,7 +53,7 @@ export async function Header() {
             <Link
               href='/'
               className='flex items-center gap-x-3 hover:no-underline'>
-              <StrapiSvg src={logoIcon} />
+              <StrapiImage src={logoIcon} />
               <span className={`text-2xl ${hind.className}`}>ClickHouse</span>
             </Link>
             <div className='flex justify-center'>
@@ -82,10 +82,10 @@ export async function Header() {
                                   data-icon={item.icon.data ? 'true' : 'false'}>
                                   {item.icon.data && (
                                     <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md text-arsenic sm:h-12 sm:w-12 md:mr-4'>
-                                      <StrapiSvg
+                                      <StrapiImage
+                                        {...item.icon.data.attributes}
                                         className='h-10 w-10 text-gunmetal dark:text-white'
                                         aria-hidden='true'
-                                        src={item.icon}
                                       />
                                     </div>
                                   )}
@@ -170,10 +170,10 @@ export async function Header() {
                                           className='w-full hover:no-underline flex items-center text-base font-medium text-gunmetal dark:text-white relative'>
                                           {item.icon.data && (
                                             <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-web-light-c4 dark:text-web-dark-c4 mr-4'>
-                                              <StrapiSvg
+                                              <StrapiImage
+                                                {...item.icon.data.attributes}
                                                 className='h-10 w-10 text-gunmetal dark:text-white'
                                                 aria-hidden='true'
-                                                src={item.icon}
                                               />
                                             </div>
                                           )}
@@ -196,10 +196,10 @@ export async function Header() {
                                     className='w-full hover:no-underline flex items-start text-base font-medium text-gunmetal dark:text-white relative'>
                                     {item.icon.data && (
                                       <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-web-light-c4 dark:text-web-dark-c4 mr-4'>
-                                        <StrapiSvg
+                                        <StrapiImage
+                                          {...item.icon.data.attributes}
                                           className='h-10 w-10 text-gunmetal dark:text-white'
                                           aria-hidden='true'
-                                          src={item.icon}
                                         />
                                       </div>
                                     )}

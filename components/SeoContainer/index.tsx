@@ -1,6 +1,4 @@
 import React from 'react'
-import useSWR from 'swr'
-import { findOne } from '../../lib/api/strapi'
 
 interface SeoMetadata {
   title?: string

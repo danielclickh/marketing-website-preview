@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { StrapiImage } from '../../../components/StrapiElements'
-import { SuiSpacer, SuiTitle } from '../../../components/sui'
+import { SuiTitle } from '../../../components/sui'
 
 function RecentBlog({ thumbnailPng, category, slug, title }) {
   return (
@@ -22,12 +22,13 @@ function RecentBlog({ thumbnailPng, category, slug, title }) {
           )}
 
           <div className='px-6 py-6'>
-            <SuiTitle size='xs' uppercase color='primary' hover>
-              <h5>{category}</h5>
+            <SuiTitle type='h6' color='primary' className='mb-2'>
+              {category}
             </SuiTitle>
-            <SuiSpacer size='sm' />
-            <SuiTitle className='group-hover:underline cursor-pointer'>
-              <h3>{title}</h3>
+            <SuiTitle
+              type='h4'
+              className='group-hover:underline cursor-pointer'>
+              {title}
             </SuiTitle>
           </div>
         </div>

@@ -14,14 +14,16 @@ export function Person(props: PersonProps) {
 
   return (
     <div className='flex w-full flex-col text-center md:max-w-xs px-4'>
-      <div>
-        <StrapiImage
-          src={avatar.data}
-          alt={name}
-          width={small ? '124' : '154'}
-          height={small ? '124' : '154'}
-        />
-      </div>
+      {avatar.data?.attributes && (
+        <div>
+          <StrapiImage
+            alt={name}
+            {...avatar.data.attributes}
+            width={small ? '124' : '154'}
+            height={small ? '124' : '154'}
+          />
+        </div>
+      )}
       <SuiText>
         <p>
           {' '}

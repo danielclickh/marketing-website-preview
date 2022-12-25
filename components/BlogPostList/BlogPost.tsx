@@ -1,9 +1,8 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { BlogPost as BlogPostType } from '../../app/blog/types'
 import Markdown from '../Markdown'
-import { transformStrapi } from '../StrapiElements'
-import { SuiSpacer, SuiText, SuiTitle } from '../sui'
+import { StrapiImage } from '../StrapiElements'
+import { SuiText, SuiTitle } from '../sui'
 
 export default function BlogPost(props: BlogPostType) {
   const {
@@ -23,11 +22,9 @@ export default function BlogPost(props: BlogPostType) {
         <div className='flex flex-col'>
           {thumbnailPng.data && (
             <div className='w-full h-28 overflow-hidden'>
-              <Image
-                src={
-                  transformStrapi(thumbnailPng?.data?.attributes, 'thumbnail')
-                    ?.src
-                }
+              <StrapiImage
+                {...thumbnailPng?.data?.attributes}
+                size='thumbnail'
                 alt={title}
                 className='rounded-t-lg object-cover w-full h-full'
                 width='100'
@@ -38,12 +35,13 @@ export default function BlogPost(props: BlogPostType) {
           )}
 
           <div className='px-6 py-6'>
-            <SuiTitle size='xs' uppercase color='primary' hover>
-              <h5>{category}</h5>
+            <SuiTitle type='h6' color='primary' className='mb-2'>
+              {category}
             </SuiTitle>
-            <SuiSpacer size='sm' />
-            <SuiTitle className='group-hover:underline cursor-pointer'>
-              <h3>{title}</h3>
+            <SuiTitle
+              type='h4'
+              className='group-hover:underline cursor-pointer'>
+              {title}
             </SuiTitle>
             {shortDescription && (
               <SuiText color='dark' className='line-clamp'>
@@ -53,10 +51,8 @@ export default function BlogPost(props: BlogPostType) {
             <div className='flex flex-row space-x-4 pt-2'>
               {author.avatarPng?.data?.attributes && (
                 <div className='flex w-11 h-11'>
-                  <Image
-                    src={
-                      transformStrapi(author.avatarPng?.data?.attributes)?.src
-                    }
+                  <StrapiImage
+                    {...author.avatarPng?.data?.attributes}
                     alt={author.name}
                     width='44'
                     height='44'

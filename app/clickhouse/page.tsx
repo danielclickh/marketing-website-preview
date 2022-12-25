@@ -1,9 +1,9 @@
-import { SuiButton, SuiSpacer, SuiText, SuiTitle } from '../../components/sui'
+import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
 import { FeatureItem } from '../../components/feature_item'
 import { FeatureItemLarge } from '../../components/feature_item_large/feature_item_large'
 import { findOne } from '../../lib/api/strapi'
 import Markdown from '../../components/Markdown'
-import { StrapiImage, StrapiSvg } from '../../components/StrapiElements'
+import { StrapiImage } from '../../components/StrapiElements'
 import BulletPoint from '../../components/BulletPoint'
 import GetStarted from '../../components/GetStarted'
 
@@ -49,10 +49,8 @@ export default async function ClickHouseServerPage() {
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-20 px-4 sm:px-8 2xl:px-0'>
           <div data-aos='fade-up' className='flex'>
             <div className='md:w-6/12 md:mt-16 flex-col text-center md:text-left'>
-              <SuiTitle size='4xl'>
-                <h1 className='text-6xl mb-0'>
-                  <Markdown>{title}</Markdown>
-                </h1>
+              <SuiTitle type='h1' className='text-6xl mb-0'>
+                <Markdown>{title}</Markdown>
               </SuiTitle>
               <div className='mt-6'>
                 <SuiText size='lg' color='dark' weight='normal'>
@@ -97,11 +95,9 @@ export default async function ClickHouseServerPage() {
       </div>
       <div className='section-dark'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-24 px-4 sm:px-8 2xl:px-0 pt-16'>
-          <SuiTitle color='primary' dark_color='primary'>
+          <SuiTitle type='h4' color='primary' className='mb-6'>
             {features1.title}
           </SuiTitle>
-
-          <SuiSpacer size='lg' />
           <div className='feature-container'>
             {features1.items.map((feature) => (
               <FeatureItem
@@ -119,18 +115,13 @@ export default async function ClickHouseServerPage() {
       <div className='flex w-full container-light-color pb-20'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0'>
           {features2.pretitle && (
-            <>
-              <SuiTitle size='sm' color='primary' dark_color='primary'>
-                <h3>{features2.pretitle}</h3>
-              </SuiTitle>
-              <SuiSpacer size='sm' />
-            </>
+            <SuiTitle type='h5' color='primary' className='mb-2'>
+              {features2.pretitle}
+            </SuiTitle>
           )}
-          <SuiTitle size='2xl'>
-            <h3>{features2.title}</h3>
+          <SuiTitle type='h2' className='mb-8'>
+            {features2.title}
           </SuiTitle>
-
-          <SuiSpacer size='xl' />
 
           <div className='large-feature-container '>
             {features2.items.map((item) => (
@@ -148,16 +139,12 @@ export default async function ClickHouseServerPage() {
       <div className='flex w-full bg-white dark:bg-gunmetal pb-20'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 px-8 2xl:px-0'>
           {features3.pretitle && (
-            <>
-              <SuiTitle size='sm' color='primary' dark_color='primary'>
-                <h3>{features3.pretitle}</h3>
-              </SuiTitle>
-              <SuiSpacer size='sm' />
-            </>
+            <SuiTitle type='h5' className='mb-2' color='primary'>
+              {features3.pretitle}
+            </SuiTitle>
           )}
-          <SuiSpacer size='sm' />
-          <SuiTitle size='2xl'>
-            <h3>{features3.mainItem.title}</h3>
+          <SuiTitle type='h2' className='mb-2'>
+            {features3.mainItem.title}
           </SuiTitle>
 
           <div className='flex flex-col md:flex-row items-center'>
@@ -165,16 +152,14 @@ export default async function ClickHouseServerPage() {
               <SuiText size='lg'>{features3.mainItem.description}</SuiText>
             </div>
             <div className='pt-4 md:pt-0 w-2/5 justify-center flex'>
-              <StrapiSvg src={features3.iconSvg} />
+              <StrapiImage {...features3.iconSvg.data.attributes} />
             </div>
           </div>
 
           <div className='flex flex-col md:flex-row md:space-x-12 pt-16'>
             {features3.items.map((feature) => (
               <div className='md:w-1/3' key={feature.title}>
-                <SuiTitle>
-                  <h4>{feature.title}</h4>
-                </SuiTitle>
+                <SuiTitle type='h4'>{feature.title}</SuiTitle>
                 <SuiText color='dark' size='lg'>
                   <p>{feature.description}</p>
                 </SuiText>
@@ -187,23 +172,16 @@ export default async function ClickHouseServerPage() {
       <div className='flex w-full container-light-color pb-20'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 px-8 2xl:px-0'>
           {features4.pretitle && (
-            <>
-              <SuiTitle size='sm' color='primary' dark_color='primary'>
-                <h3>{features4.pretitle}</h3>
-              </SuiTitle>
-              <SuiSpacer size='sm' />
-            </>
+            <SuiTitle type='h5' color='primary' className='mb-2'>
+              {features4.pretitle}
+            </SuiTitle>
           )}
-          <SuiTitle size='2xl'>
-            <h3>{features4.title}</h3>
-          </SuiTitle>
+          <SuiTitle type='h2'>{features4.title}</SuiTitle>
 
           <div className='large-feature-container'>
             {features4.items.map((feature) => (
               <div key={feature.title}>
-                <SuiTitle>
-                  <h4>{feature.title}</h4>
-                </SuiTitle>
+                <SuiTitle type='h4'>{feature.title}</SuiTitle>
                 <SuiText color='dark' size='lg'>
                   <p>{feature.description}</p>
                 </SuiText>
@@ -217,30 +195,24 @@ export default async function ClickHouseServerPage() {
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 px-8 2xl:px-0'>
           <div className='flex flex-col md:flex-row items-center'>
             <div className='md:w-2/5 justify-center flex h-64 w-64'>
-              <StrapiSvg src={features5.iconSvg} className='h-full w-full' />
+              <StrapiImage {...features5.iconSvg} className='h-full w-full' />
             </div>
 
             <div className='md:w-3/5'>
               {features5.pretitle && (
-                <>
-                  <SuiTitle size='sm' color='primary' dark_color='primary'>
-                    <h3>{features5.pretitle}</h3>
-                  </SuiTitle>
-                  <SuiSpacer size='sm' />
-                </>
+                <SuiTitle type='h5' color='primary' className='mb-2'>
+                  {features5.pretitle}
+                </SuiTitle>
               )}
-              <SuiSpacer size='sm' />
-              <SuiTitle size='2xl'>
-                <h3>{features5.title}</h3>
+              <SuiTitle type='h2' className='mb-2'>
+                {features5.title}
               </SuiTitle>
               <SuiText size='lg'>{features5.description}</SuiText>
             </div>
           </div>
 
           <div className='flex pt-16 flex-col'>
-            <SuiTitle size='lg'>
-              <h4>{features5.second_title}</h4>
-            </SuiTitle>
+            <SuiTitle type='h3'>{features5.second_title}</SuiTitle>
             <SuiText color='dark' size='lg'>
               <p className='max-w-3xl '>{features5.second_description}</p>
             </SuiText>

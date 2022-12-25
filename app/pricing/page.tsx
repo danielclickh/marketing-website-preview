@@ -2,7 +2,7 @@ import React from 'react'
 import CloudProviders from '../../components/CloudProviders'
 import Markdown from '../../components/Markdown'
 import PricingOptions from '../../components/PricingOptions'
-import { StrapiImage, transformStrapi } from '../../components/StrapiElements'
+import { StrapiImage } from '../../components/StrapiElements'
 import { SuiButton } from '../../components/sui'
 import { findAll, findOne } from '../../lib/api/strapi'
 
@@ -42,23 +42,20 @@ async function PricingPage() {
   ] = await Promise.all([pricingPromise, pricingByRegionPromise, plansProps])
 
   const style = {}
-  style['--image-url'] = `url(${
-    transformStrapi(contactSection.excludeImageLight?.data?.attributes)?.src
-  })`
-  style['--dark-image-url'] = `url(${
-    transformStrapi(contactSection.excludeImageDark?.data?.attributes)?.src
-  })`
+  style[
+    '--image-url'
+  ] = `url(${contactSection.excludeImageLight?.data?.attributes?.url})`
+  style[
+    '--dark-image-url'
+  ] = `url(${contactSection.excludeImageDark?.data?.attributes?.url})`
   const regionList = await Promise.all(
-    pricingByRegion.map(async (region): Promise<any> => {
-      const { src } = await transformStrapi(
-        region.regionFlagPNG.data.attributes
-      )
+    pricingByRegion.map((region) => {
       return {
         ...region,
         regionFlagPNG: {
-          src,
-          width: 24,
-          height: 13.5
+          src: region.regionFlagPNG.data.attributes.url,
+          width: 30,
+          height: 20
         }
       }
     })
@@ -107,7 +104,7 @@ async function PricingPage() {
                   key={column.header}>
                   <div className='header_row flex gap-6 items-center mb-12'>
                     <StrapiImage
-                      src={column.image.data}
+                      {...column.image.data.attributes}
                       alt='payment method'
                       className='image w-16 h-16'
                     />

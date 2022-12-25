@@ -51,9 +51,7 @@ function BlogPostList({ blogs, categories }: BlogPostListProps) {
           onChange={(e) => setSearch(e.target.value)}
         />
         <SuiSpacer size='lg' />
-        <SuiTitle size='xs'>
-          <h4>Blog categories</h4>
-        </SuiTitle>
+        <SuiTitle type='h6'>Blog categories</SuiTitle>
         <CategorySelector options={categoryList} />
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:w-3/4 md:gap-16 justify-center'>

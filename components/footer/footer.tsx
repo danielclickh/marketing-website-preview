@@ -1,14 +1,7 @@
-import {
-  SuiButton,
-  SuiLink,
-  SuiSpacer,
-  SuiText,
-  SuiTextField,
-  SuiTitle
-} from '../sui'
+import { SuiButton, SuiLink, SuiText, SuiTextField, SuiTitle } from '../sui'
 import Link from 'next/link'
 import { findOne } from '../../lib/api/strapi'
-import { StrapiSvg } from '../StrapiElements'
+import { StrapiImage } from '../StrapiElements'
 import { Hind_Siliguri } from '@next/font/google'
 const hind = Hind_Siliguri({
   subsets: ['latin'],
@@ -45,10 +38,9 @@ export async function Footer() {
               <div
                 key={topMenu.title}
                 className='flex flex-col lg:w-4/12 pb-6 lg:pb-0'>
-                <SuiTitle uppercase color='white'>
-                  <h5>{topMenu.title}</h5>
+                <SuiTitle type='h6' color='white' className='mb-4'>
+                  {topMenu.title}
                 </SuiTitle>
-                <SuiSpacer />
                 <div className='flex flex-row flex-wrap lg:flex-col gap-x-4 lg:gap-x-0'>
                   {topMenu.items.map((footerLink) => (
                     <SuiLink
@@ -67,7 +59,11 @@ export async function Footer() {
           <div className='flex flex-col lg:pt-12 items-start lg:flex-row'>
             {logoSvg && (
               <div className='flex md:w-64 mr-3 gap-x-3 items-center'>
-                <StrapiSvg src={logoSvg} {...logoSvg} width='25' height='25' />
+                <StrapiImage
+                  {...logoSvg.data.attributes}
+                  width='25'
+                  height='25'
+                />
                 <span className={`text-2xl text-white ${hind.className}`}>
                   ClickHouse
                 </span>
@@ -78,7 +74,7 @@ export async function Footer() {
                 <p>{licensingText}</p>
               </SuiText>
               <div className='copyright_and_bottom_links flex flex-col lg:flex-row gap-1 lg:items-center'>
-                <SuiTitle color='white' size='xs'>
+                <SuiTitle color='white' type='h6'>
                   {copyright}
                 </SuiTitle>
                 <div className='bottom_links flex divide-x divide-white'>
@@ -123,8 +119,8 @@ export async function Footer() {
                   target={socialLink.target}
                   key={socialLink.href}>
                   <div className='bg-light-purple2 border border-arsenic px-3 pt-3 pb-2 rounded hover:bg-onyx'>
-                    <StrapiSvg
-                      src={socialLink.iconSvg}
+                    <StrapiImage
+                      {...socialLink.iconSvg.data.attributes}
                       width={21}
                       height={20}
                     />

@@ -1,10 +1,4 @@
-import {
-  SuiButton,
-  SuiPanel,
-  SuiSpacer,
-  SuiText,
-  SuiTitle
-} from '../../../components/sui'
+import { SuiButton, SuiPanel, SuiText, SuiTitle } from '../../../components/sui'
 
 import { ArrowRightIcon, MapIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
@@ -15,16 +9,12 @@ import RecentEvents from '../../../components/RecentEvents'
 const NewsItem = ({ source, date, title, abstract }) => {
   return (
     <div className='flex flex-col py-4'>
-      <SuiTitle size='xs' color='dark'>
-        <h4>
-          {source} • {date}
-        </h4>
+      <SuiTitle type='h6' color='dark' className='mb-1'>
+        {source} • {date}
       </SuiTitle>
-      <SuiSpacer size='xs' />
-      <SuiTitle>
-        <h3>{title}</h3>
+      <SuiTitle type='h4' className='mb-2'>
+        {title}
       </SuiTitle>
-      <SuiSpacer size='sm' />
       <SuiText color='dark' padding_0>
         <p>{abstract}</p>
       </SuiText>
@@ -98,10 +88,9 @@ export default async function News() {
           <div
             className='flex flex-col text-center mx-auto pt-6'
             data-aos='fade-up'>
-            <SuiTitle size='4xl'>
-              <h1>{title}</h1>
+            <SuiTitle type='h1' className='mb-2'>
+              {title}
             </SuiTitle>
-            <SuiSpacer size='sm' />
             <div className='max-w-2xl'>
               <SuiText size='lg' color='dark' weight='normal'>
                 {description}
@@ -118,16 +107,11 @@ export default async function News() {
                 className='my-8'>
                 <div className='flex flex-col md:flex-row'>
                   <div className='flex flex-col md:w-1/2'>
-                    <SuiTitle size='xs' color='primary' dark_color='primary'>
-                      <h4>
-                        {featuredEvent.category} • {featuredEvent.location.city}
-                      </h4>
+                    <SuiTitle type='h6' color='primary' className='mb-2'>
+                      {featuredEvent.category} • {featuredEvent.location.city}
                     </SuiTitle>
-                    <SuiSpacer size='sm' />
 
-                    <SuiTitle>
-                      <h3>{featuredEvent.title}</h3>
-                    </SuiTitle>
+                    <SuiTitle type='h4'>{featuredEvent.title}</SuiTitle>
 
                     <SuiText color='dark'>
                       <p>{featuredEvent.shortDescription}</p>
@@ -147,8 +131,8 @@ export default async function News() {
                   </div>
                   <div className='flex md:w-1/2 pt-8 md:pt-0 justify-center items-center md:px-20'>
                     <StrapiPicture
-                      light={featuredEvent.lightFeatureImagePng.data}
-                      dark={featuredEvent.darkFeatureImagePng.data}
+                      light={featuredEvent.lightFeatureImagePng.data.attributes}
+                      dark={featuredEvent.darkFeatureImagePng.data.attributes}
                     />
                   </div>
                 </div>
@@ -165,10 +149,9 @@ export default async function News() {
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex flex-col md:flex-row justify-between pb-4 space-x-24'>
             <div className='flex flex-col md:w-1/2'>
-              <SuiTitle size='lg'>
-                <h4>{latestNewsTitle}</h4>
+              <SuiTitle type='h3' className='mb-4'>
+                {latestNewsTitle}
               </SuiTitle>
-              <SuiSpacer />
 
               {newsItems.map((newsItem) => (
                 <NewsItem
@@ -181,17 +164,18 @@ export default async function News() {
               ))}
             </div>
             <div className='flex flex-col md:w-1/2'>
-              <SuiTitle size='lg'>
-                <h4>{upcomingEventsTitle}</h4>
+              <SuiTitle type='h3' className='mb-4'>
+                {upcomingEventsTitle}
               </SuiTitle>
-              <SuiSpacer />
               {allEvents.map((upcomingEvent) => (
                 <div className='flex space-x-4 pt-4' key={upcomingEvent.title}>
                   <div className='flex w-44 items-top justify-start'>
                     <div>
                       <StrapiPicture
-                        dark={upcomingEvent.darkFeatureImagePng.data}
-                        light={upcomingEvent.lightFeatureImagePng.data}
+                        dark={upcomingEvent.darkFeatureImagePng.data.attributes}
+                        light={
+                          upcomingEvent.lightFeatureImagePng.data.attributes
+                        }
                         alt='Meetup'
                         width='128'
                         height='128'
@@ -200,10 +184,9 @@ export default async function News() {
                     </div>
                   </div>
                   <div className='flex flex-col'>
-                    <SuiTitle>
-                      <h3>{upcomingEvent.title}</h3>
+                    <SuiTitle type='h4' className='mb-2'>
+                      {upcomingEvent.title}
                     </SuiTitle>
-                    <SuiSpacer size='sm' />
                     <SuiText color='dark' padding_0>
                       {upcomingEvent.shortDescription}
                     </SuiText>
@@ -234,10 +217,9 @@ export default async function News() {
 
       <div className='flex w-full bg-white dark:bg-gunmetal pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
-          <SuiTitle size='lg'>
-            <h4>{pressReleasesTitle}</h4>
+          <SuiTitle type='h3' className='mb-4'>
+            {pressReleasesTitle}
           </SuiTitle>
-          <SuiSpacer />
           <div className='grid grid-cols-1 md:grid-cols-2 justify-between pb-4 md:gap-x-24'>
             {pressReleases.map((pressRelease) => (
               <NewsItem

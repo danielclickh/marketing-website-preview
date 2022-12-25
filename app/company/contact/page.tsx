@@ -1,11 +1,4 @@
-import {
-  SuiButton,
-  SuiLink,
-  SuiSpacer,
-  SuiText,
-  SuiTextField,
-  SuiTitle
-} from '../../../components/sui'
+import { SuiLink, SuiText, SuiTitle } from '../../../components/sui'
 
 import { findOne } from '../../../lib/api/strapi'
 import GrowingCommunity from '../../../components/GrowingCommunity'
@@ -29,19 +22,17 @@ export default async function ContactPage() {
           <div
             className='flex flex-col text-center mx-auto pt-6'
             data-aos='fade-up'>
-            <SuiTitle size='4xl'>
-              <h1>{title}</h1>
+            <SuiTitle type='h1' className='mb-2'>
+              {title}
             </SuiTitle>
-            <SuiSpacer size='sm' />
             <div className='max-w-2xl'>
               <SuiText size='lg' color='dark' weight='normal'>
-                <p>{description}</p>
+                {description}
               </SuiText>
             </div>
           </div>
           <div>
-            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-2 pb-8 text-center px-8 2xl:px-0'>
-              <SuiSpacer size='xl' />
+            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-10 pb-8 text-center px-8 2xl:px-0'>
               <div className='w-full md:w-128 self-center text-left space-y-8'>
                 <ContactForm {...contactForm} />
                 <div className='flex text-center'>

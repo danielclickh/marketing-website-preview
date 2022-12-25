@@ -4,17 +4,12 @@ import {
   SuiButton,
   SuiLink,
   SuiPanel,
-  SuiSpacer,
   SuiText,
   SuiTitle
 } from '../components/sui'
 import { FeatureItem } from '../components/feature_item'
 import { findOne } from '../lib/api/strapi'
-import {
-  StrapiImage,
-  StrapiSvg,
-  transformStrapi
-} from '../components/StrapiElements'
+import { StrapiImage } from '../components/StrapiElements'
 import styles from './HomePage.module.scss'
 import Link from 'next/link'
 import BulletPoint from '../components/BulletPoint'
@@ -55,6 +50,7 @@ async function getData() {
 }
 
 export default async function HomePage() {
+  console.log('vinu', { a: process.env.APP_ENV, b: process.env.NODE_ENV })
   const {
     hero,
     aboutClickhouse,
@@ -72,8 +68,8 @@ export default async function HomePage() {
             data-aos='fade-up'
             className='flex w-full lg:w-3/5 max-w-screen-sm mx-auto lg:mx-0'>
             <div className=' mx-auto md:mr-0 md:mt-8 flex-col text-center lg:text-left'>
-              <SuiTitle size='4xl' color='darkest'>
-                <h1 className='text-6xl mb-0'>{hero.title}</h1>
+              <SuiTitle type='h1' size='6xl' color='darkest'>
+                {hero.title}
               </SuiTitle>
               <div className='flex flex-row'>
                 <div className='mt-6 max-w-3xl flex flex-col'>
@@ -140,10 +136,9 @@ export default async function HomePage() {
                   {highlight.title}
                 </h3>
                 <div className='bg-primary h-1 w-16 rounded-md flex mx-auto my-4' />
-                <SuiText>
+                <SuiText className='mb-4'>
                   <p>{highlight.description}</p>
                 </SuiText>
-                <SuiSpacer />
                 <div>
                   <SuiButton
                     iconRight
@@ -161,11 +156,9 @@ export default async function HomePage() {
       </div>
       <div className='w-full flex flex-col section-dark'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat pb-8 px-8 2xl:px-0 pt-16'>
-          <SuiTitle color='primary' dark_color='primary'>
+          <SuiTitle type='h4' className='mb-6' color='primary'>
             {aboutClickhouse.title}
           </SuiTitle>
-
-          <SuiSpacer size='lg' />
           <div className='feature-container'>
             {aboutClickhouse.features.map((feature) => (
               <FeatureItem
@@ -195,9 +188,7 @@ export default async function HomePage() {
 
       <div className='flex w-full container-light-color'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 xl:px-0'>
-          <SuiTitle size='2xl'>
-            <h3>{customerStories.title}</h3>
-          </SuiTitle>
+          <SuiTitle type='h2'>{customerStories.title}</SuiTitle>
           <SuiText size='lg' color='dark' weight='normal'>
             <p>{customerStories.description}</p>
           </SuiText>
@@ -205,12 +196,12 @@ export default async function HomePage() {
           <div className='container pt-12 flex flex-col sm:flex-row flex-wrap lg:grid lg:grid-cols-5 gap-4 md:gap-x-8 self-center items-center justify-center'>
             {customerStories.logos.map((logo) => {
               const style = {}
-              style['--image-url'] = `url(${
-                transformStrapi(logo?.lightLogoPng?.data?.attributes)?.src
-              })`
-              style['--dark-image-url'] = `url(${
-                transformStrapi(logo?.darkLogoPng?.data?.attributes)?.src
-              })`
+              style[
+                '--image-url'
+              ] = `url(${logo?.lightLogoPng?.data?.attributes?.url})`
+              style[
+                '--dark-image-url'
+              ] = `url(${logo?.darkLogoPng?.data?.attributes?.url})`
               return (
                 <Link key={logo.href} href={logo.href} target={logo.target}>
                   <div
@@ -240,13 +231,10 @@ export default async function HomePage() {
 
       <div className='flex w-full bg-white dark:bg-gunmetal pb-20'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0'>
-          <SuiTitle color='primary' dark_color='primary'>
+          <SuiTitle type='h4' color='primary' className='mb-2'>
             {clickhouseCloud.pretitle}
           </SuiTitle>
-          <SuiSpacer size='sm' />
-          <SuiTitle size='2xl'>
-            <h3>{clickhouseCloud.title}</h3>
-          </SuiTitle>
+          <SuiTitle type='h2'>{clickhouseCloud.title}</SuiTitle>
 
           <div className='max-w-5xl flex self-center mt-2'>
             <SuiText size='lg' color='dark' weight='normal'>
@@ -261,12 +249,12 @@ export default async function HomePage() {
               }`}
               key={clickhouseCloudItem.title}>
               <div className='flex flex-col text-center md:text-left md:w-2/5 pb-4 md:pb-0'>
-                <SuiTitle size='lg'>{clickhouseCloudItem.title}</SuiTitle>
-                <SuiSpacer size='md' />
-                <SuiText size='lg' color='dark'>
+                <SuiTitle type='h3' className='mb-4'>
+                  {clickhouseCloudItem.title}
+                </SuiTitle>
+                <SuiText size='lg' color='dark' className='mb-4'>
                   <p>{clickhouseCloudItem.description}</p>
                 </SuiText>
-                <SuiSpacer size='md' />
                 <div className='pl-10 md:pl-0'>
                   {clickhouseCloudItem.bullets.map((bullet) => (
                     <BulletPoint key={bullet.text} text={bullet.text} />
@@ -317,43 +305,40 @@ export default async function HomePage() {
 
       <div className='flex w-full container-light-color'>
         <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 2xl:px-0 items-center'>
-          <SuiTitle color='primary'>
-            <h5>{testimonials.pretitle}</h5>
+          <SuiTitle color='primary' type='h4' className='mb-2'>
+            {testimonials.pretitle}
           </SuiTitle>
-          <SuiSpacer size='sm' />
-          <SuiTitle size='2xl'>
-            <h3>{testimonials.title}</h3>
+          <SuiTitle type='h2' className='mb-2'>
+            {testimonials.title}
           </SuiTitle>
-          <SuiSpacer size='sm' />
-          <SuiText size='lg' color='dark'>
+          <SuiText size='lg' color='dark' className='mb-4'>
             <p>{testimonials.description}</p>
           </SuiText>
-          <SuiSpacer size='md' />
           {testimonials.testimonialsIconSvg && (
-            <div className='flex justify-center'>
-              {/* @ts-expect-error Server Component */}
-              <StrapiSvg src={testimonials.testimonialsIconSvg} />
+            <div className='flex justify-center mb-4'>
+              <StrapiImage
+                {...testimonials.testimonialsIconSvg.data.attributes}
+              />
             </div>
           )}
-          <SuiSpacer size='md' />
           {testimonials.testimonialItems.map((testimonial) => (
-            <>
-              <SuiText weight='medium' color='dark'>
-                <SuiLink
-                  href={testimonial.href}
-                  target={testimonial.target}
-                  color='darkest'>
-                  {testimonial.title}
-                </SuiLink>
-                <br />
-                {testimonial.author}
-              </SuiText>
-
-              <SuiSpacer size='md' />
-            </>
+            <SuiText
+              key={testimonial.author}
+              weight='medium'
+              color='dark'
+              className='mb-4'>
+              <SuiLink
+                href={testimonial.href}
+                target={testimonial.target}
+                color='darkest'>
+                {testimonial.title}
+              </SuiLink>
+              <br />
+              {testimonial.author}
+            </SuiText>
           ))}
-          <StrapiSvg
-            src={testimonials.bottomIconSvg}
+          <StrapiImage
+            {...testimonials.bottomIconSvg.data.attributes}
             className='text-primary'
           />
         </div>

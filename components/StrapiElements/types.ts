@@ -1,23 +1,32 @@
 import { ImageProps } from 'next/image'
+import { HTMLAttributes } from 'react'
 
 interface BaseStrapiImage {
-  hash: string
-  url: string
+  id: number
   name: string
-  width?: number
-  height?: number
+  alternativeText: string
+  caption: string
+  hash: string
+  ext: string
+  mime: string
+  size: number
+  url: string
+  previewUrl?: string | null
+  provider: string
+  provider_metadata: any
+  width?: number | null
+  height?: number | null
 }
-
 export interface StrapiImageType extends BaseStrapiImage {
   formats?: Record<string, BaseStrapiImage>
 }
 
 export type SizeType = 'small' | 'medium' | 'large' | 'thumbnail'
 
-export interface StrapiImageProps extends Omit<ImageProps, 'alt' | 'src'> {
-  src: { attributes: StrapiImageType }
-  size?: SizeType
+export interface StrapiImageProps extends StrapiImageType {
+  sizes?: SizeType
   alt?: string
+  className?: string
 }
 
 export interface NormalImageProps extends ImageProps {
@@ -26,3 +35,8 @@ export interface NormalImageProps extends ImageProps {
 }
 
 export type Props = StrapiImageProps | NormalImageProps
+
+export interface StrapiPicProps extends HTMLAttributes<HTMLElement> {
+  dark: StrapiImageProps
+  light: StrapiImageProps
+}

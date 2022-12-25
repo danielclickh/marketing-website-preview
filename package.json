@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "fetch-images": "ts-node  -O '{\"module\": \"commonjs\"}' fetchImages",
     "lint": "next lint"
   },
   "dependencies": {
@@ -33,7 +34,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "rehype-raw": "^6.1.1",
     "sass": "^1.51.0",
-    "swr": "^1.3.0"
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@types/node": "17.0.31",

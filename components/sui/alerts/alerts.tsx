@@ -107,9 +107,7 @@ export function SuiAlert(props: AlertProps) {
           <div className='flex flex-col'>
             {props.title ? (
               <>
-                <SuiTitle size='sm' color='none' dark_color='none'>
-                  {props.title}
-                </SuiTitle>
+                <SuiTitle type='h5'>{props.title}</SuiTitle>
                 <SuiText color='none'>{props.children}</SuiText>
               </>
             ) : (

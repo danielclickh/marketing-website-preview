@@ -55,7 +55,7 @@ export function SuiSimpleModal(props: Props) {
                 <div className='flex flex-col w-full'>
                   <div className='px-8 pt-5 pb-4 sm:p-6 md:px-8 sm:pb-4'>
                     <div className='flex justify-between items-center'>
-                      <SuiTitle size='lg' className='w-full pt-4 pb-2'>
+                      <SuiTitle type='h3' className='w-full pt-4 pb-2'>
                         {props.title}
                       </SuiTitle>
                       {props.sidebar !== true && (
@@ -85,8 +85,8 @@ export function SuiSimpleModal(props: Props) {
                 {props.sidebar && (
                   <div className='bg-light-grey2 dark:bg-dark-grey3 w-1/3 p-8'>
                     <div className='flex items-center justify-between border-b border-light-grey5 dark:border-dark-grey4 pb-4'>
-                      <SuiTitle size='xs' uppercase color='dark'>
-                        <h5 className='pt-1'>Summary</h5>
+                      <SuiTitle type='h6' className='pt-1' color='dark'>
+                        Summary
                       </SuiTitle>
                       <button
                         type='button'

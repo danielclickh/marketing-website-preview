@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import Markdown from '../Markdown'
-import { StrapiSvg } from '../StrapiElements'
-import { SuiSpacer, SuiText } from '../sui'
+import { StrapiImage } from '../StrapiElements'
+import { SuiSpacer, SuiText, SuiTitle } from '../sui'
 
 type FeatureItemProps = {
   icon: ReactElement
@@ -23,13 +23,13 @@ export function FeatureItem(props: FeatureItemProps) {
       data-aos-delay={delay}>
       <div className='flex w-1/5 items-start'>
         <div className='flex w-16 h-16 bg-onyx rounded-lg shadow-md justify-center items-center'>
-          {/* @ts-expect-error Server Component */}
-          <StrapiSvg src={icon} className='feature-icon' />
+          <StrapiImage {...icon.data.attributes} className='feature-icon' />
         </div>
       </div>
       <div className='flex w-4/5 flex-col pl-2 pr-6'>
-        <h3 className='font-medium text-base md:text-ch-lg'>{title}</h3>
-        <SuiSpacer size='xs' />
+        <SuiTitle type='h4' className='mb-4'>
+          {title}
+        </SuiTitle>
         <SuiText color={textColour} padding_0>
           <Markdown>{description}</Markdown>
         </SuiText>

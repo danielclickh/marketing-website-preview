@@ -21,7 +21,10 @@ export function UseCase(props: TestimonialProps) {
     <SuiPanel color='bg-white dark:bg-gunmetal' shadow padding='xl'>
       <div className='flex flex-col justify-start align-top items-start'>
         <div className='pb-2'>
-          <StrapiPicture light={lightLogo} dark={darkLogo} />
+          <StrapiPicture
+            light={lightLogo.attributes}
+            dark={darkLogo.attributes}
+          />
         </div>
         <SuiText>{description}</SuiText>
 

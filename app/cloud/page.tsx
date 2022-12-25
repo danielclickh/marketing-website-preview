@@ -1,12 +1,10 @@
-import { SuiButton, SuiSpacer, SuiText, SuiTitle } from '../../components/sui'
+import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
 import { FeatureItem } from '../../components/feature_item'
 
-import Image from 'next/image'
 import { findOne } from '../../lib/api/strapi'
 import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
 import Markdown from '../../components/Markdown'
 import BulletPoint from '../../components/BulletPoint'
-import CloudProviders from '../../components/CloudProviders'
 
 async function getData() {
   const params = {
@@ -41,10 +39,8 @@ export default async function CloudPage() {
           <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-20 md:px-8 2xl:px-0'>
             <div data-aos='fade-up' className='flex'>
               <div className='w-11/12 mx-auto md:w-6/12 md:mt-16 flex-col text-center md:text-left'>
-                <SuiTitle size='4xl'>
-                  <h1 className='text-6xl mb-0'>
-                    <Markdown>{title}</Markdown>
-                  </h1>
+                <SuiTitle type='h1' size='6xl'>
+                  <Markdown>{title}</Markdown>
                 </SuiTitle>
                 <div className='mt-6'>
                   <SuiText size='lg' color='dark' weight='normal'>
@@ -67,8 +63,8 @@ export default async function CloudPage() {
                       <div
                         className='pt-8 flex flex-col space-y-2'
                         key={cloudProvider.title}>
-                        <SuiTitle size='xs' color='dark' className='mb-5'>
-                          <h5>{cloudProvider.title}</h5>
+                        <SuiTitle type='h6' color='dark' className='mb-5'>
+                          {cloudProvider.title}
                         </SuiTitle>
                         <div className='flex flex-row items-start gap-6 h-10'>
                           {cloudProvider.lightProviderPngs.data.map(
@@ -134,12 +130,12 @@ export default async function CloudPage() {
               } justify-between`}
               key={item.title}>
               <div className='flex flex-col text-left md:w-2/5 pb-4 md:pb-20'>
-                <SuiTitle size='lg'>{item.title}</SuiTitle>
-                <SuiSpacer size='md' />
-                <SuiText size='lg' color='dark'>
+                <SuiTitle type='h3' className='mb-4'>
+                  {item.title}
+                </SuiTitle>
+                <SuiText size='lg' color='dark' className='mb-4'>
                   <p>{item.description}</p>
                 </SuiText>
-                <SuiSpacer size='md' />
                 {item.bullets.map((bullet) => (
                   <BulletPoint
                     key={`${item.title}-${bullet.text}`}

@@ -1,4 +1,4 @@
-import { SuiSpacer, SuiText, SuiTitle } from '../../../components/sui'
+import { SuiText, SuiTitle } from '../../../components/sui'
 
 import Image from 'next/image'
 import { findOne } from '../../../lib/api/strapi'
@@ -27,10 +27,9 @@ export default async function CareersPage() {
           <div
             className='flex flex-col text-center mx-auto pt-6'
             data-aos='fade-up'>
-            <SuiTitle size='4xl'>
-              <h1>{title}</h1>
+            <SuiTitle type='h1' className='mb-2'>
+              {title}
             </SuiTitle>
-            <SuiSpacer size='sm' />
             <div className='max-w-2xl'>
               <SuiText size='lg' color='dark' weight='normal'>
                 <p>{description}</p>
@@ -42,10 +41,9 @@ export default async function CareersPage() {
         <div className='w-full pt-4 pb-12'>
           <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 md:space-x-16 mb-12'>
             <div className='flex flex-col md:w-4/5'>
-              <SuiTitle size='lg'>
-                <h2>{paragraphTitle}</h2>
+              <SuiTitle type='h3' className='mb-4'>
+                {paragraphTitle}
               </SuiTitle>
-              <SuiSpacer size='md' />
               <SuiText size='lg'>
                 <p>{paragraphText}</p>
               </SuiText>
@@ -60,10 +58,9 @@ export default async function CareersPage() {
             className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 md:space-x-16 mb-12 items-center'
             key={companyValue.title}>
             <div className='flex flex-col md:w-3/5'>
-              <SuiTitle size='lg'>
-                <h2>{companyValue.title}</h2>
+              <SuiTitle type='h3' className='mb-4'>
+                {companyValue.title}
               </SuiTitle>
-              <SuiSpacer size='md' />
               <SuiText size='lg' color='dark'>
                 <p>{companyValue.description}</p>
               </SuiText>
@@ -83,9 +80,7 @@ export default async function CareersPage() {
       <div className='w-full bg-white dark:bg-gunmetal pt-16 pb-16'>
         <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 md:space-x-16 mb-12 items-center'>
           <div className='flex flex-col md:w-3/5'>
-            <SuiTitle size='lg'>
-              <h2>{positionsTitle}</h2>
-            </SuiTitle>
+            <SuiTitle type='h3'>{positionsTitle}</SuiTitle>
           </div>
         </div>
 

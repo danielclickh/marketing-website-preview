@@ -26,7 +26,7 @@ export const SuiText = ({ ...TextProps }) => {
 
   return (
     <div
-      className={`text-${size} ${className && className}
+      className={`text-${size} ${className ?? ''}
         font-${weight ? weight : 'normal'} ${isUppercase} ${padding}
         ${colourCalculator(color, 'text-gunmetal dark:text-white')} 
       `}>

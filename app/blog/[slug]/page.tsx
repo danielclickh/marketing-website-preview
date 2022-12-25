@@ -59,14 +59,12 @@ export default async function BlogPage({ params }) {
           <div
             className='flex flex-col text-center mx-auto pt-6 max-w-3xl'
             data-aos='fade-up'>
-            <SuiTitle color='primary' dark_color='primary'>
-              <h4>{category}</h4>
+            <SuiTitle type='h4' color='primary'>
+              {category}
             </SuiTitle>
-            <SuiTitle size='4xl'>
-              <h1>{title}</h1>
+            <SuiTitle type='h1' className='mb-6'>
+              {title}
             </SuiTitle>
-
-            <SuiSpacer size='lg' />
             <div className='flex flex-row space-x-4 pt-2 justify-center'>
               <div className='flex w-11 h-11'>
                 <StrapiImage
@@ -137,9 +135,7 @@ export default async function BlogPage({ params }) {
               padding='lg'>
               <div className='flex justify-between'>
                 <div className='flex flex-col w-1/2'>
-                  <SuiTitle>
-                    <h4>Subscribe to our newsletter</h4>
-                  </SuiTitle>
+                  <SuiTitle type='h4'>Subscribe to our newsletter</SuiTitle>
                   <SuiText color='dark'>
                     <p>
                       Stay informed on feature releases, product roadmap, future
@@ -162,9 +158,7 @@ export default async function BlogPage({ params }) {
       <div className='flex w-full container-light-color pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex justify-between pb-4'>
-            <SuiTitle>
-              <h4>Recent posts</h4>
-            </SuiTitle>
+            <SuiTitle type='h4'>Recent posts</SuiTitle>
 
             <div className='flex'>
               <Link href='/blog/'>

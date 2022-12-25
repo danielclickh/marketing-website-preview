@@ -1,14 +1,7 @@
 import { ReactNode } from 'react'
 import { findOne } from '../../lib/api/strapi'
 import Markdown from '../Markdown'
-import {
-  SuiButton,
-  SuiCodeblock,
-  SuiSpacer,
-  SuiTabs,
-  SuiText,
-  SuiTitle
-} from '../sui'
+import { SuiButton, SuiCodeblock, SuiTabs, SuiText, SuiTitle } from '../sui'
 interface Props {
   customHeader?: ReactNode
 }
@@ -39,25 +32,23 @@ async function FetchGetStarted({ customHeader }: Props) {
       <div className='container mx-auto justify-center py-12 px-8 2xl:px-0  flex flex-col w-full max-w-7xl'>
         <div className='flex flex-col text-center md:w-5/12 mx-auto '>
           {customHeader ? (
-            <SuiTitle size='4xl' color='white'>
-              <h3>{customHeader}</h3>
+            <SuiTitle type='h2' size='4xl' color='white'>
+              {customHeader}
             </SuiTitle>
           ) : (
             <>
-              <SuiTitle size='sm' color='primary'>
-                <h4>{pretitle}</h4>
+              <SuiTitle type='h5' color='primary' className='mb-4'>
+                {pretitle}
               </SuiTitle>
-              <SuiSpacer />
-              <SuiTitle size='4xl' color='white'>
-                <h3>{title}</h3>
+              <SuiTitle type='h2' size='4xl' color='white'>
+                {title}
               </SuiTitle>
               <SuiText size='lg' color='offWhite'>
                 <Markdown>{descriptionRichText}</Markdown>
               </SuiText>
             </>
           )}
-          <SuiSpacer />
-          <div className='flex flex-col-reverse gap-4 md:flex-row md:space-x-8 justify-center'>
+          <div className='flex flex-col-reverse gap-4 md:flex-row md:space-x-8 justify-center mt-4'>
             <div className='w-full md:w-60'>
               {quickStartButton && (
                 <SuiButton
@@ -86,7 +77,7 @@ async function FetchGetStarted({ customHeader }: Props) {
             )}
           </div>
         </div>
-        <div className='bg-dark-grey5 w-11/12 md:w-full self-center border border-dark-grey3 rounded-lg p-2 px-6 overflow-hidden -mt-2'>
+        <div className='bg-dark-grey5 w-11/12 md:w-full self-center border border-dark-grey3 rounded-lg p-2 px-6 overflow-hidden -mt-2 mb-1'>
           <SuiTabs
             tabs={osTabs}
             activeTab={1}
@@ -97,7 +88,6 @@ async function FetchGetStarted({ customHeader }: Props) {
             hoverBorderColor='border-dark-grey5'
           />
         </div>
-        <SuiSpacer size='sm' />
         <div className='px-6 md:px-0'>
           <SuiText color='white'>
             <Markdown>{bottomText}</Markdown>

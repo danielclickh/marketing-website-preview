@@ -47,7 +47,7 @@ export function SuiFlyout(props: Props) {
                 <div className='flex h-full flex-col overflow-y-scroll bg-white dark:bg-dark-grey4 py-6 shadow-xl'>
                   <div className='px-4 sm:px-6'>
                     <div className='flex items-center justify-between'>
-                      <SuiTitle size='lg'>{props.title}</SuiTitle>
+                      <SuiTitle type='h3'>{props.title}</SuiTitle>
                       <button
                         type='button'
                         className='rounded-md bg-light-grey-1  text-text-darkest dark:text-text-light hover:text-text-dark hover:dark:text-white'

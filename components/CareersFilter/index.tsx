@@ -1,6 +1,5 @@
 'use client'
-import React, { useMemo, useState } from 'react'
-import useSWR from 'swr'
+import React, { use, useMemo, useState } from 'react'
 import CategorySelector from '../CategorySelector'
 import {
   SuiTextField,
@@ -57,7 +56,7 @@ type DataContent = null | {
 }
 
 function CareersFilter() {
-  const { data, error } = useSWR<DataContent>(
+  const { data, error } = use<DataContent>(
     'https://boards-api.greenhouse.io/v1/boards/clickhouse/jobs?content=true',
     fetcher
   )
@@ -123,23 +122,17 @@ function CareersFilter() {
       <div className='flex md:w-64 md:pr-8 pb-8 md:pb-0 flex-col'>
         <SuiTextField placeholder='Search' htmlFor='search' />
         <SuiSpacer size='lg' />
-        <SuiTitle size='xs'>
-          <h4>Office</h4>
-        </SuiTitle>
+        <SuiTitle type='h6'>Office</SuiTitle>
         <CategorySelector options={offices} />
         <SuiSpacer size='lg' />
-        <SuiTitle size='xs'>
-          <h4>Department</h4>
-        </SuiTitle>
+        <SuiTitle type='h6'>Department</SuiTitle>
         <CategorySelector options={departments} />
       </div>
       <div className='flex flex-col md:flex-row md:w-3/4 md:space-x-16 justify-center'>
         <div className='flex flex-col space-y-6 w-full'>
           {filteredDepartments.map(([name, jobs]: [string, JobType[]]) => (
             <React.Fragment key={name}>
-              <SuiTitle>
-                <h4>{name}</h4>
-              </SuiTitle>
+              <SuiTitle type='h4'>{name}</SuiTitle>
               {jobs.length === 0 && <div>No results</div>}
               {jobs.map((job: JobType) => (
                 <a

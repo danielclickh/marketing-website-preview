@@ -21,7 +21,7 @@ async function CloudProviders() {
             {cloudProvider.lightProviderPngs.data.map((lightIconPng, index) => (
               <StrapiPicture
                 key={`${cloudProvider.title}-${index}`}
-                dark={cloudProvider.darkProviderPngs.data[index]}
+                dark={cloudProvider.darkProviderPngs.data[index].attributes}
                 light={lightIconPng}
                 width='100'
                 height='40'
@@ -30,8 +30,8 @@ async function CloudProviders() {
             ))}
           </div>
           {index !== 0 && (
-            <SuiTitle size='xs' color='dark' className='mb-5'>
-              <h5>{cloudProvider.title}</h5>
+            <SuiTitle type='h6' color='dark' className='mb-5'>
+              {cloudProvider.title}
             </SuiTitle>
           )}
         </div>

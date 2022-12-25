@@ -1,14 +1,11 @@
-import { useRouter } from 'next/router'
 import { Header } from '../components/header'
 import { Footer } from '../components/footer'
 import { ReactNode } from 'react'
-import GetStarted from '../components/GetStarted'
-import { usePathname } from 'next/navigation'
 import { Providers } from './providers'
 import '../styles/globals.scss'
 import { Inter } from '@next/font/google'
 import { AnalyticsBrowser } from '@segment/analytics-next'
-import { environment } from '../environments/environment'
+import environment from '../environment'
 type Props = {
   children: ReactNode
 }
@@ -23,24 +20,23 @@ export default async function BaseLayout({ children }: Props) {
   // const showCloud = pathname === '/service-unavailable-country'
   analytics.page()
   return (
-    <html lang='en'>
+    <html lang='en' className='light' style={{ colorScheme: 'light' }}>
       <head>
         <meta charSet='utf-8' />
         <base href='/' />
-        <title>Fast Open-Source OLAP DBMS - ClickHouse</title>
         <meta content='width=device-width, initial-scale=1' name='viewport' />
         <link href='favicon.ico' rel='icon' type='image/x-icon' />
       </head>
       <body className={`${inter.variable} font-sans`}>
-        <div className='flex flex-col'>
-          <Providers>
+        <Providers>
+          <div className='flex flex-col'>
             {/* @ts-expect-error Server Component */}
             <Header />
             {children}
             {/* @ts-expect-error Server Component */}
             <Footer />
-          </Providers>
-        </div>
+          </div>
+        </Providers>
       </body>
     </html>
   )

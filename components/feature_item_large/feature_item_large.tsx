@@ -1,5 +1,5 @@
 import { ReactElement } from 'react'
-import { StrapiSvg } from '../StrapiElements'
+import { StrapiImage } from '../StrapiElements'
 import { SuiText, SuiTitle } from '../sui'
 
 type FeatureItemProps = {
@@ -16,12 +16,9 @@ export function FeatureItemLarge(props: FeatureItemProps) {
     <div className='flex flex-col space-y-2 w-full text-left' data-aos={entry}>
       <div className='flex flex-row items-center'>
         <div className='flex w-12 mr-2'>
-          {/* @ts-expect-error Server Component */}
-          <StrapiSvg src={icon} className='feature-icon' />
+          <StrapiImage {...icon.data.attributes} className='feature-icon' />
         </div>
-        <SuiTitle size='lg'>
-          <h4>{title}</h4>
-        </SuiTitle>
+        <SuiTitle type='h3'>{title}</SuiTitle>
       </div>
       <SuiText size='lg' color='dark'>
         <p>{description}</p>

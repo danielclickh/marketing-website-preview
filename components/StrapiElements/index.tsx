@@ -1,45 +1,74 @@
-import StrapiImage from './StrapiImage'
-import { SizeType, StrapiImageType } from './types'
+import Image from 'next/image'
+import React from 'react'
+import { StrapiImageProps, StrapiPicProps } from './types'
+import Markdown from '../Markdown'
+import environment from '../../environment'
 
-export { default as StrapiImage } from './StrapiImage'
-export { StrapiSvg, StrapiSvgClient } from './StrapiSvg'
-
-type ImageProps = {
-  width?: number
-  height?: number
-  src: string
-}
-export function transformStrapi(
-  image: StrapiImageType,
-  size?: SizeType
-): ImageProps {
-  if (size && image.formats?.[size]) {
-    const formattedImage = image.formats?.[size]
-    return {
-      width: formattedImage.width,
-      height: formattedImage.height,
-      src: `${process.env.NEXT_PUBLIC_STRAPI_URL ?? ''}${formattedImage.url}`
-    }
+async function StrapiImageUrl({
+  id,
+  url,
+  sizes,
+  className,
+  formats,
+  alt = '',
+  width,
+  height,
+  mime,
+  ...props
+}: StrapiImageProps) {
+  if (typeof url !== 'string') {
+    return null
   }
 
-  return {
-    width: image.width,
-    height: image.height,
-    src: `${process.env.NEXT_PUBLIC_STRAPI_URL ?? ''}${image.url}`
+  if (mime.includes('svg')) {
+    const response = await fetch(`${environment.strapiBaseUrl}${url}`)
+    const svgText = await response.text()
+
+    return (
+      <Markdown
+        components={{
+          svg: ({ node, ...params }) => {
+            return <svg {...params} {...props} />
+          }
+        }}>
+        {svgText}
+      </Markdown>
+    )
   }
+
+  const src = sizes && formats ? formats[sizes].url : url
+
+  return (
+    <Image src={src} alt={alt} className={className} unoptimized {...props} />
+  )
 }
 
-export function StrapiPicture({ dark, light, className, ...props }) {
+export function StrapiImage(props: StrapiImageProps) {
+  return (
+    <>
+      {/* @ts-expect-error Server Component */}
+      <StrapiImageUrl {...props} />
+    </>
+  )
+}
+
+export function StrapiPicture({
+  dark,
+  light,
+  className,
+  id,
+  ...props
+}: StrapiPicProps) {
   return (
     <>
       <StrapiImage
-        src={dark}
         className={`hidden dark:block ${className}`}
+        {...dark}
         {...props}
       />
       <StrapiImage
-        src={light}
         className={`dark:hidden ${className}`}
+        {...light}
         {...props}
       />
     </>
