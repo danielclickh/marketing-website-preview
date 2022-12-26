@@ -6,6 +6,7 @@ import '../styles/globals.scss'
 import { Inter } from '@next/font/google'
 import { AnalyticsBrowser } from '@segment/analytics-next'
 import environment from '../environment'
+import { SnackbarContextProvider } from '../components/sui'
 type Props = {
   children: ReactNode
 }
@@ -14,10 +15,9 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter'
 })
+
 const analytics = AnalyticsBrowser.load({ writeKey: environment.segmentKey })
 export default async function BaseLayout({ children }: Props) {
-  // const pathname = usePathname()
-  // const showCloud = pathname === '/service-unavailable-country'
   analytics.page()
   return (
     <html lang='en' className='light' style={{ colorScheme: 'light' }}>
@@ -29,13 +29,15 @@ export default async function BaseLayout({ children }: Props) {
       </head>
       <body className={`${inter.variable} font-sans`}>
         <Providers>
-          <div className='flex flex-col'>
-            {/* @ts-expect-error Server Component */}
-            <Header />
-            {children}
-            {/* @ts-expect-error Server Component */}
-            <Footer />
-          </div>
+          <SnackbarContextProvider>
+            <div className='flex flex-col'>
+              {/* @ts-expect-error Server Component */}
+              <Header />
+              {children}
+              {/* @ts-expect-error Server Component */}
+              <Footer />
+            </div>
+          </SnackbarContextProvider>
         </Providers>
       </body>
     </html>

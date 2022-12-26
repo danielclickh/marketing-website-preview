@@ -30,11 +30,13 @@ export default async function CareersPage() {
             <SuiTitle type='h1' className='mb-2'>
               {title}
             </SuiTitle>
-            <div className='max-w-2xl'>
-              <SuiText size='lg' color='dark' weight='normal'>
-                <p>{description}</p>
-              </SuiText>
-            </div>
+            <SuiText
+              type='p1'
+              weight='medium'
+              color='dark'
+              className='max-w-2xl'>
+              {description}
+            </SuiText>
           </div>
         </div>
         <div className='bg-careers_background bg-center bg-cover w-full h-64 my-12' />
@@ -44,8 +46,11 @@ export default async function CareersPage() {
               <SuiTitle type='h3' className='mb-4'>
                 {paragraphTitle}
               </SuiTitle>
-              <SuiText size='lg'>
-                <p>{paragraphText}</p>
+              <SuiText
+                type='p2'
+                weight='medium'
+                className='whitespace-pre-wrap'>
+                {paragraphText}
               </SuiText>
             </div>
           </div>
@@ -53,16 +58,22 @@ export default async function CareersPage() {
       </div>
 
       <div className='w-full container-light-color pt-12 pb-12'>
-        {companyValues.map((companyValue) => (
+        {companyValues.map((companyValue, index: number) => (
           <div
-            className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 md:space-x-16 mb-12 items-center'
+            className={`flex flex-col md:${
+              index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+            } container mx-auto max-w-7xl px-6 md:space-x-16 mb-12 items-center`}
             key={companyValue.title}>
             <div className='flex flex-col md:w-3/5'>
               <SuiTitle type='h3' className='mb-4'>
                 {companyValue.title}
               </SuiTitle>
-              <SuiText size='lg' color='dark'>
-                <p>{companyValue.description}</p>
+              <SuiText
+                type='p2'
+                weight='medium'
+                color='dark'
+                className='whitespace-pre-wrap'>
+                {companyValue.description}
               </SuiText>
             </div>
             <div className='flex flex-col md:w-2/5 mt-6 md:mt-12 items-center'>

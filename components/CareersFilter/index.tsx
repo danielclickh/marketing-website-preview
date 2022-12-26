@@ -1,13 +1,7 @@
 'use client'
 import React, { use, useMemo, useState } from 'react'
 import CategorySelector from '../CategorySelector'
-import {
-  SuiTextField,
-  SuiSpacer,
-  SuiTitle,
-  SuiText,
-  SuiHorizontalDivide
-} from '../sui'
+import { SuiTextField, SuiTitle, SuiText, SuiHorizontalDivide } from '../sui'
 type JobType = {
   url: string
   location: string
@@ -121,31 +115,31 @@ function CareersFilter() {
     <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 justify-between'>
       <div className='flex md:w-64 md:pr-8 pb-8 md:pb-0 flex-col'>
         <SuiTextField placeholder='Search' htmlFor='search' />
-        <SuiSpacer size='lg' />
-        <SuiTitle type='h6'>Office</SuiTitle>
+        <SuiTitle type='h6' className='mt-6'>
+          Office
+        </SuiTitle>
         <CategorySelector options={offices} />
-        <SuiSpacer size='lg' />
-        <SuiTitle type='h6'>Department</SuiTitle>
+        <SuiTitle type='h6' className='mt-6'>
+          Department
+        </SuiTitle>
         <CategorySelector options={departments} />
       </div>
       <div className='flex flex-col md:flex-row md:w-3/4 md:space-x-16 justify-center'>
         <div className='flex flex-col space-y-6 w-full'>
           {filteredDepartments.map(([name, jobs]: [string, JobType[]]) => (
             <React.Fragment key={name}>
-              <SuiTitle type='h4'>{name}</SuiTitle>
+              <SuiTitle type='h3'>{name}</SuiTitle>
               {jobs.length === 0 && <div>No results</div>}
               {jobs.map((job: JobType) => (
                 <a
                   href={job.url}
                   className='rounded-md pl-4 flex flex-col w-full cursor-pointer hover:bg-cultured hover:dark:bg-onyx transition-all duration-300 ease-in-out transform'
                   key={job.url}>
-                  <SuiText size='lg'>
-                    <p>
-                      {job.title}
-                      <span className='text-web-light-c4 dark:text-web-dark-c4 flex'>
-                        {job.location}
-                      </span>
-                    </p>
+                  <SuiText type='p2' weight='medium'>
+                    {job.title}
+                  </SuiText>
+                  <SuiText type='p2' weight='medium' color='dark'>
+                    {job.location}
                   </SuiText>
                   <SuiHorizontalDivide />
                 </a>

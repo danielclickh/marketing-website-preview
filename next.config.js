@@ -1,23 +1,10 @@
+// @ts-check
 const path = require('path')
-
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig ={
   reactStrictMode: true,
   experimental: {
     appDir: true,
-  },
-  env: {
-    // Add any logic you want here, returning `true` to enable password protect.
-    PASSWORD_PROTECT: process.env.ENVIRONMENT === 'staging'
-  },
-  images: {
-    loader: "default",
-    dangerouslyAllowSVG: true,
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'clickhouse.com',
-      },
-    ],
   },
   i18n: {
     locales: ['default', 'en'],
@@ -27,4 +14,14 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles'), path.join(__dirname, 'app/**/*.module.scss'), path.join(__dirname, 'components/**/*.module.scss')],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/events/:slug',
+        destination: '/company/events/:slug',
+      },
+    ]
+  },
 }
+
+module.exports = nextConfig

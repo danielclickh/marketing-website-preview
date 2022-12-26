@@ -51,16 +51,13 @@ export default async function OurStoryPage() {
               {title}
             </SuiTitle>
             <div className='max-w-xl'>
-              <SuiText size='lg' color='dark' weight='normal'>
-                <p>{description}</p>
+              <SuiText type='p1' color='dark' weight='medium'>
+                {description}
               </SuiText>
             </div>
           </div>
           <div className='flex flex-col mx-auto py-8'>
-            <StrapiImage
-              src={imagePng.data}
-              alt='ClickHouse around the world'
-            />
+            <StrapiImage {...imagePng} alt='ClickHouse around the world' />
             <div
               className='flex justify-center mt-8 md:space-x-32'
               data-aos='fade-up'>
@@ -69,15 +66,15 @@ export default async function OurStoryPage() {
                   className='flex flex-col w-44'
                   key={office.name + office.location}>
                   <StrapiImage
-                    src={office.flagPng.data}
+                    {...office.flagPng}
                     alt={`Image for ${office.name} ${office.location}`}
                   />
                   <div className='flex text-center justify-center'>
-                    <SuiText weight='semibold'>
-                      <p>{office.name}</p>
-                      <span className='text-web-light-c4 dark:text-web-dark-c4 font-normal'>
-                        {office.location}
-                      </span>
+                    <SuiText type='p2' weight='bold' className='mb-1'>
+                      {office.name}
+                    </SuiText>
+                    <SuiText type='p2' weight='medium' color='dark'>
+                      {office.location}
                     </SuiText>
                   </div>
                 </div>
@@ -93,19 +90,24 @@ export default async function OurStoryPage() {
             className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 md:space-x-16 mb-12'>
             <div className='flex flex-col md:w-3/5'>
               <SuiTitle type='h3'>{item.title}</SuiTitle>
-              <div className='pt-2 max-w-4xl '>
-                <SuiText size='lg' color='dark'>
-                  <p>{item.subtitle}</p>
-                </SuiText>
-              </div>
+              {item.subtitle && (
+                <div className='pt-2 max-w-4xl '>
+                  <SuiText type='p1' weight='medium' color='dark'>
+                    {item.subtitle}
+                  </SuiText>
+                </div>
+              )}
               <div className='pt-2 max-w-5xl'>
-                <SuiText size='lg'>
-                  <p>{item.description}</p>
+                <SuiText
+                  type='p2'
+                  weight='medium'
+                  className='whitespace-pre-wrap'>
+                  {item.description}
                 </SuiText>
               </div>
             </div>
             <div className='flex flex-col md:w-2/5 mt-6 md:mt-12'>
-              <StrapiImage {...item.imagePng.data.attributes} />
+              <StrapiImage {...item.imagePng} />
             </div>
           </div>
         ))}
@@ -128,8 +130,8 @@ export default async function OurStoryPage() {
                   </div>
                 </div>
                 <div className='flex md:w-8/12 text-center md:text-left'>
-                  <SuiText size='lg'>
-                    <p>{item.text}</p>
+                  <SuiText type='p2' weight='medium'>
+                    {item.text}
                   </SuiText>
                 </div>
               </div>
@@ -145,8 +147,8 @@ export default async function OurStoryPage() {
               {hiring.title}
             </SuiTitle>
             <div className='max-w-3xl'>
-              <SuiText size='lg' color='dark' weight='normal'>
-                <p>{hiring.description}</p>
+              <SuiText type='p2' color='dark' weight='medium'>
+                {hiring.description}
               </SuiText>
               {hiring.ctaButton && (
                 <div className='flex justify-center pt-6 pb-14'>
@@ -197,11 +199,11 @@ export default async function OurStoryPage() {
           </div>
 
           <div className='flex flex-wrap justify-evenly pt-12'>
-            {team.lightInvestorLogosPng.data.map((light, index) => (
+            {team.lightInvestorLogosPng.map((light, index) => (
               <StrapiPicture
                 key={`investors-${index}`}
                 light={light}
-                dark={team.darkInvestorLogosPng.data[index].attributes}
+                dark={team.darkInvestorLogosPng[index]}
                 size='small'
               />
             ))}

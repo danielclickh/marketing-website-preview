@@ -64,7 +64,7 @@ function RecentEvents({ excludeEventSlug }: { excludeEventSlug?: string }) {
                 {event.category}
               </SuiTitle>
               <SuiTitle type='h4'>{event.title}</SuiTitle>
-              <SuiText color='dark' padding_0>
+              <SuiText type='p3' weight='medium' color='dark'>
                 <p>
                   {event.form.type !== 'recordedGatedContent'
                     ? event.datetimeAndTimezoneString

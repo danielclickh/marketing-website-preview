@@ -1,17 +1,16 @@
-import { createElement } from 'react'
+import { createElement, HTMLAttributes } from 'react'
 import { colourCalculator } from './calculator'
 
-export type TitleProps = {
+export interface TitleProps extends HTMLAttributes<HTMLDivElement> {
   type: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   color?: string
   size?: string
-  className?: string
   weight?: string
 }
 
 // @ts-ignore
-export const SuiTitle = ({ ...TitleProps }) => {
-  const { type, children, color, size, className, weight } = TitleProps
+export const SuiTitle = ({ ...TitleProps }: TitleProps) => {
+  const { type, children, color = '', size, className, weight } = TitleProps
 
   let textClass = ''
 

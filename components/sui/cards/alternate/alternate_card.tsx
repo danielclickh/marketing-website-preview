@@ -34,7 +34,9 @@ export function SuiAlternateCard(props: CardProps) {
       <div className='flex flex-col text-center'>
         <SuiTitle type='h4'>{title}</SuiTitle>
         <div className='bg-primary h-1.5 w-16 rounded-md flex mx-auto mt-4' />
-        <SuiText color='dark'>{description}</SuiText>
+        <SuiText type='p3' weight='normal' color='dark'>
+          {description}
+        </SuiText>
         {buttonTitle && (
           <div className='flex space-x-4 items-end flex-wrap'>
             <div className='flex flex-grow-0'>

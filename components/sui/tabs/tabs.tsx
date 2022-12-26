@@ -4,7 +4,6 @@ import { SuiText } from '../typography'
 import { colourCalculator } from '../typography/calculator'
 
 type TabProps = {
-  activeTab: number
   color?: string | undefined
   activeColor?: string | undefined
   borderColor?: string | undefined
@@ -18,13 +17,8 @@ type TabProps = {
   }[]
 }
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
-}
-
 export const SuiTabs = ({ ...TabProps }) => {
   const {
-    activeTab,
     color,
     activeColor,
     borderColor,
@@ -41,7 +35,7 @@ export const SuiTabs = ({ ...TabProps }) => {
         <nav className='-mb-px flex space-x-8' aria-label='Tabs'>
           {tabs.map((tab: any) => (
             <Tab
-              key={tab.name}
+              key={tab.id}
               className={({ selected }) =>
                 selected
                   ? `border-primary ${colourCalculator(
@@ -66,7 +60,12 @@ export const SuiTabs = ({ ...TabProps }) => {
       <Tab.Panels className='flex overflow-auto'>
         {tabs.map((tab: any) => (
           <Tab.Panel key={tab.id}>
-            <SuiText>{tab.content}</SuiText>
+            <SuiText
+              type='p2'
+              weight='normal'
+              className='whitespace-pre-wrap px-9 py-6'>
+              {tab.content}
+            </SuiText>
           </Tab.Panel>
         ))}
       </Tab.Panels>

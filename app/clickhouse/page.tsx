@@ -52,11 +52,13 @@ export default async function ClickHouseServerPage() {
               <SuiTitle type='h1' className='text-6xl mb-0'>
                 <Markdown>{title}</Markdown>
               </SuiTitle>
-              <div className='mt-6'>
-                <SuiText size='lg' color='dark' weight='normal'>
-                  <p className='md:pr-16'>{description}</p>
-                </SuiText>
-              </div>
+              <SuiText
+                type='p2'
+                weight='medium'
+                color='dark'
+                className='mt-6 md:pr-16'>
+                {description}
+              </SuiText>
               <div className='flex mt-6 justify-center md:justify-start space-x-4'>
                 {mainButton && (
                   <SuiButton
@@ -81,7 +83,7 @@ export default async function ClickHouseServerPage() {
               <div>
                 <div className='mx-auto flex px-8 mt-12'>
                   <StrapiImage
-                    src={backgroundPng.data}
+                    {...backgroundPng}
                     alt='ClickHouse is fast'
                     width='471'
                     height='360'
@@ -106,7 +108,6 @@ export default async function ClickHouseServerPage() {
                 title={feature.title}
                 description={feature.description}
                 delay={100}
-                invert
               />
             ))}
           </div>
@@ -148,11 +149,14 @@ export default async function ClickHouseServerPage() {
           </SuiTitle>
 
           <div className='flex flex-col md:flex-row items-center'>
-            <div className='pt-4 md:pt-0 md:w-3/5'>
-              <SuiText size='lg'>{features3.mainItem.description}</SuiText>
-            </div>
+            <SuiText
+              type='p2'
+              weight='medium'
+              className='pt-4 md:pt-0 md:w-3/5 whitespace-pre-wrap'>
+              {features3.mainItem.description}
+            </SuiText>
             <div className='pt-4 md:pt-0 w-2/5 justify-center flex'>
-              <StrapiImage {...features3.iconSvg.data.attributes} />
+              <StrapiImage {...features3.iconSvg} />
             </div>
           </div>
 
@@ -160,8 +164,8 @@ export default async function ClickHouseServerPage() {
             {features3.items.map((feature) => (
               <div className='md:w-1/3' key={feature.title}>
                 <SuiTitle type='h4'>{feature.title}</SuiTitle>
-                <SuiText color='dark' size='lg'>
-                  <p>{feature.description}</p>
+                <SuiText color='dark' type='p2' weight='medium'>
+                  {feature.description}
                 </SuiText>
               </div>
             ))}
@@ -182,8 +186,8 @@ export default async function ClickHouseServerPage() {
             {features4.items.map((feature) => (
               <div key={feature.title}>
                 <SuiTitle type='h4'>{feature.title}</SuiTitle>
-                <SuiText color='dark' size='lg'>
-                  <p>{feature.description}</p>
+                <SuiText color='dark' type='p2' weight='medium'>
+                  {feature.description}
                 </SuiText>
               </div>
             ))}
@@ -207,14 +211,23 @@ export default async function ClickHouseServerPage() {
               <SuiTitle type='h2' className='mb-2'>
                 {features5.title}
               </SuiTitle>
-              <SuiText size='lg'>{features5.description}</SuiText>
+              <SuiText
+                type='p1'
+                weight='medium'
+                className='whitespace-pre-wrap'>
+                {features5.description}
+              </SuiText>
             </div>
           </div>
 
           <div className='flex pt-16 flex-col'>
             <SuiTitle type='h3'>{features5.second_title}</SuiTitle>
-            <SuiText color='dark' size='lg'>
-              <p className='max-w-3xl '>{features5.second_description}</p>
+            <SuiText
+              color='dark'
+              type='p2'
+              weight='medium'
+              className='max-w-3xl'>
+              {features5.second_description}
             </SuiText>
 
             <div className='flex flex-col md:flex-row pt-4 flex-wrap'>

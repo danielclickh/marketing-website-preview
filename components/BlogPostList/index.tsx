@@ -3,7 +3,7 @@ import React, { useMemo, useState } from 'react'
 import BlogPost from './BlogPost'
 import { BlogPostListProps } from './types'
 
-import { SuiSpacer, SuiTextField, SuiTitle } from '../sui'
+import { SuiTextField, SuiTitle } from '../sui'
 import CategorySelector from '../CategorySelector'
 function BlogPostList({ blogs, categories }: BlogPostListProps) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -50,8 +50,9 @@ function BlogPostList({ blogs, categories }: BlogPostListProps) {
           htmlFor='search'
           onChange={(e) => setSearch(e.target.value)}
         />
-        <SuiSpacer size='lg' />
-        <SuiTitle type='h6'>Blog categories</SuiTitle>
+        <SuiTitle type='h6' className='mt-6'>
+          Blog categories
+        </SuiTitle>
         <CategorySelector options={categoryList} />
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:w-3/4 md:gap-16 justify-center'>

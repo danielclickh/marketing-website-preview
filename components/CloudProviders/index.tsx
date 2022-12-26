@@ -18,10 +18,10 @@ async function CloudProviders() {
       {cloudProviders.map((cloudProvider, index: number) => (
         <div className='pt-8 flex flex-col space-y-2' key={cloudProvider.title}>
           <div className='flex flex-row items-start gap-6 h-10'>
-            {cloudProvider.lightProviderPngs.data.map((lightIconPng, index) => (
+            {cloudProvider.lightProviderPngs.map((lightIconPng, index) => (
               <StrapiPicture
                 key={`${cloudProvider.title}-${index}`}
-                dark={cloudProvider.darkProviderPngs.data[index].attributes}
+                dark={cloudProvider.darkProviderPngs[index]}
                 light={lightIconPng}
                 width='100'
                 height='40'

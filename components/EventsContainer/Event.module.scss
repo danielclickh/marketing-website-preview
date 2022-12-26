@@ -1,7 +1,7 @@
 
   .hero {
     .top {
-      box-sizing: border-box;
+      @apply box-border;
     }
 
     & > .event-container {
@@ -105,11 +105,8 @@
         flex: 0 0 502px;
 
         .form, .subscribed {
-          display: block;
-          @apply bg-cultured dark:bg-onyx;
-          width: 100%;
-          padding: 32px;
-          box-sizing: border-box;
+          @apply block bg-cultured dark:bg-onyx box-border w-full;
+          @apply p-8;
           box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 6px 4px -4px rgba(0, 0, 0, 0.1);
           border-radius: 10px;
 

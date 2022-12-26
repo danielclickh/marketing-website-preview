@@ -42,18 +42,14 @@ async function PricingPage() {
   ] = await Promise.all([pricingPromise, pricingByRegionPromise, plansProps])
 
   const style = {}
-  style[
-    '--image-url'
-  ] = `url(${contactSection.excludeImageLight?.data?.attributes?.url})`
-  style[
-    '--dark-image-url'
-  ] = `url(${contactSection.excludeImageDark?.data?.attributes?.url})`
+  style['--image-url'] = `url(${contactSection.excludeImageLight?.url})`
+  style['--dark-image-url'] = `url(${contactSection.excludeImageDark?.url})`
   const regionList = await Promise.all(
     pricingByRegion.map((region) => {
       return {
         ...region,
         regionFlagPNG: {
-          src: region.regionFlagPNG.data.attributes.url,
+          src: region.regionFlagPNG.url,
           width: 30,
           height: 20
         }
@@ -104,7 +100,7 @@ async function PricingPage() {
                   key={column.header}>
                   <div className='header_row flex gap-6 items-center mb-12'>
                     <StrapiImage
-                      {...column.image.data.attributes}
+                      {...column.image}
                       alt='payment method'
                       className='image w-16 h-16'
                     />

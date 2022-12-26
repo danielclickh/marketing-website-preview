@@ -38,7 +38,7 @@ export async function Footer() {
               <div
                 key={topMenu.title}
                 className='flex flex-col lg:w-4/12 pb-6 lg:pb-0'>
-                <SuiTitle type='h6' color='white' className='mb-4'>
+                <SuiTitle type='h5' color='white' className='mb-4'>
                   {topMenu.title}
                 </SuiTitle>
                 <div className='flex flex-row flex-wrap lg:flex-col gap-x-4 lg:gap-x-0'>
@@ -59,24 +59,20 @@ export async function Footer() {
           <div className='flex flex-col lg:pt-12 items-start lg:flex-row'>
             {logoSvg && (
               <div className='flex md:w-64 mr-3 gap-x-3 items-center'>
-                <StrapiImage
-                  {...logoSvg.data.attributes}
-                  width='25'
-                  height='25'
-                />
+                <StrapiImage {...logoSvg} width='25' height='25' />
                 <span className={`text-2xl text-white ${hind.className}`}>
                   ClickHouse
                 </span>
               </div>
             )}
             <div className='pr-4 lg:pl-4 self-end'>
-              <SuiText color='white' padding_0>
-                <p>{licensingText}</p>
+              <SuiText color='white' type='p4' weight='medium'>
+                {licensingText}
               </SuiText>
               <div className='copyright_and_bottom_links flex flex-col lg:flex-row gap-1 lg:items-center'>
-                <SuiTitle color='white' type='h6'>
+                <SuiText color='white' type='p4' weight='medium'>
                   {copyright}
-                </SuiTitle>
+                </SuiText>
                 <div className='bottom_links flex divide-x divide-white'>
                   {bottomLinks.map((bottomLink) => (
                     <SuiLink
@@ -98,7 +94,7 @@ export async function Footer() {
           <h4 className='text-xl font-bold text-white'>
             {newsletterForm.title}
           </h4>
-          <SuiText color='white' size='sm'>
+          <SuiText color='white' type='p3' weight='medium' className='mb-4'>
             {newsletterForm.description}
           </SuiText>
           <div className='flex align-middle items-center space-x-2'>
@@ -109,8 +105,8 @@ export async function Footer() {
           </div>
 
           <div className='flex flex-col pt-2'>
-            <SuiText color='white' size='xs'>
-              <p>{socialLinks.title}</p>
+            <SuiText color='white' type='p3' weight='medium'>
+              {socialLinks.title}
             </SuiText>
             <div className='flex space-x-4 pt-2'>
               {socialLinks.socialLinkItems.map((socialLink) => (
@@ -120,7 +116,7 @@ export async function Footer() {
                   key={socialLink.href}>
                   <div className='bg-light-purple2 border border-arsenic px-3 pt-3 pb-2 rounded hover:bg-onyx'>
                     <StrapiImage
-                      {...socialLink.iconSvg.data.attributes}
+                      {...socialLink.iconSvg}
                       width={21}
                       height={20}
                     />

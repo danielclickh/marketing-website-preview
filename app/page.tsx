@@ -9,11 +9,11 @@ import {
 } from '../components/sui'
 import { FeatureItem } from '../components/feature_item'
 import { findOne } from '../lib/api/strapi'
-import { StrapiImage } from '../components/StrapiElements'
+import { StrapiImage, StrapiPicture } from '../components/StrapiElements'
 import styles from './HomePage.module.scss'
 import Link from 'next/link'
 import BulletPoint from '../components/BulletPoint'
-import mainImage from '../public/sql_console_hero.png'
+import mainImage from '../public/images/sql_console_hero.png'
 import GetStarted from '../components/GetStarted'
 
 async function getData() {
@@ -50,7 +50,6 @@ async function getData() {
 }
 
 export default async function HomePage() {
-  console.log('vinu', { a: process.env.APP_ENV, b: process.env.NODE_ENV })
   const {
     hero,
     aboutClickhouse,
@@ -74,11 +73,11 @@ export default async function HomePage() {
               <div className='flex flex-row'>
                 <div className='mt-6 max-w-3xl flex flex-col'>
                   <SuiText
-                    size='lg'
+                    type='p2'
                     color='dark'
                     weight='normal'
                     className='text-left'>
-                    <p>{hero.description}</p>
+                    {hero.description}
                   </SuiText>
                   {hero.ctaButton && (
                     <SuiButton
@@ -91,15 +90,15 @@ export default async function HomePage() {
 
                   {!hero.ctaButton && hero.advancedCallout && (
                     <div className={styles.advanced_cta}>
-                      <div className={styles.info_container}>
-                        <div className={styles.cta_title}>
+                      <div className='md:pr-8 border-0 md:border-r-1 border-solid border-web-light-c4 dark:border-web-dark-c4'>
+                        <SuiText type='p2' weight='bold' className='mb-1'>
                           {hero.advancedCallout.title}
-                        </div>
-                        <div className={styles.cta_description}>
+                        </SuiText>
+                        <SuiText type='p2' weight='normal' color='dark'>
                           {hero.advancedCallout.description}
-                        </div>
+                        </SuiText>
                       </div>
-                      <div className={styles.button_container}>
+                      <div className='flex grow items-center justify-center md:pl-8'>
                         <SuiButton
                           path={hero.advancedCallout.href}
                           size='sm'
@@ -110,7 +109,13 @@ export default async function HomePage() {
                       </div>
                     </div>
                   )}
-                  <SuiText color='dark'>{hero.ctaButtonSubtext}</SuiText>
+                  <SuiText
+                    type='p3'
+                    weight='normal'
+                    color='dark'
+                    className='mt-3'>
+                    {hero.ctaButtonSubtext}
+                  </SuiText>
                 </div>
               </div>
             </div>
@@ -136,8 +141,8 @@ export default async function HomePage() {
                   {highlight.title}
                 </h3>
                 <div className='bg-primary h-1 w-16 rounded-md flex mx-auto my-4' />
-                <SuiText className='mb-4'>
-                  <p>{highlight.description}</p>
+                <SuiText type='p3' weight='normal' className='mb-4'>
+                  {highlight.description}
                 </SuiText>
                 <div>
                   <SuiButton
@@ -167,7 +172,6 @@ export default async function HomePage() {
                 title={feature.title}
                 description={feature.description}
                 delay={100}
-                invert
               />
             ))}
           </div>
@@ -189,28 +193,21 @@ export default async function HomePage() {
       <div className='flex w-full container-light-color'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 xl:px-0'>
           <SuiTitle type='h2'>{customerStories.title}</SuiTitle>
-          <SuiText size='lg' color='dark' weight='normal'>
-            <p>{customerStories.description}</p>
+          <SuiText type='p2' weight='medium' color='dark'>
+            {customerStories.description}
           </SuiText>
 
           <div className='container pt-12 flex flex-col sm:flex-row flex-wrap lg:grid lg:grid-cols-5 gap-4 md:gap-x-8 self-center items-center justify-center'>
-            {customerStories.logos.map((logo) => {
-              const style = {}
-              style[
-                '--image-url'
-              ] = `url(${logo?.lightLogoPng?.data?.attributes?.url})`
-              style[
-                '--dark-image-url'
-              ] = `url(${logo?.darkLogoPng?.data?.attributes?.url})`
-              return (
-                <Link key={logo.href} href={logo.href} target={logo.target}>
-                  <div
-                    className={`${styles.companyCard} dark:bg-gunmetal dark:bg-[image:var(--dark-image-url)]`}
-                    style={style}
+            {customerStories.logos.map((logo) => (
+              <Link key={logo.href} href={logo.href} target={logo.target}>
+                <div className='flex w-full sm:w-52 lg:w-full h-24 bg-white rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer'>
+                  <StrapiPicture
+                    light={logo?.lightLogoPng}
+                    dark={logo?.darkLogoPng}
                   />
-                </Link>
-              )
-            })}
+                </div>
+              </Link>
+            ))}
           </div>
 
           <div className='flex text-center justify-center pt-16'>
@@ -236,11 +233,13 @@ export default async function HomePage() {
           </SuiTitle>
           <SuiTitle type='h2'>{clickhouseCloud.title}</SuiTitle>
 
-          <div className='max-w-5xl flex self-center mt-2'>
-            <SuiText size='lg' color='dark' weight='normal'>
-              <p>{clickhouseCloud.description}</p>
-            </SuiText>
-          </div>
+          <SuiText
+            type='p2'
+            weight='medium'
+            color='dark'
+            className='max-w-5xl flex self-center mt-2'>
+            {clickhouseCloud.description}
+          </SuiText>
 
           {clickhouseCloudItems.map((clickhouseCloudItem, index) => (
             <div
@@ -252,8 +251,12 @@ export default async function HomePage() {
                 <SuiTitle type='h3' className='mb-4'>
                   {clickhouseCloudItem.title}
                 </SuiTitle>
-                <SuiText size='lg' color='dark' className='mb-4'>
-                  <p>{clickhouseCloudItem.description}</p>
+                <SuiText
+                  type='p2'
+                  weight='medium'
+                  color='dark'
+                  className='mb-4'>
+                  {clickhouseCloudItem.description}
                 </SuiText>
                 <div className='pl-10 md:pl-0'>
                   {clickhouseCloudItem.bullets.map((bullet) => (
@@ -261,12 +264,12 @@ export default async function HomePage() {
                   ))}
                 </div>
               </div>
-              {clickhouseCloudItem.screenshotPng.data && (
+              {clickhouseCloudItem.screenshotPng && (
                 <div className='flex md:w-1/2 justify-center pt-4 items-center'>
                   <StrapiImage
-                    src={clickhouseCloudItem.screenshotPng.data}
+                    {...clickhouseCloudItem.screenshotPng}
                     alt='ClickHouse Cloud is coming'
-                    size='large'
+                    sizes='large'
                     className='h-fit w-full object-contain'
                   />
                 </div>
@@ -311,34 +314,31 @@ export default async function HomePage() {
           <SuiTitle type='h2' className='mb-2'>
             {testimonials.title}
           </SuiTitle>
-          <SuiText size='lg' color='dark' className='mb-4'>
-            <p>{testimonials.description}</p>
+          <SuiText type='p2' weight='medium' color='dark' className='mb-4'>
+            {testimonials.description}
           </SuiText>
           {testimonials.testimonialsIconSvg && (
             <div className='flex justify-center mb-4'>
-              <StrapiImage
-                {...testimonials.testimonialsIconSvg.data.attributes}
-              />
+              <StrapiImage {...testimonials.testimonialsIconSvg} />
             </div>
           )}
           {testimonials.testimonialItems.map((testimonial) => (
-            <SuiText
-              key={testimonial.author}
-              weight='medium'
-              color='dark'
-              className='mb-4'>
-              <SuiLink
-                href={testimonial.href}
-                target={testimonial.target}
-                color='darkest'>
-                {testimonial.title}
-              </SuiLink>
-              <br />
-              {testimonial.author}
-            </SuiText>
+            <div key={testimonial.id} className='mb-4'>
+              <SuiText type='p1' weight='bold' color='darkest'>
+                <SuiLink
+                  href={testimonial.href}
+                  target={testimonial.target}
+                  color='darkest'>
+                  {testimonial.title}
+                </SuiLink>
+              </SuiText>
+              <SuiText type='p2' weight='medium' color='dark'>
+                {testimonial.author}
+              </SuiText>
+            </div>
           ))}
           <StrapiImage
-            {...testimonials.bottomIconSvg.data.attributes}
+            {...testimonials.bottomIconSvg}
             className='text-primary'
           />
         </div>

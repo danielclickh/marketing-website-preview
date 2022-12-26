@@ -65,7 +65,7 @@ async function EventPage({ params: { slug } }) {
               <div className='hosts'>
                 {hostedBy.hosts.map((host) => (
                   <div className='host' key={`${host.name}-${host.role}`}>
-                    <StrapiImage src={host.avatarPng} />
+                    <StrapiImage {...host.avatarPng} />
                     <div className='content'>
                       <div className='name'>{host.name}</div>
                       <div className='role'>{host.role}</div>

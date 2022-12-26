@@ -7,7 +7,6 @@ type BigStatProps = {
   label: string
   color?: string
   stat: string
-  stat_size?: string
   border?: boolean
   link_text?: string
   link_href?: string
@@ -24,7 +23,6 @@ export function SuiBigStat(props: BigStatProps) {
     label,
     color,
     stat,
-    stat_size,
     border,
     link_text,
     link_href,
@@ -43,19 +41,19 @@ export function SuiBigStat(props: BigStatProps) {
         color={color ? color : 'bg-white dark:bg-dark-grey2'}
         border={border ? border : false}>
         <div className='flex flex-col'>
-          <SuiText color='dark' weight='semibold' padding_0>
+          <SuiText type='p2' color='dark' weight='bold'>
             {label}
           </SuiText>
           <div className='flex md:flex-col xl:flex-row'>
             <div className={`flex-col ${sparklines_data ? 'w-2/4' : 'w-full'}`}>
-              <SuiTitle size={stat_size ? stat_size : 'lg'}>{stat}</SuiTitle>
+              <SuiTitle type='h3'>{stat}</SuiTitle>
               {link_text && (
-                <SuiText padding_0>
+                <SuiText type='p3' weight='normal'>
                   <SuiLink href={link_href}>{link_text}</SuiLink>
                 </SuiText>
               )}
               {change_value && (
-                <SuiText padding_0 weight='semibold' color={change_value_color}>
+                <SuiText type='p3' weight='bold' color={change_value_color}>
                   {change_value}
                 </SuiText>
               )}

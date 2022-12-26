@@ -16,6 +16,7 @@ import MenuItem from './MenuItem'
 import { findOne } from '../../lib/api/strapi'
 import styles from './Header.module.scss'
 import { Hind_Siliguri } from '@next/font/google'
+import { HeaderData } from './types'
 
 const hind = Hind_Siliguri({
   subsets: ['latin'],
@@ -23,9 +24,8 @@ const hind = Hind_Siliguri({
 })
 
 export async function Header() {
-  const { logoIcon, menuItems, ctaSecondaryButton, ctaButton } = await findOne(
-    'header',
-    {
+  const { logoIcon, menuItems, ctaSecondaryButton, ctaButton }: HeaderData =
+    await findOne('header', {
       populate: [
         'logoIcon',
         'ctaButton',
@@ -35,8 +35,8 @@ export async function Header() {
         'menuItems.menuItems',
         'menuItems.menuItems.icon'
       ]
-    }
-  )
+    })
+
   return (
     <Popover
       className={`bg-white dark:bg-gunmetal shadow-sm  dark:border-b dark:border-onyx bg-opacity-100 dark:opacity-100 h-full backdrop-blur-lg dark:backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300 ${
@@ -53,7 +53,7 @@ export async function Header() {
             <Link
               href='/'
               className='flex items-center gap-x-3 hover:no-underline'>
-              <StrapiImage src={logoIcon} />
+              <StrapiImage {...logoIcon} />
               <span className={`text-2xl ${hind.className}`}>ClickHouse</span>
             </Link>
             <div className='flex justify-center'>
@@ -79,21 +79,21 @@ export async function Header() {
                                 className='flex items-start hover:no-underline'>
                                 <div
                                   className={`${styles.menuItem} hover:bg-cultured dark:hover:bg-onyx`}
-                                  data-icon={item.icon.data ? 'true' : 'false'}>
-                                  {item.icon.data && (
+                                  data-icon={item.icon ? 'true' : 'false'}>
+                                  {item.icon && (
                                     <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md text-arsenic sm:h-12 sm:w-12 md:mr-4'>
                                       <StrapiImage
-                                        {...item.icon.data.attributes}
+                                        {...item.icon}
                                         className='h-10 w-10 text-gunmetal dark:text-white'
                                         aria-hidden='true'
                                       />
                                     </div>
                                   )}
                                   <div className=''>
-                                    <p className='text-base font-medium text-gunmetal dark:text-white'>
+                                    <p className='text-sm font-medium text-gunmetal dark:text-white'>
                                       {item.name}
                                     </p>
-                                    <p className='mt-1 text-sm text-web-light-c4 dark:text-web-dark-c4'>
+                                    <p className='mt-1 text-xs text-web-light-c4 dark:text-web-dark-c4'>
                                       {item.description}
                                     </p>
                                   </div>
@@ -109,7 +109,7 @@ export async function Header() {
                           key={menuItem.name}
                           href={menuItem.href}
                           target={menuItem.target}
-                          className='inline-flex hover:no-underline items-center text-sm font-semibold text-gunmetal dark:text-white hover:text-web-light-c4 dark:hover:text-web-dark-c4 ease-in-out'>
+                          className='inline-flex hover:no-underline items-center text-sm font-medium text-gunmetal dark:text-white hover:text-web-light-c4 dark:hover:text-web-dark-c4 ease-in-out'>
                           {menuItem.name}
                         </Link>
                       )
@@ -167,17 +167,17 @@ export async function Header() {
                                           key={item.name}
                                           href={item.href}
                                           target={item.target}
-                                          className='w-full hover:no-underline flex items-center text-base font-medium text-gunmetal dark:text-white relative'>
-                                          {item.icon.data && (
+                                          className='w-full hover:no-underline flex items-center text-sm font-medium text-gunmetal dark:text-white relative'>
+                                          {item.icon && (
                                             <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-web-light-c4 dark:text-web-dark-c4 mr-4'>
                                               <StrapiImage
-                                                {...item.icon.data.attributes}
+                                                {...item.icon}
                                                 className='h-10 w-10 text-gunmetal dark:text-white'
                                                 aria-hidden='true'
                                               />
                                             </div>
                                           )}
-                                          <div className='text-base font-medium text-gunmetal dark:text-white'>
+                                          <div className='text-sm font-medium text-gunmetal dark:text-white'>
                                             {item.name}
                                           </div>
                                         </Link>
@@ -193,17 +193,17 @@ export async function Header() {
                                     key={item.name}
                                     href={item.href}
                                     target={item.target}
-                                    className='w-full hover:no-underline flex items-start text-base font-medium text-gunmetal dark:text-white relative'>
-                                    {item.icon.data && (
+                                    className='w-full hover:no-underline flex items-start text-sm font-medium text-gunmetal dark:text-white relative'>
+                                    {item.icon && (
                                       <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-web-light-c4 dark:text-web-dark-c4 mr-4'>
                                         <StrapiImage
-                                          {...item.icon.data.attributes}
+                                          {...item.icon}
                                           className='h-10 w-10 text-gunmetal dark:text-white'
                                           aria-hidden='true'
                                         />
                                       </div>
                                     )}
-                                    <div className='text-base font-medium text-gunmetal dark:text-white'>
+                                    <div className='text-sm font-medium text-gunmetal dark:text-white'>
                                       {item.name}
                                     </div>
                                   </Link>
@@ -214,7 +214,7 @@ export async function Header() {
                                   key={menuItem.name}
                                   href={menuItem.href}
                                   target={menuItem.target}
-                                  className='text-base hover:no-underline font-medium text-gunmetal dark:text-white'>
+                                  className='text-sm hover:no-underline font-medium text-gunmetal dark:text-white'>
                                   {menuItem.name}
                                 </Link>
                               )

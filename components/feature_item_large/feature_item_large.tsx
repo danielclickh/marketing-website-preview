@@ -1,9 +1,9 @@
-import { ReactElement } from 'react'
+import { BaseStrapiImage } from '../../lib/api/strapi/types'
 import { StrapiImage } from '../StrapiElements'
 import { SuiText, SuiTitle } from '../sui'
 
 type FeatureItemProps = {
-  icon: ReactElement
+  icon: BaseStrapiImage
   title: string
   description: string
   entry?: string
@@ -16,12 +16,12 @@ export function FeatureItemLarge(props: FeatureItemProps) {
     <div className='flex flex-col space-y-2 w-full text-left' data-aos={entry}>
       <div className='flex flex-row items-center'>
         <div className='flex w-12 mr-2'>
-          <StrapiImage {...icon.data.attributes} className='feature-icon' />
+          <StrapiImage {...icon} className='feature-icon' />
         </div>
-        <SuiTitle type='h3'>{title}</SuiTitle>
+        <SuiTitle type='h2'>{title}</SuiTitle>
       </div>
-      <SuiText size='lg' color='dark'>
-        <p>{description}</p>
+      <SuiText type='p2' weight='medium' color='dark'>
+        {description}
       </SuiText>
     </div>
   )

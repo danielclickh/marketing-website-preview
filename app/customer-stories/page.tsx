@@ -44,8 +44,8 @@ async function CustomerStoriesPage() {
               {title}
             </SuiTitle>
             <div className='max-w-2xl'>
-              <SuiText size='lg' color='dark' weight='normal'>
-                <p>{description}</p>
+              <SuiText type='p1' color='dark' weight='medium'>
+                {description}
               </SuiText>
             </div>
           </div>
@@ -61,28 +61,24 @@ async function CustomerStoriesPage() {
                   <div className='w-60 md:w-80 h-full flex flex-col justify-between'>
                     <div>
                       <StrapiImage
-                        {...testimonial.avatar.data.attributes}
+                        {...testimonial.avatar}
                         alt={testimonial.author}
                         width='64'
                         height='64'
                         className='h-16 w-16 mx-auto'
                       />
                     </div>
-                    <SuiText size='lg'>
-                      <p>"{testimonial.review}"</p>
+                    <SuiText type='p2' weight='medium'>
+                      &ldquo;{testimonial.review}&ldquo;
                     </SuiText>
-                    <SuiText>
-                      <p>
-                        {' '}
-                        {testimonial.author}
-                        <br />
-                        {testimonial.role && (
-                          <span className='text-web-light-c4 dark:text-web-dark-c4'>
-                            {testimonial.role}
-                          </span>
-                        )}
-                      </p>
+                    <SuiText type='p3' weight='medium'>
+                      {testimonial.author}
                     </SuiText>
+                    {testimonial.role && (
+                      <SuiText type='p3' weight='medium' color='dark'>
+                        {testimonial.role}
+                      </SuiText>
+                    )}
                     <div
                       className='flex justify-center mx-4 mt-2 relative whitespace-nowrap text-primary'
                       data-rating={testimonial.rating}>
@@ -107,9 +103,11 @@ async function CustomerStoriesPage() {
 
       <div className='container-light-color w-full pt-16 pb-24'>
         <div className='flex container mx-auto flex-col max-w-7xl px-6 2xl:px-0'>
-          <SuiTitle type='h3'>{useCases.title}</SuiTitle>
-          <SuiText size='lg' color='dark'>
-            <p>{useCases.description}</p>
+          <SuiTitle type='h2' className='mb-4'>
+            {useCases.title}
+          </SuiTitle>
+          <SuiText type='p1' weight='medium' color='dark'>
+            {useCases.description}
           </SuiText>
         </div>
         {spotlight && (
@@ -117,11 +115,16 @@ async function CustomerStoriesPage() {
             <SuiPanel color='bg-white dark:bg-gunmetal' shadow padding='xl'>
               <div className='flex flex-row drop-shadow-2xl'>
                 <div className='flex flex-col  w-1/2'>
-                  <SuiTitle type='h6' color='primary' className='mb-1'>
+                  <SuiTitle
+                    type='h5'
+                    color='primary'
+                    className='mb-1 uppercase'>
                     {useCases.spotlightTitle}
                   </SuiTitle>
-                  <SuiTitle type='h4'>{spotlight.companyName}</SuiTitle>
-                  <SuiText>{spotlight.description}</SuiText>
+                  <SuiTitle type='h3'>{spotlight.companyName}</SuiTitle>
+                  <SuiText type='p3' weight='medium'>
+                    {spotlight.description}
+                  </SuiText>
                   {spotlight.ctaButton && (
                     <div className='flex mt-8'>
                       <SuiButton
@@ -137,8 +140,8 @@ async function CustomerStoriesPage() {
                 <div className='-mt-8 -mb-14 overflow-hidden mx-auto w-full max-w-xs'>
                   <div className='hexagon'>
                     <StrapiPicture
-                      light={spotlight.lightLogoPng.data.attributes}
-                      dark={spotlight.darkLogoPng.data.attributes}
+                      light={spotlight.lightLogoPng}
+                      dark={spotlight.darkLogoPng}
                       sizes='small'
                     />
                   </div>
@@ -151,8 +154,8 @@ async function CustomerStoriesPage() {
           {useCaseItems.map((useCase, index) => (
             <UseCase
               key={`usecase-${index}`}
-              lightLogo={useCase.lightLogoPng.data}
-              darkLogo={useCase.darkLogoPng.data}
+              lightLogo={useCase.lightLogoPng}
+              darkLogo={useCase.darkLogoPng}
               description={useCase.description}
               bullets={useCase.bullets}
               path={useCase?.ctaButton?.href}

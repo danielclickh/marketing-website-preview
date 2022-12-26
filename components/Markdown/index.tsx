@@ -7,7 +7,7 @@ function StrapiImage({ src, width, height, alt, ...props }: any) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={`${process.env.NEXT_PUBLIC_STRAPI_URL ?? ''}${src}`}
+      src={src}
       width={width}
       height={height}
       alt={alt ?? 'Markdown Image'}
@@ -18,25 +18,29 @@ function StrapiImage({ src, width, height, alt, ...props }: any) {
 }
 const components = {
   img: StrapiImage
-  // p: ({ node, ...props }) => {
-  //   // console.log('a', JSON.stringify(a))
-  //   return <div {...props} />
-  // }
 }
 
+interface Props extends ReactMarkdownOptions {
+  encloseByDiv?: boolean
+}
 function Markdown({
   children,
   components: componentsProp,
   className = '',
+  encloseByDiv = true,
   ...props
-}: ReactMarkdownOptions) {
+}: Props) {
   const newComponents = components
   if (Object.keys(componentsProp ?? {}).length > 0) {
     Object.assign(newComponents, componentsProp)
   }
   return (
     <ReactMarkdown
-      className={`rich_content ${className}`}
+      className={
+        encloseByDiv && className.length === 0
+          ? `rich_content ${className}`
+          : undefined
+      }
       components={newComponents}
       rehypePlugins={[rehypeRaw]}
       {...props}>

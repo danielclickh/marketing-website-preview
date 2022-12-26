@@ -15,12 +15,12 @@ const NewsItem = ({ source, date, title, abstract }) => {
       <SuiTitle type='h4' className='mb-2'>
         {title}
       </SuiTitle>
-      <SuiText color='dark' padding_0>
-        <p>{abstract}</p>
+      <SuiText type='p3' weight='medium' color='dark'>
+        {abstract}
       </SuiText>
       <Link href='#'>
         <div className='flex items-center cursor-pointer'>
-          <SuiText weight='medium' color='primary' className='hover:underline'>
+          <SuiText type='p3' weight='medium' color='primary'>
             Read more
           </SuiText>
           <ArrowRightIcon className='ml-2 w-4 text-primary' />
@@ -92,7 +92,7 @@ export default async function News() {
               {title}
             </SuiTitle>
             <div className='max-w-2xl'>
-              <SuiText size='lg' color='dark' weight='normal'>
+              <SuiText type='p1' color='dark' weight='medium'>
                 {description}
               </SuiText>
             </div>
@@ -113,8 +113,12 @@ export default async function News() {
 
                     <SuiTitle type='h4'>{featuredEvent.title}</SuiTitle>
 
-                    <SuiText color='dark'>
-                      <p>{featuredEvent.shortDescription}</p>
+                    <SuiText
+                      type='p2'
+                      weight='medium'
+                      color='dark'
+                      className='mb-4'>
+                      {featuredEvent.shortDescription}
                     </SuiText>
                     <div className='flex'>
                       <SuiButton
@@ -131,8 +135,8 @@ export default async function News() {
                   </div>
                   <div className='flex md:w-1/2 pt-8 md:pt-0 justify-center items-center md:px-20'>
                     <StrapiPicture
-                      light={featuredEvent.lightFeatureImagePng.data.attributes}
-                      dark={featuredEvent.darkFeatureImagePng.data.attributes}
+                      light={featuredEvent.lightFeatureImagePng}
+                      dark={featuredEvent.darkFeatureImagePng}
                     />
                   </div>
                 </div>
@@ -172,10 +176,8 @@ export default async function News() {
                   <div className='flex w-44 items-top justify-start'>
                     <div>
                       <StrapiPicture
-                        dark={upcomingEvent.darkFeatureImagePng.data.attributes}
-                        light={
-                          upcomingEvent.lightFeatureImagePng.data.attributes
-                        }
+                        dark={upcomingEvent.darkFeatureImagePng}
+                        light={upcomingEvent.lightFeatureImagePng}
                         alt='Meetup'
                         width='128'
                         height='128'
@@ -187,23 +189,21 @@ export default async function News() {
                     <SuiTitle type='h4' className='mb-2'>
                       {upcomingEvent.title}
                     </SuiTitle>
-                    <SuiText color='dark' padding_0>
+                    <SuiText type='p3' weight='medium' color='dark'>
                       {upcomingEvent.shortDescription}
                     </SuiText>
                     <div className='flex items-center space-x-2'>
                       <MapIcon className='h-16 w-16' />
                       <div>
-                        <SuiText color='dark'>
-                          <p>
-                            {[
-                              upcomingEvent.location.city,
-                              upcomingEvent.location.country
-                            ].join(', ')}{' '}
-                            {upcomingEvent.localDatetime &&
-                              ` • ${new Date(
-                                upcomingEvent.localDatetime
-                              ).toDateString()}`}
-                          </p>
+                        <SuiText type='p3' weight='medium' color='dark'>
+                          {[
+                            upcomingEvent.location.city,
+                            upcomingEvent.location.country
+                          ].join(', ')}{' '}
+                          {upcomingEvent.localDatetime &&
+                            ` • ${new Date(
+                              upcomingEvent.localDatetime
+                            ).toDateString()}`}
                         </SuiText>
                       </div>
                     </div>

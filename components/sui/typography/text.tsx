@@ -1,34 +1,30 @@
+import { HTMLAttributes } from 'react'
 import { colourCalculator } from './calculator'
 
-export type TextProps = {
-  color?: string | undefined
-  dark_color?: string
-  size?: string
-  uppercase?: boolean
-  padding_0?: boolean
-  className: string
+export interface TextProps extends HTMLAttributes<HTMLDivElement> {
+  type: 'p1' | 'p2' | 'p3' | 'p4'
+  weight: 'normal' | 'medium' | 'bold'
+  color?: string
 }
 
 // @ts-ignore
-export const SuiText = ({ ...TextProps }) => {
-  const {
-    children,
-    color,
-    dark_color,
-    size = 'sm',
-    weight,
-    uppercase,
-    padding_0,
-    className
-  } = TextProps
-  const padding = padding_0 ? 'py-0' : 'py-2'
-  const isUppercase = uppercase ? 'uppercase' : 'normal-case'
+export const SuiText = ({ ...TextProps }: TextProps) => {
+  const { type, children, color = '', weight, className } = TextProps
 
+  let textClass = ''
+  if (type === 'p1') {
+    textClass = `text-lg font-${weight}`
+  } else if (type === 'p2') {
+    textClass = `text-base font-${weight === 'bold' ? 'semibold' : weight}`
+  } else if (type === 'p3') {
+    textClass = `text-sm font-${weight === 'bold' ? 'semibold' : weight}`
+  } else {
+    textClass = `text-base font-${weight === 'bold' ? 'semibold' : weight}`
+  }
   return (
     <div
-      className={`text-${size} ${className ?? ''}
-        font-${weight ? weight : 'normal'} ${isUppercase} ${padding}
-        ${colourCalculator(color, 'text-gunmetal dark:text-white')} 
+      className={`${textClass} ${className ?? ''}
+        ${colourCalculator(color, 'text-inherit')} 
       `}>
       {children}
     </div>

@@ -1,97 +1,46 @@
 .home {
-  @apply bg-hero_background dark:bg-dark_hero_background bg-cover pt-10;
-  background: linear-gradient(180deg, rgba(246, 247, 250, 0) 0%, #F6F7FA 100%);
+  @apply bg-cover pt-10 bg-gradient-to-b from-white to-cultured;
   .advanced_cta {
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.13);
-  border-radius: 8px;
-  display: flex;
-  padding: 32px;
-  margin: 42px 0 0px;
-  background: #373343;
-  @apply max-w-screen-sm;
-    flex-direction: column;
-    gap: 16px;
-    text-align: center;
-  @screen md {
-    max-width: none;
-    width: 100%;
-    box-sizing: border-box;
-    padding-right: 32px;
-    padding-left: 32px;
-
-  }
-
-  .info_container {
-      border-right: none;
-      padding-right: 0;
-      @screen md {
-        border-right: 1px solid rgba(109, 115, 134, 0.1);;
-        padding-right: 32px;
-    }
-  }
-
-  .button_container {
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: center;
-
-    padding-left: 0;
+    @apply flex rounded-lg p-8 bg-onyx mt-11 max-w-screen-sm flex-col gap-4 text-center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.13);
     @screen md {
-    padding-left: 32px;
-
+      @apply w-full px-8 box-border;
+      max-width: none;
     }
-  }
 
-  .cta_title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-
-  .cta_description {
-    font-size: 16px;
-    font-weight: regular;
-    line-height: 24px;
-    color: #B0B4BC;
-  }
   }
 }
 
 .companyCard {
   @apply flex w-full sm:w-52 lg:w-full h-24 bg-white rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer;
   @apply bg-[image:var(--image-url)] bg-no-repeat bg-center;
-
 }
 
+.heroScreenshotBg {
+  @apply pt-4 pl-4 h-auto relative;
+  &::before {
+    @apply w-auto max-w-full absolute top-0 inset-x-0 m-auto ml-0;
+    height: 90%;
+    content: "";
+    background: linear-gradient(90deg, #ff9900 0.7%, #ffbe5b 99.07%);
+    border-radius: 8px;
+    transform: rotate(-1.92deg);
+    aspect-ratio: 2/1;
+  }
+}
 
-        .heroScreenshotBg {
-          @apply pt-4 pl-4 h-auto relative;
-          &::before {
-            @apply w-auto max-w-full absolute top-0 inset-x-0 m-auto ml-0;
-            height: 90%;
-            content: '';
-          background: linear-gradient(90deg, #FF9900 0.7%, #FFBE5B 99.07%);
-          border-radius: 8px;
-          transform: rotate(-1.92deg);
-          aspect-ratio: 2/1;
+.heroScreenshot {
+  @apply top-2 relative m-0 h-full;
+  aspect-ratio: 2/1;
 
-          }
-        }
+  border-radius: 8px;
+  box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.05);
+  // transform: rotate(1.92deg);
 
-        .heroScreenshot {
-          @apply top-2 relative m-0 h-full;
-          aspect-ratio: 2/1;
-
-          border-radius: 8px;
-          box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.05);
-          // transform: rotate(1.92deg);
-
-          @screen lg {
-          @apply w-auto left-1 top-1;
-          min-height: 24rem;
-          min-width: 48rem;
-          overflow-x: hidden;
-
-          }
-        }
+  @screen lg {
+    @apply w-auto left-1 top-1;
+    min-height: 24rem;
+    min-width: 48rem;
+    overflow-x: hidden;
+  }
+}

@@ -8,7 +8,7 @@ async function StrapiImageUrl({
   id,
   url,
   sizes,
-  className,
+  className = '',
   formats,
   alt = '',
   width,
@@ -26,9 +26,17 @@ async function StrapiImageUrl({
 
     return (
       <Markdown
+        encloseByDiv={false}
         components={{
           svg: ({ node, ...params }) => {
-            return <svg {...params} {...props} />
+            return (
+              <svg
+                {...params}
+                className={`fill-current ${className}`}
+                width={width ?? undefined}
+                height={height ?? undefined}
+              />
+            )
           }
         }}>
         {svgText}
@@ -39,7 +47,14 @@ async function StrapiImageUrl({
   const src = sizes && formats ? formats[sizes].url : url
 
   return (
-    <Image src={src} alt={alt} className={className} unoptimized {...props} />
+    <Image
+      src={src}
+      alt={alt ?? props.alternativeText}
+      className={className}
+      width={width as number}
+      height={height as number}
+      unoptimized
+    />
   )
 }
 

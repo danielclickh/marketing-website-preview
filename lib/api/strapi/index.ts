@@ -1,6 +1,7 @@
 import { stringify } from 'qs'
+import environment from '../../../environment'
 
-const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/`
+const url = `${environment.strapiBaseUrl}/api/`
 
 export async function getPathsValues(
   pathName: string,
@@ -66,6 +67,36 @@ export async function fetchAll(
   return list
 }
 
+function convertStrapiObject(element: any) {
+  const result: any = {}
+  for (const entry of Object.entries(element || {})) {
+    const field: string = entry[0]
+    const fieldValue: any = entry[1]
+
+    if (Array.isArray(fieldValue)) {
+      result[field] = fieldValue.map(convertStrapiObject)
+      continue
+    }
+
+    if (typeof fieldValue === 'object' && fieldValue) {
+      if ('data' in fieldValue && Array.isArray(fieldValue.data)) {
+        result[field] = fieldValue.data.map(convertStrapiObject)
+        continue
+      }
+      let convertedObj: any = convertStrapiObject(fieldValue)
+      if ('data' in convertedObj && Object.keys(convertedObj).length === 1) {
+        convertedObj = convertedObj.data
+      }
+
+      result[field] = convertedObj
+      continue
+    }
+
+    result[field] = fieldValue
+  }
+  return result
+}
+
 export async function findAll(pathName: string, params: Record<string, any>) {
   const newParamString = stringify(params, {
     encodeValuesOnly: true // prettify URL
@@ -76,10 +107,15 @@ export async function findAll(pathName: string, params: Record<string, any>) {
   )
 
   const { data, meta } = await response.json()
-  const dataList = data.map((content) => ({
-    id: content.id,
-    ...content.attributes
-  }))
+  const dataList = data.map((element: any) => {
+    const { id, attributes, ...otherProps } = element
+    const convertedAttr = convertStrapiObject(attributes)
+    return {
+      id,
+      ...convertedAttr,
+      ...otherProps
+    }
+  })
   return {
     data: dataList,
     pagination: meta.pagination
@@ -95,10 +131,12 @@ export async function findOne(pathName: string, params: Record<string, any>) {
   )
 
   const { data } = await response.json()
-
+  const { id, attributes, ...otherProps } = data
+  const convertedAttr = convertStrapiObject(attributes)
   return {
-    id: data.id,
-    ...data.attributes
+    id,
+    ...convertedAttr,
+    ...otherProps
   }
 }
 

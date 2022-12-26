@@ -20,6 +20,5 @@ export default async function Head({ params }: { params: { slug: string } }) {
     siteName: 'ClickHouse',
     image: data[0].thumbnailPng
   }
-  const se = data[0]
   return <SeoContainer {...blog} />
 }

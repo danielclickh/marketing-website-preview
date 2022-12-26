@@ -42,11 +42,13 @@ export default async function CloudPage() {
                 <SuiTitle type='h1' size='6xl'>
                   <Markdown>{title}</Markdown>
                 </SuiTitle>
-                <div className='mt-6'>
-                  <SuiText size='lg' color='dark' weight='normal'>
-                    <p className='md:max-w-lg md:pr-4'>{description}</p>
-                  </SuiText>
-                </div>
+                <SuiText
+                  type='p2'
+                  color='dark'
+                  weight='medium'
+                  className='mt-6 md:max-w-lg md:pr-4'>
+                  {description}
+                </SuiText>
                 <div className='flex flex-col mt-6'>
                   {ctaButton && (
                     <div className='flex justify-center md:justify-start'>
@@ -67,13 +69,11 @@ export default async function CloudPage() {
                           {cloudProvider.title}
                         </SuiTitle>
                         <div className='flex flex-row items-start gap-6 h-10'>
-                          {cloudProvider.lightProviderPngs.data.map(
+                          {cloudProvider.lightProviderPngs.map(
                             (lightIconPng, index) => (
                               <StrapiPicture
                                 key={`${cloudProvider.title}-${index}`}
-                                dark={
-                                  cloudProvider.darkProviderPngs.data[index]
-                                }
+                                dark={cloudProvider.darkProviderPngs[index]}
                                 light={lightIconPng}
                                 width='100'
                                 height='40'
@@ -91,7 +91,7 @@ export default async function CloudPage() {
                 <div>
                   <div className='mt-20'>
                     <StrapiImage
-                      src={videoGif.data}
+                      {...videoGif}
                       alt='ClickHouse demo'
                       width='748'
                       height='428'
@@ -133,8 +133,12 @@ export default async function CloudPage() {
                 <SuiTitle type='h3' className='mb-4'>
                   {item.title}
                 </SuiTitle>
-                <SuiText size='lg' color='dark' className='mb-4'>
-                  <p>{item.description}</p>
+                <SuiText
+                  type='p2'
+                  weight='medium'
+                  color='dark'
+                  className='mb-4'>
+                  {item.description}
                 </SuiText>
                 {item.bullets.map((bullet) => (
                   <BulletPoint
@@ -145,7 +149,7 @@ export default async function CloudPage() {
               </div>
               <div className='flex md:w-1/2 justify-center items-center'>
                 <StrapiImage
-                  src={item.screenshotPng.data}
+                  {...item.screenshotPng}
                   className='h-fit w-full object-contain'
                 />
               </div>

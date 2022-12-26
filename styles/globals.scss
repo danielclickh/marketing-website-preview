@@ -24,7 +24,7 @@ body {
 }
 
 * {
-  box-sizing: border-box;
+  @apply box-border;
 }
 
 .container-light-color {
@@ -128,9 +128,8 @@ body {
 
   pre {
     code {
-      box-sizing: border-box;
+      @apply box-border mb-9 w-full;
       padding: 20px;
-      @apply mb-9 w-full;
       @apply bg-raisin_black text-white rounded-lg whitespace-pre-wrap block;
       
       @apply border border-solid border-arsenic dark:border-arsenic;
@@ -153,8 +152,7 @@ body {
   }
 
   blockquote {
-    box-sizing: border-box;
-    padding-left: 16px;
+    @apply box-border pl-4;
     border-left: 4px solid #CBEABC;
     @apply text-web-light-c4 dark:text-web-light-c4;
     font-weight: 600;
@@ -199,8 +197,7 @@ body {
 .loading-ring {
   @apply inline-block relative w-20 h-20;
   div {
-    box-sizing: border-box;
-    @apply block absolute w-16 h-16 m-2 border-8 border-transparent border-solid border-t-primary rounded-full;
+    @apply box-border block absolute w-16 h-16 m-2 border-8 border-transparent border-solid border-t-primary rounded-full;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     &:nth-child(1) {
       animation-delay: -0.45s;

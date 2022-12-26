@@ -1,9 +1,9 @@
+import { BaseStrapiImage } from '../../lib/api/strapi/types'
 import { StrapiImage } from '../StrapiElements'
-import { StrapiImageProps } from '../StrapiElements/StrapiImage'
 import { SuiText } from '../sui'
 
 type PersonProps = {
-  avatar: { data: { attributes: StrapiImageProps } }
+  avatar: BaseStrapiImage
   name: string
   job?: string
   small?: boolean
@@ -14,30 +14,25 @@ export function Person(props: PersonProps) {
 
   return (
     <div className='flex w-full flex-col text-center md:max-w-xs px-4'>
-      {avatar.data?.attributes && (
+      {avatar && (
         <div>
           <StrapiImage
             alt={name}
-            {...avatar.data.attributes}
-            width={small ? '124' : '154'}
-            height={small ? '124' : '154'}
+            {...avatar}
+            width={small ? 130 : 160}
+            height={small ? 130 : 160}
+            className='aspect-square'
           />
         </div>
       )}
-      <SuiText>
-        <p>
-          {' '}
-          {name}
-          {job && (
-            <>
-              <br />
-              <span className='text-web-light-c4 dark:text-web-dark-c4'>
-                {job}
-              </span>
-            </>
-          )}
-        </p>
+      <SuiText type='p1' weight='bold' className='mb-3'>
+        {name}
       </SuiText>
+      {job && (
+        <SuiText type='p2' weight='medium' color='dark'>
+          {job}
+        </SuiText>
+      )}
     </div>
   )
 }

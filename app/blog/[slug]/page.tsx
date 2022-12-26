@@ -5,7 +5,6 @@ import { ArrowRightIcon } from '@heroicons/react/solid'
 
 import {
   SuiButton,
-  SuiSpacer,
   SuiText,
   SuiTitle,
   SuiHorizontalDivide,
@@ -68,7 +67,7 @@ export default async function BlogPage({ params }) {
             <div className='flex flex-row space-x-4 pt-2 justify-center'>
               <div className='flex w-11 h-11'>
                 <StrapiImage
-                  src={author.avatarPng.data}
+                  {...author.avatarPng}
                   alt='author avatar'
                   width='44'
                   height='44'
@@ -77,8 +76,10 @@ export default async function BlogPage({ params }) {
               </div>
               <div className='flex'>
                 <div className='flex flex-col'>
-                  <SuiText padding_0>{author.name}</SuiText>
-                  <SuiText padding_0 color='dark'>
+                  <SuiText type='p3' weight='medium'>
+                    {author.name}
+                  </SuiText>
+                  <SuiText type='p4' weight='medium' color='dark'>
                     {date || publishedAt}
                   </SuiText>
                 </div>
@@ -91,14 +92,17 @@ export default async function BlogPage({ params }) {
           <div className='flex flex-col w-full pb-20 rich_content'>
             <Markdown>{content}</Markdown>
             <SuiHorizontalDivide />
-            <SuiSpacer />
-            <div className='flex justify-between items-center'>
+            <div className='flex justify-between items-center mt-4'>
               <div className='flex'>
-                <SuiText color='dark'>Share this post</SuiText>
+                <SuiText type='p3' weight='medium' color='dark'>
+                  Share this post
+                </SuiText>
               </div>
               <div className='flex space-x-4'>
                 <div className='border border-light-grey4 rounded-lg px-2 hover:bg-light-grey3 cursor-pointer'>
-                  <SuiText color='dark'>Copy link</SuiText>
+                  <SuiText type='p3' weight='bold' color='dark'>
+                    Copy link
+                  </SuiText>
                 </div>
                 <div className='border border-light-grey4 rounded-lg p-2 pb-0 hover:bg-light-grey3 cursor-pointer'>
                   <Image
@@ -136,11 +140,9 @@ export default async function BlogPage({ params }) {
               <div className='flex justify-between'>
                 <div className='flex flex-col w-1/2'>
                   <SuiTitle type='h4'>Subscribe to our newsletter</SuiTitle>
-                  <SuiText color='dark'>
-                    <p>
-                      Stay informed on feature releases, product roadmap, future
-                      support, and cloud offerings!
-                    </p>
+                  <SuiText type='p3' weight='medium' color='dark'>
+                    Stay informed on feature releases, product roadmap, future
+                    support, and cloud offerings!
                   </SuiText>
                 </div>
                 <div className='flex align-middle items-center space-x-2'>
@@ -163,7 +165,9 @@ export default async function BlogPage({ params }) {
             <div className='flex'>
               <Link href='/blog/'>
                 <div className='flex items-center cursor-pointer hover:underline'>
-                  <SuiText weight='medium'>All posts</SuiText>
+                  <SuiText type='p1' weight='bold'>
+                    All posts
+                  </SuiText>
                   <ArrowRightIcon className='ml-2 w-4' />
                 </div>
               </Link>

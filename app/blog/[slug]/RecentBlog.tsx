@@ -11,8 +11,8 @@ function RecentBlog({ thumbnailPng, category, slug, title }) {
           {thumbnailPng && (
             <div className='w-full h-28 overflow-hidden'>
               <StrapiImage
-                src={thumbnailPng.data}
-                size='thumbnail'
+                {...thumbnailPng}
+                sizes='thumbnail'
                 alt={title}
                 className='rounded-t-lg'
                 width='558'

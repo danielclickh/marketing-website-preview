@@ -43,7 +43,7 @@ async function FetchGetStarted({ customHeader }: Props) {
               <SuiTitle type='h2' size='4xl' color='white'>
                 {title}
               </SuiTitle>
-              <SuiText size='lg' color='offWhite'>
+              <SuiText type='p2' weight='medium' color='offWhite'>
                 <Markdown>{descriptionRichText}</Markdown>
               </SuiText>
             </>
@@ -89,7 +89,7 @@ async function FetchGetStarted({ customHeader }: Props) {
           />
         </div>
         <div className='px-6 md:px-0'>
-          <SuiText color='white'>
+          <SuiText type='p3' weight='medium' color='white'>
             <Markdown>{bottomText}</Markdown>
           </SuiText>
         </div>

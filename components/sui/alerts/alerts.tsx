@@ -108,10 +108,12 @@ export function SuiAlert(props: AlertProps) {
             {props.title ? (
               <>
                 <SuiTitle type='h5'>{props.title}</SuiTitle>
-                <SuiText color='none'>{props.children}</SuiText>
+                <SuiText type='p3' weight='normal' color='none'>
+                  {props.children}
+                </SuiText>
               </>
             ) : (
-              <SuiText padding_0 color='none' dark_color='none'>
+              <SuiText type='p3' weight='normal' color='none'>
                 {props.children}
               </SuiText>
             )}

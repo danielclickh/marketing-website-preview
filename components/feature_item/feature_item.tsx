@@ -1,10 +1,10 @@
-import { ReactElement } from 'react'
+import { BaseStrapiImage } from '../../lib/api/strapi/types'
 import Markdown from '../Markdown'
 import { StrapiImage } from '../StrapiElements'
-import { SuiSpacer, SuiText, SuiTitle } from '../sui'
+import { SuiText, SuiTitle } from '../sui'
 
 type FeatureItemProps = {
-  icon: ReactElement
+  icon: BaseStrapiImage
   title: string
   description: string
   delay: number
@@ -23,14 +23,14 @@ export function FeatureItem(props: FeatureItemProps) {
       data-aos-delay={delay}>
       <div className='flex w-1/5 items-start'>
         <div className='flex w-16 h-16 bg-onyx rounded-lg shadow-md justify-center items-center'>
-          <StrapiImage {...icon.data.attributes} className='feature-icon' />
+          <StrapiImage {...icon} className='feature-icon' />
         </div>
       </div>
       <div className='flex w-4/5 flex-col pl-2 pr-6'>
-        <SuiTitle type='h4' className='mb-4'>
+        <SuiTitle type='h3' className='mb-4'>
           {title}
         </SuiTitle>
-        <SuiText color={textColour} padding_0>
+        <SuiText type='p3' weight='medium' color='dark'>
           <Markdown>{description}</Markdown>
         </SuiText>
       </div>

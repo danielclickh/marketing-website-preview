@@ -1,3 +1,4 @@
+import environment from '../../../environment'
 import {
   WorkatoNewsletterRequest,
   WorkatoContactRequest,
@@ -64,16 +65,13 @@ export async function submitWorkatoForm(
   }
 
   request.url = window.location.href
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_WORKATO_URL}/${formType}`,
-    {
-      method: 'post',
-      body: JSON.stringify(request),
-      headers: {
-        'API-TOKEN': `${process.env.NEXT_PUBLIC_WORKATO_TOKEN}`
-      }
+  const response = await fetch(`${environment.workatoApiBaseUrl}/${formType}`, {
+    method: 'post',
+    body: JSON.stringify(request),
+    headers: {
+      'API-TOKEN': `${environment.workatoApiBaseUrl}`
     }
-  )
+  })
   const workatoResp: WorkatoResponse = await response.json()
   if (request.email) {
     const email = request.email

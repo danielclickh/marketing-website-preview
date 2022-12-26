@@ -20,11 +20,11 @@ export default function BlogPost(props: BlogPostType) {
     <Link href={`/blog/${slug}`}>
       <div className='flex w-full bg-white dark:bg-gunmetal flex-col group md:max-w-sm hover:cursor-pointer shadow-md hover:shadow-xl ease-in-out duration-300 rounded-lg'>
         <div className='flex flex-col'>
-          {thumbnailPng.data && (
+          {thumbnailPng && (
             <div className='w-full h-28 overflow-hidden'>
               <StrapiImage
-                {...thumbnailPng?.data?.attributes}
-                size='thumbnail'
+                {...thumbnailPng}
+                sizes='thumbnail'
                 alt={title}
                 className='rounded-t-lg object-cover w-full h-full'
                 width='100'
@@ -44,15 +44,19 @@ export default function BlogPost(props: BlogPostType) {
               {title}
             </SuiTitle>
             {shortDescription && (
-              <SuiText color='dark' className='line-clamp'>
+              <SuiText
+                type='p4'
+                weight='medium'
+                color='dark'
+                className='line-clamp'>
                 <Markdown>{shortDescription}</Markdown>
               </SuiText>
             )}
             <div className='flex flex-row space-x-4 pt-2'>
-              {author.avatarPng?.data?.attributes && (
+              {author.avatarPng && (
                 <div className='flex w-11 h-11'>
                   <StrapiImage
-                    {...author.avatarPng?.data?.attributes}
+                    {...author.avatarPng}
                     alt={author.name}
                     width='44'
                     height='44'
@@ -62,8 +66,10 @@ export default function BlogPost(props: BlogPostType) {
               )}
               <div className='flex'>
                 <div className='flex flex-col'>
-                  <SuiText padding_0>{author.name}</SuiText>
-                  <SuiText padding_0 color='dark'>
+                  <SuiText type='p3' weight='medium'>
+                    {author.name}
+                  </SuiText>
+                  <SuiText type='p4' weight='medium' color='dark'>
                     {date || publishedAt}
                   </SuiText>
                 </div>
