@@ -7,15 +7,15 @@
 
 @tailwind components;
 @tailwind utilities;
-@import 'node_modules/aos/src/sass/aos.scss';
+@import "node_modules/aos/src/sass/aos.scss";
 $aos-distance: 12px; // It has to be above import
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+    Droid Sans, Helvetica Neue, sans-serif;
   @apply mx-auto text-gunmetal dark:text-white;
 }
 
@@ -29,7 +29,6 @@ body {
 
 .container-light-color {
   @apply bg-cultured dark:bg-onyx text-gunmetal dark:text-white;
-
 }
 
 .section-dark {
@@ -62,9 +61,13 @@ body {
   -webkit-box-orient: vertical;
 }
 
-
 .rich_content {
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply mb-9;
     &:not(:first-child) {
       @apply mt-9;
@@ -91,10 +94,10 @@ body {
       font-size: 24px;
       top: 20px;
       right: 24px;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.8);
 
       &:hover {
-        background: rgba(80,80,80,0.4);
+        background: rgba(80, 80, 80, 0.4);
         transition: background 0.3s ease-in-out;
         text-decoration: none;
       }
@@ -106,7 +109,7 @@ body {
     @apply border border-solid border-arsenic dark:border-arsenic;
 
     th {
-    @apply border border-solid border-cultured dark:border-onyx;
+      @apply border border-solid border-cultured dark:border-onyx;
       @apply font-bold p-4;
       font-weight: bold;
     }
@@ -119,7 +122,7 @@ body {
   code {
     @apply bg-cultured text-web-light-c4 dark:bg-onyx dark:text-primary;
     @apply border border-solid;
-    border: 1px solid #E8EAEE;
+    border: 1px solid #e8eaee;
     display: inline-block;
     padding: 0 5px;
     margin-bottom: 2px;
@@ -131,7 +134,7 @@ body {
       @apply box-border mb-9 w-full;
       padding: 20px;
       @apply bg-raisin_black text-white rounded-lg whitespace-pre-wrap block;
-      
+
       @apply border border-solid border-arsenic dark:border-arsenic;
       font-family: monospace, sans-serif;
       word-break: break-all;
@@ -139,10 +142,10 @@ body {
     }
   }
 
-
-  ul, ol {
+  ul,
+  ol {
     margin-left: 26px;
-      @apply mb-9;
+    @apply mb-9;
 
     li {
       &:not(:last-child) {
@@ -153,12 +156,12 @@ body {
 
   blockquote {
     @apply box-border pl-4;
-    border-left: 4px solid #CBEABC;
+    border-left: 4px solid #cbeabc;
     @apply text-web-light-c4 dark:text-web-light-c4;
     font-weight: 600;
     font-size: 20px;
     line-height: 36px;
-      @apply mb-9;
+    @apply mb-9;
   }
 
   img {
@@ -182,16 +185,16 @@ body {
   .tooltip {
     @apply invisible absolute left-full bottom-0 w-full;
   }
-  
+
   &:hover .tooltip {
     @apply visible z-50;
   }
 }
 
 .hexagon {
-    @apply w-72 absolute -top-16 z-50 mx-auto grid place-items-center bg-white dark:bg-onyx;
-    aspect-ratio: 1/1.1547;
-    clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+  @apply w-72 absolute -top-16 z-50 mx-auto grid place-items-center bg-white dark:bg-onyx;
+  aspect-ratio: 1/1.1547;
+  clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
 }
 
 .loading-ring {
@@ -216,5 +219,30 @@ body {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.heroScreenshotBg {
+  @apply pt-4 pl-4 h-auto relative w-full lg:w-2/5 object-cover md:object-contain;
+
+  &::before {
+    @apply w-auto max-w-full absolute top-0 inset-x-0 m-auto ml-0 rounded-lg;
+    height: 90%;
+    @apply content-[''];
+    background: linear-gradient(90deg, #ff9900 0.7%, #ffbe5b 99.07%);
+    transform: rotate(-1.92deg);
+    aspect-ratio: 2/1;
+  }
+}
+
+.heroScreenshot {
+  @apply top-2 relative m-0 h-full rounded-lg;
+  box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.05);
+  aspect-ratio: 2/1;
+
+  @screen lg {
+    @apply w-auto left-1 top-1 overflow-x-hidden;
+    min-height: 24rem;
+    min-width: 48rem;
   }
 }

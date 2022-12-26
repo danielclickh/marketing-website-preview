@@ -15,9 +15,13 @@ export const SuiTitle = ({ ...TitleProps }: TitleProps) => {
   let textClass = ''
 
   if (type === 'h1') {
-    textClass = `text-${size ?? '[38px] leading-none'} font-${weight ?? 'bold'}`
+    textClass = `${size ? `text-${size}` : 'text-[38px] leading-none'} font-${
+      weight ?? 'bold'
+    }`
   } else if (type === 'h2') {
-    textClass = `text-${size ?? '[28px] leading-9'} font-${weight ?? 'bold'}`
+    textClass = `${size ? `text-${size}` : 'text-[28px] leading-9'} font-${
+      weight ?? 'bold'
+    }`
   } else if (type === 'h3') {
     textClass = `text-${size ?? 'xl'} font-${weight ?? 'bold'}`
   } else if (type === 'h4') {

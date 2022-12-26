@@ -10,7 +10,15 @@ export type LinkProps = {
 
 // @ts-ignore
 export const SuiLink = ({ ...LinkProps }) => {
-  const { children, href, onClick, color, size, weight, className } = LinkProps
+  const {
+    children,
+    href,
+    onClick,
+    color,
+    size = 'sm',
+    weight,
+    className
+  } = LinkProps
 
   return (
     <Link

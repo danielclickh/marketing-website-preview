@@ -48,6 +48,7 @@ export async function Footer() {
                       href={footerLink.href}
                       target={footerLink.target}
                       color='white'
+                      className='w-fit'
                       weight='normal'>
                       {footerLink.name}
                     </SuiLink>

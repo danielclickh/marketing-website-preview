@@ -68,8 +68,12 @@ export async function fetchAll(
 }
 
 function convertStrapiObject(element: any) {
+  const newElement =
+    'attributes' in element && 'id' in element
+      ? { id: element.id, ...element.attributes }
+      : element
   const result: any = {}
-  for (const entry of Object.entries(element || {})) {
+  for (const entry of Object.entries(newElement)) {
     const field: string = entry[0]
     const fieldValue: any = entry[1]
 
@@ -107,15 +111,7 @@ export async function findAll(pathName: string, params: Record<string, any>) {
   )
 
   const { data, meta } = await response.json()
-  const dataList = data.map((element: any) => {
-    const { id, attributes, ...otherProps } = element
-    const convertedAttr = convertStrapiObject(attributes)
-    return {
-      id,
-      ...convertedAttr,
-      ...otherProps
-    }
-  })
+  const dataList = data.map(convertStrapiObject)
   return {
     data: dataList,
     pagination: meta.pagination
@@ -131,13 +127,7 @@ export async function findOne(pathName: string, params: Record<string, any>) {
   )
 
   const { data } = await response.json()
-  const { id, attributes, ...otherProps } = data
-  const convertedAttr = convertStrapiObject(attributes)
-  return {
-    id,
-    ...convertedAttr,
-    ...otherProps
-  }
+  return convertStrapiObject(data)
 }
 
 function isJSON(item: any) {

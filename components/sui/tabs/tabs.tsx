@@ -35,7 +35,7 @@ export const SuiTabs = ({ ...TabProps }) => {
         <nav className='-mb-px flex space-x-8' aria-label='Tabs'>
           {tabs.map((tab: any) => (
             <Tab
-              key={tab.id}
+              key={`tab-button-${tab.id}`}
               className={({ selected }) =>
                 selected
                   ? `border-primary ${colourCalculator(
@@ -59,11 +59,8 @@ export const SuiTabs = ({ ...TabProps }) => {
       </Tab.List>
       <Tab.Panels className='flex overflow-auto'>
         {tabs.map((tab: any) => (
-          <Tab.Panel key={tab.id}>
-            <SuiText
-              type='p2'
-              weight='normal'
-              className='whitespace-pre-wrap px-9 py-6'>
+          <Tab.Panel key={`tab-panel-${tab.id}`}>
+            <SuiText type='p2' weight='normal' className='whitespace-pre-wrap'>
               {tab.content}
             </SuiText>
           </Tab.Panel>

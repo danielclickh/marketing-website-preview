@@ -41,7 +41,7 @@ async function fetchImages() {
   const results = await response.json()
 
   const urls: string[] = results.flatMap((result: any) => {
-    const items = Object.values(result.format || {}).map(
+    const items = Object.values(result.formats || {}).map(
       (item: any) => item.url
     )
     items.push(result.url)

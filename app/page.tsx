@@ -10,7 +10,6 @@ import {
 import { FeatureItem } from '../components/feature_item'
 import { findOne } from '../lib/api/strapi'
 import { StrapiImage, StrapiPicture } from '../components/StrapiElements'
-import styles from './HomePage.module.scss'
 import Link from 'next/link'
 import BulletPoint from '../components/BulletPoint'
 import mainImage from '../public/images/sql_console_hero.png'
@@ -89,7 +88,7 @@ export default async function HomePage() {
                   )}
 
                   {!hero.ctaButton && hero.advancedCallout && (
-                    <div className={styles.advanced_cta}>
+                    <div className='flex rounded-lg p-8 bg-onyx mt-11 max-w-screen-sm flex-col gap-4 text-center shadow-md md:w-full md:px-8 md:box-border md:max-w-none'>
                       <div className='md:pr-8 border-0 md:border-r-1 border-solid border-web-light-c4 dark:border-web-dark-c4'>
                         <SuiText type='p2' weight='bold' className='mb-1'>
                           {hero.advancedCallout.title}
@@ -120,12 +119,11 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
-          <div
-            className={`w-full lg:w-2/5 object-fit md:object-contain ${styles.heroScreenshotBg}`}>
+          <div className='heroScreenshotBg'>
             <Image
               src={mainImage}
               alt='HomePage Image'
-              className={styles.heroScreenshot}
+              className='heroScreenshot'
             />
           </div>
         </div>
@@ -241,7 +239,7 @@ export default async function HomePage() {
             {clickhouseCloud.description}
           </SuiText>
 
-          {clickhouseCloudItems.map((clickhouseCloudItem, index) => (
+          {clickhouseCloudItems.map((clickhouseCloudItem, index: number) => (
             <div
               className={`flex flex-col pt-16 justify-between self-center max-w-screen-xl ${
                 index % 2 !== 0 ? ' md:flex-row-reverse' : ' md:flex-row'
@@ -340,6 +338,8 @@ export default async function HomePage() {
           <StrapiImage
             {...testimonials.bottomIconSvg}
             className='text-primary'
+            width='24'
+            height='24'
           />
         </div>
       </div>

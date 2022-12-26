@@ -19,7 +19,7 @@ export const SuiText = ({ ...TextProps }: TextProps) => {
   } else if (type === 'p3') {
     textClass = `text-sm font-${weight === 'bold' ? 'semibold' : weight}`
   } else {
-    textClass = `text-base font-${weight === 'bold' ? 'semibold' : weight}`
+    textClass = `text-xs font-${weight === 'bold' ? 'semibold' : weight}`
   }
   return (
     <div
