@@ -20,16 +20,16 @@ export const SuiTitle = ({ ...TitleProps }: TitleProps) => {
     }`
   } else if (type === 'h2') {
     textClass = `${size ? `text-${size}` : 'text-[28px] leading-9'} font-${
-      weight ?? 'bold'
+      weight ?? 'semibold'
     }`
   } else if (type === 'h3') {
-    textClass = `text-${size ?? 'xl'} font-${weight ?? 'bold'}`
+    textClass = `text-${size ?? 'xl'} font-${weight ?? 'semibold'}`
   } else if (type === 'h4') {
-    textClass = `text-${size ?? 'base'} font-${weight ?? 'bold'}`
+    textClass = `text-${size ?? 'base'} font-${weight ?? 'semibold'}`
   } else if (type === 'h5') {
     textClass = `text-${size ?? 'sm'} font-${weight ?? 'semibold'}`
   } else if (type === 'h6') {
-    textClass = `text-${size ?? 'xs'} font-${weight ?? 'bold'} uppercase`
+    textClass = `text-${size ?? 'xs'} font-${weight ?? 'semibold'} uppercase`
   }
   return createElement(
     type,

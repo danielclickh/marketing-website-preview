@@ -1,6 +1,8 @@
+'use client'
 import Link from 'next/link'
 import { RefreshIcon } from '@heroicons/react/outline'
 import { ArrowRightIcon } from '@heroicons/react/solid'
+import { useAnalytics } from '../../../Providers/Analytics'
 
 type ButtonProps = {
   title: string
@@ -66,6 +68,7 @@ export function SuiButton(props: ButtonProps) {
   }
 
   const ButtonContent = () => {
+    const analytics = useAnalytics()
     const opacityLevel = props.disabled ? 'opacity-60' : 'opacity-100'
     const hoverEffects = props.disabled
       ? 'cursor-default'
@@ -74,7 +77,6 @@ export function SuiButton(props: ButtonProps) {
     return (
       <>
         <button
-          onClick={props.onClick}
           disabled={props.disabled ? true : false}
           className={`${opacityLevel} ${hoverEffects}
           ${sizeCalculator(props.size)}
@@ -86,7 +88,8 @@ export function SuiButton(props: ButtonProps) {
           } rounded-lg duration-300 whitespace-nowrap
            ${colorCalculator(props.color)} ${props.className ?? ''}`}
           onClick={() => {
-            // analytics.track('click', )
+            analytics.track('click')
+            props.onClick && props.onClick()
           }}>
           <span className='flex justify-center'>
             {props.icon && <RefreshIcon className='w-4 mr-2' />}

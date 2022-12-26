@@ -27,11 +27,11 @@ export function FeatureItem(props: FeatureItemProps) {
         </div>
       </div>
       <div className='flex w-4/5 flex-col pl-2 pr-6'>
-        <SuiTitle type='h3' className='mb-4'>
+        <SuiTitle type='h3' className='mb-1'>
           {title}
         </SuiTitle>
-        <SuiText type='p3' weight='medium' color='dark'>
-          <Markdown>{description}</Markdown>
+        <SuiText type='p3' weight='medium' color='light_purple'>
+          <Markdown className='ignore-anchor'>{description}</Markdown>
         </SuiText>
       </div>
     </div>

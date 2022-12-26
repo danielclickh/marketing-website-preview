@@ -174,8 +174,12 @@ body {
     }
   }
 
-  a {
+  &:not(.ignore-anchor) a {
     @apply text-primary;
+  }
+
+  &.ignore-anchor a {
+    @apply text-inherit underline hover:text-primary;
   }
 }
 

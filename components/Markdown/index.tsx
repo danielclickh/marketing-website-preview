@@ -37,9 +37,9 @@ function Markdown({
   return (
     <ReactMarkdown
       className={
-        encloseByDiv && className.length === 0
-          ? `rich_content ${className}`
-          : undefined
+        !encloseByDiv && className.length === 0
+          ? undefined
+          : `rich_content ${className}`
       }
       components={newComponents}
       rehypePlugins={[rehypeRaw]}

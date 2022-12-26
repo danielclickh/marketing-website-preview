@@ -159,7 +159,7 @@ export default async function HomePage() {
       </div>
       <div className='w-full flex flex-col section-dark'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat pb-8 px-8 2xl:px-0 pt-16'>
-          <SuiTitle type='h4' className='mb-6' color='primary'>
+          <SuiTitle type='h3' className='mb-7' color='primary'>
             {aboutClickhouse.title}
           </SuiTitle>
           <div className='feature-container'>
@@ -190,7 +190,9 @@ export default async function HomePage() {
 
       <div className='flex w-full container-light-color'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 xl:px-0'>
-          <SuiTitle type='h2'>{customerStories.title}</SuiTitle>
+          <SuiTitle type='h2' className='mb-4'>
+            {customerStories.title}
+          </SuiTitle>
           <SuiText type='p2' weight='medium' color='dark'>
             {customerStories.description}
           </SuiText>
