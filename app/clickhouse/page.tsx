@@ -62,7 +62,7 @@ export default async function ClickHouseServerPage() {
               <div className='flex mt-6 justify-center md:justify-start space-x-4'>
                 {mainButton && (
                   <SuiButton
-                    size='md'
+                    type='primary'
                     path={mainButton.href}
                     target={mainButton.target}
                     title={mainButton.text}
@@ -70,8 +70,7 @@ export default async function ClickHouseServerPage() {
                 )}
                 {secondaryButton && (
                   <SuiButton
-                    color='warning'
-                    size='md'
+                    type='secondary'
                     path={secondaryButton.href}
                     target={secondaryButton.target}
                     title={secondaryButton.text}

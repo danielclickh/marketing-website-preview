@@ -52,7 +52,7 @@ function ContactForm({
       </div>
 
       <div className='flex w-64 mx-auto'>
-        <SuiButton title={submitButtonLabel} />
+        <SuiButton type='primary' title={submitButtonLabel} />
       </div>
     </>
   )

@@ -75,7 +75,8 @@ export function SuiSimpleModal(props: Props) {
                     {props.actionButtonChildren}
                     <div>
                       <SuiButton
-                        color='empty'
+                        type='empty'
+                        color='primary'
                         onClick={props.close}
                         title={closeButtonText}
                       />

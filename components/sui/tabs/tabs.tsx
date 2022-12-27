@@ -38,7 +38,7 @@ export const SuiTabs = ({ ...TabProps }) => {
               key={`tab-button-${tab.id}`}
               className={({ selected }) =>
                 selected
-                  ? `border-primary ${colorCalculator(
+                  ? `border-c_yellow ${colorCalculator(
                       color,
                       'text-text-darkest'
                     )} focus:outline-none dark:text-white whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`

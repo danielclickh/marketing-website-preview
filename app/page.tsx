@@ -80,8 +80,8 @@ export default async function HomePage() {
                   </SuiText>
                   {hero.ctaButton && (
                     <SuiButton
+                      type='primary'
                       path={hero.ctaButton.href}
-                      size='md'
                       title={hero.ctaButton.text}
                       className='mr-auto'
                     />
@@ -99,6 +99,7 @@ export default async function HomePage() {
                       </div>
                       <div className='flex grow items-center justify-center md:pl-8'>
                         <SuiButton
+                          type='primary'
                           path={hero.advancedCallout.href}
                           size='sm'
                           title={hero.advancedCallout.title}
@@ -138,7 +139,7 @@ export default async function HomePage() {
                 <h3 className='text-xl font-bold text-center px-6'>
                   {highlight.title}
                 </h3>
-                <div className='bg-primary h-1 w-16 rounded-md flex mx-auto my-4' />
+                <div className='bg-c6 h-1 w-16 rounded-md flex mx-auto my-4' />
                 <SuiText size='sm' weight='normal' className='mb-4'>
                   {highlight.description}
                 </SuiText>
@@ -146,10 +147,10 @@ export default async function HomePage() {
                   <SuiButton
                     iconRight
                     path={highlight.href}
-                    color='empty'
+                    type='empty'
+                    color='primary'
                     title={highlight.buttonText}
                     target={highlight.target}
-                    size='md'
                   />
                 </div>
               </div>
@@ -176,6 +177,7 @@ export default async function HomePage() {
           {aboutClickhouse.allFeaturesButton.text && (
             <div className='flex text-center justify-center pt-16'>
               <SuiButton
+                type='primary'
                 iconRight
                 path={aboutClickhouse.allFeaturesButton.href}
                 target={aboutClickhouse.allFeaturesButton.target}
@@ -216,8 +218,8 @@ export default async function HomePage() {
                 iconRight
                 path={customerStories.ctaButton.href}
                 target={customerStories.ctaButton.target}
-                color='empty'
-                textColor='darkest'
+                type='empty'
+                color='primary'
                 title={customerStories.ctaButton.text}
                 size='lg'
               />
@@ -281,8 +283,7 @@ export default async function HomePage() {
             {clickhouseCloud.primaryButton && (
               <div className='w-full md:w-48'>
                 <SuiButton
-                  color='primary'
-                  borderColor='border-primary'
+                  type='primary'
                   title={clickhouseCloud.primaryButton.text}
                   path={clickhouseCloud.primaryButton.href}
                   target={clickhouseCloud.primaryButton.target}
@@ -293,8 +294,7 @@ export default async function HomePage() {
             {clickhouseCloud.secondaryButton && (
               <div className='w-full md:w-48'>
                 <SuiButton
-                  color='warning'
-                  textColor='text-text-darkest'
+                  type='secondary'
                   title={clickhouseCloud.secondaryButton.text}
                   path={clickhouseCloud.secondaryButton.href}
                   target={clickhouseCloud.secondaryButton.target}
@@ -343,7 +343,7 @@ export default async function HomePage() {
           ))}
           <StrapiImage
             {...testimonials.bottomIconSvg}
-            className='text-primary'
+            className='text-c6'
             width='24'
             height='24'
           />

@@ -42,7 +42,7 @@ export async function Header() {
       className={`bg-white dark:bg-gunmetal shadow-sm  dark:border-b dark:border-onyx bg-opacity-100 dark:opacity-100 h-full backdrop-blur-lg dark:backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300 ${
         true ? 'shadow-sm bg-opacity-80 dark:bg-opacity-80' : ''
       }`}>
-      <div className='text-center bg-primary text-raisin_black text-sm font-medium w-full'>
+      <div className='text-center bg-c6 text-raisin_black text-sm font-medium w-full'>
         <Link href='/company/events/clickhouse-workshop'>
           Free ClickHouse Workshop - Sign up now
         </Link>
@@ -143,6 +143,7 @@ export async function Header() {
                       )}
                       {ctaButton && (
                         <SuiButton
+                          type='primary'
                           path={ctaButton.href}
                           target={ctaButton.target}
                           title={ctaButton.text}
@@ -246,16 +247,16 @@ export async function Header() {
                     <div className='py-6 px-5 grid gap-4 w-full grid-cols-2'>
                       {ctaSecondaryButton && (
                         <SuiButton
-                          color='secondary'
+                          type='secondary'
                           path={ctaSecondaryButton.href}
                           target={ctaSecondaryButton.target}
                           title={ctaSecondaryButton.text}
                           widthFull
-                          className='text-primary-text'
                         />
                       )}
                       {ctaButton && (
                         <SuiButton
+                          type='primary'
                           path={ctaButton.href}
                           target={ctaButton.target}
                           title={ctaButton.text}

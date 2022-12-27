@@ -20,7 +20,7 @@ export function SuiTabsPages(props: TabProps) {
         <select
           id='tabs'
           name='tabs'
-          className='block w-full pl-3 py-2 text-base border-light-grey3 dark:border-dark-grey4 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md'
+          className='block w-full pl-3 py-2 text-base border-light-grey3 dark:border-dark-grey4 focus:outline-none focus:ring-c_yellow focus:border-c_yellow sm:text-sm rounded-md'
           defaultValue={
             // @ts-ignore
             props.tabs.find((tab) => tab.id == props.activeTab).name
@@ -39,7 +39,7 @@ export function SuiTabsPages(props: TabProps) {
                 href={tab.href}
                 className={classNames(
                   tab.id == props.activeTab
-                    ? 'border-primary text-text-darkest dark:text-white'
+                    ? 'border-c_yellow text-text-darkest dark:text-white'
                     : 'border-transparent text-text-dark dark:text-text-light hover:text-text-darkest hover:border-light-grey5',
                   'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm'
                 )}

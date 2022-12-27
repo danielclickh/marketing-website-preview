@@ -16,6 +16,8 @@ module.exports = {
           DEFAULT: '#FFB200',
           text: '#4B2A04'
         },
+        c_yellow: '#FFB200',
+        seal_brown: '#4B2A04',
         cultured: '#F6F7FA',
         arsenic: '#443F51',
         gunmetal: '#2F2C3A',

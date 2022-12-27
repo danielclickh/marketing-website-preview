@@ -53,7 +53,7 @@ export default async function CloudPage() {
                   {ctaButton && (
                     <div className='flex justify-center md:justify-start'>
                       <SuiButton
-                        size='md'
+                        type='primary'
                         path={ctaButton.href}
                         target={ctaButton.target}
                         title={ctaButton.text}

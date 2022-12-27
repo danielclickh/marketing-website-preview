@@ -20,4 +20,6 @@ export type Props = StrapiImageProps | NormalImageProps
 export interface StrapiPicProps extends HTMLAttributes<HTMLElement> {
   dark: StrapiImageProps
   light: StrapiImageProps
+  sizes?: SizeType
+  alt?: string
 }

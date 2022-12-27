@@ -18,7 +18,7 @@ function CategorySelector({ options, ...props }: Props) {
           onClick={option.onClick}
           className={` text-sm px-4 py-2 font-medium rounded-md cursor-pointer transition-all duration-500 ease-in-out transform ${
             option.selected
-              ? 'bg-primary text-gunmetal dark:text-white'
+              ? 'bg-c6 text-gunmetal dark:text-white'
               : 'hover:bg-cultured dark:hover:bg-onyx text-web-light-c4 dark: text-web-dark-c4 hover:text-gunmetal dark:hover:text-white'
           }`}>
           {option.text}

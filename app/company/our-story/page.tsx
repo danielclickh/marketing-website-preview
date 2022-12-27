@@ -153,6 +153,7 @@ export default async function OurStoryPage() {
               {hiring.ctaButton && (
                 <div className='flex justify-center pt-6 pb-14'>
                   <SuiButton
+                    type='primary'
                     path={hiring.ctaButton.href}
                     target={hiring.ctaButton.target}
                     title={hiring.ctaButton.text}

@@ -30,7 +30,7 @@ export function SuiCard(props: CardProps) {
       className='flex hover:shadow-md duration-300'>
       <div className='flex flex-col'>
         {icon && (
-          <div className='bg-primary w-12 h-12 p-2 rounded-lg mb-4'>{icon}</div>
+          <div className='bg-c6 w-12 h-12 p-2 rounded-lg mb-4'>{icon}</div>
         )}
         <SuiTitle type='h4'>{title}</SuiTitle>
         <SuiText size='sm' weight='normal' color='secondary'>
@@ -39,7 +39,12 @@ export function SuiCard(props: CardProps) {
         {buttonTitle && (
           <div className='flex space-x-4 items-end flex-wrap'>
             <div className='flex flex-grow-0'>
-              <SuiButton color='dark' title={buttonTitle} path={buttonPath} />
+              <SuiButton
+                type='empty'
+                color='primary'
+                title={buttonTitle}
+                path={buttonPath}
+              />
             </div>
           </div>
         )}

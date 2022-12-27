@@ -52,9 +52,7 @@ async function FetchGetStarted({ customHeader }: Props) {
             <div className='w-full md:w-60'>
               {quickStartButton && (
                 <SuiButton
-                  color='dark_alt'
-                  textColor='text-white'
-                  borderColor='border-primary'
+                  type='secondary'
                   title={quickStartButton.text}
                   path={quickStartButton.href}
                   target={quickStartButton.target}
@@ -67,8 +65,7 @@ async function FetchGetStarted({ customHeader }: Props) {
             {cloudButton && (
               <div className='w-full md:w-60'>
                 <SuiButton
-                  color='primary'
-                  textColor='text-text-darkest'
+                  type='primary'
                   title={cloudButton.text}
                   path={cloudButton.href}
                   target={cloudButton.target}

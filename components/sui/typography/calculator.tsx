@@ -32,7 +32,7 @@ export const colorCalculator = (color: string, defaultColor?: string) => {
     case 'primary':
       return 'text-gunmetal dark:text-white'
     case 'c6':
-      return 'text-primary'
+      return 'text-c6'
     case 'c7':
       return 'text-gold dark:text-sunglow'
     case 'white':

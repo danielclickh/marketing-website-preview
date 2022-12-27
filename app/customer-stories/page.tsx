@@ -5,6 +5,8 @@ import GetStarted from '../../components/GetStarted'
 import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
 import { StarIcon } from '@heroicons/react/solid'
 import Carousel from './Carousel'
+import { CustomerStoriesData } from './types'
+import styles from './CustomerStories.module.scss'
 
 async function getData() {
   const result = await findOne('use-case', {
@@ -31,7 +33,7 @@ async function CustomerStoriesPage() {
     spotlight,
     useCases,
     useCaseItems
-  } = await getData()
+  }: CustomerStoriesData = await getData()
 
   return (
     <>
@@ -50,21 +52,21 @@ async function CustomerStoriesPage() {
             </div>
           </div>
 
-          <div className='flex flex-col md:flex-row mt-20 md:justify-evenly pb-16 2xl:container 2xl:mx-auto 2xl:px-0 py-3 px-10'>
+          <div
+            className='flex flex-col md:flex-row mt-20 md:justify-evenly pb-16 2xl:container 2xl:mx-auto 2xl:px-0 py-3 px-10'
+            data-aos='fade-up'>
             <Carousel>
               {testimonials.map((testimonial) => (
                 <div
-                  className='flex w-full max-w-xs flex-col text-center px-4'
-                  key={testimonial.author}
-                  data-aos='fade-up'
-                  data-aos-delay={200}>
-                  <div className='w-60 md:w-80 h-full flex flex-col justify-between'>
+                  className='flex w-full flex-col text-center px-4'
+                  key={testimonial.author}>
+                  <div className='w-full h-full flex flex-col justify-between'>
                     <div>
                       <StrapiImage
                         {...testimonial.avatar}
                         alt={testimonial.author}
-                        width='64'
-                        height='64'
+                        width={64}
+                        height={64}
                         className='h-16 w-16 mx-auto'
                       />
                     </div>
@@ -80,7 +82,7 @@ async function CustomerStoriesPage() {
                       </SuiText>
                     )}
                     <div
-                      className='flex justify-center mx-4 mt-2 relative whitespace-nowrap text-primary'
+                      className='flex justify-center mx-4 mt-2 relative whitespace-nowrap text-c6'
                       data-rating={testimonial.rating}>
                       <StarIcon className='w-4' />
                       <StarIcon className='w-4' />
@@ -111,10 +113,10 @@ async function CustomerStoriesPage() {
           </SuiText>
         </div>
         {spotlight && (
-          <div className='flex max-w-7xl mx-auto mt-6 space-x-12 px-6 2xl:px-0 relative'>
+          <div className='flex max-w-7xl mx-auto mt-6 space-x-12 px-6 2xl:px-0 relative md:min-h-fit'>
             <SuiPanel color='bg-white dark:bg-gunmetal' shadow padding='xl'>
               <div className='flex flex-row drop-shadow-2xl'>
-                <div className='flex flex-col  w-1/2'>
+                <div className='flex flex-col w-full md:w-1/2'>
                   <SuiTitle type='h5' color='c6' className='mb-1 uppercase'>
                     {useCases.spotlightTitle}
                   </SuiTitle>
@@ -125,17 +127,17 @@ async function CustomerStoriesPage() {
                   {spotlight.ctaButton && (
                     <div className='flex mt-8'>
                       <SuiButton
+                        type='primary'
                         title={spotlight.ctaButton.text}
                         path={spotlight.ctaButton.href}
                         target={spotlight.ctaButton.target}
-                        color='dark'
                       />
                     </div>
                   )}
                 </div>
 
-                <div className='-mt-8 -mb-14 overflow-hidden mx-auto w-full max-w-xs'>
-                  <div className='hexagon'>
+                <div className='hidden md:block -mt-8 -mb-14 overflow-hidden ml-auto w-full max-w-xs'>
+                  <div className={`bg-white dark:bg-onyx ${styles.hexagon}`}>
                     <StrapiPicture
                       light={spotlight.lightLogoPng}
                       dark={spotlight.darkLogoPng}

@@ -69,7 +69,7 @@ function PricingOptions({ regionList, pricingPlans, children }) {
         <div className='plans_container grid grid-cols-1 lg:grid-cols-3 gap-8'>
           {pricingPlans.map((plan, index) => (
             <div
-              className='plan_card border-t-[5px] rounded-[5px] border-primary w-full max-w-sm bg-white dark:bg-onyx p-10 mx-auto'
+              className='plan_card border-t-[5px] rounded-[5px] border-c_yellow w-full max-w-sm bg-white dark:bg-onyx p-10 mx-auto'
               key={`${selectedRegion.region}-${plan.name}`}>
               <div className='card_content flex flex-col h-full justify-between'>
                 <div className='border-b mb-6'>
@@ -135,13 +135,13 @@ function PricingOptions({ regionList, pricingPlans, children }) {
                           <SuiButton
                             path={plan.actionButton.link}
                             className='stroked_button_wrapper button_wrapper'
-                            color='primary'
+                            type='primary'
                             title={plan.actionButton.text}
                             widthFull
                           />
                         ) : (
                           <SuiButton
-                            color='secondary'
+                            type='secondary'
                             className='w-full stroked_button_wrapper button_wrapper disabled_button'
                             path={plan.actionButton.link}
                             disabled
@@ -153,7 +153,7 @@ function PricingOptions({ regionList, pricingPlans, children }) {
                         <SuiButton
                           path={plan.actionButton.link}
                           className='w-full stroked_button_wrapper button_wrapper'
-                          color={
+                          type={
                             index !== totalLength - 1 ? 'primary' : 'secondary'
                           }
                           title={plan.actionButton.text}

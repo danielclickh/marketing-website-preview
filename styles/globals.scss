@@ -7,9 +7,6 @@
 
 @tailwind components;
 @layer components {
-  .text-c4 {
-    @apply text-auro_metal_saurus dark:text-philippine_silver;
-  }
   .text-c1 {
     @apply text-white dark:text-gunmetal;
   }
@@ -38,11 +35,48 @@
   }
 
   .text-c6 {
-    @apply text-primary;
+    @apply text-c_yellow;
   }
 
   .text-c7 {
-    @apply text-gold dark:text-sunglow;
+    @apply bg-gold dark:bg-sunglow;
+  }
+
+  .bg-primary,
+  .bg-c1 {
+    @apply bg-white dark:bg-gunmetal;
+  }
+
+  .bg-secondary,
+  .bg-c2 {
+    @apply bg-cultured dark:bg-onyx;
+  }
+
+  .bg-c3 {
+    @apply bg-arsenic;
+  }
+
+  .bg-c4 {
+    @apply bg-auro_metal_saurus dark:bg-philippine_silver;
+  }
+  .bg-c4-10 {
+    @apply bg-auro_metal_saurus/10 dark:bg-philippine_silver/10;
+  }
+
+  .bg-c4-20 {
+    @apply bg-auro_metal_saurus/20 dark:bg-philippine_silver/20;
+  }
+
+  .bg-c5 {
+    @apply bg-gunmetal dark:bg-white;
+  }
+
+  .bg-c6 {
+    @apply bg-c_yellow;
+  }
+
+  .bg-c7 {
+    @apply bg-gold dark:text-sunglow;
   }
 }
 @tailwind utilities;
@@ -159,7 +193,7 @@ body {
   }
 
   code {
-    @apply bg-cultured text-web-light-c4 dark:bg-onyx dark:text-primary;
+    @apply bg-cultured text-web-light-c4 dark:bg-onyx dark:text-c_yellow;
     @apply border border-solid;
     border: 1px solid #e8eaee;
     display: inline-block;
@@ -214,11 +248,11 @@ body {
   }
 
   &:not(.ignore-anchor) a {
-    @apply text-primary;
+    @apply text-c_yellow;
   }
 
   &.ignore-anchor a {
-    @apply text-inherit underline hover:text-primary;
+    @apply text-inherit underline hover:text-c_yellow;
   }
 }
 
@@ -234,16 +268,10 @@ body {
   }
 }
 
-.hexagon {
-  @apply w-72 absolute -top-16 z-50 mx-auto grid place-items-center bg-white dark:bg-onyx;
-  aspect-ratio: 1/1.1547;
-  clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
-}
-
 .loading-ring {
   @apply inline-block relative w-20 h-20;
   div {
-    @apply box-border block absolute w-16 h-16 m-2 border-8 border-transparent border-solid border-t-primary rounded-full;
+    @apply box-border block absolute w-16 h-16 m-2 border-8 border-transparent border-solid border-t-c_yellow rounded-full;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     &:nth-child(1) {
       animation-delay: -0.45s;

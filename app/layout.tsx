@@ -24,7 +24,7 @@ export default async function BaseLayout({ children }: Props) {
       </head>
       <body className={`${inter.variable} font-sans`}>
         <Providers>
-          <div className='flex flex-col'>
+          <div className='flex flex-col min-h-screen'>
             {/* @ts-expect-error Server Component */}
             <Header />
             {children}

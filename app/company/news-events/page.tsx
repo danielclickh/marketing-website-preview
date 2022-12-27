@@ -122,13 +122,12 @@ export default async function News() {
                     </SuiText>
                     <div className='flex'>
                       <SuiButton
+                        type='empty'
                         iconRight
                         path={`/company/events/${featuredEvent.slug}`}
                         target='self'
-                        color='empty'
-                        textColor='darkest'
+                        color='primary'
                         title={featuredEvent.viewMoreDetailsText}
-                        size='md'
                         className='px-0'
                       />
                     </div>

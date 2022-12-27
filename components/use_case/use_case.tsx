@@ -19,27 +19,33 @@ export function UseCase(props: TestimonialProps) {
 
   return (
     <SuiPanel color='bg-white dark:bg-gunmetal' shadow padding='xl'>
-      <div className='flex flex-col justify-start align-top items-start'>
-        <div className='pb-2'>
-          <StrapiPicture light={lightLogo} dark={darkLogo} />
-        </div>
-        <SuiText size='sm' weight='medium'>
-          {description}
-        </SuiText>
+      <div className='flex flex-col justify-start align-top items-between h-full'>
+        <div className='flex-auto'>
+          <StrapiPicture light={lightLogo} dark={darkLogo} className='pb-2' />
+          <SuiText size='sm' weight='medium'>
+            {description}
+          </SuiText>
 
-        <ul className='pb-4'>
-          {bullets.map((bullet) => (
-            <li className='flex space-x-2' key={bullet.text}>
-              <StarIcon className='w-5 text-primary' />
-              <SuiText size='sm' weight='medium'>
-                {bullet.text}
-              </SuiText>
-            </li>
-          ))}
-        </ul>
+          <ul className='pb-4'>
+            {bullets.map((bullet) => (
+              <li className='flex space-x-2' key={bullet.text}>
+                <StarIcon className='w-5 text-c6' />
+                <SuiText size='sm' weight='medium'>
+                  {bullet.text}
+                </SuiText>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         {btnText && (
-          <SuiButton title={btnText} path={path} target={target} color='dark' />
+          <SuiButton
+            type='empty'
+            title={btnText}
+            path={path}
+            target={target}
+            color='primary'
+          />
         )}
       </div>
     </SuiPanel>
