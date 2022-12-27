@@ -1,4 +1,4 @@
-import { SuiButton, SuiLink } from '../sui'
+import { colorCalculator, SuiButton, SuiLink, SuiText } from '../sui'
 
 import { Fragment } from 'react'
 import {
@@ -81,21 +81,35 @@ export async function Header() {
                                   className={`${styles.menuItem} hover:bg-cultured dark:hover:bg-onyx`}
                                   data-icon={item.icon ? 'true' : 'false'}>
                                   {item.icon && (
-                                    <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md text-arsenic sm:h-12 sm:w-12 md:mr-4'>
+                                    <div
+                                      className={`
+                                      flex-shrink-0 flex justify-center h-10 w-10 rounded-md
+                                      items-center text-c4
+                                      sm:h-12 sm:w-12 md:mr-4
+                                      `}>
                                       <StrapiImage
                                         {...item.icon}
-                                        className='h-10 w-10 text-gunmetal dark:text-white'
+                                        className='h-8 w-8'
+                                        width={32}
+                                        height={32}
                                         aria-hidden='true'
                                       />
                                     </div>
                                   )}
-                                  <div className=''>
-                                    <p className='text-sm font-medium text-gunmetal dark:text-white'>
+                                  <div>
+                                    <SuiText
+                                      size='base'
+                                      color='primary'
+                                      weight='normal'>
                                       {item.name}
-                                    </p>
-                                    <p className='mt-1 text-xs text-web-light-c4 dark:text-web-dark-c4'>
+                                    </SuiText>
+                                    <SuiText
+                                      size='sm'
+                                      color='secondary'
+                                      weight='normal'
+                                      className='mt-1'>
                                       {item.description}
-                                    </p>
+                                    </SuiText>
                                   </div>
                                 </div>
                               </Link>

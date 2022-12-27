@@ -78,6 +78,7 @@ export async function Footer() {
                   {bottomLinks.map((bottomLink) => (
                     <SuiLink
                       key={bottomLink.text}
+                      size='xs'
                       href={bottomLink.href}
                       target={bottomLink.target}
                       color='white'

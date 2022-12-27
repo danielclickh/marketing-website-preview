@@ -328,14 +328,14 @@ export default async function HomePage() {
           )}
           {testimonials.testimonialItems.map((testimonial) => (
             <div key={testimonial.id} className='mb-4'>
-              <SuiText size='lg' weight='bold' color='primary'>
-                <SuiLink
-                  href={testimonial.href}
-                  target={testimonial.target}
-                  color='primary'>
-                  {testimonial.title}
-                </SuiLink>
-              </SuiText>
+              <SuiLink
+                href={testimonial.href}
+                target={testimonial.target}
+                color='primary'
+                size='lg'
+                weight='bold'>
+                {testimonial.title}
+              </SuiLink>
               <SuiText size='base' weight='medium' color='secondary'>
                 {testimonial.author}
               </SuiText>

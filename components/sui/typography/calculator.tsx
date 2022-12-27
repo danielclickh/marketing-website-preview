@@ -13,7 +13,7 @@ export const sizeCalculator = (size?: string, weight?: string) => {
   }
 }
 
-export const colorCalculator = (color: string, defaultColor: string) => {
+export const colorCalculator = (color: string, defaultColor?: string) => {
   switch (color) {
     case 'c1':
       return 'text-white dark:text-gunmetal'
@@ -22,11 +22,11 @@ export const colorCalculator = (color: string, defaultColor: string) => {
     case 'c3':
       return 'text-arsenic'
     case 'c4':
+    case 'secondary':
       return 'text-auro_metal_saurus dark:text-philippine_silver'
     case 'c4-10':
       return 'text-auro_metal_saurus/10 dark:text-philippine_silver/10'
-    case 'c4':
-    case 'secondary':
+    case 'c4-20':
       return 'text-auro_metal_saurus/20 dark:text-philippine_silver/20'
     case 'c5':
     case 'primary':
