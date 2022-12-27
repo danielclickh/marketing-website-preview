@@ -37,13 +37,13 @@ async function FetchGetStarted({ customHeader }: Props) {
             </SuiTitle>
           ) : (
             <>
-              <SuiTitle type='h5' color='primary' className='mb-4'>
+              <SuiTitle type='h5' color='c6' className='mb-4'>
                 {pretitle}
               </SuiTitle>
               <SuiTitle type='h2' size='4xl' color='white'>
                 {title}
               </SuiTitle>
-              <SuiText type='p2' weight='medium' color='offWhite'>
+              <SuiText size='base' weight='medium' color='offWhite'>
                 <Markdown>{descriptionRichText}</Markdown>
               </SuiText>
             </>
@@ -89,7 +89,7 @@ async function FetchGetStarted({ customHeader }: Props) {
           />
         </div>
         <div className='px-6 md:px-0'>
-          <SuiText type='p3' weight='medium' color='white'>
+          <SuiText size='sm' weight='medium' color='white'>
             <Markdown>{bottomText}</Markdown>
           </SuiText>
         </div>

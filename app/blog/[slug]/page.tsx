@@ -58,7 +58,7 @@ export default async function BlogPage({ params }) {
           <div
             className='flex flex-col text-center mx-auto pt-6 max-w-3xl'
             data-aos='fade-up'>
-            <SuiTitle type='h4' color='primary'>
+            <SuiTitle type='h4' color='c6'>
               {category}
             </SuiTitle>
             <SuiTitle type='h1' className='mb-6'>
@@ -76,10 +76,10 @@ export default async function BlogPage({ params }) {
               </div>
               <div className='flex'>
                 <div className='flex flex-col'>
-                  <SuiText type='p3' weight='medium'>
+                  <SuiText size='sm' weight='medium'>
                     {author.name}
                   </SuiText>
-                  <SuiText type='p4' weight='medium' color='dark'>
+                  <SuiText size='xs' weight='medium' color='secondary'>
                     {date || publishedAt}
                   </SuiText>
                 </div>
@@ -94,13 +94,13 @@ export default async function BlogPage({ params }) {
             <SuiHorizontalDivide />
             <div className='flex justify-between items-center mt-4'>
               <div className='flex'>
-                <SuiText type='p3' weight='medium' color='dark'>
+                <SuiText size='sm' weight='medium' color='secondary'>
                   Share this post
                 </SuiText>
               </div>
               <div className='flex space-x-4'>
                 <div className='border border-light-grey4 rounded-lg px-2 hover:bg-light-grey3 cursor-pointer'>
-                  <SuiText type='p3' weight='bold' color='dark'>
+                  <SuiText size='sm' weight='bold' color='secondary'>
                     Copy link
                   </SuiText>
                 </div>
@@ -140,7 +140,7 @@ export default async function BlogPage({ params }) {
               <div className='flex justify-between'>
                 <div className='flex flex-col w-1/2'>
                   <SuiTitle type='h4'>Subscribe to our newsletter</SuiTitle>
-                  <SuiText type='p3' weight='medium' color='dark'>
+                  <SuiText size='sm' weight='medium' color='secondary'>
                     Stay informed on feature releases, product roadmap, future
                     support, and cloud offerings!
                   </SuiText>
@@ -165,7 +165,7 @@ export default async function BlogPage({ params }) {
             <div className='flex'>
               <Link href='/blog/'>
                 <div className='flex items-center cursor-pointer hover:underline'>
-                  <SuiText type='p1' weight='bold'>
+                  <SuiText size='lg' weight='bold'>
                     All posts
                   </SuiText>
                   <ArrowRightIcon className='ml-2 w-4' />

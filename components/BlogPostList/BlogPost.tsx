@@ -35,7 +35,7 @@ export default function BlogPost(props: BlogPostType) {
           )}
 
           <div className='px-6 py-6'>
-            <SuiTitle type='h6' color='primary' className='mb-2'>
+            <SuiTitle type='h6' color='c6' className='mb-2'>
               {category}
             </SuiTitle>
             <SuiTitle
@@ -45,9 +45,9 @@ export default function BlogPost(props: BlogPostType) {
             </SuiTitle>
             {shortDescription && (
               <SuiText
-                type='p4'
+                size='xs'
                 weight='medium'
-                color='dark'
+                color='secondary'
                 className='line-clamp'>
                 <Markdown>{shortDescription}</Markdown>
               </SuiText>
@@ -66,10 +66,10 @@ export default function BlogPost(props: BlogPostType) {
               )}
               <div className='flex'>
                 <div className='flex flex-col'>
-                  <SuiText type='p3' weight='medium'>
+                  <SuiText size='sm' weight='medium'>
                     {author.name}
                   </SuiText>
-                  <SuiText type='p4' weight='medium' color='dark'>
+                  <SuiText size='xs' weight='medium' color='secondary'>
                     {date || publishedAt}
                   </SuiText>
                 </div>

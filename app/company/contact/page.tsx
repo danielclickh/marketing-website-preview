@@ -26,7 +26,7 @@ export default async function ContactPage() {
               {title}
             </SuiTitle>
             <div className='max-w-2xl'>
-              <SuiText type='p1' weight='medium' color='dark'>
+              <SuiText size='lg' weight='medium' color='secondary'>
                 {description}
               </SuiText>
             </div>
@@ -36,7 +36,7 @@ export default async function ContactPage() {
               <div className='w-full md:w-128 self-center text-left space-y-8'>
                 <ContactForm {...contactForm} />
                 <div className='flex text-center'>
-                  <SuiText type='p4' weight='medium' color='dark'>
+                  <SuiText size='xs' weight='medium' color='secondary'>
                     If you have any more thoughts or questions, feel free to
                     contact the ClickHouse team directly at{' '}
                     <SuiLink href='#' weight='normal' className='pl-2'>

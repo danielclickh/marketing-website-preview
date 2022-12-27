@@ -67,11 +67,11 @@ export async function Footer() {
               </div>
             )}
             <div className='pr-4 lg:pl-4 self-end'>
-              <SuiText color='white' type='p4' weight='medium'>
+              <SuiText color='white' size='xs' weight='medium'>
                 {licensingText}
               </SuiText>
               <div className='copyright_and_bottom_links flex flex-col lg:flex-row gap-1 lg:items-center'>
-                <SuiText color='white' type='p4' weight='medium'>
+                <SuiText color='white' size='xs' weight='medium'>
                   {copyright}
                 </SuiText>
                 <div className='bottom_links flex divide-x divide-white'>
@@ -95,7 +95,7 @@ export async function Footer() {
           <h4 className='text-xl font-bold text-white'>
             {newsletterForm.title}
           </h4>
-          <SuiText color='white' type='p3' weight='medium' className='mb-4'>
+          <SuiText color='white' size='sm' weight='medium' className='mb-4'>
             {newsletterForm.description}
           </SuiText>
           <div className='flex align-middle items-center space-x-2'>
@@ -106,7 +106,7 @@ export async function Footer() {
           </div>
 
           <div className='flex flex-col pt-2'>
-            <SuiText color='white' type='p3' weight='medium'>
+            <SuiText color='white' size='sm' weight='medium'>
               {socialLinks.title}
             </SuiText>
             <div className='flex space-x-4 pt-2'>

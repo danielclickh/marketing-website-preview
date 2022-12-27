@@ -1,5 +1,5 @@
 import { createElement, HTMLAttributes } from 'react'
-import { colourCalculator } from './calculator'
+import { colorCalculator } from './calculator'
 
 export interface TitleProps extends HTMLAttributes<HTMLDivElement> {
   type: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
@@ -34,7 +34,7 @@ export const SuiTitle = ({ ...TitleProps }: TitleProps) => {
   return createElement(
     type,
     {
-      className: `${colourCalculator(
+      className: `${colorCalculator(
         color,
         'text-inherit'
       )} ${className} ${textClass}`

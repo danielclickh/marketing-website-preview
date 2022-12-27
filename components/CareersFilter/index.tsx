@@ -135,10 +135,10 @@ function CareersFilter() {
                   href={job.url}
                   className='rounded-md pl-4 flex flex-col w-full cursor-pointer hover:bg-cultured hover:dark:bg-onyx transition-all duration-300 ease-in-out transform'
                   key={job.url}>
-                  <SuiText type='p2' weight='medium'>
+                  <SuiText size='base' weight='medium'>
                     {job.title}
                   </SuiText>
-                  <SuiText type='p2' weight='medium' color='dark'>
+                  <SuiText size='base' weight='medium' color='secondary'>
                     {job.location}
                   </SuiText>
                   <SuiHorizontalDivide />

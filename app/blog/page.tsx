@@ -49,7 +49,11 @@ export default async function BlogsPage() {
           <SuiTitle type='h1' className='mb-2'>
             {title}
           </SuiTitle>
-          <SuiText type='p1' color='dark' weight='normal' className='max-w-2xl'>
+          <SuiText
+            size='lg'
+            color='secondary'
+            weight='normal'
+            className='max-w-2xl'>
             {description}
           </SuiText>
         </div>

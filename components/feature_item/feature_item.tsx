@@ -8,13 +8,11 @@ type FeatureItemProps = {
   title: string
   description: string
   delay: number
-  invert?: boolean
 }
 
 export function FeatureItem(props: FeatureItemProps) {
-  const { icon, title, description, delay, invert } = props
+  const { icon, title, description, delay } = props
 
-  const textColour = invert ? 'light_purple' : 'dark'
   return (
     <div
       className='flex w-full gap-x-4'
@@ -30,7 +28,7 @@ export function FeatureItem(props: FeatureItemProps) {
         <SuiTitle type='h3' className='mb-1'>
           {title}
         </SuiTitle>
-        <SuiText type='p3' weight='medium' color='light_purple'>
+        <SuiText size='sm' weight='medium' color='c4-dark'>
           <Markdown className='ignore-anchor'>{description}</Markdown>
         </SuiText>
       </div>

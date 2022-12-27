@@ -66,14 +66,14 @@ export default async function HomePage() {
             data-aos='fade-up'
             className='flex w-full lg:w-3/5 max-w-screen-sm mx-auto lg:mx-0'>
             <div className=' mx-auto md:mr-0 md:mt-8 flex-col text-center lg:text-left'>
-              <SuiTitle type='h1' size='6xl' color='darkest'>
+              <SuiTitle type='h1' size='6xl' color='primary'>
                 {hero.title}
               </SuiTitle>
               <div className='flex flex-row'>
                 <div className='mt-6 max-w-3xl flex flex-col'>
                   <SuiText
-                    type='p2'
-                    color='dark'
+                    size='base'
+                    color='secondary'
                     weight='normal'
                     className='text-left'>
                     {hero.description}
@@ -90,10 +90,10 @@ export default async function HomePage() {
                   {!hero.ctaButton && hero.advancedCallout && (
                     <div className='flex rounded-lg p-8 bg-onyx mt-11 max-w-screen-sm flex-col gap-4 text-center shadow-md md:w-full md:px-8 md:box-border md:max-w-none'>
                       <div className='md:pr-8 border-0 md:border-r-1 border-solid border-web-light-c4 dark:border-web-dark-c4'>
-                        <SuiText type='p2' weight='bold' className='mb-1'>
+                        <SuiText size='base' weight='bold' className='mb-1'>
                           {hero.advancedCallout.title}
                         </SuiText>
-                        <SuiText type='p2' weight='normal' color='dark'>
+                        <SuiText size='base' weight='normal' color='secondary'>
                           {hero.advancedCallout.description}
                         </SuiText>
                       </div>
@@ -109,9 +109,9 @@ export default async function HomePage() {
                     </div>
                   )}
                   <SuiText
-                    type='p3'
+                    size='sm'
                     weight='normal'
-                    color='dark'
+                    color='secondary'
                     className='mt-3'>
                     {hero.ctaButtonSubtext}
                   </SuiText>
@@ -139,7 +139,7 @@ export default async function HomePage() {
                   {highlight.title}
                 </h3>
                 <div className='bg-primary h-1 w-16 rounded-md flex mx-auto my-4' />
-                <SuiText type='p3' weight='normal' className='mb-4'>
+                <SuiText size='sm' weight='normal' className='mb-4'>
                   {highlight.description}
                 </SuiText>
                 <div>
@@ -159,7 +159,7 @@ export default async function HomePage() {
       </div>
       <div className='w-full flex flex-col section-dark'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat pb-8 px-8 2xl:px-0 pt-16'>
-          <SuiTitle type='h3' className='mb-7' color='primary'>
+          <SuiTitle type='h3' className='mb-7' color='c6'>
             {aboutClickhouse.title}
           </SuiTitle>
           <div className='feature-container'>
@@ -193,7 +193,7 @@ export default async function HomePage() {
           <SuiTitle type='h2' className='mb-4'>
             {customerStories.title}
           </SuiTitle>
-          <SuiText type='p2' weight='medium' color='dark'>
+          <SuiText size='base' weight='medium' color='secondary'>
             {customerStories.description}
           </SuiText>
 
@@ -228,15 +228,15 @@ export default async function HomePage() {
 
       <div className='flex w-full bg-white dark:bg-gunmetal pb-20'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0'>
-          <SuiTitle type='h4' color='primary' className='mb-2'>
+          <SuiTitle type='h4' color='c6' className='mb-2'>
             {clickhouseCloud.pretitle}
           </SuiTitle>
           <SuiTitle type='h2'>{clickhouseCloud.title}</SuiTitle>
 
           <SuiText
-            type='p2'
+            size='base'
             weight='medium'
-            color='dark'
+            color='secondary'
             className='max-w-5xl flex self-center mt-2'>
             {clickhouseCloud.description}
           </SuiText>
@@ -252,9 +252,9 @@ export default async function HomePage() {
                   {clickhouseCloudItem.title}
                 </SuiTitle>
                 <SuiText
-                  type='p2'
+                  size='base'
                   weight='medium'
-                  color='dark'
+                  color='secondary'
                   className='mb-4'>
                   {clickhouseCloudItem.description}
                 </SuiText>
@@ -308,13 +308,17 @@ export default async function HomePage() {
 
       <div className='flex w-full container-light-color'>
         <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 2xl:px-0 items-center'>
-          <SuiTitle color='primary' type='h4' className='mb-2'>
+          <SuiTitle color='c6' type='h4' className='mb-2'>
             {testimonials.pretitle}
           </SuiTitle>
           <SuiTitle type='h2' className='mb-2'>
             {testimonials.title}
           </SuiTitle>
-          <SuiText type='p2' weight='medium' color='dark' className='mb-4'>
+          <SuiText
+            size='base'
+            weight='medium'
+            color='secondary'
+            className='mb-4'>
             {testimonials.description}
           </SuiText>
           {testimonials.testimonialsIconSvg && (
@@ -324,15 +328,15 @@ export default async function HomePage() {
           )}
           {testimonials.testimonialItems.map((testimonial) => (
             <div key={testimonial.id} className='mb-4'>
-              <SuiText type='p1' weight='bold' color='darkest'>
+              <SuiText size='lg' weight='bold' color='primary'>
                 <SuiLink
                   href={testimonial.href}
                   target={testimonial.target}
-                  color='darkest'>
+                  color='primary'>
                   {testimonial.title}
                 </SuiLink>
               </SuiText>
-              <SuiText type='p2' weight='medium' color='dark'>
+              <SuiText size='base' weight='medium' color='secondary'>
                 {testimonial.author}
               </SuiText>
             </div>

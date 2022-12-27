@@ -53,9 +53,9 @@ export default async function ClickHouseServerPage() {
                 <Markdown>{title}</Markdown>
               </SuiTitle>
               <SuiText
-                type='p2'
+                size='base'
                 weight='medium'
-                color='dark'
+                color='secondary'
                 className='mt-6 md:pr-16'>
                 {description}
               </SuiText>
@@ -97,7 +97,7 @@ export default async function ClickHouseServerPage() {
       </div>
       <div className='section-dark'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-24 px-4 sm:px-8 2xl:px-0 pt-16'>
-          <SuiTitle type='h4' color='primary' className='mb-6'>
+          <SuiTitle type='h4' color='c6' className='mb-6'>
             {features1.title}
           </SuiTitle>
           <div className='feature-container'>
@@ -116,7 +116,7 @@ export default async function ClickHouseServerPage() {
       <div className='flex w-full container-light-color pb-20'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0'>
           {features2.pretitle && (
-            <SuiTitle type='h5' color='primary' className='mb-2'>
+            <SuiTitle type='h5' color='c6' className='mb-2'>
               {features2.pretitle}
             </SuiTitle>
           )}
@@ -140,7 +140,7 @@ export default async function ClickHouseServerPage() {
       <div className='flex w-full bg-white dark:bg-gunmetal pb-20'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 px-8 2xl:px-0'>
           {features3.pretitle && (
-            <SuiTitle type='h5' className='mb-2' color='primary'>
+            <SuiTitle type='h5' className='mb-2' color='c6'>
               {features3.pretitle}
             </SuiTitle>
           )}
@@ -150,7 +150,7 @@ export default async function ClickHouseServerPage() {
 
           <div className='flex flex-col md:flex-row items-center'>
             <SuiText
-              type='p2'
+              size='base'
               weight='medium'
               className='pt-4 md:pt-0 md:w-3/5 whitespace-pre-wrap'>
               {features3.mainItem.description}
@@ -164,7 +164,7 @@ export default async function ClickHouseServerPage() {
             {features3.items.map((feature) => (
               <div className='md:w-1/3' key={feature.title}>
                 <SuiTitle type='h4'>{feature.title}</SuiTitle>
-                <SuiText color='dark' type='p2' weight='medium'>
+                <SuiText color='secondary' size='base' weight='medium'>
                   {feature.description}
                 </SuiText>
               </div>
@@ -176,7 +176,7 @@ export default async function ClickHouseServerPage() {
       <div className='flex w-full container-light-color pb-20'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 px-8 2xl:px-0'>
           {features4.pretitle && (
-            <SuiTitle type='h5' color='primary' className='mb-2'>
+            <SuiTitle type='h5' color='c6' className='mb-2'>
               {features4.pretitle}
             </SuiTitle>
           )}
@@ -186,7 +186,7 @@ export default async function ClickHouseServerPage() {
             {features4.items.map((feature) => (
               <div key={feature.title}>
                 <SuiTitle type='h4'>{feature.title}</SuiTitle>
-                <SuiText color='dark' type='p2' weight='medium'>
+                <SuiText color='secondary' size='base' weight='medium'>
                   {feature.description}
                 </SuiText>
               </div>
@@ -204,7 +204,7 @@ export default async function ClickHouseServerPage() {
 
             <div className='md:w-3/5'>
               {features5.pretitle && (
-                <SuiTitle type='h5' color='primary' className='mb-2'>
+                <SuiTitle type='h5' color='c6' className='mb-2'>
                   {features5.pretitle}
                 </SuiTitle>
               )}
@@ -212,7 +212,7 @@ export default async function ClickHouseServerPage() {
                 {features5.title}
               </SuiTitle>
               <SuiText
-                type='p1'
+                size='lg'
                 weight='medium'
                 className='whitespace-pre-wrap'>
                 {features5.description}
@@ -223,8 +223,8 @@ export default async function ClickHouseServerPage() {
           <div className='flex pt-16 flex-col'>
             <SuiTitle type='h3'>{features5.second_title}</SuiTitle>
             <SuiText
-              color='dark'
-              type='p2'
+              color='secondary'
+              size='base'
               weight='medium'
               className='max-w-3xl'>
               {features5.second_description}

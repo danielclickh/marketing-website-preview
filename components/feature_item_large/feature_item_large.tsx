@@ -20,7 +20,7 @@ export function FeatureItemLarge(props: FeatureItemProps) {
         </div>
         <SuiTitle type='h2'>{title}</SuiTitle>
       </div>
-      <SuiText type='p2' weight='medium' color='dark'>
+      <SuiText size='base' weight='medium' color='secondary'>
         {description}
       </SuiText>
     </div>

@@ -122,7 +122,7 @@ export async function Header() {
                       {ctaSecondaryButton && (
                         <SuiLink
                           href={ctaSecondaryButton.href}
-                          color='darkest'
+                          color='primary'
                           target={ctaSecondaryButton.target}>
                           {ctaSecondaryButton.text}
                         </SuiLink>

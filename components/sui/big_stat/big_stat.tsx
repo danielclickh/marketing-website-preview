@@ -41,19 +41,19 @@ export function SuiBigStat(props: BigStatProps) {
         color={color ? color : 'bg-white dark:bg-dark-grey2'}
         border={border ? border : false}>
         <div className='flex flex-col'>
-          <SuiText type='p2' color='dark' weight='bold'>
+          <SuiText size='base' color='secondary' weight='bold'>
             {label}
           </SuiText>
           <div className='flex md:flex-col xl:flex-row'>
             <div className={`flex-col ${sparklines_data ? 'w-2/4' : 'w-full'}`}>
               <SuiTitle type='h3'>{stat}</SuiTitle>
               {link_text && (
-                <SuiText type='p3' weight='normal'>
+                <SuiText size='sm' weight='normal'>
                   <SuiLink href={link_href}>{link_text}</SuiLink>
                 </SuiText>
               )}
               {change_value && (
-                <SuiText type='p3' weight='bold' color={change_value_color}>
+                <SuiText size='sm' weight='bold' color={change_value_color}>
                   {change_value}
                 </SuiText>
               )}

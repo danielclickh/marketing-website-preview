@@ -22,7 +22,7 @@ function RecentBlog({ thumbnailPng, category, slug, title }) {
           )}
 
           <div className='px-6 py-6'>
-            <SuiTitle type='h6' color='primary' className='mb-2'>
+            <SuiTitle type='h6' color='c6' className='mb-2'>
               {category}
             </SuiTitle>
             <SuiTitle

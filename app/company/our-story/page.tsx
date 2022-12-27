@@ -51,7 +51,7 @@ export default async function OurStoryPage() {
               {title}
             </SuiTitle>
             <div className='max-w-xl'>
-              <SuiText type='p1' color='dark' weight='medium'>
+              <SuiText size='lg' color='secondary' weight='medium'>
                 {description}
               </SuiText>
             </div>
@@ -70,10 +70,10 @@ export default async function OurStoryPage() {
                     alt={`Image for ${office.name} ${office.location}`}
                   />
                   <div className='flex text-center justify-center'>
-                    <SuiText type='p2' weight='bold' className='mb-1'>
+                    <SuiText size='base' weight='bold' className='mb-1'>
                       {office.name}
                     </SuiText>
-                    <SuiText type='p2' weight='medium' color='dark'>
+                    <SuiText size='base' weight='medium' color='secondary'>
                       {office.location}
                     </SuiText>
                   </div>
@@ -92,14 +92,14 @@ export default async function OurStoryPage() {
               <SuiTitle type='h3'>{item.title}</SuiTitle>
               {item.subtitle && (
                 <div className='pt-2 max-w-4xl '>
-                  <SuiText type='p1' weight='medium' color='dark'>
+                  <SuiText size='lg' weight='medium' color='secondary'>
                     {item.subtitle}
                   </SuiText>
                 </div>
               )}
               <div className='pt-2 max-w-5xl'>
                 <SuiText
-                  type='p2'
+                  size='base'
                   weight='medium'
                   className='whitespace-pre-wrap'>
                   {item.description}
@@ -130,7 +130,7 @@ export default async function OurStoryPage() {
                   </div>
                 </div>
                 <div className='flex md:w-8/12 text-center md:text-left'>
-                  <SuiText type='p2' weight='medium'>
+                  <SuiText size='base' weight='medium'>
                     {item.text}
                   </SuiText>
                 </div>
@@ -147,7 +147,7 @@ export default async function OurStoryPage() {
               {hiring.title}
             </SuiTitle>
             <div className='max-w-3xl'>
-              <SuiText type='p2' color='dark' weight='medium'>
+              <SuiText size='base' color='secondary' weight='medium'>
                 {hiring.description}
               </SuiText>
               {hiring.ctaButton && (

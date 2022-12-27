@@ -60,11 +60,11 @@ function RecentEvents({ excludeEventSlug }: { excludeEventSlug?: string }) {
             />
 
             <div className='flex flex-col px-4'>
-              <SuiTitle type='h6' color='primary' className='mb-1'>
+              <SuiTitle type='h6' color='c6' className='mb-1'>
                 {event.category}
               </SuiTitle>
               <SuiTitle type='h4'>{event.title}</SuiTitle>
-              <SuiText type='p3' weight='medium' color='dark'>
+              <SuiText size='sm' weight='medium' color='secondary'>
                 <p>
                   {event.form.type !== 'recordedGatedContent'
                     ? event.datetimeAndTimezoneString

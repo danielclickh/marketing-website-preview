@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import { Tab } from '@headlessui/react'
 import { SuiText } from '../typography'
-import { colourCalculator } from '../typography/calculator'
+import { colorCalculator } from '../typography/calculator'
 
 type TabProps = {
   color?: string | undefined
@@ -38,14 +38,14 @@ export const SuiTabs = ({ ...TabProps }) => {
               key={`tab-button-${tab.id}`}
               className={({ selected }) =>
                 selected
-                  ? `border-primary ${colourCalculator(
+                  ? `border-primary ${colorCalculator(
                       color,
                       'text-text-darkest'
                     )} focus:outline-none dark:text-white whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`
-                  : `border-transparent ${colourCalculator(
+                  : `border-transparent ${colorCalculator(
                       activeColor,
                       'text-text-darkest'
-                    )} hover:${colourCalculator(
+                    )} hover:${colorCalculator(
                       hoverColor,
                       'text-text-darkest'
                     )} hover:${
@@ -60,7 +60,10 @@ export const SuiTabs = ({ ...TabProps }) => {
       <Tab.Panels className='flex overflow-auto'>
         {tabs.map((tab: any) => (
           <Tab.Panel key={`tab-panel-${tab.id}`}>
-            <SuiText type='p2' weight='normal' className='whitespace-pre-wrap'>
+            <SuiText
+              size='base'
+              weight='normal'
+              className='whitespace-pre-wrap'>
               {tab.content}
             </SuiText>
           </Tab.Panel>

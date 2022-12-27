@@ -23,7 +23,7 @@ export function UseCase(props: TestimonialProps) {
         <div className='pb-2'>
           <StrapiPicture light={lightLogo} dark={darkLogo} />
         </div>
-        <SuiText type='p3' weight='medium'>
+        <SuiText size='sm' weight='medium'>
           {description}
         </SuiText>
 
@@ -31,7 +31,7 @@ export function UseCase(props: TestimonialProps) {
           {bullets.map((bullet) => (
             <li className='flex space-x-2' key={bullet.text}>
               <StarIcon className='w-5 text-primary' />
-              <SuiText type='p3' weight='medium'>
+              <SuiText size='sm' weight='medium'>
                 {bullet.text}
               </SuiText>
             </li>

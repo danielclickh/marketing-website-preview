@@ -9,18 +9,18 @@ import RecentEvents from '../../../components/RecentEvents'
 const NewsItem = ({ source, date, title, abstract }) => {
   return (
     <div className='flex flex-col py-4'>
-      <SuiTitle type='h6' color='dark' className='mb-1'>
+      <SuiTitle type='h6' color='secondary' className='mb-1'>
         {source} • {date}
       </SuiTitle>
       <SuiTitle type='h4' className='mb-2'>
         {title}
       </SuiTitle>
-      <SuiText type='p3' weight='medium' color='dark'>
+      <SuiText size='sm' weight='medium' color='secondary'>
         {abstract}
       </SuiText>
       <Link href='#'>
         <div className='flex items-center cursor-pointer'>
-          <SuiText type='p3' weight='medium' color='primary'>
+          <SuiText size='sm' weight='medium' color='c6'>
             Read more
           </SuiText>
           <ArrowRightIcon className='ml-2 w-4 text-primary' />
@@ -92,7 +92,7 @@ export default async function News() {
               {title}
             </SuiTitle>
             <div className='max-w-2xl'>
-              <SuiText type='p1' color='dark' weight='medium'>
+              <SuiText size='lg' color='secondary' weight='medium'>
                 {description}
               </SuiText>
             </div>
@@ -107,16 +107,16 @@ export default async function News() {
                 className='my-8'>
                 <div className='flex flex-col md:flex-row'>
                   <div className='flex flex-col md:w-1/2'>
-                    <SuiTitle type='h6' color='primary' className='mb-2'>
+                    <SuiTitle type='h6' color='c6' className='mb-2'>
                       {featuredEvent.category} • {featuredEvent.location.city}
                     </SuiTitle>
 
                     <SuiTitle type='h4'>{featuredEvent.title}</SuiTitle>
 
                     <SuiText
-                      type='p2'
+                      size='base'
                       weight='medium'
-                      color='dark'
+                      color='secondary'
                       className='mb-4'>
                       {featuredEvent.shortDescription}
                     </SuiText>
@@ -189,13 +189,13 @@ export default async function News() {
                     <SuiTitle type='h4' className='mb-2'>
                       {upcomingEvent.title}
                     </SuiTitle>
-                    <SuiText type='p3' weight='medium' color='dark'>
+                    <SuiText size='sm' weight='medium' color='secondary'>
                       {upcomingEvent.shortDescription}
                     </SuiText>
                     <div className='flex items-center space-x-2'>
                       <MapIcon className='h-16 w-16' />
                       <div>
-                        <SuiText type='p3' weight='medium' color='dark'>
+                        <SuiText size='sm' weight='medium' color='secondary'>
                           {[
                             upcomingEvent.location.city,
                             upcomingEvent.location.country

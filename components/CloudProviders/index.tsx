@@ -30,7 +30,7 @@ async function CloudProviders() {
             ))}
           </div>
           {index !== 0 && (
-            <SuiTitle type='h6' color='dark' className='mb-5'>
+            <SuiTitle type='h6' color='secondary' className='mb-5'>
               {cloudProvider.title}
             </SuiTitle>
           )}

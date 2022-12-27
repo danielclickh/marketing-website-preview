@@ -27,6 +27,10 @@ module.exports = {
         greyGradientRight: '#E9E9E9',
         primary_gradient_end: '#EE9E02',
         raisin_black: '#222222',
+        auro_metal_saurus: '#6D7386',
+        philippine_silver: '#B0B4BC',
+        gold: '#A6770D',
+        sunglow: '#A6770D',
         web: {
           light: {
             c4: '#6D7386',
@@ -53,25 +57,27 @@ module.exports = {
         text: {
           darkest: '#27242D',
           dark: '#808080',
-          neutral: '#969696',
           light: '#E9E9E9',
           success: '#407B24',
           warning: '#C78F0F',
           danger: '#C70F0F',
-          light_purple: '#B0B4BC'
         },
         alerts: {
           danger: {
             text: '#C70F0F',
-            background: '#FFCACA'
+            background: '#FAE7E7'
+          },
+          info: {
+            text: '#3B73DE',
+            background: '#E6F1FA'
           },
           success: {
-            text: '#407B24',
-            background: '#CBEABC'
+            text: '#00664B',
+            background: '#E6F9F4'
           },
           warning: {
-            text: '#C78F0F',
-            background: '#FFEFCA'
+            text: '#805300',
+            background: '#FFF8E6'
           }
         }
       },

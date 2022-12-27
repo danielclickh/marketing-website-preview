@@ -33,7 +33,7 @@ export function SuiCard(props: CardProps) {
           <div className='bg-primary w-12 h-12 p-2 rounded-lg mb-4'>{icon}</div>
         )}
         <SuiTitle type='h4'>{title}</SuiTitle>
-        <SuiText type='p3' weight='normal' color='dark'>
+        <SuiText size='sm' weight='normal' color='secondary'>
           {description}
         </SuiText>
         {buttonTitle && (

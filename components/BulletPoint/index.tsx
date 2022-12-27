@@ -24,7 +24,7 @@ function BulletPoint({
         width='32'
         height='32'
       />
-      <SuiText type='p2' weight='medium' color='dark'>
+      <SuiText size='base' weight='medium' color='secondary'>
         {text && <p>{text}</p>}
         {children}
       </SuiText>

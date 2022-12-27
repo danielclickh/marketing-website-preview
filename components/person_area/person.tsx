@@ -25,11 +25,11 @@ export function Person(props: PersonProps) {
           />
         </div>
       )}
-      <SuiText type='p1' weight='bold' className='mb-3'>
+      <SuiText size='lg' weight='bold' className='mb-3'>
         {name}
       </SuiText>
       {job && (
-        <SuiText type='p2' weight='medium' color='dark'>
+        <SuiText size='base' weight='medium' color='secondary'>
           {job}
         </SuiText>
       )}

@@ -43,8 +43,8 @@ export default async function CloudPage() {
                   <Markdown>{title}</Markdown>
                 </SuiTitle>
                 <SuiText
-                  type='p2'
-                  color='dark'
+                  size='base'
+                  color='secondary'
                   weight='medium'
                   className='mt-6 md:max-w-lg md:pr-4'>
                   {description}
@@ -65,7 +65,7 @@ export default async function CloudPage() {
                       <div
                         className='pt-8 flex flex-col space-y-2'
                         key={cloudProvider.title}>
-                        <SuiTitle type='h6' color='dark' className='mb-5'>
+                        <SuiTitle type='h6' color='secondary' className='mb-5'>
                           {cloudProvider.title}
                         </SuiTitle>
                         <div className='flex flex-row items-start gap-6 h-10'>
@@ -134,9 +134,9 @@ export default async function CloudPage() {
                   {item.title}
                 </SuiTitle>
                 <SuiText
-                  type='p2'
+                  size='base'
                   weight='medium'
-                  color='dark'
+                  color='secondary'
                   className='mb-4'>
                   {item.description}
                 </SuiText>

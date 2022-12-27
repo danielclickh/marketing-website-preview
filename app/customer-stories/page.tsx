@@ -44,7 +44,7 @@ async function CustomerStoriesPage() {
               {title}
             </SuiTitle>
             <div className='max-w-2xl'>
-              <SuiText type='p1' color='dark' weight='medium'>
+              <SuiText size='lg' color='secondary' weight='medium'>
                 {description}
               </SuiText>
             </div>
@@ -68,14 +68,14 @@ async function CustomerStoriesPage() {
                         className='h-16 w-16 mx-auto'
                       />
                     </div>
-                    <SuiText type='p2' weight='medium'>
+                    <SuiText size='base' weight='medium'>
                       &ldquo;{testimonial.review}&ldquo;
                     </SuiText>
-                    <SuiText type='p3' weight='medium'>
+                    <SuiText size='sm' weight='medium'>
                       {testimonial.author}
                     </SuiText>
                     {testimonial.role && (
-                      <SuiText type='p3' weight='medium' color='dark'>
+                      <SuiText size='sm' weight='medium' color='secondary'>
                         {testimonial.role}
                       </SuiText>
                     )}
@@ -106,7 +106,7 @@ async function CustomerStoriesPage() {
           <SuiTitle type='h2' className='mb-4'>
             {useCases.title}
           </SuiTitle>
-          <SuiText type='p1' weight='medium' color='dark'>
+          <SuiText size='lg' weight='medium' color='secondary'>
             {useCases.description}
           </SuiText>
         </div>
@@ -115,14 +115,11 @@ async function CustomerStoriesPage() {
             <SuiPanel color='bg-white dark:bg-gunmetal' shadow padding='xl'>
               <div className='flex flex-row drop-shadow-2xl'>
                 <div className='flex flex-col  w-1/2'>
-                  <SuiTitle
-                    type='h5'
-                    color='primary'
-                    className='mb-1 uppercase'>
+                  <SuiTitle type='h5' color='c6' className='mb-1 uppercase'>
                     {useCases.spotlightTitle}
                   </SuiTitle>
                   <SuiTitle type='h3'>{spotlight.companyName}</SuiTitle>
-                  <SuiText type='p3' weight='medium'>
+                  <SuiText size='sm' weight='medium'>
                     {spotlight.description}
                   </SuiText>
                   {spotlight.ctaButton && (

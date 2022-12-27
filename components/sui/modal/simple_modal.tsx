@@ -85,7 +85,7 @@ export function SuiSimpleModal(props: Props) {
                 {props.sidebar && (
                   <div className='bg-light-grey2 dark:bg-dark-grey3 w-1/3 p-8'>
                     <div className='flex items-center justify-between border-b border-light-grey5 dark:border-dark-grey4 pb-4'>
-                      <SuiTitle type='h6' className='pt-1' color='dark'>
+                      <SuiTitle type='h6' className='pt-1' color='secondary'>
                         Summary
                       </SuiTitle>
                       <button

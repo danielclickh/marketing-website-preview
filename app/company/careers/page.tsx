@@ -31,9 +31,9 @@ export default async function CareersPage() {
               {title}
             </SuiTitle>
             <SuiText
-              type='p1'
+              size='lg'
               weight='medium'
-              color='dark'
+              color='secondary'
               className='max-w-2xl'>
               {description}
             </SuiText>
@@ -47,7 +47,7 @@ export default async function CareersPage() {
                 {paragraphTitle}
               </SuiTitle>
               <SuiText
-                type='p2'
+                size='base'
                 weight='medium'
                 className='whitespace-pre-wrap'>
                 {paragraphText}
@@ -69,9 +69,9 @@ export default async function CareersPage() {
                 {companyValue.title}
               </SuiTitle>
               <SuiText
-                type='p2'
+                size='base'
                 weight='medium'
-                color='dark'
+                color='secondary'
                 className='whitespace-pre-wrap'>
                 {companyValue.description}
               </SuiText>
