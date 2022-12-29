@@ -28,7 +28,7 @@ async function FetchGetStarted({ customHeader }: Props) {
   }))
 
   return (
-    <div className='flex bg-light-purple2'>
+    <div className='flex bg-light-purple2 text-white'>
       <div className='container mx-auto justify-center py-12 px-8 2xl:px-0  flex flex-col w-full max-w-7xl'>
         <div className='flex flex-col text-center md:w-5/12 mx-auto '>
           {customHeader ? (
@@ -49,14 +49,15 @@ async function FetchGetStarted({ customHeader }: Props) {
             </>
           )}
           <div className='flex flex-col-reverse gap-4 md:flex-row md:space-x-8 justify-center mt-4'>
-            <div className='w-full md:w-60'>
+            <div className='w-full md:w-60 flex flex-col items-center'>
               {quickStartButton && (
                 <SuiButton
+                  size='sm'
                   type='secondary'
-                  title={quickStartButton.text}
                   path={quickStartButton.href}
-                  target={quickStartButton.target}
-                />
+                  target={quickStartButton.target}>
+                  {quickStartButton.text}
+                </SuiButton>
               )}
               <div className='mt-8 overflow-hidden inline-block'>
                 <div className='h-9 w-12 bg-dark-grey5 rotate-45 transform border border-dark-grey3 origin-bottom-left'></div>
@@ -65,11 +66,12 @@ async function FetchGetStarted({ customHeader }: Props) {
             {cloudButton && (
               <div className='w-full md:w-60'>
                 <SuiButton
+                  size='sm'
                   type='primary'
-                  title={cloudButton.text}
                   path={cloudButton.href}
-                  target={cloudButton.target}
-                />
+                  target={cloudButton.target}>
+                  {cloudButton.text}
+                </SuiButton>
               </div>
             )}
           </div>

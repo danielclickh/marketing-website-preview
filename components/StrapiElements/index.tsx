@@ -4,7 +4,36 @@ import { StrapiImageProps, StrapiPicProps } from './types'
 import Markdown from '../Markdown'
 import environment from '../../environment'
 
-async function StrapiImageUrl({
+async function StrapiSvg({
+  url,
+  className = '',
+  width,
+  height
+}: StrapiImageProps) {
+  const response = await fetch(`${environment.strapiBaseUrl}${url}`)
+  const svgText = await response.text()
+
+  return (
+    <Markdown
+      encloseByDiv={false}
+      components={{
+        svg: ({ node, ...params }) => {
+          return (
+            <svg
+              {...params}
+              className={`fill-current ${className}`}
+              width={width ?? undefined}
+              height={height ?? undefined}
+            />
+          )
+        }
+      }}>
+      {svgText}
+    </Markdown>
+  )
+}
+
+function StrapiImageUrl({
   id,
   url,
   sizes,
@@ -13,35 +42,10 @@ async function StrapiImageUrl({
   alt = '',
   width,
   height,
-  mime,
   ...props
-}: StrapiImageProps) {
+}: Omit<StrapiImageProps, 'mime'>) {
   if (typeof url !== 'string') {
     return null
-  }
-
-  if (mime.includes('svg')) {
-    const response = await fetch(`${environment.strapiBaseUrl}${url}`)
-    const svgText = await response.text()
-
-    return (
-      <Markdown
-        encloseByDiv={false}
-        components={{
-          svg: ({ node, ...params }) => {
-            return (
-              <svg
-                {...params}
-                className={`fill-current ${className}`}
-                width={width ?? undefined}
-                height={height ?? undefined}
-              />
-            )
-          }
-        }}>
-        {svgText}
-      </Markdown>
-    )
   }
 
   const src = sizes && formats ? formats[sizes].url : url
@@ -58,11 +62,14 @@ async function StrapiImageUrl({
   )
 }
 
-export function StrapiImage(props: StrapiImageProps) {
+export function StrapiImage({ mime, ...props }: StrapiImageProps) {
+  if (!mime.includes('svg')) {
+    return <StrapiImageUrl {...props} />
+  }
   return (
     <>
       {/* @ts-expect-error Server Component */}
-      <StrapiImageUrl {...props} />
+      <StrapiSvg {...props} />
     </>
   )
 }

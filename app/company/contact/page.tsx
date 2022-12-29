@@ -4,6 +4,7 @@ import { findOne } from '../../../lib/api/strapi'
 import GrowingCommunity from '../../../components/GrowingCommunity'
 import ContactForm from '../../../components/ContactForm'
 import GetStarted from '../../../components/GetStarted'
+import Markdown from '../../../components/Markdown'
 
 async function getData() {
   const data = await findOne('contact-us', {
@@ -37,12 +38,7 @@ export default async function ContactPage() {
                 <ContactForm {...contactForm} />
                 <div className='flex text-center'>
                   <SuiText size='xs' weight='medium' color='secondary'>
-                    If you have any more thoughts or questions, feel free to
-                    contact the ClickHouse team directly at{' '}
-                    <SuiLink href='#' weight='normal' className='pl-2'>
-                      feedback@clickhouse.com
-                    </SuiLink>
-                    .
+                    <Markdown>{contactForm.disclaimer}</Markdown>
                   </SuiText>
                 </div>
               </div>

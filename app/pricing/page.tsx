@@ -2,8 +2,8 @@ import React from 'react'
 import CloudProviders from '../../components/CloudProviders'
 import Markdown from '../../components/Markdown'
 import PricingOptions from '../../components/PricingOptions'
-import { StrapiImage } from '../../components/StrapiElements'
-import { SuiButton } from '../../components/sui'
+import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
+import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
 import { findAll, findOne } from '../../lib/api/strapi'
 
 async function PricingPage() {
@@ -41,9 +41,6 @@ async function PricingPage() {
     { data: pricingPlans }
   ] = await Promise.all([pricingPromise, pricingByRegionPromise, plansProps])
 
-  const style = {}
-  style['--image-url'] = `url(${contactSection.excludeImageLight?.url})`
-  style['--dark-image-url'] = `url(${contactSection.excludeImageDark?.url})`
   const regionList = await Promise.all(
     pricingByRegion.map((region) => {
       return {
@@ -63,8 +60,16 @@ async function PricingPage() {
         {hero && (
           <div className='hero'>
             <div className='flex flex-col items-center'>
-              <h1>{hero.title}</h1>
-              <div className='description'>{hero.description}</div>
+              <SuiTitle type='h1' className='mb-5'>
+                {hero.title}
+              </SuiTitle>
+              <SuiText
+                size='lg'
+                weight='medium'
+                color='secondary'
+                className='description'>
+                {hero.description}
+              </SuiText>
               {meteredPricing && (
                 <div>
                   {regionList.length > 0 && (
@@ -126,17 +131,17 @@ async function PricingPage() {
                 {contactSection.subtitle}
               </div>
               <SuiButton
-                type='primary'
-                color='dark'
+                type='custom'
                 path={contactSection.contactButton.link}
-                title={contactSection.contactButton.text}
-                className='text-cultured'
-              />
+                className='bg-gunmetal text-white'>
+                {contactSection.contactButton.text}
+              </SuiButton>
             </div>
             <div className='hidden md:block w-72 h-52 relative'>
-              <div
-                className='w-60 h-60 bg-[image:var(--image-url)] dark:bg-[image:var(--dark-image-url)] bg-cover absolute -right-9 top-0'
-                style={style}
+              <StrapiPicture
+                light={contactSection.excludeImageLight}
+                dark={contactSection.excludeImageDark}
+                className='w-60 h-60 bg-cover absolute -right-9 top-0'
               />
             </div>
           </div>

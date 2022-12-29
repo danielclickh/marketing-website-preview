@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import EventsForm from './EventsForm'
-import styles from './Event.module.scss'
+import Player from '@vimeo/player'
 
 function EventsContainer({ children, localDatetime, form, recordedVimeoUrl }) {
   const [isSubmitted, setIsSubmitted] = useState(false)

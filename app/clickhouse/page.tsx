@@ -64,17 +64,17 @@ export default async function ClickHouseServerPage() {
                   <SuiButton
                     type='primary'
                     path={mainButton.href}
-                    target={mainButton.target}
-                    title={mainButton.text}
-                  />
+                    target={mainButton.target}>
+                    {mainButton.text}
+                  </SuiButton>
                 )}
                 {secondaryButton && (
                   <SuiButton
                     type='secondary'
                     path={secondaryButton.href}
-                    target={secondaryButton.target}
-                    title={secondaryButton.text}
-                  />
+                    target={secondaryButton.target}>
+                    {secondaryButton.text}
+                  </SuiButton>
                 )}
               </div>
             </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import Markdown from '../../components/Markdown'
+import { SuiTitle } from '../../components/sui'
 import { findAll, getPathsValues } from '../../lib/api/strapi'
-import styles from './RichContentPage.module.scss'
 
 interface RichContentPageProps {
   title: string
@@ -11,7 +11,9 @@ interface RichContentPageProps {
   rightContent?: null | string
 }
 
-async function getData({ slug }: { slug: string[] }) {
+type ParamsType = { slug: string[] }
+
+async function getData({ slug }: ParamsType) {
   const { data } = await findAll('rich-content-pages', {
     filters: {
       url: {
@@ -29,7 +31,11 @@ async function getData({ slug }: { slug: string[] }) {
   }
 }
 
-export default async function RichContentPage({ params }) {
+export default async function RichContentPage({
+  params
+}: {
+  params: ParamsType
+}) {
   const {
     title,
     content,
@@ -38,34 +44,34 @@ export default async function RichContentPage({ params }) {
     rightContent
   }: RichContentPageProps = await getData(params)
   return (
-    <div className={styles.rich_content_page}>
-      <div className={styles.hero}>
-        <div className='mx-auto container'>
-          <h1>{title}</h1>
-        </div>
-      </div>
-      <div className='content_container mb-16'>
+    <div className='rich-content-page'>
+      <SuiTitle
+        type='h1'
+        className='mx-auto container py-16 px-0 flex items-center justify-center font-bold text-center max-w-screen-lg'>
+        {title}
+      </SuiTitle>
+      <div className='px-4 pb-16 mb-16'>
         <div className='mx-auto container'>
           {content && <Markdown>{content}</Markdown>}
 
           {(leftContent || rightContent) && (
             <div
               className={
-                leftContent && rightContent ? 'two_column_container' : ''
+                leftContent && rightContent
+                  ? 'mb-16 flex flex-col items-start justify-center md:grid md:grid-cols-2 gap-x-[5%]'
+                  : 'mb-16'
               }>
               {leftContent && (
-                <Markdown className='column_content'>{leftContent}</Markdown>
+                <Markdown className='w-full'>{leftContent}</Markdown>
               )}
               {rightContent && (
-                <Markdown className='column_content'>{rightContent}</Markdown>
+                <Markdown className='w-full'>{rightContent}</Markdown>
               )}
             </div>
           )}
 
           {fullWidthContent && (
-            <Markdown className='full_width_content'>
-              {fullWidthContent}
-            </Markdown>
+            <Markdown className='mx-auto my-16'>{fullWidthContent}</Markdown>
           )}
         </div>
       </div>

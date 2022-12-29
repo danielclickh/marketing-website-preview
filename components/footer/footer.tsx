@@ -102,7 +102,7 @@ export async function Footer() {
           <div className='flex align-middle items-center space-x-2'>
             <SuiTextField htmlFor='email' placeholder='Email address' />
             <div className='mt-1'>
-              <SuiButton type='primary' title='Sign up' />
+              <SuiButton type='primary'>Sign up</SuiButton>
             </div>
           </div>
 

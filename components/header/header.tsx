@@ -1,4 +1,4 @@
-import { colorCalculator, SuiButton, SuiLink, SuiText } from '../sui'
+import { SuiButton, SuiLink, SuiText } from '../sui'
 
 import { Fragment } from 'react'
 import {
@@ -98,9 +98,9 @@ export async function Header() {
                                   )}
                                   <div>
                                     <SuiText
-                                      size='base'
+                                      size={item.icon ? 'base' : 'sm'}
                                       color='primary'
-                                      weight='normal'>
+                                      weight={item.icon ? 'normal' : 'medium'}>
                                       {item.name}
                                     </SuiText>
                                     <SuiText
@@ -137,6 +137,7 @@ export async function Header() {
                         <SuiLink
                           href={ctaSecondaryButton.href}
                           color='primary'
+                          weight='medium'
                           target={ctaSecondaryButton.target}>
                           {ctaSecondaryButton.text}
                         </SuiLink>
@@ -145,9 +146,9 @@ export async function Header() {
                         <SuiButton
                           type='primary'
                           path={ctaButton.href}
-                          target={ctaButton.target}
-                          title={ctaButton.text}
-                        />
+                          target={ctaButton.target}>
+                          {ctaButton.text}
+                        </SuiButton>
                       )}
                     </div>
                   </PopoverGroup>
@@ -250,19 +251,18 @@ export async function Header() {
                           type='secondary'
                           path={ctaSecondaryButton.href}
                           target={ctaSecondaryButton.target}
-                          title={ctaSecondaryButton.text}
-                          widthFull
-                        />
+                          className='w-full'>
+                          {ctaSecondaryButton.text}
+                        </SuiButton>
                       )}
                       {ctaButton && (
                         <SuiButton
                           type='primary'
                           path={ctaButton.href}
                           target={ctaButton.target}
-                          title={ctaButton.text}
-                          widthFull
-                          className='w-full'
-                        />
+                          className='w-full'>
+                          {ctaButton.text}
+                        </SuiButton>
                       )}
                     </div>
                   </div>

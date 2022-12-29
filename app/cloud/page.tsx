@@ -55,9 +55,9 @@ export default async function CloudPage() {
                       <SuiButton
                         type='primary'
                         path={ctaButton.href}
-                        target={ctaButton.target}
-                        title={ctaButton.text}
-                      />
+                        target={ctaButton.target}>
+                        {ctaButton.text}
+                      </SuiButton>
                     </div>
                   )}
                   <div className='flex space-x-6 justify-center md:justify-start'>

@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import { StrapiImage } from '../../lib/types/images'
 
 export interface BlogPostAuthor {
@@ -22,4 +23,5 @@ export interface BlogPost {
 export interface BlogPostListProps {
   blogs: BlogPost[]
   categories: string[]
+  children?: ReactNode
 }

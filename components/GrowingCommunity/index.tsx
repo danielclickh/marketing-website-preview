@@ -33,6 +33,8 @@ async function GrowingCommunity() {
                 <StrapiPicture
                   dark={iconButton.darkIconPng}
                   light={iconButton.lightIconPng}
+                  height={46}
+                  className='h-11'
                 />
               </div>
             </Link>

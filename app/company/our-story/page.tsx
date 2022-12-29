@@ -155,9 +155,9 @@ export default async function OurStoryPage() {
                   <SuiButton
                     type='primary'
                     path={hiring.ctaButton.href}
-                    target={hiring.ctaButton.target}
-                    title={hiring.ctaButton.text}
-                  />
+                    target={hiring.ctaButton.target}>
+                    {hiring.ctaButton.text}
+                  </SuiButton>
                 </div>
               )}
             </div>

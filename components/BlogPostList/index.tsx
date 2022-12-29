@@ -5,7 +5,7 @@ import { BlogPostListProps } from './types'
 
 import { SuiTextField, SuiTitle } from '../sui'
 import CategorySelector from '../CategorySelector'
-function BlogPostList({ blogs, categories }: BlogPostListProps) {
+function BlogPostList({ blogs, categories, children }: BlogPostListProps) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [search, setSearch] = useState('')
 
@@ -41,6 +41,7 @@ function BlogPostList({ blogs, categories }: BlogPostListProps) {
     onClick: () => setSelectedCategory(null),
     selected: selectedCategory === null
   })
+  console.log(blogList)
 
   return (
     <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 justify-between pt-24'>
@@ -55,10 +56,13 @@ function BlogPostList({ blogs, categories }: BlogPostListProps) {
         </SuiTitle>
         <CategorySelector options={categoryList} />
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:w-3/4 md:gap-16 justify-center'>
-        {blogList.map((blog) => (
-          <BlogPost key={blog.id} {...blog} />
-        ))}
+      <div className='w-full md:w-3/4'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 justify-center'>
+          {blogList.map((blog) => (
+            <BlogPost key={blog.id} {...blog} />
+          ))}
+        </div>
+        {children}
       </div>
     </div>
   )

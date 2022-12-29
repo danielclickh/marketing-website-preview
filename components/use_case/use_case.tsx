@@ -1,3 +1,4 @@
+import { ChevronRightIcon } from '@heroicons/react/solid'
 import { StarIcon } from '@heroicons/react/solid'
 import { BaseStrapiImage } from '../../lib/api/strapi/types'
 import { StrapiPicture } from '../StrapiElements'
@@ -40,12 +41,13 @@ export function UseCase(props: TestimonialProps) {
 
         {btnText && (
           <SuiButton
-            type='empty'
-            title={btnText}
+            type='custom'
+            className='bg-auro_metal_saurus/10 dark:bg-arsenic text-c5'
             path={path}
-            target={target}
-            color='primary'
-          />
+            target={target}>
+            {btnText}
+            <ChevronRightIcon className='w-5 h-5' />
+          </SuiButton>
         )}
       </div>
     </SuiPanel>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { findOne } from '../../lib/api/strapi'
 import { StrapiPicture } from '../StrapiElements'
-import { SuiTitle } from '../sui'
+import { SuiText, SuiTitle } from '../sui'
 
 async function CloudProviders() {
   const {
@@ -15,24 +15,28 @@ async function CloudProviders() {
   })
   return (
     <div className='flex space-x-6 justify-center md:justify-start'>
-      {cloudProviders.map((cloudProvider, index: number) => (
+      {cloudProviders.map((cloudProvider, parentIndex: number) => (
         <div className='pt-8 flex flex-col space-y-2' key={cloudProvider.title}>
-          <div className='flex flex-row items-start gap-6 h-10'>
+          <div className='flex flex-row items-start gap-2 h-10'>
             {cloudProvider.lightProviderPngs.map((lightIconPng, index) => (
               <StrapiPicture
                 key={`${cloudProvider.title}-${index}`}
                 dark={cloudProvider.darkProviderPngs[index]}
                 light={lightIconPng}
-                width='100'
-                height='40'
-                className='max-h-10 w-auto'
+                className={`h-8 w-auto ${
+                  parentIndex !== 0 ? 'opacity-25' : ''
+                }`}
               />
             ))}
           </div>
-          {index !== 0 && (
-            <SuiTitle type='h6' color='secondary' className='mb-5'>
+          {parentIndex !== 0 && (
+            <SuiText
+              size='xs'
+              weight='medium'
+              color='secondary'
+              className='mb-5'>
               {cloudProvider.title}
-            </SuiTitle>
+            </SuiText>
           )}
         </div>
       ))}

@@ -83,6 +83,10 @@ module.exports = {
           }
         }
       },
+      boxShadow: {
+        card: '0px 4px 14px rgba(0, 0, 0, 0.13)',
+        'card-xl': '0px 4px 14px 4px rgba(0, 0, 0, 0.13)',
+      },
       width: {
         128: '30rem'
       },
@@ -146,17 +150,10 @@ module.exports = {
           'linear-gradient(180deg, rgba(246, 247, 250, 0) 0%, #F6F7FA 100%);',
         dark_hero_background:
           'linear-gradient(180deg, #312E3C 0%, #3B3647 100%);',
-        mountain_background: "url('/homepage/image_mountain.svg')",
-        dark_mountain_background: "url('/homepage/dark_image_mountain.svg')",
         cloud_hero_background: "url('/cloud/cloud_bg.svg')",
         dark_cloud_hero_background: "url('/cloud/dark_cloud_bg.svg')",
         field_focus:
           'linear-gradient(to top, #FFB200, #FFB200 2px, transparent 2px, transparent 100%)',
-        grid_background: "url('/homepage/background.svg')",
-        stars_background: "url('/homepage/stars.svg')",
-        cube_background: "url('/homepage/bg_cube.svg')",
-        map_background: "url('/our-story/map-bg.png')",
-        careers_background: "url('/career/camera_roll.png')",
         strain_background: "url('/homepage/new/image_strain.svg')"
       },
       backgroundPosition: {

@@ -1,5 +1,6 @@
 'use client'
-import React, { use, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
+import useSWR from 'swr'
 import CategorySelector from '../CategorySelector'
 import { SuiTextField, SuiTitle, SuiText, SuiHorizontalDivide } from '../sui'
 type JobType = {
@@ -50,7 +51,7 @@ type DataContent = null | {
 }
 
 function CareersFilter() {
-  const { data, error } = use<DataContent>(
+  const { data, error } = useSWR<DataContent>(
     'https://boards-api.greenhouse.io/v1/boards/clickhouse/jobs?content=true',
     fetcher
   )
@@ -59,6 +60,7 @@ function CareersFilter() {
   const [selectedDepartment, setSelectedDepartment] = useState<string | null>(
     null
   )
+  const [search, setSearch] = useState<string>('')
 
   const filteredDepartments: DepartmentType[] = useMemo(() => {
     if (!data) {
@@ -69,17 +71,37 @@ function CareersFilter() {
       ? data.departments.filter(([name, _]) => selectedDepartment === name)
       : data.departments
 
+    const filterJobBySearchContent = (job: JobType) => {
+      const foundMatches = search
+        .toLowerCase()
+        .trim()
+        .split(' ')
+        .every((keyword) => {
+          return (
+            job.title.toLowerCase().includes(keyword) ||
+            job.location.toLowerCase().includes(keyword)
+          )
+        })
+      return foundMatches
+    }
+
     return filteredDepartment.map(([name, jobs]) => {
       return [
         name,
         selectedOffice
-          ? jobs.filter((job: JobType) =>
-              job.offices.includes(Number(selectedOffice))
-            )
+          ? jobs.filter((job: JobType) => {
+              const hasOffice = job.offices.includes(Number(selectedOffice))
+              if (search.length > 0) {
+                return filterJobBySearchContent(job)
+              }
+              return hasOffice
+            })
+          : search.length > 0
+          ? jobs.filter(filterJobBySearchContent)
           : jobs
       ]
     })
-  }, [selectedOffice, selectedDepartment, data])
+  }, [selectedOffice, selectedDepartment, data, search])
 
   if (error) {
     return <div>Issue fetching jobs</div>
@@ -114,7 +136,11 @@ function CareersFilter() {
   return (
     <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 justify-between'>
       <div className='flex md:w-64 md:pr-8 pb-8 md:pb-0 flex-col'>
-        <SuiTextField placeholder='Search' htmlFor='search' />
+        <SuiTextField
+          placeholder='Search'
+          htmlFor='search'
+          onChange={(e) => setSearch(e.target.value)}
+        />
         <SuiTitle type='h6' className='mt-6'>
           Office
         </SuiTitle>

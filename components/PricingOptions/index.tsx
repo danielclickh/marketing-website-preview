@@ -135,19 +135,17 @@ function PricingOptions({ regionList, pricingPlans, children }) {
                           <SuiButton
                             path={plan.actionButton.link}
                             className='stroked_button_wrapper button_wrapper'
-                            type='primary'
-                            title={plan.actionButton.text}
-                            widthFull
-                          />
+                            type='primary'>
+                            {plan.actionButton.text}
+                          </SuiButton>
                         ) : (
                           <SuiButton
                             type='secondary'
                             className='w-full stroked_button_wrapper button_wrapper disabled_button'
                             path={plan.actionButton.link}
-                            disabled
-                            title='Coming soon'
-                            widthFull
-                          />
+                            disabled>
+                            Coming soon
+                          </SuiButton>
                         )
                       ) : (
                         <SuiButton
@@ -155,10 +153,9 @@ function PricingOptions({ regionList, pricingPlans, children }) {
                           className='w-full stroked_button_wrapper button_wrapper'
                           type={
                             index !== totalLength - 1 ? 'primary' : 'secondary'
-                          }
-                          title={plan.actionButton.text}
-                          widthFull
-                        />
+                          }>
+                          {plan.actionButton.text}
+                        </SuiButton>
                       )}
                     </>
                   )}

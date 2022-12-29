@@ -6,9 +6,8 @@ import { useAnalytics } from '../../../Providers/Analytics'
 import { HTMLAttributes } from 'react'
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  title: string
   size?: 'lg' | 'base' | 'sm'
-  type: 'primary' | 'secondary' | 'danger'
+  type: 'primary' | 'secondary' | 'danger' | 'custom'
   icon?: boolean
   iconRight?: boolean
   iconType?: string
@@ -18,42 +17,49 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   scroll?: boolean
   target?: string
   className?: string
-  widthFull?: boolean
   segment?: string
+  color?: never
 }
 
-interface EmptyButtonProps extends Omit<ButtonProps, 'type'> {
+interface EmptyButtonProps extends Omit<ButtonProps, 'type' | 'color'> {
   type: 'empty'
   color: 'primary' | 'warning' | 'danger'
 }
 
-const colorCalculator = (
-  color: string | undefined,
-  disabled: boolean,
+const colorCalculator = ({
+  color,
+  disabled
+}: {
+  color: string | undefined
+  disabled: boolean
   textColor?: string
-) => {
+  bgColor?: string
+}) => {
+  const disabledStyle = 'bg-c4-10 text-c4'
   switch (color) {
     case 'primary':
       if (disabled) {
-        return 'bg-c4-10 text-c4'
+        return disabledStyle
       }
       return 'bg-c6 text-seal_brown'
     case 'secondary':
       if (disabled) {
-        return 'bg-transparent text-c4 border border-c4'
+        return 'bg-transparent text-inherit border border-c4'
       }
-      return 'bg-transparent text-c5 border border-c6'
+      return 'bg-transparent text-inherit border border-c6'
     case 'danger':
       if (disabled) {
-        return 'bg-c4-10 text-c4'
+        return disabledStyle
       }
       return 'bg-alerts-danger-text text-white'
+    case 'empty':
+      return 'bg-transparent text-text-darkest dark:text-white'
+    case 'custom':
+      return 'custom-btn'
     case 'dark':
       return 'bg-arsenic text-white'
     case 'dark_alt':
       return 'bg-light-purple2 text-white'
-    case 'empty':
-      return 'bg-transparent text-text-darkest dark:text-white'
     case 'ghost':
       return 'bg-transparent text-text-darkest dark:text-white border border-light-grey5 dark:border-dark-grey4'
     case 'success':
@@ -65,7 +71,10 @@ const colorCalculator = (
     case 'xl':
       return 'text-base py-3 px-6'
     default:
-      return `bg-c6 ${textColor ?? 'text-primary-text'}`
+      if (disabled) {
+        return disabledStyle
+      }
+      return 'bg-c6 text-seal_brown'
   }
 }
 
@@ -80,30 +89,36 @@ const sizeCalculator = (size: string | undefined) => {
   }
 }
 
-export function SuiButton(props: ButtonProps | EmptyButtonProps) {
+export function SuiButton({
+  disabled,
+  type,
+  children,
+  ...props
+}: ButtonProps | EmptyButtonProps) {
   const ButtonContent = () => {
     const analytics = useAnalytics()
-    const hoverEffects = props.disabled
+    const hoverEffects = disabled
       ? 'cursor-default'
       : 'hover:underline hover:transition-all hover:-translate-y-0.5'
 
     return (
       <>
         <button
-          disabled={props.disabled ? true : false}
+          disabled={disabled ? true : false}
           className={`${hoverEffects}
           ${sizeCalculator(props.size)}
-          font-semibold text-center ${
-            props.widthFull ? 'w-full' : 'w-auto'
-          } rounded-lg duration-300 whitespace-nowrap
-           ${colorCalculator(props.color)} ${props.className ?? ''}`}
+          font-semibold text-center rounded-lg duration-300 whitespace-nowrap
+           ${colorCalculator({
+             color: type,
+             disabled: disabled ?? false
+           })} ${props.className ?? ''}`}
           onClick={() => {
             analytics.track('click')
             props.onClick && props.onClick()
           }}>
-          <span className='flex justify-center'>
+          <span className='flex justify-center items-center gap-2.5'>
             {props.icon && <RefreshIcon className='w-4 mr-2' />}
-            {props.title}
+            {children}
             {props.iconRight && <ArrowRightIcon className='w-4 ml-2' />}
           </span>
         </button>
@@ -118,7 +133,8 @@ export function SuiButton(props: ButtonProps | EmptyButtonProps) {
           href={props.path}
           passHref
           scroll={props.scroll}
-          target={props.target}>
+          target={props.target}
+          className='w-auto'>
           <ButtonContent />
         </Link>
       ) : (

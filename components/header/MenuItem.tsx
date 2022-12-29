@@ -1,5 +1,5 @@
 'use client'
-import { Fragment } from 'react'
+import { Fragment, ReactNode } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { PopoverButton, PopoverPanel } from '../HeadlessUIClient'
@@ -9,7 +9,13 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 
-const MenuItem = ({ name, children }) => (
+const MenuItem = ({
+  name,
+  children
+}: {
+  name: string
+  children: ReactNode
+}) => (
   <Popover className='relative' key={name}>
     {({ open }) => (
       <>

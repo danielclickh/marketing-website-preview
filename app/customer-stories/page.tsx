@@ -3,7 +3,7 @@ import { UseCase } from '../../components/use_case'
 import { findOne } from '../../lib/api/strapi'
 import GetStarted from '../../components/GetStarted'
 import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
-import { StarIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon, StarIcon } from '@heroicons/react/solid'
 import Carousel from './Carousel'
 import { CustomerStoriesData } from './types'
 import styles from './CustomerStories.module.scss'
@@ -127,11 +127,13 @@ async function CustomerStoriesPage() {
                   {spotlight.ctaButton && (
                     <div className='flex mt-8'>
                       <SuiButton
-                        type='primary'
-                        title={spotlight.ctaButton.text}
+                        type='custom'
+                        className='bg-auro_metal_saurus/10 dark:bg-arsenic text-c5'
                         path={spotlight.ctaButton.href}
-                        target={spotlight.ctaButton.target}
-                      />
+                        target={spotlight.ctaButton.target}>
+                        {spotlight.ctaButton.text}
+                        <ChevronRightIcon className='w-5 h-5' />
+                      </SuiButton>
                     </div>
                   )}
                 </div>

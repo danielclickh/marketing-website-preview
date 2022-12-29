@@ -1,27 +1,29 @@
 import { SuiButton, SuiPanel, SuiText, SuiTitle } from '../../../components/sui'
 
-import { ArrowRightIcon, MapIcon } from '@heroicons/react/solid'
+import { ArrowRightIcon, LocationMarkerIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import { findAll, findOne } from '../../../lib/api/strapi'
 import { StrapiPicture } from '../../../components/StrapiElements'
 import RecentEvents from '../../../components/RecentEvents'
 
-const NewsItem = ({ source, date, title, abstract }) => {
+const NewsItem = ({ source, date, title, abstract, ctaButton }) => {
   return (
-    <div className='flex flex-col py-4'>
-      <SuiTitle type='h6' color='secondary' className='mb-1'>
-        {source} • {date}
-      </SuiTitle>
-      <SuiTitle type='h4' className='mb-2'>
-        {title}
-      </SuiTitle>
-      <SuiText size='sm' weight='medium' color='secondary'>
-        {abstract}
-      </SuiText>
-      <Link href='#'>
+    <div className='flex flex-col py-4 justify-between'>
+      <div>
+        <SuiText size='xs' weight='medium' color='secondary' className='mb-1'>
+          {source} • {date}
+        </SuiText>
+        <SuiTitle type='h3' className='mb-2'>
+          {title}
+        </SuiTitle>
+        <SuiText size='sm' weight='medium' color='secondary'>
+          {abstract}
+        </SuiText>
+      </div>
+      <Link href={ctaButton.href} target={ctaButton.target}>
         <div className='flex items-center cursor-pointer'>
           <SuiText size='sm' weight='medium' color='c6'>
-            Read more
+            {ctaButton.text}
           </SuiText>
           <ArrowRightIcon className='ml-2 w-4 text-primary' />
         </div>
@@ -127,9 +129,9 @@ export default async function News() {
                         path={`/company/events/${featuredEvent.slug}`}
                         target='self'
                         color='primary'
-                        title={featuredEvent.viewMoreDetailsText}
-                        className='px-0'
-                      />
+                        className='px-0'>
+                        {featuredEvent.viewMoreDetailsText}
+                      </SuiButton>
                     </div>
                   </div>
                   <div className='flex md:w-1/2 pt-8 md:pt-0 justify-center items-center md:px-20'>
@@ -163,6 +165,7 @@ export default async function News() {
                   date={newsItem.date}
                   title={newsItem.headline}
                   abstract={newsItem.shortIntro}
+                  ctaButton={newsItem.ctaButton}
                 />
               ))}
             </div>
@@ -171,16 +174,16 @@ export default async function News() {
                 {upcomingEventsTitle}
               </SuiTitle>
               {allEvents.map((upcomingEvent) => (
-                <div className='flex space-x-4 pt-4' key={upcomingEvent.title}>
-                  <div className='flex w-44 items-top justify-start'>
-                    <div>
+                <div
+                  className='grid grid-cols-[4rem_1fr] gap-x-6 pt-4'
+                  key={upcomingEvent.title}>
+                  <div className='flex items-top justify-start'>
+                    <div className='w-16 h-16 bg-white rounded-lg flex items-center p-1'>
                       <StrapiPicture
                         dark={upcomingEvent.darkFeatureImagePng}
                         light={upcomingEvent.lightFeatureImagePng}
-                        alt='Meetup'
-                        width='128'
-                        height='128'
-                        className='cursor-pointer'
+                        alt={`Meetup ${upcomingEvent.title}`}
+                        className='cursor-pointer w-full h-auto'
                       />
                     </div>
                   </div>
@@ -192,7 +195,7 @@ export default async function News() {
                       {upcomingEvent.shortDescription}
                     </SuiText>
                     <div className='flex items-center space-x-2'>
-                      <MapIcon className='h-16 w-16' />
+                      <LocationMarkerIcon className='h-3 w-3' />
                       <div>
                         <SuiText size='sm' weight='medium' color='secondary'>
                           {[
@@ -216,7 +219,7 @@ export default async function News() {
 
       <div className='flex w-full bg-white dark:bg-gunmetal pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
-          <SuiTitle type='h3' className='mb-4'>
+          <SuiTitle type='h2' className='mb-4'>
             {pressReleasesTitle}
           </SuiTitle>
           <div className='grid grid-cols-1 md:grid-cols-2 justify-between pb-4 md:gap-x-24'>
@@ -227,6 +230,7 @@ export default async function News() {
                 date={pressRelease.date}
                 title={pressRelease.headline}
                 abstract={pressRelease.shortIntro}
+                ctaButton={pressRelease.ctaButton}
               />
             ))}
           </div>

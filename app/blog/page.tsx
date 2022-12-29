@@ -4,6 +4,7 @@ import { fetchAll, findOne } from '../../lib/api/strapi'
 
 import BlogPostList from '../../components/BlogPostList'
 import GetStarted from '../../components/GetStarted'
+import NewsLetter from '../../components/NewsLetter'
 
 async function getData() {
   const blogPageparams = {
@@ -59,8 +60,10 @@ export default async function BlogsPage() {
         </div>
       </div>
 
-      <BlogPostList categories={categories} blogs={blogs} />
-
+      <BlogPostList categories={categories} blogs={blogs}>
+        {/* @ts-expect-error Server Component */}
+        <NewsLetter />
+      </BlogPostList>
       <GetStarted />
     </div>
   )

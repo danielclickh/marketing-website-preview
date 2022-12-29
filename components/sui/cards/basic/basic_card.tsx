@@ -1,15 +1,21 @@
 import { SuiTitle, SuiText } from '../../typography'
 import { SuiButton } from '../../buttons/button'
 import { SuiPanel } from '../../panel'
+import { ArrowRightIcon } from '@heroicons/react/solid'
+import { ReactNode } from 'react'
 
 type CardProps = {
   title: string
+  pretitle?: string
   description: string
   icon?: any
   buttonTitle?: string
+  buttonTarget?: string
   buttonPath?: string
-  hasBorder?: boolean
   color?: string
+  className?: string
+  direction?: 'left' | 'right'
+  children?: ReactNode
 }
 
 export function SuiCard(props: CardProps) {
@@ -19,34 +25,61 @@ export function SuiCard(props: CardProps) {
     description,
     buttonTitle,
     buttonPath,
-    hasBorder,
-    color
+    buttonTarget,
+    color,
+    className,
+    direction,
+    pretitle,
+    children
   } = props
+
+  const line =
+    direction === 'left'
+      ? 'mr-auto'
+      : direction === 'right'
+      ? 'ml-auto'
+      : 'mx-auto'
+  const headerAlign =
+    direction === 'left'
+      ? 'text-left'
+      : direction === 'right'
+      ? 'text-right'
+      : 'text-center'
   return (
     <SuiPanel
       padding='lg'
-      border={hasBorder}
       color={color}
-      className='flex hover:shadow-md duration-300'>
-      <div className='flex flex-col'>
-        {icon && (
-          <div className='bg-c6 w-12 h-12 p-2 rounded-lg mb-4'>{icon}</div>
-        )}
-        <SuiTitle type='h4'>{title}</SuiTitle>
-        <SuiText size='sm' weight='normal' color='secondary'>
-          {description}
-        </SuiText>
+      isRounded
+      className={`flex shadow-card hover:shadow-card-3xl duration-300 ${className}`}>
+      <div className='flex flex-col justify-between'>
+        <div>
+          {pretitle && (
+            <SuiText size='xs' weight='normal' color='secondary'>
+              {pretitle}
+            </SuiText>
+          )}
+          {icon && (
+            <div className='bg-c6 w-12 h-12 p-2 rounded-lg mb-4'>{icon}</div>
+          )}
+          <SuiText size='lg' weight='bold' className={headerAlign}>
+            {title}
+          </SuiText>
+          <div className={`bg-c6 h-1 w-16 rounded-md flex ${line} mt-4 mb-6`} />
+          <SuiText size='sm' weight='normal' color='secondary'>
+            {description}
+          </SuiText>
+        </div>
+        {children}
         {buttonTitle && (
-          <div className='flex space-x-4 items-end flex-wrap'>
-            <div className='flex flex-grow-0'>
-              <SuiButton
-                type='empty'
-                color='primary'
-                title={buttonTitle}
-                path={buttonPath}
-              />
-            </div>
-          </div>
+          <SuiButton
+            type='empty'
+            color='primary'
+            path={buttonPath}
+            className='mx-auto w-full'
+            target={buttonTarget}>
+            {buttonTitle}
+            <ArrowRightIcon height='16' />
+          </SuiButton>
         )}
       </div>
     </SuiPanel>

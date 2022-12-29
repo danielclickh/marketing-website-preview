@@ -1,22 +1,21 @@
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRightIcon } from '@heroicons/react/solid'
 
 import {
-  SuiButton,
   SuiText,
   SuiTitle,
   SuiHorizontalDivide,
-  SuiPanel,
-  SuiTextField
+  SuiRecentCard
 } from '../../../components/sui'
 import { findAll, getPathsValues } from '../../../lib/api/strapi'
 import { BlogPost } from '../types'
 import Markdown from '../../../components/Markdown'
-import RecentBlog from './RecentBlog'
 import { StrapiImage } from '../../../components/StrapiElements'
 import GetStarted from '../../../components/GetStarted'
+import NewsLetter from '../../../components/NewsLetter'
+import SocialButton from '../../../components/SocialButton'
+import CopyUrlButton from '../../../components/CopyUrlButton'
 
 interface BlogProps extends BlogPost {
   content: string
@@ -48,9 +47,14 @@ async function getData(slug: string): Promise<BlogProps> {
   }
 }
 
-export default async function BlogPage({ params }) {
+export default async function BlogPage({
+  params
+}: {
+  params: { slug: string }
+}) {
   const { title, author, content, category, otherBlogs, date, publishedAt } =
     await getData(params.slug)
+
   return (
     <>
       <div className='bg-white dark:bg-dark_hero_background pt-10'>
@@ -98,61 +102,17 @@ export default async function BlogPage({ params }) {
                   Share this post
                 </SuiText>
               </div>
-              <div className='flex space-x-4'>
-                <div className='border border-light-grey4 rounded-lg px-2 hover:bg-light-grey3 cursor-pointer'>
-                  <SuiText size='sm' weight='bold' color='secondary'>
-                    Copy link
-                  </SuiText>
-                </div>
-                <div className='border border-light-grey4 rounded-lg p-2 pb-0 hover:bg-light-grey3 cursor-pointer'>
-                  <Image
-                    src='/blog/blog_twitter.svg'
-                    className='shadow-md'
-                    alt='Social share'
-                    width='24'
-                    height='24'
-                  />
-                </div>
-                <div className='border border-light-grey4 rounded-lg p-2 pb-0 hover:bg-light-grey3 cursor-pointer'>
-                  <Image
-                    src='/blog/blog_facebook.svg'
-                    className='shadow-md'
-                    alt='Social share'
-                    width='24'
-                    height='24'
-                  />
-                </div>
-                <div className='border border-light-grey4 rounded-lg p-2 pb-0 hover:bg-light-grey3 cursor-pointer'>
-                  <Image
-                    src='/blog/blog_linkedin.svg'
-                    className='shadow-md'
-                    alt='Social share'
-                    width='24'
-                    height='24'
-                  />
-                </div>
+              <div className='flex space-x-4 text-c4'>
+                <CopyUrlButton />
+                {['y_combinator', 'twitter', 'facebook', 'linkedin'].map(
+                  (social) => (
+                    <SocialButton key={social} type={social} title={title} />
+                  )
+                )}
               </div>
             </div>
-            <SuiPanel
-              color='container-light-color'
-              className='mt-8'
-              padding='lg'>
-              <div className='flex justify-between'>
-                <div className='flex flex-col w-1/2'>
-                  <SuiTitle type='h4'>Subscribe to our newsletter</SuiTitle>
-                  <SuiText size='sm' weight='medium' color='secondary'>
-                    Stay informed on feature releases, product roadmap, future
-                    support, and cloud offerings!
-                  </SuiText>
-                </div>
-                <div className='flex align-middle items-center space-x-2'>
-                  <SuiTextField htmlFor='email' placeholder='Email address' />
-                  <div className='mt-1'>
-                    <SuiButton title='Sign up' type='primary' />
-                  </div>
-                </div>
-              </div>
-            </SuiPanel>
+            {/* @ts-expect-error Server Component */}
+            <NewsLetter />
           </div>
         </div>
       </div>
@@ -160,12 +120,12 @@ export default async function BlogPage({ params }) {
       <div className='flex w-full container-light-color pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex justify-between pb-4'>
-            <SuiTitle type='h4'>Recent posts</SuiTitle>
+            <SuiTitle type='h2'>Recent posts</SuiTitle>
 
             <div className='flex'>
               <Link href='/blog/'>
                 <div className='flex items-center cursor-pointer hover:underline'>
-                  <SuiText size='lg' weight='bold'>
+                  <SuiText size='lg' weight='medium'>
                     All posts
                   </SuiText>
                   <ArrowRightIcon className='ml-2 w-4' />
@@ -173,9 +133,16 @@ export default async function BlogPage({ params }) {
               </Link>
             </div>
           </div>
-          <div className='flex flex-col md:flex-row md:space-x-16 space-y-6 md:space-y-0'>
+          <div className='w-full flex flex-col md:grid md:grid-cols-3 md:gap-x-16 gap-y-6 md:gap-y-0'>
             {otherBlogs.map((blog) => (
-              <RecentBlog key={blog.id} {...blog} />
+              <SuiRecentCard
+                key={blog.id}
+                pretitle={blog.category}
+                title={blog.title}
+                thumbnailPng={blog.thumbnailPng}
+                url={`/blog/${blog.slug}`}
+                className='w-full'
+              />
             ))}
           </div>
         </div>

@@ -40,12 +40,9 @@ export function SuiAlternateCard(props: CardProps) {
         {buttonTitle && (
           <div className='flex space-x-4 items-end flex-wrap'>
             <div className='flex flex-grow-0'>
-              <SuiButton
-                type='empty'
-                color='primary'
-                title={buttonTitle}
-                path={buttonPath}
-              />
+              <SuiButton type='empty' color='primary' path={buttonPath}>
+                {buttonTitle}
+              </SuiButton>
             </div>
           </div>
         )}
