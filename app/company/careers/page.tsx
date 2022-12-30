@@ -1,6 +1,5 @@
 import { SuiText, SuiTitle } from '../../../components/sui'
 
-import Image from 'next/image'
 import { findOne } from '../../../lib/api/strapi'
 import CareersFilter from '../../../components/CareersFilter'
 import GetStarted from '../../../components/GetStarted'
