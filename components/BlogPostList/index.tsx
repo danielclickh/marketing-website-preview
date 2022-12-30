@@ -41,7 +41,6 @@ function BlogPostList({ blogs, categories, children }: BlogPostListProps) {
     onClick: () => setSelectedCategory(null),
     selected: selectedCategory === null
   })
-  console.log(blogList)
 
   return (
     <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 justify-between pt-24'>

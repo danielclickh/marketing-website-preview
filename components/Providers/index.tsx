@@ -8,12 +8,10 @@ import { AnalyticsProvider } from './Analytics'
 
 export function Providers({ children }: { children: ReactNode }) {
   useEffect(() => {
-    Aos.init({
-      duration: 400, // values from 0 to 3000, with step 50ms
-      easing: 'ease-in-out-cubic', // default easing for AOS animations
-      once: true
-    })
-    Aos.refresh()
+    setTimeout(() => {
+      Aos.init()
+      Aos.refresh()
+    }, 50)
   }, [])
 
   return (

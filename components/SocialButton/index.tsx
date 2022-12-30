@@ -46,7 +46,7 @@ function SocialButton({ type, title }: { type: string; title: string }) {
           viewBox='0 0 20 20'
           fill='none'
           xmlns='http://www.w3.org/2000/svg'>
-          <g clip-path='url(#clip0_2004_30310)'>
+          <g clipPath='url(#clip0_2004_30310)'>
             <path
               d='M8.69336 17V11.5771L3.97363 4.11523H7.02344L10.0557 9.21289L13.0264 4.11523H16.0234L11.2861 11.5947V17H8.69336Z'
               fill='currentColor'

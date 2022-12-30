@@ -8,8 +8,8 @@ import {
 export interface HeaderTopNavItem {
   id: number
   name: string
-  href?: string
-  target: LinkTarget
+  href: string
+  target?: LinkTarget
   menuItems: Array<HeaderTopNavSubItem>
 }
 

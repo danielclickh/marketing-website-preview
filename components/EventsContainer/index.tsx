@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import EventsForm from './EventsForm'
-import Player from '@vimeo/player'
+import VimeoPlayer from '../VimeoPlayer'
 
 function EventsContainer({ children, localDatetime, form, recordedVimeoUrl }) {
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -14,19 +14,9 @@ function EventsContainer({ children, localDatetime, form, recordedVimeoUrl }) {
   return (
     <div className='pb-16 pt-24 flex flex-col md:flex-row'>
       {isSubmitted && (!eventEnded || form.type === 'recordedGatedContent') && (
-        <div className='top w-full mx-auto max-w-7xl flex justify-center mx-8 mb-16'>
+        <div className='top w-full mx-auto max-w-7xl flex justify-center px-8 mb-16'>
           <div className='video_display'>
-            <iframe
-              src={recordedVimeoUrl}
-              allow='autoplay; fullscreen; picture-in-picture'
-              allowFullScreen
-              data-ready='true'
-              frameBorder='0'
-              height='545'
-              loading='lazy'
-              width='968'
-              className='max-lg:h-auto max-lg:w-11/12'
-            />
+            <VimeoPlayer url={recordedVimeoUrl} />
           </div>
         </div>
       )}
