@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
-import { StrapiImage } from '../../lib/types/images'
+import { StrapiImageType } from '../../lib/api/strapi/types'
 
 export interface BlogPostAuthor {
   name: string
-  avatarPng: StrapiImage
+  avatarPng: StrapiImageType
 }
 
 export interface BlogPost {
@@ -13,7 +13,7 @@ export interface BlogPost {
   shortDescription: string
   content: string
   author: BlogPostAuthor
-  thumbnailPng: StrapiImage
+  thumbnailPng: StrapiImageType
   publishedAt: string
   slug?: string
   date?: string

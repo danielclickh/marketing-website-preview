@@ -59,7 +59,7 @@ export async function Header() {
             <div className='flex justify-center'>
               <div className='flex justify-between items-center md:justify-start'>
                 <div className='-mr-2 -my-2 min-[930px]:hidden'>
-                  <PopoverButton className='bg-white dark:bg-gunmetal rounded-md p-2 inline-flex items-center justify-center text-gunmetal dark:text-white hover:text-web-light-c4 hover:dark:text-web-dark-c4 hover:bg-cultured hover:dark:bg-onyx focus:outline-none'>
+                  <PopoverButton className='bg-c1 rounded-md p-2 inline-flex items-center justify-center text-c5 hover:text-c4 hover:bg-c2 focus:outline-none'>
                     <span className='sr-only'>Open menu</span>
                     <MenuIcon className='h-6 w-6' aria-hidden='true' />
                   </PopoverButton>
@@ -78,7 +78,7 @@ export async function Header() {
                                 href={item.href}
                                 className='flex items-start hover:no-underline'>
                                 <div
-                                  className={`${styles.menuItem} hover:bg-cultured dark:hover:bg-onyx`}
+                                  className={styles.menuItem}
                                   data-icon={item.icon ? 'true' : 'false'}>
                                   {item.icon && (
                                     <div
@@ -123,12 +123,12 @@ export async function Header() {
                           key={menuItem.name}
                           href={menuItem.href}
                           target={menuItem.target}
-                          className='inline-flex hover:no-underline items-center text-sm font-medium text-gunmetal dark:text-white hover:text-web-light-c4 dark:hover:text-web-dark-c4 ease-in-out'>
+                          className='inline-flex hover:no-underline items-center text-sm font-medium text-c5 hover:text-c4 ease-in-out'>
                           {menuItem.name}
                         </Link>
                       )
                     })}
-                    <div className='flex items-center border-r border-cultured dark:border-onyx pr-2'>
+                    <div className='flex items-center border-r border-c2 pr-2'>
                       <ThemeSwitcher />
                     </div>
 
@@ -166,7 +166,7 @@ export async function Header() {
                 <PopoverPanel
                   focus
                   className='absolute top-0 z-10 inset-x-0 p-2 transition transform origin-top-right min-[930px]:hidden'>
-                  <div className='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white dark:bg-gunmetal divide-y-2 divide-cultured dark:divide-onyx'>
+                  <div className='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-c1 divide-y-2 divide-c2'>
                     <div className='pt-5 pb-6 px-5'>
                       <div className='flex items-top justify-between'>
                         <div className='mt-6 w-full'>
@@ -183,17 +183,17 @@ export async function Header() {
                                           key={item.name}
                                           href={item.href}
                                           target={item.target}
-                                          className='w-full hover:no-underline flex items-center text-sm font-medium text-gunmetal dark:text-white relative'>
+                                          className='w-full hover:no-underline flex items-center text-sm font-medium text-c5 relative'>
                                           {item.icon && (
-                                            <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-web-light-c4 dark:text-web-dark-c4 mr-4'>
+                                            <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-c4 mr-4'>
                                               <StrapiImage
                                                 {...item.icon}
-                                                className='h-10 w-10 text-gunmetal dark:text-white'
+                                                className='h-10 w-10 text-c5'
                                                 aria-hidden='true'
                                               />
                                             </div>
                                           )}
-                                          <div className='text-sm font-medium text-gunmetal dark:text-white'>
+                                          <div className='text-sm font-medium text-c5'>
                                             {item.name}
                                           </div>
                                         </Link>
@@ -209,17 +209,17 @@ export async function Header() {
                                     key={item.name}
                                     href={item.href}
                                     target={item.target}
-                                    className='w-full hover:no-underline flex items-start text-sm font-medium text-gunmetal dark:text-white relative'>
+                                    className='w-full hover:no-underline flex items-start text-sm font-medium text-c5 relative'>
                                     {item.icon && (
-                                      <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-web-light-c4 dark:text-web-dark-c4 mr-4'>
+                                      <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-c4 mr-4'>
                                         <StrapiImage
                                           {...item.icon}
-                                          className='h-10 w-10 text-gunmetal dark:text-white'
+                                          className='h-10 w-10 text-c5'
                                           aria-hidden='true'
                                         />
                                       </div>
                                     )}
-                                    <div className='text-sm font-medium text-gunmetal dark:text-white'>
+                                    <div className='text-sm font-medium text-c5'>
                                       {item.name}
                                     </div>
                                   </Link>
@@ -230,7 +230,7 @@ export async function Header() {
                                   key={menuItem.name}
                                   href={menuItem.href}
                                   target={menuItem.target}
-                                  className='text-sm hover:no-underline font-medium text-gunmetal dark:text-white'>
+                                  className='text-sm hover:no-underline font-medium text-c5'>
                                   {menuItem.name}
                                 </Link>
                               )
@@ -238,7 +238,7 @@ export async function Header() {
                           </nav>
                         </div>
                         <div>
-                          <PopoverButton className='bg-white dark:bg-onyx rounded-md p-2 inline-flex items-center justify-center text-gunmetal dark:text-white hover:text-web-light-c4 dark:hover:text-web-dark-c4 ease-in-out focus:outline-none'>
+                          <PopoverButton className='bg-c1 rounded-md p-2 inline-flex items-center justify-center text-c5 hover:text-c4 ease-in-out focus:outline-none'>
                             <span className='sr-only'>Close menu</span>
                             <XIcon className='h-6 w-6' aria-hidden='true' />
                           </PopoverButton>

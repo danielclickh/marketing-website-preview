@@ -79,11 +79,11 @@ async function PricingPage() {
                       <CloudProviders />
                     </PricingOptions>
                   )}
-                  <div className='pricing_footer_note mx-auto mt-4 text-xs text-center max-w-screen-sm text-web-light-c4 dark:text-web-dark-c4'>
+                  <div className='pricing_footer_note mx-auto mt-4 text-xs text-center max-w-screen-sm text-c4'>
                     <Markdown>{meteredPricing.footerNote}</Markdown>
                   </div>
-                  <hr className='max-w-xs mx-auto my-8 border-b bg-transparent border-web-light-c4/10 dark:border-web-dark-c4/10' />
-                  <div className=' text-web-light-c4 dark:text-web-dark-c4 text-center'>
+                  <hr className='max-w-xs mx-auto my-8 border-b bg-transparent border-c4/10' />
+                  <div className=' text-c4 text-center'>
                     <Markdown>{hero.openSourceLink}</Markdown>
                   </div>
                 </div>

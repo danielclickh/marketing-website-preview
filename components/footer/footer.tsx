@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { findOne } from '../../lib/api/strapi'
 import { StrapiImage } from '../StrapiElements'
 import { Hind_Siliguri } from '@next/font/google'
+import NewsLetterForm from '../NewsLetter/NewsLetterForm'
 const hind = Hind_Siliguri({
   subsets: ['latin'],
   weight: '400'
@@ -99,6 +100,10 @@ export async function Footer() {
           <SuiText color='white' size='sm' weight='medium' className='mb-4'>
             {newsletterForm.description}
           </SuiText>
+          <NewsLetterForm
+            emailLabel={newsletterForm.inputLabel}
+            submitButtonLabel={newsletterForm.buttonLabel}
+          />
           <div className='flex align-middle items-center space-x-2'>
             <SuiTextField htmlFor='email' placeholder='Email address' />
             <div className='mt-1'>
@@ -116,7 +121,7 @@ export async function Footer() {
                   href={socialLink.href}
                   target={socialLink.target}
                   key={socialLink.href}>
-                  <div className='bg-light-purple2 border border-arsenic px-3 pt-3 pb-2 rounded hover:bg-onyx'>
+                  <div className='bg-arsenic border border-onyx px-3 pt-3 pb-2 rounded hover:bg-arsenic/10'>
                     <StrapiImage
                       {...socialLink.iconSvg}
                       width={21}

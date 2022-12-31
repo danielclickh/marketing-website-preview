@@ -13,7 +13,7 @@ export function SuiPanel(props: PanelProps) {
   const bgColour = props.color
     ? props.color
     : 'bg-light-grey2 dark:bg-dark-grey4'
-  const shadow = props.shadow ? 'shadow-lg' : ''
+  const shadow = props.shadow ? 'shadow-card' : ''
   const border = props.border
     ? 'border border-light-grey4 dark:border-dark-grey4'
     : ''

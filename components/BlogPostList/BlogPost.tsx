@@ -27,9 +27,8 @@ export default function BlogPost(props: BlogPostType) {
                 sizes='thumbnail'
                 alt={title}
                 className='rounded-t-lg object-cover w-full h-full'
-                width='100'
-                height='100'
-                unoptimized
+                width={100}
+                height={100}
               />
             </div>
           )}
@@ -59,8 +58,8 @@ export default function BlogPost(props: BlogPostType) {
                 <StrapiImage
                   {...author.avatarPng}
                   alt={author.name}
-                  width='44'
-                  height='44'
+                  width={44}
+                  height={44}
                   className='rounded-full'
                 />
               </div>

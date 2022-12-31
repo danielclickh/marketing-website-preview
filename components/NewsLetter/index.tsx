@@ -11,15 +11,20 @@ async function NewsLetter() {
     }
   )
   return (
-    <SuiPanel color='container-light-color' className='mt-8' padding='lg'>
-      <div className='flex justify-between'>
-        <div className='flex flex-col w-1/2'>
-          <SuiTitle type='h4'>{title}</SuiTitle>
+    <SuiPanel color='container-light-color' padding='lg' isRounded>
+      <div className='flex flex-col md:flex-row justify-between md:items-start'>
+        <div className='flex flex-col w-full md:w-1/2'>
+          <SuiTitle type='h3' className='mb-2.5'>
+            {title}
+          </SuiTitle>
           <SuiText size='sm' weight='medium' color='secondary'>
             {description}
           </SuiText>
         </div>
-        <NewsLetterForm />
+        <NewsLetterForm
+          emailLabel={emailLabel}
+          submitButtonLabel={submitButtonLabel}
+        />
       </div>
     </SuiPanel>
   )

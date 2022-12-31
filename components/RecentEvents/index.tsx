@@ -1,4 +1,5 @@
 import React, { use } from 'react'
+import { EventType } from '../../app/company/events/[slug]/types'
 import { findAll } from '../../lib/api/strapi'
 import { SuiRecentCard, SuiText, SuiTitle } from '../sui'
 
@@ -7,7 +8,7 @@ async function RecentEvents({
 }: {
   excludeEventSlug?: string
 }) {
-  const filters = {
+  const filters: Record<string, any> = {
     localDatetime: {
       $lt: new Date().toISOString()
     }
@@ -17,7 +18,7 @@ async function RecentEvents({
       $ne: excludeEventSlug
     }
   }
-  const { data } = await findAll('events', {
+  const { data }: { data: EventType[] } = await findAll('events', {
     filters: filters,
     sort: ['localDatetime:DESC'],
     populate: [

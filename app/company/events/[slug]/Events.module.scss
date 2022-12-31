@@ -1,0 +1,12 @@
+.eventsDescription {
+  @apply whitespace-pre-wrap;
+  ul {
+    @apply list-disc;
+  }
+  a {
+    @apply text-c5;
+    &:hover {
+      @apply no-underline;
+    }
+  }
+}

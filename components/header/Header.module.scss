@@ -4,7 +4,7 @@
 }
 
 .menuItem {
-  @apply py-2 px-6 block w-full;
+  @apply py-2 px-6 block w-full hover:bg-c1;
   &[data-icon="true"] {
     @apply flex p-1 md:px-6 md:pt-4 cursor-pointer items-center;
   }

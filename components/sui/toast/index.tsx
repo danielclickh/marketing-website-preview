@@ -1,5 +1,6 @@
 import { CheckIcon, ExclamationIcon } from '@heroicons/react/outline'
 import { createContext, ReactNode, useContext, useState } from 'react'
+import { SuiText } from '../typography'
 
 export const SnackbarContext = createContext({
   openSnackBar: (message: string, type?: 'success' | 'error') => {}
@@ -20,24 +21,32 @@ export function SnackbarContextProvider({ children }: { children: ReactNode }) {
     timer = setTimeout(() => {
       setMessage(null)
       setType(null)
-    }, 500)
+    }, 5000)
   }
   const value = { openSnackBar }
   return (
     <SnackbarContext.Provider value={value}>
       {children}
       {message && (
-        <div className='px-4 py-3 rounded-lg text-sm font-medium'>
-          {type && (
-            <div className='w-5 h-5'>
-              {type === 'success' && <CheckIcon className='w-full h-full' />}
-              {type === 'error' && (
-                <ExclamationIcon className='w-full h-full ' />
-              )}
-            </div>
-          )}
-          <div>{message}</div>
-          <button onClick={() => closeSnackBar()}>Dismiss</button>
+        <div className='fixed bottom-3.5 inset-x-0'>
+          <div className='flex gap-2 items-center w-fit px-4 py-3 rounded-lg text-sm font-medium mx-auto max-w-screen-sm bg-c3'>
+            {type && (
+              <div className='w-5 h-5'>
+                {type === 'success' && (
+                  <CheckIcon className='w-full h-full text-white' />
+                )}
+                {type === 'error' && (
+                  <ExclamationIcon className='w-full h-full text-alerts-danger-background' />
+                )}
+              </div>
+            )}
+            <SuiText size='sm' weight='medium' color='white'>
+              {message}
+            </SuiText>
+            <button className='text-c6' onClick={() => closeSnackBar()}>
+              Dismiss
+            </button>
+          </div>
         </div>
       )}
     </SnackbarContext.Provider>

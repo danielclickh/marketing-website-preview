@@ -73,7 +73,7 @@ export function SuiSelect(props: SelectProps) {
                           {selected ? (
                             <span
                               className={classNames(
-                                active ? 'text-c_yellow' : 'text-c_yellow',
+                                active ? 'text-c6' : 'text-c6',
                                 'absolute inset-y-0 right-0 flex items-center pr-4 cursor-pointer'
                               )}>
                               <CheckIcon

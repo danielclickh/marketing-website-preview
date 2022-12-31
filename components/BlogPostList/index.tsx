@@ -1,7 +1,7 @@
 'use client'
-import React, { useMemo, useState } from 'react'
+import React, { ChangeEvent, useMemo, useState } from 'react'
 import BlogPost from './BlogPost'
-import { BlogPostListProps } from './types'
+import { BlogPostListProps, BlogPost as BlogPostType } from './types'
 
 import { SuiTextField, SuiTitle } from '../sui'
 import CategorySelector from '../CategorySelector'
@@ -9,7 +9,7 @@ function BlogPostList({ blogs, categories, children }: BlogPostListProps) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [search, setSearch] = useState('')
 
-  const blogList = useMemo(() => {
+  const blogList: BlogPostType[] = useMemo(() => {
     let newBlogList =
       selectedCategory === null
         ? blogs
@@ -48,7 +48,9 @@ function BlogPostList({ blogs, categories, children }: BlogPostListProps) {
         <SuiTextField
           placeholder='Search'
           htmlFor='search'
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setSearch(e.target.value)
+          }
         />
         <SuiTitle type='h6' className='mt-6'>
           Blog categories
@@ -57,7 +59,7 @@ function BlogPostList({ blogs, categories, children }: BlogPostListProps) {
       </div>
       <div className='w-full md:w-3/4'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 justify-center'>
-          {blogList.map((blog) => (
+          {blogList.map((blog: BlogPostType) => (
             <BlogPost key={blog.id} {...blog} />
           ))}
         </div>

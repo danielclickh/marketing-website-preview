@@ -5,8 +5,16 @@ import { fetchAll, findOne } from '../../lib/api/strapi'
 import BlogPostList from '../../components/BlogPostList'
 import GetStarted from '../../components/GetStarted'
 import NewsLetter from '../../components/NewsLetter'
+import { BlogPost as BlogPostType } from './types'
 
-async function getData() {
+interface Props {
+  title: string
+  description: string
+  blogs: BlogPostType[]
+  categories: string[]
+}
+
+async function getData(): Promise<Props> {
   const blogPageparams = {
     populate: ['hero']
   }
@@ -26,7 +34,7 @@ async function getData() {
     ]
   }
   const data = await fetchAll('blog-posts', blogsParams)
-  const categories = new Set()
+  const categories = new Set<string>()
   for (let index = 0; index < data.length; index++) {
     categories.add(data[index].category)
   }

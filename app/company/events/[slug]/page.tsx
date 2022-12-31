@@ -4,9 +4,12 @@ import GetStarted from '../../../../components/GetStarted'
 import Markdown from '../../../../components/Markdown'
 import RecentEvents from '../../../../components/RecentEvents'
 import { StrapiImage } from '../../../../components/StrapiElements'
+import { SuiText, SuiTitle } from '../../../../components/sui'
 import { findAll, getPathsValues } from '../../../../lib/api/strapi'
+import { EventType } from './types'
+import styles from './Events.module.scss'
 
-async function EventPage({ params: { slug } }) {
+async function EventPage({ params: { slug } }: { params: { slug: string } }) {
   const { data } = await findAll('events', {
     filters: {
       slug: {
@@ -38,37 +41,61 @@ async function EventPage({ params: { slug } }) {
     form,
     localDatetime,
     recordedVimeoUrl
-  } = data[0]
+  }: EventType = data[0]
 
   return (
     <>
-      <div className='flex flex-col'>
+      <div className='flex flex-col px-3'>
         <EventsContainer
           localDatetime={localDatetime}
           form={form}
           recordedVimeoUrl={recordedVimeoUrl}>
-          <div className='section_metadata'>
-            <div className='pretitle'>{category}</div>
-            <div className='title'>{title}</div>
-            <div className='description'>
+          <div className='section_metadata mb-20'>
+            <SuiTitle type='h3' color='c6' className='mb-2'>
+              {category}
+            </SuiTitle>
+            <SuiTitle type='h1' className='mb-5'>
+              {title}
+            </SuiTitle>
+            <SuiText
+              size='base'
+              weight='medium'
+              color='secondary'
+              className={styles.eventsDescription}>
               {richDescription ? (
-                <Markdown>{richDescription}</Markdown>
+                <Markdown encloseByDiv={false}>{richDescription}</Markdown>
               ) : (
                 description
               )}
-            </div>
+            </SuiText>
           </div>
 
           {hostedBy && (
             <div className='hosted_by mb-16'>
-              <div className='title'>{hostedBy.title}</div>
-              <div className='hosts'>
+              <SuiTitle type='h2' className='mb-7'>
+                {hostedBy.title}
+              </SuiTitle>
+              <div className='flex flex-col'>
                 {hostedBy.hosts.map((host) => (
-                  <div className='host' key={`${host.name}-${host.role}`}>
-                    <StrapiImage {...host.avatarPng} />
-                    <div className='content'>
-                      <div className='name'>{host.name}</div>
-                      <div className='role'>{host.role}</div>
+                  <div className='flex gap-5' key={`${host.name}-${host.role}`}>
+                    <StrapiImage
+                      {...host.avatarPng}
+                      alt={host.avatarPng.caption}
+                      width={64}
+                      height={64}
+                      className='h-11 w-11 rounded-full'
+                    />
+                    <div className='flex flex-col'>
+                      <SuiText size='sm' weight='medium' className='mb-1'>
+                        {host.name}
+                      </SuiText>
+                      <SuiText
+                        size='xs'
+                        weight='medium'
+                        color='secondary'
+                        className='flex-auto'>
+                        {host.role}
+                      </SuiText>
                     </div>
                   </div>
                 ))}
@@ -77,12 +104,22 @@ async function EventPage({ params: { slug } }) {
           )}
           {agenda && (
             <div className='agenda'>
-              <div className='title'>{agenda.title}</div>
+              <SuiTitle type='h2' className='title'>
+                {agenda.title}
+              </SuiTitle>
               <div className='agenda_items'>
                 {agenda.items.map((agendaItem) => (
                   <div className='agenda_item' key={agendaItem.time}>
-                    <div className='time'>{agendaItem.time}</div>
-                    <div className='flex-auto'>{agendaItem.topic}</div>
+                    <SuiText size='sm' weight='medium' className='mb-1'>
+                      {agendaItem.time}
+                    </SuiText>
+                    <SuiText
+                      size='xs'
+                      weight='medium'
+                      color='secondary'
+                      className='flex-auto'>
+                      {agendaItem.topic}
+                    </SuiText>
                   </div>
                 ))}
               </div>
@@ -90,6 +127,7 @@ async function EventPage({ params: { slug } }) {
           )}
         </EventsContainer>
         <div className='container-light-color'>
+          {/* @ts-expect-error Server Component */}
           <RecentEvents excludeEventSlug={slug} />
         </div>
       </div>

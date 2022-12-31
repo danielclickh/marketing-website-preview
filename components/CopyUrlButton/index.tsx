@@ -9,12 +9,11 @@ function CopyUrlButton() {
   }
   return (
     <SuiButton
-      size='sm'
-      type='secondary'
+      type='custom'
       onClick={onClick}
-      className='hover:bg-light-grey3'>
+      className='border border-c2 hover:bg-c2 shadow'>
       <DuplicateIcon width='16' />
-      Copy
+      Copy Link
     </SuiButton>
   )
 }

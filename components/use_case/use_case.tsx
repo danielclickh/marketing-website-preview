@@ -42,7 +42,7 @@ export function UseCase(props: TestimonialProps) {
         {btnText && (
           <SuiButton
             type='custom'
-            className='bg-auro_metal_saurus/10 dark:bg-arsenic text-c5'
+            className='bg-c2/10 text-c5'
             path={path}
             target={target}>
             {btnText}

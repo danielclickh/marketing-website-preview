@@ -1,11 +1,16 @@
+import { StrapiImageType } from '../../lib/api/strapi/types'
+
 export interface BlogPost {
   id: number
   category: string
   title: string
   shortDescription: string
   content: string
-  author: BlogPostAuthor
-  thumbnailPng: StrapiImage
+  author: {
+    name: string
+    avatarPng: StrapiImageType
+  }
+  thumbnailPng: StrapiImageType
   publishedAt: string
   slug?: string
   date?: string

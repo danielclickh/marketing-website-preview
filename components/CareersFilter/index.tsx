@@ -159,7 +159,7 @@ function CareersFilter() {
               {jobs.map((job: JobType) => (
                 <a
                   href={job.url}
-                  className='rounded-md pl-4 flex flex-col w-full cursor-pointer hover:bg-cultured hover:dark:bg-onyx transition-all duration-300 ease-in-out transform'
+                  className='rounded-md pl-4 flex flex-col w-full cursor-pointer hover:bg-c2 transition-all duration-300 ease-in-out transform'
                   key={job.url}>
                   <SuiText size='base' weight='medium'>
                     {job.title}

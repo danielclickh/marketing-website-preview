@@ -2,12 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { ArrowRightIcon } from '@heroicons/react/solid'
 
-import {
-  SuiText,
-  SuiTitle,
-  SuiHorizontalDivide,
-  SuiRecentCard
-} from '../../../components/sui'
+import { SuiText, SuiTitle, SuiRecentCard } from '../../../components/sui'
 import { findAll, getPathsValues } from '../../../lib/api/strapi'
 import { BlogPost } from '../types'
 import Markdown from '../../../components/Markdown'
@@ -62,10 +57,10 @@ export default async function BlogPage({
           <div
             className='flex flex-col text-center mx-auto pt-6 max-w-3xl'
             data-aos='fade-up'>
-            <SuiTitle type='h4' color='c6'>
+            <SuiTitle type='h4' weight='normal' color='c6'>
               {category}
             </SuiTitle>
-            <SuiTitle type='h1' className='mb-6'>
+            <SuiTitle type='h1' className='mt-6 mb-8 max-w-screen-sm'>
               {title}
             </SuiTitle>
             <div className='flex flex-row space-x-4 pt-2 justify-center'>
@@ -73,8 +68,8 @@ export default async function BlogPage({
                 <StrapiImage
                   {...author.avatarPng}
                   alt='author avatar'
-                  width='44'
-                  height='44'
+                  width={44}
+                  height={44}
                   className='rounded-full h-11 w-11'
                 />
               </div>
@@ -92,11 +87,12 @@ export default async function BlogPage({
           </div>
         </div>
 
-        <div className='container flex mx-auto px-6 2xl:px-0 max-w-3xl pt-16'>
-          <div className='flex flex-col w-full pb-20 rich_content'>
-            <Markdown>{content}</Markdown>
-            <SuiHorizontalDivide />
-            <div className='flex justify-between items-center mt-4'>
+        <div className='container flex mx-auto px-6 2xl:px-0 max-w-3xl pt-20'>
+          <div className='flex flex-col w-full pb-20'>
+            <Markdown className='font-medium pb-6 mb-6 border-b border-c2'>
+              {content}
+            </Markdown>
+            <div className='flex justify-between items-center mb-10'>
               <div className='flex'>
                 <SuiText size='sm' weight='medium' color='secondary'>
                   Share this post

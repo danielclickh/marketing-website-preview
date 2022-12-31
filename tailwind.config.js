@@ -12,11 +12,13 @@ module.exports = {
         sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        primary: {
-          DEFAULT: '#FFB200',
-          text: '#4B2A04'
-        },
-        c_yellow: '#FFB200',
+        c1: 'var(--clickhouse-color-1)',
+        c2: 'var(--clickhouse-color-2)',
+        c3: '#443F51',
+        c4: 'rgba(var(--clickhouse-color-4), <alpha-value>)',
+        c5: 'var(--clickhouse-color-5)',
+        c6: '#FFB200',
+        c7: 'var(--clickhouse-color-7)',
         seal_brown: '#4B2A04',
         cultured: '#F6F7FA',
         arsenic: '#443F51',
@@ -33,21 +35,11 @@ module.exports = {
         philippine_silver: '#B0B4BC',
         gold: '#A6770D',
         sunglow: '#A6770D',
-        web: {
-          light: {
-            c4: '#6D7386',
-          },
-          dark: {
-            c4: '#B0B4BC',
-          },
-        },
         light: {
           grey2: '#F8F8F8',
-          grey3: '#F2F2F2',
           grey4: '#E9E9E9',
           grey5: '#E6E6E6',
           grey1a: '#FCFCFC',
-          purple2: '#403B4D'
         },
         dark: {
           grey1: '#1C1922',
@@ -86,60 +78,8 @@ module.exports = {
       boxShadow: {
         card: '0px 4px 14px rgba(0, 0, 0, 0.13)',
         'card-xl': '0px 4px 14px 4px rgba(0, 0, 0, 0.13)',
-      },
-      width: {
-        128: '30rem'
-      },
-      fontSize: {
-        'ch-max': [
-          '68px',
-          {
-            letterSpacing: '-0.01em',
-            lineHeight: '78px'
-          }
-        ],
-        'ch-5xl': [
-          '64px',
-          {
-            letterSpacing: '-0.01em',
-            lineHeight: '94px'
-          }
-        ],
-        'ch-webtitle': [
-          '48px',
-          {
-            letterSpacing: '-0.01em',
-            lineHeight: '58px'
-          }
-        ],
-        'ch-4xl': [
-          '38px',
-          {
-            letterSpacing: '-0.01em',
-            lineHeight: '44px'
-          }
-        ],
-        'ch-3xl': [
-          '32px',
-          {
-            letterSpacing: '-0.01em',
-            lineHeight: '44px'
-          }
-        ],
-        'ch-2xl': [
-          '28px',
-          {
-            letterSpacing: '-0.01em',
-            lineHeight: '34px'
-          }
-        ],
-        'ch-lg': [
-          '20px',
-          {
-            letterSpacing: '-0.01em',
-            lineHeight: '26px'
-          }
-        ]
+        input: '0px 1px 2px rgba(0, 0, 0, 0.05)',
+        'input-focus': '0px 1px 2px rgba(0, 0, 0, 0.05), inset 0px -2px 0px #FFB200'
       },
       backgroundSize: {
         default_size: '0%, 100%',
@@ -156,13 +96,9 @@ module.exports = {
           'linear-gradient(to top, #FFB200, #FFB200 2px, transparent 2px, transparent 100%)',
         strain_background: "url('/homepage/new/image_strain.svg')"
       },
-      backgroundPosition: {
-        minus_left: '-2rem'
-      },
       transitionProperty: {
         field_props: 'background-image, background-size, background-color'
       }
     }
-  },
-  plugins: [require('@tailwindcss/forms')]
+  }
 }

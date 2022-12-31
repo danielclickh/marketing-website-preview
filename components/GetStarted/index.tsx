@@ -28,7 +28,7 @@ async function FetchGetStarted({ customHeader }: Props) {
   }))
 
   return (
-    <div className='flex bg-light-purple2 text-white'>
+    <div className='flex bg-arsenic text-white'>
       <div className='container mx-auto justify-center py-12 px-8 2xl:px-0  flex flex-col w-full max-w-7xl'>
         <div className='flex flex-col text-center md:w-5/12 mx-auto '>
           {customHeader ? (

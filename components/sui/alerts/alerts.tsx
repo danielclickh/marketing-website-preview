@@ -52,7 +52,7 @@ export function SuiAlert(props: AlertProps) {
       case 'danger':
         return 'bg-alerts-danger-background text-alerts-danger-text'
       case 'none':
-        return 'bg-light-grey2 dark:bg-dark-grey2 text-text-darkest dark:text-white'
+        return 'bg-c2 text-c5'
       default:
         return 'bg-alerts-info-background text-alerts-info-text'
     }

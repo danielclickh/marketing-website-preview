@@ -1,23 +1,20 @@
-import { EyeIcon } from '@heroicons/react/solid'
 import { HTMLAttributes } from 'react'
 import styles from './Text.module.scss'
 
-interface TextFieldProps extends HTMLAttributes<HTMLInputElement> {
+interface TextFieldProps extends HTMLAttributes<HTMLTextAreaElement> {
   htmlFor: string
   label?: string
   name?: string
-  type?: string
   placeholder?: string
   value?: string
   error?: string
   required?: boolean
 }
 
-export function SuiTextField({
+export default function SuiTextFieldArea({
   className,
   label,
   htmlFor,
-  type = 'text',
   error = '',
   required = false,
   ...props
@@ -33,16 +30,11 @@ export function SuiTextField({
         </label>
       )}
       <div className='mt-1'>
-        <input
-          type={type}
+        <textarea
           id={htmlFor}
-          className={styles.textCommon}
+          className={`h-32 ${styles.textCommon}`}
           required={required}
-          {...props}
-        />
-        {type === 'password' && (
-          <EyeIcon className='w-4 relative -top-7 left-80 md:left-96 text-gray-400' />
-        )}
+          {...props}></textarea>
       </div>
       <p
         className={`mt-1 transition-opacity ease-in-out text-red-500 text-xs min-h-[1rem] italic ${

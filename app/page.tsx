@@ -89,7 +89,7 @@ export default async function HomePage() {
 
                   {!hero.ctaButton && hero.advancedCallout && (
                     <div className='flex rounded-lg p-8 bg-onyx mt-11 max-w-screen-sm flex-col gap-4 text-center shadow-md md:w-full md:px-8 md:box-border md:max-w-none'>
-                      <div className='md:pr-8 border-0 md:border-r-1 border-solid border-web-light-c4 dark:border-web-dark-c4'>
+                      <div className='md:pr-8 border-0 md:border-r-1 border-solid border-c4'>
                         <SuiText size='base' weight='bold' className='mb-1'>
                           {hero.advancedCallout.title}
                         </SuiText>

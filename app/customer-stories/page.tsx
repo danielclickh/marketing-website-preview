@@ -128,7 +128,7 @@ async function CustomerStoriesPage() {
                     <div className='flex mt-8'>
                       <SuiButton
                         type='custom'
-                        className='bg-auro_metal_saurus/10 dark:bg-arsenic text-c5'
+                        className='bg-c2/10 text-c5'
                         path={spotlight.ctaButton.href}
                         target={spotlight.ctaButton.target}>
                         {spotlight.ctaButton.text}

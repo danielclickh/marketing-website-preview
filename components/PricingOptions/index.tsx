@@ -45,7 +45,7 @@ function PricingOptions({ regionList, pricingPlans, children }) {
                       <Listbox.Option
                         key={item.id}
                         value={item}
-                        className='hover:bg-cultured dark:hover:bg-onyx'>
+                        className='hover:bg-c2'>
                         {({ selected }) => (
                           <span
                             className={`flex gap-3 truncate relative w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm ${
@@ -69,7 +69,7 @@ function PricingOptions({ regionList, pricingPlans, children }) {
         <div className='plans_container grid grid-cols-1 lg:grid-cols-3 gap-8'>
           {pricingPlans.map((plan, index) => (
             <div
-              className='plan_card border-t-[5px] rounded-[5px] border-c_yellow w-full max-w-sm bg-white dark:bg-onyx p-10 mx-auto'
+              className='plan_card border-t-[5px] rounded-[5px] border-c6 w-full max-w-sm bg-white dark:bg-onyx p-10 mx-auto'
               key={`${selectedRegion.region}-${plan.name}`}>
               <div className='card_content flex flex-col h-full justify-between'>
                 <div className='border-b mb-6'>

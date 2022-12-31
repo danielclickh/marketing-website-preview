@@ -2,6 +2,7 @@ import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import { ReactMarkdownOptions } from 'react-markdown/lib/react-markdown'
 import rehypeRaw from 'rehype-raw'
+import { SuiTitle } from '../sui'
 
 function StrapiImage({ src, width, height, alt, ...props }: any) {
   return (
@@ -16,8 +17,15 @@ function StrapiImage({ src, width, height, alt, ...props }: any) {
     />
   )
 }
+
 const components = {
-  img: StrapiImage
+  img: StrapiImage,
+  h1: (props: any) => <SuiTitle type='h1' {...props} />,
+  h2: (props: any) => <SuiTitle type='h2' {...props} />,
+  h3: (props: any) => <SuiTitle type='h3' {...props} />,
+  h4: (props: any) => <SuiTitle type='h4' {...props} />,
+  h5: (props: any) => <SuiTitle type='h5' {...props} />,
+  h6: (props: any) => <SuiTitle type='h6' {...props} />
 }
 
 interface Props extends ReactMarkdownOptions {

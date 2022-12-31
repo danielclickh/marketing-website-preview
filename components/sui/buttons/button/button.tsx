@@ -35,7 +35,7 @@ const colorCalculator = ({
   textColor?: string
   bgColor?: string
 }) => {
-  const disabledStyle = 'bg-c4-10 text-c4'
+  const disabledStyle = 'bg-c4/10 text-c4'
   switch (color) {
     case 'primary':
       if (disabled) {
@@ -58,10 +58,8 @@ const colorCalculator = ({
       return 'custom-btn'
     case 'dark':
       return 'bg-arsenic text-white'
-    case 'dark_alt':
-      return 'bg-light-purple2 text-white'
     case 'ghost':
-      return 'bg-transparent text-text-darkest dark:text-white border border-light-grey5 dark:border-dark-grey4'
+      return 'bg-transparent text-inherit border border-c4'
     case 'success':
       return 'bg-alerts-success-background text-alerts-success-text'
     case 'warning':

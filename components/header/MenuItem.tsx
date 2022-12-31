@@ -21,14 +21,12 @@ const MenuItem = ({
       <>
         <PopoverButton
           data-open={open}
-          className={`${styles.header_popover} group group-hover:text-web-light-c4 dark:group-hover:text-web-dark-c4 data-[open=true]:text-web-light-c4 data-[open=true]:dark:text-web-dark-c4  hover:text-web-light-c4 dark:hover:text-web-dark-c4`}>
+          className={`${styles.header_popover} group group-hover:text-c4 data-[open=true]:text-c4  hover:text-c4`}>
           <span>{name}</span>
           <ChevronDownIcon
             className={classNames(
-              open
-                ? 'text-web-light-c4 dark:text-web-dark-c4'
-                : 'text-gunmetal dark:text-white',
-              'ml-1 h-5 w-5 ease-in-out group-hover:text-web-light-c4 dark:group-hover:text-web-dark-c4'
+              open ? 'text-c4' : 'text-c5',
+              'ml-1 h-5 w-5 ease-in-out group-hover:text-c4'
             )}
             aria-hidden='true'
           />
@@ -43,8 +41,8 @@ const MenuItem = ({
           leaveFrom='opacity-100 translate-y-0'
           leaveTo='opacity-0 translate-y-1'>
           <PopoverPanel className='absolute z-10 -ml-4 mt-3 transform w-max max-w-md lg:max-w-1xl'>
-            <div className='rounded-lg shadow-lg border border-cultured dark:border-onyx ring-0 ring-opacity-5 overflow-hidden'>
-              <div className='relative grid gap-6 bg-white dark:bg-gunmetal px-5 py-6 sm:gap-0 sm:p-0'>
+            <div className='rounded-lg shadow-lg border border-c2 ring-0 ring-opacity-5 overflow-hidden'>
+              <div className='relative grid gap-6 bg-c1 px-5 py-6 sm:gap-0 sm:p-0'>
                 {children}
               </div>
             </div>

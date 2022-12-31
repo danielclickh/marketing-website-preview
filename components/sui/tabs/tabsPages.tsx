@@ -20,7 +20,7 @@ export function SuiTabsPages(props: TabProps) {
         <select
           id='tabs'
           name='tabs'
-          className='block w-full pl-3 py-2 text-base border-light-grey3 dark:border-dark-grey4 focus:outline-none focus:ring-c_yellow focus:border-c_yellow sm:text-sm rounded-md'
+          className='block w-full pl-3 py-2 text-base border-c2 focus:outline-none focus:ring-c6 focus:border-c6 sm:text-sm rounded-md'
           defaultValue={
             // @ts-ignore
             props.tabs.find((tab) => tab.id == props.activeTab).name
@@ -31,7 +31,7 @@ export function SuiTabsPages(props: TabProps) {
         </select>
       </div>
       <div className='hidden sm:block'>
-        <div className='border-b border-light-grey3 dark:border-dark-grey4'>
+        <div className='border-b border-c2'>
           <nav className='-mb-px flex space-x-8' aria-label='Tabs'>
             {props.tabs.map((tab) => (
               <Link
@@ -39,7 +39,7 @@ export function SuiTabsPages(props: TabProps) {
                 href={tab.href}
                 className={classNames(
                   tab.id == props.activeTab
-                    ? 'border-c_yellow text-text-darkest dark:text-white'
+                    ? 'border-c6 text-text-darkest dark:text-white'
                     : 'border-transparent text-text-dark dark:text-text-light hover:text-text-darkest hover:border-light-grey5',
                   'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm'
                 )}

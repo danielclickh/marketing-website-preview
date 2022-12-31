@@ -31,8 +31,8 @@ export async function getPathsValues(
     const newPages = await getPathsValues(
       pathName,
       obj,
-      isDynamicUrl,
       type,
+      isDynamicUrl,
       pathName,
       urlList,
       pageNumber + 1
@@ -128,22 +128,6 @@ export async function findOne(pathName: string, params: Record<string, any>) {
 
   const { data } = await response.json()
   return convertStrapiObject(data)
-}
-
-function isJSON(item: any) {
-  item = typeof item !== 'string' ? JSON.stringify(item) : item
-
-  try {
-    item = JSON.parse(item)
-  } catch (e) {
-    return false
-  }
-
-  if (typeof item === 'object' && item !== null) {
-    return true
-  }
-
-  return false
 }
 
 export async function findHeader(requestString: string) {

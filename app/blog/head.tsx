@@ -1,5 +1,7 @@
 import SeoContainer from '../../components/SeoContainer'
+import { findHeader } from '../../lib/api/strapi'
 
 export default async function Head() {
-  return <SeoContainer requestString='blog' title='Blog • ClickHouse' />
+  const data = await findHeader('blog')
+  return <SeoContainer {...data} />
 }

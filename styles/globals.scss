@@ -6,81 +6,9 @@
 }
 
 @tailwind components;
-@layer components {
-  .text-c1 {
-    @apply text-white dark:text-gunmetal;
-  }
-
-  .text-c2 {
-    @apply text-cultured dark:text-onyx;
-  }
-
-  .text-c3 {
-    @apply text-arsenic;
-  }
-  .text-secondary,
-  .text-c4 {
-    @apply text-auro_metal_saurus dark:text-philippine_silver;
-  }
-  .text-c4-10 {
-    @apply text-auro_metal_saurus/10 dark:text-philippine_silver/10;
-  }
-
-  .text-c4-20 {
-    @apply text-auro_metal_saurus/20 dark:text-philippine_silver/20;
-  }
-
-  .text-c5 {
-    @apply text-gunmetal dark:text-white;
-  }
-
-  .text-c6 {
-    @apply text-c_yellow;
-  }
-
-  .text-c7 {
-    @apply bg-gold dark:bg-sunglow;
-  }
-
-  .bg-primary,
-  .bg-c1 {
-    @apply bg-white dark:bg-gunmetal;
-  }
-
-  .bg-secondary,
-  .bg-c2 {
-    @apply bg-cultured dark:bg-onyx;
-  }
-
-  .bg-c3 {
-    @apply bg-arsenic;
-  }
-
-  .bg-c4 {
-    @apply bg-auro_metal_saurus dark:bg-philippine_silver;
-  }
-  .bg-c4-10 {
-    @apply bg-auro_metal_saurus/10 dark:bg-philippine_silver/10;
-  }
-
-  .bg-c4-20 {
-    @apply bg-auro_metal_saurus/20 dark:bg-philippine_silver/20;
-  }
-
-  .bg-c5 {
-    @apply bg-gunmetal dark:bg-white;
-  }
-
-  .bg-c6 {
-    @apply bg-c_yellow;
-  }
-
-  .bg-c7 {
-    @apply bg-gold dark:text-sunglow;
-  }
-}
 @tailwind utilities;
 @import "node_modules/aos/src/sass/aos.scss";
+@import "colors";
 $aos-distance: 12px; // It has to be above import
 
 html,
@@ -89,7 +17,7 @@ body {
   margin: 0;
   font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
     Droid Sans, Helvetica Neue, sans-serif;
-  @apply mx-auto text-gunmetal dark:text-white;
+  @apply mx-auto text-c5;
 }
 
 [data-nextjs-scroll-focus-boundary] {
@@ -101,7 +29,7 @@ body {
 }
 
 .container-light-color {
-  @apply bg-cultured dark:bg-onyx text-gunmetal dark:text-white;
+  @apply bg-c2 text-c5;
 }
 
 .section-dark {
@@ -179,25 +107,23 @@ body {
 
   table {
     @apply text-left w-full rounded-lg;
-    @apply border border-solid border-arsenic dark:border-arsenic;
+    @apply border border-solid border-c3;
 
-    th {
-      @apply border border-solid border-cultured dark:border-onyx;
-      @apply font-bold p-4;
-      font-weight: bold;
+    th,
+    td {
+      @apply border border-solid border-c2;
+      @apply p-4;
     }
 
-    td {
-      padding: 15px;
+    th {
+      @apply font-bold;
     }
   }
 
   code {
-    @apply bg-cultured text-web-light-c4 dark:bg-onyx dark:text-c_yellow;
-    @apply border border-solid;
+    @apply bg-c2 text-c4 dark:text-c6;
+    @apply border border-solid inline-block px-1;
     border: 1px solid #e8eaee;
-    display: inline-block;
-    padding: 0 5px;
     margin-bottom: 2px;
     border-radius: 2px;
   }
@@ -208,10 +134,9 @@ body {
       padding: 20px;
       @apply bg-raisin_black text-white rounded-lg whitespace-pre-wrap block;
 
-      @apply border border-solid border-arsenic dark:border-arsenic;
+      @apply border border-solid border-c3 break-words;
       font-family: monospace, sans-serif;
       word-break: break-all;
-      overflow-wrap: break-word;
     }
   }
 
@@ -222,7 +147,7 @@ body {
 
     li {
       &:not(:last-child) {
-        margin-bottom: 10px;
+        @apply mb-5;
       }
     }
   }
@@ -230,15 +155,11 @@ body {
   blockquote {
     @apply box-border pl-4;
     border-left: 4px solid #cbeabc;
-    @apply text-web-light-c4 dark:text-web-light-c4;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 36px;
-    @apply mb-9;
+    @apply text-auro_metal_saurus font-semibold text-xl mb-9;
   }
 
   img {
-    max-width: 100%;
+    @apply max-w-full;
   }
 
   p {
@@ -249,11 +170,11 @@ body {
   }
 
   &:not(.ignore-anchor) a {
-    @apply text-c_yellow;
+    @apply text-c6;
   }
 
   &.ignore-anchor a {
-    @apply text-inherit underline hover:text-c_yellow;
+    @apply text-inherit underline hover:text-c6;
   }
 }
 
@@ -272,7 +193,7 @@ body {
 .loading-ring {
   @apply inline-block relative w-20 h-20;
   div {
-    @apply box-border block absolute w-16 h-16 m-2 border-8 border-transparent border-solid border-t-c_yellow rounded-full;
+    @apply box-border block absolute w-16 h-16 m-2 border-8 border-transparent border-solid border-t-c6 rounded-full;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     &:nth-child(1) {
       animation-delay: -0.45s;
