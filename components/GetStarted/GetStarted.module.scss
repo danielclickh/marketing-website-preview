@@ -1,0 +1,5 @@
+.description {
+  p:not(:last-child) {
+    @apply mb-2.5 #{!important};
+  }
+}

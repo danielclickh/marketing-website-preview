@@ -1,9 +1,28 @@
 import { ReactNode } from 'react'
 import { findOne } from '../../lib/api/strapi'
+import { StrapiButton } from '../../lib/api/strapi/types'
 import Markdown from '../Markdown'
 import { SuiButton, SuiCodeblock, SuiTabs, SuiText, SuiTitle } from '../sui'
+import styles from './GetStarted.module.scss'
 interface Props {
   customHeader?: ReactNode
+}
+
+interface GettingStartedPlatform {
+  id: number
+  name: string
+  instructions: string
+}
+
+interface GettingStartedData {
+  pretitle: string
+  title: string
+  description: string
+  descriptionRichText: string
+  quickStartButton: StrapiButton
+  cloudButton: StrapiButton
+  platforms: Array<GettingStartedPlatform>
+  bottomText: string
 }
 
 async function FetchGetStarted({ customHeader }: Props) {
@@ -15,9 +34,11 @@ async function FetchGetStarted({ customHeader }: Props) {
     cloudButton,
     platforms,
     bottomText
-  } = await findOne('getting-started', {
+  }: GettingStartedData = await findOne('getting-started', {
     populate: ['cloudButton', 'platforms', 'quickStartButton']
   })
+
+  console.log(JSON.stringify(platforms))
   const osTabs = platforms.map((platform) => ({
     name: platform.name,
     content: (
@@ -37,23 +58,25 @@ async function FetchGetStarted({ customHeader }: Props) {
             </SuiTitle>
           ) : (
             <>
-              <SuiTitle type='h5' color='c6' className='mb-4'>
+              <SuiTitle type='h4' color='c6' className='mb-4'>
                 {pretitle}
               </SuiTitle>
-              <SuiTitle type='h2' size='4xl' color='white'>
+              <SuiTitle type='h2' size='4xl' color='white' className='mb-4'>
                 {title}
               </SuiTitle>
-              <SuiText size='base' weight='medium' color='offWhite'>
-                <Markdown>{descriptionRichText}</Markdown>
+              <SuiText size='base' weight='medium' color='c4-dark'>
+                <Markdown className={styles.description}>
+                  {descriptionRichText}
+                </Markdown>
               </SuiText>
             </>
           )}
-          <div className='flex flex-col-reverse gap-4 md:flex-row md:space-x-8 justify-center mt-4'>
-            <div className='w-full md:w-60 flex flex-col items-center'>
+          <div className='flex flex-col-reverse gap-4 md:flex-row md:gap-x-8 justify-center mt-8'>
+            <div className='w-full md:w-60'>
               {quickStartButton && (
                 <SuiButton
-                  size='sm'
                   type='secondary'
+                  className='w-full'
                   path={quickStartButton.href}
                   target={quickStartButton.target}>
                   {quickStartButton.text}
@@ -63,23 +86,24 @@ async function FetchGetStarted({ customHeader }: Props) {
                 <div className='h-9 w-12 bg-dark-grey5 rotate-45 transform border border-dark-grey3 origin-bottom-left'></div>
               </div>
             </div>
-            {cloudButton && (
-              <div className='w-full md:w-60'>
-                <SuiButton
-                  size='sm'
-                  type='primary'
-                  path={cloudButton.href}
-                  target={cloudButton.target}>
-                  {cloudButton.text}
-                </SuiButton>
-              </div>
-            )}
+            <div className='w-full md:w-60'>
+              {cloudButton && (
+                <div className='w-full md:w-60'>
+                  <SuiButton
+                    type='primary'
+                    className='w-full'
+                    path={cloudButton.href}
+                    target={cloudButton.target}>
+                    {cloudButton.text}
+                  </SuiButton>
+                </div>
+              )}
+            </div>
           </div>
         </div>
         <div className='bg-dark-grey5 w-11/12 md:w-full self-center border border-dark-grey3 rounded-lg p-2 px-6 overflow-hidden -mt-2 mb-1'>
           <SuiTabs
             tabs={osTabs}
-            activeTab={1}
             color='offWhite'
             activeColor='white'
             borderColor='border-arsenic'
@@ -87,11 +111,13 @@ async function FetchGetStarted({ customHeader }: Props) {
             hoverBorderColor='border-dark-grey5'
           />
         </div>
-        <div className='px-6 md:px-0'>
-          <SuiText size='sm' weight='medium' color='white'>
-            <Markdown>{bottomText}</Markdown>
-          </SuiText>
-        </div>
+        <SuiText
+          size='sm'
+          weight='medium'
+          color='white'
+          className='px-6 md:px-0 mt-6'>
+          <Markdown>{bottomText}</Markdown>
+        </SuiText>
       </div>
     </div>
   )

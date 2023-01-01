@@ -86,18 +86,9 @@ module.exports = {
         focus_size: '100%, 100%'
       },
       backgroundImage: {
-        hero_background:
-          'linear-gradient(180deg, rgba(246, 247, 250, 0) 0%, #F6F7FA 100%);',
-        dark_hero_background:
-          'linear-gradient(180deg, #312E3C 0%, #3B3647 100%);',
-        cloud_hero_background: "url('/cloud/cloud_bg.svg')",
-        dark_cloud_hero_background: "url('/cloud/dark_cloud_bg.svg')",
         field_focus:
           'linear-gradient(to top, #FFB200, #FFB200 2px, transparent 2px, transparent 100%)',
-        strain_background: "url('/homepage/new/image_strain.svg')"
-      },
-      transitionProperty: {
-        field_props: 'background-image, background-size, background-color'
+        strain_background: "url('/images/homepage/image_strain.svg')"
       }
     }
   }

@@ -28,12 +28,12 @@ interface EmptyButtonProps extends Omit<ButtonProps, 'type' | 'color'> {
 
 const colorCalculator = ({
   color,
+  textColor,
   disabled
 }: {
   color: string | undefined
   disabled: boolean
   textColor?: string
-  bgColor?: string
 }) => {
   const disabledStyle = 'bg-c4/10 text-c4'
   switch (color) {
@@ -53,7 +53,13 @@ const colorCalculator = ({
       }
       return 'bg-alerts-danger-text text-white'
     case 'empty':
-      return 'bg-transparent text-text-darkest dark:text-white'
+      return `bg-transparent ${
+        textColor === 'warning'
+          ? 'text-c7'
+          : textColor === 'danger'
+          ? 'text-alerts-danger-text'
+          : 'text-inherit'
+      }text-text-darkest dark:text-white`
     case 'custom':
       return 'custom-btn'
     case 'dark':
@@ -108,7 +114,8 @@ export function SuiButton({
           font-semibold text-center rounded-lg duration-300 whitespace-nowrap
            ${colorCalculator({
              color: type,
-             disabled: disabled ?? false
+             disabled: disabled ?? false,
+             textColor: props.color
            })} ${props.className ?? ''}`}
           onClick={() => {
             analytics.track('click')
@@ -131,8 +138,7 @@ export function SuiButton({
           href={props.path}
           passHref
           scroll={props.scroll}
-          target={props.target}
-          className='w-auto'>
+          target={props.target}>
           <ButtonContent />
         </Link>
       ) : (

@@ -50,7 +50,7 @@ export default async function BlogsPage() {
   const { blogs, categories, title, description } = await getData()
 
   return (
-    <div className='bg-white dark:bg-dark_hero_background pt-10'>
+    <div className='bg-hero pt-10'>
       <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
         <div
           className='flex flex-col text-center mx-auto pt-6'

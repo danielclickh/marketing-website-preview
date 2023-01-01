@@ -6,8 +6,9 @@ import Markdown from '../../components/Markdown'
 import { StrapiImage } from '../../components/StrapiElements'
 import BulletPoint from '../../components/BulletPoint'
 import GetStarted from '../../components/GetStarted'
+import { ClickhouseData } from './types'
 
-async function getData() {
+async function getData(): Promise<ClickhouseData> {
   const params = {
     populate: [
       'hero',
@@ -45,11 +46,11 @@ export default async function ClickHouseServerPage() {
     hero
   return (
     <>
-      <div className='bg-hero_background dark:bg-dark_hero_background bg-cover pt-10'>
+      <div className='bg-hero pt-10'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-20 px-4 sm:px-8 2xl:px-0'>
           <div data-aos='fade-up' className='flex'>
             <div className='md:w-6/12 md:mt-16 flex-col text-center md:text-left'>
-              <SuiTitle type='h1' className='text-6xl mb-0'>
+              <SuiTitle type='h1' size='6xl' className='text-6xl'>
                 <Markdown>{title}</Markdown>
               </SuiTitle>
               <SuiText
@@ -59,10 +60,11 @@ export default async function ClickHouseServerPage() {
                 className='mt-6 md:pr-16'>
                 {description}
               </SuiText>
-              <div className='flex mt-6 justify-center md:justify-start space-x-4'>
+              <div className='flex mt-8 justify-center md:justify-start space-x-4'>
                 {mainButton && (
                   <SuiButton
                     type='primary'
+                    className='w-48'
                     path={mainButton.href}
                     target={mainButton.target}>
                     {mainButton.text}
@@ -71,6 +73,7 @@ export default async function ClickHouseServerPage() {
                 {secondaryButton && (
                   <SuiButton
                     type='secondary'
+                    className='w-48'
                     path={secondaryButton.href}
                     target={secondaryButton.target}>
                     {secondaryButton.text}
@@ -79,15 +82,14 @@ export default async function ClickHouseServerPage() {
               </div>
             </div>
             <div className='hidden md:flex w-6/12 justify-center'>
-              <div>
-                <div className='mx-auto flex px-8 mt-12'>
-                  <StrapiImage
-                    {...backgroundPng}
-                    alt='ClickHouse is fast'
-                    width='471'
-                    height='360'
-                  />
-                </div>
+              <div className='mx-auto flex px-8 mt-12 max-w-full'>
+                <StrapiImage
+                  {...backgroundPng}
+                  alt='ClickHouse is fast'
+                  width={471}
+                  height={360}
+                  className='w-full max-w-full h-auto'
+                />
               </div>
             </div>
           </div>
@@ -96,7 +98,7 @@ export default async function ClickHouseServerPage() {
       </div>
       <div className='section-dark'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-24 px-4 sm:px-8 2xl:px-0 pt-16'>
-          <SuiTitle type='h4' color='c6' className='mb-6'>
+          <SuiTitle type='h3' className='mb-7' color='c6'>
             {features1.title}
           </SuiTitle>
           <div className='feature-container'>
@@ -143,7 +145,7 @@ export default async function ClickHouseServerPage() {
               {features3.pretitle}
             </SuiTitle>
           )}
-          <SuiTitle type='h2' className='mb-2'>
+          <SuiTitle type='h2' className='mb-6'>
             {features3.mainItem.title}
           </SuiTitle>
 
@@ -162,7 +164,9 @@ export default async function ClickHouseServerPage() {
           <div className='flex flex-col md:flex-row md:space-x-12 pt-16'>
             {features3.items.map((feature) => (
               <div className='md:w-1/3' key={feature.title}>
-                <SuiTitle type='h4'>{feature.title}</SuiTitle>
+                <SuiText size='lg' weight='bold' className='mb-6'>
+                  {feature.title}
+                </SuiText>
                 <SuiText color='secondary' size='base' weight='medium'>
                   {feature.description}
                 </SuiText>
@@ -179,12 +183,16 @@ export default async function ClickHouseServerPage() {
               {features4.pretitle}
             </SuiTitle>
           )}
-          <SuiTitle type='h2'>{features4.title}</SuiTitle>
+          <SuiTitle type='h2' className='mb-6'>
+            {features4.title}
+          </SuiTitle>
 
           <div className='large-feature-container'>
             {features4.items.map((feature) => (
               <div key={feature.title}>
-                <SuiTitle type='h4'>{feature.title}</SuiTitle>
+                <SuiText size='lg' weight='bold' className='mb-3'>
+                  {feature.title}
+                </SuiText>
                 <SuiText color='secondary' size='base' weight='medium'>
                   {feature.description}
                 </SuiText>
@@ -207,20 +215,22 @@ export default async function ClickHouseServerPage() {
                   {features5.pretitle}
                 </SuiTitle>
               )}
-              <SuiTitle type='h2' className='mb-2'>
+              <SuiTitle type='h2' className='mb-6'>
                 {features5.title}
               </SuiTitle>
               <SuiText
                 size='lg'
                 weight='medium'
-                className='whitespace-pre-wrap'>
+                className='whitespace-pre-wrap mb-6'>
                 {features5.description}
               </SuiText>
             </div>
           </div>
 
           <div className='flex pt-16 flex-col'>
-            <SuiTitle type='h3'>{features5.second_title}</SuiTitle>
+            <SuiTitle type='h2' className='mb-6'>
+              {features5.second_title}
+            </SuiTitle>
             <SuiText
               color='secondary'
               size='base'
@@ -229,7 +239,7 @@ export default async function ClickHouseServerPage() {
               {features5.second_description}
             </SuiText>
 
-            <div className='flex flex-col md:flex-row pt-4 flex-wrap'>
+            <div className='flex flex-col md:flex-row pt-4 flex-wrap gap-y-4'>
               {features5.items.map((feature) => (
                 <BulletPoint
                   key={feature.text}

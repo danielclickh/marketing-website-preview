@@ -10,9 +10,7 @@ type TabProps = {
   hoverColor?: string | undefined
   hoverBorderColor?: string | undefined
   tabs: {
-    id: number
     name: string
-    href: string
     content: ReactElement
   }[]
 }
@@ -35,18 +33,18 @@ export const SuiTabs = ({ ...TabProps }: TabProps) => {
         <nav className='-mb-px flex space-x-8' aria-label='Tabs'>
           {tabs.map((tab: any) => (
             <Tab
-              key={`tab-button-${tab.id}`}
+              key={`tab-button-${tab.name}`}
               className={({ selected }) =>
                 selected
                   ? `border-c6 ${colorCalculator(
-                      color,
+                      color ?? '',
                       'text-text-darkest'
                     )} focus:outline-none dark:text-white whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`
                   : `border-transparent ${colorCalculator(
-                      activeColor,
+                      activeColor ?? '',
                       'text-text-darkest'
                     )} hover:${colorCalculator(
-                      hoverColor,
+                      hoverColor ?? '',
                       'text-text-darkest'
                     )} hover:${
                       hoverBorderColor ? hoverBorderColor : 'border-light-grey5'
@@ -59,7 +57,7 @@ export const SuiTabs = ({ ...TabProps }: TabProps) => {
       </Tab.List>
       <Tab.Panels className='flex overflow-auto'>
         {tabs.map((tab: any) => (
-          <Tab.Panel key={`tab-panel-${tab.id}`}>
+          <Tab.Panel key={`tab-panel-${tab.name}`}>
             <SuiText
               size='base'
               weight='normal'

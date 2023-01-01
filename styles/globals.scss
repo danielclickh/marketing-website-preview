@@ -6,6 +6,11 @@
 }
 
 @tailwind components;
+@layer components {
+  .bg-hero {
+    @apply bg-gradient-to-b from-cultured/0 to-cultured dark:from-c3/0 dark:to-c3;
+  }
+}
 @tailwind utilities;
 @import "node_modules/aos/src/sass/aos.scss";
 @import "colors";
@@ -45,9 +50,12 @@ body {
 }
 
 .feature-icon {
-  @apply w-9 h-9 flex items-center text-white;
-  * {
+  @apply w-9 h-9 flex items-center;
+  &:not(.inherit) {
     @apply text-white;
+    * {
+      @apply text-white;
+    }
   }
 }
 

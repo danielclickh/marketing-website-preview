@@ -75,7 +75,7 @@ export default async function HomePage() {
                     size='base'
                     color='secondary'
                     weight='normal'
-                    className='text-left'>
+                    className='text-left mb-10'>
                     {hero.description}
                   </SuiText>
                   {hero.ctaButton && (
@@ -146,6 +146,7 @@ export default async function HomePage() {
                 <div>
                   <SuiButton
                     iconRight
+                    size='lg'
                     path={highlight.href}
                     type='empty'
                     color='primary'
@@ -177,7 +178,8 @@ export default async function HomePage() {
           {aboutClickhouse.allFeaturesButton.text && (
             <div className='flex text-center justify-center pt-16'>
               <SuiButton
-                type='primary'
+                type='empty'
+                color='primary'
                 iconRight
                 path={aboutClickhouse.allFeaturesButton.href}
                 target={aboutClickhouse.allFeaturesButton.target}

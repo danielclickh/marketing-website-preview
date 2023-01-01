@@ -12,6 +12,7 @@ import { StrapiImage } from '../../components/StrapiElements'
 import { SuiButton, SuiCard, SuiText, SuiTitle } from '../../components/sui'
 import VimeoPlayer from '../../components/VimeoPlayer'
 import { findAll } from '../../lib/api/strapi'
+import { EventType } from '../company/events/[slug]/types'
 
 const popularCourses = [
   {
@@ -84,7 +85,7 @@ async function LearnPage() {
 
   return (
     <div>
-      <div className='hero-container'>
+      <div className='hero-container bg-hero'>
         <div className='hero-background' />
         <div className='hero-content'>
           <SuiTitle type='h1' size='6xl'>
@@ -197,7 +198,7 @@ async function LearnPage() {
           Upcoming live events
         </SuiTitle>
         <div className='events-container flex gap-4'>
-          {upcomingEvents.map((event) => (
+          {upcomingEvents.map((event: EventType) => (
             <div className='event-item' key={event.title}>
               <div className='event-item--image'>
                 {event.thumbnailPng ? (

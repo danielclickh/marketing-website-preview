@@ -42,7 +42,7 @@ function NewsLetterForm({
   }
 
   return (
-    <div className='flex align-middle items-center space-x-2'>
+    <div className='flex align-middle items-start space-x-2'>
       <SuiTextField
         htmlFor='email'
         placeholder={emailLabel}
