@@ -19,6 +19,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   className?: string
   segment?: string
   color?: never
+  segmentEvent?: Record<string, string>
 }
 
 interface EmptyButtonProps extends Omit<ButtonProps, 'type' | 'color'> {
@@ -97,6 +98,7 @@ export function SuiButton({
   disabled,
   type,
   children,
+  segmentEvent,
   ...props
 }: ButtonProps | EmptyButtonProps) {
   const ButtonContent = () => {
@@ -118,7 +120,9 @@ export function SuiButton({
              textColor: props.color
            })} ${props.className ?? ''}`}
           onClick={() => {
-            analytics.track('click')
+            if (segmentEvent) {
+              analytics.track('click', segmentEvent)
+            }
             props.onClick && props.onClick()
           }}>
           <span className='flex justify-center items-center gap-2.5'>

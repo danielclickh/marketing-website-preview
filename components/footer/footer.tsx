@@ -1,9 +1,10 @@
-import { SuiButton, SuiLink, SuiText, SuiTextField, SuiTitle } from '../sui'
+import { SuiLink, SuiText, SuiTitle } from '../sui'
 import Link from 'next/link'
 import { findOne } from '../../lib/api/strapi'
 import { StrapiImage } from '../StrapiElements'
 import { Hind_Siliguri } from '@next/font/google'
 import NewsLetterForm from '../NewsLetter/NewsLetterForm'
+import { FooterData } from './types'
 const hind = Hind_Siliguri({
   subsets: ['latin'],
   weight: '400'
@@ -18,7 +19,7 @@ export async function Footer() {
     socialLinks,
     bottomLinks,
     copyright
-  } = await findOne('footer', {
+  }: FooterData = await findOne('footer', {
     populate: [
       'logoSvg',
       'topLevelFooterMenu',
@@ -50,6 +51,10 @@ export async function Footer() {
                       target={footerLink.target}
                       color='white'
                       className='w-fit'
+                      segmentEvent={{
+                        label: footerLink.name,
+                        category: 'website-nav'
+                      }}
                       weight='normal'>
                       {footerLink.name}
                     </SuiLink>
@@ -61,7 +66,7 @@ export async function Footer() {
           <div className='flex flex-col lg:pt-12 items-start lg:flex-row'>
             {logoSvg && (
               <div className='flex md:w-64 mr-3 gap-x-3 items-center'>
-                <StrapiImage {...logoSvg} width='25' height='25' />
+                <StrapiImage {...logoSvg} width={25} height={25} />
                 <span className={`text-2xl text-white ${hind.className}`}>
                   ClickHouse
                 </span>
@@ -82,6 +87,10 @@ export async function Footer() {
                       size='xs'
                       href={bottomLink.href}
                       target={bottomLink.target}
+                      segmentEvent={{
+                        label: bottomLink.text,
+                        category: 'website-nav'
+                      }}
                       color='white'
                       weight='normal'
                       className='px-1 first:pl-0 leading-normal h-4 flex items-center'>

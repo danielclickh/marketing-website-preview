@@ -39,7 +39,7 @@ export async function Header() {
 
   return (
     <Popover className='bg-c1/80 shadow-sm  dark:border-b dark:border-onyx h-full backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300'>
-      <div className='text-center bg-c6 text-raisin_black text-sm font-medium w-full'>
+      <div className='text-center bg-c6 text-raisin_black text-sm font-medium w-full py-0.5'>
         <Link href='/company/events/clickhouse-workshop'>
           Free ClickHouse Workshop - Sign up now
         </Link>

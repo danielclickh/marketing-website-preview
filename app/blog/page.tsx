@@ -55,14 +55,14 @@ export default async function BlogsPage() {
         <div
           className='flex flex-col text-center mx-auto pt-6'
           data-aos='fade-up'>
-          <SuiTitle type='h1' className='mb-2'>
+          <SuiTitle type='h1' className='mb-6'>
             {title}
           </SuiTitle>
           <SuiText
             size='lg'
             color='secondary'
             weight='normal'
-            className='max-w-2xl'>
+            className='max-w-screen-sm'>
             {description}
           </SuiText>
         </div>

@@ -1,24 +1,40 @@
 import Link from 'next/link'
+import { HTMLAttributes } from 'react'
+import { useAnalytics } from '../../Providers/Analytics'
 import { colorCalculator, sizeCalculator } from './calculator'
-export type LinkProps = {
+export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
   href: string
   onClick?: any
+  segmentEvent?: Record<string, string>
   color?: string | undefined
   size?: string
   weight?: string
+  target?: string
 }
 
 // @ts-ignore
-export const SuiLink = ({ ...LinkProps }) => {
+export const SuiLink = ({ ...LinkProps }: LinkProps) => {
+  const analytics = useAnalytics()
   const {
     children,
     href,
-    onClick,
+    onClick: onClickProp,
+    segmentEvent,
     color,
     size = 'sm',
     weight,
-    className
+    className,
+    ...props
   } = LinkProps
+
+  const onClick = () => {
+    if (segmentEvent) {
+      analytics.track('click', segmentEvent)
+    }
+    if (onClickProp) {
+      onClickProp()
+    }
+  }
 
   return (
     <Link
@@ -26,11 +42,12 @@ export const SuiLink = ({ ...LinkProps }) => {
       onClick={onClick}
       className={`
         ${sizeCalculator(size, weight)}
-        ${colorCalculator(color, 'text-inherit')}
-          hover:${colorCalculator(color, 'text-c6')}
+        ${colorCalculator(color ?? '', 'text-inherit')}
+          hover:${colorCalculator(color ?? '', 'text-c6')}
           cursor-pointer duration-200 hover:underline 
           ${className ?? ''}
-      `}>
+      `}
+      {...props}>
       {children}
     </Link>
   )

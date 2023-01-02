@@ -3,7 +3,7 @@ import React, { ChangeEvent, useMemo, useState } from 'react'
 import BlogPost from './BlogPost'
 import { BlogPostListProps, BlogPost as BlogPostType } from './types'
 
-import { SuiTextField, SuiTitle } from '../sui'
+import { SuiSearchField, SuiText, SuiTextField, SuiTitle } from '../sui'
 import CategorySelector from '../CategorySelector'
 function BlogPostList({ blogs, categories, children }: BlogPostListProps) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -45,16 +45,16 @@ function BlogPostList({ blogs, categories, children }: BlogPostListProps) {
   return (
     <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 justify-between pt-24'>
       <div className='flex md:w-64 md:pr-8 pb-8 md:pb-0 flex-col'>
-        <SuiTextField
+        <SuiSearchField
           placeholder='Search'
           htmlFor='search'
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setSearch(e.target.value)
           }
         />
-        <SuiTitle type='h6' className='mt-6'>
+        <SuiText size='xs' weight='bold' className='mt-4'>
           Blog categories
-        </SuiTitle>
+        </SuiText>
         <CategorySelector options={categoryList} />
       </div>
       <div className='w-full md:w-3/4'>
@@ -63,7 +63,7 @@ function BlogPostList({ blogs, categories, children }: BlogPostListProps) {
             <BlogPost key={blog.id} {...blog} />
           ))}
         </div>
-        {children}
+        <div className='mt-16 mb-32'>{children}</div>
       </div>
     </div>
   )

@@ -2,7 +2,7 @@
 import React, { useMemo, useState } from 'react'
 import useSWR from 'swr'
 import CategorySelector from '../CategorySelector'
-import { SuiTextField, SuiTitle, SuiText, SuiHorizontalDivide } from '../sui'
+import { SuiSearchField, SuiTitle, SuiText, SuiHorizontalDivide } from '../sui'
 type JobType = {
   url: string
   location: string
@@ -136,7 +136,7 @@ function CareersFilter() {
   return (
     <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 justify-between'>
       <div className='flex md:w-64 md:pr-8 pb-8 md:pb-0 flex-col'>
-        <SuiTextField
+        <SuiSearchField
           placeholder='Search'
           htmlFor='search'
           onChange={(e) => setSearch(e.target.value)}

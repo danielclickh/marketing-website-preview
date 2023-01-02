@@ -23,11 +23,11 @@ export function UseCase(props: TestimonialProps) {
       <div className='flex flex-col justify-start align-top items-between h-full'>
         <div className='flex-auto'>
           <StrapiPicture light={lightLogo} dark={darkLogo} className='pb-2' />
-          <SuiText size='sm' weight='medium'>
+          <SuiText size='sm' weight='medium' className='mb-6'>
             {description}
           </SuiText>
 
-          <ul className='pb-4'>
+          <ul className='mb-7 gap-y-2.5'>
             {bullets.map((bullet) => (
               <li className='flex space-x-2' key={bullet.text}>
                 <StarIcon className='w-5 text-c6' />
@@ -42,7 +42,7 @@ export function UseCase(props: TestimonialProps) {
         {btnText && (
           <SuiButton
             type='custom'
-            className='bg-c2/10 text-c5'
+            className='bg-c4/10 text-c5'
             path={path}
             target={target}>
             {btnText}
