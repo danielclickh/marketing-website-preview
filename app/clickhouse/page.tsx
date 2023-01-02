@@ -239,7 +239,7 @@ export default async function ClickHouseServerPage() {
               {features5.second_description}
             </SuiText>
 
-            <div className='flex flex-col md:flex-row pt-4 flex-wrap gap-y-4'>
+            <div className='flex flex-col md:flex-row pt-4 flex-wrap'>
               {features5.items.map((feature) => (
                 <BulletPoint
                   key={feature.text}

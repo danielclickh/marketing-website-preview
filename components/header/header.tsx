@@ -38,10 +38,7 @@ export async function Header() {
     })
 
   return (
-    <Popover
-      className={`bg-white dark:bg-gunmetal shadow-sm  dark:border-b dark:border-onyx bg-opacity-100 dark:opacity-100 h-full backdrop-blur-lg dark:backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300 ${
-        true ? 'shadow-sm bg-opacity-80 dark:bg-opacity-80' : ''
-      }`}>
+    <Popover className='bg-c1/80 shadow-sm  dark:border-b dark:border-onyx h-full backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300'>
       <div className='text-center bg-c6 text-raisin_black text-sm font-medium w-full'>
         <Link href='/company/events/clickhouse-workshop'>
           Free ClickHouse Workshop - Sign up now
@@ -67,7 +64,7 @@ export async function Header() {
                 <div className='hidden md:flex-1 min-[930px]:flex min-[930px]:items-center min-[930px]:justify-between'>
                   <PopoverGroup
                     as='nav'
-                    className='flex items-center space-x-4 lg:space-x-10'>
+                    className='flex items-center space-x-4 lg:space-x-6 xl:space-x-10'>
                     {menuItems.map((menuItem) => {
                       if (menuItem.menuItems.length > 0) {
                         return (
@@ -132,7 +129,7 @@ export async function Header() {
                       <ThemeSwitcher />
                     </div>
 
-                    <div className='flex items-center md:ml-12 space-x-2'>
+                    <div className='flex items-center md:ml-12 space-x-4'>
                       {ctaSecondaryButton && (
                         <SuiLink
                           href={ctaSecondaryButton.href}

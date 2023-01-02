@@ -33,7 +33,7 @@ export async function Footer() {
   return (
     <div className='flex bg-onyx py-8 px-4 md:px-0'>
       <div className='container mx-auto md:flex justify-between max-w-7xl px-8 2xl:px-0 '>
-        <div className='flex flex-col md:border-r border-arsenic'>
+        <div className='flex flex-col md:border-r border-c3'>
           <div className='sitemap lg:flex pt-4'>
             {topLevelFooterMenu.map((topMenu) => (
               <div
@@ -115,7 +115,7 @@ export async function Footer() {
                   href={socialLink.href}
                   target={socialLink.target}
                   key={socialLink.href}>
-                  <div className='bg-arsenic border border-onyx px-3 pt-3 pb-2 rounded hover:bg-arsenic/10'>
+                  <div className='bg-c3 border border-onyx px-3 pt-3 pb-2 rounded hover:bg-c3/10'>
                     <StrapiImage
                       {...socialLink.iconSvg}
                       width={21}

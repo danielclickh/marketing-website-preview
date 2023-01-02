@@ -16,7 +16,7 @@ async function getData() {
     ]
   }
   const response = await findOne('service-unavailable-country', params)
-  console.log(response)
+
   return {
     ...response.card,
     install_oss: response.install_oss

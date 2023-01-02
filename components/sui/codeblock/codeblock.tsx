@@ -13,7 +13,7 @@ export const SuiCodeblock: FunctionComponent<CodeblockProps> = ({
   return (
     <pre
       className={`break-all ${
-        bgColor ? bgColor : 'bg-arsenic'
+        bgColor ? bgColor : 'bg-c3'
       } text-white rounded-lg py-4 text-sm`}>
       {children}
     </pre>

@@ -15,7 +15,7 @@ function ThemeSwitcher() {
         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       />
       <MoonIcon
-        className={`w-4 h-4 text-arsenic hover:text-philippine_silver cursor-pointer ${
+        className={`w-4 h-4 text-c3 hover:text-philippine_silver cursor-pointer ${
           theme === 'dark' ? 'hidden' : ''
         }`}
         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}

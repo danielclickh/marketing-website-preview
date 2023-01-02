@@ -17,7 +17,7 @@ function BulletPoint({
   }
 
   return (
-    <div className={`flex space-x-4 pb-2 ${className}`}>
+    <div className={`flex space-x-4 pb-4 ${className}`}>
       <Image
         src='/images/homepage/icon_check.svg'
         alt='ClickHouse is fast'

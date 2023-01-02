@@ -38,7 +38,6 @@ async function FetchGetStarted({ customHeader }: Props) {
     populate: ['cloudButton', 'platforms', 'quickStartButton']
   })
 
-  console.log(JSON.stringify(platforms))
   const osTabs = platforms.map((platform) => ({
     name: platform.name,
     content: (
@@ -49,7 +48,7 @@ async function FetchGetStarted({ customHeader }: Props) {
   }))
 
   return (
-    <div className='flex bg-arsenic text-white'>
+    <div className='flex bg-c3 text-white'>
       <div className='container mx-auto justify-center py-12 px-8 2xl:px-0  flex flex-col w-full max-w-7xl'>
         <div className='flex flex-col text-center md:w-5/12 mx-auto '>
           {customHeader ? (
@@ -106,7 +105,7 @@ async function FetchGetStarted({ customHeader }: Props) {
             tabs={osTabs}
             color='offWhite'
             activeColor='white'
-            borderColor='border-arsenic'
+            borderColor='border-c3'
             hoverColor='white'
             hoverBorderColor='border-dark-grey5'
           />

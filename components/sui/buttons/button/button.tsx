@@ -63,7 +63,7 @@ const colorCalculator = ({
     case 'custom':
       return 'custom-btn'
     case 'dark':
-      return 'bg-arsenic text-white'
+      return 'bg-c3 text-white'
     case 'ghost':
       return 'bg-transparent text-inherit border border-c4'
     case 'success':

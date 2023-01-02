@@ -14,8 +14,9 @@ import Link from 'next/link'
 import BulletPoint from '../components/BulletPoint'
 import mainImage from '../public/images/sql_console_hero.png'
 import GetStarted from '../components/GetStarted'
+import { HomePageProps } from './types'
 
-async function getData() {
+async function getData(): Promise<HomePageProps> {
   const params = {
     populate: [
       'hero',
@@ -200,15 +201,18 @@ export default async function HomePage() {
             {customerStories.description}
           </SuiText>
 
-          <div className='container pt-12 flex flex-col sm:flex-row flex-wrap lg:grid lg:grid-cols-5 gap-4 md:gap-x-8 self-center items-center justify-center'>
+          <div className='container pt-6 flex flex-col sm:flex-row flex-wrap lg:grid lg:grid-cols-5 gap-4 md:gap-x-8 self-center items-center justify-center'>
             {customerStories.logos.map((logo) => (
-              <Link key={logo.href} href={logo.href} target={logo.target}>
-                <div className='flex w-full sm:w-52 lg:w-full h-24 bg-white rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer'>
-                  <StrapiPicture
-                    light={logo?.lightLogoPng}
-                    dark={logo?.darkLogoPng}
-                  />
-                </div>
+              <Link
+                key={logo.href}
+                href={logo.href}
+                target={logo.target}
+                className='flex w-full sm:w-52 lg:w-full bg-white rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer'>
+                <StrapiPicture
+                  light={logo?.lightLogoPng}
+                  dark={logo?.darkLogoPng}
+                  className='w-auto h-10'
+                />
               </Link>
             ))}
           </div>
@@ -230,11 +234,13 @@ export default async function HomePage() {
       </div>
 
       <div className='flex w-full bg-white dark:bg-gunmetal pb-20'>
-        <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0'>
-          <SuiTitle type='h4' color='c6' className='mb-2'>
+        <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 text-center px-8 2xl:px-0'>
+          <SuiTitle type='h4' color='c6' weight='bold' className='mb-3'>
             {clickhouseCloud.pretitle}
           </SuiTitle>
-          <SuiTitle type='h2'>{clickhouseCloud.title}</SuiTitle>
+          <SuiTitle type='h2' className='mb-4'>
+            {clickhouseCloud.title}
+          </SuiTitle>
 
           <SuiText
             size='base'
@@ -243,44 +249,45 @@ export default async function HomePage() {
             className='max-w-5xl flex self-center mt-2'>
             {clickhouseCloud.description}
           </SuiText>
-
-          {clickhouseCloudItems.map((clickhouseCloudItem, index: number) => (
-            <div
-              className={`flex flex-col pt-16 justify-between self-center max-w-screen-xl ${
-                index % 2 !== 0 ? ' md:flex-row-reverse' : ' md:flex-row'
-              }`}
-              key={clickhouseCloudItem.title}>
-              <div className='flex flex-col text-center md:text-left md:w-2/5 pb-4 md:pb-0'>
-                <SuiTitle type='h3' className='mb-4'>
-                  {clickhouseCloudItem.title}
-                </SuiTitle>
-                <SuiText
-                  size='base'
-                  weight='medium'
-                  color='secondary'
-                  className='mb-4'>
-                  {clickhouseCloudItem.description}
-                </SuiText>
-                <div className='pl-10 md:pl-0'>
-                  {clickhouseCloudItem.bullets.map((bullet) => (
-                    <BulletPoint key={bullet.text} text={bullet.text} />
-                  ))}
+          <div className='flex flex-col gap-y-28 mt-24'>
+            {clickhouseCloudItems.map((clickhouseCloudItem, index: number) => (
+              <div
+                className={`flex flex-col justify-between self-center max-w-screen-xl ${
+                  index % 2 !== 0 ? ' md:flex-row-reverse' : ' md:flex-row'
+                }`}
+                key={clickhouseCloudItem.title}>
+                <div className='flex flex-col text-center md:text-left md:w-2/5 pb-4 md:pb-0'>
+                  <SuiTitle type='h3' className='mb-4'>
+                    {clickhouseCloudItem.title}
+                  </SuiTitle>
+                  <SuiText
+                    size='base'
+                    weight='medium'
+                    color='secondary'
+                    className='mb-4'>
+                    {clickhouseCloudItem.description}
+                  </SuiText>
+                  <div className='pl-10 md:pl-0'>
+                    {clickhouseCloudItem.bullets.map((bullet) => (
+                      <BulletPoint key={bullet.text} text={bullet.text} />
+                    ))}
+                  </div>
                 </div>
+                {clickhouseCloudItem.screenshotPng && (
+                  <div className='flex md:w-1/2 justify-center pt-4 items-center'>
+                    <StrapiImage
+                      {...clickhouseCloudItem.screenshotPng}
+                      alt='ClickHouse Cloud is coming'
+                      sizes='large'
+                      className='h-fit w-full object-contain'
+                    />
+                  </div>
+                )}
               </div>
-              {clickhouseCloudItem.screenshotPng && (
-                <div className='flex md:w-1/2 justify-center pt-4 items-center'>
-                  <StrapiImage
-                    {...clickhouseCloudItem.screenshotPng}
-                    alt='ClickHouse Cloud is coming'
-                    sizes='large'
-                    className='h-fit w-full object-contain'
-                  />
-                </div>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
 
-          <div className='flex flex-col gap-4 md:flex-row md:gap-x-8 justify-center pt-16'>
+          <div className='flex flex-col gap-4 md:flex-row md:gap-x-16 justify-center mt-16'>
             {clickhouseCloud.primaryButton && (
               <div className='w-full md:w-48'>
                 <SuiButton
@@ -308,27 +315,31 @@ export default async function HomePage() {
       </div>
 
       <div className='flex w-full container-light-color'>
-        <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 2xl:px-0 items-center'>
-          <SuiTitle color='c6' type='h4' className='mb-2'>
+        <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat bg-opacity-10 py-16 text-center px-8 2xl:px-0 items-center'>
+          <SuiTitle color='c6' weight='bold' type='h4' className='mb-3'>
             {testimonials.pretitle}
           </SuiTitle>
-          <SuiTitle type='h2' className='mb-2'>
+          <SuiTitle type='h2' weight='bold' className='mb-4'>
             {testimonials.title}
           </SuiTitle>
           <SuiText
             size='base'
             weight='medium'
             color='secondary'
-            className='mb-4'>
+            className='mb-6'>
             {testimonials.description}
           </SuiText>
           {testimonials.testimonialsIconSvg && (
-            <div className='flex justify-center mb-4'>
-              <StrapiImage {...testimonials.testimonialsIconSvg} />
+            <div className='flex justify-center mb-10'>
+              <StrapiImage
+                {...testimonials.testimonialsIconSvg}
+                height={78}
+                className='w-auto'
+              />
             </div>
           )}
           {testimonials.testimonialItems.map((testimonial) => (
-            <div key={testimonial.id} className='mb-4'>
+            <div key={testimonial.id} className='mb-6'>
               <SuiLink
                 href={testimonial.href}
                 target={testimonial.target}
@@ -345,8 +356,8 @@ export default async function HomePage() {
           <StrapiImage
             {...testimonials.bottomIconSvg}
             className='text-c6'
-            width='24'
-            height='24'
+            width={24}
+            height={24}
           />
         </div>
       </div>

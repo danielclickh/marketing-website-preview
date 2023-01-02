@@ -46,13 +46,13 @@ export const colorCalculator = (color: string, defaultColor?: string) => {
     case 'c4-dark':
       return 'text-philippine_silver'
     case 'success':
-      return 'text-text-success'
+      return 'text-alerts-success-text'
     case 'warning':
-      return 'text-text-warning'
+      return 'text-alerts-warning-text'
     case 'danger':
-      return 'text-text-danger'
+      return 'text-alerts-danger-text'
     case 'info':
-      return 'text-text-info'
+      return 'text-alerts-info-text'
     default:
       return defaultColor ?? 'text-inherit'
   }
