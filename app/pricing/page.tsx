@@ -5,9 +5,10 @@ import PricingOptions from '../../components/PricingOptions'
 import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
 import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
 import { findAll, findOne } from '../../lib/api/strapi'
+import { PricingData, PricingPlanData, RegionPricing } from './types'
 
 async function PricingPage() {
-  const pricingPromise = findOne('pricing', {
+  const pricingPromise: Promise<PricingData> = findOne('pricing', {
     populate: [
       'hero',
       'pricingPhilosophy',
@@ -20,20 +21,24 @@ async function PricingPage() {
       'contactSection.excludeImageDark'
     ]
   })
-  const pricingByRegionPromise = findAll('pricing-per-regions', {
-    populate: [
-      'regionFlagPNG',
-      'storagePricing',
-      'computePricing',
-      'devStoragePricing',
-      'devComputePricing'
-    ],
-    fields: ['cloudProvider', 'region', 'hasDevService']
-  })
-  const plansProps = findAll('pricing-plans', {
-    populate: ['actionButton', 'items', 'items_disabled'],
-    fields: ['name', 'description', 'pricingMain']
-  })
+  const pricingByRegionPromise: Promise<{ data: Array<RegionPricing> }> =
+    findAll('pricing-per-regions', {
+      populate: [
+        'regionFlagPNG',
+        'storagePricing',
+        'computePricing',
+        'devStoragePricing',
+        'devComputePricing'
+      ],
+      fields: ['cloudProvider', 'region', 'hasDevService']
+    })
+  const plansProps: Promise<{ data: Array<PricingPlanData> }> = findAll(
+    'pricing-plans',
+    {
+      populate: ['actionButton', 'items', 'items_disabled'],
+      fields: ['name', 'description', 'pricingMain']
+    }
+  )
 
   const [
     { hero, pricingPhilosophy: philosophy, contactSection, meteredPricing },
@@ -76,6 +81,7 @@ async function PricingPage() {
                     <PricingOptions
                       regionList={regionList}
                       pricingPlans={pricingPlans}>
+                      {/* @ts-expect-error Server Component */}
                       <CloudProviders />
                     </PricingOptions>
                   )}

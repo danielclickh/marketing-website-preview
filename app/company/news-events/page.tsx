@@ -1,39 +1,15 @@
 import { SuiButton, SuiPanel, SuiText, SuiTitle } from '../../../components/sui'
 
-import { ArrowRightIcon, LocationMarkerIcon } from '@heroicons/react/solid'
-import Link from 'next/link'
+import { LocationMarkerIcon } from '@heroicons/react/solid'
 import { findAll, findOne } from '../../../lib/api/strapi'
 import { StrapiPicture } from '../../../components/StrapiElements'
 import RecentEvents from '../../../components/RecentEvents'
-
-const NewsItem = ({ source, date, title, abstract, ctaButton }) => {
-  return (
-    <div className='flex flex-col py-4 justify-between'>
-      <div>
-        <SuiText size='xs' weight='medium' color='secondary' className='mb-1'>
-          {source} • {date}
-        </SuiText>
-        <SuiTitle type='h3' className='mb-2'>
-          {title}
-        </SuiTitle>
-        <SuiText size='sm' weight='medium' color='secondary'>
-          {abstract}
-        </SuiText>
-      </div>
-      <Link href={ctaButton.href} target={ctaButton.target}>
-        <div className='flex items-center cursor-pointer'>
-          <SuiText size='sm' weight='medium' color='c6'>
-            {ctaButton.text}
-          </SuiText>
-          <ArrowRightIcon className='ml-2 w-4 text-primary' />
-        </div>
-      </Link>
-    </div>
-  )
-}
+import { EventType } from '../events/[slug]/types'
+import { NewsAndEventsData } from './types'
+import NewsItem from './NewsItem'
 
 export default async function News() {
-  const newsEvents = findOne('news-and-event', {
+  const newsEvents: Promise<NewsAndEventsData> = findOne('news-and-event', {
     populate: [
       'hero',
       'newsItems',
@@ -43,7 +19,7 @@ export default async function News() {
     ]
   })
 
-  const events = findAll('events', {
+  const events: Promise<{ data: EventType[] }> = findAll('events', {
     filters: {
       localDatetime: {
         $gte: new Date().toISOString()
@@ -75,7 +51,7 @@ export default async function News() {
     },
     { data: allEvents }
   ] = await Promise.all([newsEvents, events])
-  let featuredEvent: Event | undefined
+  let featuredEvent: EventType | undefined
   let featuredEventIndex = allEvents.findIndex((e) => e.featured)
   if (featuredEventIndex !== undefined) {
     featuredEvent = allEvents.splice(featuredEventIndex, 1)?.[0]
@@ -147,6 +123,7 @@ export default async function News() {
         </div>
       </div>
       <div className='flex w-full bg-white dark:bg-gunmetal pb-8'>
+        {/* @ts-expect-error Server Component */}
         <RecentEvents />
       </div>
 

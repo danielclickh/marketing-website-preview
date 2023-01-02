@@ -5,8 +5,9 @@ import CareersFilter from '../../../components/CareersFilter'
 import GetStarted from '../../../components/GetStarted'
 import { StrapiImage } from '../../../components/StrapiElements'
 import CompanyImages from './CompanyImages'
+import { CareersData } from './types'
 
-async function getData() {
+async function getData(): Promise<CareersData> {
   const data = await findOne('career', {
     populate: [
       'hero',
@@ -88,8 +89,8 @@ export default async function CareersPage() {
               <StrapiImage
                 {...companyValue.iconSvg}
                 alt='Empathy at work'
-                width='212'
-                height='212'
+                width={212}
+                height={212}
               />
             </div>
           </div>

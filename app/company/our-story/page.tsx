@@ -8,8 +8,9 @@ import { Person } from '../../../components/person_area'
 import { findOne } from '../../../lib/api/strapi'
 import { StrapiImage, StrapiPicture } from '../../../components/StrapiElements'
 import GetStarted from '../../../components/GetStarted'
+import { OurStoryData } from './types'
 
-async function getData() {
+async function getData(): Promise<OurStoryData> {
   const params = {
     populate: [
       'hero',
@@ -205,7 +206,7 @@ export default async function OurStoryPage() {
                 key={`investors-${index}`}
                 light={light}
                 dark={team.darkInvestorLogosPng[index]}
-                size='small'
+                sizes='small'
               />
             ))}
           </div>
