@@ -319,7 +319,7 @@ export default function Home() {
                   9:00 a.m. - Noon PST both days
                 </div>
               </div>
-              <Link href='https://clickhouse.com/company/events/clickhouse-onboarding-workshop'>
+              <Link href='https://clickhouse.com/company/events/2023-01-04-clickhouse-workshop'>
                 <div className='event-item--register-cta'>
                   Register now -&gt;
                 </div>
@@ -363,7 +363,7 @@ export default function Home() {
                   10:00 a.m. - 1:00 p.m. GMT (London) both days
                 </div>
               </div>
-              <Link href='https://clickhouse.com/company/events/clickhouse-onboarding-workshop'>
+              <Link href='https://clickhouse.com/company/events/2023-01-18-clickhouse-workshop'>
                 <div className='event-item--register-cta'>
                   Register now -&gt;
                 </div>
