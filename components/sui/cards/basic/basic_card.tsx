@@ -50,16 +50,23 @@ export function SuiCard(props: CardProps) {
       padding='lg'
       color={color}
       isRounded
-      className={`flex shadow-card hover:shadow-card-3xl duration-300 ${className}`}>
-      <div className='flex flex-col justify-between'>
+      className={`flex h-full shadow-card hover:shadow-card-3xl duration-300 ${className}`}>
+      <div className='flex flex-col justify-between h-full'>
         <div>
           {pretitle && (
-            <SuiText size='xs' weight='normal' color='secondary'>
+            <SuiText
+              size='xs'
+              weight='bold'
+              color='secondary'
+              className='mb-6 uppercase'>
               {pretitle}
             </SuiText>
           )}
           {icon && (
-            <div className='bg-c6 w-12 h-12 p-2 rounded-lg mb-4'>{icon}</div>
+            <div
+              className={`bg-c2 w-12 h-12 grid place-items-center rounded-lg mb-4 ${line}`}>
+              {icon}
+            </div>
           )}
           <SuiText size='lg' weight='bold' className={headerAlign}>
             {title}

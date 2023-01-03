@@ -9,10 +9,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { StrapiImage } from '../../components/StrapiElements'
-import { SuiButton, SuiCard, SuiText, SuiTitle } from '../../components/sui'
+import {
+  SuiButton,
+  SuiCard,
+  SuiLink,
+  SuiText,
+  SuiTitle
+} from '../../components/sui'
 import VimeoPlayer from '../../components/VimeoPlayer'
 import { findAll } from '../../lib/api/strapi'
 import { EventType } from '../company/events/[slug]/types'
+import styles from './Learn.module.scss'
 
 const popularCourses = [
   {
@@ -81,109 +88,134 @@ async function LearnPage() {
     ],
     pagination: { limit: 3 }
   })
-  const imagePrefix = ''
 
   return (
     <div>
-      <div className='hero-container bg-hero'>
-        <div className='hero-background' />
-        <div className='hero-content'>
-          <SuiTitle type='h1' size='6xl'>
-            ClickHouse <span className='gradient_title'>Academy</span>
-          </SuiTitle>
-          <div className='hero-subtitle'>
-            Become a ClickHouse expert with our free official ClickHouse
-            training
+      <div className='hero-container bg-white'>
+        <div className='hero-content relative text-center'>
+          <div className={styles.learnBg}>
+            <SuiTitle type='h1' color='white' className='pt-16 md:pt-30 pb-4'>
+              ClickHouse <span className='gradient_title'>Academy</span>
+            </SuiTitle>
+            <SuiText
+              size='base'
+              weight='normal'
+              color='white'
+              className='pb-16'>
+              Become a ClickHouse expert with our free official ClickHouse
+              training
+            </SuiText>
           </div>
-          <div className='video-placeholder'>
-            <VimeoPlayer url='https://player.vimeo.com/video/756877867?h=c58e171729&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479' />
+          <div className='relative px-6'>
+            <div className={styles.videoPlaceHolder}>
+              <div>
+                <VimeoPlayer url='https://player.vimeo.com/video/756877867?h=c58e171729&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479' />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <SuiButton
-        type='primary'
-        path='https://learn.clickhouse.com/visitor_class_catalog'>
-        Find a course
-      </SuiButton>
-      <div className='container'>
-        <SuiTitle type='h5'>POPULAR FREE COURSES</SuiTitle>
-        <div className='card-inner-container flex gap-4'>
+      <div className='my-10 mx-auto w-fit'>
+        <SuiButton
+          type='primary'
+          path='https://learn.clickhouse.com/visitor_class_catalog'>
+          Find a course
+        </SuiButton>
+      </div>
+      <div className='container max-w-screen-lg mx-auto px-16 pb-20 pt-10'>
+        <SuiTitle type='h6' className='mb-6'>
+          POPULAR FREE COURSES
+        </SuiTitle>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-10 mx-auto'>
           {popularCourses.map((course) => (
             <Link
               href={course.url}
               key={course.title}
-              className='w-full md:w-1/3'>
+              className='w-full h-full hover:no-underline'>
               <SuiCard
+                direction='left'
                 icon={course.icon}
                 title={course.title}
                 description={course.description}
                 color='empty'>
-                <div className='flex gap-2'>
+                <SuiText
+                  color='secondary'
+                  size='sm'
+                  weight='normal'
+                  className='flex gap-2 border-t mt-5 pt-4 border-c4/10'>
                   <ClockIcon width='20' height='20' />
                   {course.time}
-                </div>
+                </SuiText>
               </SuiCard>
             </Link>
           ))}
         </div>
-        <div className='cta-browse-more-courses'>
-          <Link href='https://learn.clickhouse.com/visitor_class_catalog'>
-            Browse more free training -&gt;
-          </Link>
-        </div>
+        <SuiLink
+          size='base'
+          weight='bold'
+          href='https://learn.clickhouse.com/visitor_class_catalog'
+          className='flex gap-2 mt-10 items-center mx-auto w-fit'>
+          Browse more free training
+          <ArrowRightIcon width={16} height={16} />
+        </SuiLink>
       </div>
-      <div className='section section-learning-paths'>
-        <div className='section-learning-paths--content'>
-          <div className='section-category' style={{ marginBottom: '16px' }}>
-            <div>STEP-BY-STEP</div>
-          </div>
-          <div className='section-title'>
-            <div>Learning paths</div>
-          </div>
-          <div className='section-description' style={{ marginTop: '40px' }}>
+      <div className='flex flex-col md:flex-row items-center py-32 px-16 lg:px-32 bg-c2 gap-x-16 lg:gap-x-20 gap-y-12'>
+        <div className='flex flex-col'>
+          <SuiTitle type='h6' weight='bold' color='secondary' className='mb-4'>
+            STEP-BY-STEP
+          </SuiTitle>
+          <SuiTitle type='h2'>Learning paths</SuiTitle>
+          <SuiText size='base' weight='normal' className='mt-10'>
             Become a subject matter expert through our recommended series of
             courses that will best help you build knowledge progressively.
-          </div>
+          </SuiText>
         </div>
-        <div className='section-learning-paths--cards flex gap-4'>
+        <div className='flex gap-4 flex-col sm:grid sm:grid-cols-2 max-w-screen-md w-auto'>
           {learningCourses.map((course) => (
             <Link
               href={course.url}
               key={course.title}
-              className='w-full md:w-1/3'>
+              className='w-full hover:no-underline'>
               <SuiCard
+                direction='left'
                 pretitle={course.pretitle}
                 title={course.title}
                 description={course.description}
-                color='empty'>
-                <div className='flex gap-2'>
+                color='bg-c1'>
+                <SuiText
+                  color='secondary'
+                  size='sm'
+                  weight='normal'
+                  className='flex gap-2 border-t mt-5 pt-4 border-c4/10'>
                   <ClockIcon width='20' height='20' />
                   {course.time}
-                </div>
+                </SuiText>
               </SuiCard>
             </Link>
           ))}
         </div>
       </div>
-      <div
-        className='container section-professional-cert text-center'
-        style={{ marginTop: '120px' }}>
-        <div>
-          <div className='badge'>COMING SOON</div>
-        </div>
-        <SuiTitle type='h2' className='my-10'>
+      <div className='container mx-auto px-3 text-center max-w-screen-md pt-30 pb-20'>
+        <SuiTitle
+          type='h6'
+          color='white'
+          className='mx-auto py-3 px-5 bg-alerts-danger-text w-fit rounded-full'>
+          COMING SOON
+        </SuiTitle>
+        <SuiTitle type='h2' className='mt-6 mb-10'>
           Professional certification
         </SuiTitle>
-        <SuiText size='base' weight='normal' color='secondary'>
+        <SuiText
+          size='base'
+          weight='normal'
+          color='secondary'
+          className='mb-14'>
           Let the world know you’re a ClickHouse subject matter expect! We’re
           working on building the first official ClickHouse certification
           program, and we will share the news on social media when the exams are
           ready for beta testers.
         </SuiText>
-        <SuiButton
-          type='secondary'
-          className='mt-10'
-          path='https://twitter.com/clickhousedb'>
+        <SuiButton type='secondary' path='https://twitter.com/clickhousedb'>
           Follow us on Twitter{' '}
           <Image
             alt='image'
@@ -193,13 +225,15 @@ async function LearnPage() {
           />
         </SuiButton>
       </div>
-      <div className='container mx-auto px-4' style={{ marginTop: '120px' }}>
-        <SuiTitle type='h2' className='mb-20'>
+      <div className='container mx-auto max-w-screen-lg px-4 pt-30'>
+        <SuiTitle type='h2' className='mb-20 text-center'>
           Upcoming live events
         </SuiTitle>
-        <div className='events-container flex gap-4'>
+        <div className='events-container grid grid-cols-1 md:grid-cols-3 gap-16 mx-auto'>
           {upcomingEvents.map((event: EventType) => (
-            <div className='event-item' key={event.title}>
+            <div
+              className='flex flex-col justify-between h-full'
+              key={event.title}>
               <div className='event-item--image'>
                 {event.thumbnailPng ? (
                   <StrapiImage
@@ -207,6 +241,7 @@ async function LearnPage() {
                     alt='image'
                     width={342}
                     height={196}
+                    className='w-full'
                   />
                 ) : (
                   <Image
@@ -214,38 +249,58 @@ async function LearnPage() {
                     src={`/images/clickhouse_workshop.png`}
                     width={342}
                     height={196}
+                    className='w-full'
                   />
                 )}
               </div>
-              <div className='event-item--title'>{event.title}</div>
-              <div className='event-item--description whitespace-pre-wrap'>
+              <SuiText size='lg' weight='bold' className='mt-8 mb-4'>
+                {event.title}
+              </SuiText>
+              <SuiText
+                size='base'
+                weight='normal'
+                className='whitespace-pre-wrap mb-6'>
                 {event.shortDescription}
-              </div>
-              <div className='event-item--details'>
-                <div className='event-item--date flex gap-2'>
-                  <CalendarIcon width='24' height='24' />
-                  {[event.location.city, event.location.country].join(', ')}
-                </div>
-                {event.localDatetime && (
-                  <div className='event-item--time flex gap-2'>
-                    <ClockIcon width='24' height='24' />
-                    {new Date(event.localDatetime).toDateString()}
+              </SuiText>
+              <div>
+                <SuiText
+                  size='sm'
+                  weight='normal'
+                  className='flex flex-col gap-2.5 mb-6'>
+                  <div className='flex gap-2'>
+                    <CalendarIcon width='20' height='20' />
+                    {[event.location.city, event.location.country].join(', ')}
                   </div>
-                )}
+                  {event.localDatetime && (
+                    <div className='flex gap-2'>
+                      <ClockIcon width='20' height='20' />
+                      {new Date(event.localDatetime).toDateString()}
+                    </div>
+                  )}
+                </SuiText>
+                <Link
+                  href={`/company/events/${event.slug}`}
+                  className='flex items-center w-fit gap-2 border-b-4 border-c6 py-1 hover:no-underline group'>
+                  Register now{' '}
+                  <ArrowRightIcon
+                    height='16'
+                    className='group-hover:translate-x-2'
+                  />
+                </Link>
               </div>
-              <Link
-                href={`/company/events/${event.slug}`}
-                className='flex items-center gap-2'>
-                Register now <ArrowRightIcon height='16' />
-              </Link>
             </div>
           ))}
         </div>
-        <Link href='/company/news-events'>
-          <div style={{ marginTop: '70px', marginBottom: '150px' }}>
-            <button className='button'>View all live events</button>
-          </div>
-        </Link>
+        <div className='mx-auto mb-16 mt-36 w-fit'>
+          <SuiButton
+            type='empty'
+            size='lg'
+            color='primary'
+            path='/company/news-events'>
+            View all live events
+            <ArrowRightIcon height='16' className='group-hover:translate-x-2' />
+          </SuiButton>
+        </div>
       </div>
     </div>
   )

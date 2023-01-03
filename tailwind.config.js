@@ -85,6 +85,9 @@ module.exports = {
         field_focus:
           'linear-gradient(to top, #FFB200, #FFB200 2px, transparent 2px, transparent 100%)',
         strain_background: "url('/images/homepage/image_strain.svg')"
+      },
+      spacing: {
+        '30': '7.5rem'
       }
     }
   }

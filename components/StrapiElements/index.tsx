@@ -48,7 +48,7 @@ function StrapiImageUrl({
     return null
   }
 
-  const src = sizes && formats ? formats[sizes].url : url
+  const src = sizes && formats && formats[sizes] ? formats[sizes].url : url
 
   return (
     <Image
@@ -66,6 +66,7 @@ export function StrapiImage({ mime, ...props }: StrapiImageProps) {
   if (!mime.includes('svg')) {
     return <StrapiImageUrl {...props} />
   }
+
   return (
     <>
       {/* @ts-expect-error Server Component */}
@@ -83,16 +84,20 @@ export function StrapiPicture({
 }: StrapiPicProps) {
   return (
     <>
-      <StrapiImage
-        className={`hidden dark:block ${className}`}
-        {...dark}
-        {...props}
-      />
-      <StrapiImage
-        className={`dark:hidden ${className}`}
-        {...light}
-        {...props}
-      />
+      {dark && (
+        <StrapiImage
+          className={`${light ? 'hidden dark:block' : ''} ${className}`}
+          {...dark}
+          {...props}
+        />
+      )}
+      {light && (
+        <StrapiImage
+          className={`${dark ? 'dark:hidden' : ''} ${className}`}
+          {...light}
+          {...props}
+        />
+      )}
     </>
   )
 }
