@@ -294,7 +294,7 @@ export default function Home() {
               <div className='event-item--description'>
                 A deep dive into ClickHouse for developers and architects new to
                 ClickHouse. This free, hands-on, live-training event covers
-                modeling data, ingestion, views, analyzing data, manaaging data,
+                modeling data, ingestion, views, analyzing data, managing data,
                 optimizing ClickHouse, and more.
               </div>
               <div className='event-item--details'>
@@ -338,7 +338,7 @@ export default function Home() {
               <div className='event-item--description'>
                 A deep dive into ClickHouse for developers and architects new to
                 ClickHouse. This free, hands-on, live-training event covers
-                modeling data, ingestion, views, analyzing data, manaaging data,
+                modeling data, ingestion, views, analyzing data, managing data,
                 optimizing ClickHouse, and more.
               </div>
               <div className='event-item--details'>
