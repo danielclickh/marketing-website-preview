@@ -47,7 +47,7 @@ export default async function CloudPage() {
           <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-20 md:px-8 2xl:px-0'>
             <div data-aos='fade-up' className='flex'>
               <div className='w-11/12 mx-auto md:w-6/12 md:mt-16 flex-col text-center md:text-left'>
-                <SuiTitle type='h1' size='6xl'>
+                <SuiTitle type='h1' className='text-6xl'>
                   <Markdown>{title}</Markdown>
                 </SuiTitle>
                 <SuiText

@@ -67,7 +67,7 @@ export default async function HomePage() {
             data-aos='fade-up'
             className='flex w-full lg:w-3/5 max-w-screen-sm mx-auto lg:mx-0'>
             <div className=' mx-auto md:mr-0 md:mt-8 flex-col text-center lg:text-left'>
-              <SuiTitle type='h1' size='6xl' color='primary'>
+              <SuiTitle type='h1' className='text-6xl' color='primary'>
                 {hero.title}
               </SuiTitle>
               <div className='flex flex-row'>

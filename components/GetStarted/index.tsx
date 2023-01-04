@@ -52,7 +52,7 @@ async function FetchGetStarted({ customHeader }: Props) {
       <div className='container mx-auto justify-center py-12 px-8 2xl:px-0  flex flex-col w-full max-w-7xl'>
         <div className='flex flex-col text-center md:w-5/12 mx-auto '>
           {customHeader ? (
-            <SuiTitle type='h2' size='4xl' color='white'>
+            <SuiTitle type='h2' className='text-4xl' color='white'>
               {customHeader}
             </SuiTitle>
           ) : (
@@ -60,7 +60,11 @@ async function FetchGetStarted({ customHeader }: Props) {
               <SuiTitle type='h4' color='c6' className='mb-4'>
                 {pretitle}
               </SuiTitle>
-              <SuiTitle type='h2' size='4xl' color='white' className='mb-4'>
+              <SuiTitle
+                type='h2'
+                size='4xl'
+                color='white'
+                className='text-4xl mb-4'>
                 {title}
               </SuiTitle>
               <SuiText size='base' weight='medium' color='c4-dark'>

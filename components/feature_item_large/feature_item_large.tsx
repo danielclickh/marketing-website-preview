@@ -18,7 +18,7 @@ export function FeatureItemLarge(props: FeatureItemProps) {
         <div className='flex w-12 mr-2'>
           <StrapiImage {...icon} className='feature-icon inherit' />
         </div>
-        <SuiTitle type='h3' size='2xl' weight='bold'>
+        <SuiTitle type='h3' className='text-2xl' weight='bold'>
           {title}
         </SuiTitle>
       </div>
