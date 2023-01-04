@@ -29,7 +29,7 @@ export const SuiTabs = ({ ...TabProps }: TabProps) => {
       <Tab.List
         className={`flex space-x-8 w-full pr-10 text-base ${
           borderColor ? borderColor : 'border-c2'
-        } dark:border-dark-grey4 focus:outline-none sm:text-sm rounded-t-md border-b`}>
+        } focus:outline-none sm:text-sm rounded-t-md border-b`}>
         <nav className='-mb-px flex space-x-8' aria-label='Tabs'>
           {tabs.map((tab: any) => (
             <Tab
@@ -38,16 +38,16 @@ export const SuiTabs = ({ ...TabProps }: TabProps) => {
                 selected
                   ? `border-c6 ${colorCalculator(
                       color ?? '',
-                      'text-text-darkest'
-                    )} focus:outline-none dark:text-white whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`
+                      'text-c5'
+                    )} focus:outline-none whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`
                   : `border-transparent ${colorCalculator(
                       activeColor ?? '',
-                      'text-text-darkest'
+                      'text-c5'
                     )} hover:${colorCalculator(
                       hoverColor ?? '',
-                      'text-text-darkest'
+                      'text-c5'
                     )} hover:${
-                      hoverBorderColor ? hoverBorderColor : 'border-light-grey5'
+                      hoverBorderColor ? hoverBorderColor : 'border-c4/20'
                     } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`
               }>
               {tab.name}

@@ -147,7 +147,7 @@ export const SuiTooltipContent = React.forwardRef<
       {state.open && (
         <div
           ref={ref}
-          className={`bg-onyx dark:bg-cultured text-white dark:text-gunmetal rounded-lg text-xs p-2 ${className}`}
+          className={`bg-c2-dark dark:bg-c2-light text-c1 rounded-lg text-xs p-2 ${className}`}
           style={{
             position: state.strategy,
             top: state.y ?? 0,

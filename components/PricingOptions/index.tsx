@@ -20,7 +20,7 @@ function PricingOptions({ regionList, pricingPlans, children }) {
           <div className='seed_select_wrapper w-80'>
             <Listbox value={selectedRegion} onChange={setSelectedRegion}>
               <div className='relative mt-1'>
-                <Listbox.Button className='relative bg-white dark:bg-gunmetal w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left shadow-md focus:outline-none sm:text-sm'>
+                <Listbox.Button className='relative bg-c1 w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left shadow-md focus:outline-none sm:text-sm'>
                   <span className='flex gap-3 truncate'>
                     <Image
                       src={selectedRegion.regionFlagPNG}
@@ -40,7 +40,7 @@ function PricingOptions({ regionList, pricingPlans, children }) {
                   leave='transition ease-in duration-100'
                   leaveFrom='opacity-100'
                   leaveTo='opacity-0'>
-                  <Listbox.Options className='absolute mt-1 w-full overflow-auto rounded-md bg-white dark:bg-gunmetal py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+                  <Listbox.Options className='absolute mt-1 w-full overflow-auto rounded-md bg-c1 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
                     {regionList.map((item) => (
                       <Listbox.Option
                         key={item.id}
@@ -69,7 +69,7 @@ function PricingOptions({ regionList, pricingPlans, children }) {
         <div className='plans_container grid grid-cols-1 lg:grid-cols-3 gap-8'>
           {pricingPlans.map((plan, index) => (
             <div
-              className='plan_card border-t-[5px] rounded-[5px] border-c6 w-full max-w-sm bg-white dark:bg-onyx p-10 mx-auto'
+              className='plan_card border-t-[5px] rounded-[5px] border-c6 w-full max-w-sm bg-c1-light dark:bg-c2-dark p-10 mx-auto'
               key={`${selectedRegion.region}-${plan.name}`}>
               <div className='card_content flex flex-col h-full justify-between'>
                 <div className='border-b mb-6'>
@@ -100,7 +100,7 @@ function PricingOptions({ regionList, pricingPlans, children }) {
                     {plan.items_disabled.map(
                       (itemDisabled, planIndex: number) => (
                         <div
-                          className='row_not_included flex items-center gap-4 text-sm justify-start text-gunmetal/30 dark:text-white/30'
+                          className='row_not_included flex items-center gap-4 text-sm justify-start text-c5/30'
                           key={`${selectedRegion.region}-disabled-bullet-${planIndex}`}>
                           <MinusIcon className='w-4 h-4' />
                           <div className='item_text'>

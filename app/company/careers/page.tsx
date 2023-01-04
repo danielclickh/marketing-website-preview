@@ -25,7 +25,7 @@ export default async function CareersPage() {
     hero
   return (
     <>
-      <div className='bg-white dark:bg-gunmetal bg-cover pt-10'>
+      <div className='bg-c1 bg-cover pt-10'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
           <div
             className='flex flex-col text-center mx-auto pt-6'
@@ -66,7 +66,7 @@ export default async function CareersPage() {
         </div>
       </div>
 
-      <div className='w-full container-light-color pt-12 pb-12'>
+      <div className='w-full bg-c2 text-c5 pt-12 pb-12'>
         {companyValues.map((companyValue, index: number) => (
           <div
             className={`flex flex-col md:${
@@ -97,7 +97,7 @@ export default async function CareersPage() {
         ))}
       </div>
 
-      <div className='w-full bg-white dark:bg-gunmetal pt-16 pb-16'>
+      <div className='w-full bg-c1 pt-16 pb-16'>
         <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 md:space-x-16 mb-12 items-center'>
           <div className='flex flex-col md:w-3/5'>
             <SuiTitle type='h3'>{positionsTitle}</SuiTitle>

@@ -41,14 +41,14 @@ async function FetchGetStarted({ customHeader }: Props) {
   const osTabs = platforms.map((platform) => ({
     name: platform.name,
     content: (
-      <SuiCodeblock bgColor='bg-dark-grey5'>
+      <SuiCodeblock bgColor='bg-transparent'>
         <Markdown>{platform.instructions}</Markdown>
       </SuiCodeblock>
     )
   }))
 
   return (
-    <div className='flex bg-c3 text-white'>
+    <div className='flex bg-c3 text-c1-light'>
       <div className='container mx-auto justify-center py-12 px-8 2xl:px-0  flex flex-col w-full max-w-7xl'>
         <div className='flex flex-col text-center md:w-5/12 mx-auto '>
           {customHeader ? (
@@ -82,7 +82,7 @@ async function FetchGetStarted({ customHeader }: Props) {
                 </SuiButton>
               )}
               <div className='mt-8 overflow-hidden inline-block'>
-                <div className='h-9 w-12 bg-dark-grey5 rotate-45 transform border border-dark-grey3 origin-bottom-left'></div>
+                <div className='h-9 w-12 bg-c2-dark rotate-45 transform border border-c5-light origin-bottom-left'></div>
               </div>
             </div>
             <div className='w-full md:w-60'>
@@ -100,14 +100,14 @@ async function FetchGetStarted({ customHeader }: Props) {
             </div>
           </div>
         </div>
-        <div className='bg-dark-grey5 w-11/12 md:w-full self-center border border-dark-grey3 rounded-lg p-2 px-6 overflow-hidden -mt-2 mb-1'>
+        <div className='bg-c2-dark w-11/12 md:w-full self-center border border-c5-light rounded-lg p-2 px-6 overflow-hidden -mt-2 mb-1'>
           <SuiTabs
             tabs={osTabs}
             color='offWhite'
             activeColor='white'
             borderColor='border-c3'
             hoverColor='white'
-            hoverBorderColor='border-dark-grey5'
+            hoverBorderColor='border-c2-dark'
           />
         </div>
         <SuiText

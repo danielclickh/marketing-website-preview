@@ -18,7 +18,7 @@ export default async function ContactPage() {
   const { title, description, contactForm } = await getData()
   return (
     <>
-      <div className='bg-white dark:bg-gunmetal bg-cover pt-10'>
+      <div className='bg-c1 bg-cover pt-10'>
         <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
           <div
             className='flex flex-col text-center mx-auto pt-6'

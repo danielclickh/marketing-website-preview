@@ -89,7 +89,7 @@ async function CustomerStoriesPage() {
                         <StarIcon className='w-4' />
                         <StarIcon className='w-4' />
                         <div
-                          className='mix-blend-color top-0 right-0 absolute overflow-hidden h-full bg-cultured dark:bg-c3'
+                          className='mix-blend-color top-0 right-0 absolute overflow-hidden h-full bg-c2-light dark:bg-c3'
                           style={{
                             width: `${(5 - testimonial.rating) * 20}%`
                           }}></div>
@@ -103,7 +103,7 @@ async function CustomerStoriesPage() {
         </div>
       </div>
 
-      <div className='container-light-color w-full pt-16 pb-24'>
+      <div className='bg-c2 text-c5 w-full pt-16 pb-24'>
         <div className='flex container mr-auto flex-col max-w-screen-md px-6 2xl:px-0'>
           <SuiTitle type='h2' className='mb-4'>
             {useCases.title}
@@ -114,11 +114,7 @@ async function CustomerStoriesPage() {
         </div>
         {spotlight && (
           <div className='flex max-w-7xl mx-auto mt-10 space-x-12 px-6 2xl:px-0 relative md:min-h-fit'>
-            <SuiPanel
-              isRounded
-              color='bg-white dark:bg-gunmetal'
-              shadow
-              padding='xl'>
+            <SuiPanel isRounded color='bg-c1' shadow padding='xl'>
               <div className='flex flex-row drop-shadow-2xl'>
                 <div className='flex flex-col w-full md:w-1/2'>
                   <SuiTitle type='h5' color='c6' className='mb-3 uppercase'>
@@ -145,7 +141,8 @@ async function CustomerStoriesPage() {
                 </div>
 
                 <div className='hidden md:block -mt-8 -mb-14 overflow-hidden ml-auto w-full max-w-xs'>
-                  <div className={`bg-white dark:bg-onyx ${styles.hexagon}`}>
+                  <div
+                    className={`bg-c1-light dark:bg-c2-dark ${styles.hexagon}`}>
                     <StrapiPicture
                       light={spotlight.lightLogoPng}
                       dark={spotlight.darkLogoPng}

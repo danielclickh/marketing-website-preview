@@ -60,7 +60,7 @@ async function PricingPage() {
   )
 
   return (
-    <div className='pricing container-light-color h-full md:pb-20'>
+    <div className='pricing bg-c2 text-c5 h-full md:pb-20'>
       <div className='container mx-auto px-3 py-20'>
         {hero && (
           <div className='hero'>
@@ -99,7 +99,7 @@ async function PricingPage() {
         )}
       </div>
       {philosophy && (
-        <div className='philosophy section-dark'>
+        <div className='philosophy bg-c3 text-c1-light'>
           <div className='container py-28 mx-auto'>
             <h2 className='title text-center font-bold mb-16 text-4xl'>
               {philosophy.title}
@@ -130,7 +130,7 @@ async function PricingPage() {
       )}
       {contactSection && (
         <div className='md:mt-20 mx-auto md:w-10/12'>
-          <div className='container mx-auto gap-x-4 flex md:rounded-lg py-11 px-6 md:pl-20 md:pr-0 md:py-16 bg-c6 w-full max-w-screen-lg text-gunmetal items-stretch relative'>
+          <div className='container mx-auto gap-x-4 flex md:rounded-lg py-11 px-6 md:pl-20 md:pr-0 md:py-16 bg-c6 w-full max-w-screen-lg text-c5-light items-stretch relative'>
             <div className='w-full'>
               <div>{contactSection.title}</div>
               <div className='my-8 text-base text-medium max-w-screen-sm'>
@@ -139,7 +139,7 @@ async function PricingPage() {
               <SuiButton
                 type='custom'
                 path={contactSection.contactButton.link}
-                className='bg-gunmetal text-white'>
+                className='bg-c5'>
                 {contactSection.contactButton.text}
               </SuiButton>
             </div>

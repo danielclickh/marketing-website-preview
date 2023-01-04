@@ -36,15 +36,15 @@ export const colorCalculator = (color: string, defaultColor?: string) => {
     case 'c7':
       return 'text-c7'
     case 'white':
-      return 'text-white'
-    case 'gunmetal':
-      return 'text-gunmetal'
+      return 'text-c1-light'
+    case 'c5-light':
+      return 'text-c5-light'
     case 'offWhite':
-      return 'text-cultured'
+      return 'text-c2-light'
     case 'c4-light':
-      return 'text-auro_metal_saurus'
+      return 'text-c4-light'
     case 'c4-dark':
-      return 'text-philippine_silver'
+      return 'text-c4-dark'
     case 'success':
       return 'text-alerts-success-text'
     case 'warning':

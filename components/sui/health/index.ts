@@ -1,1 +1,0 @@
-export { SuiHealth } from './health'

@@ -126,7 +126,7 @@ async function EventPage({ params: { slug } }: { params: { slug: string } }) {
             </div>
           )}
         </EventsContainer>
-        <div className='container-light-color'>
+        <div className='bg-c2 text-c5'>
           {/* @ts-expect-error Server Component */}
           <RecentEvents excludeEventSlug={slug} />
         </div>

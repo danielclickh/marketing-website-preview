@@ -12,46 +12,38 @@ module.exports = {
         sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        c1: 'rgba(var(--clickhouse-color-1), <alpha-value>)',
-        c2: 'rgba(var(--clickhouse-color-2), <alpha-value>)',
+        c1: {
+          light: '#FFFFFF',
+          DEFAULT: 'rgba(var(--clickhouse-color-1), <alpha-value>)',
+          dark: '#2F2C3A'
+        },
+        c2: {
+          light: '#F6F7FA',
+          DEFAULT: 'rgba(var(--clickhouse-color-2), <alpha-value>)',
+          dark: '#373343'
+        },
         c3: '#443F51',
-        c4: 'rgba(var(--clickhouse-color-4), <alpha-value>)',
-        c5: 'rgba(var(--clickhouse-color-5), <alpha-value>)',
-        c6: '#FFB200',
-        c7: 'rgba(var(--clickhouse-color-7), <alpha-value>)',
-        seal_brown: '#4B2A04',
-        cultured: '#F6F7FA',
-        gunmetal: '#2F2C3A',
-        onyx: '#373343',
+        c4: {
+          light: '#6D7386',
+          DEFAULT: 'rgba(var(--clickhouse-color-4), <alpha-value>)',
+          dark: '#B0B4BC'
+        },
+        c5: {
+          light: '#2F2C3A',
+          DEFAULT: 'rgba(var(--clickhouse-color-5), <alpha-value>)',
+          dark: '#FFFFFF'
+        },
+        c6: {
+          DEFAULT: '#FFB200',
+          text: '#4B2A04'
+        },
+        c7: {
+          light: '#A6770D',
+          DEFAULT: 'rgba(var(--clickhouse-color-7), <alpha-value>)',
+          dark: '#FFC133'
+        },
         gradientTop: '#FFC700',
         gradientBottom: '#FF7A00',
-        primary_muted: '#E5A100',
-        primary_gradient_end: '#EE9E02',
-        raisin_black: '#222222',
-        auro_metal_saurus: '#6D7386',
-        philippine_silver: '#B0B4BC',
-        gold: '#A6770D',
-        sunglow: '#A6770D',
-        light: {
-          grey2: '#F8F8F8',
-          grey4: '#E9E9E9',
-          grey5: '#E6E6E6',
-          grey1a: '#FCFCFC',
-        },
-        dark: {
-          grey1: '#1C1922',
-          grey2: '#1E1B24',
-          grey3: '#27242D',
-          grey4: '#2F2E36',
-          grey5: '#322F39'
-        },
-        text: {
-          darkest: '#27242D',
-          dark: '#808080',
-          light: '#E9E9E9',
-          success: '#407B24',
-          warning: '#C78F0F',
-        },
         alerts: {
           danger: {
             text: '#C70F0F',

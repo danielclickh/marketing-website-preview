@@ -61,7 +61,7 @@ export default async function News() {
 
   return (
     <>
-      <div className='bg-white dark:bg-gunmetal bg-cover pt-10'>
+      <div className='bg-c1 bg-cover pt-10'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
           <div
             className='flex flex-col text-center mx-auto pt-6'
@@ -79,7 +79,7 @@ export default async function News() {
           {featuredEvent && (
             <div className='flex max-w-5xl mx-auto'>
               <SuiPanel
-                color='container-light-color'
+                color='bg-c2 text-c5'
                 shadow
                 padding='lg'
                 className='my-8'>
@@ -122,12 +122,12 @@ export default async function News() {
           )}
         </div>
       </div>
-      <div className='flex w-full bg-white dark:bg-gunmetal pb-8'>
+      <div className='flex w-full bg-c1 pb-8'>
         {/* @ts-expect-error Server Component */}
         <RecentEvents />
       </div>
 
-      <div className='flex w-full container-light-color pb-8'>
+      <div className='flex w-full bg-c2 text-c5 pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex flex-col md:flex-row justify-between pb-4 space-x-24'>
             <div className='flex flex-col md:w-1/2'>
@@ -155,7 +155,7 @@ export default async function News() {
                   className='grid grid-cols-[4rem_1fr] gap-x-6 pt-4'
                   key={upcomingEvent.title}>
                   <div className='flex items-top justify-start'>
-                    <div className='w-16 h-16 bg-white rounded-lg flex items-center p-1'>
+                    <div className='w-16 h-16 bg-c1-light rounded-lg flex items-center p-1'>
                       <StrapiPicture
                         dark={upcomingEvent.darkFeatureImagePng}
                         light={upcomingEvent.lightFeatureImagePng}
@@ -194,7 +194,7 @@ export default async function News() {
         </div>
       </div>
 
-      <div className='flex w-full bg-white dark:bg-gunmetal pb-8'>
+      <div className='flex w-full bg-c1 pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <SuiTitle type='h2' className='mb-4'>
             {pressReleasesTitle}

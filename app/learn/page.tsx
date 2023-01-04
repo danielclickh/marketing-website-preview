@@ -91,7 +91,7 @@ async function LearnPage() {
 
   return (
     <div>
-      <div className='hero-container bg-white'>
+      <div className='hero-container bg-c1-light'>
         <div className='hero-content relative text-center'>
           <div className={styles.learnBg}>
             <SuiTitle type='h1' color='white' className='pt-16 md:pt-30 pb-4'>

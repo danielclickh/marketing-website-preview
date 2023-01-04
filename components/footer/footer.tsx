@@ -32,7 +32,7 @@ export async function Footer() {
     ]
   })
   return (
-    <div className='flex bg-onyx py-8 px-4 md:px-0'>
+    <div className='flex bg-c2-dark py-8 px-4 md:px-0'>
       <div className='container mx-auto md:flex justify-between max-w-7xl px-8 2xl:px-0 '>
         <div className='flex flex-col md:border-r border-c3'>
           <div className='sitemap lg:flex pt-4'>
@@ -67,7 +67,7 @@ export async function Footer() {
             {logoSvg && (
               <div className='flex md:w-64 mr-3 gap-x-3 items-center'>
                 <StrapiImage {...logoSvg} width={25} height={25} />
-                <span className={`text-2xl text-white ${hind.className}`}>
+                <span className={`text-2xl text-c1-light ${hind.className}`}>
                   ClickHouse
                 </span>
               </div>
@@ -80,7 +80,7 @@ export async function Footer() {
                 <SuiText color='white' size='xs' weight='medium'>
                   {copyright}
                 </SuiText>
-                <div className='bottom_links flex divide-x divide-white'>
+                <div className='bottom_links flex divide-x divide-c1-light'>
                   {bottomLinks.map((bottomLink) => (
                     <SuiLink
                       key={bottomLink.text}
@@ -103,7 +103,7 @@ export async function Footer() {
           </div>
         </div>
         <div className='hidden md:flex flex-col md:w-fit pl-12'>
-          <h4 className='text-xl font-bold text-white'>
+          <h4 className='text-xl font-bold text-c1-light'>
             {newsletterForm.title}
           </h4>
           <SuiText color='white' size='sm' weight='medium' className='mb-4'>
@@ -124,7 +124,7 @@ export async function Footer() {
                   href={socialLink.href}
                   target={socialLink.target}
                   key={socialLink.href}>
-                  <div className='bg-c3 border border-onyx px-3 pt-3 pb-2 rounded hover:bg-c3/10'>
+                  <div className='bg-c3 border border-c2-dark px-3 pt-3 pb-2 rounded hover:bg-c3/10'>
                     <StrapiImage
                       {...socialLink.iconSvg}
                       width={21}

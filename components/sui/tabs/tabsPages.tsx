@@ -39,8 +39,8 @@ export function SuiTabsPages(props: TabProps) {
                 href={tab.href}
                 className={classNames(
                   tab.id == props.activeTab
-                    ? 'border-c6 text-text-darkest dark:text-white'
-                    : 'border-transparent text-text-dark dark:text-text-light hover:text-text-darkest hover:border-light-grey5',
+                    ? 'border-c6 text-c5'
+                    : 'border-transparent text-c4 hover:text-c5 hover:border-c4',
                   'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm'
                 )}
                 aria-current={tab.current ? 'page' : undefined}>

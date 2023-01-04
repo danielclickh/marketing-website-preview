@@ -18,7 +18,7 @@ export default function BlogPost(props: BlogPostType) {
 
   return (
     <Link href={`/blog/${slug}`} className='hover:no-underline'>
-      <div className='flex w-full h-full bg-white dark:bg-gunmetal flex-col group md:max-w-sm hover:cursor-pointer shadow-md hover:shadow-xl ease-in-out duration-300 rounded-lg'>
+      <div className='flex w-full h-full bg-c1 flex-col group md:max-w-sm hover:cursor-pointer shadow-md hover:shadow-xl ease-in-out duration-300 rounded-lg'>
         <div className='h-full flex flex-col justify-between'>
           <div>
             {thumbnailPng && (

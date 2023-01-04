@@ -42,7 +42,7 @@ const colorCalculator = ({
       if (disabled) {
         return disabledStyle
       }
-      return 'bg-c6 text-seal_brown'
+      return 'bg-c6 text-c6-text'
     case 'secondary':
       if (disabled) {
         return 'bg-transparent text-inherit border border-c4'
@@ -52,7 +52,7 @@ const colorCalculator = ({
       if (disabled) {
         return disabledStyle
       }
-      return 'bg-alerts-danger-text text-white'
+      return 'bg-alerts-danger-text text-c1-light'
     case 'empty':
       return `bg-transparent ${
         textColor === 'warning'
@@ -60,11 +60,11 @@ const colorCalculator = ({
           : textColor === 'danger'
           ? 'text-alerts-danger-text'
           : 'text-inherit'
-      }text-text-darkest dark:text-white`
+      }`
     case 'custom':
       return 'custom-btn'
     case 'dark':
-      return 'bg-c3 text-white'
+      return 'bg-c3 text-c1-light'
     case 'ghost':
       return 'bg-transparent text-inherit border border-c4'
     case 'success':
@@ -79,7 +79,7 @@ const colorCalculator = ({
       if (disabled) {
         return disabledStyle
       }
-      return 'bg-c6 text-seal_brown'
+      return 'bg-c6 text-c6-text'
   }
 }
 

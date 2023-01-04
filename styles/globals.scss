@@ -8,7 +8,7 @@
 @tailwind components;
 @layer components {
   .bg-hero {
-    @apply bg-gradient-to-b from-cultured/0 to-cultured dark:from-c3/0 dark:to-c3;
+    @apply bg-gradient-to-b from-c2-light/0 to-c2-light dark:from-c3/0 dark:to-c3;
   }
 }
 @tailwind utilities;
@@ -31,14 +31,6 @@ body {
   @apply box-border;
 }
 
-.container-light-color {
-  @apply bg-c2 text-c5;
-}
-
-.section-dark {
-  @apply bg-c3 text-white;
-}
-
 .feature-container {
   @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-y-4 md:space-y-0 gap-y-10 gap-x-12;
 }
@@ -50,9 +42,9 @@ body {
 .feature-icon {
   @apply w-9 h-9 flex items-center;
   &:not(.inherit) {
-    @apply text-white;
+    @apply text-c1-light;
     * {
-      @apply text-white;
+      @apply text-c1-light;
     }
   }
 }
@@ -82,7 +74,7 @@ body {
   }
 
   .code-with-play {
-    @apply bg-raisin_black text-white flex relative whitespace-pre-wrap rounded-lg;
+    @apply bg-c2-dark text-c1-light flex relative whitespace-pre-wrap rounded-lg;
     padding: 24px;
 
     .code {
@@ -92,7 +84,7 @@ body {
     }
 
     .play-ui {
-      @apply text-white rounded-lg;
+      @apply text-c1-light rounded-lg;
       height: 32px;
       width: 32px;
       text-align: center;
@@ -138,7 +130,7 @@ body {
     code {
       @apply box-border mb-9 w-full;
       padding: 20px;
-      @apply bg-raisin_black text-white rounded-lg whitespace-pre-wrap block;
+      @apply bg-c2-dark text-c1-light rounded-lg whitespace-pre-wrap block;
 
       @apply border border-solid border-c3 break-words;
       font-family: monospace, sans-serif;
@@ -161,7 +153,7 @@ body {
   blockquote {
     @apply box-border pl-4;
     border-left: 4px solid #cbeabc;
-    @apply text-auro_metal_saurus font-semibold text-xl mb-9;
+    @apply text-c4-light font-semibold text-xl mb-9;
   }
 
   img {

@@ -121,7 +121,7 @@ export default async function CloudPage() {
           <div className='w-full mx-auto bg-strain_background bg-cover h-24 md:h-40 -mt-12 bg-no-repeat 2xl:h-52' />
         </div>
       </div>
-      <div className='section-dark'>
+      <div className='bg-c3 text-c1-light'>
         <div className='flex container mx-auto flex-col max-w-7xl  pb-16 px-4 sm:px-8 2xl:px-0 pt-16'>
           <div className='feature-container'>
             {features.map((feature) => (
@@ -137,7 +137,7 @@ export default async function CloudPage() {
         </div>
       </div>
 
-      <div className='flex w-full container-light-color pb-12 gap-y-4 md:gap-y-28'>
+      <div className='flex w-full bg-c2 text-c5 pb-12 gap-y-4 md:gap-y-28'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0 gap-y-24'>
           {screenshotsAndBullets.map((item, index: number) => (
             <div

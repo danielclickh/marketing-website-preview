@@ -89,7 +89,7 @@ export default async function HomePage() {
                   )}
 
                   {!hero.ctaButton && hero.advancedCallout && (
-                    <div className='flex rounded-lg p-8 bg-onyx mt-11 max-w-screen-sm flex-col gap-4 text-center shadow-md md:w-full md:px-8 md:box-border md:max-w-none'>
+                    <div className='flex rounded-lg p-8 bg-c2-dark mt-11 max-w-screen-sm flex-col gap-4 text-center shadow-md md:w-full md:px-8 md:box-border md:max-w-none'>
                       <div className='md:pr-8 border-0 md:border-r-1 border-solid border-c4'>
                         <SuiText size='base' weight='bold' className='mb-1'>
                           {hero.advancedCallout.title}
@@ -160,7 +160,7 @@ export default async function HomePage() {
           ))}
         </div>
       </div>
-      <div className='w-full flex flex-col section-dark'>
+      <div className='w-full flex flex-col bg-c3 text-c1-light'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat pb-8 px-8 2xl:px-0 pt-16'>
           <SuiTitle type='h3' className='mb-7' color='c6'>
             {aboutClickhouse.title}
@@ -192,7 +192,7 @@ export default async function HomePage() {
         </div>
       </div>
 
-      <div className='flex w-full container-light-color'>
+      <div className='flex w-full bg-c2 text-c5'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 xl:px-0'>
           <SuiTitle type='h2' className='mb-4'>
             {customerStories.title}
@@ -207,7 +207,7 @@ export default async function HomePage() {
                 key={logo.href}
                 href={logo.href}
                 target={logo.target}
-                className='flex w-full sm:w-52 lg:w-full bg-white rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer'>
+                className='flex w-full sm:w-52 lg:w-full bg-c1-light rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer'>
                 <StrapiPicture
                   light={logo?.lightLogoPng}
                   dark={logo?.darkLogoPng}
@@ -233,7 +233,7 @@ export default async function HomePage() {
         </div>
       </div>
 
-      <div className='flex w-full bg-white dark:bg-gunmetal pb-20'>
+      <div className='flex w-full bg-c1 pb-20'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 text-center px-8 2xl:px-0'>
           <SuiTitle type='h4' color='c6' weight='bold' className='mb-3'>
             {clickhouseCloud.pretitle}
@@ -314,7 +314,7 @@ export default async function HomePage() {
         </div>
       </div>
 
-      <div className='flex w-full container-light-color'>
+      <div className='flex w-full bg-c2 text-c5'>
         <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat bg-opacity-10 py-16 text-center px-8 2xl:px-0 items-center'>
           <SuiTitle color='c6' weight='bold' type='h4' className='mb-3'>
             {testimonials.pretitle}

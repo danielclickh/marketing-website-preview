@@ -1,1 +1,0 @@
-export { SuiCheckbox } from './checkbox';

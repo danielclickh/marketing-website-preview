@@ -10,13 +10,9 @@ type PanelProps = {
 
 export function SuiPanel(props: PanelProps) {
   const className = props.className
-  const bgColour = props.color
-    ? props.color
-    : 'bg-light-grey2 dark:bg-dark-grey4'
+  const bgColour = props.color ? props.color : 'bg-c1'
   const shadow = props.shadow ? 'shadow-card' : ''
-  const border = props.border
-    ? 'border border-light-grey4 dark:border-dark-grey4'
-    : ''
+  const border = props.border ? 'border border-c4/10' : ''
 
   const paddingCalculator = (padding: string | undefined) => {
     switch (padding) {
