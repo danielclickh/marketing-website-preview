@@ -8,7 +8,6 @@ import { HTMLAttributes } from 'react'
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   size?: 'lg' | 'base' | 'sm'
   type: 'primary' | 'secondary' | 'danger' | 'custom'
-  icon?: boolean
   iconRight?: boolean
   iconType?: string
   path?: any
@@ -19,6 +18,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   className?: string
   segment?: string
   color?: never
+  weight?: string
   segmentEvent?: Record<string, string>
 }
 
@@ -99,6 +99,7 @@ export function SuiButton({
   type,
   children,
   segmentEvent,
+  weight,
   ...props
 }: ButtonProps | EmptyButtonProps) {
   const ButtonContent = () => {
@@ -113,7 +114,9 @@ export function SuiButton({
           disabled={disabled ? true : false}
           className={`${hoverEffects}
           ${sizeCalculator(props.size)}
-          font-semibold text-center rounded-lg duration-300 whitespace-nowrap
+          ${
+            weight ? `font-${weight}` : 'font-semibold'
+          } text-center rounded-lg duration-300 whitespace-nowrap
            ${colorCalculator({
              color: type,
              disabled: disabled ?? false,
@@ -126,9 +129,8 @@ export function SuiButton({
             props.onClick && props.onClick()
           }}>
           <span className='flex justify-center items-center gap-2.5'>
-            {props.icon && <RefreshIcon className='w-4 mr-2' />}
             {children}
-            {props.iconRight && <ArrowRightIcon className='w-4 ml-2' />}
+            {props.iconRight && <ArrowRightIcon className='w-4' />}
           </span>
         </button>
       </>

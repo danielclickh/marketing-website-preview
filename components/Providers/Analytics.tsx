@@ -9,6 +9,11 @@ type Props = {
 }
 export const AnalyticsProvider = ({ children }: Props) => {
   const analytics = AnalyticsBrowser.load({ writeKey: environment.segmentKey })
+  // const analytics = {
+  //   page: () => {},
+  //   identify: () => {},
+  //   track: () => {}
+  // }
   return (
     <AnalyticsContext.Provider value={analytics}>
       {children}

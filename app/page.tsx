@@ -67,65 +67,63 @@ export default async function HomePage() {
             data-aos='fade-up'
             className='flex w-full lg:w-3/5 max-w-screen-sm mx-auto lg:mx-0'>
             <div className=' mx-auto md:mr-0 md:mt-8 flex-col text-center lg:text-left'>
-              <SuiTitle type='h1' className='text-6xl' color='primary'>
+              <SuiTitle type='h1' className='!text-6xl' color='primary'>
                 {hero.title}
               </SuiTitle>
-              <div className='flex flex-row'>
-                <div className='mt-6 max-w-3xl flex flex-col'>
-                  <SuiText
-                    size='base'
-                    color='secondary'
-                    weight='normal'
-                    className='text-left mb-10'>
-                    {hero.description}
-                  </SuiText>
-                  {hero.ctaButton && (
-                    <SuiButton
-                      type='primary'
-                      path={hero.ctaButton.href}
-                      segmentEvent={{
-                        label: hero.ctaButton.text,
-                        category: 'website-hero'
-                      }}
-                      className='mr-auto'>
-                      {hero.ctaButton.text}
-                    </SuiButton>
-                  )}
+              <div className='mt-6 max-w-[85%] flex flex-col'>
+                <SuiText
+                  size='base'
+                  color='secondary'
+                  weight='normal'
+                  className='text-left mb-10'>
+                  {hero.description}
+                </SuiText>
+                {hero.ctaButton && (
+                  <SuiButton
+                    type='primary'
+                    path={hero.ctaButton.href}
+                    segmentEvent={{
+                      label: hero.ctaButton.text,
+                      category: 'website-hero'
+                    }}
+                    className='mr-auto'>
+                    {hero.ctaButton.text}
+                  </SuiButton>
+                )}
 
-                  {!hero.ctaButton && hero.advancedCallout && (
-                    <div className='flex rounded-lg p-8 bg-c2-dark mt-11 max-w-screen-sm flex-col gap-4 text-center shadow-md md:w-full md:px-8 md:box-border md:max-w-none'>
-                      <div className='md:pr-8 border-0 md:border-r-1 border-solid border-c4'>
-                        <SuiText size='base' weight='bold' className='mb-1'>
-                          {hero.advancedCallout.title}
-                        </SuiText>
-                        <SuiText size='base' weight='normal' color='secondary'>
-                          {hero.advancedCallout.description}
-                        </SuiText>
-                      </div>
-                      <div className='flex grow items-center justify-center md:pl-8'>
-                        <SuiButton
-                          type='primary'
-                          path={hero.advancedCallout.href}
-                          size='sm'
-                          segmentEvent={{
-                            label: hero.advancedCallout.buttonText,
-                            category: 'website-hero'
-                          }}
-                          target={hero.advancedCallout.target}
-                          className='w-auto'>
-                          {hero.advancedCallout.buttonText}
-                        </SuiButton>
-                      </div>
+                {!hero.ctaButton && hero.advancedCallout && (
+                  <div className='flex rounded-lg p-8 bg-c2-dark mt-11 max-w-screen-sm flex-col gap-4 text-center shadow-md md:w-full md:px-8 md:box-border md:max-w-none'>
+                    <div className='md:pr-8 border-0 md:border-r-1 border-solid border-c4'>
+                      <SuiText size='base' weight='bold' className='mb-1'>
+                        {hero.advancedCallout.title}
+                      </SuiText>
+                      <SuiText size='base' weight='normal' color='secondary'>
+                        {hero.advancedCallout.description}
+                      </SuiText>
                     </div>
-                  )}
-                  <SuiText
-                    size='sm'
-                    weight='normal'
-                    color='secondary'
-                    className='mt-3'>
-                    {hero.ctaButtonSubtext}
-                  </SuiText>
-                </div>
+                    <div className='flex grow items-center justify-center md:pl-8'>
+                      <SuiButton
+                        type='primary'
+                        path={hero.advancedCallout.href}
+                        size='sm'
+                        segmentEvent={{
+                          label: hero.advancedCallout.buttonText,
+                          category: 'website-hero'
+                        }}
+                        target={hero.advancedCallout.target}
+                        className='w-auto'>
+                        {hero.advancedCallout.buttonText}
+                      </SuiButton>
+                    </div>
+                  </div>
+                )}
+                <SuiText
+                  size='sm'
+                  weight='normal'
+                  color='secondary'
+                  className='mt-3'>
+                  {hero.ctaButtonSubtext}
+                </SuiText>
               </div>
             </div>
           </div>
@@ -134,6 +132,7 @@ export default async function HomePage() {
               src={mainImage}
               alt='HomePage Image'
               className='heroScreenshot'
+              unoptimized
             />
           </div>
         </div>
@@ -145,10 +144,12 @@ export default async function HomePage() {
               padding='lg'
               color='empty'>
               <div className='flex flex-col text-center justify-between h-full'>
-                <h3 className='text-xl font-bold text-center px-6'>
-                  {highlight.title}
-                </h3>
-                <div className='bg-c6 h-1 w-16 rounded-md flex mx-auto my-4' />
+                <div>
+                  <h3 className='text-xl font-bold text-center px-6'>
+                    {highlight.title}
+                  </h3>
+                  <div className='bg-c6 h-1 w-20 rounded-md flex mx-auto my-4' />
+                </div>
                 <SuiText size='sm' weight='normal' className='mb-4'>
                   {highlight.description}
                 </SuiText>
@@ -159,6 +160,7 @@ export default async function HomePage() {
                     path={highlight.href}
                     type='empty'
                     color='primary'
+                    weight='medium'
                     target={highlight.target}>
                     {highlight.buttonText}
                   </SuiButton>
@@ -170,7 +172,7 @@ export default async function HomePage() {
       </div>
       <div className='w-full flex flex-col bg-c3 text-c1-light'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat pb-8 px-8 2xl:px-0 pt-16'>
-          <SuiTitle type='h3' className='mb-7' color='c6'>
+          <SuiTitle type='h3' className='mb-7 !text-lg' color='c6'>
             {aboutClickhouse.title}
           </SuiTitle>
           <div className='feature-container'>
@@ -189,6 +191,7 @@ export default async function HomePage() {
               <SuiButton
                 type='empty'
                 color='primary'
+                weight='normal'
                 iconRight
                 path={aboutClickhouse.allFeaturesButton.href}
                 target={aboutClickhouse.allFeaturesButton.target}
@@ -232,6 +235,7 @@ export default async function HomePage() {
                 path={customerStories.ctaButton.href}
                 target={customerStories.ctaButton.target}
                 type='empty'
+                weight='normal'
                 color='primary'
                 size='lg'>
                 {customerStories.ctaButton.text}
@@ -254,7 +258,7 @@ export default async function HomePage() {
             size='base'
             weight='medium'
             color='secondary'
-            className='max-w-5xl flex self-center mt-2'>
+            className='max-w-5xl flex self-center'>
             {clickhouseCloud.description}
           </SuiText>
           <div className='flex flex-col gap-y-28 mt-24'>
@@ -265,14 +269,14 @@ export default async function HomePage() {
                 }`}
                 key={clickhouseCloudItem.title}>
                 <div className='flex flex-col text-center md:text-left md:w-2/5 pb-4 md:pb-0'>
-                  <SuiTitle type='h3' className='mb-4'>
+                  <SuiTitle type='h3' className='!text-3xl mb-3'>
                     {clickhouseCloudItem.title}
                   </SuiTitle>
                   <SuiText
                     size='base'
                     weight='medium'
                     color='secondary'
-                    className='mb-4'>
+                    className='mb-8'>
                     {clickhouseCloudItem.description}
                   </SuiText>
                   <div className='pl-10 md:pl-0'>
@@ -287,7 +291,7 @@ export default async function HomePage() {
                       {...clickhouseCloudItem.screenshotPng}
                       alt='ClickHouse Cloud is coming'
                       sizes='large'
-                      className='h-fit w-full object-contain'
+                      className='h-fit w-full object-contain shadow-card'
                     />
                   </div>
                 )}

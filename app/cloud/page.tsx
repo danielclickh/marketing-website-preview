@@ -145,12 +145,12 @@ export default async function CloudPage() {
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0 gap-y-24'>
           {screenshotsAndBullets.map((item, index: number) => (
             <div
-              className={`flex flex-col ${
+              className={`flex flex-col gap-x-24 ${
                 index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-              } justify-between`}
+              } justify-center`}
               key={item.title}>
-              <div className='flex flex-col text-left md:w-2/5'>
-                <SuiTitle type='h2' className='mb-4'>
+              <div className='flex flex-col text-left md:w-1/2'>
+                <SuiTitle type='h3' className='mb-4 !text-3xl' weight='bold'>
                   {item.title}
                 </SuiTitle>
                 <SuiText
@@ -170,7 +170,7 @@ export default async function CloudPage() {
               <div className='flex md:w-1/2 justify-center items-center'>
                 <StrapiImage
                   {...item.screenshotPng}
-                  className='h-fit w-full object-contain'
+                  className='h-fit w-full object-contain rounded-lg shadow-card'
                 />
               </div>
             </div>

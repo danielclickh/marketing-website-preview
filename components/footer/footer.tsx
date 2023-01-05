@@ -43,7 +43,7 @@ export async function Footer() {
                 <SuiTitle type='h5' color='white' className='mb-4'>
                   {topMenu.title}
                 </SuiTitle>
-                <div className='flex flex-row flex-wrap lg:flex-col gap-x-4 lg:gap-x-0'>
+                <div className='flex flex-row flex-wrap lg:flex-col gap-y-2 gap-x-4 lg:gap-x-0'>
                   {topMenu.items.map((footerLink) => (
                     <SuiLink
                       key={footerLink.name}
@@ -103,9 +103,13 @@ export async function Footer() {
           </div>
         </div>
         <div className='hidden md:flex flex-col md:w-fit pl-12'>
-          <h4 className='text-xl font-bold text-c1-light'>
+          <SuiTitle
+            weight='bold'
+            type='h4'
+            color='white'
+            className='!text-xl mb-3'>
             {newsletterForm.title}
-          </h4>
+          </SuiTitle>
           <SuiText color='white' size='sm' weight='medium' className='mb-4'>
             {newsletterForm.description}
           </SuiText>
@@ -115,10 +119,10 @@ export async function Footer() {
           />
 
           <div className='flex flex-col pt-2'>
-            <SuiText color='white' size='sm' weight='medium'>
+            <SuiText color='white' size='sm' weight='medium' className='mb-4'>
               {socialLinks.title}
             </SuiText>
-            <div className='flex space-x-4 pt-2'>
+            <div className='flex space-x-4'>
               {socialLinks.socialLinkItems.map((socialLink) => (
                 <Link
                   href={socialLink.href}

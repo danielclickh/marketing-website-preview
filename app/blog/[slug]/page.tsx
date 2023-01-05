@@ -121,7 +121,7 @@ export default async function BlogPage({
             <div className='flex'>
               <Link href='/blog/'>
                 <div className='flex items-center cursor-pointer hover:underline'>
-                  <SuiText size='lg' weight='medium'>
+                  <SuiText size='lg' weight='semibold'>
                     All posts
                   </SuiText>
                   <ArrowRightIcon className='ml-2 w-4' />

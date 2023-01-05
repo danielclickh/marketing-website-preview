@@ -27,10 +27,8 @@ export default async function CareersPage() {
     <>
       <div className='bg-c1 bg-cover pt-10'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
-          <div
-            className='flex flex-col text-center mx-auto pt-6'
-            data-aos='fade-up'>
-            <SuiTitle type='h1' className='mb-2'>
+          <div className='flex flex-col text-center mx-auto' data-aos='fade-up'>
+            <SuiTitle type='h1' className='mb-4 text-6xl'>
               {title}
             </SuiTitle>
             <SuiText
@@ -42,17 +40,21 @@ export default async function CareersPage() {
             </SuiText>
           </div>
         </div>
-        <div className='bg-center bg-cover w-full max-w-full h-64 my-12'>
+        <div className='bg-center bg-cover w-full max-w-full h-72 my-16 overflow-y-hidden'>
           <CompanyImages>
             {companyImages.map((image) => (
-              <StrapiImage key={image.id} {...image} />
+              <StrapiImage
+                key={image.id}
+                {...image}
+                className='h-72 w-auto px-1'
+              />
             ))}
           </CompanyImages>
         </div>
         <div className='w-full pt-4 pb-12'>
           <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 md:space-x-16 mb-12'>
             <div className='flex flex-col md:w-4/5'>
-              <SuiTitle type='h3' className='mb-4'>
+              <SuiTitle type='h2' className='mb-6'>
                 {paragraphTitle}
               </SuiTitle>
               <SuiText
@@ -66,15 +68,15 @@ export default async function CareersPage() {
         </div>
       </div>
 
-      <div className='w-full bg-c2 text-c5 pt-12 pb-12'>
+      <div className='w-full bg-c2 text-c5 pt-12'>
         {companyValues.map((companyValue, index: number) => (
           <div
             className={`flex flex-col md:${
               index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-            } container mx-auto max-w-7xl px-6 md:space-x-16 mb-12 items-center`}
+            } container mx-auto max-w-7xl px-6 md:space-x-16 mb-28 items-center`}
             key={companyValue.title}>
             <div className='flex flex-col md:w-3/5'>
-              <SuiTitle type='h3' className='mb-4'>
+              <SuiTitle type='h3' className='mb-6 !text-3xl' weight='bold'>
                 {companyValue.title}
               </SuiTitle>
               <SuiText
@@ -100,7 +102,7 @@ export default async function CareersPage() {
       <div className='w-full bg-c1 pt-16 pb-16'>
         <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 md:space-x-16 mb-12 items-center'>
           <div className='flex flex-col md:w-3/5'>
-            <SuiTitle type='h3'>{positionsTitle}</SuiTitle>
+            <SuiTitle type='h2'>{positionsTitle}</SuiTitle>
           </div>
         </div>
 

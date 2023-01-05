@@ -3,7 +3,7 @@ import { colorCalculator, sizeCalculator } from './calculator'
 
 export interface TextProps extends HTMLAttributes<HTMLDivElement> {
   size: 'lg' | 'base' | 'sm' | 'xs'
-  weight: 'normal' | 'medium' | 'bold'
+  weight: 'normal' | 'medium' | 'bold' | 'semibold'
   color?: string
 }
 

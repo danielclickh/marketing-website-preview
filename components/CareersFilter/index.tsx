@@ -1,14 +1,15 @@
 'use client'
-import React, { useMemo, useState } from 'react'
+import React, { ChangeEvent, useMemo, useState } from 'react'
 import useSWR from 'swr'
 import CategorySelector from '../CategorySelector'
-import { SuiSearchField, SuiTitle, SuiText, SuiHorizontalDivide } from '../sui'
-type JobType = {
-  url: string
-  location: string
-  title: string
-  offices: number[]
-}
+import {
+  SuiSearchField,
+  SuiTitle,
+  SuiText,
+  SuiHorizontalDivide,
+  SuiLink
+} from '../sui'
+import { JobType, PositionType } from './types'
 
 type DepartmentType = [name: string, jobs: JobType[]]
 const convertMapToArray = (obj: any) => {
@@ -17,13 +18,13 @@ const convertMapToArray = (obj: any) => {
 
 const fetcher = async (url: string) => {
   const response = await fetch(url)
-  let positions = (await response.json()).jobs
+  let positions: PositionType[] = (await response.json()).jobs
   const departments = new Map<string, JobType[]>()
   const offices = new Map<string, string>()
   positions.forEach((position) => {
     const locationList: string[] = []
     const officesByPositions = position.offices.map((office) => {
-      offices.set(office.id, office.name)
+      offices.set(office.id.toString(), office.name)
       locationList.push(office.name)
       return office.id
     })
@@ -139,7 +140,9 @@ function CareersFilter() {
         <SuiSearchField
           placeholder='Search'
           htmlFor='search'
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setSearch(e.target.value)
+          }
         />
         <SuiTitle type='h6' className='mt-6'>
           Office
@@ -151,26 +154,32 @@ function CareersFilter() {
         <CategorySelector options={departments} />
       </div>
       <div className='flex flex-col md:flex-row md:w-3/4 md:space-x-16 justify-center'>
-        <div className='flex flex-col space-y-6 w-full'>
+        <div className='flex flex-col space-y-16 w-full'>
           {filteredDepartments.map(([name, jobs]: [string, JobType[]]) => (
-            <React.Fragment key={name}>
-              <SuiTitle type='h3'>{name}</SuiTitle>
-              {jobs.length === 0 && <div>No results</div>}
+            <div className='space-y-6' key={name}>
+              <SuiTitle type='h3' className='pl-4' weight='bold'>
+                {name}
+              </SuiTitle>
+              {jobs.length === 0 && (
+                <SuiText size='base' weight='medium' className='pl-4'>
+                  No results
+                </SuiText>
+              )}
               {jobs.map((job: JobType) => (
-                <a
+                <SuiLink
                   href={job.url}
-                  className='rounded-md pl-4 flex flex-col w-full cursor-pointer hover:bg-c2 transition-all duration-300 ease-in-out transform'
+                  className='rounded-md px-4 pt-4 flex flex-col w-full cursor-pointer hover:bg-c2 hover:no-underline transition-all duration-300 ease-in-out transform'
                   key={job.url}>
-                  <SuiText size='base' weight='medium'>
+                  <SuiText size='base' weight='medium' className='mb-2'>
                     {job.title}
                   </SuiText>
                   <SuiText size='base' weight='medium' color='secondary'>
                     {job.location}
                   </SuiText>
                   <SuiHorizontalDivide />
-                </a>
+                </SuiLink>
               ))}
-            </React.Fragment>
+            </div>
           ))}
         </div>
       </div>

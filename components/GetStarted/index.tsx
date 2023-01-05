@@ -57,14 +57,14 @@ async function FetchGetStarted({ customHeader }: Props) {
             </SuiTitle>
           ) : (
             <>
-              <SuiTitle type='h4' color='c6' className='mb-4'>
+              <SuiTitle type='h4' color='c6' className='mb-3'>
                 {pretitle}
               </SuiTitle>
               <SuiTitle
                 type='h2'
-                size='4xl'
                 color='white'
-                className='text-4xl mb-4'>
+                className='!text-4xl mb-4'
+                weight='bold'>
                 {title}
               </SuiTitle>
               <SuiText size='base' weight='medium' color='c4-dark'>
@@ -85,7 +85,7 @@ async function FetchGetStarted({ customHeader }: Props) {
                   {quickStartButton.text}
                 </SuiButton>
               )}
-              <div className='mt-8 overflow-hidden inline-block'>
+              <div className='mt-3 overflow-hidden inline-block'>
                 <div className='h-9 w-12 bg-c2-dark rotate-45 transform border border-c5-light origin-bottom-left'></div>
               </div>
             </div>

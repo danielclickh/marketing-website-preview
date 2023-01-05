@@ -38,7 +38,7 @@ async function RecentEvents({
 
   return (
     <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
-      <SuiTitle type='h2' className='pb-4 text-left'>
+      <SuiTitle type='h2' className='pb-8 text-left !text-3xl'>
         Recent events
       </SuiTitle>
       <div className='flex flex-col md:flex-row md:space-x-16 space-y-6 md:space-y-0'>

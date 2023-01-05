@@ -4,6 +4,9 @@ import Markdown from '../Markdown'
 import { StrapiImage } from '../StrapiElements'
 import { SuiText, SuiTitle } from '../sui'
 
+const components = {
+  a: (props: any) => <span {...props} />
+}
 export default function BlogPost(props: BlogPostType) {
   const {
     thumbnailPng,
@@ -38,7 +41,10 @@ export default function BlogPost(props: BlogPostType) {
               <SuiText size='xs' weight='bold' color='c6' className='mb-2'>
                 {category}
               </SuiText>
-              <SuiText size='lg' weight='bold' className='cursor-pointer pb-2'>
+              <SuiText
+                size='lg'
+                weight='bold'
+                className='cursor-pointer pb-2 !text-xl'>
                 {title}
               </SuiText>
               {shortDescription && (
@@ -47,7 +53,9 @@ export default function BlogPost(props: BlogPostType) {
                   weight='medium'
                   color='secondary'
                   className='line-clamp'>
-                  <Markdown>{shortDescription}</Markdown>
+                  <Markdown components={components}>
+                    {shortDescription}
+                  </Markdown>
                 </SuiText>
               )}
             </div>

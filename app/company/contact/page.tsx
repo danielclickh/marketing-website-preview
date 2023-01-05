@@ -23,24 +23,24 @@ export default async function ContactPage() {
           <div
             className='flex flex-col text-center mx-auto pt-6'
             data-aos='fade-up'>
-            <SuiTitle type='h1' className='mb-2'>
+            <SuiTitle type='h1' className='mb-4'>
               {title}
             </SuiTitle>
-            <div className='max-w-2xl'>
-              <SuiText size='lg' weight='medium' color='secondary'>
-                {description}
-              </SuiText>
-            </div>
+            <SuiText
+              size='lg'
+              weight='medium'
+              color='secondary'
+              className='max-w-2xl'>
+              {description}
+            </SuiText>
           </div>
-          <div>
-            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-10 pb-8 text-center px-8 2xl:px-0'>
-              <div className='w-full md:max-w-screen-sm self-center text-left space-y-5'>
-                <ContactForm {...contactForm} />
-                <div className='flex text-center'>
-                  <SuiText size='xs' weight='medium' color='secondary'>
-                    <Markdown>{contactForm.disclaimer}</Markdown>
-                  </SuiText>
-                </div>
+          <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-14 pb-8 text-center px-8 2xl:px-0'>
+            <div className='w-full md:max-w-screen-sm self-center text-left space-y-5'>
+              <ContactForm {...contactForm} />
+              <div className='flex text-center'>
+                <SuiText size='xs' weight='medium' color='secondary'>
+                  <Markdown>{contactForm.disclaimer}</Markdown>
+                </SuiText>
               </div>
             </div>
           </div>

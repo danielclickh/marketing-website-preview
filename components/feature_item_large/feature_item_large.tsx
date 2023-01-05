@@ -13,12 +13,12 @@ export function FeatureItemLarge(props: FeatureItemProps) {
   const { icon, title, description, entry } = props
 
   return (
-    <div className='flex flex-col space-y-2 w-full text-left' data-aos={entry}>
+    <div className='flex flex-col w-full text-left' data-aos={entry}>
       <div className='flex flex-row items-center mb-4'>
         <div className='flex w-12 mr-2'>
           <StrapiImage {...icon} className='feature-icon inherit' />
         </div>
-        <SuiTitle type='h3' className='text-2xl' weight='bold'>
+        <SuiTitle type='h3' className='!text-3xl' weight='bold'>
           {title}
         </SuiTitle>
       </div>

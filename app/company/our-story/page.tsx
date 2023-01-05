@@ -100,7 +100,7 @@ export default async function OurStoryPage() {
             } container mx-auto max-w-7xl px-6 gap-16 mb-12 items-start`}>
             <div className='flex flex-col w-full lg:w-3/5'>
               {item.title && (
-                <SuiTitle type='h2' className='mb-4'>
+                <SuiTitle type='h3' weight='bold' className='mb-4 !text-3xl'>
                   {item.title}
                 </SuiTitle>
               )}
@@ -133,14 +133,16 @@ export default async function OurStoryPage() {
             {ourHistory.title}
           </SuiTitle>
 
-          <div className='flex flex-col space-y-16'>
+          <div className='flex flex-col space-y-8'>
             {ourHistory.items.map((item) => (
               <div
                 className='flex flex-col md:flex-row items-center'
                 key={item.text}>
                 <div className='flex md:w-2/12 lg:w-1/12'>
-                  <div className='h-16 w-16 bg-c2 text-c5 rounded-full text-center items-center justify-center flex'>
-                    <SuiTitle type='h5'>{item.year}</SuiTitle>
+                  <div className='h-20 w-20 bg-c2 text-c5 rounded-full text-center items-center justify-center flex'>
+                    <SuiTitle type='h5' className='!text-base' weight='bold'>
+                      {item.year}
+                    </SuiTitle>
                   </div>
                 </div>
                 <div className='flex md:w-8/12 text-center md:text-left'>
@@ -157,7 +159,7 @@ export default async function OurStoryPage() {
       <div className='bg-c2 text-c5 w-full'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
           <div className='flex flex-col text-center mx-auto pt-16'>
-            <SuiTitle type='h2' className='mb-2'>
+            <SuiTitle type='h2' className='mb-6'>
               {hiring.title}
             </SuiTitle>
             <div className='max-w-3xl'>
@@ -180,17 +182,21 @@ export default async function OurStoryPage() {
       </div>
       <div className='bg-c1 w-full pt-16 pb-24'>
         <div className='flex container mx-auto flex-col max-w-7xl px-6'>
-          <SuiTitle type='h2' className='mb-8'>
+          <SuiTitle
+            type='h3'
+            weight='bold'
+            className='mb-14 !text-3xl text-center sm:text-left'>
             {team.foundersTitle}
           </SuiTitle>
 
-          <div className='flex flex-col md:flex-row space-y-8 md:space-y-0 justify-evenly'>
+          <div className='flex flex-col gap-2 items-center sm:flex-row sm:items-start space-y-8 sm:space-y-0 justify-evenly'>
             {team.founders.map((founder) => (
               <Person
                 key={founder.name + founder.role}
                 avatar={founder.profileImagePng}
                 name={founder.name}
                 job={founder.role}
+                className='!max-w-[232px] mx-auto'
               />
             ))}
           </div>
@@ -198,13 +204,14 @@ export default async function OurStoryPage() {
             <SuiHorizontalDivide />
           </div>
 
-          <SuiTitle type='h3' className='mb-8'>
+          <SuiTitle type='h3' weight='bold' className='mb-14 !text-3xl'>
             {team.investorsTitle}
           </SuiTitle>
 
-          <div className='flex justify-evenly investor'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 flex-wrap justify-evenly gap-2 investor'>
             {team.investors.map((investor) => (
               <Person
+                small
                 key={investor.name + investor.role}
                 avatar={investor.profileImagePng}
                 name={investor.name}
@@ -213,13 +220,14 @@ export default async function OurStoryPage() {
             ))}
           </div>
 
-          <div className='flex flex-wrap justify-evenly pt-12'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-20 gap-y-16 justify-evenly pt-12'>
             {team.lightInvestorLogosPng.map((light, index) => (
               <StrapiPicture
                 key={`investors-${index}`}
                 light={light}
                 dark={team.darkInvestorLogosPng[index]}
                 sizes='small'
+                className='h-10 w-auto mx-auto object-contain max-w-[240px]'
               />
             ))}
           </div>

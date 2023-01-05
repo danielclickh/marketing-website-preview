@@ -7,25 +7,25 @@ type PersonProps = {
   name: string
   job?: string
   small?: boolean
+  className?: string
 }
 
 export function Person(props: PersonProps) {
-  const { avatar, name, job, small } = props
+  const { avatar, name, job, small, className = '' } = props
 
   return (
-    <div className='flex w-full flex-col text-center md:max-w-xs px-4'>
+    <div
+      className={`flex w-full flex-col items-center text-center md:max-w-xs ${className}`}>
       {avatar && (
-        <div>
-          <StrapiImage
-            alt={name}
-            {...avatar}
-            width={small ? 130 : 160}
-            height={small ? 130 : 160}
-            className='aspect-square'
-          />
-        </div>
+        <StrapiImage
+          alt={name}
+          {...avatar}
+          width={small ? 130 : 160}
+          height={small ? 130 : 160}
+          className='aspect-square mb-6 rounded-full'
+        />
       )}
-      <SuiText size='lg' weight='bold' className='mb-3'>
+      <SuiText size='lg' weight='bold' className='mb-3 !text-xl'>
         {name}
       </SuiText>
       {job && (

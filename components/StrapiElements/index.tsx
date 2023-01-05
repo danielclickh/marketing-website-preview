@@ -10,27 +10,33 @@ async function StrapiSvg({
   width,
   height
 }: StrapiImageProps) {
-  const response = await fetch(`${environment.strapiBaseUrl}${url}`)
-  const svgText = await response.text()
+  try {
+    const response = await fetch(`${environment.strapiBaseUrl}${url}`)
+    const svgText = await response.text()
 
-  return (
-    <Markdown
-      encloseByDiv={false}
-      components={{
-        svg: ({ node, ...params }) => {
-          return (
-            <svg
-              {...params}
-              className={`fill-current ${className}`}
-              width={width ?? undefined}
-              height={height ?? undefined}
-            />
-          )
-        }
-      }}>
-      {svgText}
-    </Markdown>
-  )
+    return (
+      <Markdown
+        encloseByDiv={false}
+        components={{
+          svg: ({ node, ...params }) => {
+            return (
+              <svg
+                {...params}
+                className={`fill-current ${className}`}
+                width={width ?? undefined}
+                height={height ?? undefined}
+              />
+            )
+          }
+        }}>
+        {svgText}
+      </Markdown>
+    )
+  } catch (e) {
+    console.log('Error fetching svg', `${environment.strapiBaseUrl}${url}`)
+    console.warn(e)
+    return null
+  }
 }
 
 function StrapiImageUrl({

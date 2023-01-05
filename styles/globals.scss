@@ -217,19 +217,19 @@ body {
   @apply pt-4 pl-4 h-auto relative w-full lg:w-2/5 object-cover md:object-contain;
 
   &::before {
-    @apply w-auto max-w-full absolute top-0 inset-x-0 m-auto ml-0 rounded-lg;
+    @apply w-auto max-w-full absolute top-0 inset-x-0 m-auto ml-0 rounded-3xl;
     height: 90%;
     @apply content-[''];
     background: linear-gradient(90deg, #ff9900 0.7%, #ffbe5b 99.07%);
     transform: rotate(-1.92deg);
-    aspect-ratio: 2/1;
+    aspect-ratio: 1.95/1;
   }
 }
 
 .heroScreenshot {
-  @apply top-2 relative m-0 h-full rounded-lg;
+  @apply top-2 relative m-0 h-full rounded-md object-cover object-left-top;
   box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.05);
-  aspect-ratio: 2/1;
+  aspect-ratio: 1.95/1;
 
   @screen lg {
     @apply w-auto left-1 top-1 overflow-x-hidden;

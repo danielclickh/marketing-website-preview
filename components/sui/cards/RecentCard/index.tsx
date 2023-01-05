@@ -35,7 +35,7 @@ function SuiRecentCard({
           {...thumbnailPng}
           sizes='thumbnail'
           alt={title}
-          className='rounded-lg h-52 object-cover object-center mb-5 shadow-md'
+          className='rounded-lg h-52 object-cover object-center mb-3 shadow-md'
         />
       ) : (
         <Image
@@ -43,7 +43,7 @@ function SuiRecentCard({
           alt='Release webinar'
           width='328'
           height='214'
-          className='rounded-lg h-52 object-cover object-center mb-5 shadow-md'
+          className='rounded-lg h-52 object-cover object-center mb-3 shadow-md'
         />
       )}
 
@@ -51,7 +51,9 @@ function SuiRecentCard({
         <SuiText size='xs' weight='bold' color='c6' className='mb-2'>
           {pretitle}
         </SuiText>
-        <SuiTitle type='h3'>{title}</SuiTitle>
+        <SuiTitle type='h3' weight='bold'>
+          {title}
+        </SuiTitle>
         {description && (
           <SuiText size='sm' weight='medium' color='secondary' className='mt-1'>
             {description}

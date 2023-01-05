@@ -51,7 +51,7 @@ async function EventPage({ params: { slug } }: { params: { slug: string } }) {
           form={form}
           recordedVimeoUrl={recordedVimeoUrl}>
           <div className='section_metadata mb-20'>
-            <SuiTitle type='h3' color='c6' className='mb-2'>
+            <SuiTitle type='h3' color='c6' className='mb-2 !text-lg'>
               {category}
             </SuiTitle>
             <SuiTitle type='h1' className='mb-5'>
