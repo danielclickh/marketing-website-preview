@@ -63,6 +63,10 @@ export default async function CloudPage() {
                       <SuiButton
                         type='primary'
                         path={ctaButton.href}
+                        segmentEvent={{
+                          label: ctaButton.text,
+                          category: 'website-hero'
+                        }}
                         target={ctaButton.target}>
                         {ctaButton.text}
                       </SuiButton>

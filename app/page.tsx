@@ -83,6 +83,10 @@ export default async function HomePage() {
                     <SuiButton
                       type='primary'
                       path={hero.ctaButton.href}
+                      segmentEvent={{
+                        label: hero.ctaButton.text,
+                        category: 'website-hero'
+                      }}
                       className='mr-auto'>
                       {hero.ctaButton.text}
                     </SuiButton>
@@ -103,9 +107,13 @@ export default async function HomePage() {
                           type='primary'
                           path={hero.advancedCallout.href}
                           size='sm'
+                          segmentEvent={{
+                            label: hero.advancedCallout.buttonText,
+                            category: 'website-hero'
+                          }}
                           target={hero.advancedCallout.target}
                           className='w-auto'>
-                          {hero.advancedCallout.title}
+                          {hero.advancedCallout.buttonText}
                         </SuiButton>
                       </div>
                     </div>

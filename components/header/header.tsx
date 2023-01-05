@@ -44,7 +44,7 @@ export async function Header() {
           Free ClickHouse Workshop - Sign up now
         </Link>
       </div>
-      <div className='pt-2 container flex mx-auto md:pt-0 w-full px-4 mt-1 sm:px-8 2xl:px-0 max-w-7xl h-16 items-center'>
+      <div className='pt-2 container flex mx-auto md:pt-0 w-full px-4 sm:px-8 2xl:px-0 max-w-7xl h-16 items-center'>
         <div className='flex flex-col w-full'>
           <div className='flex justify-between items-center w-full'>
             <Link
@@ -70,9 +70,13 @@ export async function Header() {
                         return (
                           <MenuItem key={menuItem.name} name={menuItem.name}>
                             {menuItem.menuItems.map((item) => (
-                              <Link
+                              <SuiLink
                                 key={item.name}
                                 href={item.href}
+                                segmentEvent={{
+                                  label: item.name,
+                                  category: 'website-nav'
+                                }}
                                 className='flex items-start hover:no-underline'>
                                 <div
                                   className={styles.menuItem}
@@ -109,20 +113,24 @@ export async function Header() {
                                     </SuiText>
                                   </div>
                                 </div>
-                              </Link>
+                              </SuiLink>
                             ))}
                           </MenuItem>
                         )
                       }
 
                       return (
-                        <Link
+                        <SuiLink
                           key={menuItem.name}
                           href={menuItem.href}
                           target={menuItem.target}
+                          segmentEvent={{
+                            label: menuItem.name,
+                            category: 'website-nav'
+                          }}
                           className='inline-flex hover:no-underline items-center text-sm font-medium text-c5 hover:text-c4 ease-in-out'>
                           {menuItem.name}
-                        </Link>
+                        </SuiLink>
                       )
                     })}
                     <div className='flex items-center border-r border-c2 pr-2'>
@@ -135,6 +143,10 @@ export async function Header() {
                           href={ctaSecondaryButton.href}
                           color='primary'
                           weight='medium'
+                          segmentEvent={{
+                            label: ctaSecondaryButton.text,
+                            category: 'website-nav'
+                          }}
                           target={ctaSecondaryButton.target}>
                           {ctaSecondaryButton.text}
                         </SuiLink>
@@ -143,6 +155,10 @@ export async function Header() {
                         <SuiButton
                           type='primary'
                           path={ctaButton.href}
+                          segmentEvent={{
+                            label: ctaButton.text,
+                            category: 'website-nav'
+                          }}
                           target={ctaButton.target}>
                           {ctaButton.text}
                         </SuiButton>
@@ -176,10 +192,14 @@ export async function Header() {
                                       key={menuItem.name}
                                       className='flex flex-col col-span-2 gap-y-6 '>
                                       {menuItem.menuItems.map((item) => (
-                                        <Link
+                                        <SuiLink
                                           key={item.name}
                                           href={item.href}
                                           target={item.target}
+                                          segmentEvent={{
+                                            label: item.name,
+                                            category: 'website-nav'
+                                          }}
                                           className='w-full hover:no-underline flex items-center text-sm font-medium text-c5 relative'>
                                           {item.icon && (
                                             <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-c4 mr-4'>
@@ -193,7 +213,7 @@ export async function Header() {
                                           <div className='text-sm font-medium text-c5'>
                                             {item.name}
                                           </div>
-                                        </Link>
+                                        </SuiLink>
                                       ))}
                                     </div>
                                     <hr className={styles.mobileHeader} />
@@ -202,10 +222,14 @@ export async function Header() {
                               }
                               if (menuItem.menuItems.length > 0) {
                                 return menuItem.menuItems.map((item) => (
-                                  <Link
+                                  <SuiLink
                                     key={item.name}
                                     href={item.href}
                                     target={item.target}
+                                    segmentEvent={{
+                                      label: item.name,
+                                      category: 'website-nav'
+                                    }}
                                     className='w-full hover:no-underline flex items-start text-sm font-medium text-c5 relative'>
                                     {item.icon && (
                                       <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-c4 mr-4'>
@@ -219,17 +243,21 @@ export async function Header() {
                                     <div className='text-sm font-medium text-c5'>
                                       {item.name}
                                     </div>
-                                  </Link>
+                                  </SuiLink>
                                 ))
                               }
                               return (
-                                <Link
+                                <SuiLink
                                   key={menuItem.name}
                                   href={menuItem.href}
                                   target={menuItem.target}
+                                  segmentEvent={{
+                                    label: menuItem.name,
+                                    category: 'website-nav'
+                                  }}
                                   className='text-sm hover:no-underline font-medium text-c5'>
                                   {menuItem.name}
-                                </Link>
+                                </SuiLink>
                               )
                             })}
                           </nav>
@@ -248,6 +276,10 @@ export async function Header() {
                           type='secondary'
                           path={ctaSecondaryButton.href}
                           target={ctaSecondaryButton.target}
+                          segmentEvent={{
+                            label: ctaSecondaryButton.text,
+                            category: 'website-nav'
+                          }}
                           className='w-full'>
                           {ctaSecondaryButton.text}
                         </SuiButton>
@@ -257,6 +289,10 @@ export async function Header() {
                           type='primary'
                           path={ctaButton.href}
                           target={ctaButton.target}
+                          segmentEvent={{
+                            label: ctaButton.text,
+                            category: 'website-nav'
+                          }}
                           className='w-full'>
                           {ctaButton.text}
                         </SuiButton>

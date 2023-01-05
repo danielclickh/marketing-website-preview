@@ -3,7 +3,7 @@ import { FeatureItem } from '../../components/feature_item'
 import { FeatureItemLarge } from '../../components/feature_item_large/feature_item_large'
 import { findOne } from '../../lib/api/strapi'
 import Markdown from '../../components/Markdown'
-import { StrapiImage } from '../../components/StrapiElements'
+import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
 import BulletPoint from '../../components/BulletPoint'
 import GetStarted from '../../components/GetStarted'
 import { ClickhouseData } from './types'
@@ -42,8 +42,14 @@ async function getData(): Promise<ClickhouseData> {
 export default async function ClickHouseServerPage() {
   const { hero, features1, features2, features3, features4, features5 } =
     await getData()
-  const { title, description, backgroundPng, mainButton, secondaryButton } =
-    hero
+  const {
+    title,
+    description,
+    backgroundPng,
+    mainButton,
+    secondaryButton,
+    gitButton
+  } = hero
   return (
     <>
       <div className='bg-hero pt-10'>
@@ -66,6 +72,10 @@ export default async function ClickHouseServerPage() {
                     type='primary'
                     className='w-48'
                     path={mainButton.href}
+                    segmentEvent={{
+                      label: mainButton.text,
+                      category: 'website-hero'
+                    }}
                     target={mainButton.target}>
                     {mainButton.text}
                   </SuiButton>
@@ -75,8 +85,31 @@ export default async function ClickHouseServerPage() {
                     type='secondary'
                     className='w-48'
                     path={secondaryButton.href}
+                    segmentEvent={{
+                      label: secondaryButton.text,
+                      category: 'website-hero'
+                    }}
                     target={secondaryButton.target}>
                     {secondaryButton.text}
+                  </SuiButton>
+                )}
+                {!secondaryButton && gitButton?.text && (
+                  <SuiButton
+                    type='secondary'
+                    className='w-48'
+                    path={gitButton.href}
+                    segmentEvent={{
+                      label: gitButton.text,
+                      category: 'website-hero'
+                    }}
+                    target={gitButton.target}>
+                    <StrapiPicture
+                      light={gitButton.lightIconPng}
+                      dark={gitButton.darkIconPng}
+                      width={20}
+                      height={20}
+                    />
+                    {gitButton.text}
                   </SuiButton>
                 )}
               </div>
