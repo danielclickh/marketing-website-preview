@@ -11,6 +11,7 @@ type Props = {
 const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
+  display:'swap',
   variable: '--font-inter'
 })
 
@@ -23,7 +24,7 @@ export default async function BaseLayout({ children }: Props) {
         <meta content='width=device-width, initial-scale=1' name='viewport' />
         <link href='favicon.ico' rel='icon' type='image/x-icon' />
       </head>
-      <body className={`${inter.variable} font-sans`}>
+      <body className={`${inter.variable} font-inter`}>
         <Providers>
           <div className='flex flex-col min-h-screen'>
             {/* @ts-expect-error Server Component */}

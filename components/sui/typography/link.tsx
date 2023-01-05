@@ -12,7 +12,6 @@ export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
   target?: string
 }
 
-// @ts-ignore
 export const SuiLink = ({ ...LinkProps }: LinkProps) => {
   const analytics = useAnalytics()
   const {
