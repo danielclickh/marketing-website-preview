@@ -1,1 +1,2 @@
-export { SuiSelect } from './select';
+'use client'
+export { SuiSelect } from './select'

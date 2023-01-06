@@ -1,4 +1,3 @@
-'use client'
 export { SuiButton } from './buttons/button'
 export { SuiCard } from './cards/basic'
 export { SuiRecentCard } from './cards'

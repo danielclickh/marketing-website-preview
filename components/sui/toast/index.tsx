@@ -1,3 +1,4 @@
+'use client'
 import { CheckIcon, ExclamationIcon } from '@heroicons/react/outline'
 import { createContext, ReactNode, useContext, useState } from 'react'
 import { SuiText } from '../typography'

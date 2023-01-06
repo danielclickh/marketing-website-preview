@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import { HTMLAttributes } from 'react'
 import { useAnalytics } from '../../Providers/Analytics'

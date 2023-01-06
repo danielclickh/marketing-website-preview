@@ -4,7 +4,7 @@ import React from 'react'
 import { SuiButton } from '../sui'
 
 interface Props {
-  type: 'y_combinator' | 'twitter' | 'facebook' | 'linkedin'
+  type: string
   title: string
 }
 

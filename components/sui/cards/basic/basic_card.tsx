@@ -1,4 +1,4 @@
-import { SuiTitle, SuiText } from '../../typography'
+import { SuiText } from '../../typography'
 import { SuiButton } from '../../buttons/button'
 import { SuiPanel } from '../../panel'
 import { ArrowRightIcon } from '@heroicons/react/solid'

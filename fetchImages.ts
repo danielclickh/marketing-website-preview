@@ -1,5 +1,5 @@
 import { existsSync } from 'fs'
-import { rmdir, mkdir, writeFile } from 'fs/promises'
+import { mkdir, writeFile, rm } from 'fs/promises'
 import path from 'path'
 
 import environment from './environment'
@@ -27,9 +27,13 @@ async function fetchImage(url: string, count = 0) {
 async function fetchImages() {
   const uploadFolder = path.join(publicFolder, 'uploads')
   if (existsSync(uploadFolder)) {
-    await rmdir(uploadFolder, { recursive: true })
+    console.log('Remove Directory started')
+    await rm(uploadFolder, { recursive: true })
+    console.log('Remove Directory ended')
   }
+  console.log('Add Directory started')
   await mkdir(uploadFolder)
+  console.log('Add Directory ended')
   const response = await fetch(
     `${environment.strapiBaseUrl}/api/upload/files?filters[mime][$notContainsi]=svg`,
     {

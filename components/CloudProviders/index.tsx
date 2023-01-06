@@ -1,12 +1,23 @@
 import React from 'react'
 import { findOne } from '../../lib/api/strapi'
+import { StrapiImageType } from '../../lib/api/strapi/types'
 import { StrapiPicture } from '../StrapiElements'
 import { SuiText, SuiTitle } from '../sui'
+
+interface Props {
+  hero: {
+    cloudProviders: Array<{
+      title: string
+      lightProviderPngs: StrapiImageType[]
+      darkProviderPngs: StrapiImageType[]
+    }>
+  }
+}
 
 async function CloudProviders() {
   const {
     hero: { cloudProviders }
-  } = await findOne('cloud', {
+  }: Props = await findOne('cloud', {
     populate: [
       'hero.cloudProviders',
       'hero.cloudProviders.darkProviderPngs',

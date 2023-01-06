@@ -75,13 +75,15 @@ async function EventPage({ params: { slug } }: { params: { slug: string } }) {
               <div className='grid grid-cols-1 sm:grid-cols-2 flex-wrap gap-6'>
                 {hostedBy.hosts.map((host) => (
                   <div className='flex gap-5' key={`${host.name}-${host.role}`}>
-                    <StrapiImage
-                      {...host.avatarPng}
-                      alt={host.avatarPng.caption}
-                      width={64}
-                      height={64}
-                      className='h-11 w-11 rounded-full'
-                    />
+                    {host.avatarPng && (
+                      <StrapiImage
+                        {...host.avatarPng}
+                        alt={host.avatarPng.caption}
+                        width={64}
+                        height={64}
+                        className='h-11 w-11 rounded-full'
+                      />
+                    )}
                     <div className='flex flex-col'>
                       <SuiText size='sm' weight='medium' className='mb-1'>
                         {host.name}
