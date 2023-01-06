@@ -2,7 +2,12 @@ import React from 'react'
 import Link from 'next/link'
 import { ArrowRightIcon } from '@heroicons/react/solid'
 
-import { SuiText, SuiTitle, SuiRecentCard } from '../../../components/sui'
+import {
+  SuiText,
+  SuiTitle,
+  SuiRecentCard,
+  SuiButton
+} from '../../../components/sui'
 import { findAll, getPathsValues } from '../../../lib/api/strapi'
 import { BlogPost } from '../types'
 import Markdown from '../../../components/Markdown'
@@ -89,7 +94,7 @@ export default async function BlogPage({
 
         <div className='container flex mx-auto px-6 2xl:px-0 max-w-3xl pt-20'>
           <div className='flex flex-col w-full pb-20'>
-            <Markdown className='font-medium pb-6 mb-6 border-b border-c2'>
+            <Markdown className='rich-text-content font-medium pb-6 mb-6 border-b border-c2'>
               {content}
             </Markdown>
             <div className='flex justify-between items-center mb-10'>
@@ -115,19 +120,19 @@ export default async function BlogPage({
 
       <div className='flex w-full bg-c2 text-c5 pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
-          <div className='flex justify-between pb-4'>
-            <SuiTitle type='h2'>Recent posts</SuiTitle>
+          <div className='flex justify-between pb-8'>
+            <SuiTitle type='h2' className='!text-3xl' weight='bold'>
+              Recent posts
+            </SuiTitle>
 
-            <div className='flex'>
-              <Link href='/blog/'>
-                <div className='flex items-center cursor-pointer hover:underline'>
-                  <SuiText size='lg' weight='semibold'>
-                    All posts
-                  </SuiText>
-                  <ArrowRightIcon className='ml-2 w-4' />
-                </div>
-              </Link>
-            </div>
+            <SuiButton
+              path='/blog'
+              type='empty'
+              color='primary'
+              className='!text-lg'
+              iconRight>
+              All posts
+            </SuiButton>
           </div>
           <div className='w-full flex flex-col md:grid md:grid-cols-3 md:gap-x-16 gap-y-6 md:gap-y-0'>
             {otherBlogs.map((blog) => (

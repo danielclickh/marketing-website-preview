@@ -5,9 +5,10 @@ import { SuiButton } from '../sui'
 
 interface Props {
   type: 'y_combinator' | 'twitter' | 'facebook' | 'linkedin'
+  title: string
 }
 
-function SocialButton({ type, title }: { type: string; title: string }) {
+function SocialButton({ type, title }: Props) {
   const onClick = () => {
     const escapedUrl = encodeURIComponent(window.location.href)
     let shareUrl = ''

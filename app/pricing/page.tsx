@@ -46,19 +46,6 @@ async function PricingPage() {
     { data: pricingPlans }
   ] = await Promise.all([pricingPromise, pricingByRegionPromise, plansProps])
 
-  const regionList = await Promise.all(
-    pricingByRegion.map((region) => {
-      return {
-        ...region,
-        regionFlagPNG: {
-          src: region.regionFlagPNG.url,
-          width: 30,
-          height: 20
-        }
-      }
-    })
-  )
-
   return (
     <div className='pricing bg-c2 text-c5 h-full md:pb-20'>
       <div className='container mx-auto px-3 py-20'>
@@ -77,9 +64,9 @@ async function PricingPage() {
               </SuiText>
               {meteredPricing && (
                 <div>
-                  {regionList.length > 0 && (
+                  {pricingByRegion.length > 0 && (
                     <PricingOptions
-                      regionList={regionList}
+                      regionList={pricingByRegion}
                       pricingPlans={pricingPlans}>
                       {/* @ts-expect-error Server Component */}
                       <CloudProviders />
@@ -89,9 +76,9 @@ async function PricingPage() {
                     <Markdown>{meteredPricing.footerNote}</Markdown>
                   </div>
                   <hr className='max-w-xs mx-auto my-8 border-b bg-transparent border-c4/10' />
-                  <div className=' text-c4 text-center'>
-                    <Markdown>{hero.openSourceLink}</Markdown>
-                  </div>
+                  <Markdown className='rich-text-content text-c4 text-center'>
+                    {hero.openSourceLink}
+                  </Markdown>
                 </div>
               )}
             </div>
@@ -132,14 +119,17 @@ async function PricingPage() {
         <div className='md:mt-20 mx-auto md:w-10/12'>
           <div className='container mx-auto gap-x-4 flex md:rounded-lg py-11 px-6 md:pl-20 md:pr-0 md:py-16 bg-c6 w-full max-w-screen-lg text-c5-light items-stretch relative'>
             <div className='w-full'>
-              <div>{contactSection.title}</div>
-              <div className='my-8 text-base text-medium max-w-screen-sm'>
+              <SuiTitle type='h2'>{contactSection.title}</SuiTitle>
+              <SuiText
+                size='base'
+                weight='medium'
+                className='my-8 max-w-screen-sm'>
                 {contactSection.subtitle}
-              </div>
+              </SuiText>
               <SuiButton
                 type='custom'
                 path={contactSection.contactButton.link}
-                className='bg-c5'>
+                className='bg-c5-light text-c1-light'>
                 {contactSection.contactButton.text}
               </SuiButton>
             </div>

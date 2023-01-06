@@ -7,7 +7,6 @@ import { StrapiImage } from '../../../../components/StrapiElements'
 import { SuiText, SuiTitle } from '../../../../components/sui'
 import { findAll, getPathsValues } from '../../../../lib/api/strapi'
 import { EventType } from './types'
-import styles from './Events.module.scss'
 
 async function EventPage({ params: { slug } }: { params: { slug: string } }) {
   const { data } = await findAll('events', {
@@ -57,13 +56,11 @@ async function EventPage({ params: { slug } }: { params: { slug: string } }) {
             <SuiTitle type='h1' className='mb-5'>
               {title}
             </SuiTitle>
-            <SuiText
-              size='base'
-              weight='medium'
-              color='secondary'
-              className={styles.eventsDescription}>
+            <SuiText size='base' weight='medium' color='secondary'>
               {richDescription ? (
-                <Markdown encloseByDiv={false}>{richDescription}</Markdown>
+                <Markdown className='rich-text-content'>
+                  {richDescription}
+                </Markdown>
               ) : (
                 description
               )}
@@ -75,7 +72,7 @@ async function EventPage({ params: { slug } }: { params: { slug: string } }) {
               <SuiTitle type='h2' className='mb-7'>
                 {hostedBy.title}
               </SuiTitle>
-              <div className='flex flex-col'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 flex-wrap gap-6'>
                 {hostedBy.hosts.map((host) => (
                   <div className='flex gap-5' key={`${host.name}-${host.role}`}>
                     <StrapiImage

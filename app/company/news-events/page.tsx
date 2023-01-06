@@ -197,7 +197,7 @@ export default async function News() {
                         {upcomingEvent.shortDescription}
                       </SuiText>
                       <div className='flex items-center space-x-2'>
-                        <LocationMarkerIcon className='h-3 w-3' />
+                        <LocationMarkerIcon className='h-3 w-3 text-c4' />
                         <SuiText size='sm' weight='medium' color='secondary'>
                           {[
                             upcomingEvent.location.city,

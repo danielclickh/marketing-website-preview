@@ -110,12 +110,7 @@ function EventsForm({
   }
 
   return (
-    <SuiPanel
-      isRounded
-      color='bg-c4/20'
-      shadow
-      padding='xl'
-      className='ml-auto'>
+    <SuiPanel isRounded color='bg-c2' shadow padding='xl' className='ml-auto'>
       {submitted ? (
         <div className='subscribed'>
           <div className='success-container'>

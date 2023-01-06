@@ -71,6 +71,9 @@ async function LearnPage() {
     filters: {
       localDatetime: {
         $gt: new Date().toISOString()
+      },
+      category: {
+        $eqi: 'Free Training'
       }
     },
     sort: ['localDatetime:ASC'],
@@ -89,19 +92,19 @@ async function LearnPage() {
     pagination: { limit: 3 }
   })
 
+  const gridCol = `grid-cols-${upcomingEvents.length}`
   return (
     <div>
       <div className='hero-container bg-c1-light'>
         <div className='hero-content relative text-center'>
           <div className={styles.learnBg}>
-            <SuiTitle type='h1' color='white' className='pt-16 md:pt-30 pb-4'>
+            <SuiTitle
+              type='h1'
+              color='white'
+              className='pt-16 md:pt-30 pb-4 !text-6xl'>
               ClickHouse <span className='gradient_title'>Academy</span>
             </SuiTitle>
-            <SuiText
-              size='base'
-              weight='normal'
-              color='white'
-              className='pb-16'>
+            <SuiText size='lg' weight='normal' color='white' className='pb-20'>
               Become a ClickHouse expert with our free official ClickHouse
               training
             </SuiText>
@@ -123,7 +126,7 @@ async function LearnPage() {
         </SuiButton>
       </div>
       <div className='container max-w-screen-lg mx-auto px-16 pb-20 pt-10'>
-        <SuiTitle type='h6' className='mb-6'>
+        <SuiTitle type='h6' className='mb-6' color='secondary'>
           POPULAR FREE COURSES
         </SuiTitle>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-10 mx-auto'>
@@ -164,13 +167,18 @@ async function LearnPage() {
           <SuiTitle type='h6' weight='bold' color='secondary' className='mb-4'>
             STEP-BY-STEP
           </SuiTitle>
-          <SuiTitle type='h2'>Learning paths</SuiTitle>
-          <SuiText size='base' weight='normal' className='mt-10'>
+          <SuiTitle type='h2' weight='semibold' className='!text-5xl'>
+            Learning paths
+          </SuiTitle>
+          <SuiText
+            size='base'
+            weight='normal'
+            className='mt-10 max-w-screen-sm'>
             Become a subject matter expert through our recommended series of
             courses that will best help you build knowledge progressively.
           </SuiText>
         </div>
-        <div className='flex gap-4 flex-col sm:grid sm:grid-cols-2 max-w-screen-md w-auto'>
+        <div className='flex gap-4 flex-col sm:grid sm:grid-cols-2 max-w-screen-sm w-auto'>
           {learningCourses.map((course) => (
             <Link
               href={course.url}
@@ -199,10 +207,10 @@ async function LearnPage() {
         <SuiTitle
           type='h6'
           color='white'
-          className='mx-auto py-3 px-5 bg-alerts-danger-text w-fit rounded-full'>
+          className='mx-auto py-2 px-5 bg-alerts-danger-text w-fit rounded-full'>
           COMING SOON
         </SuiTitle>
-        <SuiTitle type='h2' className='mt-6 mb-10'>
+        <SuiTitle type='h2' className='mt-6 mb-10 !text-5xl'>
           Professional certification
         </SuiTitle>
         <SuiText
@@ -226,42 +234,47 @@ async function LearnPage() {
         </SuiButton>
       </div>
       <div className='container mx-auto max-w-screen-lg px-4 pt-30'>
-        <SuiTitle type='h2' className='mb-20 text-center'>
+        <SuiTitle type='h2' className='mb-20 text-center !text-5xl'>
           Upcoming live events
         </SuiTitle>
-        <div className='events-container grid grid-cols-1 md:grid-cols-3 gap-16 mx-auto'>
+        <div className='events-container flex flex-col md:flex-row gap-16 mx-auto'>
           {upcomingEvents.map((event: EventType) => (
             <div
-              className='flex flex-col justify-between h-full'
+              className='flex flex-col justify-between h-auto mx-auto md:w-1/3'
               key={event.title}>
               <div className='event-item--image'>
-                {event.thumbnailPng ? (
-                  <StrapiImage
-                    {...event.thumbnailPng}
-                    alt='image'
-                    width={342}
-                    height={196}
-                    className='w-full'
-                  />
-                ) : (
-                  <Image
-                    alt='image'
-                    src={`/images/clickhouse_workshop.png`}
-                    width={342}
-                    height={196}
-                    className='w-full'
-                  />
-                )}
+                <div>
+                  {event.thumbnailPng ? (
+                    <StrapiImage
+                      {...event.thumbnailPng}
+                      alt='image'
+                      width={342}
+                      height={196}
+                      className='w-full h-48 object-cover object-center'
+                    />
+                  ) : (
+                    <Image
+                      alt='image'
+                      src={`/images/clickhouse_workshop.png`}
+                      width={342}
+                      height={196}
+                      className='w-full h-48 object-cover object-center'
+                    />
+                  )}
+                </div>
+                <SuiText
+                  size='lg'
+                  weight='bold'
+                  className='mt-8 mb-4 md:min-h-[3.5rem]'>
+                  {event.title}
+                </SuiText>
+                <SuiText
+                  size='base'
+                  weight='normal'
+                  className='whitespace-pre-wrap mb-6'>
+                  {event.shortDescription}
+                </SuiText>
               </div>
-              <SuiText size='lg' weight='bold' className='mt-8 mb-4'>
-                {event.title}
-              </SuiText>
-              <SuiText
-                size='base'
-                weight='normal'
-                className='whitespace-pre-wrap mb-6'>
-                {event.shortDescription}
-              </SuiText>
               <div>
                 <SuiText
                   size='sm'

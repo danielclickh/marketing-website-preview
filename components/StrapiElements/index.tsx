@@ -34,7 +34,7 @@ async function StrapiSvg({
     )
   } catch (e) {
     console.log('Error fetching svg', `${environment.strapiBaseUrl}${url}`)
-    console.warn(e)
+    console.error(e)
     return null
   }
 }

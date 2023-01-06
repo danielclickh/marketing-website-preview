@@ -17,17 +17,20 @@
   &h6 {
     @apply text-xs font-semibold;
   }
-  &.weight-normal {
-    @apply font-normal;
-  }
+}
+
+.weight-normal {
+  @apply font-normal;
 }
 
 .weight-medium {
   @apply font-medium;
 }
+
 .weight-semibold {
-  @apply font-normal;
+  @apply font-semibold;
 }
+
 .weight-bold {
   @apply font-bold;
 }

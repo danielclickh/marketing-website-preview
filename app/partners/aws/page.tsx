@@ -38,7 +38,7 @@ ClickHouse has been reviewed by AWS and is an official AWS Partner, and ClickHou
 `
 function PartnersPage() {
   return (
-    <div className='pt-20 md:pt-36'>
+    <div className='pt-20 md:pt-30'>
       <div className='min-h-screen pb-10 md:pb-20 mx-10 '>
         <div className='flex flex-col md:flex-row-reverse w-full mx-auto gap-20 mb-20 md:mb-36 justify-center items-center'>
           <Image
@@ -47,15 +47,14 @@ function PartnersPage() {
             height='240'
             alt='aws partner'
           />
-          <div className='flex flex-col items-center md:items-start'>
+          <div className='flex flex-col items-center max-w-screen-md md:items-start'>
             <SuiTitle
               type='h1'
               color='primary'
               weight='bold'
-              className='text-5xl pb-6'>
+              className='text-6xl pb-6'>
               ClickHouse Cloud on AWS
             </SuiTitle>
-            <h1></h1>
             <SuiText
               size='base'
               weight='medium'
@@ -81,7 +80,7 @@ function PartnersPage() {
               description={highlight.description}
               buttonTitle={highlight.buttonText}
               buttonPath={highlight.href}
-              className='w-full md:w-1/3'
+              className='h-auto md:w-1/3'
               color='empty'
             />
           ))}

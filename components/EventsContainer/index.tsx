@@ -28,12 +28,12 @@ function EventsContainer({
             </div>
           </div>
         )}
-      <div className='event-container mx-auto block md:flex md:justify-between md:items-start'>
+      <div className='event-container mx-auto block lg:flex lg:justify-between lg:items-start'>
         <div
           className={`mb-16 mr-0 lg:mb-0 lg:mr-16 container flex-auto ${
             eventEnded && form.type !== 'recordedGatedContent'
               ? 'max-w-3xl'
-              : 'max-w-md'
+              : 'max-w-screen-md'
           }
           `}>
           {children}

@@ -1,15 +1,23 @@
 'use client'
 import { MinusIcon } from '@heroicons/react/outline'
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/solid'
-import Image from 'next/image'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, ReactNode, useState } from 'react'
+import { PricingPlanData, RegionPricing } from '../../app/pricing/types'
 import { Listbox, Transition } from '../HeadlessUIClient'
 import Markdown from '../Markdown'
 import { StrapiImage } from '../StrapiElements'
 import { SuiButton } from '../sui'
 import ShowPricing from './ShowPricing'
 
-function PricingOptions({ regionList, pricingPlans, children }) {
+function PricingOptions({
+  regionList,
+  pricingPlans,
+  children
+}: {
+  regionList: RegionPricing[]
+  pricingPlans: PricingPlanData[]
+  children: ReactNode
+}) {
   const [selectedRegion, setSelectedRegion] = useState(regionList[0])
   const totalLength = pricingPlans.length
   return (
@@ -22,15 +30,17 @@ function PricingOptions({ regionList, pricingPlans, children }) {
               <div className='relative mt-1'>
                 <Listbox.Button className='relative bg-c1 w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left shadow-md focus:outline-none sm:text-sm'>
                   <span className='flex gap-3 truncate'>
-                    <Image
-                      src={selectedRegion.regionFlagPNG}
-                      alt={selectedRegion.region}
-                    />
+                    {selectedRegion.regionFlagPNG?.url && (
+                      <StrapiImage
+                        {...selectedRegion.regionFlagPNG}
+                        alt={selectedRegion.region}
+                      />
+                    )}
                     {selectedRegion.region}
                   </span>
                   <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
                     <ChevronDownIcon
-                      className='h-5 w-5 text-gray-400'
+                      className='h-5 w-5 text-c4'
                       aria-hidden='true'
                     />
                   </span>
@@ -43,7 +53,7 @@ function PricingOptions({ regionList, pricingPlans, children }) {
                   <Listbox.Options className='absolute mt-1 w-full overflow-auto rounded-md bg-c1 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
                     {regionList.map((item) => (
                       <Listbox.Option
-                        key={item.id}
+                        key={item.region}
                         value={item}
                         className='hover:bg-c2'>
                         {({ selected }) => (
@@ -51,7 +61,10 @@ function PricingOptions({ regionList, pricingPlans, children }) {
                             className={`flex gap-3 truncate relative w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm ${
                               selected ? 'font-bold' : 'font-normal'
                             }`}>
-                            <Image src={item.regionFlagPNG} alt={item.region} />
+                            <StrapiImage
+                              {...item.regionFlagPNG}
+                              alt={item.region}
+                            />
                             {item.region}
                           </span>
                         )}
@@ -85,7 +98,7 @@ function PricingOptions({ regionList, pricingPlans, children }) {
                       : plan.pricingMain}
                   </div>
                 </div>
-                <div className='flex-auto'>
+                <div className='flex-auto justify-between'>
                   <div className='flex flex-col gap-5'>
                     {(plan.items ?? []).map((item, planIndex: number) => (
                       <div
