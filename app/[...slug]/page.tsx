@@ -31,6 +31,8 @@ async function getData({ slug }: ParamsType) {
   }
 }
 
+export const dynamicParams = false
+
 export default async function RichContentPage({
   params
 }: {
