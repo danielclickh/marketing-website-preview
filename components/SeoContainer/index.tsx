@@ -43,7 +43,7 @@ function SeoContainer({
           <meta name='og:image' content={image.url} />
         </>
       )}
-      <meta name='author' content='John Doe' />
+      <meta name='author' content='ClickHouse' />
     </>
   )
 }

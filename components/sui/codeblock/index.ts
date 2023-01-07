@@ -1,2 +1,1 @@
-export { SuiCodeblock } from './codeblock';
-export { SuiCode } from './code';
+export { SuiCodeblock } from './codeblock'

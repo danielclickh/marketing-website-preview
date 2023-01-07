@@ -43,6 +43,7 @@ export default async function RichContentPage({
     leftContent,
     rightContent
   }: RichContentPageProps = await getData(params)
+
   return (
     <div className='rich-content-page'>
       <SuiTitle

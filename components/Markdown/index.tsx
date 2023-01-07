@@ -110,6 +110,9 @@ function Markdown({
   if (Object.keys(componentsProp ?? {}).length > 0) {
     Object.assign(newComponents, componentsProp)
   }
+  if (encloseByDiv) {
+    props.allowedElements = allowedElements
+  }
   return (
     <ReactMarkdown
       className={
@@ -118,7 +121,6 @@ function Markdown({
           : `rich_content ${className}`
       }
       components={newComponents}
-      allowedElements={allowedElements}
       unwrapDisallowed
       rehypePlugins={[rehypeRaw]}
       {...props}>

@@ -11,7 +11,7 @@ type Props = {
 const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  display:'swap',
+  display: 'swap',
   variable: '--font-inter'
 })
 
@@ -23,6 +23,8 @@ export default async function BaseLayout({ children }: Props) {
         <base href='/' />
         <meta content='width=device-width, initial-scale=1' name='viewport' />
         <link href='favicon.ico' rel='icon' type='image/x-icon' />
+        <meta name='twitter:image' content='/images/sql_console_hero.png' />
+        <meta name='og:image' content='/images/sql_console_hero.png' />
       </head>
       <body className={`${inter.variable} font-inter`}>
         <Providers>
