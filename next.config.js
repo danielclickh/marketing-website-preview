@@ -6,11 +6,6 @@ const nextConfig ={
   experimental: {
     appDir: true,
   },
-  i18n: {
-    locales: ['default', 'en'],
-    defaultLocale: 'default',
-    localeDetection: false,
-  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles'), path.join(__dirname, 'app/**/*.module.scss'), path.join(__dirname, 'components/**/*.module.scss')],
   },
@@ -19,6 +14,10 @@ const nextConfig ={
       {
         source: '/events/:slug',
         destination: '/company/events/:slug',
+      },
+      {
+        source: '/en/:path*',
+        destination: '/:path*',
       },
     ]
   },
