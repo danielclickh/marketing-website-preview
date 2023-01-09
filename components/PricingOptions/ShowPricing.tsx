@@ -1,6 +1,8 @@
+'use client'
 import React from 'react'
 import { InformationCircleIcon } from '@heroicons/react/outline'
 import { SuiTooltip, SuiTooltipContent, SuiTooltipTrigger } from '../sui'
+import { usePricing } from './Context'
 
 function InfoTooltip({ content }: { content: string }) {
   return (
@@ -13,18 +15,16 @@ function InfoTooltip({ content }: { content: string }) {
   )
 }
 
-type ElementType = {
-  priceUSD: string
-  meteringUnit: string
-  meteringTooltip: string
-}
+function ShowPricing({ isFirst }: { isFirst: boolean }) {
+  const { selectedRegion } = usePricing()
+  if (selectedRegion.hasDevService) {
+    return null
+  }
 
-interface Props {
-  storage: ElementType
-  compute: ElementType
-}
-
-function ShowPricing({ storage, compute }: Props) {
+  const storage =
+    selectedRegion[isFirst ? 'devStoragePricing' : 'storagePricing']
+  const compute =
+    selectedRegion[isFirst ? 'devComputePricing' : 'computePricing']
   return (
     <div className='grid grid-cols-2 rounded-lg bg-c2 text-c5 text-left mt-8 py-3 '>
       <div className='border-r px-6 lg:px-4 xl:px-6'>

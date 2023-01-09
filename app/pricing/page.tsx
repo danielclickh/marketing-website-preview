@@ -5,7 +5,7 @@ import PricingOptions from '../../components/PricingOptions'
 import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
 import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
 import { findAll, findOne } from '../../lib/api/strapi'
-import { PricingData, PricingPlanData, RegionPricing } from './types'
+import { PricingData, PricingPlanData, RegionPricing, RegionPricingWithIcon } from './types'
 
 async function PricingPage() {
   const pricingPromise: Promise<PricingData> = findOne('pricing', {
@@ -46,6 +46,11 @@ async function PricingPage() {
     { data: pricingPlans }
   ] = await Promise.all([pricingPromise, pricingByRegionPromise, plansProps])
 
+
+  const regionList: RegionPricingWithIcon[] = pricingByRegion.map(item => ({
+    ...item,
+    regionFlagPNG: (<StrapiImage {...item.regionFlagPNG} alt={item.region} />)
+  }))
   return (
     <div className='pricing bg-c2 text-c5 h-full md:pb-20'>
       <div className='container mx-auto px-3 py-20'>
@@ -66,7 +71,7 @@ async function PricingPage() {
                 <div>
                   {pricingByRegion.length > 0 && (
                     <PricingOptions
-                      regionList={pricingByRegion}
+                      regionList={regionList}
                       pricingPlans={pricingPlans}>
                       {/* @ts-expect-error Server Component */}
                       <CloudProviders />

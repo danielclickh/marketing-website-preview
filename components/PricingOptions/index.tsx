@@ -1,12 +1,12 @@
-'use client'
 import { MinusIcon } from '@heroicons/react/outline'
-import { CheckIcon, ChevronDownIcon } from '@heroicons/react/solid'
-import React, { Fragment, ReactNode, useState } from 'react'
-import { PricingPlanData, RegionPricing } from '../../app/pricing/types'
-import { Listbox, Transition } from '../HeadlessUIClient'
+import { CheckIcon } from '@heroicons/react/solid'
+import React, { ReactNode } from 'react'
+import { PricingPlanData, RegionPricingWithIcon } from '../../app/pricing/types'
 import Markdown from '../Markdown'
-import { StrapiImage } from '../StrapiElements'
-import { SuiButton } from '../sui'
+import { ContextProvider } from './Context'
+import PlanPricing from './PlanPricing'
+import PricingButton from './PricingButton'
+import PricingSelector from './PricingSelector'
 import ShowPricing from './ShowPricing'
 
 function PricingOptions({
@@ -14,76 +14,28 @@ function PricingOptions({
   pricingPlans,
   children
 }: {
-  regionList: RegionPricing[]
+  regionList: RegionPricingWithIcon[]
   pricingPlans: PricingPlanData[]
   children: ReactNode
 }) {
-  const [selectedRegion, setSelectedRegion] = useState(regionList[0])
   const totalLength = pricingPlans.length
   return (
-    <>
+    <ContextProvider value={regionList[0]}>
       <div className='center_content'>
         <div className='controls_row flex flex-col md:flex-row items-center justify-center gap-x-20 gap-y-8 mb-16 mt-8'>
           {children}
           <div className='seed_select_wrapper w-80'>
-            <Listbox value={selectedRegion} onChange={setSelectedRegion}>
-              <div className='relative mt-1'>
-                <Listbox.Button className='relative bg-c1 w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left shadow-md focus:outline-none sm:text-sm'>
-                  <span className='flex gap-3 truncate'>
-                    {selectedRegion.regionFlagPNG?.url && (
-                      <StrapiImage
-                        {...selectedRegion.regionFlagPNG}
-                        alt={selectedRegion.region}
-                      />
-                    )}
-                    {selectedRegion.region}
-                  </span>
-                  <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
-                    <ChevronDownIcon
-                      className='h-5 w-5 text-c4'
-                      aria-hidden='true'
-                    />
-                  </span>
-                </Listbox.Button>
-                <Transition
-                  as={Fragment}
-                  leave='transition ease-in duration-100'
-                  leaveFrom='opacity-100'
-                  leaveTo='opacity-0'>
-                  <Listbox.Options className='absolute mt-1 w-full overflow-auto rounded-md bg-c1 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
-                    {regionList.map((item) => (
-                      <Listbox.Option
-                        key={item.region}
-                        value={item}
-                        className='hover:bg-c2'>
-                        {({ selected }) => (
-                          <span
-                            className={`flex gap-3 truncate relative w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm ${
-                              selected ? 'font-bold' : 'font-normal'
-                            }`}>
-                            <StrapiImage
-                              {...item.regionFlagPNG}
-                              alt={item.region}
-                            />
-                            {item.region}
-                          </span>
-                        )}
-                      </Listbox.Option>
-                    ))}
-                  </Listbox.Options>
-                </Transition>
-              </div>
-            </Listbox>
+            <PricingSelector regionList={regionList} />
           </div>
         </div>
       </div>
 
-      {selectedRegion && pricingPlans.length > 0 && (
+      {pricingPlans.length > 0 && (
         <div className='plans_container grid grid-cols-1 lg:grid-cols-3 gap-8'>
           {pricingPlans.map((plan, index) => (
             <div
               className='plan_card border-t-[5px] rounded-[5px] border-c6 w-full max-w-sm bg-c1-light dark:bg-c2-dark p-10 mx-auto'
-              key={`${selectedRegion.region}-${plan.name}`}>
+              key={`plan-${plan.name}`}>
               <div className='card_content flex flex-col h-full justify-between'>
                 <div className='border-b mb-6'>
                   <h2 className='text-center text-2xl font-bold mb-1'>
@@ -92,18 +44,14 @@ function PricingOptions({
                   <div className='text-center text-sm md:h-16 xl:h-auto mb-4 text-normal'>
                     {plan.description}
                   </div>
-                  <div className='text-center font-bold text-3xl pb-4'>
-                    {index === 0
-                      ? selectedRegion.devStoragePricing.devPriceUSD
-                      : plan.pricingMain}
-                  </div>
+                  <PlanPricing isFirst={index === 0} text={plan.pricingMain} />
                 </div>
                 <div className='flex-auto justify-between'>
                   <div className='flex flex-col gap-5'>
                     {(plan.items ?? []).map((item, planIndex: number) => (
                       <div
                         className='row flex items-center gap-4 text-sm justify-start'
-                        key={`${selectedRegion.region}-bullet-${planIndex}`}>
+                        key={`plan-bullet-${planIndex}`}>
                         {item.isBulleted && <CheckIcon className='w-4 h-4' />}
                         <div className='item_text'>
                           <Markdown>{item.description}</Markdown>
@@ -114,7 +62,7 @@ function PricingOptions({
                       (itemDisabled, planIndex: number) => (
                         <div
                           className='row_not_included flex items-center gap-4 text-sm justify-start text-c5/30'
-                          key={`${selectedRegion.region}-disabled-bullet-${planIndex}`}>
+                          key={`plan-disabled-bullet-${planIndex}`}>
                           <MinusIcon className='w-4 h-4' />
                           <div className='item_text'>
                             <Markdown>{itemDisabled.description}</Markdown>
@@ -124,53 +72,18 @@ function PricingOptions({
                     )}
                   </div>
 
-                  {index !== totalLength - 1 &&
-                    selectedRegion.hasDevService && (
-                      <ShowPricing
-                        storage={
-                          selectedRegion[
-                            index === 0 ? 'devStoragePricing' : 'storagePricing'
-                          ]
-                        }
-                        compute={
-                          selectedRegion[
-                            index === 0 ? 'devComputePricing' : 'computePricing'
-                          ]
-                        }
-                      />
-                    )}
+                  {index !== totalLength - 1 && (
+                    <ShowPricing isFirst={index === 0} />
+                  )}
                 </div>
                 <div className='mt-8'>
                   {plan.actionButton && (
-                    <>
-                      {index === 0 ? (
-                        selectedRegion.hasDevService ? (
-                          <SuiButton
-                            path={plan.actionButton.link}
-                            className='stroked_button_wrapper button_wrapper'
-                            type='primary'>
-                            {plan.actionButton.text}
-                          </SuiButton>
-                        ) : (
-                          <SuiButton
-                            type='secondary'
-                            className='w-full stroked_button_wrapper button_wrapper disabled_button'
-                            path={plan.actionButton.link}
-                            disabled>
-                            Coming soon
-                          </SuiButton>
-                        )
-                      ) : (
-                        <SuiButton
-                          path={plan.actionButton.link}
-                          className='w-full stroked_button_wrapper button_wrapper'
-                          type={
-                            index !== totalLength - 1 ? 'primary' : 'secondary'
-                          }>
-                          {plan.actionButton.text}
-                        </SuiButton>
-                      )}
-                    </>
+                    <PricingButton
+                      isFirst={index === 0}
+                      isLast={index !== totalLength - 1}
+                      path={plan.actionButton.link}
+                      btnText={plan.actionButton.text}
+                    />
                   )}
                 </div>
               </div>
@@ -178,7 +91,7 @@ function PricingOptions({
           ))}
         </div>
       )}
-    </>
+    </ContextProvider>
   )
 }
 

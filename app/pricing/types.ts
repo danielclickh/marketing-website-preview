@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import { StrapiImageType } from '../../lib/api/strapi/types'
 
 interface PricingDimension {
@@ -17,6 +18,10 @@ export interface RegionPricing {
   devStoragePricing: PricingDimension
   devComputePricing: PricingDimension
   hasDevService: boolean
+}
+
+export interface RegionPricingWithIcon extends Omit<RegionPricing, 'regionFlagPNG'> {
+  regionFlagPNG: ReactNode
 }
 
 interface PricingHero {
