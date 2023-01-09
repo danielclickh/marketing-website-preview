@@ -4,6 +4,8 @@ import { ReactNode } from 'react'
 import '../styles/globals.scss'
 import { Inter } from '@next/font/google'
 import { Providers } from '../components/Providers'
+import { withPasswordProtect } from '@storyofams/next-password-protect'
+import environment from '../environment'
 type Props = {
   children: ReactNode
 }
@@ -15,7 +17,7 @@ const inter = Inter({
   variable: '--font-inter'
 })
 
-export default async function BaseLayout({ children }: Props) {
+async function BaseLayout({ children }: Props) {
   return (
     <html lang='en' className='light' style={{ colorScheme: 'light' }}>
       <head>
@@ -40,3 +42,7 @@ export default async function BaseLayout({ children }: Props) {
     </html>
   )
 }
+
+export default environment.password
+  ? withPasswordProtect(BaseLayout, {})
+  : BaseLayout
