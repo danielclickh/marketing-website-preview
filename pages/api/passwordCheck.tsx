@@ -1,4 +1,4 @@
-import { passwordCheckHandler } from '@storyofams/next-password-protect'
+import { passwordCheckHandler } from 'next-password-protect'
 import environment from '../../environment'
 
 // @ts-ignore

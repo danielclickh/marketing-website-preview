@@ -2,7 +2,7 @@
 import React from 'react'
 import { InformationCircleIcon } from '@heroicons/react/outline'
 import { SuiTooltip, SuiTooltipContent, SuiTooltipTrigger } from '../sui'
-import { usePricing } from './Context'
+import { usePricing } from './PricingContext'
 
 function InfoTooltip({ content }: { content: string }) {
   return (
@@ -17,14 +17,14 @@ function InfoTooltip({ content }: { content: string }) {
 
 function ShowPricing({ isFirst }: { isFirst: boolean }) {
   const { selectedRegion } = usePricing()
-  if (selectedRegion.hasDevService) {
+  if (selectedRegion?.hasDevService) {
     return null
   }
 
   const storage =
-    selectedRegion[isFirst ? 'devStoragePricing' : 'storagePricing']
+    selectedRegion?.[isFirst ? 'devStoragePricing' : 'storagePricing']
   const compute =
-    selectedRegion[isFirst ? 'devComputePricing' : 'computePricing']
+    selectedRegion?.[isFirst ? 'devComputePricing' : 'computePricing']
 
   if (!storage || !compute) {
     return null

@@ -9,28 +9,37 @@ import {
 } from 'react'
 import { RegionPricingWithIcon } from '../../app/pricing/types'
 type ContextProps = {
-  selectedRegion: RegionPricingWithIcon
+  selectedRegion?: RegionPricingWithIcon
   setSelectedRegion: Dispatch<SetStateAction<RegionPricingWithIcon>>
 }
-const Context = createContext<ContextProps>(undefined!)
+
+const PricingContext = createContext<ContextProps>({
+  selectedRegion: undefined,
+  setSelectedRegion: () => {}
+})
 
 type Props = {
   children: ReactNode
   value: RegionPricingWithIcon
 }
 
-export const ContextProvider = ({ children, value }: Props) => {
-  const [selectedRegion, setSelectedRegion] = useState<RegionPricingWithIcon>(value)
+export const PricingContextProvider = ({ children, value }: Props) => {
+  const [selectedRegion, setSelectedRegion] =
+    useState<RegionPricingWithIcon>(value)
 
   const pricingValue = {
     selectedRegion,
     setSelectedRegion
   }
-  return <Context.Provider value={pricingValue}>{children}</Context.Provider>
+  return (
+    <PricingContext.Provider value={pricingValue}>
+      {children}
+    </PricingContext.Provider>
+  )
 }
 
 export const usePricing = () => {
-  const result = useContext(Context)
+  const result = useContext(PricingContext)
   if (!result) {
     throw new Error('Context used outside of its Provider!')
   }

@@ -1,6 +1,5 @@
 'use client'
 import Link from 'next/link'
-import { RefreshIcon } from '@heroicons/react/outline'
 import { ArrowRightIcon } from '@heroicons/react/solid'
 import { useAnalytics } from '../../../Providers/Analytics'
 import { HTMLAttributes } from 'react'

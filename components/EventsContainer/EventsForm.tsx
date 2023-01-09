@@ -1,11 +1,5 @@
 'use client'
-import React, {
-  ChangeEvent,
-  FocusEvent,
-  FormEvent,
-  useRef,
-  useState
-} from 'react'
+import React, { useState } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import BulletPoint from '../BulletPoint'

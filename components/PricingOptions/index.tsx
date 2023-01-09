@@ -3,7 +3,7 @@ import { CheckIcon } from '@heroicons/react/solid'
 import React, { ReactNode } from 'react'
 import { PricingPlanData, RegionPricingWithIcon } from '../../app/pricing/types'
 import Markdown from '../Markdown'
-import { ContextProvider } from './Context'
+import { PricingContextProvider } from './PricingContext'
 import PlanPricing from './PlanPricing'
 import PricingButton from './PricingButton'
 import PricingSelector from './PricingSelector'
@@ -20,7 +20,7 @@ function PricingOptions({
 }) {
   const totalLength = pricingPlans.length
   return (
-    <ContextProvider value={regionList[0]}>
+    <PricingContextProvider value={regionList[0]}>
       <div className='center_content'>
         <div className='controls_row flex flex-col md:flex-row items-center justify-center gap-x-20 gap-y-8 mb-16 mt-8'>
           {children}
@@ -91,7 +91,7 @@ function PricingOptions({
           ))}
         </div>
       )}
-    </ContextProvider>
+    </PricingContextProvider>
   )
 }
 

@@ -1156,15 +1156,6 @@
     "@stdlib/utils-constructor-name" "^0.0.x"
     "@stdlib/utils-global" "^0.0.x"
 
-"@storyofams/next-password-protect@^1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@storyofams/next-password-protect/-/next-password-protect-1.7.0.tgz#658cfa77fcc2462027593133b6fba7c6cb085cc5"
-  integrity sha512-dzNBQ8cTaj1Rj7N7eUyZFTmXEsuXgl/8+lSFYFZHxO1dl8C/TmHbe3905nNMTlE3KEvcqngHwgVJ5DeAVRhi5A==
-  dependencies:
-    cookie "^0.4.1"
-    jsonwebtoken "^8.5.1"
-    safe-compare "^1.1.4"
-
 "@swc/helpers@0.4.14":
   version "0.4.14"
   resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.4.14.tgz#1352ac6d95e3617ccb7c1498ff019654f1e12a74"
@@ -3191,6 +3182,15 @@ new-date@^1.0.3:
   integrity sha512-0fsVvQPbo2I18DT2zVHpezmeeNYV2JaJSrseiHLc17GNOxJzUdx5mvSigPu8LtIfZSij5i1wXnXFspEs2CD6hA==
   dependencies:
     "@segment/isodate" "1.0.3"
+
+next-password-protect@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/next-password-protect/-/next-password-protect-1.8.0.tgz#93106150bfa5d42554fdc62d4b36f1aa2b69a7ff"
+  integrity sha512-7QXV6rSrN9OMFovGaWqi0Cdyikg9o+TE2KqT/k00eVnGpCyUIu4VFzPX3y4M3w5OwfvNVNuy6ifWHD0nhsGsog==
+  dependencies:
+    cookie "^0.4.1"
+    jsonwebtoken "^8.5.1"
+    safe-compare "^1.1.4"
 
 next-themes@^0.2.0:
   version "0.2.0"

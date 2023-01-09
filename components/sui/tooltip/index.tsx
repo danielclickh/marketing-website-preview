@@ -1,5 +1,5 @@
 'use client'
-import * as React from 'react'
+import React, { createContext } from 'react'
 import { mergeRefs } from 'react-merge-refs'
 import {
   useFloating,
@@ -69,7 +69,7 @@ export function useTooltip({
 
 type ContextType = ReturnType<typeof useTooltip> | null
 
-const TooltipContext = React.createContext<ContextType>(null)
+const TooltipContext = createContext<ContextType>(null)
 
 export const useTooltipState = () => {
   const context = React.useContext(TooltipContext)

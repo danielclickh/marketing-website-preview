@@ -1,11 +1,15 @@
 'use client'
 import React, { Fragment } from 'react'
 import { Listbox, Transition } from '../HeadlessUIClient'
-import { usePricing } from './Context'
+import { usePricing } from './PricingContext'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { RegionPricingWithIcon } from '../../app/pricing/types'
 
-function PricingSelector({ regionList }: { regionList: RegionPricingWithIcon[] }) {
+function PricingSelector({
+  regionList
+}: {
+  regionList: RegionPricingWithIcon[]
+}) {
   const { selectedRegion, setSelectedRegion } = usePricing()
 
   return (
@@ -14,8 +18,8 @@ function PricingSelector({ regionList }: { regionList: RegionPricingWithIcon[] }
         <Listbox.Button className='relative bg-c1 w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left shadow-md focus:outline-none sm:text-sm'>
           <span className='flex gap-3 truncate'>
             <>
-              {selectedRegion.regionFlagPNG}
-              {selectedRegion.region}
+              {selectedRegion?.regionFlagPNG}
+              {selectedRegion?.region}
             </>
           </span>
           <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>

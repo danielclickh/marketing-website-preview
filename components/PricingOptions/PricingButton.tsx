@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { SuiButton } from '../sui'
-import { usePricing } from './Context'
+import { usePricing } from './PricingContext'
 
 interface Props {
   isFirst: boolean
@@ -24,7 +24,7 @@ function PricingButton({ isFirst, isLast, path, btnText }: Props) {
     )
   }
 
-  if (selectedRegion.hasDevService) {
+  if (selectedRegion?.hasDevService) {
     return (
       <SuiButton
         path={path}

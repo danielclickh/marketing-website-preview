@@ -5,7 +5,12 @@ import PricingOptions from '../../components/PricingOptions'
 import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
 import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
 import { findAll, findOne } from '../../lib/api/strapi'
-import { PricingData, PricingPlanData, RegionPricing, RegionPricingWithIcon } from './types'
+import {
+  PricingData,
+  PricingPlanData,
+  RegionPricing,
+  RegionPricingWithIcon
+} from './types'
 
 async function PricingPage() {
   const pricingPromise: Promise<PricingData> = findOne('pricing', {
@@ -46,10 +51,9 @@ async function PricingPage() {
     { data: pricingPlans }
   ] = await Promise.all([pricingPromise, pricingByRegionPromise, plansProps])
 
-
-  const regionList: RegionPricingWithIcon[] = pricingByRegion.map(item => ({
+  const regionList: RegionPricingWithIcon[] = pricingByRegion.map((item) => ({
     ...item,
-    regionFlagPNG: (<StrapiImage {...item.regionFlagPNG} alt={item.region} />)
+    regionFlagPNG: <StrapiImage {...item.regionFlagPNG} alt={item.region} />
   }))
   return (
     <div className='pricing bg-c2 text-c5 h-full md:pb-20'>
