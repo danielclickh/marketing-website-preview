@@ -25,6 +25,11 @@ function ShowPricing({ isFirst }: { isFirst: boolean }) {
     selectedRegion[isFirst ? 'devStoragePricing' : 'storagePricing']
   const compute =
     selectedRegion[isFirst ? 'devComputePricing' : 'computePricing']
+
+  if (!storage || !compute) {
+    return null
+  }
+
   return (
     <div className='grid grid-cols-2 rounded-lg bg-c2 text-c5 text-left mt-8 py-3 '>
       <div className='border-r px-6 lg:px-4 xl:px-6'>

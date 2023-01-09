@@ -95,7 +95,7 @@ const sizeCalculator = (size: string | undefined) => {
 }
 
 export function SuiButton({
-  disabled,
+  disabled = false,
   type,
   children,
   segmentEvent,
@@ -111,7 +111,7 @@ export function SuiButton({
     return (
       <>
         <button
-          disabled={disabled ? true : false}
+          disabled={disabled}
           className={`${hoverEffects}
           ${sizeCalculator(props.size)}
           ${
@@ -144,6 +144,7 @@ export function SuiButton({
           href={props.path}
           passHref
           scroll={props.scroll}
+          className={disabled ? 'cursor-not-allowed pointer-events-none' : ''}
           target={props.target}>
           <ButtonContent />
         </Link>
