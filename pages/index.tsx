@@ -306,7 +306,7 @@ export default function Home() {
                     width={20}
                     className='event-item--icon'
                   />
-                  January 4 &amp; 5, 2023
+                  January 18 &amp; 19, 2023
                 </div>
                 <div className='event-item--time'>
                   <Image
@@ -316,10 +316,10 @@ export default function Home() {
                     width={20}
                     className='event-item--icon'
                   />
-                  9:00 a.m. - Noon PST both days
+                  1:00 PM GMT (London) / 2:00 PM CET (Amsterdam)
                 </div>
               </div>
-              <Link href='https://clickhouse.com/company/events/2023-01-04-clickhouse-workshop'>
+              <Link href='https://clickhouse.com/company/events/2023-01-18-clickhouse-workshop'>
                 <div className='event-item--register-cta'>
                   Register now -&gt;
                 </div>
@@ -334,12 +334,9 @@ export default function Home() {
                   height={196}
                 />
               </div>
-              <div className='event-item--title'>ClickHouse Workshop</div>
+              <div className='event-item--title'>ClickHouse Cloud Onboarding</div>
               <div className='event-item--description'>
-                A deep dive into ClickHouse for developers and architects new to
-                ClickHouse. This free, hands-on, live-training event covers
-                modeling data, ingestion, views, analyzing data, managing data,
-                optimizing ClickHouse, and more.
+              We’ll also discuss what makes ClickHouse unique, how to get data into your ClickHouse service and what is typically done to tune performance and reduce costs. We will end with an open Q&A session where our experts are standing by.
               </div>
               <div className='event-item--details'>
                 <div className='event-item--date'>
@@ -350,7 +347,7 @@ export default function Home() {
                     width={20}
                     className='event-item--icon'
                   />
-                  January 18 &amp; 19, 2023
+                  January 26, 2023
                 </div>
                 <div className='event-item--time'>
                   <Image
@@ -360,10 +357,10 @@ export default function Home() {
                     width={20}
                     className='event-item--icon'
                   />
-                  10:00 a.m. - 1:00 p.m. GMT (London) both days
+                  1:00 PM PST (San Francisco)
                 </div>
               </div>
-              <Link href='https://clickhouse.com/company/events/2023-01-18-clickhouse-workshop'>
+              <Link href='https://clickhouse.com/company/events/2023-01-26-clickhouse-onboarding-workshop'>
                 <div className='event-item--register-cta'>
                   Register now -&gt;
                 </div>
