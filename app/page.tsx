@@ -61,7 +61,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <div className='md:bg-no-repeat bg-right bg-opacity-100 overflow-hidden'>
+      <div className='bg-hero md:bg-no-repeat bg-right bg-opacity-100 overflow-hidden'>
         <div className='flex mx-auto flex-col lg:flex-row lg:items-stretch pb-20 lg:pb-44 pt-28 px-8 2xl:px-0 relative gap-24 justify-center'>
           <div
             data-aos='fade-up'
@@ -218,7 +218,7 @@ export default async function HomePage() {
                 key={logo.href}
                 href={logo.href}
                 target={logo.target}
-                className='flex w-full sm:w-52 lg:w-full bg-c1-light rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer'>
+                className='flex w-full sm:w-52 lg:w-full bg-c1 rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer'>
                 <StrapiPicture
                   light={logo?.lightLogoPng}
                   dark={logo?.darkLogoPng}

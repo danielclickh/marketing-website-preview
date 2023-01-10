@@ -97,7 +97,7 @@ export default async function BlogPage({
             <Markdown className='rich-text-content font-medium pb-6 mb-6 border-b border-c2'>
               {content}
             </Markdown>
-            <div className='flex justify-between items-center mb-10'>
+            <div className='flex flex-col md:flex-row gap-4 justify-between items-center mb-10'>
               <div className='flex'>
                 <SuiText size='sm' weight='medium' color='secondary'>
                   Share this post
