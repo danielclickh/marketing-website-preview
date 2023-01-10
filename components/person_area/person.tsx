@@ -1,0 +1,38 @@
+import { BaseStrapiImage } from '../../lib/api/strapi/types'
+import { StrapiImage } from '../StrapiElements'
+import { SuiText } from '../sui'
+
+type PersonProps = {
+  avatar: BaseStrapiImage
+  name: string
+  job?: string
+  small?: boolean
+  className?: string
+}
+
+export function Person(props: PersonProps) {
+  const { avatar, name, job, small, className = '' } = props
+
+  return (
+    <div
+      className={`flex w-full flex-col items-center text-center md:max-w-xs ${className}`}>
+      {avatar && (
+        <StrapiImage
+          alt={name}
+          {...avatar}
+          width={small ? 130 : 160}
+          height={small ? 130 : 160}
+          className='aspect-square mb-6 rounded-full'
+        />
+      )}
+      <SuiText size='lg' weight='bold' className='mb-3 !text-xl'>
+        {name}
+      </SuiText>
+      {job && (
+        <SuiText size='base' weight='medium' color='secondary'>
+          {job}
+        </SuiText>
+      )}
+    </div>
+  )
+}

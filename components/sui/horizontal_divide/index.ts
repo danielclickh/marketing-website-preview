@@ -1,0 +1,1 @@
+export { SuiHorizontalDivide } from './horizontal_divide'

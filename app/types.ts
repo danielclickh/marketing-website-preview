@@ -1,0 +1,98 @@
+import {
+  StrapiButton,
+  StrapiImageType,
+  StrapiLink
+} from '../lib/api/strapi/types'
+
+export interface Feature {
+  id: string
+  title: string
+  description: string
+  iconSvg: StrapiImageType
+}
+
+export interface Bullet {
+  text: string
+}
+
+export interface ScreenshotAndBullets {
+  id: string
+  title: string
+  description: string
+  bullets: Array<Bullet>
+  screenshotPng: StrapiImageType
+}
+
+export interface HomepageHeroHighlight extends StrapiLink {
+  title: string
+  description: string
+  buttonText: string
+}
+
+export interface HomepageAdvancedCallout extends StrapiLink {
+  title: string
+  description: string
+  buttonText: string
+}
+
+export interface HomepageHero {
+  title: string
+  description: string
+  ctaButton: StrapiButton
+  ctaButtonSubtext: string
+  darkBackgroundIcon: StrapiImageType
+  lightBackgroundIcon: StrapiImageType
+  advancedCallout: HomepageAdvancedCallout
+  highlights: Array<HomepageHeroHighlight>
+}
+
+export interface HomepageAboutClickhouse {
+  title: string
+  features: Array<Feature>
+  allFeaturesButton: StrapiButton
+}
+
+export interface HomepageClickhouseCloud {
+  pretitle: string
+  title: string
+  description: string
+  primaryButton: StrapiButton
+  secondaryButton: StrapiButton
+}
+
+export interface HomepageTestimonials {
+  pretitle: string
+  title: string
+  description: string
+  testimonialsIconSvg: StrapiImageType
+  bottomIconSvg: StrapiImageType
+  testimonialItems: Array<HomepageTestimonialItem>
+}
+
+export interface HomepageTestimonialItem extends StrapiLink {
+  id: string
+  title: string
+  author: string
+}
+
+export interface HomepageCustomerStories {
+  title: string
+  description: string
+  logos: Array<HomepageCustomerStoryLogo>
+  ctaButton: StrapiButton
+}
+
+export interface HomepageCustomerStoryLogo extends StrapiLink {
+  id: string
+  darkLogoPng: StrapiImageType
+  lightLogoPng: StrapiImageType
+}
+
+export interface HomePageProps {
+  hero: HomepageHero
+  aboutClickhouse: HomepageAboutClickhouse
+  customerStories: HomepageCustomerStories
+  clickhouseCloud: HomepageClickhouseCloud
+  clickhouseCloudItems: Array<ScreenshotAndBullets>
+  testimonials: HomepageTestimonials
+}

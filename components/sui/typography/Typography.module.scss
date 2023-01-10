@@ -1,0 +1,36 @@
+.suiTitle {
+  &h1 {
+    @apply text-5xl font-bold;
+  }
+  &h2 {
+    @apply text-4xl font-bold;
+  }
+  &h3 {
+    @apply text-xl font-semibold;
+  }
+  &h4 {
+    @apply text-base font-semibold;
+  }
+  &h5 {
+    @apply text-sm font-semibold;
+  }
+  &h6 {
+    @apply text-xs font-semibold;
+  }
+}
+
+.weight-normal {
+  @apply font-normal;
+}
+
+.weight-medium {
+  @apply font-medium;
+}
+
+.weight-semibold {
+  @apply font-semibold;
+}
+
+.weight-bold {
+  @apply font-bold;
+}
