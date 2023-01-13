@@ -34,8 +34,8 @@ function SeoContainer({
         </>
       )}
       {keywords && <meta name='keywords' content={keywords} />}
-      {type && <meta name='keywords' content={type} />}
-      {siteName && <meta name='keywords' content={siteName} />}
+      {type && <meta name='og:type' content={type} />}
+      {siteName && <meta name='og:site_name' content={siteName} />}
 
       {image?.url && image.url.length > 0 && (
         <>
