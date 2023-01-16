@@ -169,13 +169,99 @@ function Markdown({
     props.allowedElements = allowedElements
   }
 
+  children = children.replace(/``` text\n/gi, '``` newText\n')
   const rehypePlugins = encloseByDiv
     ? [
         [rehypeRaw],
         [
           rehypeHighlight,
           {
-            detect: true
+            detect: true,
+            subset: [
+              'javascript',
+              'sql',
+              'bash',
+              'cpp',
+              'typescript',
+              'nt',
+              'plaintext'
+            ],
+            languages: {
+              newText: function (hljs: any) {
+                const COMMENT_MODE = hljs.COMMENT('--', '$')
+                const NESTED = {
+                  match: [
+                    /^\s*(?=\S)/, // have to look forward here to avoid polynomial backtracking
+                    /[^:]+/,
+                    /:\s*/,
+                    /$/
+                  ],
+                  className: {
+                    2: 'attribute',
+                    3: 'punctuation'
+                  }
+                }
+                const DICTIONARY_ITEM = {
+                  match: [
+                    /^\s*(?=\S)/, // have to look forward here to avoid polynomial backtracking
+                    /[^:]*[^: ]/,
+                    /[ ]*:/,
+                    /[ ]/,
+                    /.*$/
+                  ],
+                  className: {
+                    2: 'attribute',
+                    3: 'punctuation',
+                    5: 'string'
+                  }
+                }
+                const STRING = {
+                  className: 'string',
+                  variants: [
+                    {
+                      begin: /'/,
+                      end: /'/,
+                      contains: [{ begin: /''/ }]
+                    }
+                  ]
+                }
+                const LIST_ITEM = {
+                  variants: [
+                    { match: [/^\s*/, /-/, /[ ]/, /.*$/] },
+                    { match: [/^\s*/, /-$/] }
+                  ],
+                  className: {
+                    2: 'bullet',
+                    4: 'string'
+                  }
+                }
+                const QUOTED_IDENTIFIER = {
+                  begin: /"/,
+                  end: /"/,
+                  contains: [{ begin: /""/ }]
+                }
+
+                return {
+                  name: 'New Text',
+                  aliases: ['text', 'txt', 'newText'],
+                  contains: [
+                    hljs.inherit(hljs.HASH_COMMENT_MODE, {
+                      begin: /^\s*(?=#)/,
+                      excludeBegin: true
+                    }),
+                    LIST_ITEM,
+                    COMMENT_MODE,
+                    STRING,
+                    NESTED,
+                    QUOTED_IDENTIFIER,
+                    hljs.C_NUMBER_MODE,
+                    hljs.C_BLOCK_COMMENT_MODE,
+                    hljs.HASH_COMMENT_MODE,
+                    DICTIONARY_ITEM
+                  ]
+                }
+              }
+            }
           }
         ]
       ]
