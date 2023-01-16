@@ -115,7 +115,6 @@ export default async function BlogPage({
         </div>
       </div>
 
-      {content}
       <div className='flex w-full bg-c2 text-c5 pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex justify-between pb-8'>

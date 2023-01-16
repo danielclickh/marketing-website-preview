@@ -170,7 +170,15 @@ function Markdown({
   }
 
   const rehypePlugins = encloseByDiv
-    ? [rehypeRaw, rehypeHighlight]
+    ? [
+        [rehypeRaw],
+        [
+          rehypeHighlight,
+          {
+            detect: true
+          }
+        ]
+      ]
     : [rehypeRaw]
 
   return (
