@@ -64,7 +64,7 @@ export async function Header() {
                 <div className='hidden md:flex-1 min-[930px]:flex min-[930px]:items-center min-[930px]:justify-between'>
                   <PopoverGroup
                     as='nav'
-                    className='flex items-center space-x-4 lg:space-x-6 xl:space-x-10'>
+                    className='flex items-center space-x-2 lg:space-x-6 xl:space-x-10'>
                     {menuItems.map((menuItem) => {
                       if (menuItem.menuItems.length > 0) {
                         return (
@@ -137,19 +137,19 @@ export async function Header() {
                       <ThemeSwitcher />
                     </div>
 
-                    <div className='flex items-center md:ml-12 space-x-4'>
+                    <div className='flex items-center md:ml-12 space-x-2 lg:space-x-4'>
                       {ctaSecondaryButton && (
-                        <SuiLink
-                          href={ctaSecondaryButton.href}
-                          color='primary'
-                          weight='medium'
+                        <SuiButton
+                          type='secondary'
+                          path={ctaSecondaryButton.href}
+                          target={ctaSecondaryButton.target}
                           segmentEvent={{
                             label: ctaSecondaryButton.text,
                             category: 'website-nav'
                           }}
-                          target={ctaSecondaryButton.target}>
+                          className='w-full'>
                           {ctaSecondaryButton.text}
-                        </SuiLink>
+                        </SuiButton>
                       )}
                       {ctaButton && (
                         <SuiButton

@@ -34,7 +34,7 @@ export default function BlogPost(props: BlogPostType) {
             )}
 
             <div className='px-4 py-4'>
-              <SuiText size='xs' weight='bold' color='c6' className='mb-2'>
+              <SuiText size='sm' weight='bold' color='c6' className='mb-2'>
                 {category}
               </SuiText>
               <SuiText

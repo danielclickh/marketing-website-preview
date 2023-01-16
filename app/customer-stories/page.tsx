@@ -56,7 +56,7 @@ async function CustomerStoriesPage() {
             <Carousel>
               {testimonials.map((testimonial) => (
                 <div
-                  className='flex w-full flex-col text-center px-4'
+                  className='flex w-full flex-col text-center px-8'
                   key={testimonial.author}>
                   <div className='w-full h-full flex flex-col justify-between'>
                     <div>
