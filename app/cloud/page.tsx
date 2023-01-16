@@ -44,7 +44,7 @@ export default async function CloudPage() {
     <>
       <div className='bg-hero pt-10'>
         <div className='relative'>
-          <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-20 md:px-8 2xl:px-0'>
+          <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-24 md:px-8 2xl:px-0'>
             <div data-aos='fade-up' className='flex'>
               <div className='w-11/12 mx-auto md:w-6/12 md:mt-16 flex-col text-center md:text-left'>
                 <SuiTitle type='h1' className='text-6xl'>
@@ -122,7 +122,6 @@ export default async function CloudPage() {
               className='bg-transparent w-full h-full'
             />
           </div>
-          <div className='w-full mx-auto bg-strain_background bg-cover h-24 md:h-40 -mt-12 bg-no-repeat 2xl:h-52' />
         </div>
       </div>
       <div className='bg-c3 text-c1-light'>

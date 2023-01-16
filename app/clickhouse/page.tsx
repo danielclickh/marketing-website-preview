@@ -53,7 +53,7 @@ export default async function ClickHouseServerPage() {
   return (
     <>
       <div className='bg-hero pt-10'>
-        <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-20 px-4 sm:px-8 2xl:px-0'>
+        <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-24 px-4 sm:px-8 2xl:px-0'>
           <div data-aos='fade-up' className='flex'>
             <div className='md:w-6/12 md:mt-16 flex-col text-center md:text-left'>
               <SuiTitle type='h1' className='text-6xl'>
@@ -127,7 +127,6 @@ export default async function ClickHouseServerPage() {
             </div>
           </div>
         </div>
-        <div className='w-full mx-auto bg-strain_background bg-cover h-24 md:h-40 -mt-12 bg-no-repeat 2xl:h-52' />
       </div>
       <div className='bg-c3 text-c1-light'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-24 px-4 sm:px-8 2xl:px-0 pt-16'>
