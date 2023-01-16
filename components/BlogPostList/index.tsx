@@ -53,7 +53,7 @@ function BlogPostList({ blogs, categories, children }: BlogPostListProps) {
             setSearch(e.target.value)
           }
         />
-        <SuiText size='xs' weight='bold' className='mt-4'>
+        <SuiText size='sm' weight='bold' className='mt-4'>
           Blog categories
         </SuiText>
         <CategorySelector options={categoryList} />

@@ -33,7 +33,7 @@ function SuiRecentCard({
       {thumbnailPng ? (
         <StrapiImage
           {...thumbnailPng}
-          sizes='thumbnail'
+          sizes='medium'
           alt={title}
           className='rounded-lg h-52 object-cover object-center mb-3 shadow-md'
         />

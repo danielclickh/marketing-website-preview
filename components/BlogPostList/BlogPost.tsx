@@ -24,7 +24,7 @@ export default function BlogPost(props: BlogPostType) {
               <div className='w-full h-28 overflow-hidden'>
                 <StrapiImage
                   {...thumbnailPng}
-                  sizes='thumbnail'
+                  sizes='medium'
                   alt={title}
                   className='rounded-t-lg object-cover w-full h-full'
                   width={100}
