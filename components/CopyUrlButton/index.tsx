@@ -1,7 +1,7 @@
 'use client'
 import { DuplicateIcon } from '@heroicons/react/outline'
 import React from 'react'
-import { SuiButton } from '../sui'
+import { SuiButton } from '../sui/client'
 
 function CopyUrlButton() {
   const onClick = () => {

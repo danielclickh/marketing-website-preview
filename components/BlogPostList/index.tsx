@@ -3,8 +3,9 @@ import React, { ChangeEvent, useMemo, useState } from 'react'
 import BlogPost from './BlogPost'
 import { BlogPostListProps, BlogPost as BlogPostType } from './types'
 
-import { SuiSearchField, SuiText, SuiTextField, SuiTitle } from '../sui'
+import { SuiSearchField, SuiText } from '../sui/client'
 import CategorySelector from '../CategorySelector'
+
 function BlogPostList({ blogs, categories, children }: BlogPostListProps) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [search, setSearch] = useState('')

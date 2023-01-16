@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { SuiButton } from '../sui'
+import { SuiButton } from '../sui/client'
 import { usePricing } from './PricingContext'
 
 interface Props {

@@ -3,7 +3,12 @@ import React, { ChangeEvent, FocusEvent, FormEvent, useState } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import { useAnalytics } from '../Providers/Analytics'
-import { SuiButton, SuiTextField, SuiTextFieldArea, useSnackbar } from '../sui'
+import {
+  SuiButton,
+  SuiTextField,
+  SuiTextFieldArea,
+  useSnackbar
+} from '../sui/client'
 
 interface Props {
   firstNameLabel: string

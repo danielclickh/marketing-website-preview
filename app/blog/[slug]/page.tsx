@@ -1,7 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
-import { ArrowRightIcon } from '@heroicons/react/solid'
-
 import {
   SuiText,
   SuiTitle,
@@ -68,7 +65,7 @@ export default async function BlogPage({
             <SuiTitle type='h1' className='mt-6 mb-8 max-w-screen-sm'>
               {title}
             </SuiTitle>
-            <div className='flex flex-row space-x-4 pt-2 justify-center'>
+            <div className='flex flex-row items-center space-x-4 pt-2 justify-center'>
               <div className='flex w-11 h-11'>
                 <StrapiImage
                   {...author.avatarPng}
@@ -103,7 +100,7 @@ export default async function BlogPage({
                   Share this post
                 </SuiText>
               </div>
-              <div className='flex space-x-4 text-c4'>
+              <div className='flex gap-4 flex-wrap justify-center text-c4'>
                 <CopyUrlButton />
                 {['y_combinator', 'twitter', 'facebook', 'linkedin'].map(
                   (social) => (
@@ -118,6 +115,7 @@ export default async function BlogPage({
         </div>
       </div>
 
+      {content}
       <div className='flex w-full bg-c2 text-c5 pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex justify-between pb-8'>

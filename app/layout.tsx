@@ -1,7 +1,8 @@
 import { Header } from '../components/header'
-import { Footer } from '../components/footer'
+import Footer from '../components/Footer'
 import { ReactNode } from 'react'
 import '../styles/globals.scss'
+import '../styles/highlightjs.scss'
 import { Inter } from '@next/font/google'
 import { Providers } from '../components/Providers'
 type Props = {

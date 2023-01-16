@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { InformationCircleIcon } from '@heroicons/react/outline'
-import { SuiTooltip, SuiTooltipContent, SuiTooltipTrigger } from '../sui'
+import { SuiTooltip, SuiTooltipContent, SuiTooltipTrigger } from '../sui/client'
 import { usePricing } from './PricingContext'
 
 function InfoTooltip({ content }: { content: string }) {

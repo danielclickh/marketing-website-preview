@@ -1,10 +1,9 @@
 'use client'
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, ReactNode, useState } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
-import Markdown from '../Markdown'
 import { useAnalytics } from '../Providers/Analytics'
-import { SuiButton, SuiText, SuiTextField, useSnackbar } from '../sui'
+import { SuiButton, SuiText, SuiTextField, useSnackbar } from '../sui/client'
 
 type StatusType = {
   loading: boolean
@@ -13,14 +12,14 @@ type StatusType = {
 }
 
 interface ServiceUnavailableFormProps {
-  tosCheckboxRichText: string
+  children: ReactNode
   emailLabel: string
   success: string
   btnText: string
 }
 
 function ServiceUnavailableForm({
-  tosCheckboxRichText,
+  children,
   emailLabel,
   success: successMsg,
   btnText
@@ -100,13 +99,7 @@ function ServiceUnavailableForm({
         className='w-full text-left'
       />
       <div className='bottom'>
-        <SuiText
-          size='sm'
-          weight='normal'
-          color='secondary'
-          className='text-center my-3'>
-          <Markdown className='disclaimer'>{tosCheckboxRichText}</Markdown>
-        </SuiText>
+        {children}
         <SuiButton
           type='primary'
           disabled={status.loading || (email ?? '').length === 0}

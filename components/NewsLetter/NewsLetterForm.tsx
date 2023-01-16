@@ -3,7 +3,7 @@ import React, { ChangeEvent, useState } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import { useAnalytics } from '../Providers/Analytics'
-import { SuiButton, SuiTextField, useSnackbar } from '../sui'
+import { SuiButton, SuiTextField, useSnackbar } from '../sui/client'
 
 function NewsLetterForm({
   emailLabel,

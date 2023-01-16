@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createElement } from 'react'
 import { SuiText, SuiTitle } from '../../components/sui'
 import { fetchAll, findOne } from '../../lib/api/strapi'
 
@@ -6,6 +6,7 @@ import BlogPostList from '../../components/BlogPostList'
 import GetStarted from '../../components/GetStarted'
 import NewsLetter from '../../components/NewsLetter'
 import { BlogPost as BlogPostType } from './types'
+import Markdown from '../../components/Markdown'
 
 interface Props {
   title: string
@@ -46,8 +47,27 @@ async function getData(): Promise<Props> {
   }
 }
 
+const components = {
+  a: (props: any) => <span {...props} />
+}
+
 export default async function BlogsPage() {
   const { blogs, categories, title, description } = await getData()
+
+  blogs.map((blog) => ({
+    ...blog,
+    shortDescriptionElement: createElement('div', {
+      childreen: (
+        <SuiText
+          size='xs'
+          weight='medium'
+          color='secondary'
+          className='line-clamp'>
+          <Markdown components={components}>{blog.shortDescription}</Markdown>
+        </SuiText>
+      )
+    })
+  }))
 
   return (
     <div className='bg-hero pt-10'>

@@ -11,6 +11,7 @@ export interface BlogPost {
   category: string
   title: string
   shortDescription: string
+  shortDescriptionElement: ReactNode
   content: string
   author: BlogPostAuthor
   thumbnailPng: StrapiImageType

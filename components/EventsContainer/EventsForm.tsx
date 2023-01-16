@@ -4,7 +4,7 @@ import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import BulletPoint from '../BulletPoint'
 import { useAnalytics } from '../Providers/Analytics'
-import { SuiButton, SuiPanel, SuiTextField, useSnackbar } from '../sui'
+import { SuiButton, SuiPanel, SuiTextField, useSnackbar } from '../sui/client'
 import { EventsFormProps } from './types'
 
 function EventsForm({

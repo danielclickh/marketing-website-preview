@@ -1,4 +1,4 @@
-import React, { use } from 'react'
+import React from 'react'
 import { EventType } from '../../app/company/events/[slug]/types'
 import { findAll } from '../../lib/api/strapi'
 import { SuiRecentCard, SuiText, SuiTitle } from '../sui'

@@ -2,7 +2,7 @@ import React from 'react'
 import { findOne } from '../../lib/api/strapi'
 import { StrapiImageType } from '../../lib/api/strapi/types'
 import { StrapiPicture } from '../StrapiElements'
-import { SuiText, SuiTitle } from '../sui'
+import { SuiText } from '../sui'
 
 interface Props {
   hero: {

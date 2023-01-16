@@ -8,7 +8,7 @@ import {
   SuiText,
   SuiHorizontalDivide,
   SuiLink
-} from '../sui'
+} from '../sui/client'
 import { JobType, PositionType } from './types'
 
 type DepartmentType = [name: string, jobs: JobType[]]

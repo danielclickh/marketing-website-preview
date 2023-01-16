@@ -1,7 +1,9 @@
+// import 'server-only'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import { ReactMarkdownOptions } from 'react-markdown/lib/react-markdown'
 import rehypeRaw from 'rehype-raw'
+import rehypeHighlight from 'rehype-highlight'
 import { SuiTitle } from '../sui'
 
 const allowedElements = [
@@ -141,7 +143,7 @@ function StrapiImage({ src, width, height, alt, ...props }: any) {
 
 const components = {
   img: StrapiImage,
-  h1: (props: any) => <SuiTitle type='h1' {...props} />,
+  h1: (props: any) => <SuiTitle type='h2' {...props} />,
   h2: (props: any) => <SuiTitle type='h2' {...props} />,
   h3: (props: any) => <SuiTitle type='h3' {...props} />,
   h4: (props: any) => <SuiTitle type='h4' {...props} />,
@@ -166,6 +168,11 @@ function Markdown({
   if (encloseByDiv) {
     props.allowedElements = allowedElements
   }
+
+  const rehypePlugins = encloseByDiv
+    ? [rehypeRaw, rehypeHighlight]
+    : [rehypeRaw]
+
   return (
     <ReactMarkdown
       className={
@@ -175,7 +182,7 @@ function Markdown({
       }
       components={newComponents}
       unwrapDisallowed
-      rehypePlugins={[rehypeRaw]}
+      rehypePlugins={rehypePlugins}
       {...props}>
       {children}
     </ReactMarkdown>

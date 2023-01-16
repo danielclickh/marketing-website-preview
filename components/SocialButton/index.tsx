@@ -1,7 +1,6 @@
 'use client'
-import Image from 'next/image'
 import React from 'react'
-import { SuiButton } from '../sui'
+import { SuiButton } from '../sui/client'
 
 interface Props {
   type: string

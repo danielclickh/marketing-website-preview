@@ -1,12 +1,8 @@
 import Link from 'next/link'
 import { BlogPost as BlogPostType } from '../../app/blog/types'
-import Markdown from '../Markdown'
 import { StrapiImage } from '../StrapiElements'
-import { SuiText, SuiTitle } from '../sui'
+import { SuiText } from '../sui'
 
-const components = {
-  a: (props: any) => <span {...props} />
-}
 export default function BlogPost(props: BlogPostType) {
   const {
     thumbnailPng,
@@ -47,20 +43,10 @@ export default function BlogPost(props: BlogPostType) {
                 className='cursor-pointer pb-2 !text-xl'>
                 {title}
               </SuiText>
-              {shortDescription && (
-                <SuiText
-                  size='xs'
-                  weight='medium'
-                  color='secondary'
-                  className='line-clamp'>
-                  <Markdown components={components}>
-                    {shortDescription}
-                  </Markdown>
-                </SuiText>
-              )}
+              {shortDescription}
             </div>
           </div>
-          <div className='flex flex-row space-x-4 px-4 pb-6'>
+          <div className='flex flex-row items-center space-x-4 px-4 pb-6'>
             {author.avatarPng && (
               <div className='flex w-11 h-11'>
                 <StrapiImage

@@ -10,7 +10,7 @@ const hind = Hind_Siliguri({
   weight: '400'
 })
 
-export async function Footer() {
+export default async function Footer() {
   const {
     topLevelFooterMenu,
     logoSvg,

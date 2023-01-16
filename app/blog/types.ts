@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import { StrapiImageType } from '../../lib/api/strapi/types'
 
 export interface BlogPost {
@@ -5,6 +6,7 @@ export interface BlogPost {
   category: string
   title: string
   shortDescription: string
+  shortDescriptionElement: ReactNode
   content: string
   author: {
     name: string

@@ -4,6 +4,7 @@ import ServiceUnavailableForm from '../../components/ServiceUnavailableForm'
 import GetStarted from '../../components/GetStarted'
 import { SuiPanel, SuiText, SuiTitle } from '../../components/sui'
 import { StrapiImage } from '../../components/StrapiElements'
+import Markdown from '../../components/Markdown'
 
 async function getData() {
   const params = {
@@ -51,7 +52,17 @@ async function ServiceUnavailableCountryPage() {
               className='mb-9'>
               {description}
             </SuiText>
-            <ServiceUnavailableForm {...contactForm} btnText={ctaButton.text} />
+            <ServiceUnavailableForm {...contactForm} btnText={ctaButton.text}>
+              <SuiText
+                size='sm'
+                weight='normal'
+                color='secondary'
+                className='text-center my-3'>
+                <Markdown className='disclaimer'>
+                  {contactForm.tosCheckboxRichText}
+                </Markdown>
+              </SuiText>
+            </ServiceUnavailableForm>
           </div>
         </SuiPanel>
       </div>
