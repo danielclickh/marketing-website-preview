@@ -1,5 +1,5 @@
 .textCommon {
-  @apply bg-default_size bg-no-repeat transition-all ease-in bg-c2 border border-c4/10 text-c5 placeholder-c4 relative w-full rounded-md shadow-input pl-3 pr-10 py-2 text-left cursor-default sm:text-sm resize-none;
+  @apply bg-default_size bg-no-repeat transition-all ease-in bg-c2 border border-c4/10 text-c5 placeholder-c4 relative w-full rounded-md shadow-input pl-3 pr-10 py-2.5 text-left cursor-default sm:text-sm resize-none;
   &:focus {
     @apply bg-field_focus bg-focus_size bg-c1 shadow-input-focus outline-none;
   }
