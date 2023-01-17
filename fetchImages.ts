@@ -57,6 +57,7 @@ async function fetchImages() {
       await fetchImage(result)
     })
   )
+  console.log('Fetched all the images')
 }
 
 fetchImages()
