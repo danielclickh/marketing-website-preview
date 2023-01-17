@@ -28,7 +28,7 @@ function PricingButton({ isFirst, isLast, path, btnText }: Props) {
     return (
       <SuiButton
         path={path}
-        className='stroked_button_wrapper button_wrapper'
+        className='w-full stroked_button_wrapper button_wrapper'
         type='primary'>
         {btnText}
       </SuiButton>
