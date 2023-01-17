@@ -17,9 +17,6 @@ function InfoTooltip({ content }: { content: string }) {
 
 function ShowPricing({ isFirst }: { isFirst: boolean }) {
   const { selectedRegion } = usePricing()
-  if (selectedRegion?.hasDevService) {
-    return null
-  }
 
   const storage =
     selectedRegion?.[isFirst ? 'devStoragePricing' : 'storagePricing']
