@@ -2,11 +2,12 @@
 import React, { ReactNode } from 'react'
 import Glider from 'react-glider'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import styles from './CustomerStories.module.scss'
 import 'glider-js/glider.min.css'
 
 const Carousel = ({ children }: { children: ReactNode }) => {
   return (
-    <div className='max-w-full w-full'>
+    <div className={styles.gliderContainer}>
       <Glider
         hasArrows
         slidesToShow={1}

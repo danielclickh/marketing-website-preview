@@ -66,7 +66,7 @@ export default async function BlogPage({
               {title}
             </SuiTitle>
             <div className='flex flex-row items-center space-x-4 pt-2 justify-center'>
-              <div className='flex w-11 h-11'>
+              <div className='flex w-11 h-11 aspect-square'>
                 <StrapiImage
                   {...author.avatarPng}
                   alt='author avatar'
@@ -76,7 +76,7 @@ export default async function BlogPage({
                 />
               </div>
               <div className='flex'>
-                <div className='flex flex-col'>
+                <div className='flex flex-col items-start'>
                   <SuiText size='sm' weight='medium'>
                     {author.name}
                   </SuiText>

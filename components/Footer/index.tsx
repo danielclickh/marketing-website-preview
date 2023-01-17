@@ -128,7 +128,7 @@ export default async function Footer() {
                   href={socialLink.href}
                   target={socialLink.target}
                   key={socialLink.href}>
-                  <div className='bg-c3 border border-c2-dark px-3 pt-3 pb-2 rounded hover:bg-c3/10'>
+                  <div className='bg-c3 border border-c2-dark p-3 rounded hover:bg-c3/10'>
                     <StrapiImage
                       {...socialLink.iconSvg}
                       width={21}

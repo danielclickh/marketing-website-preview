@@ -1,7 +1,12 @@
 import Link from 'next/link'
 import { BlogPost as BlogPostType } from '../../app/blog/types'
+import Markdown from '../Markdown'
 import { StrapiImage } from '../StrapiElements'
 import { SuiText } from '../sui'
+
+const components = {
+  a: (props: any) => <span {...props} />
+}
 
 export default function BlogPost(props: BlogPostType) {
   const {
@@ -16,7 +21,11 @@ export default function BlogPost(props: BlogPostType) {
   } = props
 
   return (
-    <Link href={`/blog/${slug}`} className='hover:no-underline'>
+    <Link
+      href={`/blog/${slug}`}
+      className={`blog-post-card hover:no-underline category-${category
+        .split(' ')
+        .join('-')}`}>
       <div className='flex w-full h-full bg-c1 flex-col group md:max-w-sm hover:cursor-pointer shadow-md hover:shadow-xl ease-in-out duration-300 rounded-lg'>
         <div className='h-full flex flex-col justify-between'>
           <div>
@@ -43,12 +52,22 @@ export default function BlogPost(props: BlogPostType) {
                 className='cursor-pointer pb-2 !text-xl'>
                 {title}
               </SuiText>
-              {shortDescription}
+              {shortDescription && (
+                <SuiText
+                  size='xs'
+                  weight='medium'
+                  color='secondary'
+                  className='line-clamp'>
+                  <Markdown components={components}>
+                    {shortDescription}
+                  </Markdown>
+                </SuiText>
+              )}
             </div>
           </div>
           <div className='flex flex-row items-center space-x-4 px-4 pb-6'>
             {author.avatarPng && (
-              <div className='flex w-11 h-11'>
+              <div className='flex w-11 h-11 aspect-square'>
                 <StrapiImage
                   {...author.avatarPng}
                   alt={author.name}

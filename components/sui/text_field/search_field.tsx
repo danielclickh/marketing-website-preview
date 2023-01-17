@@ -49,7 +49,7 @@ export function SuiSearchField({
         )}
       </div>
       <p
-        className={`mt-1 transition-opacity ease-in-out text-red-500 text-xs min-h-[1rem] italic ${
+        className={`mt-1 transition-opacity ease-in-out text-red-500 text-xs min-h-[1rem] ${
           error.length == 0 ? 'opacity-0' : 'opacity-100'
         }`}>
         {error}

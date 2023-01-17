@@ -17,13 +17,16 @@ export function Person(props: PersonProps) {
     <div
       className={`flex w-full flex-col items-center text-center md:max-w-xs ${className}`}>
       {avatar && (
-        <StrapiImage
-          alt={name}
-          {...avatar}
-          width={small ? 130 : 160}
-          height={small ? 130 : 160}
-          className='aspect-square mb-6 rounded-full'
-        />
+        <div
+          className={`${small ? 'w-32 h-32' : 'w-40 h-40'} aspect-square mb-6`}>
+          <StrapiImage
+            alt={name}
+            {...avatar}
+            width={small ? 130 : 160}
+            height={small ? 130 : 160}
+            className='h-full object-cover object-center rounded-full'
+          />
+        </div>
       )}
       <SuiText size='lg' weight='bold' className='mb-3 !text-xl'>
         {name}

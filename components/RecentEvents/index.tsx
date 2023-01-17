@@ -1,7 +1,7 @@
 import React from 'react'
 import { EventType } from '../../app/company/events/[slug]/types'
 import { findAll } from '../../lib/api/strapi'
-import { SuiRecentCard, SuiText, SuiTitle } from '../sui'
+import { SuiRecentCard, SuiTitle } from '../sui'
 
 async function RecentEvents({
   excludeEventSlug

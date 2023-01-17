@@ -7,6 +7,7 @@ import GetStarted from '../../components/GetStarted'
 import NewsLetter from '../../components/NewsLetter'
 import { BlogPost as BlogPostType } from './types'
 import Markdown from '../../components/Markdown'
+import BlogPost from '../../components/BlogPostList/BlogPost'
 
 interface Props {
   title: string
@@ -47,31 +48,12 @@ async function getData(): Promise<Props> {
   }
 }
 
-const components = {
-  a: (props: any) => <span {...props} />
-}
-
 export default async function BlogsPage() {
   const { blogs, categories, title, description } = await getData()
 
-  blogs.map((blog) => ({
-    ...blog,
-    shortDescriptionElement: createElement('div', {
-      childreen: (
-        <SuiText
-          size='xs'
-          weight='medium'
-          color='secondary'
-          className='line-clamp'>
-          <Markdown components={components}>{blog.shortDescription}</Markdown>
-        </SuiText>
-      )
-    })
-  }))
-
   return (
     <div className='bg-hero pt-10'>
-      <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
+      <div className='flex container mx-auto flex-col'>
         <div
           className='flex flex-col text-center mx-auto pt-6'
           data-aos='fade-up'>
@@ -88,9 +70,16 @@ export default async function BlogsPage() {
         </div>
       </div>
 
-      <BlogPostList categories={categories} blogs={blogs}>
-        {/* @ts-expect-error Server Component */}
-        <NewsLetter />
+      <BlogPostList categories={categories}>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 justify-center'>
+          {blogs.map((blog: BlogPostType) => (
+            <BlogPost key={blog.id} {...blog} />
+          ))}
+        </div>
+        <div className='mt-16 mb-32'>
+          {/* @ts-expect-error Server Component */}
+          <NewsLetter />
+        </div>
       </BlogPostList>
       <GetStarted />
     </div>

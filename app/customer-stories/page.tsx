@@ -38,7 +38,7 @@ async function CustomerStoriesPage() {
   return (
     <>
       <div className='bg-hero pt-10'>
-        <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
+        <div className='flex container mx-auto max-w-7xl flex-col px-6 2xl:px-0'>
           <div
             className='flex flex-col text-center mx-auto pt-6 max-w-screen-sm'
             data-aos='fade-up'>
@@ -56,7 +56,7 @@ async function CustomerStoriesPage() {
             <Carousel>
               {testimonials.map((testimonial) => (
                 <div
-                  className='flex w-full flex-col text-center px-8'
+                  className='flex w-full flex-col text-center pl-4 pr-8'
                   key={testimonial.author}>
                   <div className='w-full h-full flex flex-col justify-between'>
                     <div>
