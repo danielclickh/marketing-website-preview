@@ -1,3 +1,4 @@
+import { CheckCircleIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import React, { ReactNode } from 'react'
 import { SuiText } from '../sui/client'
@@ -17,14 +18,13 @@ function BulletPoint({
   }
 
   return (
-    <div className={`flex space-x-4 pb-4 ${className}`}>
-      <Image
-        src='/images/homepage/icon_check.svg'
-        alt='ClickHouse is fast'
-        width='32'
-        height='32'
-      />
-      <SuiText size='base' weight='medium' color='secondary'>
+    <div className={`flex item-center space-x-4 pb-4 ${className}`}>
+      <CheckCircleIcon className='w-8 h-8 aspect-square text-c6' />
+      <SuiText
+        size='base'
+        weight='medium'
+        color='secondary'
+        className='flex items-center'>
         {text && <p>{text}</p>}
         {children}
       </SuiText>
