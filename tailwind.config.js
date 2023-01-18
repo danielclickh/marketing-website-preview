@@ -65,7 +65,6 @@ module.exports = {
         card: '0px 4px 14px rgba(0, 0, 0, 0.13)',
         'card-xl': '0px 4px 14px 4px rgba(0, 0, 0, 0.13)',
         input: '0px 1px 2px rgba(0, 0, 0, 0.05)',
-        'input-focus': '0px 1px 2px rgba(0, 0, 0, 0.05), inset 0px -2px 0px #FFB200'
       },
       backgroundSize: {
         default_size: '0%, 100%',
@@ -73,7 +72,7 @@ module.exports = {
       },
       backgroundImage: {
         field_focus:
-          'linear-gradient(to top, #FFB200, #FFB200 2px, transparent 2px, transparent 100%)',
+          'linear-gradient(0deg, #ffb200, #ffb200 2px, transparent 0, transparent)',
       },
       spacing: {
         '30': '7.5rem'
