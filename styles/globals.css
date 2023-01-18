@@ -76,7 +76,7 @@ a {
 .hero-title {
   font-weight: 700;
   max-width: 80%;
-  @apply mx-auto text-5xl md:text-6xl mb-4;
+  @apply mx-auto text-5xl md:!text-6xl mb-4;
 }
 
 .hero-title-gradient {

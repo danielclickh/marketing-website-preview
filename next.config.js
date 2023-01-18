@@ -5,6 +5,7 @@ const nextConfig ={
   reactStrictMode: true,
   experimental: {
     appDir: true,
+    scrollRestoration: true
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles'), path.join(__dirname, 'app/**/*.module.scss'), path.join(__dirname, 'components/**/*.module.scss')],

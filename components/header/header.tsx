@@ -17,6 +17,7 @@ import { findOne } from '../../lib/api/strapi'
 import styles from './Header.module.scss'
 import { Hind_Siliguri } from '@next/font/google'
 import { HeaderData } from './types'
+import MobilePopoverPanel from './MobilePopoverPanel'
 
 const hind = Hind_Siliguri({
   subsets: ['latin'],
@@ -44,7 +45,7 @@ export async function Header() {
           Free ClickHouse Workshop - Sign up now
         </Link>
       </div>
-      <div className='pt-2 container flex mx-auto md:pt-0 w-full px-4 sm:px-8 2xl:px-0 max-w-7xl h-16 items-center'>
+      <div className='container flex mx-auto w-full px-4 sm:px-8 2xl:px-0 max-w-7xl h-16 items-center'>
         <div className='flex flex-col w-full'>
           <div className='flex justify-between items-center w-full'>
             <Link
@@ -167,144 +168,139 @@ export async function Header() {
                   </PopoverGroup>
                 </div>
               </div>
-
-              <Transition
-                as={Fragment}
-                enter='duration-200 ease-out'
-                enterFrom='opacity-0 scale-95'
-                enterTo='opacity-100 scale-100'
-                leave='duration-100 ease-in'
-                leaveFrom='opacity-100 scale-100'
-                leaveTo='opacity-0 scale-95'>
-                <PopoverPanel
-                  focus
-                  className='absolute top-0 z-10 inset-x-0 p-2 transition transform origin-top-right min-[930px]:hidden'>
-                  <div className='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-c1 divide-y-2 divide-c2'>
-                    <div className='pt-5 pb-6 px-5'>
-                      <div className='flex items-top justify-between'>
-                        <div className='mt-6 w-full'>
-                          <nav className='grid gap-4 grid-cols-2 w-full'>
-                            {menuItems.map((menuItem, index) => {
-                              if (index === 0) {
-                                return (
-                                  <>
-                                    <div
-                                      key={menuItem.name}
-                                      className='flex flex-col col-span-2 gap-y-6 '>
-                                      {menuItem.menuItems.map((item) => (
-                                        <SuiLink
-                                          key={item.name}
-                                          href={item.href}
-                                          target={item.target}
-                                          segmentEvent={{
-                                            label: item.name,
-                                            category: 'website-nav'
-                                          }}
-                                          className='w-full hover:no-underline flex items-center text-sm font-medium text-c5 relative'>
-                                          {item.icon && (
-                                            <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-c4 mr-4'>
-                                              <StrapiImage
-                                                {...item.icon}
-                                                className='h-10 w-10 text-c5'
-                                                aria-hidden='true'
-                                              />
-                                            </div>
-                                          )}
-                                          <div className='text-sm font-medium text-c5'>
-                                            {item.name}
-                                          </div>
-                                        </SuiLink>
-                                      ))}
-                                    </div>
-                                    <hr className={styles.mobileHeader} />
-                                  </>
-                                )
-                              }
-                              if (menuItem.menuItems.length > 0) {
-                                return menuItem.menuItems.map((item) => (
-                                  <SuiLink
-                                    key={item.name}
-                                    href={item.href}
-                                    target={item.target}
-                                    segmentEvent={{
-                                      label: item.name,
-                                      category: 'website-nav'
-                                    }}
-                                    className='w-full hover:no-underline flex items-start text-sm font-medium text-c5 relative'>
-                                    {item.icon && (
-                                      <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-c4 mr-4'>
-                                        <StrapiImage
-                                          {...item.icon}
-                                          className='h-10 w-10 text-c5'
-                                          aria-hidden='true'
-                                        />
-                                      </div>
-                                    )}
-                                    <div className='text-sm font-medium text-c5'>
-                                      {item.name}
-                                    </div>
-                                  </SuiLink>
-                                ))
-                              }
-                              return (
-                                <SuiLink
-                                  key={menuItem.name}
-                                  href={menuItem.href}
-                                  target={menuItem.target}
-                                  segmentEvent={{
-                                    label: menuItem.name,
-                                    category: 'website-nav'
-                                  }}
-                                  className='text-sm hover:no-underline font-medium text-c5'>
-                                  {menuItem.name}
-                                </SuiLink>
-                              )
-                            })}
-                          </nav>
-                        </div>
-                        <div>
-                          <PopoverButton className='bg-c1 rounded-md p-2 inline-flex items-center justify-center text-c5 hover:text-c4 ease-in-out focus:outline-none'>
-                            <span className='sr-only'>Close menu</span>
-                            <XIcon className='h-6 w-6' aria-hidden='true' />
-                          </PopoverButton>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='py-6 px-5 grid gap-4 w-full grid-cols-2'>
-                      {ctaSecondaryButton && (
-                        <SuiButton
-                          type='secondary'
-                          path={ctaSecondaryButton.href}
-                          target={ctaSecondaryButton.target}
-                          segmentEvent={{
-                            label: ctaSecondaryButton.text,
-                            category: 'website-nav'
-                          }}
-                          className='w-full'>
-                          {ctaSecondaryButton.text}
-                        </SuiButton>
-                      )}
-                      {ctaButton && (
-                        <SuiButton
-                          type='primary'
-                          path={ctaButton.href}
-                          target={ctaButton.target}
-                          segmentEvent={{
-                            label: ctaButton.text,
-                            category: 'website-nav'
-                          }}
-                          className='w-full'>
-                          {ctaButton.text}
-                        </SuiButton>
-                      )}
-                    </div>
-                  </div>
-                </PopoverPanel>
-              </Transition>
             </div>
           </div>
         </div>
       </div>
+      <Transition
+        as={Fragment}
+        enter='duration-200 ease-out'
+        enterFrom='opacity-0 scale-95'
+        enterTo='opacity-100 scale-100'
+        leave='duration-100 ease-in'
+        leaveFrom='opacity-100 scale-100'
+        leaveTo='opacity-0 scale-95'>
+        <MobilePopoverPanel>
+          <div className='pt-5 pb-6 px-5'>
+            <div className='flex items-top justify-between'>
+              <div className='mt-6 w-full'>
+                <nav className='grid gap-4 grid-cols-2 w-full'>
+                  {menuItems.map((menuItem, index) => {
+                    if (index === 0) {
+                      return (
+                        <>
+                          <div
+                            key={menuItem.name}
+                            className='flex flex-col col-span-2 gap-y-6 '>
+                            {menuItem.menuItems.map((item) => (
+                              <SuiLink
+                                key={item.name}
+                                href={item.href}
+                                target={item.target}
+                                segmentEvent={{
+                                  label: item.name,
+                                  category: 'website-nav'
+                                }}
+                                className='menu-item w-full hover:no-underline flex items-center text-sm font-medium text-c5 relative'>
+                                {item.icon && (
+                                  <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-c4 mr-4'>
+                                    <StrapiImage
+                                      {...item.icon}
+                                      className='h-10 w-10 text-c5'
+                                      aria-hidden='true'
+                                    />
+                                  </div>
+                                )}
+                                <div className='text-sm font-medium text-c5'>
+                                  {item.name}
+                                </div>
+                              </SuiLink>
+                            ))}
+                          </div>
+                          <hr className={styles.mobileHeader} />
+                        </>
+                      )
+                    }
+                    if (menuItem.menuItems.length > 0) {
+                      return menuItem.menuItems.map((item) => (
+                        <SuiLink
+                          key={item.name}
+                          href={item.href}
+                          target={item.target}
+                          segmentEvent={{
+                            label: item.name,
+                            category: 'website-nav'
+                          }}
+                          className='menu-item w-full hover:no-underline flex items-start text-sm font-medium text-c5 relative'>
+                          {item.icon && (
+                            <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-c4 mr-4'>
+                              <StrapiImage
+                                {...item.icon}
+                                className='h-10 w-10 text-c5'
+                                aria-hidden='true'
+                              />
+                            </div>
+                          )}
+                          <div className='text-sm font-medium text-c5'>
+                            {item.name}
+                          </div>
+                        </SuiLink>
+                      ))
+                    }
+                    return (
+                      <SuiLink
+                        key={menuItem.name}
+                        href={menuItem.href}
+                        target={menuItem.target}
+                        segmentEvent={{
+                          label: menuItem.name,
+                          category: 'website-nav'
+                        }}
+                        className='menu-item text-sm hover:no-underline font-medium text-c5'>
+                        {menuItem.name}
+                      </SuiLink>
+                    )
+                  })}
+                </nav>
+              </div>
+              <div>
+                <PopoverButton className='bg-c1 rounded-md p-2 inline-flex items-center justify-center text-c5 hover:text-c4 ease-in-out focus:outline-none'>
+                  <span className='sr-only'>Close menu</span>
+                  <XIcon className='h-6 w-6' aria-hidden='true' />
+                </PopoverButton>
+              </div>
+            </div>
+          </div>
+          <div className='py-6 px-5 grid gap-4 w-full grid-cols-2'>
+            {ctaSecondaryButton && (
+              <SuiButton
+                type='secondary'
+                path={ctaSecondaryButton.href}
+                target={ctaSecondaryButton.target}
+                segmentEvent={{
+                  label: ctaSecondaryButton.text,
+                  category: 'website-nav'
+                }}
+                className='w-full'>
+                {ctaSecondaryButton.text}
+              </SuiButton>
+            )}
+            {ctaButton && (
+              <SuiButton
+                type='primary'
+                path={ctaButton.href}
+                target={ctaButton.target}
+                segmentEvent={{
+                  label: ctaButton.text,
+                  category: 'website-nav'
+                }}
+                className='w-full'>
+                {ctaButton.text}
+              </SuiButton>
+            )}
+          </div>
+        </MobilePopoverPanel>
+      </Transition>
     </Popover>
   )
 }

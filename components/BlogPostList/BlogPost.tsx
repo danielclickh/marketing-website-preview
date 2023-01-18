@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { BlogPost as BlogPostType } from '../../app/blog/types'
 import Markdown from '../Markdown'
 import { StrapiImage } from '../StrapiElements'
-import { SuiText } from '../sui'
+import { SuiText, SuiTitle } from '../sui'
 
 const components = {
   a: (props: any) => <span {...props} />
@@ -43,9 +43,9 @@ export default function BlogPost(props: BlogPostType) {
             )}
 
             <div className='px-4 py-4'>
-              <SuiText size='sm' weight='bold' color='c6' className='mb-2'>
+              <SuiTitle type='h6' color='c6' className='mb-2'>
                 {category}
-              </SuiText>
+              </SuiTitle>
               <SuiText
                 size='lg'
                 weight='bold'
@@ -82,7 +82,7 @@ export default function BlogPost(props: BlogPostType) {
                 <SuiText size='sm' weight='medium'>
                   {author.name}
                 </SuiText>
-                <SuiText size='xs' weight='medium' color='secondary'>
+                <SuiText size='sm' weight='medium' color='secondary'>
                   {date || publishedAt}
                 </SuiText>
               </div>

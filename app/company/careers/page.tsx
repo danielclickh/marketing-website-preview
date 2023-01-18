@@ -28,7 +28,7 @@ export default async function CareersPage() {
       <div className='bg-c1 bg-cover pt-10'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
           <div className='flex flex-col text-center mx-auto' data-aos='fade-up'>
-            <SuiTitle type='h1' className='mb-4 text-6xl'>
+            <SuiTitle type='h1' className='mb-4 md:!text-6xl'>
               {title}
             </SuiTitle>
             <SuiText

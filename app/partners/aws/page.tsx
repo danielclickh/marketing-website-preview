@@ -52,7 +52,7 @@ function PartnersPage() {
               type='h1'
               color='primary'
               weight='bold'
-              className='text-6xl pb-6'>
+              className='md:!text-6xl pb-6'>
               ClickHouse Cloud on AWS
             </SuiTitle>
             <SuiText

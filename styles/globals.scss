@@ -23,10 +23,9 @@ body {
   @apply mx-auto text-c5;
 }
 
-[data-nextjs-scroll-focus-boundary] {
-  @apply h-full;
+body {
+  @apply w-full h-full;
 }
-
 * {
   @apply box-border;
 }

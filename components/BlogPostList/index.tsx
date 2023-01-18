@@ -2,7 +2,7 @@
 import React, { ChangeEvent, useRef, useState } from 'react'
 import { BlogPostListProps } from './types'
 
-import { SuiSearchField, SuiText } from '../sui/client'
+import { SuiSearchField, SuiText, SuiTitle } from '../sui/client'
 import CategorySelector from '../CategorySelector'
 
 function BlogPostList({ categories, children }: BlogPostListProps) {
@@ -80,9 +80,9 @@ function BlogPostList({ categories, children }: BlogPostListProps) {
           htmlFor='search'
           onChange={onChange}
         />
-        <SuiText size='sm' weight='bold' className='mt-4'>
+        <SuiTitle type='h6' color='c6' className='mt-4'>
           Blog categories
-        </SuiText>
+        </SuiTitle>
         <CategorySelector options={categoryList} />
       </div>
       <div className='w-full md:w-3/4' ref={ref}>

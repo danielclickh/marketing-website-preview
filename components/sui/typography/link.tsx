@@ -29,7 +29,9 @@ export const SuiLink = ({ ...LinkProps }: LinkProps) => {
 
   const onClick = () => {
     if (segmentEvent) {
-      analytics.track('click', segmentEvent)
+      try {
+        analytics.track('click', segmentEvent)
+      } catch (error) {}
     }
     if (onClickProp) {
       onClickProp()
@@ -47,6 +49,7 @@ export const SuiLink = ({ ...LinkProps }: LinkProps) => {
           cursor-pointer duration-200 hover:underline 
           ${className ?? ''}
       `}
+      scroll
       {...props}>
       {children}
     </Link>

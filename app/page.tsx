@@ -62,20 +62,20 @@ export default async function HomePage() {
   return (
     <>
       <div className='bg-hero md:bg-no-repeat bg-right bg-opacity-100 overflow-hidden'>
-        <div className='flex mx-auto flex-col lg:flex-row lg:items-stretch pb-20 lg:pb-44 pt-28 px-8 2xl:px-0 relative gap-24 justify-center'>
+        <div className='flex mx-auto flex-col lg:flex-row lg:items-stretch pb-20 lg:pb-44 pt-16 md:pt-28 px-8 2xl:px-0 relative gap-24 justify-center'>
           <div
             data-aos='fade-up'
             className='flex w-full lg:w-3/5 max-w-screen-sm mx-auto lg:mx-0'>
             <div className=' mx-auto md:mr-0 md:mt-8 flex-col text-center lg:text-left'>
-              <SuiTitle type='h1' className='!text-6xl' color='primary'>
+              <SuiTitle type='h1' className='md:!text-6xl' color='primary'>
                 {hero.title}
               </SuiTitle>
-              <div className='mt-6 max-w-[85%] flex flex-col'>
+              <div className='mx-auto lg:ml-0 mt-6 max-w-[85%] flex flex-col'>
                 <SuiText
                   size='base'
                   color='secondary'
                   weight='normal'
-                  className='text-left mb-10'>
+                  className='text-center lg:text-left mb-10'>
                   {hero.description}
                 </SuiText>
                 {hero.ctaButton && (
@@ -264,7 +264,7 @@ export default async function HomePage() {
           <div className='flex flex-col gap-y-28 mt-24'>
             {clickhouseCloudItems.map((clickhouseCloudItem, index: number) => (
               <div
-                className={`flex flex-col justify-between self-center max-w-screen-xl ${
+                className={`flex flex-col justify-between self-center max-w-screen-xl w-full ${
                   index % 2 !== 0 ? ' md:flex-row-reverse' : ' md:flex-row'
                 }`}
                 key={clickhouseCloudItem.title}>
@@ -299,7 +299,7 @@ export default async function HomePage() {
             ))}
           </div>
 
-          <div className='flex flex-col gap-4 md:flex-row md:gap-x-16 justify-center mt-16'>
+          <div className='flex flex-col gap-4 md:flex-row md:gap-x-10 justify-center mt-16'>
             {clickhouseCloud.primaryButton && (
               <div className='w-full md:w-48'>
                 <SuiButton

@@ -34,7 +34,7 @@ async function getData(slug: string): Promise<BlogProps> {
   const blogsParams = {
     sort: ['date:DESC', 'publishedAt:DESC'],
     populate: ['thumbnailPng'],
-    fields: ['category', 'title'],
+    fields: ['category', 'title', 'slug'],
     pagination: { limit: 3 }
   }
   const { data: otherBlogs } = await findAll('blog-posts', blogsParams)

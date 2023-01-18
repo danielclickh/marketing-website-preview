@@ -101,7 +101,7 @@ async function LearnPage() {
             <SuiTitle
               type='h1'
               color='white'
-              className='pt-16 md:pt-30 pb-4 !text-6xl'>
+              className='pt-16 md:pt-30 pb-4 md:!text-6xl'>
               ClickHouse <span className='gradient_title'>Academy</span>
             </SuiTitle>
             <SuiText size='lg' weight='normal' color='white' className='pb-20'>
