@@ -6,6 +6,29 @@ import environment from './environment'
 
 const publicFolder = path.join(__dirname, 'public')
 
+async function fetchStrapiImages(count = 0): Promise<Record<string, any>> {
+  try {
+    const response = await fetch(
+      `${environment.strapiBaseUrl}/api/upload/files?filters[mime][$notContainsi]=svg`,
+      {
+        headers: new Headers({
+          Authorization: `bearer ${environment.strapiApiToken}`
+        })
+      }
+    )
+    const results = await response.json()
+    return results
+  } catch (e) {
+    if (count < 3) {
+      count++
+      const res = await fetchStrapiImages(count)
+      return res
+    } else {
+      throw e
+    }
+  }
+}
+
 async function fetchImage(url: string, count = 0) {
   try {
     const response = await fetch(`${environment.strapiBaseUrl}${url}`)
@@ -34,15 +57,7 @@ async function fetchImages() {
   console.log('Add Directory started')
   await mkdir(uploadFolder)
   console.log('Add Directory ended')
-  const response = await fetch(
-    `${environment.strapiBaseUrl}/api/upload/files?filters[mime][$notContainsi]=svg`,
-    {
-      headers: new Headers({
-        Authorization: `bearer ${environment.strapiApiToken}`
-      })
-    }
-  )
-  const results = await response.json()
+  const results = await fetchStrapiImages()
 
   const urls: string[] = results.flatMap((result: any) => {
     const items = Object.values(result.formats || {}).map(
