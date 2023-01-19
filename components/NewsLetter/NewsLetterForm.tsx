@@ -25,12 +25,14 @@ function NewsLetterForm({
         email
       })
       const userId = workatoResp?.cloudId ? workatoResp.cloudId : email
-      analytics.identify(userId, { email })
-      analytics.track('Form Submitted', {
-        email,
-        userId,
-        _mkt_trk: workatoResp.marketCookie
-      })
+      try {
+        analytics.identify(userId, { email })
+        analytics.track('Form Submitted', {
+          email,
+          userId,
+          _mkt_trk: workatoResp.marketCookie
+        })
+      } catch (e) {}
       openSnackBar('Thanks for registering to our newsletter!', 'success')
     } catch (e: any) {
       openSnackBar(e.mesage, 'error')

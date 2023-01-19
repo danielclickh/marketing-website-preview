@@ -87,12 +87,14 @@ function EventsForm({
     }
 
     const userId = response?.cloudId ? response.cloudId : email
-    analytics.identify(userId, { email })
-    analytics.track('Form Submitted', {
-      email,
-      userId,
-      _mkt_trk: response.marketCookie
-    })
+    try {
+      analytics.identify(userId, { email })
+      analytics.track('Form Submitted', {
+        email,
+        userId,
+        _mkt_trk: response.marketCookie
+      })
+    } catch (e) {}
     openSnackBar('Thank you, you have been registered to the event', 'success')
     setLoading(false)
     onSubmitProp()

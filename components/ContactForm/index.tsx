@@ -97,12 +97,14 @@ function ContactForm({
         message: useCase
       })
       const userId = response?.cloudId ? response.cloudId : email
-      analytics.identify(userId, { email })
-      analytics.track('Form Submitted', {
-        email,
-        userId,
-        _mkt_trk: response.marketCookie
-      })
+      try {
+        analytics.identify(userId, { email })
+        analytics.track('Form Submitted', {
+          email,
+          userId,
+          _mkt_trk: response.marketCookie
+        })
+      } catch (e) {}
       openSnackBar('Thanks for registering to our newsletter!', 'success')
     } catch (e: any) {
       openSnackBar(e.message, 'error')

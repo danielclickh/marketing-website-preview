@@ -123,7 +123,9 @@ export function SuiButton({
            })} ${props.className ?? ''}`}
           onClick={() => {
             if (segmentEvent) {
-              analytics.track('click', segmentEvent)
+              try {
+                analytics.track('click', segmentEvent)
+              } catch (e) {}
             }
             props.onClick && props.onClick()
           }}>

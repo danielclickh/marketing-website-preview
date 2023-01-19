@@ -63,12 +63,14 @@ function ServiceUnavailableForm({
       email: email as string
     })
     const userId = response?.cloudId ? response.cloudId : email
-    analytics.identify(userId, { email })
-    analytics.track('Form Submitted', {
-      email,
-      userId,
-      _mkt_trk: response.marketCookie
-    })
+    try {
+      analytics.identify(userId, { email })
+      analytics.track('Form Submitted', {
+        email,
+        userId,
+        _mkt_trk: response.marketCookie
+      })
+    } catch (e) {}
     openSnackBar(successMsg, 'success')
     setTimeout(() => {
       setStatus({ loading: false })
