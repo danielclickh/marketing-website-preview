@@ -8,10 +8,13 @@ type FeatureItemProps = {
   title: string
   description: string
   delay: number
+  forceDarkMode?: boolean
 }
 
 export function FeatureItem(props: FeatureItemProps) {
-  const { icon, title, description, delay } = props
+  const { icon, title, description, delay, forceDarkMode = false } = props
+
+  const colorPalette = `${forceDarkMode ? 'bg-c2-dark' : 'bg-c2'}`
 
   return (
     <div
@@ -20,7 +23,8 @@ export function FeatureItem(props: FeatureItemProps) {
       data-aos-offset={0}
       data-aos-delay={delay}>
       <div className='flex w-1/5 items-start'>
-        <div className='flex w-16 h-16 bg-c2-dark rounded-lg shadow-md justify-center items-center'>
+        <div
+          className={`flex w-16 h-16 ${colorPalette} rounded-lg shadow-md justify-center items-center`}>
           <StrapiImage {...icon} className='feature-icon' />
         </div>
       </div>

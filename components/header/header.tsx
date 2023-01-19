@@ -51,7 +51,7 @@ export async function Header() {
             <Link
               href='/'
               className='flex items-center gap-x-3 hover:no-underline'>
-              <StrapiImage {...logoIcon} />
+              <StrapiImage {...logoIcon} width={32} height={32} />
               <span className={`text-2xl ${hind.className}`}>ClickHouse</span>
             </Link>
             <div className='flex justify-center'>
@@ -65,7 +65,7 @@ export async function Header() {
                 <div className='hidden md:flex-1 min-[930px]:flex min-[930px]:items-center min-[930px]:justify-between'>
                   <PopoverGroup
                     as='nav'
-                    className='flex items-center space-x-2 lg:space-x-6 xl:space-x-10'>
+                    className='flex items-center space-x-4 lg:space-x-6 xl:space-x-10'>
                     {menuItems.map((menuItem) => {
                       if (menuItem.menuItems.length > 0) {
                         return (
@@ -140,17 +140,17 @@ export async function Header() {
 
                     <div className='flex items-center md:ml-12 space-x-2 lg:space-x-4'>
                       {ctaSecondaryButton && (
-                        <SuiButton
-                          type='secondary'
-                          path={ctaSecondaryButton.href}
+                        <SuiLink
+                          key={ctaSecondaryButton.text}
+                          href={ctaSecondaryButton.href}
                           target={ctaSecondaryButton.target}
                           segmentEvent={{
                             label: ctaSecondaryButton.text,
                             category: 'website-nav'
                           }}
-                          className='w-full'>
+                          className='inline-flex hover:no-underline items-center text-sm font-medium text-c5 hover:text-c4 ease-in-out'>
                           {ctaSecondaryButton.text}
-                        </SuiButton>
+                        </SuiLink>
                       )}
                       {ctaButton && (
                         <SuiButton

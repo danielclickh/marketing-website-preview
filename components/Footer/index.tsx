@@ -33,14 +33,14 @@ export default async function Footer() {
   })
   return (
     <div className='flex bg-c2-dark py-8 px-4 md:px-0'>
-      <div className='container mx-auto md:flex justify-between max-w-7xl px-8 2xl:px-0 '>
+      <div className='container mx-auto md:flex justify-between max-w-7xl px-4 2xl:px-0 '>
         <div className='flex flex-col md:border-r border-c3'>
           <div className='sitemap lg:flex pt-4'>
             {topLevelFooterMenu.map((topMenu) => (
               <div
                 key={topMenu.title}
-                className='flex flex-col lg:w-4/12 pb-6 lg:pb-0'>
-                <SuiTitle type='h5' color='white' className='mb-4'>
+                className='flex flex-col lg:w-4/12 pb-8 lg:pb-0'>
+                <SuiTitle type='h6' color='white' className='mb-4 lg:!text-sm'>
                   {topMenu.title}
                 </SuiTitle>
                 <div className='flex flex-row flex-wrap lg:flex-col gap-y-2 gap-x-4 lg:gap-x-0'>
@@ -50,7 +50,8 @@ export default async function Footer() {
                       href={footerLink.href}
                       target={footerLink.target}
                       color='white'
-                      className='w-fit'
+                      size='xs'
+                      className='w-fit lg:!text-sm'
                       segmentEvent={{
                         label: footerLink.name,
                         category: 'website-nav'
@@ -63,9 +64,9 @@ export default async function Footer() {
               </div>
             ))}
           </div>
-          <div className='flex flex-col lg:pt-12 items-start lg:flex-row'>
+          <div className='flex flex-col pt-2 lg:pt-12 items-start lg:flex-row'>
             {logoSvg && (
-              <div className='flex md:w-64 mr-3 gap-x-3 items-center'>
+              <div className='flex md:w-64 mb-4 mr-3 gap-x-3 items-center'>
                 <StrapiImage {...logoSvg} width={25} height={25} />
                 <span className={`text-2xl text-c1-light ${hind.className}`}>
                   ClickHouse
@@ -76,7 +77,7 @@ export default async function Footer() {
               <SuiText color='white' size='xs' weight='medium'>
                 {licensingText}
               </SuiText>
-              <div className='copyright_and_bottom_links flex flex-col lg:flex-row gap-1 lg:items-center'>
+              <div className='copyright_and_bottom_links flex flex-col sm:flex-row gap-3 sm:gap-1 items-center mt-6 sm:mt-3'>
                 <SuiText color='white' size='xs' weight='medium'>
                   {copyright}
                 </SuiText>

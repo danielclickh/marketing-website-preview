@@ -62,11 +62,11 @@ export default async function HomePage() {
   return (
     <>
       <div className='bg-hero md:bg-no-repeat bg-right bg-opacity-100 overflow-hidden'>
-        <div className='flex mx-auto flex-col lg:flex-row lg:items-stretch pb-20 lg:pb-44 pt-16 md:pt-28 px-8 2xl:px-0 relative gap-24 justify-center'>
+        <div className='flex mx-auto flex-col lg:flex-row lg:items-stretch pb-20 lg:pb-44 pt-16 md:pt-28 px-8 2xl:px-0 relative gap-24 justify-center max-w-7xl'>
           <div
             data-aos='fade-up'
             className='flex w-full lg:w-3/5 max-w-screen-sm mx-auto lg:mx-0'>
-            <div className=' mx-auto md:mr-0 md:mt-8 flex-col text-center lg:text-left'>
+            <div className='mx-auto md:mr-0 md:mt-8 flex-col text-center lg:text-left'>
               <SuiTitle type='h1' className='md:!text-6xl' color='primary'>
                 {hero.title}
               </SuiTitle>
@@ -183,6 +183,7 @@ export default async function HomePage() {
                 title={feature.title}
                 description={feature.description}
                 delay={100}
+                forceDarkMode
               />
             ))}
           </div>

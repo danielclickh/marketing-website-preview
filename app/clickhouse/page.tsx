@@ -128,7 +128,7 @@ export default async function ClickHouseServerPage() {
           </div>
         </div>
       </div>
-      <div className='bg-c3 text-c1-light'>
+      <div className='bg-c1 text-c5'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-24 px-4 sm:px-8 2xl:px-0 pt-16'>
           <SuiTitle type='h3' className='mb-7 !text-lg' color='c6'>
             {features1.title}

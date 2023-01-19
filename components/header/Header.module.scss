@@ -11,7 +11,7 @@
 }
 
 .mobileHeader {
-  @apply col-span-2 relative -left-5;
+  @apply col-span-2 relative -left-5 border-c2;
   width: calc(100% + 5rem);
   right: -3.5rem;
 }

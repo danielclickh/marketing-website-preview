@@ -8,7 +8,7 @@
 @tailwind components;
 @layer components {
   .bg-hero {
-    @apply bg-gradient-to-b from-c2-light/0 to-c2-light dark:from-c3/0 dark:to-c3;
+    @apply bg-c1 bg-gradient-to-b from-c2-light/0 to-c2-light dark:from-c3/0 dark:to-c2-dark;
   }
 }
 @tailwind utilities;
@@ -40,12 +40,6 @@ body {
 
 .feature-icon {
   @apply w-9 h-9 flex items-center;
-  &:not(.inherit) {
-    @apply text-c1-light;
-    * {
-      @apply text-c1-light;
-    }
-  }
 }
 
 .gradient_title {

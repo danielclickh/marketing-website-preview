@@ -16,7 +16,7 @@ export function FeatureItemLarge(props: FeatureItemProps) {
     <div className='flex flex-col w-full text-left' data-aos={entry}>
       <div className='flex flex-row items-center mb-4'>
         <div className='flex w-12 mr-2'>
-          <StrapiImage {...icon} className='feature-icon inherit' />
+          <StrapiImage {...icon} className='feature-icon' />
         </div>
         <SuiTitle type='h3' className='!text-3xl' weight='bold'>
           {title}

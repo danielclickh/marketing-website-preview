@@ -124,7 +124,7 @@ export default async function CloudPage() {
           </div>
         </div>
       </div>
-      <div className='bg-c3 text-c1-light'>
+      <div className='bg-c1 text-c5'>
         <div className='flex container mx-auto flex-col max-w-7xl  pb-16 px-4 sm:px-8 2xl:px-0 pt-16'>
           <div className='feature-container'>
             {features.map((feature) => (
