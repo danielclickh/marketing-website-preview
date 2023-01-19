@@ -12,10 +12,9 @@ type CloseFn = (
 const MobilePopoverPanel = React.forwardRef<
   HTMLDivElement,
   React.HTMLProps<HTMLDivElement>
->(({ children }, ref) => {
+>(function MobilePopoverPanel({ children }, ref) {
   const onClick =
     (close: CloseFn) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      console.log(e.target.closest('.menu-item'))
       close()
     }
   return (
