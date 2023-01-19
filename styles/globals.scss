@@ -247,3 +247,7 @@ body {
     min-width: 48rem;
   }
 }
+
+#ot-sdk-btn-floating .ot-floating-button__front {
+  @apply bg-transparent;
+}
