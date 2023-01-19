@@ -4,7 +4,7 @@ interface SeoMetadata {
   title?: string
   keywords?: string
   description?: string
-  image?: { url: string }
+  image?: { url: string }[]
   type?: string
   siteName?: string
 }
@@ -17,6 +17,7 @@ function SeoContainer({
   type,
   siteName
 }: SeoMetadata) {
+  const imageUrl = image?.[0]?.url
   return (
     <>
       {title.length > 0 && (
@@ -37,10 +38,10 @@ function SeoContainer({
       {type && <meta name='og:type' content={type} />}
       {siteName && <meta name='og:site_name' content={siteName} />}
 
-      {image?.url && image.url.length > 0 && (
+      {imageUrl && imageUrl.length > 0 && (
         <>
-          <meta name='twitter:image' content={image.url} />
-          <meta name='og:image' content={image.url} />
+          <meta name='twitter:image' content={imageUrl} />
+          <meta name='og:image' content={imageUrl} />
         </>
       )}
       <meta name='author' content='ClickHouse' />
