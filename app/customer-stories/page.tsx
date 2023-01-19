@@ -51,12 +51,12 @@ async function CustomerStoriesPage() {
           </div>
 
           <div
-            className='flex flex-col md:flex-row mt-20 md:justify-evenly pb-16 2xl:container 2xl:mx-auto 2xl:px-0 py-3 px-10'
+            className='flex flex-col md:flex-row mt-20 md:justify-evenly pb-16 2xl:container 2xl:mx-auto py-3'
             data-aos='fade-up'>
             <Carousel>
               {testimonials.map((testimonial) => (
                 <div
-                  className='flex w-full flex-col text-center pl-4 pr-8'
+                  className='flex w-full flex-col text-center px-4'
                   key={testimonial.author}>
                   <div className='w-full h-full flex flex-col justify-between'>
                     <div>

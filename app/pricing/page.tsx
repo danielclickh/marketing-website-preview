@@ -11,6 +11,7 @@ import {
   RegionPricing,
   RegionPricingWithIcon
 } from './types'
+import styles from './Pricing.module.scss'
 
 async function PricingPage() {
   const pricingPromise: Promise<PricingData> = findOne('pricing', {
@@ -85,7 +86,7 @@ async function PricingPage() {
                     <Markdown>{meteredPricing.footerNote}</Markdown>
                   </div>
                   <hr className='max-w-xs mx-auto my-8 border-b bg-transparent border-c4/10' />
-                  <Markdown className='rich-text-content text-c4 text-center'>
+                  <Markdown className={styles.richTextLink}>
                     {hero.openSourceLink}
                   </Markdown>
                 </div>

@@ -83,7 +83,7 @@ export default async function News() {
           </div>
 
           {featuredEvent && (
-            <div className='flex max-w-5xl mx-auto'>
+            <div className='flex max-w-7xl mx-auto'>
               <SuiPanel
                 color='bg-c2 text-c5'
                 shadow

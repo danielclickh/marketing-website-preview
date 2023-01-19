@@ -105,11 +105,23 @@ function CareersFilter() {
   }, [selectedOffice, selectedDepartment, data, search])
 
   if (error) {
-    return <div>Issue fetching jobs</div>
+    return (
+      <div className='flex flex-col md:flex-row container mx-auto max-w-7xl justify-between'>
+        <SuiText size='base' weight='medium' className='pl-4'>
+          Issue fetching jobs
+        </SuiText>
+      </div>
+    )
   }
 
   if (!data) {
-    return <div> Loading</div>
+    return (
+      <div className='flex flex-col md:flex-row container mx-auto max-w-7xl justify-between'>
+        <SuiText size='base' weight='medium' className='pl-4'>
+          Loading
+        </SuiText>
+      </div>
+    )
   }
 
   const offices = data.offices.map(([officeId, officeName]) => ({
@@ -135,7 +147,7 @@ function CareersFilter() {
   })
 
   return (
-    <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 justify-between'>
+    <div className='flex flex-col md:flex-row container mx-auto max-w-7xl justify-between'>
       <div className='flex md:w-64 md:pr-8 pb-8 md:pb-0 flex-col'>
         <SuiSearchField
           placeholder='Search'

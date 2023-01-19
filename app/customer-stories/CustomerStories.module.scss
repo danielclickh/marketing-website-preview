@@ -5,8 +5,21 @@
 }
 
 .gliderContainer {
-  @apply max-w-full w-full;
+  @apply max-w-full w-full px-6;
   :global .glider.draggable {
     overflow: hidden;
+  }
+  :global button {
+    display: grid;
+    place-items: center;
+    &:first-of-type {
+      left: auto;
+      right: 100%;
+    }
+    &:last-of-type {
+      left: 100%;
+      right: auto;
+      place-items: flex-start;
+    }
   }
 }

@@ -24,8 +24,9 @@ body {
 }
 
 body {
-  @apply w-full h-full;
+  @apply w-full h-full bg-c1;
 }
+
 * {
   @apply box-border;
 }

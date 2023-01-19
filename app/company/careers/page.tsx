@@ -51,8 +51,8 @@ export default async function CareersPage() {
             ))}
           </CompanyImages>
         </div>
-        <div className='w-full pt-4 pb-12'>
-          <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 md:space-x-16 mb-12'>
+        <div className='w-full pt-4 px-6 pb-12'>
+          <div className='flex flex-col md:flex-row container mx-auto max-w-7xl md:space-x-16 mb-12'>
             <div className='flex flex-col md:w-4/5'>
               <SuiTitle type='h2' className='mb-6'>
                 {paragraphTitle}
@@ -68,12 +68,12 @@ export default async function CareersPage() {
         </div>
       </div>
 
-      <div className='w-full bg-c2 text-c5 pt-12'>
+      <div className='w-full bg-c2 text-c5 px-6 pt-12'>
         {companyValues.map((companyValue, index: number) => (
           <div
             className={`flex flex-col md:${
               index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-            } container mx-auto max-w-7xl px-6 md:space-x-16 mb-28 items-center`}
+            } container mx-auto max-w-7xl md:space-x-16 mb-28 items-center`}
             key={companyValue.title}>
             <div className='flex flex-col md:w-3/5'>
               <SuiTitle type='h3' className='mb-6 !text-3xl' weight='bold'>
@@ -99,8 +99,8 @@ export default async function CareersPage() {
         ))}
       </div>
 
-      <div className='w-full bg-c1 pt-16 pb-16'>
-        <div className='flex flex-col md:flex-row container mx-auto max-w-7xl px-6 md:space-x-16 mb-12 items-center'>
+      <div className='w-full bg-c1 pt-16 pb-16 px-6'>
+        <div className='flex flex-col md:flex-row container mx-auto max-w-7xl md:space-x-16 mb-12 items-center'>
           <div className='flex flex-col md:w-3/5'>
             <SuiTitle type='h2'>{positionsTitle}</SuiTitle>
           </div>

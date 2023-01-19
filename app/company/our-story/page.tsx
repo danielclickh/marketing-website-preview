@@ -85,11 +85,8 @@ export default async function OurStoryPage() {
           </div>
         </div>
       </div>
-      <div className='bg-c2 text-c5 w-full pt-16 pb-12'>
-        <SuiTitle
-          type='h2'
-          weight='bold'
-          className='mb-4 px-6 max-w-7xl mx-auto'>
+      <div className='bg-c2 text-c5 w-full pt-16 pb-12 px-6'>
+        <SuiTitle type='h2' weight='bold' className='mb-4 max-w-7xl mx-auto'>
           {aboutUs.title}
         </SuiTitle>
         {aboutUs.items.map((item, index: number) => (
@@ -97,7 +94,7 @@ export default async function OurStoryPage() {
             key={item.title}
             className={`flex flex-col-reverse ${
               index % 2 == 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-            } container mx-auto max-w-7xl px-6 gap-16 mb-12 items-start`}>
+            } container mx-auto max-w-7xl gap-16 mb-12 items-start`}>
             <div className='flex flex-col w-full lg:w-3/5'>
               {item.title && (
                 <SuiTitle type='h3' weight='bold' className='mb-4 !text-3xl'>
@@ -127,8 +124,8 @@ export default async function OurStoryPage() {
         ))}
       </div>
 
-      <div className='w-full pt-16 pb-24 bg-c1'>
-        <div className='flex container mx-auto flex-col max-w-7xl px-6'>
+      <div className='w-full pt-16 pb-24 bg-c1 px-6'>
+        <div className='flex container mx-auto flex-col max-w-7xl'>
           <SuiTitle type='h2' className='mb-11 mx-auto md:ml-0'>
             {ourHistory.title}
           </SuiTitle>
@@ -156,8 +153,8 @@ export default async function OurStoryPage() {
         </div>
       </div>
 
-      <div className='bg-c2 text-c5 w-full'>
-        <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
+      <div className='bg-c2 text-c5 w-full px-6'>
+        <div className='flex container mx-auto flex-col 2xl:px-0'>
           <div className='flex flex-col text-center mx-auto pt-16'>
             <SuiTitle type='h2' className='mb-6'>
               {hiring.title}
@@ -180,8 +177,8 @@ export default async function OurStoryPage() {
           </div>
         </div>
       </div>
-      <div className='bg-c1 w-full pt-16 pb-24'>
-        <div className='flex container mx-auto flex-col max-w-7xl px-6'>
+      <div className='bg-c1 w-full pt-16 pb-24 px-6'>
+        <div className='flex container mx-auto flex-col max-w-7xl'>
           <SuiTitle
             type='h3'
             weight='bold'
