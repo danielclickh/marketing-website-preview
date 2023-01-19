@@ -2,7 +2,7 @@
 import React, { ChangeEvent, useRef, useState } from 'react'
 import { BlogPostListProps } from './types'
 
-import { SuiSearchField, SuiText, SuiTitle } from '../sui/client'
+import { SuiSearchField, SuiTitle } from '../sui/client'
 import CategorySelector from '../CategorySelector'
 
 function BlogPostList({ categories, children }: BlogPostListProps) {
