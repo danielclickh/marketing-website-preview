@@ -5,6 +5,7 @@ import '../styles/globals.scss'
 import '../styles/highlightjs.scss'
 import { Inter } from '@next/font/google'
 import { Providers } from '../components/Providers'
+import Script from 'next/script'
 type Props = {
   children: ReactNode
 }
@@ -38,6 +39,18 @@ export default async function BaseLayout({ children }: Props) {
           </div>
         </Providers>
       </body>
+      {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
+      <Script
+        src='https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js'
+        type='text/javascript'
+        data-domain-script='dedccc4b-7ab2-47de-935c-073b23b1d9b7'
+        strategy='lazyOnload'
+      />
+      <Script
+        id='cookie-consent'
+        type='text/javascript'>{`function OptanonWrapper() {}`}</Script>
+
+      {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
     </html>
   )
 }
