@@ -126,6 +126,10 @@ body {
       @apply bg-c2-dark text-c1-light rounded-lg whitespace-pre-wrap block;
 
       @apply border border-solid border-c3 break-words;
+
+      &.ignore-default-color {
+        @apply bg-transparent border-transparent text-inherit;
+      }
       font-family: monospace, sans-serif;
       word-break: break-all;
     }
