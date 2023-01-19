@@ -129,7 +129,7 @@ export async function Header() {
                             label: menuItem.name,
                             category: 'website-nav'
                           }}
-                          className='inline-flex hover:no-underline items-center text-sm font-medium text-c5 hover:text-c4 ease-in-out'>
+                          className='inline-flex items-center text-sm font-medium text-c5 ease-in-out'>
                           {menuItem.name}
                         </SuiLink>
                       )
@@ -148,7 +148,7 @@ export async function Header() {
                             label: ctaSecondaryButton.text,
                             category: 'website-nav'
                           }}
-                          className='inline-flex hover:no-underline items-center text-sm font-medium text-c5 hover:text-c4 ease-in-out'>
+                          className='inline-flex items-center text-sm font-medium text-c5 ease-in-out'>
                           {ctaSecondaryButton.text}
                         </SuiLink>
                       )}

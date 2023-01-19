@@ -33,7 +33,7 @@ export function FeatureItem(props: FeatureItemProps) {
           {title}
         </SuiTitle>
         <SuiText size='sm' weight='medium' color='c4-dark'>
-          <Markdown className='ignore-anchor'>{description}</Markdown>
+          <Markdown>{description}</Markdown>
         </SuiText>
       </div>
     </div>

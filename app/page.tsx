@@ -300,7 +300,7 @@ export default async function HomePage() {
             ))}
           </div>
 
-          <div className='flex flex-col gap-4 md:flex-row md:gap-x-10 justify-center mt-16'>
+          <div className='flex flex-col gap-4 md:flex-row md:gap-x-8 justify-center mt-16'>
             {clickhouseCloud.primaryButton && (
               <div className='w-full md:w-48'>
                 <SuiButton
