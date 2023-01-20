@@ -34,7 +34,7 @@ async function fetchStrapiImages(count = 0): Promise<Record<string, any>> {
 async function fetchImage(url: string, count = 0) {
   try {
     const response = await fetch(`${environment.strapiBaseUrl}${url}`, {
-      signal: (AbortSignal as any).timeout(10000)
+      signal: (AbortSignal as any).timeout(40000)
     })
 
     const blob = await response.blob()
@@ -81,4 +81,29 @@ async function fetchImages() {
   console.log('Fetched all the images')
 }
 
+async function fetchSiteMap(count = 0) {
+  try {
+    const response = await fetch(
+      `${environment.strapiBaseUrl}/sitemap/index.xml`,
+      {
+        signal: (AbortSignal as any).timeout(30000)
+      }
+    )
+
+    const data = await response.text()
+
+    await writeFile(path.join(publicFolder, '/sitemap.xml'), data)
+    console.log('Fetched sitemap')
+  } catch (e) {
+    if (count < 3) {
+      count++
+      await fetchSiteMap(count)
+    } else {
+      console.warn('Error fetching sitemap')
+      throw e
+    }
+  }
+}
+
+fetchSiteMap()
 fetchImages()

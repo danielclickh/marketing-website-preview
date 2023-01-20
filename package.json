@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "fetch-images": "ts-node  -O '{\"module\": \"commonjs\"}' fetchImages",
-    "deploy": "yarn fetch-images && next build",
+    "download-cms-data": "ts-node  -O '{\"module\": \"commonjs\"}' copyCmsData",
+    "deploy": "yarn download-cms-data && next build",
     "lint": "next lint",
     "export": "next export"
   },
