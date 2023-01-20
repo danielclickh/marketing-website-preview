@@ -15,7 +15,7 @@ function PricingSelector({
   return (
     <Listbox value={selectedRegion} onChange={setSelectedRegion}>
       <div className='relative mt-1'>
-        <Listbox.Button className='relative bg-c1 w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left shadow-md focus:outline-none sm:text-sm'>
+        <Listbox.Button className='relative bg-c1 w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left shadow-input focus:outline-none sm:text-sm border border-c4/10'>
           <span className='flex gap-3 truncate'>
             <>
               {selectedRegion?.regionFlagPNG}
