@@ -6,9 +6,9 @@ import RecentEvents from '../../../../components/RecentEvents'
 import { StrapiImage } from '../../../../components/StrapiElements'
 import { SuiText, SuiTitle } from '../../../../components/sui'
 import { findAll, getPathsValues } from '../../../../lib/api/strapi'
-import { EventType } from './types'
+import { EventType, PageProps } from './types'
 
-async function EventPage({ params: { slug } }: { params: { slug: string } }) {
+async function EventPage({ params: { slug } }: PageProps) {
   const { data } = await findAll('events', {
     filters: {
       slug: {

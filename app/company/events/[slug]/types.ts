@@ -1,5 +1,9 @@
 import { StrapiImageType } from '../../../../lib/api/strapi/types'
 
+export interface PageProps {
+  params: { slug: string }
+}
+
 export interface EventHost {
   name: string
   role: string
