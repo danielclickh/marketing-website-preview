@@ -1,8 +1,11 @@
-import { existsSync } from 'fs'
+import { createWriteStream, existsSync } from 'fs'
 import { mkdir, writeFile, rm } from 'fs/promises'
 import path from 'path'
+import { pipeline } from 'stream/promises'
+import { promisify } from 'util'
 
 import environment from './environment'
+const writeFilePromise = promisify(writeFile)
 
 const publicFolder = path.join(__dirname, 'public')
 
@@ -33,15 +36,10 @@ async function fetchStrapiImages(count = 0): Promise<Record<string, any>> {
 
 async function fetchImage(url: string, count = 0) {
   try {
-    const response = await fetch(`${environment.strapiBaseUrl}${url}`, {
-      signal: (AbortSignal as any).timeout(40000)
-    })
-
-    const blob = await response.blob()
-
-    const bos = blob.stream()
-
-    await writeFile(path.join(publicFolder, url), bos)
+    const response = await fetch(`${environment.strapiBaseUrl}${url}`)
+    const arrayBuffer = await response.arrayBuffer()
+    const buffer = Buffer.from(arrayBuffer)
+    createWriteStream(path.join(publicFolder, url)).write(buffer)
   } catch (e) {
     if (count < 3) {
       count++
