@@ -249,5 +249,5 @@ body {
 }
 
 #ot-sdk-btn-floating .ot-floating-button__front {
-  @apply bg-transparent;
+  @apply bg-transparent #{!important};
 }
