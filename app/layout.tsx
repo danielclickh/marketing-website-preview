@@ -28,8 +28,6 @@ export default function BaseLayout({ children }: Props) {
         <meta content='width=device-width, initial-scale=1' name='viewport' />
         <link href='favicon.ico' rel='icon' type='image/x-icon' />
         <meta name='twitter:card' content='summary_large_image' />
-        <meta name='twitter:image' content='/images/sql_console_hero.png' />
-        <meta name='og:image' content='/images/sql_console_hero.png' />
       </head>
       <body className={`${inter.variable} font-inter`}>
         <Providers>

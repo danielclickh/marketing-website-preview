@@ -15,7 +15,7 @@ function SeoContainer({
   type,
   siteName
 }: SeoMetadata) {
-  const imageUrl = image?.[0]?.url
+  const imageUrl = image?.[0]?.url || '/images/sql_console_hero.png'
 
   return (
     <>
@@ -36,12 +36,8 @@ function SeoContainer({
       {type && <meta property='og:type' content={type} />}
       {siteName && <meta name='og:site_name' content={siteName} />}
 
-      {imageUrl && imageUrl.length > 0 && (
-        <>
-          <meta name='twitter:image' content={imageUrl} />
-          <meta property='og:image' content={imageUrl} />
-        </>
-      )}
+      <meta name='twitter:image' content={imageUrl} />
+      <meta property='og:image' content={imageUrl} />
       <meta name='author' content='ClickHouse' />
     </>
   )
