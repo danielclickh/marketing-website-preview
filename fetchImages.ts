@@ -13,7 +13,8 @@ async function fetchStrapiImages(count = 0): Promise<Record<string, any>> {
       {
         headers: new Headers({
           Authorization: `bearer ${environment.strapiApiToken}`
-        })
+        }),
+        signal: (AbortSignal as any).timeout(60000)
       }
     )
     const results = await response.json()
@@ -24,6 +25,7 @@ async function fetchStrapiImages(count = 0): Promise<Record<string, any>> {
       const res = await fetchStrapiImages(count)
       return res
     } else {
+      console.warn('Error fetching image list')
       throw e
     }
   }
@@ -31,7 +33,9 @@ async function fetchStrapiImages(count = 0): Promise<Record<string, any>> {
 
 async function fetchImage(url: string, count = 0) {
   try {
-    const response = await fetch(`${environment.strapiBaseUrl}${url}`)
+    const response = await fetch(`${environment.strapiBaseUrl}${url}`, {
+      signal: (AbortSignal as any).timeout(10000)
+    })
 
     const blob = await response.blob()
 
@@ -43,6 +47,7 @@ async function fetchImage(url: string, count = 0) {
       count++
       await fetchImage(url, count)
     } else {
+      console.warn(`Error fetching image: ${environment.strapiBaseUrl}${url}`)
       throw e
     }
   }
@@ -66,6 +71,7 @@ async function fetchImages() {
     items.push(result.url)
     return items
   })
+  console.log('Fetched images list')
 
   await Promise.all(
     urls.map(async (result: string) => {
