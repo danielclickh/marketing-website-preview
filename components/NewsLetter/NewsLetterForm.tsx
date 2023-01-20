@@ -50,6 +50,7 @@ function NewsLetterForm({
         placeholder={emailLabel}
         value={email}
         onChange={onTextChange}
+        className='!min-h-[40px]'
       />
       <div className='mt-1'>
         <SuiButton type='primary' onClick={onClick}>
