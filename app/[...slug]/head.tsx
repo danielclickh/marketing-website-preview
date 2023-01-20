@@ -1,7 +1,22 @@
-import SeoContainer from '../components/SeoContainer'
-import { findHeader } from '../lib/api/strapi'
+import { findAll } from '../../lib/api/strapi'
+import SeoContainer from '../../components/SeoContainer'
+import { ParamsType } from './types'
 
-export default async function Head() {
-  const data = await findHeader('homepage')
-  return <SeoContainer {...data} />
+export default async function Head({
+  params: { slug }
+}: {
+  params: ParamsType
+}) {
+  const { data } = await findAll('rich-content-pages', {
+    filters: {
+      url: {
+        $eq: `/${slug.join('/')}`
+      }
+    },
+    fields: ['title']
+  })
+
+  return (
+    <SeoContainer title={data[0]?.title} type='website' siteName='ClickHouse' />
+  )
 }

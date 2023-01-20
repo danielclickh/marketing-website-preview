@@ -2,6 +2,7 @@ import React from 'react'
 import Markdown from '../../components/Markdown'
 import { SuiTitle } from '../../components/sui'
 import { findAll, getPathsValues } from '../../lib/api/strapi'
+import { ParamsType } from './types'
 
 interface RichContentPageProps {
   title: string
@@ -10,8 +11,6 @@ interface RichContentPageProps {
   leftContent?: null | string
   rightContent?: null | string
 }
-
-type ParamsType = { slug: string[] }
 
 async function getData({ slug }: ParamsType) {
   const { data } = await findAll('rich-content-pages', {
