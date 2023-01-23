@@ -52,6 +52,10 @@ export default function BaseLayout({ children }: Props) {
         type='text/javascript'>{`function OptanonWrapper() {}`}</Script>
 
       {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
+      <Script
+        src='https://discover.clickhouse.com/js/stripmkttok.js'
+        strategy='lazyOnload'
+      />
     </html>
   )
 }
