@@ -214,12 +214,12 @@ export default async function HomePage() {
           </SuiText>
 
           <div className='container pt-6 flex flex-col sm:flex-row flex-wrap lg:grid lg:grid-cols-5 gap-4 md:gap-x-8 self-center items-center justify-center'>
-            {customerStories.logos.map((logo) => (
+            {customerStories.logos.map((logo, index: number) => (
               <Link
                 key={logo.href}
                 href={logo.href}
                 target={logo.target}
-                className='flex w-full sm:w-52 lg:w-full bg-c1 rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer'>
+                className={`customer-stories-${index} flex w-full sm:w-52 lg:w-full bg-c1 rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer`}>
                 <StrapiPicture
                   light={logo?.lightLogoPng}
                   dark={logo?.darkLogoPng}

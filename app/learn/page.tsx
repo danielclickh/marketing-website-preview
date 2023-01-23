@@ -134,7 +134,7 @@ async function LearnPage() {
             <Link
               href={course.url}
               key={course.title}
-              className='w-full h-full hover:no-underline'>
+              className={`course-${course.title} w-full h-full hover:no-underline`}>
               <SuiCard
                 direction='left'
                 icon={course.icon}
@@ -183,7 +183,7 @@ async function LearnPage() {
             <Link
               href={course.url}
               key={course.title}
-              className='w-full hover:no-underline'>
+              className={`learning-course-${course.title} w-full hover:no-underline`}>
               <SuiCard
                 direction='left'
                 pretitle={course.pretitle}

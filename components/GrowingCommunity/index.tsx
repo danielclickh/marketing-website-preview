@@ -35,8 +35,9 @@ async function GrowingCommunity() {
       <div className='flex flex-col container mx-auto max-w-7xl px-8 2xl:px-0 mb-12'>
         <SuiTitle type='h2'>{title}</SuiTitle>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 pt-11'>
-          {iconButtons.map((iconButton) => (
+          {iconButtons.map((iconButton, index: number) => (
             <Link
+              className={`gc-icon-${index}`}
               key={iconButton.href}
               href={iconButton.href}
               target={iconButton.target}>

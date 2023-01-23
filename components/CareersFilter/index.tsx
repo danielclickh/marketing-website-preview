@@ -177,10 +177,10 @@ function CareersFilter() {
                   No results
                 </SuiText>
               )}
-              {jobs.map((job: JobType) => (
+              {jobs.map((job: JobType, index: number) => (
                 <SuiLink
                   href={job.url}
-                  className='rounded-md px-4 pt-4 flex flex-col w-full cursor-pointer hover:bg-c2 hover:no-underline transition-all duration-300 ease-in-out transform'
+                  className={`job-${index} rounded-md px-4 pt-4 flex flex-col w-full cursor-pointer hover:bg-c2 hover:no-underline transition-all duration-300 ease-in-out transform`}
                   key={job.url}>
                   <SuiText size='base' weight='medium' className='mb-2'>
                     {job.title}

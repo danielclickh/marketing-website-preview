@@ -33,16 +33,19 @@ export function SuiTabsPages(props: TabProps) {
       <div className='hidden sm:block'>
         <div className='border-b border-c2'>
           <nav className='-mb-px flex space-x-8' aria-label='Tabs'>
-            {props.tabs.map((tab) => (
+            {props.tabs.map((tab, index: number) => (
               <Link
                 key={tab.name}
                 href={tab.href}
-                className={classNames(
+                className={`
+                ${
                   tab.id == props.activeTab
                     ? 'border-c6 text-c5'
-                    : 'border-transparent text-c4 hover:text-c5 hover:border-c4',
-                  'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm'
-                )}
+                    : 'border-transparent text-c4 hover:text-c5 hover:border-c4'
+                }
+                tab-${index}    
+                  whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm
+                )`}
                 aria-current={tab.current ? 'page' : undefined}>
                 {tab.name}
               </Link>

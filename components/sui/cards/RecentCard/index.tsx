@@ -28,7 +28,10 @@ function SuiRecentCard({
     <Link
       target={target ?? '_self'}
       href={url}
-      className={`flex flex-col transition hover:scale-105 hover:no-underline  ${className}`}
+      className={`recent-card-${title.replace(
+        ' ',
+        '-'
+      )} flex flex-col transition hover:scale-105 hover:no-underline  ${className}`}
       {...props}>
       {thumbnailPng ? (
         <StrapiImage

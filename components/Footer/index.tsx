@@ -51,7 +51,7 @@ export default async function Footer() {
                       target={footerLink.target}
                       color='white'
                       size='xs'
-                      className='w-fit lg:!text-sm'
+                      className={`footer w-fit lg:!text-sm`}
                       segmentEvent={{
                         label: footerLink.name,
                         category: 'website-nav'
@@ -82,7 +82,7 @@ export default async function Footer() {
                   {copyright}
                 </SuiText>
                 <div className='bottom_links flex divide-x divide-c1-light'>
-                  {bottomLinks.map((bottomLink) => (
+                  {bottomLinks.map((bottomLink, index) => (
                     <SuiLink
                       key={bottomLink.text}
                       size='xs'
@@ -94,7 +94,7 @@ export default async function Footer() {
                       }}
                       color='white'
                       weight='normal'
-                      className='px-1 first:pl-0 leading-normal h-4 flex items-center'>
+                      className={`px-1 first:pl-0 leading-normal h-4 flex items-center bottom-link-${index}`}>
                       {bottomLink.text}
                     </SuiLink>
                   ))}
@@ -124,12 +124,13 @@ export default async function Footer() {
               {socialLinks.title}
             </SuiText>
             <div className='flex space-x-4'>
-              {socialLinks.socialLinkItems.map((socialLink) => (
+              {socialLinks.socialLinkItems.map((socialLink, index: number) => (
                 <Link
                   href={socialLink.href}
                   target={socialLink.target}
                   key={socialLink.href}>
-                  <div className='bg-c3 border border-c2-dark p-3 rounded hover:bg-c3/10'>
+                  <div
+                    className={`bg-c3 border border-c2-dark p-3 rounded hover:bg-c3/10 social-link-${index}`}>
                     <StrapiImage
                       {...socialLink.iconSvg}
                       width={21}

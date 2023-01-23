@@ -23,7 +23,7 @@ export default function BlogPost(props: BlogPostType) {
   return (
     <Link
       href={`/blog/${slug}`}
-      className={`blog-post-card hover:no-underline category-${category
+      className={`blog-post-card blog-post-card-${slug} hover:no-underline category-${category
         .split(' ')
         .join('-')}`}>
       <div className='flex w-full h-full bg-c1 flex-col group md:max-w-sm hover:cursor-pointer shadow-md hover:shadow-xl ease-in-out duration-300 rounded-lg'>
