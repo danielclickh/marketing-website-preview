@@ -1,0 +1,15 @@
+staging -> # https://api.vercel.com/v1/integrations/deploy/prj_tqhM8CQaHSnEUbdB1CtEeTuGKCah/obd6UXVxX2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["va-marketing-rewrite"]
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to staging
+        run: |
+          echo 'hello world'
