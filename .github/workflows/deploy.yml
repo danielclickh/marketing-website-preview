@@ -12,4 +12,4 @@ jobs:
     steps:
       - name: Deploy to staging
         run: |
-          echo 'hello world'
+          curl '${{ env.VERCEL_HOOK }}'
