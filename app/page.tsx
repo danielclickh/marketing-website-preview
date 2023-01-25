@@ -132,6 +132,7 @@ export default async function HomePage() {
               src={mainImage}
               alt='HomePage Image'
               className='heroScreenshot'
+              priority
               unoptimized
             />
           </div>
