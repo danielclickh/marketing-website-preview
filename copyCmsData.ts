@@ -9,6 +9,14 @@ const writeFilePromise = promisify(writeFile)
 
 const publicFolder = path.join(__dirname, 'public')
 
+function log(message: string) {
+  console.log(`[${new Date().toTimeString()}] ${message}`)
+}
+
+function warn(message: string) {
+  console.warn(`[${new Date().toTimeString()}] ${message}`)
+}
+
 async function fetchStrapiImages(count = 0): Promise<Record<string, any>> {
   try {
     const response = await fetch(
@@ -28,7 +36,7 @@ async function fetchStrapiImages(count = 0): Promise<Record<string, any>> {
       const res = await fetchStrapiImages(count)
       return res
     } else {
-      console.warn('Error fetching image list')
+      warn('Error fetching image list')
       throw e
     }
   }
@@ -45,7 +53,7 @@ async function fetchImage(url: string, count = 0) {
       count++
       await fetchImage(url, count)
     } else {
-      console.warn(`Error fetching image: ${environment.strapiBaseUrl}${url}`)
+      warn(`Error fetching image: ${environment.strapiBaseUrl}${url}`)
       throw e
     }
   }
@@ -53,13 +61,13 @@ async function fetchImage(url: string, count = 0) {
 async function fetchImages() {
   const uploadFolder = path.join(publicFolder, 'uploads')
   if (existsSync(uploadFolder)) {
-    console.log('Remove Directory started')
+    log(`[${new Date().toTimeString()}] Remove Directory started`)
     await rm(uploadFolder, { recursive: true })
-    console.log('Remove Directory ended')
+    log(`[${new Date().toTimeString()}] Remove Directory ended`)
   }
-  console.log('Add Directory started')
+  log('Add Directory started')
   await mkdir(uploadFolder)
-  console.log('Add Directory ended')
+  log('Add Directory ended')
   const results = await fetchStrapiImages()
 
   const urls: string[] = results.flatMap((result: any) => {
@@ -69,14 +77,16 @@ async function fetchImages() {
     items.push(result.url)
     return items
   })
-  console.log('Fetched images list')
 
+  log('Fetched images list')
+
+  log(`Fetching images(${urls.length})...`)
   await Promise.all(
     urls.map(async (result: string) => {
       await fetchImage(result)
     })
   )
-  console.log('Fetched all the images')
+  log(`Fetched all the images ${urls.length}`)
 }
 
 async function fetchSiteMap(count = 0) {
@@ -91,13 +101,13 @@ async function fetchSiteMap(count = 0) {
     const data = await response.text()
 
     await writeFile(path.join(publicFolder, '/sitemap.xml'), data)
-    console.log('Fetched sitemap')
+    log('Fetched sitemap')
   } catch (e) {
     if (count < 3) {
       count++
       await fetchSiteMap(count)
     } else {
-      console.warn('Error fetching sitemap')
+      warn('Error fetching sitemap')
       throw e
     }
   }
