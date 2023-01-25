@@ -6,8 +6,9 @@ on:
     branches: ["va-marketing-rewrite"]
 
 jobs:
-  deploy:
-    name: Deploy
+  deploy_to_staging:
+    name: Deploy to Staging
+    environment: Staging
     runs-on: ubuntu-latest
     steps:
       - name: Call Vercel to redeploy
