@@ -10,6 +10,6 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to staging
+      - name: Call Vercel to redeploy
         run: |
           curl '${{ env.VERCEL_HOOK }}'
