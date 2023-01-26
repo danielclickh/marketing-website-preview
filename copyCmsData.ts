@@ -3,6 +3,8 @@ import { mkdir, writeFile, rm } from 'fs/promises'
 import path from 'path'
 import { pipeline } from 'stream/promises'
 import { promisify } from 'util'
+import fetch from 'cross-fetch';
+import {RateLimit} from "async-sema"
 
 import environment from './environment'
 const writeFilePromise = promisify(writeFile)
@@ -29,7 +31,7 @@ async function fetchStrapiImages(count = 0): Promise<Record<string, any>> {
       }
     )
     const results = await response.json()
-    return results
+    return results as Record<string, string>
   } catch (e) {
     if (count < 3) {
       count++
@@ -51,6 +53,7 @@ async function fetchImage(url: string, count = 0) {
   } catch (e) {
     if (count < 3) {
       count++
+      log(`Retrying ${url}' due to ${(e as Error).message}`)
       await fetchImage(url, count)
     } else {
       warn(`Error fetching image: ${environment.strapiBaseUrl}${url}`)
@@ -59,34 +62,59 @@ async function fetchImage(url: string, count = 0) {
   }
 }
 async function fetchImages() {
-  const uploadFolder = path.join(publicFolder, 'uploads')
-  if (existsSync(uploadFolder)) {
-    log(`[${new Date().toTimeString()}] Remove Directory started`)
-    await rm(uploadFolder, { recursive: true })
-    log(`[${new Date().toTimeString()}] Remove Directory ended`)
-  }
-  log('Add Directory started')
-  await mkdir(uploadFolder)
-  log('Add Directory ended')
-  const results = await fetchStrapiImages()
+  try {
 
-  const urls: string[] = results.flatMap((result: any) => {
-    const items = Object.values(result.formats || {}).map(
-      (item: any) => item.url
-    )
-    items.push(result.url)
-    return items
-  })
+    const uploadFolder = path.join(publicFolder, 'uploads')
+    if (existsSync(uploadFolder)) {
+      log(`[${new Date().toTimeString()}] Remove Directory started`)
+      await rm(uploadFolder, { recursive: true })
+      log(`[${new Date().toTimeString()}] Remove Directory ended`)
+    }
+    log('Add Directory started')
+    await mkdir(uploadFolder)
+    log('Add Directory ended')
+    const results = await fetchStrapiImages()
 
-  log('Fetched images list')
-
-  log(`Fetching images(${urls.length})...`)
-  await Promise.all(
-    urls.map(async (result: string) => {
-      await fetchImage(result)
+    const urls: string[] = results.flatMap((result: any) => {
+      const items = Object.values(result.formats || {}).map(
+        (item: any) => item.url
+      )
+      items.push(result.url)
+      return items
     })
-  )
-  log(`Fetched all the images ${urls.length}`)
+
+    log('Fetched images list')
+
+    const batchSize = 25
+    const limit = RateLimit(batchSize)
+    log(`Fetching images(${urls.length})...`)
+
+    let batch: Promise<void>[] = []
+    let fetchImageCount = 0
+
+    for (const url of urls) {
+      // checks if limit is reached
+      if (batch.length === batchSize) {
+        await Promise.all(batch)
+        fetchImageCount += batch.length
+        log(`Fetched ${fetchImageCount} images`)
+        batch = []
+      }
+
+      await limit()
+      batch.push(fetchImage(url))
+    }
+
+    if (batch.length > 0 ) {
+      await Promise.all(batch)
+      fetchImageCount += batch.length
+      batch = []
+    }
+
+    log(`Finished fetching ${fetchImageCount} images `)
+  } catch(error) {
+    console.error(error)
+  }
 }
 
 async function fetchSiteMap(count = 0) {
