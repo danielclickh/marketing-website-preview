@@ -133,7 +133,6 @@ export default async function HomePage() {
               alt='HomePage Image'
               className='heroScreenshot'
               priority
-              unoptimized
             />
           </div>
         </div>
