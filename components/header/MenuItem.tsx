@@ -24,7 +24,7 @@ const MenuItem = ({
           className={`${styles.header_popover} group group-hover:underline data-[open=true]:underline hover:underline`}>
           <span>{name}</span>
           <ChevronDownIcon
-            className='text-c5 ml-1 h-5 w-5 ease-in-out'
+            className='text-c5 ml-1 h-5 w-5'
             aria-hidden='true'
           />
         </PopoverButton>

@@ -7,7 +7,7 @@ function ThemeSwitcher() {
   const { theme, setTheme } = useTheme()
 
   return (
-    <div className='flex space-x-4 transition-all ease-in-out duration-75'>
+    <div className='flex transition-all ease-in-out duration-75 select-none'>
       <SunIcon
         className={`w-4 h-4 text-c4-dark hover:text-c1-light cursor-pointer ${
           theme === 'dark' ? '' : 'hidden'

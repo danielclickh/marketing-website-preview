@@ -4,7 +4,6 @@ import { Fragment } from 'react'
 import {
   Popover,
   PopoverButton,
-  PopoverPanel,
   Transition,
   PopoverGroup
 } from '../HeadlessUIClient'
@@ -129,7 +128,7 @@ export async function Header() {
                             label: menuItem.name,
                             category: 'website-nav'
                           }}
-                          className='inline-flex items-center text-sm font-medium text-c5 ease-in-out'>
+                          className='inline-flex items-center text-sm font-medium text-c5'>
                           {menuItem.name}
                         </SuiLink>
                       )
