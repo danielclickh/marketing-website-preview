@@ -6,6 +6,7 @@ import '../styles/highlightjs.scss'
 import { Inter } from '@next/font/google'
 import { Providers } from '../components/Providers'
 import Script from 'next/script'
+import environment from '../environment'
 type Props = {
   children: ReactNode
 }
@@ -56,6 +57,22 @@ export default function BaseLayout({ children }: Props) {
         src='https://discover.clickhouse.com/js/stripmkttok.js'
         strategy='lazyOnload'
       />
+      {/* Google Analytics for clickhouse.com */}
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${environment.googleTagManagerId}`}
+        type='text/javascript'
+        strategy='lazyOnload'
+      />
+      <Script id='ga-script' type='text/javascript'>{`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${environment.googleTagManagerId}', {
+              page_path: window.location.pathname,
+            });
+          `}</Script>
+
+      {/* Google Analytics clickhouse.com */}
     </html>
   )
 }
