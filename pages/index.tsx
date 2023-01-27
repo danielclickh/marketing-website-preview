@@ -290,47 +290,6 @@ export default function Home() {
                   height={196}
                 />
               </div>
-              <div className='event-item--title'>ClickHouse Cloud Onboarding</div>
-              <div className='event-item--description'>
-              We’ll also discuss what makes ClickHouse unique, how to get data into your ClickHouse service and what is typically done to tune performance and reduce costs. We will end with an open Q&A session where our experts are standing by.
-              </div>
-              <div className='event-item--details'>
-                <div className='event-item--date'>
-                  <Image
-                    alt='image'
-                    src={`${imagePrefix}/icon-calendar.svg`}
-                    height={20}
-                    width={20}
-                    className='event-item--icon'
-                  />
-                  January 26, 2023
-                </div>
-                <div className='event-item--time'>
-                  <Image
-                    alt='image'
-                    src={`${imagePrefix}/icon-clock.svg`}
-                    height={20}
-                    width={20}
-                    className='event-item--icon'
-                  />
-                  1:00 PM PST (San Francisco)
-                </div>
-              </div>
-              <Link href='https://clickhouse.com/company/events/2023-01-26-clickhouse-onboarding-workshop'>
-                <div className='event-item--register-cta'>
-                  Register now -&gt;
-                </div>
-              </Link>
-            </div>
-            <div className='event-item'>
-              <div className='event-item--image'>
-                <Image
-                  alt='image'
-                  src={`${imagePrefix}/clickhouse_workshop.png`}
-                  width={342}
-                  height={196}
-                />
-              </div>
               <div className='event-item--title'>ClickHouse Workshop</div>
               <div className='event-item--description'>
                 A deep dive into ClickHouse for developers and architects new to
@@ -361,6 +320,47 @@ export default function Home() {
                 </div>
               </div>
               <Link href='https://clickhouse.com/company/events/2023-02-01-clickhouse-workshop'>
+                <div className='event-item--register-cta'>
+                  Register now -&gt;
+                </div>
+              </Link>
+            </div>
+            <div className='event-item'>
+              <div className='event-item--image'>
+                <Image
+                  alt='image'
+                  src={`${imagePrefix}/clickhouse_workshop.png`}
+                  width={342}
+                  height={196}
+                />
+              </div>
+              <div className='event-item--title'>ClickHouse Cloud Onboarding</div>
+              <div className='event-item--description'>
+              We’ll also discuss what makes ClickHouse unique, how to get data into your ClickHouse service and what is typically done to tune performance and reduce costs. We will end with an open Q&A session where our experts are standing by.
+              </div>
+              <div className='event-item--details'>
+                <div className='event-item--date'>
+                  <Image
+                    alt='image'
+                    src={`${imagePrefix}/icon-calendar.svg`}
+                    height={20}
+                    width={20}
+                    className='event-item--icon'
+                  />
+                  February 8, 2023
+                </div>
+                <div className='event-item--time'>
+                  <Image
+                    alt='image'
+                    src={`${imagePrefix}/icon-clock.svg`}
+                    height={20}
+                    width={20}
+                    className='event-item--icon'
+                  />
+                  3:00 PM GMT
+                </div>
+              </div>
+              <Link href='https://clickhouse.com/company/events/2023-02-08-clickhouse-onboarding-workshop'>
                 <div className='event-item--register-cta'>
                   Register now -&gt;
                 </div>
