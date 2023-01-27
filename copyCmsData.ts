@@ -1,14 +1,10 @@
 import { createWriteStream, existsSync } from 'fs'
 import { mkdir, writeFile, rm } from 'fs/promises'
 import path from 'path'
-import { pipeline } from 'stream/promises'
-import { promisify } from 'util'
-import fetch from 'cross-fetch';
-import {RateLimit} from "async-sema"
+import fetch from 'cross-fetch'
+import { RateLimit } from 'async-sema'
 
 import environment from './environment'
-const writeFilePromise = promisify(writeFile)
-
 const publicFolder = path.join(__dirname, 'public')
 
 function log(message: string) {
@@ -63,7 +59,6 @@ async function fetchImage(url: string, count = 0) {
 }
 async function fetchImages() {
   try {
-
     const uploadFolder = path.join(publicFolder, 'uploads')
     if (existsSync(uploadFolder)) {
       log(`[${new Date().toTimeString()}] Remove Directory started`)
@@ -105,14 +100,14 @@ async function fetchImages() {
       batch.push(fetchImage(url))
     }
 
-    if (batch.length > 0 ) {
+    if (batch.length > 0) {
       await Promise.all(batch)
       fetchImageCount += batch.length
       batch = []
     }
 
     log(`Finished fetching ${fetchImageCount} images `)
-  } catch(error) {
+  } catch (error) {
     console.error(error)
   }
 }
