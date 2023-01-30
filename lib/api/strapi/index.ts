@@ -1,4 +1,6 @@
+import fetch from 'cross-fetch'
 import { stringify } from 'qs'
+
 import environment from '../../../environment'
 
 const url = `${environment.strapiBaseUrl}/api/`

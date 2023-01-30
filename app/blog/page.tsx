@@ -9,8 +9,6 @@ import { BlogPost as BlogPostType } from './types'
 import Markdown from '../../components/Markdown'
 import BlogPost from '../../components/BlogPostList/BlogPost'
 
-import generateRssFeed from '../../lib/api/rss'
-
 interface Props {
   title: string
   description: string
@@ -38,7 +36,6 @@ async function getData(): Promise<Props> {
     ]
   }
   const data = await fetchAll('blog-posts', blogsParams)
-  await generateRssFeed(data)
   const categories = new Set<string>()
   for (let index = 0; index < data.length; index++) {
     categories.add(data[index].category)

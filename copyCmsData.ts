@@ -1,10 +1,12 @@
 import { createWriteStream, existsSync } from 'fs'
 import { mkdir, writeFile, rm } from 'fs/promises'
 import path from 'path'
-import fetch from 'cross-fetch'
+import fetch, { Headers } from 'cross-fetch'
 import { RateLimit } from 'async-sema'
 
 import environment from './environment'
+import generateRssFeed from './lib/api/rss'
+import { fetchAll } from './lib/api/strapi'
 const publicFolder = path.join(__dirname, 'public')
 
 function log(message: string) {
@@ -136,5 +138,36 @@ async function fetchSiteMap(count = 0) {
   }
 }
 
+async function generateRssXml() {
+  try {
+    const blogsParams = {
+      sort: ['date:DESC', 'publishedAt:DESC'],
+      populate: ['author', 'author.avatarPng', 'thumbnailPng'],
+      fields: [
+        'category',
+        'title',
+        'shortDescription',
+        'createdAt',
+        'updatedAt',
+        'publishedAt',
+        'slug',
+        'date'
+      ]
+    }
+    log('fetching blog posts for rss.xml...')
+    const data = await fetchAll('blog-posts', blogsParams)
+    log('generating rss.xml...')
+    await generateRssFeed(data)
+    log('done generating rss.xml')
+  } catch (e) {
+    if (e instanceof Error) {
+      warn(`Error generating rss.xml: ${e.message}`)
+    } else {
+      warn(`Error generating rss.xml: ${e}`)
+    }
+  }
+}
+
 fetchSiteMap()
 fetchImages()
+generateRssXml()
