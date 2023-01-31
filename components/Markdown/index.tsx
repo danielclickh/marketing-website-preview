@@ -4,6 +4,8 @@ import ReactMarkdown from 'react-markdown'
 import { ReactMarkdownOptions } from 'react-markdown/lib/react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeHighlight from 'rehype-highlight'
+import remarkGfm from 'remark-gfm'
+
 import { SuiTitle } from '../sui'
 import { AllowedElements, HighLightOptions } from './utils'
 
@@ -86,8 +88,13 @@ function Markdown({
   )
 
   rehypePlugins = encloseByDiv
-    ? [...(rehypePlugins ?? []), rehypeRaw, [rehypeHighlight, HighLightOptions]]
-    : [...(rehypePlugins ?? []), rehypeRaw]
+    ? [
+        ...(rehypePlugins ?? []),
+        rehypeRaw,
+        remarkGfm,
+        [rehypeHighlight, HighLightOptions]
+      ]
+    : [...(rehypePlugins ?? []), rehypeRaw, remarkGfm]
 
   return (
     <ReactMarkdown

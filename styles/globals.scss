@@ -100,10 +100,11 @@ body {
   table {
     @apply text-left w-full rounded-lg;
     @apply border border-solid border-c3;
+    border-collapse: inherit;
 
     th,
     td {
-      @apply border border-solid border-c2;
+      @apply border-b border-solid border-c2;
       @apply p-4;
     }
 

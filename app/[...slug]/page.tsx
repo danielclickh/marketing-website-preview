@@ -53,7 +53,7 @@ export default async function RichContentPage({
         {title}
       </SuiTitle>
       <div className='px-4 pb-16 mb-16'>
-        <div className='mx-auto container'>
+        <div className='mx-auto container max-w-7xl'>
           {content && <Markdown>{content}</Markdown>}
 
           {(leftContent || rightContent) && (
