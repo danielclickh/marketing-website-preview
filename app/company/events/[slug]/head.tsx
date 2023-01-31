@@ -16,7 +16,7 @@ export default async function Head({ params: { slug } }: PageProps) {
 
   return (
     <SeoContainer
-      title={data[0]}
+      title={data[0].title}
       description={data[0].shortDescription}
       image={[data[0].thumbnailPng]}
       type='website'
