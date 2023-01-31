@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { BlogPost as BlogPostType } from '../../app/blog/types'
+import { convertDateToString } from '../../lib/utils/dateUtils'
 import Markdown from '../Markdown'
 import { StrapiImage } from '../StrapiElements'
 import { SuiText, SuiTitle } from '../sui'
@@ -82,9 +83,11 @@ export default function BlogPost(props: BlogPostType) {
                 <SuiText size='sm' weight='medium'>
                   {author.name}
                 </SuiText>
-                <SuiText size='sm' weight='medium' color='secondary'>
-                  {date || publishedAt}
-                </SuiText>
+                {(date || publishedAt) && (
+                  <SuiText size='sm' weight='medium' color='secondary'>
+                    {convertDateToString(date || publishedAt)}
+                  </SuiText>
+                )}
               </div>
             </div>
           </div>
