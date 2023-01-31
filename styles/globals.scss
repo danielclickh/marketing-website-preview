@@ -181,6 +181,9 @@ body {
     ul {
       @apply list-disc;
     }
+    ol {
+      @apply list-decimal;
+    }
     &:not(.show-anchor) a {
       @apply text-c5;
       &:hover {
