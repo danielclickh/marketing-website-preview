@@ -110,7 +110,7 @@ function EventsForm({
       {submitted ? (
         <div className='subscribed'>
           <div className='success-container'>
-            <BulletPoint>
+            <BulletPoint className='!pb-0'>
               <p>Successfully subscribed to event</p>
               <p className='flex md:hidden'>(scroll up to view)</p>
             </BulletPoint>

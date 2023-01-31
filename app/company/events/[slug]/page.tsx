@@ -103,20 +103,22 @@ async function EventPage({ params: { slug } }: PageProps) {
           )}
           {agenda && (
             <div className='agenda'>
-              <SuiTitle type='h2' className='title'>
+              <SuiTitle type='h2' className='mb-7'>
                 {agenda.title}
               </SuiTitle>
-              <div className='agenda_items'>
+              <div className='agenda_items gap-1'>
                 {agenda.items.map((agendaItem) => (
-                  <div className='agenda_item' key={agendaItem.time}>
-                    <SuiText size='sm' weight='medium' className='mb-1'>
+                  <div
+                    className='agenda_item flex items-start'
+                    key={agendaItem.time}>
+                    <SuiText
+                      size='base'
+                      color='secondary'
+                      weight='medium'
+                      className='mb-1 w-16'>
                       {agendaItem.time}
                     </SuiText>
-                    <SuiText
-                      size='xs'
-                      weight='medium'
-                      color='secondary'
-                      className='flex-auto'>
+                    <SuiText size='base' weight='medium' className='flex-auto'>
                       {agendaItem.topic}
                     </SuiText>
                   </div>

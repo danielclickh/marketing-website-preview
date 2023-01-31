@@ -18,7 +18,7 @@ function EventsContainer({
   const eventEnded = new Date(localDatetime).valueOf() < Date.now()
 
   return (
-    <div className='container mx-auto pb-16 pt-24 flex flex-col md:flex-row'>
+    <div className='container mx-auto pb-16 pt-24 flex flex-col'>
       {isSubmitted &&
         (!eventEnded || form.type === 'recordedGatedContent') &&
         recordedVimeoUrl && (
