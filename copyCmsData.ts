@@ -4,9 +4,12 @@ import path from 'path'
 import fetch, { Headers } from 'cross-fetch'
 import { RateLimit } from 'async-sema'
 
+import dotenv from 'dotenv'
+dotenv.config()
 import environment from './environment'
 import generateRssFeed from './lib/api/rss'
 import { fetchAll } from './lib/api/strapi'
+
 const publicFolder = path.join(__dirname, 'public')
 
 function log(message: string) {
