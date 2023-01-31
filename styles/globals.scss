@@ -55,13 +55,16 @@ body {
 }
 
 .rich_content {
+  .md-header-container {
+    @apply mb-9 flex items-center gap-2;
+  }
+
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply mb-9;
     &:not(:first-child) {
       @apply mt-9;
     }
@@ -178,7 +181,7 @@ body {
     ul {
       @apply list-disc;
     }
-    a {
+    &:not(.ignore-anchor) a {
       @apply text-c5;
       &:hover {
         @apply no-underline;

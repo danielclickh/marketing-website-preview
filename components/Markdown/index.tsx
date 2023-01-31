@@ -1,13 +1,18 @@
 import 'server-only'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
-import { ReactMarkdownOptions } from 'react-markdown/lib/react-markdown'
+import {
+  PluggableList,
+  ReactMarkdownOptions
+} from 'react-markdown/lib/react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeHighlight from 'rehype-highlight'
 import remarkGfm from 'remark-gfm'
+import rehypeSlug from 'rehype-slug'
 
 import { SuiTitle } from '../sui'
 import { AllowedElements, HighLightOptions } from './utils'
+import HeaderLink from './HeaderLink'
 
 function StrapiImage({ src, width, height, alt, ...props }: any) {
   return (
@@ -22,15 +27,27 @@ function StrapiImage({ src, width, height, alt, ...props }: any) {
     />
   )
 }
+const commonPlugIns: PluggableList = [rehypeRaw, rehypeSlug]
 
-const components = {
-  img: StrapiImage,
-  h1: (props: any) => <SuiTitle type='h2' {...props} />,
-  h2: (props: any) => <SuiTitle type='h2' {...props} />,
-  h3: (props: any) => <SuiTitle type='h3' {...props} />,
-  h4: (props: any) => <SuiTitle type='h4' {...props} />,
-  h5: (props: any) => <SuiTitle type='h5' {...props} />,
-  h6: (props: any) => <SuiTitle type='h6' {...props} />
+function Header(props: any) {
+  let id = props.id.replaceAll('-', '')
+  return (
+    <HeaderLink id={id}>
+      <SuiTitle {...props} id={id} />
+    </HeaderLink>
+  )
+}
+
+function getDefaultComponents() {
+  return {
+    img: StrapiImage,
+    h1: (props: any) => <Header type='h2' {...props} />,
+    h2: (props: any) => <Header type='h2' {...props} />,
+    h3: (props: any) => <Header type='h3' {...props} />,
+    h4: (props: any) => <Header type='h4' {...props} />,
+    h5: (props: any) => <Header type='h5' {...props} />,
+    h6: (props: any) => <Header type='h6' {...props} />
+  }
 }
 
 interface Props extends ReactMarkdownOptions {
@@ -42,10 +59,11 @@ function Markdown({
   components: componentsProp,
   className = '',
   encloseByDiv = true,
-  rehypePlugins,
+  rehypePlugins = [],
+  remarkPlugins = [],
   ...props
 }: Props) {
-  const newComponents = components
+  const newComponents = getDefaultComponents()
   if (Object.keys(componentsProp ?? {}).length > 0) {
     Object.assign(newComponents, componentsProp)
   }
@@ -87,14 +105,11 @@ function Markdown({
     }
   )
 
-  rehypePlugins = encloseByDiv
-    ? [
-        ...(rehypePlugins ?? []),
-        rehypeRaw,
-        remarkGfm,
-        [rehypeHighlight, HighLightOptions]
-      ]
-    : [...(rehypePlugins ?? []), rehypeRaw, remarkGfm]
+  rehypePlugins = commonPlugIns.concat(rehypePlugins)
+  remarkPlugins.push(remarkGfm)
+  if (encloseByDiv) {
+    rehypePlugins.push([rehypeHighlight, HighLightOptions])
+  }
 
   return (
     <ReactMarkdown
@@ -106,6 +121,7 @@ function Markdown({
       components={newComponents}
       unwrapDisallowed
       rehypePlugins={rehypePlugins}
+      remarkPlugins={remarkPlugins}
       {...props}>
       {children}
     </ReactMarkdown>

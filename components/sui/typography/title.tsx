@@ -10,7 +10,7 @@ export interface TitleProps extends HTMLAttributes<HTMLDivElement> {
 
 // @ts-ignore
 export const SuiTitle = ({ ...TitleProps }: TitleProps) => {
-  const { type, children, color = '', className, weight } = TitleProps
+  const { type, children, color = '', className, weight, id } = TitleProps
 
   return createElement(
     type,
@@ -19,7 +19,8 @@ export const SuiTitle = ({ ...TitleProps }: TitleProps) => {
         styles.suiTitle
       } ${styles[`suiTitle${type}`]} ${
         weight ? styles[`weight-${weight}`] : ''
-      } ${className}`
+      } ${className}`,
+      id
     },
     children
   )
