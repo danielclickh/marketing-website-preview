@@ -45,8 +45,9 @@ export default async function CareersPage() {
             {companyImages.map((image) => (
               <StrapiImage
                 key={image.id}
+                sizes='medium'
                 {...image}
-                className='h-72 w-auto px-1'
+                className='!h-72 w-auto px-1 object-cover object-center'
               />
             ))}
           </CompanyImages>
