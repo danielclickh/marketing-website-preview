@@ -5,6 +5,7 @@ import { StrapiPicture } from '../StrapiElements'
 import { SuiButton, SuiPanel, SuiText } from '../sui'
 
 type TestimonialProps = {
+  id: string
   lightLogo: BaseStrapiImage
   darkLogo: BaseStrapiImage
   description: string
@@ -15,12 +16,22 @@ type TestimonialProps = {
 }
 
 export function UseCase(props: TestimonialProps) {
-  const { lightLogo, darkLogo, description, bullets, path, btnText, target } =
-    props
+  const {
+    lightLogo,
+    darkLogo,
+    description,
+    bullets,
+    path,
+    btnText,
+    target,
+    id
+  } = props
 
   return (
     <SuiPanel isRounded color='bg-c1' shadow padding='xl'>
-      <div className='flex flex-col justify-start align-top items-between h-full'>
+      <div
+        className='flex flex-col justify-start align-top items-between h-full'
+        id={id}>
         <div className='flex-auto'>
           <StrapiPicture light={lightLogo} dark={darkLogo} className='pb-7' />
           <SuiText size='sm' weight='medium' className='mb-6'>

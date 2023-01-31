@@ -50,9 +50,7 @@ async function CustomerStoriesPage() {
             </SuiText>
           </div>
 
-          <div
-            className='flex flex-col md:flex-row mt-20 md:justify-evenly pb-16 2xl:container 2xl:mx-auto py-3'
-            data-aos='fade-up'>
+          <div className='flex flex-col md:flex-row mt-20 md:justify-evenly pb-16 2xl:container 2xl:mx-auto py-3'>
             <Carousel>
               {testimonials.map((testimonial) => (
                 <div
@@ -114,7 +112,9 @@ async function CustomerStoriesPage() {
             </SuiText>
           </div>
           {spotlight && (
-            <div className='flex mt-10 space-x-12 px-6 2xl:px-0 relative md:min-h-fit'>
+            <div
+              className='flex mt-10 space-x-12 px-6 2xl:px-0 relative md:min-h-fit'
+              id={spotlight.anchorId}>
               <SuiPanel isRounded color='bg-c1' shadow padding='xl'>
                 <div className='flex flex-row drop-shadow-2xl'>
                   <div className='flex flex-col w-full md:w-1/2'>
@@ -161,6 +161,7 @@ async function CustomerStoriesPage() {
           <div className='grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto mt-12 gap-10 px-6 2xl:px-0'>
             {useCaseItems.map((useCase, index) => (
               <UseCase
+                id={useCase.anchorId}
                 key={`usecase-${index}`}
                 lightLogo={useCase.lightLogoPng}
                 darkLogo={useCase.darkLogoPng}

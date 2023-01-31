@@ -7,6 +7,7 @@ import { Inter } from '@next/font/google'
 import { Providers } from '../components/Providers'
 import Script from 'next/script'
 import environment from '../environment'
+import PageContainer from '../components/PageContainer'
 type Props = {
   children: ReactNode
 }
@@ -32,13 +33,13 @@ export default function BaseLayout({ children }: Props) {
       </head>
       <body className={`${inter.variable} font-inter`}>
         <Providers>
-          <div className='flex flex-col min-h-screen'>
+          <PageContainer>
             {/* @ts-expect-error Server Component */}
             <Header />
             {children}
             {/* @ts-expect-error Server Component */}
             <Footer />
-          </div>
+          </PageContainer>
         </Providers>
       </body>
       {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
