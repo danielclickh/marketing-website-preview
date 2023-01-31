@@ -31,18 +31,22 @@ const nextConfig ={
       {
         source: '/benchmark/dbms',
         destination: 'https://benchmark.clickhouse.com/',
+        permanent: true,
       },
       {
         source: '/clickhouse-cloud',
         destination: '/cloud',
+        permanent: true,
       },
       {
         source: '/support/case',
         destination: 'https://support.clickhouse.com',
+        permanent: false,
       },
       {
         source: '/trust/security',
         destination: 'https://trust.clickhouse.com',
+        permanent: false,
       },
     ]
   },
