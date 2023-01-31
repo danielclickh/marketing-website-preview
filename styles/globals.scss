@@ -181,7 +181,7 @@ body {
     ul {
       @apply list-disc;
     }
-    &:not(.ignore-anchor) a {
+    &:not(.show-anchor) a {
       @apply text-c5;
       &:hover {
         @apply no-underline;
