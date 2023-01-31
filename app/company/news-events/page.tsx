@@ -116,7 +116,7 @@ export default async function News() {
                         size='lg'
                         iconRight
                         path={`/company/events/${featuredEvent.slug}`}
-                        target='self'
+                        target='_self'
                         color='primary'
                         className='px-0'>
                         {featuredEvent.viewMoreDetailsText}
@@ -169,7 +169,7 @@ export default async function News() {
                 {allEvents.map((upcomingEvent) => (
                   <SuiLink
                     href={`/company/events/${upcomingEvent.slug}`}
-                    target='self'
+                    target='_self'
                     className={`grid grid-cols-[4rem_1fr] gap-x-6 p-4 hover:bg-c1-light rounded-lg hover:no-underline event-${upcomingEvent.title.replace(
                       ' ',
                       '-'
