@@ -170,7 +170,7 @@ export default async function News() {
                   <SuiLink
                     href={`/company/events/${upcomingEvent.slug}`}
                     target='_self'
-                    className={`grid grid-cols-[4rem_1fr] gap-x-6 p-4 hover:bg-c1-light rounded-lg hover:no-underline event-${upcomingEvent.title.replace(
+                    className={`grid grid-cols-[4rem_1fr] gap-x-6 p-4 hover:bg-c1 rounded-lg hover:no-underline event-${upcomingEvent.title.replace(
                       ' ',
                       '-'
                     )}`}
