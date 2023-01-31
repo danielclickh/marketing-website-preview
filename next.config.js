@@ -21,6 +21,31 @@ const nextConfig ={
       },
     ]
   },
+  async redirects() {
+    return [
+      {
+        source: '/slack',
+        destination: 'https://join.slack.com/t/clickhousedb/shared_invite/zt-1odt9tfm9-buj~8q0lVXwer9hSYO1OHA',
+        permanent: true,
+      },
+      {
+        source: '/benchmark/dbms',
+        destination: 'https://benchmark.clickhouse.com/',
+      },
+      {
+        source: '/clickhouse-cloud',
+        destination: '/cloud',
+      },
+      {
+        source: '/support/case',
+        destination: 'https://support.clickhouse.com',
+      },
+      {
+        source: '/trust/security',
+        destination: 'https://trust.clickhouse.com',
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
