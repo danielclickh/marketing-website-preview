@@ -9,9 +9,18 @@ export default async function Head({
 }) {
   const { data } = await findAll('rich-content-pages', {
     filters: {
-      url: {
-        $eq: `/${slug.join('/')}`
-      }
+      $or: [
+        {
+          url: {
+            $eq: `/${slug.join('/')}`
+          }
+        },
+        {
+          url: {
+            $eq: `/${slug.join('/')}/`
+          }
+        }
+      ]
     },
     fields: ['title']
   })

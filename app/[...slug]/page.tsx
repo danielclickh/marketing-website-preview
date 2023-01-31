@@ -15,9 +15,18 @@ interface RichContentPageProps {
 async function getData({ slug }: ParamsType) {
   const { data } = await findAll('rich-content-pages', {
     filters: {
-      url: {
-        $eq: `/${slug.join('/')}`
-      }
+      $or: [
+        {
+          url: {
+            $eq: `/${slug.join('/')}`
+          }
+        },
+        {
+          url: {
+            $eq: `/${slug.join('/')}/`
+          }
+        }
+      ]
     }
   })
   const page = data[0] ?? {}
