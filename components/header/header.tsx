@@ -7,6 +7,7 @@ import {
   Transition,
   PopoverGroup
 } from '../HeadlessUIClient'
+import CtaButton from './CtaButton'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
 import ThemeSwitcher from './ThemeSwitcher'
@@ -36,6 +37,8 @@ export async function Header() {
         'menuItems.menuItems.icon'
       ]
     })
+  
+  console.log(menuItems, ctaSecondaryButton, ctaButton)
 
   return (
     <Popover className='bg-c1/80 shadow-sm  dark:border-b dark:border-c2-dark h-full backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300'>
@@ -139,7 +142,7 @@ export async function Header() {
 
                     <div className='flex items-center md:ml-12 space-x-2 lg:space-x-4'>
                       {ctaSecondaryButton && (
-                        <SuiLink
+                        <CtaButton
                           key={ctaSecondaryButton.text}
                           href={ctaSecondaryButton.href}
                           target={ctaSecondaryButton.target}
@@ -149,19 +152,19 @@ export async function Header() {
                           }}
                           className='inline-flex items-center text-sm font-medium text-c5 ease-in-out'>
                           {ctaSecondaryButton.text}
-                        </SuiLink>
+                        </CtaButton>
                       )}
                       {ctaButton && (
-                        <SuiButton
+                        <CtaButton
                           type='primary'
-                          path={ctaButton.href}
+                          href={ctaButton.href}
                           segmentEvent={{
                             label: ctaButton.text,
                             category: 'website-nav'
                           }}
                           target={ctaButton.target}>
                           {ctaButton.text}
-                        </SuiButton>
+                        </CtaButton>
                       )}
                     </div>
                   </PopoverGroup>
@@ -272,30 +275,32 @@ export async function Header() {
           </div>
           <div className='py-6 px-5 grid gap-4 w-full grid-cols-2'>
             {ctaSecondaryButton && (
-              <SuiButton
+              <CtaButton
                 type='secondary'
-                path={ctaSecondaryButton.href}
+                href={ctaSecondaryButton.href}
                 target={ctaSecondaryButton.target}
                 segmentEvent={{
                   label: ctaSecondaryButton.text,
                   category: 'website-nav'
                 }}
-                className='w-full'>
+                className='w-full'
+              >
                 {ctaSecondaryButton.text}
-              </SuiButton>
+              </CtaButton>
             )}
             {ctaButton && (
-              <SuiButton
+              <CtaButton
                 type='primary'
-                path={ctaButton.href}
+                href={ctaButton.href}
                 target={ctaButton.target}
                 segmentEvent={{
                   label: ctaButton.text,
                   category: 'website-nav'
                 }}
-                className='w-full'>
+                className='w-full'
+              >
                 {ctaButton.text}
-              </SuiButton>
+              </CtaButton>
             )}
           </div>
         </MobilePopoverPanel>
