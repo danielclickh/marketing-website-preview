@@ -21,6 +21,7 @@ body {
   padding: 0;
   margin: 0;
   @apply mx-auto text-c5;
+  scroll-padding-top: 100px;
 }
 
 body {
@@ -57,14 +58,6 @@ body {
 .rich_content {
   .md-header-container {
     @apply mb-9 flex items-center gap-2;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
     &:not(:first-child) {
       @apply mt-9;
     }

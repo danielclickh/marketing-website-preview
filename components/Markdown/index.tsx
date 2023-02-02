@@ -8,10 +8,10 @@ import {
 import rehypeRaw from 'rehype-raw'
 import rehypeHighlight from 'rehype-highlight'
 import remarkGfm from 'remark-gfm'
-import rehypeSlug from 'rehype-slug'
+import rehypeSlug from 'rehype-slug-custom-id'
 
 import { SuiTitle } from '../sui'
-import { AllowedElements, HighLightOptions } from './utils'
+import { AllowedElements, HighLightOptions, sanitizeMarkdown } from './utils'
 import HeaderLink from './HeaderLink'
 
 function StrapiImage({ src, width, height, alt, ...props }: any) {
@@ -27,31 +27,55 @@ function StrapiImage({ src, width, height, alt, ...props }: any) {
     />
   )
 }
-const commonPlugIns: PluggableList = [rehypeRaw, rehypeSlug]
+const commonPlugIns: PluggableList = [
+  rehypeRaw,
+  [
+    rehypeSlug,
+    {
+      enableCustomId: true
+    }
+  ]
+]
 
 function Header(props: any) {
-  let id = props.id.replaceAll('-', '')
-  return (
-    <HeaderLink id={id}>
-      <SuiTitle {...props} id={id} />
-    </HeaderLink>
-  )
+  let { id, showHeaderLink, ...otherProps } = props
+  id = id.replaceAll('-', '')
+  const title = <SuiTitle {...otherProps} id={id} />
+
+  if (!showHeaderLink) {
+    return <div className='md-header-container'>{title}</div>
+  }
+
+  return <HeaderLink id={id}>{title}</HeaderLink>
 }
 
-function getDefaultComponents() {
+function getDefaultComponents({ showHeaderLink }: { showHeaderLink: boolean }) {
   return {
     img: StrapiImage,
-    h1: (props: any) => <Header type='h2' {...props} />,
-    h2: (props: any) => <Header type='h2' {...props} />,
-    h3: (props: any) => <Header type='h3' {...props} />,
-    h4: (props: any) => <Header type='h4' {...props} />,
-    h5: (props: any) => <Header type='h5' {...props} />,
-    h6: (props: any) => <Header type='h6' {...props} />
+    h1: (props: any) => (
+      <Header type='h2' showHeaderLink={showHeaderLink} {...props} />
+    ),
+    h2: (props: any) => (
+      <Header type='h2' showHeaderLink={showHeaderLink} {...props} />
+    ),
+    h3: (props: any) => (
+      <Header type='h3' showHeaderLink={showHeaderLink} {...props} />
+    ),
+    h4: (props: any) => (
+      <Header type='h4' showHeaderLink={showHeaderLink} {...props} />
+    ),
+    h5: (props: any) => (
+      <Header type='h5' showHeaderLink={showHeaderLink} {...props} />
+    ),
+    h6: (props: any) => (
+      <Header type='h6' showHeaderLink={showHeaderLink} {...props} />
+    )
   }
 }
 
 interface Props extends ReactMarkdownOptions {
   encloseByDiv?: boolean
+  showHeaderLink?: boolean
 }
 
 function Markdown({
@@ -59,51 +83,19 @@ function Markdown({
   components: componentsProp,
   className = '',
   encloseByDiv = true,
+  showHeaderLink = false,
   rehypePlugins = [],
   remarkPlugins = [],
   ...props
 }: Props) {
-  const newComponents = getDefaultComponents()
+  const newComponents = getDefaultComponents({ showHeaderLink })
   if (Object.keys(componentsProp ?? {}).length > 0) {
     Object.assign(newComponents, componentsProp)
   }
   if (encloseByDiv) {
     props.allowedElements = AllowedElements
   }
-
-  children = children.replace(/``` text\n/gi, '``` newText\n')
-  children = children.replaceAll(
-    /<pre([^>]*)?(\/?)(>(\s+)?<code[^>]*?(\/?))?(>(\s+)?<div[^>]*?(\/?))?>(.*?)<(\/div>(.*?))?(\/code>\s+?)?(\/pre>)/gis,
-    (
-      currentValue,
-      match1,
-      match2,
-      match3,
-      match4,
-      match5,
-      match6,
-      match7,
-      match8,
-      match9,
-      match10
-    ) => {
-      return (
-        "<div className='!p-0 !w-full'" +
-        match1 +
-        ' ' +
-        match6 +
-        '>\n' +
-        '<pre>' +
-        "<code class='ignore-default-color'>" +
-        match9.replaceAll('\n', '<br />') +
-        '</code>' +
-        '</pre>' +
-        '<' +
-        match10 +
-        '/div>'
-      )
-    }
-  )
+  children = sanitizeMarkdown(children)
 
   rehypePlugins = commonPlugIns.concat(rehypePlugins)
   remarkPlugins.push(remarkGfm)

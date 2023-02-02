@@ -64,7 +64,7 @@ export default async function RichContentPage({
       <div className='px-4 pb-16 mb-16'>
         <div className='mx-auto container max-w-7xl'>
           {content && (
-            <Markdown className='rich-text-content show-anchor'>
+            <Markdown showHeaderLink className='rich-text-content show-anchor'>
               {content}
             </Markdown>
           )}
@@ -77,12 +77,16 @@ export default async function RichContentPage({
                   : 'mb-16'
               }>
               {leftContent && (
-                <Markdown className='w-full rich-text-content show-anchor'>
+                <Markdown
+                  showHeaderLink
+                  className='w-full rich-text-content show-anchor'>
                   {leftContent}
                 </Markdown>
               )}
               {rightContent && (
-                <Markdown className='w-full rich-text-content show-anchor'>
+                <Markdown
+                  showHeaderLink
+                  className='w-full rich-text-content show-anchor'>
                   {rightContent}
                 </Markdown>
               )}
@@ -90,7 +94,9 @@ export default async function RichContentPage({
           )}
 
           {fullWidthContent && (
-            <Markdown className='mx-auto my-16 rich-text-content show-anchor'>
+            <Markdown
+              showHeaderLink
+              className='mx-auto my-16 rich-text-content show-anchor'>
               {fullWidthContent}
             </Markdown>
           )}

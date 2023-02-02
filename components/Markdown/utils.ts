@@ -209,3 +209,48 @@ export const AllowedElements = [
   'menuitem',
   'noframes'
 ]
+
+export function sanitizeMarkdown(children: string): string {
+  children = children.replace(/``` text\n/gi, '``` newText\n')
+  children = children.replaceAll(
+    /<pre([^>]*)?(\/?)(>(\s+)?<code[^>]*?(\/?))?(>(\s+)?<div[^>]*?(\/?))?>(.*?)<(\/div>(.*?))?(\/code>\s+?)?(\/pre>)/gis,
+    (
+      currentValue,
+      match1,
+      match2,
+      match3,
+      match4,
+      match5,
+      match6,
+      match7,
+      match8,
+      match9,
+      match10
+    ) => {
+      return (
+        "<div className='!p-0 !w-full'" +
+        match1 +
+        ' ' +
+        match6 +
+        '>\n' +
+        '<pre>' +
+        "<code class='ignore-default-color'>" +
+        match9.replaceAll('\n', '<br />') +
+        '</code>' +
+        '</pre>' +
+        '<' +
+        match10 +
+        '/div>'
+      )
+    }
+  )
+
+  children = children.replaceAll(
+    /^#{1,6}\s+.*\{((?!#).*)?\}(\s+)?$/gm,
+    (currentValue, match1) => {
+      return currentValue.replaceAll(match1, `#${match1}`)
+    }
+  )
+
+  return children
+}

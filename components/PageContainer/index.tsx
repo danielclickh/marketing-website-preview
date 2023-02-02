@@ -18,8 +18,7 @@ function PageContainer({ children }: { children: ReactNode }) {
         const element = hash ? document.querySelector(hash) : undefined
         if (element) {
           element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest'
+            behavior: 'smooth'
           })
         }
       } else {
