@@ -92,7 +92,7 @@ function EventsForm({
 
     const userId = response?.cloudId ? response.cloudId : email
     try {
-      await analytics.identify(userId, { email })
+      await analytics.identify(userId, { email, firstName, lastName })
       await analytics.track('Form Submitted', {
         email,
         userId,

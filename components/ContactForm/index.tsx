@@ -1,5 +1,11 @@
 'use client'
-import React, { ChangeEvent, FocusEvent, FormEvent, useRef, useState } from 'react'
+import React, {
+  ChangeEvent,
+  FocusEvent,
+  FormEvent,
+  useRef,
+  useState
+} from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import { useAnalytics } from '../Providers/Analytics'
@@ -104,7 +110,12 @@ function ContactForm({
       })
       const userId = response?.cloudId ? response.cloudId : email
       try {
-        await analytics.identify(userId, { email })
+        await analytics.identify(userId, {
+          email,
+          firstName,
+          lastName,
+          company
+        })
         await analytics.track('Form Submitted', {
           email,
           userId,
