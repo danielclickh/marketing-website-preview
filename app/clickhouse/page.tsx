@@ -66,7 +66,7 @@ export default async function ClickHouseServerPage() {
                 className='mt-6 md:pr-16'>
                 {description}
               </SuiText>
-              <div className='flex mt-8 justify-center md:justify-start space-x-4'>
+              <div className='flex flex-col sm:flex-row mt-8 justify-center md:justify-start gap-4'>
                 {mainButton && (
                   <SuiButton
                     type='primary'
