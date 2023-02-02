@@ -1,7 +1,7 @@
 'use client'
 
-import { ReactNode, useEffect, useState } from 'react'
-import { SuiButton } from '../sui'
+import { ReactNode } from 'react'
+import { SuiButton } from '../sui/client'
 
 interface Props {
   className?: string
@@ -31,8 +31,7 @@ export default function CtaButton(props: Props) {
       path={`${href}?ajs_aid=${ajsId}`}
       target={target}
       segmentEvent={segmentEvent}
-      className={className}
-    >
+      className={className}>
       {children}
     </SuiButton>
   )
