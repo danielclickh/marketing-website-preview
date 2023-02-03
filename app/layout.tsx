@@ -59,7 +59,7 @@ export default function BaseLayout({ children }: Props) {
       </body>
       <Script
         src='https://discover.clickhouse.com/js/stripmkttok.js'
-        strategy='lazyOnload'
+        strategy='beforeInteractive'
       />
       {/* Google Analytics for clickhouse.com */}
       <Script
