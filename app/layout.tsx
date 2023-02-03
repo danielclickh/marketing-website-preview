@@ -25,6 +25,21 @@ export default function BaseLayout({ children }: Props) {
   return (
     <html lang='en' className='light' style={{ colorScheme: 'light' }}>
       <head>
+        {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
+        <Script
+          src='https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js'
+          charSet='UTF-8'
+          type='text/javascript'
+          data-domain-script={`dedccc4b-7ab2-47de-935c-073b23b1d9b7${
+            environment.production ? '' : '-test'
+          }`}
+          strategy='lazyOnload'
+        />
+        <Script
+          id='cookie-consent'
+          type='text/javascript'>{`function OptanonWrapper() {}`}</Script>
+
+        {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
         <meta charSet='utf-8' />
         <base href='/' />
         <meta content='width=device-width, initial-scale=1' name='viewport' />
@@ -42,18 +57,6 @@ export default function BaseLayout({ children }: Props) {
           </PageContainer>
         </Providers>
       </body>
-      {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
-      <Script
-        src='https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js'
-        type='text/javascript'
-        data-domain-script='dedccc4b-7ab2-47de-935c-073b23b1d9b7'
-        strategy='lazyOnload'
-      />
-      <Script
-        id='cookie-consent'
-        type='text/javascript'>{`function OptanonWrapper() {}`}</Script>
-
-      {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
       <Script
         src='https://discover.clickhouse.com/js/stripmkttok.js'
         strategy='lazyOnload'
