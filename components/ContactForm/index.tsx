@@ -101,21 +101,17 @@ function ContactForm({
 
     try {
       submitRef.current = true
-      const response = await submitWorkatoForm('websiteContact', {
+      const requestData = {
         firstName,
         lastName,
         email,
         company,
         message: useCase
-      })
+      }
+      const response = await submitWorkatoForm('websiteContact', requestData)
       const userId = response?.cloudId ? response.cloudId : email
       try {
-        await analytics.identify(userId, {
-          email,
-          firstName,
-          lastName,
-          company
-        })
+        await analytics.identify(userId, requestData)
         await analytics.track('Form Submitted', {
           email,
           userId,
