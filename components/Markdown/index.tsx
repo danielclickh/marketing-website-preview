@@ -38,44 +38,29 @@ const commonPlugIns: PluggableList = [
 ]
 
 function Header(props: any) {
-  let { id, showHeaderLink, ...otherProps } = props
+  let { id, ...otherProps } = props
   id = id.replaceAll('-', '')
-  const title = <SuiTitle {...otherProps} id={id} />
-
-  if (!showHeaderLink) {
-    return <div className='md-header-container'>{title}</div>
-  }
-
-  return <HeaderLink id={id}>{title}</HeaderLink>
+  return (
+    <div className='md-header-container'>
+      <SuiTitle {...otherProps} id={id} />
+    </div>
+  )
 }
 
-function getDefaultComponents({ showHeaderLink }: { showHeaderLink: boolean }) {
+function getDefaultComponents() {
   return {
     img: StrapiImage,
-    h1: (props: any) => (
-      <Header type='h2' showHeaderLink={showHeaderLink} {...props} />
-    ),
-    h2: (props: any) => (
-      <Header type='h2' showHeaderLink={showHeaderLink} {...props} />
-    ),
-    h3: (props: any) => (
-      <Header type='h3' showHeaderLink={showHeaderLink} {...props} />
-    ),
-    h4: (props: any) => (
-      <Header type='h4' showHeaderLink={showHeaderLink} {...props} />
-    ),
-    h5: (props: any) => (
-      <Header type='h5' showHeaderLink={showHeaderLink} {...props} />
-    ),
-    h6: (props: any) => (
-      <Header type='h6' showHeaderLink={showHeaderLink} {...props} />
-    )
+    h1: (props: any) => <Header type='h2' {...props} />,
+    h2: (props: any) => <Header type='h2' {...props} />,
+    h3: (props: any) => <Header type='h3' {...props} />,
+    h4: (props: any) => <Header type='h4' {...props} />,
+    h5: (props: any) => <Header type='h5' {...props} />,
+    h6: (props: any) => <Header type='h6' {...props} />
   }
 }
 
 interface Props extends ReactMarkdownOptions {
   encloseByDiv?: boolean
-  showHeaderLink?: boolean
   ignoreAnchor?: boolean
 }
 
@@ -89,12 +74,11 @@ function Markdown({
   ignoreAnchor = false,
   className = '',
   encloseByDiv = true,
-  showHeaderLink = false,
   rehypePlugins = [],
   remarkPlugins = [],
   ...props
 }: Props) {
-  const newComponents = getDefaultComponents({ showHeaderLink })
+  const newComponents = getDefaultComponents()
   if (Object.keys(componentsProp ?? {}).length > 0) {
     Object.assign(newComponents, componentsProp)
   }
