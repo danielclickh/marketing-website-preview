@@ -37,8 +37,6 @@ export async function Header() {
         'menuItems.menuItems.icon'
       ]
     })
-  
-  console.log(menuItems, ctaSecondaryButton, ctaButton)
 
   return (
     <Popover className='bg-c1/80 shadow-sm  dark:border-b dark:border-c2-dark h-full backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300'>
@@ -283,8 +281,7 @@ export async function Header() {
                   label: ctaSecondaryButton.text,
                   category: 'website-nav'
                 }}
-                className='w-full'
-              >
+                className='w-full'>
                 {ctaSecondaryButton.text}
               </CtaButton>
             )}
@@ -297,8 +294,7 @@ export async function Header() {
                   label: ctaButton.text,
                   category: 'website-nav'
                 }}
-                className='w-full'
-              >
+                className='w-full'>
                 {ctaButton.text}
               </CtaButton>
             )}
