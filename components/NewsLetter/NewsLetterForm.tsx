@@ -26,8 +26,8 @@ function NewsLetterForm({
       })
       const userId = workatoResp?.cloudId ? workatoResp.cloudId : email
       try {
-        analytics.identify(userId, { email })
-        analytics.track('Form Submitted', {
+        await analytics.identify(userId, { email })
+        await analytics.track('Form Submitted', {
           email,
           userId,
           _mkt_trk: workatoResp.marketCookie

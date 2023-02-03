@@ -43,6 +43,10 @@ function EventsForm({
   }
 
   const onSubmit = async () => {
+    if (loading) {
+      return
+    }
+
     const fillAll = 'Please fill in all the required fields'
     const invalidEmail = 'Please enter a valid e-mail address'
     let response
@@ -88,8 +92,8 @@ function EventsForm({
 
     const userId = response?.cloudId ? response.cloudId : email
     try {
-      analytics.identify(userId, { email })
-      analytics.track('Form Submitted', {
+      await analytics.identify(userId, { email, firstName, lastName })
+      await analytics.track('Form Submitted', {
         email,
         userId,
         _mkt_trk: response.marketCookie

@@ -1,5 +1,11 @@
 'use client'
-import React, { ChangeEvent, FocusEvent, FormEvent, useState } from 'react'
+import React, {
+  ChangeEvent,
+  FocusEvent,
+  FormEvent,
+  useRef,
+  useState
+} from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import { useAnalytics } from '../Providers/Analytics'
@@ -33,6 +39,7 @@ function ContactForm({
   const [lastName, setLastName] = useState<string>()
   const [email, setEmail] = useState<string>()
   const [company, setCompany] = useState<string>()
+  const submitRef = useRef(false)
   const [useCase, setUseCase] = useState<string>('')
 
   const onChange = (
@@ -69,6 +76,10 @@ function ContactForm({
   }
 
   const onSubmit = async () => {
+    if (submitRef.current) {
+      return
+    }
+
     if (
       !firstName ||
       !lastName ||
@@ -89,17 +100,19 @@ function ContactForm({
     }
 
     try {
-      const response = await submitWorkatoForm('websiteContact', {
+      submitRef.current = true
+      const requestData = {
         firstName,
         lastName,
         email,
         company,
         message: useCase
-      })
+      }
+      const response = await submitWorkatoForm('websiteContact', requestData)
       const userId = response?.cloudId ? response.cloudId : email
       try {
-        analytics.identify(userId, { email })
-        analytics.track('Form Submitted', {
+        await analytics.identify(userId, requestData)
+        await analytics.track('Form Submitted', {
           email,
           userId,
           _mkt_trk: response.marketCookie
@@ -109,6 +122,8 @@ function ContactForm({
     } catch (e: any) {
       openSnackBar(e.message, 'error')
     }
+
+    submitRef.current = false
   }
   return (
     <>
