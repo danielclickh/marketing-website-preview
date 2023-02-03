@@ -162,12 +162,22 @@ body {
     }
   }
 
-  &:not(.ignore-anchor) a {
-    @apply text-c6;
+  &:not(.ignore-anchor) {
+    a {
+      @apply text-c6-link;
+    }
+    &.anchor-c6 a {
+      @apply text-c6;
+    }
   }
 
-  &.ignore-anchor a {
-    @apply text-inherit underline hover:text-c6;
+  &.ignore-anchor {
+    a {
+      @apply text-inherit underline hover:text-c6-link;
+    }
+    &.anchor-c6 a {
+      @apply hover:text-c6;
+    }
   }
 
   &.rich-text-content {

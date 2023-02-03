@@ -45,7 +45,7 @@ export const SuiLink = ({ ...LinkProps }: LinkProps) => {
       className={`
         ${sizeCalculator(size, weight)}
         ${colorCalculator(color ?? '', 'text-inherit')}
-          hover:${colorCalculator(color ?? '', 'text-c6')}
+          hover:${colorCalculator(color ?? '', 'text-c6-link')}
           cursor-pointer hover:underline 
           ${className ?? ''}
       `}

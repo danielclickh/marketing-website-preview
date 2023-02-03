@@ -31,7 +31,7 @@ export default function NewsItem({
         path={ctaButton.href}
         target={ctaButton.target}
         color='primary'
-        className='!p-0 !text-c6'>
+        className='!p-0 !text-c6-link'>
         {ctaButton.text}
       </SuiButton>
     </div>

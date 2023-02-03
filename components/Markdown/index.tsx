@@ -76,11 +76,17 @@ function getDefaultComponents({ showHeaderLink }: { showHeaderLink: boolean }) {
 interface Props extends ReactMarkdownOptions {
   encloseByDiv?: boolean
   showHeaderLink?: boolean
+  ignoreAnchor?: boolean
 }
+
+const getIgnoreAnchor = () => ({
+  a: ({ href, node, ...props }: any) => <span {...props} />
+})
 
 function Markdown({
   children,
   components: componentsProp,
+  ignoreAnchor = false,
   className = '',
   encloseByDiv = true,
   showHeaderLink = false,
@@ -92,6 +98,11 @@ function Markdown({
   if (Object.keys(componentsProp ?? {}).length > 0) {
     Object.assign(newComponents, componentsProp)
   }
+
+  if (ignoreAnchor) {
+    Object.assign(newComponents, getIgnoreAnchor())
+  }
+
   if (encloseByDiv) {
     props.allowedElements = AllowedElements
   }

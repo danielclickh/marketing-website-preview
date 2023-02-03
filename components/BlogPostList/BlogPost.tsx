@@ -5,10 +5,6 @@ import Markdown from '../Markdown'
 import { StrapiImage } from '../StrapiElements'
 import { SuiText, SuiTitle } from '../sui'
 
-const components = {
-  a: (props: any) => <span {...props} />
-}
-
 export default function BlogPost(props: BlogPostType) {
   const {
     thumbnailPng,
@@ -59,9 +55,7 @@ export default function BlogPost(props: BlogPostType) {
                   weight='medium'
                   color='secondary'
                   className='line-clamp'>
-                  <Markdown components={components}>
-                    {shortDescription}
-                  </Markdown>
+                  <Markdown ignoreAnchor>{shortDescription}</Markdown>
                 </SuiText>
               )}
             </div>

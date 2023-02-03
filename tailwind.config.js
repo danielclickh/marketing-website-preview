@@ -33,7 +33,8 @@ module.exports = {
         },
         c6: {
           DEFAULT: '#FFB200',
-          text: '#4B2A04'
+          text: '#4B2A04',
+          link: '#C78F0F'
         },
         c7: {
           light: '#A6770D',

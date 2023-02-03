@@ -44,7 +44,7 @@ export function SnackbarContextProvider({ children }: { children: ReactNode }) {
             <SuiText size='sm' weight='medium' color='white'>
               {message}
             </SuiText>
-            <button className='text-c6' onClick={() => closeSnackBar()}>
+            <button className='text-c6-link' onClick={() => closeSnackBar()}>
               Dismiss
             </button>
           </div>

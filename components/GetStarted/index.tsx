@@ -42,7 +42,7 @@ async function FetchGetStarted({ customHeader }: Props) {
     name: platform.name,
     content: (
       <SuiCodeblock bgColor='bg-transparent'>
-        <Markdown>{platform.instructions}</Markdown>
+        <Markdown ignoreAnchor>{platform.instructions}</Markdown>
       </SuiCodeblock>
     )
   }))
@@ -68,7 +68,7 @@ async function FetchGetStarted({ customHeader }: Props) {
                 {title}
               </SuiTitle>
               <SuiText size='base' weight='medium' color='c4-dark'>
-                <Markdown className={styles.description}>
+                <Markdown className={`${styles.description} anchor-c6`}>
                   {descriptionRichText}
                 </Markdown>
               </SuiText>
@@ -119,7 +119,7 @@ async function FetchGetStarted({ customHeader }: Props) {
           weight='medium'
           color='white'
           className='px-6 md:px-0 mt-6'>
-          <Markdown>{bottomText}</Markdown>
+          <Markdown className='anchor-c6'>{bottomText}</Markdown>
         </SuiText>
       </div>
     </div>
