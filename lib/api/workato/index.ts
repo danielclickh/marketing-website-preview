@@ -30,7 +30,7 @@ export async function submitWorkatoForm(
     method: 'post',
     body: JSON.stringify(request),
     headers: {
-      'API-TOKEN': `${environment.workatoApiBaseUrl}`
+      'API-TOKEN': `${environment.workatoToken}`
     }
   })
   const workatoResp: WorkatoResponse = await response.json()
