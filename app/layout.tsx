@@ -46,7 +46,10 @@ export default function BaseLayout({ children }: Props) {
         <link href='favicon.ico' rel='icon' type='image/x-icon' />
         <meta name='twitter:card' content='summary_large_image' />
       </head>
-      <body className={`${inter.variable} font-inter`}>
+      <body
+        className={`${inter.variable} font-inter`}
+        data-segment={environment.segmentKey}
+        data-env={process.env.APP_ENV}>
         <Providers>
           <PageContainer>
             {/* @ts-expect-error Server Component */}
