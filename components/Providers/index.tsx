@@ -6,7 +6,13 @@ import { ReactNode, useEffect } from 'react'
 import { SnackbarContextProvider } from '../sui/client'
 import { AnalyticsProvider } from './Analytics'
 
-export function Providers({ children }: { children: ReactNode }) {
+export function Providers({
+  children,
+  writeKey
+}: {
+  children: ReactNode
+  writeKey: string
+}) {
   useEffect(() => {
     setTimeout(() => {
       Aos.init()
@@ -17,7 +23,7 @@ export function Providers({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider attribute='class' defaultTheme='light'>
       <SnackbarContextProvider>
-        <AnalyticsProvider>{children}</AnalyticsProvider>
+        <AnalyticsProvider writeKey={writeKey}>{children}</AnalyticsProvider>
       </SnackbarContextProvider>
     </ThemeProvider>
   )

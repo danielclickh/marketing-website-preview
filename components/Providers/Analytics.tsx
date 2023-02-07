@@ -1,15 +1,16 @@
 'use client'
 import { AnalyticsBrowser } from '@segment/analytics-next'
 import { createContext, ReactNode, useContext } from 'react'
-import environment from '../../environment'
 
 const AnalyticsContext = createContext<AnalyticsBrowser>(undefined!)
 
 type Props = {
   children: ReactNode
+  writeKey: string
 }
-export const AnalyticsProvider = ({ children }: Props) => {
-  const analytics = AnalyticsBrowser.load({ writeKey: environment.segmentKey })
+
+export const AnalyticsProvider = ({ children, writeKey }: Props) => {
+  const analytics = AnalyticsBrowser.load({ writeKey })
 
   return (
     <AnalyticsContext.Provider value={analytics}>

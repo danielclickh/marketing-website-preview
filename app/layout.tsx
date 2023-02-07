@@ -50,7 +50,7 @@ export default function BaseLayout({ children }: Props) {
         className={`${inter.variable} font-inter`}
         data-segment={environment.segmentKey}
         data-env={process.env.APP_ENV}>
-        <Providers>
+        <Providers writeKey={environment.segmentKey}>
           <PageContainer>
             {/* @ts-expect-error Server Component */}
             <Header />
