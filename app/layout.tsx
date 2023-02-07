@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-before-interactive-script-outside-document */
 import { Header } from '../components/header'
 import Footer from '../components/Footer'
 import { ReactNode } from 'react'
@@ -60,11 +61,11 @@ export default function BaseLayout({ children }: Props) {
             <Footer />
           </PageContainer>
         </Providers>
+        <Script
+          src='https://discover.clickhouse.com/js/stripmkttok.js'
+          strategy='beforeInteractive'
+        />
       </body>
-      <Script
-        src='https://discover.clickhouse.com/js/stripmkttok.js'
-        strategy='beforeInteractive'
-      />
       {/* Google Analytics for clickhouse.com */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${environment.googleTagManagerId}`}
