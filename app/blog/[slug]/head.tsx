@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation'
 import SeoContainer from '../../../components/SeoContainer'
 import { findAll } from '../../../lib/api/strapi'
 

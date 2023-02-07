@@ -13,7 +13,6 @@ function PageContainer({ children }: { children: ReactNode }) {
   }, [pathname, analytics])
 
   useEffect(() => {
-    console.log('asasasas', search)
     setTimeout(() => {
       const hash = window.location.hash
       if (hash) {
