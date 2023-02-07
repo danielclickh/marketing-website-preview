@@ -187,12 +187,6 @@ body {
     ol {
       @apply list-decimal;
     }
-    &:not(.show-anchor) a {
-      @apply text-c5;
-      &:hover {
-        @apply no-underline;
-      }
-    }
   }
 }
 
