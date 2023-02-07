@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import React from 'react'
 import Markdown from '../../components/Markdown'
 import { SuiTitle } from '../../components/sui'
@@ -39,8 +40,6 @@ async function getData({ slug }: ParamsType) {
   }
 }
 
-export const dynamicParams = false
-
 export default async function RichContentPage({
   params
 }: {
@@ -53,6 +52,10 @@ export default async function RichContentPage({
     leftContent,
     rightContent
   }: RichContentPageProps = await getData(params)
+
+  if (!title) {
+    notFound()
+  }
 
   return (
     <div className='rich-content-page'>

@@ -13,6 +13,7 @@ import GetStarted from '../../../components/GetStarted'
 import NewsLetter from '../../../components/NewsLetter'
 import SocialButton from '../../../components/SocialButton'
 import CopyUrlButton from '../../../components/CopyUrlButton'
+import { notFound } from 'next/navigation'
 
 interface BlogProps extends BlogPost {
   content: string
@@ -29,6 +30,10 @@ async function getData(slug: string): Promise<BlogProps> {
     populate: ['author', 'author.avatarPng', 'thumbnailPng'],
     pagination: { limit: 1 }
   })
+  if (!data?.[0]) {
+    notFound()
+  }
+
   const blog = data[0]
 
   const blogsParams = {

@@ -8,6 +8,7 @@ import { Providers } from '../components/Providers'
 import Script from 'next/script'
 import environment from '../environment'
 import PageContainer from '../components/PageContainer'
+
 type Props = {
   children: ReactNode
 }

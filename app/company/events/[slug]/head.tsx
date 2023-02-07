@@ -14,6 +14,10 @@ export default async function Head({ params: { slug } }: PageProps) {
     populate: ['thumbnailPng']
   })
 
+  if (!data[0]) {
+    return null
+  }
+
   return (
     <SeoContainer
       title={data[0].title}

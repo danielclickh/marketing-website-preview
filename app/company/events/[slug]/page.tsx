@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import React from 'react'
 import EventsContainer from '../../../../components/EventsContainer'
 import GetStarted from '../../../../components/GetStarted'
@@ -29,6 +30,10 @@ async function EventPage({ params: { slug } }: PageProps) {
       'form'
     ]
   })
+
+  if (!data?.[0]) {
+    notFound()
+  }
 
   const {
     agenda,

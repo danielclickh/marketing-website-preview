@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import SeoContainer from '../../../components/SeoContainer'
 import { findAll } from '../../../lib/api/strapi'
 
@@ -12,6 +13,11 @@ export default async function Head({ params }: { params: { slug: string } }) {
     pagination: { limit: 1 }
   }
   const { data } = await findAll('blog-posts', blogsParams)
+
+  if (!data[0]) {
+    return null
+  }
+
   const blog = {
     title: data[0].title,
     keywords: data[0].keywords,
