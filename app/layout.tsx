@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-before-interactive-script-outside-document */
 import { Header } from '../components/header'
 import Footer from '../components/Footer'
 import { ReactNode } from 'react'
@@ -28,6 +27,7 @@ export default function BaseLayout({ children }: Props) {
     <html lang='en' className='light' style={{ colorScheme: 'light' }}>
       <head>
         {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
+
         <Script
           src='https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js'
           charSet='UTF-8'
@@ -61,12 +61,15 @@ export default function BaseLayout({ children }: Props) {
             <Footer />
           </PageContainer>
         </Providers>
+        {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
         <Script
           src='https://discover.clickhouse.com/js/stripmkttok.js'
           strategy='beforeInteractive'
         />
       </body>
+
       {/* Google Analytics for clickhouse.com */}
+
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${environment.googleTagManagerId}`}
         type='text/javascript'
@@ -82,7 +85,11 @@ export default function BaseLayout({ children }: Props) {
           `}</Script>
 
       {/* Google Analytics clickhouse.com */}
-      <Script src='/changeClickhouseCloudLinks.js' />
+
+      <Script
+        id='change-ClickHouse-CloudLinks'
+        src='/changeClickhouseCloudLinks.js'
+      />
     </html>
   )
 }
