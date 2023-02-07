@@ -1,11 +1,10 @@
 'use client'
 import React, { ReactNode, useEffect } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useAnalytics } from '../Providers/Analytics'
 
 function PageContainer({ children }: { children: ReactNode }) {
   const pathname = usePathname()
-  const search = useSearchParams()
   const analytics = useAnalytics()
 
   useEffect(() => {
@@ -30,7 +29,7 @@ function PageContainer({ children }: { children: ReactNode }) {
         })
       }
     }, 0)
-  }, [pathname, search])
+  }, [pathname])
 
   return <div className='flex flex-col min-h-screen'>{children}</div>
 }
