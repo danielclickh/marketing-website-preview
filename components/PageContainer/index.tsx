@@ -1,10 +1,11 @@
 'use client'
 import React, { ReactNode, useEffect } from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { useAnalytics } from '../Providers/Analytics'
 
 function PageContainer({ children }: { children: ReactNode }) {
   const pathname = usePathname()
+  const search = useSearchParams()
   const analytics = useAnalytics()
 
   useEffect(() => {
@@ -12,6 +13,7 @@ function PageContainer({ children }: { children: ReactNode }) {
   }, [pathname, analytics])
 
   useEffect(() => {
+    console.log('asasasas', search)
     setTimeout(() => {
       const hash = window.location.hash
       if (hash) {
@@ -29,7 +31,7 @@ function PageContainer({ children }: { children: ReactNode }) {
         })
       }
     }, 0)
-  }, [pathname])
+  }, [pathname, search])
 
   return <div className='flex flex-col min-h-screen'>{children}</div>
 }
