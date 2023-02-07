@@ -26,14 +26,53 @@ export async function submitWorkatoForm(
   }
 
   request.url = window.location.href
-  const response = await fetch(`${environment.workatoApiBaseUrl}/${formType}`, {
-    method: 'post',
-    body: JSON.stringify(request),
-    headers: {
-      'API-TOKEN': `${environment.workatoToken}`
-    }
+
+  let text = ''
+  const workatoPromise = new Promise<string>((resolve, reject) => {
+    fetch(`${environment.workatoApiBaseUrl}/${formType}`, {
+      method: 'post',
+      body: JSON.stringify(request),
+      headers: {
+        'API-TOKEN': `${environment.workatoToken}`
+      }
+    }).then(function readAllChunks(res: Response) {
+      const reader = res.body?.getReader()
+
+      const read = () => {
+        if (reader) {
+          // read the data
+          reader
+            .read()
+            .then(({ done, value }: { done: boolean; value?: Uint8Array }) => {
+              // Result objects contain two properties:
+              // done  - true if the stream has already given you all its data.
+              // value - some data. Always undefined when done is true.
+              if (done) {
+                if (value) {
+                  const decoder = new TextDecoder()
+                  text += decoder.decode(value)
+                }
+                resolve(text)
+                return
+              }
+
+              const decoder = new TextDecoder()
+              text += decoder.decode(value)
+              read()
+            })
+        } else {
+          read()
+        }
+      }
+
+      read()
+    })
   })
-  const workatoResp: WorkatoResponse = await response.json()
+
+  const response = await workatoPromise
+  const workatoResp: WorkatoResponse = response.length
+    ? JSON.parse(response)
+    : {}
   return { ...workatoResp, marketCookie }
 }
 
