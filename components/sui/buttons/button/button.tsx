@@ -141,14 +141,12 @@ export function SuiButton({
   return (
     <>
       {props.path ? (
-        <Link
+        <a
           href={props.path}
-          passHref
-          scroll={props.scroll}
           className={disabled ? 'cursor-not-allowed pointer-events-none' : ''}
           target={props.target}>
           <ButtonContent />
-        </Link>
+        </a>
       ) : (
         <ButtonContent />
       )}

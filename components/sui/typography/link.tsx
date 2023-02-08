@@ -39,7 +39,7 @@ export const SuiLink = ({ ...LinkProps }: LinkProps) => {
   }
 
   return (
-    <Link
+    <a
       href={href}
       onClick={onClick}
       className={`
@@ -49,9 +49,8 @@ export const SuiLink = ({ ...LinkProps }: LinkProps) => {
           cursor-pointer hover:underline 
           ${className ?? ''}
       `}
-      scroll
       {...props}>
       {children}
-    </Link>
+    </a>
   )
 }
