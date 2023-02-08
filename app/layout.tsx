@@ -24,7 +24,11 @@ export const revalidate = 60
 
 export default function BaseLayout({ children }: Props) {
   return (
-    <html lang='en' className='light' style={{ colorScheme: 'light' }}>
+    <html
+      lang='en'
+      className='light'
+      style={{ colorScheme: 'light' }}
+      suppressHydrationWarning={true}>
       <head>
         {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
 
@@ -85,7 +89,8 @@ export default function BaseLayout({ children }: Props) {
 
         {/* Google Analytics clickhouse.com */}
 
-        <Script
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script
           id='change-ClickHouse-CloudLinks'
           src='/changeClickhouseCloudLinks.js'
         />
