@@ -28,6 +28,7 @@ const nextConfig = {
           { key: "Access-Control-Allow-Origin", value: "*" },
           { key: "Access-Control-Allow-Methods", value: "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
           { key: "Access-Control-Allow-Headers", value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" },
+          { key: 'Cache-Control', value: 'max-age=0, must-revalidate' },
         ],
       },
     ]
@@ -75,6 +76,11 @@ const nextConfig = {
         source: '/legal/agreements/private-preview-terms-of-service',
         destination: '/legal/agreements/terms-of-service',
         permanent: false,
+      },  
+      {
+        source: '/api/:path*',
+        destination: 'http://cms.clickhouse.com:1337/api/:path*',
+        permanent: true,
       },
     ]
   },
