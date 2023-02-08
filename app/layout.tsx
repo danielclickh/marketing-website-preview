@@ -65,11 +65,10 @@ export default function BaseLayout({ children }: Props) {
             <Footer />
           </PageContainer>
         </Providers>
-        {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
-        <Script
+        <script
           src='https://discover.clickhouse.com/js/stripmkttok.js'
           type='text/javascript'
-          strategy='beforeInteractive'
+          async
         />
 
         {/* Google Analytics for clickhouse.com */}
@@ -90,10 +89,11 @@ export default function BaseLayout({ children }: Props) {
 
         {/* Google Analytics clickhouse.com */}
 
-        <Script
+        <script
           id='change-ClickHouse-CloudLinks'
           src='/changeClickhouseCloudLinks.js'
           type='text/javascript'
+          async
         />
       </body>
     </html>
