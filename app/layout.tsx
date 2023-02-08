@@ -68,6 +68,7 @@ export default function BaseLayout({ children }: Props) {
         {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
         <Script
           src='https://discover.clickhouse.com/js/stripmkttok.js'
+          type='text/javascript'
           strategy='beforeInteractive'
         />
 
@@ -89,10 +90,10 @@ export default function BaseLayout({ children }: Props) {
 
         {/* Google Analytics clickhouse.com */}
 
-        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script
+        <Script
           id='change-ClickHouse-CloudLinks'
           src='/changeClickhouseCloudLinks.js'
+          type='text/javascript'
         />
       </body>
     </html>
