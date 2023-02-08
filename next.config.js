@@ -43,6 +43,10 @@ const nextConfig = {
         source: '/en/:path*',
         destination: '/:path*',
       },
+      {
+        source: '/api/:path*',
+        destination: 'http://cms.clickhouse.com:1337/api/:path*',
+      },
     ]
   },
   async redirects() {
@@ -76,11 +80,6 @@ const nextConfig = {
         source: '/legal/agreements/private-preview-terms-of-service',
         destination: '/legal/agreements/terms-of-service',
         permanent: false,
-      },  
-      {
-        source: '/api/:path*',
-        destination: 'http://cms.clickhouse.com:1337/api/:path*',
-        permanent: true,
       },
     ]
   },
