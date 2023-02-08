@@ -14,6 +14,7 @@ import NewsLetter from '../../../components/NewsLetter'
 import SocialButton from '../../../components/SocialButton'
 import CopyUrlButton from '../../../components/CopyUrlButton'
 import { notFound } from 'next/navigation'
+import { convertDateToString } from '../../../lib/utils/dateUtils'
 
 interface BlogProps extends BlogPost {
   content: string
@@ -86,7 +87,7 @@ export default async function BlogPage({
                     {author.name}
                   </SuiText>
                   <SuiText size='xs' weight='medium' color='secondary'>
-                    {date || publishedAt}
+                    {convertDateToString(date || publishedAt)}
                   </SuiText>
                 </div>
               </div>
