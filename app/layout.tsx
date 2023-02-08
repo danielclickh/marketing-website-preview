@@ -99,6 +99,25 @@ export default function BaseLayout({ children }: Props) {
           type='text/javascript'
           async
         />
+
+        {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
+        <Script
+          id='remove-cookie-icon'
+          type='text/javascript'
+          async
+          strategy='beforeInteractive'>
+          {`  
+            window.addEventListener("load", function () {
+              setTimeout(() => {
+                const otIcon = document.querySelector('.ot-optout-icon');
+                if (otIcon) {
+                  otIcon.innerHTML = '';
+                }
+              }, 0);
+            });
+
+          `}
+        </Script>
       </body>
     </html>
   )
