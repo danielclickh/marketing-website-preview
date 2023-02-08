@@ -104,7 +104,7 @@ export default function BaseLayout({ children }: Props) {
         <Script
           id='remove-cookie-icon'
           type='text/javascript'
-          async
+          defer
           strategy='beforeInteractive'>
           {`  
             window.addEventListener("load", function () {
