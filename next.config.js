@@ -9,6 +9,19 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles'), path.join(__dirname, 'app/**/*.module.scss'), path.join(__dirname, 'components/**/*.module.scss')],
   },
+  async headers() {
+    return [
+      {
+        source: '/ot_guard_logo.svg',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'max-age=0, must-revalidate',
+          },
+        ],
+      },
+    ]
+  },
   async rewrites() {
     return [
       {
