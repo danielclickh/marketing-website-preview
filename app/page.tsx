@@ -61,7 +61,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <div className='bg-hero md:bg-no-repeat bg-right bg-opacity-100 overflow-hidden'>
+      <div className='homepage bg-hero md:bg-no-repeat bg-right bg-opacity-100 overflow-hidden'>
         <div className='flex mx-auto flex-col lg:flex-row lg:items-stretch pb-20 lg:pb-44 pt-16 md:pt-28 px-8 2xl:px-0 relative gap-24 justify-center max-w-7xl'>
           <div
             data-aos='fade-up'
