@@ -65,6 +65,9 @@ export default function BaseLayout({ children }: Props) {
             <Footer />
           </PageContainer>
         </Providers>
+        <button id='ot-sdk-btn' className='ot-sdk-show-settings hidden'>
+          Cookie Settings
+        </button>
         <script
           src='https://discover.clickhouse.com/js/stripmkttok.js'
           type='text/javascript'
