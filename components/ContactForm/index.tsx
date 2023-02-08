@@ -23,6 +23,7 @@ interface Props {
   companyLabel: string
   messageLabel: string
   submitButtonLabel: string
+  thankYouMessage: string
 }
 
 function ContactForm({
@@ -31,7 +32,8 @@ function ContactForm({
   emailLabel,
   companyLabel,
   messageLabel,
-  submitButtonLabel
+  submitButtonLabel,
+  thankYouMessage
 }: Props) {
   const analytics = useAnalytics()
   const { openSnackBar } = useSnackbar()
@@ -118,7 +120,7 @@ function ContactForm({
           _mkt_trk: response.marketCookie
         })
       } catch (e) {}
-      openSnackBar('Thanks for registering to our newsletter!', 'success')
+      openSnackBar(thankYouMessage, 'success')
     } catch (e: any) {
       openSnackBar(e.message, 'error')
     }
