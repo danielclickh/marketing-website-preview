@@ -136,11 +136,11 @@ body {
   ul,
   ol {
     margin-left: 26px;
-    @apply mb-2.5;
+    @apply mb-9;
 
     li {
       &:not(:last-child) {
-        @apply mb-5;
+        @apply mb-2.5;
       }
     }
   }
