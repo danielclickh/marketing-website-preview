@@ -66,16 +66,15 @@ export default function BaseLayout({ children }: Props) {
           src='https://discover.clickhouse.com/js/stripmkttok.js'
           strategy='beforeInteractive'
         />
-      </body>
 
-      {/* Google Analytics for clickhouse.com */}
+        {/* Google Analytics for clickhouse.com */}
 
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${environment.googleTagManagerId}`}
-        type='text/javascript'
-        strategy='lazyOnload'
-      />
-      <Script id='ga-script' type='text/javascript'>{`
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${environment.googleTagManagerId}`}
+          type='text/javascript'
+          strategy='lazyOnload'
+        />
+        <Script id='ga-script' type='text/javascript'>{`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -84,12 +83,13 @@ export default function BaseLayout({ children }: Props) {
             });
           `}</Script>
 
-      {/* Google Analytics clickhouse.com */}
+        {/* Google Analytics clickhouse.com */}
 
-      <Script
-        id='change-ClickHouse-CloudLinks'
-        src='/changeClickhouseCloudLinks.js'
-      />
+        <Script
+          id='change-ClickHouse-CloudLinks'
+          src='/changeClickhouseCloudLinks.js'
+        />
+      </body>
     </html>
   )
 }
