@@ -1,7 +1,7 @@
 // @ts-check
 const path = require('path')
 /** @type {import('next').NextConfig} */
-const nextConfig ={
+const nextConfig = {
   reactStrictMode: true,
   experimental: {
     appDir: true
@@ -46,6 +46,11 @@ const nextConfig ={
       {
         source: '/trust/security',
         destination: 'https://trust.clickhouse.com',
+        permanent: false,
+      },
+      {
+        source: '/legal/agreements/private-preview-terms-of-service',
+        destination: '/legal/agreements/terms-of-service',
         permanent: false,
       },
     ]
