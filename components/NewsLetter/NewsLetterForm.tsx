@@ -34,6 +34,7 @@ function NewsLetterForm({
         })
       } catch (e) {}
       openSnackBar('Thanks for registering to our newsletter!', 'success')
+      setEmail('')
     } catch (e: any) {
       openSnackBar(e.mesage, 'error')
     }

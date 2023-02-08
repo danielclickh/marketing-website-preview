@@ -100,6 +100,11 @@ function EventsForm({
       })
     } catch (e) {}
     openSnackBar('Thank you, you have been registered to the event', 'success')
+    setEmail(undefined)
+    if (type === 'eventRegistration') {
+      setFirstName(undefined)
+      setLastName(undefined)
+    }
     setLoading(false)
     onSubmitProp()
   }

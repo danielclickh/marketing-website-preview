@@ -72,6 +72,7 @@ function ServiceUnavailableForm({
       })
     } catch (e) {}
     openSnackBar(successMsg, 'success')
+    setEmail(undefined)
     setTimeout(() => {
       setStatus({ loading: false })
     }, 5000)
