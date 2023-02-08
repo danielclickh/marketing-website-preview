@@ -51,7 +51,7 @@ export default function BlogPost(props: BlogPostType) {
               </SuiText>
               {shortDescription && (
                 <SuiText
-                  size='xs'
+                  size='sm'
                   weight='medium'
                   color='secondary'
                   className='line-clamp'>
