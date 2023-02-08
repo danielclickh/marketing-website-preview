@@ -121,6 +121,11 @@ function ContactForm({
         })
       } catch (e) {}
       openSnackBar(thankYouMessage, 'success')
+      setFirstName('')
+      setLastName('')
+      setEmail('')
+      setCompany('')
+      setUseCase('')
     } catch (e: any) {
       openSnackBar(e.message, 'error')
     }
