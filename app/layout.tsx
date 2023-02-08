@@ -24,11 +24,7 @@ export const revalidate = 60
 
 export default function BaseLayout({ children }: Props) {
   return (
-    <html
-      lang='en'
-      className='light'
-      style={{ colorScheme: 'light' }}
-      suppressHydrationWarning={true}>
+    <html lang='en' className='light' style={{ colorScheme: 'light' }}>
       <head>
         {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
 
