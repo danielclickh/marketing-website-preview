@@ -45,7 +45,7 @@ export default async function OurStoryPage() {
     <>
       <div className='bg-hero bg-cover pt-16'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
-          <div className='flex flex-col text-center mx-auto' data-aos='fade-up'>
+          <div className='flex flex-col text-center mx-auto'>
             <SuiTitle type='h1' className='mb-5'>
               {title}
             </SuiTitle>
@@ -59,9 +59,7 @@ export default async function OurStoryPage() {
           </div>
           <div className='flex flex-col mx-auto py-8'>
             <StrapiImage {...imagePng} alt='ClickHouse around the world' />
-            <div
-              className='flex justify-between mt-8 gap-x-16 md:gap-x-32 max-w-lg mx-auto'
-              data-aos='fade-up'>
+            <div className='flex justify-between mt-8 gap-x-16 md:gap-x-32 max-w-lg mx-auto'>
               {offices.map((office) => (
                 <div
                   className='flex flex-col items-center'
@@ -117,7 +115,7 @@ export default async function OurStoryPage() {
                 </SuiText>
               </div>
             </div>
-            <div className='flex flex-col w-full lg:w-2/5' data-aos='fade-up'>
+            <div className='flex flex-col w-full lg:w-2/5'>
               <StrapiImage {...item.imagePng} />
             </div>
           </div>

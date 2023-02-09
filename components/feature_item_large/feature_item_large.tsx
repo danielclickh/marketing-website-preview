@@ -6,14 +6,13 @@ type FeatureItemProps = {
   icon: BaseStrapiImage
   title: string
   description: string
-  entry?: string
 }
 
 export function FeatureItemLarge(props: FeatureItemProps) {
-  const { icon, title, description, entry } = props
+  const { icon, title, description } = props
 
   return (
-    <div className='flex flex-col w-full text-left' data-aos={entry}>
+    <div className='flex flex-col w-full text-left'>
       <div className='flex flex-row items-center mb-4'>
         <div className='flex w-12 mr-2'>
           <StrapiImage {...icon} className='feature-icon' />

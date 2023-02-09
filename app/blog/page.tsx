@@ -54,9 +54,7 @@ export default async function BlogsPage() {
   return (
     <div className='bg-hero pt-10'>
       <div className='flex container mx-auto flex-col'>
-        <div
-          className='flex flex-col text-center mx-auto pt-6'
-          data-aos='fade-up'>
+        <div className='flex flex-col text-center mx-auto pt-6'>
           <SuiTitle type='h1' className='mb-6'>
             {title}
           </SuiTitle>

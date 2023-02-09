@@ -20,9 +20,7 @@ export default async function ContactPage() {
     <>
       <div className='bg-c1 bg-cover pt-10'>
         <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
-          <div
-            className='flex flex-col text-center mx-auto pt-6'
-            data-aos='fade-up'>
+          <div className='flex flex-col text-center mx-auto pt-6'>
             <SuiTitle type='h1' className='mb-4'>
               {title}
             </SuiTitle>

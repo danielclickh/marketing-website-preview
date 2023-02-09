@@ -17,11 +17,7 @@ export function FeatureItem(props: FeatureItemProps) {
   const colorPalette = `${forceDarkMode ? 'bg-c2-dark' : 'bg-c2'}`
 
   return (
-    <div
-      className='flex w-full gap-x-4'
-      data-aos='fade-up'
-      data-aos-offset={0}
-      data-aos-delay={delay}>
+    <div className='flex w-full gap-x-4'>
       <div className='flex w-1/5 items-start'>
         <div
           className={`flex w-16 h-16 ${colorPalette} rounded-lg shadow-md justify-center items-center`}>

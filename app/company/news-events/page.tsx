@@ -69,7 +69,7 @@ export default async function News() {
     <>
       <div className='bg-c1 bg-cover pt-14'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
-          <div className='flex flex-col text-center mx-auto' data-aos='fade-up'>
+          <div className='flex flex-col text-center mx-auto'>
             <SuiTitle type='h1' className='mb-5'>
               {title}
             </SuiTitle>
