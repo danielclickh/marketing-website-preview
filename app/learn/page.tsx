@@ -16,7 +16,6 @@ import {
   SuiText,
   SuiTitle
 } from '../../components/sui'
-import VimeoPlayer from '../../components/VimeoPlayer'
 import { findAll } from '../../lib/api/strapi'
 import { EventType } from '../company/events/[slug]/types'
 import styles from './Learn.module.scss'

@@ -1,7 +1,6 @@
 'use client'
 import React, { useState } from 'react'
 import EventsForm from './EventsForm'
-import VimeoPlayer from '../VimeoPlayer'
 import { EventsContainerProps } from './types'
 
 function EventsContainer({
@@ -24,7 +23,16 @@ function EventsContainer({
         recordedVimeoUrl && (
           <div className='top w-full mx-auto max-w-7xl flex justify-center px-8 mb-16'>
             <div className='video_display'>
-              <VimeoPlayer url={recordedVimeoUrl} />
+              <iframe
+                src={recordedVimeoUrl}
+                allow='autoplay; fullscreen; picture-in-picture'
+                allowFullScreen
+                data-ready='true'
+                frameBorder='0'
+                height='545'
+                loading='lazy'
+                width='968'></iframe>
+              \
             </div>
           </div>
         )}
