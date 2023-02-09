@@ -2,6 +2,17 @@
 import React, { ReactNode, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { useAnalytics } from '../Providers/Analytics'
+import { AnalyticsBrowser } from '@segment/analytics-next'
+
+async function firePageAnalytics(analytics: AnalyticsBrowser) {
+  const name = (await analytics.user()).anonymousId()
+  const pageAnalytics = new CustomEvent('pageAnalytics', {
+    detail: {
+      name
+    }
+  })
+  window.dispatchEvent(pageAnalytics)
+}
 
 function PageContainer({ children }: { children: ReactNode }) {
   const pathname = usePathname()
@@ -9,6 +20,7 @@ function PageContainer({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     analytics.page()
+    firePageAnalytics(analytics)
   }, [pathname, analytics])
 
   useEffect(() => {

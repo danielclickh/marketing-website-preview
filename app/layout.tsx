@@ -93,7 +93,7 @@ export default function BaseLayout({ children }: Props) {
 
         {/* Google Analytics clickhouse.com */}
 
-        <script
+        <Script
           id='change-ClickHouse-CloudLinks'
           src='/changeClickhouseCloudLinks.js'
           type='text/javascript'

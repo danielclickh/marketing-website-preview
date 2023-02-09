@@ -5,20 +5,7 @@ const cookieMap = document.cookie.split('; ').reduce((prev, item) => {
 }, {})
 const ajsId = cookieMap['ajs_user_id'] || cookieMap['ajs_anonymous_id']
 
-const throttle = (callback, limit) => {
-  let inTrhottle;
-  return (...args) => {
-    if (!inTrhottle) {
-      inTrhottle = true;
-      setTimeout(() => {
-        inTrhottle = false;
-        callback(...args);
-      }, limit);
-    }
-  };
-};
-
-const changeClickhouseCloudLinks = throttle(() => {
+const changeClickhouseCloudLinks = (ajsId) => {
   const anchors = document.getElementsByTagName("a");
   for (let i = 0; i < anchors.length; i++) {
     if (anchors[i].href.includes("clickhouse.cloud")) {
@@ -28,18 +15,9 @@ const changeClickhouseCloudLinks = throttle(() => {
       anchors[i].href = url.href;
     }
   }
-}, 100);
+};
 
-window.addEventListener("DOMContentLoaded", function () {
-  const htmlNode = document.querySelector("html");
-
-  const observer = new MutationObserver(changeClickhouseCloudLinks);
-
-  const config = {
-    childList: true,
-    subtree: true,
-    attributes: false,
-  };
-
-  observer.observe(htmlNode, config);
+window.addEventListener("pageAnalytics", function (e) {
+  console.log("Clickhouse cloud link triggered")
+  changeClickhouseCloudLinks(e.detail.name)
 });
