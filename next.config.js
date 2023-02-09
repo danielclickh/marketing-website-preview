@@ -12,12 +12,6 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: "/:path",
-        headers: [
-          { key: 'Cache-Control', value: 'no-cache, no-store, must-revalidate' },
-        ],
-      },
-      {
         // matching all API routes
         source: "/api/:path*",
         headers: [
