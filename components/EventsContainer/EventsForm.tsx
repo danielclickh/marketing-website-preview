@@ -90,12 +90,14 @@ function EventsForm({
 
     const userId = response?.cloudId ? response.cloudId : email
     try {
-      await window.analytics.identify(userId, { email, firstName, lastName })
       await window.analytics.track('Form Submitted', {
+        firstName,
+        lastName,
         email,
         userId,
         _mkt_trk: response.marketCookie
       })
+      await window.analytics.identify(userId, { email, firstName, lastName })
     } catch (e) {}
     openSnackBar('Thank you, you have been registered to the event', 'success')
     setEmail(undefined)

@@ -24,12 +24,12 @@ function NewsLetterForm({
       })
       const userId = workatoResp?.cloudId ? workatoResp.cloudId : email
       try {
-        await window.analytics.identify(userId, { email })
         await window.analytics.track('Form Submitted', {
           email,
           userId,
           _mkt_trk: workatoResp.marketCookie
         })
+        await window.analytics.identify(userId, { email })
       } catch (e) {}
       openSnackBar('Thanks for registering to our newsletter!', 'success')
       setEmail('')

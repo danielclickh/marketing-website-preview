@@ -112,12 +112,12 @@ function ContactForm({
       const response = await submitWorkatoForm('websiteContact', requestData)
       const userId = response?.cloudId ? response.cloudId : email
       try {
-        await window.analytics.identify(userId, requestData)
         await window.analytics.track('Form Submitted', {
           email,
           userId,
           _mkt_trk: response.marketCookie
         })
+        await window.analytics.identify(userId, requestData)
       } catch (e) {}
       openSnackBar(thankYouMessage, 'success')
       setFirstName(undefined)
