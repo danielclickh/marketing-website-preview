@@ -112,7 +112,19 @@ async function LearnPage() {
           <div className='relative px-6'>
             <div className={styles.videoPlaceHolder}>
               <div>
-                <VimeoPlayer url='https://player.vimeo.com/video/756877867?h=c58e171729&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479' />
+                <iframe
+                  src='https://player.vimeo.com/video/756877867?h=c58e171729&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479'
+                  frameBorder='0'
+                  allow='autoplay; fullscreen; picture-in-picture'
+                  allowFullScreen
+                  style={{
+                    position: 'relative',
+                    top: '0',
+                    left: '0',
+                    width: '100%',
+                    height: '100%'
+                  }}
+                  title='Getting Started.mp4'></iframe>
               </div>
             </div>
           </div>
