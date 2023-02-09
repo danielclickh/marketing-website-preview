@@ -90,8 +90,8 @@ function EventsForm({
 
     const userId = response?.cloudId ? response.cloudId : email
     try {
-      await analytics.identify(userId, { email, firstName, lastName })
-      await analytics.track('Form Submitted', {
+      await window.analytics.identify(userId, { email, firstName, lastName })
+      await window.analytics.track('Form Submitted', {
         email,
         userId,
         _mkt_trk: response.marketCookie
