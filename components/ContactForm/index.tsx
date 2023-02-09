@@ -8,7 +8,7 @@ import React, {
 } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
-import { useAnalytics } from '../Providers/Analytics'
+
 import {
   SuiButton,
   SuiTextField,
@@ -35,7 +35,6 @@ function ContactForm({
   submitButtonLabel,
   thankYouMessage
 }: Props) {
-  const analytics = useAnalytics()
   const { openSnackBar } = useSnackbar()
   const [firstName, setFirstName] = useState<string>()
   const [lastName, setLastName] = useState<string>()
@@ -113,8 +112,8 @@ function ContactForm({
       const response = await submitWorkatoForm('websiteContact', requestData)
       const userId = response?.cloudId ? response.cloudId : email
       try {
-        await analytics.identify(userId, requestData)
-        await analytics.track('Form Submitted', {
+        await window.analytics.identify(userId, requestData)
+        await window.analytics.track('Form Submitted', {
           email,
           userId,
           _mkt_trk: response.marketCookie

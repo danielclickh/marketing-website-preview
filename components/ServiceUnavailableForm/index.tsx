@@ -2,8 +2,7 @@
 import React, { ChangeEvent, ReactNode, useState } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
-import { useAnalytics } from '../Providers/Analytics'
-import { SuiButton, SuiText, SuiTextField, useSnackbar } from '../sui/client'
+import { SuiButton, SuiTextField, useSnackbar } from '../sui/client'
 
 type StatusType = {
   loading: boolean
@@ -24,7 +23,6 @@ function ServiceUnavailableForm({
   success: successMsg,
   btnText
 }: ServiceUnavailableFormProps) {
-  const analytics = useAnalytics()
   const { openSnackBar } = useSnackbar()
   const [email, setEmail] = useState<string>()
   const [status, setStatus] = useState<StatusType>({
@@ -64,8 +62,8 @@ function ServiceUnavailableForm({
     })
     const userId = response?.cloudId ? response.cloudId : email
     try {
-      await analytics.identify(userId, { email })
-      await analytics.track('Form Submitted', {
+      await window.analytics.identify(userId, { email })
+      await window.analytics.track('Form Submitted', {
         email,
         userId,
         _mkt_trk: response.marketCookie

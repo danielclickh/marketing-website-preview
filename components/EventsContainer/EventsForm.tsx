@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import BulletPoint from '../BulletPoint'
-import { useAnalytics } from '../Providers/Analytics'
 import { SuiButton, SuiPanel, SuiTextField, useSnackbar } from '../sui/client'
 import { EventsFormProps } from './types'
 
@@ -12,7 +11,6 @@ function EventsForm({
   onSubmit: onSubmitProp,
   form
 }: EventsFormProps) {
-  const analytics = useAnalytics()
   const { openSnackBar } = useSnackbar()
   const [firstName, setFirstName] = useState<string>()
   const [lastName, setLastName] = useState<string>()

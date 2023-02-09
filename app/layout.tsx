@@ -8,6 +8,7 @@ import { Providers } from '../components/Providers'
 import Script from 'next/script'
 import environment from '../environment'
 import PageContainer from '../components/PageContainer'
+import SegmentScript from '../components/SegmentScript'
 
 type Props = {
   children: ReactNode
@@ -26,9 +27,10 @@ export default function BaseLayout({ children }: Props) {
   return (
     <html lang='en' className='light' style={{ colorScheme: 'light' }}>
       <head>
+        <SegmentScript />
         {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
-
         <Script
+          id="otSdkStub-script"
           src='https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js'
           charSet='UTF-8'
           type='text/javascript'
@@ -52,7 +54,7 @@ export default function BaseLayout({ children }: Props) {
         className={`${inter.variable} font-inter`}
         data-segment={environment.segmentKey}
         data-env={process.env.APP_ENV}>
-        <Providers writeKey={environment.segmentKey}>
+        <Providers>
           <PageContainer>
             {/* @ts-expect-error Server Component */}
             <Header />
@@ -64,7 +66,8 @@ export default function BaseLayout({ children }: Props) {
         <button id='ot-sdk-btn' className='ot-sdk-show-settings hidden'>
           Cookie Settings
         </button>
-        <script
+        <Script
+          id="stripmkttok-script"
           src='https://discover.clickhouse.com/js/stripmkttok.js'
           type='text/javascript'
           async
@@ -73,6 +76,7 @@ export default function BaseLayout({ children }: Props) {
         {/* Google Analytics for clickhouse.com */}
 
         <Script
+          id="gtm-script"
           src={`https://www.googletagmanager.com/gtag/js?id=${environment.googleTagManagerId}`}
           type='text/javascript'
           strategy='lazyOnload'

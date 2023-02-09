@@ -2,7 +2,6 @@
 import React, { ChangeEvent, useState } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
-import { useAnalytics } from '../Providers/Analytics'
 import { SuiButton, SuiTextField, useSnackbar } from '../sui/client'
 
 function NewsLetterForm({
@@ -13,7 +12,6 @@ function NewsLetterForm({
   submitButtonLabel: string
 }) {
   const [email, setEmail] = useState<string>('')
-  const analytics = useAnalytics()
   const { openSnackBar } = useSnackbar()
   const onClick = async () => {
     if (!validateEmail(email)) {
@@ -26,8 +24,8 @@ function NewsLetterForm({
       })
       const userId = workatoResp?.cloudId ? workatoResp.cloudId : email
       try {
-        await analytics.identify(userId, { email })
-        await analytics.track('Form Submitted', {
+        await window.analytics.identify(userId, { email })
+        await window.analytics.track('Form Submitted', {
           email,
           userId,
           _mkt_trk: workatoResp.marketCookie

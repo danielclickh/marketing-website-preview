@@ -12,15 +12,6 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/ot_guard_logo.svg',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'max-age=0, must-revalidate',
-          },
-        ],
-      },
-      {
         // matching all API routes
         source: "/api/:path*",
         headers: [

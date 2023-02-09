@@ -17,6 +17,7 @@
     "@heroicons/react": "^1.0.6",
     "@next/font": "^13.1.6",
     "@segment/analytics-next": "^1.48.0",
+    "@segment/snippet": "^4.15.3",
     "@types/vimeo__player": "^2.16.3",
     "@vimeo/player": "^2.18.0",
     "feed": "^4.2.2",

@@ -1,7 +1,5 @@
 'use client'
-import Link from 'next/link'
 import { ArrowRightIcon } from '@heroicons/react/solid'
-import { useAnalytics } from '../../../Providers/Analytics'
 import { HTMLAttributes } from 'react'
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
@@ -102,7 +100,6 @@ export function SuiButton({
   ...props
 }: ButtonProps | EmptyButtonProps) {
   const ButtonContent = () => {
-    const analytics = useAnalytics()
     const hoverEffects = disabled
       ? 'cursor-default'
       : 'hover:underline hover:transition-all hover:-translate-y-0.5'
@@ -124,7 +121,7 @@ export function SuiButton({
           onClick={() => {
             if (segmentEvent) {
               try {
-                analytics.track('click', segmentEvent)
+                window.analytics.track('click', segmentEvent)
               } catch (e) {}
             }
             props.onClick && props.onClick()

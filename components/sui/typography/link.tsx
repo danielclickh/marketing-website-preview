@@ -1,7 +1,6 @@
 'use client'
 import Link from 'next/link'
 import { HTMLAttributes } from 'react'
-import { useAnalytics } from '../../Providers/Analytics'
 import { colorCalculator, sizeCalculator } from './calculator'
 export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
   href: string
@@ -14,7 +13,6 @@ export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
 }
 
 export const SuiLink = ({ ...LinkProps }: LinkProps) => {
-  const analytics = useAnalytics()
   const {
     children,
     href,
@@ -30,7 +28,7 @@ export const SuiLink = ({ ...LinkProps }: LinkProps) => {
   const onClick = () => {
     if (segmentEvent) {
       try {
-        analytics.track('click', segmentEvent)
+        window.analytics.track('click', segmentEvent)
       } catch (error) {}
     }
     if (onClickProp) {
@@ -46,7 +44,7 @@ export const SuiLink = ({ ...LinkProps }: LinkProps) => {
         ${sizeCalculator(size, weight)}
         ${colorCalculator(color ?? '', 'text-inherit')}
           hover:${colorCalculator(color ?? '', 'text-c6-link')}
-          cursor-pointer hover:underline 
+          cursor-pointer hover:underline
           ${className ?? ''}
       `}
       {...props}>
