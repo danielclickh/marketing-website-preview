@@ -30,7 +30,7 @@ export default function BaseLayout({ children }: Props) {
         <SegmentScript />
         {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
         <Script
-          id="otSdkStub-script"
+          id='otSdkStub-script'
           src='https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js'
           charSet='UTF-8'
           type='text/javascript'
@@ -67,7 +67,7 @@ export default function BaseLayout({ children }: Props) {
           Cookie Settings
         </button>
         <Script
-          id="stripmkttok-script"
+          id='stripmkttok-script'
           src='https://discover.clickhouse.com/js/stripmkttok.js'
           type='text/javascript'
           async
@@ -76,7 +76,7 @@ export default function BaseLayout({ children }: Props) {
         {/* Google Analytics for clickhouse.com */}
 
         <Script
-          id="gtm-script"
+          id='gtm-script'
           src={`https://www.googletagmanager.com/gtag/js?id=${environment.googleTagManagerId}`}
           type='text/javascript'
           strategy='lazyOnload'
@@ -91,13 +91,6 @@ export default function BaseLayout({ children }: Props) {
           `}</Script>
 
         {/* Google Analytics clickhouse.com */}
-
-        <Script
-          id='change-ClickHouse-CloudLinks'
-          src='/changeClickhouseCloudLinks.js'
-          type='text/javascript'
-          async
-        />
       </body>
     </html>
   )

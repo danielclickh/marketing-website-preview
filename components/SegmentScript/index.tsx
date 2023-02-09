@@ -1,7 +1,7 @@
-import React from "react"
-import Script from "next/script"
+import React from 'react'
+import Script from 'next/script'
 import environment from '../../environment'
-import { AnalyticsSnippet } from '@segment/analytics-next';
+import { AnalyticsSnippet } from '@segment/analytics-next'
 
 declare global {
   interface Window {
@@ -90,17 +90,27 @@ const SegmentScript = () => {
     // you'd like to manually name or tag the page, edit or
     // move this call however you'd like.
     analytics.page();
+    analytics.ready(function() {
+      const ajsId = window.analytics.user()?.anonymousId();
+      const anchors = document.getElementsByTagName("a");
+      for (let i = 0; i < anchors.length; i++) {
+        if (anchors[i].href.includes("clickhouse.cloud")) {
+          const url = new URL(anchors[i].href);
+          url.searchParams.set("ajs_aid", ajsId);
+          anchors[i].href = url.href;
+        }
+      }
+    });
   })();
   `
   return (
     <Script
-      id="segmentScript"
+      id='segmentScript'
       type='text/javascript'
-      strategy="afterInteractive"
+      strategy='afterInteractive'
       dangerouslySetInnerHTML={{
-      __html: inlineScript,
-    }}>
-    </Script>
+        __html: inlineScript
+      }}></Script>
   )
 }
 
