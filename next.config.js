@@ -12,19 +12,6 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: "/:path*",
-        has: [
-          {
-            type: 'header',
-            key: 'content-type',
-            value: 'application/octet-stream',
-          },
-        ],
-        headers: [
-          { key: 'Cache-Control', value: 'no-cache, no-store, must-revalidate' }
-        ]
-      },
-      {
         // matching all API routes
         source: "/api/:path*",
         headers: [

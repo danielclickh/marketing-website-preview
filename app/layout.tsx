@@ -21,8 +21,6 @@ const inter = Inter({
   variable: '--font-inter'
 })
 
-export const revalidate = 60
-
 export default function BaseLayout({ children }: Props) {
   return (
     <html lang='en' className='light' style={{ colorScheme: 'light' }}>
