@@ -198,6 +198,10 @@ body {
   &:hover .tooltip {
     @apply visible z-50;
   }
+
+  iframe {
+    @apply max-w-full h-auto aspect-video;
+  }
 }
 
 @keyframes lds-ring {
