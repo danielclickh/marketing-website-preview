@@ -28,7 +28,7 @@ export default async function ContactPage() {
               size='lg'
               weight='medium'
               color='secondary'
-              className='max-w-2xl'>
+              className='max-w-3xl'>
               {description}
             </SuiText>
           </div>

@@ -59,7 +59,7 @@ function PartnersPage() {
               size='base'
               weight='medium'
               color='secondary'
-              className='max-w-2xl pb-10 whitespace-pre-wrap'>
+              className='max-w-3xl pb-10 whitespace-pre-wrap'>
               {description}
             </SuiText>
             <SuiButton
