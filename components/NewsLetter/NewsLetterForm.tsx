@@ -3,6 +3,7 @@ import React, { ChangeEvent, useState } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import { SuiButton, SuiTextField, useSnackbar } from '../sui/client'
+import styles from './NewsLetterForm.module.scss'
 
 function NewsLetterForm({
   emailLabel,
@@ -49,7 +50,7 @@ function NewsLetterForm({
         placeholder={emailLabel}
         value={email}
         onChange={onTextChange}
-        className='!min-h-[40px]'
+        className={styles.newsLetterInput}
       />
       <div className='mt-1'>
         <SuiButton type='primary' onClick={onClick}>
