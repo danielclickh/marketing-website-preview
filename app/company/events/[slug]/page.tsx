@@ -49,7 +49,7 @@ async function EventPage({ params: { slug } }: PageProps) {
 
   return (
     <>
-      <div className='flex flex-col px-3'>
+      <div className='flex flex-col px-4 sm:px-8'>
         <EventsContainer
           localDatetime={localDatetime}
           form={form}

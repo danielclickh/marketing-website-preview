@@ -36,14 +36,8 @@ function EventsContainer({
             </div>
           </div>
         )}
-      <div className='event-container mx-auto block lg:flex lg:justify-between lg:items-start'>
-        <div
-          className={`mb-16 mr-0 lg:mb-0 lg:mr-16 container flex-auto ${
-            eventEnded && form.type !== 'recordedGatedContent'
-              ? 'max-w-3xl'
-              : 'max-w-screen-md'
-          }
-          `}>
+      <div className='event-container mx-auto block lg:flex lg:justify-between lg:items-start max-w-7xl'>
+        <div className={`mb-16 mr-0 lg:mb-0 lg:mr-16 container flex-auto`}>
           {children}
         </div>
         <EventsForm submitted={isSubmitted} onSubmit={onSubmit} form={form} />

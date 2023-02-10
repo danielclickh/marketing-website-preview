@@ -142,7 +142,7 @@ export default async function News() {
 
       <div className='flex w-full bg-c2 text-c5 pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
-          <div className='flex flex-col md:flex-row justify-between pb-4 space-x-24'>
+          <div className='flex flex-col md:flex-row justify-between pb-4 gap-x-24 gap-y-10'>
             <div className='flex flex-col md:w-1/2'>
               <SuiTitle type='h3' weight='bold' className='mb-6 !text-3xl'>
                 {latestNewsTitle}
@@ -162,7 +162,10 @@ export default async function News() {
               </div>
             </div>
             <div className='flex flex-col md:w-1/2'>
-              <SuiTitle type='h3' weight='bold' className='mb-6 ml-4 !text-3xl'>
+              <SuiTitle
+                type='h3'
+                weight='bold'
+                className='mb-6 md:ml-4 !text-3xl'>
                 {upcomingEventsTitle}
               </SuiTitle>
               <div className='space-y-8'>
