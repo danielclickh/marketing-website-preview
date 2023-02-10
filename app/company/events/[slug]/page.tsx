@@ -61,7 +61,11 @@ async function EventPage({ params: { slug } }: PageProps) {
             <SuiTitle type='h1' className='mb-5'>
               {title}
             </SuiTitle>
-            <SuiText size='base' weight='medium' color='secondary'>
+            <SuiText
+              size='base'
+              weight='medium'
+              color='secondary'
+              className='whitespace-pre-wrap'>
               {richDescription ? (
                 <Markdown className='rich-text-content'>
                   {richDescription}
