@@ -131,7 +131,7 @@ export default async function OurStoryPage() {
           <div className='flex flex-col space-y-8'>
             {ourHistory.items.map((item) => (
               <div
-                className='flex flex-col md:flex-row items-center'
+                className='flex flex-col md:flex-row items-center gap-y-10'
                 key={item.text}>
                 <div className='flex md:w-2/12 lg:w-1/12'>
                   <div className='h-20 w-20 bg-c2 text-c5 rounded-full text-center items-center justify-center flex'>
