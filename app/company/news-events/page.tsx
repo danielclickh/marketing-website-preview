@@ -77,7 +77,7 @@ export default async function News() {
               size='lg'
               color='secondary'
               weight='medium'
-              className='max-w-2xl'>
+              className='max-w-3xl'>
               {description}
             </SuiText>
           </div>
