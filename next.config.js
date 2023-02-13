@@ -52,8 +52,23 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/benchmark',
+        destination: 'https://benchmark.clickhouse.com/',
+        permanent: true,
+      },
+      {
         source: '/benchmark/dbms',
         destination: 'https://benchmark.clickhouse.com/',
+        permanent: true,
+      },
+      {
+        source: '/benchmark/hardware',
+        destination: 'https://benchmark.clickhouse.com/hardware/',
+        permanent: true,
+      },
+      {
+        source: '/benchmark/versions',
+        destination: 'https://benchmark.clickhouse.com/versions/',
         permanent: true,
       },
       {
