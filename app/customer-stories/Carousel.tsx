@@ -6,14 +6,13 @@ import styles from './CustomerStories.module.scss'
 import 'glider-js/glider.min.css'
 
 const Carousel = ({ children }: { children: ReactNode }) => {
-  const [visibility, setVisibility] = useState(false)
   return (
-    <div className={styles.gliderContainer} data-visible={visibility}>
+    <div className={styles.gliderContainer}>
       <Glider
         hasArrows
         slidesToShow={1}
         onLoad={() => {
-          setVisibility(true)
+          window.dispatchEvent(new Event('resize'))
         }}
         draggable
         slidesToScroll={1}
