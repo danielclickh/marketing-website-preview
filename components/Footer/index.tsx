@@ -7,7 +7,9 @@ import NewsLetterForm from '../NewsLetter/NewsLetterForm'
 import { FooterData } from './types'
 const hind = Hind_Siliguri({
   subsets: ['latin'],
-  weight: '400'
+  weight: '400',
+  adjustFontFallback: false,
+  fallback: ['sans-serif']
 })
 
 export default async function Footer() {

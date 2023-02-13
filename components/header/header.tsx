@@ -20,7 +20,9 @@ import MobilePopoverPanel from './MobilePopoverPanel'
 
 const hind = Hind_Siliguri({
   subsets: ['latin'],
-  weight: '500'
+  weight: '500',
+  adjustFontFallback: false,
+  fallback: ['sans-serif']
 })
 
 export async function Header() {

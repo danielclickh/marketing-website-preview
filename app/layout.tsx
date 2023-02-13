@@ -18,7 +18,9 @@ const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   display: 'swap',
-  variable: '--font-inter'
+  variable: '--font-inter',
+  adjustFontFallback: false,
+  fallback: ['sans-serif']
 })
 
 export default function BaseLayout({ children }: Props) {
