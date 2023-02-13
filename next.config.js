@@ -40,7 +40,11 @@ const nextConfig = {
       },
       {
         source: '/uploads/:path*',
-        destination: 'http://cms.clickhouse.com:1337/uploads/:path*',
+        destination: `${process.env.STRAPI_API_URL}/uploads/:path*`,
+      },
+      {
+        source: '/sitemap.xml',
+        destination: `${process.env.STRAPI_API_URL}/sitemap/index.xml`,
       },
     ]
   },
