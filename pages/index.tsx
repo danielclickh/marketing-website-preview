@@ -149,7 +149,7 @@ export default function HomePage({
             />
           </div>
         </div>
-        <div className='flex flex-col md:flex-row container mx-auto justify-evenly max-w-7xl px-8 2xl:px-0 mb-16 divide-y-2 md:divide-y-0 md:divide-x-2'>
+        <div className='flex flex-col md:flex-row container mx-auto justify-evenly max-w-7xl px-8 2xl:px-0 mb-16 divide-c4/20 divide-y md:divide-y-0 md:divide-x'>
           {hero.highlights.map((highlight) => (
             <SuiPanel
               key={highlight.title}
