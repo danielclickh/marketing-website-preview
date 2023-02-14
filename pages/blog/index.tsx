@@ -82,7 +82,7 @@ export default function BlogsPage({
         </div>
 
         <BlogPostList categories={categories}>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 justify-center'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 justify-center'>
             {blogs.map((blog: BlogPostType) => (
               <BlogPost key={blog.id} {...blog} />
             ))}
