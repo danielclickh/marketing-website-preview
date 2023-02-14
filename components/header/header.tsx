@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
-import ThemeSwitcher from './ThemeSwitcher'
+import dynamic from 'next/dynamic'
 import { StrapiImage } from '../StrapiElements'
 import MenuItem from './MenuItem'
 import styles from './Header.module.scss'
@@ -12,6 +12,9 @@ import { Hind_Siliguri } from '@next/font/google'
 import { HeaderData } from './types'
 import MobilePopoverPanel from './MobilePopoverPanel'
 
+const ThemeSwitcher = dynamic(() => import('./ThemeSwitcher'), {
+  ssr: false
+})
 const hind = Hind_Siliguri({
   subsets: ['latin'],
   weight: '500',
