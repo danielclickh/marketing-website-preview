@@ -244,7 +244,7 @@ export default function OurStoryPage({
                   light={light}
                   dark={team.darkInvestorLogosPng[index]}
                   sizes='small'
-                  className='h-10 w-auto mx-auto object-contain max-w-[240px]'
+                  className='h-10 w-auto mx-auto object-contain max-w-[min(250px,100%)]'
                 />
               ))}
             </div>
