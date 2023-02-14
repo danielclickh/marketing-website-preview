@@ -28,7 +28,10 @@ export function FeatureItem(props: FeatureItemProps) {
         <SuiTitle type='h3' className='mb-1' weight='bold'>
           {title}
         </SuiTitle>
-        <SuiText size='sm' weight='medium' color='c4'>
+        <SuiText
+          size='sm'
+          weight='medium'
+          color={forceDarkMode ? 'c4-dark' : 'c4'}>
           <Markdown>{description}</Markdown>
         </SuiText>
       </div>
