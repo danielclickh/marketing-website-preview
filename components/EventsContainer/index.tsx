@@ -11,6 +11,9 @@ function EventsContainer({
   const [isSubmitted, setIsSubmitted] = useState(false)
   const onSubmit = () => {
     setIsSubmitted(true)
+    setTimeout(() => {
+      window.scrollTo(0, 0)
+    }, 0)
   }
 
   const eventEnded = new Date(localDatetime).valueOf() < Date.now()
@@ -31,7 +34,6 @@ function EventsContainer({
                 height='545'
                 loading='lazy'
                 width='968'></iframe>
-              \
             </div>
           </div>
         )}
