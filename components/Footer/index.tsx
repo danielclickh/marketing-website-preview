@@ -1,6 +1,5 @@
 import { SuiLink, SuiText, SuiTitle } from '../sui'
 import Link from 'next/link'
-import { findOne } from '../../lib/api/strapi'
 import { StrapiImage } from '../StrapiElements'
 import { Hind_Siliguri } from '@next/font/google'
 import NewsLetterForm from '../NewsLetter/NewsLetterForm'
@@ -12,27 +11,15 @@ const hind = Hind_Siliguri({
   fallback: ['sans-serif']
 })
 
-export default async function Footer() {
-  const {
-    topLevelFooterMenu,
-    logoSvg,
-    licensingText,
-    newsletterForm,
-    socialLinks,
-    bottomLinks,
-    copyright
-  }: FooterData = await findOne('footer', {
-    populate: [
-      'logoSvg',
-      'topLevelFooterMenu',
-      'topLevelFooterMenu.items',
-      'newsletterForm',
-      'socialLinks',
-      'socialLinks.socialLinkItems',
-      'socialLinks.socialLinkItems.iconSvg',
-      'bottomLinks'
-    ]
-  })
+export default function Footer({
+  topLevelFooterMenu = [],
+  logoSvg,
+  licensingText,
+  newsletterForm,
+  socialLinks,
+  bottomLinks = [],
+  copyright
+}: FooterData) {
   return (
     <div className='flex bg-c2-dark py-8 px-4 md:px-0'>
       <div className='container mx-auto md:flex justify-between max-w-7xl px-4 2xl:px-0 '>
@@ -111,38 +98,41 @@ export default async function Footer() {
             type='h4'
             color='white'
             className='!text-xl mb-3'>
-            {newsletterForm.title}
+            {newsletterForm?.title}
           </SuiTitle>
           <SuiText color='white' size='sm' weight='medium' className='mb-4'>
-            {newsletterForm.description}
+            {newsletterForm?.description}
           </SuiText>
           <NewsLetterForm
             emailLabel={newsletterForm.inputLabel}
             submitButtonLabel={newsletterForm.buttonLabel}
           />
-
-          <div className='flex flex-col pt-2'>
-            <SuiText color='white' size='sm' weight='medium' className='mb-4'>
-              {socialLinks.title}
-            </SuiText>
-            <div className='flex space-x-4'>
-              {socialLinks.socialLinkItems.map((socialLink, index: number) => (
-                <Link
-                  href={socialLink.href}
-                  target={socialLink.target}
-                  key={socialLink.href}>
-                  <div
-                    className={`bg-c3 border border-c2-dark p-3 rounded hover:bg-c3/10 social-link-${index}`}>
-                    <StrapiImage
-                      {...socialLink.iconSvg}
-                      width={21}
-                      height={20}
-                    />
-                  </div>
-                </Link>
-              ))}
+          {(socialLinks?.socialLinkItems ?? []).length > 0 && (
+            <div className='flex flex-col pt-2'>
+              <SuiText color='white' size='sm' weight='medium' className='mb-4'>
+                {socialLinks?.title}
+              </SuiText>
+              <div className='flex space-x-4'>
+                {socialLinks?.socialLinkItems.map(
+                  (socialLink, index: number) => (
+                    <Link
+                      href={socialLink.href}
+                      target={socialLink.target}
+                      key={socialLink.href}>
+                      <div
+                        className={`bg-c3 border border-c2-dark p-3 rounded hover:bg-c3/10 social-link-${index}`}>
+                        <StrapiImage
+                          {...socialLink.iconSvg}
+                          width={21}
+                          height={20}
+                        />
+                      </div>
+                    </Link>
+                  )
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

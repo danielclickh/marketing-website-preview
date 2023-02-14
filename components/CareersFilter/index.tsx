@@ -1,4 +1,3 @@
-'use client'
 import React, { ChangeEvent, useMemo, useState } from 'react'
 import useSWR from 'swr'
 import CategorySelector from '../CategorySelector'

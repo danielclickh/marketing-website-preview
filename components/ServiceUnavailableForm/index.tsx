@@ -1,4 +1,3 @@
-'use client'
 import React, { ChangeEvent, ReactNode, useState } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'

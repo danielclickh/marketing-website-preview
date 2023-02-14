@@ -1,35 +1,10 @@
 import Link from 'next/link'
 import React from 'react'
-import { findOne } from '../../lib/api/strapi'
-import { StrapiImageType } from '../../lib/api/strapi/types'
+import { GrowingCommunityProps } from '../../types/contact'
 import { StrapiPicture } from '../StrapiElements'
 import { SuiTitle } from '../sui'
 
-interface DataProps {
-  title: string
-  iconButtons: {
-    darkIconPng: StrapiImageType
-    lightIconPng: StrapiImageType
-    href: string
-    target?: string
-  }[]
-}
-
-async function getData(): Promise<DataProps> {
-  const data = await findOne('growing-community', {
-    populate: [
-      'iconButtons',
-      'iconButtons.darkIconPng',
-      'iconButtons.lightIconPng'
-    ]
-  })
-
-  return data
-}
-
-async function GrowingCommunity() {
-  const { title, iconButtons } = await getData()
-
+function GrowingCommunity({ title, iconButtons }: GrowingCommunityProps) {
   return (
     <div className='w-full bg-c2 text-c5 pt-16 pb-12'>
       <div className='flex flex-col container mx-auto max-w-7xl px-8 2xl:px-0 mb-12'>

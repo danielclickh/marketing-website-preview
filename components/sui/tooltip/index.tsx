@@ -1,4 +1,3 @@
-'use client'
 import React, { createContext } from 'react'
 import { mergeRefs } from 'react-merge-refs'
 import {

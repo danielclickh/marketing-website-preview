@@ -1,4 +1,3 @@
-'use client'
 import Link from 'next/link'
 import { HTMLAttributes } from 'react'
 import { colorCalculator, sizeCalculator } from './calculator'
@@ -36,23 +35,25 @@ export const SuiLink = ({ ...LinkProps }: LinkProps) => {
     }
   }
 
-  const containsHash = !!(new URL(href.startsWith('http') ? href : `https://clickhouse/${href}`).hash)
+  const containsHash = !!new URL(
+    href.startsWith('http') ? href : `https://clickhouse/${href}`
+  ).hash
 
   if (containsHash) {
     return (
       <a
-      href={href}
-      onClick={onClick}
-      className={`
+        href={href}
+        onClick={onClick}
+        className={`
         ${sizeCalculator(size, weight)}
         ${colorCalculator(color ?? '', 'text-inherit')}
           hover:${colorCalculator(color ?? '', 'text-c6-link')}
           cursor-pointer hover:underline
           ${className ?? ''}
       `}
-      {...props}>
-      {children}
-    </a>
+        {...props}>
+        {children}
+      </a>
     )
   }
 

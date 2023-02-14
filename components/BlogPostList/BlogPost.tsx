@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { BlogPost as BlogPostType } from '../../app/blog/types'
+import { BlogPost as BlogPostType } from '../../types/blogs'
 import { convertDateToString } from '../../lib/utils/dateUtils'
 import Markdown from '../Markdown'
 import { StrapiImage } from '../StrapiElements'

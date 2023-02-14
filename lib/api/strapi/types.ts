@@ -8,7 +8,7 @@ export interface StrapiEntry {
 }
 
 export interface BaseStrapiImage {
-  id: number
+  id?: number
   name: string
   alternativeText: string
   caption: string
@@ -22,6 +22,7 @@ export interface BaseStrapiImage {
   provider_metadata: any
   width?: number | null
   height?: number | null
+  svgText?: string
 }
 
 export interface StrapiImageType extends BaseStrapiImage {
@@ -43,4 +44,14 @@ export interface StrapiIconButton extends StrapiLink {
   darkIconPng: StrapiImageType
   lightIconPng: StrapiImageType
   text?: string
+}
+
+export interface SeoMetadata {
+  title?: string
+  keywords?: string
+  description?: string
+  image?: any
+  imageUrl?: string
+  type?: string
+  siteName?: string
 }

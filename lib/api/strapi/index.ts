@@ -1,9 +1,7 @@
 import fetch from 'cross-fetch'
 import { stringify } from 'qs'
 
-import environment from '../../../environment'
-
-const url = `${environment.strapiBaseUrl}/api/`
+const url = `${process.env.STRAPI_API_URL}/api/`
 
 export async function getPathsValues(
   pathName: string,
@@ -26,7 +24,9 @@ export async function getPathsValues(
       ? page[type].split('/').filter((slug: string) => slug.length > 0)
       : page[type]
     return {
-      [paramName]: slugList
+      params: {
+        [paramName]: slugList
+      }
     }
   })
   if (pagination.pageCount > pageNumber) {
@@ -69,7 +69,7 @@ export async function fetchAll(
   return list
 }
 
-function convertStrapiObject(element: any) {
+async function convertStrapiObject(element: any) {
   const newElement =
     'attributes' in element && 'id' in element
       ? { id: element.id, ...element.attributes }
@@ -80,18 +80,38 @@ function convertStrapiObject(element: any) {
     const fieldValue: any = entry[1]
 
     if (Array.isArray(fieldValue)) {
-      result[field] = fieldValue.map(convertStrapiObject)
+      result[field] = await Promise.all(
+        fieldValue.map(
+          async (item: Record<string, any>): Promise<Record<string, any>> => {
+            return await convertStrapiObject(item)
+          }
+        )
+      )
       continue
     }
 
     if (typeof fieldValue === 'object' && fieldValue) {
       if ('data' in fieldValue && Array.isArray(fieldValue.data)) {
-        result[field] = fieldValue.data.map(convertStrapiObject)
+        result[field] = await Promise.all(
+          fieldValue.data.map(
+            async (item: Record<string, any>): Promise<Record<string, any>> => {
+              return await convertStrapiObject(item)
+            }
+          )
+        )
         continue
       }
-      let convertedObj: any = convertStrapiObject(fieldValue)
+      let convertedObj: any = await convertStrapiObject(fieldValue)
       if ('data' in convertedObj && Object.keys(convertedObj).length === 1) {
         convertedObj = convertedObj.data
+
+        if (convertedObj?.mime && convertedObj.mime.includes('svg')) {
+          const response = await fetch(
+            `${process.env.STRAPI_API_URL}${convertedObj.url}`
+          )
+          const svgText = await response.text()
+          convertedObj.svgText = svgText
+        }
       }
 
       result[field] = convertedObj
@@ -113,7 +133,14 @@ export async function findAll(pathName: string, params: Record<string, any>) {
   )
 
   const { data, meta } = await response.json()
-  const dataList = data.map(convertStrapiObject)
+  const dataList = await Promise.all(
+    data.map(
+      async (item: Record<string, any>): Promise<Record<string, any>> => {
+        const converted = await convertStrapiObject(item)
+        return converted
+      }
+    )
+  )
   return {
     data: dataList,
     pagination: meta.pagination
@@ -129,7 +156,7 @@ export async function findOne(pathName: string, params: Record<string, any>) {
   )
 
   const { data } = await response.json()
-  return convertStrapiObject(data)
+  return await convertStrapiObject(data)
 }
 
 export async function findHeader(requestString: string) {

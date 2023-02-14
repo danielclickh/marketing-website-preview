@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { EventForm } from '../../app/company/events/[slug]/types'
+import { EventForm } from '../../types/events'
 
 export interface EventsContainerProps {
   children: ReactNode

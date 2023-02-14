@@ -1,43 +1,22 @@
 import { ReactNode } from 'react'
-import { findOne } from '../../lib/api/strapi'
-import { StrapiButton } from '../../lib/api/strapi/types'
 import Markdown from '../Markdown'
 import { SuiButton, SuiCodeblock, SuiTabs, SuiText, SuiTitle } from '../sui'
 import styles from './GetStarted.module.scss'
-interface Props {
+import { GettingStartedData } from './types'
+interface Props extends GettingStartedData {
   customHeader?: ReactNode
 }
 
-interface GettingStartedPlatform {
-  id: number
-  name: string
-  instructions: string
-}
-
-interface GettingStartedData {
-  pretitle: string
-  title: string
-  description: string
-  descriptionRichText: string
-  quickStartButton: StrapiButton
-  cloudButton: StrapiButton
-  platforms: Array<GettingStartedPlatform>
-  bottomText: string
-}
-
-async function FetchGetStarted({ customHeader }: Props) {
-  const {
-    pretitle,
-    title,
-    descriptionRichText,
-    quickStartButton,
-    cloudButton,
-    platforms,
-    bottomText
-  }: GettingStartedData = await findOne('getting-started', {
-    populate: ['cloudButton', 'platforms', 'quickStartButton']
-  })
-
+export default function FetchGetStarted({
+  customHeader,
+  pretitle,
+  title,
+  descriptionRichText,
+  quickStartButton,
+  cloudButton,
+  platforms,
+  bottomText
+}: Props) {
   const osTabs = platforms.map((platform) => ({
     name: platform.name,
     content: (
@@ -123,14 +102,5 @@ async function FetchGetStarted({ customHeader }: Props) {
         </SuiText>
       </div>
     </div>
-  )
-}
-
-export default function GetStarted({ customHeader }: Props) {
-  return (
-    <>
-      {/* @ts-expect-error Server Component */}
-      <FetchGetStarted customHeader={customHeader} />
-    </>
   )
 }

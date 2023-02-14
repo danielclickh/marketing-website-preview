@@ -1,29 +1,13 @@
 import React from 'react'
-import { findOne } from '../../lib/api/strapi'
-import { StrapiImageType } from '../../lib/api/strapi/types'
+import { CloudProviderType } from '../../types/pricing'
 import { StrapiPicture } from '../StrapiElements'
 import { SuiText } from '../sui'
 
-interface Props {
-  hero: {
-    cloudProviders: Array<{
-      title: string
-      lightProviderPngs: StrapiImageType[]
-      darkProviderPngs: StrapiImageType[]
-    }>
-  }
-}
-
-async function CloudProviders() {
-  const {
-    hero: { cloudProviders }
-  }: Props = await findOne('cloud', {
-    populate: [
-      'hero.cloudProviders',
-      'hero.cloudProviders.darkProviderPngs',
-      'hero.cloudProviders.lightProviderPngs'
-    ]
-  })
+function CloudProviders({
+  cloudProviders
+}: {
+  cloudProviders: Array<CloudProviderType>
+}) {
   return (
     <div className='flex space-x-6 justify-center md:justify-start'>
       {cloudProviders.map((cloudProvider, parentIndex: number) => (

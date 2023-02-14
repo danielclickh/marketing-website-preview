@@ -1,4 +1,3 @@
-'use client'
 import React, { HTMLAttributes } from 'react'
 
 interface OptionType extends HTMLAttributes<HTMLLIElement> {

@@ -1,4 +1,3 @@
-import 'server-only'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import {
@@ -12,7 +11,6 @@ import rehypeSlug from 'rehype-slug-custom-id'
 
 import { SuiTitle } from '../sui'
 import { AllowedElements, HighLightOptions, sanitizeMarkdown } from './utils'
-import HeaderLink from './HeaderLink'
 
 function StrapiImage({ src, width, height, alt, ...props }: any) {
   return (

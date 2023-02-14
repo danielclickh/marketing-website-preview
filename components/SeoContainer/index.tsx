@@ -1,12 +1,6 @@
+import Head from 'next/head'
 import React from 'react'
-
-interface SeoMetadata {
-  title?: string
-  description?: string
-  image?: { url: string }[]
-  type?: string
-  siteName?: string
-}
+import { SeoMetadata } from '../../lib/api/strapi/types'
 
 function SeoContainer({
   image,
@@ -18,7 +12,8 @@ function SeoContainer({
   const imageUrl = image?.[0]?.url || '/images/sql_console_hero.png'
 
   return (
-    <>
+    <Head>
+      <meta name='twitter:card' content='summary_large_image' />
       {title.length > 0 && (
         <>
           <title>{title}</title>
@@ -39,7 +34,7 @@ function SeoContainer({
       <meta name='twitter:image' content={imageUrl} />
       <meta property='og:image' content={imageUrl} />
       <meta name='author' content='ClickHouse' />
-    </>
+    </Head>
   )
 }
 

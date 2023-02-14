@@ -1,7 +1,6 @@
 import {
   LinkTarget,
   StrapiButton,
-  StrapiEntry,
   StrapiImageType
 } from '../../lib/api/strapi/types'
 
@@ -22,11 +21,11 @@ export interface HeaderTopNavSubItem {
   icon?: StrapiImageType
 }
 
-export interface HeaderData extends StrapiEntry {
-  ctaButton: StrapiButton
-  ctaSecondaryButton: StrapiButton
-  menuItems: Array<HeaderTopNavItem>
-  logoIcon: StrapiImageType
+export interface HeaderData {
+  ctaButton?: StrapiButton
+  ctaSecondaryButton?: StrapiButton
+  menuItems?: Array<HeaderTopNavItem>
+  logoIcon?: StrapiImageType
 }
 
 export interface RegularNavItem {

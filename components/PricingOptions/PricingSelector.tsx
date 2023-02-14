@@ -1,9 +1,8 @@
-'use client'
 import React, { Fragment } from 'react'
-import { Listbox, Transition } from '../HeadlessUIClient'
 import { usePricing } from './PricingContext'
 import { ChevronDownIcon } from '@heroicons/react/solid'
-import { RegionPricingWithIcon } from '../../app/pricing/types'
+import { RegionPricingWithIcon } from '../../types/pricing'
+import { Listbox, Transition } from '@headlessui/react'
 
 function PricingSelector({
   regionList

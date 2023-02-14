@@ -1,4 +1,3 @@
-'use client'
 import { ReactElement } from 'react'
 import { Tab } from '@headlessui/react'
 import { SuiText } from '../typography'

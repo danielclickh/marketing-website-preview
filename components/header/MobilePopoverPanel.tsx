@@ -1,7 +1,5 @@
-'use client'
+import { Popover } from '@headlessui/react'
 import React from 'react'
-import { PopoverPanel } from '../HeadlessUIClient'
-
 type CloseFn = (
   focusableElement?:
     | HTMLElement
@@ -18,7 +16,7 @@ const MobilePopoverPanel = React.forwardRef<
       close()
     }
   return (
-    <PopoverPanel
+    <Popover.Panel
       ref={ref}
       focus
       className='absolute top-0 z-10 inset-x-0 p-2 transition transform origin-top-right min-[930px]:hidden'>
@@ -29,7 +27,7 @@ const MobilePopoverPanel = React.forwardRef<
           {children}
         </div>
       )}
-    </PopoverPanel>
+    </Popover.Panel>
   )
 })
 

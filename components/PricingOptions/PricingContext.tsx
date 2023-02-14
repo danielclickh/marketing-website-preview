@@ -1,4 +1,3 @@
-'use client'
 import {
   createContext,
   Dispatch,
@@ -7,7 +6,7 @@ import {
   useContext,
   useState
 } from 'react'
-import { RegionPricingWithIcon } from '../../app/pricing/types'
+import { RegionPricingWithIcon } from '../../types/pricing'
 type ContextProps = {
   selectedRegion?: RegionPricingWithIcon
   setSelectedRegion: Dispatch<SetStateAction<RegionPricingWithIcon>>

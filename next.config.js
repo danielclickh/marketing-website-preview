@@ -2,12 +2,8 @@
 const path = require('path')
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  experimental: {
-    appDir: true
-  },
   sassOptions: {
-    includePaths: [path.join(__dirname, 'styles'), path.join(__dirname, 'app/**/*.module.scss'), path.join(__dirname, 'components/**/*.module.scss')],
+    includePaths: [path.join(__dirname, 'styles'), path.join(__dirname, 'components/**/*.module.scss'), path.join(__dirname, 'pages/**/*.module.scss')],
   },
   async headers() {
     return [

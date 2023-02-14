@@ -1,15 +1,14 @@
 import React from 'react'
-import { findOne } from '../../lib/api/strapi'
+import { NewsLetterData } from '../../types/homepage'
 import { SuiPanel, SuiText, SuiTitle } from '../sui'
 import NewsLetterForm from './NewsLetterForm'
 
-async function NewsLetter() {
-  const { title, description, emailLabel, submitButtonLabel } = await findOne(
-    'newsletter-form',
-    {
-      populate: ['*']
-    }
-  )
+function NewsLetter({
+  title,
+  description,
+  emailLabel,
+  submitButtonLabel
+}: NewsLetterData) {
   return (
     <SuiPanel color='bg-c4/10' padding='lg' isRounded>
       <div className='flex flex-col md:flex-row justify-between md:items-start py-2'>

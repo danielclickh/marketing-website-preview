@@ -1,5 +1,5 @@
-'use client'
 import { ArrowRightIcon } from '@heroicons/react/solid'
+import Link from 'next/link'
 import { HTMLAttributes } from 'react'
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
@@ -138,12 +138,12 @@ export function SuiButton({
   return (
     <>
       {props.path ? (
-        <a
+        <Link
           href={props.path}
           className={disabled ? 'cursor-not-allowed pointer-events-none' : ''}
           target={props.target}>
           <ButtonContent />
-        </a>
+        </Link>
       ) : (
         <ButtonContent />
       )}

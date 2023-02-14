@@ -1,4 +1,3 @@
-import environment from '../../../environment'
 import { WorkatoRequest, WorkatoResponse } from './types'
 
 interface WorkatoFormResponse extends WorkatoResponse {
@@ -29,11 +28,11 @@ export async function submitWorkatoForm(
 
   let text = ''
   const workatoPromise = new Promise<string>((resolve, reject) => {
-    fetch(`${environment.workatoApiBaseUrl}/${formType}`, {
+    fetch(`${process.env.NEXT_PUBLIC_WORKATO_API_URL}/${formType}`, {
       method: 'post',
       body: JSON.stringify(request),
       headers: {
-        'API-TOKEN': `${environment.workatoToken}`
+        'API-TOKEN': `${process.env.NEXT_PUBLIC_WORKATO_TOKEN}`
       }
     }).then(function readAllChunks(res: Response) {
       const reader = res.body?.getReader()

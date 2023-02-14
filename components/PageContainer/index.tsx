@@ -1,4 +1,3 @@
-'use client'
 import React, { ReactNode, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 

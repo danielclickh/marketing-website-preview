@@ -1,4 +1,3 @@
-'use client'
 import React, { useState } from 'react'
 import EventsForm from './EventsForm'
 import { EventsContainerProps } from './types'

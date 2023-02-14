@@ -1,13 +1,7 @@
-'use client'
-import React, {
-  ChangeEvent,
-  FocusEvent,
-  FormEvent,
-  useRef,
-  useState
-} from 'react'
+import React, { FocusEvent, FormEvent, useRef, useState } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
+import { ContactFormProps } from '../../types/contact'
 
 import {
   SuiButton,
@@ -15,16 +9,6 @@ import {
   SuiTextFieldArea,
   useSnackbar
 } from '../sui/client'
-
-interface Props {
-  firstNameLabel: string
-  lastNameLabel: string
-  emailLabel: string
-  companyLabel: string
-  messageLabel: string
-  submitButtonLabel: string
-  thankYouMessage: string
-}
 
 function ContactForm({
   firstNameLabel,
@@ -34,7 +18,7 @@ function ContactForm({
   messageLabel,
   submitButtonLabel,
   thankYouMessage
-}: Props) {
+}: ContactFormProps) {
   const { openSnackBar } = useSnackbar()
   const [firstName, setFirstName] = useState<string>()
   const [lastName, setLastName] = useState<string>()

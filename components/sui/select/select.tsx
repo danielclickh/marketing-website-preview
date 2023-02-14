@@ -1,5 +1,3 @@
-'use client'
-/* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'

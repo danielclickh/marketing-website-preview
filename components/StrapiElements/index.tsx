@@ -1,43 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
+import StrapiSvg from './StrapiSvg'
 import { StrapiImageProps, StrapiPicProps } from './types'
-import Markdown from '../Markdown'
-import environment from '../../environment'
-
-async function StrapiSvg({
-  url,
-  className = '',
-  width,
-  height
-}: StrapiImageProps) {
-  try {
-    const response = await fetch(`${environment.strapiBaseUrl}${url}`)
-    const svgText = await response.text()
-
-    return (
-      <Markdown
-        encloseByDiv={false}
-        components={{
-          svg: ({ node, ...params }) => {
-            return (
-              <svg
-                {...params}
-                className={`fill-current ${className}`}
-                width={width ?? undefined}
-                height={height ?? undefined}
-              />
-            )
-          }
-        }}>
-        {svgText}
-      </Markdown>
-    )
-  } catch (e) {
-    console.log('Error fetching svg', `${environment.strapiBaseUrl}${url}`)
-    console.error(e)
-    return null
-  }
-}
 
 function StrapiImageUrl({
   id,
@@ -73,12 +37,7 @@ export function StrapiImage({ mime, ...props }: StrapiImageProps) {
     return <StrapiImageUrl {...props} />
   }
 
-  return (
-    <>
-      {/* @ts-expect-error Server Component */}
-      <StrapiSvg {...props} />
-    </>
-  )
+  return <StrapiSvg mime={mime} {...props} />
 }
 
 export function StrapiPicture({

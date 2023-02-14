@@ -186,6 +186,10 @@ body {
       @apply list-decimal;
     }
   }
+
+  iframe {
+    @apply max-w-full h-auto aspect-video;
+  }
 }
 
 .has-tooltip {
@@ -197,10 +201,6 @@ body {
 
   &:hover .tooltip {
     @apply visible z-50;
-  }
-
-  iframe {
-    @apply max-w-full h-auto aspect-video;
   }
 }
 

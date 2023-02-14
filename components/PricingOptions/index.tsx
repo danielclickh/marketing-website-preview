@@ -1,13 +1,13 @@
 import { MinusIcon } from '@heroicons/react/outline'
 import { CheckIcon } from '@heroicons/react/solid'
 import React, { ReactNode } from 'react'
-import { PricingPlanData, RegionPricingWithIcon } from '../../app/pricing/types'
 import Markdown from '../Markdown'
 import { PricingContextProvider } from './PricingContext'
 import PlanPricing from './PlanPricing'
 import PricingButton from './PricingButton'
 import PricingSelector from './PricingSelector'
 import ShowPricing from './ShowPricing'
+import { PricingPlanData, RegionPricingWithIcon } from '../../types/pricing'
 
 function PricingOptions({
   regionList,

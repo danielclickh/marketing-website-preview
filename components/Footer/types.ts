@@ -41,11 +41,11 @@ export interface FooterBottomLink extends StrapiLink {
 }
 
 export interface FooterData {
-  licensingText: string
-  copyright: string
-  logoSvg: StrapiImageType
-  topLevelFooterMenu: Array<TopLevelFooterMenu>
+  licensingText?: string
+  copyright?: string
+  logoSvg?: StrapiImageType
+  topLevelFooterMenu?: Array<TopLevelFooterMenu>
   newsletterForm: FooterNewsletterForm
-  socialLinks: FooterSocialLinks
-  bottomLinks: Array<FooterBottomLink>
+  socialLinks?: FooterSocialLinks
+  bottomLinks?: Array<FooterBottomLink>
 }

@@ -1,18 +1,12 @@
 import { SuiButton, SuiLink, SuiText } from '../sui'
 
 import { Fragment } from 'react'
-import {
-  Popover,
-  PopoverButton,
-  Transition,
-  PopoverGroup
-} from '../HeadlessUIClient'
+import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
 import ThemeSwitcher from './ThemeSwitcher'
 import { StrapiImage } from '../StrapiElements'
 import MenuItem from './MenuItem'
-import { findOne } from '../../lib/api/strapi'
 import styles from './Header.module.scss'
 import { Hind_Siliguri } from '@next/font/google'
 import { HeaderData } from './types'
@@ -25,20 +19,12 @@ const hind = Hind_Siliguri({
   fallback: ['sans-serif']
 })
 
-export async function Header() {
-  const { logoIcon, menuItems, ctaSecondaryButton, ctaButton }: HeaderData =
-    await findOne('header', {
-      populate: [
-        'logoIcon',
-        'ctaButton',
-        'ctaSecondaryButton',
-        'href',
-        'target',
-        'menuItems.menuItems',
-        'menuItems.menuItems.icon'
-      ]
-    })
-
+export default function Header({
+  logoIcon,
+  menuItems = [],
+  ctaSecondaryButton,
+  ctaButton
+}: HeaderData) {
   return (
     <Popover className='bg-c1/80 shadow-sm  dark:border-b dark:border-c2-dark h-full backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300'>
       <div className='container flex mx-auto w-full px-4 sm:px-8 2xl:px-0 max-w-7xl h-16 items-center'>
@@ -47,19 +33,19 @@ export async function Header() {
             <Link
               href='/'
               className='flex items-center gap-x-3 hover:no-underline'>
-              <StrapiImage {...logoIcon} width={32} height={32} />
+              {logoIcon && <StrapiImage {...logoIcon} width={32} height={32} />}
               <span className={`text-2xl ${hind.className}`}>ClickHouse</span>
             </Link>
             <div className='flex justify-center'>
               <div className='flex justify-between items-center md:justify-start'>
                 <div className='-mr-2 -my-2 min-[930px]:hidden'>
-                  <PopoverButton className='bg-c1 rounded-md p-2 inline-flex items-center justify-center text-c5 hover:text-c4 hover:bg-c2 focus:outline-none'>
+                  <Popover.Button className='bg-c1 rounded-md p-2 inline-flex items-center justify-center text-c5 hover:text-c4 hover:bg-c2 focus:outline-none'>
                     <span className='sr-only'>Open menu</span>
                     <MenuIcon className='h-6 w-6' aria-hidden='true' />
-                  </PopoverButton>
+                  </Popover.Button>
                 </div>
                 <div className='hidden md:flex-1 min-[930px]:flex min-[930px]:items-center min-[930px]:justify-between'>
-                  <PopoverGroup
+                  <Popover.Group
                     as='nav'
                     className='flex items-center space-x-4 lg:space-x-6 xl:space-x-10'>
                     {menuItems.map((menuItem) => {
@@ -161,7 +147,7 @@ export async function Header() {
                         </SuiButton>
                       )}
                     </div>
-                  </PopoverGroup>
+                  </Popover.Group>
                 </div>
               </div>
             </div>
@@ -184,10 +170,8 @@ export async function Header() {
                   {menuItems.map((menuItem, index) => {
                     if (index === 0) {
                       return (
-                        <>
-                          <div
-                            key={menuItem.name}
-                            className='flex flex-col col-span-2 gap-y-6 '>
+                        <Fragment key={menuItem.name}>
+                          <div className='flex flex-col col-span-2 gap-y-6 '>
                             {menuItem.menuItems.map((item) => (
                               <SuiLink
                                 key={item.name}
@@ -214,7 +198,7 @@ export async function Header() {
                             ))}
                           </div>
                           <hr className={styles.mobileHeader} />
-                        </>
+                        </Fragment>
                       )
                     }
                     if (menuItem.menuItems.length > 0) {
@@ -260,10 +244,10 @@ export async function Header() {
                 </nav>
               </div>
               <div>
-                <PopoverButton className='bg-c1 rounded-md p-2 inline-flex items-center justify-center text-c5 hover:text-c4 ease-in-out focus:outline-none'>
+                <Popover.Button className='bg-c1 rounded-md p-2 inline-flex items-center justify-center text-c5 hover:text-c4 ease-in-out focus:outline-none'>
                   <span className='sr-only'>Close menu</span>
                   <XIcon className='h-6 w-6' aria-hidden='true' />
-                </PopoverButton>
+                </Popover.Button>
               </div>
             </div>
           </div>

@@ -1,13 +1,7 @@
-'use client'
 import { Fragment, ReactNode } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
-import { PopoverButton, PopoverPanel } from '../HeadlessUIClient'
 import styles from './Header.module.scss'
-
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(' ')
-}
 
 const MenuItem = ({
   name,
@@ -19,7 +13,7 @@ const MenuItem = ({
   <Popover className='relative' key={name}>
     {({ open }) => (
       <>
-        <PopoverButton
+        <Popover.Button
           data-open={open}
           className={`${styles.header_popover} group group-hover:underline data-[open=true]:underline hover:underline`}>
           <span>{name}</span>
@@ -27,7 +21,7 @@ const MenuItem = ({
             className='text-c5 ml-1 h-5 w-5'
             aria-hidden='true'
           />
-        </PopoverButton>
+        </Popover.Button>
 
         <Transition
           as={Fragment}
@@ -38,7 +32,7 @@ const MenuItem = ({
           leave='transition ease-in duration-150'
           leaveFrom='opacity-100 translate-y-0'
           leaveTo='opacity-0 translate-y-1'>
-          <PopoverPanel className='absolute z-10 -ml-4 mt-3 transform w-max max-w-md lg:max-w-1xl'>
+          <Popover.Panel className='absolute z-10 -ml-4 mt-3 transform w-max max-w-md lg:max-w-1xl'>
             {({ close }) => (
               <div
                 className='rounded-lg shadow-lg border border-c2 ring-0 ring-opacity-5 overflow-hidden'
@@ -48,7 +42,7 @@ const MenuItem = ({
                 </div>
               </div>
             )}
-          </PopoverPanel>
+          </Popover.Panel>
         </Transition>
       </>
     )}
