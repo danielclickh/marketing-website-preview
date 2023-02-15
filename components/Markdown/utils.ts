@@ -213,7 +213,7 @@ export const AllowedElements = [
 export function sanitizeMarkdown(children: string): string {
   children = children.replace(/``` text\n/gi, '``` newText\n')
   children = children.replaceAll(
-    /<pre([^>]*)?(\/?)(>(\s+)?<code[^>]*?(\/?))?(>(\s+)?<div[^>]*?(\/?))?>(.*?)<(\/div>(.*?))?(\/code>\s+?)?(\/pre>)/gis,
+    /<[[:<:]]pre[[:>:]]([^>]*)?(\/?)(>(\s+)?<[[:<:]]code[[:>:]][^>]*?(\/?))?(>(\s+)?<[[:<:]]div[[:>:]][^>]*?(\/?))?>(.*?)<(\/div>(.*?))?(\/code>\s+?)?(\/pre>)/gis,
     (
       currentValue,
       match1,
