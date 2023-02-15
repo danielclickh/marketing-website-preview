@@ -28,7 +28,12 @@ export const getStaticProps: GetStaticProps<ServiceProps> =
       props: {
         ...response.card,
         install_oss: response.install_oss,
-        ...commonProps
+        ...commonProps,
+        seo: {
+          title: response.card.title,
+          type: 'website',
+          siteName: 'ClickHouse'
+        }
       }
     }
   }
@@ -42,10 +47,11 @@ function ServiceUnavailableCountryPage({
   install_oss,
   headerData,
   getStartedData,
-  footerData
+  footerData,
+  seo
 }: ServiceProps) {
   return (
-    <Layout headerData={headerData} footerData={footerData}>
+    <Layout headerData={headerData} footerData={footerData} seo={seo}>
       <div className='service_unavailable_country px-3'>
         <SuiPanel
           color='bg-c1'
