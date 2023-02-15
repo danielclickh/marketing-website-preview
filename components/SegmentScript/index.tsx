@@ -10,6 +10,17 @@ declare global {
 
 const SegmentScript = () => {
   const inlineScript = `
+  function assignUserToCloud() {
+      const ajsId = window.analytics.user()?.anonymousId();
+      const anchors = document.getElementsByTagName("a");
+      for (let i = 0; i < anchors.length; i++) {
+        if (anchors[i].href.includes("clickhouse.cloud")) {
+          const url = new URL(anchors[i].href);
+          url.searchParams.set("ajs_aid", ajsId);
+          anchors[i].href = url.href;
+        }
+      }
+    }
   (function(){
     // Create a queue, but don't obliterate an existing one!
     var analytics = window.analytics = window.analytics || [];
@@ -89,16 +100,18 @@ const SegmentScript = () => {
     // you'd like to manually name or tag the page, edit or
     // move this call however you'd like.
     analytics.page();
-    analytics.ready(function() {
-      const ajsId = window.analytics.user()?.anonymousId();
-      const anchors = document.getElementsByTagName("a");
-      for (let i = 0; i < anchors.length; i++) {
-        if (anchors[i].href.includes("clickhouse.cloud")) {
-          const url = new URL(anchors[i].href);
-          url.searchParams.set("ajs_aid", ajsId);
-          anchors[i].href = url.href;
-        }
-      }
+    analytics.ready(() => {
+        const htmlNode = document.querySelector("html");
+
+        const observer = new MutationObserver(assignUserToCloud);
+
+        const config = {
+          childList: true,
+          subtree: true,
+          attributes: false,
+        };
+
+        observer.observe(htmlNode, config);
     });
   })();
   `
