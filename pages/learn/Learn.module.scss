@@ -1,16 +1,14 @@
 .videoPlaceHolder {
-  @apply mx-auto aspect-video;
-  max-height: 450px;
+  @apply mx-auto;
   max-width: 800px;
   width: 100%;
   width: fill-available;
   & > div {
-    background-color: rgba(53, 50, 65, 0.25);
-    @apply rounded-xl pb-4 w-full h-full;
+    @apply rounded-xl relative z-10 p-4 w-full h-full bg-c4/10;
   }
 
   iframe {
-    @apply max-w-full top-0 left-0 relative w-full h-full;
+    @apply max-w-full top-0 left-0 relative w-full h-full aspect-video;
   }
 
   &::before {

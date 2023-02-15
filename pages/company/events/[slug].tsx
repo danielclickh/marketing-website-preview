@@ -68,6 +68,16 @@ export const getStaticProps: GetStaticProps<EventProps> =
 
     const commonProps = await getCommonProps()
     const page = data[0]
+
+    if (page.eventVideoUrl) {
+      return {
+        redirect: {
+          destination: page.eventVideoUrl,
+          permanent: false
+          // statusCode: 301
+        }
+      }
+    }
     return {
       props: {
         ...page,
@@ -102,7 +112,7 @@ function EventPage({
 }: EventProps) {
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
-      <div className='flex flex-col px-4 sm:px-8'>
+      <div className='flex flex-col'>
         <EventsContainer
           localDatetime={localDatetime}
           form={form}

@@ -111,7 +111,7 @@ function PricingPage({
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
       <div className='pricing bg-c2 text-c5 h-full md:pb-20'>
-        <div className='container mx-auto px-3 py-20'>
+        <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 mx-auto px-3 py-20'>
           {hero && (
             <div className='hero'>
               <div className='flex flex-col items-center'>
@@ -149,7 +149,7 @@ function PricingPage({
         </div>
         {philosophy && (
           <div className='philosophy bg-c3 text-c1-light'>
-            <div className='container py-28 mx-auto'>
+            <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 py-28 mx-auto'>
               <h2 className='title text-center font-bold mb-16 text-4xl'>
                 {philosophy.title}
               </h2>
@@ -178,7 +178,7 @@ function PricingPage({
           </div>
         )}
         {contactSection && (
-          <div className='md:mt-20 mx-auto md:w-10/12'>
+          <div className='md:mt-20 mx-auto md:w-10/12 max-w-7xl'>
             <div className='container mx-auto gap-x-4 flex md:rounded-lg py-11 px-6 md:pl-20 md:pr-0 md:py-16 bg-c6 w-full max-w-screen-lg text-c5-light items-stretch relative'>
               <div className='w-full'>
                 <SuiTitle type='h2'>{contactSection.title}</SuiTitle>

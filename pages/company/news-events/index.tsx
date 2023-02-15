@@ -135,7 +135,7 @@ export default function News({
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
       <div className='bg-c1 bg-cover pt-14'>
-        <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
+        <div className='flex container mx-auto flex-col px-4 sm:px-8 2xl:px-0'>
           <div className='flex flex-col text-center mx-auto'>
             <SuiTitle type='h1' className='mb-5'>
               {title}
@@ -291,7 +291,7 @@ export default function News({
       </div>
 
       <div className='flex w-full bg-c1 pb-8'>
-        <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
+        <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-4 sm:px-8 2xl:px-0'>
           <SuiTitle type='h2' className='mb-8 !text-3xl'>
             {pressReleasesTitle}
           </SuiTitle>

@@ -116,7 +116,7 @@ function LearnPage({
 }: LearnProps) {
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
-      <div className='hero-container bg-c1-light'>
+      <div className='hero-container bg-c1'>
         <div className='hero-content relative text-center'>
           <div className={styles.learnBg}>
             <SuiTitle

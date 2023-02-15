@@ -75,7 +75,7 @@ export default function OurStoryPage({
                 size='lg'
                 color='secondary'
                 weight='medium'
-                className='max-w-xl mb-16'>
+                className='max-w-7xl mb-16'>
                 {description}
               </SuiText>
             </div>
@@ -173,7 +173,7 @@ export default function OurStoryPage({
           </div>
         </div>
 
-        <div className='bg-c2 text-c5 w-full px-6'>
+        <div className='bg-c2 text-c5 w-full px-4 md:px-8'>
           <div className='flex container mx-auto flex-col 2xl:px-0'>
             <div className='flex flex-col text-center mx-auto pt-16'>
               <SuiTitle type='h2' className='mb-6'>
@@ -197,7 +197,7 @@ export default function OurStoryPage({
             </div>
           </div>
         </div>
-        <div className='bg-c1 w-full pt-16 pb-24 px-6'>
+        <div className='bg-c1 w-full pt-16 pb-24 px-4 md:px-8'>
           <div className='flex container mx-auto flex-col max-w-7xl'>
             <SuiTitle
               type='h3'
