@@ -68,13 +68,18 @@ export const getStaticProps: GetStaticProps<EventProps> =
 
     const commonProps = await getCommonProps()
     const page = data[0]
+    if (!page) {
+      return {
+        notFound: true
+      }
+    }
 
     if (page.eventVideoUrl) {
       return {
+        props: {},
         redirect: {
           destination: page.eventVideoUrl,
           permanent: false
-          // statusCode: 301
         }
       }
     }
@@ -211,13 +216,27 @@ function EventPage({
 
 export async function getStaticPaths() {
   const params = {
-    fields: ['slug']
+    fields: ['slug'],
+    filters: {
+      $or: [
+        {
+          eventVideoUrl: {
+            $null: true
+          }
+        },
+        {
+          eventVideoUrl: {
+            $eq: ''
+          }
+        }
+      ]
+    }
   }
   const paths = await getPathsValues('events', params)
 
   return {
     paths,
-    fallback: false
+    fallback: 'blocking'
   }
 }
 
