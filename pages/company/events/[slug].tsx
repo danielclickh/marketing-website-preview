@@ -11,6 +11,7 @@ import { findAll, getPathsValues } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ParamsType } from '../../../types/homepage'
 import { EventProps, EventType } from '../../../types/events'
+import styles from './Events.module.scss'
 
 export const getStaticProps: GetStaticProps<EventProps> =
   async function getStaticProps({ params }) {
@@ -119,7 +120,8 @@ function EventPage({
               color='secondary'
               className='whitespace-pre-wrap'>
               {richDescription ? (
-                <Markdown className='rich-text-content'>
+                <Markdown
+                  className={`rich-text-content ${styles.eventDescription}`}>
                   {richDescription}
                 </Markdown>
               ) : (
