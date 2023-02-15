@@ -69,6 +69,25 @@ export async function fetchAll(
   return list
 }
 
+async function convertSvg(convertedObj: Record<string, any>) {
+  if (convertedObj?.mime && convertedObj.mime.includes('svg')) {
+    const response = await fetch(
+      `${process.env.STRAPI_API_URL}${convertedObj.url}`
+    )
+    const svgText = await response.text()
+    convertedObj.svgText = svgText
+  }
+  return convertedObj
+}
+
+async function convertStrapiObjectArray(
+  item: Record<string, any>
+): Promise<Record<string, any>> {
+  let convertedObj = await convertStrapiObject(item)
+  convertedObj = await convertSvg(convertedObj)
+  return convertedObj
+}
+
 async function convertStrapiObject(element: any) {
   const newElement =
     'attributes' in element && 'id' in element
@@ -81,11 +100,7 @@ async function convertStrapiObject(element: any) {
 
     if (Array.isArray(fieldValue)) {
       result[field] = await Promise.all(
-        fieldValue.map(
-          async (item: Record<string, any>): Promise<Record<string, any>> => {
-            return await convertStrapiObject(item)
-          }
-        )
+        fieldValue.map(convertStrapiObjectArray)
       )
       continue
     }
@@ -93,28 +108,16 @@ async function convertStrapiObject(element: any) {
     if (typeof fieldValue === 'object' && fieldValue) {
       if ('data' in fieldValue && Array.isArray(fieldValue.data)) {
         result[field] = await Promise.all(
-          fieldValue.data.map(
-            async (item: Record<string, any>): Promise<Record<string, any>> => {
-              return await convertStrapiObject(item)
-            }
-          )
+          fieldValue.data.map(convertStrapiObjectArray)
         )
         continue
       }
       let convertedObj: any = await convertStrapiObject(fieldValue)
       if ('data' in convertedObj && Object.keys(convertedObj).length === 1) {
         convertedObj = convertedObj.data
-
-        if (convertedObj?.mime && convertedObj.mime.includes('svg')) {
-          const response = await fetch(
-            `${process.env.STRAPI_API_URL}${convertedObj.url}`
-          )
-          const svgText = await response.text()
-          convertedObj.svgText = svgText
-        }
       }
 
-      result[field] = convertedObj
+      result[field] = await convertSvg(convertedObj)
       continue
     }
 
