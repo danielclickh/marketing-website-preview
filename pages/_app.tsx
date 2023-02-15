@@ -57,7 +57,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       <Script
         id='gtm-script'
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GTM}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${
+          process.env.NEXT_PUBLIC_GTM ?? 'GTM-P52RCTZ'
+        }`}
         type='text/javascript'
         strategy='lazyOnload'
       />
@@ -65,7 +67,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GTM}', {
+            gtag('config', '${process.env.NEXT_PUBLIC_GTM ?? 'GTM-P52RCTZ'}', {
               page_path: window.location.pathname,
             });
           `}</Script>

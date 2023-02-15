@@ -36,11 +36,11 @@ const nextConfig = {
       },
       {
         source: '/uploads/:path*',
-        destination: `${process.env.STRAPI_API_URL}/uploads/:path*`,
+        destination: `${process.env.STRAPI_API_URL ?? 'http://cms.clickhouse.com:1337/'}/uploads/:path*`,
       },
       {
         source: '/sitemap.xml',
-        destination: `${process.env.STRAPI_API_URL}/sitemap/index.xml`,
+        destination: `${process.env.STRAPI_API_URL ?? 'http://cms.clickhouse.com:1337/'}/sitemap/index.xml`,
       },
     ]
   },

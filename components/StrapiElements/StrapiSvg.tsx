@@ -28,7 +28,10 @@ export default function StrapiSvg({
       </Markdown>
     )
   } catch (e) {
-    console.log('Error fetching svg', `${process.env.STRAPI_API_URL}${url}`)
+    console.log(
+      'Error fetching svg',
+      `${process.env.STRAPI_API_URL ?? 'http://cms.clickhouse.com:1337/'}${url}`
+    )
     console.error(e)
     return null
   }

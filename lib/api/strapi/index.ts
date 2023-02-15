@@ -1,7 +1,9 @@
 import fetch from 'cross-fetch'
 import { stringify } from 'qs'
 
-const url = `${process.env.STRAPI_API_URL}/api/`
+const url = `${
+  process.env.STRAPI_API_URL ?? 'http://cms.clickhouse.com:1337/'
+}/api/`
 
 export async function getPathsValues(
   pathName: string,
@@ -72,7 +74,9 @@ export async function fetchAll(
 async function convertSvg(convertedObj: Record<string, any>) {
   if (convertedObj?.mime && convertedObj.mime.includes('svg')) {
     const response = await fetch(
-      `${process.env.STRAPI_API_URL}${convertedObj.url}`
+      `${process.env.STRAPI_API_URL ?? 'http://cms.clickhouse.com:1337/'}${
+        convertedObj.url
+      }`
     )
     const svgText = await response.text()
     convertedObj.svgText = svgText
