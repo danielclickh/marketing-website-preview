@@ -66,7 +66,7 @@ export default function BlogsPage({
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
       <div className='bg-hero pt-10'>
-        <div className='flex container mx-auto flex-col'>
+        <div className='flex max-w-7xl px-4 sm:px-8 2xl:px-0 mx-auto flex-col'>
           <div className='flex flex-col text-center mx-auto pt-6'>
             <SuiTitle type='h1' className='mb-6'>
               {title}
