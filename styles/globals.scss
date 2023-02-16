@@ -55,9 +55,12 @@ body {
 
 .rich_content {
   .md-header-container {
-    @apply mb-9 flex items-center gap-2;
+    @apply mb-6 flex items-center gap-2;
     &:not(:first-child) {
-      @apply mt-9;
+      @apply mt-6;
+    }
+    h2 {
+      @apply text-3xl;
     }
   }
 
