@@ -68,7 +68,7 @@ body {
     .code {
       margin-top: -24px;
       max-width: 98%;
-      overflow-wrap: break-word;
+      @apply overflow-auto;
     }
 
     .play-ui {
@@ -107,7 +107,7 @@ body {
     }
   }
 
-  code {
+  :not(pre) code {
     @apply bg-c2 text-c4 dark:text-c6;
     @apply border border-solid inline-block px-1;
     border: 1px solid #e8eaee;
