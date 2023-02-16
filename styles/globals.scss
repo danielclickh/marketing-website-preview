@@ -119,7 +119,7 @@ body {
     code {
       @apply box-border mb-9 w-full;
       padding: 20px;
-      @apply text-c1-light rounded-lg whitespace-pre-wrap block;
+      @apply text-c1-light rounded-lg whitespace-pre block;
       background-color: #222222;
 
       @apply border border-solid border-c3 break-words;
