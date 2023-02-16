@@ -68,7 +68,7 @@ body {
     .code {
       margin-top: -24px;
       max-width: 98%;
-      @apply overflow-auto;
+      @apply overflow-auto whitespace-pre;
     }
 
     .play-ui {
@@ -131,7 +131,7 @@ body {
       word-break: break-all;
     }
     div {
-      @apply overflow-auto;
+      @apply overflow-auto whitespace-pre;
     }
   }
 
