@@ -48,7 +48,7 @@ function Header(props: any) {
 function getDefaultComponents() {
   return {
     img: StrapiImage,
-    h1: (props: any) => <Header type='h2' {...props} />,
+    h1: (props: any) => <Header type='h1' {...props} />,
     h2: (props: any) => <Header type='h2' {...props} />,
     h3: (props: any) => <Header type='h3' {...props} />,
     h4: (props: any) => <Header type='h4' {...props} />,
