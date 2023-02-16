@@ -2,11 +2,11 @@
 
 ### Configure environment
 
-- install `node v16`.
+- install `node v18`.
 
 ```bash
 brew install nvm
-nvm install 16
+nvm install 18
 ```
 
 ### Install yarn dependencies
