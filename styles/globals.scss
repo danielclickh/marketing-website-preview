@@ -127,7 +127,7 @@ body {
       &.ignore-default-color {
         @apply bg-transparent border-transparent text-inherit;
       }
-      font-family: monospace, sans-serif;
+      font-family: monospace, ui-sans-serif;
       word-break: break-all;
     }
     div {
