@@ -158,7 +158,7 @@ export default function HomePage({
               color='empty'>
               <div className='flex flex-col text-center justify-between h-full'>
                 <div>
-                  <h3 className='text-xl font-bold text-center px-6'>
+                  <h3 className='text-xl font-bold text-center'>
                     {highlight.title}
                   </h3>
                   <div className='bg-c6 h-1 w-20 rounded-md flex mx-auto my-4' />
