@@ -8,6 +8,8 @@ import { AppProps } from 'next/app'
 import Script from 'next/script'
 import SegmentScript from '../components/SegmentScript'
 
+const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-P52RCTZ'
+
 const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
@@ -57,9 +59,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       <Script
         id='gtm-script'
-        src={`https://www.googletagmanager.com/gtag/js?id=${
-          process.env.NEXT_PUBLIC_GTM ?? 'GTM-P52RCTZ'
-        }`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${gtmId}`}
         type='text/javascript'
         strategy='lazyOnload'
       />
@@ -67,7 +67,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GTM ?? 'GTM-P52RCTZ'}', {
+            gtag('config', '${gtmId}', {
               page_path: window.location.pathname,
             });
           `}</Script>

@@ -1,6 +1,9 @@
 import { StrapiImageProps } from './types'
 import Markdown from '../Markdown'
 
+const strapiApiUrl =
+  process.env.STRAPI_API_URL ?? 'http://cms.clickhouse.com:1337'
+
 export default function StrapiSvg({
   url,
   className = '',
@@ -28,10 +31,7 @@ export default function StrapiSvg({
       </Markdown>
     )
   } catch (e) {
-    console.log(
-      'Error fetching svg',
-      `${process.env.STRAPI_API_URL ?? 'http://cms.clickhouse.com:1337/'}${url}`
-    )
+    console.log('Error fetching svg', `${strapiApiUrl}${url}`)
     console.error(e)
     return null
   }
