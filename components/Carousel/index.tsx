@@ -5,13 +5,23 @@ import styles from './Carousel.module.scss'
 import 'glider-js/glider.min.css'
 
 const Carousel = ({ children }: { children: ReactNode }) => {
+  const [showDiv, setShowDiv] = useState(false)
   return (
     <div className={styles.gliderContainer}>
       <Glider
         hasArrows
         slidesToShow={1}
+        onRefresh={(e) => {
+          const windowWidth = window.innerWidth
+          if (windowWidth < 640 && showDiv) {
+            setShowDiv(false)
+          } else if (!showDiv) {
+            setShowDiv(true)
+          }
+        }}
         onLoad={() => {
           window.dispatchEvent(new Event('resize'))
+          setShowDiv(window.innerWidth > 640)
         }}
         draggable
         slidesToScroll={1}
@@ -36,6 +46,7 @@ const Carousel = ({ children }: { children: ReactNode }) => {
           }
         ]}>
         {children}
+        {showDiv && <div />}
       </Glider>
     </div>
   )
