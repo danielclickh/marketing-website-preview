@@ -295,7 +295,7 @@ export default function News({
           <SuiTitle type='h2' className='mb-8 !text-3xl'>
             {pressReleasesTitle}
           </SuiTitle>
-          <div className='grid grid-cols-1 md:grid-cols-2 justify-between pb-4 gap-y-6 md:gap-x-8'>
+          <div className='grid grid-cols-1 md:grid-cols-2 justify-between pb-4 gap-y-10 gap-x-24'>
             {pressReleases.map((pressRelease) => (
               <NewsItem
                 key={pressRelease.headline}
