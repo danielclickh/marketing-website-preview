@@ -1,6 +1,6 @@
 import React from 'react'
 import Markdown from '../components/Markdown'
-function dummy(props) {
+function dummy() {
   let dummyValue =
     'testValue\n # Test Header Value h1\n ## Test Header Value h2\n ### Test Header  Value h3\n #### Test Header Value h4\n ##### Test Header Value h5\n ###### Test Header Value h6\n'
   dummyValue += `
