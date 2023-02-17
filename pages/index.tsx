@@ -347,7 +347,7 @@ export default function Home() {
                     width={20}
                     className='event-item--icon'
                   />
-                  February 28, 2023
+                  March 1, 2023
                 </div>
                 <div className='event-item--time'>
                   <Image
