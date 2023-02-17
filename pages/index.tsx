@@ -341,7 +341,9 @@ export default function HomePage({
       </div>
 
       <div className='flex w-full bg-c2 text-c5'>
-        <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat bg-opacity-10 py-16 text-center px-8 2xl:px-0 items-center'>
+        <div
+          className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat bg-opacity-10 py-16 text-center px-8 2xl:px-0 items-center'
+          id='independent-benchmarks'>
           <SuiTitle color='c6' weight='bold' type='h4' className='mb-3'>
             {testimonials.pretitle}
           </SuiTitle>
