@@ -46,7 +46,7 @@ function SuiRecentCard({
           alt='Release webinar'
           width='328'
           height='214'
-          className='rounded-lg h-52 object-cover object-center mb-3 shadow-md'
+          className='rounded-lg h-52 w-auto md:h-auto object-cover object-center mb-3 shadow-md md:w-full aspect-[3/2]'
         />
       )}
 

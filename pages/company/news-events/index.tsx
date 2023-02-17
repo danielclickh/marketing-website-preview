@@ -135,7 +135,7 @@ export default function News({
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
       <div className='bg-c1 bg-cover pt-14'>
-        <div className='flex container mx-auto flex-col px-4 sm:px-8 2xl:px-0'>
+        <div className='flex mx-auto flex-col px-4 sm:px-8 2xl:px-0'>
           <div className='flex flex-col text-center mx-auto'>
             <SuiTitle type='h1' className='mb-5'>
               {title}
