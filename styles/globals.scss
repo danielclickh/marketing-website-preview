@@ -46,7 +46,7 @@ body {
   @apply text-transparent bg-clip-text bg-gradient-to-b from-gradientTop to-gradientBottom;
 }
 
-.line-clamp {
+.line-clamp-container p {
   display: -webkit-box;
   overflow: hidden;
   -webkit-line-clamp: 4;

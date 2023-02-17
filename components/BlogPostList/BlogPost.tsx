@@ -54,7 +54,7 @@ export default function BlogPost(props: BlogPostType) {
                   size='sm'
                   weight='medium'
                   color='secondary'
-                  className='line-clamp'>
+                  className='line-clamp-container'>
                   <Markdown ignoreAnchor>{shortDescription}</Markdown>
                 </SuiText>
               )}
