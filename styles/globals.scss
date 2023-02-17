@@ -226,6 +226,7 @@ body {
 
 .heroScreenshotBg {
   @apply pt-4 pl-4 h-auto relative w-full lg:w-2/5 object-cover md:object-contain;
+  aspect-ratio: 1.95/1;
 
   &::before {
     @apply w-auto max-w-full absolute top-0 inset-x-0 m-auto ml-0 rounded-3xl;
