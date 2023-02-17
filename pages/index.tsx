@@ -358,7 +358,7 @@ export default function Home() {
                     width={20}
                     className='event-item--icon'
                   />
-                  1:00 PM GMT / 2:00 PM CET
+                  8:00 AM PST
                 </div>
               </div>
               <Link href='https://clickhouse.com/company/events/2023-03-08-clickhouse-workshop'>
