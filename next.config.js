@@ -92,6 +92,11 @@ const nextConfig = {
         destination: '/legal/agreements/terms-of-service',
         permanent: false,
       },
+      {
+        source: '/blog/en/:path*',
+        destination: '/blog/:path*',
+        permanent: true,
+      },
     ]
   },
 }
