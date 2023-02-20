@@ -119,7 +119,7 @@ export default function Header({
                         </SuiLink>
                       )
                     })}
-                    <div className='flex items-center border-r border-c2 pr-2'>
+                    <div className='flex items-center border-r border-c2 pr-2 w-6'>
                       <ThemeSwitcher />
                     </div>
 
