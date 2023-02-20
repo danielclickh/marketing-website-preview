@@ -40,7 +40,9 @@ export function UseCase(props: TestimonialProps) {
 
           <ul className='mb-7 gap-y-2.5'>
             {bullets.map((bullet) => (
-              <li className='flex space-x-2' key={bullet.text}>
+              <li
+                className='grid grid-cols-[1.25rem_1fr] items-start gap-x-2'
+                key={bullet.text}>
                 <StarIcon className='w-5 text-c6' />
                 <SuiText size='sm' weight='medium'>
                   {bullet.text}
