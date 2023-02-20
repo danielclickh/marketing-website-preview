@@ -1,13 +1,98 @@
-/**
- * @type {import('next').NextConfig}
- */
-
-const debug = process.env.NODE_ENV !== 'production'
-
+// @ts-check
+const path = require('path')
+const strapiApiUrl = process.env.STRAPI_API_URL ?? 'http://cms.clickhouse.com:1337'
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  assetPrefix: debug ? '/' : 'https://clickhouse.com/learn/',
-  images: {
-    unoptimized: true
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles'), path.join(__dirname, 'components/**/*.module.scss'), path.join(__dirname, 'pages/**/*.module.scss')],
+  },
+  async headers() {
+    return [
+      {
+        // matching all API routes
+        source: "/api/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Credentials", value: "true" },
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          { key: "Access-Control-Allow-Methods", value: "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
+          { key: "Access-Control-Allow-Headers", value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" },
+          { key: 'Cache-Control', value: 'max-age=0, must-revalidate' },
+        ],
+      },
+    ]
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/events/:slug',
+        destination: '/company/events/:slug',
+      },
+      {
+        source: '/en/:path*',
+        destination: '/:path*',
+      },
+      {
+        source: '/api/:path*',
+        destination: 'http://cms.clickhouse.com:1337/api/:path*',
+      },
+      {
+        source: '/uploads/:path*',
+        destination: `${strapiApiUrl}/uploads/:path*`,
+      },
+      {
+        source: '/sitemap.xml',
+        destination: `${strapiApiUrl}/sitemap/index.xml`,
+      },
+    ]
+  },
+  async redirects() {
+    return [
+      {
+        source: '/slack',
+        destination: 'https://join.slack.com/t/clickhousedb/shared_invite/zt-1odt9tfm9-buj~8q0lVXwer9hSYO1OHA',
+        permanent: true,
+      },
+      {
+        source: '/benchmark',
+        destination: 'https://benchmark.clickhouse.com/',
+        permanent: true,
+      },
+      {
+        source: '/benchmark/dbms',
+        destination: 'https://benchmark.clickhouse.com/',
+        permanent: true,
+      },
+      {
+        source: '/benchmark/hardware',
+        destination: 'https://benchmark.clickhouse.com/hardware/',
+        permanent: true,
+      },
+      {
+        source: '/benchmark/versions',
+        destination: 'https://benchmark.clickhouse.com/versions/',
+        permanent: true,
+      },
+      {
+        source: '/clickhouse-cloud',
+        destination: '/cloud',
+        permanent: true,
+      },
+      {
+        source: '/support/case',
+        destination: 'https://support.clickhouse.com',
+        permanent: false,
+      },
+      {
+        source: '/trust/security',
+        destination: 'https://trust.clickhouse.com',
+        permanent: false,
+      },
+      {
+        source: '/legal/agreements/private-preview-terms-of-service',
+        destination: '/legal/agreements/terms-of-service',
+        permanent: false,
+      },
+    ]
   },
 }
 

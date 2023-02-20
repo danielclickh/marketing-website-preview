@@ -1,85 +1,83 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    './components/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
     extend: {
+      fontFamily: {
+        inter: 'var(--font-inter), sans-serif',
+      },
       colors: {
-        primary: '#FFB200',
+        c1: {
+          light: '#FFFFFF',
+          DEFAULT: 'rgba(var(--clickhouse-color-1), <alpha-value>)',
+          dark: '#2F2C3A'
+        },
+        c2: {
+          light: '#F6F7FA',
+          DEFAULT: 'rgba(var(--clickhouse-color-2), <alpha-value>)',
+          dark: '#373343'
+        },
+        c3: '#443F51',
+        c4: {
+          light: '#6D7386',
+          DEFAULT: 'rgba(var(--clickhouse-color-4), <alpha-value>)',
+          dark: '#B0B4BC'
+        },
+        c5: {
+          light: '#2F2C3A',
+          DEFAULT: 'rgba(var(--clickhouse-color-5), <alpha-value>)',
+          dark: '#FFFFFF'
+        },
+        c6: {
+          DEFAULT: '#FFB200',
+          text: '#4B2A04',
+          link: '#C78F0F'
+        },
+        c7: {
+          light: '#A6770D',
+          DEFAULT: 'rgba(var(--clickhouse-color-7), <alpha-value>)',
+          dark: '#FFC133'
+        },
         gradientTop: '#FFC700',
         gradientBottom: '#FF7A00',
-        primary_muted: '#E5A100',
-        greyGradientLeft: '#FFFFFF',
-        greyGradientRight: '#E9E9E9',
-        primary_gradient_end: '#EE9E02',
-        web: {
-          light: {
-            c1: '#FFFFFF',
-            c2: '#F6F7FA',
-            c3: '#443F51',
-            c4: '#6D7386',
-            c5: '#2F2C3A',
-            c6: '#FFB200'
-          },
-          dark: {
-            c1: '#2F2C3A',
-            c2: '#373343',
-            c3: '#443F51',
-            c4: '#B0B4BC',
-            c5: '#FFFFFF',
-            c6: '#FFB200'
-          },
-          slate: '#F6F7FA'
-        },
-        light: {
-          grey1: '#FFFFFF',
-          grey2: '#F8F8F8',
-          grey3: '#F2F2F2',
-          grey4: '#E9E9E9',
-          grey5: '#E6E6E6',
-          grey1a: '#FCFCFC',
-          purple1: '#373343',
-          purple2: '#403B4D',
-          purple3: '#443F51',
-          purple4: '#F3F3F5'
-        },
-        dark: {
-          grey1: '#1C1922',
-          grey2: '#1E1B24',
-          grey3: '#27242D',
-          grey4: '#2F2E36',
-          grey5: '#322F39'
-        },
-        text: {
-          darkest: '#27242D',
-          dark: '#808080',
-          neutral: '#969696',
-          light: '#E9E9E9',
-          lightest: '#FFFFFF',
-          success: '#407B24',
-          warning: '#C78F0F',
-          danger: '#C70F0F',
-          purple: '#443F51',
-          light_purple: '#B0B4BC'
-        },
         alerts: {
           danger: {
             text: '#C70F0F',
-            background: '#FFCACA'
+            background: '#FAE7E7'
+          },
+          info: {
+            text: '#3B73DE',
+            background: '#E6F1FA'
           },
           success: {
-            text: '#407B24',
-            background: '#CBEABC'
+            text: '#00664B',
+            background: '#E6F9F4'
           },
           warning: {
-            text: '#C78F0F',
-            background: '#FFEFCA'
+            text: '#805300',
+            background: '#FFF8E6'
           }
         }
       },
-    },
-  },
-  plugins: [],
+      boxShadow: {
+        card: '0px 4px 14px rgba(0, 0, 0, 0.13)',
+        'card-xl': '0px 4px 14px 4px rgba(0, 0, 0, 0.13)',
+        input: '0px 1px 2px rgba(0, 0, 0, 0.05)',
+      },
+      backgroundSize: {
+        default_size: '0%, 100%',
+        focus_size: '100%, 100%'
+      },
+      backgroundImage: {
+        field_focus:
+          'linear-gradient(0deg, #ffb200, #ffb200 2px, transparent 0, transparent)',
+      },
+      spacing: {
+        '30': '7.5rem'
+      }
+    }
+  }
 }
