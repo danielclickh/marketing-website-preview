@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Script from 'next/script'
 import { AnalyticsSnippet } from '@segment/analytics-next'
+import { useRouter } from 'next/router'
 
 declare global {
   interface Window {
@@ -12,6 +13,20 @@ const segmentKey =
   process.env.NEXT_PUBLIC_SEGEMENT ?? 'N60KaTd2DBTDYKUfGThvzkrcPZFj9hEu'
 
 const SegmentScript = () => {
+  const router = useRouter()
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      window.analytics.page()
+    }
+
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [])
+
   const inlineScript = `
   function assignUserToCloud() {
       const ajsId = window.analytics.user()?.anonymousId();
