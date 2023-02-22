@@ -11,6 +11,7 @@ import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { getNewsLetterData } from '../../components/NewsLetter/getNewsLetterData'
+import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps() {
@@ -48,7 +49,8 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         seo,
         newsLetterData,
         ...commonProps
-      }
+      },
+      revalidate: REVALIDATE_SECONDS
     }
   }
 

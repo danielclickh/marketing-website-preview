@@ -4,6 +4,10 @@ import Layout from '../components/Layout'
 import Markdown from '../components/Markdown'
 import { SuiTitle } from '../components/sui'
 import { findAll, getPathsValues } from '../lib/api/strapi'
+import {
+  NOT_FOUND_FALLBACK,
+  REVALIDATE_SECONDS
+} from '../lib/utils/revalidationConfig'
 import { getCommonProps } from '../lib/utils/getCommonProps'
 import { CatAllParamsType, RichContentPageProps } from '../types/homepage'
 
@@ -26,7 +30,15 @@ export const getStaticProps: GetStaticProps<RichContentPageProps> =
         ]
       }
     })
-    const page = data[0] ?? {}
+    const page = data[0]
+
+    if (!page) {
+      return {
+        notFound: true,
+        revalidate: REVALIDATE_SECONDS
+      }
+    }
+
     const commonProps = await getCommonProps()
     return {
       props: {
@@ -41,7 +53,8 @@ export const getStaticProps: GetStaticProps<RichContentPageProps> =
           type: 'website',
           siteName: 'ClickHouse'
         }
-      }
+      },
+      revalidate: REVALIDATE_SECONDS
     }
   }
 
@@ -111,6 +124,6 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false
+    fallback: NOT_FOUND_FALLBACK
   }
 }

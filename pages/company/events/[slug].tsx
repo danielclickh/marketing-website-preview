@@ -12,6 +12,7 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ParamsType } from '../../../types/homepage'
 import { EventProps, EventType } from '../../../types/events'
 import styles from './Events.module.scss'
+import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 
 export const getStaticProps: GetStaticProps<EventProps> =
   async function getStaticProps({ params }) {
@@ -70,7 +71,8 @@ export const getStaticProps: GetStaticProps<EventProps> =
     const page = data[0]
     if (!page) {
       return {
-        notFound: true
+        notFound: true,
+        revalidate: REVALIDATE_SECONDS
       }
     }
 
@@ -95,7 +97,8 @@ export const getStaticProps: GetStaticProps<EventProps> =
         },
         recentEvents,
         ...commonProps
-      }
+      },
+      revalidate: REVALIDATE_SECONDS
     }
   }
 

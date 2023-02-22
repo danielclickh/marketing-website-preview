@@ -12,7 +12,6 @@ import GetStarted from '../../../components/GetStarted'
 import NewsLetter from '../../../components/NewsLetter'
 import SocialButton from '../../../components/SocialButton'
 import CopyUrlButton from '../../../components/CopyUrlButton'
-import { notFound } from 'next/navigation'
 import { convertDateToString } from '../../../lib/utils/dateUtils'
 import Layout from '../../../components/Layout'
 import { GetStaticProps } from 'next'
@@ -20,6 +19,10 @@ import { BlogProps } from '../../../types/blog'
 import { ParamsType } from '../../../types/homepage'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
+import {
+  NOT_FOUND_FALLBACK,
+  REVALIDATE_SECONDS
+} from '../../../lib/utils/revalidationConfig'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -34,7 +37,10 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       pagination: { limit: 1 }
     })
     if (!data?.[0]) {
-      notFound()
+      return {
+        notFound: true,
+        revalidate: REVALIDATE_SECONDS
+      }
     }
 
     const blog = data[0]
@@ -61,7 +67,8 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         },
         newsLetterData,
         ...commonData
-      }
+      },
+      revalidate: REVALIDATE_SECONDS
     }
   }
 
@@ -182,6 +189,6 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false
+    fallback: NOT_FOUND_FALLBACK
   }
 }

@@ -16,6 +16,7 @@ import NewsItem from '../../../components/NewsItem'
 import Layout from '../../../components/Layout'
 import { GetStaticProps } from 'next'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 
 export const getStaticProps: GetStaticProps<NewsEventProps> =
   async function getStaticProps() {
@@ -113,7 +114,8 @@ export const getStaticProps: GetStaticProps<NewsEventProps> =
         recentEvents,
         seo,
         ...commonProps
-      }
+      },
+      revalidate: REVALIDATE_SECONDS
     }
   }
 
