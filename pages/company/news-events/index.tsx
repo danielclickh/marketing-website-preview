@@ -234,17 +234,17 @@ export default function News({
                 className='mb-6 md:ml-4 !text-3xl'>
                 {upcomingEventsTitle}
               </SuiTitle>
-              <div className='space-y-8'>
+              <div className='space-y-8 -mx-4 md:mx-0'>
                 {allEvents.map((upcomingEvent) => (
                   <SuiLink
                     href={`/company/events/${upcomingEvent.slug}`}
                     target='_self'
-                    className={`grid grid-cols-[4rem_1fr] gap-x-6 p-4 hover:bg-c1 rounded-lg hover:no-underline event-${upcomingEvent.title.replace(
+                    className={`grid grid-cols-1 md:grid-cols-[4rem_1fr] gap-x-6 p-4 hover:bg-c1 rounded-lg hover:no-underline event-${upcomingEvent.title.replace(
                       ' ',
                       '-'
                     )}`}
                     key={upcomingEvent.title}>
-                    <div className='flex items-top justify-start'>
+                    <div className='hidden md:flex items-top justify-start'>
                       <div className='w-16 h-16 bg-c1-light rounded-lg flex items-center p-1 shadow-card'>
                         <StrapiPicture
                           dark={upcomingEvent.darkFeatureImagePng}
