@@ -29,7 +29,7 @@ export function SuiSelect(props: SelectProps) {
         {({ open }) => (
           <>
             <div className='mt-1 relative'>
-              <Listbox.Button className='focus:bg-field_focus bg-default_size focus:bg-focus_size bg-no-repeat transition-all ease-in bg-c2 focus:bg-c1 relative w-full border border-c4/10 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none sm:text-sm max-w-lg'>
+              <Listbox.Button className='focus:bg-field_focus bg-left-bottom bg-default_size focus:bg-focus_size bg-no-repeat transition-[background] ease-in bg-c2 focus:bg-c1 relative w-full border border-c4/10 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none sm:text-sm max-w-lg'>
                 <span className='block truncate'>{selected.name}</span>
                 <span className='absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none'>
                   <SelectorIcon
