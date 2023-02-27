@@ -12,7 +12,10 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ParamsType } from '../../../types/homepage'
 import { EventProps, EventType } from '../../../types/events'
 import styles from './Events.module.scss'
-import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
+import {
+  NOT_FOUND_FALLBACK,
+  REVALIDATE_SECONDS
+} from '../../../lib/utils/revalidationConfig'
 
 export const getStaticProps: GetStaticProps<EventProps> =
   async function getStaticProps({ params }) {
@@ -239,7 +242,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: 'blocking'
+    fallback: NOT_FOUND_FALLBACK
   }
 }
 
