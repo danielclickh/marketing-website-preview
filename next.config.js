@@ -48,27 +48,52 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/tutorial(.html)?',
+        destination: '/docs/en/quick-start',
+        permanent: true,
+      },
+      {
+        source: '/reference_en(.html)?',
+        destination: '/docs/en/intro',
+        permanent: true,
+      },
+      {
+        source: '/reference_ru(.html)?',
+        destination: '/docs/ru',
+        permanent: true,
+      },
+      {
         source: '/slack',
         destination: 'https://join.slack.com/t/clickhousedb/shared_invite/zt-1odt9tfm9-buj~8q0lVXwer9hSYO1OHA',
         permanent: true,
       },
       {
-        source: '/benchmark',
+        source: '/benchmark(.html)?',
         destination: 'https://benchmark.clickhouse.com/',
         permanent: true,
       },
       {
-        source: '/benchmark/dbms',
+        source: '/benchmark/dbms(.html)?',
         destination: 'https://benchmark.clickhouse.com/',
         permanent: true,
       },
       {
-        source: '/benchmark/hardware',
+        source: '/benchmark/hardware(.html)?',
         destination: 'https://benchmark.clickhouse.com/hardware/',
         permanent: true,
       },
       {
-        source: '/benchmark/versions',
+        source: '/benchmark_hardware(.html)?',
+        destination: 'https://benchmark.clickhouse.com/hardware/',
+        permanent: true,
+      },
+      {
+        source: '/benchmark/versions(.html)?',
+        destination: 'https://benchmark.clickhouse.com/versions/',
+        permanent: true,
+      },
+      {
+        source: '/benchmark_versions(.html)?',
         destination: 'https://benchmark.clickhouse.com/versions/',
         permanent: true,
       },
