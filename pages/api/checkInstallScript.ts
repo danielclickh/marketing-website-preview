@@ -54,9 +54,11 @@ async function validateScript() {
 
   const text = await response.text();
   if (text.startsWith('#!/bin/sh -e')) {
-    console.debug('publishing success message')
-    await publishMessage(CHANNEL, SUCCESS_MESSAGE);
-    console.debug('published success message')
+    if (new Date().getUTCHours() === 0) {
+      console.debug('publishing success message')
+      await publishMessage(CHANNEL, SUCCESS_MESSAGE);
+      console.debug('published success message')
+    }
     return true;
   } else {
     console.debug('publishing error message')
