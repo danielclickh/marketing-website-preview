@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import GitHubButton from 'react-github-btn'
 
 import {
   SuiButton,
@@ -12,7 +12,6 @@ import { findOne } from '../lib/api/strapi'
 import { StrapiImage, StrapiPicture } from '../components/StrapiElements'
 import Link from 'next/link'
 import BulletPoint from '../components/BulletPoint'
-import mainImage from '../public/images/sql_console_hero.png'
 import GetStarted from '../components/GetStarted'
 import { HomePageProps } from '../types/homepage'
 import { GetStaticProps } from 'next'
@@ -77,21 +76,30 @@ export default function HomePage({
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
       <div className='homepage bg-hero md:bg-no-repeat bg-right bg-opacity-100 overflow-hidden'>
-        <div className='flex mx-auto flex-col lg:flex-row lg:items-stretch pb-20 lg:pb-44 pt-16 md:pt-28 px-8 2xl:px-0 relative gap-24 justify-center max-w-7xl'>
-          <div className='flex w-full lg:w-3/5 max-w-screen-sm mx-auto lg:mx-0'>
+        <div className='flex mx-auto flex-col pb-20 lg:pb-44 pt-16 md:pt-28 px-8 2xl:px-0 relative gap-24 justify-center max-w-7xl'>
+          <div className='flex flex-col w-full mx-auto lg:mx-0'>
             <div className='mx-auto md:mr-0 md:mt-8 flex-col text-center lg:text-left'>
+              <div>
+                <GitHubButton
+                  href='https://github.com/Clickhouse/Clickhouse'
+                  data-color-scheme='dark'
+                  data-size='large'
+                  data-show-count='true'
+                  aria-label='Star Clickhouse/Clickhouse on GitHub'
+                />
+              </div>
               <SuiTitle type='h1' className='md:!text-6xl' color='primary'>
-                {hero.title}
+                Query <span>BILLIONS</span> of rows in less than a second
               </SuiTitle>
-              <div className='mx-auto lg:ml-0 mt-6 max-w-[85%] flex flex-col'>
+              <div className='mx-auto lg:ml-0 mt-6 flex flex-col'>
                 <SuiText
                   size='base'
                   color='secondary'
                   weight='normal'
                   className='text-center lg:text-left mb-10'>
-                  {hero.description}
+                  {`ClickHouse is the fastest open-source data warehouse for low latency apps and analytics`}
                 </SuiText>
-                {hero.ctaButton && (
+                <div>
                   <SuiButton
                     type='primary'
                     path={hero.ctaButton.href}
@@ -100,54 +108,50 @@ export default function HomePage({
                       category: 'website-hero'
                     }}
                     className='mr-auto'>
-                    {hero.ctaButton.text}
+                    Start free trial
                   </SuiButton>
-                )}
-
-                {!hero.ctaButton && hero.advancedCallout && (
-                  <div className='flex rounded-lg p-8 bg-c2-dark mt-11 max-w-screen-sm flex-col gap-4 text-center shadow-md md:w-full md:px-8 md:box-border md:max-w-none'>
-                    <div className='md:pr-8 border-0 md:border-r-1 border-solid border-c4'>
-                      <SuiText size='base' weight='bold' className='mb-1'>
-                        {hero.advancedCallout.title}
-                      </SuiText>
-                      <SuiText size='base' weight='normal' color='secondary'>
-                        {hero.advancedCallout.description}
-                      </SuiText>
-                    </div>
-                    <div className='flex grow items-center justify-center md:pl-8'>
-                      <SuiButton
-                        type='primary'
-                        path={hero.advancedCallout.href}
-                        size='sm'
-                        segmentEvent={{
-                          label: hero.advancedCallout.buttonText,
-                          category: 'website-hero'
-                        }}
-                        target={hero.advancedCallout.target}
-                        className='w-auto'>
-                        {hero.advancedCallout.buttonText}
-                      </SuiButton>
-                    </div>
-                  </div>
-                )}
-                <SuiText
-                  size='sm'
-                  weight='normal'
-                  color='secondary'
-                  className='mt-3'>
-                  {hero.ctaButtonSubtext}
-                </SuiText>
+                  <SuiButton
+                    type='secondary'
+                    path={hero.ctaButton.href}
+                    segmentEvent={{
+                      label: hero.ctaButton.text,
+                      category: 'website-hero'
+                    }}
+                    className='mr-auto'>
+                    View documentation
+                  </SuiButton>
+                </div>
+                <SuiLink
+                  href='\clickhouse'
+                  target='_self'
+                  color='primary'
+                  size='lg'
+                  weight='bold'>
+                  Or download open-source ClickHouse
+                </SuiLink>
               </div>
             </div>
           </div>
-          <div className='heroScreenshotBg'>
-            <Image
-              src={mainImage}
-              alt='HomePage Image'
-              className='heroScreenshot'
-              priority
-            />
-          </div>
+          <div className='heroScreenshotBg'>image</div>
+        </div>
+        <SuiText size='base' weight='medium' color='secondary'>
+          Trusted by the best developers that work with data at scale
+        </SuiText>
+
+        <div className='container pt-6 flex flex-col sm:flex-row flex-wrap lg:grid lg:grid-cols-5 gap-4 md:gap-x-8 self-center items-center justify-center'>
+          {customerStories.logos.map((logo, index: number) => (
+            <Link
+              key={logo.href}
+              href={logo.href}
+              target={logo.target}
+              className={`customer-stories-${index} flex w-full sm:w-52 lg:w-full rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer`}>
+              <StrapiPicture
+                light={logo?.lightLogoPng}
+                dark={logo?.darkLogoPng}
+                className='w-auto h-10 grayscale'
+              />
+            </Link>
+          ))}
         </div>
         <div className='flex flex-col md:flex-row container mx-auto justify-evenly max-w-7xl px-8 2xl:px-0 mb-16 divide-c4/20 divide-y md:divide-y-0 md:divide-x'>
           {hero.highlights.map((highlight) => (
@@ -222,25 +226,6 @@ export default function HomePage({
           <SuiTitle type='h2' className='mb-4'>
             {customerStories.title}
           </SuiTitle>
-          <SuiText size='base' weight='medium' color='secondary'>
-            {customerStories.description}
-          </SuiText>
-
-          <div className='container pt-6 flex flex-col sm:flex-row flex-wrap lg:grid lg:grid-cols-5 gap-4 md:gap-x-8 self-center items-center justify-center'>
-            {customerStories.logos.map((logo, index: number) => (
-              <Link
-                key={logo.href}
-                href={logo.href}
-                target={logo.target}
-                className={`customer-stories-${index} flex w-full sm:w-52 lg:w-full bg-c1 rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer`}>
-                <StrapiPicture
-                  light={logo?.lightLogoPng}
-                  dark={logo?.darkLogoPng}
-                  className='w-auto h-10'
-                />
-              </Link>
-            ))}
-          </div>
 
           <div className='flex text-center justify-center pt-16'>
             <div>
