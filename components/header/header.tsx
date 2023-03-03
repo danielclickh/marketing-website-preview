@@ -122,7 +122,7 @@ export default function Header({
 
                     <SuiLink
                       key={'github-stars-nav'}
-                      href={'https://github.com/ClickHouse/ClickHouse'}
+                      href={'https://github.com/ClickHouse/ClickHouse?utm_source=clickhouse&utm_medium=website&utm_campaign=website-nav'}
                       target={'blank'}
                       className={`hidden lg:block`}
                       segmentEvent={{
