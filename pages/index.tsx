@@ -190,7 +190,9 @@ export default function HomePage({
               ClickHouse, your can query terabytes of data in a few seconds (or
               less).
             </SuiText>
-            <div className='pl-10 md:pl-0'>Find out more</div>
+            <CUIButton type='secondary' className='pl-10 md:pl-0'>
+              Find out more
+            </CUIButton>
           </div>
           <div className='flex md:w-1/2 justify-center pt-4 items-center'>
             {/* <StrapiImage
@@ -234,7 +236,10 @@ export default function HomePage({
       </div>
       <div className='w-full flex flex-col bg-primary text-primary-800'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat pb-8 px-8 2xl:px-0 pt-16'>
-          <SuiTitle type='h2' className='mb-7' color='c6'>
+          <SuiTitle
+            type='h2'
+            className='mb-7 max-w-3xl mx-auto !text-primary-800'
+            color='c6'>
             The data warehouse you can run on your{' '}
             <span className='tilted tilted-black'>
               <span className='tilted-content'>laptop</span>
@@ -284,7 +289,7 @@ export default function HomePage({
         </div>
       </div>
 
-      <div className='flex w-full bg-c2 text-neutral-0'>
+      <div className='flex w-full text-neutral-0'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 xl:px-0'>
           <SuiTitle type='h2' className='mb-4'>
             Speed up queries from any data source
