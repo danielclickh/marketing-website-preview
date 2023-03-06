@@ -6,8 +6,7 @@ import { ButtonProps, ButtonLinkProps } from './types'
 function ButtonLink({ href, children, linkClass, ...props }: ButtonLinkProps) {
   if (!href) {
     return React.cloneElement(children, {
-      ...props,
-      className: `${props?.className ?? ''} ${linkClass}`
+      ...props
     })
   }
   return (
