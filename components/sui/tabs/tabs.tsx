@@ -38,14 +38,14 @@ export const SuiTabs = ({ ...TabProps }: TabProps) => {
                 selected
                   ? `border-c6 ${colorCalculator(
                       color ?? '',
-                      'text-c5'
+                      'text-neutral-0'
                     )} focus:outline-none whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`
                   : `border-transparent ${colorCalculator(
                       activeColor ?? '',
-                      'text-c5'
+                      'text-neutral-0'
                     )} hover:${colorCalculator(
                       hoverColor ?? '',
-                      'text-c5'
+                      'text-neutral-0'
                     )} hover:${
                       hoverBorderColor ? hoverBorderColor : 'border-c4/20'
                     } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`

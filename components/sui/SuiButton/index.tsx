@@ -39,7 +39,7 @@ const colorCalculator = ({
       if (disabled) {
         return disabledStyle
       }
-      return 'bg-c6 text-c6-text'
+      return 'bg-base-color text-primary-800 hover:bg-primary-300'
     case 'secondary':
       if (disabled) {
         return 'bg-transparent text-inherit border border-c4'
@@ -49,7 +49,7 @@ const colorCalculator = ({
       if (disabled) {
         return disabledStyle
       }
-      return 'bg-alerts-danger-text text-c1-light'
+      return 'bg-alerts-danger-text text-neutral-0'
     case 'empty':
       return `bg-transparent ${
         textColor === 'warning'
@@ -61,7 +61,7 @@ const colorCalculator = ({
     case 'custom':
       return 'custom-btn'
     case 'dark':
-      return 'bg-c3 text-c1-light'
+      return 'bg-c3 text-neutral-0'
     case 'ghost':
       return 'bg-transparent text-inherit border border-c4'
     case 'success':

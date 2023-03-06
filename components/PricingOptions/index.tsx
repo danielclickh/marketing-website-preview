@@ -61,7 +61,7 @@ function PricingOptions({
                     {plan.items_disabled.map(
                       (itemDisabled, planIndex: number) => (
                         <div
-                          className='row_not_included flex items-center gap-4 text-sm justify-start text-c5/30'
+                          className='row_not_included flex items-center gap-4 text-sm justify-start text-neutral-0/30'
                           key={`plan-disabled-bullet-${planIndex}`}>
                           <MinusIcon className='w-4 h-4' />
                           <div className='item_text'>

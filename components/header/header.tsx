@@ -1,4 +1,4 @@
-import { SuiButton, SuiLink, SuiText } from '../sui'
+import { SuiLink, SuiText } from '../sui'
 
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
@@ -11,6 +11,7 @@ import styles from './Header.module.scss'
 import { Hind_Siliguri } from '@next/font/google'
 import { HeaderData } from './types'
 import MobilePopoverPanel from './MobilePopoverPanel'
+import { CUIButton } from '../ClickUI'
 
 const hind = Hind_Siliguri({
   subsets: ['latin'],
@@ -26,7 +27,7 @@ export default function Header({
   ctaButton
 }: HeaderData) {
   return (
-    <Popover className='bg-c1/80 shadow-sm  dark:border-b dark:border-c2-dark h-full backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300'>
+    <Popover className='shadow-sm  border-b border-primary-700 h-full backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300'>
       <div className='container flex mx-auto w-full px-4 sm:px-8 2xl:px-0 max-w-7xl h-16 items-center'>
         <div className='flex flex-col w-full'>
           <div className='flex justify-between items-center w-full'>
@@ -39,7 +40,7 @@ export default function Header({
             <div className='flex justify-center'>
               <div className='flex justify-between items-center md:justify-start'>
                 <div className='-mr-2 -my-2 min-[930px]:hidden'>
-                  <Popover.Button className='bg-c1 rounded-md p-2 inline-flex items-center justify-center text-c5 hover:text-c4 hover:bg-c2 focus:outline-none'>
+                  <Popover.Button className='bg-c1 rounded-md p-2 inline-flex items-center justify-center text-neutral-0 hover:text-c4 hover:bg-c2 focus:outline-none'>
                     <span className='sr-only'>Open menu</span>
                     <MenuIcon className='h-6 w-6' aria-hidden='true' />
                   </Popover.Button>
@@ -111,7 +112,7 @@ export default function Header({
                             label: menuItem.name,
                             category: 'website-nav'
                           }}
-                          className='inline-flex items-center text-sm font-medium text-c5'>
+                          className='inline-flex items-center text-sm font-medium text-neutral-0'>
                           {menuItem.name}
                         </SuiLink>
                       )
@@ -138,7 +139,7 @@ export default function Header({
                             clipRule='evenodd'
                             d='M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.151-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.524 2.341 1.084 2.91.828.092-.643.35-1.083.636-1.332-2.22-.251-4.555-1.107-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.268 2.75 1.022A9.607 9.607 0 0 1 12 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.696 1.028 1.587 1.028 2.675 0 3.83-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48 3.97-1.32 6.833-5.054 6.833-9.458C22 6.463 17.522 2 12 2Z'></path>
                         </svg>
-                        <span className='text-xs font-medium text-c5'>
+                        <span className='text-xs font-medium text-neutral-0'>
                           27.3k
                         </span>
                       </div>
@@ -154,21 +155,21 @@ export default function Header({
                             label: ctaSecondaryButton.text,
                             category: 'website-nav'
                           }}
-                          className='inline-flex items-center text-sm font-medium text-c5 ease-in-out'>
+                          className='inline-flex items-center text-sm font-medium text-neutral-0 ease-in-out'>
                           {ctaSecondaryButton.text}
                         </SuiLink>
                       )}
                       {ctaButton && (
-                        <SuiButton
+                        <CUIButton
                           type='primary'
-                          path={ctaButton.href}
+                          href={ctaButton.href}
                           segmentEvent={{
                             label: ctaButton.text,
                             category: 'website-nav'
                           }}
                           target={ctaButton.target}>
                           {ctaButton.text}
-                        </SuiButton>
+                        </CUIButton>
                       )}
                     </div>
                   </Popover.Group>
@@ -205,17 +206,17 @@ export default function Header({
                                   label: item.name,
                                   category: 'website-nav'
                                 }}
-                                className='menu-item w-full hover:no-underline flex items-center text-sm font-medium text-c5 relative'>
+                                className='menu-item w-full hover:no-underline flex items-center text-sm font-medium text-neutral-0 relative'>
                                 {item.icon && (
                                   <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-c4 mr-4'>
                                     <StrapiImage
                                       {...item.icon}
-                                      className='h-10 w-10 text-c5'
+                                      className='h-10 w-10 text-neutral-0'
                                       aria-hidden='true'
                                     />
                                   </div>
                                 )}
-                                <div className='text-sm font-medium text-c5'>
+                                <div className='text-sm font-medium text-neutral-0'>
                                   {item.name}
                                 </div>
                               </SuiLink>
@@ -235,17 +236,17 @@ export default function Header({
                             label: item.name,
                             category: 'website-nav'
                           }}
-                          className='menu-item w-full hover:no-underline flex items-start text-sm font-medium text-c5 relative'>
+                          className='menu-item w-full hover:no-underline flex items-start text-sm font-medium text-neutral-0 relative'>
                           {item.icon && (
                             <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 text-c4 mr-4'>
                               <StrapiImage
                                 {...item.icon}
-                                className='h-10 w-10 text-c5'
+                                className='h-10 w-10 text-neutral-0'
                                 aria-hidden='true'
                               />
                             </div>
                           )}
-                          <div className='text-sm font-medium text-c5'>
+                          <div className='text-sm font-medium text-neutral-0'>
                             {item.name}
                           </div>
                         </SuiLink>
@@ -260,7 +261,7 @@ export default function Header({
                           label: menuItem.name,
                           category: 'website-nav'
                         }}
-                        className='menu-item text-sm hover:no-underline font-medium text-c5'>
+                        className='menu-item text-sm hover:no-underline font-medium text-neutral-0'>
                         {menuItem.name}
                       </SuiLink>
                     )
@@ -268,7 +269,7 @@ export default function Header({
                 </nav>
               </div>
               <div>
-                <Popover.Button className='bg-c1 rounded-md p-2 inline-flex items-center justify-center text-c5 hover:text-c4 ease-in-out focus:outline-none'>
+                <Popover.Button className='bg-c1 rounded-md p-2 inline-flex items-center justify-center text-neutral-0 hover:text-c4 ease-in-out focus:outline-none'>
                   <span className='sr-only'>Close menu</span>
                   <XIcon className='h-6 w-6' aria-hidden='true' />
                 </Popover.Button>
@@ -277,9 +278,9 @@ export default function Header({
           </div>
           <div className='py-6 px-5 grid gap-4 w-full grid-cols-2'>
             {ctaSecondaryButton && (
-              <SuiButton
+              <CUIButton
                 type='secondary'
-                path={ctaSecondaryButton.href}
+                href={ctaSecondaryButton.href}
                 target={ctaSecondaryButton.target}
                 segmentEvent={{
                   label: ctaSecondaryButton.text,
@@ -287,12 +288,12 @@ export default function Header({
                 }}
                 className='w-full'>
                 {ctaSecondaryButton.text}
-              </SuiButton>
+              </CUIButton>
             )}
             {ctaButton && (
-              <SuiButton
+              <CUIButton
                 type='primary'
-                path={ctaButton.href}
+                href={ctaButton.href}
                 target={ctaButton.target}
                 segmentEvent={{
                   label: ctaButton.text,
@@ -300,7 +301,7 @@ export default function Header({
                 }}
                 className='w-full'>
                 {ctaButton.text}
-              </SuiButton>
+              </CUIButton>
             )}
           </div>
         </MobilePopoverPanel>

@@ -28,7 +28,7 @@ export function SuiSearchField({
       {label && (
         <label
           htmlFor={htmlFor}
-          className='block text-xs font-bold text-c5 pb-1'>
+          className='block text-xs font-bold text-neutral-0 pb-1'>
           {label}
           {!required && <span className='text-c4'></span>}
         </label>

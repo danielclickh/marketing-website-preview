@@ -21,7 +21,7 @@ export default function Footer({
   copyright
 }: FooterData) {
   return (
-    <div className='flex flex-col bg-[#191A0C] pb-8 pt-16'>
+    <div className='flex flex-col bg-noised pb-8 pt-16'>
       <div className='flex py-8 px-4 md:px-0 border-b-primary-500'>
         <div className='container mx-auto md:flex justify-between max-w-7xl px-16 2xl:px-0'>
           <div className='flex flex-col w-full'>
@@ -62,7 +62,7 @@ export default function Footer({
             {logoSvg && (
               <div className='flex md:w-64 mb-4 mr-3 gap-x-3 items-center'>
                 <StrapiImage {...logoSvg} width={25} height={25} />
-                <span className={`text-2xl text-c1-light ${hind.className}`}>
+                <span className={`text-2xl text-neutral-0 ${hind.className}`}>
                   ClickHouse
                 </span>
               </div>

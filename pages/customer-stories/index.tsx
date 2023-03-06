@@ -113,7 +113,7 @@ function CustomerStoriesPage({
         </div>
       </div>
 
-      <div className='bg-c2 text-c5 w-full pt-16 pb-24'>
+      <div className='bg-c2 text-neutral-0 w-full pt-16 pb-24'>
         <div className=' max-w-7xl mx-auto'>
           <div className='flex container mr-auto flex-col max-w-screen-md px-6 2xl:px-0'>
             <SuiTitle type='h2' className='mb-4'>
@@ -146,7 +146,7 @@ function CustomerStoriesPage({
                       <div className='flex mt-8'>
                         <SuiButton
                           type='custom'
-                          className='bg-c4/10 text-c5'
+                          className='bg-c4/10 text-neutral-0'
                           path={spotlight.ctaButton.href}
                           target={spotlight.ctaButton.target}>
                           {spotlight.ctaButton.text}

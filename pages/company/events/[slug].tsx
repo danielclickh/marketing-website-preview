@@ -211,7 +211,7 @@ function EventPage({
             </div>
           )}
         </EventsContainer>
-        <div className='bg-c2 text-c5'>
+        <div className='bg-c2 text-neutral-0'>
           <RecentEvents events={recentEvents} />
         </div>
       </div>

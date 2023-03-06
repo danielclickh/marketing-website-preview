@@ -15,6 +15,7 @@ module.exports = {
       colors: {
         "base-color": '#FBFF46',
         primary: {
+          DEFAULT: '#FBFF46',
           50: '#FFFFE8',
           100: '#FEFFBA',
           200: '#FDFFA3',
@@ -27,7 +28,7 @@ module.exports = {
         },
         neutral: {
           DEFAULT: '#212121',
-          50: '#ffffFF',
+          0: '#FFFFFF',
           100: '#F9F9F9',
           200: '#dfdfdf',
           300: '#c0c0c0',
@@ -166,12 +167,16 @@ module.exports = {
             text: '#805300',
             background: '#FFF8E6'
           }
-        }
+        },
       },
       boxShadow: {
         card: '0px 4px 14px rgba(0, 0, 0, 0.13)',
         'card-xl': '0px 4px 14px 4px rgba(0, 0, 0, 0.13)',
         input: '0px 1px 2px rgba(0, 0, 0, 0.05)',
+        click: {
+          card: '0px 4px 44px rgba(22, 22, 0, 0.4), inset 0px 1px 3px rgba(25, 26, 6, 0.9)',
+          pill: '0px -1px 5px rgba(16, 24, 40, 0.07)'
+        }
       },
       backgroundSize: {
         default_size: '0%, 100%',
@@ -180,6 +185,7 @@ module.exports = {
       backgroundImage: {
         field_focus:
           'linear-gradient(0deg, #ffb200, #ffb200 2px, transparent 0, transparent)',
+        grid: 'url("/bg-grid.png")',
       },
       spacing: {
         '30': '7.5rem'

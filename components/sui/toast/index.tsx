@@ -33,7 +33,7 @@ export function SnackbarContextProvider({ children }: { children: ReactNode }) {
             {type && (
               <div className='w-5 h-5'>
                 {type === 'success' && (
-                  <CheckIcon className='w-full h-full text-c1-light' />
+                  <CheckIcon className='w-full h-full text-neutral-0' />
                 )}
                 {type === 'error' && (
                   <ExclamationIcon className='w-full h-full text-alerts-danger-text' />

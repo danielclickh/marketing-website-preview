@@ -1,0 +1,56 @@
+import React from 'react'
+import Link from '../Link'
+import styles from './styles.module.scss'
+import { ButtonProps, ButtonLinkProps } from './types'
+
+function ButtonLink({ href, children, linkClass, ...props }: ButtonLinkProps) {
+  if (!href) {
+    return React.cloneElement(children, {
+      ...props,
+      className: `${props?.className ?? ''} ${linkClass}`
+    })
+  }
+  return (
+    <Link href={href} className={linkClass} {...props}>
+      {children}
+    </Link>
+  )
+}
+
+function Button({
+  iconRight,
+  size,
+  iconLeft,
+  className = '',
+  type,
+  disabled,
+  segmentEvent,
+  onClick,
+  weight = 'normal',
+  children,
+  ...props
+}: ButtonProps) {
+  return (
+    <ButtonLink {...props}>
+      <button
+        disabled={disabled}
+        className={`${styles.button} ${className} ${'font-' + weight}`}
+        data-type={type}
+        data-size={size}
+        onClick={() => {
+          if (segmentEvent) {
+            try {
+              window.analytics.track('click', segmentEvent)
+            } catch (e) {}
+          }
+          onClick && onClick()
+        }}>
+        {iconLeft}
+        <span>{children}</span>
+        {iconRight}
+      </button>
+    </ButtonLink>
+  )
+}
+
+export default Button

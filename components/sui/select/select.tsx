@@ -21,7 +21,7 @@ export function SuiSelect(props: SelectProps) {
       {props.labelVisible && (
         <label
           htmlFor={props.htmlFor}
-          className='block text-xs font-bold text-c5 pb-1'>
+          className='block text-xs font-bold text-neutral-0 pb-1'>
           {props.label}
         </label>
       )}
@@ -52,7 +52,7 @@ export function SuiSelect(props: SelectProps) {
                       className={({ active }) =>
                         classNames(
                           active ? ' bg-c1' : 'bg-c2',
-                          'text-c5 placeholder-c4 cursor-pointer select-none relative py-2 pl-3 pr-9'
+                          'text-neutral-0 placeholder-c4 cursor-pointer select-none relative py-2 pl-3 pr-9'
                         )
                       }
                       value={option}>

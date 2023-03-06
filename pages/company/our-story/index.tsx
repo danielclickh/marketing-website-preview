@@ -105,7 +105,7 @@ export default function OurStoryPage({
             </div>
           </div>
         </div>
-        <div className='bg-c2 text-c5 w-full pt-16 pb-12 px-6'>
+        <div className='bg-c2 text-neutral-0 w-full pt-16 pb-12 px-6'>
           <SuiTitle type='h2' weight='bold' className='mb-4 max-w-7xl mx-auto'>
             {aboutUs.title}
           </SuiTitle>
@@ -156,7 +156,7 @@ export default function OurStoryPage({
                   className='flex flex-col md:flex-row items-center gap-y-10'
                   key={item.text}>
                   <div className='flex md:w-2/12 lg:w-1/12'>
-                    <div className='h-20 w-20 bg-c2 text-c5 rounded-full text-center items-center justify-center flex'>
+                    <div className='h-20 w-20 bg-c2 text-neutral-0 rounded-full text-center items-center justify-center flex'>
                       <SuiTitle type='h5' className='!text-base' weight='bold'>
                         {item.year}
                       </SuiTitle>
@@ -173,7 +173,7 @@ export default function OurStoryPage({
           </div>
         </div>
 
-        <div className='bg-c2 text-c5 w-full px-4 md:px-8'>
+        <div className='bg-c2 text-neutral-0 w-full px-4 md:px-8'>
           <div className='flex container mx-auto flex-col 2xl:px-0'>
             <div className='flex flex-col text-center mx-auto pt-16'>
               <SuiTitle type='h2' className='mb-6'>

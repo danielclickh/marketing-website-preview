@@ -7,7 +7,6 @@ import {
   SuiText,
   SuiTitle
 } from '../components/sui'
-import { FeatureItem } from '../components/feature_item'
 import { findOne } from '../lib/api/strapi'
 import { StrapiImage, StrapiPicture } from '../components/StrapiElements'
 import Link from 'next/link'
@@ -17,6 +16,9 @@ import { HomePageProps } from '../types/homepage'
 import { GetStaticProps } from 'next'
 import Layout from '../components/Layout'
 import { getCommonProps } from '../lib/utils/getCommonProps'
+import FAQ from '../components/FAQ'
+import { BasicCard, CUIButton } from '../components/ClickUI'
+import LaptopSvg from '../components/icons/LaptopSvg'
 
 export const getStaticProps: GetStaticProps<HomePageProps> =
   async function getStaticProps() {
@@ -63,10 +65,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
 
 export default function HomePage({
   hero,
-  aboutClickhouse,
   customerStories,
-  clickhouseCloud,
-  clickhouseCloudItems,
   testimonials,
   seo,
   headerData,
@@ -75,11 +74,11 @@ export default function HomePage({
 }: HomePageProps) {
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
-      <div className='homepage bg-hero md:bg-no-repeat bg-right bg-opacity-100 overflow-hidden'>
-        <div className='flex mx-auto flex-col pb-20 lg:pb-44 pt-16 md:pt-28 px-8 2xl:px-0 relative gap-24 justify-center max-w-7xl'>
-          <div className='flex flex-col w-full mx-auto lg:mx-0'>
-            <div className='mx-auto md:mr-0 md:mt-8 flex-col text-center lg:text-left'>
-              <div>
+      <div className='homepage  bg-right bg-opacity-100 overflow-hidden'>
+        <div className='bg-grid flex flex-col pb-20 lg:pb-44 pt-16 md:pt-28 px-8 2xl:px-0 relative gap-24 justify-center '>
+          <div className='flex flex-col w-full mx-auto max-w-3xl'>
+            <div className='mx-auto md:mr-0 md:mt-8 flex-col items-center justify-center'>
+              <div className='mx-auto'>
                 <GitHubButton
                   href='https://github.com/Clickhouse/Clickhouse'
                   data-color-scheme='dark'
@@ -88,70 +87,90 @@ export default function HomePage({
                   aria-label='Star Clickhouse/Clickhouse on GitHub'
                 />
               </div>
-              <SuiTitle type='h1' className='md:!text-5.5xl' color='primary'>
-                Query <span>BILLIONS</span> of rows in less than a second
+              <SuiTitle
+                type='h1'
+                className='md:!text-5.5xl text-center'
+                color='primary'>
+                Query{' '}
+                <span className='tilted tilted-yellow'>
+                  <span className='tilted-content'>BILLIONS</span>
+                </span>{' '}
+                of rows in less than a second
               </SuiTitle>
-              <div className='mx-auto lg:ml-0 mt-6 flex flex-col'>
+              <div className='mx-auto lg:ml-0 mt-6 flex flex-col items-center'>
                 <SuiText
                   size='base'
                   color='secondary'
                   weight='normal'
                   className='text-center lg:text-left mb-10'>
-                  {`ClickHouse is the fastest open-source data warehouse for low latency apps and analytics`}
+                  ClickHouse is the fastest open-source data warehouse for low
+                  latency apps and analytics
                 </SuiText>
-                <div>
-                  <SuiButton
+                <div className='flex flex-col md:flex-row gap-6 w-full justify-center items-center'>
+                  <CUIButton
                     type='primary'
-                    path={hero.ctaButton.href}
+                    size='lg'
+                    weight='semibold'
+                    href={hero.ctaButton.href}
                     segmentEvent={{
                       label: hero.ctaButton.text,
                       category: 'website-hero'
                     }}
-                    className='mr-auto'>
+                    linkClass='w-full max-w-[14rem]'
+                    className='w-full'>
                     Start free trial
-                  </SuiButton>
-                  <SuiButton
+                  </CUIButton>
+                  <CUIButton
                     type='secondary'
-                    path={hero.ctaButton.href}
+                    weight='semibold'
+                    size='lg'
+                    href='/docs'
                     segmentEvent={{
                       label: hero.ctaButton.text,
                       category: 'website-hero'
                     }}
-                    className='mr-auto'>
+                    linkClass='w-full max-w-[14rem]'
+                    className='w-full'>
                     View documentation
-                  </SuiButton>
+                  </CUIButton>
                 </div>
                 <SuiLink
                   href='\clickhouse'
                   target='_self'
                   color='primary'
-                  size='lg'
+                  className='mt-6'
                   weight='bold'>
                   Or download open-source ClickHouse
                 </SuiLink>
               </div>
             </div>
           </div>
-          <div className='heroScreenshotBg'>image</div>
         </div>
-        <SuiText size='base' weight='medium' color='secondary'>
-          Trusted by the best developers that work with data at scale
-        </SuiText>
+        <div className='heroScreenshotBg'>
+          <div className='code-data'>code data</div>
+        </div>
+        <div className='bg-primary py-16'>
+          <div className='max-w-3xl mx-auto'>
+            <SuiText size='base' weight='medium' color='secondary'>
+              Trusted by the best developers that work with data at scale
+            </SuiText>
 
-        <div className='container pt-6 flex flex-col sm:flex-row flex-wrap lg:grid lg:grid-cols-5 gap-4 md:gap-x-8 self-center items-center justify-center'>
-          {customerStories.logos.map((logo, index: number) => (
-            <Link
-              key={logo.href}
-              href={logo.href}
-              target={logo.target}
-              className={`customer-stories-${index} flex w-full sm:w-52 lg:w-full rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer`}>
-              <StrapiPicture
-                light={logo?.lightLogoPng}
-                dark={logo?.darkLogoPng}
-                className='w-auto h-10 grayscale'
-              />
-            </Link>
-          ))}
+            <div className='container pt-6 flex flex-col sm:flex-row flex-wrap lg:grid lg:grid-cols-5 gap-4 md:gap-x-8 self-center items-center justify-center'>
+              {customerStories.logos.map((logo, index: number) => (
+                <Link
+                  key={logo.href}
+                  href={logo.href}
+                  target={logo.target}
+                  className={`customer-stories-${index} flex w-full sm:w-52 lg:w-full rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer`}>
+                  <StrapiPicture
+                    light={logo?.lightLogoPng}
+                    dark={logo?.darkLogoPng}
+                    className='w-auto h-10 grayscale'
+                  />
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -213,11 +232,17 @@ export default function HomePage({
           <div className='pl-10 md:pl-0'>Read more in the docs</div>
         </div>
       </div>
-      <div className='w-full flex flex-col bg-c3 text-c1-light'>
+      <div className='w-full flex flex-col bg-primary text-primary-800'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat pb-8 px-8 2xl:px-0 pt-16'>
-          <SuiTitle type='h3' className='mb-7 !text-lg' color='c6'>
-            The data warehouse you can run on your laptop and in your data
-            center
+          <SuiTitle type='h2' className='mb-7' color='c6'>
+            The data warehouse you can run on your{' '}
+            <span className='tilted tilted-black'>
+              <span className='tilted-content'>laptop</span>
+            </span>{' '}
+            and in your{' '}
+            <span className='tilted tilted-black'>
+              <span className='tilted-content'>data center</span>
+            </span>
           </SuiTitle>
           <SuiText
             size='base'
@@ -227,84 +252,39 @@ export default function HomePage({
             Unlike traditional closed-source data warehouses, ClickHouse runs on
             every environment, whether it’s on your machine or on the cloud
           </SuiText>
-          <div className='container flex flex-wrap'>
-            <SuiPanel className='w-full md:w-1/3' padding='lg' color='empty'>
-              <div className='flex flex-col text-center justify-between h-full'>
-                <div>
-                  <h3 className='text-xl font-bold text-center'>
-                    clickhouse-local
-                  </h3>
-                  <div className='bg-c6 h-1 w-20 rounded-md flex mx-auto my-4' />
-                </div>
-                <SuiText size='sm' weight='normal' className='mb-4'>
-                  Run fast queries on local files (CSV, TSV, Parquet, and more)
-                  without a server.
-                </SuiText>
-                <div>
-                  <SuiButton
-                    iconRight
-                    size='lg'
-                    path='/'
-                    type='primary'
-                    weight='medium'
-                    target='_self'>
-                    Download clickHouse-local
-                  </SuiButton>
-                </div>
-              </div>
-            </SuiPanel>
-            <SuiPanel className='w-full md:w-1/3' padding='lg' color='empty'>
-              <div className='flex flex-col text-center justify-between h-full'>
-                <div>
-                  <h3 className='text-xl font-bold text-center'>ClickHouse</h3>
-                  <div className='bg-c6 h-1 w-20 rounded-md flex mx-auto my-4' />
-                </div>
-                <SuiText size='sm' weight='normal' className='mb-4'>
-                  Spin up a database server with open-source ClickHouse. Always
-                  Free.
-                </SuiText>
-                <div>
-                  <SuiButton
-                    iconRight
-                    size='lg'
-                    path='/'
-                    type='primary'
-                    weight='medium'
-                    target='_self'>
-                    Download ClickHouse
-                  </SuiButton>
-                </div>
-              </div>
-            </SuiPanel>
-            <SuiPanel className='w-full md:w-1/3' padding='lg' color='empty'>
-              <div className='flex flex-col text-center justify-between h-full'>
-                <div>
-                  <h3 className='text-xl font-bold text-center'>
-                    ClickHouse Cloud
-                  </h3>
-                  <div className='bg-c6 h-1 w-20 rounded-md flex mx-auto my-4' />
-                </div>
-                <SuiText size='sm' weight='normal' className='mb-4'>
-                  Deploy a fully managed ClickHouse service on AWS and GCP.
-                </SuiText>
-                <div>
-                  <SuiButton
-                    iconRight
-                    size='lg'
-                    path='/'
-                    type='primary'
-                    weight='medium'
-                    target='_self'>
-                    Deploy in seconds
-                  </SuiButton>
-                </div>
-              </div>
-            </SuiPanel>
+          <div className='container grid grid-cols-1 md:grid-cols-3 gap-10'>
+            <BasicCard
+              icon={<LaptopSvg />}
+              title='clickhouse-local'
+              btnChildren='Download clickHouse-local'
+              href='/'
+              className='w-full'>
+              Run fast queries on local files (CSV, TSV, Parquet, and more)
+              without a server.
+            </BasicCard>
+            <BasicCard
+              icon={<LaptopSvg />}
+              title='ClickHouse'
+              btnChildren='Download clickHouse'
+              href='/'
+              className='w-full'>
+              Spin up a database server with open-source ClickHouse. Always
+              Free.
+            </BasicCard>
+            <BasicCard
+              icon={<LaptopSvg />}
+              title='ClickHouse Cloud'
+              pretitle='Recommended'
+              btnChildren='Deploy in seconds'
+              href='/'
+              className='w-full'>
+              Deploy a fully managed ClickHouse service on AWS and GCP.
+            </BasicCard>
           </div>
         </div>
       </div>
 
-      <div className='flex w-full bg-c2 text-c5'>
+      <div className='flex w-full bg-c2 text-neutral-0'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 xl:px-0'>
           <SuiTitle type='h2' className='mb-4'>
             Speed up queries from any data source
@@ -321,151 +301,56 @@ export default function HomePage({
           <div>Image X</div>
           <div className='flex text-center justify-center pt-16'>
             <div>
-              <SuiButton
+              <CUIButton
                 iconRight
-                path={customerStories.ctaButton.href}
+                href={customerStories.ctaButton.href}
                 target={customerStories.ctaButton.target}
                 weight='normal'
                 type='secondary'
                 size='lg'>
                 View all supported integrations
-              </SuiButton>
+              </CUIButton>
             </div>
           </div>
         </div>
       </div>
 
-      <div className='flex w-full bg-c1 pb-20'>
-        <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 text-center px-8 2xl:px-0'>
-          <SuiTitle type='h4' color='c6' weight='bold' className='mb-3'>
-            {clickhouseCloud.pretitle}
-          </SuiTitle>
-          <SuiTitle type='h2' className='mb-4'>
-            {clickhouseCloud.title}
-          </SuiTitle>
-
-          <SuiText
-            size='base'
-            weight='medium'
-            color='secondary'
-            className='max-w-5xl flex self-center'>
-            {clickhouseCloud.description}
-          </SuiText>
-          <div className='flex flex-col gap-y-28 mt-24'>
-            {clickhouseCloudItems.map((clickhouseCloudItem, index: number) => (
-              <div
-                className={`flex flex-col justify-between self-center max-w-screen-xl w-full ${
-                  index % 2 !== 0 ? ' md:flex-row-reverse' : ' md:flex-row'
-                }`}
-                key={clickhouseCloudItem.title}>
-                <div className='flex flex-col text-center md:text-left md:w-2/5 pb-4 md:pb-0'>
-                  <SuiTitle type='h3' className='!text-3xl mb-3'>
-                    {clickhouseCloudItem.title}
-                  </SuiTitle>
-                  <SuiText
-                    size='base'
-                    weight='medium'
-                    color='secondary'
-                    className='mb-8'>
-                    {clickhouseCloudItem.description}
-                  </SuiText>
-                  <div className='pl-10 md:pl-0'>
-                    {clickhouseCloudItem.bullets.map((bullet) => (
-                      <BulletPoint key={bullet.text} text={bullet.text} />
-                    ))}
-                  </div>
-                </div>
-                {clickhouseCloudItem.screenshotPng && (
-                  <div className='flex md:w-1/2 justify-center pt-4 items-center'>
-                    <StrapiImage
-                      {...clickhouseCloudItem.screenshotPng}
-                      alt='ClickHouse Cloud is coming'
-                      sizes='large'
-                      className='h-fit w-full object-contain shadow-card'
-                    />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className='flex flex-col gap-4 md:flex-row md:gap-x-8 justify-center mt-16'>
-            {clickhouseCloud.primaryButton && (
-              <div className='w-full md:w-48'>
-                <SuiButton
-                  type='primary'
-                  path={clickhouseCloud.primaryButton.href}
-                  target={clickhouseCloud.primaryButton.target}
-                  className='w-full'>
-                  {clickhouseCloud.primaryButton.text}
-                </SuiButton>
-              </div>
-            )}
-            {clickhouseCloud.secondaryButton && (
-              <div className='w-full md:w-48'>
-                <SuiButton
-                  type='secondary'
-                  path={clickhouseCloud.secondaryButton.href}
-                  target={clickhouseCloud.secondaryButton.target}
-                  className='w-full'>
-                  {clickhouseCloud.secondaryButton.text}
-                </SuiButton>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div className='flex w-full bg-c2 text-c5'>
-        <div
-          className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat bg-opacity-10 py-16 text-center px-8 2xl:px-0 items-center'
-          id='independent-benchmarks'>
-          <SuiTitle color='c6' weight='bold' type='h4' className='mb-3'>
-            {testimonials.pretitle}
-          </SuiTitle>
+      <div className='flex w-full bg-base-color text-primary-800'>
+        <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat bg-opacity-10 py-16 text-center px-8 2xl:px-0 items-center'>
           <SuiTitle type='h2' weight='bold' className='mb-4'>
-            {testimonials.title}
+            <span className='tilted tilted-black'>
+              <span className='tilted-content'>Simple</span>
+            </span>{' '}
+            SQL
           </SuiTitle>
           <SuiText
             size='base'
             weight='medium'
             color='secondary'
             className='mb-6'>
-            {testimonials.description}
+            ClickHouse supports a superset of ANSI SQL with thousands of helper
+            functions to make your analytics queries easy to write and read.
+            Whether you know Postgres, MySQL, Snowflake or other SQL variants,
+            you’ll find ClickHouse familiar to use.
           </SuiText>
-          {testimonials.testimonialsIconSvg && (
-            <div className='flex justify-center mb-10'>
-              <StrapiImage
-                {...testimonials.testimonialsIconSvg}
-                height={78}
-                className='w-auto'
-              />
-            </div>
-          )}
-          {testimonials.testimonialItems.map((testimonial) => (
-            <div key={testimonial.id} className='mb-6'>
-              <SuiLink
-                href={testimonial.href}
-                target={testimonial.target}
-                color='primary'
-                size='lg'
-                weight='bold'>
-                {testimonial.title}
-              </SuiLink>
-              <SuiText size='base' weight='medium' color='secondary'>
-                {testimonial.author}
-              </SuiText>
-            </div>
-          ))}
-          <StrapiImage
-            {...testimonials.bottomIconSvg}
-            className='text-c6'
-            width={24}
-            height={24}
-          />
+          <div className='flex flex-col md:flex-row gap-8'>
+            <StrapiImage
+              {...testimonials.bottomIconSvg}
+              className='text-c6'
+              width={24}
+              height={24}
+            />
+            <StrapiImage
+              {...testimonials.bottomIconSvg}
+              className='text-c6'
+              width={24}
+              height={24}
+            />
+          </div>
         </div>
       </div>
       <GetStarted {...getStartedData} />
+      <FAQ />
     </Layout>
   )
 }

@@ -88,7 +88,7 @@ export default function CareersPage({
         </div>
       </div>
 
-      <div className='w-full bg-c2 text-c5 px-6 pt-12'>
+      <div className='w-full bg-c2 text-neutral-0 px-6 pt-12'>
         {companyValues.map((companyValue, index: number) => (
           <div
             className={`flex flex-col md:${

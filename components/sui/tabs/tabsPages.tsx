@@ -40,8 +40,8 @@ export function SuiTabsPages(props: TabProps) {
                 className={`
                 ${
                   tab.id == props.activeTab
-                    ? 'border-c6 text-c5'
-                    : 'border-transparent text-c4 hover:text-c5 hover:border-c4'
+                    ? 'border-c6 text-neutral-0'
+                    : 'border-transparent text-c4 hover:text-neutral-0 hover:border-c4'
                 }
                 tab-${index}    
                   whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm

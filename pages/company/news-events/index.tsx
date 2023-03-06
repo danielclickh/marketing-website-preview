@@ -154,7 +154,7 @@ export default function News({
           {featuredEvent && (
             <div className='flex max-w-7xl mx-auto'>
               <SuiPanel
-                color='bg-c2 text-c5'
+                color='bg-c2 text-neutral-0'
                 shadow
                 padding='lg'
                 className='my-16'>
@@ -208,7 +208,7 @@ export default function News({
         <RecentEvents events={recentEvents} />
       </div>
 
-      <div className='flex w-full bg-c2 text-c5 pb-8'>
+      <div className='flex w-full bg-c2 text-neutral-0 pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex flex-col md:flex-row justify-between pb-4 gap-x-24 gap-y-10'>
             <div className='flex flex-col md:w-1/2'>

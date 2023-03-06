@@ -2,7 +2,7 @@
   @apply text-c4 text-center;
 
   :global a {
-    @apply text-c5 #{!important};
+    @apply text-neutral-0 #{!important};
 
     strong {
       @apply font-semibold;
