@@ -1,4 +1,4 @@
-export { SuiButton } from './buttons/button'
+export { default as SuiButton } from './SuiButton'
 export { SuiCodeblock } from './codeblock'
 export { SuiHorizontalDivide } from './horizontal_divide'
 export { SuiPanel } from './panel'

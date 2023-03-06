@@ -12,9 +12,6 @@ import { Hind_Siliguri } from '@next/font/google'
 import { HeaderData } from './types'
 import MobilePopoverPanel from './MobilePopoverPanel'
 
-const ThemeSwitcher = dynamic(() => import('./ThemeSwitcher'), {
-  ssr: false
-})
 const hind = Hind_Siliguri({
   subsets: ['latin'],
   weight: '500',

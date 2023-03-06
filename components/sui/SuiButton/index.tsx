@@ -91,7 +91,7 @@ const sizeCalculator = (size: string | undefined) => {
   }
 }
 
-export function SuiButton({
+export default function SuiButton({
   disabled = false,
   type,
   children,

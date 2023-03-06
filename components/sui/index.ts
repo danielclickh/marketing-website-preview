@@ -1,4 +1,4 @@
-export { SuiButton } from './buttons/button'
+export { default as SuiButton } from './SuiButton'
 export { SuiCard } from './cards/basic'
 export { SuiRecentCard } from './cards'
 export { SuiAlternateCard } from './cards/alternate'

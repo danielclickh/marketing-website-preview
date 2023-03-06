@@ -1,5 +1,5 @@
 import { SuiText } from '../../typography'
-import { SuiButton } from '../../buttons/button'
+import SuiButton from '../../SuiButton'
 import { SuiPanel } from '../../panel'
 import { ArrowRightIcon } from '@heroicons/react/solid'
 import { ReactNode } from 'react'

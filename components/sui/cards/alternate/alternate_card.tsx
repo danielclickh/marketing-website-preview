@@ -1,5 +1,5 @@
 import { SuiTitle, SuiText } from '../../typography'
-import { SuiButton } from '../../buttons/button'
+import SuiButton from '../../SuiButton'
 import { SuiPanel } from '../../panel'
 
 type CardProps = {

@@ -88,7 +88,7 @@ export default function HomePage({
                   aria-label='Star Clickhouse/Clickhouse on GitHub'
                 />
               </div>
-              <SuiTitle type='h1' className='md:!text-6xl' color='primary'>
+              <SuiTitle type='h1' className='md:!text-5.5xl' color='primary'>
                 Query <span>BILLIONS</span> of rows in less than a second
               </SuiTitle>
               <div className='mx-auto lg:ml-0 mt-6 flex flex-col'>
@@ -153,91 +153,182 @@ export default function HomePage({
             </Link>
           ))}
         </div>
-        <div className='flex flex-col md:flex-row container mx-auto justify-evenly max-w-7xl px-8 2xl:px-0 mb-16 divide-c4/20 divide-y md:divide-y-0 md:divide-x'>
-          {hero.highlights.map((highlight) => (
-            <SuiPanel
-              key={highlight.title}
-              className='w-full md:w-1/3'
-              padding='lg'
-              color='empty'>
-              <div className='flex flex-col text-center justify-between h-full'>
-                <div>
-                  <h3 className='text-xl font-bold text-center'>
-                    {highlight.title}
-                  </h3>
-                  <div className='bg-c6 h-1 w-20 rounded-md flex mx-auto my-4' />
-                </div>
-                <SuiText size='sm' weight='normal' className='mb-4'>
-                  {highlight.description}
-                </SuiText>
-                <div>
-                  <SuiButton
-                    iconRight
-                    size='lg'
-                    path={highlight.href}
-                    type='empty'
-                    color='primary'
-                    weight='medium'
-                    target={highlight.target}>
-                    {highlight.buttonText}
-                  </SuiButton>
-                </div>
-              </div>
-            </SuiPanel>
-          ))}
+      </div>
+
+      <div className='flex flex-col gap-y-28 mt-24'>
+        <div className='flex flex-col justify-between self-center max-w-screen-xl w-full md:flex-row-reverse'>
+          <div className='flex flex-col text-center md:text-left md:w-2/5 pb-4 md:pb-0'>
+            <SuiTitle type='h3' className='!text-3xl mb-3'>
+              Stop waiting for dashboards and queries to load
+            </SuiTitle>
+            <SuiText
+              size='base'
+              weight='medium'
+              color='secondary'
+              className='mb-8'>
+              Traditional databases and data warehouses take minutes or hours to
+              run your queries. ClickHouse is designed for speed. With
+              ClickHouse, your can query terabytes of data in a few seconds (or
+              less).
+            </SuiText>
+            <div className='pl-10 md:pl-0'>Find out more</div>
+          </div>
+          <div className='flex md:w-1/2 justify-center pt-4 items-center'>
+            {/* <StrapiImage
+                  {...clickhouseCloudItem.screenshotPng}
+                  alt='ClickHouse Cloud is coming'
+                  sizes='large'
+                  className='h-fit w-full object-contain shadow-card'
+                /> */}
+          </div>
+        </div>
+      </div>
+
+      <div className='flex flex-col gap-y-28 mt-24'>
+        <div className='flex flex-col justify-between self-center max-w-screen-xl w-full md:flex-row'>
+          <div className='flex flex-col text-center md:text-left md:w-2/5 pb-4 md:pb-0'>
+            <SuiTitle type='h3' className='!text-3xl mb-3'>
+              Why is ClickHouse so fast?
+            </SuiTitle>
+            <SuiText
+              size='base'
+              weight='medium'
+              color='secondary'
+              className='mb-8'>
+              Column-oriented databases are better suited to OLAP scenarios.
+              They are at least 100 times faster in processing most queries.
+              ClickHouse uses all available system resources to their full
+              potential to process each analytical query as fast as possible.
+            </SuiText>
+          </div>
+          <div className='flex md:w-1/2 justify-center pt-4 items-center'>
+            {/* <StrapiImage
+                  {...clickhouseCloudItem.screenshotPng}
+                  alt='ClickHouse Cloud is coming'
+                  sizes='large'
+                  className='h-fit w-full object-contain shadow-card'
+                /> */}
+          </div>
+          <div>Image2</div>
+          <div className='pl-10 md:pl-0'>Read more in the docs</div>
         </div>
       </div>
       <div className='w-full flex flex-col bg-c3 text-c1-light'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat pb-8 px-8 2xl:px-0 pt-16'>
           <SuiTitle type='h3' className='mb-7 !text-lg' color='c6'>
-            {aboutClickhouse.title}
+            The data warehouse you can run on your laptop and in your data
+            center
           </SuiTitle>
-          <div className='feature-container'>
-            {aboutClickhouse.features.map((feature) => (
-              <FeatureItem
-                key={feature.iconSvg.hash}
-                icon={feature.iconSvg}
-                title={feature.title}
-                description={feature.description}
-                delay={100}
-                forceDarkMode
-              />
-            ))}
+          <SuiText
+            size='base'
+            weight='medium'
+            color='secondary'
+            className='mb-8'>
+            Unlike traditional closed-source data warehouses, ClickHouse runs on
+            every environment, whether it’s on your machine or on the cloud
+          </SuiText>
+          <div className='container flex flex-wrap'>
+            <SuiPanel className='w-full md:w-1/3' padding='lg' color='empty'>
+              <div className='flex flex-col text-center justify-between h-full'>
+                <div>
+                  <h3 className='text-xl font-bold text-center'>
+                    clickhouse-local
+                  </h3>
+                  <div className='bg-c6 h-1 w-20 rounded-md flex mx-auto my-4' />
+                </div>
+                <SuiText size='sm' weight='normal' className='mb-4'>
+                  Run fast queries on local files (CSV, TSV, Parquet, and more)
+                  without a server.
+                </SuiText>
+                <div>
+                  <SuiButton
+                    iconRight
+                    size='lg'
+                    path='/'
+                    type='primary'
+                    weight='medium'
+                    target='_self'>
+                    Download clickHouse-local
+                  </SuiButton>
+                </div>
+              </div>
+            </SuiPanel>
+            <SuiPanel className='w-full md:w-1/3' padding='lg' color='empty'>
+              <div className='flex flex-col text-center justify-between h-full'>
+                <div>
+                  <h3 className='text-xl font-bold text-center'>ClickHouse</h3>
+                  <div className='bg-c6 h-1 w-20 rounded-md flex mx-auto my-4' />
+                </div>
+                <SuiText size='sm' weight='normal' className='mb-4'>
+                  Spin up a database server with open-source ClickHouse. Always
+                  Free.
+                </SuiText>
+                <div>
+                  <SuiButton
+                    iconRight
+                    size='lg'
+                    path='/'
+                    type='primary'
+                    weight='medium'
+                    target='_self'>
+                    Download ClickHouse
+                  </SuiButton>
+                </div>
+              </div>
+            </SuiPanel>
+            <SuiPanel className='w-full md:w-1/3' padding='lg' color='empty'>
+              <div className='flex flex-col text-center justify-between h-full'>
+                <div>
+                  <h3 className='text-xl font-bold text-center'>
+                    ClickHouse Cloud
+                  </h3>
+                  <div className='bg-c6 h-1 w-20 rounded-md flex mx-auto my-4' />
+                </div>
+                <SuiText size='sm' weight='normal' className='mb-4'>
+                  Deploy a fully managed ClickHouse service on AWS and GCP.
+                </SuiText>
+                <div>
+                  <SuiButton
+                    iconRight
+                    size='lg'
+                    path='/'
+                    type='primary'
+                    weight='medium'
+                    target='_self'>
+                    Deploy in seconds
+                  </SuiButton>
+                </div>
+              </div>
+            </SuiPanel>
           </div>
-          {aboutClickhouse.allFeaturesButton.text && (
-            <div className='flex text-center justify-center pt-16'>
-              <SuiButton
-                type='empty'
-                color='primary'
-                weight='normal'
-                iconRight
-                path={aboutClickhouse.allFeaturesButton.href}
-                target={aboutClickhouse.allFeaturesButton.target}
-                size='lg'>
-                {aboutClickhouse.allFeaturesButton.text}
-              </SuiButton>
-            </div>
-          )}
         </div>
       </div>
 
       <div className='flex w-full bg-c2 text-c5'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-16 pb-8 text-center px-8 xl:px-0'>
           <SuiTitle type='h2' className='mb-4'>
-            {customerStories.title}
+            Speed up queries from any data source
           </SuiTitle>
+          <SuiText
+            size='base'
+            weight='medium'
+            color='secondary'
+            className='mb-8'>
+            ClickHouse supports all the datasources you need to power your apps
+            and use cases that require exceptional performance.
+          </SuiText>
 
+          <div>Image X</div>
           <div className='flex text-center justify-center pt-16'>
             <div>
               <SuiButton
                 iconRight
                 path={customerStories.ctaButton.href}
                 target={customerStories.ctaButton.target}
-                type='empty'
                 weight='normal'
-                color='primary'
+                type='secondary'
                 size='lg'>
-                {customerStories.ctaButton.text}
+                View all supported integrations
               </SuiButton>
             </div>
           </div>

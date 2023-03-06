@@ -2,7 +2,6 @@ import '../styles/globals.scss'
 import '../styles/highlightjs.scss'
 import React from 'react'
 import { Inter } from '@next/font/google'
-import { ThemeProvider } from 'next-themes'
 import { SnackbarContextProvider } from '../components/sui'
 import { AppProps } from 'next/app'
 import Script from 'next/script'
@@ -23,13 +22,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <main className={`${inter.variable} font-inter`}>
-        <ThemeProvider attribute='class' defaultTheme='light'>
-          <SnackbarContextProvider>
-            <div className='flex flex-col min-h-screen'>
-              <Component {...pageProps} />
-            </div>
-          </SnackbarContextProvider>
-        </ThemeProvider>
+        <SnackbarContextProvider>
+          <div className='flex flex-col min-h-screen'>
+            <Component {...pageProps} />
+          </div>
+        </SnackbarContextProvider>
       </main>
       <SegmentScript />
       {/* CookiePro Cookies Consent Notice start for clickhouse.com */}

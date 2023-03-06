@@ -22,9 +22,9 @@ export default function Footer({
 }: FooterData) {
   return (
     <div className='flex flex-col bg-[#191A0C] pb-8 pt-16'>
-      <div className='flex py-8 px-4 md:px-0'>
-        <div className='container mx-auto md:flex justify-between max-w-7xl px-4 2xl:px-0 '>
-          <div className='flex flex-col md:border-r border-c3'>
+      <div className='flex py-8 px-4 md:px-0 border-b-primary-500'>
+        <div className='container mx-auto md:flex justify-between max-w-7xl px-16 2xl:px-0'>
+          <div className='flex flex-col w-full'>
             <div className='sitemap lg:flex pt-4'>
               {topLevelFooterMenu.map((topMenu) => (
                 <div
@@ -67,13 +67,6 @@ export default function Footer({
                 </span>
               </div>
             )}
-            <SuiTitle
-              weight='bold'
-              type='h4'
-              color='white'
-              className='!text-xl mb-3'>
-              {newsletterForm?.title}
-            </SuiTitle>
             <SuiText color='white' size='sm' weight='medium' className='mb-4'>
               {newsletterForm?.description}
             </SuiText>
