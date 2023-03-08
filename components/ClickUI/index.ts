@@ -1,2 +1,3 @@
 export { default as CUIButton } from './Button'
-export { BasicCard } from './Card'
+export { default as CUILink } from './Link'
+export { CUIBasicCard } from './Card'

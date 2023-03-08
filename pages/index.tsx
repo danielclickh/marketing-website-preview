@@ -1,24 +1,23 @@
 import GitHubButton from 'react-github-btn'
+import Image from 'next/image'
 
-import {
-  SuiButton,
-  SuiLink,
-  SuiPanel,
-  SuiText,
-  SuiTitle
-} from '../components/sui'
+import { SuiText, SuiTitle } from '../components/sui'
 import { findOne } from '../lib/api/strapi'
 import { StrapiImage, StrapiPicture } from '../components/StrapiElements'
-import Link from 'next/link'
-import BulletPoint from '../components/BulletPoint'
 import GetStarted from '../components/GetStarted'
 import { HomePageProps } from '../types/homepage'
 import { GetStaticProps } from 'next'
 import Layout from '../components/Layout'
 import { getCommonProps } from '../lib/utils/getCommonProps'
 import FAQ from '../components/FAQ'
-import { BasicCard, CUIButton } from '../components/ClickUI'
+import { CUIBasicCard, CUIButton, CUILink } from '../components/ClickUI'
 import LaptopSvg from '../components/icons/LaptopSvg'
+import dashboard1 from '../public/images/homepage/dashboard-1.png'
+import dashboard2 from '../public/images/homepage/dashboard-2.png'
+import dashboard3 from '../public/images/homepage/dashboard-3.png'
+import { ChevronRightIcon } from '@heroicons/react/solid'
+import Terminal from '../components/Terminal'
+// import SpeedAnimation from '../components/SpeedAnimation'
 
 export const getStaticProps: GetStaticProps<HomePageProps> =
   async function getStaticProps() {
@@ -134,40 +133,64 @@ export default function HomePage({
                     View documentation
                   </CUIButton>
                 </div>
-                <SuiLink
+                <CUILink
                   href='\clickhouse'
                   target='_self'
-                  color='primary'
-                  className='mt-6'
-                  weight='bold'>
+                  className='mt-6 text-neutral-200 underline hover:text-neutral-0'>
                   Or download open-source ClickHouse
-                </SuiLink>
+                </CUILink>
               </div>
             </div>
           </div>
         </div>
-        <div className='heroScreenshotBg'>
-          <div className='code-data'>code data</div>
+        <div className=''>
+          <Terminal>
+            <div className='code-data whitespace-pre-wrap'>
+              {`SELECT
+  town, 
+  max(price),
+  argMax(street, price)
+  FROM 
+  uk_price_paid
+  GROUP BY town
+  ORDER BY max(price) DESC
+  LIMIT 3`}
+            </div>
+            <div className='code-data'>
+              Elapsed:{' '}
+              <span className='tilted tilted-yellow'>
+                <span className='tilted-content'>0.928 sec</span>
+              </span>{' '}
+              Processed{' '}
+              <span className='tilted tilted-yellow'>
+                <span className='tilted-content'>27.45 million</span>
+              </span>{' '}
+              rows,
+              <br />
+              103.80 MB (29.56 million rows/s., 111.80 MB/s.)
+            </div>
+          </Terminal>
         </div>
         <div className='bg-primary py-16'>
           <div className='max-w-3xl mx-auto'>
             <SuiText size='base' weight='medium' color='secondary'>
-              Trusted by the best developers that work with data at scale
+              Trusted by the best developers that work with data at{' '}
+              <span>scale</span>
             </SuiText>
 
             <div className='container pt-6 flex flex-col sm:flex-row flex-wrap lg:grid lg:grid-cols-5 gap-4 md:gap-x-8 self-center items-center justify-center'>
               {customerStories.logos.map((logo, index: number) => (
-                <Link
+                <CUILink
                   key={logo.href}
                   href={logo.href}
                   target={logo.target}
-                  className={`customer-stories-${index} flex w-full sm:w-52 lg:w-full rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer`}>
+                  className={`customer-stories-${index} flex w-full sm:w-52 lg:w-full rounded-lg py-6 justify-center ease-in-out duration-200 cursor-pointer`}>
                   <StrapiPicture
                     light={logo?.lightLogoPng}
                     dark={logo?.darkLogoPng}
                     className='w-auto h-10 grayscale'
                   />
-                </Link>
+                </CUILink>
               ))}
             </div>
           </div>
@@ -175,7 +198,7 @@ export default function HomePage({
       </div>
 
       <div className='flex flex-col gap-y-28 mt-24'>
-        <div className='flex flex-col justify-between self-center max-w-screen-xl w-full md:flex-row-reverse'>
+        <div className='flex flex-col justify-between self-center max-w-screen-xl w-full md:flex-row'>
           <div className='flex flex-col text-center md:text-left md:w-2/5 pb-4 md:pb-0'>
             <SuiTitle type='h3' className='!text-3xl mb-3'>
               Stop waiting for dashboards and queries to load
@@ -185,53 +208,66 @@ export default function HomePage({
               weight='medium'
               color='secondary'
               className='mb-8'>
-              Traditional databases and data warehouses take minutes or hours to
-              run your queries. ClickHouse is designed for speed. With
-              ClickHouse, your can query terabytes of data in a few seconds (or
-              less).
+              {`Traditional databases and data warehouses take minutes or hours to run your queries. ClickHouse is designed for speed.
+
+              With ClickHouse, your can query terabytes of data in a few seconds (or less).`}
             </SuiText>
-            <CUIButton type='secondary' className='pl-10 md:pl-0'>
+            <CUIButton
+              type='secondary'
+              className='pl-10 md:pl-0'
+              href='/docs'
+              iconRight={<ChevronRightIcon className='w-4 h-4' />}>
               Find out more
             </CUIButton>
           </div>
           <div className='flex md:w-1/2 justify-center pt-4 items-center'>
-            {/* <StrapiImage
-                  {...clickhouseCloudItem.screenshotPng}
-                  alt='ClickHouse Cloud is coming'
-                  sizes='large'
-                  className='h-fit w-full object-contain shadow-card'
-                /> */}
+            <Image src={dashboard1} alt='Dashboard Image' priority />
           </div>
         </div>
       </div>
 
       <div className='flex flex-col gap-y-28 mt-24'>
-        <div className='flex flex-col justify-between self-center max-w-screen-xl w-full md:flex-row'>
-          <div className='flex flex-col text-center md:text-left md:w-2/5 pb-4 md:pb-0'>
-            <SuiTitle type='h3' className='!text-3xl mb-3'>
-              Why is ClickHouse so fast?
-            </SuiTitle>
-            <SuiText
-              size='base'
-              weight='medium'
-              color='secondary'
-              className='mb-8'>
-              Column-oriented databases are better suited to OLAP scenarios.
-              They are at least 100 times faster in processing most queries.
-              ClickHouse uses all available system resources to their full
-              potential to process each analytical query as fast as possible.
-            </SuiText>
+        <div className='flex flex-col items-center justify-between self-center max-w-screen-xl w-full'>
+          <SuiTitle type='h3' className='!text-3xl mb-3'>
+            Why is ClickHouse so fast?
+          </SuiTitle>
+          <SuiText
+            size='base'
+            weight='medium'
+            color='secondary'
+            className='mb-8'>
+            Column-oriented databases are better suited to OLAP scenarios. They
+            are at least <span className='font-bold'>100x faster</span> in
+            processing most queries. ClickHouse uses all available system
+            resources to their full potential to process each analytical query
+            as fast as possible.
+          </SuiText>
+          <div className='grid grid-cols-1 md:grid-cols-2 items-center py-16 gap-16'>
+            <div>
+              <Image src={dashboard2} alt='Dashboard Image Pie' priority />
+              <div>Row-oriented databases</div>
+              <div>
+                In a row-oriented databases, data is stored in rows, with all
+                the values related to a row physically stored next to each
+                other.
+              </div>
+            </div>
+            <div>
+              <Image src={dashboard3} alt='Dashboard Image Bar' priority />
+              <div>Column-oriented databases</div>
+              <div>
+                In a column-oriented databases, like ClickHouse, data is stored
+                in columns, with values from the same columns stored together.
+              </div>
+            </div>
           </div>
-          <div className='flex md:w-1/2 justify-center pt-4 items-center'>
-            {/* <StrapiImage
-                  {...clickhouseCloudItem.screenshotPng}
-                  alt='ClickHouse Cloud is coming'
-                  sizes='large'
-                  className='h-fit w-full object-contain shadow-card'
-                /> */}
-          </div>
-          <div>Image2</div>
-          <div className='pl-10 md:pl-0'>Read more in the docs</div>
+          <CUIButton
+            type='secondary'
+            className='w-auto'
+            href='/docs'
+            iconRight={<ChevronRightIcon className='w-4 h-4' />}>
+            Read more in the docs
+          </CUIButton>
         </div>
       </div>
       <div className='w-full flex flex-col bg-primary text-primary-800'>
@@ -257,8 +293,8 @@ export default function HomePage({
             Unlike traditional closed-source data warehouses, ClickHouse runs on
             every environment, whether it’s on your machine or on the cloud
           </SuiText>
-          <div className='container grid grid-cols-1 md:grid-cols-3 gap-10'>
-            <BasicCard
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-10'>
+            <CUIBasicCard
               icon={<LaptopSvg />}
               title='clickhouse-local'
               btnChildren='Download clickHouse-local'
@@ -266,8 +302,8 @@ export default function HomePage({
               className='w-full'>
               Run fast queries on local files (CSV, TSV, Parquet, and more)
               without a server.
-            </BasicCard>
-            <BasicCard
+            </CUIBasicCard>
+            <CUIBasicCard
               icon={<LaptopSvg />}
               title='ClickHouse'
               btnChildren='Download clickHouse'
@@ -275,8 +311,8 @@ export default function HomePage({
               className='w-full'>
               Spin up a database server with open-source ClickHouse. Always
               Free.
-            </BasicCard>
-            <BasicCard
+            </CUIBasicCard>
+            <CUIBasicCard
               icon={<LaptopSvg />}
               title='ClickHouse Cloud'
               pretitle='Recommended'
@@ -284,7 +320,7 @@ export default function HomePage({
               href='/'
               className='w-full'>
               Deploy a fully managed ClickHouse service on AWS and GCP.
-            </BasicCard>
+            </CUIBasicCard>
           </div>
         </div>
       </div>
@@ -303,7 +339,7 @@ export default function HomePage({
             and use cases that require exceptional performance.
           </SuiText>
 
-          <div>Image X</div>
+          {/* <SpeedAnimation className='w-full max-w-full' /> */}
           <div className='flex text-center justify-center pt-16'>
             <div>
               <CUIButton
@@ -332,25 +368,64 @@ export default function HomePage({
             size='base'
             weight='medium'
             color='secondary'
-            className='mb-6'>
+            className='mb-6 max-w-sm'>
             ClickHouse supports a superset of ANSI SQL with thousands of helper
             functions to make your analytics queries easy to write and read.
             Whether you know Postgres, MySQL, Snowflake or other SQL variants,
             you’ll find ClickHouse familiar to use.
           </SuiText>
           <div className='flex flex-col md:flex-row gap-8'>
-            <StrapiImage
-              {...testimonials.bottomIconSvg}
-              className='text-c6'
-              width={24}
-              height={24}
-            />
-            <StrapiImage
-              {...testimonials.bottomIconSvg}
-              className='text-c6'
-              width={24}
-              height={24}
-            />
+            <Terminal type='decimal'>
+              <div className='code-data'>
+                {`SELECT
+  town,
+  max(price),
+  argMax(street, price)
+FROM
+  uk_price_paid
+GROUP BY town
+ORDER BY max(price) DESC
+LIMIT 3
+
+
+
+
+
+
+
+
+
+
+
+`}
+              </div>
+            </Terminal>
+
+            <Terminal type='decimal'>
+              <div className='code-data whitespace-pre-wrap'>
+                {`SELECT DISTINCT 
+  town, 
+  price, 
+  street
+FROM 
+  uk_price_paid
+WHERE (town, price) in 
+ ( 
+  SELECT 
+    town, 
+    max(price) 
+  FROM 
+    uk_price_paid 
+  GROUP BY town 
+  ORDER BY max(price) DESC 
+  LIMIT 3 
+ )
+ORDER BY price DESC
+
+
+`}
+              </div>
+            </Terminal>
           </div>
         </div>
       </div>

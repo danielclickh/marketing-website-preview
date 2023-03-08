@@ -9,7 +9,7 @@ interface Props extends GettingStartedData {
 
 export default function FetchGetStarted({ platforms }: Props) {
   return (
-    <div className='flex bg-c3 text-neutral-0' id='getting_started'>
+    <div className='flex bg-grid text-neutral-0' id='getting_started'>
       <div className='container mx-auto justify-center py-12 px-8 2xl:px-0  flex flex-col w-full max-w-7xl'>
         <div className='flex flex-col text-center md:w-5/12 mx-auto '>
           <GitHubButton

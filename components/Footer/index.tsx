@@ -4,6 +4,7 @@ import { StrapiImage } from '../StrapiElements'
 import { Hind_Siliguri } from '@next/font/google'
 import NewsLetterForm from '../NewsLetter/NewsLetterForm'
 import { FooterData } from './types'
+import LogoSvg from '../icons/LogoSvg'
 const hind = Hind_Siliguri({
   subsets: ['latin'],
   weight: '400',
@@ -60,11 +61,8 @@ export default function Footer({
           </div>
           <div className='hidden md:flex flex-col md:w-fit pl-12'>
             {logoSvg && (
-              <div className='flex md:w-64 mb-4 mr-3 gap-x-3 items-center'>
-                <StrapiImage {...logoSvg} width={25} height={25} />
-                <span className={`text-2xl text-neutral-0 ${hind.className}`}>
-                  ClickHouse
-                </span>
+              <div className='flex md:w-64 mb-4 mr-3 gap-x-3 items-center text-primary'>
+                <LogoSvg className='h-6' />
               </div>
             )}
             <SuiText color='white' size='sm' weight='medium' className='mb-4'>

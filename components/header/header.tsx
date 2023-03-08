@@ -12,6 +12,7 @@ import { Hind_Siliguri } from '@next/font/google'
 import { HeaderData } from './types'
 import MobilePopoverPanel from './MobilePopoverPanel'
 import { CUIButton } from '../ClickUI'
+import LogoSvg from '../icons/LogoSvg'
 
 const hind = Hind_Siliguri({
   subsets: ['latin'],
@@ -34,13 +35,12 @@ export default function Header({
             <Link
               href='/'
               className='flex items-center gap-x-3 hover:no-underline'>
-              {logoIcon && <StrapiImage {...logoIcon} width={32} height={32} />}
-              <span className={`text-2xl ${hind.className}`}>ClickHouse</span>
+              <LogoSvg className='h-6' />
             </Link>
             <div className='flex justify-center'>
               <div className='flex justify-between items-center md:justify-start'>
                 <div className='-mr-2 -my-2 min-[930px]:hidden'>
-                  <Popover.Button className='bg-c1 rounded-md p-2 inline-flex items-center justify-center text-neutral-0 hover:text-c4 hover:bg-c2 focus:outline-none'>
+                  <Popover.Button className='rounded-md p-2 inline-flex items-center justify-center text-neutral-0 hover:text-c4 hover:bg-c2 focus:outline-none'>
                     <span className='sr-only'>Open menu</span>
                     <MenuIcon className='h-6 w-6' aria-hidden='true' />
                   </Popover.Button>

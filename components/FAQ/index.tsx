@@ -1,14 +1,14 @@
 import { Disclosure } from '@headlessui/react'
 import { ExternalLinkIcon } from '@heroicons/react/outline'
-import { SuiLink } from '../sui'
+import { SuiLink, SuiTitle } from '../sui'
 import styles from './styles.module.scss'
 
 export default function FAQ() {
   return (
-    <div className='flex flex-col md:flex-row w-full px-4 pt-16'>
+    <div className='flex flex-col md:flex-row w-full px-4 pt-16 items-center justify-center'>
       <div>
-        <h2>FAQs</h2>
-        <div>
+        <SuiTitle type='h2'>FAQs</SuiTitle>
+        <div className='max-w-md'>
           Wherever you need us, we’re there. We love to engage in thoughtful
           conversation with the ClickHouse community and are always on-hand to
           answer your questions.{' '}
@@ -22,11 +22,11 @@ export default function FAQ() {
           Ask us anything <ExternalLinkIcon className='w-4 h-4' />
         </SuiLink>
       </div>
-      <div className='mx-auto w-full max-w-md rounded-2xl p-2 flex flex-col gap-6'>
-        <Disclosure>
+      <div className='mx-auto w-full max-w-screen-sm rounded-2xl p-2 flex flex-col gap-6'>
+        <Disclosure as='div' className='bg-noised'>
           {({ open }) => (
             <>
-              <Disclosure.Button className='flex w-full justify-between rounded-lg bg-noised px-4 py-2 text-left text-sm font-medium text-neutral-0 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75'>
+              <Disclosure.Button className='flex w-full justify-between rounded-lg bg-noised px-4 py-2 text-left text-sm font-medium text-neutral-0 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75'>
                 <span>
                   Is ClickHouse faster than SnowFlake/Redshift/DuckDB etc?
                 </span>
@@ -47,10 +47,10 @@ export default function FAQ() {
             </>
           )}
         </Disclosure>
-        <Disclosure as='div'>
+        <Disclosure as='div' className='bg-noised'>
           {({ open }) => (
             <>
-              <Disclosure.Button className='flex w-full justify-between rounded-lg bg-noised px-4 py-2 text-left text-sm font-medium text-neutral-0 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75'>
+              <Disclosure.Button className='flex w-full justify-between rounded-lg bg-noised px-4 py-2 text-left text-sm font-medium text-neutral-0 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75'>
                 <span>
                   Can I use ClickHouse with Kafka/Airbyte/Amazon S3 etc?
                 </span>
@@ -71,10 +71,10 @@ export default function FAQ() {
             </>
           )}
         </Disclosure>
-        <Disclosure as='div'>
+        <Disclosure as='div' className='bg-noised'>
           {({ open }) => (
             <>
-              <Disclosure.Button className='flex w-full justify-between rounded-lg bg-noised px-4 py-2 text-left text-sm font-medium text-neutral-0 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75'>
+              <Disclosure.Button className='flex w-full justify-between rounded-lg bg-noised px-4 py-2 text-left text-sm font-medium text-neutral-0 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75'>
                 <span>
                   Can I use ClickHouse with Kafka/Airbyte/Amazon S3 etc?
                 </span>

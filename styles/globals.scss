@@ -100,8 +100,7 @@ body {
   }
 
   .code-with-play {
-    @apply text-neutral-0 flex relative whitespace-pre-wrap rounded-lg;
-    background: #222222 !important;
+    @apply text-neutral-0 flex relative whitespace-pre-wrap rounded-lg bg-noised;
     padding: 24px;
 
     .code {
@@ -158,8 +157,7 @@ body {
     code {
       @apply box-border mb-9 w-full;
       padding: 20px;
-      @apply text-neutral-0 rounded-lg whitespace-pre-wrap block;
-      background: #222222 !important;
+      @apply text-neutral-0 rounded-lg whitespace-pre-wrap block bg-noised;
 
       @apply border border-solid border-c3 break-words;
 
@@ -256,32 +254,6 @@ body {
   }
   100% {
     transform: rotate(360deg);
-  }
-}
-
-.heroScreenshotBg {
-  @apply pt-4 pl-4 h-auto relative w-full lg:w-2/5 object-cover md:object-contain;
-  aspect-ratio: 1.95/1;
-
-  &::before {
-    @apply w-auto max-w-full absolute top-0 inset-x-0 m-auto ml-0 rounded-3xl;
-    height: 90%;
-    @apply content-[''];
-    background: linear-gradient(90deg, #ff9900 0.7%, #ffbe5b 99.07%);
-    transform: rotate(-1.92deg);
-    aspect-ratio: 1.95/1;
-  }
-}
-
-.heroScreenshot {
-  @apply top-2 relative m-0 h-full rounded-md object-cover object-left-top;
-  box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.05);
-  aspect-ratio: 1.95/1;
-
-  @screen lg {
-    @apply w-auto left-1 top-1 overflow-x-hidden;
-    min-height: 24rem;
-    min-width: 48rem;
   }
 }
 

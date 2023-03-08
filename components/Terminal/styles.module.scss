@@ -1,0 +1,33 @@
+.terminalData {
+  @apply mt-8 whitespace-pre-wrap;
+
+  white-space: pre-wrap;
+  background-size: calc(var(--totalCount) * 1ch) 200%;
+  -webkit-background-clip: padding-box, text;
+  background-clip: padding-box, text;
+  background-repeat: no-repeat;
+  animation: b 0.7s infinite steps(1), t calc(var(--totalCount) * 0.3s) steps(var(--totalCount)) forwards;
+  span::before {
+    position: abolsute;
+    content: "$";
+    left: -10px;
+    padding-right: 0.8em;
+    margin-right: 5px;
+    width: 1.5em;
+    text-align: right;
+    opacity: 0.5;
+  }
+  &[data-type="decimal"] {
+    counter-reset: line-numbering;
+    span::before {
+      @apply absolute text-right text-slate-500;
+      left: -10px;
+      content: counter(line-numbering);
+      counter-increment: line-numbering;
+      padding-right: 0.8em;
+      margin-right: 5px;
+      width: 1.5em;
+      opacity: 0.5;
+    }
+  }
+}
