@@ -5,7 +5,7 @@ import { WebClient, LogLevel } from "@slack/web-api";
 const SLACK_BOT_TOKEN = process.env.SLACK_TOKEN;
 const CHANNEL = process.env.SH_CRON_CHANNEL || 'website-notifications';
 const ERROR_MESSAGE = ":internet-problems: Could not successfully verify the Install script `curl https://clickhouse.com | sh`";
-const SUCCESS_MESSAGE = ":tada: Install script verified successfully";
+const SUCCESS_MESSAGE = ":tada: ClickHouse curl install working successfully (past 24 hours)";
 
 // WebClient instantiates a client that can call API methods
 // When using Bolt, you can use either `app.client` or the `client` passed to listeners.
