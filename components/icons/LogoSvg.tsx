@@ -9,7 +9,7 @@ function LogoSvg(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
       {...props}>
-      <g clip-path='url(#clip0_768_19975)'>
+      <g clipPath='url(#clip0_768_19975)'>
         <rect
           x='1.875'
           y='1.875'

@@ -1,3 +1,4 @@
+import { StaticImageData } from 'next/image'
 import { HTMLAttributes, ReactNode } from 'react'
 import { LinkProps } from '../Link/types'
 
@@ -10,8 +11,13 @@ export interface BasicCardProps extends HTMLAttributes<HTMLDivElement> {
   target?: string
 }
 
-export interface TwitterCardProps extends LinkProps {
-  src: string
+interface StaticRequire {
+  default: StaticImageData
+}
+declare type StaticImport = StaticRequire | StaticImageData
+
+export interface TwitterCardProps extends HTMLAttributes<HTMLDivElement> {
+  src: string | StaticImport
   name: string
   twitterId: string
 }

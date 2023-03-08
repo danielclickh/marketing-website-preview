@@ -1,14 +1,19 @@
 .terminalData {
-  @apply mt-8 whitespace-pre-wrap;
-
+  @apply whitespace-pre-wrap text-sm font-bold font-inconsolata w-full;
+  display: inline;
   white-space: pre-wrap;
+  color: #0000;
+  background: linear-gradient(-90deg, #ffffff 1ch, #0000 0) 8px 0, linear-gradient(#ffffff 0 0) 0 0;
   background-size: calc(var(--totalCount) * 1ch) 200%;
   -webkit-background-clip: padding-box, text;
   background-clip: padding-box, text;
   background-repeat: no-repeat;
-  animation: b 0.7s infinite steps(1), t calc(var(--totalCount) * 0.3s) steps(var(--totalCount)) forwards;
-  span::before {
-    position: abolsute;
+  p {
+    @apply inline;
+  }
+
+  .line::before {
+    @apply absolute text-right text-slate-500;
     content: "$";
     left: -10px;
     padding-right: 0.8em;
@@ -19,8 +24,7 @@
   }
   &[data-type="decimal"] {
     counter-reset: line-numbering;
-    span::before {
-      @apply absolute text-right text-slate-500;
+    .line::before {
       left: -10px;
       content: counter(line-numbering);
       counter-increment: line-numbering;
@@ -29,5 +33,21 @@
       width: 1.5em;
       opacity: 0.5;
     }
+  }
+}
+
+.terminalHeader {
+  @apply py-3 px-6 text-primary-50 flex items-center gap-4 text-base font-bold;
+  &[data-terminal="false"] {
+    @apply relative;
+    background: #171804;
+    &::before {
+      content: "";
+      background-image: url("/noise.png");
+      @apply bg-cover absolute inset-0 opacity-5;
+    }
+  }
+  &[data-controls="false"] {
+    @apply px-4;
   }
 }

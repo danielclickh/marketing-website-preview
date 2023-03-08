@@ -21,28 +21,8 @@
     }
   }
 
-  .tilted {
-    @apply relative;
-    &:before {
-      content: "";
-      @apply absolute inset-0 -skew-y-3;
-    }
-    .tilted-content {
-      @apply relative p-2;
-    }
-  }
-  .tilted-yellow {
-    @apply text-primary-800;
-    &:before {
-      @apply bg-base-color;
-    }
-  }
-
-  .tilted-black {
-    @apply text-base-color;
-    &:before {
-      @apply bg-slate-900;
-    }
+  .section-container {
+    @apply mx-auto max-w-3xl;
   }
 }
 
@@ -248,15 +228,6 @@ body {
   }
 }
 
-@keyframes lds-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 #ot-sdk-btn-floating .ot-floating-button__front {
   @apply bg-transparent #{!important};
 }
@@ -267,4 +238,45 @@ body {
 
 .social-count {
   background: transparent;
+}
+
+.tilted {
+  @apply relative;
+  &:before {
+    content: "";
+    @apply absolute inset-0 -skew-y-3;
+  }
+  .tilted-content {
+    @apply relative p-2;
+  }
+}
+.tilted-yellow {
+  @apply text-primary-800;
+  &:before {
+    @apply bg-base-color;
+  }
+}
+
+.tilted-black {
+  @apply text-base-color;
+  &:before {
+    @apply bg-slate-900;
+  }
+}
+
+@keyframes typewrite-size {
+  from {
+    background-size: 0 200%;
+  }
+}
+
+@keyframes typewrite-position {
+  50% {
+    background-position: 0 -100%, 0 0;
+  }
+}
+
+.terminal-data {
+  animation: typewrite-position 0.7s infinite steps(1),
+    typewrite-size calc(var(--totalCount) * 0.3s) steps(var(--totalCount)) forwards;
 }

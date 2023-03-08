@@ -14,7 +14,7 @@ export default function FAQ() {
           answer your questions.{' '}
         </div>
         <SuiLink
-          href='\clickhouse'
+          href='/clickhouse'
           target='_self'
           color='primary'
           weight='bold'
@@ -32,7 +32,7 @@ export default function FAQ() {
                 </span>
                 <span className={styles.plusMinus} data-active={open} />
               </Disclosure.Button>
-              <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-neutral-0'>
+              <Disclosure.Panel className='transition-all px-4 pt-4 pb-2 text-sm text-neutral-0'>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et
                 massa mi. Aliquam in hendrerit urna. Pellentesque sit amet
                 sapien fringilla, mattis ligula consectetur, ultrices mauris.

@@ -1,7 +1,7 @@
 import '../styles/globals.scss'
 import '../styles/highlightjs.scss'
 import React from 'react'
-import { Inter } from "next/font/google"
+import { Inconsolata, Inter } from 'next/font/google'
 import { SnackbarContextProvider } from '../components/sui'
 import { AppProps } from 'next/app'
 import Script from 'next/script'
@@ -18,10 +18,18 @@ const inter = Inter({
   fallback: ['sans-serif']
 })
 
+const inconsolata = Inconsolata({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-inconsolata',
+  adjustFontFallback: false,
+  fallback: []
+})
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <main className={`${inter.variable} font-inter`}>
+      <main className={`${inter.variable} font-inter ${inconsolata.variable}`}>
         <SnackbarContextProvider>
           <div className='flex flex-col min-h-screen'>
             <Component {...pageProps} />

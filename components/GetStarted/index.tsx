@@ -38,7 +38,7 @@ export default function FetchGetStarted({ platforms }: Props) {
           className='px-6 md:px-0 mt-6'>
           Or install for{' '}
           <SuiLink
-            href='\clickhouse'
+            href='/clickhouse'
             target='_self'
             color='primary'
             weight='bold'>
@@ -46,7 +46,7 @@ export default function FetchGetStarted({ platforms }: Props) {
           </SuiLink>
           ,{' '}
           <SuiLink
-            href='\clickhouse'
+            href='/clickhouse'
             target='_self'
             color='primary'
             weight='bold'>
@@ -54,7 +54,7 @@ export default function FetchGetStarted({ platforms }: Props) {
           </SuiLink>{' '}
           or see other{' '}
           <SuiLink
-            href='\clickhouse'
+            href='/clickhouse'
             target='_self'
             color='primary'
             weight='bold'>

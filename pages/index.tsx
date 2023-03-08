@@ -17,7 +17,31 @@ import dashboard2 from '../public/images/homepage/dashboard-2.png'
 import dashboard3 from '../public/images/homepage/dashboard-3.png'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import Terminal from '../components/Terminal'
+import Markdown from '../components/Markdown'
+import TwitterSection from '../components/TwitterSection'
 // import SpeedAnimation from '../components/SpeedAnimation'
+
+const pgQuery = `SELECT DISTINCT 
+  town, 
+  price, 
+  street
+FROM 
+  uk_price_paid
+WHERE (town, price) in 
+ ( 
+  SELECT 
+    town, 
+    max(price) 
+  FROM 
+    uk_price_paid 
+  GROUP BY town 
+  ORDER BY max(price) DESC 
+  LIMIT 3 
+ )
+ORDER BY price DESC
+
+
+`
 
 export const getStaticProps: GetStaticProps<HomePageProps> =
   async function getStaticProps() {
@@ -73,8 +97,8 @@ export default function HomePage({
 }: HomePageProps) {
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
-      <div className='homepage  bg-right bg-opacity-100 overflow-hidden'>
-        <div className='bg-grid flex flex-col pb-20 lg:pb-44 pt-16 md:pt-28 px-8 2xl:px-0 relative gap-24 justify-center '>
+      <div className='homepage bg-primary bg-bottom bg-opacity-100 overflow-hidden'>
+        <div className='bg-home-grid bg-primary-800 flex flex-col pb-20 lg:pb-44 pt-16 md:pt-28 px-8 2xl:px-0 relative gap-24 justify-center '>
           <div className='flex flex-col w-full mx-auto max-w-3xl'>
             <div className='mx-auto md:mr-0 md:mt-8 flex-col items-center justify-center'>
               <div className='mx-auto'>
@@ -134,7 +158,7 @@ export default function HomePage({
                   </CUIButton>
                 </div>
                 <CUILink
-                  href='\clickhouse'
+                  href='/clickhouse'
                   target='_self'
                   className='mt-6 text-neutral-200 underline hover:text-neutral-0'>
                   Or download open-source ClickHouse
@@ -143,20 +167,34 @@ export default function HomePage({
             </div>
           </div>
         </div>
-        <div className=''>
-          <Terminal>
-            <div className='code-data whitespace-pre-wrap'>
-              {`SELECT
-  town, 
-  max(price),
-  argMax(street, price)
-  FROM 
-  uk_price_paid
-  GROUP BY town
-  ORDER BY max(price) DESC
-  LIMIT 3`}
-            </div>
-            <div className='code-data'>
+        <div className='bg-primary'>
+          <Terminal
+            type='terminal'
+            totalCount={185}
+            className='section-container flex flex-col -mt-[100px]'>
+            <p className='line'>
+              <span>SELECT toYear(date) AS year, </span>
+              {'\n'}
+              <span>
+                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;round(avg(price)) AS
+                price,
+              </span>
+              {'\n'}
+              <span>
+                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;bar ( price , 0 ,
+                2000000 , 100 ) <span>AS</span> average_price
+              </span>
+              {'\n'}
+              <span>FROM uk_price_paid</span>
+              {'\n'}
+              <span>WHERE town = 'LONDON'</span>
+              {'\n'}
+              <span>GROUP BY year</span>
+              {'\n'}
+              <span>ORDER BY year{'\n'}</span>
+            </p>
+            <br />
+            <p className='line opacity-0'>
               Elapsed:{' '}
               <span className='tilted tilted-yellow'>
                 <span className='tilted-content'>0.928 sec</span>
@@ -168,10 +206,10 @@ export default function HomePage({
               rows,
               <br />
               103.80 MB (29.56 million rows/s., 111.80 MB/s.)
-            </div>
+            </p>
           </Terminal>
         </div>
-        <div className='bg-primary py-16'>
+        <div className=' py-16'>
           <div className='max-w-3xl mx-auto'>
             <SuiText size='base' weight='medium' color='secondary'>
               Trusted by the best developers that work with data at{' '}
@@ -227,7 +265,7 @@ export default function HomePage({
       </div>
 
       <div className='flex flex-col gap-y-28 mt-24'>
-        <div className='flex flex-col items-center justify-between self-center max-w-screen-xl w-full'>
+        <div className='flex flex-col items-center justify-between self-center section-container w-full'>
           <SuiTitle type='h3' className='!text-3xl mb-3'>
             Why is ClickHouse so fast?
           </SuiTitle>
@@ -358,7 +396,7 @@ export default function HomePage({
 
       <div className='flex w-full bg-base-color text-primary-800'>
         <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat bg-opacity-10 py-16 text-center px-8 2xl:px-0 items-center'>
-          <SuiTitle type='h2' weight='bold' className='mb-4'>
+          <SuiTitle type='h2' weight='bold' className='mb-4' id='simple-sql'>
             <span className='tilted tilted-black'>
               <span className='tilted-content'>Simple</span>
             </span>{' '}
@@ -368,68 +406,52 @@ export default function HomePage({
             size='base'
             weight='medium'
             color='secondary'
-            className='mb-6 max-w-sm'>
+            className='mb-6 max-w-screen-sm'>
             ClickHouse supports a superset of ANSI SQL with thousands of helper
             functions to make your analytics queries easy to write and read.
             Whether you know Postgres, MySQL, Snowflake or other SQL variants,
             you’ll find ClickHouse familiar to use.
           </SuiText>
-          <div className='flex flex-col md:flex-row gap-8'>
-            <Terminal type='decimal'>
-              <div className='code-data'>
-                {`SELECT
-  town,
-  max(price),
-  argMax(street, price)
-FROM
-  uk_price_paid
-GROUP BY town
-ORDER BY max(price) DESC
-LIMIT 3
-
-
-
-
-
-
-
-
-
-
-
-`}
-              </div>
+          <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-8'>
+            <Terminal
+              type='decimal'
+              totalCount={120}
+              showControls={false}
+              title='ClickHouse syntax'>
+              <span className=''>SELECT</span>
+              {'\n'}
+              <span className=''> town,</span>
+              {'\n'}
+              <span className=''> max(price),</span>
+              {'\n'}
+              <span className=''> argMax(street, price)</span>
+              {'\n'}
+              <span className=''>FROM</span>
+              {'\n'}
+              <span className=''> uk_price_paid</span>
+              {'\n'}
+              <span className=''>GROUP BY town</span>
+              {'\n'}
+              <span className=''>ORDER BY max(price) DESC</span>
+              {'\n'}
+              <span className=''>LIMIT 3</span>
+              {'\n'}
             </Terminal>
 
-            <Terminal type='decimal'>
-              <div className='code-data whitespace-pre-wrap'>
-                {`SELECT DISTINCT 
-  town, 
-  price, 
-  street
-FROM 
-  uk_price_paid
-WHERE (town, price) in 
- ( 
-  SELECT 
-    town, 
-    max(price) 
-  FROM 
-    uk_price_paid 
-  GROUP BY town 
-  ORDER BY max(price) DESC 
-  LIMIT 3 
- )
-ORDER BY price DESC
-
-
-`}
-              </div>
+            <Terminal
+              type='decimal'
+              totalCount={237}
+              showControls={false}
+              title='PostgreSQL syntax'>
+              <Markdown encloseByDiv={false}>
+                {`<span class="hljs language-sql">${pgQuery}</span>`}
+              </Markdown>
             </Terminal>
           </div>
         </div>
       </div>
       <GetStarted {...getStartedData} />
+      <TwitterSection />
       <FAQ />
     </Layout>
   )
