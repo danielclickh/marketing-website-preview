@@ -12,13 +12,13 @@ function TwitterCard({
 }: TwitterCardProps) {
   return (
     <div
-      className={`flex flex-col bg-noised hover:shadow-click-twitter-card-active p-6 pt-4 gap-8 rounded ${className}`}
+      className={`flex flex-col bg-noised hover:shadow-click-twitter p-6 pt-4 gap-8 rounded ${className}`}
       {...props}>
       <div className='flex gap-4 items-center'>
         <Image
           src={src}
           alt={`Avatar for ${twitterId}`}
-          className='w-16 h-16 aspect-square'
+          className='w-16 h-16 aspect-square rounded-full'
         />
         <div className='flex flex-col'>
           <div>{name}</div>

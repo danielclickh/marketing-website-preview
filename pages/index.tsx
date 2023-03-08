@@ -19,6 +19,7 @@ import { ChevronRightIcon } from '@heroicons/react/solid'
 import Terminal from '../components/Terminal'
 import Markdown from '../components/Markdown'
 import TwitterSection from '../components/TwitterSection'
+import HomePageTerminal from '../components/Terminal/HomePageTerminal'
 // import SpeedAnimation from '../components/SpeedAnimation'
 
 const pgQuery = `SELECT DISTINCT 
@@ -49,27 +50,11 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
       populate: [
         'hero',
         'hero.ctaButton',
-        'hero.advancedCallout',
-        'hero.highlights',
-        'aboutClickhouse',
-        'aboutClickhouse.features',
-        'aboutClickhouse.features.iconSvg',
-        'aboutClickhouse.allFeaturesButton',
         'customerStories',
         'customerStories.logos',
         'customerStories.logos.darkLogoPng',
         'customerStories.logos.lightLogoPng',
         'customerStories.ctaButton',
-        'clickhouseCloud',
-        'clickhouseCloud.primaryButton',
-        'clickhouseCloud.secondaryButton',
-        'clickhouseCloudItems',
-        'clickhouseCloudItems.bullets',
-        'clickhouseCloudItems.screenshotPng',
-        'testimonials',
-        'testimonials.testimonialsIconSvg',
-        'testimonials.bottomIconSvg',
-        'testimonials.testimonialItems',
         'seo',
         'seo.image'
       ]
@@ -89,7 +74,6 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
 export default function HomePage({
   hero,
   customerStories,
-  testimonials,
   seo,
   headerData,
   footerData,
@@ -121,11 +105,7 @@ export default function HomePage({
                 of rows in less than a second
               </SuiTitle>
               <div className='mx-auto lg:ml-0 mt-6 flex flex-col items-center'>
-                <SuiText
-                  size='base'
-                  color='secondary'
-                  weight='normal'
-                  className='text-center lg:text-left mb-10'>
+                <SuiText size='base' color='secondary' weight='normal'>
                   ClickHouse is the fastest open-source data warehouse for low
                   latency apps and analytics
                 </SuiText>
@@ -167,54 +147,18 @@ export default function HomePage({
             </div>
           </div>
         </div>
-        <div className='bg-primary'>
-          <Terminal
-            type='terminal'
-            totalCount={185}
-            className='section-container flex flex-col -mt-[100px]'>
-            <p className='line'>
-              <span>SELECT toYear(date) AS year, </span>
-              {'\n'}
-              <span>
-                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;round(avg(price)) AS
-                price,
-              </span>
-              {'\n'}
-              <span>
-                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;bar ( price , 0 ,
-                2000000 , 100 ) <span>AS</span> average_price
-              </span>
-              {'\n'}
-              <span>FROM uk_price_paid</span>
-              {'\n'}
-              <span>WHERE town = 'LONDON'</span>
-              {'\n'}
-              <span>GROUP BY year</span>
-              {'\n'}
-              <span>ORDER BY year{'\n'}</span>
-            </p>
-            <br />
-            <p className='line opacity-0'>
-              Elapsed:{' '}
-              <span className='tilted tilted-yellow'>
-                <span className='tilted-content'>0.928 sec</span>
-              </span>{' '}
-              Processed{' '}
-              <span className='tilted tilted-yellow'>
-                <span className='tilted-content'>27.45 million</span>
-              </span>{' '}
-              rows,
-              <br />
-              103.80 MB (29.56 million rows/s., 111.80 MB/s.)
-            </p>
-          </Terminal>
+        <div>
+          <HomePageTerminal />
         </div>
         <div className=' py-16'>
           <div className='max-w-3xl mx-auto'>
-            <SuiText size='base' weight='medium' color='secondary'>
+            <div className='text-center mb-10 text-primary-700 sm:border-t-2 sm:border-primary-700 w-fit mx-auto leading-none'>
               Trusted by the best developers that work with data at{' '}
-              <span>scale</span>
-            </SuiText>
+              <span className='tilted tilted-black'>
+                <span className='tilted-content'>scale</span>
+              </span>
+              {/* <span className='bg-primary-700 text-primary'></span> */}
+            </div>
 
             <div className='container pt-6 flex flex-col sm:flex-row flex-wrap lg:grid lg:grid-cols-5 gap-4 md:gap-x-8 self-center items-center justify-center'>
               {customerStories.logos.map((logo, index: number) => (
@@ -418,24 +362,26 @@ export default function HomePage({
               totalCount={120}
               showControls={false}
               title='ClickHouse syntax'>
-              <span className=''>SELECT</span>
-              {'\n'}
-              <span className=''> town,</span>
-              {'\n'}
-              <span className=''> max(price),</span>
-              {'\n'}
-              <span className=''> argMax(street, price)</span>
-              {'\n'}
-              <span className=''>FROM</span>
-              {'\n'}
-              <span className=''> uk_price_paid</span>
-              {'\n'}
-              <span className=''>GROUP BY town</span>
-              {'\n'}
-              <span className=''>ORDER BY max(price) DESC</span>
-              {'\n'}
-              <span className=''>LIMIT 3</span>
-              {'\n'}
+              <p className='terminal-type'>
+                <span className='text-indigo-300'>SELECT</span>
+                {'\n'}
+                <span className=''> town,</span>
+                {'\n'}
+                <span className=''> max(price),</span>
+                {'\n'}
+                <span className=''> argMax(street, price)</span>
+                {'\n'}
+                <span className=''>FROM</span>
+                {'\n'}
+                <span className=''> uk_price_paid</span>
+                {'\n'}
+                <span className=''>GROUP BY town</span>
+                {'\n'}
+                <span className=''>ORDER BY max(price) DESC</span>
+                {'\n'}
+                <span className=''>LIMIT 3</span>
+                {'\n'}
+              </p>
             </Terminal>
 
             <Terminal

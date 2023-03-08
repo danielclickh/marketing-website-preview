@@ -1,13 +1,5 @@
 .terminalData {
   @apply whitespace-pre-wrap text-sm font-bold font-inconsolata w-full;
-  display: inline;
-  white-space: pre-wrap;
-  color: #0000;
-  background: linear-gradient(-90deg, #ffffff 1ch, #0000 0) 8px 0, linear-gradient(#ffffff 0 0) 0 0;
-  background-size: calc(var(--totalCount) * 1ch) 200%;
-  -webkit-background-clip: padding-box, text;
-  background-clip: padding-box, text;
-  background-repeat: no-repeat;
   p {
     @apply inline;
   }
@@ -37,7 +29,7 @@
 }
 
 .terminalHeader {
-  @apply py-3 px-6 text-primary-50 flex items-center gap-4 text-base font-bold;
+  @apply py-3 px-6 text-primary-50 flex items-center gap-4 text-base font-bold rounded;
   &[data-terminal="false"] {
     @apply relative;
     background: #171804;
@@ -49,5 +41,15 @@
   }
   &[data-controls="false"] {
     @apply px-4;
+  }
+}
+
+.terminalTypeActive :global {
+  @apply transition-all;
+  .keyword {
+    @apply text-info-300;
+  }
+  .constant {
+    @apply text-indigo-300;
   }
 }

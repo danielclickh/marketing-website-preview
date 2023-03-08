@@ -177,7 +177,7 @@ module.exports = {
         click: {
           card: '0px 4px 44px rgba(22, 22, 0, 0.4), inset 0px 1px 3px rgba(25, 26, 6, 0.9)',
           pill: '0px -1px 5px rgba(16, 24, 40, 0.07)',
-          'twitter-card-active': '0px 4px 48px rgba(250, 255, 72, 0.2)'
+          twitter: '0px 4px 48px rgba(250, 255, 72, 0.2)'
         }
       },
       backgroundSize: {
