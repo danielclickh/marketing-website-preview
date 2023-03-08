@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic'
 import { StrapiImage } from '../StrapiElements'
 import MenuItem from './MenuItem'
 import styles from './Header.module.scss'
-import { Hind_Siliguri } from '@next/font/google'
+import { Hind_Siliguri } from "next/font/google"
 import { HeaderData } from './types'
 import MobilePopoverPanel from './MobilePopoverPanel'
 import { CUIButton } from '../ClickUI'

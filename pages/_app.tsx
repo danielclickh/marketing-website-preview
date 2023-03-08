@@ -1,7 +1,7 @@
 import '../styles/globals.scss'
 import '../styles/highlightjs.scss'
 import React from 'react'
-import { Inter } from '@next/font/google'
+import { Inter } from "next/font/google"
 import { SnackbarContextProvider } from '../components/sui'
 import { AppProps } from 'next/app'
 import Script from 'next/script'

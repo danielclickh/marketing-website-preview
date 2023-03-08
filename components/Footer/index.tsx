@@ -1,7 +1,7 @@
 import { SuiLink, SuiText, SuiTitle } from '../sui'
 import Link from 'next/link'
 import { StrapiImage } from '../StrapiElements'
-import { Hind_Siliguri } from '@next/font/google'
+import { Hind_Siliguri } from 'next/font/google'
 import NewsLetterForm from '../NewsLetter/NewsLetterForm'
 import { FooterData } from './types'
 import LogoSvg from '../icons/LogoSvg'

@@ -14,21 +14,21 @@ function LaptopSvg(props: HTMLAttributes<HTMLOrSVGElement>) {
         stroke='currentColor'
         strokeWidth='2'
         strokeLinecap='round'
-        stroke-linejoin='round'
+        strokeLinejoin='round'
       />
       <path
         d='M7.13184 44H61.8687V48C61.8687 49.0609 61.4251 50.0783 60.6354 50.8284C59.8458 51.5786 58.7749 52 57.6582 52H11.3424C10.2257 52 9.1547 51.5786 8.36507 50.8284C7.57544 50.0783 7.13184 49.0609 7.13184 48V44Z'
         stroke='currentColor'
         strokeWidth='2'
         strokeLinecap='round'
-        stroke-linejoin='round'
+        strokeLinejoin='round'
       />
       <path
         d='M38.7106 22H30.2896'
         stroke='currentColor'
         strokeWidth='2'
         strokeLinecap='round'
-        stroke-linejoin='round'
+        strokeLinejoin='round'
       />
     </svg>
   )
