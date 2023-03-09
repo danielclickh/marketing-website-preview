@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef, useState } from 'react'
+import React, { ChangeEvent, useRef, useState, useEffect } from 'react'
 import { BlogPostListProps } from './types'
 
 import { SuiSearchField, SuiTitle } from '../sui/client'
@@ -12,7 +12,7 @@ function BlogPostList({ categories, children }: BlogPostListProps) {
     search: string | null,
     selectedCategory: string | null
   ) => {
-    const category = (selectedCategory ?? '').split(' ').join('-')
+    const category = (selectedCategory ?? '').split(' ').join('-').toLowerCase()
     if (ref.current) {
       const blogs = ref.current?.querySelectorAll(
         `.blog-post-card${selectedCategory ? `.category-${category}` : ''}`
@@ -49,27 +49,57 @@ function BlogPostList({ categories, children }: BlogPostListProps) {
   }
 
   const onChangeCategory = (category: string | null) => {
+    const normalizedCategory = category
+      ? category.split(' ').join('-').toLowerCase()
+      : ''
     filterBlogs(search, category)
     setSelectedCategory(category)
+    const queryString = category ? `?category=${normalizedCategory}` : ''
+    window.history.replaceState(
+      {},
+      '',
+      `${window.location.pathname}${queryString}`
+    )
   }
 
   const ref = useRef<HTMLDivElement>(null)
   const categoryList = categories.map((category) => ({
     text: category,
     onClick: () => onChangeCategory(category),
-    selected: selectedCategory === category
+    selected: selectedCategory == category
   }))
 
   categoryList.unshift({
     text: 'View All',
     onClick: () => onChangeCategory(null),
-    selected: selectedCategory === null
+    selected: selectedCategory == null
   })
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     filterBlogs(e.target.value, selectedCategory)
     setSearch(e.target.value)
   }
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search)
+    const category = searchParams.get('category')
+    if (category) {
+      const sanitizedCategory = encodeURIComponent(category) // sanitize the category parameter
+      const normalizedCategory = sanitizedCategory
+        .split(' ')
+        .join('-')
+        .toLowerCase()
+      const matchingCategory = categories.find(
+        (c) => c.split(' ').join('-').toLowerCase() === normalizedCategory
+      )
+      if (matchingCategory) {
+        onChangeCategory(matchingCategory)
+      } else {
+        setSelectedCategory(null)
+        filterBlogs(null, null) // show all blogs
+      }
+    }
+  }, [])
 
   return (
     <div className='flex flex-col md:flex-row container mx-auto max-w-7xl justify-between pt-24 px-4 sm:px-8 2xl:px-0'>
