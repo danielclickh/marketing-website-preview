@@ -1,37 +1,29 @@
 .terminalData {
-  @apply whitespace-pre-wrap text-sm font-bold font-inconsolata w-full;
+  @apply block whitespace-pre-wrap text-sm font-bold font-inconsolata w-full relative pl-4;
   p {
     @apply inline;
   }
 
-  .line::before {
-    @apply absolute text-right text-slate-500;
+  :global .line::before {
+    @apply absolute text-left text-slate-500 left-0;
     content: "$";
-    left: -10px;
-    padding-right: 0.8em;
-    margin-right: 5px;
-    width: 1.5em;
-    text-align: right;
-    opacity: 0.5;
+    width: 0.875rem;
   }
   &[data-type="decimal"] {
+    @apply pl-[38px];
     counter-reset: line-numbering;
-    .line::before {
-      left: -10px;
+    :global .line::before {
+      @apply text-right;
       content: counter(line-numbering);
       counter-increment: line-numbering;
-      padding-right: 0.8em;
-      margin-right: 5px;
-      width: 1.5em;
-      opacity: 0.5;
     }
   }
 }
 
 .terminalHeader {
-  @apply py-3 px-6 text-primary-50 flex items-center gap-4 text-base font-bold rounded;
+  @apply py-3 px-4 text-primary-50 flex items-center gap-4 text-base font-bold rounded h-11;
   &[data-terminal="false"] {
-    @apply relative;
+    @apply relative px-6;
     background: #171804;
     &::before {
       content: "";
@@ -41,15 +33,5 @@
   }
   &[data-controls="false"] {
     @apply px-4;
-  }
-}
-
-.terminalTypeActive :global {
-  @apply transition-all;
-  .keyword {
-    @apply text-info-300;
-  }
-  .constant {
-    @apply text-indigo-300;
   }
 }

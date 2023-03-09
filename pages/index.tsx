@@ -20,7 +20,9 @@ import Terminal from '../components/Terminal'
 import Markdown from '../components/Markdown'
 import TwitterSection from '../components/TwitterSection'
 import HomePageTerminal from '../components/Terminal/HomePageTerminal'
-// import SpeedAnimation from '../components/SpeedAnimation'
+import SpeedAnimation from '../components/SpeedAnimation'
+import ClickhouseSyntax from '../components/Terminal/ClickhouseSyntax'
+import PostgresSyntax from '../components/Terminal/PostgresSyntax'
 
 const pgQuery = `SELECT DISTINCT 
   town, 
@@ -104,7 +106,7 @@ export default function HomePage({
                 </span>{' '}
                 of rows in less than a second
               </SuiTitle>
-              <div className='mx-auto lg:ml-0 mt-6 flex flex-col items-center'>
+              <div className='mx-auto lg:ml-0 mt-6 flex flex-col items-center max-w-md'>
                 <SuiText size='base' color='secondary' weight='normal'>
                   ClickHouse is the fastest open-source data warehouse for low
                   latency apps and analytics
@@ -252,7 +254,7 @@ export default function HomePage({
           </CUIButton>
         </div>
       </div>
-      <div className='w-full flex flex-col bg-primary text-primary-800'>
+      <div className='w-full flex flex-col bg-datawarehouse-run text-primary-800'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat pb-8 px-8 2xl:px-0 pt-16'>
           <SuiTitle
             type='h2'
@@ -321,7 +323,7 @@ export default function HomePage({
             and use cases that require exceptional performance.
           </SuiText>
 
-          {/* <SpeedAnimation className='w-full max-w-full' /> */}
+          <SpeedAnimation className='w-full h-fit max-w-full' />
           <div className='flex text-center justify-center pt-16'>
             <div>
               <CUIButton
@@ -338,8 +340,8 @@ export default function HomePage({
         </div>
       </div>
 
-      <div className='flex w-full bg-base-color text-primary-800'>
-        <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat bg-opacity-10 py-16 text-center px-8 2xl:px-0 items-center'>
+      <div className='flex w-full bg-primary text-primary-800'>
+        <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat py-16 text-center px-8 2xl:px-0 items-center'>
           <SuiTitle type='h2' weight='bold' className='mb-4' id='simple-sql'>
             <span className='tilted tilted-black'>
               <span className='tilted-content'>Simple</span>
@@ -357,42 +359,8 @@ export default function HomePage({
             you’ll find ClickHouse familiar to use.
           </SuiText>
           <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-8'>
-            <Terminal
-              type='decimal'
-              totalCount={120}
-              showControls={false}
-              title='ClickHouse syntax'>
-              <p className='terminal-type'>
-                <span className='text-indigo-300'>SELECT</span>
-                {'\n'}
-                <span className=''> town,</span>
-                {'\n'}
-                <span className=''> max(price),</span>
-                {'\n'}
-                <span className=''> argMax(street, price)</span>
-                {'\n'}
-                <span className=''>FROM</span>
-                {'\n'}
-                <span className=''> uk_price_paid</span>
-                {'\n'}
-                <span className=''>GROUP BY town</span>
-                {'\n'}
-                <span className=''>ORDER BY max(price) DESC</span>
-                {'\n'}
-                <span className=''>LIMIT 3</span>
-                {'\n'}
-              </p>
-            </Terminal>
-
-            <Terminal
-              type='decimal'
-              totalCount={237}
-              showControls={false}
-              title='PostgreSQL syntax'>
-              <Markdown encloseByDiv={false}>
-                {`<span class="hljs language-sql">${pgQuery}</span>`}
-              </Markdown>
-            </Terminal>
+            <ClickhouseSyntax />
+            <PostgresSyntax />
           </div>
         </div>
       </div>

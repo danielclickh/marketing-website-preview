@@ -14,6 +14,7 @@ module.exports = {
         inconsolata: 'var(--font-inconsolata)',
       },
       colors: {
+        "rangitoto": '#28281D',
         "base-color": '#FBFF46',
         primary: {
           DEFAULT: '#FBFF46',
@@ -174,11 +175,9 @@ module.exports = {
         card: '0px 4px 14px rgba(0, 0, 0, 0.13)',
         'card-xl': '0px 4px 14px 4px rgba(0, 0, 0, 0.13)',
         input: '0px 1px 2px rgba(0, 0, 0, 0.05)',
-        click: {
-          card: '0px 4px 44px rgba(22, 22, 0, 0.4), inset 0px 1px 3px rgba(25, 26, 6, 0.9)',
-          pill: '0px -1px 5px rgba(16, 24, 40, 0.07)',
-          twitter: '0px 4px 48px rgba(250, 255, 72, 0.2)'
-        }
+        'click-card': '0px 4px 44px rgba(22, 22, 0, 0.4), inset 0px 1px 3px rgba(25, 26, 6, 0.9)',
+        'click-pill': '0px -1px 5px rgba(16, 24, 40, 0.07)',
+        'click-twitter': '0px 4px 48px rgba(250, 255, 72, 0.2)'
       },
       backgroundSize: {
         default_size: '0%, 100%',
@@ -189,6 +188,7 @@ module.exports = {
           'linear-gradient(0deg, #ffb200, #ffb200 2px, transparent 0, transparent)',
         grid: 'url("/bg-grid.png")',
         'home-grid': 'url("/bg-grid.png"), linear-gradient(117.08deg, rgba(0, 0, 0, 0) 14.55%, rgba(22, 22, 0, 0.167461) 34.15%, rgba(47, 47, 47, 0.22751) 40.54%, rgba(22, 22, 0, 0.611327) 46.65%, #161600 95.98%);',
+        'datawarehouse-run': 'url("/datawarehouse-run.png")'
       },
       spacing: {
         '30': '7.5rem'

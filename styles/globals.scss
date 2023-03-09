@@ -14,11 +14,12 @@
   .bg-noised {
     @apply relative;
     background: #191a0c;
-    &::before {
-      content: "";
-      background-image: url("/noise.png");
-      @apply bg-cover absolute inset-0 opacity-5;
-    }
+    background-image: url("/noised.png");
+    // &::before {
+    //   content: "";
+    //   background-image: url("/noise.png");
+    //   @apply bg-cover absolute inset-0 opacity-5;
+    // }
   }
 
   .section-container {
@@ -303,4 +304,25 @@ body {
   background-repeat: no-repeat;
   animation: typewrite-position 0.7s infinite steps(1),
     typewrite-size calc(var(--totalCount) * 0.3s) steps(var(--totalCount)) forwards;
+  &.active {
+    @apply transition-colors;
+    .keyword {
+      @apply text-info-300;
+    }
+    .constant {
+      @apply text-indigo-300;
+    }
+    .number,
+    .bracket-level-1 {
+      @apply text-warning-300;
+    }
+    .bracket-level-2 {
+      color: #cb76cf;
+    }
+  }
+}
+
+.simple-svg-bg {
+  background: #fbff46;
+  background-image: url("/grid.svg");
 }

@@ -41,7 +41,7 @@ function Terminal({
         )}
         {title}
       </div>
-      <div className='px-6 pt-4 pb-8'>
+      <div className={`${type === 'terminal' ? 'px-4' : 'px-6'} pt-4 pb-8`}>
         <span
           className={`${styles.terminalData} terminal-data`}
           data-type={type}>
