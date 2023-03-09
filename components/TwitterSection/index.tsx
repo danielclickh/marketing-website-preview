@@ -141,7 +141,7 @@ function TwitterSection() {
       <div className='flex flex-wrap gap-6 my-16 justify-center'>
         <div className='flex gap-6'>
           <CUILink
-            href='/'
+            href='https://twitter.com/ClickhouseDB'
             className='w-16 h-16 bg-noised rounded grid place-items-center'>
             <Image
               src='/socials/twitter.svg'
@@ -151,7 +151,7 @@ function TwitterSection() {
             />
           </CUILink>
           <CUILink
-            href='/'
+            href='https://join.slack.com/t/clickhousedb/shared_invite/zt-1gh9ds7f4-PgDhJAaF8ad5RbWBAAjzFg'
             className='w-16 h-16 bg-noised rounded grid place-items-center'>
             <Image
               src='/socials/slack.svg'
@@ -173,7 +173,7 @@ function TwitterSection() {
             />
           </CUILink>
           <CUILink
-            href='/'
+            href='https://www.meetup.com/pro/clickhouse'
             className='w-16 h-16 bg-noised rounded grid place-items-center'>
             <Image
               src='/socials/meetup.svg'

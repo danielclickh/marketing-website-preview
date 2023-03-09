@@ -35,9 +35,9 @@ const MenuItem = ({
           <Popover.Panel className='absolute z-10 -ml-4 mt-3 transform w-max max-w-md lg:max-w-1xl'>
             {({ close }) => (
               <div
-                className='rounded-lg shadow-lg border border-c2 ring-0 ring-opacity-5 overflow-hidden'
+                className='rounded-lg shadow-lg border border-rangitoto ring-0 ring-opacity-5 overflow-hidden'
                 onClick={() => close()}>
-                <div className='relative grid gap-6 bg-c1 px-5 py-6 sm:gap-0 sm:p-0'>
+                <div className='relative grid gap-6 bg-noised px-5 py-6 sm:gap-0 sm:p-0'>
                   {children}
                 </div>
               </div>

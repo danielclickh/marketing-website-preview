@@ -3,6 +3,22 @@
   a {
     @apply hover:underline;
   }
+
+  @font-face {
+    font-family: Basier Square;
+    font-weight: 600;
+    src: url(/fonts/BasierSquare/basiersquare-semibold-webfont.woff) format("woff");
+  }
+  @font-face {
+    font-family: Basier Square;
+    font-weight: 700;
+    src: url(/fonts/BasierSquare/basiersquare-bold-webfont.woff) format("woff");
+  }
+  @font-face {
+    font-family: Basier Square;
+    font-weight: 500;
+    src: url(/fonts/BasierSquare/basiersquare-medium-webfont.woff) format("woff");
+  }
 }
 
 @tailwind components;

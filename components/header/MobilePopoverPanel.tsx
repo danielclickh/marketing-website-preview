@@ -22,7 +22,7 @@ const MobilePopoverPanel = React.forwardRef<
       className='absolute top-0 z-10 inset-x-0 p-2 transition transform origin-top-right min-[930px]:hidden'>
       {({ close }) => (
         <div
-          className='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-c1 divide-y-2 divide-c2'
+          className='rounded-lg shadow-lg ring-1 ring-rangitoto ring-opacity-5 bg-noised divide-y-2 divide-c2'
           onClick={onClick(close)}>
           {children}
         </div>

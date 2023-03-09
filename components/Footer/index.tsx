@@ -15,16 +15,14 @@ const hind = Hind_Siliguri({
 export default function Footer({
   topLevelFooterMenu = [],
   logoSvg,
-  licensingText,
   newsletterForm,
-  socialLinks,
   bottomLinks = [],
   copyright
 }: FooterData) {
   return (
     <div className='flex flex-col bg-noised pb-8 pt-16'>
-      <div className='flex py-8 px-4 md:px-0 border-b-primary-500'>
-        <div className='container mx-auto md:flex justify-between max-w-7xl px-16 2xl:px-0'>
+      <div className='flex py-8 px-4 md:px-0 '>
+        <div className='container mx-auto md:flex justify-between max-w-7xl px-16 2xl:px-0 border-b border-primary-500'>
           <div className='flex flex-col w-full'>
             <div className='sitemap lg:flex pt-4'>
               {topLevelFooterMenu.map((topMenu) => (
@@ -81,7 +79,7 @@ export default function Footer({
             <SuiText color='white' size='xs' weight='medium'>
               {copyright}
             </SuiText>
-            <div className='bottom_links flex divide-x divide-c1-light'>
+            <div className='bottom_links flex'>
               {bottomLinks.map((bottomLink, index) => (
                 <SuiLink
                   key={bottomLink.text}
