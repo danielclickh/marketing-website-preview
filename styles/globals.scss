@@ -203,7 +203,7 @@ body {
 
   &:not(.ignore-anchor) {
     a {
-      @apply text-c6-link;
+      @apply text-primary;
     }
     &.anchor-c6 a {
       @apply text-c6;
@@ -258,7 +258,7 @@ body {
 }
 
 .tilted {
-  @apply relative;
+  @apply relative whitespace-nowrap;
   &:before {
     content: "";
     @apply absolute inset-0 -skew-y-3;

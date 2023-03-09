@@ -46,7 +46,7 @@ function CustomerStoriesPage({
   useCaseItems,
   seo,
   headerData,
-  getStartedData,
+  platforms,
   footerData
 }: CustomerStoriesData) {
   return (
@@ -187,7 +187,7 @@ function CustomerStoriesPage({
           </div>
         </div>
       </div>
-      <GetStarted {...getStartedData} />
+      <GetStarted platforms={platforms} />
     </Layout>
   )
 }

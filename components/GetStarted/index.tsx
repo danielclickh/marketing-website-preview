@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import Markdown from '../Markdown'
 import { SuiCodeblock, SuiLink, SuiText, SuiTitle } from '../sui'
 import { GettingStartedData } from './types'
+import { CUILink } from '../ClickUI'
 interface Props extends GettingStartedData {
   customHeader?: ReactNode
 }
@@ -10,8 +11,8 @@ interface Props extends GettingStartedData {
 export default function FetchGetStarted({ platforms }: Props) {
   return (
     <div className='flex bg-grid text-neutral-0' id='getting_started'>
-      <div className='container mx-auto justify-center py-12 px-8 2xl:px-0  flex flex-col w-full max-w-7xl'>
-        <div className='flex flex-col text-center md:w-5/12 mx-auto '>
+      <div className='container mx-auto justify-center py-32 px-8 2xl:px-0  flex flex-col w-full max-w-7xl'>
+        <div className='flex flex-col text-center mx-auto '>
           <GitHubButton
             href='https://github.com/Clickhouse/Clickhouse'
             data-color-scheme='dark'
@@ -19,48 +20,41 @@ export default function FetchGetStarted({ platforms }: Props) {
             data-show-count='true'
             aria-label='Star Clickhouse/Clickhouse on GitHub'
           />
-          <SuiTitle type='h2' className='text-4xl' color='white'>
+          <SuiTitle type='h2' color='white'>
             Start using ClickHouse in minutes
           </SuiTitle>
-          <SuiText size='base' weight='medium' color='c4-dark'>
+          <div className='text-neutral-200 text-center mb-8 mt-6'>
             Install ClickHouse for MacOs, Linux and FreeBSD
-          </SuiText>
+          </div>
         </div>
-        <div className='bg-c2-dark w-11/12 md:w-full self-center border border-c5-light rounded-lg p-2 px-6 overflow-hidden mb-1'>
+        <div className='bg-noised w-11/12 md:w-full self-center border border-rangitoto rounded-lg p-2 px-6 overflow-hidden mb-1'>
           <SuiCodeblock bgColor='bg-transparent'>
-            <Markdown ignoreAnchor>{platforms[0].instructions}</Markdown>
+            <Markdown>{platforms[0].instructions}</Markdown>
           </SuiCodeblock>
         </div>
-        <SuiText
-          size='sm'
-          weight='medium'
-          color='white'
-          className='px-6 md:px-0 mt-6'>
+        <div className='text-sm font-medium text-neutral-400 px-6 md:px-0 mt-6'>
           Or install for{' '}
-          <SuiLink
+          <CUILink
             href='/clickhouse'
             target='_self'
-            color='primary'
-            weight='bold'>
+            className='underline hover:text-neutral-0'>
             Windows
-          </SuiLink>
+          </CUILink>
           ,{' '}
-          <SuiLink
+          <CUILink
             href='/clickhouse'
             target='_self'
-            color='primary'
-            weight='bold'>
+            className='underline hover:text-neutral-0'>
             Docker
-          </SuiLink>{' '}
+          </CUILink>{' '}
           or see other{' '}
-          <SuiLink
+          <CUILink
             href='/clickhouse'
             target='_self'
-            color='primary'
-            weight='bold'>
+            className='underline hover:text-neutral-0'>
             install options.
-          </SuiLink>
-        </SuiText>
+          </CUILink>
+        </div>
       </div>
     </div>
   )

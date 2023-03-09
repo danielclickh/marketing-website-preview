@@ -117,7 +117,7 @@ function EventPage({
   recordedVimeoUrl,
   headerData,
   footerData,
-  getStartedData,
+  platforms,
   recentEvents,
   seo
 }: EventProps) {
@@ -215,7 +215,7 @@ function EventPage({
           <RecentEvents events={recentEvents} />
         </div>
       </div>
-      <GetStarted {...getStartedData} />
+      <GetStarted platforms={platforms} />
     </Layout>
   )
 }

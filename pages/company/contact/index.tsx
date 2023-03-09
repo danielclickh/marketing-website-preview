@@ -42,7 +42,7 @@ export default function ContactPage({
   contactForm,
   headerData,
   footerData,
-  getStartedData,
+  platforms,
   growingCommunityData,
   seo
 }: ContactProps) {
@@ -75,7 +75,7 @@ export default function ContactPage({
         </div>
       </div>
       <GrowingCommunity {...growingCommunityData} />
-      <GetStarted {...getStartedData} />
+      <GetStarted platforms={platforms} />
     </Layout>
   )
 }

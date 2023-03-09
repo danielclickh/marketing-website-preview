@@ -58,7 +58,7 @@ export default function OurStoryPage({
   team,
   headerData,
   footerData,
-  getStartedData,
+  platforms,
   seo
 }: OurStoryData) {
   const { title, description, imagePng, offices } = hero
@@ -250,7 +250,7 @@ export default function OurStoryPage({
             </div>
           </div>
         </div>
-        <GetStarted {...getStartedData} />
+        <GetStarted platforms={platforms} />
       </Layout>
     </>
   )

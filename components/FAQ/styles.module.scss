@@ -35,8 +35,11 @@
 .accordion {
   @apply pr-4 pl-20 relative;
   &::before {
-    @apply absolute text-left text-slate-500 inset-0 border-r border-neutral-700 w-16;
-    content: counter(line-numbering);
+    @apply absolute text-left text-slate-500 border-r border-neutral-700 w-8;
+    top: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    content: "0" counter(line-numbering);
     counter-increment: line-numbering;
   }
 }

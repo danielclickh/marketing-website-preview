@@ -38,7 +38,7 @@ export default function CareersPage({
   seo,
   headerData,
   footerData,
-  getStartedData
+  platforms
 }: CareersData) {
   const { title, description, paragraphTitle, paragraphText, companyImages } =
     hero
@@ -128,7 +128,7 @@ export default function CareersPage({
 
         <CareersFilter />
       </div>
-      <GetStarted {...getStartedData} />
+      <GetStarted platforms={platforms} />
     </Layout>
   )
 }

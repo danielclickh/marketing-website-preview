@@ -13,13 +13,7 @@ import { ServiceProps } from '../../types/serviceUnavailablePage'
 export const getStaticProps: GetStaticProps<ServiceProps> =
   async function getStaticProps() {
     const params = {
-      populate: [
-        'card',
-        'card.iconSvg',
-        'card.ctaButton',
-        'card.contactForm',
-        'install_oss'
-      ]
+      populate: ['card', 'card.iconSvg', 'card.ctaButton', 'card.contactForm']
     }
     const response = await findOne('service-unavailable-country', params)
 
@@ -44,9 +38,8 @@ function ServiceUnavailableCountryPage({
   iconSvg,
   contactForm,
   ctaButton,
-  install_oss,
   headerData,
-  getStartedData,
+  platforms,
   footerData,
   seo
 }: ServiceProps) {
@@ -88,7 +81,7 @@ function ServiceUnavailableCountryPage({
           </div>
         </SuiPanel>
       </div>
-      <GetStarted {...getStartedData} customHeader={install_oss.title} />
+      <GetStarted platforms={platforms} />
     </Layout>
   )
 }

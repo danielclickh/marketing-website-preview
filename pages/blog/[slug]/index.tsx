@@ -83,7 +83,7 @@ export default function BlogPage({
   headerData,
   footerData,
   newsLetterData,
-  getStartedData,
+  platforms,
   seo
 }: BlogProps) {
   return (
@@ -176,7 +176,7 @@ export default function BlogPage({
           </div>
         </div>
       </div>
-      <GetStarted {...getStartedData} />
+      <GetStarted platforms={platforms} />
     </Layout>
   )
 }

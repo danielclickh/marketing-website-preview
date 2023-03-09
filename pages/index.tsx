@@ -16,8 +16,6 @@ import dashboard1 from '../public/images/homepage/dashboard-1.png'
 import dashboard2 from '../public/images/homepage/dashboard-2.png'
 import dashboard3 from '../public/images/homepage/dashboard-3.png'
 import { ChevronRightIcon } from '@heroicons/react/solid'
-import Terminal from '../components/Terminal'
-import Markdown from '../components/Markdown'
 import TwitterSection from '../components/TwitterSection'
 import HomePageTerminal from '../components/Terminal/HomePageTerminal'
 import SpeedAnimation from '../components/SpeedAnimation'
@@ -79,7 +77,7 @@ export default function HomePage({
   seo,
   headerData,
   footerData,
-  getStartedData
+  platforms
 }: HomePageProps) {
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
@@ -341,7 +339,7 @@ export default function HomePage({
       </div>
 
       <div className='flex w-full bg-primary text-primary-800'>
-        <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat py-16 text-center px-8 2xl:px-0 items-center'>
+        <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat pt-16 pb-32 text-center px-8 2xl:px-0 items-center'>
           <SuiTitle type='h2' weight='bold' className='mb-4' id='simple-sql'>
             <span className='tilted tilted-black'>
               <span className='tilted-content'>Simple</span>
@@ -364,7 +362,7 @@ export default function HomePage({
           </div>
         </div>
       </div>
-      <GetStarted {...getStartedData} />
+      <GetStarted platforms={platforms} />
       <TwitterSection />
       <FAQ />
     </Layout>

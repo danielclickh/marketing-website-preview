@@ -61,7 +61,7 @@ export default function ClickHouseServerPage({
   features5,
   seo,
   headerData,
-  getStartedData,
+  platforms,
   footerData
 }: ClickhouseData) {
   const {
@@ -306,7 +306,7 @@ export default function ClickHouseServerPage({
             </div>
           </div>
         </div>
-        <GetStarted {...getStartedData} />
+        <GetStarted platforms={platforms} />
       </Layout>
     </>
   )

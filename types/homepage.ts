@@ -1,7 +1,10 @@
 import { ParsedUrlQuery } from 'querystring'
 import { ReactNode } from 'react'
 import { FooterData } from '../components/Footer/types'
-import { GettingStartedData } from '../components/GetStarted/types'
+import {
+  GettingStartedData,
+  GettingStartedPlatform
+} from '../components/GetStarted/types'
 import { HeaderData } from '../components/header/types'
 
 export type Props = {
@@ -109,7 +112,7 @@ export interface CommonProps {
   headerData: HeaderData
   footerData: FooterData
   seo?: SeoMetadata
-  getStartedData: GettingStartedData
+  platforms: Array<GettingStartedPlatform>
 }
 
 export interface HomePageProps extends CommonProps {

@@ -18,6 +18,6 @@ export async function getCommonProps(): Promise<Props> {
   return {
     headerData,
     footerData,
-    getStartedData
+    platforms: getStartedData.platforms
   }
 }
