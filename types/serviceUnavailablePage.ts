@@ -7,7 +7,4 @@ export interface ServiceProps extends CommonProps {
   iconSvg: StrapiImageType
   contactForm: any
   ctaButton: StrapiButton
-  install_oss: {
-    title: string
-  }
 }

@@ -21,7 +21,6 @@ export const getStaticProps: GetStaticProps<ServiceProps> =
     return {
       props: {
         ...response.card,
-        install_oss: response.install_oss,
         ...commonProps,
         seo: {
           title: response.card.title,
