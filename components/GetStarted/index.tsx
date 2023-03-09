@@ -1,14 +1,10 @@
 import GitHubButton from 'react-github-btn'
-import { ReactNode } from 'react'
 import Markdown from '../Markdown'
-import { SuiCodeblock, SuiLink, SuiText, SuiTitle } from '../sui'
+import { SuiCodeblock, SuiTitle } from '../sui'
 import { GettingStartedData } from './types'
 import { CUILink } from '../ClickUI'
-interface Props extends GettingStartedData {
-  customHeader?: ReactNode
-}
 
-export default function FetchGetStarted({ platforms }: Props) {
+export default function FetchGetStarted({ platforms }: GettingStartedData) {
   return (
     <div className='flex bg-grid text-neutral-0' id='getting_started'>
       <div className='container mx-auto justify-center py-32 px-8 2xl:px-0  flex flex-col w-full max-w-7xl'>
