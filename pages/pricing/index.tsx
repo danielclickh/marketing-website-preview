@@ -111,7 +111,7 @@ function PricingPage({
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
       <div className='pricing bg-c2 text-c5 h-full md:pb-20'>
-        <div className='max-w-7xl sm:px-8 2xl:px-0 mx-auto px-3 py-20'>
+        <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 mx-auto px-3 py-20'>
           {hero && (
             <div className='hero'>
               <div className='flex flex-col items-center'>
