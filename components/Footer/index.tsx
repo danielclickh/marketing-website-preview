@@ -1,6 +1,4 @@
 import { SuiLink, SuiText, SuiTitle } from '../sui'
-import Link from 'next/link'
-import { StrapiImage } from '../StrapiElements'
 import { Hind_Siliguri } from 'next/font/google'
 import NewsLetterForm from '../NewsLetter/NewsLetterForm'
 import { FooterData } from './types'
@@ -21,8 +19,8 @@ export default function Footer({
 }: FooterData) {
   return (
     <div className='flex flex-col bg-noised pb-8 pt-16'>
-      <div className='flex py-8 px-4 md:px-0 '>
-        <div className='container mx-auto md:flex justify-between max-w-7xl px-16 2xl:px-0 border-b border-primary-500'>
+      <div className='flex pt-8 px-4 md:px-0 '>
+        <div className='section-container mx-auto md:flex justify-between pb-16 px-16 2xl:px-0 border-b border-primary-500'>
           <div className='flex flex-col w-full'>
             <div className='sitemap lg:flex pt-4'>
               {topLevelFooterMenu.map((topMenu) => (
@@ -73,7 +71,7 @@ export default function Footer({
           </div>
         </div>
       </div>
-      <div className='flex flex-col pt-2 lg:pt-12 items-start'>
+      <div className='flex flex-col pt-2 lg:pt-10 items-start'>
         <div className='pr-4 lg:pl-4 self-end w-full'>
           <div className='copyright_and_bottom_links flex flex-col  gap-3 sm:gap-1 items-center mt-6 sm:mt-3'>
             <SuiText color='white' size='xs' weight='medium'>

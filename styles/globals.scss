@@ -39,7 +39,7 @@
   }
 
   .section-container {
-    @apply mx-auto max-w-3xl;
+    @apply mx-auto max-w-7xl px-4 sm:px-8 2xl:px-0;
   }
 }
 
@@ -266,6 +266,11 @@ body {
   .tilted-content {
     @apply relative p-2;
   }
+  &.non-tilted-md::before {
+    @screen md {
+      @apply skew-y-0;
+    }
+  }
 }
 .tilted-yellow {
   @apply text-primary-800;
@@ -338,7 +343,7 @@ body {
   }
 }
 
-.simple-svg-bg {
+.bg-datawarehouse-run {
   background: #fbff46;
-  background-image: url("/grid.svg");
+  background-image: url("/datawarehouse-run.png");
 }

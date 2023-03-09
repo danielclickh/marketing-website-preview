@@ -189,7 +189,6 @@ module.exports = {
           'linear-gradient(0deg, #ffb200, #ffb200 2px, transparent 0, transparent)',
         grid: 'url("/bg-grid.png")',
         'home-grid': 'linear-gradient(117.08deg, rgba(0, 0, 0, 0) 14.55%, rgba(22, 22, 0, 0.167461) 34.15%, rgba(47, 47, 47, 0.22751) 40.54%, rgba(22, 22, 0, 0.611327) 46.65%, #161600 95.98%), url("/bg-grid.png");',
-        'datawarehouse-run': 'url("/datawarehouse-run.png")'
       },
       spacing: {
         '30': '7.5rem'

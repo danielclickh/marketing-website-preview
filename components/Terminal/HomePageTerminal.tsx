@@ -7,7 +7,7 @@ function HomePageTerminal() {
     <Terminal
       type='terminal'
       totalCount={190}
-      className='section-container flex flex-col -mt-[100px]'>
+      className='flex flex-col -mt-[100px]'>
       <p
         className={`line terminal-type ${animationCompleted ? 'active' : ''}`}
         onAnimationStart={() => {
