@@ -15,8 +15,8 @@ module.exports = {
         basier: 'Basier Square'
       },
       colors: {
-        "rangitoto": '#28281D',
-        "base-color": '#FBFF46',
+        rangitoto: '#28281D',
+        'base-color': '#FBFF46',
         primary: {
           DEFAULT: '#FBFF46',
           50: '#FFFFE8',
@@ -27,7 +27,8 @@ module.exports = {
           500: '#9FA300',
           600: '#4F5100',
           700: '#282900',
-          800: '#161600',
+          800: '#1F2014',
+          900: '#161600'
         },
         neutral: {
           DEFAULT: '#212121',
@@ -66,7 +67,7 @@ module.exports = {
           600: '#5e5874',
           700: '#474257',
           800: '#23212c',
-          900: '#18161d',
+          900: '#18161d'
         },
         info: {
           DEFAULT: '#2F2C3A',
@@ -120,6 +121,7 @@ module.exports = {
           800: '#610000',
           900: '#300000'
         },
+
         c1: {
           light: '#FFFFFF',
           DEFAULT: 'rgba(var(--clickhouse-color-1), <alpha-value>)',
@@ -170,13 +172,14 @@ module.exports = {
             text: '#805300',
             background: '#FFF8E6'
           }
-        },
+        }
       },
       boxShadow: {
         card: '0px 4px 14px rgba(0, 0, 0, 0.13)',
         'card-xl': '0px 4px 14px 4px rgba(0, 0, 0, 0.13)',
         input: '0px 1px 2px rgba(0, 0, 0, 0.05)',
-        'click-card': '0px 4px 44px rgba(22, 22, 0, 0.4), inset 0px 1px 3px rgba(25, 26, 6, 0.9)',
+        'click-card':
+          '0px 4px 44px rgba(22, 22, 0, 0.4), inset 0px 1px 3px rgba(25, 26, 6, 0.9)',
         'click-pill': '0px -1px 5px rgba(16, 24, 40, 0.07)',
         'click-twitter': '0px 4px 48px rgba(250, 255, 72, 0.2)'
       },
@@ -186,9 +189,10 @@ module.exports = {
       },
       backgroundImage: {
         field_focus:
-          'linear-gradient(0deg, #ffb200, #ffb200 2px, transparent 0, transparent)',
+          'linear-gradient(0deg, #fbff46, #fbff46 2px, transparent 0, transparent)',
         grid: 'url("/bg-grid.png")',
-        'home-grid': 'linear-gradient(117.08deg, rgba(0, 0, 0, 0) 14.55%, rgba(22, 22, 0, 0.167461) 34.15%, rgba(47, 47, 47, 0.22751) 40.54%, rgba(22, 22, 0, 0.611327) 46.65%, #161600 95.98%), url("/bg-grid.png");',
+        'home-grid':
+          'linear-gradient(117.08deg, rgba(0, 0, 0, 0) 14.55%, rgba(22, 22, 0, 0.167461) 34.15%, rgba(47, 47, 47, 0.22751) 40.54%, rgba(22, 22, 0, 0.611327) 46.65%, #161600 95.98%), url("/bg-grid.png");'
       },
       spacing: {
         '30': '7.5rem'

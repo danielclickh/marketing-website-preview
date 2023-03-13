@@ -106,7 +106,7 @@ function CareersFilter() {
   if (error) {
     return (
       <div className='flex flex-col md:flex-row container mx-auto max-w-7xl justify-between'>
-        <SuiText size='base' weight='medium' className='pl-4'>
+        <SuiText size='base' weight='normal' className='pl-4'>
           Issue fetching jobs
         </SuiText>
       </div>
@@ -116,7 +116,7 @@ function CareersFilter() {
   if (!data) {
     return (
       <div className='flex flex-col md:flex-row container mx-auto max-w-7xl justify-between'>
-        <SuiText size='base' weight='medium' className='pl-4'>
+        <SuiText size='base' weight='normal' className='pl-4'>
           Loading
         </SuiText>
       </div>
@@ -172,19 +172,23 @@ function CareersFilter() {
                 {name}
               </SuiTitle>
               {jobs.length === 0 && (
-                <SuiText size='base' weight='medium' className='pl-4'>
+                <SuiText
+                  size='base'
+                  weight='normal'
+                  className='pl-4'
+                  color='secondary'>
                   No results
                 </SuiText>
               )}
               {jobs.map((job: JobType, index: number) => (
                 <SuiLink
                   href={job.url}
-                  className={`job-${index} rounded-md px-4 pt-4 flex flex-col w-full cursor-pointer hover:bg-c2 hover:no-underline transition-all duration-300 ease-in-out transform`}
+                  className={`job-${index} rounded-md px-4 pt-4 flex flex-col w-full cursor-pointer hover:bg-primary-800 hover:no-underline transition-all duration-300 ease-in-out transform`}
                   key={job.url}>
-                  <SuiText size='base' weight='medium' className='mb-2'>
+                  <SuiText size='base' weight='normal' className='mb-2'>
                     {job.title}
                   </SuiText>
-                  <SuiText size='base' weight='medium' color='secondary'>
+                  <SuiText size='base' weight='normal' color='secondary'>
                     {job.location}
                   </SuiText>
                   <SuiHorizontalDivide />

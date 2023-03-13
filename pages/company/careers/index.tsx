@@ -44,7 +44,7 @@ export default function CareersPage({
     hero
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
-      <div className='bg-c1 bg-cover pt-10'>
+      <div className='bg-home-grid bg-primary-900 bg-cover pt-10'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
           <div className='flex flex-col text-center mx-auto'>
             <SuiTitle type='h1' className='mb-4 md:!text-6xl'>
@@ -52,7 +52,7 @@ export default function CareersPage({
             </SuiTitle>
             <SuiText
               size='lg'
-              weight='medium'
+              weight='normal'
               color='secondary'
               className='max-w-3xl'>
               {description}
@@ -79,7 +79,7 @@ export default function CareersPage({
               </SuiTitle>
               <SuiText
                 size='base'
-                weight='medium'
+                weight='normal'
                 className='whitespace-pre-wrap'>
                 {paragraphText}
               </SuiText>
@@ -88,7 +88,7 @@ export default function CareersPage({
         </div>
       </div>
 
-      <div className='w-full bg-c2 text-neutral-0 px-6 pt-12'>
+      <div className='w-full bg-noised text-neutral-0 px-6 pt-12'>
         {companyValues.map((companyValue, index: number) => (
           <div
             className={`flex flex-col md:${
@@ -101,7 +101,7 @@ export default function CareersPage({
               </SuiTitle>
               <SuiText
                 size='base'
-                weight='medium'
+                weight='normal'
                 color='secondary'
                 className='whitespace-pre-wrap'>
                 {companyValue.description}
@@ -119,7 +119,7 @@ export default function CareersPage({
         ))}
       </div>
 
-      <div className='w-full bg-c1 pt-16 pb-16 px-6'>
+      <div className='w-full bg-primary-900 pt-16 pb-16 px-6'>
         <div className='flex flex-col md:flex-row container mx-auto max-w-7xl md:space-x-16 mb-12 items-center'>
           <div className='flex flex-col md:w-3/5'>
             <SuiTitle type='h2'>{positionsTitle}</SuiTitle>

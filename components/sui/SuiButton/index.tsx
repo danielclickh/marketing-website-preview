@@ -39,7 +39,7 @@ const colorCalculator = ({
       if (disabled) {
         return disabledStyle
       }
-      return 'bg-base-color text-primary-800 hover:bg-primary-300'
+      return 'bg-base-color text-primary-900 hover:bg-primary-300'
     case 'secondary':
       if (disabled) {
         return 'bg-transparent text-inherit border border-c4'

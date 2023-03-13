@@ -88,7 +88,7 @@ export default function HomePage({
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
       <div className='homepage bg-primary bg-bottom bg-opacity-100 overflow-hidden'>
-        <div className='bg-home-grid bg-primary-800 flex flex-col pb-20 lg:pb-44 pt-16 md:pt-28 px-8 2xl:px-0 relative gap-24 justify-center '>
+        <div className='bg-home-grid bg-primary-900 flex flex-col pb-20 lg:pb-44 pt-16 md:pt-28 px-8 2xl:px-0 relative gap-24 justify-center '>
           <div className='flex flex-col w-full mx-auto max-w-3xl'>
             <div className='mx-auto md:mr-0 md:mt-8 flex-col items-center justify-center'>
               <SuiTitle
@@ -359,15 +359,15 @@ export default function HomePage({
           </CUIButton>
         </div>
       </div>
-      <div className='w-full flex flex-col bg-datawarehouse-run text-primary-800'>
+      <div className='w-full flex flex-col bg-datawarehouse-run text-primary-900'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat pb-8 px-8 2xl:px-0 pt-16'>
           <SuiTitle
             type='h2'
-            className='mb-7 max-w-3xl mx-auto !text-primary-800 text-center'
+            className='mb-7 max-w-3xl mx-auto !text-primary-900 text-center'
             color='c6'>
             Deploy your way
           </SuiTitle>
-          <div className='text-primary-800 max-w-screen-sm leading-normal text-center mx-auto'>
+          <div className='text-primary-900 max-w-screen-sm leading-normal text-center mx-auto'>
             Unlike traditional closed-source data warehouses, ClickHouse runs on
             every environment, whether it’s on your machine or on the cloud
           </div>
