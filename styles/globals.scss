@@ -323,8 +323,8 @@ body {
   -webkit-background-clip: padding-box, text;
   background-clip: padding-box, text;
   background-repeat: no-repeat;
-  animation: typewrite-position 0.7s infinite steps(1),
-    typewrite-size calc(var(--totalCount) * 0.3s) steps(var(--totalCount)) forwards;
+  animation: typewrite-position 0.4s infinite steps(1),
+    typewrite-size calc(var(--totalCount) * 0.1s) steps(var(--totalCount)) forwards;
   &.active {
     @apply transition-colors;
     .keyword {
