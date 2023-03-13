@@ -4,7 +4,7 @@ import { HTMLAttributes } from 'react'
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   size?: 'lg' | 'base' | 'sm'
-  type: 'primary' | 'secondary' | 'danger' | 'custom'
+  type: 'primary' | 'secondary' | 'danger' | 'custom' | 'dark'
   iconRight?: boolean
   iconType?: string
   path?: any
@@ -61,7 +61,7 @@ const colorCalculator = ({
     case 'custom':
       return 'custom-btn'
     case 'dark':
-      return 'bg-c3 text-neutral-0'
+      return 'bg-primary-900 text-neutral-0'
     case 'ghost':
       return 'bg-transparent text-inherit border border-c4'
     case 'success':

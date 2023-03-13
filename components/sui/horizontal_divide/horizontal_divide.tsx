@@ -1,10 +1,11 @@
 export type HorizontalDivideProps = {
   size?: string
+  color?: 'default' | 'lighter'
 }
 
 // @ts-ignore
 export const SuiHorizontalDivide = ({ ...HorizontalDivideProps }) => {
-  const { size } = HorizontalDivideProps
+  const { size, color } = HorizontalDivideProps
 
   const sizeCalculator = (size: string) => {
     switch (size) {
@@ -23,11 +24,22 @@ export const SuiHorizontalDivide = ({ ...HorizontalDivideProps }) => {
     }
   }
 
+  const colorCalculator = (color: string) => {
+    switch (color) {
+      case 'darker':
+        return 'border-primary-900'
+      case 'default':
+        return 'border-primary-800'
+      default:
+        return 'border-primary-800'
+    }
+  }
+
   return (
     <hr
-      className={`flex w-full ${sizeCalculator(
-        size
-      )}  border-primary-900 border-t-0 border-b`}
+      className={`flex w-full ${sizeCalculator(size)} ${colorCalculator(
+        color
+      )} border-t-0 border-b`}
     />
   )
 }

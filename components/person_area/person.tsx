@@ -28,11 +28,11 @@ export function Person(props: PersonProps) {
           />
         </div>
       )}
-      <SuiText size='lg' weight='bold' className='mb-3 !text-xl'>
+      <SuiText size='sm' weight='bold' className='mb-3 !text-xl'>
         {name}
       </SuiText>
       {job && (
-        <SuiText size='base' weight='medium' color='secondary'>
+        <SuiText size='base' weight='normal' color='text-muted'>
           {job}
         </SuiText>
       )}

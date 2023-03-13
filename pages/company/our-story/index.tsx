@@ -65,7 +65,7 @@ export default function OurStoryPage({
   return (
     <>
       <Layout headerData={headerData} footerData={footerData} seo={seo}>
-        <div className='bg-hero bg-cover pt-16'>
+        <div className='bg-primary-900 bg-cover pt-16'>
           <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
             <div className='flex flex-col text-center mx-auto'>
               <SuiTitle type='h1' className='mb-5'>
@@ -105,7 +105,7 @@ export default function OurStoryPage({
             </div>
           </div>
         </div>
-        <div className='bg-c2 text-neutral-0 w-full pt-16 pb-12 px-6'>
+        <div className='bg-noised text-neutral-0 w-full pt-16 pb-12 px-6'>
           <SuiTitle type='h2' weight='bold' className='mb-4 max-w-7xl mx-auto'>
             {aboutUs.title}
           </SuiTitle>
@@ -131,7 +131,8 @@ export default function OurStoryPage({
                 <div className='max-w-5xl'>
                   <SuiText
                     size='base'
-                    weight='medium'
+                    weight='normal'
+                    color='secondary'
                     className='whitespace-pre-wrap'>
                     {item.description}
                   </SuiText>
@@ -144,7 +145,7 @@ export default function OurStoryPage({
           ))}
         </div>
 
-        <div className='w-full pt-16 pb-24 bg-c1 px-6'>
+        <div className='w-full pt-16 pb-24 px-6 bg-primary-900'>
           <div className='flex container mx-auto flex-col max-w-7xl'>
             <SuiTitle type='h2' className='mb-11 mx-auto md:ml-0'>
               {ourHistory.title}
@@ -156,14 +157,17 @@ export default function OurStoryPage({
                   className='flex flex-col md:flex-row items-center gap-y-10'
                   key={item.text}>
                   <div className='flex md:w-2/12 lg:w-1/12'>
-                    <div className='h-20 w-20 bg-c2 text-neutral-0 rounded-full text-center items-center justify-center flex'>
-                      <SuiTitle type='h5' className='!text-base' weight='bold'>
+                    <div className='h-20 w-20 bg-noised text-neutral-0 rounded-full text-center items-center justify-center flex'>
+                      <SuiTitle
+                        type='h5'
+                        className='!text-base'
+                        weight='medium'>
                         {item.year}
                       </SuiTitle>
                     </div>
                   </div>
                   <div className='flex md:w-8/12 text-center md:text-left'>
-                    <SuiText size='base' weight='medium'>
+                    <SuiText size='base' weight='normal'>
                       {item.text}
                     </SuiText>
                   </div>
@@ -173,20 +177,20 @@ export default function OurStoryPage({
           </div>
         </div>
 
-        <div className='bg-c2 text-neutral-0 w-full px-4 md:px-8'>
+        <div className='bg-primary bg-datawarehouse-run text-neutral-0 w-full px-4 md:px-8'>
           <div className='flex container mx-auto flex-col 2xl:px-0'>
             <div className='flex flex-col text-center mx-auto pt-16'>
-              <SuiTitle type='h2' className='mb-6'>
+              <SuiTitle type='h2' color='text-default' className='mb-6 '>
                 {hiring.title}
               </SuiTitle>
               <div className='max-w-3xl'>
-                <SuiText size='base' color='secondary' weight='medium'>
+                <SuiText size='base' color='text-default' weight='normal'>
                   {hiring.description}
                 </SuiText>
                 {hiring.ctaButton && (
                   <div className='flex justify-center pt-6 pb-14'>
                     <SuiButton
-                      type='primary'
+                      type='dark'
                       path={hiring.ctaButton.href}
                       target={hiring.ctaButton.target}>
                       {hiring.ctaButton.text}
@@ -197,7 +201,7 @@ export default function OurStoryPage({
             </div>
           </div>
         </div>
-        <div className='bg-c1 w-full pt-16 pb-24 px-4 md:px-8'>
+        <div className='bg-primary-900 w-full pt-16 pb-24 px-4 md:px-8'>
           <div className='flex container mx-auto flex-col max-w-7xl'>
             <SuiTitle
               type='h3'
@@ -241,7 +245,7 @@ export default function OurStoryPage({
               {team.lightInvestorLogosPng.map((light, index) => (
                 <StrapiPicture
                   key={`investors-${index}`}
-                  light={light}
+                  light={team.darkInvestorLogosPng[index]}
                   dark={team.darkInvestorLogosPng[index]}
                   sizes='small'
                   className='h-10 w-auto mx-auto object-contain max-w-[min(250px,100%)]'
