@@ -18,6 +18,15 @@
     }
   }
 
+  &[data-type="secondary-dark"] {
+    @apply bg-transparent text-neutral-0 border-primary;
+
+    &:hover,
+    &:active {
+      @apply bg-slate-800;
+    }
+  }
+
   &:disabled {
     @apply bg-neutral-700 text-neutral-500 border-neutral-700 cursor-default;
 

@@ -5,10 +5,11 @@ import { LinkProps } from '../Link/types'
 export interface BasicCardProps extends HTMLAttributes<HTMLDivElement> {
   pretitle?: string
   title: string
-  icon?: ReactNode
+  icon?: string
   btnChildren?: ReactNode
   href?: string
   target?: string
+  btnType?: 'primary' | 'secondary' | 'secondary-dark'
 }
 
 interface StaticRequire {

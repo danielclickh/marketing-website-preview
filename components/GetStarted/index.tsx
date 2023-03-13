@@ -1,4 +1,3 @@
-import GitHubButton from 'react-github-btn'
 import Markdown from '../Markdown'
 import { SuiCodeblock, SuiTitle } from '../sui'
 import { GettingStartedData } from './types'
@@ -9,13 +8,6 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
     <div className='flex bg-grid text-neutral-0' id='getting_started'>
       <div className='container mx-auto justify-center py-32 px-8 2xl:px-0  flex flex-col w-full max-w-7xl'>
         <div className='flex flex-col text-center mx-auto '>
-          <GitHubButton
-            href='https://github.com/Clickhouse/Clickhouse'
-            data-color-scheme='dark'
-            data-size='large'
-            data-show-count='true'
-            aria-label='Star Clickhouse/Clickhouse on GitHub'
-          />
           <SuiTitle type='h2' color='white'>
             Start using ClickHouse in minutes
           </SuiTitle>

@@ -1,9 +1,7 @@
-import GitHubButton from 'react-github-btn'
 import Image from 'next/image'
 
 import { SuiTitle } from '../components/sui'
 import { findOne } from '../lib/api/strapi'
-import { StrapiPicture } from '../components/StrapiElements'
 import GetStarted from '../components/GetStarted'
 import { HomePageProps } from '../types/homepage'
 import { GetStaticProps } from 'next'
@@ -11,16 +9,46 @@ import Layout from '../components/Layout'
 import { getCommonProps } from '../lib/utils/getCommonProps'
 import FAQ from '../components/FAQ'
 import { CUIBasicCard, CUIButton, CUILink } from '../components/ClickUI'
-import LaptopSvg from '../components/icons/LaptopSvg'
-import dashboard1 from '../public/images/homepage/dashboard-1.png'
+import yellowBar from '../public/yellow-lines.png'
 import dashboard2 from '../public/images/homepage/dashboard-2.png'
 import dashboard3 from '../public/images/homepage/dashboard-3.png'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import TwitterSection from '../components/TwitterSection'
 import HomePageTerminal from '../components/Terminal/HomePageTerminal'
 import SpeedAnimation from '../components/SpeedAnimation'
-import ClickhouseSyntax from '../components/Terminal/ClickhouseSyntax'
-import PostgresSyntax from '../components/Terminal/PostgresSyntax'
+
+const customerStoriesLogos = [
+  {
+    href: '/customer-stories#ebay',
+    target: '_self',
+    imageSrc: '/logos/eBay-black.svg',
+    alt: 'ebay'
+  },
+  {
+    href: '/customer-stories#uber',
+    target: '_self',
+    imageSrc: '/logos/uber-black.svg',
+    alt: 'uber'
+  },
+  {
+    href: '/customer-stories#cloudflare',
+    target: '_self',
+    imageSrc: '/logos/cloudflare-black.svg',
+    alt: 'cloudflare'
+  },
+  {
+    href: '/customer-stories#spotify',
+    target: '_self',
+    imageSrc: '/logos/spotify-black.svg',
+    alt: 'spotify'
+  },
+  {
+    href: '/customer-stories#deutsche_bank',
+    target: '_self',
+    imageSrc: '/logos/deutsche-black.svg',
+    alt: 'deutsche bank'
+  }
+]
 
 export const getStaticProps: GetStaticProps<HomePageProps> =
   async function getStaticProps() {
@@ -63,15 +91,6 @@ export default function HomePage({
         <div className='bg-home-grid bg-primary-800 flex flex-col pb-20 lg:pb-44 pt-16 md:pt-28 px-8 2xl:px-0 relative gap-24 justify-center '>
           <div className='flex flex-col w-full mx-auto max-w-3xl'>
             <div className='mx-auto md:mr-0 md:mt-8 flex-col items-center justify-center'>
-              <div className='mx-auto'>
-                <GitHubButton
-                  href='https://github.com/Clickhouse/Clickhouse'
-                  data-color-scheme='dark'
-                  data-size='large'
-                  data-show-count='true'
-                  aria-label='Star Clickhouse/Clickhouse on GitHub'
-                />
-              </div>
               <SuiTitle
                 type='h1'
                 className='md:!text-5.5xl text-center'
@@ -130,148 +149,30 @@ export default function HomePage({
         </div>
         <div className=' py-16'>
           <div className='max-w-3xl mx-auto'>
-            <div className='text-center mb-10 text-primary-700 sm:border-t-2 sm:border-primary-700 w-fit mx-auto leading-normal sm:leading-none'>
+            <div className='text-center mb-10 text-primary-700 w-fit mx-auto leading-normal sm:leading-none'>
               Trusted by the best developers that work with data at{' '}
-              <span className='tilted tilted-black non-tilted-md'>
+              <span className='tilted tilted-black'>
                 <span className='tilted-content'>scale</span>
               </span>
             </div>
 
             <div className='container pt-6 flex flex-wrap sm:grid sm:grid-cols-5 gap-2 md:gap-x-8 self-center items-center justify-center place-items-center'>
-              {customerStories.logos.map((logo, index: number) => (
+              {customerStoriesLogos.map((logo, index: number) => (
                 <CUILink
                   key={logo.href}
                   href={logo.href}
                   target={logo.target}
-                  className={`customer-stories-${index} flex rounded-lg justify-center ease-in-out duration-200 cursor-pointer`}>
-                  <StrapiPicture
-                    light={logo?.lightLogoPng}
-                    dark={logo?.darkLogoPng}
-                    className='w-auto h-10 grayscale'
+                  className={`customer-stories-${index} flex rounded-lg justify-center ease-in-out duration-200 cursor-pointer gap-2`}>
+                  <Image
+                    src={logo?.imageSrc}
+                    className='w-auto h-12 rounded bg-black/10'
+                    alt={logo.alt}
+                    width={144}
+                    height={48}
                   />
                 </CUILink>
               ))}
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div className='flex flex-col gap-y-28 mt-24'>
-        <div className='section-container  flex flex-col justify-between self-center max-w-screen-xl w-full md:flex-row'>
-          <div className='flex flex-col text-center md:text-left md:w-2/5 pb-4 md:pb-0'>
-            <SuiTitle type='h3' className='!text-3xl mb-3'>
-              Stop waiting for dashboards and queries to load
-            </SuiTitle>
-            <div className='text-neutral-200 max-w-screen-sm leading-normal text-left mx-auto mb-16'>
-              {`Traditional databases and data warehouses take minutes or hours to run your queries. ClickHouse is designed for speed.
-
-              With ClickHouse, your can query terabytes of data in a few seconds (or less).`}
-            </div>
-            <CUIButton
-              type='secondary'
-              className='pl-10 md:pl-0'
-              href='/docs'
-              iconRight={<ChevronRightIcon className='w-4 h-4' />}>
-              Find out more
-            </CUIButton>
-          </div>
-          <div className='flex md:w-1/2 justify-center pt-4 items-center'>
-            <Image src={dashboard1} alt='Dashboard Image' priority />
-          </div>
-        </div>
-      </div>
-
-      <div className='flex flex-col gap-y-28 mt-24 mb-16'>
-        <div className='flex flex-col items-center justify-between self-center section-container w-full'>
-          <SuiTitle type='h3' className='!text-3xl mb-6'>
-            Why is ClickHouse so fast?
-          </SuiTitle>
-          <div className='text-neutral-200 max-w-screen-sm leading-normal text-center mx-auto'>
-            Column-oriented databases are better suited to OLAP scenarios. They
-            are at least <span className='font-bold'>100x faster</span> in
-            processing most queries. ClickHouse uses all available system
-            resources to their full potential to process each analytical query
-            as fast as possible.
-          </div>
-          <div className='grid grid-cols-1 md:grid-cols-2 items-center py-16 gap-16'>
-            <div>
-              <Image src={dashboard2} alt='Dashboard Image Pie' priority />
-              <div className='text-neutral-0 font-bold leading-normal mb-4'>
-                Row-oriented databases
-              </div>
-              <div className='text-neutral-200 leading-normal'>
-                In a row-oriented databases, data is stored in rows, with all
-                the values related to a row physically stored next to each
-                other.
-              </div>
-            </div>
-            <div>
-              <Image src={dashboard3} alt='Dashboard Image Bar' priority />
-              <div className='text-neutral-0 font-bold leading-normal mb-4'>
-                Column-oriented databases
-              </div>
-              <div className='text-neutral-200 leading-normal'>
-                In a column-oriented databases, like ClickHouse, data is stored
-                in columns, with values from the same columns stored together.
-              </div>
-            </div>
-          </div>
-          <CUIButton
-            type='secondary'
-            className='w-auto'
-            href='/docs'
-            iconRight={<ChevronRightIcon className='w-4 h-4' />}>
-            Read more in the docs
-          </CUIButton>
-        </div>
-      </div>
-      <div className='w-full flex flex-col bg-datawarehouse-run text-primary-800'>
-        <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat pb-8 px-8 2xl:px-0 pt-16'>
-          <SuiTitle
-            type='h2'
-            className='mb-7 max-w-3xl mx-auto !text-primary-800 text-center'
-            color='c6'>
-            The data warehouse you can run on your{' '}
-            <span className='tilted tilted-black'>
-              <span className='tilted-content'>laptop</span>
-            </span>{' '}
-            and in your{' '}
-            <span className='tilted tilted-black'>
-              <span className='tilted-content'>data center</span>
-            </span>
-          </SuiTitle>
-          <div className='text-primary-800 max-w-screen-sm leading-normal text-center mx-auto'>
-            Unlike traditional closed-source data warehouses, ClickHouse runs on
-            every environment, whether it’s on your machine or on the cloud
-          </div>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-10 mt-16 mb-28'>
-            <CUIBasicCard
-              icon={<LaptopSvg />}
-              title='clickhouse-local'
-              btnChildren='Download clickHouse-local'
-              href='/'
-              className='w-full'>
-              Run fast queries on local files (CSV, TSV, Parquet, and more)
-              without a server.
-            </CUIBasicCard>
-            <CUIBasicCard
-              icon={<LaptopSvg />}
-              title='ClickHouse'
-              btnChildren='Download clickHouse'
-              href='/'
-              className='w-full'>
-              Spin up a database server with open-source ClickHouse. Always
-              Free.
-            </CUIBasicCard>
-            <CUIBasicCard
-              icon={<LaptopSvg />}
-              title='ClickHouse Cloud'
-              pretitle='Recommended'
-              btnChildren='Deploy in seconds'
-              href='/'
-              className='w-full'>
-              Deploy a fully managed ClickHouse service on AWS and GCP.
-            </CUIBasicCard>
           </div>
         </div>
       </div>
@@ -393,29 +294,104 @@ export default function HomePage({
         </div>
       </div>
 
-      <div className='flex w-full bg-primary text-primary-800'>
-        <div className='flex container mx-auto flex-col max-w-4xl md:bg-no-repeat pt-16 pb-32 text-center px-8 2xl:px-0 items-center'>
-          <SuiTitle type='h2' weight='bold' className='mb-5' id='simple-sql'>
-            <span className='tilted tilted-black'>
-              <span className='tilted-content'>Simple</span>
-            </span>{' '}
-            SQL
-          </SuiTitle>
-          <div className='text-primary-800 mb-6 max-w-screen-sm leading-normal'>
-            ClickHouse supports a superset of ANSI SQL with thousands of helper
-            functions to make your analytics queries easy to write and read.
-            Whether you know Postgres, MySQL, Snowflake or other SQL variants,
-            you’ll find ClickHouse familiar to use.
+      <div className='flex flex-col gap-y-28 mt-24 mb-16'>
+        <div className='flex flex-col items-center justify-between self-center section-container w-full'>
+          <div className='flex flex-col  md:flex-row items-center w-full justify-between'>
+            <Image src={yellowBar} alt='Yellow bar' width='530' height='20' />
+            <div className='flex flex-col items-start'>
+              <SuiTitle type='h3' className='!text-3xl mb-6'>
+                Why is ClickHouse so fast?
+              </SuiTitle>
+              <div className='text-neutral-200 max-w-screen-sm leading-normal text-left mx-auto'>
+                Column-oriented databases are better suited to OLAP scenarios.
+                They are at least <span className='font-bold'>100x faster</span>{' '}
+                in processing most queries. ClickHouse uses all available system
+                resources to their full potential to process each analytical
+                query as fast as possible.
+              </div>
+            </div>
           </div>
-          <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-8'>
-            <ClickhouseSyntax />
-            <PostgresSyntax />
+          <div className='grid grid-cols-1 md:grid-cols-2 items-center py-16 gap-16'>
+            <div>
+              <Image src={dashboard2} alt='Dashboard Image Pie' priority />
+              <div className='text-neutral-0 font-bold leading-normal mb-4'>
+                Row-oriented databases
+              </div>
+              <div className='text-neutral-200 leading-normal'>
+                In a row-oriented databases, data is stored in rows, with all
+                the values related to a row physically stored next to each
+                other.
+              </div>
+            </div>
+            <div>
+              <Image src={dashboard3} alt='Dashboard Image Bar' priority />
+              <div className='text-neutral-0 font-bold leading-normal mb-4'>
+                Column-oriented databases
+              </div>
+              <div className='text-neutral-200 leading-normal'>
+                In a column-oriented databases, like ClickHouse, data is stored
+                in columns, with values from the same columns stored together.
+              </div>
+            </div>
+          </div>
+          <CUIButton
+            type='secondary'
+            className='w-auto'
+            href='/docs'
+            iconRight={<ChevronRightIcon className='w-4 h-4' />}>
+            Read more in the docs
+          </CUIButton>
+        </div>
+      </div>
+      <div className='w-full flex flex-col bg-datawarehouse-run text-primary-800'>
+        <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat pb-8 px-8 2xl:px-0 pt-16'>
+          <SuiTitle
+            type='h2'
+            className='mb-7 max-w-3xl mx-auto !text-primary-800 text-center'
+            color='c6'>
+            Deploy your way
+          </SuiTitle>
+          <div className='text-primary-800 max-w-screen-sm leading-normal text-center mx-auto'>
+            Unlike traditional closed-source data warehouses, ClickHouse runs on
+            every environment, whether it’s on your machine or on the cloud
+          </div>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-10 mt-16 mb-28'>
+            <CUIBasicCard
+              icon='/laptop.svg'
+              btnType='secondary-dark'
+              title='Clickhouse Local'
+              btnChildren='Download ClickHouse Local'
+              href='/'
+              className='w-full'>
+              Run fast queries on local files (CSV, TSV, Parquet, and more)
+              without a server.
+            </CUIBasicCard>
+            <CUIBasicCard
+              icon='/drive.svg'
+              btnType='secondary-dark'
+              title='ClickHouse'
+              btnChildren='Download ClickHouse'
+              href='/'
+              className='w-full'>
+              Spin up a database server with open-source ClickHouse. Always
+              Free.
+            </CUIBasicCard>
+            <CUIBasicCard
+              icon='/cloud.svg'
+              title='ClickHouse Cloud'
+              pretitle='Recommended'
+              btnChildren='Deploy in seconds'
+              href='https://clickhouse.cloud'
+              className='w-full'>
+              Deploy a fully managed ClickHouse service on AWS and GCP.
+            </CUIBasicCard>
           </div>
         </div>
       </div>
-      <GetStarted platforms={platforms} />
+
       <TwitterSection />
       <FAQ />
+      <GetStarted platforms={platforms} />
     </Layout>
   )
 }

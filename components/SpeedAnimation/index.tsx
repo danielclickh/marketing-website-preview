@@ -4,32 +4,71 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      width='1169'
-      height='635'
+      width='1182'
+      height='753'
       fill='none'
-      viewBox='0 0 1169 635'
+      viewBox='0 0 1182 753'
       {...props}>
       <path
+        d='M55.727 66.9697L351.715 66.9698C355.029 66.9698 357.714 69.6554 357.714 72.9687L357.714 313.248C357.714 316.561 360.4 319.247 363.714 319.247L572.583 319.247'
         stroke='#4F5100'
-        strokeWidth='3'
-        d='M53.616 67.13l297.956-.001a6 6 0 016 5.999v138.211a6 6 0 006 5.999h387.002'></path>
+        stroke-width='3'
+      />
       <path
+        d='M1122.68 69.0153L902.581 69.0153C899.215 69.0153 896.455 71.7575 896.455 75.101L896.455 273.453'
         stroke='#4F5100'
-        strokeWidth='3'
-        d='M1115 148.608H903.402c-3.366 0-6.127 2.743-6.127 6.086v56.628c0 3.344-2.76 6.086-6.126 6.086H705.48M1111.67 324.964H903.158c-3.283 0-5.914-2.613-5.914-5.874v-54.806c0-3.261-2.631-5.874-5.913-5.874H656.47M98.76 524.211h253.813a6 6 0 006-6V264.503a6 6 0 016-6h193.92M54.46 155.039H352.04a6 6 0 016 6v50.468a6 6 0 006 6h246.655'></path>
+        stroke-width='3'
+      />
       <path
+        d='M1120.39 157.863L902.579 157.863C899.213 157.863 896.453 160.605 896.453 163.949L896.453 273.453'
         stroke='#4F5100'
-        strokeWidth='3'
-        d='M50.433 322.406h262.913c3.366 0 6.126-2.742 6.126-6.085v-71.356c0-3.343 2.761-6.085 6.127-6.085H1116.11M645.396 536.069v-121.98c0-3.609-3.013-6.746-6.478-6.746h-34.392c-3.465 0-6.477-3.137-6.477-6.746V294.333'></path>
+        stroke-width='3'
+      />
       <path
+        d='M1118.21 244.926L902.581 244.926C899.215 244.926 896.454 247.668 896.454 251.012L896.454 327.43C896.454 330.773 893.693 333.516 890.327 333.516L639.849 333.516'
         stroke='#4F5100'
-        strokeWidth='3'
-        d='M552.763 538.629l-.007-126.604c-.001-3.122 2.278-5.495 5.276-5.495l35.002.004c2.997.001 5.276-2.373 5.276-5.494l-.006-107.625'></path>
+        stroke-width='3'
+      />
+      <path
+        d='M1131.52 669.936L903.298 669.936C900.016 669.936 897.385 667.323 897.385 664.062L897.385 364.636'
+        stroke='#4F5100'
+        stroke-width='3'
+      />
+      <path
+        d='M1131.79 581.926L903.319 582.127C900.034 582.129 897.4 579.515 897.4 576.253L897.4 569.053'
+        stroke='#4F5100'
+        stroke-width='3'
+      />
+      <path
+        d='M1130.61 494.109L903.3 494.109C900.017 494.109 897.386 491.496 897.386 488.235L897.386 356.655C897.386 353.394 894.755 350.781 891.472 350.781L602.305 350.781'
+        stroke='#4F5100'
+        stroke-width='3'
+      />
+      <path
+        d='M52.9105 671.89L352.718 671.89C356.032 671.89 358.718 669.204 358.718 665.89L358.718 371.329C358.718 368.015 361.404 365.329 364.718 365.329L563.803 365.329'
+        stroke='#4F5100'
+        stroke-width='3'
+      />
+      <path
+        d='M49.0072 488.827L316.672 488.827C319.986 488.827 322.672 486.141 322.672 482.827L322.672 356.251C322.672 352.938 325.358 350.252 328.672 350.252L598.813 350.252'
+        stroke='#4F5100'
+        stroke-width='3'
+      />
+      <path
+        d='M52.9436 151.878L352.182 151.878C355.496 151.878 358.182 154.564 358.182 157.878L358.182 312.744C358.182 316.057 360.869 318.744 364.182 318.744L591.909 318.744'
+        stroke='#4F5100'
+        stroke-width='3'
+      />
+      <path
+        d='M50.9138 325.421L319.006 325.421C321.424 325.421 323.362 327.346 323.362 329.748V329.748C323.362 332.151 325.301 334.076 327.719 334.076L584.659 334.076'
+        stroke='#4F5100'
+        stroke-width='3'
+      />
       {/* Animation */}
       <path
+        d='M55.727 66.9697L351.715 66.9698C355.029 66.9698 357.714 69.6554 357.714 72.9687L357.714 313.248C357.714 316.561 360.4 319.247 363.714 319.247L572.583 319.247'
         stroke='#FBFF46'
-        strokeWidth='3'
-        d='M53.616 67.13l297.956-.001a6 6 0 016 5.999v138.211a6 6 0 006 5.999h387.002'>
+        stroke-width='3'>
         <animate
           dur='3s'
           attributeName='stroke-dasharray'
@@ -39,9 +78,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         />
       </path>
       <path
+        d='M171.727 66.9697L351.715 66.9698C355.029 66.9698 357.714 69.6554 357.714 72.9687L357.714 313.248C357.714 316.561 360.4 319.247 363.714 319.247L572.583 319.247'
         stroke='#FBFF46'
-        strokeWidth='3'
-        d='M1115 148.608H903.402c-3.366 0-6.127 2.743-6.127 6.086v56.628c0 3.344-2.76 6.086-6.126 6.086H705.48M1111.67 324.964H903.158c-3.283 0-5.914-2.613-5.914-5.874v-54.806c0-3.261-2.631-5.874-5.913-5.874H656.47M98.76 524.211h253.813a6 6 0 006-6V264.503a6 6 0 016-6h193.92M54.46 155.039H352.04a6 6 0 016 6v50.468a6 6 0 006 6h246.655'>
+        stroke-width='3'>
         <animate
           dur='3s'
           attributeName='stroke-dasharray'
@@ -51,9 +90,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         />
       </path>
       <path
+        d='M262.727 66.9697L351.715 66.9698C355.029 66.9698 357.714 69.6554 357.714 72.9687L357.714 313.248C357.714 316.561 360.4 319.247 363.714 319.247L572.583 319.247'
         stroke='#FBFF46'
-        strokeWidth='3'
-        d='M50.433 322.406h262.913c3.366 0 6.126-2.742 6.126-6.085v-71.356c0-3.343 2.761-6.085 6.127-6.085H1116.11M645.396 536.069v-121.98c0-3.609-3.013-6.746-6.478-6.746h-34.392c-3.465 0-6.477-3.137-6.477-6.746V294.333'>
+        stroke-width='3'>
         <animate
           dur='3s'
           attributeName='stroke-dasharray'
@@ -63,9 +102,129 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         />
       </path>
       <path
+        d='M1122.68 69.0153L902.581 69.0153C899.215 69.0153 896.455 71.7575 896.455 75.101L896.455 273.453'
         stroke='#FBFF46'
-        strokeWidth='3'
-        d='M552.763 538.629l-.007-126.604c-.001-3.122 2.278-5.495 5.276-5.495l35.002.004c2.997.001 5.276-2.373 5.276-5.494l-.006-107.625'>
+        stroke-width='3'>
+        <animate
+          dur='3s'
+          attributeName='stroke-dasharray'
+          repeatCount='indefinite'
+          begin='4s;op.end+4s'
+          values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+        />
+      </path>
+      <path
+        d='M996.166 69.0153L902.581 69.0153C899.215 69.0153 896.455 71.7575 896.455 75.101L896.455 273.453'
+        stroke='#FBFF46'
+        stroke-width='3'>
+        <animate
+          dur='3s'
+          attributeName='stroke-dasharray'
+          repeatCount='indefinite'
+          begin='4s;op.end+4s'
+          values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+        />
+      </path>
+      <path
+        d='M1120.39 157.863L902.579 157.863C899.213 157.863 896.453 160.605 896.453 163.949L896.453 273.453'
+        stroke='#FBFF46'
+        stroke-width='3'>
+        <animate
+          dur='3s'
+          attributeName='stroke-dasharray'
+          repeatCount='indefinite'
+          begin='3s;op.end+3s'
+          values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+        />
+      </path>
+      <path
+        d='M1118.21 244.926L902.581 244.926C899.215 244.926 896.454 247.668 896.454 251.012L896.454 327.43C896.454 330.773 893.693 333.516 890.327 333.516L639.849 333.516'
+        stroke='#FBFF46'
+        stroke-width='3'>
+        <animate
+          dur='3s'
+          attributeName='stroke-dasharray'
+          repeatCount='indefinite'
+          begin='3s;op.end+3s'
+          values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+        />
+      </path>
+      <path
+        d='M1131.52 669.936L903.298 669.936C900.016 669.936 897.385 667.323 897.385 664.062L897.385 364.636'
+        stroke='#FBFF46'
+        stroke-width='3'>
+        <animate
+          dur='3s'
+          attributeName='stroke-dasharray'
+          repeatCount='indefinite'
+          begin='3s;op.end+3s'
+          values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+        />
+      </path>
+      <path
+        d='M1131.79 581.926L903.319 582.127C900.034 582.129 897.4 579.515 897.4 576.253L897.4 569.053'
+        stroke='#FBFF46'
+        stroke-width='3'>
+        <animate
+          dur='3s'
+          attributeName='stroke-dasharray'
+          repeatCount='indefinite'
+          begin='3s;op.end+3s'
+          values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+        />
+      </path>
+      <path
+        d='M1130.61 494.109L903.3 494.109C900.017 494.109 897.386 491.496 897.386 488.235L897.386 356.655C897.386 353.394 894.755 350.781 891.472 350.781L602.305 350.781'
+        stroke='#FBFF46'
+        stroke-width='3'>
+        <animate
+          dur='3s'
+          attributeName='stroke-dasharray'
+          repeatCount='indefinite'
+          begin='3s;op.end+3s'
+          values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+        />
+      </path>
+      <path
+        d='M52.9105 671.89L352.718 671.89C356.032 671.89 358.718 669.204 358.718 665.89L358.718 371.329C358.718 368.015 361.404 365.329 364.718 365.329L563.803 365.329'
+        stroke='#FBFF46'
+        stroke-width='3'>
+        <animate
+          dur='3s'
+          attributeName='stroke-dasharray'
+          repeatCount='indefinite'
+          begin='3s;op.end+3s'
+          values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+        />
+      </path>
+      <path
+        d='M49.0072 488.827L316.672 488.827C319.986 488.827 322.672 486.141 322.672 482.827L322.672 356.251C322.672 352.938 325.358 350.252 328.672 350.252L598.813 350.252'
+        stroke='#FBFF46'
+        stroke-width='3'>
+        <animate
+          dur='3s'
+          attributeName='stroke-dasharray'
+          repeatCount='indefinite'
+          begin='3s;op.end+3s'
+          values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+        />
+      </path>
+      <path
+        d='M52.9436 151.878L352.182 151.878C355.496 151.878 358.182 154.564 358.182 157.878L358.182 312.744C358.182 316.057 360.869 318.744 364.182 318.744L591.909 318.744'
+        stroke='#FBFF46'
+        stroke-width='3'>
+        <animate
+          dur='3s'
+          attributeName='stroke-dasharray'
+          repeatCount='indefinite'
+          begin='3s;op.end+3s'
+          values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+        />
+      </path>
+      <path
+        d='M50.9138 325.421L319.006 325.421C321.424 325.421 323.362 327.346 323.362 329.748V329.748C323.362 332.151 325.301 334.076 327.719 334.076L584.659 334.076'
+        stroke='#FBFF46'
+        stroke-width='3'>
         <animate
           dur='3s'
           attributeName='stroke-dasharray'
@@ -75,32 +234,24 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         />
       </path>
       {/* Animation end */}
-      <text
-        xmlns='http://www.w3.org/2000/svg'
-        x='520.493'
-        y='592.952'
-        fill='#FFFFE8'
-        fontSize='14'>
-        SQL CLIENTS
-      </text>
       <rect
         xmlns='http://www.w3.org/2000/svg'
         width='119.984'
         height='119.938'
-        x='539.008'
-        y='178'
+        x='539.15'
+        y='282.068'
         fill='#FBFF46'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
-        width='80'
+        width='79'
         height='80'
-        x='559.498'
-        y='198'
+        x='559.642'
+        y='302.037'
         href='/logos/black-logo.svg'></image>
       <text
         xmlns='http://www.w3.org/2000/svg'
-        x='15'
+        x='15.1426'
         y='12'
         fill='#FFFFE8'
         fontSize='14'>
@@ -109,24 +260,25 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
       {/* postgres */}
       <rect
         xmlns='http://www.w3.org/2000/svg'
-        x='15'
-        y='31'
+        x='15.1426'
+        y='31.0679'
         width='72'
         height='72'
         fill='#191A0C'
-        rx='4'></rect>
+        rx='4'
+      />
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
         height='48'
-        x='27'
-        y='43'
+        x='27.1426'
+        y='43.0679'
         href='/logos/postgres.svg'></image>
       {/* bigquery */}
       <rect
         xmlns='http://www.w3.org/2000/svg'
-        x='103'
-        y='31'
+        x='103.143'
+        y='31.0679'
         width='72'
         height='72'
         fill='#191A0C'
@@ -135,14 +287,14 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         xmlns='http://www.w3.org/2000/svg'
         width='48'
         height='48'
-        x='115'
-        y='43'
+        x='115.143'
+        y='43.0679'
         href='/logos/bigquery.svg'></image>
       {/* aws redshift */}
       <rect
         xmlns='http://www.w3.org/2000/svg'
-        x='191'
-        y='31'
+        x='191.143'
+        y='31.0679'
         width='72'
         height='72'
         fill='#191A0C'
@@ -151,14 +303,14 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         xmlns='http://www.w3.org/2000/svg'
         width='48'
         height='48'
-        x='203'
+        x='203.143'
         y='47'
         href='/logos/redshift.svg'></image>
       {/* snowflake*/}
       <rect
         xmlns='http://www.w3.org/2000/svg'
-        x='15'
-        y='119'
+        x='15.1426'
+        y='119.068'
         width='72'
         height='72'
         fill='#191A0C'
@@ -167,14 +319,14 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         xmlns='http://www.w3.org/2000/svg'
         width='48'
         height='48'
-        x='27'
-        y='131'
+        x='27.1426'
+        y='131.068'
         href='/logos/snowflake.svg'></image>
       {/* mongodb */}
       <rect
         xmlns='http://www.w3.org/2000/svg'
-        x='103'
-        y='119'
+        x='103.143'
+        y='119.068'
         width='72'
         height='72'
         fill='#191A0C'
@@ -183,14 +335,14 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         xmlns='http://www.w3.org/2000/svg'
         width='48'
         height='48'
-        x='115'
-        y='131'
+        x='115.143'
+        y='131.068'
         href='/logos/mongodb.svg'></image>
       {/* mysql */}
       <rect
         xmlns='http://www.w3.org/2000/svg'
-        x='191'
-        y='119'
+        x='191.143'
+        y='119.068'
         width='72'
         height='72'
         fill='#191A0C'
@@ -199,13 +351,13 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         xmlns='http://www.w3.org/2000/svg'
         width='48'
         height='32'
-        x='203'
-        y='140'
+        x='203.143'
+        y='140.068'
         href='/logos/mysql.svg'></image>
       <text
         xmlns='http://www.w3.org/2000/svg'
-        x='15'
-        y='267'
+        x='15.1426'
+        y='267.068'
         fill='#FFFFE8'
         fontSize='14'>
         LOG AND ANALYTICS EVENTS
@@ -213,8 +365,8 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
       {/* kafka */}
       <rect
         xmlns='http://www.w3.org/2000/svg'
-        x='15'
-        y='286'
+        x='15.1426'
+        y='286.068'
         width='72'
         height='72'
         fill='#191A0C'
@@ -223,14 +375,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         xmlns='http://www.w3.org/2000/svg'
         width='48'
         height='48'
-        x='27'
-        y='298'
-        href='/logos/kafka.svg'></image>
+        x='27.1426'
+        y='298.068'
+        href='/logos/kafka.svg'
+      />
       {/* vector  */}
       <rect
         xmlns='http://www.w3.org/2000/svg'
-        x='103'
-        y='286'
+        x='103.143'
+        y='286.068'
         width='72'
         height='72'
         fill='#191A0C'
@@ -239,29 +392,92 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         xmlns='http://www.w3.org/2000/svg'
         width='48'
         height='48'
-        x='115'
-        y='298'
-        href='/logos/vector.svg'></image>
+        x='115.143'
+        y='298.068'
+        href='/logos/vector.svg'
+      />
       {/*  dbt */}
       <rect
         xmlns='http://www.w3.org/2000/svg'
-        x='191'
-        y='286'
+        x='191.143'
+        y='286.068'
+        width='72'
+        height='72'
+        fill='#191A0C'
+        rx='4'
+      />
+      <image
+        xmlns='http://www.w3.org/2000/svg'
+        width='48'
+        height='48'
+        x='203.143'
+        y='298.068'
+        href='/logos/dbt.svg'
+      />
+      <text
+        xmlns='http://www.w3.org/2000/svg'
+        x='15.1426'
+        y='434.068'
+        fill='#FFFFE8'
+        fontSize='14'>
+        DATA LAKES
+      </text>
+      {/* iceberg */}
+      <rect
+        xmlns='http://www.w3.org/2000/svg'
+        x='15.1426'
+        y='453.068'
         width='72'
         height='72'
         fill='#191A0C'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
-        width='48'
-        height='48'
-        x='203'
-        y='298'
-        href='/logos/dbt.svg'></image>
+        width='40'
+        height='40'
+        x='31.1426'
+        y='469.068'
+        href='/logos/iceberg.svg'
+      />
+      {/* hudi  */}
+      <rect
+        xmlns='http://www.w3.org/2000/svg'
+        x='103.143'
+        y='453.068'
+        width='72'
+        height='72'
+        fill='#191A0C'
+        rx='4'></rect>
+      <image
+        xmlns='http://www.w3.org/2000/svg'
+        width='58.4795'
+        height='40'
+        x='109.902'
+        y='469.068'
+        href='/logos/hudi.svg'
+      />
+      {/*  delta lake */}
+      <rect
+        xmlns='http://www.w3.org/2000/svg'
+        x='191.143'
+        y='453.068'
+        width='72'
+        height='72'
+        fill='#191A0C'
+        rx='4'
+      />
+      <image
+        xmlns='http://www.w3.org/2000/svg'
+        width='41.2371'
+        height='40'
+        x='206.523'
+        y='469.068'
+        href='/logos/deltaLake.svg'
+      />
       <text
         xmlns='http://www.w3.org/2000/svg'
-        x='15.758'
-        y='434'
+        x='15.1426'
+        y='601.068'
         fill='#FFFFE8'
         fontSize='14'>
         LOCAL FILES
@@ -269,157 +485,250 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
       {/* local files */}
       <rect
         xmlns='http://www.w3.org/2000/svg'
-        x='15'
-        y='453'
-        width='172'
-        height='142'
+        x='15.1426'
+        y='620.068'
+        width='248'
+        height='102'
         fill='#191A0C'
-        rx='4'></rect>
+        rx='4'
+      />
       <image
         xmlns='http://www.w3.org/2000/svg'
-        width='33'
-        height='42'
-        x='80'
-        y='469'
+        width='43'
+        height='48'
+        x='45.3262'
+        y='645.068'
         href='/logos/file-icon.svg'></image>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='124'
         height='54'
-        x='39'
-        y='525'
-        href='/logos/local-files-text.svg'></image>
-      {/* datagrip */}
-      <rect
-        xmlns='http://www.w3.org/2000/svg'
-        x='515'
-        y='499.169'
-        width='72'
-        height='72'
-        fill='#191A0C'
-        rx='4'></rect>
-      <image
-        xmlns='http://www.w3.org/2000/svg'
-        width='48'
-        height='48'
-        x='527'
-        y='511.169'
-        href='/logos/datagrip.svg'></image>
-      {/* dbeaver */}
-      <rect
-        xmlns='http://www.w3.org/2000/svg'
-        x='611'
-        y='499.169'
-        width='72'
-        height='72'
-        fill='#191A0C'
-        rx='4'></rect>
-      <image
-        xmlns='http://www.w3.org/2000/svg'
-        width='48'
-        height='48'
-        x='623'
-        y='511.169'
-        href='/logos/dbeaver.svg'></image>
-      <text x='997.876' y='95.141' fill='#FFFFE8' fontSize='12'>
+        x='110.643'
+        y='644.068'
+        href='/logos/local-files-text.svg'
+      />
+      <text x='994.166' y='12.209' fill='#FFFFE8' fontSize='12'>
         DATA VISUALIZATION TOOLS
       </text>
       {/* Superset */}
       <rect
         xmlns='http://www.w3.org/2000/svg'
-        x='994.023'
-        y='114.141'
+        x='994.166'
+        y='31.209'
         width='72'
         height='72'
         fill='#191A0C'
-        rx='4'></rect>
+        rx='4'
+      />
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
         height='48'
-        x='1006.023'
-        y='126.141'
-        href='/logos/superset.svg'></image>
+        x='1006.166'
+        y='43.209'
+        href='/logos/superset.svg'
+      />
       {/* Deepnote */}
       <rect
         xmlns='http://www.w3.org/2000/svg'
-        x='1082.02'
-        y='114.141'
+        x='1082.17'
+        y='31.209'
         width='72'
         height='72'
         fill='#191A0C'
-        rx='4'></rect>
+        rx='4'
+      />
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
         height='48'
-        x='1094.02'
-        y='126.141'
-        href='/logos/deepnote.svg'></image>
+        x='1096.17'
+        y='43.209'
+        href='/logos/deepnote.svg'
+      />
       {/* graphana */}
       <rect
         xmlns='http://www.w3.org/2000/svg'
-        x='994.023'
-        y='202.141'
+        x='994.166'
+        y='119.209'
         width='72'
         height='72'
         fill='#191A0C'
-        rx='4'></rect>
+        rx='4'
+      />
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
         height='48'
-        x='1006.023'
-        y='214.141'
-        href='/logos/graphana.svg'></image>
+        x='1006.166'
+        y='131.209'
+        href='/logos/graphana.svg'
+      />
       {/* metabase*/}
       <rect
         xmlns='http://www.w3.org/2000/svg'
         x='1082.02'
-        y='202.141'
+        y='119.209'
         width='72'
         height='72'
         fill='#191A0C'
-        rx='4'></rect>
+        rx='4'
+      />
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
         height='48'
-        x='1094.02'
-        y='214.141'
-        href='/logos/metabase.svg'></image>
+        x='1096.02'
+        y='131.209'
+        href='/logos/metabase.svg'
+      />
       {/* tableau */}
       <rect
         xmlns='http://www.w3.org/2000/svg'
-        x='994.023'
-        y='290.141'
+        x='994.166'
+        y='207.209'
         width='72'
         height='72'
         fill='#191A0C'
-        rx='4'></rect>
+        rx='4'
+      />
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
         height='48'
         x='1006.023'
-        y='302.141'
-        href='/logos/tableau.svg'></image>
+        y='219.209'
+        href='/logos/tableau.svg'
+      />
       {/* hex */}
       <rect
         xmlns='http://www.w3.org/2000/svg'
-        x='1082.02'
-        y='290.141'
+        x='1082.17'
+        y='207.209'
         width='72'
         height='72'
         fill='#191A0C'
-        rx='4'></rect>
+        rx='4'
+      />
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
         height='48'
-        x='1094.02'
-        y='302.141'
-        href='/logos/hex.svg'></image>
+        x='1094.17'
+        y='219.209'
+        href='/logos/hex.svg'
+      />
+      <text x='1007.14' y='12.209' fill='#FFFFE8' fontSize='12'>
+        LANGUAGES
+      </text>
+      {/* Python */}
+      <rect
+        xmlns='http://www.w3.org/2000/svg'
+        x='1007.14'
+        y='457.386'
+        width='72'
+        height='72'
+        fill='#191A0C'
+        rx='4'
+      />
+      <image
+        xmlns='http://www.w3.org/2000/svg'
+        width='48'
+        height='48'
+        x='1019.14'
+        y='469.386'
+        href='/logos/python.svg'
+      />
+      {/* NodeJS */}
+      <rect
+        xmlns='http://www.w3.org/2000/svg'
+        x='1095.14'
+        y='457.386'
+        width='72'
+        height='72'
+        fill='#191A0C'
+        rx='4'
+      />
+      <image
+        xmlns='http://www.w3.org/2000/svg'
+        width='48'
+        height='48'
+        x='1107.14'
+        y='469.386'
+        href='/logos/nodejs.svg'
+      />
+      {/* Java */}
+      <rect
+        xmlns='http://www.w3.org/2000/svg'
+        x='1007.14'
+        y='545.386'
+        width='72'
+        height='72'
+        fill='#191A0C'
+        rx='4'
+      />
+      <image
+        xmlns='http://www.w3.org/2000/svg'
+        width='48'
+        height='48'
+        x='1019.14'
+        y='557.386'
+        href='/logos/java.svg'
+      />
+      {/* C# */}
+      <rect
+        xmlns='http://www.w3.org/2000/svg'
+        x='1095.14'
+        y='545.386'
+        width='72'
+        height='72'
+        fill='#191A0C'
+        rx='4'
+      />
+      <image
+        xmlns='http://www.w3.org/2000/svg'
+        width='35.55'
+        height='40'
+        x='1113.39'
+        y='559.386'
+        href='/logos/chash.svg'
+      />
+      {/* Go */}
+      <rect
+        xmlns='http://www.w3.org/2000/svg'
+        x='1007.14'
+        y='633.387'
+        width='72'
+        height='72'
+        fill='#191A0C'
+        rx='4'
+      />
+      <image
+        xmlns='http://www.w3.org/2000/svg'
+        width='40'
+        height='40'
+        x='1019.14'
+        y='645.387'
+        href='/logos/go.svg'
+      />
+      {/* Rust */}
+      <rect
+        xmlns='http://www.w3.org/2000/svg'
+        x='1095.14'
+        y='633.387'
+        width='72'
+        height='72'
+        fill='#191A0C'
+        rx='4'
+      />
+      <image
+        xmlns='http://www.w3.org/2000/svg'
+        width='40'
+        height='40'
+        x='1109.14'
+        y='647.387'
+        href='/logos/rust.svg'
+      />
     </svg>
   )
 }
