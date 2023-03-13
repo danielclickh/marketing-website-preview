@@ -31,7 +31,7 @@ function SuiRecentCard({
       className={`recent-card-${title.replace(
         ' ',
         '-'
-      )} flex flex-col transition hover:scale-105 hover:no-underline  ${className}`}
+      )} flex flex-col transition group hover:scale-105 hover:no-underline  ${className}`}
       {...props}>
       {thumbnailPng ? (
         <StrapiImage
@@ -51,14 +51,18 @@ function SuiRecentCard({
       )}
 
       <div className='flex flex-col'>
-        <SuiText size='xs' weight='bold' color='c6' className='mb-2'>
+        <SuiText size='xs' weight='bold' color='text-muted' className='mb-2'>
           {pretitle}
         </SuiText>
         <SuiTitle type='h3' weight='bold'>
           {title}
         </SuiTitle>
         {description && (
-          <SuiText size='sm' weight='medium' color='secondary' className='mt-1'>
+          <SuiText
+            size='sm'
+            weight='medium'
+            color='secondary'
+            className='mt-1 group-hover:text-primary'>
             {description}
           </SuiText>
         )}

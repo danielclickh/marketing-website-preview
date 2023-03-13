@@ -132,7 +132,7 @@ export default function Header({
                         <svg
                           viewBox='0 0 24 24'
                           aria-hidden='true'
-                          className='h-6 w-6 fill-neutral-0 mr-1'>
+                          className='h-6 w-6 dark:fill-white fill-slate-900 mr-1'>
                           <path
                             fillRule='evenodd'
                             clipRule='evenodd'
@@ -160,7 +160,6 @@ export default function Header({
                       )}
                       {ctaButton && (
                         <CUIButton
-                          weight='medium'
                           type='primary'
                           href={ctaButton.href}
                           segmentEvent={{
