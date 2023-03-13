@@ -126,11 +126,6 @@ const nextConfig = {
         permanent: false
       },
       {
-        source: '/legal/agreements/private-preview-terms-of-service',
-        destination: '/legal/agreements/terms-of-service',
-        permanent: false
-      },
-      {
         source: '/blog/en/:path*',
         destination: '/blog/:path*',
         permanent: true

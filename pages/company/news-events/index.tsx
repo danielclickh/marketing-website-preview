@@ -251,7 +251,7 @@ export default function News({
                         <StrapiPicture
                           dark={upcomingEvent.darkFeatureImagePng}
                           light={upcomingEvent.lightFeatureImagePng}
-                          alt={`Meetup ${upcomingEvent.title}`}
+                          alt={`${upcomingEvent.title}`}
                           className='cursor-pointer w-full h-auto'
                         />
                       </div>
@@ -273,14 +273,21 @@ export default function News({
                       <div className='flex items-center space-x-2'>
                         <LocationMarkerIcon className='h-3 w-3 text-c4' />
                         <SuiText size='sm' weight='medium' color='secondary'>
-                          {[
-                            upcomingEvent.location.city,
-                            upcomingEvent.location.country
-                          ].join(', ')}{' '}
-                          {upcomingEvent.localDatetime &&
-                            ` • ${new Date(
-                              upcomingEvent.localDatetime
-                            ).toDateString()}`}
+                          {upcomingEvent.category == 'On-Demand Webinar' && (
+                            <>{upcomingEvent.category}</>
+                          )}
+                          {upcomingEvent.category != 'On-Demand Webinar' && (
+                            <span>
+                              {[
+                                upcomingEvent.location.city,
+                                upcomingEvent.location.country
+                              ].join(', ')}{' '}
+                              {upcomingEvent.localDatetime &&
+                                ` • ${new Date(
+                                  upcomingEvent.localDatetime
+                                ).toDateString()}`}
+                            </span>
+                          )}
                         </SuiText>
                       </div>
                     </div>
