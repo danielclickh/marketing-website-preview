@@ -10,8 +10,8 @@ import { getCommonProps } from '../lib/utils/getCommonProps'
 import FAQ from '../components/FAQ'
 import { CUIBasicCard, CUIButton, CUILink } from '../components/ClickUI'
 import yellowBar from '../public/yellow-lines.png'
-import dashboard2 from '../public/images/homepage/dashboard-2.png'
-import dashboard3 from '../public/images/homepage/dashboard-3.png'
+import columnOrientedIllustration from '../public/images/homepage/column-oriented-illustration.svg'
+import rowOrientedIllustration from '../public/images/homepage/row-oriented-illustration.svg'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import TwitterSection from '../components/TwitterSection'
 import HomePageTerminal from '../components/Terminal/HomePageTerminal'
@@ -294,11 +294,19 @@ export default function HomePage({
         </div>
       </div>
 
-      <div className='flex flex-col gap-y-28 mt-24 mb-16'>
+      <div className='relative flex flex-col gap-y-28 mt-24 mb-16'>
         <div className='flex flex-col items-center justify-between self-center section-container w-full'>
-          <div className='flex flex-col  md:flex-row items-center w-full justify-between'>
-            <Image src={yellowBar} alt='Yellow bar' width='530' height='20' />
-            <div className='flex flex-col items-start'>
+          <div className='flex flex-col md:flex-row items-center w-full justify-between gap-16'>
+            <div className='w-full md:w-1/2 min-h-[128px]'>
+              <Image
+                src={yellowBar}
+                alt='Yellow bar'
+                width='530'
+                height='128'
+                className='absolute left-0'
+              />
+            </div>
+            <div className='flex flex-col items-start w-full md:w-1/2'>
               <SuiTitle type='h3' className='!text-3xl mb-6'>
                 Why is ClickHouse so fast?
               </SuiTitle>
@@ -313,7 +321,11 @@ export default function HomePage({
           </div>
           <div className='grid grid-cols-1 md:grid-cols-2 items-center py-16 gap-16'>
             <div>
-              <Image src={dashboard2} alt='Dashboard Image Pie' priority />
+              <Image
+                src={rowOrientedIllustration}
+                alt='Dashboard Image Pie'
+                priority
+              />
               <div className='text-neutral-0 font-bold leading-normal mb-4'>
                 Row-oriented databases
               </div>
@@ -324,7 +336,11 @@ export default function HomePage({
               </div>
             </div>
             <div>
-              <Image src={dashboard3} alt='Dashboard Image Bar' priority />
+              <Image
+                src={columnOrientedIllustration}
+                alt='Dashboard Image Bar'
+                priority
+              />
               <div className='text-neutral-0 font-bold leading-normal mb-4'>
                 Column-oriented databases
               </div>
