@@ -618,7 +618,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='219.209'
         href='/logos/hex.svg'
       />
-      <text x='1007.14' y='12.209' fill='#FFFFE8' fontSize='12'>
+      <text x='1007.14' y='438.386' fill='#FFFFE8' fontSize='12'>
         LANGUAGES
       </text>
       {/* Python */}
