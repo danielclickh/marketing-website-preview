@@ -15,6 +15,7 @@ import { ChevronRightIcon } from '@heroicons/react/solid'
 import JoinCommunity from '../components/JoinCommunity'
 import HomePageTerminal from '../components/Terminal/HomePageTerminal'
 import SpeedAnimation from '../components/SpeedAnimation'
+import DevelopersSection from '../components/DevelopersSection'
 
 const customerStoriesLogos = [
   {
@@ -383,6 +384,7 @@ export default function HomePage({
       </div>
 
       <JoinCommunity />
+      <DevelopersSection />
       <FAQ />
       <GetStarted platforms={platforms} />
     </Layout>
