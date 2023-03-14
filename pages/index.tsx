@@ -161,8 +161,14 @@ export default function HomePage({
       </div>
 
       <div className='flex w-full text-neutral-0'>
-        <div className='flex container mx-auto flex-col pt-20 pb-8 text-center px-8 xl:px-0'>
-          <SuiTitle type='h2' className='mb-4'>
+        <div className='flex section-container mx-auto flex-col pt-20 pb-8 text-center items-center'>
+          <Image
+            src='/speed-icon.svg'
+            alt='Speed Icon'
+            width={72}
+            height={72}
+          />
+          <SuiTitle type='h2' className='my-6'>
             Speed up queries from any data source
           </SuiTitle>
           <div className='text-neutral-200 max-w-screen-sm leading-normal text-center mx-auto mb-10'>
@@ -267,7 +273,13 @@ export default function HomePage({
       <div className='relative flex flex-col gap-y-28 mt-24 mb-16'>
         <div className='flex flex-col items-center justify-between self-center section-container w-full'>
           <div className='flex flex-col items-center w-full gap-6'>
-            <SuiTitle type='h3' className='!text-3xl'>
+            <Image
+              src='/fast-icon.svg'
+              alt='Fast Icon'
+              width={72}
+              height={72}
+            />
+            <SuiTitle type='h2' className='my-6'>
               Why is ClickHouse so fast?
             </SuiTitle>
             <div className='text-neutral-200 max-w-screen-md leading-normal text-center mx-auto'>
@@ -323,8 +335,14 @@ export default function HomePage({
         </div>
       </div>
       <div className='w-full flex flex-col'>
-        <div className='flex container mx-auto flex-col section-container pt-16'>
-          <SuiTitle type='h2' className='mb-7 max-w-3xl mx-auto text-center'>
+        <div className='flex container mx-auto flex-col section-container pt-16 items-center'>
+          <Image
+            src='/deploy-icon.svg'
+            alt='Deploy Icon'
+            width={72}
+            height={72}
+          />
+          <SuiTitle type='h2' className='my-6 max-w-3xl mx-auto text-center'>
             Deploy your way
           </SuiTitle>
           <div className='max-w-screen-sm leading-normal text-center mx-auto'>
@@ -355,7 +373,6 @@ export default function HomePage({
             <CUIBasicCard
               icon='/cloud.svg'
               title='ClickHouse Cloud'
-              pretitle='Recommended'
               btnChildren='Deploy in seconds'
               href='https://clickhouse.cloud'
               className='w-full'>
