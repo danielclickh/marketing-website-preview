@@ -51,7 +51,7 @@ function CustomerStoriesPage({
 }: CustomerStoriesData) {
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
-      <div className='bg-hero pt-10'>
+      <div className='pt-10'>
         <div className='flex container mx-auto max-w-7xl flex-col px-4 md:px-8 2xl:px-0'>
           <div className='flex flex-col text-center mx-auto pt-6 max-w-screen-sm'>
             <SuiTitle type='h1' className='mb-5'>

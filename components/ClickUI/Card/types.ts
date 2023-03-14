@@ -3,7 +3,6 @@ import { HTMLAttributes, ReactNode } from 'react'
 import { LinkProps } from '../Link/types'
 
 export interface BasicCardProps extends HTMLAttributes<HTMLDivElement> {
-  pretitle?: string
   title: string
   icon?: string
   btnChildren?: ReactNode

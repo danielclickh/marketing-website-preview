@@ -61,7 +61,7 @@ export default function CloudPage({
   return (
     <>
       <Layout headerData={headerData} footerData={footerData} seo={seo}>
-        <div className='bg-hero pt-10'>
+        <div className='pt-10'>
           <div className='relative'>
             <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-24 md:px-8 2xl:px-0'>
               <div className='flex'>

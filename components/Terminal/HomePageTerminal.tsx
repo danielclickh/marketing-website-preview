@@ -6,6 +6,7 @@ function HomePageTerminal() {
   return (
     <Terminal
       type='terminal'
+      showControls={false}
       totalCount={190}
       className='flex flex-col -mt-[100px]'>
       <p
@@ -38,15 +39,12 @@ function HomePageTerminal() {
       </p>
       <br />
       <p className={`fade-in-animation ${animationCompleted ? 'active' : ''}`}>
-        Elapsed:{' '}
-        <span className='tilted tilted-yellow'>
-          <span className='tilted-content'>0.928 sec</span>
-        </span>{' '}
-        Processed{' '}
-        <span className='tilted tilted-yellow'>
-          <span className='tilted-content'>27.45 million</span>
-        </span>{' '}
-        rows,
+        {`------------------------------------------------\n
+        |                                              |\n
+        |                                              |\n
+        ------------------------------------------------\n`}
+        Elapsed: <span className='text-primary'>0.928 sec</span> Processed{' '}
+        <span className='text-primary'>27.45 million</span> rows,
         <br />
         103.80 MB (29.56 million rows/s., 111.80 MB/s.)
       </p>

@@ -4,7 +4,6 @@ import Button from '../Button'
 import { BasicCardProps } from './types'
 
 function BasicCard({
-  pretitle,
   title,
   children,
   icon,
@@ -16,13 +15,8 @@ function BasicCard({
 }: BasicCardProps) {
   return (
     <div
-      className={`flex flex-col items-center p-6 relative bg-noised rounded justify-between ${className}`}>
+      className={`flex flex-col items-center p-6 relative bg-eerie-black/70 rounded justify-between ${className}`}>
       <div className='flex flex-col items-center basic-card-content-container'>
-        {pretitle && (
-          <span className='absolute top-0 w-full flex justify-center basic-card-pretitle'>
-            {pretitle}
-          </span>
-        )}
         {icon && (
           <Image
             className='basic-card-icon mb-4'

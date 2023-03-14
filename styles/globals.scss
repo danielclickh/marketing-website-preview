@@ -23,19 +23,10 @@
 
 @tailwind components;
 @layer components {
-  .bg-hero {
-    @apply bg-c1 bg-gradient-to-b from-c2-light/0 to-c2-light dark:from-c3/0 dark:to-c2-dark;
-  }
-
   .bg-noised {
     @apply relative;
     background: #191a0c;
     background-image: url("/noised.png");
-    // &::before {
-    //   content: "";
-    //   background-image: url("/noise.png");
-    //   @apply bg-cover absolute inset-0 opacity-5;
-    // }
   }
 
   .section-container {
@@ -55,7 +46,7 @@ body {
 }
 
 body {
-  @apply w-full h-full bg-primary-900;
+  @apply w-full h-full bg-body-image;
 }
 
 * {

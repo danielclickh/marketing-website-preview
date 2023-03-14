@@ -7,7 +7,8 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
-        '5.5xl': '3.5rem'
+        '5.5xl': '3.5rem',
+        '6.5xl': '4rem'
       },
       fontFamily: {
         inter: 'var(--font-inter), sans-serif',
@@ -17,6 +18,7 @@ module.exports = {
       colors: {
         rangitoto: '#28281D',
         'base-color': '#FBFF46',
+        'eerie-black': '#1A1918',
         primary: {
           DEFAULT: '#FBFF46',
           50: '#FFFFE8',
@@ -192,7 +194,9 @@ module.exports = {
           'linear-gradient(0deg, #fbff46, #fbff46 2px, transparent 0, transparent)',
         grid: 'url("/bg-grid.png")',
         'home-grid':
-          'linear-gradient(117.08deg, rgba(0, 0, 0, 0) 14.55%, rgba(22, 22, 0, 0.167461) 34.15%, rgba(47, 47, 47, 0.22751) 40.54%, rgba(22, 22, 0, 0.611327) 46.65%, #161600 95.98%), url("/bg-grid.png");'
+          'linear-gradient(117.08deg, rgba(0, 0, 0, 0) 14.55%, rgba(22, 22, 0, 0.167461) 34.15%, rgba(47, 47, 47, 0.22751) 40.54%, rgba(22, 22, 0, 0.611327) 46.65%, #161600 95.98%), url("/bg-grid.png");',
+        'speed-lines': 'url("/speed-lines.svg")',
+        'body-image': 'linear-gradient(255.48deg, #292924 1.95%, #0F0F0F 100%)'
       },
       spacing: {
         '30': '7.5rem'

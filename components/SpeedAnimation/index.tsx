@@ -11,57 +11,57 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
       {...props}>
       <path
         d='M55.727 66.9697L351.715 66.9698C355.029 66.9698 357.714 69.6554 357.714 72.9687L357.714 313.248C357.714 316.561 360.4 319.247 363.714 319.247L572.583 319.247'
-        stroke='#4F5100'
+        stroke='#2B2B29'
         stroke-width='3'
       />
       <path
         d='M1122.68 69.0153L902.581 69.0153C899.215 69.0153 896.455 71.7575 896.455 75.101L896.455 273.453'
-        stroke='#4F5100'
+        stroke='#2B2B29'
         stroke-width='3'
       />
       <path
         d='M1120.39 157.863L902.579 157.863C899.213 157.863 896.453 160.605 896.453 163.949L896.453 273.453'
-        stroke='#4F5100'
+        stroke='#2B2B29'
         stroke-width='3'
       />
       <path
         d='M1118.21 244.926L902.581 244.926C899.215 244.926 896.454 247.668 896.454 251.012L896.454 327.43C896.454 330.773 893.693 333.516 890.327 333.516L639.849 333.516'
-        stroke='#4F5100'
+        stroke='#2B2B29'
         stroke-width='3'
       />
       <path
         d='M1131.52 669.936L903.298 669.936C900.016 669.936 897.385 667.323 897.385 664.062L897.385 364.636'
-        stroke='#4F5100'
+        stroke='#2B2B29'
         stroke-width='3'
       />
       <path
         d='M1131.79 581.926L903.319 582.127C900.034 582.129 897.4 579.515 897.4 576.253L897.4 569.053'
-        stroke='#4F5100'
+        stroke='#2B2B29'
         stroke-width='3'
       />
       <path
         d='M1130.61 494.109L903.3 494.109C900.017 494.109 897.386 491.496 897.386 488.235L897.386 356.655C897.386 353.394 894.755 350.781 891.472 350.781L602.305 350.781'
-        stroke='#4F5100'
+        stroke='#2B2B29'
         stroke-width='3'
       />
       <path
         d='M52.9105 671.89L352.718 671.89C356.032 671.89 358.718 669.204 358.718 665.89L358.718 371.329C358.718 368.015 361.404 365.329 364.718 365.329L563.803 365.329'
-        stroke='#4F5100'
+        stroke='#2B2B29'
         stroke-width='3'
       />
       <path
         d='M49.0072 488.827L316.672 488.827C319.986 488.827 322.672 486.141 322.672 482.827L322.672 356.251C322.672 352.938 325.358 350.252 328.672 350.252L598.813 350.252'
-        stroke='#4F5100'
+        stroke='#2B2B29'
         stroke-width='3'
       />
       <path
         d='M52.9436 151.878L352.182 151.878C355.496 151.878 358.182 154.564 358.182 157.878L358.182 312.744C358.182 316.057 360.869 318.744 364.182 318.744L591.909 318.744'
-        stroke='#4F5100'
+        stroke='#2B2B29'
         stroke-width='3'
       />
       <path
         d='M50.9138 325.421L319.006 325.421C321.424 325.421 323.362 327.346 323.362 329.748V329.748C323.362 332.151 325.301 334.076 327.719 334.076L584.659 334.076'
-        stroke='#4F5100'
+        stroke='#2B2B29'
         stroke-width='3'
       />
       {/* Animation */}
@@ -264,7 +264,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='31.0679'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image
@@ -281,7 +281,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='31.0679'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -297,7 +297,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='31.0679'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -313,7 +313,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='119.068'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -329,7 +329,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='119.068'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -345,7 +345,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='119.068'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -369,7 +369,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='286.068'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -386,7 +386,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='286.068'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -403,7 +403,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='286.068'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image
@@ -429,7 +429,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='453.068'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -446,7 +446,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='453.068'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -463,7 +463,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='453.068'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image
@@ -489,7 +489,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='620.068'
         width='248'
         height='102'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image
@@ -517,7 +517,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='31.209'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image
@@ -535,7 +535,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='31.209'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image
@@ -553,7 +553,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='119.209'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image
@@ -571,7 +571,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='119.209'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image
@@ -589,7 +589,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='207.209'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image
@@ -607,7 +607,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='207.209'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image
@@ -628,7 +628,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='457.386'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image
@@ -646,7 +646,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='457.386'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image
@@ -664,7 +664,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='545.386'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image
@@ -682,7 +682,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='545.386'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image
@@ -700,7 +700,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='633.387'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image
@@ -718,7 +718,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         y='633.387'
         width='72'
         height='72'
-        fill='#191A0C'
+        fill='#1A1918'
         rx='4'
       />
       <image

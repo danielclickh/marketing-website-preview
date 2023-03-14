@@ -18,9 +18,9 @@ export default function Footer({
   copyright
 }: FooterData) {
   return (
-    <div className='flex flex-col bg-noised pb-8 pt-16'>
+    <div className='flex flex-col bg-eerie-black/70 pb-8 pt-16'>
       <div className='flex pt-8 px-4 md:px-0 '>
-        <div className='section-container mx-auto md:flex justify-between pb-16 px-16 2xl:px-0 border-b border-primary-500'>
+        <div className='section-container mx-auto md:flex justify-between pb-16 px-16 2xl:px-0 border-b border-primary-500/10'>
           <div className='flex flex-col w-full'>
             <div className='sitemap lg:flex pt-4'>
               {topLevelFooterMenu.map((topMenu) => (

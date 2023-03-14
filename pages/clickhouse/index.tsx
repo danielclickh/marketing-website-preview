@@ -75,8 +75,8 @@ export default function ClickHouseServerPage({
   return (
     <>
       <Layout headerData={headerData} footerData={footerData} seo={seo}>
-        <div className='bg-hero pt-10'>
-          <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-24 px-4 sm:px-8 2xl:px-0'>
+        <div className='pt-10'>
+          <div className='flex container mx-auto flex-col max-w-7xl pb-24 px-4 sm:px-8 2xl:px-0'>
             <div className='flex'>
               <div className='md:w-6/12 md:mt-16 flex-col text-center md:text-left'>
                 <SuiTitle type='h1' className='md:!text-6xl'>

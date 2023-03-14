@@ -1,7 +1,7 @@
 .suiTitle {
   &h1 {
-    @apply font-basier text-4xl md:text-5xl font-semibold;
-    @apply leading-snug #{!important};
+    @apply font-basier text-4xl md:text-6.5xl font-semibold;
+    @apply leading-tight #{!important};
   }
 
   &h2 {
