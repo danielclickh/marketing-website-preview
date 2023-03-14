@@ -259,7 +259,7 @@ export default function HomePage({
             </div>
           </div>
           <div className='hidden md:block'>
-            <SpeedAnimation className='w-full h-fit max-w-full' />
+            <SpeedAnimation className='w-full h-fit max-w-full test' />
           </div>
         </div>
       </div>

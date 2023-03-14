@@ -5,8 +5,8 @@ import { SuiTitle } from '../sui'
 
 function JoinCommunity() {
   return (
-    <div className='flex flex-col items-center py-16 md:pt-32 md:pb-36 px-8 md:flex-row justify-between'>
-      <div className='flex flex-col items-center md:items-start max-w-xl gap-10'>
+    <div className='flex flex-col items-center py-16 md:pt-32 md:pb-36 md:flex-row justify-between w-full section-container gap-8'>
+      <div className='flex flex-col items-start max-w-xl gap-10'>
         <SuiTitle type='h2' className='w-full'>
           Join the{' '}
           <span className='tilted tilted-yellow'>
@@ -14,11 +14,11 @@ function JoinCommunity() {
           </span>{' '}
           developers using ClickHouse today
         </SuiTitle>
-        <div className='flex flex-wrap gap-6 justify-center'>
+        <div className='flex flex-wrap gap-6'>
           <div className='flex gap-6'>
             <CUILink
               href='https://twitter.com/ClickhouseDB'
-              className='w-16 h-16 bg-noised rounded grid place-items-center'>
+              className='w-16 h-16 bg-eerie-black/40 hover:bg-eerie-black/70 rounded grid place-items-center'>
               <Image
                 src='/socials/twitter.svg'
                 width={32}
@@ -28,7 +28,7 @@ function JoinCommunity() {
             </CUILink>
             <CUILink
               href='https://join.slack.com/t/clickhousedb/shared_invite/zt-1gh9ds7f4-PgDhJAaF8ad5RbWBAAjzFg'
-              className='w-16 h-16 bg-noised rounded grid place-items-center'>
+              className='w-16 h-16 bg-eerie-black/40 hover:bg-eerie-black/70 rounded grid place-items-center'>
               <Image
                 src='/socials/slack.svg'
                 width={32}
@@ -40,7 +40,7 @@ function JoinCommunity() {
           <div className='flex gap-6'>
             <CUILink
               href='/'
-              className='w-16 h-16 bg-noised rounded grid place-items-center'>
+              className='w-16 h-16 bg-eerie-black/40 hover:bg-eerie-black/70 rounded grid place-items-center'>
               <Image
                 src='/socials/discord.svg'
                 width={32}
@@ -50,7 +50,7 @@ function JoinCommunity() {
             </CUILink>
             <CUILink
               href='https://www.meetup.com/pro/clickhouse'
-              className='w-16 h-16 bg-noised rounded grid place-items-center'>
+              className='w-16 h-16 bg-eerie-black/40 hover:bg-eerie-black/70 rounded grid place-items-center'>
               <Image
                 src='/socials/meetup.svg'
                 width={32}

@@ -19,6 +19,7 @@ module.exports = {
         rangitoto: '#28281D',
         'base-color': '#FBFF46',
         'eerie-black': '#1A1918',
+        jet: '#343434',
         primary: {
           DEFAULT: '#FBFF46',
           50: '#FFFFE8',
