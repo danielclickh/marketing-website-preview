@@ -121,13 +121,58 @@ const nextConfig = {
         permanent: false
       },
       {
-        source: '/trust/security',
-        destination: 'https://trust.clickhouse.com',
-        permanent: false
-      },
-      {
         source: '/blog/en/:path*',
         destination: '/blog/:path*',
+        permanent: true
+      },
+      {
+        source: '/company/events/v23-2-release-webinar',
+        destination: 'https://www.youtube.com/watch?v=2o0vRMMIrkY',
+        permanent: true
+      },
+      {
+        source: '/company/events/v22-12-release-webinar',
+        destination: 'https://www.youtube.com/watch?v=sREupr6uc2k',
+        permanent: true
+      },
+      {
+        source: '/company/events/v21-10-release-webinar',
+        destination: 'https://www.youtube.com/watch?v=b9MeoOtAivQ',
+        permanent: true
+      },
+      {
+        source: '/company/events/2023-01-26-clickhouse-onboarding-workshop',
+        destination: '/company/events/clickhouse-onboarding-workshop',
+        permanent: true
+      },
+      {
+        source: '/company/events/v22-3-release-webinar',
+        destination: 'https://www.youtube.com/watch?v=GzeANZzPras',
+        permanent: true
+      },
+      {
+        source: '/company/events/v22-5-release-webinar',
+        destination: 'https://www.youtube.com/watch?v=jkXmXrmjaKQ',
+        permanent: true
+      },
+      {
+        source: '/company/events/v21-12-release-webinar',
+        destination: 'https://www.youtube.com/watch?v=6qi_S9CEqa4',
+        permanent: true
+      },
+      {
+        source: '/company/events/v22-4-release-webinar',
+        destination: 'https://www.youtube.com/watch?v=aFQs_zoYoXY',
+        permanent: true
+      },
+      {
+        source: '/company/events/cloud-beta',
+        destination: 'https://www.youtube.com/watch?v=gpSarJ-R8Iw',
+        permanent: true
+      },
+      {
+        source: '/trust/security',
+        destination: 'https://trust.clickhouse.com/',
         permanent: true
       }
     ]
