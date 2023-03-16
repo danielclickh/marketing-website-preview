@@ -9,9 +9,9 @@ interface Props extends HTMLAttributes<HTMLUListElement> {
   options: OptionType[]
 }
 
-function CategorySelector({ options, ...props }: Props) {
+function CategorySelector({ options, className = '', ...props }: Props) {
   return (
-    <ul className='mt-4' {...props}>
+    <ul className={`mt-4 ${className}`} {...props}>
       {options.map((option) => (
         <li
           key={option.text}

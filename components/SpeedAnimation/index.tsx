@@ -180,6 +180,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
       </text>
       {/* postgres */}
       <rect
+        stroke='rgba(52, 52, 52, 0.9)'
         xmlns='http://www.w3.org/2000/svg'
         x='15.1426'
         y='31.0679'
@@ -203,6 +204,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -219,6 +221,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -235,6 +238,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -251,6 +255,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -267,6 +272,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -291,6 +297,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -308,6 +315,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -325,6 +333,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'
       />
       <image
@@ -351,6 +360,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -368,6 +378,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'></rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
@@ -385,6 +396,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'
       />
       <image
@@ -411,6 +423,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='248'
         height='102'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'
       />
       <image
@@ -439,6 +452,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'
       />
       <image
@@ -457,6 +471,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'
       />
       <image
@@ -475,6 +490,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'
       />
       <image
@@ -493,6 +509,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'
       />
       <image
@@ -511,6 +528,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'
       />
       <image
@@ -529,6 +547,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'
       />
       <image
@@ -550,6 +569,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'
       />
       <image
@@ -568,6 +588,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'
       />
       <image
@@ -586,6 +607,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'
       />
       <image
@@ -604,6 +626,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'
       />
       <image
@@ -622,6 +645,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'
       />
       <image
@@ -640,6 +664,7 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         width='72'
         height='72'
         fill='#1A1918'
+        stroke='rgba(52, 52, 52, 0.9)'
         rx='4'
       />
       <image

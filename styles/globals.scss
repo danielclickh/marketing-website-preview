@@ -375,3 +375,11 @@ svg.test {
     animation-direction: reverse;
   }
 }
+.clip-inverted-triangle {
+  @apply relative;
+  &::before {
+    @apply absolute inset-0 bg-primary;
+    clip-path: polygon(50% 75%, 100% 50%, 100% 100%, 0 100%, 0 50%);
+    content: "";
+  }
+}

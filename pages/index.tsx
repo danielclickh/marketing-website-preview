@@ -87,76 +87,94 @@ export default function HomePage({
 }: HomePageProps) {
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
-      <div className='homepage overflow-hidden bg-speed-lines bg-no-repeat bg-bottom '>
-        <div className='flex flex-col relative gap-24 justify-center md:flex-row items-center section-container pb-20 lg:pb-44 pt-16 md:pt-28'>
-          <div className='mx-auto md:ml-0 md:mt-8 flex flex-col max-w-md'>
-            <SuiTitle type='h1' color='primary'>
-              Query billions of rows in milliseconds
-            </SuiTitle>
-            <div className='mt-6 flex flex-col items-center'>
-              <div className='leading-normal text-neutral-200 mb-10'>
-                ClickHouse is the fastest and most resource efficient
-                open-source database for real-time apps and analytics.
+      <div className='homepage overflow-hidden'>
+        <div className='flex flex-col pb-20 lg:pb-44 pt-16 md:pt-28 px-8 2xl:px-0 relative gap-24 justify-center '>
+          <div className='flex flex-col w-full mx-auto max-w-3xl'>
+            <div className='mx-auto md:mr-0 md:mt-8 flex-col items-center justify-center'>
+              <SuiTitle
+                type='h1'
+                className='md:!text-5.5xl text-center'
+                color='primary'>
+                Query{' '}
+                <span className='tilted tilted-yellow'>
+                  <span className='tilted-content'>BILLIONS</span>
+                </span>{' '}
+                of rows in less than a second
+              </SuiTitle>
+              <div className='mx-auto mt-6 flex flex-col items-center max-w-md'>
+                <div className='leading-normal text-neutral-200 text-center mb-10'>
+                  ClickHouse is the fastest open-source data warehouse for low
+                  latency apps and analytics
+                </div>
+                <div className='flex flex-col md:flex-row gap-6 w-full justify-center items-center'>
+                  <CUIButton
+                    type='primary'
+                    size='lg'
+                    weight='semibold'
+                    href={hero.ctaButton.href}
+                    segmentEvent={{
+                      label: hero.ctaButton.text,
+                      category: 'website-hero'
+                    }}
+                    linkClass='w-full max-w-[14rem]'
+                    className='w-full'>
+                    Start free trial
+                  </CUIButton>
+                  <CUIButton
+                    type='secondary'
+                    weight='semibold'
+                    size='lg'
+                    href='/docs'
+                    segmentEvent={{
+                      label: hero.ctaButton.text,
+                      category: 'website-hero'
+                    }}
+                    linkClass='w-full max-w-[14rem]'
+                    className='w-full'>
+                    View documentation
+                  </CUIButton>
+                </div>
+                <CUILink
+                  href='/clickhouse'
+                  target='_self'
+                  className='mt-5 text-neutral-200 underline hover:text-neutral-0'>
+                  Or download open-source ClickHouse
+                </CUILink>
               </div>
-              <div className='flex flex-col md:flex-row gap-6 w-full justify-center items-center'>
-                <CUIButton
-                  type='primary'
-                  size='lg'
-                  weight='semibold'
-                  href={hero.ctaButton.href}
-                  segmentEvent={{
-                    label: hero.ctaButton.text,
-                    category: 'website-hero'
-                  }}
-                  linkClass='w-full max-w-[14rem]'
-                  className='w-full'>
-                  Start free trial
-                </CUIButton>
-                <CUIButton
-                  type='secondary'
-                  weight='semibold'
-                  size='lg'
-                  href='/docs'
-                  segmentEvent={{
-                    label: hero.ctaButton.text,
-                    category: 'website-hero'
-                  }}
-                  linkClass='w-full max-w-[14rem]'
-                  className='w-full'>
-                  View documentation
-                </CUIButton>
-              </div>
-              <CUILink
-                href='/clickhouse'
-                target='_self'
-                className='mt-5 text-neutral-200 underline hover:text-neutral-0'>
-                Or download open-source ClickHouse
-              </CUILink>
             </div>
           </div>
-          <div className='section-container max-w-md w-full md:mr-0 md:ml-auto px-0'>
+        </div>
+        <div className='clip-inverted-triangle'>
+          <div className='section-container max-w-3xl'>
             <HomePageTerminal />
           </div>
         </div>
-      </div>
-      <div className='section-container py-16'>
-        <div className='max-w-3xl mx-auto'>
-          <div className='container pt-6 flex flex-wrap sm:grid sm:grid-cols-5 gap-2 md:gap-x-8 self-center items-center justify-center place-items-center'>
-            {customerStoriesLogos.map((logo, index: number) => (
-              <CUILink
-                key={logo.href}
-                href={logo.href}
-                target={logo.target}
-                className={`customer-stories-${index} flex rounded-lg justify-center ease-in-out duration-200 cursor-pointer gap-2`}>
-                <Image
-                  src={logo?.imageSrc}
-                  className='w-auto h-12 rounded'
-                  alt={logo.alt}
-                  width={144}
-                  height={48}
-                />
-              </CUILink>
-            ))}
+        <div className='bg-primary py-16'>
+          <div className='max-w-3xl mx-auto'>
+            <div className='text-center mb-10 text-primary-700 w-fit mx-auto leading-normal sm:leading-none'>
+              Trusted by the best developers that work with data at{' '}
+              <span className='tilted tilted-black'>
+                <span className='tilted-content'>scale</span>
+              </span>
+            </div>
+
+            <div className='container pt-6 flex flex-wrap sm:grid sm:grid-cols-5 gap-2 md:gap-x-8 self-center items-center justify-center place-items-center'>
+              {customerStoriesLogos.map((logo, index: number) => (
+                <CUILink
+                  key={logo.href}
+                  href={logo.href}
+                  target={logo.target}
+                  className={`customer-stories-${index} flex rounded-lg justify-center ease-in-out duration-200 cursor-pointer gap-2`}>
+                  <Image
+                    src={logo?.imageSrc}
+                    className='w-auto h-12 rounded bg-black/10'
+                    alt={logo.alt}
+                    width={144}
+                    height={48}
+                  />
+                </CUILink>
+              ))}
+            </div>
           </div>
         </div>
       </div>

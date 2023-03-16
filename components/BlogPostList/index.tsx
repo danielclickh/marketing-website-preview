@@ -110,7 +110,7 @@ function BlogPostList({ categories, children }: BlogPostListProps) {
         <SuiTitle type='h6' color='c6' className='mt-4'>
           Blog categories
         </SuiTitle>
-        <CategorySelector options={categoryList} />
+        <CategorySelector options={categoryList} className='flex flex-nowrap' />
         <div className='pt-2'>
           <hr />
           <SuiLink
