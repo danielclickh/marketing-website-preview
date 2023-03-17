@@ -12,7 +12,7 @@ function DevelopersSection() {
       </SuiTitle>
       <div className='flex flex-col md:flex-row'>
         <Image
-          src='/'
+          src='/developer1.svg'
           width='100'
           height='100'
           alt='Developers story image'
@@ -49,7 +49,7 @@ function DevelopersSection() {
       </div>
       <div className='grid grid-cols-1 md:grid-cols-3'>
         <CUIBasicCard
-          icon='/cloud.svg'
+          btnType='secondary'
           title='Susan Wright - Uber'
           btnChildren='Learn more'
           href='https://clickhouse.cloud'
@@ -58,8 +58,8 @@ function DevelopersSection() {
           mi.
         </CUIBasicCard>
         <CUIBasicCard
-          icon='/cloud.svg'
           title='Susan Wright - Uber'
+          btnType='secondary'
           btnChildren='Learn more'
           href='https://clickhouse.cloud'
           className='w-full'>
@@ -67,8 +67,8 @@ function DevelopersSection() {
           mi.
         </CUIBasicCard>
         <CUIBasicCard
-          icon='/cloud.svg'
           title='Susan Wright - Uber'
+          btnType='secondary'
           btnChildren='Learn more'
           href='https://clickhouse.cloud'
           className='w-full'>
