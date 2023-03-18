@@ -120,7 +120,7 @@ function PricingPage({
                 </SuiTitle>
                 <SuiText
                   size='lg'
-                  weight='medium'
+                  weight='normal'
                   color='secondary'
                   className='description'>
                   {hero.description}

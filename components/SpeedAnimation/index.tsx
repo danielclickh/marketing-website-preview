@@ -116,18 +116,18 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
       <g
         fill='none'
         stroke='#2B2B29'
-        stroke-width='3'
-        stroke-linecap='round'
-        stroke-linejoin='round'>
+        strokeWidth='3'
+        strokeLinecap='round'
+        strokeLinejoin='round'>
         <use xlinkHref='#gg' />
       </g>
       <g
         className='anim'
         fill='none'
         stroke='#FBFF46'
-        stroke-width='3'
-        stroke-linecap='butt'
-        stroke-linejoin='round'>
+        strokeWidth='3'
+        strokeLinecap='butt'
+        strokeLinejoin='round'>
         <use xlinkHref='#postgresLine' />
         <use xlinkHref='#bigQueryLine' />
         <use xlinkHref='#redshiftLine' />
