@@ -7,7 +7,7 @@ import styles from './styles.module.scss'
 export default function FAQ() {
   return (
     <div className='flex flex-col md:flex-row w-full px-4 2xl:px-0 pb-16 items-start md:items-center justify-center max-w-7xl mx-auto'>
-      <div className='py-10 max-w-screen-sm mr-auto'>
+      <div className='bg-shadow-element py-10 max-w-screen-sm mr-auto'>
         <SuiTitle type='h2'>FAQs</SuiTitle>
         <div className='max-w-md my-8'>
           Wherever you need us, we’re there. We love to engage in thoughtful

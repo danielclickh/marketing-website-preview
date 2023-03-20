@@ -6,7 +6,7 @@ export interface BlogPost {
   id: number
   category: string
   title: string
-  shortDescription: string
+  shortDescription?: string
   shortDescriptionElement: ReactNode
   content: string
   author: {

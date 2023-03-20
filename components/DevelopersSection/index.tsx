@@ -1,30 +1,57 @@
 import { ArrowRightIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import React from 'react'
-import { CUIBasicCard, CUIButton } from '../ClickUI'
+import { CUIButton, CUICard } from '../ClickUI'
 import { SuiTitle } from '../sui'
+
+const developerOptions = [
+  {
+    img: '/images/homepage/developer-image.png',
+    title: 'Susan Wright - Uber',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.',
+    btnText: 'Learn More',
+    href: 'https://clickhouse.cloud'
+  },
+  {
+    img: '/images/homepage/developer-image.png',
+    title: 'Susan Wright - Uber',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.',
+    btnText: 'Learn More',
+    href: 'https://clickhouse.cloud'
+  },
+  {
+    img: '/images/homepage/developer-image.png',
+    title: 'Susan Wright - Uber',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.',
+    btnText: 'Learn More',
+    href: 'https://clickhouse.cloud'
+  }
+]
 
 function DevelopersSection() {
   return (
     <div className='mb-10 section-container'>
-      <SuiTitle type='h2' className='w-full text-left'>
+      <SuiTitle type='h2' className='w-full text-left mb-8'>
         What do developers say?
       </SuiTitle>
-      <div className='flex flex-col md:flex-row'>
+      <div className='flex flex-col md:flex-row mb-16 gap-10'>
         <Image
-          src='/developer1.svg'
+          src='/images/homepage/developer-image.png'
           width='100'
           height='100'
           alt='Developers story image'
-          className='w-full md:w-1/2'
+          className='w-full md:w-1/2 rounded-lg'
         />
         <div className='flex flex-col w-full md:w-1/2'>
           <div>
             “We saw huge speed gains from the moment we introduced ClickHouse to
             our stack”
           </div>
-          <div className='flex flex-row gap-6 mt-8'>
-            <div className='bg-primary w-2 h-full' />
+          <div className='grid grid-cols-[0.5rem_1fr] gap-6 mt-8'>
+            <div className='bg-primary w-full h-full' />
             <div>
               Disney moved its logging platform to ClickHouse increasing
               developer productivity and overall reliability of the platform
@@ -47,34 +74,37 @@ function DevelopersSection() {
           </CUIButton>
         </div>
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-3'>
-        <CUIBasicCard
-          btnType='secondary'
-          title='Susan Wright - Uber'
-          btnChildren='Learn more'
-          href='https://clickhouse.cloud'
-          className='w-full'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa
-          mi.
-        </CUIBasicCard>
-        <CUIBasicCard
-          title='Susan Wright - Uber'
-          btnType='secondary'
-          btnChildren='Learn more'
-          href='https://clickhouse.cloud'
-          className='w-full'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa
-          mi.
-        </CUIBasicCard>
-        <CUIBasicCard
-          title='Susan Wright - Uber'
-          btnType='secondary'
-          btnChildren='Learn more'
-          href='https://clickhouse.cloud'
-          className='w-full'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa
-          mi.
-        </CUIBasicCard>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-10'>
+        {developerOptions.map((developerOption) => (
+          <CUICard className=''>
+            {developerOption.img && (
+              <CUICard.Header className='w-full'>
+                <Image
+                  src={developerOption.img}
+                  alt={`Image for ${developerOption.title ?? ''}`}
+                  width={385}
+                  height={127}
+                  className='w-full h-fit aspect-[3/1]'
+                />
+              </CUICard.Header>
+            )}
+            {developerOption.description && (
+              <CUICard.Body className='flex flex-col items-center justify-center gap-2 px-6 py-8'>
+                <div className='text-center'>{developerOption.title}</div>
+                <div className='text-center'>{developerOption.description}</div>
+              </CUICard.Body>
+            )}
+            <CUICard.Footer className='grid place-items-center w-full px-6 pb-6'>
+              <CUIButton
+                type='secondary'
+                linkClass='w-full inline-grid'
+                href={developerOption.href}
+                iconRight={<ArrowRightIcon height='24' />}>
+                {developerOption.btnText}
+              </CUIButton>
+            </CUICard.Footer>
+          </CUICard>
+        ))}
       </div>
     </div>
   )

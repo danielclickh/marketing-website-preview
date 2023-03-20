@@ -8,14 +8,60 @@ import { GetStaticProps } from 'next'
 import Layout from '../components/Layout'
 import { getCommonProps } from '../lib/utils/getCommonProps'
 import FAQ from '../components/FAQ'
-import { CUIBasicCard, CUIButton, CUILink } from '../components/ClickUI'
+import { CUIButton, CUICard, CUILink } from '../components/ClickUI'
 import columnOrientedIllustration from '../public/images/homepage/column-oriented-illustration.svg'
 import rowOrientedIllustration from '../public/images/homepage/row-oriented-illustration.svg'
-import { ChevronRightIcon } from '@heroicons/react/solid'
+import { ArrowRightIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import JoinCommunity from '../components/JoinCommunity'
 import HomePageTerminal from '../components/Terminal/HomePageTerminal'
 import SpeedAnimation from '../components/SpeedAnimation'
 import DevelopersSection from '../components/DevelopersSection'
+import { CSSProperties } from 'react'
+
+const yellowPositionStyle = {
+  '--left-side': 'auto',
+  '--right-side': '10rem'
+} as CSSProperties
+
+type DeployData = {
+  title: string
+  img: string
+  btnText: string
+  description: string
+  href: string
+  target?: string
+  btnType: 'secondary' | 'primary' | 'secondary-dark'
+}
+
+const deployData: Array<DeployData> = [
+  {
+    title: 'Clickhouse Local',
+    img: '/laptop.svg',
+    btnText: 'Download ClickHouse Local',
+    description:
+      'Run fast queries on local files (CSV, TSV, Parquet, and more) without a server.',
+    href: '/',
+    btnType: 'secondary'
+  },
+  {
+    title: 'Clickhouse',
+    img: '/drive.svg',
+    btnText: 'Download ClickHouse',
+    description:
+      'Spin up a database server with open-source ClickHouse. Always Free.',
+    href: '/',
+    btnType: 'secondary'
+  },
+  {
+    title: 'ClickHouse Cloud',
+    img: '/cloud.svg',
+    btnText: 'Deploy in seconds',
+    description: 'Deploy a fully managed ClickHouse service on AWS and GCP.',
+    href: 'https://clickhouse.cloud',
+    target: '_blank',
+    btnType: 'primary'
+  }
+]
 
 const customerStoriesLogos = [
   {
@@ -53,17 +99,7 @@ const customerStoriesLogos = [
 export const getStaticProps: GetStaticProps<HomePageProps> =
   async function getStaticProps() {
     const params = {
-      populate: [
-        'hero',
-        'hero.ctaButton',
-        'customerStories',
-        'customerStories.logos',
-        'customerStories.logos.darkLogoPng',
-        'customerStories.logos.lightLogoPng',
-        'customerStories.ctaButton',
-        'seo',
-        'seo.image'
-      ]
+      populate: ['hero', 'hero.ctaButton', 'seo', 'seo.image']
     }
 
     const commonProps = await getCommonProps()
@@ -79,7 +115,6 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
 
 export default function HomePage({
   hero,
-  customerStories,
   seo,
   headerData,
   footerData,
@@ -149,7 +184,7 @@ export default function HomePage({
             <HomePageTerminal />
           </div>
         </div>
-        <div className='bg-primary py-16'>
+        <div className='bg-primary-300 py-16'>
           <div className='max-w-3xl mx-auto'>
             <div className='text-center mb-10 text-primary-700 w-fit mx-auto leading-normal sm:leading-none'>
               Trusted by the best developers that work with data at{' '}
@@ -167,7 +202,7 @@ export default function HomePage({
                   className={`customer-stories-${index} flex rounded-lg justify-center ease-in-out duration-200 cursor-pointer gap-2`}>
                   <Image
                     src={logo?.imageSrc}
-                    className='w-auto h-12 rounded bg-black/10'
+                    className='w-auto h-12 rounded'
                     alt={logo.alt}
                     width={144}
                     height={48}
@@ -290,7 +325,7 @@ export default function HomePage({
       </div>
 
       <div className='relative flex flex-col gap-y-28 mt-24 mb-16'>
-        <div className='flex flex-col items-center justify-between self-center section-container w-full'>
+        <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element'>
           <div className='flex flex-col items-center w-full gap-6'>
             <Image
               src='/fast-icon.svg'
@@ -354,7 +389,9 @@ export default function HomePage({
         </div>
       </div>
       <div className='w-full flex flex-col'>
-        <div className='flex container mx-auto flex-col section-container pt-16 items-center'>
+        <div
+          className='flex container mx-auto flex-col section-container pt-16 items-center bg-shadow-element yellow-shadow'
+          style={yellowPositionStyle}>
           <Image
             src='/deploy-icon.svg'
             alt='Deploy Icon'
@@ -369,34 +406,36 @@ export default function HomePage({
             every environment, whether it’s on your machine or on the cloud
           </div>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-10 mt-16 mb-28'>
-            <CUIBasicCard
-              icon='/laptop.svg'
-              btnType='secondary'
-              title='Clickhouse Local'
-              btnChildren='Download ClickHouse Local'
-              href='/'
-              className='w-full'>
-              Run fast queries on local files (CSV, TSV, Parquet, and more)
-              without a server.
-            </CUIBasicCard>
-            <CUIBasicCard
-              icon='/drive.svg'
-              btnType='secondary'
-              title='ClickHouse'
-              btnChildren='Download ClickHouse'
-              href='/'
-              className='w-full'>
-              Spin up a database server with open-source ClickHouse. Always
-              Free.
-            </CUIBasicCard>
-            <CUIBasicCard
-              icon='/cloud.svg'
-              title='ClickHouse Cloud'
-              btnChildren='Deploy in seconds'
-              href='https://clickhouse.cloud'
-              className='w-full'>
-              Deploy a fully managed ClickHouse service on AWS and GCP.
-            </CUIBasicCard>
+            {deployData.map((deploy) => (
+              <CUICard className='h-full p-6'>
+                <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
+                  <Image
+                    src={deploy.img}
+                    alt={`${deploy.title}`}
+                    width={64}
+                    height={64}
+                  />
+                  <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>
+                    <div className='font-basier text-lg leading-tight cursor-pointer font-bold'>
+                      {deploy.title}
+                    </div>
+                    <div className='text-neutral-200 text-center'>
+                      {deploy.description}
+                    </div>
+                  </div>
+                </CUICard.Body>
+                <CUICard.Footer className='flex items-center w-full '>
+                  <CUIButton
+                    type={deploy.btnType}
+                    href={deploy.href}
+                    linkClass='w-full inline-grid'
+                    iconRight={<ArrowRightIcon height='16' />}
+                    target={deploy.target}>
+                    {deploy.btnText}
+                  </CUIButton>
+                </CUICard.Footer>
+              </CUICard>
+            ))}
           </div>
         </div>
       </div>

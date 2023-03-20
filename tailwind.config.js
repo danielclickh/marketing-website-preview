@@ -178,7 +178,7 @@ module.exports = {
         }
       },
       boxShadow: {
-        card: '0px 4px 14px rgba(0, 0, 0, 0.13)',
+        card: '0px 4px 4px rgba(0, 0, 0, 0.06), inset 0px 4px 25px rgba(0, 0, 0, 0.14)',
         'card-xl': '0px 4px 14px 4px rgba(0, 0, 0, 0.13)',
         input: '0px 1px 2px rgba(0, 0, 0, 0.05)',
         'click-card':

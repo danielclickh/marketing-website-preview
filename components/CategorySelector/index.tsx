@@ -11,15 +11,17 @@ interface Props extends HTMLAttributes<HTMLUListElement> {
 
 function CategorySelector({ options, className = '', ...props }: Props) {
   return (
-    <ul className={`mt-4 ${className}`} {...props}>
+    <ul
+      className={`flex flex-wrap justify-center gap-2.5 ${className}`}
+      {...props}>
       {options.map((option) => (
         <li
           key={option.text}
           onClick={option.onClick}
-          className={`text-sm px-4 py-2 mb-1 rounded-md cursor-pointer transition-colors duration-500 ease-in-out transform ${
+          className={`flex items-center text-sm font-medium px-4 h-[36px] whitespace-nowrap rounded-full cursor-pointer transition-colors duration-500 ease-in-out transform border border-primary-600 ${
             option.selected
-              ? 'bg-primary text-neutral-800 font-semibold'
-              : 'hover:bg-primary-300 text-neutral-300 hover:text-neutral-800 font-medium'
+              ? 'bg-primary-300 text-primary-800'
+              : 'hover:bg-primary-300 text-neutral-0 hover:text-primary-800'
           }`}>
           {option.text}
         </li>
