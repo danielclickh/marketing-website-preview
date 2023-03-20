@@ -5,11 +5,17 @@ import { CUILink } from '../ClickUI'
 
 export default function FetchGetStarted({ platforms }: GettingStartedData) {
   return (
-    <div className='flex text-neutral-0' id='getting_started'>
-      <div className='container mx-auto justify-center py-32 px-8 2xl:px-0  flex flex-col w-full max-w-7xl'>
-        <div className='flex flex-col text-center mx-auto '>
+    <div
+      className='flex text-neutral-0 section-container w-full mb-36'
+      id='getting_started'>
+      <div className='mx-auto flex flex-col justify-center w-full bg-neutral-900/50 border border-neutral-700 py-16 xl:px-24 rounded-lg'>
+        <div className='flex flex-col text-center'>
           <SuiTitle type='h2' color='white'>
-            Start using ClickHouse in minutes
+            Start using{' '}
+            <span className='tilted tilted-yellow'>
+              <span className='tilted-content'>ClickHouse</span>
+            </span>{' '}
+            in minutes
           </SuiTitle>
           <div className='text-neutral-200 text-center mb-8 mt-6'>
             Install ClickHouse for MacOs, Linux and FreeBSD
