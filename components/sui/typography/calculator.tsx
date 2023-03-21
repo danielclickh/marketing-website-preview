@@ -32,13 +32,13 @@ export const colorCalculator = (color: string, defaultColor?: string) => {
     case 'primary':
       return 'text-neutral-0'
     case 'c6':
-      return 'text-c6'
+      return 'text-primary'
     case 'c7':
       return 'text-c7'
     case 'white':
       return 'text-neutral-0'
     case 'text-default':
-      return 'text-primary-900'
+      return 'text-neutral-900'
     case 'text-muted':
       return 'text-neutral-300'
     case 'text-accent':

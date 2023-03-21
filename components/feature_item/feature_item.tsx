@@ -14,7 +14,7 @@ type FeatureItemProps = {
 export function FeatureItem(props: FeatureItemProps) {
   const { icon, title, description, delay, forceDarkMode = false } = props
 
-  const colorPalette = `${forceDarkMode ? 'bg-c2-dark' : 'bg-c2'}`
+  const colorPalette = `${forceDarkMode ? 'bg-c2-dark' : 'bg-neutral-725'}`
 
   return (
     <div className='flex w-full gap-x-4'>
