@@ -162,8 +162,7 @@ function CustomerStoriesPage({
                   </div>
 
                   <div className='hidden md:block -mt-8 -mb-14 overflow-hidden ml-auto w-full max-w-xs'>
-                    <div
-                      className={`bg-c2-dark dark:bg-c2-dark ${styles.hexagon}`}>
+                    <div className={`bg-neutral-750 ${styles.hexagon}`}>
                       <StrapiPicture
                         light={spotlight.lightLogoPng}
                         dark={spotlight.darkLogoPng}
