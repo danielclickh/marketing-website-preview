@@ -158,7 +158,7 @@ export default function ClickHouseServerPage({
             </div>
           </div>
         </div>
-        <div className='bg-c1 text-neutral-0'>
+        <div className='text-neutral-0'>
           <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-24 px-4 sm:px-8 2xl:px-0 pt-16'>
             <SuiTitle type='h3' className='mb-7 !text-lg' color='c6'>
               {features1.title}
@@ -176,7 +176,7 @@ export default function ClickHouseServerPage({
             </div>
           </div>
         </div>
-        <div className='flex w-full bg-c2 text-neutral-0 pb-20'>
+        <div className='flex w-full text-neutral-0 pb-20'>
           <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0'>
             {features2.pretitle && (
               <SuiTitle type='h5' color='c6' className='mb-2'>
@@ -200,7 +200,7 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <div className='flex w-full bg-c1 pb-20'>
+        <div className='flex w-full pb-20'>
           <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 px-8 2xl:px-0'>
             {features3.pretitle && (
               <SuiTitle type='h5' className='mb-2' color='c6'>
@@ -238,7 +238,7 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <div className='flex w-full bg-c2 text-neutral-0 pb-20'>
+        <div className='flex w-full text-neutral-0 pb-20'>
           <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 px-8 2xl:px-0'>
             {features4.pretitle && (
               <SuiTitle type='h5' color='c6' className='mb-2'>
@@ -264,7 +264,7 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <div className='flex w-full bg-c1 pb-20'>
+        <div className='flex w-full pb-20'>
           <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 px-8 2xl:px-0'>
             <div className='flex flex-col md:flex-row items-center'>
               <div className='md:w-2/5 justify-center flex h-64 w-64'>
