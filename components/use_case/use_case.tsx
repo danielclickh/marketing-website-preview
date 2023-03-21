@@ -28,7 +28,7 @@ export function UseCase(props: TestimonialProps) {
   } = props
 
   return (
-    <SuiPanel isRounded color='bg-c1' shadow padding='xl'>
+    <SuiPanel isRounded color='bg-neutral-725' shadow padding='xl'>
       <div
         className='flex flex-col justify-start align-top items-between h-full'
         id={id}>

@@ -44,7 +44,7 @@ const colorCalculator = ({
       if (disabled) {
         return 'bg-transparent text-inherit border border-c4'
       }
-      return 'bg-transparent text-inherit border border-c6'
+      return 'bg-transparent text-inherit border border-primary'
     case 'danger':
       if (disabled) {
         return disabledStyle
@@ -61,7 +61,7 @@ const colorCalculator = ({
     case 'custom':
       return 'custom-btn'
     case 'dark':
-      return 'bg-primary-900 text-neutral-0'
+      return 'bg-neutral-800 text-neutral-0'
     case 'ghost':
       return 'bg-transparent text-inherit border border-c4'
     case 'success':
@@ -76,7 +76,7 @@ const colorCalculator = ({
       if (disabled) {
         return disabledStyle
       }
-      return 'bg-c6 text-c6-text'
+      return 'bg-primary text-c6-text'
   }
 }
 

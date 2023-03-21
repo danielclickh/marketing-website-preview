@@ -18,10 +18,10 @@ function CategorySelector({ options, className = '', ...props }: Props) {
         <li
           key={option.text}
           onClick={option.onClick}
-          className={`flex items-center text-sm font-medium px-4 h-[36px] whitespace-nowrap rounded-full cursor-pointer transition-colors duration-500 ease-in-out transform border border-primary-600 ${
+          className={`flex items-center text-sm font-medium px-4 h-[36px] whitespace-nowrap rounded-full cursor-pointer transition-colors duration-500 ease-in-out transform border border-neutral-725 ${
             option.selected
-              ? 'bg-primary-300 text-primary-800'
-              : 'hover:bg-primary-300 text-neutral-0 hover:text-primary-800'
+              ? 'bg-primary-300 text-neutral-800'
+              : 'hover:bg-primary-300 text-neutral-0 hover:text-neutral-900'
           }`}>
           {option.text}
         </li>

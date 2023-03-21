@@ -141,7 +141,7 @@ export default function BlogsPage({
           ))}
         </div>
       </BlogPostList>
-      <div className='bg-primary-300 text-primary-800 flex flex-col items-center justify-center mt-20'>
+      <div className='bg-primary-300 text-neutral-900 flex flex-col items-center justify-center mt-20'>
         <div className='mt-8 mb-4'>Follow us</div>
         <div className='flex flex-wrap gap-6 mb-12 justify-center'>
           <CUILink

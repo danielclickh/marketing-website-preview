@@ -44,7 +44,7 @@ function NewsLetterForm({
   }
 
   return (
-    <div className='relative flex items-center items-start space-x-2 bg-primary-800 rounded'>
+    <div className='relative flex items-center items-start space-x-2 bg-neutral-725 rounded'>
       <input
         type='text'
         id='email'

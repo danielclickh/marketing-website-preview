@@ -6,7 +6,7 @@ import { SuiTitle } from '../sui'
 
 function GrowingCommunity({ title, iconButtons }: GrowingCommunityProps) {
   return (
-    <div className='w-full bg-primary-800 text-neutral-0 pt-16 pb-12'>
+    <div className='w-full text-neutral-0 pt-16 pb-12'>
       <div className='flex flex-col container mx-auto max-w-7xl px-8 2xl:px-0 mb-12'>
         <SuiTitle type='h2'>{title}</SuiTitle>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 pt-11'>

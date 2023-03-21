@@ -40,7 +40,7 @@ export const colorCalculator = (color: string, defaultColor?: string) => {
     case 'text-default':
       return 'text-neutral-900'
     case 'text-muted':
-      return 'text-neutral-300'
+      return 'text-neutral-200'
     case 'text-accent':
       return 'text-primary'
     case 'c5-light':

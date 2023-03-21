@@ -65,7 +65,7 @@ export default function OurStoryPage({
   return (
     <>
       <Layout headerData={headerData} footerData={footerData} seo={seo}>
-        <div className='bg-primary-900 bg-cover pt-16'>
+        <div className='pt-16'>
           <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
             <div className='flex flex-col text-center mx-auto'>
               <SuiTitle type='h1' className='mb-5'>
@@ -105,7 +105,7 @@ export default function OurStoryPage({
             </div>
           </div>
         </div>
-        <div className='bg-noised text-neutral-0 w-full pt-16 pb-12 px-6'>
+        <div className='text-neutral-0 w-full pt-16 pb-12 px-6'>
           <SuiTitle type='h2' weight='bold' className='mb-4 max-w-7xl mx-auto'>
             {aboutUs.title}
           </SuiTitle>
@@ -145,7 +145,7 @@ export default function OurStoryPage({
           ))}
         </div>
 
-        <div className='w-full pt-16 pb-24 px-6 bg-primary-900'>
+        <div className='w-full pt-16 pb-24 px-6'>
           <div className='flex container mx-auto flex-col max-w-7xl'>
             <SuiTitle type='h2' className='mb-11 mx-auto md:ml-0'>
               {ourHistory.title}
@@ -201,7 +201,7 @@ export default function OurStoryPage({
             </div>
           </div>
         </div>
-        <div className='bg-primary-900 w-full pt-16 pb-24 px-4 md:px-8'>
+        <div className='w-full pt-16 pb-24 px-4 md:px-8'>
           <div className='flex container mx-auto flex-col max-w-7xl'>
             <SuiTitle
               type='h3'

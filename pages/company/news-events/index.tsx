@@ -136,7 +136,7 @@ export default function News({
 }: NewsEventProps) {
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
-      <div className='bg-primary-900 bg-cover pt-14'>
+      <div className='pt-14'>
         <div className='flex mx-auto flex-col px-4 sm:px-8 2xl:px-0'>
           <div className='flex flex-col text-center mx-auto'>
             <SuiTitle type='h1' className='mb-5'>
@@ -154,8 +154,9 @@ export default function News({
           {featuredEvent && (
             <div className='flex max-w-7xl mx-auto'>
               <SuiPanel
-                color='bg-noised text-neutral-0'
+                color='bg-neutral-750 text-neutral-0'
                 isRounded
+                border
                 shadow
                 padding='lg'
                 className='my-16'>
@@ -205,11 +206,11 @@ export default function News({
           )}
         </div>
       </div>
-      <div className='flex w-full bg-noised pb-8'>
+      <div className='flex w-full pb-8'>
         <RecentEvents events={recentEvents} />
       </div>
 
-      <div className='flex w-full bg-primary-900 text-neutral-0 pb-8'>
+      <div className='flex w-full text-neutral-0 pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex flex-col md:flex-row justify-between pb-4 gap-x-24 gap-y-10'>
             <div className='flex flex-col md:w-1/2'>
@@ -239,13 +240,13 @@ export default function News({
                   <SuiLink
                     href={`/company/events/${upcomingEvent.slug}`}
                     target='_self'
-                    className={`grid grid-cols-1 md:grid-cols-[4rem_1fr] gap-x-6 p-4 group hover:bg-primary-800 rounded-lg hover:no-underline ease-in-out duration-200 cursor-pointer event-${upcomingEvent.title.replace(
+                    className={`grid grid-cols-1 md:grid-cols-[4rem_1fr] gap-x-6 p-4 group hover:bg-neutral-725 rounded-lg hover:no-underline ease-in-out duration-200 cursor-pointer event-${upcomingEvent.title.replace(
                       ' ',
                       '-'
                     )}`}
                     key={upcomingEvent.title}>
                     <div className='hidden md:flex items-top justify-start'>
-                      <div className='w-16 h-16 bg-primary-800 rounded-lg flex items-center p-1 shadow-card'>
+                      <div className='w-16 h-16 bg-neutral-800 rounded-lg flex items-center p-1 shadow-card'>
                         <StrapiPicture
                           dark={upcomingEvent.darkFeatureImagePng}
                           light={upcomingEvent.lightFeatureImagePng}
@@ -297,7 +298,7 @@ export default function News({
         </div>
       </div>
 
-      <div className='flex w-full bg-primary-900 pb-8'>
+      <div className='flex w-full pb-8'>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-4 sm:px-8 2xl:px-0'>
           <SuiTitle type='h2' className='mb-8 !text-3xl'>
             {pressReleasesTitle}

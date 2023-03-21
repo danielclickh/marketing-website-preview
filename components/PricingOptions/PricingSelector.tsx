@@ -14,7 +14,7 @@ function PricingSelector({
   return (
     <Listbox value={selectedRegion} onChange={setSelectedRegion}>
       <div className='relative mt-1'>
-        <Listbox.Button className='relative bg-c1 w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left shadow-input focus:outline-none sm:text-sm border border-c4/10'>
+        <Listbox.Button className='relative bg-neutral-750 w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left shadow-input focus:outline-none sm:text-sm border border-neutral-725'>
           <span className='flex gap-3 truncate'>
             <>
               {selectedRegion?.regionFlagPNG}
@@ -30,12 +30,12 @@ function PricingSelector({
           leave='transition ease-in duration-100'
           leaveFrom='opacity-100'
           leaveTo='opacity-0'>
-          <Listbox.Options className='absolute mt-1 w-full overflow-auto rounded-md bg-c1 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+          <Listbox.Options className='absolute mt-1 w-full overflow-auto rounded-md bg-neutral-750 border-neutral-725 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
             {regionList.map((item) => (
               <Listbox.Option
                 key={item.region}
                 value={item}
-                className='hover:bg-c2'>
+                className='hover:bg-neutral-700'>
                 {({ selected }) => (
                   <span
                     className={`flex gap-3 truncate relative w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm ${

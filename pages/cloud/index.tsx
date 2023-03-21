@@ -109,7 +109,7 @@ export default function CloudPage({
                                 <StrapiPicture
                                   key={`${cloudProvider.title}-${index}`}
                                   dark={cloudProvider.darkProviderPngs[index]}
-                                  light={lightIconPng}
+                                  light={cloudProvider.darkProviderPngs[index]}
                                   height={40}
                                   className='max-h-8 w-auto'
                                 />
@@ -145,7 +145,7 @@ export default function CloudPage({
             </div>
           </div>
         </div>
-        <div className='bg-c1 text-neutral-0'>
+        <div className='text-neutral-0'>
           <div className='flex container mx-auto flex-col max-w-7xl  pb-16 px-4 sm:px-8 2xl:px-0 pt-16'>
             <div className='feature-container'>
               {features.map((feature) => (
@@ -161,7 +161,7 @@ export default function CloudPage({
           </div>
         </div>
 
-        <div className='flex w-full bg-c2 text-neutral-0 pb-12 gap-y-4 md:gap-y-28'>
+        <div className='flex w-full text-neutral-0 pb-12 gap-y-4 md:gap-y-28'>
           <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0 gap-y-24'>
             {screenshotsAndBullets.map((item, index: number) => (
               <div

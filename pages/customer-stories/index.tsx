@@ -113,7 +113,7 @@ function CustomerStoriesPage({
         </div>
       </div>
 
-      <div className='bg-c2 text-neutral-0 w-full pt-16 pb-24'>
+      <div className='text-neutral-0 w-full pt-16 pb-24'>
         <div className=' max-w-7xl mx-auto'>
           <div className='flex container mr-auto flex-col max-w-screen-md px-6 2xl:px-0'>
             <SuiTitle type='h2' className='mb-4'>
@@ -127,7 +127,12 @@ function CustomerStoriesPage({
             <div
               className='flex mt-10 space-x-12 px-6 2xl:px-0 relative md:min-h-fit'
               id={spotlight.anchorId}>
-              <SuiPanel isRounded color='bg-c1' shadow padding='xl'>
+              <SuiPanel
+                isRounded
+                color='bg-neutral-725'
+                border
+                shadow
+                padding='xl'>
                 <div className='flex flex-row drop-shadow-2xl'>
                   <div className='flex flex-col w-full md:w-1/2'>
                     <SuiTitle type='h5' color='c6' className='mb-3 uppercase'>
@@ -139,7 +144,7 @@ function CustomerStoriesPage({
                       className='mb-2.5 !text-2xl'>
                       {spotlight.companyName}
                     </SuiTitle>
-                    <SuiText size='sm' weight='medium'>
+                    <SuiText size='sm' weight='medium' color='text-muted'>
                       {spotlight.description}
                     </SuiText>
                     {spotlight.ctaButton && (
@@ -158,7 +163,7 @@ function CustomerStoriesPage({
 
                   <div className='hidden md:block -mt-8 -mb-14 overflow-hidden ml-auto w-full max-w-xs'>
                     <div
-                      className={`bg-c1-light dark:bg-c2-dark ${styles.hexagon}`}>
+                      className={`bg-c2-dark dark:bg-c2-dark ${styles.hexagon}`}>
                       <StrapiPicture
                         light={spotlight.lightLogoPng}
                         dark={spotlight.darkLogoPng}

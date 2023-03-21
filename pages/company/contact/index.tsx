@@ -48,7 +48,7 @@ export default function ContactPage({
 }: ContactProps) {
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
-      <div className='bg-primary-900 bg-cover pt-10'>
+      <div className='pt-10'>
         <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
           <div className='flex flex-col text-center mx-auto pt-6'>
             <SuiTitle type='h1' className='mb-4'>

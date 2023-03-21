@@ -149,8 +149,8 @@ module.exports = {
           dark: '#FFFFFF'
         },
         c6: {
-          DEFAULT: '#FFB200',
-          text: '#4B2A04',
+          DEFAULT: '#FCFF74',
+          text: '#FCFF74',
           link: '#C78F0F'
         },
         c7: {
