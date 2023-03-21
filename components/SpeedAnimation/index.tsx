@@ -64,51 +64,51 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
             id='localFilesLine'
           />
           <path
-            d='M1050 69.0153L902.581 69.0153C899.215 69.0153 896.455 71.7575 896.455 75.101L896.455 273.453 L896.454 327.43C896.454 330.773 893.693 333.516 890.327 333.516L639.849 333.516'
+            d='M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.455,273.453L896.455,75.101C896.455,71.7575 899.215,69.0153 902.581,69.0153L1050,69.0153'
             id='supersetLine'
           />
           <path
-            d='M1122.68 69.0153L902.581 69.0153C899.215 69.0153 896.455 71.7575 896.455 75.101L896.455 273.453 L896.454 327.43C896.454 330.773 893.693 333.516 890.327 333.516L639.849 333.516'
+            d='M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.455,273.453L896.455,75.101C896.455,71.7575 899.215,69.0153 902.581,69.0153L1122.68,69.0153'
             id='deepNoteLine'
           />
           <path
-            d='M1050 157.863L902.579 157.863C899.213 157.863 896.453 160.605 896.453 163.949L896.453 273.453 L896.454 327.43C896.454 330.773 893.693 333.516 890.327 333.516L639.849 333.516'
+            d='M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.453,273.453L896.453,163.949C896.453,160.605 899.213,157.863 902.579,157.863L1050,157.863'
             id='graphanaLine'
           />
           <path
-            d='M1120.39 157.863L902.579 157.863C899.213 157.863 896.453 160.605 896.453 163.949L896.453 273.453 L896.454 327.43C896.454 330.773 893.693 333.516 890.327 333.516L639.849 333.516'
+            d='M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.453,273.453L896.453,163.949C896.453,160.605 899.213,157.863 902.579,157.863L1120.39,157.863'
             id='metabaseLine'
           />
           <path
-            d='M1050 244.926L902.581 244.926C899.215 244.926 896.454 247.668 896.454 251.012L896.454 327.43C896.454 330.773 893.693 333.516 890.327 333.516L639.849 333.516'
+            d='M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.454,251.012C896.454,247.668 899.215,244.926 902.581,244.926L1050,244.926'
             id='tableauLine'
           />
           <path
-            d='M1118.21 244.926L902.581 244.926C899.215 244.926 896.454 247.668 896.454 251.012L896.454 327.43C896.454 330.773 893.693 333.516 890.327 333.516L639.849 333.516'
+            d='M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.454,251.012C896.454,247.668 899.215,244.926 902.581,244.926L1118.21,244.926'
             id='hexLine'
           />
           <path
-            d='M1060 669.936L903.298 669.936C900.016 669.936 897.385 667.323 897.385 664.062L897.385 364.636C897.386 353.394 894.755 350.781 891.472 350.781L602.305 350.781'
+            d='M602.305,350.781L891.472,350.781C894.755,350.781 897.386,353.394 897.385,364.636L897.385,664.062C897.385,667.323 900.016,669.936 903.298,669.936L1060,669.936'
             id='pythonLine'
           />
           <path
-            d='M1131.52 669.936L903.298 669.936C900.016 669.936 897.385 667.323 897.385 664.062L897.385 364.636C897.386 353.394 894.755 350.781 891.472 350.781L602.305 350.781'
+            d='M602.305,350.781L891.472,350.781C894.755,350.781 897.386,353.394 897.385,364.636L897.385,664.062C897.385,667.323 900.016,669.936 903.298,669.936L1131.52,669.936'
             id='nodejsLine'
           />
           <path
-            d='M1060 581.926L903.319 582.127C900.034 582.129 897.4 579.515 897.4 576.253L897.4 364.636C897.386 353.394 894.755 350.781 891.472 350.781L602.305 350.781'
+            d='M602.305,350.781L891.472,350.781C894.755,350.781 897.386,353.394 897.4,364.636L897.4,576.253C897.4,579.515 900.034,582.129 903.319,582.127L1060,581.926'
             id='javaLine'
           />
           <path
-            d='M1131.79 581.926L903.319 582.127C900.034 582.129 897.4 579.515 897.4 576.253L897.4 364.636C897.386 353.394 894.755 350.781 891.472 350.781L602.305 350.781'
+            d='M602.305,350.781L891.472,350.781C894.755,350.781 897.386,353.394 897.4,364.636L897.4,576.253C897.4,579.515 900.034,582.129 903.319,582.127L1131.79,581.926'
             id='cHashLine'
           />
           <path
-            d='M1060 494.109L903.3 494.109C900.017 494.109 897.386 491.496 897.386 488.235L897.386 356.655C897.386 353.394 894.755 350.781 891.472 350.781L602.305 350.781'
+            d='M602.305,350.781L891.472,350.781C894.755,350.781 897.386,353.394 897.386,356.655L897.386,488.235C897.386,491.496 900.017,494.109 903.3,494.109L1060,494.109'
             id='goLine'
           />
           <path
-            d='M1130.61 494.109L903.3 494.109C900.017 494.109 897.386 491.496 897.386 488.235L897.386 356.655C897.386 353.394 894.755 350.781 891.472 350.781L602.305 350.781'
+            d='M602.305,350.781L891.472,350.781C894.755,350.781 897.386,353.394 897.386,356.655L897.386,488.235C897.386,491.496 900.017,494.109 903.3,494.109L1130.61,494.109'
             id='rustLine'
           />
         </g>
@@ -122,37 +122,257 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <use xlinkHref='#gg' />
       </g>
       <g
-        className='anim'
+        className=''
         fill='none'
-        stroke='#FBFF46'
         strokeWidth='3'
         strokeLinecap='butt'
         strokeLinejoin='round'>
-        <use xlinkHref='#postgresLine' />
-        <use xlinkHref='#bigQueryLine' />
-        <use xlinkHref='#redshiftLine' />
-        <use xlinkHref='#snowflakeLine' />
-        <use xlinkHref='#mongoLine' />
-        <use xlinkHref='#mysqlLine' />
-        <use xlinkHref='#kafkaLine' />
-        <use xlinkHref='#vectorLine' />
-        <use xlinkHref='#dbtLine' />
-        <use xlinkHref='#icebergLine' />
-        <use xlinkHref='#hudiLine' />
-        <use xlinkHref='#deltaLakeLine' />
-        <use xlinkHref='#localFilesLine' />
-        <use xlinkHref='#supersetLine' className='reverse-line' />
-        <use xlinkHref='#deepNoteLine' className='reverse-line' />
-        <use xlinkHref='#graphanaLine' className='reverse-line' />
-        <use xlinkHref='#metabaseLine' className='reverse-line' />
-        <use xlinkHref='#tableauLine' className='reverse-line' />
-        <use xlinkHref='#hexLine' className='reverse-line' />
-        <use xlinkHref='#pythonLine' className='reverse-line' />
-        <use xlinkHref='#nodejsLine' className='reverse-line' />
-        <use xlinkHref='#javaLine' className='reverse-line' />
-        <use xlinkHref='#cHashLine' className='reverse-line' />
-        <use xlinkHref='#goLine' className='reverse-line' />
-        <use xlinkHref='#rustLine' className='reverse-line' />
+        <use xlinkHref='#postgresLine' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            id='postgresLineAnimate'
+            repeatCount='indefinite'
+            begin='4s;redshiftLineAnimate.end'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#bigQueryLine' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            id='bigQueryLineAnimate'
+            repeatCount='indefinite'
+            begin='postgresLineAnimate.end'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#redshiftLine' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            id='redshiftLineAnimate'
+            begin='bigQueryLineAnimate.end'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#snowflakeLine' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            id='snowflakeLineAnimate'
+            begin='redshiftLineAnimate.end'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#mongoLine' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            id='mongoLineAnimate'
+            begin='snowflakeLineAnimate.end'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#mysqlLine' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            id='mysqlLineAnimate'
+            begin='mysqlLineAnimate.end'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#kafkaLine' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            id='kafkaLineAnimate'
+            begin='0s;dbtLineAnimate.end'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#vectorLine' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            id='vectorLineAnimate'
+            begin='kafkaLineAnimate.end'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#dbtLine' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            id='dbtLineAnimate'
+            begin='vectorLineAnimate.end'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#icebergLine' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#hudiLine' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#deltaLakeLine' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#localFilesLine' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use
+          xlinkHref='#supersetLine'
+          className='reverse-line'
+          stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use
+          xlinkHref='#deepNoteLine'
+          className='reverse-line'
+          stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use
+          xlinkHref='#graphanaLine'
+          className='reverse-line'
+          stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use
+          xlinkHref='#metabaseLine'
+          className='reverse-line'
+          stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#tableauLine' className='reverse-line' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#hexLine' className='reverse-line' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#pythonLine' className='reverse-line' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#nodejsLine' className='reverse-line' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#javaLine' className='reverse-line' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#cHashLine' className='reverse-line' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#goLine' className='reverse-line' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#rustLine' className='reverse-line' stroke='#FBFF46'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
       </g>
       <rect
         xmlns='http://www.w3.org/2000/svg'
@@ -180,15 +400,22 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
       </text>
       {/* postgres */}
       <rect
-        stroke='rgba(52, 52, 52, 0.9)'
         xmlns='http://www.w3.org/2000/svg'
         x='15.1426'
         y='31.0679'
         width='72'
         height='72'
         fill='#1A1918'
-        rx='4'
-      />
+        stroke='rgba(52, 52, 52, 0.9)'
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='postgresLineAnimate.begin-3s'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -205,7 +432,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'></rect>
+        rx='4'>
+        <animate
+          dur='3s'
+          attributeName='stroke'
+          begin='bigQueryLineAnimate.begin - 3s'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -222,7 +457,16 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'></rect>
+        rx='4'>
+        <animate
+          dur='3s'
+          attributeName='stroke'
+          id='redshiftRect'
+          begin='redshiftLineAnimate.begin-3s'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -298,7 +542,16 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'></rect>
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='kafkaLineAnimate.begin + 2s'
+          repeatCount='indefinite'
+          to='#FBFF46'
+          keyTimes='0; 1; 0; 0; 0'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -316,7 +569,16 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'></rect>
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='vectorLineAnimate.begin + 2s'
+          repeatCount='indefinite'
+          to='#FBFF46'
+          keyTimes='0; 1; 0; 0; 0'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'

@@ -357,15 +357,6 @@ body {
   background-image: url("/datawarehouse-run.png");
 }
 
-@keyframes reveal {
-  50% {
-    stroke-dashoffset: 0;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-
 @keyframes pulseEffect {
   from {
     filter: drop-shadow(0px 0px 50px #fbff46);
@@ -374,25 +365,11 @@ body {
     filter: drop-shadow(0px 0px 25px #fbff46);
   }
 }
+
 .clickhouse-logo-container {
   animation: pulseEffect 2s ease-in-out 0s alternate infinite;
 }
 
-svg.test {
-  .anim * {
-    stroke-dashoffset: 1000;
-    stroke-dasharray: 250;
-    animation: reveal 2s ease-in-out 0s forwards infinite;
-  }
-  @for $i from 1 to 5 {
-    .anim *:nth-child(#{$i}n) {
-      animation-delay: $i * 13s;
-    }
-  }
-  .reverse-line {
-    animation-direction: reverse;
-  }
-}
 .clip-inverted-triangle {
   @apply relative;
   &::before {

@@ -12,7 +12,7 @@ interface Props extends HTMLAttributes<HTMLUListElement> {
 function CategorySelector({ options, className = '', ...props }: Props) {
   return (
     <ul
-      className={`flex flex-wrap justify-center gap-2.5 ${className}`}
+      className={`flex flex-nowrap overflow-auto md:flex-wrap justify-center gap-2.5 ${className}`}
       {...props}>
       {options.map((option) => (
         <li
