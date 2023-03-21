@@ -1,6 +1,12 @@
 .newsLetterInput {
-  input {
-    min-height: 40px !important;
+  min-height: 48px !important;
+  @apply bg-transparent text-neutral-0 px-4;
+  &:hover,
+  &:active {
+    outline: 0;
+  }
+  &::placeholder {
+    @apply text-slate-400;
   }
 }
 

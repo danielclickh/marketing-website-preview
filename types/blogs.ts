@@ -27,9 +27,9 @@ export interface BlogPostListProps {
 }
 
 export interface BlogProps extends CommonProps {
+  featuredBlog: BlogPost
   title: string
   description: string
   blogs: Array<BlogPost>
   categories: string[]
-  newsLetterData: NewsLetterData
 }

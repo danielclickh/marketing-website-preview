@@ -122,22 +122,19 @@ export default function HomePage({
 }: HomePageProps) {
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
-      <div className='homepage overflow-hidden'>
-        <div className='flex flex-col pb-20 lg:pb-44 pt-16 md:pt-28 px-8 2xl:px-0 relative gap-24 justify-center '>
-          <div className='flex flex-col w-full mx-auto max-w-3xl'>
+      <div className='homepage overflow-hidden bg-grid'>
+        <div className='flex flex-col pb-20 lg:pb-44 pt-16 md:pt-24 px-8 2xl:px-0 relative gap-24 justify-center '>
+          <div className='flex flex-col w-full mx-auto max-w-2xl'>
             <div className='mx-auto md:mr-0 md:mt-8 flex-col items-center justify-center'>
-              <SuiTitle
-                type='h1'
-                className='md:!text-5.5xl text-center'
-                color='primary'>
+              <SuiTitle type='h1' className='text-center' color='primary'>
                 Query{' '}
                 <span className='tilted tilted-yellow'>
-                  <span className='tilted-content'>BILLIONS</span>
+                  <span className='tilted-content'>billions</span>
                 </span>{' '}
-                of rows in less than a second
+                of rows in milliseconds
               </SuiTitle>
-              <div className='mx-auto mt-6 flex flex-col items-center max-w-md'>
-                <div className='leading-normal text-neutral-200 text-center mb-10'>
+              <div className='mx-auto flex flex-col items-center max-w-md'>
+                <div className='leading-normal text-neutral-200 text-center my-8'>
                   ClickHouse is the fastest open-source data warehouse for low
                   latency apps and analytics
                 </div>
@@ -222,11 +219,11 @@ export default function HomePage({
             width={72}
             height={72}
           />
-          <SuiTitle type='h2' className='my-6'>
+          <SuiTitle type='h2' className='mb-6 mt-8'>
             Speed up queries from any data source
           </SuiTitle>
           <div className='text-neutral-200 max-w-screen-sm leading-normal text-center mx-auto mb-10'>
-            ClickHouse supports all the datasources you need to power your apps
+            ClickHouse supports all the data sources you need to power your apps
             and use cases that require exceptional performance.
           </div>
           <div className='flex flex-wrap md:hidden gap-10 justify-center'>

@@ -1,17 +1,18 @@
 import React from 'react'
 import { SuiLink, SuiText, SuiTitle } from '../../components/sui'
-import { fetchAll, findOne } from '../../lib/api/strapi'
+import { fetchAll, findAll, findOne } from '../../lib/api/strapi'
 
 import BlogPostList from '../../components/BlogPostList'
-import GetStarted from '../../components/GetStarted'
-import NewsLetter from '../../components/NewsLetter'
 import { BlogPost as BlogPostType, BlogProps } from '../../types/blogs'
 import BlogPost from '../../components/BlogPostList/BlogPost'
 import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { getNewsLetterData } from '../../components/NewsLetter/getNewsLetterData'
 import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
+import { StrapiImage } from '../../components/StrapiElements'
+import { convertDateToString } from '../../lib/utils/dateUtils'
+import { CUILink } from '../../components/ClickUI'
+import Image from 'next/image'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps() {
@@ -19,7 +20,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       populate: ['hero', 'seo', 'seo.image']
     }
     const { hero, seo } = await findOne('blog', blogPageparams)
-    const blogsParams = {
+    const blogsParams: Record<string, any> = {
       sort: ['date:DESC', 'publishedAt:DESC'],
       populate: ['author', 'author.avatarPng', 'thumbnailPng'],
       fields: [
@@ -33,21 +34,32 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         'date'
       ]
     }
+    const { data: featuredBlog } = await findAll('blog-posts', {
+      ...blogsParams,
+      pagination: { limit: 1 }
+    })
+    console.log('asasas', featuredBlog)
+    if (featuredBlog[0]) {
+      blogsParams.filters = {
+        slug: {
+          $ne: featuredBlog[0].slug
+        }
+      }
+    }
     const data = await fetchAll('blog-posts', blogsParams)
     const categories = new Set<string>()
     for (let index = 0; index < data.length; index++) {
       categories.add(data[index].category)
     }
     const commonProps = await getCommonProps()
-    const newsLetterData = await getNewsLetterData()
     return {
       props: {
+        featuredBlog: featuredBlog[0],
         title: hero.title,
         description: hero.description,
         blogs: data,
         categories: Array.from(categories),
         seo,
-        newsLetterData,
         ...commonProps
       },
       revalidate: REVALIDATE_SECONDS
@@ -55,76 +67,141 @@ export const getStaticProps: GetStaticProps<BlogProps> =
   }
 
 export default function BlogsPage({
+  featuredBlog,
   blogs,
   categories,
   title,
-  description,
   headerData,
   seo,
-  newsLetterData,
-  footerData,
-  platforms
+  footerData
 }: BlogProps) {
+  console.log(featuredBlog)
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
-      <div className='pt-10'>
-        <div className='flex max-w-7xl px-4 sm:px-8 2xl:px-0 mx-auto flex-col'>
-          <div className='flex flex-col text-center mx-auto pt-6'>
-            <SuiTitle type='h1' className='mb-6'>
-              {title}
-            </SuiTitle>
-            <SuiText
-              size='lg'
-              color='secondary'
-              weight='normal'
-              className='max-w-screen-sm'>
-              {description}
-            </SuiText>
+      <SuiTitle type='h1' className='pt-10 mb-16 mx-auto'>
+        {title}
+      </SuiTitle>
+
+      <CUILink
+        href={`/blog/${featuredBlog.slug}`}
+        className='mt-2 flex flex-col md:flex-row mb-16 gap-10 section-container hover:no-underline'>
+        <div className='flex flex-col lg:flex-row-reverse hover:shadow-card rounded-xl gap-8 lg:gap-12 xl:gap-24'>
+          {featuredBlog.thumbnailPng && (
+            <StrapiImage
+              {...featuredBlog.thumbnailPng}
+              className='w-full lg:w-1/2 rounded-lg object-cover h-fit'
+            />
+          )}
+          <div className='grid grid-cols-[0.5rem_1fr] gap-6 w-full lg:w-1/2'>
+            <div className='bg-primary-300 w-full h-full' />
+            <div className='flex flex-col'>
+              <div className='text-primary-300 font-medium font-inconsolata'>
+                {featuredBlog.category}
+              </div>
+              <SuiTitle type='h2'>{featuredBlog.title}</SuiTitle>
+              <div className='my-8 text-neutral-200'>
+                {featuredBlog.shortDescription}
+              </div>
+
+              <div className='flex flex-row items-center space-x-4'>
+                {featuredBlog.author.avatarPng && (
+                  <div className='flex w-11 h-11 aspect-square'>
+                    <StrapiImage
+                      {...featuredBlog.author.avatarPng}
+                      alt={featuredBlog.author.name}
+                      width={44}
+                      height={44}
+                      className='rounded-full'
+                    />
+                  </div>
+                )}
+                <div className='flex'>
+                  <div className='flex flex-col'>
+                    <SuiText size='sm' weight='medium'>
+                      {featuredBlog.author.name}
+                    </SuiText>
+                    {(featuredBlog.date || featuredBlog.publishedAt) && (
+                      <SuiText size='sm' weight='medium' color='secondary'>
+                        {convertDateToString(
+                          featuredBlog.date || featuredBlog.publishedAt
+                        )}
+                      </SuiText>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <BlogPostList categories={categories}>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 justify-center'>
-            {blogs.map((blog: BlogPostType) => (
-              <BlogPost key={blog.id} {...blog} />
-            ))}
+      </CUILink>
+      <BlogPostList categories={categories}>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 justify-center'>
+          {blogs.map((blog: BlogPostType) => (
+            <BlogPost key={blog.id} {...blog} />
+          ))}
+        </div>
+      </BlogPostList>
+      <div className='bg-primary-300 text-primary-800 flex flex-col items-center justify-center mt-20'>
+        <div className='mt-8 mb-4'>Follow us</div>
+        <div className='flex flex-wrap gap-6 mb-12 justify-center'>
+          <CUILink
+            href='https://twitter.com/ClickhouseDB'
+            className='w-16 h-16 bg-eerie-black hover:bg-eerie-black/90 rounded grid place-items-center'>
+            <Image
+              src='/socials/twitter.svg'
+              width={32}
+              height={32}
+              alt='Twitter image'
+            />
+          </CUILink>
+          <CUILink
+            href='https://join.slack.com/t/clickhousedb/shared_invite/zt-1gh9ds7f4-PgDhJAaF8ad5RbWBAAjzFg'
+            className='w-16 h-16 bg-eerie-black hover:bg-eerie-black/90 rounded grid place-items-center'>
+            <Image
+              src='/socials/slack.svg'
+              width={32}
+              height={32}
+              alt='Slack image'
+            />
+          </CUILink>
+          <CUILink
+            href='/'
+            className='w-16 h-16 bg-eerie-black hover:bg-eerie-black/90 rounded grid place-items-center'>
+            <Image
+              src='/socials/discord.svg'
+              width={32}
+              height={32}
+              alt='Discord image'
+            />
+          </CUILink>
+          <div className='flex gap-6 justify-center'>
+            <CUILink
+              href='https://www.meetup.com/pro/clickhouse'
+              className='w-16 h-16 bg-eerie-black hover:bg-eerie-black/90 rounded grid place-items-center'>
+              <Image
+                src='/socials/meetup.svg'
+                width={32}
+                height={32}
+                alt='Meetup image'
+              />
+            </CUILink>
+            <CUILink
+              key='blog-categories-nav'
+              href='/rss.xml'
+              segmentEvent={{
+                label: 'Blog RSS link',
+                category: 'blog-categories-nav'
+              }}
+              target='blank'
+              className='w-16 h-16 bg-eerie-black hover:bg-eerie-black/90 rounded grid place-items-center'>
+              <Image
+                src='/socials/rss.svg'
+                width={32}
+                height={32}
+                alt='Meetup image'
+              />
+            </CUILink>
           </div>
-          <div className='mt-16 mb-32'>
-            <NewsLetter {...newsLetterData} />
-          </div>
-        </BlogPostList>
-        <GetStarted platforms={platforms} />
-
-        <div className='pt-2'>
-          <hr />
-          <SuiLink
-            key='blog-categories-nav'
-            href='/rss.xml'
-            target='blank'
-            segmentEvent={{
-              label: 'Blog RSS link',
-              category: 'blog-categories-nav'
-            }}
-            weight='normal'>
-            <div className='flex items-center pt-2'>
-              <span className='text-sm px-4 pr-2 py-2 font-semibold cursor-pointer text-c4'>
-                Grab the RSS feed
-              </span>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth={1.5}
-                stroke='currentColor'
-                className='w-6 h-6 stroke-orange-400'>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M12.75 19.5v-.75a7.5 7.5 0 00-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z'
-                />
-              </svg>
-            </div>
-          </SuiLink>
         </div>
       </div>
     </Layout>

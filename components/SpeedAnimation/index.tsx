@@ -126,44 +126,46 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         fill='none'
         strokeWidth='3'
         strokeLinecap='butt'
+        stroke='#FBFF46'
         strokeLinejoin='round'>
-        <use xlinkHref='#postgresLine' stroke='#FBFF46'>
+        <use xlinkHref='#postgresLine'>
           <animate
-            dur='3s'
             attributeName='stroke-dasharray'
             id='postgresLineAnimate'
-            repeatCount='indefinite'
-            begin='4s;redshiftLineAnimate.end'
+            begin='0s;mongoLineAnimate.end'
+            dur='3s'
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
         <use xlinkHref='#bigQueryLine' stroke='#FBFF46'>
           <animate
-            dur='3s'
             attributeName='stroke-dasharray'
             id='bigQueryLineAnimate'
-            repeatCount='indefinite'
-            begin='postgresLineAnimate.end'
-            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+            begin='mysqlLineAnimate.end'
+            dur='3s'
+            from='0'
+            to='1000'
+            // values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
         <use xlinkHref='#redshiftLine' stroke='#FBFF46'>
           <animate
-            dur='3s'
             attributeName='stroke-dasharray'
-            repeatCount='indefinite'
             id='redshiftLineAnimate'
-            begin='bigQueryLineAnimate.end'
-            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+            begin='snowflakeLineAnimate.end'
+            dur='3s'
+            from='0'
+            to='1000'
+            // values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
         <use xlinkHref='#snowflakeLine' stroke='#FBFF46'>
           <animate
-            dur='3s'
             attributeName='stroke-dasharray'
-            repeatCount='indefinite'
             id='snowflakeLineAnimate'
-            begin='redshiftLineAnimate.end'
+            begin='bigQueryLineAnimate.end'
+            repeatCount='indefinite'
+            dur='3s'
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
@@ -171,19 +173,19 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
           <animate
             dur='3s'
             attributeName='stroke-dasharray'
-            repeatCount='indefinite'
             id='mongoLineAnimate'
-            begin='snowflakeLineAnimate.end'
+            begin='redshiftLine.end'
+            repeatCount='indefinite'
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
         <use xlinkHref='#mysqlLine' stroke='#FBFF46'>
           <animate
-            dur='3s'
             attributeName='stroke-dasharray'
-            repeatCount='indefinite'
             id='mysqlLineAnimate'
-            begin='mysqlLineAnimate.end'
+            begin='postgresLineAnimate.end'
+            repeatCount='indefinite'
+            dur='3s'
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
@@ -219,24 +221,48 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         </use>
         <use xlinkHref='#icebergLine' stroke='#FBFF46'>
           <animate
+            id='icebergLineAnimate'
             dur='3s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
-            begin='3s;op.end+3s'
+            begin='0s;op.end+9s'
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
         <use xlinkHref='#hudiLine' stroke='#FBFF46'>
           <animate
+            id='hudiLineAnimate'
             dur='3s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
-            begin='3s;op.end+3s'
+            begin='icebergLineAnimate.end'
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
         <use xlinkHref='#deltaLakeLine' stroke='#FBFF46'>
           <animate
+            id='deltaLakeLineAnimate'
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='hudiLineAnimate.end'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#localFilesLine'>
+          <animate
+            dur='3s'
+            attributeName='stroke-dasharray'
+            id='localFilesLineAnimate'
+            stroke='#FBFF46'
+            begin='0s+op.end+4s'
+            repeatCount='indefinite'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#supersetLine' stroke='#FBFF46'>
+          <animate
+            id='supersetLineAnimate'
             dur='3s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
@@ -244,7 +270,17 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
-        <use xlinkHref='#localFilesLine' stroke='#FBFF46'>
+        <use xlinkHref='#deepNoteLine' stroke='#FBFF46'>
+          <animate
+            id='deepNoteLineAnimate'
+            dur='3s'
+            attributeName='stroke-dasharray'
+            repeatCount='indefinite'
+            begin='3s;op.end+3s'
+            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+          />
+        </use>
+        <use xlinkHref='#graphanaLine' stroke='#FBFF46'>
           <animate
             dur='3s'
             attributeName='stroke-dasharray'
@@ -253,11 +289,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
-        <use
-          xlinkHref='#supersetLine'
-          className='reverse-line'
-          stroke='#FBFF46'>
+        <use xlinkHref='#metabaseLine' stroke='#FBFF46'>
           <animate
+            id='metabaseLineAnimate'
             dur='3s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
@@ -265,11 +299,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
-        <use
-          xlinkHref='#deepNoteLine'
-          className='reverse-line'
-          stroke='#FBFF46'>
+        <use xlinkHref='#tableauLine' stroke='#FBFF46'>
           <animate
+            id='tableauLineAnimate'
             dur='3s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
@@ -277,11 +309,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
-        <use
-          xlinkHref='#graphanaLine'
-          className='reverse-line'
-          stroke='#FBFF46'>
+        <use xlinkHref='#hexLine' stroke='#FBFF46'>
           <animate
+            id='hexLineAnimate'
             dur='3s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
@@ -289,11 +319,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
-        <use
-          xlinkHref='#metabaseLine'
-          className='reverse-line'
-          stroke='#FBFF46'>
+        <use xlinkHref='#pythonLine' stroke='#FBFF46'>
           <animate
+            id='pythonLineAnimate'
             dur='3s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
@@ -301,8 +329,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
-        <use xlinkHref='#tableauLine' className='reverse-line' stroke='#FBFF46'>
+        <use xlinkHref='#nodejsLine' stroke='#FBFF46'>
           <animate
+            id='nodejsLineAnimate'
             dur='3s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
@@ -310,8 +339,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
-        <use xlinkHref='#hexLine' className='reverse-line' stroke='#FBFF46'>
+        <use xlinkHref='#javaLine' stroke='#FBFF46'>
           <animate
+            id='javaLineAnimate'
             dur='3s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
@@ -319,8 +349,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
-        <use xlinkHref='#pythonLine' className='reverse-line' stroke='#FBFF46'>
+        <use xlinkHref='#cHashLine' stroke='#FBFF46'>
           <animate
+            id='cHashLineAnimate'
             dur='3s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
@@ -328,8 +359,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
-        <use xlinkHref='#nodejsLine' className='reverse-line' stroke='#FBFF46'>
+        <use xlinkHref='#goLine' stroke='#FBFF46'>
           <animate
+            id='goLineAnimate'
             dur='3s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
@@ -337,35 +369,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
             values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
           />
         </use>
-        <use xlinkHref='#javaLine' className='reverse-line' stroke='#FBFF46'>
+        <use xlinkHref='#rustLine' stroke='#FBFF46'>
           <animate
-            dur='3s'
-            attributeName='stroke-dasharray'
-            repeatCount='indefinite'
-            begin='3s;op.end+3s'
-            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
-          />
-        </use>
-        <use xlinkHref='#cHashLine' className='reverse-line' stroke='#FBFF46'>
-          <animate
-            dur='3s'
-            attributeName='stroke-dasharray'
-            repeatCount='indefinite'
-            begin='3s;op.end+3s'
-            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
-          />
-        </use>
-        <use xlinkHref='#goLine' className='reverse-line' stroke='#FBFF46'>
-          <animate
-            dur='3s'
-            attributeName='stroke-dasharray'
-            repeatCount='indefinite'
-            begin='3s;op.end+3s'
-            values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
-          />
-        </use>
-        <use xlinkHref='#rustLine' className='reverse-line' stroke='#FBFF46'>
-          <animate
+            id='rustLineAnimate'
             dur='3s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
@@ -411,8 +417,8 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='1s'
           attributeName='stroke'
-          begin='postgresLineAnimate.begin-3s'
-          repeatCount='indefinite'
+          begin='postgresLineAnimate.begin'
+          repeatDur='indefinite'
           to='#FBFF46'
         />
       </rect>
@@ -434,10 +440,10 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         stroke='rgba(52, 52, 52, 0.9)'
         rx='4'>
         <animate
-          dur='3s'
           attributeName='stroke'
-          begin='bigQueryLineAnimate.begin - 3s'
-          repeatCount='indefinite'
+          begin='bigQueryLineAnimate.begin'
+          repeatDur='indefinite'
+          dur='3s'
           to='#FBFF46'
         />
       </rect>
@@ -461,8 +467,8 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='3s'
           attributeName='stroke'
-          id='redshiftRect'
-          begin='redshiftLineAnimate.begin-3s'
+          begin='redshiftLineAnimate.begin'
+          repeatDur='indefinite'
           repeatCount='indefinite'
           to='#FBFF46'
         />
@@ -483,7 +489,16 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'></rect>
+        rx='4'>
+        <animate
+          dur='3s'
+          attributeName='stroke'
+          begin='snowflakeLineAnimate.begin'
+          repeatDur='indefinite'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -500,7 +515,16 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'></rect>
+        rx='4'>
+        <animate
+          dur='3s'
+          attributeName='stroke'
+          begin='mongoLineAnimate.begin'
+          repeatDur='indefinite'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -517,7 +541,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'></rect>
+        rx='4'>
+        <animate
+          dur='3s'
+          attributeName='stroke'
+          begin='mysqlLineAnimate.begin'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -546,10 +578,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='1s'
           attributeName='stroke'
-          begin='kafkaLineAnimate.begin + 2s'
+          begin='kafkaLineAnimate.begin'
           repeatCount='indefinite'
           to='#FBFF46'
-          keyTimes='0; 1; 0; 0; 0'
         />
       </rect>
       <image
@@ -573,10 +604,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='1s'
           attributeName='stroke'
-          begin='vectorLineAnimate.begin + 2s'
+          begin='vectorLineAnimate.begin'
           repeatCount='indefinite'
           to='#FBFF46'
-          keyTimes='0; 1; 0; 0; 0'
         />
       </rect>
       <image
@@ -596,8 +626,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'
-      />
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='dbtLineAnimate.begin'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -623,7 +660,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'></rect>
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='icebergLineAnimate.begin'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='40'
@@ -641,7 +686,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'></rect>
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='hudiLineAnimate.begin'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='58.4795'
@@ -659,8 +712,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'
-      />
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='deltaLakeLineAnimate.begin'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='41.2371'
@@ -686,8 +746,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='102'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'
-      />
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='0s;op.end+3s'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='43'
@@ -715,8 +782,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'
-      />
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='supersetLineAnimate.end'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -734,8 +808,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'
-      />
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='deepNoteLineAnimate.end'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -753,8 +834,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'
-      />
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='graphanaLineAnimate.end'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -772,8 +860,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'
-      />
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='metabaseLineAnimate.end'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -791,8 +886,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'
-      />
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='tableauLineAnimate.end'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -810,8 +912,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'
-      />
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='hexLineAnimate.end'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -832,8 +941,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'
-      />
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='pythonLineAnimate.end'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -851,8 +967,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'
-      />
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='nodejsLineAnimate.end'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -870,8 +993,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'
-      />
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='javaLineAnimate.end'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='48'
@@ -889,8 +1019,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'
-      />
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='cHashLineAnimate.end'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='35.55'
@@ -908,8 +1045,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'
-      />
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='goLineAnimate.end'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='40'
@@ -927,8 +1071,15 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         height='72'
         fill='#1A1918'
         stroke='rgba(52, 52, 52, 0.9)'
-        rx='4'
-      />
+        rx='4'>
+        <animate
+          dur='1s'
+          attributeName='stroke'
+          begin='rustLineAnimate.end'
+          repeatCount='indefinite'
+          to='#FBFF46'
+        />
+      </rect>
       <image
         xmlns='http://www.w3.org/2000/svg'
         width='40'

@@ -1,7 +1,8 @@
 import React, { ChangeEvent, useState } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
-import { SuiButton, SuiTextField, useSnackbar } from '../sui/client'
+import { CUIButton } from '../ClickUI'
+import { useSnackbar } from '../sui/client'
 import styles from './NewsLetterForm.module.scss'
 
 function NewsLetterForm({
@@ -43,19 +44,18 @@ function NewsLetterForm({
   }
 
   return (
-    <div className='flex align-middle items-start space-x-2'>
-      <SuiTextField
-        htmlFor='email'
+    <div className='relative flex items-center items-start space-x-2 bg-primary-800 rounded'>
+      <input
+        type='text'
+        id='email'
+        className={styles.newsLetterInput}
+        onChange={onTextChange}
         placeholder={emailLabel}
         value={email}
-        onChange={onTextChange}
-        className={styles.newsLetterInput}
       />
-      <div className='mt-1'>
-        <SuiButton type='primary' onClick={onClick}>
-          {submitButtonLabel}
-        </SuiButton>
-      </div>
+      <CUIButton type='primary' onClick={onClick}>
+        {submitButtonLabel}
+      </CUIButton>
     </div>
   )
 }

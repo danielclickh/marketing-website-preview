@@ -12,10 +12,7 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ParamsType } from '../../../types/homepage'
 import { EventProps, EventType } from '../../../types/events'
 import styles from './Events.module.scss'
-import {
-  NOT_FOUND_FALLBACK,
-  REVALIDATE_SECONDS
-} from '../../../lib/utils/revalidationConfig'
+import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 
 export const getStaticProps: GetStaticProps<EventProps> =
   async function getStaticProps({ params }) {
