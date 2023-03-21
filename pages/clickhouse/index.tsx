@@ -138,9 +138,16 @@ export default function ClickHouseServerPage({
                 </div>
               </div>
               <div className='hidden md:flex w-6/12 justify-center'>
-                <div className='mx-auto flex px-8 mt-12 max-w-full'>
-                  <StrapiImage
+                <div className='mx-auto flex px-16 mt-4 max-w-full'>
+                  {/* <StrapiImage
                     {...backgroundPng}
+                    alt='ClickHouse is fast'
+                    width={471}
+                    height={360}
+                    className='w-full max-w-full h-auto'
+                  /> */}
+                  <img
+                    src='/images/clickhouse_oss.png'
                     alt='ClickHouse is fast'
                     width={471}
                     height={360}
