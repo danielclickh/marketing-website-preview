@@ -123,7 +123,7 @@ export default function HomePage({
 }: HomePageProps) {
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
-      <div className='homepage overflow-hidden bg-grid'>
+      <div className='homepage overflow-hidden bg-grid bg-[length:100%_60%]'>
         <div className='flex flex-col pb-20 lg:pb-44 pt-16 md:pt-24 px-8 2xl:px-0 relative gap-24 justify-center '>
           <div className='flex flex-col w-full mx-auto max-w-2xl'>
             <div className='mx-auto md:mr-0 md:mt-8 flex-col items-center justify-center'>
