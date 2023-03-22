@@ -95,6 +95,7 @@ body {
 }
 
 .rich_content {
+  @apply text-neutral-200;
   .md-header-container {
     @apply mb-6 flex items-center gap-2;
     &:not(:first-child) {
