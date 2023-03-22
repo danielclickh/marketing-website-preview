@@ -110,10 +110,10 @@ export default function BlogPage({
               </div>
               <div className='flex'>
                 <div className='flex flex-col items-start'>
-                  <SuiText size='sm' weight='medium'>
+                  <SuiText size='md' weight='normal'>
                     {author.name}
                   </SuiText>
-                  <SuiText size='xs' weight='medium' color='secondary'>
+                  <SuiText size='sm' weight='normal' color='secondary'>
                     {convertDateToString(date || publishedAt)}
                   </SuiText>
                 </div>
@@ -124,7 +124,7 @@ export default function BlogPage({
 
         <div className='container flex mx-auto px-6 2xl:px-0 max-w-3xl pt-20'>
           <div className='flex flex-col w-full pb-20'>
-            <Markdown className='rich-text-content font-medium pb-6 mb-6 border-b border-c2'>
+            <Markdown className='rich-text-content leading-7 pb-6 mb-6 border-b border-c2'>
               {content}
             </Markdown>
             <div className='flex flex-col md:flex-row gap-4 justify-between items-center mb-10'>
