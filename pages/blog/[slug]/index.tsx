@@ -88,13 +88,13 @@ export default function BlogPage({
 }: BlogProps) {
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
-      <div className='pt-10 bg-[#191a0c]/80'>
-        <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
-          <div className='flex flex-col text-center mx-auto pt-6 max-w-3xl'>
+      <div className='pt-10'>
+        <div className='flex container mx-auto flex-col px-6 2xl:px-0 max-w-4xl'>
+          <div className='flex flex-col text-center mx-auto pt-6'>
             <SuiTitle type='h4' weight='normal' color='c6'>
               {category}
             </SuiTitle>
-            <SuiTitle type='h1' className='mt-6 mb-8 max-w-screen-sm'>
+            <SuiTitle type='h1' className='mt-6 mb-8'>
               {title}
             </SuiTitle>
             <div className='flex flex-row items-center space-x-4 pt-2 justify-center'>
@@ -128,11 +128,11 @@ export default function BlogPage({
             </Markdown>
             <div className='flex flex-col md:flex-row gap-4 justify-between items-center mb-10'>
               <div className='flex'>
-                <SuiText size='sm' weight='medium' color='secondary'>
+                <SuiText size='sm' weight='medium' color='primary'>
                   Share this post
                 </SuiText>
               </div>
-              <div className='flex gap-4 flex-wrap justify-center text-c4'>
+              <div className='flex gap-4 flex-wrap justify-center text-neutral-0'>
                 <CopyUrlButton />
                 {['y_combinator', 'twitter', 'facebook', 'linkedin'].map(
                   (social) => (
@@ -146,7 +146,7 @@ export default function BlogPage({
         </div>
       </div>
 
-      <div className='flex w-full bg-c2 text-neutral-0 pb-8'>
+      <div className='flex w-full text-neutral-0 pb-8 '>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex justify-between pb-8'>
             <SuiTitle type='h2' className='!text-3xl' weight='bold'>
@@ -176,7 +176,6 @@ export default function BlogPage({
           </div>
         </div>
       </div>
-      <GetStarted platforms={platforms} />
     </Layout>
   )
 }

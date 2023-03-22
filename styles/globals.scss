@@ -67,6 +67,10 @@ body {
   @apply w-full h-full bg-body-image;
 }
 
+::selection {
+  @apply bg-primary-300 text-neutral-800
+}
+
 * {
   @apply box-border;
 }
@@ -109,6 +113,7 @@ body {
   h1,h2,h3,h4,h5,h6 {
     @apply text-neutral-0
   }
+
 
   .code-with-play {
     @apply text-neutral-0 flex relative whitespace-pre-wrap rounded-lg bg-noised;
@@ -199,9 +204,7 @@ body {
   }
 
   blockquote {
-    @apply box-border pl-4;
-    border-left: 4px solid #cbeabc;
-    @apply text-c4 font-semibold text-xl mb-9;
+    @apply box-border border-l-primary-300 border-l-4 pl-4 text-c4 font-semibold text-xl mb-9 text-neutral-0;
   }
 
   img {

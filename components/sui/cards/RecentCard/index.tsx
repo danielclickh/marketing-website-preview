@@ -51,7 +51,11 @@ function SuiRecentCard({
       )}
 
       <div className='flex flex-col'>
-        <SuiText size='xs' weight='bold' color='text-muted' className='mb-2'>
+        <SuiText
+          size='sm'
+          weight='bold'
+          color='text-muted'
+          className='mb-2 font-inconsolata text-primary-300'>
           {pretitle}
         </SuiText>
         <SuiTitle type='h3' weight='bold'>
