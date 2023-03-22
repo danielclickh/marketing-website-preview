@@ -150,7 +150,7 @@ export default function BlogPage({
       <div className='flex w-full text-neutral-0 pb-8 '>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex justify-between pb-8'>
-            <SuiTitle type='h2' className='!text-3xl' weight='bold'>
+            <SuiTitle type='h2' className='!text-3xl' weight='semibold'>
               Recent posts
             </SuiTitle>
 
@@ -158,12 +158,11 @@ export default function BlogPage({
               path='/blog'
               type='empty'
               color='primary'
-              className='!text-lg'
-              iconRight>
-              All posts
+              className='font-base border border-primary-300/50	'>
+              View all Blogs
             </SuiButton>
           </div>
-          <div className='w-full flex flex-col md:grid md:grid-cols-3 md:gap-x-16 gap-y-6 md:gap-y-0'>
+          <div className='w-full flex flex-col md:grid md:grid-cols-3 md:gap-x-16 gap-y-6 md:gap-y-0 '>
             {otherBlogs.map((blog) => (
               <SuiRecentCard
                 key={blog.id}
@@ -171,7 +170,7 @@ export default function BlogPage({
                 title={blog.title}
                 thumbnailPng={blog.thumbnailPng}
                 url={`/blog/${blog.slug}`}
-                className='w-full'
+                className='w-full rounded-md overflow-hidden border-neutral-700 border'
               />
             ))}
           </div>
