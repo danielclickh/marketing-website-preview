@@ -27,7 +27,7 @@ export default function Header({
   ctaButton
 }: HeaderData) {
   return (
-    <Popover className='shadow-sm bg-[#191a0c]/80 border-b border-primary-700 h-full backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300'>
+    <Popover className='shadow-sm bg-neutral-900/11 border-b border-primary-700 h-full backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300'>
       <div className='container flex mx-auto w-full px-4 sm:px-8 2xl:px-0 max-w-7xl h-16 items-center'>
         <div className='flex flex-col w-full'>
           <div className='flex justify-between items-center w-full'>
