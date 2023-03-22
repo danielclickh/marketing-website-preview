@@ -8,7 +8,6 @@ import {
 import { findAll, getPathsValues } from '../../../lib/api/strapi'
 import Markdown from '../../../components/Markdown'
 import { StrapiImage } from '../../../components/StrapiElements'
-import GetStarted from '../../../components/GetStarted'
 import NewsLetter from '../../../components/NewsLetter'
 import SocialButton from '../../../components/SocialButton'
 import CopyUrlButton from '../../../components/CopyUrlButton'
@@ -24,6 +23,7 @@ import {
   REVALIDATE_SECONDS
 } from '../../../lib/utils/revalidationConfig'
 import FollowUs from '../../../components/FollowUs'
+import BlogPost from '../../../components/BlogPostList/BlogPost'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
 
     const blogsParams = {
       sort: ['date:DESC', 'publishedAt:DESC'],
-      populate: ['thumbnailPng'],
+      populate: ['thumbnailPng', 'author'],
       fields: ['category', 'title', 'slug'],
       pagination: { limit: 3 }
     }
@@ -110,7 +110,7 @@ export default function BlogPage({
               </div>
               <div className='flex'>
                 <div className='flex flex-col items-start'>
-                  <SuiText size='md' weight='normal'>
+                  <SuiText size='base' weight='normal'>
                     {author.name}
                   </SuiText>
                   <SuiText size='sm' weight='normal' color='secondary'>
@@ -164,14 +164,7 @@ export default function BlogPage({
           </div>
           <div className='w-full flex flex-col md:grid md:grid-cols-3 md:gap-x-16 gap-y-6 md:gap-y-0 '>
             {otherBlogs.map((blog) => (
-              <SuiRecentCard
-                key={blog.id}
-                pretitle={blog.category}
-                title={blog.title}
-                thumbnailPng={blog.thumbnailPng}
-                url={`/blog/${blog.slug}`}
-                className='w-full rounded-md overflow-hidden border-neutral-700 border'
-              />
+              <BlogPost key={blog.id} {...blog} />
             ))}
           </div>
         </div>
