@@ -92,12 +92,12 @@ export default function BlogPage({
       <div className='pt-10'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0 max-w-4xl'>
           <div className='flex flex-col text-center mx-auto pt-6'>
-            <SuiTitle type='h4' weight='normal' color='c6'>
+            <h4 className='font-inconsolata text-primary-300 text-lg'>
               {category}
-            </SuiTitle>
-            <SuiTitle type='h1' className='mt-6 mb-8'>
-              {title}
-            </SuiTitle>
+            </h4>
+            <h1 className='mt-6 mb-8 text-3xl md:text-5xl font-inter font-bold'>
+              <span className='leading-snug'>{title}</span>
+            </h1>
             <div className='flex flex-row items-center space-x-4 pt-2 justify-center'>
               <div className='flex w-11 h-11 aspect-square'>
                 <StrapiImage
