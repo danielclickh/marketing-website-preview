@@ -91,8 +91,7 @@ export default function BlogsPage({
               className='w-full lg:w-1/2 rounded-lg object-cover h-fit'
             />
           )}
-          <div className='grid grid-cols-[0.5rem_1fr] gap-6 w-full lg:w-1/2'>
-            <div className='bg-primary-300 w-full h-full' />
+          <div className='grid gap-6 w-full border-l-8 border-primary-300 pl-6'>
             <div className='flex flex-col'>
               <div className='text-primary-300 font-medium font-inconsolata'>
                 {featuredBlog.category}
