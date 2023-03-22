@@ -407,7 +407,7 @@ export default function HomePage({
           </div>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-10 mt-16 mb-28'>
             {deployData.map((deploy) => (
-              <CUICard className='h-full p-6'>
+              <CUICard className='h-full p-6 bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat'>
                 <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
                   <Image
                     src={deploy.img}
