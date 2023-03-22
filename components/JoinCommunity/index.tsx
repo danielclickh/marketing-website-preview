@@ -61,7 +61,7 @@ function JoinCommunity() {
           </div>
         </div>
       </div>
-      <div className='w-full mx-auto flex flex-col gap-4 items-end text-right font-semibold max-w-lg'>
+      <div className='w-full mx-auto flex flex-col gap-4 items-end text-right font-semibold max-w-lg bg-click-grid bg-bottom'>
         <div className='relative font-basier text-8xl leading-none w-fit'>
           1.2k+
           <span className='absolute top-full left-0 text-primary text-xl leading-snug'>
