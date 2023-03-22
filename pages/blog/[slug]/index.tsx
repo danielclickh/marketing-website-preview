@@ -23,6 +23,7 @@ import {
   NOT_FOUND_FALLBACK,
   REVALIDATE_SECONDS
 } from '../../../lib/utils/revalidationConfig'
+import FollowUs from '../../../components/FollowUs'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -176,6 +177,7 @@ export default function BlogPage({
           </div>
         </div>
       </div>
+      <FollowUs />
     </Layout>
   )
 }
