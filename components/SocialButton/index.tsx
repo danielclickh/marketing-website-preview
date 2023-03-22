@@ -36,7 +36,7 @@ function SocialButton({ type, title }: Props) {
   return (
     <SuiButton
       type='custom'
-      className='border border-c2 hover:bg-c2 shadow'
+      className='border border-c2 hover:bg-c2 hover:text-neutral-800 shadow'
       onClick={onClick}>
       {type === 'y_combinator' && (
         <svg

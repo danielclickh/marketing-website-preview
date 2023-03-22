@@ -100,7 +100,7 @@ function BlogPostList({ categories, children }: BlogPostListProps) {
 
   return (
     <div className='flex flex-col container mx-auto max-w-7xl justify-between pt-24 px-4 sm:px-8 2xl:px-0'>
-      <div className='flex flex-col md:flex-row pb-8 w-full justify-between gap-2.5'>
+      <div className='flex flex-col lg:flex-row pb-8 w-full justify-between gap-2.5'>
         <SuiSearchField
           placeholder='Search'
           htmlFor='search'

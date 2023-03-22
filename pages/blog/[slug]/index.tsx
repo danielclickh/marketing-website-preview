@@ -8,7 +8,6 @@ import {
 import { findAll, getPathsValues } from '../../../lib/api/strapi'
 import Markdown from '../../../components/Markdown'
 import { StrapiImage } from '../../../components/StrapiElements'
-import GetStarted from '../../../components/GetStarted'
 import NewsLetter from '../../../components/NewsLetter'
 import SocialButton from '../../../components/SocialButton'
 import CopyUrlButton from '../../../components/CopyUrlButton'
@@ -23,6 +22,8 @@ import {
   NOT_FOUND_FALLBACK,
   REVALIDATE_SECONDS
 } from '../../../lib/utils/revalidationConfig'
+import FollowUs from '../../../components/FollowUs'
+import BlogPost from '../../../components/BlogPostList/BlogPost'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -47,7 +48,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
 
     const blogsParams = {
       sort: ['date:DESC', 'publishedAt:DESC'],
-      populate: ['thumbnailPng'],
+      populate: ['thumbnailPng', 'author'],
       fields: ['category', 'title', 'slug'],
       pagination: { limit: 3 }
     }
@@ -88,13 +89,13 @@ export default function BlogPage({
 }: BlogProps) {
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
-      <div className='bg-c1 pt-10'>
-        <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
-          <div className='flex flex-col text-center mx-auto pt-6 max-w-3xl'>
+      <div className='pt-10'>
+        <div className='flex container mx-auto flex-col px-6 2xl:px-0 max-w-4xl'>
+          <div className='flex flex-col text-center mx-auto pt-6'>
             <SuiTitle type='h4' weight='normal' color='c6'>
               {category}
             </SuiTitle>
-            <SuiTitle type='h1' className='mt-6 mb-8 max-w-screen-sm'>
+            <SuiTitle type='h1' className='mt-6 mb-8'>
               {title}
             </SuiTitle>
             <div className='flex flex-row items-center space-x-4 pt-2 justify-center'>
@@ -109,10 +110,10 @@ export default function BlogPage({
               </div>
               <div className='flex'>
                 <div className='flex flex-col items-start'>
-                  <SuiText size='sm' weight='medium'>
+                  <SuiText size='base' weight='normal'>
                     {author.name}
                   </SuiText>
-                  <SuiText size='xs' weight='medium' color='secondary'>
+                  <SuiText size='sm' weight='normal' color='secondary'>
                     {convertDateToString(date || publishedAt)}
                   </SuiText>
                 </div>
@@ -123,16 +124,16 @@ export default function BlogPage({
 
         <div className='container flex mx-auto px-6 2xl:px-0 max-w-3xl pt-20'>
           <div className='flex flex-col w-full pb-20'>
-            <Markdown className='rich-text-content font-medium pb-6 mb-6 border-b border-c2'>
+            <Markdown className='rich-text-content leading-7 pb-6 mb-6 border-b border-c2'>
               {content}
             </Markdown>
             <div className='flex flex-col md:flex-row gap-4 justify-between items-center mb-10'>
               <div className='flex'>
-                <SuiText size='sm' weight='medium' color='secondary'>
+                <SuiText size='sm' weight='medium' color='primary'>
                   Share this post
                 </SuiText>
               </div>
-              <div className='flex gap-4 flex-wrap justify-center text-c4'>
+              <div className='flex gap-4 flex-wrap justify-center text-neutral-0'>
                 <CopyUrlButton />
                 {['y_combinator', 'twitter', 'facebook', 'linkedin'].map(
                   (social) => (
@@ -146,10 +147,10 @@ export default function BlogPage({
         </div>
       </div>
 
-      <div className='flex w-full bg-c2 text-neutral-0 pb-8'>
+      <div className='flex w-full text-neutral-0 pb-8 '>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex justify-between pb-8'>
-            <SuiTitle type='h2' className='!text-3xl' weight='bold'>
+            <SuiTitle type='h2' className='!text-3xl' weight='semibold'>
               Recent posts
             </SuiTitle>
 
@@ -157,26 +158,18 @@ export default function BlogPage({
               path='/blog'
               type='empty'
               color='primary'
-              className='!text-lg'
-              iconRight>
-              All posts
+              className='font-base border border-primary-300/50	'>
+              View all Blogs
             </SuiButton>
           </div>
-          <div className='w-full flex flex-col md:grid md:grid-cols-3 md:gap-x-16 gap-y-6 md:gap-y-0'>
+          <div className='w-full flex flex-col md:grid md:grid-cols-3 md:gap-x-16 gap-y-6 md:gap-y-0 '>
             {otherBlogs.map((blog) => (
-              <SuiRecentCard
-                key={blog.id}
-                pretitle={blog.category}
-                title={blog.title}
-                thumbnailPng={blog.thumbnailPng}
-                url={`/blog/${blog.slug}`}
-                className='w-full'
-              />
+              <BlogPost key={blog.id} {...blog} />
             ))}
           </div>
         </div>
       </div>
-      <GetStarted platforms={platforms} />
+      <FollowUs />
     </Layout>
   )
 }

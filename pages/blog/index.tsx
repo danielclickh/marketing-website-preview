@@ -38,7 +38,6 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       ...blogsParams,
       pagination: { limit: 1 }
     })
-    console.log('asasas', featuredBlog)
     if (featuredBlog[0]) {
       blogsParams.filters = {
         slug: {
