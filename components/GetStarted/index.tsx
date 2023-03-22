@@ -21,12 +21,10 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             Install ClickHouse for MacOs, Linux and FreeBSD
           </div>
         </div>
-        <div className='w-full md:w-full self-center border border-rangitoto rounded-lg p-2 px-6 overflow-hidden'>
-          <SuiCodeblock bgColor='bg-transparent'>
-            <Markdown>{platforms[0].instructions}</Markdown>
-          </SuiCodeblock>
-        </div>
-        <div className='text-sm font-medium text-neutral-400 mt-4'>
+        <SuiCodeblock className='w-full md:w-full self-center border border-rangitoto rounded-lg p-2 px-6 overflow-hidden'>
+          <Markdown>{platforms[0].instructions}</Markdown>
+        </SuiCodeblock>
+        <div className='text-sm font-medium text-neutral-500 mt-4'>
           Or install for{' '}
           <CUILink
             href='/clickhouse'

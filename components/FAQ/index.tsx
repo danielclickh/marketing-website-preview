@@ -1,15 +1,19 @@
 import { Disclosure, Transition } from '@headlessui/react'
 import { ExternalLinkIcon } from '@heroicons/react/outline'
+import Image from 'next/image'
 import { CUILink } from '../ClickUI'
-import { SuiLink, SuiTitle } from '../sui'
+import { SuiTitle } from '../sui'
 import styles from './styles.module.scss'
 
 export default function FAQ() {
   return (
     <div className='flex flex-col md:flex-row w-full px-4 2xl:px-0 pb-16 items-start md:items-center justify-center max-w-7xl mx-auto'>
       <div className='bg-shadow-element py-10 max-w-screen-sm mr-auto'>
-        <SuiTitle type='h2'>FAQs</SuiTitle>
-        <div className='max-w-md my-8'>
+        <Image src='/faq-icon.svg' alt='FAQ Icon' width={72} height={72} />
+        <SuiTitle type='h2' className='my-6'>
+          FAQs
+        </SuiTitle>
+        <div className='max-w-md'>
           Wherever you need us, we’re there. We love to engage in thoughtful
           conversation with the ClickHouse community and are always on-hand to
           answer your questions.{' '}

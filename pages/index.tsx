@@ -17,10 +17,11 @@ import HomePageTerminal from '../components/Terminal/HomePageTerminal'
 import SpeedAnimation from '../components/SpeedAnimation'
 import DevelopersSection from '../components/DevelopersSection'
 import { CSSProperties } from 'react'
+import HRSeparator from '../components/HRSeparator'
 
 const yellowPositionStyle = {
   '--left-side': 'auto',
-  '--right-side': '10rem'
+  '--right-side': '30%'
 } as CSSProperties
 
 type DeployData = {
@@ -212,7 +213,7 @@ export default function HomePage({
       </div>
 
       <div className='flex w-full text-neutral-0'>
-        <div className='flex section-container mx-auto flex-col pt-20 pb-8 text-center items-center'>
+        <div className='flex section-container mx-auto flex-col pt-20 text-center items-center'>
           <Image
             src='/speed-icon.svg'
             alt='Speed Icon'
@@ -321,7 +322,8 @@ export default function HomePage({
         </div>
       </div>
 
-      <div className='relative flex flex-col gap-y-28 mt-24 mb-16'>
+      <HRSeparator className='my-24' />
+      <div className='relative flex flex-col gap-y-28'>
         <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element'>
           <div className='flex flex-col items-center w-full gap-6'>
             <Image
@@ -385,9 +387,10 @@ export default function HomePage({
           </CUIButton>
         </div>
       </div>
+      <HRSeparator className='my-24' />
       <div className='w-full flex flex-col'>
         <div
-          className='flex container mx-auto flex-col section-container pt-16 items-center bg-shadow-element yellow-shadow'
+          className='flex container mx-auto flex-col section-container items-center bg-shadow-element yellow-shadow'
           style={yellowPositionStyle}>
           <Image
             src='/deploy-icon.svg'
@@ -437,8 +440,10 @@ export default function HomePage({
         </div>
       </div>
 
+      <HRSeparator className='my-24' />
       <JoinCommunity />
       <DevelopersSection />
+      <HRSeparator className='my-24' />
       <FAQ />
       <GetStarted platforms={platforms} />
     </Layout>

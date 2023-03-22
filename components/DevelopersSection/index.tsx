@@ -33,7 +33,7 @@ const developerOptions = [
 
 function DevelopersSection() {
   return (
-    <div className='mb-10 section-container'>
+    <div className='section-container'>
       <SuiTitle type='h2' className='w-full text-left mb-8'>
         What do developers say?
       </SuiTitle>

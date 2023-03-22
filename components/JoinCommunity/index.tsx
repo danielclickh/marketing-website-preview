@@ -5,7 +5,7 @@ import { SuiTitle } from '../sui'
 
 function JoinCommunity() {
   return (
-    <div className='flex flex-col items-center py-16 md:pt-32 md:pb-36 md:flex-row justify-between w-full section-container gap-8'>
+    <div className='flex flex-col items-center pb-16 md:pb-36 md:flex-row justify-between w-full section-container gap-8'>
       <div className='flex flex-col items-start max-w-xl gap-10'>
         <SuiTitle type='h2' className='w-full'>
           Join the{' '}
