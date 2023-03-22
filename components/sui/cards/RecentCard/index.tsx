@@ -52,7 +52,7 @@ function SuiRecentCard({
 
       <div className='flex flex-col p-4'>
         <SuiText
-          size='md'
+          size='base'
           weight='normal'
           color='text-muted'
           className='mb-2 font-inconsolata text-primary-300'>
@@ -62,7 +62,7 @@ function SuiRecentCard({
           {title}
         </SuiTitle>
         <SuiText
-          size='md'
+          size='base'
           weight='normal'
           color='text-muted'
           className='absolute bottom-0 mb-2 font-inconsolata text-primary-300'>
