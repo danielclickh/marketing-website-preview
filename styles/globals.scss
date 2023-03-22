@@ -106,6 +106,10 @@ body {
     }
   }
 
+  h1,h2,h3,h4,h5,h6 {
+    @apply text-neutral-0
+  }
+
   .code-with-play {
     @apply text-neutral-0 flex relative whitespace-pre-wrap rounded-lg bg-noised;
     padding: 24px;
@@ -213,10 +217,10 @@ body {
 
   &:not(.ignore-anchor) {
     a {
-      @apply text-primary;
+      @apply text-primary-300;
     }
     &.anchor-c6 a {
-      @apply text-primary;
+      @apply text-primary-300;
     }
   }
 
@@ -379,3 +383,4 @@ body {
     content: "";
   }
 }
+
