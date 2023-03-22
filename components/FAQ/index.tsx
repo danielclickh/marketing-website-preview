@@ -7,8 +7,8 @@ import styles from './styles.module.scss'
 
 export default function FAQ() {
   return (
-    <div className='flex flex-col md:flex-row w-full px-4 2xl:px-0 pb-16 items-start md:items-center justify-center max-w-7xl mx-auto'>
-      <div className='bg-shadow-element py-10 max-w-screen-sm mr-auto'>
+    <div className='bg-shadow-element flex flex-col md:flex-row w-full px-4 2xl:px-0 pb-16 items-start md:items-center justify-center max-w-7xl mx-auto'>
+      <div className='py-10 max-w-screen-sm mr-auto'>
         <Image src='/faq-icon.svg' alt='FAQ Icon' width={72} height={72} />
         <SuiTitle type='h2' className='my-6'>
           FAQs
@@ -21,7 +21,7 @@ export default function FAQ() {
         <CUILink
           href='/clickhouse'
           target='_self'
-          className='flex gap-4 leading-normal text-primary items-center'>
+          className='flex gap-4 leading-normal text-primary items-center mt-6'>
           <span>Ask us anything</span> <ExternalLinkIcon className='w-4 h-4' />
         </CUILink>
       </div>
@@ -29,7 +29,7 @@ export default function FAQ() {
         <Disclosure as='div' className={styles.accordion}>
           {({ open }) => (
             <>
-              <Disclosure.Button className='flex w-full justify-between rounded-lg py-5 text-left text-sm font-medium text-neutral-0 focus:outline-none '>
+              <Disclosure.Button className='flex w-full justify-between rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
                 <span>
                   Is ClickHouse faster than SnowFlake/Redshift/DuckDB etc?
                 </span>
@@ -42,7 +42,7 @@ export default function FAQ() {
                 leave='transition duration-75 ease-out'
                 leaveFrom='transform scale-100 opacity-100'
                 leaveTo='transform scale-95 opacity-0'>
-                <Disclosure.Panel className='transition-all pt-4 pb-2 text-sm text-neutral-0'>
+                <Disclosure.Panel className='transition-all pt-4 text-neutral-200'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et
                   massa mi. Aliquam in hendrerit urna. Pellentesque sit amet
                   sapien fringilla, mattis ligula consectetur, ultrices mauris.
@@ -62,13 +62,13 @@ export default function FAQ() {
         <Disclosure as='div' className={styles.accordion}>
           {({ open }) => (
             <>
-              <Disclosure.Button className='flex w-full justify-between rounded-lg py-5 text-left text-sm font-medium text-neutral-0 focus:outline-none '>
+              <Disclosure.Button className='flex w-full justify-between rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
                 <span>
                   Can I use ClickHouse with Kafka/Airbyte/Amazon S3 etc?
                 </span>
                 <span className={styles.plusMinus} data-active={open} />
               </Disclosure.Button>
-              <Disclosure.Panel className='pt-4 pb-2 text-sm text-neutral-0'>
+              <Disclosure.Panel className='transition-all pt-4 text-neutral-200'>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et
                 massa mi. Aliquam in hendrerit urna. Pellentesque sit amet
                 sapien fringilla, mattis ligula consectetur, ultrices mauris.
@@ -86,11 +86,11 @@ export default function FAQ() {
         <Disclosure as='div' className={styles.accordion}>
           {({ open }) => (
             <>
-              <Disclosure.Button className='flex w-full justify-between rounded-lg py-5 text-left text-sm font-medium text-neutral-0 focus:outline-none '>
+              <Disclosure.Button className='flex w-full justify-between rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
                 <span>What are the deployment options for ClickHouse?</span>
                 <span className={styles.plusMinus} data-active={open} />
               </Disclosure.Button>
-              <Disclosure.Panel className='pt-4 pb-2 text-sm text-neutral-0'>
+              <Disclosure.Panel className='transition-all pt-4 text-neutral-200'>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et
                 massa mi. Aliquam in hendrerit urna. Pellentesque sit amet
                 sapien fringilla, mattis ligula consectetur, ultrices mauris.
@@ -108,11 +108,11 @@ export default function FAQ() {
         <Disclosure as='div' className={styles.accordion}>
           {({ open }) => (
             <>
-              <Disclosure.Button className='flex w-full justify-between rounded-lg py-5 text-left text-sm font-medium text-neutral-0 focus:outline-none '>
+              <Disclosure.Button className='flex w-full justify-between rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
                 <span>How much does ClickHouse cost?</span>
                 <span className={styles.plusMinus} data-active={open} />
               </Disclosure.Button>
-              <Disclosure.Panel className='pt-4 pb-2 text-sm text-neutral-0'>
+              <Disclosure.Panel className='transition-all pt-4 text-neutral-200'>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et
                 massa mi. Aliquam in hendrerit urna. Pellentesque sit amet
                 sapien fringilla, mattis ligula consectetur, ultrices mauris.
@@ -130,11 +130,11 @@ export default function FAQ() {
         <Disclosure as='div' className={styles.accordion}>
           {({ open }) => (
             <>
-              <Disclosure.Button className='flex w-full justify-between rounded-lg py-5 text-left text-sm font-medium text-neutral-0 focus:outline-none '>
+              <Disclosure.Button className='flex w-full justify-between rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
                 <span>Can I see the benchmarks?</span>
                 <span className={styles.plusMinus} data-active={open} />
               </Disclosure.Button>
-              <Disclosure.Panel className='pt-4 pb-2 text-sm text-neutral-0'>
+              <Disclosure.Panel className='transition-all pt-4 text-neutral-200'>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et
                 massa mi. Aliquam in hendrerit urna. Pellentesque sit amet
                 sapien fringilla, mattis ligula consectetur, ultrices mauris.

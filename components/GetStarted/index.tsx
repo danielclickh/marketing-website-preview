@@ -8,7 +8,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
     <div
       className='flex text-neutral-0 section-container w-full mb-36'
       id='getting_started'>
-      <div className='mx-auto flex flex-col justify-center w-full bg-neutral-900/50 border border-neutral-700 py-16 px-4 xl:px-24 rounded-lg bg-click-grid bg-[length:547px_360px] bg-right bg-no-repeat'>
+      <div className='mx-auto flex flex-col justify-center w-full bg-neutral-900/50 border border-neutral-700/80 py-16 px-4 xl:px-24 rounded-xl bg-click-grid bg-[length:547px_360px] bg-right bg-no-repeat'>
         <div className='flex flex-col text-center'>
           <SuiTitle type='h2' color='white'>
             Start using{' '}
@@ -17,11 +17,11 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             </span>{' '}
             in minutes
           </SuiTitle>
-          <div className='text-neutral-200 text-center mb-8 mt-6'>
+          <div className='text-neutral-300 text-center mb-8 mt-6'>
             Install ClickHouse for MacOs, Linux and FreeBSD
           </div>
         </div>
-        <SuiCodeblock className='w-full md:w-full self-center border border-rangitoto rounded-lg p-2 px-6 overflow-hidden'>
+        <SuiCodeblock className='w-full md:w-full self-center overflow-hidden'>
           <Markdown>{platforms[0].instructions}</Markdown>
         </SuiCodeblock>
         <div className='text-sm font-medium text-neutral-500 mt-4'>

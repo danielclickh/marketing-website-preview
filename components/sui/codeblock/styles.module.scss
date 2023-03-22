@@ -1,12 +1,13 @@
 .codePre {
-  @apply relative break-all text-neutral-0 rounded-lg py-4 text-sm bg-neutral-725 font-inconsolata;
+  @apply relative break-all text-neutral-0 rounded-lg py-6 px-8 bg-neutral-725 font-inconsolata font-semibold shadow-codeblock backdrop-blur-sm;
+  @apply border border-neutral-700/40;
   &:hover :global .codeblock-copy-btn {
     @apply grid place-items-center;
   }
 }
 
 .copyBtn {
-  @apply absolute top-0 right-0 mr-4 mt-4 h-6 w-6 z-30 hidden text-neutral-400 rounded;
+  @apply absolute top-0 right-0 mr-8 mt-6 h-6 w-6 z-30 hidden text-neutral-400 rounded;
   &:hover {
     @apply bg-neutral-800 text-neutral-500;
   }
