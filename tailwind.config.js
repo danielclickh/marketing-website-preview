@@ -186,7 +186,8 @@ module.exports = {
         'click-card':
           '0px 4px 44px rgba(22, 22, 0, 0.4), inset 0px 1px 3px rgba(25, 26, 6, 0.9)',
         'click-pill': '0px -1px 5px rgba(16, 24, 40, 0.07)',
-        'click-twitter': '0px 4px 48px rgba(250, 255, 72, 0.2)'
+        'click-twitter': '0px 4px 48px rgba(250, 255, 72, 0.2)',
+        'footer-line': '0px -1px 1px #000000'
       },
       backgroundSize: {
         default_size: '0%, 100%',
@@ -196,6 +197,7 @@ module.exports = {
         field_focus:
           'linear-gradient(0deg, #fbff46, #fbff46 2px, transparent 0, transparent)',
         grid: 'url("/bg-grid.png")',
+        'click-grid': 'url("/bg-grid.svg")',
         'home-grid':
           'linear-gradient(117.08deg, rgba(0, 0, 0, 0) 14.55%, rgba(22, 22, 0, 0.167461) 34.15%, rgba(47, 47, 47, 0.22751) 40.54%, rgba(22, 22, 0, 0.611327) 46.65%, #161600 95.98%), url("/bg-grid.png");',
         'speed-lines': 'url("/speed-lines.svg")',

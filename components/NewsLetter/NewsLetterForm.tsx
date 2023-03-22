@@ -44,16 +44,21 @@ function NewsLetterForm({
   }
 
   return (
-    <div className='relative flex items-center items-start space-x-2 bg-neutral-725 rounded'>
-      <input
-        type='text'
-        id='email'
-        className={styles.newsLetterInput}
-        onChange={onTextChange}
-        placeholder={emailLabel}
-        value={email}
-      />
-      <CUIButton type='primary' onClick={onClick}>
+    <div className='relative flex items-center h-12 border border-neutral-725 bg-neutral-750 rounded'>
+      <div className='w-full'>
+        <input
+          type='text'
+          id='email'
+          className={styles.newsLetterInput}
+          onChange={onTextChange}
+          placeholder={emailLabel}
+          value={email}
+        />
+      </div>
+      <CUIButton
+        type='primary'
+        onClick={onClick}
+        className='whitespace-nowrap mr-1'>
         {submitButtonLabel}
       </CUIButton>
     </div>

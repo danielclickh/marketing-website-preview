@@ -8,7 +8,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
     <div
       className='flex text-neutral-0 section-container w-full mb-36'
       id='getting_started'>
-      <div className='mx-auto flex flex-col justify-center w-full bg-neutral-900/50 border border-neutral-700 py-16 xl:px-24 rounded-lg'>
+      <div className='mx-auto flex flex-col justify-center w-full bg-neutral-900/50 border border-neutral-700 py-16 px-4 xl:px-24 rounded-lg bg-click-grid bg-[length:547px_360px] bg-right bg-no-repeat'>
         <div className='flex flex-col text-center'>
           <SuiTitle type='h2' color='white'>
             Start using{' '}
@@ -21,12 +21,12 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             Install ClickHouse for MacOs, Linux and FreeBSD
           </div>
         </div>
-        <div className='w-11/12 md:w-full self-center border border-rangitoto rounded-lg p-2 px-6 overflow-hidden mb-1'>
+        <div className='w-full md:w-full self-center border border-rangitoto rounded-lg p-2 px-6 overflow-hidden'>
           <SuiCodeblock bgColor='bg-transparent'>
             <Markdown>{platforms[0].instructions}</Markdown>
           </SuiCodeblock>
         </div>
-        <div className='text-sm font-medium text-neutral-400 px-6 md:px-0 mt-6'>
+        <div className='text-sm font-medium text-neutral-400 mt-4'>
           Or install for{' '}
           <CUILink
             href='/clickhouse'
