@@ -162,11 +162,10 @@ body {
   }
 
   :not(pre) code {
-    @apply bg-c2 text-c4 dark:text-c6;
-    @apply border border-solid inline-block px-1;
-    border: 1px solid #e8eaee;
+    @apply bg-neutral-725 text-neutral-0 font-inconsolata border border-solid inline-block px-1;
+    border: 1px solid #414141;
     margin-bottom: 2px;
-    border-radius: 2px;
+    border-radius: 4px;
   }
 
   pre {
