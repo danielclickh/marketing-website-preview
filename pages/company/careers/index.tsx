@@ -96,9 +96,9 @@ export default function CareersPage({
         <div className='relative pt-10'>
           <div className='bg-primary-300 absolute inset-0 transform -skew-y-2 lg:max-h-96'></div>
           <div className='relative z-10'>
-            <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
-              <div className='flex flex-col text-center mx-auto px-8'>
-                <h1 className='mb-4 font-basier text-neutral-800 text-5.5xl font-semibold'>
+            <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
+              <div className='flex flex-col text-center mx-auto'>
+                <h1 className='text-4xl leading-tight mb-4 font-basier text-neutral-800 md:text-5.5xl font-semibold'>
                   Become part of our team
                 </h1>
                 <p className='text-neutral-800 max-w-3xl'>
@@ -133,7 +133,7 @@ export default function CareersPage({
             </div>
           </div>
           <div className='max-w-7xl mx-auto'>
-            <div className='grid lg:grid-cols-3 gap-20'>
+            <div className='grid lg:grid-cols-3 gap-x-20 gap-y-10'>
               {values.map((value) => (
                 <div className='col'>
                   <div className='flex items-start gap-4'>
