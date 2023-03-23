@@ -40,14 +40,13 @@ export default function ContactPage({
   title,
   description,
   contactForm,
-  headerData,
   footerData,
   platforms,
   growingCommunityData,
   seo
 }: ContactProps) {
   return (
-    <Layout headerData={headerData} footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo}>
       <div className='pt-10'>
         <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
           <div className='flex flex-col text-center mx-auto pt-6'>

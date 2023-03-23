@@ -117,12 +117,11 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
 export default function HomePage({
   hero,
   seo,
-  headerData,
   footerData,
   platforms
 }: HomePageProps) {
   return (
-    <Layout headerData={headerData} footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo}>
       <div className='homepage overflow-hidden bg-grid bg-[length:100%_60%]'>
         <div className='flex flex-col pb-20 lg:pb-44 pt-16 md:pt-24 px-8 2xl:px-0 relative gap-24 justify-center '>
           <div className='flex flex-col w-full mx-auto max-w-2xl'>
@@ -182,9 +181,9 @@ export default function HomePage({
             <HomePageTerminal />
           </div>
         </div>
-        <div className='bg-primary-300 py-16'>
+        <div className='bg-primary-300 py-8'>
           <div className='max-w-3xl mx-auto'>
-            <div className='text-center mb-10 text-primary-700 w-fit mx-auto leading-normal sm:leading-none'>
+            <div className='text-center mb-9 text-primary-700 w-fit mx-auto leading-normal sm:leading-none'>
               Trusted by the best developers that work with data at{' '}
               <span className='tilted tilted-black'>
                 <span className='tilted-content'>scale</span>

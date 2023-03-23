@@ -64,12 +64,11 @@ export default function RichContentPage({
   fullWidthContent,
   leftContent,
   rightContent,
-  headerData,
   footerData,
   seo
 }: RichContentPageProps) {
   return (
-    <Layout headerData={headerData} footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo}>
       <div className='rich-content-page'>
         <SuiTitle
           type='h1'

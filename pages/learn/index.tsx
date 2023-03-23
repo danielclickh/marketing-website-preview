@@ -108,14 +108,9 @@ export const getStaticProps: GetStaticProps<LearnProps> =
     }
   }
 
-function LearnPage({
-  upcomingEvents,
-  headerData,
-  footerData,
-  seo
-}: LearnProps) {
+function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
   return (
-    <Layout headerData={headerData} footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo}>
       <div className='hero-container bg-c1'>
         <div className='hero-content relative text-center'>
           <div className={styles.learnBg}>

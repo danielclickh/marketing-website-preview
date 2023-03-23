@@ -112,14 +112,13 @@ function EventPage({
   form,
   localDatetime,
   recordedVimeoUrl,
-  headerData,
   footerData,
   platforms,
   recentEvents,
   seo
 }: EventProps) {
   return (
-    <Layout headerData={headerData} footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo}>
       <div className='flex flex-col'>
         <EventsContainer
           localDatetime={localDatetime}

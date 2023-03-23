@@ -70,13 +70,12 @@ export default function BlogsPage({
   blogs,
   categories,
   title,
-  headerData,
   seo,
   footerData
 }: BlogProps) {
   console.log(featuredBlog)
   return (
-    <Layout headerData={headerData} footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo}>
       <SuiTitle type='h1' className='pt-10 mb-16 mx-auto'>
         {title}
       </SuiTitle>

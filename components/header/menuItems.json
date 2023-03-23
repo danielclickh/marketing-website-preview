@@ -1,0 +1,157 @@
+[{
+	"id": 1,
+	"name": "Product",
+	"menuItems": [{
+		"id": 1,
+		"name": "Product",
+		"menuItems": [{
+			"id": 1,
+			"name": "ClickHouse Cloud",
+			"description": "Fully-managed, autonomous ClickHouse services in the Cloud.",
+			"href": "/cloud",
+			"target": "_self",
+			"icon": "/icon.svg"
+		}, {
+			"id": 2,
+			"name": "ClickHouse",
+			"description": "Open source column-oriented database management system.",
+			"href": "/clickhouse",
+			"target": "_self",
+			"icon": "/icon.svg"
+		}]
+	},{
+		"id": 2,
+		"name": "Tools",
+		"menuItems": [{
+			"id": 1,
+			"name": "SQL console",
+			"description": "All you need from a SQL console, and more.",
+			"href": "https://console.clickhouse.cloud",
+			"target": "_blank"
+		}, {
+			"id": 2,
+			"name": "ClickHouse Pipes",
+			"description": "Easily ingest data from Kafka and Amazon S3.",
+			"href": "/clickhousePipes",
+			"target": "_blank"
+		}]
+	}, {
+		"id": 3,
+    "menuItems": [{
+			"id": 1,
+			"name": "Latest update",
+			"description": "Highlight new features and use cases here",
+			"href": "https://console.clickhouse.cloud",
+			"target": "_blank"
+		}]
+  }]
+}, {
+	"id": 2,
+	"name": "Resources",
+	"menuItems": [{
+		"id": 1,
+		"name": "Support",
+		"menuItems": [{
+			"id": 1,
+			"name": "Raise a Ticket",
+			"href": "/support/program",
+			"target": "_self"
+		}, {
+			"id": 2,
+			"name": "Knowledge Base",
+			"href": "/docs/knowledgebase",
+			"target": "_self"
+		}]
+	}, {
+		"id": 2,
+		"name": "Community",
+		"menuItems": [{
+			"id": 1,
+			"name": "Join slack",
+			"href": "/slack",
+			"target": "_blank"
+		}, {
+			"id": 2,
+			"name": "Meetups",
+			"href": "https://www.meetup.com/clickhouse-netherlands-user-group/members/342570096/",
+			"target": "_blank"
+		}, {
+			"id": 3,
+			"name": "GitHub",
+			"href": "https://github.com/ClickHouse/ClickHouse",
+			"target": "_blank"
+		}]
+	}, {
+		"id": 3,
+		"name": "Docs",
+		"menuItems": [{
+			"id": 1,
+			"name": "Get started",
+			"href": "/docs",
+			"target": "_self"
+		}, {
+			"id": 2,
+			"name": "Quick Start",
+			"href": "/docs/en/getting-started/quick-start",
+			"target": "_self"
+		}, {
+			"id": 3,
+			"name": "Integrations",
+			"href": "/docs/en/integrations",
+			"target": "_self"
+		}, {
+			"id": 4,
+			"name": "Changelog",
+			"href": "/docs/category/changelog",
+			"target": "_self"
+		}]
+	}, {
+		"id": 4,
+		"name": "Learning",
+		"menuItems": [{
+			"id": 1,
+			"name": "ClickHouse Academy",
+			"href": "/learn",
+			"target": "_self"
+		}, {
+			"id": 2,
+			"name": "Upcoming Training",
+			"href": "/company/news-events",
+			"target": "_self"
+		}]
+	}, {
+		"id": 5,
+		"name": "Blog",
+		"menuItems": [{
+			"id": 1,
+			"name": "Product",
+			"href": "/blog?category=product",
+			"target": "_self"
+		}, {
+			"id": 2,
+			"name": "Engineering",
+			"href": "/blog?category=engineering",
+			"target": "_self"
+		}, {
+			"id": 3,
+			"name": "Culture",
+			"href": "blog?category=company-and-culture",
+			"target": "_self"
+		}, {
+			"id": 4,
+			"name": "Customer Stories",
+			"href": "/blog?category=customer-stories",
+			"target": "_self"
+		}]
+	}]
+}, {
+	"id": 3,
+	"name": "Use Cases",
+	"href": "/customer-stories",
+	"target": "_self"
+}, {
+	"id": 5,
+	"name": "Pricing",
+	"href": "/pricing",
+	"target": "_self"
+}]

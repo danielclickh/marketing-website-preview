@@ -100,7 +100,6 @@ function PricingPage({
   pricingByRegion,
   pricingPlans,
   seo,
-  headerData,
   cloudProviders,
   footerData
 }: PricingPageProps) {
@@ -109,7 +108,7 @@ function PricingPage({
     regionFlagPNG: <StrapiImage {...item.regionFlagPNG} alt={item.region} />
   }))
   return (
-    <Layout headerData={headerData} footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo}>
       <div className='pricing text-neutral-0 h-full md:pb-20'>
         <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 mx-auto py-20'>
           {hero && (
