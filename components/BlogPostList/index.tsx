@@ -99,11 +99,12 @@ function BlogPostList({ categories, children }: BlogPostListProps) {
   }, [])
 
   return (
-    <div className='flex flex-col container mx-auto max-w-7xl justify-between lg:pt-24 px-4 sm:px-8 2xl:px-0'>
-      <div className='flex flex-col lg:flex-row pb-8 w-full justify-between gap-2.5'>
+    <div className='max-w-7xl mx-auto px-8 2xl:px-0 pt-8'>
+      <div className='flex-col lg:flex lg:flex-row lg:justify-between items-center pb-12 lg:space-x-24'>
         <SuiSearchField
-          placeholder='Search'
+          placeholder='Search by title or keyword...'
           htmlFor='search'
+          className='w-full lg:flex-1 mb-6 lg:mb-0'
           onChange={onChange}
         />
         <CategorySelector options={categoryList} />

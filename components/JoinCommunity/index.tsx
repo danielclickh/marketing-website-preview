@@ -27,7 +27,7 @@ function JoinCommunity() {
               />
             </CUILink>
             <CUILink
-              href='https://join.slack.com/t/clickhousedb/shared_invite/zt-1gh9ds7f4-PgDhJAaF8ad5RbWBAAjzFg'
+              href='/slack'
               className='w-16 h-16 bg-eerie-black/40 hover:bg-eerie-black/70 rounded grid place-items-center'>
               <Image
                 src='/socials/slack.svg'

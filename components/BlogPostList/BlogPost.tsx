@@ -39,10 +39,10 @@ export default function BlogPost({
             />
           )}
           <div className='flex flex-col items-start justify-center gap-2 px-6 pt-6'>
-            <div className='mb-2 font-inconsolata text-primary-300 font-medium'>
+            <div className='mb-2 font-inconsolata text-primary-300 font-medium text-lg'>
               {category}
             </div>
-            <div className='font-basier text-lg font-medium leading-tight cursor-pointer'>
+            <div className='font-basier text-xl font-medium leading-tight cursor-pointer'>
               {title}
             </div>
           </div>

@@ -48,12 +48,14 @@ export function SuiSearchField({
           <EyeIcon className='w-4 relative -top-7 left-80 md:left-96 text-gray-400' />
         )}
       </div>
-      <p
-        className={`mt-1 transition-opacity ease-in-out text-red-500 text-xs min-h-[1rem] ${
-          error.length == 0 ? 'opacity-0' : 'opacity-100'
-        }`}>
-        {error}
-      </p>
+      {error.length > 0 ? (
+        <p
+          className={`mt-1 transition-opacity ease-in-out text-red-500 text-xs min-h-[1rem] ${
+            error.length == 0 ? 'opacity-0' : 'opacity-100'
+          }`}>
+          {error}
+        </p>
+      ) : null}
     </div>
   )
 }

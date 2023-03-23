@@ -13,6 +13,7 @@ import { StrapiImage } from '../../components/StrapiElements'
 import { convertDateToString } from '../../lib/utils/dateUtils'
 import { CUILink } from '../../components/ClickUI'
 import Image from 'next/image'
+import FollowUs from '../../components/FollowUs'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps() {
@@ -74,13 +75,11 @@ export default function BlogsPage({
   seo,
   footerData
 }: BlogProps) {
-  console.log(featuredBlog)
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
-      <SuiTitle type='h1' className='pt-10 mb-16 mx-auto'>
+      <SuiTitle type='h1' className='pt-10 lg:pt-20 mb-10 lg:mb-16 mx-auto'>
         {title}
       </SuiTitle>
-
       <CUILink
         href={`/blog/${featuredBlog.slug}`}
         className='mt-2 flex flex-col md:flex-row mb-16 gap-10 section-container hover:no-underline'>
@@ -133,74 +132,14 @@ export default function BlogsPage({
         </div>
       </CUILink>
       <BlogPostList categories={categories}>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 justify-center'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center'>
           {blogs.map((blog: BlogPostType) => (
             <BlogPost key={blog.id} {...blog} />
           ))}
         </div>
       </BlogPostList>
-      <div className='bg-primary-300 text-neutral-900 flex flex-col items-center justify-center mt-20'>
-        <div className='mt-8 mb-4'>Follow us</div>
-        <div className='flex flex-wrap gap-6 mb-12 justify-center'>
-          <CUILink
-            href='https://twitter.com/ClickhouseDB'
-            className='w-16 h-16 bg-eerie-black hover:bg-eerie-black/90 rounded grid place-items-center'>
-            <Image
-              src='/socials/twitter.svg'
-              width={32}
-              height={32}
-              alt='Twitter image'
-            />
-          </CUILink>
-          <CUILink
-            href='https://join.slack.com/t/clickhousedb/shared_invite/zt-1gh9ds7f4-PgDhJAaF8ad5RbWBAAjzFg'
-            className='w-16 h-16 bg-eerie-black hover:bg-eerie-black/90 rounded grid place-items-center'>
-            <Image
-              src='/socials/slack.svg'
-              width={32}
-              height={32}
-              alt='Slack image'
-            />
-          </CUILink>
-          <CUILink
-            href='/'
-            className='w-16 h-16 bg-eerie-black hover:bg-eerie-black/90 rounded grid place-items-center'>
-            <Image
-              src='/socials/discord.svg'
-              width={32}
-              height={32}
-              alt='Discord image'
-            />
-          </CUILink>
-          <div className='flex gap-6 justify-center'>
-            <CUILink
-              href='https://www.meetup.com/pro/clickhouse'
-              className='w-16 h-16 bg-eerie-black hover:bg-eerie-black/90 rounded grid place-items-center'>
-              <Image
-                src='/socials/meetup.svg'
-                width={32}
-                height={32}
-                alt='Meetup image'
-              />
-            </CUILink>
-            <CUILink
-              key='blog-categories-nav'
-              href='/rss.xml'
-              segmentEvent={{
-                label: 'Blog RSS link',
-                category: 'blog-categories-nav'
-              }}
-              target='blank'
-              className='w-16 h-16 bg-eerie-black hover:bg-eerie-black/90 rounded grid place-items-center'>
-              <Image
-                src='/socials/rss.svg'
-                width={32}
-                height={32}
-                alt='Meetup image'
-              />
-            </CUILink>
-          </div>
-        </div>
+      <div className='mt-20'>
+        <FollowUs />
       </div>
     </Layout>
   )
