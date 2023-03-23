@@ -37,7 +37,11 @@ const MenuItem = ({
         element: arrowEl
       }),
       shift(),
-      autoPlacement()
+      autoPlacement(),
+      offset({
+        crossAxis: 20,
+        mainAxis: 10
+      })
     ]
   })
   const click = useClick(context)
@@ -68,7 +72,7 @@ const MenuItem = ({
         leaveFrom='opacity-100 translate-y-0'
         leaveTo='opacity-0 translate-y-1'>
         <Popover.Panel
-          className='absolute z-10 -ml-4 mt-3 transform w-max lg:max-w-1xl'
+          className='absolute z-10 transform w-max lg:max-w-1xl bg-navDropdown rounded-lg border border-neutral-700/30'
           ref={floating}
           style={{
             position: strategy,
@@ -83,8 +87,8 @@ const MenuItem = ({
                 className='rounded-lg shadow-lg overflow-hidden'
                 onClick={() => close()}>
                 <div
-                  className={`relative flex flex-nowrap gap-6 bg-neutral-725 justify-between lg:justify-start ${
-                    padding ? 'px-1 py-4' : ''
+                  className={`relative flex flex-nowrap gap-6 justify-between lg:justify-start ${
+                    padding ? 'px-1 pt-3 pb-4' : ''
                   }`}>
                   {children}
                 </div>

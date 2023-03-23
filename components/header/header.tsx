@@ -1,4 +1,4 @@
-import { SuiButton, SuiLink, SuiText } from '../sui'
+import { SuiButton, SuiLink } from '../sui'
 
 import { Fragment } from 'react'
 import { Disclosure, Popover, Transition } from '@headlessui/react'
@@ -11,10 +11,11 @@ import MobileMenuItem from './MobileMenuItem'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import logoFull from '../../public/logo-full.svg'
 import { CUILink } from '../ClickUI'
-import { HeaderLinkItem, MenuItem as MenuItemType } from './types'
+import { MenuItem as MenuItemType } from './types'
 import Option from './Option'
 
 export default function Header() {
+  const headerMenuItems = menuItems as Array<MenuItemType>
   return (
     <Popover className='shadow-sm bg-neutral-900/11 border-b border-primary-700 h-full backdrop-blur-lg sticky top-0 z-50 ease-in-out duration-300'>
       {({ open }) => (
@@ -49,7 +50,7 @@ export default function Header() {
                         as='nav'
                         className='flex items-center space-x-4 lg:space-x-6 xl:space-x-10 w-full'>
                         <div className='flex space-x-4 mx-auto'>
-                          {menuItems.map((menuItem) => {
+                          {headerMenuItems.map((menuItem) => {
                             if (
                               menuItem?.menuItems &&
                               menuItem?.menuItems.length > 0
@@ -62,38 +63,16 @@ export default function Header() {
                                   padding={
                                     (firstSubitem.name || '')?.length > 0
                                   }>
-                                  {menuItem.menuItems.map((subitem) => {
-                                    if (
-                                      subitem.menuItems &&
-                                      subitem.menuItems.length > 0
-                                    ) {
-                                      return (
-                                        <div className='flex flex-col'>
-                                          {subitem.name && (
-                                            <div className='mb-3 pl-3 text-c4 font-semibold text-sm'>
-                                              {subitem.name}
-                                            </div>
-                                          )}
-                                          {subitem.menuItems.map(
-                                            (item: HeaderLinkItem) => (
-                                              <Option
-                                                key={item.name}
-                                                {...item}
-                                              />
-                                            )
-                                          )}
-                                        </div>
-                                      )
-                                    } else if (subitem?.href) {
-                                      return (
-                                        <Option
-                                          key={subitem.name}
-                                          {...subitem}
-                                        />
-                                      )
-                                    }
-                                    return null
-                                  })}
+                                  {menuItem.menuItems.map((subitem) => (
+                                    <div className='flex flex-col'>
+                                      <div className='mb-7 pl-3 text-c4 font-semibold text-sm min-h-[1lh]'>
+                                        {subitem.name}
+                                      </div>
+                                      {subitem.menuItems.map((item) => (
+                                        <Option key={item.name} {...item} />
+                                      ))}
+                                    </div>
+                                  ))}
                                 </MenuItem>
                               )
                             } else if (menuItem?.href) {
@@ -123,17 +102,22 @@ export default function Header() {
                             label: 'GitHub Stars',
                             category: 'website-nav'
                           }}>
-                          <div className='flex items-center '>
+                          <div className='flex items-center gap-2'>
                             <svg
-                              viewBox='0 0 24 24'
-                              aria-hidden='true'
-                              className='h-6 w-6 dark:fill-neutral-0 fill-neutral-0 mr-1'>
+                              width='16'
+                              height='16'
+                              viewBox='0 0 16 16'
+                              fill='none'
+                              xmlns='http://www.w3.org/2000/svg'>
                               <path
-                                fillRule='evenodd'
-                                clipRule='evenodd'
-                                d='M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.151-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.524 2.341 1.084 2.91.828.092-.643.35-1.083.636-1.332-2.22-.251-4.555-1.107-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.268 2.75 1.022A9.607 9.607 0 0 1 12 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.696 1.028 1.587 1.028 2.675 0 3.83-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48 3.97-1.32 6.833-5.054 6.833-9.458C22 6.463 17.522 2 12 2Z'></path>
+                                fill-rule='evenodd'
+                                clip-rule='evenodd'
+                                d='M8 1.75C4.27062 1.75 1.25 4.77062 1.25 8.5C1.25 11.4869 3.18219 14.0097 5.86531 14.9041C6.20281 14.9631 6.32937 14.7606 6.32937 14.5834C6.32937 14.4231 6.32094 13.8916 6.32094 13.3263C4.625 13.6384 4.18625 12.9128 4.05125 12.5331C3.97531 12.3391 3.64625 11.74 3.35938 11.5797C3.12312 11.4531 2.78562 11.1409 3.35094 11.1325C3.8825 11.1241 4.26219 11.6219 4.38875 11.8244C4.99625 12.8453 5.96656 12.5584 6.35469 12.3813C6.41375 11.9425 6.59094 11.6472 6.785 11.4784C5.28312 11.3097 3.71375 10.7275 3.71375 8.14563C3.71375 7.41156 3.97531 6.80406 4.40563 6.33156C4.33812 6.16281 4.10187 5.47094 4.47312 4.54281C4.47312 4.54281 5.03844 4.36563 6.32937 5.23469C6.86937 5.08281 7.44313 5.00687 8.01688 5.00687C8.59063 5.00687 9.16438 5.08281 9.70438 5.23469C10.9953 4.35719 11.5606 4.54281 11.5606 4.54281C11.9319 5.47094 11.6956 6.16281 11.6281 6.33156C12.0584 6.80406 12.32 7.40312 12.32 8.14563C12.32 10.7359 10.7422 11.3097 9.24031 11.4784C9.485 11.6894 9.69594 12.0944 9.69594 12.7272C9.69594 13.63 9.6875 14.3556 9.6875 14.5834C9.6875 14.7606 9.81406 14.9716 10.1516 14.9041C12.8178 14.0097 14.75 11.4784 14.75 8.5C14.75 4.77062 11.7294 1.75 8 1.75Z'
+                                fill='white'
+                              />
                             </svg>
-                            <span className='text-xs font-medium text-neutral-0'>
+
+                            <span className='text-xs font-medium text-neutral-0 leading-none'>
                               27.6k
                             </span>
                           </div>
@@ -183,13 +167,8 @@ export default function Header() {
                   <div className='mt-16 mb-6 px-4 sm:px-8 overflow-auto h-[stretch]'>
                     <div className='flex items-top justify-between mt-6 w-full'>
                       <nav className='flex flex-col gap-2 w-full'>
-                        {menuItems.map((menuItem: MenuItemType) => {
+                        {headerMenuItems.map((menuItem) => {
                           if ((menuItem.menuItems ?? []).length > 0) {
-                            if (!menuItem.name) {
-                              return (
-                                <MobileMenuItem {...menuItem} close={close} />
-                              )
-                            }
                             return (
                               <Disclosure as='div'>
                                 {({ open }) => (

@@ -197,6 +197,7 @@ module.exports = {
       backgroundImage: {
         field_focus:
           'linear-gradient(0deg, #fbff46, #fbff46 2px, transparent 0, transparent)',
+        navDropdown: 'linear-gradient(to bottom, #282828 0px, #282828 44px, rgba(65, 65, 65, 0.3) 44px, rgba(65, 65, 65, 0.3)45px, black 45px, black 100%)',
         grid: 'url("/bg-grid.png")',
         'click-grid': 'url("/bg-grid.svg")',
         'home-grid':

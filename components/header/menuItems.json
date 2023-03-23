@@ -37,6 +37,7 @@
 		}]
 	}, {
 		"id": 3,
+		"name": "",
     "menuItems": [{
 			"id": 1,
 			"name": "Latest update",
