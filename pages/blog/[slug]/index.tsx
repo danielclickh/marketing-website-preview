@@ -90,7 +90,7 @@ export default function BlogPage({
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
       <div className='pt-10'>
-        <div className='flex container mx-auto flex-col px-6 2xl:px-0 max-w-4xl'>
+        <div className='flex container mx-auto flex-col px-6 2xl:px-0 max-w-6xl'>
           <div className='flex flex-col text-center mx-auto pt-6'>
             <h4 className='font-inconsolata text-primary-300 text-lg'>
               {category}
