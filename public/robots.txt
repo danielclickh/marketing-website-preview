@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
+Sitemap: http://cms.clickhouse.com:1337/sitemap/index.xml
