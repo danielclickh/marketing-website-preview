@@ -88,20 +88,10 @@ function CareersFilter() {
     return filteredDepartment.map(([name, jobs]) => {
       return [
         name,
-        selectedOffice
-          ? jobs.filter((job: JobType) => {
-              const hasOffice = job.offices.includes(Number(selectedOffice))
-              if (search.length > 0) {
-                return filterJobBySearchContent(job)
-              }
-              return hasOffice
-            })
-          : search.length > 0
-          ? jobs.filter(filterJobBySearchContent)
-          : jobs
+        search.length > 0 ? jobs.filter(filterJobBySearchContent) : jobs
       ]
     })
-  }, [selectedOffice, selectedDepartment, data, search])
+  }, [selectedDepartment, data, search])
 
   if (error) {
     return (
@@ -146,8 +136,8 @@ function CareersFilter() {
   })
 
   return (
-    <div className='flex flex-col md:flex-row container mx-auto max-w-7xl justify-between'>
-      <div className='flex md:w-64 md:pr-8 pb-8 md:pb-0 flex-col'>
+    <div className='flex flex-col w-full'>
+      <div className='w-full flex flex-col md:flex-row md:justify-between'>
         <SuiSearchField
           placeholder='Search'
           htmlFor='search'
@@ -155,13 +145,6 @@ function CareersFilter() {
             setSearch(e.target.value)
           }
         />
-        <SuiTitle type='h6' className='mt-6'>
-          Office
-        </SuiTitle>
-        <CategorySelector options={offices} />
-        <SuiTitle type='h6' className='mt-6'>
-          Department
-        </SuiTitle>
         <CategorySelector options={departments} />
       </div>
       <div className='flex flex-col md:flex-row md:w-3/4 md:space-x-16 justify-center'>

@@ -119,12 +119,8 @@ export default function CareersPage({
         ))}
       </div>
 
-      <div className='w-full pt-16 pb-16 px-6'>
-        <div className='flex flex-col md:flex-row container mx-auto max-w-7xl md:space-x-16 mb-12 items-center'>
-          <div className='flex flex-col md:w-3/5'>
-            <SuiTitle type='h2'>{positionsTitle}</SuiTitle>
-          </div>
-        </div>
+      <div className='w-full pt-16 pb-16 px-6 flex flex-col'>
+        <SuiTitle type='h2'>{positionsTitle}</SuiTitle>
 
         <CareersFilter />
       </div>
