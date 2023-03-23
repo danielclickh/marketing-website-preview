@@ -46,10 +46,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         stroke='rgba(52, 52, 52, 0.9)'
         rx='4'>
         <animate
-          dur='4s'
+          dur='3s'
           attributeName='stroke'
-          begin='postgresLineAnimate.begin-1'
-          end='postgresLineAnimate.end'
+          begin='postgresLineAnimate.begin'
           values='#FBFF46; #FBFF46; 0'
           keyTimes='0; 0.99; 1'
         />
@@ -73,9 +72,10 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         rx='4'>
         <animate
           attributeName='stroke'
-          begin='bigQueryLineAnimate.begin-1'
-          dur='4s'
-          to='#FBFF46'
+          begin='bigQueryLineAnimate.begin'
+          dur='3s'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -96,10 +96,11 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         stroke='rgba(52, 52, 52, 0.9)'
         rx='4'>
         <animate
-          dur='4s'
+          dur='3s'
           attributeName='stroke'
-          begin='redshiftLineAnimate.begin-1'
-          to='#FBFF46'
+          begin='redshiftLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -120,10 +121,11 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         stroke='rgba(52, 52, 52, 0.9)'
         rx='4'>
         <animate
-          dur='4s'
+          dur='3s'
           attributeName='stroke'
-          begin='snowflakeLineAnimate.begin-1'
-          to='#FBFF46'
+          begin='snowflakeLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -144,10 +146,11 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         stroke='rgba(52, 52, 52, 0.9)'
         rx='4'>
         <animate
-          dur='4s'
+          dur='3s'
           attributeName='stroke'
-          begin='mongoLineAnimate.begin-1'
-          to='#FBFF46'
+          begin='mongoLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -168,10 +171,11 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         stroke='rgba(52, 52, 52, 0.9)'
         rx='4'>
         <animate
-          dur='4s'
+          dur='3s'
           attributeName='stroke'
-          begin='mysqlLineAnimate.begin-1'
-          to='#FBFF46'
+          begin='mysqlLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -200,10 +204,11 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         stroke='rgba(52, 52, 52, 0.9)'
         rx='4'>
         <animate
-          dur='4s'
+          dur='3s'
           attributeName='stroke'
-          begin='kafkaLineAnimate.begin-1'
-          to='#FBFF46'
+          begin='kafkaLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -225,10 +230,11 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         stroke='rgba(52, 52, 52, 0.9)'
         rx='4'>
         <animate
-          dur='4s'
+          dur='3s'
           attributeName='stroke'
-          begin='vectorLineAnimate.begin-1'
-          to='#FBFF46'
+          begin='vectorLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -250,10 +256,11 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         stroke='rgba(52, 52, 52, 0.9)'
         rx='4'>
         <animate
-          dur='4s'
+          dur='3s'
           attributeName='stroke'
-          begin='dbtLineAnimate.begin-1'
-          to='#FBFF46'
+          begin='dbtLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -283,10 +290,11 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         stroke='rgba(52, 52, 52, 0.9)'
         rx='4'>
         <animate
-          dur='4s'
+          dur='3s'
           attributeName='stroke'
-          begin='icebergLineAnimate.begin-1'
-          to='#FBFF46'
+          begin='icebergLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -308,10 +316,11 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         stroke='rgba(52, 52, 52, 0.9)'
         rx='4'>
         <animate
-          dur='4s'
+          dur='3s'
           attributeName='stroke'
-          begin='hudiLineAnimate.begin-1'
-          to='#FBFF46'
+          begin='hudiLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -333,10 +342,11 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         stroke='rgba(52, 52, 52, 0.9)'
         rx='4'>
         <animate
-          dur='4s'
+          dur='3s'
           attributeName='stroke'
-          begin='deltaLakeLineAnimate.begin-1'
-          to='#FBFF46'
+          begin='deltaLakeLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -366,10 +376,12 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         stroke='rgba(52, 52, 52, 0.9)'
         rx='4'>
         <animate
-          dur='4s'
+          dur='3s'
           attributeName='stroke'
-          begin='localFilesLineAnimation.begin-1s'
-          to='#FBFF46'
+          begin='0s'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
+          repeatDur='indefinite'
         />
       </rect>
       <image
@@ -403,8 +415,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='3s'
           attributeName='stroke'
-          begin='supersetLineAnimate.end'
-          to='#FBFF46'
+          begin='supersetLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -428,8 +441,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='3s'
           attributeName='stroke'
-          begin='deepNoteLineAnimate.end'
-          to='#FBFF46'
+          begin='deepNoteLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -453,8 +467,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='3s'
           attributeName='stroke'
-          begin='graphanaLineAnimate.end'
-          to='#FBFF46'
+          begin='graphanaLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -478,8 +493,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='3s'
           attributeName='stroke'
-          begin='metabaseLineAnimate.end'
-          to='#FBFF46'
+          begin='metabaseLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -503,8 +519,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='3s'
           attributeName='stroke'
-          begin='tableauLineAnimate.end'
-          to='#FBFF46'
+          begin='tableauLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -528,8 +545,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='3s'
           attributeName='stroke'
-          begin='hexLineAnimate.end'
-          to='#FBFF46'
+          begin='hexLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -556,8 +574,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='3s'
           attributeName='stroke'
-          begin='pythonLineAnimate.end'
-          to='#FBFF46'
+          begin='pythonLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -581,8 +600,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='3s'
           attributeName='stroke'
-          begin='nodejsLineAnimate.end'
-          to='#FBFF46'
+          begin='nodejsLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -606,8 +626,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='3s'
           attributeName='stroke'
-          begin='javaLineAnimate.end'
-          to='#FBFF46'
+          begin='javaLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -631,8 +652,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='3s'
           attributeName='stroke'
-          begin='cHashLineAnimate.end'
-          to='#FBFF46'
+          begin='cHashLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -656,8 +678,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='3s'
           attributeName='stroke'
-          begin='goLineAnimate.end'
-          to='#FBFF46'
+          begin='goLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image
@@ -681,8 +704,9 @@ function SpeedAnimation(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
         <animate
           dur='3s'
           attributeName='stroke'
-          begin='rustLineAnimate.end'
-          to='#FBFF46'
+          begin='rustLineAnimate.begin'
+          values='#FBFF46; #FBFF46; 0'
+          keyTimes='0; 0.99; 1'
         />
       </rect>
       <image

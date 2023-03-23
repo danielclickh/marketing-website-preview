@@ -92,9 +92,7 @@ export default function BlogPage({
       <div className='pt-10'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0 max-w-6xl'>
           <div className='flex flex-col text-center mx-auto pt-6'>
-            <h4 className='font-inconsolata text-primary-300 text-lg'>
-              {category}
-            </h4>
+            <h4 className='text-primary-300 text-lg'>{category}</h4>
             <h1 className='mt-6 mb-8 text-3xl md:text-5xl font-inter font-bold'>
               <span className='leading-snug'>{title}</span>
             </h1>
