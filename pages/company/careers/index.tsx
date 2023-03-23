@@ -9,18 +9,71 @@ import { CareersData } from '../../../types/careers'
 import { GetStaticProps } from 'next'
 import Layout from '../../../components/Layout'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import Image from 'next/image'
+import FollowUs from '../../../components/FollowUs'
+
+const careerImgs = [
+  {
+    id: 1,
+    url: '/images/careers/Group.png',
+    alt: 'At the laptop'
+  },
+  { id: 2, url: '/images/careers/Guiness.png', alt: 'Team' },
+  { id: 3, url: '/images/careers/Kseniia.png', alt: 'Kseniia' },
+  { id: 4, url: '/images/careers/ZachTanyaGuy.png', alt: 'Meeting' },
+  {
+    id: 5,
+    url: '/images/careers/Group.png',
+    alt: 'At the laptop'
+  },
+  { id: 6, url: '/images/careers/Guiness.png', alt: 'Team' },
+  { id: 7, url: '/images/careers/Kseniia.png', alt: 'Kseniia' },
+  { id: 7, url: '/images/careers/ZachTanyaGuy.png', alt: 'Meeting' }
+]
+
+const values = [
+  {
+    icon: '/images/careers/icons/customer-first.svg',
+    title: 'Customer first',
+    content:
+      'We succeed when our customers and users succeed. They’re are at the center of everything we do. Our passion for our users translates into their passion for ClickHouse.'
+  },
+  {
+    icon: '/images/careers/icons/distributed.svg',
+    title: 'Distributed',
+    content:
+      'ClickHouse is proud to have employees in over 10 countries. We believe that diverse and distributed workplaces working inclusively are an essential advantage.'
+  },
+  {
+    icon: '/images/careers/icons/remote.svg',
+    title: 'Remote and flexible',
+    content:
+      'We’re a remote company, with a flexible work-from-anywhere policy. We work in small product oriented teams to focus & execute faster. We don’t track working hours, what matters is what you get done.'
+  },
+  {
+    icon: '/images/careers/icons/empathy.svg',
+    title: 'Empathy at work',
+    content:
+      'Empathy is the ability to place yourself in the shoes of others, to try to understand their thoughts, feelings, and needs, and also know that we don’t know it all and need to approach other people with the humility to learn.'
+  },
+  {
+    icon: '/images/careers/icons/diversity.svg',
+    title: 'Diversity',
+    content:
+      'Diverse and inclusive environments are both an  advantage and a moral imperative. 40% of our leadership team consists of women, and we are proud to have a diverse group of investors, board members, and advisors.'
+  },
+  {
+    icon: '/images/careers/icons/trust.svg',
+    title: 'Trust',
+    content:
+      'We work together to make collaboration a strength across timezone differences, languages, and cultures. While we’re in different places, we all have the same goals, and we trust each other to do the work needed to achieve them.'
+  }
+]
 
 export const getStaticProps: GetStaticProps<CareersData> =
   async function getStaticProps() {
     const data = await findOne('career', {
-      populate: [
-        'hero',
-        'hero.companyImages',
-        'companyValues',
-        'companyValues.iconSvg',
-        'seo',
-        'seo.image'
-      ]
+      populate: ['seo', 'seo.image']
     })
     const commonProps = await getCommonProps()
     return {
@@ -32,99 +85,86 @@ export const getStaticProps: GetStaticProps<CareersData> =
   }
 
 export default function CareersPage({
-  hero,
-  companyValues,
   positionsTitle,
   seo,
   headerData,
-  footerData,
-  platforms
+  footerData
 }: CareersData) {
-  const { title, description, paragraphTitle, paragraphText, companyImages } =
-    hero
   return (
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
       <div className='pt-10'>
-        <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
-          <div className='flex flex-col text-center mx-auto'>
-            <SuiTitle type='h1' className='mb-4 md:!text-6xl'>
-              {title}
-            </SuiTitle>
-            <SuiText
-              size='lg'
-              weight='normal'
-              color='secondary'
-              className='max-w-3xl'>
-              {description}
-            </SuiText>
+        <div className='relative pt-10'>
+          <div className='bg-primary-300 absolute inset-0 transform -skew-y-2 max-h-96'></div>
+          <div className='relative z-10'>
+            <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
+              <div className='flex flex-col text-center mx-auto px-8'>
+                <h1 className='mb-4 font-basier text-neutral-800 text-5.5xl font-semibold'>
+                  Become part of our team
+                </h1>
+                <p className='text-neutral-800 max-w-3xl'>
+                  We are a globally diverse and distributed team, united behind
+                  a common goal of creating industry-leading, real-time
+                  analytics. Here, you will have an opportunity to solve some of
+                  the most cutting edge technical challenges and have direct
+                  ownership of your work and vision. If you are a contributor by
+                  nature, a thinker as well as a doer - we’ll definitely click!
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className='bg-center bg-cover w-full max-w-full h-72 my-16 overflow-y-hidden'>
+            <CompanyImages>
+              {careerImgs.map((image) => (
+                <Image
+                  src={image.url}
+                  width='750'
+                  height='565'
+                  alt={image.alt}
+                  key={image.id}
+                  className='!h-72 w-auto px-1 object-cover object-center rounded-md'></Image>
+              ))}
+            </CompanyImages>
           </div>
         </div>
-        <div className='bg-center bg-cover w-full max-w-full h-72 my-16 overflow-y-hidden'>
-          <CompanyImages>
-            {companyImages.map((image) => (
-              <StrapiImage
-                key={image.id}
-                sizes='medium'
-                {...image}
-                className='!h-72 w-auto px-1 object-cover object-center'
-              />
-            ))}
-          </CompanyImages>
-        </div>
-        <div className='w-full pt-4 px-6 pb-12'>
-          <div className='flex flex-col md:flex-row container mx-auto max-w-7xl md:space-x-16 mb-12'>
+        <div className='w-full pt-4 pb-12 px-8'>
+          <div className='flex flex-col md:flex-row container mx-auto max-w-7xl md:space-x-16 mb-6'>
             <div className='flex flex-col md:w-4/5'>
-              <SuiTitle type='h2' className='mb-6'>
-                {paragraphTitle}
-              </SuiTitle>
-              <SuiText
-                size='base'
-                weight='normal'
-                className='whitespace-pre-wrap'>
-                {paragraphText}
-              </SuiText>
+              <h2 className='font-basier mb-6 text-4xl'>Our values</h2>
+            </div>
+          </div>
+          <div className='max-w-7xl mx-auto'>
+            <div className='grid lg:grid-cols-3 gap-20'>
+              {values.map((value) => (
+                <div className='col'>
+                  <div className='flex items-start gap-4'>
+                    <Image
+                      src={value.icon}
+                      width={32}
+                      height={32}
+                      alt='Twitter image'
+                    />{' '}
+                    <div>
+                      <h4 className='font-bold mb-3 font-inter'>
+                        {value.title}
+                      </h4>
+                      <p className='font-light font-inter leading-relaxed text-sm'>
+                        {value.content}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
 
-      <div className='w-full text-neutral-0 px-6 pt-12'>
-        {companyValues.map((companyValue, index: number) => (
-          <div
-            className={`flex flex-col md:${
-              index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-            } container mx-auto max-w-7xl md:space-x-16 mb-28 items-center`}
-            key={companyValue.title}>
-            <div className='flex flex-col md:w-3/5'>
-              <SuiTitle type='h3' className='mb-6 !text-3xl' weight='bold'>
-                {companyValue.title}
-              </SuiTitle>
-              <SuiText
-                size='base'
-                weight='normal'
-                color='secondary'
-                className='whitespace-pre-wrap'>
-                {companyValue.description}
-              </SuiText>
-            </div>
-            <div className='flex flex-col md:w-2/5 mt-6 md:mt-12 items-center'>
-              <StrapiImage
-                {...companyValue.iconSvg}
-                alt='Empathy at work'
-                width={212}
-                height={212}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className='w-full pt-16 pb-16 px-6 flex flex-col'>
+      <div className='max-w-7xl mx-auto w-full pt-16 pb-16 flex flex-col'>
         <SuiTitle type='h2'>{positionsTitle}</SuiTitle>
 
         <CareersFilter />
       </div>
-      <GetStarted platforms={platforms} />
+      <FollowUs />
     </Layout>
   )
 }
