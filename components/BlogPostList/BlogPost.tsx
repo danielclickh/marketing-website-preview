@@ -22,7 +22,7 @@ export default function BlogPost({
   return (
     <Link
       href={`/blog/${slug}`}
-      className={`blog-post-card blog-post-card-${slug} hover:no-underline category-${category
+      className={` transition ease-in-out hover:-translate-y-1 hover:scale-102 blog-post-card blog-post-card-${slug} hover:no-underline category-${category
         .split(' ')
         .join('-')
         .toLowerCase()}`}>
