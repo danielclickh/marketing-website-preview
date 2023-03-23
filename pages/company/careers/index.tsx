@@ -94,7 +94,7 @@ export default function CareersPage({
     <Layout headerData={headerData} footerData={footerData} seo={seo}>
       <div className='pt-10'>
         <div className='relative pt-10'>
-          <div className='bg-primary-300 absolute inset-0 transform -skew-y-2 max-h-96'></div>
+          <div className='bg-primary-300 absolute inset-0 transform -skew-y-2 lg:max-h-96'></div>
           <div className='relative z-10'>
             <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
               <div className='flex flex-col text-center mx-auto px-8'>
