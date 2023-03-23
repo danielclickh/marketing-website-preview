@@ -97,7 +97,7 @@ export default function CareersPage({
           <div className='bg-primary-300 absolute inset-0 transform -skew-y-2 lg:max-h-96'></div>
           <div className='relative z-10'>
             <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
-              <div className='flex flex-col text-center mx-auto'>
+              <div className='flex flex-col text-center mx-auto flip-selection'>
                 <h1 className='text-4xl leading-tight mb-4 font-basier text-neutral-800 md:text-5.5xl font-semibold'>
                   Become part of our team
                 </h1>
