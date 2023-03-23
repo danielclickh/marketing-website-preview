@@ -8,12 +8,14 @@ export interface HeaderTopNavItem {
   menuItems: Array<HeaderLinkItem>
 }
 
+export type SubMenuItem = HeaderLinkItem | HeaderTopNavItem
+
 export interface HeaderNavItem {
   id: number
   name: string
   href?: never
   target?: never
-  menuItems: Array<HeaderLinkItem | HeaderTopNavItem>
+  menuItems: Array<SubMenuItem>
 }
 
 export interface HeaderLinkItem {

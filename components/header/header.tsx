@@ -5,13 +5,14 @@ import { Disclosure, Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
 import MenuItem from './MenuItem'
-import styles from './Header.module.scss'
 import Image from 'next/image'
 import menuItems from './menuItems.json'
 import MobileMenuItem from './MobileMenuItem'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import logoFull from '../../public/logo-full.svg'
 import { CUILink } from '../ClickUI'
+import { HeaderLinkItem, MenuItem as MenuItemType } from './types'
+import Option from './Option'
 
 export default function Header() {
   return (
@@ -29,13 +30,12 @@ export default function Header() {
                     width='135'
                     height='40'
                     alt='ClickHouse logo'
-                    className=' mb-4 mr-3'
                   />
                 </Link>
                 <div className='flex justify-center w-full'>
                   <div className='flex justify-between items-center md:justify-start w-full'>
                     <div className='-mr-2 -my-2 min-[930px]:hidden ml-auto'>
-                      <Popover.Button className='bg-c1 rounded-md p-2 inline-flex items-center justify-center text-c5 hover:text-c4 hover:bg-c2 focus:outline-none'>
+                      <Popover.Button className='bg-slate text-neutral-200 rounded-md p-2 inline-flex items-center justify-center hover:text-neutral-0 focus:outline-none'>
                         <span className='sr-only'>Open menu</span>
                         {open ? (
                           <XIcon className='h-6 w-6' aria-hidden='true' />
@@ -74,122 +74,22 @@ export default function Header() {
                                               {subitem.name}
                                             </div>
                                           )}
-                                          {subitem.menuItems.map((item) => (
-                                            <SuiLink
-                                              key={item.name}
-                                              href={item.href}
-                                              segmentEvent={{
-                                                label: item.name,
-                                                category: 'website-nav'
-                                              }}
-                                              className='flex items-start text-c4 hover:no-underline max-w-md'>
-                                              <div
-                                                className={styles.menuItem}
-                                                data-icon={
-                                                  item.icon ? 'true' : 'false'
-                                                }>
-                                                {item.icon && (
-                                                  <div
-                                                    className={`
-                                      flex-shrink-0 flex justify-center h-10 w-10 rounded-md
-                                      items-center text-c4
-                                      sm:h-12 sm:w-12 md:mr-4
-                                      `}>
-                                                    <Image
-                                                      src={item.icon}
-                                                      className='h-8 w-8'
-                                                      width={32}
-                                                      height={32}
-                                                      aria-hidden='true'
-                                                      alt={''}
-                                                    />
-                                                  </div>
-                                                )}
-                                                <div className='flex flex-col'>
-                                                  <SuiText
-                                                    size={
-                                                      item.icon ? 'base' : 'sm'
-                                                    }
-                                                    color='primary'
-                                                    weight={
-                                                      item.icon
-                                                        ? 'normal'
-                                                        : 'medium'
-                                                    }>
-                                                    {item.name}
-                                                  </SuiText>
-                                                  {item.description && (
-                                                    <SuiText
-                                                      size='sm'
-                                                      color='secondary'
-                                                      weight='normal'
-                                                      className='mt-1'>
-                                                      {item.description}
-                                                    </SuiText>
-                                                  )}
-                                                </div>
-                                              </div>
-                                            </SuiLink>
-                                          ))}
+                                          {subitem.menuItems.map(
+                                            (item: HeaderLinkItem) => (
+                                              <Option
+                                                key={item.name}
+                                                {...item}
+                                              />
+                                            )
+                                          )}
                                         </div>
                                       )
                                     } else if (subitem?.href) {
                                       return (
-                                        <SuiLink
+                                        <Option
                                           key={subitem.name}
-                                          href={subitem.href}
-                                          segmentEvent={{
-                                            label: subitem.name,
-                                            category: 'website-nav'
-                                          }}
-                                          className='flex items-start text-c4 hover:no-underline max-w-md'>
-                                          <div
-                                            className={styles.menuItem}
-                                            data-icon={
-                                              subitem.icon ? 'true' : 'false'
-                                            }>
-                                            {subitem.icon && (
-                                              <div
-                                                className={`
-                                      flex-shrink-0 flex justify-center h-10 w-10 rounded-md
-                                      items-center text-c4
-                                      sm:h-12 sm:w-12 md:mr-4
-                                      `}>
-                                                <Image
-                                                  src={item.icon}
-                                                  className='h-8 w-8'
-                                                  width={32}
-                                                  height={32}
-                                                  aria-hidden='true'
-                                                  alt={''}
-                                                />
-                                              </div>
-                                            )}
-                                            <div className='flex flex-col'>
-                                              <SuiText
-                                                size={
-                                                  subitem.icon ? 'base' : 'sm'
-                                                }
-                                                color='primary'
-                                                weight={
-                                                  subitem.icon
-                                                    ? 'normal'
-                                                    : 'medium'
-                                                }>
-                                                {subitem.name}
-                                              </SuiText>
-                                              {subitem.description && (
-                                                <SuiText
-                                                  size='sm'
-                                                  color='secondary'
-                                                  weight='normal'
-                                                  className='mt-1'>
-                                                  {subitem.description}
-                                                </SuiText>
-                                              )}
-                                            </div>
-                                          </div>
-                                        </SuiLink>
+                                          {...subitem}
+                                        />
                                       )
                                     }
                                     return null
@@ -280,10 +180,10 @@ export default function Header() {
               className='fixed inset-0 z-10 inset-x-0 transition transform origin-top-right min-[930px]:hidden h-screen bg-neutral-750'>
               {({ close }) => (
                 <div className='h-full flex flex-col justify-between rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 divide-y-2 divide-c2'>
-                  <div className='mt-16 mb-6 px-5 overflow-auto h-[stretch]'>
+                  <div className='mt-16 mb-6 px-4 sm:px-8 overflow-auto h-[stretch]'>
                     <div className='flex items-top justify-between mt-6 w-full'>
                       <nav className='flex flex-col gap-2 w-full'>
-                        {menuItems.map((menuItem) => {
+                        {menuItems.map((menuItem: MenuItemType) => {
                           if ((menuItem.menuItems ?? []).length > 0) {
                             if (!menuItem.name) {
                               return (
@@ -312,8 +212,7 @@ export default function Header() {
                                 )}
                               </Disclosure>
                             )
-                          }
-                          if (menuItem.href) {
+                          } else if (menuItem.href) {
                             return (
                               <SuiLink
                                 key={menuItem.name}

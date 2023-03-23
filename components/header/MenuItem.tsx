@@ -1,16 +1,19 @@
-import { Fragment, ReactNode, useState } from 'react'
+import { Fragment, ReactNode, useRef, useState } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import styles from './Header.module.scss'
 import {
   autoUpdate,
-  flip,
+  autoPlacement,
   shift,
   size,
   useClick,
   useDismiss,
   useFloating,
-  useInteractions
+  useInteractions,
+  FloatingArrow,
+  arrow,
+  offset
 } from '@floating-ui/react'
 
 const MenuItem = ({
@@ -23,22 +26,18 @@ const MenuItem = ({
   padding: boolean
 }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const arrowEl = useRef(null)
   const { x, y, strategy, floating, reference, context } = useFloating({
     open: isOpen,
     onOpenChange: setIsOpen,
     placement: 'bottom',
     whileElementsMounted: autoUpdate,
     middleware: [
-      size({
-        apply({ availableWidth, availableHeight, elements }) {
-          Object.assign(elements.floating.style, {
-            maxWidth: `${availableWidth}px`,
-            maxHeight: `${availableHeight}px`
-          })
-        }
+      arrow({
+        element: arrowEl
       }),
-      flip(),
-      shift()
+      shift(),
+      autoPlacement()
     ]
   })
   const click = useClick(context)
@@ -78,16 +77,19 @@ const MenuItem = ({
           }}
           {...getFloatingProps()}>
           {({ close }) => (
-            <div
-              className='rounded-lg shadow-lg border border-c2 ring-0 ring-opacity-5 overflow-hidden'
-              onClick={() => close()}>
+            <>
+              <FloatingArrow ref={arrowEl} context={context} />
               <div
-                className={`relative flex flex-nowrap gap-6 bg-neutral-725 justify-between lg:justify-start ${
-                  padding ? 'px-1 py-4' : ''
-                }`}>
-                {children}
+                className='rounded-lg shadow-lg overflow-hidden'
+                onClick={() => close()}>
+                <div
+                  className={`relative flex flex-nowrap gap-6 bg-neutral-725 justify-between lg:justify-start ${
+                    padding ? 'px-1 py-4' : ''
+                  }`}>
+                  {children}
+                </div>
               </div>
-            </div>
+            </>
           )}
         </Popover.Panel>
       </Transition>

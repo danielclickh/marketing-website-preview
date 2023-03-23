@@ -69,31 +69,41 @@ const customerStoriesLogos = [
     href: '/customer-stories#ebay',
     target: '_self',
     imageSrc: '/logos/eBay-black.svg',
-    alt: 'ebay'
+    alt: 'ebay',
+    width: 136,
+    height: 40
   },
   {
     href: '/customer-stories#uber',
     target: '_self',
     imageSrc: '/logos/uber-black.svg',
-    alt: 'uber'
+    alt: 'uber',
+    width: 136,
+    height: 40
   },
   {
     href: '/customer-stories#cloudflare',
     target: '_self',
     imageSrc: '/logos/cloudflare-black.svg',
-    alt: 'cloudflare'
+    alt: 'cloudflare',
+    width: 136,
+    height: 40
   },
   {
     href: '/customer-stories#spotify',
     target: '_self',
     imageSrc: '/logos/spotify-black.svg',
-    alt: 'spotify'
+    alt: 'spotify',
+    width: 119,
+    height: 35
   },
   {
     href: '/customer-stories#deutsche_bank',
     target: '_self',
     imageSrc: '/logos/deutsche-black.svg',
-    alt: 'deutsche bank'
+    alt: 'deutsche bank',
+    width: 136,
+    height: 31
   }
 ]
 
@@ -183,14 +193,14 @@ export default function HomePage({
         </div>
         <div className='bg-primary-300 py-8'>
           <div className='max-w-3xl mx-auto'>
-            <div className='text-center mb-9 text-primary-700 w-fit mx-auto leading-normal sm:leading-none'>
+            <div className='text-center mb-8 text-primary-800 w-fit mx-auto text-xl font-bold leading-normal'>
               Trusted by the best developers that work with data at{' '}
               <span className='tilted tilted-black'>
                 <span className='tilted-content'>scale</span>
               </span>
             </div>
 
-            <div className='container pt-6 flex flex-wrap sm:grid sm:grid-cols-5 gap-2 md:gap-x-8 self-center items-center justify-center place-items-center'>
+            <div className='section-container flex flex-wrap sm:grid sm:grid-cols-5 gap-2 md:gap-x-8 self-center items-center justify-center place-items-center'>
               {customerStoriesLogos.map((logo, index: number) => (
                 <CUILink
                   key={logo.href}
@@ -199,10 +209,10 @@ export default function HomePage({
                   className={`customer-stories-${index} flex rounded-lg justify-center ease-in-out duration-200 cursor-pointer gap-2`}>
                   <Image
                     src={logo?.imageSrc}
-                    className='w-auto h-12 rounded'
+                    className='w-auto h-10 rounded object-contain'
                     alt={logo.alt}
-                    width={144}
-                    height={48}
+                    width={logo.width}
+                    height={logo.height}
                   />
                 </CUILink>
               ))}
@@ -222,8 +232,9 @@ export default function HomePage({
           <SuiTitle type='h2' className='mb-6 mt-8'>
             Speed up queries from any data source
           </SuiTitle>
-          <div className='text-neutral-200 max-w-screen-sm leading-normal text-center mx-auto mb-10'>
+          <div className='text-neutral-200 max-w-screen-sm leading-normal text-center mx-auto mb-10 md:mb-16'>
             ClickHouse supports all the data sources you need to power your apps
+            <br />
             and use cases that require exceptional performance.
           </div>
           <div className='flex flex-wrap md:hidden gap-10 justify-center'>
@@ -324,14 +335,14 @@ export default function HomePage({
       <HRSeparator className='my-24' />
       <div className='relative flex flex-col gap-y-28'>
         <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element'>
-          <div className='flex flex-col items-center w-full gap-6'>
+          <div className='flex flex-col items-center w-full'>
             <Image
               src='/fast-icon.svg'
               alt='Fast Icon'
               width={72}
               height={72}
             />
-            <SuiTitle type='h2' className='my-6'>
+            <SuiTitle type='h2' className='mt-8 mb-6'>
               Why is ClickHouse so fast?
             </SuiTitle>
             <div className='text-neutral-200 max-w-screen-md leading-normal text-center mx-auto'>
@@ -351,7 +362,7 @@ export default function HomePage({
                 alt='Row Oriented Illustration'
                 priority
               />
-              <div className='text-neutral-0 font-bold leading-normal mb-3 mt-7'>
+              <div className='text-neutral-0 font-bold leading-normal mb-3 mt-6'>
                 Row-oriented databases
               </div>
               <div className='text-neutral-200 leading-normal'>
@@ -368,7 +379,7 @@ export default function HomePage({
                 alt='Column Oriented Illustration'
                 priority
               />
-              <div className='text-neutral-0 font-bold leading-normal mb-3 mt-7'>
+              <div className='text-neutral-0 font-bold leading-normal mb-3 mt-6'>
                 Column-oriented databases
               </div>
               <div className='text-neutral-200 leading-normal'>
