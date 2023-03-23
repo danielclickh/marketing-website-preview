@@ -29,7 +29,7 @@ export default function FAQ() {
         <Disclosure as='div' className={styles.accordion}>
           {({ open }) => (
             <>
-              <Disclosure.Button className='flex w-full justify-between rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
+              <Disclosure.Button className='flex w-full justify-between items-center rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
                 <span>
                   Is ClickHouse faster than SnowFlake/Redshift/DuckDB etc?
                 </span>
@@ -62,7 +62,7 @@ export default function FAQ() {
         <Disclosure as='div' className={styles.accordion}>
           {({ open }) => (
             <>
-              <Disclosure.Button className='flex w-full justify-between rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
+              <Disclosure.Button className='flex w-full justify-between items-center rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
                 <span>
                   Can I use ClickHouse with Kafka/Airbyte/Amazon S3 etc?
                 </span>
@@ -86,7 +86,7 @@ export default function FAQ() {
         <Disclosure as='div' className={styles.accordion}>
           {({ open }) => (
             <>
-              <Disclosure.Button className='flex w-full justify-between rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
+              <Disclosure.Button className='flex w-full justify-between items-center rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
                 <span>What are the deployment options for ClickHouse?</span>
                 <span className={styles.plusMinus} data-active={open} />
               </Disclosure.Button>
@@ -108,7 +108,7 @@ export default function FAQ() {
         <Disclosure as='div' className={styles.accordion}>
           {({ open }) => (
             <>
-              <Disclosure.Button className='flex w-full justify-between rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
+              <Disclosure.Button className='flex w-full justify-between items-center rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
                 <span>How much does ClickHouse cost?</span>
                 <span className={styles.plusMinus} data-active={open} />
               </Disclosure.Button>
@@ -130,7 +130,7 @@ export default function FAQ() {
         <Disclosure as='div' className={styles.accordion}>
           {({ open }) => (
             <>
-              <Disclosure.Button className='flex w-full justify-between rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
+              <Disclosure.Button className='flex w-full justify-between items-center rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
                 <span>Can I see the benchmarks?</span>
                 <span className={styles.plusMinus} data-active={open} />
               </Disclosure.Button>
