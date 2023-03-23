@@ -38,21 +38,23 @@ function DevelopersSection() {
         What do developers say?
       </SuiTitle>
       <div className='flex flex-col md:flex-row mb-16 gap-10'>
-        <Image
-          src='/images/homepage/developer-image.png'
-          width='100'
-          height='100'
-          alt='Developers story image'
-          className='w-full md:w-1/2 rounded-lg'
-        />
+        <div className='w-full md:w-1/2 flex items-center'>
+          <iframe
+            src='https://player.vimeo.com/video/756877867?h=c58e171729&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479'
+            frameBorder='0'
+            allow='autoplay; fullscreen; picture-in-picture'
+            allowFullScreen
+            className='rounded-lg h-fit w-full top-0 left-0 relative aspect-video'
+            title='Getting Started.mp4'></iframe>
+        </div>
         <div className='flex flex-col w-full md:w-1/2'>
-          <div>
+          <div className='text-lg font-bold text-neutral-0'>
             “We saw huge speed gains from the moment we introduced ClickHouse to
             our stack”
           </div>
           <div className='grid grid-cols-[0.5rem_1fr] gap-6 mt-8'>
-            <div className='bg-primary w-full h-full' />
-            <div>
+            <div className='bg-primary-300 w-full h-full' />
+            <div className='text-neutral-200'>
               Disney moved its logging platform to ClickHouse increasing
               developer productivity and overall reliability of the platform
               while seeing 3x data compression, 10x performance increase, and ½
@@ -61,8 +63,8 @@ function DevelopersSection() {
             </div>
           </div>
           <div className='flex flex-col text-base mt-8 mb-10'>
-            <div className='leading-normal'>John Johnson,</div>
-            <div className='leading-none text-primary-300'>
+            <div className='mb-1'>John Johnson,</div>
+            <div className='leading-none text-primary-300 font-medium'>
               Head of Engineering @ Disney
             </div>
           </div>

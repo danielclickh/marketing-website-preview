@@ -56,8 +56,8 @@ export default function Footer({
         </div>
       </div>
       <div className='section-container shadow-footer-line border-t border-neutral-400 opacity-10 w-full' />
-      <div className='flex flex-col pt-2 lg:pt-10 items-start'>
-        <div className='section-container flex flex-col w-full gap-3 sm:gap-1 items-center mt-6 sm:mt-3 md:flex-row md:justify-between text-sm text-neutral-500'>
+      <div className='flex flex-col pt-2 lg:pt-8 items-start'>
+        <div className='section-container flex flex-col w-full gap-3 sm:gap-1 items-center md:flex-row md:justify-between text-sm text-neutral-500'>
           <div>
             © 2023 ClickHouse, Inc. HQ in Bay Area, CA and Amsterdam, NL.
           </div>
@@ -71,7 +71,7 @@ export default function Footer({
                   label: bottomLink.text,
                   category: 'website-nav'
                 }}
-                className={`first:pl-0 leading-normal bottom-link-${index}`}>
+                className={`first:pl-0 bottom-link-${index}`}>
                 {bottomLink.text}
               </CUILink>
             ))}

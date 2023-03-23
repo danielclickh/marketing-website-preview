@@ -13,7 +13,7 @@ export default function FAQ() {
         <SuiTitle type='h2' className='my-6'>
           FAQs
         </SuiTitle>
-        <div className='max-w-md'>
+        <div className='max-w-md text-neutral-200'>
           Wherever you need us, we’re there. We love to engage in thoughtful
           conversation with the ClickHouse community and are always on-hand to
           answer your questions.{' '}
@@ -21,7 +21,7 @@ export default function FAQ() {
         <CUILink
           href='/clickhouse'
           target='_self'
-          className='flex gap-4 leading-normal text-primary items-center mt-6'>
+          className='flex gap-4 text-primary items-center mt-6'>
           <span>Ask us anything</span> <ExternalLinkIcon className='w-4 h-4' />
         </CUILink>
       </div>

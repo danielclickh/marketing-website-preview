@@ -59,7 +59,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  @apply mx-auto text-neutral-0;
+  @apply mx-auto text-neutral-0 leading-normal;
   scroll-padding-top: 100px;
 }
 
@@ -68,7 +68,7 @@ body {
 }
 
 ::selection {
-  @apply bg-primary-300 text-neutral-800
+  @apply bg-primary-300 text-neutral-800;
 }
 
 * {
@@ -110,10 +110,14 @@ body {
     }
   }
 
-  h1,h2,h3,h4,h5,h6 {
-    @apply text-neutral-0
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-neutral-0;
   }
-
 
   .code-with-play {
     @apply text-neutral-0 flex relative whitespace-pre-wrap rounded-lg bg-noised;
@@ -385,4 +389,3 @@ body {
     content: "";
   }
 }
-

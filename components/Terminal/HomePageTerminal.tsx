@@ -39,14 +39,10 @@ function HomePageTerminal() {
       </p>
       <br />
       <p className={`fade-in-animation ${animationCompleted ? 'active' : ''}`}>
-        {`------------------------------------------------\n
-        |                                              |\n
-        |                                              |\n
-        ------------------------------------------------\n`}
-        Elapsed: <span className='text-primary'>0.928 sec</span> Processed{' '}
-        <span className='text-primary'>27.45 million</span> rows,
-        <br />
-        103.80 MB (29.56 million rows/s., 111.80 MB/s.)
+        13 rows in set. Elapsed:{' '}
+        <span className='text-primary-300'>0.823 sec</span> Processed{' '}
+        <span className='text-primary-300'>1.07 billion</span> rows, 11.75 GB
+        (1.30 billion rows/s., 14.27 GB/s.)
       </p>
     </Terminal>
   )
