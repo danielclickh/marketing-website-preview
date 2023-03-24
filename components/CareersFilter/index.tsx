@@ -1,14 +1,9 @@
 import React, { ChangeEvent, useMemo, useState } from 'react'
 import useSWR from 'swr'
 import CategorySelector from '../CategorySelector'
-import {
-  SuiSearchField,
-  SuiTitle,
-  SuiText,
-  SuiHorizontalDivide,
-  SuiLink
-} from '../sui/client'
+import { SuiSearchField, SuiText, SuiLink, SuiButton } from '../sui/client'
 import { JobType, PositionType } from './types'
+import { ArrowRightIcon } from '@heroicons/react/solid'
 
 type DepartmentType = [name: string, jobs: JobType[]]
 const convertMapToArray = (obj: any) => {
@@ -177,8 +172,11 @@ function CareersFilter() {
                         {job.location}
                       </SuiText>
                     </div>
-                    <div className='mt-4 md:mt-0 border border-primary-600 rounded py-2 px-6 font-semibold'>
-                      Apply --{'>'}
+                    <div className='mt-4 md:mt-0 border border-primary-600 rounded py-2 px-6 font-semibold '>
+                      <span className='flex justify-center items-center gap-2'>
+                        Apply
+                        <ArrowRightIcon className='w-4' />
+                      </span>
                     </div>
                   </SuiLink>
                 </div>
