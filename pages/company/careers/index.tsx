@@ -126,7 +126,7 @@ export default function CareersPage({
             </CompanyImages>
           </div>
         </div>
-        <div className='w-full pt-16 pb-12 px-8'>
+        <div className='w-full pt-16 px-8'>
           <div className='flex flex-col md:flex-row container mx-auto max-w-7xl md:space-x-16 mb-6'>
             <div className='flex flex-col md:w-4/5'>
               <h2 className='font-basier mb-6 text-4xl'>Our values</h2>
@@ -153,7 +153,8 @@ export default function CareersPage({
           </div>
         </div>
       </div>
-      <div className='w-full pt-4 pb-12 px-8'>
+      <div className='w-full border-t border-neutral-725 max-w-screen-md px-7 mx-auto my-24'></div>
+      <div className='w-full pb-12 px-8'>
         <div className='flex flex-col bg-shadow-element yellow-shadow max-w-7xl mx-auto'>
           <h2 className='text-3xl font-semibold font-inter mb-6'>
             Job openings
