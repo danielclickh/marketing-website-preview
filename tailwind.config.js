@@ -191,7 +191,7 @@ module.exports = {
         'click-pill': '0px -1px 5px rgba(16, 24, 40, 0.07)',
         'click-twitter': '0px 4px 48px rgba(250, 255, 72, 0.2)',
         'footer-line': '0px -1px 1px #000000',
-        codeblock: '0px 4px 4px rgba(0, 0, 0, 0.06), inset 0px 4px 25px rgba(0, 0, 0, 0.14)'
+        codeblock: '0px 4px 4px rgba(0, 0, 0, 0.06), inset 0px 4px 25px rgba(0, 0, 0, 0.14)',
       },
       backgroundSize: {
         default_size: '0%, 100%',

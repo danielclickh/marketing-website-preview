@@ -344,21 +344,26 @@ body {
   background-clip: padding-box, text;
   background-repeat: no-repeat;
   animation: typewrite-position 0.4s infinite steps(1),
-    typewrite-size calc(var(--totalCount) * 0.1s) steps(var(--totalCount)) forwards;
+    typewrite-size calc(var(--totalCount) * 0.05s) steps(var(--totalCount)) forwards;
   &.active {
     @apply transition-colors;
     .keyword {
-      @apply text-info-300;
+      color: #7a8fa7;
     }
     .constant {
-      @apply text-indigo-300;
+      color: #a48eaf;
     }
-    .number,
+    .number {
+      color: #c18a61;
+    }
+    .string {
+      color: #b6bd73;
+    }
     .bracket-level-1 {
       @apply text-warning-300;
     }
     .bracket-level-2 {
-      color: #cb76cf;
+      color: #c875cd;
     }
   }
 }

@@ -90,20 +90,20 @@ const customerStoriesLogos = [
     height: 40
   },
   {
-    href: '/customer-stories#spotify',
-    target: '_self',
-    imageSrc: '/logos/spotify-black.svg',
-    alt: 'spotify',
-    width: 119,
-    height: 35
-  },
-  {
     href: '/customer-stories#deutsche_bank',
     target: '_self',
     imageSrc: '/logos/deutsche-black.svg',
     alt: 'deutsche bank',
     width: 136,
     height: 31
+  },
+  {
+    href: '/customer-stories#spotify',
+    target: '_self',
+    imageSrc: '/logos/spotify-black.svg',
+    alt: 'spotify',
+    width: 119,
+    height: 35
   }
 ]
 
@@ -193,10 +193,10 @@ export default function HomePage({
         </div>
         <div className='bg-primary-300 py-8'>
           <div className='max-w-3xl mx-auto'>
-            <div className='text-center mb-8 text-primary-800 w-fit mx-auto text-xl font-bold leading-normal'>
-              Trusted by the best developers that work with data at{' '}
+            <div className='text-center mb-8 text-primary-800 w-fit mx-auto text-xl font-semibold leading-normal'>
+              Trusted by the best developers that work with data{' '}
               <span className='tilted tilted-black'>
-                <span className='tilted-content'>scale</span>
+                <span className='tilted-content leading-8'>at scale</span>
               </span>
             </div>
 
@@ -408,16 +408,18 @@ export default function HomePage({
             width={72}
             height={72}
           />
-          <SuiTitle type='h2' className='my-6 max-w-3xl mx-auto text-center'>
+          <SuiTitle
+            type='h2'
+            className='mt-8 mb-6 max-w-3xl mx-auto text-center'>
             Deploy your way
           </SuiTitle>
-          <div className='max-w-screen-sm leading-normal text-center mx-auto'>
+          <div className='max-w-screen-sm leading-normal text-center mx-auto text-neutral-200'>
             Unlike traditional closed-source data warehouses, ClickHouse runs on
             every environment, whether it’s on your machine or on the cloud
           </div>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-10 mt-16 mb-28'>
             {deployData.map((deploy) => (
-              <CUICard className='h-full p-6 bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat'>
+              <CUICard className='h-full p-8 bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat'>
                 <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
                   <Image
                     src={deploy.img}
@@ -426,7 +428,7 @@ export default function HomePage({
                     height={64}
                   />
                   <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>
-                    <div className='font-basier text-lg leading-tight cursor-pointer font-bold'>
+                    <div className='text-xl leading-tight cursor-pointer font-semibold'>
                       {deploy.title}
                     </div>
                     <div className='text-neutral-200 text-center'>

@@ -10,7 +10,7 @@ import SegmentScript from '../components/SegmentScript'
 const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-P52RCTZ'
 
 const inter = Inter({
-  subsets: ['latin'],
+  subsets: [],
   weight: ['400', '500', '600', '700'],
   display: 'swap',
   variable: '--font-inter',
@@ -19,7 +19,7 @@ const inter = Inter({
 })
 
 const inconsolata = Inconsolata({
-  subsets: ['latin'],
+  subsets: [],
   weight: ['400', '500', '600', '700'],
   display: 'swap',
   variable: '--font-inconsolata',
