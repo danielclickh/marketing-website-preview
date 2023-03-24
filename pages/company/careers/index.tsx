@@ -9,20 +9,20 @@ import Image from 'next/image'
 import FollowUs from '../../../components/FollowUs'
 
 const careerImgs = [
+  { id: 2, url: '/images/careers/Meeting.png', alt: 'Meeting' },
+  { id: 3, url: '/images/careers/At-the-office.png', alt: 'At the office' },
   {
     id: 1,
-    url: '/images/careers/Group.png',
-    alt: 'Group'
+    url: '/images/careers/Kseniia.png',
+    alt: 'Kseniia'
   },
-  { id: 2, url: '/images/careers/GroupOffice.png', alt: 'Group at the office' },
-  { id: 3, url: '/images/careers/Guiness.png', alt: 'Guiness' },
-  { id: 4, url: '/images/careers/Kseniia.png', alt: 'Kseniia' },
+  { id: 4, url: '/images/careers/Heineken-Brewry.png', alt: 'Heineken-Brewry' },
   {
     id: 5,
-    url: '/images/careers/Programmers.png',
+    url: '/images/careers/2-programmers.png',
     alt: 'Programmers'
   },
-  { id: 6, url: '/images/careers/ZachTanyaGuy.png', alt: 'Zach Tanya & Guy' }
+  { id: 6, url: '/images/careers/Zach-Tanya-Guy.png', alt: 'Zach Tanya & Guy' }
 ]
 
 const values = [
