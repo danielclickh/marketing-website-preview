@@ -28,7 +28,7 @@ const MenuItem = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const arrowEl = useRef(null)
-  const { x, y, strategy, floating, reference, context, open } = useFloating({
+  const { x, y, strategy, floating, reference, context } = useFloating({
     open: isOpen,
     onOpenChange: setIsOpen,
     placement: 'bottom',
@@ -54,7 +54,6 @@ const MenuItem = ({
     ]
   })
 
-  console.log(context)
   const hover = useHover(context, {
     handleClose: safePolygon()
   })
@@ -66,14 +65,13 @@ const MenuItem = ({
 
   return (
     <div className='relative' key={name}>
-      <button
+      <div
         ref={reference}
         data-open={isOpen}
         className={`${styles.header_popover} group group-hover:underline data-[open=true]:underline hover:underline`}
         {...getReferenceProps()}>
-        <span>{name}</span>
-        <ChevronDownIcon className='text-c5 ml-1 h-5 w-5' aria-hidden='true' />
-      </button>
+        {name}
+      </div>
       {/* 
       <Transition
         as={Fragment}
