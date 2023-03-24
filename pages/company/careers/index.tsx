@@ -117,8 +117,8 @@ export default function CareersPage({
               {careerImgs.map((image) => (
                 <Image
                   src={image.url}
-                  width='750'
-                  height='565'
+                  width='400'
+                  height='300'
                   alt={image.alt}
                   key={image.id}
                   className='!h-72 w-auto px-1 object-cover object-center rounded-md'></Image>
@@ -160,7 +160,7 @@ export default function CareersPage({
       </div>
 
       <div className='max-w-7xl mx-auto w-full pt-16 pb-16 flex flex-col'>
-        <SuiTitle type='h2'>{positionsTitle}</SuiTitle>
+        <SuiTitle type='h2'>Job openings</SuiTitle>
 
         <CareersFilter />
       </div>
