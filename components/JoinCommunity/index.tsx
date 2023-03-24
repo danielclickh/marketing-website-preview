@@ -38,7 +38,7 @@ function JoinCommunity() {
             </CUILink>
           </div>
           <div className='flex gap-6'>
-            <CUIButton
+            <CUILink
               href='/'
               className='w-16 !h-16 rounded grid place-items-center !border-neutral-700/50'
               type='secondary'>
@@ -48,8 +48,8 @@ function JoinCommunity() {
                 height={32}
                 alt='Discord image'
               />
-            </CUIButton>
-            <CUIButton
+            </CUILink>
+            <CUILink
               href='https://www.meetup.com/pro/clickhouse'
               className='w-16 !h-16 rounded grid place-items-center !border-neutral-700/50'
               type='secondary'>
@@ -59,7 +59,7 @@ function JoinCommunity() {
                 height={32}
                 alt='Meetup image'
               />
-            </CUIButton>
+            </CUILink>
           </div>
         </div>
       </div>
