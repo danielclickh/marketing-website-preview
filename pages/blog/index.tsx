@@ -143,7 +143,7 @@ export default function BlogsPage({
         <div className='flex flex-wrap gap-6 mb-12 justify-center'>
           <CUILink
             href='https://twitter.com/ClickhouseDB'
-            className='w-16 h-16 bg-eerie-black hover:bg-eerie-black/90 rounded grid place-items-center'>
+            className='w-16 h-16 bg-neutral-900 hover:bg-neutral-900/90 rounded grid place-items-center'>
             <Image
               src='/socials/twitter.svg'
               width={32}
@@ -153,7 +153,7 @@ export default function BlogsPage({
           </CUILink>
           <CUILink
             href='https://join.slack.com/t/clickhousedb/shared_invite/zt-1gh9ds7f4-PgDhJAaF8ad5RbWBAAjzFg'
-            className='w-16 h-16 bg-eerie-black hover:bg-eerie-black/90 rounded grid place-items-center'>
+            className='w-16 h-16 bg-neutral-900 hover:bg-neutral-900/90 rounded grid place-items-center'>
             <Image
               src='/socials/slack.svg'
               width={32}
@@ -163,7 +163,7 @@ export default function BlogsPage({
           </CUILink>
           <CUILink
             href='/'
-            className='w-16 h-16 bg-eerie-black hover:bg-eerie-black/90 rounded grid place-items-center'>
+            className='w-16 h-16 bg-neutral-900 hover:bg-neutral-900/90 rounded grid place-items-center'>
             <Image
               src='/socials/discord.svg'
               width={32}
@@ -174,7 +174,7 @@ export default function BlogsPage({
           <div className='flex gap-6 justify-center'>
             <CUILink
               href='https://www.meetup.com/pro/clickhouse'
-              className='w-16 h-16 bg-eerie-black hover:bg-eerie-black/90 rounded grid place-items-center'>
+              className='w-16 h-16 bg-neutral-900 hover:bg-neutral-900/90 rounded grid place-items-center'>
               <Image
                 src='/socials/meetup.svg'
                 width={32}
@@ -190,7 +190,7 @@ export default function BlogsPage({
                 category: 'blog-categories-nav'
               }}
               target='blank'
-              className='w-16 h-16 bg-eerie-black hover:bg-eerie-black/90 rounded grid place-items-center'>
+              className='w-16 h-16 bg-neutral-900 hover:bg-neutral-900/90 rounded grid place-items-center'>
               <Image
                 src='/socials/rss.svg'
                 width={32}

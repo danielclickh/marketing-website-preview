@@ -19,7 +19,7 @@ function Terminal({
   const currentStyle = { '--totalCount': totalCount, ...style }
   return (
     <div
-      className={`relative bg-eerie-black rounded text-left ${className} text-neutral-0`}
+      className={`relative bg-neutral-900 rounded text-left ${className} text-neutral-0`}
       style={currentStyle}
       {...props}>
       {(showControls || title) && (
