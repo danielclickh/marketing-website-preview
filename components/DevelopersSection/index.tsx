@@ -3,33 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import { CUIButton, CUICard } from '../ClickUI'
 import { SuiTitle } from '../sui'
-
-const developerOptions = [
-  {
-    img: '/images/homepage/developer-image.png',
-    title: 'Susan Wright - Uber',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.',
-    btnText: 'Learn More',
-    href: 'https://clickhouse.cloud'
-  },
-  {
-    img: '/images/homepage/developer-image.png',
-    title: 'Susan Wright - Uber',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.',
-    btnText: 'Learn More',
-    href: 'https://clickhouse.cloud'
-  },
-  {
-    img: '/images/homepage/developer-image.png',
-    title: 'Susan Wright - Uber',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.',
-    btnText: 'Learn More',
-    href: 'https://clickhouse.cloud'
-  }
-]
+import developerOptions from './developerOptions.json'
 
 function DevelopersSection() {
   return (
@@ -38,7 +12,7 @@ function DevelopersSection() {
         What do developers say?
       </SuiTitle>
       <div className='flex flex-col md:flex-row mb-16 gap-10'>
-        <div className='w-full md:w-1/2 flex items-center'>
+        <div className='w-full md:w-1/2 flex items-start'>
           <iframe
             src='https://player.vimeo.com/video/756877867?h=c58e171729&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479'
             frameBorder='0'
@@ -64,36 +38,40 @@ function DevelopersSection() {
           </div>
           <div className='flex flex-col text-base mt-8 mb-10'>
             <div className='mb-1'>John Johnson,</div>
-            <div className='leading-none text-primary-300 font-medium'>
+            <div className='leading-none text-primary-300 font-medium font-inconsolata'>
               Head of Engineering @ Disney
             </div>
           </div>
           <CUIButton
             type='secondary'
             href='/'
-            iconRight={<ArrowRightIcon height='24' />}>
+            iconRight={<ArrowRightIcon height='16' />}>
             Learn More
           </CUIButton>
         </div>
       </div>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-10'>
         {developerOptions.map((developerOption) => (
-          <CUICard className=''>
+          <CUICard key={developerOption.title}>
             {developerOption.img && (
-              <CUICard.Header className='w-full'>
+              <CUICard.Header className='w-full h-32'>
                 <Image
                   src={developerOption.img}
                   alt={`Image for ${developerOption.title ?? ''}`}
                   width={385}
-                  height={127}
-                  className='w-full h-fit aspect-[3/1]'
+                  height={128}
+                  className='w-full h-full aspect-video object-cover'
                 />
               </CUICard.Header>
             )}
             {developerOption.description && (
               <CUICard.Body className='flex flex-col items-center justify-center gap-2 px-6 py-8'>
-                <div className='text-center'>{developerOption.title}</div>
-                <div className='text-center'>{developerOption.description}</div>
+                <div className='text-center text-xl font-semibold'>
+                  {developerOption.title}
+                </div>
+                <div className='text-center text-neutral-200 text-sm'>
+                  {developerOption.description}
+                </div>
               </CUICard.Body>
             )}
             <CUICard.Footer className='grid place-items-center w-full px-6 pb-6'>
@@ -101,7 +79,7 @@ function DevelopersSection() {
                 type='secondary'
                 linkClass='w-full inline-grid'
                 href={developerOption.href}
-                iconRight={<ArrowRightIcon height='24' />}>
+                iconRight={<ArrowRightIcon height='16' />}>
                 {developerOption.btnText}
               </CUIButton>
             </CUICard.Footer>

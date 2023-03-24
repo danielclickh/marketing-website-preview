@@ -60,21 +60,13 @@ export default function ClickHouseServerPage({
   features4,
   features5,
   seo,
-  headerData,
   platforms,
   footerData
 }: ClickhouseData) {
-  const {
-    title,
-    description,
-    backgroundPng,
-    mainButton,
-    secondaryButton,
-    gitButton
-  } = hero
+  const { title, description, mainButton, secondaryButton, gitButton } = hero
   return (
     <>
-      <Layout headerData={headerData} footerData={footerData} seo={seo}>
+      <Layout footerData={footerData} seo={seo}>
         <div className='pt-10'>
           <div className='flex container mx-auto flex-col max-w-7xl pb-24 px-4 sm:px-8 2xl:px-0'>
             <div className='flex'>

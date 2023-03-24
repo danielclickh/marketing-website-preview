@@ -54,9 +54,9 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-function PartnersPage({ seo, headerData, footerData }: CommonProps) {
+function PartnersPage({ seo, footerData }: CommonProps) {
   return (
-    <Layout headerData={headerData} footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo}>
       <div className='pt-20 md:pt-30'>
         <div className='min-h-screen pb-10 md:pb-20 mx-10 '>
           <div className='flex flex-col md:flex-row-reverse w-full mx-auto gap-20 mb-20 md:mb-36 justify-center items-center'>

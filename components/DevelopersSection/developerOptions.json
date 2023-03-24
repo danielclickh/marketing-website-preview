@@ -1,0 +1,26 @@
+[
+  {
+    "img": "/images/homepage/developer-image.png",
+    "title": "Susan Wright - Uber",
+    "description":
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.",
+    "btnText": "Learn More",
+    "href": "https://clickhouse.cloud"
+  },
+  {
+    "img": "/images/homepage/developer-image.png",
+    "title": "Susan Wright - Uber",
+    "description":
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.",
+    "btnText": "Learn More",
+    "href": "https://clickhouse.cloud"
+  },
+  {
+    "img": "/images/homepage/developer-image.png",
+    "title": "Susan Wright - Uber",
+    "description":
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.",
+    "btnText": "Learn More",
+    "href": "https://clickhouse.cloud"
+  }
+]

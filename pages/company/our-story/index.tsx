@@ -56,7 +56,6 @@ export default function OurStoryPage({
   ourHistory,
   hiring,
   team,
-  headerData,
   footerData,
   platforms,
   seo
@@ -64,7 +63,7 @@ export default function OurStoryPage({
   const { title, description, imagePng, offices } = hero
   return (
     <>
-      <Layout headerData={headerData} footerData={footerData} seo={seo}>
+      <Layout footerData={footerData} seo={seo}>
         <div className='pt-16'>
           <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
             <div className='flex flex-col text-center mx-auto'>

@@ -81,14 +81,12 @@ export default function BlogPage({
   otherBlogs,
   date,
   publishedAt,
-  headerData,
   footerData,
   newsLetterData,
-  platforms,
   seo
 }: BlogProps) {
   return (
-    <Layout headerData={headerData} footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo}>
       <div className='pt-10'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0 max-w-6xl'>
           <div className='flex flex-col text-center mx-auto pt-6'>

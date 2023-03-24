@@ -15,7 +15,7 @@ function BasicCard({
 }: BasicCardProps) {
   return (
     <div
-      className={`flex flex-col items-center p-6 relative bg-eerie-black/70 rounded justify-between ${className}`}>
+      className={`flex flex-col items-center p-6 relative bg-neutral-900/70 rounded justify-between ${className}`}>
       <div className='flex flex-col items-center basic-card-content-container'>
         {icon && (
           <Image

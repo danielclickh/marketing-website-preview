@@ -1,11 +1,7 @@
 import { ParsedUrlQuery } from 'querystring'
 import { ReactNode } from 'react'
 import { FooterData } from '../components/Footer/types'
-import {
-  GettingStartedData,
-  GettingStartedPlatform
-} from '../components/GetStarted/types'
-import { HeaderData } from '../components/header/types'
+import { GettingStartedPlatform } from '../components/GetStarted/types'
 
 export type Props = {
   children: ReactNode
@@ -109,7 +105,6 @@ export interface NewsLetterData {
 }
 
 export interface CommonProps {
-  headerData: HeaderData
   footerData: FooterData
   seo?: SeoMetadata
   platforms: Array<GettingStartedPlatform>

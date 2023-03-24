@@ -1,52 +1,114 @@
-import { Fragment, ReactNode } from 'react'
+import { Fragment, ReactNode, useRef, useState } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import styles from './Header.module.scss'
+import {
+  autoUpdate,
+  autoPlacement,
+  shift,
+  size,
+  useHover,
+  useDismiss,
+  useFloating,
+  useInteractions,
+  FloatingArrow,
+  arrow,
+  offset,
+  safePolygon
+} from '@floating-ui/react'
 
 const MenuItem = ({
   name,
-  children
+  children,
+  padding = false
 }: {
   name: string
   children: ReactNode
-}) => (
-  <Popover className='relative' key={name}>
-    {({ open }) => (
-      <>
-        <Popover.Button
-          data-open={open}
-          className={`${styles.header_popover} group group-hover:underline data-[open=true]:underline hover:underline`}>
-          <span>{name}</span>
-          <ChevronDownIcon
-            className='text-neutral-0 ml-1 h-5 w-5'
-            aria-hidden='true'
-          />
-        </Popover.Button>
+  padding: boolean
+}) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const arrowEl = useRef(null)
+  const { x, y, strategy, floating, reference, context, open } = useFloating({
+    open: isOpen,
+    onOpenChange: setIsOpen,
+    placement: 'bottom',
+    whileElementsMounted: autoUpdate,
+    middleware: [
+      size({
+        apply({ availableWidth, availableHeight, elements }) {
+          Object.assign(elements.floating.style, {
+            maxWidth: `${availableWidth - 40}px`,
+            maxHeight: `${availableHeight}px`
+          })
+        }
+      }),
+      arrow({
+        element: arrowEl
+      }),
+      shift(),
+      autoPlacement(),
+      offset({
+        crossAxis: 20,
+        mainAxis: 10
+      })
+    ]
+  })
 
-        <Transition
-          as={Fragment}
-          show={open}
-          enter='transition ease-out duration-200'
-          enterFrom='opacity-0 translate-y-1'
-          enterTo='opacity-100 translate-y-0'
-          leave='transition ease-in duration-150'
-          leaveFrom='opacity-100 translate-y-0'
-          leaveTo='opacity-0 translate-y-1'>
-          <Popover.Panel className='absolute z-10 -ml-4 mt-3 transform w-max max-w-md lg:max-w-1xl'>
-            {({ close }) => (
+  console.log(context)
+  const hover = useHover(context, {
+    handleClose: safePolygon()
+  })
+  const dismiss = useDismiss(context)
+  const { getReferenceProps, getFloatingProps } = useInteractions([
+    hover,
+    dismiss
+  ])
+
+  return (
+    <div className='relative' key={name}>
+      <button
+        ref={reference}
+        data-open={isOpen}
+        className={`${styles.header_popover} group group-hover:underline data-[open=true]:underline hover:underline`}
+        {...getReferenceProps()}>
+        <span>{name}</span>
+        <ChevronDownIcon className='text-c5 ml-1 h-5 w-5' aria-hidden='true' />
+      </button>
+      {/* 
+      <Transition
+        as={Fragment}
+        show={isOpen}
+        enter='transition ease-out duration-200'
+        enterFrom='opacity-0 translate-y-1'
+        enterTo='opacity-100 translate-y-0'
+        leave='transition ease-in duration-150'
+        leaveFrom='opacity-100 translate-y-0'
+        leaveTo='opacity-0 translate-y-1'> */}
+      {isOpen && (
+        <>
+          <FloatingArrow ref={arrowEl} context={context} />
+          <div
+            className='absolute z-10 transform w-max lg:max-w-1xl bg-navDropdown rounded-lg border border-t-0 border-neutral-700/30'
+            ref={floating}
+            style={{
+              position: strategy,
+              top: y ?? 0,
+              left: x ?? 0
+            }}
+            {...getFloatingProps()}>
+            <div className='rounded-lg shadow-lg overflow-hidden'>
               <div
-                className='rounded-lg shadow-lg border border-rangitoto ring-0 ring-opacity-5 overflow-hidden'
-                onClick={() => close()}>
-                <div className='relative grid gap-6 bg-noised px-5 py-6 sm:gap-0 sm:p-0'>
-                  {children}
-                </div>
+                className={`relative flex flex-nowrap gap-6 justify-between lg:justify-start ${
+                  padding ? 'px-1 pt-3 pb-4' : ''
+                }`}>
+                {children}
               </div>
-            )}
-          </Popover.Panel>
-        </Transition>
-      </>
-    )}
-  </Popover>
-)
-
+            </div>
+          </div>
+        </>
+      )}
+      {/* </Transition> */}
+    </div>
+  )
+}
 export default MenuItem

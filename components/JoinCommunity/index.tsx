@@ -18,7 +18,7 @@ function JoinCommunity() {
           <div className='flex gap-6'>
             <CUILink
               href='https://twitter.com/ClickhouseDB'
-              className='w-16 h-16 bg-eerie-black/40 hover:bg-eerie-black/70 rounded grid place-items-center'>
+              className='w-16 !h-16 rounded grid place-items-center !border-neutral-700/50'>
               <Image
                 src='/socials/twitter.svg'
                 width={32}
@@ -38,45 +38,47 @@ function JoinCommunity() {
             </CUILink>
           </div>
           <div className='flex gap-6'>
-            <CUILink
+            <CUIButton
               href='/'
-              className='w-16 h-16 bg-eerie-black/40 hover:bg-eerie-black/70 rounded grid place-items-center'>
+              className='w-16 !h-16 rounded grid place-items-center !border-neutral-700/50'
+              type='secondary'>
               <Image
                 src='/socials/discord.svg'
                 width={32}
                 height={32}
                 alt='Discord image'
               />
-            </CUILink>
-            <CUILink
+            </CUIButton>
+            <CUIButton
               href='https://www.meetup.com/pro/clickhouse'
-              className='w-16 h-16 bg-eerie-black/40 hover:bg-eerie-black/70 rounded grid place-items-center'>
+              className='w-16 !h-16 rounded grid place-items-center !border-neutral-700/50'
+              type='secondary'>
               <Image
                 src='/socials/meetup.svg'
                 width={32}
                 height={32}
                 alt='Meetup image'
               />
-            </CUILink>
+            </CUIButton>
           </div>
         </div>
       </div>
-      <div className='w-full mx-auto flex flex-col gap-4 items-end text-right font-semibold max-w-lg bg-click-grid bg-bottom'>
-        <div className='relative font-basier text-8xl leading-none w-fit'>
+      <div className='w-full mx-auto flex flex-col gap-4 items-end text-right font-medium max-w-lg bg-click-grid bg-bottom'>
+        <div className='relative font-basier text-7.5xl leading-none w-fit'>
           1.2k+
-          <span className='absolute top-full left-0 text-primary text-xl leading-snug'>
+          <span className='absolute top-full left-0 text-primary text-2.75xl leading-snug'>
             Contributors
           </span>
         </div>
-        <div className='relative font-basier text-8xl leading-none mr-auto text-left'>
+        <div className='relative font-basier text-7.5xl leading-none mr-auto text-left'>
           32k+
-          <span className='absolute top-full left-0 text-primary text-xl leading-snug'>
+          <span className='absolute top-full left-0 text-primary text-2.75xl leading-snug'>
             PRs
           </span>
         </div>
-        <div className='relative font-basier text-8xl leading-none'>
+        <div className='relative font-basier text-7.5xl leading-none'>
           27k+
-          <span className='absolute top-full left-0 text-primary text-xl leading-snug'>
+          <span className='absolute top-full left-0 text-primary text-2.75xl leading-snug'>
             Stars
           </span>
         </div>

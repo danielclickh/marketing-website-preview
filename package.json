@@ -12,7 +12,7 @@
     "export": "next export"
   },
   "dependencies": {
-    "@floating-ui/react": "^0.14.0",
+    "@floating-ui/react": "0.22.0",
     "@headlessui/react": "^1.7.10",
     "@heroicons/react": "^1.0.6",
     "@segment/analytics-next": "^1.48.0",

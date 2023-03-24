@@ -129,13 +129,12 @@ export default function News({
   pressReleasesTitle,
   pressReleases,
   allEvents,
-  headerData,
   footerData,
   recentEvents,
   seo
 }: NewsEventProps) {
   return (
-    <Layout headerData={headerData} footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo}>
       <div className='pt-14'>
         <div className='flex mx-auto flex-col px-4 sm:px-8 2xl:px-0'>
           <div className='flex flex-col text-center mx-auto'>

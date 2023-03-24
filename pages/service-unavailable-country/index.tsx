@@ -37,13 +37,12 @@ function ServiceUnavailableCountryPage({
   iconSvg,
   contactForm,
   ctaButton,
-  headerData,
   platforms,
   footerData,
   seo
 }: ServiceProps) {
   return (
-    <Layout headerData={headerData} footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo}>
       <div className='service_unavailable_country px-3'>
         <SuiPanel
           color='bg-c1'

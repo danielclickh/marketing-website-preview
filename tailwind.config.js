@@ -7,8 +7,11 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
+        '2.75xl': '1.75rem',
         '5.5xl': '3.5rem',
-        '6.5xl': '4rem'
+        '5.5xl': '3.5rem',
+        '6.5xl': '4rem',
+        '7.5xl': '5.25rem'
       },
       fontFamily: {
         inter: 'var(--font-inter), sans-serif',
@@ -188,7 +191,7 @@ module.exports = {
         'click-pill': '0px -1px 5px rgba(16, 24, 40, 0.07)',
         'click-twitter': '0px 4px 48px rgba(250, 255, 72, 0.2)',
         'footer-line': '0px -1px 1px #000000',
-        codeblock: '0px 4px 4px rgba(0, 0, 0, 0.06), inset 0px 4px 25px rgba(0, 0, 0, 0.14)'
+        codeblock: '0px 4px 4px rgba(0, 0, 0, 0.06), inset 0px 4px 25px rgba(0, 0, 0, 0.14)',
       },
       backgroundSize: {
         default_size: '0%, 100%',
@@ -197,6 +200,7 @@ module.exports = {
       backgroundImage: {
         field_focus:
           'linear-gradient(0deg, #fbff46, #fbff46 2px, transparent 0, transparent)',
+        navDropdown: 'linear-gradient(to bottom, rgba(65, 65, 65, 0.3) 0px, rgba(65, 65, 65, 0.3) 1px, #282828 1px, #282828 44px, rgba(65, 65, 65, 0.3) 44px, rgba(65, 65, 65, 0.3)45px, #1F1F1C 45px, #1F1F1C 100%)',
         grid: 'url("/bg-grid.png")',
         'click-grid': 'url("/bg-grid.svg")',
         'home-grid':

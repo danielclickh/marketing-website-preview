@@ -87,11 +87,11 @@ export const getStaticProps: GetStaticProps<CareersData> =
 export default function CareersPage({
   positionsTitle,
   seo,
-  headerData,
-  footerData
+  footerData,
+  platforms
 }: CareersData) {
   return (
-    <Layout headerData={headerData} footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo}>
       <div className='pt-10'>
         <div className='relative pt-10'>
           <div className='bg-primary-300 absolute inset-0 transform -skew-y-2 lg:max-h-96'></div>
