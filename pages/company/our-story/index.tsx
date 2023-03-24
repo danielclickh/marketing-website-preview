@@ -12,6 +12,7 @@ import { OurStoryData } from '../../../types/ourStory'
 import Layout from '../../../components/Layout'
 import { GetStaticProps } from 'next'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import Image from 'next/image'
 
 export const getStaticProps: GetStaticProps<OurStoryData> =
   async function getStaticProps() {
@@ -66,28 +67,34 @@ export default function OurStoryPage({
       <Layout footerData={footerData} seo={seo}>
         <div className='pt-10'>
           <div className='pt-10'>
-            <div className='relative z-10'>
-              <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
-                <div className='flex flex-col text-center mx-auto'>
-                  <h1 className='text-4xl leading-tight mb-4 font-basier md:text-5.5xl font-semibold'>
-                    Who we are
-                  </h1>
-                  <p className='max-w-3xl'>
-                    ClickHouse launched in 2012 with the vision of being the
-                    fastest OLAP database on earth. We are the creators of the
-                    popular open-source column-oriented database management
-                    system which allows users to generate analytical reports
-                    using SQL queries in real-time. We understand that data
-                    grows in real time and ee believe that results should be
-                    fast,
-                    <br />
-                    <span className='tilted tilted-yellow'>
-                      <span className='tilted-content'>very fast</span>
-                    </span>
-                  </p>
-                </div>
+            <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
+              <div className='flex flex-col text-center mx-auto'>
+                <h1 className='text-4xl leading-tight mb-4 font-basier md:text-5.5xl font-semibold'>
+                  Who we are
+                </h1>
+                <p className='max-w-3xl text-neutral-200'>
+                  ClickHouse launched in 2012 with the vision of being the
+                  fastest OLAP database on earth. We are the creators of the
+                  popular open-source column-oriented database management system
+                  which allows users to generate analytical reports using SQL
+                  queries in real-time. We understand that data grows in real
+                  time and ee believe that results should be fast,
+                  <br />
+                  <span className='tilted tilted-yellow'>
+                    <span className='tilted-content'>very fast</span>
+                  </span>
+                </p>
               </div>
             </div>
+          </div>
+          <div className='section my-16'>
+            <Image
+              src='/images/team-who-we-are.png'
+              width='751'
+              height='406'
+              alt='Who we are'
+              className='mx-auto'
+            />
           </div>
         </div>
         <div className='pt-16'>
