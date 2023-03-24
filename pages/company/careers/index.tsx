@@ -122,7 +122,7 @@ export default function CareersPage({
                   height='300'
                   alt={image.alt}
                   key={image.id}
-                  className='!h-72 w-auto px-1 object-cover object-center rounded-md'></Image>
+                  className='px-1 object-cover object-center'></Image>
               ))}
             </CompanyImages>
           </div>
