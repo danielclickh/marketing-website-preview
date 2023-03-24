@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import { CUILink } from '../ClickUI'
+import { CUIButton } from '../ClickUI'
 import { SuiTitle } from '../sui'
 
 function JoinCommunity() {
@@ -16,48 +16,52 @@ function JoinCommunity() {
         </SuiTitle>
         <div className='flex flex-wrap gap-6'>
           <div className='flex gap-6'>
-            <CUILink
+            <CUIButton
               href='https://twitter.com/ClickhouseDB'
-              className='w-16 h-16 bg-eerie-black/40 hover:bg-eerie-black/70 rounded grid place-items-center'>
+              className='w-16 !h-16 rounded grid place-items-center !border-neutral-700/50'
+              type='secondary'>
               <Image
                 src='/socials/twitter.svg'
                 width={32}
                 height={32}
                 alt='Twitter image'
               />
-            </CUILink>
-            <CUILink
+            </CUIButton>
+            <CUIButton
               href='https://join.slack.com/t/clickhousedb/shared_invite/zt-1gh9ds7f4-PgDhJAaF8ad5RbWBAAjzFg'
-              className='w-16 h-16 bg-eerie-black/40 hover:bg-eerie-black/70 rounded grid place-items-center'>
+              className='w-16 !h-16 rounded grid place-items-center !border-neutral-700/50'
+              type='secondary'>
               <Image
                 src='/socials/slack.svg'
                 width={32}
                 height={32}
                 alt='Slack image'
               />
-            </CUILink>
+            </CUIButton>
           </div>
           <div className='flex gap-6'>
-            <CUILink
+            <CUIButton
               href='/'
-              className='w-16 h-16 bg-eerie-black/40 hover:bg-eerie-black/70 rounded grid place-items-center'>
+              className='w-16 !h-16 rounded grid place-items-center !border-neutral-700/50'
+              type='secondary'>
               <Image
                 src='/socials/discord.svg'
                 width={32}
                 height={32}
                 alt='Discord image'
               />
-            </CUILink>
-            <CUILink
+            </CUIButton>
+            <CUIButton
               href='https://www.meetup.com/pro/clickhouse'
-              className='w-16 h-16 bg-eerie-black/40 hover:bg-eerie-black/70 rounded grid place-items-center'>
+              className='w-16 !h-16 rounded grid place-items-center !border-neutral-700/50'
+              type='secondary'>
               <Image
                 src='/socials/meetup.svg'
                 width={32}
                 height={32}
                 alt='Meetup image'
               />
-            </CUILink>
+            </CUIButton>
           </div>
         </div>
       </div>
