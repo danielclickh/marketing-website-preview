@@ -21,7 +21,7 @@ function CategorySelector({ options, className = '', ...props }: Props) {
           className={`mb-2 lg:mb-0 flex items-center text-sm font-medium px-4 h-[36px] whitespace-nowrap rounded-full cursor-pointer transition-colors duration-500 ease-in-out transform border border-primary-600/60 ${
             option.selected
               ? 'bg-primary-300 text-neutral-800'
-              : 'hover:bg-primary-300 text-neutral-0 hover:text-neutral-900 hover:border-primary-300'
+              : 'text-neutral-0  hover:border-primary-300'
           }`}>
           {option.text}
         </li>
