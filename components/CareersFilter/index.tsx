@@ -148,7 +148,7 @@ function CareersFilter() {
           {filteredDepartments.map(([name, jobs]: [string, JobType[]]) => (
             <div
               key={name}
-              className='grid grid-cols-1 border-b border-neutral-700 mb-10'>
+              className='grid grid-cols-1 border-b border-neutral-700 mb-16'>
               <h3 className='font-inter text-xl font-bold mb-8'>{name}</h3>
               {jobs.length === 0 && (
                 <SuiText size='base' weight='normal' color='secondary'>
