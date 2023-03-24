@@ -10,19 +10,20 @@ import FollowUs from '../../../components/FollowUs'
 
 const careerImgs = [
   { id: 2, url: '/images/careers/Meeting.png', alt: 'Meeting' },
-  { id: 3, url: '/images/careers/At-the-office.png', alt: 'At the office' },
   {
     id: 1,
     url: '/images/careers/Kseniia.png',
     alt: 'Kseniia'
   },
+  { id: 3, url: '/images/careers/At-the-office.png', alt: 'At the office' },
+  { id: 7, url: '/images/careers/Roopa.png', alt: 'Roopa' },
+  { id: 6, url: '/images/careers/Zach-Tanya-Guy.png', alt: 'Zach Tanya & Guy' },
   { id: 4, url: '/images/careers/Heineken-Brewry.png', alt: 'Heineken-Brewry' },
   {
     id: 5,
     url: '/images/careers/2-programmers.png',
     alt: 'Programmers'
-  },
-  { id: 6, url: '/images/careers/Zach-Tanya-Guy.png', alt: 'Zach Tanya & Guy' }
+  }
 ]
 
 const values = [
