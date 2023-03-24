@@ -113,15 +113,13 @@ export default function BlogsPage({
                 )}
                 <div className='flex'>
                   <div className='flex flex-col'>
-                    <SuiText size='sm' weight='medium'>
-                      {featuredBlog.author.name}
-                    </SuiText>
+                    <div className='text-base'>{featuredBlog.author.name}</div>
                     {(featuredBlog.date || featuredBlog.publishedAt) && (
-                      <SuiText size='sm' weight='medium' color='secondary'>
+                      <div className='text-sm text-neutral-300'>
                         {convertDateToString(
                           featuredBlog.date || featuredBlog.publishedAt
                         )}
-                      </SuiText>
+                      </div>
                     )}
                   </div>
                 </div>
