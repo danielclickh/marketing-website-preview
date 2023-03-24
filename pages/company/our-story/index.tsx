@@ -64,20 +64,34 @@ export default function OurStoryPage({
   return (
     <>
       <Layout footerData={footerData} seo={seo}>
+        <div className='pt-10'>
+          <div className='pt-10'>
+            <div className='relative z-10'>
+              <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
+                <div className='flex flex-col text-center mx-auto'>
+                  <h1 className='text-4xl leading-tight mb-4 font-basier md:text-5.5xl font-semibold'>
+                    Who we are
+                  </h1>
+                  <p className='max-w-3xl'>
+                    ClickHouse launched in 2012 with the vision of being the
+                    fastest OLAP database on earth. We are the creators of the
+                    popular open-source column-oriented database management
+                    system which allows users to generate analytical reports
+                    using SQL queries in real-time. We understand that data
+                    grows in real time and ee believe that results should be
+                    fast,
+                    <br />
+                    <span className='tilted tilted-yellow'>
+                      <span className='tilted-content'>very fast</span>
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className='pt-16'>
           <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
-            <div className='flex flex-col text-center mx-auto'>
-              <SuiTitle type='h1' className='mb-5'>
-                {title}
-              </SuiTitle>
-              <SuiText
-                size='lg'
-                color='secondary'
-                weight='medium'
-                className='max-w-7xl mb-16'>
-                {description}
-              </SuiText>
-            </div>
             <div className='flex flex-col mx-auto py-8'>
               <StrapiImage {...imagePng} alt='ClickHouse around the world' />
               <div className='flex justify-between mt-8 gap-x-16 md:gap-x-32 max-w-lg mx-auto'>
