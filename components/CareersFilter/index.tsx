@@ -132,10 +132,11 @@ function CareersFilter() {
 
   return (
     <div className='flex flex-col w-full'>
-      <div className='w-full flex flex-col md:flex-row md:justify-between mb-6'>
+      <div className='flex-col lg:flex lg:flex-row lg:justify-between items-center pb-8 lg:space-x-24'>
         <SuiSearchField
           placeholder='Search job'
           htmlFor='search'
+          className='lg:flex-1 mb-6 lg:mb-0'
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setSearch(e.target.value)
           }

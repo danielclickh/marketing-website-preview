@@ -104,7 +104,7 @@ function BlogPostList({ categories, children }: BlogPostListProps) {
         <SuiSearchField
           placeholder='Search by title or keyword...'
           htmlFor='search'
-          className=' lg:flex-1 mb-6 lg:mb-0'
+          className='lg:flex-1 mb-6 lg:mb-0'
           onChange={onChange}
         />
         <CategorySelector options={categoryList} />

@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { BlogPost as BlogPostType } from '../../types/blogs'
 import { convertDateToString } from '../../lib/utils/dateUtils'
 import { StrapiImage } from '../StrapiElements'
-import { SuiText, SuiTitle } from '../sui'
 import { CUICard } from '../ClickUI'
 
 export default function BlogPost({

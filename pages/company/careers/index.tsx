@@ -27,36 +27,42 @@ const careerImgs = [
 
 const values = [
   {
+    id: 1,
     icon: '/images/careers/icons/customer-first.svg',
     title: 'Customer first',
     content:
       'We succeed when our customers and users succeed. They’re are at the center of everything we do. Our passion for our users translates into their passion for ClickHouse.'
   },
   {
+    id: 2,
     icon: '/images/careers/icons/distributed.svg',
     title: 'Distributed',
     content:
       'ClickHouse is proud to have employees in over 10 countries. We believe that diverse and distributed workplaces working inclusively are an essential advantage.'
   },
   {
+    id: 3,
     icon: '/images/careers/icons/remote.svg',
     title: 'Remote and flexible',
     content:
       'We’re a remote company, with a flexible work-from-anywhere policy. We work in small product oriented teams to focus & execute faster. We don’t track working hours, what matters is what you get done.'
   },
   {
+    id: 4,
     icon: '/images/careers/icons/empathy.svg',
     title: 'Empathy at work',
     content:
       'Empathy is the ability to place yourself in the shoes of others, to try to understand their thoughts, feelings, and needs, and also know that we don’t know it all and need to approach other people with the humility to learn.'
   },
   {
+    id: 5,
     icon: '/images/careers/icons/diversity.svg',
     title: 'Diversity',
     content:
       'Diverse and inclusive environments are both an  advantage and a moral imperative. 40% of our leadership team consists of women, and we are proud to have a diverse group of investors, board members, and advisors.'
   },
   {
+    id: 6,
     icon: '/images/careers/icons/trust.svg',
     title: 'Trust',
     content:
@@ -120,7 +126,7 @@ export default function CareersPage({
             </CompanyImages>
           </div>
         </div>
-        <div className='w-full pt-4 pb-12 px-8'>
+        <div className='w-full pt-16 pb-12 px-8'>
           <div className='flex flex-col md:flex-row container mx-auto max-w-7xl md:space-x-16 mb-6'>
             <div className='flex flex-col md:w-4/5'>
               <h2 className='font-basier mb-6 text-4xl'>Our values</h2>
@@ -129,19 +135,14 @@ export default function CareersPage({
           <div className='max-w-7xl mx-auto'>
             <div className='grid lg:grid-cols-3 gap-x-20 gap-y-10'>
               {values.map((value) => (
-                <div className='col'>
+                <div className='col' key={value.id}>
                   <div className='flex items-start gap-4'>
-                    <Image
-                      src={value.icon}
-                      width={32}
-                      height={32}
-                      alt='Twitter image'
-                    />{' '}
+                    <Image src={value.icon} width={32} height={32} alt='Icon' />{' '}
                     <div>
                       <h4 className='font-bold mb-3 font-inter'>
                         {value.title}
                       </h4>
-                      <p className='font-light font-inter leading-relaxed text-sm'>
+                      <p className='font-light font-inter leading-relaxed text-sm text-neutral-200'>
                         {value.content}
                       </p>
                     </div>
