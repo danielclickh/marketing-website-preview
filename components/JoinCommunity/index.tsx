@@ -28,7 +28,7 @@ function JoinCommunity() {
               />
             </CUIButton>
             <CUIButton
-              href='https://join.slack.com/t/clickhousedb/shared_invite/zt-1gh9ds7f4-PgDhJAaF8ad5RbWBAAjzFg'
+              href='/slack'
               className='w-16 !h-16 rounded grid place-items-center !border-neutral-700/50'
               type='secondary'>
               <Image

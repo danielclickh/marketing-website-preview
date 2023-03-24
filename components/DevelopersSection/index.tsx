@@ -52,7 +52,7 @@ function DevelopersSection() {
       </div>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-10'>
         {developerOptions.map((developerOption) => (
-          <CUICard className=''>
+          <CUICard key={developerOption.title}>
             {developerOption.img && (
               <CUICard.Header className='w-full h-32'>
                 <Image

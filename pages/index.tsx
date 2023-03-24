@@ -14,7 +14,7 @@ import rowOrientedIllustration from '../public/images/homepage/row-oriented-illu
 import { ArrowRightIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import JoinCommunity from '../components/JoinCommunity'
 import HomePageTerminal from '../components/Terminal/HomePageTerminal'
-import SpeedAnimation from '../components/SpeedAnimation'
+// import SpeedAnimation from '../components/SpeedAnimation'
 import DevelopersSection from '../components/DevelopersSection'
 import { CSSProperties } from 'react'
 import HRSeparator from '../components/HRSeparator'
@@ -327,7 +327,13 @@ export default function HomePage({
             </div>
           </div>
           <div className='hidden md:block'>
-            <SpeedAnimation className='w-full h-fit max-w-full test' />
+            <Image
+              src='/speed-animation.svg'
+              alt='Speed Icon'
+              width={1182}
+              height={753}
+              className='w-full h-fit max-w-full'
+            />
           </div>
         </div>
       </div>
@@ -417,9 +423,11 @@ export default function HomePage({
             Unlike traditional closed-source data warehouses, ClickHouse runs on
             every environment, whether it’s on your machine or on the cloud
           </div>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-10 mt-16 mb-28'>
+          <div className='flex flex-wrap justify-center gap-10 mt-16'>
             {deployData.map((deploy) => (
-              <CUICard className='h-full p-8 bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat'>
+              <CUICard
+                key={deploy.title}
+                className='p-8 bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat w-full max-w-[22.5rem]'>
                 <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
                   <Image
                     src={deploy.img}
@@ -431,7 +439,7 @@ export default function HomePage({
                     <div className='text-xl leading-tight cursor-pointer font-semibold'>
                       {deploy.title}
                     </div>
-                    <div className='text-neutral-200 text-center'>
+                    <div className='text-neutral-200 text-center text-sm'>
                       {deploy.description}
                     </div>
                   </div>

@@ -13,6 +13,7 @@ import { StrapiImage } from '../../components/StrapiElements'
 import { convertDateToString } from '../../lib/utils/dateUtils'
 import { CUILink } from '../../components/ClickUI'
 import Image from 'next/image'
+import FollowUs from '../../components/FollowUs'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps() {
@@ -138,69 +139,7 @@ export default function BlogsPage({
           ))}
         </div>
       </BlogPostList>
-      <div className='bg-primary-300 text-neutral-900 flex flex-col items-center justify-center mt-20'>
-        <div className='mt-8 mb-4'>Follow us</div>
-        <div className='flex flex-wrap gap-6 mb-12 justify-center'>
-          <CUILink
-            href='https://twitter.com/ClickhouseDB'
-            className='w-16 h-16 bg-neutral-900 hover:bg-neutral-900/90 rounded grid place-items-center'>
-            <Image
-              src='/socials/twitter.svg'
-              width={32}
-              height={32}
-              alt='Twitter image'
-            />
-          </CUILink>
-          <CUILink
-            href='https://join.slack.com/t/clickhousedb/shared_invite/zt-1gh9ds7f4-PgDhJAaF8ad5RbWBAAjzFg'
-            className='w-16 h-16 bg-neutral-900 hover:bg-neutral-900/90 rounded grid place-items-center'>
-            <Image
-              src='/socials/slack.svg'
-              width={32}
-              height={32}
-              alt='Slack image'
-            />
-          </CUILink>
-          <CUILink
-            href='/'
-            className='w-16 h-16 bg-neutral-900 hover:bg-neutral-900/90 rounded grid place-items-center'>
-            <Image
-              src='/socials/discord.svg'
-              width={32}
-              height={32}
-              alt='Discord image'
-            />
-          </CUILink>
-          <div className='flex gap-6 justify-center'>
-            <CUILink
-              href='https://www.meetup.com/pro/clickhouse'
-              className='w-16 h-16 bg-neutral-900 hover:bg-neutral-900/90 rounded grid place-items-center'>
-              <Image
-                src='/socials/meetup.svg'
-                width={32}
-                height={32}
-                alt='Meetup image'
-              />
-            </CUILink>
-            <CUILink
-              key='blog-categories-nav'
-              href='/rss.xml'
-              segmentEvent={{
-                label: 'Blog RSS link',
-                category: 'blog-categories-nav'
-              }}
-              target='blank'
-              className='w-16 h-16 bg-neutral-900 hover:bg-neutral-900/90 rounded grid place-items-center'>
-              <Image
-                src='/socials/rss.svg'
-                width={32}
-                height={32}
-                alt='Meetup image'
-              />
-            </CUILink>
-          </div>
-        </div>
-      </div>
+      <FollowUs />
     </Layout>
   )
 }
