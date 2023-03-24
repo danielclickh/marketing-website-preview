@@ -38,7 +38,7 @@ function DevelopersSection() {
         What do developers say?
       </SuiTitle>
       <div className='flex flex-col md:flex-row mb-16 gap-10'>
-        <div className='w-full md:w-1/2 flex items-center'>
+        <div className='w-full md:w-1/2 flex items-start'>
           <iframe
             src='https://player.vimeo.com/video/756877867?h=c58e171729&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479'
             frameBorder='0'
@@ -64,7 +64,7 @@ function DevelopersSection() {
           </div>
           <div className='flex flex-col text-base mt-8 mb-10'>
             <div className='mb-1'>John Johnson,</div>
-            <div className='leading-none text-primary-300 font-medium'>
+            <div className='leading-none text-primary-300 font-medium font-inconsolata'>
               Head of Engineering @ Disney
             </div>
           </div>

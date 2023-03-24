@@ -68,9 +68,11 @@ export default function Header() {
                                       <div className='mb-7 pl-3 text-c4 font-semibold text-sm min-h-[1lh]'>
                                         {subitem.name}
                                       </div>
-                                      {subitem.menuItems.map((item) => (
-                                        <Option key={item.name} {...item} />
-                                      ))}
+                                      <div className='h-full'>
+                                        {subitem.menuItems.map((item) => (
+                                          <Option key={item.name} {...item} />
+                                        ))}
+                                      </div>
                                     </div>
                                   ))}
                                 </MenuItem>

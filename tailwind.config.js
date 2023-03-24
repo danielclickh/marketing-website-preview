@@ -7,8 +7,11 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
+        '2.75xl': '1.75rem',
         '5.5xl': '3.5rem',
-        '6.5xl': '4rem'
+        '5.5xl': '3.5rem',
+        '6.5xl': '4rem',
+        '7.5xl': '5.25rem'
       },
       fontFamily: {
         inter: 'var(--font-inter), sans-serif',
@@ -197,7 +200,7 @@ module.exports = {
       backgroundImage: {
         field_focus:
           'linear-gradient(0deg, #fbff46, #fbff46 2px, transparent 0, transparent)',
-        navDropdown: 'linear-gradient(to bottom, rgba(65, 65, 65, 0.3) 0px, rgba(65, 65, 65, 0.3) 1px, #282828 1px, #282828 44px, rgba(65, 65, 65, 0.3) 44px, rgba(65, 65, 65, 0.3)45px, black 45px, black 100%)',
+        navDropdown: 'linear-gradient(to bottom, rgba(65, 65, 65, 0.3) 0px, rgba(65, 65, 65, 0.3) 1px, #282828 1px, #282828 44px, rgba(65, 65, 65, 0.3) 44px, rgba(65, 65, 65, 0.3)45px, #1F1F1C 45px, #1F1F1C 100%)',
         grid: 'url("/bg-grid.png")',
         'click-grid': 'url("/bg-grid.svg")',
         'home-grid':
