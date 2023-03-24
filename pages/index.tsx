@@ -222,7 +222,7 @@ export default function HomePage({
       </div>
 
       <div className='flex w-full text-neutral-0'>
-        <div className='flex section-container mx-auto flex-col pt-20 text-center items-center'>
+        <div className='flex section-container w-full mx-auto flex-col pt-20 text-center items-center'>
           <Image
             src='/speed-icon.svg'
             alt='Speed Icon'
@@ -326,13 +326,11 @@ export default function HomePage({
               </div>
             </div>
           </div>
-          <div className='hidden md:block'>
-            <Image
-              src='/speed-animation.svg'
-              alt='Speed Icon'
-              width={1182}
-              height={753}
-              className='w-full h-fit max-w-full'
+          <div className='hidden md:block w-full bg-contain'>
+            <embed
+              id='E'
+              src='speed-animation.svg'
+              className='w-full aspect-[1182/753]'
             />
           </div>
         </div>
