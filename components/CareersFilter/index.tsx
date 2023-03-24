@@ -137,9 +137,9 @@ function CareersFilter() {
 
   return (
     <div className='flex flex-col w-full'>
-      <div className='w-full flex flex-col md:flex-row md:justify-between'>
+      <div className='w-full flex flex-col md:flex-row md:justify-between mb-6'>
         <SuiSearchField
-          placeholder='Search'
+          placeholder='Search job'
           htmlFor='search'
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setSearch(e.target.value)
@@ -147,35 +147,41 @@ function CareersFilter() {
         />
         <CategorySelector options={departments} />
       </div>
-      <div className='flex flex-col md:flex-row md:w-3/4 md:space-x-16 justify-center'>
-        <div className='flex flex-col space-y-16 w-full'>
+      <div className=''>
+        <div className='mt-4'>
           {filteredDepartments.map(([name, jobs]: [string, JobType[]]) => (
-            <div className='space-y-6' key={name}>
-              <SuiTitle type='h3' className='pl-4' weight='bold'>
-                {name}
-              </SuiTitle>
+            <div
+              key={name}
+              className='grid grid-cols-1 border-b border-neutral-700 mb-10'>
+              <h3 className='font-inter text-xl font-bold mb-8'>{name}</h3>
               {jobs.length === 0 && (
-                <SuiText
-                  size='base'
-                  weight='normal'
-                  className='pl-4'
-                  color='secondary'>
+                <SuiText size='base' weight='normal' color='secondary'>
                   No results
                 </SuiText>
               )}
               {jobs.map((job: JobType, index: number) => (
-                <SuiLink
-                  href={job.url}
-                  className={`job-${index} rounded-md px-4 pt-4 flex flex-col w-full cursor-pointer hover:bg-neutral-725 hover:no-underline transition-all duration-300 ease-in-out transform`}
-                  key={job.url}>
-                  <SuiText size='base' weight='normal' className='mb-2'>
-                    {job.title}
-                  </SuiText>
-                  <SuiText size='base' weight='normal' color='secondary'>
-                    {job.location}
-                  </SuiText>
-                  <SuiHorizontalDivide />
-                </SuiLink>
+                <div
+                  key={job.url}
+                  className='border-t border-neutral-700 py-6 hover:bg-neutral-725 '>
+                  <SuiLink
+                    href={job.url}
+                    className={`job-${index} md:flex items-center justify-between hover:no-underline`}>
+                    <div>
+                      <SuiText
+                        size='base'
+                        weight='normal'
+                        className='font-inter text-primary-300 mb-1'>
+                        {job.title}
+                      </SuiText>
+                      <SuiText size='base' weight='normal' color='secondary'>
+                        {job.location}
+                      </SuiText>
+                    </div>
+                    <div className='mt-4 md:mt-0 border border-primary-600 rounded py-2 px-6 font-semibold'>
+                      Apply --{'>'}
+                    </div>
+                  </SuiLink>
+                </div>
               ))}
             </div>
           ))}

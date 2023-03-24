@@ -1,9 +1,5 @@
-import { SuiText, SuiTitle } from '../../../components/sui'
-
 import { findOne } from '../../../lib/api/strapi'
 import CareersFilter from '../../../components/CareersFilter'
-import GetStarted from '../../../components/GetStarted'
-import { StrapiImage } from '../../../components/StrapiElements'
 import CompanyImages from '../../../components/CompanyImages'
 import { CareersData } from '../../../types/careers'
 import { GetStaticProps } from 'next'
@@ -16,19 +12,17 @@ const careerImgs = [
   {
     id: 1,
     url: '/images/careers/Group.png',
-    alt: 'At the laptop'
+    alt: 'Group'
   },
-  { id: 2, url: '/images/careers/Guiness.png', alt: 'Team' },
-  { id: 3, url: '/images/careers/Kseniia.png', alt: 'Kseniia' },
-  { id: 4, url: '/images/careers/ZachTanyaGuy.png', alt: 'Meeting' },
+  { id: 2, url: '/images/careers/GroupOffice.png', alt: 'Group at the office' },
+  { id: 3, url: '/images/careers/Guiness.png', alt: 'Guiness' },
+  { id: 4, url: '/images/careers/Kseniia.png', alt: 'Kseniia' },
   {
     id: 5,
-    url: '/images/careers/Group.png',
-    alt: 'At the laptop'
+    url: '/images/careers/Programmers.png',
+    alt: 'Programmers'
   },
-  { id: 6, url: '/images/careers/Guiness.png', alt: 'Team' },
-  { id: 7, url: '/images/careers/Kseniia.png', alt: 'Kseniia' },
-  { id: 7, url: '/images/careers/ZachTanyaGuy.png', alt: 'Meeting' }
+  { id: 6, url: '/images/careers/ZachTanyaGuy.png', alt: 'Zach Tanya & Guy' }
 ]
 
 const values = [
@@ -94,7 +88,7 @@ export default function CareersPage({
     <Layout footerData={footerData} seo={seo}>
       <div className='pt-10'>
         <div className='relative pt-10'>
-          <div className='bg-primary-300 absolute inset-0 transform -skew-y-2 lg:max-h-96'></div>
+          <div className='bg-primary-300 absolute inset-0 transform -skew-y-2 lg:max-h-96  max-w-7xl mx-auto'></div>
           <div className='relative z-10'>
             <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
               <div className='flex flex-col text-center mx-auto flip-selection'>
@@ -112,7 +106,7 @@ export default function CareersPage({
               </div>
             </div>
           </div>
-          <div className='bg-center bg-cover w-full max-w-full h-72 my-16 overflow-y-hidden'>
+          <div className='bg-center bg-cover w-full max-w-full h-72 my-10 overflow-y-hidden'>
             <CompanyImages>
               {careerImgs.map((image) => (
                 <Image
@@ -158,11 +152,13 @@ export default function CareersPage({
           </div>
         </div>
       </div>
-
-      <div className='max-w-7xl mx-auto w-full pt-16 pb-16 flex flex-col'>
-        <SuiTitle type='h2'>Job openings</SuiTitle>
-
-        <CareersFilter />
+      <div className='w-full pt-4 pb-12 px-8'>
+        <div className='flex flex-col bg-shadow-element yellow-shadow max-w-7xl mx-auto'>
+          <h2 className='text-3xl font-semibold font-inter mb-6'>
+            Job openings
+          </h2>
+          <CareersFilter />
+        </div>
       </div>
       <FollowUs />
     </Layout>
