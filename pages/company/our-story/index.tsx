@@ -97,26 +97,52 @@ export default function OurStoryPage({
             />
           </div>
         </div>
-        <div className='pt-16'>
-          <div className='flex container mx-auto flex-col px-6 2xl:px-0'>
-            <div className='flex flex-col mx-auto py-8'>
-              <StrapiImage {...imagePng} alt='ClickHouse around the world' />
-              <div className='flex justify-between mt-8 gap-x-16 md:gap-x-32 max-w-lg mx-auto'>
-                {offices.map((office) => (
+
+        <div className='flex flex-col lg:flex-row-reverse section-container mx-auto max-w-7xl gap-16 mb-12 items-start'>
+          <div className='flex flex-col w-full lg:w-2/5'>
+            <StrapiImage {...imagePng} alt='ClickHouse around the world' />
+          </div>
+          <div className='flex flex-col w-full lg:w-3/5'>
+            <SuiTitle type='h2' weight='bold' className='mb-8'>
+              Mindfully distributed
+            </SuiTitle>
+            <div className='max-w-5xl'>
+              <div className='whitespace-pre-wrap text-neutral-200'>
+                {`ClickHouse is proud to have employees in over 10 countries. We believe that diverse and distributed workplaces working inclusively are an essential advantage.  We work together to make collaboration a strength across timezone differences, languages, and cultures. 
+
+While we’re in different places, we all have the same goals, and we trust each other to do the work needed to achieve them. Being distributed isn’t a way of doing business. It’s a mindset which we leverage intentionally to build a truly global company.
+`}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='flex flex-col lg:flex-row section-container mx-auto max-w-7xl gap-16 mb-12 items-start'>
+          <div className='flex flex-col w-full lg:w-2/5'>
+            <StrapiImage {...imagePng} alt='ClickHouse around the world' />
+          </div>
+          <div className='flex flex-col w-full lg:w-3/5'>
+            <SuiTitle type='h2' weight='bold' className='mb-8'>
+              Our history
+            </SuiTitle>
+            <div className='max-w-5xl'>
+              <div className='whitespace-pre-wrap text-neutral-200'>
+                {ourHistory.items.map((item) => (
                   <div
-                    className='flex flex-col items-center'
-                    key={office.name + office.location}>
-                    <StrapiImage
-                      {...office.flagPng}
-                      alt={`Image for ${office.name} ${office.location}`}
-                      className='mb-3'
-                    />
-                    <div className='flex flex-col text-center justify-center'>
-                      <SuiText size='base' weight='bold' className='mb-1'>
-                        {office.name}
-                      </SuiText>
-                      <SuiText size='base' weight='medium' color='secondary'>
-                        {office.location}
+                    className='flex flex-col md:flex-row items-center gap-y-10'
+                    key={item.text}>
+                    <div className='flex md:w-2/12 lg:w-1/12'>
+                      <div className='h-20 w-20 bg-noised text-neutral-0 rounded-full text-center items-center justify-center flex'>
+                        <SuiTitle
+                          type='h5'
+                          className='!text-base'
+                          weight='medium'>
+                          {item.year}
+                        </SuiTitle>
+                      </div>
+                    </div>
+                    <div className='flex md:w-8/12 text-center md:text-left'>
+                      <SuiText size='base' weight='normal'>
+                        {item.text}
                       </SuiText>
                     </div>
                   </div>
@@ -125,108 +151,10 @@ export default function OurStoryPage({
             </div>
           </div>
         </div>
-        <div className='text-neutral-0 w-full pt-16 pb-12 px-6'>
-          <SuiTitle type='h2' weight='bold' className='mb-4 max-w-7xl mx-auto'>
-            {aboutUs.title}
-          </SuiTitle>
-          {aboutUs.items.map((item, index: number) => (
-            <div
-              key={item.title}
-              className={`flex flex-col-reverse ${
-                index % 2 == 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-              } container mx-auto max-w-7xl gap-16 mb-12 items-start`}>
-              <div className='flex flex-col w-full lg:w-3/5'>
-                {item.title && (
-                  <SuiTitle type='h3' weight='bold' className='mb-4 !text-3xl'>
-                    {item.title}
-                  </SuiTitle>
-                )}
-                {item.subtitle && (
-                  <div className='mb-2 max-w-4xl '>
-                    <SuiText size='lg' weight='medium' color='secondary'>
-                      {item.subtitle}
-                    </SuiText>
-                  </div>
-                )}
-                <div className='max-w-5xl'>
-                  <SuiText
-                    size='base'
-                    weight='normal'
-                    color='secondary'
-                    className='whitespace-pre-wrap'>
-                    {item.description}
-                  </SuiText>
-                </div>
-              </div>
-              <div className='flex flex-col w-full lg:w-2/5'>
-                <StrapiImage {...item.imagePng} />
-              </div>
-            </div>
-          ))}
-        </div>
 
-        <div className='w-full pt-16 pb-24 px-6'>
-          <div className='flex container mx-auto flex-col max-w-7xl'>
-            <SuiTitle type='h2' className='mb-11 mx-auto md:ml-0'>
-              {ourHistory.title}
-            </SuiTitle>
-
-            <div className='flex flex-col space-y-8'>
-              {ourHistory.items.map((item) => (
-                <div
-                  className='flex flex-col md:flex-row items-center gap-y-10'
-                  key={item.text}>
-                  <div className='flex md:w-2/12 lg:w-1/12'>
-                    <div className='h-20 w-20 bg-noised text-neutral-0 rounded-full text-center items-center justify-center flex'>
-                      <SuiTitle
-                        type='h5'
-                        className='!text-base'
-                        weight='medium'>
-                        {item.year}
-                      </SuiTitle>
-                    </div>
-                  </div>
-                  <div className='flex md:w-8/12 text-center md:text-left'>
-                    <SuiText size='base' weight='normal'>
-                      {item.text}
-                    </SuiText>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className='bg-primary bg-datawarehouse-run text-neutral-0 w-full px-4 md:px-8'>
-          <div className='flex container mx-auto flex-col 2xl:px-0'>
-            <div className='flex flex-col text-center mx-auto pt-16'>
-              <SuiTitle type='h2' color='text-default' className='mb-6 '>
-                {hiring.title}
-              </SuiTitle>
-              <div className='max-w-3xl'>
-                <SuiText size='base' color='text-default' weight='normal'>
-                  {hiring.description}
-                </SuiText>
-                {hiring.ctaButton && (
-                  <div className='flex justify-center pt-6 pb-14'>
-                    <SuiButton
-                      type='dark'
-                      path={hiring.ctaButton.href}
-                      target={hiring.ctaButton.target}>
-                      {hiring.ctaButton.text}
-                    </SuiButton>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className='w-full pt-16 pb-24 px-4 md:px-8'>
-          <div className='flex container mx-auto flex-col max-w-7xl'>
-            <SuiTitle
-              type='h3'
-              weight='bold'
-              className='mb-14 !text-3xl text-center sm:text-left'>
+        <div className='w-full pt-16 pb-24 bg-neutral-725'>
+          <div className='flex container mx-auto flex-col section-container'>
+            <SuiTitle type='h2' weight='bold' className='mb-14 text-center'>
               {team.foundersTitle}
             </SuiTitle>
 
@@ -241,11 +169,11 @@ export default function OurStoryPage({
                 />
               ))}
             </div>
-            <div className='w-96 pt-8 pb-12 self-center'>
-              <SuiHorizontalDivide />
-            </div>
-
-            <SuiTitle type='h3' weight='bold' className='mb-14 !text-3xl'>
+          </div>
+        </div>
+        <div className='w-full pt-16 pb-24'>
+          <div className='flex container mx-auto flex-col section-container'>
+            <SuiTitle type='h2' weight='bold' className='mb-14 text-center'>
               {team.investorsTitle}
             </SuiTitle>
 
@@ -274,7 +202,30 @@ export default function OurStoryPage({
             </div>
           </div>
         </div>
-        <GetStarted platforms={platforms} />
+        <div className='bg-primary section-container text-neutral-0 w-full rounded-lg'>
+          <div className='flex container mx-auto flex-col 2xl:px-0'>
+            <div className='flex flex-col text-center mx-auto pt-16'>
+              <SuiTitle type='h2' color='text-default' className='mb-6 '>
+                {hiring.title}
+              </SuiTitle>
+              <div className='max-w-3xl'>
+                <SuiText size='base' color='text-default' weight='normal'>
+                  {hiring.description}
+                </SuiText>
+                {hiring.ctaButton && (
+                  <div className='flex justify-center pt-6 pb-14'>
+                    <SuiButton
+                      type='dark'
+                      path={hiring.ctaButton.href}
+                      target={hiring.ctaButton.target}>
+                      {hiring.ctaButton.text}
+                    </SuiButton>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       </Layout>
     </>
   )
