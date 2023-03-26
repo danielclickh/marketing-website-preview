@@ -11,12 +11,12 @@ interface Props {
 }
 function Layout({ children, footerData, seo }: Props) {
   return (
-    <>
+    <div onScroll={(e) => console.log('asasas')}>
       {seo && <SeoContainer {...seo} />}
       <Header />
       {children}
       <Footer {...footerData} />
-    </>
+    </div>
   )
 }
 

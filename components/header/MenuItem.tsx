@@ -14,6 +14,7 @@ import {
   ClientRectObject
 } from '@floating-ui/react'
 import Option from './Option'
+import { HeaderTopNavItem } from './types'
 
 const MenuItem = ({
   name,
@@ -24,7 +25,7 @@ const MenuItem = ({
   onHoverLeave
 }: {
   name: string
-  menuItems: Array<any>
+  menuItems: Array<HeaderTopNavItem>
   padding: boolean
   index: number
   onHover: (
@@ -62,6 +63,7 @@ const MenuItem = ({
     open: isOpen,
     onOpenChange,
     placement: 'bottom',
+    strategy: 'fixed',
     whileElementsMounted: autoUpdate,
     middleware: [
       size({
@@ -119,8 +121,8 @@ const MenuItem = ({
               styles.dropdownText
             } dropdown-${index}`}>
             {menuItems.map((subitem) => (
-              <div className='flex flex-col'>
-                <div className='mb-7 pl-3 text-c4 font-semibold text-sm min-h-[1lh]'>
+              <div className='flex flex-col' key={subitem.name}>
+                <div className='mb-7 pl-3 font-semibold text-sm min-h-[1lh]'>
                   {subitem.name}
                 </div>
                 <div className='h-full'>

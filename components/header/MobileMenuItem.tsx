@@ -1,7 +1,7 @@
 import React from 'react'
 import { SuiLink, SuiText } from '../sui'
 import { HeaderLinkItem, HeaderTopNavItem, MenuItem } from './types'
-import styles from './Header.module.scss'
+import styles from './styles.module.scss'
 import Image from 'next/image'
 
 type Props = MenuItem & {
@@ -25,7 +25,7 @@ function MobileMenuItem({
           label: name ?? '',
           category: 'website-nav'
         }}
-        className='menu-item hover:no-underline font-medium text-c5'>
+        className='menu-item hover:no-underline font-medium'>
         {name}
       </SuiLink>
     )
@@ -39,9 +39,7 @@ function MobileMenuItem({
             return (
               <div className='flex flex-col pt-4'>
                 {subitem.name && (
-                  <div className='mb-3 text-c4 font-medium text-sm'>
-                    {subitem.name}
-                  </div>
+                  <div className='mb-3 font-medium text-sm'>{subitem.name}</div>
                 )}
                 {subitem.menuItems.map((item: HeaderLinkItem) => (
                   <SuiLink
@@ -52,12 +50,12 @@ function MobileMenuItem({
                       label: item.name,
                       category: 'website-nav'
                     }}
-                    className='flex items-start text-c4 hover:no-underline max-w-md'>
+                    className='flex items-start hover:no-underline max-w-md'>
                     <div
                       className={styles.menuItem}
                       data-icon={item.icon ? 'true' : 'false'}>
                       {item.icon && (
-                        <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md items-center text-c4 sm:h-12 sm:w-12 md:mr-4'>
+                        <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md items-center sm:h-12 sm:w-12 md:mr-4'>
                           <Image
                             alt={`Image ${item.name}`}
                             src={item.icon}
@@ -99,12 +97,12 @@ function MobileMenuItem({
                   label: subitem.name,
                   category: 'website-nav'
                 }}
-                className='flex items-start text-c4 hover:no-underline max-w-md'>
+                className='flex items-start hover:no-underline max-w-md'>
                 <div
                   className={styles.menuItem}
                   data-icon={subitem.icon ? 'true' : 'false'}>
                   {subitem.icon && (
-                    <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md items-center text-c4 sm:h-12 sm:w-12 md:mr-4'>
+                    <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md items-center sm:h-12 sm:w-12 md:mr-4'>
                       <Image
                         alt={`Image ${subitem.name}`}
                         src={subitem.icon}

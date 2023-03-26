@@ -1,28 +1,58 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import {
+  autoUpdate,
+  offset,
+  useClick,
+  useDismiss,
+  useFloating,
+  useInteractions
+} from '@floating-ui/react'
+import { Disclosure } from '@headlessui/react'
+import { ChevronRightIcon, MenuIcon, XIcon } from '@heroicons/react/solid'
 import { CUIButton, CUILink } from '../ClickUI'
 import menuItems from './menuItems.json'
 import logoFull from '../../public/logo-full.svg'
 import { MenuItem as MenuItemType } from './types'
 import styles from './styles.module.scss'
 import MenuItem from './MenuItem'
-import MobileMenu from './MobileMenu'
+import MobileMenuItem from './MobileMenuItem'
 import { ClientRectObject } from '@floating-ui/react'
 
 const headerMenuItems = menuItems as Array<MenuItemType>
 
-function Nav() {
+export default function Header() {
+  const navBarRef = useRef<HTMLDivElement>(null)
   const navRef = useRef<HTMLDivElement>(null)
   const ref = useRef<HTMLDivElement>(null)
   const arrowRef = useRef<HTMLDivElement>(null)
+  const [isOpen, setIsOpen] = useState(false)
+  const { strategy, floating, reference, context } = useFloating({
+    open: isOpen,
+    onOpenChange: setIsOpen,
+    strategy: 'fixed',
+    placement: 'bottom',
+    whileElementsMounted: autoUpdate,
+    middleware: [
+      offset({
+        mainAxis: 20
+      })
+    ]
+  })
+
+  const click = useClick(context)
+  const dismiss = useDismiss(context)
+  const { getReferenceProps, getFloatingProps } = useInteractions([
+    click,
+    dismiss
+  ])
+
   const handleEnter = (
     floatingCoords: DOMRect,
     refCoords: DOMRect | ClientRectObject
   ) => {
-    console.log('aaaaa1')
     if (ref.current) {
-      console.log('aaaaa2')
       ref.current.classList.add('open')
       ref.current.style.setProperty('width', `${floatingCoords.width}px`)
       ref.current.style.setProperty('height', `${floatingCoords.height}px`)
@@ -31,7 +61,6 @@ function Nav() {
         `translate(${floatingCoords.left}px, ${floatingCoords.top}px)`
       )
       if (arrowRef.current) {
-        console.log('aaaaaC', refCoords)
         arrowRef.current.style.setProperty(
           'transform',
           `translateY(-50%) rotate(45deg)`
@@ -52,13 +81,32 @@ function Nav() {
         }
     }, 150)
   }
+
+  const onscroll = function () {
+    if (navBarRef.current) {
+      if (window.pageYOffset > 0) {
+        // pageYOffset or scrollY
+        navBarRef.current.classList.add('scrolled')
+      } else {
+        navBarRef.current.classList.remove('scrolled')
+      }
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('scroll', onscroll)
+    return () => {
+      document.removeEventListener('scroll', onscroll)
+    }
+  }, [])
+
   return (
-    <div className='text-neutral-0 shadow-sm bg-neutral-900/11 border-b border-primary-700 h-full backdrop-blur-md sticky top-0 z-50 ease-in-out duration-300'>
+    <div className={styles.navBarContainer} ref={navBarRef}>
       <div className={styles.dropdownBackground} ref={ref}>
         <span className={`${styles.arrow} arrow`} ref={arrowRef}></span>
       </div>
 
-      <nav className='relative flex no-wrap justify-between items-center section-container w-full py-4'>
+      <nav className='relative flex no-wrap justify-between items-center section-container w-full py-4 backdrop-blur-md'>
         <Link href='/' className='flex items-center gap-x-3 hover:no-underline'>
           <Image src={logoFull} width='135' height='40' alt='ClickHouse logo' />
         </Link>
@@ -67,7 +115,7 @@ function Nav() {
             {headerMenuItems.map((menuItem, index) => {
               if (menuItem.href) {
                 return (
-                  <li className='px-2 lg:px-4'>
+                  <li className='px-2 lg:px-4' key={menuItem.name}>
                     <CUILink
                       key={menuItem.name}
                       href={menuItem.href}
@@ -151,10 +199,103 @@ function Nav() {
             Get Started
           </CUIButton>
         </div>
-        <MobileMenu />
+
+        <div
+          className='bg-slate text-neutral-200 rounded-md p-2 inline-flex items-center justify-center hover:text-neutral-0 focus:outline-none md:hidden'
+          ref={reference}
+          {...getReferenceProps()}>
+          <span className='sr-only'>Open menu</span>
+          {isOpen ? (
+            <XIcon className='h-4 w-4' aria-hidden='true' />
+          ) : (
+            <MenuIcon className='h-4 w-4' aria-hidden='true' />
+          )}
+        </div>
       </nav>
+      {isOpen && (
+        <div
+          className='flex flex-col justify-between bg-menu-options divide-y divide-neutral-900/11 w-full backdrop-blur-[10px]'
+          ref={floating}
+          style={{
+            position: strategy,
+            top: 72,
+            left: 0,
+            height: 'calc(100vh - 72px)'
+          }}
+          {...getFloatingProps()}>
+          <div className='pt-8 mb-6 overflow-auto h-[stretch]'>
+            <div className='flex items-top justify-between mt-6 w-full'>
+              <nav className='flex flex-col w-full'>
+                {headerMenuItems.map((menuItem) => {
+                  if ((menuItem.menuItems ?? []).length > 0) {
+                    return (
+                      <Disclosure as='div'>
+                        {({ open }) => (
+                          <>
+                            <Disclosure.Button className='flex w-full justify-between rounded-lg text-left text-sm font-medium focus:outline-none focus-visible:ring-opacity-75 px-4 sm:px-8 mb-2'>
+                              <span>{menuItem.name}</span>
+                              <ChevronRightIcon
+                                className={`${
+                                  open ? 'rotate-90 transform' : ''
+                                } h-5 w-5`}
+                              />
+                            </Disclosure.Button>
+                            <Disclosure.Panel className='text-sm text-gray-500 mb-2'>
+                              <MobileMenuItem
+                                {...menuItem}
+                                close={() => setIsOpen(false)}
+                              />
+                            </Disclosure.Panel>
+                          </>
+                        )}
+                      </Disclosure>
+                    )
+                  } else if (menuItem.href) {
+                    return (
+                      <CUILink
+                        key={menuItem.name}
+                        href={menuItem.href}
+                        target={menuItem?.target}
+                        onClick={() => setIsOpen(false)}
+                        segmentEvent={{
+                          label: menuItem.name,
+                          category: 'website-nav'
+                        }}
+                        className='menu-item text-sm hover:no-underline font-medium px-4 sm:px-8 mb-2'>
+                        {menuItem.name}
+                      </CUILink>
+                    )
+                  }
+                })}
+              </nav>
+            </div>
+          </div>
+          <div className='py-6 px-5 grid gap-4 w-full grid-cols-2'>
+            <CUIButton
+              type='primary'
+              href='https://clickhouse.cloud/signUp'
+              target='_self'
+              segmentEvent={{
+                label: 'Get Started',
+                category: 'website-nav'
+              }}
+              className='w-full'>
+              Get Started
+            </CUIButton>
+            <CUIButton
+              type='secondary'
+              href='https://clickhouse.cloud/signIn'
+              target='_self'
+              segmentEvent={{
+                label: 'Sign in',
+                category: 'website-nav'
+              }}
+              className='w-full'>
+              Sign in
+            </CUIButton>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
-
-export default Nav

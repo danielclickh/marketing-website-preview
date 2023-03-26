@@ -27,8 +27,11 @@ export default function FAQ() {
         </CUILink>
       </div>
       <div className={styles.accordionContainer}>
-        {faqList.map((faq) => (
-          <Disclosure as='div' className={styles.accordion}>
+        {faqList.map((faq, index) => (
+          <Disclosure
+            as='div'
+            className={styles.accordion}
+            key={`faq-${index}`}>
             {({ open }) => (
               <>
                 <Disclosure.Button className='relative z-10 flex p-4 pl-20 w-full justify-between items-center rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
