@@ -33,7 +33,7 @@ function MobileMenuItem({
 
   if (menuItems) {
     return (
-      <div>
+      <div className='bg-neutral-750/90 px-4 sm:px-8 pb-4 border-y border-neutral-700 backdrop-blur-[10px]'>
         {menuItems.map((subitem: HeaderLinkItem | HeaderTopNavItem) => {
           if (subitem.menuItems && subitem.menuItems.length > 0) {
             return (

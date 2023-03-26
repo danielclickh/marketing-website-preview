@@ -1,5 +1,5 @@
-import { ReactNode, useRef, useState } from 'react'
-import styles from './Header.module.scss'
+import { useRef, useState } from 'react'
+import styles from './styles.module.scss'
 import {
   autoUpdate,
   autoPlacement,
@@ -9,51 +9,81 @@ import {
   useDismiss,
   useFloating,
   useInteractions,
-  FloatingArrow,
-  arrow,
   offset,
-  safePolygon
+  safePolygon,
+  ClientRectObject
 } from '@floating-ui/react'
+import Option from './Option'
 
 const MenuItem = ({
   name,
-  children,
-  padding = false
+  menuItems,
+  padding = false,
+  index = 0,
+  onHover,
+  onHoverLeave
 }: {
   name: string
-  children: ReactNode
+  menuItems: Array<any>
   padding: boolean
+  index: number
+  onHover: (
+    floatingCoords: DOMRect,
+    refCoords: DOMRect | ClientRectObject
+  ) => void
+  onHoverLeave: () => void
 }) => {
+  const ref = useRef<HTMLLIElement>(null)
   const [isOpen, setIsOpen] = useState(false)
-  const arrowEl = useRef(null)
+
+  const onOpenChange = (value: boolean) => {
+    setIsOpen(value)
+    if (value) {
+      if (ref.current) {
+        setTimeout(
+          () =>
+            ref.current &&
+            ref.current.classList.contains('trigger-enter') &&
+            ref.current.classList.add('trigger-enter-active'),
+          150
+        )
+        const floatingCoords =
+          context.refs.floating.current?.getBoundingClientRect()
+        const refCoords =
+          context.refs.reference.current?.getBoundingClientRect()
+        floatingCoords && refCoords && onHover(floatingCoords, refCoords)
+      }
+    } else if (ref.current) {
+      ref.current.classList.remove('trigger-enter-active')
+      onHoverLeave()
+    }
+  }
   const { x, y, strategy, floating, reference, context } = useFloating({
     open: isOpen,
-    onOpenChange: setIsOpen,
+    onOpenChange,
     placement: 'bottom',
     whileElementsMounted: autoUpdate,
     middleware: [
       size({
-        apply({ availableWidth, availableHeight, elements }) {
+        apply({ availableHeight, elements }) {
           Object.assign(elements.floating.style, {
-            maxWidth: `${availableWidth - 40}px`,
             maxHeight: `${availableHeight}px`
           })
         }
       }),
-      arrow({
-        element: arrowEl
-      }),
       shift(),
       autoPlacement(),
       offset({
-        crossAxis: 20,
+        crossAxis: 60,
         mainAxis: 10
       })
     ]
   })
 
   const hover = useHover(context, {
-    handleClose: safePolygon()
+    handleClose: safePolygon({
+      restMs: 50
+    })
   })
   const dismiss = useDismiss(context)
   const { getReferenceProps, getFloatingProps } = useInteractions([
@@ -62,38 +92,48 @@ const MenuItem = ({
   ])
 
   return (
-    <div className='relative' key={name}>
+    <li
+      ref={ref}
+      className={isOpen ? `${styles.triggerEnter} trigger-enter` : ''}>
       <div
         ref={reference}
         data-open={isOpen}
-        className={`${styles.header_popover} group group-hover:underline data-[open=true]:underline hover:underline`}
+        className={`${styles.headerPopover} group group-hover:text-neutral-400 data-[open=true]:text-neutral-400 hover:text-neutral-400 cursor-pointer px-2 lg:px-4 py-2.5`}
         {...getReferenceProps()}>
         {name}
       </div>
-      {isOpen && (
-        <>
-          <FloatingArrow ref={arrowEl} context={context} />
+      <div
+        className={`${styles.floatingContent} ${isOpen ? 'flex' : 'hidden'}`}
+        ref={floating}
+        style={{
+          position: strategy,
+          top: y ?? 0,
+          left: x ?? 0
+        }}
+        {...getFloatingProps()}>
+        <div className='overflow-hidden'>
           <div
-            className='absolute z-10 transform w-max lg:max-w-1xl bg-navDropdown rounded-lg border border-t-0 border-neutral-700/30'
-            ref={floating}
-            style={{
-              position: strategy,
-              top: y ?? 0,
-              left: x ?? 0
-            }}
-            {...getFloatingProps()}>
-            <div className='rounded-lg shadow-lg overflow-hidden'>
-              <div
-                className={`relative flex flex-nowrap gap-6 justify-between lg:justify-start ${
-                  padding ? 'px-1 pt-3 pb-4' : ''
-                }`}>
-                {children}
+            className={`relative flex flex-nowrap gap-6 justify-between lg:justify-start ${
+              padding ? 'px-1 pt-3 pb-4' : ''
+            } ${styles.dropdown} dropdown ${
+              styles.dropdownText
+            } dropdown-${index}`}>
+            {menuItems.map((subitem) => (
+              <div className='flex flex-col'>
+                <div className='mb-7 pl-3 text-c4 font-semibold text-sm min-h-[1lh]'>
+                  {subitem.name}
+                </div>
+                <div className='h-full'>
+                  {subitem.menuItems.map((item) => (
+                    <Option key={item.name} {...item} />
+                  ))}
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-        </>
-      )}
-    </div>
+        </div>
+      </div>
+    </li>
   )
 }
 export default MenuItem

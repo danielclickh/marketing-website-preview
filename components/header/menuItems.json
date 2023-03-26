@@ -6,18 +6,25 @@
 		"name": "Product",
 		"menuItems": [{
 			"id": 1,
-			"name": "ClickHouse Cloud",
-			"description": "Fully-managed, autonomous ClickHouse services in the Cloud.",
+			"name": "ClickHouse",
+			"description": "Spin up a database server with OSS ClickHouse.",
 			"href": "/cloud",
 			"target": "_self",
-			"icon": "/icon.svg"
+			"icon": "/drive.svg"
 		}, {
 			"id": 2,
-			"name": "ClickHouse",
-			"description": "Open source column-oriented database management system.",
+			"name": "ClickHouse Local",
+			"description": "Run fast queries on local files without a server.",
 			"href": "/clickhouse",
 			"target": "_self",
-			"icon": "/icon.svg"
+			"icon": "/laptop.svg"
+		},{
+			"id": 1,
+			"name": "ClickHouse Cloud",
+			"description": "Deploy a ClickHouse service on AWS and GCP.",
+			"href": "/cloud",
+			"target": "_self",
+			"icon": "/cloud.svg"
 		}]
 	},{
 		"id": 2,

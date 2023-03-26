@@ -1,0 +1,65 @@
+.navWrapper {
+  @apply relative hidden md:flex; // flex items-center justify-center;
+  ul {
+    @apply m-0 p-0 flex list-none justify-center;
+  }
+}
+
+.navWrapper .dropdown {
+  @apply opacity-0 overflow-hidden p-3;
+  transition: all 0.3s;
+  will-change: transform;
+}
+
+.dropdownBackground {
+  width: 50px;
+  height: 50px;
+  perspective: 600px;
+  @apply absolute bg-neutral-750 rounded-lg opacity-0 border border-neutral-700/30;
+  z-index: 1;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.31);
+  transition: all 0.3s, opacity 0.1s, translate 0.3s;
+  transform-origin: 50% 0%;
+  &::before {
+    content: "";
+    @apply absolute top-0 left-0 bg-neutral-725 h-11 w-full;
+  }
+  &:global(.open) {
+    opacity: 1;
+    perspective: 0;
+  }
+}
+
+.arrow {
+  @apply absolute block bg-neutral-725 border-t border-l border-neutral-700/30;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%) rotate(45deg);
+  transition: all 0.3s;
+  border-radius: 4px 0px;
+}
+
+.navList > li {
+  @apply relative flex;
+
+  &:global(.trigger-enter-active) .dropdown {
+    opacity: 1;
+  }
+}
+
+.headerPopover {
+  @apply rounded-md inline-flex items-center text-sm font-medium focus:outline-none;
+  @apply ease-in-out;
+}
+
+.floatingContent {
+  @apply z-10 transform w-max;
+  max-width: 65vw;
+  overflow-y: auto;
+}
+
+.triggerEnter {
+  &.trigger-enter-active .floatingContent .dropdown {
+    @apply opacity-100;
+  }
+}
