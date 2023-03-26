@@ -63,7 +63,6 @@ const MenuItem = ({
     open: isOpen,
     onOpenChange,
     placement: 'bottom',
-    strategy: 'fixed',
     whileElementsMounted: autoUpdate,
     middleware: [
       size({
