@@ -10,15 +10,4 @@
   iframe {
     @apply max-w-full top-0 left-0 relative w-full h-full aspect-video;
   }
-
-  &::before {
-    content: "";
-    @apply absolute inset-x-0 top-0;
-    background: linear-gradient(270.28deg, #443f51 0.18%, #23202d 99.84%);
-    bottom: 50%;
-  }
-}
-
-.learnBg {
-  background: linear-gradient(270.28deg, #443f51 0.18%, #23202d 99.84%);
 }

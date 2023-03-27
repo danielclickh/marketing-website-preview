@@ -161,8 +161,8 @@ module.exports = {
           DEFAULT: 'rgba(var(--clickhouse-color-7), <alpha-value>)',
           dark: '#FFC133'
         },
-        gradientTop: '#FFC700',
-        gradientBottom: '#FF7A00',
+        gradientTop: '#FCFF74',
+        gradientBottom: '#EEF400',
         alerts: {
           danger: {
             text: '#C70F0F',
@@ -191,7 +191,8 @@ module.exports = {
         'click-pill': '0px -1px 5px rgba(16, 24, 40, 0.07)',
         'click-twitter': '0px 4px 48px rgba(250, 255, 72, 0.2)',
         'footer-line': '0px -1px 1px #000000',
-        codeblock: '0px 4px 4px rgba(0, 0, 0, 0.06), inset 0px 4px 25px rgba(0, 0, 0, 0.14)',
+        codeblock:
+          '0px 4px 4px rgba(0, 0, 0, 0.06), inset 0px 4px 25px rgba(0, 0, 0, 0.14)'
       },
       backgroundSize: {
         default_size: '0%, 100%',
@@ -200,14 +201,16 @@ module.exports = {
       backgroundImage: {
         field_focus:
           'linear-gradient(0deg, #fbff46, #fbff46 2px, transparent 0, transparent)',
-        navDropdown: 'linear-gradient(to bottom, rgba(65, 65, 65, 0.3) 0px, rgba(65, 65, 65, 0.3) 1px, #282828 1px, #282828 44px, rgba(65, 65, 65, 0.3) 44px, rgba(65, 65, 65, 0.3)45px, #1F1F1C 45px, #1F1F1C 100%)',
+        navDropdown:
+          'linear-gradient(to bottom, rgba(65, 65, 65, 0.3) 0px, rgba(65, 65, 65, 0.3) 1px, #282828 1px, #282828 44px, rgba(65, 65, 65, 0.3) 44px, rgba(65, 65, 65, 0.3)45px, #1F1F1C 45px, #1F1F1C 100%)',
         grid: 'url("/bg-grid.png")',
         'click-grid': 'url("/bg-grid.svg")',
         'home-grid':
           'linear-gradient(117.08deg, rgba(0, 0, 0, 0) 14.55%, rgba(22, 22, 0, 0.167461) 34.15%, rgba(47, 47, 47, 0.22751) 40.54%, rgba(22, 22, 0, 0.611327) 46.65%, #161600 95.98%), url("/bg-grid.png");',
         'speed-lines': 'url("/speed-lines.svg")',
         'body-image': 'linear-gradient(255.48deg, #292924 1.95%, #0F0F0F 100%)',
-        'menu-options': 'linear-gradient(255.48deg, rgba(41, 41, 36, 0.95) 1.95%, rgba(15, 15, 15, 0.95) 100%)'
+        'menu-options':
+          'linear-gradient(255.48deg, rgba(41, 41, 36, 0.95) 1.95%, rgba(15, 15, 15, 0.95) 100%)'
       },
       spacing: {
         '30': '7.5rem'

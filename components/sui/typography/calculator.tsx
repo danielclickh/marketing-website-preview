@@ -23,7 +23,7 @@ export const colorCalculator = (color: string, defaultColor?: string) => {
       return 'text-c3'
     case 'c4':
     case 'secondary':
-      return 'text-neutral-300'
+      return 'text-neutral-200'
     case 'c4-10':
       return 'text-c4/10'
     case 'c4-20':
