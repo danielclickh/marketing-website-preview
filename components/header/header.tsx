@@ -58,7 +58,7 @@ export default function Header() {
       ref.current.style.setProperty('height', `${floatingCoords.height}px`)
       ref.current.style.setProperty(
         'transform',
-        `translate(${floatingCoords.left}px, ${floatingCoords.top}px)`
+        `translate(${floatingCoords.left}px, 60px)`
       )
       if (arrowRef.current) {
         arrowRef.current.style.setProperty(

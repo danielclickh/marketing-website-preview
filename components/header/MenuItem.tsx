@@ -76,7 +76,7 @@ const MenuItem = ({
       autoPlacement(),
       offset({
         crossAxis: 60,
-        mainAxis: 10
+        mainAxis: 5
       })
     ]
   })

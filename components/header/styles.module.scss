@@ -28,15 +28,18 @@
     display: block;
     opacity: 1;
     perspective: 0;
+    .arrow {
+      @apply block;
+    }
   }
 }
 
 .arrow {
-  @apply absolute block bg-neutral-725 border-t border-l border-neutral-700/30;
+  @apply absolute hidden bg-neutral-725 border-t border-l border-neutral-700/30;
   width: 20px;
   height: 20px;
-  transform: translateY(50%) rotate(45deg);
-  transition: left 0.3s;
+  transform: translateY(-100%) rotate(45deg);
+  transition: translateY 0.3s 0.3s, left 0.3s, display 0.5s;
   border-radius: 4px 0px;
 }
 
