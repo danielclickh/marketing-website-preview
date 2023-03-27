@@ -95,7 +95,8 @@ const MenuItem = ({
   return (
     <li
       ref={ref}
-      className={isOpen ? `${styles.triggerEnter} trigger-enter` : ''}>
+      className={isOpen ? `${styles.triggerEnter} trigger-enter` : ''}
+      onMouseLeave={() => onOpenChange(false)}>
       <div
         ref={reference}
         data-open={isOpen}
