@@ -364,6 +364,7 @@ export default function HomePage({
                 width='544'
                 height='257'
                 alt='Row Oriented Illustration'
+                className='bg-neutral-900 border border-neutral-700/80 rounded-lg'
                 priority
               />
               <div className='text-neutral-0 font-bold leading-normal mb-3 mt-6'>
@@ -381,6 +382,7 @@ export default function HomePage({
                 width='544'
                 height='257'
                 alt='Column Oriented Illustration'
+                className='bg-neutral-900 border border-neutral-700/80 rounded-lg'
                 priority
               />
               <div className='text-neutral-0 font-bold leading-normal mb-3 mt-6'>
