@@ -1,107 +1,134 @@
-[{
-	"id": 5,
-	"title": "Product",
-	"items": [{
-		"id": 15,
-		"name": "ClickHouse",
-		"href": "/clickhouse",
-		"target": "_self"
-	}, {
-		"id": 17,
-		"name": "ClickHouse Cloud",
-		"href": "/cloud",
-		"target": "_self"
-	}, {
-		"id": 25,
-		"name": "Download",
-		"href": "https://clickhouse.com/docs/en/install#self-managed-install",
-		"target": "_blank"
-	}]
-}, {
-	"id": 4,
-	"title": "Resources",
-	"items": [{
-		"id": 16,
-		"name": "Documentation",
-		"href": "https://clickhouse.com/docs",
-		"target": "_blank"
-	}, {
-		"id": 13,
-		"name": "Training",
-		"href": "https://clickhouse.com/learn/",
-		"target": "_blank"
-	}, {
-		"id": 14,
-		"name": "Support",
-		"href": "https://clickhouse.com/support/program",
-		"target": "_self"
-	}, {
-		"id": 18,
-		"name": "Comparison",
-		"href": "https://benchmark.clickhouse.com",
-		"target": "_blank"
-	}, {
-		"id": 19,
-		"name": "Use cases",
-		"href": "/customer-stories",
-		"target": "_self"
-	}]
-}, {
-	"id": 6,
-	"title": "Company",
-	"items": [{
-		"id": 20,
-		"name": "Blog",
-		"href": "/blog",
-		"target": "_self"
-	}, {
-		"id": 21,
-		"name": "Our story",
-		"href": "/company/our-story",
-		"target": "_self"
-	}, {
-		"id": 22,
-		"name": "Careers",
-		"href": "/company/careers",
-		"target": "_self"
-	}, {
-		"id": 23,
-		"name": "Contact us",
-		"href": "/company/contact",
-		"target": "_self"
-	}, {
-		"id": 24,
-		"name": "News and events",
-		"href": "/company/news-events",
-		"target": "_self"
-	}]
-}, {
-	"id": 7,
-	"title": "Join our community",
-	"items": [{
-		"id": 20,
-		"name": "Github",
-		"href": "https://github.com/ClickHouse/ClickHouse",
-		"target": "_blank"
-	}, {
-		"id": 21,
-		"name": "Slack",
-		"href": "/slack",
-		"target": "_blank"
-	}, {
-		"id": 22,
-		"name": "Twitter",
-		"href": "https://twitter.com/ClickhouseDB",
-		"target": "_blank"
-	}, {
-		"id": 23,
-		"name": "Telegram",
-		"href": "https://telegram.me/clickhouse_en",
-		"target": "_blank"
-	}, {
-		"id": 24,
-		"name": "Discord",
-		"href": "/company/news-events",
-		"target": "_self"
-	}]
-}]
+[
+	{
+		"id": 5,
+		"title": "Product",
+		"items": [
+			{
+				"id": 15,
+				"name": "ClickHouse",
+				"href": "/clickhouse",
+				"target": "_self"
+			},
+			{
+				"id": 17,
+				"name": "ClickHouse Cloud",
+				"href": "/cloud",
+				"target": "_self"
+			},
+			{
+				"id": 25,
+				"name": "Download",
+				"href": "https://clickhouse.com/docs/en/install#self-managed-install",
+				"target": "_blank"
+			}
+		]
+	},
+	{
+		"id": 4,
+		"title": "Resources",
+		"items": [
+			{
+				"id": 16,
+				"name": "Documentation",
+				"href": "https://clickhouse.com/docs",
+				"target": "_blank"
+			},
+			{
+				"id": 13,
+				"name": "Training",
+				"href": "https://clickhouse.com/learn/",
+				"target": "_blank"
+			},
+			{
+				"id": 14,
+				"name": "Support",
+				"href": "https://clickhouse.com/support/program",
+				"target": "_self"
+			},
+			{
+				"id": 18,
+				"name": "Comparison",
+				"href": "https://benchmark.clickhouse.com",
+				"target": "_blank"
+			},
+			{
+				"id": 19,
+				"name": "Use cases",
+				"href": "/customer-stories",
+				"target": "_self"
+			}
+		]
+	},
+	{
+		"id": 6,
+		"title": "Company",
+		"items": [
+			{
+				"id": 20,
+				"name": "Blog",
+				"href": "/blog",
+				"target": "_self"
+			},
+			{
+				"id": 21,
+				"name": "Our story",
+				"href": "/company/our-story",
+				"target": "_self"
+			},
+			{
+				"id": 22,
+				"name": "Careers",
+				"href": "/company/careers",
+				"target": "_self"
+			},
+			{
+				"id": 23,
+				"name": "Contact us",
+				"href": "/company/contact",
+				"target": "_self"
+			},
+			{
+				"id": 24,
+				"name": "News and events",
+				"href": "/company/news-events",
+				"target": "_self"
+			}
+		]
+	},
+	{
+		"id": 7,
+		"title": "Join our community",
+		"items": [
+			{
+				"id": 20,
+				"name": "Github",
+				"href": "https://github.com/ClickHouse/ClickHouse",
+				"target": "_blank"
+			},
+			{
+				"id": 21,
+				"name": "Slack",
+				"href": "/slack",
+				"target": "_blank"
+			},
+			{
+				"id": 22,
+				"name": "Twitter",
+				"href": "https://twitter.com/ClickhouseDB",
+				"target": "_blank"
+			},
+			{
+				"id": 23,
+				"name": "Telegram",
+				"href": "https://telegram.me/clickhouse_en",
+				"target": "_blank"
+			},
+			{
+				"id": 24,
+				"name": "Meetup",
+				"href": "https://www.meetup.com/pro/clickhouse",
+				"target": "_blank"
+			}
+		]
+	}
+]
