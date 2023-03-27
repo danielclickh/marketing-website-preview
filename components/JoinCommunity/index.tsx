@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { CUILink } from '../ClickUI'
+import SocialIcon from '../SocialIcon'
 import { SuiTitle } from '../sui'
 
 function JoinCommunity() {
@@ -16,48 +17,28 @@ function JoinCommunity() {
         </SuiTitle>
         <div className='flex flex-wrap gap-6'>
           <div className='flex gap-6'>
-            <CUILink
+            <SocialIcon
+              name='Twitter'
               href='https://twitter.com/ClickhouseDB'
-              className='w-16 !h-16 rounded grid place-items-center !border-neutral-700/50'>
-              <Image
-                src='/socials/twitter.svg'
-                width={32}
-                height={32}
-                alt='Twitter image'
-              />
-            </CUILink>
-            <CUILink
+              imgSrc='/socials/twitter.svg'
+            />
+            <SocialIcon
+              name='Slack'
               href='/slack'
-              className='w-16 h-16 bg-eerie-black/40 hover:bg-eerie-black/70 rounded grid place-items-center'>
-              <Image
-                src='/socials/slack.svg'
-                width={32}
-                height={32}
-                alt='Slack image'
-              />
-            </CUILink>
+              imgSrc='/socials/slack.svg'
+            />
           </div>
           <div className='flex gap-6'>
-            <CUILink
-              href='/'
-              className='w-16 !h-16 rounded grid place-items-center !border-neutral-700/50'>
-              <Image
-                src='/socials/discord.svg'
-                width={32}
-                height={32}
-                alt='Discord image'
-              />
-            </CUILink>
-            <CUILink
+            <SocialIcon
+              name='Telegram'
+              href='https://telegram.me/clickhouse_en'
+              imgSrc='/socials/telegram.svg'
+            />
+            <SocialIcon
+              name='Meetup'
               href='https://www.meetup.com/pro/clickhouse'
-              className='w-16 !h-16 rounded grid place-items-center !border-neutral-700/50'>
-              <Image
-                src='/socials/meetup.svg'
-                width={32}
-                height={32}
-                alt='Meetup image'
-              />
-            </CUILink>
+              imgSrc='/socials/meetup.svg'
+            />
           </div>
         </div>
       </div>

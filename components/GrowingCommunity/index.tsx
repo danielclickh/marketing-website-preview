@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { CUILink } from '../ClickUI'
+import SocialIcon from '../SocialIcon'
 import { SuiTitle } from '../sui'
 import socials from './socials.json'
 
@@ -17,17 +18,12 @@ function GrowingCommunity() {
         </SuiTitle>
         <div className='flex flex-wrap justify-center items-center gap-8 pt-11'>
           {socials.map((social) => (
-            <CUILink
+            <SocialIcon
               key={social.name}
               href={social.href}
-              className='w-16 h-16 bg-neutral-900 hover:bg-neutral-800 rounded grid place-items-center border border-neutral-700/80'>
-              <Image
-                src={social.imgSrc}
-                width={32}
-                height={32}
-                alt={`${social.name} image`}
-              />
-            </CUILink>
+              imgSrc={social.imgSrc}
+              name={social.name}
+            />
           ))}
         </div>
       </div>

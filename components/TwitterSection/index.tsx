@@ -12,6 +12,7 @@ import twitter7 from '../../public/avatar/twitter7.png'
 import twitter8 from '../../public/avatar/twitter8.png'
 import Image from 'next/image'
 import { CUILink } from '../ClickUI'
+import SocialIcon from '../SocialIcon'
 
 const twitterList = [
   {
@@ -140,48 +141,24 @@ function TwitterSection() {
       </SuiTitle>
       <div className='flex flex-wrap gap-6 my-16 justify-center'>
         <div className='flex gap-6'>
-          <CUILink
+          <SocialIcon
+            name='Twitter'
             href='https://twitter.com/ClickhouseDB'
-            className='w-16 h-16 bg-noised rounded grid place-items-center'>
-            <Image
-              src='/socials/twitter.svg'
-              width={32}
-              height={32}
-              alt='Twitter image'
-            />
-          </CUILink>
-          <CUILink
-            href='https://join.slack.com/t/clickhousedb/shared_invite/zt-1gh9ds7f4-PgDhJAaF8ad5RbWBAAjzFg'
-            className='w-16 h-16 bg-noised rounded grid place-items-center'>
-            <Image
-              src='/socials/slack.svg'
-              width={32}
-              height={32}
-              alt='Slack image'
-            />
-          </CUILink>
+            imgSrc='/socials/twitter.svg'
+          />
+          <SocialIcon name='Slack' href='/slack' imgSrc='/socials/slack.svg' />
         </div>
         <div className='flex gap-6'>
-          <CUILink
-            href='/'
-            className='w-16 h-16 bg-noised rounded grid place-items-center'>
-            <Image
-              src='/socials/discord.svg'
-              width={32}
-              height={32}
-              alt='Discord image'
-            />
-          </CUILink>
-          <CUILink
+          <SocialIcon
+            name='Telegram'
+            href='https://telegram.me/clickhouse_en'
+            imgSrc='/socials/telegram.svg'
+          />
+          <SocialIcon
+            name='Meetup'
             href='https://www.meetup.com/pro/clickhouse'
-            className='w-16 h-16 bg-noised rounded grid place-items-center'>
-            <Image
-              src='/socials/meetup.svg'
-              width={32}
-              height={32}
-              alt='Meetup image'
-            />
-          </CUILink>
+            imgSrc='/socials/meetup.svg'
+          />
         </div>
       </div>
       <div className='max-w-full xl:max-w-7xl mx-auto columns-1 sm:columns-2 md:columns-3 lg:columns-4 space-y-8 gap-x-6'>
