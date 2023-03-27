@@ -349,8 +349,7 @@ body {
   -webkit-background-clip: padding-box, text;
   background-clip: padding-box, text;
   background-repeat: no-repeat;
-  animation: typewrite-position 0.4s infinite steps(1),
-    typewrite-size calc(var(--totalCount) * 0.05s) steps(var(--totalCount)) forwards;
+  animation: typewrite-position 0.4s infinite steps(1), typewrite-size 2s steps(var(--totalCount)) forwards;
   &.active {
     @apply transition-colors;
     .keyword {
