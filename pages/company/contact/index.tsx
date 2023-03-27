@@ -9,6 +9,7 @@ import { GetStaticProps } from 'next'
 import { ContactProps } from '../../../types/contact'
 import Layout from '../../../components/Layout'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import HRSeparator from '../../../components/HRSeparator'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -18,19 +19,10 @@ export const getStaticProps: GetStaticProps<ContactProps> =
 
     const commonProps = await getCommonProps()
 
-    const growingCommunityData = await findOne('growing-community', {
-      populate: [
-        'iconButtons',
-        'iconButtons.darkIconPng',
-        'iconButtons.lightIconPng'
-      ]
-    })
-
     return {
       props: {
         ...data.hero,
         seo: data.seo,
-        growingCommunityData,
         ...commonProps
       }
     }
@@ -41,8 +33,6 @@ export default function ContactPage({
   description,
   contactForm,
   footerData,
-  platforms,
-  growingCommunityData,
   seo
 }: ContactProps) {
   return (
@@ -53,28 +43,22 @@ export default function ContactPage({
             <SuiTitle type='h1' className='mb-4'>
               {title}
             </SuiTitle>
-            <SuiText
-              size='lg'
-              weight='medium'
-              color='secondary'
-              className='max-w-3xl'>
-              {description}
-            </SuiText>
+            <div className='max-w-3xl text-neutral-200'>{description}</div>
           </div>
           <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-14 pb-8 text-center px-8 2xl:px-0'>
             <div className='w-full md:max-w-screen-sm self-center text-left space-y-5'>
               <ContactForm {...contactForm} />
               <div className='flex text-center'>
-                <SuiText size='xs' weight='medium' color='secondary'>
+                <div className='text-neutral-200 text-sm font-medium'>
                   <Markdown>{contactForm.disclaimer}</Markdown>
-                </SuiText>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <GrowingCommunity {...growingCommunityData} />
-      <GetStarted platforms={platforms} />
+      <HRSeparator className='my-24' />
+      <GrowingCommunity />
     </Layout>
   )
 }

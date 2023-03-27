@@ -24,25 +24,27 @@ export function SuiTextField({
 }: TextFieldProps) {
   return (
     <div className={className}>
-      {label && (
-        <label
-          htmlFor={htmlFor}
-          className='block text-xs font-bold text-neutral-0 pb-1'>
-          {label}
-          {!required && <span className='text-c4'></span>}
-        </label>
-      )}
-      <div className='mt-1'>
-        <input
-          type={type}
-          id={htmlFor}
-          className={styles.textCommon}
-          required={required}
-          {...props}
-        />
-        {type === 'password' && (
-          <EyeIcon className='w-4 relative -top-7 left-80 md:left-96 text-gray-400' />
+      <div className={styles.container}>
+        {label && (
+          <label
+            htmlFor={htmlFor}
+            className='block text-xs font-medium text-neutral-300 pb-1'>
+            {label}
+            {!required && <span className='text-c4'></span>}
+          </label>
         )}
+        <div className='mt-1'>
+          <input
+            type={type}
+            id={htmlFor}
+            className={styles.textCommon}
+            required={required}
+            {...props}
+          />
+          {type === 'password' && (
+            <EyeIcon className='w-4 relative -top-7 left-80 md:left-96 text-gray-400' />
+          )}
+        </div>
       </div>
       <p
         className={`mt-1 transition-opacity ease-in-out text-red-500 text-xs min-h-[1rem] ${

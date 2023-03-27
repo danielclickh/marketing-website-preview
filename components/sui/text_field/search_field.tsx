@@ -25,28 +25,30 @@ export function SuiSearchField({
 }: TextFieldProps) {
   return (
     <div className={className}>
-      {label && (
-        <label
-          htmlFor={htmlFor}
-          className='block text-xs font-bold text-neutral-0 pb-1'>
-          {label}
-          {!required && <span className='text-c4'></span>}
-        </label>
-      )}
-      <div className='flex mt-1 relative'>
-        <div className='absolute left-0 top-0 bottom-0 w-9 grid place-items-center z-10'>
-          <SearchIcon width='14' height='14' />
-        </div>
-        <input
-          type={type}
-          id={htmlFor}
-          className={`${styles.textCommon} ${styles.search}`}
-          required={required}
-          {...props}
-        />
-        {type === 'password' && (
-          <EyeIcon className='w-4 relative -top-7 left-80 md:left-96 text-gray-400' />
+      <div className={styles.container}>
+        {label && (
+          <label
+            htmlFor={htmlFor}
+            className='block text-xs font-medium text-neutral-300 pb-1'>
+            {label}
+            {!required && <span className='text-c4'></span>}
+          </label>
         )}
+        <div className='flex mt-1 relative'>
+          <div className='absolute left-0 top-0 bottom-0 w-9 grid place-items-center z-10'>
+            <SearchIcon width='14' height='14' />
+          </div>
+          <input
+            type={type}
+            id={htmlFor}
+            className={`${styles.textCommon} ${styles.search}`}
+            required={required}
+            {...props}
+          />
+          {type === 'password' && (
+            <EyeIcon className='w-4 relative -top-7 left-80 md:left-96 text-gray-400' />
+          )}
+        </div>
       </div>
       {error.length > 0 ? (
         <p

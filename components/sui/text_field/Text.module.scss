@@ -1,7 +1,8 @@
 .textCommon {
-  @apply bg-default_size bg-no-repeat transition-[background] bg-left-bottom duration-300 ease-in bg-neutral-800 border border-neutral-700 text-neutral-0 placeholder-neutral-400 relative w-full rounded-md shadow-input px-3 py-2 text-left sm:text-sm resize-none cursor-text;
+  @apply transition-[border] bg-left-bottom duration-300 ease-in bg-neutral-750 text-neutral-0 placeholder-neutral-400 relative w-full rounded-md shadow-input px-3 py-2 text-left sm:text-sm resize-none cursor-text;
+  @apply border border-neutral-725;
   &:focus {
-    @apply bg-field_focus bg-focus_size bg-neutral-900 outline-none;
+    @apply border-primary-300 outline-none;
   }
   &[type="password"] {
     @apply pr-10;
@@ -10,4 +11,11 @@
 
 .search {
   @apply pl-9;
+}
+
+.container {
+  @apply flex flex-col;
+  &:focus-within label {
+    @apply text-neutral-0;
+  }
 }

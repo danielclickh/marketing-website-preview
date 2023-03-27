@@ -1,31 +1,33 @@
-import Link from 'next/link'
+import Image from 'next/image'
 import React from 'react'
-import { GrowingCommunityProps } from '../../types/contact'
-import { StrapiPicture } from '../StrapiElements'
+import { CUILink } from '../ClickUI'
 import { SuiTitle } from '../sui'
+import socials from './socials.json'
 
-function GrowingCommunity({ title, iconButtons }: GrowingCommunityProps) {
+function GrowingCommunity() {
   return (
-    <div className='w-full text-neutral-0 pt-16 pb-12'>
-      <div className='flex flex-col container mx-auto max-w-7xl px-8 2xl:px-0 mb-12'>
-        <SuiTitle type='h2'>{title}</SuiTitle>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 pt-11'>
-          {iconButtons.map((iconButton, index: number) => (
-            <Link
-              className={`gc-icon-${index}`}
-              key={iconButton.href}
-              href={iconButton.href}
-              target={iconButton.target}>
-              <div className='flex w-full xl:w-52 bg-primary-900 rounded-lg py-6 justify-center hover:shadow-xl ease-in-out duration-200 cursor-pointer'>
-                <StrapiPicture
-                  dark={iconButton.darkIconPng}
-                  light={iconButton.lightIconPng}
-                  className='h-11 w-auto'
-                />
-              </div>
-            </Link>
-          ))}
-        </div>
+    <div className='w-full text-neutral-0 flex flex-col section-container justify-center items-center mb-24 bg-neutral-900/50 border border-neutral-700/80 py-16 rounded-lg'>
+      <SuiTitle type='h2'>
+        Join the{' '}
+        <span className='tilted tilted-yellow'>
+          <span className='tilted-content'>100k+</span>
+        </span>{' '}
+        developers using ClickHouse today
+      </SuiTitle>
+      <div className='flex flex-wrap gap-8 pt-11'>
+        {socials.map((social) => (
+          <CUILink
+            key={social.name}
+            href={social.href}
+            className='w-16 h-16 bg-neutral-900 hover:bg-neutral-800 rounded grid place-items-center border border-neutral-700/80'>
+            <Image
+              src={social.imgSrc}
+              width={32}
+              height={32}
+              alt={`${social.name} image`}
+            />
+          </CUILink>
+        ))}
       </div>
     </div>
   )
