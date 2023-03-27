@@ -1,21 +1,27 @@
-[{
-  "id": "1",
-  "title": "Is ClickHouse faster than SnowFlake/Redshift/DuckDB etc?",
-  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. \nCurabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci ut diam condimentum, vel euismod erat placerat. In iaculis arcu eros, eget tempus orci facilisis id.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. "
-},{
-  "id": "2",
-  "title": "Can I use ClickHouse with Kafka/Airbyte/Amazon S3 etc?",
-  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. \nCurabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci ut diam condimentum, vel euismod erat placerat. In iaculis arcu eros, eget tempus orci facilisis id.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. "
-},{
-  "id": "3",
-  "title": "What are the deployment options for ClickHouse?",
-  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. \nCurabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci ut diam condimentum, vel euismod erat placerat. In iaculis arcu eros, eget tempus orci facilisis id.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. "
-},{
-  "id": "4",
-  "title": "How much does ClickHouse cost?",
-  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. \nCurabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci ut diam condimentum, vel euismod erat placerat. In iaculis arcu eros, eget tempus orci facilisis id.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. "
-},{
-  "id": "5",
-  "title": "Can I see the benchmarks?",
-  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. \nCurabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci ut diam condimentum, vel euismod erat placerat. In iaculis arcu eros, eget tempus orci facilisis id.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. "
-}]
+[
+  {
+    "id": "1",
+    "title": "Is ClickHouse faster than SnowFlake/Redshift/DuckDB etc?",
+    "content": "Depending on your use case, ClickHouse is faster than most traditional data warehouses. However, developers often use ClickHouse with their existing CDWH solutions to act as a “speed layer” to serve fast real-time queries when exceptional performance is required."
+  },
+  {
+    "id": "2",
+    "title": "Can I use ClickHouse with Kafka/Airbyte/Amazon S3 etc?",
+    "content": "ClickHouse supports many different integrations including most common databases, data warehouses, streaming databases, and object storage solutions. Please see [this link](https://clickhouse.com/docs/en/integrations) for the full list ."
+  },
+  {
+    "id": "3",
+    "title": "What are the deployment options for ClickHouse?",
+    "content": "ClickHouse can be deployed on your machine, on-premise, or on any cloud provider. The easiest way to deploy ClickHouse is to use [ClickHouse Cloud](https://clickhouse.cloud/signUp?loc=home-faqs)."
+  },
+  {
+    "id": "4",
+    "title": "How much does ClickHouse cost?",
+    "content": "Self-managed ClickHouse is dependent on the cost of your resources and headcount necessary to manage the ClickHouse deployment. For the most affordable way to run ClickHouse, use ClickHouse Cloud (link here), which starts at $50/month."
+  },
+  {
+    "id": "5",
+    "title": "Can I see the benchmarks?",
+    "content": "Yes! You can see the benchmarks at [benchmark.clickhouse.com](https://benchmark.clickhouse.com). We developed ClickBench to easily benchmark ClickHouse and other databases and data warehouses using an easily reproducible process."
+  }
+]

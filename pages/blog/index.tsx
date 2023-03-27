@@ -76,7 +76,9 @@ export default function BlogsPage({
 }: BlogProps) {
   return (
     <Layout footerData={footerData} seo={seo}>
-      <SuiTitle type='h1' className='pt-10 lg:pt-20 mb-10 lg:mb-16 mx-auto'>
+      <SuiTitle
+        type='h1'
+        className='pt-10 lg:pt-20 mb-10 lg:mb-16 mx-auto text-center'>
         {title}
       </SuiTitle>
       <CUILink

@@ -5,10 +5,11 @@ import { CUILink } from '../ClickUI'
 import { SuiTitle } from '../sui'
 import faqList from './faqList.json'
 import styles from './styles.module.scss'
+import ReactMarkdown from 'react-markdown'
 
 export default function FAQ() {
   return (
-    <div className='bg-shadow-element flex flex-col md:flex-row w-full px-4 2xl:px-0 pb-16 items-start md:items-center justify-center max-w-7xl mx-auto'>
+    <div className='bg-shadow-element flex flex-col md:flex-row w-full px-4 2xl:px-0 pb-16 items-start  justify-center max-w-7xl mx-auto'>
       <div className='py-10 max-w-screen-sm mr-auto'>
         <Image src='/faq-icon.svg' alt='FAQ Icon' width={72} height={72} />
         <SuiTitle type='h2' className='my-6'>
@@ -45,8 +46,8 @@ export default function FAQ() {
                   leave='transition duration-75 ease-out'
                   leaveFrom='transform scale-100 opacity-100'
                   leaveTo='transform scale-95 opacity-0'>
-                  <Disclosure.Panel className='transition-all pl-20 pr-4 pb-4 text-neutral-200'>
-                    {faq.content}
+                  <Disclosure.Panel className='transition-all pl-20 pr-4 pb-4 text-neutral-200 home-faqs'>
+                    <ReactMarkdown children={faq.content} />
                   </Disclosure.Panel>
                 </Transition>
               </>

@@ -145,43 +145,48 @@ function CareersFilter() {
       </div>
       <div className=''>
         <div className='mt-4'>
+          {filteredDepartments.every(([name, jobs]) => jobs.length === 0) && (
+            <h3>No results matching your search</h3>
+          )}
           {filteredDepartments.map(([name, jobs]: [string, JobType[]]) => (
-            <div
-              key={name}
-              className='grid grid-cols-1 border-b border-neutral-700 mb-16'>
-              <h3 className='font-inter text-xl font-bold mb-8'>{name}</h3>
-              {jobs.length === 0 && (
-                <SuiText size='base' weight='normal' color='secondary'>
-                  No results
-                </SuiText>
-              )}
-              {jobs.map((job: JobType, index: number) => (
+            <div>
+              {jobs.length > 0 && (
                 <div
-                  key={job.url}
-                  className='border-t border-neutral-700 py-6 hover:bg-neutral-725 '>
-                  <SuiLink
-                    href={job.url}
-                    className={`job-${index} md:flex items-center justify-between hover:no-underline`}>
-                    <div>
-                      <SuiText
-                        size='base'
-                        weight='normal'
-                        className='font-inter text-primary-300 mb-1'>
-                        {job.title}
-                      </SuiText>
-                      <SuiText size='base' weight='normal' color='secondary'>
-                        {job.location}
-                      </SuiText>
+                  key={name}
+                  className='grid grid-cols-1 border-b border-neutral-700 mb-16'>
+                  <h3 className='font-inter text-xl font-bold mb-8'>{name}</h3>
+                  {jobs.map((job: JobType, index: number) => (
+                    <div
+                      key={job.url}
+                      className='border-t border-neutral-700 py-6 hover:bg-neutral-725 '>
+                      <SuiLink
+                        href={job.url}
+                        className={`job-${index} md:flex items-center justify-between hover:no-underline`}>
+                        <div>
+                          <SuiText
+                            size='base'
+                            weight='normal'
+                            className='font-inter text-primary-300 mb-1'>
+                            {job.title}
+                          </SuiText>
+                          <SuiText
+                            size='base'
+                            weight='normal'
+                            color='secondary'>
+                            {job.location}
+                          </SuiText>
+                        </div>
+                        <div className='mt-4 md:mt-0 border border-primary-600 rounded py-2 px-6 font-semibold '>
+                          <span className='flex justify-center items-center gap-2'>
+                            Apply
+                            <ArrowRightIcon className='w-4' />
+                          </span>
+                        </div>
+                      </SuiLink>
                     </div>
-                    <div className='mt-4 md:mt-0 border border-primary-600 rounded py-2 px-6 font-semibold '>
-                      <span className='flex justify-center items-center gap-2'>
-                        Apply
-                        <ArrowRightIcon className='w-4' />
-                      </span>
-                    </div>
-                  </SuiLink>
+                  ))}
                 </div>
-              ))}
+              )}
             </div>
           ))}
         </div>

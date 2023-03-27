@@ -7,11 +7,13 @@ type PersonProps = {
   job?: string
   small?: boolean
   className?: string
+  personType?: string
 }
 
 export function Person(props: PersonProps) {
-  const { avatar, name, job, small, className = '' } = props
+  const { avatar, name, job, small, className, personType = '' } = props
 
+  console.log(props)
   return (
     <div
       className={`flex w-full flex-col items-center text-center md:max-w-xs ${className}`}>
@@ -27,14 +29,20 @@ export function Person(props: PersonProps) {
           />
         </div>
       )}
-      <SuiText size='sm' weight='bold' className='mb-3 !text-xl'>
-        {name}
-      </SuiText>
-      {job && (
-        <SuiText size='base' weight='normal' color='text-muted'>
-          {job}
+
+      <div
+        className={`text-left ${
+          personType === 'founder' && 'border-l-primary-300 border-l-4 pl-4'
+        }`}>
+        <SuiText size='base' weight='bold' className='mb-1'>
+          {name}
         </SuiText>
-      )}
+        {job && (
+          <SuiText size='base' weight='normal' color='text-muted'>
+            {job}
+          </SuiText>
+        )}
+      </div>
     </div>
   )
 }

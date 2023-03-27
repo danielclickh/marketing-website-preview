@@ -14,7 +14,7 @@ function DevelopersSection() {
       <div className='flex flex-col md:flex-row mb-16 gap-10'>
         <div className='w-full md:w-1/2 flex items-start'>
           <iframe
-            src='https://player.vimeo.com/video/756877867?h=c58e171729&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479'
+            src='https://www.youtube.com/embed/CVVp6N8Xeoc?rel=0'
             frameBorder='0'
             allow='autoplay; fullscreen; picture-in-picture'
             allowFullScreen
@@ -79,6 +79,7 @@ function DevelopersSection() {
                 type='secondary'
                 linkClass='w-full inline-grid'
                 href={developerOption.href}
+                target='_blank'
                 iconRight={<ArrowRightIcon height='16' />}>
                 {developerOption.btnText}
               </CUIButton>

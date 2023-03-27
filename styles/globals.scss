@@ -94,7 +94,7 @@ body {
 }
 
 .gradient_title {
-  @apply text-transparent bg-clip-text bg-gradient-to-b from-gradientTop to-gradientBottom;
+  @apply text-transparent bg-clip-text bg-gradient-to-b from-primary-200 to-primary-300;
 }
 
 .line-clamp-container p {
@@ -385,4 +385,12 @@ body {
     clip-path: polygon(50% 75%, 100% 50%, 100% 100%, 0 100%, 0 50%);
     content: "";
   }
+}
+
+.home-faqs {
+  a {@apply text-primary-300}
+}
+
+.show-copy-paste {
+  .codeblock-copy-btn {@apply block grid place-items-center;}
 }

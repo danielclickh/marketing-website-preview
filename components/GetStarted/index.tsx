@@ -21,27 +21,27 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             Install ClickHouse for MacOs, Linux and FreeBSD
           </div>
         </div>
-        <SuiCodeblock className='w-full md:w-full self-center overflow-hidden'>
+        <SuiCodeblock className='w-full md:w-full self-center overflow-hidden show-copy-paste'>
           <Markdown>{platforms[0].instructions}</Markdown>
         </SuiCodeblock>
         <div className='text-sm font-medium text-neutral-500 mt-4'>
           Or install for{' '}
           <CUILink
-            href='/clickhouse'
+            href='https://clickhouse.com/docs/en/integrations/sql-clients/clickhouse-client-local'
             target='_self'
             className='underline hover:text-neutral-0'>
             Windows
           </CUILink>
           ,{' '}
           <CUILink
-            href='/clickhouse'
+            href='https://hub.docker.com/r/clickhouse/clickhouse-server/'
             target='_self'
             className='underline hover:text-neutral-0'>
             Docker
           </CUILink>{' '}
           or see other{' '}
           <CUILink
-            href='/clickhouse'
+            href='https://clickhouse.com/docs/en/install'
             target='_self'
             className='underline hover:text-neutral-0'>
             install options.

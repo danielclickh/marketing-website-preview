@@ -1,26 +1,26 @@
 [
   {
     "img": "/images/homepage/developer-image.png",
-    "title": "Susan Wright - Uber",
+    "title": "Uber’s Log Analytics Platform",
     "description":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.",
+      "Learn why Uber migrated to ClickHouse from the ELK stack.",
     "btnText": "Learn More",
-    "href": "https://clickhouse.cloud"
+    "href": "https://www.uber.com/blog/logging/"
   },
   {
     "img": "/images/homepage/developer-image.png",
-    "title": "Susan Wright - Uber",
+    "title": "Cloudflare’s HTTP Analytics Infrastructure",
     "description":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.",
+      "Read about how Cloudflare uses ClickHouse to support 6M requests per second.",
     "btnText": "Learn More",
-    "href": "https://clickhouse.cloud"
+    "href": "https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/"
   },
   {
     "img": "/images/homepage/developer-image.png",
-    "title": "Susan Wright - Uber",
+    "title": "GitLab’s APM Datastore",
     "description":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.",
+      "Watch this YouTube video showing why GitLab chose ClickHouse over Timescale to power their APM infrastructure.",
     "btnText": "Learn More",
-    "href": "https://clickhouse.cloud"
+    "href": "https://www.youtube.com/watch?v=cMdQsxolcqc"
   }
 ]

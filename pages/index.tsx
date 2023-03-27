@@ -220,7 +220,6 @@ export default function HomePage({
           </div>
         </div>
       </div>
-
       <div className='flex w-full text-neutral-0'>
         <div className='flex section-container w-full mx-auto flex-col pt-20 text-center items-center'>
           <Image
@@ -335,7 +334,6 @@ export default function HomePage({
           </div>
         </div>
       </div>
-
       <HRSeparator className='my-24' />
       <div className='relative flex flex-col gap-y-28'>
         <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element'>
@@ -459,7 +457,6 @@ export default function HomePage({
           </div>
         </div>
       </div>
-
       <HRSeparator className='my-24' />
       <JoinCommunity />
       <DevelopersSection />

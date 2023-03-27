@@ -14,6 +14,7 @@ import Layout from '../../../components/Layout'
 import { GetStaticProps } from 'next'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import Image from 'next/image'
+import { ArrowRightIcon } from '@heroicons/react/solid'
 
 export const getStaticProps: GetStaticProps<OurStoryData> =
   async function getStaticProps() {
@@ -99,17 +100,22 @@ export default function OurStoryPage({
           </div>
         </div>
 
-        <div className='flex flex-col lg:flex-row-reverse section-container mx-auto max-w-7xl gap-16 mb-12 items-start'>
+        <div className='flex flex-col lg:flex-row-reverse section-container mx-auto max-w-7xl gap-16 my-32 items-start'>
           <div className='flex flex-col w-full lg:w-1/2'>
-            <StrapiImage {...imagePng} alt='ClickHouse around the world' />
+            <Image
+              src='/images/our-story/map-wrap.png'
+              height={488}
+              width={1025}
+              alt='ClickHouse around the world'
+            />
           </div>
           <div className='flex flex-col w-full lg:w-1/2'>
-            <SuiTitle type='h2' weight='bold' className='mb-8'>
+            <SuiTitle type='h2' weight='semibold' className='mb-8'>
               Mindfully distributed
             </SuiTitle>
             <div className='max-w-5xl'>
               <div className='whitespace-pre-wrap text-neutral-200'>
-                {`ClickHouse is proud to have employees in over 10 countries. We believe that diverse and distributed workplaces working inclusively are an essential advantage.  We work together to make collaboration a strength across timezone differences, languages, and cultures. 
+                {`ClickHouse is proud to have employees in over 10 countries. We believe that diverse and distributed workplaces working inclusively are an essential advantage.  We work together to make collaboration a strength across timezone differences, languages, and cultures.
 
 While we’re in different places, we all have the same goals, and we trust each other to do the work needed to achieve them. Being distributed isn’t a way of doing business. It’s a mindset which we leverage intentionally to build a truly global company.
 `}
@@ -128,7 +134,7 @@ While we’re in different places, we all have the same goals, and we trust each
             />
           </div>
           <div className='flex flex-col w-full lg:w-1/2'>
-            <SuiTitle type='h2' weight='bold' className='mb-8'>
+            <SuiTitle type='h2' weight='semibold' className='mb-8'>
               Our history
             </SuiTitle>
             <div className='max-w-5xl'>
@@ -171,6 +177,7 @@ While we’re in different places, we all have the same goals, and we trust each
                   name={founder.name}
                   job={founder.role}
                   className='!max-w-[232px] mx-auto'
+                  personType='founder'
                 />
               ))}
             </div>
@@ -206,24 +213,25 @@ While we’re in different places, we all have the same goals, and we trust each
           </div>
         </div>
         <div className='pb-16 section-container'>
-          <div className='bg-primary-300 text-neutral-0 w-full rounded-lg'>
+          <div className='bg-primary-300 text-neutral-0 w-full rounded-lg flip-selection py-16'>
             <div className='flex container mx-auto flex-col 2xl:px-0'>
-              <div className='flex flex-col text-center mx-auto pt-16'>
+              <div className='flex flex-col text-center mx-auto'>
                 <SuiTitle type='h2' color='text-default' className='mb-6 '>
-                  {hiring.title}
+                  Interested in joining our team?
                 </SuiTitle>
                 <div className='max-w-3xl'>
                   <SuiText size='base' color='text-default' weight='normal'>
-                    {hiring.description}
+                    If you are looking for a place to build something new, be an
+                    agent of change, and have an opportunity to have a
+                    significant impact on the company’s success, this is the
+                    place for you.
                   </SuiText>
                   {hiring.ctaButton && (
-                    <div className='flex justify-center pt-6 pb-14'>
-                      <SuiButton
-                        type='dark'
-                        path={hiring.ctaButton.href}
-                        target={hiring.ctaButton.target}>
-                        {hiring.ctaButton.text}
-                      </SuiButton>
+                    <div className='mt-4 text-white bg-black rounded py-2 px-6 font-base inline-block'>
+                      <span className='flex justify-center items-center gap-2'>
+                        View careers
+                        <ArrowRightIcon className='w-4' />
+                      </span>
                     </div>
                   )}
                 </div>
