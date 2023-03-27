@@ -1,9 +1,8 @@
-import { BaseStrapiImage } from '../../lib/api/strapi/types'
-import { StrapiImage } from '../StrapiElements'
+import Image from 'next/image'
 import { SuiText } from '../sui'
 
 type PersonProps = {
-  avatar: BaseStrapiImage
+  avatar: string
   name: string
   job?: string
   small?: boolean
@@ -19,9 +18,9 @@ export function Person(props: PersonProps) {
       {avatar && (
         <div
           className={`${small ? 'w-32 h-32' : 'w-40 h-40'} aspect-square mb-6`}>
-          <StrapiImage
+          <Image
             alt={name}
-            {...avatar}
+            src={avatar}
             width={small ? 130 : 160}
             height={small ? 130 : 160}
             className='h-full object-cover object-center rounded-full'

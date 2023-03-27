@@ -7,7 +7,8 @@ import {
 import { Person } from '../../../components/person_area'
 import { findOne } from '../../../lib/api/strapi'
 import { StrapiImage, StrapiPicture } from '../../../components/StrapiElements'
-import GetStarted from '../../../components/GetStarted'
+import founders from './founders.json'
+import investors from './investors.json'
 import { OurStoryData } from '../../../types/ourStory'
 import Layout from '../../../components/Layout'
 import { GetStaticProps } from 'next'
@@ -99,10 +100,10 @@ export default function OurStoryPage({
         </div>
 
         <div className='flex flex-col lg:flex-row-reverse section-container mx-auto max-w-7xl gap-16 mb-12 items-start'>
-          <div className='flex flex-col w-full lg:w-2/5'>
+          <div className='flex flex-col w-full lg:w-1/2'>
             <StrapiImage {...imagePng} alt='ClickHouse around the world' />
           </div>
-          <div className='flex flex-col w-full lg:w-3/5'>
+          <div className='flex flex-col w-full lg:w-1/2'>
             <SuiTitle type='h2' weight='bold' className='mb-8'>
               Mindfully distributed
             </SuiTitle>
@@ -116,22 +117,28 @@ While we’re in different places, we all have the same goals, and we trust each
             </div>
           </div>
         </div>
-        <div className='flex flex-col lg:flex-row section-container mx-auto max-w-7xl gap-16 mb-12 items-start'>
-          <div className='flex flex-col w-full lg:w-2/5'>
-            <StrapiImage {...imagePng} alt='ClickHouse around the world' />
+        <div className='flex flex-col lg:flex-row section-container mx-auto max-w-7xl gap-16 mb-12 items-center'>
+          <div className='flex flex-col w-full lg:w-1/2'>
+            <Image
+              src='/images/our-story/founders.png'
+              alt='Founders'
+              width={480}
+              height={320}
+              className='w-full'
+            />
           </div>
-          <div className='flex flex-col w-full lg:w-3/5'>
+          <div className='flex flex-col w-full lg:w-1/2'>
             <SuiTitle type='h2' weight='bold' className='mb-8'>
               Our history
             </SuiTitle>
             <div className='max-w-5xl'>
-              <div className='whitespace-pre-wrap text-neutral-200'>
+              <div className='whitespace-pre-wrap text-neutral-200 flex flex-col gap-10'>
                 {ourHistory.items.map((item) => (
                   <div
-                    className='flex flex-col md:flex-row items-center gap-y-10'
+                    className='flex flex-row items-start gap-10'
                     key={item.text}>
                     <div className='flex md:w-2/12 lg:w-1/12'>
-                      <div className='h-20 w-20 bg-noised text-neutral-0 rounded-full text-center items-center justify-center flex'>
+                      <div className='font-bold text-primary-300 rounded-full text-center items-center justify-center flex'>
                         <SuiTitle
                           type='h5'
                           className='!text-base'
@@ -140,10 +147,8 @@ While we’re in different places, we all have the same goals, and we trust each
                         </SuiTitle>
                       </div>
                     </div>
-                    <div className='flex md:w-8/12 text-center md:text-left'>
-                      <SuiText size='base' weight='normal'>
-                        {item.text}
-                      </SuiText>
+                    <div className='flex md:w-8/12 text-left text-neutral-200'>
+                      {item.text}
                     </div>
                   </div>
                 ))}
@@ -159,10 +164,10 @@ While we’re in different places, we all have the same goals, and we trust each
             </SuiTitle>
 
             <div className='flex flex-col gap-2 items-center sm:flex-row sm:items-start space-y-8 sm:space-y-0 justify-evenly'>
-              {team.founders.map((founder) => (
+              {founders.map((founder) => (
                 <Person
                   key={founder.name + founder.role}
-                  avatar={founder.profileImagePng}
+                  avatar={founder.imgSrc}
                   name={founder.name}
                   job={founder.role}
                   className='!max-w-[232px] mx-auto'
@@ -174,27 +179,25 @@ While we’re in different places, we all have the same goals, and we trust each
         <div className='w-full pt-16 pb-24'>
           <div className='flex container mx-auto flex-col section-container'>
             <SuiTitle type='h2' weight='bold' className='mb-14 text-center'>
-              {team.investorsTitle}
+              Our investors
             </SuiTitle>
 
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 flex-wrap justify-evenly gap-2 investor'>
-              {team.investors.map((investor) => (
+            <div className='grid grid-cols-1 min-[340px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 flex-wrap justify-evenly gap-2 investor'>
+              {investors.map((investor) => (
                 <Person
                   small
-                  key={investor.name + investor.role}
-                  avatar={investor.profileImagePng}
+                  key={investor.name}
+                  avatar={investor.imgSrc}
                   name={investor.name}
-                  job={investor.role}
                 />
               ))}
             </div>
 
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-20 gap-y-16 justify-evenly pt-12'>
-              {team.lightInvestorLogosPng.map((light, index) => (
-                <StrapiPicture
+            <div className='flex flex-wrap gap-x-20 gap-y-16 justify-evenly pt-12'>
+              {team.darkInvestorLogosPng.map((image, index) => (
+                <StrapiImage
                   key={`investors-${index}`}
-                  light={team.darkInvestorLogosPng[index]}
-                  dark={team.darkInvestorLogosPng[index]}
+                  {...image}
                   sizes='small'
                   className='h-10 w-auto mx-auto object-contain max-w-[min(250px,100%)]'
                 />
@@ -202,26 +205,28 @@ While we’re in different places, we all have the same goals, and we trust each
             </div>
           </div>
         </div>
-        <div className='bg-primary section-container text-neutral-0 w-full rounded-lg'>
-          <div className='flex container mx-auto flex-col 2xl:px-0'>
-            <div className='flex flex-col text-center mx-auto pt-16'>
-              <SuiTitle type='h2' color='text-default' className='mb-6 '>
-                {hiring.title}
-              </SuiTitle>
-              <div className='max-w-3xl'>
-                <SuiText size='base' color='text-default' weight='normal'>
-                  {hiring.description}
-                </SuiText>
-                {hiring.ctaButton && (
-                  <div className='flex justify-center pt-6 pb-14'>
-                    <SuiButton
-                      type='dark'
-                      path={hiring.ctaButton.href}
-                      target={hiring.ctaButton.target}>
-                      {hiring.ctaButton.text}
-                    </SuiButton>
-                  </div>
-                )}
+        <div className='pb-16 section-container'>
+          <div className='bg-primary text-neutral-0 w-full rounded-lg'>
+            <div className='flex container mx-auto flex-col 2xl:px-0'>
+              <div className='flex flex-col text-center mx-auto pt-16'>
+                <SuiTitle type='h2' color='text-default' className='mb-6 '>
+                  {hiring.title}
+                </SuiTitle>
+                <div className='max-w-3xl'>
+                  <SuiText size='base' color='text-default' weight='normal'>
+                    {hiring.description}
+                  </SuiText>
+                  {hiring.ctaButton && (
+                    <div className='flex justify-center pt-6 pb-14'>
+                      <SuiButton
+                        type='dark'
+                        path={hiring.ctaButton.href}
+                        target={hiring.ctaButton.target}>
+                        {hiring.ctaButton.text}
+                      </SuiButton>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
