@@ -206,7 +206,7 @@ While we’re in different places, we all have the same goals, and we trust each
           </div>
         </div>
         <div className='pb-16 section-container'>
-          <div className='bg-primary text-neutral-0 w-full rounded-lg'>
+          <div className='bg-primary-300 text-neutral-0 w-full rounded-lg'>
             <div className='flex container mx-auto flex-col 2xl:px-0'>
               <div className='flex flex-col text-center mx-auto pt-16'>
                 <SuiTitle type='h2' color='text-default' className='mb-6 '>
