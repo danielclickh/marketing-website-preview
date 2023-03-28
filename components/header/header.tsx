@@ -223,7 +223,7 @@ export default function Header() {
       </div>
       {isOpen && (
         <div
-          className='flex flex-col justify-between bg-menu-options divide-y divide-neutral-900/11 w-full backdrop-blur-[10px] z-10'
+          className='flex flex-col justify-between bg-menu-options divide-y divide-neutral-900/11 w-full backdrop-blur-[10px] z-30'
           ref={floating}
           style={{
             position: strategy,
@@ -241,7 +241,7 @@ export default function Header() {
                       <Disclosure as='div'>
                         {({ open }) => (
                           <>
-                            <Disclosure.Button className='flex w-full justify-between rounded-lg text-left text-sm font-medium focus:outline-none focus-visible:ring-opacity-75 px-4 sm:px-8 mb-2'>
+                            <Disclosure.Button className='flex w-full justify-between rounded-lg text-left font-medium focus:outline-none focus-visible:ring-opacity-75 px-4 sm:px-8 py-1'>
                               <span>{menuItem.name}</span>
                               <ChevronRightIcon
                                 className={`${
@@ -249,7 +249,7 @@ export default function Header() {
                                 } h-5 w-5`}
                               />
                             </Disclosure.Button>
-                            <Disclosure.Panel className='text-sm text-gray-500 mb-2'>
+                            <Disclosure.Panel className='text-sm text-neutral-400 mb-2'>
                               <MobileMenuItem
                                 {...menuItem}
                                 close={() => setIsOpen(false)}
@@ -270,7 +270,7 @@ export default function Header() {
                           label: menuItem.name,
                           category: 'website-nav'
                         }}
-                        className='menu-item text-sm hover:no-underline font-medium px-4 sm:px-8 mb-2'>
+                        className='menu-item hover:no-underline font-medium px-4 sm:px-8 py-1'>
                         {menuItem.name}
                       </CUILink>
                     )

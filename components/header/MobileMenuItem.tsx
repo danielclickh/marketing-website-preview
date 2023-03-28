@@ -50,7 +50,7 @@ function MobileMenuItem({
                       label: item.name,
                       category: 'website-nav'
                     }}
-                    className='flex items-start hover:no-underline max-w-md'>
+                    className='flex items-start hover:no-underline max-w-md mb-2'>
                     <div
                       className={styles.menuItem}
                       data-icon={item.icon ? 'true' : 'false'}>
