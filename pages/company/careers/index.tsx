@@ -95,7 +95,7 @@ export default function CareersPage({
     <Layout footerData={footerData} seo={seo}>
       <div className='pt-10'>
         <div className='relative pt-10'>
-          <div className='bg-primary-300 absolute inset-0 transform -skew-y-2 lg:max-h-96  max-w-7xl mx-auto'></div>
+          <div className='bg-primary-300 absolute inset-0 transform -skew-y-2 lg:max-h-96 max-w-7xl rounded-md mx-auto'></div>
           <div className='relative z-10'>
             <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
               <div className='flex flex-col text-center mx-auto flip-selection'>
@@ -155,7 +155,7 @@ export default function CareersPage({
         </div>
       </div>
       <div className='w-full border-t border-neutral-725 max-w-screen-md px-7 mx-auto my-16'></div>
-      <div className='w-full pb-12 px-8'>
+      <div className='w-full px-8'>
         <div className='flex flex-col bg-shadow-element yellow-shadow max-w-7xl mx-auto'>
           <h2 className='text-3xl font-semibold font-inter mb-6'>
             Job openings
