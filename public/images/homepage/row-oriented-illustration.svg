@@ -215,7 +215,7 @@
     <rect x="435.333" y="107" width="20.9699" height="81" rx="3" fill="#FCFF74" />
     <rect x="465.29" y="127.932" width="20.9699" height="58" rx="3" fill="#FCFF74" />
     <rect x="495.247" y="159" width="20.9699" height="29" rx="3" fill="#FCFF74" />
-    <animate id="barChart" attributeName="opacity" attributeType="XML" dur="1s" values="1; 1; 0" keyTimes="0; 0.99; 1" begin="1.617s;lineChart.end+2s" />
+    <animate id="barChart" attributeName="opacity" attributeType="XML" dur="1s" values="1; 1; 0" keyTimes="0; 0.99; 1" begin="1.617s;lineChart.end+1.617s" />
   </g>
    <!-- Pie Chart -->
   <g opacity="0" transform="matrix(1, 0, 0, 1, 412.135132, 89.503609)">
@@ -228,16 +228,16 @@
       <path d="M106.673 32.0775L91.3507 91.9928L47.1239 48.7653L106.673 32.0775Z" fill="#FF7575"/>
     </g>
     <ellipse cx="48.907" cy="49" rx="28.0402" ry="28" fill="#211D1B"/>
-    <animate id="pieChart" attributeName="opacity" attributeType="XML" dur="1s" values="1; 1; 0" keyTimes="0; 0.99; 1" begin="barChart.end+2s" />
+    <animate id="pieChart" attributeName="opacity" attributeType="XML" dur="1s" values="1; 1; 0" keyTimes="0; 0.99; 1" begin="barChart.end+1.617s" />
   </g>
   <!-- Line Chart -->
   <g opacity="0" transform="matrix(1, 0, 0, 1, 413.511292, 87.500008)">
     <path d="M0 36.3714L18.8 23L29.2 41L48 32.2571L70 41L98 26.6" stroke="#FCFF74" stroke-width="5"/>
     <path d="M0 70.3714L18.8 57L29.2 75L48 66.2571L70 75L98 60.6" stroke="#FF7575" stroke-width="5"/>
-    <animate id="lineChart" attributeName="opacity" attributeType="XML" dur="1s" values="1; 1; 0" keyTimes="0; 0.99; 1" begin="pieChart.end+2s" />
+    <animate id="lineChart" attributeName="opacity" attributeType="XML" dur="1s" values="1; 1; 0" keyTimes="0; 0.99; 1" begin="pieChart.end+1.617s" />
   </g>
 <rect x="36.7914" y="67.932" width="336.517" height="2" rx="2" fill="#FF7575">
-    <animate id="lineNav" attributeName="y" attributeType="XML" dur="1.417s" to="223.932" begin="0s;lineNav.end+1s" />
+    <animate id="lineNav" attributeName="y" attributeType="XML" dur="1.417s" to="223.932" begin="0s;barChart.end;lineChart.end;pieChart.end" />
     <animate attributeName="opacity" attributeType="XML" dur="1s" values="0; 0; 1" keyTimes="0; 0.99; 1" begin="lineNav.end" />
 </rect>
 
