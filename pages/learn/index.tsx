@@ -3,17 +3,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { GetStaticProps } from 'next'
+import Tilt from 'react-parallax-tilt'
 
 import {
   CalendarIcon,
   ClockIcon,
   LocationMarkerIcon
 } from '@heroicons/react/outline'
-import { ArrowRightIcon } from '@heroicons/react/solid'
 
 import Layout from '../../components/Layout'
 import { StrapiImage } from '../../components/StrapiElements'
-import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
+import { SuiText, SuiTitle } from '../../components/sui'
 import { findAll } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { EventType } from '../../types/events'
@@ -166,10 +166,10 @@ function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
         <div className='grid grid-cols-1 md:grid-cols-3 gap-12 mx-auto pb-10 px-8 md:px-8'>
           {popularCourses.map((course) => (
             <Link
-              href={`https://learn.clickhouse.com/visitor_catalog_class/show/${course.url}`}
               key={course.title}
+              href={`https://learn.clickhouse.com/visitor_catalog_class/show/${course.url}`}
               className='hover:no-underline transition ease-in-out'>
-              <CUICard className='grid p-8 bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat w-full min-h-[22.5rem]'>
+              <CUICard className='grid p-8 group bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat w-full min-h-[22.5rem]'>
                 <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
                   <Image
                     src={course.icon}
@@ -181,10 +181,10 @@ function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
                     <div className='text-xl leading-tight cursor-pointer font-semibold'>
                       {course.title}
                     </div>
-                    <div className='text-sm text-neutral-200 flex gap-2 pb-4'>
+                    <div className='text-sm text-neutral-200 flex gap-2 pb-4 group-hover:text-neutral-0'>
                       <ClockIcon width={12} /> {course.time}
                     </div>
-                    <div className='text-neutral-200 text-center text-sm'>
+                    <div className='text-neutral-200 text-center text-sm group-hover:text-neutral-0'>
                       {course.description}
                     </div>
                   </div>
@@ -201,8 +201,8 @@ function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
         </CUIButton>
       </div>
 
-      <div className='clip-inverted-triangle-top flex flex-col items-center text-center px-16 lg:px-32 gap-x-16 lg:gap-x-20 gap-y-12'>
-        <div className='pt-40 relative'>
+      <div className='clip-inverted-triangle-top flex flex-col items-center text-center lg:px-32 gap-x-16 lg:gap-x-20 gap-y-12'>
+        <div className='flex-col pt-40 relative px-8'>
           <SuiTitle type='h2' color='text-default'>
             Learning paths
           </SuiTitle>
@@ -210,17 +210,17 @@ function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
             size='base'
             weight='normal'
             color='text-default'
-            className='mt-6 max-w-screen-sm'>
+            className='mt-6 max-w-screen-sm mx-auto'>
             Become a subject matter expert through our recommended series of
             courses that will best help you build knowledge progressively.
           </SuiText>
-          <div className='flex mt-8 pb-24 gap-16 flex-col sm:grid sm:grid-cols-2 max-w-screen-lg w-auto'>
+          <div className='flex mt-8 pb-24 gap-12 md:gap-16 flex-col sm:grid sm:grid-cols-1 md:grid-cols-2 w-full'>
             {learningCourses.map((course) => (
               <Link
                 key={course.title}
                 href={`https://learn.clickhouse.com/visitor_catalog_class/show/${course.url}`}
-                className='hover:no-underline bg-opacity-90 bg-neutral-750 transition ease-in-out rounded-lg'>
-                <CUICard className='p-8 bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat w-full max-w-[22.5rem]'>
+                className='hover:no-underline group bg-opacity-90 bg-neutral-750 transition ease-in-out rounded-lg'>
+                <CUICard className='p-8 bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat w-full md:max-w-[22.5rem]'>
                   <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
                     <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-4'>
                       <div className='text-xl leading-tight cursor-pointer font-semibold px-4'>
@@ -229,7 +229,7 @@ function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
                       <div className='text-sm text-neutral-200 flex gap-2 pb-4'>
                         <ClockIcon width={12} /> {course.time}
                       </div>
-                      <div className='text-neutral-200 text-center text-sm'>
+                      <div className='text-neutral-200 text-center text-sm group-hover:text-neutral-0'>
                         {course.description}
                       </div>
                     </div>
@@ -279,7 +279,7 @@ function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
         </CUIButton>
       </div>
       <HRSeparator className='my-24' />
-      <div className='container mx-auto max-w-screen-lg px-4'>
+      <div className='container mx-auto max-w-screen-xl px-8'>
         <Image
           src='/learn/icon_video.svg'
           alt='Live ClickHouse events icon'
@@ -306,13 +306,19 @@ function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
           hosted by us.
         </SuiText>
 
-        <div className='events-container flex flex-col md:flex-row gap-16 mx-auto'>
+        <div className='flex flex-col md:flex-row mx-auto gap-12 md:gap-16 justify-center w-full md:w-auto '>
           {upcomingEvents.map((event: EventType) => (
             <Link
               href={`/company/events/${event.slug}`}
-              className='flex flex-col justify-between h-auto mx-auto md:w-1/3 rounded-lg bg-neutral-900/70  shadow-card'
+              className='flex hover:no-underline flex-col justify-between w-full h-auto rounded-lg bg-neutral-900/70 border border-neutral-700/80 shadow-card md:max-w-[22.5rem]'
               key={event.title}>
-              <div>
+              <Tilt
+                tiltEnable={false}
+                glareEnable={true}
+                glareMaxOpacity={0.4}
+                glareColor='rgba(251, 255, 70, 0.08)'
+                glarePosition='all'
+                className='h-full'>
                 <div>
                   {event.thumbnailPng ? (
                     <StrapiImage
@@ -320,7 +326,7 @@ function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
                       alt='image'
                       width={342}
                       height={196}
-                      className='w-full h-48 object-cover object-center'
+                      className='w-full h-48 object-cover object-center rounded-t-lg'
                     />
                   ) : (
                     <Image
@@ -331,36 +337,39 @@ function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
                       className='w-full h-48 object-cover object-center'
                     />
                   )}
-                </div>
-                <div className='p-4'>
-                  <p className='font-inconsolata text-primary-300'>
-                    {event.category}
-                  </p>
-                  <SuiText
-                    size='lg'
-                    weight='bold'
-                    className='mt-2 mb-4 md:min-h-[3.5rem]'>
-                    {event.title}
-                  </SuiText>
 
-                  <SuiText
-                    size='sm'
-                    color='secondary'
-                    className='flex flex-col gap-2.5 mb-6'>
-                    {event.localDatetime && (
+                  <div className='p-4'>
+                    <p className='font-inconsolata text-primary-300'>
+                      {event.category}
+                    </p>
+                    <SuiText
+                      size='lg'
+                      weight='bold'
+                      className='mt-2 mb-4 md:min-h-[3.5rem]'>
+                      {event.title}
+                    </SuiText>
+
+                    <SuiText
+                      size='sm'
+                      color='secondary'
+                      className='flex flex-col gap-2.5 mb-6'>
+                      {event.localDatetime && (
+                        <div className='flex gap-2'>
+                          <CalendarIcon width='20' height='20' />
+                          {new Date(event.localDatetime).toDateString()}
+                        </div>
+                      )}
+
                       <div className='flex gap-2'>
-                        <CalendarIcon width='20' height='20' />
-                        {new Date(event.localDatetime).toDateString()}
+                        <LocationMarkerIcon width='20' height='20' />
+                        {[event.location.city, event.location.country].join(
+                          ', '
+                        )}
                       </div>
-                    )}
-
-                    <div className='flex gap-2'>
-                      <LocationMarkerIcon width='20' height='20' />
-                      {[event.location.city, event.location.country].join(', ')}
-                    </div>
-                  </SuiText>
+                    </SuiText>
+                  </div>
                 </div>
-              </div>
+              </Tilt>
             </Link>
           ))}
         </div>

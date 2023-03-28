@@ -2,7 +2,7 @@ import SocialIcon from '../SocialIcon'
 
 function FollowUs() {
   return (
-    <div className='bg-primary-300 text-neutral flex flex-col items-center justify-center mt-20'>
+    <div className='bg-primary-300 text-neutral flex flex-col items-center justify-center mt-24'>
       <div className='mt-8 mb-4 font-bold'>Follow us</div>
       <div className='flex flex-wrap gap-6 mb-12 justify-center'>
         <SocialIcon
