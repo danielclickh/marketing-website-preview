@@ -36,11 +36,11 @@
 
 .arrow {
   @apply absolute hidden bg-neutral-725 border-t border-l border-neutral-700/30;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   transform: translateY(-100%) rotate(45deg);
   transition: translateY 0.3s 0.3s, left 0.3s, display 0.5s;
-  border-radius: 4px 0px;
+  border-radius: 2px 0px;
 }
 
 .navList > li {

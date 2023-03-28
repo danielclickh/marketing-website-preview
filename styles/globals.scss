@@ -235,7 +235,7 @@ body {
   }
 
   blockquote {
-    @apply box-border border-l-primary-300 border-l-4 pl-4 text-c4 font-semibold text-xl mb-9 text-neutral-0;
+    @apply box-border border-l-primary-300 border-l-4 pl-4 font-semibold text-xl mb-9 text-neutral-0;
   }
 
   img {
@@ -263,7 +263,7 @@ body {
       @apply text-inherit underline hover:text-c6-link;
     }
     &.anchor-c6 a {
-      @apply hover:text-c6;
+      @apply hover:text-primary-300;
     }
   }
 
