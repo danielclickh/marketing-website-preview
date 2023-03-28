@@ -183,7 +183,7 @@ export default function Header() {
                   />
                 </svg>
 
-                <span className='text-xs font-medium leading-none'>27.6k</span>
+                <span className='text-sm font-medium leading-none'>27.6k</span>
               </div>
             </CUILink>
             <CUILink
@@ -198,6 +198,7 @@ export default function Header() {
             </CUILink>
             <CUIButton
               type='primary'
+              weight='medium'
               href='https://clickhouse.cloud/signUp'
               segmentEvent={{
                 label: 'Get Started',
