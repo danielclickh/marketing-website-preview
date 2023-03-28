@@ -2,8 +2,8 @@ import React from 'react'
 import CloudProviders from '../../components/CloudProviders'
 import Markdown from '../../components/Markdown'
 import PricingOptions from '../../components/PricingOptions'
-import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
-import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
+import { StrapiImage } from '../../components/StrapiElements'
+import { SuiText, SuiTitle } from '../../components/sui'
 import { findAll, findOne } from '../../lib/api/strapi'
 import {
   PricingData,
@@ -16,6 +16,8 @@ import styles from './Pricing.module.scss'
 import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { CUIButton } from '../../components/ClickUI'
+import HRSeparator from '../../components/HRSeparator'
 
 export const getStaticProps: GetStaticProps<PricingPageProps> =
   async function getStaticProps() {
@@ -109,98 +111,85 @@ function PricingPage({
   }))
   return (
     <Layout footerData={footerData} seo={seo}>
-      <div className='pricing text-neutral-0 h-full md:pb-20'>
-        <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 mx-auto py-20'>
-          {hero && (
-            <div className='hero'>
-              <div className='flex flex-col items-center'>
-                <SuiTitle type='h1' className='mb-5'>
-                  {hero.title}
-                </SuiTitle>
-                <SuiText
-                  size='lg'
-                  weight='normal'
-                  color='secondary'
-                  className='description'>
-                  {hero.description}
-                </SuiText>
-                {meteredPricing && (
-                  <div>
-                    {regionList.length > 0 && (
-                      <PricingOptions
-                        regionList={regionList}
-                        pricingPlans={pricingPlans}>
-                        <CloudProviders cloudProviders={cloudProviders} />
-                      </PricingOptions>
-                    )}
-                    <div className='pricing_footer_note mx-auto mt-4 text-xs text-center max-w-screen-sm text-neutral-300'>
-                      <Markdown>{meteredPricing.footerNote}</Markdown>
-                    </div>
-                    <hr className='max-w-xs mx-auto my-8 border-b bg-transparent border-c4/10' />
-                    <Markdown className={styles.richTextLink}>
-                      {hero.openSourceLink}
-                    </Markdown>
+      <div className='pricing text-neutral-0 h-full'>
+        <div className=' bg-grid bg-[length:100%_60%]'>
+          <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 mx-auto py-20'>
+            {hero && (
+              <div className='hero'>
+                <div className='flex flex-col items-center'>
+                  <SuiTitle type='h1'>{hero.title}</SuiTitle>
+                  <div className='text-neutral-200 mt-6 mb-8'>
+                    {hero.description}
                   </div>
-                )}
+                  <CloudProviders cloudProviders={cloudProviders} />
+                  {meteredPricing && (
+                    <div>
+                      {regionList.length > 0 && (
+                        <PricingOptions
+                          regionList={regionList}
+                          pricingPlans={pricingPlans}></PricingOptions>
+                      )}
+                      <div className='pricing_footer_note mx-auto mt-8 text-center max-w-screen-sm'>
+                        <Markdown className={styles.richTextLink}>
+                          {meteredPricing.footerNote}
+                        </Markdown>
+                      </div>
+                      <HRSeparator className='my-24 max-w-[384px]' />
+                      <Markdown className={styles.richTextLink}>
+                        {hero.openSourceLink}
+                      </Markdown>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+          {philosophy && (
+            <div className='philosophy text-neutral-900 bg-primary-300'>
+              <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 py-16 mx-auto'>
+                <SuiTitle
+                  type='h2'
+                  className='text-neutral-900 text-center pb-16'>
+                  {philosophy.title}
+                </SuiTitle>
+                <div className='columns_wrapper flex flex-col lg:flex-row lg:items-start lg:justify-center gap-x-36 gap-y-16'>
+                  {philosophy.columns.map((column) => (
+                    <div
+                      className='column max-w-sm mx-auto lg:mx-0'
+                      key={column.header}>
+                      <div className='header_row flex flex-col gap-2 items-center mb-6'>
+                        <StrapiImage
+                          {...column.image}
+                          alt='payment method'
+                          className='image w-16 h-16'
+                        />
+                        <div className='column_title text-xl font-bold'>
+                          {column.header}
+                        </div>
+                      </div>
+                      <Markdown className='!text-neutral-800 text-center'>
+                        {column.content}
+                      </Markdown>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}
         </div>
-        {philosophy && (
-          <div className='philosophy text-neutral-0'>
-            <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 py-28 mx-auto'>
-              <h2 className='title text-center font-bold mb-16 text-4xl'>
-                {philosophy.title}
-              </h2>
-              <div className='columns_wrapper flex flex-col lg:flex-row lg:items-start lg:justify-center gap-x-36 gap-y-16'>
-                {philosophy.columns.map((column) => (
-                  <div
-                    className='column max-w-sm mx-auto lg:mx-0'
-                    key={column.header}>
-                    <div className='header_row flex gap-6 items-center mb-12'>
-                      <StrapiImage
-                        {...column.image}
-                        alt='payment method'
-                        className='image w-16 h-16'
-                      />
-                      <div className='column_title text-3xl font-bold'>
-                        {column.header}
-                      </div>
-                    </div>
-                    <div className='content'>
-                      <Markdown>{column.content}</Markdown>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
         {contactSection && (
-          <div className='md:mt-20 mx-auto md:w-10/12 max-w-7xl'>
-            <div className='container mx-auto gap-x-4 flex md:rounded-lg py-11 px-6 md:pl-20 md:pr-0 md:py-16 bg-primary w-full max-w-screen-lg text-neutral-900 items-stretch relative'>
-              <div className='w-full'>
-                <SuiTitle type='h2'>{contactSection.title}</SuiTitle>
-                <SuiText
-                  size='base'
-                  weight='medium'
-                  className='my-8 max-w-screen-sm'>
-                  {contactSection.subtitle}
-                </SuiText>
-                <SuiButton
-                  type='custom'
-                  path={contactSection.contactButton.link}
-                  className='bg-c5-light text-neutral-0'>
-                  {contactSection.contactButton.text}
-                </SuiButton>
+          <div className='section-container my-24'>
+            <div className='px-4 mx-auto gap-x-4 flex flex-col items-center rounded-xl py-10 md:py-16 bg-neutral-750/50 border border-neutral-725/80 w-full text-neutral-0 relative'>
+              <SuiTitle type='h2'>{contactSection.title}</SuiTitle>
+              <div className='text-neutral-200 mt-3 mb-6 text-center max-w-screen-md'>
+                {contactSection.subtitle}
               </div>
-              <div className='hidden md:block w-72 h-52 relative'>
-                <StrapiPicture
-                  light={contactSection.excludeImageDark}
-                  dark={contactSection.excludeImageDark}
-                  className='w-60 h-60 bg-cover absolute -right-9 top-0'
-                />
-              </div>
+              <CUIButton
+                type='primary'
+                weight='medium'
+                href={contactSection.contactButton.link}>
+                {contactSection.contactButton.text}
+              </CUIButton>
             </div>
           </div>
         )}

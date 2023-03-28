@@ -11,23 +11,16 @@ import { PricingPlanData, RegionPricingWithIcon } from '../../types/pricing'
 
 function PricingOptions({
   regionList,
-  pricingPlans,
-  children
+  pricingPlans
 }: {
   regionList: RegionPricingWithIcon[]
   pricingPlans: PricingPlanData[]
-  children: ReactNode
 }) {
   const totalLength = pricingPlans.length
   return (
     <PricingContextProvider value={regionList[0]}>
-      <div className='center_content'>
-        <div className='controls_row flex flex-col md:flex-row items-center justify-center gap-x-20 gap-y-8 mb-16 mt-8'>
-          {children}
-          <div className='seed_select_wrapper w-80'>
-            <PricingSelector regionList={regionList} />
-          </div>
-        </div>
+      <div className='center_content mb-24 max-w-[344px] mx-auto'>
+        <PricingSelector regionList={regionList} />
       </div>
 
       {pricingPlans.length > 0 && (
@@ -38,10 +31,10 @@ function PricingOptions({
               key={`plan-${plan.name}`}>
               <div className='card_content flex flex-col h-full justify-between'>
                 <div className='border-b mb-6'>
-                  <h2 className='text-center text-2xl font-bold mb-1'>
+                  <h2 className='text-center text-2.75xl font-semibold mb-1'>
                     {plan.name}
                   </h2>
-                  <div className='text-center text-sm md:h-16 xl:h-auto mb-4 text-normal'>
+                  <div className='text-center text-sm md:h-16 xl:h-auto mb-4 text-normal text-neutral-300'>
                     {plan.description}
                   </div>
                   <PlanPricing isFirst={index === 0} text={plan.pricingMain} />
@@ -54,18 +47,22 @@ function PricingOptions({
                         key={`plan-bullet-${planIndex}`}>
                         {item.isBulleted && <CheckIcon className='w-4 h-4' />}
                         <div className='item_text'>
-                          <Markdown>{item.description}</Markdown>
+                          <Markdown className=' !text-neutral-0'>
+                            {item.description}
+                          </Markdown>
                         </div>
                       </div>
                     ))}
                     {plan.items_disabled.map(
                       (itemDisabled, planIndex: number) => (
                         <div
-                          className='row_not_included flex items-center gap-4 text-sm justify-start text-neutral-0/30'
+                          className='row_not_included flex items-center gap-4 text-sm justify-start text-neutral-300'
                           key={`plan-disabled-bullet-${planIndex}`}>
                           <MinusIcon className='w-4 h-4' />
                           <div className='item_text'>
-                            <Markdown>{itemDisabled.description}</Markdown>
+                            <Markdown className='!text-neutral-300'>
+                              {itemDisabled.description}
+                            </Markdown>
                           </div>
                         </div>
                       )

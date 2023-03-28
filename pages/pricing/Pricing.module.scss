@@ -1,8 +1,8 @@
 .richTextLink {
-  @apply text-c4 text-center;
+  @apply text-neutral-200 text-center text-sm;
 
   :global a {
-    @apply text-neutral-0 #{!important};
+    @apply text-primary-300 #{!important};
 
     strong {
       @apply font-semibold;
