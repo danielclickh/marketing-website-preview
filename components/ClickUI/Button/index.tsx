@@ -25,7 +25,7 @@ function Button({
   disabled,
   segmentEvent,
   onClick,
-  weight = 'normal',
+  weight = 'medium',
   children,
   ...props
 }: ButtonProps) {
