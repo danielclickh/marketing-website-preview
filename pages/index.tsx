@@ -146,7 +146,7 @@ export default function HomePage({
               <div className='mx-auto flex flex-col items-center max-w-md'>
                 <div className='leading-normal text-neutral-200 text-center my-8'>
                   ClickHouse is the fastest open-source data warehouse for low
-                  latency apps and analytics
+                  latency apps and analytics.
                 </div>
                 <div className='flex flex-col md:flex-row gap-6 w-full justify-center items-center'>
                   <CUIButton

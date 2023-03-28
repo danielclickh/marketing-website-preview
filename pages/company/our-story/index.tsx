@@ -80,7 +80,7 @@ export default function OurStoryPage({
                   popular open-source column-oriented database management system
                   which allows users to generate analytical reports using SQL
                   queries in real-time. We understand that data grows in real
-                  time and ee believe that results should be fast,
+                  time and we believe that results should be fast,
                   <br />
                   <span className='tilted tilted-yellow'>
                     <span className='tilted-content'>very fast</span>
