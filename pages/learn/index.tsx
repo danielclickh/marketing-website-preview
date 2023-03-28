@@ -202,7 +202,7 @@ function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
       </div>
 
       <div className='clip-inverted-triangle-top flex flex-col items-center text-center lg:px-32 gap-x-16 lg:gap-x-20 gap-y-12'>
-        <div className='flex-col pt-40 relative px-8'>
+        <div className='flex-col pt-24 md:pt-40 relative px-8'>
           <SuiTitle type='h2' color='text-default'>
             Learning paths
           </SuiTitle>

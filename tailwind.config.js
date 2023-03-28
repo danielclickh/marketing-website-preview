@@ -192,7 +192,8 @@ module.exports = {
         'click-twitter': '0px 4px 48px rgba(250, 255, 72, 0.2)',
         'footer-line': '0px -1px 1px #000000',
         codeblock:
-          '0px 4px 4px rgba(0, 0, 0, 0.06), inset 0px 4px 25px rgba(0, 0, 0, 0.14)'
+          '0px 4px 4px rgba(0, 0, 0, 0.06), inset 0px 4px 25px rgba(0, 0, 0, 0.14)',
+        header_bottom: 'inset 0px -1px 0px rgba(78, 78, 78, 0.25);'
       },
       backgroundSize: {
         default_size: '0%, 100%',
@@ -208,7 +209,7 @@ module.exports = {
         'home-grid':
           'linear-gradient(117.08deg, rgba(0, 0, 0, 0) 14.55%, rgba(22, 22, 0, 0.167461) 34.15%, rgba(47, 47, 47, 0.22751) 40.54%, rgba(22, 22, 0, 0.611327) 46.65%, #161600 95.98%), url("/bg-grid.png");',
         'speed-lines': 'url("/speed-lines.svg")',
-        'body-image': 'linear-gradient(255.48deg, #292924 1.95%, #0F0F0F 100%)',
+        'body-image': 'linear-gradient(264.48deg, #292924 1.95%, #0F0F0F 100%)',
         'menu-options':
           'linear-gradient(255.48deg, rgba(41, 41, 36, 0.95) 1.95%, rgba(15, 15, 15, 0.95) 100%)'
       },
