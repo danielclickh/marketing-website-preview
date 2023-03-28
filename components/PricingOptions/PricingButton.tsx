@@ -1,5 +1,5 @@
 import React from 'react'
-import { SuiButton } from '../sui/client'
+import { CUIButton } from '../ClickUI'
 import { usePricing } from './PricingContext'
 
 interface Props {
@@ -14,34 +14,37 @@ function PricingButton({ isFirst, isLast, path, btnText }: Props) {
 
   if (!isFirst) {
     return (
-      <SuiButton
-        path={path}
+      <CUIButton
+        href={path}
+        weight='medium'
         className='w-full stroked_button_wrapper button_wrapper'
         type={isLast ? 'primary' : 'secondary'}>
         {btnText}
-      </SuiButton>
+      </CUIButton>
     )
   }
 
   if (selectedRegion?.hasDevService) {
     return (
-      <SuiButton
-        path={path}
+      <CUIButton
+        href={path}
+        weight='medium'
         className='w-full stroked_button_wrapper button_wrapper'
         type='primary'>
         {btnText}
-      </SuiButton>
+      </CUIButton>
     )
   }
 
   return (
-    <SuiButton
+    <CUIButton
       type='secondary'
-      className='w-full stroked_button_wrapper button_wrapper disabled_button'
-      path={path}
+      weight='medium'
+      className='w-full stroked_button_wrapper button_wrapper disabled_button !text-primary-300'
+      href={path}
       disabled>
       Coming soon
-    </SuiButton>
+    </CUIButton>
   )
 }
 

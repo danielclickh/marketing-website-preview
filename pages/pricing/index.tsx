@@ -113,7 +113,7 @@ function PricingPage({
     <Layout footerData={footerData} seo={seo}>
       <div className='pricing text-neutral-0 h-full'>
         <div className=' bg-grid bg-[length:100%_60%]'>
-          <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 mx-auto py-20'>
+          <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 mx-auto pt-20'>
             {hero && (
               <div className='hero'>
                 <div className='flex flex-col items-center'>
@@ -134,15 +134,17 @@ function PricingPage({
                           {meteredPricing.footerNote}
                         </Markdown>
                       </div>
-                      <HRSeparator className='my-24 max-w-[384px]' />
-                      <Markdown className={styles.richTextLink}>
-                        {hero.openSourceLink}
-                      </Markdown>
                     </div>
                   )}
                 </div>
               </div>
             )}
+          </div>
+          <div className='clip-inverted-triangle pt-10 pb-60'>
+            <HRSeparator className='pb-10 max-w-[384px]' />
+            <Markdown className={styles.richTextLink}>
+              {hero.openSourceLink}
+            </Markdown>
           </div>
           {philosophy && (
             <div className='philosophy text-neutral-900 bg-primary-300'>
