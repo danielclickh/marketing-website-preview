@@ -115,7 +115,7 @@ function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
           type='h1'
           color='white'
           className='pt-16 md:pt-20 pb-6 md:!text-6xl'>
-          ClickHouse <span className='gradient_title'>Academy</span>
+          ClickHouse Academy
         </SuiTitle>
         <SuiText color='secondary' className='pb-10'>
           Become a ClickHouse expert with our free official ClickHouse training
