@@ -27,7 +27,7 @@ function PricingOptions({
         <div className='plans_container grid grid-cols-1 lg:grid-cols-3 gap-8'>
           {pricingPlans.map((plan, index) => (
             <div
-              className='plan_card border-t-[5px] rounded-[5px] border-primary w-full max-w-sm bg-neutral-750 p-10 mx-auto'
+              className='shadow-card-xl border border-neutral-700/80 border-t-4 rounded-lg border-t-primary w-full max-w-sm bg-neutral-900/50 p-10 mx-auto'
               key={`plan-${plan.name}`}>
               <div className='card_content flex flex-col h-full justify-between'>
                 <div className='border-b mb-6'>
