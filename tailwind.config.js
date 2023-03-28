@@ -204,7 +204,7 @@ module.exports = {
           'linear-gradient(0deg, #fbff46, #fbff46 2px, transparent 0, transparent)',
         navDropdown:
           'linear-gradient(to bottom, rgba(65, 65, 65, 0.3) 0px, rgba(65, 65, 65, 0.3) 1px, #282828 1px, #282828 44px, rgba(65, 65, 65, 0.3) 44px, rgba(65, 65, 65, 0.3)45px, #1F1F1C 45px, #1F1F1C 100%)',
-        grid: 'url("/bg-grid.png")',
+        grid: 'url("/dot_grid.svg")',
         'click-grid': 'url("/bg-grid.svg")',
         'home-grid':
           'linear-gradient(117.08deg, rgba(0, 0, 0, 0) 14.55%, rgba(22, 22, 0, 0.167461) 34.15%, rgba(47, 47, 47, 0.22751) 40.54%, rgba(22, 22, 0, 0.611327) 46.65%, #161600 95.98%), url("/bg-grid.png");',

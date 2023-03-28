@@ -132,7 +132,7 @@ export default function HomePage({
 }: HomePageProps) {
   return (
     <Layout footerData={footerData} seo={seo}>
-      <div className='homepage overflow-hidden bg-grid bg-[length:100%_60%]'>
+      <div className='homepage overflow-hidden bg-grid'>
         <div className='flex flex-col pb-20 lg:pb-44 pt-16 md:pt-24 px-8 2xl:px-0 relative gap-24 justify-center '>
           <div className='flex flex-col w-full mx-auto max-w-2xl'>
             <div className='mx-auto md:mr-0 md:mt-8 flex-col items-center justify-center'>
@@ -221,7 +221,7 @@ export default function HomePage({
         </div>
       </div>
       <div className='flex w-full text-neutral-0'>
-        <div className='flex section-container w-full mx-auto flex-col pt-24 text-center items-center'>
+        <div className='flex section-container w-full mx-auto flex-col pt-20 text-center items-center'>
           <Image
             src='/speed-icon.svg'
             alt='Speed Icon'

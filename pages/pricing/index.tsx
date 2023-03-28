@@ -103,7 +103,7 @@ function PricingPage({
   return (
     <Layout footerData={footerData} seo={seo}>
       <div className='pricing text-neutral-0 h-full'>
-        <div className=' bg-grid bg-[length:100%_60%]'>
+        <div className=' bg-grid'>
           <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 mx-auto pt-20'>
             {hero && (
               <div className='hero'>
