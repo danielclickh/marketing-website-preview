@@ -159,7 +159,7 @@ function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
           size='base'
           weight='normal'
           color='secondary'
-          className='pb-24'>
+          className='pb-16'>
           Learn the basics of ClickHouse with our online courses.
         </SuiText>
 
