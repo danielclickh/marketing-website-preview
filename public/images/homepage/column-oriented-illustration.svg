@@ -71,58 +71,58 @@
   <rect x="281.554" y="207.932" width="42.9384" height="17" rx="2" fill="#FCFF74" />
   <rect x="330.484" y="207.932" width="42.9384" height="17" rx="2" fill="#FCFF74" />
   <rect x="36.9054" y="107.932" width="42.9384" height="17" rx="2" fill="#FF7575">
-    <animate id="rect1" dur="0.5s" attributeName="x" begin="0s;rect1.end+0.6s" to="425" />
-    <animate dur="0.5s" attributeName="y" begin="0s;rect1.end+0.6s" to="127.932" />
-    <animate dur="0.5s" attributeName="width" begin="0s;rect1.end+0.6s" to="0" />
-    <animate dur="0.5s" attributeName="height" begin="0s;rect1.end+0.6s" to="0" />
+    <animate id="rect1" dur="0.5s" fill="freeze" attributeName="x" begin="0s;barChart.end;lineChart.end;pieChart.end" to="425" />
+    <animate dur="0.5s" fill="freeze" attributeName="y" begin="0s;barChart.end;lineChart.end;pieChart.end" to="127.932" />
+    <animate dur="0.5s" fill="freeze" attributeName="width" begin="0s;barChart.end;lineChart.end;pieChart.end" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="0s;barChart.end;lineChart.end;pieChart.end" to="0" />
   </rect>
   <rect x="183.695" y="107.932" width="42.9384" height="17" rx="2" fill="#FF7575">
-    <animate id="rect2" dur="0.5s" attributeName="x" begin="0s;rect2.end+0.6s" to="425" />
-    <animate dur="0.5s" attributeName="y" begin="0s;rect2.end+0.6s" to="127.932" />
-    <animate dur="0.5s" attributeName="width" begin="0s;rect2.end+0.6s" to="0" />
-    <animate dur="0.5s" attributeName="height" begin="0s;rect2.end+0.6s" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="x" begin="rect1.begin" to="425" />
+    <animate dur="0.5s" fill="freeze" attributeName="y" begin="rect1.begin" to="127.932" />
+    <animate dur="0.5s" fill="freeze" attributeName="width" begin="rect1.begin" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="rect1.begin" to="0" />
   </rect>
   <rect x="330.484" y="107.932" width="42.9384" height="17" rx="2" fill="#FF7575">
-    <animate id="rect3" dur="0.5s" attributeName="x" begin="0s;rect3.end+0.6s" to="425" />
-    <animate dur="0.5s" attributeName="y" begin="0s;rect3.end+0.6s" to="127.932" />
-    <animate dur="0.5s" attributeName="width" begin="0s;rect3.end+0.6s" to="0" />
-    <animate dur="0.5s" attributeName="height" begin="0s;rect3.end+0.6s" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="x" begin="rect1.begin" to="425" />
+    <animate dur="0.5s" fill="freeze" attributeName="y" begin="rect1.begin" to="127.932" />
+    <animate dur="0.5s" fill="freeze" attributeName="width" begin="rect1.begin" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="rect1.begin" to="0" />
   </rect>
   <rect x="36.9054" y="127.932" width="42.9384" height="17" rx="2" fill="#FF7575">
-    <animate id="rect4" dur="0.5s" attributeName="x" begin="0s;rect4.end+0.6s" to="425" />
-    <animate dur="0.5s" attributeName="y" begin="0s;rect4.end+0.6s" to="127.932" />
-    <animate dur="0.5s" attributeName="width" begin="0s;rect4.end+0.6s" to="0" />
-    <animate dur="0.5s" attributeName="height" begin="0s;rect4.end+0.6s" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="x" begin="rect1.begin" to="425" />
+    <animate dur="0.5s" fill="freeze" attributeName="y" begin="rect1.begin" to="127.932" />
+    <animate dur="0.5s" fill="freeze" attributeName="width" begin="rect1.begin" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="rect1.begin" to="0" />
   </rect>
   <rect x="183.695" y="127.932" width="42.9384" height="17" rx="2" fill="#FF7575">
-    <animate id="rect5" dur="0.5s" attributeName="x" begin="0s;rect5.end+0.6s" to="425" />
-    <animate dur="0.5s" attributeName="y" begin="0s;rect5.end+0.6s" to="127.932" />
-    <animate dur="0.5s" attributeName="width" begin="0s;rect5.end+0.6s" to="0" />
-    <animate dur="0.5s" attributeName="height" begin="0s;rect5.end+0.6s" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="x" begin="rect1.begin" to="425" />
+    <animate dur="0.5s" fill="freeze" attributeName="y" begin="rect1.begin" to="127.932" />
+    <animate dur="0.5s" fill="freeze" attributeName="width" begin="rect1.begin" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="rect1.begin" to="0" />
   </rect>
   <rect x="330.484" y="127.932" width="42.9384" height="17" rx="2" fill="#FF7575">
-    <animate id="rect6" dur="0.5s" attributeName="x" begin="0s;rect6.end+0.6s" to="425" />
-    <animate dur="0.5s" attributeName="y" begin="0s;rect6.end+0.6s" to="127.932" />
-    <animate dur="0.5s" attributeName="width" begin="0s;rect6.end+0.6s" to="0" />
-    <animate dur="0.5s" attributeName="height" begin="0s;rect6.end+0.6s" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="x" begin="rect1.begin" to="425" />
+    <animate dur="0.5s" fill="freeze" attributeName="y" begin="rect1.begin" to="127.932" />
+    <animate dur="0.5s" fill="freeze" attributeName="width" begin="rect1.begin" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="rect1.begin" to="0" />
   </rect>
   <rect x="36.9054" y="147.932" width="42.9384" height="17" rx="2" fill="#FF7575">
-    <animate id="rect7" dur="0.5s" attributeName="x" begin="0s;rect7.end+0.6s" to="425" />
-    <animate dur="0.5s" attributeName="y" begin="0s;rect7.end+0.6s" to="127.932" />
-    <animate dur="0.5s" attributeName="width" begin="0s;rect7.end+0.6s" to="0" />
-    <animate dur="0.5s" attributeName="height" begin="0s;rect7.end+0.6s" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="x" begin="rect1.begin" to="425" />
+    <animate dur="0.5s" fill="freeze" attributeName="y" begin="rect1.begin" to="127.932" />
+    <animate dur="0.5s" fill="freeze" attributeName="width" begin="rect1.begin" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="rect1.begin" to="0" />
   </rect>
   <rect x="183.695" y="147.932" width="42.9384" height="17" rx="2" fill="#FF7575">
-    <animate id="rect8" dur="0.5s" attributeName="x" begin="0s;rect8.end+0.6s" to="425" />
-    <animate dur="0.5s" attributeName="y" begin="0s;rect8.end+0.6s" to="127.932" />
-    <animate dur="0.5s" attributeName="width" begin="0s;rect8.end+0.6s" to="0" />
-    <animate dur="0.5s" attributeName="height" begin="0s;rect8.end+0.6s" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="x" begin="rect1.begin" to="425" />
+    <animate dur="0.5s" fill="freeze" attributeName="y" begin="rect1.begin" to="127.932" />
+    <animate dur="0.5s" fill="freeze" attributeName="width" begin="rect1.begin" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="rect1.begin" to="0" />
   </rect>
   <rect x="330.484" y="147.932" width="42.9384" height="17" rx="2" fill="#FF7575">
-    <animate id="rect9" dur="0.5s" attributeName="x" begin="0s;rect9.end+0.6s" to="425" />
-    <animate dur="0.5s" attributeName="y" begin="0s;rect9.end+0.6s" to="127.932" />
-    <animate dur="0.5s" attributeName="width" begin="0s;rect9.end+0.6s" to="0" />
-    <animate dur="0.5s" attributeName="height" begin="0s;rect9.end+0.6s" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="x" begin="rect1.begin" to="425" />
+    <animate dur="0.5s" fill="freeze" attributeName="y" begin="rect1.begin" to="127.932" />
+    <animate dur="0.5s" fill="freeze" attributeName="width" begin="rect1.begin" to="0" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="rect1.begin" to="0" />
   </rect>
   <!-- Bar Chart -->
   <g opacity="0">
@@ -130,7 +130,7 @@
     <rect x="435.333" y="107" width="20.9699" height="81" rx="3" fill="#FCFF74" />
     <rect x="465.29" y="127.932" width="20.9699" height="58" rx="3" fill="#FCFF74" />
     <rect x="495.247" y="159" width="20.9699" height="29" rx="3" fill="#FCFF74" />
-    <animate id="barChart" attributeName="opacity" attributeType="XML" dur="0.5s" values="1; 1; 0" keyTimes="0; 0.99; 1" begin="0.5s;lineChart.end+0.5s" />
+    <animate id="barChart" attributeName="opacity" attributeType="XML" dur="0.5s" values="1; 1; 0" keyTimes="0; 0.99; 1" begin="0.6s;lineChart.end+0.5s" />
   </g>
    <!-- Pie Chart -->
   <g opacity="0" transform="matrix(1, 0, 0, 1, 412.135132, 89.503609)">
