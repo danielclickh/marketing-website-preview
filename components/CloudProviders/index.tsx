@@ -1,6 +1,6 @@
 import React from 'react'
 import { CloudProviderType } from '../../types/pricing'
-import { StrapiPicture } from '../StrapiElements'
+import { StrapiImage, StrapiPicture } from '../StrapiElements'
 import { SuiText } from '../sui'
 
 function CloudProviders({
@@ -13,15 +13,16 @@ function CloudProviders({
       {cloudProviders.map((cloudProvider, parentIndex: number) => (
         <div className='pt-8 flex flex-col space-y-2' key={cloudProvider.title}>
           <div className='flex flex-row items-start gap-2 h-10'>
-            {cloudProvider.lightProviderPngs.map((lightIconPng, index) => (
-              <StrapiPicture
-                key={`${cloudProvider.title}-${index}`}
-                dark={cloudProvider.darkProviderPngs[index]}
-                light={lightIconPng}
-                className={`h-8 w-auto ${
-                  parentIndex !== 0 ? 'opacity-25' : ''
-                }`}
-              />
+            {cloudProvider.darkProviderPngs.map((darkIconPng, index) => (
+              <div className='relative w-auto px-10 py- h-16 bg-neutral-900 hover:bg-neutral-800 rounded grid place-items-center border border-neutral-700/80'>
+                <StrapiImage
+                  key={`${cloudProvider.title}-${index}`}
+                  {...darkIconPng}
+                  className={`h-10 w-auto ${
+                    parentIndex !== 0 ? 'opacity-25' : ''
+                  }`}
+                />
+              </div>
             ))}
           </div>
           {parentIndex !== 0 && (

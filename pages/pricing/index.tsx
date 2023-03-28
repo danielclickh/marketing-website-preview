@@ -3,7 +3,7 @@ import CloudProviders from '../../components/CloudProviders'
 import Markdown from '../../components/Markdown'
 import PricingOptions from '../../components/PricingOptions'
 import { StrapiImage } from '../../components/StrapiElements'
-import { SuiText, SuiTitle } from '../../components/sui'
+import { SuiTitle } from '../../components/sui'
 import { findAll, findOne } from '../../lib/api/strapi'
 import {
   PricingData,
@@ -18,15 +18,14 @@ import Layout from '../../components/Layout'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { CUIButton } from '../../components/ClickUI'
 import HRSeparator from '../../components/HRSeparator'
+import philosophy from './philosophy.json'
+import Image from 'next/image'
 
 export const getStaticProps: GetStaticProps<PricingPageProps> =
   async function getStaticProps() {
     const pricingPromise: Promise<PricingData> = findOne('pricing', {
       populate: [
         'hero',
-        'pricingPhilosophy',
-        'pricingPhilosophy.columns',
-        'pricingPhilosophy.columns.image',
         'meteredPricing',
         'contactSection',
         'contactSection.contactButton',
@@ -56,13 +55,7 @@ export const getStaticProps: GetStaticProps<PricingPageProps> =
     )
 
     const [
-      {
-        hero,
-        pricingPhilosophy: philosophy,
-        contactSection,
-        meteredPricing,
-        seo
-      },
+      { hero, contactSection, meteredPricing, seo },
       { data: pricingByRegion },
       { data: pricingPlans }
     ] = await Promise.all([pricingPromise, pricingByRegionPromise, plansProps])
@@ -82,7 +75,6 @@ export const getStaticProps: GetStaticProps<PricingPageProps> =
     return {
       props: {
         hero,
-        philosophy,
         contactSection,
         meteredPricing,
         seo,
@@ -96,7 +88,6 @@ export const getStaticProps: GetStaticProps<PricingPageProps> =
 
 function PricingPage({
   hero,
-  philosophy,
   contactSection,
   meteredPricing,
   pricingByRegion,
@@ -146,38 +137,37 @@ function PricingPage({
               {hero.openSourceLink}
             </Markdown>
           </div>
-          {philosophy && (
-            <div className='philosophy text-neutral-900 bg-primary-300'>
-              <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 py-16 mx-auto'>
-                <SuiTitle
-                  type='h2'
-                  className='text-neutral-900 text-center pb-16'>
-                  {philosophy.title}
-                </SuiTitle>
-                <div className='columns_wrapper flex flex-col lg:flex-row lg:items-start lg:justify-center gap-x-36 gap-y-16'>
-                  {philosophy.columns.map((column) => (
-                    <div
-                      className='column max-w-sm mx-auto lg:mx-0'
-                      key={column.header}>
-                      <div className='header_row flex flex-col gap-2 items-center mb-6'>
-                        <StrapiImage
-                          {...column.image}
-                          alt='payment method'
-                          className='image w-16 h-16'
-                        />
-                        <div className='column_title text-xl font-bold'>
-                          {column.header}
-                        </div>
+          <div className='philosophy text-neutral-900 bg-primary-300'>
+            <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 pb-16 mx-auto'>
+              <SuiTitle
+                type='h2'
+                className='text-neutral-900 text-center pb-16'>
+                Pricing philosophy
+              </SuiTitle>
+              <div className='columns_wrapper flex flex-col lg:flex-row lg:items-start lg:justify-center gap-x-36 gap-y-16'>
+                {philosophy.map((column) => (
+                  <div
+                    className='column max-w-sm mx-auto lg:mx-0'
+                    key={column.header}>
+                    <div className='header_row flex flex-col gap-2 items-center mb-6'>
+                      <Image
+                        src={column.image}
+                        width='72'
+                        height='72'
+                        alt='payment method'
+                      />
+                      <div className='column_title text-xl font-bold'>
+                        {column.header}
                       </div>
-                      <Markdown className='!text-neutral-800 text-center'>
-                        {column.content}
-                      </Markdown>
                     </div>
-                  ))}
-                </div>
+                    <Markdown className='!text-neutral-800 text-center'>
+                      {column.content}
+                    </Markdown>
+                  </div>
+                ))}
               </div>
             </div>
-          )}
+          </div>
         </div>
         {contactSection && (
           <div className='section-container my-24'>

@@ -79,7 +79,6 @@ interface PricingContactSection {
 
 export interface PricingData {
   hero: PricingHero
-  pricingPhilosophy: PricingPhilosophy
   meteredPricing: MeteredPricing
   contactSection: PricingContactSection
   seo: SeoMetadata
@@ -92,7 +91,6 @@ export type CloudProviderType = {
 }
 export interface PricingPageProps extends CommonProps {
   hero: PricingHero
-  philosophy: PricingPhilosophy
   meteredPricing: MeteredPricing
   contactSection: PricingContactSection
   pricingByRegion: Array<RegionPricing>
