@@ -7,7 +7,7 @@ import ArrowsDown from './arrowsDown'
 export default function SupportProgram(props: any) {
   return (
     <div>
-      <div className='bg-grid bg-[length:100%_60%]'>
+      <div className='bg-grid'>
         <div className='max-w-7xl pb-24 mx-auto px-4 sm:px-8 2xl:px-0 relative'>
           <div className='flex container mx-auto flex-col max-w-7xl px-4 sm:px-8 2xl:px-0 relative pt-28'>
             <div className='flex'>
