@@ -145,8 +145,8 @@ export default function HomePage({
               </SuiTitle>
               <div className='mx-auto flex flex-col items-center max-w-md'>
                 <div className='leading-normal text-neutral-200 text-center my-8'>
-                  ClickHouse is the fastest open-source data warehouse for low
-                  latency apps and analytics.
+                  ClickHouse is the fastest and most resource efficient
+                  open-source database for real-time apps and analytics.
                 </div>
                 <div className='flex flex-col md:flex-row gap-6 w-full justify-center items-center'>
                   <CUIButton
@@ -221,7 +221,7 @@ export default function HomePage({
         </div>
       </div>
       <div className='flex w-full text-neutral-0'>
-        <div className='flex section-container w-full mx-auto flex-col pt-20 text-center items-center'>
+        <div className='flex section-container w-full mx-auto flex-col pt-24 text-center items-center'>
           <Image
             src='/speed-icon.svg'
             alt='Speed Icon'
