@@ -133,4 +133,5 @@ export interface RichContentPageProps extends CommonProps {
   fullWidthContent?: null | string
   leftContent?: null | string
   rightContent?: null | string
+  slug?: null | string
 }

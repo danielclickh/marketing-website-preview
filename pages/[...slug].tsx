@@ -10,6 +10,7 @@ import {
 } from '../lib/utils/revalidationConfig'
 import { getCommonProps } from '../lib/utils/getCommonProps'
 import { CatAllParamsType, RichContentPageProps } from '../types/homepage'
+import SupportProgram from '../components/SupportProgram'
 
 export const getStaticProps: GetStaticProps<RichContentPageProps> =
   async function getStaticProps({ params }) {
@@ -47,6 +48,7 @@ export const getStaticProps: GetStaticProps<RichContentPageProps> =
         fullWidthContent: page.full_width_content,
         leftContent: page.left_content,
         rightContent: page.right_content,
+        slug: slug.join('/'),
         ...commonProps,
         seo: {
           title: page.title,
@@ -65,52 +67,68 @@ export default function RichContentPage({
   leftContent,
   rightContent,
   footerData,
-  seo
+  seo,
+  slug
 }: RichContentPageProps) {
   return (
     <Layout footerData={footerData} seo={seo}>
-      <div className='rich-content-page'>
-        <SuiTitle
-          type='h1'
-          className='mx-auto container py-16 px-0 flex items-center justify-center font-bold text-center max-w-screen-lg'>
-          {title}
-        </SuiTitle>
-        <div className='px-4 pb-16 mb-16'>
-          <div className='mx-auto container max-w-7xl'>
-            {content && (
-              <Markdown className='rich-text-content show-anchor'>
-                {content}
-              </Markdown>
-            )}
+      {slug === 'support/program' ? (
+        <SupportProgram
+          {...{
+            title,
+            content,
+            fullWidthContent,
+            leftContent,
+            rightContent,
+            footerData,
+            seo,
+            slug
+          }}
+        />
+      ) : (
+        <div className='rich-content-page'>
+          <SuiTitle
+            type='h1'
+            className='mx-auto container py-16 px-0 flex items-center justify-center font-bold text-center max-w-screen-lg'>
+            {title}
+          </SuiTitle>
+          <div className='px-4 pb-16 mb-16'>
+            <div className='mx-auto container max-w-7xl'>
+              {content && (
+                <Markdown className='rich-text-content show-anchor'>
+                  {content}
+                </Markdown>
+              )}
 
-            {(leftContent || rightContent) && (
-              <div
-                className={
-                  leftContent && rightContent
-                    ? 'mb-16 flex flex-col items-start justify-center md:grid md:grid-cols-2 gap-x-[5%]'
-                    : 'mb-16'
-                }>
-                {leftContent && (
-                  <Markdown className='w-full rich-text-content show-anchor'>
-                    {leftContent}
-                  </Markdown>
-                )}
-                {rightContent && (
-                  <Markdown className='w-full rich-text-content show-anchor'>
-                    {rightContent}
-                  </Markdown>
-                )}
-              </div>
-            )}
+              {(leftContent || rightContent) && (
+                <div
+                  className={
+                    leftContent && rightContent
+                      ? 'mb-16 flex flex-col items-start justify-center md:grid md:grid-cols-2 gap-x-[5%]'
+                      : 'mb-16'
+                  }>
+                  {leftContent && (
+                    <Markdown className='w-full rich-text-content show-anchor'>
+                      {leftContent}
+                    </Markdown>
+                  )}
+                  {rightContent && (
+                    <Markdown className='w-full rich-text-content show-anchor'>
+                      {rightContent}
+                    </Markdown>
+                  )}
+                </div>
+              )}
 
-            {fullWidthContent && (
-              <Markdown className='mx-auto my-16 rich-text-content show-anchor'>
-                {fullWidthContent}
-              </Markdown>
-            )}
+              {fullWidthContent && (
+                <Markdown className='mx-auto my-16 rich-text-content show-anchor'>
+                  {fullWidthContent}
+                </Markdown>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </Layout>
   )
 }

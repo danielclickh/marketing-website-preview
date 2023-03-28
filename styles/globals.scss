@@ -421,3 +421,18 @@ body {
     }
   }
 }
+
+.show-copy-paste {
+  .codeblock-copy-btn {@apply block grid place-items-center;}
+}
+
+.support-program-rich-content {
+  a {@apply text-primary-300 mb-2}
+  td {@apply py-4}
+  p {@apply mb-2}
+}
+
+.severity-table {
+  @apply text-left border border-neutral-700 rounded-lg bg-neutral-800 max-w-5xl;
+  td,th {@apply p-6 align-top text-neutral-200 text-base leading-relaxed border-b border-b-neutral-700 }
+}
