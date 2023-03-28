@@ -92,253 +92,202 @@
     stroke="rgba(52, 52, 52, 0.9)" stroke-width="3"></path>
   <path id="postgresLine"
     d="M55.727 66.9697L351.715 66.9698C355.029 66.9698 357.714 69.6554 357.714 72.9687L357.714 313.248C357.714 316.561 360.4 319.247 363.714 319.247L572.583 319.247"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="postgresLineAnimate" attributeName="stroke-dasharray"
-      begin="0s;mongoLineAnimate.end-1" from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="0s;mongoLineAnimate.end-1"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="postgresLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="0s;mongoLineAnimate.end-1"
       dur="5s" values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="0s;mongoLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" from="1000" begin="0s;mongoLineAnimate.end-1" to="0"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="bigQueryLine"
     d="M150 66.9697L351.715 66.9698C355.029 66.9698 357.714 69.6554 357.714 72.9687L357.714 313.248C357.714 316.561 360.4 319.247 363.714 319.247L572.583 319.247"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="bigQueryLineAnimate" attributeName="stroke-dasharray"
-      begin="mysqlLineAnimate.end-1" from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="mysqlLineAnimate.end-1" dur="5s"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="bigQueryLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="mysqlLineAnimate.end-1" dur="5s"
       values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="mysqlLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" from="1000" begin="mysqlLineAnimate.end-1" to="0"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="redshiftLine"
     d="M230 66.9697L351.715 66.9698C355.029 66.9698 357.714 69.6554 357.714 72.9687L357.714 313.248C357.714 316.561 360.4 319.247 363.714 319.247L572.583 319.247"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="redshiftLineAnimate" attributeName="stroke-dasharray"
-      begin="snowflakeLineAnimate.end-1" from="0" to="1000" dur="5s" fill="freeze"></animate>
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
     <animate attributeName="stroke-opacity" from="1" to="0" begin="snowflakeLineAnimate.end-1"
       dur="5s" values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="snowflakeLineAnimate.end-1" to="1000"
+    <animate id="redshiftLineAnimate" attributeName="stroke-dashoffset" from="1000" begin="snowflakeLineAnimate.end-1" to="0"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="snowflakeLine"
     d="M52.9436 151.878L352.182 151.878C355.496 151.878 358.182 154.564 358.182 157.878L358.182 312.744C358.182 316.057 360.869 318.744 364.182 318.744L591.909 318.744"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="snowflakeLineAnimate" attributeName="stroke-dasharray"
-      begin="bigQueryLineAnimate.end-1" from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="bigQueryLineAnimate.end-1"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="snowflakeLineAnimate"  attributeName="stroke-opacity" from="1" to="0" begin="bigQueryLineAnimate.end-1"
       dur="5s" values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="bigQueryLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" from="1000" begin="bigQueryLineAnimate.end-1" to="0"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="mongoLine"
     d="M150 151.878L352.182 151.878C355.496 151.878 358.182 154.564 358.182 157.878L358.182 312.744C358.182 316.057 360.869 318.744 364.182 318.744L591.909 318.744"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="mongoLineAnimate" attributeName="stroke-dasharray"
-      begin="redshiftLineAnimate.end-1" from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="redshiftLineAnimate.end-1"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="mongoLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="redshiftLineAnimate.end-1"
       dur="5s" values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="redshiftLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" from="1000" begin="redshiftLineAnimate.end-1" to="0"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="mysqlLine"
     d="M230 151.878L352.182 151.878C355.496 151.878 358.182 154.564 358.182 157.878L358.182 312.744C358.182 316.057 360.869 318.744 364.182 318.744L591.909 318.744"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="mysqlLineAnimate" attributeName="stroke-dasharray"
-      begin="postgresLineAnimate.end-1" from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="postgresLineAnimate.end-1"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="mysqlLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="postgresLineAnimate.end-1"
       dur="5s" values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="postgresLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" from="1000" begin="postgresLineAnimate.end-1" to="0"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="kafkaLine"
     d="M50.9138 325.421L319.006 325.421C321.424 325.421 323.362 327.346 323.362 329.748V329.748C323.362 332.151 325.301 334.076 327.719 334.076L584.659 334.076"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="kafkaLineAnimate" attributeName="stroke-dasharray" begin="0s;dbtLineAnimate.end-1"
-      from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="0s;dbtLineAnimate.end-1" dur="5s"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="kafkaLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="0s;dbtLineAnimate.end-1" dur="5s"
       values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="0s;dbtLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" from="1000" begin="0s;dbtLineAnimate.end-1" to="0"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="vectorLine"
     d="M150 325.421L319.006 325.421C321.424 325.421 323.362 327.346 323.362 329.748V329.748C323.362 332.151 325.301 334.076 327.719 334.076L584.659 334.076"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="vectorLineAnimate" attributeName="stroke-dasharray" begin="kafkaLineAnimate.end-1"
-      from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="kafkaLineAnimate.end-1" dur="5s"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="vectorLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="kafkaLineAnimate.end-1" dur="5s"
       values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="kafkaLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" from="1000" begin="kafkaLineAnimate.end-1" to="0"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="dbtLine"
     d="M230 325.421L319.006 325.421C321.424 325.421 323.362 327.346 323.362 329.748V329.748C323.362 332.151 325.301 334.076 327.719 334.076L584.659 334.076"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="dbtLineAnimate" attributeName="stroke-dasharray" begin="vectorLineAnimate.end-1"
-      from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="vectorLineAnimate.end-1" dur="5s"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="dbtLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="vectorLineAnimate.end-1" dur="5s"
       values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="vectorLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" tp="0" begin="vectorLineAnimate.end-1" from="1000"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="icebergLine"
     d="M49.0072 488.827L316.672 488.827C319.986 488.827 322.672 486.141 322.672 482.827L322.672 356.251C322.672 352.938 325.358 350.252 328.672 350.252L598.813 350.252"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="icebergLineAnimate" attributeName="stroke-dasharray"
-      begin="0s;deltaLakeLineAnimate.end-1" from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="0s;deltaLakeLineAnimate.end-1"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="icebergLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="0s;deltaLakeLineAnimate.end-1"
       dur="5s" values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="0s;deltaLakeLineAnimate.end-1"
-      to="1000" dur="5s" fill="freeze"></animate>
+    <animate attributeName="stroke-dashoffset" to="0" begin="0s;deltaLakeLineAnimate.end-1"
+      from="1000" dur="5s" fill="freeze"></animate>
   </path>
   <path id="hudiLine"
     d="M150 488.827L316.672 488.827C319.986 488.827 322.672 486.141 322.672 482.827L322.672 356.251C322.672 352.938 325.358 350.252 328.672 350.252L598.813 350.252"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="hudiLineAnimate" attributeName="stroke-dasharray" begin="icebergLineAnimate.end-1"
-      from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="icebergLineAnimate.end-1"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="hudiLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="icebergLineAnimate.end-1"
       dur="5s" values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="icebergLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" to="0" begin="icebergLineAnimate.end-1" from="1000"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="deltaLakeLine"
     d="M230 488.827L316.672 488.827C319.986 488.827 322.672 486.141 322.672 482.827L322.672 356.251C322.672 352.938 325.358 350.252 328.672 350.252L598.813 350.252"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="deltaLakeLineAnimate" attributeName="stroke-dasharray"
-      begin="hudiLineAnimate.end-1" from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="hudiLineAnimate.end-1" dur="5s"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="deltaLakeLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="hudiLineAnimate.end-1" dur="5s"
       values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="hudiLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" to="0" begin="hudiLineAnimate.end-1" from="1000"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="localFilesLine"
     d="M152.9105 671.89L352.718 671.89C356.032 671.89 358.718 669.204 358.718 665.89L358.718 371.329C358.718 368.015 361.404 365.329 364.718 365.329L563.803 365.329"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="localFilesLineAnimate" attributeName="stroke-dasharray"
-      begin="0s;localFilesLineAnimate.end-1" from="0" to="1000" dur="5s" fill="freeze"
-      repeatCount="indefinite"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="0s;localFilesLineAnimate.end-1"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="localFilesLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="0s;localFilesLineAnimate.end-1"
       dur="5s" values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze" repeatCount="indefinite"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="0s;localFilesLineAnimate.end-1"
-      to="1000" dur="5s" fill="freeze" repeatCount="indefinite"></animate>
+    <animate attributeName="stroke-dashoffset" to="0" begin="0s;localFilesLineAnimate.end-1"
+      from="1000" dur="5s" fill="freeze" repeatCount="indefinite"></animate>
   </path>
   <path id="supersetLine"
     d="M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.455,273.453L896.455,75.101C896.455,71.7575 899.215,69.0153 902.581,69.0153L1050,69.0153"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="supersetLineAnimate" attributeName="stroke-dasharray"
-      begin="2s;hexLineAnimate.end-1" from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="2s;hexLineAnimate.end-1" dur="5s"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500 0 500'>
+    <animate id="supersetLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="2s;hexLineAnimate.end-1" dur="5s"
       values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="2s;hexLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" to="0" begin="2s;hexLineAnimate.end-1" from="1000"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="deepNoteLine"
     d="M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.455,273.453L896.455,75.101C896.455,71.7575 899.215,69.0153 902.581,69.0153L1122.68,69.0153"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="deepNoteLineAnimate" attributeName="stroke-dasharray"
-      begin="supersetLineAnimate.end-1" from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="supersetLineAnimate.end-1"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="deepNoteLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="supersetLineAnimate.end-1"
       dur="5s" values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="supersetLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" to="0" begin="supersetLineAnimate.end-1" from="1000"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="graphanaLine"
     d="M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.453,273.453L896.453,163.949C896.453,160.605 899.213,157.863 902.579,157.863L1050,157.863"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="graphanaLineAnimate" attributeName="stroke-dasharray"
-      begin="deepNoteLineAnimate.end-1" from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="deepNoteLineAnimate.end-1"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="graphanaLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="deepNoteLineAnimate.end-1"
       dur="5s" values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="deepNoteLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" to="0" begin="deepNoteLineAnimate.end-1" from="1000"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="metabaseLine"
     d="M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.453,273.453L896.453,163.949C896.453,160.605 899.213,157.863 902.579,157.863L1120.39,157.863"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="metabaseLineAnimate" attributeName="stroke-dasharray"
-      begin="graphanaLineAnimate.end-1" from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="graphanaLineAnimate.end-1"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="metabaseLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="graphanaLineAnimate.end-1"
       dur="5s" values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="graphanaLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" to="0" begin="graphanaLineAnimate.end-1" from="1000"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="tableauLine"
     d="M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.454,251.012C896.454,247.668 899.215,244.926 902.581,244.926L1050,244.926"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="tableauLineAnimate" attributeName="stroke-dasharray"
-      begin="metabaseLineAnimate.end-1" from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="metabaseLineAnimate.end-1"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="tableauLineAnimate"  attributeName="stroke-opacity" from="1" to="0" begin="metabaseLineAnimate.end-1"
       dur="5s" values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="metabaseLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" to="0" begin="metabaseLineAnimate.end-1" from="1000"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="hexLine"
     d="M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.454,251.012C896.454,247.668 899.215,244.926 902.581,244.926L1118.21,244.926"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="hexLineAnimate" attributeName="stroke-dasharray" begin="tableauLineAnimate.end-1"
-      from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="tableauLineAnimate.end-1"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="hexLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="tableauLineAnimate.end-1"
       dur="5s" values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="tableauLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" to="0" begin="tableauLineAnimate.end-1" from="1000"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="pythonLine"
     d="M1060,494.109L903.3,494.109C900.017,494.109 897.386,491.496 897.386,488.235L897.386,356.655C897.386,353.394 894.755,350.781 891.472,350.781L602.305,350.781"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="pythonLineAnimate" attributeName="stroke-dasharray"
-      begin="0s;rustLineAnimate.end-1" from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="0s;rustLineAnimate.end-1"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="pythonLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="0s;rustLineAnimate.end-1"
       dur="5s" values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="0s;rustLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" to="0" begin="0s;rustLineAnimate.end-1" from="1000"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="nodejsLine"
     d="M1130.61,494.109L903.3,494.109C900.017,494.109 897.386,491.496 897.386,488.235L897.386,356.655C897.386,353.394 894.755,350.781 891.472,350.781L602.305,350.781"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="nodejsLineAnimate" attributeName="stroke-dasharray" begin="pythonLineAnimate.end-1"
-      from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="pythonLineAnimate.end-1" dur="5s"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="nodejsLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="pythonLineAnimate.end-1" dur="5s"
       values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="pythonLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" to="0" begin="pythonLineAnimate.end-1" from="1000"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="javaLine"
     d="M1060,581.926L903.319,582.127C900.034,582.129 897.4,579.515 897.4,576.253L897.4,364.636C897.386,353.394 894.755,350.781 891.472,350.781L602.305,350.781"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="javaLineAnimate" attributeName="stroke-dasharray" begin="nodejsLineAnimate.end-1"
-      from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="nodejsLineAnimate.end-1" dur="5s"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="javaLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="nodejsLineAnimate.end-1" dur="5s"
       values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="nodejsLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" to="0" begin="nodejsLineAnimate.end-1" from="1000"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="cHashLine"
     d="M1131.79,581.926L903.319,582.127C900.034,582.129 897.4,579.515 897.4,576.253L897.4,364.636C897.386,353.394 894.755,350.781 891.472,350.781L602.305,350.781"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="cHashLineAnimate" attributeName="stroke-dasharray" begin="javaLineAnimate.end-1"
-      from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="javaLineAnimate.end-1" dur="5s"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="cHashLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="javaLineAnimate.end-1" dur="5s"
       values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="javaLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" to="0" begin="javaLineAnimate.end-1" from="1000"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="goLine"
     d="M1060,669.936L903.298,669.936C900.016,669.936 897.385,667.323 897.385,664.062L897.385,364.636C897.386,353.394 894.755,350.781 891.472,350.781L602.305,350.781"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="goLineAnimate" attributeName="stroke-dasharray" begin="cHashLineAnimate.end-1"
-      from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="cHashLineAnimate.end-1" dur="5s"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="goLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="cHashLineAnimate.end-1" dur="5s"
       values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="cHashLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" to="0" begin="cHashLineAnimate.end-1" from="1000"
       dur="5s" fill="freeze"></animate>
   </path>
   <path id="rustLine"
     d="M1131.52,669.936L903.298,669.936C900.016,669.936 897.385,667.323 897.385,664.062L897.385,364.636C897.386,353.394 894.755,350.781 891.472,350.781L602.305,350.781"
-    stroke="#FCFF74" stroke-width="3" stroke-opacity="0">
-    <animate id="rustLineAnimate" attributeName="stroke-dasharray" begin="goLineAnimate.end-1"
-      from="0" to="1000" dur="5s" fill="freeze"></animate>
-    <animate attributeName="stroke-opacity" from="1" to="0" begin="goLineAnimate.end-1" dur="5s"
+    stroke="#FCFF74" stroke-width="3" stroke-opacity="0" stroke-dasharray='500'>
+    <animate id="rustLineAnimate" attributeName="stroke-opacity" from="1" to="0" begin="goLineAnimate.end-1" dur="5s"
       values="1; 1; 0" keyTimes="0; 0.99; 1" fill="freeze"></animate>
-    <animate attributeName="stroke-dashoffset" from="0" begin="goLineAnimate.end-1" to="1000"
+    <animate attributeName="stroke-dashoffset" to="0" begin="goLineAnimate.end-1" from="1000"
       dur="5s" fill="freeze"></animate>
   </path>
   <rect xmlns="http://www.w3.org/2000/svg" width="119.984" height="119.938" x="539.15" y="282.068"
@@ -352,7 +301,7 @@
   <rect xmlns="http://www.w3.org/2000/svg" x="15.1426" y="31.0679" width="72" height="72"
     fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
     <animate dur="3s" attributeName="stroke" begin="postgresLineAnimate.begin"
-      values="#FBFF46; #FBFF46; 0" keyTimes="0; 0.99; 1"></animate>
+      values="#FBFF46; #FBFF46; 0" keyTimes="0; 0.4; 1"></animate>
   </rect>
   <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="27.1426" y="43.0679"
     href="/logos/postgres.svg"></image>
