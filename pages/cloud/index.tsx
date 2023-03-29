@@ -12,6 +12,7 @@ import Image from 'next/image'
 import HRSeparator from '../../components/HRSeparator'
 import integrations from './integrations.json'
 import features from './features.json'
+import featureBlocks from './feature_blocks.json'
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -62,9 +63,9 @@ export default function CloudPage({
   return (
     <>
       <Layout footerData={footerData} seo={seo}>
-        <div className='pt-10 bg-speed-lines bg-center bg-no-repeat bg-contain'>
-          <div className='relative bg-grid'>
-            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-64 md:px-8 2xl:px-0'>
+        <div className='pt-10 md:bg-speed-lines bg-center bg-no-repeat bg-contain'>
+          <div className='relative'>
+            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 md:pb-64 md:px-8 2xl:px-0'>
               <div className='flex'>
                 <div className='w-11/12 mx-auto md:w-6/12 md:mt-16 flex-col text-center md:text-left'>
                   <h1 className='font-basier text-4xl mb-6 md:text-5.5xl leading-tight font-semibold'>
@@ -84,7 +85,7 @@ export default function CloudPage({
                     can spend more time getting insight out of the fastest
                     database on earth.
                   </SuiText>
-                  <div className='flex gap-8 mt-8 items-center'>
+                  <div className='flex flex-col md:flex-row gap-8 mt-8 items-center'>
                     {ctaButton && (
                       <div className='flex justify-center md:justify-start'>
                         <CUIButton
@@ -104,32 +105,24 @@ export default function CloudPage({
                       </div>
                     )}
                     <div className='flex space-x-6 justify-center md:justify-start'>
-                      {cloudProviders.map((cloudProvider) => (
-                        <div
-                          className='flex flex-col'
-                          key={cloudProvider.title}>
-                          <SuiText
-                            size='xs'
-                            weight='bold'
-                            color='secondary'
-                            className='mb-2'>
-                            {cloudProvider.title}
-                          </SuiText>
-                          <div className='flex flex-row items-start gap-6'>
-                            {cloudProvider.lightProviderPngs.map(
-                              (lightIconPng, index: number) => (
-                                <StrapiPicture
-                                  key={`${cloudProvider.title}-${index}`}
-                                  dark={cloudProvider.darkProviderPngs[index]}
-                                  light={cloudProvider.darkProviderPngs[index]}
-                                  height={40}
-                                  className='max-h-10 w-auto'
-                                />
-                              )
-                            )}
-                          </div>
-                        </div>
-                      ))}
+                      <Image
+                        src='/images/cloud/provider_aws.png'
+                        alt='AWS ClickHouse provider'
+                        width={52}
+                        height={40}
+                      />
+                      <Image
+                        src='/images/cloud/provider_gcp.png'
+                        alt='AWS ClickHouse provider'
+                        width={64}
+                        height={40}
+                      />
+                      <Image
+                        src='/images/cloud/provider_azure.png'
+                        alt='AWS ClickHouse provider'
+                        width={64}
+                        height={40}
+                      />
                     </div>
                   </div>
                 </div>
@@ -179,45 +172,45 @@ export default function CloudPage({
 
         <div className='flex w-full text-neutral-0 pb-12 gap-y-4 md:gap-y-28 bg-shadow-element yellow-shadow'>
           <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-24 pb-8 text-center px-8 2xl:px-0 gap-y-24'>
-            {screenshotsAndBullets.map((item, index: number) => (
-              <div
-                className={`flex flex-col gap-x-24 ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                } justify-center`}
-                key={item.title}>
-                <div className='flex flex-col text-left md:w-1/2 border-l-4 border-yellow-200 pl-8'>
-                  <SuiTitle
-                    type='h3'
-                    className='mb-4 !text-3xl'
-                    weight='semibold'>
-                    {item.title}
-                  </SuiTitle>
-                  <SuiText
-                    size='base'
-                    weight='medium'
-                    color='secondary'
-                    className='mb-8'>
-                    {item.description}
-                  </SuiText>
-                  {item.bullets.map((bullet) => (
-                    <BulletPoint
-                      key={`${item.title}-${bullet.text}`}
-                      text={bullet.text}
+            {featureBlocks.map((item, index: number) => (
+              <>
+                <div
+                  className={`flex flex-col gap-x-24 ${
+                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                  } justify-center`}
+                  key={item.title}>
+                  <div className='flex flex-col md:text-left md:w-1/2 md:border-l-4 border-yellow-200 md:pl-8 mb-12 md:mb-0'>
+                    <SuiTitle
+                      type='h3'
+                      className='mb-4 !text-4xl'
+                      weight='semibold'>
+                      {item.title}
+                    </SuiTitle>
+                    <SuiText size='base' color='secondary' className='mb-8'>
+                      {item.description}
+                    </SuiText>
+                    {item.bullets.map((bullet) => (
+                      <BulletPoint
+                        key={`${item.title}-${bullet.text}`}
+                        text={bullet.text}
+                      />
+                    ))}
+                  </div>
+                  <div className='flex md:w-1/2 justify-center items-center'>
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      width={item.image_width}
+                      height={item.image_height}
+                      className='h-fit w-full object-contain rounded-lg'
                     />
-                  ))}
+                  </div>
                 </div>
-                <div className='flex md:w-1/2 justify-center items-center'>
-                  <StrapiImage
-                    {...item.screenshotPng}
-                    className='h-fit w-full object-contain rounded-lg shadow-card'
-                  />
-                </div>
-              </div>
+                <HRSeparator className='my-0' />
+              </>
             ))}
           </div>
         </div>
-
-        <HRSeparator className='my-24' />
         <div className='relative flex flex-col gap-y-28'>
           <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element yellow-shadow'>
             <div className='flex flex-col items-center w-full'>

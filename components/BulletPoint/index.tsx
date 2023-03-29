@@ -19,7 +19,7 @@ function BulletPoint({
 
   return (
     <div className={`flex item-center space-x-4 pb-4 ${className}`}>
-      <CheckCircleIcon className='w-8 h-8 aspect-square text-c6' />
+      <Image src='/images/cloud/check.svg' width={32} height={32} alt='Icon' />
       <SuiText
         size='base'
         weight='medium'
