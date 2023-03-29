@@ -22,7 +22,7 @@ function DevelopersSection() {
             title='Getting Started.mp4'></iframe>
         </div>
         <div className='flex flex-col w-full md:w-1/2'>
-          <div className='text-lg font-semibold text-neutral-0'>
+          <div className='text-md font-semibold text-neutral-0'>
             ClickHouse is a preferred option for the Observability team for
             processing access logs and providing analytics on Disney+'s content
             distribution system. Its flexibility and simplicity make it a
@@ -35,7 +35,7 @@ function DevelopersSection() {
               have because it's big data, it's all the users of Disney+
               generating that data. Ever since we chose ClickHouse, it's been
               going well.”
-              <div className='flex flex-col text-base mt-8 mb-4'>
+              <div className='flex flex-col text-base mt-8'>
                 <div className='mb-1'>Roni Lazimi</div>
                 <div className='leading-none text-primary-300 font-medium font-inconsolata'>
                   Software Engineer, Disney+
@@ -45,7 +45,7 @@ function DevelopersSection() {
           </div>
 
           <CUIButton
-            className='mt-8'
+            className='mt-8 mb-4'
             type='secondary'
             href='/blog/nyc-meetup-report-high-speed-content-distribution-analytics-for-streaming-platforms'
             iconRight={<ArrowRightIcon height='16' />}>
@@ -57,12 +57,12 @@ function DevelopersSection() {
         {developerOptions.map((developerOption, index) => (
           <CUICard key={`developerOption-${index}`}>
             {developerOption.img && (
-              <CUICard.Header className='w-full h-32'>
+              <CUICard.Header className='w-full h-44'>
                 <Image
                   src={developerOption.img}
                   alt={`Image for ${developerOption.title ?? ''}`}
                   width={385}
-                  height={128}
+                  height={172}
                   className='w-full h-full aspect-video object-cover'
                 />
               </CUICard.Header>

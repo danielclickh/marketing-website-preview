@@ -1,6 +1,6 @@
 [
   {
-    "img": "/images/homepage/developer-image.png",
+    "img": "/images/homepage/dev_cover_uber.png",
     "title": "Uber’s Log Analytics Platform",
     "description":
       "Learn why Uber migrated to ClickHouse from the ELK stack.",
@@ -8,7 +8,7 @@
     "href": "https://www.uber.com/blog/logging/"
   },
   {
-    "img": "/images/homepage/developer-image.png",
+    "img": "/images/homepage/dev_cover_cloudflair.png",
     "title": "Cloudflare’s HTTP Analytics Infrastructure",
     "description":
       "Read about how Cloudflare uses ClickHouse to support 6M requests per second.",
@@ -16,7 +16,7 @@
     "href": "https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/"
   },
   {
-    "img": "/images/homepage/developer-image.png",
+    "img": "/images/homepage/dev_cover_gitlab.png",
     "title": "GitLab’s APM Datastore",
     "description":
       "Watch this YouTube video showing why GitLab chose ClickHouse over Timescale to power their APM infrastructure.",
