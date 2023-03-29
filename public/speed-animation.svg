@@ -158,9 +158,12 @@
     <animate attributeName="stroke-opacity" from="0" begin="mysqlLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#kafkaLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710">
+  <use href="#kafkaLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
     <animate id="kafkaLineAnimate" attributeName="stroke-dashoffset" from="200"
-      begin="0s;dbtLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+      begin="0.75s;dbtLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="icebergLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
   <use href="#vectorLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
@@ -176,9 +179,12 @@
     <animate attributeName="stroke-opacity" from="0" begin="dbtLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#icebergLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710">
+  <use href="#icebergLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
     <animate id="icebergLineAnimate" attributeName="stroke-dashoffset" from="200"
-      begin="0s;deltaLakeLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+      begin="0.5s;deltaLakeLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="icebergLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
   <use href="#hudiLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
