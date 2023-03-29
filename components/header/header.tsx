@@ -110,7 +110,7 @@ export default function Header() {
         <nav className='relative flex no-wrap justify-between items-center section-container w-full py-4'>
           <Link
             href='/'
-            className='flex items-center gap-x-3 hover:no-underline'>
+            className='flex items-center gap-x-3 hover:no-underline lg:min-w-[264px] '>
             <Image
               src={logoFull}
               width='135'
