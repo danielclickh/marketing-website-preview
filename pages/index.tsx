@@ -418,7 +418,7 @@ export default function HomePage({
             Deploy your way
           </SuiTitle>
           <div className='max-w-screen-sm leading-normal text-center mx-auto text-neutral-200'>
-            Unlike traditional closed-source data warehouses, ClickHouse runs on
+            Unlike traditional closed-source OLAP databases, ClickHouse runs on
             every environment, whether it’s on your machine or on the cloud
           </div>
           <div className='flex flex-wrap justify-center gap-10 mt-16'>
