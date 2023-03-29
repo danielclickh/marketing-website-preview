@@ -194,9 +194,9 @@ export default function HomePage({
         <div className='bg-primary-300 py-8'>
           <div className='max-w-3xl mx-auto'>
             <div className='text-center mb-8 text-primary-800 w-fit mx-auto text-xl font-semibold leading-normal'>
-              Trusted by the best developers that work with data{' '}
+              Trusted by the best developers that work with data at{' '}
               <span className='tilted tilted-black'>
-                <span className='tilted-content leading-8'>at scale</span>
+                <span className='tilted-content leading-8'>scale</span>
               </span>
             </div>
 
