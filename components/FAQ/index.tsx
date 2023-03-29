@@ -6,10 +6,17 @@ import { SuiTitle } from '../sui'
 import faqList from './faqList.json'
 import styles from './styles.module.scss'
 import ReactMarkdown from 'react-markdown'
+import { CSSProperties } from 'react'
+
+const style = {
+  '--top-side': '224px'
+} as CSSProperties
 
 export default function FAQ() {
   return (
-    <div className='bg-shadow-element flex flex-col md:flex-row w-full px-4 md:px-8 2xl:px-0 pb-24 items-start  justify-center max-w-7xl mx-auto'>
+    <div
+      className='relative bg-shadow-element flex flex-col md:flex-row w-full px-4 md:px-8 2xl:px-0 pb-24 items-start  justify-center max-w-7xl mx-auto'
+      style={style}>
       <div className='py-10 max-w-screen-sm mr-auto'>
         <Image src='/faq-icon.svg' alt='FAQ Icon' width={72} height={72} />
         <SuiTitle type='h2' className='my-6'>
@@ -40,13 +47,18 @@ export default function FAQ() {
                   <span className={styles.plusMinus} data-active={open} />
                 </Disclosure.Button>
                 <Transition
-                  enter='transition duration-100 ease-out'
-                  enterFrom='transform scale-95 opacity-0'
-                  enterTo='transform scale-100 opacity-100'
-                  leave='transition duration-75 ease-out'
-                  leaveFrom='transform scale-100 opacity-100'
-                  leaveTo='transform scale-95 opacity-0'>
-                  <Disclosure.Panel className='transition-all text-sm pl-20 pr-4 pb-4 text-neutral-200 home-faqs'>
+                  show={open}
+                  className='h-full'
+                  enter='transition-[max-height] duration-300 ease-in-out'
+                  enterFrom='max-h-0 opacity-0'
+                  enterTo='max-h-fit opacity-100'
+                  leave='transition-[max-height] duration-300 ease-in-out'
+                  leaveFrom='max-h-fit opacity-100'
+                  leaveTo='max-h-0 opacity-0'>
+                  <Disclosure.Panel
+                    className={`transition-opacity duration-100 text-sm pl-20 pr-4 pb-4 text-neutral-200 home-faqs ${
+                      open ? 'opacity-100' : 'opacity-0'
+                    }`}>
                     <ReactMarkdown children={faq.content} />
                   </Disclosure.Panel>
                 </Transition>
