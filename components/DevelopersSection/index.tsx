@@ -45,7 +45,7 @@ function DevelopersSection() {
           </div>
 
           <CUIButton
-            className='mt-10'
+            className='mt-8'
             type='secondary'
             href='/blog/nyc-meetup-report-high-speed-content-distribution-analytics-for-streaming-platforms'
             iconRight={<ArrowRightIcon height='16' />}>
