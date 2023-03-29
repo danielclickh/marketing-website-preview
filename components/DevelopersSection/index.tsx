@@ -11,7 +11,7 @@ function DevelopersSection() {
       <SuiTitle type='h2' className='w-full text-left mb-8'>
         What do developers say?
       </SuiTitle>
-      <div className='flex flex-col md:flex-row mb-16 gap-10'>
+      <div className='flex flex-col md:flex-row mb-8 gap-10'>
         <div className='w-full md:w-1/2 flex items-start'>
           <iframe
             src='https://www.youtube.com/embed/CVVp6N8Xeoc?rel=0'
@@ -22,29 +22,32 @@ function DevelopersSection() {
             title='Getting Started.mp4'></iframe>
         </div>
         <div className='flex flex-col w-full md:w-1/2'>
-          <div className='text-lg font-bold text-neutral-0'>
-            “We saw huge speed gains from the moment we introduced ClickHouse to
-            our stack”
+          <div className='text-lg font-semibold text-neutral-0'>
+            ClickHouse is a preferred option for the Observability team for
+            processing access logs and providing analytics on Disney+'s content
+            distribution system. Its flexibility and simplicity make it a
+            powerful tool for content distribution analytics.
           </div>
           <div className='grid grid-cols-[0.5rem_1fr] gap-6 mt-8'>
             <div className='bg-primary-300 w-full h-full' />
             <div className='text-neutral-200'>
-              Disney moved its logging platform to ClickHouse increasing
-              developer productivity and overall reliability of the platform
-              while seeing 3x data compression, 10x performance increase, and ½
-              the reduction in hardware cost. Disney moved its logging platform
-              to ClickHouse increasing developer productivity.
+              “We were really not doing well with ingesting all the logs that we
+              have because it's big data, it's all the users of Disney+
+              generating that data. Ever since we chose ClickHouse, it's been
+              going well.”
+              <div className='flex flex-col text-base mt-8 mb-4'>
+                <div className='mb-1'>Roni Lazimi</div>
+                <div className='leading-none text-primary-300 font-medium font-inconsolata'>
+                  Software Engineer, Disney+
+                </div>
+              </div>
             </div>
           </div>
-          <div className='flex flex-col text-base mt-8 mb-10'>
-            <div className='mb-1'>John Johnson,</div>
-            <div className='leading-none text-primary-300 font-medium font-inconsolata'>
-              Head of Engineering @ Disney
-            </div>
-          </div>
+
           <CUIButton
+            className='mt-10'
             type='secondary'
-            href='/'
+            href='/blog/nyc-meetup-report-high-speed-content-distribution-analytics-for-streaming-platforms'
             iconRight={<ArrowRightIcon height='16' />}>
             Learn More
           </CUIButton>
