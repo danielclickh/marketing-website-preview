@@ -179,8 +179,9 @@ export default function HomePage({
                 <CUILink
                   href='/clickhouse'
                   target='_self'
-                  className='mt-5 text-neutral-200 underline hover:text-neutral-0'>
-                  Or download open-source ClickHouse
+                  className='mt-5 text-neutral-200 hover:text-neutral-0 flex items-center gap-2'>
+                  Or download open-source ClickHouse{' '}
+                  <ArrowRightIcon height='16' />
                 </CUILink>
               </div>
             </div>
@@ -396,7 +397,7 @@ export default function HomePage({
             type='secondary'
             className='w-auto'
             href='/docs'
-            iconRight={<ChevronRightIcon className='w-4 h-4' />}>
+            iconRight={<ArrowRightIcon height='16' />}>
             Read more in the docs
           </CUIButton>
         </div>
