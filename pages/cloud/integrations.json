@@ -1,0 +1,92 @@
+[
+	{
+		"id": 1,
+		"name": "Postgres",
+		"logo": "/images/cloud/integrations/postgres.svg"
+	},
+	{
+		"id": 2,
+		"name": "Amazon S3",
+		"logo": "/images/cloud/integrations/amazon_s3.svg"
+	},
+	{
+		"id": 3,
+		"name": "Kafka",
+		"logo": "/images/cloud/integrations/kafka.svg"
+	},
+	{
+		"id": 4,
+		"name": "Airbyte",
+		"logo": "/images/cloud/integrations/airbyte.svg"
+	},
+	{
+		"id": 5,
+		"name": "dbt",
+		"logo": "/images/cloud/integrations/dbt.svg"
+	},
+	{
+		"id": 6,
+		"name": "Vector",
+		"logo": "/images/cloud/integrations/vector.svg"
+	},
+	{
+		"id": 7,
+		"name": "Grafana",
+		"logo": "/images/cloud/integrations/grafana.svg"
+	},
+	{
+		"id": 8,
+		"name": "Tableau",
+		"logo": "/images/cloud/integrations/tableau.svg"
+	},
+	{
+		"id": 9,
+		"name": "Deep Note",
+		"logo": "/images/cloud/integrations/deepnote.svg"
+	},
+	{
+		"id": 10,
+		"name": "Superset",
+		"logo": "/images/cloud/integrations/superset.svg"
+	},
+	{
+		"id": 11,
+		"name": "Metabase",
+		"logo": "/images/cloud/integrations/metabase.svg"
+	},
+	{
+		"id": 12,
+		"name": "My SQL",
+		"logo": "/images/cloud/integrations/mysql.svg"
+	},
+	{
+		"id": 13,
+		"name": "Java",
+		"logo": "/images/cloud/integrations/java.svg"
+	},
+	{
+		"id": 13,
+		"name": "Go Lang",
+		"logo": "/images/cloud/integrations/go.svg"
+	},
+	{
+		"id": 14,
+		"name": "Node JS",
+		"logo": "/images/cloud/integrations/nodejs.svg"
+	},
+	{
+		"id": 15,
+		"name": "C++",
+		"logo": "/images/cloud/integrations/c++.svg"
+	},
+	{
+		"id": 16,
+		"name": "Python",
+		"logo": "/images/cloud/integrations/python.svg"
+	},
+	{
+		"id": 17,
+		"name": "Hex",
+		"logo": "/images/cloud/integrations/hex.svg"
+	}
+]

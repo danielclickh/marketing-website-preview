@@ -1,14 +1,17 @@
-import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
-import { FeatureItem } from '../../components/feature_item'
+import { SuiText, SuiTitle } from '../../components/sui'
 
 import { findOne } from '../../lib/api/strapi'
 import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
-import Markdown from '../../components/Markdown'
 import BulletPoint from '../../components/BulletPoint'
 import { CloudData } from '../../types/cloud'
 import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { CUIButton, CUICard } from '../../components/ClickUI'
+import Image from 'next/image'
+import HRSeparator from '../../components/HRSeparator'
+import integrations from './integrations.json'
+import features from './features.json'
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -43,7 +46,6 @@ export const getStaticProps: GetStaticProps<CloudData> =
 
 export default function CloudPage({
   hero,
-  features,
   screenshotsAndBullets,
   seo,
   footerData
@@ -60,37 +62,48 @@ export default function CloudPage({
   return (
     <>
       <Layout footerData={footerData} seo={seo}>
-        <div className='pt-10'>
-          <div className='relative'>
-            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-24 md:px-8 2xl:px-0'>
+        <div className='pt-10 bg-speed-lines bg-center bg-no-repeat bg-contain'>
+          <div className='relative bg-grid'>
+            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-64 md:px-8 2xl:px-0'>
               <div className='flex'>
                 <div className='w-11/12 mx-auto md:w-6/12 md:mt-16 flex-col text-center md:text-left'>
-                  <SuiTitle type='h1' className='md:!text-6xl'>
-                    <Markdown>{title}</Markdown>
-                  </SuiTitle>
+                  <h1 className='font-basier text-4xl mb-6 md:text-5.5xl leading-tight font-semibold'>
+                    Serverless.{' '}
+                    <span className='tilted tilted-yellow'>
+                      <span className='tilted-content'>Simple.</span>
+                    </span>{' '}
+                    ClickHouse Cloud.
+                  </h1>
+
                   <SuiText
                     size='base'
                     color='secondary'
-                    weight='medium'
-                    className='mt-6 md:max-w-lg md:pr-4'>
-                    {description}
+                    className='mt-6 md:max-w-xl md:pr-4'>
+                    Get the performance you love from open source ClickHouse in
+                    a serverless offering that takes care of the details so you
+                    can spend more time getting insight out of the fastest
+                    database on earth.
                   </SuiText>
-                  <div className='flex flex-col mt-8'>
+                  <div className='flex gap-8 mt-8 items-center'>
                     {ctaButton && (
                       <div className='flex justify-center md:justify-start'>
-                        <SuiButton
+                        <CUIButton
                           type='primary'
-                          path={ctaButton.href}
+                          size='lg'
+                          weight='semibold'
+                          href={ctaButton.href}
+                          target={ctaButton.target}
                           segmentEvent={{
                             label: ctaButton.text,
                             category: 'website-hero'
                           }}
-                          target={ctaButton.target}>
+                          linkClass='w-full max-w-[12rem]'
+                          className='w-full'>
                           {ctaButton.text}
-                        </SuiButton>
+                        </CUIButton>
                       </div>
                     )}
-                    <div className='flex space-x-6 justify-center md:justify-start mt-6'>
+                    <div className='flex space-x-6 justify-center md:justify-start'>
                       {cloudProviders.map((cloudProvider) => (
                         <div
                           className='flex flex-col'
@@ -99,10 +112,10 @@ export default function CloudPage({
                             size='xs'
                             weight='bold'
                             color='secondary'
-                            className='mb-5'>
+                            className='mb-2'>
                             {cloudProvider.title}
                           </SuiText>
-                          <div className='flex flex-row items-start gap-6 h-8'>
+                          <div className='flex flex-row items-start gap-6'>
                             {cloudProvider.lightProviderPngs.map(
                               (lightIconPng, index: number) => (
                                 <StrapiPicture
@@ -110,7 +123,7 @@ export default function CloudPage({
                                   dark={cloudProvider.darkProviderPngs[index]}
                                   light={cloudProvider.darkProviderPngs[index]}
                                   height={40}
-                                  className='max-h-8 w-auto'
+                                  className='max-h-10 w-auto'
                                 />
                               )
                             )}
@@ -120,7 +133,7 @@ export default function CloudPage({
                     </div>
                   </div>
                 </div>
-                <div className='hidden md:flex w-6/12 mx-auto px-8'>
+                <div className='hidden md:flex w-6/12 mx-auto'>
                   <div>
                     <div className='mt-20 relative'>
                       <StrapiImage
@@ -135,41 +148,48 @@ export default function CloudPage({
                 </div>
               </div>
             </div>
-            <div className='absolute right-0 top-0 bottom-16 lg:bottom-30 object-fill text-c2 z-[-1] w-auto'>
-              <StrapiImage
-                {...backgroundSvg}
-                alt='ClickHouse demo'
-                className='bg-transparent w-full h-full'
-              />
-            </div>
           </div>
         </div>
-        <div className='text-neutral-0'>
-          <div className='flex container mx-auto flex-col max-w-7xl  pb-16 px-4 sm:px-8 2xl:px-0 pt-16'>
+        <div className='text-neutral-0 bg-neutral-725'>
+          <div className='flex container mx-auto flex-col max-w-7xl pb-16 px-4 sm:px-8 2xl:px-0 pt-16'>
             <div className='feature-container'>
               {features.map((feature) => (
-                <FeatureItem
-                  key={feature.iconSvg.hash}
-                  icon={feature.iconSvg}
-                  title={feature.title}
-                  description={feature.description}
-                  delay={100}
-                />
+                <div className='col' key={feature.id}>
+                  <div className='flex items-start gap-4'>
+                    <Image
+                      src={feature.icon}
+                      width={32}
+                      height={32}
+                      alt={feature.title}
+                    />
+                    <div>
+                      <h4 className='font-bold mb-3 font-inter'>
+                        {feature.title}
+                      </h4>
+                      <p className='font-light font-inter leading-relaxed text-sm text-neutral-200'>
+                        {feature.content}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
         </div>
 
-        <div className='flex w-full text-neutral-0 pb-12 gap-y-4 md:gap-y-28'>
-          <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-20 pb-8 text-center px-8 2xl:px-0 gap-y-24'>
+        <div className='flex w-full text-neutral-0 pb-12 gap-y-4 md:gap-y-28 bg-shadow-element yellow-shadow'>
+          <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-24 pb-8 text-center px-8 2xl:px-0 gap-y-24'>
             {screenshotsAndBullets.map((item, index: number) => (
               <div
                 className={`flex flex-col gap-x-24 ${
                   index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                 } justify-center`}
                 key={item.title}>
-                <div className='flex flex-col text-left md:w-1/2'>
-                  <SuiTitle type='h3' className='mb-4 !text-3xl' weight='bold'>
+                <div className='flex flex-col text-left md:w-1/2 border-l-4 border-yellow-200 pl-8'>
+                  <SuiTitle
+                    type='h3'
+                    className='mb-4 !text-3xl'
+                    weight='semibold'>
                     {item.title}
                   </SuiTitle>
                   <SuiText
@@ -194,6 +214,153 @@ export default function CloudPage({
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        <HRSeparator className='my-24' />
+        <div className='relative flex flex-col gap-y-28'>
+          <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element yellow-shadow'>
+            <div className='flex flex-col items-center w-full'>
+              <Image
+                src='/images/cloud/section_integrations.svg'
+                alt='ClickHouse integrations'
+                width={72}
+                height={72}
+              />
+              <SuiTitle type='h2' className='mt-8 mb-6'>
+                Powerful integrations
+              </SuiTitle>
+              <div className='text-neutral-200 max-w-2xl leading-normal text-center mx-auto'>
+                We curate the most popular ways to work ClickHouse. Explore our
+                growing library of ecosystem integrations for data ingestion,
+                data visualisation, language clients and SQL clients.
+              </div>
+              <div className='flex gap-6 mt-16 max-w-[88%] mx-auto md:max-w-[552px] flex-wrap'>
+                {integrations.map((integration) => (
+                  <CUICard className='p-4'>
+                    <Image
+                      src={integration.logo}
+                      width={36}
+                      height={36}
+                      alt={integration.name}
+                    />
+                  </CUICard>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <HRSeparator className='my-24' />
+        <div className='relative flex flex-col gap-y-28'>
+          <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element-right red-shadow'>
+            <div className='flex flex-col items-center w-full'>
+              <Image
+                src='/images/cloud/section_support.svg'
+                alt='Fast Icon'
+                width={72}
+                height={72}
+              />
+              <SuiTitle type='h2' className='mt-8 mb-6'>
+                All in one support
+              </SuiTitle>
+              <div className='text-neutral-200 max-w-2xl leading-normal text-center mx-auto px-4 md:px-0'>
+                ClickHouse provides the most comprehensive, consultative cloud
+                support in the industry bundled with your ClickHouse Cloud
+                service.
+              </div>
+
+              <ul className='max-w-lg justify-start py-8 px-4 md:px-0'>
+                <li>
+                  <div className='flex items-center gap-4'>
+                    <Image
+                      src='/images/cloud/check.svg'
+                      width={32}
+                      height={32}
+                      alt='Icon'
+                    />
+                    <div className=''>Unlimited 24x7 support</div>
+                  </div>
+                </li>
+                <li>
+                  <div className='flex items-center gap-4'>
+                    <Image
+                      src='/images/cloud/check.svg'
+                      width={32}
+                      height={32}
+                      alt='Icon'
+                    />
+                    <div className=''>
+                      On-Demand training and onboarding workshops
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div className='flex items-center gap-4'>
+                    <Image
+                      src='/images/cloud/check.svg'
+                      width={32}
+                      height={32}
+                      alt='Icon'
+                    />
+                    <div className=''>
+                      Consultative support via Expert Sessions
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div className='flex items-center gap-4'>
+                    <Image
+                      src='/images/cloud/check.svg'
+                      width={32}
+                      height={32}
+                      alt='Icon'
+                    />
+                    <div className=''>
+                      Assistance in migration to ClickHouse Cloud
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <CUIButton
+              type='secondary'
+              className='w-auto'
+              href='/support/program/'>
+              Learn more
+            </CUIButton>
+          </div>
+        </div>
+        <HRSeparator className='my-24' />
+
+        <div className='pb-16 section-container'>
+          <div className='bg-primary-300 text-neutral-0 w-full rounded-lg flip-selection py-16 px-4'>
+            <div className='flex container mx-auto flex-col 2xl:px-0'>
+              <div className='flex flex-col text-center mx-auto'>
+                <SuiTitle type='h2' color='text-default' className='mb-6 '>
+                  Get started for free
+                </SuiTitle>
+                <div className='max-w-3xl'>
+                  <SuiText size='base' color='text-default' weight='normal'>
+                    We’ll get you started on a 30 day trial and $300 credits to
+                    spend at your own pace.
+                  </SuiText>
+
+                  <CUIButton
+                    type='primary-dark'
+                    size='lg'
+                    className='mx-auto mt-8'
+                    href='https://clickhouse.cloud/signUp'
+                    segmentEvent={{
+                      label: 'Create a free acount',
+                      category: 'website-cloudpage-lower-hero'
+                    }}>
+                    Create a free acount
+                  </CUIButton>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </Layout>

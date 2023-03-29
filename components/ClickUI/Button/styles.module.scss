@@ -9,6 +9,15 @@
     }
   }
 
+  &[data-type="primary-dark"] {
+    @apply bg-neutral-900 text-neutral-0 border-primary;
+
+    &:hover,
+    &:active {
+      @apply bg-neutral-900;
+    }
+  }
+
   &[data-type="secondary"] {
     @apply bg-transparent text-neutral-0 border-primary-600;
 

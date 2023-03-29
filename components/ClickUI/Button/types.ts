@@ -4,7 +4,7 @@ import { LinkProps } from '../Link/types'
 
 export interface ButtonProps extends Partial<LinkProps> {
   size?: 'lg' | 'sm'
-  type: 'primary' | 'secondary' | 'secondary-dark'
+  type: 'primary' | 'primary-dark' | 'secondary' | 'secondary-dark'
   iconRight?: ReactNode
   iconLeft?: ReactNode
   href?: any
