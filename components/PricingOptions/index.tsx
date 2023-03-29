@@ -1,6 +1,6 @@
 import { MinusIcon } from '@heroicons/react/outline'
 import { CheckIcon } from '@heroicons/react/solid'
-import React, { ReactNode } from 'react'
+import React from 'react'
 import Markdown from '../Markdown'
 import { PricingContextProvider } from './PricingContext'
 import PlanPricing from './PlanPricing'
@@ -27,19 +27,19 @@ function PricingOptions({
         <div className='plans_container grid grid-cols-1 lg:grid-cols-3 gap-8'>
           {pricingPlans.map((plan, index) => (
             <div
-              className='shadow-card-xl border border-neutral-700/80 border-t-4 rounded-lg border-t-primary w-full max-w-sm bg-neutral-900/50 p-10 mx-auto'
+              className='shadow-card-xl border border-neutral-700/80 border-t-4 rounded-lg border-t-primary w-full max-w-sm bg-neutral-900/50 mx-auto'
               key={`plan-${plan.name}`}>
               <div className='card_content flex flex-col h-full justify-between'>
-                <div className='border-b mb-6'>
+                <div className='border-b border-neutral-725 p-6'>
                   <h2 className='text-center text-2.75xl font-semibold mb-1'>
                     {plan.name}
                   </h2>
-                  <div className='text-center text-sm md:h-16 xl:h-auto mb-4 text-normal text-neutral-300'>
+                  <div className='text-center text-sm md:h-16 xl:h-auto text-normal text-neutral-300'>
                     {plan.description}
                   </div>
                   <PlanPricing isFirst={index === 0} text={plan.pricingMain} />
                 </div>
-                <div className='flex-auto justify-between'>
+                <div className='flex-auto justify-between p-6'>
                   <div className='flex flex-col gap-5'>
                     {(plan.items ?? []).map((item, planIndex: number) => (
                       <div
@@ -73,7 +73,7 @@ function PricingOptions({
                     <ShowPricing isFirst={index === 0} />
                   )}
                 </div>
-                <div className='mt-8'>
+                <div className='p-6 pt-0'>
                   {plan.actionButton && (
                     <PricingButton
                       isFirst={index === 0}

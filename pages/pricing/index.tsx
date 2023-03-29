@@ -109,7 +109,7 @@ function PricingPage({
               <div className='hero'>
                 <div className='flex flex-col items-center'>
                   <SuiTitle type='h1'>{hero.title}</SuiTitle>
-                  <div className='text-neutral-200 mt-6 mb-8'>
+                  <div className='text-neutral-200 mt-6'>
                     {hero.description}
                   </div>
                   <CloudProviders cloudProviders={cloudProviders} />
@@ -131,7 +131,7 @@ function PricingPage({
               </div>
             )}
           </div>
-          <div className='clip-inverted-triangle pt-10 pb-60'>
+          <div className='clip-inverted-triangle pt-10 pb-60 bg-shadow-element'>
             <HRSeparator className='pb-10 max-w-[384px]' />
             <Markdown className={styles.richTextLink}>
               {hero.openSourceLink}
@@ -170,7 +170,7 @@ function PricingPage({
           </div>
         </div>
         {contactSection && (
-          <div className='section-container my-24'>
+          <div className='section-container my-24 bg-shadow-element'>
             <div className='px-4 mx-auto gap-x-4 flex flex-col items-center rounded-xl py-10 md:py-16 bg-neutral-750/50 border border-neutral-725/80 w-full text-neutral-0 relative'>
               <SuiTitle type='h2'>{contactSection.title}</SuiTitle>
               <div className='text-neutral-200 mt-3 mb-6 text-center max-w-screen-md'>

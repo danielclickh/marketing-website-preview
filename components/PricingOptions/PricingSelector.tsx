@@ -13,7 +13,7 @@ function PricingSelector({
 
   return (
     <Listbox value={selectedRegion} onChange={setSelectedRegion}>
-      <div className='relative mt-1'>
+      <div className='relative'>
         <Listbox.Button className='relative bg-neutral-750 w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left shadow-input focus:outline-none sm:text-sm border border-neutral-725'>
           <span className='flex gap-3 truncate'>
             <>
