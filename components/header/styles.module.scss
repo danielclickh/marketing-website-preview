@@ -57,7 +57,7 @@
 }
 
 .floatingContent {
-  @apply transform w-max;
+  @apply transform w-max pt-4;
   max-width: 65vw;
   overflow-y: auto;
 }

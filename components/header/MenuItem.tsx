@@ -75,15 +75,15 @@ const MenuItem = ({
       shift(),
       autoPlacement(),
       offset({
-        crossAxis: 60,
-        mainAxis: 5
+        crossAxis: 60
       })
     ]
   })
 
   const hover = useHover(context, {
     handleClose: safePolygon({
-      restMs: 50
+      restMs: 50,
+      blockPointerEvents: false
     })
   })
   const dismiss = useDismiss(context)
@@ -95,12 +95,14 @@ const MenuItem = ({
   return (
     <li
       ref={ref}
-      className={isOpen ? `${styles.triggerEnter} trigger-enter` : ''}
+      className={`px-2 lg:px-4 py-2.5 ${
+        isOpen ? `${styles.triggerEnter} trigger-enter` : ''
+      }`}
       onMouseLeave={() => onOpenChange(false)}>
       <div
         ref={reference}
         data-open={isOpen}
-        className={`${styles.headerPopover} group group-hover:text-neutral-400 data-[open=true]:text-neutral-400 hover:text-neutral-400 cursor-pointer px-2 lg:px-4 py-2.5`}
+        className={`${styles.headerPopover} group group-hover:text-neutral-400 data-[open=true]:text-neutral-400 hover:text-neutral-400 cursor-pointer`}
         {...getReferenceProps()}>
         {name}
       </div>
