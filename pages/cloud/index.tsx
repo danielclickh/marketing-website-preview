@@ -252,7 +252,7 @@ export default function CloudPage({
         </div>
 
         <HRSeparator className='my-24' />
-        <div className='relative flex flex-col gap-y-28'>
+        <div className='relative flex flex-col gap-y-28 pb-24'>
           <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element-right red-shadow'>
             <div className='flex flex-col items-center w-full'>
               <Image
@@ -332,7 +332,6 @@ export default function CloudPage({
             </CUIButton>
           </div>
         </div>
-        <HRSeparator className='my-24' />
 
         <div className='pb-16 section-container'>
           <div className='bg-primary-300 text-neutral-0 w-full rounded-lg flip-selection py-16 px-4'>
