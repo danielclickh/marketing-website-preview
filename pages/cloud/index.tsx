@@ -1,7 +1,6 @@
 import { SuiText, SuiTitle } from '../../components/sui'
 
 import { findOne } from '../../lib/api/strapi'
-import { StrapiImage } from '../../components/StrapiElements'
 import BulletPoint from '../../components/BulletPoint'
 import { CloudData } from '../../types/cloud'
 import { GetStaticProps } from 'next'
@@ -45,29 +44,17 @@ export const getStaticProps: GetStaticProps<CloudData> =
     }
   }
 
-export default function CloudPage({
-  hero,
-  screenshotsAndBullets,
-  seo,
-  footerData
-}: CloudData) {
-  const {
-    title,
-    description,
-    ctaButton,
-    cloudProviders,
-    videoGif,
-    backgroundSvg
-  } = hero
+export default function CloudPage({ hero, seo, footerData }: CloudData) {
+  const { ctaButton } = hero
 
   return (
     <>
       <Layout footerData={footerData} seo={seo}>
         <div className='pt-10 md:bg-speed-lines bg-center bg-no-repeat bg-contain'>
-          <div className='relative'>
-            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 md:pb-64 md:px-12'>
+          <div className='relative overflow-x-hidden'>
+            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 px-4 md:pb-24 md:px-8'>
               <div className='flex'>
-                <div className='w-11/12 mx-auto md:w-6/12 md:mt-16 flex-col text-center md:text-left'>
+                <div className='md:w-7/12 md:mt-16 flex-col text-center md:text-left'>
                   <h1 className='font-basier text-4xl mb-6 md:text-5.5xl leading-tight font-semibold'>
                     Serverless.{' '}
                     <span className='tilted tilted-yellow'>
@@ -126,18 +113,14 @@ export default function CloudPage({
                     </div>
                   </div>
                 </div>
-                <div className='hidden md:flex w-6/12 mx-auto'>
-                  <div>
-                    <div className='mt-20 relative'>
-                      <StrapiImage
-                        {...videoGif}
-                        alt='ClickHouse demo'
-                        width={748}
-                        height={428}
-                        className='rounded-md'
-                      />
-                    </div>
-                  </div>
+                <div className='hidden mx-auto md:w-4/12 md:flex mt-4'>
+                  <img
+                    src='/images/cloud/cloud_hero_image.png'
+                    alt='ClickHouse is fast'
+                    width={1262}
+                    height={523}
+                    className='w-full h-auto min-w-[60rem]'
+                  />
                 </div>
               </div>
             </div>
