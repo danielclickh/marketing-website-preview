@@ -19,7 +19,6 @@ import { MenuItem as MenuItemType } from './types'
 import styles from './styles.module.scss'
 import MenuItem from './MenuItem'
 import MobileMenuItem from './MobileMenuItem'
-import { ClientRectObject } from '@floating-ui/react'
 
 const headerMenuItems = menuItems as Array<MenuItemType>
 

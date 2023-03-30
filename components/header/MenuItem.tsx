@@ -26,6 +26,7 @@ import {
 import Option from './Option'
 import { HeaderTopNavItem } from './types'
 import { createPortal } from 'react-dom'
+import { CUILink } from '../ClickUI'
 
 const MenuItem = ({
   name,
@@ -149,9 +150,18 @@ const MenuItem = ({
                 } dropdown-${index}`}>
                 {menuItems.map((subitem) => (
                   <div className='flex flex-col' key={subitem.name}>
-                    <div className='mb-7 pl-3 font-semibold text-sm min-h-[1lh]'>
-                      {subitem.name}
-                    </div>
+                    {subitem.href ? (
+                      <CUILink
+                        href={subitem.href}
+                        target={subitem.target}
+                        className='mb-7 pl-3 font-semibold text-sm min-h-[1lh]'>
+                        {subitem.name}
+                      </CUILink>
+                    ) : (
+                      <div className='mb-7 pl-3 font-semibold text-sm min-h-[1lh]'>
+                        {subitem.name}
+                      </div>
+                    )}
                     <div className='h-full'>
                       {subitem.menuItems.map((item) => (
                         <Option key={item.name} {...item} />
