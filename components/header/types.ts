@@ -3,8 +3,8 @@ import { LinkTarget } from '../../lib/api/strapi/types'
 export interface HeaderTopNavItem {
   id: number
   name: string
-  href?: never
-  target?: never
+  href?: string
+  target?: LinkTarget
   menuItems: Array<HeaderLinkItem>
 }
 
