@@ -18,7 +18,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             in minutes
           </SuiTitle>
           <div className='text-neutral-300 text-center mb-8 mt-6'>
-            Install ClickHouse for MacOs, Linux and FreeBSD
+            Install ClickHouse for MacOS, Linux and FreeBSD
           </div>
         </div>
         <SuiCodeblock className='w-full md:w-full self-center overflow-hidden show-copy-paste'>

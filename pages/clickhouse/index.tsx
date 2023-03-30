@@ -1,8 +1,5 @@
 import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
-import { FeatureItem } from '../../components/feature_item'
-import { FeatureItemLarge } from '../../components/feature_item_large/feature_item_large'
 import { findOne } from '../../lib/api/strapi'
-import Markdown from '../../components/Markdown'
 import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
 import BulletPoint from '../../components/BulletPoint'
 import GetStarted from '../../components/GetStarted'
@@ -72,8 +69,8 @@ export default function ClickHouseServerPage({
     <>
       <Layout footerData={footerData} seo={seo}>
         <div className='md:bg-speed-lines bg-center bg-no-repeat bg-contain'>
-          <div className='pt-10 relative bg-grid'>
-            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 px-4 md:pb-64 md:px-8 2xl:px-0'>
+          <div className='pt-10 relative bg-grid overflow-x-hidden'>
+            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 px-4 md:pb-24 md:px-12 2xl:px-0'>
               <div className='flex'>
                 <div className='md:w-7/12 md:mt-16 flex-col text-center md:text-left'>
                   <h1 className='font-basier text-4xl mb-6 md:text-5.5xl leading-tight font-semibold'>
@@ -143,16 +140,15 @@ export default function ClickHouseServerPage({
                     )}
                   </div>
                 </div>
-                <div className='hidden md:flex w-6/12 justify-center'>
-                  <div className='mx-auto flex px-16 mt-4 max-w-full'>
-                    <img
-                      src='/images/clickhouse_oss.png'
-                      alt='ClickHouse is fast'
-                      width={471}
-                      height={360}
-                      className='w-full max-w-full h-auto'
-                    />
-                  </div>
+
+                <div className='hidden mx-auto md:w-4/12 md:flex mt-4'>
+                  <img
+                    src='/images/clickhouse/oss_hero_image.png'
+                    alt='ClickHouse is fast'
+                    width={1294}
+                    height={812}
+                    className='w-full h-auto min-w-[50rem]'
+                  />
                 </div>
               </div>
             </div>
@@ -160,7 +156,7 @@ export default function ClickHouseServerPage({
         </div>
 
         <div className='text-neutral-0 bg-neutral-725'>
-          <div className='flex container mx-auto flex-col max-w-7xl pb-16 px-4 sm:px-8 2xl:px-0 pt-16'>
+          <div className='flex container mx-auto flex-col max-w-7xl pb-16 px-4 sm:px-8 md:px-12 pt-16'>
             <div className='feature-container'>
               {features.map((feature) => (
                 <div className='col' key={feature.id}>
@@ -186,7 +182,7 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <div className='relative flex flex-col gap-y-28 mt-12 md:mt-24'>
+        <div className='container mx-auto relative flex flex-col gap-y-28 mt-12 md:mt-24 md:px-4'>
           <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element-left red-shadow'>
             <div className='flex flex-col items-center w-full'>
               <Image
@@ -212,7 +208,7 @@ export default function ClickHouseServerPage({
                 latency for most kinds of queries.
               </div>
 
-              <div className='grid grid-cols-1 md:grid-cols-3 gap-10 px-4 md:px-0 md:max-w-6xl mx-auto mt-10 md:mt-0'>
+              <div className='grid grid-cols-1 md:grid-cols-3 gap-10 px-4 md:px-0 mx-auto mt-10 md:mt-0'>
                 <CUICard title='Strives for CPU efficiency' className='p-6'>
                   <p className='font-inconsolata text-primary-300'>
                     Vectorization
@@ -259,8 +255,8 @@ export default function ClickHouseServerPage({
 
         <HRSeparator className='my-12 md:my-24' />
 
-        <div className='relative flex flex-col gap-y-28 md:mt-24 md:max-w-6xl mx-auto px-4 md:px-0'>
-          <div className='flex flex-col items-center justify-between self-center section-container mx-auto bg-shadow-element-left red-shadow'>
+        <div className='relative flex flex-col gap-y-28 md:mt-24 mx-auto'>
+          <div className='flex flex-col items-center justify-between self-center section-container mx-auto bg-shadow-element-left red-shadow px-4 md:px-12'>
             <CUICard className='p-8'>
               <div className='flex w-full justify-between'>
                 <h3 className='w-full text-center md:text-left font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold'>
