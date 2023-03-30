@@ -186,7 +186,7 @@ export default function HomePage({
                     </CUIButton>
                   </div>
                   <CUILink
-                    href='/clickhouse'
+                    href='#getting_started'
                     target='_self'
                     className='mt-5 text-neutral-200 hover:text-neutral-0 flex items-center gap-2'>
                     Or download open-source ClickHouse{' '}
