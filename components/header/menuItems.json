@@ -16,40 +16,12 @@
 						"icon": "/drive.svg"
 					},
 					{
-						"id": 2,
-						"name": "ClickHouse Local",
-						"description": "Run fast queries on local files without a server.",
-						"href": "/clickhouse-local",
-						"target": "_self",
-						"icon": "/laptop.svg"
-					},
-					{
 						"id": 1,
 						"name": "ClickHouse Cloud",
 						"description": "Deploy a ClickHouse service on AWS and GCP.",
 						"href": "/cloud",
 						"target": "_self",
 						"icon": "/cloud.svg"
-					}
-				]
-			},
-			{
-				"id": 2,
-				"name": "",
-				"menuItems": [
-					{
-						"id": 1,
-						"name": "SQL console",
-						"description": "All you need from a SQL console, and more.",
-						"href": "https://console.clickhouse.cloud",
-						"target": "_blank"
-					},
-					{
-						"id": 2,
-						"name": "ClickHouse Pipes",
-						"description": "Easily ingest data from Kafka and Amazon S3.",
-						"href": "/clickhousePipes",
-						"target": "_blank"
 					}
 				]
 			}
