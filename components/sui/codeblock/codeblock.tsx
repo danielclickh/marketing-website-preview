@@ -1,8 +1,4 @@
 import { DuplicateIcon } from '@heroicons/react/outline'
-import {
-  ClipboardCopyIcon,
-  DocumentDuplicateIcon
-} from '@heroicons/react/solid'
 import React, {
   FunctionComponent,
   HTMLAttributes,
