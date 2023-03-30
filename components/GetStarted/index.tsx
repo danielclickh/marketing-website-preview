@@ -6,7 +6,7 @@ import { CUILink } from '../ClickUI'
 export default function FetchGetStarted({ platforms }: GettingStartedData) {
   return (
     <div
-      className='flex text-neutral-0 section-container w-full mb-24'
+      className='flex text-neutral-0 section-container w-full mb-24 md:px-12'
       id='getting_started'>
       <div className='mx-auto flex flex-col justify-center w-full bg-neutral-900/50 border border-neutral-700/80 py-16 px-4 xl:px-24 rounded-xl bg-click-grid bg-[length:547px_360px] bg-right bg-no-repeat'>
         <div className='flex flex-col text-center'>

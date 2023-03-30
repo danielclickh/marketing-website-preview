@@ -7,7 +7,7 @@ import developerOptions from './developerOptions.json'
 
 function DevelopersSection() {
   return (
-    <div className='section-container'>
+    <div className='section-container px-12'>
       <SuiTitle type='h2' className='w-full text-left mb-8'>
         What do developers say?
       </SuiTitle>
@@ -35,7 +35,7 @@ function DevelopersSection() {
               have because it's big data, it's all the users of Disney+
               generating that data. Ever since we chose ClickHouse, it's been
               going well.”
-              <div className='flex flex-col text-base mt-8'>
+              <div className='flex flex-col text-base mt-4'>
                 <div className='mb-1'>Roni Lazimi</div>
                 <div className='leading-none text-primary-300 font-medium font-inconsolata'>
                   Software Engineer, Disney+

@@ -445,7 +445,7 @@ export default function HomePage({
                     height={64}
                   />
                   <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>
-                    <div className='text-xl leading-tight cursor-pointer font-semibold'>
+                    <div className='text-xl leading-tight text-neutral-0 cursor-pointer font-semibold'>
                       {deploy.title}
                     </div>
                     <div className='text-neutral-200 text-center text-sm'>

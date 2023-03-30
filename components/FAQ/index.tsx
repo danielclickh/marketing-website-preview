@@ -15,7 +15,7 @@ const style = {
 export default function FAQ() {
   return (
     <div
-      className='relative bg-shadow-element flex flex-col md:flex-row w-full px-4 md:px-8 2xl:px-0 pb-24 items-start justify-center max-w-7xl mx-auto'
+      className='relative bg-shadow-element flex flex-col md:flex-row w-full px-4 md:px-12 pb-24 items-start justify-center max-w-7xl mx-auto'
       style={style}>
       <div className='py-10 max-w-screen-sm mr-auto text-center md:text-left'>
         <Image
@@ -34,7 +34,7 @@ export default function FAQ() {
           answer your questions.{' '}
         </div>
         <CUILink
-          href='/clickhouse'
+          href='/support/program/'
           target='_self'
           className='flex gap-4 text-primary items-center mt-6'>
           <span>Ask us anything</span> <ExternalLinkIcon className='w-4 h-4' />
@@ -48,7 +48,7 @@ export default function FAQ() {
             key={`faq-${index}`}>
             {({ open }) => (
               <>
-                <Disclosure.Button className='relative z-10 flex p-4 pl-20 w-full justify-between items-center rounded-lg text-left font-medium text-neutral-0 focus:outline-none'>
+                <Disclosure.Button className='relative z-10 flex p-4 pl-20 w-full justify-between items-center rounded-lg text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none'>
                   <span className='text-md'>{faq.title}</span>
                   <span className={styles.plusMinus} data-active={open} />
                 </Disclosure.Button>
