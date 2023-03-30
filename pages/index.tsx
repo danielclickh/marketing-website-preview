@@ -42,7 +42,7 @@ const deployData: Array<DeployData> = [
     btnText: 'Download ClickHouse Local',
     description:
       'Run fast queries on local files (CSV, TSV, Parquet, and more) without a server.',
-    href: '/',
+    href: 'https://clickhouse.com/docs/en/operations/utilities/clickhouse-local',
     btnType: 'secondary'
   },
   {
