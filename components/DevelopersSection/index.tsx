@@ -28,8 +28,8 @@ function DevelopersSection() {
             distribution system. Its flexibility and simplicity make it a
             powerful tool for content distribution analytics.
           </div>
-          <div className='grid grid-cols-[0.5rem_1fr] gap-6 mt-8'>
-            <div className='bg-primary-300 w-full h-full' />
+          <div className='grid md:grid-cols-[0.5rem_1fr] gap-6 mt-8'>
+            <div className='bg-primary-300 w-full h-full hidden md:flex' />
             <div className='text-neutral-200'>
               “We were really not doing well with ingesting all the logs that we
               have because it's big data, it's all the users of Disney+

@@ -215,7 +215,7 @@ export default function ClickHouseServerPage({
               <div className='grid grid-cols-1 md:grid-cols-3 gap-10 md:max-w-6xl mx-auto mt-10 md:mt-0'>
                 <CUICard
                   title='Strives for CPU efficiency'
-                  className='p-6 w-full max-w-[22.5rem]'>
+                  className='p-6 max-w-[24.5rem] md:max-w-full'>
                   <p className='font-inconsolata text-primary-300'>
                     Vectorization
                   </p>
@@ -266,7 +266,7 @@ export default function ClickHouseServerPage({
         <HRSeparator className='my-12 md:my-24' />
 
         <div className='relative flex flex-col gap-y-28 md:mt-24 md:max-w-6xl mx-auto '>
-          <div className='flex flex-col items-center justify-between self-center section-container max-w-[24.5rem] md:w-full bg-shadow-element-left red-shadow'>
+          <div className='flex flex-col items-center justify-between self-center section-container max-w-[24.5rem] md:max-w-full bg-shadow-element-left red-shadow'>
             <CUICard className='p-8'>
               <div className='flex w-full justify-between'>
                 <h3 className='w-full text-center md:text-left font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold'>
@@ -322,7 +322,7 @@ export default function ClickHouseServerPage({
               {features5.second_description}
             </div>
 
-            <div className='flex flex-col md:flex-row md:max-w-5xl md:mx-auto pt-12 md:pt-6 flex-wrap'>
+            <div className='flex flex-col md:flex-row md:max-w-4xl md:mx-auto pt-12 md:pt-6 flex-wrap'>
               {features5.items.map((feature) => (
                 <BulletPoint
                   key={feature.text}
