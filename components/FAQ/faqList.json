@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "title": "Is ClickHouse faster than SnowFlake/Redshift/DuckDB etc?",
+    "title": "Is ClickHouse faster than traditional data warehouses?",
     "content": "Depending on your use case, ClickHouse is faster than most traditional data warehouses. However, developers often use ClickHouse with their existing CDWH solutions to act as a “speed layer” to serve fast real-time queries when exceptional performance is required."
   },
   {
