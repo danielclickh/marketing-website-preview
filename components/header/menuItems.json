@@ -86,7 +86,7 @@
 					{
 						"id": 1,
 						"name": "Get started",
-						"href": "/docs",
+						"href": "https://clickhouse.com/docs",
 						"target": "_self"
 					},
 					{
