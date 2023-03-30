@@ -175,7 +175,7 @@ export default function HomePage({
                       type='secondary'
                       weight='semibold'
                       size='lg'
-                      href='/docs'
+                      href='https://clickhouse.com/docs/'
                       segmentEvent={{
                         label: hero.ctaButton.text,
                         category: 'website-hero'
@@ -406,7 +406,7 @@ export default function HomePage({
           <CUIButton
             type='secondary'
             className='w-auto'
-            href='/docs'
+            href='https://clickhouse.com/docs/'
             iconRight={<ArrowRightIcon height='16' />}>
             Read more in the docs
           </CUIButton>
