@@ -1,7 +1,7 @@
 import { SuiText, SuiTitle } from '../../components/sui'
 
 import { findOne } from '../../lib/api/strapi'
-import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
+import { StrapiImage } from '../../components/StrapiElements'
 import BulletPoint from '../../components/BulletPoint'
 import { CloudData } from '../../types/cloud'
 import { GetStaticProps } from 'next'
@@ -65,7 +65,7 @@ export default function CloudPage({
       <Layout footerData={footerData} seo={seo}>
         <div className='pt-10 md:bg-speed-lines bg-center bg-no-repeat bg-contain'>
           <div className='relative'>
-            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 md:pb-64 md:px-8 2xl:px-0'>
+            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 md:pb-64 md:px-12'>
               <div className='flex'>
                 <div className='w-11/12 mx-auto md:w-6/12 md:mt-16 flex-col text-center md:text-left'>
                   <h1 className='font-basier text-4xl mb-6 md:text-5.5xl leading-tight font-semibold'>
@@ -144,7 +144,7 @@ export default function CloudPage({
           </div>
         </div>
         <div className='text-neutral-0 bg-neutral-725'>
-          <div className='flex container mx-auto flex-col max-w-7xl pb-16 px-4 sm:px-8 2xl:px-0 pt-16'>
+          <div className='flex container mx-auto flex-col max-w-7xl pb-16 px-4 sm:px-8 md:px-12 pt-16'>
             <div className='feature-container'>
               {features.map((feature) => (
                 <div className='col' key={feature.id}>
@@ -171,7 +171,7 @@ export default function CloudPage({
         </div>
 
         <div className='flex w-full text-neutral-0 pb-12 gap-y-4 md:gap-y-28 bg-shadow-element yellow-shadow'>
-          <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-24 pb-8 text-center px-8 2xl:px-0 gap-y-24'>
+          <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-24 pb-8 text-center px-8  md:px-12 gap-y-24'>
             {featureBlocks.map((item, index: number) => (
               <>
                 <div
@@ -228,7 +228,7 @@ export default function CloudPage({
                 growing library of ecosystem integrations for data ingestion,
                 data visualisation, language clients and SQL clients.
               </div>
-              <div className='flex gap-6 mt-16 max-w-[88%] mx-auto md:max-w-[552px] flex-wrap'>
+              <div className='flex gap-6 mt-16 mx-auto justify-center md:max-w-[552px] flex-wrap'>
                 {integrations.map((integration) => (
                   <CUICard className='p-4'>
                     <Image
@@ -326,7 +326,7 @@ export default function CloudPage({
           </div>
         </div>
 
-        <div className='pb-16 section-container'>
+        <div className='pb-16 section-container md:px-12'>
           <div className='bg-primary-300 text-neutral-0 w-full rounded-lg flip-selection py-16 px-4'>
             <div className='flex container mx-auto flex-col 2xl:px-0'>
               <div className='flex flex-col text-center mx-auto'>
