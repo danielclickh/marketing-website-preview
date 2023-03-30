@@ -336,7 +336,7 @@ export default function HomePage({
               </div>
             </div>
           </div>
-          <div className='hidden md:block w-full bg-contain'>
+          <div className='hidden md:block w-full md:px-12 bg-contain'>
             <embed
               id='E'
               src='speed-animation.svg'
@@ -347,7 +347,7 @@ export default function HomePage({
       </div>
       <HRSeparator className='my-24' />
       <div className='relative flex flex-col gap-y-28'>
-        <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element'>
+        <div className='flex flex-col items-center justify-between self-center section-container w-full md:px-12 bg-shadow-element'>
           <div className='flex flex-col items-center w-full'>
             <Image
               src='/fast-icon.svg'

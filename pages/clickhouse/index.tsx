@@ -71,8 +71,8 @@ export default function ClickHouseServerPage({
   return (
     <>
       <Layout footerData={footerData} seo={seo}>
-        <div className='pt-10 md:bg-speed-lines bg-center bg-no-repeat bg-contain'>
-          <div className='relative bg-grid'>
+        <div className='md:bg-speed-lines bg-center bg-no-repeat bg-contain'>
+          <div className='pt-10 relative bg-grid'>
             <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 px-4 md:pb-64 md:px-8 2xl:px-0'>
               <div className='flex'>
                 <div className='md:w-7/12 md:mt-16 flex-col text-center md:text-left'>
@@ -101,7 +101,7 @@ export default function ClickHouseServerPage({
                           label: mainButton.text,
                           category: 'website-hero'
                         }}
-                        linkClass='w-full mx-auto max-w-[14rem] md:max-w-[12rem]'
+                        linkClass='w-full mx-auto md:mx-0 max-w-[14rem] md:max-w-[12rem]'
                         className='w-full'>
                         {mainButton.text}
                       </CUIButton>
@@ -117,7 +117,7 @@ export default function ClickHouseServerPage({
                           label: secondaryButton.text,
                           category: 'website-hero'
                         }}
-                        linkClass='w-full mx-auto max-w-[14rem]'
+                        linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                         className='w-full'>
                         {secondaryButton.text}
                       </CUIButton>
@@ -212,10 +212,8 @@ export default function ClickHouseServerPage({
                 latency for most kinds of queries.
               </div>
 
-              <div className='grid grid-cols-1 md:grid-cols-3 gap-10 md:max-w-6xl mx-auto mt-10 md:mt-0'>
-                <CUICard
-                  title='Strives for CPU efficiency'
-                  className='p-6 max-w-[24.5rem] md:max-w-full'>
+              <div className='grid grid-cols-1 md:grid-cols-3 gap-10 px-4 md:px-0 md:max-w-6xl mx-auto mt-10 md:mt-0'>
+                <CUICard title='Strives for CPU efficiency' className='p-6'>
                   <p className='font-inconsolata text-primary-300'>
                     Vectorization
                   </p>
@@ -229,9 +227,7 @@ export default function ClickHouseServerPage({
                     columns increases CPU cache line hit rate.
                   </SuiText>
                 </CUICard>
-                <CUICard
-                  title='Strives for CPU efficiency'
-                  className='p-6 w-full max-w-[22.5rem]'>
+                <CUICard title='Strives for CPU efficiency' className='p-6'>
                   <p className='font-inconsolata text-primary-300'>Locality</p>
                   <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2'>
                     Optimizes disk drive access
@@ -244,9 +240,7 @@ export default function ClickHouseServerPage({
                     continually stored data.
                   </SuiText>
                 </CUICard>
-                <CUICard
-                  title='Strives for CPU efficiency'
-                  className='p-6 w-full max-w-[22.5rem]'>
+                <CUICard title='Strives for CPU efficiency' className='p-6'>
                   <p className='font-inconsolata text-primary-300'>Optimized</p>
                   <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold  text-center px-4'>
                     Minimizes data transfers
@@ -265,8 +259,8 @@ export default function ClickHouseServerPage({
 
         <HRSeparator className='my-12 md:my-24' />
 
-        <div className='relative flex flex-col gap-y-28 md:mt-24 md:max-w-6xl mx-auto '>
-          <div className='flex flex-col items-center justify-between self-center section-container max-w-[24.5rem] md:max-w-full bg-shadow-element-left red-shadow'>
+        <div className='relative flex flex-col gap-y-28 md:mt-24 md:max-w-6xl mx-auto px-4 md:px-0'>
+          <div className='flex flex-col items-center justify-between self-center section-container mx-auto bg-shadow-element-left red-shadow'>
             <CUICard className='p-8'>
               <div className='flex w-full justify-between'>
                 <h3 className='w-full text-center md:text-left font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold'>

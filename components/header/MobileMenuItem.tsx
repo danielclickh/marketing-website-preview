@@ -39,7 +39,7 @@ function MobileMenuItem({
             return (
               <div className='flex flex-col pt-4'>
                 {subitem.name && (
-                  <div className='mb-3 font-medium text-sm'>{subitem.name}</div>
+                  <div className='mb-4 font-medium text-sm'>{subitem.name}</div>
                 )}
                 {subitem.menuItems.map((item: HeaderLinkItem) => (
                   <SuiLink
@@ -50,7 +50,7 @@ function MobileMenuItem({
                       label: item.name,
                       category: 'website-nav'
                     }}
-                    className='flex items-start hover:no-underline max-w-md mb-2'>
+                    className='flex items-start hover:no-underline max-w-md mb-4'>
                     <div
                       className={styles.menuItem}
                       data-icon={item.icon ? 'true' : 'false'}>
@@ -68,7 +68,6 @@ function MobileMenuItem({
                       )}
                       <div className='flex flex-col'>
                         <SuiText
-                          size='sm'
                           color='primary'
                           weight={item.icon ? 'normal' : 'medium'}>
                           {item.name}
