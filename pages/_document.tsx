@@ -8,7 +8,7 @@ export default function BaseLayout() {
         <meta content='width=device-width, initial-scale=1' name='viewport' />
         <link href='favicon.ico' rel='icon' type='image/x-icon' />
       </Head>
-      <body>
+      <body className='antialiased'>
         <Main />
         <NextScript />
       </body>

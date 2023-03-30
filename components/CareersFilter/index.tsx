@@ -1,9 +1,10 @@
 import React, { ChangeEvent, useMemo, useState } from 'react'
 import useSWR from 'swr'
 import CategorySelector from '../CategorySelector'
-import { SuiSearchField, SuiText, SuiLink, SuiButton } from '../sui/client'
+import { SuiSearchField, SuiText, SuiLink } from '../sui/client'
 import { JobType, PositionType } from './types'
-import { ArrowRightIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon } from '@heroicons/react/solid'
+import { CUIButton } from '../ClickUI'
 
 type DepartmentType = [name: string, jobs: JobType[]]
 const convertMapToArray = (obj: any) => {
@@ -149,11 +150,9 @@ function CareersFilter() {
             <h3>No results matching your search</h3>
           )}
           {filteredDepartments.map(([name, jobs]: [string, JobType[]]) => (
-            <div>
+            <div key={name}>
               {jobs.length > 0 && (
-                <div
-                  key={name}
-                  className='grid grid-cols-1 border-b border-neutral-700 mb-16'>
+                <div className='grid grid-cols-1 border-b border-neutral-700 mb-16'>
                   <h3 className='font-inter text-xl font-bold mb-8'>{name}</h3>
                   {jobs.map((job: JobType, index: number) => (
                     <div
@@ -176,12 +175,13 @@ function CareersFilter() {
                             {job.location}
                           </SuiText>
                         </div>
-                        <div className='mt-4 md:mt-0 border border-primary-600 rounded py-2 px-6 font-semibold '>
-                          <span className='flex justify-center items-center gap-2'>
-                            Apply
-                            <ArrowRightIcon className='w-4' />
-                          </span>
-                        </div>
+                        <CUIButton
+                          type='secondary'
+                          className='w-auto'
+                          target='_blank'
+                          iconRight={<ChevronRightIcon className='w-4 h-4' />}>
+                          Apply
+                        </CUIButton>
                       </SuiLink>
                     </div>
                   ))}

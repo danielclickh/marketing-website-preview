@@ -1,14 +1,5 @@
-import {
-  SuiButton,
-  SuiLink,
-  SuiPanel,
-  SuiText,
-  SuiTitle
-} from '../../../components/sui'
-
-import { LocationMarkerIcon } from '@heroicons/react/solid'
+import { SuiTitle } from '../../../components/sui'
 import { findAll, findOne } from '../../../lib/api/strapi'
-import { StrapiPicture } from '../../../components/StrapiElements'
 import RecentEvents from '../../../components/RecentEvents'
 import { EventType } from '../../../types/events'
 import { NewsAndEventsData, NewsEventProps } from '../../../types/newsEvents'
@@ -17,6 +8,11 @@ import Layout from '../../../components/Layout'
 import { GetStaticProps } from 'next'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
+import { convertDateToString } from '../../../lib/utils/dateUtils'
+import { CUILink } from '../../../components/ClickUI'
+import { StrapiImage } from '../../../components/StrapiElements'
+import { CalendarIcon } from '@heroicons/react/outline'
+import EventPost from '../../../components/EventPostList/EventPost'
 
 export const getStaticProps: GetStaticProps<NewsEventProps> =
   async function getStaticProps() {
@@ -135,185 +131,140 @@ export default function News({
 }: NewsEventProps) {
   return (
     <Layout footerData={footerData} seo={seo}>
-      <div className='pt-14'>
+      <div>
+        <h1 className='pt-10 lg:pt-20 mb-10 lg:mb-16 mx-auto text-center font-basier text-4xl md:text-5.5xl text-neutral-100'>
+          {title}
+        </h1>
         <div className='flex mx-auto flex-col px-4 sm:px-8 2xl:px-0'>
-          <div className='flex flex-col text-center mx-auto'>
-            <SuiTitle type='h1' className='mb-5'>
-              {title}
-            </SuiTitle>
-            <SuiText
-              size='lg'
-              color='secondary'
-              weight='medium'
-              className='max-w-3xl'>
-              {description}
-            </SuiText>
-          </div>
-
           {featuredEvent && (
-            <div className='flex max-w-7xl mx-auto'>
-              <SuiPanel
-                color='bg-neutral-750 text-neutral-0'
-                isRounded
-                border
-                shadow
-                padding='lg'
-                className='my-16'>
-                <div className='flex flex-col md:flex-row'>
-                  <div className='flex flex-col md:w-1/2'>
-                    <SuiTitle type='h5' color='text-muted' className='mb-4'>
-                      {featuredEvent.category} • {featuredEvent.location.city}
-                    </SuiTitle>
-
-                    <SuiTitle
-                      type='h3'
-                      weight='bold'
-                      className='mb-4 !text-3xl'>
-                      {featuredEvent.title}
-                    </SuiTitle>
-
-                    <SuiText
-                      size='base'
-                      weight='medium'
-                      color='secondary'
-                      className='mb-4'>
-                      {featuredEvent.shortDescription}
-                    </SuiText>
-                    <div className='flex'>
-                      <SuiButton
-                        type='empty'
-                        weight='medium'
-                        size='lg'
-                        iconRight
-                        path={`/company/events/${featuredEvent.slug}`}
-                        target='_self'
-                        color='primary'
-                        className='px-0 hover:text-primary'>
-                        {featuredEvent.viewMoreDetailsText}
-                      </SuiButton>
+            <div>
+              <CUILink
+                href={`/company/events/${featuredEvent.slug}`}
+                className='mt-2 flex flex-col md:flex-row mb-16 gap-10 section-container hover:no-underline'>
+                <div className='flex flex-col lg:flex-row-reverse rounded-xl gap-8 lg:gap-12 xl:gap-24'>
+                  {featuredEvent.thumbnailPng && (
+                    <StrapiImage
+                      {...featuredEvent.thumbnailPng}
+                      className='w-full lg:w-1/2 rounded-lg object-cover h-fit'
+                    />
+                  )}
+                  <div className='grid w-full border-l-8 border-primary-300 pl-6'>
+                    <div className='flex flex-col justify-between'>
+                      <div>
+                        <SuiTitle type='h2' className='text-neutral-100'>
+                          {featuredEvent.title}
+                        </SuiTitle>
+                        <div className='mt-8 text-neutral-200 font-normal mb-8'>
+                          {featuredEvent.shortDescription}
+                        </div>
+                        <div className='flex items-center space-x-3 mb-4'>
+                          <CalendarIcon className='w-6 h-6 text-neutral-200 stroke-1' />
+                          <div className=' text-neutral-200'>
+                            {featuredEvent.localDatetime && (
+                              <div className='text-sm text-neutral-300'>
+                                {convertDateToString(
+                                  featuredEvent.localDatetime
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div className='flex items-center space-x-3'>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            strokeWidth={1}
+                            stroke='currentColor'
+                            className='w-6 h-6 text-neutral-200'>
+                            <path
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              d='M15 10.5a3 3 0 11-6 0 3 3 0 016 0z'
+                            />
+                            <path
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              d='M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z'
+                            />
+                          </svg>
+                          <div className=' text-neutral-200'>
+                            {featuredEvent.location && (
+                              <div className='text-sm text-neutral-300'>
+                                <span>
+                                  {featuredEvent.location.city} (
+                                  {featuredEvent.location.country})
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      <div className='mt-8'>
+                        <div className='mt-4 md:mt-0 rounded py-2 px-6 font-semibold inline-block bg-primary-300'>
+                          <span className='flex justify-center items-center gap-2 text-black text-base'>
+                            Register
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className='flex md:w-1/2 pt-8 md:pt-0 justify-center items-center md:px-20'>
-                    <StrapiPicture
-                      light={featuredEvent.darkFeatureImagePng}
-                      dark={featuredEvent.darkFeatureImagePng}
-                    />
-                  </div>
                 </div>
-              </SuiPanel>
+              </CUILink>
             </div>
           )}
         </div>
       </div>
-      <div className='flex w-full pb-8'>
-        <RecentEvents events={recentEvents} />
-      </div>
 
-      <div className='flex w-full text-neutral-0 pb-8'>
-        <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
-          <div className='flex flex-col md:flex-row justify-between pb-4 gap-x-24 gap-y-10'>
-            <div className='flex flex-col md:w-1/2'>
-              <SuiTitle type='h3' weight='bold' className='mb-6 !text-3xl'>
-                {latestNewsTitle}
-              </SuiTitle>
-
-              <div className='space-y-8 -mx-4 md:mx-0'>
-                {newsItems.map((newsItem) => (
-                  <NewsItem
-                    key={newsItem.headline}
-                    source={newsItem.publication}
-                    date={newsItem.date}
-                    title={newsItem.headline}
-                    abstract={newsItem.shortIntro}
-                    ctaButton={newsItem.ctaButton}
-                  />
-                ))}
-              </div>
-            </div>
-            <div className='flex flex-col md:w-1/2'>
-              <SuiTitle type='h3' weight='bold' className='mb-6 !text-3xl'>
-                {upcomingEventsTitle}
-              </SuiTitle>
-              <div className='space-y-8 -mx-4 md:mx-0'>
-                {allEvents.map((upcomingEvent) => (
-                  <SuiLink
-                    href={`/company/events/${upcomingEvent.slug}`}
-                    target='_self'
-                    className={`grid grid-cols-1 md:grid-cols-[4rem_1fr] gap-x-6 p-4 group hover:bg-neutral-725 rounded-lg hover:no-underline ease-in-out duration-200 cursor-pointer event-${upcomingEvent.title.replace(
-                      ' ',
-                      '-'
-                    )}`}
-                    key={upcomingEvent.title}>
-                    <div className='hidden md:flex items-top justify-start'>
-                      <div className='w-16 h-16 bg-neutral-800 rounded-lg flex items-center p-1 shadow-card'>
-                        <StrapiPicture
-                          dark={upcomingEvent.darkFeatureImagePng}
-                          light={upcomingEvent.lightFeatureImagePng}
-                          alt={`${upcomingEvent.title}`}
-                          className='cursor-pointer w-full h-auto'
-                        />
-                      </div>
-                    </div>
-                    <div className='flex flex-col'>
-                      <SuiText
-                        size='lg'
-                        weight='bold'
-                        className='mb-2 !text-xl'>
-                        {upcomingEvent.title}
-                      </SuiText>
-                      <SuiText
-                        size='sm'
-                        weight='normal'
-                        color='secondary'
-                        className='mb-3'>
-                        {upcomingEvent.shortDescription}
-                      </SuiText>
-                      <div className='flex items-center space-x-2'>
-                        <LocationMarkerIcon className='h-3 w-3 text-c4' />
-                        <SuiText size='sm' weight='medium' color='secondary'>
-                          {upcomingEvent.category == 'On-Demand Webinar' && (
-                            <>{upcomingEvent.category}</>
-                          )}
-                          {upcomingEvent.category != 'On-Demand Webinar' && (
-                            <span>
-                              {[
-                                upcomingEvent.location.city,
-                                upcomingEvent.location.country
-                              ].join(', ')}{' '}
-                              {upcomingEvent.localDatetime &&
-                                ` • ${new Date(
-                                  upcomingEvent.localDatetime
-                                ).toDateString()}`}
-                            </span>
-                          )}
-                        </SuiText>
-                      </div>
-                    </div>
-                  </SuiLink>
-                ))}
-              </div>
-            </div>
+      <div className='max-w-7xl mx-auto px-4 sm:px-8 2xl:px-0'>
+        <h2 className='text-4xl font-semibold font-basier text-neutral-100 mb-10'>
+          {upcomingEventsTitle}
+        </h2>
+        <div>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center'>
+            {allEvents.map((event: EventType) => (
+              <EventPost key={event.id} {...event} />
+            ))}
           </div>
         </div>
       </div>
 
-      <div className='flex w-full pb-8'>
-        <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-4 sm:px-8 2xl:px-0'>
-          <SuiTitle type='h2' className='mb-8 !text-3xl'>
-            {pressReleasesTitle}
-          </SuiTitle>
-          <div className='grid grid-cols-1 md:grid-cols-2 justify-between pb-4 gap-y-10 gap-x-24'>
-            {pressReleases.map((pressRelease) => (
-              <NewsItem
-                key={pressRelease.headline}
-                source={pressRelease.publication}
-                date={pressRelease.date}
-                title={pressRelease.headline}
-                abstract={pressRelease.shortIntro}
-                ctaButton={pressRelease.ctaButton}
-              />
-            ))}
-          </div>
+      <div className='pb-8 bg-shadow-element'>
+        <RecentEvents events={recentEvents} />
+      </div>
+
+      <div className='max-w-7xl mx-auto px-4 sm:px-8 2xl:px-0'>
+        <h2 className='text-4xl font-semibold font-basier mb-6 text-neutral-100'>
+          {latestNewsTitle}
+        </h2>
+        <div className='grid md:grid-cols-2 gap-12 '>
+          {newsItems.map((newsItem) => (
+            <NewsItem
+              key={newsItem.headline}
+              source={newsItem.publication}
+              date={newsItem.date}
+              title={newsItem.headline}
+              abstract={newsItem.shortIntro}
+              ctaButton={newsItem.ctaButton}
+            />
+          ))}
+        </div>
+      </div>
+      <div className='max-w-7xl mx-auto my-24 px-4 sm:px-8 2xl:px-0'>
+        <h2 className='text-4xl font-semibold font-basier mb-6 text-neutral-100'>
+          {pressReleasesTitle}
+        </h2>
+        <div className='grid md:grid-cols-2 gap-12'>
+          {pressReleases.map((pressRelease) => (
+            <NewsItem
+              key={pressRelease.headline}
+              source={pressRelease.publication}
+              date={pressRelease.date}
+              title={pressRelease.headline}
+              abstract={pressRelease.shortIntro}
+              ctaButton={pressRelease.ctaButton}
+            />
+          ))}
         </div>
       </div>
     </Layout>

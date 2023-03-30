@@ -41,7 +41,7 @@ export default function BlogPost({
             <div className='mb-2 font-inconsolata text-primary-300 font-medium text-base'>
               {category}
             </div>
-            <div className='font-basier text-xl font-medium leading-tight cursor-pointer'>
+            <div className='font-basier text-xl font-medium leading-tight cursor-pointer  text-neutral-100'>
               {title}
             </div>
           </div>

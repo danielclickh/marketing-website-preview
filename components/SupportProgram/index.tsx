@@ -47,7 +47,7 @@ export default function SupportProgram(props: any) {
                       />
                     </svg>
 
-                    <span className='text-sm text-left'>
+                    <span className='text-base text-left'>
                       New Support Case via ClickHouse Cloud console
                     </span>
                   </a>
@@ -69,7 +69,7 @@ export default function SupportProgram(props: any) {
                       />
                     </svg>
 
-                    <span className='text-sm text-left'>
+                    <span className='text-base text-left'>
                       <span className='text-neutral-200'>Email</span>{' '}
                       support@clickhouse.com
                     </span>
@@ -123,7 +123,7 @@ export default function SupportProgram(props: any) {
           </div>
         </div>
       </div>
-      <div className='flex container mx-auto flex-col section-container items-center bg-shadow-element yellow-shadow pt-6'>
+      <div className='flex container mx-auto flex-col section-container items-center bg-shadow-element yellow-shadow shadow-z-low pt-6'>
         <div className='text-center pt-16 pb-8'>
           <Image
             src='/images/support-program/support-details-icon.svg'
@@ -139,31 +139,29 @@ export default function SupportProgram(props: any) {
           '>
             ClickHouse Cloud Support Details
           </h2>
-          <p className='text-base pb-16'>
+          <p className='text-base pb-16 text-neutral-200 pt-2'>
             ClickHouse includes Support Services for all users and customers of
             ClickHouse Cloud.
           </p>
-          <div className='support-program-rich-content'>
-            <table className='border-b border-b-neutral-700'>
+          <div className='support-program-rich-content z-20 relative'>
+            <table className='border-b border-b-neutral-700 text-neutral-200 z-20 relative'>
               <thead>
                 <tr>
                   <th></th>
-                  <th className='p-0 border border-neutral-700 bg-neutral-800'>
-                    <div className='p-3'>ClickHouse Cloud Trial</div>
+                  <th className='p-0 border border-neutral-700 bg-neutral-750'>
+                    <div className='p-3'>Trial</div>
                   </th>
-                  <th className='p-0 border border-neutral-700 bg-neutral-800'>
-                    <div className='p-3'>
-                      ClickHouse Cloud Monthly "Pay as you Go" or Annual
-                    </div>
+                  <th className='p-0 border border-neutral-700 bg-neutral-750'>
+                    <div className='p-3'>Monthly "Pay as you Go" or Annual</div>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className='text-left border border-neutral-700 px-3 w-64'>
+                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750'>
                     <strong>Learning</strong>
                   </td>
-                  <td className='bg-neutral-800 p-4 border-r border-r-neutral-700'>
+                  <td className='bg-neutral-750 p-4 border-r border-r-neutral-700 '>
                     <p>
                       <a href='https://clickhouse.cloud/learn'>
                         On-Demand Training included
@@ -173,7 +171,7 @@ export default function SupportProgram(props: any) {
                       <a href='https://clickhouse.com/docs/'>Docs</a>
                     </p>
                   </td>
-                  <td className='bg-neutral-800 p-4  border-r border-r-neutral-700'>
+                  <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
                     <p>
                       <a href='https://clickhouse.cloud/learn'>
                         On-Demand Training included
@@ -185,10 +183,10 @@ export default function SupportProgram(props: any) {
                   </td>
                 </tr>
                 <tr>
-                  <td className='text-left border border-neutral-700 px-3 w-64'>
+                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750'>
                     <strong>Support</strong>
                   </td>
-                  <td className='bg-neutral-800 p-4 border-r border-r-neutral-700 border-l border-l-neutral-700'>
+                  <td className='bg-neutral-750 p-4 border-r border-r-neutral-700 border-l border-l-neutral-700'>
                     <ul>
                       <li>Unlimited Support Cases </li>
                       <li>
@@ -200,7 +198,7 @@ export default function SupportProgram(props: any) {
                       <li>Office Hours</li>
                     </ul>
                   </td>
-                  <td className='bg-neutral-800 p-4  border-r border-r-neutral-700'>
+                  <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
                     <ul>
                       <li>Unlimited Support Cases</li>
                       <li>
@@ -216,32 +214,32 @@ export default function SupportProgram(props: any) {
                   </td>
                 </tr>
                 <tr>
-                  <td className='text-left border border-neutral-700 px-3 w-64'>
+                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750'>
                     <strong>Expert Sessions</strong>
                   </td>
-                  <td className='bg-neutral-800 p-4  border-r border-r-neutral-700'>
+                  <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
                     Unlimited live Expert Sessions (short consultative guidance
                     sessions)
                     <br />
                     Access to On-Demand Expert Sessions included
                   </td>
-                  <td className='bg-neutral-800 p-4  border-r border-r-neutral-700'>
+                  <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
                     Unlimited live Expert Sessions <br />
                     Access to On-Demand Expert Sessions included
                   </td>
                 </tr>
                 <tr>
-                  <td className='text-left border border-neutral-700 px-3 w-64'>
+                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750'>
                     <strong>Professional Services</strong>
                   </td>
-                  <td className='bg-neutral-800 p-4  border-r border-r-neutral-700'>
+                  <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
                     ClickHouse Cloud Quickstart package available for purchase{' '}
                     <br />
                     SOW available for purchasep <br />
                     &nbsp;&nbsp;&nbsp;&nbsp; Virtual + additional T&amp;E for
                     onsite
                   </td>
-                  <td className='bg-neutral-800 p-4  border-r border-r-neutral-700'>
+                  <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
                     ClickHouse Cloud Quickstart package available for purchase{' '}
                     <br />
                     SOW available for purchasep <br />
@@ -255,7 +253,7 @@ export default function SupportProgram(props: any) {
         </div>
       </div>
       <HRSeparator className='my-30' />
-      <div className='flex container mx-auto flex-col section-container items-center bg-shadow-element bg-shadow-element'>
+      <div className='flex container mx-auto flex-col section-container items-center bg-shadow-element align-shadow-left shadow-z-low'>
         <h2
           className='font-semibold text-4xl mb-10
           '>
@@ -323,114 +321,125 @@ export default function SupportProgram(props: any) {
         </div>
       </div>
       <HRSeparator className='my-30' />
-      <div className='flex container mx-auto flex-col section-container items-center bg-shadow-element yellow-shadow'>
+      <div className='flex container mx-auto flex-col section-container items-center '>
         <h2
           className='font-semibold text-4xl mb-4 text-center
           '>
-          Support Response: Service Level Agreements (“SLA”)
+          Service Level Agreements (“SLA”)
         </h2>
         <p className='text-base mb-20 text-neutral-200 text-center'>
           Classification of severity levels for issues reported and response
           times
         </p>
         <div className='md:flex items-center md:space-x-20 justify-evenly max-w-5xl w-full mx-auto text-center'>
-          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-md p-6'>
+          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-md p-6 bg-neutral-900/50'>
             <p className='font-inconsolata text-primary-300 mb-2'>Urgent</p>
             <p className='text-2xl font-semibold mb-16'>Severity 1</p>
-            <p>
-              <span className='font-bold text-base'>1 hour SLA</span>
-              <br />
-              <span className='font-light text-base text-neutral-200'>
-                24 h / 7 days / 365 days / year
-              </span>
+            <p className='font-bold text-base mb-2'>1 hour SLA</p>
+            <p className='font-light text-base text-neutral-200'>
+              24 h / 7 days / 365 days / year
             </p>
           </div>
-          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-md p-6'>
+          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-md p-6 bg-neutral-900/50'>
             <p className='font-inconsolata text-primary-300 mb-2'>
               High priority
             </p>
             <p className='text-2xl font-semibold mb-16'>Severity 2</p>
-            <p>
-              <span className='font-bold text-base'>4 hour SLA</span>
-              <br />
-              <span className='font-light text-base text-neutral-200'>
-                Business hours only
-              </span>
+            <p className='font-bold text-base mb-2'>4 hour SLA</p>
+            <p className='font-light text-base text-neutral-200'>
+              Business hours only
             </p>
           </div>
-          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-md p-6'>
+          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-md p-6 bg-neutral-900/50'>
             <p className='font-inconsolata text-primary-300 mb-2'>
               Normal priority
             </p>
             <p className='text-2xl font-semibold mb-16'>Severity 3</p>
-            <p>
-              <span className='font-bold text-base'>1 business day SLA</span>
-              <br />
-              <span className='font-light text-base text-neutral-200'>
-                Business hours only
-              </span>
+            <p className='font-bold text-base mb-2'> 1 business day SLA</p>
+            <p className='font-light text-base text-neutral-200'>
+              Business hours only
             </p>
           </div>
         </div>
       </div>
       <HRSeparator className='my-30' />
-      <div className='flex container mx-auto flex-col section-container items-center bg-shadow-element yellow-shadow mb-30'>
+      <div className='flex container mx-auto flex-col section-container items-center bg-shadow-element yellow-shadow  align-shadow-right mb-30'>
         <h2
           className='font-semibold text-4xl text-center mb-20
           '>
           Support and Escalation Levels
         </h2>
-        <div className='grid grid-cols-1 gap-y-9 w-full max-w-2xl'>
-          <div className='border border-neutral-700 w-full p-6 rounded-md'>
-            <div className='flex items-center space-x-10'>
-              <div className='text-xl font-bold w-32'>Level 1 / L1 </div>
-              <div className='text-base text-neutral-200'>
-                ClickHouse front-line team identifying and/or routing new cases,
-                inquiries, or questions
+        <div className='grid grid-cols-1 gap-y-2 w-full max-w-2xl'>
+          <div>
+            <div className='w-full rounded-md border border-neutral-700 p-6 bg-neutral-900/50'>
+              <div className='grid md:grid-cols-4 items-center'>
+                <div className='md:col-span-1'>
+                  <div className='text-xl font-bold'>Level 1 / L1 </div>
+                </div>
+                <div className='md:col-span-3 text-base text-neutral-200'>
+                  ClickHouse front-line team identifying and/or routing new
+                  cases, inquiries, or questions
+                </div>
               </div>
             </div>
           </div>
           <div className='text-center mx-auto'>
             <ArrowsDown />
           </div>
-          <div className='border border-neutral-700 w-full p-6 rounded-md'>
-            <div className='flex items-center space-x-10'>
-              <div className='text-xl font-bold w-32'>Level 2 / L2 </div>
-              <div className='text-base text-neutral-200'>
-                ClickHouse Support Services team first touch
+          <div>
+            <div className='w-full rounded-md border border-neutral-700 p-6 bg-neutral-900/50'>
+              <div className='grid md:grid-cols-4 items-center'>
+                <div className='md:col-span-1'>
+                  <div className='text-xl font-bold'>Level 2 / L2</div>
+                </div>
+                <div className='md:col-span-3 text-base text-neutral-200'>
+                  ClickHouse Support Services team first touch
+                </div>
               </div>
             </div>
           </div>
           <div className='text-center mx-auto'>
             <ArrowsDown />
           </div>
-          <div className='border border-neutral-700 w-full p-6 rounded-md'>
-            <div className='flex items-center space-x-10'>
-              <div className='text-xl font-bold w-32'>Level 3 / L3 </div>
-              <div className='text-base text-neutral-200'>
-                ClickHouse Support Services escalation status
+          <div>
+            <div className='w-full rounded-md border border-neutral-700 p-6 bg-neutral-900/50'>
+              <div className='grid md:grid-cols-4 items-center'>
+                <div className='md:col-span-1'>
+                  <div className='text-xl font-bold'>Level 3 / L3</div>
+                </div>
+                <div className='md:col-span-3 text-base text-neutral-200'>
+                  ClickHouse Support Services escalation status
+                </div>
               </div>
             </div>
           </div>
           <div className='text-center mx-auto'>
             <ArrowsDown />
           </div>
-          <div className='border border-neutral-700 w-full p-6 rounded-md'>
-            <div className='flex items-center space-x-10'>
-              <div className='text-xl font-bold w-32'>Level 4 / L4 </div>
-              <div className='text-base text-neutral-200'>
-                Escalation to ClickHouse Engineering or Cloud
+          <div>
+            <div className='w-full rounded-md border border-neutral-700 p-6 bg-neutral-900/50'>
+              <div className='grid md:grid-cols-4 items-center'>
+                <div className='md:col-span-1'>
+                  <div className='text-xl font-bold'>Level 4 / L4</div>
+                </div>
+                <div className='md:col-span-3 text-base text-neutral-200'>
+                  Escalation to ClickHouse Engineering or Cloud
+                </div>
               </div>
             </div>
           </div>
           <div className='text-center mx-auto'>
             <ArrowsDown />
           </div>
-          <div className='border border-neutral-700 w-full p-6 rounded-md'>
-            <div className='flex items-center space-x-10'>
-              <div className='text-xl font-bold w-32'>Level 5 / L5 </div>
-              <div className='text-base text-neutral-200'>
-                Escalation to ClickHouse Executive Leadership
+          <div>
+            <div className='w-full rounded-md border border-neutral-700 p-6 bg-neutral-900/50'>
+              <div className='grid md:grid-cols-4 items-center'>
+                <div className='md:col-span-1'>
+                  <div className='text-xl font-bold'>Level 5 / L5</div>
+                </div>
+                <div className='md:col-span-3 text-base text-neutral-200'>
+                  Escalation to ClickHouse Executive Leadership
+                </div>
               </div>
             </div>
           </div>

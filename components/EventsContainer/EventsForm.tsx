@@ -4,10 +4,15 @@ import { validateEmail } from '../../lib/form'
 import BulletPoint from '../BulletPoint'
 import { SuiButton, SuiPanel, SuiTextField, useSnackbar } from '../sui/client'
 import { EventsFormProps } from './types'
+import Image from 'next/image'
+import { CheckCircleIcon } from '@heroicons/react/outline'
+import CopyUrlButton from '../CopyUrlButton'
+import SocialButton from '../SocialButton'
 
 function EventsForm({
   submitted,
   onSubmit: onSubmitProp,
+  featuredImage,
   form
 }: EventsFormProps) {
   const { openSnackBar } = useSnackbar()
@@ -17,7 +22,6 @@ function EventsForm({
   const [loading, setLoading] = useState(false)
   const { type, firstNameLabel, lastNameLabel, emailLabel, submitButtonLabel } =
     form
-
   const onChange = (e: any) => {
     const value = e.target.value ?? ''
     const name = e.target.name
@@ -114,82 +118,101 @@ function EventsForm({
   }
 
   return (
-    <SuiPanel
-      isRounded
-      color='bg-c2'
-      shadow
-      padding='xl'
-      className='ml-auto lg:max-w-lg'>
-      {submitted ? (
-        <div className='subscribed'>
-          <div className='success-container'>
-            <BulletPoint className='!pb-0'>
-              <p>Successfully subscribed to event</p>
-              <p className='flex md:hidden'>(scroll up to view)</p>
-            </BulletPoint>
-          </div>
-        </div>
-      ) : (
-        <div>
-          {type === 'eventRegistration' && (
-            <>
-              <SuiTextField
-                htmlFor='firstName'
-                name='firstName'
-                label={firstNameLabel}
-                value={firstName ?? ''}
-                onChange={onChange}
-                onBlur={onChange}
-                className='w-full mb-6'
-                error={
-                  typeof firstName === 'string' && firstName.length === 0
-                    ? 'Invalid First Name'
-                    : ''
-                }
-              />
-              <SuiTextField
-                htmlFor='lastName'
-                name='lastName'
-                label={lastNameLabel}
-                value={lastName ?? ''}
-                onChange={onChange}
-                onBlur={onChange}
-                className='w-full mb-6'
-                error={
-                  typeof lastName === 'string' && lastName.length === 0
-                    ? 'Invalid Last Name'
-                    : ''
-                }
-              />
-            </>
-          )}
-
-          <SuiTextField
-            htmlFor='email'
-            name='email'
-            label={emailLabel}
-            value={email ?? ''}
-            onKeyDown={onKeyDown}
-            onChange={onChange}
-            onBlur={onChange}
-            className='w-full mb-6'
-            error={
-              typeof email === 'undefined'
-                ? undefined
-                : email.length === 0
-                ? 'E-mail address cannot be empty'
-                : validateEmail(email)
-                ? ''
-                : 'Invalid E-mail address'
-            }
-          />
-
-          <SuiButton disabled={loading} type='primary' onClick={onSubmit}>
-            {submitButtonLabel}
-          </SuiButton>
-        </div>
+    <div className='w-full ml-auto lg:max-w-lg'>
+      {featuredImage && (
+        <Image
+          src={featuredImage.url}
+          width={512}
+          height={293}
+          alt='Featured image'
+          className='hidden lg:block rounded-lg object-cover w-full h-auto mb-20'
+        />
       )}
-    </SuiPanel>
+
+      <SuiPanel
+        isRounded
+        color='bg-neutral-900'
+        shadow
+        padding='xl'
+        className='w-full border border-neutral-800'>
+        {submitted ? (
+          <div className='subscribed'>
+            <div className='success-container text-center'>
+              <CheckCircleIcon className='stroke-1 w-16 h-16 mb-4 text-primary-300 mx-auto' />
+              <p className='text-xl px-10 font-bold mb-12'>
+                You’ve been successfully subscribed. See you there!
+              </p>
+              <p className='text-base px-10 font-semibold mb-2 text-neutral-300'>
+                Share the event
+              </p>
+              <div className='flex gap-4 flex-wrap justify-center text-neutral-0'>
+                <CopyUrlButton />
+                {['twitter', 'facebook', 'linkedin'].map((social) => (
+                  <SocialButton key={social} type={social} title='title' />
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div>
+            {type === 'eventRegistration' && (
+              <>
+                <SuiTextField
+                  htmlFor='firstName'
+                  name='firstName'
+                  label={firstNameLabel}
+                  value={firstName ?? ''}
+                  onChange={onChange}
+                  onBlur={onChange}
+                  className='w-full mb-6'
+                  error={
+                    typeof firstName === 'string' && firstName.length === 0
+                      ? 'Invalid First Name'
+                      : ''
+                  }
+                />
+                <SuiTextField
+                  htmlFor='lastName'
+                  name='lastName'
+                  label={lastNameLabel}
+                  value={lastName ?? ''}
+                  onChange={onChange}
+                  onBlur={onChange}
+                  className='w-full mb-6'
+                  error={
+                    typeof lastName === 'string' && lastName.length === 0
+                      ? 'Invalid Last Name'
+                      : ''
+                  }
+                />
+              </>
+            )}
+            <SuiTextField
+              htmlFor='email'
+              name='email'
+              label={emailLabel}
+              value={email ?? ''}
+              onKeyDown={onKeyDown}
+              onChange={onChange}
+              onBlur={onChange}
+              className='w-full mb-6'
+              error={
+                typeof email === 'undefined'
+                  ? undefined
+                  : email.length === 0
+                  ? 'E-mail address cannot be empty'
+                  : validateEmail(email)
+                  ? ''
+                  : 'Invalid E-mail address'
+              }
+            />
+            <SuiButton disabled={loading} type='primary' onClick={onSubmit}>
+              {submitButtonLabel}
+            </SuiButton>
+          </div>
+        )}
+      </SuiPanel>
+    </div>
   )
 }
 

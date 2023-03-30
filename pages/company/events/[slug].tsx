@@ -1,18 +1,18 @@
 import { GetStaticProps } from 'next'
 import React from 'react'
 import EventsContainer from '../../../components/EventsContainer'
-import GetStarted from '../../../components/GetStarted'
 import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'
-import RecentEvents from '../../../components/RecentEvents'
 import { StrapiImage } from '../../../components/StrapiElements'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findAll, getPathsValues } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ParamsType } from '../../../types/homepage'
 import { EventProps, EventType } from '../../../types/events'
-import styles from './Events.module.scss'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
+import { CalendarIcon } from '@heroicons/react/outline'
+import EventPost from '../../../components/EventPostList/EventPost'
+import Link from 'next/link'
 
 export const getStaticProps: GetStaticProps<EventProps> =
   async function getStaticProps({ params }) {
@@ -38,19 +38,18 @@ export const getStaticProps: GetStaticProps<EventProps> =
       ]
     })
 
-    const filters: Record<string, any> = {
-      localDatetime: {
-        $lt: new Date().toISOString()
-      },
-      slug: {
-        $ne: slug
-      }
-    }
     const { data: recentEvents }: { data: Array<EventType> } = await findAll(
       'events',
       {
-        filters: filters,
-        sort: ['localDatetime:DESC'],
+        filters: {
+          localDatetime: {
+            $gte: new Date().toISOString()
+          },
+          slug: {
+            $notContains: slug
+          }
+        },
+        sort: ['localDatetime:ASC'],
         populate: [
           'thumbnailPng',
           'hostedBy',
@@ -115,6 +114,8 @@ function EventPage({
   footerData,
   platforms,
   recentEvents,
+  datetimeAndTimezoneString,
+  lightFeatureImagePng,
   seo
 }: EventProps) {
   return (
@@ -123,36 +124,41 @@ function EventPage({
         <EventsContainer
           localDatetime={localDatetime}
           form={form}
-          recordedVimeoUrl={recordedVimeoUrl}>
+          recordedVimeoUrl={recordedVimeoUrl}
+          featuredImage={lightFeatureImagePng}>
           <div className='section_metadata mb-20'>
-            <SuiTitle type='h3' color='c6' className='mb-2 !text-lg'>
+            <h4 className='text-primary-300 text-lg'>
+              <Link href='/company/news-events'>News &amp; Events</Link> /{' '}
               {category}
-            </SuiTitle>
-            <SuiTitle type='h1' className='mb-5'>
+            </h4>
+            <h1
+              className='mb-8 text-5.5xl font-semibold leading-tight font-basier
+            '>
               {title}
-            </SuiTitle>
-            <SuiText
-              size='base'
-              weight='medium'
-              color='secondary'
-              className='whitespace-pre-wrap'>
-              {richDescription ? (
-                <Markdown
-                  className={`rich-text-content ${styles.eventDescription}`}>
-                  {richDescription}
-                </Markdown>
-              ) : (
-                description
-              )}
-            </SuiText>
+            </h1>
+
+            {/* {category !== 'On-Demand Webinar' && (
+              <div className='mb-10'>
+                <div className='flex space-x-3 items-center'>
+                  <CalendarIcon className='stroke-1 text-primary-300 w-6 h-6' />
+                  <span className='text-base font-normal'>
+                    {datetimeAndTimezoneString}
+                  </span>
+                </div>
+              </div>
+            )} */}
+
+            {richDescription && (
+              <div className='prose prose-neutral'>
+                <Markdown encloseByDiv={false}>{richDescription}</Markdown>
+              </div>
+            )}
           </div>
 
           {hostedBy && (
             <div className='hosted_by mb-16'>
-              <SuiTitle type='h2' className='mb-7'>
-                {hostedBy.title}
-              </SuiTitle>
-              <div className='grid grid-cols-1 sm:grid-cols-2 flex-wrap gap-6'>
+              <h3 className='mb-7 text-xl font-bold'>{hostedBy.title}</h3>
+              <div className='grid grid-cols-1 sm:grid-cols-2 flex-wrap gap-3'>
                 {hostedBy.hosts.map((host) => (
                   <div className='flex gap-5' key={`${host.name}-${host.role}`}>
                     {host.avatarPng && (
@@ -165,16 +171,10 @@ function EventPage({
                       />
                     )}
                     <div className='flex flex-col'>
-                      <SuiText size='sm' weight='medium' className='mb-1'>
-                        {host.name}
-                      </SuiText>
-                      <SuiText
-                        size='xs'
-                        weight='medium'
-                        color='secondary'
-                        className='flex-auto'>
+                      <p className='text-base mb-1 font-medium'>{host.name}</p>
+                      <p className='text-sm font-medium flex-auto text-neutral-300'>
                         {host.role}
-                      </SuiText>
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -207,11 +207,17 @@ function EventPage({
             </div>
           )}
         </EventsContainer>
-        <div className='bg-c2 text-neutral-0'>
-          <RecentEvents events={recentEvents} />
+      </div>
+      <div className='px-4 sm:px-8 2xl:px-0 pb-10 max-w-7xl mx-auto mb-40 bg-shadow-element yellow-shadow align-shadow-right'>
+        <div className='relative z-20'>
+          <h3 className='font-basier mb-10 text-4xl'>Upcoming events</h3>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center'>
+            {recentEvents.map((event: EventType) => (
+              <EventPost key={event.id} {...event} />
+            ))}
+          </div>
         </div>
       </div>
-      <GetStarted platforms={platforms} />
     </Layout>
   )
 }

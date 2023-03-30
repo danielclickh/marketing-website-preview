@@ -1,5 +1,7 @@
-import { SuiButton, SuiText, SuiLink } from '../sui'
+import { SuiText } from '../sui'
 import { NewsItemProps } from '../../types/newsEvents'
+import { CUIButton } from '../ClickUI'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 
 export default function NewsItem({
   source,
@@ -9,40 +11,26 @@ export default function NewsItem({
   ctaButton
 }: NewsItemProps) {
   return (
-    <SuiLink
-      href={ctaButton.href}
-      target='_blank'
-      className={`md:grid-cols-[4rem_1fr] gap-x-6 p-4 group flex hover:bg-primary-800 rounded-lg hover:no-underline ease-in-out duration-200 cursor-pointer`}
-      key={title}>
-      <div className='flex flex-col'>
-        <div>
-          <SuiText size='lg' weight='bold' className='mb-2 !text-xl'>
-            {title}
-          </SuiText>
-          <SuiText
-            size='sm'
-            weight='normal'
-            color='text-muted'
-            className='mb-2'>
-            {abstract}
-          </SuiText>
-        </div>
-        <div className='flex items-center'>
-          <SuiText size='sm' color='text-muted' className='mr-4 p-0'>
-            {source} • {date}
-          </SuiText>
-          <SuiButton
-            type='empty'
-            weight='medium'
-            iconRight
-            path={ctaButton.href}
+    <div className='flex flex-col'>
+      <div>
+        <p className='font-inconsolata text-primary-300 mb-2'>
+          {source} • {date}
+        </p>
+        <SuiText size='lg' weight='bold' className='!text-xl text-neutral-100'>
+          {title}
+        </SuiText>
+
+        <div className='mt-6 inline-block'>
+          <CUIButton
+            type='secondary'
+            className='w-auto'
+            href={ctaButton.href}
             target={ctaButton.target}
-            color='primary'
-            className='!text-neutral-300 !p-0 group-hover:!text-primary'>
+            iconRight={<ChevronRightIcon className='w-4 h-4' />}>
             {ctaButton.text}
-          </SuiButton>
+          </CUIButton>
         </div>
       </div>
-    </SuiLink>
+    </div>
   )
 }

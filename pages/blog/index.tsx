@@ -78,7 +78,7 @@ export default function BlogsPage({
     <Layout footerData={footerData} seo={seo}>
       <SuiTitle
         type='h1'
-        className='!text-5.5xl pt-10 lg:pt-20 mb-10 lg:mb-16 mx-auto text-center'>
+        className='pt-10 lg:pt-20 mb-10 lg:mb-16 mx-auto text-center text-neutral-100'>
         {title}
       </SuiTitle>
       <CUILink
@@ -96,7 +96,9 @@ export default function BlogsPage({
               <div className='text-primary-300 font-medium font-inconsolata'>
                 {featuredBlog.category}
               </div>
-              <SuiTitle type='h2'>{featuredBlog.title}</SuiTitle>
+              <SuiTitle type='h2' className=' text-neutral-100'>
+                {featuredBlog.title}
+              </SuiTitle>
               <div className='my-8 text-neutral-200'>
                 {featuredBlog.shortDescription}
               </div>

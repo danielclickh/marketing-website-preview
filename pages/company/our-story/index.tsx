@@ -15,6 +15,7 @@ import { GetStaticProps } from 'next'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import Image from 'next/image'
 import { ArrowRightIcon } from '@heroicons/react/solid'
+import Link from 'next/link'
 
 export const getStaticProps: GetStaticProps<OurStoryData> =
   async function getStaticProps() {
@@ -71,7 +72,7 @@ export default function OurStoryPage({
           <div className='pt-10'>
             <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
               <div className='flex flex-col text-center mx-auto'>
-                <h1 className='text-4xl leading-tight mb-4 font-basier md:text-5.5xl font-semibold'>
+                <h1 className='text-4xl leading-tight mb-4 font-basier md:text-5.5xl font-semibold  text-neutral-100'>
                   Who we are
                 </h1>
                 <p className='max-w-3xl text-neutral-200'>
@@ -110,7 +111,10 @@ export default function OurStoryPage({
             />
           </div>
           <div className='flex flex-col w-full lg:w-1/2'>
-            <SuiTitle type='h2' weight='semibold' className='mb-8'>
+            <SuiTitle
+              type='h2'
+              weight='semibold'
+              className='mb-8 text-neutral-100'>
               Mindfully distributed
             </SuiTitle>
             <div className='max-w-5xl'>
@@ -134,7 +138,10 @@ While we’re in different places, we all have the same goals, and we trust each
             />
           </div>
           <div className='flex flex-col w-full lg:w-1/2'>
-            <SuiTitle type='h2' weight='semibold' className='mb-8'>
+            <SuiTitle
+              type='h2'
+              weight='semibold'
+              className='mb-8 text-neutral-100'>
               Our history
             </SuiTitle>
             <div className='max-w-5xl'>
@@ -165,7 +172,10 @@ While we’re in different places, we all have the same goals, and we trust each
 
         <div className='w-full pt-16 pb-24 bg-neutral-725'>
           <div className='flex container mx-auto flex-col section-container'>
-            <SuiTitle type='h2' weight='bold' className='mb-14 text-center'>
+            <SuiTitle
+              type='h2'
+              weight='bold'
+              className='mb-14 text-center text-neutral-100'>
               {team.foundersTitle}
             </SuiTitle>
 
@@ -185,7 +195,10 @@ While we’re in different places, we all have the same goals, and we trust each
         </div>
         <div className='w-full pt-16 pb-24'>
           <div className='flex container mx-auto flex-col section-container'>
-            <SuiTitle type='h2' weight='bold' className='mb-14 text-center'>
+            <SuiTitle
+              type='h2'
+              weight='bold'
+              className='mb-14 text-center text-neutral-100'>
               Our investors
             </SuiTitle>
 
@@ -228,10 +241,12 @@ While we’re in different places, we all have the same goals, and we trust each
                   </SuiText>
                   {hiring.ctaButton && (
                     <div className='mt-4 text-white bg-black rounded py-2 px-6 font-base inline-block'>
-                      <span className='flex justify-center items-center gap-2'>
-                        View careers
-                        <ArrowRightIcon className='w-4' />
-                      </span>
+                      <Link href='/company/careers'>
+                        <span className='flex justify-center items-center gap-2'>
+                          View careers
+                          <ArrowRightIcon className='w-4' />
+                        </span>
+                      </Link>
                     </div>
                   )}
                 </div>

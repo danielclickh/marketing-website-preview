@@ -24,6 +24,7 @@ import {
 } from '../../../lib/utils/revalidationConfig'
 import FollowUs from '../../../components/FollowUs'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
+import Link from 'next/link'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -88,10 +89,19 @@ export default function BlogPage({
   return (
     <Layout footerData={footerData} seo={seo}>
       <div className='pt-10'>
-        <div className='flex container mx-auto flex-col px-6 2xl:px-0 max-w-6xl'>
+        <div className='flex container mx-auto flex-col px-6 2xl:px-0 max-w-3xl'>
           <div className='flex flex-col text-center mx-auto pt-6'>
-            <h4 className='text-primary-300 text-lg'>{category}</h4>
-            <h1 className='mt-6 mb-8 text-3xl md:text-5xl font-inter font-bold'>
+            <h4 className='text-primary-300 text-lg'>
+              <Link href='/blog'>Blog</Link> /{' '}
+              <Link
+                href={`/blog?category=${category
+                  .split(' ')
+                  .join('-')
+                  .toLowerCase()}`}>
+                {category}
+              </Link>
+            </h4>
+            <h1 className='mt-6 mb-8 text-4xl font-bold text-neutral-100 font-basier '>
               <span className='leading-snug'>{title}</span>
             </h1>
             <div className='flex flex-row items-center space-x-4 pt-2 justify-center'>
@@ -120,7 +130,7 @@ export default function BlogPage({
 
         <div className='container flex mx-auto px-6 2xl:px-0 max-w-3xl pt-20'>
           <div className='flex flex-col w-full pb-20'>
-            <Markdown className='rich-text-content leading-7 pb-6 mb-6 border-b border-c2'>
+            <Markdown className='leading-6 pb-6 mb-6 border-b border-c2 rich-text-content'>
               {content}
             </Markdown>
             <div className='flex flex-col md:flex-row gap-4 justify-between items-center mb-10'>
@@ -146,7 +156,10 @@ export default function BlogPage({
       <div className='flex w-full text-neutral-0 pb-8 '>
         <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
           <div className='flex justify-between pb-8'>
-            <SuiTitle type='h2' className='!text-3xl' weight='semibold'>
+            <SuiTitle
+              type='h2'
+              className='!text-3xl text-neutral-100'
+              weight='semibold'>
               Recent posts
             </SuiTitle>
 

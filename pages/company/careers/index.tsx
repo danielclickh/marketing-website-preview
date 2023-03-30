@@ -130,7 +130,9 @@ export default function CareersPage({
         <div className='w-full pt-16 px-8'>
           <div className='flex flex-col md:flex-row container mx-auto max-w-7xl md:space-x-16 mb-6'>
             <div className='flex flex-col md:w-4/5'>
-              <h2 className='font-basier mb-6 text-4xl'>Our values</h2>
+              <h2 className='font-basier mb-6 text-4xl text-neutral-100'>
+                Our values
+              </h2>
             </div>
           </div>
           <div className='max-w-7xl mx-auto'>

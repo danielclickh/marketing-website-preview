@@ -6,7 +6,8 @@ function EventsContainer({
   children,
   localDatetime,
   form,
-  recordedVimeoUrl
+  recordedVimeoUrl,
+  featuredImage
 }: EventsContainerProps) {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const onSubmit = () => {
@@ -17,7 +18,6 @@ function EventsContainer({
   }
 
   const eventEnded = new Date(localDatetime).valueOf() < Date.now()
-
   return (
     <div className='px-4 sm:px-8 2xl:px-0 w-full max-w-7xl mx-auto pb-16 pt-24 flex flex-col'>
       {isSubmitted &&
@@ -39,10 +39,15 @@ function EventsContainer({
           </div>
         )}
       <div className='event-container w-full mx-auto block lg:flex lg:justify-between lg:items-start'>
-        <div className='mb-16 mr-0 lg:mb-0 lg:mr-16 flex-auto lg:max-w-xl'>
+        <div className='mb-16 mr-0 lg:mb-0 lg:mr-16 flex-auto lg:max-w-2xl'>
           {children}
         </div>
-        <EventsForm submitted={isSubmitted} onSubmit={onSubmit} form={form} />
+        <EventsForm
+          submitted={isSubmitted}
+          onSubmit={onSubmit}
+          form={form}
+          featuredImage={featuredImage}
+        />
       </div>
     </div>
   )

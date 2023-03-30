@@ -66,13 +66,19 @@
 					{
 						"id": 1,
 						"name": "Raise a Ticket",
-						"href": "/support/program",
-						"target": "_self"
+						"href": "https://clickhouse.cloud/support?ajs_aid=ec53202d-30d3-4f49-9481-0624f07764f0",
+						"target": "_blank"
 					},
 					{
 						"id": 2,
 						"name": "Knowledge Base",
-						"href": "/docs/knowledgebase",
+						"href": "https://clickhouse.com/docs/knowledgebase",
+						"target": "_self"
+					},
+					{
+						"id": 3,
+						"name": "Support Program",
+						"href": "/support/program",
 						"target": "_self"
 					}
 				]
@@ -83,7 +89,7 @@
 				"menuItems": [
 					{
 						"id": 1,
-						"name": "Join slack",
+						"name": "Join Slack",
 						"href": "/slack",
 						"target": "_blank"
 					},
