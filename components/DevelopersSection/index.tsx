@@ -7,7 +7,7 @@ import developerOptions from './developerOptions.json'
 
 function DevelopersSection() {
   return (
-    <div className='section-container px-12'>
+    <div className='section-container md:px-12'>
       <SuiTitle type='h2' className='w-full text-left mb-8'>
         What do developers say?
       </SuiTitle>
