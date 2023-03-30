@@ -71,32 +71,32 @@ const customerStoriesLogos = [
     target: '_self',
     imageSrc: '/logos/eBay-black.svg',
     alt: 'ebay',
-    width: 136,
-    height: 40
+    width: 82,
+    height: 33
   },
   {
     href: '/customer-stories#uber',
     target: '_self',
     imageSrc: '/logos/uber-black.svg',
     alt: 'uber',
-    width: 136,
-    height: 40
+    width: 72,
+    height: 25
   },
   {
     href: '/customer-stories#cloudflare',
     target: '_self',
     imageSrc: '/logos/cloudflare-black.svg',
     alt: 'cloudflare',
-    width: 136,
-    height: 40
+    width: 117,
+    height: 39
   },
   {
     href: '/customer-stories#deutsche_bank',
     target: '_self',
     imageSrc: '/logos/deutsche-black.svg',
     alt: 'deutsche bank',
-    width: 136,
-    height: 31
+    width: 133,
+    height: 26
   },
   {
     href: '/customer-stories#spotify',
@@ -210,7 +210,7 @@ export default function HomePage({
                 </span>
               </div>
 
-              <div className='section-container flex flex-wrap sm:grid sm:grid-cols-5 gap-2 md:gap-x-8 self-center items-center justify-center place-items-center'>
+              <div className='section-container flex flex-wrap gap-2 md:gap-x-8 self-center items-center justify-center place-items-center'>
                 {customerStoriesLogos.map((logo, index: number) => (
                   <CUILink
                     key={logo.href}
@@ -219,7 +219,7 @@ export default function HomePage({
                     className={`customer-stories-${index} flex rounded-lg justify-center ease-in-out duration-200 cursor-pointer gap-2`}>
                     <Image
                       src={logo?.imageSrc}
-                      className='w-auto h-10 rounded object-contain'
+                      className='object-contain'
                       alt={logo.alt}
                       width={logo.width}
                       height={logo.height}
