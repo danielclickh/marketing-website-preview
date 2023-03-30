@@ -15,7 +15,7 @@ const style = {
 export default function FAQ() {
   return (
     <div
-      className='relative bg-shadow-element flex flex-col md:flex-row w-full px-4 md:px-12 pb-24 items-start justify-center max-w-7xl mx-auto'
+      className='relative bg-shadow-element flex flex-col md:flex-row w-full px-4 md:px-8 2xl:px-0  pb-24 items-start justify-center max-w-7xl mx-auto'
       style={style}>
       <div className='py-10 max-w-screen-sm mr-auto text-center md:text-left'>
         <Image

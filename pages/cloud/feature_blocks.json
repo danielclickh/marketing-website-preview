@@ -58,8 +58,8 @@
 	{
     "id": 5,
     "image": "/images/cloud/sql-console.svg",
-		"image_width": 576,
-		"image_height": 443,
+		"image_width": 792,
+		"image_height": 522,
     "title": "Interactive SQL console",
     "description": "The fastest and easiest way to connect, explore and query your ClickHouse databases. Exclusively available to ClickHouse Cloud customers.",
 		"bullets": [

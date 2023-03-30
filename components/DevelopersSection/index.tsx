@@ -1,4 +1,4 @@
-import { ArrowRightIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import React from 'react'
 import { CUIButton, CUICard } from '../ClickUI'
@@ -7,7 +7,7 @@ import developerOptions from './developerOptions.json'
 
 function DevelopersSection() {
   return (
-    <div className='section-container md:px-12'>
+    <div className='section-container md:px-8 2xl:px-0 '>
       <SuiTitle type='h2' className='w-full text-left mb-8'>
         What do developers say?
       </SuiTitle>
@@ -48,7 +48,7 @@ function DevelopersSection() {
             className='mt-8 mb-4'
             type='secondary'
             href='/blog/nyc-meetup-report-high-speed-content-distribution-analytics-for-streaming-platforms'
-            iconRight={<ArrowRightIcon height='16' />}>
+            iconRight={<ChevronRightIcon height='16' />}>
             Learn More
           </CUIButton>
         </div>
@@ -83,7 +83,7 @@ function DevelopersSection() {
                 linkClass='w-full inline-grid'
                 href={developerOption.href}
                 target='_blank'
-                iconRight={<ArrowRightIcon height='16' />}>
+                iconRight={<ChevronRightIcon height='16' />}>
                 {developerOption.btnText}
               </CUIButton>
             </CUICard.Footer>

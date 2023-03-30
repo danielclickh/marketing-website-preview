@@ -11,7 +11,7 @@ import FAQ from '../components/FAQ'
 import { CUIButton, CUICard, CUILink } from '../components/ClickUI'
 import columnOrientedIllustration from '../public/images/homepage/column-oriented-illustration.svg'
 import rowOrientedIllustration from '../public/images/homepage/row-oriented-illustration.svg'
-import { ArrowRightIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 import JoinCommunity from '../components/JoinCommunity'
 import HomePageTerminal from '../components/Terminal/HomePageTerminal'
 // import SpeedAnimation from '../components/SpeedAnimation'
@@ -141,7 +141,7 @@ export default function HomePage({
           glareColor='rgba(251, 255, 70, 0.08)'
           glarePosition='all'
           className='h-full'>
-          <div className='flex flex-col pb-20 lg:pb-44 pt-16 md:pt-24 px-8 2xl:px-0 relative gap-24 justify-center '>
+          <div className='flex flex-col pb-20 lg:pb-44 pt-16 md:pt-24 px-8 md:px-0 relative gap-24 justify-center '>
             <div className='flex flex-col w-full mx-auto max-w-2xl'>
               <div className='mx-auto md:mr-0 md:mt-8 flex-col items-center justify-center'>
                 <SuiTitle type='h1' className='text-center' color='primary'>
@@ -190,7 +190,7 @@ export default function HomePage({
                     target='_self'
                     className='mt-5 text-neutral-200 hover:text-neutral-0 flex items-center gap-2'>
                     Or download open-source ClickHouse{' '}
-                    <ArrowRightIcon height='16' />
+                    <ChevronRightIcon height='16' />
                   </CUILink>
                 </div>
               </div>
@@ -347,7 +347,7 @@ export default function HomePage({
       </div>
       <HRSeparator className='my-24' />
       <div className='relative flex flex-col gap-y-28'>
-        <div className='flex flex-col items-center justify-between self-center section-container w-full md:px-12 bg-shadow-element'>
+        <div className='flex flex-col items-center justify-between self-center section-container w-full md:px-16 bg-shadow-element'>
           <div className='flex flex-col items-center w-full'>
             <Image
               src='/fast-icon.svg'
@@ -407,7 +407,7 @@ export default function HomePage({
             type='secondary'
             className='w-auto'
             href='https://clickhouse.com/docs/'
-            iconRight={<ArrowRightIcon height='16' />}>
+            iconRight={<ChevronRightIcon height='16' />}>
             Read more in the docs
           </CUIButton>
         </div>
@@ -458,7 +458,7 @@ export default function HomePage({
                     type={deploy.btnType}
                     href={deploy.href}
                     linkClass='w-full inline-grid'
-                    iconRight={<ArrowRightIcon height='16' />}
+                    iconRight={<ChevronRightIcon height='16' />}
                     target={deploy.target}>
                     {deploy.btnText}
                   </CUIButton>

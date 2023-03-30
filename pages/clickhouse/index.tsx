@@ -64,13 +64,13 @@ export default function ClickHouseServerPage({
   platforms,
   footerData
 }: ClickhouseData) {
-  const { title, description, mainButton, secondaryButton, gitButton } = hero
+  const { description, mainButton, secondaryButton, gitButton } = hero
   return (
     <>
       <Layout footerData={footerData} seo={seo}>
         <div className='md:bg-speed-lines bg-center bg-no-repeat bg-contain'>
           <div className='pt-10 relative bg-grid overflow-x-hidden'>
-            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 px-4 md:pb-24 md:px-12 2xl:px-0'>
+            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 px-4 md:pb-24 md:px-8 2xl:px-0 '>
               <div className='flex'>
                 <div className='md:w-7/12 md:mt-16 flex-col text-center md:text-left'>
                   <h1 className='font-basier text-4xl mb-6 md:text-5.5xl leading-tight font-semibold'>
@@ -156,7 +156,7 @@ export default function ClickHouseServerPage({
         </div>
 
         <div className='text-neutral-0 bg-neutral-725'>
-          <div className='flex container mx-auto flex-col max-w-7xl pb-16 px-4 sm:px-8 md:px-12 pt-16'>
+          <div className='flex container mx-auto flex-col max-w-7xl pb-16 px-4 sm:px-8 md:px-8 2xl:px-0  pt-16'>
             <div className='feature-container'>
               {features.map((feature) => (
                 <div className='col' key={feature.id}>
@@ -182,7 +182,7 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <div className='container mx-auto relative flex flex-col gap-y-28 mt-12 md:mt-24 md:px-4'>
+        <div className='container mx-auto relative flex flex-col gap-y-28 mt-12 md:mt-24 md:px-0 '>
           <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element-left red-shadow'>
             <div className='flex flex-col items-center w-full'>
               <Image
@@ -256,7 +256,7 @@ export default function ClickHouseServerPage({
         <HRSeparator className='my-12 md:my-24' />
 
         <div className='relative flex flex-col gap-y-28 md:mt-24 mx-auto'>
-          <div className='flex flex-col items-center justify-between self-center section-container mx-auto bg-shadow-element-left red-shadow px-4 md:px-12'>
+          <div className='flex flex-col items-center justify-between self-center section-container mx-auto bg-shadow-element-left red-shadow px-4 md:px-8 2xl:px-0 '>
             <CUICard className='p-8'>
               <div className='flex w-full justify-between'>
                 <h3 className='w-full text-center md:text-left font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold'>
