@@ -42,10 +42,7 @@ const MenuItem = ({
   menuItems: Array<HeaderTopNavItem>
   padding: boolean
   index: number
-  onHover: (
-    floatingCoords: DOMRect,
-    refCoords: DOMRect | ClientRectObject
-  ) => void
+  onHover: () => void
   onHoverLeave: () => void
   activeIndex?: number
   setActiveIndex: Dispatch<SetStateAction<number | undefined>>
@@ -94,6 +91,7 @@ const MenuItem = ({
 
   useLayoutEffect(() => {
     if (isOpen) {
+      setActiveIndex(index)
       if (ref.current) {
         const navContainer = ref.current.closest(
           '#nav-container'
@@ -102,11 +100,8 @@ const MenuItem = ({
           '--menuLeft': x,
           '--menuTop': y
         })
-        const floatingCoords = elements.floating?.getBoundingClientRect()
-        const refCoords = elements.reference?.getBoundingClientRect()
-        floatingCoords && refCoords && onHover(floatingCoords, refCoords)
+        onHover()
       }
-      setActiveIndex(index)
     } else {
       ref.current && ref.current.classList.remove('trigger-enter-active')
       onHoverLeave()
