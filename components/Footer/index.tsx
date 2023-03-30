@@ -38,7 +38,7 @@ export default function Footer({
             ))}
           </div>
         </div>
-        <div className='flex flex-col md:w-fit'>
+        <div className='flex flex-col md:w-fit pt-12 md:pt-0'>
           <Image
             src={logoFull}
             width='135'
@@ -57,7 +57,7 @@ export default function Footer({
       </div>
       <div className='section-container shadow-footer-line border-t border-neutral-400 opacity-10 w-full' />
       <div className='flex flex-col pt-2 lg:pt-8 items-start'>
-        <div className='section-container flex flex-col w-full gap-3 sm:gap-1 items-center md:flex-row md:justify-between text-sm text-neutral-400'>
+        <div className='section-container flex flex-col w-full gap-3 sm:gap-1 items-center md:flex-row md:justify-between text-sm text-neutral-400 text-center md:text-left pt-4 md:pt-0'>
           <div>
             © 2023 ClickHouse, Inc. HQ in Bay Area, CA and Amsterdam, NL.
           </div>
