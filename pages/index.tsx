@@ -252,7 +252,7 @@ export default function HomePage({
               <div className='text-sm font-bold uppercase text-neutral-0 text-center mb-4'>
                 Databases and data warehourses
               </div>
-              <div className='w-56 justify-center border-primary-700 rounded p-4 flex flex-wrap gap-6'>
+              <div className='w-56 mx-auto justify-center border-primary-700 rounded p-4 flex flex-wrap gap-6'>
                 <Image
                   src='/logos/postgres.svg'
                   alt='Postgres logo Image'
@@ -295,7 +295,7 @@ export default function HomePage({
               <div className='text-sm font-bold uppercase text-neutral-0 text-center mb-4'>
                 log and analytics events
               </div>
-              <div className='w-56 justify-center border-primary-700 rounded p-4 flex flex-nowrap gap-6'>
+              <div className='w-56 justify-center mx-auto border-primary-700 rounded p-4 flex flex-nowrap gap-6'>
                 <Image
                   src='/logos/kafka.svg'
                   alt='Kafka logo Image'
@@ -320,7 +320,7 @@ export default function HomePage({
               <div className='text-sm font-bold uppercase text-neutral-0 text-center mb-4'>
                 Local files
               </div>
-              <div className='w-56 justify-center border-primary-700 rounded p-4 flex flex-col flex-nowrap gap-6 items-center'>
+              <div className='w-56 justify-center mx-auto border-primary-700 rounded p-4 flex flex-col flex-nowrap gap-6 items-center'>
                 <Image
                   src='/logos/file-icon.svg'
                   alt='File Icon'
@@ -376,10 +376,10 @@ export default function HomePage({
                 className='bg-neutral-900 border border-neutral-700/80 rounded-lg'
                 priority
               />
-              <div className='text-neutral-0 font-bold leading-normal mb-3 mt-6'>
+              <div className='text-neutral-0 font-bold leading-normal mb-3 mt-6 text-center md:text-left'>
                 Row-oriented databases
               </div>
-              <div className='text-neutral-200 leading-normal'>
+              <div className='text-neutral-200 leading-normal text-center md:text-left'>
                 In a row-oriented databases, data is stored in rows, with all
                 the values related to a row physically stored next to each
                 other.
@@ -394,10 +394,10 @@ export default function HomePage({
                 className='bg-neutral-900 border border-neutral-700/80 rounded-lg'
                 priority
               />
-              <div className='text-neutral-0 font-bold leading-normal mb-3 mt-6'>
+              <div className='text-neutral-0 font-bold leading-normal mb-3 mt-6 text-center md:text-left'>
                 Column-oriented databases
               </div>
-              <div className='text-neutral-200 leading-normal'>
+              <div className='text-neutral-200 leading-normal text-center md:text-left'>
                 In a column-oriented databases, like ClickHouse, data is stored
                 in columns, with values from the same columns stored together.
               </div>
