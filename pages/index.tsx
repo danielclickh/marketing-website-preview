@@ -51,7 +51,7 @@ const deployData: Array<DeployData> = [
     btnText: 'Download ClickHouse',
     description:
       'Spin up a database server with open-source ClickHouse. Always Free.',
-    href: '/',
+    href: '#getting_started',
     btnType: 'secondary'
   },
   {
