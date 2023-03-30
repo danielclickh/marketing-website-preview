@@ -162,22 +162,24 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
                     index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                   } justify-center`}
                   key={item.title}>
-                  <div className='flex flex-col md:text-left md:w-1/2 md:border-l-4 border-yellow-200 md:pl-8 mb-12 md:mb-0'>
-                    <SuiTitle
-                      type='h3'
-                      className='mb-4 !text-4xl'
-                      weight='semibold'>
-                      {item.title}
-                    </SuiTitle>
-                    <SuiText size='base' color='secondary' className='mb-8'>
-                      {item.description}
-                    </SuiText>
-                    {item.bullets.map((bullet) => (
-                      <BulletPoint
-                        key={`${item.title}-${bullet.text}`}
-                        text={bullet.text}
-                      />
-                    ))}
+                  <div className='flex flex-col md:text-left md:w-1/2 mb-12 md:mb-0'>
+                    <div className='md:border-l-4 border-yellow-200 md:pl-8 '>
+                      <SuiTitle
+                        type='h3'
+                        className='mb-4 !text-4xl'
+                        weight='semibold'>
+                        {item.title}
+                      </SuiTitle>
+                      <SuiText size='base' color='secondary' className='mb-8'>
+                        {item.description}
+                      </SuiText>
+                      {item.bullets.map((bullet) => (
+                        <BulletPoint
+                          key={`${item.title}-${bullet.text}`}
+                          text={bullet.text}
+                        />
+                      ))}
+                    </div>
                   </div>
                   <div className='flex md:w-1/2 justify-center items-center'>
                     <Image
@@ -185,7 +187,7 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
                       alt={item.title}
                       width={item.image_width}
                       height={item.image_height}
-                      className='h-fit'
+                      className='w-full md:h-fit '
                     />
                   </div>
                 </div>
