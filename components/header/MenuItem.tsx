@@ -1,4 +1,12 @@
-import { useRef, useState } from 'react'
+import {
+  Dispatch,
+  RefObject,
+  SetStateAction,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState
+} from 'react'
 import styles from './styles.module.scss'
 import {
   autoUpdate,
@@ -11,10 +19,13 @@ import {
   useInteractions,
   offset,
   safePolygon,
-  ClientRectObject
+  ClientRectObject,
+  FloatingPortal,
+  computePosition
 } from '@floating-ui/react'
 import Option from './Option'
 import { HeaderTopNavItem } from './types'
+import { createPortal } from 'react-dom'
 
 const MenuItem = ({
   name,
@@ -22,7 +33,10 @@ const MenuItem = ({
   padding = false,
   index = 0,
   onHover,
-  onHoverLeave
+  onHoverLeave,
+  activeIndex,
+  setActiveIndex,
+  dropdownContainerRef
 }: {
   name: string
   menuItems: Array<HeaderTopNavItem>
@@ -33,6 +47,9 @@ const MenuItem = ({
     refCoords: DOMRect | ClientRectObject
   ) => void
   onHoverLeave: () => void
+  activeIndex?: number
+  setActiveIndex: Dispatch<SetStateAction<number | undefined>>
+  dropdownContainerRef: RefObject<HTMLElement>
 }) => {
   const ref = useRef<HTMLLIElement>(null)
   const [isOpen, setIsOpen] = useState(false)
@@ -40,26 +57,10 @@ const MenuItem = ({
   const onOpenChange = (value: boolean) => {
     setIsOpen(value)
     if (value) {
-      if (ref.current) {
-        setTimeout(
-          () =>
-            ref.current &&
-            ref.current.classList.contains('trigger-enter') &&
-            ref.current.classList.add('trigger-enter-active'),
-          150
-        )
-        const floatingCoords =
-          context.refs.floating.current?.getBoundingClientRect()
-        const refCoords =
-          context.refs.reference.current?.getBoundingClientRect()
-        floatingCoords && refCoords && onHover(floatingCoords, refCoords)
-      }
-    } else if (ref.current) {
-      ref.current.classList.remove('trigger-enter-active')
-      onHoverLeave()
+      setActiveIndex(index)
     }
   }
-  const { x, y, strategy, floating, reference, context } = useFloating({
+  const { x, y, floating, reference, context, elements } = useFloating({
     open: isOpen,
     onOpenChange,
     placement: 'bottom',
@@ -75,14 +76,13 @@ const MenuItem = ({
       shift(),
       autoPlacement(),
       offset({
-        crossAxis: 60
+        crossAxis: 10
       })
     ]
   })
 
   const hover = useHover(context, {
     handleClose: safePolygon({
-      restMs: 50,
       blockPointerEvents: false
     })
   })
@@ -92,51 +92,83 @@ const MenuItem = ({
     dismiss
   ])
 
+  useLayoutEffect(() => {
+    if (isOpen) {
+      if (ref.current) {
+        const navContainer = ref.current.closest(
+          '#nav-container'
+        ) as HTMLDivElement
+        Object.assign(navContainer.style, {
+          '--menuLeft': x,
+          '--menuTop': y
+        })
+        const floatingCoords = elements.floating?.getBoundingClientRect()
+        const refCoords = elements.reference?.getBoundingClientRect()
+        floatingCoords && refCoords && onHover(floatingCoords, refCoords)
+      }
+      setActiveIndex(index)
+    } else {
+      ref.current && ref.current.classList.remove('trigger-enter-active')
+      onHoverLeave()
+    }
+  }, [isOpen, x, y])
+
+  useEffect(() => {
+    if (isOpen && activeIndex !== index) setIsOpen(activeIndex !== index)
+  }, [isOpen, activeIndex])
+
   return (
     <li
       ref={ref}
-      className={`px-2 lg:px-4 py-2.5 ${
-        isOpen ? `${styles.triggerEnter} trigger-enter` : ''
-      }`}
-      onMouseLeave={() => onOpenChange(false)}>
+      className={`${isOpen ? `${styles.triggerEnter} trigger-enter` : ''}`}>
       <div
+        id={`nav-item-${index}`}
         ref={reference}
-        data-open={isOpen}
-        className={`${styles.headerPopover} group group-hover:text-neutral-400 data-[open=true]:text-neutral-400 hover:text-neutral-400 cursor-pointer`}
+        data-open={isOpen && activeIndex === index}
+        className={`px-2 lg:px-4 py-2.5 ${styles.headerPopover} group group-hover:text-neutral-400 data-[open=true]:text-neutral-400 hover:text-neutral-400 cursor-pointer`}
         {...getReferenceProps()}>
         {name}
       </div>
-      <div
-        className={`${styles.floatingContent} ${isOpen ? 'flex' : 'hidden'}`}
-        ref={floating}
-        style={{
-          position: strategy,
-          top: y ?? 0,
-          left: x ?? 0
-        }}
-        {...getFloatingProps()}>
-        <div className='overflow-hidden'>
+      {dropdownContainerRef.current &&
+        createPortal(
           <div
-            className={`relative flex flex-nowrap gap-6 justify-between lg:justify-start ${
-              padding ? 'px-1 pt-3 pb-4' : ''
-            } ${styles.dropdown} dropdown ${
-              styles.dropdownText
-            } dropdown-${index}`}>
-            {menuItems.map((subitem) => (
-              <div className='flex flex-col' key={subitem.name}>
-                <div className='mb-7 pl-3 font-semibold text-sm min-h-[1lh]'>
-                  {subitem.name}
-                </div>
-                <div className='h-full'>
-                  {subitem.menuItems.map((item) => (
-                    <Option key={item.name} {...item} />
-                  ))}
-                </div>
+            className={`${styles.floatingContent} ${
+              isOpen && activeIndex === index
+                ? 'opacity-100'
+                : 'opacity-0 -z-[1]'
+            }`}
+            id={`floating-container-${index}`}
+            ref={floating}
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0
+            }}
+            {...getFloatingProps()}>
+            <div className='overflow-hidden'>
+              <div
+                className={`relative flex flex-nowrap gap-6 justify-between lg:justify-start ${
+                  padding ? 'px-1 pt-3 pb-4' : ''
+                } ${styles.dropdown} dropdown ${
+                  styles.dropdownText
+                } dropdown-${index}`}>
+                {menuItems.map((subitem) => (
+                  <div className='flex flex-col' key={subitem.name}>
+                    <div className='mb-7 pl-3 font-semibold text-sm min-h-[1lh]'>
+                      {subitem.name}
+                    </div>
+                    <div className='h-full'>
+                      {subitem.menuItems.map((item) => (
+                        <Option key={item.name} {...item} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
+            </div>
+          </div>,
+          dropdownContainerRef.current
+        )}
     </li>
   )
 }

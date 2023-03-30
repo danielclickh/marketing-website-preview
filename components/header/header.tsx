@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import {
   autoUpdate,
+  FloatingDelayGroup,
   offset,
   useClick,
   useDismiss,
@@ -25,9 +26,11 @@ const headerMenuItems = menuItems as Array<MenuItemType>
 export default function Header() {
   const navBarRef = useRef<HTMLDivElement>(null)
   const navRef = useRef<HTMLDivElement>(null)
-  const ref = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+  const dropdownContainerRef = useRef<HTMLDivElement>(null)
   const arrowRef = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState(false)
+  const [activeIndex, setActiveIndex] = useState<number | undefined>()
   const { strategy, floating, reference, context } = useFloating({
     open: isOpen,
     onOpenChange: setIsOpen,
@@ -48,36 +51,48 @@ export default function Header() {
     dismiss
   ])
 
-  const handleEnter = (
-    floatingCoords: DOMRect,
-    refCoords: DOMRect | ClientRectObject
-  ) => {
-    if (ref.current) {
-      ref.current.classList.add('open')
-      ref.current.style.setProperty('width', `${floatingCoords.width}px`)
-      ref.current.style.setProperty('height', `${floatingCoords.height}px`)
-      ref.current.style.setProperty(
-        'transform',
-        `translate(${floatingCoords.left}px, 60px)`
+  const handleEnter = () => {
+    if (dropdownRef.current) {
+      const floating = dropdownContainerRef.current?.querySelector(
+        `#floating-container-${activeIndex}`
       )
-      if (arrowRef.current) {
-        arrowRef.current.style.setProperty(
-          'transform',
-          `translateY(-50%) rotate(45deg)`
+      const reference = navRef.current?.querySelector(
+        `#nav-item-${activeIndex}`
+      )
+      const floatingCoords = floating?.getBoundingClientRect()
+      const refCoords = reference?.getBoundingClientRect()
+      if (floatingCoords && refCoords) {
+        dropdownRef.current.classList.add('open')
+        dropdownRef.current.style.setProperty(
+          'width',
+          `${floatingCoords.width}px`
         )
-        arrowRef.current.style.setProperty(
-          'left',
-          `${refCoords.left - floatingCoords.left + refCoords.width / 2}px`
+        dropdownRef.current.style.setProperty(
+          'height',
+          `${floatingCoords.height}px`
         )
+        if (arrowRef.current) {
+          arrowRef.current.classList.add('open')
+          arrowRef.current.style.setProperty(
+            'transform',
+            `translateY(-50%) rotate(45deg)`
+          )
+          arrowRef.current.style.setProperty('top', `${floatingCoords.top}px`)
+          arrowRef.current.style.setProperty(
+            'left',
+            `${refCoords.left + refCoords.width / 2}px`
+          )
+        }
       }
     }
   }
 
   const onHoverLeave = () => {
     setTimeout(() => {
-      if (ref.current && navRef.current)
+      if (dropdownRef.current && navRef.current)
         if (!navRef.current.querySelector('.trigger-enter')) {
-          ref.current.classList.remove('open')
+          arrowRef.current && arrowRef.current.classList.remove('open')
+          dropdownRef.current.classList.remove('open')
         }
     }, 150)
   }
@@ -102,11 +117,16 @@ export default function Header() {
 
   return (
     <>
-      <div className={styles.navBarContainer} ref={navBarRef}>
-        <div className={styles.dropdownBackground} ref={ref}>
+      <div
+        className={styles.navBarContainer}
+        ref={navBarRef}
+        id='nav-container'>
+        <div className='relative'>
           <span className={`${styles.arrow} arrow`} ref={arrowRef}></span>
+          <div className={styles.dropdownBackground} ref={dropdownRef}>
+            <div id='dropdown-container' ref={dropdownContainerRef}></div>
+          </div>
         </div>
-
         <nav className='relative flex no-wrap justify-between items-center section-container w-full py-4'>
           <Link
             href='/'
@@ -118,46 +138,52 @@ export default function Header() {
               alt='ClickHouse logo'
             />
           </Link>
-          <div className={styles.navWrapper} ref={navRef}>
-            <ul className={`${styles.navList} navList`}>
-              {headerMenuItems.map((menuItem, index) => {
-                if (menuItem.href) {
-                  return (
-                    <li className='px-2 lg:px-4' key={menuItem.name}>
-                      <CUILink
+          <FloatingDelayGroup delay={{ open: 1000, close: 200 }}>
+            <div className={styles.navWrapper} ref={navRef}>
+              <ul className={`${styles.navList} navList`}>
+                {headerMenuItems.map((menuItem, index) => {
+                  if (menuItem.href) {
+                    return (
+                      <li className='px-2 lg:px-4' key={menuItem.name}>
+                        <CUILink
+                          id={`nav-item-${index}`}
+                          key={menuItem.name}
+                          href={menuItem.href}
+                          target={menuItem.target}
+                          segmentEvent={{
+                            label: menuItem.name,
+                            category: 'website-nav'
+                          }}
+                          className='inline-flex items-center text-sm font-medium max-w-md hover:text-neutral-400 hover:no-underline'>
+                          {menuItem.name}
+                        </CUILink>
+                      </li>
+                    )
+                  } else if (
+                    menuItem.menuItems &&
+                    (menuItem?.menuItems ?? []).length > 0
+                  ) {
+                    const firstSubitem = menuItem.menuItems[0]
+                    return (
+                      <MenuItem
                         key={menuItem.name}
-                        href={menuItem.href}
-                        target={menuItem.target}
-                        segmentEvent={{
-                          label: menuItem.name,
-                          category: 'website-nav'
-                        }}
-                        className='inline-flex items-center text-sm font-medium max-w-md hover:text-neutral-400 hover:no-underline'>
-                        {menuItem.name}
-                      </CUILink>
-                    </li>
-                  )
-                } else if (
-                  menuItem.menuItems &&
-                  (menuItem?.menuItems ?? []).length > 0
-                ) {
-                  const firstSubitem = menuItem.menuItems[0]
-                  return (
-                    <MenuItem
-                      key={menuItem.name}
-                      name={menuItem.name}
-                      onHover={handleEnter}
-                      onHoverLeave={onHoverLeave}
-                      padding={(firstSubitem.name || '')?.length > 0}
-                      menuItems={menuItem.menuItems}
-                      index={index}
-                    />
-                  )
-                }
-                return null
-              })}
-            </ul>
-          </div>
+                        name={menuItem.name}
+                        onHover={handleEnter}
+                        onHoverLeave={onHoverLeave}
+                        padding={(firstSubitem.name || '')?.length > 0}
+                        menuItems={menuItem.menuItems}
+                        index={index}
+                        activeIndex={activeIndex}
+                        setActiveIndex={setActiveIndex}
+                        dropdownContainerRef={dropdownContainerRef}
+                      />
+                    )
+                  }
+                  return null
+                })}
+              </ul>
+            </div>
+          </FloatingDelayGroup>
           <div className='hidden md:flex flex-nowrap gap-4 lg:gap-6 items-center'>
             <CUILink
               key='github-stars-nav'
