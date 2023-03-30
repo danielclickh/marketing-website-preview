@@ -187,7 +187,7 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
                       alt={item.title}
                       width={item.image_width}
                       height={item.image_height}
-                      className='w-full md:h-fit '
+                      className='md:h-fit '
                     />
                   </div>
                 </div>
