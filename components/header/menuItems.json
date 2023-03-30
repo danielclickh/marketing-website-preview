@@ -92,19 +92,19 @@
 					{
 						"id": 2,
 						"name": "Quick Start",
-						"href": "/docs/en/getting-started/quick-start",
+						"href": "https://clickhouse.com/docs/en/getting-started/quick-start",
 						"target": "_self"
 					},
 					{
 						"id": 3,
 						"name": "Integrations",
-						"href": "/docs/en/integrations",
+						"href": "https://clickhouse.com/docs/en/integrations",
 						"target": "_self"
 					},
 					{
 						"id": 4,
 						"name": "Changelog",
-						"href": "/docs/category/changelog",
+						"href": "https://clickhouse.com/docs/category/changelog",
 						"target": "_self"
 					}
 				]
