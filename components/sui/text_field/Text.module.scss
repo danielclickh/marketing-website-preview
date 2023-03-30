@@ -1,8 +1,8 @@
 .textCommon {
-  @apply transition-[border] bg-left-bottom duration-300 ease-in bg-neutral-750 text-neutral-0 placeholder-neutral-400 relative w-full rounded-md shadow-input px-3 py-2 text-left sm:text-sm resize-none cursor-text;
-  @apply border border-neutral-725;
+  @apply transition-[border] bg-left-bottom duration-300 ease-in bg-neutral-725 text-neutral-0 placeholder-neutral-400 relative w-full rounded-md shadow-input px-3 py-2 text-left sm:text-sm resize-none cursor-text;
+  @apply border border-neutral-700;
   &:focus {
-    @apply border-primary-300 outline-none;
+    @apply border-primary-300 outline-none bg-slate-900;
   }
   &[type="password"] {
     @apply pr-10;
