@@ -125,10 +125,12 @@ export default function SupportProgram(props: any) {
                 <tr>
                   <th></th>
                   <th className='p-0 border border-neutral-700 bg-neutral-750'>
-                    <div className='p-3'>Trial</div>
+                    <div className='p-3  text-neutral-100'>Trial</div>
                   </th>
                   <th className='p-0 border border-neutral-700 bg-neutral-750'>
-                    <div className='p-3'>Monthly "Pay as you Go" or Annual</div>
+                    <div className='p-3 text-neutral-100'>
+                      Monthly "Pay as you Go" or Annual
+                    </div>
                   </th>
                 </tr>
               </thead>
