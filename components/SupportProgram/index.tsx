@@ -26,7 +26,46 @@ export default function SupportProgram(props: any) {
             exceptionally fast, high-quality results.
           </SuiText>
         </div>
-        <div className='grid grid-cols-2 pb-24'></div>
+        <div className='grid md:grid-cols-2 pb-12 max-w-3xl mx-auto gap-x-10 text-center px-4 sm:px-8 2xl:px-0 '>
+          <div className='mb-10 md:mb-0  border border-neutral-700 rounded-lg p-6 bg-neutral-900/50'>
+            <Link
+              href='https://clickhouse.cloud/support'
+              target='_blank'
+              className='hover:no-underline'>
+              <Image
+                src='/images/support-program/cloud-light.svg'
+                height={35}
+                width={49}
+                alt='Cloud'
+                className='mx-auto mb-10'
+              />
+              <p className='font-bold text-base'>
+                New Support Case via
+                <br />
+                <span className='text-primary-300'>ClickHouse Cloud</span>
+              </p>
+            </Link>
+          </div>
+          <div className='mb-10 md:mb-0 border border-neutral-700 rounded-lg p-6 bg-neutral-900/50'>
+            <Link
+              href='mailto:support@clickhouse.com'
+              target='_blank'
+              className='hover:no-underline'>
+              <Image
+                src='/images/support-program/envelope-thin.svg'
+                height={35}
+                width={49}
+                alt='Email'
+                className='mx-auto mb-10'
+              />
+              <p className='font-bold text-base'>
+                Email us at
+                <br />
+                <span className='text-primary-300'>support@clickhouse.com</span>
+              </p>
+            </Link>
+          </div>
+        </div>
         <div>
           <svg
             className='w-full'
@@ -197,7 +236,7 @@ export default function SupportProgram(props: any) {
           Severity Classification
         </h2>
 
-        <div className='grid grid-cols-1 md:grid-cols-4 max-w-5xl mx-auto bg-neutral-800 border border-neutral-700 rounded-md'>
+        <div className='grid grid-cols-1 md:grid-cols-4 max-w-5xl mx-auto bg-neutral-800 border border-neutral-700 rounded-lg'>
           <div className='p-6 pb-0 md:pb-6 md:border-b md:border-b-neutral-700'>
             <span className='font-bold text-xl'>Severity 1</span>
             <br />
@@ -269,7 +308,7 @@ export default function SupportProgram(props: any) {
           times
         </p>
         <div className='md:flex items-center md:space-x-20 justify-evenly max-w-5xl w-full mx-auto text-center'>
-          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-md p-6 bg-neutral-900/50'>
+          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-lg p-6 bg-neutral-900/50'>
             <p className='font-inconsolata text-primary-300 mb-2'>Urgent</p>
             <p className='text-2xl font-semibold mb-16'>Severity 1</p>
             <p className='font-bold text-base mb-2'>1 hour SLA</p>
@@ -277,7 +316,7 @@ export default function SupportProgram(props: any) {
               24 h / 7 days / 365 days / year
             </p>
           </div>
-          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-md p-6 bg-neutral-900/50'>
+          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-lg p-6 bg-neutral-900/50'>
             <p className='font-inconsolata text-primary-300 mb-2'>
               High priority
             </p>
@@ -287,7 +326,7 @@ export default function SupportProgram(props: any) {
               Business hours only
             </p>
           </div>
-          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-md p-6 bg-neutral-900/50'>
+          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-lg p-6 bg-neutral-900/50'>
             <p className='font-inconsolata text-primary-300 mb-2'>
               Normal priority
             </p>
@@ -308,7 +347,7 @@ export default function SupportProgram(props: any) {
         </h2>
         <div className='grid grid-cols-1 gap-y-2 w-full max-w-2xl'>
           <div>
-            <div className='w-full rounded-md border border-neutral-700 p-6 bg-neutral-900/50'>
+            <div className='w-full rounded-lg border border-neutral-700 p-6 bg-neutral-900/50'>
               <div className='grid md:grid-cols-4 items-center'>
                 <div className='md:col-span-1'>
                   <div className='text-xl font-bold'>Level 1 / L1 </div>
@@ -324,7 +363,7 @@ export default function SupportProgram(props: any) {
             <ArrowsDown />
           </div>
           <div>
-            <div className='w-full rounded-md border border-neutral-700 p-6 bg-neutral-900/50'>
+            <div className='w-full rounded-lg border border-neutral-700 p-6 bg-neutral-900/50'>
               <div className='grid md:grid-cols-4 items-center'>
                 <div className='md:col-span-1'>
                   <div className='text-xl font-bold'>Level 2 / L2</div>
@@ -339,7 +378,7 @@ export default function SupportProgram(props: any) {
             <ArrowsDown />
           </div>
           <div>
-            <div className='w-full rounded-md border border-neutral-700 p-6 bg-neutral-900/50'>
+            <div className='w-full rounded-lg border border-neutral-700 p-6 bg-neutral-900/50'>
               <div className='grid md:grid-cols-4 items-center'>
                 <div className='md:col-span-1'>
                   <div className='text-xl font-bold'>Level 3 / L3</div>
@@ -354,7 +393,7 @@ export default function SupportProgram(props: any) {
             <ArrowsDown />
           </div>
           <div>
-            <div className='w-full rounded-md border border-neutral-700 p-6 bg-neutral-900/50'>
+            <div className='w-full rounded-lg border border-neutral-700 p-6 bg-neutral-900/50'>
               <div className='grid md:grid-cols-4 items-center'>
                 <div className='md:col-span-1'>
                   <div className='text-xl font-bold'>Level 4 / L4</div>
@@ -369,7 +408,7 @@ export default function SupportProgram(props: any) {
             <ArrowsDown />
           </div>
           <div>
-            <div className='w-full rounded-md border border-neutral-700 p-6 bg-neutral-900/50'>
+            <div className='w-full rounded-lg border border-neutral-700 p-6 bg-neutral-900/50'>
               <div className='grid md:grid-cols-4 items-center'>
                 <div className='md:col-span-1'>
                   <div className='text-xl font-bold'>Level 5 / L5</div>

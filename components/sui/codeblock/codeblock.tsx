@@ -75,7 +75,7 @@ export const SuiCodeblock: FunctionComponent<CodeblockProps> = ({
             context={context}
             className='fill-neutral-750'
           />
-          Copied Successfully
+          Copied
         </div>
       )}
     </>

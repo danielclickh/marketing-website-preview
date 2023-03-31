@@ -64,21 +64,21 @@ const testimonialsJson: Array<TestimonialsJson> = [
   },
   {
     id: 2,
-    logo: '/images/use-cases/instabug-logo.png',
+    logo: '/images/use-cases/instabug.svg',
     category: 'Observability',
     text: 'At Instabug, we rely on ClickHouse to help power our teal-time observability solutions that developers rely on. ClickHouse Cloud reduced our operational overhead and cost of managing ClickHouse ourselves allowing us to focus on our users.',
     customer: 'Instabug',
-    width: 152,
-    height: 32
+    width: 189,
+    height: 33
   },
   {
     id: 3,
-    logo: '/images/use-cases/rokt-logo.png',
+    logo: '/images/use-cases/rokt.svg',
     category: 'Analytics',
     text: 'Rokt has been an eager partner of ClickHouse as we modernize our analytics stack. By offloading operations to the experts our developers are focused on delivering the best experience possible while the business scales. We we are thrilled to see the path ClickHouse is forging.',
     customer: 'Rokt',
-    width: 90,
-    height: 25
+    width: 115,
+    height: 32
   },
   {
     id: 4,
@@ -95,8 +95,8 @@ const testimonialsJson: Array<TestimonialsJson> = [
     category: 'Analytics',
     text: 'At Synq we have very high demands of both ingestion and query performance. After a thorough vendor selection process, only ClickHouse Cloud was able to meet those requirements with ease, while providing the powerful preprocessing logic our solution requires.',
     customer: 'Synq',
-    width: 100,
-    height: 100
+    width: 106,
+    height: 40
   },
   {
     id: 6,
@@ -114,8 +114,8 @@ const testimonialsJson: Array<TestimonialsJson> = [
     category: 'Cloud',
     text: 'We use Clickhouse Cloud to monitor millions of real-time web performance data points, to ensure we’re getting faster all the time. The platform delivers fast and reliable data management, while also proving to be cost efficient and user-friendly.',
     customer: 'Minted',
-    width: 134,
-    height: 30
+    width: 123,
+    height: 32
   },
   {
     id: 8,
@@ -123,8 +123,8 @@ const testimonialsJson: Array<TestimonialsJson> = [
     category: 'Cloud',
     text: 'ClickHouse Cloud Private Preview has allowed us to replace a batch analytics pipeline with one that is near-real time and costs less to run without having to manage or scale a ClickHouse cluster ourselves.',
     customer: 'The Washington Post',
-    width: 134,
-    height: 30
+    width: 206,
+    height: 32
   },
   {
     id: 9,
@@ -132,8 +132,8 @@ const testimonialsJson: Array<TestimonialsJson> = [
     category: 'Cloud',
     text: 'Airtory needed a fast, scalable and affordable data engine to power our dynamic creatives, and ClickHouse was the perfect solution for this. The ease of the ClickHouse Cloud helped us ramp up quickly and offer powerful insights for our clients into their marketing campaigns giving them a great ROI.',
     customer: 'Airtory',
-    width: 134,
-    height: 30
+    width: 85,
+    height: 32
   },
 
   {
@@ -142,8 +142,8 @@ const testimonialsJson: Array<TestimonialsJson> = [
     category: 'Cloud',
     text: 'Clickhouse Cloud gave us the confidence to deploy Clickhouse and infinitely have a scalable serverless analytics database.',
     customer: 'Calibre',
-    width: 134,
-    height: 30
+    width: 144,
+    height: 32
   },
   {
     id: 11,
@@ -151,8 +151,8 @@ const testimonialsJson: Array<TestimonialsJson> = [
     category: 'Cloud',
     text: "The team truly delivered on the fully managed Clickhouse product I've been looking for. The platform makes it trivial to spin up and connect to a cluster, and removes all concern around managing underlying infrastructure. I would highly recommend this product.",
     customer: 'Forefront',
-    width: 134,
-    height: 30
+    width: 221,
+    height: 32
   }
 ]
 
@@ -369,19 +369,27 @@ function CustomerStoriesPage({
               key={testimonial?.id}>
               <div className='w-full h-full flex flex-col justify-between space-y-12'>
                 <div className='text-left'>
-                  <p className='text-primary-300 font-inconsolata mb-4'>
-                    {testimonial?.category}
-                  </p>
+                  <Image
+                    src='/images/Quote.svg'
+                    width={35}
+                    height={35}
+                    alt='Quote'
+                    className='mb-4'
+                  />{' '}
                   <p className='text-neutral-200 text-base'>
-                    &ldquo;{testimonial?.text}&ldquo;
+                    {testimonial?.text}
                   </p>
                 </div>
                 <div>
+                  <p className='text-primary-300 font-inconsolata mb-3 text-left'>
+                    {testimonial?.category}
+                  </p>
                   <Image
                     src={testimonial.logo}
                     alt={testimonial.category}
                     width={testimonial.width}
                     height={testimonial.height}
+                    className='h-8 w-auto'
                   />
                 </div>
               </div>

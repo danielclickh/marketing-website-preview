@@ -79,7 +79,7 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
                           type='primary'
                           size='lg'
                           weight='semibold'
-                          href={ctaButton.href}
+                          href='https://clickhouse.cloud/signUp?loc=cloud-page-hero-button'
                           target={ctaButton.target}
                           segmentEvent={{
                             label: ctaButton.text,
@@ -328,7 +328,7 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
                     type='primary-dark'
                     size='lg'
                     className='mx-auto mt-8'
-                    href='https://clickhouse.cloud/signUp'
+                    href='https://clickhouse.cloud/signUp?loc=cloud-page-get-started-footer'
                     segmentEvent={{
                       label: 'Create a free acount',
                       category: 'website-cloudpage-lower-hero'
