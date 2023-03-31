@@ -50,7 +50,7 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
   return (
     <>
       <Layout footerData={footerData} seo={seo}>
-        <div className='pt-10 md:bg-speed-lines bg-center bg-no-repeat bg-contain'>
+        <div className='pt-10 xl:bg-speed-lines bg-center bg-no-repeat bg-contain'>
           <div className='relative overflow-x-hidden'>
             <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 px-4 md:pb-24 md:px-8 2xl:px-0 '>
               <div className='flex'>
