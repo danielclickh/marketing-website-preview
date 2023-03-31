@@ -297,7 +297,7 @@ export default function ClickHouseServerPage({
 
         <HRSeparator className='my-12 md:my-24' />
 
-        <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element-left red-shadow pb-16 px-4 md:px-0'>
+        <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element-left red-shadow pb-16 px-4 md:px-8 2xl:px-0'>
           <div className='flex flex-col items-center w-full'>
             <Image
               src='/images/clickhouse/section_scale.svg'
