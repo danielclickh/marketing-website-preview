@@ -3,7 +3,7 @@ import CloudProviders from '../../components/CloudProviders'
 import Markdown from '../../components/Markdown'
 import PricingOptions from '../../components/PricingOptions'
 import { StrapiImage } from '../../components/StrapiElements'
-import { SuiTitle } from '../../components/sui'
+import { SuiText, SuiTitle } from '../../components/sui'
 import { findAll, findOne } from '../../lib/api/strapi'
 import {
   PricingData,
@@ -20,6 +20,7 @@ import { CUIButton } from '../../components/ClickUI'
 import HRSeparator from '../../components/HRSeparator'
 import philosophy from './philosophy.json'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export const getStaticProps: GetStaticProps<PricingPageProps> =
   async function getStaticProps() {
@@ -125,6 +126,16 @@ function PricingPage({
                           {meteredPricing.footerNote}
                         </Markdown>
                       </div>
+                      <SuiText
+                        size='sm'
+                        color='secondary'
+                        className='text-center pt-6'>
+                        Available on AWS Marketplace{' '}
+                        <Link href='/partners/aws' className='text-primary-300'>
+                          Find out more
+                        </Link>
+                        .
+                      </SuiText>
                     </div>
                   )}
                 </div>
