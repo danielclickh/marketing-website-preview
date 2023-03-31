@@ -17,7 +17,7 @@ export default function FAQ() {
     <div
       className='relative bg-shadow-element max-w-7xl mx-auto px-4 md:px-8 2xl:px-0 lg:flex lg:gap-x-12 lg:justify-between mb-20'
       style={style}>
-      <div className='py-10 text-center'>
+      <div className='pb-10 text-center'>
         <Image
           src='/faq-icon.svg'
           alt='FAQ Icon'
