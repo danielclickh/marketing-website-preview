@@ -21,7 +21,8 @@ import {
   safePolygon,
   ClientRectObject,
   FloatingPortal,
-  computePosition
+  computePosition,
+  useFocus
 } from '@floating-ui/react'
 import Option from './Option'
 import { HeaderTopNavItem } from './types'
@@ -43,7 +44,7 @@ const MenuItem = ({
   menuItems: Array<HeaderTopNavItem>
   padding: boolean
   index: number
-  onHover: () => void
+  onHover: (height: number, width: number, referenceCoords: DOMRect) => void
   onHoverLeave: () => void
   activeIndex?: number
   setActiveIndex: Dispatch<SetStateAction<number | undefined>>
@@ -53,12 +54,24 @@ const MenuItem = ({
   const [isOpen, setIsOpen] = useState(false)
 
   const onOpenChange = (value: boolean) => {
+    console.log('asasass', {
+      index,
+      name,
+      value
+    })
     setIsOpen(value)
     if (value) {
       setActiveIndex(index)
+      const referenceCoords = elements.reference?.getBoundingClientRect()
+      elements.floating &&
+        onHover(
+          elements.floating?.offsetHeight,
+          elements.floating?.offsetWidth,
+          referenceCoords
+        )
     }
   }
-  const { x, y, floating, reference, context, elements } = useFloating({
+  const { x, y, refs, context, elements } = useFloating({
     open: isOpen,
     onOpenChange,
     placement: 'bottom',
@@ -72,7 +85,6 @@ const MenuItem = ({
         }
       }),
       shift(),
-      autoPlacement(),
       offset({
         crossAxis: 10
       })
@@ -84,24 +96,26 @@ const MenuItem = ({
       blockPointerEvents: false
     })
   })
+
+  const focus = useFocus(context)
   const dismiss = useDismiss(context)
   const { getReferenceProps, getFloatingProps } = useInteractions([
     hover,
-    dismiss
+    dismiss,
+    focus
   ])
 
   useLayoutEffect(() => {
     if (isOpen) {
       setActiveIndex(index)
-      if (ref.current) {
-        const navContainer = ref.current.closest(
-          '#nav-container'
-        ) as HTMLDivElement
-        Object.assign(navContainer.style, {
-          '--menuLeft': x,
-          '--menuTop': y
-        })
-        onHover()
+      if (elements.reference) {
+        // const navContainer = elements.reference.closest(
+        //   '#nav-container'
+        // ) as HTMLDivElement
+        // Object.assign(navContainer.style, {
+        //   '--menuLeft': x,
+        //   '--menuTop': y
+        // })
       }
     } else {
       ref.current && ref.current.classList.remove('trigger-enter-active')
@@ -114,17 +128,33 @@ const MenuItem = ({
   }, [isOpen, activeIndex])
 
   return (
-    <li
-      ref={ref}
-      className={`${isOpen ? `${styles.triggerEnter} trigger-enter` : ''}`}>
-      <div
-        id={`nav-item-${index}`}
-        ref={reference}
-        data-open={isOpen && activeIndex === index}
-        className={`px-2 lg:px-4 py-2.5 ${styles.headerPopover} group group-hover:text-neutral-400 data-[open=true]:text-neutral-400 hover:text-neutral-400 cursor-pointer`}
-        {...getReferenceProps()}>
-        {name}
-      </div>
+    <>
+      <li
+        ref={refs.setReference}
+        className={`${isOpen ? `${styles.triggerEnter} trigger-enter` : ''}`}
+        {...getReferenceProps()}
+        onMouseEnter={() =>
+          console.log('onMouseEnter', {
+            index,
+            isOpen,
+            name
+          })
+        }
+        onMouseLeave={() =>
+          console.log('onMouseLeave', {
+            index,
+            isOpen,
+            name
+          })
+        }>
+        <div
+          id={`nav-item-${index}`}
+          data-open={isOpen && activeIndex === index}
+          className={`px-2 lg:px-4 py-2.5 ${styles.headerPopover} group group-hover:text-neutral-400 data-[open=true]:text-neutral-400 hover:text-neutral-400 cursor-pointer`}>
+          {name}
+        </div>
+      </li>
+
       {dropdownContainerRef.current &&
         createPortal(
           <div
@@ -134,7 +164,7 @@ const MenuItem = ({
                 : 'opacity-0 -z-[1]'
             }`}
             id={`floating-container-${index}`}
-            ref={floating}
+            ref={refs.setFloating}
             style={{
               position: 'absolute',
               top: 0,
@@ -174,7 +204,7 @@ const MenuItem = ({
           </div>,
           dropdownContainerRef.current
         )}
-    </li>
+    </>
   )
 }
 export default MenuItem

@@ -50,38 +50,25 @@ export default function Header() {
     dismiss
   ])
 
-  const handleEnter = () => {
+  const onHover = (height: number, width: number, referenceCoords: DOMRect) => {
     if (dropdownRef.current) {
-      const floating = dropdownContainerRef.current?.querySelector(
-        `#floating-container-${activeIndex}`
-      )
       const reference = navRef.current?.querySelector(
         `#nav-item-${activeIndex}`
       )
-      const floatingCoords = floating?.getBoundingClientRect()
-      const refCoords = reference?.getBoundingClientRect()
-      if (floatingCoords && refCoords) {
-        dropdownRef.current.classList.add('open')
-        dropdownRef.current.style.setProperty(
-          'width',
-          `${floatingCoords.width}px`
+      dropdownRef.current.classList.add('open')
+      dropdownRef.current.style.setProperty('width', `${width}px`)
+      dropdownRef.current.style.setProperty('height', `${height}px`)
+      if (arrowRef.current) {
+        arrowRef.current.classList.add('open')
+        arrowRef.current.style.setProperty(
+          'transform',
+          `translateY(-50%) rotate(45deg)`
         )
-        dropdownRef.current.style.setProperty(
-          'height',
-          `${floatingCoords.height}px`
+        arrowRef.current.style.setProperty('top', `61px`)
+        arrowRef.current.style.setProperty(
+          'left',
+          `${referenceCoords.left + referenceCoords.width / 2}px`
         )
-        if (arrowRef.current) {
-          arrowRef.current.classList.add('open')
-          arrowRef.current.style.setProperty(
-            'transform',
-            `translateY(-50%) rotate(45deg)`
-          )
-          arrowRef.current.style.setProperty('top', `${floatingCoords.top}px`)
-          arrowRef.current.style.setProperty(
-            'left',
-            `${refCoords.left + refCoords.width / 2}px`
-          )
-        }
       }
     }
   }
@@ -167,7 +154,7 @@ export default function Header() {
                       <MenuItem
                         key={menuItem.name}
                         name={menuItem.name}
-                        onHover={handleEnter}
+                        onHover={onHover}
                         onHoverLeave={onHoverLeave}
                         padding={(firstSubitem.name || '')?.length > 0}
                         menuItems={menuItem.menuItems}
