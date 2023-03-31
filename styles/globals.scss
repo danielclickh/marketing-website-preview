@@ -81,6 +81,16 @@
       top: 100%;
     }
   }
+
+  .bg-shadow-element-center {
+    @extend .bg-shadow-element;
+
+    &::before {
+      left: -50%;
+      right: -50%;
+      top: 100%;
+    }
+  }
 }
 
 @tailwind utilities;

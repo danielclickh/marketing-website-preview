@@ -1,8 +1,10 @@
 import { ChevronRightIcon } from '@heroicons/react/solid'
-import { StarIcon } from '@heroicons/react/solid'
 import { BaseStrapiImage } from '../../lib/api/strapi/types'
 import { StrapiPicture } from '../StrapiElements'
 import { SuiButton, SuiPanel, SuiText } from '../sui'
+import { CheckIcon } from '@heroicons/react/outline'
+import { CUIButton } from '../../components/ClickUI'
+import Image from 'next/image'
 
 type TestimonialProps = {
   id: string
@@ -28,23 +30,32 @@ export function UseCase(props: TestimonialProps) {
   } = props
 
   return (
-    <SuiPanel isRounded color='bg-neutral-725' shadow padding='xl'>
+    <SuiPanel
+      color='bg-neutral-900'
+      padding='xl'
+      className='border-l-4 border-l-primary-300'>
       <div
         className='flex flex-col justify-start align-top items-between h-full'
         id={id}>
         <div className='flex-auto'>
-          <StrapiPicture light={lightLogo} dark={darkLogo} className='pb-7' />
-          <SuiText size='sm' weight='medium' className='mb-6'>
+          <Image
+            src={darkLogo.url}
+            alt={lightLogo.alternativeText}
+            width={darkLogo.width ? darkLogo.width : 180}
+            height={darkLogo.height ? darkLogo.height : 63}
+            className='pb-7'
+          />
+          <p className='mb-5 text-neutral-100 font-semibold text-xl leading-7 font-basier'>
+            {' '}
             {description}
-          </SuiText>
-
-          <ul className='mb-7 gap-y-2.5'>
+          </p>
+          <ul className='mb-7 space-y-3'>
             {bullets.map((bullet) => (
               <li
-                className='grid grid-cols-[1.25rem_1fr] items-start gap-x-2'
+                className='grid grid-cols-[1.25rem_1fr] items-start gap-x-4'
                 key={bullet.text}>
-                <StarIcon className='w-5 text-c6' />
-                <SuiText size='sm' weight='medium'>
+                <CheckIcon className='w-6 h-6 text-c6 stroke-1' />
+                <SuiText size='base' weight='medium'>
                   {bullet.text}
                 </SuiText>
               </li>
@@ -53,14 +64,14 @@ export function UseCase(props: TestimonialProps) {
         </div>
 
         {btnText && (
-          <SuiButton
-            type='custom'
-            className='bg-c4/10 text-neutral-0'
-            path={path}
-            target={target}>
+          <CUIButton
+            type='secondary'
+            className=''
+            href={path}
+            target={target}
+            iconRight={<ChevronRightIcon className='w-4 h-4' />}>
             {btnText}
-            <ChevronRightIcon className='w-5 h-5' />
-          </SuiButton>
+          </CUIButton>
         )}
       </div>
     </SuiPanel>
