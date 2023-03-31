@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { HTMLAttributes } from 'react'
 import * as NavigationMenu from '@radix-ui/react-navigation-menu'
 import classNames from 'classnames'
 import menuItems from '../header/menuItems.json'
@@ -73,8 +73,10 @@ const NavigationMenuDemo = () => {
     </NavigationMenu.Root>
   )
 }
-
-const ListItem = React.forwardRef(
+interface ListItemProps extends HTMLAttributes<HTMLAnchorElement> {
+  href?: string
+}
+const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
   ({ className, children, title, ...props }, forwardedRef) => (
     <li>
       <NavigationMenu.Link asChild>
