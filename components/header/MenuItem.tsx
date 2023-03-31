@@ -183,11 +183,11 @@ const MenuItem = ({
                       <CUILink
                         href={subitem.href}
                         target={subitem.target}
-                        className='mb-7 pl-3 font-semibold text-sm min-h-[1lh]'>
+                        className='mb-6 pl-3 font-semibold text-sm min-h-[1lh]'>
                         {subitem.name}
                       </CUILink>
                     ) : (
-                      <div className='mb-7 pl-3 font-semibold text-sm min-h-[1lh]'>
+                      <div className='mb-6 pl-3 font-semibold text-sm min-h-[1lh]'>
                         {subitem.name}
                       </div>
                     )}
