@@ -204,7 +204,7 @@ export default function Header() {
               </div>
             </CUILink>
             <CUILink
-              href='https://clickhouse.cloud/signIn'
+              href='https://clickhouse.cloud/signIn?loc=website-nav'
               target='_self'
               segmentEvent={{
                 label: 'Sign in',
@@ -300,7 +300,7 @@ export default function Header() {
           <div className='py-6 px-5 grid gap-4 w-full grid-cols-2'>
             <CUIButton
               type='primary'
-              href='https://clickhouse.cloud/signUp'
+              href='https://clickhouse.cloud/signUp?loc=website-nav-mobile'
               target='_self'
               segmentEvent={{
                 label: 'Get Started',
@@ -311,7 +311,7 @@ export default function Header() {
             </CUIButton>
             <CUIButton
               type='secondary'
-              href='https://clickhouse.cloud/signIn'
+              href='https://clickhouse.cloud/signIn?loc=website-nav-mobile'
               target='_self'
               segmentEvent={{
                 label: 'Sign in',
