@@ -176,7 +176,7 @@ export default function Header() {
             </div>
           </FloatingDelayGroup>
           <div className='hidden md:flex flex-nowrap gap-4 lg:gap-6 items-center'>
-            <div className='hidden lg:block'>
+            <div className='hidden xl:block'>
               <CUILink
                 key='github-stars-nav'
                 href='https://github.com/ClickHouse/ClickHouse?utm_source=clickhouse&utm_medium=website&utm_campaign=website-nav'
