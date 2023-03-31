@@ -43,7 +43,7 @@ const deployData: Array<DeployData> = [
 ]
 export default function GiveItAGo() {
   return (
-    <div className='flex flex-col items-center space-y-10 justify-between lg:space-y-0 lg:space-x-10  lg:flex-row'>
+    <div className='flex flex-wrap justify-center xl:justify-between gap-10'>
       {deployData.map((deploy) => (
         <CUICard
           key={deploy.title}
