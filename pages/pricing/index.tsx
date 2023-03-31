@@ -126,16 +126,26 @@ function PricingPage({
                           {meteredPricing.footerNote}
                         </Markdown>
                       </div>
-                      <SuiText
-                        size='sm'
-                        color='secondary'
-                        className='text-center pt-6'>
-                        Available on AWS Marketplace{' '}
-                        <Link href='/partners/aws' className='text-primary-300'>
-                          Find out more
-                        </Link>
-                        .
-                      </SuiText>
+                      <div className='flex justify-center items-center gap-2 pt-6'>
+                        <Image
+                          src='/images/pricing/marketplace.svg'
+                          alt='ClickHouse on AWS Marketplace'
+                          width={20}
+                          height={20}
+                        />
+                        <SuiText
+                          size='sm'
+                          color='secondary'
+                          className='text-center'>
+                          Available on AWS Marketplace{' '}
+                          <Link
+                            href='/partners/aws'
+                            className='text-primary-300'>
+                            Find out more
+                          </Link>
+                          .
+                        </SuiText>
+                      </div>
                     </div>
                   )}
                 </div>
