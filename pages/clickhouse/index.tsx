@@ -78,7 +78,7 @@ export default function ClickHouseServerPage({
                     <span className='tilted tilted-yellow'>
                       <span className='tilted-content'>fastest</span>
                     </span>{' '}
-                    open-source database around.
+                    open-source analytical database.
                   </h1>
                   <SuiText
                     size='base'

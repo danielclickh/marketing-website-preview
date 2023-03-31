@@ -97,39 +97,7 @@ function MobileMenuItem({
                   category: 'website-nav'
                 }}
                 className='flex items-start hover:no-underline max-w-md'>
-                <div
-                  className={styles.menuItem}
-                  data-icon={subitem.icon ? 'true' : 'false'}>
-                  {subitem.icon && (
-                    <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md items-center sm:h-12 sm:w-12 md:mr-4'>
-                      <Image
-                        alt={`Image ${subitem.name}`}
-                        src={subitem.icon}
-                        className='h-8 w-8'
-                        width={32}
-                        height={32}
-                        aria-hidden='true'
-                      />
-                    </div>
-                  )}
-                  <div className='flex flex-col'>
-                    <SuiText
-                      size='sm'
-                      color='primary'
-                      weight={subitem.icon ? 'normal' : 'medium'}>
-                      {subitem.name}
-                    </SuiText>
-                    {subitem.description && (
-                      <SuiText
-                        size='sm'
-                        color='secondary'
-                        weight='normal'
-                        className='mt-1'>
-                        {subitem.description}
-                      </SuiText>
-                    )}
-                  </div>
-                </div>
+                {subitem.name}
               </SuiLink>
             )
           }
