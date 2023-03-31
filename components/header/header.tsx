@@ -19,6 +19,7 @@ import { MenuItem as MenuItemType } from './types'
 import styles from './styles.module.scss'
 import MenuItem from './MenuItem'
 import MobileMenuItem from './MobileMenuItem'
+import NavigationMenuDemo from './../header_alt'
 
 const headerMenuItems = menuItems as Array<MenuItemType>
 
@@ -137,52 +138,9 @@ export default function Header() {
               alt='ClickHouse logo'
             />
           </Link>
-          <FloatingDelayGroup delay={{ open: 1000, close: 200 }}>
-            <div className={styles.navWrapper} ref={navRef}>
-              <ul className={`${styles.navList} navList`}>
-                {headerMenuItems.map((menuItem, index) => {
-                  if (menuItem.href) {
-                    return (
-                      <li className='px-2 lg:px-4' key={menuItem.name}>
-                        <CUILink
-                          id={`nav-item-${index}`}
-                          key={menuItem.name}
-                          href={menuItem.href}
-                          target={menuItem.target}
-                          segmentEvent={{
-                            label: menuItem.name,
-                            category: 'website-nav'
-                          }}
-                          className='inline-flex items-center text-sm font-medium max-w-md hover:text-neutral-400 hover:no-underline'>
-                          {menuItem.name}
-                        </CUILink>
-                      </li>
-                    )
-                  } else if (
-                    menuItem.menuItems &&
-                    (menuItem?.menuItems ?? []).length > 0
-                  ) {
-                    const firstSubitem = menuItem.menuItems[0]
-                    return (
-                      <MenuItem
-                        key={menuItem.name}
-                        name={menuItem.name}
-                        onHover={handleEnter}
-                        onHoverLeave={onHoverLeave}
-                        padding={(firstSubitem.name || '')?.length > 0}
-                        menuItems={menuItem.menuItems}
-                        index={index}
-                        activeIndex={activeIndex}
-                        setActiveIndex={setActiveIndex}
-                        dropdownContainerRef={dropdownContainerRef}
-                      />
-                    )
-                  }
-                  return null
-                })}
-              </ul>
-            </div>
-          </FloatingDelayGroup>
+
+          <NavigationMenuDemo />
+
           <div className='hidden md:flex flex-nowrap gap-4 lg:gap-6 items-center'>
             <CUILink
               key='github-stars-nav'
@@ -305,6 +263,7 @@ export default function Header() {
               </nav>
             </div>
           </div>
+
           <div className='py-6 px-5 grid gap-4 w-full grid-cols-2'>
             <CUIButton
               type='primary'
