@@ -48,7 +48,7 @@ export default function FAQ() {
             key={`faq-${index}`}>
             {({ open }) => (
               <>
-                <Disclosure.Button className='relative z-10 flex p-4 pl-20 w-full justify-between items-center rounded-lg text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none'>
+                <Disclosure.Button className='relative z-10 flex p-4 pr-6 pl-20 space-x-6 w-full justify-between items-center rounded-lg text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none'>
                   <span className='text-md'>{faq.title}</span>
                   <span className={styles.plusMinus} data-active={open} />
                 </Disclosure.Button>
