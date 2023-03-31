@@ -182,7 +182,7 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <div className='container mx-auto relative flex flex-col gap-y-28 mt-12 md:mt-24 md:px-0 '>
+        <div className='mx-auto relative flex flex-col gap-y-28 mt-12 md:mt-24 md:px-0 '>
           <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element-left red-shadow'>
             <div className='flex flex-col items-center w-full'>
               <Image
@@ -207,38 +207,49 @@ export default function ClickHouseServerPage({
                   <p className='font-inconsolata text-primary-300'>
                     Vectorization
                   </p>
-                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-4'>
+                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2 xl:px-8'>
                     Maximizes CPU efficiency
                   </h3>
 
-                  <SuiText size='sm' color='secondary' className='text-center'>
+                  <SuiText
+                    size='sm'
+                    color='secondary'
+                    className='text-center px-0 xl:px-8'>
                     Vectorized query execution involves relevant SIMD processor
                     instructions and runtime code generation. Processing data in
                     columns increases CPU cache line hit rate.
                   </SuiText>
                 </CUICard>
+
                 <CUICard title='Strives for CPU efficiency' className='p-6'>
                   <p className='font-inconsolata text-primary-300'>Locality</p>
-                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2'>
+                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2 xl:px-8'>
                     Optimizes disk drive access
                   </h3>
 
-                  <SuiText size='sm' color='secondary' className='text-center'>
+                  <SuiText
+                    size='sm'
+                    color='secondary'
+                    className='text-center px-0 xl:px-8'>
                     ClickHouse minimizes the number of seeks for range queries,
                     which increases the efficiency of using rotating disk
                     drives, as it maintains locality of reference for
                     continually stored data.
                   </SuiText>
                 </CUICard>
+
                 <CUICard title='Strives for CPU efficiency' className='p-6'>
                   <p className='font-inconsolata text-primary-300'>
                     Throughput
                   </p>
-                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold  text-center px-4'>
+                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2 xl:px-8'>
                     Minimizes data transfers
                   </h3>
 
-                  <SuiText size='sm' color='secondary' className='text-center'>
+                  <SuiText
+                    size='sm'
+                    color='secondary'
+                    className='text-center px-0 xl:px-8'>
                     ClickHouse enables companies to manage their data and create
                     reports without using specialized networks that are aimed at
                     high-performance computing.
@@ -268,7 +279,7 @@ export default function ClickHouseServerPage({
               </div>
 
               <div className='flex flex-col md:flex-row gap-8'>
-                <div className='w-full text-center md:text-left md:w-9/12'>
+                <div className='w-full text-center md:text-left lg:w-9/12'>
                   <SuiText size='sm' color='secondary'>
                     ClickHouse scales well both vertically and horizontally. It
                     is easily adaptable to perform on your laptop, small virtual
