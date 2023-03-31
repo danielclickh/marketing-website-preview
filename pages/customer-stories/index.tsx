@@ -92,7 +92,7 @@ const testimonialsJson: Array<TestimonialsJson> = [
   {
     id: 5,
     logo: '/images/use-cases/synq-logo.png',
-    category: 'Analytics',
+    category: 'ClickHouse Cloud',
     text: 'At Synq we have very high demands of both ingestion and query performance. After a thorough vendor selection process, only ClickHouse Cloud was able to meet those requirements with ease, while providing the powerful preprocessing logic our solution requires.',
     customer: 'Synq',
     width: 106,
@@ -101,7 +101,7 @@ const testimonialsJson: Array<TestimonialsJson> = [
   {
     id: 6,
     logo: '/images/use-cases/adevinta-logo.png',
-    category: 'Cloud',
+    category: 'ClickHouse Cloud',
     text: "Amazing to have been one of the first users of ClickHouse Serverless Cloud. It's scalable and blazingly fast ClickHouse in the cloud with simple onboarding and excellent support. Great experience.",
     customer: 'Adevinta',
     width: 134,
@@ -111,7 +111,7 @@ const testimonialsJson: Array<TestimonialsJson> = [
   {
     id: 7,
     logo: '/images/use-cases/minted-logo.png',
-    category: 'Cloud',
+    category: 'ClickHouse Cloud',
     text: 'We use Clickhouse Cloud to monitor millions of real-time web performance data points, to ensure we’re getting faster all the time. The platform delivers fast and reliable data management, while also proving to be cost efficient and user-friendly.',
     customer: 'Minted',
     width: 123,
@@ -129,7 +129,7 @@ const testimonialsJson: Array<TestimonialsJson> = [
   {
     id: 9,
     logo: '/images/use-cases/airtory-logo.png',
-    category: 'Cloud',
+    category: 'Analytics',
     text: 'Airtory needed a fast, scalable and affordable data engine to power our dynamic creatives, and ClickHouse was the perfect solution for this. The ease of the ClickHouse Cloud helped us ramp up quickly and offer powerful insights for our clients into their marketing campaigns giving them a great ROI.',
     customer: 'Airtory',
     width: 85,
@@ -139,7 +139,7 @@ const testimonialsJson: Array<TestimonialsJson> = [
   {
     id: 10,
     logo: '/images/use-cases/calibre-logo.svg',
-    category: 'Cloud',
+    category: 'Analytics',
     text: 'Clickhouse Cloud gave us the confidence to deploy Clickhouse and infinitely have a scalable serverless analytics database.',
     customer: 'Calibre',
     width: 144,
