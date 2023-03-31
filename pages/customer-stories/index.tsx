@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { SuiButton, SuiPanel, SuiText, SuiTitle } from '../../components/sui'
 import { UseCase } from '../../components/use_case'
 import { findOne } from '../../lib/api/strapi'
@@ -105,6 +106,53 @@ const testimonialsJson: Array<TestimonialsJson> = [
     customer: 'Adevinta',
     width: 134,
     height: 30
+  },
+
+  {
+    id: 7,
+    logo: '/images/use-cases/minted-logo.png',
+    category: 'Cloud',
+    text: 'We use Clickhouse Cloud to monitor millions of real-time web performance data points, to ensure we’re getting faster all the time. The platform delivers fast and reliable data management, while also proving to be cost efficient and user-friendly.',
+    customer: 'Minted',
+    width: 134,
+    height: 30
+  },
+  {
+    id: 8,
+    logo: '/images/use-cases/washington-post-logo.svg',
+    category: 'Cloud',
+    text: 'ClickHouse Cloud Private Preview has allowed us to replace a batch analytics pipeline with one that is near-real time and costs less to run without having to manage or scale a ClickHouse cluster ourselves.',
+    customer: 'The Washington Post',
+    width: 134,
+    height: 30
+  },
+  {
+    id: 9,
+    logo: '/images/use-cases/airtory-logo.png',
+    category: 'Cloud',
+    text: 'Airtory needed a fast, scalable and affordable data engine to power our dynamic creatives, and ClickHouse was the perfect solution for this. The ease of the ClickHouse Cloud helped us ramp up quickly and offer powerful insights for our clients into their marketing campaigns giving them a great ROI.',
+    customer: 'Airtory',
+    width: 134,
+    height: 30
+  },
+
+  {
+    id: 10,
+    logo: '/images/use-cases/calibre-logo.svg',
+    category: 'Cloud',
+    text: 'Clickhouse Cloud gave us the confidence to deploy Clickhouse and infinitely have a scalable serverless analytics database.',
+    customer: 'Calibre',
+    width: 134,
+    height: 30
+  },
+  {
+    id: 11,
+    logo: '/images/use-cases/forefront-logo.png',
+    category: 'Cloud',
+    text: "The team truly delivered on the fully managed Clickhouse product I've been looking for. The platform makes it trivial to spin up and connect to a cluster, and removes all concern around managing underlying infrastructure. I would highly recommend this product.",
+    customer: 'Forefront',
+    width: 134,
+    height: 30
   }
 ]
 
@@ -117,6 +165,11 @@ function CustomerStoriesPage({
   platforms,
   footerData
 }: CustomerStoriesData) {
+  const [visibleTestimonials, setVisibleTestimonials] = useState(6)
+
+  const loadMore = () => {
+    setVisibleTestimonials((prevValue) => prevValue + 6)
+  }
   return (
     <Layout footerData={footerData} seo={seo}>
       <div className='pt-10'>
@@ -308,11 +361,11 @@ function CustomerStoriesPage({
           What our customers say
         </h2>
       </div>
-      <div className='max-w-7xl mx-auto pb-20 px-4 md:px-8 2xl:px-0'>
+      <div className='max-w-7xl mx-auto pb-24 px-4 md:px-8 2xl:px-0'>
         <div className='grid lg:grid-cols-3 gap-y-6 gap-x-6 bg-shadow-element-center red-shadow'>
-          {testimonialsJson.map((testimonial) => (
+          {testimonialsJson.slice(0, visibleTestimonials).map((testimonial) => (
             <div
-              className='flex w-full flex-col text-center px-4 bg-neutral-900/50 border border-neutral-725 rounded-lg p-6 relative shadow-card hover:shadow-lg'
+              className='animate-fade-in flex w-full flex-col text-center px-4 bg-neutral-900/50 border border-neutral-725 rounded-lg p-6 relative shadow-card hover:shadow-lg'
               key={testimonial?.id}>
               <div className='w-full h-full flex flex-col justify-between space-y-12'>
                 <div className='text-left'>
@@ -335,10 +388,21 @@ function CustomerStoriesPage({
             </div>
           ))}
         </div>
+        {visibleTestimonials < testimonialsJson.length && (
+          <div className='mt-12 mx-auto'>
+            <CUIButton
+              type='secondary'
+              className='w-auto mx-auto'
+              onClick={loadMore}
+              iconRight=''>
+              View more
+            </CUIButton>
+          </div>
+        )}
       </div>
       <HRSeparator />
-      <div className='my-16'>
-        <h2 className='text-center font-basier text-neutral-100 font-basier text-4xl font-semibold mb-16'>
+      <div className='my-24'>
+        <h2 className='text-center text-neutral-100 font-basier text-4xl font-semibold mb-16'>
           Ready to give it a go?
         </h2>
         <div className='max-w-7xl mx-auto px-4 md:px-8 2xl:px-0'>

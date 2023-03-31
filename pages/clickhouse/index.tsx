@@ -309,7 +309,8 @@ export default function ClickHouseServerPage({
               {features5.second_title}
             </SuiTitle>
             <div className='text-neutral-200 max-w-2xl leading-normal text-center mx-auto md:pb-10'>
-              {features5.second_description}
+              ClickHouse is used for a variety of industries and use cases–both
+              for internal apps and customer-facing dashboards and analytics.
             </div>
 
             <div className='flex flex-col md:flex-row md:max-w-4xl md:mx-auto pt-12 md:pt-6 flex-wrap'>

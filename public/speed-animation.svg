@@ -324,7 +324,7 @@
     href="/logos/mysql.png">
   </image>
   <text xmlns="http://www.w3.org/2000/svg" x="15.1426" y="267.068" fill="#C0C0C0" font-size="12"
-    style="font-family: 'Inter';"> Log and analytics events </text>
+    style="font-family: 'Inter';"> Streams, logs, and analytics </text>
   <rect xmlns="http://www.w3.org/2000/svg" x="15.1426" y="286.068" width="72" height="72"
     fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4" />
   <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="27.1426" y="298.068"
@@ -341,7 +341,7 @@
     href="/logos/dbt.svg">
   </image>
   <text xmlns="http://www.w3.org/2000/svg" x="15.1426" y="434.068" fill="#C0C0C0" font-size="12"
-    style="font-family: 'Inter';"> Data Lakes </text>
+    style="font-family: 'Inter';"> Data lake formats </text>
   <rect xmlns="http://www.w3.org/2000/svg" x="15.1426" y="453.068" width="72" height="72"
     fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
   </rect>

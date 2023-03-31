@@ -8,88 +8,25 @@ export default function SupportProgram(props: any) {
   return (
     <div>
       <div className='bg-grid'>
-        <div className='max-w-7xl pb-24 mx-auto px-4 sm:px-8 2xl:px-0 relative'>
-          <div className='flex container mx-auto flex-col max-w-7xl px-4 sm:px-8 2xl:px-0 relative pt-28'>
-            <div className='flex'>
-              <div className='md:w-2/3 flex-col text-center md:text-left'>
-                <SuiTitle type='h1' className='md:!text-6xl mb-6'>
-                  {props.title}
-                </SuiTitle>
-                <h2 className='text-base font-bold mb-6'>
-                  Trusted Support Services for your Organization
-                </h2>
-                <SuiText
-                  size='base'
-                  weight='medium'
-                  color='secondary'
-                  className='mt-6 md:pr-16'>
-                  Here at ClickHouse, best-in-class support comes with your
-                  Cloud subscription. Our Support Services team follows the same
-                  vision as our product, bringing you unparalleled performance,
-                  ease of use, and exceptionally fast, high-quality results.
-                </SuiText>
-                <div className='mt-10'>
-                  <a
-                    href='https://clickhouse.cloud/support'
-                    target='_blank'
-                    className='flex items-center space-x-2 text-primary-300 text-base'>
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke-width='1.5'
-                      stroke='currentColor'
-                      className='w-5 h-5 text-neutral-600'>
-                      <path
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
-                        d='M16.712 4.33a9.027 9.027 0 011.652 1.306c.51.51.944 1.064 1.306 1.652M16.712 4.33l-3.448 4.138m3.448-4.138a9.014 9.014 0 00-9.424 0M19.67 7.288l-4.138 3.448m4.138-3.448a9.014 9.014 0 010 9.424m-4.138-5.976a3.736 3.736 0 00-.88-1.388 3.737 3.737 0 00-1.388-.88m2.268 2.268a3.765 3.765 0 010 2.528m-2.268-4.796a3.765 3.765 0 00-2.528 0m4.796 4.796c-.181.506-.475.982-.88 1.388a3.736 3.736 0 01-1.388.88m2.268-2.268l4.138 3.448m0 0a9.027 9.027 0 01-1.306 1.652c-.51.51-1.064.944-1.652 1.306m0 0l-3.448-4.138m3.448 4.138a9.014 9.014 0 01-9.424 0m5.976-4.138a3.765 3.765 0 01-2.528 0m0 0a3.736 3.736 0 01-1.388-.88 3.737 3.737 0 01-.88-1.388m2.268 2.268L7.288 19.67m0 0a9.024 9.024 0 01-1.652-1.306 9.027 9.027 0 01-1.306-1.652m0 0l4.138-3.448M4.33 16.712a9.014 9.014 0 010-9.424m4.138 5.976a3.765 3.765 0 010-2.528m0 0c.181-.506.475-.982.88-1.388a3.736 3.736 0 011.388-.88m-2.268 2.268L4.33 7.288m6.406 1.18L7.288 4.33m0 0a9.024 9.024 0 00-1.652 1.306A9.025 9.025 0 004.33 7.288'
-                      />
-                    </svg>
-
-                    <span className='text-base text-left'>
-                      New Support Case via ClickHouse Cloud console
-                    </span>
-                  </a>
-                  <a
-                    href='https://clickhouse.cloud/support'
-                    target='_blank'
-                    className='flex items-center space-x-2 text-primary-300 text-base mt-2'>
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke-width='1.5'
-                      stroke='currentColor'
-                      className='w-5 h-5 text-neutral-600'>
-                      <path
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
-                        d='M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75'
-                      />
-                    </svg>
-
-                    <span className='text-base text-left'>
-                      <span className='text-neutral-200'>Email</span>{' '}
-                      support@clickhouse.com
-                    </span>
-                  </a>
-                </div>
-              </div>
-              <div className='hidden md:flex w-6/12 justify-end'>
-                <div className=''>
-                  <img
-                    src='/images/support-program.png'
-                    alt='Support Program'
-                    width={417}
-                    height={417}
-                    className='h-auto'
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className='max-w-3xl pb-24 pt-28 mx-auto px-4 sm:px-8 2xl:px-0 relative text-center'>
+          <SuiTitle type='h1' className='md:!text-6xl mb-6'>
+            {props.title}
+          </SuiTitle>
+          <h2 className='text-base font-bold mb-6'>
+            Trusted Support Services for your Organization
+          </h2>
+          <SuiText
+            size='base'
+            weight='medium'
+            color='secondary'
+            className='mt-6 md:pr-16'>
+            Here at ClickHouse, best-in-class support comes with your Cloud
+            subscription. Our Support Services team follows the same vision as
+            our product, bringing you unparalleled performance, ease of use, and
+            exceptionally fast, high-quality results.
+          </SuiText>
         </div>
+        <div className='grid grid-cols-2 pb-24'></div>
         <div>
           <svg
             className='w-full'
@@ -102,8 +39,8 @@ export default function SupportProgram(props: any) {
             />
           </svg>
           <div className='bg-primary-300 text-neutral-800 pb-16 pt-10 md:pt-0'>
-            <div className='max-w-3xl mx-auto text-center text-base px-8'>
-              <p className='mb-4'>
+            <div className='max-w-3xl mx-auto text-center text-base px-8 flip-selection'>
+              <p className='mb-4 '>
                 Please note that only Subscription Customers have a Service
                 Level Agreement on Support Incidents. if you are not currently a
                 ClickHouse Cloud user – while we will try to answer your

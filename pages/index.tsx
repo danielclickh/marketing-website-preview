@@ -293,7 +293,7 @@ export default function HomePage({
             </div>
             <div>
               <div className='text-sm font-bold uppercase text-neutral-0 text-center mb-4'>
-                log and analytics events
+                Streams, logs, and analytics
               </div>
               <div className='w-56 justify-center mx-auto border-primary-700 rounded p-4 flex flex-nowrap gap-6'>
                 <Image

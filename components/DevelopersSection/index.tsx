@@ -23,10 +23,9 @@ function DevelopersSection() {
         </div>
         <div className='flex flex-col w-full md:w-1/2'>
           <div className='text-md font-semibold text-neutral-0'>
-            ClickHouse is a preferred option for the Observability team for
-            processing access logs and providing analytics on Disney+'s content
-            distribution system. Its flexibility and simplicity make it a
-            powerful tool for content distribution analytics.
+            ClickHouse is the most commonly used database for internal and
+            commercial observability platforms. Disney+ uses ClickHouse to
+            provide analytics for its content distribution system.
           </div>
           <div className='grid md:grid-cols-[0.5rem_1fr] gap-6 mt-8'>
             <div className='bg-primary-300 w-full h-full hidden md:flex' />

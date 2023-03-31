@@ -466,3 +466,17 @@ body {
     @apply p-6 align-top text-neutral-200 text-base leading-relaxed border-b border-b-neutral-700;
   }
 }
+
+.animate-fade-in {
+  animation-name: fade-in;
+  animation-duration: 0.7s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -42,4 +42,8 @@
     content: "0" counter(line-numbering);
     counter-increment: line-numbering;
   }
+  a {@apply text-primary-300}
 }
+
+
+
