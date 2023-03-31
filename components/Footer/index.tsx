@@ -75,8 +75,6 @@ export default function Footer({
                 {bottomLink.text}
               </CUILink>
             ))}
-            <a className='optanon-allow-all'>Cookie Policy</a>
-            <a className='optanon-toggle-display'>cookies</a>
             <button
               onClick={() => {
                 const element = document.querySelector(
@@ -85,7 +83,7 @@ export default function Footer({
                 console.log(element)
                 element && element.click()
               }}
-              className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length}`}>
+              className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length} hover:underline`}>
               Cookie Policy
             </button>
           </div>
