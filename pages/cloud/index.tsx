@@ -158,7 +158,7 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
             {featureBlocks.map((item, index: number) => (
               <>
                 <div
-                  className={`flex flex-col gap-x-24 ${
+                  className={`flex flex-col gap-x-24 items-center ${
                     index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                   } justify-center`}
                   key={item.title}>
@@ -187,7 +187,7 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
                       alt={item.title}
                       width={item.image_width}
                       height={item.image_height}
-                      className='md:h-fit '
+                      className='md:h-fit w-full'
                     />
                   </div>
                 </div>
