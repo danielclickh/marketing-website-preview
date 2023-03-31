@@ -120,7 +120,7 @@ const testimonialsJson: Array<TestimonialsJson> = [
   {
     id: 8,
     logo: '/images/use-cases/washington-post-logo.svg',
-    category: 'Cloud',
+    category: 'Analytics',
     text: 'ClickHouse Cloud Private Preview has allowed us to replace a batch analytics pipeline with one that is near-real time and costs less to run without having to manage or scale a ClickHouse cluster ourselves.',
     customer: 'The Washington Post',
     width: 206,
@@ -362,7 +362,7 @@ function CustomerStoriesPage({
         </h2>
       </div>
       <div className='max-w-7xl mx-auto pb-24 px-4 md:px-8 2xl:px-0'>
-        <div className='grid lg:grid-cols-3 gap-y-6 gap-x-6 bg-shadow-element-center red-shadow'>
+        <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-6 bg-shadow-element-center red-shadow'>
           {testimonialsJson.slice(0, visibleTestimonials).map((testimonial) => (
             <div
               className='animate-fade-in flex w-full flex-col text-center px-4 bg-neutral-900/50 border border-neutral-725 rounded-lg p-6 relative shadow-card hover:shadow-lg'
