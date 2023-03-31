@@ -58,11 +58,6 @@ const MenuItem = ({
   const [isOpen, setIsOpen] = useState(false)
 
   const onOpenChange = (value: boolean) => {
-    console.log('asasass', {
-      index,
-      name,
-      value
-    })
     setIsOpen(value)
     if (value) {
       setActiveIndex(index)
