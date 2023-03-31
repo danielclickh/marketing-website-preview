@@ -44,7 +44,7 @@ export function SnackbarContextProvider({ children }: { children: ReactNode }) {
               {message}
             </SuiText>
             <button
-              className='text-primary-300'
+              className='text-primary-300 hover:underline'
               onClick={() => closeSnackBar()}>
               Dismiss
             </button>
