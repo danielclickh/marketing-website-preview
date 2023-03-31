@@ -44,7 +44,11 @@ const MenuItem = ({
   menuItems: Array<HeaderTopNavItem>
   padding: boolean
   index: number
-  onHover: (height: number, width: number, referenceCoords: DOMRect) => void
+  onHover: (
+    height: number,
+    width: number,
+    referenceCoords: DOMRect | ClientRectObject | undefined
+  ) => void
   onHoverLeave: () => void
   activeIndex?: number
   setActiveIndex: Dispatch<SetStateAction<number | undefined>>

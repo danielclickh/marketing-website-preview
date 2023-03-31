@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import {
   autoUpdate,
+  ClientRectObject,
   FloatingDelayGroup,
   offset,
   useClick,
@@ -50,7 +51,11 @@ export default function Header() {
     dismiss
   ])
 
-  const onHover = (height: number, width: number, referenceCoords: DOMRect) => {
+  const onHover = (
+    height: number,
+    width: number,
+    referenceCoords: DOMRect | ClientRectObject | undefined
+  ) => {
     if (dropdownRef.current) {
       const reference = navRef.current?.querySelector(
         `#nav-item-${activeIndex}`
