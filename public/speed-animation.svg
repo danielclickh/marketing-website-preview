@@ -286,7 +286,7 @@
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
   <rect xmlns="http://www.w3.org/2000/svg" width="119.984" height="119.938" x="539.15" y="282.068"
-    fill="#FBFF46" class="clickhouse-logo-container" rx="4">
+    fill="#FCFF74" class="clickhouse-logo-container" rx="4">
   </rect>
   <image xmlns="http://www.w3.org/2000/svg" width="79" height="80" x="559.642" y="302.037"
     href="/logos/black-logo.svg">
