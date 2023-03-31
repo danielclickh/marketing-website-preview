@@ -21,9 +21,8 @@ function Option({ name, href, icon, target, description }: HeaderLinkItem) {
           <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md items-center sm:h-12 sm:w-12'>
             <Image
               src={icon}
-              className='h-8 w-8'
-              width={32}
-              height={32}
+              width={42}
+              height={42}
               aria-hidden='true'
               alt={''}
             />
