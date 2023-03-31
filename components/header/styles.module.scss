@@ -18,12 +18,11 @@
   perspective: 2000px;
   @apply absolute rounded-lg opacity-0 hidden top-[60px] left-[50%];
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.31);
-  transition: all 0.3s, opacity 0.1s, translate 0.3s;
   transform: translateX(-50%) rotateX(var(--siteMenuRotateX));
   transform-origin: 50% -50px;
   transition-duration: 250ms;
-  transition-property: transform, width, height;
-  will-change: transform, width, height;
+  transition-property: rotateX, width, height;
+  will-change: rotateX, width, height;
   &:global(.open) {
     --siteMenuRotateX: 0;
     display: block;

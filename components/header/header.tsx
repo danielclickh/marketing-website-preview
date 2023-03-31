@@ -63,7 +63,7 @@ export default function Header() {
       dropdownRef.current.classList.add('open')
       dropdownRef.current.style.setProperty('width', `${width}px`)
       dropdownRef.current.style.setProperty('height', `${height}px`)
-      if (arrowRef.current) {
+      if (arrowRef.current && referenceCoords) {
         arrowRef.current.classList.add('open')
         arrowRef.current.style.setProperty(
           'transform',
