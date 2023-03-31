@@ -201,8 +201,8 @@ export default function HomePage({
               <HomePageTerminal />
             </div>
           </div>
-          <div className='bg-primary-300 py-8'>
-            <div className='max-w-3xl mx-auto'>
+          <div className='bg-primary-300 pt-8 pb-16'>
+            <div className='max-w-4xl mx-auto'>
               <div className='text-center mb-8 text-primary-800 w-fit mx-auto text-xl font-semibold leading-normal px-4 md:px-0'>
                 Trusted by the best developers that work with data at{' '}
                 <span className='tilted tilted-black'>
@@ -210,7 +210,7 @@ export default function HomePage({
                 </span>
               </div>
 
-              <div className='section-container flex flex-wrap gap-2 md:gap-x-8 self-center items-center justify-center place-items-center'>
+              <div className='section-container flex flex-wrap gap-6 md:gap-x-14 self-center items-center justify-center place-items-center'>
                 {customerStoriesLogos.map((logo, index: number) => (
                   <CUILink
                     key={logo.href}
@@ -232,7 +232,7 @@ export default function HomePage({
         </Tilt>
       </div>
       <div className='flex w-full text-neutral-0'>
-        <div className='flex section-container w-full mx-auto flex-col pt-20 text-center items-center'>
+        <div className='flex section-container w-full mx-auto flex-col pt-24 text-center items-center'>
           <Image
             src='/speed-icon.svg'
             alt='Speed Icon'
@@ -244,7 +244,6 @@ export default function HomePage({
           </SuiTitle>
           <div className='text-neutral-200 max-w-screen-sm leading-normal text-center mx-auto mb-10 md:mb-16'>
             ClickHouse supports all the data sources you need to power your apps
-            <br />
             and use cases that require exceptional performance.
           </div>
           <div className='flex flex-wrap md:hidden gap-10 justify-center'>
@@ -470,6 +469,7 @@ export default function HomePage({
       </div>
       <HRSeparator className='my-24' />
       <JoinCommunity />
+      <HRSeparator className='my-24' />
       <DevelopersSection />
       <HRSeparator className='my-24' />
       <FAQ />
