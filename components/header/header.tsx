@@ -145,7 +145,7 @@ export default function Header() {
                             label: menuItem.name,
                             category: 'website-nav'
                           }}
-                          className='inline-flex items-center text-sm max-w-md hover:text-neutral-400 hover:no-underline'>
+                          className='inline-flex items-center text-sm max-w-md hover:text-neutral-400 hover:no-underline font-medium'>
                           {menuItem.name}
                         </CUILink>
                       </li>

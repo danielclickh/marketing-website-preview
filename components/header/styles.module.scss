@@ -67,6 +67,7 @@
 .floatingContent {
   @apply transform w-max;
   overflow-y: auto;
+
 }
 
 .triggerEnter {
@@ -84,6 +85,7 @@
 
 .menuItem {
   @apply py-2 md:px-3 rounded flex gap-4 items-center w-full hover:bg-neutral-725;
+
   &[data-icon="true"] {
     @apply flex py-1 md:py-2 md:px-3 cursor-pointer items-center;
   }
