@@ -1,4 +1,12 @@
-import { arrow, FloatingArrow, offset, useFloating } from '@floating-ui/react'
+import {
+  arrow,
+  autoUpdate,
+  flip,
+  FloatingArrow,
+  offset,
+  shift,
+  useFloating
+} from '@floating-ui/react'
 import { DuplicateIcon } from '@heroicons/react/outline'
 import React, {
   FunctionComponent,
@@ -39,13 +47,16 @@ export const SuiCodeblock: FunctionComponent<CodeblockProps> = ({
     open: isOpen,
     strategy: 'fixed',
     placement: 'top-end',
+    whileElementsMounted: autoUpdate,
     middleware: [
       arrow({
         element: arrowRef
       }),
       offset({
         mainAxis: 10
-      })
+      }),
+      flip(),
+      shift()
     ]
   })
 

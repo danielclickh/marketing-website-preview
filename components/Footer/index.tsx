@@ -75,6 +75,16 @@ export default function Footer({
                 {bottomLink.text}
               </CUILink>
             ))}
+            <button
+              onClick={() => {
+                const element = document.querySelector(
+                  '#ot-sdk-btn-floating'
+                ) as HTMLElement
+                element && element.click()
+              }}
+              className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length}`}>
+              Cookie Policy
+            </button>
           </div>
         </div>
       </div>
