@@ -59,7 +59,7 @@
       --right-side: 0;
     }
     &.shadow-z-low {
-      @apply z-10
+      @apply z-10;
     }
   }
 
@@ -78,6 +78,16 @@
     &::before {
       left: auto;
       right: 5%;
+      top: 100%;
+    }
+  }
+
+  .bg-shadow-element-center {
+    @extend .bg-shadow-element;
+
+    &::before {
+      left: -50%;
+      right: -50%;
       top: 100%;
     }
   }
@@ -303,8 +313,8 @@ body {
   }
 }
 
-#ot-sdk-btn-floating .ot-floating-button__front {
-  @apply bg-transparent #{!important};
+#ot-sdk-btn-floating {
+  @apply hidden #{!important};
 }
 
 .video-frame {
@@ -454,5 +464,19 @@ body {
   td,
   th {
     @apply p-6 align-top text-neutral-200 text-base leading-relaxed border-b border-b-neutral-700;
+  }
+}
+
+.animate-fade-in {
+  animation-name: fade-in;
+  animation-duration: 0.7s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

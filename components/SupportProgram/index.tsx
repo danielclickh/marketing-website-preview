@@ -8,86 +8,62 @@ export default function SupportProgram(props: any) {
   return (
     <div>
       <div className='bg-grid'>
-        <div className='max-w-7xl pb-24 mx-auto px-4 sm:px-8 2xl:px-0 relative'>
-          <div className='flex container mx-auto flex-col max-w-7xl px-4 sm:px-8 2xl:px-0 relative pt-28'>
-            <div className='flex'>
-              <div className='md:w-2/3 flex-col text-center md:text-left'>
-                <SuiTitle type='h1' className='md:!text-6xl mb-6'>
-                  {props.title}
-                </SuiTitle>
-                <h2 className='text-base font-bold mb-6'>
-                  Trusted Support Services for your Organization
-                </h2>
-                <SuiText
-                  size='base'
-                  weight='medium'
-                  color='secondary'
-                  className='mt-6 md:pr-16'>
-                  Here at ClickHouse, best-in-class support comes with your
-                  Cloud subscription. Our Support Services team follows the same
-                  vision as our product, bringing you unparalleled performance,
-                  ease of use, and exceptionally fast, high-quality results.
-                </SuiText>
-                <div className='mt-10'>
-                  <a
-                    href='https://clickhouse.cloud/support'
-                    target='_blank'
-                    className='flex items-center space-x-2 text-primary-300 text-base'>
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke-width='1.5'
-                      stroke='currentColor'
-                      className='w-5 h-5 text-neutral-600'>
-                      <path
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
-                        d='M16.712 4.33a9.027 9.027 0 011.652 1.306c.51.51.944 1.064 1.306 1.652M16.712 4.33l-3.448 4.138m3.448-4.138a9.014 9.014 0 00-9.424 0M19.67 7.288l-4.138 3.448m4.138-3.448a9.014 9.014 0 010 9.424m-4.138-5.976a3.736 3.736 0 00-.88-1.388 3.737 3.737 0 00-1.388-.88m2.268 2.268a3.765 3.765 0 010 2.528m-2.268-4.796a3.765 3.765 0 00-2.528 0m4.796 4.796c-.181.506-.475.982-.88 1.388a3.736 3.736 0 01-1.388.88m2.268-2.268l4.138 3.448m0 0a9.027 9.027 0 01-1.306 1.652c-.51.51-1.064.944-1.652 1.306m0 0l-3.448-4.138m3.448 4.138a9.014 9.014 0 01-9.424 0m5.976-4.138a3.765 3.765 0 01-2.528 0m0 0a3.736 3.736 0 01-1.388-.88 3.737 3.737 0 01-.88-1.388m2.268 2.268L7.288 19.67m0 0a9.024 9.024 0 01-1.652-1.306 9.027 9.027 0 01-1.306-1.652m0 0l4.138-3.448M4.33 16.712a9.014 9.014 0 010-9.424m4.138 5.976a3.765 3.765 0 010-2.528m0 0c.181-.506.475-.982.88-1.388a3.736 3.736 0 011.388-.88m-2.268 2.268L4.33 7.288m6.406 1.18L7.288 4.33m0 0a9.024 9.024 0 00-1.652 1.306A9.025 9.025 0 004.33 7.288'
-                      />
-                    </svg>
-
-                    <span className='text-base text-left'>
-                      New Support Case via ClickHouse Cloud console
-                    </span>
-                  </a>
-                  <a
-                    href='https://clickhouse.cloud/support'
-                    target='_blank'
-                    className='flex items-center space-x-2 text-primary-300 text-base mt-2'>
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke-width='1.5'
-                      stroke='currentColor'
-                      className='w-5 h-5 text-neutral-600'>
-                      <path
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
-                        d='M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75'
-                      />
-                    </svg>
-
-                    <span className='text-base text-left'>
-                      <span className='text-neutral-200'>Email</span>{' '}
-                      support@clickhouse.com
-                    </span>
-                  </a>
-                </div>
-              </div>
-              <div className='hidden md:flex w-6/12 justify-end'>
-                <div className=''>
-                  <img
-                    src='/images/support-program.png'
-                    alt='Support Program'
-                    width={417}
-                    height={417}
-                    className='h-auto'
-                  />
-                </div>
-              </div>
-            </div>
+        <div className='max-w-3xl pb-24 pt-28 mx-auto px-4 sm:px-8 2xl:px-0 relative text-center'>
+          <SuiTitle type='h1' className='md:!text-6xl mb-6'>
+            {props.title}
+          </SuiTitle>
+          <h2 className='text-base font-bold mb-6'>
+            Trusted Support Services for your Organization
+          </h2>
+          <SuiText
+            size='base'
+            weight='medium'
+            color='secondary'
+            className='mt-6 md:pr-16'>
+            Here at ClickHouse, best-in-class support comes with your Cloud
+            subscription. Our Support Services team follows the same vision as
+            our product, bringing you unparalleled performance, ease of use, and
+            exceptionally fast, high-quality results.
+          </SuiText>
+        </div>
+        <div className='grid md:grid-cols-2 pb-12 max-w-3xl mx-auto gap-x-10 text-center px-4 sm:px-8 2xl:px-0 '>
+          <div className='mb-10 md:mb-0  border border-neutral-700 rounded-lg p-6 bg-neutral-900/50'>
+            <Link
+              href='https://clickhouse.cloud/support'
+              target='_blank'
+              className='hover:no-underline'>
+              <Image
+                src='/images/support-program/cloud-light.svg'
+                height={35}
+                width={49}
+                alt='Cloud'
+                className='mx-auto mb-10'
+              />
+              <p className='font-bold text-base'>
+                New Support Case via
+                <br />
+                <span className='text-primary-300'>ClickHouse Cloud</span>
+              </p>
+            </Link>
+          </div>
+          <div className='mb-10 md:mb-0 border border-neutral-700 rounded-lg p-6 bg-neutral-900/50'>
+            <Link
+              href='mailto:support@clickhouse.com'
+              target='_blank'
+              className='hover:no-underline'>
+              <Image
+                src='/images/support-program/envelope-thin.svg'
+                height={35}
+                width={49}
+                alt='Email'
+                className='mx-auto mb-10'
+              />
+              <p className='font-bold text-base'>
+                Email us at
+                <br />
+                <span className='text-primary-300'>support@clickhouse.com</span>
+              </p>
+            </Link>
           </div>
         </div>
         <div>
@@ -102,8 +78,8 @@ export default function SupportProgram(props: any) {
             />
           </svg>
           <div className='bg-primary-300 text-neutral-800 pb-16 pt-10 md:pt-0'>
-            <div className='max-w-3xl mx-auto text-center text-base px-8'>
-              <p className='mb-4'>
+            <div className='max-w-3xl mx-auto text-center text-base px-8 flip-selection'>
+              <p className='mb-4 '>
                 Please note that only Subscription Customers have a Service
                 Level Agreement on Support Incidents. if you are not currently a
                 ClickHouse Cloud user – while we will try to answer your
@@ -149,16 +125,18 @@ export default function SupportProgram(props: any) {
                 <tr>
                   <th></th>
                   <th className='p-0 border border-neutral-700 bg-neutral-750'>
-                    <div className='p-3'>Trial</div>
+                    <div className='p-3  text-neutral-100'>Trial</div>
                   </th>
                   <th className='p-0 border border-neutral-700 bg-neutral-750'>
-                    <div className='p-3'>Monthly "Pay as you Go" or Annual</div>
+                    <div className='p-3 text-neutral-100'>
+                      Monthly "Pay as you Go" or Annual
+                    </div>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750'>
+                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750 text-neutral-100'>
                     <strong>Learning</strong>
                   </td>
                   <td className='bg-neutral-750 p-4 border-r border-r-neutral-700 '>
@@ -183,7 +161,7 @@ export default function SupportProgram(props: any) {
                   </td>
                 </tr>
                 <tr>
-                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750'>
+                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750 text-neutral-100'>
                     <strong>Support</strong>
                   </td>
                   <td className='bg-neutral-750 p-4 border-r border-r-neutral-700 border-l border-l-neutral-700'>
@@ -214,7 +192,7 @@ export default function SupportProgram(props: any) {
                   </td>
                 </tr>
                 <tr>
-                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750'>
+                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750 text-neutral-100'>
                     <strong>Expert Sessions</strong>
                   </td>
                   <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
@@ -229,7 +207,7 @@ export default function SupportProgram(props: any) {
                   </td>
                 </tr>
                 <tr>
-                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750'>
+                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750 text-neutral-100'>
                     <strong>Professional Services</strong>
                   </td>
                   <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
@@ -260,7 +238,7 @@ export default function SupportProgram(props: any) {
           Severity Classification
         </h2>
 
-        <div className='grid grid-cols-1 md:grid-cols-4 max-w-5xl mx-auto bg-neutral-800 border border-neutral-700 rounded-md'>
+        <div className='grid grid-cols-1 md:grid-cols-4 max-w-5xl mx-auto bg-neutral-800 border border-neutral-700 rounded-lg'>
           <div className='p-6 pb-0 md:pb-6 md:border-b md:border-b-neutral-700'>
             <span className='font-bold text-xl'>Severity 1</span>
             <br />
@@ -332,7 +310,7 @@ export default function SupportProgram(props: any) {
           times
         </p>
         <div className='md:flex items-center md:space-x-20 justify-evenly max-w-5xl w-full mx-auto text-center'>
-          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-md p-6 bg-neutral-900/50'>
+          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-lg p-6 bg-neutral-900/50'>
             <p className='font-inconsolata text-primary-300 mb-2'>Urgent</p>
             <p className='text-2xl font-semibold mb-16'>Severity 1</p>
             <p className='font-bold text-base mb-2'>1 hour SLA</p>
@@ -340,7 +318,7 @@ export default function SupportProgram(props: any) {
               24 h / 7 days / 365 days / year
             </p>
           </div>
-          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-md p-6 bg-neutral-900/50'>
+          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-lg p-6 bg-neutral-900/50'>
             <p className='font-inconsolata text-primary-300 mb-2'>
               High priority
             </p>
@@ -350,7 +328,7 @@ export default function SupportProgram(props: any) {
               Business hours only
             </p>
           </div>
-          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-md p-6 bg-neutral-900/50'>
+          <div className='mb-10 md:mb-0 md:w-1/3 border border-neutral-700 rounded-lg p-6 bg-neutral-900/50'>
             <p className='font-inconsolata text-primary-300 mb-2'>
               Normal priority
             </p>
@@ -371,7 +349,7 @@ export default function SupportProgram(props: any) {
         </h2>
         <div className='grid grid-cols-1 gap-y-2 w-full max-w-2xl'>
           <div>
-            <div className='w-full rounded-md border border-neutral-700 p-6 bg-neutral-900/50'>
+            <div className='w-full rounded-lg border border-neutral-700 p-6 bg-neutral-900/50'>
               <div className='grid md:grid-cols-4 items-center'>
                 <div className='md:col-span-1'>
                   <div className='text-xl font-bold'>Level 1 / L1 </div>
@@ -387,7 +365,7 @@ export default function SupportProgram(props: any) {
             <ArrowsDown />
           </div>
           <div>
-            <div className='w-full rounded-md border border-neutral-700 p-6 bg-neutral-900/50'>
+            <div className='w-full rounded-lg border border-neutral-700 p-6 bg-neutral-900/50'>
               <div className='grid md:grid-cols-4 items-center'>
                 <div className='md:col-span-1'>
                   <div className='text-xl font-bold'>Level 2 / L2</div>
@@ -402,7 +380,7 @@ export default function SupportProgram(props: any) {
             <ArrowsDown />
           </div>
           <div>
-            <div className='w-full rounded-md border border-neutral-700 p-6 bg-neutral-900/50'>
+            <div className='w-full rounded-lg border border-neutral-700 p-6 bg-neutral-900/50'>
               <div className='grid md:grid-cols-4 items-center'>
                 <div className='md:col-span-1'>
                   <div className='text-xl font-bold'>Level 3 / L3</div>
@@ -417,7 +395,7 @@ export default function SupportProgram(props: any) {
             <ArrowsDown />
           </div>
           <div>
-            <div className='w-full rounded-md border border-neutral-700 p-6 bg-neutral-900/50'>
+            <div className='w-full rounded-lg border border-neutral-700 p-6 bg-neutral-900/50'>
               <div className='grid md:grid-cols-4 items-center'>
                 <div className='md:col-span-1'>
                   <div className='text-xl font-bold'>Level 4 / L4</div>
@@ -432,7 +410,7 @@ export default function SupportProgram(props: any) {
             <ArrowsDown />
           </div>
           <div>
-            <div className='w-full rounded-md border border-neutral-700 p-6 bg-neutral-900/50'>
+            <div className='w-full rounded-lg border border-neutral-700 p-6 bg-neutral-900/50'>
               <div className='grid md:grid-cols-4 items-center'>
                 <div className='md:col-span-1'>
                   <div className='text-xl font-bold'>Level 5 / L5</div>

@@ -68,7 +68,7 @@ export default function ClickHouseServerPage({
   return (
     <>
       <Layout footerData={footerData} seo={seo}>
-        <div className='md:bg-speed-lines bg-center bg-no-repeat bg-contain'>
+        <div className='xl:bg-speed-lines bg-center bg-no-repeat bg-contain'>
           <div className='pt-10 relative bg-grid overflow-x-hidden'>
             <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 px-4 md:pb-24 md:px-8 2xl:px-0 '>
               <div className='flex'>
@@ -297,7 +297,7 @@ export default function ClickHouseServerPage({
 
         <HRSeparator className='my-12 md:my-24' />
 
-        <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element-left red-shadow pb-16 px-4 md:px-0'>
+        <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element-left red-shadow pb-16 px-4 md:px-8 2xl:px-0'>
           <div className='flex flex-col items-center w-full'>
             <Image
               src='/images/clickhouse/section_scale.svg'
@@ -309,7 +309,8 @@ export default function ClickHouseServerPage({
               {features5.second_title}
             </SuiTitle>
             <div className='text-neutral-200 max-w-2xl leading-normal text-center mx-auto md:pb-10'>
-              {features5.second_description}
+              ClickHouse is used for a variety of industries and use cases–both
+              for internal apps and customer-facing dashboards and analytics.
             </div>
 
             <div className='flex flex-col md:flex-row md:max-w-4xl md:mx-auto pt-12 md:pt-6 flex-wrap'>

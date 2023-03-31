@@ -177,7 +177,7 @@ function CareersFilter() {
                         </div>
                         <CUIButton
                           type='secondary'
-                          className='w-auto'
+                          className='w-auto mt-4 md:mt-0'
                           target='_blank'
                           iconRight={<ChevronRightIcon className='w-4 h-4' />}>
                           Apply

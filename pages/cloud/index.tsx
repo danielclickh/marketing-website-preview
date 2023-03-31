@@ -50,7 +50,7 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
   return (
     <>
       <Layout footerData={footerData} seo={seo}>
-        <div className='pt-10 md:bg-speed-lines bg-center bg-no-repeat bg-contain'>
+        <div className='pt-10 xl:bg-speed-lines bg-center bg-no-repeat bg-contain'>
           <div className='relative overflow-x-hidden'>
             <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 px-4 md:pb-24 md:px-8 2xl:px-0 '>
               <div className='flex'>
@@ -79,7 +79,7 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
                           type='primary'
                           size='lg'
                           weight='semibold'
-                          href={ctaButton.href}
+                          href='https://clickhouse.cloud/signUp?loc=cloud-page-hero-button'
                           target={ctaButton.target}
                           segmentEvent={{
                             label: ctaButton.text,
@@ -158,7 +158,7 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
             {featureBlocks.map((item, index: number) => (
               <>
                 <div
-                  className={`flex flex-col gap-x-24 ${
+                  className={`flex flex-col gap-x-24 items-center ${
                     index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                   } justify-center`}
                   key={item.title}>
@@ -187,7 +187,7 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
                       alt={item.title}
                       width={item.image_width}
                       height={item.image_height}
-                      className='md:h-fit '
+                      className='md:h-fit w-full'
                     />
                   </div>
                 </div>
@@ -328,7 +328,7 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
                     type='primary-dark'
                     size='lg'
                     className='mx-auto mt-8'
-                    href='https://clickhouse.cloud/signUp'
+                    href='https://clickhouse.cloud/signUp?loc=cloud-page-get-started-footer'
                     segmentEvent={{
                       label: 'Create a free acount',
                       category: 'website-cloudpage-lower-hero'

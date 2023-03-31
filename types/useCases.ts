@@ -1,7 +1,7 @@
 import { StrapiButton, StrapiImageType } from '../lib/api/strapi/types'
 import { CommonProps } from './homepage'
 
-export interface CustomerStoriesTestimonial {
+export interface UseCasesTestimonial {
   avatar: StrapiImageType
   review: string
   author: string
@@ -21,11 +21,11 @@ export interface UseCasesItem {
   anchorId: string
 }
 
-export interface CustomerStoriesData extends CommonProps {
+export interface UseCasesData extends CommonProps {
   hero: {
     title: string
     description: string
-    testimonials: Array<CustomerStoriesTestimonial>
+    testimonials: Array<UseCasesTestimonial>
   }
   useCases: {
     title: string

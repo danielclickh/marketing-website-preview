@@ -18,12 +18,11 @@
   perspective: 2000px;
   @apply absolute rounded-lg opacity-0 hidden top-[60px] left-[50%];
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.31);
-  transition: all 0.3s, opacity 0.1s, translate 0.3s;
   transform: translateX(-50%) rotateX(var(--siteMenuRotateX));
   transform-origin: 50% -50px;
   transition-duration: 250ms;
-  transition-property: transform, width, height;
-  will-change: transform, width, height;
+  transition-property: rotateX, width, height;
+  will-change: rotateX, width, height;
   &:global(.open) {
     --siteMenuRotateX: 0;
     display: block;
@@ -68,6 +67,7 @@
 .floatingContent {
   @apply transform w-max;
   overflow-y: auto;
+
 }
 
 .triggerEnter {
@@ -84,7 +84,9 @@
 }
 
 .menuItem {
-  @apply py-2 md:px-3 rounded flex gap-4 items-center w-full hover:bg-neutral-725;
+  &:hover > div > div {@apply text-white}
+  @apply py-2 md:px-3 rounded flex gap-4 items-center w-full hover:bg-neutral-725 hover:text-primary-900;
+
   &[data-icon="true"] {
     @apply flex py-1 md:py-2 md:px-3 cursor-pointer items-center;
   }

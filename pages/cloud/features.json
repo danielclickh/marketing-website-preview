@@ -3,42 +3,36 @@
     "id": 1,
     "icon": "/images/cloud/hard-drives.svg",
     "title": "Serverless",
-    "content":
-      "Start building instantly without having to size and scale your cluster. Sit back while we take care of sizing, scaling, security, reliability, and upgrades."
+    "content": "Start building instantly without having to size and scale your cluster. Sit back while we take care of sizing, scaling, security, reliability, and upgrades."
   },
   {
     "id": 2,
     "icon": "/images/cloud/terminal.svg",
     "title": "Interactive SQL console",
-    "content":
-      "ClickHouse is proud to have employees in over 10 countries. We believe that diverse and distributedThe fastest and easiest way to connect, explore and query your ClickHouse databases. Exclusively available to ClickHouse Cloud customers."
+    "content": "The fastest and easiest way to connect, explore and query your ClickHouse databases. Exclusively available to ClickHouse Cloud customers."
   },
   {
     "id": 3,
     "icon": "/images/cloud/lock.svg",
     "title": "Secure. Verified compliant",
-    "content":
-      "ClickHouse Cloud is SOC 2 Type II compliant! Security, availability, processing integrity, and confidentiality processes all independently audited.."
+    "content": "ClickHouse Cloud is SOC 2 Type II compliant! Security, availability, processing integrity, and confidentiality processes all independently audited.."
   },
   {
     "id": 4,
     "icon": "/images/cloud/coins.svg",
     "title": "Transparent pricing",
-    "content":
-      "Pay only for what you use, with resource reservations and scaling controls. Best price / performance ratio and low administrative overhead."
+    "content": "Pay only for what you use, with resource reservations and scaling controls. Best price / performance ratio and low administrative overhead."
   },
   {
     "id": 5,
     "icon": "/images/cloud/arrows-out.svg",
     "title": "Seamless scaling",
-    "content":
-      "Incredible scaling both horizontally and vertically. Automatic scaling adjusts to variable workloads so you don’t have to over-provision for peak usage."
+    "content": "Incredible scaling both horizontally and vertically. Automatic scaling adjusts to variable workloads so you don’t have to over-provision for peak usage."
   },
   {
     "id": 6,
     "icon": "/images/cloud/line.svg",
     "title": "Broad ecosystem",
-    "content":
-      "Bring your favorite data connectors, visualization tools, SQL and language clients with you."
+    "content": "Bring your favorite data connectors, visualization tools, SQL and language clients with you."
   }
 ]

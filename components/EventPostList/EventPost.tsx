@@ -36,7 +36,7 @@ export default function EventPost({
             <div className='font-inconsolata text-primary-300 font-medium text-base'>
               {category}
             </div>
-            <div className='font-basier text-xl font-medium leading-tight cursor-pointer text-neutral-100'>
+            <div className='font-basier text-xl font-semibold leading-tight cursor-pointer text-neutral-100'>
               {title}
             </div>
           </div>

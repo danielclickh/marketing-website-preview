@@ -25,6 +25,7 @@ import {
 import FollowUs from '../../../components/FollowUs'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
 import Link from 'next/link'
+import HRSeparator from '../../../components/HRSeparator'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -91,7 +92,7 @@ export default function BlogPage({
       <div className='pt-10'>
         <div className='flex container mx-auto flex-col px-6 2xl:px-0 max-w-3xl'>
           <div className='flex flex-col text-center mx-auto pt-6'>
-            <h4 className='text-primary-300 text-lg'>
+            <h4 className='text-primary-300 text-base font-semibold'>
               <Link href='/blog'>Blog</Link> /{' '}
               <Link
                 href={`/blog?category=${category
@@ -130,9 +131,10 @@ export default function BlogPage({
 
         <div className='container flex mx-auto px-6 2xl:px-0 max-w-3xl pt-20'>
           <div className='flex flex-col w-full pb-20'>
-            <Markdown className='leading-6 pb-6 mb-6 border-b border-c2 rich-text-content'>
+            <Markdown className='leading-6 rich-text-content'>
               {content}
             </Markdown>
+            <HRSeparator className='my-8' />
             <div className='flex flex-col md:flex-row gap-4 justify-between items-center mb-10'>
               <div className='flex'>
                 <SuiText size='sm' weight='medium' color='primary'>

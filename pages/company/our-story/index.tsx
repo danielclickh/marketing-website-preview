@@ -68,7 +68,7 @@ export default function OurStoryPage({
   return (
     <>
       <Layout footerData={footerData} seo={seo}>
-        <div className='pt-10'>
+        <div className='pt-10 relative'>
           <div className='pt-10'>
             <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
               <div className='flex flex-col text-center mx-auto'>
@@ -81,23 +81,29 @@ export default function OurStoryPage({
                   popular open-source column-oriented database management system
                   which allows users to generate analytical reports using SQL
                   queries in real-time. We understand that data grows in real
-                  time and we believe that results should be fast,
-                  <br />
+                  time and we believe that results should be fast, very{' '}
                   <span className='tilted tilted-yellow'>
-                    <span className='tilted-content'>very fast</span>
+                    <span className='tilted-content'>fast</span>
                   </span>
                 </p>
               </div>
             </div>
           </div>
-          <div className='section my-16'>
-            <Image
-              src='/images/team-who-we-are.png'
-              width='751'
-              height='406'
-              alt='Who we are'
-              className='mx-auto'
-            />
+
+          <div>
+            <div className='pt-10 relative'>
+              <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 px-4  md:px-8 2xl:px-0'>
+                <div className='flex'>
+                  <Image
+                    src='/images/team-who-we-are.png'
+                    width='751'
+                    height='406'
+                    alt='Who we are'
+                    className='mx-auto'
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -213,7 +219,7 @@ While we’re in different places, we all have the same goals, and we trust each
               ))}
             </div>
 
-            <div className='flex flex-wrap gap-x-20 gap-y-16 justify-evenly pt-12'>
+            <div className='flex flex-wrap gap-x-20 gap-y-16 justify-evenly pt-12 '>
               {team.darkInvestorLogosPng.map((image, index) => (
                 <StrapiImage
                   key={`investors-${index}`}

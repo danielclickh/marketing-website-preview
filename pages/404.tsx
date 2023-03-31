@@ -21,12 +21,12 @@ export default function NotFoundPage({ footerData, seo }: CommonProps) {
   return (
     <Layout footerData={footerData} seo={seo}>
       <div className='grid items-center h-screen overflow-hidden'>
-        <div className='flex flex-col px-8 py-10 md:flex-row md:px-10 md:bg-c1 md:border md:border-c4/10 mx-auto max-w-screen-sm divide-y-2 md:divide-x-2 md:divide-y-0'>
+        <div className='bg-neutral-900 flex flex-col px-8 py-10 md:flex-row md:px-10 md:border md:border-c4/10 mx-auto max-w-screen-sm divide-y-2 md:divide-x-2 md:divide-y-0'>
           <div className='flex flex-col items-start pb-10 md:pb-0'>
-            <p className='text-2xl text-neutral-0 text-left text-bold mb-4'>
+            <p className='text-2xl text-neutral-100 text-left text-bold mb-4'>
               Oops! We can&apos;t find this page...
             </p>
-            <p className='text-c4 mb-8 text-left'>
+            <p className='text-neutral-200 mb-8 text-left'>
               The page you&apos;re looking for doesn&apos;t appear to exist or
               has been moved.
             </p>

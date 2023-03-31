@@ -10,7 +10,7 @@ import { getCommonProps } from '../lib/utils/getCommonProps'
 import FAQ from '../components/FAQ'
 import { CUIButton, CUICard, CUILink } from '../components/ClickUI'
 import columnOrientedIllustration from '../public/images/homepage/column-oriented-illustration.svg'
-import rowOrientedIllustration from '../public/images/homepage/row-oriented-illustration.svg'
+import rowOrientedIllustration from '../public/images/homepage/row-oriented-illustration-v3.svg'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import JoinCommunity from '../components/JoinCommunity'
 import HomePageTerminal from '../components/Terminal/HomePageTerminal'
@@ -18,7 +18,6 @@ import HomePageTerminal from '../components/Terminal/HomePageTerminal'
 import DevelopersSection from '../components/DevelopersSection'
 import { CSSProperties } from 'react'
 import HRSeparator from '../components/HRSeparator'
-import Tilt from 'react-parallax-tilt'
 
 const yellowPositionStyle = {
   '--left-side': 'auto',
@@ -58,8 +57,8 @@ const deployData: Array<DeployData> = [
     title: 'ClickHouse Cloud',
     img: '/cloud.svg',
     btnText: 'Deploy in seconds',
-    description: 'Deploy a fully managed ClickHouse service on AWS and GCP.',
-    href: 'https://clickhouse.cloud',
+    description: 'Deploy a fully managed ClickHouse service on AWS.',
+    href: 'https://clickhouse.cloud/signUp?loc=home-deploy-your-way',
     target: '_blank',
     btnType: 'primary'
   }
@@ -134,105 +133,97 @@ export default function HomePage({
   return (
     <Layout footerData={footerData} seo={seo}>
       <div className='homepage overflow-hidden bg-grid'>
-        <Tilt
-          tiltEnable={false}
-          glareEnable={true}
-          glareMaxOpacity={0.4}
-          glareColor='rgba(251, 255, 70, 0.08)'
-          glarePosition='all'
-          className='h-full'>
-          <div className='flex flex-col pb-20 lg:pb-44 pt-16 md:pt-24 px-8 md:px-0 relative gap-24 justify-center '>
-            <div className='flex flex-col w-full mx-auto max-w-2xl'>
-              <div className='mx-auto md:mr-0 md:mt-8 flex-col items-center justify-center'>
-                <SuiTitle type='h1' className='text-center' color='primary'>
-                  Query{' '}
-                  <span className='tilted tilted-yellow'>
-                    <span className='tilted-content'>billions</span>
-                  </span>{' '}
-                  of rows in milliseconds
-                </SuiTitle>
-                <div className='mx-auto flex flex-col items-center max-w-md'>
-                  <div className='leading-normal text-neutral-200 text-center my-8'>
-                    ClickHouse is the fastest and most resource efficient
-                    open-source database for real-time apps and analytics.
-                  </div>
-
-                  <div className='flex flex-col md:flex-row gap-6 w-full justify-center items-center'>
-                    <CUIButton
-                      type='primary'
-                      size='lg'
-                      weight='semibold'
-                      href={hero.ctaButton.href}
-                      segmentEvent={{
-                        label: hero.ctaButton.text,
-                        category: 'website-hero'
-                      }}
-                      linkClass='w-full max-w-[14rem]'
-                      className='w-full'>
-                      Start free trial
-                    </CUIButton>
-                    <CUIButton
-                      type='secondary'
-                      weight='semibold'
-                      size='lg'
-                      href='https://clickhouse.com/docs/'
-                      segmentEvent={{
-                        label: hero.ctaButton.text,
-                        category: 'website-hero'
-                      }}
-                      linkClass='w-full max-w-[14rem]'
-                      className='w-full'>
-                      View documentation
-                    </CUIButton>
-                  </div>
-                  <CUILink
-                    href='#getting_started'
-                    target='_self'
-                    className='mt-5 text-neutral-200 hover:text-neutral-0 flex items-center gap-2'>
-                    Or download open-source ClickHouse{' '}
-                    <ChevronRightIcon height='16' />
-                  </CUILink>
+        <div className='flex flex-col pb-20 lg:pb-44 pt-16 md:pt-20 px-8 md:px-0 relative gap-24 justify-center '>
+          <div className='flex flex-col w-full mx-auto max-w-2xl'>
+            <div className='mx-auto md:mr-0 md:mt-8 flex-col items-center justify-center'>
+              <SuiTitle type='h1' className='text-center' color='primary'>
+                Query{' '}
+                <span className='tilted tilted-yellow'>
+                  <span className='tilted-content'>billions</span>
+                </span>{' '}
+                of rows in milliseconds
+              </SuiTitle>
+              <div className='mx-auto flex flex-col items-center max-w-md'>
+                <div className='leading-normal text-neutral-200 text-center my-8'>
+                  ClickHouse is the fastest and most resource efficient
+                  open-source database for real-time apps and analytics.
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className='clip-inverted-triangle'>
-            <div className='section-container max-w-3xl'>
-              <HomePageTerminal />
-            </div>
-          </div>
-          <div className='bg-primary-300 py-8'>
-            <div className='max-w-3xl mx-auto'>
-              <div className='text-center mb-8 text-primary-800 w-fit mx-auto text-xl font-semibold leading-normal px-4 md:px-0'>
-                Trusted by the best developers that work with data at{' '}
-                <span className='tilted tilted-black'>
-                  <span className='tilted-content leading-8'>scale</span>
-                </span>
-              </div>
 
-              <div className='section-container flex flex-wrap gap-2 md:gap-x-8 self-center items-center justify-center place-items-center'>
-                {customerStoriesLogos.map((logo, index: number) => (
-                  <CUILink
-                    key={logo.href}
-                    href={logo.href}
-                    target={logo.target}
-                    className={`customer-stories-${index} flex rounded-lg justify-center ease-in-out duration-200 cursor-pointer gap-2`}>
-                    <Image
-                      src={logo?.imageSrc}
-                      className='object-contain'
-                      alt={logo.alt}
-                      width={logo.width}
-                      height={logo.height}
-                    />
-                  </CUILink>
-                ))}
+                <div className='flex flex-col md:flex-row gap-6 w-full justify-center items-center'>
+                  <CUIButton
+                    type='primary'
+                    size='lg'
+                    weight='semibold'
+                    href={hero.ctaButton.href}
+                    segmentEvent={{
+                      label: hero.ctaButton.text,
+                      category: 'website-hero'
+                    }}
+                    linkClass='w-full max-w-[14rem]'
+                    className='w-full'>
+                    Start free trial
+                  </CUIButton>
+                  <CUIButton
+                    type='secondary'
+                    weight='semibold'
+                    size='lg'
+                    href='https://clickhouse.com/docs/'
+                    segmentEvent={{
+                      label: hero.ctaButton.text,
+                      category: 'website-hero'
+                    }}
+                    linkClass='w-full max-w-[14rem]'
+                    className='w-full'>
+                    View documentation
+                  </CUIButton>
+                </div>
+                <CUILink
+                  href='#getting_started'
+                  target='_self'
+                  className='mt-5 text-neutral-200 hover:text-neutral-0 flex items-center gap-2'>
+                  Or download open-source ClickHouse{' '}
+                  <ChevronRightIcon height='16' />
+                </CUILink>
               </div>
             </div>
           </div>
-        </Tilt>
+        </div>
+        <div className='clip-inverted-triangle'>
+          <div className='section-container max-w-3xl'>
+            <HomePageTerminal />
+          </div>
+        </div>
+        <div className='bg-primary-300 pt-8 pb-16'>
+          <div className='max-w-4xl mx-auto'>
+            <div className='text-center mb-8 text-primary-800 w-fit mx-auto text-xl font-semibold leading-normal px-4 md:px-0'>
+              Trusted by the best developers that work with data at{' '}
+              <span className='tilted tilted-black'>
+                <span className='tilted-content leading-8'>scale</span>
+              </span>
+            </div>
+
+            <div className='section-container flex flex-wrap gap-6 md:gap-x-14 self-center items-center justify-center place-items-center'>
+              {customerStoriesLogos.map((logo, index: number) => (
+                <CUILink
+                  key={logo.href}
+                  href={logo.href}
+                  target={logo.target}
+                  className={`customer-stories-${index} flex rounded-lg justify-center ease-in-out duration-200 cursor-pointer gap-2`}>
+                  <Image
+                    src={logo?.imageSrc}
+                    className='object-contain'
+                    alt={logo.alt}
+                    width={logo.width}
+                    height={logo.height}
+                  />
+                </CUILink>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
       <div className='flex w-full text-neutral-0'>
-        <div className='flex section-container w-full mx-auto flex-col pt-20 text-center items-center'>
+        <div className='flex section-container w-full mx-auto flex-col pt-24 text-center items-center'>
           <Image
             src='/speed-icon.svg'
             alt='Speed Icon'
@@ -244,7 +235,6 @@ export default function HomePage({
           </SuiTitle>
           <div className='text-neutral-200 max-w-screen-sm leading-normal text-center mx-auto mb-10 md:mb-16'>
             ClickHouse supports all the data sources you need to power your apps
-            <br />
             and use cases that require exceptional performance.
           </div>
           <div className='flex flex-wrap md:hidden gap-10 justify-center'>
@@ -293,7 +283,7 @@ export default function HomePage({
             </div>
             <div>
               <div className='text-sm font-bold uppercase text-neutral-0 text-center mb-4'>
-                log and analytics events
+                Streams, logs, and analytics
               </div>
               <div className='w-56 justify-center mx-auto border-primary-700 rounded p-4 flex flex-nowrap gap-6'>
                 <Image
@@ -373,7 +363,7 @@ export default function HomePage({
                 width='544'
                 height='257'
                 alt='Row Oriented Illustration'
-                className='bg-neutral-900 border border-neutral-700/80 rounded-lg'
+                className='bg-neutral-900 border border-neutral-700/80 rounded-lg mx-auto'
                 priority
               />
               <div className='text-neutral-0 font-bold leading-normal mb-3 mt-6 text-center md:text-left'>
@@ -391,7 +381,7 @@ export default function HomePage({
                 width='544'
                 height='257'
                 alt='Column Oriented Illustration'
-                className='bg-neutral-900 border border-neutral-700/80 rounded-lg'
+                className='bg-neutral-900 border border-neutral-700/80 rounded-lg mx-auto'
                 priority
               />
               <div className='text-neutral-0 font-bold leading-normal mb-3 mt-6 text-center md:text-left'>
@@ -470,6 +460,7 @@ export default function HomePage({
       </div>
       <HRSeparator className='my-24' />
       <JoinCommunity />
+      <HRSeparator className='my-24' />
       <DevelopersSection />
       <HRSeparator className='my-24' />
       <FAQ />

@@ -127,7 +127,7 @@ function EventPage({
           recordedVimeoUrl={recordedVimeoUrl}
           featuredImage={lightFeatureImagePng}>
           <div className='section_metadata mb-20'>
-            <h4 className='text-primary-300 text-lg'>
+            <h4 className='text-primary-300 text-base font-semibold mb-2'>
               <Link href='/company/news-events'>News &amp; Events</Link> /{' '}
               {category}
             </h4>

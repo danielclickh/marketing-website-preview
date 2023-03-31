@@ -28,8 +28,8 @@ export function SnackbarContextProvider({ children }: { children: ReactNode }) {
     <SnackbarContext.Provider value={value}>
       {children}
       {message && (
-        <div className='fixed bottom-3.5 inset-x-0'>
-          <div className='flex gap-2 items-center w-fit px-4 py-3 rounded-lg text-sm font-medium mx-auto max-w-screen-sm bg-c3'>
+        <div className='fixed bottom-3.5 inset-x-0 z-50'>
+          <div className='flex gap-2 items-center w-fit px-4 py-3 rounded-lg text-sm font-medium mx-auto max-w-screen-sm bg-neutral-725'>
             {type && (
               <div className='w-5 h-5'>
                 {type === 'success' && (
@@ -43,7 +43,9 @@ export function SnackbarContextProvider({ children }: { children: ReactNode }) {
             <SuiText size='sm' weight='medium' color='white'>
               {message}
             </SuiText>
-            <button className='text-c6-link' onClick={() => closeSnackBar()}>
+            <button
+              className='text-primary-300 hover:underline'
+              onClick={() => closeSnackBar()}>
               Dismiss
             </button>
           </div>
