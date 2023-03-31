@@ -174,6 +174,11 @@ const nextConfig = {
         source: '/trust/security',
         destination: 'https://trust.clickhouse.com/',
         permanent: true
+      },
+      {
+        source: '/customer-stories',
+        destination: '/use-cases',
+        permanent: true
       }
     ]
   }

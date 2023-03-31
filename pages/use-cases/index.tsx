@@ -1,11 +1,10 @@
 import { useState } from 'react'
-import { SuiButton, SuiPanel, SuiText, SuiTitle } from '../../components/sui'
+import { SuiPanel } from '../../components/sui'
 import { UseCase } from '../../components/use_case'
 import { findOne } from '../../lib/api/strapi'
-import GetStarted from '../../components/GetStarted'
-import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
-import { ChevronRightIcon, StarIcon } from '@heroicons/react/solid'
-import { CustomerStoriesData } from '../../types/customerStories'
+
+import { ChevronRightIcon } from '@heroicons/react/solid'
+import { UseCasesData } from '../../types/useCases'
 import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
@@ -15,7 +14,7 @@ import HRSeparator from '../../components/HRSeparator'
 import { CheckIcon } from '@heroicons/react/outline'
 import GiveItAGo from '../../components/GiveItAGo'
 
-export const getStaticProps: GetStaticProps<CustomerStoriesData> =
+export const getStaticProps: GetStaticProps<UseCasesData> =
   async function getStaticProps() {
     const result = await findOne('use-case', {
       populate: [
@@ -164,7 +163,7 @@ function CustomerStoriesPage({
   seo,
   platforms,
   footerData
-}: CustomerStoriesData) {
+}: UseCasesData) {
   const [visibleTestimonials, setVisibleTestimonials] = useState(6)
 
   const loadMore = () => {

@@ -133,7 +133,7 @@ export default function HomePage({
   return (
     <Layout footerData={footerData} seo={seo}>
       <div className='homepage overflow-hidden bg-grid'>
-        <div className='flex flex-col pb-20 lg:pb-44 pt-16 md:pt-24 px-8 md:px-0 relative gap-24 justify-center '>
+        <div className='flex flex-col pb-20 lg:pb-44 pt-16 md:pt-20 px-8 md:px-0 relative gap-24 justify-center '>
           <div className='flex flex-col w-full mx-auto max-w-2xl'>
             <div className='mx-auto md:mr-0 md:mt-8 flex-col items-center justify-center'>
               <SuiTitle type='h1' className='text-center' color='primary'>
