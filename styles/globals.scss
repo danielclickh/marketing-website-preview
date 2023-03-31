@@ -313,8 +313,8 @@ body {
   }
 }
 
-#ot-sdk-btn-floating .ot-floating-button__front {
-  @apply opacity-0 -z-10 #{!important};
+#ot-sdk-btn-floating {
+  @apply hidden #{!important};
 }
 
 .video-frame {

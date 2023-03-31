@@ -18,7 +18,7 @@ function Option({ name, href, icon, target, description }: HeaderLinkItem) {
       className='flex items-start hover:no-underline max-w-md !text-neutral-300 hover:!text-neutral-0'>
       <div className={styles.menuItem} data-icon={icon ? 'true' : 'false'}>
         {icon && (
-          <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md items-center sm:h-12 sm:w-12 md:mr-4'>
+          <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md items-center sm:h-12 sm:w-12'>
             <Image
               src={icon}
               className='h-8 w-8'
@@ -33,7 +33,7 @@ function Option({ name, href, icon, target, description }: HeaderLinkItem) {
           <SuiText
             size={icon ? 'base' : 'sm'}
             color='primary'
-            weight='normal'
+            weight={icon ? 'medium' : 'normal'}
             className='text-inherit'>
             {name}
           </SuiText>
