@@ -134,7 +134,7 @@ export default function SupportProgram(props: any) {
               </thead>
               <tbody>
                 <tr>
-                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750'>
+                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750 text-neutral-100'>
                     <strong>Learning</strong>
                   </td>
                   <td className='bg-neutral-750 p-4 border-r border-r-neutral-700 '>
@@ -159,7 +159,7 @@ export default function SupportProgram(props: any) {
                   </td>
                 </tr>
                 <tr>
-                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750'>
+                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750 text-neutral-100'>
                     <strong>Support</strong>
                   </td>
                   <td className='bg-neutral-750 p-4 border-r border-r-neutral-700 border-l border-l-neutral-700'>
@@ -190,7 +190,7 @@ export default function SupportProgram(props: any) {
                   </td>
                 </tr>
                 <tr>
-                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750'>
+                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750 text-neutral-100'>
                     <strong>Expert Sessions</strong>
                   </td>
                   <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
@@ -205,7 +205,7 @@ export default function SupportProgram(props: any) {
                   </td>
                 </tr>
                 <tr>
-                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750'>
+                  <td className='text-left border border-neutral-700 px-3 w-64 bg-neutral-750 text-neutral-100'>
                     <strong>Professional Services</strong>
                   </td>
                   <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
