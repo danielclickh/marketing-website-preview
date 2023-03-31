@@ -15,20 +15,20 @@ const style = {
 export default function FAQ() {
   return (
     <div
-      className='relative bg-shadow-element flex flex-col md:flex-row w-full px-4 md:px-8 2xl:px-0  pb-24 items-start justify-center max-w-7xl mx-auto'
+      className='relative bg-shadow-element max-w-7xl mx-auto px-4 md:px-8 2xl:px-0 lg:flex lg:gap-x-12 lg:justify-between mb-20'
       style={style}>
-      <div className='py-10 max-w-screen-sm mr-auto text-center md:text-left'>
+      <div className='py-10 text-center'>
         <Image
           src='/faq-icon.svg'
           alt='FAQ Icon'
           width={72}
           height={72}
-          className='mx-auto md:mx-0'
+          className='mx-auto lg:mx-0'
         />
-        <SuiTitle type='h2' className='my-6'>
+        <SuiTitle type='h2' className='my-6 lg:text-left'>
           FAQs
         </SuiTitle>
-        <div className='max-w-md text-neutral-200'>
+        <div className='max-w-md mx-auto text-neutral-200 lg:text-left'>
           Wherever you need us, we’re there. We love to engage in thoughtful
           conversation with the ClickHouse community and are always on-hand to
           answer your questions.{' '}
