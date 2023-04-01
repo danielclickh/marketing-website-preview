@@ -130,7 +130,7 @@ const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
       <NavigationMenu.Link asChild>
         <a
           className={classNames(
-            'focus:shadow-[0_0_0_2px] block rounded select-none px-3 py-2 text-sm w-full min-w-[5rem] leading-none !no-underline outline-none transition-all hover:bg-neutral-700 hover:text-neutral-0 hover:bg-opacity-40 focus:outline-none',
+            'focus:shadow-[0_0_0_2px] focus:shadow-neutral-750 block rounded select-none px-3 py-2 text-sm w-full min-w-[5rem] leading-none !no-underline outline-none transition-all hover:bg-neutral-700 hover:text-neutral-0 hover:bg-opacity-40 focus:outline-none',
             className
           )}
           {...props}
