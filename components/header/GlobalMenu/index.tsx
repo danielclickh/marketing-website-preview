@@ -39,7 +39,7 @@ const GlobalMenu = () => {
                       {menuItem.menuItems.map((subMenuItem) => {
                         return (
                           <div className='flex grow flex-col w-full'>
-                            <div className='bg-neutral-725 bg-opacity-90 border-b border-neutral-700 border-opacity-40 mb-4 bg-clip-padding'>
+                            <div className='bg-neutral-725 bg-opacity-90 border-b border-neutral-700 border-opacity-40 mb-4'>
                               <ListItem
                                 href={subMenuItem.href}
                                 className='rounded-none bg-opacity-10 pl-4 group min-w-[9.5rem]'>
