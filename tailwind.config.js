@@ -172,6 +172,11 @@ module.exports = {
           900: '#300000'
         },
 
+        //
+        navigation: {
+          background: '#212121'
+        },
+
         c1: {
           light: '#FFFFFF',
           DEFAULT: 'rgba(var(--clickhouse-color-1), <alpha-value>)',

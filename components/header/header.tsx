@@ -1,36 +1,33 @@
+import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useRef, useState } from 'react'
+import styles from './styles.module.scss'
+
 import {
   autoUpdate,
-  FloatingDelayGroup,
   offset,
   useClick,
   useDismiss,
   useFloating,
   useInteractions
 } from '@floating-ui/react'
+
 import { Disclosure } from '@headlessui/react'
 import { ChevronRightIcon, MenuIcon, XIcon } from '@heroicons/react/solid'
 import { CUIButton, CUILink } from '../ClickUI'
 import menuItems from './menuItems.json'
 import logoFull from '../../public/logo-full.svg'
 import { MenuItem as MenuItemType } from './types'
-import styles from './styles.module.scss'
-import MenuItem from './MenuItem'
 import MobileMenuItem from './MobileMenuItem'
-import NavigationMenuDemo from './../header_alt'
-
+import GlobalMenu from './GlobalMenu'
 const headerMenuItems = menuItems as Array<MenuItemType>
 
 export default function Header() {
   const navBarRef = useRef<HTMLDivElement>(null)
-  const navRef = useRef<HTMLDivElement>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const dropdownContainerRef = useRef<HTMLDivElement>(null)
   const arrowRef = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState(false)
-  const [activeIndex, setActiveIndex] = useState<number | undefined>()
   const { strategy, floating, reference, context } = useFloating({
     open: isOpen,
     onOpenChange: setIsOpen,
@@ -50,52 +47,6 @@ export default function Header() {
     click,
     dismiss
   ])
-
-  const handleEnter = () => {
-    if (dropdownRef.current) {
-      const floating = dropdownContainerRef.current?.querySelector(
-        `#floating-container-${activeIndex}`
-      )
-      const reference = navRef.current?.querySelector(
-        `#nav-item-${activeIndex}`
-      )
-      const floatingCoords = floating?.getBoundingClientRect()
-      const refCoords = reference?.getBoundingClientRect()
-      if (floatingCoords && refCoords) {
-        dropdownRef.current.classList.add('open')
-        dropdownRef.current.style.setProperty(
-          'width',
-          `${floatingCoords.width}px`
-        )
-        dropdownRef.current.style.setProperty(
-          'height',
-          `${floatingCoords.height}px`
-        )
-        if (arrowRef.current) {
-          arrowRef.current.classList.add('open')
-          arrowRef.current.style.setProperty(
-            'transform',
-            `translateY(-50%) rotate(45deg)`
-          )
-          arrowRef.current.style.setProperty('top', `${floatingCoords.top}px`)
-          arrowRef.current.style.setProperty(
-            'left',
-            `${refCoords.left + refCoords.width / 2}px`
-          )
-        }
-      }
-    }
-  }
-
-  const onHoverLeave = () => {
-    setTimeout(() => {
-      if (dropdownRef.current && navRef.current)
-        if (!navRef.current.querySelector('.trigger-enter')) {
-          arrowRef.current && arrowRef.current.classList.remove('open')
-          dropdownRef.current.classList.remove('open')
-        }
-    }, 150)
-  }
 
   const onscroll = function () {
     if (navBarRef.current) {
@@ -130,7 +81,7 @@ export default function Header() {
         <nav className='relative flex no-wrap justify-between items-center section-container w-full py-4'>
           <Link
             href='/'
-            className='flex items-center gap-x-3 hover:no-underline lg:min-w-[264px] '>
+            className='absolute z-10 flex items-center gap-x-3 hover:no-underline'>
             <Image
               src={logoFull}
               width='135'
@@ -139,14 +90,14 @@ export default function Header() {
             />
           </Link>
 
-          <NavigationMenuDemo />
+          <GlobalMenu />
 
-          <div className='hidden md:flex flex-nowrap gap-4 lg:gap-6 items-center'>
+          <div className='hidden md:flex absolute right-8 2xl:right-0 z-10 flex-nowrap gap-4 lg:gap-6 items-center'>
             <CUILink
               key='github-stars-nav'
               href='https://github.com/ClickHouse/ClickHouse?utm_source=clickhouse&utm_medium=website&utm_campaign=website-nav'
               target='_blank'
-              className='hover:text-neutral-400 hover:no-underline'
+              className='hover:text-neutral-400 hover:no-underline hidden lg:flex '
               segmentEvent={{
                 label: 'GitHub Stars',
                 category: 'website-nav'
@@ -211,9 +162,9 @@ export default function Header() {
           ref={floating}
           style={{
             position: strategy,
-            top: 72,
+            top: 64,
             left: 0,
-            height: 'calc(100vh - 72px)'
+            height: 'calc(100vh - 64px)'
           }}
           {...getFloatingProps()}>
           <div className='pt-8 mb-6 overflow-auto h-[stretch]'>
