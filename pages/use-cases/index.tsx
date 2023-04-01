@@ -83,7 +83,7 @@ const testimonialsJson: Array<TestimonialsJson> = [
     id: 4,
     logo: '/images/use-cases/darwinium-logo.png',
     category: 'Security and Fraud',
-    text: 'Darwinium chose Clickhouse as its database engine of choice because it is fast, flexible, rich in capabilities and cloud-ready. It provides the functionality we need to support real time user journey orchestration for fraud and security teams in global digital businesses.',
+    text: 'Darwinium chose ClickHouse as its database engine of choice because it is fast, flexible, rich in capabilities and cloud-ready. It provides the functionality we need to support real time user journey orchestration for fraud and security teams in global digital businesses.',
     customer: 'Darwinium',
     width: 180,
     height: 34
@@ -111,7 +111,7 @@ const testimonialsJson: Array<TestimonialsJson> = [
     id: 7,
     logo: '/images/use-cases/minted-logo.png',
     category: 'ClickHouse Cloud',
-    text: 'We use Clickhouse Cloud to monitor millions of real-time web performance data points, to ensure we’re getting faster all the time. The platform delivers fast and reliable data management, while also proving to be cost efficient and user-friendly.',
+    text: 'We use ClickHouse Cloud to monitor millions of real-time web performance data points, to ensure we’re getting faster all the time. The platform delivers fast and reliable data management, while also proving to be cost efficient and user-friendly.',
     customer: 'Minted',
     width: 123,
     height: 32
@@ -139,7 +139,7 @@ const testimonialsJson: Array<TestimonialsJson> = [
     id: 10,
     logo: '/images/use-cases/calibre-logo.svg',
     category: 'Analytics',
-    text: 'Clickhouse Cloud gave us the confidence to deploy Clickhouse and infinitely have a scalable serverless analytics database.',
+    text: 'ClickHouse Cloud gave us the confidence to deploy ClickHouse and infinitely have a scalable serverless analytics database.',
     customer: 'Calibre',
     width: 144,
     height: 32
@@ -148,7 +148,7 @@ const testimonialsJson: Array<TestimonialsJson> = [
     id: 11,
     logo: '/images/use-cases/forefront-logo.png',
     category: 'Cloud',
-    text: "The team truly delivered on the fully managed Clickhouse product I've been looking for. The platform makes it trivial to spin up and connect to a cluster, and removes all concern around managing underlying infrastructure. I would highly recommend this product.",
+    text: "The team truly delivered on the fully managed ClickHouse product I've been looking for. The platform makes it trivial to spin up and connect to a cluster, and removes all concern around managing underlying infrastructure. I would highly recommend this product.",
     customer: 'Forefront',
     width: 221,
     height: 32

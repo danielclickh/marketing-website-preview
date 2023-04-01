@@ -137,7 +137,7 @@ function PricingPage({
                           size='sm'
                           color='secondary'
                           className='text-center'>
-                          Available on AWS Marketplace{' '}
+                          Available on AWS Marketplace.{' '}
                           <Link
                             href='/partners/aws'
                             className='text-primary-300'>

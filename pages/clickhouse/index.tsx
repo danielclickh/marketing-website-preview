@@ -182,7 +182,7 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <div className='container mx-auto relative flex flex-col gap-y-28 mt-12 md:mt-24 md:px-0 '>
+        <div className='mx-auto relative flex flex-col gap-y-28 mt-12 md:mt-24 md:px-0 '>
           <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element-left red-shadow'>
             <div className='flex flex-col items-center w-full'>
               <Image
@@ -195,17 +195,11 @@ export default function ClickHouseServerPage({
                 Hardware efficient
               </SuiTitle>
               <div className='text-neutral-200 max-w-2xl leading-normal text-center mx-auto md:pb-16'>
-                ClickHouse processes typical analytical queries two to three
-                orders of magnitude faster than traditional row-oriented systems
-                with the same available I/O throughput and CPU capacity.
-                Columnar storage format allows fitting more hot data in RAM,
-                which leads to shorter typical response times.
-                <br />
-                <br />
-                Total cost of ownership could be further lowered by using
-                commodity hardware with rotating disk drives instead of
-                enterprise grade NVMe or SSD without significant sacrifices in
-                latency for most kinds of queries.
+                ClickHouse processes analytical queries 100-1000x faster than
+                traditional row-oriented systems with the same available I/O
+                throughput and CPU capacity. Columnar storage format allows
+                fitting more hot data in RAM, which leads to shorter response
+                times.
               </div>
 
               <div className='grid grid-cols-1 md:grid-cols-3 gap-10 px-4 md:px-0 mx-auto mt-10 md:mt-0'>
@@ -213,36 +207,49 @@ export default function ClickHouseServerPage({
                   <p className='font-inconsolata text-primary-300'>
                     Vectorization
                   </p>
-                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-4'>
-                    Strives for CPU efficiency
+                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2 xl:px-8'>
+                    Maximizes CPU efficiency
                   </h3>
 
-                  <SuiText size='sm' color='secondary' className='text-center'>
+                  <SuiText
+                    size='sm'
+                    color='secondary'
+                    className='text-center px-0 xl:px-8'>
                     Vectorized query execution involves relevant SIMD processor
                     instructions and runtime code generation. Processing data in
                     columns increases CPU cache line hit rate.
                   </SuiText>
                 </CUICard>
+
                 <CUICard title='Strives for CPU efficiency' className='p-6'>
                   <p className='font-inconsolata text-primary-300'>Locality</p>
-                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2'>
+                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2 xl:px-8'>
                     Optimizes disk drive access
                   </h3>
 
-                  <SuiText size='sm' color='secondary' className='text-center'>
+                  <SuiText
+                    size='sm'
+                    color='secondary'
+                    className='text-center px-0 xl:px-8'>
                     ClickHouse minimizes the number of seeks for range queries,
                     which increases the efficiency of using rotating disk
                     drives, as it maintains locality of reference for
                     continually stored data.
                   </SuiText>
                 </CUICard>
+
                 <CUICard title='Strives for CPU efficiency' className='p-6'>
-                  <p className='font-inconsolata text-primary-300'>Optimized</p>
-                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold  text-center px-4'>
+                  <p className='font-inconsolata text-primary-300'>
+                    Throughput
+                  </p>
+                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2 xl:px-8'>
                     Minimizes data transfers
                   </h3>
 
-                  <SuiText size='sm' color='secondary' className='text-center'>
+                  <SuiText
+                    size='sm'
+                    color='secondary'
+                    className='text-center px-0 xl:px-8'>
                     ClickHouse enables companies to manage their data and create
                     reports without using specialized networks that are aimed at
                     high-performance computing.
@@ -260,7 +267,7 @@ export default function ClickHouseServerPage({
             <CUICard className='p-8'>
               <div className='flex w-full justify-between'>
                 <h3 className='w-full text-center md:text-left font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold'>
-                  Linearly scalable
+                  From your laptop to petabyte scale
                 </h3>
                 <Image
                   src='/images/clickhouse/scalable.svg'
@@ -272,22 +279,20 @@ export default function ClickHouseServerPage({
               </div>
 
               <div className='flex flex-col md:flex-row gap-8'>
-                <div className='w-full text-center md:text-left md:w-8/12'>
+                <div className='w-full text-center md:text-left lg:w-9/12'>
                   <SuiText size='sm' color='secondary'>
-                    ClickHouse scales well both vertically and horizontally.
-                    ClickHouse is easily adaptable to perform either on a
-                    cluster with hundreds or thousands of nodes or on a single
-                    server or even on a tiny virtual machine. Currently, there
-                    are installations with more multiple trillion rows or
-                    hundreds of terabytes of data per single node.
+                    ClickHouse scales well both vertically and horizontally. It
+                    is easily adaptable to perform on your laptop, small virtual
+                    machine, a single server, or a cluster with hundreds or
+                    thousands of nodes.
                   </SuiText>
-                </div>
-
-                <div className='w-full text-center md:text-left md:w-4/12'>
+                  <br />
                   <SuiText size='sm' color='secondary'>
                     There are many ClickHouse clusters consisting of multiple
-                    hundred nodes while the largest known ClickHouse cluster is
-                    well over a thousand nodes.
+                    hundreds of nodes, while the largest known ClickHouse
+                    cluster is well over a thousand nodes. There are
+                    installations of ClickHouse with more multiple trillion rows
+                    or hundreds of terabytes of data per single node.
                   </SuiText>
                 </div>
               </div>
@@ -309,8 +314,9 @@ export default function ClickHouseServerPage({
               {features5.second_title}
             </SuiTitle>
             <div className='text-neutral-200 max-w-2xl leading-normal text-center mx-auto md:pb-10'>
-              ClickHouse is used for a variety of industries and use cases–both
-              for internal apps and customer-facing dashboards and analytics.
+              ClickHouse is used in a variety of industries for a broad set of
+              use cases on top of both customer-facing and internally-facing
+              workloads.
             </div>
 
             <div className='flex flex-col md:flex-row md:max-w-4xl md:mx-auto pt-12 md:pt-6 flex-wrap'>

@@ -27,7 +27,7 @@ const highlights = [
   {
     title: 'Learn ClickHouse on AWS',
     description:
-      'Visit the ClickHouse Academy to find self-paced and live training that will help you to get the best from Clickhouse Cloud. All types are available exclusively on AWS.',
+      'Visit the ClickHouse Academy to find self-paced and live training that will help you to get the best from ClickHouse Cloud. All types are available exclusively on AWS.',
     href: '/learn',
     target: '_blank',
     buttonText: 'Learn more'

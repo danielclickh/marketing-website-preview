@@ -14,7 +14,7 @@ type DeployData = {
 
 const deployData: Array<DeployData> = [
   {
-    title: 'Clickhouse Local',
+    title: 'ClickHouse Local',
     img: '/laptop.svg',
     btnText: 'Download ClickHouse Local',
     description:
@@ -23,7 +23,7 @@ const deployData: Array<DeployData> = [
     btnType: 'secondary'
   },
   {
-    title: 'Clickhouse',
+    title: 'ClickHouse',
     img: '/drive.svg',
     btnText: 'Download ClickHouse',
     description:
