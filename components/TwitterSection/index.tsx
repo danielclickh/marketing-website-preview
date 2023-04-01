@@ -90,7 +90,7 @@ const twitterList = [
     src: twitter6,
     content: (
       <>
-        Darwinium chose Clickhouse as its database engine of choice because it
+        Darwinium chose ClickHouse as its database engine of choice because it
         is fast, flexible, rich in capabilities and cloud-ready. It provides the
         functionality we need to support real time user journey orchestration
         for fraud and security teams in global digital businesses.
