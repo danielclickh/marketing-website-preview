@@ -13,7 +13,7 @@ const GlobalMenu = () => {
     <NavigationMenu.Root className='relative mx-auto z-[1] flex w-screen justify-center'>
       <NavigationMenu.List className='hidden center m-0 md:flex list-none p-1'>
         <>
-          {headerMenuItems.map((menuItem, index) => {
+          {headerMenuItems.map((menuItem) => {
             if (menuItem.href) {
               return (
                 <NavigationMenu.Item>
@@ -42,7 +42,7 @@ const GlobalMenu = () => {
                             <div className='bg-neutral-725 bg-opacity-90 border-b border-neutral-700 border-opacity-40 mb-4'>
                               <ListItem
                                 href={subMenuItem.href}
-                                className='rounded-none bg-opacity-10 pl-4 group min-w-[9.5rem]'>
+                                className='rounded-none bg-opacity-10 pl-4 group lg:min-w-[9.5rem]'>
                                 <SuiText
                                   size='sm'
                                   className='text-neutral-100 group-hover:text-neutral-0'
@@ -85,7 +85,7 @@ const GlobalMenu = () => {
                                       ) : (
                                         <ListItem
                                           href={deepMenuItem.href}
-                                          className='min-w-[9rem] pl-4 group'>
+                                          className='w-full pl-4 group'>
                                           <SuiText
                                             weight='medium'
                                             size='sm'
@@ -130,7 +130,7 @@ const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
       <NavigationMenu.Link asChild>
         <a
           className={classNames(
-            'focus:shadow-[0_0_0_2px] focus:shadow-neutral-750 block rounded select-none px-3 py-2 text-sm w-full min-w-[5rem] leading-none !no-underline outline-none transition-all hover:bg-neutral-700 hover:text-neutral-0 hover:bg-opacity-40 focus:outline-none',
+            'focus:shadow-[0_0_0_2px] focus:shadow-neutral-750 block rounded select-none px-3 py-2 text-sm w-full leading-none !no-underline outline-none transition-all hover:bg-neutral-700 hover:text-neutral-0 hover:bg-opacity-40 focus:outline-none',
             className
           )}
           {...props}
