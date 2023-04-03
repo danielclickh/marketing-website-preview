@@ -45,19 +45,19 @@ function JoinCommunity() {
       <div className='w-full pb-24 md:pb-0 mx-auto flex flex-col gap-8 md:items-end text-right font-medium max-w-lg bg-click-grid bg-bottom'>
         <div className='font-basier text-5xl md:text-7.5xl leading-none right-14 pt-4 md:pt-0 md:right-auto absolute md:relative'>
           1.2k+
-          <span className='absolute top-full left-0 text-primary text-xl md:text-2.75xl leading-snug'>
+          <span className='absolute top-full left-0 text-primary-300 text-xl md:text-2.75xl leading-snug'>
             Contributors
           </span>
         </div>
         <div className='font-basier text-5xl md:text-7.5xl leading-none mr-auto text-left absolute md:relative left-14 md:left-auto pt-14 md:pt-0'>
           32k+
-          <span className='absolute top-full left-0 text-primary text-xl md:text-2.75xl leading-snug'>
+          <span className='absolute top-full left-0 text-primary-300 text-xl md:text-2.75xl leading-snug'>
             PRs
           </span>
         </div>
         <div className='font-basier text-5xl md:text-7.5xl leading-none pt-32 md:pt-0 right-30 md:right-auto absolute md:relative'>
           27k+
-          <span className='absolute top-full left-0 text-primary text-xl md:text-2.75xl leading-snug'>
+          <span className='absolute top-full left-0 text-primary-300 text-xl md:text-2.75xl leading-snug'>
             Stars
           </span>
         </div>

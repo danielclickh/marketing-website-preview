@@ -18,7 +18,7 @@ function BulletPoint({
   }
 
   return (
-    <div className={`flex item-center space-x-4 pb-4 ${className}`}>
+    <div className={`flex item-center space-x-4 pb-2 ${className}`}>
       <Image src='/images/cloud/check.svg' width={32} height={32} alt='Icon' />
       <SuiText
         size='base'

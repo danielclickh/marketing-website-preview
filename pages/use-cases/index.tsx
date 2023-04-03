@@ -179,8 +179,8 @@ function CustomerStoriesPage({
             </h1>
           </div>
           <div>
-            <div className='grid xl:grid-cols-2 gap-x-20'>
-              <div className='relative xl:max-w-xl text-center xl:text-left'>
+            <div className='grid lg:grid-cols-2 gap-x-20'>
+              <div className='relative xl:max-w-xl text-center lg:text-left'>
                 <div className='text-4xl font-semibold relative font-basier leading-snug'>
                   <Image
                     src='/images/Quote.svg'
