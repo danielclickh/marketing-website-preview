@@ -248,7 +248,7 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
                 service.
               </div>
 
-              <ul className='max-w-lg justify-start py-8 px-4 md:px-0'>
+              <ul className='flex flex-col gap-2 max-w-lg justify-start py-8 px-4 md:px-0'>
                 <li>
                   <div className='flex items-center gap-4'>
                     <Image
