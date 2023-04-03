@@ -180,7 +180,7 @@ export default function HomePage({
                 <CUILink
                   href='#getting_started'
                   target='_self'
-                  className='mt-5 text-neutral-200 hover:text-neutral-0 flex items-center gap-2'>
+                  className='hidden mt-5 text-neutral-200 hover:text-neutral-0 md:flex items-center gap-2'>
                   Or download open-source ClickHouse{' '}
                   <ChevronRightIcon height='16' />
                 </CUILink>
@@ -189,7 +189,7 @@ export default function HomePage({
           </div>
         </div>
         <div className='clip-inverted-triangle'>
-          <div className='section-container max-w-3xl'>
+          <div className='section-container max-w-3xl mt-12 lg:mt-0'>
             <HomePageTerminal />
           </div>
         </div>
