@@ -14,7 +14,7 @@ function InfoTooltip({ content }: { content: string }) {
         </Tooltip.Trigger>
         <Tooltip.Portal>
           <Tooltip.Content
-            className='bg-neutral-725 text-neutral-0 rounded-lg text-sm p-2'
+            className='bg-neutral-725 text-neutral-0 rounded-sm text-sm p-2'
             sideOffset={5}
             side='right'>
             {content}
