@@ -1,12 +1,7 @@
-import {
-  SuiButton,
-  SuiHorizontalDivide,
-  SuiText,
-  SuiTitle
-} from '../../../components/sui'
+import { SuiText, SuiTitle } from '../../../components/sui'
 import { Person } from '../../../components/person_area'
 import { findOne } from '../../../lib/api/strapi'
-import { StrapiImage, StrapiPicture } from '../../../components/StrapiElements'
+import { StrapiImage } from '../../../components/StrapiElements'
 import founders from './founders.json'
 import investors from './investors.json'
 import { OurStoryData } from '../../../types/ourStory'
@@ -16,6 +11,7 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import Image from 'next/image'
 import { ArrowRightIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
+import styles from './styles.module.scss'
 
 export const getStaticProps: GetStaticProps<OurStoryData> =
   async function getStaticProps() {
@@ -151,24 +147,20 @@ While we’re in different places, we all have the same goals, and we trust each
               Our history
             </SuiTitle>
             <div className='max-w-5xl'>
-              <div className='whitespace-pre-wrap text-neutral-200 flex flex-col gap-10'>
+              <div className='whitespace-pre-wrap text-neutral-200 flex flex-col'>
                 {ourHistory.items.map((item) => (
-                  <div
-                    className='flex flex-row items-start gap-10'
-                    key={item.text}>
-                    <div className='flex md:w-2/12 lg:w-1/12'>
+                  <div className={styles.historyItem} key={item.text}>
+                    <div className='flex'>
                       <div className='font-bold text-primary-300 rounded-full text-center items-center justify-center flex'>
                         <SuiTitle
                           type='h5'
-                          className='!text-base'
+                          className='!text-base min-w-[3rem]'
                           weight='medium'>
                           {item.year}
                         </SuiTitle>
                       </div>
                     </div>
-                    <div className='flex md:w-8/12 text-left text-neutral-200'>
-                      {item.text}
-                    </div>
+                    <div className={styles.historyText}>{item.text}</div>
                   </div>
                 ))}
               </div>

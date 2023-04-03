@@ -68,7 +68,7 @@ function DevelopersSection() {
             )}
             {developerOption.description && (
               <CUICard.Body className='flex flex-col items-center justify-center gap-2 px-6 py-8'>
-                <div className='text-center text-xl font-semibold'>
+                <div className='font-basier text-center text-xl font-semibold'>
                   {developerOption.title}
                 </div>
                 <div className='text-center text-neutral-200 text-sm'>

@@ -10,7 +10,7 @@ function CopyUrlButton() {
     <SuiButton
       type='custom'
       onClick={onClick}
-      className='border border-neutral-700 bg-neutral-800 hover:bg-c2 hover:text-neutral-800 shadow'>
+      className='border border-neutral-700 bg-neutral-800 hover:bg-primary-300 hover:text-neutral-800 shadow'>
       <DuplicateIcon width='16' />
     </SuiButton>
   )

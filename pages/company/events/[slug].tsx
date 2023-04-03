@@ -132,7 +132,7 @@ function EventPage({
               {category}
             </h4>
             <h1
-              className='mb-8 text-5.5xl font-semibold leading-tight font-basier
+              className='mb-8 text-4xl md:text-5.5xl font-semibold leading-tight font-basier
             '>
               {title}
             </h1>

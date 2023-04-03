@@ -1,0 +1,23 @@
+.historyItem {
+  @apply flex flex-row items-start gap-7;
+  &:last-of-type {
+    .historyText::after {
+      @apply border-transparent;
+    }
+  }
+}
+
+.historyText {
+  @apply flex pl-8 pb-12 md:w-8/12 text-left text-neutral-200 relative;
+  &::before,
+  &:after {
+    content: "";
+    @apply absolute h-full top-[6px];
+  }
+  &::before {
+    @apply w-3 h-3 bg-primary-300 rounded-full -left-[6px];
+  }
+  &::after {
+    @apply border-l border-primary-300 left-0;
+  }
+}
