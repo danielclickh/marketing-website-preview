@@ -6,8 +6,4 @@
   & > div {
     @apply rounded-xl relative z-10 p-4 w-full h-full bg-c4/10;
   }
-
-  iframe {
-    @apply max-w-full top-0 left-0 relative w-full h-full aspect-video;
-  }
 }

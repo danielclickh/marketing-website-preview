@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import { CUIButton, CUICard } from '../ClickUI'
 import { SuiTitle } from '../sui'
+import VideoPlayer from '../VideoPlayer'
 import developerOptions from './developerOptions.json'
 
 function DevelopersSection() {
@@ -13,13 +14,7 @@ function DevelopersSection() {
       </SuiTitle>
       <div className='flex flex-col md:flex-row mb-8 gap-10'>
         <div className='w-full md:w-1/2 flex items-start'>
-          <iframe
-            src='https://www.youtube.com/embed/CVVp6N8Xeoc?rel=0'
-            frameBorder='0'
-            allow='autoplay; fullscreen; picture-in-picture'
-            allowFullScreen
-            className='rounded-lg h-fit w-full top-0 left-0 relative aspect-video'
-            title='Getting Started.mp4'></iframe>
+          <VideoPlayer videoId='CVVp6N8Xeoc' provider='youtube' />
         </div>
         <div className='flex flex-col w-full md:w-1/2'>
           <div className='text-md font-semibold text-neutral-0'>

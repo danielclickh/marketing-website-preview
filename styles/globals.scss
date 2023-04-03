@@ -480,3 +480,26 @@ body {
     opacity: 1;
   }
 }
+
+.plyr {
+  @apply rounded-lg;
+  --plyr-color-main: #414141;
+  --plyr-video-control-color: #fcff74;
+  @apply w-full aspect-video h-auto;
+  &.plyr--paused {
+    .plyr__video-wrapper {
+      @apply grayscale;
+    }
+
+    .plyr__controls {
+      @apply hidden;
+    }
+  }
+  .plyr__control.plyr__control--overlaid {
+    @apply flex items-center gap-3 rounded-[4rem] px-8 py-4 opacity-100 #{!important};
+    &::after {
+      content: "Watch Video";
+      @apply text-base font-semibold text-neutral-0;
+    }
+  }
+}

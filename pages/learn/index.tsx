@@ -22,6 +22,7 @@ import { LearnProps } from '../../types/learn'
 import { CUIButton, CUICard } from '../../components/ClickUI'
 import FollowUs from '../../components/FollowUs'
 import HRSeparator from '../../components/HRSeparator'
+import VideoPlayer from '../../components/VideoPlayer'
 
 const popularCourses = [
   {
@@ -132,21 +133,7 @@ function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
 
         <div className='relative px-6 pt-10'>
           <div className={styles.videoPlaceHolder}>
-            <div>
-              <iframe
-                src='https://player.vimeo.com/video/756877867?h=c58e171729&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479'
-                frameBorder='0'
-                allow='autoplay; fullscreen; picture-in-picture'
-                allowFullScreen
-                style={{
-                  position: 'relative',
-                  top: '0',
-                  left: '0',
-                  width: '100%',
-                  height: '100%'
-                }}
-                title='Getting Started.mp4'></iframe>
-            </div>
+            <VideoPlayer videoId='756877867' provider='vimeo' />
           </div>
         </div>
       </div>

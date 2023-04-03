@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import EventsForm from './EventsForm'
 import { EventsContainerProps } from './types'
+import VideoPlayer from '../VideoPlayer'
 
 function EventsContainer({
   children,
@@ -25,16 +26,7 @@ function EventsContainer({
         recordedVimeoUrl && (
           <div className='top w-full mx-auto max-w-7xl flex justify-center px-8 mb-16'>
             <div className='video_display'>
-              <iframe
-                src={recordedVimeoUrl}
-                allow='autoplay; fullscreen; picture-in-picture'
-                allowFullScreen
-                data-ready='true'
-                className='video-frame'
-                frameBorder='0'
-                height='545'
-                loading='lazy'
-                width='968'></iframe>
+              <VideoPlayer videoId={recordedVimeoUrl} provider='vimeo' />
             </div>
           </div>
         )}

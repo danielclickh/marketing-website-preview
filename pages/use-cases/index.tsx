@@ -13,6 +13,7 @@ import { CUIButton } from '../../components/ClickUI'
 import HRSeparator from '../../components/HRSeparator'
 import { CheckIcon } from '@heroicons/react/outline'
 import GiveItAGo from '../../components/GiveItAGo'
+import VideoPlayer from '../../components/VideoPlayer'
 
 export const getStaticProps: GetStaticProps<UseCasesData> =
   async function getStaticProps() {
@@ -223,13 +224,9 @@ function CustomerStoriesPage({
               <div className='w-full mt-16 xl:mt-0'>
                 <div className='w-full relative'>
                   <div className='bg-primary-300 max-w-full lg:skew-x-0 lg:inset-3 lg:absolute lg:transform lg:-right-10 lg:-top-3 rounded-md'></div>
-                  <iframe
-                    src='https://www.youtube.com/embed/CVVp6N8Xeoc?rel=0'
-                    frameBorder='0'
-                    allow='autoplay; fullscreen; picture-in-picture'
-                    allowFullScreen
-                    className='rounded-md h-fit w-full top-0 left-0 relative aspect-video'
-                    title='Getting Started.mp4'></iframe>
+                  <div className='rounded-md h-fit w-full top-0 left-0 relative aspect-video'>
+                    <VideoPlayer videoId='CVVp6N8Xeoc' provider='youtube' />
+                  </div>
                 </div>
               </div>
             </div>
