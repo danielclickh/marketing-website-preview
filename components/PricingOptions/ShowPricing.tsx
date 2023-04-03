@@ -1,16 +1,28 @@
 import React from 'react'
 import { InformationCircleIcon } from '@heroicons/react/outline'
-import { SuiTooltip, SuiTooltipContent, SuiTooltipTrigger } from '../sui/client'
+import * as Tooltip from '@radix-ui/react-tooltip'
 import { usePricing } from './PricingContext'
 
 function InfoTooltip({ content }: { content: string }) {
   return (
-    <SuiTooltip placement='right'>
-      <SuiTooltipTrigger>
-        <InformationCircleIcon className='h-3.5 w-3.5' />
-      </SuiTooltipTrigger>
-      <SuiTooltipContent>{content}</SuiTooltipContent>
-    </SuiTooltip>
+    <Tooltip.Provider delayDuration={200}>
+      <Tooltip.Root>
+        <Tooltip.Trigger asChild>
+          <button className='IconButton'>
+            <InformationCircleIcon className='h-3.5 w-3.5' />
+          </button>
+        </Tooltip.Trigger>
+        <Tooltip.Portal>
+          <Tooltip.Content
+            className='bg-neutral-725 text-neutral-0 rounded-lg text-sm p-2'
+            sideOffset={5}
+            side='right'>
+            {content}
+            <Tooltip.Arrow className='fill-neutral-725' />
+          </Tooltip.Content>
+        </Tooltip.Portal>
+      </Tooltip.Root>
+    </Tooltip.Provider>
   )
 }
 
