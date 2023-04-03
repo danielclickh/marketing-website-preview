@@ -16,7 +16,7 @@ function JoinCommunity() {
           developers using ClickHouse today
         </SuiTitle>
         <div className='flex flex-wrap gap-6 mx-auto md:mx-0'>
-          <div className='flex gap-6'>
+          <div className='flex gap-6 mx-auto'>
             <SocialIcon
               name='Twitter'
               href='https://twitter.com/ClickhouseDB'
@@ -28,7 +28,7 @@ function JoinCommunity() {
               imgSrc='/socials/slack.svg'
             />
           </div>
-          <div className='flex gap-6'>
+          <div className='flex gap-6 mx-auto'>
             <SocialIcon
               name='Telegram'
               href='https://telegram.me/clickhouse_en'
