@@ -10,7 +10,9 @@ import { SuiText } from '../../sui'
 const headerMenuItems = menuItems as Array<MenuItemType>
 const GlobalMenu = () => {
   return (
-    <NavigationMenu.Root className='relative mx-auto z-[1] flex w-screen justify-center'>
+    <NavigationMenu.Root
+      className='relative mx-auto z-[1] flex w-screen justify-center'
+      delayDuration={0}>
       <NavigationMenu.List className='hidden center m-0 md:flex list-none p-1'>
         <>
           {headerMenuItems.map((menuItem) => {
