@@ -237,94 +237,12 @@ export default function HomePage({
             ClickHouse supports all the data sources you need to power your apps
             and use cases that require exceptional performance.
           </div>
-          <div className='flex flex-wrap md:hidden gap-10 justify-center'>
-            <div>
-              <div className='text-sm font-bold uppercase text-neutral-0 text-center mb-4'>
-                Databases and data warehourses
-              </div>
-              <div className='w-56 mx-auto justify-center border-primary-700 rounded p-4 flex flex-wrap gap-6'>
-                <Image
-                  src='/logos/postgres.svg'
-                  alt='Postgres logo Image'
-                  width={40}
-                  height={40}
-                />
-                <Image
-                  src='/logos/bigquery.svg'
-                  alt='BigQuery logo Image'
-                  width={40}
-                  height={40}
-                />
-                <Image
-                  src='/logos/redshift.svg'
-                  alt='AWS Redshift logo Image'
-                  width={40}
-                  height={40}
-                />
-                <Image
-                  src='/logos/snowflake.svg'
-                  alt='Snowflake logo Image'
-                  width={40}
-                  height={40}
-                />
-                <Image
-                  src='/logos/mongodb.svg'
-                  alt='MongoDb logo Image'
-                  width={18}
-                  height={40}
-                />
-                <Image
-                  src='/logos/mysql.svg'
-                  alt='Mysql logo Image'
-                  width='48'
-                  height='32'
-                />
-              </div>
-            </div>
-            <div>
-              <div className='text-sm font-bold uppercase text-neutral-0 text-center mb-4'>
-                Streams, logs, and analytics
-              </div>
-              <div className='w-56 justify-center mx-auto border-primary-700 rounded p-4 flex flex-nowrap gap-6'>
-                <Image
-                  src='/logos/kafka.svg'
-                  alt='Kafka logo Image'
-                  width={25}
-                  height={40}
-                />
-                <Image
-                  src='/logos/vector.svg'
-                  alt='Vector logo Image'
-                  width={40}
-                  height={40}
-                />
-                <Image
-                  src='/logos/dbt.svg'
-                  alt='Dbt logo Image'
-                  width={40}
-                  height={40}
-                />
-              </div>
-            </div>
-            <div>
-              <div className='text-sm font-bold uppercase text-neutral-0 text-center mb-4'>
-                Local files
-              </div>
-              <div className='w-56 justify-center mx-auto border-primary-700 rounded p-4 flex flex-col flex-nowrap gap-6 items-center'>
-                <Image
-                  src='/logos/file-icon.svg'
-                  alt='File Icon'
-                  width='33'
-                  height='42'
-                />
-                <Image
-                  src='/logos/local-files-text.svg'
-                  alt='File Type Image'
-                  width='124'
-                  height='54'
-                />
-              </div>
-            </div>
+          <div className='md:hidden w-full md:px-12 bg-contain'>
+            <embed
+              id='E'
+              src='speed-animation-mobile.svg'
+              className='w-full aspect-[401/603]'
+            />
           </div>
           <div className='hidden md:block w-full md:px-12 bg-contain'>
             <embed
