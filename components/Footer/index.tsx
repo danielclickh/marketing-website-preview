@@ -4,7 +4,16 @@ import { CUILink } from '../ClickUI'
 import Image from 'next/image'
 import logoFull from '../../public/logo-full.svg'
 import topLevelFooterMenu from './footer.json'
-
+function openCookie() {
+  const element = document.querySelector<HTMLElement>(
+    '#ot-sdk-btn-floating .ot-floating-button__open'
+  )
+  if (element) {
+    element.click()
+  } else {
+    setTimeout(openCookie, 100)
+  }
+}
 export default function Footer({
   newsletterForm,
   bottomLinks = []
@@ -77,12 +86,7 @@ export default function Footer({
               </CUILink>
             ))}
             <button
-              onClick={() => {
-                const element = document.querySelector(
-                  '#ot-sdk-btn-floating .ot-floating-button__open'
-                ) as HTMLElement
-                element && element.click()
-              }}
+              onClick={openCookie}
               className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length} hover:underline whitespace-nowrap`}>
               Cookie Policy
             </button>
