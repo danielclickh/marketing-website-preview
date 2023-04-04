@@ -72,7 +72,7 @@ export default function Footer({
                   label: bottomLink.text,
                   category: 'website-nav'
                 }}
-                className={`first:pl-0 bottom-link-${index}`}>
+                className={`first:pl-0 bottom-link-${index} whitespace-nowrap`}>
                 {bottomLink.text}
               </CUILink>
             ))}
@@ -81,10 +81,9 @@ export default function Footer({
                 const element = document.querySelector(
                   '#ot-sdk-btn-floating .ot-floating-button__open'
                 ) as HTMLElement
-                console.log(element)
                 element && element.click()
               }}
-              className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length} hover:underline`}>
+              className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length} hover:underline whitespace-nowrap`}>
               Cookie Policy
             </button>
           </div>
