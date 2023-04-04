@@ -7,7 +7,7 @@
   {
     "id": "2",
     "title": "What is OLAP?",
-    "content": "OLAP stands for “online analytical processing” which contrasts from OLTP, or “online transaction processing”. As the name suggests, OLAP databases perform significantly better compared to OLTP databases for analytical workloads common with large datasets."
+    "content": "OLAP stands for “online analytical processing” which contrasts from OLTP, or “online transaction processing.” As the name suggests, OLAP databases perform significantly better compared to OLTP databases for analytical workloads common with large datasets."
   },
   {
     "id": "3",

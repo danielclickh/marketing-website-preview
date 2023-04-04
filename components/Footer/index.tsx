@@ -16,7 +16,7 @@ export default function Footer({
           <div className='sitemap flex flex-col lg:flex-row gap-y-8'>
             {topLevelFooterMenu.map((topMenu) => (
               <div key={topMenu.title} className='flex flex-col lg:w-4/12'>
-                <div className='mb-3 text-sm text-neutral-0 font-semibold capitalize'>
+                <div className='mb-3 text-sm text-neutral-0 font-semibold'>
                   {topMenu.title}
                 </div>
                 <div className='flex flex-row flex-wrap lg:flex-col gap-y-2 gap-x-4 lg:gap-x-0 text-neutral-400'>
@@ -59,7 +59,8 @@ export default function Footer({
       <div className='flex flex-col pt-2 lg:pt-8 items-start'>
         <div className='section-container flex flex-col w-full gap-3 sm:gap-1 items-center md:flex-row md:justify-between text-sm text-neutral-400 text-center md:text-left pt-4 md:pt-0'>
           <div>
-            © 2023 ClickHouse, Inc. HQ in Bay Area, CA and Amsterdam, NL.
+            &copy; 2023 ClickHouse, Inc. HQ in the Bay Area, CA and Amsterdam,
+            NL.
           </div>
           <div className='bottom_links flex gap-4 items-center'>
             {bottomLinks.map((bottomLink, index) => (

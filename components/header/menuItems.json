@@ -41,7 +41,7 @@
 				"menuItems": [
 					{
 						"id": 1,
-						"name": "Raise a Ticket",
+						"name": "Raise a ticket",
 						"href": "https://clickhouse.cloud/support?ajs_aid=ec53202d-30d3-4f49-9481-0624f07764f0",
 						"target": "_blank"
 					},
@@ -53,7 +53,7 @@
 					},
 					{
 						"id": 3,
-						"name": "Support Program",
+						"name": "Support program",
 						"href": "/support/program",
 						"target": "_self"
 					}
@@ -99,7 +99,7 @@
 					},
 					{
 						"id": 2,
-						"name": "Quick Start",
+						"name": "Quick start",
 						"href": "https://clickhouse.com/docs/en/getting-started/quick-start",
 						"target": "_self"
 					},
@@ -131,7 +131,7 @@
 					},
 					{
 						"id": 2,
-						"name": "Upcoming Training",
+						"name": "Upcoming training",
 						"href": "/company/news-events",
 						"target": "_self"
 					}
@@ -163,7 +163,7 @@
 					},
 					{
 						"id": 4,
-						"name": "Customer Stories",
+						"name": "Customer stories",
 						"href": "/blog?category=customer-stories",
 						"target": "_self"
 					}
@@ -173,7 +173,7 @@
 	},
 	{
 		"id": 3,
-		"name": "Use Cases",
+		"name": "Use cases",
 		"href": "/use-cases",
 		"target": "_self"
 	},

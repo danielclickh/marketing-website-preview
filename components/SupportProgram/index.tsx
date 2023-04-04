@@ -13,7 +13,7 @@ export default function SupportProgram(props: any) {
             {props.title}
           </SuiTitle>
           <h2 className='text-base font-bold mb-6'>
-            Trusted Support Services for your Organization
+            Trusted support services for your organization
           </h2>
           <SuiText
             size='base'
@@ -40,7 +40,7 @@ export default function SupportProgram(props: any) {
                 className='mx-auto mb-10'
               />
               <p className='font-bold text-base'>
-                New Support Case via
+                New support case via
                 <br />
                 <span className='text-primary-300'>ClickHouse Cloud</span>
               </p>
@@ -88,11 +88,11 @@ export default function SupportProgram(props: any) {
               </p>
               <p className='mb-4 font-bold'>
                 <Link href='/slack' target='_blank'>
-                  ClickHouse Community Slack Channel
+                  ClickHouse community Slack channel
                 </Link>{' '}
                 |{' '}
                 <Link href='/blog/the-click-house-community' target='_blank'>
-                  Other Community Options
+                  Other community options
                 </Link>
               </p>
             </div>
@@ -113,7 +113,7 @@ export default function SupportProgram(props: any) {
           <h2
             className='font-semibold text-4xl mb-2
           '>
-            ClickHouse Cloud Support Details
+            ClickHouse Cloud support details
           </h2>
           <p className='text-base pb-16 text-neutral-200 pt-2'>
             ClickHouse includes Support Services for all users and customers of
@@ -142,7 +142,7 @@ export default function SupportProgram(props: any) {
                   <td className='bg-neutral-750 p-4 border-r border-r-neutral-700 '>
                     <p>
                       <a href='https://clickhouse.cloud/learn'>
-                        On-Demand Training included
+                        On-Demand training included
                       </a>
                     </p>
                     <p>
@@ -152,7 +152,7 @@ export default function SupportProgram(props: any) {
                   <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
                     <p>
                       <a href='https://clickhouse.cloud/learn'>
-                        On-Demand Training included
+                        On-Demand training included
                       </a>
                     </p>
                     <p>
@@ -166,28 +166,28 @@ export default function SupportProgram(props: any) {
                   </td>
                   <td className='bg-neutral-750 p-4 border-r border-r-neutral-700 border-l border-l-neutral-700'>
                     <ul>
-                      <li>Unlimited Support Cases </li>
+                      <li>Unlimited support cases </li>
                       <li>
-                        Business Day support only (Monday-Friday)
+                        Business day support only (Monday-Friday)
                         <ul className='text-sm ml-4 text-neutral-400'>
-                          <li>1 Business Day</li>
+                          <li>1 Business day</li>
                         </ul>{' '}
                       </li>
-                      <li>Office Hours</li>
+                      <li>Office hours</li>
                     </ul>
                   </td>
                   <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
                     <ul>
-                      <li>Unlimited Support Cases</li>
+                      <li>Unlimited support cases</li>
                       <li>
                         24x7 support{' '}
                         <ul className='text-sm ml-4 text-neutral-400'>
-                          <li>Sev-1: 1 Hour 24x7</li>
-                          <li> Sev-2: 4 Business Hours</li>
-                          <li>Sev-3: 1 Business Day</li>
+                          <li>Sev-1: 1 hour 24x7</li>
+                          <li> Sev-2: 4 business hours</li>
+                          <li>Sev-3: 1 business day</li>
                         </ul>
                       </li>
-                      <li>Office Hours</li>
+                      <li>Office hours</li>
                     </ul>
                   </td>
                 </tr>
@@ -199,11 +199,11 @@ export default function SupportProgram(props: any) {
                     Unlimited live Expert Sessions (short consultative guidance
                     sessions)
                     <br />
-                    Access to On-Demand Expert Sessions included
+                    Access to on-demand Expert Sessions included
                   </td>
                   <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
                     Unlimited live Expert Sessions <br />
-                    Access to On-Demand Expert Sessions included
+                    Access to on-demand Expert Sessions included
                   </td>
                 </tr>
                 <tr>
@@ -211,14 +211,14 @@ export default function SupportProgram(props: any) {
                     <strong>Professional Services</strong>
                   </td>
                   <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
-                    ClickHouse Cloud Quickstart package available for purchase{' '}
+                    ClickHouse Cloud quickstart package available for purchase{' '}
                     <br />
                     SOW available for purchasep <br />
                     &nbsp;&nbsp;&nbsp;&nbsp; Virtual + additional T&amp;E for
                     onsite
                   </td>
                   <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
-                    ClickHouse Cloud Quickstart package available for purchase{' '}
+                    ClickHouse Cloud quickstart package available for purchase{' '}
                     <br />
                     SOW available for purchasep <br />
                     &nbsp;&nbsp;&nbsp;&nbsp; Virtual + additional T&amp;E for
@@ -235,7 +235,7 @@ export default function SupportProgram(props: any) {
         <h2
           className='font-semibold text-4xl mb-10
           '>
-          Severity Classification
+          Severity classification
         </h2>
 
         <div className='grid grid-cols-1 md:grid-cols-4 max-w-5xl mx-auto bg-neutral-800 border border-neutral-700 rounded-lg'>
@@ -260,7 +260,7 @@ export default function SupportProgram(props: any) {
             <span className='font-bold text-xl'>Severity 2</span>
             <br />{' '}
             <span className='font-inconsolata text-primary-300 text-base'>
-              Major Business Impact
+              Major business impact
             </span>
           </div>
           <div className='p-6 col-span-3 border-b border-b-neutral-700  text-neutral-200'>
@@ -278,7 +278,7 @@ export default function SupportProgram(props: any) {
             <span className='font-bold text-xl'>Severity 3</span>
             <br />{' '}
             <span className='font-inconsolata text-primary-300 text-base'>
-              Minor Business Impact or General Questions
+              Minor business impact or general questions
             </span>
           </div>
           <div className='p-6 col-span-3  text-neutral-200'>
@@ -303,7 +303,7 @@ export default function SupportProgram(props: any) {
         <h2
           className='font-semibold text-4xl mb-4 text-center
           '>
-          Service Level Agreements (“SLA”)
+          Service level agreements (“SLA”)
         </h2>
         <p className='text-base mb-20 text-neutral-200 text-center'>
           Classification of severity levels for issues reported and response
@@ -345,7 +345,7 @@ export default function SupportProgram(props: any) {
         <h2
           className='font-semibold text-4xl text-center mb-20
           '>
-          Support and Escalation Levels
+          Support and escalation levels
         </h2>
         <div className='grid grid-cols-1 gap-y-2 w-full max-w-2xl'>
           <div>
