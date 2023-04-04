@@ -39,7 +39,7 @@ function ShowPricing({ isFirst }: { isFirst: boolean }) {
   }
 
   return (
-    <div className='grid grid-cols-2 text-neutral-0 text-left mt-8 py-3 '>
+    <div className='grid grid-cols-2 text-neutral-0 text-left mt-8 pb-6 '>
       <div className='border-r border-neutral-725 px-8 lg:px-4 xl:px-8'>
         <h5 className='font-bold text-sm mb-2'>Storage</h5>
         <span className='whitespace-nowrap'>

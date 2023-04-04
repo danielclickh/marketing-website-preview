@@ -68,12 +68,11 @@ function PricingOptions({
                       )
                     )}
                   </div>
-
+                </div>
+                <div className='p-6 pt-0'>
                   {index !== totalLength - 1 && (
                     <ShowPricing isFirst={index === 0} />
                   )}
-                </div>
-                <div className='p-6 pt-0'>
                   {plan.actionButton && (
                     <PricingButton
                       isFirst={index === 0}
