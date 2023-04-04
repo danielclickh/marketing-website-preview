@@ -44,14 +44,18 @@ export default function EventPost({
         <CUICard.Footer className='flex items-center w-full p-4 pt-10 text-neutral-300 text-sm'>
           <div className='grid w-full'>
             <div className='flex items-center space-x-3 mb-2'>
-              <CalendarIcon className='w-6 h-6 text-neutral-200 stroke-1' />
-              <div className=' text-neutral-200'>
-                {localDatetime && (
-                  <div className='text-sm text-neutral-300'>
-                    {convertDateToString(localDatetime)}
+              {category !== 'On-Demand Webinar' && (
+                <>
+                  <CalendarIcon className='w-6 h-6 text-neutral-200 stroke-1' />
+                  <div className=' text-neutral-200'>
+                    {localDatetime && (
+                      <div className='text-sm text-neutral-300'>
+                        {convertDateToString(localDatetime)}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
+                </>
+              )}
             </div>
             <div className='flex items-center space-x-3'>
               <svg
