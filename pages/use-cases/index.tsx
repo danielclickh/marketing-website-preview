@@ -190,7 +190,7 @@ function CustomerStoriesPage({
                     alt='Quote'
                     className='inline-block -mt-10'
                   />{' '}
-                  Last time I checked, we read 2&nbsp;
+                  Last time I checked, we read two&nbsp;
                   <span className='tilted tilted-yellow'>
                     <span className='tilted-content'>billion</span>
                   </span>{' '}
