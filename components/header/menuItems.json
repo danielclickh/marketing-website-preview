@@ -12,7 +12,7 @@
 					{
 						"id": 1,
 						"name": "ClickHouse",
-						"description": "Spin up a database server with OSS ClickHouse.",
+						"description": "Spin up a database server with open-source ClickHouse.",
 						"href": "/clickhouse",
 						"target": "_self",
 						"icon": "/drive.svg"

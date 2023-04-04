@@ -148,7 +148,7 @@ const testimonialsJson: Array<TestimonialsJson> = [
   {
     id: 11,
     logo: '/images/use-cases/forefront-logo.png',
-    category: 'Cloud',
+    category: 'ClickHouse Cloud',
     text: "The team truly delivered on the fully managed ClickHouse product I've been looking for. The platform makes it trivial to spin up and connect to a cluster, and removes all concern around managing underlying infrastructure. I would highly recommend this product.",
     customer: 'Forefront',
     width: 221,

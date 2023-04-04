@@ -61,7 +61,7 @@
 		"image_width": 792,
 		"image_height": 522,
     "title": "Interactive SQL console",
-    "description": "The fastest and easiest way to connect, explore and query your ClickHouse databases. Exclusively available to ClickHouse Cloud customers.",
+    "description": "The fastest and easiest way to connect, explore, and query your ClickHouse databases. Exclusively available to ClickHouse Cloud customers.",
 		"bullets": [
 			{"id": 1, "text": "Table explorer"},
 			{"id": 2, "text": "Query editor"},
