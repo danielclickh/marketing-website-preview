@@ -33,7 +33,7 @@
   counter-reset: line-numbering;
 }
 .accordion {
-  @apply relative bg-neutral-900/50 border border-jet rounded hover:bg-neutral-800;
+  @apply relative bg-neutral-900/50 border border-jet rounded hover:bg-neutral-750 hover:bg-opacity-40;
   &::before {
     @apply absolute text-left text-neutral-300/60 border-r border-neutral-700/80 w-8;
     top: 1rem;
