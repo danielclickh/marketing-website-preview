@@ -440,6 +440,12 @@ function CustomerStoriesPage({
             <BlogPost key={blog.id} {...blog} />
           ))}
         </div>
+        <CUIButton
+          type='secondary'
+          href='/blog?category=customer-stories'
+          linkClass='mx-auto mt-10 w-fit block'>
+          View all
+        </CUIButton>
       </div>
       <HRSeparator />
       <div className='my-24'>
