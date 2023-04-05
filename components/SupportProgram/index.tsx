@@ -3,6 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import HRSeparator from '../HRSeparator'
 import ArrowsDown from './arrowsDown'
+import { CUICard, CUILink } from '../ClickUI'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 
 export default function SupportProgram(props: any) {
   return (
@@ -26,45 +28,87 @@ export default function SupportProgram(props: any) {
             exceptionally fast, high-quality results.
           </SuiText>
         </div>
+
+        {/* <Link
+          key={course.title}
+          href={`https://learn.clickhouse.com/visitor_catalog_class/show/${course.url}`}
+          className='hover:no-underline transition ease-in-out'>
+          <CUICard className='grid p-8 group bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat w-full min-h-[22.5rem]'>
+            <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
+              <Image
+                src={course.icon}
+                alt={`${course.title}`}
+                width={64}
+                height={64}
+              />
+              <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-4'>
+                <div className='text-xl leading-tight cursor-pointer font-semibold'>
+                  {course.title}
+                </div>
+                <div className='text-sm text-neutral-200 flex gap-2 pb-4 group-hover:text-neutral-0'>
+                  <ClockIcon width={12} /> {course.time}
+                </div>
+                <div className='text-neutral-200 text-center text-sm group-hover:text-neutral-0'>
+                  {course.description}
+                </div>
+              </div>
+            </CUICard.Body>
+          </CUICard>
+        </Link> */}
+
         <div className='grid md:grid-cols-2 pb-12 max-w-3xl mx-auto gap-x-10 text-center px-4 sm:px-8 2xl:px-0 '>
-          <div className='mb-10 md:mb-0  border border-neutral-700 rounded-lg p-6 bg-neutral-900/50'>
-            <Link
-              href='https://clickhouse.cloud/support'
-              target='_blank'
-              className='hover:no-underline'>
-              <Image
-                src='/images/support-program/cloud-light.svg'
-                height={35}
-                width={49}
-                alt='Cloud'
-                className='mx-auto mb-10'
-              />
-              <p className='font-bold text-base'>
-                New support case via
-                <br />
-                <span className='text-primary-300'>ClickHouse Cloud</span>
-              </p>
-            </Link>
-          </div>
-          <div className='mb-10 md:mb-0 border border-neutral-700 rounded-lg p-6 bg-neutral-900/50'>
-            <Link
-              href='mailto:support@clickhouse.com'
-              target='_blank'
-              className='hover:no-underline'>
-              <Image
-                src='/images/support-program/envelope-thin.svg'
-                height={35}
-                width={49}
-                alt='Email'
-                className='mx-auto mb-10'
-              />
-              <p className='font-bold text-base'>
-                Email us at
-                <br />
-                <span className='text-primary-300'>support@clickhouse.com</span>
-              </p>
-            </Link>
-          </div>
+          <Link
+            href='https://clickhouse.cloud/support'
+            target='_blank'
+            className='hover:no-underline'>
+            <CUICard className='flex p-8 group bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat w-full'>
+              <CUICard.Body className='flex flex-col items-center justify-center'>
+                <Image
+                  src='/images/support-program/cloud-light.svg'
+                  height={35}
+                  width={49}
+                  alt='Cloud'
+                  className='mx-auto mb-4'
+                />
+                <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-4'>
+                  <div className='text-xl leading-tight cursor-pointer font-semibold'>
+                    New support case via
+                  </div>
+
+                  <div className='text-primary-300 font-semibold group-hover:underline'>
+                    ClickHouse Cloud
+                  </div>
+                </div>
+              </CUICard.Body>
+            </CUICard>
+          </Link>
+
+          <Link
+            href='mailto:support@clickhouse.com'
+            target='_blank'
+            className='hover:no-underline'>
+            <CUICard className='flex p-8 group bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat w-full'>
+              <CUICard.Body className='flex flex-col items-center justify-center'>
+                <Image
+                  src='/images/support-program/envelope-thin.svg'
+                  height={35}
+                  width={49}
+                  alt='Email'
+                  className='mx-auto mb-4'
+                />
+
+                <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-4'>
+                  <div className='text-xl leading-tight cursor-pointer font-semibold'>
+                    Email us at
+                  </div>
+
+                  <div className='text-primary-300 font-semibold group-hover:underline'>
+                    support@clickhouse.com
+                  </div>
+                </div>
+              </CUICard.Body>
+            </CUICard>
+          </Link>
         </div>
         <div>
           <svg
@@ -80,21 +124,19 @@ export default function SupportProgram(props: any) {
           <div className='bg-primary-300 text-neutral-800 pb-16 pt-10 md:pt-0'>
             <div className='max-w-3xl mx-auto text-center text-base px-8 flip-selection'>
               <p className='mb-4 '>
-                Please note that only Subscription Customers have a Service
-                Level Agreement on Support Incidents. if you are not currently a
-                ClickHouse Cloud user – while we will try to answer your
-                question, we’d encourage you to go instead to one of our
-                Community resources:
+                Please note that only Subscription customers have a Service
+                Level Agreement on support incidents. If you are not currently a
+                ClickHouse Cloud customer – while we will try to answer your
+                question, we’d encourage you to go instead to our community
+                resources:
               </p>
-              <p className='mb-4 font-bold'>
-                <Link href='/slack' target='_blank'>
-                  ClickHouse community Slack channel
-                </Link>{' '}
-                |{' '}
-                <Link href='/blog/the-click-house-community' target='_blank'>
-                  Other community options
-                </Link>
-              </p>
+              <CUILink
+                href='/slack'
+                target='_blank'
+                className='mx-auto arrow-link mb-4 font-bold text-neutral-800 hover:text-neutral-900 md:flex justify-center items-center gap-1'>
+                ClickHouse community Slack channel{' '}
+                <ChevronRightIcon height='18' className='arrow pt-0.5' />
+              </CUILink>
             </div>
           </div>
         </div>
@@ -211,7 +253,7 @@ export default function SupportProgram(props: any) {
                     <strong>Professional Services</strong>
                   </td>
                   <td className='bg-neutral-750 p-4  border-r border-r-neutral-700'>
-                    ClickHouse Cloud quickstart package available for purchase{' '}
+                    ClickHouse Cloud consultancy packages available for purchase{' '}
                     <br />
                     SOW available for purchasep <br />
                     &nbsp;&nbsp;&nbsp;&nbsp; Virtual + additional T&amp;E for
