@@ -29,38 +29,11 @@ export default function SupportProgram(props: any) {
           </SuiText>
         </div>
 
-        {/* <Link
-          key={course.title}
-          href={`https://learn.clickhouse.com/visitor_catalog_class/show/${course.url}`}
-          className='hover:no-underline transition ease-in-out'>
-          <CUICard className='grid p-8 group bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat w-full min-h-[22.5rem]'>
-            <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
-              <Image
-                src={course.icon}
-                alt={`${course.title}`}
-                width={64}
-                height={64}
-              />
-              <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-4'>
-                <div className='text-xl leading-tight cursor-pointer font-semibold'>
-                  {course.title}
-                </div>
-                <div className='text-sm text-neutral-200 flex gap-2 pb-4 group-hover:text-neutral-0'>
-                  <ClockIcon width={12} /> {course.time}
-                </div>
-                <div className='text-neutral-200 text-center text-sm group-hover:text-neutral-0'>
-                  {course.description}
-                </div>
-              </div>
-            </CUICard.Body>
-          </CUICard>
-        </Link> */}
-
         <div className='grid md:grid-cols-2 pb-12 max-w-3xl mx-auto gap-x-10 text-center px-4 sm:px-8 2xl:px-0 '>
           <Link
             href='https://clickhouse.cloud/support'
             target='_blank'
-            className='hover:no-underline'>
+            className='hover:no-underline mb-8 md:mb-0'>
             <CUICard className='flex p-8 group bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat w-full'>
               <CUICard.Body className='flex flex-col items-center justify-center'>
                 <Image
