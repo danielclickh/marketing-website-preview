@@ -128,8 +128,12 @@ function EventPage({
           featuredImage={lightFeatureImagePng}>
           <div className='section_metadata mb-20'>
             <h4 className='text-primary-300 text-base font-semibold mb-2'>
-              <Link href='/company/news-events'>News &amp; Events</Link> /{' '}
-              {category}
+              <Link
+                className='hover:text-primary-400'
+                href='/company/news-events'>
+                News &amp; Events
+              </Link>{' '}
+              / {category}
             </h4>
             <h1
               className='mb-8 text-4xl md:text-5.5xl font-semibold leading-tight font-basier

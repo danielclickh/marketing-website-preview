@@ -23,10 +23,15 @@ export default function NewsItem({
         <div className='mt-6 inline-block'>
           <CUIButton
             type='secondary'
-            className='w-auto'
+            className='w-auto group'
             href={ctaButton.href}
             target={ctaButton.target}
-            iconRight={<ChevronRightIcon className='w-4 h-4' />}>
+            iconRight={
+              <ChevronRightIcon
+                height='16'
+                className='group-hover:translate-x-1/2 pt-0.5 transition'
+              />
+            }>
             {ctaButton.text}
           </CUIButton>
         </div>

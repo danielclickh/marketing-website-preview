@@ -206,7 +206,11 @@ function EventsForm({
                   : 'Invalid E-mail address'
               }
             />
-            <SuiButton disabled={loading} type='primary' onClick={onSubmit}>
+            <SuiButton
+              disabled={loading}
+              type='primary'
+              className='hover:no-underline hover:translate-y-0 hover:bg-primary-400 rounded-md'
+              onClick={onSubmit}>
               {submitButtonLabel}
             </SuiButton>
           </div>

@@ -34,7 +34,7 @@ export default function Footer({
                       key={footerLink.name}
                       href={footerLink.href}
                       target={footerLink.target}
-                      className='footer w-fit text-sm'
+                      className='footer w-fit text-sm hover:text-neutral-0 transition-all'
                       segmentEvent={{
                         label: footerLink.name,
                         category: 'website-nav'

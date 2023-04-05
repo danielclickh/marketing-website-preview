@@ -12,6 +12,7 @@ import HRSeparator from '../../components/HRSeparator'
 import integrations from './integrations.json'
 import features from './features.json'
 import featureBlocks from './feature_blocks.json'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -304,8 +305,14 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
 
             <CUIButton
               type='secondary'
-              className='w-auto'
-              href='/support/program/'>
+              className='w-auto group'
+              href='/support/program/'
+              iconRight={
+                <ChevronRightIcon
+                  height='18'
+                  className='group-hover:translate-x-1/2 pt-0.5 transition'
+                />
+              }>
               Learn more
             </CUIButton>
           </div>
@@ -327,8 +334,14 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
                   <CUIButton
                     type='primary-dark'
                     size='lg'
-                    className='mx-auto mt-8'
+                    className='mx-auto mt-8 group'
                     href='https://clickhouse.cloud/signUp?loc=cloud-page-get-started-footer'
+                    iconRight={
+                      <ChevronRightIcon
+                        height='18'
+                        className='group-hover:translate-x-1/2 pt-0.5 transition'
+                      />
+                    }
                     segmentEvent={{
                       label: 'Create a free acount',
                       category: 'website-cloudpage-lower-hero'

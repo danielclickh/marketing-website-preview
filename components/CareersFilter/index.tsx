@@ -157,7 +157,7 @@ function CareersFilter() {
                   {jobs.map((job: JobType, index: number) => (
                     <div
                       key={job.url}
-                      className='border-t border-neutral-700 py-6 hover:bg-neutral-725 '>
+                      className='border-t border-neutral-700 py-6 px-4 hover:bg-neutral-725 '>
                       <SuiLink
                         href={job.url}
                         className={`job-${index} md:flex items-center justify-between hover:no-underline`}>
@@ -177,9 +177,14 @@ function CareersFilter() {
                         </div>
                         <CUIButton
                           type='secondary'
-                          className='w-auto mt-4 md:mt-0'
+                          className='w-auto mt-4 md:mt-0 group'
                           target='_blank'
-                          iconRight={<ChevronRightIcon className='w-4 h-4' />}>
+                          iconRight={
+                            <ChevronRightIcon
+                              height='18'
+                              className='group-hover:translate-x-1/2 pt-0.5 transition'
+                            />
+                          }>
                           Apply
                         </CUIButton>
                       </SuiLink>

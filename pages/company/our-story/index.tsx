@@ -9,9 +9,10 @@ import Layout from '../../../components/Layout'
 import { GetStaticProps } from 'next'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import Image from 'next/image'
-import { ArrowRightIcon } from '@heroicons/react/solid'
+import { ArrowRightIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import styles from './styles.module.scss'
+import { CUIButton } from '../../../components/ClickUI'
 
 export const getStaticProps: GetStaticProps<OurStoryData> =
   async function getStaticProps() {
@@ -237,15 +238,21 @@ While we’re in different places, we all have the same goals, and we trust each
                     significant impact on the company’s success, this is the
                     place for you.
                   </SuiText>
+
                   {hiring.ctaButton && (
-                    <div className='mt-4 text-white bg-black rounded py-2 px-6 font-base inline-block'>
-                      <Link href='/company/careers'>
-                        <span className='flex justify-center items-center gap-2'>
-                          View careers
-                          <ArrowRightIcon className='w-4' />
-                        </span>
-                      </Link>
-                    </div>
+                    <CUIButton
+                      type='primary-dark'
+                      className='w-auto mx-auto flex group mt-6'
+                      href='/company/careers'
+                      size='lg'
+                      iconRight={
+                        <ChevronRightIcon
+                          height='18'
+                          className='group-hover:translate-x-1/2 pt-0.5 transition'
+                        />
+                      }>
+                      View careers
+                    </CUIButton>
                   )}
                 </div>
               </div>

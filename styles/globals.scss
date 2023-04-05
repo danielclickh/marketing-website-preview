@@ -1,9 +1,5 @@
 @tailwind base;
 @layer base {
-  a {
-    @apply hover:underline;
-  }
-
   @font-face {
     font-family: Basier Square;
     font-weight: 600;
@@ -444,6 +440,18 @@ body {
 .show-copy-paste {
   .codeblock-copy-btn {
     @apply block grid place-items-center;
+  }
+}
+
+a.arrow-link {
+  .arrow {
+    display: inline-block;
+    transition: 0.1s ease-in;
+  }
+  &:hover {
+    .arrow {
+    transform: translateX(50%);
+    }
   }
 }
 

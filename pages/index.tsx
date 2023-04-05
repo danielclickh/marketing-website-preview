@@ -180,9 +180,9 @@ export default function HomePage({
                 <CUILink
                   href='#getting_started'
                   target='_self'
-                  className='hidden mt-5 text-neutral-200 hover:text-neutral-0 md:flex items-center gap-2'>
+                  className='arrow-link hidden mt-5 text-neutral-200 hover:text-neutral-0 md:flex items-center gap-1'>
                   Or download open-source ClickHouse{' '}
-                  <ChevronRightIcon height='16' />
+                  <ChevronRightIcon height='18' className='arrow pt-0.5' />
                 </CUILink>
               </div>
             </div>
@@ -313,9 +313,14 @@ export default function HomePage({
           </div>
           <CUIButton
             type='secondary'
-            className='w-auto'
+            className='w-auto group'
             href='https://clickhouse.com/docs/'
-            iconRight={<ChevronRightIcon height='16' />}>
+            iconRight={
+              <ChevronRightIcon
+                height='16'
+                className='group-hover:translate-x-1/2 pt-0.5 transition'
+              />
+            }>
             Read more in the docs
           </CUIButton>
         </div>
@@ -365,8 +370,13 @@ export default function HomePage({
                   <CUIButton
                     type={deploy.btnType}
                     href={deploy.href}
-                    linkClass='w-full inline-grid'
-                    iconRight={<ChevronRightIcon height='16' />}
+                    linkClass='w-full inline-grid group'
+                    iconRight={
+                      <ChevronRightIcon
+                        height='18'
+                        className='arrow group-hover:translate-x-1/2 pt-0.5 transition'
+                      />
+                    }
                     target={deploy.target}>
                     {deploy.btnText}
                   </CUIButton>

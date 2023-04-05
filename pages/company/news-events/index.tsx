@@ -9,7 +9,7 @@ import { GetStaticProps } from 'next'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import { convertDateToString } from '../../../lib/utils/dateUtils'
-import { CUILink } from '../../../components/ClickUI'
+import { CUIButton, CUILink } from '../../../components/ClickUI'
 import { StrapiImage } from '../../../components/StrapiElements'
 import { CalendarIcon } from '@heroicons/react/outline'
 import EventPost from '../../../components/EventPostList/EventPost'
@@ -201,7 +201,7 @@ export default function News({
                         </div>
                       </div>
                       <div className='mt-8'>
-                        <div className='mt-4 md:mt-0 rounded py-2 px-6 font-semibold inline-block bg-primary-300'>
+                        <div className='mt-4 md:mt-0 rounded py-2 px-6 font-semibold inline-block bg-primary-300 hover:bg-primary-400 transition'>
                           <span className='flex justify-center items-center gap-2 text-black text-base'>
                             Register
                           </span>

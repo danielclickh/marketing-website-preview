@@ -66,10 +66,15 @@ export function UseCase(props: TestimonialProps) {
         {btnText && (
           <CUIButton
             type='secondary'
-            className=''
+            className='group'
             href={path}
             target={target}
-            iconRight={<ChevronRightIcon className='w-4 h-4' />}>
+            iconRight={
+              <ChevronRightIcon
+                height='18'
+                className='group-hover:translate-x-1/2 pt-0.5 transition'
+              />
+            }>
             {btnText}
           </CUIButton>
         )}

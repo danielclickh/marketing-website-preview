@@ -209,13 +209,18 @@ function CustomerStoriesPage({
                       Software Engineer @ Disney+ Streaming
                     </p>
                   </div>
-                  <div className='mt-4 xl:mt-0'>
+                  <div className='mt-4 xl:mt-0 flex justify-center lg:justify-start'>
                     <CUIButton
                       type='secondary'
-                      className='w-auto mx-auto'
+                      className='w-auto mx-auto group'
                       target='_self'
                       href='/blog/nyc-meetup-report-high-speed-content-distribution-analytics-for-streaming-platforms'
-                      iconRight={<ChevronRightIcon className='w-4 h-4' />}>
+                      iconRight={
+                        <ChevronRightIcon
+                          height='18'
+                          className='group-hover:translate-x-1/2 pt-0.5 transition'
+                        />
+                      }>
                       Learn more
                     </CUIButton>
                   </div>
@@ -306,11 +311,14 @@ function CustomerStoriesPage({
                         <div className='mt-8 mx-auto'>
                           <CUIButton
                             type='secondary'
-                            className='w-auto mx-auto'
+                            className='w-auto mx-auto group'
                             target={spotlight.ctaButton.target}
                             href={spotlight.ctaButton.href}
                             iconRight={
-                              <ChevronRightIcon className='w-4 h-4' />
+                              <ChevronRightIcon
+                                height='18'
+                                className='group-hover:translate-x-1/2 pt-0.5 transition'
+                              />
                             }>
                             Read use case
                           </CUIButton>

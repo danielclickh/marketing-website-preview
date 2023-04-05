@@ -1,6 +1,6 @@
 import { CUIButton, CUICard } from '../../components/ClickUI'
 import Image from 'next/image'
-import { ArrowRightIcon } from '@heroicons/react/solid'
+import { ArrowRightIcon, ChevronRightIcon } from '@heroicons/react/solid'
 
 type DeployData = {
   title: string
@@ -23,7 +23,7 @@ const deployData: Array<DeployData> = [
     btnType: 'secondary'
   },
   {
-    title: 'ClickHouse',
+    title: 'Open-source ClickHouse',
     img: '/drive.svg',
     btnText: 'Download ClickHouse',
     description:
@@ -69,7 +69,13 @@ export default function GiveItAGo() {
               type={deploy.btnType}
               href={deploy.href}
               linkClass='w-full inline-grid'
-              iconRight={<ArrowRightIcon height='16' />}
+              className='group'
+              iconRight={
+                <ChevronRightIcon
+                  height='18'
+                  className='group-hover:translate-x-1/2 pt-0.5 transition'
+                />
+              }
               target={deploy.target}>
               {deploy.btnText}
             </CUIButton>

@@ -39,10 +39,15 @@ function DevelopersSection() {
           </div>
 
           <CUIButton
-            className='mt-8 mb-4'
+            className='mt-8 mb-4 group'
             type='secondary'
             href='/blog/nyc-meetup-report-high-speed-content-distribution-analytics-for-streaming-platforms'
-            iconRight={<ChevronRightIcon height='16' />}>
+            iconRight={
+              <ChevronRightIcon
+                height='18'
+                className='group-hover:translate-x-1/2 pt-0.5 transition'
+              />
+            }>
             Learn More
           </CUIButton>
         </div>
@@ -74,10 +79,15 @@ function DevelopersSection() {
             <CUICard.Footer className='grid place-items-center w-full px-6 pb-6'>
               <CUIButton
                 type='secondary'
-                linkClass='w-full inline-grid'
+                linkClass='w-full group inline-grid'
                 href={developerOption.href}
                 target='_blank'
-                iconRight={<ChevronRightIcon height='16' />}>
+                iconRight={
+                  <ChevronRightIcon
+                    height='18'
+                    className='group-hover:translate-x-1/2 pt-0.5 transition'
+                  />
+                }>
                 {developerOption.btnText}
               </CUIButton>
             </CUICard.Footer>

@@ -23,6 +23,7 @@ import { CUIButton, CUICard } from '../../components/ClickUI'
 import FollowUs from '../../components/FollowUs'
 import HRSeparator from '../../components/HRSeparator'
 import VideoPlayer from '../../components/VideoPlayer'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 
 const popularCourses = [
   {
@@ -182,8 +183,14 @@ function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
         </div>
         <CUIButton
           type='secondary'
-          className='w-auto mx-auto flex'
-          href='https://learn.clickhouse.com/visitor_class_catalog'>
+          className='w-auto mx-auto flex group'
+          href='https://learn.clickhouse.com/visitor_class_catalog'
+          iconRight={
+            <ChevronRightIcon
+              height='18'
+              className='group-hover:translate-x-1/2 pt-0.5 transition'
+            />
+          }>
           Browse more free training
         </CUIButton>
       </div>
