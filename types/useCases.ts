@@ -1,4 +1,5 @@
 import { StrapiButton, StrapiImageType } from '../lib/api/strapi/types'
+import { BlogPost } from './blogs'
 import { CommonProps } from './homepage'
 
 export interface UseCasesTestimonial {
@@ -22,16 +23,7 @@ export interface UseCasesItem {
 }
 
 export interface UseCasesData extends CommonProps {
-  hero: {
-    title: string
-    description: string
-    testimonials: Array<UseCasesTestimonial>
-  }
-  useCases: {
-    title: string
-    description: string
-    spotlightTitle: string
-  }
   spotlight: UseCasesItem
   useCaseItems: Array<UseCasesItem>
+  customerStories: Array<BlogPost>
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { SuiPanel } from '../../components/sui'
 import { UseCase } from '../../components/use_case'
-import { findOne } from '../../lib/api/strapi'
+import { findAll, findOne } from '../../lib/api/strapi'
 
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import { UseCasesData } from '../../types/useCases'
@@ -14,15 +14,12 @@ import HRSeparator from '../../components/HRSeparator'
 import { CheckIcon } from '@heroicons/react/outline'
 import GiveItAGo from '../../components/GiveItAGo'
 import VideoPlayer from '../../components/VideoPlayer'
+import BlogPost from '../../components/BlogPostList/BlogPost'
 
 export const getStaticProps: GetStaticProps<UseCasesData> =
   async function getStaticProps() {
     const result = await findOne('use-case', {
       populate: [
-        'hero',
-        'hero.testimonials',
-        'hero.testimonials.avatar',
-        'useCases',
         'useCaseItems',
         'useCaseItems.darkLogoPng',
         'useCaseItems.lightLogoPng',
@@ -34,10 +31,24 @@ export const getStaticProps: GetStaticProps<UseCasesData> =
     })
     result.spotlight = (result.useCaseItems ?? []).shift()
 
+    const blogsParams = {
+      filters: {
+        category: {
+          $eqi: 'customer stories'
+        }
+      },
+      sort: ['date:DESC', 'publishedAt:DESC'],
+      populate: ['thumbnailPng', 'author'],
+      fields: ['category', 'title', 'slug'],
+      pagination: { limit: 3 }
+    }
+    const { data: customerStories } = await findAll('blog-posts', blogsParams)
+    console.log(customerStories)
     const commonProps = await getCommonProps()
     return {
       props: {
         ...result,
+        customerStories,
         ...commonProps
       }
     }
@@ -157,12 +168,10 @@ const testimonialsJson: Array<TestimonialsJson> = [
 ]
 
 function CustomerStoriesPage({
-  hero: { title, description, testimonials },
   spotlight,
-  useCases,
   useCaseItems,
   seo,
-  platforms,
+  customerStories,
   footerData
 }: UseCasesData) {
   const [visibleTestimonials, setVisibleTestimonials] = useState(6)
@@ -411,6 +420,26 @@ function CustomerStoriesPage({
             </CUIButton>
           </div>
         )}
+      </div>
+      <HRSeparator />
+      <div className='section-container my-24'>
+        <div className='mx-auto mb-14'>
+          <Image
+            src='/images/use-cases/recent-customer-stories-icon.svg'
+            width={72}
+            height={72}
+            alt='Case studies icon'
+            className='mx-auto mb-6'
+          />{' '}
+          <h2 className='text-3xl font-bold text-center font-basier'>
+            Recent customer stories
+          </h2>
+        </div>
+        <div className='w-full flex flex-col md:grid md:grid-cols-3 md:gap-x-16 gap-y-6 md:gap-y-0 '>
+          {customerStories.map((blog) => (
+            <BlogPost key={blog.id} {...blog} />
+          ))}
+        </div>
       </div>
       <HRSeparator />
       <div className='my-24'>
