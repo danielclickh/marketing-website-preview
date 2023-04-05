@@ -36,7 +36,7 @@ export default function FAQ() {
         <CUILink
           href='/support/program/'
           target='_self'
-          className='flex gap-4 text-primary items-center mt-6 justify-center md:justify-start'>
+          className='flex gap-4 text-primary items-center mt-6 justify-center lg:justify-start'>
           <span>Ask us anything</span> <ExternalLinkIcon className='w-4 h-4' />
         </CUILink>
       </div>
