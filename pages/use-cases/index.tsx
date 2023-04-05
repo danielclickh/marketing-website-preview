@@ -77,7 +77,7 @@ const testimonialsJson: Array<TestimonialsJson> = [
     id: 2,
     logo: '/images/use-cases/instabug.svg',
     category: 'Observability',
-    text: 'At Instabug, we rely on ClickHouse to help power our teal-time observability solutions that developers rely on. ClickHouse Cloud reduced our operational overhead and cost of managing ClickHouse ourselves allowing us to focus on our users.',
+    text: 'At Instabug, we rely on ClickHouse to help power our real-time observability solutions that developers rely on. ClickHouse Cloud reduced our operational overhead and cost of managing ClickHouse ourselves allowing us to focus on our users.',
     customer: 'Instabug',
     width: 189,
     height: 33
