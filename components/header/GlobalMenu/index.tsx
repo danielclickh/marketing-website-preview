@@ -18,7 +18,7 @@ const GlobalMenu = () => {
           {headerMenuItems.map((menuItem) => {
             if (menuItem.href) {
               return (
-                <NavigationMenu.Item>
+                <NavigationMenu.Item key={menuItem.name}>
                   <NavigationMenu.Link
                     className={styles.topLevelNavItem}
                     href={menuItem.href}>
@@ -31,7 +31,7 @@ const GlobalMenu = () => {
               (menuItem?.menuItems ?? []).length > 0
             ) {
               return (
-                <NavigationMenu.Item>
+                <NavigationMenu.Item key={menuItem.name}>
                   <NavigationMenu.Trigger className={styles.topLevelNavItem}>
                     {menuItem.name}
                   </NavigationMenu.Trigger>
@@ -40,7 +40,9 @@ const GlobalMenu = () => {
                     <div className='one m-0 flex list-none sm:min-w-[500px] sm:grid-cols-[1fr]'>
                       {menuItem.menuItems.map((subMenuItem) => {
                         return (
-                          <div className='flex grow flex-col w-full'>
+                          <div
+                            key={subMenuItem.name}
+                            className='flex grow flex-col w-full'>
                             <div className='bg-neutral-725 bg-opacity-90 border-b border-neutral-700 border-opacity-40 mb-4'>
                               <ListItem
                                 href={subMenuItem.href}
@@ -56,48 +58,46 @@ const GlobalMenu = () => {
                             <div>
                               {subMenuItem.menuItems.map((deepMenuItem) => {
                                 return (
-                                  <>
-                                    <div>
-                                      {deepMenuItem.icon ? (
-                                        <ListItem
-                                          href={deepMenuItem.href}
-                                          className='mx-auto rounded-none group'>
-                                          <div className='flex gap-4'>
-                                            <Image
-                                              src={deepMenuItem.icon}
-                                              alt={deepMenuItem.name}
-                                              width={24}
-                                              height={24}
-                                            />
-                                            <div className='flex flex-col gap-0.5'>
-                                              <SuiText
-                                                weight='medium'
-                                                size='sm'>
-                                                {deepMenuItem.name}
-                                              </SuiText>
-                                              <SuiText
-                                                weight='normal'
-                                                size='sm'
-                                                className='text-neutral-300 group-hover:text-neutral-0'>
-                                                {deepMenuItem.description}
-                                              </SuiText>
-                                            </div>
+                                  <div key={deepMenuItem.name}>
+                                    {deepMenuItem.icon ? (
+                                      <ListItem
+                                        href={deepMenuItem.href}
+                                        key={deepMenuItem.name}
+                                        className='mx-auto rounded-none group'>
+                                        <div className='flex gap-4'>
+                                          <Image
+                                            src={deepMenuItem.icon}
+                                            alt={deepMenuItem.name}
+                                            width={24}
+                                            height={24}
+                                          />
+                                          <div className='flex flex-col gap-0.5'>
+                                            <SuiText weight='medium' size='sm'>
+                                              {deepMenuItem.name}
+                                            </SuiText>
+                                            <SuiText
+                                              weight='normal'
+                                              size='sm'
+                                              className='text-neutral-300 group-hover:text-neutral-0'>
+                                              {deepMenuItem.description}
+                                            </SuiText>
                                           </div>
-                                        </ListItem>
-                                      ) : (
-                                        <ListItem
-                                          href={deepMenuItem.href}
-                                          className='w-full pl-4 group'>
-                                          <SuiText
-                                            weight='medium'
-                                            size='sm'
-                                            className='text-neutral-300 group-hover:text-neutral-0 whitespace-nowrap'>
-                                            {deepMenuItem.name}
-                                          </SuiText>
-                                        </ListItem>
-                                      )}
-                                    </div>
-                                  </>
+                                        </div>
+                                      </ListItem>
+                                    ) : (
+                                      <ListItem
+                                        href={deepMenuItem.href}
+                                        key={deepMenuItem.name}
+                                        className='w-full pl-4 group'>
+                                        <SuiText
+                                          weight='medium'
+                                          size='sm'
+                                          className='text-neutral-300 group-hover:text-neutral-0 whitespace-nowrap'>
+                                          {deepMenuItem.name}
+                                        </SuiText>
+                                      </ListItem>
+                                    )}
+                                  </div>
                                 )
                               })}
                             </div>
@@ -128,20 +128,18 @@ interface ListItemProps extends HTMLAttributes<HTMLAnchorElement> {
 }
 const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
   ({ className, children, title, ...props }, forwardedRef) => (
-    <li>
-      <NavigationMenu.Link asChild>
-        <a
-          className={classNames(
-            'focus:shadow-[0_0_0_2px] focus:shadow-neutral-750 block rounded select-none px-3 py-2 text-sm w-full leading-none !no-underline outline-none transition-all hover:bg-neutral-700 hover:text-neutral-0 hover:bg-opacity-40 focus:outline-none',
-            className
-          )}
-          {...props}
-          ref={forwardedRef}>
-          <div className='font-medium'>{title}</div>
-          <p className=''>{children}</p>
-        </a>
-      </NavigationMenu.Link>
-    </li>
+    <NavigationMenu.Link asChild>
+      <a
+        className={classNames(
+          'focus:shadow-[0_0_0_2px] focus:shadow-neutral-750 block rounded select-none px-3 py-2 text-sm w-full leading-none !no-underline outline-none transition-all hover:bg-neutral-700 hover:text-neutral-0 hover:bg-opacity-40 focus:outline-none',
+          className
+        )}
+        {...props}
+        ref={forwardedRef}>
+        <div className='font-medium'>{title}</div>
+        <span className=''>{children}</span>
+      </a>
+    </NavigationMenu.Link>
   )
 )
 
