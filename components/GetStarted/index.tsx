@@ -22,7 +22,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
           </div>
         </div>
         <SuiCodeblock className='w-full md:w-full self-center overflow-hidden show-copy-paste'>
-          <Markdown>{platforms[0].instructions}</Markdown>
+          <Markdown ignoreAnchor>{platforms[0].instructions}</Markdown>
         </SuiCodeblock>
         <div className='text-sm font-medium text-neutral-500 mt-4'>
           Or install for{' '}
