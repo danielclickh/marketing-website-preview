@@ -109,7 +109,7 @@ function PricingPage({
             {hero && (
               <div className='hero'>
                 <div className='flex flex-col items-center'>
-                  <SuiTitle type='h1' color='white' className='md:!text-6xl'>
+                  <SuiTitle type='h1' color='white' className='md:!text-5.5xl'>
                     {hero.title}
                   </SuiTitle>
                   <div className='text-neutral-200 mt-6'>

@@ -34,7 +34,7 @@ function PricingOptions({
                   <h2 className='text-center text-2.75xl font-semibold mb-1'>
                     {plan.name}
                   </h2>
-                  <div className='text-center text-sm md:h-16 xl:h-auto text-normal text-neutral-300'>
+                  <div className='text-center text-sm md:min-h-[40px] md:h-auto text-normal text-neutral-300'>
                     {plan.description}
                   </div>
                   <PlanPricing isFirst={index === 0} text={plan.pricingMain} />
