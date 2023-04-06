@@ -45,7 +45,7 @@ function Button({
           onClick && onClick()
         }}>
         {iconLeft}
-        <span className='flex items-center'>{children}</span>
+        <span className='flex items-center whitespace-nowrap'>{children}</span>
         {iconRight}
       </button>
     </ButtonLink>
