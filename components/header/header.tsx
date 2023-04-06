@@ -225,7 +225,7 @@ export default function Header() {
                 category: 'website-nav'
               }}
               className='w-full'>
-              Get Started
+              Get started
             </CUIButton>
             <CUIButton
               type='secondary'
