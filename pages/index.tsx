@@ -20,7 +20,7 @@ import HRSeparator from '../components/HRSeparator'
 import RowOrientedIllustration from '../components/RowOrientedIllustration'
 import ColumnOrientedIllustration from '../components/ColumnOrientedIllustration'
 import SpeedAnimationSvg from '../components/SpeedAnimation'
-
+import SpeedAnimationMobileSvg from '../components/SpeedAnimation/Mobile'
 
 const yellowPositionStyle = {
   '--left-side': 'auto',
@@ -240,12 +240,8 @@ export default function HomePage({
             ClickHouse supports all the data sources you need to power your apps
             and use cases that require exceptional performance.
           </div>
-          <div className='md:hidden w-full md:px-12 bg-contain'>
-            <embed
-              id='E'
-              src='speed-animation-mobile.svg'
-              className='w-full aspect-[401/603]'
-            />
+          <div className='md:hidden w-full md:px-12 flex justify-center'>
+            <SpeedAnimationMobileSvg className='max-w-full h-auto' />
           </div>
           <div className='hidden md:block w-full md:px-12'>
             <SpeedAnimationSvg className='max-w-full h-auto' />
