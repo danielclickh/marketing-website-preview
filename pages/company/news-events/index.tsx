@@ -140,7 +140,7 @@ export default function News({
             <div>
               <CUILink
                 href={`/company/events/${featuredEvent.slug}`}
-                className='mt-2 flex flex-col md:flex-row mb-16 gap-10 section-container hover:no-underline'>
+                className='mt-2 flex flex-col md:flex-row mb-16 group gap-10 section-container hover:no-underline'>
                 <div className='flex flex-col lg:flex-row-reverse rounded-xl gap-8 lg:gap-12 xl:gap-24'>
                   {featuredEvent.thumbnailPng && (
                     <StrapiImage
@@ -206,7 +206,7 @@ export default function News({
                         </div>
                       </div>
                       <div className='mt-8'>
-                        <div className='mt-4 md:mt-0 rounded py-2 px-6 font-semibold inline-block bg-primary-300 hover:bg-primary-400 transition'>
+                        <div className='mt-4 md:mt-0 rounded py-2 px-6 font-semibold inline-block bg-primary-300 hover:bg-primary-400 group-hover:bg-primary-400 transition'>
                           <span className='flex justify-center items-center gap-2 text-black text-base'>
                             Register
                           </span>
