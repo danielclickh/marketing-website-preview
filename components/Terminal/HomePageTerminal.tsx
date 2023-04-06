@@ -53,7 +53,7 @@ function HomePageTerminal() {
             <span className='keyword'>`</span>
             {'\n'}
             <span className='constant'>FROM</span>
-            {'  youtube\n'}
+            {' youtube\n'}
             <span className='constant'>WHERE</span>{' '}
             <span className='bracket-level-1'>(</span>
             <span className='constant'>month</span> {`>=`}{' '}
