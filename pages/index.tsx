@@ -180,7 +180,7 @@ export default function HomePage({
                 <CUILink
                   href='#getting_started'
                   target='_self'
-                  className='arrow-link hidden mt-5 text-neutral-200 hover:text-neutral-0 md:flex items-center gap-1'>
+                  className='arrow-link hidden mt-5 text-neutral-200 hover:text-neutral-0 md:flex items-center gap-1 whitespace-nowrap'>
                   Or download open-source ClickHouse{' '}
                   <ChevronRightIcon height='18' className='arrow pt-0.5' />
                 </CUILink>
