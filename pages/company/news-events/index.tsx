@@ -157,18 +157,23 @@ export default function News({
                         <div className='mt-8 text-neutral-200 font-normal mb-8'>
                           {featuredEvent.shortDescription}
                         </div>
-                        <div className='flex items-center space-x-3 mb-4'>
-                          <CalendarIcon className='w-6 h-6 text-neutral-200 stroke-1' />
-                          <div className=' text-neutral-200'>
-                            {featuredEvent.localDatetime && (
-                              <div className='text-sm text-neutral-300'>
-                                {convertDateToString(
-                                  featuredEvent.localDatetime
-                                )}
-                              </div>
-                            )}
+
+                        {featuredEvent.category == 'On-Demand Webinar' ? (
+                          <div className='flex items-center space-x-3 mb-4'>
+                            <CalendarIcon className='w-6 h-6 text-neutral-200 stroke-1' />
+                            <div className=' text-neutral-200'>
+                              {featuredEvent.localDatetime && (
+                                <div className='text-sm text-neutral-300'>
+                                  {convertDateToString(
+                                    featuredEvent.localDatetime
+                                  )}
+                                </div>
+                              )}
+                            </div>
                           </div>
-                        </div>
+                        ) : (
+                          <div className='flex h-10'></div>
+                        )}
                         <div className='flex items-center space-x-3'>
                           <svg
                             xmlns='http://www.w3.org/2000/svg'

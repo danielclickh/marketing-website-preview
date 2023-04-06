@@ -135,11 +135,11 @@ export default function Header() {
               weight='medium'
               href='https://clickhouse.cloud/signUp'
               segmentEvent={{
-                label: 'Get Started',
+                label: 'Get started',
                 category: 'website-nav'
               }}
               target='_self'>
-              Get Started
+              Get started
             </CUIButton>
           </div>
 
@@ -221,7 +221,7 @@ export default function Header() {
               href='https://clickhouse.cloud/signUp'
               target='_self'
               segmentEvent={{
-                label: 'Get Started',
+                label: 'Get started',
                 category: 'website-nav'
               }}
               className='w-full'>
