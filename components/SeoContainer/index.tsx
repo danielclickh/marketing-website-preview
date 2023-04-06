@@ -11,7 +11,7 @@ function SeoContainer({
   type,
   siteName
 }: SeoMetadata) {
-  const imageUrl = image?.[0]?.url || '/images/sql_console_hero.png'
+  const imageUrl = image?.[0]?.url || '/images/social_share.png'
 
   return (
     <Head>
