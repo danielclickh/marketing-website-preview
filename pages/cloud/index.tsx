@@ -118,6 +118,7 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
                   <Image
                     src='/images/cloud/cloud_hero_image.png'
                     alt='ClickHouse Cloud'
+                    loading='eager'
                     width={1262}
                     height={523}
                     className='w-full h-auto min-w-[60rem]'
