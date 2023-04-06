@@ -389,7 +389,7 @@ body {
   background-repeat: no-repeat;
   animation: typewrite-position 0.4s infinite steps(1), typewrite-size 2s steps(var(--totalCount)) forwards;
   &.active {
-    @apply transition-colors;
+    @apply transition-colors text-neutral-0;
     .keyword {
       color: #7a8fa7;
     }
