@@ -507,7 +507,7 @@ a.arrow-link {
     @apply flex items-center gap-3 rounded-[4rem] px-8 py-4 opacity-100 #{!important};
     &::after {
       content: "Watch Video";
-      @apply text-base font-semibold text-neutral-0;
+      @apply whitespace-nowrap text-base font-semibold text-neutral-0;
     }
   }
 }
