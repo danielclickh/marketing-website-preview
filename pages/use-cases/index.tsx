@@ -43,7 +43,6 @@ export const getStaticProps: GetStaticProps<UseCasesData> =
       pagination: { limit: 3 }
     }
     const { data: customerStories } = await findAll('blog-posts', blogsParams)
-    console.log(customerStories)
     const commonProps = await getCommonProps()
     return {
       props: {

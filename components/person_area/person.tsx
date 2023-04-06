@@ -13,7 +13,6 @@ type PersonProps = {
 export function Person(props: PersonProps) {
   const { avatar, name, job, small, className, personType = '' } = props
 
-  console.log(props)
   return (
     <div
       className={`flex w-full flex-col items-center text-center md:max-w-xs ${className}`}>

@@ -11,7 +11,7 @@ interface Props {
 }
 function Layout({ children, footerData, seo }: Props) {
   return (
-    <div onScroll={(e) => console.log('asasas')}>
+    <div>
       {seo && <SeoContainer {...seo} />}
       <Header />
       {children}
