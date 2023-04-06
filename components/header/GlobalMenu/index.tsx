@@ -6,6 +6,7 @@ import { MenuItem as MenuItemType } from '../types'
 import Image from 'next/image'
 import styles from './styles.module.scss'
 import { SuiText } from '../../sui'
+import Link from 'next/link'
 
 const headerMenuItems = menuItems as Array<MenuItemType>
 const GlobalMenu = () => {
@@ -124,21 +125,22 @@ const GlobalMenu = () => {
   )
 }
 interface ListItemProps extends HTMLAttributes<HTMLAnchorElement> {
-  href?: string
+  href: string
 }
 const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
-  ({ className, children, title, ...props }, forwardedRef) => (
+  ({ className, children, title, href, ...props }, forwardedRef) => (
     <NavigationMenu.Link asChild>
-      <a
+      <Link
         className={classNames(
           'focus:shadow-[0_0_0_2px] focus:shadow-neutral-750 block rounded select-none px-3 py-2 text-sm w-full leading-none !no-underline outline-none transition-all hover:bg-neutral-700 hover:text-neutral-0 hover:bg-opacity-40 focus:outline-none',
           className
         )}
+        href={href}
         {...props}
         ref={forwardedRef}>
         <div className='font-medium'>{title}</div>
         <span className=''>{children}</span>
-      </a>
+      </Link>
     </NavigationMenu.Link>
   )
 )
