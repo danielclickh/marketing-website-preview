@@ -106,7 +106,7 @@ body {
 }
 
 ::selection {
-  @apply bg-primary-300 text-neutral-800;
+  @apply bg-primary-300 bg-opacity-[0.99] text-neutral-800;
 }
 
 .flip-selection {
@@ -450,7 +450,7 @@ a.arrow-link {
   }
   &:hover {
     .arrow {
-    transform: translateX(50%);
+      transform: translateX(50%);
     }
   }
 }
