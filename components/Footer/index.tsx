@@ -71,7 +71,7 @@ export default function Footer({
             &copy; 2023 ClickHouse, Inc. HQ in the Bay Area, CA and Amsterdam,
             NL.
           </div>
-          <div className='bottom_links flex gap-4 items-center'>
+          <div className='bottom_links flex gap-4 items-center justify-center flex-wrap'>
             {bottomLinks.map((bottomLink, index) => (
               <CUILink
                 key={bottomLink.text}
