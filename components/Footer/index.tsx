@@ -81,13 +81,13 @@ export default function Footer({
                   label: bottomLink.text,
                   category: 'website-nav'
                 }}
-                className={`first:pl-0 bottom-link-${index} whitespace-nowrap`}>
+                className={`first:pl-0 bottom-link-${index} whitespace-nowrap hover:text-neutral-0`}>
                 {bottomLink.text}
               </CUILink>
             ))}
             <button
               onClick={openCookie}
-              className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length} hover:underline whitespace-nowrap`}>
+              className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length} hover:text-neutral-0 whitespace-nowrap`}>
               Cookie Policy
             </button>
           </div>
