@@ -196,7 +196,7 @@ export default function HomePage({
             <HomePageTerminal />
           </div>
         </div>
-        <div className='bg-primary-300 pt-8 pb-16'>
+        <div className='bg-primary-300 pt-8 pb-16 -mt-1'>
           <div className='max-w-4xl mx-auto'>
             <div className='text-center mb-8 text-primary-800 w-fit mx-auto text-xl font-semibold leading-normal px-4 md:px-0'>
               Trusted by the best developers that work with data at{' '}
