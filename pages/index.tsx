@@ -18,6 +18,8 @@ import HomePageTerminal from '../components/Terminal/HomePageTerminal'
 import DevelopersSection from '../components/DevelopersSection'
 import { CSSProperties } from 'react'
 import HRSeparator from '../components/HRSeparator'
+import RowOrientedIllustration from '../components/RowOrientedIllustration'
+import classNames from 'classnames';
 
 const yellowPositionStyle = {
   '--left-side': 'auto',
@@ -276,14 +278,7 @@ export default function HomePage({
           </div>
           <div className='grid grid-cols-1 md:grid-cols-2 items-center py-16 gap-16'>
             <div>
-              <Image
-                src={rowOrientedIllustration}
-                width='544'
-                height='257'
-                alt='Row Oriented Illustration'
-                className='bg-neutral-900 border border-neutral-700/80 rounded-lg mx-auto'
-                priority
-              />
+              <RowOrientedIllustration className="bg-neutral-900 border border-neutral-700/80 rounded-lg mx-auto"/>
               <div className='text-neutral-0 font-bold leading-normal mb-3 mt-6 text-center md:text-left'>
                 Row-oriented databases
               </div>
