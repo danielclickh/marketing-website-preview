@@ -522,3 +522,10 @@ a.arrow-link {
 .clickhouse-logo-container {
   animation: pulseEffect 2s ease-in-out 0s alternate infinite;
 }
+
+.speed-animation-mobile {
+  @apply md:hidden w-full md:px-12 flex justify-center;
+  * {
+    @apply md:hidden;
+  }
+}

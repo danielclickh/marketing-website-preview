@@ -11,93 +11,88 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
       {...props}>
       <defs>
         <path
-          id='postgresLine'
+          id='mobilePostgresLine'
           strokeWidth={3}
           d='M73.92 55.698v338.297a6 6 0 0 0 6 6h59.759'
         />
         <path
-          id='kafkaLine'
+          id='mobileKafkaLine'
           strokeWidth={3}
           d='M73.92 125.641v268.354a6 6 0 0 0 6 6h59.759'
         />
         <path
-          id='icebergLine'
+          id='mobileIcebergLine'
           strokeWidth={3}
           d='M73.92 227.641v166.354a6 6 0 0 0 6 6h59.759'
         />
         <path
-          id='bigQueryLine'
+          id='mobileBigQueryLine'
           strokeWidth={3}
           d='M159.193 45.935v262.718a6 6 0 0 0 6 6.001h17.869a6 6 0 0 1 6.001 6v18.316'
         />
         <path
-          id='dbtLine'
+          id='mobileDbtLine'
           strokeWidth={3}
           d='M159.193 125.641v183.012a6 6 0 0 0 6 6.001h17.869a6 6 0 0 1 6.001 6v18.316'
         />
         <path
-          id='mysqlLine'
+          id='mobileMysqlLine'
           strokeWidth={3}
           d='M159.193 227.641v81.012a6 6 0 0 0 6 6.001h17.869a6 6 0 0 1 6.001 6v18.316'
         />
         <path
-          id='redshiftLine'
+          id='mobileRedshiftLine'
           strokeWidth={3}
           d='M249.92 55.698v252.774a6 6 0 0 1-6 6h-16.098a6 6 0 0 0-6 6v33.025'
         />
         <path
-          id='mongoLine'
+          id='mobileMongoLine'
           strokeWidth={3}
           d='M249.92 125.641v182.831a6 6 0 0 1-6 6h-16.098a6 6 0 0 0-6 6v33.025'
         />
         <path
-          id='hudiLine'
+          id='mobileHudiLine'
           strokeWidth={3}
           d='M249.92 227.641v80.831a6 6 0 0 1-6 6h-16.098a6 6 0 0 0-6 6v33.025'
         />
         <path
-          id='snowflakeLine'
+          id='mobileSnowflakeLine'
           strokeWidth={3}
           d='M334.92 55.698v338.394a6 6 0 0 1-6 6h-68.087'
         />
         <path
-          id='vectorLine'
+          id='mobileVectorLine'
           strokeWidth={3}
           d='M334.92 125.641v268.451a6 6 0 0 1-6 6h-68.087'
         />
         <path
-          id='deltaLakeLine'
+          id='mobileDeltaLakeLine'
           strokeWidth={3}
           d='M334.92 227.641v166.451a6 6 0 0 1-6 6h-68.087'
         />
-        <style>
-          {
-            '@import url(https://fonts.googleapis.com/css2?family=Inter:wght@500);@keyframes pulseEffect{0%{filter:drop-shadow(0 0 50px #fbff46)}to{filter:drop-shadow(0 0 25px #fbff46)}}'
-          }
-        </style>
       </defs>
-      <use stroke='rgba(52, 52, 52, 0.9)' href='#postgresLine' />
-      <use stroke='rgba(52, 52, 52, 0.9)' href='#kafkaLine' />
-      <use stroke='rgba(52, 52, 52, 0.9)' href='#icebergLine' />
-      <use stroke='rgba(52, 52, 52, 0.9)' href='#bigQueryLine' />
-      <use stroke='rgba(52, 52, 52, 0.9)' href='#dbtLine' />
-      <use stroke='rgba(52, 52, 52, 0.9)' href='#mysqlLine' />
-      <use stroke='rgba(52, 52, 52, 0.9)' href='#redshiftLine' />
-      <use stroke='rgba(52, 52, 52, 0.9)' href='#mongoLine' />
-      <use stroke='rgba(52, 52, 52, 0.9)' href='#hudiLine' />
-      <use stroke='rgba(52, 52, 52, 0.9)' href='#snowflakeLine' />
-      <use stroke='rgba(52, 52, 52, 0.9)' href='#vectorLine' />
-      <use stroke='rgba(52, 52, 52, 0.9)' href='#deltaLakeLine' />
+      <use stroke='rgba(52, 52, 52, 0.9)' href='#mobilePostgresLine' />
+      <use stroke='rgba(52, 52, 52, 0.9)' href='#mobileKafkaLine' />
+      <use stroke='rgba(52, 52, 52, 0.9)' href='#mobileIcebergLine' />
+      <use stroke='rgba(52, 52, 52, 0.9)' href='#mobileBigQueryLine' />
+      <use stroke='rgba(52, 52, 52, 0.9)' href='#mobileDbtLine' />
+      <use stroke='rgba(52, 52, 52, 0.9)' href='#mobileMysqlLine' />
+      <use stroke='rgba(52, 52, 52, 0.9)' href='#mobileRedshiftLine' />
+      <use stroke='rgba(52, 52, 52, 0.9)' href='#mobileMongoLine' />
+      <use stroke='rgba(52, 52, 52, 0.9)' href='#mobileHudiLine' />
+      <use stroke='rgba(52, 52, 52, 0.9)' href='#mobileSnowflakeLine' />
+      <use stroke='rgba(52, 52, 52, 0.9)' href='#mobileVectorLine' />
+      <use stroke='rgba(52, 52, 52, 0.9)' href='#mobileDeltaLakeLine' />
       <use
         stroke='#FCFF74'
         strokeDasharray='200 1000'
         strokeWidth={3}
-        href='#postgresLine'>
+        href='#mobilePostgresLine'>
         <animate
-          id='postgresLineAnimate'
+          id='mobilePostgresLineAnimate'
           fill='freeze'
           attributeName='stroke-dashoffset'
-          begin='0s;icebergLineAnimate.end'
+          begin='0s;mobileIcebergLineAnimate.end'
           dur='3s'
           from={200}
           to={-1710}
@@ -108,12 +103,12 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
-        href='#kafkaLine'>
+        href='#mobileKafkaLine'>
         <animate
-          id='kafkaLineAnimate'
+          id='mobileKafkaLineAnimate'
           fill='freeze'
           attributeName='stroke-dashoffset'
-          begin='postgresLineAnimate.end'
+          begin='mobilePostgresLineAnimate.end'
           dur='4.197s'
           from={200}
           to={-1710}
@@ -121,7 +116,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         <animate
           fill='freeze'
           attributeName='stroke-opacity'
-          begin='kafkaLineAnimate.begin-0.01'
+          begin='mobileKafkaLineAnimate.begin-0.01'
           dur='0.01s'
           from={0}
           repeatCount={1}
@@ -133,12 +128,12 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
-        href='#icebergLine'>
+        href='#mobileIcebergLine'>
         <animate
-          id='icebergLineAnimate'
+          id='mobileIcebergLineAnimate'
           fill='freeze'
           attributeName='stroke-dashoffset'
-          begin='kafkaLineAnimate.end'
+          begin='mobileKafkaLineAnimate.end'
           dur='5.2314s'
           from={200}
           to={-1710}
@@ -146,7 +141,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         <animate
           fill='freeze'
           attributeName='stroke-opacity'
-          begin='icebergLineAnimate.begin-0.01'
+          begin='mobileIcebergLineAnimate.begin-0.01'
           dur='0.01s'
           from={0}
           repeatCount={1}
@@ -158,12 +153,12 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
-        href='#bigQueryLine'>
+        href='#mobileBigQueryLine'>
         <animate
-          id='bigQueryLineAnimate'
+          id='mobileBigQueryLineAnimate'
           fill='freeze'
           attributeName='stroke-dashoffset'
-          begin='mysqlLineAnimate.end'
+          begin='mobileMysqlLineAnimate.end'
           dur='3s'
           from={200}
           to={-1710}
@@ -171,7 +166,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         <animate
           fill='freeze'
           attributeName='stroke-opacity'
-          begin='bigQueryLineAnimate.begin-0.01'
+          begin='mobileBigQueryLineAnimate.begin-0.01'
           dur='0.01s'
           from={0}
           repeatCount={1}
@@ -183,12 +178,12 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
-        href='#dbtLine'>
+        href='#mobileDbtLine'>
         <animate
-          id='dbtLineAnimate'
+          id='mobileDbtLineAnimate'
           fill='freeze'
           attributeName='stroke-dashoffset'
-          begin='2s;bigQueryLineAnimate.end'
+          begin='2s;mobileBigQueryLineAnimate.end'
           dur='4.197s'
           from={200}
           to={-1710}
@@ -196,7 +191,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         <animate
           fill='freeze'
           attributeName='stroke-opacity'
-          begin='dbtLineAnimate.begin-0.01'
+          begin='mobileDbtLineAnimate.begin-0.01'
           dur='0.01s'
           from={0}
           repeatCount={1}
@@ -208,12 +203,12 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
-        href='#mysqlLine'>
+        href='#mobileMysqlLine'>
         <animate
-          id='mysqlLineAnimate'
+          id='mobileMysqlLineAnimate'
           fill='freeze'
           attributeName='stroke-dashoffset'
-          begin='dbtLineAnimate.end'
+          begin='mobileDbtLineAnimate.end'
           dur='5.2314s'
           from={200}
           to={-1710}
@@ -221,7 +216,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         <animate
           fill='freeze'
           attributeName='stroke-opacity'
-          begin='mysqlLineAnimate.begin-0.01'
+          begin='mobileMysqlLineAnimate.begin-0.01'
           dur='0.01s'
           from={0}
           repeatCount={1}
@@ -233,12 +228,12 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
-        href='#redshiftLine'>
+        href='#mobileRedshiftLine'>
         <animate
-          id='redshiftLineAnimate'
+          id='mobileRedshiftLineAnimate'
           fill='freeze'
           attributeName='stroke-dashoffset'
-          begin='2.8s;hudiLineAnimate.end'
+          begin='2.8s;mobileHudiLineAnimate.end'
           dur='3s'
           from={200}
           to={-1710}
@@ -246,7 +241,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         <animate
           fill='freeze'
           attributeName='stroke-opacity'
-          begin='redshiftLineAnimate.begin-0.01'
+          begin='mobileRedshiftLineAnimate.begin-0.01'
           dur='0.01s'
           from={0}
           repeatCount={1}
@@ -258,12 +253,12 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
-        href='#mongoLine'>
+        href='#mobileMongoLine'>
         <animate
-          id='mongoLineAnimate'
+          id='mobileMongoLineAnimate'
           fill='freeze'
           attributeName='stroke-dashoffset'
-          begin='redshiftLineAnimate.end'
+          begin='mobileRedshiftLineAnimate.end'
           dur='4.197s'
           from={200}
           to={-1710}
@@ -271,7 +266,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         <animate
           fill='freeze'
           attributeName='stroke-opacity'
-          begin='mongoLineAnimate.begin-0.01'
+          begin='mobileMongoLineAnimate.begin-0.01'
           dur='0.01s'
           from={0}
           repeatCount={1}
@@ -283,12 +278,12 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
-        href='#hudiLine'>
+        href='#mobileHudiLine'>
         <animate
-          id='hudiLineAnimate'
+          id='mobileHudiLineAnimate'
           fill='freeze'
           attributeName='stroke-dashoffset'
-          begin='mongoLineAnimate.end'
+          begin='mobileMongoLineAnimate.end'
           dur='5.2314s'
           from={200}
           to={-1710}
@@ -296,7 +291,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         <animate
           fill='freeze'
           attributeName='stroke-opacity'
-          begin='hudiLineAnimate.begin-0.01'
+          begin='mobileHudiLineAnimate.begin-0.01'
           dur='0.01s'
           from={0}
           repeatCount={1}
@@ -308,12 +303,12 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
-        href='#snowflakeLine'>
+        href='#mobileSnowflakeLine'>
         <animate
-          id='snowflakeLineAnimate'
+          id='mobileSnowflakeLineAnimate'
           fill='freeze'
           attributeName='stroke-dashoffset'
-          begin='deltaLakeLineAnimate.end'
+          begin='mobileDeltaLakeLineAnimate.end'
           dur='3s'
           from={200}
           to={-1710}
@@ -321,7 +316,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         <animate
           fill='freeze'
           attributeName='stroke-opacity'
-          begin='snowflakeLineAnimate.begin-0.01'
+          begin='mobileSnowflakeLineAnimate.begin-0.01'
           dur='0.01s'
           from={0}
           repeatCount={1}
@@ -333,12 +328,12 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
-        href='#vectorLine'>
+        href='#mobileVectorLine'>
         <animate
-          id='vectorLineAnimate'
+          id='mobileVectorLineAnimate'
           fill='freeze'
           attributeName='stroke-dashoffset'
-          begin='snowflakeLineAnimate.end'
+          begin='mobileSnowflakeLineAnimate.end'
           dur='4.197s'
           from={200}
           to={-1710}
@@ -346,7 +341,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         <animate
           fill='freeze'
           attributeName='stroke-opacity'
-          begin='vectorLineAnimate.begin-0.01'
+          begin='mobileVectorLineAnimate.begin-0.01'
           dur='0.01s'
           from={0}
           repeatCount={1}
@@ -357,12 +352,12 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         stroke='#FCFF74'
         strokeDasharray='200 1000'
         strokeWidth={3}
-        href='#deltaLakeLine'>
+        href='#mobileDeltaLakeLine'>
         <animate
-          id='deltaLakeLineAnimate'
+          id='mobileDeltaLakeLineAnimate'
           fill='freeze'
           attributeName='stroke-dashoffset'
-          begin='0.2s;vectorLineAnimate.end'
+          begin='0.2s;mobileVectorLineAnimate.end'
           dur='5.2314s'
           from={200}
           to={-1710}
