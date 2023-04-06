@@ -54,7 +54,7 @@ export const SuiCodeblock: FunctionComponent<CodeblockProps> = ({
             <Tooltip.Root open={isOpen}>
               <Tooltip.Trigger asChild>
                 <button
-                  className={`${styles.copyBtn} codeblock-copy-btn`}
+                  className={`${styles.copyBtn} codeblock-copy-btn hidden md:block`}
                   onClick={onClick}>
                   <DuplicateIcon className='h-4 w-4' />
                 </button>
