@@ -158,7 +158,7 @@ export default function News({
                           {featuredEvent.shortDescription}
                         </div>
 
-                        {featuredEvent.category == 'On-Demand Webinar' ? (
+                        {featuredEvent.category !== 'On-Demand Webinar' ? (
                           <div className='flex items-center space-x-3 mb-4'>
                             <CalendarIcon className='w-6 h-6 text-neutral-200 stroke-1' />
                             <div className=' text-neutral-200'>
