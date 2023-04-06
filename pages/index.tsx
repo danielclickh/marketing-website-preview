@@ -9,8 +9,7 @@ import Layout from '../components/Layout'
 import { getCommonProps } from '../lib/utils/getCommonProps'
 import FAQ from '../components/FAQ'
 import { CUIButton, CUICard, CUILink } from '../components/ClickUI'
-import columnOrientedIllustration from '../public/images/homepage/column-oriented-illustration.svg'
-import rowOrientedIllustration from '../public/images/homepage/row-oriented-illustration-v3.svg'
+
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import JoinCommunity from '../components/JoinCommunity'
 import HomePageTerminal from '../components/Terminal/HomePageTerminal'
@@ -19,7 +18,8 @@ import DevelopersSection from '../components/DevelopersSection'
 import { CSSProperties } from 'react'
 import HRSeparator from '../components/HRSeparator'
 import RowOrientedIllustration from '../components/RowOrientedIllustration'
-import classNames from 'classnames'
+import ColumnOrientedIllustration from '../components/ColumnOrientedIllustration'
+
 
 const yellowPositionStyle = {
   '--left-side': 'auto',
@@ -289,14 +289,7 @@ export default function HomePage({
               </div>
             </div>
             <div>
-              <Image
-                src={columnOrientedIllustration}
-                width='544'
-                height='257'
-                alt='Column Oriented Illustration'
-                className='bg-neutral-900 border border-neutral-700/80 rounded-lg mx-auto'
-                priority
-              />
+              <ColumnOrientedIllustration className='bg-neutral-900 border border-neutral-700/80 rounded-lg mx-auto max-w-full h-auto' />
               <div className='text-neutral-0 font-bold leading-normal mb-3 mt-6 text-center md:text-left'>
                 Column-oriented databases
               </div>
