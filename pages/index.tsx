@@ -19,6 +19,7 @@ import { CSSProperties } from 'react'
 import HRSeparator from '../components/HRSeparator'
 import RowOrientedIllustration from '../components/RowOrientedIllustration'
 import ColumnOrientedIllustration from '../components/ColumnOrientedIllustration'
+import SpeedAnimationSvg from '../components/SpeedAnimation'
 
 
 const yellowPositionStyle = {
@@ -246,12 +247,8 @@ export default function HomePage({
               className='w-full aspect-[401/603]'
             />
           </div>
-          <div className='hidden md:block w-full md:px-12 bg-contain'>
-            <embed
-              id='E'
-              src='speed-animation.svg'
-              className='w-full aspect-[1182/753]'
-            />
+          <div className='hidden md:block w-full md:px-12'>
+            <SpeedAnimationSvg className='max-w-full h-auto' />
           </div>
         </div>
       </div>
