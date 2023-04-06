@@ -9,7 +9,7 @@ function HomePageTerminal() {
       className='relative border bg-neutral-900 shadow-codeblock border-neutral-700/80 rounded-xl text-left flex flex-col -mt-[100px] text-neutral-0'
       style={style}>
       <div className='p-8'>
-        <span className='block whitespace-pre-wrap font-inconsolata w-full relative'>
+        <div className='block whitespace-pre-wrap font-inconsolata w-full relative'>
           <p
             className={`line terminal-type leading-7 ${
               animationCompleted ? 'active' : ''
@@ -84,7 +84,7 @@ function HomePageTerminal() {
             <span className='text-primary-300'>1.07 billion</span> rows, 11.75
             GB (1.30 billion rows/s., 14.27 GB/s.)
           </p>
-        </span>
+        </div>
       </div>
     </div>
   )
