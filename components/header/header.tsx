@@ -134,7 +134,7 @@ export default function Header() {
             <CUIButton
               type='primary'
               weight='medium'
-              href='https://clickhouse.cloud/signUp'
+              href='https://clickhouse.cloud/signUp?loc=nav-get-started'
               segmentEvent={{
                 label: 'Get started',
                 category: 'website-nav'
