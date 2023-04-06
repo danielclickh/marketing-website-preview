@@ -295,7 +295,7 @@ export default function HomePage({
           <CUIButton
             type='secondary'
             className='w-auto group'
-            href='https://clickhouse.com/docs/'
+            href='https://clickhouse.com/docs/en/concepts/why-clickhouse-is-so-fast'
             iconRight={
               <ChevronRightIcon
                 height='16'
