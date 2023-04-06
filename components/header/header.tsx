@@ -84,6 +84,7 @@ export default function Header() {
             className='absolute z-10 flex items-center gap-x-3 hover:no-underline'>
             <Image
               src={logoFull}
+              priority
               width='135'
               height='40'
               alt='ClickHouse logo'
