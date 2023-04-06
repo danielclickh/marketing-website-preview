@@ -104,12 +104,14 @@ function PricingPage({
   return (
     <Layout footerData={footerData} seo={seo}>
       <div className='pricing text-neutral-0 h-full'>
-        <div className=' bg-grid'>
-          <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 mx-auto pt-20'>
+        <div className='bg-grid'>
+          <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 mx-auto pt-16'>
             {hero && (
               <div className='hero'>
                 <div className='flex flex-col items-center'>
-                  <SuiTitle type='h1'>{hero.title}</SuiTitle>
+                  <SuiTitle type='h1' color='white' className='md:!text-6xl'>
+                    {hero.title}
+                  </SuiTitle>
                   <div className='text-neutral-200 mt-6'>
                     {hero.description}
                   </div>
