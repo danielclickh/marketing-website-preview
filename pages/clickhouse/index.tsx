@@ -142,12 +142,12 @@ export default function ClickHouseServerPage({
                 </div>
 
                 <div className='hidden mx-auto md:w-4/12 md:flex mt-4'>
-                  <img
+                  <Image
                     src='/images/clickhouse/oss_hero_image.png'
-                    alt='ClickHouse is fast'
+                    alt='Open source ClickHouse'
                     width={1294}
                     height={812}
-                    className='w-full h-auto min-w-[50rem]'
+                    className='w-full h-auto min-w-[54rem]'
                   />
                 </div>
               </div>

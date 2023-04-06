@@ -115,9 +115,9 @@ export default function CloudPage({ hero, seo, footerData }: CloudData) {
                   </div>
                 </div>
                 <div className='hidden mx-auto md:w-4/12 md:flex mt-4'>
-                  <img
+                  <Image
                     src='/images/cloud/cloud_hero_image.png'
-                    alt='ClickHouse is fast'
+                    alt='ClickHouse Cloud'
                     width={1262}
                     height={523}
                     className='w-full h-auto min-w-[60rem]'
