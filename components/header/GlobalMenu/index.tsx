@@ -89,6 +89,7 @@ const GlobalMenu = () => {
                                       <ListItem
                                         href={deepMenuItem.href}
                                         key={deepMenuItem.name}
+                                        target={deepMenuItem.target}
                                         className='w-full pl-4 group'>
                                         <SuiText
                                           weight='medium'
@@ -126,23 +127,40 @@ const GlobalMenu = () => {
 }
 interface ListItemProps extends HTMLAttributes<HTMLAnchorElement> {
   href?: string
+  target?: string
 }
 const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
-  ({ className, children, title, href, ...props }, forwardedRef) => {
+  ({ className, children, title, href, target, ...props }, forwardedRef) => {
     if (href) {
       return (
         <NavigationMenu.Link asChild>
-          <Link
-            className={classNames(
-              'focus:shadow-[0_0_0_2px] focus:shadow-neutral-750 block rounded select-none px-3 py-2 text-sm w-full leading-none !no-underline outline-none transition-all hover:bg-neutral-700 hover:text-neutral-0 hover:bg-opacity-40 focus:outline-none',
-              className
-            )}
-            href={href}
-            {...props}
-            ref={forwardedRef}>
-            <div className='font-medium'>{title}</div>
-            <span className=''>{children}</span>
-          </Link>
+          {href.includes('blog') ? (
+            <a
+              className={classNames(
+                'focus:shadow-[0_0_0_2px] focus:shadow-neutral-750 block rounded select-none px-3 py-2 text-sm w-full leading-none !no-underline outline-none transition-all hover:bg-neutral-700 hover:text-neutral-0 hover:bg-opacity-40 focus:outline-none',
+                className
+              )}
+              href={href}
+              target={target}
+              {...props}
+              ref={forwardedRef}>
+              <div className='font-medium'>{title}</div>
+              <span className=''>{children}</span>
+            </a>
+          ) : (
+            <Link
+              className={classNames(
+                'focus:shadow-[0_0_0_2px] focus:shadow-neutral-750 block rounded select-none px-3 py-2 text-sm w-full leading-none !no-underline outline-none transition-all hover:bg-neutral-700 hover:text-neutral-0 hover:bg-opacity-40 focus:outline-none',
+                className
+              )}
+              href={href}
+              target={target}
+              {...props}
+              ref={forwardedRef}>
+              <div className='font-medium'>{title}</div>
+              <span className=''>{children}</span>
+            </Link>
+          )}
         </NavigationMenu.Link>
       )
     }
