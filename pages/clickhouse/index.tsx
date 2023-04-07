@@ -203,53 +203,58 @@ export default function ClickHouseServerPage({
               </div>
 
               <div className='grid grid-cols-1 md:grid-cols-3 gap-10 px-4 md:px-0 mx-auto mt-10 md:mt-0 content-baseline'>
-                <CUICard title='Strives for CPU efficiency' className='p-6'>
+                <CUICard
+                  title='Strives for CPU efficiency'
+                  className='py-6 px-4'>
                   <p className='font-inconsolata text-primary-300'>
                     Vectorization
                   </p>
-                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2 xl:px-8'>
+                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2 xl:px-4'>
                     Maximizes CPU efficiency
                   </h3>
 
                   <SuiText
                     size='sm'
                     color='secondary'
-                    className='text-center px-0 xl:px-8'>
-                    Vectorized query execution involves relevant SIMD processor
+                    className='text-center px-0 xl:px-4'>
+                    Vectorized query execution leverages SIMD processor
                     instructions and runtime code generation. Processing data in
                     columns increases CPU cache line hit rate.
                   </SuiText>
                 </CUICard>
 
-                <CUICard title='Strives for CPU efficiency' className='p-6'>
+                <CUICard
+                  title='Strives for CPU efficiency'
+                  className='py-6 px-4'>
                   <p className='font-inconsolata text-primary-300'>Locality</p>
-                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2 xl:px-8'>
-                    Optimizes disk drive access
+                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2 xl:px-4'>
+                    Optimizes disk access
                   </h3>
 
                   <SuiText
                     size='sm'
                     color='secondary'
-                    className='text-center px-0 xl:px-8'>
-                    ClickHouse minimizes the number of seeks for range queries,
-                    which increases the efficiency of using rotating disk
-                    drives, as it maintains locality of reference for
-                    continually stored data.
+                    className='text-center px-0 xl:px-4'>
+                    ClickHouse minimizes the number of seeks for range queries
+                    to increase efficiency of using disk drives and maintain
+                    locality of reference for continually stored data.
                   </SuiText>
                 </CUICard>
 
-                <CUICard title='Strives for CPU efficiency' className='p-6'>
+                <CUICard
+                  title='Strives for CPU efficiency'
+                  className='py-6 px-4'>
                   <p className='font-inconsolata text-primary-300'>
                     Throughput
                   </p>
-                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2 xl:px-8'>
+                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2 xl:px-4'>
                     Minimizes data transfers
                   </h3>
 
                   <SuiText
                     size='sm'
                     color='secondary'
-                    className='text-center px-0 xl:px-8'>
+                    className='text-center px-0 xl:px-4'>
                     ClickHouse enables companies to manage their data and create
                     reports without using specialized networks that are aimed at
                     high-performance computing.
