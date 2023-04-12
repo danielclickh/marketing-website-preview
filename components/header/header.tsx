@@ -119,9 +119,9 @@ export default function Header({ github: { stars } }: HeaderProps) {
                 </svg>
 
                 <span className='text-sm font-medium leading-none'>
-                  {Intl.NumberFormat('en', { notation: 'compact' }).format(
-                    stars
-                  )}
+                  {Intl.NumberFormat('en', { notation: 'compact' })
+                    .format(stars)
+                    .toLowerCase()}
                 </span>
               </div>
             </CUILink>

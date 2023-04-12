@@ -59,7 +59,10 @@ function JoinCommunity({ github: { stars } }: Props) {
           </span>
         </div>
         <div className='font-basier text-5xl md:text-7.5xl leading-none pt-32 md:pt-0 right-30 md:right-auto absolute md:relative'>
-          {Intl.NumberFormat('en', { notation: 'compact' }).format(stars)}+
+          {Intl.NumberFormat('en', { notation: 'compact' })
+            .format(stars)
+            .toLowerCase()}
+          +
           <span className='absolute top-full left-0 text-primary-300 text-xl md:text-2.75xl leading-snug'>
             Stars
           </span>

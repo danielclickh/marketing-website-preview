@@ -3,3 +3,11 @@
     @apply mb-2.5 #{!important};
   }
 }
+
+.codeBlock {
+  @apply relative;
+  &::before {
+    @apply top-0 right-full absolute;
+    content: "$ ";
+  }
+}

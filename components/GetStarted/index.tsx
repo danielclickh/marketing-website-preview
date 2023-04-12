@@ -2,6 +2,7 @@ import Markdown from '../Markdown'
 import { SuiCodeblock, SuiTitle } from '../sui'
 import { GettingStartedData } from './types'
 import { CUILink } from '../ClickUI'
+import styles from './GetStarted.module.scss'
 
 export default function FetchGetStarted({ platforms }: GettingStartedData) {
   return (
@@ -22,7 +23,9 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
           </div>
         </div>
         <SuiCodeblock className='w-full md:w-full self-center overflow-hidden show-copy-paste'>
-          <Markdown ignoreAnchor>{platforms[0].instructions}</Markdown>
+          <Markdown ignoreAnchor className={styles.codeBlock}>
+            {platforms[0].instructions}
+          </Markdown>
         </SuiCodeblock>
         <div className='text-sm font-medium text-neutral-500 mt-4'>
           Or install for{' '}
