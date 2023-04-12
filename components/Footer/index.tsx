@@ -88,7 +88,7 @@ export default function Footer({
             <button
               onClick={openCookie}
               className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length} hover:text-neutral-0 whitespace-nowrap`}>
-              Cookie Policy
+              Cookie Settings
             </button>
           </div>
         </div>
