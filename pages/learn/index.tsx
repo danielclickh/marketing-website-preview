@@ -109,9 +109,14 @@ export const getStaticProps: GetStaticProps<LearnProps> =
     }
   }
 
-function LearnPage({ upcomingEvents, footerData, seo }: LearnProps) {
+function LearnPage({
+  upcomingEvents,
+  footerData,
+  headerData,
+  seo
+}: LearnProps) {
   return (
-    <Layout footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='relative text-center'>
         <SuiTitle
           type='h1'

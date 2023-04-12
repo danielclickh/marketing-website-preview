@@ -171,6 +171,7 @@ function CustomerStoriesPage({
   useCaseItems,
   seo,
   customerStories,
+  headerData,
   footerData
 }: UseCasesData) {
   const [visibleTestimonials, setVisibleTestimonials] = useState(6)
@@ -179,7 +180,7 @@ function CustomerStoriesPage({
     setVisibleTestimonials((prevValue) => prevValue + 6)
   }
   return (
-    <Layout footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-10'>
         <div className='flex container mx-auto max-w-7xl flex-col px-4 md:px-8 2xl:px-0'>
           <div className='flex flex-col text-center mx-auto pt-6 max-w-screen-sm'>

@@ -1,6 +1,6 @@
 import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
 import { findOne } from '../../lib/api/strapi'
-import { StrapiImage, StrapiPicture } from '../../components/StrapiElements'
+import { StrapiPicture } from '../../components/StrapiElements'
 import BulletPoint from '../../components/BulletPoint'
 import GetStarted from '../../components/GetStarted'
 import { ClickhouseData } from '../../types/clickhouse'
@@ -23,18 +23,6 @@ export const getStaticProps: GetStaticProps<ClickhouseData> =
         'hero.gitButton.darkIconPng',
         'hero.gitButton.lightIconPng',
         'hero.backgroundPng',
-        'features1',
-        'features1.items',
-        'features1.items.iconSvg',
-        'features2',
-        'features2.items',
-        'features2.items.iconSvg',
-        'features3',
-        'features3.mainItem',
-        'features3.iconSvg',
-        'features3.items',
-        'features4',
-        'features4.items',
         'features5',
         'features5.iconSvg',
         'features5.items',
@@ -55,19 +43,16 @@ export const getStaticProps: GetStaticProps<ClickhouseData> =
 
 export default function ClickHouseServerPage({
   hero,
-  features1,
-  features2,
-  features3,
-  features4,
   features5,
   seo,
   platforms,
+  headerData,
   footerData
 }: ClickhouseData) {
   const { description, mainButton, secondaryButton, gitButton } = hero
   return (
     <>
-      <Layout footerData={footerData} seo={seo}>
+      <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='lg:bg-speed-lines bg-center bg-no-repeat bg-contain'>
           <div className='pt-10 relative bg-grid overflow-x-hidden'>
             <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 px-4 md:pb-24 md:px-8 2xl:px-0 lg:min-h-[630px]'>

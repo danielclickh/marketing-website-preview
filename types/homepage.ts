@@ -13,6 +13,7 @@ import {
   StrapiImageType,
   StrapiLink
 } from '../lib/api/strapi/types'
+import { HeaderProps } from '../components/header/types'
 
 export interface Feature {
   id: string
@@ -106,6 +107,7 @@ export interface NewsLetterData {
 
 export interface CommonProps {
   footerData: FooterData
+  headerData: HeaderProps
   seo?: SeoMetadata
   platforms: Array<GettingStartedPlatform>
 }

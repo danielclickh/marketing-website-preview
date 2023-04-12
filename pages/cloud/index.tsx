@@ -45,12 +45,17 @@ export const getStaticProps: GetStaticProps<CloudData> =
     }
   }
 
-export default function CloudPage({ hero, seo, footerData }: CloudData) {
+export default function CloudPage({
+  hero,
+  seo,
+  headerData,
+  footerData
+}: CloudData) {
   const { ctaButton } = hero
 
   return (
     <>
-      <Layout footerData={footerData} seo={seo}>
+      <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='pt-10 lg:bg-speed-lines bg-center bg-no-repeat bg-contain'>
           <div className='relative overflow-x-hidden'>
             <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 px-4 md:pb-24 md:px-8 2xl:px-0 lg:min-h-[630px]'>

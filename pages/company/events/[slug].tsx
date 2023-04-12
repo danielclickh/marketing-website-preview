@@ -10,7 +10,6 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ParamsType } from '../../../types/homepage'
 import { EventProps, EventType } from '../../../types/events'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
-import { CalendarIcon } from '@heroicons/react/outline'
 import EventPost from '../../../components/EventPostList/EventPost'
 import Link from 'next/link'
 
@@ -106,20 +105,18 @@ function EventPage({
   hostedBy,
   category,
   title,
-  description,
   richDescription,
   form,
   localDatetime,
   recordedVimeoUrl,
   footerData,
-  platforms,
+  headerData,
   recentEvents,
-  datetimeAndTimezoneString,
   lightFeatureImagePng,
   seo
 }: EventProps) {
   return (
-    <Layout footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='flex flex-col'>
         <EventsContainer
           localDatetime={localDatetime}

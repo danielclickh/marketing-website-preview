@@ -17,12 +17,12 @@ import { ChevronRightIcon, MenuIcon, XIcon } from '@heroicons/react/solid'
 import { CUIButton, CUILink } from '../ClickUI'
 import menuItems from './menuItems.json'
 import logoFull from '../../public/logo-full.svg'
-import { MenuItem as MenuItemType } from './types'
+import { HeaderProps, MenuItem as MenuItemType } from './types'
 import MobileMenuItem from './MobileMenuItem'
 import GlobalMenu from './GlobalMenu'
 const headerMenuItems = menuItems as Array<MenuItemType>
 
-export default function Header() {
+export default function Header({ github: { stars } }: HeaderProps) {
   const navBarRef = useRef<HTMLDivElement>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const dropdownContainerRef = useRef<HTMLDivElement>(null)
@@ -118,7 +118,11 @@ export default function Header() {
                   />
                 </svg>
 
-                <span className='text-sm font-medium leading-none'>27.6k</span>
+                <span className='text-sm font-medium leading-none'>
+                  {Intl.NumberFormat('en', { notation: 'compact' }).format(
+                    stars
+                  )}
+                </span>
               </div>
             </CUILink>
             <CUILink

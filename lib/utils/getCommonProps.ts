@@ -3,12 +3,11 @@ import { getFooterData } from '../../components/Footer/getFooterData'
 import { FooterData } from '../../components/Footer/types'
 import { getGetStartedData } from '../../components/GetStarted/getStartedData'
 import { GettingStartedPlatform } from '../../components/GetStarted/types'
+import { HeaderProps } from '../../components/header/types'
 interface Props {
   footerData: FooterData
   platforms: Array<GettingStartedPlatform>
-  github: {
-    stars: number
-  }
+  headerData: HeaderProps
 }
 
 export async function getCommonProps(): Promise<Props> {
@@ -17,13 +16,15 @@ export async function getCommonProps(): Promise<Props> {
   const githubData = await fetch(
     'https://api.github.com/repos/ClickHouse/ClickHouse'
   )
-  const { data } = await githubData.json()
-  const stars = data?.stargazers_count ?? 0
+  const data = await githubData.json()
+  const stars = data?.stargazers_count ?? 28000
   return {
     footerData,
     platforms: getStartedData.platforms,
-    github: {
-      stars
+    headerData: {
+      github: {
+        stars
+      }
     }
   }
 }

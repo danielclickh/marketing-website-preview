@@ -34,3 +34,7 @@ export interface RegularNavItem {
 }
 
 export type MenuItem = HeaderNavItem | HeaderLinkItem
+
+export interface HeaderProps {
+  github: { stars: number }
+}
