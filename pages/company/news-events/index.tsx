@@ -126,11 +126,12 @@ export default function News({
   pressReleases,
   allEvents,
   footerData,
+  headerData,
   recentEvents,
   seo
 }: NewsEventProps) {
   return (
-    <Layout footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div>
         <h1 className='pt-10 lg:pt-20 mb-10 lg:mb-16 mx-auto text-center font-basier text-4xl md:text-5.5xl text-neutral-100'>
           {title}

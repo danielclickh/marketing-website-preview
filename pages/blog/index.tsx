@@ -72,10 +72,11 @@ export default function BlogsPage({
   categories,
   title,
   seo,
+  headerData,
   footerData
 }: BlogProps) {
   return (
-    <Layout footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <SuiTitle
         type='h1'
         className='pt-10 lg:pt-20 mb-10 lg:mb-16 mx-auto text-center text-neutral-100'>

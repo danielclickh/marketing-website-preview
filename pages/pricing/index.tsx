@@ -95,6 +95,7 @@ function PricingPage({
   pricingPlans,
   seo,
   cloudProviders,
+  headerData,
   footerData
 }: PricingPageProps) {
   const regionList: RegionPricingWithIcon[] = pricingByRegion.map((item) => ({
@@ -102,7 +103,7 @@ function PricingPage({
     regionFlagPNG: <StrapiImage {...item.regionFlagPNG} alt={item.region} />
   }))
   return (
-    <Layout footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pricing text-neutral-0 h-full'>
         <div className='bg-grid'>
           <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 mx-auto pt-16'>

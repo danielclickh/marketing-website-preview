@@ -17,9 +17,13 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       }
     }
   }
-export default function NotFoundPage({ footerData, seo }: CommonProps) {
+export default function NotFoundPage({
+  footerData,
+  headerData,
+  seo
+}: CommonProps) {
   return (
-    <Layout footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='grid items-center h-screen overflow-hidden'>
         <div className='bg-neutral-900 flex flex-col px-8 py-10 md:flex-row md:px-10 md:border md:border-c4/10 mx-auto max-w-screen-sm divide-y-2 md:divide-x-2 md:divide-y-0'>
           <div className='flex flex-col items-start pb-10 md:pb-0'>

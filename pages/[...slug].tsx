@@ -67,11 +67,12 @@ export default function RichContentPage({
   leftContent,
   rightContent,
   footerData,
+  headerData,
   seo,
   slug
 }: RichContentPageProps) {
   return (
-    <Layout footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {slug === 'support/program' ? (
         <SupportProgram
           {...{

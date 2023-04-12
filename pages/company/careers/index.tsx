@@ -89,10 +89,10 @@ export default function CareersPage({
   positionsTitle,
   seo,
   footerData,
-  platforms
+  headerData
 }: CareersData) {
   return (
-    <Layout footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-10'>
         <div className='relative pt-10'>
           <div className='bg-primary-300 absolute inset-0 transform -skew-y-2 lg:max-h-96 max-w-7xl rounded-md mx-auto'></div>

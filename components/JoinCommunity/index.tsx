@@ -1,10 +1,13 @@
-import Image from 'next/image'
 import React from 'react'
-import { CUILink } from '../ClickUI'
 import SocialIcon from '../SocialIcon'
 import { SuiTitle } from '../sui'
 
-function JoinCommunity() {
+interface Props {
+  github: {
+    stars: number
+  }
+}
+function JoinCommunity({ github: { stars } }: Props) {
   return (
     <div className='flex flex-col items-center pb-16 md:pb-16 md:px-8 2xl:px-0 md:flex-row justify-between w-full section-container gap-8'>
       <div className='flex flex-col items-start max-w-xl gap-10'>
@@ -56,7 +59,10 @@ function JoinCommunity() {
           </span>
         </div>
         <div className='font-basier text-5xl md:text-7.5xl leading-none pt-32 md:pt-0 right-30 md:right-auto absolute md:relative'>
-          27k+
+          {Intl.NumberFormat('en', { notation: 'compact' })
+            .format(stars)
+            .toLowerCase()}
+          +
           <span className='absolute top-full left-0 text-primary-300 text-xl md:text-2.75xl leading-snug'>
             Stars
           </span>

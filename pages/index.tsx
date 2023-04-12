@@ -131,10 +131,11 @@ export default function HomePage({
   hero,
   seo,
   footerData,
+  headerData,
   platforms
 }: HomePageProps) {
   return (
-    <Layout footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage overflow-hidden bg-grid'>
         <div className='flex flex-col pb-20 lg:pb-44 pt-16 md:pt-20 px-8 md:px-0 relative gap-24 justify-center '>
           <div className='flex flex-col w-full mx-auto max-w-2xl'>
@@ -368,7 +369,7 @@ export default function HomePage({
         </div>
       </div>
       <HRSeparator className='my-24' />
-      <JoinCommunity />
+      <JoinCommunity github={headerData.github} />
       <HRSeparator className='my-24' />
       <DevelopersSection />
       <HRSeparator className='my-24' />

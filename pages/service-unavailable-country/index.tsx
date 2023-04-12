@@ -39,10 +39,11 @@ function ServiceUnavailableCountryPage({
   ctaButton,
   platforms,
   footerData,
+  headerData,
   seo
 }: ServiceProps) {
   return (
-    <Layout footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='service_unavailable_country px-3'>
         <SuiPanel
           color='bg-c1'

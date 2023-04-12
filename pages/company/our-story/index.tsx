@@ -18,13 +18,6 @@ export const getStaticProps: GetStaticProps<OurStoryData> =
   async function getStaticProps() {
     const params = {
       populate: [
-        'hero',
-        'hero.imagePng',
-        'hero.offices',
-        'hero.offices.flagPng',
-        'aboutUs',
-        'aboutUs.items',
-        'aboutUs.items.imagePng',
         'ourHistory',
         'ourHistory.items',
         'hiring',
@@ -52,19 +45,16 @@ export const getStaticProps: GetStaticProps<OurStoryData> =
   }
 
 export default function OurStoryPage({
-  hero,
-  aboutUs,
   ourHistory,
   hiring,
   team,
   footerData,
-  platforms,
+  headerData,
   seo
 }: OurStoryData) {
-  const { title, description, imagePng, offices } = hero
   return (
     <>
-      <Layout footerData={footerData} seo={seo}>
+      <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='pt-10 relative'>
           <div className='pt-10'>
             <div className='flex container mx-auto flex-col px-8 2xl:px-0'>

@@ -33,10 +33,11 @@ export default function ContactPage({
   description,
   contactForm,
   footerData,
+  headerData,
   seo
 }: ContactProps) {
   return (
-    <Layout footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-10'>
         <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
           <div className='flex flex-col text-center mx-auto pt-6'>

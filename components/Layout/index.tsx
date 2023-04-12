@@ -4,16 +4,18 @@ import Footer from '../Footer'
 import { FooterData } from '../Footer/types'
 import { Header } from '../header'
 import SeoContainer from '../SeoContainer'
+import { HeaderProps } from '../header/types'
 interface Props {
   children: ReactNode
   footerData: FooterData
+  headerData: HeaderProps
   seo?: SeoMetadata
 }
-function Layout({ children, footerData, seo }: Props) {
+function Layout({ children, footerData, headerData, seo }: Props) {
   return (
     <div>
       {seo && <SeoContainer {...seo} />}
-      <Header />
+      <Header {...headerData} />
       {children}
       <Footer {...footerData} />
     </div>

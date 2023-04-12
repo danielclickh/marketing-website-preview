@@ -35,7 +35,6 @@ const highlights = [
 ]
 
 const btnText = 'ClickHouse on AWS Marketplace'
-const title = ''
 const description = `The fastest and most resource-efficient analytical database, ClickHouse, is now available as a service on AWS. ClickHouse Cloud on AWS allows you to experience the speed and scalability of the fastest OLAP database on earth without any need to manage the infrastructure.
 
 ClickHouse has been reviewed by AWS and is an official AWS Partner, and ClickHouse Cloud is Qualified Software on AWS.
@@ -54,9 +53,9 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-function PartnersPage({ seo, footerData }: CommonProps) {
+function PartnersPage({ seo, headerData, footerData }: CommonProps) {
   return (
-    <Layout footerData={footerData} seo={seo}>
+    <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-20 md:pt-30'>
         <div className='min-h-screen pb-10 md:pb-20 mx-10 '>
           <div className='flex flex-col md:flex-row-reverse w-full mx-auto gap-20 mb-20 md:mb-36 justify-center items-center'>
