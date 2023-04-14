@@ -298,7 +298,7 @@ function LearnPage({
           ClickHouse! Our team is always happy to support and answer any
           questions you may have about ClickHouse development. You can also
           <Link
-            href='/company/news-events/'
+            href='https://learn.clickhouse.com/visitor_class_catalog/category/115910'
             className='underline ml-2 hover:text-neutral-0 font-semibold'>
             access our list of older events
           </Link>{' '}
