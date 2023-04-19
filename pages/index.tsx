@@ -165,7 +165,7 @@ export default function HomePage({
                     }}
                     linkClass='w-full max-w-[14rem]'
                     className='w-full'>
-                    Start free trial
+                    Deploy in 2 min
                   </CUIButton>
                   <CUIButton
                     type='secondary'
