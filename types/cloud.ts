@@ -16,8 +16,15 @@ export interface CloudHero {
   backgroundSvg: StrapiImageType
 }
 
+export type CloudProviderType = {
+  title: string
+  lightProviderPngs: StrapiImageType[]
+  darkProviderPngs: StrapiImageType[]
+}
+
 export interface CloudData extends CommonProps {
   hero: CloudHero
+  cloudProviders: Array<CloudProviderType>
   features: Array<Feature>
   screenshotsAndBullets: Array<ScreenshotAndBullets>
 }

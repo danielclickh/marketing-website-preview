@@ -1,4 +1,5 @@
 import { SuiText, SuiTitle } from '../../components/sui'
+import CloudProviders from '../../components/CloudProviders'
 
 import { findOne } from '../../lib/api/strapi'
 import BulletPoint from '../../components/BulletPoint'
@@ -13,6 +14,7 @@ import integrations from './integrations.json'
 import features from './features.json'
 import featureBlocks from './feature_blocks.json'
 import { ChevronRightIcon } from '@heroicons/react/solid'
+import Link from 'next/link'
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -56,12 +58,12 @@ export default function CloudPage({
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
-        <div className='pt-10 lg:bg-speed-lines bg-center bg-no-repeat bg-contain'>
+        <div className='bg-contain bg-center bg-no-repeat pt-10 lg:bg-speed-lines'>
           <div className='relative overflow-x-hidden'>
-            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 px-4 md:pb-24 md:px-8 2xl:px-0 lg:min-h-[630px]'>
+            <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>
               <div className='flex'>
-                <div className='md:w-7/12 md:mt-16 flex-col text-center md:text-left'>
-                  <h1 className='font-basier text-4xl mb-6 md:text-5.5xl leading-tight font-semibold'>
+                <div className='flex-col text-center md:mt-16 md:w-7/12 md:text-left'>
+                  <h1 className='mb-6 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
                     Serverless.{' '}
                     <span className='tilted tilted-yellow'>
                       <span className='tilted-content'>Simple.</span>
@@ -78,7 +80,7 @@ export default function CloudPage({
                     can spend more time getting insight out of the fastest
                     database on earth.
                   </SuiText>
-                  <div className='flex flex-col md:flex-row gap-8 mt-8 items-center'>
+                  <div className='mt-8 flex flex-col items-center gap-8 md:flex-row'>
                     {ctaButton && (
                       <div className='flex justify-center md:justify-start'>
                         <CUIButton
@@ -97,47 +99,30 @@ export default function CloudPage({
                         </CUIButton>
                       </div>
                     )}
-                    <div className='flex space-x-6 justify-center md:justify-start'>
-                      <Image
-                        src='/images/cloud/provider_aws.png'
-                        alt='AWS ClickHouse provider'
-                        width={52}
-                        height={40}
-                      />
-                      <Image
-                        src='/images/cloud/provider_gcp.png'
-                        alt='AWS ClickHouse provider'
-                        width={64}
-                        height={40}
-                      />
-                      <Image
-                        src='/images/cloud/provider_azure.png'
-                        alt='AWS ClickHouse provider'
-                        width={64}
-                        height={40}
-                      />
+                    <div className='flex items-center justify-center space-x-6 md:justify-start'>
+                      <CloudProviders cloudProviders={hero.cloudProviders} />
                     </div>
                   </div>
                 </div>
-                <div className='hidden mx-auto md:w-4/12 md:flex mt-4'>
+                <div className='mx-auto mt-4 hidden md:flex md:w-4/12'>
                   <Image
                     src='/images/cloud/cloud_hero_image.png'
                     alt='ClickHouse Cloud'
                     loading='eager'
                     width={1262}
                     height={523}
-                    className='w-full h-auto min-w-[60rem]'
+                    className='h-auto w-full min-w-[60rem]'
                   />
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className='text-neutral-0 bg-neutral-725'>
-          <div className='flex container mx-auto flex-col max-w-7xl pb-16 px-4 sm:px-8 md:px-8 2xl:px-0  pt-16'>
+        <div className='bg-neutral-725 text-neutral-0'>
+          <div className='container mx-auto flex max-w-7xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8  2xl:px-0'>
             <div className='feature-container'>
-              {features.map((feature) => (
-                <div className='col' key={feature.id}>
+              {features.map((feature, index: number) => (
+                <div className='col' key={index}>
                   <div className='flex items-start gap-4'>
                     <Image
                       src={feature.icon}
@@ -146,10 +131,10 @@ export default function CloudPage({
                       alt={feature.title}
                     />
                     <div>
-                      <h4 className='font-bold mb-3 font-inter'>
+                      <h4 className='mb-3 font-inter font-bold'>
                         {feature.title}
                       </h4>
-                      <p className='font-light font-inter leading-relaxed text-sm text-neutral-200'>
+                      <p className='font-inter text-sm font-light leading-relaxed text-neutral-200'>
                         {feature.content}
                       </p>
                     </div>
@@ -160,17 +145,16 @@ export default function CloudPage({
           </div>
         </div>
 
-        <div className='flex w-full text-neutral-0 pb-12 gap-y-4 md:gap-y-28 bg-shadow-element yellow-shadow'>
-          <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-24 pb-8 text-center px-8 2xl:px-0 gap-y-24'>
+        <div className='bg-shadow-element yellow-shadow flex w-full gap-y-4 pb-12 text-neutral-0 md:gap-y-28'>
+          <div className='container mx-auto flex max-w-7xl flex-col gap-y-24 bg-opacity-10 px-8 pt-24 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
             {featureBlocks.map((item, index: number) => (
-              <>
+              <div key={index}>
                 <div
-                  className={`flex flex-col gap-x-24 items-center ${
+                  className={`flex flex-col items-center gap-x-24 ${
                     index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  } justify-center`}
-                  key={item.title}>
-                  <div className='flex flex-col md:text-left md:w-1/2 mb-12 md:mb-0'>
-                    <div className='md:border-l-4 border-yellow-200 md:pl-8 '>
+                  } justify-center`}>
+                  <div className='mb-12 flex flex-col md:mb-0 md:w-1/2 md:text-left'>
+                    <div className='border-yellow-200 md:border-l-4 md:pl-8 '>
                       <SuiTitle
                         type='h3'
                         className='mb-4 !text-4xl'
@@ -180,32 +164,29 @@ export default function CloudPage({
                       <SuiText size='base' color='secondary' className='mb-8'>
                         {item.description}
                       </SuiText>
-                      {item.bullets.map((bullet) => (
-                        <BulletPoint
-                          key={`${item.title}-${bullet.text}`}
-                          text={bullet.text}
-                        />
+                      {item.bullets.map((bullet, index: number) => (
+                        <BulletPoint key={index} text={bullet.text} />
                       ))}
                     </div>
                   </div>
-                  <div className='flex md:w-1/2 justify-center items-center'>
+                  <div className='flex items-center justify-center md:w-1/2'>
                     <Image
                       src={item.image}
                       alt={item.title}
                       width={item.image_width}
                       height={item.image_height}
-                      className='md:h-fit w-full'
+                      className='w-full md:h-fit'
                     />
                   </div>
                 </div>
                 <HRSeparator className='my-0' />
-              </>
+              </div>
             ))}
           </div>
         </div>
         <div className='relative flex flex-col gap-y-28'>
-          <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element yellow-shadow'>
-            <div className='flex flex-col items-center w-full'>
+          <div className='section-container bg-shadow-element yellow-shadow flex w-full flex-col items-center justify-between self-center'>
+            <div className='flex w-full flex-col items-center'>
               <Image
                 src='/images/cloud/section_integrations.svg'
                 alt='ClickHouse integrations'
@@ -215,14 +196,14 @@ export default function CloudPage({
               <SuiTitle type='h2' className='mt-8 mb-6'>
                 Powerful integrations
               </SuiTitle>
-              <div className='text-neutral-200 max-w-2xl leading-normal text-center mx-auto'>
+              <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200'>
                 We curate the most popular ways to work ClickHouse. Explore our
                 growing library of ecosystem integrations for data ingestion,
                 data visualisation, language clients and SQL clients.
               </div>
-              <div className='flex gap-6 mt-16 mx-auto justify-center md:max-w-[552px] flex-wrap'>
+              <div className='mx-auto mt-16 flex flex-wrap justify-center gap-6 md:max-w-[552px]'>
                 {integrations.map((integration) => (
-                  <CUICard className='p-4'>
+                  <CUICard className='p-4' key={integration.name}>
                     <Image
                       src={integration.logo}
                       width={36}
@@ -238,8 +219,8 @@ export default function CloudPage({
 
         <HRSeparator className='my-24' />
         <div className='relative flex flex-col gap-y-28 pb-24'>
-          <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element-right red-shadow'>
-            <div className='flex flex-col items-center w-full'>
+          <div className='section-container bg-shadow-element-right red-shadow flex w-full flex-col items-center justify-between self-center'>
+            <div className='flex w-full flex-col items-center'>
               <Image
                 src='/images/cloud/section_support.svg'
                 alt='Fast Icon'
@@ -249,13 +230,13 @@ export default function CloudPage({
               <SuiTitle type='h2' className='mt-8 mb-6'>
                 All in one support
               </SuiTitle>
-              <div className='text-neutral-200 max-w-2xl leading-normal text-center mx-auto px-4 md:px-0'>
+              <div className='mx-auto max-w-2xl px-4 text-center leading-normal text-neutral-200 md:px-0'>
                 ClickHouse provides the most comprehensive, consultative cloud
                 support in the industry bundled with your ClickHouse Cloud
                 service.
               </div>
 
-              <ul className='flex flex-col gap-2 max-w-lg justify-start py-8 px-4 md:px-0'>
+              <ul className='flex max-w-lg flex-col justify-start gap-2 py-8 px-4 md:px-0'>
                 <li>
                   <div className='flex items-center gap-4'>
                     <Image
@@ -311,12 +292,12 @@ export default function CloudPage({
 
             <CUIButton
               type='secondary'
-              className='w-auto group'
+              className='group w-auto'
               href='/support/program/'
               iconRight={
                 <ChevronRightIcon
                   height='18'
-                  className='group-hover:translate-x-1/2 pt-0.5 transition'
+                  className='pt-0.5 transition group-hover:translate-x-1/2'
                 />
               }>
               Learn more
@@ -324,10 +305,10 @@ export default function CloudPage({
           </div>
         </div>
 
-        <div className='pb-16 section-container md:px-8 2xl:px-0 '>
-          <div className='bg-primary-300 text-neutral-0 w-full rounded-lg flip-selection py-16 px-4'>
-            <div className='flex container mx-auto flex-col 2xl:px-0'>
-              <div className='flex flex-col text-center mx-auto'>
+        <div className='section-container pb-16 md:px-8 2xl:px-0 '>
+          <div className='flip-selection w-full rounded-lg bg-primary-300 py-16 px-4 text-neutral-0'>
+            <div className='container mx-auto flex flex-col 2xl:px-0'>
+              <div className='mx-auto flex flex-col text-center'>
                 <SuiTitle type='h2' color='text-default' className='mb-6 '>
                   Get started for free
                 </SuiTitle>
@@ -340,12 +321,12 @@ export default function CloudPage({
                   <CUIButton
                     type='primary-dark'
                     size='lg'
-                    className='mx-auto mt-8 group'
+                    className='group mx-auto mt-8'
                     href='https://clickhouse.cloud/signUp?loc=cloud-page-get-started-footer'
                     iconRight={
                       <ChevronRightIcon
                         height='18'
-                        className='group-hover:translate-x-1/2 pt-0.5 transition'
+                        className='pt-0.5 transition group-hover:translate-x-1/2'
                       />
                     }
                     segmentEvent={{
