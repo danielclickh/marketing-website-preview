@@ -56,6 +56,12 @@
 				"name": "Use cases",
 				"href": "/use-cases",
 				"target": "_self"
+			},
+			{
+				"id": 20,
+				"name": "Trust Center",
+				"href": "https://trust.clickhouse.com",
+				"target": "_blank"
 			}
 		]
 	},
