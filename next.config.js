@@ -179,6 +179,13 @@ const nextConfig = {
         source: '/customer-stories',
         destination: '/use-cases',
         permanent: true
+      },
+
+      {
+        source: '/qr/kubecon-amsterdam-2023',
+        destination:
+          '/company/events/kubecon-amsterdam-2023?utm_source=kubecon&utm_medium=event&utm_campaign=cup',
+        permanent: true
       }
     ]
   }
