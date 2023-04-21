@@ -200,11 +200,11 @@ function ContactForm({
         />
       </div>
 
-      <div className='flex w-64 mx-auto'>
+      <div className='mx-auto flex w-full'>
         <SuiButton
           type='primary'
           onClick={onSubmit}
-          className='w-full hover:no-underline hover:translate-y-0 hover:bg-primary-400 rounded-md'>
+          className='w-full rounded-md hover:translate-y-0 hover:bg-primary-400 hover:no-underline'>
           {submitButtonLabel}
         </SuiButton>
       </div>

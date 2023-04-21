@@ -70,7 +70,6 @@ export default function CloudPage({
                     </span>{' '}
                     ClickHouse Cloud.
                   </h1>
-
                   <SuiText
                     size='base'
                     color='secondary'
@@ -102,6 +101,14 @@ export default function CloudPage({
                     <div className='flex items-center justify-center space-x-6 md:justify-start'>
                       <CloudProviders cloudProviders={hero.cloudProviders} />
                     </div>
+                  </div>
+                  <div className='text-sm text-neutral-300'>
+                    Interested in being notified when GCP is available?{' '}
+                    <Link
+                      href='/partners/gcp?loc=cloud-page'
+                      className='text-primary-300'>
+                      Sign up here
+                    </Link>
                   </div>
                 </div>
                 <div className='mx-auto mt-4 hidden md:flex md:w-4/12'>
