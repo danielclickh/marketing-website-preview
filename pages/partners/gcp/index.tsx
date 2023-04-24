@@ -40,7 +40,7 @@ function PartnersPage({
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='pt-20 md:pt-30'>
+      <div className='pt-20'>
         <div className='mx-10 min-h-screen pb-10 md:pb-10 '>
           <div className='mx-auto max-w-3xl'>
             <Image
