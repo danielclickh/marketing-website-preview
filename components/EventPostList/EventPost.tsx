@@ -16,7 +16,7 @@ export default function EventPost({
   return (
     <Link
       href={`/company/events/${slug}`}
-      className={`transition ease-in-out hover:-translate-y-1 hover:scale-102 blog-post-card blog-post-card-${slug} hover:no-underline category-${category
+      className={`hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1 blog-post-card-${slug} hover:no-underline category-${category
         .split(' ')
         .join('-')
         .toLowerCase()}`}>
@@ -27,26 +27,26 @@ export default function EventPost({
               {...thumbnailPng}
               sizes='medium'
               alt={title}
-              className='rounded-t-lg object-cover w-full h-52'
+              className='w-full rounded-t-lg xl:h-52 xl:object-cover'
               width={100}
               height={100}
             />
           )}
           <div className='flex flex-col items-start justify-center gap-2 px-4 pt-4'>
-            <div className='font-inconsolata text-primary-300 font-medium text-base'>
+            <div className='font-inconsolata text-base font-medium text-primary-300'>
               {category}
             </div>
-            <div className='font-basier text-xl font-semibold leading-tight cursor-pointer text-neutral-100'>
+            <div className='cursor-pointer font-basier text-xl font-semibold leading-tight text-neutral-100'>
               {title}
             </div>
           </div>
         </CUICard.Body>
-        <CUICard.Footer className='flex items-center w-full p-4 pt-10 text-neutral-300 text-sm'>
+        <CUICard.Footer className='flex w-full items-center p-4 pt-10 text-sm text-neutral-300'>
           <div className='grid w-full'>
-            <div className='flex items-center space-x-3 mb-2'>
+            <div className='mb-2 flex items-center space-x-3'>
               {category !== 'On-Demand Webinar' && (
                 <>
-                  <CalendarIcon className='w-6 h-6 text-neutral-200 stroke-1' />
+                  <CalendarIcon className='h-6 w-6 stroke-1 text-neutral-200' />
                   <div className=' text-neutral-200'>
                     {localDatetime && (
                       <div className='text-sm text-neutral-300'>
@@ -64,7 +64,7 @@ export default function EventPost({
                 viewBox='0 0 24 24'
                 strokeWidth={1}
                 stroke='currentColor'
-                className='w-6 h-6 text-neutral-200'>
+                className='h-6 w-6 text-neutral-200'>
                 <path
                   strokeLinecap='round'
                   strokeLinejoin='round'
