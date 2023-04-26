@@ -118,14 +118,14 @@ function EventsForm({
   }
 
   return (
-    <div className='w-full ml-auto lg:max-w-lg'>
+    <div className='ml-auto w-full lg:max-w-lg'>
       {featuredImage && (
         <Image
           src={featuredImage.url}
           width={512}
           height={293}
           alt='Featured image'
-          className='hidden lg:block rounded-lg object-cover w-full h-auto mb-20'
+          className='mb-20 hidden h-auto w-full rounded-lg object-cover lg:block'
         />
       )}
 
@@ -138,14 +138,22 @@ function EventsForm({
         {submitted ? (
           <div className='subscribed'>
             <div className='success-container text-center'>
-              <CheckCircleIcon className='stroke-1 w-16 h-16 mb-4 text-primary-300 mx-auto' />
-              <p className='text-xl px-10 font-bold mb-12'>
-                You’ve been successfully subscribed. See you there!
+              <CheckCircleIcon className='mx-auto mb-4 h-16 w-16 stroke-1 text-primary-300' />
+              <p className='mb-12 px-10 text-xl font-bold'>
+                {form.type == 'recordedGatedContent' ? (
+                  <>Thanks for registering!</>
+                ) : (
+                  <>You’ve been successfully registered. See you there!</>
+                )}
               </p>
-              <p className='text-base px-10 font-semibold mb-2 text-neutral-300'>
-                Share the event
+              <p className='mb-2 px-10 text-base font-semibold text-neutral-300'>
+                {form.type == 'recordedGatedContent' ? (
+                  <>Share the recording</>
+                ) : (
+                  <>Share the event</>
+                )}
               </p>
-              <div className='flex gap-4 flex-wrap justify-center text-neutral-0'>
+              <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
                 <CopyUrlButton />
                 {['twitter', 'facebook', 'linkedin'].map((social) => (
                   <SocialButton key={social} type={social} title='title' />
@@ -164,7 +172,7 @@ function EventsForm({
                   value={firstName ?? ''}
                   onChange={onChange}
                   onBlur={onChange}
-                  className='w-full mb-6'
+                  className='mb-6 w-full'
                   error={
                     typeof firstName === 'string' && firstName.length === 0
                       ? 'Invalid First Name'
@@ -178,7 +186,7 @@ function EventsForm({
                   value={lastName ?? ''}
                   onChange={onChange}
                   onBlur={onChange}
-                  className='w-full mb-6'
+                  className='mb-6 w-full'
                   error={
                     typeof lastName === 'string' && lastName.length === 0
                       ? 'Invalid Last Name'
@@ -195,7 +203,7 @@ function EventsForm({
               onKeyDown={onKeyDown}
               onChange={onChange}
               onBlur={onChange}
-              className='w-full mb-6'
+              className='mb-6 w-full'
               error={
                 typeof email === 'undefined'
                   ? undefined
@@ -209,7 +217,7 @@ function EventsForm({
             <SuiButton
               disabled={loading}
               type='primary'
-              className='hover:no-underline hover:translate-y-0 hover:bg-primary-400 rounded-md'
+              className='rounded-md hover:translate-y-0 hover:bg-primary-400 hover:no-underline'
               onClick={onSubmit}>
               {submitButtonLabel}
             </SuiButton>
