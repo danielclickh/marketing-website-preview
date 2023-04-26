@@ -21,7 +21,7 @@ export default function BlogPost({
   return (
     <Link
       href={`/blog/${slug}`}
-      className={` transition ease-in-out hover:-translate-y-1 hover:scale-102 blog-post-card blog-post-card-${slug} hover:no-underline category-${category
+      className={` hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1 blog-post-card-${slug} hover:no-underline category-${category
         .split(' ')
         .join('-')
         .toLowerCase()}`}>
@@ -32,21 +32,21 @@ export default function BlogPost({
               {...thumbnailPng}
               sizes='medium'
               alt={title}
-              className='rounded-t-lg object-cover w-full h-52'
+              className='w-full rounded-t-lg xl:h-52 xl:object-cover'
               width={100}
               height={100}
             />
           )}
           <div className='flex flex-col items-start justify-center gap-2 px-6 pt-6'>
-            <div className='mb-2 font-inconsolata text-primary-300 font-medium text-base'>
+            <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
               {category}
             </div>
-            <div className='font-basier text-xl font-medium leading-tight cursor-pointer  text-neutral-100'>
+            <div className='cursor-pointer font-basier text-xl font-medium leading-tight  text-neutral-100'>
               {title}
             </div>
           </div>
         </CUICard.Body>
-        <CUICard.Footer className='flex items-center w-full p-6 text-neutral-300 text-sm'>
+        <CUICard.Footer className='flex w-full items-center p-6 text-sm text-neutral-300'>
           {footer.join(' · ')}
         </CUICard.Footer>
       </CUICard>

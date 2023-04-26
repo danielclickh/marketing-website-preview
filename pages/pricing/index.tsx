@@ -98,22 +98,24 @@ function PricingPage({
   headerData,
   footerData
 }: PricingPageProps) {
-  const regionList: RegionPricingWithIcon[] = pricingByRegion.map((item) => ({
-    ...item,
-    regionFlagPNG: <StrapiImage {...item.regionFlagPNG} alt={item.region} />
-  }))
+  const regionList: RegionPricingWithIcon[] = pricingByRegion
+    .filter((item) => item.cloudProvider === 'aws')
+    .map((item) => ({
+      ...item,
+      regionFlagPNG: <StrapiImage {...item.regionFlagPNG} alt={item.region} />
+    }))
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='pricing text-neutral-0 h-full'>
+      <div className='pricing h-full text-neutral-0'>
         <div className='bg-grid'>
-          <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 mx-auto pt-16'>
+          <div className='mx-auto max-w-7xl px-4 pt-16 sm:px-8 2xl:px-0'>
             {hero && (
               <div className='hero'>
                 <div className='flex flex-col items-center'>
                   <SuiTitle type='h1' color='white' className='md:!text-5.5xl'>
                     {hero.title}
                   </SuiTitle>
-                  <div className='text-neutral-200 mt-6'>
+                  <div className='mt-6 text-neutral-200'>
                     {hero.description}
                   </div>
                   <CloudProviders cloudProviders={cloudProviders} />
@@ -124,12 +126,12 @@ function PricingPage({
                           regionList={regionList}
                           pricingPlans={pricingPlans}></PricingOptions>
                       )}
-                      <div className='pricing_footer_note mx-auto mt-8 text-center max-w-screen-sm'>
+                      <div className='pricing_footer_note mx-auto mt-8 max-w-screen-sm text-center'>
                         <Markdown className={styles.richTextLink}>
                           {meteredPricing.footerNote}
                         </Markdown>
                       </div>
-                      <div className='flex justify-center items-center gap-2 pt-6'>
+                      <div className='flex items-center justify-center gap-2 pt-6'>
                         <Image
                           src='/images/pricing/marketplace.svg'
                           alt='ClickHouse on AWS Marketplace'
@@ -155,25 +157,25 @@ function PricingPage({
               </div>
             )}
           </div>
-          <div className='clip-inverted-triangle pt-10 pb-60 bg-shadow-element'>
-            <HRSeparator className='pb-10 max-w-[384px]' />
+          <div className='clip-inverted-triangle bg-shadow-element pt-10 pb-60'>
+            <HRSeparator className='max-w-[384px] pb-10' />
             <Markdown className={styles.richTextLink}>
               {hero.openSourceLink}
             </Markdown>
           </div>
-          <div className='philosophy text-neutral-900 bg-primary-300'>
-            <div className='max-w-7xl px-4 sm:px-8 2xl:px-0 pb-16 mx-auto'>
+          <div className='philosophy bg-primary-300 text-neutral-900'>
+            <div className='mx-auto max-w-7xl px-4 pb-16 sm:px-8 2xl:px-0'>
               <SuiTitle
                 type='h2'
-                className='text-neutral-900 text-center pb-16'>
+                className='pb-16 text-center text-neutral-900'>
                 Pricing philosophy
               </SuiTitle>
-              <div className='columns_wrapper flex flex-col lg:flex-row lg:items-start lg:justify-center gap-x-36 gap-y-16'>
+              <div className='columns_wrapper flex flex-col gap-x-36 gap-y-16 lg:flex-row lg:items-start lg:justify-center'>
                 {philosophy.map((column) => (
                   <div
-                    className='column max-w-sm mx-auto lg:mx-0'
+                    className='column mx-auto max-w-sm lg:mx-0'
                     key={column.header}>
-                    <div className='header_row flex flex-col gap-2 items-center mb-6'>
+                    <div className='header_row mb-6 flex flex-col items-center gap-2'>
                       <Image
                         src={column.image}
                         width='72'
@@ -184,7 +186,7 @@ function PricingPage({
                         {column.header}
                       </div>
                     </div>
-                    <Markdown className='!text-neutral-800 text-center'>
+                    <Markdown className='text-center !text-neutral-800'>
                       {column.content}
                     </Markdown>
                   </div>
@@ -194,10 +196,10 @@ function PricingPage({
           </div>
         </div>
         {contactSection && (
-          <div className='section-container my-24 bg-shadow-element'>
-            <div className='px-4 mx-auto gap-x-4 flex flex-col items-center rounded-xl py-10 md:py-16 bg-neutral-750/50 border border-neutral-725/80 w-full text-neutral-0 relative'>
+          <div className='section-container bg-shadow-element my-24'>
+            <div className='relative mx-auto flex w-full flex-col items-center gap-x-4 rounded-xl border border-neutral-725/80 bg-neutral-750/50 px-4 py-10 text-neutral-0 md:py-16'>
               <SuiTitle type='h2'>{contactSection.title}</SuiTitle>
-              <div className='text-neutral-200 mt-3 mb-6 text-center max-w-screen-md'>
+              <div className='mt-3 mb-6 max-w-screen-md text-center text-neutral-200'>
                 {contactSection.subtitle}
               </div>
               <CUIButton
