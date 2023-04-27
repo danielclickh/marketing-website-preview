@@ -150,27 +150,27 @@
 				"target": "_self",
 				"menuItems": [
 					{
-						"id": 1,
-						"name": "Product",
-						"href": "/blog?category=product",
-						"target": "_self"
-					},
-					{
 						"id": 2,
 						"name": "Engineering",
 						"href": "/blog?category=engineering",
 						"target": "_self"
 					},
 					{
-						"id": 3,
-						"name": "Culture",
-						"href": "blog?category=company-and-culture",
-						"target": "_self"
-					},
-					{
 						"id": 4,
 						"name": "Customer stories",
 						"href": "/blog?category=customer-stories",
+						"target": "_self"
+					},
+					{
+						"id": 1,
+						"name": "Product",
+						"href": "/blog?category=product",
+						"target": "_self"
+					},
+					{
+						"id": 3,
+						"name": "Culture",
+						"href": "blog?category=company-and-culture",
 						"target": "_self"
 					}
 				]
