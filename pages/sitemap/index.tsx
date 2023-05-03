@@ -1,40 +1,293 @@
 import { GetStaticProps } from 'next'
 import React from 'react'
 import Layout from '../../components/Layout'
-import { SuiTitle } from '../../components/sui'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { CommonProps } from '../../types/homepage'
+import { fetchAll, findOne } from '../../lib/api/strapi'
+import { convertDateToString } from '../../lib/utils/dateUtils'
+import menuItems from '../../components/header/menuItems.json'
 
-export const getStaticProps: GetStaticProps<CommonProps> =
+import Link from 'next/link'
+
+interface SitemapProps extends CommonProps {
+  blogPosts: any[]
+  allEvents: any[]
+  onDemandEvents: any[]
+  newsEvents: any[]
+  pressReleases: any[]
+  menu: any[]
+}
+
+export const getStaticProps: GetStaticProps<SitemapProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
+
+    const blogsParams: Record<string, any> = {
+      sort: ['date:DESC', 'publishedAt:DESC'],
+      populate: ['author', 'author.avatarPng', 'thumbnailPng'],
+      fields: [
+        'category',
+        'title',
+        'shortDescription',
+        'createdAt',
+        'updatedAt',
+        'publishedAt',
+        'slug',
+        'date'
+      ]
+    }
+
+    const blogPosts = await fetchAll('blog-posts', blogsParams)
+    const events = await fetchAll('events', {
+      sort: ['localDatetime:DESC'],
+      populate: ['category']
+    })
+
+    const allEvents = events.filter((event) => {
+      return event.category !== 'On-Demand Webinar'
+    })
+
+    const onDemandEvents = events.filter((event) => {
+      return event.category === 'On-Demand Webinar'
+    })
+
+    const newsEventsTest = findOne('news-and-event', {
+      populate: [
+        'hero',
+        'newsItems',
+        'newsItems.ctaButton',
+        'pressReleases',
+        'pressReleases.ctaButton',
+        'seo',
+        'seo.image'
+      ]
+    })
+
+    const newsItems = await newsEventsTest
+    const newsEvents = newsItems.newsItems
+    const pressReleases = newsItems.pressReleases
+
+    const menu = menuItems
+
     return {
       props: {
+        blogPosts,
+        allEvents,
+        onDemandEvents,
+        newsEvents,
+        pressReleases,
+        menu,
         seo: {
-          title: 'Sitemap - ClickHouse'
+          title: 'Site Map - ClickHouse'
         },
         ...commonProps
       }
     }
   }
 
-function Sitemap({ seo, headerData, footerData }: CommonProps) {
+function Sitemap({
+  seo,
+  headerData,
+  footerData,
+  blogPosts,
+  allEvents,
+  onDemandEvents,
+  newsEvents,
+  pressReleases,
+  menu
+}: SitemapProps) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='pt-20 md:pt-30'>
-        <div className='mx-10 min-h-screen pb-10 md:pb-20 '>
-          <div className='mx-auto mb-20 flex w-full flex-col items-center justify-center gap-20 md:mb-36 md:flex-row-reverse'>
-            <div className='flex max-w-screen-md flex-col items-center md:items-start'>
-              <SuiTitle
-                type='h1'
-                color='primary'
-                weight='bold'
-                className='pb-6 md:!text-6xl'>
-                ClickHouse Cloud on AWS
-              </SuiTitle>
+      <div>
+        <h1 className='mx-auto mb-10 pt-10 text-center font-basier text-4xl text-neutral-100 md:text-5.5xl lg:mb-16 lg:pt-20'>
+          Site Map
+        </h1>
+
+        <div className='mx-auto my-24 max-w-7xl px-4 sm:px-8 2xl:px-0'>
+          <div className='grid grid-cols-4 gap-10'>
+            {menu.map((item) => (
+              <div key={item.id}>
+                <span className='font-semibold'>
+                  {item.href ? (
+                    <Link href={item.href} className='hover:underline'>
+                      {item.name}
+                    </Link>
+                  ) : (
+                    <>{item.name}</>
+                  )}
+                </span>
+                {item.menuItems &&
+                  item.menuItems.map((menuItem: any) => (
+                    <div key={menuItem.key}>
+                      <ul className='ml-4 mb-4 list-disc'>
+                        <li>
+                          <Link
+                            href={menuItem.href}
+                            className='font-semibold text-primary-300 hover:underline'>
+                            {menuItem.name}{' '}
+                          </Link>
+                          <ul className='ml-4 list-disc'>
+                            {menuItem.menuItems &&
+                              menuItem.menuItems.map((menuItem: any) => (
+                                <li key={menuItem.key}>
+                                  <>
+                                    <Link
+                                      href={menuItem.href}
+                                      className='text-primary-300 hover:underline'>
+                                      {menuItem.name}{' '}
+                                    </Link>
+                                    {console.log(menuItem.menuItems)}
+                                  </>
+                                </li>
+                              ))}
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  ))}
+              </div>
+            ))}
+            <div>
+              <h2
+                id='blog-posts'
+                className='mb-6 font-basier text-2xl font-semibold text-neutral-100'>
+                Blogs
+              </h2>
+              <ul>
+                {blogPosts.map((post) => (
+                  <li key={post.slug} className='pb-3'>
+                    <p>
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className='text-primary-300 hover:underline'>
+                        {post.title}
+                      </Link>
+                    </p>
+                    <p className='text-sm text-neutral-200'>
+                      Published:{' '}
+                      {convertDateToString(post.date || post.publishedAt)}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h2
+                id='news-posts'
+                className='mb-6 font-basier text-2xl font-semibold text-neutral-100'>
+                News
+              </h2>
+              <ul>
+                {newsEvents.map((news) => (
+                  <li key={news.id} className='pb-3'>
+                    <p>
+                      <Link
+                        href={news.ctaButton.href}
+                        target={news.ctaButton.target}
+                        className='text-primary-300 hover:underline'>
+                        {news.headline}
+                      </Link>
+                    </p>
+                    <p className='text-sm text-neutral-200'>
+                      Published:{' '}
+                      {convertDateToString(news.date || news.publishedAt)}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+              <h2
+                id='press-releases'
+                className='my-6 font-basier text-2xl font-semibold text-neutral-100'>
+                Press Releases
+              </h2>
+              <ul>
+                {pressReleases.map((news) => (
+                  <li key={news.id} className='pb-3'>
+                    <p>
+                      <Link
+                        href={news.ctaButton.href}
+                        target={news.ctaButton.target}
+                        className='text-primary-300 hover:underline'>
+                        {news.headline}
+                      </Link>
+                    </p>
+                    <p className='text-sm text-neutral-200'>
+                      Published:{' '}
+                      {convertDateToString(news.date || news.publishedAt)}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h2
+                id='Events'
+                className='mb-6 font-basier text-2xl font-semibold text-neutral-100'>
+                Events
+              </h2>
+              <ul>
+                {allEvents.map((event) => (
+                  <li key={event.slug} className='pb-3'>
+                    <p>
+                      <Link
+                        href={`/company/events/${event.slug}`}
+                        className='text-primary-300 hover:underline'>
+                        {event.title}
+                      </Link>
+                    </p>
+                    <p className='text-sm text-neutral-200'>
+                      {event.category !== 'On-Demand Webinar' ? (
+                        <>
+                          {event.category}
+                          {event.localDatetime && (
+                            <> | {convertDateToString(event.localDatetime)}</>
+                          )}
+                        </>
+                      ) : (
+                        <span>{event.category}</span>
+                      )}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h2
+                id='on-demand'
+                className='mb-6 font-basier text-2xl font-semibold text-neutral-100'>
+                On-Demand
+              </h2>
+              <ul>
+                {onDemandEvents.map((event) => (
+                  <li key={event.slug} className='pb-3'>
+                    <p>
+                      <Link
+                        href={`/company/events/${event.slug}`}
+                        className='text-primary-300 hover:underline'>
+                        {event.title}
+                      </Link>
+                    </p>
+                    <p className='text-sm text-neutral-200'>
+                      {event.category !== 'On-Demand Webinar' ? (
+                        <>
+                          {event.category} |{' '}
+                          {event.localDatetime && (
+                            <>{convertDateToString(event.localDatetime)}</>
+                          )}
+                        </>
+                      ) : (
+                        <span>{event.category}</span>
+                      )}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
+        <div className='mx-auto my-24 max-w-7xl px-4 sm:px-8 2xl:px-0'></div>
+        <div className='mx-auto my-24 max-w-7xl px-4 sm:px-8 2xl:px-0'></div>
+        <div className='mx-auto my-24 max-w-7xl px-4 sm:px-8 2xl:px-0'></div>
       </div>
     </Layout>
   )
