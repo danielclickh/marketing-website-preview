@@ -51,7 +51,12 @@ export const getStaticProps: GetStaticProps<PricingPageProps> =
       'pricing-plans',
       {
         populate: ['actionButton', 'items', 'items_disabled'],
-        fields: ['name', 'description', 'pricingMain']
+        fields: ['name', 'description', 'pricingMain'],
+        filters: {
+          cloudProvider: {
+            $eq: 'aws'
+          }
+        }
       }
     )
 
