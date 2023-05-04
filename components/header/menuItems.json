@@ -41,7 +41,7 @@
 				"menuItems": [
 					{
 						"id": 1,
-						"name": "Raise a ticket",
+						"name": "Open support case",
 						"href": "https://clickhouse.cloud/support?ajs_aid=ec53202d-30d3-4f49-9481-0624f07764f0",
 						"target": "_blank"
 					},

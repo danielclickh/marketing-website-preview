@@ -165,7 +165,7 @@ export default function HomePage({
                     }}
                     linkClass='w-full max-w-[14rem]'
                     className='w-full'>
-                    Start free trial
+                    Deploy in 2 min
                   </CUIButton>
                   <CUIButton
                     type='secondary'
@@ -277,7 +277,7 @@ export default function HomePage({
                 Row-oriented databases
               </div>
               <div className='text-neutral-200 leading-normal text-center md:text-left'>
-                In a row-oriented databases, data is stored in rows, with all
+                In row-oriented databases, data is stored in rows, with all
                 the values related to a row physically stored next to each
                 other.
               </div>
@@ -288,7 +288,7 @@ export default function HomePage({
                 Column-oriented databases
               </div>
               <div className='text-neutral-200 leading-normal text-center md:text-left'>
-                In a column-oriented databases, like ClickHouse, data is stored
+                In column-oriented databases, like ClickHouse, data is stored
                 in columns, with values from the same columns stored together.
               </div>
             </div>
