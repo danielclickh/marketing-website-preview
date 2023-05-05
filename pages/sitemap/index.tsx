@@ -96,57 +96,141 @@ function Sitemap({
   pressReleases,
   menu
 }: SitemapProps) {
+  const resourcesMenu = menuItems.find((obj) => obj.id === 2)?.menuItems
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div>
         <h1 className='mx-auto mb-10 pt-10 text-center font-basier text-4xl text-neutral-100 md:text-5.5xl lg:mb-16 lg:pt-20'>
           Site Map
         </h1>
-
         <div className='mx-auto my-24 max-w-7xl px-4 sm:px-8 2xl:px-0'>
-          <div className='grid grid-cols-4 gap-10'>
-            {menu.map((item) => (
-              <div key={item.id}>
-                <span className='font-semibold'>
-                  {item.href ? (
-                    <Link href={item.href} className='hover:underline'>
-                      {item.name}
-                    </Link>
-                  ) : (
-                    <>{item.name}</>
-                  )}
-                </span>
-                {item.menuItems &&
-                  item.menuItems.map((menuItem: any) => (
-                    <div key={menuItem.key}>
-                      <ul className='ml-4 mb-4 list-disc'>
-                        <li>
-                          <Link
-                            href={menuItem.href}
-                            className='font-semibold text-primary-300 hover:underline'>
-                            {menuItem.name}{' '}
-                          </Link>
-                          <ul className='ml-4 list-disc'>
-                            {menuItem.menuItems &&
-                              menuItem.menuItems.map((menuItem: any) => (
-                                <li key={menuItem.key}>
-                                  <>
-                                    <Link
-                                      href={menuItem.href}
-                                      className='text-primary-300 hover:underline'>
-                                      {menuItem.name}{' '}
-                                    </Link>
-                                    {console.log(menuItem.menuItems)}
-                                  </>
-                                </li>
-                              ))}
+          <div className='mb-10 grid gap-10 xl:grid-cols-4'>
+            <div>
+              <h2
+                id='blog-posts'
+                className='mb-4 font-basier text-2xl font-semibold text-neutral-100'>
+                Product
+              </h2>
+              <p className='pb-2'>
+                <Link
+                  href={`/clickhouse`}
+                  className=' text-primary-300 hover:underline'>
+                  ClickHouse
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
+                  href={`/cloud?loc=sitemap`}
+                  className='text-primary-300 hover:underline'>
+                  ClickHouse Cloud
+                </Link>
+              </p>
+            </div>
+            <div>
+              <h2
+                id='blog-posts'
+                className='mb-4 font-basier text-2xl font-semibold text-neutral-100'>
+                Company
+              </h2>
+              <p className='pb-2'>
+                <Link
+                  href={`/blog`}
+                  className=' text-primary-300 hover:underline'>
+                  Blog
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
+                  href={`/company/our-story`}
+                  className='text-primary-300 hover:underline'>
+                  Our story
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
+                  href={`/company/careers`}
+                  className='text-primary-300 hover:underline'>
+                  Careers
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
+                  href={`/company/contact`}
+                  className='text-primary-300 hover:underline'>
+                  Contact us
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
+                  href={`/company/news-events`}
+                  className='text-primary-300 hover:underline'>
+                  News and events
+                </Link>
+              </p>
+            </div>
+            <div>
+              <h2
+                id='blog-posts'
+                className='mb-6 font-basier text-2xl font-semibold text-neutral-100'>
+                <Link
+                  href={`/use-cases`}
+                  className='hover:text-primary-300 hover:underline'>
+                  Use cases
+                </Link>
+              </h2>
+            </div>
+            <div>
+              <h2
+                id='blog-posts'
+                className='mb-6 font-basier text-2xl font-semibold text-neutral-100'>
+                <Link
+                  href={`/pricing`}
+                  className='hover:text-primary-300 hover:underline'>
+                  Pricing
+                </Link>
+              </h2>
+            </div>
+          </div>
+          <div className='pb-10'>
+            <div>
+              <h2
+                id='blog-posts'
+                className='mb-6 font-basier text-2xl font-semibold text-neutral-100'>
+                Resources
+              </h2>
+              <div className='mb-10 grid gap-10 gap-y-2 xl:grid-cols-4'>
+                {resourcesMenu?.map((item) => (
+                  <div key={item.id}>
+                    <p className='pb-2 font-semibold'>
+                      {item.href ? (
+                        <Link href={item.href} className='hover:underline'>
+                          {item.name}
+                        </Link>
+                      ) : (
+                        <>{item.name}</>
+                      )}
+                    </p>
+                    {item.menuItems &&
+                      item.menuItems.map((menuItem: any) => (
+                        <div key={`sub-${menuItem.id}`}>
+                          <ul className='mb-2'>
+                            <li>
+                              <Link
+                                href={menuItem.href}
+                                className='font text-primary-300 hover:underline'>
+                                {menuItem.name}{' '}
+                              </Link>
+                            </li>
                           </ul>
-                        </li>
-                      </ul>
-                    </div>
-                  ))}
+                        </div>
+                      ))}
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+          </div>
+          <div className='grid gap-10 xl:grid-cols-4'>
             <div>
               <h2
                 id='blog-posts'
