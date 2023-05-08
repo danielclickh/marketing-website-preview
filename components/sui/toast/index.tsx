@@ -1,5 +1,12 @@
 import { CheckIcon, ExclamationIcon } from '@heroicons/react/outline'
-import { createContext, ReactNode, useContext, useState } from 'react'
+import {
+  createContext,
+  CSSProperties,
+  ReactNode,
+  useContext,
+  useRef,
+  useState
+} from 'react'
 import { SuiText } from '../typography'
 
 export const SnackbarContext = createContext({
@@ -10,12 +17,18 @@ let timer: NodeJS.Timer
 export function SnackbarContextProvider({ children }: { children: ReactNode }) {
   const [message, setMessage] = useState<string | null>(null)
   const [type, setType] = useState<'success' | 'error' | null>(null)
+  const ref = useRef<CSSProperties>({})
   const closeSnackBar = () => {
     clearTimeout(timer)
     setMessage(null)
     setType(null)
   }
   const openSnackBar = (message: string, type?: 'success' | 'error') => {
+    const cookieBanner = document.querySelector('#onetrust-banner-sdk')
+    ref.current = cookieBanner
+      ? {height: `${cookieBanner.clientHeight + 40}px`}
+      : {}
+
     setMessage(message)
     setType(type ?? null)
     timer = setTimeout(() => {
@@ -28,15 +41,15 @@ export function SnackbarContextProvider({ children }: { children: ReactNode }) {
     <SnackbarContext.Provider value={value}>
       {children}
       {message && (
-        <div className='fixed bottom-3.5 inset-x-0 z-50'>
-          <div className='flex gap-2 items-center w-fit px-4 py-3 rounded-lg text-sm font-medium mx-auto max-w-screen-sm bg-neutral-725'>
+        <div className='fixed inset-x-0 bottom-3.5 z-50' style={ref.current}>
+          <div className='mx-auto flex w-fit max-w-screen-sm items-center gap-2 rounded-lg bg-neutral-725 px-4 py-3 text-sm font-medium'>
             {type && (
-              <div className='w-5 h-5'>
+              <div className='h-5 w-5'>
                 {type === 'success' && (
-                  <CheckIcon className='w-full h-full text-neutral-0' />
+                  <CheckIcon className='h-full w-full text-neutral-0' />
                 )}
                 {type === 'error' && (
-                  <ExclamationIcon className='w-full h-full text-alerts-danger-text' />
+                  <ExclamationIcon className='h-full w-full text-alerts-danger-text' />
                 )}
               </div>
             )}

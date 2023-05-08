@@ -152,6 +152,15 @@ body {
     h2 {
       @apply text-2xl font-semibold;
     }
+    .link {
+      @apply hidden;
+      &.open {
+        @apply block;
+      }
+    }
+    &:hover .link {
+      @apply block;
+    }
   }
 
   h1,

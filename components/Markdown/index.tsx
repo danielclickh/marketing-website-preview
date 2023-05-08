@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEventHandler, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import {
   PluggableList,
@@ -11,6 +11,8 @@ import rehypeSlug from 'rehype-slug-custom-id'
 
 import { SuiTitle } from '../sui'
 import { AllowedElements, HighLightOptions, sanitizeMarkdown } from './utils'
+import { CUILink } from '../ClickUI'
+import * as Tooltip from '@radix-ui/react-tooltip'
 
 function StrapiImage({ src, width, height, alt, ...props }: any) {
   return (
@@ -20,7 +22,7 @@ function StrapiImage({ src, width, height, alt, ...props }: any) {
       width={width}
       height={height}
       alt={alt ?? 'Markdown Image'}
-      className='w-auto max-w-full h-auto'
+      className='h-auto w-auto max-w-full'
       {...props}
     />
   )
@@ -36,30 +38,85 @@ const commonPlugIns: PluggableList = [
 ]
 
 function Header(props: any) {
-  let { id, ...otherProps } = props
-  id = id.replaceAll('-', '')
+  let { id, allowHeaderLink, ...otherProps } = props
+  if (!allowHeaderLink) {
+    id = id.replaceAll('-', '')
+  }
+  const [isOpen, setIsOpen] = useState(false)
+  const onClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
+    e.preventDefault()
+    navigator.clipboard.writeText(e.currentTarget.href)
+    setIsOpen(true)
+    setTimeout(() => {
+      setIsOpen(false)
+    }, 2000)
+  }
   return (
     <div className='md-header-container'>
       <SuiTitle {...otherProps} id={id} />
+      {(isOpen || allowHeaderLink) && (
+        <Tooltip.Provider delayDuration={200}>
+          <Tooltip.Root open={isOpen}>
+            <Tooltip.Trigger asChild>
+              <div>
+                <CUILink
+                  href={{
+                    hash: id
+                  }}
+                  className={`link ${isOpen ? 'open' : ''}`}
+                  onClick={onClick}>
+                  #
+                </CUILink>
+              </div>
+            </Tooltip.Trigger>
+            <Tooltip.Portal>
+              <Tooltip.Content
+                className='rounded-lg bg-neutral-750 px-3 py-2 shadow-click-card'
+                sideOffset={5}
+                side='top'>
+                Copied
+                <Tooltip.Arrow className='fill-neutral-750' />
+              </Tooltip.Content>
+            </Tooltip.Portal>
+          </Tooltip.Root>
+        </Tooltip.Provider>
+      )}
     </div>
   )
 }
 
-function getDefaultComponents() {
+interface DefaultComponentProps {
+  allowHeaderLink: boolean
+}
+
+function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
   return {
     img: StrapiImage,
-    h1: (props: any) => <Header type='h1' {...props} />,
-    h2: (props: any) => <Header type='h2' {...props} />,
-    h3: (props: any) => <Header type='h3' {...props} />,
-    h4: (props: any) => <Header type='h4' {...props} />,
-    h5: (props: any) => <Header type='h5' {...props} />,
-    h6: (props: any) => <Header type='h6' {...props} />
+    h1: (props: any) => (
+      <Header type='h1' allowHeaderLink={allowHeaderLink} {...props} />
+    ),
+    h2: (props: any) => (
+      <Header type='h2' allowHeaderLink={allowHeaderLink} {...props} />
+    ),
+    h3: (props: any) => (
+      <Header type='h3' allowHeaderLink={allowHeaderLink} {...props} />
+    ),
+    h4: (props: any) => (
+      <Header type='h4' allowHeaderLink={allowHeaderLink} {...props} />
+    ),
+    h5: (props: any) => (
+      <Header type='h5' allowHeaderLink={allowHeaderLink} {...props} />
+    ),
+    h6: (props: any) => (
+      <Header type='h6' allowHeaderLink={allowHeaderLink} {...props} />
+    )
   }
 }
 
 interface Props extends ReactMarkdownOptions {
   encloseByDiv?: boolean
   ignoreAnchor?: boolean
+  allowHeaderLink?: boolean
 }
 
 const getIgnoreAnchor = () => ({
@@ -74,9 +131,12 @@ function Markdown({
   encloseByDiv = true,
   rehypePlugins = [],
   remarkPlugins = [],
+  allowHeaderLink = false,
   ...props
 }: Props) {
-  const newComponents = getDefaultComponents()
+  const newComponents = getDefaultComponents({
+    allowHeaderLink
+  })
   if (Object.keys(componentsProp ?? {}).length > 0) {
     Object.assign(newComponents, componentsProp)
   }
