@@ -1,12 +1,3 @@
-import {
-  arrow,
-  autoUpdate,
-  flip,
-  FloatingArrow,
-  offset,
-  shift,
-  useFloating
-} from '@floating-ui/react'
 import { DuplicateIcon } from '@heroicons/react/outline'
 import React, {
   FunctionComponent,
@@ -61,7 +52,7 @@ export const SuiCodeblock: FunctionComponent<CodeblockProps> = ({
               </Tooltip.Trigger>
               <Tooltip.Portal>
                 <Tooltip.Content
-                  className='bg-neutral-750 shadow-click-card px-3 py-2 rounded-lg'
+                  className='rounded-lg bg-neutral-750 px-3 py-2 shadow-click-card'
                   sideOffset={5}
                   side='top'>
                   Copied

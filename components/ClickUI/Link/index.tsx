@@ -12,14 +12,14 @@ function Link({
   onClick: onClickProp,
   ...props
 }: LinkProps) {
-  const onClick = () => {
+  const onClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
     if (segmentEvent) {
       try {
         window.analytics.track('click', segmentEvent)
       } catch (error) {}
     }
     if (onClickProp) {
-      onClickProp()
+      onClickProp(e)
     }
   }
 
@@ -36,7 +36,7 @@ function Link({
         target={target}
         onClick={onClick}
         className={`${
-          disabled ? 'cursor-not-allowed pointer-events-none' : ''
+          disabled ? 'pointer-events-none cursor-not-allowed' : ''
         } ${className}`}
         {...props}>
         {children}
@@ -49,7 +49,7 @@ function Link({
       href={href}
       onClick={onClick}
       className={`${
-        disabled ? 'cursor-not-allowed pointer-events-none' : ''
+        disabled ? 'pointer-events-none cursor-not-allowed' : ''
       } ${className}`}
       target={target}>
       {children}

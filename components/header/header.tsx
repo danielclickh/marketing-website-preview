@@ -24,9 +24,6 @@ const headerMenuItems = menuItems as Array<MenuItemType>
 
 export default function Header({ github: { stars } }: HeaderProps) {
   const navBarRef = useRef<HTMLDivElement>(null)
-  const dropdownRef = useRef<HTMLDivElement>(null)
-  const dropdownContainerRef = useRef<HTMLDivElement>(null)
-  const arrowRef = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState(false)
   const { strategy, floating, reference, context } = useFloating({
     open: isOpen,
@@ -72,13 +69,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
         className={styles.navBarContainer}
         ref={navBarRef}
         id='nav-container'>
-        <div className='relative'>
-          <span className={`${styles.arrow} arrow`} ref={arrowRef}></span>
-          <div className={styles.dropdownBackground} ref={dropdownRef}>
-            <div id='dropdown-container' ref={dropdownContainerRef}></div>
-          </div>
-        </div>
-        <nav className='relative flex no-wrap justify-between items-center section-container w-full py-4'>
+        <nav className='no-wrap section-container relative flex w-full items-center justify-between py-4'>
           <Link
             href='/'
             className='absolute z-10 flex items-center gap-x-3 hover:no-underline'>
@@ -93,12 +84,12 @@ export default function Header({ github: { stars } }: HeaderProps) {
 
           <GlobalMenu />
 
-          <div className='hidden md:flex absolute right-8 2xl:right-0 z-10 flex-nowrap gap-4 lg:gap-6 items-center'>
+          <div className='absolute right-8 z-10 hidden flex-nowrap items-center gap-4 md:flex lg:gap-6 2xl:right-0'>
             <CUILink
               key='github-stars-nav'
               href='https://github.com/ClickHouse/ClickHouse?utm_source=clickhouse&utm_medium=website&utm_campaign=website-nav'
               target='_blank'
-              className='hover:text-neutral-400 hover:no-underline hidden lg:flex '
+              className='hidden hover:text-neutral-400 hover:no-underline lg:flex '
               segmentEvent={{
                 label: 'GitHub Stars',
                 category: 'website-nav'
@@ -149,7 +140,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
           </div>
 
           <div
-            className='bg-slate text-neutral-200 rounded-md p-2 inline-flex items-center justify-center hover:text-neutral-0 focus:outline-none md:hidden'
+            className='inline-flex items-center justify-center rounded-md bg-slate p-2 text-neutral-200 hover:text-neutral-0 focus:outline-none md:hidden'
             ref={reference}
             {...getReferenceProps()}>
             <span className='sr-only'>Open menu</span>
@@ -163,7 +154,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
       </div>
       {isOpen && (
         <div
-          className='flex flex-col justify-between bg-menu-options divide-y divide-neutral-900/11 w-full backdrop-blur-[10px] z-30'
+          className='divide-neutral-900/11 z-30 flex w-full flex-col justify-between divide-y bg-menu-options backdrop-blur-[10px]'
           ref={floating}
           style={{
             position: strategy,
@@ -172,16 +163,16 @@ export default function Header({ github: { stars } }: HeaderProps) {
             height: 'calc(100vh - 64px)'
           }}
           {...getFloatingProps()}>
-          <div className='pt-8 mb-6 overflow-auto h-[stretch]'>
-            <div className='flex items-top justify-between w-full'>
-              <nav className='flex flex-col w-full'>
+          <div className='mb-6 h-[stretch] overflow-auto pt-8'>
+            <div className='items-top flex w-full justify-between'>
+              <nav className='flex w-full flex-col'>
                 {headerMenuItems.map((menuItem) => {
                   if ((menuItem.menuItems ?? []).length > 0) {
                     return (
                       <Disclosure as='div'>
                         {({ open }) => (
                           <>
-                            <Disclosure.Button className='flex w-full justify-between rounded-lg text-left text-lg font-medium focus:outline-none focus-visible:ring-opacity-75 px-4 sm:px-8 py-2'>
+                            <Disclosure.Button className='flex w-full justify-between rounded-lg px-4 py-2 text-left text-lg font-medium focus:outline-none focus-visible:ring-opacity-75 sm:px-8'>
                               <span>{menuItem.name}</span>
                               <ChevronRightIcon
                                 className={`${
@@ -189,7 +180,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
                                 } h-5 w-5`}
                               />
                             </Disclosure.Button>
-                            <Disclosure.Panel className='text-md text-neutral-400 mt-2 mb-2'>
+                            <Disclosure.Panel className='text-md mt-2 mb-2 text-neutral-400'>
                               <MobileMenuItem
                                 {...menuItem}
                                 close={() => setIsOpen(false)}
@@ -210,7 +201,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
                           label: menuItem.name,
                           category: 'website-nav'
                         }}
-                        className='menu-item hover:no-underline text-lg font-medium px-4 sm:px-8 py-2'>
+                        className='menu-item px-4 py-2 text-lg font-medium hover:no-underline sm:px-8'>
                         {menuItem.name}
                       </CUILink>
                     )
@@ -220,7 +211,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
             </div>
           </div>
 
-          <div className='py-6 px-5 grid gap-4 w-full grid-cols-2'>
+          <div className='grid w-full grid-cols-2 gap-4 py-6 px-5'>
             <CUIButton
               type='primary'
               href='https://clickhouse.cloud/signUp'

@@ -91,9 +91,9 @@ export default function BlogPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-10'>
-        <div className='flex container mx-auto flex-col px-6 2xl:px-0 max-w-3xl'>
-          <div className='flex flex-col text-center mx-auto pt-6'>
-            <h4 className='text-primary-300 text-base font-semibold'>
+        <div className='container mx-auto flex max-w-3xl flex-col px-6 2xl:px-0'>
+          <div className='mx-auto flex flex-col pt-6 text-center'>
+            <h4 className='text-base font-semibold text-primary-300'>
               <Link href='/blog'>Blog</Link> /{' '}
               <Link
                 href={`/blog?category=${category
@@ -103,17 +103,17 @@ export default function BlogPage({
                 {category}
               </Link>
             </h4>
-            <h1 className='mt-6 mb-8 text-4xl font-bold text-neutral-100 font-basier '>
+            <h1 className='mt-6 mb-8 font-basier text-4xl font-bold text-neutral-100 '>
               <span className='leading-snug'>{title}</span>
             </h1>
-            <div className='flex flex-row items-center space-x-4 pt-2 justify-center'>
-              <div className='flex w-11 h-11 aspect-square'>
+            <div className='flex flex-row items-center justify-center space-x-4 pt-2'>
+              <div className='flex aspect-square h-11 w-11'>
                 <StrapiImage
                   {...author.avatarPng}
                   alt='author avatar'
                   width={44}
                   height={44}
-                  className='rounded-full h-11 w-11'
+                  className='h-11 w-11 rounded-full'
                 />
               </div>
               <div className='flex'>
@@ -130,19 +130,19 @@ export default function BlogPage({
           </div>
         </div>
 
-        <div className='container flex mx-auto px-6 2xl:px-0 max-w-3xl pt-20'>
-          <div className='flex flex-col w-full pb-20'>
-            <Markdown className='leading-6 rich-text-content'>
+        <div className='container mx-auto flex max-w-3xl px-6 pt-20 2xl:px-0'>
+          <div className='flex w-full flex-col pb-20'>
+            <Markdown className='rich-text-content leading-6' allowHeaderLink>
               {content}
             </Markdown>
             <HRSeparator className='my-8' />
-            <div className='flex flex-col md:flex-row gap-4 justify-between items-center mb-10'>
+            <div className='mb-10 flex flex-col items-center justify-between gap-4 md:flex-row'>
               <div className='flex'>
                 <SuiText size='sm' weight='medium' color='primary'>
                   Share this post
                 </SuiText>
               </div>
-              <div className='flex gap-4 flex-wrap justify-center text-neutral-0'>
+              <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
                 <CopyUrlButton />
                 {['y_combinator', 'twitter', 'facebook', 'linkedin'].map(
                   (social) => (
@@ -156,8 +156,8 @@ export default function BlogPage({
         </div>
       </div>
 
-      <div className='flex w-full text-neutral-0 pb-8 '>
-        <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-12 pb-8 px-8 2xl:px-0'>
+      <div className='flex w-full pb-8 text-neutral-0 '>
+        <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pt-12 pb-8 md:bg-no-repeat 2xl:px-0'>
           <div className='flex justify-between pb-8'>
             <SuiTitle
               type='h2'
@@ -174,7 +174,7 @@ export default function BlogPage({
               View all Blogs
             </SuiButton>
           </div>
-          <div className='w-full flex flex-col md:grid md:grid-cols-3 md:gap-x-16 gap-y-6 md:gap-y-0 '>
+          <div className='flex w-full flex-col gap-y-6 md:grid md:grid-cols-3 md:gap-x-16 md:gap-y-0 '>
             {otherBlogs.map((blog) => (
               <BlogPost key={blog.id} {...blog} />
             ))}
