@@ -3,13 +3,13 @@ import { SuiCodeblock, SuiTitle } from '../sui'
 import { GettingStartedData } from './types'
 import { CUILink } from '../ClickUI'
 import styles from './GetStarted.module.scss'
-
+import Link from 'next/link'
 export default function FetchGetStarted({ platforms }: GettingStartedData) {
   return (
     <div
-      className='flex text-neutral-0 section-container w-full mb-24 md:px-8 2xl:px-0 '
+      className='section-container mb-24 flex w-full text-neutral-0 md:px-8 2xl:px-0 '
       id='getting_started'>
-      <div className='mx-auto flex flex-col justify-center w-full bg-neutral-900/50 border border-neutral-700/80 py-16 px-4 xl:px-24 rounded-xl bg-click-grid bg-[length:547px_360px] bg-right bg-no-repeat'>
+      <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-click-grid bg-[length:547px_360px] bg-right bg-no-repeat py-16 px-4 xl:px-24'>
         <div className='flex flex-col text-center'>
           <SuiTitle type='h2' color='white'>
             Start using{' '}
@@ -18,16 +18,16 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             </span>{' '}
             in minutes
           </SuiTitle>
-          <div className='text-neutral-300 text-center mb-8 mt-6'>
+          <div className='mb-8 mt-6 text-center text-neutral-300'>
             Install ClickHouse for MacOS, Linux, and FreeBSD.
           </div>
         </div>
-        <SuiCodeblock className='w-full md:w-full self-center overflow-hidden show-copy-paste'>
+        <SuiCodeblock className='show-copy-paste w-full self-center overflow-hidden md:w-full'>
           <Markdown ignoreAnchor className={styles.codeBlock}>
             {platforms[0].instructions}
           </Markdown>
         </SuiCodeblock>
-        <div className='text-sm font-medium text-neutral-500 mt-4'>
+        <div className='mt-4 text-sm font-medium text-neutral-500'>
           Or install for{' '}
           <CUILink
             href='https://clickhouse.com/docs/en/integrations/sql-clients/clickhouse-client-local'
@@ -49,6 +49,15 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             className='underline hover:text-neutral-0'>
             install options.
           </CUILink>
+          <p className='mt-5'>
+            Watch this{' '}
+            <Link
+              href='/company/events/getting-started-with-clickhouse'
+              className='text-primary-300'>
+              getting started video
+            </Link>{' '}
+            to learn more about ClickHouse.
+          </p>
         </div>
       </div>
     </div>
