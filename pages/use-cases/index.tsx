@@ -4,11 +4,6 @@ import { useCasesPageDataProps } from '../../types/useCasesPage'
 import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import Link from 'next/link'
-import Image from 'next/image'
-import Glider from 'react-glider'
-import 'glider-js/glider.min.css'
-
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
     const useCasesPageData = await findOne('use-case-feature', {
@@ -17,8 +12,14 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
 
     const individualUseCasesParams = {
       sort: ['id:ASC'],
-      fields: ['title', 'description', 'shortDescription'],
-      populate: ['ClientsUsingUseCase', 'ClientUsingUseCase.logo', 'icon']
+      populate: [
+        'description',
+        'shortDescription',
+        'ClientsUsingUseCase',
+        'ClientsUsingUseCase.*',
+        'ClientsUsingUseCase.logo.*',
+        'icon'
+      ]
     }
     const { data: individualUseCases } = await findAll(
       'individual-use-cases',
