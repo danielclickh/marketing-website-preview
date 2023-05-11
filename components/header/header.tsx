@@ -20,9 +20,10 @@ import logoFull from '../../public/logo-full.svg'
 import { HeaderProps, MenuItem as MenuItemType } from './types'
 import MobileMenuItem from './MobileMenuItem'
 import GlobalMenu from './GlobalMenu'
+import Banner from './Banner'
 const headerMenuItems = menuItems as Array<MenuItemType>
 
-export default function Header({ github: { stars } }: HeaderProps) {
+export default function Header({ header, github: { stars } }: HeaderProps) {
   const navBarRef = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState(false)
   const { strategy, floating, reference, context } = useFloating({
@@ -69,6 +70,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
         className={styles.navBarContainer}
         ref={navBarRef}
         id='nav-container'>
+        <Banner content={header?.banner ?? ''} />
         <nav className='no-wrap section-container relative flex w-full items-center justify-between py-4'>
           <Link
             href='/'

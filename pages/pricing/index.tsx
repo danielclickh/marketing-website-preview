@@ -1,26 +1,22 @@
 import React from 'react'
-import CloudProviders from '../../components/CloudProviders'
 import Markdown from '../../components/Markdown'
 import PricingOptions from '../../components/PricingOptions'
-import { StrapiImage } from '../../components/StrapiElements'
 import { SuiText, SuiTitle } from '../../components/sui'
 import { findAll, findOne } from '../../lib/api/strapi'
 import {
   PricingData,
   PricingPageProps,
   PricingPlanData,
-  RegionPricing,
-  RegionPricingWithIcon
+  RegionPricing
 } from '../../types/pricing'
 import styles from './Pricing.module.scss'
 import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { CUIButton } from '../../components/ClickUI'
+import { CUIButton, CUILink } from '../../components/ClickUI'
 import HRSeparator from '../../components/HRSeparator'
 import philosophy from './philosophy.json'
 import Image from 'next/image'
-import Link from 'next/link'
 
 export const getStaticProps: GetStaticProps<PricingPageProps> =
   async function getStaticProps() {
@@ -51,12 +47,7 @@ export const getStaticProps: GetStaticProps<PricingPageProps> =
       'pricing-plans',
       {
         populate: ['actionButton', 'items', 'items_disabled'],
-        fields: ['name', 'description', 'pricingMain'],
-        filters: {
-          cloudProvider: {
-            $eq: 'aws'
-          }
-        }
+        fields: ['name', 'description', 'pricingMain', 'cloudProvider']
       }
     )
 
@@ -103,12 +94,6 @@ function PricingPage({
   headerData,
   footerData
 }: PricingPageProps) {
-  const regionList: RegionPricingWithIcon[] = pricingByRegion
-    .filter((item) => item.cloudProvider === 'aws')
-    .map((item) => ({
-      ...item,
-      regionFlagPNG: <StrapiImage {...item.regionFlagPNG} alt={item.region} />
-    }))
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pricing h-full text-neutral-0'>
@@ -123,40 +108,13 @@ function PricingPage({
                   <div className='mt-6 text-neutral-200'>
                     {hero.description}
                   </div>
-                  <CloudProviders cloudProviders={cloudProviders} />
-                  {meteredPricing && (
-                    <div>
-                      {regionList.length > 0 && (
-                        <PricingOptions
-                          regionList={regionList}
-                          pricingPlans={pricingPlans}></PricingOptions>
-                      )}
-                      <div className='pricing_footer_note mx-auto mt-8 max-w-screen-sm text-center'>
-                        <Markdown className={styles.richTextLink}>
-                          {meteredPricing.footerNote}
-                        </Markdown>
-                      </div>
-                      <div className='flex items-center justify-center gap-2 pt-6'>
-                        <Image
-                          src='/images/pricing/marketplace.svg'
-                          alt='ClickHouse on AWS Marketplace'
-                          width={20}
-                          height={20}
-                        />
-                        <SuiText
-                          size='sm'
-                          color='secondary'
-                          className='text-center'>
-                          Available on AWS Marketplace.{' '}
-                          <Link
-                            href='/partners/aws'
-                            className='text-primary-300'>
-                            Find out more
-                          </Link>
-                          .
-                        </SuiText>
-                      </div>
-                    </div>
+                  {meteredPricing && pricingByRegion.length > 0 && (
+                    <PricingOptions
+                      pricingByRegion={pricingByRegion}
+                      cloudProviders={cloudProviders}
+                      pricingPlans={pricingPlans}
+                      meteredPricing={meteredPricing}
+                    />
                   )}
                 </div>
               </div>

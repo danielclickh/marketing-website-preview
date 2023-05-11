@@ -1,0 +1,36 @@
+.cloudProvidersButton {
+  @apply w-[72px] h-12 relative;
+  &:not(:disabled) {
+    @apply bg-neutral-750 border-primary-600;
+    &:hover {
+      @apply bg-neutral-725;
+    }
+  }
+  &[data-selected="true"] {
+    @apply border-primary-300;
+    &:hover {
+      @apply border-primary-300;
+    }
+  }
+  &:disabled {
+    @apply bg-neutral-725 border-neutral-725 cursor-not-allowed #{!important};
+  }
+}
+
+.richTextLink {
+  @apply text-neutral-200 text-center text-sm;
+
+  :global a {
+    @apply text-primary-300 #{!important};
+
+    strong {
+      @apply font-semibold;
+    }
+  }
+}
+
+.gcpTextLink {
+  :global(.hide-gcp) {
+    @apply hidden;
+  }
+}

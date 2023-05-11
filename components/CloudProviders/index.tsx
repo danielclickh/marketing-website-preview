@@ -19,38 +19,20 @@ function CloudProviders({
         <div className='flex flex-col space-y-2' key={parentIndex}>
           <div className='flex flex-row items-start gap-6'>
             {cloudProvider.darkProviderPngs.map((darkIconPng, index) => (
-              <>
-                <div
-                  key={index}
-                  className={`relative w-auto px-4 ${
-                    (parentIndex === 0 && path !== '/cloud') ||
-                    (index === 0 && path !== '/cloud')
-                      ? 'hover:bg-neutral-800'
-                      : ''
-                  }  ${
-                    path === '/cloud'
-                      ? ''
-                      : 'grid h-16 place-items-center rounded border border-neutral-700/80  bg-neutral-900 '
-                  }  `}>
-                  {darkIconPng.name === 'logo_aws_dark.svg' ? (
-                    <Link href='/partners/aws'>
-                      <StrapiImage
-                        key={`${cloudProvider.title}-${index}`}
-                        {...darkIconPng}
-                        className={`h-10 w-auto ${
-                          parentIndex !== 0 ? 'opacity-25' : ''
-                        }`}
-                      />
-                    </Link>
-                  ) : darkIconPng.name === 'google_cloud_dark.svg' ? (
-                    <Link href='/partners/gcp'>
-                      <StrapiImage
-                        key={`${cloudProvider.title}-${index}`}
-                        {...darkIconPng}
-                        className={`h-10 w-auto ${parentIndex !== 0 ? '' : ''}`}
-                      />
-                    </Link>
-                  ) : (
+              <div
+                key={index}
+                className={`relative w-auto px-4 ${
+                  (parentIndex === 0 && path !== '/cloud') ||
+                  (index === 0 && path !== '/cloud')
+                    ? 'hover:bg-neutral-800'
+                    : ''
+                }  ${
+                  path === '/cloud'
+                    ? ''
+                    : 'grid h-16 place-items-center rounded border border-neutral-700/80  bg-neutral-900 '
+                }  `}>
+                {darkIconPng.name === 'logo_aws_dark.svg' ? (
+                  <Link href='/partners/aws'>
                     <StrapiImage
                       key={`${cloudProvider.title}-${index}`}
                       {...darkIconPng}
@@ -58,18 +40,41 @@ function CloudProviders({
                         parentIndex !== 0 ? 'opacity-25' : ''
                       }`}
                     />
-                  )}
-                  {parentIndex !== 0 && (
+                  </Link>
+                ) : darkIconPng.name === 'google_cloud_dark.svg' ? (
+                  <>
+                    <StrapiImage
+                      key={`${cloudProvider.title}-${index}`}
+                      {...darkIconPng}
+                      className={`h-10 w-auto ${parentIndex !== 0 ? '' : ''}`}
+                    />
                     <SuiText
                       size='xs'
                       weight='medium'
                       color='secondary'
-                      className='absolute -top-2 -right-2 rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
-                      soon
+                      className='absolute -top-1 -right-3.5 rounded-lg bg-neutral-100 px-2.5 text-sm text-neutral-900'>
+                      Beta
                     </SuiText>
-                  )}
-                </div>
-              </>
+                  </>
+                ) : (
+                  <>
+                    <StrapiImage
+                      key={`${cloudProvider.title}-${index}`}
+                      {...darkIconPng}
+                      className={`h-10 w-auto ${
+                        parentIndex !== 0 ? 'opacity-25' : ''
+                      }`}
+                    />
+                    <SuiText
+                      size='xs'
+                      weight='medium'
+                      color='secondary'
+                      className='absolute -top-1 -right-3.5 rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
+                      Soon
+                    </SuiText>
+                  </>
+                )}
+              </div>
             ))}
           </div>
         </div>

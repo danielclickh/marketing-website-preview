@@ -60,7 +60,8 @@ const deployData: Array<DeployData> = [
     title: 'ClickHouse Cloud',
     img: '/cloud.svg',
     btnText: 'Deploy in seconds',
-    description: 'Deploy a fully managed ClickHouse service on AWS.',
+    description:
+      'Deploy a fully managed ClickHouse service on AWS or GCP (Beta).',
     href: 'https://clickhouse.cloud/signUp?loc=home-deploy-your-way',
     target: '_blank',
     btnType: 'primary'

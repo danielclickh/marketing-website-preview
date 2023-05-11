@@ -1,7 +1,8 @@
 export function convertDateToString(value: string): string {
-  return new Date(value).toLocaleDateString('en-US', {
+  return new Date(value).toLocaleString('en-US', {
     year: 'numeric',
     month: 'short',
-    day: 'numeric'
+    day: 'numeric',
+    timeZone: 'UTC'
   })
 }
