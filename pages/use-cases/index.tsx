@@ -144,7 +144,7 @@ function UseCasesPage({
         </div>
       </div>
       <div className='mx-auto min-h-screen max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
-        <div className='columns-3 gap-3'>
+        <div className='gap-3 md:columns-2 lg:columns-3'>
           {quotes.slice(0, visibleTestimonials).map((quote, index) => (
             <div
               key={index}
