@@ -6,6 +6,8 @@ import Layout from '../../components/Layout'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import Image from 'next/image'
 import Link from 'next/link'
+import Glider from 'react-glider'
+import 'glider-js/glider.min.css'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -108,23 +110,21 @@ function UseCasesPage({
                     <h3 className='mb-4 px-6 pt-6 text-xl font-bold text-neutral-0'>
                       {useCase.title}
                     </h3>
-                    <div className='text-neutral-20 whitespace-pre-wrap px-6 pb-6 text-sm'>
+                    <div className='text-neutral-20 whitespace-pre-wrap px-6 pb-28 text-sm'>
                       {useCase.description}
                     </div>
                     {useCase.ClientsUsingUseCase.length > 0 && (
-                      <div className='hide-scrollbar justify-content-center flex w-full flex-row justify-between divide-x divide-neutral-700/80 overflow-x-scroll border-t border-neutral-700/80 px-3'>
+                      <div className='hide-scrollbar absolute left-0 bottom-0 flex h-20 w-full justify-between divide-x divide-neutral-700/80 overflow-x-scroll border-t border-neutral-700/80'>
                         {useCase.ClientsUsingUseCase.map(
                           (client, index) =>
                             client.logo &&
                             client.href && (
-                              <div className='flex w-20'>
-                                <Image
-                                  src={client.logo.url}
-                                  width={client.logo.width}
-                                  height={client.logo.height}
-                                  className='color-swap hover:cursor-pointer'
-                                />
-                              </div>
+                              <Image
+                                src={client.logo.url}
+                                width={client.logo.width}
+                                height={client.logo.height}
+                                className='h-20 grayscale hover:cursor-pointer hover:grayscale-0'
+                              />
                             )
                         )}
                       </div>
