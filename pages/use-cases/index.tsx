@@ -147,7 +147,7 @@ function UseCasesPage({
           </div>
         </div>
       </div>
-      <div className='mx-auto max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
+      <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
         <div className='gap-3 md:columns-2 lg:columns-3'>
           {quotes.slice(0, visibleTestimonials).map((quote, index) => (
             <div
@@ -192,7 +192,7 @@ function UseCasesPage({
             <h2 className='mt-4 text-center text-3xl font-bold text-neutral-0'>
               Industries
             </h2>
-            <div className='py-20'>
+            <div className='py-24'>
               <div className='grid gap-10 md:grid-cols-2 lg:grid-cols-3'>
                 {useCasesPageData.Industries.map((industry, index) => (
                   <div className='text-center' key={index}>
