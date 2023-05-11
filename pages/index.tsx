@@ -171,14 +171,14 @@ export default function HomePage({
                     type='secondary'
                     weight='semibold'
                     size='lg'
-                    href='/company/contact?loc=homepage-hero-cta'
+                    href='https://clickhouse.com/docs/en/intro'
                     segmentEvent={{
                       label: hero.ctaButton.text,
-                      category: 'website-hero'
+                      category: 'website-hero-docs'
                     }}
                     linkClass='w-full max-w-[14rem]'
                     className='w-full'>
-                    Contact Us
+                    View documentation
                   </CUIButton>
                 </div>
                 <CUILink
