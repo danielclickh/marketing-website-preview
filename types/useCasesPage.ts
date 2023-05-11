@@ -22,6 +22,7 @@ export interface UseCaseItem {
   title: string
   description: string
   ClientsUsingUseCase: Array<ClientUsing>
+  icon: StrapiImageType
 }
 
 export interface useCasesPageDataProps extends CommonProps {

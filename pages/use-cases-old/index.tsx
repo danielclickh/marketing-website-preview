@@ -182,22 +182,22 @@ function CustomerStoriesPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-10'>
-        <div className='flex container mx-auto max-w-7xl flex-col px-4 md:px-8 2xl:px-0'>
-          <div className='flex flex-col text-center mx-auto pt-6 max-w-screen-sm'>
-            <h1 className='text-5.5xl font-semibold mb-16 font-basier'>
+        <div className='container mx-auto flex max-w-7xl flex-col px-4 md:px-8 2xl:px-0'>
+          <div className='mx-auto flex max-w-screen-sm flex-col pt-6 text-center'>
+            <h1 className='mb-16 font-basier text-5.5xl font-semibold'>
               Use cases
             </h1>
           </div>
           <div>
-            <div className='grid lg:grid-cols-2 gap-x-20'>
-              <div className='relative xl:max-w-xl text-center lg:text-left'>
-                <div className='text-4xl font-semibold relative font-basier leading-snug'>
+            <div className='grid gap-x-20 lg:grid-cols-2'>
+              <div className='relative text-center lg:text-left xl:max-w-xl'>
+                <div className='relative font-basier text-4xl font-semibold leading-snug'>
                   <Image
                     src='/images/Quote.svg'
                     width={35}
                     height={35}
                     alt='Quote'
-                    className='inline-block -mt-10'
+                    className='-mt-10 inline-block'
                   />{' '}
                   Last time I checked, we read two&nbsp;
                   <span className='tilted tilted-yellow'>
@@ -205,29 +205,29 @@ function CustomerStoriesPage({
                   </span>{' '}
                   rows a second of CDN access&nbsp;logs
                 </div>
-                <p className='mt-6 text-neutral-200 text-base'>
+                <p className='mt-6 text-base text-neutral-200'>
                   We were really not doing well with ingesting all the logs that
                   we have because it's big data, it's all the users of Disney+
                   generating that data. Ever since we chose ClickHouse, it's
                   been going well.
                 </p>
-                <div className='xl:flex justify-between items-center mt-12'>
+                <div className='mt-12 items-center justify-between xl:flex'>
                   <div className='flex-0'>
                     <p className='text-base font-semibold'>Roni Lazimi</p>
-                    <p className='text-base font-inconsolata text-primary-300'>
+                    <p className='font-inconsolata text-base text-primary-300'>
                       Software Engineer @ Disney+ Streaming
                     </p>
                   </div>
-                  <div className='mt-4 xl:mt-0 flex justify-center lg:justify-start'>
+                  <div className='mt-4 flex justify-center lg:justify-start xl:mt-0'>
                     <CUIButton
                       type='secondary'
-                      className='w-auto mx-auto group'
+                      className='group mx-auto w-auto'
                       target='_self'
                       href='/blog/nyc-meetup-report-high-speed-content-distribution-analytics-for-streaming-platforms'
                       iconRight={
                         <ChevronRightIcon
                           height='18'
-                          className='group-hover:translate-x-1/2 pt-0.5 transition'
+                          className='pt-0.5 transition group-hover:translate-x-1/2'
                         />
                       }>
                       Learn more
@@ -235,10 +235,10 @@ function CustomerStoriesPage({
                   </div>
                 </div>
               </div>
-              <div className='w-full mt-16 xl:mt-0'>
-                <div className='w-full relative'>
-                  <div className='bg-primary-300 max-w-full lg:skew-x-0 lg:inset-3 lg:absolute lg:transform lg:-right-10 lg:-top-3 rounded-md'></div>
-                  <div className='rounded-md h-fit w-full top-0 left-0 relative aspect-video'>
+              <div className='mt-16 w-full xl:mt-0'>
+                <div className='relative w-full'>
+                  <div className='max-w-full rounded-md bg-primary-300 lg:absolute lg:inset-3 lg:-right-10 lg:-top-3 lg:skew-x-0 lg:transform'></div>
+                  <div className='relative top-0 left-0 aspect-video h-fit w-full rounded-md'>
                     <VideoPlayer videoId='CVVp6N8Xeoc' provider='youtube' />
                   </div>
                 </div>
@@ -254,23 +254,23 @@ function CustomerStoriesPage({
               alt='Case studies icon'
               className='mx-auto mb-6'
             />{' '}
-            <h2 className='text-3xl font-bold text-center font-basier'>
+            <h2 className='text-center font-basier text-3xl font-bold'>
               Case studies
             </h2>
           </div>
           <div>
             <div
-              className='flex mt-10 space-x-12 relative md:min-h-fit'
+              className='relative mt-10 flex space-x-12 md:min-h-fit'
               id={spotlight.anchorId}>
               <SuiPanel
                 color='bg-neutral-725'
                 border
                 padding='xl'
                 className='border-l-4 border-l-primary-300'>
-                <div className='flex flex-col lg:flex-row items-center justify-between'>
-                  <div className='flex flex-col w-full md:w-2/3 xl:max-w-3xl'>
+                <div className='flex flex-col items-center justify-between lg:flex-row'>
+                  <div className='flex w-full flex-col md:w-2/3 xl:max-w-3xl'>
                     <p
-                      className='text-2xl font-semibold mb-8 font-basier
+                      className='mb-8 font-basier text-2xl font-semibold
                     '>
                       Uber moved its logging platform to ClickHouse increasing
                       developer productivity and overall reliability
@@ -278,25 +278,25 @@ function CustomerStoriesPage({
                     <ul className='space-y-4'>
                       <li>
                         <p className='flex items-center space-x-3'>
-                          <CheckIcon className='stroke-1 w-6 h-6 text-primary-300' />
+                          <CheckIcon className='h-6 w-6 stroke-1 text-primary-300' />
                           <span>3x data compression</span>
                         </p>
                       </li>
                       <li>
                         <p className='flex items-center space-x-3'>
-                          <CheckIcon className='stroke-1 w-6 h-6 text-primary-300' />
+                          <CheckIcon className='h-6 w-6 stroke-1 text-primary-300' />
                           <span>10x performance increase</span>
                         </p>
                       </li>
                       <li>
                         <p className='flex items-center space-x-3'>
-                          <CheckIcon className='stroke-1 w-6 h-6 text-primary-300' />
+                          <CheckIcon className='h-6 w-6 stroke-1 text-primary-300' />
                           <span>½ the reduction in hardware cost</span>
                         </p>
                       </li>
                     </ul>
                   </div>
-                  <div className='md:block w-full max-w-xs mt-10 lg:mt-0'>
+                  <div className='mt-10 w-full max-w-xs md:block lg:mt-0'>
                     <div
                       className='mx-auto w-full
                     '>
@@ -317,16 +317,16 @@ function CustomerStoriesPage({
                       />
 
                       {spotlight.ctaButton && (
-                        <div className='mt-8 mx-auto'>
+                        <div className='mx-auto mt-8'>
                           <CUIButton
                             type='secondary'
-                            className='w-auto mx-auto group'
+                            className='group mx-auto w-auto'
                             target={spotlight.ctaButton.target}
                             href={spotlight.ctaButton.href}
                             iconRight={
                               <ChevronRightIcon
                                 height='18'
-                                className='group-hover:translate-x-1/2 pt-0.5 transition'
+                                className='pt-0.5 transition group-hover:translate-x-1/2'
                               />
                             }>
                             Read use case
@@ -342,9 +342,9 @@ function CustomerStoriesPage({
         </div>
       </div>
 
-      <div className='text-neutral-0 w-full pb-6'>
-        <div className='max-w-7xl mx-auto'>
-          <div className='grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto mt-12 gap-10 px-4 md:px-8 2xl:px-0'>
+      <div className='w-full pb-6 text-neutral-0'>
+        <div className='mx-auto max-w-7xl'>
+          <div className='mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-10 px-4 md:grid-cols-2 md:px-8 2xl:px-0'>
             {useCaseItems.map((useCase, index) => (
               <UseCase
                 id={useCase.anchorId}
@@ -370,17 +370,17 @@ function CustomerStoriesPage({
           alt='What our customers say'
           className='mx-auto mb-6'
         />{' '}
-        <h2 className='text-3xl font-semibold text-center mb-20 font-basier'>
+        <h2 className='mb-20 text-center font-basier text-3xl font-semibold'>
           What our customers say
         </h2>
       </div>
-      <div className='max-w-7xl mx-auto pb-24 px-4 md:px-8 2xl:px-0'>
-        <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-6 bg-shadow-element-center red-shadow'>
+      <div className='mx-auto max-w-7xl px-4 pb-24 md:px-8 2xl:px-0'>
+        <div className='bg-shadow-element-center red-shadow grid gap-y-6 gap-x-6 md:grid-cols-2 lg:grid-cols-3'>
           {testimonialsJson.slice(0, visibleTestimonials).map((testimonial) => (
             <div
-              className='animate-fade-in flex w-full flex-col text-center px-4 bg-neutral-900/50 border border-neutral-725 rounded-lg p-6 relative shadow-card hover:shadow-lg'
+              className='animate-fade-in relative flex w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:shadow-lg'
               key={testimonial?.id}>
-              <div className='w-full h-full flex flex-col justify-between space-y-12'>
+              <div className='flex h-full w-full flex-col justify-between space-y-12'>
                 <div className='text-left'>
                   <Image
                     src='/images/Quote.svg'
@@ -389,12 +389,12 @@ function CustomerStoriesPage({
                     alt='Quote'
                     className='mb-4'
                   />{' '}
-                  <p className='text-neutral-200 text-base'>
+                  <p className='text-base text-neutral-200'>
                     {testimonial?.text}
                   </p>
                 </div>
                 <div>
-                  <p className='text-primary-300 font-inconsolata mb-3 text-left'>
+                  <p className='mb-3 text-left font-inconsolata text-primary-300'>
                     {testimonial?.category}
                   </p>
                   <Image
@@ -410,10 +410,10 @@ function CustomerStoriesPage({
           ))}
         </div>
         {visibleTestimonials < testimonialsJson.length && (
-          <div className='mt-12 mx-auto'>
+          <div className='mx-auto mt-12'>
             <CUIButton
               type='secondary'
-              className='w-auto mx-auto'
+              className='mx-auto w-auto'
               onClick={loadMore}
               iconRight=''>
               View more
@@ -431,11 +431,11 @@ function CustomerStoriesPage({
             alt='Case studies icon'
             className='mx-auto mb-6'
           />{' '}
-          <h2 className='text-3xl font-bold text-center font-basier'>
+          <h2 className='text-center font-basier text-3xl font-bold'>
             Recent customer stories
           </h2>
         </div>
-        <div className='w-full flex flex-col md:grid md:grid-cols-3 md:gap-x-16 gap-y-6 md:gap-y-0 '>
+        <div className='flex w-full flex-col gap-y-6 md:grid md:grid-cols-3 md:gap-x-16 md:gap-y-0 '>
           {customerStories.map((blog) => (
             <BlogPost key={blog.id} {...blog} />
           ))}
@@ -449,10 +449,10 @@ function CustomerStoriesPage({
       </div>
       <HRSeparator />
       <div className='my-24'>
-        <h2 className='text-center text-neutral-100 font-basier text-4xl font-semibold mb-16'>
+        <h2 className='mb-16 text-center font-basier text-4xl font-semibold text-neutral-100'>
           Ready to give it a go?
         </h2>
-        <div className='max-w-7xl mx-auto px-4 md:px-8 2xl:px-0'>
+        <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
           <GiveItAGo />
         </div>
       </div>

@@ -4,10 +4,9 @@ import { useCasesPageDataProps } from '../../types/useCasesPage'
 import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import Image from 'next/image'
+import { StrapiImage } from '../../components/StrapiElements'
 import Link from 'next/link'
-import Glider from 'react-glider'
-import 'glider-js/glider.min.css'
+import { CUIButton } from '../../components/ClickUI'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -30,14 +29,11 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
       'individual-use-cases',
       individualUseCasesParams
     )
-
     const quotesParams = {
       sort: ['id:ASC'],
-      populate: ['quotes']
+      populate: ['quotes', 'quotes.*', 'quotes.logo.*']
     }
     const { data: quotes } = await findAll('use-case-quotes', quotesParams)
-
-    console.log(quotes)
 
     const commonProps = await getCommonProps()
     return {
@@ -106,27 +102,37 @@ function UseCasesPage({
                 {individualUseCases.map((useCase, index) => (
                   <div
                     key={index}
-                    className='relative z-20 overflow-hidden rounded-lg border border-neutral-700/80 bg-neutral-900/50 shadow-card hover:bg-neutral-750'>
-                    <h3 className='mb-4 px-6 pt-6 text-xl font-bold text-neutral-0'>
+                    className='hide-scrollbar hide-scrollbar relative z-20 min-w-full overflow-hidden rounded-lg border border-neutral-700/80 bg-neutral-900/50 shadow-card hover:bg-neutral-750'>
+                    {useCase.icon && (
+                      <div className='px-6 pt-6 pb-3'>
+                        <StrapiImage {...useCase.icon} />
+                      </div>
+                    )}
+
+                    <h3 className='mb-4 px-6 text-xl font-bold text-neutral-0'>
                       {useCase.title}
                     </h3>
                     <div className='text-neutral-20 whitespace-pre-wrap px-6 pb-28 text-sm'>
                       {useCase.description}
                     </div>
                     {useCase.ClientsUsingUseCase.length > 0 && (
-                      <div className='hide-scrollbar absolute left-0 bottom-0 flex h-20 w-full justify-between divide-x divide-neutral-700/80 overflow-x-scroll border-t border-neutral-700/80'>
-                        {useCase.ClientsUsingUseCase.map(
-                          (client, index) =>
-                            client.logo &&
-                            client.href && (
-                              <Image
-                                src={client.logo.url}
-                                width={client.logo.width}
-                                height={client.logo.height}
-                                className='h-20 grayscale hover:cursor-pointer hover:grayscale-0'
-                              />
-                            )
-                        )}
+                      <div className='hide-scrollbar absolute left-0 bottom-0 z-20 h-20 w-full overflow-x-scroll border-t border-neutral-700/80'>
+                        <div className='flex w-full justify-between divide-x divide-neutral-700/80 '>
+                          {useCase.ClientsUsingUseCase.map(
+                            (client, index) =>
+                              client.logo &&
+                              client.href && (
+                                <div key={index}>
+                                  <Link href={client.href}>
+                                    <StrapiImage
+                                      {...client.logo}
+                                      className='h-20 grayscale hover:cursor-pointer hover:grayscale-0'
+                                    />
+                                  </Link>
+                                </div>
+                              )
+                          )}
+                        </div>
                       </div>
                     )}
                   </div>
@@ -137,19 +143,37 @@ function UseCasesPage({
           </div>
         </div>
       </div>
-      <div className='mx-auto max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
-        <div className='inline-grid grid-cols-3 gap-3'>
-          {quotes.map((quote, index) => (
+      <div className='mx-auto min-h-screen max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
+        <div className='columns-3 gap-3'>
+          {quotes.slice(0, visibleTestimonials).map((quote, index) => (
             <div
               key={index}
-              className='rounded-lg border border-neutral-700/80 bg-neutral-900/50 p-6 shadow-card hover:bg-neutral-750'>
-              <h3 className=''>{quote.quotes.customerName}</h3>
+              className='animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover p-6 shadow-card hover:bg-neutral-750'>
+              {quote.quotes.href && (
+                <Link href={quote.quotes.href}>
+                  <StrapiImage
+                    {...quote.quotes.logo}
+                    className='color-swap mb-4 h-auto w-32'
+                  />
+                </Link>
+              )}
               <p className='text-sm font-normal text-white'>
                 "{quote.quotes.quote}"
               </p>
             </div>
           ))}
         </div>
+        {visibleTestimonials < quotes.length && (
+          <div className='mx-auto mt-12'>
+            <CUIButton
+              type='secondary'
+              className='mx-auto w-auto'
+              onClick={loadMore}
+              iconRight=''>
+              View more
+            </CUIButton>
+          </div>
+        )}
       </div>
     </Layout>
   )
