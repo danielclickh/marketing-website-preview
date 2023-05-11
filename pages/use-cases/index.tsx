@@ -8,11 +8,15 @@ import { StrapiImage } from '../../components/StrapiElements'
 import Link from 'next/link'
 import { CUIButton } from '../../components/ClickUI'
 import GetStartedFree from '../../components/GetStartedFree'
+import Image from 'next/image'
+
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
     const useCasesPageData = await findOne('use-case-feature', {
       populate: ['ctaButton', 'Industries']
     })
+
+    console.log(useCasesPageData)
 
     const individualUseCasesParams = {
       sort: ['id:ASC'],
@@ -175,9 +179,34 @@ function UseCasesPage({
           </div>
         )}
       </div>
-      <div className='bg-shadow-element yellow-shadow align-shadow-right mx-auto max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
-        {' '}
-        <GetStartedFree href='https://clickhouse.cloud/signUp?loc=use-cases-get-started-footer' />
+      <div className='bg-shadow-element yellow-shadow align-shadow-right bg-neutral-900'>
+        <div className='mx-auto max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
+          <div className='py-10'>
+            <Image
+              src='/images/industries-icon.svg'
+              width={72}
+              height={72}
+              alt='Industries'
+              className='mx-auto'
+            />
+            <h2 className='mt-4 text-center text-3xl font-bold text-neutral-0'>
+              Industries
+            </h2>
+            <div className='py-20'>
+              <div className='grid gap-10 md:grid-cols-2 lg:grid-cols-3'>
+                {useCasesPageData.Industries.map((industry, index) => (
+                  <div className='text-center' key={index}>
+                    <h3 className='text-lg font-bold'>{industry.name}</h3>
+                    <p className='mt-2 text-sm text-neutral-200'>
+                      {industry.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <GetStartedFree href='https://clickhouse.cloud/signUp?loc=use-cases-get-started-footer' />
+        </div>
       </div>
     </Layout>
   )

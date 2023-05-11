@@ -25,6 +25,12 @@ export interface UseCaseItem {
   icon: StrapiImageType
 }
 
+export interface Industry {
+  name: string
+  description: string
+  href: string
+}
+
 export interface useCasesPageDataProps extends CommonProps {
   useCasesPageData: {
     Title: string
@@ -33,6 +39,7 @@ export interface useCasesPageDataProps extends CommonProps {
       text: string
       href: string
     }
+    Industries: Array<Industry>
   }
   individualUseCases: Array<UseCaseItem>
   quotes: Array<Quote>
