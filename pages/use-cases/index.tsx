@@ -7,7 +7,7 @@ import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { StrapiImage } from '../../components/StrapiElements'
 import Link from 'next/link'
 import { CUIButton } from '../../components/ClickUI'
-
+import GetStartedFree from '../../components/GetStartedFree'
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
     const useCasesPageData = await findOne('use-case-feature', {
@@ -143,7 +143,7 @@ function UseCasesPage({
           </div>
         </div>
       </div>
-      <div className='mx-auto min-h-screen max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
+      <div className='mx-auto max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
         <div className='gap-3 md:columns-2 lg:columns-3'>
           {quotes.slice(0, visibleTestimonials).map((quote, index) => (
             <div
@@ -174,6 +174,10 @@ function UseCasesPage({
             </CUIButton>
           </div>
         )}
+      </div>
+      <div className='bg-shadow-element yellow-shadow align-shadow-right mx-auto max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
+        {' '}
+        <GetStartedFree href='https://clickhouse.cloud/signUp?loc=use-cases-get-started-footer' />
       </div>
     </Layout>
   )
