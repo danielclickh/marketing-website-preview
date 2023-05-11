@@ -21,18 +21,13 @@ export interface RegionPricing {
   hasDevService: boolean
 }
 
-export interface RegionPricingWithIcon
-  extends Omit<RegionPricing, 'regionFlagPNG'> {
-  regionFlagPNG: ReactNode
-}
-
 interface PricingHero {
   title: string
   description: string
   openSourceLink: string
 }
 
-interface MeteredPricing {
+export interface MeteredPricing {
   title: string
   subtitle: string
   footerNote: string
@@ -56,6 +51,7 @@ export interface PricingPlanData {
   items_disabled: Array<PlanBullet>
   actionButton: pricingActionButton
   seo: SeoMetadata
+  cloudProvider: 'aws' | 'gcp' | 'acp'
 }
 
 interface PhilosophyColumn {
