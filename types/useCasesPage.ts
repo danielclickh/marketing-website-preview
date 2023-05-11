@@ -8,6 +8,16 @@ export interface ClientUsing {
   icon: StrapiImageType
 }
 
+export interface Quote {
+  id: number
+  quotes: {
+    logo: StrapiImageType
+    customerName: string
+    href: string
+    quote: string
+  }
+}
+
 export interface UseCaseItem {
   title: string
   description: string
@@ -24,4 +34,5 @@ export interface useCasesPageDataProps extends CommonProps {
     }
   }
   individualUseCases: Array<UseCaseItem>
+  quotes: Array<Quote>
 }

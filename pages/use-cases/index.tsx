@@ -4,10 +4,13 @@ import { useCasesPageDataProps } from '../../types/useCasesPage'
 import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
+import Image from 'next/image'
+import Link from 'next/link'
+
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
     const useCasesPageData = await findOne('use-case-feature', {
-      populate: ['ctaButton']
+      populate: ['ctaButton', 'Industries']
     })
 
     const individualUseCasesParams = {
@@ -25,11 +28,21 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
       'individual-use-cases',
       individualUseCasesParams
     )
+
+    const quotesParams = {
+      sort: ['id:ASC'],
+      populate: ['quotes']
+    }
+    const { data: quotes } = await findAll('use-case-quotes', quotesParams)
+
+    console.log(quotes)
+
     const commonProps = await getCommonProps()
     return {
       props: {
         useCasesPageData,
         individualUseCases,
+        quotes,
         seo: {
           title: `${useCasesPageData.Title} | ClickHouse`,
           description: useCasesPageData.Description
@@ -44,7 +57,8 @@ function UseCasesPage({
   headerData,
   footerData,
   useCasesPageData,
-  individualUseCases
+  individualUseCases,
+  quotes
 }: useCasesPageDataProps) {
   const [visibleTestimonials, setVisibleTestimonials] = useState(6)
 
@@ -85,41 +99,56 @@ function UseCasesPage({
         </div>
         <div className='clip-inverted-triangle'>
           <div className='section-container mt-12 max-w-7xl lg:mt-0'>
-            <div className='relative -mt-[80px] w-full rounded-lg border-t-4 border-t-primary-300 bg-neutral-900 p-10 shadow-md'>
+            <div className='relative -mt-[80px] w-full rounded-lg border-t-4 border-t-primary-300 bg-neutral-900 p-10 shadow-lg'>
               <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
                 {individualUseCases.map((useCase, index) => (
-                  <>
-                    {console.log(useCase)}
-                    <div
-                      key={index}
-                      className='relative overflow-hidden rounded-lg border border-neutral-700/80 bg-neutral-900/50 p-6 shadow-card hover:bg-neutral-750'>
-                      <h3 className='mb-4 text-xl font-bold text-neutral-0'>
-                        {useCase.title}
-                      </h3>
-                      <div className='text-neutral-20 whitespace-pre-wrap pb-10 text-sm'>
-                        {useCase.description}
-                      </div>
-                      {useCase.ClientsUsingUseCase.length > 0 && (
-                        <div
-                          className='absolute bottom-0 left-0 w-full overflow-x-scroll
-                      '>
-                          {useCase.ClientsUsingUseCase.map((client, index) => (
-                            <>{client.logo}</>
-                          ))}
-                        </div>
-                      )}
+                  <div
+                    key={index}
+                    className='relative z-20 overflow-hidden rounded-lg border border-neutral-700/80 bg-neutral-900/50 shadow-card hover:bg-neutral-750'>
+                    <h3 className='mb-4 px-6 pt-6 text-xl font-bold text-neutral-0'>
+                      {useCase.title}
+                    </h3>
+                    <div className='text-neutral-20 whitespace-pre-wrap px-6 pb-6 text-sm'>
+                      {useCase.description}
                     </div>
-                  </>
+                    {useCase.ClientsUsingUseCase.length > 0 && (
+                      <div className='hide-scrollbar justify-content-center flex w-full flex-row justify-between divide-x divide-neutral-700/80 overflow-x-scroll border-t border-neutral-700/80 px-3'>
+                        {useCase.ClientsUsingUseCase.map(
+                          (client, index) =>
+                            client.logo &&
+                            client.href && (
+                              <div className='flex w-20'>
+                                <Image
+                                  src={client.logo.url}
+                                  width={client.logo.width}
+                                  height={client.logo.height}
+                                  className='color-swap hover:cursor-pointer'
+                                />
+                              </div>
+                            )
+                        )}
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
-            <div className='bg-primary-300 pb-16'></div>
+            <div className='bg-primary-300 pb-24'></div>
           </div>
         </div>
       </div>
-      <div className='bg-grid pt-10'>
-        <div className='container mx-auto flex max-w-7xl flex-col px-4 md:px-8 2xl:px-0'>
-          <div className='mx-auto flex max-w-screen-sm flex-col pt-6 text-center'></div>
+      <div className='mx-auto max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
+        <div className='inline-grid grid-cols-3 gap-3'>
+          {quotes.map((quote, index) => (
+            <div
+              key={index}
+              className='rounded-lg border border-neutral-700/80 bg-neutral-900/50 p-6 shadow-card hover:bg-neutral-750'>
+              <h3 className=''>{quote.quotes.customerName}</h3>
+              <p className='text-sm font-normal text-white'>
+                "{quote.quotes.quote}"
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </Layout>

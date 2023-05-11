@@ -538,3 +538,20 @@ a.arrow-link {
     @apply md:hidden;
   }
 }
+
+.color-swap {
+  filter: brightness(0) invert(0.8);
+  -webkit-filter: brightness(0) invert(0.8);
+  &:hover {
+    filter: brightness(1) invert(0);
+    -webkit-filter: brightness(1) invert(0);
+  }
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
