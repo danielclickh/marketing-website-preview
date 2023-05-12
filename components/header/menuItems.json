@@ -224,50 +224,6 @@
 						"target": "_self"
 					}
 				]
-			},
-			{
-				"id": 20,
-				"name": "Industries",
-				"href": "/use-cases",
-				"target": "_self",
-				"menuItems": [
-					{
-						"id": 10,
-						"name": "Financial Services",
-						"href": "/use-cases#industries",
-						"target": "_self"
-					},
-					{
-						"id": 20,
-						"name": "Marketing & Sales",
-						"href": "/use-cases#industries",
-						"target": "_self"
-					},
-					{
-						"id": 30,
-						"name": "E-Commerce & Retail",
-						"href": "/use-cases#industries",
-						"target": "_self"
-					},
-					{
-						"id": 40,
-						"name": "Technology",
-						"href": "/use-cases#industries",
-						"target": "_self"
-					},
-					{
-						"id": 50,
-						"name": "Media & Entertainment",
-						"href": "/use-cases#industries",
-						"target": "_self"
-					},
-					{
-						"id": 60,
-						"name": "Gaming",
-						"href": "/use-cases#industries",
-						"target": "_self"
-					}
-				]
 			}
 		]
 	},
