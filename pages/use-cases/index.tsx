@@ -165,12 +165,12 @@ function UseCasesPage({
                                     className={`w-96 ${
                                       index !== 0
                                         ? 'border-l border-l-neutral-700/80'
-                                        : 'ml-6'
+                                        : 'md:ml-6'
                                     } ${
                                       index !==
                                       useCase.ClientsUsingUseCase.length - 1
                                         ? ''
-                                        : 'mr-8'
+                                        : 'md:mr-8'
                                     }`}>
                                     <Link href={client.href}>
                                       <div className='h-20 w-full'>
