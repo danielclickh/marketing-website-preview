@@ -183,7 +183,7 @@
 		"menuItems": [
 			{
 				"id": 1,
-				"name": "",
+				"name": "Use cases",
 				"href": "/use-cases",
 				"target": "_self",
 				"menuItems": [
@@ -191,51 +191,81 @@
 						"id": 10,
 						"name": "Real-time Dashboards",
 						"href": "/use-cases#real-timedashboards",
-						"target": "_self",
-						"icon": "/images/icons/use-cases/realtime.svg"
+						"target": "_self"
 					},
 					{
 						"id": 20,
 						"name": "Event-Driven Analytics",
 						"href": "/use-cases#event-drivenanalytics",
-						"target": "_self",
-						"icon": "/images/icons/use-cases/eventdriven.svg"
+						"target": "_self"
 					},
 					{
 						"id": 30,
 						"name": "Business Intelligence",
 						"href": "/use-cases#businessintelligence",
-						"target": "_self",
-						"icon": "/images/icons/use-cases/bi.svg"
-					}
-				]
-			},
-			{
-				"id": 20,
-				"name": "",
-				"href": "/use-cases",
-				"target": "_self",
-				"menuItems": [
+						"target": "_self"
+					},
 					{
 						"id": 40,
 						"name": "Data Warehouse Speed Layer",
 						"href": "/use-cases#datawarehousespeedlayer",
-						"target": "_self",
-						"icon": "/images/icons/use-cases/speedlayer.svg"
+						"target": "_self"
 					},
 					{
 						"id": 50,
 						"name": "Logging & Metrics",
 						"href": "/use-cases#loggingmetrics",
-						"target": "_self",
-						"icon": "/images/icons/use-cases/logging.svg"
+						"target": "_self"
 					},
 					{
 						"id": 60,
 						"name": "ML & Data Science",
 						"href": "/use-cases#mldatascience",
-						"target": "_self",
-						"icon": "/images/icons/use-cases/ml.svg"
+						"target": "_self"
+					}
+				]
+			},
+			{
+				"id": 20,
+				"name": "Industries",
+				"href": "/use-cases",
+				"target": "_self",
+				"menuItems": [
+					{
+						"id": 10,
+						"name": "Financial Services",
+						"href": "/use-cases#industries",
+						"target": "_self"
+					},
+					{
+						"id": 20,
+						"name": "Marketing & Sales",
+						"href": "/use-cases#industries",
+						"target": "_self"
+					},
+					{
+						"id": 30,
+						"name": "E-Commerce & Retail",
+						"href": "/use-cases#industries",
+						"target": "_self"
+					},
+					{
+						"id": 40,
+						"name": "Technology",
+						"href": "/use-cases#industries",
+						"target": "_self"
+					},
+					{
+						"id": 50,
+						"name": "Media & Entertainment",
+						"href": "/use-cases#industries",
+						"target": "_self"
+					},
+					{
+						"id": 60,
+						"name": "Gaming",
+						"href": "/use-cases#industries",
+						"target": "_self"
 					}
 				]
 			}

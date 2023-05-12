@@ -71,9 +71,9 @@ function UseCasesPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
-        <div className='relative gap-24 px-8 pb-20 pt-16 md:px-0 md:pt-20 lg:pb-44 '>
+        <div className='relative gap-24 px-8 pb-20 pt-16 md:px-0 lg:pb-44 '>
           <div className='mx-auto max-w-2xl'>
-            <div className='mx-auto text-center md:mr-0 md:mt-8'>
+            <div className='mx-auto text-center md:mr-0 '>
               <h1 className='mb-6 font-basier text-5.5xl font-semibold text-neutral-200'>
                 {useCasesPageData.Title}
               </h1>
@@ -99,7 +99,7 @@ function UseCasesPage({
             </div>
           </div>
         </div>
-        <div className='clip-inverted-triangle'>
+        <div className='clip-inverted-triangle-use-cases'>
           <div className='section-container mt-12 max-w-7xl lg:mt-0'>
             <div className='relative -mt-[80px] w-full rounded-lg border-t-4 border-t-primary-300 bg-neutral-900 p-3 shadow-lg md:p-10'>
               <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
@@ -180,7 +180,9 @@ function UseCasesPage({
           </div>
         )}
       </div>
-      <div className='bg-shadow-element yellow-shadow align-shadow-right bg-neutral-900'>
+      <div
+        className='bg-shadow-element yellow-shadow align-shadow-right bg-neutral-900'
+        id='industries'>
         <div className='mx-auto max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
           <div className='py-10'>
             <Image
