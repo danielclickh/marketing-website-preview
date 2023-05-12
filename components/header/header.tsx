@@ -112,7 +112,11 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
                 </svg>
 
                 <span className='text-sm font-medium leading-none'>
-                  {Intl.NumberFormat('en', { notation: 'compact' })
+                  {Intl.NumberFormat('en', {
+                    notation: 'compact',
+                    minimumFractionDigits: 1,
+                    maximumFractionDigits: 1
+                  })
                     .format(stars)
                     .toLowerCase()}
                 </span>
