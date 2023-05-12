@@ -11,6 +11,7 @@ import GetStartedFree from '../../components/GetStartedFree'
 import Image from 'next/image'
 import Glider from 'react-glider'
 import 'glider-js/glider.min.css'
+import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/solid'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -121,36 +122,61 @@ function UseCasesPage({
                       {useCase.description}
                     </div>
                     {useCase.ClientsUsingUseCase.length > 0 && (
-                      <div className='hide-scrollbar absolute left-0 bottom-0 z-20 h-20 w-full overflow-x-scroll border-t border-neutral-700/80'>
-                        <div className='flex w-full justify-between divide-x divide-neutral-700/80 '>
-                          <Glider
-                            draggable
-                            hasArrows
-                            slidesToShow={3.5}
-                            slidesToScroll={1}>
-                            {useCase.ClientsUsingUseCase.map(
-                              (client, index) =>
-                                client.logo &&
-                                client.href && (
-                                  <div
-                                    key={index}
-                                    className={`w-96 ${
-                                      index !== 0
-                                        ? 'border-l border-l-neutral-700/80'
-                                        : ''
-                                    }`}>
-                                    <Link href={client.href}>
-                                      <div className='h-20 w-full'>
-                                        <StrapiImage
-                                          {...client.logo}
-                                          className='h-full w-full object-contain grayscale hover:cursor-pointer hover:grayscale-0'
-                                        />
-                                      </div>
-                                    </Link>
-                                  </div>
-                                )
-                            )}
-                          </Glider>
+                      <div>
+                        <div className='hide-scrollbar absolute left-0 bottom-0 z-20 h-20 w-full overflow-x-scroll border-t border-neutral-700/80'>
+                          <div className='flex w-full justify-between '>
+                            <div
+                              id={`buttonPrev-${index}`}
+                              className='absolute top-1/2 left-3 z-50 -translate-y-1/2 transform rounded-full bg-primary-300 p-1 hover:cursor-pointer hover:bg-primary-300'>
+                              <span className='sr-only'>Previous</span>
+                              <ChevronLeftIcon
+                                height='18'
+                                className='fill-black pt-0.5 transition group-hover:translate-x-1/2'
+                              />
+                            </div>
+                            <div
+                              id={`buttonNext-${index}`}
+                              className='absolute top-1/2 right-3 z-50 -translate-y-1/2 transform rounded-full bg-primary-300 p-1 hover:cursor-pointer'>
+                              <span className='sr-only'>Next</span>
+                              <ChevronRightIcon
+                                height='18'
+                                className='fill-black pt-0.5 transition group-hover:translate-x-1/2'
+                              />
+                            </div>
+                            <Glider
+                              draggable
+                              hasArrows
+                              slidesToShow={3.5}
+                              slidesToScroll={1}
+                              rewind={true}
+                              arrows={{
+                                prev: '#buttonPrev-' + index,
+                                next: '#buttonNext-' + index
+                              }}>
+                              {useCase.ClientsUsingUseCase.map(
+                                (client, index) =>
+                                  client.logo &&
+                                  client.href && (
+                                    <div
+                                      key={index}
+                                      className={`w-96 ${
+                                        index !== 0
+                                          ? 'border-l border-l-neutral-700/80'
+                                          : ''
+                                      }`}>
+                                      <Link href={client.href}>
+                                        <div className='h-20 w-full'>
+                                          <StrapiImage
+                                            {...client.logo}
+                                            className='h-full w-full object-contain grayscale hover:cursor-pointer hover:grayscale-0'
+                                          />
+                                        </div>
+                                      </Link>
+                                    </div>
+                                  )
+                              )}
+                            </Glider>
+                          </div>
                         </div>
                       </div>
                     )}
