@@ -9,6 +9,8 @@ import Link from 'next/link'
 import { CUIButton } from '../../components/ClickUI'
 import GetStartedFree from '../../components/GetStartedFree'
 import Image from 'next/image'
+import Glider from 'react-glider'
+import 'glider-js/glider.min.css'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -31,6 +33,7 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
       'individual-use-cases',
       individualUseCasesParams
     )
+
     const quotesParams = {
       sort: ['id:DESC'],
       populate: ['quotes', 'quotes.*', 'quotes.logo.*']
@@ -111,30 +114,43 @@ function UseCasesPage({
                         <StrapiImage {...useCase.icon} />
                       </div>
                     )}
-
                     <h3 className='mb-4 px-6 text-xl font-bold text-neutral-0'>
                       {useCase.title}
                     </h3>
-                    <div className='text-neutral-20 whitespace-pre-wrap px-6 pb-28 text-sm'>
+                    <div className='text-neutral-20 whitespace-pre-wrap px-6 pb-24 text-sm'>
                       {useCase.description}
                     </div>
                     {useCase.ClientsUsingUseCase.length > 0 && (
                       <div className='hide-scrollbar absolute left-0 bottom-0 z-20 h-20 w-full overflow-x-scroll border-t border-neutral-700/80'>
                         <div className='flex w-full justify-between divide-x divide-neutral-700/80 '>
-                          {useCase.ClientsUsingUseCase.map(
-                            (client, index) =>
-                              client.logo &&
-                              client.href && (
-                                <div key={index}>
-                                  <Link href={client.href}>
-                                    <StrapiImage
-                                      {...client.logo}
-                                      className='h-20 grayscale hover:cursor-pointer hover:grayscale-0'
-                                    />
-                                  </Link>
-                                </div>
-                              )
-                          )}
+                          <Glider
+                            draggable
+                            hasArrows
+                            slidesToShow={3.5}
+                            slidesToScroll={1}>
+                            {useCase.ClientsUsingUseCase.map(
+                              (client, index) =>
+                                client.logo &&
+                                client.href && (
+                                  <div
+                                    key={index}
+                                    className={`w-96 ${
+                                      index !== 0
+                                        ? 'border-l border-l-neutral-700/80'
+                                        : ''
+                                    }`}>
+                                    <Link href={client.href}>
+                                      <div className='h-20 w-full'>
+                                        <StrapiImage
+                                          {...client.logo}
+                                          className='h-full w-full object-contain grayscale hover:cursor-pointer hover:grayscale-0'
+                                        />
+                                      </div>
+                                    </Link>
+                                  </div>
+                                )
+                            )}
+                          </Glider>
                         </div>
                       </div>
                     )}
