@@ -109,7 +109,7 @@ function UseCasesPage({
                   <div
                     key={index}
                     id={useCase.title.replace(/[\s&]+/g, '').toLowerCase()}
-                    className='hide-scrollbar hide-scrollbar relative z-20 min-w-full rounded-lg border border-neutral-700/80 bg-neutral-900/50 shadow-card hover:bg-neutral-750'>
+                    className='relative z-20 min-w-full overflow-hidden rounded-lg border border-neutral-700/80 bg-neutral-900/50 shadow-card hover:bg-neutral-750'>
                     {useCase.icon && (
                       <div className='px-6 pt-6 pb-3'>
                         <StrapiImage {...useCase.icon} />
@@ -122,65 +122,63 @@ function UseCasesPage({
                       {useCase.description}
                     </div>
                     {useCase.ClientsUsingUseCase.length > 0 && (
-                      <div className='overflow-hidden'>
-                        <div className='absolute left-0 bottom-0 z-50 h-20 w-full overflow-hidden border-t border-neutral-700/80'>
-                          <div className='flex w-full justify-between'>
-                            <div
-                              id={`buttonPrev-${index}`}
-                              className='absolute top-0 left-0 z-40 hidden h-full transform bg-gradient-to-r from-neutral-900 via-neutral-800 to-transparent pl-4 pr-16 hover:cursor-pointer md:flex'>
-                              <span className='sr-only'>Previous</span>
-                              <div className='flex items-center'>
-                                <ChevronLeftIcon
-                                  height='30'
-                                  className='fill-primary-300 pt-0.5 transition group-hover:translate-x-1/2'
-                                />
-                              </div>
+                      <div className='absolute left-0 bottom-0 z-50 h-20 w-full overflow-hidden border-t border-neutral-700/80 bg-neutral-900'>
+                        <div className='flex w-full justify-between'>
+                          <div
+                            id={`buttonPrev-${index}`}
+                            className='absolute top-0 left-0 z-40 hidden h-full transform bg-gradient-to-r from-neutral-900 via-neutral-800 to-transparent pl-4 pr-16 hover:cursor-pointer md:flex'>
+                            <span className='sr-only'>Previous</span>
+                            <div className='flex items-center'>
+                              <ChevronLeftIcon
+                                height='30'
+                                className='fill-primary-300 pt-0.5 transition group-hover:translate-x-1/2'
+                              />
                             </div>
-                            <div
-                              id={`buttonNext-${index}`}
-                              className='absolute top-0 right-0 z-40 hidden h-full transform bg-gradient-to-l from-neutral-900 via-neutral-800 to-transparent pr-4 pl-16 hover:cursor-pointer md:flex'>
-                              <span className='sr-only'>Next</span>
-                              <div className='flex items-center'>
-                                <ChevronRightIcon
-                                  height='30'
-                                  className='fill-primary-300 pt-0.5 transition group-hover:translate-x-1/2'
-                                />
-                              </div>
-                            </div>
-                            <Glider
-                              draggable
-                              hasArrows
-                              slidesToShow={5}
-                              slidesToScroll={1}
-                              rewind={true}
-                              arrows={{
-                                prev: '#buttonPrev-' + index,
-                                next: '#buttonNext-' + index
-                              }}>
-                              {useCase.ClientsUsingUseCase.map(
-                                (client, index) =>
-                                  client.logo &&
-                                  client.href && (
-                                    <div
-                                      key={index}
-                                      className={`w-96 ${
-                                        index !== 0
-                                          ? 'border-l border-l-neutral-700/80'
-                                          : ''
-                                      }`}>
-                                      <Link href={client.href}>
-                                        <div className='h-20 w-full'>
-                                          <StrapiImage
-                                            {...client.logo}
-                                            className='h-full w-full object-contain grayscale hover:cursor-pointer hover:grayscale-0'
-                                          />
-                                        </div>
-                                      </Link>
-                                    </div>
-                                  )
-                              )}
-                            </Glider>
                           </div>
+                          <div
+                            id={`buttonNext-${index}`}
+                            className='absolute top-0 right-0 z-40 hidden h-full transform bg-gradient-to-l from-neutral-900 via-neutral-800 to-transparent pr-4 pl-16 hover:cursor-pointer md:flex'>
+                            <span className='sr-only'>Next</span>
+                            <div className='flex items-center'>
+                              <ChevronRightIcon
+                                height='30'
+                                className='fill-primary-300 pt-0.5 transition group-hover:translate-x-1/2'
+                              />
+                            </div>
+                          </div>
+                          <Glider
+                            draggable
+                            hasArrows
+                            slidesToShow={5}
+                            slidesToScroll={1}
+                            rewind={true}
+                            arrows={{
+                              prev: '#buttonPrev-' + index,
+                              next: '#buttonNext-' + index
+                            }}>
+                            {useCase.ClientsUsingUseCase.map(
+                              (client, index) =>
+                                client.logo &&
+                                client.href && (
+                                  <div
+                                    key={index}
+                                    className={`w-96 ${
+                                      index !== 0
+                                        ? 'border-l border-l-neutral-700/80'
+                                        : ''
+                                    }`}>
+                                    <Link href={client.href}>
+                                      <div className='h-20 w-full'>
+                                        <StrapiImage
+                                          {...client.logo}
+                                          className='h-full w-full object-contain grayscale hover:cursor-pointer hover:grayscale-0'
+                                        />
+                                      </div>
+                                    </Link>
+                                  </div>
+                                )
+                            )}
+                          </Glider>
                         </div>
                       </div>
                     )}
