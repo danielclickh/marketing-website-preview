@@ -106,6 +106,7 @@ function UseCasesPage({
                 {individualUseCases.map((useCase, index) => (
                   <div
                     key={index}
+                    id={useCase.title.replace(/[\s&]+/g, '').toLowerCase()}
                     className='hide-scrollbar hide-scrollbar relative z-20 min-w-full overflow-hidden rounded-lg border border-neutral-700/80 bg-neutral-900/50 shadow-card hover:bg-neutral-750'>
                     {useCase.icon && (
                       <div className='px-6 pt-6 pb-3'>
