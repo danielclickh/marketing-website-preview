@@ -13,7 +13,7 @@ import Image from 'next/image'
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
     const useCasesPageData = await findOne('use-case-feature', {
-      populate: ['ctaButton', 'Industries']
+      populate: ['ctaButton', 'Industries', 'Industries.icon']
     })
 
     console.log(useCasesPageData)
@@ -34,7 +34,7 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
       individualUseCasesParams
     )
     const quotesParams = {
-      sort: ['id:ASC'],
+      sort: ['id:DESC'],
       populate: ['quotes', 'quotes.*', 'quotes.logo.*']
     }
     const { data: quotes } = await findAll('use-case-quotes', quotesParams)
@@ -62,10 +62,10 @@ function UseCasesPage({
   individualUseCases,
   quotes
 }: useCasesPageDataProps) {
-  const [visibleTestimonials, setVisibleTestimonials] = useState(6)
+  const [visibleTestimonials, setVisibleTestimonials] = useState(3)
 
   const loadMore = () => {
-    setVisibleTestimonials((prevValue) => prevValue + 6)
+    setVisibleTestimonials((prevValue) => prevValue + 3)
   }
 
   return (
@@ -101,7 +101,7 @@ function UseCasesPage({
         </div>
         <div className='clip-inverted-triangle'>
           <div className='section-container mt-12 max-w-7xl lg:mt-0'>
-            <div className='relative -mt-[80px] w-full rounded-lg border-t-4 border-t-primary-300 bg-neutral-900 p-10 shadow-lg'>
+            <div className='relative -mt-[80px] w-full rounded-lg border-t-4 border-t-primary-300 bg-neutral-900 p-3 shadow-lg md:p-10'>
               <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
                 {individualUseCases.map((useCase, index) => (
                   <div
@@ -193,11 +193,17 @@ function UseCasesPage({
               Industries
             </h2>
             <div className='py-24'>
-              <div className='grid gap-10 md:grid-cols-2 lg:grid-cols-3'>
+              <div className='grid gap-24 md:grid-cols-2 lg:grid-cols-3'>
                 {useCasesPageData.Industries.map((industry, index) => (
                   <div className='text-center' key={index}>
+                    {industry.icon && (
+                      <StrapiImage
+                        {...industry.icon}
+                        className='mx-auto mb-4'
+                      />
+                    )}
                     <h3 className='text-lg font-bold'>{industry.name}</h3>
-                    <p className='mt-2 text-sm text-neutral-200'>
+                    <p className='mt-4 text-sm text-neutral-200'>
                       {industry.description}
                     </p>
                   </div>

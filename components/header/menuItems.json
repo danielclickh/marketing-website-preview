@@ -178,10 +178,68 @@
 		]
 	},
 	{
-		"id": 3,
+		"id": 20,
 		"name": "Use cases",
-		"href": "/use-cases",
-		"target": "_self"
+		"menuItems": [
+			{
+				"id": 1,
+				"name": "",
+				"href": "/use-cases",
+				"target": "_self",
+				"menuItems": [
+					{
+						"id": 10,
+						"name": "Real-time Dashboards",
+						"href": "/use-cases",
+						"target": "_self",
+						"icon": "/images/icons/use-cases/realtime.svg"
+					},
+					{
+						"id": 20,
+						"name": "Event-Driven Analytics",
+						"href": "/use-cases",
+						"target": "_self",
+						"icon": "/images/icons/use-cases/eventdriven.svg"
+					},
+					{
+						"id": 30,
+						"name": "Business Intelligence",
+						"href": "/use-cases",
+						"target": "_self",
+						"icon": "/images/icons/use-cases/bi.svg"
+					}
+				]
+			},
+			{
+				"id": 20,
+				"name": "",
+				"href": "/use-cases",
+				"target": "_self",
+				"menuItems": [
+					{
+						"id": 40,
+						"name": "Data Warehouse Speed Layer",
+						"href": "/use-cases",
+						"target": "_self",
+						"icon": "/images/icons/use-cases/speedlayer.svg"
+					},
+					{
+						"id": 50,
+						"name": "Logging & Metrics",
+						"href": "/use-cases",
+						"target": "_self",
+						"icon": "/images/icons/use-cases/logging.svg"
+					},
+					{
+						"id": 60,
+						"name": "ML & Data Science",
+						"href": "/use-cases",
+						"target": "_self",
+						"icon": "/images/icons/use-cases/ml.svg"
+					}
+				]
+			}
+		]
 	},
 	{
 		"id": 5,

@@ -29,6 +29,7 @@ export interface Industry {
   name: string
   description: string
   href: string
+  icon: StrapiImageType
 }
 
 export interface useCasesPageDataProps extends CommonProps {
