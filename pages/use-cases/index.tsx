@@ -118,7 +118,7 @@ function UseCasesPage({
                     <h3 className='mb-4 px-6 text-xl font-bold text-neutral-0'>
                       {useCase.title}
                     </h3>
-                    <div className='text-neutral-20 whitespace-pre-wrap px-6 pb-24 text-sm'>
+                    <div className='text-neutral-20 whitespace-pre-wrap px-6 pb-28 text-sm'>
                       {useCase.description}
                     </div>
                     {useCase.ClientsUsingUseCase.length > 0 && (
@@ -127,21 +127,27 @@ function UseCasesPage({
                           <div className='flex w-full justify-between '>
                             <div
                               id={`buttonPrev-${index}`}
-                              className='absolute top-1/2 -left-3 z-50 -translate-y-1/2 transform rounded-full bg-neutral-300/90 p-2 hover:cursor-pointer hover:bg-primary-300'>
+                              className='absolute top-1 left-2 z-50 -translate-y-1/2 transform rounded-full bg-neutral-300/90 p-1 px-2 hover:cursor-pointer hover:bg-primary-300'>
                               <span className='sr-only'>Previous</span>
-                              <ChevronLeftIcon
-                                height='18'
-                                className='fill-black pt-0.5 transition group-hover:translate-x-1/2'
-                              />
+                              <div className='flex items-center'>
+                                <ChevronLeftIcon
+                                  height='18'
+                                  className='fill-black pt-0.5 transition group-hover:translate-x-1/2'
+                                />
+                                <p className='text-xs text-black'>Prev</p>
+                              </div>
                             </div>
                             <div
                               id={`buttonNext-${index}`}
-                              className='absolute top-1/2 -right-3 z-50 -translate-y-1/2 transform rounded-full bg-neutral-300/90 p-2 hover:cursor-pointer hover:bg-primary-300'>
+                              className='absolute top-1 right-2 z-50 -translate-y-1/2 transform rounded-full bg-neutral-300/90 p-1 px-2 hover:cursor-pointer hover:bg-primary-300'>
                               <span className='sr-only'>Next</span>
-                              <ChevronRightIcon
-                                height='18'
-                                className='fill-black pt-0.5 transition group-hover:translate-x-1/2'
-                              />
+                              <div className='flex items-center'>
+                                <p className='text-xs text-black'>Next</p>
+                                <ChevronRightIcon
+                                  height='18'
+                                  className='fill-black pt-0.5 transition group-hover:translate-x-1/2'
+                                />
+                              </div>
                             </div>
                             <Glider
                               draggable
