@@ -126,10 +126,10 @@ function UseCasesPage({
                           <div className='flex w-full justify-between '>
                             <Glider
                               draggable
-                              hasArrows
                               slidesToShow={3.5}
                               slidesToScroll={1}
-                              rewind={true}>
+                              rewind={true}
+                              dragVelocity={1}>
                               {useCase.ClientsUsingUseCase.map(
                                 (client, index) =>
                                   client.logo &&
