@@ -126,7 +126,7 @@ function UseCasesPage({
                         <div className='flex w-full justify-between'>
                           <div
                             id={`buttonPrev-${index}`}
-                            className='absolute top-0 left-0 z-40 hidden h-full transform bg-gradient-to-r from-neutral-900 via-neutral-800 to-transparent pl-4 pr-16 hover:cursor-pointer md:flex'>
+                            className='absolute top-0 left-0 z-40 hidden h-full transform bg-gradient-to-r from-neutral-900 via-neutral-800 to-transparent pl-2 pr-10 hover:cursor-pointer md:flex'>
                             <span className='sr-only'>Previous</span>
                             <div className='flex items-center'>
                               <ChevronLeftIcon
@@ -137,7 +137,7 @@ function UseCasesPage({
                           </div>
                           <div
                             id={`buttonNext-${index}`}
-                            className='absolute top-0 right-0 z-40 hidden h-full transform bg-gradient-to-l from-neutral-900 via-neutral-800 to-transparent pr-4 pl-16 hover:cursor-pointer md:flex'>
+                            className='absolute top-0 right-0 z-40 hidden h-full transform bg-gradient-to-l from-neutral-900 via-neutral-800 to-transparent pr-2 pl-10 hover:cursor-pointer md:flex'>
                             <span className='sr-only'>Next</span>
                             <div className='flex items-center'>
                               <ChevronRightIcon
@@ -149,7 +149,7 @@ function UseCasesPage({
                           <Glider
                             draggable
                             hasArrows
-                            slidesToShow={5}
+                            slidesToShow={3}
                             slidesToScroll={1}
                             rewind={true}
                             arrows={{
@@ -165,7 +165,12 @@ function UseCasesPage({
                                     className={`w-96 ${
                                       index !== 0
                                         ? 'border-l border-l-neutral-700/80'
-                                        : ''
+                                        : 'ml-6'
+                                    } ${
+                                      index !==
+                                      useCase.ClientsUsingUseCase.length - 1
+                                        ? ''
+                                        : 'mr-8'
                                     }`}>
                                     <Link href={client.href}>
                                       <div className='h-20 w-full'>

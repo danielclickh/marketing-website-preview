@@ -194,27 +194,35 @@
 						"target": "_self"
 					},
 					{
-						"id": 20,
-						"name": "Event-Driven Analytics",
-						"href": "/use-cases#event-drivenanalytics",
-						"target": "_self"
-					},
-					{
 						"id": 30,
 						"name": "Business Intelligence",
 						"href": "/use-cases#businessintelligence",
 						"target": "_self"
 					},
 					{
-						"id": 40,
-						"name": "Data Warehouse Speed Layer",
-						"href": "/use-cases#datawarehousespeedlayer",
-						"target": "_self"
-					},
-					{
 						"id": 50,
 						"name": "Logging & Metrics",
 						"href": "/use-cases#loggingmetrics",
+						"target": "_self"
+					}
+				]
+			},
+			{
+				"id": 10,
+				"name": " ",
+				"href": "/use-cases",
+				"target": "_self",
+				"menuItems": [
+					{
+						"id": 20,
+						"name": "Real-time Analytics",
+						"href": "/use-cases#real-timeanalytics",
+						"target": "_self"
+					},
+					{
+						"id": 40,
+						"name": "Data Warehouse Speed Layer",
+						"href": "/use-cases#datawarehousespeedlayer",
 						"target": "_self"
 					},
 					{
