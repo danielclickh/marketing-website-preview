@@ -109,7 +109,7 @@ function UseCasesPage({
                   <div
                     key={index}
                     id={useCase.title.replace(/[\s&]+/g, '').toLowerCase()}
-                    className='hide-scrollbar hide-scrollbar relative z-20 min-w-full overflow-hidden rounded-lg border border-neutral-700/80 bg-neutral-900/50 shadow-card hover:bg-neutral-750'>
+                    className='hide-scrollbar hide-scrollbar relative z-20 min-w-full rounded-lg border border-neutral-700/80 bg-neutral-900/50 shadow-card hover:bg-neutral-750'>
                     {useCase.icon && (
                       <div className='px-6 pt-6 pb-3'>
                         <StrapiImage {...useCase.icon} />
@@ -123,11 +123,11 @@ function UseCasesPage({
                     </div>
                     {useCase.ClientsUsingUseCase.length > 0 && (
                       <div>
-                        <div className='hide-scrollbar absolute left-0 bottom-0 z-20 h-20 w-full overflow-x-scroll border-t border-neutral-700/80'>
+                        <div className='absolute left-0 bottom-0 z-20 h-20 w-full border-t border-neutral-700/80'>
                           <div className='flex w-full justify-between '>
                             <div
                               id={`buttonPrev-${index}`}
-                              className='absolute top-1/2 left-3 z-50 -translate-y-1/2 transform rounded-full bg-primary-300 p-1 hover:cursor-pointer hover:bg-primary-300'>
+                              className='absolute top-1/2 -left-3 z-50 -translate-y-1/2 transform rounded-full bg-neutral-300/90 p-2 hover:cursor-pointer hover:bg-primary-300'>
                               <span className='sr-only'>Previous</span>
                               <ChevronLeftIcon
                                 height='18'
@@ -136,7 +136,7 @@ function UseCasesPage({
                             </div>
                             <div
                               id={`buttonNext-${index}`}
-                              className='absolute top-1/2 right-3 z-50 -translate-y-1/2 transform rounded-full bg-primary-300 p-1 hover:cursor-pointer'>
+                              className='absolute top-1/2 -right-3 z-50 -translate-y-1/2 transform rounded-full bg-neutral-300/90 p-2 hover:cursor-pointer hover:bg-primary-300'>
                               <span className='sr-only'>Next</span>
                               <ChevronRightIcon
                                 height='18'
