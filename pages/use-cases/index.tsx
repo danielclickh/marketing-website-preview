@@ -11,6 +11,7 @@ import GetStartedFree from '../../components/GetStartedFree'
 import Image from 'next/image'
 import Glider from 'react-glider'
 import 'glider-js/glider.min.css'
+import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/solid'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -124,12 +125,40 @@ function UseCasesPage({
                       <div>
                         <div className='absolute left-0 bottom-0 z-20 h-20 w-full border-t border-neutral-700/80'>
                           <div className='flex w-full justify-between '>
+                            <div
+                              id={`buttonPrev-${index}`}
+                              className='absolute top-1 left-2 z-50 -translate-y-1/2 transform rounded-full bg-neutral-300/90 p-1 px-2 hover:cursor-pointer hover:bg-primary-300'>
+                              <span className='sr-only'>Previous</span>
+                              <div className='flex items-center'>
+                                <ChevronLeftIcon
+                                  height='18'
+                                  className='fill-black pt-0.5 transition group-hover:translate-x-1/2'
+                                />
+                                <p className='text-xs text-black'>Prev</p>
+                              </div>
+                            </div>
+                            <div
+                              id={`buttonNext-${index}`}
+                              className='absolute top-1 right-2 z-50 -translate-y-1/2 transform rounded-full bg-neutral-300/90 p-1 px-2 hover:cursor-pointer hover:bg-primary-300'>
+                              <span className='sr-only'>Next</span>
+                              <div className='flex items-center'>
+                                <p className='text-xs text-black'>Next</p>
+                                <ChevronRightIcon
+                                  height='18'
+                                  className='fill-black pt-0.5 transition group-hover:translate-x-1/2'
+                                />
+                              </div>
+                            </div>
                             <Glider
                               draggable
+                              hasArrows
                               slidesToShow={3.5}
                               slidesToScroll={1}
                               rewind={true}
-                              dragVelocity={1}>
+                              arrows={{
+                                prev: '#buttonPrev-' + index,
+                                next: '#buttonNext-' + index
+                              }}>
                               {useCase.ClientsUsingUseCase.map(
                                 (client, index) =>
                                   client.logo &&
