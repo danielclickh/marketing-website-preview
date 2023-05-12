@@ -152,16 +152,16 @@ function UseCasesPage({
           {quotes.slice(0, visibleTestimonials).map((quote, index) => (
             <div
               key={index}
-              className='animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover p-6 shadow-card hover:bg-neutral-750'>
+              className='animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover shadow-card hover:bg-neutral-750'>
               {quote.quotes.href && (
-                <Link href={quote.quotes.href}>
+                <Link href={quote.quotes.href} className=''>
                   <StrapiImage
                     {...quote.quotes.logo}
-                    className='color-swap mb-4 h-auto w-32'
+                    className='color-swap mt-4 ml-1 h-auto w-32'
                   />
                 </Link>
               )}
-              <p className='text-sm font-normal text-white'>
+              <p className='px-4 pb-6 pt-3 text-sm font-normal text-white'>
                 "{quote.quotes.quote}"
               </p>
             </div>
