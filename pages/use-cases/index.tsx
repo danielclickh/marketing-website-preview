@@ -16,8 +16,6 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
       populate: ['ctaButton', 'Industries', 'Industries.icon']
     })
 
-    console.log(useCasesPageData)
-
     const individualUseCasesParams = {
       sort: ['id:ASC'],
       populate: [
