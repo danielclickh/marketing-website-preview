@@ -122,7 +122,7 @@ function UseCasesPage({
                       {useCase.description}
                     </div>
                     {useCase.ClientsUsingUseCase.length > 0 && (
-                      <div>
+                      <div className='overflow-hidden'>
                         <div className='absolute left-0 bottom-0 z-50 h-20 w-full overflow-hidden border-t border-neutral-700/80'>
                           <div className='flex w-full justify-between'>
                             <div
@@ -142,7 +142,7 @@ function UseCasesPage({
                               <span className='sr-only'>Next</span>
                               <div className='flex items-center'>
                                 <ChevronRightIcon
-                                  height='25'
+                                  height='30'
                                   className='fill-primary-300 pt-0.5 transition group-hover:translate-x-1/2'
                                 />
                               </div>
