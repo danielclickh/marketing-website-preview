@@ -9,8 +9,8 @@ interface Props {
 }
 function JoinCommunity({ github: { stars } }: Props) {
   return (
-    <div className='flex flex-col items-center pb-16 md:pb-16 md:px-8 2xl:px-0 md:flex-row justify-between w-full section-container gap-8'>
-      <div className='flex flex-col items-start max-w-xl gap-10'>
+    <div className='section-container flex w-full flex-col items-center justify-between gap-8 pb-16 md:flex-row md:px-8 md:pb-16 2xl:px-0'>
+      <div className='flex max-w-xl flex-col items-start gap-10'>
         <SuiTitle type='h2' className='w-full text-center md:text-left'>
           Join the{' '}
           <span className='tilted tilted-yellow'>
@@ -18,8 +18,8 @@ function JoinCommunity({ github: { stars } }: Props) {
           </span>{' '}
           developers using ClickHouse today
         </SuiTitle>
-        <div className='flex flex-wrap gap-6 mx-auto md:mx-0'>
-          <div className='flex gap-6 mx-auto'>
+        <div className='mx-auto flex flex-wrap gap-6 md:mx-0'>
+          <div className='mx-auto flex gap-6'>
             <SocialIcon
               name='Twitter'
               href='https://twitter.com/ClickhouseDB'
@@ -31,7 +31,7 @@ function JoinCommunity({ github: { stars } }: Props) {
               imgSrc='/socials/slack.svg'
             />
           </div>
-          <div className='flex gap-6 mx-auto'>
+          <div className='mx-auto flex gap-6'>
             <SocialIcon
               name='Telegram'
               href='https://telegram.me/clickhouse_en'
@@ -45,25 +45,29 @@ function JoinCommunity({ github: { stars } }: Props) {
           </div>
         </div>
       </div>
-      <div className='w-full pb-24 md:pb-0 mx-auto flex flex-col gap-8 md:items-end text-right font-medium max-w-lg bg-click-grid bg-bottom'>
-        <div className='font-basier text-5xl md:text-7.5xl leading-none right-14 pt-4 md:pt-0 md:right-auto absolute md:relative'>
+      <div className='mx-auto flex w-full max-w-lg flex-col gap-8 bg-click-grid bg-bottom pb-24 text-right font-medium md:items-end md:pb-0'>
+        <div className='absolute right-14 pt-4 font-basier text-5xl leading-none md:relative md:right-auto md:pt-0 md:text-7.5xl'>
           1.2k+
-          <span className='absolute top-full left-0 text-primary-300 text-xl md:text-2.75xl leading-snug'>
+          <span className='absolute top-full left-0 text-xl leading-snug text-primary-300 md:text-2.75xl'>
             Contributors
           </span>
         </div>
-        <div className='font-basier text-5xl md:text-7.5xl leading-none mr-auto text-left absolute md:relative left-14 md:left-auto pt-14 md:pt-0'>
+        <div className='absolute left-14 mr-auto pt-14 text-left font-basier text-5xl leading-none md:relative md:left-auto md:pt-0 md:text-7.5xl'>
           32k+
-          <span className='absolute top-full left-0 text-primary-300 text-xl md:text-2.75xl leading-snug'>
+          <span className='absolute top-full left-0 text-xl leading-snug text-primary-300 md:text-2.75xl'>
             PRs
           </span>
         </div>
-        <div className='font-basier text-5xl md:text-7.5xl leading-none pt-32 md:pt-0 right-30 md:right-auto absolute md:relative'>
-          {Intl.NumberFormat('en', { notation: 'compact' })
+        <div className='absolute right-30 pt-32 font-basier text-5xl leading-none md:relative md:right-auto md:pt-0 md:text-7.5xl'>
+          {Intl.NumberFormat('en', {
+            notation: 'compact',
+            minimumFractionDigits: 1,
+            maximumFractionDigits: 1
+          })
             .format(stars)
             .toLowerCase()}
           +
-          <span className='absolute top-full left-0 text-primary-300 text-xl md:text-2.75xl leading-snug'>
+          <span className='absolute top-full left-0 text-xl leading-snug text-primary-300 md:text-2.75xl'>
             Stars
           </span>
         </div>

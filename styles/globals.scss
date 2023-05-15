@@ -440,6 +440,15 @@ body {
     @apply absolute inset-0 bg-primary-300;
     clip-path: polygon(50% 14%, 100% 0%, 100% 100%, 0 100%, 0 0%);
     content: "";
+  }
+}
+
+.clip-inverted-triangle-use-cases {
+  @apply relative;
+  &::before {
+    @apply absolute inset-0 bg-primary-300;
+    clip-path: polygon(50% 30%, 100% 10%, 100% 100%, 0 100%, 0 10%);
+    content: "";
     @media screen and (max-width: 768px) {
       clip-path: polygon(50% 6%, 100% 0%, 100% 100%, 0 100%, 0 0%);
     }
@@ -537,4 +546,21 @@ a.arrow-link {
   * {
     @apply md:hidden;
   }
+}
+
+.color-swap {
+  filter: brightness(0) invert(0.8);
+  -webkit-filter: brightness(0) invert(0.8);
+  &:hover {
+    filter: brightness(1) invert(0);
+    -webkit-filter: brightness(1) invert(0);
+  }
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;  /* Firefox */
 }

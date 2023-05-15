@@ -172,10 +172,10 @@ export default function HomePage({
                     type='secondary'
                     weight='semibold'
                     size='lg'
-                    href='https://clickhouse.com/docs/'
+                    href='https://clickhouse.com/docs/en/intro'
                     segmentEvent={{
                       label: hero.ctaButton.text,
-                      category: 'website-hero'
+                      category: 'website-hero-docs'
                     }}
                     linkClass='w-full max-w-[14rem]'
                     className='w-full'>

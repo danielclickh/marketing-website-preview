@@ -1,419 +1,248 @@
 import { useState } from 'react'
-import { SuiPanel } from '../../components/sui'
-import { UseCase } from '../../components/use_case'
-import { findAll, findOne } from '../../lib/api/strapi'
-
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import { UseCasesData } from '../../types/useCases'
+import { findOne, findAll } from '../../lib/api/strapi'
+import { useCasesPageDataProps } from '../../types/useCasesPage'
 import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import Image from 'next/image'
+import { StrapiImage } from '../../components/StrapiElements'
+import Link from 'next/link'
 import { CUIButton } from '../../components/ClickUI'
-import HRSeparator from '../../components/HRSeparator'
-import { CheckIcon } from '@heroicons/react/outline'
-import GiveItAGo from '../../components/GiveItAGo'
-import VideoPlayer from '../../components/VideoPlayer'
-import BlogPost from '../../components/BlogPostList/BlogPost'
+import GetStartedFree from '../../components/GetStartedFree'
+import Image from 'next/image'
+import Glider from 'react-glider'
+import 'glider-js/glider.min.css'
+import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/solid'
+import { CUICard } from '../../components/ClickUI'
 
-export const getStaticProps: GetStaticProps<UseCasesData> =
+export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
-    const result = await findOne('use-case', {
-      populate: [
-        'useCaseItems',
-        'useCaseItems.darkLogoPng',
-        'useCaseItems.lightLogoPng',
-        'useCaseItems.bullets',
-        'useCaseItems.ctaButton',
-        'seo',
-        'seo.image'
-      ]
+    const useCasesPageData = await findOne('use-case-feature', {
+      populate: ['ctaButton', 'Industries', 'Industries.icon']
     })
-    result.spotlight = (result.useCaseItems ?? []).shift()
 
-    const blogsParams = {
-      filters: {
-        category: {
-          $eqi: 'customer stories'
-        }
-      },
-      sort: ['date:DESC', 'publishedAt:DESC'],
-      populate: ['thumbnailPng', 'author'],
-      fields: ['category', 'title', 'slug'],
-      pagination: { limit: 3 }
+    const individualUseCasesParams = {
+      sort: ['id:ASC'],
+      populate: [
+        'description',
+        'shortDescription',
+        'ClientsUsingUseCase',
+        'ClientsUsingUseCase.*',
+        'ClientsUsingUseCase.logo.*',
+        'icon'
+      ]
     }
-    const { data: customerStories } = await findAll('blog-posts', blogsParams)
+    const { data: individualUseCases } = await findAll(
+      'individual-use-cases',
+      individualUseCasesParams
+    )
+
+    const quotesParams = {
+      sort: ['id:DESC'],
+      populate: ['quotes', 'quotes.*', 'quotes.logo.*']
+    }
+    const { data: quotes } = await findAll('use-case-quotes', quotesParams)
+
     const commonProps = await getCommonProps()
     return {
       props: {
-        ...result,
-        customerStories,
+        useCasesPageData,
+        individualUseCases,
+        quotes,
+        seo: {
+          title: `${useCasesPageData.Title} | ClickHouse`,
+          description: useCasesPageData.Description
+        },
         ...commonProps
       }
     }
   }
 
-type TestimonialsJson = {
-  id: number
-  logo: string
-  category: string
-  text: string
-  customer: string
-  width: number
-  height: number
-}
-const testimonialsJson: Array<TestimonialsJson> = [
-  {
-    id: 1,
-    logo: '/images/use-cases/posthog-logo.svg',
-    category: 'Analytics',
-    text: 'ClickHouse Cloud has made it absolutely effortless to use ClickHouse for data analysis while not having to spend any time managing cluster shards/replicas or worrying about provisioning on the storage or cpu side.',
-    customer: 'Posthog',
-    width: 155,
-    height: 30
-  },
-  {
-    id: 2,
-    logo: '/images/use-cases/instabug.svg',
-    category: 'Observability',
-    text: 'At Instabug, we rely on ClickHouse to help power our real-time observability solutions that developers rely on. ClickHouse Cloud reduced our operational overhead and cost of managing ClickHouse ourselves allowing us to focus on our users.',
-    customer: 'Instabug',
-    width: 189,
-    height: 33
-  },
-  {
-    id: 3,
-    logo: '/images/use-cases/rokt.svg',
-    category: 'Analytics',
-    text: 'Rokt has been an eager partner of ClickHouse as we modernize our analytics stack. By offloading operations to the experts our developers are focused on delivering the best experience possible while the business scales. We we are thrilled to see the path ClickHouse is forging.',
-    customer: 'Rokt',
-    width: 115,
-    height: 32
-  },
-  {
-    id: 4,
-    logo: '/images/use-cases/darwinium-logo.png',
-    category: 'Security and Fraud',
-    text: 'Darwinium chose ClickHouse as its database engine of choice because it is fast, flexible, rich in capabilities and cloud-ready. It provides the functionality we need to support real time user journey orchestration for fraud and security teams in global digital businesses.',
-    customer: 'Darwinium',
-    width: 180,
-    height: 34
-  },
-  {
-    id: 5,
-    logo: '/images/use-cases/synq-logo.png',
-    category: 'ClickHouse Cloud',
-    text: 'At Synq we have very high demands of both ingestion and query performance. After a thorough vendor selection process, only ClickHouse Cloud was able to meet those requirements with ease, while providing the powerful preprocessing logic our solution requires.',
-    customer: 'Synq',
-    width: 106,
-    height: 40
-  },
-  {
-    id: 6,
-    logo: '/images/use-cases/adevinta-logo.png',
-    category: 'ClickHouse Cloud',
-    text: "Amazing to have been one of the first users of ClickHouse Serverless Cloud. It's scalable and blazingly fast ClickHouse in the cloud with simple onboarding and excellent support. Great experience.",
-    customer: 'Adevinta',
-    width: 134,
-    height: 30
-  },
-
-  {
-    id: 7,
-    logo: '/images/use-cases/minted-logo.png',
-    category: 'ClickHouse Cloud',
-    text: 'We use ClickHouse Cloud to monitor millions of real-time web performance data points, to ensure we’re getting faster all the time. The platform delivers fast and reliable data management, while also proving to be cost efficient and user-friendly.',
-    customer: 'Minted',
-    width: 123,
-    height: 32
-  },
-  {
-    id: 8,
-    logo: '/images/use-cases/washington-post-logo.svg',
-    category: 'Analytics',
-    text: 'ClickHouse Cloud Private Preview has allowed us to replace a batch analytics pipeline with one that is near-real time and costs less to run without having to manage or scale a ClickHouse cluster ourselves.',
-    customer: 'The Washington Post',
-    width: 206,
-    height: 32
-  },
-  {
-    id: 9,
-    logo: '/images/use-cases/airtory-logo.png',
-    category: 'Analytics',
-    text: 'Airtory needed a fast, scalable and affordable data engine to power our dynamic creatives, and ClickHouse was the perfect solution for this. The ease of the ClickHouse Cloud helped us ramp up quickly and offer powerful insights for our clients into their marketing campaigns giving them a great ROI.',
-    customer: 'Airtory',
-    width: 85,
-    height: 32
-  },
-
-  {
-    id: 10,
-    logo: '/images/use-cases/calibre-logo.svg',
-    category: 'Analytics',
-    text: 'ClickHouse Cloud gave us the confidence to deploy ClickHouse and infinitely have a scalable serverless analytics database.',
-    customer: 'Calibre',
-    width: 144,
-    height: 32
-  },
-  {
-    id: 11,
-    logo: '/images/use-cases/forefront-logo.png',
-    category: 'ClickHouse Cloud',
-    text: "The team truly delivered on the fully managed ClickHouse product I've been looking for. The platform makes it trivial to spin up and connect to a cluster, and removes all concern around managing underlying infrastructure. I would highly recommend this product.",
-    customer: 'Forefront',
-    width: 221,
-    height: 32
-  }
-]
-
-function CustomerStoriesPage({
-  spotlight,
-  useCaseItems,
+function UseCasesPage({
   seo,
-  customerStories,
   headerData,
-  footerData
-}: UseCasesData) {
-  const [visibleTestimonials, setVisibleTestimonials] = useState(6)
+  footerData,
+  useCasesPageData,
+  individualUseCases,
+  quotes
+}: useCasesPageDataProps) {
+  const [visibleTestimonials, setVisibleTestimonials] = useState(3)
 
   const loadMore = () => {
-    setVisibleTestimonials((prevValue) => prevValue + 6)
+    setVisibleTestimonials((prevValue) => prevValue + (quotes.length - 3))
   }
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='pt-10'>
-        <div className='flex container mx-auto max-w-7xl flex-col px-4 md:px-8 2xl:px-0'>
-          <div className='flex flex-col text-center mx-auto pt-6 max-w-screen-sm'>
-            <h1 className='text-5.5xl font-semibold mb-16 font-basier'>
-              Use cases
-            </h1>
-          </div>
-          <div>
-            <div className='grid lg:grid-cols-2 gap-x-20'>
-              <div className='relative xl:max-w-xl text-center lg:text-left'>
-                <div className='text-4xl font-semibold relative font-basier leading-snug'>
-                  <Image
-                    src='/images/Quote.svg'
-                    width={35}
-                    height={35}
-                    alt='Quote'
-                    className='inline-block -mt-10'
-                  />{' '}
-                  Last time I checked, we read two&nbsp;
-                  <span className='tilted tilted-yellow'>
-                    <span className='tilted-content'>billion</span>
-                  </span>{' '}
-                  rows a second of CDN access&nbsp;logs
-                </div>
-                <p className='mt-6 text-neutral-200 text-base'>
-                  We were really not doing well with ingesting all the logs that
-                  we have because it's big data, it's all the users of Disney+
-                  generating that data. Ever since we chose ClickHouse, it's
-                  been going well.
-                </p>
-                <div className='xl:flex justify-between items-center mt-12'>
-                  <div className='flex-0'>
-                    <p className='text-base font-semibold'>Roni Lazimi</p>
-                    <p className='text-base font-inconsolata text-primary-300'>
-                      Software Engineer @ Disney+ Streaming
-                    </p>
-                  </div>
-                  <div className='mt-4 xl:mt-0 flex justify-center lg:justify-start'>
-                    <CUIButton
-                      type='secondary'
-                      className='w-auto mx-auto group'
-                      target='_self'
-                      href='/blog/nyc-meetup-report-high-speed-content-distribution-analytics-for-streaming-platforms'
-                      iconRight={
-                        <ChevronRightIcon
-                          height='18'
-                          className='group-hover:translate-x-1/2 pt-0.5 transition'
-                        />
-                      }>
-                      Learn more
-                    </CUIButton>
-                  </div>
-                </div>
-              </div>
-              <div className='w-full mt-16 xl:mt-0'>
-                <div className='w-full relative'>
-                  <div className='bg-primary-300 max-w-full lg:skew-x-0 lg:inset-3 lg:absolute lg:transform lg:-right-10 lg:-top-3 rounded-md'></div>
-                  <div className='rounded-md h-fit w-full top-0 left-0 relative aspect-video'>
-                    <VideoPlayer videoId='CVVp6N8Xeoc' provider='youtube' />
-                  </div>
-                </div>
-              </div>
+      <div className='homepage bg-grid'>
+        <div className='relative gap-24 px-8 pb-20 pt-16 md:px-0 lg:pb-44 '>
+          <div className='mx-auto max-w-2xl'>
+            <div className='mx-auto text-center md:mr-0 '>
+              <h1 className='mb-6 font-basier text-5.5xl font-semibold text-neutral-200'>
+                {useCasesPageData.Title}
+              </h1>
+              <p className='mb-12 text-neutral-200'>
+                {useCasesPageData.Description}
+              </p>
+              <p>
+                <a
+                  href={useCasesPageData.ctaButton.href}
+                  target='_blank'
+                  className='inline-block rounded border-primary-300 bg-primary-300 py-3 px-8 font-semibold text-neutral-900 hover:cursor-pointer hover:border-primary-400 hover:bg-primary-400'
+                  onClick={() => {
+                    try {
+                      window.analytics.track('click', {
+                        label: 'Start your free Cloud trial',
+                        category: 'use-cases-hero-cta'
+                      })
+                    } catch (e) {}
+                  }}>
+                  {useCasesPageData.ctaButton.text}
+                </a>
+              </p>
             </div>
           </div>
-          <HRSeparator className='my-16' />
-          <div className='mx-auto mb-6'>
-            <Image
-              src='/images/case-studies-icon.svg'
-              width={72}
-              height={72}
-              alt='Case studies icon'
-              className='mx-auto mb-6'
-            />{' '}
-            <h2 className='text-3xl font-bold text-center font-basier'>
-              Case studies
-            </h2>
-          </div>
-          <div>
-            <div
-              className='flex mt-10 space-x-12 relative md:min-h-fit'
-              id={spotlight.anchorId}>
-              <SuiPanel
-                color='bg-neutral-725'
-                border
-                padding='xl'
-                className='border-l-4 border-l-primary-300'>
-                <div className='flex flex-col lg:flex-row items-center justify-between'>
-                  <div className='flex flex-col w-full md:w-2/3 xl:max-w-3xl'>
-                    <p
-                      className='text-2xl font-semibold mb-8 font-basier
-                    '>
-                      Uber moved its logging platform to ClickHouse increasing
-                      developer productivity and overall reliability
-                    </p>
-                    <ul className='space-y-4'>
-                      <li>
-                        <p className='flex items-center space-x-3'>
-                          <CheckIcon className='stroke-1 w-6 h-6 text-primary-300' />
-                          <span>3x data compression</span>
-                        </p>
-                      </li>
-                      <li>
-                        <p className='flex items-center space-x-3'>
-                          <CheckIcon className='stroke-1 w-6 h-6 text-primary-300' />
-                          <span>10x performance increase</span>
-                        </p>
-                      </li>
-                      <li>
-                        <p className='flex items-center space-x-3'>
-                          <CheckIcon className='stroke-1 w-6 h-6 text-primary-300' />
-                          <span>½ the reduction in hardware cost</span>
-                        </p>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className='md:block w-full max-w-xs mt-10 lg:mt-0'>
-                    <div
-                      className='mx-auto w-full
-                    '>
-                      <Image
-                        className='mx-auto'
-                        alt={spotlight.companyName}
-                        src={spotlight.darkLogoPng.url}
-                        width={
-                          spotlight.darkLogoPng.width
-                            ? spotlight.darkLogoPng.width
-                            : 180
-                        }
-                        height={
-                          spotlight.darkLogoPng.height
-                            ? spotlight.darkLogoPng.height
-                            : 63
-                        }
-                      />
-
-                      {spotlight.ctaButton && (
-                        <div className='mt-8 mx-auto'>
-                          <CUIButton
-                            type='secondary'
-                            className='w-auto mx-auto group'
-                            target={spotlight.ctaButton.target}
-                            href={spotlight.ctaButton.href}
-                            iconRight={
-                              <ChevronRightIcon
-                                height='18'
-                                className='group-hover:translate-x-1/2 pt-0.5 transition'
-                              />
-                            }>
-                            Read use case
-                          </CUIButton>
+        </div>
+        <div className='clip-inverted-triangle-use-cases'>
+          <div className='section-container mt-12 max-w-7xl lg:mt-0'>
+            <div className='relative -mt-[80px] w-full rounded-lg border-t-4 border-t-primary-300 bg-neutral-900 p-3 shadow-lg md:p-10'>
+              <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
+                {individualUseCases.map((useCase, index) => (
+                  <div
+                    key={index}
+                    id={useCase.title.replace(/[\s&]+/g, '').toLowerCase()}
+                    className='relative z-20'>
+                    <CUICard>
+                      <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
+                        <div className='flex flex-col items-start justify-center gap-2 px-6 pt-6'>
+                          <div className='mb-1 font-inconsolata text-base font-medium text-primary-300'>
+                            {useCase.icon && <StrapiImage {...useCase.icon} />}
+                          </div>
+                          <div className='font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                            {useCase.title}
+                          </div>
+                          <div className='text-neutral-20 whitespace-pre-wrap pb-20 text-sm'>
+                            {useCase.description}
+                          </div>
                         </div>
-                      )}
-                    </div>
+                      </CUICard.Body>
+                      <CUICard.Footer className='flex w-full items-center p-6 text-sm text-neutral-300'>
+                        {useCase.ClientsUsingUseCase.length > 0 && (
+                          <div className='absolute left-0 bottom-0 z-50 h-20 w-full overflow-hidden rounded-b-lg border border-neutral-700/80 bg-neutral-900'>
+                            <div className='flex w-full justify-between'>
+                              {useCase.ClientsUsingUseCase.length > 3 && (
+                                <>
+                                  <div
+                                    id={`buttonPrev-${index}`}
+                                    className='group absolute top-0 left-0 z-40 hidden h-full transform bg-gradient-to-l from-neutral-900/90 via-neutral-800/90 to-transparent pl-2 pr-10 hover:cursor-pointer md:flex'>
+                                    <span className='sr-only'>Previous</span>
+                                    <div className='flex items-center'>
+                                      <ChevronLeftIcon
+                                        height='30'
+                                        className='fill-slate-100 pt-0.5 opacity-50 transition duration-300 group-hover:fill-primary-300 group-hover:opacity-100'
+                                      />
+                                    </div>
+                                  </div>
+                                  <div
+                                    id={`buttonNext-${index}`}
+                                    className='group absolute top-0 right-0 z-40 hidden h-full transform bg-gradient-to-l from-neutral-900/90 via-neutral-800/90 to-transparent pr-2 pl-10 hover:cursor-pointer md:flex'>
+                                    <span className='sr-only'>Next</span>
+                                    <div className='flex items-center'>
+                                      <ChevronRightIcon
+                                        height='30'
+                                        className='fill-slate-100 pt-0.5 opacity-50 transition duration-300 group-hover:fill-primary-300 group-hover:opacity-100'
+                                      />
+                                    </div>
+                                  </div>
+                                </>
+                              )}
+                              <Glider
+                                draggable
+                                hasArrows
+                                slidesToShow={3}
+                                slidesToScroll={1}
+                                rewind={true}
+                                arrows={{
+                                  prev: `#buttonPrev-${index}`,
+                                  next: `#buttonNext-${index}`
+                                }}>
+                                {useCase.ClientsUsingUseCase.map(
+                                  (client, index) => (
+                                    <div
+                                      key={index}
+                                      className={`group w-96 ${
+                                        index !== 0
+                                          ? 'border-l border-l-neutral-700/80'
+                                          : 'md:ml-6'
+                                      } ${
+                                        index !==
+                                        useCase.ClientsUsingUseCase.length - 1
+                                          ? ''
+                                          : 'md:mr-8'
+                                      }`}>
+                                      <Link href={client.href}>
+                                        <div className='h-20'>
+                                          <StrapiImage
+                                            {...client.logo}
+                                            className='h-full w-full object-contain px-4 py-2 grayscale hover:cursor-pointer group-hover:grayscale-0'
+                                          />
+                                        </div>
+                                      </Link>
+                                    </div>
+                                  )
+                                )}
+                              </Glider>
+                            </div>
+                          </div>
+                        )}
+                      </CUICard.Footer>
+                    </CUICard>
                   </div>
-                </div>
-              </SuiPanel>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className='text-neutral-0 w-full pb-6'>
-        <div className='max-w-7xl mx-auto'>
-          <div className='grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto mt-12 gap-10 px-4 md:px-8 2xl:px-0'>
-            {useCaseItems.map((useCase, index) => (
-              <UseCase
-                id={useCase.anchorId}
-                key={`usecase-${index}`}
-                lightLogo={useCase.lightLogoPng}
-                darkLogo={useCase.darkLogoPng}
-                description={useCase.description}
-                bullets={useCase.bullets}
-                path={useCase?.ctaButton?.href}
-                btnText={useCase?.ctaButton?.text}
-                target={useCase?.ctaButton?.target}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-      <HRSeparator className='my-16' />
-      <div className='mx-auto mb-6'>
-        <Image
-          src='/images/what-our-customers-say.svg'
-          width={72}
-          height={72}
-          alt='What our customers say'
-          className='mx-auto mb-6'
-        />{' '}
-        <h2 className='text-3xl font-semibold text-center mb-20 font-basier'>
-          What our customers say
-        </h2>
-      </div>
-      <div className='max-w-7xl mx-auto pb-24 px-4 md:px-8 2xl:px-0'>
-        <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-6 bg-shadow-element-center red-shadow'>
-          {testimonialsJson.slice(0, visibleTestimonials).map((testimonial) => (
-            <div
-              className='animate-fade-in flex w-full flex-col text-center px-4 bg-neutral-900/50 border border-neutral-725 rounded-lg p-6 relative shadow-card hover:shadow-lg'
-              key={testimonial?.id}>
-              <div className='w-full h-full flex flex-col justify-between space-y-12'>
-                <div className='text-left'>
-                  <Image
-                    src='/images/Quote.svg'
-                    width={35}
-                    height={35}
-                    alt='Quote'
-                    className='mb-4'
-                  />{' '}
-                  <p className='text-neutral-200 text-base'>
-                    {testimonial?.text}
-                  </p>
-                </div>
-                <div>
-                  <p className='text-primary-300 font-inconsolata mb-3 text-left'>
-                    {testimonial?.category}
-                  </p>
-                  <Image
-                    src={testimonial.logo}
-                    alt={testimonial.category}
-                    width={testimonial.width}
-                    height={testimonial.height}
-                    className='h-8 w-auto'
-                  />
-                </div>
+                ))}
               </div>
+            </div>
+            <div className='bg-primary-300 pb-24'></div>
+          </div>
+        </div>
+      </div>
+      <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
+        <div className='gap-3 md:columns-2 lg:columns-3'>
+          {quotes.slice(0, visibleTestimonials).map((quote, index) => (
+            <div key={index}>
+              {quote.quotes.href ? (
+                <Link href={quote.quotes.href} className=''>
+                  <div
+                    key={index}
+                    className='animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover p-4 shadow-card hover:bg-neutral-750'>
+                    <StrapiImage
+                      {...quote.quotes.logo}
+                      className='color-swap ml-1 h-auto w-32'
+                    />
+                    <p className=' pt-3 text-sm font-normal text-white'>
+                      "{quote.quotes.quote}"
+                    </p>
+                  </div>
+                </Link>
+              ) : (
+                <div
+                  key={index}
+                  className='animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover shadow-card hover:bg-neutral-750'>
+                  <StrapiImage
+                    {...quote.quotes.logo}
+                    className='color-swap mt-4 ml-1 h-auto w-32 px-4'
+                  />
+                  <p className='px-4 pb-6 pt-3 text-sm font-normal text-white'>
+                    "{quote.quotes.quote}"
+                  </p>
+                </div>
+              )}
             </div>
           ))}
         </div>
-        {visibleTestimonials < testimonialsJson.length && (
-          <div className='mt-12 mx-auto'>
+        {visibleTestimonials < quotes.length && (
+          <div className='mx-auto mt-12'>
             <CUIButton
               type='secondary'
-              className='w-auto mx-auto'
+              className='mx-auto w-auto'
               onClick={loadMore}
               iconRight=''>
               View more
@@ -421,43 +250,45 @@ function CustomerStoriesPage({
           </div>
         )}
       </div>
-      <HRSeparator />
-      <div className='section-container my-24'>
-        <div className='mx-auto mb-14'>
-          <Image
-            src='/images/use-cases/recent-customer-stories-icon.svg'
-            width={72}
-            height={72}
-            alt='Case studies icon'
-            className='mx-auto mb-6'
-          />{' '}
-          <h2 className='text-3xl font-bold text-center font-basier'>
-            Recent customer stories
-          </h2>
-        </div>
-        <div className='w-full flex flex-col md:grid md:grid-cols-3 md:gap-x-16 gap-y-6 md:gap-y-0 '>
-          {customerStories.map((blog) => (
-            <BlogPost key={blog.id} {...blog} />
-          ))}
-        </div>
-        <CUIButton
-          type='secondary'
-          href='/blog?category=customer-stories'
-          linkClass='mx-auto mt-10 w-fit block'>
-          View all
-        </CUIButton>
-      </div>
-      <HRSeparator />
-      <div className='my-24'>
-        <h2 className='text-center text-neutral-100 font-basier text-4xl font-semibold mb-16'>
-          Ready to give it a go?
-        </h2>
-        <div className='max-w-7xl mx-auto px-4 md:px-8 2xl:px-0'>
-          <GiveItAGo />
+      <div
+        className='bg-shadow-element yellow-shadow align-shadow-right bg-neutral-900'
+        id='industries'>
+        <div className='mx-auto max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
+          <div className='py-10'>
+            <Image
+              src='/images/industries-icon.svg'
+              width={72}
+              height={72}
+              alt='Industries'
+              className='mx-auto'
+            />
+            <h2 className='mt-4 text-center text-3xl font-bold text-neutral-0'>
+              Industries
+            </h2>
+            <div className='py-24'>
+              <div className='grid gap-24 md:grid-cols-2 lg:grid-cols-3'>
+                {useCasesPageData.Industries.map((industry, index) => (
+                  <div className='text-center' key={index}>
+                    {industry.icon && (
+                      <StrapiImage
+                        {...industry.icon}
+                        className='mx-auto mb-4'
+                      />
+                    )}
+                    <h3 className='text-lg font-bold'>{industry.name}</h3>
+                    <p className='mt-4 text-sm text-neutral-200'>
+                      {industry.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <GetStartedFree href='https://clickhouse.cloud/signUp?loc=use-cases-get-started-footer' />
         </div>
       </div>
     </Layout>
   )
 }
 
-export default CustomerStoriesPage
+export default UseCasesPage
