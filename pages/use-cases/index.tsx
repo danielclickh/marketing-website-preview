@@ -180,7 +180,7 @@ function UseCasesPage({
                                           : 'md:mr-8'
                                       }`}>
                                       <Link href={client.href}>
-                                        <div className='h-20 w-full'>
+                                        <div className='h-20'>
                                           <StrapiImage
                                             {...client.logo}
                                             className='h-full w-full object-contain px-4 py-2 grayscale hover:cursor-pointer hover:grayscale-0'
@@ -207,7 +207,7 @@ function UseCasesPage({
       <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
         <div className='gap-3 md:columns-2 lg:columns-3'>
           {quotes.slice(0, visibleTestimonials).map((quote, index) => (
-            <>
+            <div key={index}>
               {quote.quotes.href ? (
                 <Link href={quote.quotes.href} className=''>
                   <div
@@ -235,7 +235,7 @@ function UseCasesPage({
                   </p>
                 </div>
               )}
-            </>
+            </div>
           ))}
         </div>
         {visibleTestimonials < quotes.length && (
