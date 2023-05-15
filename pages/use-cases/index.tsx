@@ -183,7 +183,7 @@ function UseCasesPage({
                                         <div className='h-20 w-full'>
                                           <StrapiImage
                                             {...client.logo}
-                                            className='h-full w-full object-contain grayscale hover:cursor-pointer hover:grayscale-0'
+                                            className='h-full w-full object-contain px-4 py-2 grayscale hover:cursor-pointer hover:grayscale-0'
                                           />
                                         </div>
                                       </Link>
