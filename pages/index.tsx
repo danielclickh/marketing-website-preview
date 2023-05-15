@@ -59,7 +59,7 @@ const deployData: Array<DeployData> = [
   {
     title: 'ClickHouse Cloud',
     img: '/cloud.svg',
-    btnText: 'Deploy in seconds',
+    btnText: 'Start free trial',
     description:
       'Deploy a fully managed ClickHouse service on AWS or GCP (Beta).',
     href: 'https://clickhouse.cloud/signUp?loc=home-deploy-your-way',
@@ -166,7 +166,7 @@ export default function HomePage({
                     }}
                     linkClass='w-full max-w-[14rem]'
                     className='w-full'>
-                    Deploy in 2 min
+                    Start free trial
                   </CUIButton>
                   <CUIButton
                     type='secondary'
