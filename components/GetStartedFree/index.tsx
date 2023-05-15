@@ -35,7 +35,7 @@ export default function GetStartedFree({ href }: Props) {
                 label: 'Create a free acount',
                 category: 'website-cloudpage-lower-hero'
               }}>
-              Create a free acount
+              Create a free account
             </CUIButton>
           </div>
         </div>

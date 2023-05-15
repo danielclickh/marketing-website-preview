@@ -12,6 +12,7 @@ import Image from 'next/image'
 import Glider from 'react-glider'
 import 'glider-js/glider.min.css'
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/solid'
+import { CUICard } from '../../components/ClickUI'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -67,7 +68,7 @@ function UseCasesPage({
   const [visibleTestimonials, setVisibleTestimonials] = useState(3)
 
   const loadMore = () => {
-    setVisibleTestimonials((prevValue) => prevValue + 3)
+    setVisibleTestimonials((prevValue) => prevValue + (quotes.length - 3))
   }
 
   return (
@@ -109,84 +110,92 @@ function UseCasesPage({
                   <div
                     key={index}
                     id={useCase.title.replace(/[\s&]+/g, '').toLowerCase()}
-                    className='relative z-20 min-w-full overflow-hidden rounded-lg border border-neutral-700/80 bg-neutral-900/50 shadow-card hover:bg-neutral-750'>
-                    {useCase.icon && (
-                      <div className='px-6 pt-6 pb-3'>
-                        <StrapiImage {...useCase.icon} />
-                      </div>
-                    )}
-                    <h3 className='mb-4 px-6 text-xl font-bold text-neutral-0'>
-                      {useCase.title}
-                    </h3>
-                    <div className='text-neutral-20 whitespace-pre-wrap px-6 pb-28 text-sm'>
-                      {useCase.description}
-                    </div>
-                    {useCase.ClientsUsingUseCase.length > 0 && (
-                      <div className='absolute left-0 bottom-0 z-50 h-20 w-full overflow-hidden border-t border-neutral-700/80 bg-neutral-900'>
-                        <div className='flex w-full justify-between'>
-                          <div
-                            id={`buttonPrev-${index}`}
-                            className='absolute top-0 left-0 z-40 hidden h-full transform bg-gradient-to-r from-neutral-900 via-neutral-800 to-transparent pl-2 pr-10 hover:cursor-pointer md:flex'>
-                            <span className='sr-only'>Previous</span>
-                            <div className='flex items-center'>
-                              <ChevronLeftIcon
-                                height='30'
-                                className='fill-primary-300 pt-0.5 transition group-hover:translate-x-1/2'
-                              />
-                            </div>
+                    className='relative z-20'>
+                    <CUICard>
+                      <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
+                        <div className='flex flex-col items-start justify-center gap-2 px-6 pt-6'>
+                          <div className='mb-1 font-inconsolata text-base font-medium text-primary-300'>
+                            {useCase.icon && <StrapiImage {...useCase.icon} />}
                           </div>
-                          <div
-                            id={`buttonNext-${index}`}
-                            className='absolute top-0 right-0 z-40 hidden h-full transform bg-gradient-to-l from-neutral-900 via-neutral-800 to-transparent pr-2 pl-10 hover:cursor-pointer md:flex'>
-                            <span className='sr-only'>Next</span>
-                            <div className='flex items-center'>
-                              <ChevronRightIcon
-                                height='30'
-                                className='fill-primary-300 pt-0.5 transition group-hover:translate-x-1/2'
-                              />
-                            </div>
+                          <div className='font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                            {useCase.title}
                           </div>
-                          <Glider
-                            draggable
-                            hasArrows
-                            slidesToShow={3}
-                            slidesToScroll={1}
-                            rewind={true}
-                            arrows={{
-                              prev: '#buttonPrev-' + index,
-                              next: '#buttonNext-' + index
-                            }}>
-                            {useCase.ClientsUsingUseCase.map(
-                              (client, index) =>
-                                client.logo &&
-                                client.href && (
-                                  <div
-                                    key={index}
-                                    className={`w-96 ${
-                                      index !== 0
-                                        ? 'border-l border-l-neutral-700/80'
-                                        : 'md:ml-6'
-                                    } ${
-                                      index !==
-                                      useCase.ClientsUsingUseCase.length - 1
-                                        ? ''
-                                        : 'md:mr-8'
-                                    }`}>
-                                    <Link href={client.href}>
-                                      <div className='h-20 w-full'>
-                                        <StrapiImage
-                                          {...client.logo}
-                                          className='h-full w-full object-contain grayscale hover:cursor-pointer hover:grayscale-0'
-                                        />
-                                      </div>
-                                    </Link>
-                                  </div>
-                                )
-                            )}
-                          </Glider>
+                          <div className='text-neutral-20 whitespace-pre-wrap pb-20 text-sm'>
+                            {useCase.description}
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      </CUICard.Body>
+                      <CUICard.Footer className='flex w-full items-center p-6 text-sm text-neutral-300'>
+                        {useCase.ClientsUsingUseCase.length > 0 && (
+                          <div className='absolute left-0 bottom-0 z-50 h-20 w-full overflow-hidden rounded-b-lg border border-neutral-700/80 bg-neutral-900'>
+                            <div className='flex w-full justify-between'>
+                              {useCase.ClientsUsingUseCase.length > 3 && (
+                                <>
+                                  <div
+                                    id={`buttonPrev-${index}`}
+                                    className='group absolute top-0 left-0 z-40 hidden h-full transform bg-gradient-to-l from-neutral-900 via-neutral-800 to-transparent pl-2 pr-10 hover:cursor-pointer md:flex'>
+                                    <span className='sr-only'>Previous</span>
+                                    <div className='flex items-center'>
+                                      <ChevronLeftIcon
+                                        height='30'
+                                        className='fill-slate-100 pt-0.5 opacity-50 transition duration-300 group-hover:fill-primary-300 group-hover:opacity-100'
+                                      />
+                                    </div>
+                                  </div>
+                                  <div
+                                    id={`buttonNext-${index}`}
+                                    className='group absolute top-0 right-0 z-40 hidden h-full transform bg-gradient-to-l from-neutral-900 via-neutral-800 to-transparent pr-2 pl-10 hover:cursor-pointer md:flex'>
+                                    <span className='sr-only'>Next</span>
+                                    <div className='flex items-center'>
+                                      <ChevronRightIcon
+                                        height='30'
+                                        className='fill-slate-100 pt-0.5 opacity-50 transition duration-300 group-hover:fill-primary-300 group-hover:opacity-100'
+                                      />
+                                    </div>
+                                  </div>
+                                </>
+                              )}
+                              <Glider
+                                draggable
+                                hasArrows
+                                slidesToShow={3}
+                                slidesToScroll={1}
+                                rewind={true}
+                                arrows={{
+                                  prev: `#buttonPrev-${index}`,
+                                  next: `#buttonNext-${index}`
+                                }}>
+                                {useCase.ClientsUsingUseCase.map(
+                                  (client, index) => (
+                                    <div
+                                      key={index}
+                                      className={`w-96 ${
+                                        index !== 0
+                                          ? 'border-l border-l-neutral-700/80'
+                                          : 'md:ml-6'
+                                      } ${
+                                        index !==
+                                        useCase.ClientsUsingUseCase.length - 1
+                                          ? ''
+                                          : 'md:mr-8'
+                                      }`}>
+                                      <Link href={client.href}>
+                                        <div className='h-20 w-full'>
+                                          <StrapiImage
+                                            {...client.logo}
+                                            className='h-full w-full object-contain grayscale hover:cursor-pointer hover:grayscale-0'
+                                          />
+                                        </div>
+                                      </Link>
+                                    </div>
+                                  )
+                                )}
+                              </Glider>
+                            </div>
+                          </div>
+                        )}
+                      </CUICard.Footer>
+                    </CUICard>
                   </div>
                 ))}
               </div>

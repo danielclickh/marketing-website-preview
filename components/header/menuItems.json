@@ -180,60 +180,8 @@
 	{
 		"id": 20,
 		"name": "Use cases",
-		"menuItems": [
-			{
-				"id": 1,
-				"name": "Use cases",
-				"href": "/use-cases",
-				"target": "_self",
-				"menuItems": [
-					{
-						"id": 10,
-						"name": "Real-time Dashboards",
-						"href": "/use-cases#real-timedashboards",
-						"target": "_self"
-					},
-					{
-						"id": 30,
-						"name": "Business Intelligence",
-						"href": "/use-cases#businessintelligence",
-						"target": "_self"
-					},
-					{
-						"id": 50,
-						"name": "Logging & Metrics",
-						"href": "/use-cases#loggingmetrics",
-						"target": "_self"
-					}
-				]
-			},
-			{
-				"id": 10,
-				"name": " ",
-				"href": "/use-cases",
-				"target": "_self",
-				"menuItems": [
-					{
-						"id": 20,
-						"name": "Real-time Analytics",
-						"href": "/use-cases#real-timeanalytics",
-						"target": "_self"
-					},
-					{
-						"id": 40,
-						"name": "Data Warehouse Speed Layer",
-						"href": "/use-cases#datawarehousespeedlayer",
-						"target": "_self"
-					},
-					{
-						"id": 60,
-						"name": "ML & Data Science",
-						"href": "/use-cases#mldatascience",
-						"target": "_self"
-					}
-				]
-			}
-		]
+		"href": "/use-cases",
+		"target": "_self"
 	},
 	{
 		"id": 5,
