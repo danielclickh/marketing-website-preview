@@ -52,7 +52,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
           <p className='mt-5'>
             Watch this{' '}
             <Link
-              href='/company/events/getting-started-with-clickhouse'
+              href='/company/events/getting-started-with-clickhouse?loc=getting-started'
               className='text-primary-300'>
               getting started video
             </Link>{' '}
