@@ -169,7 +169,7 @@ function UseCasesPage({
                                   (client, index) => (
                                     <div
                                       key={index}
-                                      className={`w-96 ${
+                                      className={`group w-96 ${
                                         index !== 0
                                           ? 'border-l border-l-neutral-700/80'
                                           : 'md:ml-6'
@@ -183,7 +183,7 @@ function UseCasesPage({
                                         <div className='h-20'>
                                           <StrapiImage
                                             {...client.logo}
-                                            className='h-full w-full object-contain px-4 py-2 grayscale hover:cursor-pointer hover:grayscale-0'
+                                            className='h-full w-full object-contain px-4 py-2 grayscale hover:cursor-pointer group-hover:grayscale-0'
                                           />
                                         </div>
                                       </Link>
