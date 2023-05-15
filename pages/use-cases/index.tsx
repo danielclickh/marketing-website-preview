@@ -133,7 +133,7 @@ function UseCasesPage({
                                 <>
                                   <div
                                     id={`buttonPrev-${index}`}
-                                    className='group absolute top-0 left-0 z-40 hidden h-full transform bg-gradient-to-l from-neutral-900 via-neutral-800 to-transparent pl-2 pr-10 hover:cursor-pointer md:flex'>
+                                    className='group absolute top-0 left-0 z-40 hidden h-full transform bg-gradient-to-l from-neutral-900/90 via-neutral-800/90 to-transparent pl-2 pr-10 hover:cursor-pointer md:flex'>
                                     <span className='sr-only'>Previous</span>
                                     <div className='flex items-center'>
                                       <ChevronLeftIcon
@@ -144,7 +144,7 @@ function UseCasesPage({
                                   </div>
                                   <div
                                     id={`buttonNext-${index}`}
-                                    className='group absolute top-0 right-0 z-40 hidden h-full transform bg-gradient-to-l from-neutral-900 via-neutral-800 to-transparent pr-2 pl-10 hover:cursor-pointer md:flex'>
+                                    className='group absolute top-0 right-0 z-40 hidden h-full transform bg-gradient-to-l from-neutral-900/90 via-neutral-800/90 to-transparent pr-2 pl-10 hover:cursor-pointer md:flex'>
                                     <span className='sr-only'>Next</span>
                                     <div className='flex items-center'>
                                       <ChevronRightIcon
