@@ -207,21 +207,35 @@ function UseCasesPage({
       <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
         <div className='gap-3 md:columns-2 lg:columns-3'>
           {quotes.slice(0, visibleTestimonials).map((quote, index) => (
-            <div
-              key={index}
-              className='animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover shadow-card hover:bg-neutral-750'>
-              {quote.quotes.href && (
+            <>
+              {quote.quotes.href ? (
                 <Link href={quote.quotes.href} className=''>
+                  <div
+                    key={index}
+                    className='animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover shadow-card hover:bg-neutral-750'>
+                    <StrapiImage
+                      {...quote.quotes.logo}
+                      className='color-swap mt-4 ml-1 h-auto w-32'
+                    />
+                    <p className='px-4 pb-6 pt-3 text-sm font-normal text-white'>
+                      "{quote.quotes.quote}"
+                    </p>
+                  </div>
+                </Link>
+              ) : (
+                <div
+                  key={index}
+                  className='animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover shadow-card hover:bg-neutral-750'>
                   <StrapiImage
                     {...quote.quotes.logo}
                     className='color-swap mt-4 ml-1 h-auto w-32'
                   />
-                </Link>
+                  <p className='px-4 pb-6 pt-3 text-sm font-normal text-white'>
+                    "{quote.quotes.quote}"
+                  </p>
+                </div>
               )}
-              <p className='px-4 pb-6 pt-3 text-sm font-normal text-white'>
-                "{quote.quotes.quote}"
-              </p>
-            </div>
+            </>
           ))}
         </div>
         {visibleTestimonials < quotes.length && (
