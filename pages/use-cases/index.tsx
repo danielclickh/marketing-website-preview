@@ -169,7 +169,7 @@ function UseCasesPage({
                                   (client, index) => (
                                     <div
                                       key={index}
-                                      className={`group w-96 ${
+                                      className={`w-96 ${
                                         index !== 0
                                           ? 'border-l border-l-neutral-700/80'
                                           : 'md:ml-6'
@@ -179,11 +179,13 @@ function UseCasesPage({
                                           ? ''
                                           : 'md:mr-8'
                                       }`}>
-                                      <Link href={client.href}>
+                                      <Link
+                                        href={client.href}
+                                        className='color-swap'>
                                         <div className='h-20'>
                                           <StrapiImage
                                             {...client.logo}
-                                            className='color-swap h-full w-full object-contain px-4 py-2 hover:cursor-pointer'
+                                            className=' h-full w-full object-contain px-4 py-2 '
                                           />
                                         </div>
                                       </Link>
