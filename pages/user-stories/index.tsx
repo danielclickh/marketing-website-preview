@@ -185,7 +185,7 @@ function CustomerStoriesPage({
         <div className='container mx-auto flex max-w-7xl flex-col px-4 md:px-8 2xl:px-0'>
           <div className='mx-auto flex max-w-screen-sm flex-col pt-6 text-center'>
             <h1 className='mb-16 font-basier text-5.5xl font-semibold'>
-              Use cases
+              User stories
             </h1>
           </div>
           <div>
