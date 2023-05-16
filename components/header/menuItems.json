@@ -82,6 +82,12 @@
 						"name": "GitHub",
 						"href": "https://github.com/ClickHouse/ClickHouse",
 						"target": "_blank"
+					},
+					{
+						"id": 3,
+						"name": "User stories",
+						"href": "/user-stories",
+						"target": "_self"
 					}
 				]
 			},
