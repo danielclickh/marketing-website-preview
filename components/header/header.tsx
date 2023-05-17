@@ -129,7 +129,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
                 label: 'Sign in',
                 category: 'website-nav'
               }}
-              className='inline-flex items-center text-sm font-medium ease-in-out hover:text-neutral-400 hover:no-underline'>
+              className='hidden items-center text-sm font-medium ease-in-out hover:text-neutral-400 hover:no-underline lg:inline-flex'>
               Sign in
             </CUILink>
             <CUIButton
