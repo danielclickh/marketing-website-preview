@@ -102,7 +102,9 @@ export const getStaticProps: GetStaticProps<LearnProps> =
       props: {
         upcomingEvents: data,
         seo: {
-          title: 'Learn | ClickHouse'
+          title: 'How to Use ClickHouse | Database Tutorial | ClickHouse',
+          description:
+            'Master the art of data analysis with ClickHouse. Our seamless, easy to use database management platform can help you to unlock powerful insights. Try for free.'
         },
         ...commonProps
       }
@@ -121,8 +123,8 @@ function LearnPage({
         <SuiTitle
           type='h1'
           color='white'
-          className='pt-16 md:pt-20 pb-6 md:!text-6xl'>
-          ClickHouse Academy
+          className='pt-16 pb-6 md:pt-20 md:!text-6xl'>
+          Learn ClickHouse with ClickHouse Academy
         </SuiTitle>
         <SuiText color='secondary' className='pb-10'>
           Become a ClickHouse expert with our free official ClickHouse training
@@ -133,7 +135,7 @@ function LearnPage({
           size='lg'
           weight='semibold'
           href='https://learn.clickhouse.com/visitor_class_catalog'
-          className='mx-auto px-4 w-56'>
+          className='mx-auto w-56 px-4'>
           Find a course
         </CUIButton>
 
@@ -144,7 +146,7 @@ function LearnPage({
         </div>
       </div>
 
-      <div className='container max-w-screen-xl mx-auto pb-16 pt-24 text-center bg-shadow-element-right yellow-shadow'>
+      <div className='bg-shadow-element-right yellow-shadow container mx-auto max-w-screen-xl pb-16 pt-24 text-center'>
         <SuiTitle type='h2' className='mb-6'>
           Popular free courses
         </SuiTitle>
@@ -156,13 +158,13 @@ function LearnPage({
           Learn the basics of ClickHouse with our online courses.
         </SuiText>
 
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-12 mx-auto pb-10 px-8 md:px-8'>
+        <div className='mx-auto grid grid-cols-1 gap-12 px-8 pb-10 md:grid-cols-3 md:px-8'>
           {popularCourses.map((course) => (
             <Link
               key={course.title}
               href={`https://learn.clickhouse.com/visitor_catalog_class/show/${course.url}`}
-              className='hover:no-underline transition ease-in-out'>
-              <CUICard className='grid p-8 group bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat w-full min-h-[22.5rem]'>
+              className='transition ease-in-out hover:no-underline'>
+              <CUICard className='group grid min-h-[22.5rem] w-full bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
                 <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
                   <Image
                     src={course.icon}
@@ -171,13 +173,13 @@ function LearnPage({
                     height={64}
                   />
                   <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-4'>
-                    <div className='text-xl leading-tight cursor-pointer font-semibold'>
+                    <div className='cursor-pointer text-xl font-semibold leading-tight'>
                       {course.title}
                     </div>
-                    <div className='text-sm text-neutral-200 flex gap-2 pb-4 group-hover:text-neutral-0'>
+                    <div className='flex gap-2 pb-4 text-sm text-neutral-200 group-hover:text-neutral-0'>
                       <ClockIcon width={12} /> {course.time}
                     </div>
-                    <div className='text-neutral-200 text-center text-sm group-hover:text-neutral-0'>
+                    <div className='text-center text-sm text-neutral-200 group-hover:text-neutral-0'>
                       {course.description}
                     </div>
                   </div>
@@ -188,20 +190,20 @@ function LearnPage({
         </div>
         <CUIButton
           type='secondary'
-          className='w-auto mx-auto flex group'
+          className='group mx-auto flex w-auto'
           href='https://learn.clickhouse.com/visitor_class_catalog'
           iconRight={
             <ChevronRightIcon
               height='18'
-              className='group-hover:translate-x-1/2 pt-0.5 transition'
+              className='pt-0.5 transition group-hover:translate-x-1/2'
             />
           }>
           Browse more free training
         </CUIButton>
       </div>
 
-      <div className='clip-inverted-triangle-top flex flex-col items-center text-center lg:px-32 gap-x-16 lg:gap-x-20 gap-y-12'>
-        <div className='flex-col pt-24 md:pt-40 relative px-8'>
+      <div className='clip-inverted-triangle-top flex flex-col items-center gap-x-16 gap-y-12 text-center lg:gap-x-20 lg:px-32'>
+        <div className='relative flex-col px-8 pt-24 md:pt-40'>
           <SuiTitle type='h2' color='text-default'>
             Learning paths
           </SuiTitle>
@@ -209,26 +211,26 @@ function LearnPage({
             size='base'
             weight='normal'
             color='text-default'
-            className='mt-6 max-w-screen-sm mx-auto'>
+            className='mx-auto mt-6 max-w-screen-sm'>
             Become a subject matter expert through our recommended series of
             courses that will best help you build knowledge progressively.
           </SuiText>
-          <div className='flex mt-8 pb-24 gap-12 md:gap-16 flex-col sm:grid sm:grid-cols-1 md:grid-cols-2 w-full'>
+          <div className='mt-8 flex w-full flex-col gap-12 pb-24 sm:grid sm:grid-cols-1 md:grid-cols-2 md:gap-16'>
             {learningCourses.map((course) => (
               <Link
                 key={course.title}
                 href={`https://learn.clickhouse.com/visitor_catalog_class/show/${course.url}`}
-                className='hover:no-underline group bg-opacity-90 bg-neutral-750 transition ease-in-out rounded-lg'>
-                <CUICard className='p-8 bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat w-full md:max-w-[22.5rem]'>
+                className='group rounded-lg bg-neutral-750 bg-opacity-90 transition ease-in-out hover:no-underline'>
+                <CUICard className='w-full bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8 md:max-w-[22.5rem]'>
                   <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
                     <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-4'>
-                      <div className='text-xl leading-tight cursor-pointer font-semibold px-4'>
+                      <div className='cursor-pointer px-4 text-xl font-semibold leading-tight'>
                         {course.title}
                       </div>
-                      <div className='text-sm text-neutral-200 flex gap-2 pb-4'>
+                      <div className='flex gap-2 pb-4 text-sm text-neutral-200'>
                         <ClockIcon width={12} /> {course.time}
                       </div>
-                      <div className='text-neutral-200 text-center text-sm group-hover:text-neutral-0'>
+                      <div className='text-center text-sm text-neutral-200 group-hover:text-neutral-0'>
                         {course.description}
                       </div>
                     </div>
@@ -239,7 +241,7 @@ function LearnPage({
           </div>
         </div>
       </div>
-      <div className='container mx-auto px-3 text-center max-w-screen-md pt-24 bg-shadow-element-left red-shadow'>
+      <div className='bg-shadow-element-left red-shadow container mx-auto max-w-screen-md px-3 pt-24 text-center'>
         <Image
           src='/learn/icon_pro_cert.svg'
           alt='Professional Certificate Icon'
@@ -263,7 +265,7 @@ function LearnPage({
 
         <CUIButton
           type='secondary'
-          className='w-auto mx-auto'
+          className='mx-auto w-auto'
           href='https://twitter.com/clickhousedb'
           target='_blank'
           iconLeft={
@@ -293,23 +295,23 @@ function LearnPage({
           size='base'
           weight='normal'
           color='secondary'
-          className='mb-10 max-w-3xl text-center mx-auto'>
+          className='mx-auto mb-10 max-w-3xl text-center'>
           Join our community and attend our events to learn more about
           ClickHouse! Our team is always happy to support and answer any
           questions you may have about ClickHouse development. You can also
           <Link
             href='https://learn.clickhouse.com/visitor_class_catalog/category/115910'
-            className='underline ml-2 hover:text-neutral-0 font-semibold'>
+            className='ml-2 font-semibold underline hover:text-neutral-0'>
             access our list of older events
           </Link>{' '}
           hosted by us.
         </SuiText>
 
-        <div className='flex flex-col md:flex-row mx-auto gap-12 md:gap-16 justify-center w-full md:w-auto '>
+        <div className='mx-auto flex w-full flex-col justify-center gap-12 md:w-auto md:flex-row md:gap-16 '>
           {upcomingEvents.map((event: EventType) => (
             <Link
               href={`/company/events/${event.slug}`}
-              className='flex hover:no-underline flex-col justify-between w-full h-auto rounded-lg bg-neutral-900/70 border border-neutral-700/80 shadow-card md:max-w-[22.5rem]'
+              className='flex h-auto w-full flex-col justify-between rounded-lg border border-neutral-700/80 bg-neutral-900/70 shadow-card hover:no-underline md:max-w-[22.5rem]'
               key={event.title}>
               <Tilt
                 tiltEnable={false}
@@ -325,7 +327,7 @@ function LearnPage({
                       alt='image'
                       width={342}
                       height={196}
-                      className='w-full h-48 object-cover object-center rounded-t-lg'
+                      className='h-48 w-full rounded-t-lg object-cover object-center'
                     />
                   ) : (
                     <Image
@@ -333,7 +335,7 @@ function LearnPage({
                       src={`/images/clickhouse_workshop.png`}
                       width={342}
                       height={196}
-                      className='w-full h-48 object-cover object-center'
+                      className='h-48 w-full object-cover object-center'
                     />
                   )}
 
@@ -351,7 +353,7 @@ function LearnPage({
                     <SuiText
                       size='sm'
                       color='secondary'
-                      className='flex flex-col gap-2.5 mb-6'>
+                      className='mb-6 flex flex-col gap-2.5'>
                       {event.localDatetime && (
                         <div className='flex gap-2'>
                           <CalendarIcon width='20' height='20' />
