@@ -124,7 +124,7 @@ function LearnPage({
           type='h1'
           color='white'
           className='pt-16 pb-6 md:pt-20 md:!text-6xl'>
-          Learn ClickHouse with ClickHouse Academy
+          ClickHouse Academy
         </SuiTitle>
         <SuiText color='secondary' className='pb-10'>
           Become a ClickHouse expert with our free official ClickHouse training
