@@ -70,7 +70,7 @@ const deployData: Array<DeployData> = [
 
 const customerStoriesLogos = [
   {
-    href: '/customer-stories#ebay',
+    href: '/user-stories#ebay',
     target: '_self',
     imageSrc: '/logos/eBay-black.svg',
     alt: 'ebay',
@@ -78,7 +78,7 @@ const customerStoriesLogos = [
     height: 33
   },
   {
-    href: '/customer-stories#uber',
+    href: '/user-stories#uber',
     target: '_self',
     imageSrc: '/logos/uber-black.svg',
     alt: 'uber',
@@ -86,7 +86,7 @@ const customerStoriesLogos = [
     height: 25
   },
   {
-    href: '/customer-stories#cloudflare',
+    href: '/user-stories#cloudflare',
     target: '_self',
     imageSrc: '/logos/cloudflare-black.svg',
     alt: 'cloudflare',
@@ -94,7 +94,7 @@ const customerStoriesLogos = [
     height: 39
   },
   {
-    href: '/customer-stories#deutsche_bank',
+    href: '/user-stories#deutsche_bank',
     target: '_self',
     imageSrc: '/logos/deutsche-black.svg',
     alt: 'deutsche bank',
@@ -102,7 +102,7 @@ const customerStoriesLogos = [
     height: 26
   },
   {
-    href: '/customer-stories#spotify',
+    href: '/user-stories#spotify',
     target: '_self',
     imageSrc: '/logos/spotify-black.svg',
     alt: 'spotify',
@@ -213,7 +213,7 @@ export default function HomePage({
                   key={logo.href}
                   href={logo.href}
                   target={logo.target}
-                  className={`customer-stories-${index} flex cursor-pointer justify-center gap-2 rounded-lg duration-200 ease-in-out`}>
+                  className={`user-stories-${index} flex cursor-pointer justify-center gap-2 rounded-lg duration-200 ease-in-out`}>
                   <Image
                     src={logo?.imageSrc}
                     className='object-contain'
