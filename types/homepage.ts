@@ -119,6 +119,23 @@ export interface HomePageProps extends CommonProps {
   clickhouseCloud: HomepageClickhouseCloud
   clickhouseCloudItems: Array<ScreenshotAndBullets>
   testimonials: HomepageTestimonials
+  customerLogos: HomepageCustomerLogos
+}
+
+export interface HomepageCustomerLogos {
+  useCaseItems: Array<CustomerLogo>
+}
+
+export interface CustomerLogo {
+  companyName: string
+  darkLogoPng: StrapiImageType
+  lightLogoPng: StrapiImageType
+  description: string
+  bullets: Array<{
+    text: string
+  }>
+  ctaButton: StrapiButton
+  anchorId: string
 }
 
 export interface ParamsType extends ParsedUrlQuery {

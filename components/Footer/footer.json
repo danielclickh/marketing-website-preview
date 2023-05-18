@@ -90,7 +90,7 @@
 			{
 				"id": 23,
 				"name": "Contact us",
-				"href": "/company/contact",
+				"href": "/company/contact?loc=footer",
 				"target": "_self"
 			},
 			{

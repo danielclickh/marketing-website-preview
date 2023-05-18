@@ -564,3 +564,7 @@ a.arrow-link {
   -ms-overflow-style: none !important;  /* IE and Edge */
   scrollbar-width: none !important;  /* Firefox */
 }
+
+.pause-hover {
+  &:hover { * {animation-play-state: paused;}}
+}

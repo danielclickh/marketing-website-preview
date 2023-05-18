@@ -1,5 +1,4 @@
 import Image from 'next/image'
-
 import { SuiTitle } from '../components/sui'
 import { findOne } from '../lib/api/strapi'
 import GetStarted from '../components/GetStarted'
@@ -21,6 +20,10 @@ import RowOrientedIllustration from '../components/RowOrientedIllustration'
 import ColumnOrientedIllustration from '../components/ColumnOrientedIllustration'
 import SpeedAnimationSvg from '../components/SpeedAnimation'
 import SpeedAnimationMobileSvg from '../components/SpeedAnimation/Mobile'
+
+import { StrapiImage } from '../components/StrapiElements'
+import Link from 'next/link'
+import LogoCarousel from '../components/LogoCarousel'
 
 const yellowPositionStyle = {
   '--left-side': 'auto',
@@ -68,53 +71,19 @@ const deployData: Array<DeployData> = [
   }
 ]
 
-const customerStoriesLogos = [
-  {
-    href: '/user-stories#ebay',
-    target: '_self',
-    imageSrc: '/logos/eBay-black.svg',
-    alt: 'ebay',
-    width: 82,
-    height: 33
-  },
-  {
-    href: '/user-stories#uber',
-    target: '_self',
-    imageSrc: '/logos/uber-black.svg',
-    alt: 'uber',
-    width: 72,
-    height: 25
-  },
-  {
-    href: '/user-stories#cloudflare',
-    target: '_self',
-    imageSrc: '/logos/cloudflare-black.svg',
-    alt: 'cloudflare',
-    width: 117,
-    height: 39
-  },
-  {
-    href: '/user-stories#deutsche_bank',
-    target: '_self',
-    imageSrc: '/logos/deutsche-black.svg',
-    alt: 'deutsche bank',
-    width: 133,
-    height: 26
-  },
-  {
-    href: '/user-stories#spotify',
-    target: '_self',
-    imageSrc: '/logos/spotify-black.svg',
-    alt: 'spotify',
-    width: 119,
-    height: 35
-  }
-]
-
 export const getStaticProps: GetStaticProps<HomePageProps> =
   async function getStaticProps() {
     const params = {
-      populate: ['hero', 'hero.ctaButton', 'seo', 'seo.image']
+      populate: [
+        'hero',
+        'hero.ctaButton',
+        'seo',
+        'seo.image',
+        'customerStories',
+        'customerStories.*',
+        'customerStories.logos.*',
+        'customerStories.logos.darkLogoPng'
+      ]
     }
 
     const commonProps = await getCommonProps()
@@ -133,8 +102,18 @@ export default function HomePage({
   seo,
   footerData,
   headerData,
+  customerStories,
   platforms
 }: HomePageProps) {
+  // Split the customerStories.logos array into two separate arrays
+  const logos1 = customerStories.logos.slice(
+    0,
+    Math.ceil(customerStories.logos.length / 2)
+  )
+  const logos2 = customerStories.logos.slice(
+    Math.ceil(customerStories.logos.length / 2)
+  )
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage overflow-hidden bg-grid'>
@@ -198,31 +177,37 @@ export default function HomePage({
             <HomePageTerminal />
           </div>
         </div>
-        <div className='-mt-1 bg-primary-300 pt-8 pb-16'>
-          <div className='mx-auto max-w-4xl'>
-            <div className='mx-auto mb-8 w-fit px-4 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
+        <div className='flip-selection -mt-1 bg-primary-300 pt-16 pb-16'>
+          <div className='mx-auto'>
+            <div className='mx-auto mb-8 w-fit max-w-4xl px-4 py-6 pt-10 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
               Trusted by the best developers that work with data at{' '}
               <span className='tilted tilted-black'>
                 <span className='tilted-content leading-8'>scale</span>
               </span>
             </div>
-
-            <div className='section-container flex flex-wrap place-items-center items-center justify-center gap-6 self-center md:gap-x-14'>
-              {customerStoriesLogos.map((logo, index: number) => (
-                <CUILink
-                  key={logo.href}
-                  href={logo.href}
-                  target={logo.target}
-                  className={`user-stories-${index} flex cursor-pointer justify-center gap-2 rounded-lg duration-200 ease-in-out`}>
-                  <Image
-                    src={logo?.imageSrc}
-                    className='object-contain'
-                    alt={logo.alt}
-                    width={logo.width}
-                    height={logo.height}
-                  />
-                </CUILink>
-              ))}
+            <div className='section-container relative z-40 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center md:gap-x-14'>
+              <div className='absolute left-0 z-50 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
+              <div className='absolute right-0 z-50 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
+              <LogoCarousel
+                logos={logos1}
+                speedClass1='md:animate-marqueeLeft'
+                speedClass2='md:animate-marqueeLeft2'
+              />
+              <LogoCarousel
+                logos={logos2}
+                speedClass1='md:animate-marqueeLeft3'
+                speedClass2='md:animate-marqueeLeft4'
+              />
+            </div>
+            <div className='mx-auto w-fit max-w-4xl px-4 py-6 pb-12 pt-10 text-center text-base leading-normal text-primary-800 md:px-0'>
+              Don't take our word for it.{' '}
+              <Link href='/user-stories' className='font-bold hover:underline'>
+                Read our user stories{' '}
+                <ChevronRightIcon
+                  height='20'
+                  className='-mt-0.5 inline-block transition group-hover:translate-x-1/2'
+                />
+              </Link>
             </div>
           </div>
         </div>

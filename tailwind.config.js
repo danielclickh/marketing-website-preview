@@ -247,6 +247,10 @@ module.exports = {
         focus_size: '100%, 100%'
       },
       backgroundImage: {
+        homepageFadeLeftLogos:
+          'linear-gradient(90deg, #FCFF74 30%, rgba(252, 255, 116, 0) 99.99%)',
+        homepageFadeRightLogos:
+          'linear-gradient(270deg, #FCFF74 30%, rgba(252, 255, 116, 0) 99.99%)',
         field_focus:
           'linear-gradient(0deg, #fbff46, #fbff46 2px, transparent 0, transparent)',
         navDropdown:
@@ -295,6 +299,14 @@ module.exports = {
         fadeOut: {
           from: { opacity: 1 },
           to: { opacity: 0 }
+        },
+        marqueeLeftTransform: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' }
+        },
+        marqueeLeftTransform2: {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(0%)' }
         }
       },
       animation: {
@@ -305,7 +317,11 @@ module.exports = {
         enterFromLeft: 'enterFromLeft 250ms ease',
         enterFromRight: 'enterFromRight 250ms ease',
         exitToLeft: 'exitToLeft 250ms ease',
-        exitToRight: 'exitToRight 250ms ease'
+        exitToRight: 'exitToRight 250ms ease',
+        marqueeLeft: 'marqueeLeftTransform 75s linear infinite',
+        marqueeLeft2: 'marqueeLeftTransform2 75s linear infinite ',
+        marqueeLeft3: 'marqueeLeftTransform 90s linear infinite',
+        marqueeLeft4: 'marqueeLeftTransform2 90s linear infinite '
       }
     }
   }
