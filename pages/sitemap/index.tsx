@@ -8,6 +8,7 @@ import { convertDateToString } from '../../lib/utils/dateUtils'
 import menuItems from '../../components/header/menuItems.json'
 
 import Link from 'next/link'
+import HRSeparator from '../../components/HRSeparator'
 
 interface SitemapProps extends CommonProps {
   blogPosts: any[]
@@ -78,7 +79,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         pressReleases,
         menu,
         seo: {
-          title: 'Site Map - ClickHouse'
+          title: 'Site map - ClickHouse'
         },
         ...commonProps
       }
@@ -102,7 +103,7 @@ function Sitemap({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div>
         <h1 className='mx-auto mb-10 pt-10 text-center font-basier text-4xl text-neutral-100 md:text-5.5xl lg:mb-16 lg:pt-20'>
-          Site Map
+          Site map
         </h1>
         <div className='mx-auto my-24 max-w-7xl px-4 sm:px-8 2xl:px-0'>
           <div className='mb-10 grid gap-10 xl:grid-cols-4'>
@@ -172,64 +173,78 @@ function Sitemap({
             <div>
               <h2
                 id='blog-posts'
-                className='mb-6 font-basier text-2xl font-semibold text-neutral-100'>
+                className='mb-4 font-basier text-2xl font-semibold text-neutral-100'>
                 <Link
                   href={`/use-cases`}
                   className='hover:text-primary-300 hover:underline'>
                   Use cases
                 </Link>
               </h2>
+              <p className='pb-2'>
+                <Link
+                  href={`/user-stories`}
+                  className='text-primary-300 hover:underline'>
+                  User stories
+                </Link>
+              </p>
             </div>
             <div>
               <h2
                 id='blog-posts'
-                className='mb-6 font-basier text-2xl font-semibold text-neutral-100'>
+                className='mb-4 font-basier text-2xl font-semibold text-neutral-100'>
                 <Link
                   href={`/pricing`}
                   className='hover:text-primary-300 hover:underline'>
                   Pricing
                 </Link>
               </h2>
+              <p className='pb-2'>
+                <Link
+                  href={`/pricing`}
+                  className='text-primary-300 hover:underline'>
+                  Pricing
+                </Link>
+              </p>
             </div>
           </div>
-          <div className='pb-10'>
-            <div>
-              <h2
-                id='blog-posts'
-                className='mb-6 font-basier text-2xl font-semibold text-neutral-100'>
-                Resources
-              </h2>
-              <div className='mb-10 grid gap-10 gap-y-2 xl:grid-cols-4'>
-                {resourcesMenu?.map((item) => (
-                  <div key={item.id}>
-                    <p className='pb-2 font-semibold'>
-                      {item.href ? (
-                        <Link href={item.href} className='hover:underline'>
-                          {item.name}
-                        </Link>
-                      ) : (
-                        <>{item.name}</>
-                      )}
-                    </p>
-                    {item.menuItems &&
-                      item.menuItems.map((menuItem: any) => (
-                        <div key={`sub-${menuItem.id}`}>
-                          <ul className='mb-2'>
-                            <li>
-                              <Link
-                                href={menuItem.href}
-                                className='font text-primary-300 hover:underline'>
-                                {menuItem.name}{' '}
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
-                      ))}
-                  </div>
-                ))}
-              </div>
+          <HRSeparator className='my-20' />
+          <div>
+            <h2
+              id='blog-posts'
+              className='mb-6 font-basier text-2xl font-semibold text-neutral-100'>
+              Resources
+            </h2>
+            <div className='mb-10 grid gap-10 gap-y-2 xl:grid-cols-4'>
+              {resourcesMenu?.map((item) => (
+                <div key={item.id}>
+                  <p className='pb-2 font-semibold'>
+                    {item.href ? (
+                      <Link href={item.href} className='hover:underline'>
+                        {item.name}
+                      </Link>
+                    ) : (
+                      <>{item.name}</>
+                    )}
+                  </p>
+                  {item.menuItems &&
+                    item.menuItems.map((menuItem: any) => (
+                      <div key={`sub-${menuItem.id}`}>
+                        <ul className='mb-2'>
+                          <li>
+                            <Link
+                              href={menuItem.href}
+                              className='font text-primary-300 hover:underline'>
+                              {menuItem.name}{' '}
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    ))}
+                </div>
+              ))}
             </div>
           </div>
+          <HRSeparator className='my-20' />
           <div className='grid gap-10 xl:grid-cols-4'>
             <div>
               <h2
