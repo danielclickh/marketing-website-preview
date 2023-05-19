@@ -353,7 +353,7 @@ body {
 }
 
 .tilted-black {
-  @apply text-base-color;
+  @apply text-primary-300;
   &:before {
     @apply bg-slate-900;
   }
