@@ -190,13 +190,13 @@ export default function HomePage({
               <div className='absolute right-0 z-50 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
               <LogoCarousel
                 logos={logos1}
-                speedClass1='md:animate-marqueeLeft'
-                speedClass2='md:animate-marqueeLeft2'
+                speedClass1='animate-marqueeLeft'
+                speedClass2='animate-marqueeLeft2'
               />
               <LogoCarousel
                 logos={logos2}
-                speedClass1='md:animate-marqueeLeft3'
-                speedClass2='md:animate-marqueeLeft4'
+                speedClass1='animate-marqueeLeft3'
+                speedClass2='animate-marqueeLeft4'
               />
             </div>
             <div className='mx-auto w-fit max-w-4xl px-4 py-6 pb-12 pt-10 text-center text-base leading-normal text-primary-800 md:px-0'>
