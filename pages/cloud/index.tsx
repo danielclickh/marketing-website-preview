@@ -178,12 +178,12 @@ export default function CloudPage({
                     />
                   </div>
                 </div>
-                <HRSeparator className='my-0' />
               </div>
             ))}
           </div>
         </div>
         <div className='relative flex flex-col gap-y-28'>
+          <HRSeparator className='my-0' />
           <div className='section-container bg-shadow-element yellow-shadow flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
               <Image
