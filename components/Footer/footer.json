@@ -62,6 +62,12 @@
 				"name": "Trust Center",
 				"href": "https://trust.clickhouse.com",
 				"target": "_blank"
+			},
+			{
+				"id": 21,
+				"name": "Site map",
+				"href": "/sitemap",
+				"target": "_self"
 			}
 		]
 	},
