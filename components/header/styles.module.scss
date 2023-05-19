@@ -67,7 +67,6 @@
 .floatingContent {
   @apply transform w-max;
   overflow-y: auto;
-
 }
 
 .triggerEnter {
@@ -84,10 +83,25 @@
 }
 
 .menuItem {
-  &:hover > div > div {@apply text-white}
+  &:hover > div > div {
+    @apply text-white;
+  }
   @apply py-2 md:px-3 rounded flex gap-4 items-center w-full hover:bg-neutral-725 hover:text-primary-900;
 
   &[data-icon="true"] {
     @apply flex py-1 md:py-2 md:px-3 cursor-pointer items-center;
+  }
+}
+
+.banner {
+  @apply w-full text-center bg-primary-200 text-primary-900 text-sm py-1 pl-4 pr-8 sm:pr-4 font-medium;
+  :global(a) {
+    @apply no-underline cursor-pointer w-full #{!important};
+    &:hover {
+      @apply text-primary-700 #{!important};
+    }
+  }
+  &:hover {
+    @apply text-primary-700 cursor-pointer;
   }
 }

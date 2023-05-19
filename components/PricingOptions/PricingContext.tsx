@@ -4,9 +4,11 @@ import {
   ReactNode,
   SetStateAction,
   useContext,
+  useEffect,
   useState
 } from 'react'
-import { RegionPricingWithIcon } from '../../types/pricing'
+import { RegionPricingWithIcon } from './types'
+
 type ContextProps = {
   selectedRegion?: RegionPricingWithIcon
   setSelectedRegion: Dispatch<SetStateAction<RegionPricingWithIcon>>
@@ -30,6 +32,10 @@ export const PricingContextProvider = ({ children, value }: Props) => {
     selectedRegion,
     setSelectedRegion
   }
+
+  useEffect(() => {
+    setSelectedRegion(value)
+  }, [value])
   return (
     <PricingContext.Provider value={pricingValue}>
       {children}

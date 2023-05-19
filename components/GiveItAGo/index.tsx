@@ -34,8 +34,9 @@ const deployData: Array<DeployData> = [
   {
     title: 'ClickHouse Cloud',
     img: '/cloud.svg',
-    btnText: 'Deploy in seconds',
-    description: 'Deploy a fully managed ClickHouse service on AWS.',
+    btnText: 'Start free trial',
+    description:
+      'Deploy a fully managed ClickHouse service on AWS or GCP (Beta).',
     href: 'https://clickhouse.cloud/signUp?loc=deploy-your-way',
     target: '_blank',
     btnType: 'primary'
@@ -43,11 +44,11 @@ const deployData: Array<DeployData> = [
 ]
 export default function GiveItAGo() {
   return (
-    <div className='flex flex-wrap justify-center xl:justify-between gap-10'>
+    <div className='flex flex-wrap justify-center gap-10 xl:justify-between'>
       {deployData.map((deploy) => (
         <CUICard
           key={deploy.title}
-          className='p-8 bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat w-full max-w-[22.5rem]'>
+          className='w-full max-w-[22.5rem] bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
           <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
             <Image
               src={deploy.img}
@@ -56,15 +57,15 @@ export default function GiveItAGo() {
               height={64}
             />
             <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>
-              <div className='text-xl leading-tight text-neutral-0 cursor-pointer font-semibold'>
+              <div className='cursor-pointer text-xl font-semibold leading-tight text-neutral-0'>
                 {deploy.title}
               </div>
-              <div className='text-neutral-200 text-center text-sm'>
+              <div className='text-center text-sm text-neutral-200'>
                 {deploy.description}
               </div>
             </div>
           </CUICard.Body>
-          <CUICard.Footer className='flex items-center w-full '>
+          <CUICard.Footer className='flex w-full items-center '>
             <CUIButton
               type={deploy.btnType}
               href={deploy.href}
@@ -73,7 +74,7 @@ export default function GiveItAGo() {
               iconRight={
                 <ChevronRightIcon
                   height='18'
-                  className='group-hover:translate-x-1/2 pt-0.5 transition'
+                  className='pt-0.5 transition group-hover:translate-x-1/2'
                 />
               }
               target={deploy.target}>

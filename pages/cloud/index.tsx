@@ -14,7 +14,7 @@ import integrations from './integrations.json'
 import features from './features.json'
 import featureBlocks from './feature_blocks.json'
 import { ChevronRightIcon } from '@heroicons/react/solid'
-import Link from 'next/link'
+import GetStartedFree from '../../components/GetStartedFree'
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -101,14 +101,6 @@ export default function CloudPage({
                     <div className='flex items-center justify-center space-x-6 md:justify-start'>
                       <CloudProviders cloudProviders={hero.cloudProviders} />
                     </div>
-                  </div>
-                  <div className='text-sm text-neutral-300'>
-                    Interested in being notified when GCP is available?{' '}
-                    <Link
-                      href='/partners/gcp?loc=cloud-page'
-                      className='text-primary-300'>
-                      Sign up here
-                    </Link>
                   </div>
                 </div>
                 <div className='mx-auto mt-4 hidden md:flex md:w-4/12'>
@@ -313,39 +305,7 @@ export default function CloudPage({
         </div>
 
         <div className='section-container pb-16 md:px-8 2xl:px-0 '>
-          <div className='flip-selection w-full rounded-lg bg-primary-300 py-16 px-4 text-neutral-0'>
-            <div className='container mx-auto flex flex-col 2xl:px-0'>
-              <div className='mx-auto flex flex-col text-center'>
-                <SuiTitle type='h2' color='text-default' className='mb-6 '>
-                  Get started for free
-                </SuiTitle>
-                <div className='max-w-3xl'>
-                  <SuiText size='base' color='text-default' weight='normal'>
-                    We’ll get you started on a 30 day trial and $300 credits to
-                    spend at your own pace.
-                  </SuiText>
-
-                  <CUIButton
-                    type='primary-dark'
-                    size='lg'
-                    className='group mx-auto mt-8'
-                    href='https://clickhouse.cloud/signUp?loc=cloud-page-get-started-footer'
-                    iconRight={
-                      <ChevronRightIcon
-                        height='18'
-                        className='pt-0.5 transition group-hover:translate-x-1/2'
-                      />
-                    }
-                    segmentEvent={{
-                      label: 'Create a free acount',
-                      category: 'website-cloudpage-lower-hero'
-                    }}>
-                    Create a free acount
-                  </CUIButton>
-                </div>
-              </div>
-            </div>
-          </div>
+          <GetStartedFree href='https://clickhouse.cloud/signUp?loc=cloud-page-get-started-footer' />
         </div>
       </Layout>
     </>

@@ -20,9 +20,10 @@ import logoFull from '../../public/logo-full.svg'
 import { HeaderProps, MenuItem as MenuItemType } from './types'
 import MobileMenuItem from './MobileMenuItem'
 import GlobalMenu from './GlobalMenu'
+import Banner from './Banner'
 const headerMenuItems = menuItems as Array<MenuItemType>
 
-export default function Header({ github: { stars } }: HeaderProps) {
+export default function Header({ header, github: { stars } }: HeaderProps) {
   const navBarRef = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState(false)
   const { strategy, floating, reference, context } = useFloating({
@@ -69,6 +70,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
         className={styles.navBarContainer}
         ref={navBarRef}
         id='nav-container'>
+        <Banner content={header?.banner ?? ''} />
         <nav className='no-wrap section-container relative flex w-full items-center justify-between py-4'>
           <Link
             href='/'
@@ -110,7 +112,11 @@ export default function Header({ github: { stars } }: HeaderProps) {
                 </svg>
 
                 <span className='text-sm font-medium leading-none'>
-                  {Intl.NumberFormat('en', { notation: 'compact' })
+                  {Intl.NumberFormat('en', {
+                    notation: 'compact',
+                    minimumFractionDigits: 1,
+                    maximumFractionDigits: 1
+                  })
                     .format(stars)
                     .toLowerCase()}
                 </span>
@@ -123,7 +129,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
                 label: 'Sign in',
                 category: 'website-nav'
               }}
-              className='inline-flex items-center text-sm font-medium ease-in-out hover:text-neutral-400 hover:no-underline'>
+              className='hidden items-center text-sm font-medium ease-in-out hover:text-neutral-400 hover:no-underline lg:inline-flex'>
               Sign in
             </CUILink>
             <CUIButton
