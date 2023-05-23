@@ -5,7 +5,8 @@ interface LogoCarouselItemProps {
   index: number
   customer: {
     href?: string
-    darkLogoPng: any
+    darkLogoPng?: any
+    Logo?: any
   }
 }
 
