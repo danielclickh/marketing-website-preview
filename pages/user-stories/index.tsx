@@ -394,9 +394,6 @@ function CustomerStoriesPage({
                   </p>
                 </div>
                 <div>
-                  <p className='mb-3 text-left font-inconsolata text-primary-300'>
-                    {testimonial?.category}
-                  </p>
                   <Image
                     src={testimonial.logo}
                     alt={testimonial.category}
