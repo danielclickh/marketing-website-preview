@@ -64,7 +64,7 @@ export default function CloudPage({
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
-        <div className='bg-contain bg-center bg-no-repeat pt-10'>
+        <div className='bg-neutral-800 bg-contain bg-center bg-no-repeat pt-10'>
           <div className='relative overflow-x-hidden'>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>
               <div className='flex'>
@@ -123,7 +123,7 @@ export default function CloudPage({
             </div>
           </div>
         </div>
-        <div className='pb-16'>
+        <div className='bg-neutral-800 pb-16'>
           <div className='mx-auto'>
             <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-6 text-center text-xl font-bold leading-normal text-neutral-300 md:px-0'>
               {CloudCustomerLogos.Title}
