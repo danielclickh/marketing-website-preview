@@ -11,13 +11,15 @@ interface Props {
   speedClass1: string
   speedClass2: string
   fixShape?: boolean
+  logoColor?: string | ''
 }
 
 const PauseHoverComponent: React.FC<Props> = ({
   logos,
   speedClass1,
   speedClass2,
-  fixShape
+  fixShape,
+  logoColor
 }) => {
   // Update the Logo key to darkLogoPng
   let updatedData = logos
@@ -36,13 +38,23 @@ const PauseHoverComponent: React.FC<Props> = ({
       <div
         className={`flex content-center items-center whitespace-nowrap py-3 ${speedClass1}`}>
         {updatedData.map((customer, index) => (
-          <CarouselItem key={index} index={index} customer={customer} />
+          <CarouselItem
+            key={index}
+            index={index}
+            customer={customer}
+            logoColor={logoColor}
+          />
         ))}
       </div>
       <div
         className={`absolute top-0 flex items-center whitespace-nowrap py-3 ${speedClass2}`}>
         {updatedData.map((customer, index) => (
-          <CarouselItem key={index} index={index} customer={customer} />
+          <CarouselItem
+            key={index}
+            index={index}
+            customer={customer}
+            logoColor={logoColor}
+          />
         ))}
       </div>
     </div>

@@ -123,20 +123,17 @@ export default function CloudPage({
             </div>
           </div>
         </div>
-        <div className='flip-selection -mt-1 bg-primary-300 pt-12 pb-16'>
+        <div className='pb-16'>
           <div className='mx-auto'>
-            <div className='mx-auto mb-8 w-fit max-w-4xl px-4 py-6 pt-10 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
-              ClickHouse Cloud trusted by the best developers that work with
-              data at{' '}
-              <span className='tilted tilted-black'>
-                <span className='tilted-content leading-8'>scale</span>
-              </span>
+            <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-6 text-center text-xl font-bold leading-normal text-neutral-300 md:px-0'>
+              {CloudCustomerLogos.Title}
             </div>
             <div className='section-container relative z-40 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center md:gap-x-14'>
-              <div className='absolute left-0 z-50 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
-              <div className='absolute right-0 z-50 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
+              <div className='absolute left-0 z-50 h-full bg-cloudFadeLeftLogos p-10 lg:pr-20'></div>
+              <div className='absolute right-0 z-50 h-full bg-cloudFadeRightLogos p-10 lg:pl-20'></div>
               <LogoCarousel
                 fixShape={true}
+                logoColor='pink'
                 logos={CloudCustomerLogos.logos}
                 speedClass1='animate-marqueeLeft3'
                 speedClass2='animate-marqueeLeft4'
@@ -144,7 +141,7 @@ export default function CloudPage({
             </div>
           </div>
         </div>
-        <div className='bg-neutral-725 text-neutral-0'>
+        <div className='border-t-2 border-primary-300 bg-neutral-725 text-neutral-0'>
           <div className='container mx-auto flex max-w-7xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8  2xl:px-0'>
             <div className='feature-container'>
               {features.map((feature, index: number) => (
