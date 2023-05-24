@@ -186,6 +186,11 @@ const nextConfig = {
         destination:
           '/company/events/kubecon-amsterdam-2023?utm_source=kubecon&utm_medium=event&utm_campaign=cup',
         permanent: true
+      },
+      {
+        source: '/blog/the-click-house-community',
+        destination: '/slack',
+        permanent: true
       }
     ]
   }
