@@ -126,7 +126,11 @@ export default function CloudPage({
         <div className='bg-neutral-800 pb-16'>
           <div className='mx-auto'>
             <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-6 text-center text-xl font-bold leading-normal text-neutral-300 md:px-0'>
-              {CloudCustomerLogos.Title}
+              ClickHouse Cloud trusted by the best developers that work with
+              data at{' '}
+              <span className='tilted tilted-yellow'>
+                <span className='tilted-content leading-8'>scale</span>
+              </span>
             </div>
             <div className='section-container relative z-40 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center md:gap-x-14'>
               <div className='absolute left-0 z-50 h-full bg-cloudFadeLeftLogos p-10 lg:pr-20'></div>
