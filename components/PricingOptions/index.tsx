@@ -149,7 +149,7 @@ function PricingOptions({
                 className='relative mx-auto w-full max-w-sm rounded-lg border border-t-4 border-neutral-700/80 border-t-primary bg-neutral-900/50 shadow-card-xl'
                 key={`plan-${plan.name}`}>
                 {index === 2 && (
-                  <div className='absolute left-1/2 -translate-y-1/2 -translate-x-1/2 transform lg:-right-20 lg:left-auto'>
+                  <div className='absolute left-1/2 -translate-y-1/2 -translate-x-1/2 transform'>
                     <span className='relative inline-flex'>
                       <Link
                         href='/company/contact?loc=ent-coming-soon-btn'
