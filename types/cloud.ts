@@ -22,9 +22,15 @@ export type CloudProviderType = {
   darkProviderPngs: StrapiImageType[]
 }
 
+export type Logo = {
+  href: string
+  Logo: StrapiImageType
+}
+
 export interface CloudData extends CommonProps {
   hero: CloudHero
   cloudProviders: Array<CloudProviderType>
   features: Array<Feature>
   screenshotsAndBullets: Array<ScreenshotAndBullets>
+  CloudCustomerLogos: { Title: string; logos: Array<Logo> }
 }

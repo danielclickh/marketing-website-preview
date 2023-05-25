@@ -15,6 +15,7 @@ import features from './features.json'
 import featureBlocks from './feature_blocks.json'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import GetStartedFree from '../../components/GetStartedFree'
+import LogoCarousel from '../../components/LogoCarousel'
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -33,7 +34,11 @@ export const getStaticProps: GetStaticProps<CloudData> =
         'screenshotsAndBullets.screenshotPng',
         'screenshotsAndBullets.bullets',
         'seo',
-        'seo.image'
+        'seo.image',
+        'CloudCustomerLogos',
+        'CloudCustomerLogos.logos',
+        'CloudCustomerLogos.logos.*',
+        'CloudCustomerLogos.logos.Logo'
       ]
     }
     const data = await findOne('cloud', params)
@@ -51,14 +56,15 @@ export default function CloudPage({
   hero,
   seo,
   headerData,
-  footerData
+  footerData,
+  CloudCustomerLogos
 }: CloudData) {
   const { ctaButton } = hero
 
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
-        <div className='bg-contain bg-center bg-no-repeat pt-10 lg:bg-speed-lines'>
+        <div className='bg-neutral-800 bg-contain bg-center bg-no-repeat pt-10'>
           <div className='relative overflow-x-hidden'>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>
               <div className='flex'>
@@ -117,7 +123,29 @@ export default function CloudPage({
             </div>
           </div>
         </div>
-        <div className='bg-neutral-725 text-neutral-0'>
+        <div className='bg-neutral-800 pb-24'>
+          <div className='mx-auto'>
+            <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-6 text-center font-basier text-xl font-semibold leading-normal text-neutral-300 md:px-0'>
+              ClickHouse Cloud trusted by the best developers that work with
+              data at{' '}
+              <span className='tilted tilted-yellow'>
+                <span className='tilted-content leading-8'>scale</span>
+              </span>
+            </div>
+            <div className='section-container relative z-40 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center md:gap-x-14'>
+              <div className='absolute left-0 z-50 h-full bg-cloudFadeLeftLogos p-10 lg:pr-20'></div>
+              <div className='absolute right-0 z-50 h-full bg-cloudFadeRightLogos p-10 lg:pl-20'></div>
+              <LogoCarousel
+                fixShape={true}
+                logoColor='pink'
+                logos={CloudCustomerLogos.logos}
+                speedClass1='animate-marqueeLeft3'
+                speedClass2='animate-marqueeLeft4'
+              />
+            </div>
+          </div>
+        </div>
+        <div className='border-t-2 border-primary-300 bg-neutral-725 text-neutral-0'>
           <div className='container mx-auto flex max-w-7xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8  2xl:px-0'>
             <div className='feature-container'>
               {features.map((feature, index: number) => (

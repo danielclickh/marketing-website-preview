@@ -1,7 +1,7 @@
 import React from 'react'
 import Markdown from '../../components/Markdown'
 import PricingOptions from '../../components/PricingOptions'
-import { SuiText, SuiTitle } from '../../components/sui'
+import { SuiTitle } from '../../components/sui'
 import { findAll, findOne } from '../../lib/api/strapi'
 import {
   PricingData,
@@ -13,7 +13,7 @@ import styles from './Pricing.module.scss'
 import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { CUIButton, CUILink } from '../../components/ClickUI'
+import { CUIButton } from '../../components/ClickUI'
 import HRSeparator from '../../components/HRSeparator'
 import philosophy from './philosophy.json'
 import Image from 'next/image'
@@ -127,7 +127,7 @@ function PricingPage({
             </Markdown>
           </div>
           <div className='philosophy bg-primary-300 text-neutral-900'>
-            <div className='mx-auto max-w-7xl px-4 pb-16 sm:px-8 2xl:px-0'>
+            <div className='flip-selection mx-auto max-w-7xl px-4 pb-16 sm:px-8 2xl:px-0'>
               <SuiTitle
                 type='h2'
                 className='pb-16 text-center text-neutral-900'>

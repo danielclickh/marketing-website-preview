@@ -251,6 +251,10 @@ module.exports = {
           'linear-gradient(90deg, #FCFF74 30%, rgba(252, 255, 116, 0) 99.99%)',
         homepageFadeRightLogos:
           'linear-gradient(270deg, #FCFF74 30%, rgba(252, 255, 116, 0) 99.99%)',
+        cloudFadeLeftLogos:
+          'linear-gradient(90deg, #1D1D1D 30%, rgba(29, 29, 29, 0.1) 99.99%)',
+        cloudFadeRightLogos:
+          'linear-gradient(270deg, #1D1D1D 30%, rgba(29, 29, 29, 0.09) 99.99%)',
         field_focus:
           'linear-gradient(0deg, #fbff46, #fbff46 2px, transparent 0, transparent)',
         navDropdown:

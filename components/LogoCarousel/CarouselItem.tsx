@@ -3,24 +3,29 @@ import { StrapiImage } from '../../components/StrapiElements'
 
 interface LogoCarouselItemProps {
   index: number
+  logoColor?: string
   customer: {
     href?: string
-    darkLogoPng: any
+    darkLogoPng?: any
+    Logo?: any
   }
 }
 
 const LogoCarouselItem: React.FC<LogoCarouselItemProps> = ({
   index,
-  customer
+  customer,
+  logoColor
 }) => {
+  const imageClass = logoColor ? `fill-${logoColor}` : 'fill-none'
+
   return (
     <div key={index} className={`number-slide${index}`}>
       {customer.href ? (
         <Link href={customer.href}>
-          <StrapiImage {...customer.darkLogoPng} className='fill-none' />
+          <StrapiImage {...customer.darkLogoPng} className={`${imageClass} `} />
         </Link>
       ) : (
-        <StrapiImage {...customer.darkLogoPng} className='fill-none' />
+        <StrapiImage {...customer.darkLogoPng} className={imageClass} />
       )}
     </div>
   )

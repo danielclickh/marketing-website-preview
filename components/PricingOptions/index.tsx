@@ -19,6 +19,7 @@ import { StrapiImage } from '../StrapiElements'
 import { CUIButton, CUILink } from '../ClickUI'
 import styles from './PricingOptions.module.scss'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 function PricingOptions({
   pricingByRegion,
@@ -137,7 +138,7 @@ function PricingOptions({
             </div>
           ))}
         </div>
-        <div className='center_content mx-auto mb-24 max-w-[344px]'>
+        <div className='center_content relative z-10 mx-auto mb-24 max-w-[344px]'>
           <PricingSelector regionList={regionList} />
         </div>
 
@@ -145,8 +146,25 @@ function PricingOptions({
           <div className='plans_container grid grid-cols-1 gap-8 lg:grid-cols-3'>
             {plans.map((plan, index) => (
               <div
-                className='mx-auto w-full max-w-sm rounded-lg border border-t-4 border-neutral-700/80 border-t-primary bg-neutral-900/50 shadow-card-xl'
+                className='relative mx-auto w-full max-w-sm rounded-lg border border-t-4 border-neutral-700/80 border-t-primary bg-neutral-900/50 shadow-card-xl'
                 key={`plan-${plan.name}`}>
+                {index === 2 && (
+                  <div className='absolute left-1/2 -translate-y-1/2 -translate-x-1/2 transform'>
+                    <span className='relative inline-flex'>
+                      <Link
+                        href='/company/contact?loc=ent-coming-soon-btn'
+                        type='button'
+                        className='inline-flex items-center rounded-md bg-primary-300 px-4 py-1 text-sm font-semibold leading-6 text-neutral-800 shadow ring-1 ring-slate-900/10 transition duration-150 ease-in-out '>
+                        Coming soon
+                      </Link>
+                      <span className='absolute -top-1 -right-1 flex h-3 w-3'>
+                        <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-300 opacity-75'></span>
+                        <span className='relative inline-flex h-3 w-3 rounded-full bg-primary-300'></span>
+                      </span>
+                    </span>
+                  </div>
+                )}
+
                 <div className='card_content flex h-full flex-col justify-between'>
                   <div className='border-b border-neutral-725 p-6'>
                     <h2 className='mb-1 text-center text-2.75xl font-semibold'>
@@ -196,7 +214,7 @@ function PricingOptions({
                     )}
                     {plan.actionButton && (
                       <PricingButton
-                        isFirst={index === 0}
+                        isFirst={true}
                         isLast={index !== plans.length - 1}
                         path={plan.actionButton.link}
                         btnText={plan.actionButton.text}
