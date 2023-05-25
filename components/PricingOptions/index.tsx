@@ -19,6 +19,7 @@ import { StrapiImage } from '../StrapiElements'
 import { CUIButton, CUILink } from '../ClickUI'
 import styles from './PricingOptions.module.scss'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 function PricingOptions({
   pricingByRegion,
@@ -150,11 +151,12 @@ function PricingOptions({
                 {index === 2 && (
                   <div className='absolute -top-5 -right-6'>
                     <span className='relative inline-flex'>
-                      <button
+                      <Link
+                        href='/company/contact?loc=ent-coming-soon-btn'
                         type='button'
-                        className='inline-flex cursor-not-allowed items-center rounded-md bg-primary-300 px-4 py-2 text-sm font-semibold leading-6 text-neutral-800 shadow ring-1 ring-slate-900/10 transition duration-150 ease-in-out'>
+                        className='inline-flex items-center rounded-md bg-primary-300 px-4 py-2 text-sm font-semibold leading-6 text-neutral-800 shadow ring-1 ring-slate-900/10 transition duration-150 ease-in-out'>
                         Coming soon
-                      </button>
+                      </Link>
                       <span className='absolute -top-1 -right-1 flex h-3 w-3'>
                         <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-300 opacity-75'></span>
                         <span className='relative inline-flex h-3 w-3 rounded-full bg-primary-300'></span>
