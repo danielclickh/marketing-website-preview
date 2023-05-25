@@ -127,7 +127,7 @@ function PricingPage({
             </Markdown>
           </div>
           <div className='philosophy bg-primary-300 text-neutral-900'>
-            <div className='mx-auto max-w-7xl px-4 pb-16 sm:px-8 2xl:px-0'>
+            <div className='flip-selection mx-auto max-w-7xl px-4 pb-16 sm:px-8 2xl:px-0'>
               <SuiTitle
                 type='h2'
                 className='pb-16 text-center text-neutral-900'>
