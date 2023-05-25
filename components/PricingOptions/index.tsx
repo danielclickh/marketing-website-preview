@@ -138,7 +138,7 @@ function PricingOptions({
             </div>
           ))}
         </div>
-        <div className='center_content relative z-50 mx-auto mb-24 max-w-[344px]'>
+        <div className='center_content relative z-10 mx-auto mb-24 max-w-[344px]'>
           <PricingSelector regionList={regionList} />
         </div>
 
