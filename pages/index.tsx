@@ -185,9 +185,9 @@ export default function HomePage({
                 <span className='tilted-content leading-8'>scale</span>
               </span>
             </div>
-            <div className='section-container relative z-40 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center md:gap-x-14'>
-              <div className='absolute left-0 z-50 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
-              <div className='absolute right-0 z-50 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
+            <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center md:gap-x-14'>
+              <div className='absolute left-0 z-10 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
+              <div className='absolute right-0 z-10 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
               <LogoCarousel
                 logos={logos1}
                 speedClass1='animate-marqueeLeft'
