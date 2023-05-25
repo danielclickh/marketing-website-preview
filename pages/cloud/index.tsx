@@ -123,9 +123,9 @@ export default function CloudPage({
             </div>
           </div>
         </div>
-        <div className='bg-neutral-800 pb-16'>
+        <div className='bg-neutral-800 pb-24'>
           <div className='mx-auto'>
-            <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-6 text-center text-xl font-bold leading-normal text-neutral-300 md:px-0'>
+            <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-6 text-center font-basier text-xl font-semibold leading-normal text-neutral-300 md:px-0'>
               ClickHouse Cloud trusted by the best developers that work with
               data at{' '}
               <span className='tilted tilted-yellow'>
