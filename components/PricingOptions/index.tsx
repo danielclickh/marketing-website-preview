@@ -145,8 +145,24 @@ function PricingOptions({
           <div className='plans_container grid grid-cols-1 gap-8 lg:grid-cols-3'>
             {plans.map((plan, index) => (
               <div
-                className='mx-auto w-full max-w-sm rounded-lg border border-t-4 border-neutral-700/80 border-t-primary bg-neutral-900/50 shadow-card-xl'
+                className='relative mx-auto w-full max-w-sm rounded-lg border border-t-4 border-neutral-700/80 border-t-primary bg-neutral-900/50 shadow-card-xl'
                 key={`plan-${plan.name}`}>
+                {index === 2 && (
+                  <div className='absolute -top-5 -right-6'>
+                    <span className='relative inline-flex'>
+                      <button
+                        type='button'
+                        className='inline-flex cursor-not-allowed items-center rounded-md bg-primary-300 px-4 py-2 text-sm font-semibold leading-6 text-neutral-800 shadow ring-1 ring-slate-900/10 transition duration-150 ease-in-out'>
+                        Coming soon
+                      </button>
+                      <span className='absolute -top-1 -right-1 flex h-3 w-3'>
+                        <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-300 opacity-75'></span>
+                        <span className='relative inline-flex h-3 w-3 rounded-full bg-primary-300'></span>
+                      </span>
+                    </span>
+                  </div>
+                )}
+
                 <div className='card_content flex h-full flex-col justify-between'>
                   <div className='border-b border-neutral-725 p-6'>
                     <h2 className='mb-1 text-center text-2.75xl font-semibold'>
