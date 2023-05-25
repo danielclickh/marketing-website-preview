@@ -214,7 +214,7 @@ function PricingOptions({
                     )}
                     {plan.actionButton && (
                       <PricingButton
-                        isFirst={index === 0}
+                        isFirst={true}
                         isLast={index !== plans.length - 1}
                         path={plan.actionButton.link}
                         btnText={plan.actionButton.text}
