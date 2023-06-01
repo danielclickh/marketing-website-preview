@@ -1,1 +1,4 @@
-.mktoFormContainer {}
+.mktoFormContainer form{
+    div[data-wrapper-for="FirstName LastName"],div[data-wrapper-for="Email Company"]  {@apply flex space-x-8}
+    div[data-wrapper-for="dedicatedMigratingExisting"] {@apply flex w-full}
+}

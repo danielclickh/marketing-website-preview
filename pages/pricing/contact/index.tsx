@@ -42,7 +42,7 @@ export default function ContactPage({
 }: ContactProps) {
   return (
     <>
-      <Script id='load-form' type='text/javascript'>
+      <Script id='load-form' type='text/javascript' strategy='lazyOnload'>
         {`
         /*
         * @author Sanford Whiteman
@@ -79,17 +79,20 @@ export default function ContactPage({
         const script = document.createElement('script');
         script.src = 'https://discover.clickhouse.com/js/forms2/js/forms2.min.js';
         script.addEventListener('load', function () {
-          MktoForms2.loadForm("https://discover.clickhouse.com", "238-FPC-317", 1043);
-          MktoForms2.whenRendered(function(form) {
-            destyleMktoForm(form);
+          const formsplus = document.createElement('script');
+          formsplus.src = 'https://discover.clickhouse.com/rs/238-FPC-317/images/teknkl-formsplus-tag-0.2.4.js';
+          formsplus.addEventListener('load', function () {
+            MktoForms2.loadForm("https://discover.clickhouse.com", "238-FPC-317", 1043);
+            MktoForms2.whenRendered(function(form) {
+              destyleMktoForm(form);
+            });
           });
+          document.head.appendChild(formsplus);
+
         });
         document.head.appendChild(script);
       } else {
         MktoForms2.loadForm("https://discover.clickhouse.com", "238-FPC-317", 1043);
-        MktoForms2.whenRendered(function(form) {
-          destyleMktoForm(form);
-        });
       }
     }
     loadForm();
