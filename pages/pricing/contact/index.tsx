@@ -130,7 +130,7 @@ export default function ContactPage({
                 can help.
               </div>
             </div>
-            <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pt-14 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
+            <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 pt-14 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
               <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
                 <div className='success-message hidden'>
                   <h3 className='text-center text-2xl font-bold'>

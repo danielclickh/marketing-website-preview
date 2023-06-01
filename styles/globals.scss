@@ -573,6 +573,5 @@ a.arrow-link {
 .mktoClear {@apply hidden}
 .mktoAsterix {@apply absolute right-0 text-red-600}
 .mktoFormCol {@apply w-full}
-.mktoFieldWrap {@apply relative h-full}
-
+.mktoFieldWrap {@apply relative mb-5 md:mb-0}
 .mktoError {@apply text-red-600 text-xs mt-2 }
