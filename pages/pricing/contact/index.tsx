@@ -72,22 +72,23 @@ export default function ContactPage({
 
           if(!moreStyles) {
              formEl.setAttribute("data-styles-ready", "true");
+             console.log("Styles ready at: " + performance.now())
           }
        };
+
+
     function loadForm() {
       if (typeof MktoForms2 === 'undefined') {
         const script = document.createElement('script');
         script.src = 'https://discover.clickhouse.com/js/forms2/js/forms2.min.js';
         script.addEventListener('load', function () {
-          MktoForms2.loadForm("https://discover.clickhouse.com", "238-FPC-317", 1043);
-          MktoForms2.whenRendered(function(form) {
-            destyleMktoForm(form);
+          console.log('loaded form')
+          MktoForms2.loadForm("https://discover.clickhouse.com", "238-FPC-317", 1043, function(form){
+            destyleMktoForm(form)
           });
+
           const formsplus = document.createElement('script');
           formsplus.src = 'https://discover.clickhouse.com/rs/238-FPC-317/images/teknkl-formsplus-tag-0.2.4.js';
-          formsplus.addEventListener('load', function () {
-
-          });
           document.head.appendChild(formsplus);
 
         });
@@ -116,10 +117,8 @@ export default function ContactPage({
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pt-14 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
               <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
                 <div className={styles.mktoFormContainer}>
-                  <form id='mktoForm_1043'></form>
+                  <form id='mktoForm_1043' className='mktoForm'></form>
                 </div>
-
-                <ContactForm {...contactForm} />
                 <div className='flex text-center'>
                   <div className='text-sm font-medium text-neutral-200'>
                     <Markdown>{contactForm.disclaimer}</Markdown>
