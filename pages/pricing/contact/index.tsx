@@ -1,17 +1,33 @@
-import { SuiText, SuiTitle } from '../../../components/sui'
-
+import { SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import GrowingCommunity from '../../../components/GrowingCommunity'
-import ContactForm from '../../../components/ContactForm'
-import GetStarted from '../../../components/GetStarted'
 import Markdown from '../../../components/Markdown'
 import { GetStaticProps } from 'next'
 import { ContactProps } from '../../../types/contact'
 import Layout from '../../../components/Layout'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import HRSeparator from '../../../components/HRSeparator'
-import Script from 'next/script'
 import styles from './Contact.module.scss'
+import useMarketo from './useMarketo'
+import { useState } from 'react'
+
+interface FormProps {
+  baseUrl: string
+  munchkinId: string
+  formId: string
+  callback: () => void
+}
+
+function Form(props: FormProps) {
+  const { baseUrl, munchkinId, formId } = props
+  if (!(baseUrl && munchkinId && formId)) {
+    return <div>Fill the fields and a form should appear</div>
+  }
+
+  useMarketo(props)
+
+  return <form id={`mktoForm_${formId}`} />
+}
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -25,96 +41,134 @@ export const getStaticProps: GetStaticProps<ContactProps> =
       props: {
         ...data.hero,
         seo: {
-          title: 'Dedicated Servies - ClickHouse',
+          title: 'Dedicated Services - ClickHouse',
           description:
-            'Thank you for your interested in our Dedicated Service; please submit the below information to the best of your ability so we can help.'
+            'Thank you for your interest in our Dedicated Service; please submit the below information to the best of your ability so we can help.'
         },
         ...commonProps
       }
     }
   }
 
+interface ContactPageProps {
+  contactForm: {
+    disclaimer: string
+  }
+  footerData: ContactProps['footerData']
+  headerData: ContactProps['headerData']
+  seo: ContactProps['seo']
+}
+
 export default function ContactPage({
   contactForm,
   footerData,
   headerData,
   seo
-}: ContactProps) {
-  return (
-    <>
-      <Script id='load-form' type='text/javascript'>
-        {`
-       /*
-       * @author Sanford Whiteman
-       * @version v1.104
-       * @license MIT License: This license must appear with all reproductions of this software.
-       *
-       * Create a completely barebones, user-styles-only Marketo form
-       * by removing inline STYLE attributes and disabling STYLE and LINK elements
-       */
+}: ContactPageProps) {
+  const [inputs, setInputs] = useState<FormProps>({
+    baseUrl: '//discover.clickhouse.com',
+    munchkinId: '238-FPC-317',
+    formId: '1043',
+    callback: () => {
       function destyleMktoForm(mktoForm, moreStyles) {
-        var formEl = mktoForm.getFormElem()[0],
-          arrayify = getSelection.call.bind([].slice);
+        let formEl = mktoForm.getFormElem()[0],
+          arrayify = getSelection.call.bind([].slice)
 
         // remove element styles from <form> and children
-        var styledEls = arrayify(formEl.querySelectorAll("[style]")).concat(formEl);
+        let styledEls = arrayify(formEl.querySelectorAll('[style]')).concat(
+          formEl
+        )
         styledEls.forEach(function (el) {
-          el.removeAttribute("style");
-        });
+          el.removeAttribute('style')
+        })
 
         // disable remote stylesheets and local <style>s
-        var styleSheets = arrayify(document.styleSheets);
+        let styleSheets = arrayify(document.styleSheets)
         styleSheets.forEach(function (ss) {
           if (
-            [mktoForms2BaseStyle, mktoForms2ThemeStyle].indexOf(ss.ownerNode) != -1 ||
+            [mktoForms2BaseStyle, mktoForms2ThemeStyle].indexOf(ss.ownerNode) !=
+              -1 ||
             formEl.contains(ss.ownerNode)
           ) {
-            ss.disabled = true;
+            ss.disabled = true
           }
-        });
+        })
 
         if (!moreStyles) {
-          formEl.setAttribute("data-styles-ready", "true");
+          formEl.setAttribute('data-styles-ready', 'true')
         }
       }
-
-      function loadForm() {
-        if (typeof MktoForms2 === "undefined") {
-          const script = document.createElement("script");
-          script.src = "https://discover.clickhouse.com/js/forms2/js/forms2.min.js";
-          script.addEventListener("load", function () {
-            MktoForms2.loadForm(
-              "https://discover.clickhouse.com",
-              "238-FPC-317",
-              1043,
-              function (form) {
-                form.onSuccess(function (values, followUpUrl) {
-                  // Get the form's jQuery element and hide it
-                  form.getFormElem().hide();
-                  document.querySelector('.success-message').classList.remove('hidden');
-                  document.querySelector('.disclaimer-text').classList.add('hidden');
-                  document.getElementById('pricing-contact-form').scrollIntoView();
-                  return false;
-                });
-                destyleMktoForm(form);
-                const formsplus = document.createElement("script");
-                formsplus.src =
-                  "https://discover.clickhouse.com/rs/238-FPC-317/images/teknkl-formsplus-tag-0.2.4.js";
-                document.head.appendChild(formsplus);
-
-              }
-            );
-          });
-          document.head.appendChild(script);
-        } else {
-          MktoForms2.loadForm("https://discover.clickhouse.com", "238-FPC-317", 1043);
-        }
+      window.FormsPlus = window.FormsPlus || {
+        allDescriptors: {},
+        allMessages: {},
+        detours: {}
       }
-      loadForm();
+      FormsPlus.tagWrappers = function tagWrappers() {
+        let ANCESTORS_STOR = '.mktoFormRow, .mktoFormCol',
+          INPUTS_STOR =
+            'INPUT,SELECT,TEXTAREA,BUTTON,[data-name],.mktoPlaceholder,LEGEND',
+          attrTag = 'data-wrapper-for',
+          attrDone = 'data-initial-wrapper-tagging-complete',
+          placeholderPrefix = 'mktoPlaceholder',
+          arrayify = getSelection.call.bind([].slice)
 
-  `}
-      </Script>
+        function tagMktoWrappers(formEl) {
+          arrayify(formEl.querySelectorAll(ANCESTORS_STOR)).forEach(function (
+            ancestor
+          ) {
+            ancestor.setAttribute(attrTag, '')
+            arrayify(ancestor.querySelectorAll(INPUTS_STOR)).forEach(function (
+              input
+            ) {
+              let currentTag = ancestor.getAttribute(attrTag)
+              ancestor.setAttribute(
+                attrTag,
+                [
+                  currentTag ? currentTag : '',
+                  input.id,
+                  input.name != input.id ? input.name : '',
+                  input.getAttribute('data-name'),
+                  input.nodeName == 'LEGEND' ? input.textContent : '',
+                  arrayify(input.classList)
+                    .filter(function (cls) {
+                      return cls.indexOf(placeholderPrefix) == 0
+                    })
+                    .map(function (cls) {
+                      ancestor.classList.add(placeholderPrefix)
+                      return cls.replace(placeholderPrefix, '', 0)
+                    })
+                    .join(' ')
+                ]
+                  .join(' ')
+                  .trim()
+              )
+            })
+          })
+        }
 
+        MktoForms2.whenRendered(function (form) {
+          destyleMktoForm(form)
+          let formEl = form.getFormElem()[0]
+          tagMktoWrappers(formEl)
+          formEl.setAttribute(attrDone, 'true')
+        })
+      }
+
+      FormsPlus.tagWrappers()
+    }
+  })
+
+  const _handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.persist()
+
+    setInputs((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }))
+  }
+
+  return (
+    <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='pt-10'>
           <div className='container mx-auto flex flex-col px-8 2xl:px-0'>
@@ -125,7 +179,7 @@ export default function ContactPage({
                 Dedicated Service Form
               </SuiTitle>
               <div className='max-w-3xl text-neutral-200'>
-                Thank you for your interested in our Dedicated Service; please
+                Thank you for your interest in our Dedicated Service; please
                 submit the below information to the best of your ability so we
                 can help.
               </div>
@@ -141,7 +195,7 @@ export default function ContactPage({
                   </p>
                 </div>
                 <div className={styles.mktoFormContainer}>
-                  <form id='mktoForm_1043' className={styles.form}></form>
+                  <Form {...inputs} />
                 </div>
                 <div className='flex text-center'>
                   <div className='disclaimer-text text-sm font-medium text-neutral-200'>
