@@ -42,7 +42,7 @@ export default function ContactPage({
 }: ContactProps) {
   return (
     <>
-      <Script id='load-form' type='text/javascript' strategy='lazyOnload'>
+      <Script id='load-form' type='text/javascript'>
         {`
         /*
         * @author Sanford Whiteman
