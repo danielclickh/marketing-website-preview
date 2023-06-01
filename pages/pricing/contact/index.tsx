@@ -44,67 +44,83 @@ export default function ContactPage({
     <>
       <Script id='load-form' type='text/javascript'>
         {`
-        /*
-        * @author Sanford Whiteman
-        * @version v1.104
-        * @license MIT License: This license must appear with all reproductions of this software.
-        *
-        * Create a completely barebones, user-styles-only Marketo form
-        * by removing inline STYLE attributes and disabling STYLE and LINK elements
-        */
-       function destyleMktoForm(mktoForm, moreStyles){
-         var formEl = mktoForm.getFormElem()[0],
-           arrayify = getSelection.call.bind([].slice);
+       /*
+       * @author Sanford Whiteman
+       * @version v1.104
+       * @license MIT License: This license must appear with all reproductions of this software.
+       *
+       * Create a completely barebones, user-styles-only Marketo form
+       * by removing inline STYLE attributes and disabling STYLE and LINK elements
+       */
+      function destyleMktoForm(mktoForm, moreStyles) {
+        var formEl = mktoForm.getFormElem()[0],
+          arrayify = getSelection.call.bind([].slice);
 
-         // remove element styles from <form> and children
-         var styledEls = arrayify(formEl.querySelectorAll("[style]")).concat(formEl);
-         styledEls.forEach(function(el) {
-           el.removeAttribute("style");
-         });
-
-         // disable remote stylesheets and local <style>s
-         var styleSheets = arrayify(document.styleSheets);
-         styleSheets.forEach(function(ss) {
-           if ( [mktoForms2BaseStyle,mktoForms2ThemeStyle].indexOf(ss.ownerNode) != -1 || formEl.contains(ss.ownerNode) ) {
-             ss.disabled = true;
-           }
-         });
-
-          if(!moreStyles) {
-             formEl.setAttribute("data-styles-ready", "true");
-             console.log("Styles ready at: " + performance.now())
-          }
-       };
-
-
-    function loadForm() {
-      if (typeof MktoForms2 === 'undefined') {
-        const script = document.createElement('script');
-        script.src = 'https://discover.clickhouse.com/js/forms2/js/forms2.min.js';
-        script.addEventListener('load', function () {
-          console.log('loaded form')
-          MktoForms2.loadForm("https://discover.clickhouse.com", "238-FPC-317", 1043, function(form){
-            destyleMktoForm(form)
-          });
-
-          const formsplus = document.createElement('script');
-          formsplus.src = 'https://discover.clickhouse.com/rs/238-FPC-317/images/teknkl-formsplus-tag-0.2.4.js';
-          document.head.appendChild(formsplus);
-
+        // remove element styles from <form> and children
+        var styledEls = arrayify(formEl.querySelectorAll("[style]")).concat(formEl);
+        styledEls.forEach(function (el) {
+          el.removeAttribute("style");
         });
-        document.head.appendChild(script);
-      } else {
-        MktoForms2.loadForm("https://discover.clickhouse.com", "238-FPC-317", 1043);
+
+        // disable remote stylesheets and local <style>s
+        var styleSheets = arrayify(document.styleSheets);
+        styleSheets.forEach(function (ss) {
+          if (
+            [mktoForms2BaseStyle, mktoForms2ThemeStyle].indexOf(ss.ownerNode) != -1 ||
+            formEl.contains(ss.ownerNode)
+          ) {
+            ss.disabled = true;
+          }
+        });
+
+        if (!moreStyles) {
+          formEl.setAttribute("data-styles-ready", "true");
+        }
       }
-    }
-    loadForm();
+
+      function loadForm() {
+        if (typeof MktoForms2 === "undefined") {
+          const script = document.createElement("script");
+          script.src = "https://discover.clickhouse.com/js/forms2/js/forms2.min.js";
+          script.addEventListener("load", function () {
+            MktoForms2.loadForm(
+              "https://discover.clickhouse.com",
+              "238-FPC-317",
+              1043,
+              function (form) {
+                form.onSuccess(function (values, followUpUrl) {
+                  // Get the form's jQuery element and hide it
+                  form.getFormElem().hide();
+                  document.querySelector('.success-message').classList.remove('hidden');
+                  document.querySelector('.disclaimer-text').classList.add('hidden');
+                  document.getElementById('pricing-contact-form').scrollIntoView();
+                  return false;
+                });
+                destyleMktoForm(form);
+                const formsplus = document.createElement("script");
+                formsplus.src =
+                  "https://discover.clickhouse.com/rs/238-FPC-317/images/teknkl-formsplus-tag-0.2.4.js";
+                document.head.appendChild(formsplus);
+
+              }
+            );
+          });
+          document.head.appendChild(script);
+        } else {
+          MktoForms2.loadForm("https://discover.clickhouse.com", "238-FPC-317", 1043);
+        }
+      }
+      loadForm();
+
   `}
       </Script>
 
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='pt-10'>
           <div className='container mx-auto flex flex-col px-8 2xl:px-0'>
-            <div className='mx-auto flex flex-col pt-6 text-center'>
+            <div
+              className='mx-auto flex flex-col pt-6 text-center'
+              id='pricing-contact-form'>
               <SuiTitle type='h1' className='mb-4'>
                 Dedicated Service Form
               </SuiTitle>
@@ -116,11 +132,19 @@ export default function ContactPage({
             </div>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pt-14 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
               <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
+                <div className='success-message hidden'>
+                  <h3 className='text-center text-2xl font-bold'>
+                    Thank you for your submission!
+                  </h3>
+                  <p className='mt-2 text-center text-neutral-200'>
+                    We will be in touch soon.
+                  </p>
+                </div>
                 <div className={styles.mktoFormContainer}>
-                  <form id='mktoForm_1043' className='mktoForm'></form>
+                  <form id='mktoForm_1043' className={styles.form}></form>
                 </div>
                 <div className='flex text-center'>
-                  <div className='text-sm font-medium text-neutral-200'>
+                  <div className='disclaimer-text text-sm font-medium text-neutral-200'>
                     <Markdown>{contactForm.disclaimer}</Markdown>
                   </div>
                 </div>
