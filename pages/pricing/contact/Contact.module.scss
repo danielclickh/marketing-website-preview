@@ -6,9 +6,7 @@
         &:focus {
         @apply border-primary-300 outline-none bg-slate-900;
         }
-        &[type="password"] {
-        @apply pr-10;
-        }
+
     }
 
     input, textarea, select {width: 100% !important; }
