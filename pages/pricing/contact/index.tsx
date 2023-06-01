@@ -168,6 +168,7 @@ export default function ContactPage({
         }
 
         ;(window as any).MktoForms2.whenRendered(function (form: any) {
+          document.querySelector('#mktoForm_1014')?.classList.add('hidden')
           destyleMktoForm(form)
           let formEl = form.getFormElem()[0]
           tagMktoWrappers(formEl)
