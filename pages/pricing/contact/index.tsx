@@ -59,6 +59,53 @@ interface ContactPageProps {
   seo: ContactProps['seo']
 }
 
+declare const mktoForms2BaseStyle: any
+declare const mktoForms2ThemeStyle: any
+
+/**
+ * @author Sanford Whiteman
+ * @version v1.104
+ * @license MIT License: This license must appear with all reproductions of this software.
+ *
+ * Create a completely barebones, user-styles-only Marketo form
+ * by removing inline STYLE attributes and disabling STYLE and LINK elements
+ */
+function destyleMktoForm(mktoForm: any, moreStyles?: boolean): void {
+  const formEl: HTMLElement = mktoForm.getFormElem()[0]
+  const arrayify: Function = Array.prototype.slice.call.bind(
+    Array.prototype.slice
+  )
+
+  // remove element styles from <form> and children
+  const styledEls: HTMLElement[] = arrayify(
+    formEl.querySelectorAll('[style]')
+  ).concat(formEl)
+  styledEls.forEach((el: HTMLElement) => {
+    el.removeAttribute('style')
+  })
+
+  // disable remote stylesheets and local <style>s
+  const styleSheets: StyleSheet[] = Array.from(document.styleSheets)
+
+  styleSheets.forEach((ss: StyleSheet) => {
+    const ownerNode = ss.ownerNode as HTMLElement
+    if (
+      (typeof mktoForms2BaseStyle !== 'undefined' &&
+        ownerNode === mktoForms2BaseStyle) ||
+      (typeof mktoForms2ThemeStyle !== 'undefined' &&
+        ownerNode === mktoForms2ThemeStyle) ||
+      formEl.contains(ownerNode)
+    ) {
+      ss.disabled = true
+    }
+  })
+
+  if (!moreStyles) {
+    formEl.setAttribute('data-styles-ready', 'true')
+    console.log('Styles ready at: ' + performance.now())
+  }
+}
+
 export default function ContactPage({
   contactForm,
   footerData,
@@ -70,55 +117,29 @@ export default function ContactPage({
     munchkinId: '238-FPC-317',
     formId: '1043',
     callback: () => {
-      function destyleMktoForm(mktoForm, moreStyles) {
-        let formEl = mktoForm.getFormElem()[0],
-          arrayify = getSelection.call.bind([].slice)
-
-        // remove element styles from <form> and children
-        let styledEls = arrayify(formEl.querySelectorAll('[style]')).concat(
-          formEl
-        )
-        styledEls.forEach(function (el) {
-          el.removeAttribute('style')
-        })
-
-        // disable remote stylesheets and local <style>s
-        let styleSheets = arrayify(document.styleSheets)
-        styleSheets.forEach(function (ss) {
-          if (
-            [mktoForms2BaseStyle, mktoForms2ThemeStyle].indexOf(ss.ownerNode) !=
-              -1 ||
-            formEl.contains(ss.ownerNode)
-          ) {
-            ss.disabled = true
-          }
-        })
-
-        if (!moreStyles) {
-          formEl.setAttribute('data-styles-ready', 'true')
-        }
-      }
-      window.FormsPlus = window.FormsPlus || {
+      // Declare FormsPlus object
+      const FormsPlus = (window as any).FormsPlus || {
         allDescriptors: {},
         allMessages: {},
         detours: {}
       }
       FormsPlus.tagWrappers = function tagWrappers() {
-        let ANCESTORS_STOR = '.mktoFormRow, .mktoFormCol',
-          INPUTS_STOR =
-            'INPUT,SELECT,TEXTAREA,BUTTON,[data-name],.mktoPlaceholder,LEGEND',
-          attrTag = 'data-wrapper-for',
-          attrDone = 'data-initial-wrapper-tagging-complete',
-          placeholderPrefix = 'mktoPlaceholder',
-          arrayify = getSelection.call.bind([].slice)
+        let ANCESTORS_STOR = '.mktoFormRow, .mktoFormCol'
+        let INPUTS_STOR =
+          'INPUT,SELECT,TEXTAREA,BUTTON,[data-name],.mktoPlaceholder,LEGEND'
+        let attrTag = 'data-wrapper-for'
+        let attrDone = 'data-initial-wrapper-tagging-complete'
+        let placeholderPrefix = 'mktoPlaceholder'
+        let arrayify = getSelection.call.bind([].slice) as any
 
-        function tagMktoWrappers(formEl) {
-          arrayify(formEl.querySelectorAll(ANCESTORS_STOR)).forEach(function (
-            ancestor
-          ) {
+        function tagMktoWrappers(formEl: HTMLFormElement) {
+          const ancestors = arrayify(
+            formEl.querySelectorAll(ANCESTORS_STOR)
+          ) as NodeListOf<Element>
+          ancestors.forEach(function (ancestor) {
             ancestor.setAttribute(attrTag, '')
             arrayify(ancestor.querySelectorAll(INPUTS_STOR)).forEach(function (
-              input
+              input: HTMLFormElement
             ) {
               let currentTag = ancestor.getAttribute(attrTag)
               ancestor.setAttribute(
@@ -130,10 +151,10 @@ export default function ContactPage({
                   input.getAttribute('data-name'),
                   input.nodeName == 'LEGEND' ? input.textContent : '',
                   arrayify(input.classList)
-                    .filter(function (cls) {
+                    .filter(function (cls: HTMLFormElement) {
                       return cls.indexOf(placeholderPrefix) == 0
                     })
-                    .map(function (cls) {
+                    .map(function (cls: HTMLFormElement) {
                       ancestor.classList.add(placeholderPrefix)
                       return cls.replace(placeholderPrefix, '', 0)
                     })
@@ -146,7 +167,7 @@ export default function ContactPage({
           })
         }
 
-        MktoForms2.whenRendered(function (form) {
+        ;(window as any).MktoForms2.whenRendered(function (form: any) {
           destyleMktoForm(form)
           let formEl = form.getFormElem()[0]
           tagMktoWrappers(formEl)
