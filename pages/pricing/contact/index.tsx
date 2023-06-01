@@ -172,6 +172,16 @@ export default function ContactPage({
           let formEl = form.getFormElem()[0]
           tagMktoWrappers(formEl)
           formEl.setAttribute(attrDone, 'true')
+          form.onSuccess(function () {
+            // Get the form's jQuery element and hide it
+            form.getFormElem().hide()
+            document
+              .querySelector('.success-message')
+              ?.classList.remove('hidden')
+            document.querySelector('#pricing-contact-form')?.scrollIntoView()
+            // Return false to prevent the submission handler from taking the lead to the follow up url
+            return false
+          })
         })
       }
 
