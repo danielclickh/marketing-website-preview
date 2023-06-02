@@ -152,7 +152,7 @@ function PricingOptions({
                   <div className='absolute left-1/2 -translate-y-1/2 -translate-x-1/2 transform'>
                     <span className='relative inline-flex'>
                       <Link
-                        href='/company/contact?loc=ent-coming-soon-btn'
+                        href='/pricing/contact?loc=ent-coming-soon-btn'
                         type='button'
                         className='inline-flex items-center rounded-md bg-primary-300 px-4 py-1 text-sm font-semibold leading-6 text-neutral-800 shadow ring-1 ring-slate-900/10 transition duration-150 ease-in-out '>
                         Coming soon

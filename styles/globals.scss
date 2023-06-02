@@ -568,3 +568,10 @@ a.arrow-link {
 .pause-hover {
   &:hover { * {animation-play-state: paused;}}
 }
+
+.mktoButton {@apply hover:underline hover:transition-all hover:-translate-y-0.5 text-sm py-2.5 px-6 font-semibold text-center rounded-lg duration-300 whitespace-nowrap bg-primary-300 text-primary-900 hover:bg-primary w-full rounded-md hover:translate-y-0 hover:bg-primary-400 hover:no-underline}
+.mktoClear {@apply hidden}
+.mktoAsterix {@apply absolute right-0 text-red-600}
+.mktoFormCol {@apply w-full}
+.mktoFieldWrap {@apply relative mb-5 md:mb-0}
+.mktoError {@apply text-red-600 text-xs mt-2 }
