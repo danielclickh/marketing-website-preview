@@ -203,14 +203,14 @@ export default function ContactPage({
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='pt-10'>
-          <div className='container mx-auto flex flex-col px-8 2xl:px-0'>
+          <div className='container mx-auto flex max-w-2xl flex-col px-8 2xl:px-0'>
             <div
               className='mx-auto flex flex-col pt-6 text-center'
               id='pricing-contact-form'>
-              <SuiTitle type='h1' className='mb-4'>
-                Dedicated Service Form
-              </SuiTitle>
-              <div className='max-w-3xl text-neutral-200'>
+              <h1 className='mb-6 text-center font-basier text-5.5xl font-semibold leading-tight text-neutral-200'>
+                Dedicated Services - Early Access
+              </h1>
+              <div className=' text-neutral-200'>
                 Thank you for your interest in our Dedicated Service; please
                 submit the below information to the best of your ability so we
                 can help.
