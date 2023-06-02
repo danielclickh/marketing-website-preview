@@ -102,7 +102,6 @@ function destyleMktoForm(mktoForm: any, moreStyles?: boolean): void {
 
   if (!moreStyles) {
     formEl.setAttribute('data-styles-ready', 'true')
-    console.log('Styles ready at: ' + performance.now())
   }
 }
 
@@ -189,15 +188,6 @@ export default function ContactPage({
       FormsPlus.tagWrappers()
     }
   })
-
-  const _handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.persist()
-
-    setInputs((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value
-    }))
-  }
 
   return (
     <>
