@@ -12,6 +12,7 @@ import {
 import { CUICard } from '../../../components/ClickUI'
 import Markdown from '../../../components/Markdown'
 import HRSeparator from '../../../components/HRSeparator'
+import ContactForm from '../../../components/ContactForm'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
   async function getStaticProps({ params }) {
@@ -22,7 +23,7 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
           $eq: slug
         }
       },
-      populate: ['painpoint', 'seo'],
+      populate: ['painpoint', 'seo', 'testimonials'],
       pagination: { limit: 1 }
     })
     if (!data?.[0]) {
@@ -57,59 +58,67 @@ export default function ComparisonPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
-        <div className='relative gap-24 px-8 pb-20 pt-16 md:px-0 lg:pb-44 '>
-          <div className='mx-auto max-w-2xl'>
-            <div className='mx-auto text-center md:mr-0 '>
-              <h1 className='mb-6 font-basier text-5.5xl font-semibold text-neutral-200'>
-                {comparison.Title}
-              </h1>
-            </div>
-          </div>
-          <div className='mx-auto max-w-3xl'>
-            <div className='mx-auto text-center md:mr-0 '>
-              <p className='mb-12 text-neutral-200'>
-                {comparison.HeroDescription}
-              </p>
-              <p>
-                <a
-                  href='https://clickhouse.cloud/signUp?loc=postgres'
-                  target='_blank'
-                  className='inline-block rounded border-primary-300 bg-primary-300 py-3 px-8 font-semibold text-neutral-900 hover:cursor-pointer hover:border-primary-400 hover:bg-primary-400'
-                  onClick={() => {
-                    try {
-                      window.analytics.track('click', {
-                        label: 'Start your free Cloud trial',
-                        category: 'postgres-cta'
-                      })
-                    } catch (e) {}
-                  }}>
-                  Start your free Cloud trial
-                </a>
-              </p>
+        <div className='relative gap-24 px-8 pb-10 pt-16 md:px-0 lg:pb-32 '>
+          <div className='mx-auto max-w-7xl px-8 xl:px-0'>
+            <div className='grid grid-cols-2 items-center gap-20'>
+              <div>
+                <h1 className='mb-6 font-basier text-5.5xl font-semibold leading-tight text-neutral-200'>
+                  {comparison.Title}
+                </h1>
+                <p className='mb-12 text-neutral-200'>
+                  {comparison.HeroDescription}
+                </p>
+              </div>
+              <div>
+                <div className='p-4 pr-0'>
+                  <h3 className='mb-6 text-center text-xl font-light text-primary-300'>
+                    Contact us to find out the power of ClickHouse
+                  </h3>
+                  <ContactForm
+                    firstNameLabel='First Name'
+                    lastNameLabel='Last Name'
+                    emailLabel='Email'
+                    companyLabel='Company'
+                    messageLabel='Message'
+                    submitButtonLabel='Submit'
+                    thankYouMessage='Thank you for submitting the form!'
+                    disclaimer=''
+                  />
+                  <Markdown className='mt-4 text-center text-sm'>
+                    By clicking Submit, you acknowledge that ClickHouse will
+                    process your personal information in accordance with our
+                    [privacy
+                    policy](https://clickhouse.com/legal/privacy-policy).
+                  </Markdown>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div className='clip-inverted-triangle-use-cases'>
           <div className='section-container mt-12 max-w-7xl lg:mt-0'>
             <div className='relative -mt-[80px] w-full rounded-lg border-t-4 border-t-primary-300 bg-neutral-900 p-3 shadow-lg md:p-10'>
-              <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
+              <div className='grid grid-cols-1 gap-8'>
                 {comparison.painpoint.map((painpoint, index) => {
                   return (
                     <CUICard key={index} className='p-6'>
                       <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
-                        <h3 className='font-basier text-xl font-medium leading-tight  text-neutral-100'>
-                          {painpoint.Title}
-                        </h3>
-                        <div className='text-neutral-20 text-sm'>
-                          <Markdown>{painpoint.Description}</Markdown>
-                        </div>
-                        <HRSeparator className='my-6' />
-                        <div>
-                          <h4 className='mb-4 font-basier text-lg font-medium  leading-tight text-neutral-100'>
-                            How our customers did it
-                          </h4>
-                          <div className='text-neutral-20 text-sm'>
-                            <Markdown>{painpoint.Proofpoint}</Markdown>
+                        <div className='flex items-start gap-10'>
+                          <div className='w-1/2'>
+                            <h3 className='mb-4 flex-grow font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                              {painpoint.Title}
+                            </h3>
+                            <div className='text-neutral-20  text-sm'>
+                              <Markdown>{painpoint.Description}</Markdown>
+                            </div>
+                          </div>
+                          <div className='w-1/2'>
+                            <h4 className='mb-4 font-basier text-lg font-medium leading-tight text-neutral-100'>
+                              How our customers did it
+                            </h4>
+                            <div className='text-neutral-20 text-sm'>
+                              <Markdown>{painpoint.Proofpoint}</Markdown>
+                            </div>
                           </div>
                         </div>
                       </CUICard.Body>
@@ -121,6 +130,9 @@ export default function ComparisonPage({
             <div className='bg-primary-300 pb-24'></div>
           </div>
         </div>
+      </div>
+      <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
+        <div className='gap-3 md:columns-2 lg:columns-3'>quotes</div>
       </div>
     </Layout>
   )
