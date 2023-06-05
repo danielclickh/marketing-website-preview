@@ -21,12 +21,10 @@ const components = {
 }
 
 function Banner({ content }: { content: string }) {
-  const [isClosed, setClosed] = useState(true)
+  const [isClosed, setClosed] = useState(false)
 
   useEffect(() => {
-    const closed =
-      window.sessionStorage.getItem('banner') === 'closed' ||
-      content.length === 0
+    const closed = content.length === 0
     if (!isClosed || closed !== isClosed) {
       setClosed(closed)
     }
@@ -43,14 +41,6 @@ function Banner({ content }: { content: string }) {
         components={components}>
         {content}
       </Markdown>
-      <button
-        className='absolute right-4 top-0 flex h-full cursor-pointer items-center text-primary-900'
-        onClick={() => {
-          setClosed(true)
-          window.sessionStorage.setItem('banner', 'closed')
-        }}>
-        <XIcon className='h-4 w-4' aria-hidden='true' />
-      </button>
     </div>
   )
 }
