@@ -7,9 +7,10 @@ interface Props {
   isLast: boolean
   path: string
   btnText: string
+  index: number
 }
 
-function PricingButton({ isFirst, isLast, path, btnText }: Props) {
+function PricingButton({ isFirst, isLast, path, btnText, index }: Props) {
   const { selectedRegion } = usePricing()
 
   if (!isFirst) {
@@ -17,7 +18,7 @@ function PricingButton({ isFirst, isLast, path, btnText }: Props) {
       <CUIButton
         href={path}
         weight='medium'
-        className='w-full stroked_button_wrapper button_wrapper'
+        className='stroked_button_wrapper button_wrapper w-full'
         type={isLast ? 'primary' : 'secondary'}>
         {btnText}
       </CUIButton>
@@ -26,13 +27,30 @@ function PricingButton({ isFirst, isLast, path, btnText }: Props) {
 
   if (selectedRegion?.hasDevService) {
     return (
-      <CUIButton
-        href={path}
-        weight='medium'
-        className='w-full stroked_button_wrapper button_wrapper'
-        type='primary'>
-        {btnText}
-      </CUIButton>
+      <>
+        {selectedRegion.cloudProvider === 'aws' &&
+        index === 0 &&
+        selectedRegion.devStoragePricing.devPriceUSD == 'Coming soon' ? (
+          <>
+            <CUIButton
+              type='secondary'
+              weight='medium'
+              className='stroked_button_wrapper button_wrapper disabled_button w-full !text-primary-300'
+              href={path}
+              disabled>
+              Coming soon
+            </CUIButton>
+          </>
+        ) : (
+          <CUIButton
+            href={path}
+            weight='medium'
+            className='stroked_button_wrapper button_wrapper w-full'
+            type='primary'>
+            {btnText}
+          </CUIButton>
+        )}
+      </>
     )
   }
 
@@ -40,7 +58,7 @@ function PricingButton({ isFirst, isLast, path, btnText }: Props) {
     <CUIButton
       type='secondary'
       weight='medium'
-      className='w-full stroked_button_wrapper button_wrapper disabled_button !text-primary-300'
+      className='stroked_button_wrapper button_wrapper disabled_button w-full !text-primary-300'
       href={path}
       disabled>
       Coming soon
