@@ -218,6 +218,7 @@ function PricingOptions({
                         isLast={index !== plans.length - 1}
                         path={plan.actionButton.link}
                         btnText={plan.actionButton.text}
+                        index={index}
                       />
                     )}
                   </div>
