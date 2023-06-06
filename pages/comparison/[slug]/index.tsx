@@ -59,7 +59,7 @@ export default function ComparisonPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
         <div className='relative gap-24 px-8 pb-10 pt-16 md:px-0 lg:pb-32 '>
-          <div className='mx-auto max-w-7xl px-8 xl:px-0'>
+          <div className='mx-auto max-w-7xl px-8'>
             <div className='grid grid-cols-2 items-center gap-20'>
               <div>
                 <h1 className='mb-6 font-basier text-5.5xl font-semibold leading-tight text-neutral-200'>
