@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import { StrapiImageType } from '../lib/api/strapi/types'
 import { CommonProps } from './homepage'
 import { SeoMetadata } from '../lib/api/strapi/types'
+import { HomepageCustomerStories } from '../types/homepage'
 
 interface Painpoint {
   Title: string
@@ -9,11 +10,13 @@ interface Painpoint {
   Proofpoint: string
 }
 
-
 interface ComparisonPage {
   Title: string
+  image: StrapiImageType
   HeroDescription: string
   painpoint: Array<Painpoint>
+  formTitle: string
+  customerStories: HomepageCustomerStories
 }
 
 export interface ComparisonProps extends CommonProps {

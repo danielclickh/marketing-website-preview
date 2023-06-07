@@ -10,9 +10,12 @@ import {
   REVALIDATE_SECONDS
 } from '../../../lib/utils/revalidationConfig'
 import { CUICard } from '../../../components/ClickUI'
-import Markdown from '../../../components/Markdown'
+import ReactMarkdown from 'react-markdown'
 import HRSeparator from '../../../components/HRSeparator'
 import ContactForm from '../../../components/ContactForm'
+import { StrapiImage } from '../../../components/StrapiElements'
+import LogoCarousel from '../../../components/LogoCarousel'
+import React from 'react'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
   async function getStaticProps({ params }) {
@@ -23,7 +26,17 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
           $eq: slug
         }
       },
-      populate: ['painpoint', 'seo', 'testimonials'],
+      populate: [
+        'painpoint',
+        'seo',
+        'testimonials',
+        'customerStories',
+        'customerStories.*',
+        'customerStories.logos.*',
+        'customerStories.logos.darkLogoPng',
+        'image',
+        'formTitle'
+      ],
       pagination: { limit: 1 }
     })
     if (!data?.[0]) {
@@ -34,6 +47,9 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
     }
 
     const comparison = data[0]
+
+    console.log('comparison', comparison)
+
     const seo = comparison.seo
 
     const commonData = await getCommonProps()
@@ -55,24 +71,34 @@ export default function ComparisonPage({
   seo,
   comparison
 }: ComparisonProps) {
+  const logos1 = comparison.customerStories.logos.slice(
+    0,
+    Math.ceil(comparison.customerStories.logos.length / 2)
+  )
+  const logos2 = comparison.customerStories.logos.slice(
+    Math.ceil(comparison.customerStories.logos.length / 2)
+  )
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
-        <div className='relative gap-24 px-8 pb-10 pt-16 md:px-0 lg:pb-32 '>
-          <div className='mx-auto max-w-7xl px-8'>
-            <div className='grid grid-cols-2 items-center gap-20'>
+        <div className='relative px-8 pt-16 lg:pb-24 xl:px-0 '>
+          <div className='mx-auto max-w-7xl'>
+            <div className='grid grid-cols-2 items-start gap-20'>
               <div>
-                <h1 className='mb-6 font-basier text-5.5xl font-semibold leading-tight text-neutral-200'>
-                  {comparison.Title}
-                </h1>
-                <p className='mb-12 text-neutral-200'>
-                  {comparison.HeroDescription}
-                </p>
+                <div className='flex items-center'>
+                  <h1 className='mb-6 font-basier text-5xl font-semibold leading-tight text-neutral-200'>
+                    {comparison.Title}
+                  </h1>
+                  {comparison.image && <StrapiImage {...comparison.image} />}
+                </div>
+                <div className='rich_content mt-4 mb-12 text-base text-neutral-200'>
+                  <ReactMarkdown children={comparison.HeroDescription} />
+                </div>
               </div>
               <div>
-                <div className='p-4 pr-0'>
-                  <h3 className='mb-6 text-center text-xl font-light text-primary-300'>
-                    Contact us to find out the power of ClickHouse
+                <div className='p-4 pt-0 pr-0'>
+                  <h3 className='mb-6 text-center font-basier text-2xl font-light'>
+                    {comparison.formTitle}
                   </h3>
                   <ContactForm
                     firstNameLabel='First Name'
@@ -84,52 +110,53 @@ export default function ComparisonPage({
                     thankYouMessage='Thank you for submitting the form!'
                     disclaimer=''
                   />
-                  <Markdown className='mt-4 text-center text-sm'>
-                    By clicking Submit, you acknowledge that ClickHouse will
+                  <div className='rich_content mt-4 text-center text-sm'>
+                    <ReactMarkdown
+                      children='By clicking Submit, you acknowledge that ClickHouse will
                     process your personal information in accordance with our
                     [privacy
-                    policy](https://clickhouse.com/legal/privacy-policy).
-                  </Markdown>
+                    policy](https://clickhouse.com/legal/privacy-policy).'
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className='clip-inverted-triangle-use-cases'>
-          <div className='section-container mt-12 max-w-7xl lg:mt-0'>
-            <div className='relative -mt-[80px] w-full rounded-lg border-t-4 border-t-primary-300 bg-neutral-900 p-3 shadow-lg md:p-10'>
-              <div className='grid grid-cols-1 gap-8'>
-                {comparison.painpoint.map((painpoint, index) => {
-                  return (
-                    <CUICard key={index} className='p-6'>
-                      <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
-                        <div className='flex items-start gap-10'>
-                          <div className='w-1/2'>
-                            <h3 className='mb-4 flex-grow font-basier text-xl font-medium leading-tight  text-neutral-100'>
-                              {painpoint.Title}
-                            </h3>
-                            <div className='text-neutral-20  text-sm'>
-                              <Markdown>{painpoint.Description}</Markdown>
-                            </div>
-                          </div>
-                          <div className='w-1/2'>
-                            <h4 className='mb-4 font-basier text-lg font-medium leading-tight text-neutral-100'>
-                              How our customers did it
-                            </h4>
-                            <div className='text-neutral-20 text-sm'>
-                              <Markdown>{painpoint.Proofpoint}</Markdown>
-                            </div>
-                          </div>
-                        </div>
-                      </CUICard.Body>
-                    </CUICard>
-                  )
-                })}
+
+        {comparison.customerStories.title && (
+          <div className='relative mb-16'>
+            <div className='inset-0 mx-auto h-12 max-w-7xl skew-y-2 transform bg-primary-300 lg:max-h-96'></div>
+            <div className='relative z-10 mx-auto -mt-6 max-w-7xl  bg-primary-300'>
+              <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
+                <div className='flip-selection mx-auto flex flex-col text-center'>
+                  <div className='mx-auto mb-8 w-fit max-w-4xl px-4 py-6 pt-10 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
+                    {comparison.customerStories.title}{' '}
+                    <span className='tilted tilted-black'>
+                      <span className='tilted-content leading-8'>
+                        {comparison.customerStories.popText}
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-20 md:gap-x-14'>
+                <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
+                <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
+                <LogoCarousel
+                  logos={logos1}
+                  speedClass1='animate-marqueeLeft'
+                  speedClass2='animate-marqueeLeft2'
+                />
+                <LogoCarousel
+                  logos={logos2}
+                  speedClass1='animate-marqueeLeft3'
+                  speedClass2='animate-marqueeLeft4'
+                />
               </div>
             </div>
-            <div className='bg-primary-300 pb-24'></div>
           </div>
-        </div>
+        )}
       </div>
       <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
         <div className='gap-3 md:columns-2 lg:columns-3'>quotes</div>
