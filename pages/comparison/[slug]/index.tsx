@@ -62,8 +62,6 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
 
     const comparison = data[0]
 
-    console.log('comparison', comparison.Content)
-
     const seo = comparison.seo
 
     const commonData = await getCommonProps()
