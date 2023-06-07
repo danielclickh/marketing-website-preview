@@ -557,6 +557,11 @@ a.arrow-link {
   }
 }
 
+.color-swap-no-hover {
+  filter: brightness(0) invert(0.8);
+  -webkit-filter: brightness(0) invert(0.8);
+}
+
 .hide-scrollbar::-webkit-scrollbar {
   display: none !important;
 }
@@ -575,3 +580,7 @@ a.arrow-link {
 .mktoFormCol {@apply w-full}
 .mktoFieldWrap {@apply relative mb-5 md:mb-0}
 .mktoError {@apply text-red-600 text-xs mt-2 }
+
+.rich-content-comparisons {
+  p {@apply mb-4}
+}

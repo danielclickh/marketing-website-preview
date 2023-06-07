@@ -16,6 +16,8 @@ import ContactForm from '../../../components/ContactForm'
 import { StrapiImage } from '../../../components/StrapiElements'
 import LogoCarousel from '../../../components/LogoCarousel'
 import React from 'react'
+import Image from 'next/image'
+import { useState } from 'react'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
   async function getStaticProps({ params }) {
@@ -28,14 +30,26 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
       },
       populate: [
         'painpoint',
+        'paintpoint.customer.*',
+        'painpoint.customer.description',
+        'painpoint.customer.logo',
+        'painpointsTitle',
+        'painpointsIcon',
         'seo',
-        'testimonials',
+        'Testimonials',
+        'Testimonials.*',
+        'Testimonials.logo.*',
         'customerStories',
         'customerStories.*',
         'customerStories.logos.*',
         'customerStories.logos.darkLogoPng',
         'image',
-        'formTitle'
+        'formTitle',
+        'testimonialsTitle',
+        'testimonialsIcon',
+        'Content',
+        'Content.customContent',
+        'Content.RelatedBlogs'
       ],
       pagination: { limit: 1 }
     })
@@ -48,7 +62,7 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
 
     const comparison = data[0]
 
-    console.log('comparison', comparison)
+    console.log('comparison', comparison.Content)
 
     const seo = comparison.seo
 
@@ -78,6 +92,13 @@ export default function ComparisonPage({
   const logos2 = comparison.customerStories.logos.slice(
     Math.ceil(comparison.customerStories.logos.length / 2)
   )
+
+  const [visibleTestimonials, setVisibleTestimonials] = useState(6)
+
+  const loadMore = () => {
+    setVisibleTestimonials((prevValue) => prevValue + 6)
+  }
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
@@ -158,8 +179,171 @@ export default function ComparisonPage({
           </div>
         )}
       </div>
-      <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
-        <div className='gap-3 md:columns-2 lg:columns-3'>quotes</div>
+      {comparison.testimonialsTitle && (
+        <div className='mx-auto mt-28 max-w-7xl px-4 md:px-8 2xl:px-0'>
+          <div className='section-container bg-shadow-element yellow-shadow align-shadow-right container mx-auto flex  flex-col items-center'>
+            {comparison.painpointsIcon && (
+              <StrapiImage
+                {...comparison.painpointsIcon}
+                className='mb-4 fill-none'
+              />
+            )}
+            <h2 className='font-basier text-3xl font-semibold'>
+              {comparison.painpointsTitle}
+            </h2>
+            <div className='mt-20'>
+              <div className='grid grid-cols-1 gap-8'>
+                {comparison.painpoint.map((painpoint, index) => {
+                  return (
+                    <CUICard key={index} className='p-6'>
+                      <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
+                        <div className='flex items-start gap-10'>
+                          <div className='w-2/3'>
+                            <h3 className='mb-4 flex-grow font-basier text-3xl font-semibold leading-tight  text-neutral-100'>
+                              {painpoint.Title}
+                            </h3>
+                            <div className='rich_content text-sm  text-neutral-200'>
+                              <ReactMarkdown children={painpoint.Description} />
+                            </div>
+                          </div>
+                          {painpoint.customer && (
+                            <div className='h-full w-1/3'>
+                              <CUICard className='p-6'>
+                                <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
+                                  <div className='rich_content text-sm text-neutral-200'>
+                                    <Image
+                                      src='/images/Quote.svg'
+                                      width={35}
+                                      height={35}
+                                      alt='Quote'
+                                      className='mb-4'
+                                    />{' '}
+                                    <ReactMarkdown
+                                      children={
+                                        painpoint.customer.description as string
+                                      }
+                                    />
+                                    {painpoint.customer.logo && (
+                                      <StrapiImage
+                                        {...painpoint.customer.logo}
+                                      />
+                                    )}
+                                  </div>
+                                </CUICard.Body>
+                              </CUICard>
+                            </div>
+                          )}
+                        </div>
+                      </CUICard.Body>
+                    </CUICard>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {comparison.testimonialsTitle && (
+        <>
+          <HRSeparator className='my-24' />
+          <div className='mx-auto mb-24 max-w-7xl px-4 md:px-8 2xl:px-0'>
+            <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto  flex  flex-col items-center'>
+              {comparison.testimonialsIcon && (
+                <StrapiImage
+                  {...comparison.testimonialsIcon}
+                  className='mb-4 fill-none'
+                />
+              )}
+              <h2 className='font-basier text-3xl font-semibold'>
+                {comparison.testimonialsTitle}
+              </h2>
+            </div>
+            <div className='mt-20 gap-3 md:columns-2 lg:columns-3'>
+              {comparison.Testimonials.map((testimonial, index) => (
+                <div
+                  className='animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover p-6 shadow-card hover:bg-neutral-750'
+                  key={index}>
+                  <div className='flex h-full w-full flex-col justify-between space-y-12'>
+                    <div className='text-left'>
+                      {testimonial.logo && (
+                        <StrapiImage
+                          {...testimonial.logo}
+                          className='color-swap-no-hover mb-4 h-16  fill-none'
+                        />
+                      )}
+                      <div className='rich-content-comparisons text-sm text-neutral-200'>
+                        <ReactMarkdown children={testimonial.Description} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+      <HRSeparator className='my-24' />
+      <div className='mx-auto mb-24 max-w-7xl px-4 md:px-8 2xl:px-0'>
+        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto  flex  flex-col items-center'>
+          <Image
+            src='/images/migration.svg'
+            height={72}
+            width={72}
+            alt='Migrations'
+            className='mb-4 fill-none'
+          />
+          <h2 className='mb-16 font-basier text-3xl font-semibold'>
+            Contact us for help with your migration
+          </h2>
+          <div className='mx-auto max-w-lg'>
+            {' '}
+            <ContactForm
+              firstNameLabel='First Name'
+              lastNameLabel='Last Name'
+              emailLabel='Email'
+              companyLabel='Company'
+              messageLabel='Message'
+              submitButtonLabel='Submit'
+              thankYouMessage='Thank you for submitting the form!'
+              disclaimer=''
+            />
+            <div className='rich_content mt-4 text-center text-sm'>
+              <ReactMarkdown
+                children='By clicking Submit, you acknowledge that ClickHouse will
+                    process your personal information in accordance with our
+                    [privacy
+                    policy](https://clickhouse.com/legal/privacy-policy).'
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <HRSeparator className='my-24' />
+      <div className='mx-auto max-w-7xl'>
+        {comparison.Content.map((content, index) => {
+          return (
+            <div key={index} className='mx-auto mb-10 max-w-7xl'>
+              <h3 className='mb-4 text-2xl font-semibold'>
+                {content.SectionTitle}
+              </h3>
+              {content.customContent.length > 0 && (
+                <div className='flex space-x-6'>
+                  {content.customContent?.map((custom, index) => {
+                    return (
+                      <CUICard className='p-6' key={index}>
+                        <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
+                          <div className='rich_content text-sm text-neutral-200'>
+                            {custom.Title}
+                          </div>
+                        </CUICard.Body>
+                      </CUICard>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
+          )
+        })}
       </div>
     </Layout>
   )
