@@ -327,7 +327,7 @@ export default function ComparisonPage({
                 {content.SectionTitle}
               </h3>
               {content.customContent.length > 0 && (
-                <div className='flex space-x-6'>
+                <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-4'>
                   {content.customContent?.map((custom, index) => {
                     return (
                       <CUICard className='p-6' key={index}>
