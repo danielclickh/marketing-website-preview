@@ -191,6 +191,27 @@ const nextConfig = {
         source: '/blog/the-click-house-community',
         destination: '/slack',
         permanent: true
+      },
+      {
+        source: '/blog/clickhouse-fully-supports-joins',
+        destination: '/blog/clickhouse-fully-supports-joins-part1',
+        permanent: true
+      },
+      {
+        source: '/blog/clickhouse-fully-supports-joins-part2',
+        destination: '/blog/clickhouse-fully-supports-joins-hash-joins-part2',
+        permanent: true
+      },
+      {
+        source: '/blog/clickhouse-fully-supports-joins-part3',
+        destination:
+          '/blog/clickhouse-fully-supports-joins-full-sort-partial-merge-part3',
+        permanent: true
+      },
+      {
+        source: '/blog/clickhouse-fully-supports-joins-part4',
+        destination: '/blog/clickhouse-fully-supports-joins-direct-join-part4',
+        permanent: true
       }
     ]
   }
