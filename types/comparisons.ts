@@ -3,6 +3,7 @@ import { StrapiImageType } from '../lib/api/strapi/types'
 import { CommonProps } from './homepage'
 import { SeoMetadata } from '../lib/api/strapi/types'
 import { HomepageCustomerStories } from '../types/homepage'
+import { BlogPost as BlogPostType, BlogProps } from '../types/blogs'
 
 interface Painpoint {
   Title: string
@@ -16,17 +17,22 @@ interface Painpoint {
 
 interface RepeatableContent {
   SectionTitle: string
+  Category: string
+  Footer: string
+  Description: string
   customContent: [
     {
       Title: string
       Description: string
       href: string
       Image: StrapiImageType
+      Category: string
+      Footer: string
     }
   ]
   RelatedBlogs: [
     {
-      blog_posts: any
+      blog_posts: Array<BlogPostType>
     }
   ]
 }
