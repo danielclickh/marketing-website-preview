@@ -206,7 +206,7 @@ export default function ComparisonPage({
                       <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
                         <div className='flex flex-col items-start gap-10 lg:flex-row'>
                           <div className='w-full lg:w-2/3'>
-                            <h3 className='mb-4 flex-grow text-center font-basier text-3xl font-semibold leading-tight  text-neutral-100'>
+                            <h3 className='mb-4 flex-grow text-center font-basier text-3xl font-semibold leading-tight text-neutral-100 lg:text-left'>
                               {painpoint.Title}
                             </h3>
                             <div className='rich_content text-sm  text-neutral-200'>
