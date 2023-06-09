@@ -143,7 +143,10 @@ function EventsForm({
                 {form.type === 'recordedGatedContent' ? (
                   <>Thanks for registering!</>
                 ) : submitButtonLabel === 'Request your spot' ? (
-                  <>Thanks for your interest, we'll be in touch</>
+                  <>
+                    Thanks for your interest, we'll be in touch to let you know
+                    if a space is available
+                  </>
                 ) : (
                   <>You've been successfully registered. See you there!</>
                 )}
