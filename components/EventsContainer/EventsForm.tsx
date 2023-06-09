@@ -140,10 +140,15 @@ function EventsForm({
             <div className='success-container text-center'>
               <CheckCircleIcon className='mx-auto mb-4 h-16 w-16 stroke-1 text-primary-300' />
               <p className='mb-12 px-10 text-xl font-bold'>
-                {form.type == 'recordedGatedContent' ? (
+                {form.type === 'recordedGatedContent' ? (
                   <>Thanks for registering!</>
+                ) : submitButtonLabel === 'Request your spot' ? (
+                  <>
+                    Thanks for your interest, we'll be in touch to let you know
+                    if a space is available
+                  </>
                 ) : (
-                  <>You’ve been successfully registered. See you there!</>
+                  <>You've been successfully registered. See you there!</>
                 )}
               </p>
               <p className='mb-2 px-10 text-base font-semibold text-neutral-300'>
