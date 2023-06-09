@@ -19,6 +19,7 @@ import React from 'react'
 import Image from 'next/image'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
 import Link from 'next/link'
+import Markdown from '../../../components/Markdown'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
   async function getStaticProps({ params }) {
@@ -105,7 +106,7 @@ export default function ComparisonPage({
                   )}
                 </div>
                 <div className='rich_content mt-4 mb-12 text-base text-neutral-200'>
-                  <ReactMarkdown children={comparison.HeroDescription} />
+                  <Markdown children={comparison.HeroDescription} />
                 </div>
               </div>
               <div>
@@ -191,15 +192,15 @@ export default function ComparisonPage({
                             <h3 className='mb-4 flex-grow text-center font-basier text-3xl font-semibold leading-tight text-neutral-100 lg:text-left'>
                               {painpoint.Title}
                             </h3>
-                            <div className='rich_content text-sm  text-neutral-200'>
-                              <ReactMarkdown children={painpoint.Description} />
+                            <div className='rich_content  text-neutral-200'>
+                              <Markdown children={painpoint.Description} />
                             </div>
                           </div>
                           {painpoint.customer && (
                             <div className='h-full w-full lg:w-1/3'>
                               <CUICard className='p-6'>
                                 <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
-                                  <div className='rich_content text-sm text-neutral-200'>
+                                  <div className='rich_content  text-neutral-200'>
                                     <Image
                                       src='/images/Quote.svg'
                                       width={37}
@@ -261,7 +262,7 @@ export default function ComparisonPage({
                             className='color-swap-no-hover mb-4 h-16  fill-none'
                           />
                         )}
-                        <div className='rich-content-comparisons text-sm text-neutral-200'>
+                        <div className='rich-content-comparisons  text-neutral-200'>
                           <ReactMarkdown children={testimonial.Description} />
                         </div>
                       </div>
