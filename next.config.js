@@ -212,6 +212,11 @@ const nextConfig = {
         source: '/blog/clickhouse-fully-supports-joins-part4',
         destination: '/blog/clickhouse-fully-supports-joins-direct-join-part4',
         permanent: true
+      },
+      {
+        source: '/company/events/v23-5-release-webinar',
+        destination: 'https://www.youtube.com/watch?v=o8Gj1ClU71M',
+        permanent: true
       }
     ]
   }
