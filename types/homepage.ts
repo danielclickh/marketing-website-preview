@@ -91,6 +91,7 @@ export interface HomepageCustomerStories {
   description: string
   logos: Array<HomepageCustomerStoryLogo>
   ctaButton: StrapiButton
+  popText: string
 }
 
 export interface HomepageCustomerStoryLogo extends StrapiLink {
