@@ -95,8 +95,8 @@ export default function ComparisonPage({
       <div className='homepage bg-grid'>
         <div className='relative pt-16 lg:pb-24 '>
           <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
-            <div className='grid items-start gap-10 lg:grid-cols-2 lg:gap-20'>
-              <div>
+            <div className='items-start justify-between gap-10 lg:flex lg:grid-cols-2 lg:gap-20'>
+              <div className='lg:w-2/3'>
                 <div className='items-center md:flex'>
                   <h1 className='mb-6 text-center font-basier text-5xl font-semibold leading-tight text-neutral-200 md:text-left'>
                     {comparison.Title}
@@ -111,26 +111,28 @@ export default function ComparisonPage({
               </div>
               <div>
                 <div className='mb-12 lg:mb-0'>
-                  <h3 className='mb-6 text-center font-basier text-2xl font-light'>
-                    {comparison.formTitle}
-                  </h3>
-                  <ContactForm
-                    firstNameLabel='First Name'
-                    lastNameLabel='Last Name'
-                    emailLabel='Email'
-                    companyLabel='Company'
-                    messageLabel='Message'
-                    submitButtonLabel='Submit'
-                    thankYouMessage='Thank you for submitting the form!'
-                    disclaimer=''
-                  />
-                  <div className='rich_content mt-4 text-center text-sm'>
-                    <ReactMarkdown
-                      children='By clicking Submit, you acknowledge that ClickHouse will
+                  <div className='lg:max-w-lg'>
+                    <h3 className='mb-6 text-center font-basier text-2xl font-light'>
+                      {comparison.formTitle}
+                    </h3>
+                    <ContactForm
+                      firstNameLabel='First Name'
+                      lastNameLabel='Last Name'
+                      emailLabel='Email'
+                      companyLabel='Company'
+                      messageLabel='Message'
+                      submitButtonLabel='Submit'
+                      thankYouMessage='Thank you for submitting the form!'
+                      disclaimer=''
+                    />
+                    <div className='rich_content mt-4 text-center text-sm'>
+                      <ReactMarkdown
+                        children='By clicking Submit, you acknowledge that ClickHouse will
                     process your personal information in accordance with our
                     [privacy
                     policy](https://clickhouse.com/legal/privacy-policy).'
-                    />
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
