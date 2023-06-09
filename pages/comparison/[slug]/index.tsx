@@ -98,7 +98,7 @@ export default function ComparisonPage({
             <div className='items-start justify-between gap-10 lg:flex lg:grid-cols-2 lg:gap-20'>
               <div className='lg:w-2/3'>
                 <div className='items-center md:flex'>
-                  <h1 className='mb-6 text-center font-basier text-5xl font-semibold leading-tight text-neutral-200 md:text-left'>
+                  <h1 className='mb-6 text-center text-5xl font-semibold leading-tight text-neutral-200 md:text-left'>
                     {comparison.Title}
                   </h1>
                   {comparison.image && (
