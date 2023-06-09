@@ -17,7 +17,6 @@ import { StrapiImage } from '../../../components/StrapiElements'
 import LogoCarousel from '../../../components/LogoCarousel'
 import React from 'react'
 import Image from 'next/image'
-import { useState } from 'react'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
 import Link from 'next/link'
 
