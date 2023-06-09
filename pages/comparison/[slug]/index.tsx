@@ -90,20 +90,6 @@ export default function ComparisonPage({
   seo,
   comparison
 }: ComparisonProps) {
-  const logos1 = comparison.customerStories.logos.slice(
-    0,
-    Math.ceil(comparison.customerStories.logos.length / 2)
-  )
-  const logos2 = comparison.customerStories.logos.slice(
-    Math.ceil(comparison.customerStories.logos.length / 2)
-  )
-
-  const [visibleTestimonials, setVisibleTestimonials] = useState(6)
-
-  const loadMore = () => {
-    setVisibleTestimonials((prevValue) => prevValue + 6)
-  }
-
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
@@ -172,14 +158,9 @@ export default function ComparisonPage({
                 <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
                 <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
                 <LogoCarousel
-                  logos={logos1}
+                  logos={comparison.customerStories.logos}
                   speedClass1='animate-marqueeLeft'
                   speedClass2='animate-marqueeLeft2'
-                />
-                <LogoCarousel
-                  logos={logos2}
-                  speedClass1='animate-marqueeLeft3'
-                  speedClass2='animate-marqueeLeft4'
                 />
               </div>
             </div>
@@ -270,19 +251,21 @@ export default function ComparisonPage({
                 <div
                   className='animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover p-6 shadow-card hover:bg-neutral-750'
                   key={index}>
-                  <div className='flex h-full w-full flex-col justify-between space-y-12'>
-                    <div className='text-left'>
-                      {testimonial.logo && (
-                        <StrapiImage
-                          {...testimonial.logo}
-                          className='color-swap-no-hover mb-4 h-16  fill-none'
-                        />
-                      )}
-                      <div className='rich-content-comparisons text-sm text-neutral-200'>
-                        <ReactMarkdown children={testimonial.Description} />
+                  <Link href={testimonial.href}>
+                    <div className='flex h-full w-full flex-col justify-between space-y-12'>
+                      <div className='text-left'>
+                        {testimonial.logo && (
+                          <StrapiImage
+                            {...testimonial.logo}
+                            className='color-swap-no-hover mb-4 h-16  fill-none'
+                          />
+                        )}
+                        <div className='rich-content-comparisons text-sm text-neutral-200'>
+                          <ReactMarkdown children={testimonial.Description} />
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               ))}
             </div>
