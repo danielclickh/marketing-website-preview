@@ -98,14 +98,21 @@ export default function ComparisonPage({
             <div className='items-start justify-between gap-10 lg:flex lg:grid-cols-2 lg:gap-20'>
               <div className='lg:w-2/3'>
                 <div className='items-center md:flex'>
-                  <h1 className='mb-6 text-center text-5xl font-semibold leading-tight text-neutral-200 md:text-left'>
-                    {comparison.Title}
-                  </h1>
-                  {comparison.image && (
-                    <StrapiImage {...comparison.image} className='mx-auto' />
-                  )}
+                  <div>
+                    <h1 className='mb-6 text-center text-5xl font-semibold leading-tight text-neutral-200 md:text-left'>
+                      {comparison.Title}
+                    </h1>
+                  </div>
+                  <div>
+                    {comparison.image && (
+                      <StrapiImage
+                        {...comparison.image}
+                        className='mx-auto lg:mx-0'
+                      />
+                    )}
+                  </div>
                 </div>
-                <div className='rich_content mt-4 mb-12 text-base text-neutral-200'>
+                <div className='rich_content mt-4 mb-12 text-center text-base text-neutral-200 md:text-left'>
                   <Markdown children={comparison.HeroDescription} />
                 </div>
               </div>
