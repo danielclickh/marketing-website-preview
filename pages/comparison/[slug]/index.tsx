@@ -142,11 +142,11 @@ export default function ComparisonPage({
 
         {comparison.customerStories.title && (
           <div className='relative mb-16'>
-            <div className='inset-0 mx-auto h-12 max-w-7xl skew-y-2 transform bg-primary-300 lg:max-h-96'></div>
-            <div className='relative z-10 mx-auto -mt-6 max-w-7xl bg-primary-300'>
+            <div className='inset-0 mx-auto h-16 max-w-7xl skew-y-2 transform bg-primary-300 lg:max-h-96'></div>
+            <div className='relative z-10 mx-auto -mt-10 max-w-7xl bg-primary-300'>
               <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
                 <div className='flip-selection mx-auto flex flex-col text-center'>
-                  <div className='mx-auto mb-8 w-fit max-w-4xl px-4 py-6 pt-10 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
+                  <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-6 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
                     {comparison.customerStories.title}{' '}
                     <span className='tilted tilted-black'>
                       <span className='tilted-content leading-8'>
@@ -156,7 +156,7 @@ export default function ComparisonPage({
                   </div>
                 </div>
               </div>
-              <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-12 md:gap-x-14'>
+              <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-10 md:gap-x-14'>
                 <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
                 <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
                 <LogoCarousel
