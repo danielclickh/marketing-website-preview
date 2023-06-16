@@ -19,7 +19,7 @@ export async function getCommonProps(): Promise<Props> {
     'https://api.github.com/repos/ClickHouse/ClickHouse'
   )
   const data = await githubData.json()
-  const stars = data?.stargazers_count ?? 28649
+  const stars = data?.stargazers_count ?? 29285
   return {
     footerData,
     platforms: getStartedData.platforms,
