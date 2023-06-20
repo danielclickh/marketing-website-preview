@@ -102,13 +102,6 @@ function PricingOptions({
                             parentIndex !== 0 ? '' : ''
                           }`}
                         />
-                        <SuiText
-                          size='xs'
-                          weight='medium'
-                          color='secondary'
-                          className='absolute -top-2 -right-3.5 rounded-lg bg-neutral-100 px-2.5 text-sm text-neutral-900'>
-                          Beta
-                        </SuiText>
                       </CUIButton>
                     )
                   }
@@ -242,7 +235,7 @@ function PricingOptions({
           <CUILink href='/partners/aws' className='text-primary-300'>
             AWS
           </CUILink>{' '}
-          and GCP (Beta).
+          and GCP.
         </SuiText>
       </div>
     </div>
