@@ -48,13 +48,6 @@ function CloudProviders({
                       {...darkIconPng}
                       className={`h-10 w-auto ${parentIndex !== 0 ? '' : ''}`}
                     />
-                    <SuiText
-                      size='xs'
-                      weight='medium'
-                      color='secondary'
-                      className='absolute -top-1 -right-3.5 rounded-lg bg-neutral-100 px-2.5 text-sm text-neutral-900'>
-                      Beta
-                    </SuiText>
                   </>
                 ) : (
                   <>
