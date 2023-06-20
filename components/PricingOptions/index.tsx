@@ -235,7 +235,13 @@ function PricingOptions({
           <CUILink href='/partners/aws' className='text-primary-300'>
             AWS
           </CUILink>{' '}
-          and GCP.
+          and{' '}
+          <CUILink
+            href='/blog/clickhouse-cloud-on-google-cloud-platform-gcp-is-generally-available'
+            className='text-primary-300'>
+            GCP
+          </CUILink>
+          .
         </SuiText>
       </div>
     </div>
