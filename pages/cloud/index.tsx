@@ -332,6 +332,91 @@ export default function CloudPage({
           </div>
         </div>
 
+        <HRSeparator className='my-24' />
+        <div className='relative flex flex-col gap-y-28 pb-48'>
+          <div className='section-container bg-shadow-element-right red-shadow flex w-full flex-col items-center justify-between self-center'>
+            <div className='flex w-full flex-col items-center'>
+              <Image
+                src='/images/cloud/cloud-icon.svg'
+                alt='Fast Icon'
+                width={72}
+                height={72}
+              />
+              <SuiTitle type='h2' className='mt-8 mb-6 text-center'>
+                ClickHouse Cloud, wherever you&nbsp;are
+              </SuiTitle>
+              <div className='mx-auto max-w-2xl px-4 text-center leading-normal text-neutral-200 md:px-0'>
+                Now available on AWS and GCP Marketplaces, ClickHouse Cloud fits
+                in seamlessly with your usage and billing preferences.
+              </div>
+              <div className='mt-16 flex flex-col space-y-10 md:flex-row md:space-x-10 md:space-y-0'>
+                <CUICard className='w-full max-w-[22.5rem] bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
+                  <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
+                    <Image
+                      src='/images/cloud/aws-marketplace-logo.svg'
+                      width={180}
+                      height={22}
+                      alt='AWS Marketplace'
+                    />
+                    <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>
+                      <div className='text-center text-sm text-neutral-200'>
+                        Flexible deployment and subscription options available
+                        through the AWS Marketplace.
+                      </div>
+                    </div>
+                  </CUICard.Body>
+                  <CUICard.Footer className='flex w-full items-center '>
+                    <CUIButton
+                      type='secondary'
+                      href='https://aws.amazon.com/marketplace/pp/prodview-jettukeanwrfc'
+                      linkClass='w-full inline-grid group'
+                      iconRight={
+                        <ChevronRightIcon
+                          height='18'
+                          className='arrow pt-0.5 transition group-hover:translate-x-1/2'
+                        />
+                      }
+                      target='_blank'>
+                      View in Marketplace
+                    </CUIButton>
+                  </CUICard.Footer>
+                </CUICard>
+                <CUICard className='w-full max-w-[22.5rem] bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
+                  <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
+                    <Image
+                      src='/images/cloud/gcp-logo.svg'
+                      width={180}
+                      height={28}
+                      alt='Google Cloud'
+                    />
+                    <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>
+                      <div className='text-center text-sm text-neutral-200'>
+                        Fast procurement, flexible purchasing, and fulfillment
+                        available through the GCP Marketplace.
+                      </div>
+                    </div>
+                  </CUICard.Body>
+                  <CUICard.Footer className='flex w-full items-center '>
+                    <CUIButton
+                      type='secondary'
+                      href='https://console.cloud.google.com/marketplace/product/clickhouse-public/clickhouse-cloud'
+                      linkClass='w-full inline-grid group'
+                      iconRight={
+                        <ChevronRightIcon
+                          height='18'
+                          className='arrow pt-0.5 transition group-hover:translate-x-1/2'
+                        />
+                      }
+                      target='_blank'>
+                      View in Marketplace
+                    </CUIButton>
+                  </CUICard.Footer>
+                </CUICard>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className='section-container pb-16 md:px-8 2xl:px-0 '>
           <GetStartedFree href='https://clickhouse.cloud/signUp?loc=cloud-page-get-started-footer' />
         </div>
