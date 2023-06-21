@@ -51,11 +51,6 @@ function ServiceUnavailableCountryPage({
           isRounded
           className='mx-auto mt-16 mb-44 max-w-screen-sm px-6 py-10 text-center'>
           <div className='flex flex-col items-center'>
-            <StrapiImage
-              {...iconSvg}
-              alt={iconSvg.caption}
-              className='icon my-2.5'
-            />
             <SuiTitle type='h1' className='mb-3'>
               {title}
             </SuiTitle>

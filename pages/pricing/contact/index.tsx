@@ -197,10 +197,9 @@ export default function ContactPage({
             <div
               className='mx-auto flex flex-col pt-6 text-center'
               id='pricing-contact-form'>
-              <h1 className='text-center font-basier text-5.5xl font-semibold leading-tight text-neutral-200'>
+              <h1 className='mb-6 text-center font-basier text-5.5xl font-semibold leading-tight text-neutral-200'>
                 Dedicated Services
               </h1>
-              <h2 className='mb-6 text-3xl text-primary-300'>Early Access</h2>
               <div className=' text-neutral-200'>
                 Thank you for your interest in our Dedicated Service; please
                 submit the below information to the best of your ability so we
