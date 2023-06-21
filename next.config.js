@@ -217,6 +217,52 @@ const nextConfig = {
         source: '/company/events/v23-5-release-webinar',
         destination: 'https://www.youtube.com/watch?v=o8Gj1ClU71M',
         permanent: true
+      },
+      {
+        source: '/blog/2021/clickhouse-raises-250m-series-b',
+        destination:
+          '/blog/click-house-raises-a-250m-series-b-at-a-2b-valuationand-we-are-hiring',
+        permanent: true
+      },
+      {
+        source: '/blog/2021/clickhouse-v21.11-released',
+        destination: '/blog/click-house-v2111-released',
+        permanent: true
+      },
+      {
+        source: '/blog/2018/concept-cloud-mergetree-tables',
+        destination: '/blog/concept-cloud-merge-tree-tables',
+        permanent: true
+      },
+      {
+        source: '/blog/2021/fuzzing-clickhouse',
+        destination: '/blog/fuzzing-click-house',
+        permanent: true
+      },
+      {
+        source: '/blog/2021/clickhouse-inc',
+        destination: '/blog/introducing-click-house-inc',
+        permanent: true
+      },
+      {
+        source: '/blog/2021/performance-test-1',
+        destination: '/blog/testing-the-performance-of-click-house',
+        permanent: true
+      },
+      {
+        source: '/blog/2021/clickhouse-v21.12-released',
+        destination: '/blog/whats-new-in-clickhouse-21-12',
+        permanent: true
+      },
+      {
+        source: '/blog/2022/clickhouse-v22.1-released',
+        destination: '/blog/whats-new-in-clickhouse-22-1',
+        permanent: true
+      },
+      {
+        source: '/blog/2016/yandex-opensources-clickhouse',
+        destination: '/blog/yandex-opensources-click-house',
+        permanent: true
       }
     ]
   }
