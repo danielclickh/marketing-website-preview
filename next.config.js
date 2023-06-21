@@ -193,6 +193,11 @@ const nextConfig = {
         permanent: true
       },
       {
+        source: '/blog/2020/the-clickhouse-community/',
+        destination: '/slack',
+        permanent: true
+      },
+      {
         source: '/blog/clickhouse-fully-supports-joins',
         destination: '/blog/clickhouse-fully-supports-joins-part1',
         permanent: true
