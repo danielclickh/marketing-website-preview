@@ -274,6 +274,17 @@ const nextConfig = {
         destination:
           '/blog/decorating-a-christmas-tree-with-the-help-of-flaky-tests',
         permanent: true
+      },
+      {
+        source: '/blog/2020/pixel-benchmark',
+        destination: '/blog/running-click-house-on-an-android-phone',
+        permanent: true
+      },
+      {
+        source: '/blog/2021/reading-from-external-memory',
+        destination:
+          '/blog/a-journey-to-io_uring-aio-and-modern-storage-devices',
+        permanent: true
       }
     ]
   }
