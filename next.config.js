@@ -193,7 +193,7 @@ const nextConfig = {
         permanent: true
       },
       {
-        source: '/blog/2020/the-clickhouse-community/',
+        source: '/blog/2020/the-clickhouse-community',
         destination: '/slack',
         permanent: true
       },
