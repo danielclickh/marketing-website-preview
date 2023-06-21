@@ -268,6 +268,12 @@ const nextConfig = {
         source: '/blog/2016/yandex-opensources-clickhouse',
         destination: '/blog/yandex-opensources-click-house',
         permanent: true
+      },
+      {
+        source: '/blog/2021/tests-visualization',
+        destination:
+          '/blog/decorating-a-christmas-tree-with-the-help-of-flaky-tests',
+        permanent: true
       }
     ]
   }
