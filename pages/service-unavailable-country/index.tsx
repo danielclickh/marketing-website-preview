@@ -46,10 +46,10 @@ function ServiceUnavailableCountryPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='service_unavailable_country px-3'>
         <SuiPanel
-          color='bg-c1'
+          color='bg-neutral-950'
           shadow
           isRounded
-          className='max-w-screen-sm mx-auto mt-16 mb-44 px-6 py-10 text-center'>
+          className='mx-auto mt-16 mb-44 max-w-screen-sm px-6 py-10 text-center'>
           <div className='flex flex-col items-center'>
             <StrapiImage
               {...iconSvg}
@@ -71,7 +71,7 @@ function ServiceUnavailableCountryPage({
                 size='sm'
                 weight='normal'
                 color='secondary'
-                className='text-center my-3'>
+                className='my-3 text-center'>
                 <Markdown className='disclaimer'>
                   {contactForm.tosCheckboxRichText}
                 </Markdown>
