@@ -54,7 +54,7 @@ export const getStaticProps: GetStaticProps<RichContentPageProps> =
           title: page.title,
           type: 'website',
           siteName: 'ClickHouse',
-          path: `/${slug}`
+          path: `/${slug.join('/')}`
         }
       },
       revalidate: REVALIDATE_SECONDS
