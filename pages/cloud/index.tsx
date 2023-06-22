@@ -173,7 +173,7 @@ export default function CloudPage({
         </div>
 
         <div className='bg-shadow-element yellow-shadow flex w-full gap-y-4 pb-12 text-neutral-0 md:gap-y-28'>
-          <div className='container mx-auto flex max-w-7xl flex-col gap-y-24 bg-opacity-10 px-8 pt-24 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
+          <div className='container mx-auto flex max-w-7xl flex-col gap-y-48 bg-opacity-10 px-8 pt-24 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
             {featureBlocks.map((item, index: number) => (
               <div key={index}>
                 <div
@@ -202,7 +202,7 @@ export default function CloudPage({
                       alt={item.title}
                       width={item.image_width}
                       height={item.image_height}
-                      className='w-full md:h-fit'
+                      className=''
                     />
                   </div>
                 </div>
