@@ -86,7 +86,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
 
     const commonProps = await getCommonProps()
     const data = await findOne('homepage', params)
-    data.seo.path = '/'
+    data.seo.path = ''
     return {
       props: {
         ...data,
