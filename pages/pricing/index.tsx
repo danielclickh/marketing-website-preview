@@ -58,7 +58,7 @@ export const getStaticProps: GetStaticProps<PricingPageProps> =
     ] = await Promise.all([pricingPromise, pricingByRegionPromise, plansProps])
 
     const commonProps = await getCommonProps()
-
+    seo.path = '/pricing'
     const {
       hero: { cloudProviders }
     } = await findOne('cloud', {

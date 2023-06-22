@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps<UseCasesData> =
       ]
     })
     result.spotlight = (result.useCaseItems ?? []).shift()
-
+    result.seo.path = '/user-stories'
     const blogsParams = {
       filters: {
         category: {

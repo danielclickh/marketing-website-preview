@@ -50,7 +50,8 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
         quotes,
         seo: {
           title: `${useCasesPageData.Title} | ClickHouse`,
-          description: useCasesPageData.Description
+          description: useCasesPageData.Description,
+          path: '/use-cases'
         },
         ...commonProps
       }

@@ -91,7 +91,8 @@ export const getStaticProps: GetStaticProps<EventProps> =
           description: page.shortDescription,
           image: [data[0].thumbnailPng],
           type: 'website',
-          siteName: 'ClickHouse'
+          siteName: 'ClickHouse',
+          path: `/company/events/${slug}`
         },
         recentEvents,
         ...commonProps
@@ -124,7 +125,7 @@ function EventPage({
           recordedVimeoUrl={recordedVimeoUrl}
           featuredImage={lightFeatureImagePng}>
           <div className='section_metadata mb-20'>
-            <h4 className='text-primary-300 text-base font-semibold mb-2'>
+            <h4 className='mb-2 text-base font-semibold text-primary-300'>
               <Link
                 className='hover:text-primary-400'
                 href='/company/news-events'>
@@ -133,7 +134,7 @@ function EventPage({
               / {category}
             </h4>
             <h1
-              className='mb-8 text-4xl md:text-5.5xl font-semibold leading-tight font-basier
+              className='mb-8 font-basier text-4xl font-semibold leading-tight md:text-5.5xl
             '>
               {title}
             </h1>
@@ -159,7 +160,7 @@ function EventPage({
           {hostedBy && (
             <div className='hosted_by mb-16'>
               <h3 className='mb-7 text-xl font-bold'>{hostedBy.title}</h3>
-              <div className='grid grid-cols-1 sm:grid-cols-2 flex-wrap gap-3'>
+              <div className='grid grid-cols-1 flex-wrap gap-3 sm:grid-cols-2'>
                 {hostedBy.hosts.map((host) => (
                   <div className='flex gap-5' key={`${host.name}-${host.role}`}>
                     {host.avatarPng && (
@@ -172,8 +173,8 @@ function EventPage({
                       />
                     )}
                     <div className='flex flex-col'>
-                      <p className='text-base mb-1 font-medium'>{host.name}</p>
-                      <p className='text-sm font-medium flex-auto text-neutral-300'>
+                      <p className='mb-1 text-base font-medium'>{host.name}</p>
+                      <p className='flex-auto text-sm font-medium text-neutral-300'>
                         {host.role}
                       </p>
                     </div>
@@ -209,10 +210,10 @@ function EventPage({
           )}
         </EventsContainer>
       </div>
-      <div className='px-4 sm:px-8 2xl:px-0 pb-10 max-w-7xl mx-auto mb-40 bg-shadow-element yellow-shadow align-shadow-right'>
+      <div className='bg-shadow-element yellow-shadow align-shadow-right mx-auto mb-40 max-w-7xl px-4 pb-10 sm:px-8 2xl:px-0'>
         <div className='relative z-20'>
-          <h3 className='font-basier mb-10 text-4xl'>Upcoming events</h3>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center'>
+          <h3 className='mb-10 font-basier text-4xl'>Upcoming events</h3>
+          <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
             {recentEvents.map((event: EventType) => (
               <EventPost key={event.id} {...event} />
             ))}

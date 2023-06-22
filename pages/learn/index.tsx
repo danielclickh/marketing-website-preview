@@ -104,7 +104,8 @@ export const getStaticProps: GetStaticProps<LearnProps> =
         seo: {
           title: 'How to Use ClickHouse | Database Tutorial | ClickHouse',
           description:
-            'Master the art of data analysis with ClickHouse. Our seamless, easy to use database management platform can help you to unlock powerful insights. Try for free.'
+            'Master the art of data analysis with ClickHouse. Our seamless, easy to use database management platform can help you to unlock powerful insights. Try for free.',
+          path: '/learn'
         },
         ...commonProps
       }

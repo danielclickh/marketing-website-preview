@@ -25,7 +25,8 @@ export const getStaticProps: GetStaticProps<ServiceProps> =
         seo: {
           title: response.card.title,
           type: 'website',
-          siteName: 'ClickHouse'
+          siteName: 'ClickHouse',
+          path: '/service-unavailable-country'
         }
       }
     }

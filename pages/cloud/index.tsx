@@ -42,7 +42,7 @@ export const getStaticProps: GetStaticProps<CloudData> =
       ]
     }
     const data = await findOne('cloud', params)
-
+    data.seo.path = '/cloud'
     const commonProps = await getCommonProps()
     return {
       props: {

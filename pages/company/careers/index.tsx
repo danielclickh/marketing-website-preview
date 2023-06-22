@@ -77,6 +77,7 @@ export const getStaticProps: GetStaticProps<CareersData> =
       populate: ['seo', 'seo.image']
     })
     const commonProps = await getCommonProps()
+    data.seo.path = '/company/careers'
     return {
       props: {
         ...data,
@@ -95,14 +96,14 @@ export default function CareersPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-10'>
         <div className='relative pt-10'>
-          <div className='bg-primary-300 absolute inset-0 transform -skew-y-2 lg:max-h-96 max-w-7xl rounded-md mx-auto'></div>
+          <div className='absolute inset-0 mx-auto max-w-7xl -skew-y-2 transform rounded-md bg-primary-300 lg:max-h-96'></div>
           <div className='relative z-10'>
-            <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
-              <div className='flex flex-col text-center mx-auto flip-selection'>
-                <h1 className='text-4xl leading-tight mb-4 font-basier text-neutral-800 md:text-5.5xl font-semibold'>
+            <div className='container mx-auto flex flex-col px-8 2xl:px-0'>
+              <div className='flip-selection mx-auto flex flex-col text-center'>
+                <h1 className='mb-4 font-basier text-4xl font-semibold leading-tight text-neutral-800 md:text-5.5xl'>
                   Become part of our team
                 </h1>
-                <p className='text-neutral-800 max-w-3xl'>
+                <p className='max-w-3xl text-neutral-800'>
                   We are a globally diverse and distributed team, united behind
                   a common goal of creating industry-leading, real-time
                   analytics. Here, you will have an opportunity to solve some of
@@ -113,7 +114,7 @@ export default function CareersPage({
               </div>
             </div>
           </div>
-          <div className='bg-center bg-cover w-full max-w-full h-72 my-10 overflow-y-hidden'>
+          <div className='my-10 h-72 w-full max-w-full overflow-y-hidden bg-cover bg-center'>
             <CompanyImages>
               {careerImgs.map((image) => (
                 <Image
@@ -122,30 +123,30 @@ export default function CareersPage({
                   height='300'
                   alt={image.alt}
                   key={image.id}
-                  className='px-1 object-cover object-center'></Image>
+                  className='object-cover object-center px-1'></Image>
               ))}
             </CompanyImages>
           </div>
         </div>
-        <div className='w-full pt-16 px-8'>
-          <div className='flex flex-col md:flex-row container mx-auto max-w-7xl md:space-x-16 mb-6'>
+        <div className='w-full px-8 pt-16'>
+          <div className='container mx-auto mb-6 flex max-w-7xl flex-col md:flex-row md:space-x-16'>
             <div className='flex flex-col md:w-4/5'>
-              <h2 className='font-basier mb-6 text-4xl text-neutral-100'>
+              <h2 className='mb-6 font-basier text-4xl text-neutral-100'>
                 Our values
               </h2>
             </div>
           </div>
-          <div className='max-w-7xl mx-auto'>
-            <div className='grid lg:grid-cols-3 gap-x-20 gap-y-10'>
+          <div className='mx-auto max-w-7xl'>
+            <div className='grid gap-x-20 gap-y-10 lg:grid-cols-3'>
               {values.map((value) => (
                 <div className='col' key={value.id}>
                   <div className='flex items-start gap-4'>
                     <Image src={value.icon} width={32} height={32} alt='Icon' />{' '}
                     <div>
-                      <h4 className='font-bold mb-3 font-inter'>
+                      <h4 className='mb-3 font-inter font-bold'>
                         {value.title}
                       </h4>
-                      <p className='font-light font-inter leading-relaxed text-sm text-neutral-200'>
+                      <p className='font-inter text-sm font-light leading-relaxed text-neutral-200'>
                         {value.content}
                       </p>
                     </div>
@@ -156,10 +157,10 @@ export default function CareersPage({
           </div>
         </div>
       </div>
-      <div className='w-full border-t border-neutral-725 max-w-screen-md px-7 mx-auto my-16'></div>
+      <div className='mx-auto my-16 w-full max-w-screen-md border-t border-neutral-725 px-7'></div>
       <div className='w-full px-8'>
-        <div className='flex flex-col bg-shadow-element yellow-shadow max-w-7xl mx-auto'>
-          <h2 className='text-3xl font-semibold font-inter mb-6'>
+        <div className='bg-shadow-element yellow-shadow mx-auto flex max-w-7xl flex-col'>
+          <h2 className='mb-6 font-inter text-3xl font-semibold'>
             Job openings
           </h2>
           <CareersFilter />

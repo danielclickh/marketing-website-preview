@@ -11,7 +11,8 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title: '404 | ClickHouse'
+          title: '404 | ClickHouse',
+          path: '/404'
         },
         ...commonProps
       }
@@ -24,13 +25,13 @@ export default function NotFoundPage({
 }: CommonProps) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='grid items-center h-screen overflow-hidden'>
-        <div className='bg-neutral-900 flex flex-col px-8 py-10 md:flex-row md:px-10 md:border md:border-c4/10 mx-auto max-w-screen-sm divide-y-2 md:divide-x-2 md:divide-y-0'>
+      <div className='grid h-screen items-center overflow-hidden'>
+        <div className='mx-auto flex max-w-screen-sm flex-col divide-y-2 bg-neutral-900 px-8 py-10 md:flex-row md:divide-x-2 md:divide-y-0 md:border md:border-c4/10 md:px-10'>
           <div className='flex flex-col items-start pb-10 md:pb-0'>
-            <p className='text-2xl text-neutral-100 text-left text-bold mb-4'>
+            <p className='text-bold mb-4 text-left text-2xl text-neutral-100'>
               Oops! We can&apos;t find this page...
             </p>
-            <p className='text-neutral-200 mb-8 text-left'>
+            <p className='mb-8 text-left text-neutral-200'>
               The page you&apos;re looking for doesn&apos;t appear to exist or
               has been moved.
             </p>
@@ -45,7 +46,7 @@ export default function NotFoundPage({
               </SuiButton>
             </div>
           </div>
-          <div className='flex flex-col gap-2 items-start justify-center md:pl-8 pt-10 md:pt-0'>
+          <div className='flex flex-col items-start justify-center gap-2 pt-10 md:pl-8 md:pt-0'>
             <SuiLink
               href='https://docs.clickhouse.com'
               className='hover:text-c6'>

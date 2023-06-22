@@ -43,7 +43,8 @@ export const getStaticProps: GetStaticProps<ContactProps> =
         seo: {
           title: 'Dedicated Services - ClickHouse',
           description:
-            'Thank you for your interest in our Dedicated Service; please submit the below information to the best of your ability so we can help.'
+            'Thank you for your interest in our Dedicated Service; please submit the below information to the best of your ability so we can help.',
+          path: '/pricing/contact'
         },
         ...commonProps
       }
