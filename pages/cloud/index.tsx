@@ -202,7 +202,7 @@ export default function CloudPage({
                       alt={item.title}
                       width={item.image_width}
                       height={item.image_height}
-                      className='w-full md:h-fit'
+                      className=''
                     />
                   </div>
                 </div>
