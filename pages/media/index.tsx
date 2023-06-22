@@ -18,7 +18,8 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title: 'Media Kit'
+          title: 'Media Kit',
+          path: '/media'
         },
         ...commonProps
       }

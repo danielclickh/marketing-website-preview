@@ -21,7 +21,6 @@ import ColumnOrientedIllustration from '../components/ColumnOrientedIllustration
 import SpeedAnimationSvg from '../components/SpeedAnimation'
 import SpeedAnimationMobileSvg from '../components/SpeedAnimation/Mobile'
 
-import { StrapiImage } from '../components/StrapiElements'
 import Link from 'next/link'
 import LogoCarousel from '../components/LogoCarousel'
 
@@ -87,7 +86,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
 
     const commonProps = await getCommonProps()
     const data = await findOne('homepage', params)
-
+    data.seo.path = '/'
     return {
       props: {
         ...data,

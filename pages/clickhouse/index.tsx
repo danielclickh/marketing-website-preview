@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps<ClickhouseData> =
       ]
     }
     const data = await findOne('click-house', params)
-
+    data.seo.path = '/clickhouse'
     const commonProps = await getCommonProps()
     return {
       props: {
@@ -53,12 +53,12 @@ export default function ClickHouseServerPage({
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
-        <div className='lg:bg-speed-lines bg-center bg-no-repeat bg-contain'>
-          <div className='pt-10 relative bg-grid overflow-x-hidden'>
-            <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 px-4 md:pb-24 md:px-8 2xl:px-0 lg:min-h-[630px]'>
+        <div className='bg-contain bg-center bg-no-repeat lg:bg-speed-lines'>
+          <div className='relative overflow-x-hidden bg-grid pt-10'>
+            <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>
               <div className='flex'>
-                <div className='md:w-7/12 md:mt-16 flex-col text-center md:text-left'>
-                  <h1 className='font-basier text-4xl mb-6 md:text-5.5xl leading-tight font-semibold'>
+                <div className='flex-col text-center md:mt-16 md:w-7/12 md:text-left'>
+                  <h1 className='mb-6 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
                     The{' '}
                     <span className='tilted tilted-yellow'>
                       <span className='tilted-content'>fastest</span>
@@ -71,7 +71,7 @@ export default function ClickHouseServerPage({
                     className='mt-6 md:pr-16'>
                     {description}
                   </SuiText>
-                  <div className='flex flex-col sm:flex-row mt-8 justify-center md:justify-start gap-4'>
+                  <div className='mt-8 flex flex-col justify-center gap-4 sm:flex-row md:justify-start'>
                     {mainButton && (
                       <CUIButton
                         type='primary'
@@ -126,13 +126,13 @@ export default function ClickHouseServerPage({
                   </div>
                 </div>
 
-                <div className='hidden mx-auto md:w-4/12 md:flex mt-4'>
+                <div className='mx-auto mt-4 hidden md:flex md:w-4/12'>
                   <Image
                     src='/images/clickhouse/oss_hero_image.png'
                     alt='Open source ClickHouse'
                     width={1294}
                     height={812}
-                    className='w-full h-auto min-w-[54rem]'
+                    className='h-auto w-full min-w-[54rem]'
                   />
                 </div>
               </div>
@@ -140,8 +140,8 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <div className='text-neutral-0 bg-neutral-725'>
-          <div className='flex container mx-auto flex-col max-w-7xl pb-16 px-4 sm:px-8 md:px-8 2xl:px-0  pt-16'>
+        <div className='bg-neutral-725 text-neutral-0'>
+          <div className='container mx-auto flex max-w-7xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8  2xl:px-0'>
             <div className='feature-container'>
               {features.map((feature) => (
                 <div className='col' key={feature.id}>
@@ -153,10 +153,10 @@ export default function ClickHouseServerPage({
                       alt={feature.title}
                     />
                     <div>
-                      <h4 className='font-bold mb-3 font-inter'>
+                      <h4 className='mb-3 font-inter font-bold'>
                         {feature.title}
                       </h4>
-                      <p className='font-light font-inter leading-relaxed text-sm text-neutral-200'>
+                      <p className='font-inter text-sm font-light leading-relaxed text-neutral-200'>
                         {feature.content}
                       </p>
                     </div>
@@ -167,9 +167,9 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <div className='mx-auto relative flex flex-col gap-y-28 mt-12 md:mt-24 md:px-0 '>
-          <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element-left red-shadow'>
-            <div className='flex flex-col items-center w-full'>
+        <div className='relative mx-auto mt-12 flex flex-col gap-y-28 md:mt-24 md:px-0 '>
+          <div className='section-container bg-shadow-element-left red-shadow flex w-full flex-col items-center justify-between self-center'>
+            <div className='flex w-full flex-col items-center'>
               <Image
                 src='/images/clickhouse/section_efficient.svg'
                 alt='ClickHouse efficiency'
@@ -179,7 +179,7 @@ export default function ClickHouseServerPage({
               <SuiTitle type='h2' className='mt-8 mb-6'>
                 Hardware efficient
               </SuiTitle>
-              <div className='text-neutral-200 max-w-2xl leading-normal text-center mx-auto md:pb-16'>
+              <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200 md:pb-16'>
                 ClickHouse processes analytical queries 100-1000x faster than
                 traditional row-oriented systems with the same available I/O
                 throughput and CPU capacity. Columnar storage format allows
@@ -187,21 +187,21 @@ export default function ClickHouseServerPage({
                 times.
               </div>
 
-              <div className='grid grid-cols-1 md:grid-cols-3 gap-10 px-4 md:px-0 mx-auto mt-10 md:mt-0 content-baseline'>
+              <div className='mx-auto mt-10 grid grid-cols-1 content-baseline gap-10 px-4 md:mt-0 md:grid-cols-3 md:px-0'>
                 <CUICard
                   title='Strives for CPU efficiency'
                   className='py-6 px-4'>
                   <p className='font-inconsolata text-primary-300'>
                     Vectorization
                   </p>
-                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2 xl:px-4'>
+                  <h3 className='mb-6 px-2 text-center font-basier text-2xl font-semibold leading-tight md:text-2xl xl:px-4'>
                     Maximizes CPU efficiency
                   </h3>
 
                   <SuiText
                     size='sm'
                     color='secondary'
-                    className='text-center px-0 xl:px-4'>
+                    className='px-0 text-center xl:px-4'>
                     Vectorized query execution leverages SIMD processor
                     instructions and runtime code generation. Processing data in
                     columns increases CPU cache line hit rate.
@@ -212,14 +212,14 @@ export default function ClickHouseServerPage({
                   title='Strives for CPU efficiency'
                   className='py-6 px-4'>
                   <p className='font-inconsolata text-primary-300'>Locality</p>
-                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2 xl:px-4'>
+                  <h3 className='mb-6 px-2 text-center font-basier text-2xl font-semibold leading-tight md:text-2xl xl:px-4'>
                     Optimizes disk access
                   </h3>
 
                   <SuiText
                     size='sm'
                     color='secondary'
-                    className='text-center px-0 xl:px-4'>
+                    className='px-0 text-center xl:px-4'>
                     ClickHouse minimizes the number of seeks for range queries
                     to increase efficiency of using disk drives and maintain
                     locality of reference for continually stored data.
@@ -232,14 +232,14 @@ export default function ClickHouseServerPage({
                   <p className='font-inconsolata text-primary-300'>
                     Throughput
                   </p>
-                  <h3 className='font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold text-center px-2 xl:px-4'>
+                  <h3 className='mb-6 px-2 text-center font-basier text-2xl font-semibold leading-tight md:text-2xl xl:px-4'>
                     Minimizes data transfers
                   </h3>
 
                   <SuiText
                     size='sm'
                     color='secondary'
-                    className='text-center px-0 xl:px-4'>
+                    className='px-0 text-center xl:px-4'>
                     ClickHouse enables companies to manage their data and create
                     reports without using specialized networks that are aimed at
                     high-performance computing.
@@ -252,11 +252,11 @@ export default function ClickHouseServerPage({
 
         <HRSeparator className='my-12 md:my-24' />
 
-        <div className='relative flex flex-col gap-y-28 md:mt-24 mx-auto'>
-          <div className='flex flex-col items-center justify-between self-center section-container mx-auto bg-shadow-element-left red-shadow px-4 md:px-8 2xl:px-0 '>
+        <div className='relative mx-auto flex flex-col gap-y-28 md:mt-24'>
+          <div className='section-container bg-shadow-element-left red-shadow mx-auto flex flex-col items-center justify-between self-center px-4 md:px-8 2xl:px-0 '>
             <CUICard className='p-8'>
               <div className='flex w-full justify-between'>
-                <h3 className='w-full text-center md:text-left font-basier text-2xl mb-6 md:text-2xl leading-tight font-semibold'>
+                <h3 className='mb-6 w-full text-center font-basier text-2xl font-semibold leading-tight md:text-left md:text-2xl'>
                   From your laptop to petabyte scale
                 </h3>
                 <Image
@@ -268,7 +268,7 @@ export default function ClickHouseServerPage({
                 />
               </div>
 
-              <div className='flex flex-col md:flex-row gap-8'>
+              <div className='flex flex-col gap-8 md:flex-row'>
                 <div className='w-full text-center md:text-left lg:w-9/12'>
                   <SuiText size='sm' color='secondary'>
                     ClickHouse scales well both vertically and horizontally. It
@@ -292,8 +292,8 @@ export default function ClickHouseServerPage({
 
         <HRSeparator className='my-12 md:my-24' />
 
-        <div className='flex flex-col items-center justify-between self-center section-container w-full bg-shadow-element-left red-shadow pb-16 px-4 md:px-8 2xl:px-0'>
-          <div className='flex flex-col items-center w-full'>
+        <div className='section-container bg-shadow-element-left red-shadow flex w-full flex-col items-center justify-between self-center px-4 pb-16 md:px-8 2xl:px-0'>
+          <div className='flex w-full flex-col items-center'>
             <Image
               src='/images/clickhouse/section_scale.svg'
               alt='ClickHouse at scale'
@@ -303,13 +303,13 @@ export default function ClickHouseServerPage({
             <SuiTitle type='h2' className='mt-8 mb-6'>
               {features5.second_title}
             </SuiTitle>
-            <div className='text-neutral-200 max-w-2xl leading-normal text-center mx-auto md:pb-10'>
+            <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200 md:pb-10'>
               ClickHouse is used in a variety of industries for a broad set of
               use cases on top of both customer-facing and internally-facing
               workloads.
             </div>
 
-            <div className='flex flex-col md:flex-row md:max-w-4xl md:mx-auto pt-12 md:pt-6 flex-wrap'>
+            <div className='flex flex-col flex-wrap pt-12 md:mx-auto md:max-w-4xl md:flex-row md:pt-6'>
               {features5.items.map((feature) => (
                 <BulletPoint
                   key={feature.text}

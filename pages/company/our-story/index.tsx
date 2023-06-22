@@ -34,7 +34,7 @@ export const getStaticProps: GetStaticProps<OurStoryData> =
       ]
     }
     const data = await findOne('our-story', params)
-
+    data.seo.path = '/company/our-story'
     const commonProps = await getCommonProps()
     return {
       props: {
@@ -55,11 +55,11 @@ export default function OurStoryPage({
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
-        <div className='pt-10 relative'>
+        <div className='relative pt-10'>
           <div className='pt-10'>
-            <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
-              <div className='flex flex-col text-center mx-auto'>
-                <h1 className='text-4xl leading-tight mb-4 font-basier md:text-5.5xl font-semibold  text-neutral-100'>
+            <div className='container mx-auto flex flex-col px-8 2xl:px-0'>
+              <div className='mx-auto flex flex-col text-center'>
+                <h1 className='mb-4 font-basier text-4xl font-semibold leading-tight text-neutral-100  md:text-5.5xl'>
                   Who we are
                 </h1>
                 <p className='max-w-3xl text-neutral-200'>
@@ -78,8 +78,8 @@ export default function OurStoryPage({
           </div>
 
           <div>
-            <div className='pt-10 relative'>
-              <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pb-16 px-4  md:px-8 2xl:px-0'>
+            <div className='relative pt-10'>
+              <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat  md:px-8 2xl:px-0'>
                 <div className='flex'>
                   <Image
                     src='/images/team-who-we-are.png'
@@ -94,8 +94,8 @@ export default function OurStoryPage({
           </div>
         </div>
 
-        <div className='flex flex-col lg:flex-row-reverse section-container mx-auto max-w-7xl gap-16 my-32 items-start'>
-          <div className='flex flex-col w-full lg:w-1/2'>
+        <div className='section-container mx-auto my-32 flex max-w-7xl flex-col items-start gap-16 lg:flex-row-reverse'>
+          <div className='flex w-full flex-col lg:w-1/2'>
             <Image
               src='/images/our-story/map-wrap.png'
               height={488}
@@ -103,7 +103,7 @@ export default function OurStoryPage({
               alt='ClickHouse around the world'
             />
           </div>
-          <div className='flex flex-col w-full lg:w-1/2'>
+          <div className='flex w-full flex-col lg:w-1/2'>
             <SuiTitle
               type='h2'
               weight='semibold'
@@ -120,8 +120,8 @@ While we’re in different places, we all have the same goals, and we trust each
             </div>
           </div>
         </div>
-        <div className='flex flex-col lg:flex-row section-container mx-auto max-w-7xl gap-16 mb-12 items-center'>
-          <div className='flex flex-col w-full lg:w-1/2'>
+        <div className='section-container mx-auto mb-12 flex max-w-7xl flex-col items-center gap-16 lg:flex-row'>
+          <div className='flex w-full flex-col lg:w-1/2'>
             <Image
               src='/images/our-story/founders.png'
               alt='Founders'
@@ -130,7 +130,7 @@ While we’re in different places, we all have the same goals, and we trust each
               className='w-full'
             />
           </div>
-          <div className='flex flex-col w-full lg:w-1/2'>
+          <div className='flex w-full flex-col lg:w-1/2'>
             <SuiTitle
               type='h2'
               weight='semibold'
@@ -138,14 +138,14 @@ While we’re in different places, we all have the same goals, and we trust each
               Our history
             </SuiTitle>
             <div className='max-w-5xl'>
-              <div className='whitespace-pre-wrap text-neutral-200 flex flex-col'>
+              <div className='flex flex-col whitespace-pre-wrap text-neutral-200'>
                 {ourHistory.items.map((item) => (
                   <div className={styles.historyItem} key={item.text}>
                     <div className='flex'>
-                      <div className='font-bold text-primary-300 rounded-full text-center items-center justify-center flex'>
+                      <div className='flex items-center justify-center rounded-full text-center font-bold text-primary-300'>
                         <SuiTitle
                           type='h5'
-                          className='!text-base min-w-[3rem]'
+                          className='min-w-[3rem] !text-base'
                           weight='medium'>
                           {item.year}
                         </SuiTitle>
@@ -159,8 +159,8 @@ While we’re in different places, we all have the same goals, and we trust each
           </div>
         </div>
 
-        <div className='w-full pt-16 pb-24 bg-neutral-725'>
-          <div className='flex container mx-auto flex-col section-container'>
+        <div className='w-full bg-neutral-725 pt-16 pb-24'>
+          <div className='section-container container mx-auto flex flex-col'>
             <SuiTitle
               type='h2'
               weight='bold'
@@ -168,14 +168,14 @@ While we’re in different places, we all have the same goals, and we trust each
               {team.foundersTitle}
             </SuiTitle>
 
-            <div className='flex flex-col gap-2 items-center sm:flex-row sm:items-start space-y-8 sm:space-y-0 justify-evenly'>
+            <div className='flex flex-col items-center justify-evenly gap-2 space-y-8 sm:flex-row sm:items-start sm:space-y-0'>
               {founders.map((founder) => (
                 <Person
                   key={founder.name + founder.role}
                   avatar={founder.imgSrc}
                   name={founder.name}
                   job={founder.role}
-                  className='!max-w-[232px] mx-auto'
+                  className='mx-auto !max-w-[232px]'
                   personType='founder'
                 />
               ))}
@@ -183,7 +183,7 @@ While we’re in different places, we all have the same goals, and we trust each
           </div>
         </div>
         <div className='w-full pt-16 pb-24'>
-          <div className='flex container mx-auto flex-col section-container'>
+          <div className='section-container container mx-auto flex flex-col'>
             <SuiTitle
               type='h2'
               weight='bold'
@@ -191,7 +191,7 @@ While we’re in different places, we all have the same goals, and we trust each
               Our investors
             </SuiTitle>
 
-            <div className='grid grid-cols-1 min-[340px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 flex-wrap justify-evenly gap-2 investor'>
+            <div className='investor grid grid-cols-1 flex-wrap justify-evenly gap-2 min-[340px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-6'>
               {investors.map((investor) => (
                 <Person
                   small
@@ -202,22 +202,22 @@ While we’re in different places, we all have the same goals, and we trust each
               ))}
             </div>
 
-            <div className='flex flex-wrap gap-x-20 gap-y-16 justify-evenly pt-12 '>
+            <div className='flex flex-wrap justify-evenly gap-x-20 gap-y-16 pt-12 '>
               {team.darkInvestorLogosPng.map((image, index) => (
                 <StrapiImage
                   key={`investors-${index}`}
                   {...image}
                   sizes='small'
-                  className='h-10 w-auto mx-auto object-contain max-w-[min(250px,100%)]'
+                  className='mx-auto h-10 w-auto max-w-[min(250px,100%)] object-contain'
                 />
               ))}
             </div>
           </div>
         </div>
-        <div className='pb-16 section-container'>
-          <div className='bg-primary-300 text-neutral-0 w-full rounded-lg flip-selection py-16'>
-            <div className='flex container mx-auto flex-col 2xl:px-0'>
-              <div className='flex flex-col text-center mx-auto'>
+        <div className='section-container pb-16'>
+          <div className='flip-selection w-full rounded-lg bg-primary-300 py-16 text-neutral-0'>
+            <div className='container mx-auto flex flex-col 2xl:px-0'>
+              <div className='mx-auto flex flex-col text-center'>
                 <SuiTitle type='h2' color='text-default' className='mb-6 '>
                   Interested in joining our team?
                 </SuiTitle>
@@ -232,13 +232,13 @@ While we’re in different places, we all have the same goals, and we trust each
                   {hiring.ctaButton && (
                     <CUIButton
                       type='primary-dark'
-                      className='w-auto mx-auto flex group mt-6'
+                      className='group mx-auto mt-6 flex w-auto'
                       href='/company/careers'
                       size='lg'
                       iconRight={
                         <ChevronRightIcon
                           height='18'
-                          className='group-hover:translate-x-1/2 pt-0.5 transition'
+                          className='pt-0.5 transition group-hover:translate-x-1/2'
                         />
                       }>
                       View careers

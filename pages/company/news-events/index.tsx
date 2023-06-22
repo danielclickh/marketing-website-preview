@@ -61,6 +61,9 @@ export const getStaticProps: GetStaticProps<NewsEventProps> =
       },
       { data: allEvents }
     ] = await Promise.all([newsEvents, events])
+
+    seo.path = '/company/news-events'
+
     let featuredEvent: EventType | undefined
     let featuredEventIndex = allEvents.findIndex((e) => e.featured)
     if (featuredEventIndex !== undefined) {
@@ -133,20 +136,20 @@ export default function News({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div>
-        <h1 className='pt-10 lg:pt-20 mb-10 lg:mb-16 mx-auto text-center font-basier text-4xl md:text-5.5xl text-neutral-100'>
+        <h1 className='mx-auto mb-10 pt-10 text-center font-basier text-4xl text-neutral-100 md:text-5.5xl lg:mb-16 lg:pt-20'>
           {title}
         </h1>
-        <div className='flex mx-auto flex-col px-4 sm:px-8 2xl:px-0'>
+        <div className='mx-auto flex flex-col px-4 sm:px-8 2xl:px-0'>
           {featuredEvent && (
             <div>
               <CUILink
                 href={`/company/events/${featuredEvent.slug}`}
-                className='mt-2 flex flex-col md:flex-row mb-16 group gap-10 section-container hover:no-underline'>
-                <div className='flex flex-col lg:flex-row-reverse rounded-xl gap-8 lg:gap-12 xl:gap-24'>
+                className='section-container group mt-2 mb-16 flex flex-col gap-10 hover:no-underline md:flex-row'>
+                <div className='flex flex-col gap-8 rounded-xl lg:flex-row-reverse lg:gap-12 xl:gap-24'>
                   {featuredEvent.thumbnailPng && (
                     <StrapiImage
                       {...featuredEvent.thumbnailPng}
-                      className='w-full lg:w-1/2 rounded-lg object-cover h-fit'
+                      className='h-fit w-full rounded-lg object-cover lg:w-1/2'
                     />
                   )}
                   <div className='grid w-full border-l-8 border-primary-300 pl-6'>
@@ -155,13 +158,13 @@ export default function News({
                         <SuiTitle type='h2' className='text-neutral-100'>
                           {featuredEvent.title}
                         </SuiTitle>
-                        <div className='mt-8 text-neutral-200 font-normal mb-8'>
+                        <div className='mt-8 mb-8 font-normal text-neutral-200'>
                           {featuredEvent.shortDescription}
                         </div>
 
                         {featuredEvent.category !== 'On-Demand Webinar' ? (
-                          <div className='flex items-center space-x-3 mb-4'>
-                            <CalendarIcon className='w-6 h-6 text-neutral-200 stroke-1' />
+                          <div className='mb-4 flex items-center space-x-3'>
+                            <CalendarIcon className='h-6 w-6 stroke-1 text-neutral-200' />
                             <div className=' text-neutral-200'>
                               {featuredEvent.localDatetime && (
                                 <div className='text-sm text-neutral-300'>
@@ -182,7 +185,7 @@ export default function News({
                             viewBox='0 0 24 24'
                             strokeWidth={1}
                             stroke='currentColor'
-                            className='w-6 h-6 text-neutral-200'>
+                            className='h-6 w-6 text-neutral-200'>
                             <path
                               strokeLinecap='round'
                               strokeLinejoin='round'
@@ -207,8 +210,8 @@ export default function News({
                         </div>
                       </div>
                       <div className='mt-8'>
-                        <div className='mt-4 md:mt-0 rounded py-2 px-6 font-semibold inline-block bg-primary-300 hover:bg-primary-400 group-hover:bg-primary-400 transition'>
-                          <span className='flex justify-center items-center gap-2 text-black text-base'>
+                        <div className='mt-4 inline-block rounded bg-primary-300 py-2 px-6 font-semibold transition hover:bg-primary-400 group-hover:bg-primary-400 md:mt-0'>
+                          <span className='flex items-center justify-center gap-2 text-base text-black'>
                             Register
                           </span>
                         </div>
@@ -222,12 +225,12 @@ export default function News({
         </div>
       </div>
 
-      <div className='max-w-7xl mx-auto px-4 sm:px-8 2xl:px-0'>
-        <h2 className='text-4xl font-semibold font-basier text-neutral-100 mb-10'>
+      <div className='mx-auto max-w-7xl px-4 sm:px-8 2xl:px-0'>
+        <h2 className='mb-10 font-basier text-4xl font-semibold text-neutral-100'>
           {upcomingEventsTitle}
         </h2>
         <div>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center'>
+          <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
             {allEvents.map((event: EventType) => (
               <EventPost key={event.id} {...event} />
             ))}
@@ -235,15 +238,15 @@ export default function News({
         </div>
       </div>
 
-      <div className='pb-8 bg-shadow-element'>
+      <div className='bg-shadow-element pb-8'>
         <RecentEvents events={recentEvents} />
       </div>
 
-      <div className='max-w-7xl mx-auto px-4 sm:px-8 2xl:px-0'>
-        <h2 className='text-4xl font-semibold font-basier mb-6 text-neutral-100'>
+      <div className='mx-auto max-w-7xl px-4 sm:px-8 2xl:px-0'>
+        <h2 className='mb-6 font-basier text-4xl font-semibold text-neutral-100'>
           {latestNewsTitle}
         </h2>
-        <div className='grid md:grid-cols-2 gap-12 '>
+        <div className='grid gap-12 md:grid-cols-2 '>
           {newsItems.map((newsItem) => (
             <NewsItem
               key={newsItem.headline}
@@ -256,11 +259,11 @@ export default function News({
           ))}
         </div>
       </div>
-      <div className='max-w-7xl mx-auto my-24 px-4 sm:px-8 2xl:px-0'>
-        <h2 className='text-4xl font-semibold font-basier mb-6 text-neutral-100'>
+      <div className='mx-auto my-24 max-w-7xl px-4 sm:px-8 2xl:px-0'>
+        <h2 className='mb-6 font-basier text-4xl font-semibold text-neutral-100'>
           {pressReleasesTitle}
         </h2>
-        <div className='grid md:grid-cols-2 gap-12'>
+        <div className='grid gap-12 md:grid-cols-2'>
           {pressReleases.map((pressRelease) => (
             <NewsItem
               key={pressRelease.headline}

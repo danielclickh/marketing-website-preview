@@ -54,4 +54,5 @@ export interface SeoMetadata {
   imageUrl?: string
   type?: string
   siteName?: string
+  path: string
 }

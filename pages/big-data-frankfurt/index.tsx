@@ -24,7 +24,8 @@ export const getStaticProps: GetStaticProps<ContactProps> =
         seo: {
           title: 'Big Data & AI World - Frankfurt - Contact Us',
           description:
-            'We are delighted to be at the Big Data & AI World Frankfurt to meet with ClickHouse users in the area. If you want to setup a dedicated time to share your story, get architecture advice, or learn more about ClickHouse in a dedicated conversation fill in the form and one of our team will be in touch.'
+            'We are delighted to be at the Big Data & AI World Frankfurt to meet with ClickHouse users in the area. If you want to setup a dedicated time to share your story, get architecture advice, or learn more about ClickHouse in a dedicated conversation fill in the form and one of our team will be in touch.',
+          path: '/big-data-frankfurt'
         },
         ...commonProps
       }

@@ -46,7 +46,8 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title: 'AWS | ClickHouse'
+          title: 'AWS | ClickHouse',
+          path: '/partners/aws'
         },
         ...commonProps
       }
@@ -57,27 +58,27 @@ function PartnersPage({ seo, headerData, footerData }: CommonProps) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-20 md:pt-30'>
-        <div className='min-h-screen pb-10 md:pb-20 mx-10 '>
-          <div className='flex flex-col md:flex-row-reverse w-full mx-auto gap-20 mb-20 md:mb-36 justify-center items-center'>
+        <div className='mx-10 min-h-screen pb-10 md:pb-20 '>
+          <div className='mx-auto mb-20 flex w-full flex-col items-center justify-center gap-20 md:mb-36 md:flex-row-reverse'>
             <Image
               src='/images/aws-partner.svg'
               width='240'
               height='240'
               alt='aws partner'
             />
-            <div className='flex flex-col items-center max-w-screen-md md:items-start'>
+            <div className='flex max-w-screen-md flex-col items-center md:items-start'>
               <SuiTitle
                 type='h1'
                 color='primary'
                 weight='bold'
-                className='md:!text-6xl pb-6'>
+                className='pb-6 md:!text-6xl'>
                 ClickHouse Cloud on AWS
               </SuiTitle>
               <SuiText
                 size='base'
                 weight='medium'
                 color='secondary'
-                className='max-w-3xl pb-10 whitespace-pre-wrap'>
+                className='max-w-3xl whitespace-pre-wrap pb-10'>
                 {description}
               </SuiText>
               <SuiButton
@@ -90,7 +91,7 @@ function PartnersPage({ seo, headerData, footerData }: CommonProps) {
             </div>
           </div>
 
-          <div className='flex flex-col md:flex-row container mx-auto justify-evenly max-w-7xl px-8 2xl:px-0 mb-16 gap-4'>
+          <div className='container mx-auto mb-16 flex max-w-7xl flex-col justify-evenly gap-4 px-8 md:flex-row 2xl:px-0'>
             {highlights.map((highlight) => (
               <SuiCard
                 key={highlight.title}

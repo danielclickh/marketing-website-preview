@@ -53,7 +53,8 @@ export const getStaticProps: GetStaticProps<RichContentPageProps> =
         seo: {
           title: page.title,
           type: 'website',
-          siteName: 'ClickHouse'
+          siteName: 'ClickHouse',
+          path: `/${slug.join('/')}`
         }
       },
       revalidate: REVALIDATE_SECONDS
@@ -90,11 +91,11 @@ export default function RichContentPage({
         <div className='rich-content-page'>
           <SuiTitle
             type='h1'
-            className='mx-auto container py-16 px-0 flex items-center justify-center font-bold text-center max-w-screen-lg'>
+            className='container mx-auto flex max-w-screen-lg items-center justify-center py-16 px-0 text-center font-bold'>
             {title}
           </SuiTitle>
-          <div className='px-4 pb-16 mb-16'>
-            <div className='mx-auto container max-w-7xl'>
+          <div className='mb-16 px-4 pb-16'>
+            <div className='container mx-auto max-w-7xl'>
               {content && (
                 <Markdown className='rich-text-content show-anchor'>
                   {content}
@@ -105,16 +106,16 @@ export default function RichContentPage({
                 <div
                   className={
                     leftContent && rightContent
-                      ? 'mb-16 flex flex-col items-start justify-center md:grid md:grid-cols-2 gap-x-[5%]'
+                      ? 'mb-16 flex flex-col items-start justify-center gap-x-[5%] md:grid md:grid-cols-2'
                       : 'mb-16'
                   }>
                   {leftContent && (
-                    <Markdown className='w-full rich-text-content show-anchor'>
+                    <Markdown className='rich-text-content show-anchor w-full'>
                       {leftContent}
                     </Markdown>
                   )}
                   {rightContent && (
-                    <Markdown className='w-full rich-text-content show-anchor'>
+                    <Markdown className='rich-text-content show-anchor w-full'>
                       {rightContent}
                     </Markdown>
                   )}
@@ -122,7 +123,7 @@ export default function RichContentPage({
               )}
 
               {fullWidthContent && (
-                <Markdown className='mx-auto my-16 rich-text-content show-anchor'>
+                <Markdown className='rich-text-content show-anchor mx-auto my-16'>
                   {fullWidthContent}
                 </Markdown>
               )}

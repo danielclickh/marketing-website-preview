@@ -6,6 +6,7 @@ import { SnackbarContextProvider } from '../components/sui'
 import { AppProps } from 'next/app'
 import Script from 'next/script'
 import SegmentScript from '../components/SegmentScript'
+import Head from 'next/head'
 
 const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-P52RCTZ'
 
@@ -29,6 +30,11 @@ const inconsolata = Inconsolata({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Head>
+        <base href='/' />
+        <meta content='width=device-width, initial-scale=1' name='viewport' />
+        <link href='favicon.ico' rel='icon' type='image/x-icon' />
+      </Head>
       <main className={`${inter.variable} font-inter ${inconsolata.variable}`}>
         <SnackbarContextProvider>
           <div className='flex min-h-screen flex-col'>

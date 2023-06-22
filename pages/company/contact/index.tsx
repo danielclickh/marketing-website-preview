@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps<ContactProps> =
     })
 
     const commonProps = await getCommonProps()
-
+    data.seo.path = '/company/contact'
     return {
       props: {
         ...data.hero,
@@ -39,18 +39,18 @@ export default function ContactPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-10'>
-        <div className='flex container mx-auto flex-col px-8 2xl:px-0'>
-          <div className='flex flex-col text-center mx-auto pt-6'>
+        <div className='container mx-auto flex flex-col px-8 2xl:px-0'>
+          <div className='mx-auto flex flex-col pt-6 text-center'>
             <SuiTitle type='h1' className='mb-4'>
               {title}
             </SuiTitle>
             <div className='max-w-3xl text-neutral-200'>{description}</div>
           </div>
-          <div className='flex container mx-auto flex-col max-w-7xl md:bg-no-repeat bg-opacity-10 pt-14 pb-8 text-center px-8 2xl:px-0'>
-            <div className='w-full md:max-w-screen-sm self-center text-left space-y-5'>
+          <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pt-14 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
+            <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
               <ContactForm {...contactForm} />
               <div className='flex text-center'>
-                <div className='text-neutral-200 text-sm font-medium'>
+                <div className='text-sm font-medium text-neutral-200'>
                   <Markdown>{contactForm.disclaimer}</Markdown>
                 </div>
               </div>

@@ -52,6 +52,9 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       categories.add(data[index].category)
     }
     const commonProps = await getCommonProps()
+
+    seo.path = '/blog'
+
     return {
       props: {
         featuredBlog: featuredBlog[0],
@@ -79,22 +82,22 @@ export default function BlogsPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <SuiTitle
         type='h1'
-        className='pt-10 lg:pt-20 mb-10 lg:mb-16 mx-auto text-center text-neutral-100'>
+        className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:mb-16 lg:pt-20'>
         {title}
       </SuiTitle>
       <CUILink
         href={`/blog/${featuredBlog.slug}`}
-        className='mt-2 flex flex-col md:flex-row mb-16 gap-10 section-container hover:no-underline'>
-        <div className='flex flex-col lg:flex-row-reverse hover:shadow-card rounded-xl gap-8 lg:gap-12 xl:gap-24'>
+        className='section-container mt-2 mb-16 flex flex-col gap-10 hover:no-underline md:flex-row'>
+        <div className='flex flex-col gap-8 rounded-xl hover:shadow-card lg:flex-row-reverse lg:gap-12 xl:gap-24'>
           {featuredBlog.thumbnailPng && (
             <StrapiImage
               {...featuredBlog.thumbnailPng}
-              className='w-full lg:w-1/2 rounded-lg object-cover h-fit'
+              className='h-fit w-full rounded-lg object-cover lg:w-1/2'
             />
           )}
-          <div className='grid gap-6 w-full border-l-8 border-primary-300 pl-6'>
+          <div className='grid w-full gap-6 border-l-8 border-primary-300 pl-6'>
             <div className='flex flex-col'>
-              <div className='text-primary-300 font-medium font-inconsolata'>
+              <div className='font-inconsolata font-medium text-primary-300'>
                 {featuredBlog.category}
               </div>
               <SuiTitle type='h2' className=' text-neutral-100'>
@@ -106,7 +109,7 @@ export default function BlogsPage({
 
               <div className='flex flex-row items-center space-x-4'>
                 {featuredBlog.author.avatarPng && (
-                  <div className='flex w-11 h-11 aspect-square'>
+                  <div className='flex aspect-square h-11 w-11'>
                     <StrapiImage
                       {...featuredBlog.author.avatarPng}
                       alt={featuredBlog.author.name}
@@ -134,7 +137,7 @@ export default function BlogsPage({
         </div>
       </CUILink>
       <BlogPostList categories={categories}>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center'>
+        <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
           {blogs.map((blog: BlogPostType) => (
             <BlogPost key={blog.id} {...blog} />
           ))}

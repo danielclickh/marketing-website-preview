@@ -66,7 +66,8 @@ export const getStaticProps: GetStaticProps<BlogProps> =
           description: blog.shortDescription,
           type: 'article',
           siteName: 'ClickHouse',
-          image: [blog.thumbnailPng]
+          image: [blog.thumbnailPng],
+          path: `/blog/${slug}`
         },
         newsLetterData,
         ...commonData

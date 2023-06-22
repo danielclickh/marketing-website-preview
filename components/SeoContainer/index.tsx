@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import React from 'react'
 import { SeoMetadata } from '../../lib/api/strapi/types'
+import CanonicalUrl from '../CanonicalUrl'
 
 const siteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL ?? ''
 
@@ -9,7 +10,8 @@ function SeoContainer({
   title = '',
   description = '',
   type,
-  siteName
+  siteName,
+  path
 }: SeoMetadata) {
   const imageUrl = image?.[0]?.url || '/images/social_share.png'
 
@@ -37,6 +39,7 @@ function SeoContainer({
         <meta name='twitter:description' content={description} />
       )}
       <meta name='twitter:image' content={siteUrl + imageUrl} />
+      <CanonicalUrl path={path} />
     </Head>
   )
 }

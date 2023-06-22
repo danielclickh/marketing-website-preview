@@ -79,7 +79,8 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         pressReleases,
         menu,
         seo: {
-          title: 'Site map - ClickHouse'
+          title: 'Site map - ClickHouse',
+          path: '/sitemap'
         },
         ...commonProps
       }
