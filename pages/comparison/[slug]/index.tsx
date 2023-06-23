@@ -300,6 +300,9 @@ export default function ComparisonPage({
                 {content.customContent.length > 0 && (
                   <>
                     {content.customContent?.map((custom, index) => {
+                      if (!custom.href) {
+                        return null
+                      }
                       return (
                         <Link
                           key={index}
