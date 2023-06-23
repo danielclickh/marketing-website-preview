@@ -255,7 +255,7 @@ export default function MonitoramaPage({
                   <div className='flex flex-col items-start justify-center gap-2 px-6 pt-6'>
                     <div className='mb-1 font-inconsolata text-base font-medium text-primary-300'>
                       <Image
-                        src='/images/monitorama/speedLayer.svg'
+                        src='/images/monitorama/speedlayer.svg'
                         width={28}
                         height={28}
                         alt='Speed Layer'
@@ -280,10 +280,10 @@ export default function MonitoramaPage({
                     <div className='flex w-full justify-between'>
                       <div className='h-20'>
                         <Image
-                          src='/images/monitorama/logo-Sentry.svg'
+                          src='/images/monitorama/logo-sentry.svg'
                           width={110}
                           height={32}
-                          alt='Benocs'
+                          alt='Sentry'
                           className='h-full w-full object-contain px-4 py-2 '
                         />
                       </div>
@@ -316,7 +316,7 @@ export default function MonitoramaPage({
                   <div className='flex flex-col items-start justify-center gap-2 px-6 pt-6'>
                     <div className='mb-1 font-inconsolata text-base font-medium text-primary-300'>
                       <Image
-                        src='/images/monitorama/speedLayer.svg'
+                        src='/images/monitorama/eventdriven.svg'
                         width={28}
                         height={28}
                         alt='Speed Layer'
