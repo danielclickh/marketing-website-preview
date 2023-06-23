@@ -39,7 +39,6 @@ export const getStaticProps: GetStaticProps<MonitoramaProps> =
       props: {
         seo: {
           title: 'ClickHouse at Monitorama 2023',
-          path: '/monitorama-2023',
           description:
             'ClickHouse can help you with your observability use cases and real time data analytics.'
         },
@@ -63,6 +62,13 @@ export default function MonitoramaPage({
   const logos2 = customerStories.logos.slice(
     Math.ceil(customerStories.logos.length / 2)
   )
+
+  seo = {
+    title: 'ClickHouse at Monitorama 2023',
+    path: '/monitorama-2023',
+    description:
+      'ClickHouse can help you with your observability use cases and real time data analytics.'
+  }
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
