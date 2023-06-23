@@ -79,7 +79,7 @@ export default function MonitoramaPage({
               <div className='lg:w-2/3'>
                 <div className='items-center'>
                   <div className='lg:max-w-md'>
-                    <h1 className='mb-6 text-center font-basier text-5.5xl font-semibold leading-tight text-neutral-200 lg:text-left'>
+                    <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight text-neutral-200 lg:text-left lg:text-5.5xl'>
                       Thank you for stopping by&nbsp;at
                     </h1>
                   </div>
@@ -87,7 +87,7 @@ export default function MonitoramaPage({
                     <Image
                       src='/images/monitorama-logo.svg'
                       alt='Monitorama Logo'
-                      className='mx-auto lg:mx-0'
+                      className='mx-auto w-1/3 lg:mx-0 lg:w-auto'
                       width={378}
                       height={52}
                     />
@@ -97,7 +97,7 @@ export default function MonitoramaPage({
                   ClickHouse can help you with your observability use cases and
                   real time data analytics.
                 </div>
-                <div className='mb-12 flex gap-6 lg:max-w-md'>
+                <div className='g mb-12 flex flex-col items-center gap-6 lg:max-w-md lg:flex-row'>
                   <div className='w-1/3 rounded-md border border-primary-600 p-2'>
                     <Image
                       src='/images/monitorama/hand-coins-light.svg'
