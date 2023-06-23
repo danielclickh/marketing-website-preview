@@ -304,7 +304,7 @@ export default function MonitoramaPage({
                       </div>
                       <div className='h-20'>
                         <Image
-                          src='/images/monitorama/logo-highlight.svg'
+                          src='/images/monitorama/logo-highlight-2.svg'
                           width={153}
                           height={28}
                           alt='highlight.io'
@@ -366,7 +366,7 @@ export default function MonitoramaPage({
                       </div>
                       <div className='flex h-20 w-1/3 items-center justify-center'>
                         <Image
-                          src='/images/monitorama/logo-uber.svg'
+                          src='/images/monitorama/logo-uber-2.svg'
                           width={153}
                           height={28}
                           alt='Uber'
