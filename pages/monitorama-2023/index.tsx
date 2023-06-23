@@ -210,8 +210,7 @@ export default function MonitoramaPage({
           </div>
         </div>
       </div>
-      <HRSeparator className='my-16 lg:my-24' />
-      <div className='mx-auto mb-28 max-w-4xl px-4 md:px-8 2xl:px-0'>
+      <div className='mx-auto my-28 max-w-4xl px-4 md:px-8 2xl:px-0'>
         <div className='bg-shadow-element yellow-shadow align-shadow-right'></div>
         <Image
           src='/images/monitorama/obs-logo.svg'
@@ -377,7 +376,6 @@ export default function MonitoramaPage({
         </div>
       </div>
 
-      <HRSeparator className='my-16 lg:my-24' />
       <div className='bg-neutral-725 py-24'>
         <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
           <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto flex flex-col items-center'>
@@ -496,8 +494,7 @@ export default function MonitoramaPage({
         </div>
       </div>
 
-      <HRSeparator className='my-16 lg:my-24' />
-      <div className='mx-auto mb-24 max-w-7xl px-4 md:px-8 2xl:px-0'>
+      <div className='mx-auto my-24 max-w-7xl px-4 md:px-8 2xl:px-0'>
         <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
           <div className='mb-6 flex items-center justify-between'>
             <h3 className='text-2xl font-semibold'>Further Reading</h3>
