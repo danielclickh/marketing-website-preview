@@ -542,7 +542,7 @@ export default function MonitoramaPage({
               </CUICard>
             </Link>
             <Link
-              href='/blog/storing-log-data-in-clickhouse-fluent-bit-vector-open-telemetry'
+              href='/blog/storing-traces-and-spans-open-telemetry-in-clickhouse'
               target='_blank'
               className={` hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline`}>
               <CUICard className='h-full'>
