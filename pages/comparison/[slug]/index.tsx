@@ -178,7 +178,7 @@ export default function ComparisonPage({
           </div>
         )}
       </div>
-      {comparison.testimonialsTitle && (
+      {comparison.painpointsTitle && (
         <div className='mx-auto mt-28 max-w-7xl px-4 md:px-8 2xl:px-0'>
           <div className='section-container bg-shadow-element yellow-shadow align-shadow-right container mx-auto flex flex-col items-center'>
             {comparison.painpointsIcon && (
