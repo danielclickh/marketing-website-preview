@@ -12,6 +12,7 @@ import LogoCarousel from '../../components/LogoCarousel'
 import { findOne } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { CommonProps } from '../../types/homepage'
+import Tilt from 'react-parallax-tilt'
 
 interface MonitoramaProps extends CommonProps {
   customerStories: any
@@ -97,7 +98,7 @@ export default function MonitoramaPage({
                   ClickHouse can help you with your observability use cases and
                   real time data analytics.
                 </div>
-                <div className='g mb-12 flex flex-col items-center gap-6 lg:max-w-md lg:flex-row'>
+                <div className='g mb-12 flex items-center gap-6 lg:max-w-md '>
                   <div className='w-1/3 rounded-md border border-primary-600 p-2'>
                     <Image
                       src='/images/monitorama/hand-coins-light.svg'
@@ -113,7 +114,7 @@ export default function MonitoramaPage({
                       cost savings
                     </p>
                   </div>
-                  <div className='w-1/3 rounded-md border border-primary-600 p-2'>
+                  <div className='w-1/3 rounded-md border border-primary-600 px-3 py-2 lg:px-2'>
                     <Image
                       src='/images/monitorama/gauge-light.svg'
                       alt='Gauge'
@@ -396,30 +397,38 @@ export default function MonitoramaPage({
               What do developers say?
             </h2>
             <div className='mx-auto grid gap-10 lg:grid-cols-3'>
-              <CUICard className='p-6'>
-                <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
-                  <div className='rich_content flex flex-col justify-between  text-neutral-200'>
+              <Tilt
+                tiltEnable={false}
+                glareEnable={true}
+                glareMaxOpacity={0.4}
+                glareColor='rgba(251, 255, 70, 0.08)'
+                glarePosition='all'
+                className='h-full'>
+                <div className='cui-card flex h-full flex-col justify-between rounded-lg border border-neutral-700/80 bg-neutral-900/50 p-6 shadow-card hover:shadow-lg'>
+                  <div>
                     <Image
                       src='/images/Quote.svg'
                       width={37}
                       height={28}
                       alt='Quote'
-                      className='mb-4'
+                      className='mb-4 flex-none'
                     />{' '}
-                    <div className=''>
-                      <p className='mb-6'>
-                        Now, our customers can search through months of browser
-                        and server-side log data in under a second thanks to the
-                        tech behind ClickHouse.
-                      </p>
-                      <p className='mb-6'>
-                        <Link
-                          href='https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/'
-                          target='_blank'>
-                          Read more &raquo;
-                        </Link>
-                      </p>
-                    </div>
+                    <p className='mb-6'>
+                      ClickHouse helps us efficiently and reliably analyze logs
+                      across trillions of Internet requests to identify
+                      malicious traffic and provide customers with rich
+                      analytics
+                    </p>
+                  </div>
+                  <div>
+                    <p className='mb-6'>
+                      <Link
+                        className='text-primary-300'
+                        href='https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/'
+                        target='_blank'>
+                        Read more &raquo;
+                      </Link>
+                    </p>
                     <Image
                       src='/uploads/Cloudflare_Logo_1_1_9ea1e1bc38.png'
                       width={103}
@@ -427,65 +436,80 @@ export default function MonitoramaPage({
                       alt='Cloudflare'
                     />
                   </div>
-                </CUICard.Body>
-              </CUICard>
-              <CUICard className='p-6'>
-                <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
-                  <div className='rich_content flex flex-col justify-between  text-neutral-200'>
+                </div>
+              </Tilt>
+              <Tilt
+                tiltEnable={false}
+                glareEnable={true}
+                glareMaxOpacity={0.4}
+                glareColor='rgba(251, 255, 70, 0.08)'
+                glarePosition='all'
+                className='h-full'>
+                <div className='cui-card flex h-full flex-col justify-between rounded-lg border border-neutral-700/80 bg-neutral-900/50 p-6 shadow-card hover:shadow-lg'>
+                  <div>
                     <Image
                       src='/images/Quote.svg'
                       width={37}
                       height={28}
                       alt='Quote'
-                      className='mb-4'
+                      className='mb-4 flex-none'
                     />{' '}
-                    <div>
-                      <p className='mb-6'>
-                        The platform is ingesting millions of logs per second
-                        from thousands of services across regions, storing
-                        several PBs worth, and serving hundreds of queries per
-                        second from both dashboards and programs.
-                      </p>
-                      <p className='mb-6'>
-                        <Link href='/blog/overview-of-highlightio'>
-                          Read more &raquo;
-                        </Link>
-                      </p>
-                    </div>
+                    <p className='mb-6'>
+                      Now, our customers can search through months of browser
+                      and server-side log data in under a second thanks to the
+                      tech behind ClickHouse.
+                    </p>
+                  </div>
+                  <div>
+                    <p className='mb-6'>
+                      <Link
+                        className='text-primary-300'
+                        href='/blog/overview-of-highlightio'
+                        target='_blank'>
+                        Read more &raquo;
+                      </Link>
+                    </p>
                     <Image
                       src='/images/monitorama/logo-highlight.svg'
-                      width={153}
-                      height={28}
-                      alt='highlight.io'
+                      width={103}
+                      height={35}
+                      alt='Highlight'
                     />
                   </div>
-                </CUICard.Body>
-              </CUICard>
-              <CUICard className='p-6'>
-                <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
-                  <div className='rich_content flex flex-col justify-between  text-neutral-200'>
+                </div>
+              </Tilt>
+              <Tilt
+                tiltEnable={false}
+                glareEnable={true}
+                glareMaxOpacity={0.4}
+                glareColor='rgba(251, 255, 70, 0.08)'
+                glarePosition='all'
+                className='h-full'>
+                <div className='cui-card flex h-full flex-col justify-between rounded-lg border border-neutral-700/80 bg-neutral-900/50 p-6 shadow-card hover:shadow-lg'>
+                  <div>
                     <Image
                       src='/images/Quote.svg'
                       width={37}
                       height={28}
                       alt='Quote'
-                      className='mb-4'
-                    />
-                    <div className=''>
-                      <p className='mb-6'>
-                        ClickHouse helps us efficiently and reliably analyze
-                        logs across trillions of Internet requests to identify
-                        malicious traffic and provide customers with rich
-                        analytics.
-                      </p>
-                      <p className='mb-6'>
-                        <Link
-                          href='https://www.uber.com/blog/logging/'
-                          target='_blank'>
-                          Read more &raquo;
-                        </Link>
-                      </p>
-                    </div>
+                      className='mb-4 flex-none'
+                    />{' '}
+                    <p className='mb-6'>
+                      The platform is ingesting millions of logs per second from
+                      thousands of services across regions, storing several PBs
+                      worth, and serving hundreds of queries per second from
+                      both dashboards and programs.
+                    </p>
+                  </div>
+                  <div>
+                    <p className='mb-6'>
+                      <Link
+                        className='text-primary-300'
+                        href='https://www.uber.com/blog/logging/'
+                        target='_blank'>
+                        Read more &raquo;
+                      </Link>
+                    </p>
                     <Image
                       src='/images/monitorama/logo-uber.svg'
                       width={103}
@@ -493,8 +517,8 @@ export default function MonitoramaPage({
                       alt='Cloudflare'
                     />
                   </div>
-                </CUICard.Body>
-              </CUICard>
+                </div>
+              </Tilt>
             </div>
           </div>
         </div>
