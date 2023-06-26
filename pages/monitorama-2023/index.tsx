@@ -430,19 +430,18 @@ export default function MonitoramaPage({
                     </p>
                   </div>
                   <div>
-                    <p className='mb-6'>
-                      <Link
-                        className='text-primary-300'
-                        href='https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/'
-                        target='_blank'>
-                        Read more &raquo;
-                      </Link>
-                    </p>
+                    <Link
+                      className='text-primary-300'
+                      href='https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/'
+                      target='_blank'>
+                      Read more &raquo;
+                    </Link>
                     <Image
-                      src='/uploads/Cloudflare_Logo_1_1_9ea1e1bc38.png'
-                      width={103}
-                      height={35}
+                      src='/images/monitorama/sh-cloudflare.png'
+                      width={444}
+                      height={196}
                       alt='Cloudflare'
+                      className='max-h-20 w-auto'
                     />
                   </div>
                 </div>
@@ -470,19 +469,18 @@ export default function MonitoramaPage({
                     </p>
                   </div>
                   <div>
-                    <p className='mb-6'>
-                      <Link
-                        className='text-primary-300'
-                        href='/blog/overview-of-highlightio'
-                        target='_blank'>
-                        Read more &raquo;
-                      </Link>
-                    </p>
+                    <Link
+                      className='text-primary-300'
+                      href='/blog/overview-of-highlightio'
+                      target='_blank'>
+                      Read more &raquo;
+                    </Link>
                     <Image
-                      src='/images/monitorama/logo-highlight.svg'
-                      width={103}
-                      height={35}
+                      src='/images/monitorama/sh-highlight.png'
+                      width={680}
+                      height={196}
                       alt='Highlight'
+                      className='max-h-20 w-auto'
                     />
                   </div>
                 </div>
@@ -503,7 +501,7 @@ export default function MonitoramaPage({
                       alt='Quote'
                       className='mb-4 flex-none'
                     />
-                    <p className='mb-6'>
+                    <p className='mb-16'>
                       The platform is ingesting millions of logs per second from
                       thousands of services across regions, storing several PBs
                       worth, and serving hundreds of queries per second from
@@ -511,19 +509,18 @@ export default function MonitoramaPage({
                     </p>
                   </div>
                   <div>
-                    <p className='mb-6'>
-                      <Link
-                        className='text-primary-300'
-                        href='https://www.uber.com/blog/logging/'
-                        target='_blank'>
-                        Read more &raquo;
-                      </Link>
-                    </p>
+                    <Link
+                      className='text-primary-300'
+                      href='https://www.uber.com/blog/logging/'
+                      target='_blank'>
+                      Read more &raquo;
+                    </Link>
                     <Image
-                      src='/images/monitorama/logo-uber.svg'
-                      width={103}
-                      height={35}
+                      src='/images/monitorama/sh-uber.png'
+                      width={372}
+                      height={196}
                       alt='Cloudflare'
+                      className='max-h-20 w-auto'
                     />
                   </div>
                 </div>
