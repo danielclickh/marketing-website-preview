@@ -396,10 +396,10 @@ export default function MonitoramaPage({
         <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
           <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto flex flex-col items-center'>
             <Image
-              src='/images/monitorama/people-icon.svg'
+              src='/images/monitorama/code-icon.svg'
               height={72}
               width={72}
-              alt='People'
+              alt='Code'
               className='mb-4 fill-none'
             />
             <h2 className='mb-12 text-center font-basier text-3xl font-semibold lg:mb-16'>
