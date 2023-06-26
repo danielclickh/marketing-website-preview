@@ -96,7 +96,7 @@ export default function MonitoramaPage({
                 </div>
                 <div className='rich_content mt-16 mb-12 text-center text-base text-neutral-200 lg:max-w-md lg:text-left'>
                   ClickHouse can help you with your observability use cases and
-                  real time data analytics.
+                  real-time data analytics.
                 </div>
                 <div className='g mb-12 flex items-center gap-6 lg:max-w-md '>
                   <div className='w-1/3 rounded-md border border-primary-600 p-2'>
@@ -238,15 +238,10 @@ export default function MonitoramaPage({
           ClickHouse and Observability
         </h2>
         <p className='text-center text-base'>
-          ClickHouse is the most resource-efficient and developer-friendly
-          database to store observability events. It is used by vendors building
-          observability solutions, such as Sentry, Chronosphere, Gitlab, as well
-          as platform teams building internal observability platforms, like Uber
-          and eBay. In particular, ClickHouse excels at efficiently storing and
-          querying months to years of structured logs, traces, errors, time
-          series events, profile data, metrics. Cost savings of going with
-          ClickHouse as your observability data storage can be on the order of
-          10-100x depending on alternatives considered.
+          ClickHouse efficiently stores and queries years of structured logs,
+          traces, errors, time series events, profile data, metrics, and more.
+          Cost savings of going with ClickHouse as your observability data
+          storage can be 10-100x, depending on alternatives considered.
         </p>
       </div>
       <div className='mx-auto mb-24 max-w-7xl px-4 md:px-8 2xl:px-0'>
@@ -259,7 +254,7 @@ export default function MonitoramaPage({
             className='mx-auto mb-4 fill-none'
           />
           <h2 className='mb-12 text-center font-basier text-3xl font-semibold'>
-            ClickHouse is very popular in these two scenarios
+            Off-the-shelf or self-build ClickHouse has you covered
           </h2>
         </div>
         <div className='relative w-full rounded-lg border-t-4 border-t-primary-300 bg-neutral-900 p-3 shadow-lg md:p-10'>
@@ -280,13 +275,15 @@ export default function MonitoramaPage({
                       Vendors building observability solutions
                     </div>
                     <div className='text-neutral-20 whitespace-pre-wrap pb-20 text-sm'>
-                      Companies including but not limited to Sentry - (error
-                      tracking, metrics) , Chronosphere (structured logs,
-                      metrics), Gitlab Opstrace (error tracking, tracing), All
-                      of these vendors have chosen ClickHouse for storing
-                      observability data because it offers disruptive savings on
-                      storage often 10x or more and unmatched query speeds
-                      supporting many concurrent users.
+                      Various companies, such as Sentry (specializing in error
+                      tracking and metrics), Chronosphere (offering structured
+                      logs and metrics), and Gitlab Opstrace (focused on error
+                      tracking and tracing), have opted for ClickHouse as their
+                      storage solution for observability data. This choice is
+                      driven by ClickHouse's exceptional cost savings on
+                      storage, often exceeding 10 times the efficiency, as well
+                      as its unparalleled query speeds that can handle multiple
+                      concurrent users.
                     </div>
                   </div>
                 </CUICard.Body>
@@ -341,14 +338,18 @@ export default function MonitoramaPage({
                       Teams building bespoke observability platforms
                     </div>
                     <div className='text-neutral-20 whitespace-pre-wrap pb-20 text-sm'>
-                      Typically these teams select “best of breed technologies
-                      to create their own solution. The typical “stack” for the
-                      observability use cases involves using OpenTelemetry
-                      agents, ClickHouse as a database, and Grafana for
-                      dashboarding and alerting. We use this stack internally to
-                      power observability for ClickHouse Cloud. This approach
-                      can save 10-100x in costs for long-term storage of
-                      granular structured logs v out of the box solutions.
+                      Usually, these teams opt for a combination of
+                      industry-leading technologies to build their custom
+                      solution. The common approach for observability use cases
+                      entails employing OpenTelemetry agents for data
+                      collection, utilizing ClickHouse as the database, and
+                      leveraging Grafana for creating dashboards and managing
+                      alerts. We internally employ this stack to empower
+                      observability within ClickHouse Cloud. This methodology
+                      has the potential to deliver cost savings ranging from 10
+                      to 100 times compared to off-the-shelf solutions when it
+                      comes to storing detailed structured logs over the long
+                      term.
                     </div>
                   </div>
                 </CUICard.Body>
@@ -420,12 +421,12 @@ export default function MonitoramaPage({
                       height={28}
                       alt='Quote'
                       className='mb-4 flex-none'
-                    />{' '}
+                    />
                     <p className='mb-6'>
                       ClickHouse helps us efficiently and reliably analyze logs
                       across trillions of Internet requests to identify
                       malicious traffic and provide customers with rich
-                      analytics
+                      analytics.
                     </p>
                   </div>
                   <div>
@@ -501,7 +502,7 @@ export default function MonitoramaPage({
                       height={28}
                       alt='Quote'
                       className='mb-4 flex-none'
-                    />{' '}
+                    />
                     <p className='mb-6'>
                       The platform is ingesting millions of logs per second from
                       thousands of services across regions, storing several PBs
