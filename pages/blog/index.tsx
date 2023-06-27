@@ -1,19 +1,17 @@
-import React from 'react'
-import { SuiLink, SuiText, SuiTitle } from '../../components/sui'
-import { fetchAll, findAll, findOne } from '../../lib/api/strapi'
-
-import BlogPostList from '../../components/BlogPostList'
-import { BlogPost as BlogPostType, BlogProps } from '../../types/blogs'
-import BlogPost from '../../components/BlogPostList/BlogPost'
 import { GetStaticProps } from 'next'
+import React from 'react'
+import BlogPostList from '../../components/BlogPostList'
+import BlogPost from '../../components/BlogPostList/BlogPost'
+import { CUILink } from '../../components/ClickUI'
+import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'
+import { StrapiImage } from '../../components/StrapiElements'
+import { SuiTitle } from '../../components/sui'
+import { fetchAll, findAll, findOne } from '../../lib/api/strapi'
+import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
-import { StrapiImage } from '../../components/StrapiElements'
-import { convertDateToString } from '../../lib/utils/dateUtils'
-import { CUILink } from '../../components/ClickUI'
-import Image from 'next/image'
-import FollowUs from '../../components/FollowUs'
+import { BlogPost as BlogPostType, BlogProps } from '../../types/blogs'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps() {
@@ -32,7 +30,8 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         'updatedAt',
         'publishedAt',
         'slug',
-        'date'
+        'date',
+        'StagingOnly'
       ]
     }
     const { data: featuredBlog } = await findAll('blog-posts', {
