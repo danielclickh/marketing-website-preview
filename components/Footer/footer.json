@@ -142,5 +142,23 @@
 				"target": "_blank"
 			}
 		]
+	},
+	{
+		"id": 80,
+		"title": "Comparisons",
+		"items": [
+			{
+				"id": 10,
+				"name": "PostgreSQL",
+				"href": "/comparison/postgresql",
+				"target": "_self"
+			},
+			{
+				"id": 20,
+				"name": "Redshift",
+				"href": "/comparison/redshift",
+				"target": "_self"
+			}
+		]
 	}
 ]
