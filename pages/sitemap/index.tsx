@@ -1,14 +1,13 @@
 import { GetStaticProps } from 'next'
+import Link from 'next/link'
 import React from 'react'
+import menuItems from '../../components/header/menuItems.json'
+import HRSeparator from '../../components/HRSeparator'
 import Layout from '../../components/Layout'
+import { fetchAll, findOne } from '../../lib/api/strapi'
+import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { CommonProps } from '../../types/homepage'
-import { fetchAll, findAll, findOne } from '../../lib/api/strapi'
-import { convertDateToString } from '../../lib/utils/dateUtils'
-import menuItems from '../../components/header/menuItems.json'
-
-import Link from 'next/link'
-import HRSeparator from '../../components/HRSeparator'
 
 interface SitemapProps extends CommonProps {
   blogPosts: any[]
