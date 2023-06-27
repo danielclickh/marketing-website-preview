@@ -1,14 +1,13 @@
 import { GetStaticProps } from 'next'
+import Link from 'next/link'
 import React from 'react'
+import menuItems from '../../components/header/menuItems.json'
+import HRSeparator from '../../components/HRSeparator'
 import Layout from '../../components/Layout'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { CommonProps } from '../../types/homepage'
 import { fetchAll, findOne } from '../../lib/api/strapi'
 import { convertDateToString } from '../../lib/utils/dateUtils'
-import menuItems from '../../components/header/menuItems.json'
-
-import Link from 'next/link'
-import HRSeparator from '../../components/HRSeparator'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { CommonProps } from '../../types/homepage'
 
 interface SitemapProps extends CommonProps {
   blogPosts: any[]
@@ -17,6 +16,7 @@ interface SitemapProps extends CommonProps {
   newsEvents: any[]
   pressReleases: any[]
   menu: any[]
+  comparisons: any[]
 }
 
 export const getStaticProps: GetStaticProps<SitemapProps> =
@@ -36,6 +36,11 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         'slug',
         'date'
       ]
+    }
+
+    const comparisonsParams: Record<string, any> = {
+      sort: ['date:DESC', 'publishedAt:DESC'],
+      fields: ['Title', 'slug']
     }
 
     const blogPosts = await fetchAll('blog-posts', blogsParams)
@@ -64,6 +69,8 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
       ]
     })
 
+    const comparisons = await fetchAll('comparisons', comparisonsParams)
+
     const newsItems = await newsEventsTest
     const newsEvents = newsItems.newsItems
     const pressReleases = newsItems.pressReleases
@@ -77,6 +84,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         onDemandEvents,
         newsEvents,
         pressReleases,
+        comparisons,
         menu,
         seo: {
           title: 'Site map - ClickHouse',
@@ -96,6 +104,7 @@ function Sitemap({
   onDemandEvents,
   newsEvents,
   pressReleases,
+  comparisons,
   menu
 }: SitemapProps) {
   const resourcesMenu = menuItems.find((obj) => obj.id === 2)?.menuItems
@@ -173,7 +182,7 @@ function Sitemap({
             </div>
             <div>
               <h2
-                id='blog-posts'
+                id='use-cases'
                 className='mb-4 font-basier text-2xl font-semibold text-neutral-100'>
                 <Link
                   href={`/use-cases`}
@@ -191,7 +200,7 @@ function Sitemap({
             </div>
             <div>
               <h2
-                id='blog-posts'
+                id='Pricing'
                 className='mb-4 font-basier text-2xl font-semibold text-neutral-100'>
                 <Link
                   href={`/pricing`}
@@ -211,7 +220,7 @@ function Sitemap({
           <HRSeparator className='my-20' />
           <div>
             <h2
-              id='blog-posts'
+              id='Resources'
               className='mb-6 font-basier text-2xl font-semibold text-neutral-100'>
               Resources
             </h2>
@@ -243,6 +252,22 @@ function Sitemap({
                     ))}
                 </div>
               ))}
+              <div>
+                <p className='pb-2 font-semibold'>Comparisons</p>
+                <ul className='mb-2'>
+                  {comparisons.map((comparison, index) => {
+                    return (
+                      <li key={index}>
+                        <Link
+                          href={`/comparison/${comparison.slug}`}
+                          className='font text-primary-300 hover:underline'>
+                          {comparison.Title}{' '}
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
             </div>
           </div>
           <HRSeparator className='my-20' />
