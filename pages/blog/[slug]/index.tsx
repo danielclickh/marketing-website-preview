@@ -33,13 +33,14 @@ import HRSeparator from '../../../components/HRSeparator'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
+    const stagingOnlyFilters = getStagingOnlyFilters()
     const { slug } = params as ParamsType
     const { data } = await findAll('blog-posts', {
       filters: {
         slug: {
           $eq: slug
         },
-        $or: getStagingOnlyFilters()
+        $or: stagingOnlyFilters
       },
       populate: ['author', 'author.avatarPng', 'thumbnailPng'],
       pagination: { limit: 1 }
@@ -57,7 +58,13 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       sort: ['date:DESC', 'publishedAt:DESC'],
       populate: ['thumbnailPng', 'author'],
       fields: ['category', 'title', 'slug'],
-      pagination: { limit: 3 }
+      pagination: { limit: 3 },
+      filters: {
+        slug: {
+          $ne: slug
+        },
+        $or: stagingOnlyFilters
+      }
     }
     const { data: otherBlogs } = await findAll('blog-posts', blogsParams)
     const commonData = await getCommonProps()
