@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config()
 import generateRssFeed from './lib/api/rss'
-import { fetchAll } from './lib/api/strapi'
+import { fetchAll, getStagingOnlyFilters } from './lib/api/strapi'
 
 function log(message: string) {
   console.log(`[${new Date().toTimeString()}] ${message}`)
@@ -24,8 +24,12 @@ async function generateRssXml() {
         'updatedAt',
         'publishedAt',
         'slug',
-        'date'
-      ]
+        'date',
+        'StagingOnly'
+      ],
+      filters: {
+        $or: getStagingOnlyFilters()
+      }
     }
     log('fetching blog posts for rss.xml...')
     const data = await fetchAll('blog-posts', blogsParams)
