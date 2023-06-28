@@ -5,6 +5,16 @@ const strapiApiUrl =
   process.env.STRAPI_API_URL ?? 'http://cms.clickhouse.com:1337'
 const url = `${strapiApiUrl}/api/`
 
+const stagingOnlyFilter =
+  process.env.NEXT_IS_PROD === 'true' ? { $eq: false } : { $eq: true }
+export function getStagingOnlyFilters(): Array<Record<'StagingOnly', any>> {
+  return [
+    { StagingOnly: { $null: true } },
+    { StagingOnly: stagingOnlyFilter },
+    { StagingOnly: { $eq: false } }
+  ]
+}
+
 export async function getPathsValues(
   pathName: string,
   obj: Record<string, any>,

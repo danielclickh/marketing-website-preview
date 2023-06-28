@@ -4,7 +4,7 @@ import React from 'react'
 import menuItems from '../../components/header/menuItems.json'
 import HRSeparator from '../../components/HRSeparator'
 import Layout from '../../components/Layout'
-import { fetchAll, findOne } from '../../lib/api/strapi'
+import { fetchAll, findOne, getStagingOnlyFilters } from '../../lib/api/strapi'
 import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { CommonProps } from '../../types/homepage'
@@ -34,13 +34,12 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         'updatedAt',
         'publishedAt',
         'slug',
-        'date'
-      ]
-    }
-
-    const comparisonsParams: Record<string, any> = {
-      sort: ['date:DESC', 'publishedAt:DESC'],
-      fields: ['Title', 'slug']
+        'date',
+        'StagingOnly'
+      ],
+      filters: {
+        $or: getStagingOnlyFilters()
+      }
     }
 
     const blogPosts = await fetchAll('blog-posts', blogsParams)
@@ -48,6 +47,11 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
       sort: ['localDatetime:DESC'],
       populate: ['category']
     })
+
+    const comparisonsParams: Record<string, any> = {
+      sort: ['date:DESC', 'publishedAt:DESC'],
+      fields: ['Title', 'slug']
+    }
 
     const allEvents = events.filter((event) => {
       return event.category !== 'On-Demand Webinar'
