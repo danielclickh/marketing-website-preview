@@ -15,6 +15,16 @@ import { BlogPost as BlogPostType, BlogProps } from '../../types/blogs'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps() {
+    //if we're in prod, don't include the blogs that are meant for staging only
+    const stagingOnlyFilter =
+      process.env.NEXT_IS_PROD === 'true' ? { $eq: false } : { $eq: true }
+    //we're using the null check so that we don't have to go through all blogs. if it's null it's assumed as in prod
+    const orFilters = [
+      { StagingOnly: { $null: true } },
+      { StagingOnly: stagingOnlyFilter },
+      { StagingOnly: { $eq: false } }
+    ]
+
     const blogPageparams = {
       populate: ['hero', 'seo', 'seo.image']
     }
@@ -36,16 +46,28 @@ export const getStaticProps: GetStaticProps<BlogProps> =
     }
     const { data: featuredBlog } = await findAll('blog-posts', {
       ...blogsParams,
-      pagination: { limit: 1 }
+      pagination: { limit: 1 },
+      filters: {
+        $or: orFilters
+      }
     })
+
     if (featuredBlog[0]) {
       blogsParams.filters = {
         slug: {
           $ne: featuredBlog[0].slug
-        }
+        },
+        $or: orFilters
       }
     }
     const data = await fetchAll('blog-posts', blogsParams)
+
+    console.log(featuredBlog[0].slug)
+
+    // data.map((post) => {
+    //   console.log(post.title)
+    // })
+
     const categories = new Set<string>()
     for (let index = 0; index < data.length; index++) {
       categories.add(data[index].category)

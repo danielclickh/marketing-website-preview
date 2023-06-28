@@ -23,6 +23,16 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
 
+    //if we're in prod, don't include the blogs that are meant for staging only
+    const stagingOnlyFilter =
+      process.env.NEXT_IS_PROD === 'true' ? { $eq: false } : { $eq: true }
+    //we're using the null check so that we don't have to go through all blogs. if it's null it's assumed as in prod
+    const orFilters = [
+      { StagingOnly: { $null: true } },
+      { StagingOnly: stagingOnlyFilter },
+      { StagingOnly: { $eq: false } }
+    ]
+
     const blogsParams: Record<string, any> = {
       sort: ['date:DESC', 'publishedAt:DESC'],
       populate: ['author', 'author.avatarPng', 'thumbnailPng'],
@@ -34,13 +44,12 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         'updatedAt',
         'publishedAt',
         'slug',
-        'date'
-      ]
-    }
-
-    const comparisonsParams: Record<string, any> = {
-      sort: ['date:DESC', 'publishedAt:DESC'],
-      fields: ['Title', 'slug']
+        'date',
+        'StagingOnly'
+      ],
+      filters: {
+        $or: orFilters
+      }
     }
 
     const blogPosts = await fetchAll('blog-posts', blogsParams)
@@ -48,6 +57,11 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
       sort: ['localDatetime:DESC'],
       populate: ['category']
     })
+
+    const comparisonsParams: Record<string, any> = {
+      sort: ['date:DESC', 'publishedAt:DESC'],
+      fields: ['Title', 'slug']
+    }
 
     const allEvents = events.filter((event) => {
       return event.category !== 'On-Demand Webinar'
