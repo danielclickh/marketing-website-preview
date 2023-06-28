@@ -5,7 +5,11 @@ import {
   SuiRecentCard,
   SuiButton
 } from '../../../components/sui'
-import { findAll, getPathsValues } from '../../../lib/api/strapi'
+import {
+  findAll,
+  getPathsValues,
+  getStagingOnlyFilters
+} from '../../../lib/api/strapi'
 import Markdown from '../../../components/Markdown'
 import { StrapiImage } from '../../../components/StrapiElements'
 import NewsLetter from '../../../components/NewsLetter'
@@ -34,7 +38,8 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       filters: {
         slug: {
           $eq: slug
-        }
+        },
+        $or: getStagingOnlyFilters()
       },
       populate: ['author', 'author.avatarPng', 'thumbnailPng'],
       pagination: { limit: 1 }
