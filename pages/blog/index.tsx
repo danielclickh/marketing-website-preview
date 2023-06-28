@@ -39,11 +39,14 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         'StagingOnly'
       ]
     }
+
+    const stagingOnlyFilters = getStagingOnlyFilters()
+
     const { data: featuredBlog } = await findAll('blog-posts', {
       ...blogsParams,
       pagination: { limit: 1 },
       filters: {
-        $or: getStagingOnlyFilters()
+        $or: stagingOnlyFilters
       }
     })
 
@@ -52,7 +55,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         slug: {
           $ne: featuredBlog[0].slug
         },
-        $or: getStagingOnlyFilters()
+        $or: stagingOnlyFilters
       }
     }
     const data = await fetchAll('blog-posts', blogsParams)
