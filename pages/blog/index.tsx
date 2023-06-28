@@ -7,7 +7,12 @@ import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'
 import { StrapiImage } from '../../components/StrapiElements'
 import { SuiTitle } from '../../components/sui'
-import { fetchAll, findAll, findOne } from '../../lib/api/strapi'
+import {
+  fetchAll,
+  findAll,
+  findOne,
+  getStagingOnlyFilters
+} from '../../lib/api/strapi'
 import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
@@ -15,16 +20,6 @@ import { BlogPost as BlogPostType, BlogProps } from '../../types/blogs'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps() {
-    //if we're in prod, don't include the blogs that are meant for staging only
-    const stagingOnlyFilter =
-      process.env.NEXT_IS_PROD === 'true' ? { $eq: false } : { $eq: true }
-    //we're using the null check so that we don't have to go through all blogs. if it's null it's assumed as in prod
-    const orFilters = [
-      { StagingOnly: { $null: true } },
-      { StagingOnly: stagingOnlyFilter },
-      { StagingOnly: { $eq: false } }
-    ]
-
     const blogPageparams = {
       populate: ['hero', 'seo', 'seo.image']
     }
@@ -48,7 +43,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       ...blogsParams,
       pagination: { limit: 1 },
       filters: {
-        $or: orFilters
+        $or: getStagingOnlyFilters()
       }
     })
 
@@ -57,7 +52,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         slug: {
           $ne: featuredBlog[0].slug
         },
-        $or: orFilters
+        $or: getStagingOnlyFilters()
       }
     }
     const data = await fetchAll('blog-posts', blogsParams)

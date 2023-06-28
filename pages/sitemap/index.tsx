@@ -4,7 +4,7 @@ import React from 'react'
 import menuItems from '../../components/header/menuItems.json'
 import HRSeparator from '../../components/HRSeparator'
 import Layout from '../../components/Layout'
-import { fetchAll, findOne } from '../../lib/api/strapi'
+import { fetchAll, findOne, getStagingOnlyFilters } from '../../lib/api/strapi'
 import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { CommonProps } from '../../types/homepage'
@@ -23,16 +23,6 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
 
-    //if we're in prod, don't include the blogs that are meant for staging only
-    const stagingOnlyFilter =
-      process.env.NEXT_IS_PROD === 'true' ? { $eq: false } : { $eq: true }
-    //we're using the null check so that we don't have to go through all blogs. if it's null it's assumed as in prod
-    const orFilters = [
-      { StagingOnly: { $null: true } },
-      { StagingOnly: stagingOnlyFilter },
-      { StagingOnly: { $eq: false } }
-    ]
-
     const blogsParams: Record<string, any> = {
       sort: ['date:DESC', 'publishedAt:DESC'],
       populate: ['author', 'author.avatarPng', 'thumbnailPng'],
@@ -48,7 +38,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         'StagingOnly'
       ],
       filters: {
-        $or: orFilters
+        $or: getStagingOnlyFilters()
       }
     }
 
