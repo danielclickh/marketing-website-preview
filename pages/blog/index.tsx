@@ -62,12 +62,6 @@ export const getStaticProps: GetStaticProps<BlogProps> =
     }
     const data = await fetchAll('blog-posts', blogsParams)
 
-    console.log(featuredBlog[0].slug)
-
-    // data.map((post) => {
-    //   console.log(post.title)
-    // })
-
     const categories = new Set<string>()
     for (let index = 0; index < data.length; index++) {
       categories.add(data[index].category)
