@@ -37,6 +37,11 @@ interface RepeatableContent {
   ]
 }
 
+interface BigNumber {
+  Number: string
+  Text: string
+}
+
 interface ComparisonPage {
   Title: string
   image: StrapiImageType
@@ -57,6 +62,7 @@ interface ComparisonPage {
     }
   ]
   Content: [RepeatableContent]
+  BigNumbers: [BigNumber]
 }
 
 export interface ComparisonProps extends CommonProps {
