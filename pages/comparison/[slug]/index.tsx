@@ -104,7 +104,7 @@ export default function ComparisonPage({
               <div className='lg:w-2/3'>
                 <div className='mb-8 items-center md:flex md:justify-between md:gap-x-10'>
                   <div>
-                    <h1 className='text-center font-basier text-5.5xl font-semibold leading-tight text-neutral-200 md:mb-0 md:text-left'>
+                    <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight text-neutral-200 md:mb-0 md:text-left md:text-5.5xl'>
                       {comparison.Title}
                     </h1>
                   </div>
