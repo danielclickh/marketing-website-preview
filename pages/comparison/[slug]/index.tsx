@@ -137,7 +137,7 @@ export default function ComparisonPage({
                         return (
                           <div className='flex-1 p-3 text-center' key={index}>
                             <p className='mb-2 text-5xl'>{bigNumber.Number}</p>
-                            <p className='text-lg text-primary-300'>
+                            <p className='text-md text-primary-300'>
                               {bigNumber.Text}
                             </p>
                           </div>
