@@ -20,6 +20,7 @@ import Image from 'next/image'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
 import Link from 'next/link'
 import Markdown from '../../../components/Markdown'
+import Tilt from 'react-parallax-tilt'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
   async function getStaticProps({ params }) {
@@ -101,9 +102,9 @@ export default function ComparisonPage({
           <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
             <div className='items-start justify-between gap-10 lg:flex lg:grid-cols-2 lg:gap-20'>
               <div className='lg:w-2/3'>
-                <div className='items-center md:flex md:justify-between md:gap-x-10'>
+                <div className='mb-8 items-center md:flex md:justify-between md:gap-x-10'>
                   <div>
-                    <h1 className='mb-6 text-center text-5xl font-semibold leading-tight text-neutral-200 md:mb-0 md:text-left'>
+                    <h1 className='text-center font-basier text-5.5xl font-semibold leading-tight text-neutral-200 md:mb-0 md:text-left'>
                       {comparison.Title}
                     </h1>
                   </div>
@@ -124,25 +125,26 @@ export default function ComparisonPage({
                 </div>
 
                 {comparison.BigNumbers && (
-                  <div className='mx-auto mb-12 flex max-w-md flex-col justify-between gap-y-6 lg:mx-0 lg:gap-y-3'>
-                    {comparison.BigNumbers.map((bigNumber, index) => {
-                      const isTextLeft = index % 2 === 0
-                      const textAlignment = isTextLeft
-                        ? 'text-center md:text-left'
-                        : 'text-center md:text-right'
-                      return (
-                        <div key={index} className={`${textAlignment}`}>
-                          <h3 className={`font-basier text-5xl leading-none`}>
-                            {bigNumber.Number}
-                          </h3>
-                          <p
-                            className={`text-xl leading-snug text-primary-300 md:text-2xl`}>
-                            {bigNumber.Text}
-                          </p>
-                        </div>
-                      )
-                    })}
-                  </div>
+                  <Tilt
+                    tiltEnable={false}
+                    glareEnable={true}
+                    glareMaxOpacity={0.4}
+                    glareColor='rgba(251, 255, 70, 0.08)'
+                    glarePosition='all'
+                    className='mb-12 h-full'>
+                    <div className='cui-card flex flex-col items-stretch gap-y-5 rounded-lg border border-neutral-700/80 bg-neutral-900/50 p-3 shadow-card hover:shadow-lg lg:flex-row lg:divide-x lg:divide-neutral-700/80'>
+                      {comparison.BigNumbers.map((bigNumber, index) => {
+                        return (
+                          <div className='flex-1 p-3 text-center' key={index}>
+                            <p className='mb-2 text-5xl'>{bigNumber.Number}</p>
+                            <p className='text-md text-primary-300'>
+                              {bigNumber.Text}
+                            </p>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </Tilt>
                 )}
               </div>
               <div>

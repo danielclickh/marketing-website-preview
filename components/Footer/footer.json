@@ -158,6 +158,12 @@
 				"name": "Redshift",
 				"href": "/comparison/redshift",
 				"target": "_self"
+			},
+			{
+				"id": 30,
+				"name": "BigQuery",
+				"href": "/comparison/bigquery",
+				"target": "_self"
 			}
 		]
 	}
