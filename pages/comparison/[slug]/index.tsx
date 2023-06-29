@@ -124,21 +124,19 @@ export default function ComparisonPage({
                 </div>
 
                 {comparison.BigNumbers && (
-                  <div className='mb-12 flex max-w-lg flex-col justify-between gap-y-4'>
+                  <div className='mx-auto mb-12 flex max-w-md flex-col justify-between gap-y-6 lg:mx-0 lg:gap-y-3'>
                     {comparison.BigNumbers.map((bigNumber, index) => {
                       const isTextLeft = index % 2 === 0
                       const textAlignment = isTextLeft
-                        ? 'text-left'
-                        : 'text-right'
-
+                        ? 'text-center md:text-left'
+                        : 'text-center md:text-right'
                       return (
-                        <div
-                          className={`text-center md:${textAlignment}`}
-                          key={index}>
-                          <h3 className='font-basier text-5xl leading-none md:text-7.5xl'>
+                        <div key={index} className={`${textAlignment}`}>
+                          <h3 className={`font-basier text-5xl leading-none`}>
                             {bigNumber.Number}
                           </h3>
-                          <p className='text-xl leading-snug text-primary-300 md:text-2.75xl'>
+                          <p
+                            className={`text-xl leading-snug text-primary-300 md:text-2xl`}>
                             {bigNumber.Text}
                           </p>
                         </div>
