@@ -243,7 +243,7 @@ export default function HomePage({
               width={72}
               height={72}
             />
-            <SuiTitle type='h2' className='mt-8 mb-6'>
+            <SuiTitle type='h2' className='mt-8 mb-6 text-center'>
               Why is ClickHouse so fast?
             </SuiTitle>
             <div className='mx-auto max-w-screen-md text-center leading-normal text-neutral-200'>
@@ -323,7 +323,7 @@ export default function HomePage({
                     height={64}
                   />
                   <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>
-                    <div className='cursor-pointer text-xl font-semibold leading-tight text-neutral-0'>
+                    <div className='cursor-pointer text-center text-xl font-semibold leading-tight text-neutral-0'>
                       {deploy.title}
                     </div>
                     <div className='text-center text-sm text-neutral-200'>
