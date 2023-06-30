@@ -7,6 +7,7 @@ import { AppProps } from 'next/app'
 import Script from 'next/script'
 import SegmentScript from '../components/SegmentScript'
 import Head from 'next/head'
+import { UTMProvider } from '../context/UTMProvider'
 
 const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-P52RCTZ'
 
@@ -36,11 +37,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link href='favicon.ico' rel='icon' type='image/x-icon' />
       </Head>
       <main className={`${inter.variable} font-inter ${inconsolata.variable}`}>
-        <SnackbarContextProvider>
-          <div className='flex min-h-screen flex-col'>
-            <Component {...pageProps} />
-          </div>
-        </SnackbarContextProvider>
+        <UTMProvider>
+          <SnackbarContextProvider>
+            <div className='flex min-h-screen flex-col'>
+              <Component {...pageProps} />
+            </div>
+          </SnackbarContextProvider>
+        </UTMProvider>
       </main>
       <SegmentScript />
       {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
