@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "icon": "/images/clickhouse/lightening.svg",
+    "title": "300x",
+    "content": "**In cost savings** when compared to out-of-the-box Observability solutions like Datadog"
+  },
+  {
+    "id": 2,
+    "icon": "/images/clickhouse/scalable.svg",
+    "title": "10x",
+    "content": "**Ingestion rates of gigabytes per second** to meet all of your real-time needs"
+  },
+  {
+    "id": 3,
+    "icon": "/images/clickhouse/fault-tolerance.svg",
+    "title": "30x",
+    "content": "**Compression ratios** ensuring best-in-class storage usage"
+  }
+]
