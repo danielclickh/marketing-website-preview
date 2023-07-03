@@ -195,7 +195,7 @@ export function appendUTMsToLink(url: string): string {
 
 // Utility function to retrieve UTMs from localStorage
 function getUTMsFromStorage(): UTMs | null {
-  const utms = localStorage.getItem('ch-utms-seg')
+  const utms = localStorage.getItem('ch-utms')
   if (utms) {
     const { data, timestamp } = JSON.parse(utms)
     const convertedTimestamp = new Date(parseInt(timestamp))
@@ -203,7 +203,7 @@ function getUTMsFromStorage(): UTMs | null {
 
     if (dateNow.getTime() > convertedTimestamp.getTime()) {
       // Date has expired, remove it from localStorage
-      localStorage.removeItem('ch-utms-seg')
+      localStorage.removeItem('ch-utms')
       return null
     }
 
@@ -222,5 +222,5 @@ function storeUTMsInStorage(utms: UTMs) {
     data: utms,
     timestamp: expirationTime.getTime()
   }
-  localStorage.setItem('ch-utms-seg', JSON.stringify(data))
+  localStorage.setItem('ch-utms', JSON.stringify(data))
 }
