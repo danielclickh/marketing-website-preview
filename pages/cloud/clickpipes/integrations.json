@@ -1,0 +1,22 @@
+[
+	{
+		"id": 10,
+		"name": "Confluent integration",
+		"description": "Supercharge your streaming data with unmatched query performance. Combine the power of Confluent and ClickHouse to unlock unparalleled speed and efficiency in real-time data processing and analytics.",
+		"buttonText": "Try for Free",
+		"buttonHref": "#",
+		"buttonTarget": "_blank",
+		"buttonDescription": "Get started with Confluent Cloud today: New signups receive $400 to spend during their first 30 days—no credit card required.",
+		"logo": "/images/cloud/clickpipes/icon-confluent.svg"
+	},
+	{
+		"id": 20,
+		"name": "Kafka integration",
+		"description": "Simplify your data pipelines with the seamless integration of Kafka and ClickHouse. Efficiently transfer data from Kafka topics to ClickHouse tables, reducing complexities and enabling smooth data processing without compromising speed or accuracy.",
+		"buttonText": "Join the waitlist",
+		"buttonHref": "#",
+		"buttonTarget": "_blank",
+		"buttonDescription": "",
+		"logo": "/images/cloud/clickpipes/icon-kafka.svg"
+	}
+]

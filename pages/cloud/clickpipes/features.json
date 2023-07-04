@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "icon": "/images/cloud/clickpipes/icon-onboarding.svg",
+    "title": "Easy and intuitive data onboarding",
+    "content": "Setting up a new ingestion pipeline takes just a few steps. Select an incoming data source and format, tune your schema, and let your pipeline run."
+  },
+  {
+    "id": 2,
+    "icon": "/images/cloud/clickpipes/icon-streaming.svg",
+    "title": "Built for streaming",
+    "content": "Providing at-least-once semantics, schema registration (coming soon), and monitoring out-of-the-box. Set up your pipeline and let us handle the rest."
+  },
+  {
+    "id": 3,
+    "icon": "/images/cloud/clickpipes/icon-scale.svg",
+    "title": "Designed for speed and scale",
+    "content": "ClickPipes provides the scalability you need to handle increasing data volumes, ensuring your systems can handle future demands effortlessly."
+  },
+  {
+    "id": 4,
+    "icon": "/images/cloud/clickpipes/icon-simple.svg",
+    "title": "Simple and extensible",
+    "content": "ClickPipes leverages our deep ClickHouse expertise to ensure you maximize all of the real time advantages that ClickHouse has to offer."
+  }
+]
