@@ -240,6 +240,28 @@ export default function CloudPage({
                   </CUICard>
                 ))}
               </div>
+              <div className='mx-auto mt-16 max-w-2xl text-center leading-normal text-neutral-200'>
+                <SuiTitle type='h3' className='mt-8 mb-6'>
+                  ClickPipes
+                </SuiTitle>
+                <p>
+                  ClickPipes offers the easiest and most intuitive way to ingest
+                  data into ClickHouse Cloud. With support for Apache Kafka and
+                  Confluent today, and many more data sources coming soon.
+                </p>
+                <CUIButton
+                  type='secondary'
+                  className='group mx-auto mt-8 w-auto'
+                  href='/cloud/clickpipes'
+                  iconRight={
+                    <ChevronRightIcon
+                      height='18'
+                      className='pt-0.5 transition group-hover:translate-x-1/2'
+                    />
+                  }>
+                  Learn more
+                </CUIButton>
+              </div>
             </div>
           </div>
         </div>
