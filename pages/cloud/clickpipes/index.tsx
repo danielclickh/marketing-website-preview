@@ -14,6 +14,7 @@ import integrations from './integrations.json'
 import useMarketo from '../../../lib/marketo/useMarketo'
 
 import { FormProps } from '../../../types/marketo'
+import ReactMarkdown from 'react-markdown'
 
 function Form(props: FormProps) {
   const { baseUrl, munchkinId, formId } = props
@@ -160,6 +161,9 @@ export default function ClickHouseServerPage({
           formEl.setAttribute(attrDone, 'true')
           form.onSuccess(function () {
             // Get the form's jQuery element and hide it
+            document
+              .querySelector('.privacy-notice-form')
+              ?.classList.add('hidden')
             form.getFormElem().hide()
             document
               .querySelector('.success-message')
@@ -384,6 +388,14 @@ export default function ClickHouseServerPage({
               </div>
               <div className='mktoFormContainer px-4 lg:px-0'>
                 <Form {...inputs} />
+                <div className='rich_content privacy-notice-form mt-4 text-center text-sm'>
+                  <ReactMarkdown
+                    children='By clicking Submit, you acknowledge that ClickHouse will
+                    process your personal information in accordance with our
+                    [privacy
+                    policy](https://clickhouse.com/legal/privacy-policy).'
+                  />
+                </div>
               </div>
             </div>
           </div>
