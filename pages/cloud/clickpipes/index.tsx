@@ -186,7 +186,7 @@ export default function ClickHouseServerPage({
           <div className='relative overflow-x-hidden bg-grid pt-10'>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 2xl:px-0'>
               <div className='flex justify-between'>
-                <div className='flex-col text-center lg:mt-16 lg:w-7/12 lg:text-left'>
+                <div className='flex-col text-center lg:mt-16 lg:max-w-xl lg:text-left'>
                   <h4 className='mb-4 text-base font-semibold text-primary-300'>
                     <Link href='/cloud'>Cloud</Link> / Data Ingestion
                   </h4>
@@ -283,9 +283,10 @@ export default function ClickHouseServerPage({
                             alt={integration.name}
                             width={integration.imageWidth}
                             height={integration.imageHeight}
+                            className='max-w-[72px] md:max-w-max'
                           />
                         </div>
-                        <h3 className='mb-6 font-basier text-4xl font-semibold text-neutral-0'>
+                        <h3 className='mb-6 font-basier text-2xl font-semibold text-neutral-0 md:text-4xl'>
                           {integration.name}
                         </h3>
                         <div className='rich_content min-h-[325px] text-base text-neutral-200'>
@@ -339,7 +340,9 @@ export default function ClickHouseServerPage({
                 width={72}
                 height={73}
               />
-              <SuiTitle type='h2' className='mt-8 mb-4'>
+              <SuiTitle
+                type='h2'
+                className='mt-8 mb-4 px-8 text-center md:px-0'>
                 More connectors coming soon
               </SuiTitle>
               <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200 md:pb-16'>
