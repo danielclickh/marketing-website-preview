@@ -376,10 +376,10 @@ export default function ClickHouseServerPage({
             <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
               <div id='thankyou' className='success-message hidden'>
                 <h3 className='text-center text-2xl font-bold'>
-                  Thank you for your submission!
+                  Thanks! You're on the waitlist
                 </h3>
                 <p className='mt-2 text-center text-neutral-200'>
-                  We will be in touch soon.
+                  We will be in touch as soon as ClickPipes is available.
                 </p>
               </div>
               <div className='mktoFormContainer'>
