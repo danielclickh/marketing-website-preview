@@ -221,8 +221,8 @@ export default function ClickHouseServerPage({
                   <Image
                     src='/images/cloud/clickpipes/clickpipes-hero.svg'
                     alt='Open source ClickHouse'
-                    width={631}
-                    height={447}
+                    width={532}
+                    height={428}
                     className='h-auto w-full'
                     priority
                   />
