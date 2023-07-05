@@ -2,19 +2,19 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { CUIButton, CUICard } from '../../../components/ClickUI'
+import ReactMarkdown from 'react-markdown'
+import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import { SuiText, SuiTitle } from '../../../components/sui'
+import useMarketo from '../../../lib/marketo/useMarketo'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ClickPipesData } from '../../../types/clickpipes'
+import { FormProps } from '../../../types/marketo'
 import features from './features.json'
 import integrations from './integrations.json'
-import useMarketo from '../../../lib/marketo/useMarketo'
-
-import { FormProps } from '../../../types/marketo'
-import ReactMarkdown from 'react-markdown'
+import ClickPipesAnimation from '../../../components/ClickPipesAnimation'
 
 function Form(props: FormProps) {
   const { baseUrl, munchkinId, formId } = props
@@ -185,8 +185,8 @@ export default function ClickHouseServerPage({
         <div className='bg-contain bg-center bg-no-repeat'>
           <div className='relative overflow-x-hidden bg-grid pt-10'>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 2xl:px-0'>
-              <div className='flex'>
-                <div className='flex-col text-center md:mt-16 md:w-7/12 md:text-left'>
+              <div className='flex justify-between'>
+                <div className='flex-col text-center lg:mt-16 lg:w-7/12 lg:text-left'>
                   <h4 className='mb-4 text-base font-semibold text-primary-300'>
                     <Link href='/cloud'>Cloud</Link> / Data Ingestion
                   </h4>
@@ -204,7 +204,7 @@ export default function ClickHouseServerPage({
                     workloads, with guaranteed high throughput and low latency
                     at scale.
                   </SuiText>
-                  <div className='mt-8 flex flex-col items-center justify-center gap-6 sm:flex-row md:justify-start'>
+                  <div className='mt-8 flex flex-col items-center justify-center gap-6 sm:flex-row lg:justify-start'>
                     <CUIButton
                       type='primary'
                       size='lg'
@@ -217,15 +217,8 @@ export default function ClickHouseServerPage({
                     </CUIButton>
                   </div>
                 </div>
-                <div className='mt-4 hidden w-1/2 md:block'>
-                  <Image
-                    src='/images/cloud/clickpipes/clickpipes-hero.svg'
-                    alt='Open source ClickHouse'
-                    width={532}
-                    height={428}
-                    className='h-auto w-full'
-                    priority
-                  />
+                <div className='mt-4 hidden lg:block'>
+                  <ClickPipesAnimation className='' />
                 </div>
               </div>
             </div>
@@ -359,8 +352,7 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <HRSeparator className='my-12 md:mb-24' />
-        <div className='section-container pb-16 md:px-8 2xl:px-0 '>
+        <div className='section-container my-12 pb-16 md:px-8 2xl:px-0 '>
           <GetStartedFree
             href='https://clickhouse.cloud/signUp?loc=clickpipes-getstarted-footer'
             textBefore='Get started with ClickHouse'
@@ -368,7 +360,6 @@ export default function ClickHouseServerPage({
             textAfter='for free'
           />
         </div>
-        <HRSeparator className='my-12 md:my-24' />
         <div className='mx-auto mb-24 max-w-7xl' id='joinwaitlist'>
           <h2 className='mb-10 text-center font-basier text-3xl font-semibold leading-normal'>
             Join the waitlist
