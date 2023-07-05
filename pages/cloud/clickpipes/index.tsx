@@ -215,9 +215,6 @@ export default function ClickHouseServerPage({
                       className='w-full'>
                       Join the waitlist
                     </CUIButton>
-                    <p className='text-base font-normal text-neutral-200'>
-                      Embrace the power of real time analytics.
-                    </p>
                   </div>
                 </div>
                 <div className='mt-4 hidden w-1/2 md:block'>
@@ -275,7 +272,7 @@ export default function ClickHouseServerPage({
             <div className='relative flex flex-col rounded-lg border-t-2 border-neutral-700/80 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
                 <h2 className='mb-10 text-center font-basier text-3xl font-semibold'>
-                  Our Integrations
+                  Available Connectors
                 </h2>
                 <div className='flex flex-col gap-x-6 gap-y-6 md:flex-row'>
                   {integrations
@@ -300,21 +297,23 @@ export default function ClickHouseServerPage({
                             children={integration.description as string}
                           />
                         </div>
-                        <div className='mt-auto flex items-center gap-x-6'>
-                          <CUIButton
-                            type='primary'
-                            size='lg'
-                            weight='semibold'
-                            href={integration.buttonHref}
-                            target={integration.buttonTarget}
-                            linkClass='w-full mx-auto md:mx-0 max-w-[14rem] md:max-w-[12rem]'
-                            className='w-full'>
-                            {integration.buttonText}
-                          </CUIButton>
-                          <p className='text-xs text-neutral-50'>
-                            {integration.buttonDescription}
-                          </p>
-                        </div>
+                        {integration.buttonHref && (
+                          <div className='mt-auto flex items-center gap-x-6'>
+                            <CUIButton
+                              type='primary'
+                              size='lg'
+                              weight='semibold'
+                              href={integration.buttonHref}
+                              target={integration.buttonTarget}
+                              linkClass='w-full mx-auto md:mx-0 max-w-[14rem] md:max-w-[12rem]'
+                              className='w-full'>
+                              {integration.buttonText}
+                            </CUIButton>
+                            <p className='text-xs text-neutral-50'>
+                              {integration.buttonDescription}
+                            </p>
+                          </div>
+                        )}
                       </div>
                     ))}
                 </div>
@@ -334,7 +333,7 @@ export default function ClickHouseServerPage({
                 height={73}
               />
               <SuiTitle type='h2' className='mt-8 mb-4'>
-                More integrations coming shortly
+                More connectors coming shortly
               </SuiTitle>
               <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200 md:pb-16'>
                 To find out more,{' '}

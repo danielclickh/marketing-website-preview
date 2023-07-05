@@ -1,11 +1,11 @@
 [
 	{
 		"id": 10,
-		"name": "Confluent integration",
+		"name": "Confluent Cloud",
 		"description": "Unlock the combined power of Confluent and ClickHouse Cloud through our direct and simple integration. With just a few steps, experience supercharging your Confluent streaming data with unmatched query performance in ClickHouse.\n \n Join us in the Connect with Confluent program today — get started in ClickHouse Cloud and receive $300 in credits. Not yet a Confluent customer? Start your [free trial of Confluent Cloud](https://www.confluent.io/confluent-cloud/?utm_campaign=tm.pmm_cd.2023_partner_cwc_startree_generic&utm_source=startree&utm_medium=partnerref) today. New signups receive $400 to spend during their first 30 days — no credit card required.",
-		"buttonText": "Try for Free",
-		"buttonHref": "https://www.confluent.io/confluent-cloud/?utm_campaign=tm.pmm_cd.2023_partner_cwc_startree_generic&utm_source=startree&utm_medium=partnerref",
-		"buttonTarget": "_blank",
+		"buttonText": "Join the waitlist",
+		"buttonHref": "/cloud/clickpipes#joinwaitlist",
+		"buttonTarget": "_self",
 		"buttonDescription": "",
 		"logo": "/images/cloud/clickpipes/icon-confluent.svg",
 		"available": true,
@@ -15,7 +15,7 @@
 	{
 		"id": 20,
 		"name": "Kafka integration",
-		"description": "No matter where you’re running Apache Kafka, ClickPipes has you covered. Whether you have a self-managed cluster or are running Redpanda, Amazon MSK, or another service, ClickPipes handles setting up your custom Apache Kafka integration in 60 seconds or less. \n \nEnjoy the benefits of a managed integrations platform without impacting your existing setup. Try our custom Apache Kafka integrations today and effortlessly transfer data from Kafka topics to ClickHouse tables without compromising speed or performance.",
+		"description": "No matter where you’re running Apache Kafka, ClickPipes has you covered. Whether you have a self-managed cluster or are running Redpanda, Amazon MSK, or another service, ClickPipes handles setting up your custom Apache Kafka integration in 60 seconds or less. \n \nEnjoy the benefits of a managed integrations platform without impacting your existing setup. Try our custom Apache Kafka integration today and effortlessly transfer data from Kafka topics to ClickHouse tables without compromising speed or performance.",
 		"buttonText": "Join the waitlist",
 		"buttonHref": "/cloud/clickpipes#joinwaitlist",
 		"buttonTarget": "_self",
