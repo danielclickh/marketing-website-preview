@@ -241,9 +241,12 @@ export default function CloudPage({
                 ))}
               </div>
               <div className='mx-auto mt-16 max-w-2xl text-center leading-normal text-neutral-200'>
-                <SuiTitle type='h3' className='mt-8 mb-6'>
+                <h3 className='relative mt-8 mb-6 inline-block font-basier text-3xl font-semibold'>
                   ClickPipes
-                </SuiTitle>
+                  <div className='absolute -top-3 -right-10 rounded-full bg-primary-300 px-3 text-sm font-normal text-neutral-725'>
+                    Beta
+                  </div>
+                </h3>
                 <p>
                   ClickPipes offers the easiest and most intuitive way to ingest
                   data into ClickHouse Cloud. With support for Apache Kafka and
