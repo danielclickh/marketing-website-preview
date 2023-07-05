@@ -4,10 +4,13 @@
 		"name": "Confluent integration",
 		"description": "Supercharge your streaming data with unmatched query performance. Combine the power of Confluent and ClickHouse to unlock unparalleled speed and efficiency in real-time data processing and analytics.",
 		"buttonText": "Try for Free",
-		"buttonHref": "#",
+		"buttonHref": "https://www.confluent.io/confluent-cloud/?utm_campaign=tm.pmm_cd.2023_partner_cwc_startree_generic&utm_source=startree&utm_medium=partnerref",
 		"buttonTarget": "_blank",
 		"buttonDescription": "Get started with Confluent Cloud today: New signups receive $400 to spend during their first 30 days—no credit card required.",
-		"logo": "/images/cloud/clickpipes/icon-confluent.svg"
+		"logo": "/images/cloud/clickpipes/icon-confluent.svg",
+		"available": true,
+		"imageWidth": 100,
+		"imageHeight": 100
 	},
 	{
 		"id": 20,
@@ -17,6 +20,57 @@
 		"buttonHref": "#",
 		"buttonTarget": "_blank",
 		"buttonDescription": "",
-		"logo": "/images/cloud/clickpipes/icon-kafka.svg"
+		"logo": "/images/cloud/clickpipes/icon-kafka.svg",
+		"available": true,
+		"imageWidth": 108,
+		"imageHeight": 100
+	},
+	{
+		"id": 30,
+		"name": "PostHog",
+		"logo": "/images/cloud/clickpipes/posthog-logo.svg",
+		"imageWidth": 158,
+		"imageHeight": 31,
+		"available": false
+	},
+	{
+		"id": 40,
+		"name": "Instabug",
+		"logo": "/images/cloud/clickpipes/instabug-logo.svg",
+		"imageWidth": 152,
+		"imageHeight": 33,
+		"available": false
+	},
+	{
+		"id": 50,
+		"name": "Rokt",
+		"logo": "/images/cloud/clickpipes/rokt-logo.svg",
+		"imageWidth": 90,
+		"imageHeight": 33,
+		"available": false
+	},
+	{
+		"id": 60,
+		"name": "Darwinium",
+		"logo": "/images/cloud/clickpipes/darwinium-logo.svg",
+		"imageWidth": 180,
+		"imageHeight": 35,
+		"available": false
+	},
+	{
+		"id": 70,
+		"name": "Synq",
+		"logo": "/images/cloud/clickpipes/synq-logo.svg",
+		"imageWidth": 104,
+		"imageHeight": 39,
+		"available": false
+	},
+	{
+		"id": 80,
+		"name": "Adevinta",
+		"logo": "/images/cloud/clickpipes/adevinta-logo.svg",
+		"imageHeight": 31,
+		"imageWidth": 134,
+		"available": false
 	}
 ]
