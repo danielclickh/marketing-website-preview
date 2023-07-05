@@ -382,7 +382,7 @@ export default function ClickHouseServerPage({
                   We will be in touch as soon as ClickPipes is available.
                 </p>
               </div>
-              <div className='mktoFormContainer'>
+              <div className='mktoFormContainer px-4 lg:px-0'>
                 <Form {...inputs} />
               </div>
             </div>
