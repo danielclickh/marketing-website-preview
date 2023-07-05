@@ -205,7 +205,7 @@ export default function ClickHouseServerPage({
                       type='primary'
                       size='lg'
                       weight='semibold'
-                      href='#'
+                      href='/cloud/clickpipes#joinwaitlist'
                       target='_self'
                       linkClass='w-full mx-auto md:mx-0 max-w-[14rem] md:max-w-[12rem]'
                       className='w-full'>
@@ -368,7 +368,7 @@ export default function ClickHouseServerPage({
           />
         </div>
         <HRSeparator className='my-12 md:my-24' />
-        <div className='mx-auto mb-24 max-w-7xl'>
+        <div className='mx-auto mb-24 max-w-7xl' id='joinwaitlist'>
           <h2 className='mb-10 text-center font-basier text-3xl font-semibold leading-normal'>
             Join the waitlist
           </h2>
