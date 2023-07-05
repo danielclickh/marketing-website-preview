@@ -182,13 +182,13 @@ export default function ClickHouseServerPage({
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
-        <div className='bg-contain bg-center bg-no-repeat lg:bg-speed-lines'>
+        <div className='bg-contain bg-center bg-no-repeat'>
           <div className='relative overflow-x-hidden bg-grid pt-10'>
-            <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>
+            <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 2xl:px-0'>
               <div className='flex'>
                 <div className='flex-col text-center md:mt-16 md:w-7/12 md:text-left'>
                   <h4 className='mb-4 text-base font-semibold text-primary-300'>
-                    <Link href='/cloud'>Cloud</Link> / ClickPipes
+                    <Link href='/cloud'>Cloud</Link> / Data Ingestion
                   </h4>
                   <h1 className='mb-6 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
                     ClickPipes
@@ -202,7 +202,7 @@ export default function ClickHouseServerPage({
                     simple as clicking a few buttons. Our robust and scalable
                     architecture empowers you to handle the most demanding
                     workloads, with guaranteed high throughput and low latency
-                    at scale. 
+                    at scale.
                   </SuiText>
                   <div className='mt-8 flex flex-col items-center justify-center gap-6 sm:flex-row md:justify-start'>
                     <CUIButton
@@ -220,14 +220,13 @@ export default function ClickHouseServerPage({
                     </p>
                   </div>
                 </div>
-
-                <div className='mx-auto mt-4 hidden md:flex md:w-4/12'>
+                <div className='mt-4 hidden w-1/2 md:block'>
                   <Image
-                    src='/images/clickpipes-hero.svg'
+                    src='/images/cloud/clickpipes/clickpipes-hero.svg'
                     alt='Open source ClickHouse'
-                    width={1294}
-                    height={812}
-                    className='h-auto w-full min-w-[54rem]'
+                    width={631}
+                    height={447}
+                    className='h-auto w-full'
                     priority
                   />
                 </div>
@@ -237,17 +236,17 @@ export default function ClickHouseServerPage({
         </div>
 
         <div className='bg-neutral-725 pb-10 text-neutral-0'>
-          <div className='mx-auto max-w-3xl pt-16 text-center'>
+          <div className='mx-auto max-w-2xl pt-16 text-center'>
             <h2 className='font-basier text-3xl font-semibold leading-normal'>
-              Seamlessly connect your{' '}
+              Seamlessly{' '}
               <span className='tilted tilted-yellow'>
-                <span className='tilted-content'>streaming</span>
+                <span className='tilted-content'>connect</span>
               </span>{' '}
-              and event-driven data sources to ClickHouse Cloud.
+              your external data sources to ClickHouse Cloud.
             </h2>
           </div>
-          <div className='container mx-auto flex max-w-7xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8  2xl:px-0'>
-            <div className='grid grid-cols-1 gap-y-10 gap-x-8 space-y-4 md:grid-cols-2 md:space-y-0 lg:grid-cols-4'>
+          <div className='container mx-auto flex max-w-4xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8  2xl:px-0'>
+            <div className='grid grid-cols-1 gap-y-10 gap-x-8 space-y-4 md:grid-cols-2 md:space-y-0'>
               {features.map((feature) => (
                 <div className='col' key={feature.id}>
                   <div className='flex flex-col items-center gap-4 text-center'>
@@ -261,9 +260,9 @@ export default function ClickHouseServerPage({
                       <h4 className='text-md mb-3 font-inter font-semibold'>
                         {feature.title}
                       </h4>
-                      <p className='font-inter text-sm font-light leading-relaxed text-neutral-200'>
-                        {feature.content}
-                      </p>
+                      <div className='px-10 font-inter text-sm font-light leading-relaxed text-neutral-200'>
+                        <ReactMarkdown children={feature.content} />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -275,6 +274,9 @@ export default function ClickHouseServerPage({
           <div className='section-container max-w-7xl lg:mt-0'>
             <div className='relative flex flex-col rounded-lg border-t-2 border-neutral-700/80 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
+                <h2 className='mb-10 text-center font-basier text-3xl font-semibold'>
+                  Our Integrations
+                </h2>
                 <div className='flex flex-col gap-x-6 gap-y-6 md:flex-row'>
                   {integrations
                     .filter((integration) => integration.available)
@@ -293,9 +295,11 @@ export default function ClickHouseServerPage({
                         <h3 className='mb-6 font-basier text-4xl font-semibold text-neutral-0'>
                           {integration.name}
                         </h3>
-                        <p className='min-h-[250px] text-base text-neutral-200'>
-                          {integration.description}
-                        </p>
+                        <div className='rich_content min-h-[325px] text-base text-neutral-200'>
+                          <ReactMarkdown
+                            children={integration.description as string}
+                          />
+                        </div>
                         <div className='mt-auto flex items-center gap-x-6'>
                           <CUIButton
                             type='primary'

@@ -8,8 +8,8 @@
   {
     "id": 2,
     "icon": "/images/cloud/clickpipes/icon-streaming.svg",
-    "title": "Built for streaming",
-    "content": "Providing at-least-once semantics, schema registration (coming soon), and monitoring out-of-the-box. Set up your pipeline and let us handle the rest."
+    "title": "Built for continuous ingest",
+    "content": "ClickPipes manages your continuous ingestion pipelines so that you don’t have to. Set up your pipeline and let us handle the rest."
   },
   {
     "id": 3,
@@ -20,7 +20,7 @@
   {
     "id": 4,
     "icon": "/images/cloud/clickpipes/icon-simple.svg",
-    "title": "Simple and extensible",
+    "title": "Unlock your real time analytics",
     "content": "ClickPipes leverages our deep ClickHouse expertise to ensure you maximize all of the real time advantages that ClickHouse has to offer."
   }
 ]
