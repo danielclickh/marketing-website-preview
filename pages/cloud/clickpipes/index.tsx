@@ -317,6 +317,17 @@ export default function ClickHouseServerPage({
                       </div>
                     ))}
                 </div>
+                <div className='mx-auto mt-6'>
+                  <CUIButton
+                    type='primary'
+                    size='lg'
+                    weight='semibold'
+                    href='/cloud/clickpipes#joinwaitlist'
+                    linkClass='w-full mx-auto md:mx-0 max-w-[14rem] md:max-w-[12rem]'
+                    className='mx-auto'>
+                    Join the waitlist
+                  </CUIButton>
+                </div>
               </div>
             </div>
           </div>
@@ -333,7 +344,7 @@ export default function ClickHouseServerPage({
                 height={73}
               />
               <SuiTitle type='h2' className='mt-8 mb-4'>
-                More connectors coming shortly
+                More connectors coming soon
               </SuiTitle>
               <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200 md:pb-16'>
                 To find out more,{' '}
@@ -344,28 +355,11 @@ export default function ClickHouseServerPage({
                 </Link>{' '}
                 today.
               </div>
-
-              <div className='mx-auto mt-10 grid w-full grid-cols-1 content-baseline gap-10 px-4 md:mt-0 md:grid-cols-3 md:px-0'>
-                {integrations
-                  .filter((integration) => !integration.available)
-                  .map((integration) => (
-                    <CUICard
-                      className='min-w-full py-16 px-4'
-                      key={integration.id}>
-                      <Image
-                        src={integration.logo}
-                        alt={integration.name}
-                        width={integration.imageWidth}
-                        height={integration.imageHeight}
-                      />
-                    </CUICard>
-                  ))}
-              </div>
             </div>
           </div>
         </div>
 
-        <HRSeparator className='my-12 md:my-24' />
+        <HRSeparator className='my-12 md:mb-24' />
         <div className='section-container pb-16 md:px-8 2xl:px-0 '>
           <GetStartedFree
             href='https://clickhouse.cloud/signUp?loc=clickpipes-getstarted-footer'
