@@ -11,34 +11,32 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
       height='428'
       viewBox='0 0 532 428'
       fill='none'
-      xmlns='http://www.w3.org/2000/svg'
-      className={className}>
+      xmlns='http://www.w3.org/2000/svg'>
       <path
         d='M183.5 274.463L275.038 274.463C278.351 274.463 281.035 271.778 281.035 268.465L281.035 191.97C281.035 188.656 283.72 185.971 287.033 185.971L491.5 185.971'
         stroke='#524D4D'
-        stroke-width='3'
+        strokeWidth='3'
       />
       <path
         d='M95.5 363.463L291.039 363.463C294.351 363.463 297.036 360.778 297.036 357.464L297.036 207.969C297.036 204.656 299.721 201.971 303.034 201.971L486.001 201.971'
         stroke='#524D4D'
-        stroke-width='3'
+        strokeWidth='3'
       />
       <path
         d='M96 69.9998L274.494 69.9998C277.777 69.9998 280.409 72.6144 280.409 75.8762L280.409 163.929C280.409 167.191 283.041 169.805 286.325 169.805L483.5 169.805'
         stroke='#524D4D'
-        stroke-width='3'
-        id='lineToFollow'
+        strokeWidth='3'
       />
       <path
         d='M184 51.0005L293.494 51.0004C296.777 51.0004 299.409 53.615 299.409 56.8768L299.409 144.929C299.409 148.191 302.041 150.806 305.324 150.806L481 150.806'
         stroke='#524D4D'
-        stroke-width='3'
+        strokeWidth='3'
       />
       <path
         d='M200.5 69.9998L274.494 70C277.778 70 280.41 72.6145 280.41 75.8763L280.41 163.929C280.41 167.191 283.042 169.805 286.325 169.805L335.5 169.805'
         stroke='#FCFF74'
         strokeWidth='3'
-        id='animatedLine'></path>
+      />
       <rect
         x='380'
         y='117.829'
@@ -46,7 +44,6 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
         height='119.865'
         rx='4'
         fill='#FCFF74'
-        id='logoSquare'
         style={{ filter: 'drop-shadow(0px 4px 15px rgba(252, 255, 116, 0.5))' }}
       />
       <g filter='url(#filter0_i_170_2167)'>
@@ -107,18 +104,18 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           height='72'
           rx='4'
           fill='#151515'
-          fill-opacity='0.5'
-          shape-rendering='crispEdges'
+          fillOpacity='0.5'
+          shapeRendering='crispEdges'
         />
         <path
-          fill-rule='evenodd'
-          clip-rule='evenodd'
+          fillRule='evenodd'
+          clipRule='evenodd'
           d='M69.0837 58.1719C70.1581 58.0742 71.2325 58.0742 72.3069 57.9765V57.1951C71.2325 57.0975 70.1581 57.0975 69.0837 56.9998L65.8605 56.9021C64.0047 56.8044 62.0512 56.8044 60.1954 56.8044C60.1954 54.9486 60.1954 52.9951 60.0977 51.1393L60 47.9161C59.9024 46.8417 59.9024 45.7673 59.8047 44.6929H58.9256C58.8279 45.7673 58.8279 46.8417 58.7303 47.9161L58.6326 51.1393C58.6326 52.0184 58.6326 52.8975 58.6326 53.7765C58.2419 52.9952 57.9489 52.1161 57.5582 51.3347L56.1907 48.4045C55.7024 47.4277 55.3117 46.451 54.8233 45.4743L54.0419 45.7673C54.4326 46.8417 54.7256 47.8184 55.1163 48.7952L56.2884 51.8231C56.5814 52.7021 56.9721 53.4835 57.2652 54.3626C56.5814 53.7765 55.9954 53.0928 55.3117 52.5068L52.9675 50.2603C52.1861 49.5766 51.4047 48.7952 50.5257 48.1115L49.8419 48.7952C50.5257 49.5766 51.3071 50.358 51.9908 51.237L54.2373 53.5812C54.8233 54.2649 55.507 54.851 56.0931 55.5347C55.3117 55.2416 54.4326 54.851 53.5535 54.5579L50.5257 53.3858C49.5489 52.9951 48.4745 52.6045 47.4978 52.3114L47.1071 53.1905C48.0838 53.6789 49.0606 54.0696 50.0373 54.5579L52.9675 55.9254C53.7489 56.3161 54.628 56.6091 55.4094 56.9998C54.5303 56.9998 53.6512 56.9998 52.7722 56.9998L49.5489 57.0975C48.4745 57.1951 47.4001 57.1951 46.3257 57.2928V58.1719C47.4001 58.2695 48.4745 58.2695 49.5489 58.3672L52.7722 58.4649C54.7256 58.5626 56.5814 58.5626 58.4372 58.5626C58.4372 60.4184 58.4372 62.3718 58.5349 64.2276L58.6326 67.4509C58.7303 68.5253 58.7303 69.5997 58.8279 70.6741H59.6093C59.707 69.5997 59.707 68.5253 59.8047 67.4509L59.9024 64.2276C59.9024 63.3486 59.9024 62.3718 60 61.4928C60.3907 62.3718 60.6837 63.1532 61.0744 64.0323L62.4419 66.9625C62.9302 67.9393 63.3209 68.916 63.8093 69.8927L64.5907 69.5997C64.2977 68.5253 63.907 67.5486 63.5163 66.5718L62.5395 63.3486C62.2465 62.4695 61.8558 61.6881 61.5628 60.8091C62.2465 61.4928 62.8326 62.0788 63.5163 62.6649L65.8605 64.9114C66.6418 65.5951 67.4232 66.3765 68.3023 67.0602L68.8883 66.4741C68.2046 65.6928 67.4232 64.9114 66.7395 64.0323L64.493 61.6881C63.907 61.0044 63.2233 60.3207 62.6372 59.7346C63.5163 60.0277 64.2977 60.4184 65.1767 60.7114L68.2046 61.8835C69.1814 62.2742 70.2558 62.6649 71.2325 62.9579L71.5255 62.1765C70.5488 61.6881 69.5721 61.1998 68.5953 60.8091L65.6651 59.4416C64.786 59.0509 64.0047 58.6602 63.1256 58.3672C64.0047 58.3672 64.9814 58.3672 65.8605 58.2695L69.0837 58.1719Z'
           fill='white'
         />
         <path
-          fill-rule='evenodd'
-          clip-rule='evenodd'
+          fillRule='evenodd'
+          clipRule='evenodd'
           d='M60.0001 77.9998C48.3769 77.9998 39.0002 68.6231 39.0002 56.9999C39.0002 45.3767 48.3769 36 60.0001 36C71.6233 36 81 45.3767 81 56.9999C81 68.6231 71.6233 77.9998 60.0001 77.9998ZM60.0001 37.9535C49.549 37.9535 40.9537 46.5488 40.9537 56.9999C40.9537 67.451 49.549 76.0463 60.0001 76.0463C70.4512 76.0463 79.0465 67.451 79.0465 56.9999C79.0465 46.5488 70.4512 37.9535 60.0001 37.9535Z'
           fill='white'
         />
@@ -129,8 +126,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           height='72'
           rx='4'
           stroke='#414141'
-          stroke-opacity='0.8'
-          shape-rendering='crispEdges'
+          strokeOpacity='0.8'
+          shapeRendering='crispEdges'
         />
       </g>
       <g filter='url(#filter6_d_170_2167)'>
@@ -141,8 +138,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           height='72'
           rx='4'
           fill='#151515'
-          fill-opacity='0.5'
-          shape-rendering='crispEdges'
+          fillOpacity='0.5'
+          shapeRendering='crispEdges'
         />
         <path
           d='M155.18 59.178C153.605 59.178 152.194 59.8755 151.227 60.9736L148.751 59.2203C149.014 58.4964 149.165 57.7193 149.165 56.9057C149.165 56.1063 149.019 55.3421 148.765 54.629L151.236 52.8943C152.202 53.9868 153.61 54.6805 155.18 54.6805C158.085 54.6805 160.45 52.3165 160.45 49.4104C160.45 46.5043 158.085 44.1403 155.18 44.1403C152.274 44.1403 149.91 46.5043 149.91 49.4104C149.91 49.9306 149.988 50.4321 150.129 50.9072L147.656 52.6428C146.623 51.3613 145.136 50.4666 143.442 50.1935V47.2133C145.829 46.7119 147.628 44.5909 147.628 42.0565C147.628 39.1504 145.263 36.7864 142.357 36.7864C139.452 36.7864 137.087 39.1504 137.087 42.0565C137.087 44.557 138.839 46.6518 141.179 47.189V50.2079C137.986 50.7683 135.55 53.5547 135.55 56.9057C135.55 60.2731 138.01 63.0697 141.226 63.6111V66.7988C138.863 67.3183 137.087 69.4259 137.087 71.9435C137.087 74.8496 139.452 77.2135 142.357 77.2135C145.263 77.2135 147.628 74.8496 147.628 71.9435C147.628 69.4259 145.852 67.3183 143.489 66.7988V63.611C145.117 63.3368 146.589 62.4803 147.632 61.2011L150.125 62.9658C149.987 63.4366 149.91 63.9332 149.91 64.4481C149.91 67.3542 152.274 69.7182 155.18 69.7182C158.085 69.7182 160.45 67.3542 160.45 64.4481C160.45 61.542 158.085 59.178 155.18 59.178ZM155.18 46.8552C156.589 46.8552 157.735 48.0017 157.735 49.4104C157.735 50.8191 156.589 51.9655 155.18 51.9655C153.771 51.9655 152.624 50.8191 152.624 49.4104C152.624 48.0017 153.771 46.8552 155.18 46.8552ZM139.802 42.0565C139.802 40.6478 140.948 39.5014 142.357 39.5014C143.767 39.5014 144.913 40.6478 144.913 42.0565C144.913 43.4652 143.767 44.6116 142.357 44.6116C140.948 44.6116 139.802 43.4652 139.802 42.0565ZM144.913 71.9435C144.913 73.3521 143.767 74.4985 142.357 74.4985C140.948 74.4985 139.802 73.3521 139.802 71.9435C139.802 70.5347 140.948 69.3883 142.357 69.3883C143.767 69.3883 144.913 70.5347 144.913 71.9435ZM142.357 60.4692C140.392 60.4692 138.793 58.8708 138.793 56.9057C138.793 54.9405 140.392 53.3418 142.357 53.3418C144.322 53.3418 145.921 54.9405 145.921 56.9057C145.921 58.8708 144.322 60.4692 142.357 60.4692ZM155.18 67.0033C153.771 67.0033 152.624 65.8568 152.624 64.4481C152.624 63.0394 153.771 61.893 155.18 61.893C156.589 61.893 157.735 63.0394 157.735 64.4481C157.735 65.8568 156.589 67.0033 155.18 67.0033Z'
@@ -155,8 +152,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           height='72'
           rx='4'
           stroke='#414141'
-          stroke-opacity='0.8'
-          shape-rendering='crispEdges'
+          strokeOpacity='0.8'
+          shapeRendering='crispEdges'
         />
       </g>
       <g filter='url(#filter7_d_170_2167)'>
@@ -167,10 +164,10 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           height='72'
           rx='4'
           fill='#151515'
-          fill-opacity='0.5'
-          shape-rendering='crispEdges'
+          fillOpacity='0.5'
+          shapeRendering='crispEdges'
         />
-        <g clip-path='url(#clip0_170_2167)'>
+        <g clipPath='url(#clip0_170_2167)'>
           <path
             d='M45.5537 273.074L59.9725 279.861L74.3906 273.074L59.9722 272.463L45.5537 273.074Z'
             fill='#333333'
@@ -211,8 +208,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           height='71'
           rx='3.5'
           stroke='#414141'
-          stroke-opacity='0.8'
-          shape-rendering='crispEdges'
+          strokeOpacity='0.8'
+          shapeRendering='crispEdges'
         />
       </g>
       <g filter='url(#filter8_d_170_2167)'>
@@ -223,8 +220,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           height='72'
           rx='4'
           fill='#151515'
-          fill-opacity='0.5'
-          shape-rendering='crispEdges'
+          fillOpacity='0.5'
+          shapeRendering='crispEdges'
         />
         <path
           d='M137.4 285.919L129.715 272.609C129.42 272.097 129.264 271.517 129.264 270.926C129.264 270.335 129.42 269.754 129.715 269.243L137.4 255.933C137.695 255.421 138.12 254.996 138.632 254.7C139.144 254.405 139.724 254.249 140.315 254.249L155.684 254.249C156.275 254.249 156.856 254.405 157.368 254.7C157.879 254.996 158.304 255.421 158.6 255.933L166.284 269.243C166.58 269.754 166.735 270.335 166.735 270.926C166.735 271.517 166.58 272.097 166.284 272.609L158.6 285.919C158.304 286.431 157.879 286.856 157.368 287.151C156.856 287.447 156.275 287.602 155.684 287.602L140.315 287.602C139.724 287.602 139.144 287.447 138.632 287.151C138.12 286.856 137.695 286.431 137.4 285.919Z'
@@ -270,8 +267,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           height='71'
           rx='3.5'
           stroke='#414141'
-          stroke-opacity='0.8'
-          shape-rendering='crispEdges'
+          strokeOpacity='0.8'
+          shapeRendering='crispEdges'
         />
       </g>
       <g filter='url(#filter9_d_170_2167)'>
@@ -282,8 +279,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           height='72'
           rx='4'
           fill='#151515'
-          fill-opacity='0.5'
-          shape-rendering='crispEdges'
+          fillOpacity='0.5'
+          shapeRendering='crispEdges'
         />
         <path
           d='M56.196 363.581C55.9631 363.581 55.7628 363.499 55.5952 363.334C55.4276 363.166 55.3438 362.964 55.3438 362.729C55.3438 362.496 55.4276 362.297 55.5952 362.132C55.7628 361.964 55.9631 361.881 56.196 361.881C56.429 361.881 56.6293 361.964 56.7969 362.132C56.9645 362.297 57.0483 362.496 57.0483 362.729C57.0483 362.885 57.0085 363.028 56.929 363.159C56.8523 363.287 56.75 363.389 56.6222 363.466C56.4943 363.543 56.3523 363.581 56.196 363.581ZM59.5945 363.581C59.3615 363.581 59.1612 363.499 58.9936 363.334C58.826 363.166 58.7422 362.964 58.7422 362.729C58.7422 362.496 58.826 362.297 58.9936 362.132C59.1612 361.964 59.3615 361.881 59.5945 361.881C59.8274 361.881 60.0277 361.964 60.1953 362.132C60.3629 362.297 60.4467 362.496 60.4467 362.729C60.4467 362.885 60.407 363.028 60.3274 363.159C60.2507 363.287 60.1484 363.389 60.0206 363.466C59.8928 363.543 59.7507 363.581 59.5945 363.581ZM62.9929 363.581C62.7599 363.581 62.5597 363.499 62.392 363.334C62.2244 363.166 62.1406 362.964 62.1406 362.729C62.1406 362.496 62.2244 362.297 62.392 362.132C62.5597 361.964 62.7599 361.881 62.9929 361.881C63.2259 361.881 63.4261 361.964 63.5938 362.132C63.7614 362.297 63.8452 362.496 63.8452 362.729C63.8452 362.885 63.8054 363.028 63.7259 363.159C63.6491 363.287 63.5469 363.389 63.419 363.466C63.2912 363.543 63.1491 363.581 62.9929 363.581Z'
@@ -296,8 +293,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           height='71'
           rx='3.5'
           stroke='#414141'
-          stroke-opacity='0.8'
-          shape-rendering='crispEdges'
+          strokeOpacity='0.8'
+          shapeRendering='crispEdges'
         />
       </g>
       <rect x='56' y='229.214' width='50' height='17' rx='8.5' fill='#C0C0C0' />
@@ -325,8 +322,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           width='7.40601'
           height='68.4978'
           filterUnits='userSpaceOnUse'
-          color-interpolation-filters='sRGB'>
-          <feFlood flood-opacity='0' result='BackgroundImageFix' />
+          colorInterpolationFilters='sRGB'>
+          <feFlood floodOpacity='0' result='BackgroundImageFix' />
           <feBlend
             mode='normal'
             in='SourceGraphic'
@@ -359,8 +356,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           width='7.40601'
           height='68.4978'
           filterUnits='userSpaceOnUse'
-          color-interpolation-filters='sRGB'>
-          <feFlood flood-opacity='0' result='BackgroundImageFix' />
+          colorInterpolationFilters='sRGB'>
+          <feFlood floodOpacity='0' result='BackgroundImageFix' />
           <feBlend
             mode='normal'
             in='SourceGraphic'
@@ -393,8 +390,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           width='7.40601'
           height='68.4978'
           filterUnits='userSpaceOnUse'
-          color-interpolation-filters='sRGB'>
-          <feFlood flood-opacity='0' result='BackgroundImageFix' />
+          colorInterpolationFilters='sRGB'>
+          <feFlood floodOpacity='0' result='BackgroundImageFix' />
           <feBlend
             mode='normal'
             in='SourceGraphic'
@@ -427,8 +424,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           width='7.40601'
           height='68.4978'
           filterUnits='userSpaceOnUse'
-          color-interpolation-filters='sRGB'>
-          <feFlood flood-opacity='0' result='BackgroundImageFix' />
+          colorInterpolationFilters='sRGB'>
+          <feFlood floodOpacity='0' result='BackgroundImageFix' />
           <feBlend
             mode='normal'
             in='SourceGraphic'
@@ -461,8 +458,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           width='7.40601'
           height='15.9995'
           filterUnits='userSpaceOnUse'
-          color-interpolation-filters='sRGB'>
-          <feFlood flood-opacity='0' result='BackgroundImageFix' />
+          colorInterpolationFilters='sRGB'>
+          <feFlood floodOpacity='0' result='BackgroundImageFix' />
           <feBlend
             mode='normal'
             in='SourceGraphic'
@@ -495,8 +492,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           width='101'
           height='101'
           filterUnits='userSpaceOnUse'
-          color-interpolation-filters='sRGB'>
-          <feFlood flood-opacity='0' result='BackgroundImageFix' />
+          colorInterpolationFilters='sRGB'>
+          <feFlood floodOpacity='0' result='BackgroundImageFix' />
           <feColorMatrix
             in='SourceAlpha'
             type='matrix'
@@ -529,8 +526,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           width='101'
           height='101'
           filterUnits='userSpaceOnUse'
-          color-interpolation-filters='sRGB'>
-          <feFlood flood-opacity='0' result='BackgroundImageFix' />
+          colorInterpolationFilters='sRGB'>
+          <feFlood floodOpacity='0' result='BackgroundImageFix' />
           <feColorMatrix
             in='SourceAlpha'
             type='matrix'
@@ -563,8 +560,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           width='100'
           height='100'
           filterUnits='userSpaceOnUse'
-          color-interpolation-filters='sRGB'>
-          <feFlood flood-opacity='0' result='BackgroundImageFix' />
+          colorInterpolationFilters='sRGB'>
+          <feFlood floodOpacity='0' result='BackgroundImageFix' />
           <feColorMatrix
             in='SourceAlpha'
             type='matrix'
@@ -597,8 +594,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           width='100'
           height='100'
           filterUnits='userSpaceOnUse'
-          color-interpolation-filters='sRGB'>
-          <feFlood flood-opacity='0' result='BackgroundImageFix' />
+          colorInterpolationFilters='sRGB'>
+          <feFlood floodOpacity='0' result='BackgroundImageFix' />
           <feColorMatrix
             in='SourceAlpha'
             type='matrix'
@@ -631,8 +628,8 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           width='100'
           height='100'
           filterUnits='userSpaceOnUse'
-          color-interpolation-filters='sRGB'>
-          <feFlood flood-opacity='0' result='BackgroundImageFix' />
+          colorInterpolationFilters='sRGB'>
+          <feFlood floodOpacity='0' result='BackgroundImageFix' />
           <feColorMatrix
             in='SourceAlpha'
             type='matrix'

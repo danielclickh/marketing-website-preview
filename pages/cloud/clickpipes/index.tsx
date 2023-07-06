@@ -221,7 +221,7 @@ export default function ClickHouseServerPage({
                   </div>
                 </div>
                 <div className='mt-4 hidden lg:block'>
-                  <ClickPipesAnimation className='' />
+                  <ClickPipesAnimation className='clickpipes-animation' />
                 </div>
               </div>
             </div>
