@@ -15,11 +15,11 @@ const AccordionComponent = () => {
 
   const selectedAccordionRef = useRef<HTMLDivElement>(null)
   const isFirstRender = useRef(true)
-  const targetElement = document.getElementById('diagramTop')
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false
     } else {
+      const targetElement = document.getElementById('diagramTop')
       targetElement?.scrollIntoView({
         behavior: 'smooth',
         block: 'start'
