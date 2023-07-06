@@ -33,7 +33,7 @@ const AccordionComponent = () => {
       id='diagramTop'>
       <div className='lg:w-1/2'>
         <Diagram
-          className='px-20 py-10'
+          className='px-20 py-12'
           sectionId={strippedItemId(activeItem)}
         />
       </div>
@@ -97,7 +97,7 @@ const AccordionTrigger = forwardRef<
   <Accordion.Header className='flex'>
     <Accordion.Trigger
       className={classNames(
-        'group z-20 my-1 flex flex-1 items-center justify-between rounded-xl border border-neutral-600/80 bg-neutral-700 p-8 text-2xl font-semibold leading-none outline-none hover:cursor-pointer data-[state=open]:rounded-b-none data-[state=open]:border-b-0 data-[state=open]:pb-2',
+        'group z-20 my-1 flex flex-1 items-center justify-between rounded-xl border border-neutral-600/80 bg-neutral-700 p-8 text-2xl font-semibold leading-none outline-none hover:cursor-pointer data-[state=open]:rounded-b-none data-[state=open]:border-b-0 data-[state=open]:pb-6',
         className
       )}
       {...props}
@@ -117,7 +117,7 @@ const AccordionContent = forwardRef<
 >(({ children, className, ...props }, forwardedRef) => (
   <Accordion.Content
     className={classNames(
-      'z-10 -mt-2 mb-1 max-h-[200px] overflow-hidden overflow-y-scroll rounded-b-xl border border-neutral-600/80 bg-neutral-700 pt-5 group-data-[state=open]:pb-20',
+      'z-10 -mt-4 mb-1 max-h-[300px] overflow-hidden overflow-y-scroll rounded-b-xl border border-neutral-600/80 bg-neutral-700 group-data-[state=open]:pb-20',
       className
     )}
     {...props}
