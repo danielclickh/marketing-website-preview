@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import * as Accordion from '@radix-ui/react-accordion'
 import classNames from 'classnames'
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef, useState, useEffect, useRef } from 'react'
 import Markdown from '../../components/Markdown'
 import accordionItems from './building-a-logging-system.json'
 import Diagram from './LoggingDiagram'
@@ -13,8 +13,24 @@ const AccordionComponent = () => {
     return parseInt(itemId, 10)
   }
 
+  const selectedAccordionRef = useRef<HTMLDivElement>(null)
+  const isFirstRender = useRef(true)
+  const targetElement = document.getElementById('diagramTop')
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+    } else {
+      targetElement?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }, [activeItem])
+
   return (
-    <div className='mx-auto flex w-full flex-col rounded-xl border border-neutral-700/80 bg-neutral-900/50 p-4 lg:flex-row'>
+    <div
+      className='mx-auto flex w-full flex-col rounded-xl border border-neutral-700/80 bg-neutral-900/50 p-4 lg:flex-row'
+      id='diagramTop'>
       <div className='lg:w-1/2'>
         <Diagram
           className='px-20 py-10'
@@ -32,7 +48,14 @@ const AccordionComponent = () => {
               setActiveItem(item)
             }}>
             {accordionItems.map((item) => (
-              <AccordionItem value={`item-${item.id}`} key={item.id}>
+              <AccordionItem
+                value={`item-${item.id}`}
+                key={item.id}
+                ref={
+                  item.id === strippedSectionId(activeItem)
+                    ? selectedAccordionRef
+                    : null
+                }>
                 <AccordionTrigger>
                   {item.category ? (
                     <div className='flex w-full flex-col gap-y-4 text-left'>
@@ -61,12 +84,11 @@ const AccordionComponent = () => {
 
 const AccordionItem = forwardRef<HTMLDivElement, Accordion.AccordionItemProps>(
   ({ children, className, ...props }, forwardedRef) => (
-    <Accordion.Item
-      className={classNames('', className)}
-      {...props}
-      ref={forwardedRef}>
-      {children}
-    </Accordion.Item>
+    <div ref={forwardedRef}>
+      <Accordion.Item className={classNames('', className)} {...props}>
+        {children}
+      </Accordion.Item>
+    </div>
   )
 )
 
@@ -84,8 +106,7 @@ const AccordionTrigger = forwardRef<
       ref={forwardedRef}>
       {children}
       <ChevronDownIcon
-        className='text-violet10 group-data-[state=open]:rotate-```jsx 180 h-5 w-5 transition-transform duration-300
-        ease-[cubic-bezier(0.87,_0,_0.13,_1)]'
+        className='text-violet10 h-5 w-5 transition-transform duration-300 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:rotate-180'
         aria-hidden
       />
     </Accordion.Trigger>

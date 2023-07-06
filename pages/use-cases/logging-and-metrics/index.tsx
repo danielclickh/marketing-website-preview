@@ -25,8 +25,6 @@ export const getStaticProps: GetStaticProps<LoggingProps> =
   async function getStaticProps() {
     const params = {
       populate: [
-        'hero',
-        'hero.ctaButton',
         'seo',
         'seo.image',
         'customerStories',

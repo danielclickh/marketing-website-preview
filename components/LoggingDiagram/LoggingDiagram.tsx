@@ -21,7 +21,7 @@ const Diagram: React.FC<DiagramProps> = ({ className, sectionId }) => {
           <SvgSection
             key={id}
             className={`mx-auto w-full transition-opacity duration-500 ${
-              sectionId === id ? 'opacity-100' : 'opacity-50'
+              sectionId === id ? 'opacity-100' : 'opacity-30'
             }`}
           />
         ))}
