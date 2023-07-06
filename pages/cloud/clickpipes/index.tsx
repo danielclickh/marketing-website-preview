@@ -190,7 +190,7 @@ export default function ClickHouseServerPage({
                   <h4 className='mb-4 text-base font-semibold text-primary-300'>
                     <Link href='/cloud'>Cloud</Link> / Data Ingestion
                   </h4>
-                  <h1 className='relative mt-4 mb-6 inline-block font-basier text-4xl font-semibold leading-tight md:mt-0 md:text-5.5xl'>
+                  <h1 className='relative mb-3 mt-4 inline-block font-basier text-4xl font-semibold leading-tight md:mt-0 md:text-5.5xl'>
                     ClickPipes
                     <div className='absolute -top-2 -right-10 rounded-full bg-primary-300 px-3 text-sm font-normal text-neutral-725 md:-top-1'>
                       Beta
@@ -200,9 +200,9 @@ export default function ClickHouseServerPage({
                     size='base'
                     color='secondary'
                     className='mt-6 text-neutral-200 md:pr-16'>
-                    ClickPipes is an integration engine that makes ingesting
-                    massive volumes of data from a diverse set of sources as
-                    simple as clicking a few buttons.
+                    An integration engine that makes ingesting massive volumes
+                    of data from a diverse set of sources as simple as clicking
+                    a few buttons.
                   </SuiText>
                   <div className='mt-8 flex flex-col items-center justify-center gap-6 sm:flex-row lg:justify-start'>
                     <CUIButton
