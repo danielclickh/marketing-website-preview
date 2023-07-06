@@ -202,10 +202,7 @@ export default function ClickHouseServerPage({
                     className='mt-6 text-neutral-200 md:pr-16'>
                     ClickPipes is an integration engine that makes ingesting
                     massive volumes of data from a diverse set of sources as
-                    simple as clicking a few buttons. Our robust and scalable
-                    architecture empowers you to handle the most demanding
-                    workloads, with guaranteed high throughput and low latency
-                    at scale.
+                    simple as clicking a few buttons.
                   </SuiText>
                   <div className='mt-8 flex flex-col items-center justify-center gap-6 sm:flex-row lg:justify-start'>
                     <CUIButton
