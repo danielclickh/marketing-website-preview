@@ -1,0 +1,110 @@
+import { ChevronDownIcon } from '@heroicons/react/solid'
+import * as Accordion from '@radix-ui/react-accordion'
+import classNames from 'classnames'
+import React, { forwardRef, useState } from 'react'
+import Markdown from '../../components/Markdown'
+import accordionItems from './building-a-logging-system.json'
+import Diagram from './LoggingDiagram'
+
+const AccordionComponent = () => {
+  const [activeItem, setActiveItem] = useState('item-10')
+  const strippedSectionId = (activeItemRadix: string) => {
+    const itemId = activeItemRadix.replace('item-', '')
+    return parseInt(itemId, 10)
+  }
+
+  return (
+    <div className='mx-auto flex w-full flex-col rounded-xl border border-neutral-700/80 bg-neutral-900/50 p-4 lg:flex-row'>
+      <div className='lg:w-1/2'>
+        <Diagram
+          className='px-20 py-10'
+          sectionId={strippedSectionId(activeItem)}
+        />
+      </div>
+      <div className='lg:w-1/2'>
+        <div className='h-full w-full'>
+          <Accordion.Root
+            className='w-full'
+            type='single'
+            defaultValue='item-10'
+            collapsible
+            onValueChange={(item) => {
+              setActiveItem(item)
+            }}>
+            {accordionItems.map((item) => (
+              <AccordionItem value={`item-${item.id}`} key={item.id}>
+                <AccordionTrigger>
+                  {item.category ? (
+                    <div className='flex w-full flex-col gap-y-4 text-left'>
+                      <div className='font-inconsolata text-xl text-primary-300'>
+                        {item.category}
+                      </div>
+                      {item.title}
+                    </div>
+                  ) : (
+                    <>{item.title}</>
+                  )}
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className='rich_content'>
+                    <Markdown children={item.content} />
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion.Root>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const AccordionItem = forwardRef<HTMLDivElement, Accordion.AccordionItemProps>(
+  ({ children, className, ...props }, forwardedRef) => (
+    <Accordion.Item
+      className={classNames('', className)}
+      {...props}
+      ref={forwardedRef}>
+      {children}
+    </Accordion.Item>
+  )
+)
+
+const AccordionTrigger = forwardRef<
+  HTMLButtonElement,
+  Accordion.AccordionTriggerProps
+>(({ children, className, ...props }, forwardedRef) => (
+  <Accordion.Header className='flex'>
+    <Accordion.Trigger
+      className={classNames(
+        'group my-1 flex flex-1 items-center justify-between rounded-xl border border-neutral-600/80 bg-neutral-700 p-8 text-2xl font-semibold leading-none outline-none hover:cursor-pointer data-[state=open]:rounded-b-none data-[state=open]:border-b-0 data-[state=open]:pb-2',
+        className
+      )}
+      {...props}
+      ref={forwardedRef}>
+      {children}
+      <ChevronDownIcon
+        className='text-violet10 group-data-[state=open]:rotate-```jsx 180 h-5 w-5 transition-transform duration-300
+        ease-[cubic-bezier(0.87,_0,_0.13,_1)]'
+        aria-hidden
+      />
+    </Accordion.Trigger>
+  </Accordion.Header>
+))
+
+const AccordionContent = forwardRef<
+  HTMLDivElement,
+  Accordion.AccordionContentProps
+>(({ children, className, ...props }, forwardedRef) => (
+  <Accordion.Content
+    className={classNames(
+      '-mt-5 mb-1 rounded-b-xl border border-neutral-600/80 bg-neutral-700 pt-5',
+      className
+    )}
+    {...props}
+    ref={forwardedRef}>
+    <div className='p-8 pt-4'>{children}</div>
+  </Accordion.Content>
+))
+
+export default AccordionComponent

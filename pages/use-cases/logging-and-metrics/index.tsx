@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
 import { CUICard } from '../../../components/ClickUI'
@@ -12,11 +13,9 @@ import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
+import AccordionComponent from '../../../components/LoggingDiagram/Accordion'
 import features from './features.json'
 import quotes from './quotes.json'
-import loggingSystems from './building-a-logging-system.json'
-import { Disclosure, Transition } from '@headlessui/react'
-import { ChevronUpIcon } from '@heroicons/react/solid'
 
 interface LoggingProps extends CommonProps {
   customerStories: any
@@ -60,8 +59,6 @@ export default function ClickHouseServerPage({
   headerData,
   footerData
 }: LoggingProps) {
-  // Split the customerStories.logos array into two separate arrays
-
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -215,63 +212,11 @@ export default function ClickHouseServerPage({
                 width={72}
                 height={73}
               />
-              <SuiTitle type='h2' className='mt-8 mb-6'>
+              <SuiTitle type='h2' className='mt-8 mb-24'>
                 How to build a logging system with ClickHouse
               </SuiTitle>
             </div>
-            <div className='mx-auto flex w-full rounded-xl border border-neutral-700/80 bg-neutral-900/50 p-4'>
-              <div className='w-1/2'>
-                <Image
-                  src='/images/use-cases/logging/how-to-build-a-logging-system-diagram.svg'
-                  width={404}
-                  height={723}
-                  alt='ClickHouse is linearly scalable'
-                  className='mx-auto w-full px-20 py-10'
-                />
-              </div>
-              <div className='w-1/2'>
-                <div className='h-full w-full'>
-                  <div className='mx-auto w-full rounded-2xl bg-white p-2'>
-                    <Disclosure>
-                      {({ open }) => (
-                        <>
-                          <Disclosure.Button className='flex w-full justify-between rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75'>
-                            <span>What is your refund policy?</span>
-                            <ChevronUpIcon
-                              className={`${
-                                open ? 'rotate-180 transform' : ''
-                              } h-5 w-5 text-purple-500`}
-                            />
-                          </Disclosure.Button>
-                          <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
-                            If you're unhappy with your purchase for any reason,
-                            email us within 90 days and we'll refund you in
-                            full, no questions asked.
-                          </Disclosure.Panel>
-                        </>
-                      )}
-                    </Disclosure>
-                    <Disclosure as='div' className='mt-2'>
-                      {({ open }) => (
-                        <>
-                          <Disclosure.Button className='flex w-full justify-between rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75'>
-                            <span>Do you offer technical support?</span>
-                            <ChevronUpIcon
-                              className={`${
-                                open ? 'rotate-180 transform' : ''
-                              } h-5 w-5 text-purple-500`}
-                            />
-                          </Disclosure.Button>
-                          <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
-                            No.
-                          </Disclosure.Panel>
-                        </>
-                      )}
-                    </Disclosure>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <AccordionComponent />
           </div>
         </div>
 
@@ -323,7 +268,7 @@ export default function ClickHouseServerPage({
               src='/images/clickhouse/section_scale.svg'
               alt='ClickHouse at scale'
               width={72}
-              height={72}
+              height={73}
             />
             <SuiTitle type='h2' className='mt-8 mb-6'>
               fas
