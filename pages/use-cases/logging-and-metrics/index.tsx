@@ -1,36 +1,44 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import BulletPoint from '../../../components/BulletPoint'
+import ReactMarkdown from 'react-markdown'
+import Tilt from 'react-parallax-tilt'
 import { CUICard } from '../../../components/ClickUI'
 import GetStarted from '../../../components/GetStarted'
 import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
+import LogoCarousel from '../../../components/LogoCarousel'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { ClickhouseData } from '../../../types/clickhouse'
+import { CommonProps } from '../../../types/homepage'
 import features from './features.json'
+import quotes from './quotes.json'
+import loggingSystems from './building-a-logging-system.json'
+import { Disclosure, Transition } from '@headlessui/react'
+import { ChevronUpIcon } from '@heroicons/react/solid'
 
-export const getStaticProps: GetStaticProps<ClickhouseData> =
+interface LoggingProps extends CommonProps {
+  customerStories: any
+}
+
+export const getStaticProps: GetStaticProps<LoggingProps> =
   async function getStaticProps() {
     const params = {
       populate: [
         'hero',
-        'hero.mainButton',
-        'hero.secondaryButton',
-        'hero.gitButton',
-        'hero.gitButton.darkIconPng',
-        'hero.gitButton.lightIconPng',
-        'hero.backgroundPng',
-        'features5',
-        'features5.iconSvg',
-        'features5.items',
+        'hero.ctaButton',
         'seo',
-        'seo.image'
+        'seo.image',
+        'customerStories',
+        'customerStories.*',
+        'customerStories.logos.*',
+        'customerStories.logos.darkLogoPng'
       ]
     }
-    const data = await findOne('click-house', params)
+
+    const data = await findOne('homepage', params)
+
     data.seo.path = '/use-cases/logging'
     data.seo.title = 'Logging with ClickHouse | ClickHouse for Logging Metrics'
     data.seo.description =
@@ -46,14 +54,14 @@ export const getStaticProps: GetStaticProps<ClickhouseData> =
   }
 
 export default function ClickHouseServerPage({
-  hero,
-  features5,
+  customerStories,
   seo,
   platforms,
   headerData,
   footerData
-}: ClickhouseData) {
-  const { description, mainButton, secondaryButton, gitButton } = hero
+}: LoggingProps) {
+  // Split the customerStories.logos array into two separate arrays
+
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -66,7 +74,7 @@ export default function ClickHouseServerPage({
                     <Link href='/use-cases'>Use cases</Link> / Logging &amp;
                     Metrics
                   </h4>
-                  <h1 className='mb-6 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
+                  <h1 className='mb-6 max-w-md font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
                     Logging with ClickHouse
                   </h1>
                   <SuiText
@@ -109,91 +117,159 @@ export default function ClickHouseServerPage({
               fast observability store.
             </h2>
           </div>
-          <div className='mx-auto flex max-w-7xl gap-x-10'>
+          <div className='mx-auto flex max-w-5xl gap-x-10 pb-24'>
             {features.map((feature) => {
-              return <div key={feature.id}>{feature.title}</div>
+              return (
+                <div key={feature.id} className='flex-1 text-center'>
+                  <Image
+                    src={feature.icon}
+                    width={32}
+                    height={32}
+                    alt={feature.content}
+                    className='mx-auto '
+                  />
+                  <div className='rich_content px-4 pt-4 text-neutral-200'>
+                    <ReactMarkdown children={feature.content} />
+                  </div>
+                </div>
+              )
             })}
+          </div>
+        </div>
+        <div className='clip-inverted-triangle bg-neutral-725'>
+          <div className='section-container max-w-7xl'>
+            <div className='relative flex flex-col rounded-lg border-t-2 border-neutral-700/80 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
+              <div className='p-10'>
+                <div className='flex h-[300px] gap-x-6 gap-y-6'>
+                  {quotes.map((quote) => (
+                    <Tilt
+                      tiltEnable={false}
+                      glareEnable={true}
+                      glareMaxOpacity={0.4}
+                      glareColor='rgba(251, 255, 70, 0.08)'
+                      glarePosition='all'
+                      className='flex-1'
+                      key={quote.id}>
+                      <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:shadow-lg'>
+                        <Image
+                          src='/images/Quote.svg'
+                          width={37}
+                          height={28}
+                          alt='Quote'
+                          className='mb-4 block'
+                        />
+                        <SuiText
+                          size='sm'
+                          color='secondary'
+                          className='text-left'>
+                          {quote.content}
+                        </SuiText>
+                        <Image
+                          src={quote.logo}
+                          width={quote.imgWidth}
+                          height={quote.imgHeight}
+                          alt={quote.title}
+                          className='mt-auto'
+                        />
+                      </div>
+                    </Tilt>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='-mt-1 h-1 w-full bg-primary-300'></div>
+        </div>
+        <div className='bg-primary-300 py-12'></div>
+
+        <div className='relative z-10 mx-auto -mt-10 bg-primary-300'>
+          <div className='relative z-10 mx-auto -mt-10 max-w-7xl'>
+            <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
+              <div className='flip-selection mx-auto flex flex-col text-center'>
+                <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
+                  Trusted by developers that work with data at{' '}
+                  <span className='tilted tilted-black'>
+                    <span className='tilted-content leading-8'>scale</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-20 md:gap-x-14'>
+              <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
+              <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
+              <LogoCarousel
+                logos={customerStories.logos}
+                speedClass1='animate-marqueeLeft5'
+                speedClass2='animate-marqueeLeft6'
+              />
+            </div>
           </div>
         </div>
 
         <div className='relative mx-auto mt-12 flex flex-col gap-y-28 md:mt-24 md:px-0 '>
-          <div className='section-container bg-shadow-element-left red-shadow flex w-full flex-col items-center justify-between self-center'>
+          <div className='section-container bg-shadow-element-right yellow-shadow flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
               <Image
-                src='/images/clickhouse/section_efficient.svg'
-                alt='ClickHouse efficiency'
+                src='/images/use-cases/logging/icon-logging.svg'
+                alt='Logging'
                 width={72}
-                height={72}
+                height={73}
               />
               <SuiTitle type='h2' className='mt-8 mb-6'>
-                Hardware efficient
+                How to build a logging system with ClickHouse
               </SuiTitle>
-              <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200 md:pb-16'>
-                ClickHouse processes analytical queries 100-1000x faster than
-                traditional row-oriented systems with the same available I/O
-                throughput and CPU capacity. Columnar storage format allows
-                fitting more hot data in RAM, which leads to shorter response
-                times.
+            </div>
+            <div className='mx-auto flex w-full rounded-xl border border-neutral-700/80 bg-neutral-900/50 p-4'>
+              <div className='w-1/2'>
+                <Image
+                  src='/images/use-cases/logging/how-to-build-a-logging-system-diagram.svg'
+                  width={404}
+                  height={723}
+                  alt='ClickHouse is linearly scalable'
+                  className='mx-auto w-full px-20 py-10'
+                />
               </div>
-
-              <div className='mx-auto mt-10 grid grid-cols-1 content-baseline gap-10 px-4 md:mt-0 md:grid-cols-3 md:px-0'>
-                <CUICard
-                  title='Strives for CPU efficiency'
-                  className='py-6 px-4'>
-                  <p className='font-inconsolata text-primary-300'>
-                    Vectorization
-                  </p>
-                  <h3 className='mb-6 px-2 text-center font-basier text-2xl font-semibold leading-tight md:text-2xl xl:px-4'>
-                    Maximizes CPU efficiency
-                  </h3>
-
-                  <SuiText
-                    size='sm'
-                    color='secondary'
-                    className='px-0 text-center xl:px-4'>
-                    Vectorized query execution leverages SIMD processor
-                    instructions and runtime code generation. Processing data in
-                    columns increases CPU cache line hit rate.
-                  </SuiText>
-                </CUICard>
-
-                <CUICard
-                  title='Strives for CPU efficiency'
-                  className='py-6 px-4'>
-                  <p className='font-inconsolata text-primary-300'>Locality</p>
-                  <h3 className='mb-6 px-2 text-center font-basier text-2xl font-semibold leading-tight md:text-2xl xl:px-4'>
-                    Optimizes disk access
-                  </h3>
-
-                  <SuiText
-                    size='sm'
-                    color='secondary'
-                    className='px-0 text-center xl:px-4'>
-                    ClickHouse minimizes the number of seeks for range queries
-                    to increase efficiency of using disk drives and maintain
-                    locality of reference for continually stored data.
-                  </SuiText>
-                </CUICard>
-
-                <CUICard
-                  title='Strives for CPU efficiency'
-                  className='py-6 px-4'>
-                  <p className='font-inconsolata text-primary-300'>
-                    Throughput
-                  </p>
-                  <h3 className='mb-6 px-2 text-center font-basier text-2xl font-semibold leading-tight md:text-2xl xl:px-4'>
-                    Minimizes data transfers
-                  </h3>
-
-                  <SuiText
-                    size='sm'
-                    color='secondary'
-                    className='px-0 text-center xl:px-4'>
-                    ClickHouse enables companies to manage their data and create
-                    reports without using specialized networks that are aimed at
-                    high-performance computing.
-                  </SuiText>
-                </CUICard>
+              <div className='w-1/2'>
+                <div className='h-full w-full'>
+                  <div className='mx-auto w-full rounded-2xl bg-white p-2'>
+                    <Disclosure>
+                      {({ open }) => (
+                        <>
+                          <Disclosure.Button className='flex w-full justify-between rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75'>
+                            <span>What is your refund policy?</span>
+                            <ChevronUpIcon
+                              className={`${
+                                open ? 'rotate-180 transform' : ''
+                              } h-5 w-5 text-purple-500`}
+                            />
+                          </Disclosure.Button>
+                          <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
+                            If you're unhappy with your purchase for any reason,
+                            email us within 90 days and we'll refund you in
+                            full, no questions asked.
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+                    <Disclosure as='div' className='mt-2'>
+                      {({ open }) => (
+                        <>
+                          <Disclosure.Button className='flex w-full justify-between rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75'>
+                            <span>Do you offer technical support?</span>
+                            <ChevronUpIcon
+                              className={`${
+                                open ? 'rotate-180 transform' : ''
+                              } h-5 w-5 text-purple-500`}
+                            />
+                          </Disclosure.Button>
+                          <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
+                            No.
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -250,7 +326,7 @@ export default function ClickHouseServerPage({
               height={72}
             />
             <SuiTitle type='h2' className='mt-8 mb-6'>
-              {features5.second_title}
+              fas
             </SuiTitle>
             <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200 md:pb-10'>
               ClickHouse is used in a variety of industries for a broad set of
@@ -259,13 +335,7 @@ export default function ClickHouseServerPage({
             </div>
 
             <div className='flex flex-col flex-wrap pt-12 md:mx-auto md:max-w-4xl md:flex-row md:pt-6'>
-              {features5.items.map((feature) => (
-                <BulletPoint
-                  key={feature.text}
-                  text={feature.text}
-                  className='w-full md:w-1/2 lg:w-1/3'
-                />
-              ))}
+              asdf
             </div>
           </div>
         </div>

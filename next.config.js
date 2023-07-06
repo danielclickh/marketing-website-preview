@@ -285,6 +285,11 @@ const nextConfig = {
         destination:
           '/blog/a-journey-to-io_uring-aio-and-modern-storage-devices',
         permanent: true
+      },
+      {
+        source: '/use-cases/logging',
+        destination: '/use-cases/logging-and-metrics',
+        permanent: true
       }
     ]
   }

@@ -1,0 +1,18 @@
+[
+    {
+        "id": 10,
+        "category": "Analytics",
+        "title": "Data Collection",
+        "content": "Observability systems typically leverage gateways or aggregators to handle the collection, batching, and piping of event data to a store like ClickHouse.\n \nThe OpenTelemetry Collector (alpha) is a great option for this task - having established a data standard for communication between gateway and agent instances, the OpenTelemetry protocol is widely supported and well adopted across the industry.\n \nIt is worth noting that the OpenTelemetry ClickHouse exporter is in alpha, and although we have had no issues collecting petabytes of logs, users should adhere to the advice provided by OpenTelemetry accordingly."
+    },
+    {
+        "id": 20,
+        "title": "ClickHouse",
+        "content": "ClickHouse is purpose-built to deliver the most efficient utilization of resources, which often results in significant cost savings. Developers report up to 300x in reduction of cost when switching to ClickHouse from out-of-the-box observability solutions like Datadog."
+    },
+    {
+        "id": 30,
+        "title": "UI",
+        "content": "ClickHouse benefits from a vibrant ecosystem of integrations that includes visualization tools like Grafana. At ClickHouse, we leverage this Grafana integration for our own internal Observability system."
+    }
+]

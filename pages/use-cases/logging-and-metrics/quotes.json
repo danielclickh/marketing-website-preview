@@ -1,0 +1,32 @@
+[
+    {
+        "id": 10,
+        "title": "Cloudflare",
+        "logo": "/images/use-cases/logging/logo-cloudflare.svg",
+        "content": "ClickHouse helps us efficiently and reliably analyze logs across trillions of Internet requests to identify malicious traffic and provide customers with rich analytics",
+        "href": "https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse",
+        "target": "_blank",
+        "imgWidth": 102,
+        "imgHeight": 34
+    },
+    {
+        "id": 20,
+        "title": "Highlight.io",
+        "logo": "/images/use-cases/logging/logo-highlight.svg",
+        "content": "Now, our customers can search through months of browser and server-side log data in under a second thanks to the tech behind ClickHouse.",
+        "href": "/blog/overview-of-highlightio",
+        "target": "_blank",
+        "imgWidth": 153,
+        "imgHeight": 30
+    },
+    {
+        "id": 30,
+        "logo": "/images/use-cases/logging/logo-uber.svg",
+        "title": "Uber",
+        "content": "The platform is ingesting millions of logs per second from thousands of services across regions, storing several PBs worth, and serving hundreds of queries per second from both dashboards and programs.",
+        "href": "https://www.uber.com/blog/logging",
+        "target": "_blank",
+        "imgWidth": 74,
+        "imgHeight": 26
+    }
+]

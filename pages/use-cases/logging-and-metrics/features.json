@@ -1,20 +1,20 @@
 [
   {
     "id": 1,
-    "icon": "/images/clickhouse/lightening.svg",
+    "icon": "/images/use-cases/logging/money-light.svg",
     "title": "300x",
-    "content": "**In cost savings** when compared to out-of-the-box Observability solutions like Datadog"
+    "content": "Up to **300x in cost savings** when compared to out-of-the-box Observability solutions like Datadog"
   },
   {
     "id": 2,
-    "icon": "/images/clickhouse/scalable.svg",
+    "icon": "/images/use-cases/logging/gauge-light.svg",
     "title": "10x",
-    "content": "**Ingestion rates of gigabytes per second** to meet all of your real-time needs"
+    "content": "Supports **ingestion rates of gigabytes per second** to meet all of your real-time needs"
   },
   {
     "id": 3,
-    "icon": "/images/clickhouse/fault-tolerance.svg",
+    "icon": "/images/use-cases/logging/trend-up-light.svg",
     "title": "30x",
-    "content": "**Compression ratios** ensuring best-in-class storage usage"
+    "content": "Up to **x30 compression ratios** ensuring best-in-class storage usage"
   }
 ]

@@ -325,7 +325,9 @@ module.exports = {
         marqueeLeft: 'marqueeLeftTransform 75s linear infinite',
         marqueeLeft2: 'marqueeLeftTransform2 75s linear infinite ',
         marqueeLeft3: 'marqueeLeftTransform 90s linear infinite',
-        marqueeLeft4: 'marqueeLeftTransform2 90s linear infinite '
+        marqueeLeft4: 'marqueeLeftTransform2 90s linear infinite ',
+        marqueeLeft5: 'marqueeLeftTransform 190s linear infinite',
+        marqueeLeft6: 'marqueeLeftTransform2 190s linear infinite '
       }
     }
   }
