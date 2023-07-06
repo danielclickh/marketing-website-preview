@@ -16,14 +16,18 @@ const Diagram: React.FC<DiagramProps> = ({ className, sectionId }) => {
 
   return (
     <div className={className}>
-      <div id='section1'>
+      <div
+        id='diagramContainer'
+        className='h-[500px] overflow-hidden overflow-y-scroll'>
         {sections.map(({ id, component: SvgSection }) => (
-          <SvgSection
+          <div
             key={id}
             className={`mx-auto w-full transition-opacity duration-500 ${
               sectionId === id ? 'opacity-100' : 'opacity-30'
             }`}
-          />
+            id={`section-${id}`}>
+            <SvgSection />
+          </div>
         ))}
       </div>
     </div>

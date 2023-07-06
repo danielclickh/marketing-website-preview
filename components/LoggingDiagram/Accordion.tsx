@@ -8,7 +8,7 @@ import Diagram from './LoggingDiagram'
 
 const AccordionComponent = () => {
   const [activeItem, setActiveItem] = useState('item-10')
-  const strippedSectionId = (activeItemRadix: string) => {
+  const strippedItemId = (activeItemRadix: string) => {
     const itemId = activeItemRadix.replace('item-', '')
     return parseInt(itemId, 10)
   }
@@ -34,7 +34,7 @@ const AccordionComponent = () => {
       <div className='lg:w-1/2'>
         <Diagram
           className='px-20 py-10'
-          sectionId={strippedSectionId(activeItem)}
+          sectionId={strippedItemId(activeItem)}
         />
       </div>
       <div className='lg:w-1/2'>
@@ -52,7 +52,7 @@ const AccordionComponent = () => {
                 value={`item-${item.id}`}
                 key={item.id}
                 ref={
-                  item.id === strippedSectionId(activeItem)
+                  item.id === strippedItemId(activeItem)
                     ? selectedAccordionRef
                     : null
                 }>
@@ -69,9 +69,7 @@ const AccordionComponent = () => {
                   )}
                 </AccordionTrigger>
                 <AccordionContent>
-                  <div className='rich_content'>
-                    <Markdown children={item.content} />
-                  </div>
+                  <Markdown children={item.content} />
                 </AccordionContent>
               </AccordionItem>
             ))}
@@ -99,7 +97,7 @@ const AccordionTrigger = forwardRef<
   <Accordion.Header className='flex'>
     <Accordion.Trigger
       className={classNames(
-        'group my-1 flex flex-1 items-center justify-between rounded-xl border border-neutral-600/80 bg-neutral-700 p-8 text-2xl font-semibold leading-none outline-none hover:cursor-pointer data-[state=open]:rounded-b-none data-[state=open]:border-b-0 data-[state=open]:pb-2',
+        'group z-20 my-1 flex flex-1 items-center justify-between rounded-xl border border-neutral-600/80 bg-neutral-700 p-8 text-2xl font-semibold leading-none outline-none hover:cursor-pointer data-[state=open]:rounded-b-none data-[state=open]:border-b-0 data-[state=open]:pb-2',
         className
       )}
       {...props}
@@ -119,12 +117,14 @@ const AccordionContent = forwardRef<
 >(({ children, className, ...props }, forwardedRef) => (
   <Accordion.Content
     className={classNames(
-      '-mt-5 mb-1 rounded-b-xl border border-neutral-600/80 bg-neutral-700 pt-5',
+      'z-10 -mt-2 mb-1 max-h-[200px] overflow-hidden overflow-y-scroll rounded-b-xl border border-neutral-600/80 bg-neutral-700 pt-5 group-data-[state=open]:pb-20',
       className
     )}
     {...props}
     ref={forwardedRef}>
-    <div className='p-8 pt-4'>{children}</div>
+    <div className='border-t-5 border-neutral-600/80 bg-neutral-700 p-8 pt-4'>
+      {children}
+    </div>
   </Accordion.Content>
 ))
 
