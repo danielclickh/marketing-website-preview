@@ -44,7 +44,7 @@ const Diagram: React.FC<DiagramProps> = ({ className, sectionId }) => {
       <div
         ref={diagramContainerRef}
         id='diagramContainer'
-        className='h-[723px] overflow-hidden overflow-y-scroll'>
+        className='hide-scrollbar h-[723px] overflow-hidden'>
         {sections.map(({ id, component: SvgSection }, index) => (
           <div
             key={id}

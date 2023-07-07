@@ -117,7 +117,7 @@ const AccordionContent = forwardRef<
 >(({ children, className, ...props }, forwardedRef) => (
   <Accordion.Content
     className={classNames(
-      'z-10 -mt-4 mb-1 max-h-[300px] overflow-hidden overflow-y-scroll rounded-b-xl border border-neutral-600/80 bg-neutral-700 group-data-[state=open]:pb-20',
+      'hide-scrollbar z-10 -mt-4 mb-1 max-h-[300px] overflow-hidden overflow-y-scroll rounded-b-xl border border-neutral-600/80 bg-neutral-700 group-data-[state=open]:pb-20',
       className
     )}
     {...props}
