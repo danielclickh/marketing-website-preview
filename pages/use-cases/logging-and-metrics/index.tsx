@@ -255,26 +255,41 @@ export default function ClickHouseServerPage({
             />
           </div>
         </div>
-        <HRSeparator className='my-12 md:my-24' />
-        <div className='section-container bg-shadow-element-left red-shadow flex w-full flex-col items-center justify-between self-center px-4 pb-16 md:px-8 2xl:px-0'>
+
+        <div className='section-container bg-shadow-element-left red-shadow mt-24 flex w-full flex-col items-center justify-between self-center px-4 pb-16 md:px-8 2xl:px-0'>
           <div className='flex w-full flex-col items-center'>
             <Image
-              src='/images/clickhouse/section_scale.svg'
-              alt='ClickHouse at scale'
+              src='/images/use-cases/logging/icon-multi-support.svg'
+              alt='  Multi-region support'
               width={72}
               height={73}
             />
             <SuiTitle type='h2' className='mt-8 mb-6'>
-              fas
+              Multi-region support
             </SuiTitle>
-            <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200 md:pb-10'>
-              ClickHouse is used in a variety of industries for a broad set of
-              use cases on top of both customer-facing and internally-facing
-              workloads.
-            </div>
 
-            <div className='flex flex-col flex-wrap pt-12 md:mx-auto md:max-w-4xl md:flex-row md:pt-6'>
-              asdf
+            <div className='pt-12 text-center text-xl leading-relaxed md:mx-auto md:max-w-3xl md:pt-6'>
+              With the{' '}
+              <span className='underline'>Distributed Table Engine</span>,
+              ClickHouse offers a robust distributed cluster design - perfect
+              for log management applications.
+            </div>
+            <div className='mt-10 flex max-w-3xl flex-col gap-10 text-center md:flex-row'>
+              <div className=''>
+                By creating independent ClickHouse instances for each
+                operational region, the system can guarantee that raw,
+                uncompressed data remains within its region of origin. This
+                approach reduces the demand for cross-region data transfer, a
+                notable benefit when considering network resource utilization
+                and costs.
+              </div>
+              <div>
+                Cross-region queries, while possible, are selectively employed.
+                They're only initiated when the system handles queries that
+                necessitate data from remote regions. This strategy effectively
+                minimizes the unnecessary cross-region traffic, improving both
+                latency and cost-effectiveness.
+              </div>
             </div>
           </div>
         </div>
