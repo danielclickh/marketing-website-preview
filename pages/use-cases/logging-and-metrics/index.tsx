@@ -218,8 +218,6 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <HRSeparator className='my-12 md:my-24' />
-
         <div className='relative mx-auto mt-12 flex flex-col gap-y-28 md:mt-24 md:px-0 '>
           <div className='section-container bg-shadow-element-right yellow-shadow flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
@@ -235,17 +233,18 @@ export default function ClickHouseServerPage({
             </div>
           </div>
         </div>
-        <div className='mx-auto overflow-hidden lg:max-w-7xl'>
-          <Image
-            src='/images/use-cases/logging/regions.svg'
-            alt='Multi-region setup'
-            width={1200}
-            height={965}
-            priority
-            className='w-full'
-          />
+        <div className='hide-scrollbar overflow-hidden overflow-x-scroll sm:mx-auto sm:max-w-7xl'>
+          <div className='hide-scrollbar w-[800px] items-center overflow-x-scroll sm:w-auto'>
+            <Image
+              src='/images/use-cases/logging/regions.svg'
+              alt='Multi-region setup'
+              width={1200}
+              height={965}
+              priority
+              className='mx-auto h-auto w-max'
+            />
+          </div>
         </div>
-
         <HRSeparator className='my-12 md:my-24' />
 
         <div className='section-container bg-shadow-element-left red-shadow flex w-full flex-col items-center justify-between self-center px-4 pb-16 md:px-8 2xl:px-0'>
