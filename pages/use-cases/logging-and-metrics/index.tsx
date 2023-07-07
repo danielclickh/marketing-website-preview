@@ -227,7 +227,7 @@ export default function ClickHouseServerPage({
                   height={73}
                 />
                 <SuiTitle type='h2' className='mb-16 mt-8 text-center'>
-                  How to build a logging system with ClickHouse
+                  System overview
                 </SuiTitle>
               </div>
               <AccordionComponent />
