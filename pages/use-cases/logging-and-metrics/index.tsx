@@ -34,7 +34,7 @@ export const getStaticProps: GetStaticProps<LoggingProps> =
 
     const data = await findOne('homepage', params)
 
-    data.seo.path = '/use-cases/logging'
+    data.seo.path = '/use-cases/logging-and-metrics'
     data.seo.title =
       'Logging & Metrics with ClickHouse | ClickHouse for Logging Metrics'
     data.seo.description =
