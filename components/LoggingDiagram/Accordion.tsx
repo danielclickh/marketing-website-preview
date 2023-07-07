@@ -43,15 +43,19 @@ const AccordionComponent = () => {
                     : null
                 }>
                 <AccordionTrigger>
-                  {item.category ? (
-                    <div className='flex w-full flex-col gap-y-4 text-left'>
-                      <div className='font-inconsolata text-xl text-primary-300'>
-                        {item.category}
-                      </div>
-                      {item.title}
-                    </div>
-                  ) : (
-                    <>{item.title}</>
+                  {item.category && (
+                    <>
+                      {item.category ? (
+                        <div className='flex w-full flex-col gap-y-4 text-left'>
+                          <div className='font-inconsolata text-xl text-primary-300'>
+                            {item.category}
+                          </div>
+                          {item.title}
+                        </div>
+                      ) : (
+                        <>{item.title}</>
+                      )}
+                    </>
                   )}
                 </AccordionTrigger>
                 <AccordionContent>
