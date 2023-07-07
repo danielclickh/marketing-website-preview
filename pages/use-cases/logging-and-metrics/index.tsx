@@ -235,13 +235,14 @@ export default function ClickHouseServerPage({
             </div>
           </div>
         </div>
-        <div className='mx-auto max-w-7xl'>
+        <div className='mx-auto overflow-hidden lg:max-w-7xl'>
           <Image
             src='/images/use-cases/logging/regions.svg'
             alt='Multi-region setup'
             width={1200}
             height={965}
             priority
+            className='w-full'
           />
         </div>
 

@@ -1,4 +1,3 @@
-import React, { useRef } from 'react'
 import SvgSection1 from './SvgSection1'
 import SvgSection2 from './SvgSection2'
 import SvgSection3 from './SvgSection3'
@@ -17,17 +16,17 @@ const Diagram: React.FC<DiagramProps> = ({ className, sectionId }) => {
 
   return (
     <div className={className}>
-      <div id='diagramContainer' className='hide-scrollbar overflow-hidden'>
+      <div id='diagramContainer'>
         {sections.map(({ id, component: SvgSection }) => (
           <div
             key={id}
-            className={`mx-auto w-full transition-opacity duration-500 ${
+            className={`transition-opacity duration-500 ${
               sectionId === id
                 ? 'show-svg-background opacity-100'
                 : 'lg:opacity-20'
             }`}
             id={`section-${id}`}>
-            <SvgSection className='mx-auto flex items-center justify-center' />
+            <SvgSection className='relative' />
           </div>
         ))}
       </div>

@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import * as Accordion from '@radix-ui/react-accordion'
 import classNames from 'classnames'
-import React, { forwardRef, useState, useEffect, useRef } from 'react'
+import React, { forwardRef, useRef, useState } from 'react'
 import Markdown from '../../components/Markdown'
 import accordionItems from './building-a-logging-system.json'
 import Diagram from './LoggingDiagram'
@@ -14,36 +14,13 @@ const AccordionComponent = () => {
   }
 
   const selectedAccordionRef = useRef<HTMLDivElement>(null)
-  const isFirstRender = useRef(true)
-  useEffect(() => {
-    // if (isFirstRender.current) {
-    //   isFirstRender.current = false
-    // } else {
-    //   if (window.innerWidth >= 1080) {
-    //     const targetElement = document.getElementById('diagramTop')
-    //     targetElement?.scrollIntoView({
-    //       behavior: 'smooth',
-    //       block: 'start'
-    //     })
-    //   } else {
-    //     const targetElement = document.getElementById('accordionContainer')
-    //     targetElement?.scrollIntoView({
-    //       behavior: 'smooth',
-    //       block: 'start'
-    //     })
-    //   }
-    // }
-  }, [activeItem])
 
   return (
     <div
       className='mx-auto flex w-full flex-col rounded-xl border border-neutral-700/80 bg-neutral-900/50 p-4  lg:flex-row'
       id='diagramTop'>
       <div className='mb-12 w-full xl:mb-0 xl:w-1/2'>
-        <Diagram
-          className='lg:px-20 lg:py-12'
-          sectionId={strippedItemId(activeItem)}
-        />
+        <Diagram className='lg:py-6' sectionId={strippedItemId(activeItem)} />
       </div>
       <div className='w-full xl:w-1/2'>
         <div className='h-full w-full'>
