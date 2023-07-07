@@ -241,18 +241,17 @@ export default function CloudPage({
                   </CUICard>
                 ))}
               </div>
-              <HRSeparator className='my-24' />
 
-              <div className='mx-auto  max-w-2xl leading-normal text-neutral-200'>
-                <div className='flex items-center gap-x-10'>
-                  <div>
+              <div className='mx-auto mt-16 max-w-2xl leading-normal text-neutral-200'>
+                <div className='flex flex-col items-center gap-x-10 md:flex-row'>
+                  <div className='text-center md:text-left'>
                     <h3 className='relative mt-8 mb-6 inline-block text-left font-basier text-3xl font-semibold'>
                       ClickPipes
                       <div className='absolute -top-3 -right-10 rounded-full bg-primary-300 px-3 text-sm font-normal text-neutral-725'>
                         Beta
                       </div>
                     </h3>
-                    <p>
+                    <p className='mb-6 text-center md:text-left'>
                       ClickPipes offers the easiest and most intuitive way to
                       ingest data into ClickHouse Cloud. With support for Apache
                       Kafka and Confluent today, and many more data sources
@@ -289,7 +288,7 @@ export default function CloudPage({
         </div>
 
         <HRSeparator className='my-24' />
-        <div className='relative flex flex-col gap-y-28 pb-24'>
+        <div className='relative flex flex-col gap-y-28 '>
           <div className='section-container bg-shadow-element-right red-shadow flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
               <Image
