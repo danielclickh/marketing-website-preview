@@ -5,7 +5,7 @@ interface DiagramProps {
 
 const SvgSection1: React.FC<DiagramProps> = ({ className }) => {
   return (
-    <div className='flex justify-center'>
+    <div className='flex justify-center' id='logging-diagram-section1'>
       <svg
         className={`${className}`}
         width='418'

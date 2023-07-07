@@ -591,3 +591,14 @@ a.arrow-link {
     clip-path: polygon(0 0, 100% 90%, 100% 100%, 0 100%);
   }
 }
+
+@layer utilities {
+  @supports (-webkit-touch-callout: none) {
+    #logging-diagram-section2 {
+     @apply -mt-20
+    }
+    #logging-diagram-section3 {
+      @apply -mt-12
+     }
+  }
+}
