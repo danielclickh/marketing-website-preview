@@ -35,9 +35,10 @@ export const getStaticProps: GetStaticProps<LoggingProps> =
     const data = await findOne('homepage', params)
 
     data.seo.path = '/use-cases/logging'
-    data.seo.title = 'Logging with ClickHouse | ClickHouse for Logging Metrics'
+    data.seo.title =
+      'Logging & Metrics with ClickHouse | ClickHouse for Logging Metrics'
     data.seo.description =
-      'ClickHouse is the fastest and most resource efficient database for real-time analytics, making it the perfect fit for Observability use cases'
+      'ClickHouse is the fastest and most resource efficient database for real-time analytics, making it the perfect fit for observability use cases.'
 
     const commonProps = await getCommonProps()
     return {
@@ -74,8 +75,8 @@ export default function ClickHouseServerPage({
                     <Link href='/use-cases'>Use cases</Link> / Logging &amp;
                     Metrics
                   </h4>
-                  <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-md lg:text-left'>
-                    Logging with ClickHouse
+                  <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-lg lg:text-left'>
+                    Logging &amp; Metrics with ClickHouse
                   </h1>
                   <SuiText
                     size='base'
@@ -84,14 +85,16 @@ export default function ClickHouseServerPage({
                     <p className='mb-6'>
                       ClickHouse is the fastest and most resource efficient
                       database for real-time analytics, making it the perfect
-                      fit for Observability use cases.
+                      fit for observability use cases.
                     </p>
                     <p>
-                      When it comes to time series events data, like logs and
-                      metrics, ClickHouse shines in its ability to perform a
-                      huge range of analytical functions over massive volumes of
-                      data - leveraging features like high compression rates to
-                      ensure robust performance at scale.
+                      When it comes to time series event data like logs, traces,
+                      and metrics, ClickHouse shines in its ability to
+                      efficiently store, search, and query over years of
+                      structured data, leveraging high compression rates to
+                      ensure robust performance at scale. ClickHouse's expansive
+                      range of analytical and aggregation functions make real
+                      time analysis easy.
                     </p>
                   </SuiText>
                 </div>
@@ -112,9 +115,13 @@ export default function ClickHouseServerPage({
 
         <div className='bg-neutral-725 text-neutral-0'>
           <div className='container mx-auto max-w-4xl px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
-            <h2 className='text-center font-basier text-2xl font-semibold lg:text-4xl'>
+            <h2 className='text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
               Discover why companies are choosing ClickHouse as their blazing
-              fast observability store.
+              fast{' '}
+              <span className='tilted tilted-yellow'>
+                <span className='tilted-content'>observability</span>
+              </span>{' '}
+              store
             </h2>
           </div>
           <div className='mx-auto flex max-w-5xl flex-col gap-10 pb-24 md:flex-row'>
@@ -128,7 +135,7 @@ export default function ClickHouseServerPage({
                     alt={feature.content}
                     className='mx-auto '
                   />
-                  <div className='rich_content px-4 pt-4 text-neutral-200'>
+                  <div className='rich_content px-12 pt-4 text-neutral-200'>
                     <ReactMarkdown children={feature.content} />
                   </div>
                 </div>
@@ -140,7 +147,7 @@ export default function ClickHouseServerPage({
           <div className='section-container max-w-7xl'>
             <div className='relative flex flex-col rounded-lg border-t-2 border-neutral-700/80 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
-                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[300px] md:flex-row'>
+                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[350px] md:flex-row'>
                   {quotes.map((quote) => (
                     <Tilt
                       tiltEnable={false}
@@ -158,18 +165,21 @@ export default function ClickHouseServerPage({
                           alt='Quote'
                           className='mb-4 block'
                         />
-                        <SuiText
-                          size='sm'
-                          color='secondary'
-                          className='text-left'>
+                        <SuiText color='secondary' className='text-left'>
                           {quote.content}
                         </SuiText>
+                        <Link
+                          href={quote.href}
+                          target={quote.target}
+                          className='mt-4 text-left underline'>
+                          Read more &raquo;
+                        </Link>
                         <Image
                           src={quote.logo}
                           width={quote.imgWidth}
                           height={quote.imgHeight}
                           alt={quote.title}
-                          className='mt-10 md:mt-auto'
+                          className='mt-20 md:mt-auto'
                         />
                       </div>
                     </Tilt>

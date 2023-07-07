@@ -2,19 +2,19 @@
   {
     "id": 1,
     "icon": "/images/use-cases/logging/money-light.svg",
-    "title": "300x",
-    "content": "Up to **300x in cost savings** when compared to out-of-the-box Observability solutions like Datadog"
+    "title": "10-100x",
+    "content": "**10-100x in cost savings** depending on alternatives considered"
   },
   {
     "id": 2,
     "icon": "/images/use-cases/logging/gauge-light.svg",
     "title": "10x",
-    "content": "Supports **ingestion rates of gigabytes per second** to meet all of your real-time needs"
+    "content": "**Best-in-class ingestion rates** for the most demanding workloads"
   },
   {
     "id": 3,
     "icon": "/images/use-cases/logging/trend-up-light.svg",
     "title": "30x",
-    "content": "Up to **x30 compression ratios** ensuring best-in-class storage usage"
+    "content": "Up to **x30 compression ratios** for the most effective storage usage"
   }
 ]
