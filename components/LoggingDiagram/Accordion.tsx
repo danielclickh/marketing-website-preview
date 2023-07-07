@@ -16,23 +16,23 @@ const AccordionComponent = () => {
   const selectedAccordionRef = useRef<HTMLDivElement>(null)
   const isFirstRender = useRef(true)
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false
-    } else {
-      if (window.innerWidth >= 1080) {
-        const targetElement = document.getElementById('diagramTop')
-        targetElement?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        })
-      } else {
-        const targetElement = document.getElementById('accordionContainer')
-        targetElement?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        })
-      }
-    }
+    // if (isFirstRender.current) {
+    //   isFirstRender.current = false
+    // } else {
+    //   if (window.innerWidth >= 1080) {
+    //     const targetElement = document.getElementById('diagramTop')
+    //     targetElement?.scrollIntoView({
+    //       behavior: 'smooth',
+    //       block: 'start'
+    //     })
+    //   } else {
+    //     const targetElement = document.getElementById('accordionContainer')
+    //     targetElement?.scrollIntoView({
+    //       behavior: 'smooth',
+    //       block: 'start'
+    //     })
+    //   }
+    // }
   }, [activeItem])
 
   return (

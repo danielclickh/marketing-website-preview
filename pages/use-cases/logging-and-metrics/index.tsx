@@ -233,16 +233,16 @@ export default function ClickHouseServerPage({
                 Multi-region setup
               </SuiTitle>
             </div>
-            <div className='flex'>
-              <Image
-                src='/images/use-cases/logging/regions.svg'
-                alt='Multi-region setup'
-                width={1200}
-                height={965}
-                priority
-              />
-            </div>
           </div>
+        </div>
+        <div className='mx-auto max-w-7xl'>
+          <Image
+            src='/images/use-cases/logging/regions.svg'
+            alt='Multi-region setup'
+            width={1200}
+            height={965}
+            priority
+          />
         </div>
 
         <HRSeparator className='my-12 md:my-24' />
