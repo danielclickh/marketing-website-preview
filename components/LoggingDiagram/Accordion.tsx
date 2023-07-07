@@ -19,27 +19,36 @@ const AccordionComponent = () => {
     if (isFirstRender.current) {
       isFirstRender.current = false
     } else {
-      const targetElement = document.getElementById('diagramTop')
-      targetElement?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      })
+      if (window.innerWidth >= 1080) {
+        const targetElement = document.getElementById('diagramTop')
+        targetElement?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        })
+      } else {
+        const targetElement = document.getElementById('accordionContainer')
+        targetElement?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        })
+      }
     }
   }, [activeItem])
 
   return (
     <div
-      className='mx-auto flex w-full flex-col rounded-xl border border-neutral-700/80 bg-neutral-900/50 p-4 lg:flex-row'
+      className='mx-auto flex w-full flex-col rounded-xl border border-neutral-700/80 bg-neutral-900/50 p-4  lg:flex-row'
       id='diagramTop'>
-      <div className='lg:w-1/2'>
+      <div className='mb-12 w-full xl:mb-0 xl:w-1/2'>
         <Diagram
-          className='px-20 py-12'
+          className='lg:px-20 lg:py-12'
           sectionId={strippedItemId(activeItem)}
         />
       </div>
-      <div className='lg:w-1/2'>
+      <div className='w-full xl:w-1/2'>
         <div className='h-full w-full'>
           <Accordion.Root
+            id='accordionContainer'
             className='w-full'
             type='single'
             defaultValue='item-10'
@@ -117,7 +126,7 @@ const AccordionContent = forwardRef<
 >(({ children, className, ...props }, forwardedRef) => (
   <Accordion.Content
     className={classNames(
-      'hide-scrollbar z-10 -mt-4 mb-1 max-h-[300px] overflow-hidden overflow-y-scroll rounded-b-xl border border-neutral-600/80 bg-neutral-700 group-data-[state=open]:pb-20',
+      'hide-scrollbar z-10 -mt-4 mb-1 rounded-b-xl border border-neutral-600/80 bg-neutral-700 group-data-[state=open]:pb-20 xl:h-[600px] xl:max-h-[600px] xl:overflow-hidden xl:overflow-y-scroll',
       className
     )}
     {...props}

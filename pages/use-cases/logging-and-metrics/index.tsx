@@ -64,18 +64,18 @@ export default function ClickHouseServerPage({
           <div className='relative overflow-x-hidden bg-grid pt-10'>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>
               <div className='flex'>
-                <div className='flex-col text-center md:mt-16 md:w-7/12 md:text-left'>
-                  <h4 className='mb-6 text-base font-medium text-primary-300'>
+                <div className='flex-col xl:mt-16 xl:w-7/12'>
+                  <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
                     <Link href='/use-cases'>Use cases</Link> / Logging &amp;
                     Metrics
                   </h4>
-                  <h1 className='mb-6 max-w-md font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
+                  <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-md lg:text-left'>
                     Logging with ClickHouse
                   </h1>
                   <SuiText
                     size='base'
                     color='secondary'
-                    className='mt-6 md:pr-16'>
+                    className='mt-6 text-center md:pr-16 lg:text-left'>
                     <p className='mb-6'>
                       ClickHouse is the fastest and most resource efficient
                       database for real-time analytics, making it the perfect
@@ -106,13 +106,13 @@ export default function ClickHouseServerPage({
         </div>
 
         <div className='bg-neutral-725 text-neutral-0'>
-          <div className='container mx-auto max-w-4xl px-4 pb-16 pt-16 sm:px-8 md:px-8  2xl:px-0'>
-            <h2 className='text-center font-basier text-4xl font-semibold'>
+          <div className='container mx-auto max-w-4xl px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
+            <h2 className='text-center font-basier text-2xl font-semibold lg:text-4xl'>
               Discover why companies are choosing ClickHouse as their blazing
               fast observability store.
             </h2>
           </div>
-          <div className='mx-auto flex max-w-5xl gap-x-10 pb-24'>
+          <div className='mx-auto flex max-w-5xl flex-col gap-10 pb-24 md:flex-row'>
             {features.map((feature) => {
               return (
                 <div key={feature.id} className='flex-1 text-center'>
@@ -135,7 +135,7 @@ export default function ClickHouseServerPage({
           <div className='section-container max-w-7xl'>
             <div className='relative flex flex-col rounded-lg border-t-2 border-neutral-700/80 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
-                <div className='flex h-[300px] gap-x-6 gap-y-6'>
+                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[300px] md:flex-row'>
                   {quotes.map((quote) => (
                     <Tilt
                       tiltEnable={false}
@@ -164,7 +164,7 @@ export default function ClickHouseServerPage({
                           width={quote.imgWidth}
                           height={quote.imgHeight}
                           alt={quote.title}
-                          className='mt-auto'
+                          className='mt-10 md:mt-auto'
                         />
                       </div>
                     </Tilt>
@@ -210,7 +210,7 @@ export default function ClickHouseServerPage({
                 width={72}
                 height={73}
               />
-              <SuiTitle type='h2' className='mt-8 mb-24'>
+              <SuiTitle type='h2' className='mb-16 mt-8 text-center'>
                 How to build a logging system with ClickHouse
               </SuiTitle>
             </div>
@@ -220,41 +220,27 @@ export default function ClickHouseServerPage({
 
         <HRSeparator className='my-12 md:my-24' />
 
-        <div className='relative mx-auto flex flex-col gap-y-28 md:mt-24'>
-          <div className='section-container bg-shadow-element-left red-shadow mx-auto flex flex-col items-center justify-between self-center px-4 md:px-8 2xl:px-0 '>
-            <CUICard className='p-8'>
-              <div className='flex w-full justify-between'>
-                <h3 className='mb-6 w-full text-center font-basier text-2xl font-semibold leading-tight md:text-left md:text-2xl'>
-                  From your laptop to petabyte scale
-                </h3>
-                <Image
-                  src='/images/clickhouse/scalable.svg'
-                  width={32}
-                  height={32}
-                  alt='ClickHouse is linearly scalable'
-                  className='h-7'
-                />
-              </div>
-
-              <div className='flex flex-col gap-8 md:flex-row'>
-                <div className='w-full text-center md:text-left lg:w-9/12'>
-                  <SuiText size='sm' color='secondary'>
-                    ClickHouse scales well both vertically and horizontally. It
-                    is easily adaptable to perform on your laptop, small virtual
-                    machine, a single server, or a cluster with hundreds or
-                    thousands of nodes.
-                  </SuiText>
-                  <br />
-                  <SuiText size='sm' color='secondary'>
-                    There are many ClickHouse clusters consisting of multiple
-                    hundreds of nodes, while the largest known ClickHouse
-                    cluster is well over a thousand nodes. There are
-                    installations of ClickHouse with more multiple trillion rows
-                    or hundreds of terabytes of data per single node.
-                  </SuiText>
-                </div>
-              </div>
-            </CUICard>
+        <div className='relative mx-auto mt-12 flex flex-col gap-y-28 md:mt-24 md:px-0 '>
+          <div className='section-container bg-shadow-element-right yellow-shadow flex w-full flex-col items-center justify-between self-center'>
+            <div className='flex w-full flex-col items-center'>
+              <Image
+                src='/images/use-cases/logging/icon-logging.svg'
+                alt='Multi-region setup'
+                width={72}
+                height={73}
+              />
+              <SuiTitle type='h2' className='mb-16 mt-8 text-center'>
+                Multi-region setup
+              </SuiTitle>
+            </div>
+            <div className='flex'>
+              <Image
+                src='/images/use-cases/logging/regions.svg'
+                alt='Multi-region setup'
+                width={1200}
+                height={965}
+              />
+            </div>
           </div>
         </div>
 
