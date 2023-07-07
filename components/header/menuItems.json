@@ -174,9 +174,9 @@
 						"target": "_self"
 					},
 					{
-						"id": 3,
-						"name": "Culture",
-						"href": "blog?category=company-and-culture",
+						"id": 40,
+						"name": "Community",
+						"href": "blog?category=community",
 						"target": "_self"
 					}
 				]
