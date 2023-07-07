@@ -1,7 +1,7 @@
+import { useEffect } from 'react'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
 import { CUICard } from '../../../components/ClickUI'
@@ -57,6 +57,14 @@ export default function ClickHouseServerPage({
   headerData,
   footerData
 }: LoggingProps) {
+  useEffect(() => {
+    const container = document.getElementById('regionsContainer')
+    if (container) {
+      const middlePosition =
+        container.scrollWidth / 2 - container.clientWidth / 2
+      container.scrollLeft = middlePosition
+    }
+  }, [])
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -233,7 +241,9 @@ export default function ClickHouseServerPage({
             </div>
           </div>
         </div>
-        <div className='hide-scrollbar overflow-hidden overflow-x-scroll sm:mx-auto sm:max-w-7xl'>
+        <div
+          id='regionsContainer'
+          className='hide-scrollbar overflow-hidden overflow-x-scroll sm:mx-auto sm:max-w-7xl'>
           <div className='hide-scrollbar w-[800px] items-center overflow-x-scroll sm:w-auto'>
             <Image
               src='/images/use-cases/logging/regions.svg'
@@ -246,7 +256,6 @@ export default function ClickHouseServerPage({
           </div>
         </div>
         <HRSeparator className='my-12 md:my-24' />
-
         <div className='section-container bg-shadow-element-left red-shadow flex w-full flex-col items-center justify-between self-center px-4 pb-16 md:px-8 2xl:px-0'>
           <div className='flex w-full flex-col items-center'>
             <Image
