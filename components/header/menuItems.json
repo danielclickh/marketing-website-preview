@@ -178,12 +178,6 @@
 						"name": "Community",
 						"href": "blog?category=community",
 						"target": "_self"
-					},
-					{
-						"id": 3,
-						"name": "Culture",
-						"href": "blog?category=company-and-culture",
-						"target": "_self"
 					}
 				]
 			}
