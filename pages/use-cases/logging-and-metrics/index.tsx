@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
-import { CUICard } from '../../../components/ClickUI'
+import { CUICard, CUILink } from '../../../components/ClickUI'
 import GetStarted from '../../../components/GetStarted'
 import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
@@ -16,6 +16,7 @@ import { CommonProps } from '../../../types/homepage'
 import AccordionComponent from '../../../components/LoggingDiagram/Accordion'
 import features from './features.json'
 import quotes from './quotes.json'
+import GetStartedFree from '../../../components/GetStartedFree'
 
 interface LoggingProps extends CommonProps {
   customerStories: any
@@ -209,92 +210,140 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <div className='relative mx-auto mt-12 flex flex-col gap-y-28 md:mt-24 md:px-0 '>
-          <div className='section-container bg-shadow-element-right yellow-shadow flex w-full flex-col items-center justify-between self-center'>
-            <div className='flex w-full flex-col items-center'>
-              <Image
-                src='/images/use-cases/logging/icon-logging.svg'
-                alt='Logging'
-                width={72}
-                height={73}
-              />
-              <SuiTitle type='h2' className='mb-16 mt-8 text-center'>
-                How to build a logging system with ClickHouse
-              </SuiTitle>
+        <div className='bg-neutral-725'>
+          <div className='relative mx-auto flex flex-col gap-y-28 pt-12 md:px-0 md:pt-24'>
+            <div className='section-container flex w-full flex-col items-center justify-between self-center'>
+              <div className='flex w-full flex-col items-center'>
+                <Image
+                  src='/images/use-cases/logging/icon-logging.svg'
+                  alt='Logging'
+                  width={72}
+                  height={73}
+                />
+                <SuiTitle type='h2' className='mb-16 mt-8 text-center'>
+                  How to build a logging system with ClickHouse
+                </SuiTitle>
+              </div>
+              <AccordionComponent />
             </div>
-            <AccordionComponent />
           </div>
-        </div>
 
-        <div className='relative mx-auto mt-12 flex flex-col gap-y-28 md:mt-24 md:px-0 '>
-          <div className='section-container bg-shadow-element-right yellow-shadow flex w-full flex-col items-center justify-between self-center'>
-            <div className='flex w-full flex-col items-center'>
+          <div className='relative mx-auto mt-12 flex flex-col gap-y-28 md:mt-24 md:px-0 '>
+            <div className='section-container bg-shadow-element-right yellow-shadow flex w-full flex-col items-center justify-between self-center'>
+              <div className='flex w-full flex-col items-center'>
+                <Image
+                  src='/images/use-cases/logging/icon-logging.svg'
+                  alt='Multi-region setup'
+                  width={72}
+                  height={73}
+                />
+                <SuiTitle type='h2' className='mb-16 mt-8 text-center'>
+                  Multi-region setup
+                </SuiTitle>
+              </div>
+            </div>
+          </div>
+          <div
+            id='regionsContainer'
+            className='hide-scrollbar overflow-hidden overflow-x-scroll sm:mx-auto sm:max-w-7xl'>
+            <div className='hide-scrollbar w-[800px] items-center overflow-x-scroll sm:w-auto'>
               <Image
-                src='/images/use-cases/logging/icon-logging.svg'
+                src='/images/use-cases/logging/regions.svg'
                 alt='Multi-region setup'
+                width={1200}
+                height={965}
+                priority
+                className='mx-auto h-auto w-max'
+              />
+            </div>
+          </div>
+
+          <div className='section-container mt-24 flex w-full flex-col items-center justify-between self-center px-4 pb-16 md:px-8 2xl:px-0'>
+            <div className='flex w-full flex-col items-center'>
+              <Image
+                src='/images/use-cases/logging/icon-multi-support.svg'
+                alt='  Multi-region support'
                 width={72}
                 height={73}
               />
-              <SuiTitle type='h2' className='mb-16 mt-8 text-center'>
-                Multi-region setup
+              <SuiTitle type='h2' className='mt-8 mb-6'>
+                Multi-region support
               </SuiTitle>
-            </div>
-          </div>
-        </div>
-        <div
-          id='regionsContainer'
-          className='hide-scrollbar overflow-hidden overflow-x-scroll sm:mx-auto sm:max-w-7xl'>
-          <div className='hide-scrollbar w-[800px] items-center overflow-x-scroll sm:w-auto'>
-            <Image
-              src='/images/use-cases/logging/regions.svg'
-              alt='Multi-region setup'
-              width={1200}
-              height={965}
-              priority
-              className='mx-auto h-auto w-max'
-            />
-          </div>
-        </div>
 
-        <div className='section-container bg-shadow-element-left red-shadow mt-24 flex w-full flex-col items-center justify-between self-center px-4 pb-16 md:px-8 2xl:px-0'>
-          <div className='flex w-full flex-col items-center'>
-            <Image
-              src='/images/use-cases/logging/icon-multi-support.svg'
-              alt='  Multi-region support'
-              width={72}
-              height={73}
-            />
-            <SuiTitle type='h2' className='mt-8 mb-6'>
-              Multi-region support
-            </SuiTitle>
-
-            <div className='pt-12 text-center text-xl leading-relaxed md:mx-auto md:max-w-3xl md:pt-6'>
-              With the{' '}
-              <span className='underline'>Distributed Table Engine</span>,
-              ClickHouse offers a robust distributed cluster design - perfect
-              for log management applications.
-            </div>
-            <div className='mt-10 flex max-w-3xl flex-col gap-10 text-center md:flex-row'>
-              <div className=''>
-                By creating independent ClickHouse instances for each
-                operational region, the system can guarantee that raw,
-                uncompressed data remains within its region of origin. This
-                approach reduces the demand for cross-region data transfer, a
-                notable benefit when considering network resource utilization
-                and costs.
+              <div className='pt-12 text-center text-xl leading-relaxed md:mx-auto md:max-w-3xl md:pt-6'>
+                With the{' '}
+                <span className='underline'>Distributed Table Engine</span>,
+                ClickHouse offers a robust distributed cluster design - perfect
+                for log management applications.
               </div>
-              <div>
-                Cross-region queries, while possible, are selectively employed.
-                They're only initiated when the system handles queries that
-                necessitate data from remote regions. This strategy effectively
-                minimizes the unnecessary cross-region traffic, improving both
-                latency and cost-effectiveness.
+              <div className='mt-10 flex max-w-3xl flex-col gap-10 text-center md:flex-row'>
+                <div className=''>
+                  By creating independent ClickHouse instances for each
+                  operational region, the system can guarantee that raw,
+                  uncompressed data remains within its region of origin. This
+                  approach reduces the demand for cross-region data transfer, a
+                  notable benefit when considering network resource utilization
+                  and costs.
+                </div>
+                <div>
+                  Cross-region queries, while possible, are selectively
+                  employed. They're only initiated when the system handles
+                  queries that necessitate data from remote regions. This
+                  strategy effectively minimizes the unnecessary cross-region
+                  traffic, improving both latency and cost-effectiveness.
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <GetStarted platforms={platforms} />
+        <div className='bg-shadow-element-right yellow-shadow '>
+          <div className='section-container mb-24 flex w-full pt-24 text-neutral-0 md:px-8 2xl:px-0 '>
+            <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-right bg-no-repeat py-16 px-4 xl:px-24'>
+              <div className='flex flex-col text-center'>
+                <SuiTitle type='h2' color='white'>
+                  Supporting{' '}
+                  <span className='tilted tilted-yellow'>
+                    <span className='tilted-content'>references</span>
+                  </span>{' '}
+                </SuiTitle>
+                <div className='mb-8 mt-6 text-center text-neutral-300'>
+                  For much more detailed guides about how to get started
+                  building an Observability solution with ClickHouse, follow
+                  along in our Blogs here:
+                </div>
+                <div className='bg-neutral-725 p-8'>
+                  <ol className='list-inside list-decimal space-y-2 text-left'>
+                    <li>
+                      <Link
+                        href='/blog/storing-log-data-in-clickhouse-fluent-bit-vector-open-telemetry'
+                        className='underline'>
+                        Building an Observability Solution with ClickHouse -
+                        Part 1 - Logs
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href='https://clickhouse.com/docs/knowledgebase/use-clickhouse-for-log-analytics'
+                        className='underline'>
+                        Docs: Using ClickHouse for log analytics
+                      </Link>
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className='section-container my-44 text-neutral-0 md:px-8 2xl:px-0'>
+            <GetStartedFree
+              href='https://clickhouse.cloud/signUp?loc=logging-use-case-getstarted-footer'
+              textBefore='Get started with ClickHouse'
+              textSlanted='Cloud'
+              textAfter='for free'
+            />
+          </div>
+        </div>
       </Layout>
     </>
   )

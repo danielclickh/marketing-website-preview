@@ -1,23 +1,41 @@
-import { CUIButton, CUICard } from '../../components/ClickUI'
-import { SuiText, SuiTitle } from '../../components/sui'
 import { ChevronRightIcon } from '@heroicons/react/solid'
+import { CUIButton } from '../../components/ClickUI'
+import { SuiText, SuiTitle } from '../../components/sui'
 
 type Props = {
   href: string
+  textBefore?: string
+  textSlanted?: string
+  textAfter?: string
+  textDescription?: string
 }
 
-export default function GetStartedFree({ href }: Props) {
+export default function GetStartedFree({
+  href,
+  textBefore = 'Get started for free',
+  textSlanted,
+  textAfter,
+  textDescription = "We'll get you started on a 30 day trial and $300 credits to spend at your own pace."
+}: Props) {
   return (
     <div className='flip-selection w-full rounded-lg bg-primary-300 py-16 px-4 text-neutral-0'>
       <div className='container mx-auto flex flex-col 2xl:px-0'>
         <div className='mx-auto flex flex-col text-center'>
           <SuiTitle type='h2' color='text-default' className='mb-6 '>
-            Get started for free
+            {textBefore}
+            {textSlanted && (
+              <>
+                {' '}
+                <span className='tilted tilted-black'>
+                  <span className='tilted-content'>{textSlanted}</span>
+                </span>{' '}
+              </>
+            )}
+            {textAfter && textAfter}
           </SuiTitle>
           <div className='max-w-3xl'>
             <SuiText size='base' color='text-default' weight='normal'>
-              We’ll get you started on a 30 day trial and $300 credits to spend
-              at your own pace.
+              {textDescription}
             </SuiText>
 
             <CUIButton
