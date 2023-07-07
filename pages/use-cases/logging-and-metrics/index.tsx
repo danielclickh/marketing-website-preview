@@ -239,6 +239,7 @@ export default function ClickHouseServerPage({
                 alt='Multi-region setup'
                 width={1200}
                 height={965}
+                priority
               />
             </div>
           </div>
