@@ -242,7 +242,7 @@ export default function CloudPage({
                 ))}
               </div>
 
-              <div className='mx-auto mt-16 max-w-2xl leading-normal text-neutral-200'>
+              <div className='mx-auto mt-36 max-w-2xl leading-normal text-neutral-200'>
                 <div className='flex flex-col items-center gap-x-10 md:flex-row'>
                   <div className='text-center md:text-left'>
                     <h3 className='relative mt-8 mb-6 inline-block text-left font-basier text-3xl font-semibold'>
