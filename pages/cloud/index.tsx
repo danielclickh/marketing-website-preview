@@ -16,6 +16,7 @@ import featureBlocks from './feature_blocks.json'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import GetStartedFree from '../../components/GetStartedFree'
 import LogoCarousel from '../../components/LogoCarousel'
+import Link from 'next/link'
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -240,30 +241,48 @@ export default function CloudPage({
                   </CUICard>
                 ))}
               </div>
-              <div className='mx-auto mt-16 max-w-2xl text-center leading-normal text-neutral-200'>
-                <h3 className='relative mt-8 mb-6 inline-block font-basier text-3xl font-semibold'>
-                  ClickPipes
-                  <div className='absolute -top-3 -right-10 rounded-full bg-primary-300 px-3 text-sm font-normal text-neutral-725'>
-                    Beta
+              <HRSeparator className='my-24' />
+
+              <div className='mx-auto  max-w-2xl leading-normal text-neutral-200'>
+                <div className='flex items-center gap-x-10'>
+                  <div>
+                    <h3 className='relative mt-8 mb-6 inline-block text-left font-basier text-3xl font-semibold'>
+                      ClickPipes
+                      <div className='absolute -top-3 -right-10 rounded-full bg-primary-300 px-3 text-sm font-normal text-neutral-725'>
+                        Beta
+                      </div>
+                    </h3>
+                    <p>
+                      ClickPipes offers the easiest and most intuitive way to
+                      ingest data into ClickHouse Cloud. With support for Apache
+                      Kafka and Confluent today, and many more data sources
+                      coming soon.
+                    </p>
                   </div>
-                </h3>
-                <p>
-                  ClickPipes offers the easiest and most intuitive way to ingest
-                  data into ClickHouse Cloud. With support for Apache Kafka and
-                  Confluent today, and many more data sources coming soon.
-                </p>
-                <CUIButton
-                  type='secondary'
-                  className='group mx-auto mt-8 w-auto'
-                  href='/cloud/clickpipes'
-                  iconRight={
-                    <ChevronRightIcon
-                      height='18'
-                      className='pt-0.5 transition group-hover:translate-x-1/2'
+                  <Link href='/cloud/clickpipes'>
+                    <Image
+                      src='/images/cloud/clickpipes/clickpipes-diagram.svg'
+                      width={624}
+                      height={457}
+                      alt='ClickPipes'
+                      className='mx-auto max-w-[250px]'
                     />
-                  }>
-                  Learn more
-                </CUIButton>
+                  </Link>
+                </div>
+                <div className=' w-full'>
+                  <CUIButton
+                    type='secondary'
+                    className='group mx-auto mt-16 w-auto'
+                    href='/cloud/clickpipes'
+                    iconRight={
+                      <ChevronRightIcon
+                        height='18'
+                        className='pt-0.5 transition group-hover:translate-x-1/2'
+                      />
+                    }>
+                    Learn more
+                  </CUIButton>
+                </div>
               </div>
             </div>
           </div>
