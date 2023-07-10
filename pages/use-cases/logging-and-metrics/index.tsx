@@ -221,8 +221,8 @@ export default function ClickHouseServerPage({
             <div className='section-container flex w-full flex-col items-center justify-between self-center'>
               <div className='flex w-full flex-col items-center'>
                 <Image
-                  src='/images/use-cases/logging/icon-logging.svg'
-                  alt='Logging'
+                  src='/images/use-cases/logging/icon-how.svg'
+                  alt='System overview'
                   width={72}
                   height={73}
                 />
