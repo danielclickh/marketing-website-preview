@@ -220,6 +220,7 @@ export default function ClickHouseServerPage({
                       weight='semibold'
                       size='lg'
                       href='https://clickhouse.com/docs/en/integrations/clickpipes'
+                      target='_blank'
                       linkClass='w-full max-w-[14rem]'
                       className='w-full'>
                       View documentation
