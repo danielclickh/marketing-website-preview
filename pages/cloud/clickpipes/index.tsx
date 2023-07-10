@@ -215,6 +215,15 @@ export default function ClickHouseServerPage({
                       className='w-full'>
                       Join the waitlist
                     </CUIButton>
+                    <CUIButton
+                      type='secondary'
+                      weight='semibold'
+                      size='lg'
+                      href='https://clickhouse.com/docs/en/integrations/clickpipes'
+                      linkClass='w-full max-w-[14rem]'
+                      className='w-full'>
+                      View documentation
+                    </CUIButton>
                   </div>
                 </div>
                 <div className='mt-4 hidden lg:block'>
