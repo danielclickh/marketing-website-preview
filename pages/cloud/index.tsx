@@ -17,6 +17,7 @@ import { ChevronRightIcon } from '@heroicons/react/solid'
 import GetStartedFree from '../../components/GetStartedFree'
 import LogoCarousel from '../../components/LogoCarousel'
 import Link from 'next/link'
+import Markdown from '../../components/Markdown'
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -163,7 +164,7 @@ export default function CloudPage({
                         {feature.title}
                       </h4>
                       <p className='font-inter text-sm font-light leading-relaxed text-neutral-200'>
-                        {feature.content}
+                        <Markdown children={feature.content} />
                       </p>
                     </div>
                   </div>
