@@ -105,7 +105,8 @@ export default function ClickHouseServerPage({
                     alt='Open source ClickHouse'
                     width={382}
                     height={310}
-                    className='h-auto w-full min-w-[54rem] '
+                    className='h-auto w-full min-w-[54rem]'
+                    priority
                   />
                 </div>
               </div>
@@ -257,7 +258,7 @@ export default function ClickHouseServerPage({
                 src='/images/use-cases/logging/regions.svg'
                 alt='Multi-region setup'
                 width={1200}
-                height={965}
+                height={964}
                 priority
                 className='mx-auto h-auto w-max'
               />
@@ -333,6 +334,13 @@ export default function ClickHouseServerPage({
                         href='https://clickhouse.com/docs/knowledgebase/use-clickhouse-for-log-analytics'
                         className='underline'>
                         Docs: Using ClickHouse for log analytics
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href='/blog/nginx-logs-to-clickhouse-fluent-bit'
+                        className='underline'>
+                        Sending Nginx logs to ClickHouse with Fluent Bit
                       </Link>
                     </li>
                   </ol>
