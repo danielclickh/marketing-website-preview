@@ -94,7 +94,7 @@ export default function ClickHouseServerPage({
                       structured data, leveraging high compression rates to
                       ensure robust performance at scale. ClickHouse's expansive
                       range of analytical and aggregation functions make real
-                      time analysis easy.
+                      time analysis simple.
                     </p>
                   </SuiText>
                 </div>
