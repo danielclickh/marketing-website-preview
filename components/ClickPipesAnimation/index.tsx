@@ -34,16 +34,16 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           stroke='#524D4D'
           strokeWidth='3'
         />
+
         <path
           d='M50 47.5H286.5C289.814 47.5 292.5 50.1863 292.5 53.5V171.5C292.5 174.814 295.186 177.5 298.5 177.5H429.5'
           stroke='#FCFF74'
           strokeWidth='3'>
           <animate
-            dur='2s'
+            dur='4s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
-            begin='0.5s;op.end+0.1s'
-            values='0,0,0,0,0,621; 0,0,0,311.25,311.25,0; 0,0,0,629.5,0,0; 0,311.25,0,311.25,0,0'
+            values='0,0,0,0,0,621; 0,0,0,621,311,0; 0,0,221,311,0,0; 0,621,0,621,0,0;'
           />
         </path>
 
@@ -52,7 +52,7 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           stroke='#FCFF74'
           strokeWidth='3'>
           <animate
-            dur='2.5s'
+            dur='2.75s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
             begin='0.5s;op.end+2.5s'
