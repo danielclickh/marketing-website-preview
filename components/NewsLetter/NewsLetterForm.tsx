@@ -3,7 +3,6 @@ import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import { CUIButton } from '../ClickUI'
 import { useSnackbar } from '../sui/client'
-import styles from './NewsLetterForm.module.scss'
 
 function NewsLetterForm({
   emailLabel,
@@ -44,21 +43,18 @@ function NewsLetterForm({
   }
 
   return (
-    <div className='relative flex items-center h-12 border border-neutral-725 bg-neutral-750 rounded'>
+    <div className='relative flex items-center rounded border border-neutral-725 bg-neutral-750 p-1'>
       <div className='w-full'>
         <input
           type='text'
           id='email'
-          className={styles.newsLetterInput}
+          className='w-full bg-transparent pl-2 text-sm text-neutral-0 focus:outline-none'
           onChange={onTextChange}
           placeholder={emailLabel}
           value={email}
         />
       </div>
-      <CUIButton
-        type='primary'
-        onClick={onClick}
-        className='whitespace-nowrap mr-1'>
+      <CUIButton type='primary' onClick={onClick} className='whitespace-nowrap'>
         {submitButtonLabel}
       </CUIButton>
     </div>
