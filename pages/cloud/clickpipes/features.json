@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "icon": "/images/cloud/clickpipes/icon-onboarding.svg",
+    "title": "Easy and intuitive data onboarding",
+    "content": "Setting up a new ingestion pipeline takes just a few steps. Select an incoming data source and format, tune your schema, and let your pipeline run."
+  },
+  {
+    "id": 2,
+    "icon": "/images/cloud/clickpipes/icon-streaming.svg",
+    "title": "Built for continuous ingest",
+    "content": "ClickPipes manages your continuous ingestion pipelines so that you don’t have to. Set up your pipeline and let us handle the rest."
+  },
+  {
+    "id": 3,
+    "icon": "/images/cloud/clickpipes/icon-scale.svg",
+    "title": "Designed for speed and scale",
+    "content": "ClickPipes provides the scalability you need to handle increasing data volumes, ensuring your systems can handle future demands effortlessly."
+  },
+  {
+    "id": 4,
+    "icon": "/images/cloud/clickpipes/icon-simple.svg",
+    "title": "Unlock your real time analytics",
+    "content": "Built leveraging our deep expertise in real time data management systems, ClickPipes handles the complexities of real time ingest for optimal performance."
+  }
+]
