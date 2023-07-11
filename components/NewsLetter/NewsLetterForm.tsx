@@ -3,6 +3,7 @@ import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import { CUIButton } from '../ClickUI'
 import { useSnackbar } from '../sui/client'
+import styles from './NewsLetterForm.module.scss'
 
 function NewsLetterForm({
   emailLabel,
@@ -48,7 +49,7 @@ function NewsLetterForm({
         <input
           type='text'
           id='email'
-          className='w-full bg-transparent pl-2 text-sm text-neutral-0 focus:outline-none'
+          className={styles.newsLetterInput}
           onChange={onTextChange}
           placeholder={emailLabel}
           value={email}
