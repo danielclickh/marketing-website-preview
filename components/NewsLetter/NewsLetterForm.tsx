@@ -44,7 +44,7 @@ function NewsLetterForm({
   }
 
   return (
-    <div className='relative flex items-center h-12 border border-neutral-725 bg-neutral-750 rounded'>
+    <div className='relative flex items-center rounded border border-neutral-725 bg-neutral-750 p-1'>
       <div className='w-full'>
         <input
           type='text'
@@ -55,10 +55,7 @@ function NewsLetterForm({
           value={email}
         />
       </div>
-      <CUIButton
-        type='primary'
-        onClick={onClick}
-        className='whitespace-nowrap mr-1'>
+      <CUIButton type='primary' onClick={onClick} className='whitespace-nowrap'>
         {submitButtonLabel}
       </CUIButton>
     </div>
