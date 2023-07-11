@@ -389,8 +389,11 @@ export default function CloudPage({
                 ClickHouse Cloud, wherever you&nbsp;are
               </SuiTitle>
               <div className='mx-auto max-w-2xl px-4 text-center leading-normal text-neutral-200 md:px-0'>
-                Now available on AWS and GCP Marketplaces, ClickHouse Cloud fits
-                in seamlessly with your usage and billing preferences.
+                With the flexibility to choose where and how you deploy.
+                Available on AWS and GCP, and through Marketplaces. Manage your
+                services through our ClickHouse Cloud self-serve UI, or by
+                leveraging our APIs and Terraform provider to automate your
+                operations.
               </div>
               <div className='mt-16 flex flex-col space-y-10 md:flex-row md:space-x-10 md:space-y-0'>
                 <CUICard className='w-full max-w-[22.5rem] bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
