@@ -2,7 +2,7 @@
     {
         "id": 10,
         "title": "Data Collection",
-        "content": "Observability systems typically leverage gateways or aggregators to handle the collection, batching, and piping of event data to a store like ClickHouse.\n \nThe OpenTelemetry Collector (alpha) is a great option for this task - having established a data standard for communication between gateway and agent instances, the OpenTelemetry protocol is widely supported and well adopted across the industry.\n \nIt is worth noting that the OpenTelemetry ClickHouse exporter is in alpha, and although we have had no issues collecting petabytes of logs for our own internal observability platform, users should adhere to the advice provided by [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-collector#alpha) accordingly."
+        "content": "Observability systems typically leverage gateways or aggregators to handle the collection, batching, and piping of event data to a store like ClickHouse.\n \nThe OpenTelemetry Collector is a great option for this task - having established a data standard for communication between gateway and agent instances, the OpenTelemetry protocol is widely supported and well adopted across the industry.\n \nIt is worth noting that the OpenTelemetry ClickHouse exporter is in alpha, and although we have had no issues collecting petabytes of logs for our own internal observability platform, users should adhere to the advice provided by [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-collector#alpha) accordingly."
     },
     {
         "id": 20,
