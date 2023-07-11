@@ -101,10 +101,10 @@ export default function ClickHouseServerPage({
 
                 <div className='mx-auto mt-4 hidden md:flex md:w-4/12'>
                   <Image
-                    src='/images/logging-use-cases-hero.svg'
+                    src='/images/use-cases/logging/logging-use-cases-hero.svg'
                     alt='Open source ClickHouse'
-                    width={382}
-                    height={310}
+                    width={488}
+                    height={318}
                     className='h-auto w-full min-w-[54rem]'
                     priority
                   />
@@ -258,7 +258,7 @@ export default function ClickHouseServerPage({
                 src='/images/use-cases/logging/regions.svg'
                 alt='Multi-region setup'
                 width={1200}
-                height={964}
+                height={897}
                 priority
                 className='mx-auto h-auto w-max'
               />
