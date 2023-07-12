@@ -1,35 +1,31 @@
+import { GetStaticProps } from 'next'
+import Link from 'next/link'
 import React from 'react'
-import {
-  SuiText,
-  SuiTitle,
-  SuiRecentCard,
-  SuiButton
-} from '../../../components/sui'
+import BlogPost from '../../../components/BlogPostList/BlogPost'
+import CopyUrlButton from '../../../components/CopyUrlButton'
+import FollowUs from '../../../components/FollowUs'
+import HRSeparator from '../../../components/HRSeparator'
+import Layout from '../../../components/Layout'
+import Markdown from '../../../components/Markdown'
+import NewsLetter from '../../../components/NewsLetter'
+import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
+import SocialButton from '../../../components/SocialButton'
+import { StrapiImage } from '../../../components/StrapiElements'
+import { SuiButton, SuiText, SuiTitle } from '../../../components/sui'
 import {
   findAll,
   getPathsValues,
-  getStagingOnlyFilters
+  getStagingOnlyFilters,
+  findOne
 } from '../../../lib/api/strapi'
-import Markdown from '../../../components/Markdown'
-import { StrapiImage } from '../../../components/StrapiElements'
-import NewsLetter from '../../../components/NewsLetter'
-import SocialButton from '../../../components/SocialButton'
-import CopyUrlButton from '../../../components/CopyUrlButton'
 import { convertDateToString } from '../../../lib/utils/dateUtils'
-import Layout from '../../../components/Layout'
-import { GetStaticProps } from 'next'
-import { BlogProps } from '../../../types/blog'
-import { ParamsType } from '../../../types/homepage'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
 import {
   NOT_FOUND_FALLBACK,
   REVALIDATE_SECONDS
 } from '../../../lib/utils/revalidationConfig'
-import FollowUs from '../../../components/FollowUs'
-import BlogPost from '../../../components/BlogPostList/BlogPost'
-import Link from 'next/link'
-import HRSeparator from '../../../components/HRSeparator'
+import { BlogProps } from '../../../types/blog'
+import { ParamsType } from '../../../types/homepage'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -54,6 +50,12 @@ export const getStaticProps: GetStaticProps<BlogProps> =
 
     const blog = data[0]
 
+    const cloudCtaContent = await findOne('blog', {
+      populate: ['CloudCTAHeader', 'CloudCTAFooter']
+    })
+
+    console.log(cloudCtaContent)
+
     const blogsParams = {
       sort: ['date:DESC', 'publishedAt:DESC'],
       populate: ['thumbnailPng', 'author'],
@@ -72,6 +74,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
     return {
       props: {
         ...blog,
+        ...cloudCtaContent,
         otherBlogs,
         seo: {
           title: blog.title,
@@ -99,6 +102,10 @@ export default function BlogPage({
   footerData,
   headerData,
   newsLetterData,
+  ShowCloudCTAHeader,
+  ShowCloudCTAFooter,
+  CloudCTAFooter,
+  CloudCTAHeader,
   seo
 }: BlogProps) {
   return (
@@ -145,9 +152,27 @@ export default function BlogPage({
 
         <div className='container mx-auto flex max-w-3xl px-6 pt-20 2xl:px-0'>
           <div className='flex w-full flex-col pb-20'>
+            {ShowCloudCTAHeader && (
+              <>
+                <Markdown
+                  className='rich-text-content mb-8 leading-6'
+                  allowHeaderLink>
+                  {CloudCTAHeader}
+                </Markdown>
+              </>
+            )}
             <Markdown className='rich-text-content leading-6' allowHeaderLink>
               {content}
             </Markdown>
+            {ShowCloudCTAFooter && (
+              <>
+                <Markdown
+                  className='rich-text-content mt-8 leading-6'
+                  allowHeaderLink>
+                  {CloudCTAFooter}
+                </Markdown>
+              </>
+            )}
             <HRSeparator className='my-8' />
             <div className='mb-10 flex flex-col items-center justify-between gap-4 md:flex-row'>
               <div className='flex'>
