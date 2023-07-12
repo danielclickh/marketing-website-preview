@@ -231,73 +231,65 @@ export default function ClickHouseServerPage({
             </div>
           </div>
 
-          <div className='relative mx-auto mt-12 flex flex-col gap-y-28 md:mt-24 md:px-0 '>
-            <div className='section-container bg-shadow-element-right yellow-shadow flex w-full flex-col items-center justify-between self-center'>
-              <div className='flex w-full flex-col items-center'>
-                <Image
-                  src='/images/use-cases/logging/icon-logging.svg'
-                  alt='Multi-region setup'
-                  width={72}
-                  height={73}
-                />
-                <SuiTitle type='h2' className='mb-16 mt-8 text-center'>
-                  Multi-region setup
-                </SuiTitle>
-              </div>
-            </div>
-          </div>
-          <div
-            id='regionsContainer'
-            className='hide-scrollbar overflow-hidden overflow-x-scroll sm:mx-auto sm:max-w-7xl'>
-            <div className='hide-scrollbar w-[800px] items-center overflow-x-scroll sm:w-auto'>
-              <Image
-                src='/images/use-cases/logging/regions.svg'
-                alt='Multi-region setup'
-                width={1220}
-                height={787}
-                priority
-                className='mx-auto h-auto w-max'
-              />
-            </div>
-          </div>
-
-          <div className='section-container mt-24 flex w-full flex-col items-center justify-between self-center px-4 pb-16 md:px-8 2xl:px-0'>
-            <div className='flex w-full flex-col items-center'>
-              <Image
-                src='/images/use-cases/logging/icon-multi-support.svg'
-                alt='  Multi-region support'
-                width={72}
-                height={73}
-              />
-              <SuiTitle type='h2' className='mt-8 mb-6'>
-                Multi-region support
-              </SuiTitle>
-
-              <div className='pt-12 text-center text-xl leading-relaxed md:mx-auto md:max-w-3xl md:pt-6'>
-                With multi-region support through{' '}
-                <Link
-                  href='https://clickhouse.com/docs/en/engines/table-engines/special/distributed'
-                  className='underline'>
-                  native table engines
-                </Link>
-                , ClickHouse offers a robust distributed cluster design -
-                perfect for observability solutions.
-              </div>
-              <div className='mt-10 flex max-w-3xl flex-col gap-10 text-center md:flex-row'>
-                <div className=''>
-                  By creating independent ClickHouse instances for each
-                  operational region, the system can guarantee that raw,
-                  uncompressed data remains within its region of origin. This
-                  approach reduces the demand for cross-region data transfer, a
-                  notable benefit when considering network resource utilization
-                  and costs.
+          <div className='mt-24 bg-[#363636] py-6'>
+            <div className='relative mx-auto flex flex-col gap-y-28 md:mt-24 md:px-0 '>
+              <div className='section-container flex w-full flex-col items-center justify-between self-center'>
+                <div className='flex w-full flex-col items-center'>
+                  <Image
+                    src='/images/use-cases/logging/icon-logging.svg'
+                    alt='Multi-region setup'
+                    width={72}
+                    height={73}
+                  />
+                  <SuiTitle type='h2' className='mb-16 mt-8 text-center'>
+                    Multi-region setup
+                  </SuiTitle>
                 </div>
-                <div>
-                  Cross-region queries, while possible, are selectively
-                  employed. They're only initiated when the system handles
-                  queries that necessitate data from remote regions. This
-                  strategy effectively minimizes the unnecessary cross-region
-                  traffic, improving both latency and cost-effectiveness.
+              </div>
+            </div>
+            <div
+              id='regionsContainer'
+              className='hide-scrollbar overflow-hidden overflow-x-scroll sm:mx-auto sm:max-w-7xl'>
+              <div className='hide-scrollbar w-[800px] items-center overflow-x-scroll sm:w-auto'>
+                <Image
+                  src='/images/use-cases/logging/regions.svg'
+                  alt='Multi-region setup'
+                  width={1220}
+                  height={787}
+                  priority
+                  className='mx-auto h-auto w-max'
+                />
+              </div>
+            </div>
+
+            <div className='section-container mt-16 flex w-full flex-col items-center justify-between self-center px-4 pb-16 md:px-8 2xl:px-0'>
+              <div className='flex w-full flex-col items-center'>
+                <div className='pt-12 text-center text-xl leading-relaxed md:mx-auto md:max-w-3xl md:pt-6'>
+                  With multi-region support through{' '}
+                  <Link
+                    href='https://clickhouse.com/docs/en/engines/table-engines/special/distributed'
+                    className='underline'>
+                    native table engines
+                  </Link>
+                  , ClickHouse offers a robust distributed cluster design -
+                  perfect for observability solutions.
+                </div>
+                <div className='mt-10 flex max-w-3xl flex-col gap-10 text-center md:flex-row'>
+                  <div className=''>
+                    By creating independent ClickHouse instances for each
+                    operational region, the system can guarantee that raw,
+                    uncompressed data remains within its region of origin. This
+                    approach reduces the demand for cross-region data transfer,
+                    a notable benefit when considering network resource
+                    utilization and costs.
+                  </div>
+                  <div>
+                    Cross-region queries, while possible, are selectively
+                    employed. They're only initiated when the system handles
+                    queries that necessitate data from remote regions. This
+                    strategy effectively minimizes the unnecessary cross-region
+                    traffic, improving both latency and cost-effectiveness.
+                  </div>
                 </div>
               </div>
             </div>
