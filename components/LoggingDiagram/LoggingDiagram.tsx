@@ -23,7 +23,7 @@ const Diagram: React.FC<DiagramProps> = ({ className, sectionId }) => {
             className={`transition-opacity duration-500 ${
               sectionId === id
                 ? 'show-svg-background opacity-100'
-                : 'lg:opacity-20'
+                : 'lg:opacity-100'
             }`}
             id={`section-${id}`}>
             <SvgSection className='relative' />
