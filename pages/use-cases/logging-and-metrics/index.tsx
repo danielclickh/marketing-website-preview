@@ -232,7 +232,7 @@ export default function ClickHouseServerPage({
           </div>
 
           <div className='mt-24 bg-[#363636] py-6'>
-            <div className='relative mx-auto flex flex-col gap-y-28 md:mt-24 md:px-0 '>
+            <div className='relative mx-auto flex flex-col gap-y-28 md:mt-12 md:px-0 '>
               <div className='section-container flex w-full flex-col items-center justify-between self-center'>
                 <div className='flex w-full flex-col items-center'>
                   <Image
@@ -257,7 +257,7 @@ export default function ClickHouseServerPage({
                   width={1220}
                   height={787}
                   priority
-                  className='mx-auto h-auto w-max'
+                  className='mx-auto h-auto max-h-[500px] w-max'
                 />
               </div>
             </div>
