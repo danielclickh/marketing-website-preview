@@ -15,7 +15,8 @@ import { SuiButton, SuiText, SuiTitle } from '../../../components/sui'
 import {
   findAll,
   getPathsValues,
-  getStagingOnlyFilters
+  getStagingOnlyFilters,
+  findOne
 } from '../../../lib/api/strapi'
 import { convertDateToString } from '../../../lib/utils/dateUtils'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
@@ -49,6 +50,12 @@ export const getStaticProps: GetStaticProps<BlogProps> =
 
     const blog = data[0]
 
+    const cloudCtaContent = await findOne('blog', {
+      populate: ['CloudCTAHeader', 'CloudCTAFooter']
+    })
+
+    console.log(cloudCtaContent)
+
     const blogsParams = {
       sort: ['date:DESC', 'publishedAt:DESC'],
       populate: ['thumbnailPng', 'author'],
@@ -67,6 +74,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
     return {
       props: {
         ...blog,
+        ...cloudCtaContent,
         otherBlogs,
         seo: {
           title: blog.title,
@@ -94,6 +102,10 @@ export default function BlogPage({
   footerData,
   headerData,
   newsLetterData,
+  ShowCloudCTAHeader,
+  ShowCloudCTAFooter,
+  CloudCTAFooter,
+  CloudCTAHeader,
   seo
 }: BlogProps) {
   return (
@@ -140,9 +152,27 @@ export default function BlogPage({
 
         <div className='container mx-auto flex max-w-3xl px-6 pt-20 2xl:px-0'>
           <div className='flex w-full flex-col pb-20'>
+            {ShowCloudCTAHeader && (
+              <>
+                <Markdown
+                  className='rich-text-content mb-8 leading-6'
+                  allowHeaderLink>
+                  {CloudCTAHeader}
+                </Markdown>
+              </>
+            )}
             <Markdown className='rich-text-content leading-6' allowHeaderLink>
               {content}
             </Markdown>
+            {ShowCloudCTAFooter && (
+              <>
+                <Markdown
+                  className='rich-text-content mt-8 leading-6'
+                  allowHeaderLink>
+                  {CloudCTAFooter}
+                </Markdown>
+              </>
+            )}
             <HRSeparator className='my-8' />
             <div className='mb-10 flex flex-col items-center justify-between gap-4 md:flex-row'>
               <div className='flex'>
