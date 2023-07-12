@@ -1,35 +1,30 @@
+import { GetStaticProps } from 'next'
+import Link from 'next/link'
 import React from 'react'
-import {
-  SuiText,
-  SuiTitle,
-  SuiRecentCard,
-  SuiButton
-} from '../../../components/sui'
+import BlogPost from '../../../components/BlogPostList/BlogPost'
+import CopyUrlButton from '../../../components/CopyUrlButton'
+import FollowUs from '../../../components/FollowUs'
+import HRSeparator from '../../../components/HRSeparator'
+import Layout from '../../../components/Layout'
+import Markdown from '../../../components/Markdown'
+import NewsLetter from '../../../components/NewsLetter'
+import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
+import SocialButton from '../../../components/SocialButton'
+import { StrapiImage } from '../../../components/StrapiElements'
+import { SuiButton, SuiText, SuiTitle } from '../../../components/sui'
 import {
   findAll,
   getPathsValues,
   getStagingOnlyFilters
 } from '../../../lib/api/strapi'
-import Markdown from '../../../components/Markdown'
-import { StrapiImage } from '../../../components/StrapiElements'
-import NewsLetter from '../../../components/NewsLetter'
-import SocialButton from '../../../components/SocialButton'
-import CopyUrlButton from '../../../components/CopyUrlButton'
 import { convertDateToString } from '../../../lib/utils/dateUtils'
-import Layout from '../../../components/Layout'
-import { GetStaticProps } from 'next'
-import { BlogProps } from '../../../types/blog'
-import { ParamsType } from '../../../types/homepage'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
 import {
   NOT_FOUND_FALLBACK,
   REVALIDATE_SECONDS
 } from '../../../lib/utils/revalidationConfig'
-import FollowUs from '../../../components/FollowUs'
-import BlogPost from '../../../components/BlogPostList/BlogPost'
-import Link from 'next/link'
-import HRSeparator from '../../../components/HRSeparator'
+import { BlogProps } from '../../../types/blog'
+import { ParamsType } from '../../../types/homepage'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
