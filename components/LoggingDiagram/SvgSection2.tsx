@@ -16,7 +16,7 @@ const SvgSection2: React.FC<DiagramProps> = ({ className }) => {
         fill='none'
         xmlns='http://www.w3.org/2000/svg'>
         <g filter='url(#filter0_d_836_12057)'>
-          <rect x='31' y='27' width='356' height='96' rx='4' fill='#FBFF46' />
+          <rect x='31' y='27' width='356' height='96' rx='4' fill='#fcff74' />
           <g clipPath='url(#clip0_836_12057)'>
             <rect
               x='147.375'
