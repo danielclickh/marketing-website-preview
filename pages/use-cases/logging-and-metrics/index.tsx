@@ -88,13 +88,10 @@ export default function ClickHouseServerPage({
                       fit for observability use cases.
                     </p>
                     <p>
-                      When it comes to time series event data like logs, traces,
-                      and metrics, ClickHouse shines in its ability to
-                      efficiently store, search, and query over years of
-                      structured data, leveraging high compression rates to
-                      ensure robust performance at scale. ClickHouse's expansive
-                      range of analytical and aggregation functions make real
-                      time analysis simple.
+                      With industry-leading compression ratios, sub-second query
+                      response times, powerful aggregation functions, and an
+                      extensive suite of integrations, real-time observability
+                      becomes effortless with ClickHouse.
                     </p>
                   </SuiText>
                 </div>
@@ -134,9 +131,9 @@ export default function ClickHouseServerPage({
                     width={32}
                     height={32}
                     alt={feature.content}
-                    className='mx-auto '
+                    className='mx-auto h-11 w-auto'
                   />
-                  <div className='rich_content px-12 pt-4 text-neutral-200'>
+                  <div className='rich_content px-12 pt-4 text-lg text-neutral-200'>
                     <ReactMarkdown children={feature.content} />
                   </div>
                 </div>
@@ -278,10 +275,14 @@ export default function ClickHouseServerPage({
               </SuiTitle>
 
               <div className='pt-12 text-center text-xl leading-relaxed md:mx-auto md:max-w-3xl md:pt-6'>
-                With the{' '}
-                <span className='underline'>Distributed Table Engine</span>,
-                ClickHouse offers a robust distributed cluster design - perfect
-                for log management applications.
+                With multi-region support through{' '}
+                <Link
+                  href='https://clickhouse.com/docs/en/engines/table-engines/special/distributed'
+                  className='underline'>
+                  native table engines
+                </Link>
+                , ClickHouse offers a robust distributed cluster design -
+                perfect for observability solutions.
               </div>
               <div className='mt-10 flex max-w-3xl flex-col gap-10 text-center md:flex-row'>
                 <div className=''>
@@ -316,8 +317,8 @@ export default function ClickHouseServerPage({
                 </SuiTitle>
                 <div className='mb-8 mt-6 text-center text-neutral-300'>
                   For much more detailed guides about how to get started
-                  building an Observability solution with ClickHouse, follow
-                  along in our Blogs here:
+                  building an observability solution with ClickHouse, follow
+                  along in our blog:
                 </div>
                 <div className='bg-neutral-725 p-8'>
                   <ol className='list-inside list-decimal space-y-2 text-left'>
