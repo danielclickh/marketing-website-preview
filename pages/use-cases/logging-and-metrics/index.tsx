@@ -155,31 +155,28 @@ export default function ClickHouseServerPage({
                       glarePosition='all'
                       className='flex-1'
                       key={quote.id}>
-                      <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:shadow-lg'>
-                        <Image
-                          src='/images/Quote.svg'
-                          width={37}
-                          height={28}
-                          alt='Quote'
-                          className='mb-4 block'
-                        />
-                        <SuiText color='secondary' className='text-left'>
-                          {quote.content}
-                        </SuiText>
-                        <Link
-                          href={quote.href}
-                          target={quote.target}
-                          className='mt-4 text-left underline'>
-                          Read more &raquo;
-                        </Link>
-                        <Image
-                          src={quote.logo}
-                          width={quote.imgWidth}
-                          height={quote.imgHeight}
-                          alt={quote.title}
-                          className='mt-20 md:mt-auto'
-                        />
-                      </div>
+                      <Link href={quote.href} target={quote.target}>
+                        <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:shadow-lg'>
+                          <Image
+                            src='/images/Quote.svg'
+                            width={37}
+                            height={28}
+                            alt='Quote'
+                            className='mb-4 block'
+                          />
+                          <SuiText color='secondary' className='text-left'>
+                            {quote.content}
+                          </SuiText>
+
+                          <Image
+                            src={quote.logo}
+                            width={quote.imgWidth}
+                            height={quote.imgHeight}
+                            alt={quote.title}
+                            className='mt-20 md:mt-auto'
+                          />
+                        </div>
+                      </Link>
                     </Tilt>
                   ))}
                 </div>

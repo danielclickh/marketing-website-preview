@@ -7,7 +7,7 @@ import accordionItems from './building-a-logging-system.json'
 import Diagram from './LoggingDiagram'
 
 const AccordionComponent = () => {
-  const [activeItem, setActiveItem] = useState('item-20')
+  const [activeItem, setActiveItem] = useState('item-10')
   const strippedItemId = (activeItemRadix: string) => {
     const itemId = activeItemRadix.replace('item-', '')
     return parseInt(itemId, 10)
@@ -28,7 +28,7 @@ const AccordionComponent = () => {
             id='accordionContainer'
             className='w-full'
             type='single'
-            defaultValue='item-20'
+            defaultValue='item-10'
             collapsible
             onValueChange={(item) => {
               setActiveItem(item)
@@ -94,7 +94,7 @@ const AccordionContent = forwardRef<
 >(({ children, className, ...props }, forwardedRef) => (
   <Accordion.Content
     className={classNames(
-      'hide-scrollbar z-10 -mt-4 mb-1 rounded-b-xl border border-neutral-600/80 bg-neutral-700 group-data-[state=open]:pb-20  xl:max-h-[550px] xl:overflow-hidden xl:overflow-y-scroll',
+      'hide-scrollbar relative z-10 -mt-4 mb-1 rounded-b-xl border border-neutral-600/80  bg-neutral-700 group-data-[state=open]:pb-20 xl:max-h-[550px] xl:overflow-hidden xl:overflow-y-scroll',
       className
     )}
     {...props}
