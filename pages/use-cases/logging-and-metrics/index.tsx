@@ -156,7 +156,7 @@ export default function ClickHouseServerPage({
                       className='flex-1'
                       key={quote.id}>
                       <Link href={quote.href} target={quote.target}>
-                        <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:shadow-lg'>
+                        <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
                           <Image
                             src='/images/Quote.svg'
                             width={37}
@@ -167,13 +167,12 @@ export default function ClickHouseServerPage({
                           <SuiText color='secondary' className='text-left'>
                             {quote.content}
                           </SuiText>
-
                           <Image
                             src={quote.logo}
                             width={quote.imgWidth}
                             height={quote.imgHeight}
                             alt={quote.title}
-                            className='mt-20 md:mt-auto'
+                            className='mt-12 md:mt-auto'
                           />
                         </div>
                       </Link>
@@ -318,11 +317,11 @@ export default function ClickHouseServerPage({
                   along in our blog:
                 </div>
                 <div className='bg-neutral-725 p-8'>
-                  <ol className='list-inside list-decimal space-y-2 text-left'>
+                  <ol className='space-y-2 text-center'>
                     <li>
                       <Link
                         href='/blog/storing-log-data-in-clickhouse-fluent-bit-vector-open-telemetry'
-                        className='underline'>
+                        className='text-primary-300'>
                         Building an Observability Solution with ClickHouse -
                         Part 1 - Logs
                       </Link>
@@ -330,14 +329,14 @@ export default function ClickHouseServerPage({
                     <li>
                       <Link
                         href='https://clickhouse.com/docs/knowledgebase/use-clickhouse-for-log-analytics'
-                        className='underline'>
+                        className='text-primary-300'>
                         Docs: Using ClickHouse for log analytics
                       </Link>
                     </li>
                     <li>
                       <Link
                         href='/blog/nginx-logs-to-clickhouse-fluent-bit'
-                        className='underline'>
+                        className='text-primary-300'>
                         Sending Nginx logs to ClickHouse with Fluent Bit
                       </Link>
                     </li>
