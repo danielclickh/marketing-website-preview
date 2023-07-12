@@ -254,7 +254,7 @@ export default function ClickHouseServerPage({
               <Image
                 src='/images/use-cases/logging/regions.svg'
                 alt='Multi-region setup'
-                width={1200}
+                width={1220}
                 height={897}
                 priority
                 className='mx-auto h-auto w-max'
