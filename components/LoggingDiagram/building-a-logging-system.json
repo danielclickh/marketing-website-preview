@@ -12,6 +12,6 @@
     {
         "id": 30,
         "title": "UI, Alerting & Reports",
-        "content": "ClickHouse benefits from a vibrant ecosystem of integrations that includes visualization tools like Grafana and Superset.<br /><br />The ClickHouse-Grafana integration is a popular choice among observability practitioners who benefit from its powerful dashboarding capabilities that allow for easy ad-hoc exploration of the underlying data, as well as great utility features including alerting."
+        "content": "ClickHouse benefits from a vibrant ecosystem of integrations that includes visualization tools like Grafana and Superset.<br /><br />The [ClickHouse-Grafana](https://clickhouse.com/docs/en/integrations/grafana) integration is a popular choice among observability practitioners who benefit from its powerful dashboarding capabilities that allow for easy ad-hoc exploration of the underlying data, as well as great utility features including alerting."
     }
 ]
