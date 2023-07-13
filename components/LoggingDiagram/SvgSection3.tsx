@@ -9,7 +9,7 @@ const SvgSection3: React.FC<DiagramProps> = ({ className, sectionId }) => {
       className='relative -mt-4 flex justify-center 2xl:-mt-6'
       id='logging-diagram-section3'>
       <div
-        className={`absolute top-6 left-0 h-10 w-full justify-items-center bg-primary-300 p-10 px-10 opacity-0 blur-xl transition-opacity ease-in-out ${
+        className={`absolute top-2 left-0 h-10 w-full justify-items-center bg-primary-300 p-10 px-10 opacity-0 blur-xl transition-opacity ease-in-out 2xl:top-6 ${
           sectionId === 30 && 'animate-loggingFadeSection1'
         }`}></div>
       <svg
