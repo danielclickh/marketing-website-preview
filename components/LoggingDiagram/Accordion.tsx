@@ -9,7 +9,7 @@ import accordionItems from './building-a-logging-system.json'
 import Diagram from './LoggingDiagram'
 
 const AccordionComponent = () => {
-  const [activeItem, setActiveItem] = useState('item-10')
+  const [activeItem, setActiveItem] = useState('')
   const strippedItemId = (activeItemRadix: string) => {
     const itemId = activeItemRadix.replace('item-', '')
     return parseInt(itemId, 10)
