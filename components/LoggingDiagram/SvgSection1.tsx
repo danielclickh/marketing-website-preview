@@ -7,7 +7,7 @@ const SvgSection1: React.FC<DiagramProps> = ({ className }) => {
   return (
     <div className='flex justify-center' id='logging-diagram-section1'>
       <svg
-        className={className}
+        className={`max-h-[450px] w-auto 2xl:max-h-max ${className}`}
         height='533'
         width='418'
         fill='none'

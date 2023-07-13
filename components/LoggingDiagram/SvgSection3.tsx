@@ -5,9 +5,11 @@ interface DiagramProps {
 
 const SvgSection3: React.FC<DiagramProps> = ({ className }) => {
   return (
-    <div className='-mt-8 flex justify-center' id='logging-diagram-section3'>
+    <div
+      className='-mt-4 flex justify-center 2xl:-mt-6'
+      id='logging-diagram-section3'>
       <svg
-        className={className}
+        className={`max-h-[80px] w-auto 2xl:max-h-max ${className}`}
         width='418'
         height='108'
         viewBox='0 0 418 108'
