@@ -76,29 +76,29 @@ export default function ClickHouseServerPage({
                 <div className='flex-col xl:mt-16 xl:w-7/12'>
                   <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
                     <Link href='/use-cases'>Use cases</Link> / Logging &amp;
-                    Metrics
+                    metrics
                   </h4>
                   <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-lg lg:text-left'>
-                    Logging &amp; Metrics with ClickHouse
+                    Logging &amp; metrics with ClickHouse
                   </h1>
                   <SuiText
                     size='base'
                     color='secondary'
                     className='mt-6 text-center md:pr-16 lg:text-left'>
                     <p className='mb-6'>
-                      ClickHouse is the fastest and most resource efficient
+                      ClickHouse is the fastest and most resource-efficient
                       database for real-time analytics, making it the perfect
                       fit for observability use cases.
                     </p>
                     <p>
-                      With industry-leading compression ratios, sub-second query
+                      Transform your logging, tracing, and metrics management
+                      with industry-leading compression ratios, sub-second query
                       response times, powerful aggregation functions, and an
-                      extensive suite of integrations, real-time observability
-                      becomes effortless with ClickHouse.
+                      extensive suite of integrations. Unlock unrivaled
+                      visibility into your data with ClickHouse.
                     </p>
                   </SuiText>
                 </div>
-
                 <div className='mx-auto mt-4 hidden md:flex md:w-4/12'>
                   <Image
                     src='/images/use-cases/logging/logging-use-cases-hero.svg'
@@ -115,7 +115,7 @@ export default function ClickHouseServerPage({
         </div>
 
         <div className='bg-neutral-725 text-neutral-0'>
-          <div className='container mx-auto max-w-4xl px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
+          <div className='container mx-auto max-w-5xl px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
             <h2 className='text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
               Discover why companies are choosing ClickHouse as their blazing
               fast{' '}
@@ -148,7 +148,7 @@ export default function ClickHouseServerPage({
           <div className='section-container max-w-7xl'>
             <div className='relative flex flex-col rounded-lg border-t-2 border-neutral-700/80 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
-                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[350px] md:flex-row'>
+                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[296px] md:flex-row'>
                   {quotes.map((quote) => (
                     <Tilt
                       tiltEnable={false}
@@ -158,7 +158,29 @@ export default function ClickHouseServerPage({
                       glarePosition='all'
                       className='flex-1'
                       key={quote.id}>
-                      <Link href={quote.href} target={quote.target}>
+                      {quote.href ? (
+                        <Link href={quote.href} target={quote.target}>
+                          <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
+                            <Image
+                              src='/images/Quote.svg'
+                              width={37}
+                              height={28}
+                              alt='Quote'
+                              className='mb-4 block'
+                            />
+                            <SuiText color='secondary' className='text-left'>
+                              {quote.content}
+                            </SuiText>
+                            <Image
+                              src={quote.logo}
+                              width={quote.imgWidth}
+                              height={quote.imgHeight}
+                              alt={quote.title}
+                              className='mt-12 md:mt-auto'
+                            />
+                          </div>
+                        </Link>
+                      ) : (
                         <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
                           <Image
                             src='/images/Quote.svg'
@@ -178,7 +200,7 @@ export default function ClickHouseServerPage({
                             className='mt-12 md:mt-auto'
                           />
                         </div>
-                      </Link>
+                      )}
                     </Tilt>
                   ))}
                 </div>
@@ -213,85 +235,10 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <div className='bg-neutral-725'>
-          <div className='relative mx-auto flex flex-col gap-y-28 pt-12 md:px-0 md:pt-24'>
-            <div className='section-container flex w-full flex-col items-center justify-between self-center'>
-              <div className='flex w-full flex-col items-center'>
-                <Image
-                  src='/images/use-cases/logging/icon-how.svg'
-                  alt='System overview'
-                  width={72}
-                  height={73}
-                />
-                <SuiTitle type='h2' className='mb-16 mt-8 text-center'>
-                  System overview
-                </SuiTitle>
-              </div>
+        <div className='bg-neutral-725 pb-24'>
+          <div className='relative mx-auto pt-12 md:px-0 md:pt-24'>
+            <div className='mx-auto max-w-7xl'>
               <AccordionComponent />
-            </div>
-          </div>
-
-          <div className='mt-24 bg-[#363636] py-6'>
-            <div className='relative mx-auto flex flex-col gap-y-28 md:mt-12 md:px-0 '>
-              <div className='section-container flex w-full flex-col items-center justify-between self-center'>
-                <div className='flex w-full flex-col items-center'>
-                  <Image
-                    src='/images/use-cases/logging/icon-logging.svg'
-                    alt='Multi-region setup'
-                    width={72}
-                    height={73}
-                  />
-                  <SuiTitle type='h2' className='mb-16 mt-8 text-center'>
-                    Multi-region setup
-                  </SuiTitle>
-                </div>
-              </div>
-            </div>
-            <div
-              id='regionsContainer'
-              className='hide-scrollbar overflow-hidden overflow-x-scroll sm:mx-auto sm:max-w-7xl'>
-              <div className='hide-scrollbar w-[800px] items-center overflow-x-scroll sm:w-auto'>
-                <Image
-                  src='/images/use-cases/logging/regions.svg'
-                  alt='Multi-region setup'
-                  width={1220}
-                  height={787}
-                  priority
-                  className='mx-auto h-auto max-h-[500px] w-max'
-                />
-              </div>
-            </div>
-
-            <div className='section-container mt-16 flex w-full flex-col items-center justify-between self-center px-4 pb-16 md:px-8 2xl:px-0'>
-              <div className='flex w-full flex-col items-center'>
-                <div className='pt-12 text-center text-xl leading-relaxed md:mx-auto md:max-w-3xl md:pt-6'>
-                  With multi-region support through{' '}
-                  <Link
-                    href='https://clickhouse.com/docs/en/engines/table-engines/special/distributed'
-                    className='underline'>
-                    native table engines
-                  </Link>
-                  , ClickHouse offers a robust distributed cluster design -
-                  perfect for observability solutions.
-                </div>
-                <div className='mt-10 flex max-w-3xl flex-col gap-10 text-center md:flex-row'>
-                  <div className=''>
-                    By creating independent ClickHouse instances for each
-                    operational region, the system can guarantee that raw,
-                    uncompressed data remains within its region of origin. This
-                    approach reduces the demand for cross-region data transfer,
-                    a notable benefit when considering network resource
-                    utilization and costs.
-                  </div>
-                  <div>
-                    Cross-region queries, while possible, are selectively
-                    employed. They're only initiated when the system handles
-                    queries that necessitate data from remote regions. This
-                    strategy effectively minimizes the unnecessary cross-region
-                    traffic, improving both latency and cost-effectiveness.
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -306,7 +253,7 @@ export default function ClickHouseServerPage({
                     <span className='tilted-content'>references</span>
                   </span>{' '}
                 </SuiTitle>
-                <div className='mb-8 mt-6 text-center text-neutral-300'>
+                <div className='mx-auto mb-8 mt-6 max-w-2xl text-center text-neutral-300'>
                   For much more detailed guides about how to get started
                   building an observability solution with ClickHouse, follow
                   along in our blog:

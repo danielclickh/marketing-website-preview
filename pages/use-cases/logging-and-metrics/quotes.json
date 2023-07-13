@@ -3,9 +3,9 @@
         "id": 10,
         "title": "Cloudflare",
         "logo": "/images/use-cases/logging/logo-cloudflare.svg",
-        "content": "ClickHouse helps us efficiently and reliably analyze logs across trillions of Internet requests to identify malicious traffic and provide customers with rich analytics",
-        "href": "https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse",
-        "target": "_blank",
+        "content": "ClickHouse helps us efficiently and reliably analyze logs across trillions of Internet requests to identify malicious traffic and provide customers with rich analytics.",
+        "href": "",
+        "target": "",
         "imgWidth": 102,
         "imgHeight": 34
     },
