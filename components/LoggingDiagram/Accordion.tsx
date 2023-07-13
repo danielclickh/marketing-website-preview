@@ -37,14 +37,14 @@ const AccordionComponent = () => {
           scale.
         </p>
       </div>
-      <div className='mx-auto max-w-5xl pb-24'>
+      <div className='mx-auto max-w-4xl pb-24'>
         <div
           className='mx-auto flex w-full flex-col justify-between gap-x-10 lg:flex-row'
           id='diagramTop'>
-          <div className='w-full xl:mb-0 xl:w-1/2 '>
+          <div className='flex-0 xl:mb-0'>
             <Diagram sectionId={strippedItemId(activeItem)} />
           </div>
-          <div className='w-full pt-6'>
+          <div className='w-full pt-4 lg:w-2/3 2xl:pt-5'>
             <div className='h-full w-full'>
               <Accordion.Root
                 id='accordionContainer'
@@ -97,7 +97,7 @@ const AccordionTrigger = forwardRef<
   <Accordion.Header className='flex'>
     <Accordion.Trigger
       className={classNames(
-        'group z-20 my-1 flex flex-1 items-center justify-between rounded-lg border border-neutral-600/80 bg-[#272727] p-4 text-base font-semibold leading-none outline-none hover:cursor-pointer data-[state=open]:rounded-b-none data-[state=open]:border-b-0 data-[state=open]:pb-6',
+        'group z-20 my-1 flex flex-1 items-center justify-between rounded-lg border border-neutral-600/80 bg-[#272727] p-4 text-lg font-semibold leading-none outline-none hover:cursor-pointer data-[state=open]:rounded-b-none data-[state=open]:border-b-0 data-[state=open]:pb-6',
         className
       )}
       {...props}
@@ -117,7 +117,7 @@ const AccordionContent = forwardRef<
 >(({ children, className, ...props }, forwardedRef) => (
   <Accordion.Content
     className={classNames(
-      'hide-scrollbar relative z-10 -mt-4 mb-1 rounded-b-xl border border-neutral-600/80  bg-[#272727] group-data-[state=open]:pb-20  xl:overflow-hidden xl:overflow-y-scroll',
+      'hide-scrollbar relative z-10 -mt-4 mb-1 rounded-b-xl border border-neutral-600/80  bg-[#272727] group-data-[state=open]:pb-20 xl:overflow-hidden xl:overflow-y-scroll',
       className
     )}
     {...props}
