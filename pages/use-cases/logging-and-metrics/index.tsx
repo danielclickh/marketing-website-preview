@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps<LoggingProps> =
     data.seo.title =
       'Logging & Metrics with ClickHouse | ClickHouse for Logging Metrics'
     data.seo.description =
-      'ClickHouse is the fastest and most resource efficient database for real-time analytics, making it the perfect fit for observability use cases.'
+      'ClickHouse is the fastest and most resource-efficient database for real-time analytics, making it the perfect fit for observability use cases.'
     data.seo.image = [
       { url: 'https://clickhouse.com/images/use-cases/logging/og.png' }
     ]
@@ -162,7 +162,7 @@ export default function ClickHouseServerPage({
                       key={quote.id}>
                       {quote.href ? (
                         <Link href={quote.href} target={quote.target}>
-                          <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
+                          <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
                             <Image
                               src='/images/Quote.svg'
                               width={37}
