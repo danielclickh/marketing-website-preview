@@ -241,7 +241,7 @@ export default function ClickHouseServerPage({
           <div className='relative mx-auto pt-12 md:px-0 md:pt-24'>
             <div className='mx-auto max-w-7xl'>
               <AccordionComponent />
-              <div className='mx-auto max-w-5xl'>
+              <div className='mx-auto max-w-5xl px-4 xl:px-0'>
                 <div className='grid justify-between gap-20 pt-20 lg:grid-cols-2'>
                   {callouts.map((feature) => (
                     <div key={feature.id} className='px-3'>
