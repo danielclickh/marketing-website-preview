@@ -26,7 +26,7 @@ const Diagram: React.FC<DiagramProps> = ({ className, sectionId }) => {
                 : 'lg:opacity-100'
             }`}
             id={`section-${id}`}>
-            <SvgSection className='relative' />
+            <SvgSection className='relative' sectionId={sectionId} />
           </div>
         ))}
       </div>
