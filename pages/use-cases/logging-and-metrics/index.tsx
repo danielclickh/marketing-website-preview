@@ -14,6 +14,8 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
 import features from './features.json'
 import quotes from './quotes.json'
+import callouts from './callouts.json'
+import Markdown from '../../../components/Markdown'
 
 interface LoggingProps extends CommonProps {
   customerStories: any
@@ -239,6 +241,27 @@ export default function ClickHouseServerPage({
           <div className='relative mx-auto pt-12 md:px-0 md:pt-24'>
             <div className='mx-auto max-w-7xl'>
               <AccordionComponent />
+              <div className='mx-auto max-w-5xl'>
+                <div className='grid justify-between gap-20 pt-20 lg:grid-cols-2'>
+                  {callouts.map((feature) => (
+                    <div key={feature.id} className='px-3'>
+                      <Image
+                        src={feature.icon}
+                        alt={feature.title}
+                        width={32}
+                        height={32}
+                        className='mb-4'
+                      />
+                      <h3 className='mb-4 text-lg font-bold'>
+                        {feature.title}
+                      </h3>
+                      <div className='rich_content text-base text-neutral-200'>
+                        <Markdown children={feature.content} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

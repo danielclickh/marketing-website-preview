@@ -29,7 +29,7 @@ const AccordionComponent = () => {
         <SuiTitle type='h2' className='mt-8 text-center'>
           ClickHouse for Observability
         </SuiTitle>
-        <p className='mx-auto mb-12 max-w-2xl px-9 pt-6 text-center text-sm'>
+        <p className='mx-auto mb-12 max-w-3xl px-9 pt-6 text-center'>
           When it comes to time series event data like logs, traces, and
           metrics, ClickHouse shines in its ability to perform a huge range of
           analytical functions over massive volumes of data - leveraging
@@ -37,7 +37,7 @@ const AccordionComponent = () => {
           scale.
         </p>
       </div>
-      <div className='mx-auto max-w-4xl pb-24 2xl:max-w-5xl'>
+      <div className='mx-auto max-w-4xl pb-12 2xl:max-w-5xl'>
         <div
           className='mx-auto flex w-full flex-col justify-between gap-x-10 lg:flex-row'
           id='diagramTop'>
