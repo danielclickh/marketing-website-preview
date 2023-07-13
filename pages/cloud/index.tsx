@@ -227,7 +227,15 @@ export default function CloudPage({
               <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200'>
                 We curate the most popular ways to work ClickHouse. Explore our
                 growing library of ecosystem integrations for data ingestion,
-                data visualisation, language clients and SQL clients.
+                data visualization, and language clients. Now with support for
+                the MySQL interface so you can connect to any of your favorite
+                MySQL-compatible{' '}
+                <a
+                  href='https://clickhouse.com/docs/en/integrations/data-visualization'
+                  className='text-primary-300'>
+                  data tools
+                </a>
+                .
               </div>
               <div className='mx-auto mt-16 flex flex-wrap justify-center gap-6 md:max-w-[552px]'>
                 {integrations.map((integration) => (
