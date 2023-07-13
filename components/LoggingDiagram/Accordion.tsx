@@ -37,7 +37,7 @@ const AccordionComponent = () => {
           scale.
         </p>
       </div>
-      <div className='mx-auto max-w-4xl pb-24'>
+      <div className='mx-auto max-w-4xl pb-24 2xl:max-w-5xl'>
         <div
           className='mx-auto flex w-full flex-col justify-between gap-x-10 lg:flex-row'
           id='diagramTop'>
