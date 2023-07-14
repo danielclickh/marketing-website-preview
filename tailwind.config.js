@@ -311,6 +311,16 @@ module.exports = {
         marqueeLeftTransform2: {
           '0%': { transform: 'translateX(100%)' },
           '100%': { transform: 'translateX(0%)' }
+        },
+        loggingFadeSection1: {
+          '0%': { opacity: '0.05', transform: 'scale(0.9)' },
+          '50%': { opacity: '0.15', transform: 'scale(1.1)' },
+          '100%': { opacity: '0.05', transform: 'scale(0.9)' }
+        },
+        loggingFadeSection2: {
+          '0%': { opacity: '0.05', transform: 'scale(0.9)' },
+          '50%': { opacity: '0.25', transform: 'scale(1.1)' },
+          '100%': { opacity: '0.05', transform: 'scale(0.9)' }
         }
       },
       animation: {
@@ -325,7 +335,11 @@ module.exports = {
         marqueeLeft: 'marqueeLeftTransform 75s linear infinite',
         marqueeLeft2: 'marqueeLeftTransform2 75s linear infinite ',
         marqueeLeft3: 'marqueeLeftTransform 90s linear infinite',
-        marqueeLeft4: 'marqueeLeftTransform2 90s linear infinite '
+        marqueeLeft4: 'marqueeLeftTransform2 90s linear infinite ',
+        marqueeLeft5: 'marqueeLeftTransform 190s linear infinite',
+        marqueeLeft6: 'marqueeLeftTransform2 190s linear infinite ',
+        loggingFadeSection1: 'loggingFadeSection1 5s ease-in-out infinite',
+        loggingFadeSection2: 'loggingFadeSection2 5s ease-in-out infinite'
       }
     }
   }

@@ -14,7 +14,7 @@ function InfoTooltip({ content }: { content: string }) {
         </Tooltip.Trigger>
         <Tooltip.Portal>
           <Tooltip.Content
-            className='bg-neutral-725 text-neutral-0 rounded-sm text-sm p-2'
+            className='rounded-sm bg-neutral-725 p-2 text-sm text-neutral-0'
             sideOffset={5}
             side='right'>
             {content}
@@ -39,26 +39,26 @@ function ShowPricing({ isFirst }: { isFirst: boolean }) {
   }
 
   return (
-    <div className='grid grid-cols-2 text-neutral-0 text-left mt-8 pb-6 '>
+    <div className='mt-8 grid grid-cols-2 pb-6 text-left text-neutral-0 '>
       <div className='border-r border-neutral-725 px-8 lg:px-4 xl:px-8'>
-        <h5 className='font-bold text-sm mb-2'>Storage</h5>
+        <h5 className='mb-2 text-sm font-bold'>Storage</h5>
         <span className='whitespace-nowrap'>
-          <div className='text-2.75xl font-semibold whitespace-nowrap'>
-            $ {storage.priceUSD}
+          <div className='whitespace-nowrap text-2.75xl font-semibold'>
+            ${storage.priceUSD}
           </div>
-          <div className='text-xs font-medium flex gap-1 items-center text-neutral-0/50'>
+          <div className='flex items-center gap-1 text-xs font-medium text-neutral-0/50'>
             {storage.meteringUnit}
             <InfoTooltip content={storage.meteringTooltip} />
           </div>
         </span>
       </div>
       <div className='compute px-8 lg:px-4 xl:px-8'>
-        <h5 className='font-bold text-sm mb-2'>Compute</h5>
+        <h5 className='mb-2 text-sm font-bold'>Compute</h5>
         <span className='whitespace-nowrap'>
-          <div className='text-2.75xl font-semibold whitespace-nowrap'>
+          <div className='whitespace-nowrap text-2.75xl font-semibold'>
             ${compute.priceUSD}
           </div>
-          <div className='text-xs font-medium flex gap-1 items-center text-neutral-0/50'>
+          <div className='flex items-center gap-1 text-xs font-medium text-neutral-0/50'>
             {compute.meteringUnit}
             <InfoTooltip content={compute.meteringTooltip} />
           </div>

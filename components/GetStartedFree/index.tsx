@@ -1,6 +1,6 @@
-import { CUIButton, CUICard } from '../../components/ClickUI'
-import { SuiText, SuiTitle } from '../../components/sui'
 import { ChevronRightIcon } from '@heroicons/react/solid'
+import { CUIButton } from '../../components/ClickUI'
+import { SuiText, SuiTitle } from '../../components/sui'
 
 type Props = {
   href: string

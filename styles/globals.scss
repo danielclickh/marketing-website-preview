@@ -592,6 +592,16 @@ a.arrow-link {
   }
 }
 
+@layer utilities {
+  @supports (-webkit-touch-callout: none) {
+    #logging-diagram-section2 {
+     @apply -mt-20
+    }
+    #logging-diagram-section3 {
+      @apply -mt-12
+     }
+  }
+}
 .mktoFormContainer {
   form {width: auto !important;}
   label {width: auto !important; @apply text-xs font-medium text-neutral-300 pb-1 relative inline-block pr-2;}

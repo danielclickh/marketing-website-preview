@@ -196,6 +196,13 @@ function Sitemap({
               </h2>
               <p className='pb-2'>
                 <Link
+                  href='/use-cases/logging-and-metrics'
+                  className='text-primary-300 hover:underline'>
+                  Logging and Metrics
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
                   href={`/user-stories`}
                   className='text-primary-300 hover:underline'>
                   User stories

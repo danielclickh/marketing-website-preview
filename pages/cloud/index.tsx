@@ -127,8 +127,7 @@ export default function CloudPage({
         <div className='bg-neutral-800 pb-24'>
           <div className='mx-auto'>
             <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-6 text-center font-basier text-xl font-semibold leading-normal text-neutral-300 md:px-0'>
-              ClickHouse Cloud trusted by the best developers that work with
-              data at{' '}
+              ClickHouse Cloud trusted by developers that work with data at{' '}
               <span className='tilted tilted-yellow'>
                 <span className='tilted-content leading-8'>scale</span>
               </span>
