@@ -595,10 +595,10 @@ a.arrow-link {
 @layer utilities {
   @supports (-webkit-touch-callout: none) {
     #logging-diagram-section2 {
-     @apply -mt-20
+     @apply -mt-2
     }
     #logging-diagram-section3 {
-      @apply -mt-12
+      @apply -mt-4
      }
   }
 }
