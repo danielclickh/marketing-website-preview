@@ -99,14 +99,14 @@
 				"menuItems": [
 					{
 						"id": 1,
-						"name": "Get started",
-						"href": "https://clickhouse.com/docs",
+						"name": "Install ClickHouse",
+						"href": "https://clickhouse.com/docs/en/install",
 						"target": "_self"
 					},
 					{
 						"id": 2,
-						"name": "Quick start",
-						"href": "https://clickhouse.com/docs/en/getting-started/quick-start",
+						"name": "Cloud Quick Start",
+						"href": "https://clickhouse.com/docs/en/cloud-quick-start",
 						"target": "_self"
 					},
 					{
