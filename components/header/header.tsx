@@ -114,8 +114,8 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
                 <span className='text-sm font-medium leading-none'>
                   {Intl.NumberFormat('en', {
                     notation: 'compact',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
+                    minimumFractionDigits: 1,
+                    maximumFractionDigits: 1
                   })
                     .format(stars)
                     .toLowerCase()}
