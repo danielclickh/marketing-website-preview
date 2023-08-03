@@ -61,8 +61,8 @@ function JoinCommunity({ github: { stars } }: Props) {
         <div className='absolute right-30 pt-32 font-basier text-5xl leading-none md:relative md:right-auto md:pt-0 md:text-7.5xl'>
           {Intl.NumberFormat('en', {
             notation: 'compact',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
+            minimumFractionDigits: 1,
+            maximumFractionDigits: 1
           })
             .format(stars)
             .toLowerCase()}
