@@ -89,11 +89,19 @@ export default function RichContentPage({
         />
       ) : (
         <div className='rich-content-page'>
-          <SuiTitle
-            type='h1'
-            className='container mx-auto flex max-w-screen-lg items-center justify-center py-16 px-0 text-center font-bold'>
-            {title}
-          </SuiTitle>
+          {slug === 'legal/agreements/terms-of-service' ? (
+            <>
+              <h1 className='container mx-auto flex max-w-screen-lg items-center justify-center py-16 px-0 text-center font-basier text-5xl font-bold'>
+                {title}
+              </h1>
+            </>
+          ) : (
+            <SuiTitle
+              type='h1'
+              className='container mx-auto flex max-w-screen-lg items-center justify-center py-16 px-0 text-center font-bold'>
+              {title}
+            </SuiTitle>
+          )}
           <div className='mb-16 px-4 pb-16'>
             <div className='container mx-auto max-w-7xl'>
               {content && (
