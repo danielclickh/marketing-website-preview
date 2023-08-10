@@ -7,6 +7,7 @@ import Layout from '../../../components/Layout'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import HRSeparator from '../../../components/HRSeparator'
 import MarketoForm from '../../../components/MarketoForm'
+import { useState } from 'react';
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -46,6 +47,9 @@ export default function ContactPage({
   headerData,
   seo
 }: ContactPageProps) {
+
+  const [formSuccess, setFormSuccess] = useState(false)
+
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -65,15 +69,21 @@ export default function ContactPage({
             </div>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 pt-14 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
               <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
-                <MarketoForm formId='1043' onSuccess={() => document.querySelector('.disclaimer-text')?.classList.add('hidden')}>
-                  <h3 className='text-center text-2xl font-bold'>Thank you for your submission!</h3>
-                  <p className='mt-2 text-center text-neutral-200'>We will be in touch soon.</p>
-                </MarketoForm>
-                <div className='flex text-center'>
-                  <div className='disclaimer-text text-sm font-medium text-neutral-200'>
-                    <Markdown>{contactForm.disclaimer}</Markdown>
-                  </div>
-                </div>
+
+                <MarketoForm formId='1043' onSuccess={() => {
+                  setFormSuccess(true)
+                  return false // Stops page from reloading
+                }} />
+
+                {formSuccess && <div className='text-center'>
+                  <h3 className='text-2xl font-bold'>Thank you for your submission!</h3>
+                  <p className='mt-2 text-neutral-200'>We will be in touch soon.</p>
+                </div>}
+
+                {!formSuccess && <div className='disclaimer-text text-center text-sm font-medium text-neutral-200'>
+                  <Markdown>{contactForm.disclaimer}</Markdown>
+                </div>}
+
               </div>
             </div>
           </div>

@@ -37,6 +37,8 @@ export interface MarketoFormsApi {
         callback: MarketoCallback
     ) => void,
 
+    getForm(formId: string|number): MarketoFormObject
+
     // Callbacks
 
     whenReady(callback: MarketoCallback): void,

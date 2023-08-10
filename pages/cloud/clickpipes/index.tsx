@@ -10,7 +10,6 @@ import Layout from '../../../components/Layout'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ClickPipesData } from '../../../types/clickpipes'
-import { FormProps } from '../../../types/marketo'
 import features from './features.json'
 import integrations from './integrations.json'
 import ClickPipesAnimation from '../../../components/ClickPipesAnimation'
@@ -43,6 +42,9 @@ export default function ClickHouseServerPage({
   headerData,
   footerData
 }: ClickPipesData) {
+
+  const [formSuccess, setFormSuccess] = useState(false)
+
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -244,18 +246,26 @@ export default function ClickHouseServerPage({
           <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
             <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
               <div className='px-4 lg:px-0'>
-                <MarketoForm formId='1057' onSuccess={() => document.querySelector('.privacy-notice-form')?.classList.add('hidden')}>
-                  <h3 className='text-center text-2xl font-bold'>Thanks! You're on the waitlist</h3>
-                  <p className='mt-2 text-center text-neutral-200'>We will be in touch as soon as ClickPipes is available.</p>
-                </MarketoForm>
-                <div className='rich_content privacy-notice-form mt-4 text-center text-sm'>
+
+                <MarketoForm formId='1057' onSuccess={() => {
+                  setFormSuccess(true)
+                  return false // Stops page from reloading
+                }} />
+
+                {formSuccess && <div className='text-center'>
+                  <h3 className='text-2xl font-bold'>Thanks! You're on the waitlist</h3>
+                  <p className='mt-2 text-neutral-200'>We will be in touch as soon as ClickPipes is available.</p>
+                </div>}
+
+                {!formSuccess && <div className='rich_content privacy-notice-form mt-4 text-center text-sm'>
                   <ReactMarkdown
                     children='By clicking Submit, you acknowledge that ClickHouse will
                     process your personal information in accordance with our
                     [privacy
                     policy](https://clickhouse.com/legal/privacy-policy).'
                   />
-                </div>
+                </div>}
+
               </div>
             </div>
           </div>
