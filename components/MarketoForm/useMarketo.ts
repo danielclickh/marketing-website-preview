@@ -44,20 +44,41 @@ function removeMarketoStyles(marketoFormObject: MarketoFormObject) {
 }
 
 function useMarketo({
-  baseUrl = '//discover.clickhouse.com',
-  munchkinId = '238-FPC-317',
-  formId,
-  onLoad
+  baseUrl = '',
+  munchkinId = '',
+  formId = '',
+  onLoad,
+  onSuccess
 }: MarketoFormProps): void {
   const [scriptLoaded, setScriptLoaded] = useState(false)
 
   useEffect(() => {
     if (scriptLoaded) {
+
+      // Bail early if form has already loaded
+      if (document.getElementById(`mktoForm_${formId}`)?.classList.contains('mktoForm')) {
+        return
+      }
+
+      // Load the form with and attach callbacks
       window.MktoForms2.loadForm(baseUrl, munchkinId, formId, marketoFormObject => {
+
         removeMarketoStyles(marketoFormObject)
+
         if (onLoad) onLoad(marketoFormObject)
+
+        if (onSuccess) {
+          marketoFormObject.onSuccess((response, redirect) => {
+            const result = onSuccess(marketoFormObject, response, redirect)
+            if (typeof result !== "undefined") {
+              return result
+            }
+          });
+        }
+
       })
 
+      // Remove styles unwanted styles on re-render
       window.MktoForms2.onFormRender(marketoFormObject => {
         removeMarketoStyles(marketoFormObject)
       })
@@ -65,7 +86,7 @@ function useMarketo({
       return
     }
     addMarketoFormsScript(baseUrl, setScriptLoaded)
-  }, [scriptLoaded, baseUrl, munchkinId, formId, onLoad])
+  }, [scriptLoaded, baseUrl, munchkinId, formId, onLoad, onSuccess])
 }
 
 export default useMarketo

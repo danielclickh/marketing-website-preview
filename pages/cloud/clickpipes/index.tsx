@@ -243,16 +243,11 @@ export default function ClickHouseServerPage({
           </h2>
           <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
             <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
-              <div id='thankyou' className='success-message hidden'>
-                <h3 className='text-center text-2xl font-bold'>
-                  Thanks! You're on the waitlist
-                </h3>
-                <p className='mt-2 text-center text-neutral-200'>
-                  We will be in touch as soon as ClickPipes is available.
-                </p>
-              </div>
-              <div className='mktoFormContainer px-4 lg:px-0'>
-                <MarketoForm formId="1057" />
+              <div className='px-4 lg:px-0'>
+                <MarketoForm formId='1057' onSuccess={() => document.querySelector('.privacy-notice-form')?.classList.add('hidden')}>
+                  <h3 className='text-center text-2xl font-bold'>Thanks! You're on the waitlist</h3>
+                  <p className='mt-2 text-center text-neutral-200'>We will be in touch as soon as ClickPipes is available.</p>
+                </MarketoForm>
                 <div className='rich_content privacy-notice-form mt-4 text-center text-sm'>
                   <ReactMarkdown
                     children='By clicking Submit, you acknowledge that ClickHouse will

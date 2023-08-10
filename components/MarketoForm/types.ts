@@ -1,5 +1,13 @@
+import React from "react";
+
 export interface MarketoFormObject {
-    getFormElem: () => JQuery
+    getFormElem(): JQuery,
+    onSuccess: (
+        callback: (
+            response: any,
+            redirect: string
+        ) => void|false
+    ) => void
 }
 
 export type MarketoCallback = (marketoFormObject: MarketoFormObject) => void
@@ -8,7 +16,11 @@ export interface MarketoFormProps {
     formId: string
     baseUrl?: string
     munchkinId?: string
-    onLoad?: MarketoCallback
+
+    onLoad?: MarketoCallback,
+    onSuccess?: (marketoFormObject: MarketoFormObject, response: any, redirect: string) => void|false,
+
+    children?: React.ReactNode,
 }
 
 /**
