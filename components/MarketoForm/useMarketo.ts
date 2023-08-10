@@ -1,0 +1,71 @@
+import { useState, useEffect } from 'react'
+import { MarketoFormsApi, MarketoFormProps, MarketoFormObject } from './types'
+
+declare global {
+  interface Window {
+    MktoForms2: MarketoFormsApi
+  }
+}
+
+function addMarketoFormsScript(
+  baseUrl: string,
+  setScriptLoaded: React.Dispatch<React.SetStateAction<boolean>>
+): void {
+  if (window.MktoForms2) return setScriptLoaded(true)
+
+  const script = document.createElement('script')
+  script.src = `${baseUrl.replace(/\/$/, '')}/js/forms2/js/forms2.min.js`
+  script.onload = () => (window.MktoForms2 ? setScriptLoaded(true) : null)
+  document.body.appendChild(script)
+}
+
+function removeMarketoStyles(marketoFormObject: MarketoFormObject) {
+
+  const jqueryElement = marketoFormObject.getFormElem()
+  const formElement = jqueryElement.get(0)
+
+  // Remove marketo <link> styles
+  const styleLinks = document.querySelectorAll('#mktoForms2ThemeStyle, #mktoForms2BaseStyle');
+  Array.from(styleLinks).forEach(el => el.remove());
+
+  if (formElement) {
+
+    // Remove form <style> elements
+    const scopedStyles = formElement.querySelectorAll('style');
+    Array.from(scopedStyles).forEach(el => el.remove());
+
+    // Remove inline style attributes
+    const inlineStyles = formElement.querySelectorAll('[style]');
+    Array.from(inlineStyles).forEach(el => el.removeAttribute('style'));
+
+    // Remove inline style from <form> element
+    formElement.removeAttribute('style');
+  }
+}
+
+function useMarketo({
+  baseUrl = '//discover.clickhouse.com',
+  munchkinId = '238-FPC-317',
+  formId,
+  onLoad
+}: MarketoFormProps): void {
+  const [scriptLoaded, setScriptLoaded] = useState(false)
+
+  useEffect(() => {
+    if (scriptLoaded) {
+      window.MktoForms2.loadForm(baseUrl, munchkinId, formId, marketoFormObject => {
+        removeMarketoStyles(marketoFormObject)
+        if (onLoad) onLoad(marketoFormObject)
+      })
+
+      window.MktoForms2.onFormRender(marketoFormObject => {
+        removeMarketoStyles(marketoFormObject)
+      })
+
+      return
+    }
+    addMarketoFormsScript(baseUrl, setScriptLoaded)
+  }, [scriptLoaded, baseUrl, munchkinId, formId, onLoad])
+}
+
+export default useMarketo
