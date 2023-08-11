@@ -11,6 +11,9 @@ export interface MarketoFormObject {
     ) => void,
     setValues(values: {
         [key: string]: any
+    }): void,
+    addHiddenFields(values: {
+        [key: string]: any
     }): void
 }
 

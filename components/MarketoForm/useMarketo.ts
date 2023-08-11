@@ -68,6 +68,10 @@ function useMarketo({
 
         removeMarketoStyles(marketoFormObject)
 
+        marketoFormObject.addHiddenFields({
+          formReferrer: window.location.toString()
+        })
+
         if (onLoad) onLoad(marketoFormObject)
 
         if (onSuccess) {
@@ -78,13 +82,6 @@ function useMarketo({
             }
           });
         }
-
-
-        marketoFormObject.onSubmit(() => {
-          marketoFormObject.setValues({
-            formReferrer: window.location.toString()
-          })
-        })
 
       })
 
