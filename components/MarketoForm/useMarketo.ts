@@ -79,11 +79,10 @@ function useMarketo({
           });
         }
 
+        console.log('For you Adrian 😘', window.location.toString());
+
         marketoFormObject.onSubmit(formObj => {
-          console.group('Debug info for AF')
-            console.log('Form object', marketoFormObject)
-            console.log('Current window location', window.location.toString())
-          console.groupEnd()
+          console.log('Another one for you Adrian 😘', window.location.toString());
         })
 
       })
