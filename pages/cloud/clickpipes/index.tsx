@@ -44,6 +44,7 @@ export default function ClickHouseServerPage({
 }: ClickPipesData) {
 
   const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
 
   return (
     <>
@@ -247,17 +248,21 @@ export default function ClickHouseServerPage({
             <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
               <div className='px-4 lg:px-0'>
 
-                <MarketoForm formId='1057' onSuccess={() => {
+                {!formSuccess && <MarketoForm formId='1057' onLoad={() => setFormLoaded(true)} onSuccess={() => {
                   setFormSuccess(true)
                   return false // Stops page from reloading
-                }} />
+                }} />}
+
+                {!formLoaded && <div className='text-center'>
+                  Loading form...
+                </div>}
 
                 {formSuccess && <div className='text-center'>
                   <h3 className='text-2xl font-bold'>Thanks! You're on the waitlist</h3>
                   <p className='mt-2 text-neutral-200'>We will be in touch as soon as ClickPipes is available.</p>
                 </div>}
 
-                {!formSuccess && <div className='rich_content privacy-notice-form mt-4 text-center text-sm'>
+                {formLoaded && !formSuccess && <div className='rich_content privacy-notice-form mt-4 text-center text-sm'>
                   <ReactMarkdown
                     children='By clicking Submit, you acknowledge that ClickHouse will
                     process your personal information in accordance with our

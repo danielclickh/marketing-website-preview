@@ -19,8 +19,6 @@ export interface MarketoFormProps {
 
     onLoad?: MarketoCallback,
     onSuccess?: (marketoFormObject: MarketoFormObject, response: any, redirect: string) => void|false,
-
-    children?: React.ReactNode,
 }
 
 /**
