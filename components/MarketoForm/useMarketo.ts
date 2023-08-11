@@ -30,6 +30,14 @@ function removeMarketoStyles(marketoFormObject: MarketoFormObject) {
 
   if (formElement) {
 
+    // Remove fixed widths for improved responsiveness
+    const fixedWidths = formElement.querySelectorAll<HTMLElement>('.mktoHasWidth');
+    Array.from(fixedWidths).forEach(el => {
+      el.classList.remove('mktoHasWidth')
+      delete el.dataset.mktoFixedWidth
+      el.removeAttribute('data-mktoFixedWidth') // Just incase ¯\_(ツ)_/¯
+    })
+
     // Remove form <style> elements
     const scopedStyles = formElement.querySelectorAll('style');
     Array.from(scopedStyles).forEach(el => el.remove());
