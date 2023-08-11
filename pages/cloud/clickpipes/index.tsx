@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
@@ -43,6 +43,7 @@ export default function ClickHouseServerPage({
   footerData
 }: ClickPipesData) {
 
+  const formSuccessRef = useRef<HTMLDivElement|null>(null);
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
 
@@ -250,6 +251,14 @@ export default function ClickHouseServerPage({
 
                 {!formSuccess && <MarketoForm formId='1057' onLoad={() => setFormLoaded(true)} onSuccess={() => {
                   setFormSuccess(true)
+
+                  // Delay needed to allow the ref to update before scrolling
+                  setTimeout(() => {
+                    formSuccessRef.current?.scrollIntoView({
+                      behavior: 'smooth'
+                    })
+                  }, 10);
+
                   return false // Stops page from reloading
                 }} />}
 
@@ -257,7 +266,7 @@ export default function ClickHouseServerPage({
                   Loading form...
                 </div>}
 
-                {formSuccess && <div className='text-center'>
+                {formSuccess && <div ref={formSuccessRef} className='text-center'>
                   <h3 className='text-2xl font-bold'>Thanks! You're on the waitlist</h3>
                   <p className='mt-2 text-neutral-200'>We will be in touch as soon as ClickPipes is available.</p>
                 </div>}

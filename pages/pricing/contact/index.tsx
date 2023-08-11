@@ -7,7 +7,7 @@ import Layout from '../../../components/Layout'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import HRSeparator from '../../../components/HRSeparator'
 import MarketoForm from '../../../components/MarketoForm'
-import { useState } from 'react';
+import { useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -48,6 +48,7 @@ export default function ContactPage({
   seo
 }: ContactPageProps) {
 
+  const formSuccessRef = useRef<HTMLDivElement|null>(null);
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
 
@@ -73,20 +74,28 @@ export default function ContactPage({
 
                 {!formSuccess && <MarketoForm formId='1043' onLoad={() => setFormLoaded(true)} onSuccess={() => {
                   setFormSuccess(true)
+
+                  // Delay needed to allow the ref to update before scrolling
+                  setTimeout(() => {
+                    formSuccessRef.current?.scrollIntoView({
+                      behavior: 'smooth'
+                    })
+                  }, 10);
+
                   return false // Stops page from reloading
                 }} />}
+
+                {formLoaded && !formSuccess && <div className='disclaimer-text text-center text-sm font-medium text-neutral-200'>
+                  <Markdown>{contactForm.disclaimer}</Markdown>
+                </div>}
 
                 {!formLoaded && <div className='text-center'>
                   Loading form...
                 </div>}
 
-                {formSuccess && <div className='text-center'>
+                {formSuccess && <div ref={formSuccessRef} className='text-center'>
                   <h3 className='text-2xl font-bold'>Thank you for your submission!</h3>
                   <p className='mt-2 text-neutral-200'>We will be in touch soon.</p>
-                </div>}
-
-                {formLoaded && !formSuccess && <div className='disclaimer-text text-center text-sm font-medium text-neutral-200'>
-                  <Markdown>{contactForm.disclaimer}</Markdown>
                 </div>}
 
               </div>
