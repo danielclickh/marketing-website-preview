@@ -79,10 +79,11 @@ function useMarketo({
           });
         }
 
-        console.log('For you Adrian 😘', window.location.toString());
 
-        marketoFormObject.onSubmit(formObj => {
-          console.log('Another one for you Adrian 😘', window.location.toString());
+        marketoFormObject.onSubmit(() => {
+          marketoFormObject.setValues({
+            formReferrer: window.location.toString()
+          })
         })
 
       })
