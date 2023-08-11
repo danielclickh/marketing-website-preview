@@ -79,6 +79,13 @@ function useMarketo({
           });
         }
 
+        marketoFormObject.onSubmit(formObj => {
+          console.group('Debug info for AF')
+            console.log('Form object', marketoFormObject)
+            console.log('Current window location', window.location.toString())
+          console.groupEnd()
+        })
+
       })
 
       // Remove styles unwanted styles on re-render

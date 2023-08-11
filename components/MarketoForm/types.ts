@@ -2,12 +2,16 @@ import React from "react";
 
 export interface MarketoFormObject {
     getFormElem(): JQuery,
+    onSubmit(callback: MarketoCallback): void,
     onSuccess: (
         callback: (
             response: any,
             redirect: string
         ) => void|false
-    ) => void
+    ) => void,
+    setValues(values: {
+        [key: string]: any
+    }): void
 }
 
 export type MarketoCallback = (marketoFormObject: MarketoFormObject) => void
