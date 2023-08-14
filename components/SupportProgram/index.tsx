@@ -21,7 +21,7 @@ export default function SupportProgram(props: any) {
             size='base'
             weight='medium'
             color='secondary'
-            className='mt-6 md:pr-16'>
+            className='mt-6'>
             Here at ClickHouse, best-in-class support comes with your Cloud
             subscription. Our Support Services team follows the same vision as
             our product, bringing you unparalleled performance, ease of use, and
