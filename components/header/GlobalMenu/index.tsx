@@ -47,7 +47,6 @@ const GlobalMenu = () => {
                             <div className='mb-4 border-b border-neutral-700 border-opacity-40 bg-neutral-725 bg-opacity-90'>
                               <ListItem
                                 href={subMenuItem.href}
-                                prefetch={subMenuItem.prefetch}
                                 className='group rounded-none bg-opacity-10 pl-4 lg:min-w-[9.5rem]'>
                                 <SuiText
                                   size='sm'
@@ -129,13 +128,9 @@ const GlobalMenu = () => {
 interface ListItemProps extends HTMLAttributes<HTMLAnchorElement> {
   href?: string
   target?: string
-  prefetch?: boolean
 }
 const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
-  (
-    { className, children, title, href, target, prefetch, ...props },
-    forwardedRef
-  ) => {
+  ({ className, children, title, href, target, ...props }, forwardedRef) => {
     if (href) {
       return (
         <NavigationMenu.Link asChild>
@@ -162,7 +157,6 @@ const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
               )}
               href={href}
               target={target}
-              prefetch={prefetch}
               {...props}
               ref={forwardedRef}>
               <div className='font-medium'>{title}</div>
