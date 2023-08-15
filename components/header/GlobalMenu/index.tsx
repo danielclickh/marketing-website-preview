@@ -139,7 +139,9 @@ const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
     if (href) {
       return (
         <NavigationMenu.Link asChild>
-          {href.includes('blog') ? (
+          {href.includes('blog') ||
+          href.includes('.com') ||
+          href.includes('.cloud') ? (
             <a
               className={classNames(
                 'block w-full select-none rounded px-3 py-2 text-sm leading-none !no-underline outline-none transition-all hover:bg-neutral-700 hover:bg-opacity-40 hover:text-neutral-0 focus:shadow-[0_0_0_2px] focus:shadow-neutral-750 focus:outline-none',

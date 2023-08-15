@@ -4,7 +4,6 @@ export interface HeaderTopNavItem {
   id: number
   name: string
   href?: string
-  prefetch?: boolean
   target?: LinkTarget
   menuItems: Array<HeaderLinkItem>
 }
@@ -25,7 +24,6 @@ export interface HeaderLinkItem {
   name: string
   icon?: string
   menuItems?: never
-  prefetch?: boolean
 }
 
 export interface RegularNavItem {
@@ -33,7 +31,6 @@ export interface RegularNavItem {
   name: string
   href: string
   target: LinkTarget
-  prefetch?: boolean
 }
 
 export type MenuItem = HeaderNavItem | HeaderLinkItem

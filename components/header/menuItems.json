@@ -42,16 +42,14 @@
 					{
 						"id": 1,
 						"name": "Open support case",
-						"href": "https://clickhouse.cloud/support?ajs_aid=ec53202d-30d3-4f49-9481-0624f07764f0",
-						"target": "_blank",
-						"prefetch": false
+						"href": "https://clickhouse.cloud/support",
+						"target": "_blank"
 					},
 					{
 						"id": 2,
 						"name": "Knowledge Base",
 						"href": "https://clickhouse.com/docs/knowledgebase",
-						"target": "_self",
-						"prefetch": false
+						"target": "_self"
 					},
 					{
 						"id": 3,
@@ -66,7 +64,6 @@
 				"name": "Community",
 				"href": "https://github.com/ClickHouse/ClickHouse",
 				"target": "_blank",
-				"prefetch": false,
 				"menuItems": [
 					{
 						"id": 1,
@@ -78,15 +75,13 @@
 						"id": 2,
 						"name": "Meetups",
 						"href": "https://www.meetup.com/pro/clickhouse/",
-						"target": "_blank",
-						"prefetch": false
+						"target": "_blank"
 					},
 					{
 						"id": 3,
 						"name": "GitHub",
 						"href": "https://github.com/ClickHouse/ClickHouse",
-						"target": "_blank",
-						"prefetch": false
+						"target": "_blank"
 					},
 					{
 						"id": 3,
@@ -101,35 +96,30 @@
 				"name": "Docs",
 				"href": "https://clickhouse.com/docs",
 				"target": "_self",
-				"prefetch": false,
 				"menuItems": [
 					{
 						"id": 1,
 						"name": "Install ClickHouse",
 						"href": "https://clickhouse.com/docs/en/install",
-						"target": "_self",
-						"prefetch": false
+						"target": "_self"
 					},
 					{
 						"id": 2,
 						"name": "Cloud Quick Start",
 						"href": "https://clickhouse.com/docs/en/cloud-quick-start",
-						"target": "_self",
-						"prefetch": false
+						"target": "_self"
 					},
 					{
 						"id": 3,
 						"name": "Integrations",
 						"href": "https://clickhouse.com/docs/en/integrations",
-						"target": "_self",
-						"prefetch": false
+						"target": "_self"
 					},
 					{
 						"id": 4,
 						"name": "Changelog",
 						"href": "https://clickhouse.com/docs/category/changelog",
-						"target": "_self",
-						"prefetch": false
+						"target": "_self"
 					}
 				]
 			},
