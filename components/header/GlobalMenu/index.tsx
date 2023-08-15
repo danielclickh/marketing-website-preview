@@ -160,7 +160,6 @@ const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
               )}
               href={href}
               target={target}
-              prefetch={prefetch}
               {...props}
               ref={forwardedRef}>
               <div className='font-medium'>{title}</div>
