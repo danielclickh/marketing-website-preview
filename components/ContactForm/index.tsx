@@ -18,7 +18,9 @@ function ContactForm({
   companyLabel,
   messageLabel,
   submitButtonLabel,
-  thankYouMessage
+  thankYouMessage,
+
+  onSuccess
 }: ContactFormProps) {
   const { openSnackBar } = useSnackbar()
   const [firstName, setFirstName] = useState<string>()
@@ -27,7 +29,9 @@ function ContactForm({
   const [company, setCompany] = useState<string>()
   const submitRef = useRef(false)
   const [useCase, setUseCase] = useState<string>('')
-  const [submissionSuccessful, setSubmissionSuccessful] = useState(false);
+
+  const [formProcessing, setFormProcessing] = useState(false)
+  const [submissionSuccessful, setSubmissionSuccessful] = useState(false)
 
   const onChange = (
     e:
@@ -86,6 +90,8 @@ function ContactForm({
       return
     }
 
+    setFormProcessing(true)
+
     try {
       submitRef.current = true
       const requestData = {
@@ -95,7 +101,10 @@ function ContactForm({
         company,
         message: useCase
       }
-      const response = await submitWorkatoForm('websiteContact', requestData)
+
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      const response = {marketCookie: 1}//await submitWorkatoForm('websiteContact', requestData)
       const userId = response?.cloudId ? response.cloudId : email
       try {
         await window.analytics.track('Form Submitted', {
@@ -105,17 +114,23 @@ function ContactForm({
         })
         await window.analytics.identify(userId, requestData)
       } catch (e) {}
-      //openSnackBar(thankYouMessage, 'success')
+
       setSubmissionSuccessful(true)
       setFirstName(undefined)
       setLastName(undefined)
       setEmail(undefined)
       setCompany(undefined)
       setUseCase('')
+
+      if (onSuccess) {
+        onSuccess()
+      }
     } catch (e: any) {
       setSubmissionSuccessful(false)
       openSnackBar(e.message, 'error')
     }
+
+    setFormProcessing(false)
 
     submitRef.current = false
   }
@@ -210,7 +225,8 @@ function ContactForm({
             type='primary'
             onClick={onSubmit}
             className='w-full rounded-md hover:translate-y-0 hover:bg-primary-400 hover:no-underline'>
-            {submitButtonLabel}
+            {formProcessing && 'Please Wait'}
+            {!formProcessing && submitButtonLabel}
           </SuiButton>
         </div>
       </div>
