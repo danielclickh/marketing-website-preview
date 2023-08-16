@@ -1,25 +1,23 @@
-import React, { Fragment } from 'react'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
+import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
-import AccordionComponent from '../../../components/LoggingDiagram/Accordion'
+import AccordionComponent from '../../../components/MLDiagram/Accordion'
 import LogoCarousel from '../../../components/LogoCarousel'
+import Markdown from '../../../components/Markdown'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
-import features from './features.json'
-import quotes from './quotes.json'
 import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
-import Markdown from '../../../components/Markdown'
-import BulletPoint from '../../../components/BulletPoint'
-import { CUIButton } from '../../../components/ClickUI'
+import features from './features.json'
+import quotes from './quotes.json'
 
 interface LoggingProps extends CommonProps {
   customerStories: any
@@ -143,15 +141,15 @@ export default function ClickHouseServerPage({
                         type='secondary'
                         size='lg'
                         weight='semibold'
-                        href='https://clickhouse.cloud/signUp?loc=use-case-ml-and-ds'
-                        target='_blank'
+                        href='/company/contact?loc=use-case-ml-and-ds'
+                        target='_self'
                         segmentEvent={{
-                          label: 'use-case-ml-and-ds',
-                          category: 'use-case-ml-and-ds'
+                          label: 'use-case-ml-and-ds-contact',
+                          category: 'use-case-ml-and-ds-contact'
                         }}
-                        linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
+                        linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
                         className='w-full'>
-                        Get started today
+                        Contact sales
                       </CUIButton>
                     </div>
                   </div>
@@ -201,7 +199,7 @@ export default function ClickHouseServerPage({
           <div className='section-container max-w-7xl'>
             <div className='relative flex flex-col rounded-lg border-t-2 border-neutral-700/80 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
-                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[296px] md:flex-row'>
+                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[490px] md:flex-row lg:h-[360px] xl:h-[320px] '>
                   {quotes.map((quote) => (
                     <Tilt
                       tiltEnable={false}
@@ -333,28 +331,53 @@ export default function ClickHouseServerPage({
                   along in our blog:
                 </div>
                 <div className='bg-neutral-725 p-8'>
-                  <ol className='space-y-2 text-center'>
+                  <ol className='list-decimal space-y-2 text-left	text-primary-300'>
                     <li>
                       <Link
-                        href='/blog/storing-log-data-in-clickhouse-fluent-bit-vector-open-telemetry'
+                        href='/blog/vector-search-clickhouse-p1'
                         className='text-primary-300'>
-                        Building an Observability Solution with ClickHouse -
-                        Part 1 - Logs
+                        Vector Search with ClickHouse - Part 1
                       </Link>
                     </li>
                     <li>
                       <Link
-                        href='https://clickhouse.com/docs/knowledgebase/use-clickhouse-for-log-analytics'
+                        href='/blog/vector-search-clickhouse-p2'
                         className='text-primary-300'>
-                        Docs: Using ClickHouse for log analytics
+                        Vector Search with ClickHouse - Part 2
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        href='/blog/nginx-logs-to-clickhouse-fluent-bit'
-                        className='text-primary-300'>
-                        Sending Nginx logs to ClickHouse with Fluent Bit
-                      </Link>
+                      <a
+                        href='https://www.youtube.com/watch?v=hGRNcftpqAk'
+                        className='text-primary-300'
+                        target='_blank'>
+                        Video: ClickHouse for AI - Vectors, Embedding, Semantic
+                        Search, and more - Alexey Milovidov, ClickHouse
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href='https://www.youtube.com/watch?v=F08ktx1ZrpI'
+                        className='text-primary-300'
+                        target='_blank'>
+                        Video: Vector Search In ClickHouse - Dale McDiarmid
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href='https://python.langchain.com/docs/integrations/vectorstores/clickhouse'
+                        className='text-primary-300'
+                        target='_blank'>
+                        Using Langchain with ClickHouse
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href='https://deepnote.com/blog/clickhouse'
+                        className='text-primary-300'
+                        target='_blank'>
+                        Using Deepnote with ClickHouse
+                      </a>
                     </li>
                   </ol>
                 </div>

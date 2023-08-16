@@ -276,13 +276,13 @@ export default function ClickHouseServerPage({
                     <span className='tilted-content'>references</span>
                   </span>{' '}
                 </SuiTitle>
-                <div className='mx-auto mb-8 mt-6 max-w-2xl text-center text-neutral-300'>
+                <div className='mx-auto mb-8 mt-6 max-w-2xl text-left text-neutral-300'>
                   For much more detailed guides about how to get started
                   building an observability solution with ClickHouse, follow
                   along in our blog:
                 </div>
                 <div className='bg-neutral-725 p-8'>
-                  <ol className='space-y-2 text-center'>
+                  <ol className='list-decimal space-y-2 text-center	'>
                     <li>
                       <Link
                         href='/blog/storing-log-data-in-clickhouse-fluent-bit-vector-open-telemetry'
