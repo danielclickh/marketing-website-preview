@@ -102,9 +102,7 @@ function ContactForm({
         message: useCase
       }
 
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      const response = {marketCookie: 1}//await submitWorkatoForm('websiteContact', requestData)
+      const response = await submitWorkatoForm('websiteContact', requestData)
       const userId = response?.cloudId ? response.cloudId : email
       try {
         await window.analytics.track('Form Submitted', {
