@@ -1,0 +1,32 @@
+[
+    {
+        "id": 10,
+        "title": "Cloudflare",
+        "logo": "/images/use-cases/logging/logo-cloudflare.svg",
+        "content": "We aggregate the user's history in ClickHouse and use it as a data store for training and inference. Even when reading 10s of millions of rows, the performance was very nice and not the bottleneck when training new models.",
+        "href": "",
+        "target": "",
+        "imgWidth": 102,
+        "imgHeight": 34
+    },
+    {
+        "id": 20,
+        "title": "Highlight.io",
+        "logo": "/images/use-cases/logging/logo-highlight.svg",
+        "content": "After Testing Hadoop and Spark, We Chose ClickHouse",
+        "href": "/blog/overview-of-highlightio",
+        "target": "_blank",
+        "imgWidth": 153,
+        "imgHeight": 30
+    },
+    {
+        "id": 30,
+        "logo": "/images/use-cases/logging/logo-uber.svg",
+        "title": "Uber",
+        "content": "We collect tens of thousands of data points from customers' phones and other more traditional sources. ClickHouse is used as a way to process all of these SMS messages and extract valuable information used for the scoring and fraud models.",
+        "href": "https://www.uber.com/blog/logging",
+        "target": "_blank",
+        "imgWidth": 74,
+        "imgHeight": 26
+    }
+]
