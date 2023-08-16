@@ -68,6 +68,13 @@ function MediaPage({ seo, headerData, footerData }: CommonProps) {
 
               <div className='mt-8 mb-56 flex w-full flex-wrap justify-center gap-8 md:justify-evenly'>
                 <LogoContainer
+                  background='bg-primary-300'
+                  h_url='ch_logo_blk_sm.svg'
+                  h_title='ClickHouse Logo Horizontal - Black'
+                  v_url='ch_logo_blk_md_vert.svg'
+                  v_title='ClickHouse Logo Vertical - Black'
+                />
+                <LogoContainer
                   background='bg-neutral-0'
                   h_url='ch_logo_blk_sm.svg'
                   h_title='ClickHouse Logo Horizontal - Black'
