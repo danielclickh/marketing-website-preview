@@ -70,9 +70,9 @@ function MediaPage({ seo, headerData, footerData }: CommonProps) {
                 <LogoContainer
                   background='bg-primary-300'
                   h_url='ch_logo_blk_sm.svg'
-                  h_title='ClickHouse Logo Horizontal - Black'
+                  h_title='ClickHouse Logo Horizontal - Black on Yellow'
                   v_url='ch_logo_blk_md_vert.svg'
-                  v_title='ClickHouse Logo Vertical - Black'
+                  v_title='ClickHouse Logo Vertical - Black on Yellow'
                 />
                 <LogoContainer
                   background='bg-neutral-0'
