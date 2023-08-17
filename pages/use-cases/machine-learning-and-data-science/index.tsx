@@ -19,11 +19,11 @@ import checkpoints from './checkpoints.json'
 import features from './features.json'
 import quotes from './quotes.json'
 
-interface LoggingProps extends CommonProps {
+interface MLProps extends CommonProps {
   customerStories: any
 }
 
-export const getStaticProps: GetStaticProps<LoggingProps> =
+export const getStaticProps: GetStaticProps<MLProps> =
   async function getStaticProps() {
     const params = {
       populate: [
@@ -38,7 +38,7 @@ export const getStaticProps: GetStaticProps<LoggingProps> =
 
     const data = await findOne('homepage', params)
 
-    data.seo.path = '/use-cases/logging-and-metrics'
+    data.seo.path = '/use-cases/machine-learning-and-data-science'
     data.seo.title =
       'Machine Learning and Data Science with ClickHouse | ClickHouse for ML and data science'
     data.seo.description =
@@ -56,12 +56,12 @@ export const getStaticProps: GetStaticProps<LoggingProps> =
     }
   }
 
-export default function ClickHouseServerPage({
+export default function MLUseCasePage({
   customerStories,
   seo,
   headerData,
   footerData
-}: LoggingProps) {
+}: MLProps) {
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
@@ -387,7 +387,7 @@ export default function ClickHouseServerPage({
 
           <div className='section-container my-44 text-neutral-0 md:px-8 2xl:px-0'>
             <GetStartedFree
-              href='https://clickhouse.cloud/signUp?loc=logging-use-case-getstarted-footer'
+              href='https://clickhouse.cloud/signUp?loc=ml-and-ds-use-case-getstarted-footer'
               textBefore='Get started with ClickHouse'
               textSlanted='Cloud'
               textAfter='for free'

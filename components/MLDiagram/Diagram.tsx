@@ -1,7 +1,4 @@
 import SvgSection1 from './SvgSection1'
-import SvgSection2 from './SvgSection2'
-import SvgSection3 from './SvgSection3'
-import SvgSection4 from './SvgSection4'
 
 interface DiagramProps {
   className?: string
@@ -9,12 +6,7 @@ interface DiagramProps {
 }
 
 const Diagram: React.FC<DiagramProps> = ({ className, sectionId }) => {
-  const sections = [
-    { id: 10, component: SvgSection1 },
-    { id: 20, component: SvgSection2 },
-    { id: 30, component: SvgSection3 },
-    { id: 40, component: SvgSection4 }
-  ]
+  const sections = [{ id: 10, component: SvgSection1 }]
 
   return (
     <div className={className}>
@@ -25,10 +17,13 @@ const Diagram: React.FC<DiagramProps> = ({ className, sectionId }) => {
             className={`transition-opacity duration-500 ${
               sectionId === id || !sectionId
                 ? 'show-svg-background opacity-100'
-                : 'lg:opacity-20'
+                : 'lg:opacity-100'
             }`}
             id={`section-${id}`}>
-            <SvgSection className='relative' sectionId={sectionId} />
+            <SvgSection
+              className='mlDiagram relative w-full'
+              sectionId={sectionId}
+            />
           </div>
         ))}
       </div>

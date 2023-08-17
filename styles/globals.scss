@@ -625,3 +625,21 @@ a.arrow-link {
   div[data-wrapper-for="dedicatedUseCase"],div[data-wrapper-for="dedicatedDescribeWorkload"]   {@apply  mb-5}
 
 }
+
+.mlDiagram {
+  * {@apply transition-all ease-in-out;}
+}
+
+.active-diagram-0 {
+  .all {@apply opacity-100}
+}
+.active-diagram-10 {
+  .data-ingestion, .models, .clickhouse { @apply opacity-100;}
+  .tooling, .apps, .data-transformation, .data-prep,.connecting-lines {@apply opacity-30 }}
+.active-diagram-20 {
+  .sources, .tooling, .lines {@apply opacity-30}
+}
+.active-diagram-30 {
+  .clickhouse, .tooling { @apply opacity-100;}
+  .sources, .lines, .models, .data-transformation, .apps, .connecting-lines, .data-prep { @apply opacity-30;}
+}

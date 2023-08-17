@@ -9,7 +9,7 @@ import accordionItems from './building-a-logging-system.json'
 import Diagram from './Diagram'
 
 const AccordionComponent = () => {
-  const [activeItem, setActiveItem] = useState('')
+  const [activeItem, setActiveItem] = useState('item-0')
   const strippedItemId = (activeItemRadix: string) => {
     const itemId = activeItemRadix.replace('item-', '')
     return parseInt(itemId, 10)
@@ -39,14 +39,14 @@ const AccordionComponent = () => {
           application.
         </p>
       </div>
-      <div className='mx-auto max-w-4xl pb-12 2xl:max-w-5xl'>
+      <div className='mx-auto px-12 pb-12'>
         <div
-          className='mx-auto flex w-full flex-col justify-between gap-x-10 lg:flex-row'
+          className='mx-auto flex w-full flex-col justify-between gap-x-5 lg:flex-row'
           id='diagramTop'>
-          <div className='flex-0 xl:mb-0'>
+          <div className='lg:w-3/5 xl:mb-0'>
             <Diagram sectionId={strippedItemId(activeItem)} />
           </div>
-          <div className='w-full pt-4 lg:w-1/2 2xl:pt-5'>
+          <div className='w-full pt-4 lg:w-2/5 2xl:pt-5'>
             <div className='h-full w-full'>
               <Accordion.Root
                 id='accordionContainer'
@@ -65,9 +65,7 @@ const AccordionComponent = () => {
                         ? selectedAccordionRef
                         : null
                     }>
-                    <AccordionTrigger>
-                      <>{item.title}</>
-                    </AccordionTrigger>
+                    <AccordionTrigger>{item.title}</AccordionTrigger>
                     <AccordionContent>
                       <Markdown children={item.content} />
                     </AccordionContent>
@@ -99,7 +97,7 @@ const AccordionTrigger = forwardRef<
   <Accordion.Header className='flex'>
     <Accordion.Trigger
       className={classNames(
-        'group z-20 my-1 flex flex-1 items-center justify-between rounded-lg border border-neutral-600/80 bg-[#272727] p-4 text-lg font-semibold leading-none outline-none hover:cursor-pointer data-[state=open]:rounded-b-none data-[state=open]:border-b-0 data-[state=open]:bg-[#404040] data-[state=open]:pb-6',
+        'group z-20 my-1 flex flex-1 items-center justify-between rounded-lg border border-neutral-600/80 bg-[#272727] p-4 text-base font-semibold leading-none outline-none hover:cursor-pointer data-[state=open]:rounded-b-none data-[state=open]:border-b-0 data-[state=open]:bg-[#404040] data-[state=open]:pb-6 2xl:text-lg',
         className
       )}
       {...props}
@@ -119,7 +117,7 @@ const AccordionContent = forwardRef<
 >(({ children, className, ...props }, forwardedRef) => (
   <Accordion.Content
     className={classNames(
-      'hide-scrollbar group relative z-10 -mt-4 mb-1 rounded-b-xl border border-neutral-600/80  bg-[#272727] group-data-[state=open]:pb-20 xl:overflow-hidden xl:overflow-y-scroll',
+      'hide-scrollbar group relative z-10 -mt-4 mb-1 rounded-b-xl border border-neutral-600/80 bg-[#272727] group-data-[state=open]:pb-20 xl:overflow-hidden xl:overflow-y-scroll',
       className
     )}
     {...props}
