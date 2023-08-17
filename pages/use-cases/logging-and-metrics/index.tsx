@@ -16,6 +16,7 @@ import features from './features.json'
 import quotes from './quotes.json'
 import callouts from './callouts.json'
 import Markdown from '../../../components/Markdown'
+import { CUIButton } from '../../../components/ClickUI'
 
 interface LoggingProps extends CommonProps {
   customerStories: any
@@ -100,6 +101,36 @@ export default function ClickHouseServerPage({
                       visibility into your data with ClickHouse.
                     </p>
                   </SuiText>
+                  <div className='relative z-40 mt-6 flex gap-6'>
+                    <CUIButton
+                      type='primary'
+                      size='lg'
+                      weight='semibold'
+                      href='https://clickhouse.cloud/signUp?loc=use-case-logging'
+                      target='_blank'
+                      segmentEvent={{
+                        label: 'use-case-logging',
+                        category: 'use-case-logging'
+                      }}
+                      linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
+                      className='w-full'>
+                      Get started today
+                    </CUIButton>
+                    <CUIButton
+                      type='secondary'
+                      size='lg'
+                      weight='semibold'
+                      href='/company/contact?loc=use-case-ml-and-ds'
+                      target='_self'
+                      segmentEvent={{
+                        label: 'use-case-ml-and-ds-contact',
+                        category: 'use-case-ml-and-ds-contact'
+                      }}
+                      linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
+                      className='w-full'>
+                      Contact sales
+                    </CUIButton>
+                  </div>
                 </div>
                 <div className='mx-auto mt-4 hidden md:flex md:w-4/12'>
                   <Image
