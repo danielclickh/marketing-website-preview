@@ -119,11 +119,11 @@ export default function ClickHouseServerPage({
                       type='secondary'
                       size='lg'
                       weight='semibold'
-                      href='/company/contact?loc=use-case-ml-and-ds'
+                      href='/company/contact?loc=use-case-logging'
                       target='_self'
                       segmentEvent={{
-                        label: 'use-case-ml-and-ds-contact',
-                        category: 'use-case-ml-and-ds-contact'
+                        label: 'use-case-logging',
+                        category: 'use-case-logging'
                       }}
                       linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
                       className='w-full'>
