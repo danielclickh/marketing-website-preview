@@ -43,7 +43,7 @@ export const getStaticProps: GetStaticProps<MLProps> =
       'Machine Learning and Data Science with ClickHouse | ClickHouse for ML and data science'
     data.seo.description =
       "The ultimate real-time database to power machine learning workloads. With ClickHouse, it's easier than ever to unleash AI with your data."
-    data.seo.image = [{ url: 'https://clickhouse.com/images/og-ml-ds.png' }]
+    data.seo.image = [{ url: '/images/og-ml-ds.png' }]
 
     const commonProps = await getCommonProps()
     return {

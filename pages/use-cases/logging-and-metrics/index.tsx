@@ -42,9 +42,7 @@ export const getStaticProps: GetStaticProps<LoggingProps> =
       'Logging & Metrics with ClickHouse | ClickHouse for Logging Metrics'
     data.seo.description =
       'ClickHouse is the fastest and most resource-efficient database for real-time analytics, making it the perfect fit for observability use cases.'
-    data.seo.image = [
-      { url: 'https://clickhouse.com/images/use-cases/logging/og.png' }
-    ]
+    data.seo.image = [{ url: '/images/use-cases/logging/og.png' }]
 
     const commonProps = await getCommonProps()
     return {
