@@ -180,7 +180,7 @@ export default function ClickHouseServerPage({
         </div>
         <div className='clip-inverted-triangle bg-neutral-725'>
           <div className='section-container max-w-7xl'>
-            <div className='relative flex flex-col rounded-lg border-t-2 border-neutral-700/80 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
+            <div className='relative flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
                 <div className='flex flex-col gap-x-6 gap-y-6 md:h-[296px] md:flex-row'>
                   {quotes.map((quote) => (
@@ -314,7 +314,7 @@ export default function ClickHouseServerPage({
                   along in our blog:
                 </div>
                 <div className='bg-neutral-725 p-8'>
-                  <ol className='list-decimal space-y-2 text-center	'>
+                  <ol className='list-decimal space-y-2 text-left text-primary-300	'>
                     <li>
                       <Link
                         href='/blog/storing-log-data-in-clickhouse-fluent-bit-vector-open-telemetry'
