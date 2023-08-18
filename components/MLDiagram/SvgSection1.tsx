@@ -203,7 +203,7 @@ const SvgSection1: React.FC<DiagramProps> = ({ className, sectionId }) => {
           <rect
             height='93.5864'
             width='316.084'
-            fill='#FBFF46'
+            fill='#fcff74'
             rx='1.79261'
             transform='rotate(90 251.398 215.157)'
             x='251.398'
@@ -239,7 +239,7 @@ const SvgSection1: React.FC<DiagramProps> = ({ className, sectionId }) => {
           <rect
             height='107.108'
             width='107.381'
-            fill='#FBFF46'
+            fill='#fcff74'
             rx='1.56853'
             stroke='#6F6F6F'
             strokeDasharray='2.69 2.69'
@@ -257,7 +257,7 @@ const SvgSection1: React.FC<DiagramProps> = ({ className, sectionId }) => {
           <rect
             height='107.108'
             width='107.381'
-            fill='#FBFF46'
+            fill='#fcff74'
             rx='1.56853'
             stroke='#6F6F6F'
             strokeDasharray='2.69 2.69'
@@ -271,7 +271,7 @@ const SvgSection1: React.FC<DiagramProps> = ({ className, sectionId }) => {
           <rect
             height='107.381'
             width='94.9945'
-            fill='#FBFF46'
+            fill='#fcff74'
             rx='1.56853'
             stroke='#6F6F6F'
             strokeDasharray='2.69 2.69'

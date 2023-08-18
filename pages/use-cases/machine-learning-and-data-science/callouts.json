@@ -14,7 +14,7 @@
     {
         "id": 30,
         "title": "Manage data efficiently",
-        "content": "ClickHouse's efficient management of resources helps maximize cost-effectiveness. Our column-oriented design delivers best-in-class compression ratios, reducing storage burden and ensuring blazing speed and performance for even the most intensive ML workloads.",
+        "content": "ClickHouse's efficient management of resources helps maximize cost-effectiveness. Our column-oriented design delivers best-in-class compression ratios, reducing storage burden and ensuring blazing speed for even the most intensive ML workloads.",
         "icon": "/images/use-cases/logging/manage.svg"
     },
     {

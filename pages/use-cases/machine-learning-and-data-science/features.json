@@ -2,12 +2,12 @@
   {
     "id": 10,
     "icon": "/images/use-cases/logging/ingest.svg",
-    "content": "**Best-in-class ingestion rates** built to handle continuous streams of data so you can rely on the most up-to-date, information to fuel accurate predictions and results."
+    "content": "**Best-in-class ingestion rates** built to handle continuous streams of data so you can rely on the most up-to-date information to fuel accurate predictions and results."
   },
   {
     "id": 20,
     "icon": "/images/use-cases/logging/gauge-light.svg",
-    "content": "**Unparalleled query performance** at scale. Query billions of rows in milliseconds. Reduce iteration times and maximize efficiency with your data."
+    "content": "**Unparalleled query performance at scale**. Query billions of rows in milliseconds. Reduce iteration times and maximize efficiency with your data."
   },
   {
     "id": 30,

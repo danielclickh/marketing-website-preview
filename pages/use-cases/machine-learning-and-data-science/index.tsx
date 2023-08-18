@@ -79,7 +79,7 @@ export default function MLUseCasePage({
             <div className='container relative z-40 mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>
               <div className='flex'>
                 <div className='flex-col xl:mt-16'>
-                  <div className='w-full lg:max-w-xl xl:max-w-2xl'>
+                  <div className='w-full lg:max-w-xl xl:max-w-full'>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
                       <Link href='/use-cases'>Use cases</Link> / ML &amp; Data
                       Science
@@ -324,9 +324,8 @@ export default function MLUseCasePage({
                   </span>{' '}
                 </SuiTitle>
                 <div className='mx-auto mb-8 mt-6 max-w-2xl text-center text-neutral-300'>
-                  For much more detailed guides about how to get started
-                  building an observability solution with ClickHouse, follow
-                  along in our blog:
+                  For detailed guides about how to get started with ClickHouse
+                  for ML, follow along in our blog:
                 </div>
                 <div className='bg-neutral-725 p-8'>
                   <ol className='list-decimal space-y-2 text-left	text-primary-300'>
