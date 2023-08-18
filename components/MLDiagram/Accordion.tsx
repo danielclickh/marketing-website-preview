@@ -39,7 +39,7 @@ const AccordionComponent = () => {
           application.
         </p>
       </div>
-      <div className='mx-auto px-12 pb-12'>
+      <div className='mx-auto pb-12 md:px-12'>
         <div
           className='mx-auto flex w-full flex-col justify-between gap-x-5 lg:flex-row'
           id='diagramTop'>

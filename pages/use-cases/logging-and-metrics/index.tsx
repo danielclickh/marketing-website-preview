@@ -72,8 +72,9 @@ export default function ClickHouseServerPage({
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
-        <div className='bg-contain bg-center bg-no-repeat lg:bg-speed-lines'>
-          <div className='relative overflow-x-hidden bg-grid pt-10'>
+        <div className='bg-contain bg-center bg-no-repeat'>
+          <div className='relative z-20 overflow-hidden bg-grid pt-10'>
+            <div className='absolute z-10 w-full bg-center bg-no-repeat lg:top-40 lg:h-[524px] lg:bg-speed-lines-ml'></div>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>
               <div className='flex'>
                 <div className='flex-col xl:mt-16 xl:w-7/12'>
@@ -132,7 +133,7 @@ export default function ClickHouseServerPage({
                     </CUIButton>
                   </div>
                 </div>
-                <div className='mx-auto mt-4 hidden md:flex md:w-4/12'>
+                <div className='relative z-20 mx-auto mt-4 hidden md:flex md:w-4/12'>
                   <Image
                     src='/images/use-cases/logging/logging-use-cases-hero.svg'
                     alt='Open source ClickHouse'
