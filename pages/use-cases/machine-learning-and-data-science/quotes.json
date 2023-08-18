@@ -1,0 +1,32 @@
+[
+    {
+        "id": 10,
+        "title": "DeepL",
+        "logo": "/images/use-cases/ml-and-ds/DeepL_logo.svg",
+        "content": "We aggregate the user's history in ClickHouse and use it as a data store for training and inference. Even when reading 10s of millions of rows, the performance was very nice and not the bottleneck when training new models.",
+        "href": "/blog/deepls-journey-with-clickhouse",
+        "target": "_self",
+        "imgWidth": 122,
+        "imgHeight": 44
+    },
+    {
+        "id": 20,
+        "title": "Denic",
+        "logo": "/images/use-cases/ml-and-ds/Logo_DENIC.svg",
+        "content": "After Testing Hadoop and Spark, We Chose ClickHouse",
+        "href": "/blog/denic-improves-query-times-by-10x-with-clickhouse",
+        "target": "_self",
+        "imgWidth": 95,
+        "imgHeight": 49
+    },
+    {
+        "id": 30,
+        "logo": "/images/use-cases/ml-and-ds/QuickCheck.svg",
+        "title": "QuickCheck",
+        "content": "We collect tens of thousands of data points from customers' phones and other more traditional sources. ClickHouse is used as a way to process all of these SMS messages and extract valuable information used for the scoring and fraud models.",
+        "href": "/blog/how-quickcheck-uses-clickhouse-to-bring-banking-to-the-unbanked",
+        "target": "_self",
+        "imgWidth": 202,
+        "imgHeight": 48
+    }
+]

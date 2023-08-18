@@ -1,28 +1,29 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
+import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
-import AccordionComponent from '../../../components/LoggingDiagram/Accordion'
+import AccordionComponent from '../../../components/MLDiagram/Accordion'
 import LogoCarousel from '../../../components/LogoCarousel'
+import Markdown from '../../../components/Markdown'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
+import callouts from './callouts.json'
+import checkpoints from './checkpoints.json'
 import features from './features.json'
 import quotes from './quotes.json'
-import callouts from './callouts.json'
-import Markdown from '../../../components/Markdown'
-import { CUIButton } from '../../../components/ClickUI'
 
-interface LoggingProps extends CommonProps {
+interface MLProps extends CommonProps {
   customerStories: any
 }
 
-export const getStaticProps: GetStaticProps<LoggingProps> =
+export const getStaticProps: GetStaticProps<MLProps> =
   async function getStaticProps() {
     const params = {
       populate: [
@@ -37,14 +38,12 @@ export const getStaticProps: GetStaticProps<LoggingProps> =
 
     const data = await findOne('homepage', params)
 
-    data.seo.path = '/use-cases/logging-and-metrics'
+    data.seo.path = '/use-cases/machine-learning-and-data-science'
     data.seo.title =
-      'Logging & Metrics with ClickHouse | ClickHouse for Logging Metrics'
+      'Machine Learning and Data Science with ClickHouse | ClickHouse for ML and data science'
     data.seo.description =
-      'ClickHouse is the fastest and most resource-efficient database for real-time analytics, making it the perfect fit for observability use cases.'
-    data.seo.image = [
-      { url: 'https://clickhouse.com/images/use-cases/logging/og.png' }
-    ]
+      "The ultimate real-time database to power machine learning workloads. With ClickHouse, it's easier than ever to unleash AI with your data."
+    data.seo.image = [{ url: 'https://clickhouse.com/images/og-ml-ds.png' }]
 
     const commonProps = await getCommonProps()
     return {
@@ -55,12 +54,12 @@ export const getStaticProps: GetStaticProps<LoggingProps> =
     }
   }
 
-export default function ClickHouseServerPage({
+export default function MLUseCasePage({
   customerStories,
   seo,
   headerData,
   footerData
-}: LoggingProps) {
+}: MLProps) {
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
@@ -73,73 +72,91 @@ export default function ClickHouseServerPage({
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='bg-contain bg-center bg-no-repeat'>
-          <div className='relative z-20 overflow-hidden bg-grid pt-10'>
-            <div className='absolute z-10 w-full bg-center bg-no-repeat lg:top-40 lg:h-[524px] lg:bg-speed-lines-ml'></div>
-            <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>
+          <div className='relative z-20 overflow-hidden bg-grid pt-10 pb-20'>
+            <div className='absolute z-10 w-full bg-center bg-no-repeat lg:top-64 lg:h-[524px] lg:bg-speed-lines-ml'></div>
+            <div className='container relative z-40 mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>
               <div className='flex'>
-                <div className='flex-col xl:mt-16 xl:w-7/12'>
-                  <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                    <Link href='/use-cases'>Use cases</Link> / Logging &amp;
-                    metrics
-                  </h4>
-                  <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-lg lg:text-left'>
-                    Logging &amp; metrics with ClickHouse
-                  </h1>
-                  <SuiText
-                    size='base'
-                    color='secondary'
-                    className='mt-6 text-center md:pr-16 lg:text-left'>
-                    <p className='mb-6'>
-                      ClickHouse is the fastest and most resource-efficient
-                      database for real-time analytics, making it the perfect
-                      fit for observability use cases.
-                    </p>
-                    <p>
-                      Transform your logging, tracing, and metrics management
-                      with industry-leading compression ratios, sub-second query
-                      response times, powerful aggregation functions, and an
-                      extensive suite of integrations. Unlock unrivaled
-                      visibility into your data with ClickHouse.
-                    </p>
-                  </SuiText>
-                  <div className='relative z-40 mt-6 flex gap-6'>
-                    <CUIButton
-                      type='primary'
-                      size='lg'
-                      weight='semibold'
-                      href='https://clickhouse.cloud/signUp?loc=use-case-logging'
-                      target='_blank'
-                      segmentEvent={{
-                        label: 'use-case-logging',
-                        category: 'use-case-logging'
-                      }}
-                      linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
-                      className='w-full'>
-                      Get started today
-                    </CUIButton>
-                    <CUIButton
-                      type='secondary'
-                      size='lg'
-                      weight='semibold'
-                      href='/company/contact?loc=use-case-ml-and-ds'
-                      target='_self'
-                      segmentEvent={{
-                        label: 'use-case-ml-and-ds-contact',
-                        category: 'use-case-ml-and-ds-contact'
-                      }}
-                      linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
-                      className='w-full'>
-                      Contact sales
-                    </CUIButton>
+                <div className='flex-col xl:mt-16'>
+                  <div className='w-full lg:max-w-xl xl:max-w-full'>
+                    <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
+                      <Link href='/use-cases'>Use cases</Link> / ML &amp; Data
+                      Science
+                    </h4>
+                    <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-lg lg:text-left'>
+                      ML &amp; Data Science with ClickHouse
+                    </h1>
+                    <SuiText
+                      size='base'
+                      color='secondary'
+                      className='mt-6 text-center md:pr-16 lg:text-left'>
+                      <p className='mb-6 font-normal'>
+                        The ultimate real-time database to power machine
+                        learning workloads. With&nbsp;ClickHouse, it's easier
+                        than ever to unleash AI with your data.
+                      </p>
+                    </SuiText>
+                  </div>
+                  <div className='lg:max-w-2xl xl:max-w-full'>
+                    {checkpoints.map((checkpoint) => {
+                      return (
+                        <div
+                          className={`item-center flex space-x-4 pb-2`}
+                          key={checkpoint.id}>
+                          <Image
+                            src='/images/cloud/check.svg'
+                            width={32}
+                            height={33}
+                            alt='Icon'
+                          />
+                          <SuiText
+                            size='base'
+                            weight='normal'
+                            color='secondary'
+                            className='flex items-center'>
+                            <p>{checkpoint.content}</p>
+                          </SuiText>
+                        </div>
+                      )
+                    })}
+                    <div className='relative z-40 mt-6 flex gap-6'>
+                      <CUIButton
+                        type='primary'
+                        size='lg'
+                        weight='semibold'
+                        href='https://clickhouse.cloud/signUp?loc=use-case-ml-and-ds'
+                        target='_blank'
+                        segmentEvent={{
+                          label: 'use-case-ml-and-ds',
+                          category: 'use-case-ml-and-ds'
+                        }}
+                        linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
+                        className='w-full'>
+                        Get started today
+                      </CUIButton>
+                      <CUIButton
+                        type='secondary'
+                        size='lg'
+                        weight='semibold'
+                        href='/company/contact?loc=use-case-ml-and-ds'
+                        target='_self'
+                        segmentEvent={{
+                          label: 'use-case-ml-and-ds-contact',
+                          category: 'use-case-ml-and-ds-contact'
+                        }}
+                        linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
+                        className='w-full'>
+                        Contact sales
+                      </CUIButton>
+                    </div>
                   </div>
                 </div>
-                <div className='relative z-20 mx-auto mt-4 hidden md:flex md:w-4/12'>
+                <div className='relative z-30 mx-auto mt-20 hidden md:mt-10 md:w-4/12 lg:flex'>
                   <Image
-                    src='/images/use-cases/logging/logging-use-cases-hero.svg'
-                    alt='Open source ClickHouse'
-                    width={488}
-                    height={318}
-                    className='h-auto w-full min-w-[54rem]'
+                    src='/images/use-cases/ml-and-ds/ml-ds-hero.svg'
+                    alt='ClickHouse'
+                    width={326}
+                    height={316}
+                    className='h-auto w-full '
                     priority
                   />
                 </div>
@@ -151,15 +168,11 @@ export default function ClickHouseServerPage({
         <div className='bg-neutral-725 text-neutral-0'>
           <div className='container mx-auto max-w-5xl px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
             <h2 className='text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
-              Discover why companies are choosing ClickHouse as their blazing
-              fast{' '}
-              <span className='tilted tilted-yellow'>
-                <span className='tilted-content'>observability</span>
-              </span>{' '}
-              store
+              Find out why companies are using ClickHouse to power&nbsp;their
+              machine learning data workloads.
             </h2>
           </div>
-          <div className='mx-auto flex max-w-5xl flex-col gap-10 pb-24 md:flex-row'>
+          <div className='mx-auto flex max-w-6xl flex-col gap-5 pb-24 md:flex-row'>
             {features.map((feature) => {
               return (
                 <div key={feature.id} className='flex-1 text-center'>
@@ -170,7 +183,7 @@ export default function ClickHouseServerPage({
                     alt={feature.content}
                     className='mx-auto h-11 w-auto'
                   />
-                  <div className='rich_content px-12 pt-4 text-lg text-neutral-200'>
+                  <div className='rich_content px-3 pt-4 text-base text-neutral-200'>
                     <ReactMarkdown children={feature.content} />
                   </div>
                 </div>
@@ -182,7 +195,7 @@ export default function ClickHouseServerPage({
           <div className='section-container max-w-7xl'>
             <div className='relative flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
-                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[296px] md:flex-row'>
+                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[490px] md:flex-row lg:h-[360px] xl:h-[320px] '>
                   {quotes.map((quote) => (
                     <Tilt
                       tiltEnable={false}
@@ -203,7 +216,7 @@ export default function ClickHouseServerPage({
                               className='mb-4 block'
                             />
                             <SuiText color='secondary' className='text-left'>
-                              {quote.content}
+                              "{quote.content}"
                             </SuiText>
                             <Image
                               src={quote.logo}
@@ -224,7 +237,7 @@ export default function ClickHouseServerPage({
                             className='mb-4 block'
                           />
                           <SuiText color='secondary' className='text-left'>
-                            {quote.content}
+                            "{quote.content}"
                           </SuiText>
                           <Image
                             src={quote.logo}
@@ -308,34 +321,58 @@ export default function ClickHouseServerPage({
                     <span className='tilted-content'>references</span>
                   </span>{' '}
                 </SuiTitle>
-                <div className='mx-auto mb-8 mt-6 max-w-2xl text-left text-neutral-300'>
-                  For much more detailed guides about how to get started
-                  building an observability solution with ClickHouse, follow
-                  along in our blog:
+                <div className='mx-auto mb-8 mt-6 max-w-2xl text-center text-neutral-300'>
+                  For detailed guides about how to get started with ClickHouse
+                  for ML, follow along in our blog:
                 </div>
                 <div className='bg-neutral-725 p-8'>
-                  <ol className='list-decimal space-y-2 text-left text-primary-300	'>
+                  <ol className='list-decimal space-y-2 text-left	text-primary-300'>
                     <li>
                       <Link
-                        href='/blog/storing-log-data-in-clickhouse-fluent-bit-vector-open-telemetry'
+                        href='/blog/vector-search-clickhouse-p1'
                         className='text-primary-300'>
-                        Building an Observability Solution with ClickHouse -
-                        Part 1 - Logs
+                        Vector Search with ClickHouse - Part 1
                       </Link>
                     </li>
                     <li>
                       <Link
-                        href='https://clickhouse.com/docs/knowledgebase/use-clickhouse-for-log-analytics'
+                        href='/blog/vector-search-clickhouse-p2'
                         className='text-primary-300'>
-                        Docs: Using ClickHouse for log analytics
+                        Vector Search with ClickHouse - Part 2
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        href='/blog/nginx-logs-to-clickhouse-fluent-bit'
-                        className='text-primary-300'>
-                        Sending Nginx logs to ClickHouse with Fluent Bit
-                      </Link>
+                      <a
+                        href='https://www.youtube.com/watch?v=hGRNcftpqAk'
+                        className='text-primary-300'
+                        target='_blank'>
+                        Video: ClickHouse for AI - Vectors, Embedding, Semantic
+                        Search, and more - Alexey Milovidov, ClickHouse
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href='https://www.youtube.com/watch?v=F08ktx1ZrpI'
+                        className='text-primary-300'
+                        target='_blank'>
+                        Video: Vector Search In ClickHouse - Dale McDiarmid
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href='https://python.langchain.com/docs/integrations/vectorstores/clickhouse'
+                        className='text-primary-300'
+                        target='_blank'>
+                        Using Langchain with ClickHouse
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href='https://deepnote.com/blog/clickhouse'
+                        className='text-primary-300'
+                        target='_blank'>
+                        Using Deepnote with ClickHouse
+                      </a>
                     </li>
                   </ol>
                 </div>
@@ -345,7 +382,7 @@ export default function ClickHouseServerPage({
 
           <div className='section-container my-44 text-neutral-0 md:px-8 2xl:px-0'>
             <GetStartedFree
-              href='https://clickhouse.cloud/signUp?loc=logging-use-case-getstarted-footer'
+              href='https://clickhouse.cloud/signUp?loc=ml-and-ds-use-case-getstarted-footer'
               textBefore='Get started with ClickHouse'
               textSlanted='Cloud'
               textAfter='for free'
