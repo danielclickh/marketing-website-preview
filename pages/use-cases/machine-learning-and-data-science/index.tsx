@@ -129,7 +129,7 @@ export default function MLUseCasePage({
                           label: 'use-case-ml-and-ds',
                           category: 'use-case-ml-and-ds'
                         }}
-                        linkclassName='w-full mx-auto md:mx-0 max-w-[14rem]'
+                        linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                         className='w-full'>
                         Get started today
                       </CUIButton>
@@ -143,7 +143,7 @@ export default function MLUseCasePage({
                           label: 'use-case-ml-and-ds-contact',
                           category: 'use-case-ml-and-ds-contact'
                         }}
-                        linkclassName='w-full mx-auto md:mx-0 max-w-[12rem]'
+                        linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
                         className='w-full'>
                         Contact sales
                       </CUIButton>
