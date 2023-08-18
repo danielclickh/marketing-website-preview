@@ -15,7 +15,7 @@ import HRSeparator from '../../../components/HRSeparator'
 import ContactForm from '../../../components/ContactForm'
 import { StrapiImage } from '../../../components/StrapiElements'
 import LogoCarousel from '../../../components/LogoCarousel'
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
 import Link from 'next/link'
@@ -95,6 +95,8 @@ export default function ComparisonPage({
   seo,
   comparison
 }: ComparisonProps) {
+  const [form1Successful, setForm1Successful] = useState(false)
+  const [form2Successful, setForm2Successful] = useState(false)
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
@@ -162,15 +164,16 @@ export default function ComparisonPage({
                       submitButtonLabel='Submit'
                       thankYouMessage='Thank you for submitting the form!'
                       disclaimer=''
+                      onSuccess={() => setForm1Successful(true)}
                     />
-                    <div className='rich_content mt-4 text-center text-sm'>
+                    {!form1Successful && <div className='rich_content mt-4 text-center text-sm'>
                       <ReactMarkdown
                         children='By clicking Submit, you acknowledge that ClickHouse will
                     process your personal information in accordance with our
                     [privacy
                     policy](https://clickhouse.com/legal/privacy-policy).'
                       />
-                    </div>
+                    </div>}
                   </div>
                 </div>
               </div>
@@ -409,15 +412,16 @@ export default function ComparisonPage({
               submitButtonLabel='Submit'
               thankYouMessage='Thank you for submitting the form!'
               disclaimer=''
+              onSuccess={() => setForm2Successful(true)}
             />
-            <div className='rich_content mt-4 text-center text-sm'>
+            {!form2Successful && <div className='rich_content mt-4 text-center text-sm'>
               <ReactMarkdown
                 children='By clicking Submit, you acknowledge that ClickHouse will
                     process your personal information in accordance with our
                     [privacy
                     policy](https://clickhouse.com/legal/privacy-policy).'
               />
-            </div>
+            </div>}
           </div>
         </div>
       </div>

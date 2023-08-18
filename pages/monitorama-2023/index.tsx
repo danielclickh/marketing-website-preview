@@ -2,7 +2,7 @@ import { ChevronRightIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { CUIButton, CUICard } from '../../components/ClickUI'
 import ContactForm from '../../components/ContactForm'
@@ -70,6 +70,9 @@ export default function MonitoramaPage({
     description:
       'ClickHouse can help you with your observability use cases and real time data analytics.'
   }
+
+  const [form1Successful, setForm1Successful] = useState(false)
+  const [form2Successful, setForm2Successful] = useState(false)
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -161,15 +164,16 @@ export default function MonitoramaPage({
                       submitButtonLabel='Submit'
                       thankYouMessage='Thank you for submitting the form!'
                       disclaimer=''
+                      onSuccess={() => setForm1Successful(true)}
                     />
-                    <div className='rich_content mt-4 text-center text-sm'>
+                    {!form1Successful && <div className='rich_content mt-4 text-center text-sm'>
                       <ReactMarkdown
                         children='By clicking Submit, you acknowledge that ClickHouse will
                     process your personal information in accordance with our
                     [privacy
                     policy](https://clickhouse.com/legal/privacy-policy).'
                       />
-                    </div>
+                    </div>}
                   </div>
                 </div>
               </div>
@@ -688,15 +692,16 @@ export default function MonitoramaPage({
               submitButtonLabel='Submit'
               thankYouMessage='Thank you for submitting the form!'
               disclaimer=''
+              onSuccess={() => setForm2Successful(true)}
             />
-            <div className='rich_content mt-4 text-center text-sm'>
+            {!form2Successful && <div className='rich_content mt-4 text-center text-sm'>
               <ReactMarkdown
                 children='By clicking Submit, you acknowledge that ClickHouse will
                     process your personal information in accordance with our
                     [privacy
                     policy](https://clickhouse.com/legal/privacy-policy).'
               />
-            </div>
+            </div>}
           </div>
         </div>
       </div>
