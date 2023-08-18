@@ -26,7 +26,7 @@
         "content": "We collect tens of thousands of data points from customers' phones and other more traditional sources. ClickHouse is used as a way to process all of these SMS messages and extract valuable information used for the scoring and fraud models.",
         "href": "/blog/how-quickcheck-uses-clickhouse-to-bring-banking-to-the-unbanked",
         "target": "_self",
-        "imgWidth": 202,
-        "imgHeight": 48
+        "imgWidth": 258,
+        "imgHeight": 49
     }
 ]
