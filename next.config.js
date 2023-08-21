@@ -290,6 +290,12 @@ const nextConfig = {
         source: '/use-cases/logging',
         destination: '/use-cases/logging-and-metrics',
         permanent: true
+      },
+      {
+        source: '/try',
+        destination:
+          'https://clickhouse.cloud/signUp?utm_medium=video&utm_source=clickhouse&utm_campaign=testimonials',
+        permanent: true
       }
     ]
   }
