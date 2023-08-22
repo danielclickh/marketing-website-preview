@@ -1,7 +1,7 @@
 // @ts-check
 const path = require('path')
 const strapiApiUrl =
-  process.env.STRAPI_API_URL ?? 'https://cms.clickhouse.com:1338'
+  process.env.STRAPI_API_URL ?? 'https://cms.clickhouse-dev.com:1337'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   sassOptions: {
@@ -45,7 +45,7 @@ const nextConfig = {
       },
       {
         source: '/api/:path*',
-        destination: 'https://cms.clickhouse.com:1338/api/:path*'
+        destination: `${strapiApiUrl}/api/:path*`
       },
       {
         source: '/uploads/:path*',
