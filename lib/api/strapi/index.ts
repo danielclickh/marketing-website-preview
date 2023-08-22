@@ -2,7 +2,7 @@ import fetch from 'cross-fetch'
 import { stringify } from 'qs'
 
 const strapiApiUrl =
-  process.env.STRAPI_API_URL ?? 'http://cms.clickhouse.com:1337'
+  process.env.STRAPI_API_URL ?? 'https://cms.clickhouse-dev.com:1337'
 const url = `${strapiApiUrl}/api/`
 
 const stagingOnlyFilter =
