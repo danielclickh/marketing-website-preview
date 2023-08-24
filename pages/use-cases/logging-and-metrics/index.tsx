@@ -92,12 +92,15 @@ export default function ClickHouseServerPage({
                       database for real-time analytics, making it the perfect
                       fit for observability use cases.
                     </p>
-                    <p>
-                      Transform your logging, tracing, and metrics management
-                      with industry-leading compression ratios, sub-second query
+                    <p className='mb-6'>
+                      Transform your metrics, events, logs, and traces with
+                      industry-leading compression ratios, sub-second query
                       response times, powerful aggregation functions, and an
-                      extensive suite of integrations. Unlock unrivaled
-                      visibility into your data with ClickHouse.
+                      extensive suite of integrations.{' '}
+                    </p>
+                    <p className='mb-6'>
+                      Unlock unrivaled visibility into your M.E.L.T. data with
+                      ClickHouse.
                     </p>
                   </SuiText>
                   <div className='relative z-40 mt-6 flex gap-6'>
@@ -119,11 +122,11 @@ export default function ClickHouseServerPage({
                       type='secondary'
                       size='lg'
                       weight='semibold'
-                      href='/company/contact?loc=use-case-logging'
+                      href='/company/contact?loc=use-case-ml-and-ds'
                       target='_self'
                       segmentEvent={{
-                        label: 'use-case-logging',
-                        category: 'use-case-logging'
+                        label: 'use-case-ml-and-ds-contact',
+                        category: 'use-case-ml-and-ds-contact'
                       }}
                       linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
                       className='w-full'>
@@ -335,13 +338,29 @@ export default function ClickHouseServerPage({
                         Sending Nginx logs to ClickHouse with Fluent Bit
                       </Link>
                     </li>
+                    <li>
+                      <Link
+                        href='/blog/working-with-time-series-data-and-functions-ClickHouse'
+                        className='text-primary-300'>
+                        Working with Time Series Data in ClickHouse
+                      </Link>
+                    </li>
+                    <li>
+                      <a
+                        target='_blank'
+                        href='https://www.zomato.com/blog/building-a-cost-effective-logging-platform-using-clickhouse-for-petabyte-scale'
+                        className='text-primary-300'>
+                        Building a cost-effective logging platform using
+                        ClickHouse for petabyte scale
+                      </a>
+                    </li>
                   </ol>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className='section-container my-44 text-neutral-0 md:px-8 2xl:px-0'>
+          <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
             <GetStartedFree
               href='https://clickhouse.cloud/signUp?loc=logging-use-case-getstarted-footer'
               textBefore='Get started with ClickHouse'

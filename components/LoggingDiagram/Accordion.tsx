@@ -30,11 +30,11 @@ const AccordionComponent = () => {
           ClickHouse for Observability
         </SuiTitle>
         <p className='mx-auto mb-12 max-w-3xl px-9 pt-6 text-center'>
-          When it comes to time series event data like logs, traces, and
-          metrics, ClickHouse shines in its ability to perform a huge range of
-          analytical functions over massive volumes of data - leveraging
-          features like high compression rates to ensure robust performance at
-          scale.
+          When it comes to telemetry data types, often referred to as M.E.L.T.
+          (metrics, events, logs, and traces), ClickHouse shines in its ability
+          to perform a huge range of analytical functions over massive volumes
+          of data - leveraging features like high compression rates to ensure
+          robust performance at scale.
         </p>
       </div>
       <div className='mx-auto max-w-4xl pb-12 2xl:max-w-5xl'>
