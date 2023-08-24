@@ -109,6 +109,14 @@ export default function CloudPage({
                       <CloudProviders cloudProviders={hero.cloudProviders} />
                     </div>
                   </div>
+                  <p className='mt-3 text-sm'>
+                    Interested in being notified when Azure is available?{' '}
+                    <Link
+                      href='/cloud/azure-waitlist'
+                      className='text-primary-300'>
+                      Join the waitlist
+                    </Link>
+                  </p>
                 </div>
                 <div className='mx-auto mt-4 hidden md:flex md:w-4/12'>
                   <Image
