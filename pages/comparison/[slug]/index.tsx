@@ -152,7 +152,7 @@ export default function ComparisonPage({
               <div>
                 <div className='mb-12 lg:mb-0'>
                   <div className='lg:max-w-lg'>
-                    <h3 className='mb-6 text-center font-basier text-2xl font-light'>
+                    <h3 className='mb-6 text-center font-basier text-2xl font-light text-neutral-0'>
                       {comparison.formTitle}
                     </h3>
                     <ContactForm
