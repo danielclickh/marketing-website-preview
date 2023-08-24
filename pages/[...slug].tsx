@@ -77,6 +77,7 @@ export default function RichContentPage({
     [
       'legal/agreements/terms-of-service',
       'legal/agreements/terms-of-service',
+      'legal/agreements/data-processing-addendum',
       'legal/agreements/terms-of-service/archive/202210',
       'legal/agreements/terms-of-service/archive/202308'
     ].includes(slug)
