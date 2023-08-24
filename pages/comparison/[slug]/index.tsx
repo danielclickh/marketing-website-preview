@@ -106,7 +106,7 @@ export default function ComparisonPage({
               <div className='lg:w-2/3'>
                 <div className='mb-8 items-center md:flex md:justify-between md:gap-x-10'>
                   <div>
-                    <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight text-neutral-200 md:mb-0 md:text-left md:text-5.5xl'>
+                    <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 md:mb-0 md:text-left md:text-5.5xl'>
                       {comparison.Title}
                     </h1>
                   </div>
@@ -119,7 +119,7 @@ export default function ComparisonPage({
                     )}
                   </div>
                 </div>
-                <div className='rich_content mt-4 mb-12 text-center text-base text-neutral-200 md:text-left'>
+                <div className='rich_content mt-4 mb-12 text-center text-base text-neutral-0 md:text-left'>
                   <Markdown
                     children={comparison.HeroDescription}
                     className='text-lg'
@@ -166,14 +166,16 @@ export default function ComparisonPage({
                       disclaimer=''
                       onSuccess={() => setForm1Successful(true)}
                     />
-                    {!form1Successful && <div className='rich_content mt-4 text-center text-sm'>
-                      <ReactMarkdown
-                        children='By clicking Submit, you acknowledge that ClickHouse will
+                    {!form1Successful && (
+                      <div className='rich_content mt-4 text-center text-sm'>
+                        <ReactMarkdown
+                          children='By clicking Submit, you acknowledge that ClickHouse will
                     process your personal information in accordance with our
                     [privacy
                     policy](https://clickhouse.com/legal/privacy-policy).'
-                      />
-                    </div>}
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -236,7 +238,7 @@ export default function ComparisonPage({
                             <h3 className='mb-4 flex-grow text-center font-basier text-3xl font-semibold leading-tight text-neutral-100 lg:text-left'>
                               {painpoint.Title}
                             </h3>
-                            <div className='rich_content  text-neutral-200'>
+                            <div className='rich_content  text-neutral-0'>
                               <Markdown children={painpoint.Description} />
                             </div>
                           </div>
@@ -244,7 +246,7 @@ export default function ComparisonPage({
                             <div className='h-full w-full lg:w-1/3'>
                               <CUICard className='p-6'>
                                 <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
-                                  <div className='rich_content  text-neutral-200'>
+                                  <div className='rich_content  text-neutral-0'>
                                     <Image
                                       src='/images/Quote.svg'
                                       width={37}
@@ -306,7 +308,7 @@ export default function ComparisonPage({
                             className='color-swap-no-hover mb-4 h-16  fill-none'
                           />
                         )}
-                        <div className='rich-content-comparisons  text-neutral-200'>
+                        <div className='rich-content-comparisons  text-neutral-0'>
                           <ReactMarkdown children={testimonial.Description} />
                         </div>
                       </div>
@@ -414,14 +416,16 @@ export default function ComparisonPage({
               disclaimer=''
               onSuccess={() => setForm2Successful(true)}
             />
-            {!form2Successful && <div className='rich_content mt-4 text-center text-sm'>
-              <ReactMarkdown
-                children='By clicking Submit, you acknowledge that ClickHouse will
+            {!form2Successful && (
+              <div className='rich_content mt-4 text-center text-sm'>
+                <ReactMarkdown
+                  children='By clicking Submit, you acknowledge that ClickHouse will
                     process your personal information in accordance with our
                     [privacy
                     policy](https://clickhouse.com/legal/privacy-policy).'
-              />
-            </div>}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
