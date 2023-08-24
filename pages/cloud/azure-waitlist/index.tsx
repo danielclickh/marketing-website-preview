@@ -8,6 +8,7 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import HRSeparator from '../../../components/HRSeparator'
 import MarketoForm from '../../../components/MarketoForm'
 import { useRef, useState } from 'react'
+import { CUIButton } from '../../../components/ClickUI'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -104,6 +105,21 @@ export default function ContactPage({
                     <p className='mt-2 text-neutral-200'>
                       We'll be in touch as soon as Azure becomes available.
                     </p>
+                    <div className='mt-6 flex w-full flex-col items-center justify-center gap-6 md:flex-row'>
+                      <CUIButton
+                        type='primary'
+                        size='lg'
+                        weight='semibold'
+                        href='/cloud'
+                        segmentEvent={{
+                          label: 'azure-waitlist',
+                          category: 'azure-waitlist'
+                        }}
+                        linkClass='w-full max-w-[16rem]'
+                        className='w-full'>
+                        Back to ClickHouse Cloud
+                      </CUIButton>
+                    </div>
                   </div>
                 )}
               </div>
