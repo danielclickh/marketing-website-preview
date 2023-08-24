@@ -76,6 +76,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         })(window,document,'script','dataLayer', '${gtmId}');
       `}
       </Script>
+
+      <Script id='drift-script' src='/drift.js' type='text/javascript' async />
     </>
   )
 }
