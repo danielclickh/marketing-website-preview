@@ -72,7 +72,17 @@ export default function RichContentPage({
   seo,
   slug
 }: RichContentPageProps) {
-  return (
+  const lockContent =
+    slug &&
+    [
+      'legal/agreements/terms-of-service',
+      'legal/agreements/terms-of-service',
+      'legal/agreements/data-processing-addendum',
+      'legal/agreements/terms-of-service/archive/202210',
+      'legal/agreements/terms-of-service/archive/202308'
+    ].includes(slug)
+
+  const pageBody = (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {slug === 'support/program' ? (
         <SupportProgram
@@ -141,6 +151,29 @@ export default function RichContentPage({
       )}
     </Layout>
   )
+
+  if (lockContent) {
+    return (
+      <div>
+        <div
+          className='print:hidden'
+          style={{ userSelect: 'none' }}
+          ref={(el) => {
+            el &&
+              el.addEventListener('selectstart', function () {
+                return false
+              })
+          }}>
+          {pageBody}
+        </div>
+        <div className='hidden text-black print:block'>
+          Please request a copy from legal@clickhouse.com
+        </div>
+      </div>
+    )
+  }
+
+  return pageBody
 }
 
 export async function getStaticPaths() {

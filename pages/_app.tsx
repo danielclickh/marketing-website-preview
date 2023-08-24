@@ -76,8 +76,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         })(window,document,'script','dataLayer', '${gtmId}');
       `}
       </Script>
-
-      {/* Google Analytics clickhouse.com */}
     </>
   )
 }

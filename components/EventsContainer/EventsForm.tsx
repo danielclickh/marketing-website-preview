@@ -224,7 +224,10 @@ function EventsForm({
               type='primary'
               className='rounded-md hover:translate-y-0 hover:bg-primary-400 hover:no-underline'
               onClick={onSubmit}>
-              {submitButtonLabel}
+              {submitButtonLabel == 'Register to event' ||
+              submitButtonLabel == 'Register for event'
+                ? 'Register now'
+                : submitButtonLabel}
             </SuiButton>
           </div>
         )}
