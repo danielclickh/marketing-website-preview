@@ -10,6 +10,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        print: {
+          'raw': 'print'
+        },
+      },
       typography: ({ theme }) => ({
         neutral: {
           css: {
