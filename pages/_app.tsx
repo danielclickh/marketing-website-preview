@@ -76,13 +76,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         })(window,document,'script','dataLayer', '${gtmId}');
       `}
       </Script>
-
-      <Script
-        id='drift-script'
-        src='https://js.driftt.com/include/1692885300000/bhbc5tszm6xi.js'
-        type='text/javascript'
-        async
-      />
     </>
   )
 }
