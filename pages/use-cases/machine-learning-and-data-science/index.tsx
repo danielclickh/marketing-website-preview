@@ -380,7 +380,7 @@ export default function MLUseCasePage({
             </div>
           </div>
 
-          <div className='section-container my-44 text-neutral-0 md:px-8 2xl:px-0'>
+          <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
             <GetStartedFree
               href='https://clickhouse.cloud/signUp?loc=ml-and-ds-use-case-getstarted-footer'
               textBefore='Get started with ClickHouse'
