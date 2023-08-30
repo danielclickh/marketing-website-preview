@@ -203,18 +203,30 @@ body {
   }
 
   table {
-    @apply text-left w-full rounded-lg;
-    @apply border border-solid border-c3;
-    border-collapse: inherit;
+    @apply text-left w-full max-w-screen-md rounded-lg mb-8 leading-5 text-sm;
+    @apply rounded-tl-lg rounded-tr-lg;
 
-    th,
-    td {
-      @apply border-b border-solid border-c2;
-      @apply p-4;
+    thead {
+      @apply first:rounded-tl-lg last:rounded-tr-lg;
+    }
+    th {
+      @apply border-solid border-neutral-700 bg-neutral-725 font-semibold;
+      @apply px-2 py-2 first:rounded-tl-lg last:rounded-tr-lg text-left; 
+    }
+    tr {
+      @apply border-b border-solid border-neutral-725 hover:bg-neutral-700 transition-all;
     }
 
-    th {
-      @apply font-bold;
+    tr.highlight {
+      @apply bg-primary-300 border-primary-500 text-neutral-900 bg-opacity-70 hover:bg-opacity-100;
+    }
+
+    tr.highlight-blue {
+      @apply bg-blue-600 text-neutral-0 border-blue-800 bg-opacity-70 hover:bg-opacity-100;
+    }
+  
+    td {
+      @apply p-2 text-left;
     }
   }
 
