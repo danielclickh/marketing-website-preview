@@ -12,8 +12,8 @@ module.exports = {
     extend: {
       screens: {
         print: {
-          'raw': 'print'
-        },
+          raw: 'print'
+        }
       },
       typography: ({ theme }) => ({
         neutral: {
@@ -252,6 +252,8 @@ module.exports = {
         focus_size: '100%, 100%'
       },
       backgroundImage: {
+        snowflakeGradient:
+          'linear-gradient(0deg, #FCFF74 30%, rgba(252, 255, 116, 0) 99.99%)',
         homepageFadeLeftLogos:
           'linear-gradient(90deg, #FCFF74 30%, rgba(252, 255, 116, 0) 99.99%)',
         homepageFadeRightLogos:
