@@ -224,7 +224,9 @@ export default function SnowflakePage({
                   </div>
                   <div className='relative z-40 -mt-30 lg:-mt-20'>
                     <div className='mx-auto max-w-xl rounded-lg bg-black p-5 text-white lg:p-10'>
-                      <p className='mb-4 text-2xl font-bold lg:text-3xl'>
+                      <p
+                        className='mb-4 text-2xl font-bold lg:text-3xl'
+                        ref={formSuccessRef}>
                         Ready to learn more?
                       </p>
                       <p className='mb-6'>Access the PDF executive summary.</p>
@@ -262,7 +264,7 @@ export default function SnowflakePage({
                       )}
 
                       {formSuccess && (
-                        <div ref={formSuccessRef} className='text-center'>
+                        <div className='text-center'>
                           <h3 className='text-2xl font-bold'>
                             Thank you for your submission!
                           </h3>
