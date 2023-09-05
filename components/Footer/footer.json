@@ -164,6 +164,12 @@
 				"name": "BigQuery",
 				"href": "/comparison/bigquery",
 				"target": "_self"
+			},
+			{
+				"id": 40,
+				"name": "Snowflake",
+				"href": "/comparison/snowflake",
+				"target": "_self"
 			}
 		]
 	}
