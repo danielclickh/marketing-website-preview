@@ -126,8 +126,8 @@ export default function SnowflakePage({
           </div>
 
           <div className='clip-inverted-triangle -mt-16'>
-            <div className='relative z-40 mx-auto mt-12 max-w-4xl pt-20 pb-0 lg:mt-0'>
-              <div className='mx-auto mb-12 flex items-center gap-4'>
+            <div className='relative z-40 mx-auto mt-4 max-w-4xl pt-20 pb-0 lg:mt-12'>
+              <div className='mx-auto mb-12 flex items-center gap-4  px-4 md:px-0'>
                 {stats.map((stat) => (
                   <div
                     key={stat.id}
@@ -135,7 +135,7 @@ export default function SnowflakePage({
                     <h3 className='mb-2 text-center font-basier text-2xl font-bold leading-none text-primary-300 lg:text-[69px]'>
                       {stat.title}
                     </h3>
-                    <p className='text-center font-basier text-sm font-bold leading-none lg:text-base'>
+                    <p className='min-h-[30px] text-center font-basier text-sm font-bold leading-none lg:text-base'>
                       {stat.description}
                     </p>
                   </div>
