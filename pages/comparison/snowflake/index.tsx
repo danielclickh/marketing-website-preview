@@ -63,17 +63,17 @@ export default function SnowflakePage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage'>
-        <div className='relative pt-16 lg:pb-24 '>
+        <div className='relative pt-16 lg:pb-20 '>
           <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
             <div className='items-start justify-between gap-10 lg:flex lg:grid-cols-2 lg:gap-20'>
               <div className='lg:w-2/3'>
                 <div className='items-center'>
-                  <div className='lg:max-w-md'>
+                  <div className='lg:max-w-2xl'>
                     <h4 className='mb-2 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
                       Comparisons
                     </h4>
-                    <h1 className='mb-4 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 lg:text-left lg:text-5.5xl'>
-                      ClickHouse vs&nbsp;Snowflake
+                    <h1 className='mb-4 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 lg:text-left lg:text-5xl'>
+                      ClickHouse vs Snowflake
                     </h1>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-neutral-0/60 lg:text-left'>
                       For Real-time Analytics
@@ -121,7 +121,7 @@ export default function SnowflakePage({
               <span className='tilted tilted-yellow'>
                 <span className='tilted-content leading-8'>real-time</span>
               </span>{' '}
-              analytics.
+              analytics
             </div>
           </div>
 
