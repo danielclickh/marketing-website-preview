@@ -2,18 +2,24 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+import BlogPost from '../../../components/BlogPostList/BlogPost'
+import { CUICard } from '../../../components/ClickUI'
 import GetStarted from '../../../components/GetStarted'
+import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
 import MarketoForm from '../../../components/MarketoForm'
-import { findOne } from '../../../lib/api/strapi'
+import { StrapiImage } from '../../../components/StrapiElements'
+import { findAll, findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { CommonProps } from '../../../types/homepage'
+import { ComparisonProps } from '../../../types/comparisons'
 import stats from './stats.json'
 
-interface SnowflakePageProps extends CommonProps {
+interface SnowflakePageProps extends ComparisonProps {
   customerStories: any
+  comparison: any
 }
 
 export const getStaticProps: GetStaticProps<SnowflakePageProps> =
@@ -34,8 +40,47 @@ export const getStaticProps: GetStaticProps<SnowflakePageProps> =
     const commonProps = await getCommonProps()
     const data = await findOne('homepage', params)
 
+    const comparison = await findAll('comparisons', {
+      populate: [
+        'painpoint',
+        'paintpoint.customer.*',
+        'painpoint.customer.description',
+        'painpoint.customer.logo',
+        'painpointsTitle',
+        'painpointsIcon',
+        'seo',
+        'Testimonials',
+        'Testimonials.*',
+        'Testimonials.logo.*',
+        'customerStories',
+        'customerStories.*',
+        'customerStories.logos.*',
+        'customerStories.logos.darkLogoPng',
+        'image',
+        'formTitle',
+        'testimonialsTitle',
+        'testimonialsIcon',
+        'Content',
+        'Content.customContent',
+        'Content.customContent.Image',
+        'Content.RelatedBlogs',
+        'Content.RelatedBlogs.blog_posts',
+        'Content.RelatedBlogs.blog_posts.*',
+        'Content.RelatedBlogs.blog_posts.author',
+        'Content.RelatedBlogs.blog_posts.thumbnailPng',
+        'BigNumbers',
+        'BigNumbers.*'
+      ],
+      filters: {
+        slug: {
+          $eq: 'snowflake'
+        }
+      }
+    })
+
     return {
       props: {
+        comparison,
         ...data,
         ...commonProps
       }
@@ -47,7 +92,8 @@ export default function SnowflakePage({
   headerData,
   customerStories,
   seo,
-  platforms
+  platforms,
+  comparison
 }: SnowflakePageProps) {
   seo = {
     title: 'ClickHouse vs Snowflake',
@@ -60,6 +106,9 @@ export default function SnowflakePage({
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
+
+  console.log(comparison.data[0])
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage'>
@@ -68,12 +117,12 @@ export default function SnowflakePage({
             <div className='items-start justify-between gap-10 lg:flex lg:grid-cols-2 lg:gap-20'>
               <div className='lg:w-2/3'>
                 <div className='items-center'>
-                  <div className='lg:max-w-2xl'>
+                  <div className='lg:max-w-xl'>
                     <h4 className='mb-2 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
                       Comparisons
                     </h4>
-                    <h1 className='mb-4 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 lg:text-left lg:text-5xl'>
-                      ClickHouse vs Snowflake
+                    <h1 className='mb-4 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 lg:text-left lg:text-5.5xl'>
+                      ClickHouse vs&nbsp;Snowflake
                     </h1>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-neutral-0/60 lg:text-left'>
                       For Real-time Analytics
@@ -224,12 +273,18 @@ export default function SnowflakePage({
                   </div>
                   <div className='relative z-40 -mt-30 lg:-mt-20'>
                     <div className='mx-auto max-w-xl rounded-lg bg-black p-5 text-white lg:p-10'>
-                      <p
-                        className='mb-4 text-2xl font-bold lg:text-3xl'
-                        ref={formSuccessRef}>
-                        Ready to learn more?
-                      </p>
-                      <p className='mb-6'>Access the PDF executive summary.</p>
+                      {formLoaded && !formSuccess && (
+                        <>
+                          <p
+                            className='mb-4 text-2xl font-bold lg:text-3xl'
+                            ref={formSuccessRef}>
+                            Ready to learn more?
+                          </p>
+                          <p className='mb-6'>
+                            Access the PDF executive summary.
+                          </p>
+                        </>
+                      )}
                       {!formSuccess && (
                         <MarketoForm
                           formId='1073'
@@ -297,6 +352,82 @@ export default function SnowflakePage({
           </div>
         </div>
       </div>
+
+      <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
+        <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
+          {comparison.data[0].Content.map((content: any, index: number) => {
+            return (
+              <div key={index} className='mx-auto mb-10 max-w-7xl'>
+                <h3 className='mb-4 text-2xl font-semibold'>
+                  {content.SectionTitle}
+                </h3>
+                {content.Description && (
+                  <div className='rich_content mb-6'>
+                    <ReactMarkdown children={content.Description} />
+                  </div>
+                )}
+                <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
+                  {content.customContent.length > 0 && (
+                    <>
+                      {content.customContent?.map(
+                        (custom: any, index: number) => {
+                          if (!custom.href) {
+                            return null
+                          }
+                          return (
+                            <Link
+                              key={index}
+                              href={custom.href}
+                              target='_blank'
+                              className={` hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline`}>
+                              <CUICard className='h-full'>
+                                <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
+                                  {custom.Image && (
+                                    <StrapiImage
+                                      {...custom.Image}
+                                      sizes='medium'
+                                      alt={custom.Image.alternativeText}
+                                      className='w-full rounded-t-lg xl:h-52 xl:object-cover'
+                                      width={100}
+                                      height={100}
+                                    />
+                                  )}
+                                  <div className='flex flex-col items-start justify-center gap-2 px-6 pt-6'>
+                                    <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
+                                      {custom.Category}
+                                    </div>
+                                    <div className='cursor-pointer font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                                      {custom.Title}
+                                    </div>
+                                  </div>
+                                </CUICard.Body>
+                                <CUICard.Footer className='flex w-full items-center p-6 text-sm text-neutral-300'>
+                                  {custom.Footer}
+                                </CUICard.Footer>
+                              </CUICard>
+                            </Link>
+                          )
+                        }
+                      )}
+                    </>
+                  )}
+                  {content.RelatedBlogs.length > 0 && (
+                    <>
+                      {content.RelatedBlogs.flatMap((custom: any) =>
+                        custom.blog_posts.map((blog: any) => (
+                          <BlogPost key={blog.id} {...blog} />
+                        ))
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+      <HRSeparator className='my-24' />
+
       <GetStarted platforms={platforms} />
     </Layout>
   )
