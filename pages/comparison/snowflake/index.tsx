@@ -49,6 +49,7 @@ export const getStaticProps: GetStaticProps<SnowflakePageProps> =
         'painpointsTitle',
         'painpointsIcon',
         'seo',
+        'seo.*',
         'Testimonials',
         'Testimonials.*',
         'Testimonials.logo.*',
@@ -122,7 +123,7 @@ export default function SnowflakePage({
                     </h4>
                   </div>
                 </div>
-                <div className='rich_content mt-8 w-full text-center text-base text-neutral-200 lg:max-w-2xl lg:text-left'>
+                <div className='rich_content mt-8 w-full text-center text-base text-neutral-200 lg:max-w-xl lg:text-left'>
                   <Markdown children={comparison.data[0].HeroDescription} />
                 </div>
               </div>
@@ -343,7 +344,7 @@ export default function SnowflakePage({
                     <ReactMarkdown children={content.Description} />
                   </div>
                 )}
-                <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-4'>
+                <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
                   {content.customContent.length > 0 && (
                     <>
                       {content.customContent?.map(
