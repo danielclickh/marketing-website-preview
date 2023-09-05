@@ -163,7 +163,7 @@ export default function SnowflakePage({
           </div>
         </div>
 
-        <div className='relative mb-16 pt-12 lg:pt-0'>
+        <div className='relative pt-12 lg:pt-0'>
           <div className='mx-auto flex flex-col text-center'>
             <div className='mx-auto w-fit max-w-[850px] px-4 pb-4 pt-2 text-center font-basier text-2xl font-semibold leading-normal text-white md:px-0 lg:mb-8 lg:text-4xl'>
               ClickHouse performance compared to Snowflake for{' '}
@@ -174,7 +174,7 @@ export default function SnowflakePage({
             </div>
           </div>
 
-          <div className='clip-inverted-triangle -mt-16'>
+          <div className='clip-inverted-triangle -mt-28'>
             <div className='relative z-40 mx-auto mt-4 max-w-4xl pt-20 pb-0 lg:mt-12'>
               <div className='mx-auto mb-12 flex items-center gap-4  px-4 md:px-0'>
                 {stats.map((stat) => (
@@ -339,7 +339,7 @@ export default function SnowflakePage({
                   </div>
                 </div>
               </div>
-              <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-20 md:gap-x-14'>
+              <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-16 md:gap-x-14'>
                 <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
                 <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
                 <LogoCarousel
@@ -353,7 +353,7 @@ export default function SnowflakePage({
         </div>
       </div>
 
-      <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
+      <div className='mx-auto max-w-7xl px-4 pt-20 md:px-8 2xl:px-0'>
         <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
           {comparison.data[0].Content.map((content: any, index: number) => {
             return (
