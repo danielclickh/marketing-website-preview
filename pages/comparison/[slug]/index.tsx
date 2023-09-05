@@ -28,7 +28,8 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
     const { data } = await findAll('comparisons', {
       filters: {
         slug: {
-          $eq: slug
+          $eq: slug,
+          $neq: 'snowflake'
         }
       },
       populate: [
