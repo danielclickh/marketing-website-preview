@@ -28,8 +28,7 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
     const { data } = await findAll('comparisons', {
       filters: {
         slug: {
-          $eq: slug,
-          $neq: 'snowflake'
+          $eq: slug
         }
       },
       populate: [
@@ -439,7 +438,14 @@ export async function getStaticPaths() {
     fields: ['slug']
   }
 
-  const paths = await getPathsValues('comparisons', params)
+  const allPaths = await getPathsValues('comparisons', params)
+
+  // Filter out the paths with the 'snowflake' slug
+  const paths = allPaths.filter((path) => {
+    const slug = path.params.slug
+    return slug !== 'snowflake'
+  })
+
   return {
     paths,
     fallback: NOT_FOUND_FALLBACK
