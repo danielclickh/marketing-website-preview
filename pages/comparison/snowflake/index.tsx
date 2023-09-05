@@ -223,7 +223,7 @@ export default function SnowflakePage({
                     <div className='absolute left-0 bottom-0 z-20 h-[220px] w-full bg-snowflakeGradient lg:h-[100px] '></div>
                   </div>
                   <div className='relative z-40 -mt-30 lg:-mt-20'>
-                    <div className='mx-auto max-w-xl rounded-lg bg-black  p-10 text-white'>
+                    <div className='mx-auto max-w-xl rounded-lg bg-black p-5 text-white lg:p-10'>
                       <p className='mb-4 text-2xl font-bold lg:text-3xl'>
                         Ready to learn more?
                       </p>
