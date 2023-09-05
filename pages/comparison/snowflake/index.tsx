@@ -78,6 +78,9 @@ export const getStaticProps: GetStaticProps<SnowflakePageProps> =
       }
     })
 
+    data.seo = comparison.data[0].seo
+    data.seo.path = '/comparison/snowflake'
+
     return {
       props: {
         comparison,
@@ -95,19 +98,9 @@ export default function SnowflakePage({
   platforms,
   comparison
 }: SnowflakePageProps) {
-  seo = {
-    title: 'ClickHouse vs Snowflake',
-    path: '/comparison/snowflake',
-    description:
-      'ClickHouse is designed for real-time data analytics and exploration at scale. Snowflake is a cloud data warehouse that is well-optimized for executing long-running reports and ad-hoc data analysis. When it comes to real-time analytics, ClickHouse shines with faster queries at a fraction of the cost.',
-    image: [{ url: '/images/clickhouse-vs-snowflake-og.png' }]
-  }
-
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
-
-  console.log(comparison.data[0])
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -115,48 +108,32 @@ export default function SnowflakePage({
         <div className='relative pt-16 lg:pb-20 '>
           <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
             <div className='items-start justify-between lg:flex lg:grid-cols-2'>
-              <div className='lg:w-2/3'>
+              <div>
                 <div className='items-center'>
-                  <div className='lg:max-w-xl'>
+                  <div className='w-full lg:max-w-xl'>
                     <h4 className='mb-2 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
                       Comparisons
                     </h4>
-                    <h1 className='mb-4 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 lg:text-left lg:text-5.5xl'>
-                      ClickHouse vs&nbsp;Snowflake
+                    <h1 className='mb-4 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 lg:text-left lg:text-5xl xl:text-5.5xl '>
+                      {comparison.data[0].Title}
                     </h1>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-neutral-0/60 lg:text-left'>
                       For Real-time Analytics
                     </h4>
                   </div>
                 </div>
-                <div className='rich_content mt-8 text-center text-base text-neutral-200 lg:max-w-2xl lg:text-left'>
-                  <p>
-                    ClickHouse is designed for real-time data analytics and
-                    exploration at scale. Snowflake is a cloud data warehouse
-                    that is well-optimized for executing long-running reports
-                    and ad-hoc data analysis. When it comes to real-time
-                    analytics, ClickHouse shines with faster queries at a
-                    fraction of the cost.
-                  </p>
-                  <p>
-                    Discover these insights and more in our benchmark study that
-                    compares ClickHouse with Snowflake for real-time analytics.
-                    Learn how to escape from Snowflake's climbing costs and
-                    revamp your data strategy below.
-                  </p>
+                <div className='rich_content mt-8 w-full text-center text-base text-neutral-200 lg:max-w-2xl lg:text-left'>
+                  <Markdown children={comparison.data[0].HeroDescription} />
                 </div>
               </div>
-              <div>
-                <div className='mb-6 lg:mb-0'>
-                  <div className=''>
-                    <Image
-                      src='/images/clickhouse-vs-snowflake-og.png'
-                      width={512}
-                      height={278}
-                      alt='ClickHouse vs Snowflake'
-                      className='hidden h-auto w-full lg:block'
+              <div className='mb-6 hidden lg:mb-0 lg:block lg:max-w-[400px] xl:max-w-[575px]'>
+                <div className=''>
+                  {comparison.data[0].image && (
+                    <StrapiImage
+                      {...comparison.data[0].image}
+                      className='mx-auto lg:mx-0'
                     />
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -174,7 +151,7 @@ export default function SnowflakePage({
             </div>
           </div>
 
-          <div className='clip-inverted-triangle -mt-28'>
+          <div className='clip-inverted-triangle -mt-16 xl:-mt-28'>
             <div className='relative z-40 mx-auto mt-4 max-w-4xl pt-20 pb-0 lg:mt-12'>
               <div className='mx-auto mb-12 flex items-center gap-4  px-4 md:px-0'>
                 {stats.map((stat) => (
@@ -366,7 +343,7 @@ export default function SnowflakePage({
                     <ReactMarkdown children={content.Description} />
                   </div>
                 )}
-                <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
+                <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-4'>
                   {content.customContent.length > 0 && (
                     <>
                       {content.customContent?.map(
@@ -387,7 +364,7 @@ export default function SnowflakePage({
                                       {...custom.Image}
                                       sizes='medium'
                                       alt={custom.Image.alternativeText}
-                                      className='w-full rounded-t-lg xl:h-52 xl:object-cover'
+                                      className='w-full rounded-t-lg xl:h-52 '
                                       width={100}
                                       height={100}
                                     />
@@ -415,7 +392,9 @@ export default function SnowflakePage({
                     <>
                       {content.RelatedBlogs.flatMap((custom: any) =>
                         custom.blog_posts.map((blog: any) => (
-                          <BlogPost key={blog.id} {...blog} />
+                          <div id='snowflake-relatedcontent'>
+                            <BlogPost key={blog.id} {...blog} />
+                          </div>
                         ))
                       )}
                     </>

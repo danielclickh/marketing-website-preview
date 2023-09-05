@@ -634,3 +634,7 @@ a.arrow-link {
   .mktoButtonWrap {@apply w-auto}
   .mktoButton { @apply inline-block w-auto mx-0 }
 }
+
+#snowflake-relatedcontent img {
+  @apply object-contain h-auto;
+}
