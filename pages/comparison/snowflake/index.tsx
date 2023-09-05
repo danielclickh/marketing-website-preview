@@ -220,11 +220,11 @@ export default function SnowflakePage({
                       storage. Finally, this expense analysis is projected and
                       compared for a production environment and workload.
                     </p>
-                    <div className='absolute left-0 bottom-0 z-20 h-[100px] w-full bg-snowflakeGradient '></div>
+                    <div className='absolute left-0 bottom-0 z-20 h-[220px] w-full bg-snowflakeGradient lg:h-[100px] '></div>
                   </div>
-                  <div className='relative z-40 -mt-20'>
+                  <div className='relative z-40 -mt-30 lg:-mt-20'>
                     <div className='mx-auto max-w-xl rounded-lg bg-black  p-10 text-white'>
-                      <p className='mb-4 text-3xl font-bold'>
+                      <p className='mb-4 text-2xl font-bold lg:text-3xl'>
                         Ready to learn more?
                       </p>
                       <p className='mb-6'>Access the PDF executive summary.</p>
@@ -248,7 +248,7 @@ export default function SnowflakePage({
                       )}
 
                       {formLoaded && !formSuccess && (
-                        <div className='disclaimer-text mt-4 text-center text-sm font-medium text-neutral-200'>
+                        <div className='disclaimer-text mt-8 text-left text-sm font-medium text-neutral-200'>
                           <Markdown>
                             By registering, you acknowledge that ClickHouse will
                             process your personal information in accordance with
