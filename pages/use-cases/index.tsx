@@ -148,6 +148,23 @@ function UseCasesPage({
                             </CUIButton>
                           </div>
                         )}
+                        {useCase.title === 'Real-time Analytics' && (
+                          <div className='absolute top-6 right-6'>
+                            <CUIButton
+                              type='secondary'
+                              size='sm'
+                              className='group mx-auto'
+                              href='/use-cases/real-time-analytics'
+                              iconRight={
+                                <ChevronRightIcon
+                                  height='18'
+                                  className='pt-0.5 transition group-hover:translate-x-1/2'
+                                />
+                              }>
+                              Learn more
+                            </CUIButton>
+                          </div>
+                        )}
                         <div className='flex flex-col items-start justify-center gap-2 px-6 pt-6'>
                           <div className='mb-1 font-inconsolata text-base font-medium text-primary-300'>
                             {useCase.icon && <StrapiImage {...useCase.icon} />}

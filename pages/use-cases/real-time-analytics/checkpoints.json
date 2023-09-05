@@ -1,0 +1,18 @@
+[
+    {
+        "id": 10,
+        "content": "Create user-facing applications with instant responsiveness"
+    },
+    {
+        "id": 20,
+        "content": "Drive well-informed business decisions with the most up-to-date"
+    },
+    {
+        "id": 30,
+        "content": "Run SQL-based analytics effortlessly on your most diverse, high-cardinality datasets"
+    },
+    {
+        "id": 40,
+        "content": "Seamlessly integrate static or streaming data from a wide range of sources"
+    }
+]
