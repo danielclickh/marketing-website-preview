@@ -114,7 +114,7 @@ export default function SnowflakePage({
       <div className='homepage'>
         <div className='relative pt-16 lg:pb-20 '>
           <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
-            <div className='items-start justify-between gap-10 lg:flex lg:grid-cols-2 lg:gap-20'>
+            <div className='items-start justify-between lg:flex lg:grid-cols-2'>
               <div className='lg:w-2/3'>
                 <div className='items-center'>
                   <div className='lg:max-w-xl'>
@@ -148,7 +148,7 @@ export default function SnowflakePage({
               </div>
               <div>
                 <div className='mb-6 lg:mb-0'>
-                  <div className='lg:max-w-2xl'>
+                  <div className=''>
                     <Image
                       src='/images/clickhouse-vs-snowflake-og.png'
                       width={512}
