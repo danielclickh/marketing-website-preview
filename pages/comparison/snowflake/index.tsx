@@ -81,6 +81,7 @@ export const getStaticProps: GetStaticProps<SnowflakePageProps> =
 
     data.seo = comparison.data[0].seo
     data.seo.path = '/comparison/snowflake'
+    data.seo.image = [{ url: '/images/clickhouse-vs-snowflake-og.png' }]
 
     return {
       props: {
