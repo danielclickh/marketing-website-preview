@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React, { useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
-import { CUICard } from '../../../components/ClickUI'
+import { CUIButton, CUICard } from '../../../components/ClickUI'
 import GetStarted from '../../../components/GetStarted'
 import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
@@ -120,7 +120,7 @@ export default function SnowflakePage({
                       {comparison.data[0].Title}
                     </h1>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-neutral-0/60 lg:text-left'>
-                      For Real-time Analytics
+                      For real-time analytics
                     </h4>
                   </div>
                 </div>
@@ -144,10 +144,10 @@ export default function SnowflakePage({
 
         <div className='relative pt-12 lg:pt-0'>
           <div className='mx-auto flex flex-col text-center'>
-            <div className='mx-auto w-fit max-w-[850px] px-4 pb-4 pt-2 text-center font-basier text-2xl font-semibold leading-normal text-white md:px-0 lg:mb-8 lg:text-4xl'>
+            <div className='mx-auto w-fit max-w-[850px] px-4 pb-4 pt-2 text-center font-basier text-2xl font-semibold  text-white md:px-0 lg:mb-8 lg:text-4xl'>
               ClickHouse performance compared to Snowflake for{' '}
-              <span className='tilted tilted-yellow'>
-                <span className='tilted-content leading-8'>real-time</span>
+              <span className='tilted tilted-yellow leading-relaxed'>
+                <span className='tilted-content'>real-time</span>
               </span>{' '}
               analytics
             </div>
@@ -251,7 +251,7 @@ export default function SnowflakePage({
                     <div className='absolute left-0 bottom-0 z-20 h-[220px] w-full bg-snowflakeGradient lg:h-[100px] '></div>
                   </div>
                   <div className='relative z-40 -mt-30 lg:-mt-20'>
-                    <div className='mx-auto max-w-xl rounded-lg bg-black p-5 text-white lg:p-10'>
+                    <div className='mx-auto max-w-xl rounded-lg bg-neutral-900 p-5 text-white lg:p-10'>
                       {formLoaded && !formSuccess && (
                         <>
                           <p
@@ -302,9 +302,22 @@ export default function SnowflakePage({
                           <h3 className='text-2xl font-bold'>
                             Thank you for your submission!
                           </h3>
+                          <CUIButton
+                            type='primary'
+                            size='lg'
+                            weight='semibold'
+                            href=' https://discover.clickhouse.com/rs/238-FPC-317/images/ClickHouse-vs-Snowflake.pdf'
+                            target='_blank'
+                            segmentEvent={{
+                              label: 'Snowflake-PDF',
+                              category: 'snowflake-pdf-click'
+                            }}
+                            className='my-6 w-full'>
+                            Download PDF
+                          </CUIButton>
                           <p className='mt-2 text-neutral-200'>
-                            You'll receive an email shortly with the executive
-                            summary.
+                            You'll also receive an email shortly with the
+                            executive summary.
                           </p>
                         </div>
                       )}
