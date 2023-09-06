@@ -148,6 +148,12 @@
 		"title": "Comparisons",
 		"items": [
 			{
+				"id": 30,
+				"name": "BigQuery",
+				"href": "/comparison/bigquery",
+				"target": "_self"
+			},
+			{
 				"id": 10,
 				"name": "PostgreSQL",
 				"href": "/comparison/postgresql",
@@ -157,12 +163,6 @@
 				"id": 20,
 				"name": "Redshift",
 				"href": "/comparison/redshift",
-				"target": "_self"
-			},
-			{
-				"id": 30,
-				"name": "BigQuery",
-				"href": "/comparison/bigquery",
 				"target": "_self"
 			},
 			{
