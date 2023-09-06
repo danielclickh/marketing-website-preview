@@ -284,6 +284,13 @@ function Sitemap({
                       </li>
                     )
                   })}
+                  <li>
+                    <Link
+                      href={`/comparison/snowflake`}
+                      className='font text-primary-300 hover:underline'>
+                      ClickHouse vs Snowflake
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>

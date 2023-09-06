@@ -438,7 +438,14 @@ export async function getStaticPaths() {
     fields: ['slug']
   }
 
-  const paths = await getPathsValues('comparisons', params)
+  const allPaths = await getPathsValues('comparisons', params)
+
+  // Filter out the paths with the 'snowflake' slug
+  const paths = allPaths.filter((path) => {
+    const slug = path.params.slug
+    return slug !== 'snowflake'
+  })
+
   return {
     paths,
     fallback: NOT_FOUND_FALLBACK
