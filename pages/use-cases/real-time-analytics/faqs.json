@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "content": "<span class='text-primary-300'>Best-in-class query performance</span> that your most mission-critical and time-sensitive applications can depend on."
+  },
+  {
+    "id": 2,
+    "content": "<span class='text-primary-300'>Built for continuous ingest</span> with native integrations and managed pipelines for your favorite streaming sources."
+  },
+  {
+    "id": 3,
+    "content": "<span class='text-primary-300'>High query concurrency</span> so you can build interactive apps your users love without worrying about responsiveness at scale."
+  },
+  {
+    "id": 4,
+    "content": "<span class='text-primary-300'>Powerful domain-specific functions</span> that simplify your SQL queries and make complex analysis easier than ever."
+  }
+]

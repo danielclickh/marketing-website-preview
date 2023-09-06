@@ -7,23 +7,23 @@ import Tilt from 'react-parallax-tilt'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
-import AccordionComponent from '../../../components/MLDiagram/Accordion'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
+import AccordionComponent from '../../../components/MLDiagram/Accordion'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
 import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
-import features from './features.json'
+import faqs from './faqs.json'
 import quotes from './quotes.json'
 
-interface MLProps extends CommonProps {
+interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
 }
 
-export const getStaticProps: GetStaticProps<MLProps> =
+export const getStaticProps: GetStaticProps<RealTimeAnalyticsPageProps> =
   async function getStaticProps() {
     const params = {
       populate: [
@@ -52,12 +52,12 @@ export const getStaticProps: GetStaticProps<MLProps> =
     }
   }
 
-export default function MLUseCasePage({
+export default function RealTimeAnalyticsPage({
   customerStories,
   seo,
   headerData,
   footerData
-}: MLProps) {
+}: RealTimeAnalyticsPageProps) {
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
@@ -147,7 +147,7 @@ export default function MLUseCasePage({
                     </div>
                   </div>
                 </div>
-                <div className='relative z-30 mx-auto hidden md:w-4/12 lg:flex'>
+                <div className='relative z-30 mx-auto hidden md:w-4/12 lg:flex lg:w-[400px] xl:w-[525px]'>
                   <Image
                     src='/images/use-cases/real-time-analytics/real-time-analytics-hero.svg'
                     alt='ClickHouse'
@@ -162,34 +162,47 @@ export default function MLUseCasePage({
           </div>
         </div>
 
-        <div className='bg-neutral-725 text-neutral-0'>
-          <div className='container mx-auto max-w-5xl px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
-            <h2 className='text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
-              Find out why companies are using ClickHouse to power&nbsp;their
-              machine learning data workloads.
-            </h2>
-          </div>
-          <div className='mx-auto flex max-w-6xl flex-col gap-5 pb-24 md:flex-row'>
-            {features.map((feature) => {
-              return (
-                <div key={feature.id} className='flex-1 text-center'>
-                  <Image
-                    src={feature.icon}
-                    width={32}
-                    height={32}
-                    alt={feature.content}
-                    className='mx-auto h-11 w-auto'
-                  />
-                  <div className='rich_content px-3 pt-4 text-base text-neutral-200'>
-                    <ReactMarkdown children={feature.content} />
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
         <div className='clip-inverted-triangle bg-neutral-725'>
           <div className='section-container max-w-7xl'>
+            <div className='bg-shadow-element-left red-shadow flex flex-col justify-between py-20 xl:flex-row xl:px-12'>
+              <div className='mb-10 xl:mb-0 xl:min-w-[540px]'>
+                <Image
+                  src='/images/icon-shield.svg'
+                  alt='icon'
+                  className='mb-6'
+                  width={72}
+                  height={72}
+                />
+                <h2 className='text-left font-basier text-2xl font-semibold lg:text-4xl xl:max-w-[515px]'>
+                  The real-time database that truly shines at scale. Count on
+                  blazing performance when low latency{' '}
+                  <span className='text-primary-300'>really</span> matters.
+                </h2>
+                <p className='mt-6 xl:max-w-[445px]'>
+                  Discover why companies are choosing ClickHouse for their
+                  real-time analytics applications.
+                </p>
+              </div>
+              <div>
+                <div className='flex flex-col gap-y-8 xl:max-w-[610px]'>
+                  {faqs.map((faq) => (
+                    <div
+                      className='flex items-center rounded-md border border-neutral-700/80 bg-neutral-900/80 p-3 pr-6 shadow-xl'
+                      key={faq.id}>
+                      <span className='pl-2 text-center text-lg text-[#B3B6BD]/60'>
+                        0{faq.id}
+                      </span>
+                      <span className='border-r border-neutral-700/80 py-2 pl-4 text-lg'>
+                        &nbsp;
+                      </span>
+                      <div className='pl-4'>
+                        <Markdown children={faq.content} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
             <div className='relative flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
                 <div className='flex flex-col gap-x-6 gap-y-6 md:h-[490px] md:flex-row lg:h-[360px] xl:h-[320px] '>
