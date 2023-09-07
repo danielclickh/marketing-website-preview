@@ -128,5 +128,31 @@
 				"text": "Visualization and collaboration features"
 			}
 		]
+	},
+	{
+		"id": 5,
+		"image": "/images/cloud/automate-clickhouse-terraform.svg",
+		"image_width": 556,
+		"image_height": 406,
+		"title": "Automate with ease",
+		"description": "Use our Terraform provider and infrastructure APIs to effortlessly automate your setup and configuration. ",
+		"bullets": [
+			{
+				"id": 1,
+				"text": "Ensure consistency of configurations"
+			},
+			{
+				"id": 2,
+				"text": "Reuse custom settings for all your deployments"
+			},
+			{
+				"id": 3,
+				"text": "Maximize efficiency across infrastructure teams"
+			},
+			{
+				"id": 4,
+				"text": "Accelerate delivery with seamless automation"
+			}
+		]
 	}
 ]
