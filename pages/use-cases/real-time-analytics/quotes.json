@@ -1,32 +1,32 @@
 [
     {
         "id": 10,
-        "title": "DeepL",
-        "logo": "/images/use-cases/ml-and-ds/DeepL_logo.svg",
-        "content": "We aggregate the user's history in ClickHouse and use it as a data store for training and inference. Even when reading 10s of millions of rows, the performance was very nice and not the bottleneck when training new models.",
-        "href": "/blog/deepls-journey-with-clickhouse",
+        "title": "modeo",
+        "logo": "/images/modeo-logo.svg",
+        "content": "We evaluated several data warehouse solutions for scalability, real-time analytics, and customer satisfaction. ClickHouse outperformed the competition on all these parameters.",
+        "href": "/blog/driving-sustainable-data-management-with-clickhouse-introducing-stash-by-modeo",
         "target": "_self",
-        "imgWidth": 122,
-        "imgHeight": 44
+        "imgWidth": 124,
+        "imgHeight": 26
     },
     {
         "id": 20,
-        "title": "Denic",
-        "logo": "/images/use-cases/ml-and-ds/Logo_DENIC.svg",
-        "content": "After Testing Hadoop and Spark, We Chose ClickHouse",
-        "href": "/blog/denic-improves-query-times-by-10x-with-clickhouse",
+        "title": "ongage",
+        "logo": "/images/ongage-logo.svg",
+        "content": "Our existing data warehouse lacked the real-time capabilities we needed. This was particularly important for our analytics and automation operations, where immediate event triggering and analysis were essential.",
+        "href": "/blog/ongages-strategic-shift-to-clickhouse-for-real-time-email-marketing",
         "target": "_self",
-        "imgWidth": 95,
-        "imgHeight": 49
+        "imgWidth": 128,
+        "imgHeight": 35
     },
     {
         "id": 30,
-        "logo": "/images/use-cases/ml-and-ds/QuickCheck.svg",
-        "title": "QuickCheck",
-        "content": "We collect tens of thousands of data points from customers' phones and other more traditional sources. ClickHouse is used as a way to process all of these SMS messages and extract valuable information used for the scoring and fraud models.",
-        "href": "/blog/how-quickcheck-uses-clickhouse-to-bring-banking-to-the-unbanked",
+        "logo": "/images/instabug-logo.svg",
+        "title": "instabug",
+        "content": "We store approximately 3 billion events (rows) per day at a rate of approximately 2 million events per minute. We also have to serve some pretty complex data visualizations that depend heavily on filtering very large amounts of data and calculating complex aggregations in a reasonably fast time frame for the sake of the user experience.",
+        "href": "/blog/10x-improved-response-times-cheaper-to-operate-and-30-storage-reduction-why-instabug-chose-clickhouse-for-apm",
         "target": "_self",
-        "imgWidth": 258,
-        "imgHeight": 49
+        "imgWidth": 146,
+        "imgHeight": 33
     }
 ]

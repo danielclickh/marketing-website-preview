@@ -1,26 +1,26 @@
 [
     {
         "id": 10,
-        "title": "Create valuable experiences and insights",
-        "content": "Whether you're building engaging personalization features, incorporating semantic search into your product, generating summarized insights from raw content automatically, or more, ClickHouse exposes the features you need to build AI-powered functionality with your data.",
-        "icon": "/images/use-cases/ml-and-ds/smile.svg"
+        "title": "Unlock real-time insights and user experiences",
+        "content": "Whether you’re performing live analysis to drive business outcomes or building interactive user-facing applications, ClickHouse delivers the unparalleled speed-to-insight you can depend on.",
+        "icon": "/images/use-cases/ml-and-ds/tools.svg"
     },
     {
         "id": 20,
-        "title": "Unify your data stack",
-        "content": "Eliminate the need for specialized data stores used for specific machine learning tasks, such as vector search. With ClickHouse, you can rely on one, unified, data store to power your analytics, run your machine learning workloads, and manage your ad-hoc querying, all in one place.",
+        "title": "Simplify your SQL",
+        "content": "ClickHouse supports an extensive library of domain-specific functions that transform even the most complex and cumbersome queries into simple SQL statements. With ClickHouse, real-time data exploration is easy and powerful.",
         "icon": "/images/use-cases/logging/ingest.svg"
     },
     {
         "id": 30,
         "title": "Manage data efficiently",
-        "content": "ClickHouse's efficient management of resources helps maximize cost-effectiveness. Our column-oriented design delivers best-in-class compression ratios, reducing storage burden and ensuring blazing speed for even the most intensive ML workloads.",
+        "content": "ClickHouse is purpose-built to deliver the most efficient utilization of resources. With highly optimized compression techniques and our fully parallelized query pipeline, ClickHouse maximizes CPU efficiency and provides the power to quickly process huge volumes of compressed data.",
         "icon": "/images/use-cases/logging/manage.svg"
     },
     {
         "id": 40,
-        "title": "Use the tools you love",
-        "content": "Leverage ClickHouse directly with your favorite ML tools. Our growing community of integrations includes popular machine learning frameworks, visualization tools, notebooks, and more.",
+        "title": "Scale effortlessly",
+        "content": "ClickHouse scales both vertically and horizontally to meet the demands of any workload - read and write - to systems with hundreds of cores and petabytes of storage. ClickHouse provides the scalability you need to effortlessly handle increasing data volumes and workloads over time.",
         "icon": "/images/use-cases/ml-and-ds/tools.svg"
     }
 ]

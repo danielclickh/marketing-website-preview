@@ -2,14 +2,13 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
-import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
-import AccordionComponent from '../../../components/MLDiagram/Accordion'
+import AccordionComponent from '../../../components/RealTimeDiagram/Accordion'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
@@ -18,6 +17,8 @@ import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import faqs from './faqs.json'
 import quotes from './quotes.json'
+import features from './features.json'
+import Feature from './feature-check'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
@@ -162,9 +163,9 @@ export default function RealTimeAnalyticsPage({
           </div>
         </div>
 
-        <div className='clip-inverted-triangle bg-neutral-725'>
-          <div className='section-container max-w-7xl'>
-            <div className='bg-shadow-element-left red-shadow flex flex-col justify-between py-20 xl:flex-row xl:px-12'>
+        <div className=' bg-neutral-725 '>
+          <div className='bg-shadow-element-left red-shadow section-container max-w-7xl'>
+            <div className='flex flex-col justify-between py-20 xl:flex-row xl:px-12'>
               <div className='mb-10 xl:mb-0 xl:min-w-[540px]'>
                 <Image
                   src='/images/icon-shield.svg'
@@ -195,7 +196,7 @@ export default function RealTimeAnalyticsPage({
                       <span className='border-r border-neutral-700/80 py-2 pl-4 text-lg'>
                         &nbsp;
                       </span>
-                      <div className='pl-4'>
+                      <div className='pl-6'>
                         <Markdown children={faq.content} />
                       </div>
                     </div>
@@ -203,21 +204,46 @@ export default function RealTimeAnalyticsPage({
                 </div>
               </div>
             </div>
-            <div className='relative flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
-              <div className='p-10'>
-                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[490px] md:flex-row lg:h-[360px] xl:h-[320px] '>
-                  {quotes.map((quote) => (
-                    <Tilt
-                      tiltEnable={false}
-                      glareEnable={true}
-                      glareMaxOpacity={0.4}
-                      glareColor='rgba(251, 255, 70, 0.08)'
-                      glarePosition='all'
-                      className='flex-1'
-                      key={quote.id}>
-                      {quote.href ? (
-                        <Link href={quote.href} target={quote.target}>
-                          <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
+          </div>
+
+          <div className='clip-inverted-triangle before:-top-40'>
+            <div className='mx-auto max-w-7xl'>
+              <div className='relative z-20 flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
+                <div className='p-10'>
+                  <div className='flex flex-col gap-x-6 gap-y-6 md:h-[490px] md:flex-row lg:h-[360px] xl:h-[350px] '>
+                    {quotes.map((quote) => (
+                      <Tilt
+                        tiltEnable={false}
+                        glareEnable={true}
+                        glareMaxOpacity={0.4}
+                        glareColor='rgba(251, 255, 70, 0.08)'
+                        glarePosition='all'
+                        className='flex-1'
+                        key={quote.id}>
+                        {quote.href ? (
+                          <Link href={quote.href} target={quote.target}>
+                            <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
+                              <Image
+                                src='/images/Quote.svg'
+                                width={37}
+                                height={28}
+                                alt='Quote'
+                                className='mb-4 block'
+                              />
+                              <SuiText color='secondary' className='text-left'>
+                                "{quote.content}"
+                              </SuiText>
+                              <Image
+                                src={quote.logo}
+                                width={quote.imgWidth}
+                                height={quote.imgHeight}
+                                alt={quote.title}
+                                className='mt-12 md:mt-auto'
+                              />
+                            </div>
+                          </Link>
+                        ) : (
+                          <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
                             <Image
                               src='/images/Quote.svg'
                               width={37}
@@ -236,40 +262,18 @@ export default function RealTimeAnalyticsPage({
                               className='mt-12 md:mt-auto'
                             />
                           </div>
-                        </Link>
-                      ) : (
-                        <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
-                          <Image
-                            src='/images/Quote.svg'
-                            width={37}
-                            height={28}
-                            alt='Quote'
-                            className='mb-4 block'
-                          />
-                          <SuiText color='secondary' className='text-left'>
-                            "{quote.content}"
-                          </SuiText>
-                          <Image
-                            src={quote.logo}
-                            width={quote.imgWidth}
-                            height={quote.imgHeight}
-                            alt={quote.title}
-                            className='mt-12 md:mt-auto'
-                          />
-                        </div>
-                      )}
-                    </Tilt>
-                  ))}
+                        )}
+                      </Tilt>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className='-mt-1 h-1 w-full bg-primary-300'></div>
         </div>
-        <div className='bg-primary-300 py-12'></div>
 
-        <div className='relative z-10 mx-auto -mt-10 bg-primary-300'>
-          <div className='relative z-10 mx-auto -mt-10 max-w-7xl'>
+        <div className='relative z-10 mx-auto bg-primary-300'>
+          <div className='relative z-10 mx-auto max-w-7xl'>
             <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
               <div className='flip-selection mx-auto flex flex-col text-center'>
                 <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
@@ -293,8 +297,37 @@ export default function RealTimeAnalyticsPage({
         </div>
 
         <div className='bg-neutral-725 pb-24'>
-          <div className='relative mx-auto pt-12 md:px-0 md:pt-24'>
+          <div className='relative mx-auto pt-12  md:px-0 md:pt-24'>
             <div className='mx-auto max-w-7xl'>
+              <div className='flex w-full flex-col items-center pt-6 pb-12'>
+                <Image
+                  src='/images/use-cases/logging/icon-how.svg'
+                  alt='System overview'
+                  width={72}
+                  height={73}
+                />
+                <SuiTitle type='h2' className='mt-8 text-center'>
+                  Real-time Applications
+                </SuiTitle>
+                <p className='mx-auto mb-12 max-w-3xl px-9 pt-6 text-center text-sm'>
+                  ClickHouse is used across industries to power systems and
+                  applications where real-time analysis, evaluation, and
+                  querying are critical.
+                </p>
+                <div className='mb-12 flex w-full flex-col gap-6 px-8 lg:flex-row lg:px-0'>
+                  {[10, 20, 30].map((section) => (
+                    <div
+                      key={section}
+                      className='items-center rounded-md border border-neutral-0/30 bg-[rgba(62,62,62,1)] py-4 px-6 text-left lg:w-1/3'>
+                      {features
+                        .filter((feature) => feature.section === section)
+                        .map((feature) => (
+                          <Feature key={feature.id} feature={feature} />
+                        ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
               <AccordionComponent />
               <div className='mx-auto max-w-5xl px-4 xl:px-0'>
                 <div className='grid justify-between gap-20 pt-20 lg:grid-cols-2'>
@@ -333,15 +366,15 @@ export default function RealTimeAnalyticsPage({
                 </SuiTitle>
                 <div className='mx-auto mb-8 mt-6 max-w-2xl text-center text-neutral-300'>
                   For detailed guides about how to get started with ClickHouse
-                  for ML, follow along in our blog:
+                  for real-time analytics workloads, follow along in our blog:
                 </div>
                 <div className='bg-neutral-725 p-8'>
                   <ol className='list-decimal space-y-2 text-left	text-primary-300'>
                     <li>
                       <Link
-                        href='/blog/vector-search-clickhouse-p1'
+                        href='/blog/asynchronous-data-inserts-in-clickhouse'
                         className='text-primary-300'>
-                        Vector Search with ClickHouse - Part 1
+                        Asynchronous Data Inserts in ClickHouse
                       </Link>
                     </li>
                     <li>
@@ -353,35 +386,49 @@ export default function RealTimeAnalyticsPage({
                     </li>
                     <li>
                       <a
-                        href='https://www.youtube.com/watch?v=hGRNcftpqAk'
-                        className='text-primary-300'
-                        target='_blank'>
-                        Video: ClickHouse for AI - Vectors, Embedding, Semantic
-                        Search, and more - Alexey Milovidov, ClickHouse
+                        href='/blog/real-time-event-streaming-with-confluent-cloud-clickhouse-and-clickpipes'
+                        className='text-primary-300'>
+                        Real-time event streaming with ClickHouse, Confluent
+                        Cloud and ClickPipes
                       </a>
                     </li>
                     <li>
                       <a
-                        href='https://www.youtube.com/watch?v=F08ktx1ZrpI'
-                        className='text-primary-300'
-                        target='_blank'>
-                        Video: Vector Search In ClickHouse - Dale McDiarmid
+                        href='/blog/building-real-time-applications-with-clickhouse-and-hex-notebook-keeper-engine'
+                        className='text-primary-300'>
+                        Adding Real-Time Analytics to a Supabase Application
+                        With ClickHouse
                       </a>
                     </li>
                     <li>
                       <a
                         href='https://python.langchain.com/docs/integrations/vectorstores/clickhouse'
-                        className='text-primary-300'
-                        target='_blank'>
-                        Using Langchain with ClickHouse
+                        className='text-primary-300'>
+                        Building Real-time Analytics Apps with ClickHouse and
+                        Hex
                       </a>
                     </li>
                     <li>
                       <a
-                        href='https://deepnote.com/blog/clickhouse'
-                        className='text-primary-300'
-                        target='_blank'>
-                        Using Deepnote with ClickHouse
+                        href='/blog/working-with-time-series-data-and-functions-ClickHouse'
+                        className='text-primary-300'>
+                        Working with Time Series Data in ClickHouse
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href='/blog/clickhouse-postgresql-change-data-capture-cdc-part-1'
+                        className='text-primary-300'>
+                        Change Data Capture (CDC) with PostgreSQL and ClickHouse
+                        - Part 1
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href='/blog/clickhouse-postgresql-change-data-capture-cdc-part-2'
+                        className='text-primary-300'>
+                        Change Data Capture (CDC) with PostgreSQL and ClickHouse
+                        - Part 2
                       </a>
                     </li>
                   </ol>
@@ -392,7 +439,7 @@ export default function RealTimeAnalyticsPage({
 
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
             <GetStartedFree
-              href='https://clickhouse.cloud/signUp?loc=ml-and-ds-use-case-getstarted-footer'
+              href='https://clickhouse.cloud/signUp?loc=real-time-use-case-getstarted-footer'
               textBefore='Get started with ClickHouse'
               textSlanted='Cloud'
               textAfter='for free'
