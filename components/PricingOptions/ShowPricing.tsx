@@ -1,19 +1,30 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { InformationCircleIcon } from '@heroicons/react/outline'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { usePricing } from './PricingContext'
 
 function InfoTooltip({ content }: { content: string }) {
+  const triggerRef = useRef(null)
+
   return (
-    <Tooltip.Provider delayDuration={200}>
+    <Tooltip.Provider delayDuration={0}>
       <Tooltip.Root>
-        <Tooltip.Trigger asChild>
-          <button className='IconButton'>
-            <InformationCircleIcon className='h-3.5 w-3.5' />
-          </button>
+        <Tooltip.Trigger
+          asChild
+          ref={triggerRef}
+          onClick={(event) => event.preventDefault()}>
+          <InformationCircleIcon
+            className='h-3.5 w-3.5 hover:cursor-pointer'
+            onClick={(e) => {
+              e.preventDefault
+            }}
+          />
         </Tooltip.Trigger>
         <Tooltip.Portal>
           <Tooltip.Content
+            onPointerDownOutside={(event) => {
+              if (event.target === triggerRef.current) event.preventDefault()
+            }}
             className='rounded-sm bg-neutral-725 p-2 text-sm text-neutral-0'
             sideOffset={5}
             side='right'>
