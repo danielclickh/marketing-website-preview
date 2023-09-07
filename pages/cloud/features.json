@@ -27,7 +27,7 @@
     "id": 5,
     "icon": "/images/cloud/arrows-out.svg",
     "title": "Scale seamlessly",
-    "content": "Forget about over-provisioning for peak usage and paying for unused capacity. ClickHouse seamlessly scales to meet demands and unpredictable workloads."
+    "content": "Forget about over-provisioning for peak usage and paying for unused capacity. ClickHouse seamlessly scales up or down to meet demands and unpredictable workloads."
   },
   {
     "id": 6,
