@@ -374,6 +374,14 @@ export default function MLUseCasePage({
                         Using Deepnote with ClickHouse
                       </a>
                     </li>
+                    <li>
+                      <a
+                        href='/blog/query-analyze-hugging-face-datasets-with-clickhouse'
+                        className='text-primary-300'
+                        target='_blank'>
+                        Analyzing Hugging Face datasets with ClickHouse
+                      </a>
+                    </li>
                   </ol>
                 </div>
               </div>

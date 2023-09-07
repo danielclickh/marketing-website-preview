@@ -66,6 +66,7 @@ function PricingOptions({
                   if (darkIconPng.name === 'logo_aws_dark.svg') {
                     return (
                       <CUIButton
+                        key={index}
                         type='secondary'
                         onClick={() => {
                           setProvider('aws')
@@ -214,7 +215,7 @@ function PricingOptions({
       </div>
       <div className='flex items-center justify-center gap-2 pt-6'>
         <SuiText size='sm' color='secondary' className='text-center'>
-          Learn more about our partnerships wth{' '}
+          Learn more about our partnerships with{' '}
           <CUILink href='/partners/aws' className='text-primary-300'>
             AWS
           </CUILink>{' '}
