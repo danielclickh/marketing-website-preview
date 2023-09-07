@@ -1,9 +1,9 @@
 [
   {
     "id": 1,
-    "icon": "/images/cloud/automate.svg",
-    "title": "Automate all the things",
-    "content": "Through automation, managing ClickHouse infrastructure becomes effortless. Utilizing public API keys, it enables easy setup, efficient scaling, and secure, consistent deployments."
+    "icon": "/images/cloud/stopwatch.svg",
+    "title": "Deploy in seconds",
+    "content": "Get started in seconds without worrying about sizing, scaling, and upgrading your services. Eliminate the operational overhead and let us handle the rest."
   },
   {
     "id": 2,
@@ -19,9 +19,9 @@
   },
   {
     "id": 4,
-    "icon": "/images/cloud/coins.svg",
-    "title": "Pay as you go",
-    "content": "Start building without managing cluster size or scale. We handle security, upgrades, and more. Pay only for what you use, ensuring optimal price/performance and low overhead."
+    "icon": "/images/cloud/automate-gears.svg",
+    "title": "Effortless automation",
+    "content": "Streamline your infrastructure management with our Terraform provider and APIs that help you effortlessly automate your setup and configuration."
   },
   {
     "id": 5,
