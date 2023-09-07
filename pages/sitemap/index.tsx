@@ -141,6 +141,13 @@ function Sitemap({
                   ClickHouse Cloud
                 </Link>
               </p>
+              <p className='pb-2'>
+                <Link
+                  href={`/cloud/clickpipes?loc=sitemap`}
+                  className='text-primary-300 hover:underline'>
+                  ClickPipes
+                </Link>
+              </p>
             </div>
             <div>
               <h2

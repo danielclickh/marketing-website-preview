@@ -148,6 +148,12 @@
 		"title": "Comparisons",
 		"items": [
 			{
+				"id": 30,
+				"name": "BigQuery",
+				"href": "/comparison/bigquery",
+				"target": "_self"
+			},
+			{
 				"id": 10,
 				"name": "PostgreSQL",
 				"href": "/comparison/postgresql",
@@ -160,9 +166,9 @@
 				"target": "_self"
 			},
 			{
-				"id": 30,
-				"name": "BigQuery",
-				"href": "/comparison/bigquery",
+				"id": 40,
+				"name": "Snowflake",
+				"href": "/comparison/snowflake",
 				"target": "_self"
 			}
 		]

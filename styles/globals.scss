@@ -211,7 +211,7 @@ body {
     }
     th {
       @apply border-solid border-neutral-700 bg-neutral-725 font-semibold;
-      @apply px-2 py-2 first:rounded-tl-lg last:rounded-tr-lg text-left; 
+      @apply px-2 py-2 first:rounded-tl-lg last:rounded-tr-lg text-left;
     }
     tr {
       @apply border-b border-solid border-neutral-725 hover:bg-neutral-700 transition-all;
@@ -224,7 +224,7 @@ body {
     tr.highlight-blue {
       @apply bg-blue-600 text-neutral-0 border-blue-800 bg-opacity-70 hover:bg-opacity-100;
     }
-  
+
     td {
       @apply p-2 text-left;
     }
@@ -628,4 +628,13 @@ a.arrow-link {
 .active-diagram-30 {
   .clickhouse, .tooling { @apply opacity-100;}
   .sources, .lines, .models, .data-transformation, .apps, .connecting-lines, .data-prep { @apply opacity-30;}
+}
+
+#mktoForm_1073 {
+  .mktoButtonWrap {@apply w-auto}
+  .mktoButton { @apply inline-block w-auto mx-0 }
+}
+
+#snowflake-relatedcontent img {
+  @apply object-contain h-auto;
 }
