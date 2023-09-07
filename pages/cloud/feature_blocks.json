@@ -133,7 +133,7 @@
 		"id": 5,
 		"image": "/images/cloud/automate-clickhouse-terraform.svg",
 		"image_width": 556,
-		"image_height": 407,
+		"image_height": 406,
 		"title": "Automate with ease",
 		"description": "Use our Terraform provider and infrastructure APIs to effortlessly automate your setup and configuration. ",
 		"bullets": [
