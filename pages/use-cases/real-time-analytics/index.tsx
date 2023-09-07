@@ -18,7 +18,7 @@ import checkpoints from './checkpoints.json'
 import faqs from './faqs.json'
 import quotes from './quotes.json'
 import features from './features.json'
-import Feature from './feature-check'
+import Feature from '../../../components/RealTimeDiagram/feature-check'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
