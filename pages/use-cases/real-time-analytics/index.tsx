@@ -9,7 +9,7 @@ import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
 import AccordionComponent from '../../../components/RealTimeDiagram/Accordion'
-import { SuiText, SuiTitle } from '../../../components/sui'
+import { SuiLink, SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
@@ -72,7 +72,7 @@ export default function RealTimeAnalyticsPage({
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='bg-contain bg-center bg-no-repeat'>
           <div className='relative z-20 overflow-hidden bg-grid pb-16 pt-10'>
-            <div className='container relative z-40 mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 md:bg-no-repeat md:px-8 lg:min-h-[630px] 2xl:px-0'>
+            <div className='container relative z-40 mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 md:bg-no-repeat md:px-8 lg:min-h-[630px] 2xl:px-0'>
               <div className='flex'>
                 <div className='flex-col xl:mt-16'>
                   <div className='w-full lg:max-w-xl xl:max-w-full'>
@@ -250,6 +250,11 @@ export default function RealTimeAnalyticsPage({
                             )}
                           </CUICard.Body>
                           <CUICard.Footer>
+                            <Link
+                              className='mt-10 inline-block text-primary-300 xl:mt-0'
+                              href={quote.href}>
+                              Read more
+                            </Link>
                             <Image
                               src={quote.logo}
                               width={quote.imgWidth}
