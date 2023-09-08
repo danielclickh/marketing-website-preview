@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 import Tilt from 'react-parallax-tilt'
-import { CUIButton } from '../../../components/ClickUI'
+import { CUIButton, CUICard } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps<RealTimeAnalyticsPageProps> =
     const data = await findOne('homepage', params)
 
     data.seo.path = '/use-cases/real-time-analytics'
-    data.seo.title = 'Real-time Analytics with ClickHouse'
+    data.seo.title = 'Real-time analytics with ClickHouse'
     data.seo.description =
       'Ingest millions of rows per second. Handle the most heavily concurrent workloads. All without compromising query speed.'
 
@@ -71,17 +71,17 @@ export default function RealTimeAnalyticsPage({
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='bg-contain bg-center bg-no-repeat'>
-          <div className='relative z-20 overflow-hidden bg-grid pt-10 pb-20'>
-            <div className='container relative z-40 mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>
+          <div className='relative z-20 overflow-hidden bg-grid pb-16 pt-10'>
+            <div className='container relative z-40 mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 md:bg-no-repeat md:px-8 lg:min-h-[630px] 2xl:px-0'>
               <div className='flex'>
                 <div className='flex-col xl:mt-16'>
                   <div className='w-full lg:max-w-xl xl:max-w-full'>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
                       <Link href='/use-cases'>Use cases</Link> / Real-time
-                      Analytics
+                      analytics
                     </h4>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-xl lg:text-left'>
-                      Real-time Analytics with ClickHouse
+                      Real-time analytics with ClickHouse
                     </h1>
                     <SuiText
                       size='base'
@@ -165,7 +165,7 @@ export default function RealTimeAnalyticsPage({
 
         <div className=' bg-neutral-725 '>
           <div className='bg-shadow-element-left red-shadow section-container max-w-7xl'>
-            <div className='flex flex-col justify-between py-20 xl:flex-row xl:px-12'>
+            <div className='flex flex-col justify-between py-16 xl:flex-row xl:px-12'>
               <div className='mb-10 xl:mb-0 xl:min-w-[540px]'>
                 <Image
                   src='/images/icon-shield.svg'
@@ -210,60 +210,56 @@ export default function RealTimeAnalyticsPage({
             <div className='mx-auto max-w-7xl'>
               <div className='relative z-20 flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
                 <div className='p-10'>
-                  <div className='flex flex-col gap-x-6 gap-y-6 md:h-[490px] md:flex-row lg:h-[360px] xl:h-[350px] '>
+                  <div className='flex flex-col gap-x-6 gap-y-6 lg:flex-row'>
                     {quotes.map((quote) => (
-                      <Tilt
-                        tiltEnable={false}
-                        glareEnable={true}
-                        glareMaxOpacity={0.4}
-                        glareColor='rgba(251, 255, 70, 0.08)'
-                        glarePosition='all'
-                        className='flex-1'
-                        key={quote.id}>
-                        {quote.href ? (
-                          <Link href={quote.href} target={quote.target}>
-                            <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
-                              <Image
-                                src='/images/Quote.svg'
-                                width={37}
-                                height={28}
-                                alt='Quote'
-                                className='mb-4 block'
-                              />
-                              <SuiText color='secondary' className='text-left'>
-                                "{quote.content}"
-                              </SuiText>
-                              <Image
-                                src={quote.logo}
-                                width={quote.imgWidth}
-                                height={quote.imgHeight}
-                                alt={quote.title}
-                                className='mt-12 md:mt-auto'
-                              />
-                            </div>
-                          </Link>
-                        ) : (
-                          <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
-                            <Image
-                              src='/images/Quote.svg'
-                              width={37}
-                              height={28}
-                              alt='Quote'
-                              className='mb-4 block'
-                            />
-                            <SuiText color='secondary' className='text-left'>
-                              "{quote.content}"
-                            </SuiText>
+                      <div className='w-full lg:w-1/3'>
+                        <CUICard
+                          key={quote.id}
+                          className='w-full bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
+                          <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
+                            {quote.href ? (
+                              <Link href={quote.href} target={quote.target}>
+                                <Image
+                                  src='/images/Quote.svg'
+                                  width={37}
+                                  height={28}
+                                  alt='Quote'
+                                  className='mb-4 block'
+                                />
+                                <SuiText
+                                  color='secondary'
+                                  className='text-left xl:h-[250px]'>
+                                  "{quote.content}"
+                                </SuiText>
+                              </Link>
+                            ) : (
+                              <>
+                                <Image
+                                  src='/images/Quote.svg'
+                                  width={37}
+                                  height={28}
+                                  alt='Quote'
+                                  className='mb-4 mt-10 block'
+                                />
+                                <SuiText
+                                  color='secondary'
+                                  className='text-left md:h-[490px] lg:h-[360px] xl:h-[250px]'>
+                                  "{quote.content}"
+                                </SuiText>
+                              </>
+                            )}
+                          </CUICard.Body>
+                          <CUICard.Footer>
                             <Image
                               src={quote.logo}
                               width={quote.imgWidth}
                               height={quote.imgHeight}
                               alt={quote.title}
-                              className='mt-12 md:mt-auto'
+                              className='mb-4 mt-10 block'
                             />
-                          </div>
-                        )}
-                      </Tilt>
+                          </CUICard.Footer>
+                        </CUICard>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -314,7 +310,7 @@ export default function RealTimeAnalyticsPage({
                   applications where real-time analysis, evaluation, and
                   querying are critical.
                 </p>
-                <div className='mb-12 flex w-full flex-col gap-6 px-8 lg:flex-row lg:px-0'>
+                <div className='mb-12 flex w-full flex-col gap-6 px-8 lg:flex-row lg:px-6 xl:px-0'>
                   {[10, 20, 30].map((section) => (
                     <div
                       key={section}
@@ -377,13 +373,7 @@ export default function RealTimeAnalyticsPage({
                         Asynchronous Data Inserts in ClickHouse
                       </Link>
                     </li>
-                    <li>
-                      <Link
-                        href='/blog/vector-search-clickhouse-p2'
-                        className='text-primary-300'>
-                        Vector Search with ClickHouse - Part 2
-                      </Link>
-                    </li>
+
                     <li>
                       <a
                         href='/blog/real-time-event-streaming-with-confluent-cloud-clickhouse-and-clickpipes'
@@ -406,6 +396,14 @@ export default function RealTimeAnalyticsPage({
                         className='text-primary-300'>
                         Building Real-time Analytics Apps with ClickHouse and
                         Hex
+                      </a>
+                    </li>
+
+                    <li>
+                      <a
+                        href='/blog/using-materialized-views-in-clickhouse'
+                        className='text-primary-300'>
+                        Using Materialized Views in ClickHouse
                       </a>
                     </li>
                     <li>

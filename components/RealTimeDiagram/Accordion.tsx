@@ -7,6 +7,7 @@ import Markdown from '../../components/Markdown'
 import { SuiTitle } from '../sui'
 import accordionItems from './accordion-items.json'
 import Diagram from './Diagram'
+import Tilt from 'react-parallax-tilt'
 
 const AccordionComponent = () => {
   const [activeItem, setActiveItem] = useState('item-0')
@@ -29,14 +30,14 @@ const AccordionComponent = () => {
         <SuiTitle type='h2' className='mt-8 text-center'>
           ClickHouse for Real-time Analytics
         </SuiTitle>
-        <p className='mx-auto mb-12 max-w-4xl px-9 pt-6 text-center'>
+        <p className='mx-auto mb-10 max-w-4xl px-9 pt-6 text-center'>
           ClickHouse was built from the ground up to transform large-scale
           real-time analytics, eliminating the operational complexities often
           present in other traditional real-time systems, and ensuring that even
           the most sophisticated data analysis can be done intuitively, using
           simple SQL. 
         </p>
-        <p className='mx-auto mb-12 max-w-3xl px-9 pt-6 text-center'>
+        <p className='mx-auto mb-12 max-w-3xl px-9 text-center'>
           Our parallelized query execution engine, best-in-class compression
           rates, and column-oriented design deliver unparalleled performance at
           scale so that you can focus on insights and forget worrying about
@@ -107,6 +108,7 @@ const AccordionTrigger = forwardRef<
       {...props}
       ref={forwardedRef}>
       {children}
+
       <ChevronDownIcon
         className='text-violet10 h-5 w-5 transition-transform duration-300 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:rotate-180'
         aria-hidden
@@ -126,9 +128,17 @@ const AccordionContent = forwardRef<
     )}
     {...props}
     ref={forwardedRef}>
-    <div className='border-t-5 data border-neutral-600/80 bg-[#272727] p-4 pt-4 group-data-[state=open]:bg-[#404040]'>
-      {children}
-    </div>
+    <Tilt
+      tiltEnable={false}
+      glareEnable={true}
+      glareMaxOpacity={0.4}
+      glareColor='rgba(251, 255, 70, 0.10)'
+      glarePosition='all'
+      className='flex-1'>
+      <div className='border-t-5 data border-neutral-600/80 bg-[#272727] p-4 pt-4 group-data-[state=open]:bg-[#404040]'>
+        {children}
+      </div>
+    </Tilt>
   </Accordion.Content>
 ))
 
