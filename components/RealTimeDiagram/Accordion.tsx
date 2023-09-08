@@ -62,19 +62,30 @@ const AccordionComponent = () => {
                   setActiveItem(item)
                 }}>
                 {accordionItems.map((item) => (
-                  <AccordionItem
-                    value={`item-${item.id}`}
-                    key={item.id}
-                    ref={
-                      item.id === strippedItemId(activeItem)
-                        ? selectedAccordionRef
-                        : null
-                    }>
-                    <AccordionTrigger>{item.title}</AccordionTrigger>
-                    <AccordionContent>
-                      <Markdown children={item.content} />
-                    </AccordionContent>
-                  </AccordionItem>
+                  <div className='mb-2 rounded-lg border border-neutral-600/80 bg-[#272727]'>
+                    <Tilt
+                      tiltEnable={false}
+                      glareEnable={true}
+                      glareMaxOpacity={0.4}
+                      glareColor='rgba(251, 255, 70, 0.20)'
+                      glarePosition='all'
+                      className='flex-1'
+                      scale={1}>
+                      <AccordionItem
+                        value={`item-${item.id}`}
+                        key={item.id}
+                        ref={
+                          item.id === strippedItemId(activeItem)
+                            ? selectedAccordionRef
+                            : null
+                        }>
+                        <AccordionTrigger>{item.title}</AccordionTrigger>
+                        <AccordionContent>
+                          <Markdown children={item.content} />
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Tilt>
+                  </div>
                 ))}
               </Accordion.Root>
             </div>
@@ -102,7 +113,7 @@ const AccordionTrigger = forwardRef<
   <Accordion.Header className='flex'>
     <Accordion.Trigger
       className={classNames(
-        'group z-20 my-1 flex flex-1 items-center justify-between rounded-lg border border-neutral-600/80 bg-[#272727] p-4 text-base font-semibold leading-none outline-none hover:cursor-pointer data-[state=open]:rounded-b-none data-[state=open]:border-b-0 data-[state=open]:bg-[#404040] data-[state=open]:pb-6 2xl:text-lg',
+        'data- group z-20 flex flex-1 items-center justify-between rounded-lg p-4 text-base font-semibold leading-none outline-none hover:cursor-pointer data-[state=open]:rounded-b-none data-[state=open]:border-b-0 data-[state=open]:pb-6 2xl:text-lg',
         className
       )}
       {...props}
@@ -123,22 +134,12 @@ const AccordionContent = forwardRef<
 >(({ children, className, ...props }, forwardedRef) => (
   <Accordion.Content
     className={classNames(
-      'hide-scrollbar group relative z-10 -mt-4 mb-1 rounded-b-xl border border-neutral-600/80 bg-[#272727] group-data-[state=open]:pb-20 xl:overflow-hidden xl:overflow-y-scroll',
+      'hide-scrollbar group relative z-10 -mt-4 group-data-[state=open]:pb-20 xl:overflow-hidden xl:overflow-y-scroll',
       className
     )}
     {...props}
     ref={forwardedRef}>
-    <Tilt
-      tiltEnable={false}
-      glareEnable={true}
-      glareMaxOpacity={0.4}
-      glareColor='rgba(251, 255, 70, 0.10)'
-      glarePosition='all'
-      className='flex-1'>
-      <div className='border-t-5 data border-neutral-600/80 bg-[#272727] p-4 pt-4 group-data-[state=open]:bg-[#404040]'>
-        {children}
-      </div>
-    </Tilt>
+    <div className='border-t-5 data p-4 pt-4 '>{children}</div>
   </Accordion.Content>
 ))
 
