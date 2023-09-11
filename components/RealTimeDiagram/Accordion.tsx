@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import Image from 'next/image'
 import React, { forwardRef, useRef, useState } from 'react'
 import Markdown from '../../components/Markdown'
+import ChAccordion from '../Accordion-CH'
 import { SuiTitle } from '../sui'
 import accordionItems from './accordion-items.json'
 import Diagram from './Diagram'
@@ -50,7 +51,7 @@ const AccordionComponent = () => {
           <div className='lg:w-3/5 xl:mb-0'>
             <Diagram sectionId={strippedItemId(activeItem)} />
           </div>
-          <div className='w-full pt-4 lg:w-2/5 2xl:pt-5'>
+          <div className='w-full pt-4 lg:w-2/5 2xl:pt-2'>
             <div className='h-full w-full'>
               <Accordion.Root
                 id='accordionContainer'
@@ -101,20 +102,20 @@ const AccordionTrigger = forwardRef<
   <Accordion.Header className='flex'>
     <Accordion.Trigger
       className={classNames(
-        'group z-20 my-2 flex flex-1 items-center justify-between rounded-md border border-neutral-600/80 bg-[rgb(26,26,26)]/80 p-4 text-base font-semibold leading-none outline-none hover:cursor-pointer data-[state=open]:rounded-b-none data-[state=open]:border-b-0 data-[state=open]:bg-[#404040] data-[state=open]:pb-6 2xl:text-lg',
+        'group z-20 my-2 flex flex-1 items-center justify-between rounded-sm border border-jet bg-[rgb(26,26,26)]/80 p-4 pr-6 text-base font-[500] leading-none outline-none hover:cursor-pointer hover:bg-neutral-750 hover:bg-opacity-40 data-[state=open]:rounded-b-none data-[state=open]:border-b-0  data-[state=open]:bg-neutral-750 data-[state=open]:pb-2',
         className
       )}
       {...props}
       ref={forwardedRef}>
-      {children}
+      <p>{children}</p>
       <div className='relative flex items-center'>
         <PlusIcon
-          className='text-violet10 absolute right-3 h-5 w-5 transition-all duration-300 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:rotate-180 group-data-[state=open]:opacity-0'
-          aria-aria-hidden
+          className='absolute right-0 h-6 w-6 transition-all duration-[350ms] ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:-rotate-180 group-data-[state=open]:opacity-0'
+          aria-hidden
         />
         <MinusIcon
-          className='text-violet10 absolute right-3 h-5 w-5 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:block group-data-[state=open]:rotate-180 group-data-[state=open]:opacity-100'
-          aria-aria-hidden
+          className='absolute right-0 h-6 w-6 opacity-0 transition-all duration-[350ms] ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:block group-data-[state=open]:-rotate-180 group-data-[state=open]:opacity-100'
+          aria-hidden
         />
       </div>
     </Accordion.Trigger>
@@ -127,12 +128,12 @@ const AccordionContent = forwardRef<
 >(({ children, className, ...props }, forwardedRef) => (
   <Accordion.Content
     className={classNames(
-      'hide-scrollbar group relative z-10 mb-2 -mt-4 rounded-b-md border border-neutral-600/80 bg-[#272727] group-data-[state=open]:pb-20 xl:overflow-hidden xl:overflow-y-scroll',
+      'hide-scrollbar group relative z-10 mb-2 -mt-4 rounded-b-md border border-jet group-data-[state=open]:pb-20 xl:overflow-hidden xl:overflow-y-scroll',
       className
     )}
     {...props}
     ref={forwardedRef}>
-    <div className='border-t-5 data border-neutral-600/80 bg-[#272727] p-4 pt-4 group-data-[state=open]:bg-[#404040]'>
+    <div className='border-t-5 data border-jet p-4 pt-4 text-sm group-data-[state=open]:bg-neutral-750'>
       {children}
     </div>
   </Accordion.Content>

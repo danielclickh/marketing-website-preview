@@ -19,6 +19,7 @@ import faqs from './faqs.json'
 import features from './features.json'
 import quotes from './quotes.json'
 import Tilt from 'react-parallax-tilt'
+import ChAccordion from '../../../components/Accordion-CH'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
