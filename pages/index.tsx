@@ -23,6 +23,7 @@ import SpeedAnimationMobileSvg from '../components/SpeedAnimation/Mobile'
 
 import Link from 'next/link'
 import LogoCarousel from '../components/LogoCarousel'
+import VideoPlayButton from '../public/images/VideoPlayButton'
 
 const yellowPositionStyle = {
   '--left-side': 'auto',
@@ -207,14 +208,25 @@ export default function HomePage({
                 />
               </Link>
             </div>
-            <div className='mx-auto max-w-7xl px-3 py-24 text-black xl:px-0'>
-              <div className='flex flex-col gap-6 xl:flex-row'>
+            <div className='mx-auto max-w-7xl px-3 py-6 text-black xl:px-0'>
+              <div className='flex flex-col gap-6 xl:flex-row xl:gap-10'>
                 {[10, 20, 30].map((index) => {
                   return (
-                    <div
-                      key={index}
-                      className='card min-h-[200px] rounded-lg bg-red-900 xl:w-1/3'>
-                      ahdfs
+                    <div key={index} className='xl:w-1/3'>
+                      <div className='group flex min-h-[220px] items-center rounded-lg bg-red-900 p-4 hover:cursor-pointer'>
+                        <div className='mx-auto'>
+                          <VideoPlayButton className='transition-all group-hover:scale-110' />
+                        </div>
+                      </div>
+                      <p className='pt-4 text-base font-medium'>
+                        "Moving over to ClickHouse we were basically able to cut
+                        that (Redshift) bill in half."
+                      </p>
+                      <p className='pt-4 text-sm text-neutral-900/80'>
+                        Brooke McKim
+                        <br />
+                        Co-founder and CTO, Vantage
+                      </p>
                     </div>
                   )
                 })}
