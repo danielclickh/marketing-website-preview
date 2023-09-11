@@ -10,7 +10,7 @@ const Diagram: React.FC<DiagramProps> = ({ className, sectionId }) => {
 
   return (
     <div className={className}>
-      <div id='diagramContainer'>
+      <div id='diagramContainer' className='mlDiagramContainer'>
         {sections.map(({ id, component: SvgSection }) => (
           <div
             key={id}
