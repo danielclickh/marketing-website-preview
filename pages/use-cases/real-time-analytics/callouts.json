@@ -8,7 +8,7 @@
     {
         "id": 20,
         "title": "Simplify your SQL",
-        "content": "ClickHouse supports an extensive library of domain-specific functions that transform even the most complex and cumbersome queries into simple SQL statements. With ClickHouse, real-time data exploration is easy and powerful.",
+        "content": "ClickHouse supports an extensive library of domain-specific functions that transform even the most complex queries into simple SQL statements. With ClickHouse, real-time data exploration is easy and powerful.",
         "icon": "/images/use-cases/logging/ingest.svg"
     },
     {
