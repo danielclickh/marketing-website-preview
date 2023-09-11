@@ -213,7 +213,9 @@ export default function HomePage({
                 {[10, 20, 30].map((index) => {
                   return (
                     <div key={index} className='xl:w-1/3'>
-                      <div className='group flex min-h-[220px] items-center rounded-lg bg-red-900 p-4 hover:cursor-pointer'>
+                      <div
+                        className='group flex min-h-[220px] items-center rounded-lg bg-red-900 p-4 hover:cursor-pointer hover:shadow-md
+                      '>
                         <div className='mx-auto'>
                           <VideoPlayButton className='transition-all group-hover:scale-110' />
                         </div>
