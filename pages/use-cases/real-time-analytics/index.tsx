@@ -2,7 +2,8 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
-import { CUIButton, CUICard } from '../../../components/ClickUI'
+import Tilt from 'react-parallax-tilt'
+import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
@@ -18,8 +19,6 @@ import checkpoints from './checkpoints.json'
 import faqs from './faqs.json'
 import features from './features.json'
 import quotes from './quotes.json'
-import Tilt from 'react-parallax-tilt'
-import ChAccordion from '../../../components/Accordion-CH'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
