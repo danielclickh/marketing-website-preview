@@ -636,9 +636,12 @@ a.arrow-link {
 .rtDiagramContainer {
   .active-diagram-0 {
     .all {@apply opacity-100}
+    .many-others {@apply opacity-40}
   }
   .active-diagram-10 {
 .data-ingestion {@apply opacity-100}
+.many-others {@apply opacity-40}
+
 .data-transformations, .apps {@apply opacity-30}
   }
   .active-diagram-20 {
