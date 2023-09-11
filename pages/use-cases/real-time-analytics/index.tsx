@@ -18,6 +18,7 @@ import checkpoints from './checkpoints.json'
 import faqs from './faqs.json'
 import features from './features.json'
 import quotes from './quotes.json'
+import Tilt from 'react-parallax-tilt'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
@@ -211,59 +212,60 @@ export default function RealTimeAnalyticsPage({
                 <div className='p-10'>
                   <div className='flex flex-col gap-x-6 gap-y-6 lg:flex-row'>
                     {quotes.map((quote) => (
-                      <div className='w-full lg:w-1/3'>
-                        <CUICard
-                          key={quote.id}
-                          className='w-full bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
-                          <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
-                            {quote.href ? (
-                              <Link href={quote.href} target={quote.target}>
-                                <Image
-                                  src='/images/Quote.svg'
-                                  width={37}
-                                  height={28}
-                                  alt='Quote'
-                                  className='mb-4 block'
-                                />
-                                <SuiText
-                                  color='secondary'
-                                  className='text-left xl:h-[250px]'>
-                                  "{quote.content}"
-                                </SuiText>
-                              </Link>
-                            ) : (
-                              <>
-                                <Image
-                                  src='/images/Quote.svg'
-                                  width={37}
-                                  height={28}
-                                  alt='Quote'
-                                  className='mb-4 mt-10 block'
-                                />
-                                <SuiText
-                                  color='secondary'
-                                  className='text-left md:h-[490px] lg:h-[360px] xl:h-[250px]'>
-                                  "{quote.content}"
-                                </SuiText>
-                              </>
-                            )}
-                          </CUICard.Body>
-                          <CUICard.Footer>
-                            <Link
-                              className='mt-10 inline-block text-primary-300 xl:mt-0'
-                              href={quote.href}>
-                              Read more
-                            </Link>
+                      <Tilt
+                        tiltEnable={false}
+                        glareEnable={true}
+                        glareMaxOpacity={0.4}
+                        glareColor='rgba(251, 255, 70, 0.08)'
+                        glarePosition='all'
+                        className='flex-1'
+                        key={quote.id}>
+                        {quote.href ? (
+                          <Link href={quote.href} target={quote.target}>
+                            <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
+                              <Image
+                                src='/images/Quote.svg'
+                                width={37}
+                                height={28}
+                                alt='Quote'
+                                className='mb-4 block'
+                              />
+                              <SuiText
+                                color='secondary'
+                                className='min-h-auto text-left xl:min-h-[250px]'>
+                                "{quote.content}"
+                              </SuiText>
+                              <Image
+                                src={quote.logo}
+                                width={quote.imgWidth}
+                                height={quote.imgHeight}
+                                alt={quote.title}
+                                className='mt-12 xl:mt-auto'
+                              />
+                            </div>
+                          </Link>
+                        ) : (
+                          <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
+                            <Image
+                              src='/images/Quote.svg'
+                              width={37}
+                              height={28}
+                              alt='Quote'
+                              className='mb-4 block'
+                            />
+                            <SuiText color='secondary' className='text-left'>
+                              "{quote.content}"
+                            </SuiText>
                             <Image
                               src={quote.logo}
                               width={quote.imgWidth}
                               height={quote.imgHeight}
                               alt={quote.title}
-                              className='mb-4 mt-10 block'
+                              className='mt-12 xl:mt-auto'
                             />
-                          </CUICard.Footer>
-                        </CUICard>
-                      </div>
+                          </div>
+                        )}
+                      </Tilt>
                     ))}
                   </div>
                 </div>
