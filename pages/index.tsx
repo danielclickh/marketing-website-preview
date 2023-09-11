@@ -207,6 +207,19 @@ export default function HomePage({
                 />
               </Link>
             </div>
+            <div className='mx-auto max-w-7xl px-3 py-24 text-black xl:px-0'>
+              <div className='flex flex-col gap-6 xl:flex-row'>
+                {[10, 20, 30].map((index) => {
+                  return (
+                    <div
+                      key={index}
+                      className='card min-h-[200px] rounded-lg bg-red-900 xl:w-1/3'>
+                      ahdfs
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>
