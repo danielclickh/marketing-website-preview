@@ -170,7 +170,7 @@ export default function RealTimeAnalyticsPage({
                 <Image
                   src='/images/icon-shield.svg'
                   alt='icon'
-                  className='mb-6'
+                  className='mx-auto mb-6 xl:mx-0'
                   width={72}
                   height={72}
                 />
