@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React, { forwardRef, useRef, useState } from 'react'
 import Markdown from '../../components/Markdown'
 import { SuiTitle } from '../sui'
-import accordionItems from './building-a-logging-system.json'
+import accordionItems from './accordion-items.json'
 import Diagram from './Diagram'
 
 const AccordionComponent = () => {
@@ -27,16 +27,20 @@ const AccordionComponent = () => {
           height={73}
         />
         <SuiTitle type='h2' className='mt-8 text-center'>
-          ClickHouse for ML & AI
+          ClickHouse for Real-time Analytics
         </SuiTitle>
-        <p className='mx-auto mb-12 max-w-3xl px-9 pt-6 text-center'>
-          ClickHouse is purpose-built to make deriving insights from complex
-          data effortless. No matter how much data you're working with. Whether
-          you're extracting valuable information for model training and
-          evaluation through aggregations, running inference through our User
-          Defined Functions, or performing vector search, ClickHouse enables you
-          to maximize data efficiency and unlock the power of AI for any
-          application.
+        <p className='mx-auto mb-10 max-w-4xl px-9 pt-6 text-center'>
+          ClickHouse was built from the ground up to transform large-scale
+          real-time analytics, eliminating the operational complexities often
+          present in other traditional real-time systems, and ensuring that even
+          the most sophisticated data analysis can be done intuitively, using
+          simple SQL. 
+        </p>
+        <p className='mx-auto mb-12 max-w-3xl px-9 text-center'>
+          Our parallelized query execution engine, best-in-class compression
+          rates, and column-oriented design deliver unparalleled performance at
+          scale so that you can focus on insights and forget worrying about
+          infrastructure.
         </p>
       </div>
       <div className='mx-auto pb-12 md:px-12'>

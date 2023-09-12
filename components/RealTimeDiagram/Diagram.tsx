@@ -1,16 +1,15 @@
-import SvgSection1 from './SvgSection1'
-
+import RealTimeDiagram from '../../pages/use-cases/real-time-analytics/RealTimeDiagram'
 interface DiagramProps {
   className?: string
   sectionId?: number
 }
 
 const Diagram: React.FC<DiagramProps> = ({ className, sectionId }) => {
-  const sections = [{ id: 10, component: SvgSection1 }]
+  const sections = [{ id: 10, component: RealTimeDiagram }]
 
   return (
     <div className={className}>
-      <div id='diagramContainer' className='mlDiagramContainer'>
+      <div id='diagramContainer' className='rtDiagramContainer'>
         {sections.map(({ id, component: SvgSection }) => (
           <div
             key={id}
@@ -21,7 +20,7 @@ const Diagram: React.FC<DiagramProps> = ({ className, sectionId }) => {
             }`}
             id={`section-${id}`}>
             <SvgSection
-              className='mlDiagram relative w-full'
+              className='rtDiagram relative w-full'
               sectionId={sectionId}
             />
           </div>

@@ -215,7 +215,7 @@ export default function HomePage({
           <Image
             src='/speed-icon.svg'
             alt='Speed Icon'
-            width={72}
+            width={73}
             height={72}
           />
           <SuiTitle type='h2' className='mb-6 mt-8'>
@@ -298,7 +298,7 @@ export default function HomePage({
           <Image
             src='/deploy-icon.svg'
             alt='Deploy Icon'
-            width={72}
+            width={73}
             height={72}
           />
           <SuiTitle
