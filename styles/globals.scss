@@ -638,3 +638,7 @@ a.arrow-link {
 #snowflake-relatedcontent img {
   @apply object-contain h-auto;
 }
+
+.disable-scroll {
+  overflow: hidden;
+}

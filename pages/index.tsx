@@ -212,17 +212,32 @@ export default function HomePage({
                   {
                     videoId: '863656593',
                     type: 'vimeo',
-                    vimeoCode: 'ff50bb0ffb'
+                    vimeoCode: 'ff50bb0ffb',
+                    quote:
+                      'Moving over to ClickHouse we were basically able to cut that (Redshift) bill in half.',
+                    personName: 'Brooke McKim',
+                    personTitleAndCompany: 'Co-founder and CTO, Vantage',
+                    image: '/images/vantage-tile.png'
                   },
                   {
                     videoId: '863656379',
                     type: 'vimeo',
-                    vimeoCode: 'ec5de7be6d'
+                    vimeoCode: 'ec5de7be6d',
+                    quote:
+                      "There is that feeling of new tech where everything just feels like it's going right.",
+                    personName: 'Harlow Ward',
+                    personTitleAndCompany: 'CTO, Clearbit',
+                    image: '/images/clearbit-tile.png'
                   },
                   {
                     videoId: '863656471',
                     type: 'vimeo',
-                    vimeoCode: '72825b3c5e'
+                    vimeoCode: '72825b3c5e',
+                    quote:
+                      'We wanted something not only just simple to use, but also simple to manage.',
+                    personName: 'Jason Wang',
+                    personTitleAndCompany: 'Software Engineer, Statsig',
+                    image: '/images/statsig-tile.png'
                   }
                 ]}
               />
