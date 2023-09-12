@@ -47,13 +47,13 @@ function JoinCommunity({ github: { stars } }: Props) {
       </div>
       <div className='mx-auto flex w-full max-w-lg flex-col gap-8 bg-click-grid bg-bottom pb-24 text-right font-medium md:items-end md:pb-0'>
         <div className='absolute right-14 pt-4 font-basier text-5xl leading-none md:relative md:right-auto md:pt-0 md:text-7.5xl'>
-          1.2k+
+          1.3k+
           <span className='absolute top-full left-0 text-xl leading-snug text-primary-300 md:text-2.75xl'>
             Contributors
           </span>
         </div>
         <div className='absolute left-14 mr-auto pt-14 text-left font-basier text-5xl leading-none md:relative md:left-auto md:pt-0 md:text-7.5xl'>
-          32k+
+          36k+
           <span className='absolute top-full left-0 text-xl leading-snug text-primary-300 md:text-2.75xl'>
             PRs
           </span>
