@@ -2,16 +2,24 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import VideoPlayButton from '../../public/images/VideoPlayButton'
 
+declare global {
+  interface Window {
+    dataLayer: any[] // You can specify the dataLayer type if you know it
+  }
+}
+
+interface CustomerVideo {
+  videoId: string
+  vimeoCode?: string
+  type: 'youtube' | 'vimeo'
+  quote?: string
+  personName?: string
+  personTitleAndCompany?: string
+  image?: string
+}
+
 interface HomepageCustomerVideosProps {
-  videos: {
-    videoId: string
-    vimeoCode?: string
-    type: 'youtube' | 'vimeo'
-    quote?: string
-    personName?: string
-    personTitleAndCompany?: string
-    image?: string
-  }[]
+  videos: CustomerVideo[]
 }
 
 export default function HomepageCustomerVideos({
@@ -21,10 +29,22 @@ export default function HomepageCustomerVideos({
   const [vimeoCode, setVimeoCode] = useState<string | null>(null)
   const [fullscreen, setFullscreen] = useState(false)
 
-  const onVideoClicked = (video: any) => {
+  const onVideoClicked = (video: CustomerVideo) => {
     setFullscreen(true)
     setClickedVideo(video.videoId)
-    setVimeoCode(video.vimeoCode)
+    if (video.vimeoCode) {
+      setVimeoCode(video.vimeoCode)
+    }
+
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({
+        event: 'videoClick',
+        videoId: video.videoId,
+        videoQuote: video.quote,
+        videoPerson: video.personName,
+        videoPersonTitleAndCompany: video.personTitleAndCompany
+      })
+    }
   }
 
   const closeFullscreen = () => {
@@ -66,7 +86,9 @@ export default function HomepageCustomerVideos({
       <div className='flex flex-col gap-6 md:flex-row xl:gap-10'>
         {videos.map((video) => {
           return (
-            <div key={video.videoId} className='xl:w-1/3'>
+            <div
+              key={video.videoId}
+              className={`xl:w-1/3 homepage-video-${video.videoId}`}>
               <div
                 onClick={(e) => onVideoClicked(video)}
                 className='group relative flex items-center rounded-lg hover:cursor-pointer hover:shadow-md'>
