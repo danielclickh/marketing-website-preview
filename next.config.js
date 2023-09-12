@@ -292,7 +292,7 @@ const nextConfig = {
         permanent: true
       },
       {
-        source: ' /support/policy',
+        source: '/support/policy',
         destination: '/legal/support-services-policy',
         permanent: true
       },
