@@ -1,29 +1,27 @@
-import Image from 'next/image'
-import { SuiTitle } from '../components/sui'
-import { findOne } from '../lib/api/strapi'
-import GetStarted from '../components/GetStarted'
-import { HomePageProps } from '../types/homepage'
-import { GetStaticProps } from 'next'
-import Layout from '../components/Layout'
-import { getCommonProps } from '../lib/utils/getCommonProps'
-import FAQ from '../components/FAQ'
-import { CUIButton, CUICard, CUILink } from '../components/ClickUI'
-
 import { ChevronRightIcon } from '@heroicons/react/solid'
-import JoinCommunity from '../components/JoinCommunity'
-import HomePageTerminal from '../components/Terminal/HomePageTerminal'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { CSSProperties } from 'react'
+import { CUIButton, CUICard, CUILink } from '../components/ClickUI'
+import ColumnOrientedIllustration from '../components/ColumnOrientedIllustration'
 // import SpeedAnimation from '../components/SpeedAnimation'
 import DevelopersSection from '../components/DevelopersSection'
-import { CSSProperties } from 'react'
+import FAQ from '../components/FAQ'
+import GetStarted from '../components/GetStarted'
+import HomepageCustomerVideos from '../components/HomepageVideos'
 import HRSeparator from '../components/HRSeparator'
+import JoinCommunity from '../components/JoinCommunity'
+import Layout from '../components/Layout'
+import LogoCarousel from '../components/LogoCarousel'
 import RowOrientedIllustration from '../components/RowOrientedIllustration'
-import ColumnOrientedIllustration from '../components/ColumnOrientedIllustration'
 import SpeedAnimationSvg from '../components/SpeedAnimation'
 import SpeedAnimationMobileSvg from '../components/SpeedAnimation/Mobile'
-
-import Link from 'next/link'
-import LogoCarousel from '../components/LogoCarousel'
-import VideoPlayButton from '../public/images/VideoPlayButton'
+import { SuiTitle } from '../components/sui'
+import HomePageTerminal from '../components/Terminal/HomePageTerminal'
+import { findOne } from '../lib/api/strapi'
+import { getCommonProps } from '../lib/utils/getCommonProps'
+import { HomePageProps } from '../types/homepage'
 
 const yellowPositionStyle = {
   '--left-side': 'auto',
@@ -209,30 +207,25 @@ export default function HomePage({
               </Link>
             </div>
             <div className='mx-auto max-w-7xl px-3 py-6 text-black xl:px-0'>
-              <div className='flex flex-col gap-6 xl:flex-row xl:gap-10'>
-                {[10, 20, 30].map((index) => {
-                  return (
-                    <div key={index} className='xl:w-1/3'>
-                      <div
-                        className='group flex min-h-[220px] items-center rounded-lg bg-red-900 p-4 hover:cursor-pointer hover:shadow-md
-                      '>
-                        <div className='mx-auto'>
-                          <VideoPlayButton className='transition-all group-hover:scale-110' />
-                        </div>
-                      </div>
-                      <p className='pt-4 text-base font-medium'>
-                        "Moving over to ClickHouse we were basically able to cut
-                        that (Redshift) bill in half."
-                      </p>
-                      <p className='pt-4 text-sm text-neutral-900/80'>
-                        Brooke McKim
-                        <br />
-                        Co-founder and CTO, Vantage
-                      </p>
-                    </div>
-                  )
-                })}
-              </div>
+              <HomepageCustomerVideos
+                videos={[
+                  {
+                    videoId: '863656593',
+                    type: 'vimeo',
+                    vimeoCode: 'ff50bb0ffb'
+                  },
+                  {
+                    videoId: '863656379',
+                    type: 'vimeo',
+                    vimeoCode: 'ec5de7be6d'
+                  },
+                  {
+                    videoId: '863656471',
+                    type: 'vimeo',
+                    vimeoCode: '72825b3c5e'
+                  }
+                ]}
+              />
             </div>
           </div>
         </div>
