@@ -122,7 +122,7 @@ export default function HomepageCustomerVideos({
         <div
           id='videoOverlayFullscreen'
           className='fixed top-0 left-0 z-[60] min-h-screen w-full overflow-hidden bg-neutral-725/90 backdrop-blur-[10px]'>
-          <div className='relative z-[60] mx-auto min-h-screen max-w-3xl px-4 pt-40 md:pt-10 2xl:max-w-7xl'>
+          <div className='relative z-[60] mx-auto min-h-screen max-w-3xl px-4 pt-20 md:pt-10 2xl:max-w-7xl'>
             <div
               className='cursor-pointer'
               onClick={(e) => setFullscreen(false)}>
