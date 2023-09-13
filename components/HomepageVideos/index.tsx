@@ -83,7 +83,7 @@ export default function HomepageCustomerVideos({
 
   return (
     <>
-      <div className='flex flex-col gap-6 md:flex-row xl:gap-10'>
+      <div className='flex flex-col gap-6 px-4 md:flex-row xl:gap-10 2xl:px-0'>
         {videos.map((video) => {
           return (
             <div

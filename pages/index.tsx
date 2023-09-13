@@ -226,7 +226,7 @@ export default function HomePage({
                     quote:
                       "There is that feeling of new tech where everything just feels like it's going right.",
                     personName: 'Harlow Ward',
-                    personTitleAndCompany: 'CTO, Clearbit',
+                    personTitleAndCompany: 'Co-founder and CTO, Clearbit',
                     image: '/images/clearbit-tile.png'
                   },
                   {
