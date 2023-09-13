@@ -1,28 +1,27 @@
-import Image from 'next/image'
-import { SuiTitle } from '../components/sui'
-import { findOne } from '../lib/api/strapi'
-import GetStarted from '../components/GetStarted'
-import { HomePageProps } from '../types/homepage'
-import { GetStaticProps } from 'next'
-import Layout from '../components/Layout'
-import { getCommonProps } from '../lib/utils/getCommonProps'
-import FAQ from '../components/FAQ'
-import { CUIButton, CUICard, CUILink } from '../components/ClickUI'
-
 import { ChevronRightIcon } from '@heroicons/react/solid'
-import JoinCommunity from '../components/JoinCommunity'
-import HomePageTerminal from '../components/Terminal/HomePageTerminal'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { CSSProperties } from 'react'
+import { CUIButton, CUICard, CUILink } from '../components/ClickUI'
+import ColumnOrientedIllustration from '../components/ColumnOrientedIllustration'
 // import SpeedAnimation from '../components/SpeedAnimation'
 import DevelopersSection from '../components/DevelopersSection'
-import { CSSProperties } from 'react'
+import FAQ from '../components/FAQ'
+import GetStarted from '../components/GetStarted'
+import HomepageCustomerVideos from '../components/HomepageVideos'
 import HRSeparator from '../components/HRSeparator'
+import JoinCommunity from '../components/JoinCommunity'
+import Layout from '../components/Layout'
+import LogoCarousel from '../components/LogoCarousel'
 import RowOrientedIllustration from '../components/RowOrientedIllustration'
-import ColumnOrientedIllustration from '../components/ColumnOrientedIllustration'
 import SpeedAnimationSvg from '../components/SpeedAnimation'
 import SpeedAnimationMobileSvg from '../components/SpeedAnimation/Mobile'
-
-import Link from 'next/link'
-import LogoCarousel from '../components/LogoCarousel'
+import { SuiTitle } from '../components/sui'
+import HomePageTerminal from '../components/Terminal/HomePageTerminal'
+import { findOne } from '../lib/api/strapi'
+import { getCommonProps } from '../lib/utils/getCommonProps'
+import { HomePageProps } from '../types/homepage'
 
 const yellowPositionStyle = {
   '--left-side': 'auto',
@@ -175,9 +174,9 @@ export default function HomePage({
             <HomePageTerminal />
           </div>
         </div>
-        <div className='flip-selection -mt-1 bg-primary-300 pt-16 pb-16'>
+        <div className='flip-selection -mt-1 bg-primary-300 pt-16 '>
           <div className='mx-auto'>
-            <div className='mx-auto mb-8 w-fit max-w-4xl px-4 py-6 pt-10 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
+            <div className='mx-auto mb-8 w-fit max-w-4xl px-4 py-6 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
               Trusted by developers that work with data at{' '}
               <span className='tilted tilted-black'>
                 <span className='tilted-content leading-8'>scale</span>
@@ -197,7 +196,7 @@ export default function HomePage({
                 speedClass2='animate-marqueeLeft4'
               />
             </div>
-            <div className='mx-auto w-fit max-w-4xl px-4 py-6 pb-12 pt-10 text-center text-base leading-normal text-primary-800 md:px-0'>
+            <div className='mx-auto w-fit max-w-4xl px-4 py-6 pb-0 pt-10 text-center text-base leading-normal text-primary-800 md:px-0'>
               Don't take our word for it.{' '}
               <Link href='/user-stories' className='font-bold hover:underline'>
                 Read our user stories{' '}
@@ -206,6 +205,42 @@ export default function HomePage({
                   className='-mt-0.5 inline-block transition group-hover:translate-x-1/2'
                 />
               </Link>
+            </div>
+            <div className='mx-auto max-w-7xl py-24 px-3 text-black xl:px-0'>
+              <HomepageCustomerVideos
+                videos={[
+                  {
+                    videoId: '863656593',
+                    type: 'vimeo',
+                    vimeoCode: 'ff50bb0ffb',
+                    quote:
+                      'Moving over to ClickHouse we were basically able to cut that (Redshift) bill in half.',
+                    personName: 'Brooke McKim',
+                    personTitleAndCompany: 'Co-founder and CTO, Vantage',
+                    image: '/images/vantage-tile.png'
+                  },
+                  {
+                    videoId: '863656379',
+                    type: 'vimeo',
+                    vimeoCode: 'ec5de7be6d',
+                    quote:
+                      "There is that feeling of new tech where everything just feels like it's going right.",
+                    personName: 'Harlow Ward',
+                    personTitleAndCompany: 'Co-founder and CTO, Clearbit',
+                    image: '/images/clearbit-tile.png'
+                  },
+                  {
+                    videoId: '863656471',
+                    type: 'vimeo',
+                    vimeoCode: '72825b3c5e',
+                    quote:
+                      'We wanted something not only just simple to use, but also simple to manage.',
+                    personName: 'Jason Wang',
+                    personTitleAndCompany: 'Software Engineer, Statsig',
+                    image: '/images/statsig-tile.png'
+                  }
+                ]}
+              />
             </div>
           </div>
         </div>
