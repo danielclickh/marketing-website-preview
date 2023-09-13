@@ -174,7 +174,7 @@ export default function HomePage({
             <HomePageTerminal />
           </div>
         </div>
-        <div className='flip-selection -mt-1 bg-primary-300 pt-16 pb-16'>
+        <div className='flip-selection -mt-1 bg-primary-300 pt-16 '>
           <div className='mx-auto'>
             <div className='mx-auto mb-8 w-fit max-w-4xl px-4 py-6 pt-10 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
               Trusted by developers that work with data at{' '}
