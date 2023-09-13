@@ -196,7 +196,7 @@ export default function HomePage({
                 speedClass2='animate-marqueeLeft4'
               />
             </div>
-            <div className='mx-auto w-fit max-w-4xl px-4 py-6 pb-12 pt-10 text-center text-base leading-normal text-primary-800 md:px-0'>
+            <div className='mx-auto w-fit max-w-4xl px-4 py-6 pb-0 pt-10 text-center text-base leading-normal text-primary-800 md:px-0'>
               Don't take our word for it.{' '}
               <Link href='/user-stories' className='font-bold hover:underline'>
                 Read our user stories{' '}
@@ -206,7 +206,7 @@ export default function HomePage({
                 />
               </Link>
             </div>
-            <div className='mx-auto max-w-7xl px-3 py-6 text-black xl:px-0'>
+            <div className='mx-auto max-w-7xl py-24 px-3 text-black xl:px-0'>
               <HomepageCustomerVideos
                 videos={[
                   {

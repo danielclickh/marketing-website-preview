@@ -91,7 +91,8 @@ export default function HomepageCustomerVideos({
               className={`xl:w-1/3 homepage-video-${video.videoId}`}>
               <div
                 onClick={(e) => onVideoClicked(video)}
-                className='group relative flex items-center rounded-lg hover:cursor-pointer hover:shadow-md'>
+                className='group relative flex items-center overflow-hidden rounded-lg hover:cursor-pointer hover:shadow-md'>
+                <div className='absolute hidden h-full w-full bg-black/[0.65] group-hover:block'></div>
                 <Image
                   src={video.image as string}
                   alt={video.quote as string}
@@ -99,11 +100,11 @@ export default function HomepageCustomerVideos({
                   height={420}
                 />
                 <div className='absolute flex h-full w-full items-center justify-center'>
-                  <VideoPlayButton className='transition-all group-hover:scale-110' />
+                  <VideoPlayButton className='transition-all group-hover:scale-150' />
                 </div>
               </div>
               {video.quote && (
-                <p className='pt-4 text-base font-medium'>"{video.quote}"</p>
+                <p className='pt-4 text-base font-bold'>"{video.quote}"</p>
               )}
               {video.personName && (
                 <p className='pt-4 text-sm text-neutral-900'>

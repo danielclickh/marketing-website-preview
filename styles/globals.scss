@@ -518,8 +518,10 @@ a.arrow-link {
 
 .plyr {
   @apply rounded-lg;
-  --plyr-color-main: #414141;
-  --plyr-video-control-color: #fcff74;
+  --plyr-color-main: #fcff74;
+  --plyr-video-control-color: #000000;
+  --plyr-video-control-color-hover: #000000;
+
   @apply w-full aspect-video h-auto;
   &.plyr--paused {
     .plyr__video-wrapper {
@@ -531,13 +533,24 @@ a.arrow-link {
     }
   }
   .plyr__control.plyr__control--overlaid {
-    @apply flex items-center gap-3 rounded-[4rem] px-8 py-4 opacity-100 #{!important};
+    @apply flex items-center gap-3 rounded-[4rem] p-4 opacity-100 #{!important};
     &::after {
-      content: "Watch Video";
-      @apply whitespace-nowrap text-base font-semibold text-neutral-0;
+      @apply whitespace-nowrap text-base font-semibold;
     }
   }
+  .plyr__control--overlaid {
+    transform: initial;
+    top:40%;
+    left:45%
+  }
+
+
+  .plyr__control:hover {
+    transform: scale(1.5);
+  }
 }
+
+
 
 @keyframes pulseEffect {
   from {
