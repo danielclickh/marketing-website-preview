@@ -106,7 +106,7 @@ export default function HomepageCustomerVideos({
                 <p className='pt-4 text-base font-medium'>"{video.quote}"</p>
               )}
               {video.personName && (
-                <p className='pt-4 text-sm text-neutral-900/80'>
+                <p className='pt-4 text-sm text-neutral-900'>
                   {video.personName}
                   <br />
                   {video.personTitleAndCompany && (
@@ -122,7 +122,7 @@ export default function HomepageCustomerVideos({
         <div
           id='videoOverlayFullscreen'
           className='fixed top-0 left-0 z-[60] min-h-screen w-full overflow-hidden bg-neutral-725/90 backdrop-blur-[10px]'>
-          <div className='relative z-[60] mx-auto min-h-screen max-w-7xl px-4 pt-40 md:pt-10'>
+          <div className='relative z-[60] mx-auto min-h-screen max-w-3xl px-4 pt-40 md:pt-10 2xl:max-w-7xl'>
             <div
               className='cursor-pointer'
               onClick={(e) => setFullscreen(false)}>
