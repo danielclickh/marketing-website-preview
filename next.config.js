@@ -301,6 +301,11 @@ const nextConfig = {
         destination:
           'https://clickhouse.cloud/signUp?utm_medium=video&utm_source=clickhouse&utm_campaign=testimonials',
         permanent: true
+      },
+      {
+        source: '/support/agreement',
+        destination: '/legal/agreements/support',
+        permanent: true
       }
     ]
   }
