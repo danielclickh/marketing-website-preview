@@ -62,7 +62,7 @@ export default function HomepageCustomerVideos({
       }
 
       // Check if the viewport height is greater than a certain threshold
-      setIsShortScreen(window.innerHeight <= 850) // Adjust the threshold as needed
+      setIsShortScreen(window.innerHeight <= 995) // Adjust the threshold as needed
     }
 
     // Add or remove the class based on the fullscreen state
