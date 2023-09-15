@@ -28,6 +28,7 @@ export default function HomepageCustomerVideos({
   const [clickedVideo, setClickedVideo] = useState<string | null>(null)
   const [vimeoCode, setVimeoCode] = useState<string | null>(null)
   const [fullscreen, setFullscreen] = useState(false)
+  const [isShortScreen, setIsShortScreen] = useState(false) // Add state to track tall screens
 
   const onVideoClicked = (video: CustomerVideo) => {
     setFullscreen(true)
@@ -59,6 +60,9 @@ export default function HomepageCustomerVideos({
       } else {
         document.body.classList.remove('disable-scroll')
       }
+
+      // Check if the viewport height is greater than a certain threshold
+      setIsShortScreen(window.innerHeight <= 995) // Adjust the threshold as needed
     }
 
     // Add or remove the class based on the fullscreen state
@@ -92,7 +96,7 @@ export default function HomepageCustomerVideos({
               <div
                 onClick={(e) => onVideoClicked(video)}
                 className='group relative flex items-center overflow-hidden rounded-lg hover:cursor-pointer hover:shadow-md'>
-                <div className='absolute hidden h-full w-full bg-black/[0.65] group-hover:block'></div>
+                <div className='absolute h-full w-full bg-black/[0.65] opacity-0 transition-all group-hover:opacity-90'></div>
                 <Image
                   src={video.image as string}
                   alt={video.quote as string}
@@ -122,8 +126,12 @@ export default function HomepageCustomerVideos({
       {fullscreen && (
         <div
           id='videoOverlayFullscreen'
-          className='fixed top-0 left-0 z-[60] min-h-screen w-full overflow-hidden bg-neutral-725/90 backdrop-blur-[10px]'>
-          <div className='relative z-[60] mx-auto min-h-screen max-w-3xl px-4 pt-20 md:pt-10 2xl:max-w-7xl'>
+          className='fixed top-0 left-0 z-[60] w-full overflow-hidden bg-neutral-725/90 backdrop-blur-[10px]'>
+          <div
+            id='videoPlayerContainer'
+            className={`relative z-[60] mx-auto min-h-screen  px-4 pt-20 md:pt-10  ${
+              isShortScreen ? 'max-w-3xl' : 'max-w-3xl 2xl:max-w-7xl'
+            }`}>
             <div
               className='cursor-pointer'
               onClick={(e) => setFullscreen(false)}>
