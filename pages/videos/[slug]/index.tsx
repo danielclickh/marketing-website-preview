@@ -83,7 +83,7 @@ export default function VideoPage({
 
           {video.type === 'vimeo' && <iframe
             className="absolute inset-0 w-full h-full"
-            src={`https://player.vimeo.com/video/${video.id}?&;badge=0&autopause=0&player_id=0&app_id=58479`}
+            src={`https://player.vimeo.com/video/${video.id}?badge=0&autopause=0&player_id=0&app_id=58479`}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />}
         </div>
