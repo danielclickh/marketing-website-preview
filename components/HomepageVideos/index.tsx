@@ -96,7 +96,7 @@ export default function HomepageCustomerVideos({
               <div
                 onClick={(e) => onVideoClicked(video)}
                 className='group relative flex items-center overflow-hidden rounded-lg hover:cursor-pointer hover:shadow-md'>
-                <div className='absolute hidden h-full w-full bg-black/[0.65] group-hover:block'></div>
+                <div className='absolute h-full w-full bg-black/[0.65] opacity-0 transition-all group-hover:opacity-90'></div>
                 <Image
                   src={video.image as string}
                   alt={video.quote as string}
