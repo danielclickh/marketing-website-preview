@@ -11,6 +11,16 @@ const nextConfig = {
       path.join(__dirname, 'pages/**/*.module.scss')
     ]
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'img.youtube.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
   async headers() {
     return [
       {
