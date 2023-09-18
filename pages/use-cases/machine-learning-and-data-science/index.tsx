@@ -377,16 +377,14 @@ export default function MLUseCasePage({
                     <li>
                       <Link
                         href='/blog/query-analyze-hugging-face-datasets-with-clickhouse'
-                        className='text-primary-300'
-                        target='_blank'>
+                        className='text-primary-300'>
                         Analyzing Hugging Face datasets with ClickHouse
                       </Link>
                     </li>
                     <li>
                       <Link
                         href='/blog/clickhouse-open-ai-user-defined-functions-udfs'
-                        className='text-primary-300'
-                        target='_blank'>
+                        className='text-primary-300'>
                         Using ClickHouse UDFs to integrate with OpenAI models
                       </Link>
                     </li>
