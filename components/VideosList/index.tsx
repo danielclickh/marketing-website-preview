@@ -1,28 +1,25 @@
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from 'next/router'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { getVideos, getCategories } from '../../lib/videos'
-import VideoPlayButton from "../../public/images/VideoPlayButton";
+import { getVideos, getCategories, getCategory } from '../../lib/videos'
 import { SuiSearchField } from '../sui'
 import CategorySelector from '../CategorySelector'
-import { CUICard } from '../ClickUI'
+import VideoCard from '../VideoCard'
 
 export default function VideosList() {
 
   const router = useRouter()
 
-  const defaultCategory = 'View all';
-  const [category, setCategory] = useState<string>(defaultCategory)
-  const [search, setSearch] = useState<string | null>(null)
+  const [category, setCategory] = useState<string|null>(null)
+  const [search, setSearch] = useState<string|null>(null)
 
   const searchChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value.trim().toLowerCase())
 
   const videoList = (() => {
     let results = getVideos();
+    const categoryName = category ? getCategory(category) : false;
 
-    if (category && category !== defaultCategory) {
-      results = results.filter(video => video.categories.includes(category))
+    if (categoryName) {
+      results = results.filter(video => video.categories.includes(categoryName))
     }
 
     if (search) {
@@ -36,15 +33,26 @@ export default function VideosList() {
     return results
   })()
 
-  const categoryList = [defaultCategory, ...getCategories()].map(categoryName => {
-    return {
-      text: categoryName,
-      selected: categoryName === category,
+  const categoryList = [
+    {
+      text: 'View all',
+      selected: !category,
       onClick() {
-        setCategory(categoryName)
+        setCategory(null)
       }
     }
-  })
+  ];
+
+  // Push categories to list
+  getCategories().forEach((name, slug) => {
+    categoryList.push({
+      text: name,
+      selected: slug === category,
+      onClick() {
+        setCategory(slug)
+      }
+    })
+  });
 
   // Load values from query string
   useEffect(() => {
@@ -52,10 +60,12 @@ export default function VideosList() {
     const urlCategory = queryParams.get('category')
     const urlSearch = queryParams.get('search')
 
-    if (urlCategory && String(urlCategory).trim().length) {
+    // Check the url category is valid using the `getCategory` function
+    if (urlCategory && String(urlCategory).trim().length && getCategory(String(urlCategory).trim())) {
       setCategory(urlCategory)
     }
 
+    // Check the search query is not empty
     if (urlSearch && String(urlSearch).trim().length) {
       setSearch(urlSearch)
     }
@@ -65,7 +75,7 @@ export default function VideosList() {
   useEffect(() => {
     const queryParams = [];
 
-    if (category && category !== defaultCategory) {
+    if (category && getCategory(category)) {
       queryParams.push(`category=${encodeURIComponent(category)}`);
     }
 
@@ -97,33 +107,9 @@ export default function VideosList() {
         <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
           {videoList.map((video) => {
             return (
-              <Link
-                key={video.id} href={`/videos/${video.id}`}
-                className='transition ease-in-out hover:no-underline hover:-translate-y-1 hover:scale-102'>
-                <CUICard>
-                  <CUICard.Body>
-                    <div className='relative overflow-hidden rounded-t-lg'>
-                      <Image
-                        src={video.thumbnail}
-                        alt={video.title}
-                        width={774}
-                        height={420} />
-
-                      <div className='absolute h-full w-full top-0 left-0 flex items-center justify-center'>
-                        <VideoPlayButton className='transition-all group-hover:scale-150' />
-                      </div>
-                    </div>
-
-                    <div className='p-6 font-basier text-xl font-medium leading-tight  text-neutral-100'>
-                      <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
-                        {video.categories.join(', ')}
-                      </div>
-                      <p>{video.title}</p>
-                      {video?.subTitle && <p className='pt-4 text-sm whitespace-pre-wrap'>{video.subTitle}</p>}
-                    </div>
-                  </CUICard.Body>
-                </CUICard>
-              </Link>
+              <div key={video.slug}>
+                <VideoCard video={video} />
+              </div>
             )
           })}
         </div>
@@ -131,7 +117,7 @@ export default function VideosList() {
         {!videoList.length && (
           <p className='text-center w-full mt-12'>
             {search ? `No search results for "${search}"` : 'No results'}
-            {category && category !== defaultCategory ? ` in ${category}` : ''}
+            {category && getCategory(category) ? ` in ${getCategory(category)}` : ''}
           </p>
         )}
 
