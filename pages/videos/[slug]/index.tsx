@@ -86,7 +86,7 @@ export default function VideoPage({
         <ResponsiveEmbed html={video.embed} />
       </div>
 
-      <div className='container mx-auto flex max-w-3xl 2xl:px-0 mt-10 mb-20'>
+      <div className='container mx-auto flex max-w-3xl px-6 2xl:px-0 mt-10 mb-20'>
         <div className='flex w-full flex-col gap-3'>
           {video.subTitle && <h2 className='text-xl whitespace-pre-wrap'>{video.subTitle}</h2>}
           {video.description && <p>{video.description}</p>}
