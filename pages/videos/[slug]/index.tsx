@@ -1,11 +1,11 @@
 import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from 'next'
 import Link from "next/link";
-import { ParsedUrlQuery } from "querystring";
+import { ParsedUrlQuery } from 'querystring'
 import React from 'react'
 import FollowUs from '../../../components/FollowUs'
 import Layout from '../../../components/Layout'
-import { SuiButton, SuiTitle } from "../../../components/sui";
-import VideoCard from "../../../components/VideoCard";
+import { SuiButton, SuiTitle } from '../../../components/sui'
+import VideoCard from '../../../components/VideoCard'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import { slugify } from "../../../lib/utils/strings";
@@ -76,17 +76,19 @@ export default function VideoPage({
                 {video.categories?.[0]}
               </Link>}
             </h4>
-            <h1 className='mt-6 mb-8 font-basier text-4xl font-bold text-neutral-100 '>
+            <h1 className='mt-6 font-basier text-4xl font-bold text-neutral-100 '>
               <span className='leading-snug'>{video.title}</span>
             </h1>
-            {video.subTitle && <h2 className='text-2xl mt-2 whitespace-pre-wrap'>{video.subTitle}</h2>}
           </div>
         </div>
 
         <div className='container mx-auto flex max-w-3xl px-6 pt-20 2xl:px-0'>
-          <div className='flex w-full flex-col pb-20'>
+          <div className='flex w-full flex-col gap-10 pb-20'>
             <ResponsiveEmbed html={video.embed} />
-            {video.description && <p className='mt-10'>{video.description}</p>}
+            <div>
+              {video.subTitle && <h2 className='text-xl whitespace-pre-wrap mb-3'>{video.subTitle}</h2>}
+              {video.description && <p>{video.description}</p>}
+            </div>
           </div>
         </div>
 
@@ -106,16 +108,16 @@ export default function VideoPage({
                 path='/videos'
                 type='empty'
                 color='primary'
-                className='font-base border border-primary-300/50	'>
+                className='font-base border border-primary-300/50'>
               View all Videos
             </SuiButton>
           </div>
           <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
             {getVideos().filter(item => item.slug !== video.slug).map((item) => {
               return (
-                  <div key={item.slug}>
-                    <VideoCard video={item} />
-                  </div>
+                <div key={item.slug}>
+                  <VideoCard video={item} />
+                </div>
               )
             })}
           </div>

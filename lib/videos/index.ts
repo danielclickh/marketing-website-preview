@@ -1,6 +1,6 @@
 import slug from "../../pages/company/events/[slug]";
 import { Video, VideoCategory } from './types'
-import { slugify } from '../../lib/utils/strings'
+import { slugify } from '../utils/strings'
 
 export function getVideos(): Video[] {
   return [
