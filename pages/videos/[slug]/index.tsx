@@ -6,6 +6,7 @@ import FollowUs from '../../../components/FollowUs'
 import Layout from '../../../components/Layout'
 import { SuiButton, SuiTitle } from '../../../components/sui'
 import VideoCard from '../../../components/VideoCard'
+import VideoPlayer from "../../../components/VideoPlayer";
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import { slugify } from "../../../lib/utils/strings";
@@ -84,7 +85,7 @@ export default function VideoPage({
 
         <div className='container mx-auto flex max-w-3xl px-6 pt-20 2xl:px-0'>
           <div className='flex w-full flex-col gap-10 pb-20'>
-            <ResponsiveEmbed html={video.embed} />
+            <VideoPlayer provider={video.provider} videoId={video.id} />
             <div>
               {video.subTitle && <h2 className='text-xl whitespace-pre-wrap mb-3'>{video.subTitle}</h2>}
               {video.description && <p>{video.description}</p>}
