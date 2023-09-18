@@ -6,7 +6,6 @@ import FollowUs from '../../../components/FollowUs'
 import Layout from '../../../components/Layout'
 import { SuiButton, SuiTitle } from '../../../components/sui'
 import VideoCard from '../../../components/VideoCard'
-import VideoPlayer from "../../../components/VideoPlayer";
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import { slugify } from "../../../lib/utils/strings";
@@ -68,34 +67,33 @@ export default function VideoPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='pt-10'>
-        <div className='container mx-auto flex max-w-3xl flex-col px-6 2xl:px-0'>
-          <div className='mx-auto flex flex-col pt-6 text-center'>
-            <h4 className='text-base font-semibold text-primary-300'>
-              <Link href='/videos'>Videos</Link>{video.categories?.[0] && ` / `}
-              {video.categories?.[0] && <Link href={`/videos?category=${slugify(video.categories?.[0])}`}>
-                {video.categories?.[0]}
-              </Link>}
-            </h4>
-            <h1 className='mt-6 font-basier text-4xl font-bold text-neutral-100 '>
-              <span className='leading-snug'>{video.title}</span>
-            </h1>
-          </div>
-        </div>
 
-        <div className='container mx-auto flex max-w-3xl px-6 pt-20 2xl:px-0'>
-          <div className='flex w-full flex-col gap-10 pb-20'>
-            <VideoPlayer provider={video.provider} videoId={video.id} />
-            <div>
-              {video.subTitle && <h2 className='text-xl whitespace-pre-wrap mb-3'>{video.subTitle}</h2>}
-              {video.description && <p>{video.description}</p>}
-            </div>
-          </div>
+      <div className='container mx-auto flex max-w-3xl flex-col px-6 2xl:px-0 my-20'>
+        <div className='mx-auto flex flex-col text-center'>
+          <h4 className='text-base font-semibold text-primary-300'>
+            <Link href='/videos'>Videos</Link>{video.categories?.[0] && ` / `}
+            {video.categories?.[0] && <Link href={`/videos?category=${slugify(video.categories?.[0])}`}>
+              {video.categories?.[0]}
+            </Link>}
+          </h4>
+          <h1 className='mt-6 font-basier text-4xl font-bold text-neutral-100'>
+            <span className='leading-snug'>{video.title}</span>
+          </h1>
         </div>
-
       </div>
 
-      <div className='flex w-full pb-8 text-neutral-0 '>
+      <div className='container mx-auto max-w-4xl px-6 2xl:px-0 mt-20 mb-10'>
+        <ResponsiveEmbed html={video.embed} />
+      </div>
+
+      <div className='container mx-auto flex max-w-3xl 2xl:px-0 mt-10 mb-20'>
+        <div className='flex w-full flex-col gap-3'>
+          {video.subTitle && <h2 className='text-xl whitespace-pre-wrap'>{video.subTitle}</h2>}
+          {video.description && <p>{video.description}</p>}
+        </div>
+      </div>
+
+      <div className='flex w-full pb-8 text-neutral-0 my-20'>
         <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pt-12 pb-8 md:bg-no-repeat 2xl:px-0'>
           <div className='flex justify-between pb-8'>
             <SuiTitle
@@ -124,6 +122,7 @@ export default function VideoPage({
           </div>
         </div>
       </div>
+
       <FollowUs />
     </Layout>
   )
