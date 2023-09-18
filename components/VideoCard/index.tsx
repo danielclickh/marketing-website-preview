@@ -1,0 +1,37 @@
+import Image from 'next/image'
+import Link from 'next/link'
+import VideoPlayButton from '../../public/images/VideoPlayButton'
+import { CUICard } from '../ClickUI'
+import { VideoCardProps } from './types'
+
+export default function VideoCard({video}: VideoCardProps) {
+    return (
+        <Link href={`/videos/${video.slug}`}
+            className='group transition ease-in-out hover:no-underline hover:-translate-y-1 hover:scale-102'>
+            <CUICard>
+                <CUICard.Body>
+                    <div className='relative overflow-hidden rounded-t-lg'>
+                        <div className='absolute h-full w-full transition bg-black/[0.65] opacity-0 group-hover:opacity-100'></div>
+                        <Image
+                            src={video.thumbnail}
+                            alt={video.title}
+                            width={774}
+                            height={420} />
+
+                        <div className='absolute h-full w-full top-0 left-0 flex items-center justify-center'>
+                            <VideoPlayButton className='transition-all group-hover:scale-150' />
+                        </div>
+                    </div>
+
+                    <div className='p-6 font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                        <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
+                            {video.categories.join(', ')}
+                        </div>
+                        <p>{video.title}</p>
+                        {video?.subTitle && <p className='pt-4 text-sm whitespace-pre-wrap'>{video.subTitle}</p>}
+                    </div>
+                </CUICard.Body>
+            </CUICard>
+        </Link>
+    )
+}
