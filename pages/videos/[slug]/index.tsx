@@ -1,10 +1,14 @@
 import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from 'next'
+import Link from "next/link";
 import { ParsedUrlQuery } from "querystring";
 import React from 'react'
 import FollowUs from '../../../components/FollowUs'
 import Layout from '../../../components/Layout'
+import { SuiButton, SuiTitle } from "../../../components/sui";
+import VideoCard from "../../../components/VideoCard";
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
+import { slugify } from "../../../lib/utils/strings";
 import { CommonProps } from '../../../types/homepage'
 import { Video } from '../../../lib/videos/types'
 import { getVideos, getVideo } from '../../../lib/videos'
@@ -63,26 +67,61 @@ export default function VideoPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-
-      <div className='max-w-7xl container mx-auto px-8 2xl:px-0'>
-
-        <div className='my-10 text-center'>
-          <div className='font-inconsolata text-base font-medium text-primary-300'>
-            Videos / {video.categories?.[0]}
+      <div className='pt-10'>
+        <div className='container mx-auto flex max-w-3xl flex-col px-6 2xl:px-0'>
+          <div className='mx-auto flex flex-col pt-6 text-center'>
+            <h4 className='text-base font-semibold text-primary-300'>
+              <Link href='/videos'>Videos</Link>{video.categories?.[0] && ` / `}
+              {video.categories?.[0] && <Link href={`/videos?category=${slugify(video.categories?.[0])}`}>
+                {video.categories?.[0]}
+              </Link>}
+            </h4>
+            <h1 className='mt-6 mb-8 font-basier text-4xl font-bold text-neutral-100 '>
+              <span className='leading-snug'>{video.title}</span>
+            </h1>
+            {video.subTitle && <h2 className='text-2xl mt-2 whitespace-pre-wrap'>{video.subTitle}</h2>}
           </div>
-          <h1 className='font-basier text-4xl font-bold'>{video.title}</h1>
-          {video.subTitle && <h2 className='text-2xl mt-2 whitespace-pre-wrap'>{video.subTitle}</h2>}
-          {video.description && <p className='mt-10 max-w-2xl mx-auto'>{video.description}</p>}
         </div>
 
-        <ResponsiveEmbed html={video.embed} />
+        <div className='container mx-auto flex max-w-3xl px-6 pt-20 2xl:px-0'>
+          <div className='flex w-full flex-col pb-20'>
+            <ResponsiveEmbed html={video.embed} />
+            {video.description && <p className='mt-10'>{video.description}</p>}
+          </div>
+        </div>
 
       </div>
 
-      <div className='mt-20'>
-        <FollowUs />
-      </div>
+      <div className='flex w-full pb-8 text-neutral-0 '>
+        <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pt-12 pb-8 md:bg-no-repeat 2xl:px-0'>
+          <div className='flex justify-between pb-8'>
+            <SuiTitle
+                type='h2'
+                className='!text-3xl text-neutral-100'
+                weight='semibold'>
+              Recent videos
+            </SuiTitle>
 
+            <SuiButton
+                path='/videos'
+                type='empty'
+                color='primary'
+                className='font-base border border-primary-300/50	'>
+              View all Videos
+            </SuiButton>
+          </div>
+          <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
+            {getVideos().filter(item => item.slug !== video.slug).map((item) => {
+              return (
+                  <div key={item.slug}>
+                    <VideoCard video={item} />
+                  </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+      <FollowUs />
     </Layout>
   )
 }
