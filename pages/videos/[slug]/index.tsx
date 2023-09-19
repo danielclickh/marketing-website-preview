@@ -43,7 +43,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     const thisIndex = getVideos().findIndex(vid => vid.slug === video.slug)
     const nextVideo = getVideos().at(thisIndex + 1) || null
-    const prevVideo = thisIndex > 1 ? getVideos().at(thisIndex - 1) || null : null
+    const prevVideo = thisIndex > 0 ? getVideos().at(thisIndex - 1) || null : null
 
     const props: VideoPageProps = {
       video,
