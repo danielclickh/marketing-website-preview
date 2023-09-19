@@ -64,6 +64,12 @@
 				"target": "_blank"
 			},
 			{
+				"id": 20,
+				"name": "Videos",
+				"href": "/videos",
+				"target": "_self"
+			},
+			{
 				"id": 21,
 				"name": "Site map",
 				"href": "/sitemap",

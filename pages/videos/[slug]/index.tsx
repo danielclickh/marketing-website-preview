@@ -106,7 +106,7 @@ export default function VideoPage({
               <SuiButton
                   type='empty'
                   color='primary'
-                  className='font-base border border-primary-300/50 block w-full hover:no-underline'>
+                  className='font-base border border-primary-300/50 hover:translate-y-0 hover:border-primary-400 block w-full hover:no-underline'>
                 <div className='flex flex-row-reverse gap-6 items-center w-full'>
                   <div className='text-left flex-grow flex-shrink basis-0 truncate'>
                     <strong className='block font-bold'>Previous video</strong>
@@ -127,7 +127,7 @@ export default function VideoPage({
               <SuiButton
                   type='empty'
                   color='primary'
-                  className='font-base border border-primary-300/50 block w-full hover:no-underline'>
+                  className='font-base border border-primary-300/50 hover:translate-y-0 hover:border-primary-400 block w-full hover:no-underline'>
                 <div className='flex flex-row gap-6 items-center w-full'>
                   <div className='text-left flex-grow flex-shrink basis-0 truncate'>
                     <strong className='block font-bold'>Next video</strong>
