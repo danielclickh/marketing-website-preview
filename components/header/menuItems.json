@@ -180,38 +180,6 @@
 						"target": "_self"
 					}
 				]
-			},
-			{
-				"id": 5,
-				"name": "Videos",
-				"href": "/videos",
-				"target": "_self",
-				"menuItems": [
-					{
-						"id": 2,
-						"name": "Management",
-						"href": "/videos?category=management",
-						"target": "_self"
-					},
-					{
-						"id": 4,
-						"name": "Database",
-						"href": "/videos?category=database",
-						"target": "_self"
-					},
-					{
-						"id": 1,
-						"name": "Testing",
-						"href": "/videos?category=testing",
-						"target": "_self"
-					},
-					{
-						"id": 40,
-						"name": "How to",
-						"href": "/videos?category=how-to",
-						"target": "_self"
-					}
-				]
 			}
 		]
 	},

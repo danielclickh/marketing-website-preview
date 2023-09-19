@@ -12,7 +12,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/8FUfyvoqDTg/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/8FUfyvoqDTg?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['Management']
+      categories: ['ClickHouse Cloud']
     },
     {
       slug: 'clearbit',
@@ -23,7 +23,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/3mS-RSKfGWQ/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/3mS-RSKfGWQ?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['Database']
+      categories: ['ClickHouse Cloud']
     },
     {
       slug: 'statsig',
@@ -34,8 +34,126 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/6V_66oiln00/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/6V_66oiln00?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['Testing']
+      categories: ['ClickHouse Cloud']
     },
+    {
+      slug: 'self-serve-analytics-on-petabytes-of-data-microsoft',
+      title:
+        "Fast Interactive Self-Serve Analytics on Petabytes of Data - Microsoft's Journey with ClickHouse",
+      subTitle:
+        'Sathish Manivannan\nSenior Director Data & Analytics\n\nLin Tang\nPrincipal Software Engineering Manager',
+      description:
+        'This presentation on ClickHouse Power Data Analytics Solutions in WebXT.',
+      thumbnail: 'https://img.youtube.com/vi/r1ZqjU8ZbNs/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/r1ZqjU8ZbNs?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['Users']
+    },
+    {
+      slug: 'disney-plus-clickhouse',
+      title: "Disney+ClickHouse, Disney's Flexible ELT Pipelines in ClickHouse",
+      subTitle: 'Roni Lazimi\nSoftware Engineer, Disney+',
+      description:
+        'This talk was given at the ClickHouse Community Meetup in Manhattan on December 6, 2022.',
+      thumbnail: 'https://img.youtube.com/vi/CVVp6N8Xeoc/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/CVVp6N8Xeoc?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['Users']
+    },
+    {
+      slug: 'microsoft-clarity-and-clickhouse',
+      title: 'Microsoft Clarity and ClickHouse',
+      subTitle: 'Narendra Rana\nPrincipal Data Scientist',
+      description:
+        'Democratizing data and analytics for Bing, MSN, Edge & More\n\nThis presentation on ClickHouse Power Data Analytics Solutions in WebXT @ Microsoft',
+      thumbnail: 'https://img.youtube.com/vi/rUVZlquVGw0/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/rUVZlquVGw0?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['Users']
+    },
+    {
+      slug: 'building-the-future-of-reporting-at-rokt',
+      title: 'Building the future of reporting at Rokt',
+      subTitle: 'Vadim Semenov\nRokt',
+      description:
+        'This talk was given at the ClickHouse Community Meetup in Manhattan on December 6, 2022',
+      thumbnail: 'https://img.youtube.com/vi/BEP07Edor-0/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/BEP07Edor-0?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['Users']
+    },
+    {
+      slug: 'serving-5m-analytics-queries-a-month-with-clickhouse',
+      title: 'Serving 5m analytics queries a month, with ClickHouse',
+      subTitle: 'Tim Glaser\nCo-founder & CTO, Posthog',
+      description:
+        'This presentation was given at the ClickHouse community meeutp in London.',
+      thumbnail: 'https://img.youtube.com/vi/9VKfiz-MzvQ/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/9VKfiz-MzvQ?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['Users']
+    },
+    {
+      slug: 'building-user-facing-and-internal-applications-with-clickhouse',
+      title: 'Building user-facing and internal applications with ClickHouse',
+      subTitle: 'Petr Janda\nSynq.io',
+      description:
+        'This presentation was given at the ClickHouse community meeutp in London.',
+      thumbnail: 'https://img.youtube.com/vi/Q4xAJnv-UM0/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/Q4xAJnv-UM0?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['Users']
+    },
+
+    {
+      slug: 'observability-with-clickhouse',
+      title: 'Observability with ClickHouse',
+      subTitle: 'Boris Tane\nBaselime.io',
+      description:
+        'A "behind the scenes" view into building an observability solution with ClickHouse. This presentation was given at the ClickHouse community meeutp in London.',
+      thumbnail: 'https://img.youtube.com/vi/00gW8txIP5g/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/00gW8txIP5g?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['Users']
+    },
+
+    {
+      slug: 'from-redshift-to-clickhouse',
+      title: 'Our Journey from Redshift to ClickHouse Cloud',
+      subTitle: 'Brooke McKim\nCo-founder and CTO, Vantage',
+      description:
+        'In this talk -- given at the ClickHouse NYC Meetup on April 26, 2023 -- Brooke McKim (Co-founder and CTO of Vantage) shares their journey from Redshift to ClickHouse Cloud.',
+      thumbnail: 'https://img.youtube.com/vi/gBgXcHM_ldc/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/gBgXcHM_ldc?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['Users']
+    },
+
+    {
+      slug: 'clickhouse-journey-in-contentsquare',
+      title: 'ClickHouse journey in Contentsquare',
+      subTitle: 'Doron Hoffman & Guram Sigua\nContentsquare',
+      description:
+        'This talk was given at the ClickHouse Community Meetup in Tel Aviv on January 16, 2023.',
+      thumbnail: 'https://img.youtube.com/vi/zvuCBAl2T0Q/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/zvuCBAl2T0Q?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['Users']
+    },
+
+    {
+      slug: 'big-sensitive-data-warehouse-deutsche-bank-clickhouse',
+      title:
+        'Big Sensitive Data Warehouse in regulated environments on ClickHouse',
+      subTitle: 'Pavel Yakunin\nDeutsche Bank',
+      description:
+        'This is a re-recording of a talk that was given at the ClickHouse Community Meetup in Berlin on 5 December 5, 2022',
+      thumbnail: 'https://img.youtube.com/vi/O3GJ6jag3Hc/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/O3GJ6jag3Hc?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['Users']
+    },
+
     {
       slug: 'how-to-get-started-with-clickhouse',
       title: 'How to Get Started with ClickHouse',
