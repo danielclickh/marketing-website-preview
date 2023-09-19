@@ -99,15 +99,8 @@ export default function VideoPage({
         <ResponsiveEmbed html={video.embed} />
       </div>
 
-      <div className='container mx-auto flex max-w-3xl px-6 2xl:px-0 mt-10 mb-20'>
-        <div className='flex w-full flex-col gap-3'>
-          {video.subTitle && <h2 className='text-xl whitespace-pre-wrap'>{video.subTitle}</h2>}
-          {video.description && <p>{video.description}</p>}
-        </div>
-      </div>
-
-      <div className='container mx-auto flex max-w-3xl px-6 2xl:px-0 mt-10 mb-20'>
-        <div className="w-full grid grid-cols-1 gap-8 md:grid-cols-2">
+      <div className='container mx-auto max-w-3xl px-6 2xl:px-0 mt-10 mb-20'>
+        <div className="w-full grid grid-cols-1 gap-8 md:grid-cols-2 mb-10">
           {prevVideo && <div>
             <Link href={`/videos/${prevVideo.slug}`} className='block w-full'>
               <SuiButton
@@ -149,6 +142,10 @@ export default function VideoPage({
               </SuiButton>
             </Link>
           </div>}
+        </div>
+        <div className='flex w-full flex-col gap-3'>
+          {video.subTitle && <h2 className='text-xl whitespace-pre-wrap'>{video.subTitle}</h2>}
+          {video.description && <p>{video.description}</p>}
         </div>
       </div>
 
