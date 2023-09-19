@@ -6,7 +6,6 @@ import Layout from '../../components/Layout'
 import { SuiTitle } from '../../components/sui'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
-import { getVideos } from "../../lib/videos";
 import { CommonProps } from '../../types/homepage'
 
 interface VideosPageProps extends CommonProps {
@@ -17,8 +16,8 @@ export async function getStaticProps() {
   const props: VideosPageProps = {
     title: 'Videos',
     seo: {
-      title: 'ClickHouse | Videos',
-      description: 'Video page description',
+      title: 'ClickHouse Videos | ClickHouse How to videos',
+      description: 'Discover a rich collection of customer testimonials, informative how-to tutorials, and engaging Meetup recordings. Elevate your data analytics game with our diverse video library.\n',
       path: '/videos'
     },
     ...(await getCommonProps())

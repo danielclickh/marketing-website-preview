@@ -138,8 +138,8 @@ export function getVideos(): Video[] {
   ]
 }
 
-export function getVideo(slug: string): Video | undefined {
-  return getVideos().find((video) => video.slug === slug)
+export function getVideo(slug: string): Video | null {
+  return getVideos().find((video) => video.slug === slug) || null
 }
 
 export function getCategories(): Map<string, VideoCategory> {
@@ -154,6 +154,6 @@ export function getCategories(): Map<string, VideoCategory> {
   return categories
 }
 
-export function getCategory(slug: string): VideoCategory | undefined {
-  return getCategories().get(slug)
+export function getCategory(slug: string): VideoCategory | null {
+  return getCategories().get(slug) || null
 }
