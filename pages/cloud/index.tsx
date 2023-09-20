@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+
 import { SuiText, SuiTitle } from '../../components/sui'
 import CloudProviders from '../../components/CloudProviders'
 
@@ -17,7 +19,7 @@ import { ChevronRightIcon } from '@heroicons/react/solid'
 import GetStartedFree from '../../components/GetStartedFree'
 import LogoCarousel from '../../components/LogoCarousel'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import ClickPipesIntegrationImage from '../../components/ClickPipesAnimation/ClickPipesIntegrationImage'
 import Lines from '../../components/ClickPipesAnimation/Lines'
 
@@ -64,7 +66,12 @@ export default function CloudPage({
   CloudCustomerLogos
 }: CloudData) {
   const { ctaButton } = hero
-
+  const integrationsRef = useRef(null)
+  const isInView = useInView(integrationsRef, {
+    margin: '0px 0px 200px 0px',
+    once: false,
+    amount: 'all'
+  })
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -248,12 +255,14 @@ export default function CloudPage({
                 </a>
                 .
               </div>
-              <div className='relative z-20 mx-auto mt-16 flex flex-wrap justify-center gap-6 md:max-w-[552px]'>
+              <div
+                ref={integrationsRef}
+                className='relative z-20 mx-auto mt-16 flex flex-wrap justify-center gap-6 md:max-w-[552px]'>
                 {integrations.map((integration) => (
                   <motion.div
                     transition={{
-                      duration: 2,
-                      delay: 2,
+                      duration: 1,
+                      delay: 0.4,
                       ease: [0, 0.71, 0.2, 1.01]
                     }}
                     whileInView={
