@@ -304,7 +304,7 @@ export default function CloudPage({
                   width={120}
                   height={120}
                   alt='ClickHouse'
-                  className='relative z-20 mx-auto mt-20 shadow-noOffset shadow-primary-300'
+                  className='relative z-20 mx-auto mt-16 shadow-noOffset shadow-primary-300'
                 />
                 <SuiTitle type='h2' className='mt-8 mb-6 text-center'>
                   ClickHouse Cloud
