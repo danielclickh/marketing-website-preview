@@ -126,7 +126,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/gBgXcHM_ldc/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/gBgXcHM_ldc?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['Users', 'ClickHouse Cloud']
+      categories: ['User Stories', 'ClickHouse Cloud']
     },
 
     {
