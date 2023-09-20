@@ -254,7 +254,7 @@ export default function CloudPage({
                     initial={{ opacity: 0, scale: 0.1 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{
-                      duration: 0.4,
+                      duration: 0.3,
                       delay: 0.2,
                       ease: [0, 0.71, 0.2, 1.01]
                     }}
@@ -275,7 +275,7 @@ export default function CloudPage({
                 ))}
                 <Lines className='absolute top-12 left-8 z-10 hidden opacity-90 lg:block' />
               </div>
-              <div className='relative z-20 mt-28 w-full'>
+              <div className='relative z-20 mt-28 w-full pb-24'>
                 <SuiTitle type='h2' className='mb-6 text-center'>
                   ClickPipes
                 </SuiTitle>
@@ -297,7 +297,7 @@ export default function CloudPage({
                   width={120}
                   height={120}
                   alt='ClickHouse'
-                  className='relative z-20 mx-auto mt-40 shadow-noOffset shadow-primary-300'
+                  className='relative z-20 mx-auto mt-20 shadow-noOffset shadow-primary-300'
                 />
                 <SuiTitle type='h2' className='mt-8 mb-6 text-center'>
                   ClickHouse Cloud
@@ -311,7 +311,7 @@ export default function CloudPage({
                 </div>
                 <CUIButton
                   type='primary'
-                  className='group mx-auto mt-11 w-auto'
+                  className='mx-auto mt-11'
                   href='https://clickhouse.cloud/signUp?loc=clickpipes-cloud-page-get-started'>
                   Get Started
                 </CUIButton>
@@ -320,7 +320,7 @@ export default function CloudPage({
           </div>
         </div>
 
-        <HRSeparator className='my-24' />
+        <HRSeparator className='mb-24' />
         <div className='relative flex flex-col gap-y-28 '>
           <div className='section-container bg-shadow-element-right red-shadow flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
