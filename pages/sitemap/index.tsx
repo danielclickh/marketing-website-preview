@@ -8,6 +8,7 @@ import { fetchAll, findOne, getStagingOnlyFilters } from '../../lib/api/strapi'
 import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { CommonProps } from '../../types/homepage'
+import { getVideos } from '../../lib/videos/index'
 
 interface SitemapProps extends CommonProps {
   blogPosts: any[]
@@ -112,7 +113,7 @@ function Sitemap({
   menu
 }: SitemapProps) {
   const resourcesMenu = menuItems.find((obj) => obj.id === 2)?.menuItems
-
+  const videos = getVideos()
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div>
@@ -262,8 +263,8 @@ function Sitemap({
                     )}
                   </p>
                   {item.menuItems &&
-                    item.menuItems.map((menuItem: any) => (
-                      <div key={`sub-${menuItem.id}`}>
+                    item.menuItems.map((menuItem: any, index) => (
+                      <div key={index}>
                         <ul className='mb-2'>
                           <li>
                             <Link
@@ -399,6 +400,26 @@ function Sitemap({
                     </p>
                   </li>
                 ))}
+              </ul>
+            </div>
+            <div>
+              <h2
+                id='Events'
+                className='mb-6 font-basier text-2xl font-semibold text-neutral-100'>
+                <Link href='/videos'>Videos</Link>
+              </h2>
+              <ul className='mb-2'>
+                {videos.map((video, index) => {
+                  return (
+                    <li key={index}>
+                      <Link
+                        href={`/video/${video.slug}`}
+                        className='font text-primary-300 hover:underline'>
+                        {video.title}
+                      </Link>
+                    </li>
+                  )
+                })}
               </ul>
             </div>
             <div>
