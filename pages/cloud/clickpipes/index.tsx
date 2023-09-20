@@ -1,7 +1,6 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import ClickPipesAnimation from '../../../components/ClickPipesAnimation'
 import { CUIButton } from '../../../components/ClickUI'
@@ -38,10 +37,6 @@ export default function ClickHouseServerPage({
   headerData,
   footerData
 }: ClickPipesData) {
-  const formSuccessRef = useRef<HTMLDivElement | null>(null)
-  const [formSuccess, setFormSuccess] = useState(false)
-  const [formLoaded, setFormLoaded] = useState(false)
-
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>

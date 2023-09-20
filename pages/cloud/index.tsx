@@ -17,7 +17,9 @@ import { ChevronRightIcon } from '@heroicons/react/solid'
 import GetStartedFree from '../../components/GetStartedFree'
 import LogoCarousel from '../../components/LogoCarousel'
 import Link from 'next/link'
-import IntegrationsandClickPipes from '../../components/ClickPipesAnimation/ClickPipesHomepage'
+import { motion } from 'framer-motion'
+import ClickPipesIntegrationImage from '../../components/ClickPipesAnimation/ClickPipesIntegrationImage'
+import Lines from '../../components/ClickPipesAnimation/Lines'
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -127,6 +129,7 @@ export default function CloudPage({
                     width={1262}
                     height={523}
                     className='h-auto w-full min-w-[60rem]'
+                    priority={true}
                   />
                 </div>
               </div>
@@ -211,7 +214,7 @@ export default function CloudPage({
                       alt={item.title}
                       width={item.image_width}
                       height={item.image_height}
-                      className=''
+                      priority={false}
                     />
                   </div>
                 </div>
@@ -219,15 +222,15 @@ export default function CloudPage({
             ))}
           </div>
         </div>
-        <div className='relative flex flex-col gap-y-28'>
+        <div className='relative flex flex-col gap-y-28 bg-[#262622]'>
           <HRSeparator className='my-0' />
-          <div className='section-container bg-shadow-element yellow-shadow flex w-full flex-col items-center justify-between self-center'>
+          <div className='flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
               <Image
                 src='/images/cloud/section_integrations.svg'
                 alt='ClickHouse integrations'
                 width={72}
-                height={72}
+                height={73}
               />
               <SuiTitle type='h2' className='mt-8 mb-6'>
                 Powerful integrations
@@ -245,19 +248,74 @@ export default function CloudPage({
                 </a>
                 .
               </div>
-              <div className='mx-auto mt-16 flex flex-wrap justify-center gap-6 md:max-w-[552px]'>
+              <div className='relative z-20 mx-auto mt-16 flex flex-wrap justify-center gap-6 md:max-w-[552px]'>
                 {integrations.map((integration) => (
-                  <CUICard className='p-4' key={integration.name}>
-                    <Image
-                      src={integration.logo}
-                      width={36}
-                      height={36}
-                      alt={integration.name}
-                    />
-                  </CUICard>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      duration: 0.4,
+                      delay: 0.2,
+                      ease: [0, 0.71, 0.2, 1.01]
+                    }}
+                    whileInView={
+                      integration.fadeOnLoad ? { opacity: 0.1 } : { opacity: 1 }
+                    }
+                    className={`${
+                      integration.fadeOnLoad ? 'z-10' : 'z-20'
+                    } relative rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
+                    key={integration.name}>
+                    {integration.soon && (
+                      <div className='absolute -top-2 -right-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
+                        Soon
+                      </div>
+                    )}
+                    <ClickPipesIntegrationImage integration={integration} />
+                  </motion.div>
                 ))}
+                <Lines className='absolute top-12 left-8 z-10 hidden lg:block' />
               </div>
-              <IntegrationsandClickPipes />
+              <div className='relative z-20 mt-28 w-full'>
+                <SuiTitle type='h2' className='mb-6 text-center'>
+                  ClickPipes
+                </SuiTitle>
+                <div className='mx-auto max-w-3xl text-center leading-normal text-neutral-200'>
+                  ClickPipes offers the easiest and most intuitive way to ingest
+                  data into ClickHouse Cloud. With support for Apache Kafka and
+                  Confluent today, and many more data sources coming soon.
+                </div>
+                <div className='mx-auto mt-11 inline-block w-full bg-[#262622] text-center hover:cursor-none'>
+                  <CUIButton
+                    type='secondary'
+                    className='group mx-auto w-auto text-center'
+                    href='/cloud/clickpipes'>
+                    Learn more
+                  </CUIButton>
+                </div>
+                <Image
+                  src='/images/cloud/clickhouse-logo-with-dropshadow.svg'
+                  width={120}
+                  height={120}
+                  alt='ClickHouse'
+                  className='relative z-20 mx-auto mt-40 shadow-noOffset shadow-primary-300'
+                />
+                <SuiTitle type='h2' className='mt-8 mb-6 text-center'>
+                  ClickHouse Cloud
+                </SuiTitle>
+                <div className='mx-auto max-w-3xl text-center leading-normal text-neutral-200'>
+                  Experience the power of open-source ClickHouse in a serverless
+                  setup. Deploy in seconds, scale seamlessly, and ensure
+                  top-tier security with our SOC 2 Type II compliant platform.
+                  Available on AWS and GCP. Dive into insights without the
+                  infrastructure hassle!
+                </div>
+                <CUIButton
+                  type='primary'
+                  className='group mx-auto mt-11 w-auto'
+                  href='https://clickhouse.cloud/signUp?loc=clickpipes-cloud-page-get-started'>
+                  Get Started
+                </CUIButton>
+              </div>
             </div>
           </div>
         </div>
@@ -270,7 +328,7 @@ export default function CloudPage({
                 src='/images/cloud/section_support.svg'
                 alt='Fast Icon'
                 width={72}
-                height={72}
+                height={73}
               />
               <SuiTitle type='h2' className='mt-8 mb-6'>
                 All in one support
@@ -287,7 +345,7 @@ export default function CloudPage({
                     <Image
                       src='/images/cloud/check.svg'
                       width={32}
-                      height={32}
+                      height={33}
                       alt='Icon'
                     />
                     <div className=''>Unlimited 24x7 support</div>
@@ -298,7 +356,7 @@ export default function CloudPage({
                     <Image
                       src='/images/cloud/check.svg'
                       width={32}
-                      height={32}
+                      height={33}
                       alt='Icon'
                     />
                     <div className=''>
@@ -311,7 +369,7 @@ export default function CloudPage({
                     <Image
                       src='/images/cloud/check.svg'
                       width={32}
-                      height={32}
+                      height={33}
                       alt='Icon'
                     />
                     <div className=''>
@@ -324,7 +382,7 @@ export default function CloudPage({
                     <Image
                       src='/images/cloud/check.svg'
                       width={32}
-                      height={32}
+                      height={33}
                       alt='Icon'
                     />
                     <div className=''>
@@ -375,8 +433,8 @@ export default function CloudPage({
                   <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
                     <Image
                       src='/images/cloud/aws-marketplace-logo.svg'
-                      width={180}
-                      height={22}
+                      width={183}
+                      height={29}
                       alt='AWS Marketplace'
                     />
                     <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>
@@ -406,8 +464,8 @@ export default function CloudPage({
                   <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
                     <Image
                       src='/images/cloud/gcp-logo.svg'
-                      width={180}
-                      height={28}
+                      width={181}
+                      height={29}
                       alt='Google Cloud'
                     />
                     <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>
