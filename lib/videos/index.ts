@@ -47,7 +47,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/r1ZqjU8ZbNs/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/r1ZqjU8ZbNs?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['Users']
+      categories: ['User Stories']
     },
     {
       slug: 'disney-plus-clickhouse',
@@ -58,7 +58,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/CVVp6N8Xeoc/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/CVVp6N8Xeoc?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['Users']
+      categories: ['User Stories']
     },
     {
       slug: 'microsoft-clarity-and-clickhouse',
@@ -69,7 +69,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/rUVZlquVGw0/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/rUVZlquVGw0?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['Users']
+      categories: ['User Stories']
     },
     {
       slug: 'building-the-future-of-reporting-at-rokt',
@@ -80,7 +80,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/BEP07Edor-0/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/BEP07Edor-0?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['Users']
+      categories: ['User Stories']
     },
     {
       slug: 'serving-5m-analytics-queries-a-month-with-clickhouse',
@@ -91,7 +91,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/9VKfiz-MzvQ/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/9VKfiz-MzvQ?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['Users']
+      categories: ['User Stories']
     },
     {
       slug: 'building-user-facing-and-internal-applications-with-clickhouse',
@@ -102,7 +102,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/Q4xAJnv-UM0/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/Q4xAJnv-UM0?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['Users']
+      categories: ['User Stories']
     },
 
     {
@@ -114,7 +114,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/00gW8txIP5g/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/00gW8txIP5g?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['Users']
+      categories: ['User Stories']
     },
 
     {
@@ -138,7 +138,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/zvuCBAl2T0Q/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/zvuCBAl2T0Q?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['Users']
+      categories: ['User Stories']
     },
 
     {
@@ -151,7 +151,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/O3GJ6jag3Hc/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/O3GJ6jag3Hc?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['Users']
+      categories: ['User Stories']
     },
 
     {
