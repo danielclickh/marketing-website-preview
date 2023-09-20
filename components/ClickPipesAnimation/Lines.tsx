@@ -101,7 +101,7 @@ const Lines = (props: Props) => {
             dur='4s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
-            values='0,921,0,921; 0,0,120,721; 0,0,0,321; 0,0,0,121'
+            values='0,921,0,921; 0,0,120,721; 0,0,0,321; 0,0,0,1200'
           />
         </path>
 
