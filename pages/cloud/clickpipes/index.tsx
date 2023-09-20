@@ -3,17 +3,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+import ClickPipesAnimation from '../../../components/ClickPipesAnimation'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
-import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ClickPipesData } from '../../../types/clickpipes'
 import features from './features.json'
 import integrations from './integrations.json'
-import ClickPipesAnimation from '../../../components/ClickPipesAnimation'
-import MarketoForm from '../../../components/MarketoForm'
 
 export const getStaticProps: GetStaticProps<ClickPipesData> =
   async function getStaticProps() {
