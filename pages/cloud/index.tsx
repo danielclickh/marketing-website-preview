@@ -273,7 +273,7 @@ export default function CloudPage({
                     <ClickPipesIntegrationImage integration={integration} />
                   </motion.div>
                 ))}
-                <Lines className='absolute top-12 left-8 z-10 hidden lg:block' />
+                <Lines className='absolute top-12 left-8 z-10 hidden opacity-90 lg:block' />
               </div>
               <div className='relative z-20 mt-28 w-full'>
                 <SuiTitle type='h2' className='mb-6 text-center'>
