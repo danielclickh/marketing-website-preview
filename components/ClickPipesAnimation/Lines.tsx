@@ -99,12 +99,13 @@ const Lines = (props: Props) => {
         </path>
 
         <path
-          d='M269 671.5L269.001 322L386.501 322L386.501 293.5'
+          d='M269 691.5L269.001 322L386.501 322L386.501 293.5'
           stroke='url(#paint9_linear_405_2690)'
           strokeWidth='2'
         />
         <path
-          d='M269 671.5L269.001 322L386.501 322L386.501 293.5'
+          id='shortline'
+          d='M269 691.5L269.001 322L386.501 322L386.501 313.5'
           stroke='#fcff74'
           stroke-width='2'>
           <animate
