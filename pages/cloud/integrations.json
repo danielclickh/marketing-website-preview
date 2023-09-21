@@ -31,12 +31,12 @@
 		"fadeOnLoad": true
 	},
 	{
-		"id": 40,
-		"name": "Azure Event Hub",
-		"logo": "/images/cloud/integrations/diagram/azure-event-hub.svg",
+		"id": 10,
+		"name": "Superset",
+		"logo": "/images/cloud/integrations/superset.svg",
 		"imgWidth": 44,
-		"imgHeight": 44,
-		"soon": true
+		"imgHeight": 45,
+		"fadeOnLoad": true
 	},
 	{
 		"id": 6,
@@ -78,11 +78,12 @@
 		"fadeOnLoad": true
 	},
 	{
-		"id": 10,
-		"name": "Superset",
-		"logo": "/images/cloud/integrations/superset.svg",
+		"id": 40,
+		"name": "Azure Event Hub",
+		"logo": "/images/cloud/integrations/diagram/azure-event-hub.svg",
 		"imgWidth": 44,
-		"imgHeight": 45
+		"imgHeight": 44,
+		"soon": true
 	},
 	{
 		"id": 12,

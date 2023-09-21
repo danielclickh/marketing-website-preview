@@ -71,11 +71,7 @@ export default function CloudPage({
 }: CloudData) {
   const { ctaButton } = hero
   const integrationsRef = useRef(null)
-  const isInView = useInView(integrationsRef, {
-    margin: '0px 0px 200px 0px',
-    once: false,
-    amount: 'all'
-  })
+  const isInView = useInView(integrationsRef)
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -259,9 +255,9 @@ export default function CloudPage({
                 </a>
                 .
               </div>
-              <div
-                ref={integrationsRef}
-                className='relative z-20 mx-auto mt-16 flex flex-wrap justify-center gap-6 md:max-w-[552px]'>
+              <p className='text-white'>{isInView.toString()}</p>
+
+              <div className='relative z-20 mx-auto mt-16 flex flex-wrap justify-center gap-6 md:max-w-[552px]'>
                 {integrations.map((integration) => (
                   <motion.div
                     transition={{
@@ -269,8 +265,12 @@ export default function CloudPage({
                       delay: getRandomDelay(0.2, 1),
                       ease: [0, 0.71, 0.2, 1.01]
                     }}
-                    whileInView={
-                      integration.fadeOnLoad ? { opacity: 0.1 } : { opacity: 1 }
+                    animate={
+                      isInView
+                        ? integration.fadeOnLoad
+                          ? { opacity: 0.1 }
+                          : { opacity: 1 }
+                        : ''
                     }
                     className={`${
                       integration.fadeOnLoad ? 'z-10' : 'z-20'
@@ -285,7 +285,7 @@ export default function CloudPage({
                   </motion.div>
                 ))}
                 <motion.div
-                  className='absolute top-12 left-8 z-10 hidden opacity-90 lg:block'
+                  className='absolute top-12 left-8 z-[5] hidden opacity-90 lg:block'
                   initial={{ opacity: 0 }}
                   transition={{
                     ease: 'easeOut',
@@ -301,7 +301,9 @@ export default function CloudPage({
                 <SuiTitle type='h2' className='mb-6 text-center'>
                   ClickPipes
                 </SuiTitle>
-                <div className='mx-auto max-w-3xl text-center leading-normal text-neutral-200'>
+                <div
+                  className='mx-auto max-w-3xl text-center leading-normal text-neutral-200'
+                  ref={integrationsRef}>
                   ClickPipes offers the easiest and most intuitive way to ingest
                   data into ClickHouse Cloud. With support for Apache Kafka and
                   Confluent today, and many more data sources coming soon.
