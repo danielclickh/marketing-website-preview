@@ -4,7 +4,7 @@ interface Props {
 
 const Lines = (props: Props) => {
   return (
-    <div className={props.className}>
+    <div>
       <svg
         height='703'
         width='485'
@@ -17,10 +17,11 @@ const Lines = (props: Props) => {
           strokeWidth='2'></path>
         <path d='M242 691.5V182.5H386.5V5.5' stroke='#fcff74' stroke-width='2'>
           <animate
-            dur='4s'
+            dur='3s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
-            values='0,821,0,821; 0,0,120,821; 0,0,0,821'
+            values='0,621,0,621; 0,0,120,621; 0,0,0,621'
+            keyTimes='0; 0.8; 1'
           />
         </path>
 
@@ -34,14 +35,16 @@ const Lines = (props: Props) => {
           stroke='url(#paint5_linear_405_2690)'
           strokeWidth='2'
         />
-        <path d='M224 693.5V211.5H193.5V4.5' stroke='#fcff74' strokeWidth='2'>
+        <path d='M224 693.5V211.5H193.5V4.5' stroke='#fcff74' stroke-width='2'>
           <animate
             dur='4s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
             values='0,621,0,621; 0,0,120,621; 0,0,0,621'
+            keyTimes='0; 0.8; 1'
           />
         </path>
+
         <path
           d='M215 692L215 247L99.5 247L99.5 196'
           stroke='url(#paint6_linear_405_2690)'
@@ -50,25 +53,31 @@ const Lines = (props: Props) => {
         <path
           d='M215 692L215 247L99.5 247L99.5 196'
           stroke='#fcff74'
-          strokeWidth='2'>
+          stroke-width='2'>
           <animate
             dur='2s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
             values='0,721,0,721; 0,0,120,721; 0,0,0,721'
+            keyTimes='0; 0.8; 1'
           />
         </path>
+
         <path
           d='M251 689L251 208H483.5V101.5'
           stroke='url(#paint7_linear_405_2690)'
           strokeWidth='2'
         />
-        <path d='M251 689L251 208H483.5V101.5' stroke='#fcff74' strokeWidth='2'>
+        <path
+          d='M251 689L251 208H483.5V101.5'
+          stroke='#fcff74'
+          stroke-width='2'>
           <animate
-            dur='6.5s'
+            dur='6s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
             values='0,721,0,721; 0,0,120,721; 0,0,0,721'
+            keyTimes='0; 0.8; 1'
           />
         </path>
         <path
@@ -79,12 +88,13 @@ const Lines = (props: Props) => {
         <path
           d='M259 703L259.002 237L290.002 237L290.002 198'
           stroke='#fcff74'
-          strokeWidth='2'>
+          stroke-width='2'>
           <animate
-            dur='6s'
+            dur='3s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
             values='0,721,0,721; 0,0,120,721; 0,0,0,721'
+            keyTimes='0; 0.8; 1'
           />
         </path>
 
@@ -96,12 +106,13 @@ const Lines = (props: Props) => {
         <path
           d='M269 671.5L269.001 322L386.501 322L386.501 293.5'
           stroke='#fcff74'
-          strokeWidth='2'>
+          stroke-width='2'>
           <animate
-            dur='4s'
+            dur='5s'
             attributeName='stroke-dasharray'
             repeatCount='indefinite'
-            values='0,921,0,921; 0,0,120,721; 0,0,0,321; 0,0,0,1200'
+            values='0,721,0,721; 0,0,120,721; 0,0,0,721'
+            keyTimes='0; 0.8; 1'
           />
         </path>
 

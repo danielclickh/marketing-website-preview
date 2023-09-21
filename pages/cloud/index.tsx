@@ -23,6 +23,10 @@ import { motion, useInView } from 'framer-motion'
 import ClickPipesIntegrationImage from '../../components/ClickPipesAnimation/ClickPipesIntegrationImage'
 import Lines from '../../components/ClickPipesAnimation/Lines'
 
+function getRandomDelay(min: number, max: number): number {
+  return Math.random() * (max - min) + min
+}
+
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
     const params = {
@@ -229,7 +233,7 @@ export default function CloudPage({
             ))}
           </div>
         </div>
-        <div className='relative flex flex-col gap-y-28 bg-[#262622]'>
+        <div className='relative flex flex-col gap-y-28 bg-[#262622] px-3 xl:px-0'>
           <HRSeparator className='my-0' />
           <div className='flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
@@ -262,7 +266,7 @@ export default function CloudPage({
                   <motion.div
                     transition={{
                       duration: 1,
-                      delay: 0.4,
+                      delay: getRandomDelay(0.2, 1),
                       ease: [0, 0.71, 0.2, 1.01]
                     }}
                     whileInView={
@@ -280,7 +284,18 @@ export default function CloudPage({
                     <ClickPipesIntegrationImage integration={integration} />
                   </motion.div>
                 ))}
-                <Lines className='absolute top-12 left-8 z-10 hidden opacity-90 lg:block' />
+                <motion.div
+                  className='absolute top-12 left-8 z-10 hidden opacity-90 lg:block'
+                  initial={{ opacity: 0 }}
+                  transition={{
+                    ease: 'easeOut',
+                    duration: 6
+                  }}
+                  whileInView={{
+                    opacity: 1
+                  }}>
+                  <Lines />
+                </motion.div>
               </div>
               <div className='relative z-20 mt-28 w-full pb-24'>
                 <SuiTitle type='h2' className='mb-6 text-center'>
