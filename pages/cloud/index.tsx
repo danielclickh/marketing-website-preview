@@ -255,7 +255,6 @@ export default function CloudPage({
                 </a>
                 .
               </div>
-              <p className='text-white'>{isInView.toString()}</p>
 
               <div className='relative z-20 mx-auto mt-16 flex flex-wrap justify-center gap-6 md:max-w-[552px]'>
                 {integrations.map((integration) => (
