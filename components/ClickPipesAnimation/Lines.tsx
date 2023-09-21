@@ -12,10 +12,10 @@ const Lines = (props: Props) => {
         viewBox='0 0 485 703'
         xmlns='http://www.w3.org/2000/svg'>
         <path
-          d='M242 691.5V182.5H386.5V5.5'
+          d='M242 711.5V190.5H386.5V25.5'
           stroke='url(#paint0_linear_405_2690)'
           strokeWidth='2'></path>
-        <path d='M242 691.5V182.5H386.5V5.5' stroke='#fcff74' stroke-width='2'>
+        <path d='M242 711.5V190.5H386.5V25.5' stroke='#fcff74' stroke-width='2'>
           <animate
             dur='3s'
             attributeName='stroke-dasharray'
