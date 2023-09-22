@@ -14,7 +14,7 @@ import MarketoForm from '../../../components/MarketoForm'
 import { StrapiImage } from '../../../components/StrapiElements'
 import { findAll, findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { ComparisonProps } from '../../../types/comparisons'
+import { ComparisonProps, BigNumber } from '../../../types/comparisons'
 import stats from './stats.json'
 
 interface SnowflakePageProps extends ComparisonProps {
@@ -103,6 +103,12 @@ export default function SnowflakePage({
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
+  console.log(comparison)
+  const {
+    Title: comparisonTitle,
+    HeroDescription: heroDescription,
+    BigNumbers: BigNumbers
+  } = comparison.data[0]
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -117,7 +123,7 @@ export default function SnowflakePage({
                       Comparisons
                     </h4>
                     <h1 className='mb-4 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 lg:text-left lg:text-5xl xl:text-5.5xl '>
-                      {comparison.data[0].Title}
+                      {comparisonTitle}
                     </h1>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-neutral-0/60 lg:text-left'>
                       For real-time analytics
@@ -125,7 +131,7 @@ export default function SnowflakePage({
                   </div>
                 </div>
                 <div className='rich_content mt-8 w-full text-center text-base text-neutral-200 lg:max-w-xl lg:text-left'>
-                  <Markdown children={comparison.data[0].HeroDescription} />
+                  <Markdown children={heroDescription} />
                 </div>
               </div>
               <div className='mb-6 hidden lg:mb-0 lg:block lg:max-w-[400px] xl:max-w-[575px]'>
@@ -156,15 +162,15 @@ export default function SnowflakePage({
           <div className='clip-inverted-triangle -mt-16 xl:-mt-28'>
             <div className='relative z-40 mx-auto mt-4 max-w-4xl pt-20 pb-0 lg:mt-12'>
               <div className='mx-auto mb-12 flex items-center gap-4  px-4 md:px-0'>
-                {stats.map((stat) => (
+                {BigNumbers.map((stat: BigNumber, index: number) => (
                   <div
-                    key={stat.id}
+                    key={index}
                     className='w-1/3 rounded-md border border-white/40 bg-[#363531] py-6 px-3 shadow-lg'>
                     <h3 className='mb-2 text-center font-basier text-2xl font-bold leading-none text-primary-300 lg:text-[69px]'>
-                      {stat.title}
+                      {stat.Number}
                     </h3>
                     <p className='min-h-[30px] text-center font-basier text-sm font-bold leading-none lg:text-base'>
-                      {stat.description}
+                      {stat.Text}
                     </p>
                   </div>
                 ))}

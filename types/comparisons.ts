@@ -37,7 +37,7 @@ interface RepeatableContent {
   ]
 }
 
-interface BigNumber {
+export interface BigNumber {
   Number: string
   Text: string
 }
