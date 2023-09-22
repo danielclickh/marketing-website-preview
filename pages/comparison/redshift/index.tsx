@@ -181,7 +181,7 @@ export default function ComparisonPage({
         <div className='clip-inverted-triangle -mt-16 xl:-mt-28'>
           <div className='relative z-40 mx-auto mt-4 max-w-4xl pt-20 pb-0 lg:mt-12'>
             <div className='mx-auto flex items-center gap-4 px-4 md:px-0'>
-              <div className='container mx-auto max-w-4xl px-6 2xl:px-0'>
+              <div className='container mx-auto max-w-4xl border-none px-6  2xl:px-0'>
                 <div className='overflow-hidden rounded-xl'>
                   <ResponsiveEmbed html='<iframe src="https://www.youtube-nocookie.com/embed/8FUfyvoqDTg?rel=0&autoplay=0" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>' />
                 </div>
