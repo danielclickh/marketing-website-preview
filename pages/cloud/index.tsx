@@ -69,12 +69,13 @@ export default function CloudPage({
   footerData,
   CloudCustomerLogos
 }: CloudData) {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const [windowWidth, setWindowWidth] = useState(0)
   const { ctaButton } = hero
   const integrationsRef = useRef(null)
   const isInView = useInView(integrationsRef)
 
   useEffect(() => {
+    setWindowWidth(window.innerWidth)
     const handleResize = () => {
       setWindowWidth(window.innerWidth)
     }
