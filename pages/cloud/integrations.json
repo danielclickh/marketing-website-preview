@@ -59,7 +59,8 @@
 		"name": "Tableau",
 		"logo": "/images/cloud/integrations/tableau.svg",
 		"imgWidth": 40,
-		"imgHeight": 41
+		"imgHeight": 41,
+		"fadeOnLoad": true
 	},
 	{
 		"id": 80,
