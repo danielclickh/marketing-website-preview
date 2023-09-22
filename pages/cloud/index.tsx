@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 import { SuiText, SuiTitle } from '../../components/sui'
 import CloudProviders from '../../components/CloudProviders'
@@ -69,9 +69,22 @@ export default function CloudPage({
   footerData,
   CloudCustomerLogos
 }: CloudData) {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const { ctaButton } = hero
   const integrationsRef = useRef(null)
   const isInView = useInView(integrationsRef)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -257,32 +270,54 @@ export default function CloudPage({
               </div>
 
               <div className='relative z-20 mx-auto mt-16 flex flex-wrap justify-center gap-6 md:max-w-[552px]'>
-                {integrations.map((integration) => (
-                  <motion.div
-                    transition={{
-                      duration: 1,
-                      delay: getRandomDelay(0.2, 1),
-                      ease: [0, 0.71, 0.2, 1.01]
-                    }}
-                    animate={
-                      isInView
-                        ? integration.fadeOnLoad
-                          ? { opacity: 0.1 }
-                          : { opacity: 1 }
-                        : ''
-                    }
-                    className={`${
-                      integration.fadeOnLoad ? 'z-10' : 'z-20'
-                    } relative rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
-                    key={integration.name}>
-                    {integration.soon && (
-                      <div className='absolute -top-2 -right-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
-                        Soon
-                      </div>
-                    )}
-                    <ClickPipesIntegrationImage integration={integration} />
-                  </motion.div>
-                ))}
+                {integrations.map((integration) => {
+                  const shouldAnimate = isInView && windowWidth > 768
+                  return (
+                    <>
+                      {shouldAnimate ? (
+                        <motion.div
+                          transition={{
+                            duration: 1,
+                            delay: getRandomDelay(0.2, 1),
+                            ease: [0, 0.71, 0.2, 1.01]
+                          }}
+                          animate={
+                            isInView
+                              ? integration.fadeOnLoad
+                                ? { opacity: 0.1 }
+                                : { opacity: 1 }
+                              : ''
+                          }
+                          className={`${
+                            integration.fadeOnLoad ? 'z-10' : 'z-20'
+                          } relative rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
+                          key={integration.name}>
+                          {integration.soon && (
+                            <div className='absolute -top-2 -right-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
+                              Soon
+                            </div>
+                          )}
+                          <ClickPipesIntegrationImage
+                            integration={integration}
+                          />
+                        </motion.div>
+                      ) : (
+                        <div
+                          className={`relative z-20 rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
+                          key={integration.name}>
+                          {integration.soon && (
+                            <div className='absolute -top-2 -right-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
+                              Soon
+                            </div>
+                          )}
+                          <ClickPipesIntegrationImage
+                            integration={integration}
+                          />
+                        </div>
+                      )}
+                    </>
+                  )
+                })}
                 <motion.div
                   className='absolute top-12 left-8 z-[5] hidden opacity-90 lg:block'
                   initial={{ opacity: 0 }}
