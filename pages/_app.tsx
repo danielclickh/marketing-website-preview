@@ -43,21 +43,21 @@ function MyApp({ Component, pageProps }: AppProps) {
         </SnackbarContextProvider>
       </main>
       {/* Securiti.ai Cookie Blocker - required for GDPR compliance */}
-      <script 
-        type="text/javascript" 
-        src="https://cdn-prod.securiti.ai/consent/auto_blocking/8555e54b-cd0b-45d7-9c1c-e9e088bf774a/e058d040-977c-4594-aa2c-84b844ce5cf0.js"
+      <Script
+        type='text/javascript'
+        src='https://cdn-prod.securiti.ai/consent/auto_blocking/8555e54b-cd0b-45d7-9c1c-e9e088bf774a/e058d040-977c-4594-aa2c-84b844ce5cf0.js'
       />
       {/* Securiti.ai Cookie Blocker end */}
       {/* Securiti.ai CSS */}
-      <link 
-        rel='stylesheet' 
-        type='text/css' 
-        href='https://cdn-prod.securiti.ai/consent/cookie-consent.css' 
+      <link
+        rel='stylesheet'
+        type='text/css'
+        href='https://cdn-prod.securiti.ai/consent/cookie-consent.css'
       />
-      <link 
-        rel='stylesheet' 
-        type='text/css' 
-        href='https://cdn-prod.securiti.ai/consent/styles/8555e54b-cd0b-45d7-9c1c-e9e088bf774a/e058d040-977c-4594-aa2c-84b844ce5cf0.css' 
+      <link
+        rel='stylesheet'
+        type='text/css'
+        href='https://cdn-prod.securiti.ai/consent/styles/8555e54b-cd0b-45d7-9c1c-e9e088bf774a/e058d040-977c-4594-aa2c-84b844ce5cf0.css'
       />
       {/* Securiti.ai CSS */}
       <SegmentScript />
@@ -80,13 +80,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Script>
       {/* Securiti.ai Cookie Banner */}
       {/*-- After adding this script, call setConsentBannerParams({uuid: <unique id> }) to set unique ID for a customer. --*/}
-      <script
-      	defer
-      	data-strict-csp
-      	src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-strict-csp.js'
-      	data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
-      	data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
-      	data-backend-url='https://app.securiti.ai'
+      <Script
+        defer
+        data-strict-csp
+        src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-strict-csp.js'
+        data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
+        data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
+        data-backend-url='https://app.securiti.ai'
         id='securiti-ai-script'
         type='text/javascript'
         strategy='afterInteractive'
