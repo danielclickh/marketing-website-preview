@@ -62,7 +62,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       `}
       </Script>
       {/* Securiti.ai Cookie Banner */}
-      <!-- After adding this script, call setConsentBannerParams({uuid: <unique id> }) to set unique ID for a customer. -->
       <script
 	      defer
 	      data-strict-csp
