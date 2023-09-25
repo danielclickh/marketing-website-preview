@@ -6,7 +6,7 @@ import logoFull from '../../public/logo-full.svg'
 import topLevelFooterMenu from './footer.json'
 function openCookie() {
   const element = document.querySelector<HTMLElement>(
-    '#ot-sdk-btn-floating .ot-floating-button__open'
+    '#securitiCmpCookiePrefBtn'
   )
   if (element) {
     element.click()
@@ -20,21 +20,21 @@ export default function Footer({
 }: FooterData) {
   return (
     <div className='flex flex-col bg-neutral-900 pb-8 pt-16'>
-      <div className='w-full section-container mx-auto md:flex justify-between pb-11 gap-8 lg:gap-10'>
-        <div className='flex flex-col w-full'>
-          <div className='sitemap flex flex-col lg:flex-row gap-y-8'>
+      <div className='section-container mx-auto w-full justify-between gap-8 pb-11 md:flex lg:gap-10'>
+        <div className='flex w-full flex-col'>
+          <div className='sitemap flex flex-col gap-y-8 lg:flex-row'>
             {topLevelFooterMenu.map((topMenu) => (
               <div key={topMenu.title} className='flex flex-col lg:w-4/12'>
-                <div className='mb-3 text-sm text-neutral-0 font-semibold'>
+                <div className='mb-3 text-sm font-semibold text-neutral-0'>
                   {topMenu.title}
                 </div>
-                <div className='flex flex-row flex-wrap lg:flex-col gap-y-2 gap-x-4 lg:gap-x-0 text-neutral-400'>
+                <div className='flex flex-row flex-wrap gap-y-2 gap-x-4 text-neutral-400 lg:flex-col lg:gap-x-0'>
                   {topMenu.items.map((footerLink) => (
                     <CUILink
                       key={footerLink.name}
                       href={footerLink.href}
                       target={footerLink.target}
-                      className='footer w-fit text-sm hover:text-neutral-0 transition-all'
+                      className='footer w-fit text-sm transition-all hover:text-neutral-0'
                       segmentEvent={{
                         label: footerLink.name,
                         category: 'website-nav'
@@ -47,7 +47,7 @@ export default function Footer({
             ))}
           </div>
         </div>
-        <div className='flex flex-col md:w-fit pt-12 md:pt-0'>
+        <div className='flex flex-col pt-12 md:w-fit md:pt-0'>
           <Image
             src={logoFull}
             width='135'
@@ -64,14 +64,14 @@ export default function Footer({
           />
         </div>
       </div>
-      <div className='section-container shadow-footer-line border-t border-neutral-400 opacity-10 w-full' />
-      <div className='flex flex-col pt-2 lg:pt-8 items-start'>
-        <div className='section-container flex flex-col w-full gap-3 sm:gap-1 items-center md:flex-row md:justify-between text-sm text-neutral-400 text-center md:text-left pt-4 md:pt-0'>
+      <div className='section-container w-full border-t border-neutral-400 opacity-10 shadow-footer-line' />
+      <div className='flex flex-col items-start pt-2 lg:pt-8'>
+        <div className='section-container flex w-full flex-col items-center gap-3 pt-4 text-center text-sm text-neutral-400 sm:gap-1 md:flex-row md:justify-between md:pt-0 md:text-left'>
           <div>
             &copy; 2023 ClickHouse, Inc. HQ in the Bay Area, CA and Amsterdam,
             NL.
           </div>
-          <div className='bottom_links flex gap-4 items-center justify-center flex-wrap'>
+          <div className='bottom_links flex flex-wrap items-center justify-center gap-4'>
             {bottomLinks.map((bottomLink, index) => (
               <CUILink
                 key={bottomLink.text}
@@ -87,7 +87,7 @@ export default function Footer({
             ))}
             <button
               onClick={openCookie}
-              className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length} hover:text-neutral-0 whitespace-nowrap`}>
+              className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length} whitespace-nowrap hover:text-neutral-0`}>
               Cookie Settings
             </button>
           </div>
