@@ -17,9 +17,9 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'img.youtube.com',
         port: '',
-        pathname: '/**',
-      },
-    ],
+        pathname: '/**'
+      }
+    ]
   },
   async headers() {
     return [
@@ -315,6 +315,11 @@ const nextConfig = {
       {
         source: '/support/agreement',
         destination: '/legal/agreements/support',
+        permanent: true
+      },
+      {
+        source: '/support/professional-services-agreement',
+        destination: '/legal/agreements/professional-services',
         permanent: true
       }
     ]
