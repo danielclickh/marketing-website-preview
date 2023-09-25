@@ -41,6 +41,14 @@ function MyApp({ Component, pageProps }: AppProps) {
           src='https://cdn-prod.securiti.ai/consent/auto_blocking/8555e54b-cd0b-45d7-9c1c-e9e088bf774a/e058d040-977c-4594-aa2c-84b844ce5cf0.js'
         />
         {/* Securiti.ai Cookie Blocker end */}
+        <link 
+            rel='stylesheet' type='text/css' 
+          href='https://cdn-prod.securiti.ai/consent/cookie-consent.css' 
+        />
+        <link 
+          rel='stylesheet' 
+          type='text/css' href='https://cdn-prod.securiti.ai/consent/styles/8555e54b-cd0b-45d7-9c1c-e9e088bf774a/e058d040-977c-4594-aa2c-84b844ce5cf0.css' 
+        />
       </Head>
       <main className={`${inter.variable} font-inter ${inconsolata.variable}`}>
         <SnackbarContextProvider>
