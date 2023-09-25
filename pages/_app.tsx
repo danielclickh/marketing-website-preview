@@ -62,18 +62,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       `}
       </Script>
       {/* Securiti.ai Cookie Banner */}
-      {/*-- After adding this script, call setConsentBannerParams({uuid: <unique id> }) to set unique ID for a customer. --*/}
-      <Script
-        defer
-        data-strict-csp
-        src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-strict-csp.js'
-        data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
-        data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
-        data-backend-url='https://app.securiti.ai'
-        id='securiti-ai-script'
-        type='text/javascript'
-        strategy='afterInteractive'
-      />
+      <!-- After adding this script, call setConsentBannerParams({uuid: <unique id> }) to set unique ID for a customer. -->
+      <script
+	      defer
+	      data-strict-csp
+	      src="https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-strict-csp.js"
+	      data-tenant-uuid="8555e54b-cd0b-45d7-9c1c-e9e088bf774a"
+	      data-domain-uuid="6e04a5fb-5986-4252-81d6-b9ea27685442"
+	      data-backend-url="https://app.securiti.ai">
+      </script>
       {/* Securiti.ai Cookie Banner */}
     </>
   )
