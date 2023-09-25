@@ -35,12 +35,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <base href='/' />
         <meta content='width=device-width, initial-scale=1' name='viewport' />
         <link href='favicon.ico' rel='icon' type='image/x-icon' />
-        {/* Securiti.ai Cookie Blocker - required for GDPR compliance */}
-        <Script
-          type='text/javascript'
-          src='https://cdn-prod.securiti.ai/consent/auto_blocking/8555e54b-cd0b-45d7-9c1c-e9e088bf774a/e058d040-977c-4594-aa2c-84b844ce5cf0.js'
-        />
-        {/* Securiti.ai Cookie Blocker end */}
         <link 
             rel='stylesheet' type='text/css' 
           href='https://cdn-prod.securiti.ai/consent/cookie-consent.css' 
