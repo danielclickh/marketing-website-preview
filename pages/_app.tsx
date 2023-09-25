@@ -1,5 +1,6 @@
 import '../styles/globals.scss'
 import '../styles/highlightjs.scss'
+import '../styles/securiti-cookie-banner.scss'
 import React from 'react'
 import { Inconsolata, Inter } from 'next/font/google'
 import { SnackbarContextProvider } from '../components/sui'
@@ -31,6 +32,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
+	{/* Securiti.ai cookie blocker */}
+	<script 
+	  type="text/javascript" 
+	  src="https://cdn-prod.securiti.ai/consent/auto_blocking/8555e54b-cd0b-45d7-9c1c-e9e088bf774a/e058d040-977c-4594-aa2c-84b844ce5cf0.js"
+        />
+	{/* Securiti.ai cookie blocker */}
         <base href='/' />
         <meta content='width=device-width, initial-scale=1' name='viewport' />
         <link href='favicon.ico' rel='icon' type='image/x-icon' />
@@ -43,22 +50,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         </SnackbarContextProvider>
       </main>
       <SegmentScript />
-      {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
-      <Script
-        id='otSdkStub-script'
-        src='https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js'
-        charSet='UTF-8'
-        type='text/javascript'
-        data-domain-script={`dedccc4b-7ab2-47de-935c-073b23b1d9b7${
-          process.env.NEXT_IS_PROD === 'true' ? '' : '-test'
-        }`}
-        strategy='lazyOnload'
-      />
-      <Script
-        id='cookie-consent'
-        type='text/javascript'>{`function OptanonWrapper() {}`}</Script>
-
-      {/* CookiePro Cookies Consent Notice start for clickhouse.com */}
       <Script
         id='stripmkttok-script'
         src='https://discover.clickhouse.com/js/stripmkttok.js'
@@ -76,6 +67,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         })(window,document,'script','dataLayer', '${gtmId}');
       `}
       </Script>
+      {/* Securiti.ai Cookie Banner */}
+      <script
+        defer
+	data-strict-csp
+	src="https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-strict-csp.js"
+		data-tenant-uuid="8555e54b-cd0b-45d7-9c1c-e9e088bf774a"
+		data-domain-uuid="e058d040-977c-4594-aa2c-84b844ce5cf0"
+		data-backend-url="https://app.securiti.ai"
+      />
+      {/* Securiti.ai Cookie Banner */}
     </>
   )
 }
