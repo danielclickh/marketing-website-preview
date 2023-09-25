@@ -1,5 +1,6 @@
 import '../styles/globals.scss'
 import '../styles/highlightjs.scss'
+import '../styles/securiti-cookie-banner.scss'
 import React from 'react'
 import { Inconsolata, Inter } from 'next/font/google'
 import { SnackbarContextProvider } from '../components/sui'
@@ -40,18 +41,20 @@ function MyApp({ Component, pageProps }: AppProps) {
           src='https://cdn-prod.securiti.ai/consent/auto_blocking/8555e54b-cd0b-45d7-9c1c-e9e088bf774a/e058d040-977c-4594-aa2c-84b844ce5cf0.js'
         />
         {/* Securiti.ai Cookie Blocker end */}
-        {/* Securiti.ai CSS */}
-        <link
-          rel='stylesheet'
-          type='text/css'
-          href='https://cdn-prod.securiti.ai/consent/cookie-consent.css'
+        {/* Securiti.ai Cookie Banner */}
+        {/*-- After adding this script, call setConsentBannerParams({uuid: <unique id> }) to set unique ID for a customer. --*/}
+        <Script
+          defer
+          data-strict-csp
+          src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-strict-csp.js'
+          data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
+          data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
+          data-backend-url='https://app.securiti.ai'
+          id='securiti-ai-script'
+          type='text/javascript'
+          strategy='afterInteractive'
         />
-        <link
-          rel='stylesheet'
-          type='text/css'
-          href='https://cdn-prod.securiti.ai/consent/styles/8555e54b-cd0b-45d7-9c1c-e9e088bf774a/e058d040-977c-4594-aa2c-84b844ce5cf0.css'
-        />
-        {/* Securiti.ai CSS */}
+        {/* Securiti.ai Cookie Banner */}
       </Head>
       <main className={`${inter.variable} font-inter ${inconsolata.variable}`}>
         <SnackbarContextProvider>
@@ -78,20 +81,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         })(window,document,'script','dataLayer', '${gtmId}');
       `}
       </Script>
-      {/* Securiti.ai Cookie Banner */}
-      {/*-- After adding this script, call setConsentBannerParams({uuid: <unique id> }) to set unique ID for a customer. --*/}
-      <Script
-        defer
-        data-strict-csp
-        src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-strict-csp.js'
-        data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
-        data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
-        data-backend-url='https://app.securiti.ai'
-        id='securiti-ai-script'
-        type='text/javascript'
-        strategy='afterInteractive'
-      />
-      {/* Securiti.ai Cookie Banner */}
     </>
   )
 }
