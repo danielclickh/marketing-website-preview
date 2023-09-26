@@ -4,6 +4,42 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'managing-clickhouse-dictionaires-at-cloudflare',
+      title: 'Managing ClickHouse Dictionaries at Cloudflare',
+      subTitle: 'James Morrison\nSystems Engineer, Cloudflare',
+      description:
+        'James Morrison of Cloudflare discusses managing ClickHouse dictionaries at scale. He traces its history at Cloudflare and details how these essential tools for data queries have evolved in size and source.',
+      thumbnail: 'https://img.youtube.com/vi/0A8nTASRERo/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/0A8nTASRERo?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User stories']
+    },
+    {
+      slug: 'switching-from-elastichsearch-to-clickhouse',
+      title:
+        'Stream pipeline monitoring: Switching from Elasticsearch to ClickHouse',
+      subTitle: 'Ricky Thomas\nCo-founder & CTO, Streamkap',
+      description:
+        'Ricky Thomas of Streamkap highlighted their shift from Elasticsearch to ClickHouse for real-time metrics in their streaming CDC pipelines. He also introduced ClickHouse as a new supported destination.',
+      thumbnail: 'https://img.youtube.com/vi/WFF6hhQU3VQ/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/WFF6hhQU3VQ?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User stories']
+    },
+    {
+      slug: 'building-real-time-applications-with-clickhouse',
+      title:
+        'Building Real-time Applications with ClickHouse Materialized Views',
+      subTitle:
+        'Dale McDiarmid\nPrincipal Product Marketing Engineer, ClickHouse',
+      description:
+        "Dale McDiarmid from ClickHouse explored the concept of building real-time applications using materialized views. Emphasizing ClickHouse's strength in handling fast queries across billions of rows, he explained how materialized views can be used to summarize data, significantly enhancing query performance.",
+      thumbnail: 'https://img.youtube.com/vi/j_kKKX1bguw/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/j_kKKX1bguw?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to', 'Materialized Views']
+    },
+    {
       slug: 'clickpipes-demo',
       title:
         'ClickPipes for Kafka - ClickHouse Cloud Managed Ingestion Service',
