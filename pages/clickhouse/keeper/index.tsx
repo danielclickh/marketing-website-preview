@@ -179,10 +179,8 @@ export default function KeeperPage({
                   </h2>
                   <ul className='ml-10 flex list-disc flex-col gap-y-3 '>
                     <li>Most of your request are writes</li>
-                    <li>
-                      Efficient memory utilisation matters Your project isn’t
-                      part of the Java ecosystem
-                    </li>
+                    <li>Efficient memory utilisation matters</li>
+                    <li>Your project isn’t part of the Java ecosystem</li>
                     <li>
                       You require resource efficiency for write heavy workload
                     </li>
