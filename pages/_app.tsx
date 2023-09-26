@@ -32,16 +32,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        {/* Securiti.ai cookie blocker */}
-        <script
-          type='text/javascript'
-          src='https://cdn-prod.securiti.ai/consent/auto_blocking/8555e54b-cd0b-45d7-9c1c-e9e088bf774a/e058d040-977c-4594-aa2c-84b844ce5cf0.js'
-        />
-        {/* Securiti.ai cookie blocker */}
         <base href='/' />
         <meta content='width=device-width, initial-scale=1' name='viewport' />
         <link href='favicon.ico' rel='icon' type='image/x-icon' />
       </Head>
+      {/* Securiti.ai cookie blocker */}
+      <Script
+        src='https://cdn-prod.securiti.ai/consent/auto_blocking/8555e54b-cd0b-45d7-9c1c-e9e088bf774a/e058d040-977c-4594-aa2c-84b844ce5cf0.js'
+        strategy='beforeInteractive'
+      />
+      {/* Securiti.ai cookie blocker */}
       <main className={`${inter.variable} font-inter ${inconsolata.variable}`}>
         <SnackbarContextProvider>
           <div className='flex min-h-screen flex-col'>
@@ -49,6 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </div>
         </SnackbarContextProvider>
       </main>
+
       <SegmentScript />
       <Script
         id='stripmkttok-script'
@@ -68,7 +69,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       `}
       </Script>
       {/* Securiti.ai Cookie Banner */}
-      <script
+      <Script
         defer
         data-strict-csp
         src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-strict-csp.js'
