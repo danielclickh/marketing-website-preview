@@ -1,3 +1,5 @@
+import { useRef, useState, useEffect } from 'react'
+
 import { SuiText, SuiTitle } from '../../components/sui'
 import CloudProviders from '../../components/CloudProviders'
 
@@ -17,6 +19,13 @@ import { ChevronRightIcon } from '@heroicons/react/solid'
 import GetStartedFree from '../../components/GetStartedFree'
 import LogoCarousel from '../../components/LogoCarousel'
 import Link from 'next/link'
+import { motion, useInView } from 'framer-motion'
+import ClickPipesIntegrationImage from '../../components/ClickPipesAnimation/ClickPipesIntegrationImage'
+import Lines from '../../components/ClickPipesAnimation/Lines'
+
+function getRandomDelay(min: number, max: number): number {
+  return Math.random() * (max - min) + min
+}
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -60,7 +69,22 @@ export default function CloudPage({
   footerData,
   CloudCustomerLogos
 }: CloudData) {
+  const [windowWidth, setWindowWidth] = useState(0)
   const { ctaButton } = hero
+  const integrationsRef = useRef(null)
+  const isInView = useInView(integrationsRef)
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth)
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   return (
     <>
@@ -126,6 +150,7 @@ export default function CloudPage({
                     width={1262}
                     height={523}
                     className='h-auto w-full min-w-[60rem]'
+                    priority={true}
                   />
                 </div>
               </div>
@@ -210,7 +235,7 @@ export default function CloudPage({
                       alt={item.title}
                       width={item.image_width}
                       height={item.image_height}
-                      className=''
+                      priority={false}
                     />
                   </div>
                 </div>
@@ -218,15 +243,15 @@ export default function CloudPage({
             ))}
           </div>
         </div>
-        <div className='relative flex flex-col gap-y-28'>
+        <div className='relative flex flex-col gap-y-28 bg-[#262622] px-3 xl:px-0'>
           <HRSeparator className='my-0' />
-          <div className='section-container bg-shadow-element yellow-shadow flex w-full flex-col items-center justify-between self-center'>
+          <div className='flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
               <Image
                 src='/images/cloud/section_integrations.svg'
                 alt='ClickHouse integrations'
                 width={72}
-                height={72}
+                height={73}
               />
               <SuiTitle type='h2' className='mt-8 mb-6'>
                 Powerful integrations
@@ -244,65 +269,117 @@ export default function CloudPage({
                 </a>
                 .
               </div>
-              <div className='mx-auto mt-16 flex flex-wrap justify-center gap-6 md:max-w-[552px]'>
-                {integrations.map((integration) => (
-                  <CUICard className='p-4' key={integration.name}>
-                    <Image
-                      src={integration.logo}
-                      width={36}
-                      height={36}
-                      alt={integration.name}
-                    />
-                  </CUICard>
-                ))}
-              </div>
 
-              <div className='mx-auto mt-36 max-w-2xl leading-normal text-neutral-200'>
-                <div className='flex flex-col items-center gap-x-10 md:flex-row'>
-                  <div className='text-center md:text-left'>
-                    <h3 className='relative mt-8 mb-6 inline-block text-left font-basier text-3xl font-semibold'>
-                      ClickPipes
-                      <div className='absolute -top-3 -right-10 rounded-full bg-primary-300 px-3 text-sm font-normal text-neutral-725'>
-                        Beta
-                      </div>
-                    </h3>
-                    <p className='mb-6 text-center md:text-left'>
-                      ClickPipes offers the easiest and most intuitive way to
-                      ingest data into ClickHouse Cloud. With support for Apache
-                      Kafka and Confluent today, and many more data sources
-                      coming soon.
-                    </p>
-                  </div>
-                  <Link href='/cloud/clickpipes'>
-                    <Image
-                      src='/images/cloud/clickpipes/clickpipes-diagram.svg'
-                      width={624}
-                      height={457}
-                      alt='ClickPipes'
-                      className='mx-auto max-w-[250px]'
-                    />
-                  </Link>
+              <div className='relative z-20 mx-auto mt-16 flex flex-wrap justify-center gap-6 md:max-w-[552px]'>
+                {integrations.map((integration) => {
+                  const shouldAnimate = isInView && windowWidth > 768
+                  return (
+                    <>
+                      {shouldAnimate ? (
+                        <motion.div
+                          transition={{
+                            duration: 1,
+                            delay: getRandomDelay(0.2, 1),
+                            ease: [0, 0.71, 0.2, 1.01]
+                          }}
+                          animate={
+                            isInView
+                              ? integration.fadeOnLoad
+                                ? { opacity: 0.1 }
+                                : { opacity: 1 }
+                              : ''
+                          }
+                          className={`${
+                            integration.fadeOnLoad ? 'z-10' : 'z-20'
+                          } relative rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
+                          key={integration.name}>
+                          {integration.soon && (
+                            <div className='absolute -top-2 -right-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
+                              Soon
+                            </div>
+                          )}
+                          <ClickPipesIntegrationImage
+                            integration={integration}
+                          />
+                        </motion.div>
+                      ) : (
+                        <div
+                          className={`relative z-20 rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
+                          key={integration.name}>
+                          {integration.soon && (
+                            <div className='absolute -top-2 -right-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
+                              Soon
+                            </div>
+                          )}
+                          <ClickPipesIntegrationImage
+                            integration={integration}
+                          />
+                        </div>
+                      )}
+                    </>
+                  )
+                })}
+                <motion.div
+                  className='absolute top-12 left-8 z-[5] hidden opacity-90 lg:block'
+                  initial={{ opacity: 0 }}
+                  transition={{
+                    ease: 'easeOut',
+                    duration: 6
+                  }}
+                  whileInView={{
+                    opacity: 1
+                  }}>
+                  <Lines />
+                </motion.div>
+              </div>
+              <div className='relative z-20 mt-28 w-full pb-24'>
+                <SuiTitle type='h2' className='mb-6 text-center'>
+                  ClickPipes
+                </SuiTitle>
+                <div
+                  className='mx-auto max-w-3xl text-center leading-normal text-neutral-200'
+                  ref={integrationsRef}>
+                  ClickPipes offers the easiest and most intuitive way to ingest
+                  data into ClickHouse Cloud. With support for Apache Kafka and
+                  Confluent today, and many more data sources coming soon.
                 </div>
-                <div className=' w-full'>
+                <div className='mx-auto mt-11 inline-block w-full bg-[#262622] text-center hover:cursor-none'>
                   <CUIButton
                     type='secondary'
-                    className='group mx-auto mt-16 w-auto'
-                    href='/cloud/clickpipes'
-                    iconRight={
-                      <ChevronRightIcon
-                        height='18'
-                        className='pt-0.5 transition group-hover:translate-x-1/2'
-                      />
-                    }>
+                    className='group mx-auto w-auto text-center'
+                    href='/cloud/clickpipes'>
                     Learn more
                   </CUIButton>
                 </div>
+                <Image
+                  src='/images/cloud/clickhouse-logo-with-dropshadow.svg'
+                  width={120}
+                  height={120}
+                  alt='ClickHouse'
+                  className='relative z-20 mx-auto mt-16 shadow-noOffset shadow-primary-300'
+                />
+                <SuiTitle type='h2' className='mt-8 mb-6 text-center'>
+                  ClickHouse Cloud
+                </SuiTitle>
+                <div className='mx-auto max-w-3xl text-center leading-normal text-neutral-200'>
+                  Experience the power of open-source ClickHouse in a serverless
+                  setup. Deploy in seconds, scale seamlessly, and ensure
+                  top-tier security with our SOC 2 Type II compliant platform.
+                  Available on AWS and GCP. Dive into insights without the
+                  infrastructure hassle!
+                </div>
+                <CUIButton
+                  type='primary'
+                  className='mx-auto mt-11'
+                  href='https://clickhouse.cloud/signUp?loc=clickpipes-cloud-page-get-started'>
+                  Get Started
+                </CUIButton>
               </div>
             </div>
           </div>
         </div>
 
-        <HRSeparator className='my-24' />
+        <HRSeparator className='mb-24' />
         <div className='relative flex flex-col gap-y-28 '>
           <div className='section-container bg-shadow-element-right red-shadow flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
@@ -310,7 +387,7 @@ export default function CloudPage({
                 src='/images/cloud/section_support.svg'
                 alt='Fast Icon'
                 width={72}
-                height={72}
+                height={73}
               />
               <SuiTitle type='h2' className='mt-8 mb-6'>
                 All in one support
@@ -327,7 +404,7 @@ export default function CloudPage({
                     <Image
                       src='/images/cloud/check.svg'
                       width={32}
-                      height={32}
+                      height={33}
                       alt='Icon'
                     />
                     <div className=''>Unlimited 24x7 support</div>
@@ -338,7 +415,7 @@ export default function CloudPage({
                     <Image
                       src='/images/cloud/check.svg'
                       width={32}
-                      height={32}
+                      height={33}
                       alt='Icon'
                     />
                     <div className=''>
@@ -351,7 +428,7 @@ export default function CloudPage({
                     <Image
                       src='/images/cloud/check.svg'
                       width={32}
-                      height={32}
+                      height={33}
                       alt='Icon'
                     />
                     <div className=''>
@@ -364,7 +441,7 @@ export default function CloudPage({
                     <Image
                       src='/images/cloud/check.svg'
                       width={32}
-                      height={32}
+                      height={33}
                       alt='Icon'
                     />
                     <div className=''>
@@ -415,8 +492,8 @@ export default function CloudPage({
                   <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
                     <Image
                       src='/images/cloud/aws-marketplace-logo.svg'
-                      width={180}
-                      height={22}
+                      width={183}
+                      height={29}
                       alt='AWS Marketplace'
                     />
                     <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>
@@ -446,8 +523,8 @@ export default function CloudPage({
                   <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
                     <Image
                       src='/images/cloud/gcp-logo.svg'
-                      width={180}
-                      height={28}
+                      width={181}
+                      height={29}
                       alt='Google Cloud'
                     />
                     <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>

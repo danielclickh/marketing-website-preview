@@ -2,8 +2,8 @@
 	{
 		"id": 1,
 		"image": "/images/cloud/onboarding.svg",
-		"image_width": 500,
-		"image_height": 286,
+		"image_width": 580,
+		"image_height": 298,
 		"title": "Instant onboarding",
 		"description": "All the speed and power that you expect from ClickHouse available in a cloud offering.",
 		"bullets": [
@@ -54,8 +54,8 @@
 	{
 		"id": 3,
 		"image": "/images/cloud/reliability.svg",
-		"image_width": 571,
-		"image_height": 298,
+		"image_width": 691,
+		"image_height": 369,
 		"title": "Uncompromising reliability",
 		"description": "Reliable by default, each service is automatically replicated across multiple availability zones.",
 		"bullets": [
@@ -132,8 +132,8 @@
 	{
 		"id": 5,
 		"image": "/images/cloud/automate-clickhouse-terraform.svg",
-		"image_width": 556,
-		"image_height": 406,
+		"image_width": 560,
+		"image_height": 407,
 		"title": "Automate with ease",
 		"description": "Use our Terraform provider and infrastructure APIs to effortlessly automate your setup and configuration. ",
 		"bullets": [

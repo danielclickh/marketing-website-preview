@@ -18,8 +18,8 @@ function BulletPoint({
   }
 
   return (
-    <div className={`flex item-center space-x-4 pb-2 ${className}`}>
-      <Image src='/images/cloud/check.svg' width={32} height={32} alt='Icon' />
+    <div className={`item-center flex space-x-4 pb-2 ${className}`}>
+      <Image src='/images/cloud/check.svg' width={32} height={33} alt='Icon' />
       <SuiText
         size='base'
         weight='medium'
