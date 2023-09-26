@@ -4,6 +4,19 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'clickpipes-demo',
+      title:
+        'ClickPipes for Kafka - ClickHouse Cloud Managed Ingestion Service',
+      subTitle: 'Dale McDiarmid & Ryadh Dahimene\nClickHouse',
+      description:
+        'ClickPipes is a managed integration platform for ClickHouse Cloud that makes ingesting data from a diverse set of sources as simple as clicking a few buttons. Designed for the most demanding workloads, ClickPipes’s robust and scalable architecture ensures consistent performance and reliability.',
+      thumbnail: 'https://img.youtube.com/vi/rSUHqyqdRuk/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/rSUHqyqdRuk?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['ClickHouse Cloud', 'ClickPipes']
+    },
+
+    {
       slug: 'vantage',
       title: 'Vantage & ClickHouse',
       subTitle: 'Brooke McKim\nCo-founder and CTO, Vantage',
