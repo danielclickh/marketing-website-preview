@@ -52,10 +52,11 @@ export default function KeeperPage({
                     size='base'
                     color='secondary'
                     className='mt-8 md:pr-4 lg:max-w-xl'>
-                    Get the performance you love from open source ClickHouse in
-                    a serverless offering that takes care of the details so you
-                    can spend more time getting insight out of the fastest
-                    database on earth.
+                    ClickHouse Keeper solves the well-known drawbacks of
+                    ZooKeeper and makes many additional improvements.
+                    <br />
+                    <br />
+                    Join us in building the future of distributed consensus.
                   </SuiText>
                   <div className='mt-12 flex items-center justify-center gap-8 lg:justify-start'>
                     <a
@@ -179,11 +180,8 @@ export default function KeeperPage({
                   </h2>
                   <ul className='ml-10 flex list-disc flex-col gap-y-3 '>
                     <li>Most of your request are writes</li>
-                    <li>Efficient memory utilisation matters</li>
+                    <li>Efficient memory utilization matters</li>
                     <li>Your project isn’t part of the Java ecosystem</li>
-                    <li>
-                      You require resource efficiency for write heavy workload
-                    </li>
                     <li>You are managing a ClickHouse cluster</li>
                   </ul>
                 </div>

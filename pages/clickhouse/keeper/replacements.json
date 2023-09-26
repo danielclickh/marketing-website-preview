@@ -16,10 +16,6 @@
         "title": "Uses Raft algorithm (NuRaft implementation)"
     },
     {
-        "id": 5,
-        "title": "Less memory used"
-    },
-    {
         "id": 6,
         "title": "Optional TLS for clients and internal communication"
     }
