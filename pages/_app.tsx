@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         {/* Securiti.ai cookie blocker */}
-        <Script
+        <script
           type='text/javascript'
           src='https://cdn-prod.securiti.ai/consent/auto_blocking/8555e54b-cd0b-45d7-9c1c-e9e088bf774a/e058d040-977c-4594-aa2c-84b844ce5cf0.js'
         />
