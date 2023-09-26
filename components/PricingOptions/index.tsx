@@ -163,7 +163,7 @@ function PricingOptions({
                           key={`plan-bullet-${planIndex}`}>
                           {item.isBulleted && <CheckIcon className='h-4 w-4' />}
                           <div className='item_text'>
-                            <Markdown className=' !text-neutral-0'>
+                            <Markdown className=' max-w-xs !text-neutral-0'>
                               {item.description}
                             </Markdown>
                           </div>
