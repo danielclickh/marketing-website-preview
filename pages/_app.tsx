@@ -8,7 +8,6 @@ import { AppProps } from 'next/app'
 import Script from 'next/script'
 import SegmentScript from '../components/SegmentScript'
 import Head from 'next/head'
-import CookieConsentSettings from '../components/CookieConsent'
 
 const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-P52RCTZ'
 
@@ -70,7 +69,22 @@ function MyApp({ Component, pageProps }: AppProps) {
       `}
       </Script>
       {/* Securiti.ai Cookie Banner */}
-      <CookieConsentSettings />
+      <Script
+        data-strict-csp
+        src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-strict-csp.js'
+        data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
+        data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
+        data-backend-url='https://app.securiti.ai'
+        onReady={() => {
+          const cookieSettingsButton = document.querySelector(
+            '#cookie-settings-button'
+          )
+          cookieSettingsButton?.classList.remove('hidden')
+          cookieSettingsButton?.classList.add('cmp-revoke-consent')
+          console.log('csp loaded - onReady')
+        }}
+      />
+      {/* Securiti.ai Cookie Banner */}
     </>
   )
 }
