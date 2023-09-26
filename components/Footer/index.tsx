@@ -76,7 +76,8 @@ export default function Footer({
               </CUILink>
             ))}
             <button
-              className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length} cmp-revoke-consent whitespace-nowrap hover:text-neutral-0`}>
+              id='cookie-settings-button'
+              className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length} hidden whitespace-nowrap hover:text-neutral-0`}>
               Cookie Settings
             </button>
           </div>
