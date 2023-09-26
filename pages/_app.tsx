@@ -37,14 +37,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link href='favicon.ico' rel='icon' type='image/x-icon' />
       </Head>
       {/* Securiti.ai cookie blocker */}
-      {/* <Script
+      <Script
         src='https://cdn-prod.securiti.ai/consent/auto_blocking/8555e54b-cd0b-45d7-9c1c-e9e088bf774a/e058d040-977c-4594-aa2c-84b844ce5cf0.js'
         strategy='beforeInteractive'
-      /> */}
-      <Script 
-        type="text/javascript" 
-        src="https://cdn-prod.securiti.ai/consent/auto_blocking/8555e54b-cd0b-45d7-9c1c-e9e088bf774a/7b4ec9f7-0279-40b5-9f7c-5a3b367566f2.js"
-      />
+      /> 
       {/* Securiti.ai cookie blocker */}
       <main className={`${inter.variable} font-inter ${inconsolata.variable}`}>
         <SnackbarContextProvider>
@@ -73,7 +69,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       `}
       </Script>
       {/* Securiti.ai Cookie Banner */}
-      {/* <Script
+      <Script
         defer
         data-strict-csp
         src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-strict-csp.js'
@@ -87,22 +83,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           cookieSettingsButton?.classList.remove('hidden')
           cookieSettingsButton?.classList.add('cmp-revoke-consent')
         }}
-      /> */}
-      <Script
-	      defer
-	      data-strict-csp
-	      src="https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-strict-csp.js"
-	      data-tenant-uuid="8555e54b-cd0b-45d7-9c1c-e9e088bf774a"
-	      data-domain-uuid="7b4ec9f7-0279-40b5-9f7c-5a3b367566f2"
-	      data-backend-url="https://app.securiti.ai"
-        onReady={() => {
-          const cookieSettingsButton = document.querySelector(
-            '#cookie-settings-button'
-          )
-          cookieSettingsButton?.classList.remove('hidden')
-          cookieSettingsButton?.classList.add('cmp-revoke-consent')
-        }}
-      />
+      /> 
       {/* Securiti.ai Cookie Banner */}
     </>
   )
