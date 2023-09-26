@@ -1,104 +1,44 @@
-import { useRef, useState, useEffect } from 'react'
-
-import { SuiText, SuiTitle } from '../../../components/sui'
-import CloudProviders from '../../../components/CloudProviders'
-
-import { findOne } from '../../../lib/api/strapi'
-import BulletPoint from '../../../components/BulletPoint'
-import { CloudData } from '../../../types/cloud'
 import { GetStaticProps } from 'next'
-import Layout from '../../../components/Layout'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { CUIButton, CUICard } from '../../../components/ClickUI'
 import Image from 'next/image'
-import HRSeparator from '../../../components/HRSeparator'
-import integrations from './integrations.json'
-import features from './features.json'
-import featureBlocks from './feature_blocks.json'
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import GetStartedFree from '../../../components/GetStartedFree'
-import LogoCarousel from '../../../components/LogoCarousel'
 import Link from 'next/link'
-import { motion, useInView } from 'framer-motion'
-import ClickPipesIntegrationImage from '../../../components/ClickPipesAnimation/ClickPipesIntegrationImage'
-import Lines from '../../../components/ClickPipesAnimation/Lines'
+import GetStarted from '../../../components/GetStarted'
+import Layout from '../../../components/Layout'
+import { SuiText } from '../../../components/sui'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { KeeperData } from '../../../types/keeper'
+import features from './features.json'
+import replacements from './replacements.json'
 
-function getRandomDelay(min: number, max: number): number {
-  return Math.random() * (max - min) + min
-}
-
-export const getStaticProps: GetStaticProps<CloudData> =
+export const getStaticProps: GetStaticProps<KeeperData> =
   async function getStaticProps() {
-    const params = {
-      populate: [
-        'hero',
-        'hero.ctaButton',
-        'hero.cloudProviders',
-        'hero.cloudProviders.darkProviderPngs',
-        'hero.cloudProviders.lightProviderPngs',
-        'hero.videoGif',
-        'hero.backgroundSvg',
-        'features',
-        'features.iconSvg',
-        'screenshotsAndBullets',
-        'screenshotsAndBullets.screenshotPng',
-        'screenshotsAndBullets.bullets',
-        'seo',
-        'seo.image',
-        'CloudCustomerLogos',
-        'CloudCustomerLogos.logos',
-        'CloudCustomerLogos.logos.*',
-        'CloudCustomerLogos.logos.Logo'
-      ]
-    }
-    const data = await findOne('cloud', params)
-    data.seo.path = '/clickhouse/keeper'
-    data.seo.title = 'ClickHouse Keeper - Open-source coordination that scales'
-    data.seo.description =
-      'ClickHouse Keeper solves the well-known drawbacks of ZooKeeper and makes many additional improvements. Join us in building the future of distributed consensus.'
-    data.seo.image = [{ url: '/images/cloud/clickpipes/clickpipes-og.png' }]
-
     const commonProps = await getCommonProps()
     return {
       props: {
-        ...data,
         ...commonProps
       }
     }
   }
 
-export default function CloudPage({
-  hero,
-  seo,
+export default function KeeperPage({
   headerData,
   footerData,
-  CloudCustomerLogos
-}: CloudData) {
-  const [windowWidth, setWindowWidth] = useState(0)
-  const { ctaButton } = hero
-  const integrationsRef = useRef(null)
-  const isInView = useInView(integrationsRef)
-
-  useEffect(() => {
-    setWindowWidth(window.innerWidth)
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth)
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
+  platforms
+}: KeeperData) {
+  const seoData = {
+    path: '/clickhouse/keeper',
+    title: 'ClickHouse Keeper - Open-source coordination that scales',
+    description:
+      'ClickHouse Keeper solves the well-known drawbacks of ZooKeeper and makes many additional improvements. Join us in building the future of distributed consensus.',
+    image: [{ url: '/images/cloud/clickpipes/clickpipes-og.png' }]
+  }
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <Layout footerData={footerData} seo={seoData} headerData={headerData}>
         <div className='bg-neutral-800 bg-contain bg-center bg-no-repeat pt-10'>
           <div className='relative overflow-x-hidden'>
-            <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>
-              <div className='flex flex-col lg:flex-row'>
-                <div className='flex-col text-center md:mt-16 lg:w-7/12 lg:text-left'>
+            <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 2xl:px-0'>
+              <div className='flex flex-col gap-6 lg:flex-row lg:items-center'>
+                <div className='flex-col text-center md:mt-16 lg:w-1/2 lg:text-left'>
                   <h1 className='mb-4 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
                     ClickHouse{' '}
                     <span className='tilted tilted-yellow'>
@@ -117,7 +57,7 @@ export default function CloudPage({
                     can spend more time getting insight out of the fastest
                     database on earth.
                   </SuiText>
-                  <div className='mt-12 flex items-center justify-center gap-8'>
+                  <div className='mt-12 flex items-center justify-center gap-8 lg:justify-start'>
                     <a
                       href='https://github.com/ClickHouse/ClickHouse?utm_source=clickhouse&utm_medium=website&utm_campaign=clickhouse-keeper'
                       target='_blank'
@@ -143,14 +83,14 @@ export default function CloudPage({
                     </Link>
                   </div>
                 </div>
-                <div className='mt-12 w-full lg:block lg:w-1/2'>
+                <div className='mt-12 w-full lg:mt-0 lg:block lg:w-1/2'>
                   <Image
                     src='/images/clickhouse-keeper-hero.svg'
                     alt='ClickHouse Keeper'
                     loading='eager'
                     width={1262}
                     height={523}
-                    className='mx-auto h-auto w-full md:min-w-[640px]'
+                    className='mx-auto h-auto w-full'
                     priority={true}
                   />
                 </div>
@@ -158,406 +98,171 @@ export default function CloudPage({
             </div>
           </div>
         </div>
-        <div className='bg-neutral-800 pb-24'>
-          <div className='mx-auto'>
-            <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-6 text-center font-basier text-xl font-semibold leading-normal text-neutral-300 md:px-0'>
-              ClickHouse Cloud is trusted by developers that work with data at{' '}
-              <span className='tilted tilted-yellow'>
-                <span className='tilted-content leading-8'>scale</span>
-              </span>
-            </div>
-            <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center md:gap-x-14'>
-              <div className='absolute left-0 z-10 h-full bg-cloudFadeLeftLogos p-10 lg:pr-20'></div>
-              <div className='absolute right-0 z-10 h-full bg-cloudFadeRightLogos p-10 lg:pl-20'></div>
-              <LogoCarousel
-                fixShape={true}
-                logoColor='pink'
-                logos={CloudCustomerLogos.logos}
-                speedClass1='animate-marqueeLeft3'
-                speedClass2='animate-marqueeLeft4'
-              />
-            </div>
-          </div>
-        </div>
-        <div className='border-t-2 border-primary-300 bg-neutral-725 text-neutral-0'>
-          <div className='container mx-auto flex max-w-7xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8  2xl:px-0'>
-            <div className='feature-container'>
+
+        <div className='bg-neutral-700 px-4 pb-24 pt-16 text-neutral-0 sm:px-8 md:px-8  2xl:px-0'>
+          <div className='container mx-auto flex max-w-5xl flex-col '>
+            <Image
+              src='/images/coordination-icon.svg'
+              width={72}
+              height={72}
+              alt='Coordination'
+              className='mx-auto mb-6'
+            />
+            <h2 className='mb-6 text-center font-basier text-4xl font-semibold'>
+              Coordination without the drawbacks
+            </h2>
+            <p className='mx-auto mb-8 text-center text-base lg:max-w-3xl'>
+              In order to overcome some shortcomings of ZooKeeper, we started
+              building a ClickHouse native Keeper from scratch based on our own
+              requirements, optimized for usage in ClickHouse.
+            </p>
+            <div className='grid rounded-md border border-primary-300 bg-neutral-900 p-9 md:grid-cols-2 lg:grid-cols-3'>
               {features.map((feature, index: number) => (
-                <div className='col' key={index}>
-                  <div className='flex items-start gap-4'>
-                    <Image
-                      src={feature.icon}
-                      width={32}
-                      height={32}
-                      alt={feature.title}
-                    />
-                    <div>
-                      <h4 className='mb-3 font-inter font-bold'>
-                        {feature.title}
-                      </h4>
-                      <p className='font-inter text-sm font-light leading-relaxed text-neutral-200'>
-                        {feature.content}
-                      </p>
-                    </div>
-                  </div>
+                <div key={index} className='flex items-center gap-4'>
+                  <Image
+                    src='/images/cloud/check.svg'
+                    width={32}
+                    height={33}
+                    alt='Icon'
+                  />
+                  <h4 className='font-inter font-semibold'>{feature.title}</h4>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        <div className='bg-shadow-element yellow-shadow flex w-full gap-y-4 pb-12 text-neutral-0 md:gap-y-28'>
-          <div className='container mx-auto flex max-w-7xl flex-col gap-y-48 bg-opacity-10 px-8 pt-24 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
-            {featureBlocks.map((item, index: number) => (
-              <div key={index}>
-                <div
-                  className={`flex flex-col items-center gap-x-24 ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  } justify-center`}>
-                  <div className='mb-12 flex flex-col md:mb-0 md:w-1/2 md:text-left'>
-                    <div className='border-yellow-200 md:border-l-4 md:pl-8 '>
-                      <SuiTitle
-                        type='h3'
-                        className='mb-4 !text-4xl'
-                        weight='semibold'>
-                        {item.title}
-                      </SuiTitle>
-                      <SuiText size='base' color='secondary' className='mb-8'>
-                        {item.description}
-                      </SuiText>
-                      {item.bullets.map((bullet, index: number) => (
-                        <BulletPoint key={index} text={bullet.text} />
-                      ))}
-                    </div>
-                  </div>
-                  <div className='flex items-center justify-center md:w-1/2'>
+        <div className='bg-neutral-750 px-4 pb-24 pt-16 text-neutral-0 sm:px-8 md:px-8  2xl:px-0'>
+          <div className='container mx-auto flex max-w-5xl flex-col '>
+            <Image
+              src='/images/question-icon.svg'
+              width={72}
+              height={72}
+              alt='Coordination'
+              className='mx-auto mb-6'
+            />
+            <h2 className='mb-6 text-center font-basier text-4xl font-semibold'>
+              A replacement for ZooKeeper?
+            </h2>
+            <p className='mx-auto mb-8 text-center text-base lg:max-w-3xl'>
+              Keeper is a drop-in replacement for Zookeeper written in C++, with
+              a fully compatible client protocol and the same data model, and
+              features these improvements
+            </p>
+            <div className='mx-auto max-w-3xl'>
+              <div className='flex flex-col gap-y-3'>
+                {replacements.map((replacement, index: number) => (
+                  <div key={index} className='flex items-center gap-4'>
                     <Image
-                      src={item.image}
-                      alt={item.title}
-                      width={item.image_width}
-                      height={item.image_height}
-                      priority={false}
+                      src='/images/arrow-right.svg'
+                      width={24}
+                      height={24}
+                      alt='Icon'
                     />
+                    <h4>{replacement.title}</h4>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-        <div className='relative flex flex-col gap-y-28 bg-[#262622] px-3 xl:px-0'>
-          <HRSeparator className='my-0' />
-          <div className='flex w-full flex-col items-center justify-between self-center'>
-            <div className='flex w-full flex-col items-center'>
-              <Image
-                src='/images/cloud/section_integrations.svg'
-                alt='ClickHouse integrations'
-                width={72}
-                height={73}
-              />
-              <SuiTitle type='h2' className='mt-8 mb-6'>
-                Powerful integrations
-              </SuiTitle>
-              <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200'>
-                We curate the most popular ways to work ClickHouse. Explore our
-                growing library of ecosystem integrations for data ingestion,
-                data visualization, and language clients. Now with support for
-                the MySQL interface so you can connect to any of your favorite
-                MySQL-compatible{' '}
-                <a
-                  href='https://clickhouse.com/docs/en/integrations/data-visualization'
-                  className='text-primary-300'>
-                  data tools
-                </a>
-                .
-              </div>
-
-              <div className='relative z-20 mx-auto mt-16 flex flex-wrap justify-center gap-6 md:max-w-[552px]'>
-                {integrations.map((integration) => {
-                  const shouldAnimate = isInView && windowWidth > 768
-                  return (
-                    <>
-                      {shouldAnimate ? (
-                        <motion.div
-                          transition={{
-                            duration: 1,
-                            delay: getRandomDelay(0.2, 1),
-                            ease: [0, 0.71, 0.2, 1.01]
-                          }}
-                          animate={
-                            isInView
-                              ? integration.fadeOnLoad
-                                ? { opacity: 0.1 }
-                                : { opacity: 1 }
-                              : ''
-                          }
-                          className={`${
-                            integration.fadeOnLoad ? 'z-10' : 'z-20'
-                          } relative rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
-                          key={integration.name}>
-                          {integration.soon && (
-                            <div className='absolute -top-2 -right-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
-                              Soon
-                            </div>
-                          )}
-                          <ClickPipesIntegrationImage
-                            integration={integration}
-                          />
-                        </motion.div>
-                      ) : (
-                        <div
-                          className={`relative z-20 rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
-                          key={integration.name}>
-                          {integration.soon && (
-                            <div className='absolute -top-2 -right-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
-                              Soon
-                            </div>
-                          )}
-                          <ClickPipesIntegrationImage
-                            integration={integration}
-                          />
-                        </div>
-                      )}
-                    </>
-                  )
-                })}
-                <motion.div
-                  className='absolute top-12 left-8 z-[5] hidden opacity-90 lg:block'
-                  initial={{ opacity: 0 }}
-                  transition={{
-                    ease: 'easeOut',
-                    duration: 6
-                  }}
-                  whileInView={{
-                    opacity: 1
-                  }}>
-                  <Lines />
-                </motion.div>
-              </div>
-              <div className='relative z-20 mt-28 w-full pb-24'>
-                <SuiTitle type='h2' className='mb-6 text-center'>
-                  ClickPipes
-                </SuiTitle>
-                <div
-                  className='mx-auto max-w-3xl text-center leading-normal text-neutral-200'
-                  ref={integrationsRef}>
-                  ClickPipes offers the easiest and most intuitive way to ingest
-                  data into ClickHouse Cloud. With support for Apache Kafka and
-                  Confluent today, and many more data sources coming soon.
+            </div>
+            <div className='py-24'>
+              <div className='flex flex-col gap-8 md:flex-row'>
+                <div className='rounded-lg bg-primary-300 p-8 text-black md:w-1/2'>
+                  <Image
+                    src='/images/icon-checkmark-circle.svg'
+                    width={48}
+                    height={48}
+                    alt='Coordination'
+                    className='mx-auto mb-6'
+                  />
+                  <h2 className='mb-6 text-center font-basier text-2xl font-semibold'>
+                    When to use ClickHouse Keeper?
+                  </h2>
+                  <ul className='ml-10 flex list-disc flex-col gap-y-3 '>
+                    <li>Most of your request are writes</li>
+                    <li>
+                      Efficient memory utilisation matters Your project isn’t
+                      part of the Java ecosystem
+                    </li>
+                    <li>
+                      You require resource efficiency for write heavy workload
+                    </li>
+                    <li>You are managing a ClickHouse cluster</li>
+                  </ul>
                 </div>
-                <div className='mx-auto mt-11 inline-block w-full bg-[#262622] text-center hover:cursor-none'>
-                  <CUIButton
-                    type='secondary'
-                    className='group mx-auto w-auto text-center'
-                    href='/cloud/clickpipes'>
-                    Learn more
-                  </CUIButton>
+                <div className='rounded-lg bg-neutral-700 p-8 text-neutral-200 md:w-1/2'>
+                  <Image
+                    src='/images/icon-delete.svg'
+                    width={48}
+                    height={48}
+                    alt='Coordination'
+                    className='mx-auto mb-6'
+                  />
+                  <h2 className='mb-6 text-center font-basier text-2xl font-semibold'>
+                    When NOT to use ClickHouse Keeper?
+                  </h2>
+                  <ul className='ml-10 flex list-disc flex-col gap-y-3 '>
+                    <li>Most of your request are reads</li>
+                    <li>You require scalability with a read-heavy workload</li>
+                    <li>Java-based components are important to your project</li>
+                    <li>
+                      Managing ClickHouse clusters is not part of the use case
+                    </li>
+                  </ul>
                 </div>
-                <Image
-                  src='/images/cloud/clickhouse-logo-with-dropshadow.svg'
-                  width={120}
-                  height={120}
-                  alt='ClickHouse'
-                  className='relative z-20 mx-auto mt-16 shadow-noOffset shadow-primary-300'
-                />
-                <SuiTitle type='h2' className='mt-8 mb-6 text-center'>
-                  ClickHouse Cloud
-                </SuiTitle>
-                <div className='mx-auto max-w-3xl text-center leading-normal text-neutral-200'>
-                  Experience the power of open-source ClickHouse in a serverless
-                  setup. Deploy in seconds, scale seamlessly, and ensure
-                  top-tier security with our SOC 2 Type II compliant platform.
-                  Available on AWS and GCP. Dive into insights without the
-                  infrastructure hassle!
-                </div>
-                <CUIButton
-                  type='primary'
-                  className='mx-auto mt-11'
-                  href='https://clickhouse.cloud/signUp?loc=clickpipes-cloud-page-get-started'>
-                  Get Started
-                </CUIButton>
               </div>
             </div>
           </div>
         </div>
-
-        <HRSeparator className='mb-24' />
-        <div className='relative flex flex-col gap-y-28 '>
-          <div className='section-container bg-shadow-element-right red-shadow flex w-full flex-col items-center justify-between self-center'>
-            <div className='flex w-full flex-col items-center'>
-              <Image
-                src='/images/cloud/section_support.svg'
-                alt='Fast Icon'
-                width={72}
-                height={73}
-              />
-              <SuiTitle type='h2' className='mt-8 mb-6'>
-                All in one support
-              </SuiTitle>
-              <div className='mx-auto max-w-2xl px-4 text-center leading-normal text-neutral-200 md:px-0'>
-                ClickHouse provides the most comprehensive, consultative cloud
-                support in the industry bundled with your ClickHouse Cloud
-                service.
-              </div>
-
-              <ul className='flex max-w-lg flex-col justify-start gap-2 py-8 px-4 md:px-0'>
-                <li>
-                  <div className='flex items-center gap-4'>
-                    <Image
-                      src='/images/cloud/check.svg'
-                      width={32}
-                      height={33}
-                      alt='Icon'
-                    />
-                    <div className=''>Unlimited 24x7 support</div>
-                  </div>
-                </li>
-                <li>
-                  <div className='flex items-center gap-4'>
-                    <Image
-                      src='/images/cloud/check.svg'
-                      width={32}
-                      height={33}
-                      alt='Icon'
-                    />
-                    <div className=''>
-                      On-Demand training and onboarding workshops
+        <div className='bg-neutral-750'>
+          <div className=' clip-inverted-triangle'>
+            <div className='section-container mx-auto max-w-5xl lg:mt-0 '>
+              <div className='relative flex flex-col rounded-lg border-t-2 border-neutral-700/80 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
+                <div className='p-16'>
+                  <Image
+                    src='/images/cpp-raft.svg'
+                    width={274}
+                    height={88}
+                    alt='C++ + RAFT'
+                    className='mx-auto mb-6'
+                  />
+                  <h2 className='mb-6 text-center font-basier text-3xl font-semibold'>
+                    Keep your system afloat with RAFT
+                  </h2>
+                  <div className='mx-auto mt-16 flex flex-col gap-10 md:flex-row md:gap-16'>
+                    <div className='md:w-1/2'>
+                      <h3 className='mb-4 font-inconsolata text-lg text-primary-300'>
+                        Zookeeper Implementation
+                      </h3>
+                      <p className='text-base'>
+                        ZooKeeper is one of the first well-known open-source
+                        coordination systems. It's implemented in Java, and has
+                        a quite simple and powerful data model. ZooKeeper's
+                        coordination algorithm, ZooKeeper Atomic Broadcast
+                        (ZAB), doesn't provide linearizability guarantees for
+                        reads, because each ZooKeeper node serves reads locally.
+                      </p>
+                    </div>
+                    <div className='md:w-1/2'>
+                      <h3 className='mb-4 font-inconsolata text-lg text-primary-300'>
+                        ClickHouse Keeper Implementation
+                      </h3>
+                      <p className='text-base'>
+                        Unlike ZooKeeper, ClickHouse Keeper is written in C++
+                        and uses the RAFT algorithm implementation. This
+                        algorithm allows linearizability for reads and writes,
+                        and has several open-source implementations in different
+                        languages.
+                      </p>
                     </div>
                   </div>
-                </li>
-                <li>
-                  <div className='flex items-center gap-4'>
-                    <Image
-                      src='/images/cloud/check.svg'
-                      width={32}
-                      height={33}
-                      alt='Icon'
-                    />
-                    <div className=''>
-                      Consultative support via Expert Sessions
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div className='flex items-center gap-4'>
-                    <Image
-                      src='/images/cloud/check.svg'
-                      width={32}
-                      height={33}
-                      alt='Icon'
-                    />
-                    <div className=''>
-                      Assistance in migration to ClickHouse Cloud
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <CUIButton
-              type='secondary'
-              className='group w-auto'
-              href='/support/program/'
-              iconRight={
-                <ChevronRightIcon
-                  height='18'
-                  className='pt-0.5 transition group-hover:translate-x-1/2'
-                />
-              }>
-              Learn more
-            </CUIButton>
-          </div>
-        </div>
-
-        <HRSeparator className='my-24' />
-        <div className='relative flex flex-col gap-y-28 pb-48'>
-          <div className='section-container bg-shadow-element-right red-shadow flex w-full flex-col items-center justify-between self-center'>
-            <div className='flex w-full flex-col items-center'>
-              <Image
-                src='/images/cloud/cloud-icon.svg'
-                alt='Fast Icon'
-                width={72}
-                height={72}
-              />
-              <SuiTitle type='h2' className='mt-8 mb-6 text-center'>
-                ClickHouse Cloud, wherever you&nbsp;are
-              </SuiTitle>
-              <div className='mx-auto max-w-2xl px-4 text-center leading-normal text-neutral-200 md:px-0'>
-                With the flexibility to choose where and how you deploy.
-                Available on AWS and GCP, and through Marketplaces. Manage your
-                services through our ClickHouse Cloud self-serve UI, or by
-                leveraging our APIs and Terraform provider to automate your
-                operations.
-              </div>
-              <div className='mt-16 flex flex-col space-y-10 md:flex-row md:space-x-10 md:space-y-0'>
-                <CUICard className='w-full max-w-[22.5rem] bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
-                  <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
-                    <Image
-                      src='/images/cloud/aws-marketplace-logo.svg'
-                      width={183}
-                      height={29}
-                      alt='AWS Marketplace'
-                    />
-                    <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>
-                      <div className='text-center text-sm text-neutral-200'>
-                        Flexible deployment and subscription options available
-                        through the AWS Marketplace.
-                      </div>
-                    </div>
-                  </CUICard.Body>
-                  <CUICard.Footer className='flex w-full items-center '>
-                    <CUIButton
-                      type='secondary'
-                      href='https://aws.amazon.com/marketplace/pp/prodview-jettukeanwrfc'
-                      linkClass='w-full inline-grid group'
-                      iconRight={
-                        <ChevronRightIcon
-                          height='18'
-                          className='arrow pt-0.5 transition group-hover:translate-x-1/2'
-                        />
-                      }
-                      target='_blank'>
-                      View in Marketplace
-                    </CUIButton>
-                  </CUICard.Footer>
-                </CUICard>
-                <CUICard className='w-full max-w-[22.5rem] bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
-                  <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
-                    <Image
-                      src='/images/cloud/gcp-logo.svg'
-                      width={181}
-                      height={29}
-                      alt='Google Cloud'
-                    />
-                    <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>
-                      <div className='text-center text-sm text-neutral-200'>
-                        Fast procurement, flexible purchasing, and fulfillment
-                        available through the GCP Marketplace.
-                      </div>
-                    </div>
-                  </CUICard.Body>
-                  <CUICard.Footer className='flex w-full items-center '>
-                    <CUIButton
-                      type='secondary'
-                      href='https://console.cloud.google.com/marketplace/product/clickhouse-public/clickhouse-cloud'
-                      linkClass='w-full inline-grid group'
-                      iconRight={
-                        <ChevronRightIcon
-                          height='18'
-                          className='arrow pt-0.5 transition group-hover:translate-x-1/2'
-                        />
-                      }
-                      target='_blank'>
-                      View in Marketplace
-                    </CUIButton>
-                  </CUICard.Footer>
-                </CUICard>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div className='section-container pb-16 md:px-8 2xl:px-0 '>
-          <GetStartedFree href='https://clickhouse.cloud/signUp?loc=cloud-page-get-started-footer' />
+        <div className='-mt-2 bg-primary-300 py-8 pb-10'></div>
+        <div className='pt-16 md:px-8 2xl:px-0'>
+          <GetStarted platforms={platforms} />
         </div>
       </Layout>
     </>
