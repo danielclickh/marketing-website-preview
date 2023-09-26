@@ -16,6 +16,12 @@
 				"target": "_self"
 			},
 			{
+				"id": 20,
+				"name": "ClickPipes",
+				"href": "/cloud/clickpipes",
+				"target": "_self"
+			},
+			{
 				"id": 25,
 				"name": "Download",
 				"href": "https://clickhouse.com/docs/en/install#self-managed-install",
