@@ -1,21 +1,16 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+import ClickPipesAnimation from '../../../components/ClickPipesAnimation'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
-import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ClickPipesData } from '../../../types/clickpipes'
 import features from './features.json'
 import integrations from './integrations.json'
-import ClickPipesAnimation from '../../../components/ClickPipesAnimation'
-import MarketoForm from '../../../components/MarketoForm'
-
-
 
 export const getStaticProps: GetStaticProps<ClickPipesData> =
   async function getStaticProps() {
@@ -42,11 +37,6 @@ export default function ClickHouseServerPage({
   headerData,
   footerData
 }: ClickPipesData) {
-
-  const formSuccessRef = useRef<HTMLDivElement|null>(null);
-  const [formSuccess, setFormSuccess] = useState(false)
-  const [formLoaded, setFormLoaded] = useState(false)
-
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -60,9 +50,6 @@ export default function ClickHouseServerPage({
                   </h4>
                   <h1 className='relative mb-3 mt-4 inline-block font-basier text-4xl font-semibold leading-tight md:mt-0 md:text-5.5xl'>
                     ClickPipes
-                    <div className='absolute -top-2 -right-10 rounded-full bg-primary-300 px-3 text-sm font-normal text-neutral-725 md:-top-1'>
-                      Beta
-                    </div>
                   </h1>
                   <SuiText
                     size='base'
@@ -77,11 +64,11 @@ export default function ClickHouseServerPage({
                       type='primary'
                       size='lg'
                       weight='semibold'
-                      href='/cloud/clickpipes#joinwaitlist'
-                      target='_self'
+                      href='https://clickhouse.cloud/signUp?loc=clickpipes-hero-button'
+                      target='_blank'
                       linkClass='w-full mx-auto md:mx-0 max-w-[14rem] md:max-w-[12rem]'
                       className='w-full'>
-                      Join the waitlist
+                      Get started today
                     </CUIButton>
                     <CUIButton
                       type='secondary'
@@ -189,17 +176,6 @@ export default function ClickHouseServerPage({
                       </div>
                     ))}
                 </div>
-                <div className='mx-auto mt-6'>
-                  <CUIButton
-                    type='primary'
-                    size='lg'
-                    weight='semibold'
-                    href='/cloud/clickpipes#joinwaitlist'
-                    linkClass='w-full mx-auto md:mx-0 max-w-[14rem] md:max-w-[12rem]'
-                    className='mx-auto'>
-                    Join the waitlist
-                  </CUIButton>
-                </div>
               </div>
             </div>
           </div>
@@ -240,49 +216,6 @@ export default function ClickHouseServerPage({
             textSlanted='Cloud'
             textAfter='for free'
           />
-        </div>
-        <div className='mx-auto mb-24 max-w-7xl' id='joinwaitlist'>
-          <h2 className='mb-10 text-center font-basier text-3xl font-semibold leading-normal'>
-            Join the waitlist
-          </h2>
-          <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
-            <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
-              <div className='px-4 lg:px-0'>
-
-                {!formSuccess && <MarketoForm formId='1057' onLoad={() => setFormLoaded(true)} onSuccess={() => {
-                  setFormSuccess(true)
-
-                  // Delay needed to allow the ref to update before scrolling
-                  setTimeout(() => {
-                    formSuccessRef.current?.scrollIntoView({
-                      behavior: 'smooth'
-                    })
-                  }, 10);
-
-                  return false // Stops page from reloading
-                }} />}
-
-                {!formLoaded && <div className='text-center'>
-                  Loading form...
-                </div>}
-
-                {formSuccess && <div ref={formSuccessRef} className='text-center'>
-                  <h3 className='text-2xl font-bold'>Thanks! You're on the waitlist</h3>
-                  <p className='mt-2 text-neutral-200'>We will be in touch as soon as ClickPipes is available.</p>
-                </div>}
-
-                {formLoaded && !formSuccess && <div className='rich_content privacy-notice-form mt-4 text-center text-sm'>
-                  <ReactMarkdown
-                    children='By clicking Submit, you acknowledge that ClickHouse will
-                    process your personal information in accordance with our
-                    [privacy
-                    policy](https://clickhouse.com/legal/privacy-policy).'
-                  />
-                </div>}
-
-              </div>
-            </div>
-          </div>
         </div>
       </Layout>
     </>
