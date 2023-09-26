@@ -4,16 +4,6 @@ import { CUILink } from '../ClickUI'
 import Image from 'next/image'
 import logoFull from '../../public/logo-full.svg'
 import topLevelFooterMenu from './footer.json'
-function openCookie() {
-  const element = document.querySelector<HTMLElement>(
-    '#securitiCmpCookiePrefBtn'
-  )
-  if (element) {
-    element.click()
-  } else {
-    setTimeout(openCookie, 100)
-  }
-}
 export default function Footer({
   newsletterForm,
   bottomLinks = []
@@ -79,15 +69,14 @@ export default function Footer({
                 target={bottomLink.target}
                 segmentEvent={{
                   label: bottomLink.text,
-                  category: 'website-nav'
+                  category: 'website-nav-footer'
                 }}
                 className={`first:pl-0 bottom-link-${index} whitespace-nowrap hover:text-neutral-0`}>
                 {bottomLink.text}
               </CUILink>
             ))}
             <button
-              onClick={openCookie}
-              className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length} whitespace-nowrap hover:text-neutral-0`}>
+              className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length} cmp-revoke-consent whitespace-nowrap hover:text-neutral-0`}>
               Cookie Settings
             </button>
           </div>
