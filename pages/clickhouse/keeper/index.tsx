@@ -199,10 +199,8 @@ export default function KeeperPage({
                   <ul className='ml-10 flex list-disc flex-col gap-y-3 '>
                     <li>Most of your request are reads</li>
                     <li>You require scalability with a read-heavy workload</li>
-                    <li>Java-based components are important to your project</li>
-                    <li>
-                      Managing ClickHouse clusters is not part of the use case
-                    </li>
+                    <li>Java-based components are important to you</li>
+                    <li>You are not managing ClickHouse clusters</li>
                   </ul>
                 </div>
               </div>
