@@ -37,7 +37,7 @@ export default function KeeperPage({
         <div className='bg-neutral-800 bg-contain bg-center bg-no-repeat pt-10'>
           <div className='relative overflow-x-hidden'>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 2xl:px-0'>
-              <div className='flex flex-col gap-6 lg:flex-row lg:items-center'>
+              <div className='flex flex-col lg:flex-row lg:items-center'>
                 <div className='flex-col text-center md:mt-16 lg:w-1/2 lg:text-left'>
                   <h1 className='mb-4 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
                     ClickHouse{' '}
@@ -91,7 +91,7 @@ export default function KeeperPage({
                     loading='eager'
                     width={672}
                     height={486}
-                    className='mx-auto h-auto w-full'
+                    className=' h-auto w-full'
                     priority={true}
                   />
                 </div>
@@ -117,7 +117,7 @@ export default function KeeperPage({
               building a ClickHouse native Keeper from scratch based on our own
               requirements, optimized for usage in ClickHouse.
             </p>
-            <div className='grid rounded-md border border-primary-300 bg-neutral-900 p-9 md:grid-cols-2 lg:grid-cols-3'>
+            <div className='grid gap-4 rounded-md border border-primary-300 bg-neutral-900 p-8 md:grid-cols-2 lg:grid-cols-3'>
               {features.map((feature, index: number) => (
                 <div key={index} className='flex items-center gap-4'>
                   <Image
@@ -167,13 +167,13 @@ export default function KeeperPage({
             </div>
             <div className='py-24'>
               <div className='flex flex-col gap-8 md:flex-row'>
-                <div className='rounded-lg bg-primary-300 p-8 text-black md:w-1/2'>
+                <div className='rounded-lg bg-primary-300 p-8 pt-6 text-black md:w-1/2'>
                   <Image
                     src='/images/icon-checkmark-circle.svg'
                     width={48}
                     height={48}
                     alt='Coordination'
-                    className='mx-auto mb-6'
+                    className='mx-auto mb-4'
                   />
                   <h2 className='mb-6 text-center font-basier text-2xl font-semibold'>
                     When to use ClickHouse Keeper?
@@ -185,13 +185,13 @@ export default function KeeperPage({
                     <li>You are managing a ClickHouse cluster</li>
                   </ul>
                 </div>
-                <div className='rounded-lg bg-neutral-700 p-8 text-neutral-200 md:w-1/2'>
+                <div className='rounded-lg bg-neutral-700 p-8 pt-6 text-white md:w-1/2'>
                   <Image
                     src='/images/icon-delete.svg'
                     width={48}
                     height={48}
                     alt='Coordination'
-                    className='mx-auto mb-6'
+                    className='mx-auto mb-4'
                   />
                   <h2 className='mb-6 text-center font-basier text-2xl font-semibold'>
                     When NOT to use ClickHouse Keeper?
@@ -210,7 +210,7 @@ export default function KeeperPage({
         <div className='bg-neutral-750'>
           <div className=' clip-inverted-triangle'>
             <div className='section-container mx-auto max-w-5xl lg:mt-0 '>
-              <div className='relative flex flex-col rounded-lg border-t-2 border-neutral-700/80 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
+              <div className='relative flex flex-col rounded-lg border-t-4 border-neutral-700/80 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
                 <div className='p-16'>
                   <Image
                     src='/images/cpp-raft.svg'
