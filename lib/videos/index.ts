@@ -15,7 +15,7 @@ export function getVideos(): Video[] {
       categories: ['User stories']
     },
     {
-      slug: 'switching-from-elastichsearch-to-clickhouse',
+      slug: 'switching-from-elasticsearch-to-clickhouse',
       title:
         'Stream pipeline monitoring: Switching from Elasticsearch to ClickHouse',
       subTitle: 'Ricky Thomas\nCo-founder & CTO, Streamkap',
