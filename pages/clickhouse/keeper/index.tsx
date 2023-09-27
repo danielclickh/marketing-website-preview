@@ -222,7 +222,7 @@ export default function KeeperPage({
                   <h2 className='mb-6 text-center font-basier text-3xl font-semibold'>
                     Keep your system afloat with RAFT
                   </h2>
-                  <div className='mx-auto mt-16 flex flex-col gap-10 md:flex-row md:gap-16'>
+                  <div className='mx-auto mt-10 flex flex-col gap-10 md:flex-row md:gap-16'>
                     <div className='md:w-1/2'>
                       <h3 className='mb-4 font-inconsolata text-lg text-primary-300'>
                         Zookeeper Implementation
