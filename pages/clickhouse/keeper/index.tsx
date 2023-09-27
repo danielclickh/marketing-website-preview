@@ -167,7 +167,7 @@ export default function KeeperPage({
             </div>
             <div className='pb-24 pt-16'>
               <div className='flex flex-col gap-8 md:flex-row'>
-                <div className='rounded-lg bg-primary-300 p-8 pt-6 text-black md:w-1/2'>
+                <div className='rounded-lg bg-primary-300 p-8 pt-6 pb-12 text-black md:w-1/2'>
                   <Image
                     src='/images/icon-checkmark-circle.svg'
                     width={48}
