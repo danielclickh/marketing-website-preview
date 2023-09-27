@@ -29,7 +29,7 @@ export function SeoPage({
   return (
     <main>
       <div className='container mx-auto max-w-6xl px-6 2xl:px-0 my-20'>
-      <div className='lg:flex flex-row items-start gap-6'>
+      <div className='lg:flex flex-row items-start gap-16'>
         <div className='flex-grow flex-shrink'>
           <h1 className='mb-20 font-basier text-4xl font-bold text-neutral-100'>
             <span className='leading-snug'>{title}</span>
