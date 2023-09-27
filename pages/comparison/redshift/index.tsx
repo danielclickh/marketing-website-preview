@@ -189,7 +189,7 @@ export default function ComparisonPage({
             </div>
           </div>
         </div>
-        <div className='bg-primary-300 py-12'>
+        <div className='-mt-1 bg-primary-300 py-12 lg:mt-0'>
           <div className='mx-auto max-w-2xl text-center text-neutral-900'>
             <p className='mb-6 text-2xl font-bold'>
               "Moving over to ClickHouse, we were basically able to cut that
