@@ -29,7 +29,7 @@ export default function KeeperPage({
     title: 'ClickHouse Keeper - Open-source coordination that scales',
     description:
       'ClickHouse Keeper solves the well-known drawbacks of ZooKeeper and makes many additional improvements. Join us in building the future of distributed consensus.',
-    image: [{ url: '/images/cloud/clickpipes/clickpipes-og.png' }]
+    image: [{ url: '/images/keeper-social-image.png' }]
   }
   return (
     <>
@@ -89,8 +89,8 @@ export default function KeeperPage({
                     src='/images/clickhouse-keeper-hero.svg'
                     alt='ClickHouse Keeper'
                     loading='eager'
-                    width={1262}
-                    height={523}
+                    width={672}
+                    height={486}
                     className='mx-auto h-auto w-full'
                     priority={true}
                   />
