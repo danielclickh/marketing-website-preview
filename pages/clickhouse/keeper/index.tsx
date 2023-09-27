@@ -254,6 +254,10 @@ export default function KeeperPage({
         <div className='pt-16 md:px-8 2xl:px-0'>
           <GetStarted platforms={platforms} />
         </div>
+        <div className='mx-auto max-w-7xl pb-24 text-center text-sm'>
+          Apache, Apache ZooKeeper and the ZooKeeper logo are trademarks of the
+          Apache Software Foundation.
+        </div>
       </Layout>
     </>
   )
