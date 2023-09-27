@@ -10,6 +10,12 @@
 				"target": "_self"
 			},
 			{
+				"id": 22,
+				"name": "ClickHouse Keeper",
+				"href": "/clickhouse/keeper",
+				"target": "_self"
+			},
+			{
 				"id": 17,
 				"name": "ClickHouse Cloud",
 				"href": "/cloud",

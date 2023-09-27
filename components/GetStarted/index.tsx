@@ -7,9 +7,9 @@ import Link from 'next/link'
 export default function FetchGetStarted({ platforms }: GettingStartedData) {
   return (
     <div
-      className='section-container mb-24 flex w-full text-neutral-0 md:px-8 2xl:px-0 '
+      className='mx-auto mb-24 flex w-full max-w-7xl px-4 text-neutral-0 xl:px-0'
       id='getting_started'>
-      <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-click-grid bg-[length:547px_360px] bg-right bg-no-repeat py-16 px-4 xl:px-24'>
+      <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-click-grid bg-[length:547px_360px] bg-right bg-no-repeat p-6 md:p-10 lg:p-12 xl:p-16'>
         <div className='flex flex-col text-center'>
           <SuiTitle type='h2' color='white'>
             Start using{' '}
