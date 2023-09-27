@@ -4,7 +4,7 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
-      slug: 'managing-clickhouse-dictionaires-at-cloudflare',
+      slug: 'managing-clickhouse-dictionaries-at-cloudflare',
       title: 'Managing ClickHouse Dictionaries at Cloudflare',
       subTitle: 'James Morrison\nSystems Engineer, Cloudflare',
       description:

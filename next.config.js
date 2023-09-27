@@ -321,6 +321,11 @@ const nextConfig = {
         source: '/support/professional-services-agreement',
         destination: '/legal/agreements/professional-services',
         permanent: true
+      },
+      {
+        source: '/videos/managing-clickhouse-dictionaires-at-cloudflare',
+        destination: '/videos/managing-clickhouse-dictionaries-at-cloudflare',
+        permanent: true
       }
     ]
   }
