@@ -202,6 +202,17 @@ export function getVideos(): Video[] {
         '<iframe src="https://www.youtube-nocookie.com/embed/O3GJ6jag3Hc?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
       categories: ['User Stories']
     },
+    {
+      slug: 'how-to-compute-running-aggregation-in-clickhouse',
+      title: 'How to Compute a Running Aggregation in ClickHouse',
+      subTitle: 'Rich Raposa\nDirector, Global Learning, ClickHouse',
+      description:
+        "Using aggregate functions in a materialized view in ClickHouse can lead to surprising results if you don't define them properly. The AggregatingMergeTree table engine requires special column types for representing and storing intermediate (running) totals of aggregations like avg, max, min, uniq, count, and all the other aggregate functions in ClickHouse.",
+      thumbnail: 'https://img.youtube.com/vi/-Ma2ohy_6lM/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/-Ma2ohy_6lM?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
 
     {
       slug: 'how-to-get-started-with-clickhouse',
