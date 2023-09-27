@@ -200,7 +200,6 @@ export default function KeeperPage({
                     <li>Most of your request are reads</li>
                     <li>You require scalability with a read-heavy workload</li>
                     <li>Java-based components are important to you</li>
-                    <li>You are not managing ClickHouse clusters</li>
                   </ul>
                 </div>
               </div>
@@ -228,12 +227,9 @@ export default function KeeperPage({
                         Zookeeper Implementation
                       </h3>
                       <p className='text-base'>
-                        ZooKeeper is one of the first well-known open-source
-                        coordination systems. It's implemented in Java, and has
-                        a quite simple and powerful data model. ZooKeeper's
-                        coordination algorithm, ZooKeeper Atomic Broadcast
-                        (ZAB), doesn't provide linearizability guarantees for
-                        reads, because each ZooKeeper node serves reads locally.
+                        ZooKeeper is implemented in Java and its coordination
+                        algorithm, ZooKeeper Atomic Broadcast (ZAB), doesn't
+                        provide linearizability guarantees for reads.
                       </p>
                     </div>
                     <div className='md:w-1/2'>
