@@ -146,7 +146,7 @@ export default function KeeperPage({
               A replacement for ZooKeeper?
             </h2>
             <p className='mx-auto mb-8 text-center text-base lg:max-w-3xl'>
-              Keeper is a drop-in replacement for Zookeeper written in C++, with
+              Keeper is a drop-in replacement for ZooKeeper written in C++, with
               a fully compatible client protocol and the same data model, and
               features these improvements
             </p>
@@ -224,7 +224,7 @@ export default function KeeperPage({
                   <div className='mx-auto mt-10 flex flex-col gap-10 md:flex-row md:gap-16'>
                     <div className='md:w-1/2'>
                       <h3 className='mb-4 font-inconsolata text-lg text-primary-300'>
-                        Zookeeper Implementation
+                        ZooKeeper Implementation
                       </h3>
                       <p className='text-base'>
                         ZooKeeper is implemented in Java and its coordination
