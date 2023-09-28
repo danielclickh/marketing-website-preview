@@ -50,6 +50,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </SnackbarContextProvider>
       </main>
 
+      <SegmentScript />
       <Script
         id='stripmkttok-script'
         src='https://discover.clickhouse.com/js/stripmkttok.js'

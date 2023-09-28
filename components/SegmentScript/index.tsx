@@ -169,7 +169,7 @@ const SegmentScript = () => {
     <Script
       id='segmentScript'
       type='text/javascript'
-      strategy='lazyOnload'
+      strategy='afterInteractive'
       dangerouslySetInnerHTML={{
         __html: inlineScript
       }}></Script>
