@@ -5,9 +5,14 @@ const prod = {
   domainUUID: 'e058d040-977c-4594-aa2c-84b844ce5cf0'
 }
 
+// const dev = {
+//   tenentUUID: '8555e54b-cd0b-45d7-9c1c-e9e088bf774a',
+//   domainUUID: '7b4ec9f7-0279-40b5-9f7c-5a3b367566f2'
+// }
+
 const dev = {
   tenentUUID: '8555e54b-cd0b-45d7-9c1c-e9e088bf774a',
-  domainUUID: '7b4ec9f7-0279-40b5-9f7c-5a3b367566f2'
+  domainUUID: 'e058d040-977c-4594-aa2c-84b844ce5cf0'
 }
 
 //Staging and Prod instances
