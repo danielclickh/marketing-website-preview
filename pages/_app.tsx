@@ -81,6 +81,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           cookieSettingsButton?.classList.remove('hidden')
           cookieSettingsButton?.classList.add('cmp-revoke-consent')
         }}
+      />
+      {/* Securiti.ai Cookie Banner */}
     </>
   )
 }
