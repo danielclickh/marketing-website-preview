@@ -169,7 +169,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
             height: 'calc(100vh - 64px)'
           }}
           {...getFloatingProps()}>
-          <div className='mb-6 h-[stretch] overflow-auto pt-8'>
+          <div className='mb-6 h-[stretch] overflow-auto pt-14'>
             <div className='items-top flex w-full justify-between'>
               <nav className='flex w-full flex-col'>
                 {headerMenuItems.map((menuItem) => {

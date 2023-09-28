@@ -25,7 +25,7 @@ function MobileMenuItem({
           label: name ?? '',
           category: 'website-nav'
         }}
-        className='menu-item hover:no-underline font-medium'>
+        className='menu-item font-medium hover:no-underline'>
         {name}
       </SuiLink>
     )
@@ -33,13 +33,13 @@ function MobileMenuItem({
 
   if (menuItems) {
     return (
-      <div className='bg-neutral-750/90 px-4 sm:px-8 pb-4 border-y border-neutral-700 backdrop-blur-[10px]'>
+      <div className='border-y border-neutral-700 bg-neutral-750/90 px-4 pb-4 backdrop-blur-[10px] sm:px-8'>
         {menuItems.map((subitem: HeaderLinkItem | HeaderTopNavItem) => {
           if (subitem.menuItems && subitem.menuItems.length > 0) {
             return (
               <div className='flex flex-col pt-4'>
                 {subitem.name && (
-                  <div className='mb-4 font-medium text-sm'>{subitem.name}</div>
+                  <div className='mb-4 text-sm font-medium'>{subitem.name}</div>
                 )}
                 {subitem.menuItems.map((item: HeaderLinkItem) => (
                   <SuiLink
@@ -50,12 +50,12 @@ function MobileMenuItem({
                       label: item.name,
                       category: 'website-nav'
                     }}
-                    className='flex items-start hover:no-underline max-w-md mb-4'>
+                    className='mb-4 flex max-w-md items-start hover:no-underline'>
                     <div
                       className={styles.menuItem}
                       data-icon={item.icon ? 'true' : 'false'}>
                       {item.icon && (
-                        <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md items-center sm:h-12 sm:w-12 md:mr-4'>
+                        <div className='flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md sm:h-12 sm:w-12 md:mr-4'>
                           <Image
                             alt={`Image ${item.name}`}
                             src={item.icon}
@@ -96,7 +96,7 @@ function MobileMenuItem({
                   label: subitem.name,
                   category: 'website-nav'
                 }}
-                className='flex items-start hover:no-underline max-w-md'>
+                className='flex max-w-md items-start hover:no-underline'>
                 {subitem.name}
               </SuiLink>
             )

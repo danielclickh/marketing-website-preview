@@ -54,8 +54,6 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       populate: ['CloudCTAHeader', 'CloudCTAFooter']
     })
 
-    console.log(cloudCtaContent)
-
     const blogsParams = {
       sort: ['date:DESC', 'publishedAt:DESC'],
       populate: ['thumbnailPng', 'author'],

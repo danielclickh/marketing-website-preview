@@ -149,6 +149,13 @@ function Sitemap({
                   ClickPipes
                 </Link>
               </p>
+              <p className='pb-2'>
+                <Link
+                  href={`/clickhouse/keeper?loc=sitemap`}
+                  className='text-primary-300 hover:underline'>
+                  ClickHouse Keeper
+                </Link>
+              </p>
             </div>
             <div>
               <h2

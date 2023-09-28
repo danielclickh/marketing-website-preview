@@ -1,34 +1,30 @@
-import { findAll, getPathsValues } from '../../../lib/api/strapi'
 import { GetStaticProps } from 'next'
-import Layout from '../../../components/Layout'
-import { ComparisonProps } from '../../../types/comparisons'
-import { ParamsType } from '../../../types/homepage'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
-import {
-  NOT_FOUND_FALLBACK,
-  REVALIDATE_SECONDS
-} from '../../../lib/utils/revalidationConfig'
-import { CUICard } from '../../../components/ClickUI'
-import ReactMarkdown from 'react-markdown'
-import HRSeparator from '../../../components/HRSeparator'
-import ContactForm from '../../../components/ContactForm'
-import { StrapiImage } from '../../../components/StrapiElements'
-import LogoCarousel from '../../../components/LogoCarousel'
-import React, { useState } from 'react'
 import Image from 'next/image'
-import BlogPost from '../../../components/BlogPostList/BlogPost'
 import Link from 'next/link'
-import Markdown from '../../../components/Markdown'
+import React, { useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
+import BlogPost from '../../../components/BlogPostList/BlogPost'
+import { CUICard } from '../../../components/ClickUI'
+import ContactForm from '../../../components/ContactForm'
+import HRSeparator from '../../../components/HRSeparator'
+import Layout from '../../../components/Layout'
+import LogoCarousel from '../../../components/LogoCarousel'
+import Markdown from '../../../components/Markdown'
+import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
+import ResponsiveEmbed from '../../../components/ResponsiveEmbed'
+import { StrapiImage } from '../../../components/StrapiElements'
+import { findAll } from '../../../lib/api/strapi'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
+import { ComparisonProps } from '../../../types/comparisons'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
-  async function getStaticProps({ params }) {
-    const { slug } = params as ParamsType
+  async function getStaticProps() {
     const { data } = await findAll('comparisons', {
       filters: {
         slug: {
-          $eq: slug
+          $eq: 'redshift'
         }
       },
       populate: [
@@ -74,7 +70,7 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
 
     const seo = comparison.seo
 
-    seo.path = `/comparison/${slug}`
+    seo.path = `/comparison/redshift`
 
     const commonData = await getCommonProps()
     const newsLetterData = await getNewsLetterData()
@@ -182,38 +178,48 @@ export default function ComparisonPage({
             </div>
           </div>
         </div>
-
-        {comparison.customerStories.title && (
-          <div className='relative mb-16'>
-            <div className='slanted-top mx-auto h-16 bg-primary-300 lg:max-h-96'></div>
-            <div className='-mt-1 h-1 w-full bg-primary-300'></div>
-            <div className='mx-auto bg-primary-300'>
-              <div className='relative z-10 mx-auto  max-w-7xl bg-primary-300'>
-                <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
-                  <div className='flip-selection mx-auto flex flex-col text-center'>
-                    <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-6 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
-                      {comparison.customerStories.title}{' '}
-                      <span className='tilted tilted-black'>
-                        <span className='tilted-content leading-8'>
-                          {comparison.customerStories.popText}
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-10 md:gap-x-14'>
-                  <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
-                  <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
-                  <LogoCarousel
-                    logos={comparison.customerStories.logos}
-                    speedClass1='animate-marqueeLeft'
-                    speedClass2='animate-marqueeLeft2'
-                  />
+        <div className='clip-inverted-triangle -mt-16 xl:-mt-28'>
+          <div className='relative z-40 mx-auto mt-4 max-w-4xl pt-20 pb-0 lg:mt-12'>
+            <div className='mx-auto flex items-center gap-4 px-4 md:px-0'>
+              <div className='container mx-auto max-w-4xl border-none px-6  2xl:px-0'>
+                <div className='overflow-hidden rounded-xl'>
+                  <ResponsiveEmbed html='<iframe src="https://www.youtube-nocookie.com/embed/8FUfyvoqDTg?rel=0&autoplay=0" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>' />
                 </div>
               </div>
             </div>
           </div>
-        )}
+        </div>
+        <div className='-mt-1 bg-primary-300 py-12 lg:mt-0'>
+          <div className='mx-auto max-w-2xl text-center text-neutral-900'>
+            <p className='mb-6 text-2xl font-bold'>
+              "Moving over to ClickHouse, we were basically able to cut that
+              (Redshift) bill in half"
+            </p>
+            <p className='text-xl font-light text-neutral-725'>Brooke McKim</p>
+            <p className='text-xl font-light text-neutral-725'>
+              Co-founder and CTO, Vantage
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className='bg-primary-300 py-6'>
+        <div className='mx-auto'>
+          <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-6 text-center font-basier text-xl font-semibold leading-normal text-neutral-900 md:px-0'>
+            Trusted by developers that work with data at{' '}
+            <span className='tilted tilted-black'>
+              <span className='tilted-content leading-8'>scale</span>
+            </span>
+          </div>
+          <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-16 md:gap-x-14'>
+            <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
+            <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
+            <LogoCarousel
+              logos={comparison.customerStories.logos}
+              speedClass1='animate-marqueeLeft3'
+              speedClass2='animate-marqueeLeft4'
+            />
+          </div>
+        </div>
       </div>
       {comparison.painpointsTitle && (
         <div className='mx-auto mt-28 max-w-7xl px-4 md:px-8 2xl:px-0'>
@@ -431,26 +437,4 @@ export default function ComparisonPage({
       </div>
     </Layout>
   )
-}
-
-export async function getStaticPaths() {
-  const params = {
-    fields: ['slug']
-  }
-
-  // Define an array of slugs to exclude
-  const excludedSlugs = ['snowflake', 'redshift']
-
-  const allPaths = await getPathsValues('comparisons', params)
-
-  // Filter out the paths with the excluded slugs
-  const paths = allPaths.filter((path) => {
-    const slug = path.params.slug
-    return !excludedSlugs.includes(slug)
-  })
-
-  return {
-    paths,
-    fallback: NOT_FOUND_FALLBACK
-  }
 }

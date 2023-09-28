@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Markdown from '../Markdown'
 import styles from './styles.module.scss'
-import { XIcon } from '@heroicons/react/solid'
 
 const components = {
   a: ({ node, children, className, ...props }: any) => {
@@ -21,7 +20,7 @@ const components = {
 }
 
 function Banner({ content }: { content: string }) {
-  const [isClosed, setClosed] = useState(true)
+  const [isClosed, setClosed] = useState(false)
 
   useEffect(() => {
     const closed = content.length === 0

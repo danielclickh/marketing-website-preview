@@ -4,6 +4,55 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'managing-clickhouse-dictionaries-at-cloudflare',
+      title: 'Managing ClickHouse Dictionaries at Cloudflare',
+      subTitle: 'James Morrison\nSystems Engineer, Cloudflare',
+      description:
+        'James Morrison of Cloudflare discusses managing ClickHouse dictionaries at scale. He traces its history at Cloudflare and details how these essential tools for data queries have evolved in size and source.',
+      thumbnail: 'https://img.youtube.com/vi/0A8nTASRERo/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/0A8nTASRERo?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User stories']
+    },
+    {
+      slug: 'switching-from-elasticsearch-to-clickhouse',
+      title:
+        'Stream pipeline monitoring: Switching from Elasticsearch to ClickHouse',
+      subTitle: 'Ricky Thomas\nCo-founder & CTO, Streamkap',
+      description:
+        'Ricky Thomas of Streamkap highlighted their shift from Elasticsearch to ClickHouse for real-time metrics in their streaming CDC pipelines. He also introduced ClickHouse as a new supported destination.',
+      thumbnail: 'https://img.youtube.com/vi/WFF6hhQU3VQ/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/WFF6hhQU3VQ?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User stories']
+    },
+    {
+      slug: 'building-real-time-applications-with-clickhouse',
+      title:
+        'Building Real-time Applications with ClickHouse Materialized Views',
+      subTitle:
+        'Dale McDiarmid\nPrincipal Product Marketing Engineer, ClickHouse',
+      description:
+        "Dale McDiarmid from ClickHouse explored the concept of building real-time applications using materialized views. Emphasizing ClickHouse's strength in handling fast queries across billions of rows, he explained how materialized views can be used to summarize data, significantly enhancing query performance.",
+      thumbnail: 'https://img.youtube.com/vi/j_kKKX1bguw/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/j_kKKX1bguw?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to', 'Materialized Views']
+    },
+    {
+      slug: 'clickpipes-demo',
+      title:
+        'ClickPipes for Kafka - ClickHouse Cloud Managed Ingestion Service',
+      subTitle: 'Dale McDiarmid & Ryadh Dahimene\nClickHouse',
+      description:
+        'ClickPipes is a managed integration platform for ClickHouse Cloud that makes ingesting data from a diverse set of sources as simple as clicking a few buttons. Designed for the most demanding workloads, ClickPipes’s robust and scalable architecture ensures consistent performance and reliability.',
+      thumbnail: 'https://img.youtube.com/vi/rSUHqyqdRuk/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/rSUHqyqdRuk?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['ClickHouse Cloud', 'ClickPipes']
+    },
+
+    {
       slug: 'vantage',
       title: 'Vantage & ClickHouse',
       subTitle: 'Brooke McKim\nCo-founder and CTO, Vantage',
@@ -152,6 +201,17 @@ export function getVideos(): Video[] {
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/O3GJ6jag3Hc?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
       categories: ['User Stories']
+    },
+    {
+      slug: 'how-to-compute-running-aggregation-in-clickhouse',
+      title: 'How to Compute a Running Aggregation in ClickHouse',
+      subTitle: 'Rich Raposa\nDirector, Global Learning, ClickHouse',
+      description:
+        "Using aggregate functions in a materialized view in ClickHouse can lead to surprising results if you don't define them properly. The AggregatingMergeTree table engine requires special column types for representing and storing intermediate (running) totals of aggregations like avg, max, min, uniq, count, and all the other aggregate functions in ClickHouse.",
+      thumbnail: 'https://img.youtube.com/vi/-Ma2ohy_6lM/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/-Ma2ohy_6lM?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
     },
 
     {

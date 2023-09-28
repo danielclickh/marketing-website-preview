@@ -17,9 +17,10 @@ export const getStaticProps: GetStaticProps<ClickPipesData> =
     const data = {
       seo: {
         path: '/cloud/clickpipes',
-        title: 'ClickPipes - ClickHouse Cloud',
+        title: 'ClickPipes - Continuous Data Ingestion for ClickHouse Cloud',
         description:
-          'ClickPipes is an integration engine that makes ingesting massive volumes of data from a diverse set of sources as simple as clicking a few buttons. Our robust and scalable architecture empowers you to handle the most demanding workloads, with guaranteed high throughput and low latency at scale.'
+          'ClickPipes is an integration engine that makes ingesting massive volumes of data from a diverse set of sources as simple as clicking a few buttons. Our robust and scalable architecture empowers you to handle the most demanding workloads, with guaranteed high throughput and low latency at scale.',
+        image: [{ url: '/images/cloud/clickpipes/clickpipes-og.png' }]
       }
     }
 
