@@ -1,5 +1,6 @@
 import '../styles/globals.scss'
 import '../styles/highlightjs.scss'
+import '../styles/securiti-cookie-banner.scss'
 import React from 'react'
 import { Inconsolata, Inter } from 'next/font/google'
 import { SnackbarContextProvider } from '../components/sui'
