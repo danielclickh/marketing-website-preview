@@ -60,10 +60,6 @@ const nextConfig = {
       {
         source: '/uploads/:path*',
         destination: `${strapiApiUrl}/uploads/:path*`
-      },
-      {
-        source: '/sitemap.xml',
-        destination: `${strapiApiUrl}/sitemap/index.xml`
       }
     ]
   },

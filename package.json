@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "download-cms-data": "ts-node  -O '{\"module\": \"commonjs\"}' copyCmsData",
-    "deploy": "yarn download-cms-data && next build",
+    "create-static-sitemap": "ts-node  -O '{\"module\": \"commonjs\"}' createStaticSitemap",
+    "deploy": "yarn download-cms-data && yarn create-static-sitemap && next build",
     "lint": "next lint",
     "export": "next export"
   },
