@@ -1,31 +1,23 @@
 import type { NextApiResponse } from 'next'
 import { fetchAll } from '../lib/api/strapi'
-
-//pages/sitemap.xml.js
-//product
-//company
-//use cases
-//pricing
-//resources
-//blogs
-//news
-//events
-//videos
-//ond demand
-//comparisons
+import { getVideos } from '../lib/videos/index'
 
 interface Items {
   id?: string
   slug?: string
   updatedAt?: string
   url?: string
+  thumbnail?: string
+  description?: string
+  title?: string
 }
 
 function generateSiteMap(
   blogPosts: Items[],
   events: Items[],
   comparisons: Items[],
-  richTextPages: Items[]
+  richTextPages: Items[],
+  videos: Items[]
 ) {
   const siteURL = 'https://clickhouse.com'
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -65,6 +57,9 @@ function generateSiteMap(
   </url>
   <url>
       <loc>${siteURL}/media</loc>
+  </url>
+  <url>
+    <loc>${siteURL}/videos</loc>
   </url>
   <url>
       <loc>${siteURL}/monitorama-2023</loc>
@@ -142,6 +137,15 @@ function generateSiteMap(
   `
     })
     .join('')}
+ ${videos
+   .map((post) => {
+     return `
+      <url>
+          <loc>${`${siteURL}/videos/${post.slug}`}</loc>
+      </url>
+      `
+   })
+   .join('')}
 </urlset>
 
  `
@@ -176,7 +180,13 @@ export async function getServerSideProps({ res }: { res: NextApiResponse }) {
   const richTextPages = await fetchAll('rich-content-pages', richTextPageParams)
 
   // We generate the XML sitemap with the posts data
-  const sitemap = generateSiteMap(blogPosts, events, comparisons, richTextPages)
+  const sitemap = generateSiteMap(
+    blogPosts,
+    events,
+    comparisons,
+    richTextPages,
+    getVideos()
+  )
 
   res.setHeader('Content-Type', 'text/xml')
   // we send the XML to the browser
