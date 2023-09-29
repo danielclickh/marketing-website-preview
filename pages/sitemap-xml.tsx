@@ -1,15 +1,7 @@
 import type { NextApiResponse } from 'next'
-
-import menuItems from '../components/header/menuItems.json'
-import { fetchAll, findOne } from '../lib/api/strapi'
-import { convertDateToString } from '../lib/utils/dateUtils'
-import { getCommonProps } from '../lib/utils/getCommonProps'
-import { CommonProps } from '../types/homepage'
-import { getVideos } from '../lib/videos/index'
+import { fetchAll } from '../lib/api/strapi'
 
 //pages/sitemap.xml.js
-const EXTERNAL_DATA_URL = 'https://jsonplaceholder.typicode.com/posts'
-
 //product
 //company
 //use cases
