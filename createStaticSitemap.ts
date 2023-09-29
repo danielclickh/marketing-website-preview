@@ -33,7 +33,7 @@ function generateSiteMap(
   const siteURL = 'https://clickhouse.com'
 
   const sitemapXML = `<?xml version="1.0" encoding="UTF-8"?>
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>${siteURL}</loc>
     </url>
@@ -152,15 +152,13 @@ function generateSiteMap(
    ${videos
      .map((post) => {
        return `
-        <url>
-            <loc>${`${siteURL}/videos/${post.slug}`}</loc>
-        </url>
-        `
+    <url>
+        <loc>${`${siteURL}/videos/${post.slug}`}</loc>
+    </url>
+    `
      })
      .join('')}
-  </urlset>
-
-   `
+</urlset>`
   try {
     const outputPath = path.join(__dirname, 'public', 'sitemap.xml')
     fs.writeFileSync(outputPath, sitemapXML)
