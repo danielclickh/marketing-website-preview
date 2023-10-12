@@ -30,11 +30,6 @@
     "imgSrc": "/socials/stackoverflow.svg"
   },
   {
-    "name": "Facebook",
-    "href": "https://www.facebook.com/ClickHouseInc/",
-    "imgSrc": "/socials/facebook.svg"
-  },
-  {
     "name": "Telegram",
     "href": "https://telegram.me/clickhouse_en",
     "imgSrc": "/socials/telegram.svg"
