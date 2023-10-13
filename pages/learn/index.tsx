@@ -258,7 +258,7 @@ function LearnPage({
           weight='normal'
           color='secondary'
           className='mb-10'>
-          Let the world know you’re a ClickHouse subject matter expect! We’re
+          Let the world know you’re a ClickHouse subject matter expert! We’re
           working on building the first official ClickHouse certification
           program, and we will share the news on social media when the exams are
           ready for beta testers.
