@@ -8,6 +8,7 @@ import { SnackbarContextProvider } from '../components/sui'
 import { AppProps } from 'next/app'
 import Script from 'next/script'
 import SegmentScript from '../components/SegmentScript'
+import UTMPersist from '../components/UTMPersist'
 import Head from 'next/head'
 
 const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-P52RCTZ'
@@ -45,6 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </SnackbarContextProvider>
       </main>
       <SegmentScript />
+      <UTMPersist />
       <Script
         id='stripmkttok-script'
         src='https://discover.clickhouse.com/js/stripmkttok.js'
@@ -62,23 +64,46 @@ function MyApp({ Component, pageProps }: AppProps) {
         })(window,document,'script','dataLayer', '${gtmId}');
       `}
       </Script>
-      {/* Securiti.ai Cookie Banner */}
-      <Script
-        defer
-        data-strict-csp
-        data-skip-css='true'
-        src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-strict-csp.js'
-        data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
-        data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
-        data-backend-url='https://app.securiti.ai'
-        onReady={() => {
-          const cookieSettingsButton = document.querySelector(
-            '#cookie-settings-button'
-          )
-          cookieSettingsButton?.classList.remove('hidden')
-          cookieSettingsButton?.classList.add('cmp-revoke-consent')
-        }}
-      />
+
+      {/* Securiti.ai Cookie Banner - first is produciton mode, second is dev */}
+      {process.env.NEXT_IS_PROD ? (
+        <Script
+          defer
+          data-strict-csp
+          data-skip-css='false'
+          src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader-strict-csp.js'
+          data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
+          data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
+          data-backend-url='https://app.securiti.ai'
+          onReady={() => {
+            const cookieSettingsButton = document.querySelector(
+              '#cookie-settings-button'
+            )
+            cookieSettingsButton?.classList.remove('hidden')
+            cookieSettingsButton?.classList.add('cmp-revoke-consent')
+          }}
+        />
+      ) : (
+        <Script
+          defer
+          data-strict-csp
+          data-securiti-staging-mode='true'
+          data-skip-css='false'
+          src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader-strict-csp.js'
+          data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
+          data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
+          data-backend-url='https://app.securiti.ai'
+          onReady={() => {
+            console.log('Cookie banner in dev mode')
+            const cookieSettingsButton = document.querySelector(
+              '#cookie-settings-button'
+            )
+            cookieSettingsButton?.classList.remove('hidden')
+            cookieSettingsButton?.classList.add('cmp-revoke-consent')
+          }}
+        />
+      )}
+
       {/* Securiti.ai Cookie Banner */}
     </>
   )
