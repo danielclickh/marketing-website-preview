@@ -38,7 +38,6 @@ const UTMPersist = () => {
 
     const handleRouteChange = () => {
       updateLinks()
-      window.analytics.page()
     }
 
     router.events.on('routeChangeComplete', handleRouteChange)
