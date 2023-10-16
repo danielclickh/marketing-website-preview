@@ -1,6 +1,7 @@
 import '../styles/globals.scss'
 import '../styles/highlightjs.scss'
 import '../styles/securiti-cookie-banner.scss'
+import '../styles/securiti-overrides.scss'
 import React from 'react'
 import { Inconsolata, Inter } from 'next/font/google'
 import { SnackbarContextProvider } from '../components/sui'
@@ -65,7 +66,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Script
         defer
         data-strict-csp
-        data-skip-css="true"
+        data-skip-css='true'
         src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-strict-csp.js'
         data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
         data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
