@@ -68,9 +68,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       {process.env.NEXT_IS_PROD ? (
         <Script
           defer
-          data-strict-csp
           data-skip-css='true'
-          src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader-strict-csp.js'
+          src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader.js'
           data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
           data-domain-uuid='14707cc7-31e6-41e7-931b-9afd9b578e61'
           data-backend-url='https://app.securiti.ai'
