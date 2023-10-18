@@ -45,6 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </div>
         </SnackbarContextProvider>
       </main>
+      <SegmentScript />
       <UTMPersist />
       <Script
         id='stripmkttok-script'
