@@ -87,7 +87,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         // THIS IS DEV/LOCAL
         <Script
           defer
-          data-skip-css='true'
+          data-skip-css='false'
           data-strict-csp
           src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader-strict-csp.js'
           data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
