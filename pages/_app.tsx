@@ -70,7 +70,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           defer
           data-strict-csp
           data-skip-css='true'
-          data-securiti-staging-mode='true'
           src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader-strict-csp.js'
           data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
           data-domain-uuid='14707cc7-31e6-41e7-931b-9afd9b578e61'
