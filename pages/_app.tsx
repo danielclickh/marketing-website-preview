@@ -66,6 +66,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       {/* Securiti.ai Cookie Banner - first is produciton mode, second is dev */}
       {process.env.NEXT_IS_PROD ? (
+        // THIS IS PRODUCTION
         <Script
           defer
           data-strict-csp
@@ -83,6 +84,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           }}
         />
       ) : (
+        // THIS IS DEV/LOCAL
         <Script
           defer
           data-skip-css='true'
