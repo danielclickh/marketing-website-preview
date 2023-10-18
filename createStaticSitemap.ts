@@ -5,6 +5,9 @@ import fs from 'fs'
 import path from 'path'
 dotenv.config()
 
+import { getStagingOnlyFilters } from './lib/api/strapi'
+const stagingOnlyFilters = getStagingOnlyFilters()
+
 interface Items {
   id?: string
   slug?: string
@@ -173,7 +176,8 @@ async function triggerSitemap() {
 
   const blogsParams = {
     sort: ['date:DESC', 'publishedAt:DESC'],
-    fields: ['createdAt', 'updatedAt', 'publishedAt', 'slug', 'date']
+    fields: ['createdAt', 'updatedAt', 'publishedAt', 'slug', 'date'],
+    filters: { $or: stagingOnlyFilters }
   }
   const blogPosts = await fetchAll('blog-posts', blogsParams)
 
