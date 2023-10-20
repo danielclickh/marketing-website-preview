@@ -322,6 +322,28 @@ const nextConfig = {
         source: '/videos/managing-clickhouse-dictionaires-at-cloudflare',
         destination: '/videos/managing-clickhouse-dictionaries-at-cloudflare',
         permanent: true
+      },
+      {
+        source: '/company/events/202312-amer-clickhouse-fundamentals',
+        destination: '/company/events/clickhouse-workshop',
+        permanent: true
+      },
+      {
+        source: '/company/events/202311-emea-clickhouse-fundamentals',
+        destination: '/company/events/clickhouse-workshop',
+        permanent: true
+      },
+      {
+        source: '/202311-amer-clickhouse-fundamentals',
+        destination: '/company/events/clickhouse-workshop',
+        permanent: true
+      },
+      {
+        source:
+          '/blog/how-clickhouse-powers-ahrefs-the-worlds-largest-web-crawler',
+        destination:
+          '/blog/how-clickhouse-powers-ahrefs-the-worlds-most-active-web-crawler',
+        permanent: true
       }
     ]
   }
