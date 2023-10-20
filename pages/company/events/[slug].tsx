@@ -251,8 +251,6 @@ export async function getStaticPaths() {
     return !excludedSlugs.includes(slug)
   })
 
-  console.log(paths)
-
   return {
     paths,
     fallback: 'blocking'

@@ -334,7 +334,7 @@ const nextConfig = {
         permanent: true
       },
       {
-        source: '/202311-amer-clickhouse-fundamentals',
+        source: '/company/events/202311-amer-clickhouse-fundamentals',
         destination: '/company/events/clickhouse-workshop',
         permanent: true
       },
@@ -343,6 +343,21 @@ const nextConfig = {
           '/blog/how-clickhouse-powers-ahrefs-the-worlds-largest-web-crawler',
         destination:
           '/blog/how-clickhouse-powers-ahrefs-the-worlds-most-active-web-crawler',
+        permanent: true
+      },
+      {
+        source: '/events/202312-amer-clickhouse-fundamentals',
+        destination: '/company/events/clickhouse-workshop',
+        permanent: true
+      },
+      {
+        source: '/events/202311-emea-clickhouse-fundamentals',
+        destination: '/company/events/clickhouse-workshop',
+        permanent: true
+      },
+      {
+        source: '/events/202311-amer-clickhouse-fundamentals',
+        destination: '/company/events/clickhouse-workshop',
         permanent: true
       }
     ]
