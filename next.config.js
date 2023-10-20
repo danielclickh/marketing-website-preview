@@ -337,6 +337,13 @@ const nextConfig = {
         source: '/202311-amer-clickhouse-fundamentals',
         destination: '/company/events/clickhouse-workshop',
         permanent: true
+      },
+      {
+        source:
+          '/blog/how-clickhouse-powers-ahrefs-the-worlds-largest-web-crawler',
+        destination:
+          '/blog/how-clickhouse-powers-ahrefs-the-worlds-most-active-web-crawler',
+        permanent: true
       }
     ]
   }
