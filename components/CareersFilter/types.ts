@@ -17,6 +17,7 @@ export interface Department {
 export interface PositionType {
   offices: Office[]
   departments: Department[]
+  location: { name: string }
   absolute_url: string
   title: string
 }

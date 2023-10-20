@@ -27,7 +27,7 @@ const fetcher = async (url: string) => {
       const jobs = departments.get(department.name) ?? []
       jobs.push({
         url: position.absolute_url,
-        location: locationList.join(', '),
+        location: position.location.name,
         title: position.title,
         offices: officesByPositions
       })
@@ -144,7 +144,7 @@ function CareersFilter() {
         />
         <CategorySelector options={departments} />
       </div>
-      <div className=''>
+      <div>
         <div className='mt-4'>
           {filteredDepartments.every(([name, jobs]) => jobs.length === 0) && (
             <h3>No results matching your search</h3>
