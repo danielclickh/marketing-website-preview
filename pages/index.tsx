@@ -125,7 +125,7 @@ export default function HomePage({
                 of rows in milliseconds
               </SuiTitle>
               <div className='mx-auto flex max-w-md flex-col items-center md:max-w-2xl'>
-                <div className='mt-6 mb-10 text-center text-lg leading-normal text-neutral-0 md:text-xl'>
+                <div className='mt-6 mb-10 text-center text-lg text-neutral-0 md:text-xl md:leading-relaxed'>
                   ClickHouse is the fastest and most resource efficient
                   open-source database for real-time apps and analytics.
                 </div>
