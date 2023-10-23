@@ -45,15 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </div>
         </SnackbarContextProvider>
       </main>
-      <SegmentScript />
       <UTMPersist />
-      <Script
-        id='stripmkttok-script'
-        src='https://discover.clickhouse.com/js/stripmkttok.js'
-        type='text/javascript'
-        async
-      />
-
       {/* Google Analytics for clickhouse.com */}
       <Script id='google-tag-manager' strategy='lazyOnload'>
         {`
@@ -64,7 +56,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         })(window,document,'script','dataLayer', '${gtmId}');
       `}
       </Script>
-
+      <Script
+        id='stripmkttok-script'
+        src='https://discover.clickhouse.com/js/stripmkttok.js'
+        type='text/javascript'
+        async
+      />
       {/* Securiti.ai Cookie Banner - first is produciton mode, second is dev */}
       {process.env.NEXT_IS_PROD ? (
         // THIS IS PRODUCTION
