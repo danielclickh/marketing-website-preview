@@ -80,7 +80,8 @@ export const getStaticProps: GetStaticProps<BlogProps> =
           type: 'article',
           siteName: 'ClickHouse',
           image: [blog.thumbnailPng],
-          path: `/blog/${slug}`
+          path:
+            slug === 'ensemble slug' ? `set this to ensemble` : `/blog/${slug}`
         },
         newsLetterData,
         ...commonData
