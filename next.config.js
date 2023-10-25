@@ -359,6 +359,13 @@ const nextConfig = {
         source: '/events/202311-amer-clickhouse-fundamentals',
         destination: '/company/events/clickhouse-workshop',
         permanent: true
+      },
+      {
+        source:
+          '/blog/optimizing-your-customer-facing-analytics-experience-with-cumul-io-and-clickhouse',
+        destination:
+          '/blog/optimizing-your-customer-facing-analytics-experience-with-luzmo-and-clickhouse',
+        permanent: true
       }
     ]
   }
