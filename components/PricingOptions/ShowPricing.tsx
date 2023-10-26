@@ -1,10 +1,24 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { InformationCircleIcon } from '@heroicons/react/outline'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { usePricing } from './PricingContext'
 
 function InfoTooltip({ content }: { content: string }) {
   const triggerRef = useRef(null)
+  const [position, setPosition] = useState('right')
+
+  useEffect(() => {
+    function updatePosition() {
+      if (window.innerWidth < 1024) {
+        setPosition('top')
+      } else {
+        setPosition('right')
+      }
+    }
+    window.addEventListener('resize', updatePosition);
+    updatePosition();
+    return () => window.removeEventListener('resize', updatePosition);
+  }, []);
 
   return (
     <Tooltip.Provider delayDuration={0}>
@@ -27,7 +41,7 @@ function InfoTooltip({ content }: { content: string }) {
               }}
               className='rounded-sm bg-neutral-725 p-2 text-sm text-neutral-0'
               sideOffset={5}
-              side='right'>
+              side={position}>
             {content}
             <Tooltip.Arrow className='fill-neutral-725' />
           </Tooltip.Content>
