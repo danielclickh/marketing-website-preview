@@ -12,7 +12,7 @@ function InfoTooltip({ content }: { content: string }) {
             asChild
             ref={triggerRef}
             onClick={(e) => e.preventDefault()} >
-          <button className='appearance-none cursor-pointer' tabIndex={0}>
+          <button className='appearance-none cursor-pointer align-middle' tabIndex={0}>
             <InformationCircleIcon
                 className='h-3.5 w-3.5'
                 onClick={(e) => e.preventDefault()}
