@@ -10,24 +10,23 @@ function InfoTooltip({ content }: { content: string }) {
     <Tooltip.Provider delayDuration={0}>
       <Tooltip.Root>
         <Tooltip.Trigger
-          asChild
-          ref={triggerRef}
-          onClick={(event) => event.preventDefault()}>
-          <InformationCircleIcon
-            className='h-3.5 w-3.5 hover:cursor-pointer'
-            onClick={(e) => {
-              e.preventDefault
-            }}
-          />
+            asChild
+            ref={triggerRef}>
+          <button className='appearance-none cursor-pointer'>
+            <InformationCircleIcon
+                className='h-3.5 w-3.5'
+                onClick={(e) => e.preventDefault()}
+            />
+          </button>
         </Tooltip.Trigger>
         <Tooltip.Portal>
           <Tooltip.Content
-            onPointerDownOutside={(event) => {
-              if (event.target === triggerRef.current) event.preventDefault()
-            }}
-            className='rounded-sm bg-neutral-725 p-2 text-sm text-neutral-0'
-            sideOffset={5}
-            side='right'>
+              onPointerDownOutside={(event) => {
+                if (event.target === triggerRef.current) event.preventDefault()
+              }}
+              className='rounded-sm bg-neutral-725 p-2 text-sm text-neutral-0'
+              sideOffset={5}
+              side='right'>
             {content}
             <Tooltip.Arrow className='fill-neutral-725' />
           </Tooltip.Content>
