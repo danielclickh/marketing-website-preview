@@ -1,6 +1,5 @@
 export default function CanonicalUrl({ path }: { path: string }) {
   const siteUrl = 'https://clickhouse.com'
-  console.log(path)
   // Check if the path is "forecasting-using-clickhouse"
   const canonicalUrl =
     path === '/blog/forecasting-using-clickhouse'
