@@ -11,8 +11,9 @@ function InfoTooltip({ content }: { content: string }) {
       <Tooltip.Root>
         <Tooltip.Trigger
             asChild
-            ref={triggerRef}>
-          <button className='appearance-none cursor-pointer'>
+            ref={triggerRef}
+            onClick={(e) => e.preventDefault()} >
+          <button className='appearance-none cursor-pointer' tabIndex={0}>
             <InformationCircleIcon
                 className='h-3.5 w-3.5'
                 onClick={(e) => e.preventDefault()}
