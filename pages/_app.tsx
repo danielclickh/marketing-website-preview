@@ -11,7 +11,7 @@ import SegmentScript from '../components/SegmentScript'
 import UTMPersist from '../components/UTMPersist'
 import Head from 'next/head'
 
-const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-P52RCTZ'
+const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K'
 
 const inter = Inter({
   subsets: [],
