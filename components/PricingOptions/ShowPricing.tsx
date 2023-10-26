@@ -49,10 +49,10 @@ function Info({
   return (
     <div className='flex items-center gap-1 flex-wrap text-xs font-medium text-neutral-0/50' onClick={toggle}>
       {unit}
-      <div className='hidden lg:block'>
+      <div className='hidden lg:block leading-none'>
         <InfoTooltip content={content} />
       </div>
-      <span className='lg:hidden leading-none'>
+      <span className='lg:hidden'>
         <InformationCircleIcon className='h-3.5 w-3.5' />
       </span>
       <div className={showing ? 'lg:hidden p-2 mt-2 rounded bg-neutral-700 w-100 shrink grow whitespace-normal relative' : 'hidden'}>
