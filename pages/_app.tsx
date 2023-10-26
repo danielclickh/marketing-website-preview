@@ -7,7 +7,6 @@ import { Inconsolata, Inter } from 'next/font/google'
 import { SnackbarContextProvider } from '../components/sui'
 import { AppProps } from 'next/app'
 import Script from 'next/script'
-import SegmentScript from '../components/SegmentScript'
 import UTMPersist from '../components/UTMPersist'
 import Head from 'next/head'
 
@@ -46,16 +45,33 @@ function MyApp({ Component, pageProps }: AppProps) {
         </SnackbarContextProvider>
       </main>
       <UTMPersist />
-      {/* Google Analytics for clickhouse.com */}
-      <Script id='google-tag-manager' strategy='lazyOnload'>
-        {`
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer', '${gtmId}');
-      `}
-      </Script>
+
+      {/* GTM - Prod/Env environments */}
+      {process.env.NEXT_IS_PROD ? (
+        // THIS IS PRODUCTION
+        <Script id='google-tag-manager' strategy='lazyOnload'>
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer', '${gtmId}');
+          `}
+        </Script>
+      ) : (
+        // THIS IS DEV/LOCAL
+        <Script id='google-tag-manager' strategy='lazyOnload'>
+          {`
+            <!-- Google Tag Manager -->
+           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl+ '&gtm_auth=BzKh0v8t1wje2QxxRxIGzA&gtm_preview=env-74&gtm_cookies_win=x';f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','${gtmId}');
+          `}
+        </Script>
+      )}
+
       <Script
         id='stripmkttok-script'
         src='https://discover.clickhouse.com/js/stripmkttok.js'
@@ -102,8 +118,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           }}
         />
       )}
-
-      {/* Securiti.ai Cookie Banner */}
     </>
   )
 }
