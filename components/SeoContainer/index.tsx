@@ -1,9 +1,8 @@
 import Head from 'next/head'
 import React from 'react'
 import { SeoMetadata } from '../../lib/api/strapi/types'
-import CanonicalUrl from '../CanonicalUrl'
 
-const siteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL ?? ''
+const siteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL ?? 'https://clickhouse.com'
 
 function SeoContainer({
   image,
@@ -14,10 +13,15 @@ function SeoContainer({
   path
 }: SeoMetadata) {
   const imageUrl = image?.[0]?.url || '/images/social_share.png'
-
+  const canonicalUrl =
+    path === '/blog/forecasting-using-clickhouse'
+      ? 'https://ensembleanalytics.io/blog/forecasting-using-clickhouse'
+      : `${siteUrl}${path}`
   return (
     <Head>
       {title.length > 0 && <title>{title}</title>}
+      <link rel='canonical' href={canonicalUrl} key='canonical' />
+
       {description.length > 0 && (
         <meta name='description' content={description} />
       )}
@@ -39,7 +43,6 @@ function SeoContainer({
         <meta name='twitter:description' content={description} />
       )}
       <meta name='twitter:image' content={siteUrl + imageUrl} />
-      <CanonicalUrl path={path} />
     </Head>
   )
 }
