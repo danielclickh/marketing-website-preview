@@ -52,7 +52,7 @@ function Info({
       <div className='hidden lg:block'>
         <InfoTooltip content={content} />
       </div>
-      <span className='lg:hidden'>
+      <span className='lg:hidden leading-none'>
         <InformationCircleIcon className='h-3.5 w-3.5' />
       </span>
       <div className={showing ? 'lg:hidden p-2 mt-2 rounded bg-neutral-700 w-100 shrink grow whitespace-normal relative' : 'hidden'}>
