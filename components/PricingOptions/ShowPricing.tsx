@@ -36,7 +36,13 @@ function InfoTooltip({ content }: { content: string }) {
   )
 }
 
-function Info({ unit, content }: { unit: string, content: string }) {
+function Info({
+  unit,
+  content
+}: {
+  unit: string,
+  content: string
+}) {
   const [showing, setShowing] = useState(false)
   const toggle = () => setShowing(!showing)
 
@@ -70,28 +76,27 @@ function ShowPricing({ isFirst }: { isFirst: boolean }) {
   }
 
   return (
-    <div className='mt-8 grid grid-cols-2 pb-6 text-left text-neutral-0 '>
-      <div className='border-r border-neutral-725 px-8 lg:px-4 xl:px-8'>
+    <div className='mt-8 flex items-stretch justify-center gap-4 xl:gap-8 pb-6 text-left text-neutral-0 '>
+      <div className='basis-0 grow shrink xl:max-w-[100px]'>
         <h5 className='mb-2 text-sm font-bold'>Storage</h5>
-        <span className='whitespace-nowrap'>
-          <div className='whitespace-nowrap text-2.75xl font-semibold'>
-            ${storage.priceUSD}
-          </div>
-          <Info
-              unit={storage.meteringUnit}
-              content={storage.meteringTooltip} />
-        </span>
+        <div className='whitespace-nowrap text-2.75xl font-semibold'>
+          ${storage.priceUSD}
+        </div>
+        <Info
+          unit={storage.meteringUnit}
+          content={storage.meteringTooltip} />
       </div>
-      <div className='compute px-8 lg:px-4 xl:px-8'>
+
+      <div className='border-r border-neutral-725 grow-0 shrink-0' />
+
+      <div className='basis-0 grow shrink xl:max-w-[100px]'>
         <h5 className='mb-2 text-sm font-bold'>Compute</h5>
-        <span className='whitespace-nowrap'>
-          <div className='whitespace-nowrap text-2.75xl font-semibold'>
-            ${compute.priceUSD}
-          </div>
-          <Info
-              unit={compute.meteringUnit}
-              content={compute.meteringTooltip} />
-        </span>
+        <div className='whitespace-nowrap text-2.75xl font-semibold'>
+          ${compute.priceUSD}
+        </div>
+        <Info
+          unit={compute.meteringUnit}
+          content={compute.meteringTooltip} />
       </div>
     </div>
   )
