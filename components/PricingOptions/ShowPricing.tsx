@@ -5,21 +5,6 @@ import { usePricing } from './PricingContext'
 
 function InfoTooltip({ content }: { content: string }) {
   const triggerRef = useRef(null)
-  const [position, setPosition] = useState<Tooltip.TooltipContentProps['side']>('right')
-
-  useEffect(() => {
-    function updatePosition() {
-      if (window.innerWidth < 1024) {
-        setPosition('top')
-      } else {
-        setPosition('right')
-      }
-    }
-    window.addEventListener('resize', updatePosition);
-    updatePosition();
-    return () => window.removeEventListener('resize', updatePosition);
-  }, []);
-
   return (
     <Tooltip.Provider delayDuration={0}>
       <Tooltip.Root>
@@ -41,13 +26,34 @@ function InfoTooltip({ content }: { content: string }) {
               }}
               className='rounded-sm bg-neutral-725 p-2 text-sm text-neutral-0'
               sideOffset={5}
-              side={position}>
+              side='right'>
             {content}
             <Tooltip.Arrow className='fill-neutral-725' />
           </Tooltip.Content>
         </Tooltip.Portal>
       </Tooltip.Root>
     </Tooltip.Provider>
+  )
+}
+
+function Info({ unit, content }: { unit: string, content: string }) {
+  const [showing, setShowing] = useState(false)
+  const toggle = () => setShowing(!showing)
+
+  return (
+    <div className='flex items-center gap-1 flex-wrap text-xs font-medium text-neutral-0/50' onClick={toggle}>
+      {unit}
+      <div className='hidden lg:block'>
+        <InfoTooltip content={content} />
+      </div>
+      <span className='lg:hidden'>
+        <InformationCircleIcon className='h-3.5 w-3.5' />
+      </span>
+      <div className={showing ? 'lg:hidden p-2 mt-2 rounded bg-neutral-700 w-100 shrink grow whitespace-normal relative' : 'hidden'}>
+        <div className='invisible absolute h-2 w-2 bg-inherit before:visible before:absolute before:h-2 before:w-2 before:rotate-45 before:bg-inherit before:content-[""] top-0 left-1/2 -translate-y-1/2 -translate-x-1/2'></div>
+        {content}
+      </div>
+    </div>
   )
 }
 
@@ -71,10 +77,9 @@ function ShowPricing({ isFirst }: { isFirst: boolean }) {
           <div className='whitespace-nowrap text-2.75xl font-semibold'>
             ${storage.priceUSD}
           </div>
-          <div className='flex items-center gap-1 text-xs font-medium text-neutral-0/50'>
-            {storage.meteringUnit}
-            <InfoTooltip content={storage.meteringTooltip} />
-          </div>
+          <Info
+              unit={storage.meteringUnit}
+              content={storage.meteringTooltip} />
         </span>
       </div>
       <div className='compute px-8 lg:px-4 xl:px-8'>
@@ -83,10 +88,9 @@ function ShowPricing({ isFirst }: { isFirst: boolean }) {
           <div className='whitespace-nowrap text-2.75xl font-semibold'>
             ${compute.priceUSD}
           </div>
-          <div className='flex items-center gap-1 text-xs font-medium text-neutral-0/50'>
-            {compute.meteringUnit}
-            <InfoTooltip content={compute.meteringTooltip} />
-          </div>
+          <Info
+              unit={compute.meteringUnit}
+              content={compute.meteringTooltip} />
         </span>
       </div>
     </div>
