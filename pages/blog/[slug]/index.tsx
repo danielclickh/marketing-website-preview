@@ -81,7 +81,9 @@ export const getStaticProps: GetStaticProps<BlogProps> =
           siteName: 'ClickHouse',
           image: [blog.thumbnailPng],
           path:
-            slug === 'ensemble slug' ? `set this to ensemble` : `/blog/${slug}`
+            slug === 'forecasting-using-clickhouse'
+              ? `https://ensembleanalytics.io/blog/forecasting-using-clickhouse`
+              : `/blog/${slug}`
         },
         newsLetterData,
         ...commonData
