@@ -5,7 +5,7 @@ import { usePricing } from './PricingContext'
 
 function InfoTooltip({ content }: { content: string }) {
   const triggerRef = useRef(null)
-  const [position, setPosition] = useState('right')
+  const [position, setPosition] = useState<Tooltip.TooltipContentProps['side']>('right')
 
   useEffect(() => {
     function updatePosition() {
