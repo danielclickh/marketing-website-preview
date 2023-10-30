@@ -1,6 +1,7 @@
 import { MinusIcon } from '@heroicons/react/outline'
 import { CheckIcon } from '@heroicons/react/solid'
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useMemo, useEffect, SetStateAction } from 'react'
+import { slugify } from '../../lib/utils/strings'
 import Markdown from '../Markdown'
 import { PricingContextProvider } from './PricingContext'
 import PlanPricing from './PlanPricing'
@@ -39,10 +40,14 @@ function PricingOptions({
   const regionList: RegionPricingWithIcon[] = useMemo(() => {
     return pricingByRegion
       .filter((item) => item.cloudProvider === provider)
-      .map((item) => ({
-        ...item,
-        regionFlagPNG: <StrapiImage {...item.regionFlagPNG} alt={item.region} />
-      }))
+      .map((item) => {
+        let regionSlug = item.region.match(/[(]*\(([^)]+)\)$/i)?.[1] || item.region;
+        return {
+          ...item,
+          regionFlagPNG: <StrapiImage {...item.regionFlagPNG} alt={item.region} />,
+          regionSlug: slugify(regionSlug)
+        }
+      })
   }, [pricingByRegion, provider])
 
   const plans: Array<PricingPlanData> = useMemo(() => {
@@ -55,9 +60,31 @@ function PricingOptions({
       setProvider(newProvider)
     }
   }, [router.query.provider])
+
+  const updateRegionParam = (value: RegionPricingWithIcon) => {
+    router.push(`/pricing?provider=${value.cloudProvider}&region=${value.regionSlug}`, undefined, {
+      shallow: true
+    })
+  }
+
+  const getDefaultRegion = () => {
+    const fallback = regionList[0]
+    const urlRegion = router.query?.region
+    if (provider && urlRegion && !Array.isArray(urlRegion)) {
+      const found = regionList.find(item => {
+        return item.cloudProvider === provider && item.regionSlug === urlRegion
+      })
+
+      if (found) {
+        return found
+      }
+    }
+    return fallback
+  }
+
   return (
     <div>
-      <PricingContextProvider value={regionList[0]}>
+      <PricingContextProvider value={getDefaultRegion()}>
         <div className='flex justify-center space-x-6 pt-8 pb-6'>
           {cloudProviders.map((cloudProvider, parentIndex: number) => (
             <div className='flex flex-col space-y-2' key={parentIndex}>
@@ -133,7 +160,7 @@ function PricingOptions({
           ))}
         </div>
         <div className='center_content relative z-10 mx-auto mb-24 max-w-[344px]'>
-          <PricingSelector regionList={regionList} />
+          <PricingSelector regionList={regionList} onChange={updateRegionParam} />
         </div>
 
         {plans.length > 0 && (
