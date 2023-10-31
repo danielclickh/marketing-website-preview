@@ -4,6 +4,17 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'processing-json-in-clickhouse',
+      title: 'Processing JSON in ClickHouse',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we'll learn about the JSON inference feature that was added in ClickHouse 23.9, with help from a PyPI dataset. The video covers how to download and inspect the dataset, compares the inference capabilities between ClickHouse 23.8 and 23.9, and demonstrates creating and querying a table. The new version eliminates the need for manual schema definition, making the process more efficient and user-friendly.",
+      thumbnail: 'https://img.youtube.com/vi/gCg5ISOujtc/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/gCg5ISOujtc?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
       slug: 'managing-clickhouse-dictionaries-at-cloudflare',
       title: 'Managing ClickHouse Dictionaries at Cloudflare',
       subTitle: 'James Morrison\nSystems Engineer, Cloudflare',
