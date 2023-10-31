@@ -15,7 +15,7 @@
 .cc-compliance {color: #fff !important; font-weight: normal !important;}
 .cc-btn {font-size: 13px !important; color: #fff !important; font-weight: normal !important;}
 
-.cc-btn.cc-allow {
+.cc-btn.cc-allow, .cc-btn.cc-dismiss {
     background-color: rgb(23, 103, 54) !important;
     color: #fff !important;
     font-weight: normal !important;
@@ -26,7 +26,7 @@
 
 #securitiCmpCookiePrefBtn {font-weight: normal !important;}
 
-.cc-btn.cc-allow:hover {
+.cc-btn.cc-allow:hover,.cc-btn.cc-dismiss:hover {
     background-color: rgb(15, 67, 35) !important;
 }
 
