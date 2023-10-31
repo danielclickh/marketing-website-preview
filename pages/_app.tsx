@@ -105,11 +105,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           data-strict-csp
           src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader-strict-csp.js'
           data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
-          data-domain-uuid='14707cc7-31e6-41e7-931b-9afd9b578e61'
+          data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
           data-backend-url='https://app.securiti.ai'
           onReady={() => {
             console.log('Cookie banner in dev mode')
-
             const cookieSettingsButton = document.querySelector(
               '#cookie-settings-button'
             )
