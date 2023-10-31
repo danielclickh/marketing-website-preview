@@ -220,7 +220,7 @@ export default function BlogPage({
               View all Blogs
             </SuiButton>
           </div>
-          <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
+          <div className='grid grid-cols-1 justify-center gap-8 lg:grid-cols-3'>
             {otherBlogs.map((blog) => (
               <BlogPost key={blog.id} {...blog} />
             ))}
