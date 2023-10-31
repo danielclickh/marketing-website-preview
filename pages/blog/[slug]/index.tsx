@@ -56,8 +56,18 @@ export const getStaticProps: GetStaticProps<BlogProps> =
 
     const blogsParams = {
       sort: ['date:DESC', 'publishedAt:DESC'],
-      populate: ['thumbnailPng', 'author'],
-      fields: ['category', 'title', 'slug'],
+      populate: ['author', 'author.avatarPng', 'thumbnailPng'],
+      fields: [
+        'category',
+        'title',
+        'shortDescription',
+        'createdAt',
+        'updatedAt',
+        'publishedAt',
+        'slug',
+        'date',
+        'StagingOnly'
+      ],
       pagination: { limit: 3 },
       filters: {
         slug: {
@@ -210,7 +220,7 @@ export default function BlogPage({
               View all Blogs
             </SuiButton>
           </div>
-          <div className='flex w-full flex-col gap-y-6 md:grid md:grid-cols-3 md:gap-x-16 md:gap-y-0 '>
+          <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
             {otherBlogs.map((blog) => (
               <BlogPost key={blog.id} {...blog} />
             ))}
