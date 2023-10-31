@@ -54,7 +54,7 @@ export function getVideos(): Video[] {
 
     {
       slug: 'vantage',
-      title: 'Vantage & ClickHouse',
+      title: 'Vantage Cuts Costs 50%: Redshift to ClickHouse Cloud Migration',
       subTitle: 'Brooke McKim\nCo-founder and CTO, Vantage',
       description:
         "Vantage streamlines cloud cost management for businesses. Brooke shares how transitioning to ClickHouse Cloud not only optimized Vantage's operations but also cut their Redshift bill in half.",
@@ -65,7 +65,8 @@ export function getVideos(): Video[] {
     },
     {
       slug: 'clearbit',
-      title: 'Clearbit & ClickHouse',
+      title:
+        "10x Cost Reduction: Clearbit's Postgres to ClickHouse Cloud Migration",
       subTitle: 'Harlow Ward\nCo-founder and CTO, Clearbit',
       description:
         'Clearbit needed a real-time database to handle their massive clickstream data volume and power their UI. Harlow shares why ClickHouse Cloud ticked all the boxes.',
@@ -76,7 +77,8 @@ export function getVideos(): Video[] {
     },
     {
       slug: 'statsig',
-      title: 'Statsig & ClickHouse',
+      title:
+        "Managing Billions of events: Statsig's Switch from Druid to ClickHouse Cloud",
       subTitle: 'Jason Wang\nSoftware Engineer, Statsig',
       description:
         'Statsig is an experimentation and A/B testing company, handling millions of events every second and billions daily. Jason shares why they landed on ClickHouse Cloud for their real-time analytics.',
