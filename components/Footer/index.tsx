@@ -77,7 +77,7 @@ export default function Footer({
             ))}
             <button
               id='cookie-settings-button'
-              className={`bg-transparent first:pl-0 bottom-link-${bottomLinks.length} hidden whitespace-nowrap hover:text-neutral-0`}>
+              className={`cmp-revoke-consent hidden whitespace-nowrap bg-transparent hover:text-neutral-0`}>
               Cookie Settings
             </button>
           </div>
