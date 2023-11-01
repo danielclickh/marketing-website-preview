@@ -24,11 +24,7 @@ export default function Footer({
                       key={footerLink.name}
                       href={footerLink.href}
                       target={footerLink.target}
-                      className='footer w-fit text-sm transition-all hover:text-neutral-0'
-                      segmentEvent={{
-                        label: footerLink.name,
-                        category: 'website-nav'
-                      }}>
+                      className='footer w-fit text-sm transition-all hover:text-neutral-0'>
                       {footerLink.name}
                     </CUILink>
                   ))}
@@ -67,10 +63,6 @@ export default function Footer({
                 key={bottomLink.text}
                 href={bottomLink.href}
                 target={bottomLink.target}
-                segmentEvent={{
-                  label: bottomLink.text,
-                  category: 'website-nav-footer'
-                }}
                 className={`first:pl-0 bottom-link-${index} whitespace-nowrap hover:text-neutral-0`}>
                 {bottomLink.text}
               </CUILink>

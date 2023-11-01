@@ -48,11 +48,7 @@ export default function GetStartedFree({
                   height='18'
                   className='pt-0.5 transition group-hover:translate-x-1/2'
                 />
-              }
-              segmentEvent={{
-                label: 'Create a free acount',
-                category: 'website-cloudpage-lower-hero'
-              }}>
+              }>
               Create a free account
             </CUIButton>
           </div>

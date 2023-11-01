@@ -15,7 +15,6 @@ export interface ButtonProps extends Partial<LinkProps> {
   segment?: string
   color?: never
   weight?: string
-  segmentEvent?: Record<string, string>
   linkClass?: string
 }
 

@@ -119,10 +119,6 @@ export default function CloudPage({
                           weight='semibold'
                           href='https://clickhouse.cloud/signUp?loc=cloud-page-hero-button'
                           target={ctaButton.target}
-                          segmentEvent={{
-                            label: ctaButton.text,
-                            category: 'website-hero'
-                          }}
                           linkClass='w-full max-w-[12rem]'
                           className='w-full'>
                           {ctaButton.text}

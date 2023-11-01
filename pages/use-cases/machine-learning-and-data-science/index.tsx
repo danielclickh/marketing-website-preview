@@ -125,10 +125,6 @@ export default function MLUseCasePage({
                         weight='semibold'
                         href='https://clickhouse.cloud/signUp?loc=use-case-ml-and-ds'
                         target='_blank'
-                        segmentEvent={{
-                          label: 'use-case-ml-and-ds',
-                          category: 'use-case-ml-and-ds'
-                        }}
                         linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                         className='w-full'>
                         Get started today
@@ -139,10 +135,6 @@ export default function MLUseCasePage({
                         weight='semibold'
                         href='/company/contact?loc=use-case-ml-and-ds'
                         target='_self'
-                        segmentEvent={{
-                          label: 'use-case-ml-and-ds-contact',
-                          category: 'use-case-ml-and-ds-contact'
-                        }}
                         linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
                         className='w-full'>
                         Contact sales
