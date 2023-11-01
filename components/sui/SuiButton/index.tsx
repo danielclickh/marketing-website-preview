@@ -13,7 +13,6 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   scroll?: boolean
   target?: string
   className?: string
-  segment?: string
   color?: never
   weight?: string
 }
