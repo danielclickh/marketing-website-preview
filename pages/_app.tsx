@@ -71,7 +71,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           `}
         </Script>
       )}
-
       <Script
         id='stripmkttok-script'
         src='https://discover.clickhouse.com/js/stripmkttok.js'
