@@ -88,15 +88,7 @@ function UseCasesPage({
                 <a
                   href={useCasesPageData.ctaButton.href}
                   target='_blank'
-                  className='inline-block rounded border-primary-300 bg-primary-300 py-3 px-8 font-semibold text-neutral-900 hover:cursor-pointer hover:border-primary-400 hover:bg-primary-400'
-                  onClick={() => {
-                    try {
-                      window.analytics.track('click', {
-                        label: 'Start your free Cloud trial',
-                        category: 'use-cases-hero-cta'
-                      })
-                    } catch (e) {}
-                  }}>
+                  className='inline-block rounded border-primary-300 bg-primary-300 py-3 px-8 font-semibold text-neutral-900 hover:cursor-pointer hover:border-primary-400 hover:bg-primary-400'>
                   {useCasesPageData.ctaButton.text}
                 </a>
               </p>
