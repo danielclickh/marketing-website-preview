@@ -79,10 +79,6 @@ export default function ClickHouseServerPage({
                         weight='semibold'
                         href={mainButton.href}
                         target={mainButton.target}
-                        segmentEvent={{
-                          label: mainButton.text,
-                          category: 'website-hero'
-                        }}
                         linkClass='w-full mx-auto md:mx-0 max-w-[14rem] md:max-w-[12rem]'
                         className='w-full'>
                         {mainButton.text}
@@ -95,10 +91,6 @@ export default function ClickHouseServerPage({
                         weight='semibold'
                         href={secondaryButton.href}
                         target={secondaryButton.target}
-                        segmentEvent={{
-                          label: secondaryButton.text,
-                          category: 'website-hero'
-                        }}
                         linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                         className='w-full'>
                         {secondaryButton.text}
@@ -109,10 +101,6 @@ export default function ClickHouseServerPage({
                         type='secondary'
                         className='w-48'
                         path={gitButton.href}
-                        segmentEvent={{
-                          label: gitButton.text,
-                          category: 'website-hero'
-                        }}
                         target={gitButton.target}>
                         <StrapiPicture
                           light={gitButton.lightIconPng}

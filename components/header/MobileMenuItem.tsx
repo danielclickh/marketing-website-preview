@@ -21,10 +21,6 @@ function MobileMenuItem({
         key={name}
         href={href}
         target={target}
-        segmentEvent={{
-          label: name ?? '',
-          category: 'website-nav'
-        }}
         className='menu-item font-medium hover:no-underline'>
         {name}
       </SuiLink>
@@ -46,10 +42,6 @@ function MobileMenuItem({
                     key={item.name}
                     href={item.href}
                     onClick={close}
-                    segmentEvent={{
-                      label: item.name,
-                      category: 'website-nav'
-                    }}
                     className='mb-4 flex max-w-md items-start hover:no-underline'>
                     <div
                       className={styles.menuItem}
@@ -92,10 +84,6 @@ function MobileMenuItem({
               <SuiLink
                 key={subitem.name}
                 href={subitem.href}
-                segmentEvent={{
-                  label: subitem.name,
-                  category: 'website-nav'
-                }}
                 className='flex max-w-md items-start hover:no-underline'>
                 {subitem.name}
               </SuiLink>

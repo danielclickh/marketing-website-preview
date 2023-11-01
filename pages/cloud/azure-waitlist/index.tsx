@@ -111,10 +111,6 @@ export default function ContactPage({
                         size='lg'
                         weight='semibold'
                         href='/cloud'
-                        segmentEvent={{
-                          label: 'azure-waitlist',
-                          category: 'azure-waitlist'
-                        }}
                         linkClass='w-full max-w-[16rem]'
                         className='w-full'>
                         Back to ClickHouse Cloud

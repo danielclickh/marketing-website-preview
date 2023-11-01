@@ -13,10 +13,8 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   scroll?: boolean
   target?: string
   className?: string
-  segment?: string
   color?: never
   weight?: string
-  segmentEvent?: Record<string, string>
 }
 
 interface EmptyButtonProps extends Omit<ButtonProps, 'type' | 'color'> {
@@ -95,7 +93,6 @@ export default function SuiButton({
   disabled = false,
   type,
   children,
-  segmentEvent,
   weight,
   ...props
 }: ButtonProps | EmptyButtonProps) {
@@ -112,21 +109,16 @@ export default function SuiButton({
           ${sizeCalculator(props.size)}
           ${
             weight ? `font-${weight}` : 'font-semibold'
-          } text-center rounded-lg duration-300 whitespace-nowrap
+          } whitespace-nowrap rounded-lg text-center duration-300
            ${colorCalculator({
              color: type,
              disabled: disabled ?? false,
              textColor: props.color
            })} ${props.className ?? ''}`}
           onClick={() => {
-            if (segmentEvent) {
-              try {
-                window.analytics.track('click', segmentEvent)
-              } catch (e) {}
-            }
             props.onClick && props.onClick()
           }}>
-          <span className='flex justify-center items-center gap-2.5'>
+          <span className='flex items-center justify-center gap-2.5'>
             {children}
             {props.iconRight && <ArrowRightIcon className='w-4' />}
           </span>
@@ -140,7 +132,7 @@ export default function SuiButton({
       {props.path ? (
         <Link
           href={props.path}
-          className={disabled ? 'cursor-not-allowed pointer-events-none' : ''}
+          className={disabled ? 'pointer-events-none cursor-not-allowed' : ''}
           target={props.target}>
           <ButtonContent />
         </Link>

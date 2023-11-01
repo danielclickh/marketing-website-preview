@@ -136,10 +136,6 @@ export default function HomePage({
                     size='lg'
                     weight='semibold'
                     href={hero.ctaButton.href}
-                    segmentEvent={{
-                      label: hero.ctaButton.text,
-                      category: 'website-hero'
-                    }}
                     linkClass='w-full max-w-[14rem]'
                     className='w-full'>
                     Start free trial
@@ -149,10 +145,6 @@ export default function HomePage({
                     weight='semibold'
                     size='lg'
                     href='https://clickhouse.com/docs/en/intro'
-                    segmentEvent={{
-                      label: hero.ctaButton.text,
-                      category: 'website-hero-docs'
-                    }}
                     linkClass='w-full max-w-[14rem]'
                     className='w-full'>
                     View documentation

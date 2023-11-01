@@ -4,7 +4,6 @@ import { colorCalculator, sizeCalculator } from './calculator'
 export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
   href: string
   onClick?: any
-  segmentEvent?: Record<string, string>
   color?: string | undefined
   size?: string
   weight?: string
@@ -16,7 +15,6 @@ export const SuiLink = ({ ...LinkProps }: LinkProps) => {
     children,
     href,
     onClick: onClickProp,
-    segmentEvent,
     color,
     size = 'sm',
     weight,
@@ -25,11 +23,6 @@ export const SuiLink = ({ ...LinkProps }: LinkProps) => {
   } = LinkProps
 
   const onClick = () => {
-    if (segmentEvent) {
-      try {
-        window.analytics.track('click', segmentEvent)
-      } catch (error) {}
-    }
     if (onClickProp) {
       onClickProp()
     }

@@ -11,6 +11,7 @@ import UTMPersist from '../components/UTMPersist'
 import Head from 'next/head'
 
 const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K'
+const in_prod = process.env.NEXT_IS_PROD ?? false
 
 const inter = Inter({
   subsets: [],
@@ -47,7 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <UTMPersist />
 
       {/* GTM - Prod/Env environments */}
-      {process.env.NEXT_IS_PROD ? (
+      {in_prod ? (
         // THIS IS PRODUCTION
         <Script id='google-tag-manager' strategy='lazyOnload'>
           {`
@@ -71,6 +72,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           `}
         </Script>
       )}
+
       <Script
         id='stripmkttok-script'
         src='https://discover.clickhouse.com/js/stripmkttok.js'
@@ -78,7 +80,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         async
       />
       {/* Securiti.ai Cookie Banner - first is produciton mode, second is dev */}
-      {process.env.NEXT_IS_PROD ? (
+      {in_prod ? (
         // THIS IS PRODUCTION
         <Script
           defer

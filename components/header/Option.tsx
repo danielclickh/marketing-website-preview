@@ -11,14 +11,10 @@ function Option({ name, href, icon, target, description }: HeaderLinkItem) {
       key={name}
       href={href}
       target={target}
-      segmentEvent={{
-        label: name,
-        category: 'website-nav'
-      }}
-      className='flex items-start hover:no-underline max-w-md !text-neutral-300 hover:!text-neutral-0 '>
+      className='flex max-w-md items-start !text-neutral-300 hover:!text-neutral-0 hover:no-underline '>
       <div className={styles.menuItem} data-icon={icon ? 'true' : 'false'}>
         {icon && (
-          <div className='flex-shrink-0 flex justify-center h-10 w-10 rounded-md items-center sm:h-12 sm:w-12'>
+          <div className='flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md sm:h-12 sm:w-12'>
             <Image
               src={icon}
               width={42}

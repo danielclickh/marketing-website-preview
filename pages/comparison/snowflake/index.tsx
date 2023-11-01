@@ -308,10 +308,6 @@ export default function SnowflakePage({
                             weight='semibold'
                             href=' https://discover.clickhouse.com/rs/238-FPC-317/images/ClickHouse-vs-Snowflake.pdf'
                             target='_blank'
-                            segmentEvent={{
-                              label: 'Snowflake-PDF',
-                              category: 'snowflake-pdf-click'
-                            }}
                             className='my-6 w-full'>
                             Download PDF
                           </CUIButton>
