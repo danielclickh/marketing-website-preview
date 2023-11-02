@@ -380,6 +380,13 @@ export default function MLUseCasePage({
                         Using ClickHouse UDFs to integrate with OpenAI models
                       </Link>
                     </li>
+                    <li>
+                      <Link
+                        href='/blog/forecasting-using-clickhouse'
+                        className='text-primary-300'>
+                        Forecasting Using ClickHouse Machine Learning Functions
+                      </Link>
+                    </li>
                   </ol>
                 </div>
               </div>
