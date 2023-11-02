@@ -4,6 +4,17 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'greatest-common-denominator-codec-clickhouse-23-9',
+      title: 'Greatest Common Denominator Codec in ClickHouse 23.9',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we'll explore the GCD (Greatest Common Denominator) codec in Clickhouse 23.9, a feature that works well for optimizing storage of large numbers that change in big increments. We'll ingest a Forex dataset and see the difference when storing data with and without this codec.",
+      thumbnail: 'https://img.youtube.com/vi/vaY5LQ7a_Dk/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/vaY5LQ7a_Dk?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
       slug: 'processing-json-in-clickhouse',
       title: 'Processing JSON in ClickHouse',
       subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
