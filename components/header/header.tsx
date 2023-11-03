@@ -22,8 +22,11 @@ import MobileMenuItem from './MobileMenuItem'
 import GlobalMenu from './GlobalMenu'
 import Banner from './Banner'
 const headerMenuItems = menuItems as Array<MenuItemType>
+import { useRouter } from 'next/router'
 
 export default function Header({ header, github: { stars } }: HeaderProps) {
+  const router = useRouter()
+  const currentPath = router.asPath
   const navBarRef = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState(false)
   const { strategy, floating, reference, context } = useFloating({
@@ -57,6 +60,16 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
     }
   }
 
+  const pathsForBanner = [
+    '/cloud',
+    '/comparison',
+    '/company/contact',
+    '/pricing',
+    '/use-cases'
+  ]
+
+  const showBanner = pathsForBanner.some((path) => currentPath.startsWith(path))
+
   useEffect(() => {
     document.addEventListener('scroll', onscroll)
     return () => {
@@ -70,7 +83,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
         className={styles.navBarContainer}
         ref={navBarRef}
         id='nav-container'>
-        <Banner content={header?.banner ?? ''} />
+        {showBanner && <Banner content={header?.banner ?? ''} />}
         <nav className='no-wrap section-container relative flex w-full items-center justify-between py-4'>
           <Link
             href='/'
