@@ -99,7 +99,7 @@ export default function ReinventPage({
                       script.onerror = function (e) {
                         console.log('Clearbit Form JS unable to load')
                         pollForDefinition(window, 'MktoForms2', function () {
-                          window.MktoForms2.whenReady(function (form) {
+                          MktoForms2.whenReady(function (form) {
                             form.setValues({
                               clearbitFormStatus:
                                 'Clearbit Form JS unable to load'
@@ -107,15 +107,13 @@ export default function ReinventPage({
                           })
                         })
                       }
-                      if (script) {
-                        script.onload = function () {
-                          window.MktoForms2.whenReady(function (form) {
-                            form.setValues({
-                              clearbitFormStatus:
-                                'Clearbit Form JS unable to load'
-                            })
+                      script.onload = function () {
+                        MktoForms2.whenReady(function (form) {
+                          form.setValues({
+                            clearbitFormStatus:
+                              'Clearbit Form JS unable to load'
                           })
-                        }
+                        })
                       }
 
                       document.querySelector('head')?.appendChild(script)
