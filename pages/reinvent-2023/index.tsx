@@ -9,6 +9,20 @@ import HRSeparator from '../../components/HRSeparator'
 import MarketoForm from '../../components/MarketoForm'
 import { useRef, useState } from 'react'
 import Script from 'next/script'
+import { ChatIcon } from '@heroicons/react/solid'
+
+interface DriftAPI {
+  startInteraction: (options: { interactionId: number }) => void
+}
+
+interface DriftWindow extends Window {
+  drift: {
+    api: DriftAPI
+  }
+}
+
+// Tell TypeScript that when we reference `window`, we mean the extended type with `drift` on it
+declare var window: DriftWindow
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -62,9 +76,24 @@ export default function ReinventPage({
               <h1 className='mb-6 text-center font-basier text-5.5xl font-semibold leading-tight text-neutral-200'>
                 re:Invent 2023
               </h1>
-              <div className=' text-neutral-200'>
-                Fill out the form, and we'll be in touch.
+              <div className='mb-6 text-neutral-200'>
+                Fill out the form, and we'll be in touch about booking some time
+                with our team.
               </div>
+              <div className='mb-6 font-bold text-neutral-200'>OR</div>
+
+              <button
+                className='mx-auto mt-4 block max-w-[250px] rounded bg-primary-300 py-2 px-6 font-semibold transition hover:bg-primary-400 group-hover:bg-primary-400 md:mt-0'
+                onClick={() => {
+                  if (window.drift !== undefined) {
+                    window.drift.api.startInteraction({ interactionId: 378704 })
+                  }
+                }}>
+                <span className='flex items-center justify-center gap-2 text-base text-black'>
+                  <ChatIcon className='h-5 w-5' />
+                  Book a meeting here
+                </span>
+              </button>
             </div>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 pt-14 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
               <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
