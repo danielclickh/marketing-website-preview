@@ -72,7 +72,6 @@ export default function ReinventPage({
                   <MarketoForm
                     formId='1099'
                     onLoad={() => {
-                      console.log('hello')
                       setFormLoaded(true)
                       var pollForDefinition = function (
                         scope: any,
@@ -108,6 +107,17 @@ export default function ReinventPage({
                           })
                         })
                       }
+                      if (script) {
+                        script.onload = function () {
+                          window.MktoForms2.whenReady(function (form) {
+                            form.setValues({
+                              clearbitFormStatus:
+                                'Clearbit Form JS unable to load'
+                            })
+                          })
+                        }
+                      }
+
                       document.querySelector('head')?.appendChild(script)
                     }}
                     onSuccess={() => {
