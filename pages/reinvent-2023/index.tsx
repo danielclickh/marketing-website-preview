@@ -71,7 +71,45 @@ export default function ReinventPage({
                 {!formSuccess && (
                   <MarketoForm
                     formId='1099'
-                    onLoad={() => setFormLoaded(true)}
+                    onLoad={() => {
+                      console.log('hello')
+                      setFormLoaded(true)
+                      var pollForDefinition = function (
+                        scope: any,
+                        varname: any,
+                        callback: any
+                      ) {
+                        if (typeof scope[varname] !== 'undefined') {
+                          return callback()
+                        }
+                        var interval = setInterval(function () {
+                          if (typeof scope[varname] !== 'undefined') {
+                            clearInterval(interval)
+                            callback()
+                          }
+                        }, 250)
+                      }
+                      var script = document.createElement('script')
+                      script.src =
+                        'https://marketo.clearbit.com/assets/v1/marketo/forms.js'
+                      script.async = true
+                      script.setAttribute(
+                        'data-clearbit-publishable-key',
+                        'pk_25c26e54fda4158b4189447198378375'
+                      )
+                      script.onerror = function (e) {
+                        console.log('Clearbit Form JS unable to load')
+                        pollForDefinition(window, 'MktoForms2', function () {
+                          window.MktoForms2.whenReady(function (form) {
+                            form.setValues({
+                              clearbitFormStatus:
+                                'Clearbit Form JS unable to load'
+                            })
+                          })
+                        })
+                      }
+                      document.querySelector('head')?.appendChild(script)
+                    }}
                     onSuccess={() => {
                       setFormSuccess(true)
 
@@ -115,31 +153,8 @@ export default function ReinventPage({
         <GrowingCommunity />
         <Script id='clearbitFormStatus'>
           {`
-            var pollForDefinition = function (scope, varname, callback) {
-              if (typeof scope[varname] !== "undefined") {
-                return callback();
-              }
-              var interval = setInterval(function () {
-                if (typeof scope[varname] !== "undefined") {
-                  clearInterval(interval);
-                  callback();
-                }
-              }, 250);
-            };
-            var script = document.createElement("script");
-            script.src = "https://marketo.clearbit.com/assets/v1/marketo/forms.js";
-            script.async = true;
-            script.setAttribute("data-clearbit-publishable-key", "pk_25c26e54fda4158b4189447198378375");
-            script.onerror = function (e) {
-              console.log("Clearbit Form JS unable to load");
-              pollForDefinition(window, "MktoForms2", function () {
-                MktoForms2.whenReady(function (form) {
-                  form.setValues({ clearbitFormStatus: "Clearbit Form JS unable to load" });
-                });
-              });
-            };
-            document.querySelector('head').appendChild(script);
-          `}
+
+                          `}
         </Script>
       </Layout>
     </>
