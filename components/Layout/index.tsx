@@ -16,7 +16,7 @@ function Layout({ children, footerData, headerData, seo }: Props) {
     <div>
       {seo && <SeoContainer {...seo} />}
       <Header {...headerData} />
-      {children}
+      <div className='class-for-dale'>{children}</div>
       <Footer {...footerData} />
     </div>
   )
