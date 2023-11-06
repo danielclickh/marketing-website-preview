@@ -23,7 +23,7 @@ function Banner({ content }: { content: string }) {
   const [isClosed, setClosed] = useState(false)
 
   content =
-    '<a href="/reinvent-2023?loc=eyebrow">Visiting re:Invent Nov 27 - Dec 1? We\'d love to meet. Let us know here </a>'
+    '<a href="/reinvent-2023?loc=eyebrow">Visiting AWS re:Invent Nov 27 - Dec 1? We\'d love to meet. Let us know here </a>'
 
   useEffect(() => {
     const closed = content.length === 0
