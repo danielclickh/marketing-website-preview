@@ -36,9 +36,9 @@ export const getStaticProps: GetStaticProps<ContactProps> =
       props: {
         ...data.hero,
         seo: {
-          title: 're:Invent 2023 - ClickHouse',
+          title: 'AWS re:Invent 2023 - ClickHouse',
           description:
-            'Book a meeting with the ClickHouse team at re:Invent 2023',
+            'Book a meeting with the ClickHouse team at AWS re:Invent 2023',
           path: '/reinvent-2023'
         },
         ...commonProps
@@ -74,7 +74,7 @@ export default function ReinventPage({
               className='mx-auto flex flex-col pt-6 text-center'
               id='pricing-contact-form'>
               <h1 className='mb-6 text-center font-basier text-5.5xl font-semibold leading-tight text-neutral-200'>
-                re:Invent 2023
+                AWS re:Invent 2023
               </h1>
               <div className='mb-6 text-neutral-200'>
                 Fill out the form, and we'll be in touch about booking some time
