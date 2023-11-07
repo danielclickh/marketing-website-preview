@@ -272,7 +272,7 @@ body {
   }
 
   blockquote {
-    @apply box-border border-l-primary-300 border-l-4 pl-4 font-semibold text-xl mb-9 text-neutral-0;
+    @apply box-border rounded border-l-primary-300 border-l-4 pt-3 pr-4 pb-3 pl-4 text-lg mb-9 text-neutral-0 bg-neutral-0/10 italic;
   }
 
   img {
