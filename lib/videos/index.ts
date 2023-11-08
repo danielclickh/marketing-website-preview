@@ -15,7 +15,7 @@ export function getVideos(): Video[] {
       categories: ['How to']
     },
     {
-      slug: 'authenticating-in-clickhouse-with-an-ss-key',
+      slug: 'authenticating-in-clickhouse-with-an-ssh-key',
       title: 'Authenticating in ClickHouse with an SSH Key',
       subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
       description:
