@@ -1,15 +1,14 @@
-import { findOne } from '../../lib/api/strapi'
-import GrowingCommunity from '../../components/GrowingCommunity'
-import Markdown from '../../components/Markdown'
-import { GetStaticProps } from 'next'
-import { ContactProps } from '../../types/contact'
-import Layout from '../../components/Layout'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import HRSeparator from '../../components/HRSeparator'
-import MarketoForm from '../../components/MarketoForm'
-import { useRef, useState } from 'react'
-import Script from 'next/script'
 import { ChatIcon } from '@heroicons/react/solid'
+import { GetStaticProps } from 'next'
+import { useRef, useState } from 'react'
+import GrowingCommunity from '../../components/GrowingCommunity'
+import HRSeparator from '../../components/HRSeparator'
+import Layout from '../../components/Layout'
+import Markdown from '../../components/Markdown'
+import MarketoForm from '../../components/MarketoForm'
+import { findOne } from '../../lib/api/strapi'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { ContactProps } from '../../types/contact'
 
 interface DriftAPI {
   startInteraction: (options: { interactionId: number }) => void
@@ -181,11 +180,6 @@ export default function ReinventPage({
         </div>
         <HRSeparator className='my-24' />
         <GrowingCommunity />
-        <Script id='clearbitFormStatus'>
-          {`
-
-                          `}
-        </Script>
       </Layout>
     </>
   )

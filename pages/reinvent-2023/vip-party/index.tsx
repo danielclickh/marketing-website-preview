@@ -174,11 +174,6 @@ export default function ReinventPage({
         </div>
         <HRSeparator className='my-24' />
         <GrowingCommunity />
-        <Script id='clearbitFormStatus'>
-          {`
-
-                          `}
-        </Script>
       </Layout>
     </>
   )
