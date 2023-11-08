@@ -108,6 +108,12 @@ function generateSiteMap(
         <loc>${siteURL}/user-stories</loc>
     </url>
     <url>
+      <loc>${siteURL}/reinvent-2023</loc>
+    </url>
+    <url>
+      <loc>${siteURL}/reinvent-2023/vip-party</loc>
+    </url>
+    <url>
         <loc>${siteURL}/blog</loc>
     </url>
     ${blogPosts

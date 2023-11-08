@@ -1,14 +1,15 @@
-import { ChatIcon } from '@heroicons/react/solid'
+import { findOne } from '../../../lib/api/strapi'
+import GrowingCommunity from '../../../components/GrowingCommunity'
+import Markdown from '../../../components/Markdown'
 import { GetStaticProps } from 'next'
+import { ContactProps } from '../../../types/contact'
+import Layout from '../../../components/Layout'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import HRSeparator from '../../../components/HRSeparator'
+import MarketoForm from '../../../components/MarketoForm'
 import { useRef, useState } from 'react'
-import GrowingCommunity from '../../components/GrowingCommunity'
-import HRSeparator from '../../components/HRSeparator'
-import Layout from '../../components/Layout'
-import Markdown from '../../components/Markdown'
-import MarketoForm from '../../components/MarketoForm'
-import { findOne } from '../../lib/api/strapi'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { ContactProps } from '../../types/contact'
+import Script from 'next/script'
+import { ChatIcon } from '@heroicons/react/solid'
 
 interface DriftAPI {
   startInteraction: (options: { interactionId: number }) => void
@@ -35,10 +36,11 @@ export const getStaticProps: GetStaticProps<ContactProps> =
       props: {
         ...data.hero,
         seo: {
-          title: 'AWS re:Invent 2023 - ClickHouse',
+          title:
+            'AWS re:Invent 2023 After Hours Networking Reception - ClickHouse',
           description:
-            'Book a meeting with the ClickHouse team at AWS re:Invent 2023',
-          path: '/reinvent-2023'
+            'Your VIP Pass to ClickHouse’s re:Invent Reception Awaits!',
+          path: '/reinvent-2023/vip-party'
         },
         ...commonProps
       }
@@ -68,38 +70,30 @@ export default function ReinventPage({
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='pt-10'>
-          <div className='container mx-auto flex max-w-2xl flex-col px-8 2xl:px-0'>
+          <div className='max-w74xl container mx-auto flex flex-col px-8 2xl:px-0'>
             <div
               className='mx-auto flex flex-col pt-6 text-center'
               id='pricing-contact-form'>
               <h1 className='mb-6 text-center font-basier text-5.5xl font-semibold leading-tight text-neutral-200'>
                 AWS re:Invent 2023
+                <br />
+                After Hours Networking Reception
               </h1>
-              <div className='mb-6 text-neutral-200'>
-                Fill out the form, and we'll be in touch about booking some time
-                with our team.
+              <div className='mx-auto mb-6 max-w-2xl text-neutral-200'>
+                Spaces are filling up fast, and we're quickly running out of VIP
+                passes for the After Hours Networking Reception hosted at{' '}
+                <strong>
+                  Hakkasan, MGM Grand, Las Vegas, on November 29, from 6 PM to 8
+                  PM.
+                </strong>
               </div>
-              <div className='mb-6 font-bold text-neutral-200'>OR</div>
-
-              <button
-                className='mx-auto mt-4 block max-w-[250px] rounded bg-primary-300 py-2 px-6 font-semibold transition hover:bg-primary-400 group-hover:bg-primary-400 md:mt-0'
-                onClick={() => {
-                  if (window.drift !== undefined) {
-                    window.drift.api.startInteraction({ interactionId: 378704 })
-                  }
-                }}>
-                <span className='flex items-center justify-center gap-2 text-base text-black'>
-                  <ChatIcon className='h-5 w-5' />
-                  Book a meeting here
-                </span>
-              </button>
             </div>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 pt-14 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
               <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
                 {!formSuccess && (
                   <MarketoForm
-                    formId='1099'
-                    onLoad={(form) => {
+                    formId='1101'
+                    onLoad={() => {
                       setFormLoaded(true)
 
                       var pollForDefinition = function (
@@ -126,7 +120,6 @@ export default function ReinventPage({
                         'pk_25c26e54fda4158b4189447198378375'
                       )
                       script.onerror = function (e) {
-                        console.log('Clearbit Form JS unable to load')
                         pollForDefinition(window, 'MktoForms2', function () {
                           window.MktoForms2.whenReady(function (form) {
                             form.setValues({
@@ -167,10 +160,11 @@ export default function ReinventPage({
                 {formSuccess && (
                   <div ref={formSuccessRef} className='text-center'>
                     <h3 className='text-2xl font-bold'>
-                      Thank you for your submission!
+                      You're on the waitlist!
                     </h3>
                     <p className='mt-2 text-neutral-200'>
-                      We will be in touch soon.
+                      One of the team will be in touch to let you know if a VIP
+                      pass becomes available.
                     </p>
                   </div>
                 )}
