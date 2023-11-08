@@ -4,6 +4,28 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'querying-pandas-with-clickhouse',
+      title: 'Querying Pandas with ClickHouse',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we'll learn how to query Pandas DataFrames using chdb, a Python library powered by ClickHouse. With help from Canadian house prices and cities datasets, we'll learn how to query individual DataFrames, how to join them together, and how to generate a new DataFrame from the results.",
+      thumbnail: 'https://img.youtube.com/vi/udlfgc5eVTY/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/udlfgc5eVTY?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
+      slug: 'authenticating-in-clickhouse-with-an-ss-key',
+      title: 'Authenticating in ClickHouse with an SSH Key',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we're looking at how to connect to Clickhouse using SSH keys, a feature introduced in Clickhouse 23.9. We'll walk through user setup, SSH key generation, and discuss the benefits of this method. We'll also touch on using config files for easier access.",
+      thumbnail: 'https://img.youtube.com/vi/Rhe-kUyrFUE/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/Rhe-kUyrFUE?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
       slug: 'greatest-common-denominator-codec-clickhouse-23-9',
       title: 'Greatest Common Denominator Codec in ClickHouse 23.9',
       subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
