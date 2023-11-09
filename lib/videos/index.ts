@@ -4,6 +4,17 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'working-with-materialized-views',
+      title: 'An intro to Materialized Views in ClickHouse',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we explore materialized views in ClickHouse using a dataset of PyPI download events. Materialized views in ClickHouse don't store data themselves but perform transformations on data as it is inserted. We illustrate this process using the PyPI dataset, showing how it can efficiently aggregate daily download counts per project.",
+      thumbnail: 'https://img.youtube.com/vi/QUigKP7iy7Y/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/QUigKP7iy7Y?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
       slug: 'querying-pandas-with-clickhouse',
       title: 'Querying Pandas with ClickHouse',
       subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
