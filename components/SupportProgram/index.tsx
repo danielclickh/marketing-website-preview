@@ -91,7 +91,7 @@ export default function SupportProgram(props: any) {
             xmlns='http://www.w3.org/2000/svg'>
             <path
               d='M-35 0L693.808 86.1145C714.198 88.5237 734.801 88.5093 755.187 86.0717L1475 0V360H-35V0Z'
-              fill='#FCFF74'
+              fill='#FAFF69'
             />
           </svg>
           <div className='bg-primary-300 pb-16 pt-10 text-neutral-800 md:pt-0'>

@@ -16,301 +16,301 @@
   <ellipse cx="352.952" cy="38.4316" rx="2.49642" ry="2.5" fill="#313128" />
   <rect x="36.9054" y="67.9316" width="42.9384" height="17" rx="2" fill="#282828">
     <animate id="col1" attributeName="fill" begin="0s;barChart.end;lineChart.end;pieChart.end"
-      dur="200ms" values="#FCFF74" fill="freeze" />
+      dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="36.9054" y="87.9316" width="42.9384" height="17" rx="2" fill="#282828">
     <animate attributeName="fill" begin="0s;barChart.end;lineChart.end;pieChart.end" dur="200ms"
-      values="#FCFF74" fill="freeze" />
+      values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="36.9054" y="107.932" width="42.9384" height="17" rx="2" fill="#282828">
     <animate attributeName="fill" begin="0s;barChart.end;lineChart.end;pieChart.end" dur="200ms"
-      values="#FCFF74" fill="freeze" />
+      values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="36.9054" y="127.932" width="42.9384" height="17" rx="2" fill="#282828">
     <animate attributeName="fill" begin="0s;barChart.end;lineChart.end;pieChart.end" dur="200ms"
-      values="#FCFF74" fill="freeze" />
+      values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="36.9054" y="147.932" width="42.9384" height="17" rx="2" fill="#282828">
     <animate attributeName="fill" begin="0s;barChart.end;lineChart.end;pieChart.end" dur="200ms"
-      values="#FCFF74" fill="freeze" />
+      values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="36.9054" y="167.932" width="42.9384" height="17" rx="2" fill="#282828">
     <animate attributeName="fill" begin="0s;barChart.end;lineChart.end;pieChart.end" dur="200ms"
-      values="#FCFF74" fill="freeze" />
+      values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="36.9054" y="187.932" width="42.9384" height="17" rx="2" fill="#282828">
     <animate attributeName="fill" begin="0s;barChart.end;lineChart.end;pieChart.end" dur="200ms"
-      values="#FCFF74" fill="freeze" />
+      values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="36.9054" y="207.932" width="42.9384" height="17" rx="2" fill="#282828">
     <animate attributeName="fill" begin="0s;barChart.end;lineChart.end;pieChart.end" dur="200ms"
-      values="#FCFF74" fill="freeze" />
+      values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
 
   <rect x="85.8352" y="67.9316" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate id="col2" attributeName="fill" begin="col1.end" dur="200ms" values="#FCFF74"
+    <animate id="col2" attributeName="fill" begin="col1.end" dur="200ms" values="#FAFF69"
       fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="85.8352" y="87.9316" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col1.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col1.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="85.8352" y="107.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col1.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col1.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="85.8352" y="127.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col1.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col1.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="85.8352" y="147.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col1.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col1.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="85.8352" y="167.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col1.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col1.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="85.8352" y="187.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col1.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col1.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="85.8352" y="207.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col1.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col1.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
 
   <rect x="134.765" y="67.9316" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate id="col3" attributeName="fill" begin="col2.end" dur="200ms" values="#FCFF74"
+    <animate id="col3" attributeName="fill" begin="col2.end" dur="200ms" values="#FAFF69"
       fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="134.765" y="87.9316" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col2.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col2.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="134.765" y="107.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col2.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col2.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="134.765" y="127.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col2.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col2.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="134.765" y="147.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col2.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col2.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="134.765" y="167.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col2.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col2.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="134.765" y="187.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col2.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col2.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="134.765" y="207.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col2.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col2.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
 
   <rect x="183.695" y="67.9316" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate id="col4" attributeName="fill" begin="col3.end" dur="200ms" values="#FCFF74"
+    <animate id="col4" attributeName="fill" begin="col3.end" dur="200ms" values="#FAFF69"
       fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="183.695" y="87.9316" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col3.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col3.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="183.695" y="107.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col3.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col3.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="183.695" y="127.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col3.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col3.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="183.695" y="147.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col3.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col3.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="183.695" y="167.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col3.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col3.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="183.695" y="187.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col3.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col3.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="183.695" y="207.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col3.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col3.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
 
   <rect x="232.624" y="67.9316" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate id="col5" attributeName="fill" begin="col4.end" dur="200ms" values="#FCFF74"
+    <animate id="col5" attributeName="fill" begin="col4.end" dur="200ms" values="#FAFF69"
       fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="232.624" y="87.9316" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col4.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col4.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="232.624" y="107.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col4.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col4.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="232.624" y="127.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col4.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col4.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="232.624" y="147.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col4.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col4.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="232.624" y="167.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col4.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col4.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="232.624" y="187.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col4.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col4.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="232.624" y="207.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col4.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col4.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
 
   <rect x="281.554" y="67.9316" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate id="col6" attributeName="fill" begin="col5.end" dur="200ms" values="#FCFF74"
+    <animate id="col6" attributeName="fill" begin="col5.end" dur="200ms" values="#FAFF69"
       fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="281.554" y="87.9316" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col5.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col5.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="281.554" y="107.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col5.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col5.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="281.554" y="127.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col5.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col5.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="281.554" y="147.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col5.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col5.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="281.554" y="167.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col5.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col5.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="281.554" y="187.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col5.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col5.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="281.554" y="207.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col5.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col5.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
 
   <rect x="330.484" y="67.9316" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate id="col7" attributeName="fill" begin="col6.end" dur="200ms" values="#FCFF74"
+    <animate id="col7" attributeName="fill" begin="col6.end" dur="200ms" values="#FAFF69"
       fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="330.484" y="87.9316" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col6.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col6.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="330.484" y="107.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col6.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col6.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="330.484" y="127.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col6.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col6.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="330.484" y="147.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col6.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col6.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="330.484" y="167.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col6.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col6.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="330.484" y="187.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col6.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col6.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
   <rect x="330.484" y="207.932" width="42.9384" height="17" rx="2" fill="#282828">
-    <animate attributeName="fill" begin="col6.end" dur="200ms" values="#FCFF74" fill="freeze" />
+    <animate attributeName="fill" begin="col6.end" dur="200ms" values="#FAFF69" fill="freeze" />
     <animate attributeName="fill" begin="col1.begin-100ms"
       dur="10ms" values="#282828" fill="freeze" />
   </rect>
@@ -446,19 +446,19 @@
   </rect>
   <!-- Bar Chart -->
   <g opacity="0">
-    <rect x="405.376" y="90" width="20.9699" height="98" rx="3" fill="#FCFF74" />
-    <rect x="435.333" y="107" width="20.9699" height="81" rx="3" fill="#FCFF74" />
-    <rect x="465.29" y="127.932" width="20.9699" height="58" rx="3" fill="#FCFF74" />
-    <rect x="495.247" y="159" width="20.9699" height="29" rx="3" fill="#FCFF74" />
+    <rect x="405.376" y="90" width="20.9699" height="98" rx="3" fill="#FAFF69" />
+    <rect x="435.333" y="107" width="20.9699" height="81" rx="3" fill="#FAFF69" />
+    <rect x="465.29" y="127.932" width="20.9699" height="58" rx="3" fill="#FAFF69" />
+    <rect x="495.247" y="159" width="20.9699" height="29" rx="3" fill="#FAFF69" />
     <animate id="barChart" attributeName="opacity" attributeType="XML" dur="0.5s" values="1; 1; 0"
       keyTimes="0; 0.99; 1" begin="2.4s;lineChart.end+2.4s" />
   </g>
   <!-- Pie Chart -->
   <g opacity="0" transform="matrix(1, 0, 0, 1, 412.135132, 89.503609)">
-    <circle cx="49.2523" cy="48.9316" r="38.5" fill="#FF7575" stroke="#FCFF74" stroke-width="21" />
+    <circle cx="49.2523" cy="48.9316" r="38.5" fill="#FF7575" stroke="#FAFF69" stroke-width="21" />
     <mask id="mask0_642_37639" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="-1"
       width="99" height="99">
-      <circle cx="49.2523" cy="48.9316" r="38.5" fill="#FF7575" stroke="#FCFF74" stroke-width="21" />
+      <circle cx="49.2523" cy="48.9316" r="38.5" fill="#FF7575" stroke="#FAFF69" stroke-width="21" />
     </mask>
     <g mask="url(#mask0_642_37639)">
       <path d="M63.6944 -10.658L108.406 32.0681L49.0482 49.4262L63.6944 -10.658Z" fill="#FF7575" />
@@ -470,7 +470,7 @@
   </g>
   <!-- Line Chart -->
   <g opacity="0" transform="matrix(1, 0, 0, 1, 413.511292, 87.500008)">
-    <path d="M0 36.3714L18.8 23L29.2 41L48 32.2571L70 41L98 26.6" stroke="#FCFF74" stroke-width="5" />
+    <path d="M0 36.3714L18.8 23L29.2 41L48 32.2571L70 41L98 26.6" stroke="#FAFF69" stroke-width="5" />
     <path d="M0 70.3714L18.8 57L29.2 75L48 66.2571L70 75L98 60.6" stroke="#FF7575" stroke-width="5" />
     <animate id="lineChart" attributeName="opacity" attributeType="XML" dur="0.5s" values="1; 1; 0"
       keyTimes="0; 0.99; 1" begin="pieChart.end+2.4s" />

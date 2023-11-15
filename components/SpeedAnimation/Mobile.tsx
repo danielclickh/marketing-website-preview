@@ -84,7 +84,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
       <use stroke='rgba(52, 52, 52, 0.9)' href='#mobileVectorLine' />
       <use stroke='rgba(52, 52, 52, 0.9)' href='#mobileDeltaLakeLine' />
       <use
-        stroke='#FCFF74'
+        stroke='#FAFF69'
         strokeDasharray='200 1000'
         strokeWidth={3}
         href='#mobilePostgresLine'>
@@ -99,7 +99,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         />
       </use>
       <use
-        stroke='#FCFF74'
+        stroke='#FAFF69'
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
@@ -124,7 +124,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         />
       </use>
       <use
-        stroke='#FCFF74'
+        stroke='#FAFF69'
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
@@ -149,7 +149,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         />
       </use>
       <use
-        stroke='#FCFF74'
+        stroke='#FAFF69'
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
@@ -174,7 +174,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         />
       </use>
       <use
-        stroke='#FCFF74'
+        stroke='#FAFF69'
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
@@ -199,7 +199,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         />
       </use>
       <use
-        stroke='#FCFF74'
+        stroke='#FAFF69'
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
@@ -224,7 +224,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         />
       </use>
       <use
-        stroke='#FCFF74'
+        stroke='#FAFF69'
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
@@ -249,7 +249,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         />
       </use>
       <use
-        stroke='#FCFF74'
+        stroke='#FAFF69'
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
@@ -274,7 +274,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         />
       </use>
       <use
-        stroke='#FCFF74'
+        stroke='#FAFF69'
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
@@ -299,7 +299,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         />
       </use>
       <use
-        stroke='#FCFF74'
+        stroke='#FAFF69'
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
@@ -324,7 +324,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         />
       </use>
       <use
-        stroke='#FCFF74'
+        stroke='#FAFF69'
         strokeDasharray='200 1000'
         strokeOpacity={0}
         strokeWidth={3}
@@ -349,7 +349,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         />
       </use>
       <use
-        stroke='#FCFF74'
+        stroke='#FAFF69'
         strokeDasharray='200 1000'
         strokeWidth={3}
         href='#mobileDeltaLakeLine'>
@@ -369,7 +369,7 @@ function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
         height={120}
         x={140.609}
         y={338.641}
-        fill='#FCFF74'
+        fill='#FAFF69'
         rx={4}
         style={{
           animation: 'pulseEffect 2s ease-in-out 0s alternate infinite'
