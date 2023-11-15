@@ -11,7 +11,7 @@ const VideoPlayButton = (props: Props) => {
       viewBox='0 0 45 45'
       xmlns='http://www.w3.org/2000/svg'
       className={props.className}>
-      <circle cx='22.3379' cy='22.3379' fill='#FCFF74' r='22.3379' />
+      <circle cx='22.3379' cy='22.3379' fill='#FAFF69' r='22.3379' />
       <circle
         cx='22.3379'
         cy='22.3379'

@@ -122,7 +122,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
-          values='#FCFF74; #FCFF74; #282828'
+          values='#FAFF69; #FAFF69; #282828'
           keyTimes='0; 0.99; 1'
         />
       </rect>
@@ -140,7 +140,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -171,7 +171,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -200,7 +200,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
-          values='#FCFF74; #FCFF74; #282828'
+          values='#FAFF69; #FAFF69; #282828'
           keyTimes='0; 0.99; 1'
         />
       </rect>
@@ -218,7 +218,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -249,7 +249,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -278,7 +278,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
-          values='#FCFF74; #FCFF74; #282828'
+          values='#FAFF69; #FAFF69; #282828'
           keyTimes='0; 0.99; 1'
         />
       </rect>
@@ -295,7 +295,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
-          values='#FCFF74; #FCFF74; #282828'
+          values='#FAFF69; #FAFF69; #282828'
           keyTimes='0; 0.99; 1'
         />
       </rect>
@@ -313,7 +313,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -344,7 +344,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -373,7 +373,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
-          values='#FCFF74; #FCFF74; #282828'
+          values='#FAFF69; #FAFF69; #282828'
           keyTimes='0; 0.99; 1'
         />
       </rect>
@@ -391,7 +391,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -422,7 +422,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -451,7 +451,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
-          values='#FCFF74; #FCFF74; #282828'
+          values='#FAFF69; #FAFF69; #282828'
           keyTimes='0; 0.99; 1'
         />
       </rect>
@@ -582,7 +582,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
-          values='#FCFF74; #FCFF74; #282828'
+          values='#FAFF69; #FAFF69; #282828'
           keyTimes='0; 0.99; 1'
         />
       </rect>
@@ -600,7 +600,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -631,7 +631,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -660,7 +660,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
-          values='#FCFF74; #FCFF74; #282828'
+          values='#FAFF69; #FAFF69; #282828'
           keyTimes='0; 0.99; 1'
         />
       </rect>
@@ -678,7 +678,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -709,7 +709,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -738,7 +738,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
-          values='#FCFF74; #FCFF74; #282828'
+          values='#FAFF69; #FAFF69; #282828'
           keyTimes='0; 0.99; 1'
         />
       </rect>
@@ -755,7 +755,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
-          values='#FCFF74; #FCFF74; #282828'
+          values='#FAFF69; #FAFF69; #282828'
           keyTimes='0; 0.99; 1'
         />
       </rect>
@@ -773,7 +773,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -804,7 +804,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -833,7 +833,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
-          values='#FCFF74; #FCFF74; #282828'
+          values='#FAFF69; #FAFF69; #282828'
           keyTimes='0; 0.99; 1'
         />
       </rect>
@@ -851,7 +851,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -882,7 +882,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         width='42.9384'
         height='0'
         rx='2'
-        fill='#FCFF74'>
+        fill='#FAFF69'>
         <animate
           dur='200ms'
           fill='freeze'
@@ -911,7 +911,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
-          values='#FCFF74; #FCFF74; #282828'
+          values='#FAFF69; #FAFF69; #282828'
           keyTimes='0; 0.99; 1'
         />
       </rect>
@@ -1460,7 +1460,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           width='20.9699'
           height='98'
           rx='3'
-          fill='#FCFF74'
+          fill='#FAFF69'
         />
         <rect
           x='435.333'
@@ -1468,7 +1468,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           width='20.9699'
           height='81'
           rx='3'
-          fill='#FCFF74'
+          fill='#FAFF69'
         />
         <rect
           x='465.29'
@@ -1476,7 +1476,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           width='20.9699'
           height='58'
           rx='3'
-          fill='#FCFF74'
+          fill='#FAFF69'
         />
         <rect
           x='495.247'
@@ -1484,7 +1484,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           width='20.9699'
           height='29'
           rx='3'
-          fill='#FCFF74'
+          fill='#FAFF69'
         />
         <animate
           id='barChart'
@@ -1503,7 +1503,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           cy='48.932'
           r='38.5'
           fill='#FF7575'
-          stroke='#FCFF74'
+          stroke='#FAFF69'
           strokeWidth='21'
         />
         <mask
@@ -1518,7 +1518,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
             cy='48.932'
             r='38.5'
             fill='#FF7575'
-            stroke='#FCFF74'
+            stroke='#FAFF69'
             strokeWidth='21'
           />
         </mask>
@@ -1547,7 +1547,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
       <g opacity='0' transform='matrix(1, 0, 0, 1, 413.511292, 87.500008)'>
         <path
           d='M0 36.3714L18.8 23L29.2 41L48 32.2571L70 41L98 26.6'
-          stroke='#FCFF74'
+          stroke='#FAFF69'
           strokeWidth='5'
         />
         <path
