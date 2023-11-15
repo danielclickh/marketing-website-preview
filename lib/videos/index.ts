@@ -4,6 +4,17 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'sql-dynamic-column-selection-in-clickhouse',
+      title: 'SQL Dynamic Column Selection in ClickHouse',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we'll learn about dynamic column selection in SQL with ClickHouse, using the New York taxi dataset. We’ll learn how to use the COLUMNS clause to return columns by regex, before showing how to apply functions to aggregate data and format results. We'll also learn how to modify the values of columns, as well as excluding fields that we don't want.",
+      thumbnail: 'https://img.youtube.com/vi/moabRqqHNo4/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/moabRqqHNo4?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
       slug: 'working-with-materialized-views',
       title: 'An intro to Materialized Views in ClickHouse',
       subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
