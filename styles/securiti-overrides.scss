@@ -12,7 +12,7 @@
 .cmp-accordion__sub-title {@apply text-sm}
 .cmp-save-btn {@apply rounded-sm; }
 .cmp-modal__footer .cmp-save-btn, .cmp-modal__footer .cmp-decline-btn {height: auto !important;}
-.cc-message {padding: 15px 15px 0 15px !important}
+.cc-message {padding: 15px !important}
 .cc-compliance {color: #fff !important; font-weight: normal !important;}
 .cc-btn {font-size: 14px !important; color: #fff !important; font-weight: normal !important; padding: 15px !important}
 
@@ -31,3 +31,8 @@
 }
 
 .cmp-revoke-consent {position: initial !important; padding: 0 !important;}
+
+@media only screen and (max-width: 750px) {
+    .cc-message {padding: 15px 15px 0 15px !important}
+
+  }
