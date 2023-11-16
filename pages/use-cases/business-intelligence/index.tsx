@@ -155,11 +155,6 @@ export default function RealTimeAnalyticsPage({
                             children={number.readmore}
                           />
                         )}
-                        {number.subcontent && (
-                          <p className='mt-4 text-center text-xs'>
-                            {number.subcontent}
-                          </p>
-                        )}
                       </div>
                     )
                   })}
