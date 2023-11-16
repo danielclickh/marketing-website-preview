@@ -222,11 +222,10 @@ export default function RealTimeAnalyticsPage({
                                 alt='Quote'
                                 className='mb-4 block'
                               />
-                              <SuiText
-                                color='secondary'
-                                className='min-h-auto text-left xl:min-h-[250px]'>
-                                "{quote.content}"
-                              </SuiText>
+                              <Markdown
+                                className='min-h-auto text-left xl:min-h-[250px]'
+                                children={quote.content}
+                              />
                               <Image
                                 src={quote.logo}
                                 width={quote.imgWidth}
@@ -245,9 +244,10 @@ export default function RealTimeAnalyticsPage({
                               alt='Quote'
                               className='mb-4 block'
                             />
-                            <SuiText color='secondary' className='text-left'>
-                              "{quote.content}"
-                            </SuiText>
+                            <Markdown
+                              className='min-h-auto text-left xl:min-h-[250px]'
+                              children={quote.content}
+                            />
                             <Image
                               src={quote.logo}
                               width={quote.imgWidth}
@@ -301,7 +301,7 @@ export default function RealTimeAnalyticsPage({
                   height={73}
                 />
                 <SuiTitle type='h2' className='mt-8 text-center'>
-                  Real-time Applications
+                  Real-time Applications and Dashboards
                 </SuiTitle>
                 <p className='mx-auto mb-12 max-w-3xl px-9 pt-6 text-center text-sm'>
                   ClickHouse is used across industries to power systems and

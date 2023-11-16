@@ -1,7 +1,7 @@
 [
     {
         "id": 10,
-        "content": "Create user-facing applications with instant responsiveness"
+        "content": "Create user-facing dashboards and applications with instant responsiveness"
     },
     {
         "id": 20,
@@ -14,5 +14,9 @@
     {
         "id": 40,
         "content": "Seamlessly integrate static or streaming data from a wide range of sources"
+    },
+    {
+        "id": 50,
+        "content": "Use your favorite visualization tools like Grafana, Tableau, Superset, and more"
     }
 ]
