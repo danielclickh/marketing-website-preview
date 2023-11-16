@@ -3,14 +3,7 @@
         "id": 10,
         "stat": "10x+",
         "content": "Reduction in costs",
-        "subcontent": "Depending on alternatives considered.",
         "readmore": "[Read more](/blog/juspay-analyzes-payment-transactions-in-real-time-with-clickhouse)"
-    },
-    {
-        "id": 20,
-        "stat": "70+",
-        "content": "Supported file formats",
-        "readmore": "[Read more](/blog/data-formats-clickhouse-csv-tsv-parquet-native)"
     },
     {
         "id": 30,

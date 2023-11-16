@@ -134,11 +134,10 @@ export default function RealTimeAnalyticsPage({
           <div className='bg-neutral-725 text-neutral-0'>
             <div className='container mx-auto max-w-5xl px-4 pb-16 pt-12 sm:px-8 md:px-8 2xl:px-0'>
               <h2 className='text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
-                Discover why developers are choosing ClickHouse to power their
-                real-time data warehouse.
+                ClickHouse when compared to alternatives
               </h2>
               <div className='py-12'>
-                <div className='mx-auto grid max-w-3xl grid-cols-2 justify-between gap-y-10 gap-x-16 text-center md:grid-cols-4'>
+                <div className='mx-auto grid max-w-xl grid-cols-2 justify-between gap-y-10 gap-x-16 text-center md:grid-cols-3'>
                   {bigNumbers.map((number, index) => {
                     return (
                       <div key={index}>
@@ -172,7 +171,7 @@ export default function RealTimeAnalyticsPage({
           <div className='clip-inverted-triangle before:-top-40'></div>
         </div>
 
-        <div className='relative z-10 mx-auto bg-primary-300'>
+        <div className='relative z-10 mx-auto -mt-1 bg-primary-300'>
           <div className='relative z-10 mx-auto max-w-7xl'>
             <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
               <div className='flip-selection mx-auto flex flex-col text-center'>
