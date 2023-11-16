@@ -106,40 +106,42 @@ function UseCasesPage({
                     className='relative z-20'>
                     <CUICard>
                       <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
-                        {useCase.title === 'Logging & Metrics' && (
-                          <div className='absolute top-6 right-6'>
-                            <CUIButton
-                              type='secondary'
-                              size='sm'
-                              className='group mx-auto'
-                              href='/use-cases/logging-and-metrics'
-                              iconRight={
-                                <ChevronRightIcon
-                                  height='18'
-                                  className='pt-0.5 transition group-hover:translate-x-1/2'
-                                />
-                              }>
-                              Learn more
-                            </CUIButton>
-                          </div>
-                        )}
-                        {useCase.title === 'ML & Data Science' && (
-                          <div className='absolute top-6 right-6'>
-                            <CUIButton
-                              type='secondary'
-                              size='sm'
-                              className='group mx-auto'
-                              href='/use-cases/machine-learning-and-data-science'
-                              iconRight={
-                                <ChevronRightIcon
-                                  height='18'
-                                  className='pt-0.5 transition group-hover:translate-x-1/2'
-                                />
-                              }>
-                              Learn more
-                            </CUIButton>
-                          </div>
-                        )}
+                        {useCase.title === 'Logging & Metrics' ||
+                          (useCase.title === 'Logs, Events, & Traces' && (
+                            <div className='absolute top-6 right-6'>
+                              <CUIButton
+                                type='secondary'
+                                size='sm'
+                                className='group mx-auto'
+                                href='/use-cases/logging-and-metrics'
+                                iconRight={
+                                  <ChevronRightIcon
+                                    height='18'
+                                    className='pt-0.5 transition group-hover:translate-x-1/2'
+                                  />
+                                }>
+                                Learn more
+                              </CUIButton>
+                            </div>
+                          ))}
+                        {useCase.title === 'ML & Data Science' ||
+                          (useCase.title === 'Machine Learning & GenAI' && (
+                            <div className='absolute top-6 right-6'>
+                              <CUIButton
+                                type='secondary'
+                                size='sm'
+                                className='group mx-auto'
+                                href='/use-cases/machine-learning-and-data-science'
+                                iconRight={
+                                  <ChevronRightIcon
+                                    height='18'
+                                    className='pt-0.5 transition group-hover:translate-x-1/2'
+                                  />
+                                }>
+                                Learn more
+                              </CUIButton>
+                            </div>
+                          ))}
                         {useCase.title === 'Real-time Analytics' && (
                           <div className='absolute top-6 right-6'>
                             <CUIButton
