@@ -40,7 +40,7 @@ const AccordionComponent = () => {
         <div
           className='mx-auto flex w-full flex-col justify-between gap-x-5 lg:flex-row'
           id='diagramTop'>
-          <div className='lg:w-3/5 xl:mb-0'>
+          <div className='px-0 lg:w-3/5 lg:px-6 xl:mb-0'>
             <Diagram sectionId={strippedItemId(activeItem)} />
           </div>
           <div className='w-full pt-4 lg:w-2/5 2xl:pt-2'>

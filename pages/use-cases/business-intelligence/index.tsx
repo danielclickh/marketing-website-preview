@@ -190,7 +190,7 @@ export default function RealTimeAnalyticsPage({
             </div>
           </div>
         </div>
-        <div className='bg-neutral-725 pb-24'>
+        <div className='bg-neutral-725'>
           <div className='relative mx-auto pt-12 pb-24 md:px-0 md:pt-24'>
             <div className='section-container mx-auto max-w-7xl '>
               <div className='mx-auto max-w-6xl'>
@@ -289,62 +289,36 @@ export default function RealTimeAnalyticsPage({
           <div className='bg-primary-300 pb-24'>
             <div className='section-container mx-auto max-w-7xl'>
               <AccordionComponent />
-            </div>
-          </div>
-        </div>
-
-        <div className='bg-neutral-725 pb-24'>
-          <div className='section-container mx-auto max-w-6xl'>
-            <div className='flex w-full flex-col items-center'>
-              <div className='grid justify-between gap-20 lg:grid-cols-2'>
-                {callouts.map((feature) => (
-                  <div key={feature.id} className='px-3'>
-                    <Image
-                      src={feature.icon}
-                      alt={feature.title}
-                      width={32}
-                      height={32}
-                      className='mb-4'
-                    />
-                    <h3 className='mb-4 text-lg font-bold'>{feature.title}</h3>
-                    <div className='rich_content text-base text-neutral-200'>
-                      <Markdown children={feature.content} />
-                    </div>
+              <div className='mx-auto max-w-5xl'>
+                <div className='flex flex-col items-start justify-between gap-x-24 gap-y-10 pt-24 text-center text-black md:flex-row'>
+                  <div>
+                    <h3 className='mb-8 font-basier text-3xl font-bold leading-10'>
+                      Best-in-class
+                      <br />
+                      performance
+                    </h3>
+                    <p className='text-sm leading-6'>
+                      Unlike other JVM-based solutions which are limited in
+                      their ability to scale vertically due to expensive GC
+                      cycles on larger heaps, ClickHouse leverages the full
+                      resources of a machine and scales both horizontally and
+                      vertically to systems with hundreds of cores and petabytes
+                      of storage.
+                    </p>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className='bg-primary-300 py-12'>
-          <div className='section-container mx-auto max-w-5xl'>
-            <div className='flex flex-col items-start justify-between gap-x-24 gap-y-10 text-center text-black md:flex-row'>
-              <div>
-                <h3 className='mb-8 font-basier text-3xl font-bold leading-10'>
-                  Best-in-class
-                  <br />
-                  performance
-                </h3>
-                <p className='text-sm leading-6'>
-                  Unlike other JVM-based solutions which are limited in their
-                  ability to scale vertically due to expensive GC cycles on
-                  larger heaps, ClickHouse leverages the full resources of a
-                  machine and scales both horizontally and vertically to systems
-                  with hundreds of cores and petabytes of storage.
-                </p>
-              </div>
-              <div>
-                <h3 className='mb-8 font-basier text-3xl font-bold leading-10'>
-                  Flexible and scalable concurrency
-                </h3>
-                <p className='text-sm leading-6'>
-                  With ClickHouse, you can build the powerful Business
-                  Intelligence applications your users will love without
-                  worrying about responsiveness at scale. Ingest millions of
-                  rows per second. Handle the most heavily concurrent workloads.
-                  All without compromising query speed.
-                </p>
+                  <div>
+                    <h3 className='mb-8 font-basier text-3xl font-bold leading-10'>
+                      Flexible and scalable concurrency
+                    </h3>
+                    <p className='text-sm leading-6'>
+                      With ClickHouse, you can build the powerful Business
+                      Intelligence applications your users will love without
+                      worrying about responsiveness at scale. Ingest millions of
+                      rows per second. Handle the most heavily concurrent
+                      workloads. All without compromising query speed.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

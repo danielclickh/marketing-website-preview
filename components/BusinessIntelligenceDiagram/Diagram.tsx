@@ -1,4 +1,4 @@
-import RealTimeDiagram from '../../pages/use-cases/real-time-analytics/RealTimeDiagram'
+import RealTimeDiagram from './SvgSection1'
 interface DiagramProps {
   className?: string
   sectionId?: number
