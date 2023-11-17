@@ -39,69 +39,77 @@ const GlobalMenu = () => {
 
                   <NavigationMenu.Content className='absolute top-0 left-0 flex w-full flex-col overflow-hidden rounded-md pb-4 data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight sm:w-auto'>
                     <div className='one m-0 flex list-none sm:min-w-[500px] sm:grid-cols-[1fr]'>
-                      {menuItem.menuItems.map((subMenuItem) => {
+                      {menuItem.menuItems.map((subMenuItem, index) => {
                         return (
                           <div
-                            key={subMenuItem.name}
+                            key={index}
                             className='flex w-full grow flex-col'>
-                            <div className='mb-4 border-b border-neutral-700 border-opacity-40 bg-neutral-725 bg-opacity-90'>
-                              <ListItem
-                                href={subMenuItem.href}
-                                className='group rounded-none bg-opacity-10 pl-4 lg:min-w-[9.5rem]'>
-                                <SuiText
-                                  size='sm'
-                                  className='text-neutral-100 group-hover:text-neutral-0'
-                                  weight='semibold'>
-                                  {subMenuItem.name}
-                                </SuiText>
-                              </ListItem>
-                            </div>
+                            {subMenuItem.name !== 'Use cases' ? (
+                              <div className='mb-4 border-b border-neutral-700 border-opacity-40 bg-neutral-725 bg-opacity-90'>
+                                <ListItem
+                                  href={subMenuItem.href}
+                                  className='group rounded-none bg-opacity-10 pl-4 lg:min-w-[9.5rem]'>
+                                  <SuiText
+                                    size='sm'
+                                    className='text-neutral-100 group-hover:text-neutral-0'
+                                    weight='semibold'>
+                                    {subMenuItem.name}
+                                  </SuiText>
+                                </ListItem>
+                              </div>
+                            ) : (
+                              <div className='pt-3'></div>
+                            )}
                             <div>
-                              {subMenuItem.menuItems.map((deepMenuItem) => {
-                                return (
-                                  <div key={deepMenuItem.name}>
-                                    {deepMenuItem.icon ? (
-                                      <ListItem
-                                        href={deepMenuItem.href}
-                                        key={deepMenuItem.name}
-                                        className='group mx-auto rounded-none'>
-                                        <div className='flex gap-4'>
-                                          <Image
-                                            src={deepMenuItem.icon}
-                                            alt={deepMenuItem.name}
-                                            width={24}
-                                            height={24}
-                                          />
-                                          <div className='flex flex-col gap-0.5'>
-                                            <SuiText weight='medium' size='sm'>
-                                              {deepMenuItem.name}
-                                            </SuiText>
-                                            <SuiText
-                                              weight='normal'
-                                              size='sm'
-                                              className='text-neutral-300 group-hover:text-neutral-0'>
-                                              {deepMenuItem.description}
-                                            </SuiText>
+                              {subMenuItem.menuItems.map(
+                                (deepMenuItem, index) => {
+                                  return (
+                                    <div key={index}>
+                                      {deepMenuItem.icon ? (
+                                        <ListItem
+                                          href={deepMenuItem.href}
+                                          key={deepMenuItem.name}
+                                          className='group mx-auto rounded-none'>
+                                          <div className='flex gap-4'>
+                                            <Image
+                                              src={deepMenuItem.icon}
+                                              alt={deepMenuItem.name}
+                                              width={24}
+                                              height={24}
+                                            />
+                                            <div className='flex flex-col gap-0.5'>
+                                              <SuiText
+                                                weight='medium'
+                                                size='sm'>
+                                                {deepMenuItem.name}
+                                              </SuiText>
+                                              <SuiText
+                                                weight='normal'
+                                                size='sm'
+                                                className='text-neutral-300 group-hover:text-neutral-0'>
+                                                {deepMenuItem.description}
+                                              </SuiText>
+                                            </div>
                                           </div>
-                                        </div>
-                                      </ListItem>
-                                    ) : (
-                                      <ListItem
-                                        href={deepMenuItem.href}
-                                        key={deepMenuItem.name}
-                                        target={deepMenuItem.target}
-                                        className='group w-full pl-4'>
-                                        <SuiText
-                                          weight='medium'
-                                          size='sm'
-                                          className='whitespace-nowrap text-neutral-300 group-hover:text-neutral-0'>
-                                          {deepMenuItem.name}
-                                        </SuiText>
-                                      </ListItem>
-                                    )}
-                                  </div>
-                                )
-                              })}
+                                        </ListItem>
+                                      ) : (
+                                        <ListItem
+                                          href={deepMenuItem.href}
+                                          key={deepMenuItem.name}
+                                          target={deepMenuItem.target}
+                                          className='group w-full pl-4'>
+                                          <SuiText
+                                            weight='medium'
+                                            size='sm'
+                                            className='whitespace-nowrap text-neutral-300 group-hover:text-neutral-0'>
+                                            {deepMenuItem.name}
+                                          </SuiText>
+                                        </ListItem>
+                                      )}
+                                    </div>
+                                  )
+                                }
+                              )}
                             </div>
                           </div>
                         )
