@@ -1,62 +1,22 @@
 [
     {
-        "id": 10,
-        "content": "User-facing dashboards and apps",
-        "section": 10
+        "title": "Analyze all data, in any format",
+        "content": "ClickHouse provides support for 70+ [file formats](https://clickhouse.com/docs/en/sql-reference/formats) - from Parquet to JSON, CSV, TSV, and many more. For local files, [clickhouse-local](/blog/extracting-converting-querying-local-files-with-sql-clickhouse-local) provides a powerful and portable tool to query, convert and transform data on your local machine, too.",
+        "icon": "/images/use-cases/ml-and-ds/tools.svg"
     },
     {
-        "id": 20,
-        "content": "E-commerce optimization",
-        "section": 10
+        "title": "Integrate with your favorite tools",
+        "content": "Our vibrant and growing ecosystem of integrations makes it easy to leverage the tools and frameworks you already love. These include MySQL-compatible products, popular utilities for data ingestion and visualization such as Tableau, as well as language clients, transformation tools like DBT, [and more](https://clickhouse.com/docs/en/integrations).",
+        "icon": "/images/use-cases/ml-and-ds/tools.svg"
     },
     {
-        "id": 30,
-        "content": "Retail analytics",
-        "section": 10
+        "title": "Simplify your SQL",
+        "content": "ClickHouse provides support for 70+ [file formats](https://clickhouse.com/docs/en/sql-reference/formats) - from Parquet to JSON, CSV, TSV, and many more. For local files, [clickhouse-local](https://clickhouse.com/blog/extracting-converting-querying-local-files-with-sql-clickhouse-local) provides a powerful and portable tool to query, convert and transform data on your local machine, too.",
+        "icon": "/images/use-cases/ml-and-ds/tools.svg"
     },
     {
-        "id": 40,
-        "content": "Supply chain optimization",
-        "section": 10
-    },
-    {
-        "id": 50,
-        "content": "Fraud detection",
-        "section": 20
-    },
-    {
-        "id": 60,
-        "content": "Threat prevention",
-        "section": 20
-    },
-    {
-        "id": 70,
-        "content": "Proactive maintenance",
-        "section": 20
-    },
-    {
-        "id": 80,
-        "content": "Intelligent automation",
-        "section": 20
-    },
-    {
-        "id": 90,
-        "content": "User behavior analytics",
-        "section": 30
-    },
-    {
-        "id": 100,
-        "content": "Trend evaluation and monitoring",
-        "section": 30
-    },
-    {
-        "id": 110,
-        "content": "Gaming analytics",
-        "section": 30
-    },
-    {
-        "id": 120,
-        "content": "Advertising and marketing analysis",
-        "section": 30
+        "title": "Reduce cost and maximize efficiency",
+        "content": "Many traditional BI platforms like data warehouses charge per query, limit concurrency, and gate critical features behind higher pricing tiers. With ClickHouse, blazing speed comes out-of-the box. And, you only pay for the compute and compressed storage you actually use.",
+        "icon": "/images/use-cases/ml-and-ds/tools.svg"
     }
 ]

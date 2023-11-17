@@ -7,14 +7,17 @@ import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
-import AccordionComponent from '../../../components/RealTimeDiagram/Accordion'
+import AccordionComponent from '../../../components/BusinessIntelligenceDiagram/Accordion'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
+import Tilt from 'react-parallax-tilt'
 import bigNumbers from './big-numbers.json'
 import callouts from './callouts.json'
 import references from './supporting-references.json'
+import features from './features.json'
+import quotes from './quotes.json'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
@@ -137,21 +140,21 @@ export default function RealTimeAnalyticsPage({
                 ClickHouse when compared to alternatives
               </h2>
               <div className='py-12'>
-                <div className='mx-auto grid max-w-xl grid-cols-2 justify-between gap-y-10 gap-x-16 text-center md:grid-cols-3'>
+                <div className='mx-auto grid max-w-xl grid-cols-3 justify-between gap-y-10 gap-x-6 text-center md:gap-x-16'>
                   {bigNumbers.map((number, index) => {
                     return (
                       <div key={index}>
-                        <div className='flex min-h-[144px] min-w-[144px] items-center rounded-[36px] border-4 border-primary-300 bg-[#1E1E1B] text-center'>
+                        <div className='flex items-center rounded-[36px] border-4 border-primary-300 bg-[#1E1E1B] py-8 text-center md:min-h-[144px] md:min-w-[144px] md:py-0'>
                           <p className='w-full text-4xl font-semibold text-primary-300'>
                             {number.stat}
                           </p>
                         </div>
-                        <p className='mt-6 text-lg font-semibold'>
+                        <p className='mt-6 text-sm font-semibold md:text-lg'>
                           {number.content}
                         </p>
                         {number.readmore && (
                           <Markdown
-                            className='text-center text-sm'
+                            className='text-center text-xs md:text-sm'
                             children={number.readmore}
                           />
                         )}
@@ -162,15 +165,13 @@ export default function RealTimeAnalyticsPage({
               </div>
             </div>
           </div>
-
           <div className='clip-inverted-triangle before:-top-40'></div>
         </div>
-
         <div className='relative z-10 mx-auto -mt-1 bg-primary-300'>
           <div className='relative z-10 mx-auto max-w-7xl'>
             <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
               <div className='flip-selection mx-auto flex flex-col text-center'>
-                <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
+                <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-10 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
                   Trusted by developers that work with data at{' '}
                   <span className='tilted tilted-black'>
                     <span className='tilted-content leading-8'>scale</span>
@@ -178,7 +179,7 @@ export default function RealTimeAnalyticsPage({
                 </div>
               </div>
             </div>
-            <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-20 md:gap-x-14'>
+            <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-16 md:gap-x-14'>
               <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
               <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
               <LogoCarousel
@@ -189,42 +190,135 @@ export default function RealTimeAnalyticsPage({
             </div>
           </div>
         </div>
-
         <div className='bg-neutral-725 pb-24'>
-          <div className='relative mx-auto pt-12 md:px-0 md:pt-24'>
-            <div className='mx-auto max-w-7xl'>
+          <div className='relative mx-auto pt-12 pb-24 md:px-0 md:pt-24'>
+            <div className='section-container mx-auto max-w-7xl '>
               <div className='mx-auto max-w-6xl'>
-                <div className='flex w-full flex-col items-center pt-6 pb-12'>
-                  <div className='bg-shadow-element-right yellow-shadow grid justify-between gap-10 lg:grid-cols-2'>
-                    {callouts.map((callout) => (
+                <div className='flex w-full flex-col items-center'>
+                  <div className='grid justify-between gap-10 lg:grid-cols-2'>
+                    {features.map((feature, index) => (
                       <div
-                        key={callout.id}
+                        key={index}
                         className='rounded-lg border border-t-4 border-[#414141] border-t-primary-300 bg-neutral-900 p-7 shadow-lg'>
                         <Image
-                          src={callout.icon}
-                          alt={callout.title}
+                          src={feature.icon}
+                          alt={feature.title}
                           width={32}
                           height={32}
                           className='mb-4'
                         />
                         <h3 className='mb-4 text-lg font-bold'>
-                          {callout.title}
+                          {feature.title}
                         </h3>
                         <div className='rich_content text-base text-neutral-200'>
-                          <Markdown children={callout.content} />
+                          <Markdown children={feature.content} />
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className='clip-inverted-triangle bg-shadow-element-right yellow-shadow bg-neutral-725'>
+            <div className='section-container max-w-7xl'>
+              <div className='relative flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
+                <div className='p-10'>
+                  <div className='flex flex-col gap-x-6 gap-y-6 md:h-[590px] md:flex-row'>
+                    {quotes.map((quote) => (
+                      <Tilt
+                        tiltEnable={false}
+                        glareEnable={true}
+                        glareMaxOpacity={0.4}
+                        glareColor='rgba(251, 255, 70, 0.08)'
+                        glarePosition='all'
+                        className='flex-1'
+                        key={quote.id}>
+                        {quote.href ? (
+                          <Link href={quote.href} target={quote.target}>
+                            <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
+                              <Image
+                                src='/images/Quote.svg'
+                                width={37}
+                                height={28}
+                                alt='Quote'
+                                className='mb-4 block'
+                              />
+                              <SuiText color='secondary' className='text-left'>
+                                <Markdown children={quote.content} />
+                              </SuiText>
+                              <Image
+                                src={quote.logo}
+                                width={quote.imgWidth}
+                                height={quote.imgHeight}
+                                alt={quote.title}
+                                className='mt-12 md:mt-auto'
+                              />
+                            </div>
+                          </Link>
+                        ) : (
+                          <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
+                            <Image
+                              src='/images/Quote.svg'
+                              width={37}
+                              height={28}
+                              alt='Quote'
+                              className='mb-4 block'
+                            />
+                            <SuiText color='secondary' className='text-left'>
+                              "{quote.content}"
+                            </SuiText>
+                            <Image
+                              src={quote.logo}
+                              width={quote.imgWidth}
+                              height={quote.imgHeight}
+                              alt={quote.title}
+                              className='mt-12 md:mt-auto'
+                            />
+                          </div>
+                        )}
+                      </Tilt>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='-mt-1 h-1 w-full bg-primary-300'></div>
+            <div className='bg-primary-300 py-11'></div>
+          </div>
+          <div className='bg-primary-300 pb-24'>
+            <div className='section-container mx-auto max-w-7xl'>
               <AccordionComponent />
             </div>
           </div>
         </div>
 
-        <div className='bg-primary-300 py-14'>
-          <div className='mx-auto max-w-5xl px-8 md:px-0'>
+        <div className='bg-neutral-725 pb-24'>
+          <div className='section-container mx-auto max-w-6xl'>
+            <div className='flex w-full flex-col items-center'>
+              <div className='grid justify-between gap-20 lg:grid-cols-2'>
+                {callouts.map((feature) => (
+                  <div key={feature.id} className='px-3'>
+                    <Image
+                      src={feature.icon}
+                      alt={feature.title}
+                      width={32}
+                      height={32}
+                      className='mb-4'
+                    />
+                    <h3 className='mb-4 text-lg font-bold'>{feature.title}</h3>
+                    <div className='rich_content text-base text-neutral-200'>
+                      <Markdown children={feature.content} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className='bg-primary-300 py-12'>
+          <div className='section-container mx-auto max-w-5xl'>
             <div className='flex flex-col items-start justify-between gap-x-24 gap-y-10 text-center text-black md:flex-row'>
               <div>
                 <h3 className='mb-8 font-basier text-3xl font-bold leading-10'>
@@ -268,7 +362,7 @@ export default function RealTimeAnalyticsPage({
                 </SuiTitle>
                 <div className='mx-auto mb-8 mt-6 max-w-2xl text-center text-neutral-300'>
                   For detailed guides about how to get started with ClickHouse
-                  for real-time analytics workloads, follow along in our blog:
+                  for business intelligence workloads, follow along in our blog:
                 </div>
                 <div className='bg-neutral-725 p-8'>
                   <ol className='list-decimal space-y-2 text-left	text-primary-300'>
@@ -289,8 +383,7 @@ export default function RealTimeAnalyticsPage({
               </div>
             </div>
           </div>
-
-          <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
+          <div className='section-container pb-24 text-neutral-0 md:px-8 2xl:px-0'>
             <GetStartedFree
               href='https://clickhouse.cloud/signUp?loc=real-time-use-case-getstarted-footer'
               textBefore='Get started with ClickHouse'

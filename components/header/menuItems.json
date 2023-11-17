@@ -186,8 +186,34 @@
 	{
 		"id": 20,
 		"name": "Use cases",
-		"href": "/use-cases",
-		"target": "_self"
+		"menuItems": [
+			{
+				"id": 1,
+				"name": "Use cases",
+				"href": "/use-cases",
+				"target": "_self",
+				"menuItems": [
+					{
+						"id": 1,
+						"name": "Open support case",
+						"href": "https://clickhouse.cloud/support",
+						"target": "_blank"
+					},
+					{
+						"id": 2,
+						"name": "Knowledge Base",
+						"href": "https://clickhouse.com/docs/knowledgebase",
+						"target": "_self"
+					},
+					{
+						"id": 3,
+						"name": "Support Program",
+						"href": "/support/program",
+						"target": "_self"
+					}
+				]
+			}
+		]
 	},
 	{
 		"id": 5,
