@@ -169,7 +169,10 @@ export default function RealTimeAnalyticsPage({
                 <h2 className='text-left font-basier text-2xl font-semibold lg:text-4xl xl:max-w-[515px]'>
                   The real-time database that truly shines at scale. Count on
                   blazing performance when low latency{' '}
-                  <span className='text-primary-300'>really</span> matters.
+                  <span className='tilted tilted-yellow'>
+                    <span className='tilted-content leading-8'>really</span>
+                  </span>{' '}
+                  matters.
                 </h2>
                 <p className='mt-6 xl:max-w-[445px]'>
                   Discover why companies are choosing ClickHouse for their

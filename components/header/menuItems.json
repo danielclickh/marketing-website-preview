@@ -195,20 +195,26 @@
 				"menuItems": [
 					{
 						"id": 1,
-						"name": "Open support case",
-						"href": "https://clickhouse.cloud/support",
-						"target": "_blank"
+						"name": "Real-time Analytics",
+						"href": "/use-cases/real-time-analytics",
+						"target": "_self"
 					},
 					{
 						"id": 2,
-						"name": "Knowledge Base",
-						"href": "https://clickhouse.com/docs/knowledgebase",
+						"name": "Logs, Events, & Traces",
+						"href": "/use-cases/logging-and-metrics",
 						"target": "_self"
 					},
 					{
 						"id": 3,
-						"name": "Support Program",
-						"href": "/support/program",
+						"name": "Machine Learning & GenAI",
+						"href": "/use-cases/machine-learning-and-data-science",
+						"target": "_self"
+					},
+					{
+						"id": 4,
+						"name": "Business Intelligence",
+						"href": "/use-cases/business-intelligence",
 						"target": "_self"
 					}
 				]

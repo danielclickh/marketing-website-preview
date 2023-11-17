@@ -78,7 +78,7 @@ function UseCasesPage({
         <div className='relative gap-24 px-8 pb-20 pt-16 md:px-0 lg:pb-44 '>
           <div className='mx-auto max-w-3xl'>
             <div className='mx-auto text-center md:mr-0 '>
-              <h1 className='mb-6 font-basier text-4xl font-semibold text-neutral-200 md:text-5.5xl'>
+              <h1 className='mb-6 font-basier text-4xl font-semibold text-neutral-200 md:text-5.5xl md:leading-tight'>
                 {useCasesPageData.Title} for the
                 <br />
                 real-time data warehouse
