@@ -293,7 +293,7 @@ export default function RealTimeAnalyticsPage({
               <AccordionComponent />
               <div className='mx-auto max-w-6xl pt-24'>
                 <div className='flex flex-col gap-y-12 text-center text-black md:flex-row md:divide-x md:divide-[#1E1E1E]'>
-                  <div className='px-12'>
+                  <div className='px-12 md:w-1/2'>
                     <h3 className='mb-8 font-basier text-3xl font-bold leading-10'>
                       Best-in-class
                       <br />
@@ -308,8 +308,8 @@ export default function RealTimeAnalyticsPage({
                       of storage.
                     </p>
                   </div>
-                  <div className='px-12'>
-                    <h3 className='mb-8 font-basier text-3xl font-bold leading-10'>
+                  <div className='px-12 md:w-1/2 '>
+                    <h3 className='mb-8 px-12 font-basier text-3xl font-bold leading-10'>
                       Flexible and scalable concurrency
                     </h3>
                     <p className='text-sm leading-6'>
