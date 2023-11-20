@@ -148,7 +148,7 @@ export default function RealTimeAnalyticsPage({
                             {number.stat}
                           </p>
                         </div>
-                        <p className='mt-6 text-sm font-semibold md:text-lg'>
+                        <p className='mt-6 text-base font-semibold md:text-lg'>
                           {number.content}
                         </p>
                         {number.readmore && (
