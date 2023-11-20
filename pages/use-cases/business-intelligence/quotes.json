@@ -1,15 +1,5 @@
 [
     {
-        "id": 10,
-        "title": "ongage",
-        "logo": "/images/ongage-logo.svg",
-        "content": "\"The implementation of ClickHouse also brought real-time decision-making capabilities to Ongage. Previously, generating essential business reports was a time-consuming and sometimes troublesome task. We used MySQL before, and sometimes the warehouse took two to three hours to generate a report, sometimes causing alerts in the system. It was a pain.\" said Raslin, VP of R&D at Ongage.\n\nWith ClickHouse, however, the situation changed dramatically. \"When we tested how much time the same reports would take with ClickHouse, people were amazed. We ran the same data, and in a blink of an eye, we had the results.\" said Raslin.",
-        "href": "/blog/ongages-strategic-shift-to-clickhouse-for-real-time-email-marketing",
-        "target": "_self",
-        "imgWidth": 128,
-        "imgHeight": 35
-    },
-    {
         "id": 20,
         "title": "Denic",
         "logo": "/adgreetz-logo-gray.svg",
@@ -17,6 +7,16 @@
         "href": "/blog/adgreetz-processes-millions-of-daily-ad-impressions",
         "target": "_self",
         "imgWidth": 187,
+        "imgHeight": 35
+    },
+    {
+        "id": 10,
+        "title": "ongage",
+        "logo": "/images/ongage-logo.svg",
+        "content": "\"The implementation of ClickHouse also brought real-time decision-making capabilities to Ongage. Previously, generating essential business reports was a time-consuming and sometimes troublesome task. We used MySQL before, and sometimes the warehouse took two to three hours to generate a report, sometimes causing alerts in the system. It was a pain.\" said Raslin, VP of R&D at Ongage.\n\nWith ClickHouse, however, the situation changed dramatically. \"When we tested how much time the same reports would take with ClickHouse, people were amazed. We ran the same data, and in a blink of an eye, we had the results.\" said Raslin.",
+        "href": "/blog/ongages-strategic-shift-to-clickhouse-for-real-time-email-marketing",
+        "target": "_self",
+        "imgWidth": 128,
         "imgHeight": 35
     },
     {

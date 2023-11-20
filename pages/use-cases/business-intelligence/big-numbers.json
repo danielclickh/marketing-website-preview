@@ -8,7 +8,7 @@
     {
         "id": 30,
         "stat": "5x",
-        "content": "Query performance",
+        "content": "Faster queries",
         "readmore": "[Read more](/comparison/redshift)"
     },
     {

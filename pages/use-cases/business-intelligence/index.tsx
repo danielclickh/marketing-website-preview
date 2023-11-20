@@ -2,22 +2,21 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
+import Tilt from 'react-parallax-tilt'
+import AccordionComponent from '../../../components/BusinessIntelligenceDiagram/Accordion'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
-import AccordionComponent from '../../../components/BusinessIntelligenceDiagram/Accordion'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
-import Tilt from 'react-parallax-tilt'
 import bigNumbers from './big-numbers.json'
-import callouts from './callouts.json'
-import references from './supporting-references.json'
 import features from './features.json'
 import quotes from './quotes.json'
+import references from './supporting-references.json'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
@@ -123,7 +122,7 @@ export default function RealTimeAnalyticsPage({
                     src='/images/bi-hero.svg'
                     alt='ClickHouse'
                     width={537}
-                    height={313}
+                    height={314}
                     className='h-auto w-full '
                     priority
                   />
@@ -137,7 +136,7 @@ export default function RealTimeAnalyticsPage({
           <div className='bg-neutral-725 text-neutral-0'>
             <div className='container mx-auto max-w-5xl px-4 pb-16 pt-12 sm:px-8 md:px-8 2xl:px-0'>
               <h2 className='text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
-                ClickHouse when compared to alternatives
+                ClickHouse when compared to other warehouses
               </h2>
               <div className='py-12'>
                 <div className='mx-auto grid max-w-xl grid-cols-3 justify-between gap-y-10 gap-x-6 text-center md:gap-x-16'>
@@ -145,7 +144,7 @@ export default function RealTimeAnalyticsPage({
                     return (
                       <div key={index}>
                         <div className='flex items-center rounded-[36px] border-4 border-primary-300 bg-[#1E1E1B] py-8 text-center md:min-h-[144px] md:min-w-[144px] md:py-0'>
-                          <p className='w-full text-4xl font-semibold text-primary-300'>
+                          <p className='w-full text-5xl font-semibold text-primary-300'>
                             {number.stat}
                           </p>
                         </div>
@@ -193,9 +192,9 @@ export default function RealTimeAnalyticsPage({
         <div className='bg-neutral-725'>
           <div className='relative mx-auto pt-12 pb-24 md:px-0 md:pt-24'>
             <div className='section-container mx-auto max-w-7xl '>
-              <div className='mx-auto max-w-6xl'>
+              <div className='mx-auto max-w-7xl'>
                 <div className='flex w-full flex-col items-center'>
-                  <div className='grid justify-between gap-10 lg:grid-cols-2'>
+                  <div className='grid justify-between gap-10 md:grid-cols-2 xl:grid-cols-4'>
                     {features.map((feature, index) => (
                       <div
                         key={index}
@@ -224,6 +223,9 @@ export default function RealTimeAnalyticsPage({
             <div className='section-container max-w-7xl'>
               <div className='relative flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
                 <div className='p-10'>
+                  <h2 className='mb-10 text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
+                    What our customers say
+                  </h2>
                   <div className='flex flex-col gap-x-6 gap-y-6 md:h-[590px] md:flex-row'>
                     {quotes.map((quote) => (
                       <Tilt
@@ -289,9 +291,9 @@ export default function RealTimeAnalyticsPage({
           <div className='bg-primary-300 pb-24'>
             <div className='section-container mx-auto max-w-7xl'>
               <AccordionComponent />
-              <div className='mx-auto max-w-5xl'>
-                <div className='flex flex-col items-start justify-between gap-x-24 gap-y-10 pt-24 text-center text-black md:flex-row'>
-                  <div>
+              <div className='mx-auto max-w-6xl pt-24'>
+                <div className='flex flex-col gap-y-12 text-center text-black md:flex-row md:divide-x md:divide-[#1E1E1E]'>
+                  <div className='px-12'>
                     <h3 className='mb-8 font-basier text-3xl font-bold leading-10'>
                       Best-in-class
                       <br />
@@ -306,7 +308,7 @@ export default function RealTimeAnalyticsPage({
                       of storage.
                     </p>
                   </div>
-                  <div>
+                  <div className='px-12'>
                     <h3 className='mb-8 font-basier text-3xl font-bold leading-10'>
                       Flexible and scalable concurrency
                     </h3>
