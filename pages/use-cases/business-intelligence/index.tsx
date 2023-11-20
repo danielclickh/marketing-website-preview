@@ -226,7 +226,7 @@ export default function RealTimeAnalyticsPage({
                   <h2 className='mb-10 text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
                     What our customers say
                   </h2>
-                  <div className='flex flex-col gap-x-6 gap-y-6 md:h-[590px] md:flex-row'>
+                  <div className='flex flex-col gap-x-6 gap-y-6 md:h-[390px] md:flex-row'>
                     {quotes.map((quote) => (
                       <Tilt
                         tiltEnable={false}
