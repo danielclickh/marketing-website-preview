@@ -301,11 +301,10 @@ export default function RealTimeAnalyticsPage({
                     </h3>
                     <p className='text-sm leading-6'>
                       Unlike other JVM-based solutions which are limited in
-                      their ability to scale vertically due to expensive GC
-                      cycles on larger heaps, ClickHouse leverages the full
-                      resources of a machine and scales both horizontally and
-                      vertically to systems with hundreds of cores and petabytes
-                      of storage.
+                      their ability to scale vertically due to costly GC cycles
+                      on larger heaps, ClickHouse leverages the full resources
+                      of a machine and scales both horizontally and vertically
+                      with hundreds of cores and petabytes of storage.
                     </p>
                   </div>
                   <div className='px-12 md:w-1/2 '>
