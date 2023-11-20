@@ -136,7 +136,7 @@ export default function RealTimeAnalyticsPage({
           <div className='bg-neutral-725 text-neutral-0'>
             <div className='container mx-auto max-w-5xl px-4 pb-16 pt-12 sm:px-8 md:px-8 2xl:px-0'>
               <h2 className='text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
-                ClickHouse when compared to other warehouses
+                ClickHouse compared to other warehouses
               </h2>
               <div className='py-12'>
                 <div className='mx-auto grid max-w-xl grid-cols-3 justify-between gap-y-10 gap-x-6 text-center md:gap-x-16'>
