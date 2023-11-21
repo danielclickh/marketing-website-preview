@@ -45,7 +45,6 @@ const GlobalMenu = () => {
                             key={subMenuItem.name}
                             className='flex w-full grow flex-col'>
                             <div className='mb-4 border-b border-neutral-700 border-opacity-40 bg-neutral-725 bg-opacity-90'>
-                              {subMenuItem.name === '2'} {<>does</>}
                               <ListItem
                                 href={subMenuItem.href}
                                 className='group rounded-none bg-opacity-10 pl-4 lg:min-w-[9.5rem]'>
