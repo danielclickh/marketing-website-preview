@@ -374,7 +374,6 @@ export default function RealTimeAnalyticsPage({
                         Asynchronous Data Inserts in ClickHouse
                       </Link>
                     </li>
-
                     <li>
                       <a
                         href='/blog/real-time-event-streaming-with-confluent-cloud-clickhouse-and-clickpipes'
@@ -399,7 +398,6 @@ export default function RealTimeAnalyticsPage({
                         Hex
                       </a>
                     </li>
-
                     <li>
                       <a
                         href='/blog/using-materialized-views-in-clickhouse'
@@ -428,6 +426,14 @@ export default function RealTimeAnalyticsPage({
                         className='text-primary-300'>
                         Change Data Capture (CDC) with PostgreSQL and ClickHouse
                         - Part 2
+                      </a>
+                    </li>{' '}
+                    <li>
+                      <a
+                        href='/blog/how-cloudflare-processes-hundreds-of-millions-of-rows-per-second-with-clickhouse'
+                        className='text-primary-300'>
+                        How Cloudflare Processes Hundreds of Millions of Rows
+                        per Second with ClickHouse
                       </a>
                     </li>
                   </ol>
