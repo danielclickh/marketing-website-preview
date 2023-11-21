@@ -387,6 +387,14 @@ export default function MLUseCasePage({
                         Forecasting Using ClickHouse Machine Learning Functions
                       </Link>
                     </li>
+                    <li>
+                      <Link
+                        href='/blog/helicones-migration-from-postgres-to-clickhouse-for-advanced-llm-monitoring'
+                        className='text-primary-300'>
+                        Helicone's Migration from Postgres to ClickHouse for
+                        Advanced LLM Monitoring
+                      </Link>
+                    </li>
                   </ol>
                 </div>
               </div>

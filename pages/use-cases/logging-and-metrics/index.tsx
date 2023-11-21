@@ -341,6 +341,14 @@ export default function ClickHouseServerPage({
                         ClickHouse for petabyte scale
                       </a>
                     </li>
+                    <li>
+                      <Link
+                        href='/blog/helicones-migration-from-postgres-to-clickhouse-for-advanced-llm-monitoring'
+                        className='text-primary-300'>
+                        Helicone's Migration from Postgres to ClickHouse for
+                        Advanced LLM Monitoring
+                      </Link>
+                    </li>
                   </ol>
                 </div>
               </div>
