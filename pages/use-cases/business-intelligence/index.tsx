@@ -69,7 +69,7 @@ export default function RealTimeAnalyticsPage({
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='bg-contain bg-center bg-no-repeat'>
-          <div className='relative z-20 overflow-hidden bg-grid pb-16 pt-10'>
+          <div className='relative z-20 overflow-hidden bg-grid pb-24 pt-10'>
             <div className='container relative z-40 mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 md:bg-no-repeat md:px-8 lg:min-h-[430px] 2xl:px-0'>
               <div className='flex items-center'>
                 <div className='flex-col items-center xl:mt-16'>
@@ -85,10 +85,10 @@ export default function RealTimeAnalyticsPage({
                       size='base'
                       color='secondary'
                       className='mt-6 text-center md:pr-16 lg:text-left'>
-                      <p className='mb-6 max-w-2xl text-xl font-normal'>
+                      <p className='mb-12 max-w-2xl text-xl font-normal leading-[175%]'>
                         Say goodbye to loading spinners and lengthy report wait
-                        times. For Business Intelligence, ClickHouse unlocks
-                        faster queries at a fraction of the cost.
+                        times. For&nbsp;Business Intelligence, ClickHouse
+                        unlocks faster queries at a fraction of the cost.
                       </p>
                     </SuiText>
                   </div>

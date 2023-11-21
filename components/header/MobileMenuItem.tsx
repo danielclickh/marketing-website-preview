@@ -30,19 +30,16 @@ function MobileMenuItem({
   if (menuItems) {
     return (
       <div className='border-y border-neutral-700 bg-neutral-750/90 px-4 pb-4 backdrop-blur-[10px] sm:px-8'>
-        {menuItems.map((subitem: HeaderLinkItem | HeaderTopNavItem, index) => {
+        {menuItems.map((subitem: HeaderLinkItem | HeaderTopNavItem) => {
           if (subitem.menuItems && subitem.menuItems.length > 0) {
             return (
-              <div
-                className={`flex flex-col ${
-                  subitem.name !== 'Use cases' && 'pt-4'
-                }  ${index !== 1 && 'pt-4'}`}>
-                {subitem.name !== 'Use cases' && (
+              <div className='flex flex-col pt-4'>
+                {subitem.name && (
                   <div className='mb-4 text-sm font-medium'>{subitem.name}</div>
                 )}
-                {subitem.menuItems.map((item: HeaderLinkItem, index) => (
+                {subitem.menuItems.map((item: HeaderLinkItem) => (
                   <SuiLink
-                    key={index}
+                    key={item.name}
                     href={item.href}
                     onClick={close}
                     className='mb-4 flex max-w-md items-start hover:no-underline'>
@@ -85,7 +82,7 @@ function MobileMenuItem({
           } else if (subitem?.href) {
             return (
               <SuiLink
-                key={index}
+                key={subitem.name}
                 href={subitem.href}
                 className='flex max-w-md items-start hover:no-underline'>
                 {subitem.name}
