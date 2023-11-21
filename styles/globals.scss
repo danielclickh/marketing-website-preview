@@ -683,24 +683,20 @@ a.arrow-link {
 
 
 .businessIntelligenceDiagramContainer {
-  .active-diagram-0 {
-    .all {@apply opacity-100}
-    .many-others {@apply opacity-40}
-  }
   .active-diagram-10 {
     .data-ingestion {@apply opacity-100}
-    .integrations, .querying, .data-transformations {@apply opacity-40}
+    .integrations, .querying, .data-transformations, .dbt {@apply opacity-40}
   }
   .active-diagram-20 {
     .data-transformations {@apply opacity-100}
     .data-ingestion, .integrations {@apply opacity-40}
   }
   .active-diagram-30 {
-    .data-transformations {@apply opacity-100}
-    .data-ingestion, .integrations {@apply opacity-40}
+    .querying {@apply opacity-100}
+    .data-ingestion, .integrations, .dbt {@apply opacity-40}
   }
   .active-diagram-40 {
     .integrations {@apply opacity-100}
-    .data-transformations, .data-ingestion, .querying {@apply opacity-40}
+    .data-transformations, .data-ingestion, .querying, .dbt {@apply opacity-40}
   }
 }

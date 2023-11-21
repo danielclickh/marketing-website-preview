@@ -85,7 +85,7 @@ export default function RealTimeAnalyticsPage({
                       size='base'
                       color='secondary'
                       className='mt-6 text-center md:pr-16 lg:text-left'>
-                      <p className='mb-6 max-w-2xl font-normal'>
+                      <p className='mb-6 max-w-2xl text-xl font-normal'>
                         Say goodbye to loading spinners and lengthy report wait
                         times. For Business Intelligence, ClickHouse unlocks
                         faster queries at a fraction of the cost.
@@ -144,7 +144,7 @@ export default function RealTimeAnalyticsPage({
                     return (
                       <div key={index}>
                         <div className='flex items-center rounded-[36px] border-4 border-primary-300 bg-[#1E1E1B] py-8 text-center md:min-h-[144px] md:min-w-[144px] md:py-0'>
-                          <p className='w-full text-5xl font-semibold text-primary-300'>
+                          <p className='w-full text-3xl font-semibold text-primary-300 md:text-5xl'>
                             {number.stat}
                           </p>
                         </div>
@@ -153,7 +153,7 @@ export default function RealTimeAnalyticsPage({
                         </p>
                         {number.readmore && (
                           <Markdown
-                            className='text-center text-xs md:text-sm'
+                            className='text-center text-base'
                             children={number.readmore}
                           />
                         )}
@@ -299,7 +299,7 @@ export default function RealTimeAnalyticsPage({
                       <br />
                       performance
                     </h3>
-                    <p className='text-sm leading-6'>
+                    <p>
                       Unlike other JVM-based solutions which are limited in
                       their ability to scale vertically due to costly GC cycles
                       on larger heaps, ClickHouse leverages the full resources
@@ -311,7 +311,7 @@ export default function RealTimeAnalyticsPage({
                     <h3 className='mb-8 px-12 font-basier text-3xl font-bold leading-10'>
                       Flexible and scalable concurrency
                     </h3>
-                    <p className='text-sm leading-6'>
+                    <p>
                       With ClickHouse, you can build the powerful Business
                       Intelligence applications your users will love without
                       worrying about responsiveness at scale. Ingest millions of

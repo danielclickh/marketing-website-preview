@@ -7,7 +7,7 @@
     {
         "title": "Integrate with your favorite tools",
         "content": "Our vibrant and growing ecosystem of integrations makes it easy to leverage the tools and frameworks you already love - from MySQL-compatible tools, to popular visualization products like Tableau, as well as language clients, dbt, [and many more](https://clickhouse.com/docs/en/integrations).",
-        "icon": "/images/use-cases/ml-and-ds/tools.svg"
+        "icon": "/images/tools-icon.svg"
     },
     {
         "title": "Reduce cost and maximize efficiency",
