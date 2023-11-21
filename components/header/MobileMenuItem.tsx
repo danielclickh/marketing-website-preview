@@ -37,12 +37,9 @@ function MobileMenuItem({
                 className={`flex flex-col ${
                   subitem.name !== 'Use cases' && 'pt-4'
                 }  ${index !== 1 && 'pt-4'}`}>
-                {subitem.name !== 'Use cases' ||
-                  (subitem.name !== 'Use cases' && (
-                    <div className='mb-4 text-sm font-medium'>
-                      {subitem.name}
-                    </div>
-                  ))}
+                {subitem.name !== 'Use cases' && (
+                  <div className='mb-4 text-sm font-medium'>{subitem.name}</div>
+                )}
                 {subitem.menuItems.map((item: HeaderLinkItem, index) => (
                   <SuiLink
                     key={index}
