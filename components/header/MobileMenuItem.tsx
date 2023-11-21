@@ -15,7 +15,7 @@ function MobileMenuItem({
   menuItems,
   close
 }: Props) {
-  if (href && name !== 'Use cases') {
+  if (href) {
     return (
       <SuiLink
         key={name}
