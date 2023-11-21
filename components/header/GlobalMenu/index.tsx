@@ -17,29 +17,24 @@ const GlobalMenu = () => {
       <NavigationMenu.List className='center m-0 hidden list-none p-1 md:flex'>
         <>
           {headerMenuItems.map((menuItem) => {
-            if (menuItem.href) {
-              return (
-                <NavigationMenu.Item key={menuItem.name}>
-                  <NavigationMenu.Link
-                    className={styles.topLevelNavItem}
-                    href={menuItem.href}>
-                    {menuItem.name}
-                  </NavigationMenu.Link>
-                </NavigationMenu.Item>
-              )
-            } else if (
-              menuItem.menuItems &&
-              (menuItem?.menuItems ?? []).length > 0
-            ) {
-              return (
-                <NavigationMenu.Item key={menuItem.name}>
+            return (
+              <NavigationMenu.Item key={menuItem.name}>
+                {menuItem.href ? (
+                  <NavigationMenu.Trigger className={styles.topLevelNavItem}>
+                    <NavigationMenu.Link href={menuItem.href}>
+                      {menuItem.name}
+                    </NavigationMenu.Link>
+                  </NavigationMenu.Trigger>
+                ) : (
                   <NavigationMenu.Trigger className={styles.topLevelNavItem}>
                     {menuItem.name}
                   </NavigationMenu.Trigger>
+                )}
 
+                {(menuItem?.menuItems ?? []).length > 0 && (
                   <NavigationMenu.Content className='absolute top-0 left-0 flex w-full flex-col overflow-hidden rounded-md pb-4 data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight sm:w-auto'>
                     <div className='one m-0 flex list-none sm:min-w-[500px] sm:grid-cols-[1fr]'>
-                      {menuItem.menuItems.map((subMenuItem, index) => {
+                      {menuItem.menuItems?.map((subMenuItem, index) => {
                         return (
                           <div
                             key={index}
@@ -116,9 +111,9 @@ const GlobalMenu = () => {
                       })}
                     </div>
                   </NavigationMenu.Content>
-                </NavigationMenu.Item>
-              )
-            }
+                )}
+              </NavigationMenu.Item>
+            )
           })}
         </>
 
