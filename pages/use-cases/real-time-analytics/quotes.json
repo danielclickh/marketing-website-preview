@@ -1,15 +1,5 @@
 [
     {
-        "id": 10,
-        "title": "disney+",
-        "logo": "/images/disney+-white.svg",
-        "content": "Last time I checked, we read **two billion rows a second** of CDN access logs",
-        "href": "/blog/nyc-meetup-report-high-speed-content-distribution-analytics-for-streaming-platforms",
-        "target": "_self",
-        "imgWidth": 123,
-        "imgHeight": 67
-    },
-    {
         "id": 20,
         "title": "Cloudflare",
         "logo": "/images/Cloudflare_Logo-grey.svg",
@@ -27,5 +17,15 @@
         "target": "_self",
         "imgWidth": 123,
         "imgHeight": 32
+    },
+    {
+        "id": 10,
+        "title": "disney+",
+        "logo": "/images/disney+-white.svg",
+        "content": "Last time I checked, we read **two billion rows a second** of CDN access logs",
+        "href": "/blog/nyc-meetup-report-high-speed-content-distribution-analytics-for-streaming-platforms",
+        "target": "_self",
+        "imgWidth": 123,
+        "imgHeight": 67
     }
 ]
