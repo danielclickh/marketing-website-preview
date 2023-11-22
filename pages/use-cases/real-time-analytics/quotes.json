@@ -1,32 +1,31 @@
 [
     {
-        "id": 10,
-        "title": "modeo",
-        "logo": "/images/modeo-logo.svg",
-        "content": "We evaluated several data warehouse solutions for scalability, real-time analytics, and customer satisfaction. ClickHouse outperformed the competition on all these parameters.",
-        "href": "/blog/driving-sustainable-data-management-with-clickhouse-introducing-stash-by-modeo",
-        "target": "_self",
-        "imgWidth": 124,
-        "imgHeight": 26
-    },
-    {
         "id": 20,
-        "title": "ongage",
-        "logo": "/images/ongage-logo.svg",
-        "content": "Our existing data warehouse lacked the real-time capabilities we needed. This was particularly important for our analytics and automation operations, where immediate event triggering and analysis were essential.",
-        "href": "/blog/ongages-strategic-shift-to-clickhouse-for-real-time-email-marketing",
+        "title": "Cloudflare",
+        "logo": "/images/Cloudflare_Logo-grey.svg",
+        "content": "ClickHouse was open sourced in 2016, and we were running in production by the end of that year, so we've been long term users. Since then we've scaled up exponentially. This year we actually exceeded a thousand active replicas. That's **processing hundreds of millions of inserted rows every second**, which actually corresponds to quite a significantly larger number of events because we've been using a lot of sampling.",
         "target": "_self",
-        "imgWidth": 128,
-        "imgHeight": 35
+        "imgWidth": 123,
+        "imgHeight": 41
     },
     {
         "id": 30,
-        "logo": "/images/instabug-logo.svg",
-        "title": "instabug",
-        "content": "We store approximately 3 billion events (rows) per day at a rate of approximately 2 million events per minute. We also have to serve some pretty complex data visualizations that depend heavily on filtering very large amounts of data and calculating complex aggregations in a reasonably fast time frame for the sake of the user experience.",
-        "href": "/blog/10x-improved-response-times-cheaper-to-operate-and-30-storage-reduction-why-instabug-chose-clickhouse-for-apm",
+        "logo": "/images/ahrefs-logo.svg",
+        "title": "ahrefs",
+        "content": "We have multiple clusters deployed on our hardware with hundreds of hosts. Our main cluster is now geo-replicated, and we designate some replicas for read-heavy operations and others for write-heavy operations. Many of our tables are quite large, **with trillions and trillions of rows, as well as tens of columns.**",
+        "href": "/blog/how-clickhouse-powers-ahrefs-the-worlds-most-active-web-crawler",
         "target": "_self",
-        "imgWidth": 146,
-        "imgHeight": 33
+        "imgWidth": 123,
+        "imgHeight": 32
+    },
+    {
+        "id": 10,
+        "title": "disney+",
+        "logo": "/images/disney+-white.svg",
+        "content": "Last time I checked, we read **two billion rows a second** of CDN access logs.",
+        "href": "/blog/nyc-meetup-report-high-speed-content-distribution-analytics-for-streaming-platforms",
+        "target": "_self",
+        "imgWidth": 123,
+        "imgHeight": 67
     }
 ]

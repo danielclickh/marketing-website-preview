@@ -1,0 +1,32 @@
+[
+    {
+        "id": 20,
+        "title": "Denic",
+        "logo": "/adgreetz-logo-gray.svg",
+        "content": "\"With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud. We got several seconds query time and no materialized views. With ClickHouse Cloud's production instance, we are getting sub-second query time along with materialized views. The decision to switch was a no-brainer for us.\"",
+        "href": "/blog/adgreetz-processes-millions-of-daily-ad-impressions",
+        "target": "_self",
+        "imgWidth": 187,
+        "imgHeight": 35
+    },
+    {
+        "id": 10,
+        "title": "ongage",
+        "logo": "/images/ongage-logo.svg",
+        "content": "\"We used MySQL before, and sometimes the warehouse took two to three hours to generate a report, sometimes causing alerts in the system. It was a pain… When we tested how much time the same reports would take with ClickHouse, people were amazed. We ran the same data, and in a blink of an eye, we had the results.\"",
+        "href": "/blog/ongages-strategic-shift-to-clickhouse-for-real-time-email-marketing",
+        "target": "_self",
+        "imgWidth": 128,
+        "imgHeight": 35
+    },
+    {
+        "id": 30,
+        "logo": "/images/synq-logo-gray.svg",
+        "title": "synq",
+        "content": "\"With dbt execution orchestrated in various intervals, we can also leverage ClickHouse for internal BI use cases. We’ve found this setup very practical, as we can flexibly create new analytical views of our customer data without moving it from our production operational systems.\"",
+        "href": "/blog/building-a-unified-data-platform-with-clickhouse",
+        "target": "_self",
+        "imgWidth": 116,
+        "imgHeight": 43
+    }
+]

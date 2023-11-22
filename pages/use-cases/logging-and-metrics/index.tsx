@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps<LoggingProps> =
 
     data.seo.path = '/use-cases/logging-and-metrics'
     data.seo.title =
-      'Logging & Metrics with ClickHouse | ClickHouse for Logging Metrics'
+      'Logs, Events, & Traces with ClickHouse | ClickHouse for Logging'
     data.seo.description =
       'ClickHouse is the fastest and most resource-efficient database for real-time analytics, making it the perfect fit for observability use cases.'
     data.seo.image = [{ url: '/images/use-cases/logging/og.png' }]
@@ -80,27 +80,22 @@ export default function ClickHouseServerPage({
                     <Link href='/use-cases'>Use cases</Link> / Logging &amp;
                     metrics
                   </h4>
-                  <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-lg lg:text-left'>
-                    Logging &amp; metrics with ClickHouse
+                  <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-2xl lg:text-left'>
+                    Logs, Events, & Traces with ClickHouse
                   </h1>
                   <SuiText
                     size='base'
                     color='secondary'
                     className='mt-6 text-center md:pr-16 lg:text-left'>
                     <p className='mb-6'>
-                      ClickHouse is the fastest and most resource-efficient
-                      database for real-time analytics, making it the perfect
-                      fit for observability use cases.
-                    </p>
-                    <p className='mb-6'>
-                      Transform your metrics, events, logs, and traces with
+                      Transform your logs, events, and traces with
                       industry-leading compression ratios, sub-second query
                       response times, powerful aggregation functions, and an
-                      extensive suite of integrations.{' '}
+                      extensive suite of integrations.
                     </p>
                     <p className='mb-6'>
-                      Unlock unrivaled visibility into your M.E.L.T. data with
-                      ClickHouse.
+                      ClickHouse provides the cost-efficiency and blazing speed
+                      you need to power observability platforms at any scale.
                     </p>
                   </SuiText>
                   <div className='relative z-40 mt-6 flex gap-6'>
@@ -145,7 +140,7 @@ export default function ClickHouseServerPage({
           <div className='container mx-auto max-w-5xl px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
             <h2 className='text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
               Discover why companies are choosing ClickHouse as their blazing
-              fast{' '}
+              fast SQL-based{' '}
               <span className='tilted tilted-yellow'>
                 <span className='tilted-content'>observability</span>
               </span>{' '}
@@ -346,12 +341,19 @@ export default function ClickHouseServerPage({
                         ClickHouse for petabyte scale
                       </a>
                     </li>
+                    <li>
+                      <Link
+                        href='/blog/helicones-migration-from-postgres-to-clickhouse-for-advanced-llm-monitoring'
+                        className='text-primary-300'>
+                        Helicone's Migration from Postgres to ClickHouse for
+                        Advanced LLM Monitoring
+                      </Link>
+                    </li>
                   </ol>
                 </div>
               </div>
             </div>
           </div>
-
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
             <GetStartedFree
               href='https://clickhouse.cloud/signUp?loc=logging-use-case-getstarted-footer'

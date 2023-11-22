@@ -18,7 +18,7 @@ const AccordionComponent = () => {
   const selectedAccordionRef = useRef<HTMLDivElement>(null)
 
   return (
-    <div className='rounded-xl border border-neutral-700/80 bg-neutral-900/50 p-6'>
+    <div className='rounded-xl border border-neutral-700/80 bg-neutral-900 p-6'>
       <div className='flex w-full flex-col items-center pt-6'>
         <Image
           src='/images/use-cases/logging/icon-how.svg'
@@ -27,26 +27,20 @@ const AccordionComponent = () => {
           height={73}
         />
         <SuiTitle type='h2' className='mt-8 text-center'>
-          ClickHouse for Real-time Analytics
+          Business Intelligence with ClickHouse
         </SuiTitle>
         <p className='mx-auto mb-10 max-w-4xl px-9 pt-6 text-center'>
-          Whether you’re building user-facing dashboards, instantly responsive
-          applications, or analyzing data on the fly, ClickHouse has you
-          covered. We’re built to ensure that even the most sophisticated data
-          analysis can be done intuitively, using simple SQL.
-        </p>
-        <p className='mx-auto mb-12 max-w-3xl px-9 text-center'>
-          Our parallelized query execution engine, best-in-class compression
-          rates, and column-oriented design deliver unparalleled performance at
-          scale so that you can focus on insights and forget worrying about
-          infrastructure.
+          Running traditional BI tools on data warehouses for analytics can be
+          costly and often results in performance and concurrency limitations.
+          Companies leverage ClickHouse as their real-time data warehouse to
+          ensure that analytics and business intelligence shine at any scale.
         </p>
       </div>
       <div className='mx-auto pb-12 md:px-12'>
         <div
           className='mx-auto flex w-full flex-col justify-between gap-x-5 lg:flex-row'
           id='diagramTop'>
-          <div className='lg:w-3/5 xl:mb-0'>
+          <div className='px-0 lg:w-3/5 lg:px-6 xl:mb-0'>
             <Diagram sectionId={strippedItemId(activeItem)} />
           </div>
           <div className='w-full pt-4 lg:w-2/5 2xl:pt-2'>
