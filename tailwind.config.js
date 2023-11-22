@@ -75,7 +75,7 @@ module.exports = {
           50: '#FFFFE8',
           100: '#FEFFBA',
           200: '#FDFFA3',
-          300: '#FCFF74',
+          300: '#FAFF69',
           400: '#EEF400',
           500: '#9FA300',
           600: '#4F5100',
@@ -204,8 +204,8 @@ module.exports = {
           dark: '#FFFFFF'
         },
         c6: {
-          DEFAULT: '#FCFF74',
-          text: '#FCFF74',
+          DEFAULT: '#FAFF69',
+          text: '#FAFF69',
           link: '#C78F0F'
         },
         c7: {
@@ -213,7 +213,7 @@ module.exports = {
           DEFAULT: 'rgba(var(--clickhouse-color-7), <alpha-value>)',
           dark: '#FFC133'
         },
-        gradientTop: '#FCFF74',
+        gradientTop: '#FAFF69',
         gradientBottom: '#EEF400',
         alerts: {
           danger: {
@@ -254,11 +254,11 @@ module.exports = {
       },
       backgroundImage: {
         snowflakeGradient:
-          'linear-gradient(0deg, #FCFF74 30%, rgba(252, 255, 116, 0) 99.99%)',
+          'linear-gradient(0deg, #FAFF69 30%, rgba(252, 255, 116, 0) 99.99%)',
         homepageFadeLeftLogos:
-          'linear-gradient(90deg, #FCFF74 30%, rgba(252, 255, 116, 0) 99.99%)',
+          'linear-gradient(90deg, #FAFF69 30%, rgba(252, 255, 116, 0) 99.99%)',
         homepageFadeRightLogos:
-          'linear-gradient(270deg, #FCFF74 30%, rgba(252, 255, 116, 0) 99.99%)',
+          'linear-gradient(270deg, #FAFF69 30%, rgba(252, 255, 116, 0) 99.99%)',
         cloudFadeLeftLogos:
           'linear-gradient(90deg, #1D1D1D 30%, rgba(29, 29, 29, 0.1) 99.99%)',
         cloudFadeRightLogos:
