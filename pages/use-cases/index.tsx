@@ -83,9 +83,9 @@ function UseCasesPage({
                 <br />
                 real-time data warehouse
               </h1>
-              <p className='mx-auto mb-12 max-w-2xl text-xl text-neutral-200'>
+              <p className='mx-auto mb-12 max-w-2xl text-xl leading-[175%] text-neutral-200'>
                 Unlock faster queries and the ability to handle greater
-                concurrency. No matter how much data you’re working with.
+                concurrency. No&nbsp;matter how much data you’re working with.
               </p>
               <p>
                 <a
