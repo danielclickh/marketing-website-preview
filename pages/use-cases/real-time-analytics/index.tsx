@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps<RealTimeAnalyticsPageProps> =
     const data = await findOne('homepage', params)
 
     data.seo.path = '/use-cases/real-time-analytics'
-    data.seo.title = 'Real-time analytics with ClickHouse'
+    data.seo.title = 'Real-time Analytics with ClickHouse'
     data.seo.description =
       'Ingest millions of rows per second. Handle the most heavily concurrent workloads. All without compromising query speed.'
 
@@ -78,10 +78,10 @@ export default function RealTimeAnalyticsPage({
                   <div className='w-full lg:max-w-xl xl:max-w-full'>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
                       <Link href='/use-cases'>Use cases</Link> / Real-time
-                      analytics
+                      Analytics
                     </h4>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-xl lg:text-left'>
-                      Real-time analytics with ClickHouse
+                      Real-time Analytics with ClickHouse
                     </h1>
                     <SuiText
                       size='base'
