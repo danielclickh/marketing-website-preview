@@ -15,7 +15,7 @@ const Lines = (props: Props) => {
           d='M242 711.5V190.5H386.5V25.5'
           stroke='url(#paint0_linear_405_2690)'
           strokeWidth='2'></path>
-        <path d='M242 711.5V190.5H386.5V25.5' stroke='#fcff74' stroke-width='2'>
+        <path d='M242 711.5V190.5H386.5V25.5' stroke='#FAFF69' stroke-width='2'>
           <animate
             dur='3s'
             attributeName='stroke-dasharray'
@@ -35,7 +35,7 @@ const Lines = (props: Props) => {
           stroke='url(#paint5_linear_405_2690)'
           strokeWidth='2'
         />
-        <path d='M224 693.5V211.5H193.5V4.5' stroke='#fcff74' stroke-width='2'>
+        <path d='M224 693.5V211.5H193.5V4.5' stroke='#FAFF69' stroke-width='2'>
           <animate
             dur='4s'
             attributeName='stroke-dasharray'
@@ -52,7 +52,7 @@ const Lines = (props: Props) => {
         />
         <path
           d='M215 692L215 247L99.5 247L99.5 196'
-          stroke='#fcff74'
+          stroke='#FAFF69'
           stroke-width='2'>
           <animate
             dur='2s'
@@ -70,7 +70,7 @@ const Lines = (props: Props) => {
         />
         <path
           d='M251 689L251 208H483.5V101.5'
-          stroke='#fcff74'
+          stroke='#FAFF69'
           stroke-width='2'>
           <animate
             dur='6s'
@@ -87,7 +87,7 @@ const Lines = (props: Props) => {
         />
         <path
           d='M259 703L259.002 237L290.002 237L290.002 198'
-          stroke='#fcff74'
+          stroke='#FAFF69'
           stroke-width='2'>
           <animate
             dur='3s'
@@ -106,7 +106,7 @@ const Lines = (props: Props) => {
         <path
           id='shortline'
           d='M269 691.5L269.001 322L386.501 322L386.501 313.5'
-          stroke='#fcff74'
+          stroke='#FAFF69'
           stroke-width='2'>
           <animate
             dur='5s'

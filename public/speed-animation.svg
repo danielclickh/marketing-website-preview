@@ -119,166 +119,166 @@
   <use stroke="rgba(52, 52, 52, 0.9)" href="#cHashLine" />
   <use stroke="rgba(52, 52, 52, 0.9)" href="#goLine" />
   <use stroke="rgba(52, 52, 52, 0.9)" href="#rustLine" />
-  <use href="#postgresLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710">
+  <use href="#postgresLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710">
     <animate id="postgresLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="0s;mongoLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
   </use>
-  <use href="#bigQueryLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#bigQueryLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="bigQueryLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="mysqlLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="bigQueryLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#redshiftLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#redshiftLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="redshiftLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="snowflakeLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="redshiftLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#snowflakeLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#snowflakeLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="snowflakeLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="bigQueryLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="snowflakeLine.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#mongoLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#mongoLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="mongoLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="redshiftLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="mongoLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#mysqlLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#mysqlLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="mysqlLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="postgresLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="mysqlLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#kafkaLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#kafkaLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="kafkaLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="0.75s;dbtLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="icebergLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#vectorLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#vectorLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="vectorLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="kafkaLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="vectorLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#dbtLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#dbtLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="dbtLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="vectorLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="dbtLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#icebergLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#icebergLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="icebergLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="0.5s;deltaLakeLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="icebergLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#hudiLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#hudiLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="hudiLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="icebergLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="hudiLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#deltaLakeLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#deltaLakeLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="deltaLakeLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="hudiLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="deltaLakeLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#localFilesLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710">
+  <use href="#localFilesLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710">
     <animate attributeName="stroke-dashoffset" from="200" begin="0s" to="-1710" dur="3s"
       repeatCount="indefinite" />
   </use>
-  <use href="#supersetLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#supersetLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="supersetLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="2s;hexLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="supersetLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#deepNoteLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#deepNoteLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="deepNoteLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="supersetLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="deepNoteLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#graphanaLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#graphanaLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="graphanaLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="deepNoteLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="graphanaLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#metabaseLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#metabaseLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="metabaseLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="graphanaLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="metabaseLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#tableauLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#tableauLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="tableauLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="metabaseLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="tableauLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#hexLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#hexLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="hexLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="tableauLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="hexLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#pythonLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710">
+  <use href="#pythonLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710">
     <animate id="pythonLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="0s;rustLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
   </use>
-  <use href="#nodejsLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#nodejsLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="nodejsLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="pythonLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="nodejsLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#javaLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#javaLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="javaLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="nodejsLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="javaLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#cHashLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#cHashLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="cHashLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="javaLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="cHashLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#goLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#goLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="goLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="cHashLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
     <animate attributeName="stroke-opacity" from="0" begin="goLineAnimate.begin-0.01" to="1"
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
-  <use href="#rustLine" stroke="#FCFF74" stroke-width="3" stroke-dasharray="200 1710"
+  <use href="#rustLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
     stroke-opacity="0">
     <animate id="rustLineAnimate" attributeName="stroke-dashoffset" from="200"
       begin="goLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
@@ -286,7 +286,7 @@
       dur="0.01s" repeatCount='1' fill="freeze" />
   </use>
   <rect xmlns="http://www.w3.org/2000/svg" width="119.984" height="119.938" x="539.15" y="282.068"
-    fill="#FCFF74" class="clickhouse-logo-container" rx="4">
+    fill="#FAFF69" class="clickhouse-logo-container" rx="4">
   </rect>
   <image xmlns="http://www.w3.org/2000/svg" width="79" height="80" x="559.642" y="302.037"
     href="/logos/black-logo.svg">
