@@ -5,6 +5,17 @@ export function getVideos(): Video[] {
   return [
     {
       slug: 'querying-remote-parquet-files-with-clickHouse',
+      title: "One Size Can't Fit All - The Case for a Real-Time Data Warehouse",
+      subTitle: 'Tanya Bragin\nVP Product, ClickHouse',
+      description:
+        'We owe a lot to the cloud data warehouses, but their era of hegemony is coming to an end. The cloud data warehouses accomplished what many considered impossible: shifting huge analytical workloads from proprietary mainframe-like self-managed solutions to the cloud. This evolution ultimately resulted in a close examination of how warehoused data could be used to build increasingly interactive data-driven applications and led to an increasing trend to unbundle the cloud data warehouse, now deployed in a more open and interconnected environment.',
+      thumbnail: 'https://img.youtube.com/vi/8cIKXnSHNRU/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/8cIKXnSHNRU?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['ClickHouse']
+    },
+    {
+      slug: 'querying-remote-parquet-files-with-clickHouse',
       title: 'Querying remote Parquet files with ClickHouse',
       subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
       description:
