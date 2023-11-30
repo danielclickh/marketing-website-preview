@@ -4,7 +4,7 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
-      slug: 'querying-remote-parquet-files-with-clickHouse',
+      slug: 'the-case-for-a-real-time-data-warehouse',
       title: "One Size Can't Fit All - The Case for a Real-Time Data Warehouse",
       subTitle: 'Tanya Bragin\nVP Product, ClickHouse',
       description:
