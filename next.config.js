@@ -366,6 +366,16 @@ const nextConfig = {
         destination:
           '/blog/optimizing-your-customer-facing-analytics-experience-with-luzmo-and-clickhouse',
         permanent: true
+      },
+      {
+        source: '/reinvent-2023',
+        destination: '/company/contact',
+        permanent: true
+      },
+      {
+        source: '/reinvent-2023/vip-party',
+        destination: '/company/contact',
+        permanent: true
       }
     ]
   }
