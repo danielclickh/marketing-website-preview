@@ -65,8 +65,6 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
       return 0
     })
 
-    console.log(quotes)
-
     const commonProps = await getCommonProps()
     return {
       props: {
