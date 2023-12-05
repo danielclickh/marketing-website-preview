@@ -42,6 +42,31 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
     }
     const { data: quotes } = await findAll('use-case-quotes', quotesParams)
 
+    const firstThreeIds = [3, 14, 9] // Specify the IDs you want to keep at the beginning
+    quotes.sort((a, b) => {
+      const aIndex = firstThreeIds.indexOf(a.id)
+      const bIndex = firstThreeIds.indexOf(b.id)
+
+      // If both elements are in the firstThreeIds array, sort them based on their index
+      if (aIndex !== -1 && bIndex !== -1) {
+        return aIndex - bIndex
+      }
+
+      // If only one of the elements is in the firstThreeIds array, prioritize it
+      if (aIndex !== -1) {
+        return -1
+      }
+
+      if (bIndex !== -1) {
+        return 1
+      }
+
+      // If neither element is in the firstThreeIds array, maintain their original order
+      return 0
+    })
+
+    console.log(quotes)
+
     const commonProps = await getCommonProps()
     return {
       props: {
