@@ -22,7 +22,7 @@
         "id": 10,
         "title": "Lyft",
         "logo": "/images/lyft-logo.svg",
-        "content": "At Lyft, we ingest tens of millions of rows and execute millions of read queries in ClickHouse daily with volume continuing to increase. On a monthly basis, this means reading and writing more than 25TB of data.",
+        "content": "At Lyft, **we ingest tens of millions of rows and execute millions of read queries in ClickHouse daily with volume continuing to increase**. On a monthly basis, this means reading and writing more than 25TB of data.",
         "href": "https://eng.lyft.com/druid-deprecation-and-clickhouse-adoption-at-lyft-120af37651fd",
         "target": "_blank",
         "imgWidth": 64,
