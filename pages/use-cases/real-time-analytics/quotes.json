@@ -20,12 +20,12 @@
     },
     {
         "id": 10,
-        "title": "disney+",
-        "logo": "/images/disney+-white.svg",
-        "content": "Last time I checked, we read **two billion rows a second** of CDN access logs.",
-        "href": "/blog/nyc-meetup-report-high-speed-content-distribution-analytics-for-streaming-platforms",
-        "target": "_self",
-        "imgWidth": 123,
-        "imgHeight": 67
+        "title": "Lyft",
+        "logo": "/images/lyft-logo.svg",
+        "content": "At Lyft, we ingest tens of millions of rows and execute millions of read queries in ClickHouse daily with volume continuing to increase. On a monthly basis, this means reading and writing more than 25TB of data.",
+        "href": "https://eng.lyft.com/druid-deprecation-and-clickhouse-adoption-at-lyft-120af37651fd",
+        "target": "_blank",
+        "imgWidth": 64,
+        "imgHeight": 45
     }
 ]
