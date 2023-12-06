@@ -4,6 +4,17 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'ingesting-data-from-redpanda-into-clickHouse',
+      title: 'Ingesting data from Redpanda into ClickHouse',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we'll learn how to ingest data from RedPanda into Clickhouse using Clickhouse's Kafka engine. The tutorial guides viewers through setting up a RedPanda streaming data platform, creating a topic for wiki events, and using the rpk and kcat tools to administer and ingest data into Redpanda. We also learn how to setup ClickHouse to ingest streaming data and run a couple of queries to identify frequent updaters and differentiate between bots and humans.",
+      thumbnail: 'https://img.youtube.com/vi/1O27sis1nLE/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/1O27sis1nLE?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
       slug: 'the-case-for-a-real-time-data-warehouse',
       title: "One Size Can't Fit All - The Case for a Real-Time Data Warehouse",
       subTitle: 'Tanya Bragin\nVP Product, ClickHouse',
