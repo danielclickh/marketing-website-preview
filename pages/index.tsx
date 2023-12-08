@@ -54,6 +54,7 @@ const deployData: Array<DeployData> = [
     btnText: 'Download ClickHouse',
     description:
       'Spin up a database server with open-source ClickHouse. Always Free.',
+
     href: '#getting_started',
     btnType: 'secondary'
   },
@@ -61,7 +62,8 @@ const deployData: Array<DeployData> = [
     title: 'ClickHouse Cloud',
     img: '/cloud.svg',
     btnText: 'Start free trial',
-    description: 'Deploy a fully managed ClickHouse service on AWS or GCP.',
+    description:
+      'Available on AWS, GCP, and through their respective Marketplaces. Azure coming soon.',
     href: 'https://clickhouse.cloud/signUp?loc=home-deploy-your-way',
     target: '_blank',
     btnType: 'primary'
@@ -353,7 +355,7 @@ export default function HomePage({
                     <div className='cursor-pointer text-center text-xl font-semibold leading-tight text-neutral-0'>
                       {deploy.title}
                     </div>
-                    <div className='text-center text-sm text-neutral-200'>
+                    <div className='text-center text-sm text-neutral-200 lg:min-h-[60px]'>
                       {deploy.description}
                     </div>
                   </div>

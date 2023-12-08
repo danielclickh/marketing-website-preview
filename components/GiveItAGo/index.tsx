@@ -35,7 +35,8 @@ const deployData: Array<DeployData> = [
     title: 'ClickHouse Cloud',
     img: '/cloud.svg',
     btnText: 'Start free trial',
-    description: 'Deploy a fully managed ClickHouse service on AWS or GCP.',
+    description:
+      'Available on AWS, GCP, and through their respective Marketplaces. Azure coming soon.',
     href: 'https://clickhouse.cloud/signUp?loc=deploy-your-way',
     target: '_blank',
     btnType: 'primary'

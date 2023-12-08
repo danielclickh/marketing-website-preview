@@ -20,7 +20,7 @@
 					{
 						"id": 1,
 						"name": "ClickHouse Cloud",
-						"description": "Deploy a ClickHouse service on AWS or GCP.",
+						"description": "Available on AWS and GCP.",
 						"href": "/cloud",
 						"target": "_self",
 						"icon": "/cloud.svg"
