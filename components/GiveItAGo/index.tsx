@@ -60,7 +60,7 @@ export default function GiveItAGo() {
               <div className='cursor-pointer text-xl font-semibold leading-tight text-neutral-0'>
                 {deploy.title}
               </div>
-              <div className='text-center text-sm text-neutral-200'>
+              <div className='text-center text-sm text-neutral-200 lg:min-h-[60px]'>
                 {deploy.description}
               </div>
             </div>
