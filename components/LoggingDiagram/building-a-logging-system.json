@@ -2,7 +2,7 @@
     {
         "id": 10,
         "title": "Data Collection",
-        "content": "For observability use cases, ClickHouse seamlessly integrates with OpenTelemetry, the growing industry standard. At ClickHouse, we’re actively supporting the OpenTelemetry ecosystem with continued contributions to components like the ClickHouse collector and exporter."
+        "content": "For observability use cases, ClickHouse seamlessly integrates with OpenTelemetry, the growing industry standard. At ClickHouse, we internally use ClickHouse Cloud to power our own observability platform, where we've adopted OpenTelemetry components like the OTel ClickHouse collector and exporter."
     },
     {
         "id": 20,
