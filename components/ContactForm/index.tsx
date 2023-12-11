@@ -76,10 +76,12 @@ function ContactForm({
       !lastName ||
       !email ||
       !company ||
+      !useCase ||
       firstName.length === 0 ||
       lastName.length === 0 ||
       email.length === 0 ||
-      company.length === 0
+      company.length === 0 ||
+      useCase.length === 0
     ) {
       openSnackBar('Please fill in all the required fields', 'error')
       return
