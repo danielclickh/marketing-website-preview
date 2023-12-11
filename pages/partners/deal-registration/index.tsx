@@ -8,6 +8,7 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import HRSeparator from '../../../components/HRSeparator'
 import MarketoForm from '../../../components/MarketoForm'
 import { useRef, useState } from 'react'
+import Head from 'next/head'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -51,6 +52,9 @@ export default function ContactPage({
 
   return (
     <>
+      <Head>
+        <meta name='robots' content='noindex,nofollow' />
+      </Head>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='pt-10'>
           <div className='container mx-auto flex max-w-2xl flex-col px-8 2xl:px-0'>
