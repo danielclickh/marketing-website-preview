@@ -45,7 +45,9 @@ function Header(props: any) {
   const [isOpen, setIsOpen] = useState(false)
   const onClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.preventDefault()
-    navigator.clipboard.writeText(e.currentTarget.href)
+    const href = e.currentTarget.href;
+    history.pushState({}, '', href)
+    navigator.clipboard.writeText(href)
     setIsOpen(true)
     setTimeout(() => {
       setIsOpen(false)
