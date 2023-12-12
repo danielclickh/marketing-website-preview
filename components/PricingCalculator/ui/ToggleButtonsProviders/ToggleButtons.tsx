@@ -1,4 +1,7 @@
-import { useRouter } from 'next/router'
+import React, { ReactElement } from 'react'
+import AwsLogo from './AwsLogo'
+import GCPLogo from './GCPLogo'
+
 import styles from './ToggleButtons.module.scss'
 
 export interface Option<T extends string = string> {
@@ -12,33 +15,25 @@ export interface ToggleButtonsProps<T extends string = string> {
   onChange: (value: T) => void
 }
 
-export function ToggleButtons<T extends string = string>({
+export function ToggleButtonsProviders<T extends string = string>({
   options,
   value,
   onChange
 }: ToggleButtonsProps<T>) {
-  const router = useRouter()
-
   return (
     <div className={styles.buttons}>
       {options.map((option) => (
         <button
           key={option.value}
-          onClick={() => {
-            router.push(
-              {
-                query: {
-                  ...router.query,
-                  tier: option.value
-                }
-              },
-              undefined,
-              { shallow: true }
-            )
-            onChange(option.value)
-          }}
+          onClick={() => onChange(option.value)}
           className={`${value === option.value ? styles.selected : undefined}`}>
-          {option.label}
+          {option.label === 'aws' ? (
+            <AwsLogo />
+          ) : option.label === 'gcp' ? (
+            <GCPLogo />
+          ) : (
+            option.label
+          )}
         </button>
       ))}
     </div>

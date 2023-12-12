@@ -1,11 +1,10 @@
-import Image from 'next/image'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useRouter } from 'next/router'
 import {
   calculateComputeCost,
   calculateStorageCost
 } from '../../lib/m3ter/costs'
 import { PricingData } from '../../pages/api/pricing-api'
-import { CUIButton } from '../ClickUI'
 import { FormControl } from '../PricingCalculator/ui/FormControl'
 import {
   NumericSelect,
@@ -18,9 +17,11 @@ import {
   ToggleButtons
 } from '../PricingCalculator/ui/ToggleButtons'
 import styles from './CostCalculator.module.scss'
+import CTAButtons from './CTAButtons'
+import { ToggleButtonsProviders } from './ui/ToggleButtonsProviders'
 
 type Tier = 'Development' | 'Production'
-type Provider = 'AWS' | 'GCP'
+type Provider = 'aws' | 'gcp'
 
 const tierOptions: Array<ToggleOption<Tier>> = [
   { value: 'Development', label: 'Development' },
@@ -28,16 +29,16 @@ const tierOptions: Array<ToggleOption<Tier>> = [
 ]
 
 const providerOptions: Array<ToggleOption<Provider>> = [
-  { value: 'AWS', label: 'AWS' },
-  { value: 'GCP', label: 'GCP' }
+  { value: 'aws', label: 'aws' },
+  { value: 'gcp', label: 'gcp' }
 ]
 
 const regionOptions: Record<Provider, Array<SelectOption>> = {
-  AWS: [
+  aws: [
     { value: 'eu-west-1', label: 'Ireland (eu-west-1)' },
     { value: 'eu-west-2', label: 'London (eu-west-2)' }
   ],
-  GCP: [
+  gcp: [
     { value: 'gcp-europe-west1', label: 'europe-west1' },
     { value: 'gcp-europe-west2', label: 'europe-west2' }
   ]
@@ -57,9 +58,10 @@ const computeOptions: Array<NumericSelectOption> = [
 ]
 
 export const PricingCalculator: React.FC = () => {
-  const [pricingOverlay, setPricingOverlay] = useState(false)
+  const router = useRouter()
+
   const [tier, setTier] = useState<Tier>('Development')
-  const [provider, setProvider] = useState<Provider>('AWS')
+  const [provider, setProvider] = useState<Provider>('aws')
   const [region, setRegion] = useState<string>('eu-west-1')
 
   const [hours, setHours] = useState(8)
@@ -73,6 +75,17 @@ export const PricingCalculator: React.FC = () => {
   const changeProvider = useCallback((newProvider: Provider) => {
     setProvider(newProvider)
     setRegion(regionOptions[newProvider][0].value)
+    router.push(
+      {
+        query: {
+          ...router.query,
+          provider: newProvider,
+          region: regionOptions[newProvider][0].value
+        }
+      },
+      undefined,
+      { shallow: true }
+    )
   }, [])
 
   useEffect(() => {
@@ -154,7 +167,7 @@ export const PricingCalculator: React.FC = () => {
         </FormControl>
 
         <FormControl label='Cloud provider'>
-          <ToggleButtons
+          <ToggleButtonsProviders
             options={providerOptions}
             value={provider}
             onChange={changeProvider}
@@ -163,6 +176,7 @@ export const PricingCalculator: React.FC = () => {
 
         <FormControl label='Region'>
           <Select
+            id='region'
             options={regionOptions[provider]}
             value={region}
             onChange={setRegion}
@@ -170,13 +184,14 @@ export const PricingCalculator: React.FC = () => {
         </FormControl>
 
         <FormControl label='Active hours per day'>
-          <RangeSlider min={1} max={24} value={hours} onChange={setHours} />
+          <RangeSlider value={hours} onChange={setHours} />
         </FormControl>
 
         <FormControl
           label='Data volume'
           helpText={`${storageAfterCompression}GB after compression`}>
           <NumericSelect
+            id='storageVolume'
             options={dataOptions}
             value={storage}
             onChange={setStorage}
@@ -187,6 +202,7 @@ export const PricingCalculator: React.FC = () => {
           <div className={styles.sizes}>
             <FormControl label='Minimum size'>
               <NumericSelect
+                id='computeMinSize'
                 options={computeOptions}
                 value={minCompute}
                 onChange={setMinCompute}
@@ -194,6 +210,7 @@ export const PricingCalculator: React.FC = () => {
             </FormControl>
             <FormControl label='Maximum size'>
               <NumericSelect
+                id='computeMaxSize'
                 options={computeOptions}
                 value={maxCompute}
                 onChange={setMaxCompute}
@@ -220,131 +237,10 @@ export const PricingCalculator: React.FC = () => {
                         0
                       )}
                     </p>
-                    <div className='flex flex-col gap-4'>
-                      <CUIButton
-                        type='primary'
-                        size='lg'
-                        weight='semibold'
-                        href='https://clickhouse.cloud/signUp?loc=pricing-calculator'
-                        linkClass='w-full'
-                        className='w-full'>
-                        <span className='text-sm'>Start free trial</span>
-                      </CUIButton>
-                      <CUIButton
-                        type='secondary'
-                        size='lg'
-                        weight='semibold'
-                        href='https://clickhouse.cloud/signUp?loc=pricing-calculator'
-                        linkClass='w-full'
-                        className='w-full'>
-                        <svg
-                          xmlns='http://www.w3.org/2000/svg'
-                          width='24'
-                          height='24'
-                          viewBox='0 0 24 24'
-                          fill='none'
-                          stroke='currentColor'
-                          strokeWidth='2'
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          className='lucide lucide-share-2 h-4 w-4'>
-                          <circle cx='18' cy='5' r='3' />
-                          <circle cx='6' cy='12' r='3' />
-                          <circle cx='18' cy='19' r='3' />
-                          <line x1='8.59' x2='15.42' y1='13.51' y2='17.49' />
-                          <line x1='15.41' x2='8.59' y1='6.51' y2='10.49' />
-                        </svg>
-                        <span className='ml-2 text-sm'>Share</span>
-                      </CUIButton>
-                      <CUIButton
-                        type='secondary'
-                        size='lg'
-                        weight='semibold'
-                        href='/company/contact?loc=pricing-calculator'
-                        linkClass='w-full'
-                        className='w-full'>
-                        <span className='text-sm'>Contact us</span>
-                      </CUIButton>
-                    </div>
-                    <ul className='mt-6 flex flex-col gap-y-4 text-left'>
-                      <li>
-                        <div className='flex items-center gap-4'>
-                          <svg
-                            width='16'
-                            height='16'
-                            viewBox='0 0 16 16'
-                            fill='none'
-                            xmlns='http://www.w3.org/2000/svg'>
-                            <path
-                              d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
-                              stroke='#FCFF74'
-                              strokeWidth='2'
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                            />
-                          </svg>
-                          <p>${costData.storageCost.toFixed(2)} for storage</p>
-                        </div>
-                      </li>
-                      <li>
-                        <div className='flex items-center gap-4'>
-                          <svg
-                            width='16'
-                            height='16'
-                            viewBox='0 0 16 16'
-                            fill='none'
-                            xmlns='http://www.w3.org/2000/svg'>
-                            <path
-                              d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
-                              stroke='#FCFF74'
-                              strokeWidth='2'
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                            />
-                          </svg>
-
-                          <p>${costData.computeCost!.toFixed(2)} for compute</p>
-                        </div>
-                      </li>
-                      <li>
-                        <div className='flex items-center gap-4'>
-                          <svg
-                            width='16'
-                            height='16'
-                            viewBox='0 0 16 16'
-                            fill='none'
-                            xmlns='http://www.w3.org/2000/svg'>
-                            <path
-                              d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
-                              stroke='#FCFF74'
-                              strokeWidth='2'
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                            />
-                          </svg>
-                          <div className=''>Includes data transfer costs</div>
-                        </div>
-                      </li>
-                      <li>
-                        <div className='flex items-center gap-4'>
-                          <svg
-                            width='16'
-                            height='16'
-                            viewBox='0 0 16 16'
-                            fill='none'
-                            xmlns='http://www.w3.org/2000/svg'>
-                            <path
-                              d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
-                              stroke='#FCFF74'
-                              strokeWidth='2'
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                            />
-                          </svg>
-                          <div className=''>Includes 2 availability zones</div>
-                        </div>
-                      </li>
-                    </ul>
+                    <CTAButtons
+                      computeCostMin={Number(costData.computeCost?.toFixed(2))}
+                      storageCost={Number(costData.storageCost?.toFixed(2))}
+                    />
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
@@ -358,15 +254,16 @@ export const PricingCalculator: React.FC = () => {
                         costData.maxComputeCost! + costData.storageCost
                       ).toFixed(0)}
                     </p>
-                    <p>${costData.storageCost.toFixed(2)} for storage</p>
-                    <p>
-                      ${costData.minComputeCost!.toFixed(2)} minimum compute
-                      cost
-                    </p>
-                    <p>
-                      ${costData.maxComputeCost!.toFixed(2)} maximum compute
-                      cost
-                    </p>
+
+                    <CTAButtons
+                      computeCostMin={Number(
+                        costData.minComputeCost!.toFixed(2)
+                      )}
+                      computeCostMax={Number(
+                        costData.maxComputeCost!.toFixed(2)
+                      )}
+                      storageCost={costData.storageCost}
+                    />
                   </React.Fragment>
                 )}
               </div>

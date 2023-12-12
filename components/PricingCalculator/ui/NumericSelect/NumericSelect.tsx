@@ -1,4 +1,5 @@
-import React, { useCallback, useMemo } from 'react'
+import { useRouter } from 'next/router'
+import { useCallback, useMemo } from 'react'
 
 import { Select } from '../Select/Select'
 
@@ -11,18 +12,32 @@ export interface NumericSelectProps {
   options: Array<Option>
   value: number
   onChange: (value: number) => void
+  id: string
 }
 
 export const NumericSelect: React.FC<NumericSelectProps> = ({
   options,
   value,
-  onChange
+  onChange,
+  id
 }) => {
+  const router = useRouter()
   const handleChange = useCallback(
     (newValue: string) => {
       const numericValue = Number(newValue)
       if (!Number.isNaN(numericValue)) {
         onChange(numericValue)
+
+        router.push(
+          {
+            query: {
+              ...router.query,
+              volume: newValue
+            }
+          },
+          undefined,
+          { shallow: true }
+        )
       }
     },
     [onChange]
@@ -39,6 +54,7 @@ export const NumericSelect: React.FC<NumericSelectProps> = ({
 
   return (
     <Select
+      id={id}
       options={optionsAsStrings}
       value={value.toString()}
       onChange={handleChange}
