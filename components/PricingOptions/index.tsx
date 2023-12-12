@@ -41,10 +41,13 @@ function PricingOptions({
     return pricingByRegion
       .filter((item) => item.cloudProvider === provider)
       .map((item) => {
-        let regionSlug = item.region.match(/[(]*\(([^)]+)\)$/i)?.[1] || item.region;
+        let regionSlug =
+          item.region.match(/[(]*\(([^)]+)\)$/i)?.[1] || item.region
         return {
           ...item,
-          regionFlagPNG: <StrapiImage {...item.regionFlagPNG} alt={item.region} />,
+          regionFlagPNG: (
+            <StrapiImage {...item.regionFlagPNG} alt={item.region} />
+          ),
           regionSlug: slugify(regionSlug)
         }
       })
@@ -62,16 +65,20 @@ function PricingOptions({
   }, [router.query.provider])
 
   const updateRegionParam = (value: RegionPricingWithIcon) => {
-    router.push(`/pricing?provider=${value.cloudProvider}&region=${value.regionSlug}`, undefined, {
-      shallow: true
-    })
+    router.push(
+      `/pricing?provider=${value.cloudProvider}&region=${value.regionSlug}`,
+      undefined,
+      {
+        shallow: true
+      }
+    )
   }
 
   const getDefaultRegion = () => {
     const fallback = regionList[0]
     const urlRegion = router.query?.region
     if (provider && urlRegion && !Array.isArray(urlRegion)) {
-      const found = regionList.find(item => {
+      const found = regionList.find((item) => {
         return item.cloudProvider === provider && item.regionSlug === urlRegion
       })
 
@@ -88,6 +95,7 @@ function PricingOptions({
         <div className='flex justify-center space-x-6 pt-8 pb-6'>
           {cloudProviders.map((cloudProvider, parentIndex: number) => (
             <div className='flex flex-col space-y-2' key={parentIndex}>
+              {parentIndex}
               <div className='mx-auto flex flex-row items-start gap-4'>
                 {cloudProvider.darkProviderPngs.map((darkIconPng, index) => {
                   if (darkIconPng.name === 'logo_aws_dark.svg') {
@@ -114,6 +122,7 @@ function PricingOptions({
                   if (darkIconPng.name === 'google_cloud_dark.svg') {
                     return (
                       <CUIButton
+                        key={index}
                         onClick={() => {
                           setProvider('gcp')
                           router.push('/pricing?provider=gcp', undefined, {
@@ -135,6 +144,7 @@ function PricingOptions({
                   }
                   return (
                     <CUIButton
+                      key={index}
                       type='secondary'
                       className={styles.cloudProvidersButton}
                       disabled>
@@ -160,7 +170,10 @@ function PricingOptions({
           ))}
         </div>
         <div className='center_content relative z-10 mx-auto mb-24 max-w-[344px]'>
-          <PricingSelector regionList={regionList} onChange={updateRegionParam} />
+          <PricingSelector
+            regionList={regionList}
+            onChange={updateRegionParam}
+          />
         </div>
 
         {plans.length > 0 && (
