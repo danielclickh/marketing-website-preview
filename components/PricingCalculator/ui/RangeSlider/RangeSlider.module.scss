@@ -1,0 +1,12 @@
+.control {
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  flex: 1;
+}
+
+.value {
+  flex: 0 0 40px;
+}

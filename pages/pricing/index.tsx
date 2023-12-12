@@ -17,6 +17,7 @@ import { CUIButton } from '../../components/ClickUI'
 import HRSeparator from '../../components/HRSeparator'
 import philosophy from './philosophy.json'
 import Image from 'next/image'
+import { PricingCalculator } from '../../components/PricingCalculator'
 
 export const getStaticProps: GetStaticProps<PricingPageProps> =
   async function getStaticProps() {
@@ -120,12 +121,19 @@ function PricingPage({
               </div>
             )}
           </div>
-          <div className='clip-inverted-triangle bg-shadow-element pt-10 pb-60'>
-            <HRSeparator className='max-w-[384px] pb-10' />
-            <Markdown className={styles.richTextLink}>
-              {hero.openSourceLink}
-            </Markdown>
+          <HRSeparator className='mt-10 max-w-[384px] pb-10' />
+          <Markdown className={styles.richTextLink}>
+            {hero.openSourceLink}
+          </Markdown>
+          <div className='py-16'>
+            <SuiTitle type='h2' className='pb-16 text-center'>
+              Estimate your monthly cost
+            </SuiTitle>
+            <div className='mx-auto max-w-5xl'>
+              <PricingCalculator />
+            </div>
           </div>
+          <div className='clip-inverted-triangle bg-shadow-element pt-10 pb-60'></div>
           <div className='philosophy bg-primary-300 text-neutral-900'>
             <div className='flip-selection mx-auto max-w-7xl px-4 pb-16 sm:px-8 2xl:px-0'>
               <SuiTitle

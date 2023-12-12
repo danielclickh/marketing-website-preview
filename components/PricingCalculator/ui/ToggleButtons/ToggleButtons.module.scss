@@ -1,0 +1,17 @@
+.buttons {
+  display: flex;
+  gap: 20px;
+
+  button {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+
+    &.selected {
+      border-color: rgb(250, 255, 105);
+    }
+  }
+}
