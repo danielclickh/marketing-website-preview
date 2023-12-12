@@ -1,26 +1,25 @@
 import { MinusIcon } from '@heroicons/react/outline'
 import { CheckIcon } from '@heroicons/react/solid'
-import React, { useState, useMemo, useEffect, SetStateAction } from 'react'
+import { useRouter } from 'next/router'
+import React, { useEffect, useMemo, useState } from 'react'
 import { slugify } from '../../lib/utils/strings'
-import Markdown from '../Markdown'
-import { PricingContextProvider } from './PricingContext'
-import PlanPricing from './PlanPricing'
-import PricingButton from './PricingButton'
-import PricingSelector from './PricingSelector'
-import ShowPricing from './ShowPricing'
+import { CloudProviderType } from '../../types/cloud'
 import {
   MeteredPricing,
   PricingPlanData,
   RegionPricing
 } from '../../types/pricing'
-import { RegionPricingWithIcon } from './types'
-import { CloudProviderType } from '../../types/cloud'
-import { SuiText } from '../sui'
-import { StrapiImage } from '../StrapiElements'
 import { CUIButton, CUILink } from '../ClickUI'
+import Markdown from '../Markdown'
+import { StrapiImage } from '../StrapiElements'
+import { SuiText } from '../sui'
+import PlanPricing from './PlanPricing'
+import PricingButton from './PricingButton'
+import { PricingContextProvider } from './PricingContext'
 import styles from './PricingOptions.module.scss'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+import PricingSelector from './PricingSelector'
+import ShowPricing from './ShowPricing'
+import { RegionPricingWithIcon } from './types'
 
 function PricingOptions({
   pricingByRegion,
