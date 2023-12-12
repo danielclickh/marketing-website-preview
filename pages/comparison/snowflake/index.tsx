@@ -14,7 +14,7 @@ import MarketoForm from '../../../components/MarketoForm'
 import { StrapiImage } from '../../../components/StrapiElements'
 import { findAll, findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { ComparisonProps } from '../../../types/comparisons'
+import { ComparisonProps, BigNumber } from '../../../types/comparisons'
 import stats from './stats.json'
 
 interface SnowflakePageProps extends ComparisonProps {
@@ -103,6 +103,12 @@ export default function SnowflakePage({
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
+  console.log(comparison)
+  const {
+    Title: comparisonTitle,
+    HeroDescription: heroDescription,
+    BigNumbers: BigNumbers
+  } = comparison.data[0]
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -117,7 +123,7 @@ export default function SnowflakePage({
                       Comparisons
                     </h4>
                     <h1 className='mb-4 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 lg:text-left lg:text-5xl xl:text-5.5xl '>
-                      {comparison.data[0].Title}
+                      {comparisonTitle}
                     </h1>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-neutral-0/60 lg:text-left'>
                       For real-time analytics
@@ -125,7 +131,7 @@ export default function SnowflakePage({
                   </div>
                 </div>
                 <div className='rich_content mt-8 w-full text-center text-base text-neutral-200 lg:max-w-xl lg:text-left'>
-                  <Markdown children={comparison.data[0].HeroDescription} />
+                  <Markdown children={heroDescription} />
                 </div>
               </div>
               <div className='mb-6 hidden lg:mb-0 lg:block lg:max-w-[400px] xl:max-w-[575px]'>
@@ -155,16 +161,16 @@ export default function SnowflakePage({
 
           <div className='clip-inverted-triangle -mt-16 xl:-mt-28'>
             <div className='relative z-40 mx-auto mt-4 max-w-4xl pt-20 pb-0 lg:mt-12'>
-              <div className='mx-auto mb-12 flex items-center gap-4  px-4 md:px-0'>
-                {stats.map((stat) => (
+              <div className='mx-auto mb-12 flex items-center gap-4 px-4 md:px-0'>
+                {BigNumbers.map((stat: BigNumber, index: number) => (
                   <div
-                    key={stat.id}
+                    key={index}
                     className='w-1/3 rounded-md border border-white/40 bg-[#363531] py-6 px-3 shadow-lg'>
                     <h3 className='mb-2 text-center font-basier text-2xl font-bold leading-none text-primary-300 lg:text-[69px]'>
-                      {stat.title}
+                      {stat.Number}
                     </h3>
                     <p className='min-h-[30px] text-center font-basier text-sm font-bold leading-none lg:text-base'>
-                      {stat.description}
+                      {stat.Text}
                     </p>
                   </div>
                 ))}
@@ -173,34 +179,65 @@ export default function SnowflakePage({
           </div>
           <div className='relative z-10 mx-auto -mt-16 bg-primary-300'>
             <div className='mx-auto max-w-4xl px-4 pt-8 md:px-0'>
-              <div className='w-full rounded-md border border-white/40 bg-[#363531] p-10 shadow-lg'>
-                <Image
-                  src='/images/Quote.svg'
-                  width={37}
-                  height={28}
-                  alt='Quote'
-                  className='mb-4 flex-none'
-                />
-                <h3 className='mb-4 text-base'>
-                  "With Snowflake, we were using the standard plan, small
-                  compute, which <strong>cost nearly six times more</strong>{' '}
-                  than ClickHouse Cloud. We got several seconds query time and
-                  no materialized views. With ClickHouse Cloud's production
-                  instance, we are getting sub-second query time along with
-                  materialized views. The decision to switch was a no-brainer
-                  for us.”
-                </h3>
-                <p className='min-h-[30px] pb-6 text-sm text-primary-300 lg:min-h-fit lg:text-base'>
-                  <Link href='/blog/adgreetz-processes-millions-of-daily-ad-impressions'>
-                    Read more
-                  </Link>
-                </p>
-                <Image
-                  src='/images/adgreetz-logo.svg'
-                  alt='Adgreetz'
-                  width={224}
-                  height={29}
-                />
+              <div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
+                <div className='w-full rounded-md border border-white/40 bg-[#363531] p-10 shadow-lg'>
+                  <Image
+                    src='/images/Quote.svg'
+                    width={37}
+                    height={28}
+                    alt='Quote'
+                    className='mb-4 flex-none'
+                  />
+                  <h3 className='mb-4 text-base'>
+                    "With Snowflake, we were using the standard plan, small
+                    compute, which <strong>cost nearly six times more</strong>{' '}
+                    than ClickHouse Cloud. We got several seconds query time and
+                    no materialized views. With ClickHouse Cloud's production
+                    instance, we are getting sub-second query time along with
+                    materialized views. The decision to switch was a no-brainer
+                    for us.”
+                  </h3>
+                  <p className='min-h-[30px] pb-6 text-sm text-primary-300 lg:min-h-fit lg:text-base'>
+                    <Link href='/blog/adgreetz-processes-millions-of-daily-ad-impressions'>
+                      Read more
+                    </Link>
+                  </p>
+                  <Image
+                    src='/images/adgreetz-logo.svg'
+                    alt='Adgreetz'
+                    width={224}
+                    height={29}
+                  />
+                </div>
+                <div className='w-full rounded-md border border-white/40 bg-[#363531] p-10 shadow-lg'>
+                  <div className='lg:min-h-[320px] '>
+                    <Image
+                      src='/images/Quote.svg'
+                      width={37}
+                      height={28}
+                      alt='Quote'
+                      className='mb-4 flex-none'
+                    />
+                    <h3 className='mb-4 text-base'>
+                      “Snowflake [was] too slow and costly for our needs. While
+                      it performs well for processing in-house data, it becomes
+                      quite expensive when handling real-time customer data
+                      within a product, which negatively impacts the product's
+                      unit economics.”
+                    </h3>
+                    <p className='min-h-[30px] pb-6 text-sm text-primary-300 lg:min-h-fit lg:text-base'>
+                      <Link href='/blog/harnessing-the-power-of-materialized-views-and-clickhouse-for-high-performance-analytics-at-inigo'>
+                        Read more
+                      </Link>
+                    </p>
+                  </div>
+                  <Image
+                    src='/images/inigo-logo.svg'
+                    alt='inigo'
+                    width={135}
+                    height={40}
+                  />
+                </div>
               </div>
             </div>
 
