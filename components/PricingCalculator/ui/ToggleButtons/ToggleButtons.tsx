@@ -1,22 +1,24 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement } from 'react'
+import AwsLogo from './AwsLogo'
+import GCPLogo from './GCPLogo'
 
-import styles from './ToggleButtons.module.scss';
+import styles from './ToggleButtons.module.scss'
 
 export interface Option<T extends string = string> {
-  value: T;
-  label: string;
+  value: T
+  label: string
 }
 
 export interface ToggleButtonsProps<T extends string = string> {
-  options: Array<Option<T>>;
-  value: string;
-  onChange: (value: T) => void;
+  options: Array<Option<T>>
+  value: string
+  onChange: (value: T) => void
 }
 
 export function ToggleButtons<T extends string = string>({
   options,
   value,
-  onChange,
+  onChange
 }: ToggleButtonsProps<T>) {
   return (
     <div className={styles.buttons}>
@@ -24,11 +26,16 @@ export function ToggleButtons<T extends string = string>({
         <button
           key={option.value}
           onClick={() => onChange(option.value)}
-          className={value === option.value ? styles.selected : undefined}
-        >
-          {option.label}
+          className={`${value === option.value ? styles.selected : undefined}`}>
+          {option.label === 'AWS' ? (
+            <AwsLogo />
+          ) : option.label === 'GCP' ? (
+            <GCPLogo />
+          ) : (
+            option.label
+          )}
         </button>
       ))}
     </div>
-  );
+  )
 }

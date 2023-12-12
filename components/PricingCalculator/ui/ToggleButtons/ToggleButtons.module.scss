@@ -1,17 +1,13 @@
 .buttons {
-  display: flex;
-  gap: 20px;
+  @apply flex gap-5;
 
   button {
-    padding: 10px 20px;
-    border-radius: 6px;
-    border: 1px solid #444;
-    background-color: #444;
-    color: white;
-    cursor: pointer;
+    @apply transition-all delay-75 text-sm font-medium rounded-[4px] border border-transparent hover:border-neutral-600 hover:border bg-neutral-725 px-10 py-2;
+
+    &.providers {}
 
     &.selected {
-      border-color: rgb(250, 255, 105);
+     @apply border-primary-300 border;
     }
   }
 }

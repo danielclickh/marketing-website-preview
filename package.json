@@ -18,6 +18,7 @@
     "@heroicons/react": "^1.0.6",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-navigation-menu": "^1.1.2",
+    "@radix-ui/react-slider": "^1.1.2",
     "@radix-ui/react-tooltip": "^1.0.5",
     "@segment/analytics-next": "^1.48.0",
     "@segment/snippet": "^4.15.3",
@@ -48,8 +49,8 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
-    "@types/lodash": "^4.14.202",
     "@types/jquery": "^3.5.16",
+    "@types/lodash": "^4.14.202",
     "@types/node": "17.0.31",
     "@types/qs": "6.9.7",
     "@types/react": "18.0.8",

@@ -125,7 +125,7 @@ function PricingPage({
           <Markdown className={styles.richTextLink}>
             {hero.openSourceLink}
           </Markdown>
-          <div className='py-16'>
+          <div className='mt-44 pb-16'>
             <SuiTitle type='h2' className='pb-16 text-center'>
               Estimate your monthly cost
             </SuiTitle>

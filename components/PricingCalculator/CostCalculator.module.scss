@@ -1,27 +1,19 @@
 .wrapper {
-  display: flex;
-  align-items: flex-start;
-  gap: 50px;
+  @apply flex gap-10 relative justify-between items-stretch ;
 }
 
 .options {
-  flex: 1;
+  @apply w-full max-w-[520px]
 }
 
 .sizes {
-  display: flex;
-  gap: 20px;
+  @apply flex gap-10;
 }
 
 .costs {
-  flex: 1;
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid rgb(250, 255, 105);
+  @apply flex-1 p-8 border border-primary-300 rounded-lg bg-black text-center;
 }
 
 .total {
-  font-size: 60px;
-  text-align: center;
-  font-weight: bold;
+  @apply font-basier font-bold text-white text-[64px] mb-8;
 }
