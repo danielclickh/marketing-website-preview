@@ -133,6 +133,12 @@ export const PricingCalculator: React.FC<{
     if (typeof tierQueryParam === 'string') {
       setTier(tierQueryParam as Tier)
     }
+
+    const storageQueryParam = router.query.storage
+    if (typeof storageQueryParam === 'string') {
+      setStorage(parseInt(storageQueryParam))
+    }
+
     setIsLoading(true)
     fetch(`/api/pricing-api?${m3terQuery}`)
       .then((response) => response.json())
@@ -246,7 +252,6 @@ export const PricingCalculator: React.FC<{
                 id='computeMinSize'
                 options={computeOptions}
                 value={minCompute}
-                onChange={setMinCompute}
               />
             </FormControl>
             <FormControl label='Maximum size'>
@@ -254,7 +259,6 @@ export const PricingCalculator: React.FC<{
                 id='computeMaxSize'
                 options={computeOptions}
                 value={maxCompute}
-                onChange={setMaxCompute}
               />
             </FormControl>
           </div>

@@ -81,8 +81,6 @@ export const getRelevantPricing = async (
     instanceTier
   }
 
-  console.log('relevantpricing')
-
   return allPricings.filter(
     (pricing: any) => pricing.segment && isEqual(pricing.segment, segment)
   )

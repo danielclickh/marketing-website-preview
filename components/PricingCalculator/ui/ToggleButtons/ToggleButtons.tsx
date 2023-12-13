@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import Icon from '../../ui/Tooltip'
-import styles from './ToggleButtons.module.scss'
 
 export interface Option<T extends string = string> {
   value: T
