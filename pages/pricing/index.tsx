@@ -130,7 +130,13 @@ function PricingPage({
               Estimate your monthly cost
             </SuiTitle>
             <div className='mx-auto max-w-5xl'>
-              <PricingCalculator />
+              {pricingByRegion.length > 0 && (
+                <PricingCalculator
+                  pricingByRegion={pricingByRegion}
+                  cloudProviders={cloudProviders}
+                  pricingPlans={pricingPlans}
+                />
+              )}
             </div>
           </div>
           <div className='clip-inverted-triangle bg-shadow-element pt-10 pb-60'></div>

@@ -1,27 +1,32 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   calculateComputeCost,
   calculateStorageCost
 } from '../../lib/m3ter/costs'
 import { PricingData } from '../../pages/api/pricing-api'
+import {
+  CloudProviderType,
+  PricingPlanData,
+  RegionPricing
+} from '../../types/pricing'
 import { FormControl } from '../PricingCalculator/ui/FormControl'
 import {
   NumericSelect,
   Option as NumericSelectOption
 } from '../PricingCalculator/ui/NumericSelect'
 import { RangeSlider } from '../PricingCalculator/ui/RangeSlider'
-import { Option as SelectOption, Select } from '../PricingCalculator/ui/Select'
 import {
   Option as ToggleOption,
   ToggleButtons
 } from '../PricingCalculator/ui/ToggleButtons'
+import PricingOptions from '../PricingOptions'
 import styles from './CostCalculator.module.scss'
 import CTAButtons from './CTAButtons'
 import { ToggleButtonsProviders } from './ui/ToggleButtonsProviders'
 
 type Tier = 'Development' | 'Production'
-type Provider = 'aws' | 'gcp'
+type Provider = 'aws' | 'gcp' | 'azure'
 
 const tierOptions: Array<ToggleOption<Tier>> = [
   { value: 'Development', label: 'Development' },
@@ -33,16 +38,16 @@ const providerOptions: Array<ToggleOption<Provider>> = [
   { value: 'gcp', label: 'gcp' }
 ]
 
-const regionOptions: Record<Provider, Array<SelectOption>> = {
-  aws: [
-    { value: 'eu-west-1', label: 'Ireland (eu-west-1)' },
-    { value: 'eu-west-2', label: 'London (eu-west-2)' }
-  ],
-  gcp: [
-    { value: 'gcp-europe-west1', label: 'europe-west1' },
-    { value: 'gcp-europe-west2', label: 'europe-west2' }
-  ]
-}
+// const regionOptions: Record<Provider, Array<SelectOption>> = {
+//   aws: [
+//     { value: 'eu-west-1', label: 'Ireland (eu-west-1)' },
+//     { value: 'eu-west-2', label: 'London (eu-west-2)' }
+//   ],
+//   gcp: [
+//     { value: 'gcp-europe-west1', label: 'europe-west1' },
+//     { value: 'gcp-europe-west2', label: 'europe-west2' }
+//   ]
+// }
 
 const dataOptions: Array<NumericSelectOption> = [
   { value: 250, label: '250GB' },
@@ -57,9 +62,12 @@ const computeOptions: Array<NumericSelectOption> = [
   { value: 96, label: '96 GiB RAM, 24 vCPU' }
 ]
 
-export const PricingCalculator: React.FC = () => {
+export const PricingCalculator: React.FC<{
+  pricingByRegion: RegionPricing[]
+  cloudProviders: CloudProviderType[]
+  pricingPlans: PricingPlanData[]
+}> = ({ pricingByRegion, cloudProviders, pricingPlans }) => {
   const router = useRouter()
-
   const [tier, setTier] = useState<Tier>('Development')
   const [provider, setProvider] = useState<Provider>('aws')
   const [region, setRegion] = useState<string>('eu-west-1')
@@ -72,15 +80,19 @@ export const PricingCalculator: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [pricingData, setPricingData] = useState<PricingData | undefined>()
 
+  const removeQueryParam = (param: string) => {
+    const { pathname, query } = router
+    const params = new URLSearchParams(query.toString())
+    params.delete(param)
+  }
+
   const changeProvider = useCallback((newProvider: Provider) => {
     setProvider(newProvider)
-    setRegion(regionOptions[newProvider][0].value)
     router.push(
       {
         query: {
           ...router.query,
-          provider: newProvider,
-          region: regionOptions[newProvider][0].value
+          provider: newProvider
         }
       },
       undefined,
@@ -89,14 +101,34 @@ export const PricingCalculator: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    // Load the data whenever the provider, region or tier change.
-    const query = new URLSearchParams({
+    const m3terQuery = new URLSearchParams({
       provider,
       region,
       tier
     })
+
+    console.log(`/api/pricing-api?${m3terQuery}`)
+
+    // Load the data whenever the provider, region or tier change.
+    const regionQueryParam = router.query.region
+    if (typeof regionQueryParam === 'string') {
+      setRegion(regionQueryParam)
+    }
+
+    const providerQueryParam = router.query.provider
+    if (
+      typeof providerQueryParam === 'string' &&
+      ['aws', 'gcp', 'azure'].includes(providerQueryParam)
+    ) {
+      setProvider(providerQueryParam as Provider)
+    }
+
+    const tierQueryParam = router.query.tier
+    if (typeof tierQueryParam === 'string') {
+      setTier(tierQueryParam as Tier)
+    }
     setIsLoading(true)
-    fetch(`/api/pricing-api?${query}`)
+    fetch(`/api/pricing-api?${m3terQuery}`)
       .then((response) => response.json())
       .then((data) => {
         setPricingData(data)
@@ -105,7 +137,7 @@ export const PricingCalculator: React.FC = () => {
       .catch((error) => {
         console.log(error)
       })
-  }, [provider, region, tier])
+  }, [router.query.region, router.query.provider, router.query.tier])
 
   const storageAfterCompression = storage / 10
 
@@ -175,11 +207,11 @@ export const PricingCalculator: React.FC = () => {
         </FormControl>
 
         <FormControl label='Region'>
-          <Select
-            id='region'
-            options={regionOptions[provider]}
-            value={region}
-            onChange={setRegion}
+          <PricingOptions
+            selectorOnly={true}
+            pricingByRegion={pricingByRegion}
+            cloudProviders={cloudProviders}
+            pricingPlans={pricingPlans}
           />
         </FormControl>
 
