@@ -33,12 +33,6 @@ const handler = async (
 ) => {
   const { provider, region, tier } = req.query
 
-  //only for testing
-
-  return res
-    .status(200)
-    .json({ computeUnitPrice: 0.00182, storageUnitPrice: 6.85e-7 })
-
   // Validate the query params were provided.
   // Using `typeof` ensures the value is not undefined and is not an array of values.
   if (
@@ -83,4 +77,13 @@ const handler = async (
   }
 }
 
-export default handler
+const testHandler = async (
+  req: NextApiRequest,
+  res: NextApiResponse<PricingData | Error>
+) => {
+  return res
+    .status(200)
+    .json({ computeUnitPrice: 0.00182, storageUnitPrice: 6.85e-7 })
+}
+
+export default testHandler
