@@ -80,25 +80,23 @@ export const PricingCalculator: React.FC<{
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [pricingData, setPricingData] = useState<PricingData | undefined>()
 
-  const removeQueryParam = (param: string) => {
-    const { pathname, query } = router
-    const params = new URLSearchParams(query.toString())
-    params.delete(param)
-  }
-
-  const changeProvider = useCallback((newProvider: Provider) => {
-    setProvider(newProvider)
-    router.push(
-      {
-        query: {
-          ...router.query,
-          provider: newProvider
-        }
-      },
-      undefined,
-      { shallow: true }
-    )
-  }, [])
+  const changeProvider = useCallback(
+    (newProvider: Provider) => {
+      setProvider(newProvider)
+      delete router.query.region
+      router.push(
+        {
+          query: {
+            ...router.query,
+            provider: newProvider
+          }
+        },
+        undefined,
+        { shallow: true }
+      )
+    },
+    [router.query]
+  )
 
   useEffect(() => {
     const m3terQuery = new URLSearchParams({
