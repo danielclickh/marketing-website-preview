@@ -121,6 +121,11 @@ export const PricingCalculator: React.FC<{
       setRegion(regionQueryParam)
     }
 
+    const hoursQueryParam = router.query.hours
+    if (typeof hoursQueryParam === 'string') {
+      setHours(parseInt(hoursQueryParam))
+    }
+
     const providerQueryParam = router.query.provider
     if (
       typeof providerQueryParam === 'string' &&
@@ -133,7 +138,6 @@ export const PricingCalculator: React.FC<{
     if (typeof tierQueryParam === 'string') {
       setTier(tierQueryParam as Tier)
       if (tierQueryParam.toLowerCase() === 'development') {
-        console.log('shjoud')
         delete router.query.computeMinSize
         delete router.query.computeMaxSize
         router.push(

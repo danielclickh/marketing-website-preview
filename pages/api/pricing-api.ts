@@ -63,14 +63,14 @@ const handler = async (
 
   if (!computePricing || !storagePricing) {
     //remove these hardcoded values! just for testing
-    res
+    return res
       .status(200)
       .json({ computeUnitPrice: 0.00182, storageUnitPrice: 6.85e-7 })
     // throw new Error(
     //   'Could not look up compute and/or storage pricing. Check the configured IDs'
     // )
   } else {
-    res.status(200).json({
+    return res.status(200).json({
       computeUnitPrice: getUnitPrice(computePricing),
       storageUnitPrice: getUnitPrice(storagePricing)
     })
