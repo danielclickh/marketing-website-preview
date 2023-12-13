@@ -41,7 +41,7 @@ const handler = async (
     typeof tier !== 'string'
   ) {
     return res.status(400).json({
-      message: 'Query parameters provider, region and tier are all required'
+      message: 'Query parameters provider, region, and tier are all required'
     })
   }
 
@@ -55,26 +55,25 @@ const handler = async (
 
   // Attempt to find the pricing that relates to the compute and storage aggregations.
   const computePricing = pricings.find(
-    (pricing) => pricing.aggregationId === config.computeAggregationId
+    (pricing) => pricing?.aggregationId === config.computeAggregationId
   )
   const storagePricing = pricings.find(
-    (pricing) => pricing.aggregationId === config.storageAggregationId
+    (pricing) => pricing?.aggregationId === config.storageAggregationId
   )
 
   if (!computePricing || !storagePricing) {
-    //remove these hardcoded values! just for testing
-    res
-      .status(200)
-      .json({ computeUnitPrice: 0.00182, storageUnitPrice: 6.85e-7 })
-    // throw new Error(
-    //   'Could not look up compute and/or storage pricing. Check the configured IDs'
-    // )
+    // Handle the case where pricing is not found.
+    res.status(404).json({
+      message:
+        'Compute and/or storage pricing not found. Check the configured IDs.'
+    })
+  } else {
+    // Pricing found, return the unit prices.
+    res.status(200).json({
+      computeUnitPrice: getUnitPrice(computePricing),
+      storageUnitPrice: getUnitPrice(storagePricing)
+    })
   }
-
-  res.status(200).json({
-    computeUnitPrice: getUnitPrice(computePricing),
-    storageUnitPrice: getUnitPrice(storagePricing)
-  })
 }
 
 export default handler
