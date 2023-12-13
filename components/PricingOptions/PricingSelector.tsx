@@ -1,6 +1,5 @@
 import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
-import React from 'react'
 import { usePricing } from './PricingContext'
 import { RegionPricingWithIcon } from './types'
 
