@@ -267,7 +267,7 @@ function PricingOptions({
           </>
         )}
       </PricingContextProvider>
-      {!selectorOnly && (
+      {!selectorOnly && meteredPricing && (
         <>
           <div className='pricing_footer_note mx-auto mt-8 max-w-screen-sm text-center'>
             <Markdown
