@@ -1,7 +1,6 @@
 import { InformationCircleIcon } from '@heroicons/react/outline'
 import * as Tooltip from '@radix-ui/react-tooltip'
-import React, { useRef, useState } from 'react'
-import { usePricing } from './PricingContext'
+import { useState, useRef } from 'react'
 
 function InfoTooltip({ content }: { content: string }) {
   const triggerRef = useRef(null)
@@ -38,7 +37,7 @@ function InfoTooltip({ content }: { content: string }) {
   )
 }
 
-function Info({ unit, content }: { unit: string; content: string }) {
+export default function Info({ content }: { content: string }) {
   const [showing, setShowing] = useState(false)
   const toggle = () => setShowing(!showing)
 
@@ -46,7 +45,6 @@ function Info({ unit, content }: { unit: string; content: string }) {
     <div
       className='flex flex-wrap items-center gap-1 text-xs font-medium text-neutral-0/50'
       onClick={toggle}>
-      {unit}
       <div className='hidden leading-none lg:block'>
         <InfoTooltip content={content} />
       </div>
@@ -65,40 +63,3 @@ function Info({ unit, content }: { unit: string; content: string }) {
     </div>
   )
 }
-
-function ShowPricing({ isFirst }: { isFirst: boolean }) {
-  const { selectedRegion } = usePricing()
-
-  const storage =
-    selectedRegion?.[isFirst ? 'devStoragePricing' : 'storagePricing']
-  const compute =
-    selectedRegion?.[isFirst ? 'devComputePricing' : 'computePricing']
-
-  if (!storage || !compute) {
-    return null
-  }
-
-  return (
-    <div className='mt-8 flex items-stretch justify-center gap-4 pb-6 text-left text-neutral-0 xl:gap-8 '>
-      <div className='shrink grow basis-0 xl:max-w-[100px]'>
-        <h5 className='mb-2 text-sm font-bold'>Storage</h5>
-        <div className='whitespace-nowrap text-2.75xl font-semibold'>
-          ${storage.priceUSD}
-        </div>
-        <Info unit={storage.meteringUnit} content={storage.meteringTooltip} />
-      </div>
-
-      <div className='shrink-0 grow-0 border-r border-neutral-725' />
-
-      <div className='shrink grow basis-0 xl:max-w-[100px]'>
-        <h5 className='mb-2 text-sm font-bold'>Compute</h5>
-        <div className='whitespace-nowrap text-2.75xl font-semibold'>
-          ${compute.priceUSD}
-        </div>
-        <Info unit={compute.meteringUnit} content={compute.meteringTooltip} />
-      </div>
-    </div>
-  )
-}
-
-export default ShowPricing

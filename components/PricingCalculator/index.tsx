@@ -29,8 +29,16 @@ type Tier = 'Development' | 'Production'
 type Provider = 'aws' | 'gcp' | 'azure'
 
 const tierOptions: Array<ToggleOption<Tier>> = [
-  { value: 'Development', label: 'Development' },
-  { value: 'Production', label: 'Production' }
+  {
+    value: 'Development',
+    label: 'Development',
+    tooltip: 'Great for smaller workloads and starter projects'
+  },
+  {
+    value: 'Production',
+    label: 'Production',
+    tooltip: 'Designed to handle production workloads'
+  }
 ]
 
 const providerOptions: Array<ToggleOption<Provider>> = [
@@ -213,12 +221,15 @@ export const PricingCalculator: React.FC<{
           />
         </FormControl>
 
-        <FormControl label='Active hours per day'>
+        <FormControl
+          label='Active hours per day'
+          tooltip='We idle your service when it’s inactive, saving you on cost.'>
           <RangeSlider value={hours} onChange={setHours} />
         </FormControl>
 
         <FormControl
           label='Data volume'
+          tooltip='Uncompressed volume data. We compress your data before we store it with a 10x estimated compression rate.'
           helpText={`${storageAfterCompression}GB after compression`}>
           <NumericSelect
             id='storageVolume'
