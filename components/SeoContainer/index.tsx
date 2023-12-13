@@ -13,10 +13,14 @@ function SeoContainer({
   path
 }: SeoMetadata) {
   const imageUrl = image?.[0]?.url || '/images/social_share.png'
+
   const canonicalUrl =
     path === '/blog/forecasting-using-clickhouse'
       ? 'https://ensembleanalytics.io/blog/forecasting-using-clickhouse'
+      : path === '/blog/clickhouse-linear-regression-machine-learning-functions'
+      ? 'https://ensembleanalytics.io/blog/linear-regression-using-clickhouse'
       : `${siteUrl}${path}`
+
   return (
     <Head>
       {title.length > 0 && <title>{title}</title>}
