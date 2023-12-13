@@ -132,6 +132,20 @@ export const PricingCalculator: React.FC<{
     const tierQueryParam = router.query.tier
     if (typeof tierQueryParam === 'string') {
       setTier(tierQueryParam as Tier)
+      if (tierQueryParam.toLowerCase() === 'development') {
+        console.log('shjoud')
+        delete router.query.computeMinSize
+        delete router.query.computeMaxSize
+        router.push(
+          {
+            query: {
+              ...router.query
+            }
+          },
+          undefined,
+          { shallow: true }
+        )
+      }
     }
 
     const storageQueryParam = router.query.storage

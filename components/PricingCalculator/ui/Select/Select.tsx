@@ -23,6 +23,8 @@ export const Select: React.FC<SelectProps> = ({
   onChange
 }) => {
   const router = useRouter()
+  const selectedOption = options.find((option) => option.value === value)
+
   const handleChange = (e: any) => {
     console.log(e, id)
     if (id === 'storageVolume') {
@@ -70,7 +72,7 @@ export const Select: React.FC<SelectProps> = ({
         <div className='relative'>
           <Listbox.Button className='relative w-full cursor-default rounded-[4px] border border-neutral-725 bg-neutral-725 py-2 pl-3 pr-10 text-left shadow-input hover:cursor-pointer focus:outline-none data-[headlessui-state=open]:rounded-b-none data-[headlessui-state=open]:border-primary-300 sm:text-sm'>
             <span className='flex gap-3 truncate'>
-              <>{value}</>
+              <>{selectedOption ? selectedOption.label : ''}</>
             </span>
             <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
               <ChevronDownIcon className='h-5 w-5 text-c4' aria-hidden='true' />
