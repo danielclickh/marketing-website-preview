@@ -264,24 +264,26 @@ export const PricingCalculator: React.FC<{
         </FormControl>
 
         {tier === 'Production' && (
-          <div className={styles.sizes}>
-            <FormControl label='Minimum size'>
-              <NumericSelect
-                id='computeMinSize'
-                options={computeOptions}
-                value={minCompute}
-                onChange={setMinCompute}
-              />
-            </FormControl>
-            <FormControl label='Maximum size'>
-              <NumericSelect
-                id='computeMaxSize'
-                options={computeOptions}
-                value={maxCompute}
-                onChange={setMaxCompute}
-              />
-            </FormControl>
-          </div>
+          <>
+            <div className={styles.sizes}>
+              <FormControl label='Minimum size'>
+                <NumericSelect
+                  id='computeMinSize'
+                  options={computeOptions}
+                  value={minCompute}
+                  onChange={setMinCompute}
+                />
+              </FormControl>
+              <FormControl label='Maximum size'>
+                <NumericSelect
+                  id='computeMaxSize'
+                  options={computeOptions}
+                  value={maxCompute}
+                  onChange={setMaxCompute}
+                />
+              </FormControl>
+            </div>
+          </>
         )}
       </div>
       <div className={styles.costs}>
