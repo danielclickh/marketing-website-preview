@@ -46,17 +46,6 @@ const providerOptions: Array<ToggleOption<Provider>> = [
   { value: 'gcp', label: 'gcp' }
 ]
 
-// const regionOptions: Record<Provider, Array<SelectOption>> = {
-//   aws: [
-//     { value: 'eu-west-1', label: 'Ireland (eu-west-1)' },
-//     { value: 'eu-west-2', label: 'London (eu-west-2)' }
-//   ],
-//   gcp: [
-//     { value: 'gcp-europe-west1', label: 'europe-west1' },
-//     { value: 'gcp-europe-west2', label: 'europe-west2' }
-//   ]
-// }
-
 const dataOptions: Array<NumericSelectOption> = [
   { value: 250, label: '250GB' },
   { value: 500, label: '500GB' },
@@ -113,8 +102,6 @@ export const PricingCalculator: React.FC<{
       tier
     })
 
-    console.log(`/api/pricing-api?${m3terQuery}`)
-
     // Load the data whenever the provider, region or tier change.
     const regionQueryParam = router.query.region
     if (typeof regionQueryParam === 'string') {
@@ -158,16 +145,39 @@ export const PricingCalculator: React.FC<{
     }
 
     setIsLoading(true)
-    fetch(`/api/pricing-api?${m3terQuery}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setPricingData(data)
-        setIsLoading(false)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [router.query.region, router.query.provider, router.query.tier])
+
+    console.log(`${m3terQuery}`)
+    const testPricing = { computeUnitPrice: 0.00182, storageUnitPrice: 6.85e-7 }
+
+    setIsLoading(false)
+    setPricingData(testPricing)
+
+    const findByCloudProvider = pricingByRegion.filter(
+      (obj) =>
+        obj.cloudProvider === router.query.provider ||
+        obj.cloudProvider === provider
+    )
+
+    const filteredObjects = pricingByRegion.filter((obj) => {
+      return (
+        ((obj.cloudProvider === router.query.provider ||
+          obj.cloudProvider === provider) &&
+          obj.region.includes(region)) ||
+        ((obj.cloudProvider === router.query.provider ||
+          obj.cloudProvider === provider) &&
+          typeof router.query.region === 'string' &&
+          obj.region.includes(router.query.region))
+      )
+    })
+
+    console.log(filteredObjects[0].region)
+  }, [
+    router.query.region,
+    router.query.provider,
+    router.query.tier,
+    region,
+    provider
+  ])
 
   const storageAfterCompression = storage / 10
 
