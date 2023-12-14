@@ -15,15 +15,6 @@ export interface Pricing {
   description?: string
 }
 
-// const API_ENDPOINT = process.env.M3TER_API_ENDPOINT || 'https://api.m3ter.com'
-// const API_KEY =
-//   process.env.M3TER_API_KEY || '0574d101-a1ff-455b-bbe6-a7af4b955df3'
-// const API_SECRET =
-//   process.env.M3TER_API_SECRET ||
-//   'MTUxZmYwOGUtZDA2Ni00OGZkLTlkMTAtOTA0YTM5ZWEzYjI5'
-// const ORG_ID =
-//   process.env.M3TER_ORG_ID || '8c53ef3b-276f-4d46-8ff5-eb6e9e3c9f27'
-
 const API_ENDPOINT = process.env.M3TER_API_ENDPOINT
 const API_KEY = process.env.M3TER_API_KEY
 const API_SECRET = process.env.M3TER_API_SECRET
