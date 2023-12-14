@@ -4,7 +4,6 @@ import {
   calculateComputeCost,
   calculateStorageCost
 } from '../../lib/m3ter/costs'
-import { PricingData } from '../../pages/api/pricing-api'
 import {
   CloudProviderType,
   PricingPlanData,
@@ -24,9 +23,14 @@ import PricingOptions from '../PricingOptions'
 import styles from './CostCalculator.module.scss'
 import CTAButtons from './CTAButtons'
 import { ToggleButtonsProviders } from './ui/ToggleButtonsProviders'
+import pricingPlansFromfile from '../../public/pricingFile.json'
 
 type Tier = 'Development' | 'Production'
-type Provider = 'aws' | 'gcp' | 'azure'
+type Provider = 'AWS' | 'GCP'
+interface PricingData {
+  computeUnitPrice: number
+  storageUnitPrice: number
+}
 
 const tierOptions: Array<ToggleOption<Tier>> = [
   {
@@ -42,8 +46,8 @@ const tierOptions: Array<ToggleOption<Tier>> = [
 ]
 
 const providerOptions: Array<ToggleOption<Provider>> = [
-  { value: 'aws', label: 'aws' },
-  { value: 'gcp', label: 'gcp' }
+  { value: 'AWS', label: 'AWS' },
+  { value: 'GCP', label: 'GCP' }
 ]
 
 const dataOptions: Array<NumericSelectOption> = [
@@ -65,8 +69,9 @@ export const PricingCalculator: React.FC<{
   pricingPlans: PricingPlanData[]
 }> = ({ pricingByRegion, cloudProviders, pricingPlans }) => {
   const router = useRouter()
+
   const [tier, setTier] = useState<Tier>('Development')
-  const [provider, setProvider] = useState<Provider>('aws')
+  const [provider, setProvider] = useState<Provider>('AWS')
   const [region, setRegion] = useState<string>('eu-west-1')
 
   const [hours, setHours] = useState(8)
@@ -96,13 +101,21 @@ export const PricingCalculator: React.FC<{
   )
 
   useEffect(() => {
+    // Load the data whenever the provider, region or tier change.
     const m3terQuery = new URLSearchParams({
       provider,
       region,
       tier
     })
+    const providerQueryParam = router.query.provider
+    if (
+      typeof providerQueryParam === 'string' &&
+      ['AWS', 'GCP'].includes(providerQueryParam)
+    ) {
+      setProvider(providerQueryParam as Provider)
+      console.log('provider', provider)
+    }
 
-    // Load the data whenever the provider, region or tier change.
     const regionQueryParam = router.query.region
     if (typeof regionQueryParam === 'string') {
       setRegion(regionQueryParam)
@@ -110,21 +123,13 @@ export const PricingCalculator: React.FC<{
 
     const hoursQueryParam = router.query.hours
     if (typeof hoursQueryParam === 'string') {
-      setHours(parseInt(hoursQueryParam))
-    }
-
-    const providerQueryParam = router.query.provider
-    if (
-      typeof providerQueryParam === 'string' &&
-      ['aws', 'gcp', 'azure'].includes(providerQueryParam)
-    ) {
-      setProvider(providerQueryParam as Provider)
+      setHours(Number(hoursQueryParam))
     }
 
     const tierQueryParam = router.query.tier
     if (typeof tierQueryParam === 'string') {
       setTier(tierQueryParam as Tier)
-      if (tierQueryParam.toLowerCase() === 'development') {
+      if (tierQueryParam === 'Development') {
         delete router.query.computeMinSize
         delete router.query.computeMaxSize
         router.push(
@@ -141,42 +146,27 @@ export const PricingCalculator: React.FC<{
 
     const storageQueryParam = router.query.storage
     if (typeof storageQueryParam === 'string') {
-      setStorage(parseInt(storageQueryParam))
+      setStorage(Number(storageQueryParam))
     }
 
     setIsLoading(true)
+    console.log(pricingPlansFromfile)
 
-    console.log(`${m3terQuery}`)
-    const testPricing = { computeUnitPrice: 0.00182, storageUnitPrice: 6.85e-7 }
+    // fetch(`/api/pricing-api?${m3terQuery}`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setPricingData(data)
+    //     setIsLoading(false)
+    //   })
 
     setIsLoading(false)
-    setPricingData(testPricing)
-
-    const findByCloudProvider = pricingByRegion.filter(
-      (obj) =>
-        obj.cloudProvider === router.query.provider ||
-        obj.cloudProvider === provider
-    )
-
-    const filteredObjects = pricingByRegion.filter((obj) => {
-      return (
-        ((obj.cloudProvider === router.query.provider ||
-          obj.cloudProvider === provider) &&
-          obj.region.includes(region)) ||
-        ((obj.cloudProvider === router.query.provider ||
-          obj.cloudProvider === provider) &&
-          typeof router.query.region === 'string' &&
-          obj.region.includes(router.query.region))
-      )
-    })
-
-    console.log(filteredObjects[0].region)
   }, [
     router.query.region,
     router.query.provider,
     router.query.tier,
     region,
-    provider
+    provider,
+    tier
   ])
 
   const storageAfterCompression = storage / 10
@@ -253,6 +243,10 @@ export const PricingCalculator: React.FC<{
             cloudProviders={cloudProviders}
             pricingPlans={pricingPlans}
           />
+          <p className='mt-2 text-xs'>
+            This region does not have a development service, please choose
+            another.
+          </p>
         </FormControl>
 
         <FormControl

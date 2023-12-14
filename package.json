@@ -8,7 +8,8 @@
     "start": "next start",
     "download-cms-data": "ts-node  -O '{\"module\": \"commonjs\"}' copyCmsData",
     "create-static-sitemap": "ts-node  -O '{\"module\": \"commonjs\"}' createStaticSitemap",
-    "deploy": "yarn download-cms-data && yarn create-static-sitemap && next build",
+    "create-pricing-file": "ts-node  -O '{\"module\": \"commonjs\"}' createPricingFile",
+    "deploy": "yarn download-cms-data && yarn create-static-sitemap && yarn create-pricing-file && next build",
     "lint": "next lint",
     "export": "next export"
   },

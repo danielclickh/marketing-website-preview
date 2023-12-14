@@ -13,9 +13,9 @@ interface Error {
 
 // Update this config with values from m3ter.
 const config = {
-  planId: 'edcbc7aa-9532-4072-a18c-f0c34e15396a',
-  computeAggregationId: '64ad5584-ac22-4a0a-a40e-ae8b6b93ec6c',
-  storageAggregationId: '4d976d72-e1aa-4df8-810c-21dd2d435bdf'
+  planId: '01b9a9d2-a36a-4a1d-969b-b24fc756cd64',
+  computeAggregationId: '3797d30c-b13c-480b-9068-baf1e340a589',
+  storageAggregationId: 'b5843a1b-a1bb-403d-a929-3ce8486e00d9'
 }
 
 const getUnitPrice = (pricing: Pricing): number => {
@@ -45,6 +45,8 @@ const handler = async (
     })
   }
 
+  console.log(region)
+
   // Load pricing that matches the correct segment.
   const pricings = await getRelevantPricing(
     config.planId,
@@ -62,13 +64,9 @@ const handler = async (
   )
 
   if (!computePricing || !storagePricing) {
-    //remove these hardcoded values! just for testing
-    return res
-      .status(200)
-      .json({ computeUnitPrice: 0.00182, storageUnitPrice: 6.85e-7 })
-    // throw new Error(
-    //   'Could not look up compute and/or storage pricing. Check the configured IDs'
-    // )
+    throw new Error(
+      'Could not look up compute and/or storage pricing. Check the configured IDs'
+    )
   } else {
     return res.status(200).json({
       computeUnitPrice: getUnitPrice(computePricing),
@@ -86,4 +84,4 @@ const testHandler = async (
     .json({ computeUnitPrice: 0.00182, storageUnitPrice: 6.85e-7 })
 }
 
-export default testHandler
+export default handler

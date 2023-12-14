@@ -26,7 +26,6 @@ export const Select: React.FC<SelectProps> = ({
   const selectedOption = options.find((option) => option.value === value)
 
   const handleChange = (e: any) => {
-    console.log(e, id)
     if (id === 'storageVolume') {
       onChange(e.value)
       router.push(
