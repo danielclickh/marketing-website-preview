@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import { getPricingsByPlan, PricingBand } from './lib/m3ter/m3ter-api'
+import { getPricingsByPlan } from './lib/m3ter/m3ter-api'
 
 const config = {
   planId: '01b9a9d2-a36a-4a1d-969b-b24fc756cd64',
@@ -17,10 +17,10 @@ function warn(message: string) {
 }
 
 function generatePricingFile(pricings: any) {
-  const sitemapXML = `${JSON.stringify(pricings)}`
+  const pricingJSON = `${JSON.stringify(pricings)}`
   try {
     const outputPath = path.join(__dirname, 'public', 'pricingFile.json')
-    fs.writeFileSync(outputPath, sitemapXML)
+    fs.writeFileSync(outputPath, pricingJSON)
     log('Pricing successfully written to file.')
   } catch (error) {
     warn(`Error writing Pricing to file:  ${JSON.stringify(error)}`)
@@ -62,7 +62,7 @@ async function triggerPricingFile() {
     }))
 
   // We generate the JSON pricing file with the pricings data
-  const sitemap = generatePricingFile(pricingsToStore)
+  generatePricingFile(pricingsToStore)
 }
 
 triggerPricingFile()
