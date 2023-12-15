@@ -465,7 +465,7 @@ export const PricingCalculator: React.FC<{
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
-                    <p className='mb-8 font-basier text-5xl font-bold text-white'>
+                    <p className='mb-8 font-basier text-[64px] font-bold text-white'>
                       $
                       {(
                         costData.minComputeCost! + costData.storageCost

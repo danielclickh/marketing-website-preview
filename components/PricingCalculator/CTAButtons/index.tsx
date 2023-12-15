@@ -19,7 +19,7 @@ export default function CTAButtons({
   const [isCopied, setIsCopied] = useState(false)
   const [share, setShare] = useState('Share')
   const copyToClipboard = () => {
-    const urlToCopy = window.location.href
+    const urlToCopy = window.location.href + '#pricing-calculator'
 
     navigator.clipboard
       .writeText(urlToCopy)
