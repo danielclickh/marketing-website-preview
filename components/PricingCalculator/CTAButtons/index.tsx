@@ -1,14 +1,22 @@
 import { CUIButton } from '../../ClickUI'
+import Info from '../ui/Tooltip'
 
 export default function CTAButtons({
   storageCost,
   computeCostMin,
-  computeCostMax
+  computeCostMax,
+  storageSize,
+  minMemory,
+  maxMemory
 }: {
   storageCost: number
   computeCostMin: number
   computeCostMax?: number
+  storageSize?: number
+  minMemory?: number
+  maxMemory?: number
 }) {
+  console.log(storageSize, minMemory, maxMemory)
   return (
     <>
       <div className='flex flex-col gap-4'>
@@ -74,7 +82,9 @@ export default function CTAButtons({
                 strokeLinejoin='round'
               />
             </svg>
-            <p>${storageCost!.toFixed(2)} for storage</p>
+            <p className='flex items-center gap-x-2'>
+              ${storageCost!.toFixed(2)} for storage{' '}
+            </p>
           </div>
         </li>
         <li>

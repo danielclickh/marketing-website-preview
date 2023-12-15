@@ -140,7 +140,7 @@ function PricingPage({
             </div>
           </div>
           <div className='clip-inverted-triangle bg-shadow-element pt-10 pb-60'></div>
-          <div className='philosophy bg-primary-300 text-neutral-900'>
+          <div className='philosophy -mt-1 bg-primary-300 text-neutral-900'>
             <div className='flip-selection mx-auto max-w-7xl px-4 pb-16 sm:px-8 2xl:px-0'>
               <SuiTitle
                 type='h2'

@@ -438,17 +438,17 @@ export const PricingCalculator: React.FC<{
       </div>
       <div className={styles.costs}>
         {isLoading ? (
-          <p>Loading, please wait…</p>
+          <p className='text-center'>Loading, please wait…</p>
         ) : (
           <div>
-            <p className='pb-1 font-inconsolata text-lg text-primary-300'>
+            <p className='font-inconsolata text-lg text-primary-300'>
               Average price per month
             </p>
             {costData && (
-              <div>
+              <div className='mt-4'>
                 {tier === 'Development' ? (
                   <React.Fragment>
-                    <p className={styles.total}>
+                    <p className='mb-8 font-basier text-[64px] font-bold text-white'>
                       $
                       {(costData.computeCost! + costData.storageCost).toFixed(
                         0
@@ -457,11 +457,14 @@ export const PricingCalculator: React.FC<{
                     <CTAButtons
                       computeCostMin={Number(costData.computeCost?.toFixed(2))}
                       storageCost={Number(costData.storageCost?.toFixed(2))}
+                      minMemory={Number(computeMinSize)}
+                      maxMemory={computeMaxSize}
+                      storageSize={Number(storageAfterCompression)}
                     />
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
-                    <p className={styles.total}>
+                    <p className='mb-8 font-basier text-5xl font-bold text-white'>
                       $
                       {(
                         costData.minComputeCost! + costData.storageCost
