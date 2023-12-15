@@ -53,6 +53,11 @@ const tierOptions: Array<ToggleOption<Tier>> = [
     value: 'Development',
     label: 'Development',
     tooltip: 'Great for smaller workloads and starter projects'
+  },
+  {
+    value: 'Production',
+    label: 'Production',
+    tooltip: 'Designed to handle production workloads'
   }
 ]
 
@@ -290,14 +295,18 @@ export const PricingCalculator: React.FC<{
           storageUnitPrice = matchingPlan.pricingBands[0].unitPrice
         }
       })
-      console.log({ computeUnitPrice, storageUnitPrice })
+      console.log(
+        { computeUnitPrice, storageUnitPrice },
+        'Matched',
+        matchingPricingPlans
+      )
       // Set pricingData with the computed unit prices
       setPricingData({ computeUnitPrice, storageUnitPrice })
+      setIsLoading(false)
     } else {
       console.log('No matching pricing plans found for the specified criteria.')
       setIsLoading(false)
     }
-
     setIsLoading(false)
   }, [tier, provider, region, hours, storage, computeMinSize, computeMaxSize])
 
@@ -326,7 +335,7 @@ export const PricingCalculator: React.FC<{
       return {
         minComputeCost: calculateComputeCost(
           pricingData.computeUnitPrice,
-          computeMaxSize,
+          computeMinSize,
           hours
         ),
         maxComputeCost: calculateComputeCost(
