@@ -111,6 +111,9 @@ export const PricingCalculator: React.FC<{
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [pricingData, setPricingData] = useState<PricingData | undefined>()
   const [memoryError, setMemoryError] = useState<string | undefined>(undefined)
+  const [contactSales, setContactSales] = useState<string | undefined>(
+    undefined
+  )
 
   useEffect(() => {
     setIsLoading(true)
@@ -298,11 +301,7 @@ export const PricingCalculator: React.FC<{
           storageUnitPrice = matchingPlan.pricingBands[0].unitPrice
         }
       })
-      console.log(
-        { computeUnitPrice, storageUnitPrice },
-        'Matched',
-        matchingPricingPlans
-      )
+      console.log({ computeUnitPrice, storageUnitPrice })
       // Set pricingData with the computed unit prices
       setPricingData({ computeUnitPrice, storageUnitPrice })
       setIsLoading(false)
