@@ -77,7 +77,10 @@ const dataOptions: Array<NumericSelectOption> = [
 const computeOptions: Array<NumericSelectOption> = [
   { value: 24, label: '24 GiB RAM, 6 vCPU' },
   { value: 48, label: '48 GiB RAM, 12 vCPU' },
-  { value: 96, label: '96 GiB RAM, 24 vCPU' }
+  { value: 96, label: '96 GiB RAM, 24 vCPU' },
+  { value: 192, label: '192 GiB RAM, 48 vCPU' },
+  { value: 360, label: '360 GiB RAM, 96 vCPU' },
+  { value: 720, label: '720 GiB RAM, 192 vCPU' }
 ]
 
 const config = {
