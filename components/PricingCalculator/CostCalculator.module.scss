@@ -1,5 +1,5 @@
 .wrapper {
-  @apply flex flex-col lg:flex-row gap-12 relative justify-between items-start ;
+  @apply flex flex-col md:flex-row gap-x-12 relative justify-between items-start ;
 }
 
 .options {
@@ -9,9 +9,8 @@
 .sizes {
   @apply flex gap-x-6 justify-between;
   div {@apply w-full}
-  #computeMaxSize, #computeMinSize {@apply w-full bg-red-900}
 }
 
 .costs {
-  @apply flex-1 p-8 border border-primary-300 rounded-lg bg-black text-center;
+  @apply w-full lg:flex-1 p-8 border border-primary-300 rounded-lg bg-black text-center;
 }
