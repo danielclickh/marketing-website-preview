@@ -363,12 +363,21 @@ export const PricingCalculator: React.FC<{
                   />
                 </FormControl>
               </div>
-              {!memoryError && (
+              {!memoryError &&
+              computeMinSize !== computeMaxSize &&
+              tier === 'Production' ? (
                 <div className='mt-3 text-xs'>
-                  Your service will autoscale between {computeMinSize} GiB and{' '}
-                  {computeMaxSize}
-                  GiB of RAM depending on your workload
+                  Your service will autoscale between {computeMinSize}GiB and{' '}
+                  {computeMaxSize}GiB of RAM depending on your workload
                 </div>
+              ) : (
+                <>
+                  {!memoryError && (
+                    <div className='mt-3 text-xs'>
+                      Your service will be pinned at {computeMinSize}GiB
+                    </div>
+                  )}
+                </>
               )}
 
               <div className='mt-3 text-xs'>{memoryError && memoryError}</div>
