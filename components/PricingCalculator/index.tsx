@@ -67,7 +67,6 @@ const providerOptions: Array<ToggleOption<Provider>> = [
 ]
 
 const dataOptions: Array<NumericSelectOption> = [
-  { value: 1, label: '1GB' },
   { value: 250, label: '250GB' },
   { value: 500, label: '500GB' },
   { value: 1024, label: '1TB' },
