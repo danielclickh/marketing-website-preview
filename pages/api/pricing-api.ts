@@ -75,13 +75,4 @@ const handler = async (
   }
 }
 
-const testHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse<PricingData | Error>
-) => {
-  return res
-    .status(200)
-    .json({ computeUnitPrice: 0.00182, storageUnitPrice: 6.85e-7 })
-}
-
 export default handler

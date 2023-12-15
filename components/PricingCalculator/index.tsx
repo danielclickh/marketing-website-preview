@@ -1,12 +1,16 @@
+import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
-
 import {
   calculateComputeCost,
   calculateStorageCost
 } from '../../lib/m3ter/costs'
-
+import pricingPlansFromFile from '../../public/pricingFile.json'
+import {
+  CloudProviderType,
+  PricingPlanData,
+  RegionPricing
+} from '../../types/pricing'
 import { FormControl } from '../PricingCalculator/ui/FormControl'
 import {
   NumericSelect,
@@ -17,19 +21,11 @@ import {
   Option as ToggleOption,
   ToggleButtons
 } from '../PricingCalculator/ui/ToggleButtons'
-import { ToggleButtonsProviders } from './ui/ToggleButtonsProviders'
 import PricingOptions from '../PricingOptions'
-import CTAButtons from './CTAButtons'
-
 import styles from './CostCalculator.module.scss'
+import CTAButtons from './CTAButtons'
+import { ToggleButtonsProviders } from './ui/ToggleButtonsProviders'
 
-import pricingPlansFromfile from '../../public/pricingFile.json'
-
-import {
-  CloudProviderType,
-  PricingPlanData,
-  RegionPricing
-} from '../../types/pricing'
 type Tier = 'Development' | 'Production'
 type Provider = 'aws' | 'gcp'
 interface PricingData {
@@ -57,11 +53,6 @@ const tierOptions: Array<ToggleOption<Tier>> = [
     value: 'Development',
     label: 'Development',
     tooltip: 'Great for smaller workloads and starter projects'
-  },
-  {
-    value: 'Production',
-    label: 'Production',
-    tooltip: 'Designed to handle production workloads'
   }
 ]
 
@@ -83,6 +74,12 @@ const computeOptions: Array<NumericSelectOption> = [
   { value: 96, label: '96 GiB RAM, 24 vCPU' }
 ]
 
+const config = {
+  planId: '01b9a9d2-a36a-4a1d-969b-b24fc756cd64',
+  computeAggregationId: '3797d30c-b13c-480b-9068-baf1e340a589',
+  storageAggregationId: 'b5843a1b-a1bb-403d-a929-3ce8486e00d9'
+}
+
 export const PricingCalculator: React.FC<{
   pricingByRegion: RegionPricing[]
   cloudProviders: CloudProviderType[]
@@ -94,7 +91,11 @@ export const PricingCalculator: React.FC<{
   const tier = searchParams.get('tier') || 'Development'
   const provider = searchParams.get('provider') || 'aws'
   const region = searchParams.get('region') || 'eu-west-1'
-  const hours = Number(searchParams.get('hours'))
+  let hours = 8
+  const hoursParam = searchParams.get('hours')
+  if (hoursParam !== null) {
+    hours = Number(hoursParam)
+  }
   const storage = Number(searchParams.get('storage')) || 500
   const computeMinSize = Number(searchParams.get('computeMinSize')) || 24
   const computeMaxSize = Number(searchParams.get('computeMaxSize')) || 48
@@ -167,11 +168,25 @@ export const PricingCalculator: React.FC<{
 
     //make sure number isn't over 24 hrs
     if (hours > 24) {
+      // If it's not a valid value, default to '8'
       router.push(
         {
           query: {
             ...router.query,
-            hours: 24
+            hours: 24 // Set your default value here
+          }
+        },
+        undefined,
+        { shallow: true }
+      )
+    }
+    if (hours < 0) {
+      // If it's not a valid value, default to '8'
+      router.push(
+        {
+          query: {
+            ...router.query,
+            hours: 8 // Set your default value here
           }
         },
         undefined,
@@ -245,13 +260,44 @@ export const PricingCalculator: React.FC<{
       }
     }
 
-    // Load the data whenever the provider, region or tier change.
-    const m3terQuery = new URLSearchParams({
-      provider,
-      region,
-      tier
-    })
-    setPricingData({ computeUnitPrice: 0.00182, storageUnitPrice: 6.85e-7 })
+    //Find the right region for pricing
+    //We have to check the provider as m3ter returns gcp region names prepended with gcp-XXXX
+    const regionToCheckPricing =
+      provider.toLowerCase() === 'gcp' ? `gcp-${region}` : region
+    const matchingPricingPlans = pricingPlansFromFile.filter(
+      (plan) =>
+        plan.instanceTier.toLowerCase() === tier.toLowerCase() &&
+        plan.region.toLowerCase() === regionToCheckPricing &&
+        plan.cloudProvider.toLowerCase() === provider.toLowerCase()
+    )
+
+    if (matchingPricingPlans.length > 0) {
+      // Initialize variables to store the compute and storage unit prices
+      let computeUnitPrice = 0
+      let storageUnitPrice = 0
+
+      // Iterate through matching pricing plans
+      matchingPricingPlans.forEach((matchingPlan) => {
+        // Check if the aggregationId matches config.computeAggregationId
+        if (matchingPlan.aggregationId === config.computeAggregationId) {
+          // Get the computeUnitPrice for this matching plan
+          computeUnitPrice = matchingPlan.pricingBands[0].unitPrice
+        }
+
+        // Check if the aggregationId matches config.storageAggregationId
+        if (matchingPlan.aggregationId === config.storageAggregationId) {
+          // Get the storageUnitPrice for this matching plan
+          storageUnitPrice = matchingPlan.pricingBands[0].unitPrice
+        }
+      })
+      console.log({ computeUnitPrice, storageUnitPrice })
+      // Set pricingData with the computed unit prices
+      setPricingData({ computeUnitPrice, storageUnitPrice })
+    } else {
+      console.log('No matching pricing plans found for the specified criteria.')
+      setIsLoading(false)
+    }
+
     setIsLoading(false)
   }, [tier, provider, region, hours, storage, computeMinSize, computeMaxSize])
 
@@ -321,10 +367,6 @@ export const PricingCalculator: React.FC<{
             cloudProviders={cloudProviders}
             pricingPlans={pricingPlans}
           />
-          <p className='mt-2 text-xs'>
-            This region does not have a development service, please choose
-            another.
-          </p>
         </FormControl>
 
         <FormControl

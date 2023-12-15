@@ -6,6 +6,7 @@ export interface RangeSliderProps {
 }
 
 export const RangeSlider: React.FC<RangeSliderProps> = ({ value }) => {
+  // Set a default value (e.g., 12 hours)
   const router = useRouter()
   return (
     <div>
