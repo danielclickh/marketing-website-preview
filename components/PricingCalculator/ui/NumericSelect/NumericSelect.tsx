@@ -10,24 +10,13 @@ export interface NumericSelectProps {
   options: Array<Option>
   value: number
   id?: string
-  onChange: (value: number) => void
 }
 
 export const NumericSelect: React.FC<NumericSelectProps> = ({
   options,
   value,
-  id,
-  onChange
+  id
 }) => {
-  const handleChange = useCallback(
-    (newValue: string) => {
-      const numericValue = Number(newValue)
-      if (!Number.isNaN(numericValue)) {
-        onChange(numericValue)
-      }
-    },
-    [onChange]
-  )
   const optionsAsStrings = useMemo(
     () =>
       options.map((option) => ({
@@ -37,12 +26,5 @@ export const NumericSelect: React.FC<NumericSelectProps> = ({
     [options]
   )
 
-  return (
-    <Select
-      id={id}
-      options={optionsAsStrings}
-      value={value.toString()}
-      onChange={handleChange}
-    />
-  )
+  return <Select id={id} options={optionsAsStrings} value={value.toString()} />
 }

@@ -28,6 +28,8 @@ import CTAButtons from './CTAButtons'
 import styles from './CostCalculator.module.scss'
 
 import pricingPlansFromfile from '../../public/pricingFile.json'
+import { useSearchParams } from 'next/navigation'
+import { max } from 'lodash'
 
 type Tier = 'Development' | 'Production'
 type Provider = 'aws' | 'gcp'
@@ -72,120 +74,100 @@ export const PricingCalculator: React.FC<{
   cloudProviders: CloudProviderType[]
   pricingPlans: PricingPlanData[]
 }> = ({ pricingByRegion, cloudProviders, pricingPlans }) => {
+  const searchParams = useSearchParams()
   const router = useRouter()
 
-  const [tier, setTier] = useState<Tier>('Development')
-  const [provider, setProvider] = useState<Provider>('aws')
-  const [region, setRegion] = useState<string>('eu-west-1')
-
-  const [hours, setHours] = useState(8)
-  const [storage, setStorage] = useState(500)
-  const [minCompute, setMinCompute] = useState(24)
-  const [maxCompute, setMaxCompute] = useState(48)
+  const tier = searchParams.get('tier') || 'Development'
+  const provider = searchParams.get('provider') || 'aws'
+  const region = searchParams.get('region') || 'eu-west-1'
+  const hours = Number(searchParams.get('hours'))
+  const storage = Number(searchParams.get('storage')) || 500
+  const minCompute = Number(searchParams.get('minCompute')) || 24
+  const maxCompute = Number(searchParams.get('maxCompute')) || 48
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [pricingData, setPricingData] = useState<PricingData | undefined>()
 
-  const changeProvider = useCallback(
-    (newProvider: Provider) => {
-      setProvider(newProvider)
-      delete router.query.region
+  useEffect(() => {
+    setIsLoading(true)
 
+    console.log('State: ', {
+      tier,
+      provider,
+      region,
+      hours,
+      storage,
+      minCompute,
+      maxCompute
+    })
+
+    //make sure only accepted tiers
+    if (!['Development', 'Production'].includes(tier)) {
       router.push(
         {
           query: {
             ...router.query,
-            provider: newProvider
+            tier: 'Development'
           }
         },
         undefined,
         { shallow: true }
       )
-    },
-    [router.query]
-  )
+    }
 
-  useEffect(() => {
+    //make sure only accepted providers
+    if (!['aws', 'gcp'].includes(provider)) {
+      router.push(
+        {
+          query: {
+            ...router.query,
+            provider: 'aws'
+          }
+        },
+        undefined,
+        { shallow: true }
+      )
+    }
+
+    //make sure only accepted regions
+
+    //make sure number isn't over 24 hrs
+    if (hours > 24) {
+      router.push(
+        {
+          query: {
+            ...router.query,
+            hours: 24
+          }
+        },
+        undefined,
+        { shallow: true }
+      )
+    }
+
+    //validate data accepted volumes
+    if (!dataOptions.map((option) => option.value).includes(storage)) {
+      router.push(
+        {
+          query: {
+            ...router.query,
+            storage: 500
+          }
+        },
+        undefined,
+        { shallow: true }
+      )
+    }
+
     // Load the data whenever the provider, region or tier change.
     const m3terQuery = new URLSearchParams({
       provider,
       region,
       tier
     })
-    const providerQueryParam = router.query.provider
-    if (
-      typeof providerQueryParam === 'string' &&
-      ['aws', 'gcp'].includes(providerQueryParam)
-    ) {
-      setProvider(providerQueryParam as Provider)
-      if (provider === 'gcp') {
-        setRegion('us-central1')
-      } else {
-        setRegion('us-east-2')
-      }
-    }
-
-    const regionQueryParam = router.query.region
-    if (typeof regionQueryParam === 'string') {
-      setRegion(regionQueryParam)
-    }
-
-    const hoursQueryParam = router.query.hours
-    if (typeof hoursQueryParam === 'string') {
-      setHours(Number(hoursQueryParam))
-    }
-
-    const tierQueryParam = router.query.tier
-    if (typeof tierQueryParam === 'string') {
-      setTier(tierQueryParam as Tier)
-      if (tierQueryParam === 'Development') {
-        delete router.query.computeMinSize
-        delete router.query.computeMaxSize
-        router.push(
-          {
-            query: {
-              ...router.query
-            }
-          },
-          undefined,
-          { shallow: true }
-        )
-      }
-    }
-
-    const storageQueryParam = router.query.storage
-    if (typeof storageQueryParam === 'string') {
-      setStorage(Number(storageQueryParam))
-    }
-
-    setIsLoading(true)
-
-    console.log(tier, provider, region)
-    //find the right pricing plan in the json
-    console.log(
-      region,
-      pricingPlansFromfile.filter(
-        (plan: any) =>
-          plan?.region?.includes(region) && plan?.instanceTier === tier
-      )
-    )
-
-    // fetch(`/api/pricing-api?${m3terQuery}`)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setPricingData(data)
-    //     setIsLoading(false)
-    //   })
 
     setIsLoading(false)
-  }, [
-    router.query.region,
-    router.query.provider,
-    router.query.tier,
-    region,
-    provider,
-    tier
-  ])
+  }, [tier, provider, region, hours, storage, minCompute, maxCompute])
 
   const storageAfterCompression = storage / 10
 
@@ -239,19 +221,11 @@ export const PricingCalculator: React.FC<{
     <div className={styles.wrapper}>
       <div className={styles.options}>
         <FormControl label='Service type'>
-          <ToggleButtons
-            options={tierOptions}
-            value={tier}
-            onChange={setTier}
-          />
+          <ToggleButtons options={tierOptions} value={tier} />
         </FormControl>
 
         <FormControl label='Cloud provider'>
-          <ToggleButtonsProviders
-            options={providerOptions}
-            value={provider}
-            onChange={changeProvider}
-          />
+          <ToggleButtonsProviders options={providerOptions} value={provider} />
         </FormControl>
 
         <FormControl label='Region'>
@@ -270,7 +244,7 @@ export const PricingCalculator: React.FC<{
         <FormControl
           label='Active hours per day'
           tooltip='We idle your service when it’s inactive, saving you on cost.'>
-          <RangeSlider value={hours} onChange={setHours} />
+          <RangeSlider value={hours} />
         </FormControl>
 
         <FormControl
@@ -281,7 +255,6 @@ export const PricingCalculator: React.FC<{
             id='storageVolume'
             options={dataOptions}
             value={storage}
-            onChange={setStorage}
           />
         </FormControl>
 
@@ -293,7 +266,6 @@ export const PricingCalculator: React.FC<{
                   id='computeMinSize'
                   options={computeOptions}
                   value={minCompute}
-                  onChange={setMinCompute}
                 />
               </FormControl>
               <FormControl label='Maximum size'>
@@ -301,7 +273,6 @@ export const PricingCalculator: React.FC<{
                   id='computeMaxSize'
                   options={computeOptions}
                   value={maxCompute}
-                  onChange={setMaxCompute}
                 />
               </FormControl>
             </div>

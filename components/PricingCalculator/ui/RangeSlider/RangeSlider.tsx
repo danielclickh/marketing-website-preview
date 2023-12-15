@@ -3,24 +3,20 @@ import * as Slider from '@radix-ui/react-slider'
 
 export interface RangeSliderProps {
   value: number
-  onChange: (value: number) => void
 }
 
-export const RangeSlider: React.FC<RangeSliderProps> = ({
-  value,
-  onChange
-}) => {
+export const RangeSlider: React.FC<RangeSliderProps> = ({ value }) => {
   const router = useRouter()
   return (
     <div>
       <Slider.Root
         className='relative flex h-5 touch-none select-none items-center hover:cursor-pointer'
         max={24}
+        min={0}
         step={1}
         value={[value]}
         onValueChange={(values) => {
           const newValue = values[0]
-          onChange(newValue)
           router.push(
             {
               query: {

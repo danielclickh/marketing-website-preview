@@ -13,21 +13,14 @@ export interface SelectProps {
   options: Array<Option>
   value: string
   id?: string
-  onChange: (value: string) => void
 }
 
-export const Select: React.FC<SelectProps> = ({
-  options,
-  value,
-  id,
-  onChange
-}) => {
+export const Select: React.FC<SelectProps> = ({ options, value, id }) => {
   const router = useRouter()
   const selectedOption = options.find((option) => option.value === value)
 
   const handleChange = (e: any) => {
     if (id === 'storageVolume') {
-      onChange(e.value)
       router.push(
         {
           query: {

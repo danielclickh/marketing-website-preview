@@ -10,13 +10,11 @@ export interface Option<T extends string = string> {
 export interface ToggleButtonsProps<T extends string = string> {
   options: Array<Option<T>>
   value: string
-  onChange: (value: T) => void
 }
 
 export function ToggleButtons<T extends string = string>({
   options,
-  value,
-  onChange
+  value
 }: ToggleButtonsProps<T>) {
   const router = useRouter()
 
@@ -41,7 +39,6 @@ export function ToggleButtons<T extends string = string>({
               undefined,
               { shallow: true }
             )
-            onChange(option.value)
           }}>
           <button>{option.label}</button>
           {option.tooltip && <Icon content={option.tooltip} />}

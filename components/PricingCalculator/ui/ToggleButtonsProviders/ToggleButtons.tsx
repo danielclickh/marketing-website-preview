@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react'
+import { useRouter } from 'next/router'
 import AwsLogo from './AwsLogo'
 import GCPLogo from './GCPLogo'
 
@@ -12,24 +13,34 @@ export interface Option<T extends string = string> {
 export interface ToggleButtonsProps<T extends string = string> {
   options: Array<Option<T>>
   value: string
-  onChange: (value: T) => void
 }
 
 export function ToggleButtonsProviders<T extends string = string>({
   options,
-  value,
-  onChange
+  value
 }: ToggleButtonsProps<T>) {
+  const router = useRouter()
   return (
     <div className={styles.buttons}>
       {options.map((option) => (
         <button
           key={option.value}
-          onClick={() => onChange(option.value)}
+          onClick={() => {
+            router.push(
+              {
+                query: {
+                  ...router.query,
+                  provider: option.value
+                }
+              },
+              undefined,
+              { shallow: true }
+            )
+          }}
           className={`${value === option.value ? styles.selected : undefined}`}>
-          {option.label === 'aws' ? (
+          {option.value === 'aws' ? (
             <AwsLogo />
-          ) : option.label === 'gcp' ? (
+          ) : option.value === 'gcp' ? (
             <GCPLogo />
           ) : (
             option.label

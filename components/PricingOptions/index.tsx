@@ -36,7 +36,7 @@ function PricingOptions({
 }) {
   const router = useRouter()
   const [provider, setProvider] = useState(
-    router.query.priovider ? 'gcp' : 'aws'
+    router.query.provider ? 'gcp' : 'aws'
   )
   const regionList: RegionPricingWithIcon[] = useMemo(() => {
     return pricingByRegion
@@ -110,7 +110,7 @@ function PricingOptions({
                           type='secondary'
                           onClick={() => {
                             setProvider('aws')
-                            router.push('/pricing', undefined, {
+                            router.push('/pricing?provider=aws', undefined, {
                               shallow: true
                             })
                           }}
