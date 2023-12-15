@@ -446,7 +446,7 @@ export const PricingCalculator: React.FC<{
               Average price per month
             </p>
             {costData && (
-              <div className='mt-4'>
+              <div className='mt-2'>
                 {tier === 'Development' ? (
                   <React.Fragment>
                     <p className='mb-8 font-basier text-[64px] font-bold text-white'>
