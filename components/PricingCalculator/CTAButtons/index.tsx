@@ -1,5 +1,5 @@
+import { useState } from 'react'
 import { CUIButton } from '../../ClickUI'
-import Info from '../ui/Tooltip'
 
 export default function CTAButtons({
   storageCost,
@@ -16,7 +16,24 @@ export default function CTAButtons({
   minMemory?: number
   maxMemory?: number
 }) {
-  console.log(storageSize, minMemory, maxMemory)
+  const [isCopied, setIsCopied] = useState(false)
+  const [share, setShare] = useState('Share')
+  const copyToClipboard = () => {
+    const urlToCopy = window.location.href
+
+    navigator.clipboard
+      .writeText(urlToCopy)
+      .then(() => {
+        setIsCopied(true)
+        setTimeout(() => {
+          setShare('Share')
+          setIsCopied(false)
+        }, 1000)
+      })
+      .catch((err) => {
+        console.error('Error copying to clipboard:', err)
+      })
+  }
   return (
     <>
       <div className='flex flex-col gap-4'>
@@ -30,10 +47,10 @@ export default function CTAButtons({
           <span className='text-sm'>Start free trial</span>
         </CUIButton>
         <CUIButton
+          onClick={copyToClipboard}
           type='secondary'
           size='lg'
           weight='semibold'
-          href='https://clickhouse.cloud/signUp?loc=pricing-calculator'
           linkClass='w-full'
           className='w-full'>
           <svg
@@ -53,7 +70,7 @@ export default function CTAButtons({
             <line x1='8.59' x2='15.42' y1='13.51' y2='17.49' />
             <line x1='15.41' x2='8.59' y1='6.51' y2='10.49' />
           </svg>
-          <span className='ml-2 text-sm'>Share</span>
+          <span className='ml-2 text-sm'>{isCopied ? 'Copied!' : share}</span>
         </CUIButton>
         <CUIButton
           type='secondary'
