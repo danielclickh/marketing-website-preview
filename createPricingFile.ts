@@ -58,7 +58,10 @@ async function triggerPricingFile() {
       id: item?.id,
       aggregationId: item?.aggregationId, // Change this to match the actual property name in 'Pricing'
       pricingBands: item?.pricingBands,
-      description: item?.description
+      description: item?.description,
+      instanceTier: item?.segment?.instanceTier,
+      region: item?.segment?.region,
+      cloudProvider: item?.segment?.cloudProvider
     }))
 
   // We generate the JSON pricing file with the pricings data

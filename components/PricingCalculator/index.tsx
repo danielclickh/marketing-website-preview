@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
+
 import {
   calculateComputeCost,
   calculateStorageCost
@@ -9,6 +10,7 @@ import {
   PricingPlanData,
   RegionPricing
 } from '../../types/pricing'
+
 import { FormControl } from '../PricingCalculator/ui/FormControl'
 import {
   NumericSelect,
@@ -19,14 +21,16 @@ import {
   Option as ToggleOption,
   ToggleButtons
 } from '../PricingCalculator/ui/ToggleButtons'
-import PricingOptions from '../PricingOptions'
-import styles from './CostCalculator.module.scss'
-import CTAButtons from './CTAButtons'
 import { ToggleButtonsProviders } from './ui/ToggleButtonsProviders'
+import PricingOptions from '../PricingOptions'
+import CTAButtons from './CTAButtons'
+
+import styles from './CostCalculator.module.scss'
+
 import pricingPlansFromfile from '../../public/pricingFile.json'
 
 type Tier = 'Development' | 'Production'
-type Provider = 'AWS' | 'GCP'
+type Provider = 'aws' | 'gcp'
 interface PricingData {
   computeUnitPrice: number
   storageUnitPrice: number
@@ -46,8 +50,8 @@ const tierOptions: Array<ToggleOption<Tier>> = [
 ]
 
 const providerOptions: Array<ToggleOption<Provider>> = [
-  { value: 'AWS', label: 'AWS' },
-  { value: 'GCP', label: 'GCP' }
+  { value: 'aws', label: 'AWS' },
+  { value: 'gcp', label: 'GCP' }
 ]
 
 const dataOptions: Array<NumericSelectOption> = [
@@ -71,7 +75,7 @@ export const PricingCalculator: React.FC<{
   const router = useRouter()
 
   const [tier, setTier] = useState<Tier>('Development')
-  const [provider, setProvider] = useState<Provider>('AWS')
+  const [provider, setProvider] = useState<Provider>('aws')
   const [region, setRegion] = useState<string>('eu-west-1')
 
   const [hours, setHours] = useState(8)
@@ -86,6 +90,7 @@ export const PricingCalculator: React.FC<{
     (newProvider: Provider) => {
       setProvider(newProvider)
       delete router.query.region
+
       router.push(
         {
           query: {
@@ -110,10 +115,14 @@ export const PricingCalculator: React.FC<{
     const providerQueryParam = router.query.provider
     if (
       typeof providerQueryParam === 'string' &&
-      ['AWS', 'GCP'].includes(providerQueryParam)
+      ['aws', 'gcp'].includes(providerQueryParam)
     ) {
       setProvider(providerQueryParam as Provider)
-      console.log('provider', provider)
+      if (provider === 'gcp') {
+        setRegion('us-central1')
+      } else {
+        setRegion('us-east-2')
+      }
     }
 
     const regionQueryParam = router.query.region
@@ -150,7 +159,16 @@ export const PricingCalculator: React.FC<{
     }
 
     setIsLoading(true)
-    console.log(pricingPlansFromfile)
+
+    console.log(tier, provider, region)
+    //find the right pricing plan in the json
+    console.log(
+      region,
+      pricingPlansFromfile.filter(
+        (plan: any) =>
+          plan?.region?.includes(region) && plan?.instanceTier === tier
+      )
+    )
 
     // fetch(`/api/pricing-api?${m3terQuery}`)
     //   .then((response) => response.json())
