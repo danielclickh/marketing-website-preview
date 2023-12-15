@@ -1,15 +1,11 @@
 import { useRouter } from 'next/router'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 import {
   calculateComputeCost,
   calculateStorageCost
 } from '../../lib/m3ter/costs'
-import {
-  CloudProviderType,
-  PricingPlanData,
-  RegionPricing
-} from '../../types/pricing'
 
 import { FormControl } from '../PricingCalculator/ui/FormControl'
 import {
@@ -28,15 +24,33 @@ import CTAButtons from './CTAButtons'
 import styles from './CostCalculator.module.scss'
 
 import pricingPlansFromfile from '../../public/pricingFile.json'
-import { useSearchParams } from 'next/navigation'
-import { max } from 'lodash'
 
+import {
+  CloudProviderType,
+  PricingPlanData,
+  RegionPricing
+} from '../../types/pricing'
 type Tier = 'Development' | 'Production'
 type Provider = 'aws' | 'gcp'
 interface PricingData {
   computeUnitPrice: number
   storageUnitPrice: number
 }
+
+const acceptableRegions = [
+  { provider: 'aws', region: 'us-east-2' },
+  { provider: 'aws', region: 'us-west-2' },
+  { provider: 'aws', region: 'us-east-1' },
+  { provider: 'aws', region: 'eu-west-1' },
+  { provider: 'aws', region: 'eu-central-1' },
+  { provider: 'aws', region: 'ap-southeast-1' },
+  { provider: 'aws', region: 'ap-south-1' },
+  { provider: 'aws', region: 'ap-southeast-2' },
+  { provider: 'gcp', region: 'us-central1' },
+  { provider: 'gcp', region: 'us-east1' },
+  { provider: 'gcp', region: 'europe-west4' },
+  { provider: 'gcp', region: 'asia-southeast1' }
+]
 
 const tierOptions: Array<ToggleOption<Tier>> = [
   {
@@ -82,27 +96,20 @@ export const PricingCalculator: React.FC<{
   const region = searchParams.get('region') || 'eu-west-1'
   const hours = Number(searchParams.get('hours'))
   const storage = Number(searchParams.get('storage')) || 500
-  const minCompute = Number(searchParams.get('minCompute')) || 24
-  const maxCompute = Number(searchParams.get('maxCompute')) || 48
+  const computeMinSize = Number(searchParams.get('computeMinSize')) || 24
+  const computeMaxSize = Number(searchParams.get('computeMaxSize')) || 48
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [pricingData, setPricingData] = useState<PricingData | undefined>()
+  const [memoryError, setMemoryError] = useState<string | undefined>(undefined)
 
   useEffect(() => {
     setIsLoading(true)
+    setMemoryError(undefined)
 
-    console.log('State: ', {
-      tier,
-      provider,
-      region,
-      hours,
-      storage,
-      minCompute,
-      maxCompute
-    })
-
-    //make sure only accepted tiers
-    if (!['Development', 'Production'].includes(tier)) {
+    // Check if the selected tier is valid
+    if (!tierOptions.some((option) => option.value === tier)) {
+      // If it's not a valid tier, default to 'dev'
       router.push(
         {
           query: {
@@ -115,8 +122,9 @@ export const PricingCalculator: React.FC<{
       )
     }
 
-    //make sure only accepted providers
-    if (!['aws', 'gcp'].includes(provider)) {
+    // Check if the selected provider is valid
+    if (!providerOptions.some((option) => option.value === provider)) {
+      // If it's not a valid provider, default to 'aws'
       router.push(
         {
           query: {
@@ -129,7 +137,33 @@ export const PricingCalculator: React.FC<{
       )
     }
 
-    //make sure only accepted regions
+    //make sure only accepted regions and providers
+    const providerToCheck = provider
+    const regionToCheck = region
+    const isMatch = acceptableRegions.some(
+      (region) =>
+        region.provider === providerToCheck && region.region === regionToCheck
+    )
+
+    //if no match, then set the region to the first region in the list of the given provider.
+    if (!isMatch) {
+      const firstRegionForProvider = acceptableRegions.find(
+        (region) => region.provider === providerToCheck
+      )
+
+      if (firstRegionForProvider) {
+        router.push(
+          {
+            query: {
+              ...router.query,
+              region: firstRegionForProvider.region
+            }
+          },
+          undefined,
+          { shallow: true }
+        )
+      }
+    }
 
     //make sure number isn't over 24 hrs
     if (hours > 24) {
@@ -159,15 +193,67 @@ export const PricingCalculator: React.FC<{
       )
     }
 
+    //validate min and max memory sizes
+    // Check if computeMinSize is an acceptable value
+    const isMinSizeValid = computeOptions.some(
+      (option) => option.value === computeMinSize
+    )
+
+    // Check if computeMaxSize is an acceptable value
+    const isMaxSizeValid = computeOptions.some(
+      (option) => option.value === computeMaxSize
+    )
+
+    if (tier === 'Production') {
+      // Check if computeMinSize is in the list of acceptable options
+      if (!isMinSizeValid) {
+        // Set a default value for computeMinSize
+        router.push(
+          {
+            query: {
+              ...router.query,
+              computeMinSize: 24
+            }
+          },
+          undefined,
+          { shallow: true }
+        )
+      }
+
+      // Check if computeMaxSize is in the list of acceptable options
+      if (!isMaxSizeValid) {
+        // Set a default value for computeMaxSize
+        router.push(
+          {
+            query: {
+              ...router.query,
+              computeMaxSize: 48
+            }
+          },
+          undefined,
+          { shallow: true }
+        )
+      }
+
+      if (
+        computeMinSize > computeMaxSize &&
+        computeMinSize !== computeMaxSize
+      ) {
+        setMemoryError(
+          'Please make sure that minimum size is less than max size.'
+        )
+      }
+    }
+
     // Load the data whenever the provider, region or tier change.
     const m3terQuery = new URLSearchParams({
       provider,
       region,
       tier
     })
-
+    setPricingData({ computeUnitPrice: 0.00182, storageUnitPrice: 6.85e-7 })
     setIsLoading(false)
-  }, [tier, provider, region, hours, storage, minCompute, maxCompute])
+  }, [tier, provider, region, hours, storage, computeMinSize, computeMaxSize])
 
   const storageAfterCompression = storage / 10
 
@@ -194,12 +280,12 @@ export const PricingCalculator: React.FC<{
       return {
         minComputeCost: calculateComputeCost(
           pricingData.computeUnitPrice,
-          minCompute,
+          computeMaxSize,
           hours
         ),
         maxComputeCost: calculateComputeCost(
           pricingData.computeUnitPrice,
-          maxCompute,
+          computeMaxSize,
           hours
         ),
         storageCost: calculateStorageCost(
@@ -209,8 +295,8 @@ export const PricingCalculator: React.FC<{
       }
     }
   }, [
-    minCompute,
-    maxCompute,
+    computeMinSize,
+    computeMaxSize,
     storageAfterCompression,
     hours,
     tier,
@@ -260,21 +346,32 @@ export const PricingCalculator: React.FC<{
 
         {tier === 'Production' && (
           <>
-            <div className={styles.sizes}>
-              <FormControl label='Minimum size'>
-                <NumericSelect
-                  id='computeMinSize'
-                  options={computeOptions}
-                  value={minCompute}
-                />
-              </FormControl>
-              <FormControl label='Maximum size'>
-                <NumericSelect
-                  id='computeMaxSize'
-                  options={computeOptions}
-                  value={maxCompute}
-                />
-              </FormControl>
+            <div>
+              <div className={styles.sizes}>
+                <FormControl label='Minimum size' marginBottom={false}>
+                  <NumericSelect
+                    id='computeMinSize'
+                    options={computeOptions}
+                    value={computeMinSize}
+                  />
+                </FormControl>
+                <FormControl label='Maximum size' marginBottom={false}>
+                  <NumericSelect
+                    id='computeMaxSize'
+                    options={computeOptions}
+                    value={computeMaxSize}
+                  />
+                </FormControl>
+              </div>
+              {!memoryError && (
+                <div className='mt-3 text-xs'>
+                  Your service will autoscale between {computeMinSize} GiB and{' '}
+                  {computeMaxSize}
+                  GiB of RAM depending on your workload
+                </div>
+              )}
+
+              <div className='mt-3 text-xs'>{memoryError && memoryError}</div>
             </div>
           </>
         )}

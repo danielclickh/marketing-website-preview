@@ -8,16 +8,22 @@ export interface FormControlProps {
   label: string
   helpText?: string
   tooltip?: string
+  errorText?: string
+  marginBottom?: boolean
+  id?: string
 }
 
 export const FormControl: React.FC<FormControlProps> = ({
   label,
   helpText,
   children,
-  tooltip
+  tooltip,
+  errorText,
+  marginBottom = true,
+  id
 }) => {
   return (
-    <div className='mb-10'>
+    <div className={marginBottom ? 'mb-10' : ''} id={id ? id : ''}>
       <div className='mb-2 flex items-center gap-x-3'>
         <label className='block text-xs font-bold text-[#B3B6BD]'>
           {label}
@@ -26,6 +32,7 @@ export const FormControl: React.FC<FormControlProps> = ({
       </div>
       {children}
       {helpText && <p className={styles.helpText}>{helpText}</p>}
+      {errorText && <p className={styles.helpText}>{errorText}</p>}
     </div>
   )
 }

@@ -129,7 +129,7 @@ function PricingPage({
             <SuiTitle type='h2' className='pb-16 text-center'>
               Estimate your monthly cost
             </SuiTitle>
-            <div className='mx-auto max-w-5xl'>
+            <div className='mx-auto max-w-5xl px-4 sm:px-8 2xl:px-0'>
               {pricingByRegion.length > 0 && (
                 <PricingCalculator
                   pricingByRegion={pricingByRegion}
