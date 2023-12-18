@@ -25,7 +25,7 @@ function PricingSelector({
   return (
     <Listbox value={selectedRegion} onChange={listValueChange}>
       <div className='relative'>
-        <Listbox.Button className='relative w-full cursor-default rounded-[4px] border border-neutral-725 bg-neutral-725 py-2 pl-3 pr-10 text-left shadow-input hover:cursor-pointer focus:outline-none data-[headlessui-state=open]:rounded-b-none data-[headlessui-state=open]:border-primary-300 sm:text-sm'>
+        <Listbox.Button className='relative w-full cursor-default rounded-[4px] border border-primary-600 bg-neutral-750 py-2 pl-3 pr-10 text-left shadow-input transition-all delay-75 hover:cursor-pointer hover:border-primary-300 hover:bg-neutral-725 focus:outline-none data-[headlessui-state=open]:rounded-b-none data-[headlessui-state=open]:border-primary-300 sm:text-sm'>
           <span className='flex gap-3 truncate'>
             <>
               {selectedRegion?.regionFlagPNG}

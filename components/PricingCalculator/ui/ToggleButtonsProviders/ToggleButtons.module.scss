@@ -2,7 +2,7 @@
   @apply flex gap-5;
 
   button {
-    @apply transition-all delay-75 text-sm font-medium rounded-[4px] border border-transparent hover:border-neutral-600 hover:border bg-neutral-725 px-4 py-2;
+    @apply transition-all delay-75 text-sm font-medium rounded-[4px] border border-primary-600 hover:bg-neutral-725 hover:bg-opacity-100 hover:border-primary-300 bg-neutral-750 px-4 py-2;
 
     &.selected {
      @apply border-primary-300 border;
