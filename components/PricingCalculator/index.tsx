@@ -230,6 +230,20 @@ export const PricingCalculator: React.FC<{
       (option) => option.value === computeMaxSize
     )
 
+    if (tier === 'Development') {
+      delete router.query.computeMaxSize
+      delete router.query.computeMinSize
+      router.push(
+        {
+          query: {
+            ...router.query
+          }
+        },
+        undefined,
+        { shallow: true }
+      )
+    }
+
     if (tier === 'Production') {
       // Check if computeMinSize is in the list of acceptable options
       if (!isMinSizeValid) {
@@ -310,6 +324,21 @@ export const PricingCalculator: React.FC<{
       setIsLoading(false)
     }
     setIsLoading(false)
+    if (costData) {
+      if (tier === 'Production') {
+        if (
+          costData.minComputeCost &&
+          costData.maxComputeCost &&
+          costData.storageCost &&
+          (costData.minComputeCost + costData.storageCost > 2000 ||
+            costData.maxComputeCost + costData.storageCost > 2000)
+        ) {
+          setContactSales('Contact sales for pricing') // Set contactSales if the combined cost exceeds 2000
+        } else {
+          setContactSales(undefined)
+        }
+      }
+    }
   }, [tier, provider, region, hours, storage, computeMinSize, computeMaxSize])
 
   const storageAfterCompression = storage / 10
@@ -359,15 +388,6 @@ export const PricingCalculator: React.FC<{
     tier,
     pricingData
   ])
-
-  if (costData) {
-    if (
-      Number((costData.minComputeCost! + costData.storageCost).toFixed(0)) >=
-      2000
-    ) {
-      setContactSales('Contact sales')
-    }
-  }
 
   return (
     <div className={styles.wrapper}>
@@ -475,7 +495,18 @@ export const PricingCalculator: React.FC<{
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
-                    {contactSales && <>hey</>}
+                    {contactSales && (
+                      <>
+                        <p className='mb-2 font-basier text-[64px] font-bold text-white'>
+                          Contact us
+                        </p>
+                        <p className='mb-8 text-base text-[#B3B6BD]'>
+                          You’re eligible for custom quotes.
+                          <br />
+                          Contact us for more details.
+                        </p>
+                      </>
+                    )}
                     {!contactSales && (
                       <p className='mb-8 font-basier text-[64px] font-bold text-white'>
                         $
@@ -490,6 +521,8 @@ export const PricingCalculator: React.FC<{
                     )}
 
                     <CTAButtons
+                      contactSales={contactSales}
+                      tier={tier}
                       computeCostMin={Number(
                         costData.minComputeCost!.toFixed(2)
                       )}
