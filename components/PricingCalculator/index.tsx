@@ -513,10 +513,19 @@ export const PricingCalculator: React.FC<{
                         {(
                           costData.minComputeCost! + costData.storageCost
                         ).toFixed(0)}{' '}
-                        - $
                         {(
-                          costData.maxComputeCost! + costData.storageCost
-                        ).toFixed(0)}
+                          costData.minComputeCost! + costData.storageCost
+                        ).toFixed(0) !==
+                          (
+                            costData.maxComputeCost! + costData.storageCost
+                          ).toFixed(0) && (
+                          <>
+                            - $
+                            {(
+                              costData.maxComputeCost! + costData.storageCost
+                            ).toFixed(0)}
+                          </>
+                        )}
                       </p>
                     )}
 
