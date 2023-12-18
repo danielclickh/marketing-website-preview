@@ -1,16 +1,15 @@
-import { SuiText, SuiTitle } from '../../../components/sui'
-
-import { findOne } from '../../../lib/api/strapi'
-import GrowingCommunity from '../../../components/GrowingCommunity'
-import ContactForm from '../../../components/ContactForm'
-import GetStarted from '../../../components/GetStarted'
-import Markdown from '../../../components/Markdown'
 import { GetStaticProps } from 'next'
-import { ContactProps } from '../../../types/contact'
-import Layout from '../../../components/Layout'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import ContactForm from '../../../components/ContactForm'
+import GrowingCommunity from '../../../components/GrowingCommunity'
 import HRSeparator from '../../../components/HRSeparator'
-import { useState } from 'react'
+import Layout from '../../../components/Layout'
+import Markdown from '../../../components/Markdown'
+import { SuiTitle } from '../../../components/sui'
+import { findOne } from '../../../lib/api/strapi'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { ContactProps } from '../../../types/contact'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -37,7 +36,15 @@ export default function ContactPage({
   headerData,
   seo
 }: ContactProps) {
+  const router = useRouter()
   const [formSuccessful, setFormSuccessful] = useState(false)
+
+  useEffect(() => {
+    if (router.query.custom) {
+      contactForm.customPricingQoute = JSON.stringify(router.query)
+    }
+  }, [router.query])
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-10'>
@@ -50,15 +57,18 @@ export default function ContactPage({
           </div>
           <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pt-14 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
             <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
+              <ContactForm
+                {...contactForm}
+                onSuccess={() => setFormSuccessful(true)}
+              />
 
-              <ContactForm {...contactForm} onSuccess={() => setFormSuccessful(true)} />
-
-              {!formSuccessful && <div className='flex text-center'>
-                <div className='text-sm font-medium text-neutral-200'>
-                  <Markdown>{contactForm.disclaimer}</Markdown>
+              {!formSuccessful && (
+                <div className='flex text-center'>
+                  <div className='text-sm font-medium text-neutral-200'>
+                    <Markdown>{contactForm.disclaimer}</Markdown>
+                  </div>
                 </div>
-              </div>}
-
+              )}
             </div>
           </div>
         </div>

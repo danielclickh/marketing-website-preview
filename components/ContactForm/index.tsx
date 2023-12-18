@@ -1,5 +1,4 @@
 import { FocusEvent, FormEvent, useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/router'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import { ContactFormProps } from '../../types/contact'
@@ -20,10 +19,9 @@ function ContactForm({
   messageLabel,
   submitButtonLabel,
   thankYouMessage,
-
+  customPricingQoute,
   onSuccess
 }: ContactFormProps) {
-  const router = useRouter()
   const { openSnackBar } = useSnackbar()
   const [firstName, setFirstName] = useState<string>()
   const [lastName, setLastName] = useState<string>()
@@ -35,6 +33,20 @@ function ContactForm({
   const [formProcessing, setFormProcessing] = useState(false)
   const [submissionSuccessful, setSubmissionSuccessful] = useState(false)
 
+  useEffect(() => {
+    if (customPricingQoute) {
+      messageLabel = 'Tell us about your pricing'
+
+      const customPricingQouteObj = JSON.parse(customPricingQoute)
+      setUseCase(`Custom pricing quote:
+Tier: ${customPricingQouteObj.tier}
+Provider: ${customPricingQouteObj.provider.toUpperCase()}
+Region: ${customPricingQouteObj.region}
+Active hours: ${customPricingQouteObj.hours}
+Compute size: ${customPricingQouteObj.maxMemory}`)
+    }
+  })
+
   const onChange = (
     e:
       | FormEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -42,6 +54,7 @@ function ContactForm({
   ) => {
     const value = (e.target as any).value ?? ''
     const name = (e.target as any).name
+
     switch (name) {
       case 'firstName':
         setFirstName(value)
@@ -127,10 +140,6 @@ function ContactForm({
     setFormProcessing(false)
 
     submitRef.current = false
-
-    useEffect(() => {
-      console.log(router.query)
-    })
   }
   return (
     <>
