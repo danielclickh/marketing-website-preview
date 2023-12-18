@@ -16,7 +16,7 @@ function InfoTooltip({ content }: { content: string }) {
             className='cursor-pointer appearance-none align-middle'
             tabIndex={0}>
             <InformationCircleIcon
-              className='h-3.5 w-3.5'
+              className='h-4 w-4'
               onClick={(e) => e.preventDefault()}
             />
           </button>
@@ -46,10 +46,8 @@ function Info({ unit, content }: { unit: string; content: string }) {
     <div
       className='flex flex-wrap items-center gap-1 text-xs font-medium text-neutral-0/50'
       onClick={toggle}>
-      {unit}
-      <div className='hidden leading-none lg:block'>
-        <InfoTooltip content={content} />
-      </div>
+      <span className='mt-2 text-[14px] text-[#DFDFDF]'>{unit}</span>
+      <div className='mt-2 hidden lg:block'>{content}</div>
       <span className='lg:hidden'>
         <InformationCircleIcon className='h-3.5 w-3.5' />
       </span>
@@ -80,7 +78,7 @@ function ShowPricing({ isFirst }: { isFirst: boolean }) {
 
   return (
     <div className='mt-8 flex items-stretch justify-center gap-4 pb-6 text-left text-neutral-0 xl:gap-8 '>
-      <div className='shrink grow basis-0 xl:max-w-[100px]'>
+      <div className='shrink grow basis-0'>
         <h5 className='mb-2 text-sm font-bold'>Storage</h5>
         <div className='whitespace-nowrap text-2.75xl font-semibold'>
           ${storage.priceUSD}
@@ -90,7 +88,7 @@ function ShowPricing({ isFirst }: { isFirst: boolean }) {
 
       <div className='shrink-0 grow-0 border-r border-neutral-725' />
 
-      <div className='shrink grow basis-0 xl:max-w-[100px]'>
+      <div className='shrink grow basis-0'>
         <h5 className='mb-2 text-sm font-bold'>Compute</h5>
         <div className='whitespace-nowrap text-2.75xl font-semibold'>
           ${compute.priceUSD}

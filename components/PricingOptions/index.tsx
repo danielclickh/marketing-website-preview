@@ -250,13 +250,37 @@ function PricingOptions({
                           <ShowPricing isFirst={index === 0} />
                         )}
                         {plan.actionButton && (
-                          <PricingButton
-                            isFirst={true}
-                            isLast={index !== plans.length - 1}
-                            path={plan.actionButton.link}
-                            btnText={plan.actionButton.text}
-                            index={index}
-                          />
+                          <>
+                            <PricingButton
+                              isFirst={true}
+                              isLast={index !== plans.length - 1}
+                              path={plan.actionButton.link}
+                              btnText={plan.actionButton.text}
+                              index={index}
+                            />
+                            {plan.name === 'Development' && (
+                              <>
+                                <CUIButton
+                                  href='/pricing?tier=Development#pricing-calculator'
+                                  weight='medium'
+                                  className='stroked_button_wrapper button_wrapper mt-4 w-full'
+                                  type='secondary'>
+                                  Estimate your monthly cost ↓
+                                </CUIButton>
+                              </>
+                            )}
+                            {plan.name === 'Production' && (
+                              <>
+                                <CUIButton
+                                  href='/pricing?tier=Production#pricing-calculator'
+                                  weight='medium'
+                                  className='stroked_button_wrapper button_wrapper mt-4 w-full'
+                                  type='secondary'>
+                                  Estimate your monthly cost ↓
+                                </CUIButton>
+                              </>
+                            )}
+                          </>
                         )}
                       </div>
                     </div>

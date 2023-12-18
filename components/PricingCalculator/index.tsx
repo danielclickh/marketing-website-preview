@@ -479,7 +479,7 @@ export const PricingCalculator: React.FC<{
               <div className='mt-2'>
                 {tier === 'Development' ? (
                   <React.Fragment>
-                    <p className='mb-8 font-basier text-[64px] font-bold text-white'>
+                    <p className='mb-8 font-basier text-[60px] font-bold text-white'>
                       $
                       {(costData.computeCost! + costData.storageCost).toFixed(
                         0
@@ -497,7 +497,7 @@ export const PricingCalculator: React.FC<{
                   <React.Fragment>
                     {contactSales && (
                       <>
-                        <p className='mb-2 font-basier text-[64px] font-bold text-white'>
+                        <p className='mb-2 font-basier text-[60px] font-bold text-white'>
                           Contact us
                         </p>
                         <p className='mb-8 text-base text-[#B3B6BD]'>
@@ -508,7 +508,7 @@ export const PricingCalculator: React.FC<{
                       </>
                     )}
                     {!contactSales && (
-                      <p className='mb-8 font-basier text-[64px] font-bold text-white'>
+                      <p className='mb-8 font-basier text-[60px] font-bold text-white'>
                         $
                         {(
                           costData.minComputeCost! + costData.storageCost
