@@ -4,18 +4,21 @@ import { Select } from '../Select/Select' // Assuming SelectProps is imported co
 export interface Option {
   value: number
   label: string
+  tier?: string
 }
 
 export interface NumericSelectProps {
   options: Array<Option>
   value: number
   id?: string
+  disabled?: boolean
 }
 
 export const NumericSelect: React.FC<NumericSelectProps> = ({
   options,
   value,
-  id
+  id,
+  disabled
 }) => {
   const optionsAsStrings = useMemo(
     () =>
@@ -26,5 +29,12 @@ export const NumericSelect: React.FC<NumericSelectProps> = ({
     [options]
   )
 
-  return <Select id={id} options={optionsAsStrings} value={value.toString()} />
+  return (
+    <Select
+      disabled={disabled}
+      id={id}
+      options={optionsAsStrings}
+      value={value.toString()}
+    />
+  )
 }

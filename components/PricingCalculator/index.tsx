@@ -74,12 +74,13 @@ const dataOptions: Array<NumericSelectOption> = [
 ]
 
 const computeOptions: Array<NumericSelectOption> = [
-  { value: 24, label: '24 GiB RAM, 6 vCPU' },
-  { value: 48, label: '48 GiB RAM, 12 vCPU' },
-  { value: 96, label: '96 GiB RAM, 24 vCPU' },
-  { value: 192, label: '192 GiB RAM, 48 vCPU' },
-  { value: 360, label: '360 GiB RAM, 96 vCPU' },
-  { value: 720, label: '720 GiB RAM, 192 vCPU' }
+  { value: 16, label: '16 GiB RAM, 2 vCPU', tier: 'Development' },
+  { value: 24, label: '24 GiB RAM, 6 vCPU', tier: 'Production' },
+  { value: 48, label: '48 GiB RAM, 12 vCPU', tier: 'Production' },
+  { value: 96, label: '96 GiB RAM, 24 vCPU', tier: 'Production' },
+  { value: 192, label: '192 GiB RAM, 48 vCPU', tier: 'Production' },
+  { value: 360, label: '360 GiB RAM, 96 vCPU', tier: 'Production' },
+  { value: 720, label: '720 GiB RAM, 192 vCPU', tier: 'Production' }
 ]
 
 const config = {
@@ -232,7 +233,6 @@ export const PricingCalculator: React.FC<{
 
     if (tier === 'Development') {
       delete router.query.computeMaxSize
-      delete router.query.computeMinSize
       router.push(
         {
           query: {
@@ -242,11 +242,23 @@ export const PricingCalculator: React.FC<{
         undefined,
         { shallow: true }
       )
+      if (computeMinSize > 16) {
+        router.push(
+          {
+            query: {
+              ...router.query,
+              computeMinSize: 16
+            }
+          },
+          undefined,
+          { shallow: true }
+        )
+      }
     }
 
     if (tier === 'Production') {
       // Check if computeMinSize is in the list of acceptable options
-      if (!isMinSizeValid) {
+      if (!isMinSizeValid || computeMinSize < 24) {
         // Set a default value for computeMinSize
         router.push(
           {
@@ -425,6 +437,20 @@ export const PricingCalculator: React.FC<{
             value={storage}
           />
         </FormControl>
+        {tier === 'Development' && (
+          <FormControl
+            label='Compute size - not editable in development instances'
+            marginBottom={false}>
+            <NumericSelect
+              id='computeMinSize'
+              options={computeOptions.filter(
+                (option) => option.tier === 'Development'
+              )}
+              value={computeMinSize}
+              disabled={true}
+            />
+          </FormControl>
+        )}
 
         {tier === 'Production' && (
           <>
@@ -433,14 +459,18 @@ export const PricingCalculator: React.FC<{
                 <FormControl label='Minimum size' marginBottom={false}>
                   <NumericSelect
                     id='computeMinSize'
-                    options={computeOptions}
+                    options={computeOptions.filter(
+                      (option) => option.tier === 'Production'
+                    )}
                     value={computeMinSize}
                   />
                 </FormControl>
                 <FormControl label='Maximum size' marginBottom={false}>
                   <NumericSelect
                     id='computeMaxSize'
-                    options={computeOptions}
+                    options={computeOptions.filter(
+                      (option) => option.tier === 'Production'
+                    )}
                     value={computeMaxSize}
                   />
                 </FormControl>

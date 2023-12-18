@@ -193,6 +193,7 @@ export default function CTAButtons({
               <p>
                 ${computeCostMin}
                 {computeCostMax !== 0 &&
+                  tier === 'Production' &&
                   computeCostMax !== computeCostMin &&
                   ` - $${computeCostMax}`}{' '}
                 for compute

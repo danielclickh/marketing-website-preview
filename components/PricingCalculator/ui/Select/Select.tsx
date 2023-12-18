@@ -13,9 +13,15 @@ export interface SelectProps {
   options: Array<Option>
   value: string
   id?: string
+  disabled?: boolean
 }
 
-export const Select: React.FC<SelectProps> = ({ options, value, id }) => {
+export const Select: React.FC<SelectProps> = ({
+  options,
+  value,
+  id,
+  disabled = false
+}) => {
   const router = useRouter()
   const selectedOption = options.find((option) => option.value === value)
 
@@ -60,15 +66,28 @@ export const Select: React.FC<SelectProps> = ({ options, value, id }) => {
 
   return (
     <>
-      <Listbox value={value} onChange={handleChange} as='div' id={id}>
+      <Listbox
+        value={value}
+        onChange={handleChange}
+        as='div'
+        id={id}
+        disabled={disabled}
+        className=''>
         <div className='relative'>
-          <Listbox.Button className='relative w-full cursor-default rounded-[4px] border border-neutral-725 bg-neutral-725 py-2 pl-3 pr-10 text-left shadow-input hover:cursor-pointer focus:outline-none data-[headlessui-state=open]:rounded-b-none data-[headlessui-state=open]:border-primary-300 sm:text-sm'>
+          <Listbox.Button className='relative w-full cursor-default rounded-[4px] border border-neutral-725 bg-neutral-725 py-2 pl-3 pr-10 text-left shadow-input hover:cursor-pointer focus:outline-none disabled:cursor-auto data-[headlessui-state=open]:rounded-b-none data-[headlessui-state=open]:border-primary-300 sm:text-sm'>
             <span className='flex gap-3 truncate'>
-              <>{selectedOption ? selectedOption.label : ''}</>
+              <span className={disabled ? 'text-neutral-300' : ''}>
+                {selectedOption ? selectedOption.label : ''}
+              </span>
             </span>
-            <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
-              <ChevronDownIcon className='h-5 w-5 text-c4' aria-hidden='true' />
-            </span>
+            {!disabled && (
+              <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
+                <ChevronDownIcon
+                  className='h-5 w-5 text-c4'
+                  aria-hidden='true'
+                />
+              </span>
+            )}
           </Listbox.Button>
           <Listbox.Options className='absolute z-10 -mt-1 w-full overflow-auto rounded-md rounded-t-none border border-t-0 border-primary-300 bg-neutral-725 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
             {options.map((item, index) => (
