@@ -516,6 +516,10 @@ export const PricingCalculator: React.FC<{
                       )}
                     </p>
                     <CTAButtons
+                      tier={tier}
+                      provider={provider}
+                      region={region}
+                      hours={hours}
                       computeCostMin={Number(costData.computeCost?.toFixed(2))}
                       storageCost={Number(costData.storageCost?.toFixed(2))}
                       minMemory={Number(computeMinSize)}
@@ -562,6 +566,12 @@ export const PricingCalculator: React.FC<{
                     <CTAButtons
                       contactSales={contactSales}
                       tier={tier}
+                      hours={hours}
+                      region={region}
+                      provider={provider}
+                      minMemory={computeMinSize}
+                      maxMemory={computeMaxSize}
+                      storageSize={storage}
                       computeCostMin={Number(
                         costData.minComputeCost!.toFixed(2)
                       )}

@@ -1,4 +1,5 @@
-import React, { FocusEvent, FormEvent, useRef, useState } from 'react'
+import { FocusEvent, FormEvent, useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/router'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import { ContactFormProps } from '../../types/contact'
@@ -22,6 +23,7 @@ function ContactForm({
 
   onSuccess
 }: ContactFormProps) {
+  const router = useRouter()
   const { openSnackBar } = useSnackbar()
   const [firstName, setFirstName] = useState<string>()
   const [lastName, setLastName] = useState<string>()
@@ -125,6 +127,10 @@ function ContactForm({
     setFormProcessing(false)
 
     submitRef.current = false
+
+    useEffect(() => {
+      console.log(router.query)
+    })
   }
   return (
     <>

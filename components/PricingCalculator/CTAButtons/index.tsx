@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { CUIButton } from '../../ClickUI'
 
 export default function CTAButtons({
@@ -9,7 +10,10 @@ export default function CTAButtons({
   computeCostMax,
   storageSize,
   minMemory,
-  maxMemory
+  maxMemory,
+  provider,
+  region,
+  hours
 }: {
   contactSales?: string
   tier?: string
@@ -19,7 +23,11 @@ export default function CTAButtons({
   storageSize?: number
   minMemory?: number
   maxMemory?: number
+  provider?: string
+  region?: string
+  hours?: number
 }) {
+  const router = useRouter()
   const [isCopied, setIsCopied] = useState(false)
   const [share, setShare] = useState('Share')
   const [availabilityZones, setAvailabilityZones] = useState(2)
@@ -66,7 +74,20 @@ export default function CTAButtons({
               type='primary'
               size='lg'
               weight='semibold'
-              href='https://clickhouse.cloud/signUp?loc=pricing-calculator'
+              onClick={() => {
+                router.push('/company/contact', {
+                  query: {
+                    custom: true,
+                    tier,
+                    storageSize,
+                    minMemory,
+                    maxMemory,
+                    provider,
+                    region,
+                    hours
+                  }
+                })
+              }}
               linkClass='w-full'
               className='w-full'>
               <span className='text-sm'>Get custom quote</span>
@@ -142,9 +163,21 @@ export default function CTAButtons({
             type='secondary'
             size='lg'
             weight='semibold'
-            href='/company/contact?loc=pricing-calculator'
             linkClass='w-full'
-            className='w-full'>
+            className='w-full'
+            onClick={() => {
+              router.push('/company/contact', {
+                query: {
+                  tier,
+                  storageSize,
+                  minMemory,
+                  maxMemory,
+                  provider,
+                  region,
+                  hours
+                }
+              })
+            }}>
             <span className='text-sm'>Contact us</span>
           </CUIButton>
         )}
