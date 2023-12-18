@@ -360,6 +360,15 @@ export const PricingCalculator: React.FC<{
     pricingData
   ])
 
+  if (costData) {
+    if (
+      Number((costData.minComputeCost! + costData.storageCost).toFixed(0)) >=
+      2000
+    ) {
+      setContactSales('Contact sales')
+    }
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.options}>
@@ -466,16 +475,19 @@ export const PricingCalculator: React.FC<{
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
-                    <p className='mb-8 font-basier text-[64px] font-bold text-white'>
-                      $
-                      {(
-                        costData.minComputeCost! + costData.storageCost
-                      ).toFixed(0)}{' '}
-                      - $
-                      {(
-                        costData.maxComputeCost! + costData.storageCost
-                      ).toFixed(0)}
-                    </p>
+                    {contactSales && <>hey</>}
+                    {!contactSales && (
+                      <p className='mb-8 font-basier text-[64px] font-bold text-white'>
+                        $
+                        {(
+                          costData.minComputeCost! + costData.storageCost
+                        ).toFixed(0)}{' '}
+                        - $
+                        {(
+                          costData.maxComputeCost! + costData.storageCost
+                        ).toFixed(0)}
+                      </p>
+                    )}
 
                     <CTAButtons
                       computeCostMin={Number(
