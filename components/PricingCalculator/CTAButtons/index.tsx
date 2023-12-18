@@ -75,7 +75,8 @@ export default function CTAButtons({
               size='lg'
               weight='semibold'
               onClick={() => {
-                router.push('/company/contact', {
+                router.push({
+                  pathname: '/company/contact',
                   query: {
                     custom: true,
                     tier,
@@ -166,8 +167,10 @@ export default function CTAButtons({
             linkClass='w-full'
             className='w-full'
             onClick={() => {
-              router.push('/company/contact', {
+              router.push({
+                pathname: '/company/contact',
                 query: {
+                  custom: true,
                   tier,
                   storageSize,
                   minMemory,
