@@ -3,7 +3,7 @@
         "id": 20,
         "title": "Cloudflare",
         "logo": "/images/Cloudflare_Logo-grey.svg",
-        "content": "ClickHouse was open sourced in 2016, and we were running in production by the end of that year, so we've been long term users. Since then we've scaled up exponentially. This year we actually exceeded a thousand active replicas. That's **processing hundreds of millions of inserted rows every second**, which actually corresponds to quite a significantly larger number of events because we've been using a lot of sampling.",
+        "content": "This year we actually exceeded a thousand active replicas. That's **processing hundreds of millions of inserted rows every second**, which actually corresponds to quite a significantly larger number of events because we've been using a lot of sampling.",
         "target": "_self",
         "imgWidth": 123,
         "imgHeight": 41
