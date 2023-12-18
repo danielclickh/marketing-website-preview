@@ -78,6 +78,7 @@ export default function CTAButtons({
                 router.push({
                   pathname: '/company/contact',
                   query: {
+                    ...router.query,
                     custom: true,
                     tier,
                     storageSize,

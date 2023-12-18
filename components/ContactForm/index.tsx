@@ -1,4 +1,6 @@
 import { FocusEvent, FormEvent, useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/router'
+
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import { ContactFormProps } from '../../types/contact'
@@ -19,7 +21,7 @@ function ContactForm({
   messageLabel,
   submitButtonLabel,
   thankYouMessage,
-  customPricingQoute,
+  customPricingQuote,
   onSuccess
 }: ContactFormProps) {
   const { openSnackBar } = useSnackbar()
@@ -33,19 +35,20 @@ function ContactForm({
   const [formProcessing, setFormProcessing] = useState(false)
   const [submissionSuccessful, setSubmissionSuccessful] = useState(false)
 
+  const router = useRouter()
   useEffect(() => {
-    if (customPricingQoute) {
-      messageLabel = 'Tell us about your pricing'
-
-      const customPricingQouteObj = JSON.parse(customPricingQoute)
-      setUseCase(`Custom pricing quote:
-Tier: ${customPricingQouteObj.tier}
-Provider: ${customPricingQouteObj.provider.toUpperCase()}
-Region: ${customPricingQouteObj.region}
-Active hours: ${customPricingQouteObj.hours}
-Compute size: ${customPricingQouteObj.maxMemory}`)
+    if (router.query.custom) {
+      const customPricingQuoteObj = router.query
+      setUseCase(`Custom pricing request
+Tier: ${customPricingQuoteObj.tier}
+Provider: ${customPricingQuoteObj.provider}
+Region: ${customPricingQuoteObj.region}
+Active hours: ${customPricingQuoteObj.hours}
+Data volume: ${customPricingQuoteObj.storageSize}
+Compute: ${customPricingQuoteObj.minMemory}GiB ${customPricingQuoteObj.maxMemory}GiB
+`)
     }
-  })
+  }, [router.query])
 
   const onChange = (
     e:
@@ -141,6 +144,7 @@ Compute size: ${customPricingQouteObj.maxMemory}`)
 
     submitRef.current = false
   }
+
   return (
     <>
       <div className={submissionSuccessful ? 'hidden' : ''}>

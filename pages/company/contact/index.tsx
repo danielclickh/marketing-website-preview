@@ -1,6 +1,5 @@
 import { GetStaticProps } from 'next'
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
 import ContactForm from '../../../components/ContactForm'
 import GrowingCommunity from '../../../components/GrowingCommunity'
 import HRSeparator from '../../../components/HRSeparator'
@@ -36,14 +35,7 @@ export default function ContactPage({
   headerData,
   seo
 }: ContactProps) {
-  const router = useRouter()
   const [formSuccessful, setFormSuccessful] = useState(false)
-
-  useEffect(() => {
-    if (router.query.custom) {
-      contactForm.customPricingQoute = JSON.stringify(router.query)
-    }
-  }, [router.query])
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
