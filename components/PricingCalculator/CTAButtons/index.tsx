@@ -192,7 +192,10 @@ export default function CTAButtons({
               </svg>
               <p>
                 ${computeCostMin}
-                {computeCostMax !== 0 && ` - $${computeCostMax}`} for compute
+                {computeCostMax !== 0 &&
+                  computeCostMax !== computeCostMin &&
+                  ` - $${computeCostMax}`}{' '}
+                for compute
               </p>
             </div>
           </li>
