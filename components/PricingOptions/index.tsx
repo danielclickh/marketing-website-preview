@@ -261,8 +261,20 @@ function PricingOptions({
                             {plan.name === 'Development' && (
                               <>
                                 <CUIButton
-                                  href='/pricing?tier=Development#pricing-calculator'
                                   weight='medium'
+                                  onClick={() => {
+                                    router.push(
+                                      {
+                                        hash: 'pricing-calculator',
+                                        query: {
+                                          ...router.query,
+                                          tier: 'Development'
+                                        }
+                                      },
+                                      undefined,
+                                      { shallow: true }
+                                    )
+                                  }}
                                   className='stroked_button_wrapper button_wrapper mt-4 w-full'
                                   type='secondary'>
                                   Estimate your monthly cost ↓
@@ -272,7 +284,19 @@ function PricingOptions({
                             {plan.name === 'Production' && (
                               <>
                                 <CUIButton
-                                  href='/pricing?tier=Production#pricing-calculator'
+                                  onClick={() => {
+                                    router.push(
+                                      {
+                                        hash: 'pricing-calculator',
+                                        query: {
+                                          ...router.query,
+                                          tier: 'Production'
+                                        }
+                                      },
+                                      undefined,
+                                      { shallow: true }
+                                    )
+                                  }}
                                   weight='medium'
                                   className='stroked_button_wrapper button_wrapper mt-4 w-full'
                                   type='secondary'>
