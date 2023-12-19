@@ -26,7 +26,7 @@ export function ToggleButtons<T extends string = string>({
           className={`flex gap-2 rounded-[4px] bg-neutral-750 py-2 px-10 text-sm font-medium transition-all delay-75 hover:cursor-pointer hover:border hover:border-primary-300 hover:bg-neutral-725 ${
             value === option.value
               ? 'border border-primary-300'
-              : 'border border-primary-600'
+              : 'border border-neutral-700'
           }`}
           onClick={() => {
             router.push(
