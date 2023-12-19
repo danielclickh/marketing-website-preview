@@ -77,6 +77,9 @@ function generateSiteMap(
       <loc>${siteURL}/videos</loc>
     </url>
     <url>
+        <loc>${siteURL}/integrations</loc>
+    </url>
+    <url>
         <loc>${siteURL}/monitorama-2023</loc>
     </url>
     <url>
