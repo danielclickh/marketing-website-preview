@@ -267,12 +267,10 @@ export const PricingCalculator: React.FC<{
           storageUnitPrice = matchingPlan.pricingBands[0].unitPrice
         }
       })
-      console.log({ computeUnitPrice, storageUnitPrice })
       // Set pricingData with the computed unit prices
       setPricingData({ computeUnitPrice, storageUnitPrice })
       setIsLoading(false)
     } else {
-      console.log('No matching pricing plans found for the specified criteria.')
       setIsLoading(false)
     }
     setIsLoading(false)
