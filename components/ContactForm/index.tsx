@@ -49,7 +49,9 @@ function ContactForm({
           memory = `${customPricingQuoteObj.minMemory}GiB - ${customPricingQuoteObj.maxMemory}GiB`
         }
       }
-      setUseCase(`Custom pricing request
+      setUseCase(`
+
+=== Custom pricing request ===
 Service type: ${customPricingQuoteObj.tier}
 Provider: ${customPricingQuoteObj.provider}
 Region: ${customPricingQuoteObj.region}
