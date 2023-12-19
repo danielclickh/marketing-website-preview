@@ -6,7 +6,7 @@ const TooltipInfo = ({ content }: { content: string }) => {
     <Tooltip.Provider delayDuration={0} disableHoverableContent={false}>
       <Tooltip.Root>
         <Tooltip.Trigger asChild>
-          <button className='inline-flex h-[20px] w-[20px] items-center justify-center rounded-full text-[#B3B6BD] outline-none'>
+          <button className='inline-flex h-[16px] w-[16px] items-center justify-center rounded-full text-[#B3B6BD] outline-none'>
             <InformationCircleIcon />
           </button>
         </Tooltip.Trigger>
