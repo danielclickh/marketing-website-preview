@@ -7,7 +7,7 @@ const TooltipInfo = ({ content }: { content: string }) => {
       <Tooltip.Root>
         <Tooltip.Trigger asChild>
           <button className='inline-flex h-[16px] w-[16px] items-center justify-center rounded-full text-[#B3B6BD] outline-none'>
-            <InformationCircleIcon />
+            <InformationCircleIcon className='h-[16px] w-[16px]' />
           </button>
         </Tooltip.Trigger>
         <Tooltip.Portal>
