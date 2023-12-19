@@ -370,7 +370,8 @@ export const PricingCalculator: React.FC<{
         {tier === 'Development' && (
           <FormControl
             label='Compute size - not editable in development instances'
-            marginBottom={true}>
+            marginBottom={true}
+            helpText='There is no auto-scaling with development service'>
             <NumericSelect
               id='computeMinSize'
               options={computeOptions.filter(
