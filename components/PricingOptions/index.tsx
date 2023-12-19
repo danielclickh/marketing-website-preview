@@ -245,6 +245,7 @@ function PricingOptions({
                           )}
                         </div>
                       </div>
+
                       <div className='p-6 pt-0'>
                         {index !== plans.length - 1 && (
                           <ShowPricing isFirst={index === 0} />

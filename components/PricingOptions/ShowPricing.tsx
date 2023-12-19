@@ -77,23 +77,34 @@ function ShowPricing({ isFirst }: { isFirst: boolean }) {
   }
 
   return (
-    <div className='mt-8 flex items-stretch justify-center gap-4 pb-6 text-left text-neutral-0 xl:gap-8 '>
-      <div className='shrink grow basis-0'>
-        <h5 className='mb-2 text-sm font-bold'>Storage</h5>
-        <div className='whitespace-nowrap text-2.75xl font-semibold'>
-          ${storage.priceUSD}
+    <>
+      <div className='pb-6'>
+        <div className='flex justify-between gap-x-8'>
+          <div className='w-1/2'>
+            <h5 className='mb-2 text-sm font-bold'>Storage</h5>
+            <div className='whitespace-nowrap text-2.75xl font-semibold'>
+              ${storage.priceUSD}
+            </div>
+            <Info
+              unit={storage.meteringUnit}
+              content={storage.meteringTooltip}
+            />
+          </div>
+          <div className='w-1/2 text-left'>
+            <h5 className='mb-2 text-sm font-bold'>Compute</h5>
+            <div className='whitespace-nowrap text-2.75xl font-semibold'>
+              ${compute.priceUSD}
+            </div>
+            <div className='max-w-[120px]'>
+              <Info
+                unit={compute.meteringUnit}
+                content={compute.meteringTooltip}
+              />
+            </div>
+          </div>
         </div>
-        <Info unit={storage.meteringUnit} content={storage.meteringTooltip} />
       </div>
-
-      <div className='shrink grow basis-0'>
-        <h5 className='mb-2 text-sm font-bold'>Compute</h5>
-        <div className='whitespace-nowrap text-2.75xl font-semibold'>
-          ${compute.priceUSD}
-        </div>
-        <Info unit={compute.meteringUnit} content={compute.meteringTooltip} />
-      </div>
-    </div>
+    </>
   )
 }
 
