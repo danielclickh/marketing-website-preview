@@ -1,0 +1,91 @@
+[
+    {
+        "title": "Snowflake",
+        "quote": "With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud",
+        "icon": "/images/use-cases/ml-and-ds/tools.svg",
+        "test": "",
+        "stats": [
+            {
+                "icon": "icon",
+                "bigStat": "2x",
+                "smallText": "faster queries"
+            },
+            {
+                "icon": "icon",
+                "bigStat": "38%",
+                "smallText": "Better compression"
+            },
+            {
+                "icon": "icon",
+                "bigStat": "2-5x",
+                "smallText": "Reduction in cost"
+            }
+        ]
+    },
+    {
+        "title": "Postgres",
+        "quote": "With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud",
+        "icon": "/images/use-cases/ml-and-ds/tools.svg",
+        "stats": [
+            {
+                "icon": "icon",
+                "bigStat": "2x",
+                "smallText": "faster queries"
+            },
+            {
+                "icon": "icon",
+                "bigStat": "38%",
+                "smallText": "Better compression"
+            },
+            {
+                "icon": "icon",
+                "bigStat": "2-5x",
+                "smallText": "Reduction in cost"
+            }
+        ]
+    },
+    {
+        "title": "BigQuery",
+        "quote": "With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud",
+        "icon": "/images/use-cases/ml-and-ds/tools.svg",
+        "stats": [
+            {
+                "icon": "icon",
+                "bigStat": "2x",
+                "smallText": "faster queries"
+            },
+            {
+                "icon": "icon",
+                "bigStat": "38%",
+                "smallText": "Better compression"
+            },
+            {
+                "icon": "icon",
+                "bigStat": "2-5x",
+                "smallText": "Reduction in cost"
+            }
+        ]
+    },
+    {
+        "title": "Redshift",
+        "quote": "With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud",
+        "icon": "/images/use-cases/ml-and-ds/tools.svg",
+        "stats": [
+            {
+                "icon": "icon",
+                "bigStat": "2x",
+                "smallText": "faster queries"
+            },
+            {
+                "icon": "icon",
+                "bigStat": "38%",
+                "smallText": "Better compression"
+            },
+            {
+                "icon": "icon",
+                "bigStat": "2-5x",
+                "smallText": "Reduction in cost"
+            }
+        ]
+    }
+]

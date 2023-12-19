@@ -13,6 +13,7 @@ import Glider from 'react-glider'
 import 'glider-js/glider.min.css'
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/solid'
 import { CUICard } from '../../components/ClickUI'
+import UseCasesComparisons from '../../components/UseCasesComparisons'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -313,7 +314,9 @@ function UseCasesPage({
               into your data at a fraction of the cost.
             </p>
           </div>
-          <div className='min-h-[1000px]'>asdf</div>
+          <div className='min-h-[1000px]'>
+            <UseCasesComparisons />
+          </div>
         </div>
       </div>
 
