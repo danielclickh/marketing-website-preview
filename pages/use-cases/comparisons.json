@@ -1,0 +1,8 @@
+[
+    {
+        "id": 10,
+        "title": "Snowflake",
+        "quote": "With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud",
+        "icon": "/images/use-cases/ml-and-ds/tools.svg"
+    }
+]
