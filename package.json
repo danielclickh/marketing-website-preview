@@ -9,7 +9,8 @@
     "download-cms-data": "ts-node  -O '{\"module\": \"commonjs\"}' copyCmsData",
     "create-static-sitemap": "ts-node  -O '{\"module\": \"commonjs\"}' createStaticSitemap",
     "create-pricing-file": "ts-node  -O '{\"module\": \"commonjs\"}' createPricingFile",
-    "deploy": "yarn download-cms-data && yarn create-static-sitemap && yarn create-pricing-file && next build",
+    "create-githubstars-file": "ts-node  -O '{\"module\": \"commonjs\"}' getGitHubStars",
+    "deploy": "yarn download-cms-data && create-githubstars-file && yarn create-static-sitemap && yarn create-pricing-file && next build",
     "lint": "next lint",
     "export": "next export"
   },
