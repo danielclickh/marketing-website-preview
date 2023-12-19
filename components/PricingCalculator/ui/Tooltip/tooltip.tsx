@@ -1,7 +1,7 @@
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { InformationCircleIcon } from '@heroicons/react/outline'
 
-const TooltipInfo = ({ content, unit }: { content: string; unit: string }) => {
+const TooltipInfo = ({ content }: { content: string }) => {
   return (
     <Tooltip.Provider delayDuration={0} disableHoverableContent={false}>
       <Tooltip.Root>
