@@ -279,7 +279,7 @@ export default function CTAButtons({
                       <>
                         ${computeCostMin} minimum compute cost{' '}
                         <TooltipInfo
-                          content={`Minimum compute cost = 1 compute unit * ${hours}h per day * 30 days\n\n1 compute unit = ${minMemoryLabel} = / $${pricingData?.computeUnitPrice} / hour`}
+                          content={`Minimum compute cost = 1 compute unit * ${hours}h per day * 30 days\n\n1 compute unit = ${minMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
                         />
                       </>
                     </p>
@@ -305,7 +305,7 @@ export default function CTAButtons({
                       <>
                         ${computeCostMax} maximum compute cost{' '}
                         <TooltipInfo
-                          content={`Maximum compute cost = 2 compute units * ${hours}h per day * 30 days\n\n1 compute unit = ${maxMemoryLabel} = / $${pricingData?.computeUnitPrice} / hour`}
+                          content={`Maximum compute cost = 2 compute units * ${hours}h per day * 30 days\n\n1 compute unit = ${maxMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
                         />
                       </>
                     </p>
