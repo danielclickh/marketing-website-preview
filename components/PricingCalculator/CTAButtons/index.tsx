@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { CUIButton } from '../../ClickUI'
 import TooltipInfo from '../ui/Tooltip/tooltip'
+import { PricingData } from '../CalculatorTypesOptions'
 
 export default function CTAButtons({
   contactSales,
@@ -14,7 +15,10 @@ export default function CTAButtons({
   maxMemory,
   provider,
   region,
-  hours
+  hours,
+  minMemoryLabel,
+  maxMemoryLabel,
+  pricingData
 }: {
   contactSales?: string
   tier?: string
@@ -27,6 +31,9 @@ export default function CTAButtons({
   provider?: string
   region?: string
   hours?: number
+  minMemoryLabel?: string
+  maxMemoryLabel?: string
+  pricingData?: PricingData
 }) {
   const router = useRouter()
   const [isCopied, setIsCopied] = useState(false)
@@ -217,35 +224,96 @@ export default function CTAButtons({
           </li>
         )}
         {!contactSales && (
-          <li>
-            <div className='flex items-center gap-4'>
-              <svg
-                width='16'
-                height='16'
-                viewBox='0 0 16 16'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'>
-                <path
-                  d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
-                  stroke='#FCFF74'
-                  strokeWidth='2'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                />
-              </svg>
-              <p className='flex items-center gap-x-2'>
-                ${computeCostMin}
-                {computeCostMax !== 0 &&
-                  tier === 'Production' &&
-                  computeCostMax !== computeCostMin &&
-                  ` - $${computeCostMax}`}{' '}
-                for compute
-                <TooltipInfo
-                  content={`Compute cost = ${minMemory} * ${hours} per day`}
-                />
-              </p>
-            </div>
-          </li>
+          <>
+            {tier === 'Development' && (
+              <li>
+                <div className='flex items-center gap-4'>
+                  <svg
+                    width='16'
+                    height='16'
+                    viewBox='0 0 16 16'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'>
+                    <path
+                      d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
+                      stroke='#FCFF74'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                    />
+                  </svg>
+                  <p className='flex items-center gap-x-2'>
+                    <>
+                      ${computeCostMin} for compute{' '}
+                      <TooltipInfo
+                        content={`Compute cost = ${minMemoryLabel} * ${hours}h per day\n\n1 compute unit = ${minMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
+                      />
+                    </>
+                  </p>
+                </div>
+              </li>
+            )}
+          </>
+        )}
+        {!contactSales && (
+          <>
+            {tier === 'Production' && (
+              <>
+                <li>
+                  <div className='flex items-center gap-4'>
+                    <svg
+                      width='16'
+                      height='16'
+                      viewBox='0 0 16 16'
+                      fill='none'
+                      xmlns='http://www.w3.org/2000/svg'>
+                      <path
+                        d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
+                        stroke='#FCFF74'
+                        strokeWidth='2'
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                      />
+                    </svg>
+                    <p className='flex items-center gap-x-2'>
+                      <>
+                        ${computeCostMin} minimum compute cost{' '}
+                        <TooltipInfo
+                          content={`Minimum compute cost = 1 compute unit * ${hours}h per day * 30 days\n\n1 compute unit = ${minMemoryLabel} = / $${pricingData?.computeUnitPrice} / hour`}
+                        />
+                      </>
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div className='flex items-center gap-4'>
+                    <svg
+                      width='16'
+                      height='16'
+                      viewBox='0 0 16 16'
+                      fill='none'
+                      xmlns='http://www.w3.org/2000/svg'>
+                      <path
+                        d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
+                        stroke='#FCFF74'
+                        strokeWidth='2'
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                      />
+                    </svg>
+                    <p className='flex items-center gap-x-2'>
+                      <>
+                        ${computeCostMax} maximum compute cost{' '}
+                        <TooltipInfo
+                          content={`Maximum compute cost = 2 compute units * ${hours}h per day * 30 days\n\n1 compute unit = ${maxMemoryLabel} = / $${pricingData?.computeUnitPrice} / hour`}
+                        />
+                      </>
+                    </p>
+                  </div>
+                </li>
+              </>
+            )}
+          </>
         )}
         <li>
           <div className='flex items-center gap-4'>

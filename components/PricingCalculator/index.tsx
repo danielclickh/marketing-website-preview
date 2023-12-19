@@ -463,6 +463,17 @@ export const PricingCalculator: React.FC<{
                       minMemory={Number(computeMinSize)}
                       maxMemory={computeMaxSize}
                       storageSize={Number(storageAfterCompression)}
+                      minMemoryLabel={
+                        computeOptions.find(
+                          (option) => option.value === computeMinSize
+                        )?.label || ''
+                      }
+                      maxMemoryLabel={
+                        computeOptions.find(
+                          (option) => option.value === computeMaxSize
+                        )?.label || ''
+                      }
+                      pricingData={pricingData}
                     />
                   </React.Fragment>
                 ) : (
@@ -517,6 +528,17 @@ export const PricingCalculator: React.FC<{
                         costData.maxComputeCost!.toFixed(2)
                       )}
                       storageCost={costData.storageCost}
+                      minMemoryLabel={
+                        computeOptions.find(
+                          (option) => option.value === computeMinSize
+                        )?.label || ''
+                      }
+                      maxMemoryLabel={
+                        computeOptions.find(
+                          (option) => option.value === computeMaxSize
+                        )?.label || ''
+                      }
+                      pricingData={pricingData}
                     />
                   </React.Fragment>
                 )}

@@ -14,7 +14,7 @@ const TooltipInfo = ({ content }: { content: string }) => {
           <Tooltip.Content
             side='top'
             align='start'
-            className='max-w-[350px] rounded-[4px] bg-neutral-725 px-[15px] py-[10px] text-sm leading-normal will-change-[transform,opacity]'
+            className='max-w-[350px] whitespace-pre-wrap rounded-[4px] bg-neutral-725 px-[15px] py-[10px] text-sm leading-normal will-change-[transform,opacity]'
             sideOffset={5}>
             {content}
             <Tooltip.Arrow className='fill-neutral-725' />
