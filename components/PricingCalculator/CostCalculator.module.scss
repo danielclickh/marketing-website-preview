@@ -7,7 +7,7 @@
 }
 
 .sizes {
-  @apply flex gap-x-6 justify-between;
+  @apply flex flex-col lg:flex-row gap-6 justify-between;
   div {@apply w-full}
 }
 
