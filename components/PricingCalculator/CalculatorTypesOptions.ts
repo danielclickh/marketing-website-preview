@@ -25,7 +25,7 @@ export interface RangeSliderProps {
   value: number
 }
 export interface NumericSelectProps {
-  options: Array<Option>
+  options: Array<NumericOption>
   value: number
   id?: string
   disabled?: boolean
