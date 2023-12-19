@@ -77,9 +77,9 @@ export const Select: React.FC<SelectProps> = ({
           <Listbox.Button
             className={`${
               disabled
-                ? ''
+                ? 'border-neutral-750'
                 : 'hover:cursor-pointer hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl'
-            } relative w-full cursor-default rounded-[4px] border border-neutral-700 bg-neutral-750 py-2 pl-3 pr-10 text-left shadow-input transition-all delay-75  focus:outline-none disabled:cursor-auto data-[headlessui-state=open]:rounded-b-none data-[headlessui-state=open]:border-primary-300 sm:text-sm`}>
+            } relative w-full cursor-default rounded-[4px] border border-neutral-700 bg-neutral-750 py-2 pl-3 pr-10 text-left shadow-input transition-all focus:outline-none disabled:cursor-auto data-[headlessui-state=open]:rounded-b-none data-[headlessui-state=open]:border-primary-300 sm:text-sm`}>
             <span className='flex gap-3 truncate'>
               <span className={disabled ? 'text-neutral-300' : ''}>
                 {selectedOption ? selectedOption.label : ''}
