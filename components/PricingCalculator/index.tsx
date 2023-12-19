@@ -173,15 +173,7 @@ export const PricingCalculator: React.FC<{
 
     if (tier === 'Development') {
       delete router.query.computeMaxSize
-      router.push(
-        {
-          query: {
-            ...router.query
-          }
-        },
-        undefined,
-        { shallow: true }
-      )
+
       if (computeMinSize > 16) {
         router.push(
           {
