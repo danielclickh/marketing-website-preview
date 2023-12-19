@@ -440,14 +440,14 @@ export const PricingCalculator: React.FC<{
           <p className='text-center'>Loading, please wait…</p>
         ) : (
           <div>
-            <p className='font-inconsolata text-lg text-primary-300'>
+            <p className='mb-4 font-inconsolata text-lg text-primary-300'>
               Average price per month
             </p>
             {costData && (
-              <div className='mt-2'>
+              <div>
                 {tier === 'Development' ? (
                   <React.Fragment>
-                    <p className='mb-8 font-basier text-[60px] font-bold text-white'>
+                    <p className='mb-8 font-basier text-[60px] font-bold leading-[84px]  text-white'>
                       $
                       {(costData.computeCost! + costData.storageCost).toFixed(
                         0
@@ -480,7 +480,7 @@ export const PricingCalculator: React.FC<{
                       </>
                     )}
                     {!contactSales && (
-                      <p className='mb-8 font-basier text-3xl font-bold leading-normal text-white lg:text-4xl xl:text-[60px] xl:leading-none'>
+                      <p className='mb-8 font-basier text-[60px] font-bold leading-[84px]  text-white'>
                         $
                         {(
                           costData.minComputeCost! + costData.storageCost
