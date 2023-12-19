@@ -12,6 +12,15 @@ export interface Option<T extends string = string> {
   tooltip?: string
   id?: string
 }
+
+export interface NumericOption<T extends string = string> {
+  value: number
+  label: string
+  tooltip?: string
+  id?: string
+  tier?: string
+}
+
 export interface RangeSliderProps {
   value: number
 }
@@ -65,7 +74,7 @@ export const config = {
   storageAggregationId: 'b5843a1b-a1bb-403d-a929-3ce8486e00d9'
 }
 
-export const tierOptions: Array<ToggleOption<Tier>> = [
+export const tierOptions: Array<Option<Tier>> = [
   {
     value: 'Development',
     label: 'Development',
@@ -78,19 +87,19 @@ export const tierOptions: Array<ToggleOption<Tier>> = [
   }
 ]
 
-export const providerOptions: Array<ToggleOption<Provider>> = [
+export const providerOptions: Array<Option<Provider>> = [
   { value: 'aws', label: 'AWS' },
   { value: 'gcp', label: 'GCP' }
 ]
 
-export const dataOptions: Array<NumericSelectOption> = [
+export const dataOptions: Array<NumericOption> = [
   { value: 250, label: '250GB' },
   { value: 500, label: '500GB' },
   { value: 1024, label: '1TB' },
   { value: 10240, label: '10TB' }
 ]
 
-export const computeOptions: Array<NumericSelectOption> = [
+export const computeOptions: Array<NumericOption> = [
   { value: 16, label: '16 GiB RAM, 2 vCPU', tier: 'Development' },
   { value: 24, label: '24 GiB RAM, 6 vCPU', tier: 'Production' },
   { value: 48, label: '48 GiB RAM, 12 vCPU', tier: 'Production' },
