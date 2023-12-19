@@ -1,9 +1,7 @@
 import { useRouter } from 'next/router'
 import * as Slider from '@radix-ui/react-slider'
 
-export interface RangeSliderProps {
-  value: number
-}
+import { RangeSliderProps } from '../../CalculatorTypesOptions'
 
 export const RangeSlider: React.FC<RangeSliderProps> = ({ value }) => {
   // Set a default value (e.g., 12 hours)

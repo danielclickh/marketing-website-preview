@@ -5,15 +5,7 @@ import GCPLogo from './GCPLogo'
 
 import styles from './ToggleButtons.module.scss'
 
-export interface Option<T extends string = string> {
-  value: T
-  label: string
-}
-
-export interface ToggleButtonsProps<T extends string = string> {
-  options: Array<Option<T>>
-  value: string
-}
+import { Option, ToggleButtonsProps } from '../../CalculatorTypesOptions'
 
 export function ToggleButtonsProviders<T extends string = string>({
   options,

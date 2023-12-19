@@ -1,16 +1,7 @@
 import { useRouter } from 'next/router'
 import Icon from '../../ui/Tooltip'
 
-export interface Option<T extends string = string> {
-  value: T
-  label: string
-  tooltip?: string
-}
-
-export interface ToggleButtonsProps<T extends string = string> {
-  options: Array<Option<T>>
-  value: string
-}
+import { ToggleButtonsProps } from '../../CalculatorTypesOptions'
 
 export function ToggleButtons<T extends string = string>({
   options,

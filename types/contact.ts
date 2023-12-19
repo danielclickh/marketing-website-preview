@@ -10,7 +10,6 @@ export interface ContactFormProps {
   submitButtonLabel: string
   thankYouMessage: string
   disclaimer: string
-  customPricingQuote?: string
   onSuccess?: Function
 }
 

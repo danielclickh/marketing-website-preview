@@ -3,15 +3,7 @@ import Info from '../Tooltip'
 
 import styles from './FormControl.module.scss'
 
-export interface FormControlProps {
-  children: ReactNode
-  label: string
-  helpText?: string
-  tooltip?: string
-  errorText?: string
-  marginBottom?: boolean
-  id?: string
-}
+import { FormControlProps } from '../../CalculatorTypesOptions'
 
 export const FormControl: React.FC<FormControlProps> = ({
   label,

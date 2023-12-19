@@ -21,7 +21,6 @@ function ContactForm({
   messageLabel,
   submitButtonLabel,
   thankYouMessage,
-  customPricingQuote,
   onSuccess
 }: ContactFormProps) {
   const { openSnackBar } = useSnackbar()

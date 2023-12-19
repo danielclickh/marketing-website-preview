@@ -3,18 +3,7 @@ import { useRouter } from 'next/router'
 import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
-export interface Option {
-  value: string
-  label: string
-  id?: string
-}
-
-export interface SelectProps {
-  options: Array<Option>
-  value: string
-  id?: string
-  disabled?: boolean
-}
+import { SelectProps } from '../../CalculatorTypesOptions'
 
 export const Select: React.FC<SelectProps> = ({
   options,
