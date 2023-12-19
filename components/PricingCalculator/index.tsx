@@ -367,7 +367,7 @@ export const PricingCalculator: React.FC<{
 
         <FormControl
           label='Data volume'
-          tooltip='Uncompressed volume data. We compress your data before we store it with a 10x estimated compression rate.'
+          tooltip='Pricing is based on compressed data. We compress your data before we store it with a 10x estimated compression rate.'
           helpText={`${storageAfterCompression}GB after compression`}>
           <NumericSelect
             id='storageVolume'

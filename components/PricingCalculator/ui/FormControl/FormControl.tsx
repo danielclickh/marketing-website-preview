@@ -1,9 +1,7 @@
-import React, { ReactNode } from 'react'
-import Info from '../Tooltip'
-
-import styles from './FormControl.module.scss'
-
+import React from 'react'
 import { FormControlProps } from '../../CalculatorTypesOptions'
+import TooltipInfo from '../Tooltip/tooltip'
+import styles from './FormControl.module.scss'
 
 export const FormControl: React.FC<FormControlProps> = ({
   label,
@@ -20,7 +18,7 @@ export const FormControl: React.FC<FormControlProps> = ({
         <label className='block text-xs font-bold text-[#B3B6BD]'>
           {label}
         </label>
-        {tooltip && <Info content={tooltip} />}
+        {tooltip && <TooltipInfo content={tooltip} />}
       </div>
       {children}
       {helpText && <p className={styles.helpText}>{helpText}</p>}

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import Icon from '../../ui/Tooltip'
+import TooltipInfo from '../Tooltip/tooltip'
 
 import { ToggleButtonsProps } from '../../CalculatorTypesOptions'
 
@@ -32,7 +32,7 @@ export function ToggleButtons<T extends string = string>({
             )
           }}>
           <button>{option.label}</button>
-          {option.tooltip && <Icon content={option.tooltip} />}
+          {option.tooltip && <TooltipInfo content={option.tooltip} />}
         </div>
       ))}
     </div>
