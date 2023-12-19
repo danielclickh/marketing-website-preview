@@ -1,7 +1,7 @@
 .cloudProvidersButton {
   @apply w-[72px] h-12 relative;
   &:not(:disabled) {
-    @apply bg-neutral-750 border-primary-600;
+    @apply bg-neutral-750 border-neutral-700;
     &:hover {
       @apply bg-neutral-725;
     }
