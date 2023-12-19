@@ -86,8 +86,6 @@ function ShowPricing({ isFirst }: { isFirst: boolean }) {
         <Info unit={storage.meteringUnit} content={storage.meteringTooltip} />
       </div>
 
-      <div className='shrink-0 grow-0 border-r border-neutral-725' />
-
       <div className='shrink grow basis-0'>
         <h5 className='mb-2 text-sm font-bold'>Compute</h5>
         <div className='whitespace-nowrap text-2.75xl font-semibold'>
