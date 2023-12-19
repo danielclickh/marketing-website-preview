@@ -95,7 +95,7 @@ function PricingOptions({
   }
 
   return (
-    <div>
+    <div className='w-full '>
       <PricingContextProvider value={getDefaultRegion()}>
         {!selectorOnly && (
           <div className='flex justify-center space-x-6 pt-8 pb-6'>
@@ -251,13 +251,6 @@ function PricingOptions({
                         )}
                         {plan.actionButton && (
                           <>
-                            <PricingButton
-                              isFirst={true}
-                              isLast={index !== plans.length - 1}
-                              path={plan.actionButton.link}
-                              btnText={plan.actionButton.text}
-                              index={index}
-                            />
                             {plan.name === 'Development' && (
                               <>
                                 <CUIButton
@@ -275,7 +268,7 @@ function PricingOptions({
                                       { shallow: true }
                                     )
                                   }}
-                                  className='stroked_button_wrapper button_wrapper mt-4 w-full'
+                                  className='stroked_button_wrapper button_wrapper mb-4 w-full'
                                   type='secondary'>
                                   Estimate your monthly cost ↓
                                 </CUIButton>
@@ -298,12 +291,19 @@ function PricingOptions({
                                     )
                                   }}
                                   weight='medium'
-                                  className='stroked_button_wrapper button_wrapper mt-4 w-full'
+                                  className='stroked_button_wrapper button_wrapper mb-4 w-full'
                                   type='secondary'>
                                   Estimate your monthly cost ↓
                                 </CUIButton>
                               </>
                             )}
+                            <PricingButton
+                              isFirst={true}
+                              isLast={index !== plans.length - 1}
+                              path={plan.actionButton.link}
+                              btnText={plan.actionButton.text}
+                              index={index}
+                            />
                           </>
                         )}
                       </div>
