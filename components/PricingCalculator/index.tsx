@@ -392,7 +392,7 @@ export const PricingCalculator: React.FC<{
 
         {tier === 'Production' && (
           <>
-            <div>
+            <div className='mb-10'>
               <div className={styles.sizes}>
                 <FormControl label='Minimum size' marginBottom={false}>
                   <NumericSelect
@@ -480,7 +480,7 @@ export const PricingCalculator: React.FC<{
                       </>
                     )}
                     {!contactSales && (
-                      <p className='mb-8 font-basier text-[60px] font-bold text-white'>
+                      <p className='mb-8 font-basier text-3xl font-bold leading-normal text-white lg:text-4xl xl:text-[60px] xl:leading-none'>
                         $
                         {(
                           costData.minComputeCost! + costData.storageCost

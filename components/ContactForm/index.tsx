@@ -37,18 +37,25 @@ function ContactForm({
   const router = useRouter()
   useEffect(() => {
     if (router.query.custom) {
-      const customPricingQuoteObj = router.query
+      let customPricingQuoteObj = { ...router.query }
 
+      let memory = '16GiB'
+      if (
+        customPricingQuoteObj.minMemory &&
+        customPricingQuoteObj.maxMemory &&
+        customPricingQuoteObj.tier
+      ) {
+        if (customPricingQuoteObj.tier === 'Production') {
+          memory = `${customPricingQuoteObj.minMemory}GiB - ${customPricingQuoteObj.maxMemory}GiB`
+        }
+      }
       setUseCase(`Custom pricing request
-Tier: ${customPricingQuoteObj.tier}
+Service type: ${customPricingQuoteObj.tier}
 Provider: ${customPricingQuoteObj.provider}
 Region: ${customPricingQuoteObj.region}
 Active hours: ${customPricingQuoteObj.hours}
-Data volume: ${customPricingQuoteObj.storageSize}
-Compute: ${customPricingQuoteObj.minMemory}GiB ${
-        customPricingQuoteObj.tier === 'Production' &&
-        customPricingQuoteObj.maxMemory
-      }GiB
+Data volume: ${customPricingQuoteObj.storageSize}GB compressed
+Compute: ${memory}
 `)
     }
   }, [router.query])
