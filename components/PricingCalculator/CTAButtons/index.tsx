@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { CUIButton } from '../../ClickUI'
+import TooltipInfo from '../ui/Tooltip/tooltip'
 
 export default function CTAButtons({
   contactSales,
@@ -206,6 +207,11 @@ export default function CTAButtons({
               </svg>
               <p className='flex items-center gap-x-2'>
                 ${storageCost!.toFixed(2)} for storage{' '}
+                <TooltipInfo
+                  content={`Storage cost for ${
+                    storageSize && storageSize / 10
+                  } GB compressed data`}
+                />
               </p>
             </div>
           </li>
@@ -227,13 +233,16 @@ export default function CTAButtons({
                   strokeLinejoin='round'
                 />
               </svg>
-              <p>
+              <p className='flex items-center gap-x-2'>
                 ${computeCostMin}
                 {computeCostMax !== 0 &&
                   tier === 'Production' &&
                   computeCostMax !== computeCostMin &&
                   ` - $${computeCostMax}`}{' '}
                 for compute
+                <TooltipInfo
+                  content={`Compute cost = ${minMemory} * ${hours} per day`}
+                />
               </p>
             </div>
           </li>
