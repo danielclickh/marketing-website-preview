@@ -314,7 +314,7 @@ function UseCasesPage({
               into your data at a fraction of the cost.
             </p>
           </div>
-          <div className='min-h-[1000px]'>
+          <div>
             <UseCasesComparisons />
           </div>
         </div>
