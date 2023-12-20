@@ -7,10 +7,11 @@ export default function UseCasesComparisons() {
   return (
     <>
       <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
-        <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
+        <div
+          className={`flex flex-col items-start justify-between gap-10 lg:flex-row`}>
           <div
             id='comparisons-left'
-            className='lg:sticky lg:top-[70px] xl:max-w-[426px]'>
+            className={`lg:sticky lg:top-[50%] xl:max-w-[426px]`}>
             <h2 className='mb-4 font-basier text-5.5xl font-semibold text-white'>
               Comparisons
             </h2>
