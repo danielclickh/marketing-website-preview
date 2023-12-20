@@ -13,6 +13,7 @@ import Glider from 'react-glider'
 import 'glider-js/glider.min.css'
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/solid'
 import { CUICard } from '../../components/ClickUI'
+import UseCasesComparisons from '../../components/UseCasesComparisons'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -293,6 +294,9 @@ function UseCasesPage({
           </div>
         </div>
       </div>
+
+      <UseCasesComparisons />
+
       <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
         <div className='gap-3 md:columns-2 lg:columns-3'>
           {quotes.slice(0, visibleTestimonials).map((quote, index) => (

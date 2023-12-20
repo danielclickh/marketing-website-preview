@@ -44,4 +44,5 @@ export interface useCasesPageDataProps extends CommonProps {
   }
   individualUseCases: Array<UseCaseItem>
   quotes: Array<Quote>
+  comparisons?: any
 }
