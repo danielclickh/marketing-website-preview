@@ -2,7 +2,7 @@
     {
         "href": "/comparison/snowflake",
         "title": "Snowflake",
-        "quote": "With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud",
+        "quote": "With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud.",
         "stats": [
             {
                 "icon": "/images/use-cases/logging/gauge-light.svg",
@@ -20,7 +20,7 @@
             },
             {
                 "icon": "/images/hand-coins-light.svg",
-                "bigStat": "2-5x",
+                "bigStat": "3-5x",
                 "smallText": "Reduction in cost",
                 "iconWidth": 32,
                 "iconHeight": 32
@@ -56,7 +56,7 @@
                 "iconHeight": 32
             }
         ],
-        "quote": "It is instant in ClickHouse vs forever in Postgres",
+        "quote": "It is instant in ClickHouse vs forever in Postgres.",
         "customerLogo": "/images/quickcheck-logo.svg",
         "customerLogoWidth": 183,
         "customerLogoHeight": 34
