@@ -63,6 +63,22 @@ function useMarketo({
   useEffect(() => {
     if (scriptLoaded) {
 
+      // Fixes marketo referrer issue for SPAs
+      // @link https://blog.teknkl.com/fix-forms-20-referrer-cached-single-page-application/
+      window.MktoForms2.whenReady(function(readyForm){
+        const nativeGetValues = readyForm.getValues;
+        readyForm.onSubmit(function(submittingForm){
+          submittingForm.getValues = function() {
+            const values = nativeGetValues();
+            Object.defineProperty(values, '_mktoReferrer', {
+              value: document.location.href,
+              enumerable: true
+            });
+            return values;
+          };
+        });
+      });
+
       // Load the form with and attach callbacks
       window.MktoForms2.loadForm(baseUrl, munchkinId, formId, marketoFormObject => {
 
