@@ -369,10 +369,11 @@ export const PricingCalculator: React.FC<{
         </FormControl>
         {tier === 'Development' && (
           <FormControl
-            label='Compute size - not editable'
+            label='Compute size'
+            id='computeSizeDevTooltipTrigger'
             marginBottom={true}
             helpText='Development services do not auto-scale'
-            tooltip='Not editable in development services'>
+            tooltip='Deployment services have a fixed size of 16 GiB RAM, 2 vCPUs and cannot be edited'>
             <NumericSelect
               id='computeMinSize'
               options={computeOptions.filter(
