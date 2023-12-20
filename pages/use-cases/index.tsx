@@ -294,31 +294,8 @@ function UseCasesPage({
           </div>
         </div>
       </div>
-      <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
-        <div className='flex flex-col justify-between gap-10 lg:flex-row'>
-          <div className='xl:max-w-[426px]'>
-            <h2 className='mb-4 font-basier text-5.5xl font-semibold text-white'>
-              Comparisons
-            </h2>
-            <p className='mb-6 text-base text-[#DFDFDF]'>
-              ClickHouse excels at powering workloads that operate on both
-              real-time and historical data.
-            </p>
-            <p className='mb-6 text-base text-[#DFDFDF]'>
-              In contrast, traditional warehouses and transactional databases
-              lack the performance and cost efficiency that makes them viable
-              for analytic workloads at scale.
-            </p>
-            <p className='mb-6 text-base text-[#DFDFDF]'>
-              With ClickHouse, you’ll have unrivaled performance and visibility
-              into your data at a fraction of the cost.
-            </p>
-          </div>
-          <div>
-            <UseCasesComparisons />
-          </div>
-        </div>
-      </div>
+
+      <UseCasesComparisons />
 
       <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
         <div className='gap-3 md:columns-2 lg:columns-3'>
