@@ -26,7 +26,7 @@ export function getVideos(): Video[] {
       categories: ['How to']
     },
     {
-      slug: 'ingesting-data-from-redpanda-into-clickouse',
+      slug: 'ingesting-data-from-redpanda-into-clickhouse',
       title: 'Ingesting data from Redpanda into ClickHouse',
       subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
       description:
@@ -48,7 +48,7 @@ export function getVideos(): Video[] {
       categories: ['ClickHouse']
     },
     {
-      slug: 'querying-remote-parquet-files-with-clickouse',
+      slug: 'querying-remote-parquet-files-with-clickhouse',
       title: 'Querying remote Parquet files with ClickHouse',
       subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
       description:
