@@ -7,7 +7,7 @@ export default function UseCasesComparisons() {
   return (
     <>
       <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
-        <div className='flex flex-col items-start justify-between gap-10 lg:flex-row'>
+        <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
           <div
             id='comparisons-left'
             className='lg:sticky lg:top-[70px] xl:max-w-[426px]'>
@@ -38,7 +38,7 @@ export default function UseCasesComparisons() {
                   <Link
                     href={comparison.href}
                     key={index}
-                    className='w-full rounded-[12px] border border-[#ffffff] border-opacity-[12%] bg-[#363636] p-3 md:p-5 lg:min-w-[600px] lg:max-w-[600px] lg:p-10'>
+                    className='w-full rounded-[12px] border border-[#ffffff] border-opacity-[12%] bg-[#363636] p-3 transition-all hover:bg-neutral-700 md:p-5 lg:min-w-[600px] lg:max-w-[600px] lg:p-10'>
                     <div className='flex items-center justify-between font-basier text-3xl font-semibold'>
                       <h3>
                         ClickHouse <span className='opacity-30'>vs</span>{' '}
