@@ -150,7 +150,7 @@
 					{
 						"id": 3,
 						"name": "How to videos",
-						"href": "/videos",
+						"href": "/videos?category=how-to",
 						"target": "_self"
 					}
 				]
