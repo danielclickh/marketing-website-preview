@@ -295,7 +295,7 @@ function UseCasesPage({
         </div>
       </div>
       <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
-        <div className='flex justify-between'>
+        <div className='flex flex-col justify-between gap-10 lg:flex-row'>
           <div className='xl:max-w-[426px]'>
             <h2 className='mb-4 font-basier text-5.5xl font-semibold text-white'>
               Comparisons

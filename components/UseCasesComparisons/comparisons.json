@@ -1,91 +1,126 @@
 [
     {
+        "href": "/comparison/snowflake",
         "title": "Snowflake",
         "quote": "With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud",
-        "icon": "/images/use-cases/ml-and-ds/tools.svg",
-        "test": "",
         "stats": [
             {
-                "icon": "icon",
+                "icon": "/images/use-cases/logging/gauge-light.svg",
                 "bigStat": "2x",
-                "smallText": "faster queries"
+                "smallText": "faster queries",
+                "iconWidth": 32,
+                "iconHeight": 32
             },
             {
-                "icon": "icon",
+                "icon": "/images/file-zip-rar.svg",
                 "bigStat": "38%",
-                "smallText": "Better compression"
+                "smallText": "Better compression",
+                "iconWidth": 32,
+                "iconHeight": 32
             },
             {
-                "icon": "icon",
+                "icon": "/images/hand-coins-light.svg",
                 "bigStat": "2-5x",
-                "smallText": "Reduction in cost"
+                "smallText": "Reduction in cost",
+                "iconWidth": 32,
+                "iconHeight": 32
             }
-        ]
+        ],
+        "customerLogo": "/images/adgreetz-logo-white.svg",
+        "customerLogoWidth": 166,
+        "customerLogoHeight": 30
     },
     {
-        "title": "Postgres",
-        "quote": "With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud",
-        "icon": "/images/use-cases/ml-and-ds/tools.svg",
+        "href": "/comparison/postgresql",
+        "title": "PostgreSQL",
         "stats": [
             {
-                "icon": "icon",
-                "bigStat": "2x",
-                "smallText": "faster queries"
+                "icon": "/images/use-cases/logging/gauge-light.svg",
+                "bigStat": "1000x",
+                "smallText": "faster queries",
+                "iconWidth": 32,
+                "iconHeight": 32
             },
             {
-                "icon": "icon",
-                "bigStat": "38%",
-                "smallText": "Better compression"
+                "icon": "/images/file-zip-rar.svg",
+                "bigStat": "-50%",
+                "smallText": "Disk space",
+                "iconWidth": 32,
+                "iconHeight": 32
             },
             {
-                "icon": "icon",
-                "bigStat": "2-5x",
-                "smallText": "Reduction in cost"
+                "icon": "/images/hand-coins-light.svg",
+                "bigStat": "5x",
+                "smallText": "Cost savings",
+                "iconWidth": 32,
+                "iconHeight": 32
             }
-        ]
+        ],
+        "quote": "It is instant in ClickHouse vs forever in Postgres",
+        "customerLogo": "/images/quickcheck-logo.svg",
+        "customerLogoWidth": 183,
+        "customerLogoHeight": 34
     },
     {
+        "href": "/comparison/bigquery",
         "title": "BigQuery",
-        "quote": "With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud",
-        "icon": "/images/use-cases/ml-and-ds/tools.svg",
         "stats": [
             {
-                "icon": "icon",
-                "bigStat": "2x",
-                "smallText": "faster queries"
+                "icon": "/images/use-cases/logging/gauge-light.svg",
+                "bigStat": "10x",
+                "smallText": "Better performance",
+                "iconWidth": 32,
+                "iconHeight": 32
             },
             {
-                "icon": "icon",
-                "bigStat": "38%",
-                "smallText": "Better compression"
+                "icon": "/images/file-zip-rar.svg",
+                "bigStat": "30x",
+                "smallText": "Compression ratios",
+                "iconWidth": 32,
+                "iconHeight": 32
             },
             {
-                "icon": "icon",
-                "bigStat": "2-5x",
-                "smallText": "Reduction in cost"
+                "icon": "/images/hand-coins-light.svg",
+                "bigStat": "10x",
+                "smallText": "OpEx reduction",
+                "iconWidth": 32,
+                "iconHeight": 32
             }
-        ]
+        ],
+        "quote": "We simply don’t want the hassle of trying to figure out in advance how many BQ slots to purchase - what a headache!",
+        "customerLogo": "/images/HIFI-logo.svg",
+        "customerLogoWidth": 82,
+        "customerLogoHeight": 30
     },
     {
+        "href": "/comparison/redshift",
         "title": "Redshift",
-        "quote": "With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud",
-        "icon": "/images/use-cases/ml-and-ds/tools.svg",
         "stats": [
             {
-                "icon": "icon",
-                "bigStat": "2x",
-                "smallText": "faster queries"
+                "icon": "/images/use-cases/logging/gauge-light.svg",
+                "bigStat": "5x",
+                "smallText": "Query performance",
+                "iconWidth": 32,
+                "iconHeight": 32
             },
             {
-                "icon": "icon",
-                "bigStat": "38%",
-                "smallText": "Better compression"
+                "icon": "/images/hand-coins-light.svg",
+                "bigStat": "75%",
+                "smallText": "Reduction in cost",
+                "iconWidth": 32,
+                "iconHeight": 32
             },
             {
-                "icon": "icon",
-                "bigStat": "2-5x",
-                "smallText": "Reduction in cost"
+                "icon": "/images/use-cases/logging/ingest.svg",
+                "bigStat": "20x",
+                "smallText": "Concurrency",
+                "iconWidth": 32,
+                "iconHeight": 32
             }
-        ]
+        ],
+        "quote": "Moving over to ClickHouse we were basically able to cut that (Redshift) bill in half.",
+        "customerLogo": "/images/vantage-logo.svg",
+        "customerLogoWidth": 133,
+        "customerLogoHeight": 35
     }
 ]

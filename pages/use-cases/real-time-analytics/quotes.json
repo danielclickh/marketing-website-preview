@@ -32,7 +32,7 @@
         "id": 40,
         "title": "Vimeo",
         "logo": "/images/vimeo-logo.svg",
-        "content": "In the post-evaluation of each database against our criteria (with metrics ranging from query performance to cost), ClickHouse emerged as the unrivaled frontrunner. It excelled across the board, even astonishingly so in certain domains, and proved more cost-efficient.",
+        "content": "In the post-evaluation of each database against our criteria (with metrics ranging from query performance to cost), **ClickHouse emerged as the unrivaled frontrunner.** It excelled across the board, even astonishingly so in certain domains, and proved more cost-efficient.",
         "href": "https://medium.com/vimeo-engineering-blog/clickhouse-is-in-the-house-413862c8ac28",
         "target": "_blank",
         "imgWidth": 140,
