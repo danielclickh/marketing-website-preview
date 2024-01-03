@@ -37,17 +37,45 @@ function PricingOptions({
   const [provider, setProvider] = useState(
     router.query.priovider ? 'gcp' : 'aws'
   )
+
   const regionList: RegionPricingWithIcon[] = useMemo(() => {
-    return pricingByRegion
+    const orderedRegions = pricingByRegion
       .filter((item) => item.cloudProvider === provider)
       .map((item) => {
-        let regionSlug = item.region.match(/[(]*\(([^)]+)\)$/i)?.[1] || item.region;
+        let regionSlug =
+          item.region.match(/[(]*\(([^)]+)\)$/i)?.[1] || item.region
         return {
           ...item,
-          regionFlagPNG: <StrapiImage {...item.regionFlagPNG} alt={item.region} />,
+          regionFlagPNG: (
+            <StrapiImage {...item.regionFlagPNG} alt={item.region} />
+          ),
           regionSlug: slugify(regionSlug)
         }
       })
+      .sort((a, b) => {
+        // Extract the regionSlugs
+        const slugA = a.regionSlug.toLowerCase()
+        const slugB = b.regionSlug.toLowerCase()
+
+        // Define the order of prefixes
+        const order = ['us', 'eu', 'ap']
+
+        // Find the index of the prefixes in the order array
+        const indexA = order.findIndex((prefix) => slugA.startsWith(prefix))
+        const indexB = order.findIndex((prefix) => slugB.startsWith(prefix))
+
+        // Compare based on the prefix order
+        if (indexA < indexB) return -1
+        if (indexA > indexB) return 1
+
+        // If the prefixes are the same or not in the order, compare the full slugs
+        if (slugA < slugB) return -1
+        if (slugA > slugB) return 1
+
+        return 0 // Slugs are equal
+      })
+
+    return orderedRegions
   }, [pricingByRegion, provider])
 
   const plans: Array<PricingPlanData> = useMemo(() => {
@@ -62,16 +90,20 @@ function PricingOptions({
   }, [router.query.provider])
 
   const updateRegionParam = (value: RegionPricingWithIcon) => {
-    router.push(`/pricing?provider=${value.cloudProvider}&region=${value.regionSlug}`, undefined, {
-      shallow: true
-    })
+    router.push(
+      `/pricing?provider=${value.cloudProvider}&region=${value.regionSlug}`,
+      undefined,
+      {
+        shallow: true
+      }
+    )
   }
 
   const getDefaultRegion = () => {
     const fallback = regionList[0]
     const urlRegion = router.query?.region
     if (provider && urlRegion && !Array.isArray(urlRegion)) {
-      const found = regionList.find(item => {
+      const found = regionList.find((item) => {
         return item.cloudProvider === provider && item.regionSlug === urlRegion
       })
 
@@ -160,7 +192,10 @@ function PricingOptions({
           ))}
         </div>
         <div className='center_content relative z-10 mx-auto mb-24 max-w-[344px]'>
-          <PricingSelector regionList={regionList} onChange={updateRegionParam} />
+          <PricingSelector
+            regionList={regionList}
+            onChange={updateRegionParam}
+          />
         </div>
 
         {plans.length > 0 && (
