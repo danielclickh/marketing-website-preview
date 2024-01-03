@@ -4,6 +4,28 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'funnel-analysis-with-clickhouse',
+      title: 'Funnel Analysis with ClickHouse',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we'll learn about conducting funnel analysis using ClickHouse. With the help of a UK weather dataset, we'll explore the UK's changeable weather, searching for the number of times that different combinations of weather conditions have happened over the last few years.",
+      thumbnail: 'https://img.youtube.com/vi/2RlODumivgk/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/2RlODumivgk?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
+      slug: 'working-with-arrays-in-clickhouse',
+      title: 'Working with Arrays in ClickHouse',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we'll learn all about working with arrays in ClickHouse. Starting with an overview of the array functions documentation, we dive into practical examples using a weather measurements dataset. Key topics include querying, grouping, and manipulating arrays to extract valuable insights like maximum and minimum temperatures, weather conditions, and more. The functions covered in this video include array_slice, array_max, array_min, array_filter, array_join, array_flatten, array_compact, and array_distinct.",
+      thumbnail: 'https://img.youtube.com/vi/JKHAdCFtYDg/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/JKHAdCFtYDg?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
       slug: 'loading-s3-data-into-clickhouse',
       title: 'Continuously loading S3 data into ClickHouse',
       subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
