@@ -1,7 +1,7 @@
-import React, { Fragment, SetStateAction } from 'react'
-import { usePricing } from './PricingContext'
+import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
-import { Listbox, Transition } from '@headlessui/react'
+import React from 'react'
+import { usePricing } from './PricingContext'
 import { RegionPricingWithIcon } from './types'
 
 type OnChangeCallback = (value: RegionPricingWithIcon) => void
@@ -10,7 +10,7 @@ function PricingSelector({
   regionList,
   onChange
 }: {
-  regionList: RegionPricingWithIcon[],
+  regionList: RegionPricingWithIcon[]
   onChange?: OnChangeCallback
 }) {
   const { selectedRegion, setSelectedRegion } = usePricing()

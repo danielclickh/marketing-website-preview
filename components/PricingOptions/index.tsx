@@ -1,26 +1,25 @@
 import { MinusIcon } from '@heroicons/react/outline'
 import { CheckIcon } from '@heroicons/react/solid'
-import React, { useState, useMemo, useEffect, SetStateAction } from 'react'
+import { useRouter } from 'next/router'
+import React, { useEffect, useMemo, useState } from 'react'
 import { slugify } from '../../lib/utils/strings'
-import Markdown from '../Markdown'
-import { PricingContextProvider } from './PricingContext'
-import PlanPricing from './PlanPricing'
-import PricingButton from './PricingButton'
-import PricingSelector from './PricingSelector'
-import ShowPricing from './ShowPricing'
+import { CloudProviderType } from '../../types/cloud'
 import {
   MeteredPricing,
   PricingPlanData,
   RegionPricing
 } from '../../types/pricing'
-import { RegionPricingWithIcon } from './types'
-import { CloudProviderType } from '../../types/cloud'
-import { SuiText } from '../sui'
-import { StrapiImage } from '../StrapiElements'
 import { CUIButton, CUILink } from '../ClickUI'
+import Markdown from '../Markdown'
+import { StrapiImage } from '../StrapiElements'
+import { SuiText } from '../sui'
+import PlanPricing from './PlanPricing'
+import PricingButton from './PricingButton'
+import { PricingContextProvider } from './PricingContext'
 import styles from './PricingOptions.module.scss'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+import PricingSelector from './PricingSelector'
+import ShowPricing from './ShowPricing'
+import { RegionPricingWithIcon } from './types'
 
 function PricingOptions({
   pricingByRegion,
@@ -57,18 +56,18 @@ function PricingOptions({
         const slugA = a.regionSlug.toLowerCase()
         const slugB = b.regionSlug.toLowerCase()
 
-        // Define the order of prefixes
-        const order = ['us', 'eu', 'ap']
+        // Define the order of prefixes and region names
+        const order = ['us', 'eu', 'ap', 'europe', 'asia']
 
-        // Find the index of the prefixes in the order array
+        // Find the index of the prefixes/region names in the order array
         const indexA = order.findIndex((prefix) => slugA.startsWith(prefix))
         const indexB = order.findIndex((prefix) => slugB.startsWith(prefix))
 
-        // Compare based on the prefix order
+        // Compare based on the prefix/region name order
         if (indexA < indexB) return -1
         if (indexA > indexB) return 1
 
-        // If the prefixes are the same or not in the order, compare the full slugs
+        // If the prefixes/region names are the same or not in the order, compare the full slugs
         if (slugA < slugB) return -1
         if (slugA > slugB) return 1
 
