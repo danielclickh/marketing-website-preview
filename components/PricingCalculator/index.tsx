@@ -295,8 +295,17 @@ export const PricingCalculator: React.FC<{
           costData.minComputeCost &&
           costData.maxComputeCost &&
           costData.storageCost &&
-          (costData.minComputeCost + costData.storageCost > 2000 ||
-            costData.maxComputeCost + costData.storageCost > 2000)
+          costData.minComputeCost + costData.storageCost > 2000
+        ) {
+          setContactSales('Contact sales for pricing') // Set contactSales if the combined cost exceeds 2000
+        } else {
+          setContactSales(undefined)
+        }
+      }
+      if (tier === 'Development') {
+        if (
+          costData.computeCost &&
+          costData.computeCost + costData.storageCost > 2000
         ) {
           setContactSales('Contact sales for pricing') // Set contactSales if the combined cost exceeds 2000
         } else {
@@ -478,13 +487,29 @@ export const PricingCalculator: React.FC<{
               <div>
                 {tier === 'Development' ? (
                   <React.Fragment>
-                    <p className='mb-8 font-basier text-[60px] font-bold leading-[84px]  text-white'>
-                      $
-                      {(costData.computeCost! + costData.storageCost).toFixed(
-                        0
-                      )}
-                    </p>
+                    {contactSales ? (
+                      <>
+                        <p className='mb-2 font-basier text-[60px] font-bold text-white'>
+                          Contact us
+                        </p>
+                        <p className='mb-8 text-base text-[#B3B6BD]'>
+                          You’re eligible for custom quotes.
+                          <br />
+                          Contact us for more details.
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <p className='mb-8 font-basier text-[60px] font-bold leading-[84px]  text-white'>
+                          $
+                          {(
+                            costData.computeCost! + costData.storageCost
+                          ).toFixed(0)}
+                        </p>
+                      </>
+                    )}
                     <CTAButtons
+                      contactSales={contactSales}
                       tier={tier}
                       provider={provider}
                       region={region}
