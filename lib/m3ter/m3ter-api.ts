@@ -1,5 +1,9 @@
 import isEqual from 'lodash/isEqual'
 
+if (!process.env.NEXT_IS_PROD) {
+  require('dotenv').config({ path: './.env.local' })
+}
+
 // These are subsets of the fields from the API to cover what we use.
 
 export interface PricingBand {
@@ -36,6 +40,8 @@ const getToken = async () => {
     const data = await res.json()
     return data.access_token
   } else {
+    const data = await res.json()
+    console.log(data)
     throw new Error('Unable to obtain an auth token')
   }
 }

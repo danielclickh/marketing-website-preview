@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { getPricingsByPlan } from './lib/m3ter/m3ter-api'
-import { acceptableRegions } from './components/PricingCalculator/CalculatorTypesOptions'
+import { acceptableRegions as importedAcceptableRegions } from './components/PricingCalculator/CalculatorTypesOptions'
 
 const config = {
   planId: '01b9a9d2-a36a-4a1d-969b-b24fc756cd64',
@@ -33,14 +33,28 @@ async function triggerPricingFile() {
 
   const allPricings = await getPricingsByPlan(config.planId)
 
+  //should really pull from Strapi, but for now this will do
+  const acceptableRegions = [
+    'us-east-2',
+    'us-west-2',
+    'us-east-1',
+    'eu-west-1',
+    'eu-west-2',
+    'eu-central-1',
+    'ap-southeast-1',
+    'ap-south-1',
+    'ap-southeast-2',
+    'gcp-us-central1',
+    'gcp-us-east1',
+    'gcp-europe-west4',
+    'gcp-asia-southeast1'
+  ]
+
   const pricingsToStore = allPricings
     .filter(
       (item) =>
-        acceptableRegions.some(
-          (region) =>
-            region.provider === item?.segment?.cloudProvider &&
-            region.region === item?.segment?.region
-        ) && !item?.description?.includes('Dedicated')
+        acceptableRegions.includes(item?.segment?.region ?? '') &&
+        !item?.description?.includes('Dedicated')
     )
     .map((item) => ({
       id: item?.id,
