@@ -223,6 +223,16 @@ export const PricingCalculator: React.FC<{
         computeMinSize > computeMaxSize &&
         computeMinSize !== computeMaxSize
       ) {
+        router.push(
+          {
+            query: {
+              ...router.query,
+              computeMaxSize: computeMinSize
+            }
+          },
+          undefined,
+          { shallow: true }
+        )
         setMemoryError(
           'Please make sure that minimum size is less than max size.'
         )
