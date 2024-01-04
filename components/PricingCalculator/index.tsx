@@ -186,6 +186,19 @@ export const PricingCalculator: React.FC<{
           { shallow: true }
         )
       }
+
+      if (storage > 10240) {
+        router.push(
+          {
+            query: {
+              ...router.query,
+              storage: 10240
+            }
+          },
+          undefined,
+          { shallow: true }
+        )
+      }
     }
 
     if (tier === 'Production') {
@@ -371,12 +384,19 @@ export const PricingCalculator: React.FC<{
           label='Data volume'
           tooltip='Pricing is based on compressed data. We compress your data before we store it with a 10x estimated compression rate.'
           helpText={`${storageAfterCompression}GB after compression`}>
-          <NumericSelect
-            id='storageVolume'
-            options={dataOptions}
-            value={storage}
-          />
+          {tier && dataOptions && (
+            <NumericSelect
+              id='storageVolume'
+              options={dataOptions.filter((option) => {
+                if (option.tier) {
+                  return option.tier.includes(tier)
+                }
+              })}
+              value={storage}
+            />
+          )}
         </FormControl>
+
         {tier === 'Development' && (
           <FormControl
             label='Compute size'
@@ -386,9 +406,11 @@ export const PricingCalculator: React.FC<{
             tooltip='Deployment services have a fixed size of 16 GiB RAM, 2 vCPUs and cannot be edited'>
             <NumericSelect
               id='computeMinSize'
-              options={computeOptions.filter(
-                (option) => option.tier === 'Development'
-              )}
+              options={computeOptions.filter((option) => {
+                if (option.tier) {
+                  return option.tier.includes('Development')
+                }
+              })}
               value={computeMinSize}
               disabled={true}
             />
@@ -402,18 +424,22 @@ export const PricingCalculator: React.FC<{
                 <FormControl label='Minimum size' marginBottom={false}>
                   <NumericSelect
                     id='computeMinSize'
-                    options={computeOptions.filter(
-                      (option) => option.tier === 'Production'
-                    )}
+                    options={computeOptions.filter((option) => {
+                      if (option.tier) {
+                        return option.tier.includes('Production')
+                      }
+                    })}
                     value={computeMinSize}
                   />
                 </FormControl>
                 <FormControl label='Maximum size' marginBottom={false}>
                   <NumericSelect
                     id='computeMaxSize'
-                    options={computeOptions.filter(
-                      (option) => option.tier === 'Production'
-                    )}
+                    options={computeOptions.filter((option) => {
+                      if (option.tier) {
+                        return option.tier.includes('Production')
+                      }
+                    })}
                     value={computeMaxSize}
                   />
                 </FormControl>
