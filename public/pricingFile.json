@@ -48,6 +48,38 @@
         "cloudProvider": "GCP"
     },
     {
+        "id": "58aefccd-d1ad-4210-b724-61f50969be6e",
+        "aggregationId": "8aa7d48b-93a7-46e6-8e98-4c51b1ec2300",
+        "pricingBands": [
+            {
+                "id": "4114df9f-8fbc-4dac-a45a-8a4a979e2885",
+                "lowerLimit": 0,
+                "fixedPrice": 0,
+                "unitPrice": 0.00211
+            }
+        ],
+        "description": "devComputeUnitMinutes AWS eu-west-2 Development",
+        "instanceTier": "Development",
+        "region": "eu-west-2",
+        "cloudProvider": "AWS"
+    },
+    {
+        "id": "bfc4fa6b-cc8d-4586-adb4-c9834c6baa55",
+        "aggregationId": "3797d30c-b13c-480b-9068-baf1e340a589",
+        "pricingBands": [
+            {
+                "id": "7db2f81c-5b5b-48b3-b371-3930a8d64eaf",
+                "lowerLimit": 0,
+                "fixedPrice": 0,
+                "unitPrice": 0.00444
+            }
+        ],
+        "description": "computeUnitMinutes AWS eu-west-2 Production",
+        "instanceTier": "Production",
+        "region": "eu-west-2",
+        "cloudProvider": "AWS"
+    },
+    {
         "id": "9fb69fb1-02b9-4980-be4e-4a97535083e7",
         "aggregationId": "a2b09c63-14f1-4fb7-a9fa-2920c9edaab7",
         "pricingBands": [
@@ -253,6 +285,22 @@
         "description": "storageGBMinutesTables AWS us-east-2 Development",
         "instanceTier": "Development",
         "region": "us-east-2",
+        "cloudProvider": "AWS"
+    },
+    {
+        "id": "e027fe18-2712-455f-980f-d7e2258735b6",
+        "aggregationId": "3797d30c-b13c-480b-9068-baf1e340a589",
+        "pricingBands": [
+            {
+                "id": "972701a7-7a9d-4948-bab7-6915abc58331",
+                "lowerLimit": 0,
+                "fixedPrice": 0,
+                "unitPrice": 0.00211
+            }
+        ],
+        "description": "computeUnitMinutes AWS eu-west-2 Development",
+        "instanceTier": "Development",
+        "region": "eu-west-2",
         "cloudProvider": "AWS"
     },
     {
@@ -784,6 +832,22 @@
         "cloudProvider": "AWS"
     },
     {
+        "id": "1dcdc992-22b2-4a76-b0d2-ca8f01bd1e0e",
+        "aggregationId": "b5843a1b-a1bb-403d-a929-3ce8486e00d9",
+        "pricingBands": [
+            {
+                "id": "4c198c8f-dcde-456c-ae44-49c4f1a17652",
+                "lowerLimit": 0,
+                "fixedPrice": 0,
+                "unitPrice": 8.22e-7
+            }
+        ],
+        "description": "storageGBMinutesTables AWS eu-west-2 Development",
+        "instanceTier": "Development",
+        "region": "eu-west-2",
+        "cloudProvider": "AWS"
+    },
+    {
         "id": "658f48b6-0a93-49a5-8d72-8ac047d2b418",
         "aggregationId": "b5843a1b-a1bb-403d-a929-3ce8486e00d9",
         "pricingBands": [
@@ -960,6 +1024,22 @@
         "cloudProvider": "AWS"
     },
     {
+        "id": "2fd3e707-37e9-499d-bf21-73b22ee214e5",
+        "aggregationId": "b5843a1b-a1bb-403d-a929-3ce8486e00d9",
+        "pricingBands": [
+            {
+                "id": "69a64352-c2a3-4c25-973f-659230043969",
+                "lowerLimit": 0,
+                "fixedPrice": 0,
+                "unitPrice": 0.000001096
+            }
+        ],
+        "description": "storageGBMinutesTables AWS eu-west-2 Production",
+        "instanceTier": "Production",
+        "region": "eu-west-2",
+        "cloudProvider": "AWS"
+    },
+    {
         "id": "a865cd27-f651-42ab-9fdf-52c4a43edef5",
         "aggregationId": "b5843a1b-a1bb-403d-a929-3ce8486e00d9",
         "pricingBands": [
@@ -1086,6 +1166,22 @@
         "instanceTier": "Development",
         "region": "gcp-asia-southeast1",
         "cloudProvider": "GCP"
+    },
+    {
+        "id": "b5c16a2d-8237-4499-98c6-69dd2b8771d0",
+        "aggregationId": "a2b09c63-14f1-4fb7-a9fa-2920c9edaab7",
+        "pricingBands": [
+            {
+                "id": "411ae01b-2061-4a0c-879b-1bd9910d34df",
+                "lowerLimit": 0,
+                "fixedPrice": 0,
+                "unitPrice": 8.22e-7
+            }
+        ],
+        "description": "devStorageGBMinutesTables AWS eu-west-2 Development",
+        "instanceTier": "Development",
+        "region": "eu-west-2",
+        "cloudProvider": "AWS"
     },
     {
         "id": "b75eb523-928c-4494-9db3-1af2e4c06418",

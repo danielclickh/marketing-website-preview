@@ -44,3 +44,4 @@ public/sitemap2.xml
 public/rss.xml
 .env
 .env.staging
+public/pricingFile.json
