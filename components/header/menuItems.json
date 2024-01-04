@@ -146,6 +146,12 @@
 						"name": "News and events",
 						"href": "/company/news-events",
 						"target": "_self"
+					},
+					{
+						"id": 3,
+						"name": "How to videos",
+						"href": "/videos?category=how-to",
+						"target": "_self"
 					}
 				]
 			},

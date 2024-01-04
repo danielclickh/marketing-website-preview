@@ -226,7 +226,7 @@ export default function RealTimeAnalyticsPage({
                                 className='mb-4 block'
                               />
                               <Markdown
-                                className='min-h-auto text-left xl:min-h-[250px]'
+                                className='min-h-auto text-left xl:min-h-[280px]'
                                 children={quote.content}
                               />
                               <Image

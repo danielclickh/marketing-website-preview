@@ -38,10 +38,13 @@ function PricingOptions({
   const [provider, setProvider] = useState(
     router.query.provider ? 'gcp' : 'aws'
   )
+
   const regionList: RegionPricingWithIcon[] = useMemo(() => {
-    return pricingByRegion
+    const orderedRegions = pricingByRegion
       .filter((item) => item.cloudProvider === provider)
       .map((item) => {
+        let regionSlug =
+          item.region.match(/[(]*\(([^)]+)\)$/i)?.[1] || item.region
         let regionSlug =
           item.region.match(/[(]*\(([^)]+)\)$/i)?.[1] || item.region
         return {
@@ -52,6 +55,30 @@ function PricingOptions({
           regionSlug: slugify(regionSlug)
         }
       })
+      .sort((a, b) => {
+        // Extract the regionSlugs
+        const slugA = a.regionSlug.toLowerCase()
+        const slugB = b.regionSlug.toLowerCase()
+
+        // Define the order of prefixes and region names
+        const order = ['us', 'eu', 'ap', 'europe', 'asia']
+
+        // Find the index of the prefixes/region names in the order array
+        const indexA = order.findIndex((prefix) => slugA.startsWith(prefix))
+        const indexB = order.findIndex((prefix) => slugB.startsWith(prefix))
+
+        // Compare based on the prefix/region name order
+        if (indexA < indexB) return -1
+        if (indexA > indexB) return 1
+
+        // If the prefixes/region names are the same or not in the order, compare the full slugs
+        if (slugA < slugB) return -1
+        if (slugA > slugB) return 1
+
+        return 0 // Slugs are equal
+      })
+
+    return orderedRegions
   }, [pricingByRegion, provider])
 
   const plans: Array<PricingPlanData> = useMemo(() => {
@@ -67,15 +94,11 @@ function PricingOptions({
 
   const updateRegionParam = (value: RegionPricingWithIcon) => {
     router.push(
-      {
-        query: {
-          ...router.query,
-          provider: value.cloudProvider,
-          region: value.regionSlug
-        }
-      },
+      `/pricing?provider=${value.cloudProvider}&region=${value.regionSlug}`,
       undefined,
-      { shallow: true }
+      {
+        shallow: true
+      }
     )
   }
 
