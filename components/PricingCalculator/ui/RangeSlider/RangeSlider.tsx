@@ -7,7 +7,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = ({ value }) => {
   // Set a default value (e.g., 12 hours)
   const router = useRouter()
   return (
-    <div>
+    <div className={`${value === 24 && 'pr-4'} `}>
       <Slider.Root
         className='relative flex h-5 touch-none select-none items-center hover:cursor-pointer'
         max={24}

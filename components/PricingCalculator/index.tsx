@@ -372,11 +372,9 @@ export const PricingCalculator: React.FC<{
         <FormControl label='Service type'>
           <ToggleButtons options={tierOptions} value={tier} />
         </FormControl>
-
         <FormControl label='Cloud provider'>
           <ToggleButtonsProviders options={providerOptions} value={provider} />
         </FormControl>
-
         <FormControl label='Region'>
           <PricingOptions
             selectorOnly={true}
@@ -410,7 +408,6 @@ export const PricingCalculator: React.FC<{
             />
           )}
         </FormControl>
-
         {tier === 'Development' && (
           <FormControl
             label='Compute size'
@@ -430,7 +427,6 @@ export const PricingCalculator: React.FC<{
             />
           </FormControl>
         )}
-
         {tier === 'Production' && (
           <>
             <div className='mb-10'>
