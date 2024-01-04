@@ -92,11 +92,15 @@ function PricingOptions({
 
   const updateRegionParam = (value: RegionPricingWithIcon) => {
     router.push(
-      `/pricing?provider=${value.cloudProvider}&region=${value.regionSlug}`,
-      undefined,
       {
-        shallow: true
-      }
+        query: {
+          ...router.query,
+          provider: value.cloudProvider,
+          region: value.regionSlug
+        }
+      },
+      undefined,
+      { shallow: true }
     )
   }
 
