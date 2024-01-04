@@ -39,7 +39,7 @@ export const PricingCalculator: React.FC<{
 
   const tier = searchParams.get('tier') || 'Development'
   const provider = searchParams.get('provider') || 'aws'
-  const region = searchParams.get('region') || 'us-east-2'
+  const region = searchParams.get('region') || 'us-east-1'
   let hours = 8
   const hoursParam = searchParams.get('hours')
   if (hoursParam !== null) {
