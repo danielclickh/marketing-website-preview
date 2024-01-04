@@ -45,8 +45,6 @@ function PricingOptions({
       .map((item) => {
         let regionSlug =
           item.region.match(/[(]*\(([^)]+)\)$/i)?.[1] || item.region
-        let regionSlug =
-          item.region.match(/[(]*\(([^)]+)\)$/i)?.[1] || item.region
         return {
           ...item,
           regionFlagPNG: (
