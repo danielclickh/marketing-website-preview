@@ -219,7 +219,7 @@ function UseCasesPage({
                                 (client, index) => (
                                   <div
                                     key={index}
-                                    className='logos-color-swap flex h-[86px] w-full items-center border-l border-b border-[#464641]'>
+                                    className='logos-color-swap flex h-[86px] w-full items-center border-l border-b border-[#464641] last:border-r '>
                                     <Link
                                       href={client.href}
                                       className='color-swap mx-auto w-full object-contain'>
