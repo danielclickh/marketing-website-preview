@@ -298,7 +298,7 @@ function UseCasesPage({
       <UseCasesComparisons />
 
       <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
-        <div className='gap-3 md:columns-2 lg:columns-3'>
+        <div className=' gap-3 md:columns-2 lg:columns-3'>
           {quotes.slice(0, visibleTestimonials).map((quote, index) => (
             <div key={index}>
               {quote.quotes.href ? (
@@ -312,7 +312,7 @@ function UseCasesPage({
                         className='color-swap h-16'
                       />
                     </div>
-                    <p className='pt-1 text-sm font-normal text-white'>
+                    <p className='min-h-[145px] pt-1 text-sm font-normal text-white'>
                       "{quote.quotes.quote}"
                     </p>
                   </div>
