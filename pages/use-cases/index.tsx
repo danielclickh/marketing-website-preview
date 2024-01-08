@@ -128,7 +128,7 @@ function UseCasesPage({
             {individualUseCases.map((useCase, index) => (
               <div key={index}>
                 <CUICard>
-                  <CUICard.Body className='rounded-t-lg bg-neutral-900'>
+                  <CUICard.Body className='rounded-lg bg-neutral-900'>
                     <div className='flex flex-col items-start justify-between gap-x-6 lg:flex-row'>
                       <div className='relative p-6 lg:w-[560px]'>
                         {useCase.title === 'Business Intelligence' && (
@@ -212,7 +212,7 @@ function UseCasesPage({
                         </div>
                       </div>
                       <div className='lg:w-[590px]'>
-                        <div className='hide-scrollbar max-h-64 overflow-scroll'>
+                        <div className='hide-scrollbar max-h-64 overflow-hidden'>
                           {useCase.ClientsUsingUseCase.length > 0 && (
                             <div className='grid grid-cols-2'>
                               {useCase.ClientsUsingUseCase.map(
