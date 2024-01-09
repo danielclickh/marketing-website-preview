@@ -104,7 +104,7 @@ function UseCasesPage({
               <h1 className='mb-6 font-basier text-4xl font-semibold text-neutral-200 md:text-5.5xl md:leading-tight'>
                 {useCasesPageData.Title} for the
                 <br />
-                real-time data warehouse
+                Real-time Data Warehouse
               </h1>
               <p className='mx-auto mb-12 max-w-2xl text-xl leading-[175%] text-neutral-200'>
                 Unlock faster queries and the ability to handle greater
