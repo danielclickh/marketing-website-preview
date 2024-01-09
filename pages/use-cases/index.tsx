@@ -266,7 +266,7 @@ function UseCasesPage({
                     <p className='min-h-[145px] pt-1 text-sm font-normal text-white'>
                       {quote.quotes.quote}
                     </p>
-                    <div className='w-1/2'>
+                    <div>
                       <StrapiImage
                         {...quote.quotes.logo}
                         className='color-swap h-16'
@@ -278,7 +278,7 @@ function UseCasesPage({
                 <div
                   key={index}
                   className='logos-color-swap animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover shadow-card hover:bg-neutral-750'>
-                  <div className='w-1/2'>
+                  <div>
                     <StrapiImage
                       {...quote.quotes.logo}
                       className='color-swap h-16'
