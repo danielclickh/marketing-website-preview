@@ -343,7 +343,7 @@ export default function LearnPage({
             alt={'ClickHouse Certified Developer'}
             width={494}
             height={449}
-            className='absolute right-0 -top-20 md:-top-40 max-w-[130px] md:max-w-[247px]' />
+            className='absolute right-0 -top-20 md:-top-40 max-w-[130px] md:max-w-[247px] pointer-events-none' />
 
           {/* Intro */}
           <div className='text-center max-w-2xl mx-auto'>

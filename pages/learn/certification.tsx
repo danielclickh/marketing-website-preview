@@ -194,11 +194,11 @@ export default function CertificationPage({
             alt={'ClickHouse Certified Developer'}
             width={494}
             height={449}
-            className='absolute right-0 -top-20 md:-top-40 max-w-[130px] md:max-w-[247px]' />
+            className='absolute right-0 -top-20 md:-top-40 max-w-[130px] md:max-w-[247px] pointer-events-none' />
 
           {/* Intro */}
           <div className='text-center max-w-3xl mx-auto mb-8'>
-            <SuiTitle type='h2' className='my-6'>Exam objectives</SuiTitle>
+            <SuiTitle type='h2' className='mb-6'>Exam objectives</SuiTitle>
             <p className='mt-6'>To be fully prepared to pass the ClickHouse Certified Developer exam, candidates should
               be able to successfully complete the following tasks on a ClickHouse service, given access to the
               ClickHouse documentation, and using either the clickhouse-client or the ClickHouse SQL Console.</p>
