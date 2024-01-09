@@ -1,19 +1,18 @@
-import { useState } from 'react'
-import { findOne, findAll } from '../../lib/api/strapi'
-import { useCasesPageDataProps } from '../../types/useCasesPage'
-import { GetStaticProps } from 'next'
-import Layout from '../../components/Layout'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { StrapiImage } from '../../components/StrapiElements'
-import Link from 'next/link'
-import { CUIButton } from '../../components/ClickUI'
-import GetStartedFree from '../../components/GetStartedFree'
-import Image from 'next/image'
-import Glider from 'react-glider'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 import 'glider-js/glider.min.css'
-import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/solid'
-import { CUICard } from '../../components/ClickUI'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+import AccordionComponent from '../../components/AccordionComponent'
+import { CUIButton, CUICard } from '../../components/ClickUI'
+import GetStartedFree from '../../components/GetStartedFree'
+import Layout from '../../components/Layout'
+import { StrapiImage } from '../../components/StrapiElements'
 import UseCasesComparisons from '../../components/UseCasesComparisons'
+import { findAll, findOne } from '../../lib/api/strapi'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { useCasesPageDataProps } from '../../types/useCasesPage'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -237,6 +236,8 @@ function UseCasesPage({
                                         className={`${
                                           index === 2
                                             ? 'lg:min-h-[84px] lg:min-w-[150px]'
+                                            : index === 3
+                                            ? 'max-h-[64px] max-w-[160px]'
                                             : 'max-h-[64px] max-w-[120px]'
                                         } mx-auto mt-auto `}
                                       />
@@ -286,7 +287,7 @@ function UseCasesPage({
           {quotes.slice(0, visibleTestimonials).map((quote, index) => (
             <div key={index}>
               {quote.quotes.href ? (
-                <Link href={quote.quotes.href} className=''>
+                <Link href={quote.quotes.href}>
                   <div
                     key={index}
                     className='logos-color-swap animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover p-4 shadow-card hover:bg-neutral-750'>
@@ -342,36 +343,14 @@ function UseCasesPage({
         className='bg-shadow-element yellow-shadow align-shadow-right bg-neutral-900'
         id='industries'>
         <div className='mx-auto max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
-          <div className='py-10'>
-            <Image
-              src='/images/industries-icon.svg'
-              width={72}
-              height={72}
-              alt='Industries'
-              className='mx-auto'
-            />
-            <h2 className='mt-4 text-center text-3xl font-bold text-neutral-0'>
-              Industries
-            </h2>
-            <div className='py-24'>
-              <div className='grid gap-24 md:grid-cols-2 lg:grid-cols-3'>
-                {useCasesPageData.Industries.map((industry, index) => (
-                  <div className='text-center' key={index}>
-                    {industry.icon && (
-                      <StrapiImage
-                        {...industry.icon}
-                        className='mx-auto mb-4'
-                      />
-                    )}
-                    <h3 className='text-lg font-bold'>{industry.name}</h3>
-                    <p className='mt-4 text-sm text-neutral-200'>
-                      {industry.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <AccordionComponent
+            numbered={false}
+            items={useCasesPageData.Industries}
+            title='Industries'
+            icon='/images/industries-icon.svg'
+            description='Wherever you need us, we’re there. We love to engage in thoughtful conversation with the ClickHouse community and are always on-hand to answer your questions. '
+          />
+
           <GetStartedFree href='https://clickhouse.cloud/signUp?loc=use-cases-get-started-footer' />
         </div>
       </div>
