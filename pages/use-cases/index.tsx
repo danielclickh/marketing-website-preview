@@ -89,10 +89,10 @@ function UseCasesPage({
   individualUseCases,
   quotes
 }: useCasesPageDataProps) {
-  const [visibleTestimonials, setVisibleTestimonials] = useState(3)
+  const [visibleTestimonials, setVisibleTestimonials] = useState(6)
 
   const loadMore = () => {
-    setVisibleTestimonials((prevValue) => prevValue + (quotes.length - 3))
+    setVisibleTestimonials((prevValue) => prevValue + (quotes.length - 6))
   }
 
   return (
@@ -284,7 +284,7 @@ function UseCasesPage({
 
       <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
         <div className=' gap-3 md:columns-2 lg:columns-3'>
-          {quotes.slice(0, visibleTestimonials).map((quote, index) => (
+          {quotes.map((quote, index) => (
             <div key={index}>
               {quote.quotes.href ? (
                 <Link href={quote.quotes.href}>
@@ -298,7 +298,7 @@ function UseCasesPage({
                       alt='Quote'
                       className='mb-4 block'
                     />
-                    <p className='min-h-[195px] pt-1 font-normal text-white'>
+                    <p className='pt-1 font-normal text-white'>
                       {quote.quotes.quote}
                     </p>
                     <div>
@@ -327,17 +327,6 @@ function UseCasesPage({
             </div>
           ))}
         </div>
-        {visibleTestimonials < quotes.length && (
-          <div className='mx-auto mt-12'>
-            <CUIButton
-              type='secondary'
-              className='mx-auto w-auto'
-              onClick={loadMore}
-              iconRight=''>
-              View more
-            </CUIButton>
-          </div>
-        )}
       </div>
       <div
         className='bg-shadow-element yellow-shadow align-shadow-right bg-neutral-900'
