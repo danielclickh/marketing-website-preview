@@ -1,384 +1,446 @@
-import React from 'react'
+import { ClockIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
-import Link from 'next/link'
-
+import React from 'react'
 import { GetStaticProps } from 'next'
-import Tilt from 'react-parallax-tilt'
-
-import {
-  CalendarIcon,
-  ClockIcon,
-  LocationMarkerIcon
-} from '@heroicons/react/outline'
-
-import Layout from '../../components/Layout'
-import { StrapiImage } from '../../components/StrapiElements'
-import { SuiText, SuiTitle } from '../../components/sui'
-import { findAll } from '../../lib/api/strapi'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { EventType } from '../../types/events'
-import styles from './Learn.module.scss'
-import { LearnProps } from '../../types/learn'
 import { CUIButton, CUICard } from '../../components/ClickUI'
-import FollowUs from '../../components/FollowUs'
-import HRSeparator from '../../components/HRSeparator'
-import VideoPlayer from '../../components/VideoPlayer'
-import { ChevronRightIcon } from '@heroicons/react/solid'
-
-const popularCourses = [
-  {
-    icon: '/learn/steps.svg',
-    title: 'Getting started',
-    description:
-      'Get up and running quickly with ClickHouse! In this course, you will learn how to create a new service, an understanding of how primary keys work in ClickHouse, how to define a table, how to insert data, and how to run queries on your tables.',
-    time: '25 minutes',
-    url: '913420'
-  },
-  {
-    icon: '/learn/waves.svg',
-    title: 'Data ingestion',
-    description:
-      'In this course, you will learn techniques for getting data into your ClickHouse service, including how to insert a CSV/TSV file, how to insert data from another database, and how to use the various table functions and table engines for ingesting data.',
-    time: '20 minutes',
-    url: '912833/'
-  },
-  {
-    icon: '/learn/eye.svg',
-    title: 'Materialized views',
-    description:
-      'Creating views is an important step in optimizing your OLAP applications. In this course, you will learn how to define materialized views, including views that use the SummingMergeTree and AggregatingMergeTree table engines.',
-    time: '25 minutes',
-    url: '1043451/'
-  }
-]
-
-const learningCourses = [
-  {
-    pretitle: 'Learning path',
-    title: 'ClickHouse Developer Learning Path',
-    description:
-      'Become a ClickHouse Developer expert, from getting started to a deep dive into the architecture of ClickHouse to advanced topics like deduplication, materialized views, and projections.',
-    time: '2 hours',
-    url: '1049584/'
-  },
-  {
-    pretitle: 'Learning path',
-    title: 'ClickHouse Cloud Onboarding',
-    description:
-      'Start your journey to becoming a ClickHouse Cloud expert by learning how to get started in the Cloud, the architecture of ClickHouse, how to create tables, and how to ingest data.',
-    time: '1.5 hours',
-    url: '913421/'
-  }
-]
+import Certificate from '../../components/icons/Certificate'
+import CertificateSquare from '../../components/icons/CertificateSquare'
+import DatabasePlus from '../../components/icons/DatabasePlus'
+import Eye from '../../components/icons/Eye'
+import Stairs from '../../components/icons/Stairs'
+import UserList from '../../components/icons/UserList'
+import UserListSquare from '../../components/icons/UserListSquare'
+import VideoSquare from '../../components/icons/VideoSquare'
+import Webcam from '../../components/icons/Webcam'
+import Layout from '../../components/Layout'
+import LogoCarousel from '../../components/LogoCarousel'
+import { SuiText, SuiTitle } from '../../components/sui'
+import { findOne } from '../../lib/api/strapi'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { LearnProps } from '../../types/learn'
 
 export const getStaticProps: GetStaticProps<LearnProps> =
   async function getStaticProps() {
-    const { data } = await findAll('events', {
-      filters: {
-        localDatetime: {
-          $gt: new Date().toISOString()
-        },
-        category: {
-          $eqi: 'Free Training'
-        }
-      },
-      sort: ['localDatetime:ASC'],
-      populate: [
-        'thumbnailPng',
-        'hostedBy',
-        'hostedBy.hosts',
-        'hostedBy.hosts.avatarPng',
-        'agenda',
-        'agenda.items',
-        'location',
-        'darkFeatureImagePng',
-        'lightFeatureImagePng',
-        'form'
-      ],
-      pagination: { limit: 3 }
-    })
     const commonProps = await getCommonProps()
+    const data = await findOne('homepage', {
+      populate: [
+        'customerStories',
+        'customerStories.*',
+        'customerStories.logos.*',
+        'customerStories.logos.darkLogoPng'
+      ]
+    })
     return {
       props: {
-        upcomingEvents: data,
         seo: {
           title: 'How to Use ClickHouse | Database Tutorial | ClickHouse',
           description:
             'Master the art of data analysis with ClickHouse. Our seamless, easy to use database management platform can help you to unlock powerful insights. Try for free.',
           path: '/learn'
         },
+        ...data,
         ...commonProps
       }
     }
   }
 
-function LearnPage({
-  upcomingEvents,
+type TrainingCardProps = {
+  icon: JSX.Element,
+  badge?: string,
+  title: string,
+  description: string,
+  perks: Array<string>,
+  link: string,
+  button?: string, // Defaults to 'Sign up'
+}
+
+function TrainingCard(props: TrainingCardProps) {
+  return (
+    <div className='h-full flex flex-col justify-between items-center rounded-lg border border-neutral-700/80 bg-neutral-900 shadow-card hover:shadow-lg p-6'>
+      <CUICard.Body className='mb-6'>
+        <div className='h-[46px] mb-6 flex items-center text-primary-300'>
+          {props.icon}
+        </div>
+        <SuiTitle type='h3' className='mb-4 flex items-center gap-3'>
+          {props.title}
+          {props.badge && <span className='flex-grow-0 flex-shrink-0 inline-block px-3 py-1 rounded-full border border-primary text-xs font-normal'>{props.badge}</span>}
+        </SuiTitle>
+        <p className='text-sm'>{props.description}</p>
+      </CUICard.Body>
+      <CUICard.Footer>
+        {props.perks.map(perk => {
+          return (
+            <div className='flex items-start gap-2 mt-2'>
+              <Certificate style={{width: '20px', height: 'auto'}} className='text-primary flex-shrink-0 flex-grow-0 mt-1' />
+              {perk}
+            </div>
+          )
+        })}
+        <CUIButton type='primary' size='lg' className='w-full mt-6' href={props.link}>
+          {props.button || 'Sign up'}
+        </CUIButton>
+      </CUICard.Footer>
+    </div>
+  )
+}
+
+type CertificationCardProps = {
+  title: string,
+  description: string,
+}
+
+function CertificationCard(props: CertificationCardProps) {
+  return (
+    <div className="h-full border border-white rounded p-6">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M5.33333 4H12C12.736 4 13.3333 4.59733 13.3333 5.33333V12C13.3333 12.736 12.736 13.3333 12 13.3333H5.33333C4.59733 13.3333 4 12.736 4 12V5.33333C4 4.59733 4.59733 4 5.33333 4Z"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round" />
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M19.9993 4H26.666C27.402 4 27.9993 4.59733 27.9993 5.33333V12C27.9993 12.736 27.402 13.3333 26.666 13.3333H19.9993C19.2633 13.3333 18.666 12.736 18.666 12V5.33333C18.666 4.59733 19.2633 4 19.9993 4Z"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round" />
+        <path
+          d="M22.666 21.3332L25.3327 18.6665L27.9993 21.3332"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round" />
+        <path
+          d="M25.3327 18.6665V26.6665C25.3327 27.4025 24.7353 27.9998 23.9993 27.9998H18.666"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round" />
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M5.33333 18.6665H12C12.736 18.6665 13.3333 19.2638 13.3333 19.9998V26.6665C13.3333 27.4025 12.736 27.9998 12 27.9998H5.33333C4.59733 27.9998 4 27.4025 4 26.6665V19.9998C4 19.2638 4.59733 18.6665 5.33333 18.6665Z"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round" />
+      </svg>
+      <SuiTitle type="h4" className="my-4">{props.title}</SuiTitle>
+      <p>{props.description}</p>
+    </div>
+  )
+}
+
+type OnDemandCardProps = {
+  icon: JSX.Element,
+  title: string,
+  duration: string,
+  thumbnail: string,
+  description: string,
+  link: string,
+  button?: string, // Defaults to 'Register now'
+}
+
+function OnDemandCard(props: OnDemandCardProps) {
+  return (
+    <CUICard>
+      <CUICard.Body className='p-6 text-center'>
+        <div className='inline-block text-primary-300 h-[60px] flex items-center justify-center'>
+          {props.icon}
+        </div>
+        <SuiTitle type='h3' className='my-4'>{props.title}</SuiTitle>
+        <div className='flex gap-2 justify-center opacity-75'>
+          <ClockIcon width='20' height='20' />
+          {props.duration}
+        </div>
+        <div className='my-4 aspect-video relative rounded overflow-hidden bg-white'>
+          <Image
+            src={props.thumbnail}
+            alt={props.title}
+            width={320}
+            height={180}
+            className='absolute w-full h-full object-cover object-center' />
+        </div>
+        <p className="text-sm">{props.description}</p>
+      </CUICard.Body>
+      <CUICard.Footer className='p-6 pt-0'>
+        <CUIButton type="primary" size="lg" className="w-full" href={props.link}>
+          {props.button || 'Register now'}
+        </CUIButton>
+      </CUICard.Footer>
+    </CUICard>
+  )
+}
+
+const trainingCards: Array<TrainingCardProps> = [
+  {
+    icon: <UserList />,
+    badge: 'Free',
+    title: 'Free On-demand Training',
+    description: 'Learn at your own pace. ClickHouse Academy provides free, on-demand, self-paced training.',
+    perks: [
+      'Start learning right now',
+      'Hands-on lab activities'
+    ],
+    link: 'https://learn.clickhouse.com/visitor_class_catalog'
+  },
+  {
+    icon: <Webcam />,
+    badge: 'Free',
+    title: 'Free Live Training',
+    description: 'Learn from ClickHouse experts by attending one of our virtual training sessions. Instructors deliver the content live.',
+    perks: [
+      'Hands-on lab activities',
+      'Live Q&A and engaging interactions'
+    ],
+    link: 'https://clickhouse.com/company/events/clickhouse-workshop'
+  },
+  {
+    icon: <Certificate />,
+    title: 'Certification',
+    description: 'Showcase your ClickHouse expertise and set yourself apart professionally by becoming ClickHouse certified.',
+    perks: [
+      'Official ClickHouse certification',
+      'Validate your knowledge and skills'
+    ],
+    link: '/learn/certification'
+  }
+]
+
+const certificationCards: Array<CertificationCardProps> = [
+  {
+    title: 'Career Growth',
+    description: 'Let companies know you can provide a competitive advantage.'
+  },
+  {
+    title: 'Industry Recognition',
+    description: 'Passing one of our hands-on, performance-based exams proves you not only understand ClickHouse, but also have the skills to build real-world solutions with ClickHouse.'
+  },
+  {
+    title: 'Improved Results',
+    description: 'ClickHouse is simple to get started, but the deeper you dive into it the more you realize how powerful and complex it is. The more you understand about ClickHouse, the more you will get out of ClickHouse!'
+  }
+]
+
+const onDemandCards: Array<OnDemandCardProps> = [
+  {
+    icon: <Stairs />,
+    title: 'Getting Started',
+    duration: '25 minutes',
+    thumbnail: '/images/learn/od-getting-started.jpg',
+    description: 'Get up and running quickly with ClickHouse! In this course, you’ll learn how to create a new service, how primary keys work in ClickHouse, how to define a table, how to insert data, and how to run queries on your table.',
+    link: 'https://learn.clickhouse.com/visitor_class_catalog/category/106343',
+  },
+  {
+    icon: <DatabasePlus />,
+    title: 'Data Ingestion',
+    duration: '20 minutes',
+    thumbnail: '/images/learn/od-data-ingestion.jpg',
+    description: 'In this course, you’ll learn techniques for getting data into your ClickHouse service, including how to insert a CSV/TSV file, how to insert data from another database, and how to use the various functions and table engines for ingesting data.',
+    link: 'https://learn.clickhouse.com/visitor_catalog_class/show/912833/104---Data-Ingestion',
+  },
+  {
+    icon: <Eye />,
+    title: 'Materialized Views',
+    duration: '25 minutes',
+    thumbnail: '/images/learn/od-materialized-views.jpg',
+    description: 'Creating views is an important step in optimizing your OLAP applications. In this course, you’ll learn how to define materialized views, including views that use the SummingMergeTree and AggregatingMergeTree table engines.',
+    link: 'https://learn.clickhouse.com/visitor_catalog_class/show/1043451/Materialized-Views',
+  }
+]
+
+export default function LearnPage({
   footerData,
   headerData,
+  customerStories,
   seo
 }: LearnProps) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='relative text-center'>
+
+      {/* Hero */}
+      <div className="relative text-center my-16 md:my-20">
         <SuiTitle
-          type='h1'
-          color='white'
-          className='pt-16 pb-6 md:pt-20 md:!text-6xl'>
-          ClickHouse Academy
+          type="h1"
+          color="white"
+          className="mb-6 md:!text-6xl">
+          ClickHouse Training
         </SuiTitle>
-        <SuiText color='secondary' className='pb-10'>
-          Become a ClickHouse expert with our free official ClickHouse training
+        <SuiText color="secondary">
+          Become a ClickHouse expert with our free official ClickHouse training.
         </SuiText>
-
-        <CUIButton
-          type='primary'
-          size='lg'
-          weight='semibold'
-          href='https://learn.clickhouse.com/visitor_class_catalog'
-          className='mx-auto w-56 px-4'>
-          Find a course
-        </CUIButton>
-
-        <div className='relative px-6 pt-10'>
-          <div className={styles.videoPlaceHolder}>
-            <VideoPlayer videoId='756877867' provider='vimeo' />
-          </div>
-        </div>
       </div>
 
-      <div className='bg-shadow-element-right yellow-shadow container mx-auto max-w-screen-xl pb-16 pt-24 text-center'>
-        <SuiTitle type='h2' className='mb-6'>
-          Popular free courses
-        </SuiTitle>
-        <SuiText
-          size='base'
-          weight='normal'
-          color='secondary'
-          className='pb-16'>
-          Learn the basics of ClickHouse with our online courses.
-        </SuiText>
-
-        <div className='mx-auto grid grid-cols-1 gap-12 px-8 pb-10 md:grid-cols-3 md:px-8'>
-          {popularCourses.map((course) => (
-            <Link
-              key={course.title}
-              href={`https://learn.clickhouse.com/visitor_catalog_class/show/${course.url}`}
-              className='transition ease-in-out hover:no-underline'>
-              <CUICard className='group grid min-h-[22.5rem] w-full bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
-                <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
-                  <Image
-                    src={course.icon}
-                    alt={`${course.title}`}
-                    width={64}
-                    height={64}
-                  />
-                  <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-4'>
-                    <div className='cursor-pointer text-xl font-semibold leading-tight'>
-                      {course.title}
-                    </div>
-                    <div className='flex gap-2 pb-4 text-sm text-neutral-200 group-hover:text-neutral-0'>
-                      <ClockIcon width={12} /> {course.time}
-                    </div>
-                    <div className='text-center text-sm text-neutral-200 group-hover:text-neutral-0'>
-                      {course.description}
-                    </div>
-                  </div>
-                </CUICard.Body>
-              </CUICard>
-            </Link>
-          ))}
-        </div>
-        <CUIButton
-          type='secondary'
-          className='group mx-auto flex w-auto'
-          href='https://learn.clickhouse.com/visitor_class_catalog'
-          iconRight={
-            <ChevronRightIcon
-              height='18'
-              className='pt-0.5 transition group-hover:translate-x-1/2'
-            />
-          }>
-          Browse more free training
-        </CUIButton>
-      </div>
-
-      <div className='clip-inverted-triangle-top flex flex-col items-center gap-x-16 gap-y-12 text-center lg:gap-x-20 lg:px-32'>
-        <div className='relative flex-col px-8 pt-24 md:pt-40'>
-          <SuiTitle type='h2' color='text-default'>
-            Learning paths
-          </SuiTitle>
-          <SuiText
-            size='base'
-            weight='normal'
-            color='text-default'
-            className='mx-auto mt-6 max-w-screen-sm'>
-            Become a subject matter expert through our recommended series of
-            courses that will best help you build knowledge progressively.
-          </SuiText>
-          <div className='mt-8 flex w-full flex-col gap-12 pb-24 sm:grid sm:grid-cols-1 md:grid-cols-2 md:gap-16'>
-            {learningCourses.map((course) => (
-              <Link
-                key={course.title}
-                href={`https://learn.clickhouse.com/visitor_catalog_class/show/${course.url}`}
-                className='group rounded-lg bg-neutral-750 bg-opacity-90 transition ease-in-out hover:no-underline'>
-                <CUICard className='w-full bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8 md:max-w-[22.5rem]'>
-                  <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
-                    <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-4'>
-                      <div className='cursor-pointer px-4 text-xl font-semibold leading-tight'>
-                        {course.title}
-                      </div>
-                      <div className='flex gap-2 pb-4 text-sm text-neutral-200'>
-                        <ClockIcon width={12} /> {course.time}
-                      </div>
-                      <div className='text-center text-sm text-neutral-200 group-hover:text-neutral-0'>
-                        {course.description}
-                      </div>
-                    </div>
-                  </CUICard.Body>
-                </CUICard>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className='bg-shadow-element-left red-shadow container mx-auto max-w-screen-md px-3 pt-24 text-center'>
-        <Image
-          src='/learn/icon_pro_cert.svg'
-          alt='Professional Certificate Icon'
-          className='mx-auto'
-          width={72}
-          height={72}
-        />
-        <SuiTitle type='h2' className='mt-8 mb-6'>
-          Professional certification
-        </SuiTitle>
-        <SuiText
-          size='base'
-          weight='normal'
-          color='secondary'
-          className='mb-10'>
-          Let the world know you’re a ClickHouse subject matter expert! We’re
-          working on building the first official ClickHouse certification
-          program, and we will share the news on social media when the exams are
-          ready for beta testers.
-        </SuiText>
-
-        <CUIButton
-          type='secondary'
-          className='mx-auto w-auto'
-          href='https://twitter.com/clickhousedb'
-          target='_blank'
-          iconLeft={
-            <Image
-              alt='Twitter icon'
-              src='/learn/icon_twitter_outline.svg'
-              width={24}
-              height={20}
-            />
-          }>
-          Follow us on Twitter
-        </CUIButton>
-      </div>
-      <HRSeparator className='my-24' />
-      <div className='container mx-auto max-w-screen-xl px-8'>
-        <Image
-          src='/learn/icon_video.svg'
-          alt='Live ClickHouse events icon'
-          className='mx-auto'
-          width={72}
-          height={72}
-        />
-        <SuiTitle type='h2' className='mt-8 mb-6 text-center'>
-          Upcoming live events
-        </SuiTitle>
-        <SuiText
-          size='base'
-          weight='normal'
-          color='secondary'
-          className='mx-auto mb-10 max-w-3xl text-center'>
-          Join our community and attend our events to learn more about
-          ClickHouse! Our team is always happy to support and answer any
-          questions you may have about ClickHouse development. You can also
-          <Link
-            href='https://learn.clickhouse.com/visitor_class_catalog/category/115910'
-            className='ml-2 font-semibold underline hover:text-neutral-0'>
-            access our list of older events
-          </Link>{' '}
-          hosted by us.
-        </SuiText>
-
-        <div className='mx-auto flex w-full flex-col justify-center gap-12 md:w-auto md:flex-row md:gap-16 '>
-          {upcomingEvents.map((event: EventType) => (
-            <Link
-              href={`/company/events/${event.slug}`}
-              className='flex h-auto w-full flex-col justify-between rounded-lg border border-neutral-700/80 bg-neutral-900/70 shadow-card hover:no-underline md:max-w-[22.5rem]'
-              key={event.title}>
-              <Tilt
-                tiltEnable={false}
-                glareEnable={true}
-                glareMaxOpacity={0.4}
-                glareColor='rgba(251, 255, 70, 0.08)'
-                glarePosition='all'
-                className='h-full'>
-                <div>
-                  {event.thumbnailPng ? (
-                    <StrapiImage
-                      {...event.thumbnailPng}
-                      alt='image'
-                      width={342}
-                      height={196}
-                      className='h-48 w-full rounded-t-lg object-cover object-center'
-                    />
-                  ) : (
-                    <Image
-                      alt='image'
-                      src={`/images/clickhouse_workshop.png`}
-                      width={342}
-                      height={196}
-                      className='h-48 w-full object-cover object-center'
-                    />
-                  )}
-
-                  <div className='p-4'>
-                    <p className='font-inconsolata text-primary-300'>
-                      {event.category}
-                    </p>
-                    <SuiText
-                      size='lg'
-                      weight='bold'
-                      className='mt-2 mb-4 md:min-h-[3.5rem]'>
-                      {event.title}
-                    </SuiText>
-
-                    <SuiText
-                      size='sm'
-                      color='secondary'
-                      className='mb-6 flex flex-col gap-2.5'>
-                      {event.localDatetime && (
-                        <div className='flex gap-2'>
-                          <CalendarIcon width='20' height='20' />
-                          {new Date(event.localDatetime).toDateString()}
-                        </div>
-                      )}
-
-                      <div className='flex gap-2'>
-                        <LocationMarkerIcon width='20' height='20' />
-                        {[event.location.city, event.location.country].join(
-                          ', '
-                        )}
-                      </div>
-                    </SuiText>
-                  </div>
+      {/* Training cards */}
+      <div className="relative">
+        <div className="bg-primary-300 clip-inverted-triangle-simplified absolute inset-0 top-[100px] z-0" />
+        <div className="section-container relative z-10">
+          <div className="flex flex-wrap justify-center gap-y-4">
+            {trainingCards.map(card => {
+              return (
+                <div className="px-2 w-full md:w-1/2 lg:w-1/3">
+                  <TrainingCard {...card} />
                 </div>
-              </Tilt>
-            </Link>
-          ))}
+              )
+            })}
+          </div>
         </div>
       </div>
-      <FollowUs />
+
+      {/* Instructor-led training */}
+      <div className="bg-primary-300 text-primary-800 py-12 md:py-24">
+        <div className="section-container flex items-center justify-between max-w-5xl">
+
+          {/* Content column */}
+          <div className='max-w-lg px-2'>
+            <UserListSquare />
+            <SuiTitle type='h2' className='my-6'>Free Instructor-led Training</SuiTitle>
+            <p className='my-6'>Our live, online training events are a great way to get started on your path to becoming
+              a subject matter expert in ClickHouse.</p>
+            {[
+              'Delivered by Rich Raposa, our head of training at ClickHouse',
+              'Support engineers are on hand to help answer questions',
+              'Hands-on labs',
+              'Accelerate your career with ClickHouse Certification!',
+              'We start at the beginning, then dive deep into ClickHouse',
+            ].map(item => {
+              return (
+                <div className='flex items-start gap-2 mt-2'>
+                  <Certificate style={{ width: '20px', height: 'auto' }} className='flex-shrink-0 flex-grow-0 mt-1' />
+                  {item}
+                </div>
+              )
+            })}
+            <CUIButton
+              type='primary-dark'
+              size='lg'
+              className='mt-6 !px-12'
+              linkClass='inline-block'
+              href='/learn/certification'>
+              Register now
+            </CUIButton>
+          </div>
+
+          {/* Image column */}
+          <div className='-mb-24 hidden lg:block'>
+            <Image
+              src='/images/learn/instructor-led-training.png'
+              alt='Instructor-led training'
+              width={910}
+              height={1272} />
+          </div>
+
+        </div>
+      </div>
+
+      {/* Certification */}
+      <div className='bg-neutral-600 text-white py-12 md:py-24'>
+        <div className='section-container relative'>
+
+          {/* Badge */}
+          <Image
+            src='/images/learn/certified-developer-badge.png'
+            alt={'ClickHouse Certified Developer'}
+            width={494}
+            height={449}
+            className='absolute right-0 -top-20 md:-top-40 max-w-[130px] md:max-w-[247px]' />
+
+          {/* Intro */}
+          <div className='text-center max-w-2xl mx-auto'>
+            <CertificateSquare className='inline-block' />
+            <SuiTitle type='h2' className='my-6'>ClickHouse Certification</SuiTitle>
+            <p className='my-6'>Become a recognized ClickHouse expert by validating your skills with our official
+              ClickHouse Certification.</p>
+            <CUIButton
+              type='primary'
+              className='mt-6 !px-8 shadow-lg'
+              linkClass='inline-block'
+              href='/learn/certification' >
+              Check our certification page
+            </CUIButton>
+          </div>
+
+          {/* Cards */}
+          <div className="flex flex-wrap justify-center gap-y-4 mt-12">
+            {certificationCards.map(card => {
+              return (
+                <div className="px-2 w-full md:w-1/2 xl:w-1/4">
+                  <CertificationCard {...card} />
+                </div>
+              )
+            })}
+          </div>
+
+        </div>
+      </div>
+
+      {/* On demand */}
+      <div className='py-12 md:py-24'>
+        <div className='section-container'>
+
+          {/* Intro */}
+          <div className='text-center max-w-2xl mx-auto'>
+            <CertificateSquare className='inline-block text-primary-300' />
+            <SuiTitle type='h2' className='my-6'>On-demand</SuiTitle>
+            <p className='mt-6'>Check out some of our popular free courses.</p>
+          </div>
+
+          {/* Cards */}
+          <div className="flex flex-wrap justify-center gap-y-4 mt-12">
+            {onDemandCards.map(card => {
+              return (
+                <div className="px-2 w-full md:w-1/2 lg:w-1/3">
+                  <OnDemandCard {...card} />
+                </div>
+              )
+            })}
+          </div>
+
+        </div>
+      </div>
+
+      {/* Events */}
+      <div className='bg-white/10 py-12 md:py-24'>
+        <div className='section-container'>
+          <div className='text-center max-w-3xl mx-auto'>
+            <VideoSquare className='inline-block text-primary-300' />
+            <SuiTitle type='h2' className='my-6'>Upcoming live events</SuiTitle>
+            <p className='my-6'>Join our community and attend our events to learn more about ClickHouse! Our team is
+              always happy to support and answer any questions you may have about ClickHouse development. You can also
+              access our list of older events hosted by us.</p>
+            <CUIButton
+              type='primary-dark'
+              size='lg'
+              linkClass='inline-block'
+              className='md:!px-20 !border-primary-800'
+              href='/company/news-events'>
+              Check our calendar
+            </CUIButton>
+          </div>
+        </div>
+      </div>
+
+      {/* Logo wheel */}
+      <div className="bg-white/10 relative">
+        <div className="bg-primary-300 clip-inverted-triangle-simplified absolute inset-0 md:-top-20 z-0" />
+        <div className='section-container text-primary-800 pt-28 pb-6 md:pt-24 md:pb-20 relative z-10'>
+          <SuiTitle type='h3' className='text-center mb-6'>
+            Trusted by the best developers that work with data{' '}
+            <span className='tilted tilted-black'>
+              <span className='tilted-content text-white'>at scale</span>
+            </span>
+          </SuiTitle>
+          <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center md:gap-x-14'>
+            <div className='absolute left-0 z-10 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
+            <div className='absolute right-0 z-10 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
+            <LogoCarousel
+              logos={customerStories.logos.slice(0, Math.ceil(customerStories.logos.length / 2))}
+              speedClass1='animate-marqueeLeft'
+              speedClass2='animate-marqueeLeft2' />
+          </div>
+        </div>
+      </div>
+
     </Layout>
   )
 }
-
-export default LearnPage
