@@ -132,7 +132,7 @@ function UseCasesPage({
                     <div className='flex flex-col items-start justify-between gap-x-6 lg:flex-row'>
                       <div className='relative p-6 lg:w-[560px]'>
                         {useCase.title === 'Business Intelligence' && (
-                          <div className='absolute right-0'>
+                          <div className=' absolute right-6 lg:right-0'>
                             <CUIButton
                               type='secondary'
                               size='sm'
@@ -149,7 +149,7 @@ function UseCasesPage({
                           </div>
                         )}
                         {useCase.title === 'Logs, Events, & Traces' && (
-                          <div className='absolute right-0'>
+                          <div className=' absolute right-6 lg:right-0'>
                             <CUIButton
                               type='secondary'
                               size='sm'
@@ -166,7 +166,7 @@ function UseCasesPage({
                           </div>
                         )}
                         {useCase.title === 'Machine Learning & GenAI' && (
-                          <div className='absolute right-0'>
+                          <div className=' absolute right-6 lg:right-0'>
                             <CUIButton
                               type='secondary'
                               size='sm'
@@ -183,7 +183,7 @@ function UseCasesPage({
                           </div>
                         )}
                         {useCase.title === 'Real-time Analytics' && (
-                          <div className='absolute right-0'>
+                          <div className='absolute right-6 lg:right-0'>
                             <CUIButton
                               type='secondary'
                               size='sm'
@@ -211,27 +211,61 @@ function UseCasesPage({
                           </div>
                         </div>
                       </div>
-                      <div className='lg:w-[590px]'>
+                      <div className='w-full border-t border-t-[#464641] lg:w-[590px] lg:border-t-0'>
                         <div className='hide-scrollbar max-h-64 overflow-hidden'>
-                          {useCase.ClientsUsingUseCase.length > 0 && (
-                            <div className='grid grid-cols-2'>
+                          {useCase.title === 'Machine Learning & GenAI' ? (
+                            <div className='grid grid-cols-2 lg:grid-cols-2 lg:grid-rows-3'>
                               {useCase.ClientsUsingUseCase.map(
                                 (client, index) => (
-                                  <div
+                                  <Link
+                                    href={client.href}
                                     key={index}
-                                    className='logos-color-swap flex h-[86px] w-full items-center border-l border-b border-[#464641] last:border-r '>
-                                    <Link
-                                      href={client.href}
-                                      className='color-swap mx-auto w-full object-contain'>
+                                    className={`${
+                                      index === 0
+                                        ? 'h-[86px] lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-2' // First element
+                                        : index === 1
+                                        ? 'h-[86px] lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:row-end-3' // Second element
+                                        : index === 2
+                                        ? 'lg:col-start-2 lg:col-end-4 lg:row-start-1 lg:row-end-3' // Third element spanning two rows
+                                        : index === 3
+                                        ? 'h-[86px] lg:col-start-1 lg:col-end-4 lg:row-start-3 lg:row-end-4' // Fourth element spanning full width
+                                        : ''
+                                    } logos-color-swap flex w-full items-center border-l border-b border-[#464641] last:border-r`}>
+                                    <div className='color-swap mx-auto w-full object-contain'>
                                       <StrapiImage
                                         {...client.logo}
-                                        className='mx-auto mt-auto '
+                                        className={`${
+                                          index === 2
+                                            ? 'lg:min-h-[84px] lg:min-w-[150px]'
+                                            : 'max-h-[64px] max-w-[120px]'
+                                        } mx-auto mt-auto `}
                                       />
-                                    </Link>
-                                  </div>
+                                    </div>
+                                  </Link>
                                 )
                               )}
                             </div>
+                          ) : (
+                            useCase.ClientsUsingUseCase.length > 0 && (
+                              <div className='grid grid-cols-2'>
+                                {useCase.ClientsUsingUseCase.map(
+                                  (client, index) => (
+                                    <div
+                                      key={index}
+                                      className='logos-color-swap flex h-[86px] w-full items-center border-l border-b border-[#464641] last:border-r '>
+                                      <Link
+                                        href={client.href}
+                                        className='color-swap mx-auto w-full object-contain'>
+                                        <StrapiImage
+                                          {...client.logo}
+                                          className='mx-auto mt-auto max-h-[64px] max-w-[100px] lg:max-w-[120px]'
+                                        />
+                                      </Link>
+                                    </div>
+                                  )
+                                )}
+                              </div>
+                            )
                           )}
                         </div>
                       </div>
