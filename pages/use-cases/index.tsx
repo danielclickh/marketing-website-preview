@@ -264,7 +264,7 @@ function UseCasesPage({
                       className='mb-4 block'
                     />
                     <p className='min-h-[145px] pt-1 text-sm font-normal text-white'>
-                      "{quote.quotes.quote}"
+                      {quote.quotes.quote}
                     </p>
                     <div className='w-1/2'>
                       <StrapiImage
