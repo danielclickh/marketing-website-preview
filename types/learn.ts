@@ -1,6 +1,6 @@
 import { EventType } from './events'
-import { CommonProps, HomepageCustomerLogos } from './homepage'
+import { CommonProps, HomepageCustomerStories } from './homepage'
 
 export interface LearnProps extends CommonProps {
-  customerLogos: HomepageCustomerLogos
+  customerStories: HomepageCustomerStories
 }
