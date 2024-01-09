@@ -420,7 +420,7 @@ export default function LearnPage({
         </div>
       </div>
 
-      {/* Logo wheel */}
+      {/* Logo carousel */}
       <div className="bg-white/10 relative">
         <div className="bg-primary-300 clip-inverted-triangle-simplified absolute inset-0 md:-top-20 z-0" />
         <div className='section-container text-primary-800 pt-28 pb-6 md:pt-24 md:pb-20 relative z-10'>
