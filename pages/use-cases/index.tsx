@@ -297,7 +297,7 @@ function UseCasesPage({
                       alt='Quote'
                       className='mb-4 block'
                     />
-                    <p className='min-h-[145px] pt-1 text-sm font-normal text-white'>
+                    <p className='min-h-[195px] pt-1 font-normal text-white'>
                       {quote.quotes.quote}
                     </p>
                     <div>
