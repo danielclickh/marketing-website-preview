@@ -27,6 +27,18 @@ export const Select: React.FC<SelectProps> = ({
         { shallow: true }
       )
     }
+    if (id === 'storageUnit') {
+      router.push(
+        {
+          query: {
+            ...router.query,
+            storageUnit: e.value
+          }
+        },
+        undefined,
+        { shallow: true }
+      )
+    }
     if (id === 'computeMinSize') {
       router.push(
         {

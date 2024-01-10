@@ -27,7 +27,19 @@ import {
 } from './CalculatorTypesOptions'
 import styles from './CostCalculator.module.scss'
 import CTAButtons from './CTAButtons'
+import { Select } from './ui/Select'
+import { Text } from './ui/Text'
 import { ToggleButtonsProviders } from './ui/ToggleButtonsProviders'
+
+function convertStorageToGB(size: number, unit: string) {
+  const unitToGB: { [key: string]: number } = {
+    gb: 1,
+    tb: 1024,
+    pb: 1024 * 1024
+  }
+
+  return Number(size * unitToGB[unit]) / 10
+}
 
 export const PricingCalculator: React.FC<{
   pricingByRegion: RegionPricing[]
@@ -48,6 +60,9 @@ export const PricingCalculator: React.FC<{
   const storage = Number(searchParams.get('storage')) || 500
   const computeMinSize = Number(searchParams.get('computeMinSize')) || 16
   const computeMaxSize = Number(searchParams.get('computeMaxSize')) || 48
+
+  const storageSize = Number(searchParams.get('storageSize')) || 500
+  const storageUnit = searchParams.get('storageUnit') || 'gb'
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [pricingData, setPricingData] = useState<PricingData | undefined>()
@@ -88,6 +103,12 @@ export const PricingCalculator: React.FC<{
         undefined,
         { shallow: true }
       )
+    }
+
+    //handle new storage options
+    if (storageUnit && storageSize) {
+      console.log(storageSize, storageUnit)
+      //calculate the compressed size
     }
 
     //make sure only accepted regions and providers
@@ -316,9 +337,19 @@ export const PricingCalculator: React.FC<{
         }
       }
     }
-  }, [tier, provider, region, hours, storage, computeMinSize, computeMaxSize])
+  }, [
+    tier,
+    provider,
+    region,
+    hours,
+    storage,
+    computeMinSize,
+    computeMaxSize,
+    storageUnit,
+    storageSize
+  ])
 
-  const storageAfterCompression = storage / 10
+  const storageAfterCompression = convertStorageToGB(storageSize, storageUnit)
 
   const costData = useMemo(() => {
     if (!pricingData) {
@@ -390,6 +421,34 @@ export const PricingCalculator: React.FC<{
           <RangeSlider value={hours} />
         </FormControl>
 
+        {/* === START new storage options  */}
+        {/* need to convert to gbs */}
+        <div className='relative'>
+          <div className='flex gap-6'>
+            <FormControl
+              id='storageSize'
+              label='Storage Size'
+              helpText={`${Math.round(storageAfterCompression).toLocaleString(
+                'en-us'
+              )}GB after compression`}>
+              {tier && storageSize && <Text id='storageVolume' />}
+            </FormControl>
+            <FormControl id='storageUnit' label='Storage Unit'>
+              {tier && dataOptions && (
+                <Select
+                  id='storageUnit'
+                  options={[
+                    { value: 'gb', label: 'GB' },
+                    { value: 'tb', label: 'TB' },
+                    { value: 'pb', label: 'PB' }
+                  ]}
+                  value={storageUnit}
+                />
+              )}
+            </FormControl>
+          </div>
+        </div>
+        {/* === END new storage options  */}
         <FormControl
           id='compression'
           label='Data volume'
