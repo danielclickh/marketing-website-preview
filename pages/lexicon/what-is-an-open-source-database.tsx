@@ -1,10 +1,10 @@
 import { InferGetStaticPropsType } from 'next'
 import React from 'react'
-import Layout from '../components/Layout'
-import { getNewsLetterData } from '../components/NewsLetter/getNewsLetterData'
-import { SeoPage } from '../components/SeoPage'
-import { getCommonProps } from '../lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '../lib/utils/revalidationConfig'
+import Layout from '../../components/Layout'
+import { getNewsLetterData } from '../../components/NewsLetter/getNewsLetterData'
+import { SeoPage } from '../../components/SeoPage'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
 
 export async function getStaticProps() {
   const newsLetterData = await getNewsLetterData()
@@ -13,7 +13,7 @@ export async function getStaticProps() {
       seo: {
         title: 'What Is an Open-Source Database? | ClickHouse',
         description: 'Discover the power of open-source databases. Learn how they offer cost-effectiveness and why ClickHouse is a game-changer for real-time analytics.',
-        path: '/what-is-an-open-source-database'
+        path: '/lexicon/what-is-an-open-source-database'
       },
       newsLetterData,
       ...(await getCommonProps()),
@@ -34,25 +34,25 @@ export default function Page({
         title='What Is an Open-Source Database?'
         moreLikeThis={[
           {
-            link: '/data-warehousing-explained',
+            link: '/lexicon/data-warehousing-explained',
             title: 'Data Warehousing Explained'
           },
           {
-            link: '/distributed-databases',
+            link: '/lexicon/distributed-databases',
             title: 'Distributed Database Systems Explained'
           },
           {
-            link: '/high-performance-databases',
+            link: '/lexicon/high-performance-databases',
             title: 'High-Performance Database Defined'
           },
           // {
-          //   link: '/what-is-an-open-source-database',
+          //   link: '/lexicon/what-is-an-open-source-database',
           //   title: 'What Is an Open-Source Database?'
           // }
         ]}
         newsLetterData={newsLetterData}>
 {`
-*What Is an Open-Source Database?**
+**What Is an Open-Source Database?**
 
 An open-source database is an intriguing concept that sits at the intersection of two key trends in the technology world: the openness of source code and the never-ending need for robust, efficient databases. But what exactly is an open-source database? Join us on this journey as we explore this unique concept in depth.
 

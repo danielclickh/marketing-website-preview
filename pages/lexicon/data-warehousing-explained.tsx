@@ -1,10 +1,10 @@
 import { InferGetStaticPropsType } from 'next'
 import React from 'react'
-import Layout from '../components/Layout'
-import { getNewsLetterData } from '../components/NewsLetter/getNewsLetterData'
-import { SeoPage } from '../components/SeoPage'
-import { getCommonProps } from '../lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '../lib/utils/revalidationConfig'
+import Layout from '../../components/Layout'
+import { getNewsLetterData } from '../../components/NewsLetter/getNewsLetterData'
+import { SeoPage } from '../../components/SeoPage'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
 
 export async function getStaticProps() {
   const newsLetterData = await getNewsLetterData()
@@ -13,7 +13,7 @@ export async function getStaticProps() {
       seo: {
         title: 'Data Warehousing Explained | ClickHouse',
         description: 'Learn all about the intricacies of data warehousing: its essential components, unique benefits, architecture, and the journey from data analytics to AI.',
-        path: '/data-warehousing-explained'
+        path: '/lexicon/data-warehousing-explained'
       },
       newsLetterData,
       ...(await getCommonProps()),
@@ -34,19 +34,19 @@ export default function Page({
         title='Data Warehousing Explained'
         moreLikeThis={[
           // {
-          //   link: '/data-warehousing-explained',
+          //   link: '/lexicon/data-warehousing-explained',
           //   title: 'Data Warehousing Explained'
           // },
           {
-            link: '/distributed-databases',
+            link: '/lexicon/distributed-databases',
             title: 'Distributed Database Systems Explained'
           },
           {
-            link: '/high-performance-databases',
+            link: '/lexicon/high-performance-databases',
             title: 'High-Performance Database Defined'
           },
           {
-            link: '/what-is-an-open-source-database',
+            link: '/lexicon/what-is-an-open-source-database',
             title: 'What Is an Open-Source Database?'
           }
         ]}

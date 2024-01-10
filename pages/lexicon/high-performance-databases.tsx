@@ -1,10 +1,10 @@
 import { InferGetStaticPropsType } from 'next'
 import React from 'react'
-import Layout from '../components/Layout'
-import { getNewsLetterData } from '../components/NewsLetter/getNewsLetterData'
-import { SeoPage } from '../components/SeoPage'
-import { getCommonProps } from '../lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '../lib/utils/revalidationConfig'
+import Layout from '../../components/Layout'
+import { getNewsLetterData } from '../../components/NewsLetter/getNewsLetterData'
+import { SeoPage } from '../../components/SeoPage'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
 
 export async function getStaticProps() {
   const newsLetterData = await getNewsLetterData()
@@ -13,7 +13,7 @@ export async function getStaticProps() {
       seo: {
         title: 'High-Performance Database Defined | ClickHouse',
         description: 'Discover the definition of a high-performance database and learn why ClickHouse sets the standard in speed, efficiency, and scalability for data at scale.',
-        path: '/high-performance-databases'
+        path: '/lexicon/high-performance-databases'
       },
       newsLetterData,
       ...(await getCommonProps()),
@@ -34,19 +34,19 @@ export default function Page({
         title='High-Performance Database Defined'
         moreLikeThis={[
           {
-            link: '/data-warehousing-explained',
+            link: '/lexicon/data-warehousing-explained',
             title: 'Data Warehousing Explained'
           },
           {
-            link: '/distributed-databases',
+            link: '/lexicon/distributed-databases',
             title: 'Distributed Database Systems Explained'
           },
           // {
-          //   link: '/high-performance-databases',
+          //   link: '/lexicon/high-performance-databases',
           //   title: 'High-Performance Database Defined'
           // },
           {
-            link: '/what-is-an-open-source-database',
+            link: '/lexicon/what-is-an-open-source-database',
             title: 'What Is an Open-Source Database?'
           }
         ]}
