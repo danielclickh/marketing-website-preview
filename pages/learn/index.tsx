@@ -303,7 +303,7 @@ export default function LearnPage({
       </div>
 
       {/* Training cards */}
-      <div className='relative'>
+      <div className='relative bg-grid'>
         <div className='clip-inverted-triangle-simplified absolute inset-0 top-[100px] z-0 bg-primary-300' />
         <div className='section-container relative z-10'>
           <div className='flex flex-wrap justify-center gap-y-4'>

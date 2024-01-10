@@ -82,7 +82,7 @@ export default function CertificationPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
 
       {/* Hero */}
-      <div className="section-container my-16 md:my-20 grid grid-cols-1 lg:grid-cols-2 auto-rows-max gap-x-6 gap-y-8">
+      <div className="section-container py-16 md:py-20 grid grid-cols-1 lg:grid-cols-2 auto-rows-max gap-x-6 gap-y-8 bg-grid">
 
         {/* Content */}
         <div className='col-start-1 row-start-1'>
@@ -167,7 +167,7 @@ export default function CertificationPage({
               {!formLoaded && <div className='text-center'>Loading form...</div>}
 
               {formSuccess && (
-                <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
+                <div ref={formSuccessRef} className='flex flex-wrap justify-center gap-4 text-neutral-0'>
                   <div className='subscribed'>
                     <div className='success-container text-center'>
                       <CheckCircleIcon className='mx-auto mb-4 h-16 w-16 stroke-1 text-primary-300' />
