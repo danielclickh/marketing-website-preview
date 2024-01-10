@@ -611,7 +611,7 @@ export const PricingCalculator: React.FC<{
                       provider={provider}
                       minMemory={computeMinSize}
                       maxMemory={computeMaxSize}
-                      storageSize={storageSize}
+                      storageSize={Number(storageAfterCompression)}
                       computeCostMin={Number(
                         costData.minComputeCost!.toFixed(2)
                       )}
