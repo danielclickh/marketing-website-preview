@@ -20,10 +20,10 @@ import {
   acceptableRegions,
   computeOptions,
   config,
-  dataOptions,
   PricingData,
   providerOptions,
-  tierOptions
+  tierOptions,
+  storageUnitOptions
 } from './CalculatorTypesOptions'
 import styles from './CostCalculator.module.scss'
 import CTAButtons from './CTAButtons'
@@ -57,12 +57,11 @@ export const PricingCalculator: React.FC<{
   if (hoursParam !== null) {
     hours = Number(hoursParam)
   }
-  const storage = Number(searchParams.get('storage')) || 500
   const computeMinSize = Number(searchParams.get('computeMinSize')) || 16
   const computeMaxSize = Number(searchParams.get('computeMaxSize')) || 48
 
-  const storageSize = Number(searchParams.get('storageSize')) || 500
-  const storageUnit = searchParams.get('storageUnit') || 'gb'
+  const storageSize = Number(searchParams.get('storageSize')) || 0
+  const storageUnit = searchParams.get('storageUnit')?.toLowerCase() || 'tb'
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [pricingData, setPricingData] = useState<PricingData | undefined>()
@@ -103,12 +102,6 @@ export const PricingCalculator: React.FC<{
         undefined,
         { shallow: true }
       )
-    }
-
-    //handle new storage options
-    if (storageUnit && storageSize) {
-      console.log(storageSize, storageUnit)
-      //calculate the compressed size
     }
 
     //make sure only accepted regions and providers
@@ -167,13 +160,13 @@ export const PricingCalculator: React.FC<{
       )
     }
 
-    //validate data accepted volumes
-    if (!dataOptions.map((option) => option.value).includes(storage)) {
+    //validate storage units
+    if (!storageUnitOptions.includes(storageUnit.toLowerCase())) {
       router.push(
         {
           query: {
             ...router.query,
-            storage: 500
+            storageUnit: 'gb' // Set your default value here
           }
         },
         undefined,
@@ -208,12 +201,12 @@ export const PricingCalculator: React.FC<{
         )
       }
 
-      if (storage > 10240) {
+      if (storageSize < 0) {
         router.push(
           {
             query: {
               ...router.query,
-              storage: 10240
+              storageSize: 0
             }
           },
           undefined,
@@ -342,7 +335,6 @@ export const PricingCalculator: React.FC<{
     provider,
     region,
     hours,
-    storage,
     computeMinSize,
     computeMaxSize,
     storageUnit,
@@ -431,12 +423,10 @@ export const PricingCalculator: React.FC<{
               helpText={`${Math.round(storageAfterCompression).toLocaleString(
                 'en-us'
               )}GB after compression`}>
-              {tier && storageSize && (
-                <Text id='storageVolume' value={storageSize} />
-              )}
+              <Text id='storageVolume' value={storageSize} />
             </FormControl>
             <FormControl id='storageUnit' label='Storage Unit'>
-              {tier && dataOptions && (
+              {tier && (
                 <Select
                   id='storageUnit'
                   options={[
@@ -451,25 +441,7 @@ export const PricingCalculator: React.FC<{
           </div>
         </div>
         {/* === END new storage options  */}
-        <FormControl
-          id='compression'
-          label='Data volume'
-          tooltip='Pricing is based on compressed data. We compress your data before we store it with a 10x estimated compression rate.'
-          helpText={`${Math.round(storageAfterCompression).toLocaleString(
-            'en-us'
-          )}GB after compression`}>
-          {tier && dataOptions && (
-            <NumericSelect
-              id='storageVolume'
-              options={dataOptions.filter((option) => {
-                if (option.tier) {
-                  return option.tier.includes(tier)
-                }
-              })}
-              value={storage}
-            />
-          )}
-        </FormControl>
+
         {tier === 'Development' && (
           <FormControl
             label='Compute size'
@@ -639,7 +611,7 @@ export const PricingCalculator: React.FC<{
                       provider={provider}
                       minMemory={computeMinSize}
                       maxMemory={computeMaxSize}
-                      storageSize={storage}
+                      storageSize={storageSize}
                       computeCostMin={Number(
                         costData.minComputeCost!.toFixed(2)
                       )}

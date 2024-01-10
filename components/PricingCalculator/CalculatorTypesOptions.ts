@@ -93,17 +93,6 @@ export const providerOptions: Array<Option<Provider>> = [
   { value: 'gcp', label: 'GCP' }
 ]
 
-export const dataOptions: Array<NumericOption> = [
-  { value: 250, label: '250GB', tier: ['Development', 'Production'] },
-  { value: 500, label: '500GB', tier: ['Development', 'Production'] },
-  { value: 1024, label: '1TB', tier: ['Development', 'Production'] },
-  { value: 10240, label: '10TB', tier: ['Development', 'Production'] },
-  { value: 102400, label: '100TB', tier: ['Production'] },
-  { value: 1048576, label: '1PB', tier: ['Production'] },
-  { value: 5120000, label: '5PB', tier: ['Production'] },
-  { value: 10240000, label: '10PB', tier: ['Production'] }
-]
-
 export const computeOptions: Array<NumericOption> = [
   { value: 16, label: '16 GiB RAM, 2 vCPU', tier: ['Development'] },
   { value: 24, label: '24 GiB RAM, 6 vCPU', tier: ['Production'] },
@@ -113,3 +102,5 @@ export const computeOptions: Array<NumericOption> = [
   { value: 360, label: '360 GiB RAM, 96 vCPU', tier: ['Production'] },
   { value: 720, label: '720 GiB RAM, 192 vCPU', tier: ['Production'] }
 ]
+
+export const storageUnitOptions: Array<string> = ['tb', 'gb', 'pb']

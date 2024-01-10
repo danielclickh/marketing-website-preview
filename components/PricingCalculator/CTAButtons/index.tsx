@@ -215,9 +215,9 @@ export default function CTAButtons({
               <p className='flex items-center gap-x-2'>
                 ${storageCost!.toFixed(2)} for storage{' '}
                 <TooltipInfo
-                  content={`Storage cost for ${
-                    storageSize && storageSize / 10
-                  } GB compressed data`}
+                  content={`Storage cost for ${Math.round(
+                    Number(storageSize)
+                  ).toLocaleString('en-us')}GB of compressed data`}
                 />
               </p>
             </div>

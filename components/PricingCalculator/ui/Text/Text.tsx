@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
+import React from 'react'
 
 interface TextInputProps {
   value: number
   id?: string
-  // You can add other props specific to text input here
 }
 
 export const Text: React.FC<TextInputProps> = ({ value, id }) => {
@@ -15,21 +15,19 @@ export const Text: React.FC<TextInputProps> = ({ value, id }) => {
       type='number'
       id={id}
       min={0}
-      value={value}
+      value={value} // Render an empty string if value is 0
       onChange={(e) => {
         router.push(
           {
             query: {
               ...router.query,
-              storageSize: e.target.value
+              storageSize: e.target.value || '0' // Use '0' as a default value
             }
           },
           undefined,
           { shallow: true }
         )
-        return e.target.value
       }}
-      // You can add other input-specific props here
     />
   )
 }

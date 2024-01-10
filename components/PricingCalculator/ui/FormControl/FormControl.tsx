@@ -41,7 +41,7 @@ export const FormControl: React.FC<FormControlProps> = ({
           )}
           <p
             className={` ${
-              id === 'compression' ? 'text-[#66FF73]' : 'text-white'
+              id === 'storageSize' ? 'text-[#66FF73]' : 'text-white'
             } ${styles.helpText} text-xs `}>
             {helpText}
           </p>
