@@ -295,12 +295,12 @@ export const PricingCalculator: React.FC<{
           (costData.minComputeCost &&
             costData.maxComputeCost &&
             costData.storageCost &&
-            costData.minComputeCost + costData.storageCost > 2000) ||
-          (costData.minComputeCost === 0 && costData.storageCost > 2000)
+            costData.minComputeCost + costData.storageCost > 5000) ||
+          (costData.minComputeCost === 0 && costData.storageCost > 5000)
         ) {
           console.log(costData.minComputeCost + costData.storageCost)
 
-          setContactSales('Contact sales for pricing') // Set contactSales if the combined cost exceeds 2000
+          setContactSales('Contact sales for pricing') // Set contactSales if the combined cost exceeds 5000
         } else {
           setContactSales(undefined)
         }
@@ -308,9 +308,9 @@ export const PricingCalculator: React.FC<{
       if (tier === 'Development') {
         if (
           costData.computeCost &&
-          costData.computeCost + costData.storageCost > 2000
+          costData.computeCost + costData.storageCost > 5000
         ) {
-          setContactSales('Contact sales for pricing') // Set contactSales if the combined cost exceeds 2000
+          setContactSales('Contact sales for pricing') // Set contactSales if the combined cost exceeds 5000
         } else {
           setContactSales(undefined)
         }
