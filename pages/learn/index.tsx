@@ -56,8 +56,11 @@ type TrainingCardProps = {
 
 function TrainingCard(props: TrainingCardProps) {
   return (
-    <div className='flex h-full flex-col items-center justify-between rounded-lg border border-neutral-700/80 bg-neutral-900 p-6 shadow-card hover:shadow-lg'>
-      <CUICard.Body className='mb-6'>
+    <div className='flex h-full flex-col items-center justify-between rounded-lg border border-neutral-700/80 bg-neutral-900 p-6 shadow-card hover:shadow-lg relative'>
+      <div
+        className='absolute inset-0 z-0 pointer-events-none bg-grid-lines'
+        style={{maskImage: 'radial-gradient(#000 0%, transparent 75%)'}} />
+      <CUICard.Body className='mb-6 relative z-10'>
         <div className='mb-6 flex h-[46px] items-center text-primary-300'>
           {props.icon}
         </div>
@@ -71,7 +74,7 @@ function TrainingCard(props: TrainingCardProps) {
         </SuiTitle>
         <p className='text-sm'>{props.description}</p>
       </CUICard.Body>
-      <CUICard.Footer>
+      <CUICard.Footer className='relative z-10'>
         {props.perks.map((perk) => {
           return (
             <div className='mt-2 flex items-start gap-2'>
@@ -290,7 +293,7 @@ export default function LearnPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <div className='relative my-16 text-center md:my-20'>
+      <div className='relative py-16 text-center md:py-20 bg-grid'>
         <SuiTitle type='h1' color='white' className='mb-6 md:!text-6xl'>
           ClickHouse Training
         </SuiTitle>
@@ -304,9 +307,9 @@ export default function LearnPage({
         <div className='clip-inverted-triangle-simplified absolute inset-0 top-[100px] z-0 bg-primary-300' />
         <div className='section-container relative z-10'>
           <div className='flex flex-wrap justify-center gap-y-4'>
-            {trainingCards.map((card) => {
+            {trainingCards.map((card, index) => {
               return (
-                <div className='w-full px-2 md:w-1/2 lg:w-1/3'>
+                <div className='w-full px-2 md:w-1/2 lg:w-1/3' key={index}>
                   <TrainingCard {...card} />
                 </div>
               )
@@ -334,9 +337,9 @@ export default function LearnPage({
               'Hands-on labs',
               'Accelerate your career with ClickHouse Certification!',
               'We start at the beginning, then dive deep into ClickHouse'
-            ].map((item) => {
+            ].map((item, index) => {
               return (
-                <div className='mt-2 flex items-start gap-2'>
+                <div className='mt-2 flex items-start gap-2' key={index}>
                   <Certificate
                     style={{ width: '20px', height: 'auto' }}
                     className='mt-1 flex-shrink-0 flex-grow-0'
@@ -400,9 +403,9 @@ export default function LearnPage({
 
           {/* Cards */}
           <div className='mt-12 flex flex-wrap justify-center gap-y-4'>
-            {certificationCards.map((card) => {
+            {certificationCards.map((card, index) => {
               return (
-                <div className='w-full px-2 md:w-1/2 xl:w-1/4'>
+                <div className='w-full px-2 md:w-1/2 xl:w-1/4' key={index}>
                   <CertificationCard {...card} />
                 </div>
               )

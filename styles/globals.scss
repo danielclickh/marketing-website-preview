@@ -437,6 +437,13 @@ body {
   background-image: url("/datawarehouse-run.png");
 }
 
+.bg-grid-lines {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(#fff, var(--grid-lines-opacity, 0.05)) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(#fff, var(--grid-lines-opacity, 0.05)) 1px, transparent 1px);
+}
+
 // Other triangle classes produce issues on smaller screen widths.
 // This class fixes that by using a fixed triangle depth.
 //
