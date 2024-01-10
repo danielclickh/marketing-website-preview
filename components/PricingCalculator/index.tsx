@@ -431,7 +431,9 @@ export const PricingCalculator: React.FC<{
               helpText={`${Math.round(storageAfterCompression).toLocaleString(
                 'en-us'
               )}GB after compression`}>
-              {tier && storageSize && <Text id='storageVolume' />}
+              {tier && storageSize && (
+                <Text id='storageVolume' value={storageSize} />
+              )}
             </FormControl>
             <FormControl id='storageUnit' label='Storage Unit'>
               {tier && dataOptions && (
