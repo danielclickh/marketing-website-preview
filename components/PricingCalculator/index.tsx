@@ -60,8 +60,23 @@ export const PricingCalculator: React.FC<{
   const computeMinSize = Number(searchParams.get('computeMinSize')) || 16
   const computeMaxSize = Number(searchParams.get('computeMaxSize')) || 48
 
-  const storageSize = Number(searchParams.get('storageSize')) || 0
-  const storageUnit = searchParams.get('storageUnit')?.toLowerCase() || 'tb'
+  const storageSizeParam = searchParams.get('storageSize')
+
+  let storageSize: number
+
+  if (storageSizeParam === null) {
+    storageSize = 500
+  } else {
+    const parsedStorageSize = Number(storageSizeParam)
+
+    if (parsedStorageSize === 0) {
+      storageSize = 0
+    } else {
+      storageSize = parsedStorageSize
+    }
+  }
+
+  const storageUnit = searchParams.get('storageUnit')?.toLowerCase() || 'gb'
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [pricingData, setPricingData] = useState<PricingData | undefined>()
