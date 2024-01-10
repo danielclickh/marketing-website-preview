@@ -70,7 +70,7 @@ export default function AccordionComponent({
                     numbered && styles.numbered
                   } relative z-10 grid w-full grid-cols-[1fr_1rem] items-center justify-between gap-x-6 rounded-lg p-4 pr-6 pl-20 text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none`}>
                   {!numbered && (
-                    <div className='absolute w-16 border-r border-neutral-700/80 text-left text-neutral-300/60'>
+                    <div className='absolute left-0 w-16 border-r border-neutral-700/80 text-left text-neutral-300/60'>
                       <Image
                         src={faq.icon?.url as string}
                         width={32}
