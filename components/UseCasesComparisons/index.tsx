@@ -33,7 +33,7 @@ export default function UseCasesComparisons() {
             id='comparisons-left-buffer'
             className='hidden xl:max-w-[426px]'></div>
           <div id='comparisons-right'>
-            <div className='flex w-full flex-col gap-y-4'>
+            <div className='flex w-full flex-col gap-y-8'>
               {comparisons.map((comparison, index) => {
                 return (
                   <Link

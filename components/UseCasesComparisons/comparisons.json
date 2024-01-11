@@ -7,7 +7,7 @@
             {
                 "icon": "/images/use-cases/logging/gauge-light.svg",
                 "bigStat": "2x",
-                "smallText": "faster queries",
+                "smallText": "Faster queries",
                 "iconWidth": 32,
                 "iconHeight": 32
             },
@@ -37,7 +37,7 @@
             {
                 "icon": "/images/use-cases/logging/gauge-light.svg",
                 "bigStat": "1000x",
-                "smallText": "faster queries",
+                "smallText": "Faster queries",
                 "iconWidth": 32,
                 "iconHeight": 32
             },

@@ -34,57 +34,37 @@ const GlobalMenu = () => {
               return (
                 <NavigationMenu.Item key={menuItem.name}>
                   <NavigationMenu.Trigger className={styles.topLevelNavItem}>
-                    {menuItem.name}
+                    {menuItem.name === 'Use cases' ? (
+                      <Link href='/use-cases'>Use cases</Link>
+                    ) : (
+                      menuItem.name
+                    )}
                   </NavigationMenu.Trigger>
 
                   <NavigationMenu.Content className='absolute top-0 left-0 flex w-full flex-col overflow-hidden rounded-md pb-4 data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight sm:w-auto'>
-                    <div className='one m-0 flex list-none sm:min-w-[500px] sm:grid-cols-[1fr]'>
+                    <div
+                      className={`${
+                        menuItem.name === 'Product'
+                          ? 'sm:min-w-[500px]'
+                          : 'sm:min-w-[250px]'
+                      } m-0 flex list-none  sm:grid-cols-[1fr]`}>
                       {menuItem.menuItems.map((subMenuItem) => {
                         return (
                           <div
                             key={subMenuItem.name}
                             className='flex w-full grow flex-col'>
-                            {subMenuItem.name === 'Use cases' ? (
-                              <>
-                                {subMenuItem.id !== 2 ? (
-                                  <div className='mb-4 border-b border-neutral-700 border-opacity-40 bg-neutral-725 bg-opacity-90'>
-                                    <ListItem
-                                      href={subMenuItem.href}
-                                      className='group rounded-none bg-opacity-10 pl-4 lg:min-w-[9.5rem]'>
-                                      <SuiText
-                                        size='sm'
-                                        className='text-neutral-100 group-hover:text-neutral-0'
-                                        weight='semibold'>
-                                        {subMenuItem.name}
-                                      </SuiText>
-                                    </ListItem>
-                                  </div>
-                                ) : (
-                                  <div className='mb-4 border-b border-neutral-700 border-opacity-40 bg-neutral-725 bg-opacity-90'>
-                                    <SuiText
-                                      size='sm'
-                                      className='py-2 text-neutral-100 group-hover:text-neutral-0'
-                                      weight='semibold'>
-                                      &nbsp;
-                                    </SuiText>
-                                  </div>
-                                )}
-                              </>
-                            ) : (
-                              <div className='mb-4 border-b border-neutral-700 border-opacity-40 bg-neutral-725 bg-opacity-90'>
-                                <ListItem
-                                  href={subMenuItem.href}
-                                  className='group rounded-none bg-opacity-10 pl-4 lg:min-w-[9.5rem]'>
-                                  <SuiText
-                                    size='sm'
-                                    className='text-neutral-100 group-hover:text-neutral-0'
-                                    weight='semibold'>
-                                    {subMenuItem.name}
-                                  </SuiText>
-                                </ListItem>
-                              </div>
-                            )}
-
+                            <div className='mb-4 border-b border-neutral-700 border-opacity-40 bg-neutral-725 bg-opacity-90'>
+                              <ListItem
+                                href={subMenuItem.href}
+                                className='group rounded-none bg-opacity-10 pl-4 lg:min-w-[9.5rem]'>
+                                <SuiText
+                                  size='sm'
+                                  className='text-neutral-100 group-hover:text-neutral-0'
+                                  weight='semibold'>
+                                  {subMenuItem.name}
+                                </SuiText>
+                              </ListItem>
+                            </div>
                             <div>
                               {subMenuItem.menuItems.map((deepMenuItem) => {
                                 return (

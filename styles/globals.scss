@@ -582,6 +582,14 @@ a.arrow-link {
   }
 }
 
+.logos-color-swap:hover {
+  .color-swap {
+      filter: brightness(1) invert(0);
+      -webkit-filter: brightness(1) invert(0);
+  }
+}
+
+
 .color-swap-no-hover {
   filter: brightness(0) invert(0.8);
   -webkit-filter: brightness(0) invert(0.8);

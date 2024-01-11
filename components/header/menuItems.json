@@ -47,13 +47,13 @@
 					},
 					{
 						"id": 2,
-						"name": "Knowledge Base",
+						"name": "Knowledge base",
 						"href": "https://clickhouse.com/docs/knowledgebase",
 						"target": "_self"
 					},
 					{
 						"id": 3,
-						"name": "Support Program",
+						"name": "Support program",
 						"href": "/support/program",
 						"target": "_self"
 					}
@@ -105,7 +105,7 @@
 					},
 					{
 						"id": 2,
-						"name": "Cloud Quick Start",
+						"name": "Cloud quick start",
 						"href": "https://clickhouse.com/docs/en/cloud-quick-start",
 						"target": "_self"
 					},
@@ -195,39 +195,31 @@
 		"menuItems": [
 			{
 				"id": 1,
-				"name": "Use cases",
+				"name": "Overview",
 				"href": "/use-cases",
 				"target": "_self",
 				"menuItems": [
 					{
 						"id": 1,
-						"name": "Real-time Analytics",
+						"name": "Real-time analytics",
 						"href": "/use-cases/real-time-analytics",
 						"target": "_self"
 					},
 					{
 						"id": 2,
-						"name": "Logs, Events, & Traces",
+						"name": "Logs, events, & traces",
 						"href": "/use-cases/logging-and-metrics",
 						"target": "_self"
-					}
-				]
-			},
-			{
-				"id": 2,
-				"name": "Use cases",
-				"href": "/use-cases",
-				"target": "_self",
-				"menuItems": [
+					},
 					{
 						"id": 3,
-						"name": "Machine Learning & GenAI",
+						"name": "Machine learning & GenAI",
 						"href": "/use-cases/machine-learning-and-data-science",
 						"target": "_self"
 					},
 					{
 						"id": 4,
-						"name": "Business Intelligence",
+						"name": "Business intelligence",
 						"href": "/use-cases/business-intelligence",
 						"target": "_self"
 					}
