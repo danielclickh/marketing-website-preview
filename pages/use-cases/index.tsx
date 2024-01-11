@@ -229,7 +229,7 @@ function UseCasesPage({
                                           index === 2
                                             ? 'lg:min-h-[84px] lg:min-w-[130px]'
                                             : index === 3
-                                            ? 'max-h-[64px] max-w-[160px]'
+                                            ? 'max-h-[64px] max-w-[130px] lg:max-w-[160px]'
                                             : 'max-h-[64px] max-w-[120px]'
                                         } mx-auto mt-auto `}
                                       />
@@ -253,20 +253,20 @@ function UseCasesPage({
                                           {...client.logo}
                                           className={`${
                                             client.clientName === 'Lyft'
-                                              ? 'max-h-[44px]'
+                                              ? 'max-w-[60px] lg:max-h-[44px]'
                                               : client.clientName ===
                                                 'Contentsquare'
-                                              ? 'max-w-[160px]'
+                                              ? 'max-w-[140px] lg:max-w-[160px]'
                                               : client.clientName ===
                                                 'Highlight.io'
-                                              ? 'max-w-[160px]'
+                                              ? 'max-w-[120px] lg:max-w-[160px]'
                                               : client.clientName ===
                                                 'Deutsche Bank'
-                                              ? 'max-w-[170px]'
+                                              ? 'max-w-[150px] lg:max-w-[170px]'
                                               : client.clientName ===
                                                 'QuickCheck'
-                                              ? 'max-w-[160px]'
-                                              : 'max-h-[64px] max-w-[100px] lg:max-w-[120px]'
+                                              ? 'max-w-[140px] lg:max-w-[160px]'
+                                              : 'max-h-[64px] max-w-[120px] lg:max-w-[120px]'
                                           }
                                           mx-auto mt-auto
                                             `}
