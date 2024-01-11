@@ -285,6 +285,7 @@ export const PricingCalculator: React.FC<{
     //We have to check the provider as m3ter returns gcp region names prepended with gcp-XXXX
     const regionToCheckPricing =
       provider.toLowerCase() === 'gcp' ? `gcp-${region}` : region
+
     const matchingPricingPlans = pricingPlansFromFile.filter(
       (plan) =>
         plan.instanceTier.toLowerCase() === tier.toLowerCase() &&
@@ -327,8 +328,6 @@ export const PricingCalculator: React.FC<{
             costData.minComputeCost + costData.storageCost > 5000) ||
           (costData.minComputeCost === 0 && costData.storageCost > 5000)
         ) {
-          console.log(costData.minComputeCost + costData.storageCost)
-
           setContactSales('Contact sales for pricing') // Set contactSales if the combined cost exceeds 5000
         } else {
           setContactSales(undefined)

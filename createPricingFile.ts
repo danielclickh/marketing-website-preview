@@ -33,10 +33,18 @@ async function triggerPricingFile() {
 
   const allPricings = await getPricingsByPlan(config.planId)
 
+  // Generate modified 'acceptableRegions' array for 'gcp' provider
+  const modifiedAcceptableRegions = acceptableRegions.map((regionObj) => {
+    if (regionObj.provider === 'gcp') {
+      return { ...regionObj, region: `gcp-${regionObj.region}` }
+    }
+    return regionObj
+  })
+
   const pricingsToStore = allPricings
     .filter(
       (item) =>
-        acceptableRegions.some(
+        modifiedAcceptableRegions.some(
           (region) => region.region === item?.segment?.region
         ) && !item?.description?.includes('Dedicated')
     )
