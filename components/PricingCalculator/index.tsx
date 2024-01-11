@@ -549,7 +549,7 @@ export const PricingCalculator: React.FC<{
                     {contactSales && (
                       <>
                         <p className='mb-8 text-base text-[#B3B6BD]'>
-                          You’re eligible for custom quotes.
+                          You’re eligible for custom terms.
                           <br />
                           Contact us for more details.
                         </p>
@@ -607,7 +607,7 @@ export const PricingCalculator: React.FC<{
                     {contactSales && (
                       <>
                         <p className='mb-8 text-base text-[#B3B6BD]'>
-                          You’re eligible for custom quotes.
+                          You’re eligible for custom terms.
                           <br />
                           Contact us for more details.
                         </p>
