@@ -262,7 +262,7 @@ function UseCasesPage({
                                               ? 'max-w-[120px] lg:max-w-[160px]'
                                               : client.clientName ===
                                                 'Deutsche Bank'
-                                              ? 'max-w-[150px] lg:max-w-[170px]'
+                                              ? 'max-w-[150px] lg:max-w-[190px]'
                                               : client.clientName ===
                                                 'QuickCheck'
                                               ? 'max-w-[140px] lg:max-w-[160px]'
