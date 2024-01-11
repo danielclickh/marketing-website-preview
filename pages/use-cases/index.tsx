@@ -262,9 +262,12 @@ function UseCasesPage({
                                               ? 'max-w-[120px] lg:max-w-[160px]'
                                               : client.clientName ===
                                                 'Deutsche Bank'
-                                              ? 'max-w-[150px] lg:max-w-[190px]'
+                                              ? 'max-w-[150px] lg:max-w-[210px]'
                                               : client.clientName ===
                                                 'QuickCheck'
+                                              ? 'max-w-[150px] lg:max-w-[210px]'
+                                              : client.clientName ===
+                                                'Darwinium'
                                               ? 'max-w-[140px] lg:max-w-[160px]'
                                               : 'max-h-[64px] max-w-[120px] lg:max-w-[120px]'
                                           }
