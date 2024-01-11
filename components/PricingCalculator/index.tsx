@@ -336,8 +336,9 @@ export const PricingCalculator: React.FC<{
       }
       if (tier === 'Development') {
         if (
-          costData.computeCost &&
-          costData.computeCost + costData.storageCost > 5000
+          (costData.computeCost &&
+            costData.computeCost + costData.storageCost > 5000) ||
+          (costData.computeCost === 0 && costData.storageCost > 5000)
         ) {
           setContactSales('Contact sales for pricing') // Set contactSales if the combined cost exceeds 5000
         } else {
@@ -537,24 +538,20 @@ export const PricingCalculator: React.FC<{
               <div>
                 {tier === 'Development' ? (
                   <React.Fragment>
-                    {contactSales ? (
+                    <p className='mb-2 font-basier text-[50px] font-bold leading-[84px]  text-white'>
+                      $
+                      {Number(
+                        (costData.computeCost! + costData.storageCost).toFixed(
+                          0
+                        )
+                      ).toLocaleString()}
+                    </p>
+                    {contactSales && (
                       <>
-                        <p className='mb-2 font-basier text-[50px] font-bold text-white'>
-                          Contact us
-                        </p>
                         <p className='mb-8 text-base text-[#B3B6BD]'>
                           You’re eligible for custom quotes.
                           <br />
                           Contact us for more details.
-                        </p>
-                      </>
-                    ) : (
-                      <>
-                        <p className='mb-8 font-basier text-[50px] font-bold leading-[84px]  text-white'>
-                          $
-                          {(
-                            costData.computeCost! + costData.storageCost
-                          ).toFixed(0)}
                         </p>
                       </>
                     )}
@@ -584,38 +581,37 @@ export const PricingCalculator: React.FC<{
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
+                    <p className='mb-2 font-basier text-[50px] font-bold leading-[84px]  text-white'>
+                      $
+                      {Number(
+                        (
+                          costData.minComputeCost! + costData.storageCost
+                        ).toFixed(0)
+                      ).toLocaleString()}{' '}
+                      {(
+                        costData.minComputeCost! + costData.storageCost
+                      ).toFixed(0) !==
+                        (
+                          costData.maxComputeCost! + costData.storageCost
+                        ).toFixed(0) && (
+                        <>
+                          - $
+                          {Number(
+                            (
+                              costData.maxComputeCost! + costData.storageCost
+                            ).toFixed(0)
+                          ).toLocaleString()}
+                        </>
+                      )}
+                    </p>
                     {contactSales && (
                       <>
-                        <p className='mb-2 font-basier text-[50px] font-bold text-white'>
-                          Contact us
-                        </p>
                         <p className='mb-8 text-base text-[#B3B6BD]'>
                           You’re eligible for custom quotes.
                           <br />
                           Contact us for more details.
                         </p>
                       </>
-                    )}
-                    {!contactSales && (
-                      <p className='mb-8 font-basier text-[50px] font-bold leading-[84px]  text-white'>
-                        $
-                        {(
-                          costData.minComputeCost! + costData.storageCost
-                        ).toFixed(0)}{' '}
-                        {(
-                          costData.minComputeCost! + costData.storageCost
-                        ).toFixed(0) !==
-                          (
-                            costData.maxComputeCost! + costData.storageCost
-                          ).toFixed(0) && (
-                          <>
-                            - $
-                            {(
-                              costData.maxComputeCost! + costData.storageCost
-                            ).toFixed(0)}
-                          </>
-                        )}
-                      </p>
                     )}
 
                     <CTAButtons

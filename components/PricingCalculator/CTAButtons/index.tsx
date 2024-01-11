@@ -82,6 +82,15 @@ export default function CTAButtons({
               type='primary'
               size='lg'
               weight='semibold'
+              href='https://clickhouse.cloud/signUp?loc=pricing-calculator-custom'
+              linkClass='w-full'
+              className='w-full'>
+              <span className='text-sm'>Start free trial</span>
+            </CUIButton>
+            <CUIButton
+              type='secondary'
+              size='lg'
+              weight='semibold'
               onClick={() => {
                 router.push({
                   pathname: '/company/contact',
@@ -101,15 +110,6 @@ export default function CTAButtons({
               linkClass='w-full'
               className='w-full'>
               <span className='text-sm'>Get custom quote</span>
-            </CUIButton>
-            <CUIButton
-              type='secondary'
-              size='lg'
-              weight='semibold'
-              href='https://clickhouse.cloud/signUp?loc=pricing-calculator-custom'
-              linkClass='w-full'
-              className='w-full'>
-              <span className='text-sm'>Start free trial</span>
             </CUIButton>
             <CUIButton
               onClick={copyToClipboard}
@@ -195,37 +195,65 @@ export default function CTAButtons({
         )}
       </div>
       <ul className='mt-6 flex flex-col gap-y-4 text-left'>
-        {!contactSales && (
-          <li>
-            <div className='flex items-center gap-4'>
-              <svg
-                width='16'
-                height='16'
-                viewBox='0 0 16 16'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'>
-                <path
-                  d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
-                  stroke='#FCFF74'
-                  strokeWidth='2'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                />
-              </svg>
-              <p className='flex items-center gap-x-2'>
-                ${storageCost!.toFixed(2)} for storage{' '}
-                <TooltipInfo
-                  content={`Storage cost for ${Math.round(
-                    Number(storageSize)
-                  ).toLocaleString('en-us')}GB of compressed data`}
-                />
-              </p>
-            </div>
-          </li>
-        )}
-        {!contactSales && (
-          <>
-            {tier === 'Development' && (
+        <li>
+          <div className='flex items-center gap-4'>
+            <svg
+              width='16'
+              height='16'
+              viewBox='0 0 16 16'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'>
+              <path
+                d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
+                stroke='#FCFF74'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+            </svg>
+            <p className='flex items-center gap-x-2'>
+              ${storageCost!.toFixed(2)} for storage{' '}
+              <TooltipInfo
+                content={`Storage cost for ${Math.round(
+                  Number(storageSize)
+                ).toLocaleString('en-us')}GB of compressed data`}
+              />
+            </p>
+          </div>
+        </li>
+        <>
+          {tier === 'Development' && (
+            <li>
+              <div className='flex items-center gap-4'>
+                <svg
+                  width='16'
+                  height='16'
+                  viewBox='0 0 16 16'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'>
+                  <path
+                    d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
+                    stroke='#FCFF74'
+                    strokeWidth='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                  />
+                </svg>
+                <p className='flex items-center gap-x-2'>
+                  <>
+                    ${computeCostMin} for compute{' '}
+                    <TooltipInfo
+                      content={`Compute cost = ${minMemoryLabel} * ${hours}h per day\n\n1 compute unit = ${minMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
+                    />
+                  </>
+                </p>
+              </div>
+            </li>
+          )}
+        </>
+        <>
+          {tier === 'Production' && (
+            <>
               <li>
                 <div className='flex items-center gap-4'>
                   <svg
@@ -244,77 +272,43 @@ export default function CTAButtons({
                   </svg>
                   <p className='flex items-center gap-x-2'>
                     <>
-                      ${computeCostMin} for compute{' '}
+                      ${computeCostMin} minimum compute cost{' '}
                       <TooltipInfo
-                        content={`Compute cost = ${minMemoryLabel} * ${hours}h per day\n\n1 compute unit = ${minMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
+                        content={`Minimum compute cost = 1 compute unit * ${hours}h per day * 30 days\n\n1 compute unit = ${minMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
                       />
                     </>
                   </p>
                 </div>
               </li>
-            )}
-          </>
-        )}
-        {!contactSales && (
-          <>
-            {tier === 'Production' && (
-              <>
-                <li>
-                  <div className='flex items-center gap-4'>
-                    <svg
-                      width='16'
-                      height='16'
-                      viewBox='0 0 16 16'
-                      fill='none'
-                      xmlns='http://www.w3.org/2000/svg'>
-                      <path
-                        d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
-                        stroke='#FCFF74'
-                        strokeWidth='2'
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
+              <li>
+                <div className='flex items-center gap-4'>
+                  <svg
+                    width='16'
+                    height='16'
+                    viewBox='0 0 16 16'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'>
+                    <path
+                      d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
+                      stroke='#FCFF74'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                    />
+                  </svg>
+                  <p className='flex items-center gap-x-2'>
+                    <>
+                      ${computeCostMax} maximum compute cost{' '}
+                      <TooltipInfo
+                        content={`Maximum compute cost = 2 compute units * ${hours}h per day * 30 days\n\n1 compute unit = ${maxMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
                       />
-                    </svg>
-                    <p className='flex items-center gap-x-2'>
-                      <>
-                        ${computeCostMin} minimum compute cost{' '}
-                        <TooltipInfo
-                          content={`Minimum compute cost = 1 compute unit * ${hours}h per day * 30 days\n\n1 compute unit = ${minMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
-                        />
-                      </>
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div className='flex items-center gap-4'>
-                    <svg
-                      width='16'
-                      height='16'
-                      viewBox='0 0 16 16'
-                      fill='none'
-                      xmlns='http://www.w3.org/2000/svg'>
-                      <path
-                        d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
-                        stroke='#FCFF74'
-                        strokeWidth='2'
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                      />
-                    </svg>
-                    <p className='flex items-center gap-x-2'>
-                      <>
-                        ${computeCostMax} maximum compute cost{' '}
-                        <TooltipInfo
-                          content={`Maximum compute cost = 2 compute units * ${hours}h per day * 30 days\n\n1 compute unit = ${maxMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
-                        />
-                      </>
-                    </p>
-                  </div>
-                </li>
-              </>
-            )}
-          </>
-        )}
+                    </>
+                  </p>
+                </div>
+              </li>
+            </>
+          )}
+        </>
         <li>
           <div className='flex items-center gap-4'>
             <svg
