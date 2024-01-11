@@ -123,7 +123,7 @@ function PricingOptions({
     <div className='w-full '>
       <PricingContextProvider value={getDefaultRegion()}>
         {!selectorOnly && (
-          <div className='flex justify-center space-x-6 pt-8 pb-6'>
+          <div className='flex justify-center space-x-6 pt-8 pb-6 '>
             {cloudProviders.map((cloudProvider, parentIndex: number) => (
               <div className='flex flex-col space-y-2' key={parentIndex}>
                 <div className='mx-auto flex flex-row items-start gap-4'>
@@ -220,7 +220,7 @@ function PricingOptions({
         {!selectorOnly && (
           <>
             {plans.length > 0 && (
-              <div className='plans_container grid grid-cols-1 gap-8 lg:grid-cols-3'>
+              <div className='plans_container grid min-h-[940px] grid-cols-1 gap-8 lg:grid-cols-3'>
                 {plans.map((plan, index) => (
                   <div
                     className='relative mx-auto w-full max-w-sm rounded-lg border border-t-4 border-neutral-700/80 border-t-primary bg-neutral-900/50 shadow-card-xl'

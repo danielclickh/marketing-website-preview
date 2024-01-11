@@ -18,6 +18,8 @@ export function ToggleButtonsProviders<T extends string = string>({
         <button
           key={option.value}
           onClick={() => {
+            console.log('hey safari')
+
             router.push(
               {
                 query: {
