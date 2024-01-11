@@ -212,7 +212,7 @@ export default function CTAButtons({
               />
             </svg>
             <p className='flex items-center gap-x-2'>
-              ${storageCost!.toFixed(2)} for storage{' '}
+              ${Number(storageCost.toFixed(0)).toLocaleString()} for storage{' '}
               <TooltipInfo
                 content={`Storage cost for ${Math.round(
                   Number(storageSize)
@@ -241,7 +241,8 @@ export default function CTAButtons({
                 </svg>
                 <p className='flex items-center gap-x-2'>
                   <>
-                    ${computeCostMin} for compute{' '}
+                    ${Number(computeCostMin.toFixed(0)).toLocaleString()} for
+                    compute
                     <TooltipInfo
                       content={`Compute cost = ${minMemoryLabel} * ${hours}h per day\n\n1 compute unit = ${minMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
                     />
@@ -272,7 +273,8 @@ export default function CTAButtons({
                   </svg>
                   <p className='flex items-center gap-x-2'>
                     <>
-                      ${computeCostMin} minimum compute cost{' '}
+                      ${Number(computeCostMin.toFixed(0)).toLocaleString()}{' '}
+                      minimum compute cost{' '}
                       <TooltipInfo
                         content={`Minimum compute cost = 1 compute unit * ${hours}h per day * 30 days\n\n1 compute unit = ${minMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
                       />
@@ -298,7 +300,8 @@ export default function CTAButtons({
                   </svg>
                   <p className='flex items-center gap-x-2'>
                     <>
-                      ${computeCostMax} maximum compute cost{' '}
+                      ${Number(computeCostMax?.toFixed(0)).toLocaleString()}{' '}
+                      maximum compute cost{' '}
                       <TooltipInfo
                         content={`Maximum compute cost = 2 compute units * ${hours}h per day * 30 days\n\n1 compute unit = ${maxMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
                       />
