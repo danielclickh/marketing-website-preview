@@ -100,7 +100,10 @@ export const computeOptions: Array<NumericOption> = [
   { value: 96, label: '96 GiB RAM, 24 vCPU', tier: ['Production'] },
   { value: 192, label: '192 GiB RAM, 48 vCPU', tier: ['Production'] },
   { value: 360, label: '360 GiB RAM, 96 vCPU', tier: ['Production'] },
-  { value: 720, label: '720 GiB RAM, 192 vCPU', tier: ['Production'] }
+  { value: 720, label: '720 GiB RAM, 192 vCPU', tier: ['Production'] },
+  { value: 1080, label: '1080 GiB RAM, 270 vCPU', tier: ['Production'] },
+  { value: 1800, label: '1800 GiB RAM, 450 vCPU', tier: ['Production'] },
+  { value: 3600, label: '3600 GiB RAM, 960 vCPU', tier: ['Production'] }
 ]
 
 export const storageUnitOptions: Array<string> = ['tb', 'gb', 'pb']
