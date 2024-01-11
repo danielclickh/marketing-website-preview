@@ -89,12 +89,6 @@ function UseCasesPage({
   individualUseCases,
   quotes
 }: useCasesPageDataProps) {
-  const [visibleTestimonials, setVisibleTestimonials] = useState(6)
-
-  const loadMore = () => {
-    setVisibleTestimonials((prevValue) => prevValue + (quotes.length - 6))
-  }
-
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
@@ -283,14 +277,14 @@ function UseCasesPage({
       <UseCasesComparisons />
 
       <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
-        <div className=' gap-3 md:columns-2 lg:columns-3'>
+        <div className='gap-6 md:columns-2 lg:columns-3'>
           {quotes.map((quote, index) => (
             <div key={index}>
               {quote.quotes.href ? (
                 <Link href={quote.quotes.href}>
                   <div
                     key={index}
-                    className='logos-color-swap animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover p-4 shadow-card hover:bg-neutral-750'>
+                    className='logos-color-swap animate-fade-in mb-6 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover p-4 shadow-card hover:bg-neutral-750'>
                     <Image
                       src='/images/Quote.svg'
                       width={37}
