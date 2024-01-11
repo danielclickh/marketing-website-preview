@@ -36,6 +36,8 @@ const GlobalMenu = () => {
                   <NavigationMenu.Trigger className={styles.topLevelNavItem}>
                     {menuItem.name === 'Use cases' ? (
                       <Link href='/use-cases'>Use cases</Link>
+                    ) : menuItem.name === 'Product' ? (
+                      <Link href='/clickhouse'>Product</Link>
                     ) : (
                       menuItem.name
                     )}
