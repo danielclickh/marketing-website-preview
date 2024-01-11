@@ -38,7 +38,7 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
 
     const quotesParams = {
       sort: ['id:DESC'],
-      populate: ['quotes', 'quotes.*', 'quotes.logo.*']
+      populate: ['quotes', 'quotes.*', 'quotes.logo.*', 'id']
     }
     const { data: quotes } = await findAll('use-case-quotes', quotesParams)
 
@@ -96,9 +96,7 @@ function UseCasesPage({
           <div className='mx-auto max-w-3xl'>
             <div className='mx-auto text-center md:mr-0 '>
               <h1 className='mb-6 font-basier text-4xl font-semibold text-neutral-200 md:text-5.5xl md:leading-tight'>
-                {useCasesPageData.Title} for the
-                <br />
-                Real-time Data Warehouse
+                {useCasesPageData.Title}
               </h1>
               <p className='mx-auto mb-12 max-w-2xl text-xl leading-[175%] text-neutral-200'>
                 Unlock faster queries and the ability to handle greater
@@ -229,7 +227,7 @@ function UseCasesPage({
                                         {...client.logo}
                                         className={`${
                                           index === 2
-                                            ? 'lg:min-h-[84px] lg:min-w-[150px]'
+                                            ? 'lg:min-h-[84px] lg:min-w-[130px]'
                                             : index === 3
                                             ? 'max-h-[64px] max-w-[160px]'
                                             : 'max-h-[64px] max-w-[120px]'
@@ -247,13 +245,31 @@ function UseCasesPage({
                                   (client, index) => (
                                     <div
                                       key={index}
-                                      className='logos-color-swap flex h-[86px] w-full items-center border-l border-b border-[#464641] last:border-r '>
+                                      className={`logos-color-swap flex h-[86px] w-full items-center border-l border-b border-[#464641] last:border-r`}>
                                       <Link
                                         href={client.href}
                                         className='color-swap mx-auto w-full object-contain'>
                                         <StrapiImage
                                           {...client.logo}
-                                          className='mx-auto mt-auto max-h-[64px] max-w-[100px] lg:max-w-[120px]'
+                                          className={`${
+                                            client.clientName === 'Lyft'
+                                              ? 'max-h-[44px]'
+                                              : client.clientName ===
+                                                'Contentsquare'
+                                              ? 'max-w-[160px]'
+                                              : client.clientName ===
+                                                'Highlight.io'
+                                              ? 'max-w-[160px]'
+                                              : client.clientName ===
+                                                'Deutsche Bank'
+                                              ? 'max-w-[170px]'
+                                              : client.clientName ===
+                                                'QuickCheck'
+                                              ? 'max-w-[160px]'
+                                              : 'max-h-[64px] max-w-[100px] lg:max-w-[120px]'
+                                          }
+                                          mx-auto mt-auto
+                                            `}
                                         />
                                       </Link>
                                     </div>
