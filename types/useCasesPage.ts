@@ -1,11 +1,12 @@
 import { CommonProps } from './homepage'
-import { StrapiButton, StrapiImageType } from '../lib/api/strapi/types'
+import { StrapiImageType } from '../lib/api/strapi/types'
 
 export interface ClientUsing {
   logo: StrapiImageType
   clientName: string
   href: string
   icon: StrapiImageType
+  id?: string
 }
 
 export interface Quote {
