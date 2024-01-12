@@ -437,6 +437,52 @@ body {
   background-image: url("/datawarehouse-run.png");
 }
 
+.bg-grid-lines {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(#fff, var(--grid-lines-opacity, 0.05)) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(#fff, var(--grid-lines-opacity, 0.05)) 1px, transparent 1px);
+}
+
+// Other triangle classes produce issues on smaller screen widths.
+// This class fixes that by using a fixed triangle depth.
+//
+// Use in combination with background classes
+// @example <div class="bg-primary-300 clip-inverted-triangle-simplified">...</div>
+//
+// The default depth can be overriden by using the css variable `--triangle-depth`
+// @example <div class="clip-inverted-triangle-simplified" style="--triangle-depth: 150px">...</div>
+// @example <div class="clip-inverted-triangle-simplified" style="--triangle-depth: 25%">...</div>
+//
+// The triangle can be offset from the top by using the css variable `--triangle-offset`
+// @example <div class="clip-inverted-triangle-simplified" style="--triangle-offset: 200px">...</div>
+// @example <div class="clip-inverted-triangle-simplified" style="--triangle-offset: 10%">...</div>
+.clip-inverted-triangle-simplified {
+
+  // Triangle offset from the top will default to 0% if variable is not defined
+  $triangle-offset: var(--triangle-offset, 0%);
+
+  // Triangle depth will default to 75 pixels if variable is not defined
+  $triangle-depth: var(--triangle-depth, 75px);
+
+  clip-path: polygon(
+    // Top left corner
+    0% #{$triangle-offset},
+
+    // Triangle tip
+    50% calc(#{$triangle-offset} + #{$triangle-depth}),
+
+    // Top right corner
+    100% #{$triangle-offset},
+
+    // Bottom right corner
+    100% 100%,
+
+    // Bottom left corner
+    0% 100%
+  );
+}
+
 .clip-inverted-triangle {
   @apply relative;
   &::before {
