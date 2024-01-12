@@ -106,4 +106,20 @@ export const computeOptions: Array<NumericOption> = [
   { value: 3600, label: '3600 GiB RAM, 960 vCPU', tier: ['Production'] }
 ]
 
-export const storageUnitOptions: Array<string> = ['tb', 'gb', 'pb']
+export const storageUnitOptionsTiered = [
+  {
+    value: 'gb',
+    label: 'GB',
+    tier: ['Development', 'Production']
+  },
+  {
+    value: 'tb',
+    label: 'TB',
+    tier: ['Development', 'Production']
+  },
+  {
+    value: 'pb',
+    label: 'PB',
+    tier: ['Production']
+  }
+]

@@ -23,7 +23,7 @@ import {
   PricingData,
   providerOptions,
   tierOptions,
-  storageUnitOptions
+  storageUnitOptionsTiered
 } from './CalculatorTypesOptions'
 import styles from './CostCalculator.module.scss'
 import CTAButtons from './CTAButtons'
@@ -189,13 +189,12 @@ export const PricingCalculator: React.FC<{
       )
     }
 
-    //validate storage units
-    if (!storageUnitOptions.includes(storageUnit.toLowerCase())) {
+    if (tier === 'Development' && storageUnit.toLowerCase() === 'pb') {
       router.push(
         {
           query: {
             ...router.query,
-            storageUnit: 'gb' // Set your default value here
+            storageUnit: 'tb'
           }
         },
         undefined,
@@ -458,11 +457,11 @@ export const PricingCalculator: React.FC<{
               {tier && (
                 <Select
                   id='storageUnit'
-                  options={[
-                    { value: 'gb', label: 'GB' },
-                    { value: 'tb', label: 'TB' },
-                    { value: 'pb', label: 'PB' }
-                  ]}
+                  options={storageUnitOptionsTiered.filter((option) => {
+                    if (option.tier.includes(tier)) {
+                      return option
+                    }
+                  })}
                   value={storageUnit}
                 />
               )}
