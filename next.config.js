@@ -376,6 +376,11 @@ const nextConfig = {
         source: '/reinvent-2023/vip-party',
         destination: '/company/contact',
         permanent: true
+      },
+      {
+        source: '/company/events/clickhouse-workshop',
+        destination: '/company/events/clickhouse-fundamentals',
+        permanent: true
       }
     ]
   }
