@@ -150,7 +150,7 @@ export default function CertificationPage({
 
           {/* Form column */}
           <div className='w-full lg:max-w-[400px]'>
-            <p className='mb-6 text-center text-lg'>
+            <p className='mt-6 mb-12 text-center lg:mb-6 lg:mt-0'>
               Share your contact details with us to find out first when the exam
               is released
             </p>
