@@ -211,16 +211,30 @@ function Sitemap({
               </h2>
               <p className='pb-2'>
                 <Link
+                  href='/use-cases/real-time-analytics'
+                  className='text-primary-300 hover:underline'>
+                  Real-time analytics
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
                   href='/use-cases/logging-and-metrics'
                   className='text-primary-300 hover:underline'>
-                  Logging and Metrics
+                  Logs, events &amp; traces
                 </Link>
               </p>
               <p className='pb-2'>
                 <Link
                   href='/use-cases/machine-learning-and-data-science'
                   className='text-primary-300 hover:underline'>
-                  Machine Learning and Data Science
+                  Machine Learning &amp; GenAI
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
+                  href='/use-cases/business-intelligence'
+                  className='text-primary-300 hover:underline'>
+                  Business intelligence
                 </Link>
               </p>
               <p className='pb-2'>
