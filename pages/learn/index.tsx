@@ -33,7 +33,8 @@ export const getStaticProps: GetStaticProps<LearnProps> =
     return {
       props: {
         seo: {
-          title: 'How to Use ClickHouse | Database Tutorial | ClickHouse',
+          title:
+            'ClickHouse Training | How to Use ClickHouse | Database Tutorial',
           description:
             'Master the art of data analysis with ClickHouse. Our seamless, easy to use database management platform can help you to unlock powerful insights. Try for free.',
           path: '/learn'
@@ -56,11 +57,12 @@ type TrainingCardProps = {
 
 function TrainingCard(props: TrainingCardProps) {
   return (
-    <div className='flex h-full flex-col items-center justify-between rounded-lg border border-neutral-700/80 bg-neutral-900 p-6 shadow-card hover:shadow-lg relative'>
+    <div className='relative flex h-full flex-col items-center justify-between rounded-lg border border-neutral-700/80 bg-neutral-900 p-6 shadow-card hover:shadow-lg'>
       <div
-        className='absolute inset-0 z-0 pointer-events-none bg-grid-lines'
-        style={{maskImage: 'radial-gradient(#000 0%, transparent 75%)'}} />
-      <CUICard.Body className='mb-6 relative z-10'>
+        className='bg-grid-lines pointer-events-none absolute inset-0 z-0'
+        style={{ maskImage: 'radial-gradient(#000 0%, transparent 75%)' }}
+      />
+      <CUICard.Body className='relative z-10 mb-6'>
         <div className='mb-6 flex h-[46px] items-center text-primary-300'>
           {props.icon}
         </div>
@@ -293,7 +295,7 @@ export default function LearnPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <div className='relative py-16 text-center md:py-20 bg-grid'>
+      <div className='relative bg-grid py-16 text-center md:py-20'>
         <SuiTitle type='h1' color='white' className='mb-6 md:!text-6xl'>
           ClickHouse Training
         </SuiTitle>
@@ -379,7 +381,7 @@ export default function LearnPage({
             alt={'ClickHouse Certified Developer'}
             width={417}
             height={363}
-            className='pointer-events-none absolute right-0 -top-20 max-w-[130px] md:-top-40 md:max-w-[210px] rotate-[15deg]'
+            className='pointer-events-none absolute right-0 -top-20 max-w-[130px] rotate-[15deg] md:-top-40 md:max-w-[210px]'
           />
 
           {/* Intro */}
