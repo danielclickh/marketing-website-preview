@@ -304,7 +304,7 @@ function Sitemap({
                 <ul className='mb-2'>
                   {comparisons.map((comparison, index) => {
                     return (
-                      <li key={index}>
+                      <li key={index} className='pb-2'>
                         <Link
                           href={`/comparison/${comparison.slug}`}
                           className='font text-primary-300 hover:underline'>
@@ -432,7 +432,7 @@ function Sitemap({
               <ul className='mb-2'>
                 {videos.map((video, index) => {
                   return (
-                    <li key={index}>
+                    <li key={index} className='pb-2'>
                       <Link
                         href={`/video/${video.slug}`}
                         className='font text-primary-300 hover:underline'>
