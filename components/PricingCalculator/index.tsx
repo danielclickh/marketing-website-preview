@@ -405,7 +405,7 @@ export const PricingCalculator: React.FC<{
   ])
 
   return (
-    <div className={styles.wrapper}>
+    <div className='grid gap-x-12 lg:grid-cols-2'>
       <div className={styles.options}>
         <FormControl label='Service type'>
           <ToggleButtons options={tierOptions} value={tier} />
@@ -537,7 +537,7 @@ export const PricingCalculator: React.FC<{
               <div>
                 {tier === 'Development' ? (
                   <React.Fragment>
-                    <p className='mb-2 font-basier text-[50px] font-bold leading-[84px]  text-white'>
+                    <p className='mb-2 break-words font-basier text-[50px] font-bold leading-[84px]  text-white'>
                       $
                       {Number(
                         (costData.computeCost! + costData.storageCost).toFixed(
@@ -580,7 +580,7 @@ export const PricingCalculator: React.FC<{
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
-                    <p className='mb-2 font-basier text-[50px] font-bold leading-[84px]  text-white'>
+                    <p className='mb-2 break-words font-basier text-[50px] font-bold leading-[84px] text-white'>
                       $
                       {Number(
                         (
