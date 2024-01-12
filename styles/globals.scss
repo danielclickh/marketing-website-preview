@@ -708,3 +708,13 @@ a.arrow-link {
     .data-transformations, .data-ingestion, .querying, .dbt {@apply opacity-40}
   }
 }
+
+@layer base {
+  #storageSize {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }}
+
+}
