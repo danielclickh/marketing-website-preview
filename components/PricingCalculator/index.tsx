@@ -175,6 +175,20 @@ export const PricingCalculator: React.FC<{
       )
     }
 
+    //make sure storage is 4 digits or less
+    if (storageSize.toString().length > 4) {
+      router.push(
+        {
+          query: {
+            ...router.query,
+            storageSize: 500 // Set your default value here
+          }
+        },
+        undefined,
+        { shallow: true }
+      )
+    }
+
     //validate storage units
     if (!storageUnitOptions.includes(storageUnit.toLowerCase())) {
       router.push(

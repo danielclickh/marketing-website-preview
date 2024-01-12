@@ -14,13 +14,16 @@ export const Text: React.FC<TextInputProps> = ({ value, id }) => {
       type='number'
       id={id}
       min={0}
+      maxLength={4}
       value={value} // Render an empty string if value is 0
       onChange={(e) => {
+        const inputValue = e.target.value || '0'
+        const truncatedValue = inputValue.slice(0, 4) // Truncate to 4 characters
         router.push(
           {
             query: {
               ...router.query,
-              storageSize: e.target.value || '0' // Use '0' as a default value
+              storageSize: truncatedValue
             }
           },
           undefined,
