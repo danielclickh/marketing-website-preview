@@ -23,7 +23,6 @@ function Button({
   className = '',
   type,
   disabled,
-  segmentEvent,
   onClick,
   weight = 'medium',
   children,
@@ -37,11 +36,6 @@ function Button({
         data-type={type}
         data-size={size}
         onClick={() => {
-          if (segmentEvent) {
-            try {
-              window.analytics.track('click', segmentEvent)
-            } catch (e) {}
-          }
           onClick && onClick()
         }}>
         {iconLeft}

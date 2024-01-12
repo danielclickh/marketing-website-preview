@@ -30,11 +30,10 @@ const AccordionComponent = () => {
           ClickHouse for Real-time Analytics
         </SuiTitle>
         <p className='mx-auto mb-10 max-w-4xl px-9 pt-6 text-center'>
-          ClickHouse was built from the ground up to transform large-scale
-          real-time analytics, eliminating the operational complexities often
-          present in other traditional real-time systems, and ensuring that even
-          the most sophisticated data analysis can be done intuitively, using
-          simple SQL. 
+          Whether you’re building user-facing dashboards, instantly responsive
+          applications, or analyzing data on the fly, ClickHouse has you
+          covered. We’re built to ensure that even the most sophisticated data
+          analysis can be done intuitively, using simple SQL.
         </p>
         <p className='mx-auto mb-12 max-w-3xl px-9 text-center'>
           Our parallelized query execution engine, best-in-class compression

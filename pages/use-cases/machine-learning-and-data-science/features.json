@@ -17,6 +17,6 @@
   {
     "id": 40,
     "icon": "/images/use-cases/ml-and-ds/native-support.svg",
-    "content": "**Native support** for statistical functions and complex data types that scale seamlessly over billions of records."
+    "content": "Available as an **in-process OLAP SQL engine for Python**. Leverage the full power of ClickHouse, directly in your Python code with [chDB](/blog/welcome-chdb-to-clickhouse)."
   }
 ]

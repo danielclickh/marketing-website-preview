@@ -1,25 +1,25 @@
 import { MinusIcon } from '@heroicons/react/outline'
 import { CheckIcon } from '@heroicons/react/solid'
-import React, { useState, useMemo, useEffect } from 'react'
-import Markdown from '../Markdown'
-import { PricingContextProvider } from './PricingContext'
-import PlanPricing from './PlanPricing'
-import PricingButton from './PricingButton'
-import PricingSelector from './PricingSelector'
-import ShowPricing from './ShowPricing'
+import { useRouter } from 'next/router'
+import React, { useEffect, useMemo, useState } from 'react'
+import { slugify } from '../../lib/utils/strings'
+import { CloudProviderType } from '../../types/cloud'
 import {
   MeteredPricing,
   PricingPlanData,
   RegionPricing
 } from '../../types/pricing'
-import { RegionPricingWithIcon } from './types'
-import { CloudProviderType } from '../../types/cloud'
-import { SuiText } from '../sui'
-import { StrapiImage } from '../StrapiElements'
 import { CUIButton, CUILink } from '../ClickUI'
+import Markdown from '../Markdown'
+import { StrapiImage } from '../StrapiElements'
+import { SuiText } from '../sui'
+import PlanPricing from './PlanPricing'
+import PricingButton from './PricingButton'
+import { PricingContextProvider } from './PricingContext'
 import styles from './PricingOptions.module.scss'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+import PricingSelector from './PricingSelector'
+import ShowPricing from './ShowPricing'
+import { RegionPricingWithIcon } from './types'
 
 function PricingOptions({
   pricingByRegion,
@@ -36,13 +36,45 @@ function PricingOptions({
   const [provider, setProvider] = useState(
     router.query.priovider ? 'gcp' : 'aws'
   )
+
   const regionList: RegionPricingWithIcon[] = useMemo(() => {
-    return pricingByRegion
+    const orderedRegions = pricingByRegion
       .filter((item) => item.cloudProvider === provider)
-      .map((item) => ({
-        ...item,
-        regionFlagPNG: <StrapiImage {...item.regionFlagPNG} alt={item.region} />
-      }))
+      .map((item) => {
+        let regionSlug =
+          item.region.match(/[(]*\(([^)]+)\)$/i)?.[1] || item.region
+        return {
+          ...item,
+          regionFlagPNG: (
+            <StrapiImage {...item.regionFlagPNG} alt={item.region} />
+          ),
+          regionSlug: slugify(regionSlug)
+        }
+      })
+      .sort((a, b) => {
+        // Extract the regionSlugs
+        const slugA = a.regionSlug.toLowerCase()
+        const slugB = b.regionSlug.toLowerCase()
+
+        // Define the order of prefixes and region names
+        const order = ['us', 'eu', 'ap', 'europe', 'asia']
+
+        // Find the index of the prefixes/region names in the order array
+        const indexA = order.findIndex((prefix) => slugA.startsWith(prefix))
+        const indexB = order.findIndex((prefix) => slugB.startsWith(prefix))
+
+        // Compare based on the prefix/region name order
+        if (indexA < indexB) return -1
+        if (indexA > indexB) return 1
+
+        // If the prefixes/region names are the same or not in the order, compare the full slugs
+        if (slugA < slugB) return -1
+        if (slugA > slugB) return 1
+
+        return 0 // Slugs are equal
+      })
+
+    return orderedRegions
   }, [pricingByRegion, provider])
 
   const plans: Array<PricingPlanData> = useMemo(() => {
@@ -55,9 +87,35 @@ function PricingOptions({
       setProvider(newProvider)
     }
   }, [router.query.provider])
+
+  const updateRegionParam = (value: RegionPricingWithIcon) => {
+    router.push(
+      `/pricing?provider=${value.cloudProvider}&region=${value.regionSlug}`,
+      undefined,
+      {
+        shallow: true
+      }
+    )
+  }
+
+  const getDefaultRegion = () => {
+    const fallback = regionList[0]
+    const urlRegion = router.query?.region
+    if (provider && urlRegion && !Array.isArray(urlRegion)) {
+      const found = regionList.find((item) => {
+        return item.cloudProvider === provider && item.regionSlug === urlRegion
+      })
+
+      if (found) {
+        return found
+      }
+    }
+    return fallback
+  }
+
   return (
     <div>
-      <PricingContextProvider value={regionList[0]}>
+      <PricingContextProvider value={getDefaultRegion()}>
         <div className='flex justify-center space-x-6 pt-8 pb-6'>
           {cloudProviders.map((cloudProvider, parentIndex: number) => (
             <div className='flex flex-col space-y-2' key={parentIndex}>
@@ -133,7 +191,10 @@ function PricingOptions({
           ))}
         </div>
         <div className='center_content relative z-10 mx-auto mb-24 max-w-[344px]'>
-          <PricingSelector regionList={regionList} />
+          <PricingSelector
+            regionList={regionList}
+            onChange={updateRegionParam}
+          />
         </div>
 
         {plans.length > 0 && (

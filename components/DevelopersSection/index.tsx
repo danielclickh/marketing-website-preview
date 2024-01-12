@@ -2,8 +2,8 @@ import { ChevronRightIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import React from 'react'
 import { CUIButton, CUICard } from '../ClickUI'
+import HomepageCustomerVideos from '../HomepageVideos'
 import { SuiTitle } from '../sui'
-import VideoPlayer from '../VideoPlayer'
 import developerOptions from './developerOptions.json'
 
 function DevelopersSection() {
@@ -14,7 +14,17 @@ function DevelopersSection() {
       </SuiTitle>
       <div className='flex flex-col md:flex-row mb-8 gap-10'>
         <div className='w-full md:w-1/2 flex items-start'>
-          <VideoPlayer videoId='CVVp6N8Xeoc' provider='youtube' />
+        <HomepageCustomerVideos
+              fullWidth={true}
+              videos={[
+                {
+                  videoId: '884351851',
+                  type: 'vimeo',
+                  vimeoCode: '979264b085',
+                  image: '/images/disney-thumbnail.png'
+                }
+              ]}
+            />
         </div>
         <div className='flex flex-col w-full md:w-1/2'>
           <div className='text-md font-semibold text-neutral-0'>

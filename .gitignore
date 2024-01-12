@@ -39,6 +39,7 @@ next-env.d.ts
 
 /public/uploads/*
 public/sitemap.xml
+public/sitemap2.xml
 public/rss.xml
 .env
 .env.staging

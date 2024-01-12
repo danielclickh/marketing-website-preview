@@ -21,10 +21,6 @@ function MobileMenuItem({
         key={name}
         href={href}
         target={target}
-        segmentEvent={{
-          label: name ?? '',
-          category: 'website-nav'
-        }}
         className='menu-item font-medium hover:no-underline'>
         {name}
       </SuiLink>
@@ -34,22 +30,21 @@ function MobileMenuItem({
   if (menuItems) {
     return (
       <div className='border-y border-neutral-700 bg-neutral-750/90 px-4 pb-4 backdrop-blur-[10px] sm:px-8'>
-        {menuItems.map((subitem: HeaderLinkItem | HeaderTopNavItem) => {
+        {menuItems.map((subitem: HeaderLinkItem | HeaderTopNavItem, index) => {
           if (subitem.menuItems && subitem.menuItems.length > 0) {
             return (
-              <div className='flex flex-col pt-4'>
-                {subitem.name && (
+              <div
+                className={`flex flex-col ${
+                  subitem.name !== 'Use cases' && 'pt-4'
+                }  ${index !== 1 && 'pt-4'}`}>
+                {subitem.name !== 'Use cases' && (
                   <div className='mb-4 text-sm font-medium'>{subitem.name}</div>
                 )}
-                {subitem.menuItems.map((item: HeaderLinkItem) => (
+                {subitem.menuItems.map((item: HeaderLinkItem, index) => (
                   <SuiLink
-                    key={item.name}
+                    key={index}
                     href={item.href}
                     onClick={close}
-                    segmentEvent={{
-                      label: item.name,
-                      category: 'website-nav'
-                    }}
                     className='mb-4 flex max-w-md items-start hover:no-underline'>
                     <div
                       className={styles.menuItem}
@@ -90,12 +85,8 @@ function MobileMenuItem({
           } else if (subitem?.href) {
             return (
               <SuiLink
-                key={subitem.name}
+                key={index}
                 href={subitem.href}
-                segmentEvent={{
-                  label: subitem.name,
-                  category: 'website-nav'
-                }}
                 className='flex max-w-md items-start hover:no-underline'>
                 {subitem.name}
               </SuiLink>

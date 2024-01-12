@@ -64,7 +64,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='0s;barChart.end;lineChart.end;pieChart.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -86,7 +86,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='0s;barChart.end;lineChart.end;pieChart.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -108,7 +108,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='0s;barChart.end;lineChart.end;pieChart.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -130,7 +130,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='0s;barChart.end;lineChart.end;pieChart.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -152,7 +152,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='0s;barChart.end;lineChart.end;pieChart.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -174,7 +174,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='0s;barChart.end;lineChart.end;pieChart.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -196,7 +196,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='0s;barChart.end;lineChart.end;pieChart.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -218,7 +218,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='0s;barChart.end;lineChart.end;pieChart.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -242,7 +242,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col1.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -264,7 +264,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col1.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -286,7 +286,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col1.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -308,7 +308,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col1.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -330,7 +330,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col1.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -352,7 +352,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col1.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -374,7 +374,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col1.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -396,7 +396,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col1.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -420,7 +420,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col2.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -442,7 +442,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col2.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -464,7 +464,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col2.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -486,7 +486,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col2.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -508,7 +508,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col2.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -530,7 +530,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col2.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -552,7 +552,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col2.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -574,7 +574,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col2.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -598,7 +598,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col3.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -620,7 +620,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col3.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -642,7 +642,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col3.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -664,7 +664,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col3.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -686,7 +686,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col3.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -708,7 +708,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col3.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -730,7 +730,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col3.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -752,7 +752,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col3.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -776,7 +776,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col4.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -798,7 +798,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col4.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -820,7 +820,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col4.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -842,7 +842,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col4.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -864,7 +864,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col4.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -886,7 +886,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col4.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -908,7 +908,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col4.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -930,7 +930,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col4.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -954,7 +954,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col5.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -976,7 +976,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col5.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -998,7 +998,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col5.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -1020,7 +1020,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col5.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -1042,7 +1042,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col5.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -1064,7 +1064,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col5.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -1086,7 +1086,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col5.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -1108,7 +1108,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col5.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -1132,7 +1132,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col6.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -1154,7 +1154,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col6.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -1176,7 +1176,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col6.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -1198,7 +1198,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col6.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -1220,7 +1220,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col6.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -1242,7 +1242,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col6.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -1264,7 +1264,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col6.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -1286,7 +1286,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           attributeName='fill'
           begin='col6.end'
           dur='200ms'
-          values='#FCFF74'
+          values='#FAFF69'
           fill='freeze'
         />
         <animate
@@ -1872,7 +1872,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           width='20.9699'
           height='98'
           rx='3'
-          fill='#FCFF74'
+          fill='#FAFF69'
         />
         <rect
           x='435.333'
@@ -1880,7 +1880,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           width='20.9699'
           height='81'
           rx='3'
-          fill='#FCFF74'
+          fill='#FAFF69'
         />
         <rect
           x='465.29'
@@ -1888,7 +1888,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           width='20.9699'
           height='58'
           rx='3'
-          fill='#FCFF74'
+          fill='#FAFF69'
         />
         <rect
           x='495.247'
@@ -1896,7 +1896,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           width='20.9699'
           height='29'
           rx='3'
-          fill='#FCFF74'
+          fill='#FAFF69'
         />
         <animate
           id='barChart'
@@ -1915,7 +1915,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
           cy='48.9316'
           r='38.5'
           fill='#FF7575'
-          stroke='#FCFF74'
+          stroke='#FAFF69'
           strokeWidth='21'
         />
         <mask
@@ -1930,7 +1930,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
             cy='48.9316'
             r='38.5'
             fill='#FF7575'
-            stroke='#FCFF74'
+            stroke='#FAFF69'
             strokeWidth='21'
           />
         </mask>
@@ -1959,7 +1959,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
       <g opacity='0' transform='matrix(1, 0, 0, 1, 413.511292, 87.500008)'>
         <path
           d='M0 36.3714L18.8 23L29.2 41L48 32.2571L70 41L98 26.6'
-          stroke='#FCFF74'
+          stroke='#FAFF69'
           strokeWidth='5'
         />
         <path

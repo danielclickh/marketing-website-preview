@@ -54,6 +54,7 @@ const deployData: Array<DeployData> = [
     btnText: 'Download ClickHouse',
     description:
       'Spin up a database server with open-source ClickHouse. Always Free.',
+
     href: '#getting_started',
     btnType: 'secondary'
   },
@@ -61,7 +62,8 @@ const deployData: Array<DeployData> = [
     title: 'ClickHouse Cloud',
     img: '/cloud.svg',
     btnText: 'Start free trial',
-    description: 'Deploy a fully managed ClickHouse service on AWS or GCP.',
+    description:
+      'Available on AWS, GCP, and through their respective Marketplaces. Azure coming soon.',
     href: 'https://clickhouse.cloud/signUp?loc=home-deploy-your-way',
     target: '_blank',
     btnType: 'primary'
@@ -124,8 +126,8 @@ export default function HomePage({
                 </span>{' '}
                 of rows in milliseconds
               </SuiTitle>
-              <div className='mx-auto flex max-w-md flex-col items-center'>
-                <div className='my-8 text-center leading-normal text-neutral-200'>
+              <div className='mx-auto flex max-w-md flex-col items-center md:max-w-2xl'>
+                <div className='mt-6 mb-10 text-center text-lg text-neutral-0 md:text-xl md:leading-relaxed'>
                   ClickHouse is the fastest and most resource efficient
                   open-source database for real-time apps and analytics.
                 </div>
@@ -136,10 +138,6 @@ export default function HomePage({
                     size='lg'
                     weight='semibold'
                     href={hero.ctaButton.href}
-                    segmentEvent={{
-                      label: hero.ctaButton.text,
-                      category: 'website-hero'
-                    }}
                     linkClass='w-full max-w-[14rem]'
                     className='w-full'>
                     Start free trial
@@ -149,10 +147,6 @@ export default function HomePage({
                     weight='semibold'
                     size='lg'
                     href='https://clickhouse.com/docs/en/intro'
-                    segmentEvent={{
-                      label: hero.ctaButton.text,
-                      category: 'website-hero-docs'
-                    }}
                     linkClass='w-full max-w-[14rem]'
                     className='w-full'>
                     View documentation
@@ -361,7 +355,7 @@ export default function HomePage({
                     <div className='cursor-pointer text-center text-xl font-semibold leading-tight text-neutral-0'>
                       {deploy.title}
                     </div>
-                    <div className='text-center text-sm text-neutral-200'>
+                    <div className='text-center text-sm text-neutral-200 lg:min-h-[60px]'>
                       {deploy.description}
                     </div>
                   </div>

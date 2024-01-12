@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps<RealTimeAnalyticsPageProps> =
     const data = await findOne('homepage', params)
 
     data.seo.path = '/use-cases/real-time-analytics'
-    data.seo.title = 'Real-time analytics with ClickHouse'
+    data.seo.title = 'Real-time Analytics with ClickHouse'
     data.seo.description =
       'Ingest millions of rows per second. Handle the most heavily concurrent workloads. All without compromising query speed.'
 
@@ -78,10 +78,10 @@ export default function RealTimeAnalyticsPage({
                   <div className='w-full lg:max-w-xl xl:max-w-full'>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
                       <Link href='/use-cases'>Use cases</Link> / Real-time
-                      analytics
+                      Analytics
                     </h4>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-xl lg:text-left'>
-                      Real-time analytics with ClickHouse
+                      Real-time Analytics with ClickHouse
                     </h1>
                     <SuiText
                       size='base'
@@ -123,10 +123,6 @@ export default function RealTimeAnalyticsPage({
                         weight='semibold'
                         href='https://clickhouse.cloud/signUp?loc=use-case-real-time-analytics'
                         target='_blank'
-                        segmentEvent={{
-                          label: 'use-case-ml-and-ds',
-                          category: 'use-case-ml-and-ds'
-                        }}
                         linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                         className='w-full'>
                         Get started today
@@ -137,10 +133,6 @@ export default function RealTimeAnalyticsPage({
                         weight='semibold'
                         href='/company/contact?loc=use-case-real-time-analytics'
                         target='_self'
-                        segmentEvent={{
-                          label: 'use-case-ml-and-ds-contact',
-                          category: 'use-case-ml-and-ds-contact'
-                        }}
                         linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
                         className='w-full'>
                         Contact sales
@@ -177,7 +169,10 @@ export default function RealTimeAnalyticsPage({
                 <h2 className='text-left font-basier text-2xl font-semibold lg:text-4xl xl:max-w-[515px]'>
                   The real-time database that truly shines at scale. Count on
                   blazing performance when low latency{' '}
-                  <span className='text-primary-300'>really</span> matters.
+                  <span className='tilted tilted-yellow'>
+                    <span className='tilted-content leading-8'>really</span>
+                  </span>{' '}
+                  matters.
                 </h2>
                 <p className='mt-6 xl:max-w-[445px]'>
                   Discover why companies are choosing ClickHouse for their
@@ -230,11 +225,10 @@ export default function RealTimeAnalyticsPage({
                                 alt='Quote'
                                 className='mb-4 block'
                               />
-                              <SuiText
-                                color='secondary'
-                                className='min-h-auto text-left xl:min-h-[250px]'>
-                                "{quote.content}"
-                              </SuiText>
+                              <Markdown
+                                className='min-h-auto text-left xl:min-h-[280px]'
+                                children={quote.content}
+                              />
                               <Image
                                 src={quote.logo}
                                 width={quote.imgWidth}
@@ -253,9 +247,10 @@ export default function RealTimeAnalyticsPage({
                               alt='Quote'
                               className='mb-4 block'
                             />
-                            <SuiText color='secondary' className='text-left'>
-                              "{quote.content}"
-                            </SuiText>
+                            <Markdown
+                              className='min-h-auto text-left xl:min-h-[250px]'
+                              children={quote.content}
+                            />
                             <Image
                               src={quote.logo}
                               width={quote.imgWidth}
@@ -309,7 +304,7 @@ export default function RealTimeAnalyticsPage({
                   height={73}
                 />
                 <SuiTitle type='h2' className='mt-8 text-center'>
-                  Real-time Applications
+                  Real-time Applications and Dashboards
                 </SuiTitle>
                 <p className='mx-auto mb-12 max-w-3xl px-9 pt-6 text-center text-sm'>
                   ClickHouse is used across industries to power systems and
@@ -379,7 +374,6 @@ export default function RealTimeAnalyticsPage({
                         Asynchronous Data Inserts in ClickHouse
                       </Link>
                     </li>
-
                     <li>
                       <a
                         href='/blog/real-time-event-streaming-with-confluent-cloud-clickhouse-and-clickpipes'
@@ -404,7 +398,6 @@ export default function RealTimeAnalyticsPage({
                         Hex
                       </a>
                     </li>
-
                     <li>
                       <a
                         href='/blog/using-materialized-views-in-clickhouse'
@@ -433,6 +426,14 @@ export default function RealTimeAnalyticsPage({
                         className='text-primary-300'>
                         Change Data Capture (CDC) with PostgreSQL and ClickHouse
                         - Part 2
+                      </a>
+                    </li>{' '}
+                    <li>
+                      <a
+                        href='/blog/how-cloudflare-processes-hundreds-of-millions-of-rows-per-second-with-clickhouse'
+                        className='text-primary-300'>
+                        How Cloudflare Processes Hundreds of Millions of Rows
+                        per Second with ClickHouse
                       </a>
                     </li>
                   </ol>

@@ -60,10 +60,6 @@ const nextConfig = {
       {
         source: '/uploads/:path*',
         destination: `${strapiApiUrl}/uploads/:path*`
-      },
-      {
-        source: '/sitemap.xml',
-        destination: `${strapiApiUrl}/sitemap/index.xml`
       }
     ]
   },
@@ -87,7 +83,7 @@ const nextConfig = {
       {
         source: '/slack',
         destination:
-          'https://join.slack.com/t/clickhousedb/shared_invite/zt-23y85sfck-crUbdd4RupnjOBxfFIQv5w',
+          'https://join.slack.com/t/clickhousedb/shared_invite/zt-29tze3zyo-lHQ~K_kMu7XRXfZ1fI72dg',
         permanent: true
       },
       {
@@ -325,6 +321,65 @@ const nextConfig = {
       {
         source: '/videos/managing-clickhouse-dictionaires-at-cloudflare',
         destination: '/videos/managing-clickhouse-dictionaries-at-cloudflare',
+        permanent: true
+      },
+      {
+        source: '/company/events/202312-amer-clickhouse-fundamentals',
+        destination: '/company/events/clickhouse-workshop',
+        permanent: true
+      },
+      {
+        source: '/company/events/202311-emea-clickhouse-fundamentals',
+        destination: '/company/events/clickhouse-workshop',
+        permanent: true
+      },
+      {
+        source: '/company/events/202311-amer-clickhouse-fundamentals',
+        destination: '/company/events/clickhouse-workshop',
+        permanent: true
+      },
+      {
+        source:
+          '/blog/how-clickhouse-powers-ahrefs-the-worlds-largest-web-crawler',
+        destination:
+          '/blog/how-clickhouse-powers-ahrefs-the-worlds-most-active-web-crawler',
+        permanent: true
+      },
+      {
+        source: '/events/202312-amer-clickhouse-fundamentals',
+        destination: '/company/events/clickhouse-workshop',
+        permanent: true
+      },
+      {
+        source: '/events/202311-emea-clickhouse-fundamentals',
+        destination: '/company/events/clickhouse-workshop',
+        permanent: true
+      },
+      {
+        source: '/events/202311-amer-clickhouse-fundamentals',
+        destination: '/company/events/clickhouse-workshop',
+        permanent: true
+      },
+      {
+        source:
+          '/blog/optimizing-your-customer-facing-analytics-experience-with-cumul-io-and-clickhouse',
+        destination:
+          '/blog/optimizing-your-customer-facing-analytics-experience-with-luzmo-and-clickhouse',
+        permanent: true
+      },
+      {
+        source: '/reinvent-2023',
+        destination: '/company/contact',
+        permanent: true
+      },
+      {
+        source: '/reinvent-2023/vip-party',
+        destination: '/company/contact',
+        permanent: true
+      },
+      {
+        source: '/company/events/clickhouse-workshop',
+        destination: '/company/events/clickhouse-fundamentals',
         permanent: true
       }
     ]

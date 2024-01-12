@@ -40,9 +40,9 @@ export const getStaticProps: GetStaticProps<MLProps> =
 
     data.seo.path = '/use-cases/machine-learning-and-data-science'
     data.seo.title =
-      'Machine Learning and Data Science with ClickHouse | ClickHouse for ML and data science'
+      'Machine Learning & GenAI with ClickHouse | ClickHouse for ML and data science'
     data.seo.description =
-      "The ultimate real-time database to power machine learning workloads. With ClickHouse, it's easier than ever to unleash AI with your data."
+      "The ultimate real-time database to power Machine Learning workloads. With ClickHouse, it's easier than ever to unleash GenAI on your analytics data."
     data.seo.image = [{ url: '/images/og-ml-ds.png' }]
 
     const commonProps = await getCommonProps()
@@ -79,20 +79,20 @@ export default function MLUseCasePage({
                 <div className='flex-col xl:mt-16'>
                   <div className='w-full lg:max-w-xl xl:max-w-full'>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                      <Link href='/use-cases'>Use cases</Link> / ML &amp; Data
-                      Science
+                      <Link href='/use-cases'>Use cases</Link> / Machine
+                      Learning & GenAI
                     </h4>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-lg lg:text-left'>
-                      ML &amp; Data Science with ClickHouse
+                      Machine Learning & GenAI
                     </h1>
                     <SuiText
                       size='base'
                       color='secondary'
                       className='mt-6 text-center md:pr-16 lg:text-left'>
                       <p className='mb-6 font-normal'>
-                        The ultimate real-time database to power machine
-                        learning workloads. With&nbsp;ClickHouse, it's easier
-                        than ever to unleash AI with your data.
+                        The ultimate real-time database to power Machine
+                        Learning workloads. With ClickHouse, it's easier than
+                        ever to unleash GenAI on your analytics data.
                       </p>
                     </SuiText>
                   </div>
@@ -125,10 +125,6 @@ export default function MLUseCasePage({
                         weight='semibold'
                         href='https://clickhouse.cloud/signUp?loc=use-case-ml-and-ds'
                         target='_blank'
-                        segmentEvent={{
-                          label: 'use-case-ml-and-ds',
-                          category: 'use-case-ml-and-ds'
-                        }}
                         linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                         className='w-full'>
                         Get started today
@@ -139,10 +135,6 @@ export default function MLUseCasePage({
                         weight='semibold'
                         href='/company/contact?loc=use-case-ml-and-ds'
                         target='_self'
-                        segmentEvent={{
-                          label: 'use-case-ml-and-ds-contact',
-                          category: 'use-case-ml-and-ds-contact'
-                        }}
                         linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
                         className='w-full'>
                         Contact sales
@@ -168,8 +160,8 @@ export default function MLUseCasePage({
         <div className='bg-neutral-725 text-neutral-0'>
           <div className='container mx-auto max-w-5xl px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
             <h2 className='text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
-              Find out why companies are using ClickHouse to power&nbsp;their
-              machine learning data workloads.
+              Find out why companies are using ClickHouse to power their AI
+              workloads.
             </h2>
           </div>
           <div className='mx-auto flex max-w-6xl flex-col gap-5 pb-24 md:flex-row'>
@@ -386,6 +378,21 @@ export default function MLUseCasePage({
                         href='/blog/clickhouse-open-ai-user-defined-functions-udfs'
                         className='text-primary-300'>
                         Using ClickHouse UDFs to integrate with OpenAI models
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href='/blog/forecasting-using-clickhouse'
+                        className='text-primary-300'>
+                        Forecasting Using ClickHouse Machine Learning Functions
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href='/blog/helicones-migration-from-postgres-to-clickhouse-for-advanced-llm-monitoring'
+                        className='text-primary-300'>
+                        Helicone's Migration from Postgres to ClickHouse for
+                        Advanced LLM Monitoring
                       </Link>
                     </li>
                   </ol>

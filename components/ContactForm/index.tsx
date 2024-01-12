@@ -76,10 +76,12 @@ function ContactForm({
       !lastName ||
       !email ||
       !company ||
+      !useCase ||
       firstName.length === 0 ||
       lastName.length === 0 ||
       email.length === 0 ||
-      company.length === 0
+      company.length === 0 ||
+      useCase.length === 0
     ) {
       openSnackBar('Please fill in all the required fields', 'error')
       return
@@ -104,14 +106,6 @@ function ContactForm({
 
       const response = await submitWorkatoForm('websiteContact', requestData)
       const userId = response?.cloudId ? response.cloudId : email
-      try {
-        await window.analytics.track('Form Submitted', {
-          email,
-          userId,
-          _mkt_trk: response.marketCookie
-        })
-        await window.analytics.identify(userId, requestData)
-      } catch (e) {}
 
       setSubmissionSuccessful(true)
       setFirstName(undefined)
@@ -228,7 +222,9 @@ function ContactForm({
           </SuiButton>
         </div>
       </div>
-      {submissionSuccessful && <ReactMarkdown className='text-center' children={thankYouMessage} />}
+      {submissionSuccessful && (
+        <ReactMarkdown className='text-center' children={thankYouMessage} />
+      )}
     </>
   )
 }

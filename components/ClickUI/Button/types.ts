@@ -12,10 +12,8 @@ export interface ButtonProps extends Partial<LinkProps> {
   disabled?: boolean
   target?: string
   className?: string
-  segment?: string
   color?: never
   weight?: string
-  segmentEvent?: Record<string, string>
   linkClass?: string
 }
 

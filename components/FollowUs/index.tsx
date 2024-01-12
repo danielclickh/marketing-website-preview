@@ -2,9 +2,9 @@ import SocialIcon from '../SocialIcon'
 
 function FollowUs() {
   return (
-    <div className='bg-primary-300 text-neutral flex flex-col items-center justify-center mt-24'>
+    <div className='mt-24 flex flex-col items-center justify-center bg-primary-300 text-neutral'>
       <div className='mt-8 mb-4 font-bold'>Follow us</div>
-      <div className='flex flex-wrap gap-6 mb-12 justify-center'>
+      <div className='mb-12 flex flex-wrap justify-center gap-6'>
         <SocialIcon
           name='Twitter'
           href='https://twitter.com/ClickhouseDB'
@@ -16,7 +16,7 @@ function FollowUs() {
           href='https://github.com/ClickHouse/ClickHouse'
           imgSrc='/socials/github.svg'
         />
-        <div className='flex gap-6 justify-center'>
+        <div className='flex justify-center gap-6'>
           <SocialIcon
             name='Telegram'
             href='https://telegram.me/clickhouse_en'
@@ -32,10 +32,6 @@ function FollowUs() {
             name='Rss'
             href='/rss.xml'
             imgSrc='/socials/rss.svg'
-            segmentEvent={{
-              label: 'Blog RSS link',
-              category: 'blog-categories-nav'
-            }}
           />
         </div>
       </div>

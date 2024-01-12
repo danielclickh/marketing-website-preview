@@ -20,10 +20,12 @@ interface CustomerVideo {
 
 interface HomepageCustomerVideosProps {
   videos: CustomerVideo[]
+  fullWidth?: boolean
 }
 
 export default function HomepageCustomerVideos({
-  videos
+  videos,
+  fullWidth
 }: HomepageCustomerVideosProps) {
   const [clickedVideo, setClickedVideo] = useState<string | null>(null)
   const [vimeoCode, setVimeoCode] = useState<string | null>(null)
@@ -92,7 +94,9 @@ export default function HomepageCustomerVideos({
           return (
             <div
               key={video.videoId}
-              className={`xl:w-1/3 homepage-video-${video.videoId}`}>
+              className={`${
+                fullWidth ? 'w-full' : 'xl:w-1/3'
+              }  homepage-video-${video.videoId}`}>
               <div
                 onClick={(e) => onVideoClicked(video)}
                 className='group relative flex items-center overflow-hidden rounded-lg hover:cursor-pointer hover:shadow-md'>

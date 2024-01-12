@@ -37,7 +37,7 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
 
         <path
           d='M50 47.5H286.5C289.814 47.5 292.5 50.1863 292.5 53.5V171.5C292.5 174.814 295.186 177.5 298.5 177.5H429.5'
-          stroke='#FCFF74'
+          stroke='#FAFF69'
           strokeWidth='3'>
           <animate
             dur='4s'
@@ -49,7 +49,7 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
 
         <path
           d='M85 135.5L286.585 135.5C289.869 135.5 292.5 138.114 292.5 141.376L292.5 172.124C292.5 175.386 295.132 178 298.416 178L399.5 178'
-          stroke='#FCFF74'
+          stroke='#FAFF69'
           strokeWidth='3'>
           <animate
             dur='2.75s'
@@ -66,7 +66,7 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
           width='120'
           height='120'
           rx='4'
-          fill='#FCFF74'
+          fill='#FAFF69'
           style={{
             filter: 'drop-shadow(0px 4px 15px rgba(252, 255, 116, 0.5))'
           }}
@@ -149,7 +149,7 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
             width='72'
             height='72'
             rx='4'
-            stroke='#FCFF74'
+            stroke='#FAFF69'
             shapeRendering='crispEdges'
           />
         </g>
@@ -173,7 +173,7 @@ function ClickPipesAnimation({ className }: Props): JSX.Element {
             width='72'
             height='72'
             rx='4'
-            stroke='#FCFF74'
+            stroke='#FAFF69'
             shapeRendering='crispEdges'
           />
         </g>

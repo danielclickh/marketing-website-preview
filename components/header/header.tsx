@@ -91,11 +91,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
               key='github-stars-nav'
               href='https://github.com/ClickHouse/ClickHouse?utm_source=clickhouse&utm_medium=website&utm_campaign=website-nav'
               target='_blank'
-              className='hidden hover:text-neutral-400 hover:no-underline lg:flex '
-              segmentEvent={{
-                label: 'GitHub Stars',
-                category: 'website-nav'
-              }}>
+              className='hidden hover:text-neutral-400 hover:no-underline lg:flex '>
               <div className='flex items-center gap-2  hover:no-underline'>
                 <svg
                   width='16'
@@ -125,10 +121,6 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
             <CUILink
               href='https://clickhouse.cloud/signIn'
               target='_self'
-              segmentEvent={{
-                label: 'Sign in',
-                category: 'website-nav'
-              }}
               className='hidden items-center text-sm font-medium ease-in-out hover:text-neutral-400 hover:no-underline lg:inline-flex'>
               Sign in
             </CUILink>
@@ -136,10 +128,6 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
               type='primary'
               weight='medium'
               href='https://clickhouse.cloud/signUp?loc=nav-get-started'
-              segmentEvent={{
-                label: 'Get started',
-                category: 'website-nav'
-              }}
               target='_self'>
               Get started
             </CUIButton>
@@ -203,10 +191,6 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
                         href={menuItem.href}
                         target={menuItem?.target}
                         onClick={() => setIsOpen(false)}
-                        segmentEvent={{
-                          label: menuItem.name,
-                          category: 'website-nav'
-                        }}
                         className='menu-item px-4 py-2 text-lg font-medium hover:no-underline sm:px-8'>
                         {menuItem.name}
                       </CUILink>
@@ -222,10 +206,6 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
               type='primary'
               href='https://clickhouse.cloud/signUp'
               target='_self'
-              segmentEvent={{
-                label: 'Get started',
-                category: 'website-nav'
-              }}
               className='w-full'>
               Get started
             </CUIButton>
@@ -233,10 +213,6 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
               type='secondary'
               href='https://clickhouse.cloud/signIn'
               target='_self'
-              segmentEvent={{
-                label: 'Sign in',
-                category: 'website-nav'
-              }}
               className='w-full'>
               Sign in
             </CUIButton>

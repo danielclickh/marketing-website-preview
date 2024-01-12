@@ -35,7 +35,8 @@ const deployData: Array<DeployData> = [
     title: 'ClickHouse Cloud',
     img: '/cloud.svg',
     btnText: 'Start free trial',
-    description: 'Deploy a fully managed ClickHouse service on AWS or GCP.',
+    description:
+      'Available on AWS, GCP, and through their respective Marketplaces. Azure coming soon.',
     href: 'https://clickhouse.cloud/signUp?loc=deploy-your-way',
     target: '_blank',
     btnType: 'primary'
@@ -59,7 +60,7 @@ export default function GiveItAGo() {
               <div className='cursor-pointer text-xl font-semibold leading-tight text-neutral-0'>
                 {deploy.title}
               </div>
-              <div className='text-center text-sm text-neutral-200'>
+              <div className='text-center text-sm text-neutral-200 lg:min-h-[60px]'>
                 {deploy.description}
               </div>
             </div>

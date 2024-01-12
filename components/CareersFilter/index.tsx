@@ -27,7 +27,7 @@ const fetcher = async (url: string) => {
       const jobs = departments.get(department.name) ?? []
       jobs.push({
         url: position.absolute_url,
-        location: locationList.join(', '),
+        location: position.location.name,
         title: position.title,
         offices: officesByPositions
       })
@@ -91,7 +91,7 @@ function CareersFilter() {
 
   if (error) {
     return (
-      <div className='flex flex-col md:flex-row container mx-auto max-w-7xl justify-between'>
+      <div className='container mx-auto flex max-w-7xl flex-col justify-between md:flex-row'>
         <SuiText size='base' weight='normal' className='pl-4'>
           Issue fetching jobs
         </SuiText>
@@ -101,7 +101,7 @@ function CareersFilter() {
 
   if (!data) {
     return (
-      <div className='flex flex-col md:flex-row container mx-auto max-w-7xl justify-between'>
+      <div className='container mx-auto flex max-w-7xl flex-col justify-between md:flex-row'>
         <SuiText size='base' weight='normal' className='pl-4'>
           Loading
         </SuiText>
@@ -132,19 +132,19 @@ function CareersFilter() {
   })
 
   return (
-    <div className='flex flex-col w-full'>
-      <div className='flex-col lg:flex lg:flex-row lg:justify-between items-center pb-8 lg:space-x-24'>
+    <div className='flex w-full flex-col'>
+      <div className='flex-col items-start pb-8'>
         <SuiSearchField
-          placeholder='Search job'
+          placeholder='Search jobs...'
           htmlFor='search'
-          className='lg:flex-1 mb-6 lg:mb-0'
+          className='mb-6'
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setSearch(e.target.value)
           }
         />
         <CategorySelector options={departments} />
       </div>
-      <div className=''>
+      <div>
         <div className='mt-4'>
           {filteredDepartments.every(([name, jobs]) => jobs.length === 0) && (
             <h3>No results matching your search</h3>
@@ -152,20 +152,20 @@ function CareersFilter() {
           {filteredDepartments.map(([name, jobs]: [string, JobType[]]) => (
             <div key={name}>
               {jobs.length > 0 && (
-                <div className='grid grid-cols-1 border-b border-neutral-700 mb-16'>
-                  <h3 className='font-inter text-xl font-bold mb-8'>{name}</h3>
+                <div className='mb-16 grid grid-cols-1 border-b border-neutral-700'>
+                  <h3 className='mb-8 font-inter text-xl font-bold'>{name}</h3>
                   {jobs.map((job: JobType, index: number) => (
                     <div
                       key={job.url}
                       className='border-t border-neutral-700 py-6 px-4 hover:bg-neutral-725 '>
                       <SuiLink
                         href={job.url}
-                        className={`job-${index} md:flex items-center justify-between hover:no-underline`}>
+                        className={`job-${index} items-center justify-between hover:no-underline md:flex`}>
                         <div>
                           <SuiText
                             size='base'
                             weight='normal'
-                            className='font-inter text-primary-300 mb-1'>
+                            className='mb-1 font-inter text-primary-300'>
                             {job.title}
                           </SuiText>
                           <SuiText
@@ -177,12 +177,12 @@ function CareersFilter() {
                         </div>
                         <CUIButton
                           type='secondary'
-                          className='w-auto mt-4 md:mt-0 group'
+                          className='group mt-4 w-auto md:mt-0'
                           target='_blank'
                           iconRight={
                             <ChevronRightIcon
                               height='18'
-                              className='group-hover:translate-x-1/2 pt-0.5 transition'
+                              className='pt-0.5 transition group-hover:translate-x-1/2'
                             />
                           }>
                           Apply

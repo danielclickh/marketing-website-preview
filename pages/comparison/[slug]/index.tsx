@@ -438,12 +438,15 @@ export async function getStaticPaths() {
     fields: ['slug']
   }
 
+  // Define an array of slugs to exclude
+  const excludedSlugs = ['snowflake', 'redshift']
+
   const allPaths = await getPathsValues('comparisons', params)
 
-  // Filter out the paths with the 'snowflake' slug
+  // Filter out the paths with the excluded slugs
   const paths = allPaths.filter((path) => {
     const slug = path.params.slug
-    return slug !== 'snowflake'
+    return !excludedSlugs.includes(slug)
   })
 
   return {

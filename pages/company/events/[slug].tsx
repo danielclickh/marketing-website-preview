@@ -242,7 +242,14 @@ export async function getStaticPaths() {
       ]
     }
   }
-  const paths = await getPathsValues('events', params)
+  const allPaths = await getPathsValues('events', params)
+  // Define an array of slugs to exclude
+  const excludedSlugs = ['clickhouse-workshop', 'clickhouse-fundamentals']
+  // Filter out the paths with the excluded slugs
+  const paths = allPaths.filter((path) => {
+    const slug = path.params.slug
+    return !excludedSlugs.includes(slug)
+  })
 
   return {
     paths,

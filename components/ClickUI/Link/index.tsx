@@ -8,16 +8,10 @@ function Link({
   children,
   disabled,
   className = '',
-  segmentEvent,
   onClick: onClickProp,
   ...props
 }: LinkProps) {
   const onClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
-    if (segmentEvent) {
-      try {
-        window.analytics.track('click', segmentEvent)
-      } catch (error) {}
-    }
     if (onClickProp) {
       onClickProp(e)
     }
