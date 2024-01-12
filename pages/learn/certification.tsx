@@ -1,12 +1,9 @@
 import { CheckCircleIcon } from '@heroicons/react/outline'
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
-import { GetStaticProps } from 'next'
-import { CUIButton, CUICard } from '../../components/ClickUI'
-import CopyUrlButton from '../../components/CopyUrlButton'
+import { CUICard } from '../../components/ClickUI'
 import Bullseye from '../../components/icons/Bullseye'
-import Certificate from '../../components/icons/Certificate'
-import CertificateSquare from '../../components/icons/CertificateSquare'
 import Clock from '../../components/icons/Clock'
 import Coins from '../../components/icons/Coins'
 import FileDashed from '../../components/icons/FileDashed'
@@ -15,7 +12,6 @@ import Layout from '../../components/Layout'
 import LogoCarousel from '../../components/LogoCarousel'
 import Markdown from '../../components/Markdown'
 import MarketoForm from '../../components/MarketoForm'
-import SocialButton from '../../components/SocialButton'
 import { SuiText, SuiTitle } from '../../components/sui'
 import { findOne } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
@@ -229,9 +225,7 @@ export default function CertificationPage({
             <div className='flex flex-col gap-6 rounded bg-primary-800/95 p-6 text-white'>
               <CUICard>
                 <CUICard.Body className='p-6'>
-                  <p className='mb-4'>
-                    <strong>Modeling Data</strong>
-                  </p>
+                  <p className='mb-4 font-basier text-[20px]'>Modeling Data</p>
                   <ul className='flex flex-col gap-2'>
                     <li>
                       <CheckListItem value='Create a new database' />
@@ -253,9 +247,7 @@ export default function CertificationPage({
               </CUICard>
               <CUICard>
                 <CUICard.Body className='p-6'>
-                  <p className='mb-4'>
-                    <strong>Inserting Data</strong>
-                  </p>
+                  <p className='mb-4 font-basier text-[20px]'>Inserting Data</p>
                   <ul className='flex flex-col gap-2'>
                     <li>
                       <CheckListItem value='Insert a local file into a table' />
@@ -277,9 +269,7 @@ export default function CertificationPage({
               </CUICard>
               <CUICard>
                 <CUICard.Body className='p-6'>
-                  <p className='mb-4'>
-                    <strong>Analyzing Data</strong>
-                  </p>
+                  <p className='mb-4 font-basier text-[20px]'>Analyzing Data</p>
                   <ul className='flex flex-col gap-2'>
                     <li>
                       <CheckListItem value='Write a query that satisfies a given criteria' />
@@ -307,8 +297,8 @@ export default function CertificationPage({
               </CUICard>
               <CUICard>
                 <CUICard.Body className='p-6'>
-                  <p className='mb-4'>
-                    <strong>Optimizing Query Performance</strong>
+                  <p className='mb-4 font-basier text-[20px]'>
+                    Optimizing Query Performance
                   </p>
                   <ul className='flex flex-col gap-2'>
                     <li>
@@ -331,8 +321,8 @@ export default function CertificationPage({
               </CUICard>
               <CUICard>
                 <CUICard.Body className='p-6'>
-                  <p className='mb-4'>
-                    <strong>Deduplication and Mutations</strong>
+                  <p className='mb-4 font-basier text-[20px]'>
+                    Deduplication and Mutations
                   </p>
                   <ul className='flex flex-col gap-2'>
                     <li>
