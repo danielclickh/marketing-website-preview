@@ -105,6 +105,9 @@ function generateSiteMap(
         <loc>${siteURL}/use-cases/real-time-analytics</loc>
     </url>
     <url>
+        <loc>${siteURL}/use-cases/business-intelligence</loc>
+    </url>
+    <url>
         <loc>${siteURL}/user-stories</loc>
     </url>
     <url>
