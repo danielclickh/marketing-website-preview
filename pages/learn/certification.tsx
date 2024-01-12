@@ -316,7 +316,7 @@ export default function CertificationPage({
           {/* Footnote */}
           <div className='text-center max-w-3xl mx-auto mt-16'>
             <Image
-              src="/images/learn/certified-developer-badge-alt.png"
+              src="/images/learn/certified-developer-badge.png"
               alt={'ClickHouse Certified Developer'}
               width={417}
               height={363}

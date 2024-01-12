@@ -377,9 +377,9 @@ export default function LearnPage({
           <Image
             src='/images/learn/certified-developer-badge.png'
             alt={'ClickHouse Certified Developer'}
-            width={494}
-            height={449}
-            className='pointer-events-none absolute right-0 -top-20 max-w-[130px] md:-top-40 md:max-w-[247px]'
+            width={417}
+            height={363}
+            className='pointer-events-none absolute right-0 -top-20 max-w-[130px] md:-top-40 md:max-w-[210px] rotate-[15deg]'
           />
 
           {/* Intro */}
@@ -428,9 +428,9 @@ export default function LearnPage({
 
           {/* Cards */}
           <div className='mt-12 flex flex-wrap justify-center gap-y-4'>
-            {onDemandCards.map((card) => {
+            {onDemandCards.map((card, index) => {
               return (
-                <div className='w-full px-2 md:w-1/2 lg:w-1/3'>
+                <div key={index} className='w-full px-2 md:w-1/2 lg:w-1/3'>
                   <OnDemandCard {...card} />
                 </div>
               )
