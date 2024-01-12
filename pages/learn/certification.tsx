@@ -375,10 +375,10 @@ export default function CertificationPage({
             <p className='mb-6'>
               If you have any questions, please email{' '}
               <a
-                href='mailto:certification@clickhouse.com'
+                href='mailto:certifications@clickhouse.com'
                 target='_blank'
                 className='underline'>
-                certification@clickhouse.com
+                certifications@clickhouse.com
               </a>
               .
             </p>
