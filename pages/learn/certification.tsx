@@ -196,7 +196,9 @@ export default function CertificationPage({
                 <div className='subscribed'>
                   <div className='success-container text-center'>
                     <CheckCircleIcon className='mx-auto mb-4 h-16 w-16 stroke-1 text-primary-300' />
-                    <p className='text-xl font-bold'>Thanks for registering!</p>
+                    <p className='text-xl font-bold'>
+                      Thanks for your interest! We'll be in touch!
+                    </p>
                   </div>
                 </div>
               </div>
