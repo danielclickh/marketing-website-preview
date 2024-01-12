@@ -53,9 +53,9 @@ export function SeoPage({
               </div>
             </div>
           </div>
-          <aside className='w-full flex-shrink-0 flex-grow-0 align-top lg:max-w-sm'>
+          <aside className='w-full flex-shrink-0 flex-grow-0 align-top lg:sticky lg:top-32 lg:max-w-sm'>
             {moreLikeThis?.length > 0 && (
-              <div className='mb-8'>
+              <div className='mb-8 '>
                 <h3 className='mb-6 text-lg font-bold'>More like this</h3>
                 <Link href='/lexicon' className='mb-4 block w-full'>
                   <SuiButton
