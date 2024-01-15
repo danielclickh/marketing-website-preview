@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { CheckCircleIcon } from '@heroicons/react/outline'
 import CopyUrlButton from '../CopyUrlButton'
 import SocialButton from '../SocialButton'
+import Link from 'next/link'
 
 function EventsForm({
   submitted,
@@ -222,6 +223,18 @@ function EventsForm({
             </SuiButton>
           </div>
         )}
+        <div className='disclaimer-text mt-8 text-sm font-medium text-neutral-200'>
+          <div className='rich_content '>
+            <p>
+              By registering, you acknowledge that ClickHouse will process your
+              personal information in accordance with our{' '}
+              <Link href='/legal/privacy-policy' target='_blank'>
+                Privacy Policy
+              </Link>
+              .
+            </p>
+          </div>
+        </div>
       </SuiPanel>
     </div>
   )
