@@ -1,12 +1,12 @@
 import { Lexicon } from './types'
-import { slugify } from '../utils/strings'
 
 export function getLexicons(): Lexicon[] {
   return [
     {
       title: 'Data Warehousing Explained',
       slug: 'data-warehousing-explained',
-      excerpt: 'Learn all about the intricacies of data warehousing: its essential components, unique benefits, architecture, and the journey from data analytics to AI.',
+      excerpt:
+        'Learn all about the intricacies of data warehousing: its essential components, unique benefits, architecture, and the journey from data analytics to AI.',
       body: `### Data Warehousing Explained
 
 In the realm of data management, a data warehouse is a system used for reporting and data analysis. Data warehouses centralize data from different sources into one comprehensive database, fostering business intelligence activities, particularly analytics. By providing data from various sources, they offer a coherent picture of business conditions, helping organizations make informed decisions.
@@ -51,12 +51,13 @@ ClickHouse is not just a tool but a thriving community. Trusted by developers de
 
 Experience the power of ClickHouse today with a free trial. Dive into the world of efficient data warehousing and supercharge your analytics with unrivaled speed and efficiency. Your journey toward better data management starts here.
 
-ClickHouse redefines the concept of data warehousing by combining speed, versatility, and ease of deployment. Its column-oriented structure and broad data source support make it the perfect tool for developers and businesses aiming for real-time analytics and superior performance. Begin your journey with ClickHouse today, and join the ever-growing community of developers that trust ClickHouse for their data warehousing needs.`,
+ClickHouse redefines the concept of data warehousing by combining speed, versatility, and ease of deployment. Its column-oriented structure and broad data source support make it the perfect tool for developers and businesses aiming for real-time analytics and superior performance. Begin your journey with ClickHouse today, and join the ever-growing community of developers that trust ClickHouse for their data warehousing needs.`
     },
     {
       title: 'Distributed Databases',
       slug: 'distributed-databases',
-      excerpt: 'Explore the world of distributed database systems and learn how they enhance data management with improved performance, reliability, and scalability.',
+      excerpt:
+        'Explore the world of distributed database systems and learn how they enhance data management with improved performance, reliability, and scalability.',
       body: `### Distributed Database Systems Explained
 
 A distributed database system is a model where the database is stored on multiple machines, often geographically dispersed, and the entire system appears as a single logical database to the user. The primary objective of this approach is to enhance data availability, reliability, and performance, making it a key consideration for large, data-intensive organizations.
@@ -107,12 +108,13 @@ Join the community of developers worldwide that trust ClickHouse for their distr
 
 Distributed database systems offer a modern approach to data management, delivering high performance, scalability, and reliability. As we continue to generate and rely on data, understanding and leveraging distributed systems will become an essential business competency.
 
-ClickHouse's exceptional speed, versatility, and adaptability make it an excellent choice for your distributed database system. With its powerful capabilities and active community, ClickHouse can supercharge your data management strategy and drive your business forward.`,
+ClickHouse's exceptional speed, versatility, and adaptability make it an excellent choice for your distributed database system. With its powerful capabilities and active community, ClickHouse can supercharge your data management strategy and drive your business forward.`
     },
     {
       title: 'High Performance Databases',
       slug: 'high-performance-databases',
-      excerpt: 'Discover the definition of a high-performance database and learn why ClickHouse sets the standard in speed, efficiency, and scalability for data at scale.',
+      excerpt:
+        'Discover the definition of a high-performance database and learn why ClickHouse sets the standard in speed, efficiency, and scalability for data at scale.',
       body: `### High-Performance Database Defined
 
 In our fast-paced digital era, it’s crucial for businesses to keep up with rapidly expanding data volumes and their inevitable complexity. An essential tool enabling this efficiency is none other than a high-performance database. The term might sound a bit technical and perhaps intimidating. If you’re unfamiliar with it or interested in learning more, we’re here to break it down for you.
@@ -167,12 +169,13 @@ ClickHouse stands out for its real-time query processing capabilities, which are
 
 Furthermore, ClickHouse supports a wide variety of data sources, making it adaptable to different business needs. Its scalable design also allows it to handle data volume growth efficiently.
 
-A high-performance database is a vital tool for managing and leveraging the vast amounts of data generated in today’s digital age. With solutions like ClickHouse, businesses can harness their data’s power to drive strategic decision-making and growth.`,
+A high-performance database is a vital tool for managing and leveraging the vast amounts of data generated in today’s digital age. With solutions like ClickHouse, businesses can harness their data’s power to drive strategic decision-making and growth.`
     },
     {
       title: 'What is an open source database?',
       slug: 'what-is-an-open-source-database',
-      excerpt: 'Discover the power of open-source databases. Learn how they offer cost-effectiveness and why ClickHouse is a game-changer for real-time analytics.',
+      excerpt:
+        'Discover the power of open-source databases. Learn how they offer cost-effectiveness and why ClickHouse is a game-changer for real-time analytics.',
       body: `### What Is an Open-Source Database?
 
 An open-source database is an intriguing concept that sits at the intersection of two key trends in the technology world: the openness of source code and the never-ending need for robust, efficient databases. But what exactly is an open-source database? Join us on this journey as we explore this unique concept in depth.
@@ -217,11 +220,11 @@ This ultra-fast system supports all data sources you need for powering your apps
 
 ### Column-Oriented Databases
 
-The answer to ClickHouse’s speed lies in its column-oriented nature. Unlike traditional row-oriented databases, where data is stored in rows with all related values physically stored side-by-side, column-oriented databases like ClickHouse store data in columns, grouping values from the same columns together. 
+The answer to ClickHouse’s speed lies in its column-oriented nature. Unlike traditional row-oriented databases, where data is stored in rows with all related values physically stored side-by-side, column-oriented databases like ClickHouse store data in columns, grouping values from the same columns together.
 
 This approach is better suited for Online Analytical Processing (OLAP) scenarios and can be at least 100 times faster in processing most queries. Thus, ClickHouse effectively harnesses all available system resources, ensuring each analytical query is processed as swiftly as possible.
 
-As a forerunner in the open-source database space, ClickHouse exemplifies what’s possible when speed, efficiency, and flexibility come together in one platform. Whether you’re running a startup, a medium business, or a global corporation dealing with vast volumes of data, ClickHouse presents an option that could redefine your data management and real-time analytics game.`,
+As a forerunner in the open-source database space, ClickHouse exemplifies what’s possible when speed, efficiency, and flexibility come together in one platform. Whether you’re running a startup, a medium business, or a global corporation dealing with vast volumes of data, ClickHouse presents an option that could redefine your data management and real-time analytics game.`
     }
   ]
 }
