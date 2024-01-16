@@ -20,7 +20,7 @@ export async function getCommonProps(): Promise<Props> {
   // )
   // const data = await githubData.json()
 
-  const stars = 32555
+  const stars = 32604
   return {
     footerData,
     platforms: getStartedData.platforms,
