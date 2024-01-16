@@ -39,8 +39,8 @@ export function getVideos(): Video[] {
       categories: ['User Stories']
     },
     {
-      slug: 'extending-an-observability-platform-for-100b-logs',
-      title: 'Extending an Observability Platform for 100B Logs',
+      slug: 'extending-an-observability-platform-for-200b-logs',
+      title: 'Extending an Observability Platform for 200B Logs',
       subTitle: 'Angelo Saraceno\nRailway',
       description:
         'This presentation was given at the ClickHouse Community Meetup in NYC on 12 December, 2023. - https://www.meetup.com/clickhouse-new-york-user-group/events/296488779/',
