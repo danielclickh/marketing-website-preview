@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       lexicon,
       moreLikeThis,
       seo: {
-        title: `${lexicon.title} | ClickHouse Videos`,
+        title: `${lexicon.title} | ClickHouse Lexicon`,
         description: lexicon.excerpt,
         path: `/lexicon/${lexicon.slug}`
       },
