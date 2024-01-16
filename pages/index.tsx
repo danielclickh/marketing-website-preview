@@ -232,6 +232,16 @@ export default function HomePage({
                     personName: 'Jason Wang',
                     personTitleAndCompany: 'Software Engineer, Statsig',
                     image: '/images/statsig-tile.png'
+                  },
+                  {
+                    videoId: '903236689',
+                    type: 'vimeo',
+                    vimeoCode: '62b37e3795',
+                    quote:
+                      'ClickHouse has been great for us. It has solved all the use cases we have thrown at it',
+                    personName: 'Ritesh Varyani',
+                    personTitleAndCompany: 'Senior Software Engineer, Lyft',
+                    image: '/images/lyft-tile.png'
                   }
                 ]}
               />
