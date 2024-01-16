@@ -180,7 +180,7 @@ export default function IntegrationsPage({
   const [category, setCategory] = useState<string|null>(null)
   const [search, setSearch] = useState<string|null>(null)
 
-  const searchChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value.trim().toLowerCase())
+  const searchChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
 
   const groups = (() => {
     let categoryGroups = structuredClone(integrationGroups);
@@ -196,7 +196,7 @@ export default function IntegrationsPage({
     if (search) {
       categoryGroups = categoryGroups.map(group => {
         group.integrations = group.integrations.filter(integration => {
-          return integration.name.toLowerCase().includes(search)
+          return integration.name.toLowerCase().includes(search.trim().toLowerCase())
         })
         return group
       })
