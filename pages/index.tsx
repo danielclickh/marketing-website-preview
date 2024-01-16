@@ -240,7 +240,7 @@ export default function HomePage({
                     quote:
                       'ClickHouse has been great for us. It has solved all the use cases we have thrown at it',
                     personName: 'Ritesh Varyani',
-                    personTitleAndCompany: 'Software Engineer, Lyft',
+                    personTitleAndCompany: 'Senior Software Engineer, Lyft',
                     image: '/images/lyft-tile.png'
                   }
                 ]}
