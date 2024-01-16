@@ -4,6 +4,17 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'transforming-log-data-with-clickhouse-materialized-views',
+      title: 'Transforming log data with ClickHouse materialized views',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we'll learn how to transform log entries using ClickHouse materialized views. We start with a bunch of log files in S3 and then show how to pull out the individual components using a regular expression and store them in a MergeTree table. We conclude by seeing that our solution can also handle any new files added to the S3 bucket.",
+      thumbnail: 'https://img.youtube.com/vi/JLk-pcWZSGc/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/JLk-pcWZSGc?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
       slug: 'funnel-analysis-with-clickhouse',
       title: 'Funnel Analysis with ClickHouse',
       subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
