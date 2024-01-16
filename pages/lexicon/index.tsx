@@ -35,16 +35,17 @@ function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
   const router = useRouter()
   const [search, setSearch] = useState<string|null>(null)
 
-  const searchChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value.trim().toLowerCase())
+  const searchChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
 
   const items = (() => {
 
     // Filter items by search term
     if (search) {
       lexiconItems = lexiconItems.filter(item => {
-        const inTitle = item.title.toLowerCase().includes(search)
-        const inExcerpt = item.excerpt.toLowerCase().includes(search)
-        const inBody = item.body.toLowerCase().includes(search)
+        const searchTerm = search.trim().toLowerCase()
+        const inTitle = item.title.toLowerCase().includes(searchTerm)
+        const inExcerpt = item.excerpt.toLowerCase().includes(searchTerm)
+        const inBody = item.body.toLowerCase().includes(searchTerm)
 
         return inTitle || inExcerpt || inBody
       })
