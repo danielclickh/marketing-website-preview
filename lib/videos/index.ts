@@ -365,6 +365,17 @@ export function getVideos(): Video[] {
       categories: ['ClickHouse Cloud']
     },
     {
+      slug: 'rebuilding-segmentation-with-clickhouse',
+      title: 'Rebuilding Segmentation with ClickHouse',
+      subTitle: 'Patrick McGrath\nKlaviyo',
+      description:
+        'This presentation was given at the ClickHouse summer meetup in Boston on  18 July https://www.meetup.com/clickhouse-boston-user-group/events/293913596/',
+      thumbnail: 'https://img.youtube.com/vi/a9nHW93Ehi8/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/a9nHW93Ehi8?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User Stories']
+    },
+    {
       slug: 'self-serve-analytics-on-petabytes-of-data-microsoft',
       title:
         "Fast Interactive Self-Serve Analytics on Petabytes of Data - Microsoft's Journey with ClickHouse",
