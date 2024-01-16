@@ -97,8 +97,8 @@ export default function Page({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <main>
-        <div className='container mx-auto my-20 max-w-6xl px-6 2xl:px-0 bg-grid'>
+      <main className='bg-grid'>
+        <div className='container mx-auto pt-20 max-w-6xl px-6 2xl:px-0'>
           <div className='flex-row items-start gap-16 lg:flex'>
             <div className="flex-shrink flex-grow">
               <h4 className="text-base font-semibold">
@@ -177,9 +177,7 @@ export default function Page({
             </aside>
           </div>
         </div>
-        <div className='mt-20'>
-          <FollowUs />
-        </div>
+        <FollowUs />
       </main>
     </Layout>
   )
