@@ -1,35 +1,22 @@
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
+import { SuiSearchField, SuiTitle } from '../../components/sui'
+import { getLexicons } from '../../lib/lexicons'
+import { Lexicon } from '../../lib/lexicons/types'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { CommonProps } from '../../types/homepage'
 
 interface LexiconProps extends CommonProps {
-  lexiconItems: any[]
+  lexiconItems: Lexicon[]
 }
 
 export const getStaticProps: GetStaticProps<LexiconProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
-    const lexiconItems = [
-      {
-        title: 'Data Warehousing Explained',
-        href: '/lexicon/data-warehousing-explained'
-      },
-      {
-        title: 'Distributed Databases',
-        href: '/lexicon/distributed-databases'
-      },
-      {
-        title: 'High Performance Databases',
-        href: '/lexicon/high-performance-databases'
-      },
-      {
-        title: 'What is an open source database?',
-        href: '/lexicon/what-is-an-open-source-database'
-      }
-    ]
+    const lexiconItems = getLexicons()
 
     return {
       props: {
@@ -44,28 +31,97 @@ export const getStaticProps: GetStaticProps<LexiconProps> =
   }
 
 function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
+
+  const router = useRouter()
+  const [search, setSearch] = useState<string|null>(null)
+
+  const searchChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value.trim().toLowerCase())
+
+  const items = (() => {
+
+    // Filter items by search term
+    if (search) {
+      lexiconItems = lexiconItems.filter(item => {
+        const inTitle = item.title.toLowerCase().includes(search)
+        const inExcerpt = item.excerpt.toLowerCase().includes(search)
+        const inBody = item.body.toLowerCase().includes(search)
+
+        return inTitle || inExcerpt || inBody
+      })
+    }
+
+    return lexiconItems
+  })()
+
+  // Load values from query string
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search)
+    const urlSearch = queryParams.get('search');
+
+    // Check the search query is not empty
+    if (urlSearch && String(urlSearch).trim().length) {
+      setSearch(urlSearch)
+    }
+  }, [router])
+
+  // Update query string values
+  useEffect(() => {
+    const queryParams = [];
+
+    if (search) {
+      queryParams.push(`search=${encodeURIComponent(search)}`);
+    }
+
+    if (queryParams.length) {
+      router.push('/lexicon?' + queryParams.join('&'), undefined, { shallow: true })
+    } else {
+      router.push('/lexicon', undefined, { shallow: true })
+    }
+  }, [search])
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div>
-        <h1 className='mx-auto mb-10 pt-10 text-center font-basier text-4xl text-neutral-100 md:text-5.5xl lg:mb-16 lg:pt-20'>
-          ClickHouse Lexicon
-        </h1>
-        <div className='mx-auto my-24 max-w-7xl px-4 sm:px-8 2xl:px-0'>
-          <div className='mb-[380px] text-center'>
-            <div>
-              {lexiconItems.map((item, index) => {
-                return (
-                  <h2 className='pb-4 text-xl' key={index}>
+      <div className='bg-grid'>
+        <div className='section-container py-16 md:py-20'>
+          <SuiTitle type='h1' color='white' className='mb-12 md:!text-6xl'>
+            ClickHouse Lexicon
+          </SuiTitle>
+
+          <SuiSearchField
+            placeholder='Search by title or keyword...'
+            htmlFor='search'
+            className='max-w-[300px]'
+            value={search || ''}
+            onChange={searchChange} />
+
+          <hr className='border-0 h-[1px] bg-white bg-opacity-40 my-6' />
+
+
+          {items.map((item) => {
+            return (
+              <div className='flex flex-wrap md:flex-nowrap items-center justify-between my-10' key={item.slug}>
+                <div className='w-full md:w-1/3 mb-4 md:mb-0'>
+                  <SuiTitle type='h2' className='!text-xl'>
                     <Link
-                      href={item.href}
-                      className=' text-primary-300 hover:underline'>
+                      href={`/lexicon/${item.slug}`}
+                      className='text-primary-300 hover:underline'>
                       {item.title}
                     </Link>
-                  </h2>
-                )
-              })}
-            </div>
-          </div>
+                  </SuiTitle>
+                </div>
+                <div className='w-full md:w-2/3'>
+                  {item.excerpt}
+                </div>
+              </div>
+            )
+          })}
+
+          {!items.length && (
+            <p className='text-center mt-12'>
+              {search ? `No search results for "${search}"` : 'No results'}
+            </p>
+          )}
+
         </div>
       </div>
     </Layout>
