@@ -77,14 +77,14 @@ export const config = {
 
 export const tierOptions: Array<Option<Tier>> = [
   {
-    value: 'Development',
-    label: 'Development',
-    tooltip: 'Great for smaller workloads and starter projects'
-  },
-  {
     value: 'Production',
     label: 'Production',
     tooltip: 'Designed to handle production workloads'
+  },
+  {
+    value: 'Development',
+    label: 'Development',
+    tooltip: 'Great for smaller workloads and starter projects'
   }
 ]
 
