@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { CUIButton } from '../../ClickUI'
 import TooltipInfo from '../ui/Tooltip/tooltip'
 import { PricingData } from '../CalculatorTypesOptions'
+import { convertStorageToReadableNumber } from '..'
 
 export default function CTAButtons({
   contactSales,
@@ -18,7 +19,8 @@ export default function CTAButtons({
   hours,
   minMemoryLabel,
   maxMemoryLabel,
-  pricingData
+  pricingData,
+  storageCompressed
 }: {
   contactSales?: string
   tier?: string
@@ -34,6 +36,7 @@ export default function CTAButtons({
   minMemoryLabel?: string
   maxMemoryLabel?: string
   pricingData?: PricingData
+  storageCompressed?: string
 }) {
   const router = useRouter()
   const [isCopied, setIsCopied] = useState(false)
@@ -103,7 +106,8 @@ export default function CTAButtons({
                     maxMemory,
                     provider,
                     region,
-                    hours
+                    hours,
+                    storageCompressed
                   }
                 })
               }}
@@ -186,7 +190,8 @@ export default function CTAButtons({
                   maxMemory,
                   provider,
                   region,
-                  hours
+                  hours,
+                  storageCompressed
                 }
               })
             }}>

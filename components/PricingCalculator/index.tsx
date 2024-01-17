@@ -48,6 +48,43 @@ function convertStorageToGB(
     return Number(size * unitToGB[unit])
   }
 }
+export function convertStorageToReadableNumber(
+  size: number,
+  unit: string,
+  storageCompressed: string
+) {
+  const unitToGB: { [key: string]: number } = {
+    gb: 1,
+    tb: 1024,
+    pb: 1024 * 1024
+  }
+
+  if (storageCompressed === 'yes') {
+    const compressedSize = Number(size) / 10
+    const roundedCompressedSize = Math.floor(compressedSize)
+
+    if (roundedCompressedSize === 0) {
+      // If rounded down compressed size is 0, switch to the next unit down
+      const units = Object.keys(unitToGB)
+      const currentUnitIndex = units.indexOf(unit.toLowerCase())
+
+      if (currentUnitIndex > 0) {
+        const nextUnit = units[currentUnitIndex - 1]
+        const sizeInNextUnit = size * unitToGB[nextUnit]
+
+        return `${Number(
+          sizeInNextUnit.toFixed(0)
+        ).toLocaleString()}${nextUnit.toUpperCase()}`
+      }
+    }
+
+    return `${Number(
+      roundedCompressedSize.toFixed(0)
+    ).toLocaleString()}${unit.toUpperCase()}`
+  } else {
+    return Number(size * unitToGB[unit])
+  }
+}
 
 export const PricingCalculator: React.FC<{
   pricingByRegion: RegionPricing[]
@@ -475,16 +512,7 @@ export const PricingCalculator: React.FC<{
             <FormControl
               id='storageSize'
               label='Storage Size'
-              marginBottom={false}
-              // helpText={`${
-              //   storageCompressed === 'yes'
-              //     ? `${Math.round(storageAfterCompression).toLocaleString(
-              //         'en-us'
-              //       )}GB after compression`
-              //     : 'No compression applied'
-              // }
-              // `}
-            >
+              marginBottom={false}>
               <Text id='storageVolume' value={storageSize} />
             </FormControl>
             <FormControl
@@ -524,10 +552,14 @@ export const PricingCalculator: React.FC<{
               storageCompressed === 'yes' ? 'text-[#66FF73]' : 'text-white'
             } ${styles.helpText} mb-10 mt-3 text-xs `}>
             {storageCompressed === 'yes' ? (
-              <>
-                {Math.round(storageAfterCompression).toLocaleString('en-us')}GB
+              <p>
+                {convertStorageToReadableNumber(
+                  storageSize,
+                  storageUnit,
+                  storageCompressed
+                )}{' '}
                 after compression
-              </>
+              </p>
             ) : (
               <>No compression applied</>
             )}
@@ -643,6 +675,7 @@ export const PricingCalculator: React.FC<{
                       minMemory={Number(computeMinSize)}
                       maxMemory={computeMaxSize}
                       storageSize={Number(storageAfterCompression)}
+                      storageCompressed={storageCompressed}
                       minMemoryLabel={
                         computeOptions.find(
                           (option) => option.value === computeMinSize
@@ -700,6 +733,7 @@ export const PricingCalculator: React.FC<{
                       minMemory={computeMinSize}
                       maxMemory={computeMaxSize}
                       storageSize={Number(storageAfterCompression)}
+                      storageCompressed={storageCompressed}
                       computeCostMin={Number(
                         costData.minComputeCost!.toFixed(2)
                       )}
