@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { CUIButton } from '../../ClickUI'
 import TooltipInfo from '../ui/Tooltip/tooltip'
 import { PricingData } from '../CalculatorTypesOptions'
-import { convertStorageToReadableNumber } from '..'
 
 export default function CTAButtons({
   contactSales,
