@@ -31,14 +31,22 @@ import { Select } from './ui/Select'
 import { Text } from './ui/Text'
 import { ToggleButtonsProviders } from './ui/ToggleButtonsProviders'
 
-function convertStorageToGB(size: number, unit: string) {
+function convertStorageToGB(
+  size: number,
+  unit: string,
+  storageCompressed: string
+) {
   const unitToGB: { [key: string]: number } = {
     gb: 1,
     tb: 1024,
     pb: 1024 * 1024
   }
 
-  return Number(size * unitToGB[unit]) / 10
+  if (storageCompressed === 'yes') {
+    return Number(size * unitToGB[unit]) / 10
+  } else {
+    return Number(size * unitToGB[unit])
+  }
 }
 
 export const PricingCalculator: React.FC<{
@@ -61,6 +69,7 @@ export const PricingCalculator: React.FC<{
   const computeMaxSize = Number(searchParams.get('computeMaxSize')) || 48
 
   const storageSizeParam = searchParams.get('storageSize')
+  const storageCompressed = searchParams.get('storageCompressed') || 'yes'
 
   let storageSize: number
 
@@ -189,6 +198,19 @@ export const PricingCalculator: React.FC<{
       )
     }
 
+    if (!['yes', 'no'].includes(storageCompressed)) {
+      router.push(
+        {
+          query: {
+            ...router.query,
+            storageCompressed: 'yes' // Set your default value here
+          }
+        },
+        undefined,
+        { shallow: true }
+      )
+    }
+
     if (tier === 'Development' && storageUnit.toLowerCase() === 'pb') {
       router.push(
         {
@@ -245,7 +267,7 @@ export const PricingCalculator: React.FC<{
 
     if (tier === 'Production') {
       // Check if computeMinSize is in the list of acceptable options
-      if (!isMinSizeValid || computeMinSize < 24) {
+      if (!isMinSizeValid || computeMinSize < 16) {
         // Set a default value for computeMinSize
         router.push(
           {
@@ -366,10 +388,15 @@ export const PricingCalculator: React.FC<{
     computeMinSize,
     computeMaxSize,
     storageUnit,
-    storageSize
+    storageSize,
+    storageCompressed
   ])
 
-  const storageAfterCompression = convertStorageToGB(storageSize, storageUnit)
+  const storageAfterCompression = convertStorageToGB(
+    storageSize,
+    storageUnit,
+    storageCompressed
+  )
 
   const costData = useMemo(() => {
     if (!pricingData) {
@@ -444,16 +471,26 @@ export const PricingCalculator: React.FC<{
         {/* === START new storage options  */}
         {/* need to convert to gbs */}
         <div className='relative'>
-          <div className='flex gap-6'>
+          <div className='flex gap-x-6 gap-y-0'>
             <FormControl
               id='storageSize'
               label='Storage Size'
-              helpText={`${Math.round(storageAfterCompression).toLocaleString(
-                'en-us'
-              )}GB after compression`}>
+              marginBottom={false}
+              // helpText={`${
+              //   storageCompressed === 'yes'
+              //     ? `${Math.round(storageAfterCompression).toLocaleString(
+              //         'en-us'
+              //       )}GB after compression`
+              //     : 'No compression applied'
+              // }
+              // `}
+            >
               <Text id='storageVolume' value={storageSize} />
             </FormControl>
-            <FormControl id='storageUnit' label='Storage Unit'>
+            <FormControl
+              id='storageUnit'
+              label='Storage Unit'
+              marginBottom={false}>
               {tier && (
                 <Select
                   id='storageUnit'
@@ -466,7 +503,35 @@ export const PricingCalculator: React.FC<{
                 />
               )}
             </FormControl>
+            <FormControl
+              id='storageCompressed'
+              label='Compressed Storage'
+              marginBottom={false}>
+              {tier && (
+                <Select
+                  id='storageCompressed'
+                  options={[
+                    { label: 'Yes', value: 'yes' },
+                    { label: 'No', value: 'no' }
+                  ]}
+                  value={storageCompressed}
+                />
+              )}
+            </FormControl>
           </div>
+          <p
+            className={` ${
+              storageCompressed === 'yes' ? 'text-[#66FF73]' : 'text-white'
+            } ${styles.helpText} mb-10 mt-3 text-xs `}>
+            {storageCompressed === 'yes' ? (
+              <>
+                {Math.round(storageAfterCompression).toLocaleString('en-us')}GB
+                after compression
+              </>
+            ) : (
+              <>No compression applied</>
+            )}
+          </p>
         </div>
         {/* === END new storage options  */}
 

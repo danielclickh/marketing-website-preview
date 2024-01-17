@@ -13,7 +13,7 @@ export const FormControl: React.FC<FormControlProps> = ({
   id
 }) => {
   return (
-    <div className={marginBottom ? 'mb-10' : ''} id={id ? id : ''}>
+    <div className={`${marginBottom ? 'mb-10' : ''}`} id={id ? id : ''}>
       <div className='mb-2 flex items-center gap-x-3'>
         <label className='block text-xs font-bold text-[#B3B6BD]'>
           {label}

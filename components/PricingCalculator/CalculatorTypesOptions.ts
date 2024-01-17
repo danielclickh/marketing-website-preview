@@ -94,7 +94,11 @@ export const providerOptions: Array<Option<Provider>> = [
 ]
 
 export const computeOptions: Array<NumericOption> = [
-  { value: 16, label: '16 GiB RAM, 2 vCPU', tier: ['Development'] },
+  {
+    value: 16,
+    label: '16 GiB RAM, 2 vCPU',
+    tier: ['Development', 'Production']
+  },
   { value: 24, label: '24 GiB RAM, 6 vCPU', tier: ['Production'] },
   { value: 48, label: '48 GiB RAM, 12 vCPU', tier: ['Production'] },
   { value: 96, label: '96 GiB RAM, 24 vCPU', tier: ['Production'] },
