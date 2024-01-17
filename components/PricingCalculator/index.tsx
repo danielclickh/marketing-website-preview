@@ -48,7 +48,8 @@ function convertStorageToGB(
     return Number(size * unitToGB[unit])
   }
 }
-export function convertStorageToReadableNumber(
+
+function humanReadableStorage(
   size: number,
   unit: string,
   storageCompressed: string
@@ -60,29 +61,7 @@ export function convertStorageToReadableNumber(
   }
 
   if (storageCompressed === 'yes') {
-    const compressedSize = Number(size) / 10
-    const roundedCompressedSize = Math.floor(compressedSize)
-
-    if (roundedCompressedSize === 0) {
-      // If rounded down compressed size is 0, switch to the next unit down
-      const units = Object.keys(unitToGB)
-      const currentUnitIndex = units.indexOf(unit.toLowerCase())
-
-      if (currentUnitIndex > 0) {
-        const nextUnit = units[currentUnitIndex - 1]
-        const sizeInNextUnit = size * unitToGB[nextUnit]
-
-        return `${Number(
-          sizeInNextUnit.toFixed(0)
-        ).toLocaleString()}${nextUnit.toUpperCase()}`
-      }
-    }
-
-    return `${Number(
-      roundedCompressedSize.toFixed(0)
-    ).toLocaleString()}${unit.toUpperCase()}`
-  } else {
-    return Number(size * unitToGB[unit])
+    return Number(size) / 10
   }
 }
 
@@ -547,23 +526,23 @@ export const PricingCalculator: React.FC<{
               )}
             </FormControl>
           </div>
-          <p
+          <div
             className={` ${
               storageCompressed === 'yes' ? 'text-[#66FF73]' : 'text-white'
             } ${styles.helpText} mb-10 mt-3 text-xs `}>
             {storageCompressed === 'yes' ? (
               <p>
-                {convertStorageToReadableNumber(
+                {humanReadableStorage(
                   storageSize,
                   storageUnit,
                   storageCompressed
-                )}{' '}
-                after compression
+                )}
+                {storageUnit.toUpperCase()} after compression
               </p>
             ) : (
-              <>No compression applied</>
+              <p>No compression applied</p>
             )}
-          </p>
+          </div>
         </div>
         {/* === END new storage options  */}
 

@@ -217,7 +217,7 @@ export default function CTAButtons({
               />
             </svg>
             <p className='flex items-center gap-x-2'>
-              ${Number(storageCost.toFixed(0)).toLocaleString()} for storage{' '}
+              ${storageCost.toFixed(2).toLocaleString()} for storage{' '}
               <TooltipInfo
                 content={`Storage cost for ${Math.round(
                   Number(storageSize)
