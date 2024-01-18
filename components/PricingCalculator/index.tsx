@@ -42,7 +42,7 @@ function convertStorageToGB(
     pb: 1024 * 1024
   }
 
-  if (storageCompressed === 'yes') {
+  if (storageCompressed === 'no') {
     return Number(size * unitToGB[unit]) / 10
   } else {
     return Number(size * unitToGB[unit])
@@ -60,7 +60,7 @@ function humanReadableStorage(
     pb: 1024 * 1024
   }
 
-  if (storageCompressed === 'yes') {
+  if (storageCompressed === 'no') {
     return Number(size) / 10
   }
 }
@@ -507,8 +507,8 @@ export const PricingCalculator: React.FC<{
             </FormControl>
             <FormControl
               id='storageCompressed'
-              label='Compressed'
-              tooltip='ClickHouse compression is very efficient, it can compress your data by an average of 10x, if your data is already efficiently compressed then you do not to apply compression.'
+              label='Is your data compressed?'
+              tooltip='If your data is not compressed, ClickHouse will apply up to 10x compression.'
               marginBottom={false}>
               {tier && (
                 <Select
@@ -524,9 +524,9 @@ export const PricingCalculator: React.FC<{
           </div>
           <div
             className={` ${
-              storageCompressed === 'yes' ? 'text-[#66FF73]' : 'text-white'
+              storageCompressed === 'no' ? 'text-[#66FF73]' : 'text-white'
             } ${styles.helpText} mb-10 mt-3 text-xs `}>
-            {storageCompressed === 'yes' ? (
+            {storageCompressed === 'no' ? (
               <p>
                 {humanReadableStorage(
                   storageSize,
