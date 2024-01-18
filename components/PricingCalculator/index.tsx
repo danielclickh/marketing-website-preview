@@ -85,7 +85,7 @@ export const PricingCalculator: React.FC<{
   const computeMaxSize = Number(searchParams.get('computeMaxSize')) || 48
 
   const storageSizeParam = searchParams.get('storageSize')
-  const storageCompressed = searchParams.get('storageCompressed') || 'yes'
+  const storageCompressed = searchParams.get('storageCompressed') || 'no'
 
   let storageSize: number
 
@@ -219,7 +219,7 @@ export const PricingCalculator: React.FC<{
         {
           query: {
             ...router.query,
-            storageCompressed: 'yes' // Set your default value here
+            storageCompressed: 'no' // Set your default value here
           }
         },
         undefined,
@@ -487,17 +487,12 @@ export const PricingCalculator: React.FC<{
         {/* === START new storage options  */}
         {/* need to convert to gbs */}
         <div className='relative'>
+          <h3 className='text-md mb-3 font-semibold'>Storage </h3>
           <div className='flex gap-x-6 gap-y-0'>
-            <FormControl
-              id='storageSize'
-              label='Storage Size'
-              marginBottom={false}>
+            <FormControl id='storageSize' label='Volume' marginBottom={false}>
               <Text id='storageVolume' value={storageSize} />
             </FormControl>
-            <FormControl
-              id='storageUnit'
-              label='Storage Unit'
-              marginBottom={false}>
+            <FormControl id='storageUnit' label='Unit' marginBottom={false}>
               {tier && (
                 <Select
                   id='storageUnit'
@@ -512,7 +507,8 @@ export const PricingCalculator: React.FC<{
             </FormControl>
             <FormControl
               id='storageCompressed'
-              label='Compressed Storage'
+              label='Compressed'
+              tooltip='ClickHouse compression is very efficient, it can compress your data by an average of 10x, if your data is already efficiently compressed then you do not to apply compression.'
               marginBottom={false}>
               {tier && (
                 <Select
@@ -545,7 +541,7 @@ export const PricingCalculator: React.FC<{
           </div>
         </div>
         {/* === END new storage options  */}
-
+        <h3 className='text-md mb-3 font-semibold'>Compute </h3>
         {tier === 'Development' && (
           <FormControl
             label='Compute size'
