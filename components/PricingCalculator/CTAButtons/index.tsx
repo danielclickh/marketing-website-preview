@@ -8,6 +8,7 @@ export default function CTAButtons({
   contactSales,
   tier,
   storageCost,
+  storageUnit,
   computeCostMin,
   computeCostMax,
   storageSize,
@@ -19,7 +20,8 @@ export default function CTAButtons({
   minMemoryLabel,
   maxMemoryLabel,
   pricingData,
-  storageCompressed
+  storageCompressed,
+  storageHumanReadable
 }: {
   contactSales?: string
   tier?: string
@@ -36,12 +38,21 @@ export default function CTAButtons({
   maxMemoryLabel?: string
   pricingData?: PricingData
   storageCompressed?: string
+  storageUnit?: string
+  storageHumanReadable?: number
 }) {
   const router = useRouter()
   const [isCopied, setIsCopied] = useState(false)
   const [share, setShare] = useState('Share')
   const [availabilityZones, setAvailabilityZones] = useState(2)
 
+  const formattedStorageCost = Number(storageCost.toFixed(2)).toLocaleString(
+    'en-US',
+    {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }
+  )
   useEffect(() => {
     if (tier === 'Production') {
       setAvailabilityZones(3)
@@ -216,11 +227,13 @@ export default function CTAButtons({
               />
             </svg>
             <p className='flex items-center gap-x-2'>
-              ${storageCost.toFixed(2).toLocaleString()} for storage{' '}
+              ${formattedStorageCost} for storage{' '}
               <TooltipInfo
-                content={`Storage cost for ${Math.round(
-                  Number(storageSize)
-                ).toLocaleString('en-us')}GB of compressed data`}
+                content={`Storage cost for ${
+                  storageHumanReadable && storageHumanReadable
+                }${storageUnit?.toUpperCase()} ${
+                  storageCompressed === 'no' ? 'compressed' : 'uncompressed'
+                }`}
               />
             </p>
           </div>
@@ -245,8 +258,8 @@ export default function CTAButtons({
                 </svg>
                 <p className='flex items-center gap-x-2'>
                   <>
-                    ${Number(computeCostMin.toFixed(0)).toLocaleString()} for
-                    compute
+                    ${Number(computeCostMin.toFixed(0)).toLocaleString('en-US')}{' '}
+                    for compute
                     <TooltipInfo
                       content={`Compute cost = ${minMemoryLabel} * ${hours}h per day\n\n1 compute unit = ${minMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
                     />
@@ -277,7 +290,10 @@ export default function CTAButtons({
                   </svg>
                   <p className='flex items-center gap-x-2'>
                     <>
-                      ${Number(computeCostMin.toFixed(0)).toLocaleString()}{' '}
+                      $
+                      {Number(computeCostMin.toFixed(0)).toLocaleString(
+                        'en-US'
+                      )}{' '}
                       minimum compute cost{' '}
                       <TooltipInfo
                         content={`Minimum compute cost = 1 compute unit * ${hours}h per day * 30 days\n\n1 compute unit = ${minMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
@@ -304,7 +320,10 @@ export default function CTAButtons({
                   </svg>
                   <p className='flex items-center gap-x-2'>
                     <>
-                      ${Number(computeCostMax?.toFixed(0)).toLocaleString()}{' '}
+                      $
+                      {Number(computeCostMax?.toFixed(0)).toLocaleString(
+                        'en-US'
+                      )}{' '}
                       maximum compute cost{' '}
                       <TooltipInfo
                         content={`Maximum compute cost = 2 compute units * ${hours}h per day * 30 days\n\n1 compute unit = ${maxMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}

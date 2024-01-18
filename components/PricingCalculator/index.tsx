@@ -62,6 +62,8 @@ function humanReadableStorage(
 
   if (storageCompressed === 'no') {
     return Number(size) / 10
+  } else {
+    return Number(size)
   }
 }
 
@@ -628,7 +630,7 @@ export const PricingCalculator: React.FC<{
                         (costData.computeCost! + costData.storageCost).toFixed(
                           0
                         )
-                      ).toLocaleString()}
+                      ).toLocaleString('en-US')}
                     </p>
                     {contactSales && (
                       <>
@@ -641,6 +643,12 @@ export const PricingCalculator: React.FC<{
                     )}
                     <CTAButtons
                       contactSales={contactSales}
+                      storageUnit={storageUnit}
+                      storageHumanReadable={humanReadableStorage(
+                        storageSize,
+                        storageUnit,
+                        storageCompressed
+                      )}
                       tier={tier}
                       provider={provider}
                       region={region}
@@ -672,7 +680,7 @@ export const PricingCalculator: React.FC<{
                         (
                           costData.minComputeCost! + costData.storageCost
                         ).toFixed(0)
-                      ).toLocaleString()}{' '}
+                      ).toLocaleString('en-US')}{' '}
                       {(
                         costData.minComputeCost! + costData.storageCost
                       ).toFixed(0) !==
@@ -685,7 +693,7 @@ export const PricingCalculator: React.FC<{
                             (
                               costData.maxComputeCost! + costData.storageCost
                             ).toFixed(0)
-                          ).toLocaleString()}
+                          ).toLocaleString('en-US')}
                         </>
                       )}
                     </p>
@@ -701,6 +709,12 @@ export const PricingCalculator: React.FC<{
 
                     <CTAButtons
                       contactSales={contactSales}
+                      storageUnit={storageUnit}
+                      storageHumanReadable={humanReadableStorage(
+                        storageSize,
+                        storageUnit,
+                        storageCompressed
+                      )}
                       tier={tier}
                       hours={hours}
                       region={region}
