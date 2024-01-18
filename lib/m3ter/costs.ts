@@ -17,5 +17,6 @@ export const calculateComputeCost = (
 ) => {
   // Unit price is based on units (memory / 8) per minute.
   const minutesConsumed = hours * 60 * AVG_DAYS_PER_MONTH
+  console.log('memory', (memory / 8) * minutesConsumed * unitPrice)
   return (memory / 8) * minutesConsumed * unitPrice
 }

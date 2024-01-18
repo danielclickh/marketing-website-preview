@@ -260,6 +260,10 @@ export default function CTAButtons({
                   <>
                     ${Number(computeCostMin.toFixed(0)).toLocaleString('en-US')}{' '}
                     for compute
+                    {/*
+                      const minutesConsumed = hours * 60 * AVG_DAYS_PER_MONTH
+                      return (memory / 8) * minutesConsumed * unitPrice
+                    */}
                     <TooltipInfo
                       content={`Compute cost = ${minMemoryLabel} * ${hours}h per day\n\n1 compute unit = ${minMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
                     />
