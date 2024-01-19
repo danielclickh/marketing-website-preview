@@ -71,9 +71,6 @@ export default function MonitoramaPage({
       'ClickHouse can help you with your observability use cases and real time data analytics.'
   }
 
-  const [form1Successful, setForm1Successful] = useState(false)
-  const [form2Successful, setForm2Successful] = useState(false)
-
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
@@ -155,25 +152,7 @@ export default function MonitoramaPage({
                     <h3 className='mb-6 text-center font-basier text-2xl font-light'>
                       Contact us for help with real time analytics
                     </h3>
-                    <ContactForm
-                      firstNameLabel='First Name'
-                      lastNameLabel='Last Name'
-                      emailLabel='Email'
-                      companyLabel='Company'
-                      messageLabel='Message'
-                      submitButtonLabel='Submit'
-                      thankYouMessage='Thank you for submitting the form!'
-                      disclaimer=''
-                      onSuccess={() => setForm1Successful(true)}
-                    />
-                    {!form1Successful && <div className='rich_content mt-4 text-center text-sm'>
-                      <ReactMarkdown
-                        children='By clicking Submit, you acknowledge that ClickHouse will
-                    process your personal information in accordance with our
-                    [privacy
-                    policy](https://clickhouse.com/legal/privacy-policy).'
-                      />
-                    </div>}
+                    <ContactForm />
                   </div>
                 </div>
               </div>
@@ -682,26 +661,7 @@ export default function MonitoramaPage({
             Contact us for help with your Observability Questions
           </h2>
           <div className='mx-auto max-w-lg'>
-            {' '}
-            <ContactForm
-              firstNameLabel='First Name'
-              lastNameLabel='Last Name'
-              emailLabel='Email'
-              companyLabel='Company'
-              messageLabel='Message'
-              submitButtonLabel='Submit'
-              thankYouMessage='Thank you for submitting the form!'
-              disclaimer=''
-              onSuccess={() => setForm2Successful(true)}
-            />
-            {!form2Successful && <div className='rich_content mt-4 text-center text-sm'>
-              <ReactMarkdown
-                children='By clicking Submit, you acknowledge that ClickHouse will
-                    process your personal information in accordance with our
-                    [privacy
-                    policy](https://clickhouse.com/legal/privacy-policy).'
-              />
-            </div>}
+            <ContactForm />
           </div>
         </div>
       </div>

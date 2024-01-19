@@ -1,18 +1,7 @@
 import { StrapiImageType } from '../lib/api/strapi/types'
 import { CommonProps } from './homepage'
 
-export interface ContactFormProps {
-  firstNameLabel: string
-  lastNameLabel: string
-  emailLabel: string
-  companyLabel: string
-  messageLabel: string
-  submitButtonLabel: string
-  thankYouMessage: string
-  disclaimer: string,
-
-  onSuccess?: Function
-}
+export interface ContactFormProps {}
 
 export interface GrowingCommunityProps {
   title: string
