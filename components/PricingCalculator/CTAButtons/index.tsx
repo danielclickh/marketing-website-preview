@@ -95,15 +95,6 @@ export default function CTAButtons({
               type='primary'
               size='lg'
               weight='semibold'
-              href='https://clickhouse.cloud/signUp?loc=pricing-calculator-custom'
-              linkClass='w-full'
-              className='w-full'>
-              <span className='text-sm'>Start free trial</span>
-            </CUIButton>
-            <CUIButton
-              type='secondary'
-              size='lg'
-              weight='semibold'
               onClick={() => {
                 router.push({
                   pathname: '/company/contact',
@@ -123,7 +114,16 @@ export default function CTAButtons({
               }}
               linkClass='w-full'
               className='w-full'>
-              <span className='text-sm'>Get custom quote</span>
+              <span className='text-sm'>Get a custom quote</span>
+            </CUIButton>
+            <CUIButton
+              type='secondary'
+              size='lg'
+              weight='semibold'
+              href='https://clickhouse.cloud/signUp?loc=pricing-calculator-custom'
+              linkClass='w-full'
+              className='w-full'>
+              <span className='text-sm'>Start free trial</span>
             </CUIButton>
             <CUIButton
               onClick={copyToClipboard}
@@ -260,12 +260,8 @@ export default function CTAButtons({
                   <>
                     ${Number(computeCostMin.toFixed(0)).toLocaleString('en-US')}{' '}
                     for compute
-                    {/*
-                      const minutesConsumed = hours * 60 * AVG_DAYS_PER_MONTH
-                      return (memory / 8) * minutesConsumed * unitPrice
-                    */}
                     <TooltipInfo
-                      content={`Compute cost = ${minMemoryLabel} * ${hours}h per day\n\n1 compute unit = ${minMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
+                      content={`Compute cost = ${minMemoryLabel} * ${hours}h per day * 30 days per month\n\n1 compute unit = ${minMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
                     />
                   </>
                 </p>
@@ -276,36 +272,45 @@ export default function CTAButtons({
         <>
           {tier === 'Production' && (
             <>
-              <li>
-                <div className='flex items-center gap-4'>
-                  <svg
-                    width='16'
-                    height='16'
-                    viewBox='0 0 16 16'
-                    fill='none'
-                    xmlns='http://www.w3.org/2000/svg'>
-                    <path
-                      d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
-                      stroke='#FCFF74'
-                      strokeWidth='2'
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                    />
-                  </svg>
-                  <p className='flex items-center gap-x-2'>
-                    <>
-                      $
-                      {Number(computeCostMin.toFixed(0)).toLocaleString(
-                        'en-US'
-                      )}{' '}
-                      minimum compute cost{' '}
-                      <TooltipInfo
-                        content={`Minimum compute cost = 1 compute unit * ${hours}h per day * 30 days\n\n1 compute unit = ${minMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
-                      />
-                    </>
-                  </p>
-                </div>
-              </li>
+              {computeCostMin !== computeCostMax && (
+                <>
+                  <li>
+                    <div className='flex items-center gap-4'>
+                      <svg
+                        width='16'
+                        height='16'
+                        viewBox='0 0 16 16'
+                        fill='none'
+                        xmlns='http://www.w3.org/2000/svg'>
+                        <path
+                          d='M13.3332 4.3335L5.99984 11.6668L2.6665 8.3335'
+                          stroke='#FCFF74'
+                          strokeWidth='2'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                        />
+                      </svg>
+                      <p className='flex items-center gap-x-2'>
+                        $
+                        {Number(computeCostMin.toFixed(0)).toLocaleString(
+                          'en-US'
+                        )}{' '}
+                        minimum compute cost{' '}
+                        <TooltipInfo
+                          content={`Minimum compute cost = ${
+                            minMemory && minMemory / 24
+                          } compute unit${
+                            minMemory && minMemory / 24 > 1 ? 's' : ''
+                          } * ${hours}h per day * 30 days\n\n1 compute unit = ${minMemoryLabel} = $${
+                            pricingData?.computeUnitPrice
+                          } / hour`}
+                        />
+                      </p>
+                    </div>
+                  </li>
+                </>
+              )}
+
               <li>
                 <div className='flex items-center gap-4'>
                   <svg
@@ -328,9 +333,16 @@ export default function CTAButtons({
                       {Number(computeCostMax?.toFixed(0)).toLocaleString(
                         'en-US'
                       )}{' '}
-                      maximum compute cost{' '}
+                      {computeCostMin !== computeCostMax && 'maximum'} compute
+                      cost{' '}
                       <TooltipInfo
-                        content={`Maximum compute cost = 2 compute units * ${hours}h per day * 30 days\n\n1 compute unit = ${maxMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
+                        content={`Maximum compute cost = ${
+                          maxMemory && maxMemory / 24
+                        } compute unit${
+                          maxMemory && maxMemory / 24 > 1 ? 's' : ''
+                        }  * ${hours}h per day * 30 days\n\n1 compute unit = ${maxMemoryLabel} = $${
+                          pricingData?.computeUnitPrice
+                        } / hour`}
                       />
                     </>
                   </p>

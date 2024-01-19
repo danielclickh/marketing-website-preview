@@ -83,7 +83,7 @@ export const PricingCalculator: React.FC<{
   if (hoursParam !== null) {
     hours = Number(hoursParam)
   }
-  const computeMinSize = Number(searchParams.get('computeMinSize')) || 16
+  const computeMinSize = Number(searchParams.get('computeMinSize')) || 24
   const computeMaxSize = Number(searchParams.get('computeMaxSize')) || 48
 
   const storageSizeParam = searchParams.get('storageSize')
@@ -285,7 +285,7 @@ export const PricingCalculator: React.FC<{
 
     if (tier === 'Production') {
       // Check if computeMinSize is in the list of acceptable options
-      if (!isMinSizeValid || computeMinSize < 16) {
+      if (!isMinSizeValid || computeMinSize < 24) {
         // Set a default value for computeMinSize
         router.push(
           {
@@ -367,7 +367,6 @@ export const PricingCalculator: React.FC<{
       })
       // Set pricingData with the computed unit prices
       setPricingData({ computeUnitPrice, storageUnitPrice })
-      console.log({ computeUnitPrice, storageUnitPrice })
       setIsLoading(false)
     } else {
       setIsLoading(false)
