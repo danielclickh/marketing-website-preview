@@ -26,13 +26,21 @@ function PricingOptions({
   pricingPlans,
   cloudProviders,
   meteredPricing,
-  selectorOnly
+  selectorOnly,
+  storageCostDev,
+  computeCostDev,
+  storageCostProd,
+  computeCostProd
 }: {
   pricingByRegion: Array<RegionPricing>
   pricingPlans: Array<PricingPlanData>
   cloudProviders: Array<CloudProviderType>
   meteredPricing?: MeteredPricing
   selectorOnly?: boolean
+  storageCostDev?: number
+  computeCostDev?: number
+  storageCostProd?: number
+  computeCostProd?: number
 }) {
   const router = useRouter()
   const [provider, setProvider] = useState(
@@ -273,7 +281,19 @@ function PricingOptions({
 
                       <div className='p-6 pt-0'>
                         {index !== plans.length - 1 && (
-                          <ShowPricing isFirst={index === 0} />
+                          <ShowPricing
+                            storagePricing={
+                              plan.name === 'Development'
+                                ? storageCostDev
+                                : storageCostProd
+                            }
+                            computePricing={
+                              plan.name === 'Development'
+                                ? computeCostDev
+                                : computeCostProd
+                            }
+                            isFirst={index === 0}
+                          />
                         )}
                         {plan.actionButton && (
                           <>

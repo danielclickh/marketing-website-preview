@@ -2,7 +2,7 @@ import { InformationCircleIcon } from '@heroicons/react/outline'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import React, { useRef, useState } from 'react'
 import { usePricing } from './PricingContext'
-
+import { calculateStorageCost } from '../../lib/m3ter/costs'
 function InfoTooltip({ content }: { content: string }) {
   const triggerRef = useRef(null)
   return (
@@ -64,7 +64,15 @@ function Info({ unit, content }: { unit: string; content: string }) {
   )
 }
 
-function ShowPricing({ isFirst }: { isFirst: boolean }) {
+function ShowPricing({
+  isFirst,
+  storagePricing,
+  computePricing
+}: {
+  isFirst: boolean
+  storagePricing: number | undefined
+  computePricing: number | undefined
+}) {
   const { selectedRegion } = usePricing()
 
   const storage =
@@ -83,7 +91,9 @@ function ShowPricing({ isFirst }: { isFirst: boolean }) {
           <div className='w-1/2'>
             <h5 className='mb-2 text-sm font-bold'>Storage</h5>
             <div className='whitespace-nowrap text-2.75xl font-semibold'>
-              ${storage.priceUSD}
+              $
+              {storagePricing &&
+                calculateStorageCost(storagePricing, 1024).toFixed(2)}
             </div>
             <Info
               unit={storage.meteringUnit}
@@ -93,7 +103,7 @@ function ShowPricing({ isFirst }: { isFirst: boolean }) {
           <div className='w-1/2 text-left'>
             <h5 className='mb-2 text-sm font-bold'>Compute</h5>
             <div className='whitespace-nowrap text-2.75xl font-semibold'>
-              ${compute.priceUSD}
+              ${computePricing}
             </div>
             <div className='max-w-[120px]'>
               <Info

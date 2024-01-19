@@ -30,6 +30,10 @@ import CTAButtons from './CTAButtons'
 import { Select } from './ui/Select'
 import { Text } from './ui/Text'
 import { ToggleButtonsProviders } from './ui/ToggleButtonsProviders'
+import { MeteredPricing } from '../../types/pricing'
+import HRSeparator from '../HRSeparator'
+import Markdown from '../Markdown'
+import { SuiTitle } from '../sui'
 
 function convertStorageToGB(
   size: number,
@@ -71,7 +75,15 @@ export const PricingCalculator: React.FC<{
   pricingByRegion: RegionPricing[]
   cloudProviders: CloudProviderType[]
   pricingPlans: PricingPlanData[]
-}> = ({ pricingByRegion, cloudProviders, pricingPlans }) => {
+  meteredPricing: MeteredPricing
+  hero: any
+}> = ({
+  pricingByRegion,
+  cloudProviders,
+  pricingPlans,
+  meteredPricing,
+  hero
+}) => {
   const searchParams = useSearchParams()
   const router = useRouter()
 
@@ -104,6 +116,21 @@ export const PricingCalculator: React.FC<{
   }
 
   const storageUnit = searchParams.get('storageUnit')?.toLowerCase() || 'gb'
+
+  //for passing to the tables
+  const [storagePricingDev, setStoragePricingDev] = useState<
+    number | undefined
+  >(undefined)
+
+  const [computePricingDev, setComputePricingDev] = useState<
+    number | undefined
+  >(undefined)
+  const [storagePricingProd, setStoragePricingProd] = useState<
+    number | undefined
+  >(undefined)
+  const [computePricingProd, setComputePricingProd] = useState<
+    number | undefined
+  >(undefined)
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [pricingData, setPricingData] = useState<PricingData | undefined>()
@@ -209,6 +236,19 @@ export const PricingCalculator: React.FC<{
           query: {
             ...router.query,
             storageSize: 500 // Set your default value here
+          }
+        },
+        undefined,
+        { shallow: true }
+      )
+    }
+
+    if (tier === 'Development' && storageUnit === 'tb' && storageSize > 10) {
+      router.push(
+        {
+          query: {
+            ...router.query,
+            storageSize: 10
           }
         },
         undefined,
@@ -367,11 +407,45 @@ export const PricingCalculator: React.FC<{
       })
       // Set pricingData with the computed unit prices
       setPricingData({ computeUnitPrice, storageUnitPrice })
+
       setIsLoading(false)
     } else {
       setIsLoading(false)
     }
     setIsLoading(false)
+    //this passes the pricing to the tables at the top of the page
+    const matchingPricingPlansForTable = pricingPlansFromFile.filter(
+      (plan) =>
+        plan.region.toLowerCase() === regionToCheckPricing &&
+        plan.cloudProvider.toLowerCase() === provider.toLowerCase()
+    )
+
+    if (matchingPricingPlansForTable.length > 0) {
+      // Iterate through matching pricing plans
+      matchingPricingPlansForTable.forEach((matchingPlan) => {
+        // Check if the aggregationId matches config.computeAggregationId
+        if (matchingPlan.aggregationId === config.computeAggregationId) {
+          // Get the computeUnitPrice for this matching plan
+          if (matchingPlan.instanceTier === 'Production') {
+            setComputePricingProd(matchingPlan.pricingBands[0].unitPrice)
+          }
+          if (matchingPlan.instanceTier === 'Development') {
+            setComputePricingDev(matchingPlan.pricingBands[0].unitPrice)
+          }
+        }
+
+        // Check if the aggregationId matches config.storageAggregationId
+        if (matchingPlan.aggregationId === config.storageAggregationId) {
+          // Get the storageUnitPrice for this matching plan
+          if (matchingPlan.instanceTier === 'Production') {
+            setStoragePricingProd(matchingPlan.pricingBands[0].unitPrice)
+          }
+          if (matchingPlan.instanceTier === 'Development') {
+            setStoragePricingDev(matchingPlan.pricingBands[0].unitPrice)
+          }
+        }
+      })
+    }
     if (costData) {
       if (tier === 'Production') {
         if (
@@ -463,291 +537,329 @@ export const PricingCalculator: React.FC<{
   ])
 
   return (
-    <div className='grid gap-x-12 lg:grid-cols-2'>
-      <div className={styles.options}>
-        <FormControl label='Service type'>
-          <ToggleButtons options={tierOptions} value={tier} />
-        </FormControl>
-        <FormControl label='Cloud provider'>
-          <ToggleButtonsProviders options={providerOptions} value={provider} />
-        </FormControl>
-        <FormControl label='Region'>
-          <PricingOptions
-            selectorOnly={true}
-            pricingByRegion={pricingByRegion}
-            cloudProviders={cloudProviders}
-            pricingPlans={pricingPlans}
-          />
-        </FormControl>
-
-        <FormControl
-          label='Active hours per day'
-          tooltip='We idle your service when it’s inactive, saving you on cost.'>
-          <RangeSlider value={hours} />
-        </FormControl>
-
-        {/* === START new storage options  */}
-        {/* need to convert to gbs */}
-        <div className='relative'>
-          <h3 className='text-md mb-3 font-semibold'>Storage </h3>
-          <div className='flex gap-x-6 gap-y-0'>
-            <FormControl id='storageSize' label='Volume' marginBottom={false}>
-              <Text id='storageVolume' value={storageSize} />
+    <div>
+      {meteredPricing && pricingByRegion.length > 0 && (
+        <PricingOptions
+          computeCostDev={computePricingDev}
+          storageCostDev={storagePricingDev}
+          computeCostProd={computePricingProd}
+          storageCostProd={storagePricingProd}
+          pricingByRegion={pricingByRegion}
+          cloudProviders={cloudProviders}
+          pricingPlans={pricingPlans}
+          meteredPricing={meteredPricing}
+        />
+      )}
+      <HRSeparator className='mt-10 max-w-[384px] pb-10 ' />
+      <div className='mb-44 text-center'>
+        <Markdown className={styles.richTextLink}>
+          {hero.openSourceLink}
+        </Markdown>
+      </div>
+      <div id='pricing-calculator'>
+        <SuiTitle type='h2' className='pb-16 text-center'>
+          Estimate your monthly cost
+        </SuiTitle>
+      </div>
+      <div className='mx-auto max-w-5xl px-4 sm:px-8 xl:px-0'>
+        <div className='grid gap-x-12 lg:grid-cols-2'>
+          <div className={styles.options}>
+            <FormControl label='Service type'>
+              <ToggleButtons options={tierOptions} value={tier} />
             </FormControl>
-            <FormControl id='storageUnit' label='Unit' marginBottom={false}>
-              {tier && (
-                <Select
-                  id='storageUnit'
-                  options={storageUnitOptionsTiered.filter((option) => {
-                    if (option.tier.includes(tier)) {
-                      return option
+            <FormControl label='Cloud provider'>
+              <ToggleButtonsProviders
+                options={providerOptions}
+                value={provider}
+              />
+            </FormControl>
+            <FormControl label='Region'>
+              <PricingOptions
+                selectorOnly={true}
+                pricingByRegion={pricingByRegion}
+                cloudProviders={cloudProviders}
+                pricingPlans={pricingPlans}
+              />
+            </FormControl>
+
+            <FormControl
+              label='Active hours per day'
+              tooltip='We idle your service when it’s inactive, saving you on cost.'>
+              <RangeSlider value={hours} />
+            </FormControl>
+
+            {/* === START new storage options  */}
+            {/* need to convert to gbs */}
+            <div className='relative'>
+              <h3 className='text-md mb-3 font-semibold'>Storage </h3>
+              <div className='flex gap-x-6 gap-y-0'>
+                <FormControl
+                  id='storageSize'
+                  label='Volume'
+                  marginBottom={false}>
+                  <Text id='storageVolume' value={storageSize} />
+                </FormControl>
+                <FormControl id='storageUnit' label='Unit' marginBottom={false}>
+                  {tier && (
+                    <Select
+                      id='storageUnit'
+                      options={storageUnitOptionsTiered.filter((option) => {
+                        if (option.tier.includes(tier)) {
+                          return option
+                        }
+                      })}
+                      value={storageUnit}
+                    />
+                  )}
+                </FormControl>
+                <FormControl
+                  id='storageCompressed'
+                  label='Is your data compressed?'
+                  tooltip='If your data is not compressed, ClickHouse will apply up to 10x compression.'
+                  marginBottom={false}>
+                  {tier && (
+                    <Select
+                      id='storageCompressed'
+                      options={[
+                        { label: 'Yes', value: 'yes' },
+                        { label: 'No', value: 'no' }
+                      ]}
+                      value={storageCompressed}
+                    />
+                  )}
+                </FormControl>
+              </div>
+              <div
+                className={` ${
+                  storageCompressed === 'no' ? 'text-[#66FF73]' : 'text-white'
+                } ${styles.helpText} mb-10 mt-3 text-xs `}>
+                {storageCompressed === 'no' ? (
+                  <p>
+                    {humanReadableStorage(
+                      storageSize,
+                      storageUnit,
+                      storageCompressed
+                    )}
+                    {storageUnit.toUpperCase()} after compression
+                  </p>
+                ) : (
+                  <p>No compression applied</p>
+                )}
+              </div>
+            </div>
+            {/* === END new storage options  */}
+            <h3 className='text-md mb-3 font-semibold'>Compute </h3>
+            {tier === 'Development' && (
+              <FormControl
+                label='Compute size'
+                id='computeSizeDevTooltipTrigger'
+                marginBottom={true}
+                helpText='Development services do not auto-scale'
+                tooltip='Deployment services have a fixed size of 16 GiB RAM, 2 vCPUs and cannot be edited'>
+                <NumericSelect
+                  id='computeMinSize'
+                  options={computeOptions.filter((option) => {
+                    if (option.tier) {
+                      return option.tier.includes('Development')
                     }
                   })}
-                  value={storageUnit}
+                  value={computeMinSize}
+                  disabled={true}
                 />
-              )}
-            </FormControl>
-            <FormControl
-              id='storageCompressed'
-              label='Is your data compressed?'
-              tooltip='If your data is not compressed, ClickHouse will apply up to 10x compression.'
-              marginBottom={false}>
-              {tier && (
-                <Select
-                  id='storageCompressed'
-                  options={[
-                    { label: 'Yes', value: 'yes' },
-                    { label: 'No', value: 'no' }
-                  ]}
-                  value={storageCompressed}
-                />
-              )}
-            </FormControl>
+              </FormControl>
+            )}
+            {tier === 'Production' && (
+              <>
+                <div className='mb-10'>
+                  <div className={styles.sizes}>
+                    <FormControl label='Minimum size' marginBottom={false}>
+                      <NumericSelect
+                        id='computeMinSize'
+                        options={computeOptions.filter((option) => {
+                          if (option.tier) {
+                            return option.tier.includes('Production')
+                          }
+                        })}
+                        value={computeMinSize}
+                      />
+                    </FormControl>
+                    <FormControl label='Maximum size' marginBottom={false}>
+                      <NumericSelect
+                        id='computeMaxSize'
+                        options={computeOptions.filter((option) => {
+                          if (option.tier) {
+                            return option.tier.includes('Production')
+                          }
+                        })}
+                        value={computeMaxSize}
+                      />
+                    </FormControl>
+                  </div>
+                  {!memoryError &&
+                  computeMinSize !== computeMaxSize &&
+                  tier === 'Production' ? (
+                    <div className='mt-3 text-xs'>
+                      Your service will autoscale between {computeMinSize}GiB
+                      and {computeMaxSize}GiB of RAM depending on your workload
+                    </div>
+                  ) : (
+                    <>
+                      {!memoryError && (
+                        <div className='mt-3 text-xs'>
+                          Your service will be pinned at {computeMinSize}GiB
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  <div className='mt-3 text-xs'>
+                    {memoryError && memoryError}
+                  </div>
+                </div>
+              </>
+            )}
           </div>
-          <div
-            className={` ${
-              storageCompressed === 'no' ? 'text-[#66FF73]' : 'text-white'
-            } ${styles.helpText} mb-10 mt-3 text-xs `}>
-            {storageCompressed === 'no' ? (
-              <p>
-                {humanReadableStorage(
-                  storageSize,
-                  storageUnit,
-                  storageCompressed
-                )}
-                {storageUnit.toUpperCase()} after compression
-              </p>
+          <div className={styles.costs}>
+            {isLoading ? (
+              <p className='text-center'>Loading, please wait…</p>
             ) : (
-              <p>No compression applied</p>
+              <div>
+                <p className='mb-4 font-inconsolata text-lg text-primary-300'>
+                  Average price per month
+                </p>
+                {costData && (
+                  <div>
+                    {tier === 'Development' ? (
+                      <React.Fragment>
+                        <p className='mb-2 break-words font-basier text-[50px] font-bold leading-[84px]  text-white'>
+                          $
+                          {Number(
+                            (
+                              costData.computeCost! + costData.storageCost
+                            ).toFixed(0)
+                          ).toLocaleString('en-US')}
+                        </p>
+                        {contactSales && (
+                          <>
+                            <p className='mb-8 text-base text-[#B3B6BD]'>
+                              You’re eligible for custom terms.
+                              <br />
+                              Contact us for more details.
+                            </p>
+                          </>
+                        )}
+                        <CTAButtons
+                          contactSales={contactSales}
+                          storageUnit={storageUnit}
+                          storageHumanReadable={humanReadableStorage(
+                            storageSize,
+                            storageUnit,
+                            storageCompressed
+                          )}
+                          tier={tier}
+                          provider={provider}
+                          region={region}
+                          hours={hours}
+                          computeCostMin={Number(
+                            costData.computeCost?.toFixed(2)
+                          )}
+                          storageCost={Number(costData.storageCost?.toFixed(2))}
+                          minMemory={Number(computeMinSize)}
+                          maxMemory={computeMaxSize}
+                          storageSize={Number(storageAfterCompression)}
+                          storageCompressed={storageCompressed}
+                          minMemoryLabel={
+                            computeOptions.find(
+                              (option) => option.value === computeMinSize
+                            )?.label || ''
+                          }
+                          maxMemoryLabel={
+                            computeOptions.find(
+                              (option) => option.value === computeMaxSize
+                            )?.label || ''
+                          }
+                          pricingData={pricingData}
+                        />
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        <p className='mb-2 break-words font-basier text-[50px] font-bold leading-[84px] text-white'>
+                          $
+                          {Number(
+                            (
+                              costData.minComputeCost! + costData.storageCost
+                            ).toFixed(0)
+                          ).toLocaleString('en-US')}{' '}
+                          {(
+                            costData.minComputeCost! + costData.storageCost
+                          ).toFixed(0) !==
+                            (
+                              costData.maxComputeCost! + costData.storageCost
+                            ).toFixed(0) && (
+                            <>
+                              - $
+                              {Number(
+                                (
+                                  costData.maxComputeCost! +
+                                  costData.storageCost
+                                ).toFixed(0)
+                              ).toLocaleString('en-US')}
+                            </>
+                          )}
+                        </p>
+                        {contactSales && (
+                          <>
+                            <p className='mb-8 text-base text-[#B3B6BD]'>
+                              You’re eligible for custom terms.
+                              <br />
+                              Contact us for more details.
+                            </p>
+                          </>
+                        )}
+
+                        <CTAButtons
+                          contactSales={contactSales}
+                          storageUnit={storageUnit}
+                          storageHumanReadable={humanReadableStorage(
+                            storageSize,
+                            storageUnit,
+                            storageCompressed
+                          )}
+                          tier={tier}
+                          hours={hours}
+                          region={region}
+                          provider={provider}
+                          minMemory={computeMinSize}
+                          maxMemory={computeMaxSize}
+                          storageSize={Number(storageAfterCompression)}
+                          storageCompressed={storageCompressed}
+                          computeCostMin={Number(
+                            costData.minComputeCost!.toFixed(2)
+                          )}
+                          computeCostMax={Number(
+                            costData.maxComputeCost!.toFixed(2)
+                          )}
+                          storageCost={costData.storageCost}
+                          minMemoryLabel={
+                            computeOptions.find(
+                              (option) => option.value === computeMinSize
+                            )?.label || ''
+                          }
+                          maxMemoryLabel={
+                            computeOptions.find(
+                              (option) => option.value === computeMaxSize
+                            )?.label || ''
+                          }
+                          pricingData={pricingData}
+                        />
+                      </React.Fragment>
+                    )}
+                  </div>
+                )}
+              </div>
             )}
           </div>
         </div>
-        {/* === END new storage options  */}
-        <h3 className='text-md mb-3 font-semibold'>Compute </h3>
-        {tier === 'Development' && (
-          <FormControl
-            label='Compute size'
-            id='computeSizeDevTooltipTrigger'
-            marginBottom={true}
-            helpText='Development services do not auto-scale'
-            tooltip='Deployment services have a fixed size of 16 GiB RAM, 2 vCPUs and cannot be edited'>
-            <NumericSelect
-              id='computeMinSize'
-              options={computeOptions.filter((option) => {
-                if (option.tier) {
-                  return option.tier.includes('Development')
-                }
-              })}
-              value={computeMinSize}
-              disabled={true}
-            />
-          </FormControl>
-        )}
-        {tier === 'Production' && (
-          <>
-            <div className='mb-10'>
-              <div className={styles.sizes}>
-                <FormControl label='Minimum size' marginBottom={false}>
-                  <NumericSelect
-                    id='computeMinSize'
-                    options={computeOptions.filter((option) => {
-                      if (option.tier) {
-                        return option.tier.includes('Production')
-                      }
-                    })}
-                    value={computeMinSize}
-                  />
-                </FormControl>
-                <FormControl label='Maximum size' marginBottom={false}>
-                  <NumericSelect
-                    id='computeMaxSize'
-                    options={computeOptions.filter((option) => {
-                      if (option.tier) {
-                        return option.tier.includes('Production')
-                      }
-                    })}
-                    value={computeMaxSize}
-                  />
-                </FormControl>
-              </div>
-              {!memoryError &&
-              computeMinSize !== computeMaxSize &&
-              tier === 'Production' ? (
-                <div className='mt-3 text-xs'>
-                  Your service will autoscale between {computeMinSize}GiB and{' '}
-                  {computeMaxSize}GiB of RAM depending on your workload
-                </div>
-              ) : (
-                <>
-                  {!memoryError && (
-                    <div className='mt-3 text-xs'>
-                      Your service will be pinned at {computeMinSize}GiB
-                    </div>
-                  )}
-                </>
-              )}
-
-              <div className='mt-3 text-xs'>{memoryError && memoryError}</div>
-            </div>
-          </>
-        )}
-      </div>
-      <div className={styles.costs}>
-        {isLoading ? (
-          <p className='text-center'>Loading, please wait…</p>
-        ) : (
-          <div>
-            <p className='mb-4 font-inconsolata text-lg text-primary-300'>
-              Average price per month
-            </p>
-            {costData && (
-              <div>
-                {tier === 'Development' ? (
-                  <React.Fragment>
-                    <p className='mb-2 break-words font-basier text-[50px] font-bold leading-[84px]  text-white'>
-                      $
-                      {Number(
-                        (costData.computeCost! + costData.storageCost).toFixed(
-                          0
-                        )
-                      ).toLocaleString('en-US')}
-                    </p>
-                    {contactSales && (
-                      <>
-                        <p className='mb-8 text-base text-[#B3B6BD]'>
-                          You’re eligible for custom terms.
-                          <br />
-                          Contact us for more details.
-                        </p>
-                      </>
-                    )}
-                    <CTAButtons
-                      contactSales={contactSales}
-                      storageUnit={storageUnit}
-                      storageHumanReadable={humanReadableStorage(
-                        storageSize,
-                        storageUnit,
-                        storageCompressed
-                      )}
-                      tier={tier}
-                      provider={provider}
-                      region={region}
-                      hours={hours}
-                      computeCostMin={Number(costData.computeCost?.toFixed(2))}
-                      storageCost={Number(costData.storageCost?.toFixed(2))}
-                      minMemory={Number(computeMinSize)}
-                      maxMemory={computeMaxSize}
-                      storageSize={Number(storageAfterCompression)}
-                      storageCompressed={storageCompressed}
-                      minMemoryLabel={
-                        computeOptions.find(
-                          (option) => option.value === computeMinSize
-                        )?.label || ''
-                      }
-                      maxMemoryLabel={
-                        computeOptions.find(
-                          (option) => option.value === computeMaxSize
-                        )?.label || ''
-                      }
-                      pricingData={pricingData}
-                    />
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>
-                    <p className='mb-2 break-words font-basier text-[50px] font-bold leading-[84px] text-white'>
-                      $
-                      {Number(
-                        (
-                          costData.minComputeCost! + costData.storageCost
-                        ).toFixed(0)
-                      ).toLocaleString('en-US')}{' '}
-                      {(
-                        costData.minComputeCost! + costData.storageCost
-                      ).toFixed(0) !==
-                        (
-                          costData.maxComputeCost! + costData.storageCost
-                        ).toFixed(0) && (
-                        <>
-                          - $
-                          {Number(
-                            (
-                              costData.maxComputeCost! + costData.storageCost
-                            ).toFixed(0)
-                          ).toLocaleString('en-US')}
-                        </>
-                      )}
-                    </p>
-                    {contactSales && (
-                      <>
-                        <p className='mb-8 text-base text-[#B3B6BD]'>
-                          You’re eligible for custom terms.
-                          <br />
-                          Contact us for more details.
-                        </p>
-                      </>
-                    )}
-
-                    <CTAButtons
-                      contactSales={contactSales}
-                      storageUnit={storageUnit}
-                      storageHumanReadable={humanReadableStorage(
-                        storageSize,
-                        storageUnit,
-                        storageCompressed
-                      )}
-                      tier={tier}
-                      hours={hours}
-                      region={region}
-                      provider={provider}
-                      minMemory={computeMinSize}
-                      maxMemory={computeMaxSize}
-                      storageSize={Number(storageAfterCompression)}
-                      storageCompressed={storageCompressed}
-                      computeCostMin={Number(
-                        costData.minComputeCost!.toFixed(2)
-                      )}
-                      computeCostMax={Number(
-                        costData.maxComputeCost!.toFixed(2)
-                      )}
-                      storageCost={costData.storageCost}
-                      minMemoryLabel={
-                        computeOptions.find(
-                          (option) => option.value === computeMinSize
-                        )?.label || ''
-                      }
-                      maxMemoryLabel={
-                        computeOptions.find(
-                          (option) => option.value === computeMaxSize
-                        )?.label || ''
-                      }
-                      pricingData={pricingData}
-                    />
-                  </React.Fragment>
-                )}
-              </div>
-            )}
-          </div>
-        )}
       </div>
     </div>
   )

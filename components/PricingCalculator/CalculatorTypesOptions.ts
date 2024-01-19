@@ -5,6 +5,10 @@ export type Provider = 'aws' | 'gcp'
 export interface PricingData {
   computeUnitPrice: number
   storageUnitPrice: number
+  storageUnitPriceDev?: number
+  computeUnitPriceDev?: number
+  storageUnitPriceProd?: number
+  computeUnitPriceProd?: number
 }
 export interface Option<T extends string = string> {
   value: T

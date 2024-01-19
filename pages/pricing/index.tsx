@@ -109,29 +109,16 @@ function PricingPage({
                   <div className='mt-6 text-neutral-200'>
                     {hero.description}
                   </div>
-                  {meteredPricing && pricingByRegion.length > 0 && (
-                    <PricingOptions
-                      pricingByRegion={pricingByRegion}
-                      cloudProviders={cloudProviders}
-                      pricingPlans={pricingPlans}
-                      meteredPricing={meteredPricing}
-                    />
-                  )}
                 </div>
               </div>
             )}
           </div>
-          <HRSeparator className='mt-10 max-w-[384px] pb-10' />
-          <Markdown className={styles.richTextLink}>
-            {hero.openSourceLink}
-          </Markdown>
-          <div className='mt-44 pb-16' id='pricing-calculator'>
-            <SuiTitle type='h2' className='pb-16 text-center'>
-              Estimate your monthly cost
-            </SuiTitle>
-            <div className='mx-auto max-w-5xl px-4 sm:px-8 xl:px-0'>
+          <div className='pb-16'>
+            <div className='mx-auto max-w-7xl px-4 sm:px-8 xl:px-0'>
               {pricingByRegion.length > 0 && (
                 <PricingCalculator
+                  hero={hero}
+                  meteredPricing={meteredPricing}
                   pricingByRegion={pricingByRegion}
                   cloudProviders={cloudProviders}
                   pricingPlans={pricingPlans}
