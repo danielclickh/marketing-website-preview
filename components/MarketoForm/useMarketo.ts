@@ -82,7 +82,7 @@ function useMarketo({
       });
 
 
-      const allFormEls = Array.from(document.querySelectorAll(`[data-id="${formId}"]`));
+      const allFormEls = Array.from(document.querySelectorAll<HTMLFormElement>(`[data-id="${formId}"]`));
 
       // In cases where the same form exists multiple times
       // we need to load them one-by-one by setting the <form> id
@@ -91,13 +91,22 @@ function useMarketo({
       (function loadFormsRecursively(formEls) {
         const formEl = formEls.shift();
         if (formEl) {
-          formEl.id = `mktoForm_${formId}`;
 
+          // Add the required id attribute so the marketo JS api will work
+          formEl.id = `mktoForm_${formId}`
+
+          // Empty form incase it's already been loaded
+          formEl.innerHTML = ''
+
+          // Init the marketo JS api
           window.MktoForms2.loadForm(baseUrl, munchkinId, formId, function(marketoFormObject) {
             const formEl = marketoFormObject.getFormElem().get(0)
 
             // Reset the form element id to allow the next load to work
             if (formEl) formEl.id = ''
+
+            // Load the next form (of the same type)
+            if (formEls.length) loadFormsRecursively(formEls)
 
             // Remove marketo added styles
             removeMarketoStyles(marketoFormObject)
@@ -119,12 +128,7 @@ function useMarketo({
                 }
               });
             }
-
-            // Load the next form (of the same type)
-            if (formEls.length) loadFormsRecursively(formEls)
           });
-        } else {
-          if (formEls.length) loadFormsRecursively(formEls)
         }
       })(allFormEls);
 
@@ -136,7 +140,7 @@ function useMarketo({
       return
     }
     addMarketoFormsScript(baseUrl, setScriptLoaded)
-  }, [scriptLoaded, baseUrl, munchkinId, formId])
+  }, [scriptLoaded])
 }
 
 export default useMarketo
