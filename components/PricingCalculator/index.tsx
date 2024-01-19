@@ -562,7 +562,7 @@ export const PricingCalculator: React.FC<{
         </SuiTitle>
       </div>
       <div className='mx-auto max-w-5xl px-4 sm:px-8 xl:px-0'>
-        <div className='grid gap-x-12 lg:grid-cols-2'>
+        <div className='flex flex-col items-start gap-x-12 lg:flex-row'>
           <div className={styles.options}>
             <FormControl label='Service type'>
               <ToggleButtons options={tierOptions} value={tier} />
