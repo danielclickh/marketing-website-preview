@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
-import { submitWorkatoForm } from '../../lib/api/workato'
-import { validateEmail } from '../../lib/form'
-import BulletPoint from '../BulletPoint'
-import { SuiButton, SuiPanel, SuiTextField, useSnackbar } from '../sui/client'
+import React, { useRef, useState } from 'react'
+import MarketoForm from '../MarketoForm'
+import { SuiPanel } from '../sui/client'
 import { EventsFormProps } from './types'
 import Image from 'next/image'
 import { CheckCircleIcon } from '@heroicons/react/outline'
@@ -16,98 +14,12 @@ function EventsForm({
   featuredImage,
   form
 }: EventsFormProps) {
-  const { openSnackBar } = useSnackbar()
-  const [firstName, setFirstName] = useState<string>()
-  const [lastName, setLastName] = useState<string>()
-  const [email, setEmail] = useState<string>()
-  const [loading, setLoading] = useState(false)
-  const { type, firstNameLabel, lastNameLabel, emailLabel, submitButtonLabel } =
-    form
-  const onChange = (e: any) => {
-    const value = e.target.value ?? ''
-    const name = e.target.name
-    switch (name) {
-      case 'firstName':
-        setFirstName(value)
-        break
 
-      case 'lastName':
-        setLastName(value)
-        break
+  const { submitButtonLabel } = form
 
-      case 'email':
-        setEmail(value)
-        break
-
-      default:
-        break
-    }
-  }
-
-  const onSubmit = async () => {
-    if (loading) {
-      return
-    }
-
-    const fillAll = 'Please fill in all the required fields'
-    const invalidEmail = 'Please enter a valid e-mail address'
-    let response
-    if (type === 'eventRegistration') {
-      if (
-        !firstName ||
-        !lastName ||
-        !email ||
-        firstName.length === 0 ||
-        lastName.length === 0 ||
-        email.length === 0
-      ) {
-        openSnackBar(fillAll, 'error')
-        return
-      }
-
-      if (!validateEmail(email)) {
-        openSnackBar(invalidEmail, 'error')
-        return
-      }
-
-      setLoading(true)
-      response = await submitWorkatoForm('eventRegistration', {
-        firstName,
-        lastName,
-        email
-      })
-    } else {
-      if (!email || email.length === 0) {
-        openSnackBar(fillAll, 'error')
-        return
-      }
-      if (!validateEmail(email)) {
-        openSnackBar(invalidEmail, 'error')
-        return
-      }
-
-      setLoading(true)
-      response = await submitWorkatoForm('recordedGatedContent', {
-        email
-      })
-    }
-
-    const userId = response?.cloudId ? response.cloudId : email
-
-    openSnackBar('Thank you, you have been registered to the event', 'success')
-    setEmail(undefined)
-    if (type === 'eventRegistration') {
-      setFirstName(undefined)
-      setLastName(undefined)
-    }
-    setLoading(false)
-    onSubmitProp()
-  }
-  const onKeyDown = (e: any) => {
-    if (e.key === 'Enter') {
-      onSubmit()
-    }
-  }
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
 
   return (
     <div className='ml-auto w-full lg:max-w-lg'>
@@ -127,8 +39,30 @@ function EventsForm({
         shadow
         padding='xl'
         className='w-full border border-neutral-800'>
-        {submitted ? (
-          <div className='subscribed'>
+
+        {!formSuccess && (
+          <MarketoForm
+            formId={'1013'}
+            onLoad={() => setFormLoaded(true)}
+            onSuccess={() => {
+              setFormSuccess(true)
+
+              // Delay needed to allow the ref to update before scrolling
+              setTimeout(() => {
+                formSuccessRef.current?.scrollIntoView({
+                  behavior: 'smooth'
+                })
+              }, 10)
+
+              return false // Stops page from reloading
+            }}
+          />
+        )}
+
+        {!formLoaded && <div className='text-center'>Loading form...</div>}
+
+        {formSuccess && (
+          <div className='subscribed' ref={formSuccessRef}>
             <div className='success-container text-center'>
               <CheckCircleIcon className='mx-auto mb-4 h-16 w-16 stroke-1 text-primary-300' />
               <p className='mb-12 px-10 text-xl font-bold'>
@@ -158,83 +92,22 @@ function EventsForm({
               </div>
             </div>
           </div>
-        ) : (
-          <div>
-            {type === 'eventRegistration' && (
-              <>
-                <SuiTextField
-                  htmlFor='firstName'
-                  name='firstName'
-                  label={firstNameLabel}
-                  value={firstName ?? ''}
-                  onChange={onChange}
-                  onBlur={onChange}
-                  className='mb-6 w-full'
-                  error={
-                    typeof firstName === 'string' && firstName.length === 0
-                      ? 'Invalid First Name'
-                      : ''
-                  }
-                />
-                <SuiTextField
-                  htmlFor='lastName'
-                  name='lastName'
-                  label={lastNameLabel}
-                  value={lastName ?? ''}
-                  onChange={onChange}
-                  onBlur={onChange}
-                  className='mb-6 w-full'
-                  error={
-                    typeof lastName === 'string' && lastName.length === 0
-                      ? 'Invalid Last Name'
-                      : ''
-                  }
-                />
-              </>
-            )}
-            <SuiTextField
-              htmlFor='email'
-              name='email'
-              label={emailLabel}
-              value={email ?? ''}
-              onKeyDown={onKeyDown}
-              onChange={onChange}
-              onBlur={onChange}
-              className='mb-6 w-full'
-              error={
-                typeof email === 'undefined'
-                  ? undefined
-                  : email.length === 0
-                  ? 'E-mail address cannot be empty'
-                  : validateEmail(email)
-                  ? ''
-                  : 'Invalid E-mail address'
-              }
-            />
-            <SuiButton
-              disabled={loading}
-              type='primary'
-              className='rounded-md hover:translate-y-0 hover:bg-primary-400 hover:no-underline'
-              onClick={onSubmit}>
-              {submitButtonLabel == 'Register to event' ||
-              submitButtonLabel == 'Register for event'
-                ? 'Register now'
-                : submitButtonLabel}
-            </SuiButton>
+        )}
+
+        {formLoaded && (
+          <div className='disclaimer-text mt-8 text-sm font-medium text-neutral-200'>
+            <div className='rich_content '>
+              <p>
+                By registering, you acknowledge that ClickHouse will process your
+                personal information in accordance with our{' '}
+                <Link href='/legal/privacy-policy' target='_blank'>
+                  Privacy Policy
+                </Link>
+                .
+              </p>
+            </div>
           </div>
         )}
-        <div className='disclaimer-text mt-8 text-sm font-medium text-neutral-200'>
-          <div className='rich_content '>
-            <p>
-              By registering, you acknowledge that ClickHouse will process your
-              personal information in accordance with our{' '}
-              <Link href='/legal/privacy-policy' target='_blank'>
-                Privacy Policy
-              </Link>
-              .
-            </p>
-          </div>
-        </div>
       </SuiPanel>
     </div>
   )
