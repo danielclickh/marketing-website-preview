@@ -181,10 +181,7 @@ export default function Page({
                   className='mb-6'>
                   {newsLetterData.description}
                 </SuiText>
-                <NewsLetterForm
-                  emailLabel={newsLetterData.emailLabel}
-                  submitButtonLabel={newsLetterData.submitButtonLabel}
-                />
+                <NewsLetterForm />
               </SuiPanel>
             </aside>
           </div>
