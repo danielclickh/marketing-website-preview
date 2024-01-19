@@ -63,6 +63,8 @@ function useMarketo({
   useEffect(() => {
     if (scriptLoaded) {
 
+      //const loadMarketoForm = window.MktoForms2.loadForm.bind(window.MktoForms2, baseUrl, munchkinId, formId)
+
       // Fixes marketo referrer issue for SPAs
       // @link https://blog.teknkl.com/fix-forms-20-referrer-cached-single-page-application/
       window.MktoForms2.whenReady(function(readyForm){
@@ -79,27 +81,52 @@ function useMarketo({
         });
       });
 
-      // Load the form with and attach callbacks
-      window.MktoForms2.loadForm(baseUrl, munchkinId, formId, marketoFormObject => {
 
-        removeMarketoStyles(marketoFormObject)
+      const allFormEls = Array.from(document.querySelectorAll(`[data-id="${formId}"]`));
 
-        marketoFormObject.addHiddenFields({
-          formReferrer: window.location.toString()
-        })
+      // In cases where the same form exists multiple times
+      // we need to load them one-by-one by setting the <form> id
+      // and then removing it after it's loaded
+      // @link https://codepen.io/figureone/pen/PWyGqm
+      (function loadFormsRecursively(formEls) {
+        const formEl = formEls.shift();
+        if (formEl) {
+          formEl.id = `mktoForm_${formId}`;
 
-        if (onLoad) onLoad(marketoFormObject)
+          window.MktoForms2.loadForm(baseUrl, munchkinId, formId, function(marketoFormObject) {
+            const formEl = marketoFormObject.getFormElem().get(0)
 
-        if (onSuccess) {
-          marketoFormObject.onSuccess((response, redirect) => {
-            const result = onSuccess(marketoFormObject, response, redirect)
-            if (typeof result !== "undefined") {
-              return result
+            // Reset the form element id to allow the next load to work
+            if (formEl) formEl.id = ''
+
+            // Remove marketo added styles
+            removeMarketoStyles(marketoFormObject)
+
+            // Add our custom referer field
+            marketoFormObject.addHiddenFields({
+              formReferrer: window.location.toString()
+            })
+
+            // Attach the component defined onLoad callback
+            if (onLoad) onLoad(marketoFormObject)
+
+            // Attach the component defined onSuccess callback
+            if (onSuccess) {
+              marketoFormObject.onSuccess((response, redirect) => {
+                const result = onSuccess(marketoFormObject, response, redirect)
+                if (typeof result !== "undefined") {
+                  return result
+                }
+              });
             }
-          });
-        }
 
-      })
+            // Load the next form (of the same type)
+            if (formEls.length) loadFormsRecursively(formEls)
+          });
+        } else {
+          if (formEls.length) loadFormsRecursively(formEls)
+        }
+      })(allFormEls);
 
       // Remove styles unwanted styles on re-render
       window.MktoForms2.onFormRender(marketoFormObject => {
