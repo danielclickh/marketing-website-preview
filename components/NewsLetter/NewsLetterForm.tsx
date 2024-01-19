@@ -1,56 +1,40 @@
-import React, { ChangeEvent, useState } from 'react'
-import { submitWorkatoForm } from '../../lib/api/workato'
-import { validateEmail } from '../../lib/form'
-import { CUIButton } from '../ClickUI'
-import { useSnackbar } from '../sui/client'
-import styles from './NewsLetterForm.module.scss'
+import React, { useRef, useState } from 'react'
+import MarketoForm from '../MarketoForm'
 
-function NewsLetterForm({
-  emailLabel,
-  submitButtonLabel
-}: {
-  emailLabel: string
-  submitButtonLabel: string
-}) {
-  const [email, setEmail] = useState<string>('')
-  const { openSnackBar } = useSnackbar()
-  const onClick = async () => {
-    if (!validateEmail(email)) {
-      openSnackBar('Please enter a valid email address', 'error')
-      return
-    }
-    try {
-      const workatoResp = await submitWorkatoForm('newsletter', {
-        email
-      })
-      const userId = workatoResp?.cloudId ? workatoResp.cloudId : email
+function NewsLetterForm() {
 
-      openSnackBar('Thanks for registering to our newsletter!', 'success')
-      setEmail('')
-    } catch (e: any) {
-      openSnackBar(e.mesage, 'error')
-    }
-  }
-
-  const onTextChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
-  }
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
 
   return (
-    <div className='relative flex items-center rounded border border-neutral-725 bg-neutral-750 p-1'>
-      <div className='w-full'>
-        <input
-          type='text'
-          id='email'
-          className={styles.newsLetterInput}
-          onChange={onTextChange}
-          placeholder={emailLabel}
-          value={email}
+    <div>
+      {!formSuccess && (
+        <MarketoForm
+          formId={'1122'}
+          onLoad={() => setFormLoaded(true)}
+          onSuccess={() => {
+            setFormSuccess(true)
+
+            // Delay needed to allow the ref to update before scrolling
+            setTimeout(() => {
+              formSuccessRef.current?.scrollIntoView({
+                behavior: 'smooth'
+              })
+            }, 10)
+
+            return false // Stops page from reloading
+          }}
         />
-      </div>
-      <CUIButton type='primary' onClick={onClick} className='whitespace-nowrap'>
-        {submitButtonLabel}
-      </CUIButton>
+      )}
+
+      {!formLoaded && <div className='text-center'>Loading form...</div>}
+
+      {formSuccess && (
+        <div ref={formSuccessRef}>
+          <p>Thanks for registering to our newsletter!</p>
+        </div>
+      )}
     </div>
   )
 }
