@@ -13,8 +13,14 @@ function SeoContainer({
   siteName,
   path
 }: SeoMetadata) {
-  let socialImageUrl = siteUrl + image?.[0]?.url || `${siteUrl}/images/social_share.png`
 
+  // Default social image
+  let socialImageUrl = `${siteUrl}/images/social_share.png`
+
+  // If image is passed as an object
+  if (image?.[0]?.url) socialImageUrl = siteUrl + image?.[0]?.url;
+
+  // If the image is passed as a string
   if (imageUrl) socialImageUrl = imageUrl;
 
   const canonicalUrl =
