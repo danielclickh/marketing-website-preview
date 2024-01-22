@@ -13,7 +13,9 @@ function SeoContainer({
   siteName,
   path
 }: SeoMetadata) {
-  const socialImageUrl = imageUrl || siteUrl + image?.[0]?.url || `${siteUrl}/images/social_share.png`
+  let socialImageUrl = siteUrl + image?.[0]?.url || `${siteUrl}/images/social_share.png`
+
+  if (imageUrl) socialImageUrl = imageUrl;
 
   const canonicalUrl =
     path === '/blog/forecasting-using-clickhouse'
