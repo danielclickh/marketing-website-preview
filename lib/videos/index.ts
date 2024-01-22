@@ -4,6 +4,17 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'what-if-energy-cost-analysis-with-streamlit-and-clickhouse',
+      title: 'What-If energy cost analysis with Streamlit and Clickhouse',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we'll learn how to build an interactive Streamlit application using chdb to analyze household energy usage data. We'll generate plot.ly charts showing the cost of energy usage over the last year, as well as doing what-if analysis to compare energy costs across timeframes and tariffs.",
+      thumbnail: 'https://img.youtube.com/vi/2Tra0DU1tfM/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/2Tra0DU1tfM?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
       slug: 'fast-answers-in-cancer-research',
       title: 'Fast Answers in Cancer Research',
       subTitle: 'Aaron Lisman\nMemorial Sloan Kettering',
