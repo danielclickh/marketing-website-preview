@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       seo: {
         title: `${video.title} | ClickHouse Videos`,
         description: video.description,
-        imageUrl: video.thumbnail,
+        imageUrl: video.socialImage ?? video.thumbnail,
         path: `/videos/${video.slug}`
       },
       ...(await getCommonProps())

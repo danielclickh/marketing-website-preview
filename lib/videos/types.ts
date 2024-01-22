@@ -6,6 +6,7 @@ export interface Video {
   subTitle?: string,
   description: string,
   thumbnail: string,
+  socialImage?: string,
   embed: string,
   categories: VideoCategory[]
 }
