@@ -600,7 +600,7 @@ export const PricingCalculator: React.FC<{
             {/* need to convert to gbs */}
             <div className='relative'>
               <div className='grid grid-cols-4 gap-6'>
-                <div>
+                <div className='col-span-2  md:col-span-1'>
                   <FormControl
                     id='storageSize'
                     label='Storage Volume'
@@ -608,7 +608,7 @@ export const PricingCalculator: React.FC<{
                     <Text id='storageVolume' value={storageSize} />
                   </FormControl>
                 </div>
-                <div>
+                <div className='col-span-2 md:col-span-1'>
                   <FormControl
                     id='storageUnit'
                     label='Storage Unit'
@@ -626,7 +626,7 @@ export const PricingCalculator: React.FC<{
                     )}
                   </FormControl>
                 </div>
-                <div className='col-span-4 mb-4 lg:col-span-2'>
+                <div className='col-span-4 mb-4 md:col-span-2'>
                   <FormControl
                     id='storageRadioButtons'
                     label='Is your data compressed?'
