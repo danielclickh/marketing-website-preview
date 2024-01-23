@@ -29,6 +29,7 @@ import styles from './CostCalculator.module.scss'
 import CTAButtons from './CTAButtons'
 import { Select } from './ui/Select'
 import { Text } from './ui/Text'
+import RadioGroupComponent from './ui/Radio/Radio'
 import { ToggleButtonsProviders } from './ui/ToggleButtonsProviders'
 import { MeteredPricing } from '../../types/pricing'
 import HRSeparator from '../HRSeparator'
@@ -620,6 +621,13 @@ export const PricingCalculator: React.FC<{
                   )}
                 </FormControl>
                 <FormControl
+                  id='storageRadioButtons'
+                  label='Is your data compressed?'
+                  tooltip='If your data is not compressed, ClickHouse will apply up to 10x compression.'
+                  marginBottom={false}>
+                  <RadioGroupComponent value={storageCompressed} />
+                </FormControl>
+                {/* <FormControl
                   id='storageCompressed'
                   label='Is your data compressed?'
                   tooltip='If your data is not compressed, ClickHouse will apply up to 10x compression.'
@@ -634,7 +642,7 @@ export const PricingCalculator: React.FC<{
                       value={storageCompressed}
                     />
                   )}
-                </FormControl>
+                </FormControl> */}
               </div>
               <div
                 className={` ${
