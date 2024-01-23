@@ -453,6 +453,7 @@ export const PricingCalculator: React.FC<{
     if (costData) {
       const priceRange = document.getElementById('price-range')
       if (priceRange) {
+        console.log(priceRangeTextSize)
         setPriceRangeTextSize(priceRange.innerText.length)
       }
       if (tier === 'Production') {
@@ -794,6 +795,8 @@ export const PricingCalculator: React.FC<{
                             priceRangeTextSize && priceRangeTextSize <= 15
                               ? 'text-[50px] leading-[84px]'
                               : priceRangeTextSize && priceRangeTextSize <= 23
+                              ? 'text-[32px] leading-[66px]'
+                              : priceRangeTextSize && priceRangeTextSize <= 24
                               ? 'text-[35px] leading-[69px]'
                               : priceRangeTextSize && priceRangeTextSize <= 25
                               ? 'text-[30px] leading-[64px]'
