@@ -138,6 +138,9 @@ export const PricingCalculator: React.FC<{
   const [contactSales, setContactSales] = useState<string | undefined>(
     undefined
   )
+  const [priceRangeTextSize, setPriceRangeTextSize] = useState<
+    number | undefined
+  >(undefined)
 
   useEffect(() => {
     setIsLoading(true)
@@ -447,6 +450,11 @@ export const PricingCalculator: React.FC<{
       })
     }
     if (costData) {
+      const priceRange = document.getElementById('price-range')
+      if (priceRange) {
+        console.log(priceRangeTextSize)
+        setPriceRangeTextSize(priceRange.innerText.length)
+      }
       if (tier === 'Production') {
         if (
           (costData.minComputeCost &&
@@ -783,7 +791,19 @@ export const PricingCalculator: React.FC<{
                       </React.Fragment>
                     ) : (
                       <React.Fragment>
-                        <p className='mb-2 break-words font-basier text-[50px] font-bold leading-[84px] text-white'>
+                        <p
+                          className={`${
+                            priceRangeTextSize && priceRangeTextSize <= 15
+                              ? 'text-[50px] leading-[84px]'
+                              : priceRangeTextSize && priceRangeTextSize <= 23
+                              ? 'text-[35px] leading-[69px]'
+                              : priceRangeTextSize && priceRangeTextSize <= 25
+                              ? 'text-[30px] leading-[64px]'
+                              : priceRangeTextSize && priceRangeTextSize <= 30
+                              ? 'text-[28px] leading-[62px]'
+                              : 'text-[50px] leading-[84px]'
+                          } mb-2 break-words font-basier font-bold  text-white`}
+                          id='price-range'>
                           $
                           {Number(
                             (
