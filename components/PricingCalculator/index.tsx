@@ -599,12 +599,11 @@ export const PricingCalculator: React.FC<{
             {/* === START new storage options  */}
             {/* need to convert to gbs */}
             <div className='relative'>
-              <h3 className='text-md mb-3 font-semibold'>Storage </h3>
               <div className='grid grid-cols-4 gap-6'>
                 <div>
                   <FormControl
                     id='storageSize'
-                    label='Volume'
+                    label='Storage Volume'
                     marginBottom={false}>
                     <Text id='storageVolume' value={storageSize} />
                   </FormControl>
@@ -612,7 +611,7 @@ export const PricingCalculator: React.FC<{
                 <div>
                   <FormControl
                     id='storageUnit'
-                    label='Unit'
+                    label='Storage Unit'
                     marginBottom={false}>
                     {tier && (
                       <Select
@@ -656,7 +655,6 @@ export const PricingCalculator: React.FC<{
               </div>
             </div>
             {/* === END new storage options  */}
-            <h3 className='text-md mb-3 font-semibold'>Compute </h3>
             {tier === 'Development' && (
               <FormControl
                 label='Compute size'
