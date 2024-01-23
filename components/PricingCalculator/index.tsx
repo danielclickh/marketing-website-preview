@@ -600,49 +600,42 @@ export const PricingCalculator: React.FC<{
             {/* need to convert to gbs */}
             <div className='relative'>
               <h3 className='text-md mb-3 font-semibold'>Storage </h3>
-              <div className='flex gap-x-6 gap-y-0'>
-                <FormControl
-                  id='storageSize'
-                  label='Volume'
-                  marginBottom={false}>
-                  <Text id='storageVolume' value={storageSize} />
-                </FormControl>
-                <FormControl id='storageUnit' label='Unit' marginBottom={false}>
-                  {tier && (
-                    <Select
-                      id='storageUnit'
-                      options={storageUnitOptionsTiered.filter((option) => {
-                        if (option.tier.includes(tier)) {
-                          return option
-                        }
-                      })}
-                      value={storageUnit}
-                    />
-                  )}
-                </FormControl>
-                <FormControl
-                  id='storageRadioButtons'
-                  label='Is your data compressed?'
-                  tooltip='If your data is not compressed, ClickHouse will apply up to 10x compression.'
-                  marginBottom={false}>
-                  <RadioGroupComponent value={storageCompressed} />
-                </FormControl>
-                {/* <FormControl
-                  id='storageCompressed'
-                  label='Is your data compressed?'
-                  tooltip='If your data is not compressed, ClickHouse will apply up to 10x compression.'
-                  marginBottom={false}>
-                  {tier && (
-                    <Select
-                      id='storageCompressed'
-                      options={[
-                        { label: 'Yes', value: 'yes' },
-                        { label: 'No', value: 'no' }
-                      ]}
-                      value={storageCompressed}
-                    />
-                  )}
-                </FormControl> */}
+              <div className='grid grid-cols-4 gap-6'>
+                <div>
+                  <FormControl
+                    id='storageSize'
+                    label='Volume'
+                    marginBottom={false}>
+                    <Text id='storageVolume' value={storageSize} />
+                  </FormControl>
+                </div>
+                <div>
+                  <FormControl
+                    id='storageUnit'
+                    label='Unit'
+                    marginBottom={false}>
+                    {tier && (
+                      <Select
+                        id='storageUnit'
+                        options={storageUnitOptionsTiered.filter((option) => {
+                          if (option.tier.includes(tier)) {
+                            return option
+                          }
+                        })}
+                        value={storageUnit}
+                      />
+                    )}
+                  </FormControl>
+                </div>
+                <div className='col-span-4 mb-4 lg:col-span-2'>
+                  <FormControl
+                    id='storageRadioButtons'
+                    label='Is your data compressed?'
+                    tooltip='If your data is not compressed, ClickHouse will apply up to 10x compression.'
+                    marginBottom={false}>
+                    <RadioGroupComponent value={storageCompressed} />
+                  </FormControl>
+                </div>
               </div>
               <div
                 className={` ${
