@@ -679,7 +679,9 @@ export const PricingCalculator: React.FC<{
               <>
                 <div className='mb-10'>
                   <div className={styles.sizes}>
-                    <FormControl label='Minimum size' marginBottom={false}>
+                    <FormControl
+                      label='Minimum compute size'
+                      marginBottom={false}>
                       <NumericSelect
                         id='computeMinSize'
                         options={computeOptions.filter((option) => {
@@ -690,7 +692,9 @@ export const PricingCalculator: React.FC<{
                         value={computeMinSize}
                       />
                     </FormControl>
-                    <FormControl label='Maximum size' marginBottom={false}>
+                    <FormControl
+                      label='Maximum compute size'
+                      marginBottom={false}>
                       <NumericSelect
                         id='computeMaxSize'
                         options={computeOptions.filter((option) => {
