@@ -567,7 +567,7 @@ export const PricingCalculator: React.FC<{
       </div>
       <div id='pricing-calculator'>
         <SuiTitle type='h2' className='pb-16 text-center'>
-          Estimate your monthly cost
+          Estimate your monthly&nbsp;cost
         </SuiTitle>
       </div>
       <div className='mx-auto max-w-5xl px-4 sm:px-8 xl:px-0'>
