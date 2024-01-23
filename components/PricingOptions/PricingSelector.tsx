@@ -38,22 +38,31 @@ function PricingSelector({
         </Listbox.Button>
 
         <Listbox.Options className='absolute z-10 -mt-1 w-full overflow-auto rounded-md rounded-t-none border border-t-0 border-primary-300 bg-neutral-725 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
-          {regionList.map((item) => (
-            <Listbox.Option
-              key={item.region}
-              value={item}
-              className='hover:bg-neutral-700'>
-              {({ selected }) => (
-                <span
-                  className={`relative flex w-full cursor-pointer gap-3 truncate rounded-lg py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm ${
-                    selected ? 'font-bold' : 'font-normal'
-                  }`}>
-                  {item.regionFlagPNG}
-                  {item.region}
-                </span>
-              )}
-            </Listbox.Option>
-          ))}
+          {regionList.map((item) => {
+            let regionSlug =
+              item.region.match(/[(]*\(([^)]+)\)$/i)?.[1] || item.region
+            const selectedRegionName =
+              selectedRegion?.region.match(/[(]*\(([^)]+)\)$/i)?.[1]
+
+            if (regionSlug !== selectedRegionName) {
+              return (
+                <Listbox.Option
+                  key={item.region}
+                  value={item}
+                  className='hover:bg-neutral-700'>
+                  {({ selected }) => (
+                    <span
+                      className={`relative flex w-full cursor-pointer gap-3 truncate rounded-lg py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm ${
+                        selected ? 'font-bold' : 'font-normal'
+                      }`}>
+                      {item.regionFlagPNG}
+                      {item.region}
+                    </span>
+                  )}
+                </Listbox.Option>
+              )
+            }
+          })}
         </Listbox.Options>
       </div>
     </Listbox>

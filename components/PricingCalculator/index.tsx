@@ -453,7 +453,6 @@ export const PricingCalculator: React.FC<{
     if (costData) {
       const priceRange = document.getElementById('price-range')
       if (priceRange) {
-        console.log(priceRangeTextSize)
         setPriceRangeTextSize(priceRange.innerText.length)
       }
       if (tier === 'Production') {
