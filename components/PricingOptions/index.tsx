@@ -302,17 +302,38 @@ function PricingOptions({
                                 <CUIButton
                                   weight='medium'
                                   onClick={() => {
-                                    router.push(
-                                      {
-                                        hash: 'pricing-calculator',
-                                        query: {
-                                          ...router.query,
-                                          tier: 'Development'
-                                        }
-                                      },
-                                      undefined,
-                                      { shallow: true }
-                                    )
+                                    const calculatorElement =
+                                      document.getElementById(
+                                        'pricing-calculator'
+                                      )
+                                    if (calculatorElement) {
+                                      calculatorElement.scrollIntoView({
+                                        behavior: 'smooth',
+                                        block: 'start'
+                                      })
+                                      router.push(
+                                        {
+                                          query: {
+                                            ...router.query,
+                                            tier: 'Development'
+                                          }
+                                        },
+                                        undefined,
+                                        { shallow: true }
+                                      )
+                                    } else {
+                                      router.push(
+                                        {
+                                          hash: 'pricing-calculator',
+                                          query: {
+                                            ...router.query,
+                                            tier: 'Development'
+                                          }
+                                        },
+                                        undefined,
+                                        { shallow: true }
+                                      )
+                                    }
                                   }}
                                   className='stroked_button_wrapper button_wrapper mb-4 w-full'
                                   type='secondary'>
@@ -324,17 +345,38 @@ function PricingOptions({
                               <>
                                 <CUIButton
                                   onClick={() => {
-                                    router.push(
-                                      {
-                                        hash: 'pricing-calculator',
-                                        query: {
-                                          ...router.query,
-                                          tier: 'Production'
-                                        }
-                                      },
-                                      undefined,
-                                      { shallow: true }
-                                    )
+                                    const calculatorElement =
+                                      document.getElementById(
+                                        'pricing-calculator'
+                                      )
+                                    if (calculatorElement) {
+                                      calculatorElement.scrollIntoView({
+                                        behavior: 'smooth',
+                                        block: 'start'
+                                      })
+                                      router.push(
+                                        {
+                                          query: {
+                                            ...router.query,
+                                            tier: 'Production'
+                                          }
+                                        },
+                                        undefined,
+                                        { shallow: true }
+                                      )
+                                    } else {
+                                      router.push(
+                                        {
+                                          hash: 'pricing-calculator',
+                                          query: {
+                                            ...router.query,
+                                            tier: 'Production'
+                                          }
+                                        },
+                                        undefined,
+                                        { shallow: true }
+                                      )
+                                    }
                                   }}
                                   weight='medium'
                                   className='stroked_button_wrapper button_wrapper mb-4 w-full'

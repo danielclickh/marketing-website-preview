@@ -1,6 +1,6 @@
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import {
   calculateComputeCost,
   calculateStorageCost
@@ -87,6 +87,7 @@ export const PricingCalculator: React.FC<{
 }) => {
   const searchParams = useSearchParams()
   const router = useRouter()
+  const isMounted = useRef(false)
 
   const tier = searchParams.get('tier') || 'Production'
   const provider = searchParams.get('provider') || 'aws'
@@ -142,6 +143,59 @@ export const PricingCalculator: React.FC<{
   const [priceRangeTextSize, setPriceRangeTextSize] = useState<
     number | undefined
   >(undefined)
+
+  //for events
+  useEffect(() => {
+    //ga event
+    if (isMounted.current) {
+      let timeoutId = setTimeout(() => {
+        console.log('Changed innit', new Date())
+        if (typeof window !== 'undefined' && window.dataLayer) {
+          window.dataLayer.push({
+            event: 'pricingCalculatorNewConfiguration',
+            referrer: window.document.referrer,
+            tier: tier,
+            provider: provider,
+            region: region,
+            hours: hours,
+            storageVolume: storageSize,
+            storageUnit: storageUnit,
+            storageCompressed: storageCompressed,
+            minimumCompute: computeMinSize,
+            maximumCompute: computeMaxSize,
+            pricingConfig: {
+              referrer: window.document.referrer,
+              tier: tier,
+              provider: provider,
+              region: region,
+              hours: hours,
+              storageVolume: storageSize,
+              storageUnit: storageUnit,
+              storageCompressed: storageCompressed,
+              minimumCompute: computeMinSize,
+              maximumCompute: computeMaxSize
+            }
+          })
+        }
+      }, 5000)
+      return () => {
+        clearTimeout(timeoutId)
+      }
+    } else {
+      // Component is mounting for the first time
+      isMounted.current = true
+    }
+  }, [
+    tier,
+    provider,
+    region,
+    hours,
+    computeMinSize,
+    computeMaxSize,
+    storageUnit,
+    storageSize,
+    storageCompressed
+  ])
 
   useEffect(() => {
     setIsLoading(true)

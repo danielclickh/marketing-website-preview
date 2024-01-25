@@ -74,7 +74,83 @@ export default function CTAButtons({
       .catch((err) => {
         console.error('Error copying to clipboard:', err)
       })
+
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({
+        event: 'pricingCalculatorShare',
+        url: urlToCopy,
+        referrer: window.document.referrer,
+        tier: tier,
+        provider: provider,
+        region: region,
+        hours: hours,
+        storageVolume: storageSize,
+        storageUnit: storageUnit,
+        storageCompressed: storageCompressed,
+        minimumCompute: minMemory,
+        maximumCompute: maxMemory,
+        pricingConfig: {
+          url: urlToCopy,
+          referrer: window.document.referrer,
+          tier: tier,
+          provider: provider,
+          region: region,
+          hours: hours,
+          storageVolume: storageSize,
+          storageUnit: storageUnit,
+          storageCompressed: storageCompressed,
+          minimumCompute: minMemory,
+          maximumCompute: maxMemory
+        }
+      })
+    }
   }
+
+  const contactSalesHandler = () => {
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({
+        event: 'pricingCalculatorContactClick',
+        referrer: window.document.referrer,
+        tier: tier,
+        provider: provider,
+        region: region,
+        hours: hours,
+        storageVolume: storageSize,
+        storageUnit: storageUnit,
+        storageCompressed: storageCompressed,
+        minimumCompute: minMemory,
+        maximumCompute: maxMemory,
+        pricingConfig: {
+          referrer: window.document.referrer,
+          tier: tier,
+          provider: provider,
+          region: region,
+          hours: hours,
+          storageVolume: storageSize,
+          storageUnit: storageUnit,
+          storageCompressed: storageCompressed,
+          minimumCompute: minMemory,
+          maximumCompute: maxMemory
+        }
+      })
+    }
+    router.push({
+      pathname: '/company/contact',
+      query: {
+        ...router.query,
+        custom: true,
+        tier,
+        storageSize,
+        minMemory,
+        maxMemory,
+        provider,
+        region,
+        hours,
+        storageCompressed
+      }
+    })
+  }
+
   return (
     <>
       <div className='flex flex-col gap-4'>
@@ -85,6 +161,36 @@ export default function CTAButtons({
             weight='semibold'
             href='https://clickhouse.cloud/signUp?loc=pricing-calculator'
             linkClass='w-full'
+            target='_blank'
+            onClick={() => {
+              if (typeof window !== 'undefined' && window.dataLayer) {
+                window.dataLayer.push({
+                  event: 'pricingCalculatorStartTrial',
+                  referrer: window.document.referrer,
+                  tier: tier,
+                  provider: provider,
+                  region: region,
+                  hours: hours,
+                  storageVolume: storageSize,
+                  storageUnit: storageUnit,
+                  storageCompressed: storageCompressed,
+                  minimumCompute: minMemory,
+                  maximumCompute: maxMemory,
+                  pricingConfig: {
+                    referrer: window.document.referrer,
+                    tier: tier,
+                    provider: provider,
+                    region: region,
+                    hours: hours,
+                    storageVolume: storageSize,
+                    storageUnit: storageUnit,
+                    storageCompressed: storageCompressed,
+                    minimumCompute: minMemory,
+                    maximumCompute: maxMemory
+                  }
+                })
+              }
+            }}
             className='w-full'>
             <span className='text-sm'>Start free trial</span>
           </CUIButton>
@@ -95,24 +201,9 @@ export default function CTAButtons({
               type='primary'
               size='lg'
               weight='semibold'
-              onClick={() => {
-                router.push({
-                  pathname: '/company/contact',
-                  query: {
-                    ...router.query,
-                    custom: true,
-                    tier,
-                    storageSize,
-                    minMemory,
-                    maxMemory,
-                    provider,
-                    region,
-                    hours,
-                    storageCompressed
-                  }
-                })
-              }}
+              onClick={contactSalesHandler}
               linkClass='w-full'
+              target='_blank'
               className='w-full'>
               <span className='text-sm'>Get a custom quote</span>
             </CUIButton>
@@ -122,6 +213,7 @@ export default function CTAButtons({
               weight='semibold'
               href='https://clickhouse.cloud/signUp?loc=pricing-calculator-custom'
               linkClass='w-full'
+              target='_blank'
               className='w-full'>
               <span className='text-sm'>Start free trial</span>
             </CUIButton>
@@ -189,22 +281,8 @@ export default function CTAButtons({
             weight='semibold'
             linkClass='w-full'
             className='w-full'
-            onClick={() => {
-              router.push({
-                pathname: '/company/contact',
-                query: {
-                  custom: true,
-                  tier,
-                  storageSize,
-                  minMemory,
-                  maxMemory,
-                  provider,
-                  region,
-                  hours,
-                  storageCompressed
-                }
-              })
-            }}>
+            target='_blank'
+            onClick={contactSalesHandler}>
             <span className='text-sm'>Contact us</span>
           </CUIButton>
         )}
