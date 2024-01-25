@@ -134,7 +134,7 @@ export const storageUnitOptionsTiered = [
 
 export function calculateComputeMargin(tier: string, computePrice: number) {
   if (tier === 'Development') {
-    return computePrice * 60 * 2
+    return Number(computePrice * 60 * 2).toFixed(4)
   }
-  return computePrice * 60 * 3
+  return Number(computePrice * 60 * 3).toFixed(4)
 }
