@@ -23,7 +23,8 @@ import {
   PricingData,
   providerOptions,
   tierOptions,
-  storageUnitOptionsTiered
+  storageUnitOptionsTiered,
+  calculateComputeMargin
 } from './CalculatorTypesOptions'
 import styles from './CostCalculator.module.scss'
 import CTAButtons from './CTAButtons'
