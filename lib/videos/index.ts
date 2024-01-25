@@ -4,6 +4,140 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'what-if-energy-cost-analysis-with-streamlit-and-clickhouse',
+      title: 'What-If energy cost analysis with Streamlit and Clickhouse',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we'll learn how to build an interactive Streamlit application using chdb to analyze household energy usage data. We'll generate plot.ly charts showing the cost of energy usage over the last year, as well as doing what-if analysis to compare energy costs across timeframes and tariffs.",
+      thumbnail: 'https://img.youtube.com/vi/2Tra0DU1tfM/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/2Tra0DU1tfM?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
+      slug: 'fast-answers-in-cancer-research',
+      title: 'Fast Answers in Cancer Research',
+      subTitle: 'Aaron Lisman\nMemorial Sloan Kettering',
+      description:
+        'This presentation was given at the ClickHouse Community Meetup in NYC on 12 December, 2023. - https://www.meetup.com/clickhouse-new-york-user-group/events/296488779/',
+      thumbnail: 'https://img.youtube.com/vi/y32-WWZrppQ/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/y32-WWZrppQ?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User Stories']
+    },
+    {
+      slug: 'optimizing-data-orchestration-for-analytics-platforms',
+      title:
+        'Optimizing Data Orchestration for Analytics Platforms Connecting to ClickHouse',
+      subTitle: 'Gary Lin\nExplo',
+      description:
+        'This presentation was given at the ClickHouse Community Meetup in NYC on 12 December, 2023. - https://www.meetup.com/clickhouse-new-york-user-group/events/296488779/',
+      thumbnail: 'https://img.youtube.com/vi/ti26ag10hq4/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/ti26ag10hq4?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User Stories']
+    },
+    {
+      slug: 'how-building-llm-prompt-sdk-led-us-to-typesafe-clickhouse-queries',
+      title:
+        'How building an LLM prompt SDK led us to typesafe ClickHouse queries',
+      subTitle: 'Nicole White\nAutoblocks',
+      description:
+        'This presentation was given at the ClickHouse Community Meetup in NYC on 12 December, 2023. - https://www.meetup.com/clickhouse-new-york-user-group/events/296488779/',
+      thumbnail: 'https://img.youtube.com/vi/G60wENTfW2o/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/G60wENTfW2o?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User Stories']
+    },
+    {
+      slug: 'extending-an-observability-platform-for-200b-logs',
+      title: 'Extending an Observability Platform for 200B Logs',
+      subTitle: 'Angelo Saraceno\nRailway',
+      description:
+        'This presentation was given at the ClickHouse Community Meetup in NYC on 12 December, 2023. - https://www.meetup.com/clickhouse-new-york-user-group/events/296488779/',
+      thumbnail: 'https://img.youtube.com/vi/r6exhJkJcbw/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/r6exhJkJcbw?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User Stories']
+    },
+    {
+      slug: 'funnel-analytics-and-distributed-queries-in-clickhouse',
+      title: 'Funnel Analytics and Distributed Queries in ClickHouse',
+      subTitle: 'Degena Woldemariam\nKlaviyo',
+      description:
+        'This presentation was given at the ClickHouse Community Meetup in Boston on 11 December, 2023. - https://www.meetup.com/clickhouse-boston-user-group/events/296488840/',
+      thumbnail: 'https://img.youtube.com/vi/4gQz4324e2I/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/4gQz4324e2I?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User Stories']
+    },
+    {
+      slug: 'learning-databases-and-learning-languages',
+      title: 'Learning Databases and Learning Languages',
+      subTitle: 'Tyler Hannan\nSenior Director, Developer Advocacy, ClickHouse',
+      description:
+        'This presentation was given at the ClickHouse Community Meetup in Boston on 11 December, 2023. - https://www.meetup.com/clickhouse-boston-user-group/events/296488840/',
+      thumbnail: 'https://img.youtube.com/vi/ZICoTYUPFq4/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/ZICoTYUPFq4?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['ClickHouse']
+    },
+    {
+      slug: 'scaling-graphite-with-clickhouse',
+      title: 'Scaling Graphite with ClickHouse',
+      subTitle: 'Josh Bradley\nFastly',
+      description:
+        'This presentation was given at the ClickHouse Community Meetup in Boston on 11 December, 2023. - https://www.meetup.com/clickhouse-boston-user-group/events/296488840/',
+      thumbnail: 'https://img.youtube.com/vi/n3vAheF81hI/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/n3vAheF81hI?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User Stories']
+    },
+    {
+      slug: 'scaling-the-data-integration-mountain',
+      title: 'Scaling the Data Integration Mountain: Tools, Tricks, and Tales',
+      subTitle: 'Alex Simoes\nDatawheel',
+      description:
+        'This presentation was given at the ClickHouse Community Meetup in Boston on 11 December, 2023. - https://www.meetup.com/clickhouse-boston-user-group/events/296488840/',
+      thumbnail: 'https://img.youtube.com/vi/phe8tADsil0/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/phe8tADsil0?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User Stories']
+    },
+    {
+      slug: 'clickhouse-overview',
+      title: 'ClickHouse Overview - Alexey Milovidov interview with CSDN',
+      subTitle: 'Alexey Milovidov\nCTO, ClickHouse',
+      description:
+        'Alexey Milovidov, our CTO, shares the story of ClickHouse in greater detail.',
+      thumbnail: 'https://img.youtube.com/vi/OrqzWhz3yts/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/OrqzWhz3yts?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['ClickHouse']
+    },
+    {
+      slug: 'bringing-open-source-and-cloud-together',
+      title: 'ClickHouse: Bringing Open Source and Cloud Together',
+      subTitle: 'Yury Izrailevsky\nPresident, Product & Technology, ClickHouse',
+      description:
+        'Our own Yury Izrailevsky (President, Product & Technology) shares the vision of ClickHouse and bringing Open Source and Cloud together in this meetup talk recorded in Beijing.',
+      thumbnail: 'https://img.youtube.com/vi/g7LWpIEu678/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/g7LWpIEu678?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['ClickHouse']
+    },
+    {
+      slug: 'transforming-log-data-with-clickhouse-materialized-views',
+      title: 'Transforming log data with ClickHouse materialized views',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we'll learn how to transform log entries using ClickHouse materialized views. We start with a bunch of log files in S3 and then show how to pull out the individual components using a regular expression and store them in a MergeTree table. We conclude by seeing that our solution can also handle any new files added to the S3 bucket.",
+      thumbnail: 'https://img.youtube.com/vi/JLk-pcWZSGc/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/JLk-pcWZSGc?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
       slug: 'funnel-analysis-with-clickhouse',
       title: 'Funnel Analysis with ClickHouse',
       subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
@@ -240,6 +374,17 @@ export function getVideos(): Video[] {
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/6V_66oiln00?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
       categories: ['ClickHouse Cloud']
+    },
+    {
+      slug: 'rebuilding-segmentation-with-clickhouse',
+      title: 'Rebuilding Segmentation with ClickHouse',
+      subTitle: 'Patrick McGrath\nKlaviyo',
+      description:
+        'This presentation was given at the ClickHouse summer meetup in Boston on  18 July https://www.meetup.com/clickhouse-boston-user-group/events/293913596/',
+      thumbnail: 'https://img.youtube.com/vi/a9nHW93Ehi8/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/a9nHW93Ehi8?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User Stories']
     },
     {
       slug: 'self-serve-analytics-on-petabytes-of-data-microsoft',

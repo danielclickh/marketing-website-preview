@@ -9,6 +9,7 @@ import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { CommonProps } from '../../types/homepage'
 import { getVideos } from '../../lib/videos/index'
+import { getLexicons } from '../../lib/lexicons'
 
 interface SitemapProps extends CommonProps {
   blogPosts: any[]
@@ -18,6 +19,7 @@ interface SitemapProps extends CommonProps {
   pressReleases: any[]
   menu: any[]
   comparisons: any[]
+  lexicons: any[]
 }
 
 export const getStaticProps: GetStaticProps<SitemapProps> =
@@ -80,6 +82,8 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
     const newsEvents = newsItems.newsItems
     const pressReleases = newsItems.pressReleases
 
+    const lexicons = getLexicons()
+
     const menu = menuItems
 
     return {
@@ -91,6 +95,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         pressReleases,
         comparisons,
         menu,
+        lexicons,
         seo: {
           title: 'Site map - ClickHouse',
           path: '/sitemap'
@@ -110,7 +115,8 @@ function Sitemap({
   newsEvents,
   pressReleases,
   comparisons,
-  menu
+  menu,
+  lexicons
 }: SitemapProps) {
   const resourcesMenu = menuItems.find((obj) => obj.id === 2)?.menuItems
   const videos = getVideos()
@@ -211,16 +217,30 @@ function Sitemap({
               </h2>
               <p className='pb-2'>
                 <Link
+                  href='/use-cases/real-time-analytics'
+                  className='text-primary-300 hover:underline'>
+                  Real-time analytics
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
                   href='/use-cases/logging-and-metrics'
                   className='text-primary-300 hover:underline'>
-                  Logging and Metrics
+                  Logs, events &amp; traces
                 </Link>
               </p>
               <p className='pb-2'>
                 <Link
                   href='/use-cases/machine-learning-and-data-science'
                   className='text-primary-300 hover:underline'>
-                  Machine Learning and Data Science
+                  Machine Learning &amp; GenAI
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
+                  href='/use-cases/business-intelligence'
+                  className='text-primary-300 hover:underline'>
+                  Business intelligence
                 </Link>
               </p>
               <p className='pb-2'>
@@ -290,11 +310,27 @@ function Sitemap({
                 <ul className='mb-2'>
                   {comparisons.map((comparison, index) => {
                     return (
-                      <li key={index}>
+                      <li key={index} className='pb-2'>
                         <Link
                           href={`/comparison/${comparison.slug}`}
                           className='font text-primary-300 hover:underline'>
                           {comparison.Title}{' '}
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+              <div>
+                <p className='pb-2 font-semibold'>Lexicon</p>
+                <ul className='mb-2'>
+                  {lexicons.map((lexicon, index) => {
+                    return (
+                      <li key={index} className='pb-2'>
+                        <Link
+                          href={`/lexicon/${lexicon.slug}`}
+                          className='font text-primary-300 hover:underline'>
+                          {lexicon.title}{' '}
                         </Link>
                       </li>
                     )
@@ -418,7 +454,7 @@ function Sitemap({
               <ul className='mb-2'>
                 {videos.map((video, index) => {
                   return (
-                    <li key={index}>
+                    <li key={index} className='pb-2'>
                       <Link
                         href={`/video/${video.slug}`}
                         className='font text-primary-300 hover:underline'>

@@ -1,25 +1,23 @@
 import { GetStaticProps } from 'next'
-import React from 'react'
-import EventsContainer from '../../../components/EventsContainer'
-import Layout from '../../../components/Layout'
-import Markdown from '../../../components/Markdown'
-import { StrapiImage } from '../../../components/StrapiElements'
-import { SuiText, SuiTitle } from '../../../components/sui'
-import { findAll, getPathsValues } from '../../../lib/api/strapi'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { ParamsType } from '../../../types/homepage'
-import { EventProps, EventType } from '../../../types/events'
-import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
-import EventPost from '../../../components/EventPostList/EventPost'
 import Link from 'next/link'
+import React from 'react'
+import EventPost from '../../../../components/EventPostList/EventPost'
+import EventsContainerMarketo from '../../../../components/EventsContainer-Marketo'
+import Layout from '../../../../components/Layout'
+import Markdown from '../../../../components/Markdown'
+import { StrapiImage } from '../../../../components/StrapiElements'
+import { SuiText, SuiTitle } from '../../../../components/sui'
+import { findAll } from '../../../../lib/api/strapi'
+import { getCommonProps } from '../../../../lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '../../../../lib/utils/revalidationConfig'
+import { EventProps, EventType } from '../../../../types/events'
 
 export const getStaticProps: GetStaticProps<EventProps> =
-  async function getStaticProps({ params }) {
-    const { slug } = params as ParamsType
+  async function getStaticProps() {
     const { data } = await findAll('events', {
       filters: {
         slug: {
-          $eq: slug
+          $eq: 'clickhouse-fundamentals'
         }
       },
       sort: ['localDatetime:DESC'],
@@ -45,7 +43,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
             $gte: new Date().toISOString()
           },
           slug: {
-            $notContains: slug
+            $notContains: 'clickhouse-fundamentals'
           }
         },
         sort: ['localDatetime:ASC'],
@@ -67,6 +65,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
 
     const commonProps = await getCommonProps()
     const page = data[0]
+
     if (!page) {
       return {
         notFound: true,
@@ -92,7 +91,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
           image: [data[0].thumbnailPng],
           type: 'website',
           siteName: 'ClickHouse',
-          path: `/company/events/${slug}`
+          path: `/company/events/clickhouse-fundamentals`
         },
         recentEvents,
         ...commonProps
@@ -119,9 +118,10 @@ function EventPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='flex flex-col'>
-        <EventsContainer
+        <EventsContainerMarketo
           localDatetime={localDatetime}
           form={form}
+          mktoFormId={'1086'}
           recordedVimeoUrl={recordedVimeoUrl}
           featuredImage={lightFeatureImagePng}>
           <div className='section_metadata mb-20'>
@@ -197,7 +197,7 @@ function EventPage({
               </div>
             </div>
           )}
-        </EventsContainer>
+        </EventsContainerMarketo>
       </div>
       <div className='bg-shadow-element yellow-shadow align-shadow-right mx-auto mb-40 max-w-7xl px-4 pb-10 sm:px-8 2xl:px-0'>
         <div className='relative z-20'>
@@ -211,39 +211,6 @@ function EventPage({
       </div>
     </Layout>
   )
-}
-
-export async function getStaticPaths() {
-  const params = {
-    fields: ['slug'],
-    filters: {
-      $or: [
-        {
-          eventVideoUrl: {
-            $null: true
-          }
-        },
-        {
-          eventVideoUrl: {
-            $eq: ''
-          }
-        }
-      ]
-    }
-  }
-  const allPaths = await getPathsValues('events', params)
-  // Define an array of slugs to exclude
-  const excludedSlugs = ['clickhouse-workshop', 'clickhouse-fundamentals']
-  // Filter out the paths with the excluded slugs
-  const paths = allPaths.filter((path) => {
-    const slug = path.params.slug
-    return !excludedSlugs.includes(slug)
-  })
-
-  return {
-    paths,
-    fallback: 'blocking'
-  }
 }
 
 export default EventPage

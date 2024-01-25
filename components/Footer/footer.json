@@ -83,6 +83,12 @@
 			},
 			{
 				"id": 21,
+				"name": "Lexicon",
+				"href": "/lexicon",
+				"target": "_self"
+			},
+			{
+				"id": 21,
 				"name": "Site map",
 				"href": "/sitemap",
 				"target": "_self"

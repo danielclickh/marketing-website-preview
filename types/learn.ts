@@ -1,6 +1,6 @@
 import { EventType } from './events'
-import { CommonProps } from './homepage'
+import { CommonProps, HomepageCustomerStories } from './homepage'
 
 export interface LearnProps extends CommonProps {
-  upcomingEvents: Array<EventType>
+  customerStories: HomepageCustomerStories
 }

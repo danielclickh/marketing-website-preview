@@ -6,13 +6,22 @@ const siteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL ?? 'https://clickhouse.com'
 
 function SeoContainer({
   image,
+  imageUrl,
   title = '',
   description = '',
   type,
   siteName,
   path
 }: SeoMetadata) {
-  const imageUrl = image?.[0]?.url || '/images/social_share.png'
+
+  // Default social image
+  let socialImageUrl = `${siteUrl}/images/social_share.png`
+
+  // If image is passed as an object
+  if (image?.[0]?.url) socialImageUrl = siteUrl + image?.[0]?.url;
+
+  // If the image is passed as a string
+  if (imageUrl) socialImageUrl = imageUrl;
 
   const canonicalUrl =
     path === '/blog/forecasting-using-clickhouse'
@@ -38,7 +47,7 @@ function SeoContainer({
       )}
       {type && <meta property='og:type' content={type} />}
       {siteName && <meta name='og:site_name' content={siteName} />}
-      <meta property='og:image' content={siteUrl + imageUrl} />
+      <meta property='og:image' content={socialImageUrl} />
 
       {/* Twitter */}
       <meta name='twitter:card' content='summary_large_image' />
@@ -46,7 +55,7 @@ function SeoContainer({
       {description.length > 0 && (
         <meta name='twitter:description' content={description} />
       )}
-      <meta name='twitter:image' content={siteUrl + imageUrl} />
+      <meta name='twitter:image' content={socialImageUrl} />
     </Head>
   )
 }

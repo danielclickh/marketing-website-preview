@@ -87,16 +87,19 @@ export default function HomepageCustomerVideos({
     }
   }, [fullscreen])
 
+  console.log(videos.length)
+
   return (
     <>
-      <div className='flex flex-col gap-6 px-4 md:flex-row xl:gap-10 2xl:px-0'>
+      <div
+        className={`${
+          videos.length === 1 ? '' : 'md:grid-cols-2 lg:grid-cols-4 '
+        } grid grid-cols-1 gap-6 px-4 md:flex-row  xl:gap-10 2xl:px-0`}>
         {videos.map((video) => {
           return (
             <div
               key={video.videoId}
-              className={`${
-                fullWidth ? 'w-full' : 'xl:w-1/3'
-              }  homepage-video-${video.videoId}`}>
+              className={`w-full homepage-video-${video.videoId}`}>
               <div
                 onClick={(e) => onVideoClicked(video)}
                 className='group relative flex items-center overflow-hidden rounded-lg hover:cursor-pointer hover:shadow-md'>
