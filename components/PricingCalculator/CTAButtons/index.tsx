@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { CUIButton } from '../../ClickUI'
 import TooltipInfo from '../ui/Tooltip/tooltip'
-import { PricingData } from '../CalculatorTypesOptions'
+import { calculateComputeMargin, PricingData } from '../CalculatorTypesOptions'
 
 export default function CTAButtons({
   contactSales,
@@ -36,7 +36,7 @@ export default function CTAButtons({
   hours?: number
   minMemoryLabel?: string
   maxMemoryLabel?: string
-  pricingData?: PricingData
+  pricingData?: PricingData | undefined
   storageCompressed?: string
   storageUnit?: string
   storageHumanReadable?: number
@@ -339,7 +339,13 @@ export default function CTAButtons({
                     ${Number(computeCostMin.toFixed(0)).toLocaleString('en-US')}{' '}
                     for compute
                     <TooltipInfo
-                      content={`Compute cost = ${minMemoryLabel} * ${hours}h per day * 30 days per month\n\n1 compute unit = ${minMemoryLabel} = $${pricingData?.computeUnitPrice} / hour`}
+                      content={`Compute cost = ${minMemoryLabel} * ${hours}h per day * 30 days per month\n\n1 compute unit = ${minMemoryLabel} = $${
+                        pricingData &&
+                        calculateComputeMargin(
+                          tier,
+                          pricingData?.computeUnitPrice
+                        )
+                      } / hour`}
                     />
                   </>
                 </p>
@@ -380,7 +386,11 @@ export default function CTAButtons({
                           } compute unit${
                             minMemory && minMemory / 24 > 1 ? 's' : ''
                           } * ${hours}h per day * 30 days\n\n1 compute unit = ${minMemoryLabel} = $${
-                            pricingData?.computeUnitPrice
+                            pricingData &&
+                            calculateComputeMargin(
+                              tier,
+                              pricingData?.computeUnitPrice
+                            )
                           } / hour`}
                         />
                       </p>
@@ -419,7 +429,11 @@ export default function CTAButtons({
                         } compute unit${
                           maxMemory && maxMemory / 24 > 1 ? 's' : ''
                         }  * ${hours}h per day * 30 days\n\n1 compute unit = ${maxMemoryLabel} = $${
-                          pricingData?.computeUnitPrice
+                          pricingData &&
+                          calculateComputeMargin(
+                            tier,
+                            pricingData?.computeUnitPrice
+                          )
                         } / hour`}
                       />
                     </>

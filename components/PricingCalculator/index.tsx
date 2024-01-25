@@ -456,7 +456,6 @@ export const PricingCalculator: React.FC<{
         if (matchingPlan.aggregationId === config.computeAggregationId) {
           // Get the computeUnitPrice for this matching plan
           computeUnitPrice = matchingPlan.pricingBands[0].unitPrice
-          computeUnitPrice = calculateComputeMargin(tier, computeUnitPrice)
         }
 
         // Check if the aggregationId matches config.storageAggregationId
