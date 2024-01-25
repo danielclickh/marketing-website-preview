@@ -3,6 +3,7 @@ import * as Tooltip from '@radix-ui/react-tooltip'
 import React, { useRef, useState } from 'react'
 import { usePricing } from './PricingContext'
 import { calculateStorageCost } from '../../lib/m3ter/costs'
+import { calculateComputeMargin } from '../PricingCalculator/CalculatorTypesOptions'
 function InfoTooltip({ content }: { content: string }) {
   const triggerRef = useRef(null)
   return (
@@ -67,11 +68,13 @@ function Info({ unit, content }: { unit: string; content: string }) {
 function ShowPricing({
   isFirst,
   storagePricing,
-  computePricing
+  computePricing,
+  tier
 }: {
   isFirst: boolean
   storagePricing: number | undefined
-  computePricing: number | undefined
+  computePricing: number
+  tier: string
 }) {
   const { selectedRegion } = usePricing()
 
@@ -103,7 +106,7 @@ function ShowPricing({
           <div className='w-1/2 text-left'>
             <h5 className='mb-2 text-sm font-bold'>Compute</h5>
             <div className='whitespace-nowrap text-2.75xl font-semibold'>
-              ${computePricing}
+              ${calculateComputeMargin(tier, computePricing)}
             </div>
             <div className='max-w-[120px]'>
               <Info

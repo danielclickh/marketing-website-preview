@@ -23,7 +23,8 @@ import {
   PricingData,
   providerOptions,
   tierOptions,
-  storageUnitOptionsTiered
+  storageUnitOptionsTiered,
+  calculateComputeMargin
 } from './CalculatorTypesOptions'
 import styles from './CostCalculator.module.scss'
 import CTAButtons from './CTAButtons'
@@ -455,6 +456,7 @@ export const PricingCalculator: React.FC<{
         if (matchingPlan.aggregationId === config.computeAggregationId) {
           // Get the computeUnitPrice for this matching plan
           computeUnitPrice = matchingPlan.pricingBands[0].unitPrice
+          computeUnitPrice = calculateComputeMargin(tier, computeUnitPrice)
         }
 
         // Check if the aggregationId matches config.storageAggregationId

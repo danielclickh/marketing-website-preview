@@ -131,3 +131,10 @@ export const storageUnitOptionsTiered = [
     tier: ['Production']
   }
 ]
+
+export function calculateComputeMargin(tier: string, computePrice: number) {
+  if (tier === 'Development') {
+    return computePrice * 60 * 2
+  }
+  return computePrice * 60 * 3
+}

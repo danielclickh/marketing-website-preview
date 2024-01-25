@@ -1,23 +1,20 @@
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
 import React from 'react'
+import { CUIButton } from '../../components/ClickUI'
+import Layout from '../../components/Layout'
 import Markdown from '../../components/Markdown'
-import PricingOptions from '../../components/PricingOptions'
+import { PricingCalculator } from '../../components/PricingCalculator'
 import { SuiTitle } from '../../components/sui'
 import { findAll, findOne } from '../../lib/api/strapi'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
 import {
   PricingData,
   PricingPageProps,
   PricingPlanData,
   RegionPricing
 } from '../../types/pricing'
-import styles from './Pricing.module.scss'
-import { GetStaticProps } from 'next'
-import Layout from '../../components/Layout'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { CUIButton } from '../../components/ClickUI'
-import HRSeparator from '../../components/HRSeparator'
 import philosophy from './philosophy.json'
-import Image from 'next/image'
-import { PricingCalculator } from '../../components/PricingCalculator'
 
 export const getStaticProps: GetStaticProps<PricingPageProps> =
   async function getStaticProps() {

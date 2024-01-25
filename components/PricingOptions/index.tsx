@@ -282,6 +282,7 @@ function PricingOptions({
                       <div className='p-6 pt-0'>
                         {index !== plans.length - 1 && (
                           <ShowPricing
+                            tier={plan.name}
                             storagePricing={
                               plan.name === 'Development'
                                 ? storageCostDev
