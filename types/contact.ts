@@ -9,8 +9,7 @@ export interface ContactFormProps {
   messageLabel: string
   submitButtonLabel: string
   thankYouMessage: string
-  disclaimer: string,
-
+  disclaimer: string
   onSuccess?: Function
 }
 

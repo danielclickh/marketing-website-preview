@@ -103,7 +103,6 @@ export default function SnowflakePage({
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
-  console.log(comparison)
   const {
     Title: comparisonTitle,
     HeroDescription: heroDescription,

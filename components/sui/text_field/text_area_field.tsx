@@ -25,7 +25,7 @@ export default function SuiTextFieldArea({
         {label && (
           <label
             htmlFor={htmlFor}
-            className='block text-xs font-medium text-neutral-300 pb-1'>
+            className='block pb-1 text-xs font-medium text-neutral-300'>
             {label}
             {!required && <span className='text-c4'></span>}
           </label>
@@ -33,13 +33,13 @@ export default function SuiTextFieldArea({
         <div className='mt-1'>
           <textarea
             id={htmlFor}
-            className={`h-32 ${styles.textCommon}`}
+            className={`h-64 ${styles.textCommon}`}
             required={required}
             {...props}></textarea>
         </div>
       </div>
       <p
-        className={`mt-1 transition-opacity ease-in-out text-red-500 text-xs min-h-[1rem] ${
+        className={`mt-1 min-h-[1rem] text-xs text-red-500 transition-opacity ease-in-out ${
           error.length == 0 ? 'opacity-0' : 'opacity-100'
         }`}>
         {error}

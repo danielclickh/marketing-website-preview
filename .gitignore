@@ -1,5 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
+pricingFile.json
+githubStars.json
 # dependencies
 /node_modules
 /.pnp
@@ -43,3 +44,4 @@ public/sitemap2.xml
 public/rss.xml
 .env
 .env.staging
+public/pricingFile.json

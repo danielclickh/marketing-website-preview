@@ -1,4 +1,6 @@
-import React, { FocusEvent, FormEvent, useRef, useState } from 'react'
+import { FocusEvent, FormEvent, useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/router'
+
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import { ContactFormProps } from '../../types/contact'
@@ -19,7 +21,6 @@ function ContactForm({
   messageLabel,
   submitButtonLabel,
   thankYouMessage,
-
   onSuccess
 }: ContactFormProps) {
   const { openSnackBar } = useSnackbar()
@@ -33,6 +34,35 @@ function ContactForm({
   const [formProcessing, setFormProcessing] = useState(false)
   const [submissionSuccessful, setSubmissionSuccessful] = useState(false)
 
+  const router = useRouter()
+  useEffect(() => {
+    if (router.query.custom) {
+      let customPricingQuoteObj = { ...router.query }
+
+      let memory = '16GiB'
+      if (
+        customPricingQuoteObj.minMemory &&
+        customPricingQuoteObj.maxMemory &&
+        customPricingQuoteObj.tier
+      ) {
+        if (customPricingQuoteObj.tier === 'Production') {
+          memory = `${customPricingQuoteObj.minMemory}GiB - ${customPricingQuoteObj.maxMemory}GiB`
+        }
+      }
+      setUseCase(`
+
+=== Custom pricing request ===
+Service type: ${customPricingQuoteObj.tier}
+Provider: ${customPricingQuoteObj.provider}
+Region: ${customPricingQuoteObj.region}
+Active hours: ${customPricingQuoteObj.hours}
+Data volume: ${customPricingQuoteObj.storageSize}GB
+Data compressed: ${customPricingQuoteObj.storageCompressed}
+Compute: ${memory}
+`)
+    }
+  }, [router.query])
+
   const onChange = (
     e:
       | FormEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -40,6 +70,7 @@ function ContactForm({
   ) => {
     const value = (e.target as any).value ?? ''
     const name = (e.target as any).name
+
     switch (name) {
       case 'firstName':
         setFirstName(value)
@@ -126,6 +157,7 @@ function ContactForm({
 
     submitRef.current = false
   }
+
   return (
     <>
       <div className={submissionSuccessful ? 'hidden' : ''}>

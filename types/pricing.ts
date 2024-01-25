@@ -1,4 +1,3 @@
-import { ReactNode } from 'react'
 import { SeoMetadata, StrapiImageType } from '../lib/api/strapi/types'
 import { CommonProps } from './homepage'
 

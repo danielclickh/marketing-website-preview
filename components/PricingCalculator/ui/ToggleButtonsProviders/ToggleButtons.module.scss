@@ -1,0 +1,12 @@
+.buttons {
+  @apply flex gap-5;
+
+  button {
+    @apply transition-all  text-sm font-medium rounded-[4px] border border-neutral-700  hover:bg-neutral-725 hover:bg-opacity-80 hover:border-primary-500 hover:shadow-xl bg-neutral-750 px-4 py-2 ;
+
+    &.selected {
+     @apply border-primary-300 border;
+    }
+  }
+}
+
