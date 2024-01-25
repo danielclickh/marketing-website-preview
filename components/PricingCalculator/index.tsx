@@ -150,7 +150,6 @@ export const PricingCalculator: React.FC<{
     //ga event
     if (isMounted.current) {
       let timeoutId = setTimeout(() => {
-        console.log('Changed innit', new Date())
         if (typeof window !== 'undefined' && window.dataLayer) {
           window.dataLayer.push({
             event: 'pricingCalculatorNewConfiguration',

@@ -87,8 +87,6 @@ export default function HomepageCustomerVideos({
     }
   }, [fullscreen])
 
-  console.log(videos.length)
-
   return (
     <>
       <div
