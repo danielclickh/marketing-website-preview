@@ -73,7 +73,7 @@ function ShowPricing({
 }: {
   isFirst: boolean
   storagePricing: number | undefined
-  computePricing: number
+  computePricing: number | undefined
   tier: string
 }) {
   const { selectedRegion } = usePricing()
@@ -106,7 +106,7 @@ function ShowPricing({
           <div className='w-1/2 text-left'>
             <h5 className='mb-2 text-sm font-bold'>Compute</h5>
             <div className='whitespace-nowrap text-2.75xl font-semibold'>
-              ${calculateComputeMargin(tier, computePricing)}
+              ${computePricing && calculateComputeMargin(tier, computePricing)}
             </div>
             <div className='max-w-[120px]'>
               <Info
