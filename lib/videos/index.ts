@@ -4,6 +4,17 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'importing-numpy-array-files-into-clickhouse',
+      title: 'Importing Numpy array files into ClickHouse',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we'll learn how to import Numpy array files into ClickHouse. We'll be using the LAION multi modal dataset, which provides Numpy files for text and image embeddings, as well as metadata in Parquet format. We'll join the data from these files together using the recently added PASTE JOIN.",
+      thumbnail: 'https://img.youtube.com/vi/_7mpIeig8Hw/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/_7mpIeig8Hw?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
       slug: 'what-if-energy-cost-analysis-with-streamlit-and-clickhouse',
       title: 'What-If energy cost analysis with Streamlit and Clickhouse',
       subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
