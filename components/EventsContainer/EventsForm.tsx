@@ -9,8 +9,6 @@ import SocialButton from '../SocialButton'
 import Link from 'next/link'
 
 function EventsForm({
-  submitted,
-  onSubmit: onSubmitProp,
   featuredImage,
   form
 }: EventsFormProps) {
@@ -42,7 +40,7 @@ function EventsForm({
 
         {!formSuccess && (
           <MarketoForm
-            formId={'1013'}
+            formId={'1127'}
             onLoad={() => setFormLoaded(true)}
             onSuccess={() => {
               setFormSuccess(true)
