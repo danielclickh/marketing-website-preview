@@ -1,5 +1,4 @@
-import { Main, Head, NextScript, Html } from 'next/document'
-import { useEffect } from 'react'
+import { Main, NextScript } from 'next/document'
 
 export default function BaseLayout() {
   return (
