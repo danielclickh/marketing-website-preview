@@ -18,7 +18,7 @@ export interface MarketoFormObject {
 }
 
 export type MarketoCallback = (marketoFormObject: MarketoFormObject) => void
-Z
+
 /**
  * @see https://developers.marketo.com/javascript-api/forms/api-reference/
  */
