@@ -34,7 +34,8 @@ export const getStaticProps: GetStaticProps<LearnProps> =
           title: 'ClickHouse Certification | ClickHouse',
           description: '',
           path: '/learn/certification',
-          imageUrl: '/images/clickhouse-certification-og.png'
+          imageUrl:
+            'https://clickhouse.com/images/clickhouse-certification-og.png'
         },
         ...data,
         ...commonProps
