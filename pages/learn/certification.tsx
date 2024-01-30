@@ -33,7 +33,8 @@ export const getStaticProps: GetStaticProps<LearnProps> =
         seo: {
           title: 'ClickHouse Certification | ClickHouse',
           description: '',
-          path: '/learn/certification'
+          path: '/learn/certification',
+          imageUrl: '/images/clickhouse-certification-og.png'
         },
         ...data,
         ...commonProps

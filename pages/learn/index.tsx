@@ -37,7 +37,8 @@ export const getStaticProps: GetStaticProps<LearnProps> =
             'ClickHouse Training | How to Use ClickHouse | Database Tutorial',
           description:
             'Master the art of data analysis with ClickHouse. Our seamless, easy to use database management platform can help you to unlock powerful insights. Try for free.',
-          path: '/learn'
+          path: '/learn',
+          imageUrl: '/images/clickhouse-learning-og.png'
         },
         ...data,
         ...commonProps
