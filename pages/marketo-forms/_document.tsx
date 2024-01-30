@@ -3,12 +3,9 @@ import { useEffect } from 'react'
 
 export default function BaseLayout() {
   return (
-    <Html>
-      <Head />
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
+    <body>
+      <Main />
+      <NextScript />
+    </body>
   )
 }
