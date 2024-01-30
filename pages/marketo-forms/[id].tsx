@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { MarketoFormObject, MarketoFormsApi } from './types'
+import { MarketoFormObject, MarketoFormsApi } from '../../types/marketo-form'
 import styles from './styles.module.scss'
 
 const BASE_URL = '//discover.clickhouse.com'
