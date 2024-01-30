@@ -47,6 +47,7 @@ export default function MarketoForm(props: MarketoFormProps) {
         {mountIframe &&<iframe
           src={resolveHref(router, `/marketo-forms/${props.formId}?iid=${encodeURIComponent(instanceId)}`)}
           height={iframeHeight < 24 ? 24 : iframeHeight}
-          className={`w-full !bg-transparent transition-opacity no-scrollbar ${formLoaded ? 'opacity-100' : 'opacity-0'}`} />}
+          scrolling="no"
+          className={`w-full !bg-transparent transition-opacity ${formLoaded ? 'opacity-100' : 'opacity-0'}`} />}
     </>
 }
