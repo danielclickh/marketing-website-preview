@@ -1,10 +1,16 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import styles from '../../components/MarketoForm/styles.module.scss'
-import { removeMarketoStyles } from '../../components/MarketoForm/useMarketo'
+import { MarketoFormObject, MarketoFormsApi } from './types'
+import styles from './styles.module.scss'
 
 const BASE_URL = '//discover.clickhouse.com'
 const MUNCHKIN_ID = '238-FPC-317'
+
+declare global {
+  interface Window {
+    MktoForms2: MarketoFormsApi
+  }
+}
 
 export default function Page() {
 
@@ -162,4 +168,36 @@ export default function Page() {
       </div>
     </>
   )
+}
+
+function removeMarketoStyles(marketoFormObject: MarketoFormObject) {
+
+  const jqueryElement = marketoFormObject.getFormElem()
+  const formElement = jqueryElement.get(0)
+
+  // Remove marketo <link> styles
+  const styleLinks = document.querySelectorAll('#mktoForms2ThemeStyle, #mktoForms2BaseStyle');
+  Array.from(styleLinks).forEach(el => el.remove());
+
+  if (formElement) {
+
+    // Remove fixed widths for improved responsiveness
+    const fixedWidths = formElement.querySelectorAll<HTMLElement>('.mktoHasWidth');
+    Array.from(fixedWidths).forEach(el => {
+      el.classList.remove('mktoHasWidth')
+      delete el.dataset.mktoFixedWidth
+      el.removeAttribute('data-mktoFixedWidth') // Just incase ¯\_(ツ)_/¯
+    })
+
+    // Remove form <style> elements
+    const scopedStyles = formElement.querySelectorAll('style');
+    Array.from(scopedStyles).forEach(el => el.remove());
+
+    // Remove inline style attributes
+    const inlineStyles = formElement.querySelectorAll('[style]');
+    Array.from(inlineStyles).forEach(el => el.removeAttribute('style'));
+
+    // Remove inline style from <form> element
+    formElement.removeAttribute('style');
+  }
 }
