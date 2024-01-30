@@ -90,9 +90,27 @@ export default function Page() {
       script.onload = () => (window.MktoForms2 ? setScriptLoaded(true) : null)
       document.body.appendChild(script)
 
+      // We have to do this because marketo does validation on different
+      // events but it doesn't trigger the `onValidation` hook
+      const catchInputEvents = (event: Event) => {
+        const target = event.target as HTMLInputElement;
+        if (['INPUT', 'SELECT', 'TEXTAREA'].includes(target.tagName)) {
+          setTimeout(sendResizeEvent, 100)
+        }
+      }
+
+      document.body.addEventListener('change', catchInputEvents)
+      document.body.addEventListener('input', catchInputEvents)
+      document.body.addEventListener('focus', catchInputEvents)
+      document.body.addEventListener('blur', catchInputEvents)
+
       // Clean up on unmount
       return () => {
         window.removeEventListener('resize', sendResizeEvent)
+        document.body.removeEventListener('change', catchInputEvents)
+        document.body.removeEventListener('input', catchInputEvents)
+        document.body.removeEventListener('focus', catchInputEvents)
+        document.body.removeEventListener('blur', catchInputEvents)
         script.remove()
       }
     }
