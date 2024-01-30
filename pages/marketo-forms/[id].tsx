@@ -99,18 +99,16 @@ export default function Page() {
         }
       }
 
-      document.body.addEventListener('change', catchInputEvents)
-      document.body.addEventListener('input', catchInputEvents)
-      document.body.addEventListener('focus', catchInputEvents)
-      document.body.addEventListener('blur', catchInputEvents)
+      document.body.addEventListener('change', catchInputEvents, true)
+      document.body.addEventListener('focus', catchInputEvents, true)
+      document.body.addEventListener('blur', catchInputEvents, true)
 
       // Clean up on unmount
       return () => {
         window.removeEventListener('resize', sendResizeEvent)
-        document.body.removeEventListener('change', catchInputEvents)
-        document.body.removeEventListener('input', catchInputEvents)
-        document.body.removeEventListener('focus', catchInputEvents)
-        document.body.removeEventListener('blur', catchInputEvents)
+        document.body.removeEventListener('change', catchInputEvents, true)
+        document.body.removeEventListener('focus', catchInputEvents, true)
+        document.body.removeEventListener('blur', catchInputEvents, true)
         script.remove()
       }
     }
