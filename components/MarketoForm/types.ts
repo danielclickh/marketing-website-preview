@@ -3,6 +3,6 @@ export interface MarketoFormProps {
     baseUrl?: string
     munchkinId?: string
 
-    onLoad?: () => {},
-    onSuccess?: (response: any, redirect: string) => void,
+    onLoad?: () => any,
+    onSuccess?: (response: any, redirect: string) => any,
 }

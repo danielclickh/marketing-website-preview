@@ -18,16 +18,7 @@ export interface MarketoFormObject {
 }
 
 export type MarketoCallback = (marketoFormObject: MarketoFormObject) => void
-
-export interface MarketoFormProps {
-  formId: string
-  baseUrl?: string
-  munchkinId?: string
-
-  onLoad?: () => any,
-  onSuccess?: (response: any, redirect: string) => any,
-}
-
+Z
 /**
  * @see https://developers.marketo.com/javascript-api/forms/api-reference/
  */
