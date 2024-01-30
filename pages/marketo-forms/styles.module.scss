@@ -7,6 +7,43 @@
       // "@apply space-y-5;" doesn't work because Marketo wraps hidden fields in a div producing extra spacing.
       // Spacing is added to the .mktoFormCol class
 
+      // Newsletter specific styles (Marketo ID 1122)
+      //
+      &#mktoForm_1122 {
+        @apply flex flex-row flex-nowrap items-stretch;
+        @apply rounded border border-neutral-725 bg-neutral-750 p-1;
+
+        .mktoFormRow {
+          @apply flex-grow;
+
+          .mktoFormCol {
+            @apply mb-0;
+
+            .mktoFieldWrap {
+              label.mktoLabel {
+                @apply hidden;
+              }
+
+              input:not([type="checkbox"]):not([type="radio"]),
+              textarea,
+              select {
+                @apply mt-0;
+                @apply border-0 bg-transparent;
+              }
+            }
+          }
+        }
+
+        .mktoButtonRow {
+          @apply flex-1;
+
+          button.mktoButton {
+            @apply w-auto px-3 h-full;
+            @apply rounded font-medium;
+          }
+        }
+      }
+
       // Resets
       //
       //
