@@ -163,18 +163,7 @@ export const PricingCalculator: React.FC<{
             storageCompressed: storageCompressed,
             minimumCompute: computeMinSize,
             maximumCompute: computeMaxSize,
-            pricingConfig: {
-              referrer: window.document.referrer,
-              tier: tier,
-              provider: provider,
-              region: region,
-              hours: hours,
-              storageVolume: storageSize,
-              storageUnit: storageUnit,
-              storageCompressed: storageCompressed,
-              minimumCompute: computeMinSize,
-              maximumCompute: computeMaxSize
-            }
+            url: window.location.href
           })
         }
       }, 5000)

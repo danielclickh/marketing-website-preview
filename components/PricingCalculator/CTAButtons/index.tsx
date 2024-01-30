@@ -88,20 +88,7 @@ export default function CTAButtons({
         storageUnit: storageUnit,
         storageCompressed: storageCompressed,
         minimumCompute: minMemory,
-        maximumCompute: maxMemory,
-        pricingConfig: {
-          url: urlToCopy,
-          referrer: window.document.referrer,
-          tier: tier,
-          provider: provider,
-          region: region,
-          hours: hours,
-          storageVolume: storageSize,
-          storageUnit: storageUnit,
-          storageCompressed: storageCompressed,
-          minimumCompute: minMemory,
-          maximumCompute: maxMemory
-        }
+        maximumCompute: maxMemory
       })
     }
   }
@@ -110,6 +97,7 @@ export default function CTAButtons({
     if (typeof window !== 'undefined' && window.dataLayer) {
       window.dataLayer.push({
         event: 'pricingCalculatorContactClick',
+        url: window.location.href,
         referrer: window.document.referrer,
         tier: tier,
         provider: provider,
@@ -119,19 +107,7 @@ export default function CTAButtons({
         storageUnit: storageUnit,
         storageCompressed: storageCompressed,
         minimumCompute: minMemory,
-        maximumCompute: maxMemory,
-        pricingConfig: {
-          referrer: window.document.referrer,
-          tier: tier,
-          provider: provider,
-          region: region,
-          hours: hours,
-          storageVolume: storageSize,
-          storageUnit: storageUnit,
-          storageCompressed: storageCompressed,
-          minimumCompute: minMemory,
-          maximumCompute: maxMemory
-        }
+        maximumCompute: maxMemory
       })
     }
     router.push({
@@ -176,18 +152,7 @@ export default function CTAButtons({
                   storageCompressed: storageCompressed,
                   minimumCompute: minMemory,
                   maximumCompute: maxMemory,
-                  pricingConfig: {
-                    referrer: window.document.referrer,
-                    tier: tier,
-                    provider: provider,
-                    region: region,
-                    hours: hours,
-                    storageVolume: storageSize,
-                    storageUnit: storageUnit,
-                    storageCompressed: storageCompressed,
-                    minimumCompute: minMemory,
-                    maximumCompute: maxMemory
-                  }
+                  url: window.location.href
                 })
               }
             }}
