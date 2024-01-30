@@ -19,7 +19,7 @@ function addMarketoFormsScript(
   document.body.appendChild(script)
 }
 
-function removeMarketoStyles(marketoFormObject: MarketoFormObject) {
+export function removeMarketoStyles(marketoFormObject: MarketoFormObject) {
 
   const jqueryElement = marketoFormObject.getFormElem()
   const formElement = jqueryElement.get(0)

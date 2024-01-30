@@ -3,6 +3,7 @@ import React from "react";
 export interface MarketoFormObject {
     getFormElem(): JQuery,
     onSubmit(callback: MarketoCallback): void,
+    onValidate(callback: MarketoCallback): void,
     onSuccess: (
         callback: (
             response: any,
@@ -25,8 +26,8 @@ export interface MarketoFormProps {
     baseUrl?: string
     munchkinId?: string
 
-    onLoad?: MarketoCallback,
-    onSuccess?: (marketoFormObject: MarketoFormObject, response: any, redirect: string) => void|false,
+    onLoad?: () => {},
+    onSuccess?: (response: any, redirect: string) => void,
 }
 
 /**
