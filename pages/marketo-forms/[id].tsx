@@ -25,6 +25,9 @@ export default function Page() {
   // Component ID passed from parent
   const instanceId = typeof router.query?.iid === 'string' ? router.query.iid : ''
 
+  // Referer URL passed from parent
+  const referer = typeof router.query?.referer === 'string' ? router.query.referer : ''
+
   // Prefix events so the parent can identify events from multiple forms iframes
   const instanceEventPrefix = ['mkto', instanceId, formId].filter(val => !!val).join('-')
 
@@ -37,7 +40,7 @@ export default function Page() {
       window.parent.postMessage({
         type: `${instanceEventPrefix}-${eventName}`,
         data: data
-      }, '*')
+      })
       return true
     }
 
@@ -130,7 +133,7 @@ export default function Page() {
           submittingForm.getValues = function() {
             const values = nativeGetValues()
             Object.defineProperty(values, '_mktoReferrer', {
-              value: document.location.href,
+              value: referer || window.location !== window.parent.location ? document.referrer : document.location.href,
               enumerable: true
             })
             return values
@@ -153,11 +156,6 @@ export default function Page() {
         // Remove marketo added styles
         removeMarketoStyles(marketoFormObject)
 
-        // Add our custom referer field
-        marketoFormObject.addHiddenFields({
-          formReferrer: window.location.toString()
-        })
-
         // Send validation event
         marketoFormObject.onValidate(() => setTimeout(sendResizeEvent, 100))
 
@@ -166,8 +164,8 @@ export default function Page() {
           sendEventToParent('formSuccess', {
             response,
             redirect
-          });
-          return false;
+          })
+          return false
         })
       })
 

@@ -1,12 +1,12 @@
 import { resolveHref } from 'next/dist/client/resolve-href'
 import { useRouter } from 'next/router'
-import { useEffect, useId, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { MarketoFormProps } from './types'
 
 export default function MarketoForm(props: MarketoFormProps) {
     const router = useRouter()
     const instanceId = useId()
-    const instanceEventPrefix = `mkto-${instanceId}-${props.formId}`;
+    const instanceEventPrefix = `mkto-${instanceId}-${props.formId}`
 
     const [mountIframe, setMountIframe] = useState(false)
     const [formLoaded, setFormLoaded] = useState(false)
@@ -14,7 +14,7 @@ export default function MarketoForm(props: MarketoFormProps) {
 
     useEffect(() => {
         window.addEventListener('message', ({ data }) => {
-            if ('type' in data && 'data' in data) {
+            if (typeof data === 'object' && 'type' in data && 'data' in data) {
                 const eventType = data.type
                 const eventData = data.data
 
