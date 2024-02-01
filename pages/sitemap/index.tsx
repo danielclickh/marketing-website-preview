@@ -456,7 +456,7 @@ function Sitemap({
                   return (
                     <li key={index} className='pb-2'>
                       <Link
-                        href={`/video/${video.slug}`}
+                        href={`/videos/${video.slug}`}
                         className='font text-primary-300 hover:underline'>
                         {video.title}
                       </Link>
