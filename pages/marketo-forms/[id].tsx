@@ -2,6 +2,12 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { MarketoFormObject, MarketoFormsApi } from '../../types/marketo-form'
 import styles from './styles.module.scss'
+import resolveConfig from 'tailwindcss/resolveConfig'
+import tailwindConfig from '../../tailwind.config'
+
+// Get the medium breakpoint from the tailwind config incase the value is changed
+const resolvedConfig = resolveConfig(tailwindConfig as any)
+const formBreakpoint = parseInt(resolvedConfig.theme?.screens?.md || '768px')
 
 const BASE_URL = '//discover.clickhouse.com'
 const MUNCHKIN_ID = '238-FPC-317'
@@ -43,11 +49,14 @@ export default function Page() {
   }
 
   function sendResizeEvent() {
-    sendEventToParent('resize', {
-      width: window.innerWidth,
-      height: window.innerHeight,
-      scrollHeight: document.documentElement.scrollHeight
-    })
+    // Timeout allows a repaint to happen before we get the values
+    setTimeout(() => {
+      sendEventToParent('resize', {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        scrollHeight: document.documentElement.scrollHeight
+      })
+    }, 100)
   }
 
   // 1. Watch for when router is ready
@@ -61,6 +70,7 @@ export default function Page() {
     // Make document transparent
     document.querySelector('html')?.classList.add('!bg-transparent', '!bg-none')
     document.querySelector('body')?.classList.add('!bg-transparent', '!bg-none')
+    document.querySelector('body main > .min-h-screen')?.classList.remove('min-h-screen')
 
     // Hide cookie banner
     const cookieBannerInterval = window.setInterval(() => {
@@ -79,8 +89,18 @@ export default function Page() {
     if (routerReady) {
 
       // Resize events
-      window.addEventListener('resize', sendResizeEvent)
-      sendResizeEvent()
+      const resize = () => {
+        if (formRef.current) {
+          if (window.parent.innerWidth > formBreakpoint) {
+            formRef.current.classList.add('allow-columns')
+          } else {
+            formRef.current.classList.remove('allow-mobile-columns')
+          }
+        }
+        sendResizeEvent()
+      }
+      window.addEventListener('resize', resize)
+      resize()
 
       // Add marketo script
       const script = document.createElement('script')
@@ -93,7 +113,7 @@ export default function Page() {
       const catchInputEvents = (event: Event) => {
         const target = event.target as HTMLInputElement;
         if (['INPUT', 'SELECT', 'TEXTAREA'].includes(target.tagName)) {
-          setTimeout(sendResizeEvent, 100)
+          sendResizeEvent()
         }
       }
 
@@ -103,7 +123,7 @@ export default function Page() {
 
       // Clean up on unmount
       return () => {
-        window.removeEventListener('resize', sendResizeEvent)
+        window.removeEventListener('resize', resize)
         document.body.removeEventListener('change', catchInputEvents, true)
         document.body.removeEventListener('focus', catchInputEvents, true)
         document.body.removeEventListener('blur', catchInputEvents, true)
@@ -146,13 +166,13 @@ export default function Page() {
 
         // Send form loaded event
         sendEventToParent('formLoaded')
-        setTimeout(sendResizeEvent, 100)
+        sendResizeEvent()
 
         // Remove marketo added styles
         removeMarketoStyles(marketoFormObject)
 
         // Send validation event
-        marketoFormObject.onValidate(() => setTimeout(sendResizeEvent, 100))
+        marketoFormObject.onValidate(() => sendResizeEvent())
 
         // Prevent redirection
         marketoFormObject.onSuccess((response, redirect) => {

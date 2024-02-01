@@ -87,6 +87,18 @@
         }
       }
 
+      // By default, on smaller screens we break columns onto new lines.
+      // Adding this class to the will disable this behaviour.
+      &.allow-columns {
+        .mktoFormRow, .mktoButtonRow {
+          @apply gap-8;
+
+          .mktoFormCol {
+            @apply basis-0;
+          }
+        }
+      }
+
       // Field sets
       //
       //
