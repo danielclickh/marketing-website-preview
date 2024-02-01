@@ -13,7 +13,12 @@
         @apply flex flex-row flex-nowrap items-stretch;
         @apply rounded border border-neutral-725 bg-neutral-750 p-1;
 
-        .mktoFormRow {
+        // Hides hidden fields
+        .mktoFormRow:not(:first-child) {
+          @apply hidden;
+        }
+
+        .mktoFormRow:first-child {
           @apply flex-grow w-full self-center;
 
           .mktoFormCol {
