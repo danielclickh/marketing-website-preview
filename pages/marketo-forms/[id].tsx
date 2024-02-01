@@ -2,12 +2,6 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { MarketoFormObject, MarketoFormsApi } from '../../types/marketo-form'
 import styles from './styles.module.scss'
-import resolveConfig from 'tailwindcss/resolveConfig'
-import tailwindConfig from '../../tailwind.config'
-
-// Get the medium breakpoint from the tailwind config incase the value is changed
-const resolvedConfig = resolveConfig(tailwindConfig as any)
-const formBreakpoint = parseInt(resolvedConfig.theme?.screens?.md || '768px')
 
 const BASE_URL = '//discover.clickhouse.com'
 const MUNCHKIN_ID = '238-FPC-317'
@@ -91,7 +85,7 @@ export default function Page() {
       // Resize events
       const resize = () => {
         if (formRef.current) {
-          if (window.parent.innerWidth > formBreakpoint) {
+          if (window.parent.innerWidth > 768) {
             formRef.current.classList.add('allow-columns')
           } else {
             formRef.current.classList.remove('allow-mobile-columns')
