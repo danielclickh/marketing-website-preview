@@ -72,22 +72,22 @@ export default function ContactPage({
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 pt-14 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
               <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
 
-                {!formSuccess && <MarketoForm formId='1043' onLoad={() => setFormLoaded(true)} onSuccess={() => {
-                  setFormSuccess(true)
+                {!formSuccess && <MarketoForm
+                  formId='1043'
+                  disclaimer={contactForm.disclaimer}
+                  onLoad={() => setFormLoaded(true)}
+                  onSuccess={() => {
+                    setFormSuccess(true)
 
-                  // Delay needed to allow the ref to update before scrolling
-                  setTimeout(() => {
-                    formSuccessRef.current?.scrollIntoView({
-                      behavior: 'smooth'
-                    })
-                  }, 10);
+                    // Delay needed to allow the ref to update before scrolling
+                    setTimeout(() => {
+                      formSuccessRef.current?.scrollIntoView({
+                        behavior: 'smooth'
+                      })
+                    }, 10);
 
-                  return false // Stops page from reloading
-                }} />}
-
-                {formLoaded && !formSuccess && <div className='disclaimer-text text-center text-sm font-medium text-neutral-200'>
-                  <Markdown>{contactForm.disclaimer}</Markdown>
-                </div>}
+                    return false // Stops page from reloading
+                  }} />}
 
                 {!formLoaded && <div className='text-center'>
                   Loading form...

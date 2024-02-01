@@ -91,21 +91,6 @@ function EventsForm({
             </div>
           </div>
         )}
-
-        {formLoaded && (
-          <div className='disclaimer-text mt-8 text-sm font-medium text-neutral-200'>
-            <div className='rich_content '>
-              <p>
-                By registering, you acknowledge that ClickHouse will process your
-                personal information in accordance with our{' '}
-                <Link href='/legal/privacy-policy' target='_blank'>
-                  Privacy Policy
-                </Link>
-                .
-              </p>
-            </div>
-          </div>
-        )}
       </SuiPanel>
     </div>
   )

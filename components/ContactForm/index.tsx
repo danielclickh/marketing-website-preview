@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
-import Markdown from '../Markdown'
 import MarketoForm from '../MarketoForm'
 
 function ContactForm() {
@@ -27,16 +26,6 @@ function ContactForm() {
             return false // Stops page from reloading
           }}
         />
-      )}
-
-      {formLoaded && !formSuccess && (
-        <div className='disclaimer-text mt-8 text-center text-sm font-medium text-neutral-200'>
-          <Markdown>
-            By registering, you acknowledge that ClickHouse will process
-            your personal information in accordance with our [Privacy
-            Policy](/legal/privacy-policy).
-          </Markdown>
-        </div>
       )}
 
       {!formLoaded && <div className='text-center'>Loading form...</div>}

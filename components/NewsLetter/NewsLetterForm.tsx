@@ -13,6 +13,7 @@ function NewsLetterForm() {
       {!formSuccess && (
         <MarketoForm
           formId={'1122'}
+          disclaimer={false}
           onLoad={() => setFormLoaded(true)}
           onSuccess={() => {
             setFormSuccess(true)

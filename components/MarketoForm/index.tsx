@@ -1,15 +1,30 @@
 import { resolveHref } from 'next/dist/client/resolve-href'
 import { useRouter } from 'next/router'
-import { useEffect, useId, useRef, useState } from 'react'
-import { MarketoFormProps } from './types'
+import { useEffect, useId, useState } from 'react'
+import Markdown from '../Markdown'
 
-export default function MarketoForm(props: MarketoFormProps) {
+type MarketoFormProps = {
+    formId: string,
+    disclaimer?: string|false,
+
+    // Callbacks
+    onLoad?: () => any,
+    onSuccess?: (response: any, redirect: string) => any,
+}
+
+export default function MarketoForm({
+  formId,
+  disclaimer = 'By registering, you acknowledge that ClickHouse will process your personal information in accordance with our [Privacy Policy](/legal/privacy-policy).',
+  onLoad,
+  onSuccess
+}: MarketoFormProps) {
     const router = useRouter()
     const instanceId = useId()
-    const instanceEventPrefix = `mkto-${instanceId}-${props.formId}`
+    const instanceEventPrefix = `mkto-${instanceId}-${formId}`
 
     const [mountIframe, setMountIframe] = useState(false)
     const [formLoaded, setFormLoaded] = useState(false)
+    const [formSuccess, setFormSuccess] = useState(false)
     const [iframeHeight, setIframeHeight] = useState(24)
 
     useEffect(() => {
@@ -26,13 +41,14 @@ export default function MarketoForm(props: MarketoFormProps) {
                         break
                     case `${instanceEventPrefix}-formLoaded`:
                         setFormLoaded(true)
-                        if (typeof props.onLoad === 'function') {
-                            props.onLoad()
+                        if (typeof onLoad === 'function') {
+                            onLoad()
                         }
                         break
                     case `${instanceEventPrefix}-formSuccess`:
-                        if (typeof props.onSuccess === 'function') {
-                            props.onSuccess(eventData?.response, eventData?.redirect)
+                        setFormSuccess(true)
+                        if (typeof onSuccess === 'function') {
+                            onSuccess(eventData?.response, eventData?.redirect)
                         }
                         break
                 }
@@ -45,9 +61,13 @@ export default function MarketoForm(props: MarketoFormProps) {
 
     return <>
         {mountIframe &&<iframe
-          src={resolveHref(router, `/marketo-forms/${props.formId}?iid=${encodeURIComponent(instanceId)}`)}
+          src={resolveHref(router, `/marketo-forms/${formId}?iid=${encodeURIComponent(instanceId)}`)}
           height={iframeHeight < 24 ? 24 : iframeHeight}
-          scrolling="no"
+          scrolling="no" // Deprecated but still hides scrollbars
           className={`w-full !bg-transparent transition-opacity ${formLoaded ? 'opacity-100' : 'opacity-0'}`} />}
+
+        {formLoaded && !formSuccess && disclaimer && disclaimer.length && <div className='disclaimer-text text-center text-sm font-medium text-neutral-200 mt-3'>
+            <Markdown>{disclaimer}</Markdown>
+        </div>}
     </>
 }
