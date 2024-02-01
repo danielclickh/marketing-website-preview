@@ -14,7 +14,7 @@
         @apply rounded border border-neutral-725 bg-neutral-750 p-1;
 
         .mktoFormRow {
-          @apply flex-grow w-full;
+          @apply flex-grow w-full self-center;
 
           .mktoFormCol {
             @apply mb-0;
@@ -27,8 +27,12 @@
               input:not([type="checkbox"]):not([type="radio"]),
               textarea,
               select {
-                @apply mt-0;
-                @apply border-0 bg-transparent;
+                @apply mt-0 pl-2;
+                @apply border-0 bg-transparent text-sm leading-none;
+
+                &::placeholder {
+                  @apply text-slate-400;
+                }
               }
             }
           }
@@ -38,7 +42,7 @@
           @apply flex-1;
 
           button.mktoButton {
-            @apply w-auto px-3 h-full;
+            @apply w-auto px-4 h-full whitespace-nowrap;
             @apply rounded font-medium;
           }
         }
