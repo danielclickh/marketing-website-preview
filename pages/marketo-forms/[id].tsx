@@ -14,11 +14,6 @@ declare global {
 
 export default function Page() {
 
-  // Stop nextjs throwing a fit
-  // @link https://stackoverflow.com/a/66580539/3804924
-  const canUseDOM = typeof window !== 'undefined';
-  const useIsomorphicLayoutEffect = canUseDOM ? useLayoutEffect : useEffect
-
   const router = useRouter()
   const formId = typeof router.query?.id === 'string' ? router.query.id : ''
 

@@ -90,7 +90,9 @@
       // Field sets
       //
       //
-      legend {@apply mb-4 pb-2 border-b border-b-primary-300/30 w-full}
+      legend {
+        @apply mb-4 pb-2 border-b border-b-primary-300/30 w-full;
+      }
 
       // Fields
       //
