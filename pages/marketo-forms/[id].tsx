@@ -85,6 +85,7 @@ export default function Page() {
       // Resize events
       const resize = () => {
         if (formRef.current) {
+          console.log(window.parent.innerWidth);
           if (window.parent.innerWidth > 768) {
             formRef.current.classList.add('allow-columns')
           } else {
