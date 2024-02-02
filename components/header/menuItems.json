@@ -230,8 +230,28 @@
 	{
 		"id": 5,
 		"name": "Pricing",
-		"href": "/pricing",
-		"target": "_self"
+		"menuItems": [
+			{
+				"id": 1,
+				"name": "Overview",
+				"href": "/pricing",
+				"target": "_self",
+				"menuItems": [
+					{
+						"id": 1,
+						"name": "Estimate your cost",
+						"href": "/pricing?loc=sub-menu#pricing-calculator",
+						"target": "_self"
+					},
+					{
+						"id": 2,
+						"name": "Dedicated services",
+						"href": "/pricing/contact?loc=menu",
+						"target": "_self"
+					}
+				]
+			}
+		]
 	},
 	{
 		"id": 6,
