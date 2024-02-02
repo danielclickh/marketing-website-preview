@@ -233,7 +233,7 @@
 		"menuItems": [
 			{
 				"id": 1,
-				"name": "Overview",
+				"name": "ClickHouse Cloud Pricing",
 				"href": "/pricing",
 				"target": "_self",
 				"menuItems": [
