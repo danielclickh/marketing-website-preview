@@ -219,7 +219,7 @@ function PricingOptions({
               onChange={updateRegionParam}
             />
             <Link
-              href='/pricing#pricing-calculator'
+              href='#pricing-calculator'
               className='mt-4 block w-full text-center text-sm'>
               Estimate your monthly cost ↓
             </Link>
