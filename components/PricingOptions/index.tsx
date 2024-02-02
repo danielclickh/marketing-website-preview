@@ -1,5 +1,6 @@
 import { MinusIcon } from '@heroicons/react/outline'
 import { CheckIcon } from '@heroicons/react/solid'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
 import { slugify } from '../../lib/utils/strings'
@@ -217,6 +218,11 @@ function PricingOptions({
               regionList={regionList}
               onChange={updateRegionParam}
             />
+            <Link
+              href='/pricing#pricing-calculator'
+              className='mt-4 block w-full text-center text-sm'>
+              Estimate your monthly cost ↓
+            </Link>
           </div>
         ) : (
           <PricingSelector
