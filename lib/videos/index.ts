@@ -23,40 +23,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/xKN9FoQYqWo/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/xKN9FoQYqWo?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['User Stories']
-    },
-    {
-      slug: 'clearbit-user-story',
-      title: 'ClickHouse & Clearbit',
-      subTitle: 'Harlow Ward\nCo-founder and CTO, Clearbit',
-      description:
-        '"There is that feeling of new tech where everything just feels like it\'s going right."',
-      thumbnail: 'https://img.youtube.com/vi/oygw8bAvhAY/maxresdefault.jpg',
-      embed:
-        '<iframe src="https://www.youtube-nocookie.com/embed/oygw8bAvhAY?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['User Stories']
-    },
-    {
-      slug: 'vantage-user-story',
-      title: 'ClickHouse & Vantage',
-      subTitle: 'Brooke McKim\nCo-founder and CTO, Vantage',
-      description:
-        '"By moving over to ClickHouse we were basically able to cut that (Redshift) bill in half."',
-      thumbnail: 'https://img.youtube.com/vi/V14L4NlqSY8/maxresdefault.jpg',
-      embed:
-        '<iframe src="https://www.youtube-nocookie.com/embed/V14L4NlqSY8?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['User Stories']
-    },
-    {
-      slug: 'statsig-user-story',
-      title: 'ClickHouse & Statsig',
-      subTitle: 'Jason Wang\nSoftware Engineer, Statsig',
-      description:
-        '"We wanted something not only just simple to use, but also simple to manage."',
-      thumbnail: 'https://img.youtube.com/vi/LlSovwS_oQg/maxresdefault.jpg',
-      embed:
-        '<iframe src="https://www.youtube-nocookie.com/embed/LlSovwS_oQg?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['User Stories']
+      categories: ['User Stories', 'ClickHouse Cloud']
     },
     {
       slug: 'importing-numpy-array-files-into-clickhouse',
@@ -415,7 +382,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/8FUfyvoqDTg/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/8FUfyvoqDTg?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['ClickHouse Cloud']
+      categories: ['ClickHouse Cloud', 'User Stories']
     },
     {
       slug: 'clearbit',
@@ -427,7 +394,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/3mS-RSKfGWQ/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/3mS-RSKfGWQ?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['ClickHouse Cloud']
+      categories: ['ClickHouse Cloud', 'User Stories']
     },
     {
       slug: 'statsig',
@@ -439,7 +406,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/6V_66oiln00/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/6V_66oiln00?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['ClickHouse Cloud']
+      categories: ['ClickHouse Cloud', 'User Stories']
     },
     {
       slug: 'rebuilding-segmentation-with-clickhouse',
