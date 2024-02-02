@@ -4,6 +4,61 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'querying-archive-files-with-clickhouse',
+      title: 'Querying archive files with ClickHouse',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        'In this video, we’ll learn how to query archive files directly using ClickHouse. We’ll start by learning about the ‘One’ input format that returns a list of files that match a glob expression on a ZIP file. We then show how to describe and ingest different CSV files into ClickHouse, before joining the datasets together. And along the way we learn how to deal with inconsistencies in the CSV data.',
+      thumbnail: 'https://img.youtube.com/vi/CiKfRMAhs3M/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/CiKfRMAhs3M?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
+      slug: 'lyft-user-story',
+      title: 'ClickHouse & Lyft',
+      subTitle: 'Ritesh Varyani\nSenior Software Engineer, Lyft',
+      description:
+        '"ClickHouse has been great for us. It has solved all the use cases we have thrown at it"',
+      thumbnail: 'https://img.youtube.com/vi/xKN9FoQYqWo/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/xKN9FoQYqWo?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User Stories']
+    },
+    {
+      slug: 'clearbit-user-story',
+      title: 'ClickHouse & Clearbit',
+      subTitle: 'Harlow Ward\nCo-founder and CTO, Clearbit',
+      description:
+        '"There is that feeling of new tech where everything just feels like it\'s going right."',
+      thumbnail: 'https://img.youtube.com/vi/oygw8bAvhAY/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/oygw8bAvhAY?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User Stories']
+    },
+    {
+      slug: 'vantage-user-story',
+      title: 'ClickHouse & Vantage',
+      subTitle: 'Brooke McKim\nCo-founder and CTO, Vantage',
+      description:
+        '"By moving over to ClickHouse we were basically able to cut that (Redshift) bill in half."',
+      thumbnail: 'https://img.youtube.com/vi/V14L4NlqSY8/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/V14L4NlqSY8?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User Stories']
+    },
+    {
+      slug: 'statsig-user-story',
+      title: 'ClickHouse & Statsig',
+      subTitle: 'Jason Wang\nSoftware Engineer, Statsig',
+      description:
+        '"We wanted something not only just simple to use, but also simple to manage."',
+      thumbnail: 'https://img.youtube.com/vi/LlSovwS_oQg/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/LlSovwS_oQg?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User Stories']
+    },
+    {
       slug: 'importing-numpy-array-files-into-clickhouse',
       title: 'Importing Numpy array files into ClickHouse',
       subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
