@@ -220,7 +220,18 @@ function PricingOptions({
             />
             <Link
               href='#pricing-calculator'
-              className='mt-4 block w-full text-center text-sm'>
+              onClick={(e) => {
+                const calculatorElement =
+                  document.getElementById('pricing-calculator')
+                if (calculatorElement) {
+                  e.preventDefault()
+                  calculatorElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                  })
+                }
+              }}
+              className='mt-4 flex h-10 items-center justify-center gap-1 rounded border border-primary-600 bg-transparent px-4 text-sm text-neutral-0 transition-all hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl'>
               Estimate your monthly cost ↓
             </Link>
           </div>
