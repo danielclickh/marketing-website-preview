@@ -130,11 +130,13 @@ export default function CloudPage({
                     </div>
                   </div>
                   <p className='mt-3 text-sm'>
-                    Interested in being notified when Azure is available?{' '}
-                    <Link
-                      href='/cloud/azure-waitlist'
-                      className='text-primary-300'>
-                      Join the waitlist
+                    Or join the waitlist for{' '}
+                    <Link href='/cloud/azure-waitlist' className='text-primary-300'>
+                      Azure
+                    </Link>
+                    {' '}|{' '}
+                    <Link href='/cloud/bring-your-own-cloud' className='text-primary-300'>
+                      Bring Your Your Cloud (BYOC)
                     </Link>
                   </p>
                 </div>
@@ -239,7 +241,7 @@ export default function CloudPage({
             ))}
           </div>
         </div>
-        <div className='relative flex flex-col gap-y-28 bg-[#262622] px-3 xl:px-0'>
+        <div className='relative flex flex-col gap-y-28 px-3 xl:px-0'>
           <HRSeparator className='my-0' />
           <div className='flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
@@ -339,10 +341,10 @@ export default function CloudPage({
                   data into ClickHouse Cloud. With support for Apache Kafka and
                   Confluent today, and many more data sources coming soon.
                 </div>
-                <div className='mx-auto mt-11 inline-block w-full bg-[#262622] text-center hover:cursor-none'>
+                <div className='mx-auto mt-11 inline-block w-full text-center hover:cursor-none'>
                   <CUIButton
                     type='secondary'
-                    className='group mx-auto w-auto text-center'
+                    className='group mx-auto w-auto text-center !bg-neutral-800'
                     href='/cloud/clickpipes'>
                     Learn more
                   </CUIButton>
@@ -375,7 +377,34 @@ export default function CloudPage({
           </div>
         </div>
 
-        <HRSeparator className='mb-24' />
+        <div className='section-container max-w-[1115px] mx-auto mb-24'>
+          <div className='rounded-lg bg-primary-300 text-neutral-900 p-8 lg:py-16 lg:px-16 flex flex-wrap lg:flex-nowrap items-center gap-16'>
+            <div className='w-full lg:w-1/3'>
+              <Image
+                width={394}
+                height={168}
+                src='/images/cloud/byoc-aws.svg'
+                alt={'Bring your own cloud AWS'} />
+            </div>
+            <div className='w-full lg:w-2/3'>
+              <div className='mb-6 flex flex-wrap items-center gap-8'>
+                <SuiTitle type='h2'>
+                  Bring Your Own Cloud
+                </SuiTitle>
+                <small className='uppercase font-medium leading-none inline-block px-5 py-3 rounded-full border border-neutral-900'>Coming soon</small>
+              </div>
+              <SuiText className='mb-6 leading-relaxed'>Do you have strict data residency and compliance requirements that make typical SaaS offerings a nonstarter? Our Bring Your Own Cloud deployment model allows you to experience the advantages of ClickHouse Cloud within your own Virtual Private Cloud (VPC).</SuiText>
+              <CUIButton
+                type='primary-dark'
+                size='lg'
+                href='/cloud/bring-your-own-cloud'
+                className='!px-8'>
+                Join waitlist
+              </CUIButton>
+            </div>
+          </div>
+        </div>
+
         <div className='relative flex flex-col gap-y-28 '>
           <div className='section-container bg-shadow-element-right red-shadow flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
