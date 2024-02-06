@@ -392,19 +392,21 @@ export default function CloudPage({
               />
             </div>
             <div className='w-full lg:w-2/3'>
-              <div className='mb-6 flex flex-wrap items-center gap-8'>
+              <div className='flip-selection mb-6 flex flex-wrap items-center gap-8'>
                 <SuiTitle type='h2'>Bring Your Own Cloud</SuiTitle>
                 <small className='inline-block rounded-full border border-neutral-900 px-5 py-2  font-semibold uppercase'>
                   Coming soon
                 </small>
               </div>
-              <SuiText className='mb-6 leading-relaxed'>
-                Do you have strict data residency and compliance requirements
-                that make typical SaaS offerings a nonstarter? Our Bring Your
-                Own Cloud deployment model allows you to experience the
-                advantages of ClickHouse Cloud within your own Virtual Private
-                Cloud (VPC).
-              </SuiText>
+              <div className='flip-selection'>
+                <SuiText className='mb-6 leading-relaxed '>
+                  Do you have strict data residency and compliance requirements
+                  that make typical SaaS offerings a nonstarter? Our Bring Your
+                  Own Cloud deployment model allows you to experience the
+                  advantages of ClickHouse Cloud within your own Virtual Private
+                  Cloud (VPC).
+                </SuiText>
+              </div>
               <Link
                 href='/cloud/bring-your-own-cloud?loc=cloud-page-component'
                 className='inline-block rounded bg-[#161600] py-3 px-8 text-center font-semibold text-white'>

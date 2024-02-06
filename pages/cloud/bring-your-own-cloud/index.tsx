@@ -37,7 +37,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
           <div className='section-container mx-auto'>
             <div className='flex flex-wrap items-center gap-12 lg:flex-nowrap lg:gap-16'>
               {/* Content column */}
-              <div className='w-full text-neutral-900 lg:w-1/2'>
+              <div className='flip-selection w-full text-neutral-900 lg:w-1/2'>
                 <Image
                   width={469}
                   height={208}
