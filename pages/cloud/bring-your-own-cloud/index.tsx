@@ -45,7 +45,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                   alt={'Bring your own cloud graphic'}
                 />
 
-                <h1 className='mt-8 mb-5 text-3xl font-bold !leading-snug lg:text-4xl xl:text-[56px]'>
+                <h1 className='mt-8 mb-5 font-basier text-3xl font-bold !leading-snug lg:text-4xl xl:text-[56px]'>
                   Join the waitlist for Bring Your Own Cloud
                 </h1>
                 <p className='text-xl'>
@@ -115,7 +115,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                 alt={'BYOC on AWS icon'}
                 className='mx-auto mb-10'
               />
-              <h2 className='mb-10 text-3xl font-bold lg:text-5xl'>
+              <h2 className='mb-10 font-basier text-3xl font-bold lg:text-5xl'>
                 BYOC on AWS
               </h2>
               <p className='mb-10 text-neutral-200'>
@@ -132,11 +132,11 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
             </div>
 
             <Image
-              width={1105}
-              height={750}
+              width={1020}
+              height={738}
               src='/images/cloud/bring-your-own-cloud/diagram.svg'
               alt={'BYOC on AWS diagram'}
-              className='mx-auto'
+              className='mx-auto mt-20'
             />
           </div>
         </div>
