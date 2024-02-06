@@ -131,11 +131,15 @@ export default function CloudPage({
                   </div>
                   <p className='mt-3 text-sm'>
                     Or join the waitlist for{' '}
-                    <Link href='/cloud/azure-waitlist' className='text-primary-300'>
+                    <Link
+                      href='/cloud/azure-waitlist'
+                      className='text-primary-300'>
                       Azure
-                    </Link>
-                    {' '}|{' '}
-                    <Link href='/cloud/bring-your-own-cloud' className='text-primary-300'>
+                    </Link>{' '}
+                    |{' '}
+                    <Link
+                      href='/cloud/bring-your-own-cloud'
+                      className='text-primary-300'>
                       Bring Your Your Cloud (BYOC)
                     </Link>
                   </p>
@@ -344,7 +348,7 @@ export default function CloudPage({
                 <div className='mx-auto mt-11 inline-block w-full text-center hover:cursor-none'>
                   <CUIButton
                     type='secondary'
-                    className='group mx-auto w-auto text-center !bg-neutral-800'
+                    className='group mx-auto w-auto !bg-neutral-800 text-center'
                     href='/cloud/clickpipes'>
                     Learn more
                   </CUIButton>
@@ -377,30 +381,35 @@ export default function CloudPage({
           </div>
         </div>
 
-        <div className='section-container max-w-[1115px] mx-auto mb-24'>
-          <div className='rounded-lg bg-primary-300 text-neutral-900 p-8 lg:py-16 lg:px-16 flex flex-wrap lg:flex-nowrap items-center gap-16'>
+        <div className='section-container mx-auto mb-24 max-w-[1115px]'>
+          <div className='flex flex-wrap items-center gap-16 rounded-lg bg-primary-300 p-8 text-neutral-900 lg:flex-nowrap lg:py-16 lg:px-16'>
             <div className='w-full lg:w-1/3'>
               <Image
                 width={394}
                 height={168}
                 src='/images/cloud/byoc-aws.svg'
-                alt={'Bring your own cloud AWS'} />
+                alt={'Bring your own cloud AWS'}
+              />
             </div>
             <div className='w-full lg:w-2/3'>
               <div className='mb-6 flex flex-wrap items-center gap-8'>
-                <SuiTitle type='h2'>
-                  Bring Your Own Cloud
-                </SuiTitle>
-                <small className='uppercase font-medium leading-none inline-block px-5 py-3 rounded-full border border-neutral-900'>Coming soon</small>
+                <SuiTitle type='h2'>Bring Your Own Cloud</SuiTitle>
+                <small className='inline-block rounded-full border border-neutral-900 px-5 py-2  font-semibold uppercase'>
+                  Coming soon
+                </small>
               </div>
-              <SuiText className='mb-6 leading-relaxed'>Do you have strict data residency and compliance requirements that make typical SaaS offerings a nonstarter? Our Bring Your Own Cloud deployment model allows you to experience the advantages of ClickHouse Cloud within your own Virtual Private Cloud (VPC).</SuiText>
-              <CUIButton
-                type='primary-dark'
-                size='lg'
+              <SuiText className='mb-6 leading-relaxed'>
+                Do you have strict data residency and compliance requirements
+                that make typical SaaS offerings a nonstarter? Our Bring Your
+                Own Cloud deployment model allows you to experience the
+                advantages of ClickHouse Cloud within your own Virtual Private
+                Cloud (VPC).
+              </SuiText>
+              <Link
                 href='/cloud/bring-your-own-cloud'
-                className='!px-8'>
+                className='inline-block rounded bg-[#161600] py-3 px-8 text-center font-semibold text-white'>
                 Join waitlist
-              </CUIButton>
+              </Link>
             </div>
           </div>
         </div>
