@@ -406,7 +406,7 @@ export default function CloudPage({
                 Cloud (VPC).
               </SuiText>
               <Link
-                href='/cloud/bring-your-own-cloud'
+                href='/cloud/bring-your-own-cloud?loc=cloud-page-component'
                 className='inline-block rounded bg-[#161600] py-3 px-8 text-center font-semibold text-white'>
                 Join waitlist
               </Link>
