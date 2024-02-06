@@ -8,27 +8,23 @@ import { CUIButton } from '../../../components/ClickUI'
 import { HomePageProps } from '../../../types/homepage'
 import styles from './styles.module.scss'
 
-export const getStaticProps: GetStaticProps=
-  async function getStaticProps() {
-    const commonProps = await getCommonProps()
+export const getStaticProps: GetStaticProps = async function getStaticProps() {
+  const commonProps = await getCommonProps()
 
-    return {
-      props: {
-        seo: {
-          title: 'Bring Your Own Cloud - ClickHouse',
-          description: 'Join the waitlist for Bring Your Own Cloud. A fully managed ClickHouse Cloud service, deployed in your own AWS account.',
-          path: '/cloud/bring-your-own-cloud'
-        },
-        ...commonProps
-      }
+  return {
+    props: {
+      seo: {
+        title: 'Bring Your Own Cloud - ClickHouse',
+        description:
+          'Join the waitlist for Bring Your Own Cloud. A fully managed ClickHouse Cloud service, deployed in your own AWS account.',
+        path: '/cloud/cloud/bring-your-own-cloud'
+      },
+      ...commonProps
     }
   }
+}
 
-export default function Page({
-  footerData,
-  headerData,
-  seo
-}: HomePageProps) {
+export default function Page({ footerData, headerData, seo }: HomePageProps) {
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
@@ -36,27 +32,31 @@ export default function Page({
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
-
         {/* Hero */}
-        <div className='py-16 lg:py-20 bg-primary-300'>
+        <div className='bg-primary-300 py-16 lg:py-20'>
           <div className='section-container mx-auto'>
-            <div className='flex flex-wrap lg:flex-nowrap items-center gap-12 lg:gap-16'>
-
+            <div className='flex flex-wrap items-center gap-12 lg:flex-nowrap lg:gap-16'>
               {/* Content column */}
-              <div className='w-full lg:w-1/2 text-neutral-900'>
+              <div className='w-full text-neutral-900 lg:w-1/2'>
                 <Image
                   width={469}
                   height={208}
                   src='/images/cloud/bring-your-own-cloud/hero.svg'
-                  alt={'Bring your own cloud graphic'} />
+                  alt={'Bring your own cloud graphic'}
+                />
 
-                <h1 className='text-3xl lg:text-4xl xl:text-[56px] !leading-snug font-bold mt-8 mb-5'>Join the waitlist for Bring Your Own Cloud</h1>
-                <p className='text-xl'>A fully managed ClickHouse Cloud service, deployed in your own AWS
-                  account.</p>
+                <h1 className='mt-8 mb-5 text-3xl font-bold !leading-snug lg:text-4xl xl:text-[56px]'>
+                  Join the waitlist for Bring Your Own Cloud
+                </h1>
+                <p className='text-xl'>
+                  A fully managed ClickHouse Cloud service, deployed in your own
+                  AWS account.
+                </p>
               </div>
 
               {/* Form column */}
-              <div className={`w-full lg:w-1/2 rounded-lg bg-neutral-900 p-8 ${styles.byocForm}`}>
+              <div
+                className={`w-full rounded-lg bg-neutral-900 p-8 lg:w-1/2 ${styles.byocForm}`}>
                 {!formSuccess && (
                   <MarketoForm
                     formId='1135'
@@ -107,17 +107,28 @@ export default function Page({
         {/* BYOC on AWS */}
         <div className='my-16 lg:my-20'>
           <div className='section-container mx-auto'>
-
-            <div className='text-center max-w-[800px] mx-auto'>
+            <div className='mx-auto max-w-[800px] text-center'>
               <Image
                 width={72}
                 height={72}
                 src='/images/cloud/bring-your-own-cloud/upload-icon.svg'
                 alt={'BYOC on AWS icon'}
-                className='mx-auto mb-10' />
-              <h2 className='text-3xl lg:text-5xl font-bold mb-10'>BYOC on AWS</h2>
-              <p className='text-neutral-200 mb-10'>Do you have strict data residency and compliance requirements that make typical SaaS offerings a nonstarter? Our Bring Your Own Cloud deployment model allows you to experience the advantages of ClickHouse Cloud within your own Virtual Private Cloud (VPC).</p>
-              <p className='text-neutral-200 mb-10'>No regulatory headaches. No operational complexity. All the benefits of cloud.</p>
+                className='mx-auto mb-10'
+              />
+              <h2 className='mb-10 text-3xl font-bold lg:text-5xl'>
+                BYOC on AWS
+              </h2>
+              <p className='mb-10 text-neutral-200'>
+                Do you have strict data residency and compliance requirements
+                that make typical SaaS offerings a nonstarter? Our Bring Your
+                Own Cloud deployment model allows you to experience the
+                advantages of ClickHouse Cloud within your own Virtual Private
+                Cloud (VPC).
+              </p>
+              <p className='mb-10 text-neutral-200'>
+                No regulatory headaches. No operational complexity. All the
+                benefits of cloud.
+              </p>
             </div>
 
             <Image
@@ -125,11 +136,10 @@ export default function Page({
               height={750}
               src='/images/cloud/bring-your-own-cloud/diagram.svg'
               alt={'BYOC on AWS diagram'}
-              className='mx-auto' />
-
+              className='mx-auto'
+            />
           </div>
         </div>
-
       </Layout>
     </>
   )
