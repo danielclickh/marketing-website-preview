@@ -34,7 +34,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         {/* Hero */}
-        <div className='bg-primary-300 py-16 lg:py-20'>
+        <div className='bg-primary-300 py-16 lg:py-24'>
           <div className='section-container mx-auto'>
             <div className='flex flex-wrap items-center gap-12 lg:flex-nowrap lg:gap-16'>
               {/* Content column */}
@@ -46,10 +46,10 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                   alt={'Bring your own cloud graphic'}
                 />
 
-                <h1 className='mt-8 mb-5 font-basier text-3xl font-bold !leading-snug lg:text-4xl xl:text-[56px]'>
+                <h1 className='mt-12 mb-5 font-basier text-3xl font-bold !leading-snug lg:text-4xl xl:text-[56px]'>
                   Join the waitlist for Bring Your Own Cloud
                 </h1>
-                <p className='text-xl'>
+                <p className='text-xl leading-[180%]'>
                   A fully managed ClickHouse Cloud service, deployed in your own
                   AWS account.
                 </p>
@@ -116,7 +116,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
         </div>
 
         {/* BYOC on AWS */}
-        <div className='my-16 lg:my-20'>
+        <div className='my-16 lg:my-24'>
           <div className='section-container mx-auto'>
             <div className='mx-auto max-w-[800px] text-center'>
               <Image
