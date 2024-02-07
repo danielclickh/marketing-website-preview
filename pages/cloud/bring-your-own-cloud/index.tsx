@@ -1,9 +1,10 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Layout from '../../../components/Layout'
+import Markdown from '../../../components/Markdown'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import MarketoForm from '../../../components/MarketoForm'
-import { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { CUIButton } from '../../../components/ClickUI'
 import { HomePageProps } from '../../../types/homepage'
 import styles from './styles.module.scss'
@@ -78,6 +79,16 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
 
                 {!formLoaded && (
                   <div className='text-center'>Loading form...</div>
+                )}
+
+                {formLoaded && !formSuccess && (
+                  <div className='disclaimer-text mt-8 text-center text-sm font-medium text-neutral-200'>
+                    <Markdown>
+                      By registering, you acknowledge that ClickHouse will process
+                      your personal information in accordance with our [Privacy
+                      Policy](/legal/privacy-policy).
+                    </Markdown>
+                  </div>
                 )}
 
                 {formSuccess && (
