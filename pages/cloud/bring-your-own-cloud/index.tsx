@@ -46,10 +46,10 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                   alt={'Bring your own cloud graphic'}
                 />
 
-                <h1 className='mt-12 mb-5 font-basier text-3xl font-bold !leading-snug lg:text-4xl xl:text-[56px]'>
+                <h1 className='mt-12 mb-5 text-center font-basier text-3xl font-bold !leading-snug lg:text-left lg:text-4xl xl:text-[56px]'>
                   Join the waitlist for Bring Your Own Cloud
                 </h1>
-                <p className='text-xl leading-[180%]'>
+                <p className='text-center leading-[180%] lg:text-left'>
                   A fully managed ClickHouse Cloud service, deployed in your own
                   AWS account.
                 </p>
