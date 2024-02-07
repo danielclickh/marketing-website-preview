@@ -33,7 +33,9 @@ export const getStaticProps: GetStaticProps<LearnProps> =
         seo: {
           title: 'ClickHouse Certification | ClickHouse',
           description: '',
-          path: '/learn/certification'
+          path: '/learn/certification',
+          imageUrl:
+            'https://clickhouse.com/images/clickhouse-certification-og.png'
         },
         ...data,
         ...commonProps
@@ -344,7 +346,7 @@ export default function CertificationPage({
             />
 
             <p className='mb-6'>
-              To become a ClickHouse Certified Engineer, you will need to pass
+              To become a ClickHouse Certified Developer, you will need to pass
               our hands-on, performance-based exam. The exam involves completing
               a series of real-world tasks on ClickHouse clusters in a
               supervised environment.

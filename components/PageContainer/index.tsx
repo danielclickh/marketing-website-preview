@@ -24,7 +24,7 @@ function PageContainer({ children }: { children: ReactNode }) {
     }, 0)
   }, [pathname])
 
-  return <div className='flex flex-col min-h-screen'>{children}</div>
+  return <div className='flex min-h-screen flex-col'>{children}</div>
 }
 
 export default PageContainer

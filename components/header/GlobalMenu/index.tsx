@@ -33,13 +33,19 @@ const GlobalMenu = () => {
             ) {
               return (
                 <NavigationMenu.Item key={menuItem.name}>
-                  <NavigationMenu.Trigger className={styles.topLevelNavItem}>
-                    {menuItem.name === 'Use cases' ? (
+                  {menuItem.name === 'Use cases' ? (
+                    <NavigationMenu.Trigger className={styles.topLevelNavItem}>
                       <Link href='/use-cases'>Use cases</Link>
-                    ) : (
-                      menuItem.name
-                    )}
-                  </NavigationMenu.Trigger>
+                    </NavigationMenu.Trigger>
+                  ) : menuItem.name === 'Pricing' ? (
+                    <NavigationMenu.Trigger className={styles.topLevelNavItem}>
+                      <Link href='/pricing'>Pricing</Link>
+                    </NavigationMenu.Trigger>
+                  ) : (
+                    <NavigationMenu.Trigger className={styles.topLevelNavItem}>
+                      {menuItem.name}
+                    </NavigationMenu.Trigger>
+                  )}
 
                   <NavigationMenu.Content className='absolute top-0 left-0 flex w-full flex-col overflow-hidden rounded-md pb-4 data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight sm:w-auto'>
                     <div

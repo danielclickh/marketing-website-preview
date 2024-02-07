@@ -89,7 +89,10 @@ export default function HomepageCustomerVideos({
 
   return (
     <>
-      <div className='grid grid-cols-1 gap-6 px-4 md:grid-cols-2 md:flex-row lg:grid-cols-4 xl:gap-10 2xl:px-0'>
+      <div
+        className={`${
+          videos.length === 1 ? '' : 'md:grid-cols-2 lg:grid-cols-4 '
+        } grid grid-cols-1 gap-6 px-4 md:flex-row  xl:gap-10 2xl:px-0`}>
         {videos.map((video) => {
           return (
             <div

@@ -1,0 +1,44 @@
+import React, { ReactElement } from 'react'
+import { useRouter } from 'next/router'
+import AwsLogo from './AwsLogo'
+import GCPLogo from './GCPLogo'
+
+import styles from './ToggleButtons.module.scss'
+
+import { Option, ToggleButtonsProps } from '../../CalculatorTypesOptions'
+
+export function ToggleButtonsProviders<T extends string = string>({
+  options,
+  value
+}: ToggleButtonsProps<T>) {
+  const router = useRouter()
+  return (
+    <div className={styles.buttons}>
+      {options.map((option) => (
+        <button
+          key={option.value}
+          onClick={() => {
+            router.push(
+              {
+                query: {
+                  ...router.query,
+                  provider: option.value
+                }
+              },
+              undefined,
+              { shallow: true }
+            )
+          }}
+          className={`${value === option.value ? styles.selected : undefined}`}>
+          {option.value === 'aws' ? (
+            <AwsLogo />
+          ) : option.value === 'gcp' ? (
+            <GCPLogo />
+          ) : (
+            option.label
+          )}
+        </button>
+      ))}
+    </div>
+  )
+}

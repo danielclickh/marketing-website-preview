@@ -4,6 +4,50 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'querying-archive-files-with-clickhouse',
+      title: 'Querying archive files with ClickHouse',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        'In this video, we’ll learn how to query archive files directly using ClickHouse. We’ll start by learning about the ‘One’ input format that returns a list of files that match a glob expression on a ZIP file. We then show how to describe and ingest different CSV files into ClickHouse, before joining the datasets together. And along the way we learn how to deal with inconsistencies in the CSV data.',
+      thumbnail: 'https://img.youtube.com/vi/CiKfRMAhs3M/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/CiKfRMAhs3M?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
+      slug: 'lyft-user-story',
+      title: 'ClickHouse & Lyft',
+      subTitle: 'Ritesh Varyani\nSenior Software Engineer, Lyft',
+      description:
+        '"ClickHouse has been great for us. It has solved all the use cases we have thrown at it"',
+      thumbnail: 'https://img.youtube.com/vi/xKN9FoQYqWo/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/xKN9FoQYqWo?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['User Stories', 'ClickHouse Cloud']
+    },
+    {
+      slug: 'importing-numpy-array-files-into-clickhouse',
+      title: 'Importing Numpy array files into ClickHouse',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we'll learn how to import Numpy array files into ClickHouse. We'll be using the LAION multi modal dataset, which provides Numpy files for text and image embeddings, as well as metadata in Parquet format. We'll join the data from these files together using the recently added PASTE JOIN.",
+      thumbnail: 'https://img.youtube.com/vi/_7mpIeig8Hw/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/_7mpIeig8Hw?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
+      slug: 'what-if-energy-cost-analysis-with-streamlit-and-clickhouse',
+      title: 'What-If energy cost analysis with Streamlit and Clickhouse',
+      subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
+      description:
+        "In this video, we'll learn how to build an interactive Streamlit application using chdb to analyze household energy usage data. We'll generate plot.ly charts showing the cost of energy usage over the last year, as well as doing what-if analysis to compare energy costs across timeframes and tariffs.",
+      thumbnail: 'https://img.youtube.com/vi/2Tra0DU1tfM/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/2Tra0DU1tfM?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['How to']
+    },
+    {
       slug: 'fast-answers-in-cancer-research',
       title: 'Fast Answers in Cancer Research',
       subTitle: 'Aaron Lisman\nMemorial Sloan Kettering',
@@ -338,7 +382,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/8FUfyvoqDTg/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/8FUfyvoqDTg?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['ClickHouse Cloud']
+      categories: ['ClickHouse Cloud', 'User Stories']
     },
     {
       slug: 'clearbit',
@@ -350,7 +394,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/3mS-RSKfGWQ/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/3mS-RSKfGWQ?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['ClickHouse Cloud']
+      categories: ['ClickHouse Cloud', 'User Stories']
     },
     {
       slug: 'statsig',
@@ -362,7 +406,7 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/6V_66oiln00/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/6V_66oiln00?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['ClickHouse Cloud']
+      categories: ['ClickHouse Cloud', 'User Stories']
     },
     {
       slug: 'rebuilding-segmentation-with-clickhouse',
