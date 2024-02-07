@@ -59,6 +59,9 @@ function generateSiteMap(
         <loc>${siteURL}/cloud/clickpipes</loc>
     </url>
     <url>
+        <loc>${siteURL}/cloud/bring-your-own-cloud</loc>
+    </url>
+    <url>
         <loc>${siteURL}/company/careers</loc>
     </url>
     <url>
