@@ -61,7 +61,14 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                 {!formSuccess && (
                   <MarketoForm
                     formId='1135'
-                    onLoad={() => setFormLoaded(true)}
+                    onLoad={() => {
+                      setFormLoaded(true)
+                      const firstNameInput =
+                        window?.document?.getElementById('FirstName')
+                      if (firstNameInput) {
+                        firstNameInput.focus()
+                      }
+                    }}
                     onSuccess={() => {
                       setFormSuccess(true)
 
