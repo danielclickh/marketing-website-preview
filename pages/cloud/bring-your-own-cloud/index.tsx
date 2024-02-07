@@ -84,9 +84,9 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                 {formLoaded && !formSuccess && (
                   <div className='disclaimer-text mt-8 text-center text-sm font-medium text-neutral-200'>
                     <Markdown>
-                      By registering, you acknowledge that ClickHouse will process
-                      your personal information in accordance with our [Privacy
-                      Policy](/legal/privacy-policy).
+                      By registering, you acknowledge that ClickHouse will
+                      process your personal information in accordance with our
+                      [Privacy Policy](/legal/privacy-policy).
                     </Markdown>
                   </div>
                 )}
