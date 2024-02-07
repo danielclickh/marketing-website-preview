@@ -394,9 +394,11 @@ export default function CloudPage({
             <div className='w-full lg:w-2/3'>
               <div className='flip-selection mb-6 flex flex-wrap items-center gap-8'>
                 <SuiTitle type='h2'>Bring Your Own Cloud</SuiTitle>
-                <small className='inline-block rounded-full border border-neutral-900 px-5 py-2  font-semibold uppercase'>
+                <Link
+                  href='/cloud/bring-your-own-cloud'
+                  className='inline-block rounded-full border border-neutral-900 px-5 py-2  font-semibold uppercase'>
                   Coming soon
-                </small>
+                </Link>
               </div>
               <div className='flip-selection'>
                 <SuiText className='mb-6 leading-relaxed '>
