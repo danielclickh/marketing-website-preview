@@ -96,12 +96,12 @@ Custom disclaimer markdown can be passed to the component using the `disclaimer`
 />
 ```
 
-Alternatively, you can disable the disclaimer altogether by passing `null` to the property:
+Alternatively, you can disable the disclaimer altogether by passing `false` to the property:
 
 ```tsx
 <MarketoForm
     formId={'1234'}
-    disclaimer={null}
+    disclaimer={false}
 />
 ```
 
