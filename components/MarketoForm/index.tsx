@@ -1,4 +1,5 @@
 import { resolveHref } from 'next/dist/client/resolve-href'
+import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { useEffect, useId, useRef, useState } from 'react'
 import Markdown from '../Markdown'
@@ -64,6 +65,8 @@ export default function MarketoForm({
   const instanceId = useId()
   const instanceEventPrefix = `mkto-${instanceId}-${formId}`
 
+  const queryParams = useSearchParams()
+  const [queryString, setQueryString] = useState('')
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [mountIframe, setMountIframe] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
@@ -230,22 +233,27 @@ export default function MarketoForm({
   }
 
   useEffect(() => {
-    window.addEventListener('message', recieveEventFromIframe)
-    setMountIframe(true)
-    return () => {
-      window.removeEventListener('message', recieveEventFromIframe)
+    if (router.isReady) {
+      // Build a query string to send to the iframe
+      const params = new URLSearchParams(queryParams.toString())
+      params.set('iid', instanceId) // Add our component instance id
+      setQueryString(params.toString())
+
+      // Listen for messages from the iframe
+      window.addEventListener('message', recieveEventFromIframe)
+      setMountIframe(true)
+      return () => {
+        window.removeEventListener('message', recieveEventFromIframe)
+      }
     }
-  }, [])
+  }, [router.isReady, queryParams])
 
   return (
     <>
       {mountIframe && (
         <iframe
           ref={iframeRef}
-          src={resolveHref(
-            router,
-            `/marketo-forms/${formId}?iid=${encodeURIComponent(instanceId)}`
-          )}
+          src={resolveHref(router, `/marketo-forms/${formId}?${queryString}`)}
           height={iframeHeight < 24 ? 24 : iframeHeight}
           scrolling='no' // Deprecated but still hides scrollbars
           className={`w-full !bg-transparent transition-opacity ${
