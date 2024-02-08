@@ -184,9 +184,17 @@ export default function Page() {
 
 Below is a list of Marketo JS API methods that have different implementations than the official docs.
 
-##### `.validate()`
+##### `.getFormElem()`
 
-This method will return a `Promise<boolean)`, so if you need to use the return value for something, you'll need to use the `await` operator. For example:
+This method is unavailable due to the inability to pass an element reference between the parent window and iframe.
+
+##### `.showErrorMessage(message: string): void`
+
+In the official documentation, you will find a second parameter designed for passing an element for the error to point to. However, due to the inability to pass an element reference between the parent window and iframe, this parameter has been omitted. Instead, the message will always point to the submit button.
+
+##### `.validate(): Promise<boolean>`
+
+This method will return a `Promise<boolean>`, so if you need to use the return value for something, you'll need to use the `await` operator. For example:
 
 ```tsx
 export default function Page() {
@@ -207,7 +215,7 @@ export default function Page() {
 }
 ```
 
-##### `.getValues()`
+##### `.getValues(): Promise<Record<string, any>>`
 
 This method will return a `Promise<Record<string, any>>`, so if you need to use the return value for something, you'll need to use the `await` operator. For example:
 
@@ -226,7 +234,7 @@ export default function Page() {
 }
 ```
 
-##### `.submittable()` (alias: `.submitable()`)
+##### `.submittable(canSubmit?: boolean): Promise<boolean>` (alias: `.submitable()`)
 
 This method will return a `Promise<boolean>`, so if you need to use the return value for something, you'll need to use the `await` operator. For example:
 
@@ -249,7 +257,7 @@ export default function Page() {
 }
 ```
 
-##### `.allFieldsFilled()`
+##### `.allFieldsFilled(): Promise<boolean>`
 
 This method will return a `Promise<boolean>`, so if you need to use the return value for something, you'll need to use the `await` operator. For example:
 
@@ -261,6 +269,29 @@ export default function Page() {
             onLoad={(formObject) => {
                 (async () => {
                     const allFieldsHaveValues = await formObject.allFieldsFilled();
+                })();
+            }}
+        />
+    );
+}
+```
+
+##### `.vals(values?: Record<string, any>): undefined | Promise<Record<string, any>>`
+
+This method will return a `Record<string, any>` if the values paramater is set, so if you need to use the return value for something, you'll need to use the `await` operator. For example:
+
+```tsx
+export default function Page() {
+    return (
+        <MarketoForm
+            formId={'1234'}
+            onLoad={(formObject) => {
+                // Setter: doesn't need await
+                formObject.vals({ name: 'Bob Ross' });
+
+                // Getter: needs async/await
+                (async () => {
+                    const fieldValues = await formObject.vals();
                 })();
             }}
         />
