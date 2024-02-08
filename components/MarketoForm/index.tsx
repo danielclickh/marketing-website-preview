@@ -36,6 +36,7 @@ interface MarketoObjectController extends SpoofedMarketoObject {
   _onSuccessListeners: Array<
     (values: SpoofedMarketoValuesObject, redirect: string | null) => void
   >
+  _validateListener: null | Function
   _getValuesListener: null | Function
   _submittableListener: null | Function
   _allFieldsFilledListener: null | Function
@@ -85,6 +86,7 @@ export default function MarketoForm({
     _onSubmitListeners: [],
     _onValidateListeners: [],
     _onSuccessListeners: [],
+    _validateListener: null,
     _getValuesListener: null,
     _submittableListener: null,
     _allFieldsFilledListener: null,
@@ -98,8 +100,10 @@ export default function MarketoForm({
     },
 
     async validate() {
-      sendEventToIframe('validate')
-      return false
+      return new Promise((resolve) => {
+        this._validateListener = resolve
+        sendEventToIframe('validate')
+      })
     },
     onValidate(callback) {
       this._onValidateListeners.push(callback)
@@ -191,6 +195,13 @@ export default function MarketoForm({
           })
           if (typeof onSuccess === 'function') {
             onSuccess(eventData?.response, eventData?.redirect)
+          }
+          break
+
+        case `${instanceEventPrefix}-validate`:
+          if (spoofMarketoFormObject._validateListener) {
+            spoofMarketoFormObject._validateListener(eventData)
+            spoofMarketoFormObject._validateListener = null
           }
           break
 

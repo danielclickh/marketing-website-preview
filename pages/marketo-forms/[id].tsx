@@ -58,9 +58,6 @@ export default function Page() {
 
       switch (eventType) {
         // Trigger events
-        case `${instanceEventPrefix}-validate`:
-          window.MktoForms2?.getForm(formId)?.validate()
-          break
         case `${instanceEventPrefix}-submit`:
           window.MktoForms2?.getForm(formId)?.submit()
           break
@@ -75,6 +72,12 @@ export default function Page() {
           break
 
         // Getter events
+        case `${instanceEventPrefix}-validate`:
+          sendEventToParent(
+            'validate',
+            window.MktoForms2?.getForm(formId)?.validate()
+          )
+          break
         case `${instanceEventPrefix}-getValues`:
           sendEventToParent(
             'getValues',
