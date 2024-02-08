@@ -19,18 +19,21 @@ declare global {
 }
 
 export default function Page() {
-
   const router = useRouter()
   const formId = typeof router.query?.id === 'string' ? router.query.id : ''
 
   // Component ID passed from parent
-  const instanceId = typeof router.query?.iid === 'string' ? router.query.iid : ''
+  const instanceId =
+    typeof router.query?.iid === 'string' ? router.query.iid : ''
 
   // Referer URL passed from parent
-  const referer = typeof router.query?.referer === 'string' ? router.query.referer : ''
+  const referer =
+    typeof router.query?.referer === 'string' ? router.query.referer : ''
 
   // Prefix events so the parent can identify events from multiple forms iframes
-  const instanceEventPrefix = ['mkto', instanceId, formId].filter(val => !!val).join('-')
+  const instanceEventPrefix = ['mkto', instanceId, formId]
+    .filter((val) => !!val)
+    .join('-')
 
   const formRef = useRef<HTMLFormElement>(null)
   const [scriptLoaded, setScriptLoaded] = useState(false)
@@ -66,11 +69,12 @@ export default function Page() {
 
   // 2. Hide unwanted UI stuffs
   useEffect(() => {
-
     // Make document transparent
     document.querySelector('html')?.classList.add('!bg-transparent', '!bg-none')
     document.querySelector('body')?.classList.add('!bg-transparent', '!bg-none')
-    document.querySelector('body main > .min-h-screen')?.classList.remove('min-h-screen')
+    document
+      .querySelector('body main > .min-h-screen')
+      ?.classList.remove('min-h-screen')
 
     // Hide cookie banner
     const cookieBannerInterval = window.setInterval(() => {
@@ -81,13 +85,11 @@ export default function Page() {
         cookieBanner.style.display = 'none'
       }
     }, 500)
-
   }, [])
 
   // 3. Load external script and attach resize event
   useEffect(() => {
     if (routerReady) {
-
       // Resize events
       const resize = () => {
         if (formRef.current) {
@@ -111,7 +113,7 @@ export default function Page() {
       // We have to do this because marketo does validation on different
       // events but it doesn't trigger the `onValidation` hook
       const catchInputEvents = (event: Event) => {
-        const target = event.target as HTMLInputElement;
+        const target = event.target as HTMLInputElement
         if (['INPUT', 'SELECT', 'TEXTAREA'].includes(target.tagName)) {
           sendResizeEvent()
         }
@@ -132,23 +134,24 @@ export default function Page() {
     }
   }, [routerReady])
 
-
   // 4. Call Marketo JS API
   useEffect(() => {
     if (routerReady && scriptLoaded) {
-
       // Empty form contents in case of rerender
       if (formRef.current) formRef.current.innerHTML = ''
 
       // Fixes marketo referrer issue for SPAs
       // @link https://blog.teknkl.com/fix-forms-20-referrer-cached-single-page-application/
-      window.MktoForms2.whenReady(function(readyForm){
-        const nativeGetValues = readyForm.getValues;
-        readyForm.onSubmit(function(submittingForm){
-          submittingForm.getValues = function() {
+      window.MktoForms2.whenReady(function (readyForm) {
+        const nativeGetValues = readyForm.getValues
+        readyForm.onSubmit(function (submittingForm) {
+          submittingForm.getValues = function () {
             const values = nativeGetValues()
             Object.defineProperty(values, '_mktoReferrer', {
-              value: referer || window.location !== window.parent.location ? document.referrer : document.location.href,
+              value:
+                referer || window.location !== window.parent.location
+                  ? document.referrer
+                  : document.location.href,
               enumerable: true
             })
             return values
@@ -157,76 +160,77 @@ export default function Page() {
       })
 
       // Remove styles unwanted styles on re-render
-      window.MktoForms2.onFormRender(marketoFormObject => {
+      window.MktoForms2.onFormRender((marketoFormObject) => {
         removeMarketoStyles(marketoFormObject)
       })
 
       // Init the marketo JS api
-      window.MktoForms2.loadForm(BASE_URL, MUNCHKIN_ID, formId, function(marketoFormObject) {
+      window.MktoForms2.loadForm(
+        BASE_URL,
+        MUNCHKIN_ID,
+        formId,
+        function (marketoFormObject) {
+          // Send form loaded event
+          sendEventToParent('formLoaded')
+          sendResizeEvent()
 
-        // Send form loaded event
-        sendEventToParent('formLoaded')
-        sendResizeEvent()
+          // Remove marketo added styles
+          removeMarketoStyles(marketoFormObject)
 
-        // Remove marketo added styles
-        removeMarketoStyles(marketoFormObject)
+          // Send validation event
+          marketoFormObject.onValidate(() => sendResizeEvent())
 
-        // Send validation event
-        marketoFormObject.onValidate(() => sendResizeEvent())
-
-        // Prevent redirection
-        marketoFormObject.onSuccess((response, redirect) => {
-          sendEventToParent('formSuccess', {
-            response,
-            redirect
+          // Prevent redirection
+          marketoFormObject.onSuccess((response, redirect) => {
+            sendEventToParent('formSuccess', {
+              response,
+              redirect
+            })
+            return false
           })
-          return false
-        })
-      })
-
+        }
+      )
     }
   }, [routerReady, scriptLoaded])
 
   return (
     <>
       <div className={styles.marketoFormContainerV2}>
-        <form
-          className='mktoForm'
-          id={`mktoForm_${formId}`}
-          ref={formRef} />
+        <form className='mktoForm' id={`mktoForm_${formId}`} ref={formRef} />
       </div>
     </>
   )
 }
 
 function removeMarketoStyles(marketoFormObject: MarketoFormObject) {
-
   const jqueryElement = marketoFormObject.getFormElem()
   const formElement = jqueryElement.get(0)
 
   // Remove marketo <link> styles
-  const styleLinks = document.querySelectorAll('#mktoForms2ThemeStyle, #mktoForms2BaseStyle');
-  Array.from(styleLinks).forEach(el => el.remove());
+  const styleLinks = document.querySelectorAll(
+    '#mktoForms2ThemeStyle, #mktoForms2BaseStyle'
+  )
+  Array.from(styleLinks).forEach((el) => el.remove())
 
   if (formElement) {
-
     // Remove fixed widths for improved responsiveness
-    const fixedWidths = formElement.querySelectorAll<HTMLElement>('.mktoHasWidth');
-    Array.from(fixedWidths).forEach(el => {
+    const fixedWidths =
+      formElement.querySelectorAll<HTMLElement>('.mktoHasWidth')
+    Array.from(fixedWidths).forEach((el) => {
       el.classList.remove('mktoHasWidth')
       delete el.dataset.mktoFixedWidth
       el.removeAttribute('data-mktoFixedWidth') // Just incase ¯\_(ツ)_/¯
     })
 
     // Remove form <style> elements
-    const scopedStyles = formElement.querySelectorAll('style');
-    Array.from(scopedStyles).forEach(el => el.remove());
+    const scopedStyles = formElement.querySelectorAll('style')
+    Array.from(scopedStyles).forEach((el) => el.remove())
 
     // Remove inline style attributes
-    const inlineStyles = formElement.querySelectorAll('[style]');
-    Array.from(inlineStyles).forEach(el => el.removeAttribute('style'));
+    const inlineStyles = formElement.querySelectorAll('[style]')
+    Array.from(inlineStyles).forEach((el) => el.removeAttribute('style'))
 
     // Remove inline style from <form> element
-    formElement.removeAttribute('style');
+    formElement.removeAttribute('style')
   }
 }
