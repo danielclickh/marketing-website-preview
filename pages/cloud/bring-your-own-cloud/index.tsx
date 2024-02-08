@@ -18,7 +18,8 @@ export const getStaticProps: GetStaticProps = async function getStaticProps() {
         title: 'Bring Your Own Cloud - ClickHouse',
         description:
           'Join the waitlist for Bring Your Own Cloud. A fully managed ClickHouse Cloud service, deployed in your own AWS account.',
-        path: '/cloud/bring-your-own-cloud'
+        path: '/cloud/bring-your-own-cloud',
+        image: [{ url: '/images/cloud/bring-your-own-cloud/byoc-og-image.png' }]
       },
       ...commonProps
     }
