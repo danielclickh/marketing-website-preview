@@ -51,10 +51,58 @@ export default function Page() {
     return false
   }
 
+  function recieveEventFromParent({ data }: MessageEvent) {
+    if (typeof data === 'object' && 'type' in data && 'data' in data) {
+      const eventType = data.type
+      const eventData = data.data
+
+      switch (eventType) {
+        // Trigger events
+        case `${instanceEventPrefix}-validate`:
+          window.MktoForms2?.getForm(formId)?.validate()
+          break
+        case `${instanceEventPrefix}-submit`:
+          window.MktoForms2?.getForm(formId)?.submit()
+          break
+        case `${instanceEventPrefix}-setValues`:
+          window.MktoForms2?.getForm(formId)?.setValues(eventData)
+          break
+        case `${instanceEventPrefix}-addHiddenFields`:
+          window.MktoForms2?.getForm(formId)?.addHiddenFields(eventData)
+          break
+        case `${instanceEventPrefix}-showErrorMessage`:
+          window.MktoForms2?.getForm(formId)?.showErrorMessage(eventData)
+          break
+
+        // Getter events
+        case `${instanceEventPrefix}-getValues`:
+          sendEventToParent(
+            'getValues',
+            window.MktoForms2?.getForm(formId)?.getValues()
+          )
+          break
+
+        case `${instanceEventPrefix}-submittable`:
+          sendEventToParent(
+            'submittable',
+            window.MktoForms2?.getForm(formId)?.submittable(eventData)
+          )
+          break
+
+        case `${instanceEventPrefix}-allFieldsFilled`:
+          sendEventToParent(
+            'allFieldsFilled',
+            window.MktoForms2?.getForm(formId)?.allFieldsFilled()
+          )
+          break
+      }
+    }
+  }
+
   function sendResizeEvent() {
     // Timeout allows a repaint to happen before we get the values
     setTimeout(() => {
-      sendEventToParent('resize', {
+      sendEventToParent('onResize', {
         width: window.innerWidth,
         height: window.innerHeight,
         scrollHeight: document.documentElement.scrollHeight
@@ -141,22 +189,8 @@ export default function Page() {
       if (formRef.current) formRef.current.innerHTML = ''
 
       // Fixes marketo referrer issue for SPAs
-      // @link https://blog.teknkl.com/fix-forms-20-referrer-cached-single-page-application/
-      window.MktoForms2.whenReady(function (readyForm) {
-        const nativeGetValues = readyForm.getValues
-        readyForm.onSubmit(function (submittingForm) {
-          submittingForm.getValues = function () {
-            const values = nativeGetValues()
-            Object.defineProperty(values, '_mktoReferrer', {
-              value:
-                referer || window.location !== window.parent.location
-                  ? document.referrer
-                  : document.location.href,
-              enumerable: true
-            })
-            return values
-          }
-        })
+      window.MktoForms2.whenReady((marketoFormObject) => {
+        fixMarketoReferer(marketoFormObject, referer)
       })
 
       // Remove styles unwanted styles on re-render
@@ -170,26 +204,42 @@ export default function Page() {
         MUNCHKIN_ID,
         formId,
         function (marketoFormObject) {
-          // Send form loaded event
-          sendEventToParent('formLoaded')
-          sendResizeEvent()
-
           // Remove marketo added styles
           removeMarketoStyles(marketoFormObject)
 
+          // Send form loaded event
+          sendEventToParent('onLoad')
+          sendResizeEvent()
+
           // Send validation event
-          marketoFormObject.onValidate(() => sendResizeEvent())
+          marketoFormObject.onValidate((isValid) => {
+            sendEventToParent('onValidate', isValid)
+            sendResizeEvent()
+          })
+
+          // Send submit event
+          marketoFormObject.onSubmit(() => {
+            sendEventToParent('onSubmit')
+            sendResizeEvent()
+          })
 
           // Prevent redirection
-          marketoFormObject.onSuccess((response, redirect) => {
-            sendEventToParent('formSuccess', {
-              response,
-              redirect
-            })
+          marketoFormObject.onSuccess((values, redirect) => {
+            sendEventToParent('onSuccess', { values, redirect })
+            sendResizeEvent()
             return false
           })
+
+          // Listen for events from the parent
+          window.addEventListener('message', recieveEventFromParent)
         }
       )
+
+      // Clean-up on unmount
+      return () => {
+        if (formRef.current) formRef.current.innerHTML = ''
+        window.removeEventListener('message', recieveEventFromParent)
+      }
     }
   }, [routerReady, scriptLoaded])
 
@@ -233,4 +283,25 @@ function removeMarketoStyles(marketoFormObject: MarketoFormObject) {
     // Remove inline style from <form> element
     formElement.removeAttribute('style')
   }
+}
+
+// @link https://blog.teknkl.com/fix-forms-20-referrer-cached-single-page-application/
+function fixMarketoReferer(
+  marketoFormObject: MarketoFormObject,
+  referer?: string
+) {
+  const nativeGetValues = marketoFormObject.getValues
+  marketoFormObject.onSubmit(function (submittingForm) {
+    submittingForm.getValues = function () {
+      const values = nativeGetValues()
+      Object.defineProperty(values, '_mktoReferrer', {
+        value:
+          referer || window.location !== window.parent.location
+            ? document.referrer
+            : document.location.href,
+        enumerable: true
+      })
+      return values
+    }
+  })
 }

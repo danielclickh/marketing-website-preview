@@ -1,20 +1,18 @@
 export interface MarketoFormObject {
-  getFormElem(): JQuery,
-  onSubmit(callback: MarketoCallback): void,
-  onValidate(callback: MarketoCallback): void,
+  getFormElem(): JQuery
+  validate(): void
+  submit(): void
+  submittable(value?: boolean): boolean | undefined
+  allFieldsFilled(): boolean
+  onSubmit(callback: MarketoCallback): void
+  onValidate(callback: (valid: boolean) => void): void
   onSuccess: (
-    callback: (
-      response: any,
-      redirect: string
-    ) => void|false
-  ) => void,
-  setValues(values: {
-    [key: string]: any
-  }): void,
-  getValues(): object,
-  addHiddenFields(values: {
-    [key: string]: any
-  }): void
+    callback: (response: any, redirect: string) => void | false
+  ) => void
+  setValues(values: Record<string, any>): void
+  getValues(): object
+  addHiddenFields(values: Record<string, any>): void
+  showErrorMessage(message: string, element?: JQuery): void
 }
 
 export type MarketoCallback = (marketoFormObject: MarketoFormObject) => void
@@ -23,7 +21,6 @@ export type MarketoCallback = (marketoFormObject: MarketoFormObject) => void
  * @see https://developers.marketo.com/javascript-api/forms/api-reference/
  */
 export interface MarketoFormsApi {
-
   // Methods
 
   loadForm: (
@@ -31,14 +28,13 @@ export interface MarketoFormsApi {
     munchkinId: string,
     formId: string,
     callback: MarketoCallback
-  ) => void,
+  ) => void
 
-  getForm(formId: string|number): MarketoFormObject
+  getForm(formId: string | number): MarketoFormObject
 
   // Callbacks
 
-  whenReady(callback: MarketoCallback): void,
-  onFormRender(callback: MarketoCallback): void,
-  whenRendered(callback: MarketoCallback): void,
-
+  whenReady(callback: MarketoCallback): void
+  onFormRender(callback: MarketoCallback): void
+  whenRendered(callback: MarketoCallback): void
 }

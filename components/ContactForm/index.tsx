@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
-import MarketoForm from '../MarketoForm'
+import MarketoForm, { SpoofedMarketoObject } from '../MarketoForm'
 import { useRouter } from 'next/router'
 
 function ContactForm() {
@@ -10,6 +10,7 @@ function ContactForm() {
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
   const [useCase, setUseCase] = useState<string>('')
+  const [marketoForm, setMarketoForm] = useState<SpoofedMarketoObject>()
 
   useEffect(() => {
     if (router.query.custom) {
@@ -38,14 +39,23 @@ Compute: ${memory}
 `)
     }
   }, [router.query])
+
+  useEffect(() => {
+    if (marketoForm && useCase) {
+      marketoForm.setValues({
+        programmessagefull: useCase
+      })
+    }
+  }, [marketoForm, useCase])
+
   return (
     <>
       {!formSuccess && (
         <MarketoForm
           formId={'1124'}
-          onLoad={() => {
-            //update values here
+          onLoad={(formObject) => {
             setFormLoaded(true)
+            setMarketoForm(formObject)
           }}
           onSuccess={() => {
             setFormSuccess(true)
