@@ -13,8 +13,8 @@ import { CUIButton } from '../../components/ClickUI'
 import HRSeparator from '../../components/HRSeparator'
 import { CheckIcon } from '@heroicons/react/outline'
 import GiveItAGo from '../../components/GiveItAGo'
-import VideoPlayer from '../../components/VideoPlayer'
 import BlogPost from '../../components/BlogPostList/BlogPost'
+import HomepageCustomerVideos from '../../components/HomepageVideos'
 
 export const getStaticProps: GetStaticProps<UseCasesData> =
   async function getStaticProps() {
@@ -199,39 +199,22 @@ function CustomerStoriesPage({
                     alt='Quote'
                     className='-mt-10 inline-block'
                   />{' '}
-                  Last time I checked, we read two&nbsp;
-                  <span className='tilted tilted-yellow'>
-                    <span className='tilted-content'>billion</span>
-                  </span>{' '}
-                  rows a second of CDN access&nbsp;logs
+                  There is that feeling of new tech where everything just feels
+                  like it's going right.
                 </div>
                 <p className='mt-6 text-base text-neutral-200'>
-                  We were really not doing well with ingesting all the logs that
-                  we have because it's big data, it's all the users of Disney+
-                  generating that data. Ever since we chose ClickHouse, it's
-                  been going well.
+                  We were using Postgres, but there was a moment in time when we
+                  hit the 64TB database limit and we couldn't read or write fast
+                  enough. We prototyped in ClickHouse Cloud in a week and we
+                  were able to ingest data 5 to 6 times faster than Postgres. We
+                  saved 10x in cost.
                 </p>
                 <div className='mt-12 items-center justify-between xl:flex'>
                   <div className='flex-0'>
-                    <p className='text-base font-semibold'>Roni Lazimi</p>
+                    <p className='text-base font-semibold'>Harlow Ward</p>
                     <p className='font-inconsolata text-base text-primary-300'>
-                      Software Engineer @ Disney+ Streaming
+                      Co-founder and CTO, Clearbit
                     </p>
-                  </div>
-                  <div className='mt-4 flex justify-center lg:justify-start xl:mt-0'>
-                    <CUIButton
-                      type='secondary'
-                      className='group mx-auto w-auto'
-                      target='_self'
-                      href='/blog/nyc-meetup-report-high-speed-content-distribution-analytics-for-streaming-platforms'
-                      iconRight={
-                        <ChevronRightIcon
-                          height='18'
-                          className='pt-0.5 transition group-hover:translate-x-1/2'
-                        />
-                      }>
-                      Learn more
-                    </CUIButton>
                   </div>
                 </div>
               </div>
@@ -239,7 +222,16 @@ function CustomerStoriesPage({
                 <div className='relative w-full'>
                   <div className='max-w-full rounded-md bg-primary-300 lg:absolute lg:inset-3 lg:-right-10 lg:-top-3 lg:skew-x-0 lg:transform'></div>
                   <div className='relative top-0 left-0 aspect-video h-fit w-full rounded-md'>
-                    <VideoPlayer videoId='CVVp6N8Xeoc' provider='youtube' />
+                    <HomepageCustomerVideos
+                      videos={[
+                        {
+                          videoId: '863656379',
+                          type: 'vimeo',
+                          vimeoCode: 'ec5de7be6d',
+                          image: '/images/clearbit-tile.png'
+                        }
+                      ]}
+                    />
                   </div>
                 </div>
               </div>

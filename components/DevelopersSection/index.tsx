@@ -12,56 +12,7 @@ function DevelopersSection() {
       <SuiTitle type='h2' className='mb-8 w-full text-left'>
         What do developers say?
       </SuiTitle>
-      <div className='mb-8 flex flex-col gap-10 md:flex-row'>
-        <div className='flex w-full items-start md:w-1/2'>
-          <HomepageCustomerVideos
-            fullWidth={true}
-            videos={[
-              {
-                videoId: '884351851',
-                type: 'vimeo',
-                vimeoCode: '979264b085',
-                image: '/images/disney-thumbnail.png'
-              }
-            ]}
-          />
-        </div>
-        <div className='flex w-full flex-col md:w-1/2'>
-          <div className='text-md font-semibold text-neutral-0'>
-            ClickHouse is the most commonly used database for internal and
-            commercial observability platforms. Disney+ uses ClickHouse to
-            provide analytics for its content distribution system.
-          </div>
-          <div className='mt-8 grid gap-6 md:grid-cols-[0.5rem_1fr]'>
-            <div className='hidden h-full w-full bg-primary-300 md:flex' />
-            <div className='text-neutral-200'>
-              “We were really not doing well with ingesting all the logs that we
-              have because it's big data, it's all the users of Disney+
-              generating that data. Ever since we chose ClickHouse, it's been
-              going well.”
-              <div className='mt-4 flex flex-col text-base'>
-                <div className='mb-1'>Roni Lazimi</div>
-                <div className='font-inconsolata font-medium leading-none text-primary-300'>
-                  Software Engineer, Disney+
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <CUIButton
-            className='group mt-8 mb-4'
-            type='secondary'
-            href='/blog/nyc-meetup-report-high-speed-content-distribution-analytics-for-streaming-platforms'
-            iconRight={
-              <ChevronRightIcon
-                height='18'
-                className='pt-0.5 transition group-hover:translate-x-1/2'
-              />
-            }>
-            Learn More
-          </CUIButton>
-        </div>
-      </div>
       <div className='grid grid-cols-1 gap-10 md:grid-cols-3'>
         {developerOptions.map((developerOption, index) => (
           <CUICard key={`developerOption-${index}`}>

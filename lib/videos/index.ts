@@ -433,17 +433,6 @@ export function getVideos(): Video[] {
       categories: ['User Stories']
     },
     {
-      slug: 'disney-plus-clickhouse',
-      title: "Disney+ClickHouse, Disney's Flexible ELT Pipelines in ClickHouse",
-      subTitle: 'Roni Lazimi\nSoftware Engineer, Disney+',
-      description:
-        'This talk was given at the ClickHouse Community Meetup in Manhattan on December 6, 2022.',
-      thumbnail: 'https://img.youtube.com/vi/CVVp6N8Xeoc/maxresdefault.jpg',
-      embed:
-        '<iframe src="https://www.youtube-nocookie.com/embed/CVVp6N8Xeoc?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['User Stories']
-    },
-    {
       slug: 'microsoft-clarity-and-clickhouse',
       title: 'Microsoft Clarity and ClickHouse',
       subTitle: 'Narendra Rana\nPrincipal Data Scientist',
