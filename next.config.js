@@ -386,6 +386,11 @@ const nextConfig = {
         source: '/blog/index.xml',
         destination: '/rss.xml',
         permanent: true
+      },
+      {
+        source: '/company/events/202402-cloud-update-live',
+        destination: '/videos/clickhouse-cloud-update-call-feb2024',
+        permanent: true
       }
     ]
   }
