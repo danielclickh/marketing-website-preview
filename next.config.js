@@ -381,6 +381,11 @@ const nextConfig = {
         source: '/company/events/clickhouse-workshop',
         destination: '/company/events/clickhouse-fundamentals',
         permanent: true
+      },
+      {
+        source: '/blog/index.xml',
+        destination: '/rss.xml',
+        permanent: true
       }
     ]
   }
