@@ -27,16 +27,14 @@ function ContactForm() {
         }
       }
       setUseCase(`
-
-=== Custom pricing request ===
+--- Custom pricing request ---
 Service type: ${customPricingQuoteObj.tier}
 Provider: ${customPricingQuoteObj.provider}
 Region: ${customPricingQuoteObj.region}
 Active hours: ${customPricingQuoteObj.hours}
 Data volume: ${customPricingQuoteObj.storageSize}GB
 Data compressed: ${customPricingQuoteObj.storageCompressed}
-Compute: ${memory}
-`)
+Compute: ${memory}`)
     }
   }, [router.query])
 
