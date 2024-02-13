@@ -74,6 +74,9 @@ function generateSiteMap(
         <loc>${siteURL}/learn</loc>
     </url>
     <url>
+        <loc>${siteURL}/learn/certification</loc>
+    </url>
+    <url>
         <loc>${siteURL}/media</loc>
     </url>
     <url>

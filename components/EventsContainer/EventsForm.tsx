@@ -83,7 +83,7 @@ function EventsForm({
               </p>
               {form.type === 'recordedGatedContent' && (
                 <div className='my-10' id='custom-video-container-player'>
-                  <p className='mb-4'>Watch recording below</p>
+                  <p className='mb-4'>Watch the recording below</p>
                   <VideoPlayerCustom
                     fullWidth={true}
                     videos={[
