@@ -7,7 +7,6 @@ import MarketoForm from '../../../components/MarketoForm'
 import React, { useRef, useState } from 'react'
 import { CUIButton } from '../../../components/ClickUI'
 import { HomePageProps } from '../../../types/homepage'
-import styles from './styles.module.scss'
 
 export const getStaticProps: GetStaticProps = async function getStaticProps() {
   const commonProps = await getCommonProps()
@@ -57,8 +56,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
               </div>
 
               {/* Form column */}
-              <div
-                className={`w-full rounded-lg bg-neutral-900 p-8 lg:w-1/2 ${styles.byocForm}`}>
+              <div className={`w-full rounded-lg bg-neutral-900 p-8 lg:w-1/2`}>
                 {!formSuccess && (
                   <MarketoForm
                     formId='1135'
