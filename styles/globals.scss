@@ -782,7 +782,7 @@ form.mktoForm#mktoForm_1135 {
       & + label { @apply hidden; }
 
       // Spoof buttons
-      @apply flex-1 h-[38px] rounded bg-neutral-725 border border-neutral-700 cursor-pointer transition-colors;
+      @apply flex-1 h-[42px] rounded bg-neutral-725 border border-neutral-700 cursor-pointer transition-colors;
       @apply bg-no-repeat bg-center bg-contain;
       @apply hover:border-neutral-600;
       @apply checked:border-primary;
