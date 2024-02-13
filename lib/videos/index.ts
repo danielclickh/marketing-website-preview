@@ -4,6 +4,17 @@ import { slugify } from '../utils/strings'
 export function getVideos(): Video[] {
   return [
     {
+      slug: 'clickhouse-cloud-update-call-feb2024',
+      title: 'ClickHouse Cloud Live Update - February 2024',
+      subTitle: 'ClickHouse Cloud Team',
+      description:
+        'Deep dive into our latest features and upcoming product roadmap with interactive demos and walkthroughs.',
+      thumbnail: 'https://img.youtube.com/vi/Ew8vHeyyahI/maxresdefault.jpg',
+      embed:
+        '<iframe src="https://www.youtube-nocookie.com/embed/Ew8vHeyyahI?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
+      categories: ['ClickHouse Cloud']
+    },
+    {
       slug: 'querying-archive-files-with-clickhouse',
       title: 'Querying archive files with ClickHouse',
       subTitle: 'Mark Needham\nPrincipal Product Marketing Manager, ClickHouse',
@@ -430,17 +441,6 @@ export function getVideos(): Video[] {
       thumbnail: 'https://img.youtube.com/vi/r1ZqjU8ZbNs/maxresdefault.jpg',
       embed:
         '<iframe src="https://www.youtube-nocookie.com/embed/r1ZqjU8ZbNs?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
-      categories: ['User Stories']
-    },
-    {
-      slug: 'disney-plus-clickhouse',
-      title: "Disney+ClickHouse, Disney's Flexible ELT Pipelines in ClickHouse",
-      subTitle: 'Roni Lazimi\nSoftware Engineer, Disney+',
-      description:
-        'This talk was given at the ClickHouse Community Meetup in Manhattan on December 6, 2022.',
-      thumbnail: 'https://img.youtube.com/vi/CVVp6N8Xeoc/maxresdefault.jpg',
-      embed:
-        '<iframe src="https://www.youtube-nocookie.com/embed/CVVp6N8Xeoc?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>',
       categories: ['User Stories']
     },
     {

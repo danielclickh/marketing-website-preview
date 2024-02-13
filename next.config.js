@@ -83,7 +83,7 @@ const nextConfig = {
       {
         source: '/slack',
         destination:
-          'https://join.slack.com/t/clickhousedb/shared_invite/zt-29tze3zyo-lHQ~K_kMu7XRXfZ1fI72dg',
+          'https://join.slack.com/t/clickhousedb/shared_invite/zt-2car40htv-p1sNrGw1q_2PKWhdO0B58Q',
         permanent: true
       },
       {
@@ -380,6 +380,16 @@ const nextConfig = {
       {
         source: '/company/events/clickhouse-workshop',
         destination: '/company/events/clickhouse-fundamentals',
+        permanent: true
+      },
+      {
+        source: '/blog/index.xml',
+        destination: '/rss.xml',
+        permanent: true
+      },
+      {
+        source: '/company/events/202402-cloud-update-live',
+        destination: '/videos/clickhouse-cloud-update-call-feb2024',
         permanent: true
       },
       {
