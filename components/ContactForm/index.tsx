@@ -73,10 +73,12 @@ Compute: ${memory}`)
 
       {formSuccess && (
         <div ref={formSuccessRef}>
-          <ReactMarkdown
-            className='text-center'
-            children='Thank you for submitting the form'
-          />
+          <h3 className='text-center text-2xl font-bold'>
+            Thank you for your submission!
+          </h3>
+          <p className='mt-2 text-center text-neutral-200'>
+            We will be in touch soon.
+          </p>
         </div>
       )}
     </>
