@@ -46,7 +46,6 @@ interface MarketoObjectController extends SpoofedMarketoObject {
 type MarketoFormProps = {
   formId: string
   disclaimer?: string | false
-  siteUrl?: string
 
   // Callbacks
   onLoad?: (formObject: SpoofedMarketoObject) => any
@@ -60,10 +59,7 @@ export default function MarketoForm({
   formId,
   disclaimer = 'By registering, you acknowledge that ClickHouse will process your personal information in accordance with our [Privacy Policy](/legal/privacy-policy).',
   onLoad,
-  onSuccess,
-  siteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL
-    ? process.env.NEXT_PUBLIC_WEBSITE_URL
-    : ''
+  onSuccess
 }: MarketoFormProps) {
   const router = useRouter()
   const instanceId = useId()
@@ -255,20 +251,15 @@ export default function MarketoForm({
   return (
     <>
       {mountIframe && (
-        <>
-          <iframe
-            ref={iframeRef}
-            src={resolveHref(
-              router,
-              `${siteUrl}/marketo-forms/${formId}?${queryString}`
-            )}
-            height={iframeHeight < 24 ? 24 : iframeHeight}
-            scrolling='no' // Deprecated but still hides scrollbars
-            className={`w-full !bg-transparent transition-opacity ${
-              formLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
-          />
-        </>
+        <iframe
+          ref={iframeRef}
+          src={resolveHref(router, `/marketo-forms/${formId}?${queryString}`)}
+          height={iframeHeight < 24 ? 24 : iframeHeight}
+          scrolling='no' // Deprecated but still hides scrollbars
+          className={`w-full !bg-transparent transition-opacity ${
+            formLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
       )}
 
       {formLoaded && !formSuccess && disclaimer && disclaimer.length && (
