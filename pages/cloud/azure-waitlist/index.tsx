@@ -73,6 +73,7 @@ export default function ContactPage({
                 {!formSuccess && (
                   <MarketoForm
                     formId='1070'
+                    disclaimer={contactForm.disclaimer}
                     onLoad={() => setFormLoaded(true)}
                     onSuccess={() => {
                       setFormSuccess(true)
@@ -87,12 +88,6 @@ export default function ContactPage({
                       return false // Stops page from reloading
                     }}
                   />
-                )}
-
-                {formLoaded && !formSuccess && (
-                  <div className='disclaimer-text text-center text-sm font-medium text-neutral-200'>
-                    <Markdown>{contactForm.disclaimer}</Markdown>
-                  </div>
                 )}
 
                 {!formLoaded && (

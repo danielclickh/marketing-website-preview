@@ -46,10 +46,7 @@ export default function Footer({
           <div className='mb-4 text-sm text-neutral-400'>
             {newsletterForm?.description}
           </div>
-          <NewsLetterForm
-            emailLabel={newsletterForm.inputLabel}
-            submitButtonLabel={newsletterForm.buttonLabel}
-          />
+          <NewsLetterForm />
         </div>
       </div>
       <div className='section-container w-full border-t border-neutral-400 opacity-10 shadow-footer-line' />

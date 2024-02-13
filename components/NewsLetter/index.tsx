@@ -20,10 +20,7 @@ function NewsLetter({
             {description}
           </SuiText>
         </div>
-        <NewsLetterForm
-          emailLabel={emailLabel}
-          submitButtonLabel={submitButtonLabel}
-        />
+        <NewsLetterForm />
       </div>
     </SuiPanel>
   )

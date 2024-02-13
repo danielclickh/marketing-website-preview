@@ -1,40 +1,17 @@
-import { FocusEvent, FormEvent, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+import MarketoForm, { SpoofedMarketoObject } from '../MarketoForm'
 import { useRouter } from 'next/router'
 
-import { submitWorkatoForm } from '../../lib/api/workato'
-import { validateEmail } from '../../lib/form'
-import { ContactFormProps } from '../../types/contact'
-import ReactMarkdown from 'react-markdown'
-
-import {
-  SuiButton,
-  SuiTextField,
-  SuiTextFieldArea,
-  useSnackbar
-} from '../sui/client'
-
-function ContactForm({
-  firstNameLabel,
-  lastNameLabel,
-  emailLabel,
-  companyLabel,
-  messageLabel,
-  submitButtonLabel,
-  thankYouMessage,
-  onSuccess
-}: ContactFormProps) {
-  const { openSnackBar } = useSnackbar()
-  const [firstName, setFirstName] = useState<string>()
-  const [lastName, setLastName] = useState<string>()
-  const [email, setEmail] = useState<string>()
-  const [company, setCompany] = useState<string>()
-  const submitRef = useRef(false)
-  const [useCase, setUseCase] = useState<string>('')
-
-  const [formProcessing, setFormProcessing] = useState(false)
-  const [submissionSuccessful, setSubmissionSuccessful] = useState(false)
-
+function ContactForm() {
   const router = useRouter()
+
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
+  const [useCase, setUseCase] = useState<string>('')
+  const [marketoForm, setMarketoForm] = useState<SpoofedMarketoObject>()
+
   useEffect(() => {
     if (router.query.custom) {
       let customPricingQuoteObj = { ...router.query }
@@ -50,212 +27,59 @@ function ContactForm({
         }
       }
       setUseCase(`
-
-=== Custom pricing request ===
+--- Custom pricing request ---
 Service type: ${customPricingQuoteObj.tier}
 Provider: ${customPricingQuoteObj.provider}
 Region: ${customPricingQuoteObj.region}
 Active hours: ${customPricingQuoteObj.hours}
 Data volume: ${customPricingQuoteObj.storageSize}GB
 Data compressed: ${customPricingQuoteObj.storageCompressed}
-Compute: ${memory}
-`)
+Compute: ${memory}`)
     }
   }, [router.query])
 
-  const onChange = (
-    e:
-      | FormEvent<HTMLInputElement | HTMLTextAreaElement>
-      | FocusEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const value = (e.target as any).value ?? ''
-    const name = (e.target as any).name
-
-    switch (name) {
-      case 'firstName':
-        setFirstName(value)
-        break
-
-      case 'lastName':
-        setLastName(value)
-        break
-
-      case 'email':
-        setEmail(value)
-        break
-
-      case 'company':
-        setCompany(value)
-        break
-
-      case 'useCase':
-        setUseCase(value)
-        break
-
-      default:
-        break
+  useEffect(() => {
+    if (marketoForm && useCase) {
+      marketoForm.setValues({
+        programmessagefull: useCase
+      })
     }
-  }
-
-  const onSubmit = async () => {
-    if (submitRef.current) {
-      return
-    }
-
-    if (
-      !firstName ||
-      !lastName ||
-      !email ||
-      !company ||
-      !useCase ||
-      firstName.length === 0 ||
-      lastName.length === 0 ||
-      email.length === 0 ||
-      company.length === 0 ||
-      useCase.length === 0
-    ) {
-      openSnackBar('Please fill in all the required fields', 'error')
-      return
-    }
-
-    if (!validateEmail(email)) {
-      openSnackBar('Please enter a valid e-mail address', 'error')
-      return
-    }
-
-    setFormProcessing(true)
-
-    try {
-      submitRef.current = true
-      const requestData = {
-        firstName,
-        lastName,
-        email,
-        company,
-        message: useCase
-      }
-
-      const response = await submitWorkatoForm('websiteContact', requestData)
-      const userId = response?.cloudId ? response.cloudId : email
-
-      setSubmissionSuccessful(true)
-      setFirstName(undefined)
-      setLastName(undefined)
-      setEmail(undefined)
-      setCompany(undefined)
-      setUseCase('')
-
-      if (onSuccess) {
-        onSuccess()
-      }
-    } catch (e: any) {
-      setSubmissionSuccessful(false)
-      openSnackBar(e.message, 'error')
-    }
-
-    setFormProcessing(false)
-
-    submitRef.current = false
-  }
+  }, [marketoForm, useCase])
 
   return (
     <>
-      <div className={submissionSuccessful ? 'hidden' : ''}>
-        <div className='flex space-x-8'>
-          <SuiTextField
-            htmlFor='firstName'
-            name='firstName'
-            label={firstNameLabel}
-            value={firstName ?? ''}
-            onChange={onChange}
-            onBlur={onChange}
-            className='w-full'
-            error={
-              typeof firstName === 'string' && firstName.length === 0
-                ? 'Invalid First Name'
-                : ''
-            }
-            required
-          />
-          <SuiTextField
-            htmlFor='lastName'
-            name='lastName'
-            value={lastName ?? ''}
-            onChange={onChange}
-            onBlur={onChange}
-            label={lastNameLabel}
-            error={
-              typeof lastName === 'string' && lastName.length === 0
-                ? 'Invalid Last Name'
-                : ''
-            }
-            className='w-full'
-            required
-          />
-        </div>
-        <div className='flex w-full'>
-          <SuiTextField
-            htmlFor='email'
-            name='email'
-            type='email'
-            value={email ?? ''}
-            onChange={onChange}
-            onBlur={onChange}
-            label={emailLabel}
-            error={
-              typeof email === 'undefined'
-                ? undefined
-                : email.length === 0
-                ? 'E-mail address cannot be empty'
-                : validateEmail(email)
-                ? ''
-                : 'Invalid E-mail address'
-            }
-            className='w-full'
-            required
-          />
-        </div>
-        <div className='flex'>
-          <SuiTextField
-            htmlFor='company'
-            name='company'
-            value={company ?? ''}
-            onChange={onChange}
-            onBlur={onChange}
-            label={companyLabel}
-            error={
-              typeof company === 'string' && company.length === 0
-                ? 'Company name cannot be empty'
-                : ''
-            }
-            className='w-full'
-            required
-          />
-        </div>
-        <div className='flex'>
-          <SuiTextFieldArea
-            htmlFor='useCase'
-            name='useCase'
-            value={useCase}
-            onChange={onChange}
-            onBlur={onChange}
-            label={messageLabel}
-            className='w-full'
-          />
-        </div>
+      {!formSuccess && (
+        <MarketoForm
+          formId={'1124'}
+          onLoad={(formObject) => {
+            setFormLoaded(true)
+            setMarketoForm(formObject)
+          }}
+          onSuccess={() => {
+            setFormSuccess(true)
+            // Delay needed to allow the ref to update before scrolling
+            setTimeout(() => {
+              formSuccessRef.current?.scrollIntoView({
+                behavior: 'smooth'
+              })
+            }, 10)
 
-        <div className='mx-auto flex w-full'>
-          <SuiButton
-            type='primary'
-            onClick={onSubmit}
-            className='w-full rounded-md hover:translate-y-0 hover:bg-primary-400 hover:no-underline'>
-            {formProcessing && 'Please Wait'}
-            {!formProcessing && submitButtonLabel}
-          </SuiButton>
+            return false // Stops page from reloading
+          }}
+        />
+      )}
+
+      {!formLoaded && <div className='text-center'>Loading form...</div>}
+
+      {formSuccess && (
+        <div ref={formSuccessRef}>
+          <h3 className='text-center text-2xl font-bold'>
+            Thank you for your submission!
+          </h3>
+          <p className='mt-2 text-center text-neutral-200'>
+            We will be in touch soon.
+          </p>
         </div>
-      </div>
-      {submissionSuccessful && (
-        <ReactMarkdown className='text-center' children={thankYouMessage} />
       )}
     </>
   )

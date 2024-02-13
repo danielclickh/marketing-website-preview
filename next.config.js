@@ -391,6 +391,11 @@ const nextConfig = {
         source: '/company/events/202402-cloud-update-live',
         destination: '/videos/clickhouse-cloud-update-call-feb2024',
         permanent: true
+      },
+      {
+        source: '/company/events/v24-1-community-release-call',
+        destination: 'https://www.youtube.com/watch?v=pBF9g0wGAGs',
+        permanent: true
       }
     ]
   }

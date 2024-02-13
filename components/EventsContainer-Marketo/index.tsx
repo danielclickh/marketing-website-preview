@@ -1,14 +1,11 @@
+import { CheckCircleIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
-import { CUIButton } from '../ClickUI'
 import CopyUrlButton from '../CopyUrlButton'
-import Markdown from '../Markdown'
 import MarketoForm from '../MarketoForm'
 import SocialButton from '../SocialButton'
 import { SuiPanel } from '../sui'
-import VideoPlayer from '../VideoPlayer'
 import { EventsContainerProps } from './types'
-import { CheckCircleIcon } from '@heroicons/react/outline'
 
 interface MarketoEventsContainerProps extends EventsContainerProps {
   mktoFormId: string
@@ -16,34 +13,15 @@ interface MarketoEventsContainerProps extends EventsContainerProps {
 
 function EventsContainerMarketo({
   children,
-  localDatetime,
-  form,
   mktoFormId,
-  recordedVimeoUrl,
   featuredImage
 }: MarketoEventsContainerProps) {
-  const [isSubmitted, setIsSubmitted] = useState(false)
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
 
-  const onSubmit = () => {
-    setIsSubmitted(true)
-    setTimeout(() => {
-      window.scrollTo(0, 0)
-    }, 0)
-  }
-
-  const eventEnded = new Date(localDatetime).valueOf() < Date.now()
   return (
     <div className='mx-auto flex w-full max-w-7xl flex-col px-4 pb-16 pt-24 sm:px-8 2xl:px-0'>
-      {isSubmitted &&
-        (!eventEnded || form.type === 'recordedGatedContent') &&
-        recordedVimeoUrl && (
-          <div className='mb-10 flex w-full items-start'>
-            <VideoPlayer videoId={recordedVimeoUrl} provider='vimeo' />
-          </div>
-        )}
       <div className='event-container mx-auto block w-full lg:flex lg:items-start lg:justify-between'>
         <div className='mb-16 mr-0 flex-auto lg:mb-0 lg:mr-16 lg:max-w-2xl'>
           {children}
@@ -81,16 +59,6 @@ function EventsContainerMarketo({
                   return false // Stops page from reloading
                 }}
               />
-            )}
-
-            {formLoaded && !formSuccess && (
-              <div className='disclaimer-text mt-8 text-center text-sm font-medium text-neutral-200'>
-                <Markdown>
-                  By registering, you acknowledge that ClickHouse will process
-                  your personal information in accordance with our [Privacy
-                  Policy](/legal/privacy-policy).
-                </Markdown>
-              </div>
             )}
 
             {!formLoaded && <div className='text-center'>Loading form...</div>}
