@@ -225,7 +225,7 @@ const trainingCards: Array<TrainingCardProps> = [
     description:
       'Learn from ClickHouse experts by attending one of our virtual training sessions. Instructors deliver the content live.',
     perks: ['Hands-on lab activities', 'Live Q&A and engaging interactions'],
-    link: 'https://clickhouse.com/company/events/clickhouse-workshop'
+    link: 'https://clickhouse.com/company/events/clickhouse-fundamentals'
   },
   {
     icon: <Certificate />,
@@ -356,7 +356,7 @@ export default function LearnPage({
               size='lg'
               className='mt-6 !px-12'
               linkClass='inline-block'
-              href='/company/events/clickhouse-workshop'>
+              href='/company/events/clickhouse-fundamentals'>
               Register now
             </CUIButton>
           </div>
