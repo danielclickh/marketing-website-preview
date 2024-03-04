@@ -18,15 +18,5 @@
         "target": "_blank",
         "imgWidth": 153,
         "imgHeight": 30
-    },
-    {
-        "id": 30,
-        "logo": "/images/use-cases/logging/logo-uber.svg",
-        "title": "Uber",
-        "content": "The platform is ingesting millions of logs per second from thousands of services across regions, storing several PBs worth, and serving hundreds of queries per second from both dashboards and programs.",
-        "href": "https://www.uber.com/blog/logging",
-        "target": "_blank",
-        "imgWidth": 74,
-        "imgHeight": 26
     }
 ]

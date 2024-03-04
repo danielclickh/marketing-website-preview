@@ -5,8 +5,8 @@ import { CUIButton, CUICard } from '../ClickUI'
 import HomepageCustomerVideos from '../HomepageVideos'
 import { SuiTitle } from '../sui'
 import developerOptions from './developerOptions.json'
-import { galaxyOnClick } from '../../lib/galaxy/galaxy';
-import { FullyQualifiedEvent } from '../../lib/galaxy/client/index';
+import { galaxyOnClick } from '../../lib/galaxy/galaxy'
+import { FullyQualifiedEvent } from '../../lib/galaxy/client/index'
 
 function DevelopersSection() {
   return (
@@ -19,7 +19,7 @@ function DevelopersSection() {
         {developerOptions.map((developerOption, index) => (
           <CUICard key={`developerOption-${index}`}>
             {developerOption.img && (
-              <CUICard.Header className='h-44 w-full'>
+              <CUICard.Header>
                 <Image
                   src={developerOption.img}
                   alt={`Image for ${developerOption.title ?? ''}`}
@@ -45,7 +45,9 @@ function DevelopersSection() {
                 linkClass='w-full group inline-grid'
                 href={developerOption.href}
                 target='_blank'
-                onClick={galaxyOnClick(developerOption.event as FullyQualifiedEvent)}
+                onClick={galaxyOnClick(
+                  developerOption.event as FullyQualifiedEvent
+                )}
                 iconRight={
                   <ChevronRightIcon
                     height='18'
