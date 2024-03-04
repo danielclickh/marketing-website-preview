@@ -18,7 +18,7 @@
   {
     "img": "/images/homepage/dev_cover_lyft.svg",
     "title": "Lyft's Real-time Analytics",
-    "description": "ClickHouse has been great for us. It has solved all the use cases we have thrown at it.",
+    "description": "Read about how ClickHouse has been great for Lyft. It has solved all the use cases that they  have thrown at it.",
     "btnText": "Learn More",
     "href": "/videos/lyft-user-story",
     "event": "homePage.engBlogs.lyftLearnMoreSelect"
