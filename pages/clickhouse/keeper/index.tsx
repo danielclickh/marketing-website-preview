@@ -8,6 +8,7 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { KeeperData } from '../../../types/keeper'
 import features from './features.json'
 import replacements from './replacements.json'
+import {galaxyOnPage} from "../../../lib/galaxy/galaxy";
 
 export const getStaticProps: GetStaticProps<KeeperData> =
   async function getStaticProps() {
@@ -24,6 +25,9 @@ export default function KeeperPage({
   footerData,
   platforms
 }: KeeperData) {
+
+  galaxyOnPage('keeperPage');
+
   const seoData = {
     path: '/clickhouse/keeper',
     title: 'ClickHouse Keeper - Open-source coordination that scales',

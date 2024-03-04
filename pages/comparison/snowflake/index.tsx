@@ -1,21 +1,21 @@
-import { GetStaticProps } from 'next'
+import {GetStaticProps} from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useRef, useState } from 'react'
+import React, {useRef, useState} from 'react'
 import ReactMarkdown from 'react-markdown'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
-import { CUIButton, CUICard } from '../../../components/ClickUI'
+import {CUIButton, CUICard} from '../../../components/ClickUI'
 import GetStarted from '../../../components/GetStarted'
 import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
 import MarketoForm from '../../../components/MarketoForm'
-import { StrapiImage } from '../../../components/StrapiElements'
-import { findAll, findOne } from '../../../lib/api/strapi'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { ComparisonProps, BigNumber } from '../../../types/comparisons'
-import stats from './stats.json'
+import {StrapiImage} from '../../../components/StrapiElements'
+import {findAll, findOne} from '../../../lib/api/strapi'
+import {getCommonProps} from '../../../lib/utils/getCommonProps'
+import {BigNumber, ComparisonProps} from '../../../types/comparisons'
+import {galaxyOnPage} from '../../../lib/galaxy/galaxy'
 
 interface SnowflakePageProps extends ComparisonProps {
   customerStories: any
@@ -108,7 +108,7 @@ export default function SnowflakePage({
     HeroDescription: heroDescription,
     BigNumbers: BigNumbers
   } = comparison.data[0]
-
+  galaxyOnPage('snowflakeComparisonPage');
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage'>

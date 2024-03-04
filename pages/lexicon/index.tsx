@@ -1,13 +1,14 @@
-import { GetStaticProps } from 'next'
+import {GetStaticProps} from 'next'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import {useRouter} from 'next/router'
+import React, {ChangeEvent, useEffect, useState} from 'react'
 import Layout from '../../components/Layout'
-import { SuiSearchField, SuiTitle } from '../../components/sui'
-import { getLexicons } from '../../lib/lexicons'
-import { Lexicon } from '../../lib/lexicons/types'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { CommonProps } from '../../types/homepage'
+import {SuiSearchField, SuiTitle} from '../../components/sui'
+import {getLexicons} from '../../lib/lexicons'
+import {Lexicon} from '../../lib/lexicons/types'
+import {getCommonProps} from '../../lib/utils/getCommonProps'
+import {CommonProps} from '../../types/homepage'
+import {galaxyOnPage} from '../../lib/galaxy/galaxy'
 
 interface LexiconProps extends CommonProps {
   lexiconItems: Lexicon[]
@@ -33,7 +34,7 @@ export const getStaticProps: GetStaticProps<LexiconProps> =
 function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
 
   const router = useRouter()
-  const [search, setSearch] = useState<string|null>(null)
+  const [search, setSearch] = useState<string | null>(null)
 
   const searchChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
 
@@ -57,7 +58,7 @@ function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
   // Load values from query string
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search)
-    const urlSearch = queryParams.get('search');
+    const urlSearch = queryParams.get('search')
 
     // Check the search query is not empty
     if (urlSearch && String(urlSearch).trim().length) {
@@ -67,10 +68,10 @@ function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
 
   // Update query string values
   useEffect(() => {
-    const queryParams = [];
+    const queryParams = []
 
     if (search) {
-      queryParams.push(`search=${encodeURIComponent(search)}`);
+      queryParams.push(`search=${encodeURIComponent(search)}`)
     }
 
     if (queryParams.length) {
@@ -80,37 +81,39 @@ function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
     }
   }, [search])
 
+  galaxyOnPage('lexiconPage');
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='bg-grid'>
-        <div className='section-container py-16 md:py-20'>
-          <SuiTitle type='h1' color='white' className='mb-12 md:!text-6xl'>
+      <div className="bg-grid">
+        <div className="section-container py-16 md:py-20">
+          <SuiTitle type="h1" color="white" className="mb-12 md:!text-6xl">
             ClickHouse Lexicon
           </SuiTitle>
 
           <SuiSearchField
-            placeholder='Search by title or keyword...'
-            htmlFor='search'
-            className='max-w-[300px]'
+            placeholder="Search by title or keyword..."
+            htmlFor="search"
+            className="max-w-[300px]"
             value={search || ''}
             onChange={searchChange} />
 
-          <hr className='border-0 h-[1px] bg-white bg-opacity-40 my-6' />
+          <hr className="border-0 h-[1px] bg-white bg-opacity-40 my-6" />
 
 
           {items.map((item) => {
             return (
-              <div className='flex flex-wrap md:flex-nowrap items-center justify-between my-10' key={item.slug}>
-                <div className='w-full md:w-1/3 mb-4 md:mb-0'>
-                  <SuiTitle type='h2' className='!text-xl'>
+              <div className="flex flex-wrap md:flex-nowrap items-center justify-between my-10" key={item.slug}>
+                <div className="w-full md:w-1/3 mb-4 md:mb-0">
+                  <SuiTitle type="h2" className="!text-xl">
                     <Link
                       href={`/lexicon/${item.slug}`}
-                      className='text-primary-300 hover:underline'>
+                      className="text-primary-300 hover:underline">
                       {item.title}
                     </Link>
                   </SuiTitle>
                 </div>
-                <div className='w-full md:w-2/3'>
+                <div className="w-full md:w-2/3">
                   {item.excerpt}
                 </div>
               </div>
@@ -118,7 +121,7 @@ function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
           })}
 
           {!items.length && (
-            <p className='text-center mt-12'>
+            <p className="text-center mt-12">
               {search ? `No search results for "${search}"` : 'No results'}
             </p>
           )}

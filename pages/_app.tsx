@@ -10,6 +10,7 @@ import Script from 'next/script'
 import UTMPersist from '../components/UTMPersist'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useInitGalaxy } from '../lib/galaxy/galaxy';
 
 const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K'
 const websiteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL
@@ -40,6 +41,7 @@ const inconsolata = Inconsolata({
 })
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
+  useInitGalaxy();
   return (
     <>
       <Head>

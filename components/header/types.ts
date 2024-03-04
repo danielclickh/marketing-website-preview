@@ -6,6 +6,7 @@ export interface HeaderTopNavItem {
   href?: string
   target?: LinkTarget
   menuItems: Array<HeaderLinkItem>
+  galaxyEvent?: string
 }
 
 export interface HeaderNavItem {
@@ -14,6 +15,7 @@ export interface HeaderNavItem {
   href?: never
   target?: never
   menuItems: Array<HeaderTopNavItem>
+  galaxyEvent?: string
 }
 
 export interface HeaderLinkItem {
@@ -24,6 +26,7 @@ export interface HeaderLinkItem {
   name: string
   icon?: string
   menuItems?: never
+  galaxyEvent?: string
 }
 
 export interface RegularNavItem {

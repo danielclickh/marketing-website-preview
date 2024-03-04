@@ -13,6 +13,7 @@ import UseCasesComparisons from '../../components/UseCasesComparisons'
 import { findAll, findOne } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { useCasesPageDataProps } from '../../types/useCasesPage'
+import {galaxyOnPage} from "../../lib/galaxy/galaxy";
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -89,6 +90,7 @@ function UseCasesPage({
   individualUseCases,
   quotes
 }: useCasesPageDataProps) {
+    galaxyOnPage('useCasesPage');
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>

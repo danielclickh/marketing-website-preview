@@ -11,6 +11,7 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ClickPipesData } from '../../../types/clickpipes'
 import features from './features.json'
 import integrations from './integrations.json'
+import {galaxyOnLoad, galaxyOnPage} from "../../../lib/galaxy/galaxy";
 
 export const getStaticProps: GetStaticProps<ClickPipesData> =
   async function getStaticProps() {
@@ -38,6 +39,8 @@ export default function ClickHouseServerPage({
   headerData,
   footerData
 }: ClickPipesData) {
+
+  galaxyOnPage('clickPipesPage');
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>

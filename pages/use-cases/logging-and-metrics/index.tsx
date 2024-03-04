@@ -1,22 +1,23 @@
-import { GetStaticProps } from 'next'
+import {GetStaticProps} from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import {useEffect} from 'react'
 import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import AccordionComponent from '../../../components/LoggingDiagram/Accordion'
 import LogoCarousel from '../../../components/LogoCarousel'
-import { SuiText, SuiTitle } from '../../../components/sui'
-import { findOne } from '../../../lib/api/strapi'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { CommonProps } from '../../../types/homepage'
+import {SuiText, SuiTitle} from '../../../components/sui'
+import {findOne} from '../../../lib/api/strapi'
+import {getCommonProps} from '../../../lib/utils/getCommonProps'
+import {CommonProps} from '../../../types/homepage'
 import features from './features.json'
 import quotes from './quotes.json'
 import callouts from './callouts.json'
 import Markdown from '../../../components/Markdown'
-import { CUIButton } from '../../../components/ClickUI'
+import {CUIButton} from '../../../components/ClickUI'
+import {galaxyOnPage} from "../../../lib/galaxy/galaxy";
 
 interface LoggingProps extends CommonProps {
   customerStories: any
@@ -59,6 +60,7 @@ export default function ClickHouseServerPage({
   headerData,
   footerData
 }: LoggingProps) {
+  galaxyOnPage('logsMetricsUseCasePage');
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {

@@ -1,23 +1,24 @@
-import { GetStaticProps } from 'next'
+import {GetStaticProps} from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
-import { CUICard } from '../../../components/ClickUI'
+import {CUICard} from '../../../components/ClickUI'
 import ContactForm from '../../../components/ContactForm'
 import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
-import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
+import {getNewsLetterData} from '../../../components/NewsLetter/getNewsLetterData'
 import ResponsiveEmbed from '../../../components/ResponsiveEmbed'
-import { StrapiImage } from '../../../components/StrapiElements'
-import { findAll } from '../../../lib/api/strapi'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
-import { ComparisonProps } from '../../../types/comparisons'
+import {StrapiImage} from '../../../components/StrapiElements'
+import {findAll} from '../../../lib/api/strapi'
+import {getCommonProps} from '../../../lib/utils/getCommonProps'
+import {REVALIDATE_SECONDS} from '../../../lib/utils/revalidationConfig'
+import {ComparisonProps} from '../../../types/comparisons'
+import {galaxyOnPage} from '../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
   async function getStaticProps() {
@@ -91,6 +92,7 @@ export default function ComparisonPage({
   seo,
   comparison
 }: ComparisonProps) {
+  galaxyOnPage('redshiftComparisonPage');
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>

@@ -1,16 +1,17 @@
-import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
-import { findOne } from '../../lib/api/strapi'
-import { StrapiPicture } from '../../components/StrapiElements'
+import {SuiButton, SuiText, SuiTitle} from '../../components/sui'
+import {findOne} from '../../lib/api/strapi'
+import {StrapiPicture} from '../../components/StrapiElements'
 import BulletPoint from '../../components/BulletPoint'
 import GetStarted from '../../components/GetStarted'
-import { ClickhouseData } from '../../types/clickhouse'
+import {ClickhouseData} from '../../types/clickhouse'
 import features from './features.json'
 import Image from 'next/image'
-import { GetStaticProps } from 'next'
+import {GetStaticProps} from 'next'
 import Layout from '../../components/Layout'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { CUIButton, CUICard } from '../../components/ClickUI'
+import {getCommonProps} from '../../lib/utils/getCommonProps'
+import {CUIButton, CUICard} from '../../components/ClickUI'
 import HRSeparator from '../../components/HRSeparator'
+import {galaxyOnPage} from "../../lib/galaxy/galaxy";
 
 export const getStaticProps: GetStaticProps<ClickhouseData> =
   async function getStaticProps() {
@@ -49,6 +50,8 @@ export default function ClickHouseServerPage({
   headerData,
   footerData
 }: ClickhouseData) {
+  galaxyOnPage('productOpenSourcePage');
+
   const { description, mainButton, secondaryButton, gitButton } = hero
   return (
     <>

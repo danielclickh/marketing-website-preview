@@ -1,12 +1,13 @@
-import type { InferGetStaticPropsType } from 'next'
+import type {InferGetStaticPropsType} from 'next'
 import React from 'react'
 import VideosList from '../../components/VideosList'
 import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'
-import { SuiTitle } from '../../components/sui'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
-import { CommonProps } from '../../types/homepage'
+import {SuiTitle} from '../../components/sui'
+import {getCommonProps} from '../../lib/utils/getCommonProps'
+import {REVALIDATE_SECONDS} from '../../lib/utils/revalidationConfig'
+import {CommonProps} from '../../types/homepage'
+import {galaxyOnPage} from "../../lib/galaxy/galaxy";
 
 interface VideosPageProps extends CommonProps {
   title: string,
@@ -35,6 +36,8 @@ export default function VideosPage({
   headerData,
   footerData
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  galaxyOnPage('videosPage');
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <SuiTitle

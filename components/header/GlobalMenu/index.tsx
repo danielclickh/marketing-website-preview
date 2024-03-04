@@ -7,6 +7,8 @@ import Image from 'next/image'
 import styles from './styles.module.scss'
 import { SuiText } from '../../sui'
 import Link from 'next/link'
+import { galaxyOnClick } from '../../../lib/galaxy/galaxy'
+import { FullyQualifiedEvent } from '../../../lib/galaxy/client'
 
 const headerMenuItems = menuItems as Array<MenuItemType>
 const GlobalMenu = () => {
@@ -22,7 +24,8 @@ const GlobalMenu = () => {
                 <NavigationMenu.Item key={menuItem.name}>
                   <NavigationMenu.Link
                     className={styles.topLevelNavItem}
-                    href={menuItem.href}>
+                    href={menuItem.href}
+                    onClick={menuItem.galaxyEvent ? galaxyOnClick(menuItem.galaxyEvent as FullyQualifiedEvent): undefined}>
                     {menuItem.name}
                   </NavigationMenu.Link>
                 </NavigationMenu.Item>
@@ -35,11 +38,23 @@ const GlobalMenu = () => {
                 <NavigationMenu.Item key={menuItem.name}>
                   {menuItem.name === 'Use cases' ? (
                     <NavigationMenu.Trigger className={styles.topLevelNavItem}>
-                      <Link href='/use-cases'>Use cases</Link>
+                      <Link
+                        href='/use-cases'
+                        onClick={galaxyOnClick(
+                          'topNav.navItems.useCasesSelect'
+                        )}>
+                        Use cases
+                      </Link>
                     </NavigationMenu.Trigger>
                   ) : menuItem.name === 'Pricing' ? (
                     <NavigationMenu.Trigger className={styles.topLevelNavItem}>
-                      <Link href='/pricing'>Pricing</Link>
+                      <Link
+                        href='/pricing'
+                        onClick={galaxyOnClick(
+                          'topNav.navItems.pricingSelect'
+                        )}>
+                        Pricing
+                      </Link>
                     </NavigationMenu.Trigger>
                   ) : (
                     <NavigationMenu.Trigger className={styles.topLevelNavItem}>
@@ -62,7 +77,13 @@ const GlobalMenu = () => {
                             <div className='mb-4 border-b border-neutral-700 border-opacity-40 bg-neutral-725 bg-opacity-90'>
                               <ListItem
                                 href={subMenuItem.href}
-                                className='group rounded-none bg-opacity-10 pl-4 lg:min-w-[9.5rem]'>
+                                className='group rounded-none bg-opacity-10 pl-4 lg:min-w-[9.5rem]'
+                                onClick={() => {
+                                  subMenuItem.galaxyEvent &&
+                                    window.galaxy.track(
+                                      subMenuItem.galaxyEvent as FullyQualifiedEvent
+                                    )
+                                }}>
                                 <SuiText
                                   size='sm'
                                   className='text-neutral-100 group-hover:text-neutral-0'
@@ -79,7 +100,13 @@ const GlobalMenu = () => {
                                       <ListItem
                                         href={deepMenuItem.href}
                                         key={deepMenuItem.name}
-                                        className='group mx-auto rounded-none'>
+                                        className='group mx-auto rounded-none'
+                                        onClick={() => {
+                                          deepMenuItem.galaxyEvent &&
+                                            window.galaxy.track(
+                                              deepMenuItem.galaxyEvent as FullyQualifiedEvent
+                                            )
+                                        }}>
                                         <div className='flex gap-4'>
                                           <Image
                                             src={deepMenuItem.icon}
@@ -105,7 +132,13 @@ const GlobalMenu = () => {
                                         href={deepMenuItem.href}
                                         key={deepMenuItem.name}
                                         target={deepMenuItem.target}
-                                        className='group w-full pl-4'>
+                                        className='group w-full pl-4'
+                                        onClick={() => {
+                                          deepMenuItem.galaxyEvent &&
+                                            window.galaxy.track(
+                                              deepMenuItem.galaxyEvent as FullyQualifiedEvent
+                                            )
+                                        }}>
                                         <SuiText
                                           weight='medium'
                                           size='sm'

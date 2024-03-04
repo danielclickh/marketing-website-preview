@@ -1,20 +1,21 @@
-import { useState } from 'react'
-import { SuiPanel } from '../../components/sui'
-import { UseCase } from '../../components/use_case'
-import { findAll, findOne } from '../../lib/api/strapi'
+import {useState} from 'react'
+import {SuiPanel} from '../../components/sui'
+import {UseCase} from '../../components/use_case'
+import {findAll, findOne} from '../../lib/api/strapi'
 
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import { UseCasesData } from '../../types/useCases'
-import { GetStaticProps } from 'next'
+import {ChevronRightIcon} from '@heroicons/react/solid'
+import {UseCasesData} from '../../types/useCases'
+import {GetStaticProps} from 'next'
 import Layout from '../../components/Layout'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
+import {getCommonProps} from '../../lib/utils/getCommonProps'
 import Image from 'next/image'
-import { CUIButton } from '../../components/ClickUI'
+import {CUIButton} from '../../components/ClickUI'
 import HRSeparator from '../../components/HRSeparator'
-import { CheckIcon } from '@heroicons/react/outline'
+import {CheckIcon} from '@heroicons/react/outline'
 import GiveItAGo from '../../components/GiveItAGo'
 import BlogPost from '../../components/BlogPostList/BlogPost'
 import HomepageCustomerVideos from '../../components/HomepageVideos'
+import {galaxyOnPage} from "../../lib/galaxy/galaxy";
 
 export const getStaticProps: GetStaticProps<UseCasesData> =
   async function getStaticProps() {
@@ -174,6 +175,7 @@ function CustomerStoriesPage({
   headerData,
   footerData
 }: UseCasesData) {
+  galaxyOnPage('userStoriesPage');
   const [visibleTestimonials, setVisibleTestimonials] = useState(6)
 
   const loadMore = () => {

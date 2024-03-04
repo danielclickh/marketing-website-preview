@@ -1,9 +1,9 @@
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import { GetStaticProps } from 'next'
+import {ChevronRightIcon} from '@heroicons/react/solid'
+import {GetStaticProps} from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { CSSProperties } from 'react'
-import { CUIButton, CUICard, CUILink } from '../components/ClickUI'
+import {CSSProperties} from 'react'
+import {CUIButton, CUICard, CUILink} from '../components/ClickUI'
 import ColumnOrientedIllustration from '../components/ColumnOrientedIllustration'
 import DevelopersSection from '../components/DevelopersSection'
 import FAQ from '../components/FAQ'
@@ -16,11 +16,13 @@ import LogoCarousel from '../components/LogoCarousel'
 import RowOrientedIllustration from '../components/RowOrientedIllustration'
 import SpeedAnimationSvg from '../components/SpeedAnimation'
 import SpeedAnimationMobileSvg from '../components/SpeedAnimation/Mobile'
-import { SuiTitle } from '../components/sui'
+import {SuiTitle} from '../components/sui'
 import HomePageTerminal from '../components/Terminal/HomePageTerminal'
-import { findOne } from '../lib/api/strapi'
-import { getCommonProps } from '../lib/utils/getCommonProps'
-import { HomePageProps } from '../types/homepage'
+import {findOne} from '../lib/api/strapi'
+import {getCommonProps} from '../lib/utils/getCommonProps'
+import {HomePageProps} from '../types/homepage'
+import {galaxyOnClick, galaxyOnPage} from '../lib/galaxy/galaxy';
+import {FullyQualifiedEvent} from '../lib/galaxy/client/index';
 
 const yellowPositionStyle = {
   '--left-side': 'auto',
@@ -34,7 +36,8 @@ type DeployData = {
   description: string
   href: string
   target?: string
-  btnType: 'secondary' | 'primary' | 'secondary-dark'
+  btnType: 'secondary' | 'primary' | 'secondary-dark',
+  event: FullyQualifiedEvent
 }
 
 const deployData: Array<DeployData> = [
@@ -45,7 +48,8 @@ const deployData: Array<DeployData> = [
     description:
       'Run fast queries on local files (CSV, TSV, Parquet, and more) without a server.',
     href: 'https://clickhouse.com/docs/en/operations/utilities/clickhouse-local',
-    btnType: 'secondary'
+    btnType: 'secondary',
+    event: 'homePage.deploymentOptions.clickhouseLocalSelect'
   },
   {
     title: 'Open-source ClickHouse',
@@ -55,7 +59,8 @@ const deployData: Array<DeployData> = [
       'Spin up a database server with open-source ClickHouse. Always Free.',
 
     href: '#getting_started',
-    btnType: 'secondary'
+    btnType: 'secondary',
+    event: 'homePage.deploymentOptions.openSourceSelect'
   },
   {
     title: 'ClickHouse Cloud',
@@ -65,7 +70,8 @@ const deployData: Array<DeployData> = [
       'Available on AWS, GCP, and through their respective Marketplaces. Azure coming soon.',
     href: 'https://clickhouse.cloud/signUp?loc=home-deploy-your-way',
     target: '_blank',
-    btnType: 'primary'
+    btnType: 'primary',
+    event: 'homePage.deploymentOptions.cloudSelect'
   }
 ]
 
@@ -103,6 +109,8 @@ export default function HomePage({
   customerStories,
   platforms
 }: HomePageProps) {
+  galaxyOnPage('homePage');
+
   // Split the customerStories.logos array into two separate arrays
   const logos1 = customerStories.logos.slice(
     0,
@@ -138,6 +146,7 @@ export default function HomePage({
                     weight='semibold'
                     href={hero.ctaButton.href}
                     linkClass='w-full max-w-[14rem]'
+                    onClick={galaxyOnClick('homePage.hero.startTrial')}
                     className='w-full'>
                     Start free trial
                   </CUIButton>
@@ -147,6 +156,7 @@ export default function HomePage({
                     size='lg'
                     href='https://clickhouse.com/docs/en/intro'
                     linkClass='w-full max-w-[14rem]'
+                    onClick={galaxyOnClick('homePage.hero.viewDocsSelect')}
                     className='w-full'>
                     View documentation
                   </CUIButton>
@@ -154,7 +164,8 @@ export default function HomePage({
                 <CUILink
                   href='#getting_started'
                   target='_self'
-                  className='arrow-link mt-5 hidden items-center gap-1 whitespace-nowrap text-neutral-200 hover:text-neutral-0 md:flex'>
+                  className='arrow-link mt-5 hidden items-center gap-1 whitespace-nowrap text-neutral-200 hover:text-neutral-0 md:flex'
+                  onClick={galaxyOnClick('homePage.hero.openSourceSelect')}>
                   Or download open-source ClickHouse{' '}
                   <ChevronRightIcon height='18' className='arrow pt-0.5' />
                 </CUILink>
@@ -323,7 +334,8 @@ export default function HomePage({
                 height='16'
                 className='pt-0.5 transition group-hover:translate-x-1/2'
               />
-            }>
+            }
+            onClick={galaxyOnClick('homePage.whyClickHouse.viewDocsSelect')}>
             Read more in the docs
           </CUIButton>
         </div>
@@ -380,7 +392,8 @@ export default function HomePage({
                         className='arrow pt-0.5 transition group-hover:translate-x-1/2'
                       />
                     }
-                    target={deploy.target}>
+                    target={deploy.target}
+                    onClick={galaxyOnClick(deploy.event)}>
                     {deploy.btnText}
                   </CUIButton>
                 </CUICard.Footer>

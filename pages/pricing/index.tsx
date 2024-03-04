@@ -1,20 +1,16 @@
-import { GetStaticProps } from 'next'
+import {GetStaticProps} from 'next'
 import Image from 'next/image'
 import React from 'react'
-import { CUIButton } from '../../components/ClickUI'
+import {CUIButton} from '../../components/ClickUI'
 import Layout from '../../components/Layout'
 import Markdown from '../../components/Markdown'
-import { PricingCalculator } from '../../components/PricingCalculator'
-import { SuiTitle } from '../../components/sui'
-import { findAll, findOne } from '../../lib/api/strapi'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import {
-  PricingData,
-  PricingPageProps,
-  PricingPlanData,
-  RegionPricing
-} from '../../types/pricing'
+import {PricingCalculator} from '../../components/PricingCalculator'
+import {SuiTitle} from '../../components/sui'
+import {findAll, findOne} from '../../lib/api/strapi'
+import {getCommonProps} from '../../lib/utils/getCommonProps'
+import {PricingData, PricingPageProps, PricingPlanData, RegionPricing} from '../../types/pricing'
 import philosophy from './philosophy.json'
+import {galaxyOnPage} from "../../lib/galaxy/galaxy";
 
 export const getStaticProps: GetStaticProps<PricingPageProps> =
   async function getStaticProps() {
@@ -92,6 +88,9 @@ function PricingPage({
   headerData,
   footerData
 }: PricingPageProps) {
+
+    galaxyOnPage('pricingPage');
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pricing h-full text-neutral-0'>

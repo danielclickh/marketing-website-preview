@@ -1,27 +1,28 @@
-import { useRef, useState, useEffect } from 'react'
+import {useEffect, useRef, useState} from 'react'
 
-import { SuiText, SuiTitle } from '../../components/sui'
+import {SuiText, SuiTitle} from '../../components/sui'
 import CloudProviders from '../../components/CloudProviders'
 
-import { findOne } from '../../lib/api/strapi'
+import {findOne} from '../../lib/api/strapi'
 import BulletPoint from '../../components/BulletPoint'
-import { CloudData } from '../../types/cloud'
-import { GetStaticProps } from 'next'
+import {CloudData} from '../../types/cloud'
+import {GetStaticProps} from 'next'
 import Layout from '../../components/Layout'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { CUIButton, CUICard } from '../../components/ClickUI'
+import {getCommonProps} from '../../lib/utils/getCommonProps'
+import {CUIButton, CUICard} from '../../components/ClickUI'
 import Image from 'next/image'
 import HRSeparator from '../../components/HRSeparator'
 import integrations from './integrations.json'
 import features from './features.json'
 import featureBlocks from './feature_blocks.json'
-import { ChevronRightIcon } from '@heroicons/react/solid'
+import {ChevronRightIcon} from '@heroicons/react/solid'
 import GetStartedFree from '../../components/GetStartedFree'
 import LogoCarousel from '../../components/LogoCarousel'
 import Link from 'next/link'
-import { motion, useInView } from 'framer-motion'
+import {motion, useInView} from 'framer-motion'
 import ClickPipesIntegrationImage from '../../components/ClickPipesAnimation/ClickPipesIntegrationImage'
 import Lines from '../../components/ClickPipesAnimation/Lines'
+import {galaxyOnPage} from "../../lib/galaxy/galaxy";
 
 function getRandomDelay(min: number, max: number): number {
   return Math.random() * (max - min) + min
@@ -74,6 +75,7 @@ export default function CloudPage({
   const integrationsRef = useRef(null)
   const isInView = useInView(integrationsRef)
 
+  galaxyOnPage('productCloudPage');
   useEffect(() => {
     setWindowWidth(window.innerWidth)
     const handleResize = () => {

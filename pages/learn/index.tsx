@@ -1,8 +1,8 @@
-import { ClockIcon } from '@heroicons/react/outline'
+import {ClockIcon} from '@heroicons/react/outline'
 import Image from 'next/image'
 import React from 'react'
-import { GetStaticProps } from 'next'
-import { CUIButton, CUICard } from '../../components/ClickUI'
+import {GetStaticProps} from 'next'
+import {CUIButton, CUICard} from '../../components/ClickUI'
 import Certificate from '../../components/icons/Certificate'
 import CertificateSquare from '../../components/icons/CertificateSquare'
 import DatabasePlus from '../../components/icons/DatabasePlus'
@@ -14,10 +14,11 @@ import VideoSquare from '../../components/icons/VideoSquare'
 import Webcam from '../../components/icons/Webcam'
 import Layout from '../../components/Layout'
 import LogoCarousel from '../../components/LogoCarousel'
-import { SuiText, SuiTitle } from '../../components/sui'
-import { findOne } from '../../lib/api/strapi'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { LearnProps } from '../../types/learn'
+import {SuiText, SuiTitle} from '../../components/sui'
+import {findOne} from '../../lib/api/strapi'
+import {getCommonProps} from '../../lib/utils/getCommonProps'
+import {LearnProps} from '../../types/learn'
+import {galaxyOnPage} from "../../lib/galaxy/galaxy";
 
 export const getStaticProps: GetStaticProps<LearnProps> =
   async function getStaticProps() {
@@ -293,6 +294,8 @@ export default function LearnPage({
   customerStories,
   seo
 }: LearnProps) {
+  galaxyOnPage('learnPage');
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}

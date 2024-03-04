@@ -1,26 +1,24 @@
-import { findAll, getPathsValues } from '../../../lib/api/strapi'
-import { GetStaticProps } from 'next'
+import {findAll, getPathsValues} from '../../../lib/api/strapi'
+import {GetStaticProps} from 'next'
 import Layout from '../../../components/Layout'
-import { ComparisonProps } from '../../../types/comparisons'
-import { ParamsType } from '../../../types/homepage'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
-import {
-  NOT_FOUND_FALLBACK,
-  REVALIDATE_SECONDS
-} from '../../../lib/utils/revalidationConfig'
-import { CUICard } from '../../../components/ClickUI'
+import {ComparisonProps} from '../../../types/comparisons'
+import {ParamsType} from '../../../types/homepage'
+import {getCommonProps} from '../../../lib/utils/getCommonProps'
+import {getNewsLetterData} from '../../../components/NewsLetter/getNewsLetterData'
+import {NOT_FOUND_FALLBACK, REVALIDATE_SECONDS} from '../../../lib/utils/revalidationConfig'
+import {CUICard} from '../../../components/ClickUI'
 import ReactMarkdown from 'react-markdown'
 import HRSeparator from '../../../components/HRSeparator'
 import ContactForm from '../../../components/ContactForm'
-import { StrapiImage } from '../../../components/StrapiElements'
+import {StrapiImage} from '../../../components/StrapiElements'
 import LogoCarousel from '../../../components/LogoCarousel'
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
 import Link from 'next/link'
 import Markdown from '../../../components/Markdown'
 import Tilt from 'react-parallax-tilt'
+import {galaxyOnPage} from '../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
   async function getStaticProps({ params }) {
@@ -75,7 +73,6 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
     const seo = comparison.seo
 
     seo.path = `/comparison/${slug}`
-
     const commonData = await getCommonProps()
     const newsLetterData = await getNewsLetterData()
     return {
@@ -95,6 +92,7 @@ export default function ComparisonPage({
   seo,
   comparison
 }: ComparisonProps) {
+  galaxyOnPage(`${comparison.slug}ComparisonPage`);
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>

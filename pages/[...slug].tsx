@@ -11,6 +11,7 @@ import {
 import { getCommonProps } from '../lib/utils/getCommonProps'
 import { CatAllParamsType, RichContentPageProps } from '../types/homepage'
 import SupportProgram from '../components/SupportProgram'
+import {galaxyOnPage} from "../lib/galaxy/galaxy";
 
 export const getStaticProps: GetStaticProps<RichContentPageProps> =
   async function getStaticProps({ params }) {
@@ -76,11 +77,23 @@ export default function RichContentPage({
     slug &&
     [
       'legal/agreements/terms-of-service',
-      'legal/agreements/terms-of-service',
       'legal/agreements/data-processing-addendum',
       'legal/agreements/terms-of-service/archive/202210',
       'legal/agreements/terms-of-service/archive/202308'
-    ].includes(slug)
+    ].includes(slug);
+
+  const galaxyEventPrefixMap: Record<string, string> = {
+      'support/program': 'supportProgramPage',
+      'legal/agreements/terms-of-service': 'termsOfServicePage',
+      'legal/agreements/data-processing-addendum': 'dataProcessingAddendumPage',
+      'legal/agreements/terms-of-service/archive/202210': 'termsOfServiceArchiveOct2022Page',
+      'legal/agreements/terms-of-service/archive/202308': 'termsOfServiceArchiveAug2023Page',
+  };
+  const galaxyEventPrefix = galaxyEventPrefixMap[slug ?? ''];
+
+  if (galaxyEventPrefix) {
+      galaxyOnPage(galaxyEventPrefix, [slug]);
+  }
 
   const pageBody = (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
