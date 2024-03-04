@@ -10,12 +10,12 @@ import { FullyQualifiedEvent } from '../../lib/galaxy/client/index'
 
 function DevelopersSection() {
   return (
-    <div className='mx-auto max-w-4xl md:px-8 2xl:px-0 '>
+    <div className='section-container md:px-8 2xl:px-0 '>
       <SuiTitle type='h2' className='mb-8 w-full text-left'>
         What do developers say?
       </SuiTitle>
 
-      <div className='grid grid-cols-1 gap-10 md:grid-cols-2'>
+      <div className='grid grid-cols-1 gap-10 md:grid-cols-3'>
         {developerOptions.map((developerOption, index) => (
           <CUICard key={`developerOption-${index}`}>
             {developerOption.img && (
