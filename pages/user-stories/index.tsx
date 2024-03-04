@@ -1,21 +1,21 @@
-import {useState} from 'react'
-import {SuiPanel} from '../../components/sui'
-import {UseCase} from '../../components/use_case'
-import {findAll, findOne} from '../../lib/api/strapi'
+import { useState } from 'react'
+import { SuiPanel } from '../../components/sui'
+import { UseCase } from '../../components/use_case'
+import { findAll, findOne } from '../../lib/api/strapi'
 
-import {ChevronRightIcon} from '@heroicons/react/solid'
-import {UseCasesData} from '../../types/useCases'
-import {GetStaticProps} from 'next'
+import { ChevronRightIcon } from '@heroicons/react/solid'
+import { UseCasesData } from '../../types/useCases'
+import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
-import {getCommonProps} from '../../lib/utils/getCommonProps'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
 import Image from 'next/image'
-import {CUIButton} from '../../components/ClickUI'
+import { CUIButton } from '../../components/ClickUI'
 import HRSeparator from '../../components/HRSeparator'
-import {CheckIcon} from '@heroicons/react/outline'
+import { CheckIcon } from '@heroicons/react/outline'
 import GiveItAGo from '../../components/GiveItAGo'
 import BlogPost from '../../components/BlogPostList/BlogPost'
 import HomepageCustomerVideos from '../../components/HomepageVideos'
-import {galaxyOnPage} from "../../lib/galaxy/galaxy";
+import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<UseCasesData> =
   async function getStaticProps() {
@@ -175,7 +175,7 @@ function CustomerStoriesPage({
   headerData,
   footerData
 }: UseCasesData) {
-  galaxyOnPage('userStoriesPage');
+  galaxyOnPage('userStoriesPage')
   const [visibleTestimonials, setVisibleTestimonials] = useState(6)
 
   const loadMore = () => {
@@ -251,87 +251,6 @@ function CustomerStoriesPage({
             <h2 className='text-center font-basier text-3xl font-bold'>
               Case studies
             </h2>
-          </div>
-          <div>
-            <div
-              className='relative mt-10 flex space-x-12 md:min-h-fit'
-              id={spotlight.anchorId}>
-              <SuiPanel
-                color='bg-neutral-725'
-                border
-                padding='xl'
-                className='border-l-4 border-l-primary-300'>
-                <div className='flex flex-col items-center justify-between lg:flex-row'>
-                  <div className='flex w-full flex-col md:w-2/3 xl:max-w-3xl'>
-                    <p
-                      className='mb-8 font-basier text-2xl font-semibold
-                    '>
-                      Uber moved its logging platform to ClickHouse increasing
-                      developer productivity and overall reliability
-                    </p>
-                    <ul className='space-y-4'>
-                      <li>
-                        <p className='flex items-center space-x-3'>
-                          <CheckIcon className='h-6 w-6 stroke-1 text-primary-300' />
-                          <span>3x data compression</span>
-                        </p>
-                      </li>
-                      <li>
-                        <p className='flex items-center space-x-3'>
-                          <CheckIcon className='h-6 w-6 stroke-1 text-primary-300' />
-                          <span>10x performance increase</span>
-                        </p>
-                      </li>
-                      <li>
-                        <p className='flex items-center space-x-3'>
-                          <CheckIcon className='h-6 w-6 stroke-1 text-primary-300' />
-                          <span>½ the reduction in hardware cost</span>
-                        </p>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className='mt-10 w-full max-w-xs md:block lg:mt-0'>
-                    <div
-                      className='mx-auto w-full
-                    '>
-                      <Image
-                        className='mx-auto'
-                        alt={spotlight.companyName}
-                        src={spotlight.darkLogoPng.url}
-                        width={
-                          spotlight.darkLogoPng.width
-                            ? spotlight.darkLogoPng.width
-                            : 180
-                        }
-                        height={
-                          spotlight.darkLogoPng.height
-                            ? spotlight.darkLogoPng.height
-                            : 63
-                        }
-                      />
-
-                      {spotlight.ctaButton && (
-                        <div className='mx-auto mt-8'>
-                          <CUIButton
-                            type='secondary'
-                            className='group mx-auto w-auto'
-                            target={spotlight.ctaButton.target}
-                            href={spotlight.ctaButton.href}
-                            iconRight={
-                              <ChevronRightIcon
-                                height='18'
-                                className='pt-0.5 transition group-hover:translate-x-1/2'
-                              />
-                            }>
-                            Read use case
-                          </CUIButton>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </SuiPanel>
-            </div>
           </div>
         </div>
       </div>

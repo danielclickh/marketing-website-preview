@@ -348,15 +348,7 @@ export default function MonitoramaPage({
                           className='h-full w-full object-contain px-4 py-2'
                         />
                       </div>
-                      <div className='flex h-20 w-1/3 items-center justify-center'>
-                        <Image
-                          src='/images/monitorama/logo-uber-2.svg'
-                          width={153}
-                          height={28}
-                          alt='Uber'
-                          className='h-full w-full border-l border-l-neutral-700/80 object-contain px-4 py-2'
-                        />
-                      </div>
+
                       <div className='flex h-20 w-1/3 items-center justify-center'>
                         <Image
                           src='/images/monitorama/logo-ebay.svg'
@@ -388,7 +380,7 @@ export default function MonitoramaPage({
             <h2 className='mb-12 text-center font-basier text-3xl font-semibold lg:mb-16'>
               What do developers say?
             </h2>
-            <div className='mx-auto grid gap-10 lg:grid-cols-3'>
+            <div className='mx-auto flex flex-col gap-10 lg:flex-row'>
               <Tilt
                 tiltEnable={false}
                 glareEnable={true}
@@ -463,46 +455,6 @@ export default function MonitoramaPage({
                       width={680}
                       height={196}
                       alt='Highlight'
-                      className='max-h-20 w-auto'
-                    />
-                  </div>
-                </div>
-              </Tilt>
-              <Tilt
-                tiltEnable={false}
-                glareEnable={true}
-                glareMaxOpacity={0.4}
-                glareColor='rgba(251, 255, 70, 0.08)'
-                glarePosition='all'
-                className='h-full'>
-                <div className='cui-card flex h-full flex-col justify-between rounded-lg border border-neutral-700/80 bg-neutral-900/50 p-6 shadow-card hover:shadow-lg'>
-                  <div>
-                    <Image
-                      src='/images/Quote.svg'
-                      width={37}
-                      height={28}
-                      alt='Quote'
-                      className='mb-4 flex-none'
-                    />
-                    <p className='mb-16'>
-                      The platform is ingesting millions of logs per second from
-                      thousands of services across regions, storing several PBs
-                      worth, and serving hundreds of queries per second from
-                      both dashboards and programs.
-                    </p>
-                  </div>
-                  <div>
-                    <Link
-                      className='text-primary-300'
-                      href='https://www.uber.com/blog/logging/'
-                      target='_blank'>
-                      Read more &raquo;
-                    </Link>
-                    <Image
-                      src='/images/monitorama/sh-uber.png'
-                      width={372}
-                      height={196}
-                      alt='Cloudflare'
                       className='max-h-20 w-auto'
                     />
                   </div>

@@ -5,21 +5,21 @@ import { CUIButton, CUICard } from '../ClickUI'
 import HomepageCustomerVideos from '../HomepageVideos'
 import { SuiTitle } from '../sui'
 import developerOptions from './developerOptions.json'
-import { galaxyOnClick } from '../../lib/galaxy/galaxy';
-import { FullyQualifiedEvent } from '../../lib/galaxy/client/index';
+import { galaxyOnClick } from '../../lib/galaxy/galaxy'
+import { FullyQualifiedEvent } from '../../lib/galaxy/client/index'
 
 function DevelopersSection() {
   return (
-    <div className='section-container md:px-8 2xl:px-0 '>
+    <div className='mx-auto max-w-4xl md:px-8 2xl:px-0 '>
       <SuiTitle type='h2' className='mb-8 w-full text-left'>
         What do developers say?
       </SuiTitle>
 
-      <div className='grid grid-cols-1 gap-10 md:grid-cols-3'>
+      <div className='grid grid-cols-1 gap-10 md:grid-cols-2'>
         {developerOptions.map((developerOption, index) => (
           <CUICard key={`developerOption-${index}`}>
             {developerOption.img && (
-              <CUICard.Header className='h-44 w-full'>
+              <CUICard.Header>
                 <Image
                   src={developerOption.img}
                   alt={`Image for ${developerOption.title ?? ''}`}
@@ -45,7 +45,9 @@ function DevelopersSection() {
                 linkClass='w-full group inline-grid'
                 href={developerOption.href}
                 target='_blank'
-                onClick={galaxyOnClick(developerOption.event as FullyQualifiedEvent)}
+                onClick={galaxyOnClick(
+                  developerOption.event as FullyQualifiedEvent
+                )}
                 iconRight={
                   <ChevronRightIcon
                     height='18'
