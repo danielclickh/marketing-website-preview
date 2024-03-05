@@ -1,8 +1,8 @@
-import {ClockIcon} from '@heroicons/react/outline'
+import { ClockIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
 import React from 'react'
-import {GetStaticProps} from 'next'
-import {CUIButton, CUICard} from '../../components/ClickUI'
+import { GetStaticProps } from 'next'
+import { CUIButton, CUICard } from '../../components/ClickUI'
 import Certificate from '../../components/icons/Certificate'
 import CertificateSquare from '../../components/icons/CertificateSquare'
 import DatabasePlus from '../../components/icons/DatabasePlus'
@@ -14,11 +14,11 @@ import VideoSquare from '../../components/icons/VideoSquare'
 import Webcam from '../../components/icons/Webcam'
 import Layout from '../../components/Layout'
 import LogoCarousel from '../../components/LogoCarousel'
-import {SuiText, SuiTitle} from '../../components/sui'
-import {findOne} from '../../lib/api/strapi'
-import {getCommonProps} from '../../lib/utils/getCommonProps'
-import {LearnProps} from '../../types/learn'
-import {galaxyOnPage} from "../../lib/galaxy/galaxy";
+import { SuiText, SuiTitle } from '../../components/sui'
+import { findOne } from '../../lib/api/strapi'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { LearnProps } from '../../types/learn'
+import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<LearnProps> =
   async function getStaticProps() {
@@ -214,10 +214,11 @@ const trainingCards: Array<TrainingCardProps> = [
     icon: <UserList />,
     badge: 'Free',
     title: 'Free On-demand Training',
+    button: 'Browse catalog',
     description:
       'Learn at your own pace. ClickHouse Academy provides free, on-demand, self-paced training.',
     perks: ['Start learning right now', 'Hands-on lab activities'],
-    link: 'https://learn.clickhouse.com/visitor_class_catalog/category/116050'
+    link: 'https://learn.clickhouse.com/visitor_class_catalog'
   },
   {
     icon: <Webcam />,
@@ -231,6 +232,7 @@ const trainingCards: Array<TrainingCardProps> = [
   {
     icon: <Certificate />,
     title: 'Certification',
+    button: 'Learn more',
     description:
       'Showcase your ClickHouse expertise and set yourself apart professionally by becoming ClickHouse certified.',
     perks: [
@@ -294,7 +296,7 @@ export default function LearnPage({
   customerStories,
   seo
 }: LearnProps) {
-  galaxyOnPage('learnPage');
+  galaxyOnPage('learnPage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
