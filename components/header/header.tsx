@@ -65,6 +65,9 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
     }
   }, [])
 
+  header.banner =
+    '<a href="/blog">chDB joins the ClickHouse family. Read more</a>'
+
   return (
     <>
       <div
