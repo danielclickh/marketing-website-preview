@@ -23,30 +23,6 @@ function StatBox({
   )
 }
 
-function StoryCard({ key, children }: { key: any; children: JSX.Element }) {
-  return (
-    <motion.div
-      key={key}
-      initial='collapsed'
-      animate='open'
-      exit='collapsed'
-      variants={{
-        open: { opacity: 1, height: 'auto', scale: 1, zIndex: 'auto' },
-        collapsed: { opacity: 0, height: 0, scale: 0.25, zIndex: -1 }
-      }}
-      transition={{
-        duration: 0.4,
-        ease: [0.04, 0.62, 0.23, 0.98]
-      }}>
-      <div className='pb-11'>
-        <div className='space-y-11 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8'>
-          {children}
-        </div>
-      </div>
-    </motion.div>
-  )
-}
-
 export default function HomepageSectionContentFeed() {
   const allContent = getContent()
   const allCategories = getCategories()
@@ -102,56 +78,54 @@ export default function HomepageSectionContentFeed() {
       </div>
 
       {/* Feed column */}
-      <div className='-mb-11 w-full flex-1 lg:w-auto'>
-        <AnimatePresence initial={false}>
-          {allContent.map((entry, index) => {
-            const isActive =
-              !activeCategory || entry.categories.includes(activeCategory)
-            return (
-              isActive && (
-                <StoryCard key={index}>
-                  <>
-                    <ReactMarkdown
-                      components={{
-                        a: ({ children, ...props }) => (
-                          <a {...props} className='font-bold underline'>
-                            {children}
-                          </a>
-                        )
-                      }}
-                      className='text-center text-inherit'>
-                      {entry.bodyMarkdown}
-                    </ReactMarkdown>
-                    <div className='flex justify-center'>
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: entry.logoSvg
-                        }}></div>
-                    </div>
-                    {entry.stats && entry.stats.length && (
-                      <div className='grid grid-cols-1 gap-2 md:grid-cols-3'>
-                        {entry.stats.map((stat) => {
-                          return (
-                            <StatBox
-                              stat={stat.stat}
-                              label={stat.label}
-                              icon={
-                                <div
-                                  dangerouslySetInnerHTML={{
-                                    __html: stat.iconSvg
-                                  }}></div>
-                              }
-                            />
-                          )
-                        })}
-                      </div>
-                    )}
-                  </>
-                </StoryCard>
-              )
+      <div className='-mb-11 w-full flex-1 space-y-11 lg:w-auto'>
+        {allContent.map((entry, index) => {
+          const isActive =
+            !activeCategory || entry.categories.includes(activeCategory)
+          return (
+            isActive && (
+              <div
+                key={index}
+                className='space-y-11 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8'>
+                <ReactMarkdown
+                  components={{
+                    a: ({ children, ...props }) => (
+                      <a {...props} className='font-bold underline'>
+                        {children}
+                      </a>
+                    )
+                  }}
+                  className='text-center text-inherit'>
+                  {entry.bodyMarkdown}
+                </ReactMarkdown>
+                <div className='flex justify-center'>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: entry.logoSvg
+                    }}></div>
+                </div>
+                {entry.stats && entry.stats.length && (
+                  <div className='grid grid-cols-1 gap-2 md:grid-cols-3'>
+                    {entry.stats.map((stat) => {
+                      return (
+                        <StatBox
+                          stat={stat.stat}
+                          label={stat.label}
+                          icon={
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: stat.iconSvg
+                              }}></div>
+                          }
+                        />
+                      )
+                    })}
+                  </div>
+                )}
+              </div>
             )
-          })}
-        </AnimatePresence>
+          )
+        })}
 
         <div className='flex justify-center'>
           <CUIButton
