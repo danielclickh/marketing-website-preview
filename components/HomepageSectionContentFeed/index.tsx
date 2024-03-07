@@ -32,14 +32,16 @@ export default function HomepageSectionContentFeed() {
   )
 
   return (
-    <div className='section-container my-32 flex flex-row flex-wrap gap-16 md:gap-24 lg:flex-nowrap xl:gap-48'>
+    <div className='section-container my-32 flex flex-row flex-wrap gap-16 md:gap-24 lg:flex-nowrap'>
       {/* Text & filters column */}
-      <div className='relative w-full flex-shrink-0 flex-grow-0 lg:w-1/3'>
+      <div className='relative w-full flex-shrink-0 flex-grow-0 lg:w-2/5'>
         <div className='sticky top-20'>
-          <SuiTitle type='h2' className='mb-4'>
+          <SuiTitle type='h2' className='text-balance mb-4 xl:pr-12'>
             Build real-time data products that scale
           </SuiTitle>
-          <SuiText size='lg' className='opacity-70'>
+          <SuiText
+            size='lg'
+            className='text-balance opacity-70 xl:text-[1.25rem]'>
             Sony, Lyft, Cisco, GitLab, Twillio and many more choose ClickHouse
             Cloud for it's scale, efficiency, and ease of use.
           </SuiText>
@@ -78,15 +80,29 @@ export default function HomepageSectionContentFeed() {
       </div>
 
       {/* Feed column */}
-      <div className='-mb-11 w-full flex-1 space-y-11 lg:w-auto'>
+      <div className='-mb-11 w-full flex-1 lg:w-auto'>
         {allContent.map((entry, index) => {
           const isActive =
-            !activeCategory || entry.categories.includes(activeCategory)
+            (!activeCategory && entry.featured) ||
+            (activeCategory && entry.categories.includes(activeCategory))
+          const statsCount = entry.stats?.length
+          let statsColumnClasses = ''
+          switch (statsCount) {
+            case 1:
+              statsColumnClasses = 'md:grid-cols-1'
+              break
+            case 2:
+              statsColumnClasses = 'md:grid-cols-2'
+              break
+            default:
+              statsColumnClasses = 'md:grid-cols-3'
+              break
+          }
           return (
             isActive && (
               <div
                 key={index}
-                className='space-y-11 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8'>
+                className='mb-11 space-y-11 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8'>
                 <ReactMarkdown
                   components={{
                     a: ({ children, ...props }) => (
@@ -96,7 +112,7 @@ export default function HomepageSectionContentFeed() {
                     )
                   }}
                   className='text-center text-inherit'>
-                  {entry.bodyMarkdown}
+                  {entry.body}
                 </ReactMarkdown>
                 <div className='flex justify-center'>
                   <div
@@ -105,7 +121,8 @@ export default function HomepageSectionContentFeed() {
                     }}></div>
                 </div>
                 {entry.stats && entry.stats.length && (
-                  <div className='grid grid-cols-1 gap-2 md:grid-cols-3'>
+                  <div
+                    className={`grid grid-cols-1 gap-2 ${statsColumnClasses}`}>
                     {entry.stats.map((stat) => {
                       return (
                         <StatBox
