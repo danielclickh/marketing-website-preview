@@ -20,7 +20,7 @@ const components = {
 }
 
 function Banner({ content }: { content: string }) {
-  const [isClosed, setClosed] = useState(true)
+  const [isClosed, setClosed] = useState(false)
 
   useEffect(() => {
     const closed = content.length === 0
