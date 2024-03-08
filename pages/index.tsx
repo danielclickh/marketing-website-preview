@@ -62,6 +62,8 @@ export default function HomePage({
           <HomepageSectionTrustedBy customerStories={customerStories} />
           <HomepageSectionContentFeed />
           <HomepageSectionWhyClickhouse />
+          <HomepageSectionFast />
+          <HRSeparator className='my-24' />
           <JoinCommunity github={headerData.github} />
           <HRSeparator className='my-24' />
           <FAQ />
