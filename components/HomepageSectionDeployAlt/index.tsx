@@ -87,8 +87,7 @@ export default function HomepageSectionDeployAlt() {
 
           {/* Open Source */}
           <Link
-            href='https://clickhouse.cloud/signUp?loc=home-deploy-your-way'
-            target='_blank'
+            href='#getting_started'
             className='group flex flex-col items-center justify-center gap-6 rounded-lg bg-neutral-750 p-8 text-center text-white'>
             <svg
               className='text-primary-300'
@@ -124,8 +123,7 @@ export default function HomepageSectionDeployAlt() {
 
           {/* Local */}
           <Link
-            href='https://clickhouse.cloud/signUp?loc=home-deploy-your-way'
-            target='_blank'
+            href='https://clickhouse.com/docs/en/operations/utilities/clickhouse-local'
             className='group flex flex-col items-center justify-center gap-6 rounded-lg bg-neutral-750 p-8 text-center text-white'>
             <svg
               className='text-primary-300'
