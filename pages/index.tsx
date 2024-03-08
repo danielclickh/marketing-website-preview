@@ -8,6 +8,7 @@ import HomepageSectionDeploy from '../components/HomepageSectionDeploy'
 import HomepageSectionFast from '../components/HomepageSectionFast'
 import HomepageSectionSpeed from '../components/HomepageSectionSpeed'
 import HomepageSectionTrustedBy from '../components/HomepageSectionTrustedBy'
+import HomepageSectionWhyClickhouse from '../components/HomepageSectionWhyClickhouse'
 import HRSeparator from '../components/HRSeparator'
 import JoinCommunity from '../components/JoinCommunity'
 import Layout from '../components/Layout'
@@ -60,6 +61,7 @@ export default function HomePage({
         <>
           <HomepageSectionTrustedBy customerStories={customerStories} />
           <HomepageSectionContentFeed />
+          <HomepageSectionWhyClickhouse />
           <JoinCommunity github={headerData.github} />
           <HRSeparator className='my-24' />
           <FAQ />
