@@ -5,6 +5,7 @@ import GetStarted from '../components/GetStarted'
 import HomepageHeroLogosVideos from '../components/HomepageHeroLogosVideos'
 import HomepageSectionContentFeed from '../components/HomepageSectionContentFeed'
 import HomepageSectionDeploy from '../components/HomepageSectionDeploy'
+import HomepageSectionDeployAlt from '../components/HomepageSectionDeployAlt'
 import HomepageSectionFast from '../components/HomepageSectionFast'
 import HomepageSectionSpeed from '../components/HomepageSectionSpeed'
 import HomepageSectionStackIntegration from '../components/HomepageSectionStackIntegration'
@@ -65,7 +66,7 @@ export default function HomePage({
           <HomepageSectionWhyClickhouse />
           <HomepageSectionStackIntegration />
           <HomepageSectionFast />
-          <HRSeparator className='my-24' />
+          <HomepageSectionDeployAlt />
           <JoinCommunity github={headerData.github} />
           <HRSeparator className='my-24' />
           <FAQ />
