@@ -1,7 +1,7 @@
-import { AnimatePresence, motion } from 'framer-motion'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { CUIButton } from '../ClickUI'
+import ResponsiveEmbed from '../ResponsiveEmbed'
 import { SuiText, SuiTitle } from '../sui'
 import { getContent, getCategories, EntryCategory } from './content'
 
@@ -99,48 +99,48 @@ export default function HomepageSectionContentFeed() {
               break
           }
           return (
-            isActive && (
-              <div
-                key={index}
-                className='mb-11 space-y-11 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8'>
-                <ReactMarkdown
-                  components={{
-                    a: ({ children, ...props }) => (
-                      <a {...props} className='font-bold underline'>
-                        {children}
-                      </a>
-                    )
-                  }}
-                  className='text-center text-inherit'>
-                  {entry.body}
-                </ReactMarkdown>
-                <div className='flex justify-center'>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: entry.logoSvg
-                    }}></div>
-                </div>
-                {entry.stats && entry.stats.length && (
-                  <div
-                    className={`grid grid-cols-1 gap-2 ${statsColumnClasses}`}>
-                    {entry.stats.map((stat) => {
-                      return (
-                        <StatBox
-                          stat={stat.stat}
-                          label={stat.label}
-                          icon={
-                            <div
-                              dangerouslySetInnerHTML={{
-                                __html: stat.iconSvg
-                              }}></div>
-                          }
-                        />
-                      )
-                    })}
-                  </div>
-                )}
+            <div
+              key={index}
+              className={`${
+                isActive ? 'block' : 'hidden'
+              } mb-11 space-y-11 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8`}>
+              {entry.embed && <ResponsiveEmbed html={entry.embed} />}
+              <ReactMarkdown
+                components={{
+                  a: ({ children, ...props }) => (
+                    <a {...props} className='font-bold underline'>
+                      {children}
+                    </a>
+                  )
+                }}
+                className='text-center text-inherit'>
+                {entry.body}
+              </ReactMarkdown>
+              <div className='flex justify-center'>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: entry.logoSvg
+                  }}></div>
               </div>
-            )
+              {entry.stats && entry.stats.length && (
+                <div className={`grid grid-cols-1 gap-2 ${statsColumnClasses}`}>
+                  {entry.stats.map((stat) => {
+                    return (
+                      <StatBox
+                        stat={stat.stat}
+                        label={stat.label}
+                        icon={
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: stat.iconSvg
+                            }}></div>
+                        }
+                      />
+                    )
+                  })}
+                </div>
+              )}
+            </div>
           )
         })}
 
