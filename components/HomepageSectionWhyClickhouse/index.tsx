@@ -293,6 +293,17 @@ export default function HomepageSectionWhyClickhouse() {
               link=''
             />
           </div>
+
+          {/* CTA */}
+          <SuiText className='text-center lg:mt-8'>
+            Get started in a few minutes with a{' '}
+            <Link
+              href='https://clickhouse.cloud/signUp'
+              target='_blank'
+              className='font-bold text-primary-300'>
+              free cloud trial -&gt;
+            </Link>
+          </SuiText>
         </div>
       </div>
     </div>
