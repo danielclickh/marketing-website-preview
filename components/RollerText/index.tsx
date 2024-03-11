@@ -69,7 +69,7 @@ export default function RollerText({
 
   return (
     <div
-      className={`relative -my-[0.75em] inline-block h-[2.75em] w-full overflow-visible ${styles.rollerMask}`}
+      className={`relative -my-[0.75em] inline-block h-[2.75em] w-full overflow-hidden ${styles.rollerMask}`}
       style={{ backfaceVisibility: 'hidden', transform: 'translateZ(0)' }}>
       <div
         ref={listElement}
