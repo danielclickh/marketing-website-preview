@@ -86,7 +86,8 @@ export default function HomepageHeroAlt() {
           data warehouse for{' '}
         </SuiTitle>
         <div
-          className={`relative h-40 overflow-hidden ${styles.rollerMask} -mt-10`}>
+          className={`relative h-40 overflow-hidden ${styles.rollerMask} -mt-10`}
+          style={{ backfaceVisibility: 'hidden', transform: 'translateZ(0)' }}>
           <div
             ref={listElement}
             className='ease-[cubic-bezier(0.09, 0.24, 0.09, 1)] absolute top-0 left-0 right-0 flex -translate-y-full flex-col duration-[2000ms]'>
