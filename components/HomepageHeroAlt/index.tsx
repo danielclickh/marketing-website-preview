@@ -1,10 +1,24 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { galaxyOnClick } from '../../lib/galaxy/galaxy'
+import { getCategory } from '../../lib/videos'
 import { CUIButton } from '../ClickUI'
 import RollerText from '../RollerText'
 import { SuiText, SuiTitle } from '../sui'
+import Typewriter from 'typewriter-effect'
 
 export default function HomepageHeroAlt() {
+  const router = useRouter()
+
+  const [isTypewritter, setIsTypewritter] = useState(false)
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search)
+    if (queryParams.has('typewriter')) {
+      setIsTypewritter(true)
+    }
+  }, [router])
   return (
     <div className='relative overflow-x-hidden border-primary-300 lg:border-t-[38px]'>
       <div className='absolute top-0 left-0 bottom-0 z-10 w-full bg-primary-300 lg:w-1/2'></div>
@@ -20,17 +34,37 @@ export default function HomepageHeroAlt() {
             </span>{' '}
             <br className='sm:hidden lg:block' />
             data warehouse for <br />
-            <RollerText
-              phraseList={[
-                'analytics',
-                'observability',
-                'ML & GenAI',
-                'business intelligence',
-                'financial services',
-                'fraud & cybersecurity',
-                'gaming'
-              ]}
-            />
+            {!isTypewritter && (
+              <RollerText
+                phrases={[
+                  'analytics',
+                  'observability',
+                  'ML & GenAI',
+                  'business intelligence',
+                  'financial services',
+                  'fraud & cybersecurity',
+                  'gaming'
+                ]}
+              />
+            )}
+            {isTypewritter && (
+              <Typewriter
+                options={{
+                  strings: [
+                    'analytics',
+                    'observability',
+                    'ML & GenAI',
+                    'business intelligence',
+                    'financial services',
+                    'fraud & cybersecurity',
+                    'gaming'
+                  ],
+                  cursor: '_',
+                  autoStart: true,
+                  loop: true
+                }}
+              />
+            )}
           </SuiTitle>
           <div className='lg:inline-block lg:w-auto'>
             <SuiText
