@@ -25,15 +25,18 @@ function PerkCard({
 function FeatureCard({
   icon,
   title,
-  link
+  link,
+  target
 }: {
   icon: React.ReactNode
   title: React.ReactNode | string
   link: string
+  target?: React.HTMLAttributeAnchorTarget
 }) {
   return (
     <Link
       href={link}
+      target={target}
       className='group flex flex-col items-center gap-4 rounded-lg bg-primary-300 py-6 px-2 text-center text-primary-900'>
       {icon}
       <SuiTitle type='h3' color='inherit'>
@@ -177,7 +180,7 @@ export default function HomepageSectionWhyClickhouse() {
                   Source
                 </>
               }
-              link=''
+              link='/clickhouse'
             />
             <FeatureCard
               icon={
@@ -210,7 +213,8 @@ export default function HomepageSectionWhyClickhouse() {
                   compliant
                 </>
               }
-              link=''
+              link='https://trust.clickhouse.com/'
+              target='_blank'
             />
             <FeatureCard
               icon={
@@ -264,7 +268,7 @@ export default function HomepageSectionWhyClickhouse() {
                   at scale
                 </>
               }
-              link=''
+              link='/user-stories'
             />
             <FeatureCard
               icon={
@@ -290,7 +294,8 @@ export default function HomepageSectionWhyClickhouse() {
                   integrations
                 </>
               }
-              link=''
+              link='https://clickhouse.com/docs/en/integrations'
+              target='_blank'
             />
           </div>
 
