@@ -7,10 +7,10 @@ import { SuiText, SuiTitle } from '../sui'
 export default function HomepageHeroAlt() {
   return (
     <div className='relative overflow-x-hidden border-primary-300 lg:border-t-[38px]'>
-      <div className='absolute top-0 left-0 bottom-0 z-10 hidden w-1/2 bg-primary-300 lg:block'></div>
+      <div className='absolute top-0 left-0 bottom-0 z-10 w-4 bg-primary-300 sm:w-8 lg:w-1/2'></div>
       <div className='section-container relative z-20 grid lg:grid-cols-2'>
         {/* Text column */}
-        <div className='relative z-30 order-last bg-primary-300 py-32 text-black lg:order-first'>
+        <div className='relative z-30 order-last rounded-br-2xl bg-primary-300 pb-12 text-black lg:order-first lg:rounded-br-none lg:py-32'>
           <SuiTitle type='h1'>
             The{' '}
             <span className='tilted tilted-black'>
@@ -31,7 +31,9 @@ export default function HomepageHeroAlt() {
             />
           </SuiTitle>
           <div className='inline-block w-auto'>
-            <SuiText size='lg' className='mt-6 mb-16 w-auto lg:!text-[20px]'>
+            <SuiText
+              size='lg'
+              className='mt-6 mb-8 w-auto lg:mb-16 lg:!text-[20px]'>
               Unlock faster queries without skyrocketing costs.
             </SuiText>
             <div className='flex w-auto gap-6'>
@@ -59,7 +61,20 @@ export default function HomepageHeroAlt() {
 
         {/* Graphic column */}
         <div className='relative order-first lg:order-last'>
-          {/* Angle separator */}
+          {/* Horizontal angle separator */}
+          <div className='absolute left-0 bottom-0 right-0 z-20 aspect-[608/142] text-primary-300 lg:hidden'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='100%'
+              height='auto'
+              viewBox='0 0 608 142'>
+              <path
+                fill='currentColor'
+                d='M.01516757.76743.0055 141.757124h607.989001v-1.7469c0-28.0458-18.654029-41.3032869-45.034001-44.9027238L32.383 45.2474298C13.1345 39.27443.0152294 21.46743.01516921 1.31443l-.00000164-.547Z'
+              />
+            </svg>
+          </div>
+          {/* Verticle angle separator */}
           <div className='absolute top-0 left-0 bottom-0 z-20 hidden aspect-[272/608] text-primary-300 lg:block'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -73,7 +88,9 @@ export default function HomepageHeroAlt() {
               />
             </svg>
           </div>
-          <div className='lg:absolute lg:top-0 lg:left-8 lg:bottom-0 lg:right-0 lg:z-10'>
+
+          {/* Hero image */}
+          <div className='mt-4 sm:mt-8 lg:absolute lg:top-0 lg:left-8 lg:bottom-0 lg:right-0 lg:z-10 lg:mt-0'>
             <Image
               src='/images/homepage/home-hero-product-ui.png'
               width={3000}
