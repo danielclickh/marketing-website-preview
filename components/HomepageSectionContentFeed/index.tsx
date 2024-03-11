@@ -34,24 +34,16 @@ export default function HomepageSectionContentFeed() {
   )
 
   useEffect(() => {
-    // Allow DOM to update before checking if in view
-    setTimeout(() => {
-      if (container.current && hasChanged) {
-        const bounds = container.current.getBoundingClientRect()
-        const inView = bounds.top < window.innerHeight && bounds.bottom >= 0
-
-        if (!inView) {
-          container.current.scrollIntoView({
-            behavior: 'smooth'
-          })
-        }
-      }
-    }, 10)
+    if (container.current && hasChanged) {
+      container.current.scrollIntoView({
+        behavior: 'smooth'
+      })
+    }
   }, [activeCategory])
 
   return (
     <div
-      className='section-container my-32 flex flex-row flex-wrap gap-16 md:gap-24 lg:flex-nowrap'
+      className='section-container my-16 flex flex-row flex-wrap gap-16 md:my-32 md:gap-24 lg:flex-nowrap'
       ref={container}>
       {/* Text & filters column */}
       <div className='relative w-full flex-shrink-0 flex-grow-0 lg:w-2/5'>
