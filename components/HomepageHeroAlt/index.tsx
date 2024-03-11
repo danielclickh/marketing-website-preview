@@ -10,7 +10,7 @@ export default function HomepageHeroAlt() {
       <div className='absolute top-0 left-0 bottom-0 z-10 w-4 bg-primary-300 sm:w-8 lg:w-1/2'></div>
       <div className='section-container relative z-20 grid lg:grid-cols-2'>
         {/* Text column */}
-        <div className='relative z-30 order-last rounded-br-2xl bg-primary-300 pr-4 pb-12 text-black sm:pr-8 md:pr-0 md:pb-24 lg:order-first lg:rounded-br-none lg:py-24 xl:py-32'>
+        <div className='pb:16 relative z-30 order-last rounded-br-2xl bg-primary-300 pr-4 pb-4 text-black sm:pb-8 sm:pr-8 lg:order-first lg:rounded-br-none lg:py-24 lg:pb-24 lg:pr-0 xl:py-32'>
           <SuiTitle
             type='h1'
             className='!text-[2rem] md:!text-[2.85rem] xl:!text-[3.85rem]'>
@@ -18,7 +18,7 @@ export default function HomepageHeroAlt() {
             <span className='tilted tilted-black'>
               <span className='tilted-content text-white'>real-time</span>
             </span>{' '}
-            <br />
+            <br className='sm:hidden lg:block' />
             data warehouse for <br />
             <RollerText
               phraseList={[
@@ -32,13 +32,13 @@ export default function HomepageHeroAlt() {
               ]}
             />
           </SuiTitle>
-          <div className='inline-block w-auto'>
+          <div className='lg:inline-block lg:w-auto'>
             <SuiText
               size='lg'
-              className='mt-6 mb-8 w-auto lg:mb-16 lg:!text-[20px]'>
+              className='mb-4 w-auto sm:mt-6 sm:mb-8 md:mt-6 md:mb-16 lg:!text-[20px]'>
               Unlock faster queries without skyrocketing costs.
             </SuiText>
-            <div className='flex w-auto flex-wrap gap-6 md:flex-nowrap'>
+            <div className='flex w-auto flex-wrap gap-4 sm:gap-8 md:flex-nowrap md:gap-6'>
               <CUIButton
                 type='primary-dark'
                 size='lg'
