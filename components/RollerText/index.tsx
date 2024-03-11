@@ -2,13 +2,13 @@ import { useEffect, useRef } from 'react'
 import styles from './styles.module.scss'
 
 export default function RollerText({
-  phraseList,
+  phrases,
   pauseDelay = 3000
 }: {
-  phraseList: string[]
+  phrases: string[]
   pauseDelay?: number
 }) {
-  const distancePerPhrase = 100 / (phraseList.length * 2)
+  const distancePerPhrase = 100 / (phrases.length * 2)
   const listElement = useRef<HTMLDivElement>(null)
 
   // Start the initial animation on mount
@@ -50,7 +50,7 @@ export default function RollerText({
 
         // Set new iteration for next loop
         const newIteration = loopIteration + 1
-        loopIteration = newIteration < phraseList.length ? newIteration : 0
+        loopIteration = newIteration < phrases.length ? newIteration : 0
       }, pauseDelay)
     }
 
@@ -74,7 +74,7 @@ export default function RollerText({
       <div
         ref={listElement}
         className='ease-[cubic-bezier(0.09, 0.24, 0.09, 1)] absolute top-0 left-0 right-0 flex -translate-y-full flex-col duration-[2000ms]'>
-        {[...phraseList, ...phraseList].map((phrase, index) => {
+        {[...phrases, ...phrases].map((phrase, index) => {
           return (
             <div
               key={index}
