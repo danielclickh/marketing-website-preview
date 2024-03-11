@@ -43,19 +43,17 @@ export default function HomepageHeroAlt() {
     }
 
     const startLoop = () => {
+      // Calculate new offsets
+      let startOffset = 50 + distancePerPhrase * loopIteration
+      let endOffset = distancePerPhrase * (loopIteration + 1)
+
+      // Move list to start position (WITHOUT animating)
+      setOffset(listElement.current, 0 - startOffset, false)
+
       // Start looping animation after pause delay
       timeout = setTimeout(() => {
-        // Calculate new offsets
-        let startOffset = 50 + distancePerPhrase * loopIteration
-        let endOffset = distancePerPhrase * (loopIteration + 1)
-
-        // Move list to start position (WITHOUT animating)
-        setOffset(listElement.current, 0 - startOffset, false)
-
         // Move list to end position (WITH animation)
-        setTimeout(() => {
-          setOffset(listElement.current, 0 - endOffset, true)
-        }, 1000) // Matches transition duration
+        setOffset(listElement.current, 0 - endOffset, true)
 
         // Set new iteration for next loop
         const newIteration = loopIteration + 1
@@ -91,7 +89,7 @@ export default function HomepageHeroAlt() {
           className={`relative h-40 overflow-hidden ${styles.rollerMask} -mt-10`}>
           <div
             ref={listElement}
-            className='absolute top-0 left-0 right-0 flex -translate-y-full flex-col duration-1000'>
+            className='ease-[cubic-bezier(0.25, 0.1, 0.25, 1)] absolute top-0 left-0 right-0 flex -translate-y-full flex-col duration-[2000ms]'>
             {[...phraseList, ...phraseList].map((phrase, index) => {
               return (
                 <div
