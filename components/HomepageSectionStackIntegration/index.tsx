@@ -4,9 +4,9 @@ import { SuiText, SuiTitle } from '../sui'
 
 export default function HomepageSectionStackIntegration() {
   return (
-    <div className='my-32'>
+    <div className='my-16 md:my-32'>
       {/* Intro text */}
-      <div className='mb-32 flex justify-center'>
+      <div className='mb-16 flex justify-center md:mb-32'>
         <div className='max-w-[650px] text-center'>
           <SuiTitle type='h2' color='inherit' className='mb-4'>
             Seamlessly integrate with your stack
