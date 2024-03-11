@@ -64,6 +64,7 @@ export default function HomePage({
         <>
           <HomepageHeroAlt />
           <HomepageSectionTrustedBy customerStories={customerStories} />
+          <HRSeparator />
           <HomepageSectionContentFeed />
           <HomepageSectionWhyClickhouse />
           <HomepageSectionStackIntegration />
