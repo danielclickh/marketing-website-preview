@@ -69,7 +69,7 @@ export default function RollerText({
 
   return (
     <div
-      className={`relative -my-[0.5em] inline-block h-[2.25em] w-full overflow-hidden ${styles.rollerMask}`}
+      className={`relative -my-[0.75em] inline-block h-[2.75em] w-full overflow-hidden ${styles.rollerMask}`}
       style={{ backfaceVisibility: 'hidden', transform: 'translateZ(0)' }}>
       <div
         ref={listElement}
@@ -78,7 +78,7 @@ export default function RollerText({
           return (
             <div
               key={index}
-              className='flex h-[2.25em] items-center whitespace-nowrap'>
+              className='flex h-[2.75em] items-center whitespace-nowrap'>
               <span>{phrase}</span>
             </div>
           )
