@@ -7,10 +7,10 @@ import { SuiText, SuiTitle } from '../sui'
 export default function HomepageHeroAlt() {
   return (
     <div className='relative overflow-x-hidden border-primary-300 lg:border-t-[38px]'>
-      <div className='absolute top-0 left-0 bottom-0 z-10 w-4 bg-primary-300 sm:w-8 lg:w-1/2'></div>
+      <div className='absolute top-0 left-0 bottom-0 z-10 w-4 rounded-br-lg bg-primary-300 sm:w-8 lg:w-1/2 lg:rounded-br-none'></div>
       <div className='section-container relative z-20 grid lg:grid-cols-2'>
         {/* Text column */}
-        <div className='pb:16 relative z-30 order-last rounded-br-2xl bg-primary-300 pr-4 pb-4 text-black sm:pb-8 sm:pr-8 lg:order-first lg:rounded-br-none lg:py-24 lg:pb-24 lg:pr-0 xl:py-32'>
+        <div className='relative z-30 bg-primary-300 pr-4 pt-8 text-black sm:pt-16 sm:pr-8 lg:py-24 lg:pt-24 lg:pr-0 xl:py-32'>
           <SuiTitle
             type='h1'
             className='!text-[2rem] md:!text-[2.85rem] xl:!text-[3.85rem]'>
@@ -62,17 +62,17 @@ export default function HomepageHeroAlt() {
         </div>
 
         {/* Graphic column */}
-        <div className='relative order-first lg:order-last'>
+        <div className='relative'>
           {/* Horizontal angle separator */}
-          <div className='absolute left-0 -bottom-px right-0 z-20 aspect-[608/142] text-primary-300 lg:hidden'>
+          <div className='absolute left-0 -top-px right-0 z-20 aspect-[608/141] text-primary-300 lg:hidden'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='100%'
               height='auto'
-              viewBox='0 0 608 142'>
+              viewBox='0 0 608 141'>
               <path
                 fill='currentColor'
-                d='M.01516757.76743.0055 141.757124h607.989001v-1.7469c0-28.0458-18.654029-41.3032869-45.034001-44.9027238L32.383 45.2474298C13.1345 39.27443.0152294 21.46743.01516921 1.31443l-.00000164-.547Z'
+                d='M.00966757 140.989694 0 0h607.989001v1.7469c0 28.0458-18.654029 41.3032869-45.034001 44.9027238L32.3775 96.5096942C13.129 102.482694.0097294 120.289694.00966921 140.442694l-.00000164.547Z'
               />
             </svg>
           </div>
