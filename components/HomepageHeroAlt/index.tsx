@@ -4,16 +4,13 @@ import styles from './styles.module.scss'
 
 export default function HomepageHeroAlt() {
   const phraseList = [
-    'Whimsical Moonlit Symphony',
-    'Sapphire Whispering Breeze',
-    'Celestial Enigma Echo',
-    'Velvet Serenade Cascade',
-    'Ethereal Twilight Mirage',
-    'Radiant Oasis Harmony',
-    'Midnight Elixir Reverie',
-    'Enchanted Echoing Meadow',
-    'Serendipitous Lullaby Dream',
-    'Mystic Cascade Radiance'
+    'analytics',
+    'observability',
+    'ML & GenAI',
+    'business intelligence',
+    'financial services',
+    'fraud & cybersecurity',
+    'gaming'
   ]
 
   const distancePerPhrase = 100 / (phraseList.length * 2)
@@ -80,21 +77,31 @@ export default function HomepageHeroAlt() {
   }, [])
 
   return (
-    <div className='section-container my-48'>
-      <SuiTitle type='h1'>Lorem ipsum blah</SuiTitle>
-      <div className={`relative h-40 overflow-hidden ${styles.rollerMask}`}>
+    <div className='bg-primary-300 py-48 text-black'>
+      <div className='section-container'>
+        <SuiTitle type='h1'>
+          The{' '}
+          <span className='tilted tilted-black'>
+            <span className='tilted-content text-white'>real-time</span>
+          </span>{' '}
+          <br />
+          data warehouse for{' '}
+        </SuiTitle>
         <div
-          ref={listElement}
-          className='absolute top-0 left-0 right-0 flex -translate-y-full flex-col duration-1000'>
-          {[...phraseList, ...phraseList].map((phrase, index) => {
-            return (
-              <div
-                key={index}
-                className='flex h-40 items-center text-[4rem] font-bold leading-none'>
-                <span>{phrase}</span>
-              </div>
-            )
-          })}
+          className={`relative h-40 overflow-hidden ${styles.rollerMask} -mt-10`}>
+          <div
+            ref={listElement}
+            className='absolute top-0 left-0 right-0 flex -translate-y-full flex-col duration-1000'>
+            {[...phraseList, ...phraseList].map((phrase, index) => {
+              return (
+                <div
+                  key={index}
+                  className='flex h-40 items-center text-[4rem] font-bold leading-none'>
+                  <span>{phrase}</span>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </div>
     </div>

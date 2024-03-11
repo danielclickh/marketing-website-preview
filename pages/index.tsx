@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next'
 import DevelopersSection from '../components/DevelopersSection'
 import FAQ from '../components/FAQ'
 import GetStarted from '../components/GetStarted'
+import HomepageHeroAlt from '../components/HomepageHeroAlt'
 import HomepageHeroLogosVideos from '../components/HomepageHeroLogosVideos'
 import HomepageSectionContentFeed from '../components/HomepageSectionContentFeed'
 import HomepageSectionDeploy from '../components/HomepageSectionDeploy'
@@ -61,6 +62,7 @@ export default function HomePage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {displayNewHomepage ? (
         <>
+          <HomepageHeroAlt />
           <HomepageSectionTrustedBy customerStories={customerStories} />
           <HomepageSectionContentFeed />
           <HomepageSectionWhyClickhouse />
