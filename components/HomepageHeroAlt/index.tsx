@@ -12,7 +12,7 @@ export default function HomepageHeroAlt() {
         <div className='absolute top-0 left-0 bottom-0 z-10 w-4 bg-primary-300 sm:w-8 lg:w-1/2'></div>
         <div className='section-container relative z-20 grid lg:grid-cols-2'>
           {/* Text column */}
-          <div className='relative z-30 bg-primary-300 pr-4 pt-8 text-black sm:pt-16 sm:pr-8 lg:py-24 lg:pt-24 lg:pr-0 xl:py-32'>
+          <div className='relative z-30 bg-primary-300 pr-4 pt-8 text-black sm:pt-16 sm:pr-8 lg:py-24 lg:pr-0 xl:py-32'>
             <SuiTitle
               type='h1'
               className='!text-[2rem] md:!text-[2.85rem] xl:!text-[3.85rem]'>
