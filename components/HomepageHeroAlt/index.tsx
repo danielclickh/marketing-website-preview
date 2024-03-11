@@ -60,7 +60,7 @@ export default function HomepageHeroAlt() {
         {/* Graphic column */}
         <div className='relative order-first lg:order-last'>
           {/* Angle separator */}
-          <div className='absolute top-0 left-0 bottom-0 right-0 z-20 hidden text-primary-300 lg:block'>
+          <div className='absolute top-0 left-0 bottom-0 z-20 hidden aspect-[272/608] text-primary-300 lg:block'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='auto'
