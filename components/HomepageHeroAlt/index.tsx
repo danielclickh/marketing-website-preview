@@ -64,7 +64,7 @@ export default function HomepageHeroAlt() {
         {/* Graphic column */}
         <div className='relative order-first lg:order-last'>
           {/* Horizontal angle separator */}
-          <div className='absolute left-0 bottom-0 right-0 z-20 aspect-[608/142] text-primary-300 lg:hidden'>
+          <div className='absolute left-0 -bottom-px right-0 z-20 aspect-[608/142] text-primary-300 lg:hidden'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='100%'
@@ -77,7 +77,7 @@ export default function HomepageHeroAlt() {
             </svg>
           </div>
           {/* Verticle angle separator */}
-          <div className='absolute top-0 left-0 bottom-0 z-20 hidden aspect-[272/608] text-primary-300 lg:block'>
+          <div className='absolute top-0 -left-px bottom-0 z-20 hidden aspect-[272/608] text-primary-300 lg:block'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='auto'
