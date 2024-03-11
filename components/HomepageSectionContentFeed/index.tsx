@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { CUIButton } from '../ClickUI'
 import ResponsiveEmbed from '../ResponsiveEmbed'
@@ -26,13 +26,33 @@ function StatBox({
 export default function HomepageSectionContentFeed() {
   const allContent = getContent()
   const allCategories = getCategories()
+  const container = useRef<HTMLDivElement>(null)
+  const [hasChanged, setHasChanged] = useState(false)
 
   const [activeCategory, setActiveCategory] = useState<EntryCategory | null>(
     null
   )
 
+  useEffect(() => {
+    // Allow DOM to update before checking if in view
+    setTimeout(() => {
+      if (container.current && hasChanged) {
+        const bounds = container.current.getBoundingClientRect()
+        const inView = bounds.top < window.innerHeight && bounds.bottom >= 0
+
+        if (!inView) {
+          container.current.scrollIntoView({
+            behavior: 'smooth'
+          })
+        }
+      }
+    }, 10)
+  }, [activeCategory])
+
   return (
-    <div className='section-container my-32 flex flex-row flex-wrap gap-16 md:gap-24 lg:flex-nowrap'>
+    <div
+      className='section-container my-32 flex flex-row flex-wrap gap-16 md:gap-24 lg:flex-nowrap'
+      ref={container}>
       {/* Text & filters column */}
       <div className='relative w-full flex-shrink-0 flex-grow-0 lg:w-2/5'>
         <div className='sticky top-20'>
@@ -64,9 +84,10 @@ export default function HomepageSectionContentFeed() {
                   return (
                     <li key={category}>
                       <button
-                        onClick={() =>
+                        onClick={() => {
+                          setHasChanged(true)
                           setActiveCategory(isActive ? null : category)
-                        }
+                        }}
                         className={`inline-block rounded-full border px-4 py-2 text-sm font-medium transition-colors ${classes}`}>
                         {category}
                       </button>
