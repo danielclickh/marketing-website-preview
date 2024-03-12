@@ -94,7 +94,7 @@ export function appendUTMsToLink(url: string): string {
 }
 
 export function appendGalaxySessionIDToLink(url: string): string {
-  const galaxy_id = Galaxy.getGalaxySessionId()
+  const galaxy_id = Galaxy.getAnonymousId()
   const urlObject = new URL(url)
 
   // Append galaxy session id to links that contain ".cloud"
