@@ -1,9 +1,30 @@
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { Galaxy } from '../../lib/galaxy/web/browser'
+import { Experiment, Result } from '@growthbook/growthbook'
 
 type UTMs = {
   [key: string]: string
+}
+
+export const onExperimentViewed = (
+  experiment: Experiment<any>,
+  result: Result<any>
+) => {
+  const experimentId = experiment.key
+  const variationId = result.key
+
+  const links = Array.from(document.querySelectorAll('a'))
+  for (const link of links) {
+    if (link.hostname.includes('.cloud')) {
+      const updatedURL = appendExperimentParamsToLink(
+        link.href,
+        experimentId,
+        variationId
+      )
+      link.href = updatedURL
+    }
+  }
 }
 
 const UTMPersist = () => {
@@ -110,4 +131,20 @@ function storeUTMsInStorage(utms: UTMs) {
     timestamp: expirationTime.getTime()
   }
   localStorage.setItem('ch-utms', JSON.stringify(data))
+}
+
+export function appendExperimentParamsToLink(
+  url: string,
+  experimentId: string,
+  variationId: string
+): string {
+  const urlObject = new URL(url)
+
+  // Append experiment parameters to links that contain ".cloud"
+  if (experimentId && variationId) {
+    urlObject.searchParams.set('experimentId', experimentId)
+    urlObject.searchParams.set('variationId', variationId)
+  }
+
+  return urlObject.toString()
 }

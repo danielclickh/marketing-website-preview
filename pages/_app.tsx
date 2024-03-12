@@ -7,12 +7,11 @@ import { Inconsolata, Inter } from 'next/font/google'
 import { SnackbarContextProvider } from '../components/sui'
 import { AppProps } from 'next/app'
 import Script from 'next/script'
-import UTMPersist from '../components/UTMPersist'
+import UTMPersist, { onExperimentViewed } from '../components/UTMPersist'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useInitGalaxy } from '../lib/galaxy/galaxy'
 import { GrowthBook, GrowthBookProvider } from '@growthbook/growthbook-react'
-import { Experiment, Result } from '@growthbook/growthbook'
 import { Galaxy } from '../lib/galaxy/web/browser'
 
 const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K'
@@ -42,19 +41,6 @@ const inconsolata = Inconsolata({
   adjustFontFallback: false,
   fallback: []
 })
-
-const onExperimentViewed = (
-  experiment: Experiment<any>,
-  result: Result<any>
-) => {
-  const experimentId = experiment.key
-  const variationId = result.key
-
-  console.log('Viewed Experiment', {
-    experimentId,
-    variationId
-  })
-}
 
 // Create a client-side GrowthBook instance
 const gb = new GrowthBook({
