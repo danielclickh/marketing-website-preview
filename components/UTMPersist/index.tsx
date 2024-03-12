@@ -99,7 +99,7 @@ export function appendGalaxySessionIDToLink(url: string): string {
 
   // Append galaxy session id to links that contain ".cloud"
   if (galaxy_id) {
-    urlObject.searchParams.set('glx_id', galaxy_id)
+    urlObject.searchParams.set('glxid', galaxy_id)
   }
 
   return urlObject.toString()
