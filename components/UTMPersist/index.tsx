@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
+import { Galaxy } from '../../lib/galaxy/web/browser'
 
 type UTMs = {
   [key: string]: string
@@ -13,7 +14,7 @@ const UTMPersist = () => {
     for (const link of links) {
       if (link.hostname.includes('.cloud')) {
         const updatedURL = appendUTMsToLink(link.href)
-        link.href = updatedURL
+        link.href = appendGalaxySessionIDToLink(updatedURL)
       }
     }
   }
@@ -62,6 +63,18 @@ export function appendUTMsToLink(url: string): string {
     for (const [key, value] of Object.entries(utms)) {
       urlObject.searchParams.set(key, value)
     }
+  }
+
+  return urlObject.toString()
+}
+
+export function appendGalaxySessionIDToLink(url: string): string {
+  const galaxy_id = Galaxy.getGalaxySessionId()
+  const urlObject = new URL(url)
+
+  // Append galaxy session id to links that contain ".cloud"
+  if (galaxy_id) {
+    urlObject.searchParams.set('glx_id', galaxy_id)
   }
 
   return urlObject.toString()
