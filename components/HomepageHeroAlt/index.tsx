@@ -86,7 +86,7 @@ export default function HomepageHeroAlt() {
                 type='secondary-dark'
                 weight='semibold'
                 size='lg'
-                href='https://clickhouse.com/docs/en/intro'
+                href='/clickhouse'
                 linkClass='w-full'
                 className='w-full !border-black !text-black !transition-all hover:!text-white'>
                 Download open-source
@@ -98,7 +98,7 @@ export default function HomepageHeroAlt() {
         {/* Graphic column */}
         <div className='relative'>
           {/* Desktop angle separator */}
-          <div className='absolute top-0 -left-px bottom-0 z-20 hidden aspect-[272/608] text-primary-300 lg:block'>
+          <div className='absolute -top-px -left-px bottom-0 z-20 hidden aspect-[272/608] text-primary-300 lg:block'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='auto'
@@ -116,10 +116,10 @@ export default function HomepageHeroAlt() {
           <div className='absolute top-0 left-4 bottom-0 right-0 z-10 hidden lg:block'>
             <Image
               src='/images/homepage/home-hero-product-ui.png'
-              width={3000}
-              height={1931}
+              width={3006}
+              height={1815}
               alt='ClickHouse Product Screenshot'
-              className='aspect-[3000/1931] h-auto w-full lg:h-full lg:w-auto lg:max-w-none'
+              className='aspect-[3006/1815] h-auto w-full lg:h-full lg:w-auto lg:max-w-none'
             />
           </div>
         </div>
