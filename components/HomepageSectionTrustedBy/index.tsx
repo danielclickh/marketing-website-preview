@@ -29,7 +29,7 @@ export default function HomepageSectionTrustedBy({
   const logos2 = logos.slice(Math.ceil(logos.length / 2))
 
   return (
-    <div className='my-16 md:my-20'>
+    <div className='my-16'>
       <SuiText
         weight='bold'
         size='sm'
