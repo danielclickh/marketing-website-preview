@@ -77,7 +77,8 @@ export default function HomepageHeroAlt() {
                 type='primary-dark'
                 size='lg'
                 weight='semibold'
-                href='#'
+                href='https://clickhouse.cloud/signUp'
+                target='_blank'
                 linkClass='w-full'
                 className='w-full'>
                 Start free cloud trial
@@ -86,7 +87,8 @@ export default function HomepageHeroAlt() {
                 type='secondary-dark'
                 weight='semibold'
                 size='lg'
-                href='/docs/en/getting-started/quick-start'
+                href='https://clickhouse.com/docs/en/getting-started/quick-start'
+                target='_blank'
                 linkClass='w-full'
                 className='w-full !border-black !text-black !transition-all hover:!text-white'>
                 Download open-source
