@@ -64,7 +64,7 @@ export default function HomepageSectionWhyClickhouse() {
           <div className='flex justify-center'>
             <div className='max-w-[600px] text-center'>
               <SuiTitle type='h2' color='inherit' className='mb-4'>
-                Why Clickhouse?
+                Why ClickHouse?
               </SuiTitle>
               <SuiText size='lg' className='opacity-70'>
                 ClickHouse is the fastest and most resource efficient real-time
