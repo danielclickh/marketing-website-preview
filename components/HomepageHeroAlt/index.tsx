@@ -36,6 +36,7 @@ export default function HomepageHeroAlt() {
             data warehouse for <br />
             {!isTypewritter && (
               <CycleText
+                pauseDelay={2000}
                 phrases={[
                   'analytics',
                   'observability',

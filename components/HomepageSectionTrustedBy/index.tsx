@@ -17,7 +17,7 @@ export default function HomepageSectionTrustedBy({
   )
 
   return (
-    <div className='my-16 md:my-32'>
+    <div className='my-16 md:my-20'>
       <SuiText
         weight='bold'
         size='sm'

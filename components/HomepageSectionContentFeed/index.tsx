@@ -43,7 +43,7 @@ export default function HomepageSectionContentFeed() {
 
   return (
     <div
-      className='section-container my-16 flex flex-row flex-wrap gap-16 md:my-32 md:gap-24 lg:flex-nowrap'
+      className='section-container my-16 flex flex-row flex-wrap gap-12 md:my-32 lg:flex-nowrap'
       ref={container}>
       {/* Text & filters column */}
       <div className='relative w-full flex-shrink-0 flex-grow-0 lg:w-2/5'>
@@ -115,8 +115,12 @@ export default function HomepageSectionContentFeed() {
             isActive && (
               <div
                 key={index}
-                className='mb-11 space-y-11 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8'>
-                {entry.embed && <ResponsiveEmbed html={entry.embed} />}
+                className='mb-11 space-y-11 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8 lg:p-10'>
+                {entry.embed && (
+                  <div className='overflow-clip rounded border border-neutral-750'>
+                    <ResponsiveEmbed html={entry.embed} />
+                  </div>
+                )}
                 <ReactMarkdown
                   components={{
                     a: ({ children, ...props }) => (
