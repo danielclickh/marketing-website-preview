@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { galaxyOnClick } from '../../lib/galaxy/galaxy'
 import { getCategory } from '../../lib/videos'
 import { CUIButton } from '../ClickUI'
-import RollerText from '../RollerText'
+import CycleText from '../CycleText'
 import { SuiText, SuiTitle } from '../sui'
 import Typewriter from 'typewriter-effect'
 
@@ -35,7 +35,7 @@ export default function HomepageHeroAlt() {
             <br className='sm:hidden lg:block' />
             data warehouse for <br />
             {!isTypewritter && (
-              <RollerText
+              <CycleText
                 phrases={[
                   'analytics',
                   'observability',
