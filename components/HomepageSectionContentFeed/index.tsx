@@ -116,11 +116,7 @@ export default function HomepageSectionContentFeed() {
               <div
                 key={index}
                 className='mb-11 space-y-11 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8 lg:p-10'>
-                {entry.embed && (
-                  <div className='overflow-clip rounded border border-neutral-750'>
-                    <ResponsiveEmbed html={entry.embed} />
-                  </div>
-                )}
+                {entry.embed && <ResponsiveEmbed html={entry.embed} />}
                 <ReactMarkdown
                   components={{
                     a: ({ children, ...props }) => (
