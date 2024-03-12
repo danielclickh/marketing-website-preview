@@ -7,12 +7,25 @@ type UTMs = {
   [key: string]: string
 }
 
+const updateLinks = () => {
+  const links = Array.from(document.querySelectorAll('a'))
+  for (const link of links) {
+    if (link.hostname.includes('.cloud')) {
+      const updatedURL = appendUTMsToLink(link.href)
+
+      link.href = appendGalaxySessionIDToLink(updatedURL)
+    }
+  }
+}
+
 export const onExperimentViewed = (
   experiment: Experiment<any>,
   result: Result<any>
 ) => {
   const experimentId = experiment.key
   const variationId = result.key
+
+  console.log('Experiment viewed:', { experimentId, variationId })
 
   const links = Array.from(document.querySelectorAll('a'))
   for (const link of links) {
@@ -23,22 +36,13 @@ export const onExperimentViewed = (
         variationId
       )
       link.href = updatedURL
+      updateLinks()
     }
   }
 }
 
 const UTMPersist = () => {
   const router = useRouter()
-
-  const updateLinks = () => {
-    const links = Array.from(document.querySelectorAll('a'))
-    for (const link of links) {
-      if (link.hostname.includes('.cloud')) {
-        const updatedURL = appendUTMsToLink(link.href)
-        link.href = appendGalaxySessionIDToLink(updatedURL)
-      }
-    }
-  }
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
