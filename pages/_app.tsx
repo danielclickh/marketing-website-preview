@@ -13,6 +13,7 @@ import { useRouter } from 'next/router'
 import { useInitGalaxy } from '../lib/galaxy/galaxy'
 import { GrowthBook, GrowthBookProvider } from '@growthbook/growthbook-react'
 import { Experiment, Result } from '@growthbook/growthbook'
+import { Galaxy } from '../lib/galaxy/web/browser'
 
 const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K'
 const websiteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL
@@ -75,9 +76,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   useInitGalaxy()
 
   useEffect(() => {
+    const glx_id = Galaxy.getGalaxySessionId()
+
     // Load features from the GrowthBook API and keep them up-to-date
     gb.loadFeatures({ autoRefresh: true })
-    gb.setAttributes({ user_id: undefined, session_id: 11, id: 1 })
+    gb.setAttributes({
+      user_id: undefined,
+      session_id: glx_id,
+      id: glx_id
+    })
 
     // Subscribe to route change events and update GrowthBook
     router.events.on('routeChangeComplete', updateGrowthBookURL)
