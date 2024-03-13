@@ -36,18 +36,20 @@ export default function HomepageSectionTrustedBy({
         className='mb-4 text-center uppercase tracking-wide text-primary-300'>
         Trusted by
       </SuiText>
-      <div className='relative z-10 flex flex-wrap place-items-center items-center justify-center gap-6 self-center opacity-90 grayscale invert md:gap-x-14'>
-        <LogoCarousel
-          logoColor='white'
-          logos={logos1}
-          speedClass1='animate-marqueeLeft'
-          speedClass2='animate-marqueeLeft2'
-        />
+      <div className='relative z-10 flex flex-wrap place-items-center items-center justify-center gap-6 self-center overflow-hidden opacity-90 grayscale invert md:gap-x-14'>
+        <div className='-translate-x-3'>
+          <LogoCarousel
+            logoColor='white'
+            logos={logos1}
+            speedClass1='_disabled_animate-marqueeLeft'
+            speedClass2='_disabled_animate-marqueeLeft2'
+          />
+        </div>
         <LogoCarousel
           logoColor='white'
           logos={logos2}
-          speedClass1='animate-marqueeLeft3'
-          speedClass2='animate-marqueeLeft4'
+          speedClass1='_disabled_animate-marqueeLeft3'
+          speedClass2='_disabled_animate-marqueeLeft4'
         />
       </div>
     </div>
