@@ -24,7 +24,7 @@ export default function HomepageHeroAlt() {
       <div className='absolute top-0 left-0 bottom-0 z-10 w-full bg-primary-300 lg:w-1/2'></div>
       <div className='section-container relative z-20 grid lg:grid-cols-2'>
         {/* Text column */}
-        <div className='relative z-30 bg-primary-300 py-12 text-black lg:py-24 xl:py-32'>
+        <div className='relative z-30 bg-primary-300 py-12 text-center text-black lg:py-24 lg:text-left xl:py-32'>
           <SuiTitle
             type='h1'
             className='!text-[2rem] md:!text-[2.85rem] xl:!text-[3.85rem]'>
@@ -32,11 +32,12 @@ export default function HomepageHeroAlt() {
             <span className='tilted tilted-black'>
               <span className='tilted-content text-white'>real-time</span>
             </span>{' '}
-            <br className='sm:hidden lg:block' />
+            <br />
             data warehouse for <br />
             {!isTypewritter && (
               <CycleText
                 pauseDelay={2000}
+                phraseClasses='justify-center lg:justify-start'
                 phrases={[
                   'analytics',
                   'observability',
@@ -68,9 +69,7 @@ export default function HomepageHeroAlt() {
             )}
           </SuiTitle>
           <div className='lg:inline-block lg:w-auto'>
-            <SuiText
-              size='lg'
-              className='mb-4 w-auto sm:mt-6 sm:mb-8 md:mt-6 md:mb-16 lg:!text-[20px]'>
+            <SuiText className='mt-6 mb-8 w-auto lg:!text-[20px]'>
               Unlock faster queries without skyrocketing costs.
             </SuiText>
             <div className='flex w-auto flex-wrap gap-4 sm:gap-8 md:flex-nowrap md:gap-6'>

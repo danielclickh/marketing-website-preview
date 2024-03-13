@@ -3,10 +3,12 @@ import styles from './styles.module.scss'
 
 export default function RollerText({
   phrases,
-  pauseDelay = 3000
+  pauseDelay = 3000,
+  phraseClasses
 }: {
   phrases: string[]
   pauseDelay?: number
+  phraseClasses?: string
 }) {
   const distancePerPhrase = 100 / (phrases.length * 2)
   const listElement = useRef<HTMLDivElement>(null)
@@ -78,7 +80,9 @@ export default function RollerText({
           return (
             <div
               key={index}
-              className='flex h-[2.75em] items-center whitespace-nowrap'>
+              className={`flex h-[2.75em] items-center whitespace-nowrap ${
+                phraseClasses || ''
+              }`}>
               <span>{phrase}</span>
             </div>
           )
