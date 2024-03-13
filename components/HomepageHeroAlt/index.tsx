@@ -116,7 +116,7 @@ export default function HomepageHeroAlt() {
           </div>
 
           {/* Hero image */}
-          <div className='absolute top-0 left-4 bottom-0 right-0 z-10 hidden lg:block'>
+          <div className='absolute top-0 bottom-0 right-0 z-10 hidden lg:left-10 lg:block xl:left-14'>
             <Image
               src='/images/homepage/home-hero-product-ui.png'
               width={2949}

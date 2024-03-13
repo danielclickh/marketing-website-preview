@@ -241,7 +241,7 @@ export default function HomepageSectionWhyClickhouse() {
                   optimized
                 </>
               }
-              link=''
+              link='https://clickhouse.com/docs'
             />
             <FeatureCard
               icon={

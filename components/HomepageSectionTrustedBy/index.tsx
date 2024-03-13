@@ -7,7 +7,7 @@ export default function HomepageSectionTrustedBy({
 }: {
   customerStories: HomepageCustomerStories
 }) {
-  const logoSizeModifier = 0.875
+  const logoSizeModifier = 0.8
 
   // Hacky way of resizing the logos
   // First we clone the array so not to modify else where
@@ -34,7 +34,7 @@ export default function HomepageSectionTrustedBy({
         weight='bold'
         size='sm'
         className='mb-4 text-center uppercase tracking-wide text-primary-300'>
-        Trusted by
+        ClickHouse is Trusted by
       </SuiText>
       <div className='relative z-10 flex flex-wrap place-items-center items-center justify-center gap-6 self-center overflow-hidden opacity-90 grayscale invert md:gap-x-14'>
         <div className='-translate-x-3'>
