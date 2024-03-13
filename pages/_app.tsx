@@ -62,7 +62,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   useInitGalaxy()
 
   useEffect(() => {
-    const glx_id = Galaxy.getGalaxySessionId()
+    const glx_id = Galaxy.getAnonymousId()
 
     // Load features from the GrowthBook API and keep them up-to-date
     gb.loadFeatures({ autoRefresh: true })
