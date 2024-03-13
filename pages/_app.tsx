@@ -99,6 +99,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       id: glx_id
     })
 
+    window.document
+      .querySelector('#main-site-container')
+      ?.classList.remove('hidden')
+
     // Subscribe to route change events and update GrowthBook
     router.events.on('routeChangeComplete', updateGrowthBookURL)
     return () => router.events.off('routeChangeComplete', updateGrowthBookURL)
@@ -113,7 +117,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <GrowthBookProvider growthbook={gb}>
         <main
-          className={`${inter.variable} font-inter ${inconsolata.variable}`}>
+          id='main-site-container'
+          className={`${inter.variable} font-inter ${inconsolata.variable} hidden`}>
           <SnackbarContextProvider>
             <div className='flex min-h-screen flex-col'>
               <Component {...pageProps} />
