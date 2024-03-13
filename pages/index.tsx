@@ -116,7 +116,7 @@ export default function HomePage({
   const tiltedTextFeature = useFeatureIsOn('tilted-text')
   const { value } = useExperiment({
     key: 'mktg-hero-tilted-text',
-    variations: ['gazillions', 'billions']
+    variations: ['Gazillions', 'Billions']
   })
 
   // Split the customerStories.logos array into two separate arrays
@@ -137,7 +137,9 @@ export default function HomePage({
               <SuiTitle type='h1' className='text-center' color='primary'>
                 Query{' '}
                 <span className='tilted tilted-yellow'>
-                  <span className='tilted-content'>{value}</span>
+                  <span className='tilted-content'>
+                    {tiltedTextFeature ? 'gazillions' : 'billions'}
+                  </span>
                 </span>{' '}
                 of rows in milliseconds
               </SuiTitle>
