@@ -27,7 +27,7 @@ export default function HomepageHeroAlt() {
         <div className='relative z-30 bg-primary-300 py-12 text-center text-black lg:py-24 lg:text-left xl:py-32'>
           <SuiTitle
             type='h1'
-            className='!text-[2rem] md:!text-[2.85rem] xl:!text-[3.85rem]'>
+            className='!text-[2rem] md:!text-[2.5rem] xl:!text-[3.5rem]'>
             The{' '}
             <span className='tilted tilted-black'>
               <span className='tilted-content text-white'>real-time</span>
