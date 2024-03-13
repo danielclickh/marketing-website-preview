@@ -24,7 +24,7 @@ import { HomePageProps } from '../types/homepage'
 import { galaxyOnClick, galaxyOnPage } from '../lib/galaxy/galaxy'
 import { FullyQualifiedEvent } from '../lib/galaxy/client/index'
 
-import { useFeatureIsOn } from '@growthbook/growthbook-react'
+import { useFeatureIsOn, useExperiment } from '@growthbook/growthbook-react'
 
 const yellowPositionStyle = {
   '--left-side': 'auto',
@@ -114,6 +114,10 @@ export default function HomePage({
   galaxyOnPage('homePage')
 
   const tiltedTextFeature = useFeatureIsOn('tilted-text')
+  const { value } = useExperiment({
+    key: 'mktg-hero-tilted-text',
+    variations: ['gazillions', 'billions']
+  })
 
   // Split the customerStories.logos array into two separate arrays
   const logos1 = customerStories.logos.slice(
@@ -133,9 +137,7 @@ export default function HomePage({
               <SuiTitle type='h1' className='text-center' color='primary'>
                 Query{' '}
                 <span className='tilted tilted-yellow'>
-                  <span className='tilted-content'>
-                    {tiltedTextFeature ? 'gazillions' : 'billions'}
-                  </span>
+                  <span className='tilted-content'>{value}</span>
                 </span>{' '}
                 of rows in milliseconds
               </SuiTitle>
