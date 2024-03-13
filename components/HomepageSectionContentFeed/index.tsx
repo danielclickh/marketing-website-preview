@@ -8,15 +8,17 @@ import { getContent, getCategories, EntryCategory } from './content'
 function StatBox({
   stat,
   label,
-  icon
+  iconSvg
 }: {
   stat: string | number
   label: string
-  icon: JSX.Element
+  iconSvg: string
 }) {
   return (
     <div className='flex flex-col items-center justify-center gap-2 rounded bg-neutral-750 py-4 px-2 text-center text-white'>
-      {icon}
+      <div
+        className='flex aspect-square w-10 items-center justify-center'
+        dangerouslySetInnerHTML={{ __html: iconSvg }}></div>
       <span className='text-4xl font-bold'>{stat}</span>
       <SuiText size='sm'>{label}</SuiText>
     </div>
@@ -142,12 +144,7 @@ export default function HomepageSectionContentFeed() {
                         <StatBox
                           stat={stat.stat}
                           label={stat.label}
-                          icon={
-                            <div
-                              dangerouslySetInnerHTML={{
-                                __html: stat.iconSvg
-                              }}></div>
-                          }
+                          iconSvg={stat.iconSvg}
                         />
                       )
                     })}
