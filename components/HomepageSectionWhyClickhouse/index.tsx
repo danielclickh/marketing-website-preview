@@ -241,7 +241,7 @@ export default function HomepageSectionWhyClickhouse() {
                   optimized
                 </>
               }
-              link='https://clickhouse.com/docs'
+              link='https://clickhouse.com/docs/en/concepts/why-clickhouse-is-so-fast'
             />
             <FeatureCard
               icon={
