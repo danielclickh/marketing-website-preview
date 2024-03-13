@@ -2,11 +2,11 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { galaxyOnClick } from '../../lib/galaxy/galaxy'
-import { getCategory } from '../../lib/videos'
 import { CUIButton } from '../ClickUI'
 import CycleText from '../CycleText'
 import { SuiText, SuiTitle } from '../sui'
 import Typewriter from 'typewriter-effect'
+import styles from './styles.module.scss'
 
 export default function HomepageHeroAlt() {
   const router = useRouter()
@@ -101,7 +101,8 @@ export default function HomepageHeroAlt() {
         {/* Graphic column */}
         <div className='relative'>
           {/* Desktop angle separator */}
-          <div className='absolute -top-px -left-px bottom-0 z-20 hidden aspect-[272/608] text-primary-300 lg:block'>
+          <div
+            className={`absolute -top-px -left-px bottom-0 z-20 hidden aspect-[272/608] text-primary-300 lg:block ${styles.angleShadow}`}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='auto'
