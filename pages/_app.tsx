@@ -99,10 +99,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       id: glx_id
     })
 
-    window.document
-      .querySelector('#main-site-container')
-      ?.classList.remove('hidden')
-
     // Subscribe to route change events and update GrowthBook
     router.events.on('routeChangeComplete', updateGrowthBookURL)
     return () => router.events.off('routeChangeComplete', updateGrowthBookURL)

@@ -26,6 +26,9 @@ export const onExperimentViewed = (
   const variationId = result.key
 
   console.log('Experiment viewed:', { experimentId, variationId })
+  window.document
+    .querySelector('#main-site-container')
+    ?.classList.remove('hidden')
 
   const links = Array.from(document.querySelectorAll('a'))
   for (const link of links) {
