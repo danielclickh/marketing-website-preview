@@ -50,9 +50,6 @@ const gb = new GrowthBook({
   enableDevMode: true,
   trackingCallback: onExperimentViewed,
   features: {
-    'redirect-cp-login-to-uc': {
-      defaultValue: false
-    },
     'tilted-text': {
       defaultValue: false,
       rules: [

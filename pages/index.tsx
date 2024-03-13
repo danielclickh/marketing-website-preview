@@ -114,10 +114,6 @@ export default function HomePage({
   galaxyOnPage('homePage')
 
   const tiltedTextFeature = useFeatureIsOn('tilted-text')
-  const { value } = useExperiment({
-    key: 'mktg-hero-tilted-text',
-    variations: ['Gazillions', 'Billions']
-  })
 
   // Split the customerStories.logos array into two separate arrays
   const logos1 = customerStories.logos.slice(
