@@ -119,10 +119,10 @@ export default function HomepageHeroAlt() {
           <div className='absolute top-0 left-4 bottom-0 right-0 z-10 hidden lg:block'>
             <Image
               src='/images/homepage/home-hero-product-ui.png'
-              width={3006}
-              height={1815}
+              width={2949}
+              height={1806}
               alt='ClickHouse Product Screenshot'
-              className='aspect-[3006/1815] h-auto w-full lg:h-full lg:w-auto lg:max-w-none'
+              className='aspect-[2949/1806] h-auto w-full lg:h-full lg:w-auto lg:max-w-none'
             />
           </div>
         </div>
