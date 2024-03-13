@@ -37,9 +37,7 @@ export default function HomepageSectionContentFeed() {
 
   useEffect(() => {
     if (container.current && hasChanged) {
-      container.current.scrollIntoView({
-        behavior: 'smooth'
-      })
+      container.current.scrollIntoView()
     }
   }, [activeCategory])
 

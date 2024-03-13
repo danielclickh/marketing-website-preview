@@ -37,12 +37,12 @@ function FeatureCard({
     <Link
       href={link}
       target={target}
-      className='group flex flex-col items-center gap-4 rounded-lg bg-primary-300 py-6 px-2 text-center text-primary-900'>
+      className='group flex items-center gap-4 rounded-lg bg-primary-300 py-6 px-4 text-primary-900 sm:flex-col sm:gap-4 sm:px-2 sm:text-center'>
       {icon}
-      <SuiTitle type='h3' color='inherit'>
+      <SuiTitle type='h3' color='inherit' className='flex-1'>
         {title}
       </SuiTitle>
-      <span>
+      <span className='ml-auto flex-shrink-0 flex-grow-0 whitespace-nowrap sm:ml-0'>
         More{' '}
         <span className='tanslate-x-0 inline-block transition-transform group-hover:translate-x-1'>
           -&gt;
@@ -54,7 +54,7 @@ function FeatureCard({
 
 export default function HomepageSectionWhyClickhouse() {
   return (
-    <div className='my-16 bg-neutral-700 py-16 md:my-32 lg:py-36'>
+    <div className='my-16 bg-neutral-700 py-16 md:my-32 lg:py-24'>
       <div className='section-container'>
         <div className='relative flex flex-col gap-8 overflow-clip rounded bg-neutral-750 p-8 lg:p-16'>
           {/* Gradient */}
@@ -157,7 +157,7 @@ export default function HomepageSectionWhyClickhouse() {
           </div>
 
           {/* Features */}
-          <div className='grid grid-cols-2 gap-6 lg:grid-cols-5'>
+          <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-5'>
             <FeatureCard
               icon={
                 <svg

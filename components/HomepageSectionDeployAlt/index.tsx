@@ -50,8 +50,8 @@ export default function HomepageSectionDeployAlt() {
       </div>
 
       {/* Cards */}
-      <div className='section-container max-w-[800px]'>
-        <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
+      <div className='section-container'>
+        <div className='mx-auto grid w-full max-w-[800px] grid-cols-1 gap-6 md:grid-cols-2'>
           {/* Cloud */}
           <Link
             href='https://clickhouse.cloud/signUp?loc=home-deploy-your-way'
@@ -75,9 +75,9 @@ export default function HomepageSectionDeployAlt() {
             <SuiTitle type='h3' className='!text-[24px]'>
               ClickHouse Cloud
             </SuiTitle>
-            <SuiText size='lg'>
+            <SuiText>
               The best way to use ClickHouse. Available on AWS, GCP and their{' '}
-              <br className='hidden lg:block' />
+              <br className='hidden md:block' />
               marketplaces. Coming soon to Azure.
             </SuiText>
             <strong className='block w-full rounded bg-white py-2 text-center font-medium text-neutral-900 transition-all group-hover:opacity-80'>
@@ -112,7 +112,7 @@ export default function HomepageSectionDeployAlt() {
             <SuiTitle type='h3' className='!text-[24px]'>
               ClickHouse Open Source
             </SuiTitle>
-            <SuiText size='lg'>
+            <SuiText>
               Spin up a database server with <br className='hidden lg:block' />
               open-source ClickHouse. Always free.
             </SuiText>
