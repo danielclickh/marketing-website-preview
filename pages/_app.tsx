@@ -48,7 +48,37 @@ const gb = new GrowthBook({
   clientKey: process.env.NEXT_PUBLIC_GROWTHBOOK_CLIENT_KEY,
   decryptionKey: process.env.NEXT_PUBLIC_GROWTHBOOK_DECRYPTION_KEY,
   enableDevMode: true,
-  trackingCallback: onExperimentViewed
+  trackingCallback: onExperimentViewed,
+  features: {
+    'redirect-cp-login-to-uc': {
+      defaultValue: false
+    },
+    'tilted-text': {
+      defaultValue: false,
+      rules: [
+        {
+          coverage: 1,
+          seed: 'mktg-hero-tilted-text',
+          hashVersion: 2,
+          variations: [false, true],
+          weights: [0.5, 0.5],
+          key: 'mktg-hero-tilted-text',
+          meta: [
+            {
+              key: '0',
+              name: 'Control'
+            },
+            {
+              key: '1',
+              name: 'Variation 1'
+            }
+          ],
+          phase: '0',
+          name: 'mktg-hero-tilted-text'
+        }
+      ]
+    }
+  }
 })
 
 // Let the GrowthBook instance know when the URL changes so the active

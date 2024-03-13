@@ -24,11 +24,7 @@ import { HomePageProps } from '../types/homepage'
 import { galaxyOnClick, galaxyOnPage } from '../lib/galaxy/galaxy'
 import { FullyQualifiedEvent } from '../lib/galaxy/client/index'
 
-import {
-  useFeatureIsOn,
-  useFeatureValue,
-  useGrowthBook
-} from '@growthbook/growthbook-react'
+import { useFeatureIsOn } from '@growthbook/growthbook-react'
 
 const yellowPositionStyle = {
   '--left-side': 'auto',
