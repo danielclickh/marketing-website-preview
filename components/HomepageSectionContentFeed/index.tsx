@@ -3,24 +3,16 @@ import ReactMarkdown from 'react-markdown'
 import { CUIButton } from '../ClickUI'
 import ResponsiveEmbed from '../ResponsiveEmbed'
 import { SuiText, SuiTitle } from '../sui'
-import { getContent, getCategories, EntryCategory } from './content'
+import { getContent, getCategories, EntryCategory, EntryStat } from './content'
 
-function StatBox({
-  stat,
-  label,
-  iconSvg
-}: {
-  stat: string | number
-  label: string
-  iconSvg: string
-}) {
+function StatBox(props: EntryStat) {
   return (
     <div className='flex flex-col items-center justify-center gap-2 rounded bg-neutral-750 py-4 px-2 text-center text-white'>
-      <div
-        className='flex aspect-square w-10 items-center justify-center'
-        dangerouslySetInnerHTML={{ __html: iconSvg }}></div>
-      <span className='text-4xl font-bold'>{stat}</span>
-      <SuiText size='sm'>{label}</SuiText>
+      <div className='flex aspect-square w-10 items-center justify-center'>
+        <props.icon />
+      </div>
+      <span className='text-4xl font-bold'>{props.stat}</span>
+      <SuiText size='sm'>{props.label}</SuiText>
     </div>
   )
 }
@@ -129,10 +121,7 @@ export default function HomepageSectionContentFeed() {
                   {entry.body}
                 </ReactMarkdown>
                 <div className='flex justify-center'>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: entry.logoSvg
-                    }}></div>
+                  <entry.logo />
                 </div>
                 {entry.stats && entry.stats.length && (
                   <div
@@ -142,7 +131,7 @@ export default function HomepageSectionContentFeed() {
                         <StatBox
                           stat={stat.stat}
                           label={stat.label}
-                          iconSvg={stat.iconSvg}
+                          icon={stat.icon}
                         />
                       )
                     })}
