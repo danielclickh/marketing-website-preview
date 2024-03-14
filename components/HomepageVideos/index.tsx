@@ -116,7 +116,7 @@ export default function HomepageCustomerVideos({
                 <p className='pt-4 text-base font-bold'>"{video.quote}"</p>
               )}
               {video.personName && (
-                <p className='pt-4 text-sm text-neutral-900'>
+                <p className='pt-4 text-sm'>
                   {video.personName}
                   <br />
                   {video.personTitleAndCompany && (
