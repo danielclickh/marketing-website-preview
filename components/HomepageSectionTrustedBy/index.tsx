@@ -60,11 +60,12 @@ export default function HomepageSectionTrustedBy({
         ClickHouse is Trusted by
       </SuiText>
       <div className={`group/container relative ${styles.maskCarousel}`}>
-        <div className='mask-carousel space-y-6'>
+        <div className='mask-carousel space-y-6 text-black'>
           <Swiper
             onSwiper={setSwiperCarousel1}
             slidesPerView={'auto'}
             slidesPerGroup={3}
+            spaceBetween={48}
             centeredSlides={true}
             centeredSlidesBounds={true}
             loop={true}
@@ -94,6 +95,7 @@ export default function HomepageSectionTrustedBy({
             onSwiper={setSwiperCarousel2}
             slidesPerView={'auto'}
             slidesPerGroup={3}
+            spaceBetween={48}
             centeredSlides={true}
             centeredSlidesBounds={true}
             loop={true}
