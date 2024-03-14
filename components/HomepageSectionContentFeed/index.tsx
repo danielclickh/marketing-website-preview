@@ -54,15 +54,15 @@ export default function HomepageSectionContentFeed() {
           <SuiText
             size='lg'
             className='text-balance opacity-70 xl:text-[1.25rem]'>
-            Sony, Lyft, Cisco, GitLab, Twillio and many more choose ClickHouse
-            Cloud for it's scale, efficiency, and ease of use.
+            Sony, Lyft, Cisco, GitLab, Twilio and many more choose ClickHouse
+            Cloud for its scale, efficiency, and ease of use.
           </SuiText>
           {allCategories.length && (
             <>
               <SuiText
                 weight='bold'
                 size='sm'
-                className='mt-12 mb-4 uppercase tracking-wide text-primary-300'>
+                className='mt-12 mb-4 uppercase tracking-[0.0875rem] text-primary-300'>
                 Filter by
               </SuiText>
               <ul className='flex flex-wrap gap-4'>

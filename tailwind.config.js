@@ -13,7 +13,9 @@ module.exports = {
       screens: {
         print: {
           raw: 'print'
-        }
+        },
+        '3xl': '2200px'
+        // => @media (min-width: 2200px) { ... }
       },
       typography: ({ theme }) => ({
         neutral: {

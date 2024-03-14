@@ -56,7 +56,7 @@ export default function HomepageSectionTrustedBy({
       <SuiText
         weight='bold'
         size='sm'
-        className='mb-10 text-center uppercase tracking-wide text-primary-300'>
+        className='mb-10 text-center uppercase tracking-[0.0875rem] text-primary-300'>
         ClickHouse is Trusted by
       </SuiText>
       <div className={`group/container relative ${styles.maskCarousel}`}>
