@@ -22,7 +22,7 @@ import Layout from '../components/Layout'
 import { findOne } from '../lib/api/strapi'
 import { getCommonProps } from '../lib/utils/getCommonProps'
 import { HomePageProps } from '../types/homepage'
-import { galaxyOnClick, galaxyOnPage } from '../lib/galaxy/galaxy'
+import { galaxyOnPage } from '../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<HomePageProps> =
   async function getStaticProps() {
@@ -75,8 +75,13 @@ export default function HomePage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {testType === 'control' && (
-        <LayoutControl
-          hero={hero}
+        // <LayoutControl
+        //   hero={hero}
+        //   customerStories={customerStories}
+        //   headerData={headerData}
+        //   platforms={platforms}
+        // />
+        <LayoutExperiment4
           customerStories={customerStories}
           headerData={headerData}
           platforms={platforms}
