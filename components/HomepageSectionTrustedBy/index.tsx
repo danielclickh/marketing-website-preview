@@ -1,159 +1,60 @@
+import { ChevronRightIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-import { Dispatch, SetStateAction, useState } from 'react'
-import type { Swiper as SwiperClass } from 'swiper/types'
 import { HomepageCustomerStories } from '../../types/homepage'
-import { StrapiImage } from '../StrapiElements'
-import { SuiText } from '../sui'
-import styles from './styles.module.scss'
+import LogoCarousel from '../LogoCarousel'
 
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
+interface Props extends React.HTMLProps<HTMLDivElement> {
+  customerStories: HomepageCustomerStories
+  invertLogos?: boolean
+}
 
 export default function HomepageSectionTrustedBy({
-  customerStories
-}: {
-  customerStories: HomepageCustomerStories
-}) {
-  const resizeImageDimension = (size: number) =>
-    parseFloat((size * 0.8).toFixed(2))
-
-  // Hacky way of resizing the logos
-  // First we clone the array so not to modify else where
-  // Then we alter the strapi data which gets used by the LogoCarousel component
-  const logos = structuredClone(customerStories.logos).map((logo) => {
-    if (logo.darkLogoPng?.width && logo.darkLogoPng?.height) {
-      logo.darkLogoPng.width = resizeImageDimension(logo.darkLogoPng.width)
-      logo.darkLogoPng.height = resizeImageDimension(logo.darkLogoPng.height)
-    }
-    if (logo.lightLogoPng?.width && logo.lightLogoPng?.height) {
-      logo.lightLogoPng.width = resizeImageDimension(logo.lightLogoPng.width)
-      logo.lightLogoPng.height = resizeImageDimension(logo.lightLogoPng.height)
-    }
-    return logo
-  })
-
-  // Reverse array without mutating original
-  //const logosReversed = [...logos].reverse()
-
-  const logos1 = logos.slice(0, Math.ceil(logos.length / 2))
-  const logos2 = logos.slice(Math.ceil(logos.length / 2))
-
-  const [swiperCarousel1, setSwiperCarousel1] = useState<SwiperClass>(null)
-  const [swiperCarousel2, setSwiperCarousel2] = useState<SwiperClass>(null)
-
-  const goPrev = () => {
-    if (swiperCarousel1) swiperCarousel1.slidePrev()
-    if (swiperCarousel2) swiperCarousel2.slidePrev()
-  }
-
-  const goNext = () => {
-    if (swiperCarousel1) swiperCarousel1.slideNext()
-    if (swiperCarousel2) swiperCarousel2.slideNext()
-  }
-
+  customerStories,
+  invertLogos = false,
+  ...props
+}: Props) {
+  // Split the customerStories.logos array into two separate arrays
+  const logos1 = customerStories.logos.slice(
+    0,
+    Math.ceil(customerStories.logos.length / 2)
+  )
+  const logos2 = customerStories.logos.slice(
+    Math.ceil(customerStories.logos.length / 2)
+  )
   return (
-    <div className='my-16'>
-      <SuiText
-        weight='bold'
-        size='sm'
-        className='mb-10 text-center uppercase tracking-[0.0875rem] text-primary-300'>
-        ClickHouse is Trusted by
-      </SuiText>
-      <div className={`group/container relative ${styles.maskCarousel}`}>
-        <div className='mask-carousel space-y-6 text-black'>
-          <Swiper
-            onSwiper={setSwiperCarousel1}
-            slidesPerView={'auto'}
-            slidesPerGroup={3}
-            spaceBetween={64}
-            centeredSlides={true}
-            centeredSlidesBounds={true}
-            loop={true}
-            loopAddBlankSlides={false}
-            loopPreventsSliding={true}
-            allowTouchMove={false}
-            className={styles.customSwiperStyles}>
-            {logos1.map((customer, index) => {
-              return (
-                <SwiperSlide key={index} className='!w-auto'>
-                  <div
-                    className='inline-block opacity-90 grayscale invert'
-                    style={{ width: customer.darkLogoPng.width || 'auto' }}>
-                    {customer.href ? (
-                      <Link href={customer.href} className='inline'>
-                        <StrapiImage {...customer.darkLogoPng} />
-                      </Link>
-                    ) : (
-                      <StrapiImage {...customer.darkLogoPng} />
-                    )}
-                  </div>
-                </SwiperSlide>
-              )
-            })}
-          </Swiper>
-          <Swiper
-            onSwiper={setSwiperCarousel2}
-            slidesPerView={'auto'}
-            slidesPerGroup={3}
-            spaceBetween={64}
-            centeredSlides={true}
-            centeredSlidesBounds={true}
-            loop={true}
-            loopAddBlankSlides={false}
-            loopPreventsSliding={true}
-            allowTouchMove={false}
-            className={styles.customSwiperStyles}>
-            {logos2.map((customer, index) => {
-              return (
-                <SwiperSlide key={index} className='!w-auto'>
-                  <div
-                    className='inline-block opacity-90 grayscale invert'
-                    style={{ width: customer.darkLogoPng.width || 'auto' }}>
-                    {customer.href ? (
-                      <Link href={customer.href} className='inline'>
-                        <StrapiImage {...customer.darkLogoPng} />
-                      </Link>
-                    ) : (
-                      <StrapiImage {...customer.darkLogoPng} />
-                    )}
-                  </div>
-                </SwiperSlide>
-              )
-            })}
-          </Swiper>
+    <div {...props}>
+      <div className='section-container space-y-14'>
+        <div className='text-center text-xl font-semibold leading-normal'>
+          Trusted by developers that work with data at{' '}
+          <span className='tilted tilted-black'>
+            <span className='tilted-content leading-8'>scale</span>
+          </span>
         </div>
-        <button
-          onClick={goPrev}
-          className='group/button absolute top-0 left-0 bottom-0 z-10 flex w-24 items-center justify-center text-primary-300 opacity-0 transition-opacity group-hover/container:opacity-100'>
-          <svg
-            className='transition-transform group-hover/button:-translate-x-1'
-            xmlns='http://www.w3.org/2000/svg'
-            width='23'
-            height='15'
-            fill='none'
-            viewBox='0 0 23 15'>
-            <path
-              fill='currentColor'
-              d='M7.22354.204545 8.87127 1.84517 4.54599 6.16335H22.4082v2.40057H4.54599l4.32528 4.32528-1.64773 1.6335L.0644531 7.36364 7.22354.204545Z'
+        <div
+          className={`mask-logos-carousel mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-6 ${
+            invertLogos ? 'grayscale invert' : ''
+          }`}>
+          <LogoCarousel
+            logos={logos1}
+            speedClass1='animate-marqueeLeft'
+            speedClass2='animate-marqueeLeft2'
+          />
+          <LogoCarousel
+            logos={logos2}
+            speedClass1='animate-marqueeLeft3'
+            speedClass2='animate-marqueeLeft4'
+          />
+        </div>
+        <div className='text-center text-base leading-normal'>
+          Don't take our word for it.{' '}
+          <Link href='/user-stories' className='font-bold hover:underline'>
+            Read our user stories{' '}
+            <ChevronRightIcon
+              height='20'
+              className='-mt-0.5 inline-block transition group-hover:translate-x-1/2'
             />
-          </svg>
-        </button>
-        <button
-          onClick={goNext}
-          className='group/button absolute top-0 right-0 bottom-0 z-10 flex w-24 items-center justify-center text-primary-300 opacity-0 transition-opacity group-hover/container:opacity-100'>
-          <svg
-            className='transition-transform group-hover/button:translate-x-1'
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='15'
-            fill='none'
-            viewBox='0 0 24 15'>
-            <path
-              fill='currentColor'
-              d='m15.8751 14.7955-1.6477-1.6407 4.3252-4.31815H.69043V6.43608H18.5526L14.2274 2.1108 15.8751.477273l7.1591 7.159087-7.1591 7.15914Z'
-            />
-          </svg>
-        </button>
+          </Link>
+        </div>
       </div>
     </div>
   )
