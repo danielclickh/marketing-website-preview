@@ -69,7 +69,7 @@ export default function HomepageHeroAlt() {
             )}
           </SuiTitle>
           <div className='lg:inline-block lg:w-auto'>
-            <SuiText className='mt-6 mb-8 w-auto lg:!text-[20px]'>
+            <SuiText className='mt-6 mb-12 !font-medium w-auto lg:!text-[20px]'>
               Unlock faster queries without skyrocketing costs.
             </SuiText>
             <div className='flex w-auto flex-wrap gap-4 sm:gap-8 md:flex-nowrap md:gap-6'>
