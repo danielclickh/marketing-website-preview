@@ -108,7 +108,6 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#282828'
       />
-
       <rect
         id='line2'
         x='36.7914'
@@ -118,7 +117,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#282828'>
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
@@ -142,14 +141,14 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FAFF69'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+200ms'
+          begin='lineNav.begin+2s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -173,14 +172,14 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FAFF69'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+200ms'
+          begin='lineNav.begin+2s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -196,7 +195,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#282828'>
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
@@ -220,14 +219,14 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FAFF69'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+200ms'
+          begin='lineNav.begin+2s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -251,14 +250,14 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FAFF69'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+200ms'
+          begin='lineNav.begin+2s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -274,7 +273,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#282828'>
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
@@ -291,7 +290,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#282828'>
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
@@ -315,14 +314,14 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FAFF69'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+400ms'
+          begin='lineNav.begin+3s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -346,14 +345,14 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FAFF69'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+400ms'
+          begin='lineNav.begin+3s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -369,7 +368,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#282828'>
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
@@ -393,14 +392,14 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FAFF69'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+400ms'
+          begin='lineNav.begin+3s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -424,14 +423,14 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FAFF69'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+400ms'
+          begin='lineNav.begin+3s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -447,7 +446,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#282828'>
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
@@ -578,7 +577,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#282828'>
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
@@ -602,14 +601,14 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FAFF69'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+1000ms'
+          begin='lineNav.begin+6s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -633,14 +632,14 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FAFF69'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+1000ms'
+          begin='lineNav.begin+6s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -656,7 +655,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#282828'>
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
@@ -680,14 +679,14 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FAFF69'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+1000ms'
+          begin='lineNav.begin+6s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -711,14 +710,14 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FAFF69'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+1000ms'
+          begin='lineNav.begin+6s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -734,7 +733,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#282828'>
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
@@ -742,6 +741,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           keyTimes='0; 0.99; 1'
         />
       </rect>
+
       <rect
         id='line7'
         x='36.7914'
@@ -751,7 +751,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#282828'>
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
@@ -759,6 +759,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           keyTimes='0; 0.99; 1'
         />
       </rect>
+
       <rect
         x='85.7211'
         y='187.932'
@@ -774,15 +775,16 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         height='0'
         rx='2'
         fill='#FAFF69'>
+        //update
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+1200ms'
+          begin='lineNav.begin+7s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -806,14 +808,14 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FAFF69'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+1200ms'
+          begin='lineNav.begin+7s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -829,7 +831,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#282828'>
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
@@ -853,14 +855,14 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FAFF69'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+1200ms'
+          begin='lineNav.begin+7s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -884,14 +886,14 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FAFF69'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+1200ms'
+          begin='lineNav.begin+7s'
           to='17'
         />
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='height'
           begin='lineNav.end+0.5s'
@@ -907,7 +909,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#282828'>
         <animate
-          dur='0.6s'
+          dur='0.5s'
           fill='freeze'
           attributeName='fill'
           begin='lineNav.end+0.5s'
@@ -915,6 +917,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           keyTimes='0; 0.99; 1'
         />
       </rect>
+
       <rect
         x='36.7914'
         y='87.932'
@@ -923,35 +926,35 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FF7575'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+200ms'
+          begin='lineNav.begin+2s'
           to='17'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.1s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='width'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.1s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='x'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.1s'
           to='425'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='y'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.1s'
           to='127.932'
         />
       </rect>
@@ -963,35 +966,35 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FF7575'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+200ms'
+          begin='lineNav.begin+2s'
           to='17'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.1s'
           attributeName='width'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.1s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='x'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='425'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='y'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='127.932'
         />
       </rect>
@@ -1003,35 +1006,35 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FF7575'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+200ms'
+          begin='lineNav.begin+2s'
           to='17'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.1s'
           attributeName='width'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.1s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='x'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='425'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='y'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='127.932'
         />
       </rect>
@@ -1043,35 +1046,35 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FF7575'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+400ms'
+          begin='lineNav.begin+3s'
           to='17'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.1s'
           attributeName='width'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.1s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='x'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='425'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='y'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='127.932'
         />
       </rect>
@@ -1083,35 +1086,35 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FF7575'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+400ms'
+          begin='lineNav.begin+3s'
           to='17'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.1s'
           attributeName='width'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.1s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='x'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='425'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='y'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='127.932'
         />
       </rect>
@@ -1123,35 +1126,35 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FF7575'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+400ms'
+          begin='lineNav.begin+3s'
           to='17'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.1s'
           attributeName='width'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.1s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='x'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='425'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='y'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='127.932'
         />
       </rect>
@@ -1163,35 +1166,35 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FF7575'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+1000ms'
+          begin='lineNav.begin+6s'
           to='17'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.1s'
           attributeName='width'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.1s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='x'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='425'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='y'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='127.932'
         />
       </rect>
@@ -1203,35 +1206,35 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FF7575'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+1000ms'
+          begin='lineNav.begin+6s'
           to='17'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.1s'
           attributeName='width'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.1s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='x'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='425'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='y'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='127.932'
         />
       </rect>
@@ -1243,35 +1246,35 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FF7575'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+1000ms'
+          begin='lineNav.begin+6s'
           to='17'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.1s'
           attributeName='width'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.1s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='x'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='425'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='y'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='127.932'
         />
       </rect>
@@ -1283,35 +1286,35 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FF7575'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+1200ms'
+          begin='lineNav.begin+7s'
           to='17'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.1s'
           attributeName='width'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.1s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='x'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='425'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='y'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='127.932'
         />
       </rect>
@@ -1323,35 +1326,35 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FF7575'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+1200ms'
+          begin='lineNav.begin+7s'
           to='17'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.1s'
           attributeName='width'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.1s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='x'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='425'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='y'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='127.932'
         />
       </rect>
@@ -1363,35 +1366,35 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         rx='2'
         fill='#FF7575'>
         <animate
-          dur='200ms'
+          dur='1ms'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.begin+1200ms'
+          begin='lineNav.begin+7s'
           to='17'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           fill='freeze'
           attributeName='height'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.1s'
           attributeName='width'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.1s'
           to='0'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='x'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='425'
         />
         <animate
-          dur='0.5s'
+          dur='0.2s'
           attributeName='y'
-          begin='lineNav.end+0.5s'
+          begin='lineNav.end+0.2s'
           to='127.932'
         />
       </rect>
@@ -1493,7 +1496,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           dur='1s'
           values='1; 1; 0'
           keyTimes='0; 0.99; 1'
-          begin='2.417s;lineChart.end+2.417s'
+          begin='10.5s;'
         />
       </g>
 
@@ -1533,15 +1536,15 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           />
         </g>
         <ellipse cx='48.907' cy='49' rx='28.0402' ry='28' fill='#211D1B' />
-        <animate
+        {/* <animate
           id='pieChart'
           attributeName='opacity'
           attributeType='XML'
           dur='1s'
           values='1; 1; 0'
           keyTimes='0; 0.99; 1'
-          begin='barChart.end+2.417s'
-        />
+          begin='barChart.end+10.5s'
+        /> */}
       </g>
 
       <g opacity='0' transform='matrix(1, 0, 0, 1, 413.511292, 87.500008)'>
@@ -1555,15 +1558,15 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           stroke='#FF7575'
           strokeWidth='5'
         />
-        <animate
+        {/* <animate
           id='lineChart'
           attributeName='opacity'
           attributeType='XML'
-          dur='1s'
+          dur='2s'
           values='1; 1; 0'
           keyTimes='0; 0.99; 1'
-          begin='pieChart.end+2.417s'
-        />
+          begin='pieChart.end+10.5s'
+        /> */}
       </g>
       <rect
         x='36.7914'
@@ -1576,9 +1579,13 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           id='lineNav'
           attributeName='y'
           attributeType='XML'
-          dur='1570ms'
-          to='223.932'
-          begin='0s;barChart.end;lineChart.end;pieChart.end'
+          to='207.932'
+          // begin='0s;barChart.end;lineChart.end;pieChart.end'
+          begin='0s;barChart.end;'
+          dur='10s'
+          values='67.932; 83.932; 103.932; 123.932; 143.932; 163.932; 183.932; 203.932; 223.932; 229.932;'
+          keyTimes='0; 0.1; 0.2; 0.3; 0.4; 0.5; 0.6; 0.7; 0.8; 1'
+          calcMode='discrete'
         />
         <animate
           attributeName='opacity'
@@ -1586,7 +1593,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           dur='1s'
           values='0; 0; 1'
           keyTimes='0; 0.99; 1'
-          begin='lineNav.end'
+          begin='lineNav.end-1s'
         />
       </rect>
     </svg>
