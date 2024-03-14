@@ -115,7 +115,7 @@ export default function HomepageSectionContentFeed() {
             isActive && (
               <div
                 key={index}
-                className='mb-11 space-y-11 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8 lg:p-10'>
+                className='mb-11 space-y-8 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8 lg:p-10'>
                 {entry.embed && <ResponsiveEmbed html={entry.embed} />}
                 <ReactMarkdown
                   components={{
@@ -136,7 +136,7 @@ export default function HomepageSectionContentFeed() {
                 </div>
                 {entry.stats && entry.stats.length && (
                   <div
-                    className={`grid grid-cols-1 gap-2 ${statsColumnClasses}`}>
+                    className={`grid grid-cols-1 gap-1 ${statsColumnClasses}`}>
                     {entry.stats.map((stat) => {
                       return (
                         <StatBox
