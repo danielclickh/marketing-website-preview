@@ -136,7 +136,7 @@ export default function HomepageSectionContentFeed() {
                 </div>
                 {entry.stats && entry.stats.length && (
                   <div
-                    className={`grid grid-cols-1 gap-2 ${statsColumnClasses}`}>
+                    className={`grid grid-cols-1 gap-1 ${statsColumnClasses}`}>
                     {entry.stats.map((stat) => {
                       return (
                         <StatBox
