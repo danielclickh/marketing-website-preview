@@ -65,7 +65,7 @@ export default function HomepageSectionTrustedBy({
             onSwiper={setSwiperCarousel1}
             slidesPerView={'auto'}
             slidesPerGroup={3}
-            spaceBetween={48}
+            spaceBetween={64}
             centeredSlides={true}
             centeredSlidesBounds={true}
             loop={true}
@@ -95,7 +95,7 @@ export default function HomepageSectionTrustedBy({
             onSwiper={setSwiperCarousel2}
             slidesPerView={'auto'}
             slidesPerGroup={3}
-            spaceBetween={48}
+            spaceBetween={64}
             centeredSlides={true}
             centeredSlidesBounds={true}
             loop={true}
