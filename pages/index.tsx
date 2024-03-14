@@ -19,12 +19,10 @@ import SpeedAnimationMobileSvg from '../components/SpeedAnimation/Mobile'
 import { SuiTitle } from '../components/sui'
 import HomePageTerminal from '../components/Terminal/HomePageTerminal'
 import { findOne } from '../lib/api/strapi'
+import { FullyQualifiedEvent } from '../lib/galaxy/client/index'
+import { galaxyOnClick, galaxyOnPage } from '../lib/galaxy/galaxy'
 import { getCommonProps } from '../lib/utils/getCommonProps'
 import { HomePageProps } from '../types/homepage'
-import { galaxyOnClick, galaxyOnPage } from '../lib/galaxy/galaxy'
-import { FullyQualifiedEvent } from '../lib/galaxy/client/index'
-
-import { useFeatureIsOn, useExperiment } from '@growthbook/growthbook-react'
 
 const yellowPositionStyle = {
   '--left-side': 'auto',
@@ -113,8 +111,6 @@ export default function HomePage({
 }: HomePageProps) {
   galaxyOnPage('homePage')
 
-  const tiltedTextFeature = useFeatureIsOn('tilted-text')
-
   // Split the customerStories.logos array into two separate arrays
   const logos1 = customerStories.logos.slice(
     0,
@@ -133,9 +129,7 @@ export default function HomePage({
               <SuiTitle type='h1' className='text-center' color='primary'>
                 Query{' '}
                 <span className='tilted tilted-yellow'>
-                  <span className='tilted-content'>
-                    {tiltedTextFeature ? 'gazillions' : 'billions'}
-                  </span>
+                  <span className='tilted-content'>billions</span>
                 </span>{' '}
                 of rows in milliseconds
               </SuiTitle>
