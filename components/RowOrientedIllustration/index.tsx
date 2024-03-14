@@ -1457,10 +1457,10 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           id='barChart1'
           attributeName='opacity'
           attributeType='XML'
-          dur='1s'
+          dur='1.5s'
           values='1; 1; 0'
           keyTimes='0; 0.99; 1'
-          begin='10.5s;lineNav1.end+0.5s'
+          begin='10.25s;pieChart1.end+10.25s;'
         />
       </g>
 
@@ -1500,15 +1500,15 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           />
         </g>
         <ellipse cx='48.907' cy='49' rx='28.0402' ry='28' fill='#211D1B' />
-        {/* <animate
+        <animate
           id='pieChart1'
           attributeName='opacity'
           attributeType='XML'
-          dur='1s'
+          dur='1.5s'
           values='1; 1; 0'
           keyTimes='0; 0.99; 1'
-          begin='barChart1.end+10.5s'
-        /> */}
+          begin='lineChart1.end+10.25s'
+        />
       </g>
 
       <g opacity='0' transform='matrix(1, 0, 0, 1, 413.511292, 87.500008)'>
@@ -1522,15 +1522,15 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           stroke='#FF7575'
           strokeWidth='5'
         />
-        {/* <animate
+        <animate
           id='lineChart1'
           attributeName='opacity'
           attributeType='XML'
-          dur='2s'
+          dur='1.5s'
           values='1; 1; 0'
           keyTimes='0; 0.99; 1'
-          begin='pieChart1.end+10.5s'
-        /> */}
+          begin='barChart1.end+10.25s'
+        />
       </g>
       <rect
         x='36.7914'
@@ -1546,7 +1546,7 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
           to='207.932'
           from='83.932'
           // begin='0s;barChart1.end;lineChart1.end;pieChart1.end'
-          begin='0s;barChart1.end;'
+          begin='0s;barChart1.end;lineChart1.end;pieChart1.end;'
           dur='10s'
           values='-40000; 83.932; 103.932; 123.932; 143.932; 163.932; 183.932; 203.932; -3000; -4000;'
           // keyTimes='0; 0.1; 0.2; 0.3; 0.4; 0.5; 0.6; 0.7; 0.8; 1'
