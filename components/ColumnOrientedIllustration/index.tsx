@@ -1884,7 +1884,7 @@ function ColumnOrientedIllustration({ className }: Props): JSX.Element {
         />
         <rect
           x='465.29'
-          y='127.932'
+          y='130'
           width='20.9699'
           height='58'
           rx='3'
