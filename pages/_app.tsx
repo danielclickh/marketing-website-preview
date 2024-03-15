@@ -54,6 +54,7 @@ const gb = new GrowthBook({
 // Let the GrowthBook instance know when the URL changes so the active
 // experiments can update accordingly
 function updateGrowthBookURL() {
+  console.log('updateGrowthBookURL', window.location.href)
   gb.setURL(window.location.href)
 }
 
@@ -71,7 +72,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       session_id: glx_id,
       id: glx_id
     })
-
     // Subscribe to route change events and update GrowthBook
     router.events.on('routeChangeComplete', updateGrowthBookURL)
     return () => router.events.off('routeChangeComplete', updateGrowthBookURL)

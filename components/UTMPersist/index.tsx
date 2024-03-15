@@ -7,13 +7,15 @@ type UTMs = {
   [key: string]: string
 }
 
-const updateLinks = () => {
+const updateLinks = (experimentId?: string, variationId?: string) => {
   const links = Array.from(document.querySelectorAll('a'))
   for (const link of links) {
     if (link.hostname.includes('.cloud')) {
-      const updatedURL = appendUTMsToLink(link.href)
-
-      link.href = appendGalaxySessionIDToLink(updatedURL)
+      link.href = appendUTMsToLink(link.href)
+      link.href = appendGalaxySessionIDToLink(link.href)
+      if (experimentId && variationId) {
+        link.href = `${link.href}&yo=1`
+      }
     }
   }
 }
@@ -24,19 +26,8 @@ export const onExperimentViewed = (
 ) => {
   const experimentId = experiment.key
   const variationId = result.key
-
-  const links = Array.from(document.querySelectorAll('a'))
-  for (const link of links) {
-    if (link.hostname.includes('.cloud')) {
-      const updatedURL = appendExperimentParamsToLink(
-        link.href,
-        experimentId,
-        variationId
-      )
-      link.href = updatedURL
-      updateLinks()
-    }
-  }
+  console.log('onExperimentViewed ', window.location.href)
+  console.log('viewed experiment ', { experimentId, variationId })
 }
 
 const UTMPersist = () => {
@@ -69,7 +60,7 @@ const UTMPersist = () => {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
-  }, [])
+  }, [router.events])
 
   return null
 }
@@ -92,7 +83,7 @@ export function appendUTMsToLink(url: string): string {
 }
 
 export function appendGalaxySessionIDToLink(url: string): string {
-  const galaxy_id = Galaxy.getAnonymousId()
+  const galaxy_id = Galaxy.getGalaxySessionId()
   const urlObject = new URL(url)
 
   // Append galaxy session id to links that contain ".cloud"
@@ -135,18 +126,39 @@ function storeUTMsInStorage(utms: UTMs) {
   localStorage.setItem('ch-utms', JSON.stringify(data))
 }
 
-export function appendExperimentParamsToLink(
+// Function to append experiment and variation to link
+function appendExperimentToLink(
   url: string,
   experimentId: string,
   variationId: string
 ): string {
   const urlObject = new URL(url)
 
-  // Append experiment parameters to links that contain ".cloud"
-  if (experimentId && variationId) {
-    urlObject.searchParams.set('experimentId', experimentId)
-    urlObject.searchParams.set('variationId', variationId)
-  }
+  // Retrieve existing experiments and parse them into an object
+  const experimentsQuery = urlObject.searchParams.get('experiments')
+
+  let experiments: Record<string, string> = experimentsQuery
+    ? experimentsQuery
+        .split(',')
+        .reduce((acc: Record<string, string>, curr: string) => {
+          const [id, variation] = curr.split(':')
+          acc[id] = variation
+          return acc
+        }, {})
+    : {}
+
+  // Update the experiments object with the new experiment and variation
+  experiments[experimentId] = variationId
+
+  // Convert the experiments object back into a query string
+  const newExperimentsQuery = Object.entries(experiments)
+    .map(([id, variation]) => `${id}:${variation}`)
+    .join(',')
+
+  // Set the updated experiments query back on the URL
+  urlObject.searchParams.set('experiments', newExperimentsQuery)
+
+  console.log(url, urlObject.toString())
 
   return urlObject.toString()
 }
