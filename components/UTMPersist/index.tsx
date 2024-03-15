@@ -25,8 +25,6 @@ export const onExperimentViewed = (
   const experimentId = experiment.key
   const variationId = result.key
 
-  console.log('Experiment viewed:', { experimentId, variationId })
-
   const links = Array.from(document.querySelectorAll('a'))
   for (const link of links) {
     if (link.hostname.includes('.cloud')) {
