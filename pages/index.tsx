@@ -1,9 +1,9 @@
-import {ChevronRightIcon} from '@heroicons/react/solid'
-import {GetStaticProps} from 'next'
+import { ChevronRightIcon } from '@heroicons/react/solid'
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import {CSSProperties} from 'react'
-import {CUIButton, CUICard, CUILink} from '../components/ClickUI'
+import { CSSProperties } from 'react'
+import { CUIButton, CUICard, CUILink } from '../components/ClickUI'
 import ColumnOrientedIllustration from '../components/ColumnOrientedIllustration'
 import DevelopersSection from '../components/DevelopersSection'
 import FAQ from '../components/FAQ'
@@ -16,13 +16,13 @@ import LogoCarousel from '../components/LogoCarousel'
 import RowOrientedIllustration from '../components/RowOrientedIllustration'
 import SpeedAnimationSvg from '../components/SpeedAnimation'
 import SpeedAnimationMobileSvg from '../components/SpeedAnimation/Mobile'
-import {SuiTitle} from '../components/sui'
+import { SuiTitle } from '../components/sui'
 import HomePageTerminal from '../components/Terminal/HomePageTerminal'
-import {findOne} from '../lib/api/strapi'
-import {getCommonProps} from '../lib/utils/getCommonProps'
-import {HomePageProps} from '../types/homepage'
-import {galaxyOnClick, galaxyOnPage} from '../lib/galaxy/galaxy';
-import {FullyQualifiedEvent} from '../lib/galaxy/client/index';
+import { findOne } from '../lib/api/strapi'
+import { FullyQualifiedEvent } from '../lib/galaxy/client/index'
+import { galaxyOnClick, galaxyOnPage } from '../lib/galaxy/galaxy'
+import { getCommonProps } from '../lib/utils/getCommonProps'
+import { HomePageProps } from '../types/homepage'
 
 const yellowPositionStyle = {
   '--left-side': 'auto',
@@ -36,7 +36,7 @@ type DeployData = {
   description: string
   href: string
   target?: string
-  btnType: 'secondary' | 'primary' | 'secondary-dark',
+  btnType: 'secondary' | 'primary' | 'secondary-dark'
   event: FullyQualifiedEvent
 }
 
@@ -109,7 +109,7 @@ export default function HomePage({
   customerStories,
   platforms
 }: HomePageProps) {
-  galaxyOnPage('homePage');
+  galaxyOnPage('homePage')
 
   // Split the customerStories.logos array into two separate arrays
   const logos1 = customerStories.logos.slice(

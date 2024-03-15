@@ -2,15 +2,17 @@ import '../styles/globals.scss'
 import '../styles/highlightjs.scss'
 import '../styles/securiti-cookie-banner.scss'
 import '../styles/securiti-overrides.scss'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Inconsolata, Inter } from 'next/font/google'
 import { SnackbarContextProvider } from '../components/sui'
 import { AppProps } from 'next/app'
 import Script from 'next/script'
-import UTMPersist from '../components/UTMPersist'
+import UTMPersist, { onExperimentViewed } from '../components/UTMPersist'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useInitGalaxy } from '../lib/galaxy/galaxy';
+import { useInitGalaxy } from '../lib/galaxy/galaxy'
+import { GrowthBook, GrowthBookProvider } from '@growthbook/growthbook-react'
+import { Galaxy } from '../lib/galaxy/web/browser'
 
 const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K'
 const websiteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL
@@ -39,9 +41,69 @@ const inconsolata = Inconsolata({
   adjustFontFallback: false,
   fallback: []
 })
+
+// Create a client-side GrowthBook instance
+const gb = new GrowthBook({
+  apiHost: process.env.NEXT_PUBLIC_GROWTHBOOK_API_HOST,
+  clientKey: process.env.NEXT_PUBLIC_GROWTHBOOK_CLIENT_KEY,
+  decryptionKey: process.env.NEXT_PUBLIC_GROWTHBOOK_DECRYPTION_KEY,
+  enableDevMode: true,
+  trackingCallback: onExperimentViewed,
+  features: {
+    'tilted-text': {
+      defaultValue: false,
+      rules: [
+        {
+          coverage: 1,
+          seed: 'mktg-hero-tilted-text',
+          hashVersion: 2,
+          variations: [false, true],
+          weights: [0.5, 0.5],
+          key: 'mktg-hero-tilted-text',
+          meta: [
+            {
+              key: '0',
+              name: 'Control'
+            },
+            {
+              key: '1',
+              name: 'Variation 1'
+            }
+          ],
+          phase: '0',
+          name: 'mktg-hero-tilted-text'
+        }
+      ]
+    }
+  }
+})
+
+// Let the GrowthBook instance know when the URL changes so the active
+// experiments can update accordingly
+function updateGrowthBookURL() {
+  gb.setURL(window.location.href)
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
-  useInitGalaxy();
+  useInitGalaxy()
+
+  useEffect(() => {
+    const glx_id = Galaxy.getGalaxySessionId()
+
+    // Load features from the GrowthBook API and keep them up-to-date
+    gb.loadFeatures({ autoRefresh: true })
+    gb.setAttributes({
+      user_id: undefined,
+      session_id: glx_id,
+      id: glx_id
+    })
+
+    // Subscribe to route change events and update GrowthBook
+    router.events.on('routeChangeComplete', updateGrowthBookURL)
+    return () => router.events.off('routeChangeComplete', updateGrowthBookURL)
+  }, [])
+
   return (
     <>
       <Head>
@@ -49,15 +111,18 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta content='width=device-width, initial-scale=1' name='viewport' />
         <link href='favicon.ico' rel='icon' type='image/x-icon' />
       </Head>
-      <main className={`${inter.variable} font-inter ${inconsolata.variable}`}>
-        <SnackbarContextProvider>
-          <div className='flex min-h-screen flex-col'>
-            <Component {...pageProps} />
-          </div>
-        </SnackbarContextProvider>
-      </main>
-      <UTMPersist />
-
+      <GrowthBookProvider growthbook={gb}>
+        <main
+          id='main-site-container'
+          className={`${inter.variable} font-inter ${inconsolata.variable}`}>
+          <SnackbarContextProvider>
+            <div className='flex min-h-screen flex-col'>
+              <Component {...pageProps} />
+            </div>
+          </SnackbarContextProvider>
+        </main>
+        <UTMPersist />
+      </GrowthBookProvider>
       {/* GTM - Prod/Env environments */}
       {router.pathname !== '/marketo-forms/[id]' && (
         <>
