@@ -54,9 +54,7 @@ const gb = new GrowthBook({
 // Let the GrowthBook instance know when the URL changes so the active
 // experiments can update accordingly
 function updateGrowthBookURL() {
-  console.log('updateGrowthBookURL', window.location.href)
   gb.setURL(window.location.href)
-  gb.loadFeatures({ autoRefresh: true })
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
