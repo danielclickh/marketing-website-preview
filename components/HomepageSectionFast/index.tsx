@@ -4,24 +4,30 @@ import { galaxyOnClick } from '../../lib/galaxy/galaxy'
 import { CUIButton } from '../ClickUI'
 import ColumnOrientedIllustration from '../ColumnOrientedIllustration'
 import RowOrientedIllustration from '../RowOrientedIllustration'
-import { SuiTitle } from '../sui'
+import { SuiText, SuiTitle } from '../sui'
 
 export default function HomepageSectionFast() {
   return (
     <div className='relative flex flex-col gap-y-28'>
       <div className='section-container bg-shadow-element flex w-full flex-col items-center justify-between self-center md:px-16'>
-        <div className='flex w-full flex-col items-center'>
-          <Image src='/fast-icon.svg' alt='Fast Icon' width={72} height={72} />
-          <SuiTitle type='h2' className='mt-8 mb-6 text-center'>
+        <div className='flex w-full flex-col items-center text-center'>
+          <Image
+            src='/fast-icon.svg'
+            alt='Fast Icon'
+            width={72}
+            height={72}
+            className='mb-8'
+          />
+          <SuiTitle type='h2' color='inherit' className='mb-4'>
             Why is ClickHouse so fast?
           </SuiTitle>
-          <div className='mx-auto max-w-screen-md text-center leading-normal text-neutral-200'>
+          <SuiText size='lg' className='mx-auto max-w-screen-md opacity-70'>
             Column-oriented databases are better suited to OLAP scenarios. They
             are at least <span className='font-bold'>100x faster</span> in
             processing most queries. ClickHouse uses all available system
             resources to their full potential to process each analytical query
             as fast as possible.
-          </div>
+          </SuiText>
         </div>
         <div className='grid grid-cols-1 items-center gap-16 py-16 md:grid-cols-2'>
           <div>
