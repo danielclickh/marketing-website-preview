@@ -60,7 +60,7 @@ const UTMPersist = () => {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
-  }, [router.events])
+  }, [])
 
   return null
 }
