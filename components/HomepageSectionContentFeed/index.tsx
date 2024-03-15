@@ -7,7 +7,7 @@ import { getContent, getCategories, EntryCategory, EntryStat } from './content'
 
 function StatBox(props: EntryStat) {
   return (
-    <div className='flex flex-col items-center justify-center gap-2 rounded bg-neutral-750 py-4 px-2 text-center text-white'>
+    <div className='flex flex-col items-center justify-center gap-1 rounded bg-neutral-750 py-4 px-2 text-center text-white'>
       <div className='flex aspect-square w-10 items-center justify-center'>
         <props.icon />
       </div>
@@ -125,7 +125,7 @@ export default function HomepageSectionContentFeed() {
                 </div>
                 {entry.stats && entry.stats.length && (
                   <div
-                    className={`grid grid-cols-1 gap-1 ${statsColumnClasses}`}>
+                    className={`grid grid-cols-1 gap-2 ${statsColumnClasses}`}>
                     {entry.stats.map((stat) => {
                       return (
                         <StatBox
