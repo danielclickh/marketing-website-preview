@@ -14,7 +14,7 @@ const updateLinks = (experimentId?: string, variationId?: string) => {
       link.href = appendUTMsToLink(link.href)
       link.href = appendGalaxySessionIDToLink(link.href)
       if (experimentId && variationId) {
-        link.href = `${link.href}&yo=1`
+        link.href = appendExperimentToLink(link.href, experimentId, variationId)
       }
     }
   }
@@ -26,8 +26,7 @@ export const onExperimentViewed = (
 ) => {
   const experimentId = experiment.key
   const variationId = result.key
-  console.log('onExperimentViewed ', window.location.href)
-  console.log('viewed experiment ', { experimentId, variationId })
+  updateLinks(experimentId, variationId)
 }
 
 const UTMPersist = () => {
@@ -157,8 +156,6 @@ function appendExperimentToLink(
 
   // Set the updated experiments query back on the URL
   urlObject.searchParams.set('experiments', newExperimentsQuery)
-
-  console.log(url, urlObject.toString())
 
   return urlObject.toString()
 }

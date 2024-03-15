@@ -56,6 +56,7 @@ const gb = new GrowthBook({
 function updateGrowthBookURL() {
   console.log('updateGrowthBookURL', window.location.href)
   gb.setURL(window.location.href)
+  gb.loadFeatures({ autoRefresh: true })
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
