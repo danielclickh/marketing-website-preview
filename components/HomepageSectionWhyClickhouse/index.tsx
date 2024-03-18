@@ -305,8 +305,11 @@ export default function HomepageSectionWhyClickhouse() {
             <Link
               href='https://clickhouse.cloud/signUp'
               target='_blank'
-              className='font-bold text-primary-300'>
-              free cloud trial -&gt;
+              className='group whitespace-nowrap font-bold text-primary-300'>
+              free cloud trial{' '}
+              <span className='tanslate-x-0 inline-block transition-transform group-hover:translate-x-1'>
+                -&gt;
+              </span>
             </Link>
           </SuiText>
         </div>
