@@ -121,8 +121,17 @@ export default function HomepageSectionTrustedByAlt({
           <Swiper
             onSwiper={setSwiperCarousel1}
             slidesPerView={'auto'}
-            slidesPerGroup={3}
+            slidesPerGroup={1}
             spaceBetween={64}
+            speed={1200}
+            breakpoints={{
+              500: {
+                slidesPerGroup: 2
+              },
+              800: {
+                slidesPerGroup: 3
+              }
+            }}
             centeredSlides={true}
             centeredSlidesBounds={true}
             loop={true}
@@ -151,8 +160,17 @@ export default function HomepageSectionTrustedByAlt({
           <Swiper
             onSwiper={setSwiperCarousel2}
             slidesPerView={'auto'}
-            slidesPerGroup={3}
+            slidesPerGroup={1}
             spaceBetween={64}
+            speed={1200}
+            breakpoints={{
+              500: {
+                slidesPerGroup: 2
+              },
+              800: {
+                slidesPerGroup: 3
+              }
+            }}
             centeredSlides={true}
             centeredSlidesBounds={true}
             loop={true}
