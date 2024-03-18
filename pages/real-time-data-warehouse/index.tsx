@@ -149,7 +149,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
         <HRSeparator className='my-24' />
 
         {/* Why use RT data warehouse */}
-        <div className='section-container my-24'>
+        <div className='my-24'>
           <div className='mx-auto mb-24 flex max-w-[830px] flex-col items-center gap-6 text-center'>
             <SuiTitle type='h2'>Why use a real-time data warehouse?</SuiTitle>
             <SuiText className='max-w-[600px] opacity-70'>
@@ -157,9 +157,211 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
               warehouse to ensure that analytics shine at any scale.
             </SuiText>
           </div>
+
+          {/* Timeline */}
+          <div>
+            <SuiText
+              size='sm'
+              weight='semibold'
+              className='mt-12 text-center uppercase tracking-widest'>
+              Evolution of data warehouses for modern cloud infrastructure
+            </SuiText>
+
+            <div className='relative mt-24 pt-8'>
+              <div className='absolute top-0 left-0 right-0 h-0.5 bg-neutral-600'></div>
+              <div className='section-container grid grid-cols-1 gap-16 lg:grid-cols-3'>
+                <div className='relative flex flex-col'>
+                  <TimelineLabel>30 years ago</TimelineLabel>
+                  <TimelineCard
+                    title='Traditional on-prem data warehouse'
+                    text='30 years ago, on-prem data warehouses like IBM, Hadoop, Oracle, and Teradata were the only options available.'
+                    items={[
+                      { type: ItemArrow, text: 'Data volumnes were small' },
+                      {
+                        type: ItemArrow,
+                        text: 'Warehouses were operationally complex'
+                      }
+                    ]}
+                    logos={[
+                      <Image
+                        src='/images/real-time-data-warehouse/teradata.svg'
+                        alt='Teradata'
+                        width={108}
+                        height={21}
+                      />,
+                      <Image
+                        src='/images/real-time-data-warehouse/oracle.svg'
+                        alt='Oracle'
+                        width={109}
+                        height={15}
+                      />,
+                      <Image
+                        src='/images/real-time-data-warehouse/ibm.svg'
+                        alt='IBM'
+                        width={51}
+                        height={20}
+                      />
+                    ]}
+                  />
+                </div>
+
+                <div className='relative flex flex-col'>
+                  <TimelineLabel>10 years ago</TimelineLabel>
+                  <TimelineCard
+                    title='Traditional cloud warehouse'
+                    text='Traditional cloud data warehouses, whose predecessors were
+                      built to manage much smaller volumes, began to strain
+                      under the increased data load.'
+                    items={[
+                      {
+                        type: ItemArrow,
+                        text: 'Performance and concurrency limitations became limiting at scale'
+                      },
+                      {
+                        type: ItemArrow,
+                        text: 'Retrofitting these for analytics or real-time workloads can become prohibitively costly'
+                      }
+                    ]}
+                    logos={[
+                      <Image
+                        src='/images/real-time-data-warehouse/snowflake.svg'
+                        alt='Snowflake'
+                        width={109}
+                        height={27}
+                      />,
+                      <Image
+                        src='/images/real-time-data-warehouse/google-bigquery.svg'
+                        alt='Google BigQuery'
+                        width={88}
+                        height={30}
+                      />,
+                      <Image
+                        src='/images/real-time-data-warehouse/amazon-redshift.svg'
+                        alt='Amazon Redshift'
+                        width={76}
+                        height={28}
+                      />
+                    ]}
+                  />
+                </div>
+
+                <div className='relative flex flex-col'>
+                  <TimelineLabel>
+                    <span className='tilted tilted-yellow inline-block py-2 px-3'>
+                      <span className='tilted-content'>Today</span>
+                    </span>
+                  </TimelineLabel>
+                  <TimelineCard
+                    active={true}
+                    title='Real-time data warehouse'
+                    text='Built for the next generation of data-intensive workloads.'
+                    items={[
+                      { type: ItemYes, text: 'Simplified and cost effective' },
+                      {
+                        type: ItemYes,
+                        text: 'Unified resource for querying streaming and historical data'
+                      }
+                    ]}
+                    logos={[
+                      <Image
+                        src='/images/real-time-data-warehouse/clickhouse.svg'
+                        alt='ClickHouse'
+                        width={136}
+                        height={23}
+                      />
+                    ]}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </Layout>
     </>
+  )
+}
+
+function ItemYes({
+  children,
+  className,
+  ...props
+}: React.HTMLProps<HTMLDivElement>) {
+  return (
+    <div className={`flex gap-4 ${className}`} {...props}>
+      <div className='w-4 flex-shrink-0 flex-grow-0 text-primary'>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='16'
+          height='16'
+          fill='none'
+          viewBox='0 0 16 16'>
+          <path
+            stroke='currentColor'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth='2'
+            d='M13.3337 4.33331 6.00033 11.6666 2.66699 8.33331'
+          />
+        </svg>
+      </div>
+      <div className='flex-1'>{children}</div>
+    </div>
+  )
+}
+
+function ItemNo({
+  children,
+  className,
+  ...props
+}: React.HTMLProps<HTMLDivElement>) {
+  return (
+    <div className={`flex gap-4 ${className}`} {...props}>
+      <div className='w-4 flex-shrink-0 flex-grow-0 text-[#FFBABA]'>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='24'
+          height='24'
+          fill='none'
+          viewBox='0 0 24 24'>
+          <path
+            stroke='currentColor'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth='1.5'
+            d='m8 8 8 8m0-8-8 8'
+          />
+        </svg>
+      </div>
+      <div className='flex-1'>{children}</div>
+    </div>
+  )
+}
+
+function ItemArrow({
+  children,
+  className,
+  ...props
+}: React.HTMLProps<HTMLDivElement>) {
+  return (
+    <div className={`flex gap-4 ${className}`} {...props}>
+      <div className='w-4 flex-shrink-0 flex-grow-0 text-primary'>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='24'
+          height='24'
+          fill='none'
+          viewBox='0 0 24 24'>
+          <path
+            stroke='currentColor'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth='1.5'
+            d='M4.47742 11.98H19.4674m-5.9869-5.99199L19.5175 12l-6.037 6.012'
+          />
+        </svg>
+      </div>
+      <div className='flex-1'>{children}</div>
+    </div>
   )
 }
 
@@ -172,7 +374,7 @@ function YesNoTable({
   noHeading: string
   rows: Array<{ label: string; yes: string; no: string }>
 }) {
-  const [highlightOffset, setHighlightOffset] = useState<number>(0)
+  const [highlightOffset, setHighlightOffset] = useState<null | number>(null)
   const yesColRef = useRef<HTMLTableHeaderCellElement>(null)
 
   useEffect(() => {
@@ -189,62 +391,6 @@ function YesNoTable({
     return () => window.removeEventListener('resize', calculatePosition)
   }, [yesColRef])
 
-  function Yes({
-    children,
-    className,
-    ...props
-  }: React.HTMLProps<HTMLDivElement>) {
-    return (
-      <div className={`flex gap-4 ${className}`} {...props}>
-        <div className='w-4 flex-shrink-0 flex-grow-0 text-primary'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='16'
-            height='16'
-            fill='none'
-            viewBox='0 0 16 16'>
-            <path
-              stroke='currentColor'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth='2'
-              d='M13.3337 4.33331 6.00033 11.6666 2.66699 8.33331'
-            />
-          </svg>
-        </div>
-        <div className='flex-1'>{children}</div>
-      </div>
-    )
-  }
-
-  function No({
-    children,
-    className,
-    ...props
-  }: React.HTMLProps<HTMLDivElement>) {
-    return (
-      <div className={`flex gap-4 ${className}`} {...props}>
-        <div className='w-4 flex-shrink-0 flex-grow-0 text-[#FFBABA]'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            fill='none'
-            viewBox='0 0 24 24'>
-            <path
-              stroke='currentColor'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth='1.5'
-              d='m8 8 8 8m0-8-8 8'
-            />
-          </svg>
-        </div>
-        <div className='flex-1'>{children}</div>
-      </div>
-    )
-  }
-
   return (
     <>
       {/* Mobile table */}
@@ -255,29 +401,29 @@ function YesNoTable({
             {rows.map(({ label, no }) => {
               return (
                 <li className='mt-4 border-t border-neutral-700 pt-4'>
-                  <No>
+                  <ItemNo>
                     <div className='text-sm font-bold uppercase text-[#B3B6BD]'>
                       {label}
                     </div>
                     <div className='font-medium'>{no}</div>
-                  </No>
+                  </ItemNo>
                 </li>
               )
             })}
           </ul>
         </div>
-        <div className='rounded-lg border-2 border-primary-300 p-6 shadow-xl shadow-primary-300/40'>
+        <div className='rounded-lg border-2 border-primary-300 p-6 shadow-noOffset-sm shadow-primary-300/40'>
           <h3 className='mb-6 text-xl font-semibold'>{yesHeading}</h3>
           <ul>
             {rows.map(({ label, yes }) => {
               return (
                 <li className='mt-4 border-t border-neutral-700 pt-4'>
-                  <Yes>
+                  <ItemYes>
                     <div className='text-sm font-bold uppercase text-[#B3B6BD]'>
                       {label}
                     </div>
                     <div className='font-medium'>{yes}</div>
-                  </Yes>
+                  </ItemYes>
                 </li>
               )
             })}
@@ -288,9 +434,11 @@ function YesNoTable({
       {/* Desktop table */}
       <div className='relative hidden pb-3 md:block'>
         <div
-          className='absolute left-0 top-0 right-0 bottom-0 z-10 rounded-lg border-2 border-primary-300 shadow-xl shadow-primary-300/40'
-          style={{ left: highlightOffset }}></div>
-        <table className='relative z-20 w-full text-left'>
+          className={`pointer-events-none absolute left-0 top-0 right-0 bottom-0 rounded-lg border-2 border-primary-300 shadow-noOffset-sm shadow-primary-300/40 ${
+            highlightOffset === null ? 'opacity-0' : 'opacity-100'
+          } transition-opacity`}
+          style={{ left: highlightOffset || 0 }}></div>
+        <table className='w-full text-left'>
           <thead>
             <tr>
               <th className='hidden border-b border-neutral-700 py-6 pr-8 text-xl font-semibold lg:table-cell xl:pr-16'></th>
@@ -316,22 +464,22 @@ function YesNoTable({
                   <td
                     valign='top'
                     className='border-b border-neutral-700 py-4 pr-6'>
-                    <No>
+                    <ItemNo>
                       <div className='text-sm font-bold uppercase text-[#B3B6BD] lg:hidden'>
-                        {label}real-time-data-warehouse
+                        {label}
                       </div>
                       <div className='font-medium'>{no}</div>
-                    </No>
+                    </ItemNo>
                   </td>
                   <td
                     valign='top'
                     className='border-b border-neutral-700 py-4 px-6'>
-                    <Yes>
+                    <ItemYes>
                       <div className='text-sm font-bold uppercase text-[#B3B6BD] lg:hidden'>
                         {label}
                       </div>
                       <div className='font-medium'>{yes}</div>
-                    </Yes>
+                    </ItemYes>
                   </td>
                 </tr>
               )
@@ -340,5 +488,78 @@ function YesNoTable({
         </table>
       </div>
     </>
+  )
+}
+
+function TimelineLabel({
+  className,
+  children,
+  ...props
+}: React.HTMLProps<HTMLSpanElement>) {
+  return (
+    <span
+      {...props}
+      className={`relative text-center font-bold text-primary-300 lg:absolute lg:left-1/2 lg:-top-24 lg:-translate-x-1/2 ${className}`}>
+      {children}
+      <span className='absolute left-1/2 top-16 hidden h-3 w-3 -translate-y-1/2 -translate-x-1/2 rounded-full bg-primary-300 lg:block'></span>
+    </span>
+  )
+}
+
+function TimelineCard({
+  title,
+  text,
+  logos,
+  items,
+  active = false
+}: {
+  title: string
+  text: string
+  items?: Array<{
+    type: typeof ItemYes | typeof ItemNo | typeof ItemArrow
+    text: string
+  }>
+  logos?: Array<React.ReactElement>
+  active?: boolean
+}) {
+  return (
+    <div
+      className={`flex flex-1 flex-col gap-3 rounded-lg p-4 ${
+        active
+          ? 'border-2 border-primary-300 shadow-noOffset-sm shadow-primary/40'
+          : 'border border-neutral-700'
+      }`}>
+      <SuiTitle type='h3'>{title}</SuiTitle>
+      <SuiText
+        size='sm'
+        weight='medium'
+        className={`${active ? '' : 'opacity-70'}`}>
+        {text}
+      </SuiText>
+      {items && (
+        <ul className='mb-8 space-y-3'>
+          {items.map(({ type: Type, text }) => {
+            return (
+              <li>
+                <Type>
+                  <SuiText
+                    size='sm'
+                    weight='medium'
+                    className={`${active ? '' : 'opacity-70'}`}>
+                    {text}
+                  </SuiText>
+                </Type>
+              </li>
+            )
+          })}
+        </ul>
+      )}
+      <div className='mt-auto flex flex-wrap items-center gap-6'>
+        {logos &&
+          logos.map((logo) => {
+            return <>{logo}</>
+          })}
+      </div>
+    </div>
   )
 }

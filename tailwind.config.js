@@ -246,7 +246,8 @@ module.exports = {
         codeblock:
           '0px 4px 4px rgba(0, 0, 0, 0.06), inset 0px 4px 25px rgba(0, 0, 0, 0.14)',
         header_bottom: 'inset 0px -1px 0px rgba(78, 78, 78, 0.25);',
-        noOffset: '0 0 100px -12px rgb(0 0 0 / 0.25)'
+        noOffset: '0 0 100px -12px rgb(0 0 0 / 0.25)',
+        'noOffset-sm': '0 0 48px rgb(0 0 0 / 0.25)'
       },
       backgroundSize: {
         default_size: '0%, 100%',
