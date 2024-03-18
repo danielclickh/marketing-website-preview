@@ -340,6 +340,94 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
             />
           </div>
         </div>
+
+        {/* Industries */}
+        <div className='bg-neutral-600 py-16'>
+          <SuiTitle type='h2' className='text-center text-white'>
+            Relied on across industries
+          </SuiTitle>
+          <div className='section-container mt-16 grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6'>
+            <IndustryCard
+              title='Financial Services'
+              text='Trading and market analytics, fraud detection, risk monitoring, blockchain, and more.'
+              icon={
+                <Image
+                  src='/images/real-time-data-warehouse/icon-money.svg'
+                  alt='Money icon'
+                  width={32}
+                  height={33}
+                />
+              }
+            />
+            <IndustryCard
+              title='E-Commerce and Retail'
+              text='Real-time inventory monitoring and overall tracking for online businesses.'
+              icon={
+                <Image
+                  src='/images/real-time-data-warehouse/icon-retail.svg'
+                  alt='Retail icon'
+                  width={32}
+                  height={33}
+                />
+              }
+            />
+            <IndustryCard
+              title='Marketing and Sales'
+              text='Data store for Adtech, web analytics, SEO, and much more.'
+              icon={
+                <Image
+                  src='/images/real-time-data-warehouse/icon-marketing.svg'
+                  alt='Marketing icon'
+                  width={27}
+                  height={28}
+                />
+              }
+            />
+            <IndustryCard
+              title='Technology'
+              text='Including IoT, Energy, Biotech, Manufacturing, and others.'
+              icon={
+                <Image
+                  src='/images/real-time-data-warehouse/icon-technology.svg'
+                  alt='Technology icon'
+                  width={24}
+                  height={25}
+                />
+              }
+            />
+            <IndustryCard
+              title='Media and Entertainment'
+              text='Assess the performance of videos, assets, and other media in real-time.'
+              icon={
+                <Image
+                  src='/images/real-time-data-warehouse/icon-media.svg'
+                  alt='Media icon'
+                  width={32}
+                  height={33}
+                />
+              }
+            />
+            <IndustryCard
+              title='Gaming'
+              text='Understand player behavior, gaming dynamics, and other key insights used to improve overall gameplay.'
+              icon={
+                <Image
+                  src='/images/real-time-data-warehouse/icon-gaming.svg'
+                  alt='Gaming icon'
+                  width={30}
+                  height={23}
+                />
+              }
+            />
+          </div>
+          <CUIButton
+            href='/company/contact'
+            type='primary'
+            size='lg'
+            className='mx-auto mt-16 !px-6'>
+            Get started for free
+          </CUIButton>
+        </div>
       </Layout>
     </>
   )
@@ -659,6 +747,30 @@ function QuoteCard({
           <br className='hidden sm:block' />
           {alternative}
         </span>
+      </div>
+    </div>
+  )
+}
+
+function IndustryCard({
+  title,
+  text,
+  icon
+}: {
+  title: string
+  text: string
+  icon: React.ReactElement
+}) {
+  return (
+    <div className='flex divide-x divide-neutral-600 rounded bg-neutral-800 p-4 pl-0'>
+      <div className='flex w-20 flex-shrink-0 flex-grow-0 items-start justify-center'>
+        {icon}
+      </div>
+      <div className='flex-1 pl-4'>
+        <SuiTitle type='h3' className='mb-4 !text-2xl text-primary-300'>
+          {title}
+        </SuiTitle>
+        <SuiText>{text}</SuiText>
       </div>
     </div>
   )
