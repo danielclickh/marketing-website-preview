@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import HRSeparator from '../../components/HRSeparator'
 import Layout from '../../components/Layout'
+import Markdown from '../../components/Markdown'
 import { SuiText, SuiTitle } from '../../components/sui'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import React, { useEffect, useRef, useState } from 'react'
@@ -274,6 +275,75 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Impact of RT */}
+        <div className='bg-primary-300 py-16'>
+          <SuiTitle type='h2' className='text-center text-neutral-750'>
+            Impact of the{' '}
+            <span className='tilted tilted-black'>
+              <span className='tilted-content text-white'>real-time</span>
+            </span>{' '}
+            data warehouse
+          </SuiTitle>
+          <div className='section-container mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2'>
+            <QuoteCard
+              label='Alternative to Snowflake'
+              quote={`With Snowflake, we were using the standard plan, small compute, which **cost nearly six times more** than ClickHouse Cloud. We got several seconds query time and no materialized views. 
+
+With ClickHouse Cloud's production instance, we are getting **sub-second query time** along with materialized views. The decision to switch was a no-brainer for us.`}
+              logo={
+                <Image
+                  src='/images/real-time-data-warehouse/teradata.svg'
+                  alt='Teradata'
+                  width={108}
+                  height={21}
+                />
+              }
+            />
+            <QuoteCard
+              label='Alternative to Snowflake'
+              quote={`With Snowflake, we were using the standard plan, small compute, which **cost nearly six times more** than ClickHouse Cloud. We got several seconds query time and no materialized views. 
+
+With ClickHouse Cloud's production instance, we are getting **sub-second query time** along with materialized views. The decision to switch was a no-brainer for us.`}
+              logo={
+                <Image
+                  src='/images/real-time-data-warehouse/teradata.svg'
+                  alt='Teradata'
+                  width={108}
+                  height={21}
+                />
+              }
+            />
+            <QuoteCard
+              label='Alternative to Snowflake'
+              quote={`With Snowflake, we were using the standard plan, small compute, which **cost nearly six times more** than ClickHouse Cloud. We got several seconds query time and no materialized views. 
+
+With ClickHouse Cloud's production instance, we are getting **sub-second query time** along with materialized views. The decision to switch was a no-brainer for us.`}
+              logo={
+                <Image
+                  src='/images/real-time-data-warehouse/teradata.svg'
+                  alt='Teradata'
+                  width={108}
+                  height={21}
+                />
+              }
+            />
+            <QuoteCard
+              label='Alternative to Snowflake'
+              quote={`With Snowflake, we were using the standard plan, small compute, which **cost nearly six times more** than ClickHouse Cloud. We got several seconds query time and no materialized views. 
+
+With ClickHouse Cloud's production instance, we are getting **sub-second query time** along with materialized views. The decision to switch was a no-brainer for us.`}
+              logo={
+                <Image
+                  src='/images/real-time-data-warehouse/teradata.svg'
+                  alt='Teradata'
+                  width={108}
+                  height={21}
+                />
+              }
+            />
           </div>
         </div>
       </Layout>
@@ -559,6 +629,38 @@ function TimelineCard({
           logos.map((logo) => {
             return <>{logo}</>
           })}
+      </div>
+    </div>
+  )
+}
+
+function QuoteCard({
+  quote,
+  logo,
+  label
+}: {
+  quote: string
+  logo: React.ReactElement
+  label: string
+}) {
+  return (
+    <div className='rounded-lg bg-neutral-800 p-6 text-white lg:p-12'>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='36'
+        height='28'
+        fill='none'
+        viewBox='0 0 36 28'
+        className='mb-6 text-primary-300'>
+        <path
+          fill='currentColor'
+          d='M0 27.3452v-7.8239c0-2.25.4219-4.5895 1.2656-7.0185.8693-2.4545 2.0455-4.7684 3.5284-6.9417C6.3026 3.3622 7.99 1.5085 9.8565 0l6.4432 4.1804c-1.5085 2.2756-2.7741 4.6534-3.7969 7.1335-.9971 2.4546-1.4829 5.1648-1.4573 8.1307v7.9006H0Zm19.4446 0v-7.8239c0-2.25.4219-4.5895 1.2656-7.0185.8693-2.4545 2.0455-4.7684 3.5284-6.9417C25.7472 3.3622 27.4347 1.5085 29.3011 0l6.4432 4.1804c-1.5085 2.2756-2.7741 4.6534-3.7969 7.1335-.9971 2.4546-1.4829 5.1648-1.4573 8.1307v7.9006H19.4446Z'
+        />
+      </svg>
+      <Markdown children={quote} className='text-lg font-medium' />
+      <div className='mt-16 flex items-center justify-between gap-6'>
+        {logo}
+        <span className='font-mono text-primary-300'>{label}</span>
       </div>
     </div>
   )
