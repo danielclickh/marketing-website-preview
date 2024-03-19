@@ -7,7 +7,7 @@ type UTMs = {
   [key: string]: string
 }
 
-const updateLinks = (experimentId?: string, variationId?: string) => {
+export const updateLinks = (experimentId?: string, variationId?: string) => {
   const links = Array.from(document.querySelectorAll('a'))
   for (const link of links) {
     if (link.hostname.includes('.cloud')) {
@@ -27,6 +27,7 @@ export const onExperimentViewed = (
   const experimentId = experiment.key
   const variationId = result.key
   updateLinks(experimentId, variationId)
+  console.log('viewed experiment', experimentId, variationId)
 }
 
 const UTMPersist = () => {
