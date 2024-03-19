@@ -150,129 +150,131 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
         <HRSeparator className='my-24' />
 
         {/* Why use RT data warehouse */}
-        <div className='my-24'>
-          <div className='mx-auto mb-24 flex max-w-[830px] flex-col items-center gap-6 text-center'>
+        <div className='my-24 mx-auto px-4 xl:flex xl:max-w-[970px] xl:items-start xl:gap-12 xl:px-0 2xl:block 2xl:max-w-none'>
+          <div className='mx-auto mb-12 flex max-w-[830px] flex-1 flex-col items-center gap-6 text-center xl:sticky xl:top-24 xl:mb-0 xl:items-start xl:text-left 2xl:top-0 2xl:mb-24 2xl:items-center 2xl:text-center'>
             <SuiTitle type='h2'>Why use a real-time data warehouse?</SuiTitle>
-            <SuiText className='max-w-[600px] opacity-70'>
+            <SuiText className='max-w-[600px] opacity-70 xl:max-w-none 2xl:max-w-[600px]'>
               Companies leverage ClickHouse Cloud as their real-time data
               warehouse to ensure that analytics shine at any scale.
             </SuiText>
           </div>
 
           {/* Timeline */}
-          <div>
+          <div className='relative mx-auto max-w-[715px] flex-shrink-0 flex-grow-0 xl:max-w-[580px] 2xl:mt-24 2xl:max-w-none 2xl:pt-8'>
             <SuiText
               size='sm'
               weight='semibold'
-              className='mt-12 text-center uppercase tracking-widest'>
+              className='mb-12 text-center uppercase tracking-widest'>
               Evolution of data warehouses for modern cloud infrastructure
             </SuiText>
 
-            <div className='relative mt-24 pt-8'>
-              <div className='absolute top-0 left-0 right-0 h-0.5 bg-neutral-600'></div>
-              <div className='section-container grid grid-cols-1 gap-16 lg:grid-cols-3'>
-                <div className='relative flex flex-col'>
-                  <TimelineLabel>30 years ago</TimelineLabel>
-                  <TimelineCard
-                    title='Traditional on-prem data warehouse'
-                    text='30 years ago, on-prem data warehouses like IBM, Hadoop, Oracle, and Teradata were the only options available.'
-                    items={[
-                      { type: ItemArrow, text: 'Data volumnes were small' },
-                      {
-                        type: ItemArrow,
-                        text: 'Warehouses were operationally complex'
-                      }
-                    ]}
-                    logos={[
-                      <Image
-                        src='/images/real-time-data-warehouse/teradata.svg'
-                        alt='Teradata'
-                        width={108}
-                        height={21}
-                      />,
-                      <Image
-                        src='/images/real-time-data-warehouse/oracle.svg'
-                        alt='Oracle'
-                        width={109}
-                        height={15}
-                      />,
-                      <Image
-                        src='/images/real-time-data-warehouse/ibm.svg'
-                        alt='IBM'
-                        width={51}
-                        height={20}
-                      />
-                    ]}
-                  />
-                </div>
+            {/* Line */}
+            <div className='absolute top-2 left-4 h-full w-0.5 bg-neutral-600 sm:left-24 md:left-36 lg:left-28 2xl:top-0 2xl:left-0 2xl:right-0 2xl:h-0.5 2xl:w-auto'></div>
 
-                <div className='relative flex flex-col'>
-                  <TimelineLabel>10 years ago</TimelineLabel>
-                  <TimelineCard
-                    title='Traditional cloud warehouse'
-                    text='Traditional cloud data warehouses, whose predecessors were
+            {/* Items container */}
+            <div className='section-container grid grid-cols-1 gap-16 pl-8 sm:pl-28 md:pl-40 lg:pl-32 2xl:grid-cols-3 2xl:pl-4'>
+              <div className='relative flex flex-col'>
+                <TimelineLabel>30 years ago</TimelineLabel>
+                <TimelineCard
+                  title='Traditional on-prem data warehouse'
+                  text='30 years ago, on-prem data warehouses like IBM, Hadoop, Oracle, and Teradata were the only options available.'
+                  items={[
+                    { type: ItemArrow, text: 'Data volumnes were small' },
+                    {
+                      type: ItemArrow,
+                      text: 'Warehouses were operationally complex'
+                    }
+                  ]}
+                  logos={[
+                    <Image
+                      src='/images/real-time-data-warehouse/teradata.svg'
+                      alt='Teradata'
+                      width={108}
+                      height={21}
+                    />,
+                    <Image
+                      src='/images/real-time-data-warehouse/oracle.svg'
+                      alt='Oracle'
+                      width={109}
+                      height={15}
+                    />,
+                    <Image
+                      src='/images/real-time-data-warehouse/ibm.svg'
+                      alt='IBM'
+                      width={51}
+                      height={20}
+                    />
+                  ]}
+                />
+              </div>
+
+              <div className='relative flex flex-col'>
+                <TimelineLabel>10 years ago</TimelineLabel>
+                <TimelineCard
+                  title='Traditional cloud warehouse'
+                  text='Traditional cloud data warehouses, whose predecessors were
                       built to manage much smaller volumes, began to strain
                       under the increased data load.'
-                    items={[
-                      {
-                        type: ItemArrow,
-                        text: 'Performance and concurrency limitations became limiting at scale'
-                      },
-                      {
-                        type: ItemArrow,
-                        text: 'Retrofitting these for analytics or real-time workloads can become prohibitively costly'
-                      }
-                    ]}
-                    logos={[
-                      <Image
-                        src='/images/real-time-data-warehouse/snowflake.svg'
-                        alt='Snowflake'
-                        width={109}
-                        height={27}
-                      />,
-                      <Image
-                        src='/images/real-time-data-warehouse/google-bigquery.svg'
-                        alt='Google BigQuery'
-                        width={88}
-                        height={30}
-                      />,
-                      <Image
-                        src='/images/real-time-data-warehouse/amazon-redshift.svg'
-                        alt='Amazon Redshift'
-                        width={76}
-                        height={28}
-                      />
-                    ]}
-                  />
-                </div>
+                  items={[
+                    {
+                      type: ItemArrow,
+                      text: 'Performance and concurrency limitations became limiting at scale'
+                    },
+                    {
+                      type: ItemArrow,
+                      text: 'Retrofitting these for analytics or real-time workloads can become prohibitively costly'
+                    }
+                  ]}
+                  logos={[
+                    <Image
+                      src='/images/real-time-data-warehouse/snowflake.svg'
+                      alt='Snowflake'
+                      width={109}
+                      height={27}
+                    />,
+                    <Image
+                      src='/images/real-time-data-warehouse/google-bigquery.svg'
+                      alt='Google BigQuery'
+                      width={88}
+                      height={30}
+                    />,
+                    <Image
+                      src='/images/real-time-data-warehouse/amazon-redshift.svg'
+                      alt='Amazon Redshift'
+                      width={76}
+                      height={28}
+                    />
+                  ]}
+                />
+              </div>
 
-                <div className='relative flex flex-col'>
-                  <TimelineLabel>
-                    <span className='tilted tilted-yellow inline-block py-2 px-3'>
-                      <span className='tilted-content'>Today</span>
-                    </span>
-                  </TimelineLabel>
-                  <TimelineCard
-                    active={true}
-                    title='Real-time data warehouse'
-                    text='Built for the next generation of data-intensive workloads.'
-                    items={[
-                      { type: ItemYes, text: 'Simplified and cost effective' },
-                      {
-                        type: ItemYes,
-                        text: 'Unified resource for querying streaming and historical data'
-                      }
-                    ]}
-                    logos={[
-                      <Image
-                        src='/images/real-time-data-warehouse/clickhouse.svg'
-                        alt='ClickHouse'
-                        width={136}
-                        height={23}
-                      />
-                    ]}
-                  />
-                </div>
+              <div className='relative flex flex-col'>
+                <TimelineLabel>
+                  <span className='md:hidden'>Today</span>
+                  <span className='tilted tilted-yellow hidden py-2 px-3 md:inline-block'>
+                    <span className='tilted-content'>Today</span>
+                  </span>
+                </TimelineLabel>
+                <TimelineCard
+                  active={true}
+                  title='Real-time data warehouse'
+                  text='Built for the next generation of data-intensive workloads.'
+                  items={[
+                    { type: ItemYes, text: 'Simplified and cost effective' },
+                    {
+                      type: ItemYes,
+                      text: 'Unified resource for querying streaming and historical data'
+                    }
+                  ]}
+                  logos={[
+                    <Image
+                      src='/images/real-time-data-warehouse/clickhouse.svg'
+                      alt='ClickHouse'
+                      width={136}
+                      height={23}
+                    />
+                  ]}
+                />
               </div>
             </div>
           </div>
@@ -651,9 +653,9 @@ function TimelineLabel({
   return (
     <span
       {...props}
-      className={`relative pl-4 font-bold text-primary-300 sm:pl-0 sm:text-center lg:absolute lg:left-1/2 lg:-top-24 lg:-translate-x-1/2 ${className}`}>
+      className={`2xl:translate-y-none relative pl-4 font-bold leading-tight text-primary-300 sm:absolute sm:-left-28 sm:w-24 sm:-translate-y-1/2 sm:px-4 sm:text-center md:-left-40 md:w-36 lg:-left-32 lg:w-28 lg:pl-0 lg:pr-8 2xl:left-1/2 2xl:-top-24 2xl:w-full 2xl:-translate-x-1/2 2xl:px-0 ${className}`}>
       {children}
-      <span className='absolute -left-4 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-primary-300 2xl:left-1/2 2xl:top-16 2xl:-translate-y-1/2 2xl:-translate-x-1/2'></span>
+      <span className='absolute -left-4 top-1/2 h-3 w-3 -translate-y-1/2 -translate-x-1/2 rounded-full bg-primary-300 sm:left-auto sm:-right-3 2xl:left-1/2 2xl:top-16'></span>
     </span>
   )
 }
@@ -678,7 +680,7 @@ function TimelineCard({
     <div
       className={`flex flex-1 flex-col gap-3 rounded-lg p-4 ${
         active
-          ? 'border-2 border-primary-300 shadow-noOffset-sm shadow-primary/40'
+          ? 'mt-4 border-2 border-primary-300 shadow-noOffset-sm shadow-primary/40 2xl:mt-0'
           : 'border-neutral-700 2xl:border'
       }`}>
       <SuiTitle type='h3'>{title}</SuiTitle>
