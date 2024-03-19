@@ -651,9 +651,9 @@ function TimelineLabel({
   return (
     <span
       {...props}
-      className={`relative text-center font-bold text-primary-300 lg:absolute lg:left-1/2 lg:-top-24 lg:-translate-x-1/2 ${className}`}>
+      className={`relative pl-4 font-bold text-primary-300 sm:pl-0 sm:text-center lg:absolute lg:left-1/2 lg:-top-24 lg:-translate-x-1/2 ${className}`}>
       {children}
-      <span className='absolute left-1/2 top-16 hidden h-3 w-3 -translate-y-1/2 -translate-x-1/2 rounded-full bg-primary-300 lg:block'></span>
+      <span className='absolute -left-4 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-primary-300 2xl:left-1/2 2xl:top-16 2xl:-translate-y-1/2 2xl:-translate-x-1/2'></span>
     </span>
   )
 }
@@ -679,7 +679,7 @@ function TimelineCard({
       className={`flex flex-1 flex-col gap-3 rounded-lg p-4 ${
         active
           ? 'border-2 border-primary-300 shadow-noOffset-sm shadow-primary/40'
-          : 'border border-neutral-700'
+          : 'border-neutral-700 2xl:border'
       }`}>
       <SuiTitle type='h3'>{title}</SuiTitle>
       <SuiText
