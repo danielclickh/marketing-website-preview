@@ -65,6 +65,7 @@ export default function HomePage({
   const gb = useGrowthBook()
 
   if (gb?.ready) {
+    console.log('gb ready')
     updateLinks(
       'mktg-website-homepage-sections',
       gb.getFeatureValue('mktg-website-homepage-rollout', 0).toString()
