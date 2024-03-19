@@ -35,6 +35,10 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
   const timelineLineRef = useRef<HTMLDivElement | null>(null)
   const timelineDotRefs = useRef<Array<HTMLSpanElement | null>>([])
 
+  const [timelineExternalResourceHeight, setTimelineExternalResourceHeight] =
+    useState(0)
+  const timelineExternalResourcesRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
     const calculatePosition = () => {
       if (
@@ -91,6 +95,22 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
     window.addEventListener('resize', calculatePosition)
     return () => window.removeEventListener('resize', calculatePosition)
   }, [timelineContainerRef, timelineLineRef, timelineDotRefs])
+
+  useEffect(() => {
+    const calculatePadding = () => {
+      if (timelineExternalResourcesRef.current) {
+        setTimelineExternalResourceHeight(
+          timelineExternalResourcesRef.current.getBoundingClientRect().height
+        )
+      }
+    }
+
+    // Set initial values on mount
+    calculatePadding()
+
+    window.addEventListener('resize', calculatePadding)
+    return () => window.removeEventListener('resize', calculatePadding)
+  }, [timelineExternalResourcesRef])
 
   return (
     <>
@@ -252,7 +272,9 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
             />
 
             {/* Items container */}
-            <div className='section-container grid grid-cols-1 gap-16 pr-0 pl-8 sm:pl-32 md:pl-44 lg:pl-36 2xl:grid-cols-3 2xl:pl-0'>
+            <div
+              style={{ paddingBottom: timelineExternalResourceHeight }}
+              className='section-container grid grid-cols-1 gap-16 pr-0 pl-8 sm:pl-32 md:pl-44 lg:pl-36 2xl:grid-cols-3 2xl:pl-0'>
               <div className='relative flex flex-col'>
                 <TimelineCard
                   ref={(el: HTMLSpanElement) =>
@@ -359,6 +381,58 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                     />
                   ]}
                 />
+                <div
+                  ref={timelineExternalResourcesRef}
+                  className='absolute top-full left-0 right-0'>
+                  <div className='relative'>
+                    <svg
+                      className='mx-auto'
+                      xmlns='http://www.w3.org/2000/svg'
+                      width='10'
+                      height='64'
+                      fill='none'
+                      viewBox='0 0 10 64'>
+                      <path
+                        fill='#FAFF69'
+                        d='m4.99744 64 4.33012-7.5H.667309L4.99744 64Zm-.75-64v57.25h1.5V0h-1.5Z'
+                      />
+                    </svg>
+                    <SuiText
+                      size='sm'
+                      weight='medium'
+                      className='stroke-text absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+                      Query as external sources
+                    </SuiText>
+                  </div>
+                  <div className='rounded-lg border border-neutral-700 bg-neutral-900 p-4'>
+                    <SuiText
+                      size='sm'
+                      weight='bold'
+                      className='mb-4 text-center uppercase !text-[#B3B6BD]'>
+                      Query as external sources
+                    </SuiText>
+                    <div className='flex flex-wrap items-center justify-evenly gap-3'>
+                      <Image
+                        src='/images/real-time-data-warehouse/databricks.svg'
+                        alt='Databricks'
+                        width={105}
+                        height={25}
+                      />
+                      <Image
+                        src='/images/real-time-data-warehouse/snowflake.svg'
+                        alt='Snowflake'
+                        width={109}
+                        height={27}
+                      />
+                      <Image
+                        src='/images/real-time-data-warehouse/amazon-athena.svg'
+                        alt='Amazon Athena'
+                        width={78}
+                        height={32}
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
