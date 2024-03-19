@@ -23,7 +23,7 @@ import { findOne } from '../lib/api/strapi'
 import { getCommonProps } from '../lib/utils/getCommonProps'
 import { HomePageProps } from '../types/homepage'
 import { galaxyOnPage } from '../lib/galaxy/galaxy'
-import { useFeatureValue } from '@growthbook/growthbook-react'
+import { useFeatureValue, useGrowthBook } from '@growthbook/growthbook-react'
 
 export const getStaticProps: GetStaticProps<HomePageProps> =
   async function getStaticProps() {
@@ -61,48 +61,55 @@ export default function HomePage({
 }: HomePageProps) {
   galaxyOnPage('homePage')
 
+  const gb = useGrowthBook()
+
   const homepageLayout = useFeatureValue('mktg-website-homepage-rollout', 0)
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <>
-        {homepageLayout === 0 && (
-          <LayoutControl
-            hero={hero}
-            customerStories={customerStories}
-            headerData={headerData}
-            platforms={platforms}
-          />
-        )}
-        {homepageLayout === 1 && (
-          <LayoutExperiment1
-            hero={hero}
-            customerStories={customerStories}
-            headerData={headerData}
-            platforms={platforms}
-          />
-        )}
-        {homepageLayout === 2 && (
-          <LayoutExperiment2
-            hero={hero}
-            customerStories={customerStories}
-            headerData={headerData}
-            platforms={platforms}
-          />
-        )}
-        {homepageLayout === 3 && (
-          <LayoutExperiment3
-            customerStories={customerStories}
-            headerData={headerData}
-            platforms={platforms}
-          />
-        )}
-        {homepageLayout === 4 && (
-          <LayoutExperiment4
-            customerStories={customerStories}
-            headerData={headerData}
-            platforms={platforms}
-          />
+        {gb?.ready && (
+          <>
+            {' '}
+            {homepageLayout === 0 && (
+              <LayoutControl
+                hero={hero}
+                customerStories={customerStories}
+                headerData={headerData}
+                platforms={platforms}
+              />
+            )}
+            {homepageLayout === 1 && (
+              <LayoutExperiment1
+                hero={hero}
+                customerStories={customerStories}
+                headerData={headerData}
+                platforms={platforms}
+              />
+            )}
+            {homepageLayout === 2 && (
+              <LayoutExperiment2
+                hero={hero}
+                customerStories={customerStories}
+                headerData={headerData}
+                platforms={platforms}
+              />
+            )}
+            {homepageLayout === 3 && (
+              <LayoutExperiment3
+                customerStories={customerStories}
+                headerData={headerData}
+                platforms={platforms}
+              />
+            )}
+            {homepageLayout === 4 && (
+              <LayoutExperiment4
+                customerStories={customerStories}
+                headerData={headerData}
+                platforms={platforms}
+              />
+            )}
+          </>
         )}
       </>
     </Layout>
