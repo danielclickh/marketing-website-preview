@@ -70,7 +70,6 @@ export default function HomePage({
       <>
         {gb?.ready && (
           <>
-            {' '}
             {homepageLayout === 0 && (
               <LayoutControl
                 hero={hero}
@@ -173,9 +172,9 @@ function LayoutExperiment1({
       <HomepageSectionVideoGrid className='bg-primary-300 pb-24 text-primary-800' />
       <HomepageSectionStackIntegration />
       <HRSeparator className='my-24' />
-      <HomepageSectionFast />
-      <HomepageSectionWhyClickhouse />
-      <HomepageSectionDeployAlt />
+      <HomepageSectionFast className='mb-16' />
+      <HomepageSectionWhyClickhouse className='!my-0' />
+      <HomepageSectionDeployAlt className='!my-0 !mb-32' />
       <JoinCommunity github={headerData.github} />
       <HRSeparator className='my-24' />
       <FAQ />
