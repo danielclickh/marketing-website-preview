@@ -100,7 +100,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
           <div className='section-container mx-auto'>
             <div className='flex flex-wrap items-center gap-12 lg:flex-nowrap lg:gap-16'>
               {/* Content column */}
-              <div className='flip-selection w-full text-neutral-900 lg:w-2/5'>
+              <div className='flip-selection w-full text-center text-neutral-900 lg:w-1/2 lg:text-left xl:w-2/5'>
                 <SuiTitle type='h1' weight='bold'>
                   The{' '}
                   <span className='tilted tilted-black'>
@@ -117,13 +117,13 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                   href='/company/contact'
                   type='primary-dark'
                   size='lg'
-                  className='!px-6'>
+                  className='mx-auto !px-6 lg:mx-0'>
                   Try it for free
                 </CUIButton>
               </div>
 
               {/* Image */}
-              <div className='w-full lg:ml-auto lg:w-auto'>
+              <div className='hidden w-full lg:ml-auto lg:block lg:w-auto'>
                 <Image
                   src='/images/real-time-data-warehouse-hero.svg'
                   width={628}
@@ -483,7 +483,7 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
             />
             <IndustryCard
               title='Media and Entertainment'
-              text='Assess the performance of videos, assets, and other media in real-time.'
+              text='Assess the performance of videos, assets, and other media in real‑time.'
               icon={
                 <Image
                   src='/images/real-time-data-warehouse/icon-media.svg'
@@ -632,7 +632,7 @@ function YesNoTable({
   return (
     <>
       {/* Mobile table */}
-      <div className='space-y-8 md:hidden'>
+      <div className='space-y-16 md:hidden'>
         <div>
           <h3 className='mb-6 text-xl font-semibold'>{noHeading}</h3>
           <ul>
@@ -826,7 +826,7 @@ function QuoteCard({
   alternative: string
 }) {
   return (
-    <div className='flex flex-col gap-6 rounded-lg bg-neutral-800 p-6 text-xl text-white md:p-12 lg:p-8 xl:p-12'>
+    <div className='flex flex-col gap-6 rounded-lg bg-neutral-800 p-6 text-lg text-white md:p-10 md:text-xl lg:p-8 lg:text-lg xl:p-10 xl:text-xl'>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         width='36'
@@ -840,7 +840,7 @@ function QuoteCard({
         />
       </svg>
       <Markdown children={quote} className='font-medium md:mb-16' />
-      <div className='mt-auto flex flex-col justify-between gap-6 sm:flex-row sm:items-center'>
+      <div className='mt-auto flex flex-col justify-between gap-6 sm:flex-row sm:items-end'>
         {logo}
         <span className='order-first font-mono text-primary-300 sm:order-last sm:text-right'>
           Alternative to
