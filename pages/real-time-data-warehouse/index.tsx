@@ -252,11 +252,11 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
             />
 
             {/* Items container */}
-            <div className='section-container grid grid-cols-1 gap-16 pr-0 pl-8 sm:pl-28 md:pl-40 lg:pl-32 2xl:grid-cols-3 2xl:pl-0'>
+            <div className='section-container grid grid-cols-1 gap-16 pr-0 pl-8 sm:pl-32 md:pl-44 lg:pl-36 2xl:grid-cols-3 2xl:pl-0'>
               <div className='relative flex flex-col'>
                 <TimelineCard
                   ref={(el: HTMLSpanElement) =>
-                    timelineDotRefs.current.push(el)
+                    (timelineDotRefs.current[0] = el)
                   }
                   label='30 years ago'
                   title='Traditional on-prem data warehouse'
@@ -294,7 +294,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
               <div className='relative flex flex-col'>
                 <TimelineCard
                   ref={(el: HTMLSpanElement) =>
-                    timelineDotRefs.current.push(el)
+                    (timelineDotRefs.current[1] = el)
                   }
                   label='10 years ago'
                   title='Traditional cloud warehouse'
@@ -337,7 +337,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
               <div className='relative flex flex-col'>
                 <TimelineCard
                   ref={(el: HTMLSpanElement) =>
-                    timelineDotRefs.current.push(el)
+                    (timelineDotRefs.current[2] = el)
                   }
                   active={true}
                   label='Today'
@@ -754,7 +754,9 @@ const TimelineCard = forwardRef(function TimelineCard(
     <>
       {/* Floating label */}
       <span
-        className={`2xl:translate-y-none relative pl-4 font-bold leading-tight text-primary-300 sm:absolute sm:-left-28 sm:w-24 sm:-translate-y-1/2 sm:px-4 sm:text-center md:-left-40 md:w-36 lg:-left-32 lg:w-28 lg:pl-0 lg:pr-8 2xl:left-1/2 2xl:-top-24 2xl:w-full 2xl:translate-y-0 2xl:-translate-x-1/2 2xl:px-0`}>
+        className={`relative pl-4 font-bold leading-tight text-primary-300 sm:absolute sm:-left-32 sm:w-24 sm:px-4 sm:text-center md:-left-44 md:w-36 lg:-left-36 lg:w-28 lg:pl-0 lg:pr-8 2xl:left-1/2 2xl:-top-24 2xl:w-full 2xl:-translate-x-1/2 2xl:px-0 ${
+          active ? '-top-1.5 sm:top-4' : '-top-1.5'
+        }`}>
         {!active && <>{label}</>}
         {active && (
           <>
@@ -775,10 +777,10 @@ const TimelineCard = forwardRef(function TimelineCard(
 
       {/* Card */}
       <div
-        className={`flex flex-1 flex-col gap-3 rounded-lg p-4 ${
+        className={`flex flex-1 flex-col gap-3 rounded-lg ${
           active
-            ? 'mt-4 border-2 border-primary-300 shadow-noOffset-sm shadow-primary/40 2xl:mt-0'
-            : 'border-neutral-700 2xl:border'
+            ? 'border-2 border-primary-300 p-4 shadow-noOffset-sm shadow-primary/40'
+            : 'border-neutral-700 px-4 2xl:border 2xl:py-4'
         }`}>
         <SuiTitle type='h3'>{title}</SuiTitle>
         <SuiText
