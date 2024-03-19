@@ -5,9 +5,17 @@ import { CUIButton, CUILink } from '../ClickUI'
 import { SuiTitle } from '../sui'
 import HomePageTerminal from '../Terminal/HomePageTerminal'
 
-export default function HomepageHero({ hero }: { hero: HomepageHeroContent }) {
+interface Props extends React.HTMLProps<HTMLDivElement> {
+  hero: HomepageHeroContent
+}
+
+export default function HomepageHero({
+  hero,
+  className = '',
+  ...props
+}: Props) {
   return (
-    <div className='homepage overflow-hidden bg-grid'>
+    <div className={`homepage overflow-hidden bg-grid ${className}`} {...props}>
       <div className='relative flex flex-col justify-center gap-24 px-8 pb-20 pt-16 md:px-0 md:pt-20 lg:pb-44 '>
         <div className='mx-auto flex w-full max-w-2xl flex-col'>
           <div className='mx-auto flex-col items-center justify-center md:mr-0 md:mt-8'>

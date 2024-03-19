@@ -1,14 +1,18 @@
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
+import React from 'react'
 import { galaxyOnClick } from '../../lib/galaxy/galaxy'
 import { CUIButton } from '../ClickUI'
 import ColumnOrientedIllustration from '../ColumnOrientedIllustration'
 import RowOrientedIllustration from '../RowOrientedIllustration'
 import { SuiText, SuiTitle } from '../sui'
 
-export default function HomepageSectionFast() {
+export default function HomepageSectionFast({
+  className = '',
+  ...props
+}: React.HTMLProps<HTMLDivElement>) {
   return (
-    <div className='relative flex flex-col gap-y-28'>
+    <div className={`relative flex flex-col gap-y-28 ${className}`} {...props}>
       <div className='section-container bg-shadow-element flex w-full flex-col items-center justify-between self-center md:px-16'>
         <div className='flex w-full flex-col items-center text-center'>
           <Image

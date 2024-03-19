@@ -1,11 +1,15 @@
 import Image from 'next/image'
+import React from 'react'
 import SpeedAnimationSvg from '../SpeedAnimation'
 import SpeedAnimationMobileSvg from '../SpeedAnimation/Mobile'
 import { SuiTitle } from '../sui'
 
-export default function HomepageSectionSpeed() {
+export default function HomepageSectionSpeed({
+  className = '',
+  ...props
+}: React.HTMLProps<HTMLDivElement>) {
   return (
-    <div className='flex w-full text-neutral-0'>
+    <div className={`flex w-full text-neutral-0 ${className}`} {...props}>
       <div className='section-container mx-auto flex w-full flex-col items-center pt-24 text-center'>
         <Image src='/speed-icon.svg' alt='Speed Icon' width={73} height={72} />
         <SuiTitle type='h2' className='mb-6 mt-8'>

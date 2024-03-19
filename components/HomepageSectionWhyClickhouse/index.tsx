@@ -52,9 +52,14 @@ function FeatureCard({
   )
 }
 
-export default function HomepageSectionWhyClickhouse() {
+export default function HomepageSectionWhyClickhouse({
+  className = '',
+  ...props
+}: React.HTMLProps<HTMLDivElement>) {
   return (
-    <div className='my-16 bg-neutral-700 py-16 md:my-32 lg:py-24'>
+    <div
+      className={`my-16 bg-neutral-700 py-16 md:my-32 lg:py-24 ${className}`}
+      {...props}>
       <div className='section-container'>
         <div className='relative flex flex-col gap-8 overflow-clip rounded bg-neutral-750 p-8 lg:p-16'>
           {/* Gradient */}

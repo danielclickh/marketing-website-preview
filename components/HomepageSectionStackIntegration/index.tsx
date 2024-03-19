@@ -2,9 +2,12 @@ import Image from 'next/image'
 import React from 'react'
 import { SuiText, SuiTitle } from '../sui'
 
-export default function HomepageSectionStackIntegration() {
+export default function HomepageSectionStackIntegration({
+  className = '',
+  ...props
+}: React.HTMLProps<HTMLDivElement>) {
   return (
-    <div className='my-16 md:my-32'>
+    <div className={`my-16 md:my-32 ${className}`} {...props}>
       {/* Intro text */}
       <div className='mb-16 flex justify-center md:mb-32'>
         <div className='max-w-[650px] text-center'>

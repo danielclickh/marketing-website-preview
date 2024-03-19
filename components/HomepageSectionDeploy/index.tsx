@@ -1,6 +1,6 @@
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
-import { CSSProperties } from 'react'
+import React, { CSSProperties } from 'react'
 import { FullyQualifiedEvent } from '../../lib/galaxy/client'
 import { galaxyOnClick } from '../../lib/galaxy/galaxy'
 import { CUIButton, CUICard } from '../ClickUI'
@@ -57,9 +57,12 @@ const deployData: Array<DeployData> = [
   }
 ]
 
-export default function HomepageSectionDeploy() {
+export default function HomepageSectionDeploy({
+  className = '',
+  ...props
+}: React.HTMLProps<HTMLDivElement>) {
   return (
-    <div className='flex w-full flex-col'>
+    <div className={`flex w-full flex-col ${className}`} {...props}>
       <div
         className='section-container bg-shadow-element yellow-shadow container mx-auto flex flex-col items-center'
         style={yellowPositionStyle}>

@@ -3,9 +3,14 @@ import Link from 'next/link'
 import React from 'react'
 import { SuiText, SuiTitle } from '../sui'
 
-export default function HomepageSectionDeployAlt() {
+export default function HomepageSectionDeployAlt({
+  className = '',
+  ...props
+}: React.HTMLProps<HTMLDivElement>) {
   return (
-    <div className='my-32 bg-primary-300 py-16 text-primary-900'>
+    <div
+      className={`my-32 bg-primary-300 py-16 text-primary-900 ${className}`}
+      {...props}>
       {/* Intro text */}
       <div className='mb-16 flex justify-center'>
         <div className='flex max-w-[650px] flex-col items-center gap-4 text-center'>

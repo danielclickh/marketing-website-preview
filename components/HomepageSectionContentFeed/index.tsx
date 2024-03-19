@@ -17,7 +17,10 @@ function StatBox(props: EntryStat) {
   )
 }
 
-export default function HomepageSectionContentFeed() {
+export default function HomepageSectionContentFeed({
+  className = '',
+  ...props
+}: React.HTMLProps<HTMLDivElement>) {
   const allContent = getContent()
   const allCategories = getCategories()
   const container = useRef<HTMLDivElement>(null)
@@ -35,7 +38,8 @@ export default function HomepageSectionContentFeed() {
 
   return (
     <div
-      className='section-container my-16 flex flex-row flex-wrap gap-12 md:my-32 lg:flex-nowrap'
+      className={`section-container my-16 flex flex-row flex-wrap gap-12 md:my-32 lg:flex-nowrap ${className}`}
+      {...props}
       ref={container}>
       {/* Text & filters column */}
       <div className='relative w-full flex-shrink-0 flex-grow-0 lg:w-2/5'>

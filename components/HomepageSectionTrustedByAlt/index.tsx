@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Dispatch, SetStateAction, useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import type { Swiper as SwiperClass } from 'swiper/types'
 import { HomepageCustomerStories } from '../../types/homepage'
 import { StrapiImage } from '../StrapiElements'
@@ -9,11 +9,15 @@ import styles from './styles.module.scss'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
-export default function HomepageSectionTrustedByAlt({
-  customerStories
-}: {
+interface Props extends React.HTMLProps<HTMLDivElement> {
   customerStories: HomepageCustomerStories
-}) {
+}
+
+export default function HomepageSectionTrustedByAlt({
+  customerStories,
+  className = '',
+  ...props
+}: Props) {
   const resizeImageDimension = (size: number) =>
     parseFloat((size * 0.8).toFixed(2))
 
@@ -109,7 +113,7 @@ export default function HomepageSectionTrustedByAlt({
   }
 
   return (
-    <div className='my-16'>
+    <div className={`my-16 ${className}`} {...props}>
       <SuiText
         weight='bold'
         size='sm'

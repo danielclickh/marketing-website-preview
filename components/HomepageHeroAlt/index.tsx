@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { galaxyOnClick } from '../../lib/galaxy/galaxy'
 import { CUIButton } from '../ClickUI'
 import CycleText from '../CycleText'
@@ -8,7 +8,10 @@ import { SuiText, SuiTitle } from '../sui'
 import Typewriter from 'typewriter-effect'
 import styles from './styles.module.scss'
 
-export default function HomepageHeroAlt() {
+export default function HomepageHeroAlt({
+  className = '',
+  ...props
+}: React.HTMLProps<HTMLDivElement>) {
   const router = useRouter()
 
   const [isTypewritter, setIsTypewritter] = useState(false)
@@ -20,7 +23,9 @@ export default function HomepageHeroAlt() {
     }
   }, [router])
   return (
-    <div className='relative overflow-x-hidden border-primary-300 lg:border-t-[38px]'>
+    <div
+      className={`relative overflow-x-hidden border-primary-300 lg:border-t-[38px] ${className}`}
+      {...props}>
       <div className='absolute top-0 left-0 bottom-0 z-10 w-full bg-primary-300 lg:w-1/2'></div>
       <div className='section-container relative z-20 grid lg:grid-cols-2'>
         {/* Text column */}
@@ -69,7 +74,7 @@ export default function HomepageHeroAlt() {
             )}
           </SuiTitle>
           <div className='lg:inline-block lg:w-auto'>
-            <SuiText className='mt-6 mb-12 !font-medium w-auto lg:!text-[20px]'>
+            <SuiText className='mt-6 mb-12 w-auto !font-medium lg:!text-[20px]'>
               Unlock faster queries without skyrocketing costs.
             </SuiText>
             <div className='flex w-auto flex-wrap gap-4 sm:gap-8 md:flex-nowrap md:gap-6'>
