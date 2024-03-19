@@ -400,7 +400,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                     <SuiText
                       size='sm'
                       weight='medium'
-                      className='stroke-text absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+                      className='stroke-text absolute top-1/2 left-0 right-0 -translate-y-1/2 text-center'>
                       Query as external sources
                     </SuiText>
                   </div>
@@ -409,7 +409,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                       size='sm'
                       weight='bold'
                       className='mb-4 text-center uppercase !text-[#B3B6BD]'>
-                      Query as external sources
+                      Offline data warehouses
                     </SuiText>
                     <div className='flex flex-wrap items-center justify-evenly gap-3'>
                       <Image
