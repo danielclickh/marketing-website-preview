@@ -69,10 +69,12 @@ export default function HomePage({
       'gb ready',
       gb.getFeatureValue('mktg-website-homepage-rollout', 0).toString()
     )
-    updateLinks(
-      'mktg-website-homepage-sections',
-      gb.getFeatureValue('mktg-website-homepage-rollout', 0).toString()
-    )
+    setTimeout(() => {
+      updateLinks(
+        'mktg-website-homepage-sections',
+        gb.getFeatureValue('mktg-website-homepage-rollout', 0).toString()
+      )
+    }, 100)
   }
 
   const homepageLayout = useFeatureValue('mktg-website-homepage-rollout', 0)
