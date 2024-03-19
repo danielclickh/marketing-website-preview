@@ -174,8 +174,8 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
             {/* Items container */}
             <div className='section-container grid grid-cols-1 gap-16 pl-8 sm:pl-28 md:pl-40 lg:pl-32 2xl:grid-cols-3 2xl:pl-4'>
               <div className='relative flex flex-col'>
-                <TimelineLabel>30 years ago</TimelineLabel>
                 <TimelineCard
+                  label='30 years ago'
                   title='Traditional on-prem data warehouse'
                   text='30 years ago, on-prem data warehouses like IBM, Hadoop, Oracle, and Teradata were the only options available.'
                   items={[
@@ -209,8 +209,8 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
               </div>
 
               <div className='relative flex flex-col'>
-                <TimelineLabel>10 years ago</TimelineLabel>
                 <TimelineCard
+                  label='10 years ago'
                   title='Traditional cloud warehouse'
                   text='Traditional cloud data warehouses, whose predecessors were
                       built to manage much smaller volumes, began to strain
@@ -249,14 +249,9 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
               </div>
 
               <div className='relative flex flex-col'>
-                <TimelineLabel>
-                  <span className='md:hidden'>Today</span>
-                  <span className='tilted tilted-yellow hidden py-2 px-3 md:inline-block'>
-                    <span className='tilted-content'>Today</span>
-                  </span>
-                </TimelineLabel>
                 <TimelineCard
                   active={true}
+                  label='Today'
                   title='Real-time data warehouse'
                   text='Built for the next generation of data-intensive workloads.'
                   items={[
@@ -645,28 +640,15 @@ function YesNoTable({
   )
 }
 
-function TimelineLabel({
-  className,
-  children,
-  ...props
-}: React.HTMLProps<HTMLSpanElement>) {
-  return (
-    <span
-      {...props}
-      className={`2xl:translate-y-none relative pl-4 font-bold leading-tight text-primary-300 sm:absolute sm:-left-28 sm:w-24 sm:-translate-y-1/2 sm:px-4 sm:text-center md:-left-40 md:w-36 lg:-left-32 lg:w-28 lg:pl-0 lg:pr-8 2xl:left-1/2 2xl:-top-24 2xl:w-full 2xl:-translate-x-1/2 2xl:px-0 ${className}`}>
-      {children}
-      <span className='absolute -left-4 top-1/2 h-3 w-3 -translate-y-1/2 -translate-x-1/2 rounded-full bg-primary-300 sm:left-auto sm:-right-3 2xl:left-1/2 2xl:top-16'></span>
-    </span>
-  )
-}
-
 function TimelineCard({
+  label,
   title,
   text,
   logos,
   items,
   active = false
 }: {
+  label: string
   title: string
   text: string
   items?: Array<{
@@ -677,44 +659,67 @@ function TimelineCard({
   active?: boolean
 }) {
   return (
-    <div
-      className={`flex flex-1 flex-col gap-3 rounded-lg p-4 ${
-        active
-          ? 'mt-4 border-2 border-primary-300 shadow-noOffset-sm shadow-primary/40 2xl:mt-0'
-          : 'border-neutral-700 2xl:border'
-      }`}>
-      <SuiTitle type='h3'>{title}</SuiTitle>
-      <SuiText
-        size='sm'
-        weight='medium'
-        className={`${active ? '' : 'opacity-70'}`}>
-        {text}
-      </SuiText>
-      {items && (
-        <ul className='mb-8 space-y-3'>
-          {items.map(({ type: Type, text }) => {
-            return (
-              <li>
-                <Type>
-                  <SuiText
-                    size='sm'
-                    weight='medium'
-                    className={`${active ? '' : 'opacity-70'}`}>
-                    {text}
-                  </SuiText>
-                </Type>
-              </li>
-            )
-          })}
-        </ul>
-      )}
-      <div className='mt-auto flex flex-wrap items-center gap-6'>
-        {logos &&
-          logos.map((logo) => {
-            return <>{logo}</>
-          })}
+    <>
+      {/* Floating label */}
+      <span
+        className={`2xl:translate-y-none relative pl-4 font-bold leading-tight text-primary-300 sm:absolute sm:-left-28 sm:w-24 sm:-translate-y-1/2 sm:px-4 sm:text-center md:-left-40 md:w-36 lg:-left-32 lg:w-28 lg:pl-0 lg:pr-8 2xl:left-1/2 2xl:-top-24 2xl:w-full 2xl:-translate-x-1/2 2xl:px-0`}>
+        {!active && <>{label}</>}
+        {active && (
+          <>
+            <span className='md:hidden'>{label}</span>
+            <span className='tilted tilted-yellow hidden py-2 px-3 md:inline-block'>
+              <span className='tilted-content'>{label}</span>
+            </span>
+          </>
+        )}
+        <span
+          className={`absolute -left-4 top-1/2 h-3 w-3 -translate-y-1/2 -translate-x-1/2 rounded-full sm:left-auto sm:-right-3 2xl:left-1/2 2xl:top-16 ${
+            active
+              ? 'bg-neutral-800 ring-4 ring-primary-300 ring-offset-0 2xl:bg-primary-300 2xl:ring-0'
+              : 'bg-primary-300'
+          }`}></span>
+      </span>
+
+      {/* Card */}
+      <div
+        className={`flex flex-1 flex-col gap-3 rounded-lg p-4 ${
+          active
+            ? 'mt-4 border-2 border-primary-300 shadow-noOffset-sm shadow-primary/40 2xl:mt-0'
+            : 'border-neutral-700 2xl:border'
+        }`}>
+        <SuiTitle type='h3'>{title}</SuiTitle>
+        <SuiText
+          size='sm'
+          weight='medium'
+          className={`${active ? '' : 'opacity-70'}`}>
+          {text}
+        </SuiText>
+        {items && (
+          <ul className='mb-8 space-y-3'>
+            {items.map(({ type: Type, text }) => {
+              return (
+                <li>
+                  <Type>
+                    <SuiText
+                      size='sm'
+                      weight='medium'
+                      className={`${active ? '' : 'opacity-70'}`}>
+                      {text}
+                    </SuiText>
+                  </Type>
+                </li>
+              )
+            })}
+          </ul>
+        )}
+        <div className='mt-auto flex flex-wrap items-center gap-6'>
+          {logos &&
+            logos.map((logo) => {
+              return <>{logo}</>
+            })}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
