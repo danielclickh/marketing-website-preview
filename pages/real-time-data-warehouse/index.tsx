@@ -5,7 +5,7 @@ import Layout from '../../components/Layout'
 import Markdown from '../../components/Markdown'
 import { SuiText, SuiTitle } from '../../components/sui'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { forwardRef, useEffect, useRef, useState } from 'react'
 import { CUIButton } from '../../components/ClickUI'
 import { HomePageProps } from '../../types/homepage'
 
@@ -25,6 +25,73 @@ export const getStaticProps: GetStaticProps = async function getStaticProps() {
 }
 
 export default function Page({ footerData, headerData, seo }: HomePageProps) {
+  const [timelineCoords, setTimelineCoords] = useState<null | {
+    top: number
+    right: number
+    bottom: number
+    left: number
+  }>(null)
+  const timelineContainerRef = useRef<HTMLDivElement | null>(null)
+  const timelineLineRef = useRef<HTMLDivElement | null>(null)
+  const timelineDotRefs = useRef<Array<HTMLSpanElement | null>>([])
+
+  useEffect(() => {
+    const calculatePosition = () => {
+      if (
+        timelineContainerRef.current &&
+        timelineLineRef.current &&
+        timelineDotRefs.current
+      ) {
+        const container = timelineContainerRef.current
+        const line = timelineLineRef.current
+        const first = timelineDotRefs.current[0]
+        const last = timelineDotRefs.current[timelineDotRefs.current.length - 1]
+        if (first && last) {
+          const containerRect = container.getBoundingClientRect()
+          const lineRect = line.getBoundingClientRect()
+          const firstRect = first.getBoundingClientRect()
+          const lastRect = last.getBoundingClientRect()
+
+          const is2xl = window.innerWidth >= 1536
+
+          const round = (value: number) => parseFloat(value.toFixed(2))
+          setTimelineCoords({
+            top: round(
+              firstRect.top -
+                containerRect.top +
+                firstRect.height / 2 -
+                (is2xl ? lineRect.height / 2 : 0)
+            ),
+            left: round(
+              firstRect.left -
+                containerRect.left +
+                firstRect.width / 2 -
+                (is2xl ? 0 : lineRect.width / 2)
+            ),
+            bottom: round(
+              containerRect.bottom -
+                lastRect.bottom +
+                lastRect.height / 2 -
+                (is2xl ? lineRect.height / 2 : 0)
+            ),
+            right: round(
+              containerRect.right -
+                lastRect.right +
+                lastRect.width / 2 -
+                (is2xl ? 0 : lineRect.width / 2)
+            )
+          })
+        }
+      }
+    }
+
+    // Set initial values on mount
+    calculatePosition()
+
+    window.addEventListener('resize', calculatePosition)
+    return () => window.removeEventListener('resize', calculatePosition)
+  }, [timelineContainerRef, timelineLineRef, timelineDotRefs])
+
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -160,21 +227,37 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
           </div>
 
           {/* Timeline */}
-          <div className='relative mx-auto max-w-[715px] flex-shrink-0 flex-grow-0 xl:max-w-[580px] 2xl:mt-24 2xl:max-w-none 2xl:pt-8'>
+          <div
+            ref={timelineContainerRef}
+            className='relative mx-auto max-w-[715px] flex-shrink-0 flex-grow-0 xl:max-w-[580px] 2xl:mt-24 2xl:max-w-none'>
             <SuiText
               size='sm'
               weight='semibold'
-              className='mb-12 text-center uppercase tracking-widest'>
+              className='mb-12 text-center uppercase tracking-widest 2xl:mb-36'>
               Evolution of data warehouses for modern cloud infrastructure
             </SuiText>
 
             {/* Line */}
-            <div className='absolute top-2 left-4 h-full w-0.5 bg-neutral-600 sm:left-24 md:left-36 lg:left-28 2xl:top-0 2xl:left-0 2xl:right-0 2xl:h-0.5 2xl:w-auto'></div>
+            <div
+              ref={timelineLineRef}
+              className={`absolute w-0.5 bg-neutral-600 transition-opacity 2xl:!left-0 2xl:!right-0 2xl:h-0.5 2xl:w-auto ${
+                timelineCoords ? 'opacity-100' : 'opacity-0'
+              }`}
+              style={{
+                top: timelineCoords?.top || 0,
+                right: timelineCoords?.right || 0,
+                bottom: timelineCoords?.bottom || 0,
+                left: timelineCoords?.left || 0
+              }}
+            />
 
             {/* Items container */}
-            <div className='section-container grid grid-cols-1 gap-16 pl-8 sm:pl-28 md:pl-40 lg:pl-32 2xl:grid-cols-3 2xl:pl-4'>
+            <div className='section-container grid grid-cols-1 gap-16 pr-0 pl-8 sm:pl-28 md:pl-40 lg:pl-32 2xl:grid-cols-3 2xl:pl-0'>
               <div className='relative flex flex-col'>
                 <TimelineCard
+                  ref={(el: HTMLSpanElement) =>
+                    timelineDotRefs.current.push(el)
+                  }
                   label='30 years ago'
                   title='Traditional on-prem data warehouse'
                   text='30 years ago, on-prem data warehouses like IBM, Hadoop, Oracle, and Teradata were the only options available.'
@@ -210,6 +293,9 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
 
               <div className='relative flex flex-col'>
                 <TimelineCard
+                  ref={(el: HTMLSpanElement) =>
+                    timelineDotRefs.current.push(el)
+                  }
                   label='10 years ago'
                   title='Traditional cloud warehouse'
                   text='Traditional cloud data warehouses, whose predecessors were
@@ -250,6 +336,9 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
 
               <div className='relative flex flex-col'>
                 <TimelineCard
+                  ref={(el: HTMLSpanElement) =>
+                    timelineDotRefs.current.push(el)
+                  }
                   active={true}
                   label='Today'
                   title='Real-time data warehouse'
@@ -640,29 +729,32 @@ function YesNoTable({
   )
 }
 
-function TimelineCard({
-  label,
-  title,
-  text,
-  logos,
-  items,
-  active = false
-}: {
-  label: string
-  title: string
-  text: string
-  items?: Array<{
-    type: typeof ItemYes | typeof ItemNo | typeof ItemArrow
+const TimelineCard = forwardRef(function TimelineCard(
+  {
+    label,
+    title,
+    text,
+    logos,
+    items,
+    active = false
+  }: {
+    label: string
+    title: string
     text: string
-  }>
-  logos?: Array<React.ReactElement>
-  active?: boolean
-}) {
+    items?: Array<{
+      type: typeof ItemYes | typeof ItemNo | typeof ItemArrow
+      text: string
+    }>
+    logos?: Array<React.ReactElement>
+    active?: boolean
+  },
+  ref: React.ForwardedRef<HTMLSpanElement>
+) {
   return (
     <>
       {/* Floating label */}
       <span
-        className={`2xl:translate-y-none relative pl-4 font-bold leading-tight text-primary-300 sm:absolute sm:-left-28 sm:w-24 sm:-translate-y-1/2 sm:px-4 sm:text-center md:-left-40 md:w-36 lg:-left-32 lg:w-28 lg:pl-0 lg:pr-8 2xl:left-1/2 2xl:-top-24 2xl:w-full 2xl:-translate-x-1/2 2xl:px-0`}>
+        className={`2xl:translate-y-none relative pl-4 font-bold leading-tight text-primary-300 sm:absolute sm:-left-28 sm:w-24 sm:-translate-y-1/2 sm:px-4 sm:text-center md:-left-40 md:w-36 lg:-left-32 lg:w-28 lg:pl-0 lg:pr-8 2xl:left-1/2 2xl:-top-24 2xl:w-full 2xl:translate-y-0 2xl:-translate-x-1/2 2xl:px-0`}>
         {!active && <>{label}</>}
         {active && (
           <>
@@ -673,6 +765,7 @@ function TimelineCard({
           </>
         )}
         <span
+          ref={ref}
           className={`absolute -left-4 top-1/2 h-3 w-3 -translate-y-1/2 -translate-x-1/2 rounded-full sm:left-auto sm:-right-3 2xl:left-1/2 2xl:top-16 ${
             active
               ? 'bg-neutral-800 ring-4 ring-primary-300 ring-offset-0 2xl:bg-primary-300 2xl:ring-0'
@@ -696,9 +789,9 @@ function TimelineCard({
         </SuiText>
         {items && (
           <ul className='mb-8 space-y-3'>
-            {items.map(({ type: Type, text }) => {
+            {items.map(({ type: Type, text }, index) => {
               return (
-                <li>
+                <li key={index}>
                   <Type>
                     <SuiText
                       size='sm'
@@ -721,7 +814,7 @@ function TimelineCard({
       </div>
     </>
   )
-}
+})
 
 function QuoteCard({
   quote,
