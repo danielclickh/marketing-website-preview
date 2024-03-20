@@ -32,6 +32,12 @@
 				"name": "Download",
 				"href": "https://clickhouse.com/docs/en/install#self-managed-install",
 				"target": "_blank"
+			},
+			{
+				"id": 123,
+				"name": "RT Data Warehouse",
+				"href": "/real-time-data-warehouse",
+				"target": "_self"
 			}
 		]
 	},
