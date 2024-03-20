@@ -141,6 +141,7 @@ export default function Page({
                   <span className='tilted tilted-black'>
                     <span className='tilted-content text-white'>real-time</span>
                   </span>{' '}
+                  <br />
                   data warehouse
                 </SuiTitle>
                 <SuiText weight='medium' className='my-6 !text-xl'>
@@ -158,7 +159,7 @@ export default function Page({
               </div>
 
               {/* Image */}
-              <div className='order-first mx-auto lg:order-last lg:ml-auto lg:mr-0 lg:w-auto'>
+              <div className='order-first mx-auto max-w-xs lg:order-last lg:ml-auto lg:mr-0 lg:w-auto lg:max-w-none'>
                 <Image
                   src='/images/real-time-data-warehouse-hero.svg'
                   width={628}
@@ -935,8 +936,8 @@ function QuoteCard({
           d='M0 27.3452v-7.8239c0-2.25.4219-4.5895 1.2656-7.0185.8693-2.4545 2.0455-4.7684 3.5284-6.9417C6.3026 3.3622 7.99 1.5085 9.8565 0l6.4432 4.1804c-1.5085 2.2756-2.7741 4.6534-3.7969 7.1335-.9971 2.4546-1.4829 5.1648-1.4573 8.1307v7.9006H0Zm19.4446 0v-7.8239c0-2.25.4219-4.5895 1.2656-7.0185.8693-2.4545 2.0455-4.7684 3.5284-6.9417C25.7472 3.3622 27.4347 1.5085 29.3011 0l6.4432 4.1804c-1.5085 2.2756-2.7741 4.6534-3.7969 7.1335-.9971 2.4546-1.4829 5.1648-1.4573 8.1307v7.9006H19.4446Z'
         />
       </svg>
-      <Markdown children={quote} className='font-medium md:mb-16' />
-      <div className='mt-auto flex flex-col justify-between gap-6 sm:flex-row sm:items-end'>
+      <Markdown children={quote} className='font-medium md:mb-8' />
+      <div className='mt-auto flex flex-col justify-between gap-6 sm:flex-row sm:items-center'>
         {logo}
         <span className='order-first font-mono text-primary-300 sm:order-last sm:text-right'>
           Alternative to
