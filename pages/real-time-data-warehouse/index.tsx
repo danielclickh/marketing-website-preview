@@ -1,9 +1,11 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
+import HomepageSectionTrustedByAlt from '../../components/HomepageSectionTrustedByAlt'
 import HRSeparator from '../../components/HRSeparator'
 import Layout from '../../components/Layout'
 import Markdown from '../../components/Markdown'
 import { SuiText, SuiTitle } from '../../components/sui'
+import { findOne } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import React, { forwardRef, useEffect, useRef, useState } from 'react'
 import { CUIButton } from '../../components/ClickUI'
@@ -11,7 +13,14 @@ import { HomePageProps } from '../../types/homepage'
 
 export const getStaticProps: GetStaticProps = async function getStaticProps() {
   const commonProps = await getCommonProps()
-
+  const data = await findOne('homepage', {
+    populate: [
+      'customerStories',
+      'customerStories.*',
+      'customerStories.logos.*',
+      'customerStories.logos.darkLogoPng'
+    ]
+  })
   return {
     props: {
       seo: {
@@ -19,12 +28,18 @@ export const getStaticProps: GetStaticProps = async function getStaticProps() {
         description: '',
         path: '/real-time-data-warehouse'
       },
+      ...data,
       ...commonProps
     }
   }
 }
 
-export default function Page({ footerData, headerData, seo }: HomePageProps) {
+export default function Page({
+  footerData,
+  headerData,
+  seo,
+  customerStories
+}: HomePageProps) {
   const [timelineCoords, setTimelineCoords] = useState<null | {
     top: number
     right: number
@@ -154,6 +169,12 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
             </div>
           </div>
         </div>
+
+        <HomepageSectionTrustedByAlt
+          invertLogos={false}
+          className='!my-0 bg-primary-300 pb-16 text-primary-800'
+          customerStories={customerStories}
+        />
 
         {/* What is RT data warehouse */}
         <div className='section-container my-24'>
