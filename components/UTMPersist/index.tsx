@@ -7,8 +7,15 @@ type UTMs = {
   [key: string]: string
 }
 
-export const updateLinks = (experimentId?: string, variationId?: string) => {
-  const links = Array.from(document.querySelectorAll('a'))
+export const updateLinks = (
+  experimentId?: string,
+  variationId?: string,
+  target?: string
+) => {
+  let links = Array.from(document.querySelectorAll('a'))
+  if (target) {
+    links = Array.from(document.querySelectorAll(`${target} a`))
+  }
   for (const link of links) {
     if (link.hostname.includes('.cloud')) {
       link.href = appendUTMsToLink(link.href)

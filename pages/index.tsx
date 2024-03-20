@@ -68,7 +68,8 @@ export default function HomePage({
     setTimeout(() => {
       updateLinks(
         'mktg-website-homepage-sections',
-        gb.getFeatureValue('mktg-website-homepage-rollout', 0).toString()
+        gb.getFeatureValue('mktg-website-homepage-rollout', 0).toString(),
+        '.readable-content'
       )
     }, 100)
   }
