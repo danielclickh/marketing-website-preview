@@ -119,6 +119,16 @@ body {
   @apply box-border;
 }
 
+// Mask size can be overriden with inline styles
+// <el style="--mask-size: 10px; --mask-size-lg: 20px">...</el>
+.mask-logos-carousel {
+  $mask-size: var(--mask-size, 2.5rem);
+  mask-image: linear-gradient(90deg, rgba(#000, 0) 0.1%, rgba(#000, 1) #{$mask-size}, rgba(#000, 1) calc(99.9% - #{$mask-size}), rgba(#000, 0) 99.9%);
+  @media (min-width: 1024px) {
+    --mask-size: var(--mask-size-lg, 5rem);
+  }
+}
+
 .feature-container {
   @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-y-4 md:space-y-0 gap-y-10 gap-x-12;
 }

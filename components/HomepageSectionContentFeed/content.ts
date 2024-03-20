@@ -1,0 +1,379 @@
+import IconCalendar from './assets/icon-calendar'
+import IconDatabase from './assets/icon-database'
+import IconFrame from './assets/icon-frame'
+import IconGauge from './assets/icon-gauge'
+import IconHandCoins from './assets/icon-hand-coins'
+import IconPeople from './assets/icon-people'
+import IconPerson from './assets/icon-person'
+import IconPieChart from './assets/icon-pie-chart'
+import IconStack from './assets/icon-stack'
+import IconStopwatch from './assets/icon-stopwatch'
+import LogoAdgreetz from './assets/logo-adgreetz'
+import LogoAdmixer from './assets/logo-admixer'
+import LogoClearbit from './assets/logo-clearbit'
+import LogoCloudflare from './assets/logo-cloudflare'
+import LogoContentsquare from './assets/logo-contentsquare'
+import LogoDarwinium from './assets/logo-darwinium'
+import LogoDassana from './assets/logo-dassana'
+import LogoDeepl from './assets/logo-deepl'
+import LogoDenic from './assets/logo-denic'
+import LogoExitlag from './assets/logo-exitlag'
+import LogoHifi from './assets/logo-hifi'
+import LogoJuspay from './assets/logo-juspay'
+import LogoLyft from './assets/logo-lyft'
+import LogoMinted from './assets/logo-minted'
+import LogoOngage from './assets/logo-ongage'
+import LogoQuickcheck from './assets/logo-quickcheck'
+import LogoSony from './assets/logo-sony'
+import LogoSynq from './assets/logo-synq'
+import LogoVantage from './assets/logo-vantage'
+import LogoVimeo from './assets/logo-vimeo'
+
+export type EntryCategory = string
+
+export type EntryStat = {
+  icon: React.ComponentType
+  stat: string
+  label: string
+}
+
+export type Entry = {
+  body: string
+  logo: React.ComponentType
+  categories: EntryCategory[]
+  stats?: EntryStat[]
+  featured: boolean
+  embed?: string
+}
+
+export function getCategories(): EntryCategory[] {
+  const mergedCategories = getContent().flatMap((entry) => entry.categories)
+
+  // Remove duplicates (Array.from silences typescript error)
+  return [...Array.from(new Set(mergedCategories))]
+}
+
+export function getContent(): Entry[] {
+  return [
+    // Cloudflare
+    {
+      featured: true,
+      body: `“ClickHouse helps us efficiently and reliably analyze logs across trillions of Internet requests to identify malicious traffic and provide customers with rich analytics.” [Read blog](https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/)`,
+      logo: LogoCloudflare,
+      categories: ['Observability'],
+      stats: [
+        {
+          icon: IconFrame,
+          stat: '1.5T',
+          label: 'Page views analyzed / mo'
+        },
+        {
+          icon: IconPerson,
+          stat: '2.5B',
+          label: 'Visitors analyzed / mo'
+        },
+        {
+          icon: IconStack,
+          stat: '11M',
+          label: 'Rows ingested / sec'
+        }
+      ]
+    },
+
+    // Sony
+    {
+      featured: false,
+      body: `“At Sony LIV, we ingest tens of millions of video streaming events into ClickHouse Cloud and run queries to generate complex dashboards for analysis. This allows our operations team to monitor, alert & troubleshoot the QOS and QOE of our customers in real-time. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.”`,
+      logo: LogoSony,
+      categories: ['Observability'],
+      stats: [
+        {
+          icon: IconStack,
+          stat: '10M+',
+          label: 'Streaming events ingested'
+        },
+        {
+          icon: IconHandCoins,
+          stat: 'Cost',
+          label: 'Efficiency'
+        }
+      ]
+    },
+
+    // Clearbit
+    {
+      featured: false,
+      body: `“There's that feeling of new tech where everything just feels like it's going right. Can we get the data in there quick enough? Yes. Can we query the data in a way that is going to have a responsive UI? Yes. Is the cost gonna kill us? No.”`,
+      logo: LogoClearbit,
+      categories: ['Real-time analytics'],
+      embed: `<iframe src="https://player.vimeo.com/video/863656379?h=ec5de7be6d&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&autoplay=0" frameBorder='0' allow='autoplay; fullscreen; picture-in-picture'></iframe>`,
+      stats: [
+        {
+          icon: IconGauge,
+          stat: '5-6x',
+          label: 'Faster data ingestion'
+        },
+        {
+          icon: IconHandCoins,
+          stat: '10x',
+          label: 'Cost savings'
+        }
+      ]
+    },
+
+    // Lyft
+    {
+      featured: true,
+      body: `“We needed something to slice and dice real-time data, like rides and driver hours across cities and regions where Lyft runs. Using ClickHouse resulted into a lot of performance benefits for us with huge cost savings for the org.” [Read blog](https://eng.lyft.com/druid-deprecation-and-clickhouse-adoption-at-lyft-120af37651fd)`,
+      logo: LogoLyft,
+      categories: ['Real-time analytics'],
+      embed: `<iframe src="https://player.vimeo.com/video/903236689?h=62b37e3795&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&autoplay=0" frameBorder='0' allow='autoplay; fullscreen; picture-in-picture'></iframe>`,
+      stats: [
+        {
+          icon: IconStack,
+          stat: '10M+',
+          label: 'Rows ingested daily'
+        },
+        {
+          icon: IconDatabase,
+          stat: '20TB',
+          label: 'Data read daily'
+        },
+        {
+          icon: IconHandCoins,
+          stat: 'Huge',
+          label: 'Cost savings'
+        }
+      ]
+    },
+
+    // Vantage
+    {
+      featured: false,
+      body: `“Moving over to ClickHouse we were able to cut that (Redshift) bill in half … That 30 second query now takes a couple seconds or under a second under a second … every page loads just faster”`,
+      logo: LogoVantage,
+      categories: ['Real-time analytics'],
+      stats: [
+        {
+          icon: IconGauge,
+          stat: '500x',
+          label: 'Query speed improvement'
+        },
+        {
+          icon: IconHandCoins,
+          stat: '50%',
+          label: 'Cost savings'
+        }
+      ]
+    },
+
+    // Vimeo
+    {
+      featured: true,
+      body: `“In the post-evaluation of each database against our criteria (with metrics ranging from query performance to cost), ClickHouse emerged as the unrivalled frontrunner. It excelled across the board, even astonishingly so in certain domains, and proved more cost-efficient.” [Read blog](https://medium.com/vimeo-engineering-blog/clickhouse-is-in-the-house-413862c8ac28)`,
+      logo: LogoVimeo,
+      categories: ['Media & entertainment'],
+      stats: [
+        {
+          icon: IconFrame,
+          stat: '100B+',
+          label: 'Sessions analyzed / year'
+        },
+        {
+          icon: IconGauge,
+          stat: '10x',
+          label: 'Improved query speed'
+        },
+        {
+          icon: IconDatabase,
+          stat: '2-3x',
+          label: 'Better storage efficiency'
+        }
+      ]
+    },
+
+    // Admixer
+    {
+      featured: false,
+      body: `“ClickHouse was perfect as Big Data Storage for our ML models.” [Read blog](https://clickhouse.com/blog/admixer-aggregates-over-1-billion-unique-users-a-day-using-clickhouse)`,
+      logo: LogoAdmixer,
+      categories: ['ML & GenAI'],
+      stats: [
+        {
+          icon: IconStack,
+          stat: '100 Billion',
+          label: 'Records inserted per day'
+        },
+        {
+          icon: IconPeople,
+          stat: '1 Billion',
+          label: 'Unique users aggregated daily'
+        }
+      ]
+    },
+
+    // QuickCheck
+    {
+      featured: false,
+      body: `"We collect tens of thousands of data points from customers’ phones and other more traditional sources. ClickHouse is used as a way to process all of these SMS messages and extract valuable information used for the scoring and fraud models." [Read blog](https://clickhouse.com/blog/how-quickcheck-uses-clickhouse-to-bring-banking-to-the-unbanked)`,
+      logo: LogoQuickcheck,
+      categories: ['Financial services'],
+      stats: [
+        {
+          icon: IconStack,
+          stat: '100+ Million',
+          label: 'Rows of individual loan data'
+        },
+        {
+          icon: IconPieChart,
+          stat: 'Live dashboards',
+          label: 'Powering financial, fraud, and monitoring analysis'
+        }
+      ]
+    },
+
+    // Ongage
+    {
+      featured: false,
+      body: `"When we tested how much time the same reports would take with ClickHouse, people were amazed. We ran the same data, and in a blink of an eye, we had the results." [Read blog](https://clickhouse.com/blog/ongages-strategic-shift-to-clickhouse-for-real-time-email-marketing)`,
+      logo: LogoOngage,
+      categories: ['Marketing & sales']
+    },
+
+    // AdGreetz
+    {
+      featured: false,
+      body: `"With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud. We got several seconds query time and no materialized views. With ClickHouse Cloud’s production instance, we are getting sub-second query time along with materialized views. The decision to switch was a no-brainer for us.” [Read blog](https://clickhouse.com/blog/adgreetz-processes-millions-of-daily-ad-impressions)`,
+      logo: LogoAdgreetz,
+      categories: ['Business intelligence', 'Marketing & sales'],
+      stats: [
+        {
+          icon: IconHandCoins,
+          stat: '6x',
+          label: 'Cost savings compared to Snowflake'
+        },
+        {
+          icon: IconStopwatch,
+          stat: '< 1 sec',
+          label: 'Query response times'
+        }
+      ]
+    },
+
+    // Juspay
+    {
+      featured: false,
+      body: `“ClickHouse solves most of our problems very efficiently at a small fraction of the price in terms of infrastructure. This is a far better advantage for us in our books” [Read blog](https://clickhouse.com/blog/juspay-analyzes-payment-transactions-in-real-time-with-clickhouse)`,
+      logo: LogoJuspay,
+      categories: ['Financial services'],
+      stats: [
+        {
+          icon: IconHandCoins,
+          stat: '10x',
+          label: 'Cost reduction'
+        }
+      ]
+    },
+
+    // Contentsquare
+    {
+      featured: false,
+      body: `“Moving from Elasticsearch to ClickHouse was a long journey, but this is one of the best tech decisions we ever took.” [Read blog](https://clickhouse.com/blog/contentsquare-migration-from-elasticsearch-to-clickhouse)`,
+      logo: LogoContentsquare,
+      categories: ['E-commerce & retail'],
+      stats: [
+        {
+          icon: IconHandCoins,
+          stat: '11x',
+          label: 'More cost effective'
+        },
+        {
+          icon: IconGauge,
+          stat: '10x',
+          label: 'Performance improvement'
+        },
+        {
+          icon: IconCalendar,
+          stat: '13 month',
+          label: 'Data retention'
+        }
+      ]
+    },
+
+    // HIFI
+    {
+      featured: false,
+      body: `“ClickHouse’s performance exceeds all other column-oriented database management systems. It processes billions of rows and tens of gigabytes of data per server per second”`,
+      logo: LogoHifi,
+      categories: ['Media & entertainment'],
+      stats: [
+        {
+          icon: IconStack,
+          stat: 'Billions',
+          label: 'of rows'
+        },
+        {
+          icon: IconStopwatch,
+          stat: '10s of GBs',
+          label: 'of data processed / second'
+        }
+      ]
+    },
+
+    // DeepL
+    {
+      featured: false,
+      body: `"We aggregate the user’s history in ClickHouse and use it as a data store for training and inference. Even when reading 10s of millions of rows, the performance was very nice and not the bottleneck when training new models." [Read blog](https://clickhouse.com/blog/deepls-journey-with-clickhouse)`,
+      logo: LogoDeepl,
+      categories: ['ML & GenAI']
+    },
+
+    // DENIC
+    {
+      featured: false,
+      body: `"After Testing Hadoop and Spark, We Chose ClickHouse" [Read blog](https://clickhouse.com/blog/denic-improves-query-times-by-10x-with-clickhouse)`,
+      logo: LogoDenic,
+      categories: ['ML & GenAI']
+    },
+
+    // Synq
+    {
+      featured: false,
+      body: `“With dbt execution orchestrated in various intervals, we can also leverage ClickHouse for internal BI use cases. We’ve found this setup very practical, as we can flexibly create new analytical views of our customer data without moving it from our production operational systems.” [Read blog](https://clickhouse.com/blog/building-a-unified-data-platform-with-clickhouse)`,
+      logo: LogoSynq,
+      categories: ['Business intelligence']
+    },
+
+    // Minted
+    {
+      featured: false,
+      body: `“We use Clickhouse Cloud to monitor millions of real-time web performance data points, to ensure we’re getting faster all the time. The platform delivers fast and reliable data management, while also proving to be cost efficient and user-friendly.”`,
+      logo: LogoMinted,
+      categories: ['E-commerce & retail']
+    },
+
+    // Darwinium
+    {
+      featured: false,
+      body: `“With ClickHouse, the data pipeline logic is simplified, and is only dealing with the “streaming” aspect of the write as opposed to all of these complexities. ClickHouse thus enables a simpler write design pattern just like any other new age data lake systems like Hudi etc. but with a more simplistic developer experience.” [Read blog](https://clickhouse.com/blog/fast-feature-rich-and-mutable-clickhouse-powers-darwiniums-security-and-fraud-analytics-use-cases)`,
+      logo: LogoDarwinium,
+      categories: ['Fraud & cybersecurity']
+    },
+
+    // Dassana
+    {
+      featured: false,
+      body: `"We evaluated more than a dozen different big data systems before settling on ClickHouse. No system comes close to ClickHouse when it comes to the flexibility ClickHouse provides" [Read blog](https://clickhouse.com/blog/clickhouse-powers-dassanas-security-data-lake)`,
+      logo: LogoDassana,
+      categories: ['Fraud & cybersecurity']
+    },
+
+    // ExitLag
+    {
+      featured: false,
+      body: `“The benefits were immediate, with faster data processing and accurate analytics that allowed me to make strategic decisions with confidence. ClickHouse opened new horizons for the growth and success of my company, raising our executive vision to levels never reached before.” [Read blog](https://clickhouse.com/blog/boosting-game-performance-exitlag-quest-for-a-better-data-management-system)`,
+      logo: LogoExitlag,
+      categories: ['Gaming']
+    }
+  ]
+}
