@@ -65,13 +65,11 @@ export default function HomePage({
   const gb = useGrowthBook()
 
   if (gb?.ready) {
-    setTimeout(() => {
-      updateLinks(
-        'mktg-website-homepage-sections',
-        gb.getFeatureValue('mktg-website-homepage-rollout', 0).toString(),
-        '.readable-content'
-      )
-    }, 500)
+    updateLinks(
+      'mktg-website-homepage-sections',
+      gb.getFeatureValue('mktg-website-homepage-rollout', 0).toString(),
+      '.readable-content'
+    )
   }
 
   const homepageLayout = useFeatureValue('mktg-website-homepage-rollout', 0)
