@@ -1,15 +1,21 @@
+import { Experiment, Result } from '@growthbook/growthbook'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { Galaxy } from '../../lib/galaxy/web/browser'
-import { Experiment, Result } from '@growthbook/growthbook'
-import { useGrowthBook } from '@growthbook/growthbook-react'
 
 type UTMs = {
   [key: string]: string
 }
 
-const updateLinks = (experimentId?: string, variationId?: string) => {
-  const links = Array.from(document.querySelectorAll('a'))
+export const updateLinks = (
+  experimentId?: string,
+  variationId?: string,
+  target?: string
+) => {
+  let links = Array.from(document.querySelectorAll('a'))
+  if (target) {
+    links = Array.from(document.querySelectorAll(`${target} a`))
+  }
   for (const link of links) {
     if (link.hostname.includes('.cloud')) {
       link.href = appendUTMsToLink(link.href)
