@@ -134,7 +134,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
               href='https://clickhouse.cloud/signUp?loc=nav-get-started'
               target='_self'
               onClick={galaxyOnClick('topNav.navItems.getStartedSelect')}>
-              Get started
+              <span id='nav-bar-cta-button'>Get started</span>
             </CUIButton>
           </div>
 
