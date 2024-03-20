@@ -118,9 +118,9 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
         {/* Hero */}
         <div className='bg-primary-300 py-16 lg:py-24'>
           <div className='section-container mx-auto'>
-            <div className='flex flex-wrap items-center gap-12 lg:flex-nowrap lg:gap-16'>
+            <div className='flex flex-col items-center gap-12 lg:flex-row lg:gap-16'>
               {/* Content column */}
-              <div className='flip-selection w-full text-center text-neutral-900 lg:w-1/2 lg:text-left xl:w-2/5'>
+              <div className='flip-selection order-last w-full text-center text-neutral-900 lg:order-first lg:w-1/2 lg:text-left xl:w-2/5'>
                 <SuiTitle type='h1' weight='bold'>
                   The{' '}
                   <span className='tilted tilted-black'>
@@ -128,9 +128,9 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                   </span>{' '}
                   data warehouse
                 </SuiTitle>
-                <SuiText size='lg' weight='medium' className='my-6'>
-                  ClickHouse is optimized to power data-intensive applications
-                  that run on real-time and historical data. <br />
+                <SuiText weight='medium' className='my-6 !text-xl'>
+                  Optimized to power data-intensive applications that run on
+                  real-time and historical data. <br />
                   With blazing speed and high concurrency.
                 </SuiText>
                 <CUIButton
@@ -143,7 +143,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
               </div>
 
               {/* Image */}
-              <div className='hidden w-full lg:ml-auto lg:block lg:w-auto'>
+              <div className='order-first mx-auto lg:order-last lg:ml-auto lg:mr-0 lg:w-auto'>
                 <Image
                   src='/images/real-time-data-warehouse-hero.svg'
                   width={628}
@@ -189,8 +189,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
               transactional databases to their limits – not just in terms of
               performance, but also with skyrocketing costs. A real-time data
               warehouse is purpose-built for fast, reliable, and cost-effective
-              querying at any scale, and excels at powering workloads that
-              operate on both real-time and historical data.
+              querying at any scale.
             </SuiText>
           </div>
           <div className='mx-auto max-w-[1010px]'>
@@ -205,13 +204,13 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                 },
                 {
                   label: 'Hardware efficiency',
-                  yes: 'Optimized to manage and query petabytes of data, with best-in-class compression ratios for the most efficient storage usage',
+                  yes: 'Optimized to manage petabytes of data, with best-in-class compression ratios for the most efficient storage usage',
                   no: 'Can create data bloat and inefficient usage of system resources'
                 },
                 {
                   label: 'Scale',
                   yes: 'Delivers unparalleled performance for analytical workloads at scale',
-                  no: 'Analytics scales inadequately as data volumes increase'
+                  no: 'Analytics queries scale inadequately as data volumes increase'
                 },
                 {
                   label: 'Complexity',
@@ -238,7 +237,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
 
         {/* Why use RT data warehouse */}
         <div className='my-24 mx-auto px-4 xl:flex xl:max-w-[970px] xl:items-start xl:gap-12 xl:px-0 2xl:block 2xl:max-w-none'>
-          <div className='mx-auto mb-12 flex max-w-[830px] flex-1 flex-col items-center gap-6 text-center xl:sticky xl:top-24 xl:mb-0 xl:items-start xl:text-left 2xl:top-0 2xl:mb-24 2xl:items-center 2xl:text-center'>
+          <div className='mx-auto mb-12 flex max-w-[830px] flex-1 flex-col items-center gap-6 text-center xl:sticky xl:top-24 xl:mb-0 xl:items-start xl:text-left 2xl:top-0 2xl:mb-12 2xl:items-center 2xl:text-center'>
             <SuiTitle type='h2'>Why use a real-time data warehouse?</SuiTitle>
             <SuiText className='max-w-[600px] opacity-70 xl:max-w-none 2xl:max-w-[600px]'>
               Companies leverage ClickHouse Cloud as their real-time data
@@ -249,12 +248,12 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
           {/* Timeline */}
           <div
             ref={timelineContainerRef}
-            className='relative mx-auto max-w-[715px] flex-shrink-0 flex-grow-0 xl:max-w-[580px] 2xl:mt-24 2xl:max-w-none'>
+            className='relative mx-auto max-w-[715px] flex-shrink-0 flex-grow-0 xl:max-w-[580px] 2xl:max-w-none'>
             <SuiText
               size='sm'
               weight='semibold'
               className='mb-12 text-center uppercase tracking-widest 2xl:mb-36'>
-              Evolution of data warehouses for modern cloud infrastructure
+              Evolution of data warehouses
             </SuiText>
 
             {/* Line */}
@@ -274,7 +273,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
             {/* Items container */}
             <div
               style={{ paddingBottom: timelineExternalResourceHeight }}
-              className='section-container grid grid-cols-1 gap-16 pr-0 pl-8 sm:pl-32 md:pl-44 lg:pl-36 2xl:grid-cols-3 2xl:pl-0'>
+              className='section-container grid grid-cols-1 gap-16 pr-0 pl-8 sm:pl-32 md:pl-44 xl:pl-36 2xl:grid-cols-3 2xl:pl-0'>
               <div className='relative flex flex-col'>
                 <TimelineCard
                   ref={(el: HTMLSpanElement) =>
@@ -330,7 +329,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                     },
                     {
                       type: ItemArrow,
-                      text: 'Retrofitting these for analytics or real-time workloads can become prohibitively costly'
+                      text: 'Retrofitting these for analytics or real-time workloads started to become prohibitively costly'
                     }
                   ]}
                   logos={[
@@ -828,7 +827,7 @@ const TimelineCard = forwardRef(function TimelineCard(
     <>
       {/* Floating label */}
       <span
-        className={`relative pl-4 font-bold leading-tight text-primary-300 sm:absolute sm:-left-32 sm:w-24 sm:px-4 sm:text-center md:-left-44 md:w-36 lg:-left-36 lg:w-28 lg:pl-0 lg:pr-8 2xl:left-1/2 2xl:-top-24 2xl:w-full 2xl:-translate-x-1/2 2xl:px-0 ${
+        className={`relative pl-4 font-bold leading-tight text-primary-300 sm:absolute sm:-left-32 sm:w-24 sm:px-4 sm:text-center md:-left-44 md:w-36 xl:-left-36 xl:w-28 xl:pl-0 xl:pr-8 2xl:left-1/2 2xl:-top-24 2xl:w-full 2xl:-translate-x-1/2 2xl:px-0 ${
           active ? '-top-1.5 sm:top-4' : '-top-1.5'
         }`}>
         {!active && <>{label}</>}
@@ -902,7 +901,7 @@ function QuoteCard({
   alternative: string
 }) {
   return (
-    <div className='flex flex-col gap-6 rounded-lg bg-neutral-800 p-6 text-lg text-white md:p-10 md:text-xl lg:p-8 lg:text-lg xl:p-10 xl:text-xl'>
+    <div className='flex flex-col gap-6 rounded-lg bg-neutral-800 p-6 text-lg text-white md:p-10 lg:p-8 xl:p-10'>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         width='36'
