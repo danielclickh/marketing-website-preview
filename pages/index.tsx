@@ -71,7 +71,7 @@ export default function HomePage({
         gb.getFeatureValue('mktg-website-homepage-rollout', 0).toString(),
         '.readable-content'
       )
-    }, 100)
+    }, 500)
   }
 
   const homepageLayout = useFeatureValue('mktg-website-homepage-rollout', 0)
