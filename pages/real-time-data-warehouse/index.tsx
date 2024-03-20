@@ -59,6 +59,7 @@ export default function Page({
 
     const calculatePosition = () => {
       if (resizeDelay) clearTimeout(resizeDelay)
+      setTimelineCoords(null)
       resizeDelay = setTimeout(() => {
         if (
           timelineContainerRef.current &&
