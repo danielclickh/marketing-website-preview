@@ -15,7 +15,6 @@ export const updateLinks = (
   let links = Array.from(document.querySelectorAll('a'))
   if (target) {
     links = Array.from(document.querySelectorAll(`${target} a`))
-    console.log('has target')
   }
   for (const link of links) {
     if (link.hostname.includes('.cloud')) {
