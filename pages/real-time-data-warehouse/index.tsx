@@ -156,7 +156,7 @@ export default function Page({
                   type='primary-dark'
                   size='lg'
                   className='mx-auto !px-6 lg:mx-0'>
-                  Try it for free
+                  Start free trial
                 </CUIButton>
               </div>
 

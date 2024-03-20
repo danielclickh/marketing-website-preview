@@ -146,6 +146,7 @@ export default function HomepageSectionTrustedByAlt({
             loopAddBlankSlides={false}
             loopPreventsSliding={true}
             allowTouchMove={false}
+            initialSlide={0}
             className={styles.customSwiperStyles}>
             {logos1.map((customer, index) => {
               return (
@@ -187,6 +188,7 @@ export default function HomepageSectionTrustedByAlt({
             loopAddBlankSlides={false}
             loopPreventsSliding={true}
             allowTouchMove={false}
+            initialSlide={0}
             className={styles.customSwiperStyles}>
             {logos2.map((customer, index) => {
               return (
