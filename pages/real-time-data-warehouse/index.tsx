@@ -151,7 +151,8 @@ export default function Page({
                   With blazing speed and high concurrency.
                 </SuiText>
                 <CUIButton
-                  href='/company/contact'
+                  href='https://clickhouse.cloud/signUp'
+                  target='_blank'
                   type='primary-dark'
                   size='lg'
                   className='mx-auto !px-6 lg:mx-0'>
@@ -249,7 +250,8 @@ export default function Page({
             />
           </div>
           <CUIButton
-            href='/company/contact'
+            href='https://clickhouse.cloud/signUp'
+            target='_blank'
             type='primary'
             size='lg'
             className='mx-auto mt-16 !px-6'>
@@ -532,78 +534,37 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
             <IndustryCard
               title='Financial Services'
               text='Trading and market analytics, fraud detection, risk monitoring, blockchain, and more.'
-              icon={
-                <Image
-                  src='/images/real-time-data-warehouse/icon-money.svg'
-                  alt='Money icon'
-                  width={32}
-                  height={33}
-                />
-              }
+              icon='/images/real-time-data-warehouse/icon-money.svg'
             />
             <IndustryCard
               title='E-Commerce and Retail'
               text='Real-time inventory monitoring and overall tracking for online businesses.'
-              icon={
-                <Image
-                  src='/images/real-time-data-warehouse/icon-retail.svg'
-                  alt='Retail icon'
-                  width={32}
-                  height={33}
-                />
-              }
+              icon='/images/real-time-data-warehouse/icon-retail.svg'
             />
             <IndustryCard
               title='Marketing and Sales'
               text='Data store for Adtech, web analytics, SEO, and much more.'
-              icon={
-                <Image
-                  src='/images/real-time-data-warehouse/icon-marketing.svg'
-                  alt='Marketing icon'
-                  width={27}
-                  height={28}
-                />
-              }
+              icon='/images/real-time-data-warehouse/icon-marketing.svg'
             />
             <IndustryCard
               title='Technology'
               text='Including IoT, Energy, Biotech, Manufacturing, and others.'
-              icon={
-                <Image
-                  src='/images/real-time-data-warehouse/icon-technology.svg'
-                  alt='Technology icon'
-                  width={24}
-                  height={25}
-                />
-              }
+              icon='/images/real-time-data-warehouse/icon-technology.svg'
             />
             <IndustryCard
               title='Media and Entertainment'
               text='Assess the performance of videos, assets, and other media in real‑time.'
-              icon={
-                <Image
-                  src='/images/real-time-data-warehouse/icon-media.svg'
-                  alt='Media icon'
-                  width={32}
-                  height={33}
-                />
-              }
+              icon='/images/real-time-data-warehouse/icon-media.svg'
             />
             <IndustryCard
               title='Gaming'
               text='Understand player behavior, gaming dynamics, and other key insights used to improve overall gameplay.'
-              icon={
-                <Image
-                  src='/images/real-time-data-warehouse/icon-gaming.svg'
-                  alt='Gaming icon'
-                  width={30}
-                  height={23}
-                />
-              }
+              icon='/images/real-time-data-warehouse/icon-gaming.svg'
             />
           </div>
           <CUIButton
-            href='/company/contact'
+            href='https://clickhouse.cloud/signUp'
+            target='_blank'
             type='primary'
             size='lg'
             className='mx-auto mt-16 !px-6'>
@@ -937,10 +898,10 @@ function QuoteCard({
           d='M0 27.3452v-7.8239c0-2.25.4219-4.5895 1.2656-7.0185.8693-2.4545 2.0455-4.7684 3.5284-6.9417C6.3026 3.3622 7.99 1.5085 9.8565 0l6.4432 4.1804c-1.5085 2.2756-2.7741 4.6534-3.7969 7.1335-.9971 2.4546-1.4829 5.1648-1.4573 8.1307v7.9006H0Zm19.4446 0v-7.8239c0-2.25.4219-4.5895 1.2656-7.0185.8693-2.4545 2.0455-4.7684 3.5284-6.9417C25.7472 3.3622 27.4347 1.5085 29.3011 0l6.4432 4.1804c-1.5085 2.2756-2.7741 4.6534-3.7969 7.1335-.9971 2.4546-1.4829 5.1648-1.4573 8.1307v7.9006H19.4446Z'
         />
       </svg>
-      <Markdown children={quote} className='font-medium md:mb-8' />
+      <Markdown children={quote} className='font-medium !text-white md:mb-8' />
       <div className='mt-auto flex flex-col justify-between gap-6 sm:flex-row sm:items-center'>
         {logo}
-        <span className='order-first font-mono text-primary-300 sm:order-last sm:text-right'>
+        <span className='order-first font-mono text-base text-primary-300 sm:order-last sm:text-right'>
           Alternative to
           <br className='hidden sm:block' />
           {alternative}
@@ -957,12 +918,20 @@ function IndustryCard({
 }: {
   title: string
   text: string
-  icon: React.ReactElement
+  icon: string
 }) {
   return (
     <div className='flex divide-x divide-neutral-600 rounded bg-neutral-800 p-4 pl-0'>
       <div className='flex w-20 flex-shrink-0 flex-grow-0 items-start justify-center'>
-        <div className='flex h-8 w-8 items-center justify-center'>{icon}</div>
+        <div className='flex h-8 w-8 items-center justify-center'>
+          <Image
+            className='h-full w-full object-scale-down'
+            src={icon}
+            alt={`${title} icon`}
+            width={32}
+            height={32}
+          />
+        </div>
       </div>
       <div className='flex-1 pl-4'>
         <SuiTitle type='h3' className='mb-4 !text-2xl text-primary-300'>
