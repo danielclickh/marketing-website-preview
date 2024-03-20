@@ -65,6 +65,15 @@ type TestimonialsJson = {
 }
 const testimonialsJson: Array<TestimonialsJson> = [
   {
+    id: 101,
+    logo: '/images/sony.svg',
+    category: 'Analytics',
+    text: 'At Sony Entertainment Television, we ingest tens of millions of CDN records into ClickHouse Cloud and run millions of queries against them daily. This allows our operations team to monitor the delivery of our content in real-time, and analyze/investigate potential issues the moment they arise. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.',
+    customer: 'Sony',
+    width: 80,
+    height: 17
+  },
+  {
     id: 1,
     logo: '/images/use-cases/posthog-logo.svg',
     category: 'Analytics',
