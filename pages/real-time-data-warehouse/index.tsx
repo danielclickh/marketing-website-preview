@@ -55,64 +55,58 @@ export default function Page({
   const timelineExternalResourcesRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    let resizeDelay: null | NodeJS.Timeout = null
-
     const calculatePosition = () => {
-      if (resizeDelay) clearTimeout(resizeDelay)
-      setTimelineCoords(null)
-      resizeDelay = setTimeout(() => {
-        if (
-          timelineContainerRef.current &&
-          timelineLineRef.current &&
-          timelineDotRefs.current
-        ) {
-          const container = timelineContainerRef.current
-          const line = timelineLineRef.current
-          const first = timelineDotRefs.current[0]
-          const last =
-            timelineDotRefs.current[timelineDotRefs.current.length - 1]
-          if (first && last) {
-            const containerRect = container.getBoundingClientRect()
-            const lineRect = line.getBoundingClientRect()
-            const firstRect = first.getBoundingClientRect()
-            const lastRect = last.getBoundingClientRect()
+      if (
+        timelineContainerRef.current &&
+        timelineLineRef.current &&
+        timelineDotRefs.current
+      ) {
+        const container = timelineContainerRef.current
+        const line = timelineLineRef.current
+        const first = timelineDotRefs.current[0]
+        const last = timelineDotRefs.current[timelineDotRefs.current.length - 1]
+        if (first && last) {
+          const containerRect = container.getBoundingClientRect()
+          const lineRect = line.getBoundingClientRect()
+          const firstRect = first.getBoundingClientRect()
+          const lastRect = last.getBoundingClientRect()
 
-            const is2xl = window.innerWidth >= 1536
+          const is2xl = window.innerWidth >= 1536
 
-            const round = (value: number) => parseFloat(value.toFixed(2))
-            setTimelineCoords({
-              top: round(
-                firstRect.top -
-                  containerRect.top +
-                  firstRect.height / 2 -
-                  (is2xl ? lineRect.height / 2 : 0)
-              ),
-              left: round(
-                firstRect.left -
-                  containerRect.left +
-                  firstRect.width / 2 -
-                  (is2xl ? 0 : lineRect.width / 2)
-              ),
-              bottom: round(
-                containerRect.bottom -
-                  lastRect.bottom +
-                  lastRect.height / 2 -
-                  (is2xl ? lineRect.height / 2 : 0)
-              ),
-              right: round(
-                containerRect.right -
-                  lastRect.right +
-                  lastRect.width / 2 -
-                  (is2xl ? 0 : lineRect.width / 2)
-              )
-            })
-          }
+          const round = (value: number) => parseFloat(value.toFixed(2))
+          setTimelineCoords({
+            top: round(
+              firstRect.top -
+                containerRect.top +
+                firstRect.height / 2 -
+                (is2xl ? lineRect.height / 2 : 0)
+            ),
+            left: round(
+              firstRect.left -
+                containerRect.left +
+                firstRect.width / 2 -
+                (is2xl ? 0 : lineRect.width / 2)
+            ),
+            bottom: round(
+              containerRect.bottom -
+                lastRect.bottom +
+                lastRect.height / 2 -
+                (is2xl ? lineRect.height / 2 : 0)
+            ),
+            right: round(
+              containerRect.right -
+                lastRect.right +
+                lastRect.width / 2 -
+                (is2xl ? 0 : lineRect.width / 2)
+            )
+          })
         }
-      }, 100)
+      }
     }
 
     // Set initial values on mount
     calculatePosition()
+    setTimeout(calculatePosition, 500) // Give the page time to adjust
 
     window.addEventListener('resize', calculatePosition)
     return () => window.removeEventListener('resize', calculatePosition)
