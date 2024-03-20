@@ -71,7 +71,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       session_id: glx_id,
       id: glx_id
     })
-
     // Subscribe to route change events and update GrowthBook
     router.events.on('routeChangeComplete', updateGrowthBookURL)
     return () => router.events.off('routeChangeComplete', updateGrowthBookURL)

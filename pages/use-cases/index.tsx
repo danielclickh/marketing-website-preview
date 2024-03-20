@@ -13,7 +13,7 @@ import UseCasesComparisons from '../../components/UseCasesComparisons'
 import { findAll, findOne } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { useCasesPageDataProps } from '../../types/useCasesPage'
-import {galaxyOnPage} from "../../lib/galaxy/galaxy";
+import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -90,7 +90,7 @@ function UseCasesPage({
   individualUseCases,
   quotes
 }: useCasesPageDataProps) {
-    galaxyOnPage('useCasesPage');
+  galaxyOnPage('useCasesPage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
@@ -215,13 +215,13 @@ function UseCasesPage({
                                     key={index}
                                     className={`${
                                       index === 0
-                                        ? 'h-[86px] lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-2' // First element
+                                        ? 'h-[86px] lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-2'
                                         : index === 1
-                                        ? 'h-[86px] lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:row-end-3' // Second element
+                                        ? 'h-[86px] lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:row-end-3'
                                         : index === 2
-                                        ? 'lg:col-start-2 lg:col-end-4 lg:row-start-1 lg:row-end-3' // Third element spanning two rows
+                                        ? 'lg:col-start-2 lg:col-end-4 lg:row-start-1 lg:row-end-3'
                                         : index === 3
-                                        ? 'h-[86px] lg:col-start-1 lg:col-end-4 lg:row-start-3 lg:row-end-4' // Fourth element spanning full width
+                                        ? 'h-[86px] lg:col-start-1 lg:col-end-4 lg:row-start-3 lg:row-end-4'
                                         : ''
                                     } logos-color-swap flex w-full items-center border-l border-b border-[#464641] last:border-r`}>
                                     <div className='color-swap mx-auto w-full object-contain'>
@@ -271,6 +271,9 @@ function UseCasesPage({
                                               : client.clientName ===
                                                 'Darwinium'
                                               ? 'max-w-[140px] lg:max-w-[160px]'
+                                              : client.clientName ===
+                                                'RunReveal'
+                                              ? 'max-w-[140px] lg:max-w-[150px]'
                                               : 'max-h-[64px] max-w-[120px] lg:max-w-[120px]'
                                           }
                                           mx-auto mt-auto
