@@ -1,0 +1,32 @@
+$mask-width: 150px;
+
+.maskCarousel {
+  :global {
+    .mask-carousel {
+      position: relative;
+      mask: {
+        image: linear-gradient(90deg, rgba(#000, 0) 0%, rgba(#000, 1) #{$mask-width}, rgba(#000, 1) calc(100% - #{$mask-width}), rgba(#000, 0) 100%);
+        size: calc(100% + #{$mask-width * 2}) 100%;
+        position: center;
+      }
+      transition: mask-size 0.4s;
+    }
+  }
+
+  &:hover {
+    :global {
+      .mask-carousel {
+        mask-size: 100% 100%;
+      }
+    }
+  }
+}
+
+
+.customSwiperStyles {
+  :global {
+    .swiper-wrapper {
+      align-items: center;
+    }
+  }
+}

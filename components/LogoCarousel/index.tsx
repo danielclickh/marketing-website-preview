@@ -19,7 +19,7 @@ const PauseHoverComponent: React.FC<Props> = ({
   speedClass1,
   speedClass2,
   fixShape,
-  logoColor
+  logoColor = 'current'
 }) => {
   // Update the Logo key to darkLogoPng
   let updatedData = logos
@@ -34,9 +34,9 @@ const PauseHoverComponent: React.FC<Props> = ({
   }
 
   return (
-    <div className='pause-hover hide-scrollbar relative flex overflow-x-scroll md:overflow-x-hidden'>
+    <div className='pause-hover hide-scrollbar relative flex overflow-x-scroll text-black md:overflow-x-hidden'>
       <div
-        className={`flex content-center items-center whitespace-nowrap py-3 ${speedClass1}`}>
+        className={`flex content-center items-center gap-12 whitespace-nowrap py-3 ${speedClass1}`}>
         {updatedData.map((customer, index) => (
           <CarouselItem
             key={index}
@@ -47,7 +47,7 @@ const PauseHoverComponent: React.FC<Props> = ({
         ))}
       </div>
       <div
-        className={`absolute top-0 flex items-center whitespace-nowrap py-3 ${speedClass2}`}>
+        className={`absolute top-0 flex items-center gap-12 whitespace-nowrap py-3 ${speedClass2}`}>
         {updatedData.map((customer, index) => (
           <CarouselItem
             key={index}
