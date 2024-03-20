@@ -35,6 +35,7 @@ export const onExperimentViewed = (
   const experimentId = experiment.key
   const variationId = result.key
   updateLinks(experimentId, variationId)
+  console.log(experimentId, variationId)
 }
 
 const UTMPersist = () => {
