@@ -14,7 +14,7 @@ export default function Footer({
     <div className='flex flex-col bg-neutral-900 pb-8 pt-16'>
       <div className='section-container mx-auto w-full justify-between gap-8 pb-11 md:flex lg:gap-10'>
         <div className='flex w-full flex-col'>
-          <div className='sitemap flex flex-col gap-y-8 lg:flex-row'>
+          <div className='sitemap flex flex-col gap-y-8 lg:flex-row lg:gap-x-3'>
             {topLevelFooterMenu.map((topMenu) => (
               <div key={topMenu.title} className='flex flex-col lg:w-4/12'>
                 <div className='mb-3 text-sm font-semibold text-neutral-0'>

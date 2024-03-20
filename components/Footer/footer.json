@@ -35,7 +35,7 @@
 			},
 			{
 				"id": 123,
-				"name": "RT Data Warehouse",
+				"name": "Real-time Data Warehouse",
 				"href": "/real-time-data-warehouse",
 				"target": "_self"
 			}
