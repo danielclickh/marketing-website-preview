@@ -11,11 +11,15 @@ import 'swiper/css'
 
 interface Props extends React.HTMLProps<HTMLDivElement> {
   customerStories: HomepageCustomerStories
+  invertLogos?: boolean
+  heading?: string
 }
 
 export default function HomepageSectionTrustedByAlt({
   customerStories,
   className = '',
+  invertLogos = true,
+  heading = 'ClickHouse is Trusted by',
   ...props
 }: Props) {
   const resizeImageDimension = (size: number) =>
@@ -113,12 +117,12 @@ export default function HomepageSectionTrustedByAlt({
   }
 
   return (
-    <div className={`my-16 ${className}`} {...props}>
+    <div className={`my-16 text-primary-300 ${className}`} {...props}>
       <SuiText
         weight='bold'
         size='sm'
-        className='mb-10 text-center uppercase tracking-[0.0875rem] text-primary-300'>
-        ClickHouse is Trusted by
+        className='mb-10 text-center uppercase tracking-[0.0875rem]'>
+        {heading}
       </SuiText>
       <div className={`group/container relative ${styles.maskCarousel}`}>
         <div className='mask-carousel space-y-6 text-black'>
@@ -147,7 +151,9 @@ export default function HomepageSectionTrustedByAlt({
               return (
                 <SwiperSlide key={index} className='!w-auto'>
                   <div
-                    className='inline-block opacity-90 grayscale invert'
+                    className={`inline-block ${
+                      invertLogos ? 'opacity-90 grayscale invert' : ''
+                    }`}
                     style={{ width: customer.darkLogoPng.width || 'auto' }}>
                     {customer.href ? (
                       <Link href={customer.href} className='inline'>
@@ -186,7 +192,9 @@ export default function HomepageSectionTrustedByAlt({
               return (
                 <SwiperSlide key={index} className='!w-auto'>
                   <div
-                    className='inline-block opacity-90 grayscale invert'
+                    className={`inline-block ${
+                      invertLogos ? 'opacity-90 grayscale invert' : ''
+                    }`}
                     style={{ width: customer.darkLogoPng.width || 'auto' }}>
                     {customer.href ? (
                       <Link href={customer.href} className='inline'>
@@ -203,7 +211,7 @@ export default function HomepageSectionTrustedByAlt({
         </div>
         <button
           onClick={goPrev}
-          className='group/button absolute top-0 left-0 bottom-0 z-10 flex w-24 items-center justify-center text-primary-300 opacity-0 transition-opacity group-hover/container:opacity-100'>
+          className='group/button absolute top-0 left-0 bottom-0 z-10 flex w-24 items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100'>
           <svg
             className='transition-transform group-hover/button:-translate-x-1'
             xmlns='http://www.w3.org/2000/svg'
@@ -219,7 +227,7 @@ export default function HomepageSectionTrustedByAlt({
         </button>
         <button
           onClick={goNext}
-          className='group/button absolute top-0 right-0 bottom-0 z-10 flex w-24 items-center justify-center text-primary-300 opacity-0 transition-opacity group-hover/container:opacity-100'>
+          className='group/button absolute top-0 right-0 bottom-0 z-10 flex w-24 items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100'>
           <svg
             className='transition-transform group-hover/button:translate-x-1'
             xmlns='http://www.w3.org/2000/svg'
