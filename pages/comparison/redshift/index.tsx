@@ -1,24 +1,25 @@
-import {GetStaticProps} from 'next'
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
-import {CUICard} from '../../../components/ClickUI'
+import { CUICard } from '../../../components/ClickUI'
 import ContactForm from '../../../components/ContactForm'
 import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
-import {getNewsLetterData} from '../../../components/NewsLetter/getNewsLetterData'
+import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
 import ResponsiveEmbed from '../../../components/ResponsiveEmbed'
-import {StrapiImage} from '../../../components/StrapiElements'
-import {findAll} from '../../../lib/api/strapi'
-import {getCommonProps} from '../../../lib/utils/getCommonProps'
-import {REVALIDATE_SECONDS} from '../../../lib/utils/revalidationConfig'
-import {ComparisonProps} from '../../../types/comparisons'
-import {galaxyOnPage} from '../../../lib/galaxy/galaxy'
+import { StrapiImage } from '../../../components/StrapiElements'
+import { findAll } from '../../../lib/api/strapi'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
+import { ComparisonProps } from '../../../types/comparisons'
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import MarketoForm from '../../../components/MarketoForm'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
   async function getStaticProps() {
@@ -92,7 +93,7 @@ export default function ComparisonPage({
   seo,
   comparison
 }: ComparisonProps) {
-  galaxyOnPage('redshiftComparisonPage');
+  galaxyOnPage('redshiftComparisonPage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
@@ -148,10 +149,10 @@ export default function ComparisonPage({
               <div>
                 <div className='mb-12 lg:mb-0'>
                   <div className='lg:max-w-lg'>
-                    <h3 className='mb-6 text-center font-basier text-2xl font-light text-neutral-0'>
+                    <h3 className='mb-6 text-center font-basier text-xl font-light text-neutral-0'>
                       {comparison.formTitle}
                     </h3>
-                    <ContactForm />
+                    <MarketoForm formId={'1137'} />
                   </div>
                 </div>
               </div>
@@ -159,7 +160,7 @@ export default function ComparisonPage({
           </div>
         </div>
         <div className='clip-inverted-triangle -mt-16 xl:-mt-28'>
-          <div className='relative z-40 mx-auto mt-4 max-w-4xl pt-20 pb-0 lg:mt-12'>
+          <div className='relative z-40 mx-auto mt-4 max-w-4xl pt-20 pb-0 lg:mt-6'>
             <div className='mx-auto flex items-center gap-4 px-4 md:px-0'>
               <div className='container mx-auto max-w-4xl border-none px-6  2xl:px-0'>
                 <div className='overflow-hidden rounded-xl'>
@@ -386,11 +387,11 @@ export default function ComparisonPage({
             alt='Migrations'
             className='mb-4 fill-none'
           />
-          <h2 className='mb-12 text-center font-basier text-3xl font-semibold lg:mb-16'>
+          <h2 className='mb-12 text-center font-basier text-xl font-semibold lg:mb-16'>
             Contact us for help with your migration
           </h2>
           <div className='mx-auto max-w-lg'>
-            <ContactForm />
+            <MarketoForm formId={'1137'} />
           </div>
         </div>
       </div>
