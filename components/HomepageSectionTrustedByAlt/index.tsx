@@ -13,6 +13,8 @@ interface Props extends React.HTMLProps<HTMLDivElement> {
   customerStories: HomepageCustomerStories
   invertLogos?: boolean
   heading?: string
+  firstCarouselInitialSlide?: number
+  secondCarouselInitialSlide?: number
 }
 
 export default function HomepageSectionTrustedByAlt({
@@ -20,6 +22,8 @@ export default function HomepageSectionTrustedByAlt({
   className = '',
   invertLogos = true,
   heading = 'ClickHouse is Trusted by',
+  firstCarouselInitialSlide = 0,
+  secondCarouselInitialSlide = 0,
   ...props
 }: Props) {
   const resizeImageDimension = (size: number) =>
@@ -146,7 +150,7 @@ export default function HomepageSectionTrustedByAlt({
             loopAddBlankSlides={false}
             loopPreventsSliding={true}
             allowTouchMove={false}
-            initialSlide={0}
+            initialSlide={firstCarouselInitialSlide}
             className={styles.customSwiperStyles}>
             {logos1.map((customer, index) => {
               return (
@@ -188,7 +192,7 @@ export default function HomepageSectionTrustedByAlt({
             loopAddBlankSlides={false}
             loopPreventsSliding={true}
             allowTouchMove={false}
-            initialSlide={0}
+            initialSlide={secondCarouselInitialSlide}
             className={styles.customSwiperStyles}>
             {logos2.map((customer, index) => {
               return (
