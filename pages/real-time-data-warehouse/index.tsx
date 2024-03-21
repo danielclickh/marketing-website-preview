@@ -187,8 +187,11 @@ export default function Page({
           <div className='mx-auto mb-12 flex max-w-[830px] flex-1 flex-col items-center gap-6 text-center xl:sticky xl:top-24 xl:mb-0 xl:items-start xl:text-left 2xl:relative 2xl:top-0 2xl:mb-12 2xl:items-center 2xl:text-center'>
             <SuiTitle type='h2'>What is a real-time data warehouse?</SuiTitle>
             <SuiText className='max-w-[600px] opacity-70 xl:max-w-none 2xl:max-w-[600px]'>
-              Companies leverage ClickHouse Cloud as their real-time data
-              warehouse to ensure that analytics shine at any scale.
+              Analytics push traditional data warehouses, lakes, and
+              transactional databases to their limits – not just in terms of
+              performance, but also with skyrocketing costs. A real-time data
+              warehouse is purpose-built for fast, reliable, and cost-effective
+              querying at any scale.
             </SuiText>
           </div>
 
@@ -416,11 +419,8 @@ export default function Page({
             </svg>
             <SuiTitle type='h2'>Why use a real-time data warehouse?</SuiTitle>
             <SuiText className='opacity-70'>
-              Analytics push traditional data warehouses, lakes, and
-              transactional databases to their limits – not just in terms of
-              performance, but also with skyrocketing costs. A real-time data
-              warehouse is purpose-built for fast, reliable, and cost-effective
-              querying at any scale.
+              Companies leverage ClickHouse Cloud as their real-time data
+              warehouse to ensure that analytics shine at any scale.
             </SuiText>
           </div>
           <div className='mx-auto max-w-[1010px]'>
