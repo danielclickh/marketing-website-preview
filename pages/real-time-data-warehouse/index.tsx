@@ -823,7 +823,7 @@ const TimelineCard = forwardRef(function TimelineCard(
         {active && (
           <>
             <span className='md:hidden'>{label}</span>
-            <span className='tilted tilted-yellow -my-2 hidden py-2 px-3 md:inline-block 2xl:-top-4'>
+            <span className='tilted tilted-yellow -my-2 hidden py-2 px-3 md:inline-block'>
               <span className='tilted-content'>{label}</span>
             </span>
           </>
