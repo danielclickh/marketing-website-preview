@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
@@ -19,7 +19,9 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import { ComparisonProps } from '../../../types/comparisons'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
-import MarketoForm from '../../../components/MarketoForm'
+import MarketoForm, {
+  SpoofedMarketoObject
+} from '../../../components/MarketoForm'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
   async function getStaticProps() {
@@ -94,6 +96,10 @@ export default function ComparisonPage({
   comparison
 }: ComparisonProps) {
   galaxyOnPage('redshiftComparisonPage')
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
+  const [marketoForm, setMarketoForm] = useState<SpoofedMarketoObject>()
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
@@ -152,7 +158,43 @@ export default function ComparisonPage({
                     <h3 className='mb-6 text-center font-basier text-xl font-light text-neutral-0'>
                       {comparison.formTitle}
                     </h3>
-                    <MarketoForm formId={'1137'} />
+                    <>
+                      {!formSuccess && (
+                        <MarketoForm
+                          formId={'1137'}
+                          onLoad={(formObject) => {
+                            setFormLoaded(true)
+                            setMarketoForm(formObject)
+                          }}
+                          onSuccess={() => {
+                            setFormSuccess(true)
+                            // Delay needed to allow the ref to update before scrolling
+                            setTimeout(() => {
+                              formSuccessRef.current?.scrollIntoView({
+                                behavior: 'smooth'
+                              })
+                            }, 10)
+
+                            return false // Stops page from reloading
+                          }}
+                        />
+                      )}
+
+                      {!formLoaded && (
+                        <div className='text-center'>Loading form...</div>
+                      )}
+
+                      {formSuccess && (
+                        <div ref={formSuccessRef}>
+                          <h3 className='text-center text-2xl font-bold'>
+                            Thank you for your submission!
+                          </h3>
+                          <p className='mt-2 text-center text-neutral-200'>
+                            We will be in touch soon.
+                          </p>
+                        </div>
+                      )}
+                    </>
                   </div>
                 </div>
               </div>
@@ -391,7 +433,43 @@ export default function ComparisonPage({
             Contact us for help with your migration
           </h2>
           <div className='mx-auto max-w-lg'>
-            <MarketoForm formId={'1137'} />
+            <>
+              {!formSuccess && (
+                <MarketoForm
+                  formId={'1137'}
+                  onLoad={(formObject) => {
+                    setFormLoaded(true)
+                    setMarketoForm(formObject)
+                  }}
+                  onSuccess={() => {
+                    setFormSuccess(true)
+                    // Delay needed to allow the ref to update before scrolling
+                    setTimeout(() => {
+                      formSuccessRef.current?.scrollIntoView({
+                        behavior: 'smooth'
+                      })
+                    }, 10)
+
+                    return false // Stops page from reloading
+                  }}
+                />
+              )}
+
+              {!formLoaded && (
+                <div className='text-center'>Loading form...</div>
+              )}
+
+              {formSuccess && (
+                <div ref={formSuccessRef}>
+                  <h3 className='text-center text-2xl font-bold'>
+                    Thank you for your submission!
+                  </h3>
+                  <p className='mt-2 text-center text-neutral-200'>
+                    We will be in touch soon.
+                  </p>
+                </div>
+              )}
+            </>
           </div>
         </div>
       </div>
