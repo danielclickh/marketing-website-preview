@@ -26,7 +26,8 @@ export const getStaticProps: GetStaticProps = async function getStaticProps() {
       seo: {
         title: 'Real-time Data Warehouse - ClickHouse',
         description: '',
-        path: '/real-time-data-warehouse'
+        path: '/real-time-data-warehouse',
+        image: [{ url: '/images/real-time-data-warehouse/social-banner.png' }]
       },
       ...data,
       ...commonProps
@@ -147,11 +148,11 @@ export default function Page({
                 </SuiTitle>
                 <SuiText weight='medium' className='my-6 !text-xl'>
                   Optimized to power data-intensive applications that run on
-                  real-time and historical data. <br />
-                  With blazing speed and high concurrency.
+                  real-time and historical data. With blazing speed and high
+                  concurrency.
                 </SuiText>
                 <CUIButton
-                  href='https://clickhouse.cloud/signUp'
+                  href='https://clickhouse.cloud/signUp?loc=rt-page-hero'
                   target='_blank'
                   type='primary-dark'
                   size='lg'
@@ -179,90 +180,9 @@ export default function Page({
           customerStories={customerStories}
         />
 
-        {/* What is RT data warehouse */}
-        <div className='section-container my-24'>
-          <div className='mx-auto mb-24 flex max-w-[830px] flex-col items-center gap-6 text-center'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='80'
-              height='80'
-              fill='none'
-              viewBox='0 0 80 80'>
-              <rect
-                width='78'
-                height='78'
-                x='1'
-                y='1'
-                stroke='#FAFF69'
-                strokeWidth='2'
-                rx='7'
-              />
-              <g
-                stroke='#FAFF69'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'>
-                <path d='M40 40c9.1127 0 16.5-4.0294 16.5-9s-7.3873-9-16.5-9-16.5 4.0294-16.5 9 7.3873 9 16.5 9Z' />
-                <path d='M23.5 31v9c0 4.9706 7.3875 9 16.5 9s16.5-4.0294 16.5-9v-9' />
-                <path d='M23.5 40v9c0 4.9706 7.3875 9 16.5 9s16.5-4.0294 16.5-9v-9' />
-              </g>
-            </svg>
-            <SuiTitle type='h2'>What is a real-time data warehouse?</SuiTitle>
-            <SuiText className='opacity-70'>
-              Analytics push traditional data warehouses, lakes, and
-              transactional databases to their limits – not just in terms of
-              performance, but also with skyrocketing costs. A real-time data
-              warehouse is purpose-built for fast, reliable, and cost-effective
-              querying at any scale.
-            </SuiText>
-          </div>
-          <div className='mx-auto max-w-[1010px]'>
-            <YesNoTable
-              yesHeading='Real-time data warehouse'
-              noHeading='Traditional cloud data warehouse'
-              rows={[
-                {
-                  label: 'Performance',
-                  yes: 'Engineered to handle highly concurrent workloads that back user-facing applications',
-                  no: 'High query latency and concurrency limitations are commonplace'
-                },
-                {
-                  label: 'Hardware efficiency',
-                  yes: 'Optimized to manage petabytes of data, with best-in-class compression ratios for the most efficient storage usage',
-                  no: 'Can create data bloat and inefficient usage of system resources'
-                },
-                {
-                  label: 'Scale',
-                  yes: 'Delivers unparalleled performance for analytical workloads at scale',
-                  no: 'Analytics queries scale inadequately as data volumes increase'
-                },
-                {
-                  label: 'Complexity',
-                  yes: "Simplified developer experience that's easy to manage and scale",
-                  no: 'Can lead to growing operational complexity'
-                },
-                {
-                  label: 'Cost',
-                  yes: 'Maximizes cost-effectiveness',
-                  no: 'Costly for many workloads'
-                }
-              ]}
-            />
-          </div>
-          <CUIButton
-            href='https://clickhouse.cloud/signUp'
-            target='_blank'
-            type='primary'
-            size='lg'
-            className='mx-auto mt-16 !px-6'>
-            Try it for free
-          </CUIButton>
-        </div>
-        <HRSeparator className='my-24' />
-
         {/* Why use RT data warehouse */}
         <div className='my-24 mx-auto px-4 xl:flex xl:max-w-[970px] xl:items-start xl:gap-12 xl:px-0 2xl:block 2xl:max-w-none'>
-          <div className='mx-auto mb-12 flex max-w-[830px] flex-1 flex-col items-center gap-6 text-center xl:sticky xl:top-24 xl:mb-0 xl:items-start xl:text-left 2xl:top-0 2xl:mb-12 2xl:items-center 2xl:text-center'>
+          <div className='mx-auto mb-12 flex max-w-[830px] flex-1 flex-col items-center gap-6 text-center xl:sticky xl:top-24 xl:mb-0 xl:items-start xl:text-left 2xl:relative 2xl:top-0 2xl:mb-12 2xl:items-center 2xl:text-center'>
             <SuiTitle type='h2'>Why use a real-time data warehouse?</SuiTitle>
             <SuiText className='max-w-[600px] opacity-70 xl:max-w-none 2xl:max-w-[600px]'>
               Companies leverage ClickHouse Cloud as their real-time data
@@ -462,6 +382,88 @@ export default function Page({
           </div>
         </div>
 
+        <HRSeparator className='my-24' />
+
+        {/* What is RT data warehouse */}
+        <div className='section-container my-24'>
+          <div className='mx-auto mb-24 flex max-w-[830px] flex-col items-center gap-6 text-center'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='80'
+              height='80'
+              fill='none'
+              viewBox='0 0 80 80'>
+              <rect
+                width='78'
+                height='78'
+                x='1'
+                y='1'
+                stroke='#FAFF69'
+                strokeWidth='2'
+                rx='7'
+              />
+              <g
+                stroke='#FAFF69'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'>
+                <path d='M40 40c9.1127 0 16.5-4.0294 16.5-9s-7.3873-9-16.5-9-16.5 4.0294-16.5 9 7.3873 9 16.5 9Z' />
+                <path d='M23.5 31v9c0 4.9706 7.3875 9 16.5 9s16.5-4.0294 16.5-9v-9' />
+                <path d='M23.5 40v9c0 4.9706 7.3875 9 16.5 9s16.5-4.0294 16.5-9v-9' />
+              </g>
+            </svg>
+            <SuiTitle type='h2'>What is a real-time data warehouse?</SuiTitle>
+            <SuiText className='opacity-70'>
+              Analytics push traditional data warehouses, lakes, and
+              transactional databases to their limits – not just in terms of
+              performance, but also with skyrocketing costs. A real-time data
+              warehouse is purpose-built for fast, reliable, and cost-effective
+              querying at any scale.
+            </SuiText>
+          </div>
+          <div className='mx-auto max-w-[1010px]'>
+            <YesNoTable
+              yesHeading='Real-time data warehouse'
+              noHeading='Traditional cloud data warehouse'
+              rows={[
+                {
+                  label: 'Performance',
+                  yes: 'Engineered to handle highly concurrent workloads that back user-facing applications',
+                  no: 'High query latency and concurrency limitations are commonplace'
+                },
+                {
+                  label: 'Hardware efficiency',
+                  yes: 'Optimized to manage petabytes of data, with best-in-class compression ratios for the most efficient storage usage',
+                  no: 'Can create data bloat and inefficient usage of system resources'
+                },
+                {
+                  label: 'Scale',
+                  yes: 'Delivers unparalleled performance for analytical workloads at scale',
+                  no: 'Analytics queries scale inadequately as data volumes increase'
+                },
+                {
+                  label: 'Complexity',
+                  yes: "Simplified developer experience that's easy to manage and scale",
+                  no: 'Can lead to growing operational complexity'
+                },
+                {
+                  label: 'Cost',
+                  yes: 'Maximizes cost-effectiveness',
+                  no: 'Costly for many workloads'
+                }
+              ]}
+            />
+          </div>
+          <CUIButton
+            href='https://clickhouse.cloud/signUp?loc=rt-page-what-is-rt'
+            target='_blank'
+            type='primary'
+            size='lg'
+            className='mx-auto mt-16 !px-6'>
+            Try it for free
+          </CUIButton>
+        </div>
+
         {/* Impact of RT */}
         <div className='bg-primary-300 py-16'>
           <SuiTitle type='h2' className='text-center text-neutral-750'>
@@ -563,7 +565,7 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
             />
           </div>
           <CUIButton
-            href='https://clickhouse.cloud/signUp'
+            href='https://clickhouse.cloud/signUp?loc=rt-page-industries'
             target='_blank'
             type='primary'
             size='lg'
