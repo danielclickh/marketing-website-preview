@@ -185,7 +185,7 @@ export default function Page({
         {/* Why use RT data warehouse */}
         <div className='my-24 mx-auto px-4 xl:flex xl:max-w-[970px] xl:items-start xl:gap-12 xl:px-0 2xl:block 2xl:max-w-none'>
           <div className='mx-auto mb-12 flex max-w-[830px] flex-1 flex-col items-center gap-6 text-center xl:sticky xl:top-24 xl:mb-0 xl:items-start xl:text-left 2xl:relative 2xl:top-0 2xl:mb-12 2xl:items-center 2xl:text-center'>
-            <SuiTitle type='h2'>Why use a real-time data warehouse?</SuiTitle>
+            <SuiTitle type='h2'>What is a real-time data warehouse?</SuiTitle>
             <SuiText className='max-w-[600px] opacity-70 xl:max-w-none 2xl:max-w-[600px]'>
               Companies leverage ClickHouse Cloud as their real-time data
               warehouse to ensure that analytics shine at any scale.
@@ -414,7 +414,7 @@ export default function Page({
                 <path d='M23.5 40v9c0 4.9706 7.3875 9 16.5 9s16.5-4.0294 16.5-9v-9' />
               </g>
             </svg>
-            <SuiTitle type='h2'>What is a real-time data warehouse?</SuiTitle>
+            <SuiTitle type='h2'>Why use a real-time data warehouse?</SuiTitle>
             <SuiText className='opacity-70'>
               Analytics push traditional data warehouses, lakes, and
               transactional databases to their limits – not just in terms of
