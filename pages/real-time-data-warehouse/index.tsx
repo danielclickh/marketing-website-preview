@@ -146,7 +146,7 @@ export default function Page({
                   <br />
                   data warehouse
                 </SuiTitle>
-                <SuiText weight='medium' className='my-6 !text-xl'>
+                <SuiText weight='medium' className='mt-6 mb-8 !text-xl'>
                   Optimized to power data-intensive applications that run on
                   real-time and historical data. With blazing speed and high
                   concurrency.
@@ -176,6 +176,8 @@ export default function Page({
 
         <HomepageSectionTrustedByAlt
           invertLogos={false}
+          firstCarouselInitialSlide={10}
+          secondCarouselInitialSlide={11}
           className='!my-0 bg-primary-300 pb-16 text-primary-800'
           customerStories={customerStories}
         />
@@ -513,6 +515,7 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
               }
             />
             <QuoteCard
+              className='hidden lg:flex'
               alternative='RedShift'
               quote={`You can see that **ClickHouse outperforms Redshift** easily... The performance of ClickHouse was consistent in returning results, with some spikes possibly related to the network storage. They also tested the performance of ClickHouse with different levels of concurrency, which showed predictable growth and a maximum query time of six seconds.`}
               logo={
@@ -877,17 +880,25 @@ const TimelineCard = forwardRef(function TimelineCard(
   )
 })
 
-function QuoteCard({
-  quote,
-  logo,
-  alternative
-}: {
+interface QuoteCardProps extends React.HTMLProps<HTMLDivElement> {
   quote: string
   logo: React.ReactElement
   alternative: string
-}) {
+}
+
+function QuoteCard({
+  quote,
+  logo,
+  alternative,
+  className,
+  ...props
+}: QuoteCardProps) {
   return (
-    <div className='flex flex-col gap-6 rounded-lg bg-neutral-800 p-6 text-lg text-white md:p-10 lg:p-8 xl:p-10'>
+    <div
+      {...props}
+      className={`flex flex-col gap-6 rounded-lg bg-neutral-800 p-6 text-lg text-white md:p-10 lg:p-8 xl:p-10 ${
+        className || ''
+      }`}>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         width='36'
@@ -900,7 +911,17 @@ function QuoteCard({
           d='M0 27.3452v-7.8239c0-2.25.4219-4.5895 1.2656-7.0185.8693-2.4545 2.0455-4.7684 3.5284-6.9417C6.3026 3.3622 7.99 1.5085 9.8565 0l6.4432 4.1804c-1.5085 2.2756-2.7741 4.6534-3.7969 7.1335-.9971 2.4546-1.4829 5.1648-1.4573 8.1307v7.9006H0Zm19.4446 0v-7.8239c0-2.25.4219-4.5895 1.2656-7.0185.8693-2.4545 2.0455-4.7684 3.5284-6.9417C25.7472 3.3622 27.4347 1.5085 29.3011 0l6.4432 4.1804c-1.5085 2.2756-2.7741 4.6534-3.7969 7.1335-.9971 2.4546-1.4829 5.1648-1.4573 8.1307v7.9006H19.4446Z'
         />
       </svg>
-      <Markdown children={quote} className='font-medium !text-white md:mb-8' />
+      <Markdown
+        children={quote}
+        className='font-medium md:mb-8'
+        components={{
+          strong: ({ children, className, ...props }) => (
+            <strong {...props} className={`text-white ${className || ''}`}>
+              {children}
+            </strong>
+          )
+        }}
+      />
       <div className='mt-auto flex flex-col justify-between gap-6 sm:flex-row sm:items-center'>
         {logo}
         <span className='order-first font-mono text-base text-primary-300 sm:order-last sm:text-right'>
@@ -913,17 +934,25 @@ function QuoteCard({
   )
 }
 
-function IndustryCard({
-  title,
-  text,
-  icon
-}: {
+interface IndustryCardProps extends React.HTMLProps<HTMLDivElement> {
   title: string
   text: string
   icon: string
-}) {
+}
+
+function IndustryCard({
+  title,
+  text,
+  icon,
+  className,
+  ...props
+}: IndustryCardProps) {
   return (
-    <div className='flex divide-x divide-neutral-600 rounded bg-neutral-800 p-4 pl-0'>
+    <div
+      {...props}
+      className={`flex divide-x divide-neutral-600 rounded bg-neutral-800 p-4 pl-0 ${
+        className || ''
+      }`}>
       <div className='flex w-20 flex-shrink-0 flex-grow-0 items-start justify-center'>
         <div className='flex h-8 w-8 items-center justify-center'>
           <Image
