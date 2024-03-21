@@ -96,6 +96,7 @@ export default function ComparisonPage({
   comparison
 }: ComparisonProps) {
   galaxyOnPage('redshiftComparisonPage')
+  const formSuccessRef1 = useRef<HTMLDivElement | null>(null)
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
@@ -170,7 +171,7 @@ export default function ComparisonPage({
                             setFormSuccess(true)
                             // Delay needed to allow the ref to update before scrolling
                             setTimeout(() => {
-                              formSuccessRef.current?.scrollIntoView({
+                              formSuccessRef1.current?.scrollIntoView({
                                 behavior: 'smooth'
                               })
                             }, 10)
@@ -185,7 +186,7 @@ export default function ComparisonPage({
                       )}
 
                       {formSuccess && (
-                        <div ref={formSuccessRef}>
+                        <div ref={formSuccessRef1}>
                           <h3 className='text-center text-2xl font-bold'>
                             Thank you for your submission!
                           </h3>
