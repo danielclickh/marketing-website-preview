@@ -391,7 +391,7 @@ export default function Page({
 
         {/* What is RT data warehouse */}
         <div className='section-container my-24'>
-          <div className='mx-auto mb-24 flex max-w-[830px] flex-col items-center gap-6 text-center'>
+          <div className='mx-auto mb-24 flex flex-col items-center gap-6 text-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='80'
@@ -418,7 +418,7 @@ export default function Page({
               </g>
             </svg>
             <SuiTitle type='h2'>Why use a real-time data warehouse?</SuiTitle>
-            <SuiText className='opacity-70'>
+            <SuiText className='max-w-[600px] opacity-70'>
               Companies leverage ClickHouse Cloud as their real-time data
               warehouse to ensure that analytics shine at any scale.
             </SuiText>
@@ -763,7 +763,7 @@ function YesNoTable({
                   </th>
                   <td
                     valign='top'
-                    className='border-b border-neutral-700 py-4 pr-6'>
+                    className='border-b border-neutral-700 py-4 pr-6 lg:pr-8'>
                     <ItemNo>
                       <div className='text-sm font-bold uppercase text-[#B3B6BD] lg:hidden'>
                         {label}
@@ -773,7 +773,7 @@ function YesNoTable({
                   </td>
                   <td
                     valign='top'
-                    className='border-b border-neutral-700 py-4 px-6'>
+                    className='border-b border-neutral-700 py-4 px-6 lg:px-8'>
                     <ItemYes>
                       <div className='text-sm font-bold uppercase text-[#B3B6BD] lg:hidden'>
                         {label}
