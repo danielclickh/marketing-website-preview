@@ -14,7 +14,7 @@ import { useInitGalaxy } from '../lib/galaxy/galaxy'
 import { GrowthBook, GrowthBookProvider } from '@growthbook/growthbook-react'
 import { Galaxy } from '../lib/galaxy/web/browser'
 
-const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K'
+const gtmId = 'GTM-TL8H72K'
 const websiteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL
 let is_prod = false
 
