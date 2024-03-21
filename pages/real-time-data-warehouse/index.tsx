@@ -816,21 +816,21 @@ const TimelineCard = forwardRef(function TimelineCard(
     <>
       {/* Floating label */}
       <span
-        className={`relative pl-4 font-bold leading-tight text-primary-300 sm:absolute sm:-left-32 sm:w-24 sm:px-4 sm:text-center md:-left-44 md:w-36 xl:-left-36 xl:w-28 xl:pl-0 xl:pr-8 2xl:left-1/2 2xl:-top-24 2xl:w-full 2xl:-translate-x-1/2 2xl:px-0 ${
+        className={`relative pl-4 font-bold leading-tight text-primary-300 sm:absolute sm:-left-32 sm:w-24 sm:px-4 sm:text-center md:-left-44 md:w-36 xl:-left-36 xl:w-28 xl:pl-0 xl:pr-8 2xl:left-1/2 2xl:-top-20 2xl:w-full 2xl:-translate-x-1/2 2xl:px-0 ${
           active ? '-top-1.5 sm:top-4' : '-top-1.5'
         }`}>
         {!active && <>{label}</>}
         {active && (
           <>
             <span className='md:hidden'>{label}</span>
-            <span className='tilted tilted-yellow -my-2 hidden py-2 px-3 md:inline-block'>
+            <span className='tilted tilted-yellow -my-2 hidden py-2 px-3 md:inline-block 2xl:-top-4'>
               <span className='tilted-content'>{label}</span>
             </span>
           </>
         )}
         <span
           ref={ref}
-          className={`absolute -left-4 top-1/2 h-3 w-3 -translate-y-1/2 -translate-x-1/2 rounded-full sm:left-auto sm:-right-3 2xl:left-1/2 2xl:top-16 ${
+          className={`absolute -left-4 top-1/2 h-3 w-3 -translate-y-1/2 -translate-x-1/2 rounded-full sm:left-auto sm:-right-3 2xl:left-1/2 2xl:top-12 ${
             active
               ? 'bg-neutral-800 ring-4 ring-primary-300 ring-offset-0 2xl:bg-primary-300 2xl:ring-0'
               : 'bg-primary-300'
