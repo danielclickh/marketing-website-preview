@@ -19,9 +19,7 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import { ComparisonProps } from '../../../types/comparisons'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
-import MarketoForm, {
-  SpoofedMarketoObject
-} from '../../../components/MarketoForm'
+import MarketoForm from '../../../components/MarketoForm'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
   async function getStaticProps() {
@@ -100,7 +98,6 @@ export default function ComparisonPage({
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
-  const [marketoForm, setMarketoForm] = useState<SpoofedMarketoObject>()
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
@@ -163,9 +160,9 @@ export default function ComparisonPage({
                       {!formSuccess && (
                         <MarketoForm
                           formId={'1156'}
-                          onLoad={(formObject) => {
+                          clearbitTracking={true}
+                          onLoad={() => {
                             setFormLoaded(true)
-                            setMarketoForm(formObject)
                           }}
                           onSuccess={() => {
                             setFormSuccess(true)
@@ -438,48 +435,9 @@ export default function ComparisonPage({
               {!formSuccess && (
                 <MarketoForm
                   formId={'1156'}
-                  onLoad={(formObject) => {
+                  clearbitTracking={true}
+                  onLoad={() => {
                     setFormLoaded(true)
-                    setMarketoForm(formObject)
-                    var pollForDefinition = function (
-                      scope: any,
-                      varname: any,
-                      callback: any
-                    ) {
-                      if (typeof scope[varname] !== 'undefined') {
-                        return callback()
-                      }
-                      var interval = setInterval(function () {
-                        if (typeof scope[varname] !== 'undefined') {
-                          clearInterval(interval)
-                          callback()
-                        }
-                      }, 250)
-                    }
-                    var script = document.createElement('script')
-                    script.onload = () => {
-                      console.log(onload)
-                    }
-                    script.src =
-                      'https://marketo.clearbit.com/assets/v1/marketo/forms.js'
-                    script.async = true
-                    script.setAttribute(
-                      'data-clearbit-publishable-key',
-                      'pk_25c26e54fda4158b4189447198378375'
-                    )
-
-                    script.onerror = function (e) {
-                      pollForDefinition(window, 'MktoForms2', function () {
-                        window.MktoForms2.whenReady(function (form) {
-                          form.setValues({
-                            clearbitFormStatus:
-                              'Clearbit Form JS unable to load'
-                          })
-                        })
-                      })
-                    }
-
-                    document.querySelector('head')?.appendChild(script)
                   }}
                   onSuccess={() => {
                     setFormSuccess(true)

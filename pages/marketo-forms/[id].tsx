@@ -26,6 +26,10 @@ export default function Page() {
   const instanceId =
     typeof router.query?.iid === 'string' ? router.query.iid : ''
 
+  const clearbitTracking =
+    typeof router.query?.clearbitTracking === 'string' &&
+    router.query.clearbitTracking === '1'
+
   // Referer URL passed from parent
   const referer =
     typeof router.query?.referer === 'string' ? router.query.referer : ''
@@ -209,6 +213,25 @@ export default function Page() {
         function (marketoFormObject) {
           // Remove marketo added styles
           removeMarketoStyles(marketoFormObject)
+
+          // Add clearbit tracking script
+          if (clearbitTracking) {
+            const script = document.createElement('script')
+            script.src =
+              'https://marketo.clearbit.com/assets/v1/marketo/forms.js'
+            script.async = true
+            script.setAttribute(
+              'data-clearbit-publishable-key',
+              'pk_25c26e54fda4158b4189447198378375'
+            )
+            script.onerror = function (e) {
+              marketoFormObject.setValues({
+                clearbitFormStatus: 'Clearbit Form JS unable to load'
+              })
+            }
+
+            document.querySelector('head')?.appendChild(script)
+          }
 
           // Send form loaded event
           sendEventToParent('onLoad')
