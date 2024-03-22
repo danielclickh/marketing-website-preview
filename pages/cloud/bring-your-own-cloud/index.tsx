@@ -1,11 +1,10 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import Layout from '../../../components/Layout'
-import Markdown from '../../../components/Markdown'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import MarketoForm from '../../../components/MarketoForm'
 import React, { useRef, useState } from 'react'
 import { CUIButton } from '../../../components/ClickUI'
+import Layout from '../../../components/Layout'
+import MarketoForm from '../../../components/MarketoForm'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { HomePageProps } from '../../../types/homepage'
 
 export const getStaticProps: GetStaticProps = async function getStaticProps() {
@@ -60,6 +59,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                 {!formSuccess && (
                   <MarketoForm
                     formId='1135'
+                    clearbitTracking={true}
                     onLoad={() => {
                       setFormLoaded(true)
                       const firstNameInput =

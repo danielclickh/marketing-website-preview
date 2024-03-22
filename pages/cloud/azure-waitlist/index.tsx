@@ -75,6 +75,7 @@ export default function ContactPage({
                     formId='1070'
                     disclaimer={contactForm.disclaimer}
                     onLoad={() => setFormLoaded(true)}
+                    clearbitTracking={true}
                     onSuccess={() => {
                       setFormSuccess(true)
 
