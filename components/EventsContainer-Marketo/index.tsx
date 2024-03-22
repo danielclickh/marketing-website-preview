@@ -46,6 +46,7 @@ function EventsContainerMarketo({
               <MarketoForm
                 formId={mktoFormId}
                 onLoad={() => setFormLoaded(true)}
+                clearbitTracking={true}
                 onSuccess={() => {
                   setFormSuccess(true)
 
