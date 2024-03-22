@@ -184,6 +184,12 @@ export default function ComparisonPage({
                                 }
                               }, 250)
                             }
+                            var clearbitmaintag =
+                              document.createElement('script')
+                            clearbitmaintag.src =
+                              'https://tag.clearbitscripts.com/v1/pk_25c26e54fda4158b4189447198378375/tags.js'
+                            clearbitmaintag.async = true
+
                             var script = document.createElement('script')
                             script.src =
                               'https://marketo.clearbit.com/assets/v1/marketo/forms.js'
@@ -208,6 +214,9 @@ export default function ComparisonPage({
                               )
                             }
 
+                            document
+                              .querySelector('head')
+                              ?.appendChild(clearbitmaintag)
                             document.querySelector('head')?.appendChild(script)
                           }}
                           onSuccess={() => {

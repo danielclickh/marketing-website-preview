@@ -457,6 +457,9 @@ export default function ComparisonPage({
                       }, 250)
                     }
                     var script = document.createElement('script')
+                    script.onload = () => {
+                      console.log(onload)
+                    }
                     script.src =
                       'https://marketo.clearbit.com/assets/v1/marketo/forms.js'
                     script.async = true
