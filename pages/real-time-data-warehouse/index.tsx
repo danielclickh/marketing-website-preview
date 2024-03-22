@@ -475,7 +475,7 @@ export default function Page({
             </span>{' '}
             data warehouse
           </SuiTitle>
-          <div className='section-container mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2'>
+          <div className='section-container mt-16 grid max-w-[1000px] grid-cols-1 gap-8 lg:grid-cols-2'>
             <QuoteCard
               alternative='Snowflake'
               quote={`With Snowflake, we were using the standard plan, small compute, which **cost nearly six times more** than ClickHouse Cloud. We got several seconds query time and no materialized views. 
@@ -485,8 +485,8 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
                 <Image
                   src='/images/real-time-data-warehouse/adgreetz.svg'
                   alt='Adgreetz'
-                  width={238}
-                  height={31}
+                  width={185}
+                  height={23}
                 />
               }
             />
@@ -497,8 +497,8 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
                 <Image
                   src='/images/real-time-data-warehouse/vantage.svg'
                   alt='Vantage'
-                  width={182}
-                  height={48}
+                  width={159}
+                  height={42}
                 />
               }
             />
@@ -509,8 +509,8 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
                 <Image
                   src='/images/real-time-data-warehouse/hifi.svg'
                   alt='HIFI'
-                  width={115}
-                  height={42}
+                  width={87}
+                  height={31}
                 />
               }
             />
@@ -522,8 +522,8 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
                 <Image
                   src='/images/real-time-data-warehouse/rokt.svg'
                   alt='Rokt'
-                  width={143}
-                  height={41}
+                  width={107}
+                  height={30}
                 />
               }
             />
@@ -896,7 +896,7 @@ function QuoteCard({
   return (
     <div
       {...props}
-      className={`flex flex-col gap-6 rounded-lg bg-neutral-800 p-6 text-lg text-white md:p-10 lg:p-8 xl:p-10 ${
+      className={`flex flex-col gap-6 rounded-lg bg-neutral-800 p-6 md:px-10 md:py-8 lg:px-8 lg:py-6 xl:px-10 xl:py-8 ${
         className || ''
       }`}>
       <svg
@@ -913,7 +913,7 @@ function QuoteCard({
       </svg>
       <Markdown
         children={quote}
-        className='font-medium md:mb-8'
+        className='md:mb- font-medium'
         components={{
           strong: ({ children, className, ...props }) => (
             <strong {...props} className={`text-white ${className || ''}`}>
@@ -924,7 +924,7 @@ function QuoteCard({
       />
       <div className='mt-auto flex flex-col justify-between gap-6 sm:flex-row sm:items-center'>
         {logo}
-        <span className='order-first font-mono text-base text-primary-300 sm:order-last sm:text-right'>
+        <span className='order-first font-mono text-primary-300 sm:order-last sm:text-right'>
           Alternative to
           <br className='hidden sm:block' />
           {alternative}
