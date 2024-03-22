@@ -49,6 +49,7 @@ function EventsForm({
           <MarketoForm
             formId={'1127'}
             onLoad={() => setFormLoaded(true)}
+            clearbitTracking={true}
             onSuccess={() => {
               setFormSuccess(true)
               // Delay needed to allow the ref to update before scrolling

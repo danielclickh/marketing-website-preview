@@ -1,24 +1,24 @@
-import {GetStaticProps} from 'next'
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
-import {CUICard} from '../../../components/ClickUI'
-import ContactForm from '../../../components/ContactForm'
+import { CUICard } from '../../../components/ClickUI'
 import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
-import {getNewsLetterData} from '../../../components/NewsLetter/getNewsLetterData'
+import MarketoForm from '../../../components/MarketoForm'
+import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
 import ResponsiveEmbed from '../../../components/ResponsiveEmbed'
-import {StrapiImage} from '../../../components/StrapiElements'
-import {findAll} from '../../../lib/api/strapi'
-import {getCommonProps} from '../../../lib/utils/getCommonProps'
-import {REVALIDATE_SECONDS} from '../../../lib/utils/revalidationConfig'
-import {ComparisonProps} from '../../../types/comparisons'
-import {galaxyOnPage} from '../../../lib/galaxy/galaxy'
+import { StrapiImage } from '../../../components/StrapiElements'
+import { findAll } from '../../../lib/api/strapi'
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
+import { ComparisonProps } from '../../../types/comparisons'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
   async function getStaticProps() {
@@ -92,14 +92,18 @@ export default function ComparisonPage({
   seo,
   comparison
 }: ComparisonProps) {
-  galaxyOnPage('redshiftComparisonPage');
+  galaxyOnPage('redshiftComparisonPage')
+  const formSuccessRef1 = useRef<HTMLDivElement | null>(null)
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
         <div className='relative pt-16 lg:pb-24 '>
           <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
-            <div className='items-start justify-between gap-10 lg:flex lg:grid-cols-2 lg:gap-20'>
-              <div className='lg:w-2/3'>
+            <div className='w-full items-start gap-10 lg:grid lg:grid-cols-8 lg:gap-20'>
+              <div className='lg:col-span-5'>
                 <div className='mb-8 items-center md:flex md:justify-between md:gap-x-10'>
                   <div>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 md:mb-0 md:text-left md:text-5.5xl'>
@@ -145,13 +149,49 @@ export default function ComparisonPage({
                   </Tilt>
                 )}
               </div>
-              <div>
+              <div className='lg:col-span-3'>
                 <div className='mb-12 lg:mb-0'>
                   <div className='lg:max-w-lg'>
-                    <h3 className='mb-6 text-center font-basier text-2xl font-light text-neutral-0'>
+                    <h3 className='mb-6 text-center font-basier text-xl font-light text-neutral-0'>
                       {comparison.formTitle}
                     </h3>
-                    <ContactForm />
+                    <>
+                      {!formSuccess && (
+                        <MarketoForm
+                          formId={'1156'}
+                          clearbitTracking={true}
+                          onLoad={() => {
+                            setFormLoaded(true)
+                          }}
+                          onSuccess={() => {
+                            setFormSuccess(true)
+                            // Delay needed to allow the ref to update before scrolling
+                            setTimeout(() => {
+                              formSuccessRef1.current?.scrollIntoView({
+                                behavior: 'smooth'
+                              })
+                            }, 10)
+
+                            return false // Stops page from reloading
+                          }}
+                        />
+                      )}
+
+                      {!formLoaded && (
+                        <div className='text-center'>Loading form...</div>
+                      )}
+
+                      {formSuccess && (
+                        <div ref={formSuccessRef1}>
+                          <h3 className='text-center text-2xl font-bold'>
+                            Thank you for your submission!
+                          </h3>
+                          <p className='mt-2 text-center text-neutral-200'>
+                            We will be in touch soon.
+                          </p>
+                        </div>
+                      )}
+                    </>
                   </div>
                 </div>
               </div>
@@ -159,7 +199,7 @@ export default function ComparisonPage({
           </div>
         </div>
         <div className='clip-inverted-triangle -mt-16 xl:-mt-28'>
-          <div className='relative z-40 mx-auto mt-4 max-w-4xl pt-20 pb-0 lg:mt-12'>
+          <div className='relative z-40 mx-auto mt-4 max-w-4xl pt-20 pb-0 lg:mt-6'>
             <div className='mx-auto flex items-center gap-4 px-4 md:px-0'>
               <div className='container mx-auto max-w-4xl border-none px-6  2xl:px-0'>
                 <div className='overflow-hidden rounded-xl'>
@@ -386,11 +426,47 @@ export default function ComparisonPage({
             alt='Migrations'
             className='mb-4 fill-none'
           />
-          <h2 className='mb-12 text-center font-basier text-3xl font-semibold lg:mb-16'>
+          <h2 className='mb-12 text-center font-basier text-xl font-semibold lg:mb-16'>
             Contact us for help with your migration
           </h2>
           <div className='mx-auto max-w-lg'>
-            <ContactForm />
+            <>
+              {!formSuccess && (
+                <MarketoForm
+                  formId={'1156'}
+                  clearbitTracking={true}
+                  onLoad={() => {
+                    setFormLoaded(true)
+                  }}
+                  onSuccess={() => {
+                    setFormSuccess(true)
+                    // Delay needed to allow the ref to update before scrolling
+                    setTimeout(() => {
+                      formSuccessRef.current?.scrollIntoView({
+                        behavior: 'smooth'
+                      })
+                    }, 10)
+
+                    return false // Stops page from reloading
+                  }}
+                />
+              )}
+
+              {!formLoaded && (
+                <div className='text-center'>Loading form...</div>
+              )}
+
+              {formSuccess && (
+                <div ref={formSuccessRef}>
+                  <h3 className='text-center text-2xl font-bold'>
+                    Thank you for your submission!
+                  </h3>
+                  <p className='mt-2 text-center text-neutral-200'>
+                    We will be in touch soon.
+                  </p>
+                </div>
+              )}
+            </>
           </div>
         </div>
       </div>

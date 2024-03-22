@@ -1,24 +1,27 @@
-import {findAll, getPathsValues} from '../../../lib/api/strapi'
-import {GetStaticProps} from 'next'
-import Layout from '../../../components/Layout'
-import {ComparisonProps} from '../../../types/comparisons'
-import {ParamsType} from '../../../types/homepage'
-import {getCommonProps} from '../../../lib/utils/getCommonProps'
-import {getNewsLetterData} from '../../../components/NewsLetter/getNewsLetterData'
-import {NOT_FOUND_FALLBACK, REVALIDATE_SECONDS} from '../../../lib/utils/revalidationConfig'
-import {CUICard} from '../../../components/ClickUI'
-import ReactMarkdown from 'react-markdown'
-import HRSeparator from '../../../components/HRSeparator'
-import ContactForm from '../../../components/ContactForm'
-import {StrapiImage} from '../../../components/StrapiElements'
-import LogoCarousel from '../../../components/LogoCarousel'
-import React from 'react'
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import BlogPost from '../../../components/BlogPostList/BlogPost'
 import Link from 'next/link'
-import Markdown from '../../../components/Markdown'
+import React, { useRef, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
-import {galaxyOnPage} from '../../../lib/galaxy/galaxy'
+import BlogPost from '../../../components/BlogPostList/BlogPost'
+import { CUICard } from '../../../components/ClickUI'
+import HRSeparator from '../../../components/HRSeparator'
+import Layout from '../../../components/Layout'
+import LogoCarousel from '../../../components/LogoCarousel'
+import Markdown from '../../../components/Markdown'
+import MarketoForm from '../../../components/MarketoForm'
+import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
+import { StrapiImage } from '../../../components/StrapiElements'
+import { findAll, getPathsValues } from '../../../lib/api/strapi'
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import {
+  NOT_FOUND_FALLBACK,
+  REVALIDATE_SECONDS
+} from '../../../lib/utils/revalidationConfig'
+import { ComparisonProps } from '../../../types/comparisons'
+import { ParamsType } from '../../../types/homepage'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
   async function getStaticProps({ params }) {
@@ -92,14 +95,19 @@ export default function ComparisonPage({
   seo,
   comparison
 }: ComparisonProps) {
-  galaxyOnPage(`${comparison.slug}ComparisonPage`);
+  galaxyOnPage(`${comparison.slug}ComparisonPage`)
+  const formSuccessRef1 = useRef<HTMLDivElement | null>(null)
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
-        <div className='relative pt-16 lg:pb-24 '>
+        <div className='relative pt-16 lg:pb-6 '>
           <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
-            <div className='items-start justify-between gap-10 lg:flex lg:grid-cols-2 lg:gap-20'>
-              <div className='lg:w-2/3'>
+            <div className='w-full items-start gap-10 lg:grid lg:grid-cols-8 lg:gap-20'>
+              <div className='lg:col-span-5'>
                 <div className='mb-8 items-center md:flex md:justify-between md:gap-x-10'>
                   <div>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 md:mb-0 md:text-left md:text-5.5xl'>
@@ -145,54 +153,58 @@ export default function ComparisonPage({
                   </Tilt>
                 )}
               </div>
-              <div>
+              <div className='lg:col-span-3'>
                 <div className='mb-12 lg:mb-0'>
                   <div className='lg:max-w-lg'>
-                    <h3 className='mb-6 text-center font-basier text-2xl font-light text-neutral-0'>
+                    <h3 className='mb-6 text-center font-basier text-xl font-light text-neutral-0'>
                       {comparison.formTitle}
                     </h3>
-                    <ContactForm />
+                    <>
+                      {!formSuccess && (
+                        <MarketoForm
+                          formId={'1156'}
+                          clearbitTracking={true}
+                          onLoad={() => {
+                            setFormLoaded(true)
+                          }}
+                          onSuccess={() => {
+                            setFormSuccess(true)
+                            // Delay needed to allow the ref to update before scrolling
+                            setTimeout(() => {
+                              formSuccessRef1.current?.scrollIntoView({
+                                behavior: 'smooth'
+                              })
+                            }, 10)
+
+                            return false // Stops page from reloading
+                          }}
+                        />
+                      )}
+
+                      {!formLoaded && (
+                        <div className='text-center'>Loading form...</div>
+                      )}
+
+                      {formSuccess && (
+                        <div ref={formSuccessRef1}>
+                          <h3 className='text-center text-2xl font-bold'>
+                            Thank you for your submission!
+                          </h3>
+                          <p className='mt-2 text-center text-neutral-200'>
+                            We will be in touch soon.
+                          </p>
+                        </div>
+                      )}
+                    </>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        {comparison.customerStories.title && (
-          <div className='relative mb-16'>
-            <div className='slanted-top mx-auto h-16 bg-primary-300 lg:max-h-96'></div>
-            <div className='-mt-1 h-1 w-full bg-primary-300'></div>
-            <div className='mx-auto bg-primary-300'>
-              <div className='relative z-10 mx-auto  max-w-7xl bg-primary-300'>
-                <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
-                  <div className='flip-selection mx-auto flex flex-col text-center'>
-                    <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-6 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
-                      {comparison.customerStories.title}{' '}
-                      <span className='tilted tilted-black'>
-                        <span className='tilted-content leading-8'>
-                          {comparison.customerStories.popText}
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-10 md:gap-x-14'>
-                  <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
-                  <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
-                  <LogoCarousel
-                    logos={comparison.customerStories.logos}
-                    speedClass1='animate-marqueeLeft'
-                    speedClass2='animate-marqueeLeft2'
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
       {comparison.painpointsTitle && (
-        <div className='mx-auto mt-28 max-w-7xl px-4 md:px-8 2xl:px-0'>
+        <div className='mx-auto mt-6 max-w-7xl px-4 md:px-8 2xl:px-0'>
           <div className='section-container bg-shadow-element yellow-shadow align-shadow-right container mx-auto flex flex-col items-center'>
             {comparison.painpointsIcon && (
               <StrapiImage
@@ -297,6 +309,29 @@ export default function ComparisonPage({
         </>
       )}
       <HRSeparator className='my-16 lg:my-24' />
+      <div className='section-container relative z-10 flex max-w-7xl flex-wrap place-items-center items-center justify-center gap-6 self-center overflow-hidden pb-10 md:gap-x-14'>
+        <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
+          <div className='flip-selection mx-auto flex flex-col text-center'>
+            <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-6 text-center text-xl font-semibold leading-normal text-neutral-300 md:px-0'>
+              {comparison.customerStories.title}{' '}
+              <span className='tilted tilted-yellow'>
+                <span className='tilted-content leading-8'>
+                  {comparison.customerStories.popText}
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className='opacity-60 grayscale invert'>
+          <LogoCarousel
+            logos={comparison.customerStories.logos}
+            logoColor='white'
+            speedClass1='animate-marqueeLeft'
+            speedClass2='animate-marqueeLeft2'
+          />
+        </div>
+      </div>
+      <HRSeparator className='my-16 lg:mt-12 lg:mb-24' />
       <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
         {comparison.Content.map((content, index) => {
           return (
@@ -309,6 +344,7 @@ export default function ComparisonPage({
                   <ReactMarkdown children={content.Description} />
                 </div>
               )}
+
               <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
                 {content.customContent.length > 0 && (
                   <>
@@ -352,6 +388,7 @@ export default function ComparisonPage({
                     })}
                   </>
                 )}
+
                 {content.RelatedBlogs.length > 0 && (
                   <>
                     {content.RelatedBlogs.flatMap((custom) =>
@@ -376,11 +413,47 @@ export default function ComparisonPage({
             alt='Migrations'
             className='mb-4 fill-none'
           />
-          <h2 className='mb-12 text-center font-basier text-3xl font-semibold lg:mb-16'>
+          <h2 className='mb-12 text-center font-basier text-xl font-semibold lg:mb-16'>
             Contact us for help with your migration
           </h2>
           <div className='mx-auto max-w-lg'>
-            <ContactForm />
+            <>
+              {!formSuccess && (
+                <MarketoForm
+                  formId={'1156'}
+                  clearbitTracking={true}
+                  onLoad={() => {
+                    setFormLoaded(true)
+                  }}
+                  onSuccess={() => {
+                    setFormSuccess(true)
+                    // Delay needed to allow the ref to update before scrolling
+                    setTimeout(() => {
+                      formSuccessRef.current?.scrollIntoView({
+                        behavior: 'smooth'
+                      })
+                    }, 10)
+
+                    return false // Stops page from reloading
+                  }}
+                />
+              )}
+
+              {!formLoaded && (
+                <div className='text-center'>Loading form...</div>
+              )}
+
+              {formSuccess && (
+                <div ref={formSuccessRef}>
+                  <h3 className='text-center text-2xl font-bold'>
+                    Thank you for your submission!
+                  </h3>
+                  <p className='mt-2 text-center text-neutral-200'>
+                    We will be in touch soon.
+                  </p>
+                </div>
+              )}
+            </>
           </div>
         </div>
       </div>

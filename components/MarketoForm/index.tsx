@@ -46,6 +46,7 @@ interface MarketoObjectController extends SpoofedMarketoObject {
 type MarketoFormProps = {
   formId: string
   disclaimer?: string | false
+  clearbitTracking?: boolean
 
   // Callbacks
   onLoad?: (formObject: SpoofedMarketoObject) => any
@@ -58,6 +59,7 @@ type MarketoFormProps = {
 export default function MarketoForm({
   formId,
   disclaimer = 'By registering, you acknowledge that ClickHouse will process your personal information in accordance with our [Privacy Policy](/legal/privacy-policy).',
+  clearbitTracking = false,
   onLoad,
   onSuccess
 }: MarketoFormProps) {
@@ -237,6 +239,7 @@ export default function MarketoForm({
       // Build a query string to send to the iframe
       const params = new URLSearchParams(queryParams.toString())
       params.set('iid', instanceId) // Add our component instance id
+      if (clearbitTracking) params.set('clearbitTracking', '1') // Add optional tracking param
       setQueryString(params.toString())
 
       // Listen for messages from the iframe
