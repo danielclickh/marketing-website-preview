@@ -51,6 +51,7 @@ Compute: ${memory}`)
       {!formSuccess && (
         <MarketoForm
           formId={'1124'}
+          clearbitTracking={true}
           onLoad={(formObject) => {
             setFormLoaded(true)
             setMarketoForm(formObject)
