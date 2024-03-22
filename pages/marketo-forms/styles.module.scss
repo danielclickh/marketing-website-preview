@@ -184,6 +184,11 @@
           }
         }
 
+        // Empty placehoders
+        .mktoPlaceholder {
+          display: none;
+        }
+
         // Dropdowns
         //
         select {
