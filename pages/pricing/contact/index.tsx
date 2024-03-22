@@ -40,15 +40,13 @@ interface ContactPageProps {
   seo: ContactProps['seo']
 }
 
-
 export default function ContactPage({
   contactForm,
   footerData,
   headerData,
   seo
 }: ContactPageProps) {
-
-  const formSuccessRef = useRef<HTMLDivElement|null>(null);
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
 
@@ -71,33 +69,41 @@ export default function ContactPage({
             </div>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 pt-14 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
               <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
+                {!formSuccess && (
+                  <MarketoForm
+                    clearbitTracking={true}
+                    formId='1043'
+                    disclaimer={contactForm.disclaimer}
+                    onLoad={() => setFormLoaded(true)}
+                    onSuccess={() => {
+                      setFormSuccess(true)
 
-                {!formSuccess && <MarketoForm
-                  formId='1043'
-                  disclaimer={contactForm.disclaimer}
-                  onLoad={() => setFormLoaded(true)}
-                  onSuccess={() => {
-                    setFormSuccess(true)
+                      // Delay needed to allow the ref to update before scrolling
+                      setTimeout(() => {
+                        formSuccessRef.current?.scrollIntoView({
+                          behavior: 'smooth'
+                        })
+                      }, 10)
 
-                    // Delay needed to allow the ref to update before scrolling
-                    setTimeout(() => {
-                      formSuccessRef.current?.scrollIntoView({
-                        behavior: 'smooth'
-                      })
-                    }, 10);
+                      return false // Stops page from reloading
+                    }}
+                  />
+                )}
 
-                    return false // Stops page from reloading
-                  }} />}
+                {!formLoaded && (
+                  <div className='text-center'>Loading form...</div>
+                )}
 
-                {!formLoaded && <div className='text-center'>
-                  Loading form...
-                </div>}
-
-                {formSuccess && <div ref={formSuccessRef} className='text-center'>
-                  <h3 className='text-2xl font-bold'>Thank you for your submission!</h3>
-                  <p className='mt-2 text-neutral-200'>We will be in touch soon.</p>
-                </div>}
-
+                {formSuccess && (
+                  <div ref={formSuccessRef} className='text-center'>
+                    <h3 className='text-2xl font-bold'>
+                      Thank you for your submission!
+                    </h3>
+                    <p className='mt-2 text-neutral-200'>
+                      We will be in touch soon.
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
