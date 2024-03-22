@@ -65,6 +65,12 @@
         @apply hidden;
       }
 
+      // Empty placehoders
+      //
+      .mktoPlaceholder {
+        display: none;
+      }
+
       // Basic layout
       //
       //
@@ -182,11 +188,6 @@
           &.mktoInvalid:not(:focus) {
             @apply border-danger-200;
           }
-        }
-
-        // Empty placehoders
-        .mktoPlaceholder {
-          display: none;
         }
 
         // Dropdowns

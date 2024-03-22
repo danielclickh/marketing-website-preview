@@ -174,6 +174,8 @@ export default function Page() {
         }
       }
 
+      document.body.addEventListener('keyup', catchInputEvents, true)
+      document.body.addEventListener('input', catchInputEvents, true)
       document.body.addEventListener('change', catchInputEvents, true)
       document.body.addEventListener('focus', catchInputEvents, true)
       document.body.addEventListener('blur', catchInputEvents, true)
@@ -181,6 +183,8 @@ export default function Page() {
       // Clean up on unmount
       return () => {
         window.removeEventListener('resize', resize)
+        document.body.removeEventListener('keyup', catchInputEvents, true)
+        document.body.removeEventListener('input', catchInputEvents, true)
         document.body.removeEventListener('change', catchInputEvents, true)
         document.body.removeEventListener('focus', catchInputEvents, true)
         document.body.removeEventListener('blur', catchInputEvents, true)
