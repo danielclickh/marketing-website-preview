@@ -6,20 +6,19 @@ import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
 import { CUICard } from '../../../components/ClickUI'
-import ContactForm from '../../../components/ContactForm'
 import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
+import MarketoForm from '../../../components/MarketoForm'
 import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
 import ResponsiveEmbed from '../../../components/ResponsiveEmbed'
 import { StrapiImage } from '../../../components/StrapiElements'
 import { findAll } from '../../../lib/api/strapi'
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import { ComparisonProps } from '../../../types/comparisons'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
-import MarketoForm from '../../../components/MarketoForm'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
   async function getStaticProps() {
@@ -103,8 +102,8 @@ export default function ComparisonPage({
       <div className='homepage bg-grid'>
         <div className='relative pt-16 lg:pb-24 '>
           <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
-            <div className='items-start justify-between gap-10 lg:flex lg:grid-cols-2 lg:gap-20'>
-              <div className='lg:w-2/3'>
+            <div className='w-full items-start gap-10 lg:grid lg:grid-cols-8 lg:gap-20'>
+              <div className='lg:col-span-5'>
                 <div className='mb-8 items-center md:flex md:justify-between md:gap-x-10'>
                   <div>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 md:mb-0 md:text-left md:text-5.5xl'>
@@ -150,7 +149,7 @@ export default function ComparisonPage({
                   </Tilt>
                 )}
               </div>
-              <div>
+              <div className='lg:col-span-3'>
                 <div className='mb-12 lg:mb-0'>
                   <div className='lg:max-w-lg'>
                     <h3 className='mb-6 text-center font-basier text-xl font-light text-neutral-0'>

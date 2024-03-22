@@ -104,10 +104,10 @@ export default function ComparisonPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
-        <div className='relative pt-16 lg:pb-24 '>
+        <div className='relative pt-16 lg:pb-6 '>
           <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
-            <div className='items-start justify-between gap-10 lg:flex lg:grid-cols-2 lg:gap-20'>
-              <div className='lg:w-2/3'>
+            <div className='w-full items-start gap-10 lg:grid lg:grid-cols-8 lg:gap-20'>
+              <div className='lg:col-span-5'>
                 <div className='mb-8 items-center md:flex md:justify-between md:gap-x-10'>
                   <div>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 md:mb-0 md:text-left md:text-5.5xl'>
@@ -152,8 +152,20 @@ export default function ComparisonPage({
                     </div>
                   </Tilt>
                 )}
+                <div className='overflow-hidden'>
+                  <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-10 md:gap-x-14'>
+                    <div className='opacity-60 grayscale invert'>
+                      <LogoCarousel
+                        logos={comparison.customerStories.logos}
+                        logoColor='white'
+                        speedClass1='animate-marqueeLeft'
+                        speedClass2='animate-marqueeLeft2'
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
+              <div className='lg:col-span-3'>
                 <div className='mb-12 lg:mb-0'>
                   <div className='lg:max-w-lg'>
                     <h3 className='mb-6 text-center font-basier text-xl font-light text-neutral-0'>
@@ -202,41 +214,9 @@ export default function ComparisonPage({
             </div>
           </div>
         </div>
-
-        {comparison.customerStories.title && (
-          <div className='relative mb-16'>
-            <div className='slanted-top mx-auto h-16 bg-primary-300 lg:max-h-96'></div>
-            <div className='-mt-1 h-1 w-full bg-primary-300'></div>
-            <div className='mx-auto bg-primary-300'>
-              <div className='relative z-10 mx-auto  max-w-7xl bg-primary-300'>
-                <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
-                  <div className='flip-selection mx-auto flex flex-col text-center'>
-                    <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-6 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
-                      {comparison.customerStories.title}{' '}
-                      <span className='tilted tilted-black'>
-                        <span className='tilted-content leading-8'>
-                          {comparison.customerStories.popText}
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-10 md:gap-x-14'>
-                  <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
-                  <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
-                  <LogoCarousel
-                    logos={comparison.customerStories.logos}
-                    speedClass1='animate-marqueeLeft'
-                    speedClass2='animate-marqueeLeft2'
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
       {comparison.painpointsTitle && (
-        <div className='mx-auto mt-28 max-w-7xl px-4 md:px-8 2xl:px-0'>
+        <div className='mx-auto mt-6 max-w-7xl px-4 md:px-8 2xl:px-0'>
           <div className='section-container bg-shadow-element yellow-shadow align-shadow-right container mx-auto flex flex-col items-center'>
             {comparison.painpointsIcon && (
               <StrapiImage
