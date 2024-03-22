@@ -464,6 +464,7 @@ export default function ComparisonPage({
                       'data-clearbit-publishable-key',
                       'pk_25c26e54fda4158b4189447198378375'
                     )
+
                     script.onerror = function (e) {
                       pollForDefinition(window, 'MktoForms2', function () {
                         window.MktoForms2.whenReady(function (form) {
