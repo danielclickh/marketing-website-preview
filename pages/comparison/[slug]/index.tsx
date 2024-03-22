@@ -152,18 +152,6 @@ export default function ComparisonPage({
                     </div>
                   </Tilt>
                 )}
-                <div className='overflow-hidden'>
-                  <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-10 md:gap-x-14'>
-                    <div className='opacity-60 grayscale invert'>
-                      <LogoCarousel
-                        logos={comparison.customerStories.logos}
-                        logoColor='white'
-                        speedClass1='animate-marqueeLeft'
-                        speedClass2='animate-marqueeLeft2'
-                      />
-                    </div>
-                  </div>
-                </div>
               </div>
               <div className='lg:col-span-3'>
                 <div className='mb-12 lg:mb-0'>
@@ -321,6 +309,29 @@ export default function ComparisonPage({
         </>
       )}
       <HRSeparator className='my-16 lg:my-24' />
+      <div className='section-container relative z-10 flex max-w-7xl flex-wrap place-items-center items-center justify-center gap-6 self-center overflow-hidden pb-10 md:gap-x-14'>
+        <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
+          <div className='flip-selection mx-auto flex flex-col text-center'>
+            <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-6 text-center text-xl font-semibold leading-normal text-neutral-300 md:px-0'>
+              {comparison.customerStories.title}{' '}
+              <span className='tilted tilted-yellow'>
+                <span className='tilted-content leading-8'>
+                  {comparison.customerStories.popText}
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className='opacity-60 grayscale invert'>
+          <LogoCarousel
+            logos={comparison.customerStories.logos}
+            logoColor='white'
+            speedClass1='animate-marqueeLeft'
+            speedClass2='animate-marqueeLeft2'
+          />
+        </div>
+      </div>
+      <HRSeparator className='my-16 lg:mt-12 lg:mb-24' />
       <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
         {comparison.Content.map((content, index) => {
           return (
@@ -333,6 +344,7 @@ export default function ComparisonPage({
                   <ReactMarkdown children={content.Description} />
                 </div>
               )}
+
               <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
                 {content.customContent.length > 0 && (
                   <>
@@ -376,6 +388,7 @@ export default function ComparisonPage({
                     })}
                   </>
                 )}
+
                 {content.RelatedBlogs.length > 0 && (
                   <>
                     {content.RelatedBlogs.flatMap((custom) =>
