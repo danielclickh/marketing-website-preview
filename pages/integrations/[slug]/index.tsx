@@ -1,6 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import React from 'react'
-import Link from 'next/Link'
+import Link from 'next/link'
 import GetStartedFree from '../../../components/GetStartedFree'
 import IntegrationSupportPill from '../../../components/IntegrationSupportPill'
 import Layout from '../../../components/Layout'
