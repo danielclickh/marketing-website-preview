@@ -134,7 +134,6 @@ function Markdown({
   rehypePlugins = [],
   remarkPlugins = [],
   allowHeaderLink = false,
-  allowedElements = [],
   ...props
 }: Props) {
   const newComponents = getDefaultComponents({
@@ -148,13 +147,12 @@ function Markdown({
     Object.assign(newComponents, getIgnoreAnchor())
   }
 
-  // Merge default AllowedElements with component specific
   if (encloseByDiv) {
-    allowedElements.push(...AllowedElements)
-  }
+    props.allowedElements = AllowedElements
 
-  // Automatically allow component elements
-  allowedElements.push(...Object.keys(newComponents))
+    // Automatically allow component elements
+    props.allowedElements.push(...Object.keys(newComponents))
+  }
 
   children = sanitizeMarkdown(children)
 
@@ -175,7 +173,6 @@ function Markdown({
       unwrapDisallowed
       rehypePlugins={rehypePlugins}
       remarkPlugins={remarkPlugins}
-      allowedElements={allowedElements}
       {...props}>
       {children}
     </ReactMarkdown>
