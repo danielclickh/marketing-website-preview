@@ -65,6 +65,9 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
     }
   }, [])
 
+  header.banner =
+    '<a href="/company/events/2024-04-google-next?loc=eyebrow">Headed to Google Next between Apr 9-11? Meet with our founders here</a>'
+
   return (
     <>
       <div
