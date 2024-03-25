@@ -45,7 +45,7 @@ function Header(props: any) {
   const [isOpen, setIsOpen] = useState(false)
   const onClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.preventDefault()
-    const href = e.currentTarget.href;
+    const href = e.currentTarget.href
     history.pushState({}, '', href)
     navigator.clipboard.writeText(href)
     setIsOpen(true)
@@ -134,6 +134,7 @@ function Markdown({
   rehypePlugins = [],
   remarkPlugins = [],
   allowHeaderLink = false,
+  allowedElements = [],
   ...props
 }: Props) {
   const newComponents = getDefaultComponents({
@@ -147,9 +148,14 @@ function Markdown({
     Object.assign(newComponents, getIgnoreAnchor())
   }
 
+  // Merge default AllowedElements with component specific
   if (encloseByDiv) {
-    props.allowedElements = AllowedElements
+    allowedElements.push(...AllowedElements)
   }
+
+  // Automatically allow component elements
+  allowedElements.push(...Object.keys(newComponents))
+
   children = sanitizeMarkdown(children)
 
   rehypePlugins = commonPlugIns.concat(rehypePlugins)
@@ -169,6 +175,7 @@ function Markdown({
       unwrapDisallowed
       rehypePlugins={rehypePlugins}
       remarkPlugins={remarkPlugins}
+      allowedElements={allowedElements}
       {...props}>
       {children}
     </ReactMarkdown>
