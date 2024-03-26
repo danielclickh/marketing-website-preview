@@ -34,7 +34,7 @@ const deployData: Array<DeployData> = [
     event: 'homePage.deploymentOptions.clickhouseLocalSelect'
   },
   {
-    title: 'Open-source ClickHouse',
+    title: 'ClickHouse',
     img: '/drive.svg',
     btnText: 'Download ClickHouse',
     description:

@@ -23,7 +23,7 @@ const deployData: Array<DeployData> = [
     btnType: 'secondary'
   },
   {
-    title: 'Open-source ClickHouse',
+    title: 'ClickHouse',
     img: '/drive.svg',
     btnText: 'Download ClickHouse',
     description:
