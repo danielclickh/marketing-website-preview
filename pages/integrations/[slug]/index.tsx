@@ -2,11 +2,13 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import React from 'react'
 import Link from 'next/link'
 import GetStartedFree from '../../../components/GetStartedFree'
-import IntegrationSupportPill from '../../../components/IntegrationSupportPill'
+import IntegrationLogo from '../../../components/IntegrationLogo'
+import IntegrationPill from '../../../components/IntegrationPill'
+import IntegrationTile from '../../../components/IntegrationTile'
 import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'
 import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
-import { SuiText, SuiTitle } from '../../../components/sui'
+import { SuiTitle } from '../../../components/sui'
 import { findAll, getPathsValues } from '../../../lib/api/strapi'
 import { SeoMetadata, StrapiImageType } from '../../../lib/api/strapi/types'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
@@ -34,6 +36,15 @@ interface IntegrationProps extends CommonProps {
     changelog: string | null
     changelogv2: string | null
   }
+  similar: Array<{
+    name: string
+    slug: string
+    logo: StrapiImageType
+    logo_dark: StrapiImageType | null
+    category: string
+    website: string | null
+    readiness: string | null
+  }>
 }
 
 export async function getStaticPaths() {
@@ -78,6 +89,18 @@ export const getStaticProps: GetStaticProps<IntegrationProps> =
       }
     }
 
+    const similar = await findAll('integrations', {
+      filters: {
+        slug: {
+          $ne: slug
+        }
+      },
+      sort: ['name:ASC', 'date:DESC'],
+      populate: ['logo', 'logo_dark'],
+      fields: ['name', 'slug', 'category', 'website', 'readiness'],
+      pagination: { limit: 5 }
+    })
+
     const integration = data[0]
 
     const seo = integration.seo || {
@@ -92,6 +115,7 @@ export const getStaticProps: GetStaticProps<IntegrationProps> =
     return {
       props: {
         integration,
+        similar: similar.data,
         seo,
         newsLetterData,
         ...commonData
@@ -104,11 +128,12 @@ export default function IntegrationPage({
   seo,
   headerData,
   footerData,
-  integration
+  integration,
+  similar
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='bg-grid py-20'>
+      <div className='bg-grid py-12 md:py-20'>
         <div className='section-container max-w-[800px]'>
           <Link
             href={'/integrations'}
@@ -126,18 +151,24 @@ export default function IntegrationPage({
             </svg>
             <span>Back to integrations</span>
           </Link>
-          <div className='my-5'>
+          <div className='my-5 flex items-center gap-6'>
+            <div className='flex aspect-square w-20 items-center justify-center rounded bg-white'>
+              <IntegrationLogo
+                image={integration.logo_dark || integration.logo}
+                alt={integration.name}
+              />
+            </div>
             <SuiTitle type='h1'>{integration.name}</SuiTitle>
           </div>
           <div className='flex flex-wrap gap-2'>
-            <IntegrationSupportPill label={integration.supportLevel} />
+            <IntegrationPill label={integration.supportLevel} />
             {integration.readiness && (
-              <IntegrationSupportPill label={integration.readiness} />
+              <IntegrationPill label={integration.readiness} />
             )}
           </div>
         </div>
       </div>
-      <div className='section-container max-w-[800px]'>
+      <div className='section-container my-8 max-w-[800px] md:my-16'>
         <Markdown
           components={
             {
@@ -145,17 +176,17 @@ export default function IntegrationPage({
                 children,
                 ...props
               }: React.HTMLProps<any>) => {
-                return <ul className='!ml-0 space-y-2 !p-0'>{children}</ul>
+                return <ul className='!ml-0 space-y-1 !p-0'>{children}</ul>
               },
               'vertical-stepper-without-label-step': ({
                 children,
                 ...props
               }: React.HTMLProps<any>) => {
                 return (
-                  <li className='flex gap-4'>
+                  <li className='group flex gap-4'>
                     <div className='flex flex-shrink-0 flex-grow-0 flex-col items-center'>
                       <div className='z-10 mt-1 h-4 w-4 flex-shrink-0 flex-grow-0 rounded-full bg-white'></div>
-                      <div className='-mt-3 h-full w-0.5 rounded-t-full bg-neutral-600'></div>
+                      <div className='-mt-3 h-full w-0.5 rounded-t-full bg-neutral-600 group-last:hidden'></div>
                     </div>
                     <div className='flex-1 pb-4'>{children}</div>
                   </li>
@@ -165,8 +196,21 @@ export default function IntegrationPage({
           }>
           {integration.summaryv2 || integration.summary}
         </Markdown>
+
+        {similar.length && (
+          <>
+            <SuiTitle type='h2' className='mt-8 md:mt-16'>
+              Other integrations
+            </SuiTitle>
+            <div className='mt-6 grid grid-cols-2 justify-center gap-3 sm:grid-cols-3 md:grid-cols-5'>
+              {similar.map((integration) => (
+                <IntegrationTile {...integration} />
+              ))}
+            </div>
+          </>
+        )}
       </div>
-      <div className='section-container my-32'>
+      <div className='section-container my-16 md:my-32'>
         <GetStartedFree
           href='https://clickhouse.cloud/signUp?loc=integrations'
           textBefore='Get started with ClickHouse'
