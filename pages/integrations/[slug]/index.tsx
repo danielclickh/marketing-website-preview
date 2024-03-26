@@ -152,10 +152,11 @@ export default function IntegrationPage({
             <span>Back to integrations</span>
           </Link>
           <div className='my-5 flex items-center gap-6'>
-            <div className='flex aspect-square w-20 items-center justify-center rounded bg-white'>
+            <div className='flex h-20 w-20 items-center justify-center rounded bg-white p-1'>
               <IntegrationLogo
                 image={integration.logo_dark || integration.logo}
                 alt={integration.name}
+                className='aspect-square h-auto w-full object-contain'
               />
             </div>
             <SuiTitle type='h1'>{integration.name}</SuiTitle>
