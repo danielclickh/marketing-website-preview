@@ -115,7 +115,7 @@ export default function HomepageSectionDeployAlt({
               />
             </svg>
             <SuiTitle type='h3' className='!text-[24px]'>
-              ClickHouse Open Source
+              ClickHouse
             </SuiTitle>
             <SuiText>
               Spin up a database server with <br className='hidden lg:block' />
