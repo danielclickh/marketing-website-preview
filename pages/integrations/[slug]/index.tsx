@@ -170,6 +170,7 @@ export default function IntegrationPage({
       </div>
       <div className='section-container my-8 max-w-[800px] md:my-16'>
         <Markdown
+          className='rich-text-content'
           components={
             {
               'vertical-stepper-without-label': ({
