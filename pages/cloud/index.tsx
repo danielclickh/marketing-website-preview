@@ -369,7 +369,7 @@ export default function CloudPage({
                   Experience the power of open-source ClickHouse in a serverless
                   setup. Deploy in seconds, scale seamlessly, and ensure
                   top-tier security with our SOC 2 Type II compliant platform.
-                  Available on AWS, GCP and Private Preview in Azure. Dive into
+                  Available on AWS, GCP and Azure in Private Preview. Dive into
                   insights without the infrastructure hassle!
                 </div>
                 <CUIButton
@@ -522,7 +522,7 @@ export default function CloudPage({
               </SuiTitle>
               <div className='mx-auto max-w-2xl px-4 text-center leading-normal text-neutral-200 md:px-0'>
                 With the flexibility to choose where and how you deploy.
-                Available on AWS, GCP and Private Preview in Azure, and through
+                Available on AWS, GCP and Azure in Private Preview, and through
                 Marketplaces. Manage your services through our ClickHouse Cloud
                 self-serve UI, or by leveraging our APIs and Terraform provider
                 to automate your operations.
