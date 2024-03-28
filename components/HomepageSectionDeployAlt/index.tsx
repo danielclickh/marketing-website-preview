@@ -83,7 +83,7 @@ export default function HomepageSectionDeployAlt({
             <SuiText>
               The best way to use ClickHouse. Available on AWS, GCP and their{' '}
               <br className='hidden md:block' />
-              marketplaces. Coming soon to Azure.
+              marketplaces. Azure in Private Preview.
             </SuiText>
             <strong className='block w-full rounded bg-white py-2 text-center font-medium text-neutral-900 transition-all group-hover:opacity-80'>
               Get started
