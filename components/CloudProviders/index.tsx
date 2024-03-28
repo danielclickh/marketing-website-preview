@@ -42,13 +42,15 @@ function CloudProviders({
                     />
                   </Link>
                 ) : darkIconPng.name === 'google_cloud_dark.svg' ? (
-                  <>
+                  <Link
+                    href='https://console.cloud.google.com/marketplace/product/clickhouse-public/clickhouse-cloud'
+                    target='_blank'>
                     <StrapiImage
                       key={`${cloudProvider.title}-${index}`}
                       {...darkIconPng}
                       className={`h-10 w-auto ${parentIndex !== 0 ? '' : ''}`}
                     />
-                  </>
+                  </Link>
                 ) : (
                   <>
                     <StrapiImage
