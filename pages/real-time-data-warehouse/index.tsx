@@ -329,25 +329,8 @@ export default function Page({
                 <div
                   ref={timelineExternalResourcesRef}
                   className='absolute top-full left-0 right-0'>
-                  <div className='relative'>
-                    <svg
-                      className='mx-auto'
-                      xmlns='http://www.w3.org/2000/svg'
-                      width='10'
-                      height='64'
-                      fill='none'
-                      viewBox='0 0 10 64'>
-                      <path
-                        fill='#FAFF69'
-                        d='m4.99744 64 4.33012-7.5H.667309L4.99744 64Zm-.75-64v57.25h1.5V0h-1.5Z'
-                      />
-                    </svg>
-                    <SuiText
-                      size='sm'
-                      weight='medium'
-                      className='stroke-text absolute top-1/2 left-0 right-0 -translate-y-1/2 text-center'>
-                      Query as external sources
-                    </SuiText>
+                  <div>
+                    <div className='mx-auto h-10 w-px bg-neutral-700'></div>
                   </div>
                   <div className='rounded-lg border border-neutral-700 bg-neutral-900 p-4'>
                     <SuiText
