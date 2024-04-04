@@ -205,7 +205,7 @@ export default function Page({
             {/* Line */}
             <div
               ref={timelineLineRef}
-              className={`absolute w-0.5 bg-neutral-600 transition-opacity 2xl:!left-0 2xl:!right-0 2xl:h-0.5 2xl:w-auto ${
+              className={`absolute border-l-[0.125rem] border-dashed border-neutral-600 transition-opacity 2xl:!left-0 2xl:!right-0 2xl:h-0.5 2xl:w-auto 2xl:border-l-0 2xl:border-t-[0.125rem] ${
                 timelineCoords ? 'opacity-100' : 'opacity-0'
               }`}
               style={{
