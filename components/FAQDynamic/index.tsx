@@ -22,13 +22,11 @@ export default function FAQDynamic({
   title?: string
   description?: string
   askUsAnything: boolean
-  faqs: [
-    {
-      title: string
-      content: string
-      event: FullyQualifiedEvent
-    }
-  ]
+  faqs: {
+    title: string
+    content: string
+    event: string
+  }[]
 }) {
   return (
     <div
@@ -67,7 +65,7 @@ export default function FAQDynamic({
             key={`faq-${index}`}>
             {({ open }) => (
               <>
-                <div onClick={galaxyOnClick(faq.event)}>
+                <div onClick={galaxyOnClick(faq.event as FullyQualifiedEvent)}>
                   <Disclosure.Button className='relative z-10 grid w-full grid-cols-[1fr_1rem] items-center justify-between gap-x-6 rounded-lg p-4 pl-20 pr-6 text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none'>
                     <span className='text-md'>{faq.title}</span>
                     <span className={styles.plusMinus} data-active={open} />
