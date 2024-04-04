@@ -4,6 +4,7 @@ import HomepageSectionTrustedByAlt from '../../components/HomepageSectionTrusted
 import HRSeparator from '../../components/HRSeparator'
 import Layout from '../../components/Layout'
 import Markdown from '../../components/Markdown'
+import RealTimeDataWarehouseAnimation from '../../components/RealTimeDataWarehouseAnimation'
 import { SuiText, SuiTitle } from '../../components/sui'
 import { findOne } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
@@ -162,13 +163,14 @@ export default function Page({
               </div>
 
               {/* Image */}
-              <div className='order-first mx-auto max-w-xs lg:order-last lg:ml-auto lg:mr-0 lg:w-auto lg:max-w-none'>
-                <Image
+              <div className='order-first mx-auto w-full max-w-xl lg:order-last lg:ml-auto lg:mr-0 lg:max-w-[628px]'>
+                {/*<Image
                   src='/images/real-time-data-warehouse-hero.svg'
                   width={628}
                   height={383}
                   alt='Real-time data warehouse'
-                />
+                />*/}
+                <RealTimeDataWarehouseAnimation width='100%' height='auto' />
               </div>
             </div>
           </div>
