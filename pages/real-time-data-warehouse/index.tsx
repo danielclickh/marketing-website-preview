@@ -164,12 +164,6 @@ export default function Page({
 
               {/* Image */}
               <div className='order-first mx-auto w-full max-w-xl lg:order-last lg:ml-auto lg:mr-0 lg:max-w-[628px]'>
-                {/*<Image
-                  src='/images/real-time-data-warehouse-hero.svg'
-                  width={628}
-                  height={383}
-                  alt='Real-time data warehouse'
-                />*/}
                 <RealTimeDataWarehouseAnimation width='100%' height='auto' />
               </div>
             </div>
