@@ -68,7 +68,7 @@ export default function FAQDynamic({
             {({ open }) => (
               <>
                 <div onClick={galaxyOnClick(faq.event)}>
-                  <Disclosure.Button className='relative z-10 grid w-full grid-cols-[1fr_1rem] items-center justify-between gap-x-6 rounded-lg p-4 pr-6 pl-20 text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none'>
+                  <Disclosure.Button className='relative z-10 grid w-full grid-cols-[1fr_1rem] items-center justify-between gap-x-6 rounded-lg p-4 pl-20 pr-6 text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none'>
                     <span className='text-md'>{faq.title}</span>
                     <span className={styles.plusMinus} data-active={open} />
                   </Disclosure.Button>

@@ -39,11 +39,10 @@
     top: 1rem;
     bottom: 1rem;
     left: 1rem;
-    content: "0" counter(line-numbering);
+    content: "" counter(line-numbering);
     counter-increment: line-numbering;
   }
   a {@apply text-primary-300}
-  p:not(:last-child) {@apply mb-5}
 }
 
 
