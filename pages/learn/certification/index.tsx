@@ -1,19 +1,21 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import React from 'react'
-import { CUIButton, CUICard } from '../../components/ClickUI'
-import Bullseye from '../../components/icons/Bullseye'
-import Clock from '../../components/icons/Clock'
-import Coins from '../../components/icons/Coins'
-import FileDashed from '../../components/icons/FileDashed'
-import Globe from '../../components/icons/Globe'
-import Layout from '../../components/Layout'
-import LogoCarousel from '../../components/LogoCarousel'
-import { SuiText, SuiTitle } from '../../components/sui'
-import { findOne } from '../../lib/api/strapi'
-import { galaxyOnClick, galaxyOnPage } from '../../lib/galaxy/galaxy'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { LearnProps } from '../../types/learn'
+import { CUIButton, CUICard } from '../../../components/ClickUI'
+import FAQDynamic from '../../../components/FAQDynamic'
+import Bullseye from '../../../components/icons/Bullseye'
+import Clock from '../../../components/icons/Clock'
+import Coins from '../../../components/icons/Coins'
+import FileDashed from '../../../components/icons/FileDashed'
+import Globe from '../../../components/icons/Globe'
+import Layout from '../../../components/Layout'
+import LogoCarousel from '../../../components/LogoCarousel'
+import { SuiText, SuiTitle } from '../../../components/sui'
+import { findOne } from '../../../lib/api/strapi'
+import { galaxyOnClick, galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { LearnProps } from '../../../types/learn'
+import faqs from './faqs.json'
 
 export const getStaticProps: GetStaticProps<LearnProps> =
   async function getStaticProps() {
@@ -358,6 +360,9 @@ export default function CertificationPage({
             />
           </div>
         </div>
+      </div>
+      <div className='my-24'>
+        <FAQDynamic askUsAnything={false} faqs={faqs} />
       </div>
     </Layout>
   )
