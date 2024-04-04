@@ -330,7 +330,7 @@ export default function Page({
                   ref={timelineExternalResourcesRef}
                   className='absolute top-full left-0 right-0'>
                   <div>
-                    <div className='mx-auto h-10 w-px bg-neutral-700'></div>
+                    <div className='mx-auto h-10 w-px bg-neutral-600'></div>
                   </div>
                   <div className='rounded-lg border border-neutral-700 bg-neutral-900 p-4'>
                     <SuiText
