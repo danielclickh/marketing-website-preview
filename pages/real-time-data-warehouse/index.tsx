@@ -25,8 +25,9 @@ export const getStaticProps: GetStaticProps = async function getStaticProps() {
   return {
     props: {
       seo: {
-        title: 'Real-time Data Warehouse - ClickHouse',
-        description: '',
+        title: 'The Real-Time Data Warehouse - ClickHouse',
+        description:
+          'Optimized to power data-intensive apps that run on real-time and historical data. Purpose-built for fast, reliable, and cost-effective querying at any scale.',
         path: '/real-time-data-warehouse',
         image: [{ url: '/images/real-time-data-warehouse/social-banner.png' }]
       },
@@ -138,7 +139,7 @@ export default function Page({
           <div className='section-container mx-auto'>
             <div className='flex flex-col items-center gap-12 lg:flex-row lg:gap-16'>
               {/* Content column */}
-              <div className='flip-selection order-last w-full text-center text-neutral-900 lg:order-first lg:w-1/2 lg:text-left xl:w-2/5'>
+              <div className='flip-selection w-full text-center text-neutral-900 lg:w-1/2 lg:text-left xl:w-2/5'>
                 <SuiTitle type='h1' weight='bold'>
                   The{' '}
                   <span className='tilted tilted-black'>
@@ -163,7 +164,7 @@ export default function Page({
               </div>
 
               {/* Image */}
-              <div className='order-first mx-auto w-full max-w-xl lg:order-last lg:ml-auto lg:mr-0 lg:max-w-[628px]'>
+              <div className='mx-auto w-full max-w-xl lg:ml-auto lg:mr-0 lg:max-w-[628px]'>
                 <RealTimeDataWarehouseAnimation width='100%' height='auto' />
               </div>
             </div>
