@@ -148,17 +148,22 @@ export default function Page({
                   <br />
                   data warehouse
                 </SuiTitle>
-                <SuiText weight='medium' className='mt-6 mb-8 !text-xl'>
+                <SuiText weight='medium' className='mt-6 !text-xl lg:mb-8'>
                   Optimized to power data-intensive applications that run on
                   real-time and historical data. With blazing speed and high
                   concurrency.
                 </SuiText>
+
+                {/**
+                 * This button is hidden on mobile.
+                 * The mobile button can be found below.
+                 */}
                 <CUIButton
                   href='https://clickhouse.cloud/signUp?loc=rt-page-hero'
                   target='_blank'
                   type='primary-dark'
                   size='lg'
-                  className='mx-auto !px-6 lg:mx-0'>
+                  className='mx-auto !hidden !px-6 lg:mx-0 lg:!inline-block'>
                   Start free trial
                 </CUIButton>
               </div>
@@ -166,6 +171,19 @@ export default function Page({
               {/* Image */}
               <div className='mx-auto w-full max-w-xl lg:ml-auto lg:mr-0 lg:max-w-[628px]'>
                 <RealTimeDataWarehouseAnimation width='100%' height='auto' />
+
+                {/**
+                 * This button is hidden on desktop.
+                 * The desktop button can be found above.
+                 */}
+                <CUIButton
+                  href='https://clickhouse.cloud/signUp?loc=rt-page-hero'
+                  target='_blank'
+                  type='primary-dark'
+                  size='lg'
+                  className='mx-auto mt-8 !px-6 lg:mx-0 lg:!hidden'>
+                  Start free trial
+                </CUIButton>
               </div>
             </div>
           </div>
