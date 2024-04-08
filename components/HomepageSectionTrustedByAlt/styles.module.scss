@@ -1,4 +1,4 @@
-$mask-width: 150px;
+$mask-width: 100px;
 
 .maskCarousel {
   :global {
@@ -10,6 +10,14 @@ $mask-width: 150px;
         position: center;
       }
       transition: mask-size 0.4s;
+    }
+  }
+
+  @media not (hover: hover) {
+    :global {
+      .carousel-container {
+        mask-size: 100% 100%;
+      }
     }
   }
 

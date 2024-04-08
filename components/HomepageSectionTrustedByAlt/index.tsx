@@ -87,6 +87,7 @@ export default function HomepageSectionTrustedByAlt({
               <CarouselRow
                 key={index}
                 logos={logoRow}
+                invertLogos={invertLogos}
                 initialSlide={
                   Array.isArray(initialSlide)
                     ? initialSlide?.[index] || 0
@@ -104,9 +105,9 @@ export default function HomepageSectionTrustedByAlt({
         </div>
         <button
           onClick={goPrev}
-          className='group/button absolute top-0 left-0 bottom-0 z-10 hidden w-24 items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100 sm:flex'>
+          className='group/button absolute top-0 left-0 bottom-0 z-10 flex w-12 appearance-none items-center justify-center transition-opacity sm:w-24 sm:opacity-0 sm:group-hover/container:opacity-100'>
           <svg
-            className='transition-transform group-hover/button:-translate-x-1'
+            className='transition-transform sm:group-hover/button:-translate-x-1'
             xmlns='http://www.w3.org/2000/svg'
             width='23'
             height='15'
@@ -120,9 +121,9 @@ export default function HomepageSectionTrustedByAlt({
         </button>
         <button
           onClick={goNext}
-          className='group/button absolute top-0 right-0 bottom-0 z-10 hidden w-24 items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100 sm:flex'>
+          className='group/button absolute top-0 right-0 bottom-0 z-10 flex w-12 appearance-none items-center justify-center transition-opacity sm:w-24 sm:opacity-0 sm:group-hover/container:opacity-100'>
           <svg
-            className='transition-transform group-hover/button:translate-x-1'
+            className='transition-transform sm:group-hover/button:translate-x-1'
             xmlns='http://www.w3.org/2000/svg'
             width='24'
             height='15'
@@ -142,7 +143,7 @@ export default function HomepageSectionTrustedByAlt({
 function CarouselRow({
   logos,
   onInit = () => {},
-  invertLogos = false,
+  invertLogos = true,
   initialSlide = 1
 }: {
   logos: Array<HomepageCustomerStoryLogo>
@@ -156,27 +157,24 @@ function CarouselRow({
       slidesPerView={'auto'}
       slidesPerGroup={1}
       spaceBetween={32}
-      speed={1200}
+      speed={600}
       centeredSlides={true}
       centeredSlidesBounds={true}
       loop={true}
       loopAddBlankSlides={false}
       loopPreventsSliding={true}
-      freeMode={{ enabled: true, sticky: false, momentum: true }}
-      allowTouchMove={true}
+      allowTouchMove={false}
       initialSlide={initialSlide}
       breakpoints={{
         500: {
           slidesPerGroup: 2,
           spaceBetween: 64,
-          allowTouchMove: false,
-          freeMode: false
+          speed: 1200
         },
         800: {
           slidesPerGroup: 3,
           spaceBetween: 64,
-          allowTouchMove: false,
-          freeMode: false
+          speed: 1200
         }
       }}
       className={styles.customSwiperStyles}>
