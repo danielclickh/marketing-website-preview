@@ -162,7 +162,7 @@ function CarouselRow({
       loop={true}
       loopAddBlankSlides={false}
       loopPreventsSliding={true}
-      freeMode={true}
+      freeMode={{ enabled: true, sticky: false, momentum: true }}
       allowTouchMove={true}
       initialSlide={initialSlide}
       breakpoints={{
