@@ -10,6 +10,7 @@ import { SuiText } from '../sui'
 import styles from './styles.module.scss'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { FreeMode } from 'swiper/modules'
 import 'swiper/css'
 
 interface Props extends React.HTMLProps<HTMLDivElement> {
@@ -81,7 +82,7 @@ export default function HomepageSectionTrustedByAlt({
       <div
         className={`group/container relative ${styles.maskCarousel}`}
         style={{ '--logo-scale': logoScale } as React.CSSProperties}>
-        <div className='carousel-container space-y-4 text-black sm:space-y-6'>
+        <div className='carousel-container -my-2 text-black sm:-my-3'>
           {logoRows.map((logoRow, index) => {
             return (
               <CarouselRow
@@ -105,7 +106,7 @@ export default function HomepageSectionTrustedByAlt({
         </div>
         <button
           onClick={goPrev}
-          className='group/button absolute top-0 left-0 bottom-0 z-10 flex w-12 appearance-none items-center justify-center transition-opacity sm:w-24 sm:opacity-0 sm:group-hover/container:opacity-100'>
+          className='group/button absolute top-0 left-0 bottom-0 z-10 hidden w-24 appearance-none items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100 sm:flex'>
           <svg
             className='transition-transform sm:group-hover/button:-translate-x-1'
             xmlns='http://www.w3.org/2000/svg'
@@ -121,7 +122,7 @@ export default function HomepageSectionTrustedByAlt({
         </button>
         <button
           onClick={goNext}
-          className='group/button absolute top-0 right-0 bottom-0 z-10 flex w-12 appearance-none items-center justify-center transition-opacity sm:w-24 sm:opacity-0 sm:group-hover/container:opacity-100'>
+          className='group/button absolute top-0 right-0 bottom-0 z-10 hidden w-24 appearance-none items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100 sm:flex'>
           <svg
             className='transition-transform sm:group-hover/button:translate-x-1'
             xmlns='http://www.w3.org/2000/svg'
@@ -154,6 +155,7 @@ function CarouselRow({
   return (
     <Swiper
       onSwiper={onInit}
+      modules={[FreeMode]}
       slidesPerView={'auto'}
       slidesPerGroup={1}
       spaceBetween={32}
@@ -163,18 +165,27 @@ function CarouselRow({
       loop={true}
       loopAddBlankSlides={false}
       loopPreventsSliding={true}
-      allowTouchMove={false}
+      allowTouchMove={true}
+      touchEventsTarget={'container'}
       initialSlide={initialSlide}
+      freeMode={{
+        enabled: true,
+        sticky: false
+      }}
       breakpoints={{
         500: {
           slidesPerGroup: 2,
           spaceBetween: 64,
-          speed: 1200
+          speed: 1200,
+          allowTouchMove: false,
+          freeMode: false
         },
         800: {
           slidesPerGroup: 3,
           spaceBetween: 64,
-          speed: 1200
+          speed: 1200,
+          allowTouchMove: false,
+          freeMode: false
         }
       }}
       className={styles.customSwiperStyles}>
@@ -182,7 +193,7 @@ function CarouselRow({
         return (
           <SwiperSlide key={index} className='!w-auto'>
             <div
-              className={`inline-block ${
+              className={`inline-block py-2 sm:py-3 ${
                 invertLogos ? 'opacity-90 grayscale invert' : ''
               }`}
               style={{

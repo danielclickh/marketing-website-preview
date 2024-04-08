@@ -13,14 +13,6 @@ $mask-width: 100px;
     }
   }
 
-  @media not (hover: hover) {
-    :global {
-      .carousel-container {
-        mask-size: 100% 100%;
-      }
-    }
-  }
-
   @media (hover: hover) {
     &:hover {
       :global {
