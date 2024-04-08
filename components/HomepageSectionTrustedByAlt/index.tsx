@@ -1,7 +1,10 @@
 import Link from 'next/link'
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import type { Swiper as SwiperClass } from 'swiper/types'
-import { HomepageCustomerStories } from '../../types/homepage'
+import {
+  HomepageCustomerStories,
+  HomepageCustomerStoryLogo
+} from '../../types/homepage'
 import { StrapiImage } from '../StrapiElements'
 import { SuiText } from '../sui'
 import styles from './styles.module.scss'
@@ -13,8 +16,8 @@ interface Props extends React.HTMLProps<HTMLDivElement> {
   customerStories: HomepageCustomerStories
   invertLogos?: boolean
   heading?: string
-  firstCarouselInitialSlide?: number
-  secondCarouselInitialSlide?: number
+  initialSlide?: number | Array<number>
+  numberOfRows?: number
 }
 
 export default function HomepageSectionTrustedByAlt({
@@ -22,10 +25,189 @@ export default function HomepageSectionTrustedByAlt({
   className = '',
   invertLogos = true,
   heading = 'ClickHouse is Trusted by',
-  firstCarouselInitialSlide = 0,
-  secondCarouselInitialSlide = 0,
+  initialSlide = 0, // Index of initial slide, can be an array of indexes for each row of logos
+  numberOfRows = 2,
   ...props
 }: Props) {
+  const [logoScale, setLogoScale] = useState(1)
+  const [swiperInstances, setSwiperInstances] = useState<
+    Record<number, SwiperClass>
+  >({})
+
+  // Modify logo records, replacing SVG sources
+  const logos = structuredClone(customerStories.logos).map(replaceCustomerLogo)
+
+  // Split logos array into X number of groups/rows
+  const logoRows: Array<Array<HomepageCustomerStoryLogo>> = []
+  for (let i = numberOfRows; i > 0; i--) {
+    logoRows.push(logos.splice(0, Math.ceil(logos.length / i)))
+  }
+
+  // Trigger all carousel to go back
+  const goPrev = () => {
+    Object.values(swiperInstances).forEach((instance) => {
+      instance.slidePrev()
+    })
+  }
+
+  // Trigger all carousel to go forward
+  const goNext = () => {
+    Object.values(swiperInstances).forEach((instance) => {
+      instance.slideNext()
+    })
+  }
+
+  useEffect(() => {
+    // Scale logos down on smaller devices, else set to the default scale
+    const resizeListener = () =>
+      window.innerWidth < 640 ? setLogoScale(0.7) : setLogoScale(1)
+
+    // Resize on mount
+    resizeListener()
+
+    // Bind event listeners
+    window.addEventListener('resize', resizeListener)
+    return () => window.removeEventListener('resize', resizeListener)
+  }, [])
+
+  return (
+    <div className={`my-16 text-primary-300 ${className}`} {...props}>
+      <SuiText
+        weight='bold'
+        size='sm'
+        className='mb-10 text-center uppercase tracking-[0.0875rem]'>
+        {heading}
+      </SuiText>
+      <div
+        className={`group/container relative ${styles.maskCarousel}`}
+        style={{ '--logo-scale': logoScale } as React.CSSProperties}>
+        <div className='mask-carousel space-y-4 text-black sm:space-y-6'>
+          {logoRows.map((logoRow, index) => {
+            return (
+              <CarouselRow
+                key={index}
+                logos={logoRow}
+                initialSlide={
+                  Array.isArray(initialSlide)
+                    ? initialSlide?.[index] || 0
+                    : initialSlide
+                }
+                onInit={(newInstance) => {
+                  setSwiperInstances((prevState) => {
+                    prevState[index] = newInstance
+                    return prevState
+                  })
+                }}
+              />
+            )
+          })}
+        </div>
+        <button
+          onClick={goPrev}
+          className='group/button absolute top-0 left-0 bottom-0 z-10 hidden w-24 items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100 sm:flex'>
+          <svg
+            className='transition-transform group-hover/button:-translate-x-1'
+            xmlns='http://www.w3.org/2000/svg'
+            width='23'
+            height='15'
+            fill='none'
+            viewBox='0 0 23 15'>
+            <path
+              fill='currentColor'
+              d='M7.22354.204545 8.87127 1.84517 4.54599 6.16335H22.4082v2.40057H4.54599l4.32528 4.32528-1.64773 1.6335L.0644531 7.36364 7.22354.204545Z'
+            />
+          </svg>
+        </button>
+        <button
+          onClick={goNext}
+          className='group/button absolute top-0 right-0 bottom-0 z-10 hidden w-24 items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100 sm:flex'>
+          <svg
+            className='transition-transform group-hover/button:translate-x-1'
+            xmlns='http://www.w3.org/2000/svg'
+            width='24'
+            height='15'
+            fill='none'
+            viewBox='0 0 24 15'>
+            <path
+              fill='currentColor'
+              d='m15.8751 14.7955-1.6477-1.6407 4.3252-4.31815H.69043V6.43608H18.5526L14.2274 2.1108 15.8751.477273l7.1591 7.159087-7.1591 7.15914Z'
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  )
+}
+
+function CarouselRow({
+  logos,
+  onInit = () => {},
+  invertLogos = false,
+  initialSlide = 1
+}: {
+  logos: Array<HomepageCustomerStoryLogo>
+  onInit?: (swiper: SwiperClass) => void
+  invertLogos?: boolean
+  initialSlide?: number
+}) {
+  return (
+    <Swiper
+      onSwiper={onInit}
+      slidesPerView={'auto'}
+      slidesPerGroup={1}
+      spaceBetween={32}
+      speed={1200}
+      breakpoints={{
+        500: {
+          slidesPerGroup: 2,
+          spaceBetween: 64,
+          allowTouchMove: false
+        },
+        800: {
+          slidesPerGroup: 3,
+          spaceBetween: 64,
+          allowTouchMove: false
+        }
+      }}
+      centeredSlides={true}
+      centeredSlidesBounds={true}
+      loop={true}
+      loopAddBlankSlides={false}
+      loopPreventsSliding={true}
+      allowTouchMove={true}
+      initialSlide={initialSlide}
+      className={styles.customSwiperStyles}>
+      {logos.map((customer, index) => {
+        return (
+          <SwiperSlide key={index} className='!w-auto'>
+            <div
+              className={`inline-block ${
+                invertLogos ? 'opacity-90 grayscale invert' : ''
+              }`}
+              style={{
+                width: customer.darkLogoPng?.width
+                  ? `calc(${customer.darkLogoPng.width}px * var(--logo-scale, 1))`
+                  : 'auto'
+              }}>
+              {customer.href ? (
+                <Link href={customer.href} className='inline'>
+                  <StrapiImage
+                    {...customer.darkLogoPng}
+                    className='max-w-full'
+                  />
+                </Link>
+              ) : (
+                <StrapiImage {...customer.darkLogoPng} className='max-w-full' />
+              )}
+            </div>
+          </SwiperSlide>
+        )
+      })}
+    </Swiper>
+  )
+}
+
+function replaceCustomerLogo(customer: HomepageCustomerStoryLogo) {
   const logoMap: Record<string, string> = {
     'Adevinta.svg': `<svg xmlns="http://www.w3.org/2000/svg" width="129" height="56" viewBox="0 0 129 56"><path fill="#151515" d="M36.5014 24.5082c-1.3805-1.6141-3.2492-2.4227-5.6089-2.4227-2.3748 0-4.2914.9403-5.7587 2.8239-1.4674 1.8837-2.1981 4.3692-2.1981 7.4657v.2605c0 3.0815.7367 5.579 2.2071 7.4925 1.4733 1.9136 3.3749 2.8689 5.7107 2.8689 2.4616 0 4.3812-.8445 5.7587-2.5335l.1677 2.1622h3.1683V14h-3.4468v10.5082Zm0 12.6163c-1.0062 1.9645-2.6023 2.9438-4.7884 2.9438-1.665 0-2.9707-.6469-3.914-1.9376-.9433-1.2907-1.4165-3.0814-1.4165-5.3663 0-2.5605.4732-4.492 1.4165-5.7947.9433-1.3056 2.2609-1.9584 3.9499-1.9584 2.1352 0 3.7223.9493 4.7525 2.8508v9.2624Zm13.9307-15.039c-1.6021 0-3.0904.4432-4.4649 1.3326-1.3746.8894-2.4407 2.1172-3.2073 3.6894-.7636 1.5722-1.1469 3.357-1.1469 5.3574v.6349c0 3.0066.8564 5.4083 2.5723 7.202 1.716 1.7968 3.938 2.6922 6.6721 2.6922 3.3809 0 5.9144-1.2967 7.6034-3.896l-2.1053-1.6411c-.6348.8206-1.3715 1.4794-2.216 1.9765-.8445.4971-1.8776.7457-3.0935.7457-1.7159 0-3.1293-.6109-4.2403-1.8357-1.1111-1.2248-1.692-2.83-1.7429-4.8184h13.6615v-1.4344c0-3.2193-.7277-5.6898-2.1801-7.4177-1.4524-1.7249-3.4918-2.5874-6.1121-2.5874Zm4.8454 8.6096H45.1766c.2246-1.8268.8085-3.2462 1.7518-4.2584s2.1112-1.5183 3.5037-1.5183c1.4405 0 2.5844.4822 3.4289 1.4434.8445.9643 1.3176 2.3209 1.4165 4.0727v.2606Zm11.9523 7.25-5.124-15.4882h-3.5247l7.3067 20.1658h2.629l7.23-20.1658h-3.522zm13.67-15.4882h-3.447v20.1658h3.447zm-1.695-7.3428c-.67 0-1.177.1916-1.518.5779-.341.3863-.512.8565-.512 1.4165s.171 1.0241.512 1.3985c.341.3713.848.56 1.518.56.671 0 1.18-.1857 1.528-.56.347-.3714.521-.8385.521-1.3985s-.174-1.0302-.521-1.4165c-.348-.3833-.854-.5779-1.528-.5779Zm13.953 6.9714c-2.486 0-4.498.9703-6.037 2.9078l-.111-2.5335h-3.261v20.1659h3.446V28.2574c.474-.9702 1.132-1.7518 1.977-2.3477.844-.596 1.827-.8954 2.944-.8954 1.38 0 2.395.3473 3.045 1.0451.653.6947.985 1.7698.997 3.2252v13.3441h3.447V29.3026c-.036-4.8124-2.183-7.2171-6.447-7.2171Zm14.158 17.3779c-.335-.4043-.503-1.0122-.503-1.8178V25.1251h3.764v-2.6652h-3.764v-4.8843h-3.447v4.8843h-3.671v2.6652h3.671v12.5056c0 1.7159.393 3.0365 1.174 3.9708.782.9314 1.944 1.3985 3.486 1.3985.856 0 1.74-.1228 2.647-.3713v-2.779c-.695.1497-1.243.2246-1.641.2246-.808-.003-1.38-.2067-1.716-.6109Zm20.735-1.5543v-9.2803c-.051-2.0364-.734-3.6385-2.049-4.8004-1.317-1.1619-3.138-1.7429-5.462-1.7429-1.467 0-2.812.2725-4.034.8205-1.225.5481-2.192 1.2877-2.908 2.228-.715.9374-1.072 1.9106-1.072 2.9168h3.468c0-.8834.416-1.6351 1.249-2.2549.832-.6199 1.863-.9314 3.093-.9314 1.405 0 2.468.3564 3.187 1.0721.721.7157 1.081 1.674 1.081 2.8808v1.5842h-3.354c-2.896 0-5.142.581-6.738 1.7429s-2.396 2.794-2.396 4.8932c0 1.7279.638 3.1533 1.911 4.2763 1.272 1.126 2.904 1.686 4.893 1.686 2.225 0 4.138-.8325 5.741-2.4975.122 1.0182.284 1.7279.485 2.1232h3.614v-.2995c-.473-1.093-.709-2.5664-.709-4.4171Zm-3.447-.9343c-.435.8954-1.138 1.6201-2.106 2.1801-.97.56-1.994.8385-3.075.8385-1.129 0-2.057-.3055-2.776-.9134-.722-.6079-1.081-1.4524-1.081-2.5334 0-2.4736 2.111-3.7104 6.337-3.7104h2.701v4.1386ZM13.4164 15.4883h-3.1323L2.6957 35.5104h18.4409l-7.7202-20.0221Zm-1.5662 4.4171 4.6657 12.6912H7.2924l4.5578-12.6912Zm6.5396 17.7881 1.8118 4.9322h3.6714l-1.8986-4.9322zM0 42.6257h3.6894l1.7728-4.9322H1.8687z"/></svg>`,
     'Airtory.svg': `<svg xmlns="http://www.w3.org/2000/svg" width="99" height="56" viewBox="0 0 99 56"><path fill="#151515" d="M0 31.9524c0-2.0953.7619-3.5238 2.381-4.381 1.619-.8571 3.9047-1.2381 6.9524-1.2381h2v-.9524c0-1.4285-.381-2.6666-1.1429-3.7143-.7619-1.0476-2-1.619-3.5238-1.619-1.0476 0-2 .1905-2.8571.5714-.8572.381-1.3333.5715-1.3333.5715-.2858 0-.5715-.1905-.762-.4762s-.2857-.5715-.2857-.9524c0-.4762.5714-.9524 1.7143-1.4286 1.1428-.3809 2.381-.6667 3.7143-.6667 2.4762 0 4.3809.762 5.5238 2.1905 1.1428 1.4286 1.7143 3.3334 1.7143 5.5238v10.381c0 .2857-.0952.5714-.381.7619-.2857.1905-.5714.2857-.9523.2857-.381 0-.6667-.0952-.8572-.2857s-.3809-.4762-.3809-.7619v-1.7143c-1.8095 2.0952-3.8096 3.0476-6.0001 3.0476-1.619 0-2.9523-.4762-3.9047-1.3333C.4762 34.9047 0 33.6666 0 31.9524Zm2.5715-.2858c0 1.1429.2857 2.0001.9524 2.4762C4.1905 34.7143 5.0476 35 6 35c1.2381 0 2.4763-.4762 3.6191-1.4286 1.1429-.9524 1.7143-1.9047 1.7143-2.7619v-2.5714H9.6191c-1.0476 0-2 0-2.6667.0952-.7619.0953-1.4286.1905-2.1905.4762C4 29 3.5238 29.3809 3.1429 29.8571c-.381.4762-.5714 1.0476-.5714 1.8095ZM19.143 11.8572c-.381-.2858-.4762-.762-.4762-1.1429 0-.4762.1905-.8572.4762-1.1429.3809-.2857.7619-.4762 1.2381-.4762.4761 0 .8571.1905 1.238.4762.2858.2857.4762.6667.4762 1.1429 0 .4762-.1904.8571-.4762 1.1429-.3809.3809-.7619.4761-1.238.4761-.4762.0953-.9524-.0952-1.2381-.4761Zm0 23.9999V18.9048c0-.2857.0952-.4762.3809-.6667.2857-.1905.5714-.2857.9524-.2857.3809 0 .6666.0952.9524.2857.2857.1905.3809.381.3809.6667v16.9523c0 .2858-.0952.4762-.3809.762-.2858.1904-.5715.2857-.9524.2857-.381 0-.6667-.0953-.8571-.2857-.381-.2858-.4762-.4762-.4762-.762Zm7.9046 0V18.9047c0-.2857.0952-.4762.381-.6666.2857-.1905.5714-.2857.9523-.2857.381 0 .6667.0952.8572.2857.2857.1904.381.3809.381.6666v2.0001c.4762-.8572 1.1428-1.6191 2.0952-2.2858.9524-.6666 2-.9524 3.2381-.9524h1.4286c.2857 0 .4761.0953.7619.381.1904.2857.2857.5714.2857.8571 0 .2858-.0953.5715-.2857.8572-.1905.2857-.4762.3809-.7619.3809h-1.4286c-1.4286 0-2.5715.5715-3.7143 1.6191-1.0476 1.0476-1.619 2.4762-1.619 4.1905v9.8095c0 .2857-.0953.4762-.381.7619-.2857.1905-.5714.2857-.9524.2857-.3809 0-.6667-.0952-.8571-.2857-.1905-.1905-.381-.381-.381-.6667ZM40.5716 31V9.9524c0-.2857.0952-.4762.3809-.6667.2857-.1905.5714-.2857.8572-.2857.3809 0 .6666.0952.9523.2857.2857.1905.381.381.381.6667v8h5.1428c.2857 0 .4762.0952.6667.2857.1905.1905.2857.4762.2857.7619s-.0952.5714-.2857.7619-.381.2857-.6667.2857H43.143v10.7619c0 1.3334.2857 2.1905.8571 2.7619.5714.4762 1.5238.7619 2.8572.7619h1.1428c.381 0 .6667.0953.8571.381.1905.1905.381.4762.381.8571 0 .2857-.0952.6667-.381.8572-.1904.2857-.4761.3809-.8571.3809h-1.1428c-4.1905.0953-6.2857-1.9047-6.2857-5.8095Zm11.1428-1.4286v-4.3809c0-2 .7619-3.8095 2.2857-5.2381 1.5238-1.5238 3.2381-2.1905 5.3329-2.1905 2.096 0 3.81.7619 5.334 2.1905 1.524 1.4286 2.285 3.2381 2.285 5.2381v4.3809c0 2-.761 3.8096-2.285 5.3334s-3.334 2.2857-5.334 2.2857c-1.9996 0-3.7138-.7619-5.2377-2.2857-1.619-1.5238-2.3809-3.3334-2.3809-5.3334Zm2.5714 0c0 1.3334.4762 2.5715 1.4286 3.6191.9524 1.0476 2.0953 1.619 3.5236 1.619 1.429 0 2.572-.5714 3.524-1.619s1.524-2.2857 1.524-3.6191v-4.3809c0-1.3333-.476-2.4762-1.524-3.5238s-2.19-1.5238-3.524-1.5238c-1.3331 0-2.5712.4762-3.5236 1.5238-.9524 1.0476-1.4286 2.1905-1.4286 3.5238v4.3809Zm17.2382 6.2857V18.9047c0-.2857.095-.4762.381-.6666.286-.1905.571-.2857.952-.2857s.667.0952.857.2857c.286.1904.381.3809.381.6666v2.0001c.477-.8572 1.143-1.6191 2.096-2.2858.952-.6666 2-.9524 3.238-.9524h1.428c.286 0 .476.0953.762.381.286.2857.286.5714.286.8571 0 .2858-.095.5715-.286.8572-.19.2857-.476.3809-.762.3809h-1.428c-1.429 0-2.572.5715-3.715 1.6191-1.047 1.0476-1.619 2.4762-1.619 4.1905v9.8095c0 .2857-.095.4762-.381.7619-.285.1905-.571.2857-.952.2857s-.667-.0952-.857-.2857c-.286-.1905-.381-.381-.381-.6667ZM83.143 19c0-.2857.19-.5714.476-.8571.381-.2858.667-.381 1.048-.381.476 0 .857.1905.952.5714L91.143 33l5.143-14.6667c.19-.3809.476-.5714.857-.5714s.667.0952 1.048.381c.38.2857.571.5714.571.8571 0 .1905 0 .2857-.095.2857l-6.191 16.7619-.762 2c-.095.381-.381.9524-.762 1.9048s-.762 1.5238-.952 2l-1.048 1.619c-.476.6667-.857 1.1429-1.333 1.4286-.381.2857-.952.5714-1.524.8572-.571.2857-1.143.3809-1.809.3809-.762 0-1.238-.3809-1.238-1.2381 0-.8571.285-1.2381.762-1.2381 1.238 0 2.381-.7619 3.428-2.1905 1.048-1.4285 1.81-3.3333 2.381-5.5238L83.143 19.381V19Z"/></svg>`,
@@ -72,214 +254,14 @@ export default function HomepageSectionTrustedByAlt({
     'trackingplan 1.svg': `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="56" viewBox="0 0 200 56"><path d="M12.7007068 23.04094758c.0065909.02447622.0131818.04883859.02.07297329l3.4053404 12.74254783c.7769317 2.9072058 3.7573859 4.6324947 6.656931 3.8534678 2.899545-.7790268 4.6202266-3.7671748 3.8432949-6.6744944l-2.0181815-7.5515401 2.8621587-.7688948c2.899545-.77902687 4.6203403-3.76728874 3.8434085-6.67449447-.7769317-2.90719435-3.7573858-4.63244911-6.6569309-3.8534678l-8.1127262 2.17952203c-2.899545.77898132-4.6202266 3.76728872-3.8432949 6.67438062ZM6.84013938 30.2571065c-2.89772689.7784576-5.8771583-.9489943-6.65363548-3.8543785-.77647716-2.9053843.94238624-5.89501228 3.84011313-6.67358377 2.89772688-.77845764 5.87704467.94910813 6.65363547 3.85437853.7763635 2.90538424-.94238623 5.89512604-3.84011312 6.67358374ZM52.718656 22.15251771h-3.9827267v-4.91705632h-.0595455l-3.8638631 2.44370581v2.47335051h-2.3778406v3.15891239h2.3778406v6.7945987c0 .8046415 0 4.5595213 4.2205676 4.5595213 1.545568 0 2.9722723-.5066008 3.4180677-.8940081v-2.8906986h-.0594318c-.3863636.1788472-1.2186362.447061-1.9319315.447061-1.6049998 0-1.7238634-1.3112423-1.7238634-3.0397188v-4.9767555h3.9827267v-3.15891239Zm9.3556806-.32763982c-2.0507952 0-3.3288632 1.10268217-4.1313631 2.80133181l-.3863636-2.47346431h-3.0317041V36.3080835h3.9232949v-6.6157516c0-3.8145335 1.9617043-4.5296945 3.2397723-4.5296945.8024999 0 1.6644316.2085602 2.1399997.3575805v-3.33775951c-.3565909-.1489065-1.0996589-.3575805-1.7536361-.3575805Zm9.0722715-.14913418c-2.1994315 0-4.5474994 1.0430285-5.7661356 1.90732368l-.1188636 3.24827901h.0594318c.9511362-.8046415 3.0019314-1.7880163 5.4094311-1.7880163 1.9022724 0 2.7939769.6853341 2.7939769 1.638996 0 1.1323951-.8322726 1.3112423-2.823636 1.3112423-3.269545 0-6.4201128.9833749-6.4201128 4.2317677 0 3.039605 2.7047724 4.5296945 5.2311357 4.5296945 2.3778406 0 3.7747722-1.1920488 4.547613-2.2649041l.3269318 1.8178431h3.0317041v-9.50645c0-3.84424654-3.2992041-5.12577589-6.2714764-5.12577589Zm-.6836363 12.24824209c-1.2482953 0-2.3480679-.5960814-2.3480679-1.7583034 0-1.2515886.9807954-1.638996 2.4074997-1.638996 1.2484089 0 2.5859088-.1788471 3.2992041-.923835v1.3112424c0 1.7581895-1.5157952 3.009892-3.3586359 3.009892Zm16.2086342 2.8905847c2.7943178 0 4.1909085-.8343545 5.0534084-1.4601489v-3.3377595h-.0590909c-.9215908.6257943-2.4965905 1.370896-4.4295448 1.370896-2.2886361 0-4.0715904-1.4007228-4.0715904-4.172114 0-2.8906985 1.7829543-4.1125742 4.0715904-4.1125742 1.8431815 0 3.3886359.685448 4.3397721 1.3410692h.0590909v-3.36747254c-.8613635-.56625451-2.4068178-1.40072285-4.9329539-1.40072285-4.3994312 0-7.4905672 3.42712619-7.4905672 7.53970039 0 4.3508473 3.1209087 7.5991264 7.4598854 7.5991264Zm7.5511354-.5066009h3.9227267V17.23546139h-3.9227267V36.3079696Zm13.3738616-14.09579822v-.05965367h-4.30909l-5.1420449 6.16880439 5.2909089 7.9866475h4.724999v-.0595398l-5.497727-7.9271077 4.932954-6.10915072Zm3.752272-2.17542368c1.396591 0 2.406818-.923835 2.406818-2.17542367 0-1.2218643-1.010227-2.17550337-2.406818-2.17550337-1.427272 0-2.437499.95363907-2.437499 2.17550337 0 1.25158867 1.010227 2.17542367 2.437499 2.17542367Zm1.931818 16.2712219V22.15263155h-3.923863V36.3079696h3.923863Zm10.438635-14.51314623c-2.198863 0-3.655681 1.19204884-4.428408 2.47357823l-.327273-2.11588389h-3.031818V36.3078558h3.923863v-7.3905662c0-2.7118514 1.3375-3.7847067 2.793182-3.7847067 1.515909 0 2.615909.923835 2.615909 3.6655132v7.5097597h3.923863v-8.3144012c0-3.6058595-1.813636-6.19863123-5.469318-6.19863123Zm18.571589 2.47369203c-.743182-1.40072285-2.288636-2.53311802-4.547727-2.53311802-3.804545 0-6.74659 2.98006522-6.74659 7.18200602 0 4.410501 2.853409 7.1521792 6.50909 7.1521792 2.020454 0 3.418182-.8641813 4.279545-1.9668635v.7748147c0 2.3542708-1.456818 3.69534-3.804545 3.69534-2.318181 0-4.726136-.8046415-6.032954-1.638996h-.060227v3.3674725C133.165918 41.1655317 135.662509 42 138.337508 42c4.102272 0 7.342045-2.1158838 7.342045-8.0164744V22.15263155h-3.031818l-.356818 2.11588385Zm-3.775 8.5229614c-2.467045 0-3.537499-2.0264034-3.537499-3.8740734s1.011363-3.8145335 3.537499-3.8145335c2.407955 0 3.418182 1.9668635 3.418182 3.7847067 0 1.8774968-1.010227 3.9039002-3.418182 3.9039002Zm17.954543-11.05607942c-2.347727 0-3.982954 1.22187568-4.814772 2.56283102l-.327272-2.14559685h-3.031818V41.6721325h3.923863v-6.734945c.861363 1.0430285 2.228409 1.7581895 4.042045 1.7581895 3.83409 0 6.687499-3.277992 6.687499-7.6886069 0-4.172114-2.764772-7.27137272-6.479545-7.27137272Zm-.980681 11.62233392c-2.407955 0-3.447727-2.1158839-3.447727-4.1422872 0-1.9966904 1.039772-4.142401 3.418181-4.142401 2.436364 0 3.536363 2.1158838 3.536363 4.1722278 0 2.0264034-1.069318 4.1124604-3.506817 4.1124604Zm13.467043 2.9502383V17.23546139h-3.922726V36.3079696zm9.068181-14.63222589c-2.2 0-4.547727 1.0430285-5.767045 1.90732368l-.118182 3.24827901h.059091c.951137-.8046415 3.002273-1.7880163 5.409091-1.7880163 1.902272 0 2.794317.6853341 2.794317 1.638996 0 1.1323951-.831818 1.3112423-2.823863 1.3112423-3.269318 0-6.419317.9833749-6.419317 4.2317677 0 3.039605 2.704545 4.5296945 5.230681 4.5296945 2.377272 0 3.774999-1.1920488 4.547727-2.2649041l.327272 1.8178431h3.030682v-9.50645c0-3.84424654-3.298864-5.12577589-6.270454-5.12577589Zm-.684091 12.24824209c-1.248863 0-2.347727-.5960814-2.347727-1.7583034 0-1.2515886.980682-1.638996 2.406818-1.638996 1.248863 0 2.586363-.1788471 3.3-.923835v1.3112424c0 1.7581895-1.515909 3.009892-3.359091 3.009892Zm17.189771-12.12916243c-2.198864 0-3.655682 1.19204884-4.428409 2.47357823l-.327273-2.11588389h-3.030681V36.3078558h3.922727v-7.3905662c0-2.7118514 1.3375-3.7847067 2.794318-3.7847067 1.515908 0 2.614772.923835 2.614772 3.6655132v7.5097597H200v-8.3144012c0-3.6058595-1.813636-6.19863123-5.469317-6.19863123Z"/></svg>`
   }
 
-  const logos = structuredClone(customerStories.logos).map((customer) => {
-    if (customer.darkLogoPng.name in logoMap) {
-      const svgText = logoMap[customer.darkLogoPng.name]
-      const width = parseInt(svgText.match(/\swidth="([\d]+)"/)?.[1] || '')
-      const height = parseInt(svgText.match(/\sheight="([\d]+)"/)?.[1] || '')
-      customer.darkLogoPng.svgText = svgText
-      if (!isNaN(width)) customer.darkLogoPng.width = width
-      if (!isNaN(height)) customer.darkLogoPng.height = height
-    }
-
-    return customer
-  })
-
-  // Reverse array without mutating original
-  //const logosReversed = [...logos].reverse()
-
-  const logos1 = logos.slice(0, Math.ceil(logos.length / 2))
-  const logos2 = logos.slice(Math.ceil(logos.length / 2))
-
-  const [swiperCarousel1, setSwiperCarousel1] = useState<SwiperClass>(null)
-  const [swiperCarousel2, setSwiperCarousel2] = useState<SwiperClass>(null)
-
-  const goPrev = () => {
-    if (swiperCarousel1) swiperCarousel1.slidePrev()
-    if (swiperCarousel2) swiperCarousel2.slidePrev()
+  if (customer.darkLogoPng.name in logoMap) {
+    const svgText = logoMap[customer.darkLogoPng.name]
+    const width = parseInt(svgText.match(/\swidth="([\d]+)"/)?.[1] || '')
+    const height = parseInt(svgText.match(/\sheight="([\d]+)"/)?.[1] || '')
+    customer.darkLogoPng.svgText = svgText
+    if (!isNaN(width)) customer.darkLogoPng.width = width
+    if (!isNaN(height)) customer.darkLogoPng.height = height
   }
 
-  const goNext = () => {
-    if (swiperCarousel1) swiperCarousel1.slideNext()
-    if (swiperCarousel2) swiperCarousel2.slideNext()
-  }
-
-  const [logoScale, setLogoScale] = useState(1)
-
-  useEffect(() => {
-    const resizeListener = () => {
-      // Scale logos down on smaller devices
-      if (window.innerWidth < 640) {
-        setLogoScale(0.7)
-      }
-
-      // Reset logo scale
-      else {
-        setLogoScale(1)
-      }
-    }
-
-    resizeListener()
-
-    window.addEventListener('resize', resizeListener)
-
-    return () => window.removeEventListener('resize', resizeListener)
-  }, [])
-
-  return (
-    <div className={`my-16 text-primary-300 ${className}`} {...props}>
-      <SuiText
-        weight='bold'
-        size='sm'
-        className='mb-10 text-center uppercase tracking-[0.0875rem]'>
-        {heading}
-      </SuiText>
-      <div
-        className={`group/container relative ${styles.maskCarousel}`}
-        style={{ '--logo-scale': logoScale } as React.CSSProperties}>
-        <div className='mask-carousel space-y-4 text-black sm:space-y-6'>
-          <Swiper
-            onSwiper={setSwiperCarousel1}
-            slidesPerView={'auto'}
-            slidesPerGroup={1}
-            spaceBetween={32}
-            speed={1200}
-            breakpoints={{
-              500: {
-                slidesPerGroup: 2,
-                spaceBetween: 64
-              },
-              800: {
-                slidesPerGroup: 3,
-                spaceBetween: 64
-              }
-            }}
-            centeredSlides={true}
-            centeredSlidesBounds={true}
-            loop={true}
-            loopAddBlankSlides={false}
-            loopPreventsSliding={true}
-            allowTouchMove={false}
-            initialSlide={firstCarouselInitialSlide}
-            className={styles.customSwiperStyles}>
-            {logos1.map((customer, index) => {
-              return (
-                <SwiperSlide key={index} className='!w-auto'>
-                  <div
-                    className={`inline-block ${
-                      invertLogos ? 'opacity-90 grayscale invert' : ''
-                    }`}
-                    style={{
-                      width: customer.darkLogoPng?.width
-                        ? `calc(${customer.darkLogoPng.width}px * var(--logo-scale, 1))`
-                        : 'auto'
-                    }}>
-                    {customer.href ? (
-                      <Link href={customer.href} className='inline'>
-                        <StrapiImage
-                          {...customer.darkLogoPng}
-                          className='max-w-full'
-                        />
-                      </Link>
-                    ) : (
-                      <StrapiImage
-                        {...customer.darkLogoPng}
-                        className='max-w-full'
-                      />
-                    )}
-                  </div>
-                </SwiperSlide>
-              )
-            })}
-          </Swiper>
-          <Swiper
-            onSwiper={setSwiperCarousel2}
-            slidesPerView={'auto'}
-            slidesPerGroup={1}
-            spaceBetween={32}
-            speed={1200}
-            breakpoints={{
-              500: {
-                slidesPerGroup: 2,
-                spaceBetween: 64
-              },
-              800: {
-                slidesPerGroup: 3,
-                spaceBetween: 64
-              }
-            }}
-            centeredSlides={true}
-            centeredSlidesBounds={true}
-            loop={true}
-            loopAddBlankSlides={false}
-            loopPreventsSliding={true}
-            allowTouchMove={false}
-            initialSlide={secondCarouselInitialSlide}
-            className={styles.customSwiperStyles}>
-            {logos2.map((customer, index) => {
-              return (
-                <SwiperSlide key={index} className='!w-auto'>
-                  <div
-                    className={`inline-block ${
-                      invertLogos ? 'opacity-90 grayscale invert' : ''
-                    }`}
-                    style={{
-                      width: customer.darkLogoPng?.width
-                        ? `calc(${customer.darkLogoPng.width}px * var(--logo-scale, 1))`
-                        : 'auto'
-                    }}>
-                    {customer.href ? (
-                      <Link href={customer.href} className='inline'>
-                        <StrapiImage
-                          {...customer.darkLogoPng}
-                          className='max-w-full'
-                        />
-                      </Link>
-                    ) : (
-                      <StrapiImage
-                        {...customer.darkLogoPng}
-                        className='max-w-full'
-                      />
-                    )}
-                  </div>
-                </SwiperSlide>
-              )
-            })}
-          </Swiper>
-        </div>
-        <button
-          onClick={goPrev}
-          className='group/button absolute top-0 left-0 bottom-0 z-10 flex w-24 items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100'>
-          <svg
-            className='transition-transform group-hover/button:-translate-x-1'
-            xmlns='http://www.w3.org/2000/svg'
-            width='23'
-            height='15'
-            fill='none'
-            viewBox='0 0 23 15'>
-            <path
-              fill='currentColor'
-              d='M7.22354.204545 8.87127 1.84517 4.54599 6.16335H22.4082v2.40057H4.54599l4.32528 4.32528-1.64773 1.6335L.0644531 7.36364 7.22354.204545Z'
-            />
-          </svg>
-        </button>
-        <button
-          onClick={goNext}
-          className='group/button absolute top-0 right-0 bottom-0 z-10 flex w-24 items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100'>
-          <svg
-            className='transition-transform group-hover/button:translate-x-1'
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='15'
-            fill='none'
-            viewBox='0 0 24 15'>
-            <path
-              fill='currentColor'
-              d='m15.8751 14.7955-1.6477-1.6407 4.3252-4.31815H.69043V6.43608H18.5526L14.2274 2.1108 15.8751.477273l7.1591 7.159087-7.1591 7.15914Z'
-            />
-          </svg>
-        </button>
-      </div>
-    </div>
-  )
+  return customer
 }
