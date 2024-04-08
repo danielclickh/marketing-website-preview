@@ -922,7 +922,7 @@ function QuoteCard({
       <div className='mt-auto flex flex-col justify-between gap-6 sm:flex-row sm:items-center'>
         {logo}
         <span className='order-first font-mono text-primary-300 sm:order-last sm:text-right'>
-          Alternative to
+          Alternative to{' '}
           <br className='hidden sm:block' />
           {alternative}
         </span>
