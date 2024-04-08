@@ -66,7 +66,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
   }, [])
 
   header.banner =
-    '<a href="/blog/chdb-joins-clickhouse-family">chDB joins the ClickHouse family. Read more</a>'
+    '<a href="/company/events/2024-04-google-next?loc=eyebrow">Headed to Google Next between Apr 9-11? Meet with our founders here</a>'
 
   return (
     <>

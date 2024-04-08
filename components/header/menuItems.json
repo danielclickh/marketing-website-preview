@@ -21,7 +21,7 @@
 					{
 						"id": 1,
 						"name": "ClickHouse Cloud",
-						"description": "Available on AWS and GCP.",
+						"description": "Available on AWS, GCP and Azure in Private Preview.",
 						"href": "/cloud",
 						"target": "_self",
 						"icon": "/cloud.svg",

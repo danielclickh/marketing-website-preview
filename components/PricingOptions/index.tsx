@@ -200,8 +200,8 @@ function PricingOptions({
                           size='xs'
                           weight='medium'
                           color='secondary'
-                          className='absolute -top-2 -right-6 rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
-                          Soon
+                          className='absolute -top-2 -right-20 rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
+                          Private Preview
                         </SuiText>
                       </CUIButton>
                     )

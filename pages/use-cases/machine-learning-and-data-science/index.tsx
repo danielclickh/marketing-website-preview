@@ -1,24 +1,24 @@
-import {GetStaticProps} from 'next'
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
-import {CUIButton} from '../../../components/ClickUI'
+import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import AccordionComponent from '../../../components/MLDiagram/Accordion'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
-import {SuiText, SuiTitle} from '../../../components/sui'
-import {findOne} from '../../../lib/api/strapi'
-import {getCommonProps} from '../../../lib/utils/getCommonProps'
-import {CommonProps} from '../../../types/homepage'
+import { SuiText, SuiTitle } from '../../../components/sui'
+import { findOne } from '../../../lib/api/strapi'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { CommonProps } from '../../../types/homepage'
 import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import features from './features.json'
 import quotes from './quotes.json'
-import {galaxyOnPage} from "../../../lib/galaxy/galaxy";
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface MLProps extends CommonProps {
   customerStories: any
@@ -61,7 +61,7 @@ export default function MLUseCasePage({
   headerData,
   footerData
 }: MLProps) {
-  galaxyOnPage('mlAIUseCasePage');
+  galaxyOnPage('mlAIUseCasePage')
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
@@ -395,6 +395,20 @@ export default function MLUseCasePage({
                         className='text-primary-300'>
                         Helicone's Migration from Postgres to ClickHouse for
                         Advanced LLM Monitoring
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href='/blog/clickHouse-and-the-machine-learning-data-layer'
+                        className='text-primary-300'>
+                        ClickHouse and the Machine Learning Data Layer
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href='/blog/powering-featurestores-with-clickhouse'
+                        className='text-primary-300'>
+                        Powering Feature Stores with ClickHouse
                       </Link>
                     </li>
                   </ol>

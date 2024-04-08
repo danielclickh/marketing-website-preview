@@ -1,13 +1,25 @@
-import { findOne } from '../../../lib/api/strapi'
-import GrowingCommunity from '../../../components/GrowingCommunity'
-import Markdown from '../../../components/Markdown'
 import { GetStaticProps } from 'next'
-import { ContactProps } from '../../../types/contact'
-import Layout from '../../../components/Layout'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import HRSeparator from '../../../components/HRSeparator'
-import MarketoForm from '../../../components/MarketoForm'
 import { useRef, useState } from 'react'
+import GrowingCommunity from '../../components/GrowingCommunity'
+import HRSeparator from '../../components/HRSeparator'
+import Layout from '../../components/Layout'
+import MarketoForm from '../../components/MarketoForm'
+import { findOne } from '../../lib/api/strapi'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { ContactProps } from '../../types/contact'
+
+interface DriftAPI {
+  startInteraction: (options: { interactionId: number }) => void
+}
+
+interface DriftWindow extends Window {
+  drift: {
+    api: DriftAPI
+  }
+}
+
+// Tell TypeScript that when we reference `window`, we mean the extended type with `drift` on it
+declare var window: DriftWindow
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -21,10 +33,11 @@ export const getStaticProps: GetStaticProps<ContactProps> =
       props: {
         ...data.hero,
         seo: {
-          title: 'Dedicated Services - ClickHouse',
+          title: 'Google Next 2024 After After Party - ClickHouse',
           description:
-            'Thank you for your interest in our Dedicated Service; please submit the below information to the best of your ability so we can help.',
-          path: '/pricing/contact'
+            'You’re invited to an exclusive ClickHouse “After, After Party” on Tuesday, April 10th  from 9-11pm at the 1923 Prohibition (Speakeasy) Bar at Mandalay Bay Shoppes',
+          path: '/google-next-after-party',
+          image: [{ url: '/images/google-next-party.png' }]
         },
         ...commonProps
       }
@@ -40,7 +53,7 @@ interface ContactPageProps {
   seo: ContactProps['seo']
 }
 
-export default function ContactPage({
+export default function ReinventPage({
   contactForm,
   footerData,
   headerData,
@@ -54,25 +67,30 @@ export default function ContactPage({
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='pt-10'>
-          <div className='container mx-auto flex max-w-2xl flex-col px-8 2xl:px-0'>
+          <div className='max-w74xl container mx-auto flex flex-col px-8 2xl:px-0'>
             <div
               className='mx-auto flex flex-col pt-6 text-center'
               id='pricing-contact-form'>
               <h1 className='mb-6 text-center font-basier text-5.5xl font-semibold leading-tight text-neutral-200'>
-                Dedicated Services
+                Google Next After, After Party
               </h1>
-              <div className=' text-neutral-200'>
-                Thank you for your interest in our Dedicated Service; please
-                submit the below information to the best of your ability so we
-                can help.
+              <h2 className='mb-6 text-center font-basier text-2xl font-semibold leading-tight text-neutral-200'>
+                April 10, from 9 PM to 11 PM
+                <br />
+                1923 Prohibition (Speakeasy) Bar at Mandalay Bay Shoppes
+              </h2>
+              <div className='mx-auto mb-6 max-w-2xl text-neutral-200'>
+                Spaces are filling up fast, and we're quickly running out of
+                passes for the After, After Hours Party. Register below and
+                we'll be in touch!
+                <strong></strong>
               </div>
             </div>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 pt-14 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
               <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
                 {!formSuccess && (
                   <MarketoForm
-                    clearbitTracking={true}
-                    formId='1043'
+                    formId='1101'
                     disclaimer={contactForm.disclaimer}
                     onLoad={() => setFormLoaded(true)}
                     onSuccess={() => {
@@ -96,12 +114,8 @@ export default function ContactPage({
 
                 {formSuccess && (
                   <div ref={formSuccessRef} className='text-center'>
-                    <h3 className='text-2xl font-bold'>
-                      Thank you for your submission!
-                    </h3>
-                    <p className='mt-2 text-neutral-200'>
-                      We will be in touch soon.
-                    </p>
+                    <h3 className='text-2xl font-bold'>Thank you!</h3>
+                    <p className='mt-2 text-neutral-200'>We'll be in touch.</p>
                   </div>
                 )}
               </div>

@@ -1,28 +1,28 @@
-import {useEffect, useRef, useState} from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-import {SuiText, SuiTitle} from '../../components/sui'
+import { SuiText, SuiTitle } from '../../components/sui'
 import CloudProviders from '../../components/CloudProviders'
 
-import {findOne} from '../../lib/api/strapi'
+import { findOne } from '../../lib/api/strapi'
 import BulletPoint from '../../components/BulletPoint'
-import {CloudData} from '../../types/cloud'
-import {GetStaticProps} from 'next'
+import { CloudData } from '../../types/cloud'
+import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
-import {getCommonProps} from '../../lib/utils/getCommonProps'
-import {CUIButton, CUICard} from '../../components/ClickUI'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { CUIButton, CUICard } from '../../components/ClickUI'
 import Image from 'next/image'
 import HRSeparator from '../../components/HRSeparator'
 import integrations from './integrations.json'
 import features from './features.json'
 import featureBlocks from './feature_blocks.json'
-import {ChevronRightIcon} from '@heroicons/react/solid'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 import GetStartedFree from '../../components/GetStartedFree'
 import LogoCarousel from '../../components/LogoCarousel'
 import Link from 'next/link'
-import {motion, useInView} from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import ClickPipesIntegrationImage from '../../components/ClickPipesAnimation/ClickPipesIntegrationImage'
 import Lines from '../../components/ClickPipesAnimation/Lines'
-import {galaxyOnPage} from "../../lib/galaxy/galaxy";
+import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 
 function getRandomDelay(min: number, max: number): number {
   return Math.random() * (max - min) + min
@@ -75,7 +75,7 @@ export default function CloudPage({
   const integrationsRef = useRef(null)
   const isInView = useInView(integrationsRef)
 
-  galaxyOnPage('productCloudPage');
+  galaxyOnPage('productCloudPage')
   useEffect(() => {
     setWindowWidth(window.innerWidth)
     const handleResize = () => {
@@ -369,8 +369,8 @@ export default function CloudPage({
                   Experience the power of open-source ClickHouse in a serverless
                   setup. Deploy in seconds, scale seamlessly, and ensure
                   top-tier security with our SOC 2 Type II compliant platform.
-                  Available on AWS and GCP. Dive into insights without the
-                  infrastructure hassle!
+                  Available on AWS, GCP and Azure in Private Preview. Dive into
+                  insights without the infrastructure hassle!
                 </div>
                 <CUIButton
                   type='primary'
@@ -522,10 +522,10 @@ export default function CloudPage({
               </SuiTitle>
               <div className='mx-auto max-w-2xl px-4 text-center leading-normal text-neutral-200 md:px-0'>
                 With the flexibility to choose where and how you deploy.
-                Available on AWS and GCP, and through Marketplaces. Manage your
-                services through our ClickHouse Cloud self-serve UI, or by
-                leveraging our APIs and Terraform provider to automate your
-                operations.
+                Available on AWS, GCP and Azure in Private Preview, and through
+                Marketplaces. Manage your services through our ClickHouse Cloud
+                self-serve UI, or by leveraging our APIs and Terraform provider
+                to automate your operations.
               </div>
               <div className='mt-16 flex flex-col space-y-10 md:flex-row md:space-x-10 md:space-y-0'>
                 <CUICard className='w-full max-w-[22.5rem] bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>

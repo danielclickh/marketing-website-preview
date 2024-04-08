@@ -81,9 +81,9 @@ export default function HomepageSectionDeployAlt({
               ClickHouse Cloud
             </SuiTitle>
             <SuiText>
-              The best way to use ClickHouse. Available on AWS, GCP and their{' '}
+              The best way to use ClickHouse. Available on AWS, GCP,{' '}
               <br className='hidden md:block' />
-              marketplaces. Coming soon to Azure.
+              their respective marketplaces, and Azure in Private Preview.
             </SuiText>
             <strong className='block w-full rounded bg-white py-2 text-center font-medium text-neutral-900 transition-all group-hover:opacity-80'>
               Get started
@@ -115,7 +115,7 @@ export default function HomepageSectionDeployAlt({
               />
             </svg>
             <SuiTitle type='h3' className='!text-[24px]'>
-              ClickHouse Open Source
+              ClickHouse
             </SuiTitle>
             <SuiText>
               Spin up a database server with <br className='hidden lg:block' />

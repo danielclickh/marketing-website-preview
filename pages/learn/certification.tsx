@@ -160,6 +160,7 @@ export default function CertificationPage({
               <MarketoForm
                 formId={'1116'}
                 onLoad={() => setFormLoaded(true)}
+                clearbitTracking={true}
                 onSuccess={() => {
                   setFormSuccess(true)
 

@@ -396,6 +396,11 @@ const nextConfig = {
         source: '/company/events/v24-1-community-release-call',
         destination: 'https://www.youtube.com/watch?v=pBF9g0wGAGs',
         permanent: true
+      },
+      {
+        source: '/careers',
+        destination: '/company/careers',
+        permanent: true
       }
     ]
   }

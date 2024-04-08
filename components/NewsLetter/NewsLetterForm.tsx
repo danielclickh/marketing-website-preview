@@ -3,7 +3,6 @@ import Markdown from '../Markdown'
 import MarketoForm from '../MarketoForm'
 
 function NewsLetterForm() {
-
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
@@ -14,6 +13,7 @@ function NewsLetterForm() {
         <MarketoForm
           formId={'1122'}
           disclaimer={false}
+          clearbitTracking={true}
           onLoad={() => setFormLoaded(true)}
           onSuccess={() => {
             setFormSuccess(true)
