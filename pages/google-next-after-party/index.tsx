@@ -36,7 +36,8 @@ export const getStaticProps: GetStaticProps<ContactProps> =
           title: 'Google Next 2024 After After Party - ClickHouse',
           description:
             'You’re invited to an exclusive ClickHouse “After, After Party” on Tuesday, April 10th  from 9-11pm at the 1923 Prohibition (Speakeasy) Bar at Mandalay Bay Shoppes',
-          path: '/google-next-after-party'
+          path: '/google-next-after-party',
+          image: [{ url: '/images/google-next-party.png' }]
         },
         ...commonProps
       }
