@@ -150,7 +150,8 @@ export default function HomepageSectionTrustedByAlt({
                 spaceBetween: 64
               },
               800: {
-                slidesPerGroup: 3
+                slidesPerGroup: 3,
+                spaceBetween: 64
               }
             }}
             centeredSlides={true}
@@ -203,7 +204,8 @@ export default function HomepageSectionTrustedByAlt({
                 spaceBetween: 64
               },
               800: {
-                slidesPerGroup: 3
+                slidesPerGroup: 3,
+                spaceBetween: 64
               }
             }}
             centeredSlides={true}
