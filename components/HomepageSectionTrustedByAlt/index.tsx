@@ -81,7 +81,7 @@ export default function HomepageSectionTrustedByAlt({
       <div
         className={`group/container relative ${styles.maskCarousel}`}
         style={{ '--logo-scale': logoScale } as React.CSSProperties}>
-        <div className='mask-carousel space-y-4 text-black sm:space-y-6'>
+        <div className='carousel-container space-y-4 text-black sm:space-y-6'>
           {logoRows.map((logoRow, index) => {
             return (
               <CarouselRow
@@ -157,25 +157,28 @@ function CarouselRow({
       slidesPerGroup={1}
       spaceBetween={32}
       speed={1200}
-      breakpoints={{
-        500: {
-          slidesPerGroup: 2,
-          spaceBetween: 64,
-          allowTouchMove: false
-        },
-        800: {
-          slidesPerGroup: 3,
-          spaceBetween: 64,
-          allowTouchMove: false
-        }
-      }}
       centeredSlides={true}
       centeredSlidesBounds={true}
       loop={true}
       loopAddBlankSlides={false}
       loopPreventsSliding={true}
+      freeMode={true}
       allowTouchMove={true}
       initialSlide={initialSlide}
+      breakpoints={{
+        500: {
+          slidesPerGroup: 2,
+          spaceBetween: 64,
+          allowTouchMove: false,
+          freeMode: false
+        },
+        800: {
+          slidesPerGroup: 3,
+          spaceBetween: 64,
+          allowTouchMove: false,
+          freeMode: false
+        }
+      }}
       className={styles.customSwiperStyles}>
       {logos.map((customer, index) => {
         return (
