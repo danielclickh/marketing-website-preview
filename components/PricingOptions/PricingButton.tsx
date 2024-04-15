@@ -68,7 +68,7 @@ function PricingButton({ isFirst, isLast, path, btnText, index }: Props) {
       </CUIButton>
     )
   } else {
-    return
+    return null
   }
 }
 
