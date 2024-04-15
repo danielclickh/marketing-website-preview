@@ -22,9 +22,7 @@ import {
   config,
   PricingData,
   providerOptions,
-  tierOptions,
-  storageUnitOptionsTiered,
-  calculateComputeMargin
+  storageUnitOptionsTiered
 } from './CalculatorTypesOptions'
 import styles from './CostCalculator.module.scss'
 import CTAButtons from './CTAButtons'
@@ -93,6 +91,20 @@ export const PricingCalculator: React.FC<{
   const tier = searchParams.get('tier') || 'Production'
   const provider = searchParams.get('provider') || 'aws'
   const region = searchParams.get('region') || 'us-east-1'
+
+  const tierOptions = useMemo(() => {
+    if (region === 'ap-northeast-1') {
+      // If the region is ap-northeast-1, only include 'Production' in tier options
+      return [{ label: 'Production', value: 'Production' }]
+    } else {
+      // For other regions, include all tier options
+      return [
+        { label: 'Production', value: 'Production' },
+        { label: 'Development', value: 'Development' }
+      ]
+    }
+  }, [region])
+
   let hours = 8
   const hoursParam = searchParams.get('hours')
   if (hoursParam !== null) {
@@ -246,6 +258,20 @@ export const PricingCalculator: React.FC<{
           { shallow: true }
         )
       }
+    }
+
+    //update dev to prod on ap-northeast-1
+    if (region === 'ap-northeast-1' && tier === 'Development') {
+      router.push(
+        {
+          query: {
+            ...router.query,
+            tier: 'Production' // Set your default value here
+          }
+        },
+        undefined,
+        { shallow: true }
+      )
     }
 
     //make sure number isn't over 24 hrs
