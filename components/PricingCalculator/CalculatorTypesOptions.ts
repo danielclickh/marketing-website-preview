@@ -58,19 +58,48 @@ export interface FormControlProps {
 }
 
 export const acceptableRegions = [
-  { provider: 'aws', region: 'us-east-2' },
-  { provider: 'aws', region: 'us-west-2' },
-  { provider: 'aws', region: 'us-east-1' },
-  { provider: 'aws', region: 'eu-west-1' },
-  { provider: 'aws', region: 'eu-west-2' },
-  { provider: 'aws', region: 'eu-central-1' },
-  { provider: 'aws', region: 'ap-southeast-1' },
-  { provider: 'aws', region: 'ap-south-1' },
-  { provider: 'aws', region: 'ap-southeast-2' },
-  { provider: 'gcp', region: 'us-central1' },
-  { provider: 'gcp', region: 'us-east1' },
-  { provider: 'gcp', region: 'europe-west4' },
-  { provider: 'gcp', region: 'asia-southeast1' }
+  { provider: 'aws', region: 'us-east-2', tier: ['Production', 'Development'] },
+  { provider: 'aws', region: 'us-west-2', tier: ['Production', 'Development'] },
+  { provider: 'aws', region: 'us-east-1', tier: ['Production', 'Development'] },
+  { provider: 'aws', region: 'eu-west-1', tier: ['Production', 'Development'] },
+  { provider: 'aws', region: 'eu-west-2', tier: ['Production', 'Development'] },
+  {
+    provider: 'aws',
+    region: 'eu-central-1',
+    tier: ['Production', 'Development']
+  },
+  { provider: 'aws', region: 'ap-northeast-1', tier: ['Production'] },
+  {
+    provider: 'aws',
+    region: 'ap-southeast-1',
+    tier: ['Production', 'Development']
+  },
+  {
+    provider: 'aws',
+    region: 'ap-south-1',
+    tier: ['Production', 'Development']
+  },
+  {
+    provider: 'aws',
+    region: 'ap-southeast-2',
+    tier: ['Production', 'Development']
+  },
+  {
+    provider: 'gcp',
+    region: 'us-central1',
+    tier: ['Production', 'Development']
+  },
+  { provider: 'gcp', region: 'us-east1', tier: ['Production', 'Development'] },
+  {
+    provider: 'gcp',
+    region: 'europe-west4',
+    tier: ['Production', 'Development']
+  },
+  {
+    provider: 'gcp',
+    region: 'asia-southeast1',
+    tier: ['Production', 'Development']
+  }
 ]
 
 export const config = {

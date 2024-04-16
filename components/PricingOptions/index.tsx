@@ -315,50 +315,51 @@ function PricingOptions({
                         )}
                         {plan.actionButton && (
                           <>
-                            {plan.name === 'Development' && (
-                              <>
-                                <CUIButton
-                                  weight='medium'
-                                  onClick={() => {
-                                    const calculatorElement =
-                                      document.getElementById(
-                                        'pricing-calculator'
-                                      )
-                                    if (calculatorElement) {
-                                      calculatorElement.scrollIntoView({
-                                        behavior: 'smooth',
-                                        block: 'start'
-                                      })
-                                      router.push(
-                                        {
-                                          query: {
-                                            ...router.query,
-                                            tier: 'Development'
-                                          }
-                                        },
-                                        undefined,
-                                        { shallow: true }
-                                      )
-                                    } else {
-                                      router.push(
-                                        {
-                                          hash: 'pricing-calculator',
-                                          query: {
-                                            ...router.query,
-                                            tier: 'Development'
-                                          }
-                                        },
-                                        undefined,
-                                        { shallow: true }
-                                      )
-                                    }
-                                  }}
-                                  className='stroked_button_wrapper button_wrapper mb-4 w-full'
-                                  type='secondary'>
-                                  Estimate your monthly cost ↓
-                                </CUIButton>
-                              </>
-                            )}
+                            {plan.name === 'Development' &&
+                              router.query.region !== 'ap-northeast-1' && (
+                                <>
+                                  <CUIButton
+                                    weight='medium'
+                                    onClick={() => {
+                                      const calculatorElement =
+                                        document.getElementById(
+                                          'pricing-calculator'
+                                        )
+                                      if (calculatorElement) {
+                                        calculatorElement.scrollIntoView({
+                                          behavior: 'smooth',
+                                          block: 'start'
+                                        })
+                                        router.push(
+                                          {
+                                            query: {
+                                              ...router.query,
+                                              tier: 'Development'
+                                            }
+                                          },
+                                          undefined,
+                                          { shallow: true }
+                                        )
+                                      } else {
+                                        router.push(
+                                          {
+                                            hash: 'pricing-calculator',
+                                            query: {
+                                              ...router.query,
+                                              tier: 'Development'
+                                            }
+                                          },
+                                          undefined,
+                                          { shallow: true }
+                                        )
+                                      }
+                                    }}
+                                    className='stroked_button_wrapper button_wrapper mb-4 w-full'
+                                    type='secondary'>
+                                    Estimate your monthly cost ↓
+                                  </CUIButton>
+                                </>
+                              )}
                             {plan.name === 'Production' && (
                               <>
                                 <CUIButton
