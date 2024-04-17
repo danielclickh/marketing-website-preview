@@ -297,9 +297,9 @@ export default function CloudPage({
                             integration.fadeOnLoad ? 'z-10' : 'z-20'
                           } relative rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
                           key={integration.name}>
-                          {integration.soon && (
+                          {integration.badge && (
                             <div className='absolute -top-2 -right-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
-                              Soon
+                              {integration.badge}
                             </div>
                           )}
                           <ClickPipesIntegrationImage
@@ -310,9 +310,9 @@ export default function CloudPage({
                         <div
                           className={`relative z-20 rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
                           key={integration.name}>
-                          {integration.soon && (
+                          {integration.badge && (
                             <div className='absolute -top-2 -right-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
-                              Soon
+                              {integration.badge}
                             </div>
                           )}
                           <ClickPipesIntegrationImage
@@ -343,9 +343,10 @@ export default function CloudPage({
                 <div
                   className='mx-auto max-w-3xl text-center leading-normal text-neutral-200'
                   ref={integrationsRef}>
-                  ClickPipes offers the easiest and most intuitive way to ingest
-                  data into ClickHouse Cloud. With support for Apache Kafka and
-                  Confluent today, and many more data sources coming soon.
+                  ClickPipes is a managed integration service that makes
+                  ingesting data from a diverse set of sources as simple as
+                  clicking a few buttons, offering the easiest and most
+                  intuitive way to ingest data into ClickHouse Cloud.
                 </div>
                 <div className='mx-auto mt-11 inline-block w-full text-center hover:cursor-none'>
                   <CUIButton

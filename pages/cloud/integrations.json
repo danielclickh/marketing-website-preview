@@ -5,15 +5,17 @@
 		"logo": "/images/cloud/integrations/postgres.svg",
 		"imgWidth": 48,
 		"imgHeight": 49,
-		"fadeOnLoad": true
+		"fadeOnLoad": true,
+		"badge": "Soon"
 	},
 	{
 		"id": 2,
 		"name": "Amazon S3",
 		"logo": "/images/cloud/integrations/amazon_s3.svg",
-		"imgWidth": 48,
+		"imgWidth": 49,
 		"imgHeight": 49,
-		"fadeOnLoad": true
+		"fadeOnLoad": false,
+		"badge": "Beta"
 	},
 	{
 		"id": 3,
@@ -66,9 +68,9 @@
 		"id": 80,
 		"name": "Google Cloud PubSub",
 		"logo": "/images/cloud/integrations/diagram/google-cloud-pubsub-logo-1.svg",
-		"soon": true,
 		"imgWidth": 40,
-		"imgHeight": 36
+		"imgHeight": 36,
+		"fadeOnLoad": true
 	},
 	{
 		"id": 9,
@@ -83,8 +85,7 @@
 		"name": "Azure Event Hub",
 		"logo": "/images/cloud/integrations/diagram/azure-event-hub.svg",
 		"imgWidth": 44,
-		"imgHeight": 44,
-		"soon": true
+		"imgHeight": 44
 	},
 	{
 		"id": 12,
@@ -92,7 +93,7 @@
 		"logo": "/images/cloud/integrations/mysql.svg",
 		"imgWidth": 40,
 		"imgHeight": 41,
-		"soon": true
+		"fadeOnLoad": true
 	},
 	{
 		"id": 5,
@@ -104,10 +105,10 @@
 	},
 	{
 		"id": 120,
-		"name": "Union",
-		"logo": "/images/cloud/integrations/diagram/Union.svg",
-		"imgWidth": 48,
-		"imgHeight": 46
+		"name": "AWS MSK",
+		"logo": "/images/cloud/integrations/diagram/aws-msk.svg",
+		"imgWidth": 49,
+		"imgHeight": 49
 	},
 	{
 		"id": 16,
@@ -121,9 +122,10 @@
 		"id": 500,
 		"name": "AWS Kinesis",
 		"logo": "/images/cloud/integrations/diagram/aws-kinesis.svg",
-		"imgWidth": 37,
-		"imgHeight": 44,
-		"soon": true
+		"imgWidth": 49,
+		"imgHeight": 49,
+		"badge": "Beta",
+		"fadeOnLoad": false
 	},
 	{
 		"id": 11,
