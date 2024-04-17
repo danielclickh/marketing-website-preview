@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import ClickPipesAnimation from '../../../components/ClickPipesAnimation'
+import ClickPipesAnimationV2 from '../../../components/ClickPipesAnimation/ClickPipesAnimationV2'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
@@ -11,7 +12,7 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ClickPipesData } from '../../../types/clickpipes'
 import features from './features.json'
 import integrations from './integrations.json'
-import {galaxyOnLoad, galaxyOnPage} from "../../../lib/galaxy/galaxy";
+import { galaxyOnLoad, galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<ClickPipesData> =
   async function getStaticProps() {
@@ -39,8 +40,7 @@ export default function ClickHouseServerPage({
   headerData,
   footerData
 }: ClickPipesData) {
-
-  galaxyOnPage('clickPipesPage');
+  galaxyOnPage('clickPipesPage')
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -86,8 +86,31 @@ export default function ClickHouseServerPage({
                     </CUIButton>
                   </div>
                 </div>
-                <div className='mt-6 hidden lg:block'>
-                  <ClickPipesAnimation className='clickpipes-animation' />
+                <div className='mx-6 mt-6 hidden lg:block'>
+                  <ClickPipesAnimationV2
+                    logo1={{
+                      src: '/images/cloud/integrations/diagram/confluent-logos-idXfleyO4U-1.svg',
+                      alt: 'Confluent',
+                      active: true
+                    }}
+                    logo2={{
+                      src: '/images/cloud/integrations/kafka.svg',
+                      alt: 'Kafka',
+                      active: true
+                    }}
+                    logo3={{
+                      src: '/images/cloud/integrations/amazon_s3.svg',
+                      alt: 'Amazon S3',
+                      active: false,
+                      badge: 'Beta'
+                    }}
+                    logo4={{
+                      src: '/images/cloud/integrations/diagram/aws-kinesis.svg',
+                      alt: 'AWS Kinesis',
+                      active: false,
+                      badge: 'Beta'
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -131,54 +154,88 @@ export default function ClickHouseServerPage({
         </div>
         <div className='clip-inverted-triangle bg-neutral-725'>
           <div className='section-container max-w-7xl lg:mt-0'>
-            <div className='relative flex flex-col rounded-lg border-t-2 border-neutral-700/80 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
-              <div className='p-10'>
-                <h2 className='mb-10 text-center font-basier text-3xl font-semibold'>
-                  Available Connectors
-                </h2>
-                <div className='flex flex-col gap-x-6 gap-y-6 md:flex-row'>
-                  {integrations
-                    .filter((integration) => integration.available)
-                    .map((integration) => (
-                      <div
-                        className='flex flex-1 flex-col justify-evenly bg-neutral-700 p-4'
-                        key={integration.id}>
-                        <div className='mb-4'>
+            <div className='relative rounded-lg border-t-2 border-neutral-700/80 border-primary-300 bg-neutral-900 shadow-lg'>
+              <div className='px-6 py-8 lg:p-10'>
+                <div className='text-center'>
+                  <SuiTitle type='h2'>Available Connectors</SuiTitle>
+                  <SuiText className='mx-auto mt-6 max-w-[844px] opacity-70'>
+                    ClickPipes is an integration engine that simplifies data
+                    ingestion from a variety of sources, including new
+                    connectors for Amazon S3 and Google Cloud Storage. Our
+                    scalable architecture ensures high throughput and low
+                    latency, ideal for demanding workloads.
+                  </SuiText>
+                </div>
+                <div className='-mx-2 mt-8 -mb-3 flex max-w-[1040px] flex-wrap items-stretch justify-center sm:-mx-3 lg:mx-auto'>
+                  {[
+                    {
+                      logo: '/images/cloud/integrations/amazon_s3.svg',
+                      name: 'AWS S3',
+                      badge: 'new'
+                    },
+                    {
+                      logo: '/images/cloud/integrations/diagram/aws-kinesis.svg',
+                      name: 'AWS Kinesis'
+                    },
+                    {
+                      logo: '/images/cloud/integrations/diagram/aws-msk.svg',
+                      name: 'AWS MSK'
+                    },
+                    {
+                      logo: '/images/cloud/integrations/diagram/confluent-logos-idXfleyO4U-1.svg',
+                      name: 'Confluent'
+                    },
+                    {
+                      logo: '/images/cloud/integrations/google-cloud-storage.svg',
+                      name: 'Google Cloud Storage',
+                      badge: 'new'
+                    },
+                    {
+                      logo: '/images/cloud/integrations/kafka.svg',
+                      name: 'Kafka'
+                    },
+                    {
+                      logo: '/images/cloud/integrations/redpanda.svg',
+                      name: 'RedPanda',
+                      badge: 'new'
+                    },
+                    {
+                      logo: '/images/cloud/integrations/upstash.svg',
+                      name: 'Upstash'
+                    },
+                    {
+                      logo: '/images/cloud/integrations/diagram/azure-event-hub.svg',
+                      name: 'Azure Event Hubs'
+                    },
+                    {
+                      logo: '/images/cloud/integrations/warpstream.svg',
+                      name: 'Warpstream'
+                    }
+                  ].map(({ logo, name, badge }) => {
+                    return (
+                      <div className='w-1/2 p-2 sm:p-3 md:w-1/3 lg:w-1/4'>
+                        <div className='relative flex h-full flex-col items-center rounded-sm bg-neutral-700/70 px-4 pt-8 pb-6'>
                           <Image
-                            src={integration.logo}
-                            alt={integration.name}
-                            width={integration.imageWidth}
-                            height={integration.imageHeight}
-                            className='max-w-[72px] md:max-w-max'
+                            src={logo}
+                            width={56}
+                            height={56}
+                            alt={name}
+                            className='mb-4 h-14 w-14 object-contain'
                           />
+                          <SuiTitle
+                            type='h3'
+                            className='!my-auto text-center !text-base'>
+                            {name}
+                          </SuiTitle>
+                          {badge && (
+                            <span className='absolute top-3 right-3 rounded-full bg-warning-800 px-3 py-1 text-xs font-normal text-warning-200'>
+                              {badge}
+                            </span>
+                          )}
                         </div>
-                        <h3 className='mb-6 font-basier text-2xl font-semibold text-neutral-0 md:text-4xl'>
-                          {integration.name}
-                        </h3>
-                        <div className='rich_content min-h-[325px] text-base text-neutral-200'>
-                          <ReactMarkdown
-                            children={integration.description as string}
-                          />
-                        </div>
-                        {integration.buttonHref && (
-                          <div className='mt-auto flex items-center gap-x-6'>
-                            <CUIButton
-                              type='primary'
-                              size='lg'
-                              weight='semibold'
-                              href={integration.buttonHref}
-                              target={integration.buttonTarget}
-                              linkClass='w-full mx-auto md:mx-0 max-w-[14rem] md:max-w-[12rem]'
-                              className='w-full'>
-                              {integration.buttonText}
-                            </CUIButton>
-                            <p className='text-xs text-neutral-50'>
-                              {integration.buttonDescription}
-                            </p>
-                          </div>
-                        )}
                       </div>
-                    ))}
+                    )
+                  })}
                 </div>
               </div>
             </div>
