@@ -170,39 +170,38 @@ export default function ClickHouseServerPage({
                   {[
                     {
                       logo: '/images/cloud/integrations/amazon_s3.svg',
-                      name: 'AWS S3',
-                      badge: 'beta'
+                      name: 'Amazon S3',
+                      badge: 'Beta'
                     },
                     {
                       logo: '/images/cloud/integrations/diagram/aws-kinesis.svg',
-                      name: 'AWS Kinesis',
-                      badge: 'beta'
+                      name: 'Amazon Kinesis',
+                      badge: 'Beta'
                     },
                     {
                       logo: '/images/cloud/integrations/diagram/aws-msk.svg',
-                      name: 'AWS MSK'
+                      name: 'Amazon MSK'
                     },
                     {
                       logo: '/images/cloud/integrations/diagram/confluent-logos-idXfleyO4U-1.svg',
-                      name: 'Confluent'
+                      name: 'Confluent Cloud'
                     },
                     {
                       logo: '/images/cloud/integrations/google-cloud-storage.svg',
                       name: 'Google Cloud Storage',
-                      badge: 'beta'
+                      badge: 'Beta'
                     },
                     {
                       logo: '/images/cloud/integrations/kafka.svg',
-                      name: 'Kafka'
+                      name: 'Apache Kafka'
                     },
                     {
                       logo: '/images/cloud/integrations/redpanda.svg',
-                      name: 'RedPanda',
-                      badge: 'new'
+                      name: 'Redpanda'
                     },
                     {
                       logo: '/images/cloud/integrations/upstash.svg',
-                      name: 'Upstash'
+                      name: 'Upstash Kafta'
                     },
                     {
                       logo: '/images/cloud/integrations/diagram/azure-event-hub.svg',
@@ -210,7 +209,7 @@ export default function ClickHouseServerPage({
                     },
                     {
                       logo: '/images/cloud/integrations/warpstream.svg',
-                      name: 'Warpstream'
+                      name: 'WarpStream'
                     }
                   ].map(({ logo, name, badge }) => {
                     return (
