@@ -11,13 +11,13 @@
     },
     {
         "id": 20,
-        "title": "Denic",
-        "logo": "/images/use-cases/ml-and-ds/Logo_DENIC.svg",
-        "content": "After Testing Hadoop and Spark, We Chose ClickHouse",
-        "href": "/blog/denic-improves-query-times-by-10x-with-clickhouse",
+        "title": "LangChain",
+        "logo": "/images/langchain-logo-white.svg",
+        "content": "When we moved into the LLM observability and analytics space, we decided to back LangSmith with ClickHouse instead of Postgres.",
+        "href": "/blog/langchain-why-we-choose-clickhouse-to-power-langchain?loc=ml-use-case",
         "target": "_self",
-        "imgWidth": 95,
-        "imgHeight": 49
+        "imgWidth": 240,
+        "imgHeight": 43
     },
     {
         "id": 30,
