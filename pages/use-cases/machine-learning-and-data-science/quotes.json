@@ -13,7 +13,7 @@
         "id": 20,
         "title": "LangChain",
         "logo": "/images/langchain-logo-white.svg",
-        "content": "When we moved into the LLM observability and analytics space, we decided to back LangSmith with ClickHouse instead of Postgres.",
+        "content": "We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse.",
         "href": "/blog/langchain-why-we-choose-clickhouse-to-power-langchain?loc=ml-use-case",
         "target": "_self",
         "imgWidth": 240,

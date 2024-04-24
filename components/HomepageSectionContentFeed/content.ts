@@ -195,7 +195,7 @@ export function getContent(): Entry[] {
     // Langchain
     {
       featured: false,
-      body: `“When we moved into the LLM observability and analytics space, we decided to back LangSmith with ClickHouse instead of Postgres.”
+      body: `“We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse.”
 
 
 Ankush, CTO of LangChain

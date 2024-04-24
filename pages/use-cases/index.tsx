@@ -229,87 +229,46 @@ function UseCasesPage({
                       </div>
                       <div className='w-full border-t border-t-[#464641] lg:w-[590px] lg:border-t-0'>
                         <div className='hide-scrollbar max-h-64 overflow-hidden'>
-                          {useCase.title === 'Machine Learning & GenAI' ? (
-                            <div className='grid grid-cols-2 lg:grid-cols-2 lg:grid-rows-3'>
+                          {useCase.ClientsUsingUseCase.length > 0 && (
+                            <div className='grid grid-cols-2'>
                               {useCase.ClientsUsingUseCase.map(
                                 (client, index) => (
-                                  <Link
-                                    href={client.href}
+                                  <div
                                     key={index}
-                                    className={`${
-                                      index === 0
-                                        ? 'h-[86px] lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-2'
-                                        : index === 1
-                                        ? 'h-[86px] lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:row-end-3'
-                                        : index === 2
-                                        ? 'lg:col-start-2 lg:col-end-4 lg:row-start-1 lg:row-end-3'
-                                        : index === 3
-                                        ? 'h-[86px] lg:col-start-1 lg:col-end-4 lg:row-start-3 lg:row-end-4'
-                                        : ''
-                                    } logos-color-swap flex w-full items-center border-l border-b border-[#464641] last:border-r`}>
-                                    <div className='color-swap mx-auto w-full object-contain'>
+                                    className={`logos-color-swap flex h-[86px] w-full items-center border-l border-b border-[#464641] last:border-r`}>
+                                    <Link
+                                      href={client.href}
+                                      className='color-swap mx-auto w-full object-contain'>
                                       <StrapiImage
                                         {...client.logo}
                                         className={`${
-                                          index === 2
-                                            ? 'lg:min-h-[84px] lg:min-w-[130px]'
-                                            : index === 0
-                                            ? 'max-h-[64px] max-w-[130px] lg:max-w-[160px]'
-                                            : index === 3
-                                            ? 'max-h-[64px] max-w-[130px] lg:max-w-[160px]'
-                                            : 'max-h-[64px] max-w-[120px]'
-                                        } mx-auto mt-auto `}
+                                          client.clientName === 'Lyft'
+                                            ? 'max-w-[60px] lg:max-h-[44px]'
+                                            : client.clientName ===
+                                              'Contentsquare'
+                                            ? 'max-w-[140px] lg:max-w-[160px]'
+                                            : client.clientName ===
+                                              'Highlight.io'
+                                            ? 'max-w-[120px] lg:max-w-[160px]'
+                                            : client.clientName ===
+                                              'Deutsche Bank'
+                                            ? 'max-w-[150px] lg:max-w-[200px]'
+                                            : client.clientName === 'QuickCheck'
+                                            ? 'max-w-[150px] lg:max-w-[210px]'
+                                            : client.clientName === 'Darwinium'
+                                            ? 'max-w-[140px] lg:max-w-[160px]'
+                                            : client.clientName === 'RunReveal'
+                                            ? 'max-w-[140px] lg:max-w-[150px]'
+                                            : 'max-h-[64px] max-w-[120px] lg:max-w-[120px]'
+                                        }
+                                          mx-auto mt-auto
+                                            `}
                                       />
-                                    </div>
-                                  </Link>
+                                    </Link>
+                                  </div>
                                 )
                               )}
                             </div>
-                          ) : (
-                            useCase.ClientsUsingUseCase.length > 0 && (
-                              <div className='grid grid-cols-2'>
-                                {useCase.ClientsUsingUseCase.map(
-                                  (client, index) => (
-                                    <div
-                                      key={index}
-                                      className={`logos-color-swap flex h-[86px] w-full items-center border-l border-b border-[#464641] last:border-r`}>
-                                      <Link
-                                        href={client.href}
-                                        className='color-swap mx-auto w-full object-contain'>
-                                        <StrapiImage
-                                          {...client.logo}
-                                          className={`${
-                                            client.clientName === 'Lyft'
-                                              ? 'max-w-[60px] lg:max-h-[44px]'
-                                              : client.clientName ===
-                                                'Contentsquare'
-                                              ? 'max-w-[140px] lg:max-w-[160px]'
-                                              : client.clientName ===
-                                                'Highlight.io'
-                                              ? 'max-w-[120px] lg:max-w-[160px]'
-                                              : client.clientName ===
-                                                'Deutsche Bank'
-                                              ? 'max-w-[150px] lg:max-w-[210px]'
-                                              : client.clientName ===
-                                                'QuickCheck'
-                                              ? 'max-w-[150px] lg:max-w-[210px]'
-                                              : client.clientName ===
-                                                'Darwinium'
-                                              ? 'max-w-[140px] lg:max-w-[160px]'
-                                              : client.clientName ===
-                                                'RunReveal'
-                                              ? 'max-w-[140px] lg:max-w-[150px]'
-                                              : 'max-h-[64px] max-w-[120px] lg:max-w-[120px]'
-                                          }
-                                          mx-auto mt-auto
-                                            `}
-                                        />
-                                      </Link>
-                                    </div>
-                                  )
-                                )}
-                              </div>
-                            )
                           )}
                         </div>
                       </div>
