@@ -47,6 +47,7 @@ export default function CTAButtons({
   const [availabilityZones, setAvailabilityZones] = useState(2)
 
   const oneComputeUnitText = '24GiB RAM, 6 vCPU'
+  const oneComputeUnitTextDev = '16GiB RAM, 2 vCPU'
 
   const formattedStorageCost = Number(storageCost.toFixed(2)).toLocaleString(
     'en-US',
@@ -306,7 +307,7 @@ export default function CTAButtons({
                     ${Number(computeCostMin.toFixed(0)).toLocaleString('en-US')}{' '}
                     for compute
                     <TooltipInfo
-                      content={`Compute cost = ${minMemoryLabel} * ${hours}h per day * 30 days per month\n\n1 compute unit = ${oneComputeUnitText} = $${
+                      content={`Compute cost = ${minMemoryLabel} * ${hours}h per day * 30 days per month\n\n1 compute unit = ${oneComputeUnitTextDev} = $${
                         pricingData &&
                         calculateComputeMargin(
                           tier,
