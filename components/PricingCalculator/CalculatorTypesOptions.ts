@@ -126,6 +126,7 @@ export const providerOptions: Array<Option<Provider>> = [
   { value: 'gcp', label: 'GCP' }
 ]
 
+//to calculate vCPU, you divide the GiB by 4
 export const computeOptions: Array<NumericOption> = [
   {
     value: 16,
@@ -136,8 +137,8 @@ export const computeOptions: Array<NumericOption> = [
   { value: 48, label: '48 GiB RAM, 12 vCPU', tier: ['Production'] },
   { value: 96, label: '96 GiB RAM, 24 vCPU', tier: ['Production'] },
   { value: 192, label: '192 GiB RAM, 48 vCPU', tier: ['Production'] },
-  { value: 360, label: '360 GiB RAM, 96 vCPU', tier: ['Production'] },
-  { value: 720, label: '720 GiB RAM, 192 vCPU', tier: ['Production'] },
+  { value: 360, label: '360 GiB RAM, 90 vCPU', tier: ['Production'] },
+  { value: 720, label: '720 GiB RAM, 180 vCPU', tier: ['Production'] },
   { value: 1080, label: '1080 GiB RAM, 270 vCPU', tier: ['Production'] },
   { value: 1800, label: '1800 GiB RAM, 450 vCPU', tier: ['Production'] },
   { value: 3600, label: '3600 GiB RAM, 960 vCPU', tier: ['Production'] }
