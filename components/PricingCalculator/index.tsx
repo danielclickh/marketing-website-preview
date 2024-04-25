@@ -427,6 +427,7 @@ export const PricingCalculator: React.FC<{
         )
       }
 
+      //if min size is greater than max, then set max to match
       if (
         computeMinSize > computeMaxSize &&
         computeMinSize !== computeMaxSize

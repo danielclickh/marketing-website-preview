@@ -46,6 +46,8 @@ export default function CTAButtons({
   const [share, setShare] = useState('Share')
   const [availabilityZones, setAvailabilityZones] = useState(2)
 
+  const oneComputeUnitText = '24GiB RAM, 6 vCPU'
+
   const formattedStorageCost = Number(storageCost.toFixed(2)).toLocaleString(
     'en-US',
     {
@@ -304,7 +306,7 @@ export default function CTAButtons({
                     ${Number(computeCostMin.toFixed(0)).toLocaleString('en-US')}{' '}
                     for compute
                     <TooltipInfo
-                      content={`Compute cost = ${minMemoryLabel} * ${hours}h per day * 30 days per month\n\n1 compute unit = ${minMemoryLabel} = $${
+                      content={`Compute cost = ${minMemoryLabel} * ${hours}h per day * 30 days per month\n\n1 compute unit = ${oneComputeUnitText} = $${
                         pricingData &&
                         calculateComputeMargin(
                           tier,
@@ -350,7 +352,7 @@ export default function CTAButtons({
                             minMemory && minMemory / 24
                           } compute unit${
                             minMemory && minMemory / 24 > 1 ? 's' : ''
-                          } * ${hours}h per day * 30 days\n\n1 compute unit = ${minMemoryLabel} = $${
+                          } * ${hours}h per day * 30 days\n\n1 compute unit = ${oneComputeUnitText} = $${
                             pricingData &&
                             calculateComputeMargin(
                               tier,
@@ -393,7 +395,7 @@ export default function CTAButtons({
                           maxMemory && maxMemory / 24
                         } compute unit${
                           maxMemory && maxMemory / 24 > 1 ? 's' : ''
-                        }  * ${hours}h per day * 30 days\n\n1 compute unit = ${maxMemoryLabel} = $${
+                        }  * ${hours}h per day * 30 days\n\n1 compute unit = ${oneComputeUnitText} = $${
                           pricingData &&
                           calculateComputeMargin(
                             tier,
