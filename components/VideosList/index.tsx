@@ -1,31 +1,42 @@
 import { useRouter } from 'next/router'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { getVideos, getCategories, getCategory } from '../../lib/videos'
+import { Video, VideoCategoryRecord } from '../../lib/videos/types'
 import { SuiSearchField } from '../sui'
 import CategorySelector from '../CategorySelector'
 import VideoCard from '../VideoCard'
 
-export default function VideosList() {
-
+export default function VideosList({
+  videos,
+  categories
+}: {
+  videos: Video[]
+  categories: VideoCategoryRecord
+}) {
   const router = useRouter()
 
-  const [category, setCategory] = useState<string|null>(null)
-  const [search, setSearch] = useState<string|null>(null)
+  const [category, setCategory] = useState<string | null>(null)
+  const [search, setSearch] = useState<string | null>(null)
 
-  const searchChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value.trim().toLowerCase())
+  const searchChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setSearch(e.target.value.trim().toLowerCase())
 
   const videoList = (() => {
-    let results = getVideos();
-    const categoryName = category ? getCategory(category) : false;
+    let results = structuredClone(videos)
+    const categoryName = false //category ? await getCategory(category) : false
 
     if (categoryName) {
-      results = results.filter(video => video.categories.includes(categoryName))
+      results = results.filter((video) =>
+        video.categories.includes(categoryName)
+      )
     }
 
     if (search) {
-      results = results.filter(video => {
+      results = results.filter((video) => {
         const inTitle = video.title.toLowerCase().includes(search)
-        const inSubTitle = (video?.subTitle || '').toLowerCase().includes(search)
+        const inSubTitle = (video?.subTitle || '')
+          .toLowerCase()
+          .includes(search)
         return inTitle || inSubTitle
       })
     }
@@ -41,18 +52,18 @@ export default function VideosList() {
         setCategory(null)
       }
     }
-  ];
+  ]
 
   // Push categories to list
-  getCategories().forEach((name, slug) => {
-    categoryList.push({
-      text: name,
-      selected: slug === category,
-      onClick() {
-        setCategory(slug)
-      }
-    })
-  });
+  // categories.forEach((name, slug) => {
+  //   categoryList.push({
+  //     text: name,
+  //     selected: slug === category,
+  //     onClick() {
+  //       setCategory(slug)
+  //     }
+  //   })
+  // })
 
   // Load values from query string
   useEffect(() => {
@@ -61,7 +72,11 @@ export default function VideosList() {
     const urlSearch = queryParams.get('search')
 
     // Check the url category is valid using the `getCategory` function
-    if (urlCategory && String(urlCategory).trim().length && getCategory(String(urlCategory).trim())) {
+    if (
+      urlCategory &&
+      String(urlCategory).trim().length &&
+      getCategory(String(urlCategory).trim())
+    ) {
       setCategory(urlCategory)
     }
 
@@ -73,34 +88,36 @@ export default function VideosList() {
 
   // Update query string values
   useEffect(() => {
-    const queryParams = [];
+    const queryParams = []
 
-    if (category && getCategory(category)) {
-      queryParams.push(`category=${encodeURIComponent(category)}`);
+    if (category) {
+      queryParams.push(`category=${encodeURIComponent(category)}`)
     }
 
     if (search) {
-      queryParams.push(`search=${encodeURIComponent(search)}`);
+      queryParams.push(`search=${encodeURIComponent(search)}`)
     }
 
     if (queryParams.length) {
-      router.push('/videos?' + queryParams.join('&'), undefined, { shallow: true })
+      router.push('/videos?' + queryParams.join('&'), undefined, {
+        shallow: true
+      })
     } else {
       router.push('/videos', undefined, { shallow: true })
     }
-  }, [category, search]);
+  }, [category, search])
 
   return (
     <>
-      <div className='max-w-7xl container mx-auto px-8 2xl:px-0 pt-8'>
-
-        <div className='flex-col lg:flex lg:flex-row lg:justify-between items-center pb-8 lg:space-x-24'>
+      <div className='container mx-auto max-w-7xl px-8 pt-8 2xl:px-0'>
+        <div className='flex-col items-center pb-8 lg:flex lg:flex-row lg:justify-between lg:space-x-24'>
           <SuiSearchField
             placeholder='Search by title or keyword...'
             htmlFor='search'
-            className='lg:flex-1 mb-6 lg:mb-0'
+            className='mb-6 lg:mb-0 lg:flex-1'
             value={search || ''}
-            onChange={searchChange}/>
+            onChange={searchChange}
+          />
           <CategorySelector options={categoryList} />
         </div>
 
@@ -115,12 +132,13 @@ export default function VideosList() {
         </div>
 
         {!videoList.length && (
-          <p className='text-center w-full mt-12'>
+          <p className='mt-12 w-full text-center'>
             {search ? `No search results for "${search}"` : 'No results'}
-            {category && getCategory(category) ? ` in ${getCategory(category)}` : ''}
+            {category && getCategory(category)
+              ? ` in ${getCategory(category)}`
+              : ''}
           </p>
         )}
-
       </div>
     </>
   )
