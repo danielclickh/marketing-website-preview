@@ -1,7 +1,10 @@
 import { useRouter } from 'next/router'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { getVideos, getCategories, getCategory } from '../../lib/videos'
-import { Video, VideoCategoryRecord } from '../../lib/videos/types'
+import {
+  Video,
+  VideoCategory,
+  VideoCategoryRecord
+} from '../../lib/videos/types'
 import { SuiSearchField } from '../sui'
 import CategorySelector from '../CategorySelector'
 import VideoCard from '../VideoCard'
@@ -18,12 +21,14 @@ export default function VideosList({
   const [category, setCategory] = useState<string | null>(null)
   const [search, setSearch] = useState<string | null>(null)
 
+  const getCategory = (slug: string) => categories?.[slug] || null
+
   const searchChange = (e: ChangeEvent<HTMLInputElement>) =>
     setSearch(e.target.value.trim().toLowerCase())
 
   const videoList = (() => {
     let results = structuredClone(videos)
-    const categoryName = false //category ? await getCategory(category) : false
+    const categoryName = category ? getCategory(category) : false
 
     if (categoryName) {
       results = results.filter((video) =>
@@ -55,15 +60,15 @@ export default function VideosList({
   ]
 
   // Push categories to list
-  // categories.forEach((name, slug) => {
-  //   categoryList.push({
-  //     text: name,
-  //     selected: slug === category,
-  //     onClick() {
-  //       setCategory(slug)
-  //     }
-  //   })
-  // })
+  Object.entries(categories).forEach(([slug, name]) => {
+    categoryList.push({
+      text: name,
+      selected: slug === category,
+      onClick() {
+        setCategory(slug)
+      }
+    })
+  })
 
   // Load values from query string
   useEffect(() => {

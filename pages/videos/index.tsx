@@ -20,7 +20,7 @@ interface VideosPageProps extends CommonProps {
 export async function getStaticProps() {
   const props: VideosPageProps = {
     allVideos: await getVideos(),
-    allCategories: Object.fromEntries((await getCategories()).entries()),
+    allCategories: await getCategories(),
     title: 'Videos',
     seo: {
       title: 'ClickHouse Videos | ClickHouse How to videos',

@@ -4,6 +4,7 @@ import { ParsedUrlQuery } from 'querystring'
 import React from 'react'
 import FollowUs from '../../../components/FollowUs'
 import Layout from '../../../components/Layout'
+import Markdown from '../../../components/Markdown'
 import { SuiButton, SuiTitle } from '../../../components/sui'
 import VideoCard from '../../../components/VideoCard'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
@@ -51,12 +52,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       video,
       nextVideo,
       prevVideo,
-      seo: {
-        title: `${video.title} | ClickHouse Videos`,
-        description: video.description,
-        imageUrl: video.socialImage ?? video.thumbnail,
-        path: `/videos/${video.slug}`
-      },
+      seo: { ...video.seo, ...{ path: `/videos/${video.slug}` } },
       ...(await getCommonProps())
     }
 
@@ -178,7 +174,7 @@ export default function VideoPage({
           {video.subTitle && (
             <h2 className='whitespace-pre-wrap text-xl'>{video.subTitle}</h2>
           )}
-          {video.description && <p>{video.description}</p>}
+          {video.description && <Markdown>{video.description}</Markdown>}
         </div>
       </div>
 
@@ -202,7 +198,13 @@ export default function VideoPage({
           </div>
           <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
             {allVideos
-              .filter((item) => item.slug !== video.slug)
+              .filter((item) => {
+                if (video.related.length) {
+                  return video.related.includes(item.id)
+                }
+
+                return item.slug !== video.slug
+              })
               .map((item) => {
                 return (
                   <div key={item.slug}>

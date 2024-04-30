@@ -1,5 +1,6 @@
+import { StrapiImageProps } from '../../components/StrapiElements/types'
 import { findAll } from '../api/strapi'
-import { Video, VideoCategory, VideoCategoryMap } from './types'
+import { Video, VideoCategoryRecord } from './types'
 import { slugify } from '../utils/strings'
 
 type StrapiItem = {
@@ -9,26 +10,47 @@ type StrapiItem = {
   Title?: null | string
   SubTitle?: null | string
   Description?: null | string
-  Categories?: Array<{ CategoryName: string }>
+  categories?: Array<{ CategoryName: string }>
   RelatedVideos?: Array<StrapiItem>
+  seo: null | {
+    title?: null | string
+    description?: null | string
+    image?: null | StrapiImageProps
+  }
 }
 
 export async function getVideos(): Promise<Video[]> {
   const response = await findAll('marketing-videos', {
-    populate: ['Categories']
+    populate: ['categories', 'RelatedVideos', 'seo', 'seo.image']
   })
 
   const data = response.data as Array<StrapiItem>
 
   return data.map((item) => {
+    const thumbnail = `https://img.youtube.com/vi/${item.VideoID}/maxresdefault.jpg`
+
+    let seo: Video['seo'] = {
+      title: item?.seo?.title || `${item.Title} | ClickHouse Videos`,
+      description: item?.seo?.description || item.Description || ''
+    }
+
+    if (item?.seo?.image) {
+      seo.image = [item?.seo?.image]
+    } else {
+      seo.imageUrl = thumbnail
+    }
+
     return {
+      id: item.id,
       slug: item.Slug,
       title: item.Title,
       subTitle: item?.SubTitle || null,
       description: item.Description,
-      thumbnail: `https://img.youtube.com/vi/${item.VideoID}/maxresdefault.jpg`,
+      thumbnail,
       embed: `<iframe src="https://www.youtube-nocookie.com/embed/${item.VideoID}?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>`,
-      categories: item.Categories?.map((cat) => cat.CategoryName) || []
+      categories: item.categories?.map((cat) => cat.CategoryName) || [],
+      related: item.RelatedVideos?.map((cat) => cat.id) || [],
+      seo: seo
     } as Video
   })
 }
@@ -37,7 +59,7 @@ export async function getVideo(slug: string): Promise<Video | null> {
   return (await getVideos()).find((video) => video.slug === slug) || null
 }
 
-export async function getCategories(): Promise<VideoCategoryMap> {
+export async function getCategories(): Promise<VideoCategoryRecord> {
   const categories = new Map()
 
   ;(await getVideos())
@@ -46,9 +68,5 @@ export async function getCategories(): Promise<VideoCategoryMap> {
       categories.set(slugify(category), category)
     })
 
-  return categories
-}
-
-export async function getCategory(slug: string): Promise<VideoCategory | null> {
-  return (await getCategories()).get(slug) || null
+  return Object.fromEntries(categories.entries())
 }
