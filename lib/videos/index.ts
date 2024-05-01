@@ -8,7 +8,7 @@ type StrapiItem = {
   Slug: string
   VideoID: string
   Title?: null | string
-  SubTitle?: null | string
+  IntroText?: null | string
   Description?: null | string
   categories?: Array<{ CategoryName: string }>
   RelatedVideos?: Array<StrapiItem>
@@ -44,7 +44,7 @@ export async function getVideos(): Promise<Video[]> {
       id: item.id,
       slug: item.Slug,
       title: item.Title,
-      subTitle: item?.SubTitle || null,
+      subTitle: item?.IntroText || null,
       description: item.Description,
       thumbnail,
       embed: `<iframe src="https://www.youtube-nocookie.com/embed/${item.VideoID}?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>`,
