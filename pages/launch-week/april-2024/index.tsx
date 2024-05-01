@@ -31,6 +31,7 @@ export const getStaticProps: GetStaticProps = async () => {
   data.seo.path = '/launch-week/april-2024'
   data.seo.title = 'ClickHouse Cloud Launch Week - April 2024'
   data.seo.description = 'ClickHouse Cloud Launch Week - April 2024'
+  // TODO: Update this URL
   data.seo.image = [{ url: '/images/use-cases/logging/og.png' }]
 
   const commonProps = await getCommonProps()
@@ -74,7 +75,7 @@ export default function LaunchWeekPage({
   headerData,
   footerData
 }: EventProps) {
-  galaxyOnPage('logsMetricsUseCasePage')
+  galaxyOnPage('launchWeekAprilPage')
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
