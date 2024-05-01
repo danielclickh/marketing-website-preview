@@ -33,8 +33,9 @@ export const getStaticProps: GetStaticProps = async () => {
   data.seo.path = '/launch-week/april-2024'
   data.seo.title = 'ClickHouse Cloud Launch Week - April 2024'
   data.seo.description = 'ClickHouse Cloud Launch Week - April 2024'
-  // TODO: Update this URL
-  data.seo.image = [{ url: '/images/use-cases/logging/og.png' }]
+  data.seo.image = [
+    { url: '/images/launch-week/launch-week-social-preview.png' }
+  ]
 
   const commonProps = await getCommonProps()
 
