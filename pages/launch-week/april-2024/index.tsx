@@ -67,7 +67,8 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       recentEvents,
-      ...commonProps
+      ...commonProps,
+      ...data
     }
   }
 }
