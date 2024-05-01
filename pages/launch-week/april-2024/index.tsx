@@ -133,7 +133,7 @@ export default function LaunchWeekPage({
           <div className='flex-col'>
             {releases.map((release) => (
               <>
-                <div className='mb-12 flex flex-col md:flex md:flex-row'>
+                <div className='mb-12 flex flex-col justify-center md:flex md:flex-row'>
                   <div className='flex justify-start gap-4 pt-4 pb-4'>
                     <div className='flex'>
                       <CalendarIcon className='h-12 w-12 stroke-1 text-neutral-200' />
@@ -145,6 +145,7 @@ export default function LaunchWeekPage({
                       <h5 className='text-neutral-400'>{release.date}</h5>
                     </div>
                   </div>
+
                   <Tilt
                     tiltEnable={false}
                     glareEnable={true}
