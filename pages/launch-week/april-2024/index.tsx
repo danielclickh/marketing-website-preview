@@ -12,6 +12,8 @@ import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CUIButton } from '../../../components/ClickUI'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import Tilt from 'react-parallax-tilt'
+
 import HRSeparator from '../../../components/HRSeparator'
 import {
   BookOpenIcon,
@@ -141,61 +143,69 @@ export default function LaunchWeekPage({
                       <h5 className='text-neutral-400'>{release.date}</h5>
                     </div>
                   </div>
-                  <div className='relative mx-auto flex h-auto w-full rounded-lg border border-neutral-700/80 bg-neutral-900 bg-opacity-30 p-4 shadow-card'>
-                    {release.blurred && (
-                      <div className='absolute mt-16 ml-[40%] text-lg font-semibold'>
-                        Coming soon
-                      </div>
-                    )}
-                    <div
-                      className={`flex w-full justify-between gap-8 ${
-                        release.blurred && 'pointer-events-none blur-xl'
-                      }`}>
-                      <div className='flex-col'>
-                        <h3 className='mb-1 text-lg font-semibold'>
-                          {release.title}
-                        </h3>
-                        <SuiText className='mb-6 max-w-2xl'>
-                          {release.summary}
-                        </SuiText>
-
-                        <div className='flex-col gap-6 md:flex md:flex-row'>
-                          {release.linkBlog && (
-                            <Link
-                              className='align-center flex gap-2 text-base-color opacity-80 transition-all hover:opacity-100'
-                              href={release.linkBlog}>
-                              <BookOpenIcon className='mt-1 h-4 w-4' />
-                              <span>Read blog</span>
-                            </Link>
-                          )}
-                          {release.linkDocs && (
-                            <Link
-                              className='align-center flex gap-2 text-base-color opacity-80 transition-all hover:opacity-100'
-                              href={release.linkDocs}>
-                              <DocumentTextIcon className='mt-1 h-4 w-4' />
-                              <span>Read docs</span>
-                            </Link>
-                          )}
-                          {release.linkVideo && (
-                            <Link
-                              className='align-center flex gap-2 text-base-color opacity-80 transition-all hover:opacity-100'
-                              href={release.linkVideo}>
-                              <PlayIcon className='mt-1 h-4 w-4' />
-                              <span>Watch video</span>
-                            </Link>
-                          )}
+                  <Tilt
+                    tiltEnable={false}
+                    glareEnable={true}
+                    glareMaxOpacity={0.4}
+                    glareColor='rgba(251, 255, 70, 0.08)'
+                    glarePosition='all'
+                    className='h-full'>
+                    <div className='relative mx-auto flex h-auto w-full rounded-lg border border-neutral-700/80 bg-neutral-900 bg-opacity-30 p-4 shadow-card'>
+                      {release.blurred && (
+                        <div className='absolute mt-16 ml-[40%] text-lg font-semibold'>
+                          Coming soon
                         </div>
-                      </div>
+                      )}
+                      <div
+                        className={`flex w-full justify-between gap-8 ${
+                          release.blurred && 'pointer-events-none blur-xl'
+                        }`}>
+                        <div className='flex-col'>
+                          <h3 className='mb-1 text-lg font-semibold'>
+                            {release.title}
+                          </h3>
+                          <SuiText className='mb-6 max-w-2xl'>
+                            {release.summary}
+                          </SuiText>
 
-                      <Image
-                        className='mr-4 hidden md:flex'
-                        src={release.imgSrc}
-                        width='84'
-                        height='84'
-                        alt={release.imgAlt}
-                      />
+                          <div className='flex-col gap-6 md:flex md:flex-row'>
+                            {release.linkBlog && (
+                              <Link
+                                className='align-center flex gap-2 text-base-color opacity-80 transition-all hover:opacity-100'
+                                href={release.linkBlog}>
+                                <BookOpenIcon className='mt-1 h-4 w-4' />
+                                <span>Read blog</span>
+                              </Link>
+                            )}
+                            {release.linkDocs && (
+                              <Link
+                                className='align-center flex gap-2 text-base-color opacity-80 transition-all hover:opacity-100'
+                                href={release.linkDocs}>
+                                <DocumentTextIcon className='mt-1 h-4 w-4' />
+                                <span>Read docs</span>
+                              </Link>
+                            )}
+                            {release.linkVideo && (
+                              <Link
+                                className='align-center flex gap-2 text-base-color opacity-80 transition-all hover:opacity-100'
+                                href={release.linkVideo}>
+                                <PlayIcon className='mt-1 h-4 w-4' />
+                                <span>Watch video</span>
+                              </Link>
+                            )}
+                          </div>
+                        </div>
+
+                        <Image
+                          className='mr-4 hidden md:flex'
+                          src={release.imgSrc}
+                          width='84'
+                          height='84'
+                          alt={release.imgAlt}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  </Tilt>
                 </div>
               </>
             ))}
