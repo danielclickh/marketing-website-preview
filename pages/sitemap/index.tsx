@@ -53,7 +53,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
     })
 
     const comparisonsParams: Record<string, any> = {
-      sort: ['date:DESC', 'publishedAt:DESC'],
+      sort: ['publishedAt:DESC'],
       fields: ['Title', 'slug']
     }
 
