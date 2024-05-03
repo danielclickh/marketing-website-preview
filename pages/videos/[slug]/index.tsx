@@ -17,7 +17,7 @@ import ResponsiveEmbed from '../../../components/ResponsiveEmbed'
 
 interface VideoPageProps extends CommonProps {
   allVideos: Video[]
-  video: Video | null
+  video: Video
   nextVideo: Video | null
   prevVideo: Video | null
 }
@@ -37,7 +37,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<VideoPageProps> = async (
+  context
+) => {
   const { slug } = context.params as VideoPageParams
 
   const video = await getVideo(slug)
