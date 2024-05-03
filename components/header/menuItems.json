@@ -259,6 +259,13 @@
 		]
 	},
 	{
+		"id": 10,
+		"name": "User stories",
+		"href": "/user-stories",
+		"target": "_self",
+		"galaxyEvent": "topNav.navItems.userStoriesSelect"
+	},
+	{
 		"id": 5,
 		"name": "Pricing",
 		"menuItems": [

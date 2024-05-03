@@ -1,378 +1,226 @@
-import { useState } from 'react'
-import { SuiPanel } from '../../components/sui'
-import { UseCase } from '../../components/use_case'
-import { findAll, findOne } from '../../lib/api/strapi'
-
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import { UseCasesData } from '../../types/useCases'
+import { CirclePlay } from 'lucide-react'
 import { GetStaticProps } from 'next'
-import Layout from '../../components/Layout'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
 import Image from 'next/image'
-import { CUIButton } from '../../components/ClickUI'
-import HRSeparator from '../../components/HRSeparator'
-import { CheckIcon } from '@heroicons/react/outline'
-import GiveItAGo from '../../components/GiveItAGo'
-import BlogPost from '../../components/BlogPostList/BlogPost'
-import HomepageCustomerVideos from '../../components/HomepageVideos'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import Layout from '../../components/Layout'
+import { findOne } from '../../lib/api/strapi'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { UserStoriesPage } from '../../types/userStories'
+import { useRouter } from 'next/router'
+import { useSearchParams } from 'next/navigation'
 
-export const getStaticProps: GetStaticProps<UseCasesData> =
+export const getStaticProps: GetStaticProps<UserStoriesPage> =
   async function getStaticProps() {
     const result = await findOne('use-case', {
-      populate: [
-        'useCaseItems',
-        'useCaseItems.darkLogoPng',
-        'useCaseItems.lightLogoPng',
-        'useCaseItems.bullets',
-        'useCaseItems.ctaButton',
-        'seo',
-        'seo.image'
-      ]
+      populate: ['useCaseItems', 'useCaseItems.darkLogoPng', 'seo', 'seo.image']
     })
-    result.spotlight = (result.useCaseItems ?? []).shift()
     result.seo.path = '/user-stories'
-    const blogsParams = {
-      filters: {
-        category: {
-          $eqi: 'customer stories'
+
+    const userStoriesData = await fetch(
+      `${process.env.STRAPI_API_URL}/api/user-stories?populate=User.logo,useCase,migrations,vertical,`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_KEY}`
         }
-      },
-      sort: ['date:DESC', 'publishedAt:DESC'],
-      populate: ['thumbnailPng', 'author'],
-      fields: ['category', 'title', 'slug'],
-      pagination: { limit: 3 }
-    }
-    const { data: customerStories } = await findAll('blog-posts', blogsParams)
+      }
+    )
+
+    const userStoriesPayload = await userStoriesData.json()
+    const userStories = userStoriesPayload.data
+    //make highlighted stories come first
+    userStories.sort(
+      (
+        a: { attributes: { highlight: boolean } },
+        b: { attributes: { highlight: boolean } }
+      ) => {
+        if (a.attributes.highlight && !b.attributes.highlight) return -1
+        if (!a.attributes.highlight && b.attributes.highlight) return 1
+        return 0
+      }
+    )
+
     const commonProps = await getCommonProps()
     return {
       props: {
         ...result,
-        customerStories,
+        userStories,
         ...commonProps
       }
     }
   }
 
-type TestimonialsJson = {
-  id: number
-  logo: string
-  category: string
-  text: string
-  customer: string
-  width: number
-  height: number
-}
-const testimonialsJson: Array<TestimonialsJson> = [
-  {
-    id: 101,
-    logo: '/images/sony.svg',
-    category: 'Analytics',
-    text: 'At Sony Entertainment Television, we ingest tens of millions of CDN records into ClickHouse Cloud and run millions of queries against them daily. This allows our operations team to monitor the delivery of our content in real-time, and analyze/investigate potential issues the moment they arise. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.',
-    customer: 'Sony',
-    width: 80,
-    height: 17
-  },
-  {
-    id: 1,
-    logo: '/images/use-cases/posthog-logo.svg',
-    category: 'Analytics',
-    text: 'ClickHouse Cloud has made it absolutely effortless to use ClickHouse for data analysis while not having to spend any time managing cluster shards/replicas or worrying about provisioning on the storage or cpu side.',
-    customer: 'Posthog',
-    width: 155,
-    height: 30
-  },
-  {
-    id: 2,
-    logo: '/images/use-cases/instabug.svg',
-    category: 'Observability',
-    text: 'At Instabug, we rely on ClickHouse to help power our real-time observability solutions that developers rely on. ClickHouse Cloud reduced our operational overhead and cost of managing ClickHouse ourselves allowing us to focus on our users.',
-    customer: 'Instabug',
-    width: 189,
-    height: 33
-  },
-  {
-    id: 3,
-    logo: '/images/use-cases/rokt.svg',
-    category: 'Analytics',
-    text: 'Rokt has been an eager partner of ClickHouse as we modernize our analytics stack. By offloading operations to the experts our developers are focused on delivering the best experience possible while the business scales. We we are thrilled to see the path ClickHouse is forging.',
-    customer: 'Rokt',
-    width: 115,
-    height: 32
-  },
-  {
-    id: 4,
-    logo: '/images/use-cases/darwinium-logo.png',
-    category: 'Security and Fraud',
-    text: 'Darwinium chose ClickHouse as its database engine of choice because it is fast, flexible, rich in capabilities and cloud-ready. It provides the functionality we need to support real time user journey orchestration for fraud and security teams in global digital businesses.',
-    customer: 'Darwinium',
-    width: 180,
-    height: 34
-  },
-  {
-    id: 5,
-    logo: '/images/use-cases/synq-logo.png',
-    category: 'ClickHouse Cloud',
-    text: 'At Synq we have very high demands of both ingestion and query performance. After a thorough vendor selection process, only ClickHouse Cloud was able to meet those requirements with ease, while providing the powerful preprocessing logic our solution requires.',
-    customer: 'Synq',
-    width: 106,
-    height: 40
-  },
-  {
-    id: 6,
-    logo: '/images/use-cases/adevinta-logo.png',
-    category: 'ClickHouse Cloud',
-    text: "Amazing to have been one of the first users of ClickHouse Serverless Cloud. It's scalable and blazingly fast ClickHouse in the cloud with simple onboarding and excellent support. Great experience.",
-    customer: 'Adevinta',
-    width: 134,
-    height: 30
-  },
-
-  {
-    id: 7,
-    logo: '/images/use-cases/minted-logo.png',
-    category: 'ClickHouse Cloud',
-    text: 'We use ClickHouse Cloud to monitor millions of real-time web performance data points, to ensure we’re getting faster all the time. The platform delivers fast and reliable data management, while also proving to be cost efficient and user-friendly.',
-    customer: 'Minted',
-    width: 123,
-    height: 32
-  },
-  {
-    id: 8,
-    logo: '/images/use-cases/washington-post-logo.svg',
-    category: 'Analytics',
-    text: 'ClickHouse Cloud Private Preview has allowed us to replace a batch analytics pipeline with one that is near-real time and costs less to run without having to manage or scale a ClickHouse cluster ourselves.',
-    customer: 'The Washington Post',
-    width: 206,
-    height: 32
-  },
-  {
-    id: 9,
-    logo: '/images/use-cases/airtory-logo.png',
-    category: 'Analytics',
-    text: 'Airtory needed a fast, scalable and affordable data engine to power our dynamic creatives, and ClickHouse was the perfect solution for this. The ease of the ClickHouse Cloud helped us ramp up quickly and offer powerful insights for our clients into their marketing campaigns giving them a great ROI.',
-    customer: 'Airtory',
-    width: 85,
-    height: 32
-  },
-
-  {
-    id: 10,
-    logo: '/images/use-cases/calibre-logo.svg',
-    category: 'Analytics',
-    text: 'ClickHouse Cloud gave us the confidence to deploy ClickHouse and infinitely have a scalable serverless analytics database.',
-    customer: 'Calibre',
-    width: 144,
-    height: 32
-  },
-  {
-    id: 11,
-    logo: '/images/use-cases/forefront-logo.png',
-    category: 'ClickHouse Cloud',
-    text: "The team truly delivered on the fully managed ClickHouse product I've been looking for. The platform makes it trivial to spin up and connect to a cluster, and removes all concern around managing underlying infrastructure. I would highly recommend this product.",
-    customer: 'Forefront',
-    width: 221,
-    height: 32
-  }
-]
-
 function CustomerStoriesPage({
-  spotlight,
-  useCaseItems,
   seo,
-  customerStories,
+  userStories,
   headerData,
   footerData
-}: UseCasesData) {
+}: UserStoriesPage) {
   galaxyOnPage('userStoriesPage')
-  const [visibleTestimonials, setVisibleTestimonials] = useState(6)
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
-  const loadMore = () => {
-    setVisibleTestimonials((prevValue) => prevValue + 6)
+  const orderByDate = searchParams.get('latest')
+    ? searchParams.get('latest') === 'true'
+    : true
+
+  const toggleOrderByDate = () => {
+    router.push(
+      {
+        query: {
+          ...router.query,
+          latest: !orderByDate
+        }
+      },
+      undefined,
+      { shallow: true }
+    )
   }
+  const sortedUserStories = userStories.slice().sort((a, b) => {
+    const dateA = new Date(a.attributes.publishedAt)
+    const dateB = new Date(b.attributes.publishedAt)
+
+    if (orderByDate) {
+      return dateA.getTime() - dateB.getTime() // Ascending order
+    } else {
+      return dateB.getTime() - dateA.getTime() // Descending order
+    }
+  })
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-10'>
         <div className='container mx-auto flex max-w-7xl flex-col px-4 md:px-8 2xl:px-0'>
           <div className='mx-auto flex max-w-screen-sm flex-col pt-6 text-center'>
-            <h1 className='mb-16 font-basier text-5.5xl font-semibold'>
+            <h1 className='font-basier text-5.5xl font-semibold'>
               User stories
             </h1>
           </div>
-          <div>
-            <div className='grid gap-x-20 lg:grid-cols-2'>
-              <div className='relative text-center lg:text-left xl:max-w-xl'>
-                <div className='relative font-basier text-4xl font-semibold leading-snug'>
-                  <Image
-                    src='/images/Quote.svg'
-                    width={35}
-                    height={35}
-                    alt='Quote'
-                    className='-mt-10 inline-block'
-                  />{' '}
-                  There is that feeling of new tech where everything just feels
-                  like it's going right.
-                </div>
-                <p className='mt-6 text-base text-neutral-200'>
-                  We were using Postgres, but there was a moment in time when we
-                  hit the 64TB database limit and we couldn't read or write fast
-                  enough. We prototyped in ClickHouse Cloud in a week and we
-                  were able to ingest data 5 to 6 times faster than Postgres. We
-                  saved 10x in cost.
-                </p>
-                <div className='mt-12 items-center justify-between xl:flex'>
-                  <div className='flex-0'>
-                    <p className='text-base font-semibold'>Harlow Ward</p>
-                    <p className='font-inconsolata text-base text-primary-300'>
-                      Co-founder and CTO, Clearbit
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className='mt-16 w-full xl:mt-0'>
-                <div className='relative w-full'>
-                  <div className='max-w-full rounded-md bg-primary-300 lg:absolute lg:inset-3 lg:-right-10 lg:-top-3 lg:skew-x-0 lg:transform'></div>
-                  <div className='relative top-0 left-0 aspect-video h-fit w-full rounded-md'>
-                    <HomepageCustomerVideos
-                      videos={[
-                        {
-                          videoId: '863656379',
-                          type: 'vimeo',
-                          vimeoCode: 'ec5de7be6d',
-                          image: '/images/clearbit-tile.png'
-                        }
-                      ]}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <HRSeparator className='my-16' />
-          <div className='mx-auto mb-6'>
-            <Image
-              src='/images/case-studies-icon.svg'
-              width={72}
-              height={72}
-              alt='Case studies icon'
-              className='mx-auto mb-6'
-            />{' '}
-            <h2 className='text-center font-basier text-3xl font-bold'>
-              Case studies
-            </h2>
-          </div>
+          <p className='pt-6 text-center'>
+            Discover how companies are using ClickHouse to speed up their
+            workloads and lower costs.
+          </p>
         </div>
-      </div>
+        <div className='my-24 mx-auto max-w-7xl px-8 2xl:px-0'>
+          <div className='filters mb-6 flex justify-between'>
+            <div className='search'>search</div>
+            <button
+              type='button'
+              className={`${
+                orderByDate
+                  ? 'bg-primary-300 text-black'
+                  : 'border-opacity-[0.3] text-white'
+              } rounded-full border border-primary-500  py-2 px-3 text-sm font-semibold text-black`}
+              onClick={toggleOrderByDate}>
+              Latest
+            </button>
+          </div>
 
-      <div className='w-full pb-6 text-neutral-0'>
-        <div className='mx-auto max-w-7xl'>
-          <div className='mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-10 px-4 md:grid-cols-2 md:px-8 2xl:px-0'>
-            {useCaseItems.map((useCase, index) => (
-              <UseCase
-                id={useCase.anchorId}
-                key={`usecase-${index}`}
-                lightLogo={useCase.lightLogoPng}
-                darkLogo={useCase.darkLogoPng}
-                description={useCase.description}
-                bullets={useCase.bullets}
-                path={useCase?.ctaButton?.href}
-                btnText={useCase?.ctaButton?.text}
-                target={useCase?.ctaButton?.target}
-              />
-            ))}
+          <div className='grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3'>
+            {sortedUserStories &&
+              sortedUserStories.map((story, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={`${
+                      story.attributes.highlight
+                        ? 'border-primary-300 bg-neutral-700'
+                        : 'overflow-hidden border-neutral-700/80'
+                    }  relative min-h-[400px] rounded-[4px] border`}>
+                    <div className='story-header bg-primary-300 p-4'>
+                      <div className='flex h-[40px] items-center justify-center'>
+                        {story.attributes.User.data && (
+                          <Image
+                            src={
+                              story.attributes.User.data.attributes.logo.data
+                                .attributes.url
+                            }
+                            width={
+                              story.attributes.User.data.attributes.logo.data
+                                .attributes.width
+                            }
+                            height={
+                              story.attributes.User.data.attributes.logo.data
+                                .attributes.height
+                            }
+                            alt={
+                              story.attributes.User.data.attributes.logo.data
+                                .attributes.alternativeText
+                                ? story.attributes.User.data.attributes.logo
+                                    .data.attributes.alternativeText
+                                : 'Logo'
+                            }
+                          />
+                        )}
+                      </div>
+                    </div>
+                    <div className={` p-6`}>
+                      <div className='story-categories font-inconsolata text-primary-300'>
+                        {story.attributes.useCase.data &&
+                          story.attributes.useCase.data.map(
+                            (useCase, index) => {
+                              return (
+                                <span key={index}>
+                                  {useCase.attributes.Name}
+                                </span>
+                              )
+                            }
+                          )}
+                      </div>
+                      <div className='story-title py-2 font-basier text-xl font-semibold'>
+                        {story.attributes.Title}
+                      </div>
+                      <div className='story-description'>
+                        {story.attributes.Description}
+                      </div>
+                      {(story.attributes.ReadBlogLink ||
+                        story.attributes.ExternalLink ||
+                        story.attributes.WatchVideoLink) && (
+                        <div className='absolute bottom-6 right-6'>
+                          <div className='flex items-center gap-x-6 text-primary-300'>
+                            {story.attributes.ReadBlogLink && (
+                              <Link
+                                href={story.attributes.ReadBlogLink}
+                                target='_blank'>
+                                Read blog
+                              </Link>
+                            )}
+                            {story.attributes.ExternalLink && (
+                              <Link
+                                href={story.attributes.ExternalLink}
+                                target='_blank'>
+                                Read blog
+                              </Link>
+                            )}
+                            {story.attributes.WatchVideoLink && (
+                              <Link
+                                href={story.attributes.WatchVideoLink}
+                                target='_blank'
+                                className='flex items-center gap-x-3'>
+                                <CirclePlay
+                                  strokeWidth={1.5}
+                                  className='h-5 w-5'
+                                />
+                                Watch video
+                              </Link>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    {story.attributes.highlight && (
+                      <div className='absolute left-1/2 -bottom-2 z-50 -translate-x-1/2 transform bg-half-highlight px-1 text-xs font-bold uppercase'>
+                        Highlight
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
           </div>
-        </div>
-      </div>
-      <HRSeparator className='my-16' />
-      <div className='mx-auto mb-6'>
-        <Image
-          src='/images/what-our-customers-say.svg'
-          width={72}
-          height={72}
-          alt='What our customers say'
-          className='mx-auto mb-6'
-        />{' '}
-        <h2 className='mb-20 text-center font-basier text-3xl font-semibold'>
-          What our customers say
-        </h2>
-      </div>
-      <div className='mx-auto max-w-7xl px-4 pb-24 md:px-8 2xl:px-0'>
-        <div className='bg-shadow-element-center red-shadow grid gap-y-6 gap-x-6 md:grid-cols-2 lg:grid-cols-3'>
-          {testimonialsJson.slice(0, visibleTestimonials).map((testimonial) => (
-            <div
-              className='animate-fade-in relative flex w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:shadow-lg'
-              key={testimonial?.id}>
-              <div className='flex h-full w-full flex-col justify-between space-y-12'>
-                <div className='text-left'>
-                  <Image
-                    src='/images/Quote.svg'
-                    width={35}
-                    height={35}
-                    alt='Quote'
-                    className='mb-4'
-                  />{' '}
-                  <p className='text-base text-neutral-200'>
-                    {testimonial?.text}
-                  </p>
-                </div>
-                <div>
-                  <Image
-                    src={testimonial.logo}
-                    alt={testimonial.category}
-                    width={testimonial.width}
-                    height={testimonial.height}
-                    className='h-8 w-auto'
-                  />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        {visibleTestimonials < testimonialsJson.length && (
-          <div className='mx-auto mt-12'>
-            <CUIButton
-              type='secondary'
-              className='mx-auto w-auto'
-              onClick={loadMore}
-              iconRight=''>
-              View more
-            </CUIButton>
+          <div className='mt-20 whitespace-pre'>
+            {JSON.stringify(userStories, null, 2)}
           </div>
-        )}
-      </div>
-      <HRSeparator />
-      <div className='section-container my-24'>
-        <div className='mx-auto mb-14'>
-          <Image
-            src='/images/use-cases/recent-customer-stories-icon.svg'
-            width={72}
-            height={72}
-            alt='Case studies icon'
-            className='mx-auto mb-6'
-          />{' '}
-          <h2 className='text-center font-basier text-3xl font-bold'>
-            Recent customer stories
-          </h2>
-        </div>
-        <div className='flex w-full flex-col gap-y-6 md:grid md:grid-cols-3 md:gap-x-16 md:gap-y-0 '>
-          {customerStories.map((blog) => (
-            <BlogPost key={blog.id} {...blog} />
-          ))}
-        </div>
-        <CUIButton
-          type='secondary'
-          href='/blog?category=customer-stories'
-          linkClass='mx-auto mt-10 w-fit block'>
-          View all
-        </CUIButton>
-      </div>
-      <HRSeparator />
-      <div className='my-24'>
-        <h2 className='mb-16 text-center font-basier text-4xl font-semibold text-neutral-100'>
-          Ready to give it a go?
-        </h2>
-        <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
-          <GiveItAGo />
         </div>
       </div>
     </Layout>

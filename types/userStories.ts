@@ -1,0 +1,93 @@
+import { CommonProps } from './homepage'
+
+export interface UserStoriesPage extends CommonProps {
+  userStories: UserStory[]
+}
+
+export interface UserStory {
+  id: number
+  attributes: {
+    Title: string
+    highlight: boolean
+    Description: string | null
+    ReadBlogLink: string | null
+    ExternalLink: string | null
+    WatchVideoLink: string | null
+    createdAt: string
+    updatedAt: string
+    publishedAt: string
+    User: {
+      data: UserData
+    }
+    useCase: {
+      data: UseCase[]
+    }
+    migrations: {
+      data: Migration[]
+    }
+    vertical: {
+      data: Vertical[]
+    }
+  }
+}
+
+interface UserData {
+  id: number
+  attributes: {
+    Name: string
+    createdAt: string
+    updatedAt: string
+    logo: {
+      data: LogoData
+    }
+  }
+}
+
+interface LogoData {
+  id: number
+  attributes: {
+    name: string
+    alternativeText: string | null
+    caption: string | null
+    width: number
+    height: number
+    formats: any // You can specify the type based on the actual structure
+    hash: string
+    ext: string
+    mime: string
+    size: number
+    url: string
+    previewUrl: string | null
+    provider: string
+    provider_metadata: any // You can specify the type based on the actual structure
+    createdAt: string
+    updatedAt: string
+  }
+}
+
+interface UseCase {
+  id: number
+  attributes: {
+    Name: string
+    createdAt: string
+    updatedAt: string
+  }
+}
+
+interface Migration {
+  id: number
+  attributes: {
+    Name: string
+    createdAt: string
+    updatedAt: string
+  }
+}
+
+interface Vertical {
+  id: number
+  attributes: {
+    Name: string
+    createdAt: string
+    updatedAt: string
+  }
+}
