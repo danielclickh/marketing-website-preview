@@ -64,6 +64,7 @@ export async function getCategories(): Promise<VideoCategoryRecord> {
 
   ;(await getVideos())
     .flatMap((video) => video.categories)
+    .sort((a, b) => a.localeCompare(b))
     .forEach((category) => {
       categories.set(slugify(category), category)
     })
