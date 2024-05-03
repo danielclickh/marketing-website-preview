@@ -1,13 +1,16 @@
 import { useRouter } from 'next/router'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import {
   Video,
   VideoCategory,
   VideoCategoryRecord
 } from '../../lib/videos/types'
+import { CUIButton } from '../ClickUI'
 import { SuiSearchField } from '../sui'
 import CategorySelector from '../CategorySelector'
 import VideoCard from '../VideoCard'
+
+const VIDEOS_PER_PAGE = 9
 
 export default function VideosList({
   videos,
@@ -18,15 +21,19 @@ export default function VideosList({
 }) {
   const router = useRouter()
 
+  const container = useRef<HTMLDivElement>(null)
   const [category, setCategory] = useState<string | null>(null)
   const [search, setSearch] = useState<string | null>(null)
+  const [page, setPage] = useState<number>(0)
 
   const getCategory = (slug: string) => categories?.[slug] || null
 
-  const searchChange = (e: ChangeEvent<HTMLInputElement>) =>
+  const searchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPage(0)
     setSearch(e.target.value.trim().toLowerCase())
+  }
 
-  const videoList = (() => {
+  let videoList = (() => {
     let results = structuredClone(videos)
     const categoryName = category ? getCategory(category) : false
 
@@ -45,15 +52,36 @@ export default function VideosList({
         return inTitle || inSubTitle
       })
     }
-
     return results
   })()
+
+  const totalPages = Math.floor(videoList.length / VIDEOS_PER_PAGE)
+  const hasPrevPage = page > 0
+  const hasNextPage = page < totalPages
+
+  const backToTop = () => {
+    setTimeout(() => {
+      container.current?.scrollIntoView({
+        behavior: 'smooth'
+      })
+    })
+  }
+
+  // Apply pagination
+  if (page > 0 && page <= totalPages) {
+    const pageStart = page * VIDEOS_PER_PAGE - 1
+    const pageEnd = pageStart + VIDEOS_PER_PAGE
+    videoList = videoList.slice(pageStart, pageEnd)
+  } else {
+    videoList = videoList.slice(0, VIDEOS_PER_PAGE)
+  }
 
   const categoryList = [
     {
       text: 'View all',
       selected: !category,
       onClick() {
+        setPage(0)
         setCategory(null)
       }
     }
@@ -65,6 +93,7 @@ export default function VideosList({
       text: name,
       selected: slug === category,
       onClick() {
+        setPage(0)
         setCategory(slug)
       }
     })
@@ -75,6 +104,7 @@ export default function VideosList({
     const queryParams = new URLSearchParams(window.location.search)
     const urlCategory = queryParams.get('category')
     const urlSearch = queryParams.get('search')
+    const urlPage = parseInt(queryParams.get('page') || '')
 
     // Check the url category is valid using the `getCategory` function
     if (
@@ -88,6 +118,11 @@ export default function VideosList({
     // Check the search query is not empty
     if (urlSearch && String(urlSearch).trim().length) {
       setSearch(urlSearch)
+    }
+
+    // Check the page number is not empty
+    if (!isNaN(urlPage) && urlPage >= 0 && urlPage <= totalPages) {
+      setPage(urlPage)
     }
   }, [router])
 
@@ -103,6 +138,10 @@ export default function VideosList({
       queryParams.push(`search=${encodeURIComponent(search)}`)
     }
 
+    if (page) {
+      queryParams.push(`page=${encodeURIComponent(page)}`)
+    }
+
     if (queryParams.length) {
       router.push('/videos?' + queryParams.join('&'), undefined, {
         shallow: true
@@ -110,11 +149,13 @@ export default function VideosList({
     } else {
       router.push('/videos', undefined, { shallow: true })
     }
-  }, [category, search])
+  }, [category, search, page])
 
   return (
     <>
-      <div className='container mx-auto max-w-7xl px-8 pt-8 2xl:px-0'>
+      <div
+        className='container mx-auto max-w-7xl px-8 pt-8 2xl:px-0'
+        ref={container}>
         <div className='flex-col items-center pb-8 lg:flex lg:flex-row lg:justify-between lg:space-x-24'>
           <SuiSearchField
             placeholder='Search by title or keyword...'
@@ -135,6 +176,47 @@ export default function VideosList({
             )
           })}
         </div>
+
+        {(hasPrevPage || hasNextPage) && (
+          <div className='my-8 flex items-center justify-center gap-8'>
+            <CUIButton
+              type='primary-dark'
+              className={`group !border-primary-300/50 ${
+                !hasPrevPage
+                  ? 'pointer-events-none opacity-40'
+                  : 'hover:!border-primary-400'
+              }`}
+              onClick={() => {
+                if (hasPrevPage) {
+                  setPage(page - 1)
+                  backToTop()
+                }
+              }}>
+              <span className='tanslate-x-0 mr-2 inline-block transition-transform group-hover:-translate-x-1'>
+                &lt;-
+              </span>
+              Prev
+            </CUIButton>
+            <CUIButton
+              type='primary-dark'
+              className={`group !border-primary-300/50 ${
+                !hasNextPage
+                  ? 'pointer-events-none opacity-40'
+                  : 'hover:!border-primary-400'
+              }`}
+              onClick={() => {
+                if (hasNextPage) {
+                  setPage(page + 1)
+                  backToTop()
+                }
+              }}>
+              Next{' '}
+              <span className='tanslate-x-0 ml-2 inline-block transition-transform group-hover:translate-x-1'>
+                -&gt;
+              </span>
+            </CUIButton>
+          </div>
+        )}
 
         {!videoList.length && (
           <p className='mt-12 w-full text-center'>
