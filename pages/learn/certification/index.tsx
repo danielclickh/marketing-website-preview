@@ -141,6 +141,20 @@ export default function CertificationPage({
 
           {/* Form column */}
           <div className='w-full lg:max-w-[600px]'>
+            <p className='mb-4'>
+              There is no required prerequisite for attempting this exam, but we
+              highly recommend taking the ClickHouse Developer training course -
+              available either{' '}
+              <a
+                href='https://learn.clickhouse.com/visitor_catalog_class/show/1328973'
+                target='_blank'
+                className='text-primary-300'>
+                On-demand
+              </a>{' '}
+              or Instructor-led (coming soon!), which covers all the exam
+              objectives listed below.
+            </p>
+
             <div className='flex flex-col gap-2 '>
               <Feature
                 icon={<Bullseye className='h-auto w-full' />}
@@ -304,6 +318,21 @@ export default function CertificationPage({
                   </ul>
                 </CUICard.Body>
               </CUICard>
+              <div className='mx-auto w-full'>
+                <CUIButton
+                  type='primary'
+                  size='lg'
+                  weight='semibold'
+                  href='https://buy.stripe.com/14keYf7q55tn2Jy001'
+                  linkClass='w-full max-w-[14rem]'
+                  onClick={galaxyOnClick(
+                    'certificationPage.objectives.purchaseCertification'
+                  )}
+                  target='_blank'
+                  className='mx-auto w-full max-w-[150px]'>
+                  Purchase now
+                </CUIButton>
+              </div>
             </div>
           </div>
 
