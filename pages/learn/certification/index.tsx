@@ -128,7 +128,7 @@ export default function CertificationPage({
               type='primary'
               size='lg'
               weight='semibold'
-              href='https://buy.stripe.com/cN27vNfWBbRLgAo6oo'
+              href='https://buy.stripe.com/14keYf7q55tn2Jy001'
               linkClass='w-full max-w-[14rem]'
               onClick={galaxyOnClick(
                 'certificationPage.hero.purchaseCertification'
