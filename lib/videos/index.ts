@@ -21,6 +21,7 @@ type StrapiItem = {
 
 export async function getVideos(): Promise<Video[]> {
   const response = await findAll('marketing-videos', {
+    sort: ['date:DESC', 'publishedAt:DESC'],
     populate: ['categories', 'RelatedVideos', 'seo', 'seo.image']
   })
 
