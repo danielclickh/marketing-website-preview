@@ -9,7 +9,7 @@
     "linkBlog": "https://clickhouse.com/blog/",
 		"linkDocs": "https://clickhouse.com/docs/",
 		"linkVideo": "https://clickhouse.com/videos/",
-		"blurred": ""
+		"blurred": true
   }, 
 	{
     "day": "2",
@@ -21,7 +21,7 @@
     "linkBlog": "https://clickhouse.com/blog/",
 		"linkDocs": "https://clickhouse.com/docs/",
 		"linkVideo": "https://clickhouse.com/videos/",
-		"blurred": ""
+		"blurred": true
   }, 
 	{
     "day": "3",
@@ -33,7 +33,7 @@
     "linkBlog": "https://clickhouse.com/blog/",
 		"linkDocs": "https://clickhouse.com/docs/",
 		"linkVideo": "https://clickhouse.com/videos/",
-		"blurred": ""
+		"blurred": true
   },
 	{
     "day": "4",
@@ -45,7 +45,7 @@
     "linkBlog": "https://clickhouse.com/blog/",
 		"linkDocs": "https://clickhouse.com/docs/",
 		"linkVideo": "",
-		"blurred": ""
+		"blurred": true
   },
 	{
     "day": "5",

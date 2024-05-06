@@ -96,7 +96,7 @@ export default function LaunchWeekPage({
             <div className='container mx-auto flex-col px-4 pt-10 pb-16 lg:w-1/2'>
               <div className='mb-6 flex justify-center'>
                 <h4 className='w-full max-w-[8rem] rounded-full border border-base-color py-1 text-center text-base font-medium'>
-                  April 2024
+                  May 2024
                 </h4>
               </div>
               <div className='mx-auto mb-6 flex max-w-lg justify-center'>
@@ -109,8 +109,9 @@ export default function LaunchWeekPage({
                 color='secondary'
                 className='mx-auto mt-6 justify-center text-center md:max-w-2xl'>
                 <p className='mb-8 text-xl'>
-                  Between the dates of May 13th - 17th, we will be announcing a
-                  number of hugely exciting Cloud-related product updates.
+                  Join us for Launch Week on May 13th - May 17th where we’ll
+                  release a new feature each day of the week. Mark your
+                  calendars – you won’t want to miss it!
                 </p>
               </SuiText>
               <div className='flex justify-center gap-6'>
