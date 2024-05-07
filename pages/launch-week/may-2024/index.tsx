@@ -119,11 +119,11 @@ export default function LaunchWeekPage({
                   type='primary'
                   size='lg'
                   weight='semibold'
-                  href='https://clickhouse.cloud/signUp?loc=use-case-logging'
+                  href='https://clickhouse.cloud/signUp?loc=launch-week-may2024'
                   target='_blank'
                   linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                   className='w-full'>
-                  Sign up for email updates
+                  Start your free trial
                 </CUIButton>
               </div>
             </div>
