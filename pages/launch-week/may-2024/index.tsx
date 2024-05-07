@@ -156,7 +156,7 @@ export default function LaunchWeekPage({
                     className='h-full'>
                     <div className='relative mx-auto flex h-auto w-full rounded-lg border border-neutral-700/80 bg-neutral-900 bg-opacity-30 p-4 shadow-card'>
                       {release.blurred && (
-                        <div className='absolute mt-12 ml-[40%] text-lg font-semibold'>
+                        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform text-lg font-semibold'>
                           Coming soon
                         </div>
                       )}
