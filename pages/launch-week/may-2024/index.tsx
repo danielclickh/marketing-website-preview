@@ -30,9 +30,9 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const data = await findOne('homepage', params)
 
-  data.seo.path = '/launch-week/april-2024'
-  data.seo.title = 'ClickHouse Cloud Launch Week - April 2024'
-  data.seo.description = 'ClickHouse Cloud Launch Week - April 2024'
+  data.seo.path = '/launch-week/may-2024'
+  data.seo.title = 'ClickHouse Cloud Launch Week - May 2024'
+  data.seo.description = 'ClickHouse Cloud Launch Week - May 2024'
   data.seo.image = [
     { url: '/images/launch-week/launch-week-social-preview.png' }
   ]
@@ -79,7 +79,7 @@ export default function LaunchWeekPage({
   headerData,
   footerData
 }: EventProps) {
-  galaxyOnPage('launchWeekAprilPage')
+  galaxyOnPage('launchWeekMayPage')
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
