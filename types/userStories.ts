@@ -2,6 +2,12 @@ import { CommonProps } from './homepage'
 
 export interface UserStoriesPage extends CommonProps {
   userStories: UserStory[]
+  UseCaseCategories: UseCaseCategory[]
+}
+
+export interface UseCaseCategory {
+  code: number
+  name: string
 }
 
 export interface UserStory {
