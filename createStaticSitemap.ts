@@ -213,14 +213,14 @@ async function triggerSitemap() {
   })
 
   const comparisonsParams = {
-    sort: ['date:DESC', 'publishedAt:DESC'],
+    sort: ['publishedAt:DESC'],
     fields: ['Title', 'slug', 'updatedAt']
   }
   const comparisons = await fetchAll('comparisons', comparisonsParams)
 
   const richTextPageParams = {
-    sort: ['date:DESC', 'publishedAt:DESC'],
-    fields: ['url', 'updatedAt']
+    sort: ['publishedAt:DESC'],
+    fields: ['url', 'updatedAt', 'publishedAt']
   }
   const richTextPages = await fetchAll('rich-content-pages', richTextPageParams)
 
