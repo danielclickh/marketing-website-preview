@@ -7,6 +7,7 @@ import Layout from '../../components/Layout'
 import { fetchAll, findOne, getStagingOnlyFilters } from '../../lib/api/strapi'
 import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { Video } from '../../lib/videos/types'
 import { CommonProps } from '../../types/homepage'
 import { getVideos } from '../../lib/videos/index'
 import { getLexicons } from '../../lib/lexicons'
@@ -15,6 +16,7 @@ import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 interface SitemapProps extends CommonProps {
   blogPosts: any[]
   allEvents: any[]
+  allVideos: Video[]
   onDemandEvents: any[]
   newsEvents: any[]
   pressReleases: any[]
@@ -85,12 +87,15 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
 
     const lexicons = getLexicons()
 
+    const allVideos = await getVideos()
+
     const menu = menuItems
 
     return {
       props: {
         blogPosts,
         allEvents,
+        allVideos,
         onDemandEvents,
         newsEvents,
         pressReleases,
@@ -112,6 +117,7 @@ function Sitemap({
   footerData,
   blogPosts,
   allEvents,
+  allVideos,
   onDemandEvents,
   newsEvents,
   pressReleases,
@@ -120,7 +126,6 @@ function Sitemap({
   lexicons
 }: SitemapProps) {
   const resourcesMenu = menuItems.find((obj) => obj.id === 2)?.menuItems
-  const videos = getVideos()
 
   galaxyOnPage('siteMapPage')
 
@@ -463,7 +468,7 @@ function Sitemap({
                 <Link href='/videos'>Videos</Link>
               </h2>
               <ul className='mb-2'>
-                {videos.map((video, index) => {
+                {allVideos.map((video, index) => {
                   return (
                     <li key={index} className='pb-2'>
                       <Link

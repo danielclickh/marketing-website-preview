@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 import { fetchAll } from './lib/api/strapi'
-import { getVideos } from './lib/videos/index'
+import { Video } from './lib/videos/types'
+import { getVideos } from './lib/videos'
 import fs from 'fs'
 import path from 'path'
 dotenv.config()
@@ -33,7 +34,7 @@ function generateSiteMap(
   events: Items[],
   comparisons: Items[],
   richTextPages: Items[],
-  videos: Items[],
+  videos: Video[],
   lexicons: Items[]
 ) {
   const siteURL = 'https://clickhouse.com'
@@ -224,12 +225,12 @@ async function triggerSitemap() {
   const richTextPages = await fetchAll('rich-content-pages', richTextPageParams)
 
   // We generate the XML sitemap with the posts data
-  const sitemap = generateSiteMap(
+  generateSiteMap(
     blogPosts,
     events,
     comparisons,
     richTextPages,
-    getVideos(),
+    await getVideos(),
     getLexicons()
   )
 }
