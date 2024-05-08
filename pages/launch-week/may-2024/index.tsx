@@ -166,14 +166,16 @@ export default function LaunchWeekPage({
                         }`}>
                         <div className='flex-col'>
                           <h3 className='mb-1 text-lg font-semibold'>
-                            {release.title}
+                            {release.blurred ? 'Coming soon' : release.title}
                           </h3>
                           <SuiText className='mb-6 max-w-2xl'>
-                            {release.summary}
+                            {release.blurred
+                              ? 'We’ll be rolling out a new ClickHouse Cloud feature every day 🚀. Mark your calendars – you won’t want to miss it! Each day, we’ll release a new ClickHouse Cloud feature with blogs, videos, and more. Be sure to keep tabs on our Launch page for the latest announcements.'
+                              : release.summary}
                           </SuiText>
 
                           <div className='flex-col gap-6 md:flex md:flex-row'>
-                            {release.linkBlog && (
+                            {!release.blurred && release.linkBlog && (
                               <Link
                                 className='align-center flex gap-2 text-base-color opacity-80 transition-all hover:opacity-100'
                                 href={release.linkBlog}>
@@ -181,7 +183,7 @@ export default function LaunchWeekPage({
                                 <span>Read blog</span>
                               </Link>
                             )}
-                            {release.linkDocs && (
+                            {!release.blurred && release.linkDocs && (
                               <Link
                                 className='align-center flex gap-2 text-base-color opacity-80 transition-all hover:opacity-100'
                                 href={release.linkDocs}>
@@ -189,7 +191,7 @@ export default function LaunchWeekPage({
                                 <span>Read docs</span>
                               </Link>
                             )}
-                            {release.linkVideo && (
+                            {!release.blurred && release.linkVideo && (
                               <Link
                                 className='align-center flex gap-2 text-base-color opacity-80 transition-all hover:opacity-100'
                                 href={release.linkVideo}>
@@ -199,14 +201,23 @@ export default function LaunchWeekPage({
                             )}
                           </div>
                         </div>
-
-                        <Image
-                          className='mr-4 hidden md:flex'
-                          src={release.imgSrc}
-                          width='84'
-                          height='84'
-                          alt={release.imgAlt}
-                        />
+                        {!release.blurred ? (
+                          <Image
+                            className='mr-4 hidden md:flex'
+                            src={release.imgSrc}
+                            width='84'
+                            height='84'
+                            alt={release.imgAlt}
+                          />
+                        ) : (
+                          <Image
+                            className='mr-4 hidden md:flex'
+                            src='/images/clickhouse-logomark-yellow.svg'
+                            width='84'
+                            height='84'
+                            alt='ClickHouse Logo'
+                          />
+                        )}
                       </div>
                     </div>
                   </Tilt>
