@@ -249,6 +249,7 @@ module.exports = {
           '0px 4px 4px rgba(0, 0, 0, 0.06), inset 0px 4px 25px rgba(0, 0, 0, 0.14)',
         header_bottom: 'inset 0px -1px 0px rgba(78, 78, 78, 0.25);',
         noOffset: '0 0 100px -12px rgb(0 0 0 / 0.25)',
+        'noOffset-sm': '0 0 48px rgb(0 0 0 / 0.25)',
         stackIntegrationGraphic: '0 4px 60px rgb(251, 255, 70)',
         stackIntegrationGraphicSmall: '0 2px 30px rgb(251, 255, 70)'
       },
@@ -277,6 +278,7 @@ module.exports = {
           'linear-gradient(117.08deg, rgba(0, 0, 0, 0) 14.55%, rgba(22, 22, 0, 0.167461) 34.15%, rgba(47, 47, 47, 0.22751) 40.54%, rgba(22, 22, 0, 0.611327) 46.65%, #161600 95.98%), url("/bg-grid.png");',
         'speed-lines': 'url("/speed-lines.svg")',
         'speed-lines-ml': 'url("/speed-lines-ml.svg")',
+        calendar: 'url("/calendar.svg")',
         'body-image': 'linear-gradient(272.48deg, #292924 1.95%, #0F0F0F 100%)',
         'menu-options':
           'linear-gradient(255.48deg, rgba(41, 41, 36, 0.95) 1.95%, rgba(15, 15, 15, 0.95) 100%)'

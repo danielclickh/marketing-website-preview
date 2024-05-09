@@ -54,16 +54,22 @@ function PricingButton({ isFirst, isLast, path, btnText, index }: Props) {
     )
   }
 
-  return (
-    <CUIButton
-      type='secondary'
-      weight='medium'
-      className='stroked_button_wrapper button_wrapper disabled_button w-full !text-primary-300'
-      href={path}
-      disabled>
-      Coming soon
-    </CUIButton>
-  )
+  if (
+    (selectedRegion?.regionSlug === 'ap-northeast-1' && index === 1) ||
+    index === 2
+  ) {
+    return (
+      <CUIButton
+        href={path}
+        weight='medium'
+        className='stroked_button_wrapper button_wrapper w-full'
+        type='primary'>
+        {btnText}
+      </CUIButton>
+    )
+  } else {
+    return null
+  }
 }
 
 export default PricingButton

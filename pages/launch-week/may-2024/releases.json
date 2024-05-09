@@ -1,0 +1,67 @@
+[
+	{
+		"day": "1",
+		"date": "Mon, May 13th, 2024",
+		"title": "ClickPipes for Amazon Kinesis",
+		"summary": "ClickPipes is a powerful and simple way to ingest your data into ClickHouse Cloud. As one of the most requested integrations, we’re excited to announce the availability of our newest connector for Amazon Kinesis, which offers a hassle-free way to ingest your Kinesis Data Streams into ClickHouse Cloud.",
+		"imgSrc": "/images/launch-week/kinesis.svg",
+		"imgAlt": "ClickPipes for Amazon Kinesis",
+		"linkBlog": "https://clickhouse.com/blog?loc=launch-week-may2024",
+		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
+		"linkVideo": "https://clickhouse.com/videos?loc=launch-week-may2024",
+		"blurred": true,
+		"beta": ""
+	},
+	{
+		"day": "2",
+		"date": "Tue, May 14th, 2024",
+		"title": "How we Rebuilt the Cloud Console (While Running It)",
+		"summary": "Today, we’re thrilled to share that the new Cloud Console experience is now available to all Cloud users! The roll-out was staged over several weeks, and was the culmination of an acquisition and year-long rebuild. Read an in-depth behind-the-scenes account about how we built and shipped this new experience below.",
+		"imgSrc": "/images/launch-week/cloud-console.svg",
+		"imgAlt": "Cloud Console rebuild",
+		"linkBlog": "https://clickhouse.com/blog?loc=launch-week-may2024",
+		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
+		"linkVideo": "https://clickhouse.com/videos?loc=launch-week-may2024",
+		"blurred": true,
+		"beta": ""
+	},
+	{
+		"day": "3",
+		"date": "Wed, May 15th, 2024",
+		"title": "Enhanced ClickHouse Cloud Monitoring with Prometheus",
+		"summary": "Monitoring your ClickHouse Cloud instances just got easier. With the release of our beta Prometheus endpoint for ClickHouse Cloud, users can enjoy the seamless integration of ClickHouse Cloud metrics with monitoring tools that support Prometheus, including Datadog and Grafana, for monitoring and alerting.",
+		"imgSrc": "/images/launch-week/prometheus.svg",
+		"imgAlt": "Prometheus for monitoring and alerting",
+		"linkBlog": "https://clickhouse.com/blog?loc=launch-week-may2024",
+		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
+		"linkVideo": "",
+		"blurred": true,		
+		"beta": true
+	},
+	{
+		"day": "4",
+		"date": "Thu, May 16th, 2024",
+		"title": "Configurable Backups in ClickHouse Cloud",
+		"summary": "We’re excited to announce configurable backup controls are now available in ClickHouse Cloud. Now, you can control the start time, retention, and frequency of your backups in Production and Dedicated tier services. Learn more about the update below.",
+		"imgSrc": "/images/launch-week/backups.svg",
+		"imgAlt": "Customizable backup controls for ClickHouse Cloud",
+		"linkBlog": "https://clickhouse.com/blog?loc=launch-week-may2024",
+		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
+		"linkVideo": "",
+		"blurred": true,
+		"beta": ""
+	},
+	{
+		"day": "5",
+		"date": "Friday, May 17th, 2024",
+		"title": "Automatic Query Endpoints: Creating APIs from SQL Queries",
+		"summary": "With the new Automatic Query Endpoints feature, you can create an API endpoint directly from any saved SQL query in the Cloud Console. Forget about wrangling language clients, drivers, and auth protocols. In just a few clicks, make your queries instantly consumable by applications via a safe and secure ClickHouse Cloud API.",
+		"imgSrc": "/images/launch-week/api-endpoints.svg",
+		"imgAlt": "Query API Endpoints",
+		"linkBlog": "https://clickhouse.com/blog?loc=launch-week-may2024",
+		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
+		"linkVideo": "https://clickhouse.com/videos?loc=launch-week-may2024",
+		"blurred": "",
+		"beta": true
+	}
+]

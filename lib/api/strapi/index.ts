@@ -1,5 +1,15 @@
-import fetch from 'cross-fetch'
+import _fetch from 'cross-fetch'
 import { stringify } from 'qs'
+
+export function fetch(uri: string, init: any = {}) {
+  if (process?.env?.STRAPI_API_KEY) {
+    init.headers = {
+      Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+      ...(init.headers || {})
+    }
+  }
+  return _fetch(uri, init)
+}
 
 const strapiApiUrl =
   process.env.STRAPI_API_URL ?? 'https://cms.clickhouse-dev.com:1337'

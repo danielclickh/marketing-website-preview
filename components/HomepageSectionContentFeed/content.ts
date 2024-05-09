@@ -20,6 +20,7 @@ import LogoDenic from './assets/logo-denic'
 import LogoExitlag from './assets/logo-exitlag'
 import LogoHifi from './assets/logo-hifi'
 import LogoJuspay from './assets/logo-juspay'
+import LogoLangchain from './assets/logo-langchain'
 import LogoLyft from './assets/logo-lyft'
 import LogoMinted from './assets/logo-minted'
 import LogoOngage from './assets/logo-ongage'
@@ -28,6 +29,7 @@ import LogoSony from './assets/logo-sony'
 import LogoSynq from './assets/logo-synq'
 import LogoVantage from './assets/logo-vantage'
 import LogoVimeo from './assets/logo-vimeo'
+import LogoDidi from './assets/logo-didi'
 
 export type EntryCategory = string
 
@@ -96,6 +98,31 @@ export function getContent(): Entry[] {
           icon: IconHandCoins,
           stat: 'Cost',
           label: 'Efficiency'
+        }
+      ]
+    },
+
+    // Didi
+    {
+      featured: false,
+      body: `“Migrating logs from Elasticsearch to ClickHouse has not only significantly reduced storage costs but also provided us with a faster querying experience.” [Read blog](/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system)`,
+      logo: LogoDidi,
+      categories: ['Observability'],
+      stats: [
+        {
+          icon: IconStack,
+          stat: '40GB',
+          label: ' per second'
+        },
+        {
+          icon: IconHandCoins,
+          stat: '30%',
+          label: 'cost savings'
+        },
+        {
+          icon: IconGauge,
+          stat: '4x',
+          label: 'faster queries'
         }
       ]
     },
@@ -191,11 +218,23 @@ export function getContent(): Entry[] {
         }
       ]
     },
+    // Langchain
+    {
+      featured: false,
+      body: `“We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse.”
 
+
+Ankush, CTO of LangChain
+
+
+[Read blog](/blog/langchain-why-we-choose-clickhouse-to-power-langchain?loc=homepage)`,
+      logo: LogoLangchain,
+      categories: ['ML & GenAI']
+    },
     // Admixer
     {
       featured: false,
-      body: `“ClickHouse was perfect as Big Data Storage for our ML models.” [Read blog](https://clickhouse.com/blog/admixer-aggregates-over-1-billion-unique-users-a-day-using-clickhouse)`,
+      body: `“ClickHouse was perfect as Big Data Storage for our ML models.” [Read blog](/blog/admixer-aggregates-over-1-billion-unique-users-a-day-using-clickhouse?loc=homepage)`,
       logo: LogoAdmixer,
       categories: ['ML & GenAI'],
       stats: [
@@ -215,7 +254,7 @@ export function getContent(): Entry[] {
     // QuickCheck
     {
       featured: false,
-      body: `"We collect tens of thousands of data points from customers’ phones and other more traditional sources. ClickHouse is used as a way to process all of these SMS messages and extract valuable information used for the scoring and fraud models." [Read blog](https://clickhouse.com/blog/how-quickcheck-uses-clickhouse-to-bring-banking-to-the-unbanked)`,
+      body: `"We collect tens of thousands of data points from customers’ phones and other more traditional sources. ClickHouse is used as a way to process all of these SMS messages and extract valuable information used for the scoring and fraud models." [Read blog](/blog/how-quickcheck-uses-clickhouse-to-bring-banking-to-the-unbanked?loc=homepage)`,
       logo: LogoQuickcheck,
       categories: ['Financial services'],
       stats: [
@@ -235,7 +274,7 @@ export function getContent(): Entry[] {
     // Ongage
     {
       featured: false,
-      body: `"When we tested how much time the same reports would take with ClickHouse, people were amazed. We ran the same data, and in a blink of an eye, we had the results." [Read blog](https://clickhouse.com/blog/ongages-strategic-shift-to-clickhouse-for-real-time-email-marketing)`,
+      body: `"When we tested how much time the same reports would take with ClickHouse, people were amazed. We ran the same data, and in a blink of an eye, we had the results." [Read blog](/blog/ongages-strategic-shift-to-clickhouse-for-real-time-email-marketing?loc=homepage)`,
       logo: LogoOngage,
       categories: ['Marketing & sales']
     },
@@ -243,7 +282,7 @@ export function getContent(): Entry[] {
     // AdGreetz
     {
       featured: false,
-      body: `"With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud. We got several seconds query time and no materialized views. With ClickHouse Cloud’s production instance, we are getting sub-second query time along with materialized views. The decision to switch was a no-brainer for us.” [Read blog](https://clickhouse.com/blog/adgreetz-processes-millions-of-daily-ad-impressions)`,
+      body: `"With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud. We got several seconds query time and no materialized views. With ClickHouse Cloud’s production instance, we are getting sub-second query time along with materialized views. The decision to switch was a no-brainer for us.” [Read blog](/blog/adgreetz-processes-millions-of-daily-ad-impressions?loc=homepage)`,
       logo: LogoAdgreetz,
       categories: ['Business intelligence', 'Marketing & sales'],
       stats: [
@@ -263,7 +302,7 @@ export function getContent(): Entry[] {
     // Juspay
     {
       featured: false,
-      body: `“ClickHouse solves most of our problems very efficiently at a small fraction of the price in terms of infrastructure. This is a far better advantage for us in our books” [Read blog](https://clickhouse.com/blog/juspay-analyzes-payment-transactions-in-real-time-with-clickhouse)`,
+      body: `“ClickHouse solves most of our problems very efficiently at a small fraction of the price in terms of infrastructure. This is a far better advantage for us in our books” [Read blog](/blog/juspay-analyzes-payment-transactions-in-real-time-with-clickhouse?loc=homepage)`,
       logo: LogoJuspay,
       categories: ['Financial services'],
       stats: [
@@ -278,7 +317,7 @@ export function getContent(): Entry[] {
     // Contentsquare
     {
       featured: false,
-      body: `“Moving from Elasticsearch to ClickHouse was a long journey, but this is one of the best tech decisions we ever took.” [Read blog](https://clickhouse.com/blog/contentsquare-migration-from-elasticsearch-to-clickhouse)`,
+      body: `“Moving from Elasticsearch to ClickHouse was a long journey, but this is one of the best tech decisions we ever took.” [Read blog](/blog/contentsquare-migration-from-elasticsearch-to-clickhouse?loc=homepage)`,
       logo: LogoContentsquare,
       categories: ['E-commerce & retail'],
       stats: [
@@ -323,7 +362,7 @@ export function getContent(): Entry[] {
     // DeepL
     {
       featured: false,
-      body: `"We aggregate the user’s history in ClickHouse and use it as a data store for training and inference. Even when reading 10s of millions of rows, the performance was very nice and not the bottleneck when training new models." [Read blog](https://clickhouse.com/blog/deepls-journey-with-clickhouse)`,
+      body: `"We aggregate the user’s history in ClickHouse and use it as a data store for training and inference. Even when reading 10s of millions of rows, the performance was very nice and not the bottleneck when training new models." [Read blog](/blog/deepls-journey-with-clickhouse?loc=homepage)`,
       logo: LogoDeepl,
       categories: ['ML & GenAI']
     },
@@ -331,7 +370,7 @@ export function getContent(): Entry[] {
     // DENIC
     {
       featured: false,
-      body: `"After Testing Hadoop and Spark, We Chose ClickHouse" [Read blog](https://clickhouse.com/blog/denic-improves-query-times-by-10x-with-clickhouse)`,
+      body: `"After Testing Hadoop and Spark, We Chose ClickHouse" [Read blog](/blog/denic-improves-query-times-by-10x-with-clickhouse?loc=homepage)`,
       logo: LogoDenic,
       categories: ['ML & GenAI']
     },
@@ -339,7 +378,7 @@ export function getContent(): Entry[] {
     // Synq
     {
       featured: false,
-      body: `“With dbt execution orchestrated in various intervals, we can also leverage ClickHouse for internal BI use cases. We’ve found this setup very practical, as we can flexibly create new analytical views of our customer data without moving it from our production operational systems.” [Read blog](https://clickhouse.com/blog/building-a-unified-data-platform-with-clickhouse)`,
+      body: `“With dbt execution orchestrated in various intervals, we can also leverage ClickHouse for internal BI use cases. We’ve found this setup very practical, as we can flexibly create new analytical views of our customer data without moving it from our production operational systems.” [Read blog](/blog/building-a-unified-data-platform-with-clickhouse?loc=homepage)`,
       logo: LogoSynq,
       categories: ['Business intelligence']
     },
@@ -355,7 +394,7 @@ export function getContent(): Entry[] {
     // Darwinium
     {
       featured: false,
-      body: `“With ClickHouse, the data pipeline logic is simplified, and is only dealing with the “streaming” aspect of the write as opposed to all of these complexities. ClickHouse thus enables a simpler write design pattern just like any other new age data lake systems like Hudi etc. but with a more simplistic developer experience.” [Read blog](https://clickhouse.com/blog/fast-feature-rich-and-mutable-clickhouse-powers-darwiniums-security-and-fraud-analytics-use-cases)`,
+      body: `“With ClickHouse, the data pipeline logic is simplified, and is only dealing with the “streaming” aspect of the write as opposed to all of these complexities. ClickHouse thus enables a simpler write design pattern just like any other new age data lake systems like Hudi etc. but with a more simplistic developer experience.” [Read blog](/blog/fast-feature-rich-and-mutable-clickhouse-powers-darwiniums-security-and-fraud-analytics-use-cases?loc=homepage)`,
       logo: LogoDarwinium,
       categories: ['Fraud & cybersecurity']
     },
@@ -363,7 +402,7 @@ export function getContent(): Entry[] {
     // Dassana
     {
       featured: false,
-      body: `"We evaluated more than a dozen different big data systems before settling on ClickHouse. No system comes close to ClickHouse when it comes to the flexibility ClickHouse provides" [Read blog](https://clickhouse.com/blog/clickhouse-powers-dassanas-security-data-lake)`,
+      body: `"We evaluated more than a dozen different big data systems before settling on ClickHouse. No system comes close to ClickHouse when it comes to the flexibility ClickHouse provides" [Read blog](/blog/clickhouse-powers-dassanas-security-data-lake?loc=homepage)`,
       logo: LogoDassana,
       categories: ['Fraud & cybersecurity']
     },
@@ -371,7 +410,7 @@ export function getContent(): Entry[] {
     // ExitLag
     {
       featured: false,
-      body: `“The benefits were immediate, with faster data processing and accurate analytics that allowed me to make strategic decisions with confidence. ClickHouse opened new horizons for the growth and success of my company, raising our executive vision to levels never reached before.” [Read blog](https://clickhouse.com/blog/boosting-game-performance-exitlag-quest-for-a-better-data-management-system)`,
+      body: `“The benefits were immediate, with faster data processing and accurate analytics that allowed me to make strategic decisions with confidence. ClickHouse opened new horizons for the growth and success of my company, raising our executive vision to levels never reached before.” [Read blog](/blog/boosting-game-performance-exitlag-quest-for-a-better-data-management-system?loc=homepage)`,
       logo: LogoExitlag,
       categories: ['Gaming']
     }

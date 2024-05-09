@@ -45,7 +45,9 @@ async function triggerPricingFile() {
     .filter(
       (item) =>
         modifiedAcceptableRegions.some(
-          (region) => region.region === item?.segment?.region
+          (region) =>
+            region.region === item?.segment?.region &&
+            region.tier.includes(item?.segment?.instanceTier)
         ) && !item?.description?.includes('Dedicated')
     )
     .map((item) => ({

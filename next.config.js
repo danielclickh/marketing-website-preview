@@ -83,7 +83,7 @@ const nextConfig = {
       {
         source: '/slack',
         destination:
-          'https://join.slack.com/t/clickhousedb/shared_invite/zt-2f363kfap-iQbWEQHKZluYzR5v_jDk~w',
+          'https://join.slack.com/t/clickhousedb/shared_invite/zt-2h7k4l3n6-2tm52WOWwaD11OiijTUIkg',
         permanent: true
       },
       {
@@ -395,6 +395,21 @@ const nextConfig = {
       {
         source: '/company/events/v24-1-community-release-call',
         destination: 'https://www.youtube.com/watch?v=pBF9g0wGAGs',
+        permanent: true
+      },
+      {
+        source: '/careers',
+        destination: '/company/careers',
+        permanent: true
+      },
+      {
+        source: '/launch-week',
+        destination: '/launch-week/may-2024',
+        permanent: true
+      },
+      {
+        source: '/launchweek',
+        destination: '/launch-week/may-2024',
         permanent: true
       }
     ]
