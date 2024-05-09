@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { CUIButton, CUICard } from '../../../components/ClickUI'
 import FAQDynamic from '../../../components/FAQDynamic'
@@ -151,8 +152,11 @@ export default function CertificationPage({
                 className='text-primary-300'>
                 On-demand
               </a>{' '}
-              or Instructor-led (coming soon!), which covers all the exam
-              objectives listed below.
+              or{' '}
+              <Link href='/events/202406-clickhouse-developer'>
+                Instructor-led
+              </Link>
+              , which covers all the exam objectives listed below.
             </p>
 
             <div className='flex flex-col gap-2 '>
