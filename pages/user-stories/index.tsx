@@ -55,7 +55,6 @@ export const getStaticProps: GetStaticProps<UserStoriesPage> =
       }
     )
     const useCasesPayload = await useCases.json()
-
     const UseCaseCategories: UseCaseCategory[] = []
 
     useCasesPayload.data.forEach((item: any) => {
@@ -119,6 +118,8 @@ function CustomerStoriesPage({
 
   useEffect(() => {
     setUseCases(UseCaseCategories)
+
+    document.querySelector('.multiselect-target')?.classList.remove('hidden')
   }, [UseCaseCategories])
 
   return (
@@ -158,7 +159,20 @@ function CustomerStoriesPage({
                 onClick={toggleOrderByDate}>
                 Latest
               </button>
-              <div className=''>
+              <div className='multiselect-target hidden'>
+                <MultiSelect
+                  value={selectedUseCases}
+                  onChange={(e) => setselectedUseCases(e.value)}
+                  options={useCases}
+                  optionLabel='name'
+                  placeholder='Use Case'
+                  maxSelectedLabels={0}
+                  panelHeaderTemplate={<></>}
+                  selectedItemsLabel='Use Case ({0})'
+                  unstyled
+                />
+              </div>
+              <div className='multiselect-target hidden'>
                 <MultiSelect
                   value={selectedUseCases}
                   onChange={(e) => setselectedUseCases(e.value)}
