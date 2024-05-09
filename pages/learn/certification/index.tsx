@@ -153,7 +153,9 @@ export default function CertificationPage({
                 On-demand
               </a>{' '}
               or{' '}
-              <Link href='/events/202406-clickhouse-developer'>
+              <Link
+                href='/events/202406-clickhouse-developer'
+                className='text-primary-300'>
                 Instructor-led
               </Link>
               , which covers all the exam objectives listed below.
