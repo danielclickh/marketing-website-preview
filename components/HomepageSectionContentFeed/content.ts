@@ -29,6 +29,7 @@ import LogoSony from './assets/logo-sony'
 import LogoSynq from './assets/logo-synq'
 import LogoVantage from './assets/logo-vantage'
 import LogoVimeo from './assets/logo-vimeo'
+import LogoDidi from './assets/logo-didi'
 
 export type EntryCategory = string
 
@@ -97,6 +98,31 @@ export function getContent(): Entry[] {
           icon: IconHandCoins,
           stat: 'Cost',
           label: 'Efficiency'
+        }
+      ]
+    },
+
+    // Didi
+    {
+      featured: false,
+      body: `“Migrating logs from Elasticsearch to ClickHouse has not only significantly reduced storage costs but also provided us with a faster querying experience.” [Read blog](/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system)`,
+      logo: LogoDidi,
+      categories: ['Observability'],
+      stats: [
+        {
+          icon: IconStack,
+          stat: '40GB',
+          label: ' per second'
+        },
+        {
+          icon: IconHandCoins,
+          stat: '30%',
+          label: 'cost savings'
+        },
+        {
+          icon: IconGauge,
+          stat: '4x',
+          label: 'faster queries'
         }
       ]
     },

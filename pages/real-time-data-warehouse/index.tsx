@@ -191,7 +191,6 @@ export default function Page({
 
         <HomepageSectionTrustedByAlt
           invertLogos={false}
-          initialSlide={10}
           className='!my-0 bg-primary-300 pb-16 text-primary-800'
           customerStories={customerStories}
         />

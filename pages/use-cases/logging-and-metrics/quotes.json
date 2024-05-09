@@ -11,12 +11,12 @@
     },
     {
         "id": 20,
-        "title": "Highlight.io",
-        "logo": "/images/use-cases/logging/logo-highlight.svg",
-        "content": "Now, our customers can search through months of browser and server-side log data in under a second thanks to the tech behind ClickHouse.",
-        "href": "/blog/overview-of-highlightio",
+        "title": "didi",
+        "logo": "/images/didi-logo-white.svg",
+        "content": "Migrating logs from Elasticsearch to ClickHouse has not only significantly reduced storage costs but also provided us with a faster querying experience.",
+        "href": "/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system",
         "target": "_blank",
-        "imgWidth": 153,
+        "imgWidth": 110,
         "imgHeight": 30
     },
     {

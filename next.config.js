@@ -401,6 +401,16 @@ const nextConfig = {
         source: '/careers',
         destination: '/company/careers',
         permanent: true
+      },
+      {
+        source: '/launch-week',
+        destination: '/launch-week/may-2024',
+        permanent: true
+      },
+      {
+        source: '/launchweek',
+        destination: '/launch-week/may-2024',
+        permanent: true
       }
     ]
   }

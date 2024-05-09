@@ -66,7 +66,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
   }, [])
 
   header.banner =
-    '<a href="/company/events/2024-04-google-next?loc=eyebrow">Headed to Google Next between Apr 9-11? Meet with our founders here</a>'
+    '<a href="/launch-week/may-2024?loc=eyebrow">Join us for Launch Week, May 13 - 17</a>'
 
   return (
     <>
@@ -74,7 +74,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
         className={styles.navBarContainer}
         ref={navBarRef}
         id='nav-container'>
-        {/*<Banner content={header?.banner ?? ''} />*/}
+        <Banner content={header?.banner ?? ''} />
         <nav className='no-wrap section-container relative flex w-full items-center justify-between py-4'>
           <Link
             href='/'
