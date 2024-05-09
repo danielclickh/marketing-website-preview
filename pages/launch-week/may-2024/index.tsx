@@ -165,9 +165,16 @@ export default function LaunchWeekPage({
                           release.blurred && 'pointer-events-none blur-xl'
                         }`}>
                         <div className='flex-col'>
-                          <h3 className='mb-1 text-lg font-semibold'>
-                            {release.blurred ? 'Coming soon' : release.title}
-                          </h3>
+                          <div className='flex flex-row align-middle'>
+                            <h3 className='mb-1 text-lg font-semibold'>
+                              {release.blurred ? 'Coming soon' : release.title}
+                            </h3>
+                            {release.beta && (
+                              <div className='ml-4 mt-1 flex h-5 w-14 rounded-full bg-primary-300 px-3 text-sm font-normal text-neutral-725'>
+                                beta
+                              </div>
+                            )}
+                          </div>
                           <SuiText className='mb-6 max-w-2xl'>
                             {release.blurred
                               ? 'We’ll be rolling out a new ClickHouse Cloud feature every day 🚀. Mark your calendars – you won’t want to miss it! Each day, we’ll release a new ClickHouse Cloud feature with blogs, videos, and more. Be sure to keep tabs on our Launch page for the latest announcements.'
