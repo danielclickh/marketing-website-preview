@@ -44,7 +44,7 @@ export const Tailwind = {
       )
     },
     panel: {
-      className: classNames('bg-neutral-700 text-white border-0 shadow-lg')
+      className: classNames('')
     },
     header: {
       className: classNames(
@@ -88,26 +88,20 @@ export const Tailwind = {
     }),
     wrapper: {
       className: classNames(
-        'overflow-auto',
-        'bg-white text-gray-700 border-0 rounded-md shadow-lg'
+        'border border-primary-600',
+        'bg-neutral-800 text-white rounded-md rounded-t-0 shadow-xl'
       )
     },
     list: ({ props }: { props: any }) => ({
-      className: 'py-3 list-none m-0'
+      className: 'list-none m-0'
     }),
     item: ({ context }: { context: any }) => ({
       className: classNames(
-        'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap',
-        'm-0 p-3 border-0  transition-shadow duration-200 rounded-none',
+        'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap text-white',
+        'm-0 px-3 py-1 border-0 transition-shadow duration-200 rounded-none',
         {
-          'text-gray-700 hover:text-gray-700 hover:bg-gray-200':
-            !context || !context.selected,
-          'bg-gray-300 text-gray-700 hover:text-gray-700 hover:bg-gray-200':
-            context && context.focused && !context.selected,
-          'bg-blue-100 text-blue-700':
-            context && context.focused && context.selected,
-          'bg-blue-50 text-blue-700':
-            context && !context.focused && context.selected
+          'text-white hover:bg-neutral-725 hover:text-primary-900':
+            !context || !context.selected
         }
       )
     }),
@@ -115,7 +109,6 @@ export const Tailwind = {
     checkboxContainer: {
       className: classNames(
         'inline-flex cursor-pointer select-none align-bottom relative',
-        'mr-2',
         'w-6 h-6'
       )
     },
@@ -131,7 +124,7 @@ export const Tailwind = {
       )
     }),
     checkboxIcon: ({ props }: { props: any }) => ({
-      className: 'w-4 h-4 transition-all duration-200 text-white text-base'
+      className: 'hidden'
     }),
     itemGroup: {
       className: classNames(
