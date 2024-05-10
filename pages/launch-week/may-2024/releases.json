@@ -35,7 +35,7 @@
 		"linkBlog": "https://clickhouse.com/blog?loc=launch-week-may2024",
 		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
 		"linkVideo": "",
-		"blurred": true,		
+		"blurred": true,
 		"beta": true
 	},
 	{
@@ -61,7 +61,7 @@
 		"linkBlog": "https://clickhouse.com/blog?loc=launch-week-may2024",
 		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
 		"linkVideo": "https://clickhouse.com/videos?loc=launch-week-may2024",
-		"blurred": "",
+		"blurred": true,
 		"beta": true
 	}
 ]
