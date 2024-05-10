@@ -112,7 +112,7 @@ export default function HomepageSectionContentFeed({
             isActive && (
               <div
                 key={index}
-                className='mb-11 space-y-8 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8 lg:p-10'>
+                className='flip-selection mb-11 space-y-8 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8 lg:p-10'>
                 {entry.embed && <ResponsiveEmbed html={entry.embed} />}
                 <div className='text-center text-inherit'>
                   <Markdown
