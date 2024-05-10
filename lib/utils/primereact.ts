@@ -11,7 +11,7 @@ export const Tailwind = {
     root: ({ props }: { props: any }) => ({
       className: classNames(
         'inline-flex cursor-pointer select-none text-white',
-        'border border-primary-600 rounded-full py-3 px-4 pr-0 text-sm font-semibold',
+        'border border-primary-600 rounded-full py-2.5 px-4 pr-0 text-sm font-semibold transition-colors duration-500  hover:border-primary-300 ease-in-out transform',
         {
           'opacity-60 select-none pointer-events-none cursor-default':
             props.disabled

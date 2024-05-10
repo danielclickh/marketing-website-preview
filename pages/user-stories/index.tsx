@@ -180,6 +180,7 @@ function CustomerStoriesPage({
   const useCaseParam = searchParams.get('useCase')
   const migrationParam = searchParams.get('migration')
   const verticalParam = searchParams.get('vertical')
+  const searchParamInput = searchParams.get('search')
 
   const toggleOrderByDate = () => {
     router.push(
@@ -203,8 +204,6 @@ function CustomerStoriesPage({
       return dateB.getTime() - dateA.getTime() // Descending order
     }
   })
-  //set the multiselect dropdown values
-  const [verticals, setVerticals] = useState<UseCaseVertical[]>()
 
   //state to hold user selected values
   const [selectedUseCases, setSelectedUseCases] = useState<UseCaseCategory[]>(
@@ -251,8 +250,24 @@ function CustomerStoriesPage({
     const dateB = new Date()
     const latestMatch = orderByDate ? dateA.getTime() <= dateB.getTime() : true
 
+    // Filter by Search Query
+    const title = story.attributes.Title.toLowerCase()
+    const description = story.attributes.Description?.toLowerCase()
+    const searchLowerCase = searchParamInput
+      ? searchParamInput.toLowerCase()
+      : ''
+    const searchMatch =
+      title.includes(searchLowerCase) || description?.includes(searchLowerCase)
+
+    return (
+      useCaseMatch &&
+      migrationMatch &&
+      verticalMatch &&
+      latestMatch &&
+      searchMatch
+    )
+
     // Return true only if any selected parameter matches or if no values are selected, and it matches the latest filter
-    return useCaseMatch && migrationMatch && verticalMatch && latestMatch
   })
 
   useEffect(() => {
@@ -303,7 +318,29 @@ function CustomerStoriesPage({
     // Set the selected use cases
     setSelectedVerticals(selectedVerticalsObject)
     //=== vertical ==//
-  }, [useCaseParam, migrationParam, verticalParam])
+
+    //=== search ==//
+  }, [useCaseParam, migrationParam, verticalParam, searchParamInput])
+
+  //Search field
+  const [searchQuery, setSearchQuery] = useState('')
+
+  // Event handler to update search query
+  const handleSearchInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchQuery(event.target.value)
+    router.push(
+      {
+        query: {
+          ...router.query,
+          search: event.target.value
+        }
+      },
+      undefined,
+      { shallow: true }
+    )
+  }
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -331,16 +368,12 @@ function CustomerStoriesPage({
           </div>
           <div className='my-24 mx-auto max-w-7xl px-8 2xl:px-0'>
             <div className='filters mb-6 flex items-center justify-between gap-x-4'>
-              <div className='search'>
-                <SuiSearchField
-                  placeholder='Search by title or keyword...'
-                  htmlFor='search'
-                  className='mb-6 lg:mb-0 lg:flex-1'
-                  onChange={() => {
-                    console.log('hello')
-                  }}
-                />
-              </div>
+              <SuiSearchField
+                placeholder='Search by company or keyword...'
+                htmlFor='search'
+                className='min-w-[447px]'
+                onChange={handleSearchInputChange}
+              />
               <div className='flex items-center gap-x-4'>
                 <button
                   type='button'
@@ -348,7 +381,7 @@ function CustomerStoriesPage({
                     orderByDate
                       ? 'bg-primary-300 text-black'
                       : 'border-opacity-[0.3] text-white'
-                  } rounded-full border border-primary-500 py-3 px-4 text-sm font-semibold text-black`}
+                  } rounded-full border border-primary-500 py-2.5 px-4 text-sm font-semibold text-black`}
                   onClick={toggleOrderByDate}>
                   Latest
                 </button>
@@ -440,105 +473,104 @@ function CustomerStoriesPage({
             </div>
 
             <div className='grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3'>
-              {sortedUserStories &&
-                filteredUserStories.map((story, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className={`${
-                        story.attributes.highlight
-                          ? 'border-primary-300 bg-neutral-700'
-                          : 'overflow-hidden border-neutral-700/80'
-                      }  relative min-h-[400px] rounded-[4px] border`}>
-                      <div className='story-header bg-primary-300 p-4'>
-                        <div className='flex h-[40px] items-center justify-center'>
-                          {story.attributes.User.data && (
-                            <Image
-                              src={
-                                story.attributes.User.data.attributes.logo.data
-                                  .attributes.url
-                              }
-                              width={
-                                story.attributes.User.data.attributes.logo.data
-                                  .attributes.width
-                              }
-                              height={
-                                story.attributes.User.data.attributes.logo.data
-                                  .attributes.height
-                              }
-                              alt={
-                                story.attributes.User.data.attributes.logo.data
-                                  .attributes.alternativeText
-                                  ? story.attributes.User.data.attributes.logo
-                                      .data.attributes.alternativeText
-                                  : 'Logo'
-                              }
-                            />
-                          )}
-                        </div>
-                      </div>
-                      <div className={` p-6`}>
-                        <div className='story-categories font-inconsolata text-primary-300'>
-                          {story.attributes.useCase.data &&
-                            story.attributes.useCase.data.map(
-                              (useCase, index) => {
-                                return (
-                                  <span key={index}>
-                                    {useCase.attributes.Name}
-                                  </span>
-                                )
-                              }
-                            )}
-                        </div>
-                        <div className='story-title py-2 font-basier text-xl font-semibold'>
-                          {story.attributes.Title}
-                        </div>
-                        <div className='story-description'>
-                          {story.attributes.Description}
-                        </div>
-                        {(story.attributes.ReadBlogLink ||
-                          story.attributes.ExternalLink ||
-                          story.attributes.WatchVideoLink) && (
-                          <div className='absolute bottom-6 right-6'>
-                            <div className='flex items-center gap-x-6 text-primary-300'>
-                              {story.attributes.ReadBlogLink && (
-                                <Link
-                                  href={story.attributes.ReadBlogLink}
-                                  target='_blank'>
-                                  Read blog
-                                </Link>
-                              )}
-                              {story.attributes.ExternalLink && (
-                                <Link
-                                  href={story.attributes.ExternalLink}
-                                  target='_blank'>
-                                  Read blog
-                                </Link>
-                              )}
-                              {story.attributes.WatchVideoLink && (
-                                <Link
-                                  href={story.attributes.WatchVideoLink}
-                                  target='_blank'
-                                  className='flex items-center gap-x-3'>
-                                  <CirclePlay
-                                    strokeWidth={1.5}
-                                    className='h-5 w-5'
-                                  />
-                                  Watch video
-                                </Link>
-                              )}
-                            </div>
-                          </div>
+              {filteredUserStories.map((story, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={`${
+                      story.attributes.highlight
+                        ? 'border-primary-300 bg-neutral-700'
+                        : 'overflow-hidden border-neutral-700/80'
+                    }  relative min-h-[400px] rounded-[4px] border`}>
+                    <div className='story-header bg-primary-300 p-4'>
+                      <div className='flex h-[40px] items-center justify-center'>
+                        {story.attributes.User.data && (
+                          <Image
+                            src={
+                              story.attributes.User.data.attributes.logo.data
+                                .attributes.url
+                            }
+                            width={
+                              story.attributes.User.data.attributes.logo.data
+                                .attributes.width
+                            }
+                            height={
+                              story.attributes.User.data.attributes.logo.data
+                                .attributes.height
+                            }
+                            alt={
+                              story.attributes.User.data.attributes.logo.data
+                                .attributes.alternativeText
+                                ? story.attributes.User.data.attributes.logo
+                                    .data.attributes.alternativeText
+                                : 'Logo'
+                            }
+                          />
                         )}
                       </div>
-                      {story.attributes.highlight && (
-                        <div className='absolute left-1/2 -bottom-2 z-50 -translate-x-1/2 transform bg-half-highlight px-1 text-xs font-bold uppercase'>
-                          Highlight
+                    </div>
+                    <div className={` p-6`}>
+                      <div className='story-categories font-inconsolata text-primary-300'>
+                        {story.attributes.useCase.data &&
+                          story.attributes.useCase.data.map(
+                            (useCase, index) => {
+                              return (
+                                <span key={index}>
+                                  {useCase.attributes.Name}
+                                </span>
+                              )
+                            }
+                          )}
+                      </div>
+                      <div className='story-title py-2 font-basier text-xl font-semibold'>
+                        {story.attributes.Title}
+                      </div>
+                      <div className='story-description'>
+                        {story.attributes.Description}
+                      </div>
+                      {(story.attributes.ReadBlogLink ||
+                        story.attributes.ExternalLink ||
+                        story.attributes.WatchVideoLink) && (
+                        <div className='absolute bottom-6 right-6'>
+                          <div className='flex items-center gap-x-6 text-primary-300'>
+                            {story.attributes.ReadBlogLink && (
+                              <Link
+                                href={story.attributes.ReadBlogLink}
+                                target='_blank'>
+                                Read blog
+                              </Link>
+                            )}
+                            {story.attributes.ExternalLink && (
+                              <Link
+                                href={story.attributes.ExternalLink}
+                                target='_blank'>
+                                Read blog
+                              </Link>
+                            )}
+                            {story.attributes.WatchVideoLink && (
+                              <Link
+                                href={story.attributes.WatchVideoLink}
+                                target='_blank'
+                                className='flex items-center gap-x-3'>
+                                <CirclePlay
+                                  strokeWidth={1.5}
+                                  className='h-5 w-5'
+                                />
+                                Watch video
+                              </Link>
+                            )}
+                          </div>
                         </div>
                       )}
                     </div>
-                  )
-                })}
+                    {story.attributes.highlight && (
+                      <div className='absolute left-1/2 -bottom-2 z-50 -translate-x-1/2 transform bg-half-highlight px-1 text-xs font-bold uppercase'>
+                        Highlight
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </div>
           <FollowUs />
