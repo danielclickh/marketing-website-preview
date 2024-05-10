@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'
+import { SuiSearchField } from '../../components/sui'
 import { findOne } from '../../lib/api/strapi'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
@@ -329,101 +330,112 @@ function CustomerStoriesPage({
             </p>
           </div>
           <div className='my-24 mx-auto max-w-7xl px-8 2xl:px-0'>
-            <div className='filters mb-6 flex items-center gap-x-4'>
-              <div className='search'>search</div>
-              <button
-                type='button'
-                className={`${
-                  orderByDate
-                    ? 'bg-primary-300 text-black'
-                    : 'border-opacity-[0.3] text-white'
-                } rounded-full border border-primary-500 py-3 px-4 text-sm font-semibold text-black`}
-                onClick={toggleOrderByDate}>
-                Latest
-              </button>
-              <div className='multiselect-target hidden'>
-                <MultiSelect
-                  value={selectedUseCases}
-                  onChange={(e) => {
-                    setSelectedUseCases(e.value)
-                    const selectedValues = e.value
-                      .map((option: UseCaseCategory) => option.code)
-                      .join(',')
-                    router.push(
-                      {
-                        query: {
-                          ...router.query,
-                          useCase: selectedValues
-                        }
-                      },
-                      undefined,
-                      { shallow: true }
-                    )
+            <div className='filters mb-6 flex items-center justify-between gap-x-4'>
+              <div className='search'>
+                <SuiSearchField
+                  placeholder='Search by title or keyword...'
+                  htmlFor='search'
+                  className='mb-6 lg:mb-0 lg:flex-1'
+                  onChange={() => {
+                    console.log('hello')
                   }}
-                  options={UseCaseCategories}
-                  optionLabel='name'
-                  placeholder='Use Case'
-                  maxSelectedLabels={0}
-                  panelHeaderTemplate={<></>}
-                  selectedItemsLabel='Use Case ({0})'
-                  unstyled
                 />
               </div>
-              <div className='multiselect-target hidden'>
-                <MultiSelect
-                  value={selectedMigrations}
-                  onChange={(e) => {
-                    setSelectedMigrations(e.value)
-                    const selectedValues = e.value
-                      .map((option: UseCaseMigration) => option.code)
-                      .join(',')
-                    router.push(
-                      {
-                        query: {
-                          ...router.query,
-                          migration: selectedValues
-                        }
-                      },
-                      undefined,
-                      { shallow: true }
-                    )
-                  }}
-                  options={UseCaseMigrations}
-                  optionLabel='name'
-                  placeholder='Migration'
-                  maxSelectedLabels={0}
-                  panelHeaderTemplate={<></>}
-                  selectedItemsLabel='Migration ({0})'
-                  unstyled
-                />
-              </div>
-              <div className='multiselect-target hidden'>
-                <MultiSelect
-                  value={selectedVerticals}
-                  onChange={(e) => {
-                    setSelectedVerticals(e.value)
-                    const selectedValues = e.value
-                      .map((option: UseCaseVertical) => option.code)
-                      .join(',')
-                    router.push(
-                      {
-                        query: {
-                          ...router.query,
-                          vertical: selectedValues
-                        }
-                      },
-                      undefined,
-                      { shallow: true }
-                    )
-                  }}
-                  options={UseCaseVerticals}
-                  optionLabel='name'
-                  placeholder='Vertical'
-                  maxSelectedLabels={0}
-                  panelHeaderTemplate={<></>}
-                  selectedItemsLabel='Vertical ({0})'
-                  unstyled
-                />
+              <div className='flex items-center gap-x-4'>
+                <button
+                  type='button'
+                  className={`${
+                    orderByDate
+                      ? 'bg-primary-300 text-black'
+                      : 'border-opacity-[0.3] text-white'
+                  } rounded-full border border-primary-500 py-3 px-4 text-sm font-semibold text-black`}
+                  onClick={toggleOrderByDate}>
+                  Latest
+                </button>
+                <div className='multiselect-target hidden'>
+                  <MultiSelect
+                    value={selectedUseCases}
+                    onChange={(e) => {
+                      setSelectedUseCases(e.value)
+                      const selectedValues = e.value
+                        .map((option: UseCaseCategory) => option.code)
+                        .join(',')
+                      router.push(
+                        {
+                          query: {
+                            ...router.query,
+                            useCase: selectedValues
+                          }
+                        },
+                        undefined,
+                        { shallow: true }
+                      )
+                    }}
+                    options={UseCaseCategories}
+                    optionLabel='name'
+                    placeholder='Use Case'
+                    maxSelectedLabels={0}
+                    panelHeaderTemplate={<></>}
+                    selectedItemsLabel='Use Case ({0})'
+                    unstyled
+                  />
+                </div>
+                <div className='multiselect-target hidden'>
+                  <MultiSelect
+                    value={selectedMigrations}
+                    onChange={(e) => {
+                      setSelectedMigrations(e.value)
+                      const selectedValues = e.value
+                        .map((option: UseCaseMigration) => option.code)
+                        .join(',')
+                      router.push(
+                        {
+                          query: {
+                            ...router.query,
+                            migration: selectedValues
+                          }
+                        },
+                        undefined,
+                        { shallow: true }
+                      )
+                    }}
+                    options={UseCaseMigrations}
+                    optionLabel='name'
+                    placeholder='Migration'
+                    maxSelectedLabels={0}
+                    panelHeaderTemplate={<></>}
+                    selectedItemsLabel='Migration ({0})'
+                    unstyled
+                  />
+                </div>
+                <div className='multiselect-target hidden'>
+                  <MultiSelect
+                    value={selectedVerticals}
+                    onChange={(e) => {
+                      setSelectedVerticals(e.value)
+                      const selectedValues = e.value
+                        .map((option: UseCaseVertical) => option.code)
+                        .join(',')
+                      router.push(
+                        {
+                          query: {
+                            ...router.query,
+                            vertical: selectedValues
+                          }
+                        },
+                        undefined,
+                        { shallow: true }
+                      )
+                    }}
+                    options={UseCaseVerticals}
+                    optionLabel='name'
+                    placeholder='Vertical'
+                    maxSelectedLabels={0}
+                    panelHeaderTemplate={<></>}
+                    selectedItemsLabel='Vertical ({0})'
+                    unstyled
+                  />
+                </div>
               </div>
             </div>
 
