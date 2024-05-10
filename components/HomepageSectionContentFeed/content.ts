@@ -30,6 +30,7 @@ import LogoSynq from './assets/logo-synq'
 import LogoVantage from './assets/logo-vantage'
 import LogoVimeo from './assets/logo-vimeo'
 import LogoDidi from './assets/logo-didi'
+import LogoInstacart from './assets/logo-instacart'
 
 export type EntryCategory = string
 
@@ -313,7 +314,12 @@ Ankush, CTO of LangChain
         }
       ]
     },
-
+    {
+      featured: false,
+      body: `“ClickHouse is a fast and highly performant analytical database, widely used across Instacart to power other use-cases such as critical retailer and ads dashboards, calculating results for A/B testing, and machine learning signals.” <a href="https://tech.instacart.com/real-time-fraud-detection-with-yoda-and-clickhouse-bd08e9dbe3f4?utm_source=clickhouse" target="_blank">Read blog</a>`,
+      logo: LogoInstacart,
+      categories: ['E-commerce & retail']
+    },
     // Contentsquare
     {
       featured: false,
@@ -382,6 +388,7 @@ Ankush, CTO of LangChain
       logo: LogoSynq,
       categories: ['Business intelligence']
     },
+    // Minted
 
     // Minted
     {

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { CUIButton } from '../ClickUI'
+import Markdown from '../Markdown'
 import ResponsiveEmbed from '../ResponsiveEmbed'
 import { SuiText, SuiTitle } from '../sui'
 import { getContent, getCategories, EntryCategory, EntryStat } from './content'
@@ -111,19 +112,21 @@ export default function HomepageSectionContentFeed({
             isActive && (
               <div
                 key={index}
-                className='mb-11 space-y-8 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8 lg:p-10'>
+                className='flip-selection mb-11 space-y-8 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8 lg:p-10'>
                 {entry.embed && <ResponsiveEmbed html={entry.embed} />}
-                <ReactMarkdown
-                  components={{
-                    a: ({ children, ...props }) => (
-                      <a {...props} className='font-bold underline'>
-                        {children}
-                      </a>
-                    )
-                  }}
-                  className='text-center text-inherit'>
-                  {entry.body}
-                </ReactMarkdown>
+                <div className='text-center text-inherit'>
+                  <Markdown
+                    encloseByDiv={false}
+                    components={{
+                      a: ({ children, ...props }) => (
+                        <a {...props} className='font-bold underline'>
+                          {children}
+                        </a>
+                      )
+                    }}>
+                    {entry.body}
+                  </Markdown>
+                </div>
                 <div className='flex justify-center'>
                   <entry.logo />
                 </div>

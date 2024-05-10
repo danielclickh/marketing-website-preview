@@ -29,7 +29,7 @@ export default function HomepageHeroAlt({
       <div className='absolute top-0 left-0 bottom-0 z-10 w-full bg-primary-300 lg:w-1/2'></div>
       <div className='section-container relative z-20 grid lg:grid-cols-2'>
         {/* Text column */}
-        <div className='relative z-30 bg-primary-300 py-12 text-center text-black lg:py-24 lg:text-left xl:py-32'>
+        <div className='flip-selection relative z-30 bg-primary-300 py-12 text-center text-black lg:py-24 lg:text-left xl:py-32'>
           <SuiTitle
             type='h1'
             className='!text-[2rem] md:!text-[2.5rem] xl:!text-[3.5rem]'>
