@@ -8,12 +8,18 @@ import { PrimeReactProvider } from 'primereact/api'
 import { MultiSelect } from 'primereact/multiselect'
 import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
+import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'
 import { findOne } from '../../lib/api/strapi'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { UseCaseCategory, UserStoriesPage } from '../../types/userStories'
 import { Tailwind } from '../../lib/utils/primereact'
+import {
+  UseCaseCategory,
+  UseCaseMigration,
+  UseCaseVertical,
+  UserStoriesPage
+} from '../../types/userStories'
 
 export const getStaticProps: GetStaticProps<UserStoriesPage> =
   async function getStaticProps() {
@@ -64,12 +70,52 @@ export const getStaticProps: GetStaticProps<UserStoriesPage> =
       })
     })
 
+    //get migrations
+    const migrations = await fetch(
+      `${process.env.STRAPI_API_URL}/api/user-stories-migrations?sort=Name`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_KEY}`
+        }
+      }
+    )
+    const migrationsPayload = await migrations.json()
+    const UseCaseMigrations: UseCaseMigration[] = []
+
+    migrationsPayload.data.forEach((item: any) => {
+      UseCaseMigrations.push({
+        code: item.id,
+        name: item.attributes.Name
+      })
+    })
+
+    //get verticals
+    const verticals = await fetch(
+      `${process.env.STRAPI_API_URL}/api/user-stories-verticals?sort=Name`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_KEY}`
+        }
+      }
+    )
+    const verticalsPayload = await verticals.json()
+    const UseCaseVerticals: UseCaseVertical[] = []
+
+    verticalsPayload.data.forEach((item: any) => {
+      UseCaseVerticals.push({
+        code: item.id,
+        name: item.attributes.Name
+      })
+    })
+
     const commonProps = await getCommonProps()
     return {
       props: {
         ...result,
         userStories,
         UseCaseCategories,
+        UseCaseMigrations,
+        UseCaseVerticals,
         ...commonProps
       }
     }
@@ -80,15 +126,28 @@ function CustomerStoriesPage({
   userStories,
   headerData,
   footerData,
-  UseCaseCategories
+  UseCaseCategories,
+  UseCaseMigrations,
+  UseCaseVerticals
 }: UserStoriesPage) {
   galaxyOnPage('userStoriesPage')
   const router = useRouter()
   const searchParams = useSearchParams()
 
+  function findByCode<T extends { code: number }>(
+    array: T[],
+    code: number
+  ): T | undefined {
+    return array.find((item) => item.code === code)
+  }
+
   const orderByDate = searchParams.get('latest')
     ? searchParams.get('latest') === 'true'
     : true
+
+  const useCaseParam = searchParams.get('useCase')
+  const migrationParam = searchParams.get('migration')
+  const verticalParam = searchParams.get('vertical')
 
   const toggleOrderByDate = () => {
     router.push(
@@ -112,15 +171,113 @@ function CustomerStoriesPage({
       return dateB.getTime() - dateA.getTime() // Descending order
     }
   })
-
-  const [selectedUseCases, setselectedUseCases] = useState(null)
+  //set the multiselect dropdown values
   const [useCases, setUseCases] = useState<UseCaseCategory[]>()
+  const [migrations, setMigrations] = useState<UseCaseMigration[]>()
+  const [verticals, setVerticals] = useState<UseCaseVertical[]>()
+
+  //state to hold user selected values
+  const [selectedUseCases, setSelectedUseCases] = useState<UseCaseCategory[]>(
+    []
+  )
+  const [selectedMigrations, setSelectedMigrations] = useState<
+    UseCaseMigration[]
+  >([])
+  const [selectedVerticals, setSelectedVerticals] = useState<UseCaseVertical[]>(
+    []
+  )
+
+  // Filter userStories based on selected parameters
+  const filteredUserStories = sortedUserStories.filter((story) => {
+    // Filter by Use Case
+    const useCaseCodes = selectedUseCases.map((useCase) => useCase.code)
+    const storyUseCaseCodes = story.attributes.useCase.data.map(
+      (useCase) => useCase.id
+    )
+    const useCaseMatch =
+      useCaseCodes.some((code) => storyUseCaseCodes.includes(code)) ||
+      !useCaseCodes.length
+
+    // Filter by Migration
+    const migrationCodes = selectedMigrations.map((migration) => migration.code)
+    const storyMigrationCodes = story.attributes.migrations.data.map(
+      (migration) => migration.id
+    )
+    const migrationMatch =
+      migrationCodes.some((code) => storyMigrationCodes.includes(code)) ||
+      !migrationCodes.length
+
+    // Filter by Vertical
+    const verticalCodes = selectedVerticals.map((vertical) => vertical.code)
+    const storyVerticalCodes = story.attributes.vertical.data.map(
+      (vertical) => vertical.id
+    )
+    const verticalMatch =
+      verticalCodes.some((code) => storyVerticalCodes.includes(code)) ||
+      !verticalCodes.length
+
+    // Filter by Latest
+    const dateA = new Date(story.attributes.publishedAt)
+    const dateB = new Date()
+    const latestMatch = orderByDate ? dateA.getTime() <= dateB.getTime() : true
+
+    // Return true only if any selected parameter matches or if no values are selected, and it matches the latest filter
+    return useCaseMatch && migrationMatch && verticalMatch && latestMatch
+  })
 
   useEffect(() => {
     setUseCases(UseCaseCategories)
+    setMigrations(UseCaseMigrations)
+    setVerticals(UseCaseVerticals)
 
-    document.querySelector('.multiselect-target')?.classList.remove('hidden')
-  }, [UseCaseCategories])
+    //stop flash of unstyled content
+    const multiselectTargets = document.querySelectorAll('.multiselect-target')
+    multiselectTargets.forEach((item) => {
+      item.classList.remove('hidden')
+    })
+  }, [UseCaseCategories, UseCaseMigrations])
+
+  //manage
+  useEffect(() => {
+    //=== Use Cases ==//
+    const useCaseCodes = useCaseParam
+      ?.split(',')
+      .map((code) => parseInt(code.trim(), 10))
+    const selectedUseCaseObjects = useCaseCodes
+      ? useCaseCodes
+          .map((code) => findByCode(UseCaseCategories, code))
+          .filter((item): item is UseCaseCategory => item !== undefined)
+      : []
+    // Set the selected use cases
+    setSelectedUseCases(selectedUseCaseObjects)
+    //=== Use Cases ==//
+
+    //=== Migrations ==//
+    const migrationsCodes = migrationParam
+      ?.split(',')
+      .map((code) => parseInt(code.trim(), 10))
+    const selectedMigrationsObject = migrationsCodes
+      ? migrationsCodes
+          .map((code) => findByCode(UseCaseMigrations, code))
+          .filter((item): item is UseCaseMigration => item !== undefined)
+      : []
+    // Set the selected use cases
+    setSelectedMigrations(selectedMigrationsObject)
+    //=== Migrations ==//
+
+    //=== vertical ==//
+    const verticalCodes = verticalParam
+      ?.split(',')
+      .map((code) => parseInt(code.trim(), 10))
+    const selectedVerticalsObject = verticalCodes
+      ? verticalCodes
+          .map((code) => findByCode(UseCaseVerticals, code))
+          .filter((item): item is UseCaseVertical => item !== undefined)
+      : []
+    // Set the selected use cases
+    setSelectedVerticals(selectedVerticalsObject)
+    //=== vertical ==//
+  }, [useCaseParam, migrationParam, verticalParam])
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -162,7 +319,22 @@ function CustomerStoriesPage({
               <div className='multiselect-target hidden'>
                 <MultiSelect
                   value={selectedUseCases}
-                  onChange={(e) => setselectedUseCases(e.value)}
+                  onChange={(e) => {
+                    setSelectedUseCases(e.value)
+                    const selectedValues = e.value
+                      .map((option: UseCaseCategory) => option.code)
+                      .join(',')
+                    router.push(
+                      {
+                        query: {
+                          ...router.query,
+                          useCase: selectedValues
+                        }
+                      },
+                      undefined,
+                      { shallow: true }
+                    )
+                  }}
                   options={useCases}
                   optionLabel='name'
                   placeholder='Use Case'
@@ -174,14 +346,57 @@ function CustomerStoriesPage({
               </div>
               <div className='multiselect-target hidden'>
                 <MultiSelect
-                  value={selectedUseCases}
-                  onChange={(e) => setselectedUseCases(e.value)}
-                  options={useCases}
+                  value={selectedMigrations}
+                  onChange={(e) => {
+                    setSelectedMigrations(e.value)
+                    const selectedValues = e.value
+                      .map((option: UseCaseMigration) => option.code)
+                      .join(',')
+                    router.push(
+                      {
+                        query: {
+                          ...router.query,
+                          migration: selectedValues
+                        }
+                      },
+                      undefined,
+                      { shallow: true }
+                    )
+                  }}
+                  options={migrations}
                   optionLabel='name'
-                  placeholder='Use Case'
+                  placeholder='Migration'
                   maxSelectedLabels={0}
                   panelHeaderTemplate={<></>}
-                  selectedItemsLabel='Use Case ({0})'
+                  selectedItemsLabel='Migration ({0})'
+                  unstyled
+                />
+              </div>
+              <div className='multiselect-target hidden'>
+                <MultiSelect
+                  value={selectedVerticals}
+                  onChange={(e) => {
+                    setSelectedVerticals(e.value)
+                    const selectedValues = e.value
+                      .map((option: UseCaseVertical) => option.code)
+                      .join(',')
+                    router.push(
+                      {
+                        query: {
+                          ...router.query,
+                          vertical: selectedValues
+                        }
+                      },
+                      undefined,
+                      { shallow: true }
+                    )
+                  }}
+                  options={verticals}
+                  optionLabel='name'
+                  placeholder='Vertical'
+                  maxSelectedLabels={0}
+                  panelHeaderTemplate={<></>}
+                  selectedItemsLabel='Vertical ({0})'
                   unstyled
                 />
               </div>
@@ -189,7 +404,7 @@ function CustomerStoriesPage({
 
             <div className='grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3'>
               {sortedUserStories &&
-                sortedUserStories.map((story, index) => {
+                filteredUserStories.map((story, index) => {
                   return (
                     <div
                       key={index}
@@ -288,10 +503,8 @@ function CustomerStoriesPage({
                   )
                 })}
             </div>
-            <div className='mt-20 whitespace-pre'>
-              {JSON.stringify(userStories, null, 2)}
-            </div>
           </div>
+          <FollowUs />
         </div>
       </PrimeReactProvider>
     </Layout>

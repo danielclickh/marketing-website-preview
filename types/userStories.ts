@@ -3,9 +3,21 @@ import { CommonProps } from './homepage'
 export interface UserStoriesPage extends CommonProps {
   userStories: UserStory[]
   UseCaseCategories: UseCaseCategory[]
+  UseCaseMigrations: UseCaseMigration[]
+  UseCaseVerticals: UseCaseVertical[]
 }
 
 export interface UseCaseCategory {
+  code: number
+  name: string
+}
+
+export interface UseCaseMigration {
+  code: number
+  name: string
+}
+
+export interface UseCaseVertical {
   code: number
   name: string
 }

@@ -2,7 +2,7 @@ import { classNames } from '../../lib/utils/classNames'
 
 export const TRANSITIONS = {
   overlay: {
-    timeout: 150
+    timeout: 50
   }
 }
 
@@ -88,8 +88,9 @@ export const Tailwind = {
     }),
     wrapper: {
       className: classNames(
-        'border border-primary-600',
-        'bg-neutral-800 text-white rounded-md rounded-t-0 shadow-xl'
+        'border border-primary-600 py-1 mt-2',
+        'bg-neutral-800 text-white rounded-md rounded-t-0 shadow-xl',
+        'overflow-auto'
       )
     },
     list: ({ props }: { props: any }) => ({
