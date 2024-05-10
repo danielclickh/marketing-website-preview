@@ -1,4 +1,4 @@
-import { CirclePlay } from 'lucide-react'
+import { CirclePlay, CircleXIcon } from 'lucide-react'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -181,6 +181,17 @@ function CustomerStoriesPage({
   const migrationParam = searchParams.get('migration')
   const verticalParam = searchParams.get('vertical')
   const searchParamInput = searchParams.get('search')
+
+  const clearAllFilters = () => {
+    console.log('clear those filters')
+    router.push(
+      {
+        query: null
+      },
+      undefined,
+      { shallow: true }
+    )
+  }
 
   const toggleOrderByDate = () => {
     router.push(
@@ -469,6 +480,13 @@ function CustomerStoriesPage({
                     unstyled
                   />
                 </div>
+                <button
+                  type='button'
+                  className='flex transform items-center gap-x-2 rounded-full  py-2.5 text-sm font-semibold transition-colors duration-500 ease-in-out'
+                  onClick={clearAllFilters}>
+                  Clear filters
+                  <CircleXIcon strokeWidth={1.25} />
+                </button>
               </div>
             </div>
 
