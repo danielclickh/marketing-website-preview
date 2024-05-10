@@ -64,10 +64,19 @@ export const getStaticProps: GetStaticProps<UserStoriesPage> =
     const UseCaseCategories: UseCaseCategory[] = []
 
     useCasesPayload.data.forEach((item: any) => {
-      UseCaseCategories.push({
-        code: item.id,
-        name: item.attributes.Name
-      })
+      // Check if the category is used in any user story
+      const isUsed = userStories.some(
+        (story: { attributes: { useCase: { data: { id: number }[] } } }) =>
+          story.attributes.useCase.data.some(
+            (useCase) => useCase.id === item.id
+          )
+      )
+      if (isUsed) {
+        UseCaseCategories.push({
+          code: item.id,
+          name: item.attributes.Name
+        })
+      }
     })
 
     //get migrations
@@ -82,12 +91,23 @@ export const getStaticProps: GetStaticProps<UserStoriesPage> =
     const migrationsPayload = await migrations.json()
     const UseCaseMigrations: UseCaseMigration[] = []
 
-    migrationsPayload.data.forEach((item: any) => {
-      UseCaseMigrations.push({
-        code: item.id,
-        name: item.attributes.Name
-      })
-    })
+    migrationsPayload.data.forEach(
+      (item: { id: number; attributes: { Name: string } }) => {
+        // Check if the migration is used in any user story
+        const isUsed = userStories.some(
+          (story: { attributes: { migrations: { data: { id: number }[] } } }) =>
+            story.attributes.migrations.data.some(
+              (migration: { id: number }) => migration.id === item.id
+            )
+        )
+        if (isUsed) {
+          UseCaseMigrations.push({
+            code: item.id,
+            name: item.attributes.Name
+          })
+        }
+      }
+    )
 
     //get verticals
     const verticals = await fetch(
@@ -101,12 +121,23 @@ export const getStaticProps: GetStaticProps<UserStoriesPage> =
     const verticalsPayload = await verticals.json()
     const UseCaseVerticals: UseCaseVertical[] = []
 
-    verticalsPayload.data.forEach((item: any) => {
-      UseCaseVerticals.push({
-        code: item.id,
-        name: item.attributes.Name
-      })
-    })
+    verticalsPayload.data.forEach(
+      (item: { id: number; attributes: { Name: string } }) => {
+        // Check if the vertical is used in any user story
+        const isUsed = userStories.some(
+          (story: { attributes: { vertical: { data: { id: number }[] } } }) =>
+            story.attributes.vertical.data.some(
+              (vertical: { id: number }) => vertical.id === item.id
+            )
+        )
+        if (isUsed) {
+          UseCaseVerticals.push({
+            code: item.id,
+            name: item.attributes.Name
+          })
+        }
+      }
+    )
 
     const commonProps = await getCommonProps()
     return {
@@ -172,8 +203,6 @@ function CustomerStoriesPage({
     }
   })
   //set the multiselect dropdown values
-  const [useCases, setUseCases] = useState<UseCaseCategory[]>()
-  const [migrations, setMigrations] = useState<UseCaseMigration[]>()
   const [verticals, setVerticals] = useState<UseCaseVertical[]>()
 
   //state to hold user selected values
@@ -226,16 +255,12 @@ function CustomerStoriesPage({
   })
 
   useEffect(() => {
-    setUseCases(UseCaseCategories)
-    setMigrations(UseCaseMigrations)
-    setVerticals(UseCaseVerticals)
-
     //stop flash of unstyled content
     const multiselectTargets = document.querySelectorAll('.multiselect-target')
     multiselectTargets.forEach((item) => {
       item.classList.remove('hidden')
     })
-  }, [UseCaseCategories, UseCaseMigrations])
+  })
 
   //manage
   useEffect(() => {
@@ -335,7 +360,7 @@ function CustomerStoriesPage({
                       { shallow: true }
                     )
                   }}
-                  options={useCases}
+                  options={UseCaseCategories}
                   optionLabel='name'
                   placeholder='Use Case'
                   maxSelectedLabels={0}
@@ -363,7 +388,7 @@ function CustomerStoriesPage({
                       { shallow: true }
                     )
                   }}
-                  options={migrations}
+                  options={UseCaseMigrations}
                   optionLabel='name'
                   placeholder='Migration'
                   maxSelectedLabels={0}
@@ -391,7 +416,7 @@ function CustomerStoriesPage({
                       { shallow: true }
                     )
                   }}
-                  options={verticals}
+                  options={UseCaseVerticals}
                   optionLabel='name'
                   placeholder='Vertical'
                   maxSelectedLabels={0}
