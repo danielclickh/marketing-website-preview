@@ -183,7 +183,7 @@ function CustomerStoriesPage({
   const searchParamInput = searchParams.get('search')
 
   const clearAllFilters = () => {
-    console.log('clear those filters')
+    setSearchQuery('')
     router.push(
       {
         query: null
@@ -384,6 +384,7 @@ function CustomerStoriesPage({
                 htmlFor='search'
                 className='min-w-[447px]'
                 onChange={handleSearchInputChange}
+                value={searchQuery}
               />
               <div className='flex items-center gap-x-4'>
                 <button
