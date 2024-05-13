@@ -523,7 +523,7 @@ export default function CloudPage({
               </SuiTitle>
               <div className='mx-auto max-w-2xl px-4 text-center leading-normal text-neutral-200 md:px-0'>
                 With the flexibility to choose where and how you deploy.
-                Available on AWS, GCP and Azure in Private Preview, and through
+                Available on AWS, GCP and Azure in Beta, and through
                 Marketplaces. Manage your services through our ClickHouse Cloud
                 self-serve UI, or by leveraging our APIs and Terraform provider
                 to automate your operations.
