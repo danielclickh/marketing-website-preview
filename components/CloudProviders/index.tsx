@@ -64,8 +64,8 @@ function CloudProviders({
                       size='xs'
                       weight='medium'
                       color='secondary'
-                      className='absolute -right-20 -top-1 w-[110px] rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
-                      Private Preview
+                      className='absolute -right-3 -top-1 rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
+                      Beta
                     </SuiText>
                   </>
                 )}
