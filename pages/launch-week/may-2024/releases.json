@@ -6,10 +6,10 @@
 		"summary": "ClickPipes is a powerful and simple way to ingest your data into ClickHouse Cloud. As one of the most requested integrations, we’re excited to announce the availability of our newest connector for Amazon Kinesis, which offers a hassle-free way to ingest your Kinesis Data Streams into ClickHouse Cloud.",
 		"imgSrc": "/images/launch-week/kinesis.svg",
 		"imgAlt": "ClickPipes for Amazon Kinesis",
-		"linkBlog": "https://clickhouse.com/blog?loc=launch-week-may2024",
-		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
-		"linkVideo": "https://clickhouse.com/videos?loc=launch-week-may2024",
-		"blurred": true,
+		"linkBlog": "/blog/clickpipes-amazon-kinesis?loc=launch-week-may2024",
+		"linkDocs": "https://clickhouse.com/docs/en/integrations/clickpipes/kinesis?loc=launch-week-may2024",
+		"linkVideo": "/videos/clickpipes-for-amazon-kinesis?loc=launch-week-may2024",
+		"blurred": false,
 		"beta": ""
 	},
 	{
