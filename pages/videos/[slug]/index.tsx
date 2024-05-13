@@ -200,21 +200,45 @@ export default function VideoPage({
           </div>
           <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
             {allVideos
+              // Make sure not to display the same video
               .filter((item) => {
-                if (video.related.length) {
-                  return video.related.includes(item.id)
-                }
-
                 return item.slug !== video.slug
               })
+
+              // Order videos by those with matching categories
+              .sort((a, b) => {
+                // Related item to the top!
+                if (video.related.length && video.related.includes(a.id)) {
+                  return -1
+                }
+
+                // Find matching categories for a
+                const aCategories = a.categories.filter((cat) =>
+                  video.categories.includes(cat)
+                )
+
+                // Find matching categories for b
+                const bCategories = b.categories.filter((cat) =>
+                  video.categories.includes(cat)
+                )
+
+                // A negative value indicates that a should come before b.
+                // A positive value indicates that a should come after b.
+                // Zero or NaN indicates that a and b are considered equal.
+                return bCategories.length - aCategories.length
+              })
+
+              // Limit selection to 3 items
+              .slice(0, 3)
+
+              // Render video cards
               .map((item) => {
                 return (
                   <div key={item.slug}>
                     <VideoCard video={item} />
                   </div>
                 )
-              })
-              .slice(0, 3)}
+              })}
           </div>
         </div>
       </div>
