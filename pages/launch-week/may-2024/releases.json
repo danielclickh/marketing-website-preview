@@ -19,10 +19,10 @@
 		"summary": "Today, we’re thrilled to share that the new Cloud Console experience is now available to all Cloud users! The roll-out was staged over several weeks, and was the culmination of an acquisition and year-long rebuild. Read an in-depth behind-the-scenes account about how we built and shipped this new experience below.",
 		"imgSrc": "/images/launch-week/cloud-console.svg",
 		"imgAlt": "Cloud Console rebuild",
-		"linkBlog": "https://clickhouse.com/blog?loc=launch-week-may2024",
-		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
-		"linkVideo": "https://clickhouse.com/videos?loc=launch-week-may2024",
-		"blurred": true,
+		"linkBlog": "/blog/clickhouse-cloud-console-rebuilt?loc=launch-week-may2024",
+		"linkDocs": "",
+		"linkVideo": "",
+		"blurred": false,
 		"beta": ""
 	},
 	{
