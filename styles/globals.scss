@@ -833,6 +833,7 @@ form.mktoForm#mktoForm_1135 {
     @apply cursor-pointer inline-flex relative select-none align-bottom w-4 h-4;
   }
   [data-pc-section="box"] {
-    @apply flex items-center justify-center border w-4 h-4 text-gray-600 rounded-md transition-colors duration-200 bg-neutral-750 hover:border-primary-300 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)];
+    @apply flex items-center justify-center border border-neutral-700 w-4 h-4 text-gray-600 rounded-[3px] transition-colors duration-200 bg-neutral-750 hover:border-primary-300 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)];
   }
+
 }
