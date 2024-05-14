@@ -169,9 +169,14 @@ export default function LaunchWeekPage({
                             <h3 className='mb-1 text-lg font-semibold'>
                               {release.blurred ? 'Coming soon' : release.title}
                             </h3>
-                            {release.beta && (
-                              <div className='ml-4 mt-1 flex h-5 w-14 rounded-full bg-primary-300 px-3 text-sm font-normal text-neutral-725'>
-                                beta
+                            {['beta', 'preview'].includes(release.badge) && (
+                              <div
+                                className={`ml-4 mt-1 flex h-5 ${
+                                  release.badge === 'beta' ? 'w-14' : 'w-32'
+                                } rounded-full bg-primary-300 px-3 text-sm font-normal text-neutral-725`}>
+                                {release.badge === 'beta'
+                                  ? 'beta'
+                                  : 'private preview'}
                               </div>
                             )}
                           </div>
