@@ -277,8 +277,6 @@ function CustomerStoriesPage({
       latestMatch &&
       searchMatch
     )
-
-    // Return true only if any selected parameter matches or if no values are selected, and it matches the latest filter
   })
 
   useEffect(() => {
@@ -359,10 +357,8 @@ function CustomerStoriesPage({
         value={{
           unstyled: true,
           pt: Tailwind,
-          ptOptions: {
-            mergeSections: true,
-            mergeProps: true,
-            classNameMergeFunction: twMerge
+          zIndex: {
+            overlay: 30
           }
         }}>
         <div className='pt-10'>
@@ -400,6 +396,7 @@ function CustomerStoriesPage({
                 <div className='multiselect-target hidden'>
                   <MultiSelect
                     value={selectedUseCases}
+                    itemClassName='multiselect-item'
                     onChange={(e) => {
                       setSelectedUseCases(e.value)
                       const selectedValues = e.value
@@ -481,9 +478,25 @@ function CustomerStoriesPage({
                     unstyled
                   />
                 </div>
+
                 <button
                   type='button'
-                  className='flex transform items-center gap-x-2 rounded-full  py-2.5 text-sm font-semibold transition-colors duration-500 ease-in-out'
+                  disabled={
+                    useCaseParam ||
+                    migrationParam ||
+                    searchParamInput ||
+                    verticalParam
+                      ? false
+                      : true
+                  }
+                  className={`${
+                    useCaseParam ||
+                    migrationParam ||
+                    searchParamInput ||
+                    verticalParam
+                      ? 'text-whte'
+                      : 'text-neutral-500'
+                  } flex transform items-center gap-x-2 rounded-full py-2.5 text-sm font-semibold transition-colors duration-500 ease-in-out`}
                   onClick={clearAllFilters}>
                   Clear filters
                   <CircleXIcon strokeWidth={1.25} />

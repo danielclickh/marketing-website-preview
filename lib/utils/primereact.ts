@@ -44,7 +44,7 @@ export const Tailwind = {
       )
     },
     panel: {
-      className: classNames('')
+      className: classNames()
     },
     header: {
       className: classNames(
@@ -88,8 +88,8 @@ export const Tailwind = {
     }),
     wrapper: {
       className: classNames(
-        'border border-primary-600 py-1 mt-2',
-        'bg-neutral-800 text-white rounded-md rounded-t-0 shadow-xl',
+        'border border-primary-600 py-1.5 mt-2',
+        'bg-neutral-800 text-white rounded-xl rounded-t-0 shadow-xl',
         'overflow-auto'
       )
     },
@@ -99,33 +99,25 @@ export const Tailwind = {
     item: ({ context }: { context: any }) => ({
       className: classNames(
         'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap text-white',
-        'm-0 px-3 py-1 border-0 transition-shadow duration-200 rounded-none',
+        'm-0 px-4 py-1.5 border-0 transition-shadow duration-200 rounded-none',
         {
           'text-white hover:bg-neutral-725 hover:text-primary-900':
             !context || !context.selected
         }
       )
     }),
-
     checkboxContainer: {
       className: classNames(
-        'inline-flex cursor-pointer select-none align-bottom relative',
-        'w-6 h-6'
+        'inline-flex cursor-pointer select-none align-bottom relative mr-2',
+        'w-4 h-4'
       )
     },
-    checkbox: ({ context }: { context: any }) => ({
-      className: classNames(
-        'flex items-center justify-center',
-        'border-2 w-6 h-6 text-gray-600 rounded-lg transition-colors duration-200',
-        'hover:border-blue-500 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)]',
-        {
-          'border-gray-300  bg-white': !context || !context.selected,
-          'border-blue-500 bg-blue-500': context && context.selected
-        }
-      )
-    }),
+
+    checkbox: {
+      classNames: ''
+    },
     checkboxIcon: ({ props }: { props: any }) => ({
-      className: 'hidden'
+      className: 'w-2 h-2 transition-all duration-200 text-white text-base'
     }),
     itemGroup: {
       className: classNames(
@@ -134,7 +126,7 @@ export const Tailwind = {
       )
     },
     filterContainer: ({ props }: { props: any }) => ({
-      className: 'relative' // Adjust as needed
+      className: 'relative'
     }),
     filterInput: {
       root: {
