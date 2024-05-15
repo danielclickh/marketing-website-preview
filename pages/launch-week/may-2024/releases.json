@@ -43,7 +43,7 @@
 		"date": "Thu, May 16th, 2024",
 		"title": "The first official ClickHouse certification",
 		"summary": "Today, we are pleased to announce that the first official ClickHouse certification is now available: ClickHouse Certified Developer. Demonstrate your skills with an on-demand, instructor-led course and exam that’s designed to validate your ability to model tables appropriately and effectively, insert and analyze data, and optimize queries - a true testament to a subject matter expert’s knowledge of ClickHouse.",
-		"imgSrc": "/images/launch-week/prometheus.svg",
+		"imgSrc": "/images/launch-week/clickhouse-certification.svg",
 		"imgAlt": "Announcing ClickHouse Certification",
 		"linkBlog": "https://clickhouse.com/blog?loc=launch-week-may2024",
 		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
