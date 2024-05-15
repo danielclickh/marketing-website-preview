@@ -396,7 +396,7 @@ export default function CertificationPage({
           </div>
         </div>
       </div>
-      <div className='my-24'>
+      <div className='my-24' id='faqs'>
         <FAQDynamic askUsAnything={false} faqs={faqs} />
       </div>
     </Layout>
