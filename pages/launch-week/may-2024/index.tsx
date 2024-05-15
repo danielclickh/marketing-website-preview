@@ -16,6 +16,7 @@ import Tilt from 'react-parallax-tilt'
 
 import HRSeparator from '../../../components/HRSeparator'
 import {
+  ArrowCircleRightIcon,
   BookOpenIcon,
   CalendarIcon,
   DocumentTextIcon,
@@ -209,6 +210,14 @@ export default function LaunchWeekPage({
                                 href={release.linkVideo}>
                                 <PlayIcon className='mt-1 h-4 w-4' />
                                 <span>Watch video</span>
+                              </Link>
+                            )}
+                            {!release.blurred && release.linkStarted && (
+                              <Link
+                                className='align-center flex gap-2 text-base-color opacity-80 transition-all hover:opacity-100'
+                                href={release.linkStarted}>
+                                <ArrowCircleRightIcon className='mt-1 h-4 w-4' />
+                                <span>Get started</span>
                               </Link>
                             )}
                           </div>
