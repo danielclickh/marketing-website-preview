@@ -61,12 +61,12 @@
 		"title": "Automatic Query Endpoints: Creating APIs from SQL Queries",
 		"summary": "With the new Automatic Query Endpoints feature, you can create an API endpoint directly from any saved SQL query in the Cloud Console. Forget about wrangling language clients, drivers, and auth protocols. In just a few clicks, make your queries instantly consumable by applications via a safe and secure ClickHouse Cloud API.",
 		"imgSrc": "/images/launch-week/api-endpoints.svg",
-		"imgAlt": "Query API Endpoints",
+		"imgAlt": "Query API Endpoints in Cloud",
 		"linkBlog": "/blog/automatic-query-endpoints?loc=launch-week-may2024",
-		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
-		"linkVideo": "https://clickhouse.com/videos?loc=launch-week-may2024",
+		"linkDocs": "",
+		"linkVideo": "/videos/automatic-query-endpoints-clickhouse-cloud?loc=launch-week-may2024",
 		"linkStarted": "",
-		"blurred": true,
+		"blurred": false,
 		"badge": "beta"
 	}
 ]
