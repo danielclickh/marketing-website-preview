@@ -63,7 +63,7 @@
 		"imgSrc": "/images/launch-week/api-endpoints.svg",
 		"imgAlt": "Query API Endpoints in Cloud",
 		"linkBlog": "/blog/automatic-query-endpoints?loc=launch-week-may2024",
-		"linkDocs": "",
+		"linkDocs": "https://clickhouse.com/docs/en/get-started/query-endpoints?loc=launch-week-may2024",
 		"linkVideo": "/videos/automatic-query-endpoints-clickhouse-cloud?loc=launch-week-may2024",
 		"linkStarted": "",
 		"blurred": false,
