@@ -136,7 +136,7 @@ export default function CloudPage({
                     <Link
                       href='/cloud/bring-your-own-cloud'
                       className='text-primary-300'>
-                      Bring Your Your Cloud (BYOC)
+                      Bring Your Own Cloud (BYOC)
                     </Link>
                   </p>
                 </div>
