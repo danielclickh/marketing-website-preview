@@ -2,12 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { getPricingsByPlan } from './lib/m3ter/m3ter-api'
 import { acceptableRegions } from './components/PricingCalculator/CalculatorTypesOptions'
-
-const config = {
-  planId: '01b9a9d2-a36a-4a1d-969b-b24fc756cd64',
-  computeAggregationId: '3797d30c-b13c-480b-9068-baf1e340a589',
-  storageAggregationId: 'b5843a1b-a1bb-403d-a929-3ce8486e00d9'
-}
+import { config } from './components/PricingCalculator/CalculatorTypesOptions'
 
 function log(message: string) {
   console.log(`[${new Date().toTimeString()}] ${message}`)

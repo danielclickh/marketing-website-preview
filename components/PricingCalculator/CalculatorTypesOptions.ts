@@ -99,11 +99,37 @@ export const acceptableRegions = [
     provider: 'gcp',
     region: 'asia-southeast1',
     tier: ['Production', 'Development']
+  },
+  {
+    provider: 'azure',
+    region: 'asia-germanywestcentral',
+    tier: ['Production']
+  },
+  {
+    provider: 'azure',
+    region: 'azure-germanywestcentral',
+    tier: ['Production']
+  },
+  {
+    provider: 'azure',
+    region: 'azure-eastus2',
+    tier: ['Production']
+  },
+  {
+    provider: 'azure',
+    region: 'azure-westus3',
+    tier: ['Production']
   }
 ]
 
 export const config = {
   planId: '01b9a9d2-a36a-4a1d-969b-b24fc756cd64',
+  computeAggregationId: '3797d30c-b13c-480b-9068-baf1e340a589',
+  storageAggregationId: 'b5843a1b-a1bb-403d-a929-3ce8486e00d9'
+}
+
+export const configStaging = {
+  planId: '0f8fc0ba-d098-4b49-94fd-344204ed87c2',
   computeAggregationId: '3797d30c-b13c-480b-9068-baf1e340a589',
   storageAggregationId: 'b5843a1b-a1bb-403d-a929-3ce8486e00d9'
 }
