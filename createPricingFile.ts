@@ -29,7 +29,7 @@ function generatePricingFile(pricings: any) {
 async function triggerPricingFile() {
   log('Starting to build pricing file')
 
-  const allPricings = await getPricingsByPlan(config.planId)
+  const allPricings = await getPricingsByPlan(configStaging.planId)
 
   // Generate modified 'acceptableRegions' array for 'gcp' provider
   const modifiedAcceptableRegions = acceptableRegions.map((regionObj) => {
