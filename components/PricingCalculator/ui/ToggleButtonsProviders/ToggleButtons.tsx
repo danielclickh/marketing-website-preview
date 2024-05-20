@@ -6,6 +6,7 @@ import GCPLogo from './GCPLogo'
 import styles from './ToggleButtons.module.scss'
 
 import { Option, ToggleButtonsProps } from '../../CalculatorTypesOptions'
+import AzureLogo from './AzureLogo'
 
 export function ToggleButtonsProviders<T extends string = string>({
   options,
@@ -34,6 +35,8 @@ export function ToggleButtonsProviders<T extends string = string>({
             <AwsLogo />
           ) : option.value === 'gcp' ? (
             <GCPLogo />
+          ) : option.value === 'azure' ? (
+            <AzureLogo />
           ) : (
             option.label
           )}

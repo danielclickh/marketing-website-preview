@@ -20,6 +20,7 @@ import {
   acceptableRegions,
   computeOptions,
   config,
+  configStaging,
   PricingData,
   providerOptions,
   storageUnitOptionsTiered
@@ -451,7 +452,11 @@ export const PricingCalculator: React.FC<{
     //Find the right region for pricing
     //We have to check the provider as m3ter returns gcp region names prepended with gcp-XXXX
     const regionToCheckPricing =
-      provider.toLowerCase() === 'gcp' ? `gcp-${region}` : region
+      provider.toLowerCase() === 'gcp'
+        ? `gcp-${region}`
+        : provider.toLowerCase() === 'azure'
+        ? `azure-${region}`
+        : region
 
     const matchingPricingPlans = pricingPlansFromFile.filter(
       (plan) =>
@@ -481,6 +486,7 @@ export const PricingCalculator: React.FC<{
       })
       // Set pricingData with the computed unit prices
       setPricingData({ computeUnitPrice, storageUnitPrice })
+      console.log(region, { computeUnitPrice, storageUnitPrice })
 
       setIsLoading(false)
     } else {

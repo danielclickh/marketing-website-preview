@@ -134,7 +134,7 @@ function PricingOptions({
         {!selectorOnly && (
           <div className='flex justify-center space-x-6 pt-8 pb-6 '>
             {cloudProviders.map((cloudProvider, parentIndex: number) => (
-              <div className='flex flex-col space-y-2' key={parentIndex}>
+              <div className='flex flex-col' key={parentIndex}>
                 <div className='mx-auto flex flex-row items-start gap-4'>
                   {cloudProvider.darkProviderPngs.map((darkIconPng, index) => {
                     if (darkIconPng.name === 'logo_aws_dark.svg') {
@@ -186,14 +186,20 @@ function PricingOptions({
                     return (
                       <CUIButton
                         key={index}
+                        onClick={() => {
+                          setProvider('azure')
+                          router.push('/pricing?provider=azure', undefined, {
+                            shallow: true
+                          })
+                        }}
                         type='secondary'
                         className={styles.cloudProvidersButton}
-                        disabled>
+                        data-selected={provider === 'azure'}>
                         <StrapiImage
                           key={`${cloudProvider.title}-${index}`}
                           {...darkIconPng}
                           className={`h-8 w-auto ${
-                            parentIndex !== 0 ? 'opacity-25' : ''
+                            parentIndex !== 0 ? '' : ''
                           }`}
                         />
                         <SuiText
