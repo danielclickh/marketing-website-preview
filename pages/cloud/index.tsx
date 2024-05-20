@@ -132,13 +132,7 @@ export default function CloudPage({
                     </div>
                   </div>
                   <p className='mt-3 text-sm'>
-                    Or join the waitlist for{' '}
-                    <Link
-                      href='/cloud/azure-waitlist'
-                      className='text-primary-300'>
-                      Azure
-                    </Link>{' '}
-                    |{' '}
+                    Join the waitlist for{' '}
                     <Link
                       href='/cloud/bring-your-own-cloud'
                       className='text-primary-300'>
