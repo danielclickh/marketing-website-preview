@@ -66,7 +66,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
   }, [])
 
   header.banner =
-    '<a href="/blog?loc=eyebrow">ClickHouse Cloud on Microsoft Azure: Now in Beta</a>'
+    '<a href="/blog/clickhouse-cloud-is-now-on-azure-in-public-beta?loc=eyebrow">ClickHouse Cloud on Microsoft Azure: Now in Beta</a>'
 
   return (
     <>
