@@ -118,7 +118,7 @@ export const acceptableRegions = [
 ]
 
 export const config = {
-  planId: '01b9a9d2-a36a-4a1d-969b-b24fc756cd64',
+  planId: '0f8fc0ba-d098-4b49-94fd-344204ed87c2',
   computeAggregationId: '3797d30c-b13c-480b-9068-baf1e340a589',
   storageAggregationId: 'b5843a1b-a1bb-403d-a929-3ce8486e00d9'
 }

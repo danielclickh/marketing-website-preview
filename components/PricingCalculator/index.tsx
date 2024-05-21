@@ -475,14 +475,14 @@ export const PricingCalculator: React.FC<{
 
       // Iterate through matching pricing plans
       matchingPricingPlans.forEach((matchingPlan) => {
-        // Check if the aggregationId matches configStaging.computeAggregationId
-        if (matchingPlan.aggregationId === configStaging.computeAggregationId) {
+        // Check if the aggregationId matches config.computeAggregationId
+        if (matchingPlan.aggregationId === config.computeAggregationId) {
           // Get the computeUnitPrice for this matching plan
           computeUnitPrice = matchingPlan.pricingBands[0].unitPrice
         }
 
-        // Check if the aggregationId matches configStaging.storageAggregationId
-        if (matchingPlan.aggregationId === configStaging.storageAggregationId) {
+        // Check if the aggregationId matches config.storageAggregationId
+        if (matchingPlan.aggregationId === config.storageAggregationId) {
           // Get the storageUnitPrice for this matching plan
           storageUnitPrice = matchingPlan.pricingBands[0].unitPrice
         }
@@ -506,8 +506,8 @@ export const PricingCalculator: React.FC<{
     if (matchingPricingPlansForTable.length > 0) {
       // Iterate through matching pricing plans
       matchingPricingPlansForTable.forEach((matchingPlan) => {
-        // Check if the aggregationId matches configStaging.computeAggregationId
-        if (matchingPlan.aggregationId === configStaging.computeAggregationId) {
+        // Check if the aggregationId matches config.computeAggregationId
+        if (matchingPlan.aggregationId === config.computeAggregationId) {
           // Get the computeUnitPrice for this matching plan
           if (matchingPlan.instanceTier === 'Production') {
             setComputePricingProd(matchingPlan.pricingBands[0].unitPrice)
@@ -517,8 +517,8 @@ export const PricingCalculator: React.FC<{
           }
         }
 
-        // Check if the aggregationId matches configStaging.storageAggregationId
-        if (matchingPlan.aggregationId === configStaging.storageAggregationId) {
+        // Check if the aggregationId matches config.storageAggregationId
+        if (matchingPlan.aggregationId === config.storageAggregationId) {
           // Get the storageUnitPrice for this matching plan
           if (matchingPlan.instanceTier === 'Production') {
             setStoragePricingProd(matchingPlan.pricingBands[0].unitPrice)
