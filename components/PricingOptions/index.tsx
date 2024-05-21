@@ -88,8 +88,20 @@ function PricingOptions({
     return orderedRegions
   }, [pricingByRegion, provider])
 
+  const sortPlans = (plans: PricingPlanData[]): PricingPlanData[] => {
+    const order = ['Development', 'Production', 'Dedicated']
+    return plans.sort((a, b) => {
+      const aIndex = order.findIndex((name) => a.name.includes(name))
+      const bIndex = order.findIndex((name) => b.name.includes(name))
+      return aIndex - bIndex
+    })
+  }
+
   const plans: Array<PricingPlanData> = useMemo(() => {
-    return pricingPlans.filter((item) => item.cloudProvider === provider)
+    const filteredPlans = pricingPlans.filter(
+      (item) => item.cloudProvider === provider
+    )
+    return sortPlans(filteredPlans)
   }, [pricingPlans, provider])
 
   useEffect(() => {
@@ -322,7 +334,8 @@ function PricingOptions({
                         {plan.actionButton && (
                           <>
                             {plan.name === 'Development' &&
-                              router.query.region !== 'ap-northeast-1' && (
+                              router.query.region !== 'ap-northeast-1' &&
+                              router.query.provider !== 'azure' && (
                                 <>
                                   <CUIButton
                                     weight='medium'

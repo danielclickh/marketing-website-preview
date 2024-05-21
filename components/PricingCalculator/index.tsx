@@ -262,7 +262,10 @@ export const PricingCalculator: React.FC<{
     }
 
     //update dev to prod on ap-northeast-1
-    if (region === 'ap-northeast-1' && tier === 'Development') {
+    if (
+      (region === 'ap-northeast-1' && tier === 'Development') ||
+      (provider === 'azure' && tier === 'Development')
+    ) {
       router.push(
         {
           query: {
