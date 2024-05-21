@@ -52,13 +52,11 @@ function CloudProviders({
                     />
                   </Link>
                 ) : (
-                  <>
+                  <Link href='/pricing?provider=azure'>
                     <StrapiImage
                       key={`${cloudProvider.title}-${index}`}
                       {...darkIconPng}
-                      className={`h-10 w-auto ${
-                        parentIndex !== 0 ? 'opacity-25' : ''
-                      }`}
+                      className={`h-10 w-auto `}
                     />
                     <SuiText
                       size='xs'
@@ -67,7 +65,7 @@ function CloudProviders({
                       className='absolute -right-3 -top-1 rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
                       Beta
                     </SuiText>
-                  </>
+                  </Link>
                 )}
               </div>
             ))}
