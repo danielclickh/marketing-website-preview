@@ -6,11 +6,12 @@
 		"summary": "ClickPipes is a powerful and simple way to ingest your data into ClickHouse Cloud. As one of the most requested integrations, we’re excited to announce the availability of our newest connector for Amazon Kinesis, which offers a hassle-free way to ingest your Kinesis Data Streams into ClickHouse Cloud.",
 		"imgSrc": "/images/launch-week/kinesis.svg",
 		"imgAlt": "ClickPipes for Amazon Kinesis",
-		"linkBlog": "https://clickhouse.com/blog?loc=launch-week-may2024",
-		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
-		"linkVideo": "https://clickhouse.com/videos?loc=launch-week-may2024",
-		"blurred": true,
-		"beta": ""
+		"linkBlog": "/blog/clickpipes-amazon-kinesis?loc=launch-week-may2024",
+		"linkDocs": "https://clickhouse.com/docs/en/integrations/clickpipes/kinesis?loc=launch-week-may2024",
+		"linkVideo": "/videos/clickpipes-for-amazon-kinesis?loc=launch-week-may2024",
+		"linkStarted": "",
+		"blurred": false,
+		"badge": "beta"
 	},
 	{
 		"day": "2",
@@ -19,11 +20,12 @@
 		"summary": "Today, we’re thrilled to share that the new Cloud Console experience is now available to all Cloud users! The roll-out was staged over several weeks, and was the culmination of an acquisition and year-long rebuild. Read an in-depth behind-the-scenes account about how we built and shipped this new experience below.",
 		"imgSrc": "/images/launch-week/cloud-console.svg",
 		"imgAlt": "Cloud Console rebuild",
-		"linkBlog": "https://clickhouse.com/blog?loc=launch-week-may2024",
-		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
-		"linkVideo": "https://clickhouse.com/videos?loc=launch-week-may2024",
-		"blurred": true,
-		"beta": ""
+		"linkBlog": "/blog/clickhouse-cloud-console-rebuilt?loc=launch-week-may2024",
+		"linkDocs": "",
+		"linkVideo": "/videos/new-clickhouse-cloud-experience?loc=launch-week-may2024",
+		"linkStarted": "",
+		"blurred": false,
+		"badge": ""
 	},
 	{
 		"day": "3",
@@ -32,24 +34,26 @@
 		"summary": "We’re excited to announce configurable backup controls are now available in ClickHouse Cloud. Now, you can control the start time, retention, and frequency of your backups in Production and Dedicated tier services. Learn more about the update below.",
 		"imgSrc": "/images/launch-week/backups.svg",
 		"imgAlt": "Customizable backup controls for ClickHouse Cloud",
-		"linkBlog": "https://clickhouse.com/blog?loc=launch-week-may2024",
-		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
+		"linkBlog": "/blog/configurable-backups-in-clickhouse-cloud?loc=launch-week-may2024",
+		"linkDocs": "https://clickhouse.com/docs/en/manage/backups?loc=launch-week-may2024",
 		"linkVideo": "",
-		"blurred": true,
-		"beta": ""
+		"linkStarted": "",
+		"blurred": false,
+		"badge": "preview"
 	},
 	{
 		"day": "4",
 		"date": "Thu, May 16th, 2024",
-		"title": "Enhanced ClickHouse Cloud Monitoring with Prometheus",
-		"summary": "Monitoring your ClickHouse Cloud instances just got easier. With the release of our beta Prometheus endpoint for ClickHouse Cloud, users can enjoy the seamless integration of ClickHouse Cloud metrics with monitoring tools that support Prometheus, including Datadog and Grafana, for monitoring and alerting.",
-		"imgSrc": "/images/launch-week/prometheus.svg",
-		"imgAlt": "Prometheus for monitoring and alerting",
-		"linkBlog": "https://clickhouse.com/blog?loc=launch-week-may2024",
-		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
+		"title": "The First Official ClickHouse Certification",
+		"summary": "Today, we are pleased to announce that the first official ClickHouse certification is now available. Demonstrate your skills with an on-demand, instructor-led course and exam that’s designed to validate your ability to model tables appropriately and effectively, insert and analyze data, and optimize queries - a true testament to a subject matter expert’s knowledge of ClickHouse.",
+		"imgSrc": "/images/launch-week/clickhouse-certification.svg",
+		"imgAlt": "Announcing ClickHouse Certification",
+		"linkBlog": "/blog/first-official-clickhouse-certification?loc=launch-week-may2024",
+		"linkDocs": "",
 		"linkVideo": "",
-		"blurred": true,
-		"beta": true
+		"linkStarted": "https://clickhouse.com/learn/certification?loc=launch-week-may2024",
+		"blurred": false,
+		"badge": ""
 	},
 	{
 		"day": "5",
@@ -57,11 +61,12 @@
 		"title": "Automatic Query Endpoints: Creating APIs from SQL Queries",
 		"summary": "With the new Automatic Query Endpoints feature, you can create an API endpoint directly from any saved SQL query in the Cloud Console. Forget about wrangling language clients, drivers, and auth protocols. In just a few clicks, make your queries instantly consumable by applications via a safe and secure ClickHouse Cloud API.",
 		"imgSrc": "/images/launch-week/api-endpoints.svg",
-		"imgAlt": "Query API Endpoints",
-		"linkBlog": "https://clickhouse.com/blog?loc=launch-week-may2024",
-		"linkDocs": "https://clickhouse.com/docs?loc=launch-week-may2024",
-		"linkVideo": "https://clickhouse.com/videos?loc=launch-week-may2024",
-		"blurred": true,
-		"beta": true
+		"imgAlt": "Query API Endpoints in Cloud",
+		"linkBlog": "/blog/automatic-query-endpoints?loc=launch-week-may2024",
+		"linkDocs": "https://clickhouse.com/docs/en/get-started/query-endpoints?loc=launch-week-may2024",
+		"linkVideo": "/videos/automatic-query-endpoints-clickhouse-cloud?loc=launch-week-may2024",
+		"linkStarted": "",
+		"blurred": false,
+		"badge": "beta"
 	}
 ]

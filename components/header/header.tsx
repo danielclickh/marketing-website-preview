@@ -74,7 +74,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
         className={styles.navBarContainer}
         ref={navBarRef}
         id='nav-container'>
-        <Banner content={header?.banner ?? ''} />
+        {/*<Banner content={header?.banner ?? ''} />*/}
         <nav className='no-wrap section-container relative flex w-full items-center justify-between py-4'>
           <Link
             href='/'
