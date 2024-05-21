@@ -20,9 +20,9 @@ export interface Pricing {
 }
 
 const API_ENDPOINT = process.env.M3TER_API_ENDPOINT
-const API_KEY = process.env.M3TER_API_KEY_STAGING
-const API_SECRET = process.env.M3TER_API_SECRET_STAGING
-const ORG_ID = process.env.M3TER_ORG_ID_STAGING
+const API_KEY = process.env.M3TER_API_KEY
+const API_SECRET = process.env.M3TER_API_SECRET
+const ORG_ID = process.env.M3TER_ORG_ID
 
 const basicAuth = btoa(`${API_KEY}:${API_SECRET}`)
 
