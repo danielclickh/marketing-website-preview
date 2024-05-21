@@ -112,7 +112,7 @@ export const acceptableRegions = [
   },
   {
     provider: 'azure',
-    region: 'westus2',
+    region: 'westus3',
     tier: ['Production']
   }
 ]
