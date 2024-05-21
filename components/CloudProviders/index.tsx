@@ -32,7 +32,7 @@ function CloudProviders({
                     : 'grid h-16 place-items-center rounded border border-neutral-700/80  bg-neutral-900 '
                 }  `}>
                 {darkIconPng.name === 'logo_aws_dark.svg' ? (
-                  <Link href='/partners/aws'>
+                  <Link href='/pricing?provider=aws'>
                     <StrapiImage
                       key={`${cloudProvider.title}-${index}`}
                       {...darkIconPng}
@@ -42,9 +42,7 @@ function CloudProviders({
                     />
                   </Link>
                 ) : darkIconPng.name === 'google_cloud_dark.svg' ? (
-                  <Link
-                    href='https://console.cloud.google.com/marketplace/product/clickhouse-public/clickhouse-cloud'
-                    target='_blank'>
+                  <Link href='/pricing?provider=gcp'>
                     <StrapiImage
                       key={`${cloudProvider.title}-${index}`}
                       {...darkIconPng}
