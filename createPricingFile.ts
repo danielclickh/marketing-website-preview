@@ -51,7 +51,8 @@ async function triggerPricingFile() {
             region.tier.includes(item?.segment?.instanceTier)
         ) &&
         !item?.description?.includes('Dedicated') &&
-        !item?.description?.includes('Cognitiv')
+        !item?.description?.includes('Cognitiv') &&
+        !item?.description?.includes('Backups')
     )
     .map((item) => ({
       id: item?.id,
