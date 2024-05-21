@@ -39,6 +39,9 @@ export async function getVideos(): Promise<Video[]> {
 
     if (item?.seo?.image) {
       seo.image = [item.seo.image]
+
+      // Social image overrides thumbnail
+      thumbnail = item.seo.image.url
     } else {
       seo.imageUrl = thumbnail
     }
