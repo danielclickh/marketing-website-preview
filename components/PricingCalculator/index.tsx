@@ -94,7 +94,7 @@ export const PricingCalculator: React.FC<{
   const region = searchParams.get('region') || 'us-east-1'
 
   const tierOptions = useMemo(() => {
-    if (region === 'ap-northeast-1') {
+    if (region === 'ap-northeast-1' || provider === 'azure') {
       // If the region is ap-northeast-1, only include 'Production' in tier options
       return [{ label: 'Production', value: 'Production' }]
     } else {
