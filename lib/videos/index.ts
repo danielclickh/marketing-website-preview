@@ -1,5 +1,6 @@
 import { StrapiImageProps } from '../../components/StrapiElements/types'
 import { findAll } from '../api/strapi'
+import { convertDateToString } from '../utils/dateUtils'
 import { Video, VideoCategoryRecord } from './types'
 import { slugify } from '../utils/strings'
 
@@ -12,6 +13,7 @@ type StrapiItem = {
   Description?: null | string
   categories?: Array<{ CategoryName: string }>
   RelatedVideos?: Array<StrapiItem>
+  VideoDate?: null | string
   seo: null | {
     title?: null | string
     description?: null | string
@@ -28,7 +30,7 @@ export async function getVideos(): Promise<Video[]> {
   const data = response.data as Array<StrapiItem>
 
   return data.map((item) => {
-    const thumbnail = `https://img.youtube.com/vi/${item.VideoID}/maxresdefault.jpg`
+    let thumbnail = `https://img.youtube.com/vi/${item.VideoID}/maxresdefault.jpg`
 
     let seo: Video['seo'] = {
       title: item?.seo?.title || `${item.Title} | ClickHouse Videos`,
@@ -36,7 +38,7 @@ export async function getVideos(): Promise<Video[]> {
     }
 
     if (item?.seo?.image) {
-      seo.image = [item?.seo?.image]
+      seo.image = [item.seo.image]
     } else {
       seo.imageUrl = thumbnail
     }
@@ -47,6 +49,7 @@ export async function getVideos(): Promise<Video[]> {
       title: item.Title,
       subTitle: item?.IntroText || null,
       description: item.Description,
+      date: item?.VideoDate ? convertDateToString(item.VideoDate) : null,
       thumbnail,
       embed: `<iframe src="https://www.youtube-nocookie.com/embed/${item.VideoID}?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>`,
       categories: item.categories?.map((cat) => cat.CategoryName) || [],

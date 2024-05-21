@@ -95,6 +95,9 @@ export default function VideoPage({
           <h1 className='mt-6 font-basier text-4xl font-bold text-neutral-100'>
             <span className='leading-snug'>{video.title}</span>
           </h1>
+          {video?.date && (
+            <p className='mt-6 text-sm text-neutral-300'>{video.date}</p>
+          )}
         </div>
       </div>
 
