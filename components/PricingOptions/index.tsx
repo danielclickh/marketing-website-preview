@@ -145,88 +145,107 @@ function PricingOptions({
       <PricingContextProvider value={getDefaultRegion()}>
         {!selectorOnly && (
           <div className='flex justify-center space-x-6 pt-8 pb-6 '>
-            {cloudProviders.map((cloudProvider, parentIndex: number) => (
-              <div className='flex flex-col' key={parentIndex}>
-                <div className='mx-auto flex flex-row items-start gap-4'>
-                  {cloudProvider.darkProviderPngs.map((darkIconPng, index) => {
-                    if (darkIconPng.name === 'logo_aws_dark.svg') {
-                      return (
-                        <CUIButton
-                          key={index}
-                          type='secondary'
-                          onClick={() => {
-                            setProvider('aws')
-                            router.push('/pricing?provider=aws', undefined, {
-                              shallow: true
-                            })
-                          }}
-                          className={styles.cloudProvidersButton}
-                          data-selected={provider === 'aws'}>
-                          <StrapiImage
-                            key={`${cloudProvider.title}-${index}`}
-                            {...darkIconPng}
-                            className={`h-8 w-auto ${
-                              parentIndex !== 0 ? 'opacity-25' : ''
-                            }`}
-                          />
-                        </CUIButton>
-                      )
-                    }
-                    if (darkIconPng.name === 'google_cloud_dark.svg') {
-                      return (
-                        <CUIButton
-                          key={index}
-                          onClick={() => {
-                            setProvider('gcp')
-                            router.push('/pricing?provider=gcp', undefined, {
-                              shallow: true
-                            })
-                          }}
-                          type='secondary'
-                          className={styles.cloudProvidersButton}
-                          data-selected={provider === 'gcp'}>
-                          <StrapiImage
-                            key={`${cloudProvider.title}-${index}`}
-                            {...darkIconPng}
-                            className={`h-8 w-auto ${
-                              parentIndex !== 0 ? '' : ''
-                            }`}
-                          />
-                        </CUIButton>
-                      )
-                    }
-                    return (
-                      <CUIButton
-                        key={index}
-                        onClick={() => {
-                          setProvider('azure')
-                          router.push('/pricing?provider=azure', undefined, {
-                            shallow: true
-                          })
-                        }}
-                        type='secondary'
-                        className={styles.cloudProvidersButton}
-                        data-selected={provider === 'azure'}>
-                        <StrapiImage
-                          key={`${cloudProvider.title}-${index}`}
-                          {...darkIconPng}
-                          className={`h-8 w-auto ${
-                            parentIndex !== 0 ? '' : ''
-                          }`}
-                        />
-                        <SuiText
-                          size='xs'
-                          weight='medium'
-                          color='secondary'
-                          className='absolute -top-2 -right-4 rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
-                          Beta
-                        </SuiText>
-                      </CUIButton>
-                    )
-                  })}
-                </div>
+            <div className='flex flex-col'>
+              <div className='mx-auto flex flex-row items-start gap-4'>
+                {cloudProviders.map((cloudProvider, parentIndex: number) => (
+                  <React.Fragment key={parentIndex}>
+                    {cloudProvider.darkProviderPngs.map(
+                      (darkIconPng, index) => {
+                        if (darkIconPng.name === 'logo_aws_dark.svg') {
+                          return (
+                            <CUIButton
+                              key={index}
+                              data-key-id={index}
+                              type='secondary'
+                              onClick={() => {
+                                setProvider('aws')
+                                router.push(
+                                  '/pricing?provider=aws',
+                                  undefined,
+                                  {
+                                    shallow: true
+                                  }
+                                )
+                              }}
+                              className={styles.cloudProvidersButton}
+                              data-selected={provider === 'aws'}>
+                              <StrapiImage
+                                key={`${cloudProvider.title}-${index}`}
+                                {...darkIconPng}
+                                className={`h-8 w-auto ${
+                                  parentIndex !== 0 ? 'opacity-25' : ''
+                                }`}
+                              />
+                            </CUIButton>
+                          )
+                        }
+                        if (darkIconPng.name === 'google_cloud_dark.svg') {
+                          return (
+                            <CUIButton
+                              key={index}
+                              data-key-id={index}
+                              onClick={() => {
+                                setProvider('gcp')
+                                router.push(
+                                  '/pricing?provider=gcp',
+                                  undefined,
+                                  {
+                                    shallow: true
+                                  }
+                                )
+                              }}
+                              type='secondary'
+                              className={styles.cloudProvidersButton}
+                              data-selected={provider === 'gcp'}>
+                              <StrapiImage
+                                key={`${cloudProvider.title}-${index}`}
+                                {...darkIconPng}
+                                className={`h-8 w-auto ${
+                                  parentIndex !== 0 ? '' : ''
+                                }`}
+                              />
+                            </CUIButton>
+                          )
+                        }
+                        return (
+                          <CUIButton
+                            key={index}
+                            data-key-id={index}
+                            onClick={() => {
+                              setProvider('azure')
+                              router.push(
+                                '/pricing?provider=azure',
+                                undefined,
+                                {
+                                  shallow: true
+                                }
+                              )
+                            }}
+                            type='secondary'
+                            className={styles.cloudProvidersButton}
+                            data-selected={provider === 'azure'}>
+                            <StrapiImage
+                              key={`${cloudProvider.title}-${index}`}
+                              {...darkIconPng}
+                              className={`h-8 w-auto ${
+                                parentIndex !== 0 ? '' : ''
+                              }`}
+                            />
+                            <SuiText
+                              size='xs'
+                              weight='medium'
+                              color='secondary'
+                              className='absolute -top-2 -right-4 rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
+                              Beta
+                            </SuiText>
+                          </CUIButton>
+                        )
+                      }
+                    )}
+                  </React.Fragment>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         )}
 
