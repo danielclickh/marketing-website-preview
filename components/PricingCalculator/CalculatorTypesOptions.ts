@@ -100,9 +100,10 @@ export const acceptableRegions = [
     region: 'asia-southeast1',
     tier: ['Production', 'Development']
   },
+
   {
     provider: 'azure',
-    region: 'germanywestcentral',
+    region: 'westus3',
     tier: ['Production']
   },
   {
@@ -112,7 +113,7 @@ export const acceptableRegions = [
   },
   {
     provider: 'azure',
-    region: 'westus3',
+    region: 'germanywestcentral',
     tier: ['Production']
   }
 ]
