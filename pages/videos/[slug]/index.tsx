@@ -7,6 +7,7 @@ import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'
 import { SuiButton, SuiTitle } from '../../../components/sui'
 import VideoCard from '../../../components/VideoCard'
+import { convertDateToString } from '../../../lib/utils/dateUtils'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import { slugify } from '../../../lib/utils/strings'
@@ -95,9 +96,6 @@ export default function VideoPage({
           <h1 className='mt-6 font-basier text-4xl font-bold text-neutral-100'>
             <span className='leading-snug'>{video.title}</span>
           </h1>
-          {video?.date && (
-            <p className='mt-6 text-sm text-neutral-300'>{video.date}</p>
-          )}
         </div>
       </div>
 

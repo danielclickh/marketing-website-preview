@@ -1,6 +1,5 @@
 import { StrapiImageProps } from '../../components/StrapiElements/types'
 import { findAll } from '../api/strapi'
-import { convertDateToString } from '../utils/dateUtils'
 import { Video, VideoCategoryRecord } from './types'
 import { slugify } from '../utils/strings'
 
@@ -19,11 +18,12 @@ type StrapiItem = {
     description?: null | string
     image?: null | StrapiImageProps
   }
+  publishedAt: string
 }
 
 export async function getVideos(): Promise<Video[]> {
   const response = await findAll('marketing-videos', {
-    sort: ['publishedAt:DESC'],
+    sort: ['VideoDate:DESC', 'publishedAt:DESC'],
     populate: ['categories', 'RelatedVideos', 'seo', 'seo.image']
   })
 
@@ -46,13 +46,15 @@ export async function getVideos(): Promise<Video[]> {
       seo.imageUrl = thumbnail
     }
 
+    const date = item?.VideoDate || item.publishedAt
+
     return {
       id: item.id,
       slug: item.Slug,
       title: item.Title,
       subTitle: item?.IntroText || null,
       description: item.Description,
-      date: item?.VideoDate ? convertDateToString(item.VideoDate) : null,
+      date,
       thumbnail,
       embed: `<iframe src="https://www.youtube-nocookie.com/embed/${item.VideoID}?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>`,
       categories: item.categories?.map((cat) => cat.CategoryName) || [],

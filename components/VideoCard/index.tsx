@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { convertDateToString } from '../../lib/utils/dateUtils'
 import VideoPlayButton from '../../public/images/VideoPlayButton'
 import { CUICard } from '../ClickUI'
 import { VideoCardProps } from './types'
@@ -34,9 +35,6 @@ export default function VideoCard({ video }: VideoCardProps) {
               <p className='whitespace-pre-wrap pt-4 text-sm'>
                 {video.subTitle}
               </p>
-            )}
-            {video?.date && (
-              <p className='pt-6 text-sm text-neutral-300'>{video.date}</p>
             )}
           </div>
         </CUICard.Body>
