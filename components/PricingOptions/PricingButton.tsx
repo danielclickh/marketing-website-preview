@@ -56,6 +56,7 @@ function PricingButton({ isFirst, isLast, path, btnText, index }: Props) {
 
   if (
     (selectedRegion?.regionSlug === 'ap-northeast-1' && index === 1) ||
+    (selectedRegion?.cloudProvider === 'azure' && index === 1) ||
     index === 2
   ) {
     return (

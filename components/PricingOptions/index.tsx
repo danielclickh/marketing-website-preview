@@ -88,8 +88,20 @@ function PricingOptions({
     return orderedRegions
   }, [pricingByRegion, provider])
 
+  const sortPlans = (plans: PricingPlanData[]): PricingPlanData[] => {
+    const order = ['Development', 'Production', 'Dedicated']
+    return plans.sort((a, b) => {
+      const aIndex = order.findIndex((name) => a.name.includes(name))
+      const bIndex = order.findIndex((name) => b.name.includes(name))
+      return aIndex - bIndex
+    })
+  }
+
   const plans: Array<PricingPlanData> = useMemo(() => {
-    return pricingPlans.filter((item) => item.cloudProvider === provider)
+    const filteredPlans = pricingPlans.filter(
+      (item) => item.cloudProvider === provider
+    )
+    return sortPlans(filteredPlans)
   }, [pricingPlans, provider])
 
   useEffect(() => {
@@ -133,82 +145,107 @@ function PricingOptions({
       <PricingContextProvider value={getDefaultRegion()}>
         {!selectorOnly && (
           <div className='flex justify-center space-x-6 pt-8 pb-6 '>
-            {cloudProviders.map((cloudProvider, parentIndex: number) => (
-              <div className='flex flex-col space-y-2' key={parentIndex}>
-                <div className='mx-auto flex flex-row items-start gap-4'>
-                  {cloudProvider.darkProviderPngs.map((darkIconPng, index) => {
-                    if (darkIconPng.name === 'logo_aws_dark.svg') {
-                      return (
-                        <CUIButton
-                          key={index}
-                          type='secondary'
-                          onClick={() => {
-                            setProvider('aws')
-                            router.push('/pricing?provider=aws', undefined, {
-                              shallow: true
-                            })
-                          }}
-                          className={styles.cloudProvidersButton}
-                          data-selected={provider === 'aws'}>
-                          <StrapiImage
-                            key={`${cloudProvider.title}-${index}`}
-                            {...darkIconPng}
-                            className={`h-8 w-auto ${
-                              parentIndex !== 0 ? 'opacity-25' : ''
-                            }`}
-                          />
-                        </CUIButton>
-                      )
-                    }
-                    if (darkIconPng.name === 'google_cloud_dark.svg') {
-                      return (
-                        <CUIButton
-                          key={index}
-                          onClick={() => {
-                            setProvider('gcp')
-                            router.push('/pricing?provider=gcp', undefined, {
-                              shallow: true
-                            })
-                          }}
-                          type='secondary'
-                          className={styles.cloudProvidersButton}
-                          data-selected={provider === 'gcp'}>
-                          <StrapiImage
-                            key={`${cloudProvider.title}-${index}`}
-                            {...darkIconPng}
-                            className={`h-8 w-auto ${
-                              parentIndex !== 0 ? '' : ''
-                            }`}
-                          />
-                        </CUIButton>
-                      )
-                    }
-                    return (
-                      <CUIButton
-                        key={index}
-                        type='secondary'
-                        className={styles.cloudProvidersButton}
-                        disabled>
-                        <StrapiImage
-                          key={`${cloudProvider.title}-${index}`}
-                          {...darkIconPng}
-                          className={`h-8 w-auto ${
-                            parentIndex !== 0 ? 'opacity-25' : ''
-                          }`}
-                        />
-                        <SuiText
-                          size='xs'
-                          weight='medium'
-                          color='secondary'
-                          className='absolute -top-2 -right-20 rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
-                          Private Preview
-                        </SuiText>
-                      </CUIButton>
-                    )
-                  })}
-                </div>
+            <div className='flex flex-col'>
+              <div className='mx-auto flex flex-row items-start gap-4'>
+                {cloudProviders.map((cloudProvider, parentIndex: number) => (
+                  <React.Fragment key={parentIndex}>
+                    {cloudProvider.darkProviderPngs.map(
+                      (darkIconPng, index) => {
+                        if (darkIconPng.name === 'logo_aws_dark.svg') {
+                          return (
+                            <CUIButton
+                              key={index}
+                              data-key-id={index}
+                              type='secondary'
+                              onClick={() => {
+                                setProvider('aws')
+                                router.push(
+                                  '/pricing?provider=aws',
+                                  undefined,
+                                  {
+                                    shallow: true
+                                  }
+                                )
+                              }}
+                              className={styles.cloudProvidersButton}
+                              data-selected={provider === 'aws'}>
+                              <StrapiImage
+                                key={`${cloudProvider.title}-${index}`}
+                                {...darkIconPng}
+                                className={`h-8 w-auto ${
+                                  parentIndex !== 0 ? 'opacity-25' : ''
+                                }`}
+                              />
+                            </CUIButton>
+                          )
+                        }
+                        if (darkIconPng.name === 'google_cloud_dark.svg') {
+                          return (
+                            <CUIButton
+                              key={index}
+                              data-key-id={index}
+                              onClick={() => {
+                                setProvider('gcp')
+                                router.push(
+                                  '/pricing?provider=gcp',
+                                  undefined,
+                                  {
+                                    shallow: true
+                                  }
+                                )
+                              }}
+                              type='secondary'
+                              className={styles.cloudProvidersButton}
+                              data-selected={provider === 'gcp'}>
+                              <StrapiImage
+                                key={`${cloudProvider.title}-${index}`}
+                                {...darkIconPng}
+                                className={`h-8 w-auto ${
+                                  parentIndex !== 0 ? '' : ''
+                                }`}
+                              />
+                            </CUIButton>
+                          )
+                        }
+                        return (
+                          <CUIButton
+                            key={index}
+                            data-key-id={index}
+                            onClick={() => {
+                              setProvider('azure')
+                              router.push(
+                                '/pricing?provider=azure',
+                                undefined,
+                                {
+                                  shallow: true
+                                }
+                              )
+                            }}
+                            type='secondary'
+                            className={styles.cloudProvidersButton}
+                            data-selected={provider === 'azure'}>
+                            <StrapiImage
+                              key={`${cloudProvider.title}-${index}`}
+                              {...darkIconPng}
+                              className={`h-8 w-auto ${
+                                parentIndex !== 0 ? '' : ''
+                              }`}
+                            />
+                            <SuiText
+                              size='xs'
+                              weight='medium'
+                              color='secondary'
+                              className='absolute -top-2 -right-4 rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
+                              Beta
+                            </SuiText>
+                          </CUIButton>
+                        )
+                      }
+                    )}
+                  </React.Fragment>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         )}
 
@@ -316,7 +353,8 @@ function PricingOptions({
                         {plan.actionButton && (
                           <>
                             {plan.name === 'Development' &&
-                              router.query.region !== 'ap-northeast-1' && (
+                              router.query.region !== 'ap-northeast-1' &&
+                              router.query.provider !== 'azure' && (
                                 <>
                                   <CUIButton
                                     weight='medium'

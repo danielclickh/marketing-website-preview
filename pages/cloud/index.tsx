@@ -132,17 +132,11 @@ export default function CloudPage({
                     </div>
                   </div>
                   <p className='mt-3 text-sm'>
-                    Or join the waitlist for{' '}
-                    <Link
-                      href='/cloud/azure-waitlist'
-                      className='text-primary-300'>
-                      Azure
-                    </Link>{' '}
-                    |{' '}
+                    Join the waitlist for{' '}
                     <Link
                       href='/cloud/bring-your-own-cloud'
                       className='text-primary-300'>
-                      Bring Your Your Cloud (BYOC)
+                      Bring Your Own Cloud (BYOC)
                     </Link>
                   </p>
                 </div>
@@ -370,8 +364,8 @@ export default function CloudPage({
                   Experience the power of open-source ClickHouse in a serverless
                   setup. Deploy in seconds, scale seamlessly, and ensure
                   top-tier security with our SOC 2 Type II compliant platform.
-                  Available on AWS, GCP and Azure in Private Preview. Dive into
-                  insights without the infrastructure hassle!
+                  Available on AWS, GCP and Azure in Beta. Dive into insights
+                  without the infrastructure hassle!
                 </div>
                 <CUIButton
                   type='primary'
@@ -523,7 +517,7 @@ export default function CloudPage({
               </SuiTitle>
               <div className='mx-auto max-w-2xl px-4 text-center leading-normal text-neutral-200 md:px-0'>
                 With the flexibility to choose where and how you deploy.
-                Available on AWS, GCP and Azure in Private Preview, and through
+                Available on AWS, GCP and Azure in Beta, and through
                 Marketplaces. Manage your services through our ClickHouse Cloud
                 self-serve UI, or by leveraging our APIs and Terraform provider
                 to automate your operations.

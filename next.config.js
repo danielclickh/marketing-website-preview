@@ -411,6 +411,11 @@ const nextConfig = {
         source: '/launchweek',
         destination: '/launch-week/may-2024',
         permanent: true
+      },
+      {
+        source: '/cloud/azure-waitlist',
+        destination: '/cloud',
+        permanent: true
       }
     ]
   }
