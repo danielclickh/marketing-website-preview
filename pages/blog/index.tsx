@@ -1,12 +1,15 @@
-import { GetServerSideProps } from 'next'
-import React from 'react'
+import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import BlogPostList from '../../components/BlogPostList'
 import BlogPost from '../../components/BlogPostList/BlogPost'
+import CategorySelector from '../../components/CategorySelector'
 import { CUIButton, CUILink } from '../../components/ClickUI'
 import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'
 import { StrapiImage } from '../../components/StrapiElements'
-import { SuiTitle } from '../../components/sui'
+import { SuiSearchField, SuiTitle } from '../../components/sui'
+import { useDebounce } from '../../hooks'
 import {
   fetchAll,
   findAll,
@@ -16,84 +19,28 @@ import {
 import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
-import { BlogPost as BlogPostType, BlogProps } from '../../types/blogs'
+import {
+  BlogApiResponse,
+  BlogPost as BlogPostType,
+  BlogProps
+} from '../../types/blogs'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 
-export const getServerSideProps: GetServerSideProps<BlogProps> =
-  async function getServerSideProps(context) {
-    const { query } = context
-
-    // Get and validate the paginated page number
-    let page = query?.page ? Number(query?.page) : 1
-    page = isNaN(page) ? 1 : page
-    page = page < 1 ? 1 : page
-
+export const getStaticProps: GetStaticProps<BlogProps> =
+  async function getStaticProps(context) {
     // Current page params
     const { hero, seo } = await findOne('blog', {
       populate: ['hero', 'seo', 'seo.image']
     })
 
-    // Blog query params
-    const blogsParams: Record<string, any> = {
-      sort: ['date:DESC', 'publishedAt:DESC'],
-      populate: ['author', 'author.avatarPng', 'thumbnailPng'],
-      fields: [
-        'category',
-        'title',
-        'shortDescription',
-        'createdAt',
-        'updatedAt',
-        'publishedAt',
-        'slug',
-        'date',
-        'StagingOnly'
-      ],
-      filters: {
-        $or: getStagingOnlyFilters()
-      }
-    }
-
-    const { data: featuredBlog } = await findAll('blog-posts', {
-      ...blogsParams,
-      pagination: { limit: 1 }
-    })
-
-    // Excluded featured blog from query
-    if (featuredBlog[0]) {
-      blogsParams.filters.slug = {
-        $ne: featuredBlog[0].slug
-      }
-    }
-
-    // Get paginated blog posts
-    const { data, pagination } = await findAll('blog-posts', {
-      ...blogsParams,
-      pagination: { pageSize: 15, page: page }
-    })
-
-    // 404 if page number returned no results
-    if (!data.length && page !== 1) {
-      return {
-        notFound: true
-      }
-    }
-
-    const categories = new Set<string>()
-    for (let index = 0; index < data.length; index++) {
-      categories.add(data[index].category)
-    }
     const commonProps = await getCommonProps()
 
     seo.path = '/blog'
 
     return {
       props: {
-        featuredBlog: featuredBlog[0],
         title: hero.title,
         description: hero.description,
-        blogs: data,
-        categories: Array.from(categories),
-        pagination,
         seo,
         ...commonProps
       }
@@ -101,10 +48,6 @@ export const getServerSideProps: GetServerSideProps<BlogProps> =
   }
 
 export default function BlogsPage({
-  featuredBlog,
-  blogs,
-  categories,
-  pagination,
   title,
   seo,
   headerData,
@@ -112,18 +55,112 @@ export default function BlogsPage({
 }: BlogProps) {
   galaxyOnPage('blogListPage')
 
-  const hasPrevPage = pagination.page > 1
-  const hasNextPage = pagination.page < pagination.pageCount
+  const router = useRouter()
+
+  const container = useRef<HTMLDivElement>(null)
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const [response, setResponse] = useState<null | BlogApiResponse>(null)
+  const [page, setPage] = useState<BlogApiResponse['pagination']['page']>(
+    response ? response.pagination.page : 1
+  )
+  const [search, setSearch] = useState<BlogApiResponse['params']['search']>(
+    response ? response.params.search : null
+  )
+  const [category, setCategory] = useState<
+    BlogApiResponse['params']['category']
+  >(response ? response.params.category : null)
+
+  const featuredBlog = response?.data?.featured || null
+  const blogs = response?.data?.blogs || []
+  const categories = response?.data?.categories || {}
+  const hasPrevPage = response && page > 1
+  const hasNextPage = response && page < response.pagination.pageCount
+
+  const categoryList = Object.entries(categories).map(([slug, label]) => ({
+    text: label,
+    onClick: () => {
+      setPage(0)
+      setCategory(slug)
+    },
+    selected: category === slug
+  }))
+
+  categoryList.unshift({
+    text: 'View All',
+    onClick: () => {
+      setPage(0)
+      setCategory(null)
+    },
+    selected: !category
+  })
+
+  const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPage(0)
+    setSearch(e.target.value)
+  }
+
+  const backToTop = () => {
+    setTimeout(() => {
+      container.current?.scrollIntoView({
+        behavior: 'smooth'
+      })
+    })
+  }
+
+  // Load values from query string
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search)
+    const urlCategory = queryParams.get('category')
+    const urlSearch = queryParams.get('search')
+    const urlPage = Number(queryParams.get('page') || '')
+
+    if (urlCategory && urlCategory !== category) setCategory(urlCategory)
+    if (urlSearch && urlSearch !== search) setSearch(urlSearch)
+    if (!isNaN(urlPage) && urlPage !== page) setPage(urlPage)
+  }, [router])
+
+  // On states changed
+  useEffect(() => {
+    ;(async function () {
+      // Show loading screen
+      setLoading(true)
+
+      // Build query
+      const params = new URLSearchParams()
+      if (page) params.set('page', page.toString())
+      if (search) params.set('search', search)
+      if (category) params.set('category', category)
+
+      // Update URL
+      router.push(`/blog?${params}`, undefined, {
+        shallow: true
+      })
+
+      // Make request
+      const response = await fetch(`/api/blog?${params}`)
+
+      // Handle response
+      try {
+        setResponse(await response.json())
+      } catch (e) {
+        // Do nothing
+      }
+
+      // Hide loading screen
+      setLoading(false)
+    })()
+  }, [page, search, category])
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:mb-16 lg:pt-20'>
+      <div
+        className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:mb-16 lg:pt-20'
+        ref={container}>
         <SuiTitle type='h1'>{title}</SuiTitle>
-        {pagination.page > 1 && (
-          <p className='text-neutral-300'>Page {pagination.page}</p>
-        )}
+        {page > 1 && <p className='text-neutral-300'>Page {page}</p>}
       </div>
-      {featuredBlog && pagination.page === 1 && (
+      {featuredBlog && (
         <>
           <CUILink
             href={`/blog/${featuredBlog.slug}`}
@@ -180,44 +217,84 @@ export default function BlogsPage({
           </CUILink>
         </>
       )}
-      <BlogPostList categories={categories}>
-        <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
-          {blogs.map((blog: BlogPostType) => (
-            <BlogPost key={blog.id} {...blog} />
-          ))}
-        </div>
-      </BlogPostList>
 
-      {(hasPrevPage || hasNextPage) && (
-        <div className='my-8 flex items-center justify-center gap-8'>
-          <CUIButton
-            href={hasPrevPage ? `?page=${pagination.page - 1}` : null}
-            type='primary-dark'
-            className={`group !border-primary-300/50 ${
-              !hasPrevPage
-                ? 'pointer-events-none cursor-default opacity-40'
-                : 'hover:!border-primary-400'
-            }`}>
-            <span className='tanslate-x-0 mr-2 inline-block transition-transform group-hover:-translate-x-1'>
-              &lt;-
-            </span>
-            Prev
-          </CUIButton>
-          <CUIButton
-            href={hasNextPage ? `?page=${pagination.page + 1}` : null}
-            type='primary-dark'
-            className={`group !border-primary-300/50 ${
-              !hasNextPage
-                ? 'pointer-events-none cursor-default opacity-40'
-                : 'hover:!border-primary-400'
-            }`}>
-            Next{' '}
-            <span className='tanslate-x-0 ml-2 inline-block transition-transform group-hover:translate-x-1'>
-              -&gt;
-            </span>
-          </CUIButton>
+      <div className='container mx-auto max-w-7xl px-8 pt-8 2xl:px-0'>
+        <div className='flex-col items-center pb-8 lg:flex lg:flex-row lg:justify-between lg:space-x-24'>
+          <SuiSearchField
+            placeholder='Search by title or keyword...'
+            htmlFor='search'
+            className='mb-6 lg:mb-0 lg:flex-1'
+            onChange={useDebounce(onSearchChange, 500)}
+          />
+          <CategorySelector options={categoryList} />
         </div>
-      )}
+
+        {loading && <p className='mt-12 w-full text-center'>Loading...</p>}
+
+        {!loading && !blogs.length && (
+          <>
+            <p className='mt-12 w-full text-center'>
+              {search ? `No search results for "${search}"` : 'No results'}
+              {category && category in categories
+                ? ` in ${categories[category]}`
+                : ''}
+            </p>
+          </>
+        )}
+
+        {!(loading && blogs.length) && (
+          <>
+            <div className='w-full'>
+              <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
+                {blogs.map((blog) => (
+                  <BlogPost key={blog.id} {...blog} />
+                ))}
+              </div>
+            </div>
+
+            {(hasPrevPage || hasNextPage) && (
+              <div className='my-8 flex items-center justify-center gap-8'>
+                <CUIButton
+                  type='primary-dark'
+                  className={`group !border-primary-300/50 ${
+                    !hasPrevPage
+                      ? 'pointer-events-none opacity-40'
+                      : 'hover:!border-primary-400'
+                  }`}
+                  onClick={() => {
+                    if (hasPrevPage) {
+                      setPage(page - 1)
+                      backToTop()
+                    }
+                  }}>
+                  <span className='tanslate-x-0 mr-2 inline-block transition-transform group-hover:-translate-x-1'>
+                    &lt;-
+                  </span>
+                  Prev
+                </CUIButton>
+                <CUIButton
+                  type='primary-dark'
+                  className={`group !border-primary-300/50 ${
+                    !hasNextPage
+                      ? 'pointer-events-none opacity-40'
+                      : 'hover:!border-primary-400'
+                  }`}
+                  onClick={() => {
+                    if (hasNextPage) {
+                      setPage(page + 1)
+                      backToTop()
+                    }
+                  }}>
+                  Next{' '}
+                  <span className='tanslate-x-0 ml-2 inline-block transition-transform group-hover:translate-x-1'>
+                    -&gt;
+                  </span>
+                </CUIButton>
+              </div>
+            )}
+          </>
+        )}
+      </div>
 
       <div className='mt-20'>
         <FollowUs />
