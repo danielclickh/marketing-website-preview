@@ -32,4 +32,10 @@ export interface BlogProps extends CommonProps {
   description: string
   blogs: Array<BlogPost>
   categories: string[]
+  pagination: {
+    page: number
+    pageSize: number
+    pageCount: number
+    total: number
+  }
 }
