@@ -1,7 +1,6 @@
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
-import BlogPostList from '../../components/BlogPostList'
 import BlogPost from '../../components/BlogPostList/BlogPost'
 import CategorySelector from '../../components/CategorySelector'
 import { CUIButton, CUILink } from '../../components/ClickUI'
@@ -10,15 +9,9 @@ import Layout from '../../components/Layout'
 import { StrapiImage } from '../../components/StrapiElements'
 import { SuiSearchField, SuiTitle } from '../../components/sui'
 import { useDebounce } from '../../hooks'
-import {
-  fetchAll,
-  findAll,
-  findOne,
-  getStagingOnlyFilters
-} from '../../lib/api/strapi'
+import { findOne } from '../../lib/api/strapi'
 import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
 import {
   BlogApiResponse,
   BlogPost as BlogPostType,
@@ -27,7 +20,7 @@ import {
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
-  async function getStaticProps(context) {
+  async function getStaticProps() {
     // Current page params
     const { hero, seo } = await findOne('blog', {
       populate: ['hero', 'seo', 'seo.image']
@@ -80,7 +73,7 @@ export default function BlogsPage({
   const categoryList = Object.entries(categories).map(([slug, label]) => ({
     text: label,
     onClick: () => {
-      setPage(0)
+      setPage(1)
       setCategory(slug)
     },
     selected: category === slug
@@ -89,14 +82,14 @@ export default function BlogsPage({
   categoryList.unshift({
     text: 'View All',
     onClick: () => {
-      setPage(0)
+      setPage(1)
       setCategory(null)
     },
     selected: !category
   })
 
   const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPage(0)
+    setPage(1)
     setSearch(e.target.value)
   }
 
@@ -110,15 +103,18 @@ export default function BlogsPage({
 
   // Load values from query string
   useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search)
-    const urlCategory = queryParams.get('category')
-    const urlSearch = queryParams.get('search')
-    const urlPage = Number(queryParams.get('page') || '')
+    if (router.isReady) {
+      const urlCategory = router.query?.category
+      const urlSearch = router.query?.search
+      const urlPage = Number(router.query?.page || '')
 
-    if (urlCategory && urlCategory !== category) setCategory(urlCategory)
-    if (urlSearch && urlSearch !== search) setSearch(urlSearch)
-    if (!isNaN(urlPage) && urlPage !== page) setPage(urlPage)
-  }, [router])
+      if (typeof urlCategory === 'string' && urlCategory !== category)
+        setCategory(urlCategory)
+      if (typeof urlSearch === 'string' && urlSearch !== search)
+        setSearch(urlSearch)
+      if (!isNaN(urlPage) && urlPage !== page) setPage(urlPage)
+    }
+  }, [router.isReady])
 
   // On states changed
   useEffect(() => {
