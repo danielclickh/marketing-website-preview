@@ -124,7 +124,7 @@ export default function BlogsPage({
       scrollToContainer.current?.scrollIntoView({
         behavior: 'smooth'
       })
-    })
+    }, 100)
   }
 
   // Load values from query string
@@ -287,9 +287,9 @@ export default function BlogsPage({
                   }`}
                   onClick={() => {
                     if (hasPrevPage) {
+                      backToTop()
                       setLoading(true)
                       setPage(currentPage - 1)
-                      backToTop()
                     }
                   }}>
                   <span className='tanslate-x-0 mr-2 inline-block transition-transform group-hover:-translate-x-1'>
@@ -314,9 +314,9 @@ export default function BlogsPage({
                                   : '!border-primary-300/50 hover:!border-primary-400'
                               }
                               onClick={() => {
+                                backToTop()
                                 setLoading(true)
                                 setPage(item)
-                                backToTop()
                               }}>
                               {item}
                             </CUIButton>
@@ -334,9 +334,9 @@ export default function BlogsPage({
                   }`}
                   onClick={() => {
                     if (hasNextPage) {
+                      backToTop()
                       setLoading(true)
                       setPage(currentPage + 1)
-                      backToTop()
                     }
                   }}>
                   Next{' '}
