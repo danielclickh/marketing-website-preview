@@ -597,7 +597,9 @@ function CustomerStoriesPage({
               </div>
             ) : (
               <div className='flex w-full flex-col items-center rounded-md border border-dashed border-primary-700 p-16 text-center'>
-                <div className='flex-grow'>Sorry, no user stories found</div>
+                <div className='flex-grow font-basier text-2xl'>
+                  Sorry, no user stories found
+                </div>
                 <ClearFilterButton
                   className='mt-6 rounded-full border border-primary-600 py-2.5 px-4 text-sm font-semibold hover:border-primary-300'
                   onClick={clearAllFilters}
