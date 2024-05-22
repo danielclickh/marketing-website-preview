@@ -425,6 +425,7 @@ function CustomerStoriesPage({
                 <div className='multiselect-target hidden'>
                   <MultiSelect
                     value={selectedMigrations}
+                    itemClassName='multiselect-item'
                     onChange={(e) => {
                       setSelectedMigrations(e.value)
                       const selectedValues = e.value
@@ -453,6 +454,7 @@ function CustomerStoriesPage({
                 <div className='multiselect-target hidden'>
                   <MultiSelect
                     value={selectedVerticals}
+                    itemClassName='multiselect-item'
                     onChange={(e) => {
                       setSelectedVerticals(e.value)
                       const selectedValues = e.value

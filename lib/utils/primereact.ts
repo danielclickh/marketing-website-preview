@@ -19,11 +19,11 @@ export const Tailwind = {
       )
     }),
     labelContainer: ({ props }: { props: any }) => ({
-      className: classNames('overflow-hidden flex flex-auto cursor-pointer')
+      className: classNames('overflow-hidden flex flex-auto cursor-pointer ')
     }),
     label: ({ props }: { props: any }) => ({
       className: classNames(
-        'block overflow-hidden whitespace-nowrap cursor-pointer overflow-ellipsis',
+        'block overflow-hidden whitespace-nowrap cursor-pointer overflow-ellipsis w-24',
         'text-white ',
         'transition duration-200'
       )
@@ -40,7 +40,7 @@ export const Tailwind = {
     trigger: {
       className: classNames(
         'flex items-center justify-center shrink-0',
-        'bg-transparent text-white w-12 rounded-tr-lg rounded-br-lg'
+        'bg-transparent text-white w-12'
       )
     },
     panel: {
@@ -99,7 +99,7 @@ export const Tailwind = {
     item: ({ context }: { context: any }) => ({
       className: classNames(
         'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap text-white flex items-center',
-        'm-0 px-4 py-1.5 border-0 transition-shadow duration-200 rounded-none',
+        'm-0 px-4 py-1.5 border-0 transition-shadow duration-200 rounded-none text-base',
         {
           'text-white hover:bg-neutral-725 hover:text-primary-900':
             !context || context.selected
