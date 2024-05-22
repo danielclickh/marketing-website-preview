@@ -112,7 +112,7 @@
 					{
 						"id": 3,
 						"name": "Integrations",
-						"href": "https://clickhouse.com/integrations",
+						"href": "/integrations",
 						"target": "_self"
 					},
 					{
