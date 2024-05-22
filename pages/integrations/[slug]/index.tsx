@@ -95,7 +95,7 @@ export const getStaticProps: GetStaticProps<IntegrationProps> =
           $ne: slug
         }
       },
-      sort: ['name:ASC', 'date:DESC'],
+      sort: ['name:ASC'],
       populate: ['logo', 'logo_dark'],
       fields: ['name', 'slug', 'category', 'website', 'readiness'],
       pagination: { limit: 5 }

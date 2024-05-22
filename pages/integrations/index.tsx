@@ -4,8 +4,6 @@ import { useRouter } from 'next/router'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import CategorySelector from '../../components/CategorySelector'
 import GetStartedFree from '../../components/GetStartedFree'
-import IntegrationLogo from '../../components/IntegrationLogo'
-import IntegrationPill from '../../components/IntegrationPill'
 import IntegrationTile from '../../components/IntegrationTile'
 import Layout from '../../components/Layout'
 import { SuiSearchField, SuiTitle } from '../../components/sui'
@@ -14,7 +12,6 @@ import { StrapiImageType } from '../../lib/api/strapi/types'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
 import { CommonProps } from '../../types/homepage'
-import { CUICard } from '../../components/ClickUI'
 
 interface Integration {
   name: string
@@ -45,7 +42,15 @@ export async function getStaticProps() {
     fields: ['name', 'slug', 'category', 'website', 'readiness']
   })
 
+  // Divide the integrations into groups.
+  // Groups that have no integrations are removed.
   const integrationGroups: Array<IntegrationGroup> = [
+    {
+      label: 'ClickPipes',
+      description: '',
+      slug: 'clickpipes',
+      integrations: data.filter((item) => item.category === 'CLICKPIPES')
+    },
     {
       label: 'Data ingestion',
       description:
@@ -63,6 +68,14 @@ export async function getStaticProps() {
       )
     },
     {
+      label: 'Data transformation',
+      description: '',
+      slug: 'data-transformation',
+      integrations: data.filter(
+        (item) => item.category === 'DATA_TRANSFORMATION'
+      )
+    },
+    {
       label: 'SQL client',
       description:
         'Harness the power of SQL with ClickHouse! Integrated clients enable swift queries, delivering instant, precise results.',
@@ -76,7 +89,7 @@ export async function getStaticProps() {
       slug: 'language-client',
       integrations: data.filter((item) => item.category === 'LANGUAGE_CLIENT')
     }
-  ]
+  ].filter((group) => group.integrations.length)
 
   const props: IntegrationsPageProps = {
     title: 'Integrations',
@@ -215,11 +228,11 @@ export default function IntegrationsPage({
       </div>
 
       <div className='container mx-auto mb-20 max-w-7xl space-y-20 px-8 2xl:px-0'>
-        <div className='flex-col items-center lg:flex lg:flex-row lg:justify-between lg:space-x-24'>
+        <div className='flex-col items-center'>
           <SuiSearchField
             placeholder='Search by integration...'
             htmlFor='search'
-            className='mb-6 lg:mb-0 lg:flex-1'
+            className='mx-auto mb-6 md:max-w-md lg:mb-8'
             value={search || ''}
             onChange={searchChange}
           />
@@ -237,7 +250,7 @@ export default function IntegrationsPage({
               )}
               <div className='mt-6 grid grid-cols-2 justify-center gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7'>
                 {group.integrations.map((integration) => (
-                  <IntegrationTile {...integration} />
+                  <IntegrationTile key={integration.slug} {...integration} />
                 ))}
               </div>
             </div>
