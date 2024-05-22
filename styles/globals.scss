@@ -837,7 +837,8 @@ form.mktoForm#mktoForm_1135 {
   }
   [data-p-highlight="true"]{
     @apply bg-primary-300 overflow-hidden rounded-[3px] border-none;
-    .p-icon {@apply text-black;}
+    .p-icon {@apply text-black stroke-1 stroke-current;}
+
   }
 
 }
