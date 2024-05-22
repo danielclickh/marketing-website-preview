@@ -99,7 +99,7 @@ export const Tailwind = {
     item: ({ context }: { context: any }) => ({
       className: classNames(
         'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap text-white flex items-center',
-        'm-0 px-4 py-1.5 border-0 transition-shadow duration-200 rounded-none text-base',
+        'm-0 px-4 py-1.5 border-0 transition-shadow duration-200 rounded-none text-[14px]',
         {
           'text-white hover:bg-neutral-725 hover:text-primary-900':
             !context || context.selected
