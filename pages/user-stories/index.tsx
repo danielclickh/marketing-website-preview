@@ -7,7 +7,6 @@ import { useRouter } from 'next/router'
 import { PrimeReactProvider } from 'primereact/api'
 import { MultiSelect } from 'primereact/multiselect'
 import { useEffect, useState } from 'react'
-import { twMerge } from 'tailwind-merge'
 import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'
 import { SuiSearchField } from '../../components/sui'
@@ -327,9 +326,7 @@ function CustomerStoriesPage({
     // Set the selected use cases
     setSelectedVerticals(selectedVerticalsObject)
     //=== vertical ==//
-
-    //=== search ==//
-  }, [useCaseParam, migrationParam, verticalParam, searchParamInput])
+  }, [useCaseParam, migrationParam, verticalParam])
 
   //Search field
   const [searchQuery, setSearchQuery] = useState('')
