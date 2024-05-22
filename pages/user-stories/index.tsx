@@ -378,18 +378,18 @@ function CustomerStoriesPage({
               <SuiSearchField
                 placeholder='Search by company or keyword...'
                 htmlFor='search'
-                className='mb-6 -mt-1 xl:mb-0 xl:min-w-[447px]'
+                className='mb-6 xl:mb-0 xl:min-w-[447px]'
                 onChange={handleSearchInputChange}
                 value={searchQuery}
               />
-              <div className='flex flex-wrap justify-center gap-4 xl:flex-nowrap'>
+              <div className='flex flex-col items-center justify-center gap-4 xl:flex-row xl:flex-nowrap'>
                 <button
                   type='button'
                   className={`${
                     orderByDate
                       ? 'bg-primary-300 text-black'
                       : 'border-opacity-[0.3] text-white'
-                  } max-h-[42px] w-[162px] rounded-full border border-primary-500 py-2.5 px-4 text-sm font-semibold text-black md:w-auto`}
+                  } max-h-[42px] w-[162px] rounded-full border border-primary-500 py-2.5 px-4 text-sm font-semibold text-black xl:w-auto`}
                   onClick={toggleOrderByDate}>
                   Latest
                 </button>
