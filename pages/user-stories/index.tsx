@@ -514,7 +514,7 @@ function CustomerStoriesPage({
                       story.attributes.highlight
                         ? 'border-primary-300 bg-neutral-700'
                         : 'overflow-hidden border-neutral-700/80'
-                    }  relative min-h-[400px] rounded-[4px] border`}>
+                    }  relative min-h-[440px] rounded-[4px] border md:min-h-[400px]`}>
                     <div className='story-header bg-primary-300 p-4'>
                       <div className='flex h-[40px] items-center justify-center'>
                         {story.attributes.User.data && (
@@ -542,7 +542,7 @@ function CustomerStoriesPage({
                         )}
                       </div>
                     </div>
-                    <div className={` p-6`}>
+                    <div className={`p-6`}>
                       <div className='story-categories font-inconsolata text-primary-300'>
                         {story.attributes.useCase.data &&
                           story.attributes.useCase.data.map(
@@ -564,7 +564,7 @@ function CustomerStoriesPage({
                       {(story.attributes.ReadBlogLink ||
                         story.attributes.ExternalLink ||
                         story.attributes.WatchVideoLink) && (
-                        <div className='absolute bottom-6 right-6'>
+                        <div className='absolute bottom-6 right-6 mt-auto'>
                           <div className='flex items-center gap-x-6 text-primary-300'>
                             {story.attributes.ReadBlogLink && (
                               <Link
