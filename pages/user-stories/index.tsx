@@ -535,6 +535,8 @@ function CustomerStoriesPage({
                                     .data.attributes.alternativeText
                                 : 'Logo'
                             }
+                            priority={true}
+                            loading='eager'
                           />
                         )}
                       </div>
