@@ -63,6 +63,7 @@ interface ComparisonPage {
   ]
   Content: [RepeatableContent]
   BigNumbers: [BigNumber]
+  slug?: string
 }
 
 export interface ComparisonProps extends CommonProps {

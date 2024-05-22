@@ -94,7 +94,7 @@
 }
 
 .banner {
-  @apply w-full text-center bg-primary-200 text-primary-900 text-sm py-1 pl-4 pr-8 sm:pr-4 font-medium;
+  @apply w-full text-center bg-primary-300 text-primary-900 text-sm py-1 pl-4 pr-8 sm:pr-4 font-medium;
   :global(a) {
     @apply no-underline cursor-pointer w-full #{!important};
     &:hover {

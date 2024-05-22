@@ -1,12 +1,15 @@
 import dotenv from 'dotenv'
 import { fetchAll } from './lib/api/strapi'
-import { getVideos } from './lib/videos/index'
+import { Video } from './lib/videos/types'
+import { getVideos } from './lib/videos'
 import fs from 'fs'
 import path from 'path'
 dotenv.config()
 
 import { getStagingOnlyFilters } from './lib/api/strapi'
 const stagingOnlyFilters = getStagingOnlyFilters()
+
+import { getLexicons } from './lib/lexicons'
 
 interface Items {
   id?: string
@@ -31,7 +34,8 @@ function generateSiteMap(
   events: Items[],
   comparisons: Items[],
   richTextPages: Items[],
-  videos: Items[]
+  videos: Video[],
+  lexicons: Items[]
 ) {
   const siteURL = 'https://clickhouse.com'
 
@@ -56,6 +60,9 @@ function generateSiteMap(
         <loc>${siteURL}/cloud/clickpipes</loc>
     </url>
     <url>
+        <loc>${siteURL}/cloud/bring-your-own-cloud</loc>
+    </url>
+    <url>
         <loc>${siteURL}/company/careers</loc>
     </url>
     <url>
@@ -69,6 +76,9 @@ function generateSiteMap(
     </url>
     <url>
         <loc>${siteURL}/learn</loc>
+    </url>
+    <url>
+        <loc>${siteURL}/learn/certification</loc>
     </url>
     <url>
         <loc>${siteURL}/media</loc>
@@ -108,13 +118,13 @@ function generateSiteMap(
         <loc>${siteURL}/use-cases/real-time-analytics</loc>
     </url>
     <url>
+        <loc>${siteURL}/use-cases/business-intelligence</loc>
+    </url>
+    <url>
         <loc>${siteURL}/user-stories</loc>
     </url>
     <url>
-      <loc>${siteURL}/reinvent-2023</loc>
-    </url>
-    <url>
-      <loc>${siteURL}/reinvent-2023/vip-party</loc>
+      <loc>${siteURL}/real-time-data-warehouse</loc>
     </url>
     <url>
         <loc>${siteURL}/blog</loc>
@@ -170,6 +180,16 @@ function generateSiteMap(
     `
      })
      .join('')}
+
+     ${lexicons
+       .map((lexicon) => {
+         return `
+    <url>
+        <loc>${`${siteURL}/lexicon/${lexicon.slug}`}</loc>
+    </url>
+    `
+       })
+       .join('')}
 </urlset>`
   try {
     const outputPath = path.join(__dirname, 'public', 'sitemap.xml')
@@ -196,24 +216,25 @@ async function triggerSitemap() {
   })
 
   const comparisonsParams = {
-    sort: ['date:DESC', 'publishedAt:DESC'],
+    sort: ['publishedAt:DESC'],
     fields: ['Title', 'slug', 'updatedAt']
   }
   const comparisons = await fetchAll('comparisons', comparisonsParams)
 
   const richTextPageParams = {
-    sort: ['date:DESC', 'publishedAt:DESC'],
-    fields: ['url', 'updatedAt']
+    sort: ['publishedAt:DESC'],
+    fields: ['url', 'updatedAt', 'publishedAt']
   }
   const richTextPages = await fetchAll('rich-content-pages', richTextPageParams)
 
   // We generate the XML sitemap with the posts data
-  const sitemap = generateSiteMap(
+  generateSiteMap(
     blogPosts,
     events,
     comparisons,
     richTextPages,
-    getVideos()
+    await getVideos(),
+    getLexicons()
   )
 }
 

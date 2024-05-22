@@ -13,8 +13,9 @@ import { CUIButton } from '../../components/ClickUI'
 import HRSeparator from '../../components/HRSeparator'
 import { CheckIcon } from '@heroicons/react/outline'
 import GiveItAGo from '../../components/GiveItAGo'
-import VideoPlayer from '../../components/VideoPlayer'
 import BlogPost from '../../components/BlogPostList/BlogPost'
+import HomepageCustomerVideos from '../../components/HomepageVideos'
+import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<UseCasesData> =
   async function getStaticProps() {
@@ -63,6 +64,15 @@ type TestimonialsJson = {
   height: number
 }
 const testimonialsJson: Array<TestimonialsJson> = [
+  {
+    id: 101,
+    logo: '/images/sony.svg',
+    category: 'Analytics',
+    text: 'At Sony Entertainment Television, we ingest tens of millions of CDN records into ClickHouse Cloud and run millions of queries against them daily. This allows our operations team to monitor the delivery of our content in real-time, and analyze/investigate potential issues the moment they arise. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.',
+    customer: 'Sony',
+    width: 80,
+    height: 17
+  },
   {
     id: 1,
     logo: '/images/use-cases/posthog-logo.svg',
@@ -174,6 +184,7 @@ function CustomerStoriesPage({
   headerData,
   footerData
 }: UseCasesData) {
+  galaxyOnPage('userStoriesPage')
   const [visibleTestimonials, setVisibleTestimonials] = useState(6)
 
   const loadMore = () => {
@@ -199,39 +210,22 @@ function CustomerStoriesPage({
                     alt='Quote'
                     className='-mt-10 inline-block'
                   />{' '}
-                  Last time I checked, we read two&nbsp;
-                  <span className='tilted tilted-yellow'>
-                    <span className='tilted-content'>billion</span>
-                  </span>{' '}
-                  rows a second of CDN access&nbsp;logs
+                  There is that feeling of new tech where everything just feels
+                  like it's going right.
                 </div>
                 <p className='mt-6 text-base text-neutral-200'>
-                  We were really not doing well with ingesting all the logs that
-                  we have because it's big data, it's all the users of Disney+
-                  generating that data. Ever since we chose ClickHouse, it's
-                  been going well.
+                  We were using Postgres, but there was a moment in time when we
+                  hit the 64TB database limit and we couldn't read or write fast
+                  enough. We prototyped in ClickHouse Cloud in a week and we
+                  were able to ingest data 5 to 6 times faster than Postgres. We
+                  saved 10x in cost.
                 </p>
                 <div className='mt-12 items-center justify-between xl:flex'>
                   <div className='flex-0'>
-                    <p className='text-base font-semibold'>Roni Lazimi</p>
+                    <p className='text-base font-semibold'>Harlow Ward</p>
                     <p className='font-inconsolata text-base text-primary-300'>
-                      Software Engineer @ Disney+ Streaming
+                      Co-founder and CTO, Clearbit
                     </p>
-                  </div>
-                  <div className='mt-4 flex justify-center lg:justify-start xl:mt-0'>
-                    <CUIButton
-                      type='secondary'
-                      className='group mx-auto w-auto'
-                      target='_self'
-                      href='/blog/nyc-meetup-report-high-speed-content-distribution-analytics-for-streaming-platforms'
-                      iconRight={
-                        <ChevronRightIcon
-                          height='18'
-                          className='pt-0.5 transition group-hover:translate-x-1/2'
-                        />
-                      }>
-                      Learn more
-                    </CUIButton>
                   </div>
                 </div>
               </div>
@@ -239,7 +233,16 @@ function CustomerStoriesPage({
                 <div className='relative w-full'>
                   <div className='max-w-full rounded-md bg-primary-300 lg:absolute lg:inset-3 lg:-right-10 lg:-top-3 lg:skew-x-0 lg:transform'></div>
                   <div className='relative top-0 left-0 aspect-video h-fit w-full rounded-md'>
-                    <VideoPlayer videoId='CVVp6N8Xeoc' provider='youtube' />
+                    <HomepageCustomerVideos
+                      videos={[
+                        {
+                          videoId: '863656379',
+                          type: 'vimeo',
+                          vimeoCode: 'ec5de7be6d',
+                          image: '/images/clearbit-tile.png'
+                        }
+                      ]}
+                    />
                   </div>
                 </div>
               </div>
@@ -257,87 +260,6 @@ function CustomerStoriesPage({
             <h2 className='text-center font-basier text-3xl font-bold'>
               Case studies
             </h2>
-          </div>
-          <div>
-            <div
-              className='relative mt-10 flex space-x-12 md:min-h-fit'
-              id={spotlight.anchorId}>
-              <SuiPanel
-                color='bg-neutral-725'
-                border
-                padding='xl'
-                className='border-l-4 border-l-primary-300'>
-                <div className='flex flex-col items-center justify-between lg:flex-row'>
-                  <div className='flex w-full flex-col md:w-2/3 xl:max-w-3xl'>
-                    <p
-                      className='mb-8 font-basier text-2xl font-semibold
-                    '>
-                      Uber moved its logging platform to ClickHouse increasing
-                      developer productivity and overall reliability
-                    </p>
-                    <ul className='space-y-4'>
-                      <li>
-                        <p className='flex items-center space-x-3'>
-                          <CheckIcon className='h-6 w-6 stroke-1 text-primary-300' />
-                          <span>3x data compression</span>
-                        </p>
-                      </li>
-                      <li>
-                        <p className='flex items-center space-x-3'>
-                          <CheckIcon className='h-6 w-6 stroke-1 text-primary-300' />
-                          <span>10x performance increase</span>
-                        </p>
-                      </li>
-                      <li>
-                        <p className='flex items-center space-x-3'>
-                          <CheckIcon className='h-6 w-6 stroke-1 text-primary-300' />
-                          <span>½ the reduction in hardware cost</span>
-                        </p>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className='mt-10 w-full max-w-xs md:block lg:mt-0'>
-                    <div
-                      className='mx-auto w-full
-                    '>
-                      <Image
-                        className='mx-auto'
-                        alt={spotlight.companyName}
-                        src={spotlight.darkLogoPng.url}
-                        width={
-                          spotlight.darkLogoPng.width
-                            ? spotlight.darkLogoPng.width
-                            : 180
-                        }
-                        height={
-                          spotlight.darkLogoPng.height
-                            ? spotlight.darkLogoPng.height
-                            : 63
-                        }
-                      />
-
-                      {spotlight.ctaButton && (
-                        <div className='mx-auto mt-8'>
-                          <CUIButton
-                            type='secondary'
-                            className='group mx-auto w-auto'
-                            target={spotlight.ctaButton.target}
-                            href={spotlight.ctaButton.href}
-                            iconRight={
-                              <ChevronRightIcon
-                                height='18'
-                                className='pt-0.5 transition group-hover:translate-x-1/2'
-                              />
-                            }>
-                            Read use case
-                          </CUIButton>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </SuiPanel>
-            </div>
           </div>
         </div>
       </div>

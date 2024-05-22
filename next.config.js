@@ -83,7 +83,7 @@ const nextConfig = {
       {
         source: '/slack',
         destination:
-          'https://join.slack.com/t/clickhousedb/shared_invite/zt-26mymngo5-ROHA32cO_MVvGO_aoiLdhw',
+          'https://join.slack.com/t/clickhousedb/shared_invite/zt-2h7k4l3n6-2tm52WOWwaD11OiijTUIkg',
         permanent: true
       },
       {
@@ -375,6 +375,46 @@ const nextConfig = {
       {
         source: '/reinvent-2023/vip-party',
         destination: '/company/contact',
+        permanent: true
+      },
+      {
+        source: '/company/events/clickhouse-workshop',
+        destination: '/company/events/clickhouse-fundamentals',
+        permanent: true
+      },
+      {
+        source: '/blog/index.xml',
+        destination: '/rss.xml',
+        permanent: true
+      },
+      {
+        source: '/company/events/202402-cloud-update-live',
+        destination: '/videos/clickhouse-cloud-update-call-feb2024',
+        permanent: true
+      },
+      {
+        source: '/company/events/v24-1-community-release-call',
+        destination: 'https://www.youtube.com/watch?v=pBF9g0wGAGs',
+        permanent: true
+      },
+      {
+        source: '/careers',
+        destination: '/company/careers',
+        permanent: true
+      },
+      {
+        source: '/launch-week',
+        destination: '/launch-week/may-2024',
+        permanent: true
+      },
+      {
+        source: '/launchweek',
+        destination: '/launch-week/may-2024',
+        permanent: true
+      },
+      {
+        source: '/cloud/azure-waitlist',
+        destination: '/cloud',
         permanent: true
       }
     ]

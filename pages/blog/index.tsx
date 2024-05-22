@@ -17,6 +17,7 @@ import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
 import { BlogPost as BlogPostType, BlogProps } from '../../types/blogs'
+import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps() {
@@ -91,6 +92,7 @@ export default function BlogsPage({
   headerData,
   footerData
 }: BlogProps) {
+  galaxyOnPage('blogListPage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <SuiTitle

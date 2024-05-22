@@ -7,17 +7,22 @@ import Layout from '../../components/Layout'
 import { fetchAll, findOne, getStagingOnlyFilters } from '../../lib/api/strapi'
 import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { Video } from '../../lib/videos/types'
 import { CommonProps } from '../../types/homepage'
 import { getVideos } from '../../lib/videos/index'
+import { getLexicons } from '../../lib/lexicons'
+import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 
 interface SitemapProps extends CommonProps {
   blogPosts: any[]
   allEvents: any[]
+  allVideos: Video[]
   onDemandEvents: any[]
   newsEvents: any[]
   pressReleases: any[]
   menu: any[]
   comparisons: any[]
+  lexicons: any[]
 }
 
 export const getStaticProps: GetStaticProps<SitemapProps> =
@@ -50,7 +55,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
     })
 
     const comparisonsParams: Record<string, any> = {
-      sort: ['date:DESC', 'publishedAt:DESC'],
+      sort: ['publishedAt:DESC'],
       fields: ['Title', 'slug']
     }
 
@@ -80,17 +85,23 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
     const newsEvents = newsItems.newsItems
     const pressReleases = newsItems.pressReleases
 
+    const lexicons = getLexicons()
+
+    const allVideos = await getVideos()
+
     const menu = menuItems
 
     return {
       props: {
         blogPosts,
         allEvents,
+        allVideos,
         onDemandEvents,
         newsEvents,
         pressReleases,
         comparisons,
         menu,
+        lexicons,
         seo: {
           title: 'Site map - ClickHouse',
           path: '/sitemap'
@@ -106,14 +117,18 @@ function Sitemap({
   footerData,
   blogPosts,
   allEvents,
+  allVideos,
   onDemandEvents,
   newsEvents,
   pressReleases,
   comparisons,
-  menu
+  menu,
+  lexicons
 }: SitemapProps) {
   const resourcesMenu = menuItems.find((obj) => obj.id === 2)?.menuItems
-  const videos = getVideos()
+
+  galaxyOnPage('siteMapPage')
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div>
@@ -154,6 +169,13 @@ function Sitemap({
                   href={`/clickhouse/keeper?loc=sitemap`}
                   className='text-primary-300 hover:underline'>
                   ClickHouse Keeper
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
+                  href={`/real-time-data-warehouse?loc=sitemap`}
+                  className='text-primary-300 hover:underline'>
+                  Real-time Data Warehouse
                 </Link>
               </p>
             </div>
@@ -211,16 +233,30 @@ function Sitemap({
               </h2>
               <p className='pb-2'>
                 <Link
+                  href='/use-cases/real-time-analytics'
+                  className='text-primary-300 hover:underline'>
+                  Real-time analytics
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
                   href='/use-cases/logging-and-metrics'
                   className='text-primary-300 hover:underline'>
-                  Logging and Metrics
+                  Logs, events &amp; traces
                 </Link>
               </p>
               <p className='pb-2'>
                 <Link
                   href='/use-cases/machine-learning-and-data-science'
                   className='text-primary-300 hover:underline'>
-                  Machine Learning and Data Science
+                  Machine Learning &amp; GenAI
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
+                  href='/use-cases/business-intelligence'
+                  className='text-primary-300 hover:underline'>
+                  Business intelligence
                 </Link>
               </p>
               <p className='pb-2'>
@@ -290,11 +326,27 @@ function Sitemap({
                 <ul className='mb-2'>
                   {comparisons.map((comparison, index) => {
                     return (
-                      <li key={index}>
+                      <li key={index} className='pb-2'>
                         <Link
                           href={`/comparison/${comparison.slug}`}
                           className='font text-primary-300 hover:underline'>
                           {comparison.Title}{' '}
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+              <div>
+                <p className='pb-2 font-semibold'>Lexicon</p>
+                <ul className='mb-2'>
+                  {lexicons.map((lexicon, index) => {
+                    return (
+                      <li key={index} className='pb-2'>
+                        <Link
+                          href={`/lexicon/${lexicon.slug}`}
+                          className='font text-primary-300 hover:underline'>
+                          {lexicon.title}{' '}
                         </Link>
                       </li>
                     )
@@ -416,11 +468,11 @@ function Sitemap({
                 <Link href='/videos'>Videos</Link>
               </h2>
               <ul className='mb-2'>
-                {videos.map((video, index) => {
+                {allVideos.map((video, index) => {
                   return (
-                    <li key={index}>
+                    <li key={index} className='pb-2'>
                       <Link
-                        href={`/video/${video.slug}`}
+                        href={`/videos/${video.slug}`}
                         className='font text-primary-300 hover:underline'>
                         {video.title}
                       </Link>

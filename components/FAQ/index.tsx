@@ -7,6 +7,8 @@ import faqList from './faqList.json'
 import styles from './styles.module.scss'
 import ReactMarkdown from 'react-markdown'
 import { CSSProperties } from 'react'
+import { galaxyOnClick } from '../../lib/galaxy/galaxy';
+import { FullyQualifiedEvent } from '../../lib/galaxy/client/index';
 
 const style = {
   '--top-side': '224px'
@@ -36,7 +38,8 @@ export default function FAQ() {
         <CUILink
           href='/support/program/'
           target='_self'
-          className='flex gap-4 text-primary items-center mt-6 justify-center lg:justify-start'>
+          className='flex gap-4 text-primary items-center mt-6 justify-center lg:justify-start'
+          onClick={galaxyOnClick('homePage.faqSection.askAnythingSelect')}>
           <span>Ask us anything</span> <ExternalLinkIcon className='w-4 h-4' />
         </CUILink>
       </div>
@@ -48,10 +51,12 @@ export default function FAQ() {
             key={`faq-${index}`}>
             {({ open }) => (
               <>
-                <Disclosure.Button className='relative z-10 grid grid-cols-[1fr_1rem] p-4 pr-6 pl-20 gap-x-6 w-full justify-between items-center rounded-lg text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none'>
-                  <span className='text-md'>{faq.title}</span>
-                  <span className={styles.plusMinus} data-active={open} />
-                </Disclosure.Button>
+                <div onClick={galaxyOnClick(faq.event as FullyQualifiedEvent)}>
+                  <Disclosure.Button className='relative z-10 grid grid-cols-[1fr_1rem] p-4 pr-6 pl-20 gap-x-6 w-full justify-between items-center rounded-lg text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none'>
+                    <span className='text-md'>{faq.title}</span>
+                    <span className={styles.plusMinus} data-active={open} />
+                  </Disclosure.Button>
+                </div>
                 <Transition
                   show={open}
                   className='h-full'

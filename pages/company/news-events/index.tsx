@@ -1,18 +1,19 @@
-import { SuiTitle } from '../../../components/sui'
-import { findAll, findOne } from '../../../lib/api/strapi'
+import {SuiTitle} from '../../../components/sui'
+import {findAll, findOne} from '../../../lib/api/strapi'
 import RecentEvents from '../../../components/RecentEvents'
-import { EventType } from '../../../types/events'
-import { NewsAndEventsData, NewsEventProps } from '../../../types/newsEvents'
+import {EventType} from '../../../types/events'
+import {NewsAndEventsData, NewsEventProps} from '../../../types/newsEvents'
 import NewsItem from '../../../components/NewsItem'
 import Layout from '../../../components/Layout'
-import { GetStaticProps } from 'next'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
-import { convertDateToString } from '../../../lib/utils/dateUtils'
-import { CUIButton, CUILink } from '../../../components/ClickUI'
-import { StrapiImage } from '../../../components/StrapiElements'
-import { CalendarIcon } from '@heroicons/react/outline'
+import {GetStaticProps} from 'next'
+import {getCommonProps} from '../../../lib/utils/getCommonProps'
+import {REVALIDATE_SECONDS} from '../../../lib/utils/revalidationConfig'
+import {convertDateToString} from '../../../lib/utils/dateUtils'
+import {CUILink} from '../../../components/ClickUI'
+import {StrapiImage} from '../../../components/StrapiElements'
+import {CalendarIcon} from '@heroicons/react/outline'
 import EventPost from '../../../components/EventPostList/EventPost'
+import {galaxyOnPage} from "../../../lib/galaxy/galaxy";
 
 export const getStaticProps: GetStaticProps<NewsEventProps> =
   async function getStaticProps() {
@@ -133,6 +134,8 @@ export default function News({
   recentEvents,
   seo
 }: NewsEventProps) {
+    galaxyOnPage('newsEventsPage');
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div>

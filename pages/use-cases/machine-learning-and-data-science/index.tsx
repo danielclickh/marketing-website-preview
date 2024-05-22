@@ -18,6 +18,7 @@ import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import features from './features.json'
 import quotes from './quotes.json'
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface MLProps extends CommonProps {
   customerStories: any
@@ -60,6 +61,7 @@ export default function MLUseCasePage({
   headerData,
   footerData
 }: MLProps) {
+  galaxyOnPage('mlAIUseCasePage')
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
@@ -393,6 +395,20 @@ export default function MLUseCasePage({
                         className='text-primary-300'>
                         Helicone's Migration from Postgres to ClickHouse for
                         Advanced LLM Monitoring
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href='/blog/clickHouse-and-the-machine-learning-data-layer'
+                        className='text-primary-300'>
+                        ClickHouse and the Machine Learning Data Layer
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href='/blog/powering-featurestores-with-clickhouse'
+                        className='text-primary-300'>
+                        Powering Feature Stores with ClickHouse
                       </Link>
                     </li>
                   </ol>

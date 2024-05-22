@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { SuiText, SuiTitle } from '../../components/sui'
 import CloudProviders from '../../components/CloudProviders'
@@ -22,6 +22,7 @@ import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import ClickPipesIntegrationImage from '../../components/ClickPipesAnimation/ClickPipesIntegrationImage'
 import Lines from '../../components/ClickPipesAnimation/Lines'
+import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 
 function getRandomDelay(min: number, max: number): number {
   return Math.random() * (max - min) + min
@@ -74,6 +75,7 @@ export default function CloudPage({
   const integrationsRef = useRef(null)
   const isInView = useInView(integrationsRef)
 
+  galaxyOnPage('productCloudPage')
   useEffect(() => {
     setWindowWidth(window.innerWidth)
     const handleResize = () => {
@@ -130,11 +132,11 @@ export default function CloudPage({
                     </div>
                   </div>
                   <p className='mt-3 text-sm'>
-                    Interested in being notified when Azure is available?{' '}
+                    Join the waitlist for{' '}
                     <Link
-                      href='/cloud/azure-waitlist'
+                      href='/cloud/bring-your-own-cloud'
                       className='text-primary-300'>
-                      Join the waitlist
+                      Bring Your Own Cloud (BYOC)
                     </Link>
                   </p>
                 </div>
@@ -239,7 +241,7 @@ export default function CloudPage({
             ))}
           </div>
         </div>
-        <div className='relative flex flex-col gap-y-28 bg-[#262622] px-3 xl:px-0'>
+        <div className='relative flex flex-col gap-y-28 px-3 xl:px-0'>
           <HRSeparator className='my-0' />
           <div className='flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
@@ -289,9 +291,9 @@ export default function CloudPage({
                             integration.fadeOnLoad ? 'z-10' : 'z-20'
                           } relative rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
                           key={integration.name}>
-                          {integration.soon && (
+                          {integration.badge && (
                             <div className='absolute -top-2 -right-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
-                              Soon
+                              {integration.badge}
                             </div>
                           )}
                           <ClickPipesIntegrationImage
@@ -302,9 +304,9 @@ export default function CloudPage({
                         <div
                           className={`relative z-20 rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
                           key={integration.name}>
-                          {integration.soon && (
+                          {integration.badge && (
                             <div className='absolute -top-2 -right-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
-                              Soon
+                              {integration.badge}
                             </div>
                           )}
                           <ClickPipesIntegrationImage
@@ -335,14 +337,15 @@ export default function CloudPage({
                 <div
                   className='mx-auto max-w-3xl text-center leading-normal text-neutral-200'
                   ref={integrationsRef}>
-                  ClickPipes offers the easiest and most intuitive way to ingest
-                  data into ClickHouse Cloud. With support for Apache Kafka and
-                  Confluent today, and many more data sources coming soon.
+                  ClickPipes is a managed integration service that makes
+                  ingesting data from a diverse set of sources as simple as
+                  clicking a few buttons, offering the easiest and most
+                  intuitive way to ingest data into ClickHouse Cloud.
                 </div>
-                <div className='mx-auto mt-11 inline-block w-full bg-[#262622] text-center hover:cursor-none'>
+                <div className='mx-auto mt-11 inline-block w-full text-center hover:cursor-none'>
                   <CUIButton
                     type='secondary'
-                    className='group mx-auto w-auto text-center'
+                    className='group mx-auto w-auto !bg-neutral-800 text-center'
                     href='/cloud/clickpipes'>
                     Learn more
                   </CUIButton>
@@ -361,8 +364,8 @@ export default function CloudPage({
                   Experience the power of open-source ClickHouse in a serverless
                   setup. Deploy in seconds, scale seamlessly, and ensure
                   top-tier security with our SOC 2 Type II compliant platform.
-                  Available on AWS and GCP. Dive into insights without the
-                  infrastructure hassle!
+                  Available on AWS, GCP and Azure in Beta. Dive into insights
+                  without the infrastructure hassle!
                 </div>
                 <CUIButton
                   type='primary'
@@ -375,7 +378,43 @@ export default function CloudPage({
           </div>
         </div>
 
-        <HRSeparator className='mb-24' />
+        <div className='section-container mx-auto mb-24 max-w-[1115px]'>
+          <div className='flex flex-wrap items-center gap-16 rounded-lg bg-primary-300 p-8 text-neutral-900 lg:flex-nowrap lg:py-16 lg:px-16'>
+            <div className='w-full lg:w-1/3'>
+              <Image
+                width={394}
+                height={168}
+                src='/images/cloud/byoc-aws.svg'
+                alt={'Bring your own cloud AWS'}
+              />
+            </div>
+            <div className='w-full lg:w-2/3'>
+              <div className='flip-selection mb-6 flex flex-wrap items-center gap-8'>
+                <SuiTitle type='h2'>Bring Your Own Cloud</SuiTitle>
+                <Link
+                  href='/cloud/bring-your-own-cloud'
+                  className='inline-block rounded-full border border-neutral-900 px-5 py-2  font-semibold uppercase'>
+                  Coming soon
+                </Link>
+              </div>
+              <div className='flip-selection'>
+                <SuiText className='mb-6 leading-relaxed '>
+                  Do you have strict data residency and compliance requirements
+                  that make typical SaaS offerings a nonstarter? Our Bring Your
+                  Own Cloud deployment model allows you to experience the
+                  advantages of ClickHouse Cloud within your own Virtual Private
+                  Cloud (VPC).
+                </SuiText>
+              </div>
+              <Link
+                href='/cloud/bring-your-own-cloud?loc=cloud-page-component'
+                className='inline-block rounded bg-[#161600] py-3 px-8 text-center font-semibold text-white'>
+                Join waitlist
+              </Link>
+            </div>
+          </div>
+        </div>
+
         <div className='relative flex flex-col gap-y-28 '>
           <div className='section-container bg-shadow-element-right red-shadow flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
@@ -478,10 +517,10 @@ export default function CloudPage({
               </SuiTitle>
               <div className='mx-auto max-w-2xl px-4 text-center leading-normal text-neutral-200 md:px-0'>
                 With the flexibility to choose where and how you deploy.
-                Available on AWS and GCP, and through Marketplaces. Manage your
-                services through our ClickHouse Cloud self-serve UI, or by
-                leveraging our APIs and Terraform provider to automate your
-                operations.
+                Available on AWS, GCP and Azure in Beta, and through
+                Marketplaces. Manage your services through our ClickHouse Cloud
+                self-serve UI, or by leveraging our APIs and Terraform provider
+                to automate your operations.
               </div>
               <div className='mt-16 flex flex-col space-y-10 md:flex-row md:space-x-10 md:space-y-0'>
                 <CUICard className='w-full max-w-[22.5rem] bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>

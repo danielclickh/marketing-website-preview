@@ -21,6 +21,7 @@ import { HeaderProps, MenuItem as MenuItemType } from './types'
 import MobileMenuItem from './MobileMenuItem'
 import GlobalMenu from './GlobalMenu'
 import Banner from './Banner'
+import { galaxyOnClick } from '../../lib/galaxy/galaxy'
 const headerMenuItems = menuItems as Array<MenuItemType>
 
 export default function Header({ header, github: { stars } }: HeaderProps) {
@@ -64,6 +65,9 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
     }
   }, [])
 
+  header.banner =
+    '<a href="/blog/clickhouse-cloud-is-now-on-azure-in-public-beta?loc=eyebrow">ClickHouse Cloud on Microsoft Azure: Now in Beta</a>'
+
   return (
     <>
       <div
@@ -74,7 +78,8 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
         <nav className='no-wrap section-container relative flex w-full items-center justify-between py-4'>
           <Link
             href='/'
-            className='absolute z-10 flex items-center gap-x-3 hover:no-underline'>
+            className='absolute z-10 flex items-center gap-x-3 hover:no-underline'
+            onClick={galaxyOnClick('topNav.logo.select')}>
             <Image
               src={logoFull}
               priority
@@ -91,7 +96,8 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
               key='github-stars-nav'
               href='https://github.com/ClickHouse/ClickHouse?utm_source=clickhouse&utm_medium=website&utm_campaign=website-nav'
               target='_blank'
-              className='hidden hover:text-neutral-400 hover:no-underline lg:flex '>
+              className='hidden hover:text-neutral-400 hover:no-underline lg:flex '
+              onClick={galaxyOnClick('topNav.navItems.githubSelect')}>
               <div className='flex items-center gap-2  hover:no-underline'>
                 <svg
                   width='16'
@@ -121,15 +127,17 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
             <CUILink
               href='https://clickhouse.cloud/signIn'
               target='_self'
-              className='hidden items-center text-sm font-medium ease-in-out hover:text-neutral-400 hover:no-underline lg:inline-flex'>
+              className='hidden items-center text-sm font-medium ease-in-out hover:text-neutral-400 hover:no-underline lg:inline-flex'
+              onClick={galaxyOnClick('topNav.navItems.signInSelect')}>
               Sign in
             </CUILink>
             <CUIButton
               type='primary'
               weight='medium'
               href='https://clickhouse.cloud/signUp?loc=nav-get-started'
-              target='_self'>
-              Get started
+              target='_self'
+              onClick={galaxyOnClick('topNav.navItems.getStartedSelect')}>
+              <span id='nav-bar-cta-button'>Get started</span>
             </CUIButton>
           </div>
 

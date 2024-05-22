@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import {GetStaticProps} from 'next'
 import Link from 'next/link'
 import React from 'react'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
@@ -8,24 +8,17 @@ import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'
 import NewsLetter from '../../../components/NewsLetter'
-import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
+import {getNewsLetterData} from '../../../components/NewsLetter/getNewsLetterData'
 import SocialButton from '../../../components/SocialButton'
-import { StrapiImage } from '../../../components/StrapiElements'
-import { SuiButton, SuiText, SuiTitle } from '../../../components/sui'
-import {
-  findAll,
-  getPathsValues,
-  getStagingOnlyFilters,
-  findOne
-} from '../../../lib/api/strapi'
-import { convertDateToString } from '../../../lib/utils/dateUtils'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import {
-  NOT_FOUND_FALLBACK,
-  REVALIDATE_SECONDS
-} from '../../../lib/utils/revalidationConfig'
-import { BlogProps } from '../../../types/blog'
-import { ParamsType } from '../../../types/homepage'
+import {StrapiImage} from '../../../components/StrapiElements'
+import {SuiButton, SuiText, SuiTitle} from '../../../components/sui'
+import {findAll, findOne, getPathsValues, getStagingOnlyFilters} from '../../../lib/api/strapi'
+import {convertDateToString} from '../../../lib/utils/dateUtils'
+import {getCommonProps} from '../../../lib/utils/getCommonProps'
+import {NOT_FOUND_FALLBACK, REVALIDATE_SECONDS} from '../../../lib/utils/revalidationConfig'
+import {BlogProps} from '../../../types/blog'
+import {ParamsType} from '../../../types/homepage'
+import {galaxyOnPage} from "../../../lib/galaxy/galaxy";
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -116,6 +109,7 @@ export default function BlogPage({
   CloudCTAHeader,
   seo
 }: BlogProps) {
+  galaxyOnPage('blogPage');
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-10'>

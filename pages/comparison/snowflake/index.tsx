@@ -14,8 +14,8 @@ import MarketoForm from '../../../components/MarketoForm'
 import { StrapiImage } from '../../../components/StrapiElements'
 import { findAll, findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { ComparisonProps, BigNumber } from '../../../types/comparisons'
-import stats from './stats.json'
+import { BigNumber, ComparisonProps } from '../../../types/comparisons'
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface SnowflakePageProps extends ComparisonProps {
   customerStories: any
@@ -103,13 +103,12 @@ export default function SnowflakePage({
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
-  console.log(comparison)
   const {
     Title: comparisonTitle,
     HeroDescription: heroDescription,
     BigNumbers: BigNumbers
   } = comparison.data[0]
-
+  galaxyOnPage('snowflakeComparisonPage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage'>
@@ -304,6 +303,7 @@ export default function SnowflakePage({
                       {!formSuccess && (
                         <MarketoForm
                           formId='1073'
+                          clearbitTracking={true}
                           onLoad={() => setFormLoaded(true)}
                           onSuccess={() => {
                             setFormSuccess(true)
@@ -318,16 +318,6 @@ export default function SnowflakePage({
                             return false // Stops page from reloading
                           }}
                         />
-                      )}
-
-                      {formLoaded && !formSuccess && (
-                        <div className='disclaimer-text mt-8 text-left text-sm font-medium text-neutral-200'>
-                          <Markdown>
-                            By registering, you acknowledge that ClickHouse will
-                            process your personal information in accordance with
-                            our [Privacy Policy](/legal/privacy-policy).
-                          </Markdown>
-                        </div>
                       )}
 
                       {!formLoaded && (

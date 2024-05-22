@@ -7,6 +7,7 @@ import Layout from '../../../components/Layout'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import Image from 'next/image'
 import FollowUs from '../../../components/FollowUs'
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 const careerImgs = [
   { id: 2, url: '/images/careers/Meeting.png', alt: 'Meeting' },
@@ -92,6 +93,9 @@ export default function CareersPage({
   footerData,
   headerData
 }: CareersData) {
+
+  galaxyOnPage('careersPage');
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-10'>

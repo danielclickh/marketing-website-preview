@@ -17,6 +17,7 @@ import quotes from './quotes.json'
 import callouts from './callouts.json'
 import Markdown from '../../../components/Markdown'
 import { CUIButton } from '../../../components/ClickUI'
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface LoggingProps extends CommonProps {
   customerStories: any
@@ -59,6 +60,7 @@ export default function ClickHouseServerPage({
   headerData,
   footerData
 }: LoggingProps) {
+  galaxyOnPage('logsMetricsUseCasePage')
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
@@ -170,7 +172,7 @@ export default function ClickHouseServerPage({
           <div className='section-container max-w-7xl'>
             <div className='relative flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
-                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[296px] md:flex-row'>
+                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[400px] md:flex-row'>
                   {quotes.map((quote) => (
                     <Tilt
                       tiltEnable={false}

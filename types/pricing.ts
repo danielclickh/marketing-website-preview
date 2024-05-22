@@ -1,4 +1,3 @@
-import { ReactNode } from 'react'
 import { SeoMetadata, StrapiImageType } from '../lib/api/strapi/types'
 import { CommonProps } from './homepage'
 
@@ -51,7 +50,7 @@ export interface PricingPlanData {
   items_disabled: Array<PlanBullet>
   actionButton: pricingActionButton
   seo: SeoMetadata
-  cloudProvider: 'aws' | 'gcp' | 'acp'
+  cloudProvider: 'aws' | 'gcp' | 'acp' | 'azure'
 }
 
 interface PhilosophyColumn {

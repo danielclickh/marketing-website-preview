@@ -11,22 +11,20 @@
     },
     {
         "id": 20,
-        "title": "Highlight.io",
-        "logo": "/images/use-cases/logging/logo-highlight.svg",
-        "content": "Now, our customers can search through months of browser and server-side log data in under a second thanks to the tech behind ClickHouse.",
-        "href": "/blog/overview-of-highlightio",
+        "title": "didi",
+        "logo": "/images/didi-logo-white.svg",
+        "content": "Migrating logs from Elasticsearch to ClickHouse has not only significantly reduced storage costs but also provided us with a faster querying experience.",
+        "href": "/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system",
         "target": "_blank",
-        "imgWidth": 153,
+        "imgWidth": 110,
         "imgHeight": 30
     },
     {
         "id": 30,
-        "logo": "/images/use-cases/logging/logo-uber.svg",
-        "title": "Uber",
-        "content": "The platform is ingesting millions of logs per second from thousands of services across regions, storing several PBs worth, and serving hundreds of queries per second from both dashboards and programs.",
-        "href": "https://www.uber.com/blog/logging",
-        "target": "_blank",
-        "imgWidth": 74,
-        "imgHeight": 26
+        "title": "Sony",
+        "logo": "/images/sony.svg",
+        "content": "At Sony Entertainment Television, we ingest tens of millions of CDN records into ClickHouse Cloud and run millions of queries against them daily. This allows our operations team to monitor the delivery of our content in real-time, and analyze/investigate potential issues the moment they arise. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.",
+        "imgWidth": 80,
+        "imgHeight": 17
     }
 ]
