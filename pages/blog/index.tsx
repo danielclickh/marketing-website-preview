@@ -12,11 +12,7 @@ import { useDebounce } from '../../hooks'
 import { findOne } from '../../lib/api/strapi'
 import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import {
-  BlogApiResponse,
-  BlogPost as BlogPostType,
-  BlogProps
-} from '../../types/blogs'
+import { BlogApiResponse, BlogProps } from '../../types/blogs'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
@@ -50,7 +46,7 @@ export default function BlogsPage({
 
   const router = useRouter()
 
-  const container = useRef<HTMLDivElement>(null)
+  const scrollToContainer = useRef<HTMLDivElement>(null)
   const [loading, setLoading] = useState<boolean>(false)
 
   const [response, setResponse] = useState<null | BlogApiResponse>(null)
@@ -64,11 +60,13 @@ export default function BlogsPage({
     BlogApiResponse['params']['category']
   >(response ? response.params.category : null)
 
+  const currentPage = page > 1 ? page : 1
+
   const featuredBlog = response?.data?.featured || null
   const blogs = response?.data?.blogs || []
   const categories = response?.data?.categories || {}
-  const hasPrevPage = response && page > 1
-  const hasNextPage = response && page < response.pagination.pageCount
+  const hasPrevPage = response && currentPage > 1
+  const hasNextPage = response && currentPage < response.pagination.pageCount
 
   const categoryList = Object.entries(categories).map(([slug, label]) => ({
     text: label,
@@ -93,9 +91,37 @@ export default function BlogsPage({
     setSearch(e.target.value)
   }
 
+  const pagination = (
+    page: number,
+    totalPages: number,
+    display: number = 5,
+    ellipsis = '…'
+  ) => {
+    const { floor, min, max } = Math
+    const range = (lo: number, hi: number) =>
+      Array.from({ length: hi - lo }, (_, i) => i + lo)
+    const start = max(
+      1,
+      min(page - floor((display - 3) / 2), totalPages - display + 2)
+    )
+    const end = min(
+      totalPages,
+      max(page + floor((display - 2) / 2), display - 1)
+    )
+    return [
+      ...(start > 2 ? [1, ellipsis] : start > 1 ? [1] : []),
+      ...range(start, end + 1),
+      ...(end < totalPages - 1
+        ? [ellipsis, totalPages]
+        : end < totalPages
+        ? [totalPages]
+        : [])
+    ]
+  }
+
   const backToTop = () => {
     setTimeout(() => {
-      container.current?.scrollIntoView({
+      scrollToContainer.current?.scrollIntoView({
         behavior: 'smooth'
       })
     })
@@ -124,7 +150,7 @@ export default function BlogsPage({
 
       // Build query
       const params = new URLSearchParams()
-      if (page) params.set('page', page.toString())
+      if (page && page > 1) params.set('page', page.toString())
       if (search) params.set('search', search)
       if (category) params.set('category', category)
 
@@ -150,11 +176,11 @@ export default function BlogsPage({
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div
-        className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:mb-16 lg:pt-20'
-        ref={container}>
+      <div className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:mb-16 lg:pt-20'>
         <SuiTitle type='h1'>{title}</SuiTitle>
-        {page > 1 && <p className='text-neutral-300'>Page {page}</p>}
+        {currentPage > 1 && (
+          <p className='text-neutral-300'>Page {currentPage}</p>
+        )}
       </div>
       {featuredBlog && (
         <>
@@ -214,7 +240,9 @@ export default function BlogsPage({
         </>
       )}
 
-      <div className='container mx-auto max-w-7xl px-8 pt-8 2xl:px-0'>
+      <div
+        className='container mx-auto max-w-7xl px-8 pt-8 2xl:px-0'
+        ref={scrollToContainer}>
         <div className='flex-col items-center pb-8 lg:flex lg:flex-row lg:justify-between lg:space-x-24'>
           <SuiSearchField
             placeholder='Search by title or keyword...'
@@ -249,7 +277,7 @@ export default function BlogsPage({
             </div>
 
             {(hasPrevPage || hasNextPage) && (
-              <div className='my-8 flex items-center justify-center gap-8'>
+              <div className='my-8 flex items-center justify-center gap-3'>
                 <CUIButton
                   type='primary-dark'
                   className={`group !border-primary-300/50 ${
@@ -259,7 +287,8 @@ export default function BlogsPage({
                   }`}
                   onClick={() => {
                     if (hasPrevPage) {
-                      setPage(page - 1)
+                      setLoading(true)
+                      setPage(currentPage - 1)
                       backToTop()
                     }
                   }}>
@@ -268,6 +297,34 @@ export default function BlogsPage({
                   </span>
                   Prev
                 </CUIButton>
+                {response &&
+                  pagination(page, response.pagination.pageCount).map(
+                    (item) => {
+                      const isEllipsis = typeof item === 'string'
+                      const isActive = currentPage === item
+                      return (
+                        <div className='!hidden md:!inline-block'>
+                          {isEllipsis && <span>{item}</span>}
+                          {!isEllipsis && (
+                            <CUIButton
+                              type={isActive ? 'primary' : 'primary-dark'}
+                              className={
+                                isActive
+                                  ? ''
+                                  : '!border-primary-300/50 hover:!border-primary-400'
+                              }
+                              onClick={() => {
+                                setLoading(true)
+                                setPage(item)
+                                backToTop()
+                              }}>
+                              {item}
+                            </CUIButton>
+                          )}
+                        </div>
+                      )
+                    }
+                  )}
                 <CUIButton
                   type='primary-dark'
                   className={`group !border-primary-300/50 ${
@@ -277,7 +334,8 @@ export default function BlogsPage({
                   }`}
                   onClick={() => {
                     if (hasNextPage) {
-                      setPage(page + 1)
+                      setLoading(true)
+                      setPage(currentPage + 1)
                       backToTop()
                     }
                   }}>
