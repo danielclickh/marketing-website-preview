@@ -1,22 +1,23 @@
-import { GetStaticProps } from 'next'
+import {GetStaticProps} from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React, {useEffect} from 'react'
 import Tilt from 'react-parallax-tilt'
 import AccordionComponent from '../../../components/BusinessIntelligenceDiagram/Accordion'
-import { CUIButton } from '../../../components/ClickUI'
+import {CUIButton} from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
-import { SuiText, SuiTitle } from '../../../components/sui'
-import { findOne } from '../../../lib/api/strapi'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { CommonProps } from '../../../types/homepage'
+import {SuiText, SuiTitle} from '../../../components/sui'
+import {findOne} from '../../../lib/api/strapi'
+import {getCommonProps} from '../../../lib/utils/getCommonProps'
+import {CommonProps} from '../../../types/homepage'
 import bigNumbers from './big-numbers.json'
 import features from './features.json'
 import quotes from './quotes.json'
 import references from './supporting-references.json'
+import {galaxyOnPage} from "../../../lib/galaxy/galaxy";
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
@@ -57,6 +58,7 @@ export default function RealTimeAnalyticsPage({
   headerData,
   footerData
 }: RealTimeAnalyticsPageProps) {
+  galaxyOnPage('bizIntelUseCasePage');
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {

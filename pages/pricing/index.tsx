@@ -1,22 +1,16 @@
-import React from 'react'
-import Markdown from '../../components/Markdown'
-import PricingOptions from '../../components/PricingOptions'
-import { SuiTitle } from '../../components/sui'
-import { findAll, findOne } from '../../lib/api/strapi'
-import {
-  PricingData,
-  PricingPageProps,
-  PricingPlanData,
-  RegionPricing
-} from '../../types/pricing'
-import styles from './Pricing.module.scss'
-import { GetStaticProps } from 'next'
-import Layout from '../../components/Layout'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { CUIButton } from '../../components/ClickUI'
-import HRSeparator from '../../components/HRSeparator'
-import philosophy from './philosophy.json'
+import {GetStaticProps} from 'next'
 import Image from 'next/image'
+import React from 'react'
+import {CUIButton} from '../../components/ClickUI'
+import Layout from '../../components/Layout'
+import Markdown from '../../components/Markdown'
+import {PricingCalculator} from '../../components/PricingCalculator'
+import {SuiTitle} from '../../components/sui'
+import {findAll, findOne} from '../../lib/api/strapi'
+import {getCommonProps} from '../../lib/utils/getCommonProps'
+import {PricingData, PricingPageProps, PricingPlanData, RegionPricing} from '../../types/pricing'
+import philosophy from './philosophy.json'
+import {galaxyOnPage} from "../../lib/galaxy/galaxy";
 
 export const getStaticProps: GetStaticProps<PricingPageProps> =
   async function getStaticProps() {
@@ -94,6 +88,9 @@ function PricingPage({
   headerData,
   footerData
 }: PricingPageProps) {
+
+    galaxyOnPage('pricingPage');
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pricing h-full text-neutral-0'>
@@ -108,25 +105,25 @@ function PricingPage({
                   <div className='mt-6 text-neutral-200'>
                     {hero.description}
                   </div>
-                  {meteredPricing && pricingByRegion.length > 0 && (
-                    <PricingOptions
-                      pricingByRegion={pricingByRegion}
-                      cloudProviders={cloudProviders}
-                      pricingPlans={pricingPlans}
-                      meteredPricing={meteredPricing}
-                    />
-                  )}
                 </div>
               </div>
             )}
           </div>
-          <div className='clip-inverted-triangle bg-shadow-element pt-10 pb-60'>
-            <HRSeparator className='max-w-[384px] pb-10' />
-            <Markdown className={styles.richTextLink}>
-              {hero.openSourceLink}
-            </Markdown>
+          <div className='pb-16'>
+            <div className='mx-auto max-w-7xl px-4 sm:px-8 xl:px-0'>
+              {pricingByRegion.length > 0 && (
+                <PricingCalculator
+                  hero={hero}
+                  meteredPricing={meteredPricing}
+                  pricingByRegion={pricingByRegion}
+                  cloudProviders={cloudProviders}
+                  pricingPlans={pricingPlans}
+                />
+              )}
+            </div>
           </div>
-          <div className='philosophy bg-primary-300 text-neutral-900'>
+          <div className='clip-inverted-triangle bg-shadow-element pt-10 pb-60'></div>
+          <div className='philosophy -mt-1 bg-primary-300 text-neutral-900'>
             <div className='flip-selection mx-auto max-w-7xl px-4 pb-16 sm:px-8 2xl:px-0'>
               <SuiTitle
                 type='h2'

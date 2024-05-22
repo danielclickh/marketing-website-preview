@@ -1,24 +1,25 @@
-import { GetStaticProps } from 'next'
+import {GetStaticProps} from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React, {useEffect} from 'react'
 import Tilt from 'react-parallax-tilt'
-import { CUIButton } from '../../../components/ClickUI'
+import {CUIButton} from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
 import AccordionComponent from '../../../components/RealTimeDiagram/Accordion'
 import Feature from '../../../components/RealTimeDiagram/feature-check'
-import { SuiText, SuiTitle } from '../../../components/sui'
-import { findOne } from '../../../lib/api/strapi'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { CommonProps } from '../../../types/homepage'
+import {SuiText, SuiTitle} from '../../../components/sui'
+import {findOne} from '../../../lib/api/strapi'
+import {getCommonProps} from '../../../lib/utils/getCommonProps'
+import {CommonProps} from '../../../types/homepage'
 import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import faqs from './faqs.json'
 import features from './features.json'
 import quotes from './quotes.json'
+import {galaxyOnPage} from "../../../lib/galaxy/galaxy";
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
@@ -59,6 +60,7 @@ export default function RealTimeAnalyticsPage({
   headerData,
   footerData
 }: RealTimeAnalyticsPageProps) {
+  galaxyOnPage('realTimeUseCasePage');
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
@@ -226,7 +228,7 @@ export default function RealTimeAnalyticsPage({
                                 className='mb-4 block'
                               />
                               <Markdown
-                                className='min-h-auto text-left xl:min-h-[250px]'
+                                className='min-h-auto text-left xl:min-h-[280px]'
                                 children={quote.content}
                               />
                               <Image

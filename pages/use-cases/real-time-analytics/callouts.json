@@ -21,6 +21,6 @@
         "id": 40,
         "title": "Scale effortlessly",
         "content": "ClickHouse scales both vertically and horizontally to meet the demands of any workload - read and write - to systems with hundreds of cores and petabytes of storage. ClickHouse provides the scalability you need to effortlessly handle increasing data volumes and workloads over time.",
-        "icon": "/images/use-cases/ml-and-ds/tools.svg"
+        "icon": "/images/use-cases/real-time-analytics/trend-up-light.svg"
     }
 ]

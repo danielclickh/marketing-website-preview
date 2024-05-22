@@ -1,22 +1,43 @@
+import { Experiment, Result } from '@growthbook/growthbook'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
+import { Galaxy } from '../../lib/galaxy/web/browser'
 
 type UTMs = {
   [key: string]: string
 }
 
-const UTMPersist = () => {
-  const router = useRouter()
-
-  const updateLinks = () => {
-    const links = Array.from(document.querySelectorAll('a'))
-    for (const link of links) {
-      if (link.hostname.includes('.cloud')) {
-        const updatedURL = appendUTMsToLink(link.href)
-        link.href = updatedURL
+export const updateLinks = (
+  experimentId?: string,
+  variationId?: string,
+  target?: string
+) => {
+  let links = Array.from(document.querySelectorAll('a'))
+  if (target) {
+    links = Array.from(document.querySelectorAll(`${target} a`))
+  }
+  for (const link of links) {
+    if (link.hostname.includes('.cloud')) {
+      link.href = appendUTMsToLink(link.href)
+      link.href = appendGalaxySessionIDToLink(link.href)
+      if (experimentId && variationId) {
+        link.href = appendExperimentToLink(link.href, experimentId, variationId)
       }
     }
   }
+}
+
+export const onExperimentViewed = (
+  experiment: Experiment<any>,
+  result: Result<any>
+) => {
+  const experimentId = experiment.key
+  const variationId = result.key
+  updateLinks(experimentId, variationId)
+}
+
+const UTMPersist = () => {
+  const router = useRouter()
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
@@ -67,6 +88,18 @@ export function appendUTMsToLink(url: string): string {
   return urlObject.toString()
 }
 
+export function appendGalaxySessionIDToLink(url: string): string {
+  const galaxy_id = Galaxy.getGalaxySessionId()
+  const urlObject = new URL(url)
+
+  // Append galaxy session id to links that contain ".cloud"
+  if (galaxy_id) {
+    urlObject.searchParams.set('glxid', galaxy_id)
+  }
+
+  return urlObject.toString()
+}
+
 // Utility function to retrieve UTMs from localStorage
 function getUTMsFromStorage(): UTMs | null {
   const utms = localStorage.getItem('ch-utms')
@@ -97,4 +130,39 @@ function storeUTMsInStorage(utms: UTMs) {
     timestamp: expirationTime.getTime()
   }
   localStorage.setItem('ch-utms', JSON.stringify(data))
+}
+
+// Function to append experiment and variation to link
+function appendExperimentToLink(
+  url: string,
+  experimentId: string,
+  variationId: string
+): string {
+  const urlObject = new URL(url)
+
+  // Retrieve existing experiments and parse them into an object
+  const experimentsQuery = urlObject.searchParams.get('experiments')
+
+  let experiments: Record<string, string> = experimentsQuery
+    ? experimentsQuery
+        .split(',')
+        .reduce((acc: Record<string, string>, curr: string) => {
+          const [id, variation] = curr.split(':')
+          acc[id] = variation
+          return acc
+        }, {})
+    : {}
+
+  // Update the experiments object with the new experiment and variation
+  experiments[experimentId] = variationId
+
+  // Convert the experiments object back into a query string
+  const newExperimentsQuery = Object.entries(experiments)
+    .map(([id, variation]) => `${id}:${variation}`)
+    .join(',')
+
+  // Set the updated experiments query back on the URL
+  urlObject.searchParams.set('experiments', newExperimentsQuery)
+
+  return urlObject.toString()
 }

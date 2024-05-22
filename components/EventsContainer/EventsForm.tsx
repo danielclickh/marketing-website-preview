@@ -1,113 +1,32 @@
-import React, { useState } from 'react'
-import { submitWorkatoForm } from '../../lib/api/workato'
-import { validateEmail } from '../../lib/form'
-import BulletPoint from '../BulletPoint'
-import { SuiButton, SuiPanel, SuiTextField, useSnackbar } from '../sui/client'
-import { EventsFormProps } from './types'
-import Image from 'next/image'
 import { CheckCircleIcon } from '@heroicons/react/outline'
+import Image from 'next/image'
+import React, { useRef, useState } from 'react'
 import CopyUrlButton from '../CopyUrlButton'
+import MarketoForm from '../MarketoForm'
 import SocialButton from '../SocialButton'
+import { SuiPanel } from '../sui/client'
+import VideoPlayerCustom from '../VideoPlayerCustom'
+import { EventsFormProps } from './types'
 
 function EventsForm({
-  submitted,
-  onSubmit: onSubmitProp,
   featuredImage,
-  form
+  form,
+  recordedVimeoUrl = ''
 }: EventsFormProps) {
-  const { openSnackBar } = useSnackbar()
-  const [firstName, setFirstName] = useState<string>()
-  const [lastName, setLastName] = useState<string>()
-  const [email, setEmail] = useState<string>()
-  const [loading, setLoading] = useState(false)
-  const { type, firstNameLabel, lastNameLabel, emailLabel, submitButtonLabel } =
-    form
-  const onChange = (e: any) => {
-    const value = e.target.value ?? ''
-    const name = e.target.name
-    switch (name) {
-      case 'firstName':
-        setFirstName(value)
-        break
+  const { submitButtonLabel } = form
 
-      case 'lastName':
-        setLastName(value)
-        break
-
-      case 'email':
-        setEmail(value)
-        break
-
-      default:
-        break
-    }
-  }
-
-  const onSubmit = async () => {
-    if (loading) {
-      return
-    }
-
-    const fillAll = 'Please fill in all the required fields'
-    const invalidEmail = 'Please enter a valid e-mail address'
-    let response
-    if (type === 'eventRegistration') {
-      if (
-        !firstName ||
-        !lastName ||
-        !email ||
-        firstName.length === 0 ||
-        lastName.length === 0 ||
-        email.length === 0
-      ) {
-        openSnackBar(fillAll, 'error')
-        return
-      }
-
-      if (!validateEmail(email)) {
-        openSnackBar(invalidEmail, 'error')
-        return
-      }
-
-      setLoading(true)
-      response = await submitWorkatoForm('eventRegistration', {
-        firstName,
-        lastName,
-        email
-      })
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
+  const checkVimeoCode = (video: string) => {
+    const regex = /\/video\/(\d+)/
+    const match = video?.match(regex)
+    if (match) {
+      return match[1]
     } else {
-      if (!email || email.length === 0) {
-        openSnackBar(fillAll, 'error')
-        return
-      }
-      if (!validateEmail(email)) {
-        openSnackBar(invalidEmail, 'error')
-        return
-      }
-
-      setLoading(true)
-      response = await submitWorkatoForm('recordedGatedContent', {
-        email
-      })
-    }
-
-    const userId = response?.cloudId ? response.cloudId : email
-
-    openSnackBar('Thank you, you have been registered to the event', 'success')
-    setEmail(undefined)
-    if (type === 'eventRegistration') {
-      setFirstName(undefined)
-      setLastName(undefined)
-    }
-    setLoading(false)
-    onSubmitProp()
-  }
-  const onKeyDown = (e: any) => {
-    if (e.key === 'Enter') {
-      onSubmit()
+      return video
     }
   }
-
   return (
     <div className='ml-auto w-full lg:max-w-lg'>
       {featuredImage && (
@@ -126,13 +45,34 @@ function EventsForm({
         shadow
         padding='xl'
         className='w-full border border-neutral-800'>
-        {submitted ? (
-          <div className='subscribed'>
+        {!formSuccess && (
+          <MarketoForm
+            formId={'1127'}
+            onLoad={() => setFormLoaded(true)}
+            clearbitTracking={true}
+            onSuccess={() => {
+              setFormSuccess(true)
+              // Delay needed to allow the ref to update before scrolling
+              setTimeout(() => {
+                formSuccessRef.current?.scrollIntoView({
+                  behavior: 'smooth'
+                })
+              }, 10)
+
+              return false // Stops page from reloading
+            }}
+          />
+        )}
+
+        {!formLoaded && <div className='text-center'>Loading form...</div>}
+
+        {formSuccess && (
+          <div className='subscribed' ref={formSuccessRef}>
             <div className='success-container text-center'>
               <CheckCircleIcon className='mx-auto mb-4 h-16 w-16 stroke-1 text-primary-300' />
               <p className='mb-12 px-10 text-xl font-bold'>
                 {form.type === 'recordedGatedContent' ? (
-                  <>Thanks for registering!</>
+                  <>Thanks for registering! </>
                 ) : submitButtonLabel === 'Request your spot' ? (
                   <>
                     Thanks for your interest, we'll be in touch to let you know
@@ -142,6 +82,23 @@ function EventsForm({
                   <>You've been successfully registered. See you there!</>
                 )}
               </p>
+              {form.type === 'recordedGatedContent' && (
+                <div className='my-10' id='custom-video-container-player'>
+                  <p className='mb-4'>Watch the recording below</p>
+                  <VideoPlayerCustom
+                    fullWidth={true}
+                    videos={[
+                      {
+                        videoId: checkVimeoCode(recordedVimeoUrl),
+                        type: 'vimeo',
+                        vimeoCode: '979264b085',
+                        image: featuredImage?.url
+                      }
+                    ]}
+                  />
+                </div>
+              )}
+
               <p className='mb-2 px-10 text-base font-semibold text-neutral-300'>
                 {form.type == 'recordedGatedContent' ? (
                   <>Share the recording</>
@@ -156,70 +113,6 @@ function EventsForm({
                 ))}
               </div>
             </div>
-          </div>
-        ) : (
-          <div>
-            {type === 'eventRegistration' && (
-              <>
-                <SuiTextField
-                  htmlFor='firstName'
-                  name='firstName'
-                  label={firstNameLabel}
-                  value={firstName ?? ''}
-                  onChange={onChange}
-                  onBlur={onChange}
-                  className='mb-6 w-full'
-                  error={
-                    typeof firstName === 'string' && firstName.length === 0
-                      ? 'Invalid First Name'
-                      : ''
-                  }
-                />
-                <SuiTextField
-                  htmlFor='lastName'
-                  name='lastName'
-                  label={lastNameLabel}
-                  value={lastName ?? ''}
-                  onChange={onChange}
-                  onBlur={onChange}
-                  className='mb-6 w-full'
-                  error={
-                    typeof lastName === 'string' && lastName.length === 0
-                      ? 'Invalid Last Name'
-                      : ''
-                  }
-                />
-              </>
-            )}
-            <SuiTextField
-              htmlFor='email'
-              name='email'
-              label={emailLabel}
-              value={email ?? ''}
-              onKeyDown={onKeyDown}
-              onChange={onChange}
-              onBlur={onChange}
-              className='mb-6 w-full'
-              error={
-                typeof email === 'undefined'
-                  ? undefined
-                  : email.length === 0
-                  ? 'E-mail address cannot be empty'
-                  : validateEmail(email)
-                  ? ''
-                  : 'Invalid E-mail address'
-              }
-            />
-            <SuiButton
-              disabled={loading}
-              type='primary'
-              className='rounded-md hover:translate-y-0 hover:bg-primary-400 hover:no-underline'
-              onClick={onSubmit}>
-              {submitButtonLabel == 'Register to event' ||
-              submitButtonLabel == 'Register for event'
-                ? 'Register now'
-                : submitButtonLabel}
-            </SuiButton>
           </div>
         )}
       </SuiPanel>

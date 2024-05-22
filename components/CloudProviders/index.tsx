@@ -32,7 +32,7 @@ function CloudProviders({
                     : 'grid h-16 place-items-center rounded border border-neutral-700/80  bg-neutral-900 '
                 }  `}>
                 {darkIconPng.name === 'logo_aws_dark.svg' ? (
-                  <Link href='/partners/aws'>
+                  <Link href='/pricing?provider=aws'>
                     <StrapiImage
                       key={`${cloudProvider.title}-${index}`}
                       {...darkIconPng}
@@ -42,30 +42,28 @@ function CloudProviders({
                     />
                   </Link>
                 ) : darkIconPng.name === 'google_cloud_dark.svg' ? (
-                  <>
+                  <Link href='/pricing?provider=gcp'>
                     <StrapiImage
                       key={`${cloudProvider.title}-${index}`}
                       {...darkIconPng}
                       className={`h-10 w-auto ${parentIndex !== 0 ? '' : ''}`}
                     />
-                  </>
+                  </Link>
                 ) : (
-                  <>
+                  <Link href='/pricing?provider=azure'>
                     <StrapiImage
                       key={`${cloudProvider.title}-${index}`}
                       {...darkIconPng}
-                      className={`h-10 w-auto ${
-                        parentIndex !== 0 ? 'opacity-25' : ''
-                      }`}
+                      className={`h-10 w-auto `}
                     />
                     <SuiText
                       size='xs'
                       weight='medium'
                       color='secondary'
-                      className='absolute -top-1 -right-3.5 rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
-                      Soon
+                      className='absolute -right-3 -top-1 rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
+                      Beta
                     </SuiText>
-                  </>
+                  </Link>
                 )}
               </div>
             ))}

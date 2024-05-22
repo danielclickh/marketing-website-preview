@@ -15,4 +15,5 @@ export interface EventsFormProps {
   onSubmit: () => void
   featuredImage?: StrapiImage
   form: EventForm
+  recordedVimeoUrl?: string
 }

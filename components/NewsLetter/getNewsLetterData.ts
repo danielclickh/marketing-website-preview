@@ -5,7 +5,7 @@ let newsLetterData: NewsLetterData | null = null
 
 export async function fetchNewsLetterData(): Promise<NewsLetterData> {
   newsLetterData = await findOne('newsletter-form', {
-    populate: ['*']
+    populate: '*'
   })
 
   return newsLetterData as NewsLetterData

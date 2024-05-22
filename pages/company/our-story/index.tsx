@@ -1,18 +1,18 @@
-import { SuiText, SuiTitle } from '../../../components/sui'
-import { Person } from '../../../components/person_area'
-import { findOne } from '../../../lib/api/strapi'
-import { StrapiImage } from '../../../components/StrapiElements'
+import {SuiText, SuiTitle} from '../../../components/sui'
+import {Person} from '../../../components/person_area'
+import {findOne} from '../../../lib/api/strapi'
+import {StrapiImage} from '../../../components/StrapiElements'
 import founders from './founders.json'
 import investors from './investors.json'
-import { OurStoryData } from '../../../types/ourStory'
+import {OurStoryData} from '../../../types/ourStory'
 import Layout from '../../../components/Layout'
-import { GetStaticProps } from 'next'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import {GetStaticProps} from 'next'
+import {getCommonProps} from '../../../lib/utils/getCommonProps'
 import Image from 'next/image'
-import { ArrowRightIcon, ChevronRightIcon } from '@heroicons/react/solid'
-import Link from 'next/link'
+import {ChevronRightIcon} from '@heroicons/react/solid'
 import styles from './styles.module.scss'
-import { CUIButton } from '../../../components/ClickUI'
+import {CUIButton} from '../../../components/ClickUI'
+import {galaxyOnPage} from '../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<OurStoryData> =
   async function getStaticProps() {
@@ -52,6 +52,9 @@ export default function OurStoryPage({
   headerData,
   seo
 }: OurStoryData) {
+
+  galaxyOnPage('ourStoryPage');
+
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>

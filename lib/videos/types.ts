@@ -1,11 +1,19 @@
+import { SeoMetadata } from '../api/strapi/types'
+
 export type VideoCategory = string
 
+export type VideoCategoryRecord = Record<string, VideoCategory>
+
 export interface Video {
-  slug: string,
-  title: string,
-  subTitle?: string,
-  description: string,
-  thumbnail: string,
-  embed: string,
+  id: number
+  slug: string
+  title: string
+  subTitle?: string
+  description: string
+  thumbnail: string
+  socialImage?: string
+  embed: string
   categories: VideoCategory[]
+  related: Array<Video['id']>
+  seo: Omit<SeoMetadata, 'path'>
 }

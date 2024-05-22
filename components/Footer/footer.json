@@ -32,6 +32,12 @@
 				"name": "Download",
 				"href": "https://clickhouse.com/docs/en/install#self-managed-install",
 				"target": "_blank"
+			},
+			{
+				"id": 123,
+				"name": "Real-time Data Warehouse",
+				"href": "/real-time-data-warehouse",
+				"target": "_self"
 			}
 		]
 	},
@@ -79,6 +85,12 @@
 				"id": 20,
 				"name": "Videos",
 				"href": "/videos",
+				"target": "_self"
+			},
+			{
+				"id": 21,
+				"name": "Lexicon",
+				"href": "/lexicon",
 				"target": "_self"
 			},
 			{

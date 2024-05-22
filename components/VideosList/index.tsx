@@ -1,67 +1,117 @@
 import { useRouter } from 'next/router'
-import { ChangeEvent, useEffect, useState } from 'react'
-import { getVideos, getCategories, getCategory } from '../../lib/videos'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import {
+  Video,
+  VideoCategory,
+  VideoCategoryRecord
+} from '../../lib/videos/types'
+import { CUIButton } from '../ClickUI'
 import { SuiSearchField } from '../sui'
 import CategorySelector from '../CategorySelector'
 import VideoCard from '../VideoCard'
 
-export default function VideosList() {
+const VIDEOS_PER_PAGE = 9
 
+export default function VideosList({
+  videos,
+  categories
+}: {
+  videos: Video[]
+  categories: VideoCategoryRecord
+}) {
   const router = useRouter()
 
-  const [category, setCategory] = useState<string|null>(null)
-  const [search, setSearch] = useState<string|null>(null)
+  const container = useRef<HTMLDivElement>(null)
+  const [category, setCategory] = useState<string | null>(null)
+  const [search, setSearch] = useState<string | null>(null)
+  const [page, setPage] = useState<number>(0)
 
-  const searchChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value.trim().toLowerCase())
+  const getCategory = (slug: string) => categories?.[slug] || null
 
-  const videoList = (() => {
-    let results = getVideos();
-    const categoryName = category ? getCategory(category) : false;
+  const searchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPage(0)
+    setSearch(e.target.value.trim().toLowerCase())
+  }
+
+  let videoList = (() => {
+    let results = structuredClone(videos)
+    const categoryName = category ? getCategory(category) : false
 
     if (categoryName) {
-      results = results.filter(video => video.categories.includes(categoryName))
+      results = results.filter((video) =>
+        video.categories.includes(categoryName)
+      )
     }
 
     if (search) {
-      results = results.filter(video => {
+      results = results.filter((video) => {
         const inTitle = video.title.toLowerCase().includes(search)
-        const inSubTitle = (video?.subTitle || '').toLowerCase().includes(search)
+        const inSubTitle = (video?.subTitle || '')
+          .toLowerCase()
+          .includes(search)
         return inTitle || inSubTitle
       })
     }
-
     return results
   })()
+
+  const totalPages = Math.floor(videoList.length / VIDEOS_PER_PAGE)
+  const hasPrevPage = page > 0
+  const hasNextPage = page < totalPages
+
+  const backToTop = () => {
+    setTimeout(() => {
+      container.current?.scrollIntoView({
+        behavior: 'smooth'
+      })
+    })
+  }
+
+  // Apply pagination
+  if (page > 0 && page <= totalPages) {
+    const pageStart = page * VIDEOS_PER_PAGE - 1
+    const pageEnd = pageStart + VIDEOS_PER_PAGE
+    videoList = videoList.slice(pageStart, pageEnd)
+  } else {
+    videoList = videoList.slice(0, VIDEOS_PER_PAGE)
+  }
 
   const categoryList = [
     {
       text: 'View all',
       selected: !category,
       onClick() {
+        setPage(0)
         setCategory(null)
       }
     }
-  ];
+  ]
 
   // Push categories to list
-  getCategories().forEach((name, slug) => {
+  Object.entries(categories).forEach(([slug, name]) => {
     categoryList.push({
       text: name,
       selected: slug === category,
       onClick() {
+        setPage(0)
         setCategory(slug)
       }
     })
-  });
+  })
 
   // Load values from query string
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search)
     const urlCategory = queryParams.get('category')
     const urlSearch = queryParams.get('search')
+    const urlPage = parseInt(queryParams.get('page') || '')
 
     // Check the url category is valid using the `getCategory` function
-    if (urlCategory && String(urlCategory).trim().length && getCategory(String(urlCategory).trim())) {
+    if (
+      urlCategory &&
+      String(urlCategory).trim().length &&
+      getCategory(String(urlCategory).trim())
+    ) {
       setCategory(urlCategory)
     }
 
@@ -69,38 +119,51 @@ export default function VideosList() {
     if (urlSearch && String(urlSearch).trim().length) {
       setSearch(urlSearch)
     }
+
+    // Check the page number is not empty
+    if (!isNaN(urlPage) && urlPage >= 0 && urlPage <= totalPages) {
+      setPage(urlPage)
+    }
   }, [router])
 
   // Update query string values
   useEffect(() => {
-    const queryParams = [];
+    const queryParams = []
 
-    if (category && getCategory(category)) {
-      queryParams.push(`category=${encodeURIComponent(category)}`);
+    if (category) {
+      queryParams.push(`category=${encodeURIComponent(category)}`)
     }
 
     if (search) {
-      queryParams.push(`search=${encodeURIComponent(search)}`);
+      queryParams.push(`search=${encodeURIComponent(search)}`)
+    }
+
+    if (page) {
+      queryParams.push(`page=${encodeURIComponent(page)}`)
     }
 
     if (queryParams.length) {
-      router.push('/videos?' + queryParams.join('&'), undefined, { shallow: true })
+      router.push('/videos?' + queryParams.join('&'), undefined, {
+        shallow: true
+      })
     } else {
       router.push('/videos', undefined, { shallow: true })
     }
-  }, [category, search]);
+  }, [category, search, page])
 
   return (
     <>
-      <div className='max-w-7xl container mx-auto px-8 2xl:px-0 pt-8'>
-
-        <div className='flex-col lg:flex lg:flex-row lg:justify-between items-center pb-8 lg:space-x-24'>
+      <div
+        className='container mx-auto max-w-7xl px-8 pt-8 2xl:px-0'
+        ref={container}>
+        <div className='flex-col items-center pb-8 lg:flex lg:flex-row lg:justify-between lg:space-x-24'>
           <SuiSearchField
             placeholder='Search by title or keyword...'
             htmlFor='search'
-            className='lg:flex-1 mb-6 lg:mb-0'
+            className='mb-6 lg:mb-0 lg:flex-1'
             value={search || ''}
-            onChange={searchChange}/>
+            onChange={searchChange}
+          />
           <CategorySelector options={categoryList} />
         </div>
 
@@ -114,13 +177,55 @@ export default function VideosList() {
           })}
         </div>
 
-        {!videoList.length && (
-          <p className='text-center w-full mt-12'>
-            {search ? `No search results for "${search}"` : 'No results'}
-            {category && getCategory(category) ? ` in ${getCategory(category)}` : ''}
-          </p>
+        {(hasPrevPage || hasNextPage) && (
+          <div className='my-8 flex items-center justify-center gap-8'>
+            <CUIButton
+              type='primary-dark'
+              className={`group !border-primary-300/50 ${
+                !hasPrevPage
+                  ? 'pointer-events-none opacity-40'
+                  : 'hover:!border-primary-400'
+              }`}
+              onClick={() => {
+                if (hasPrevPage) {
+                  setPage(page - 1)
+                  backToTop()
+                }
+              }}>
+              <span className='tanslate-x-0 mr-2 inline-block transition-transform group-hover:-translate-x-1'>
+                &lt;-
+              </span>
+              Prev
+            </CUIButton>
+            <CUIButton
+              type='primary-dark'
+              className={`group !border-primary-300/50 ${
+                !hasNextPage
+                  ? 'pointer-events-none opacity-40'
+                  : 'hover:!border-primary-400'
+              }`}
+              onClick={() => {
+                if (hasNextPage) {
+                  setPage(page + 1)
+                  backToTop()
+                }
+              }}>
+              Next{' '}
+              <span className='tanslate-x-0 ml-2 inline-block transition-transform group-hover:translate-x-1'>
+                -&gt;
+              </span>
+            </CUIButton>
+          </div>
         )}
 
+        {!videoList.length && (
+          <p className='mt-12 w-full text-center'>
+            {search ? `No search results for "${search}"` : 'No results'}
+            {category && getCategory(category)
+              ? ` in ${getCategory(category)}`
+              : ''}
+          </p>
+        )}
       </div>
     </>
   )

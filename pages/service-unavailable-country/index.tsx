@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { findOne } from '../../lib/api/strapi'
 import ServiceUnavailableForm from '../../components/ServiceUnavailableForm'
 import GetStarted from '../../components/GetStarted'
@@ -9,6 +9,8 @@ import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { ServiceProps } from '../../types/serviceUnavailablePage'
+import MarketoForm from '../../components/MarketoForm'
+import ReactMarkdown from 'react-markdown'
 
 export const getStaticProps: GetStaticProps<ServiceProps> =
   async function getStaticProps() {
@@ -18,6 +20,7 @@ export const getStaticProps: GetStaticProps<ServiceProps> =
     const response = await findOne('service-unavailable-country', params)
 
     const commonProps = await getCommonProps()
+
     return {
       props: {
         ...response.card,
@@ -43,6 +46,9 @@ function ServiceUnavailableCountryPage({
   headerData,
   seo
 }: ServiceProps) {
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='service_unavailable_country px-3'>
@@ -51,7 +57,7 @@ function ServiceUnavailableCountryPage({
           shadow
           isRounded
           className='mx-auto mt-16 mb-44 max-w-screen-sm px-6 py-10 text-center'>
-          <div className='flex flex-col items-center'>
+          <div className='flex flex-col'>
             <SuiTitle type='h1' className='mb-3'>
               {title}
             </SuiTitle>
@@ -62,17 +68,39 @@ function ServiceUnavailableCountryPage({
               className='mb-9'>
               {description}
             </SuiText>
-            <ServiceUnavailableForm {...contactForm} btnText={ctaButton.text}>
-              <SuiText
-                size='sm'
-                weight='normal'
-                color='secondary'
-                className='my-3 text-center'>
-                <Markdown className='disclaimer'>
-                  {contactForm.tosCheckboxRichText}
-                </Markdown>
-              </SuiText>
-            </ServiceUnavailableForm>
+            <>
+              {!formSuccess && (
+                <MarketoForm
+                  formId={'1034'}
+                  onLoad={() => setFormLoaded(true)}
+                  onSuccess={() => {
+                    setFormSuccess(true)
+
+                    // Delay needed to allow the ref to update before scrolling
+                    setTimeout(() => {
+                      formSuccessRef.current?.scrollIntoView({
+                        behavior: 'smooth'
+                      })
+                    }, 10)
+
+                    return false // Stops page from reloading
+                  }}
+                />
+              )}
+
+              {!formLoaded && (
+                <div className='text-center'>Loading form...</div>
+              )}
+
+              {formSuccess && (
+                <div ref={formSuccessRef}>
+                  <ReactMarkdown
+                    className='text-center'
+                    children='Thank you for submitting the form'
+                  />
+                </div>
+              )}
+            </>
           </div>
         </SuiPanel>
       </div>

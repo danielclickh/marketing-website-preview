@@ -4,15 +4,17 @@ import { CUILink } from '../ClickUI'
 import Image from 'next/image'
 import logoFull from '../../public/logo-full.svg'
 import topLevelFooterMenu from './footer.json'
+
 export default function Footer({
   newsletterForm,
   bottomLinks = []
 }: FooterData) {
+  const year = new Date()
   return (
     <div className='flex flex-col bg-neutral-900 pb-8 pt-16'>
       <div className='section-container mx-auto w-full justify-between gap-8 pb-11 md:flex lg:gap-10'>
         <div className='flex w-full flex-col'>
-          <div className='sitemap flex flex-col gap-y-8 lg:flex-row'>
+          <div className='sitemap flex flex-col gap-y-8 lg:flex-row lg:gap-x-3'>
             {topLevelFooterMenu.map((topMenu) => (
               <div key={topMenu.title} className='flex flex-col lg:w-4/12'>
                 <div className='mb-3 text-sm font-semibold text-neutral-0'>
@@ -44,18 +46,15 @@ export default function Footer({
           <div className='mb-4 text-sm text-neutral-400'>
             {newsletterForm?.description}
           </div>
-          <NewsLetterForm
-            emailLabel={newsletterForm.inputLabel}
-            submitButtonLabel={newsletterForm.buttonLabel}
-          />
+          <NewsLetterForm />
         </div>
       </div>
       <div className='section-container w-full border-t border-neutral-400 opacity-10 shadow-footer-line' />
       <div className='flex flex-col items-start pt-2 lg:pt-8'>
         <div className='section-container flex w-full flex-col items-center gap-3 pt-4 text-center text-sm text-neutral-400 sm:gap-1 md:flex-row md:justify-between md:pt-0 md:text-left'>
           <div>
-            &copy; 2023 ClickHouse, Inc. HQ in the Bay Area, CA and Amsterdam,
-            NL.
+            &copy; {year.getFullYear()} ClickHouse, Inc. HQ in the Bay Area, CA
+            and Amsterdam, NL.
           </div>
           <div className='bottom_links flex flex-wrap items-center justify-center gap-4'>
             {bottomLinks.map((bottomLink, index) => (

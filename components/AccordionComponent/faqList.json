@@ -1,0 +1,27 @@
+[
+  {
+    "id": "1",
+    "title": "Why should I use ClickHouse vs. X database?",
+    "content": "ClickHouse is faster than most traditional data warehouses and databases and is most often used when real-time queries on large datasets are necessary at an affordable cost. However, developers also often use ClickHouse on top of their CDWH or OLTP databases to act as a “speed layer” within their existing infrastructure."
+  },
+  {
+    "id": "2",
+    "title": "What is OLAP?",
+    "content": "OLAP stands for “online analytical processing” which contrasts from OLTP, or “online transaction processing.” As the name suggests, OLAP databases perform significantly better compared to OLTP databases for analytical workloads common with large datasets."
+  },
+  {
+    "id": "3",
+    "title": "How does ClickHouse handle large amounts of data?",
+    "content": "In order to easily process large amounts of data, ClickHouse uses highly optimized compression techniques and vectorized query execution to maximize CPU efficiency."
+  },
+  {
+    "id": "4",
+    "title": "How does ClickHouse support data visualization and analysis?",
+    "content": "ClickHouse supports connectors to many clients and drivers, including common BI and data analysis tools. Please see [this page](https://clickhouse.com/docs/en/integrations) for a complete list of supported integrations. "
+  },
+  {
+    "id": "5",
+    "title": "How much does ClickHouse cost?",
+    "content": "Self-managed ClickHouse is dependent on the cost of your compute and data storage resources, as well as headcount necessary to manage the ClickHouse deployment. For the most affordable way to run ClickHouse, use [ClickHouse Cloud](https://clickhouse.cloud/signUp?loc=homepage-faq-accordion), which starts at $50/month."
+  }
+]

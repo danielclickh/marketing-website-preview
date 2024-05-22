@@ -139,17 +139,6 @@ function EventPage({
               {title}
             </h1>
 
-            {/* {category !== 'On-Demand Webinar' && (
-              <div className='mb-10'>
-                <div className='flex space-x-3 items-center'>
-                  <CalendarIcon className='stroke-1 text-primary-300 w-6 h-6' />
-                  <span className='text-base font-normal'>
-                    {datetimeAndTimezoneString}
-                  </span>
-                </div>
-              </div>
-            )} */}
-
             {richDescription && (
               <div className='prose prose-neutral'>
                 <Markdown encloseByDiv={false}>{richDescription}</Markdown>
@@ -244,7 +233,7 @@ export async function getStaticPaths() {
   }
   const allPaths = await getPathsValues('events', params)
   // Define an array of slugs to exclude
-  const excludedSlugs = ['clickhouse-workshop']
+  const excludedSlugs = ['clickhouse-workshop', 'clickhouse-fundamentals']
   // Filter out the paths with the excluded slugs
   const paths = allPaths.filter((path) => {
     const slug = path.params.slug
