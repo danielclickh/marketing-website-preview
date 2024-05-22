@@ -40,7 +40,7 @@ interface IntegrationsPageProps extends CommonProps {
 
 export async function getStaticProps() {
   const data = await fetchAll('integrations', {
-    sort: ['name:ASC', 'date:DESC'],
+    sort: ['name:ASC'],
     populate: ['logo', 'logo_dark'],
     fields: ['name', 'slug', 'category', 'website', 'readiness']
   })
