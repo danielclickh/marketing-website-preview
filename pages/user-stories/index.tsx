@@ -20,6 +20,7 @@ import {
   UseCaseVertical,
   UserStoriesPage
 } from '../../types/userStories'
+import ClearFilterButton from '../../components/UserStories/ClearFilterButton'
 
 export const getStaticProps: GetStaticProps<UserStoriesPage> =
   async function getStaticProps() {
@@ -477,8 +478,8 @@ function CustomerStoriesPage({
                     unstyled
                   />
                 </div>
-                <button
-                  type='button'
+                <ClearFilterButton
+                  onClick={clearAllFilters}
                   disabled={
                     useCaseParam ||
                     migrationParam ||
@@ -487,123 +488,130 @@ function CustomerStoriesPage({
                       ? false
                       : true
                   }
-                  className={`${
+                />
+              </div>
+            </div>
+
+            {filteredUserStories.length > 0 ? (
+              <div className='grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3'>
+                {filteredUserStories.map((story, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={`${
+                        story.attributes.highlight
+                          ? 'border-primary-300 bg-neutral-700'
+                          : 'overflow-hidden border-neutral-700/80'
+                      }  relative min-h-[440px] rounded-[4px] border md:min-h-[400px]`}>
+                      <div className='story-header bg-primary-300 p-4'>
+                        <div className='flex h-[40px] items-center justify-center'>
+                          {story.attributes.User.data && (
+                            <Image
+                              src={
+                                story.attributes.User.data.attributes.logo.data
+                                  .attributes.url
+                              }
+                              width={
+                                story.attributes.User.data.attributes.logo.data
+                                  .attributes.width
+                              }
+                              height={
+                                story.attributes.User.data.attributes.logo.data
+                                  .attributes.height
+                              }
+                              alt={
+                                story.attributes.User.data.attributes.logo.data
+                                  .attributes.alternativeText
+                                  ? story.attributes.User.data.attributes.logo
+                                      .data.attributes.alternativeText
+                                  : 'Logo'
+                              }
+                              priority={true}
+                              loading='eager'
+                            />
+                          )}
+                        </div>
+                      </div>
+                      <div className={`p-6`}>
+                        <div className='story-categories font-inconsolata text-primary-300'>
+                          {story.attributes.useCase.data &&
+                            story.attributes.useCase.data.map(
+                              (useCase, index) => {
+                                return (
+                                  <span key={index}>
+                                    {useCase.attributes.Name}
+                                  </span>
+                                )
+                              }
+                            )}
+                        </div>
+                        <div className='story-title py-2 font-basier text-xl font-semibold'>
+                          {story.attributes.Title}
+                        </div>
+                        <div className='story-description'>
+                          {story.attributes.Description}
+                        </div>
+                        {(story.attributes.ReadBlogLink ||
+                          story.attributes.ExternalLink ||
+                          story.attributes.WatchVideoLink) && (
+                          <div className='absolute bottom-6 right-6 mt-auto'>
+                            <div className='flex items-center gap-x-6 text-primary-300'>
+                              {story.attributes.ReadBlogLink && (
+                                <Link
+                                  href={story.attributes.ReadBlogLink}
+                                  target='_blank'>
+                                  Read blog
+                                </Link>
+                              )}
+                              {story.attributes.ExternalLink && (
+                                <Link
+                                  href={story.attributes.ExternalLink}
+                                  target='_blank'>
+                                  Read blog
+                                </Link>
+                              )}
+                              {story.attributes.WatchVideoLink && (
+                                <Link
+                                  href={story.attributes.WatchVideoLink}
+                                  target='_blank'
+                                  className='flex items-center gap-x-3'>
+                                  <CirclePlay
+                                    strokeWidth={1.5}
+                                    className='h-5 w-5'
+                                  />
+                                  Watch video
+                                </Link>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      {story.attributes.highlight && (
+                        <div className='absolute left-1/2 -bottom-2 z-50 -translate-x-1/2 transform bg-half-highlight px-1 text-xs font-bold uppercase'>
+                          Highlight
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            ) : (
+              <div className='flex w-full flex-col items-center rounded-md border border-dashed border-primary-700 p-16 text-center'>
+                <div className='flex-grow'>Sorry, no user stories found</div>
+                <ClearFilterButton
+                  className='mt-6 rounded-full border border-primary-600 py-2.5 px-4 text-sm font-semibold hover:border-primary-300'
+                  onClick={clearAllFilters}
+                  disabled={
                     useCaseParam ||
                     migrationParam ||
                     searchParamInput ||
                     verticalParam
-                      ? 'text-whte'
-                      : 'text-neutral-500'
-                  } flex transform items-center gap-x-2 rounded-full py-2.5 text-sm font-semibold transition-colors duration-500 ease-in-out`}
-                  onClick={clearAllFilters}>
-                  Clear filters
-                  <CircleXIcon strokeWidth={1.25} />
-                </button>
+                      ? false
+                      : true
+                  }
+                />
               </div>
-            </div>
-
-            <div className='grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3'>
-              {filteredUserStories.map((story, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={`${
-                      story.attributes.highlight
-                        ? 'border-primary-300 bg-neutral-700'
-                        : 'overflow-hidden border-neutral-700/80'
-                    }  relative min-h-[440px] rounded-[4px] border md:min-h-[400px]`}>
-                    <div className='story-header bg-primary-300 p-4'>
-                      <div className='flex h-[40px] items-center justify-center'>
-                        {story.attributes.User.data && (
-                          <Image
-                            src={
-                              story.attributes.User.data.attributes.logo.data
-                                .attributes.url
-                            }
-                            width={
-                              story.attributes.User.data.attributes.logo.data
-                                .attributes.width
-                            }
-                            height={
-                              story.attributes.User.data.attributes.logo.data
-                                .attributes.height
-                            }
-                            alt={
-                              story.attributes.User.data.attributes.logo.data
-                                .attributes.alternativeText
-                                ? story.attributes.User.data.attributes.logo
-                                    .data.attributes.alternativeText
-                                : 'Logo'
-                            }
-                            priority={true}
-                            loading='eager'
-                          />
-                        )}
-                      </div>
-                    </div>
-                    <div className={`p-6`}>
-                      <div className='story-categories font-inconsolata text-primary-300'>
-                        {story.attributes.useCase.data &&
-                          story.attributes.useCase.data.map(
-                            (useCase, index) => {
-                              return (
-                                <span key={index}>
-                                  {useCase.attributes.Name}
-                                </span>
-                              )
-                            }
-                          )}
-                      </div>
-                      <div className='story-title py-2 font-basier text-xl font-semibold'>
-                        {story.attributes.Title}
-                      </div>
-                      <div className='story-description'>
-                        {story.attributes.Description}
-                      </div>
-                      {(story.attributes.ReadBlogLink ||
-                        story.attributes.ExternalLink ||
-                        story.attributes.WatchVideoLink) && (
-                        <div className='absolute bottom-6 right-6 mt-auto'>
-                          <div className='flex items-center gap-x-6 text-primary-300'>
-                            {story.attributes.ReadBlogLink && (
-                              <Link
-                                href={story.attributes.ReadBlogLink}
-                                target='_blank'>
-                                Read blog
-                              </Link>
-                            )}
-                            {story.attributes.ExternalLink && (
-                              <Link
-                                href={story.attributes.ExternalLink}
-                                target='_blank'>
-                                Read blog
-                              </Link>
-                            )}
-                            {story.attributes.WatchVideoLink && (
-                              <Link
-                                href={story.attributes.WatchVideoLink}
-                                target='_blank'
-                                className='flex items-center gap-x-3'>
-                                <CirclePlay
-                                  strokeWidth={1.5}
-                                  className='h-5 w-5'
-                                />
-                                Watch video
-                              </Link>
-                            )}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                    {story.attributes.highlight && (
-                      <div className='absolute left-1/2 -bottom-2 z-50 -translate-x-1/2 transform bg-half-highlight px-1 text-xs font-bold uppercase'>
-                        Highlight
-                      </div>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
+            )}
           </div>
           <FollowUs />
         </div>
