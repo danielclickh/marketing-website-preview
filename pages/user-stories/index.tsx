@@ -374,22 +374,22 @@ function CustomerStoriesPage({
             </p>
           </div>
           <div className='my-24 mx-auto max-w-7xl px-8 2xl:px-0'>
-            <div className='filters mb-6 flex items-center justify-between gap-x-4'>
+            <div className='filters mb-6 gap-x-4 xl:flex xl:justify-between'>
               <SuiSearchField
                 placeholder='Search by company or keyword...'
                 htmlFor='search'
-                className='min-w-[447px]'
+                className='mb-6 -mt-1 xl:mb-0 xl:min-w-[447px]'
                 onChange={handleSearchInputChange}
                 value={searchQuery}
               />
-              <div className='flex items-center gap-x-4'>
+              <div className='flex flex-wrap justify-center gap-4 xl:flex-nowrap'>
                 <button
                   type='button'
                   className={`${
                     orderByDate
                       ? 'bg-primary-300 text-black'
                       : 'border-opacity-[0.3] text-white'
-                  } rounded-full border border-primary-500 py-2.5 px-4 text-sm font-semibold text-black`}
+                  } max-h-[42px] w-[162px] rounded-full border border-primary-500 py-2.5 px-4 text-sm font-semibold text-black md:w-auto`}
                   onClick={toggleOrderByDate}>
                   Latest
                 </button>
@@ -480,7 +480,6 @@ function CustomerStoriesPage({
                     unstyled
                   />
                 </div>
-
                 <button
                   type='button'
                   disabled={
