@@ -22,7 +22,10 @@ export default function VideoCard({ video }: VideoCardProps) {
             />
 
             <div className='absolute top-0 left-0 flex h-full w-full items-center justify-center'>
-              <VideoPlayButton className='rounded-full border-2 border-primary-800/50 shadow-lg backdrop-blur transition-all group-hover:scale-125' />
+              <VideoPlayButton
+                invert={true}
+                className='transition-all group-hover:scale-125'
+              />
             </div>
           </div>
 

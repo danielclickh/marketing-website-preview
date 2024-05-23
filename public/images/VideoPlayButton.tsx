@@ -1,8 +1,17 @@
-interface Props {
+interface Props extends React.SVGProps<SVGSVGElement> {
+  invert?: boolean
   className?: string
 }
 
-const VideoPlayButton = (props: Props) => {
+const VideoPlayButton = ({ invert = false, ...props }: Props) => {
+  let circle = 'text-primary-300'
+  let triangle = 'text-primary-900'
+
+  if (invert) {
+    circle = 'text-primary-900'
+    triangle = 'text-primary-300'
+  }
+
   return (
     <svg
       height='45'
@@ -10,8 +19,14 @@ const VideoPlayButton = (props: Props) => {
       fill='none'
       viewBox='0 0 45 45'
       xmlns='http://www.w3.org/2000/svg'
-      className={props.className}>
-      <circle cx='22.3379' cy='22.3379' fill='#FAFF69' r='22.3379' />
+      {...props}>
+      <circle
+        cx='22.3379'
+        cy='22.3379'
+        className={circle}
+        fill='currentColor'
+        r='22.3379'
+      />
       <circle
         cx='22.3379'
         cy='22.3379'
@@ -21,8 +36,9 @@ const VideoPlayButton = (props: Props) => {
         strokeWidth='0.930748'
       />
       <path
+        className={triangle}
         d='M17.8394 15.2174L30.4045 22.4719L17.8394 29.7263L17.8394 15.2174Z'
-        fill='#201F1D'
+        fill='currentColor'
       />
     </svg>
   )
