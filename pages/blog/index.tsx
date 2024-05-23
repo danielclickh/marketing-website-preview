@@ -50,15 +50,11 @@ export default function BlogsPage({
   const [loading, setLoading] = useState<boolean>(false)
 
   const [response, setResponse] = useState<null | BlogApiResponse>(null)
-  const [page, setPage] = useState<BlogApiResponse['pagination']['page']>(
-    response ? response.pagination.page : 1
-  )
-  const [search, setSearch] = useState<BlogApiResponse['params']['search']>(
-    response ? response.params.search : null
-  )
-  const [category, setCategory] = useState<
-    BlogApiResponse['params']['category']
-  >(response ? response.params.category : null)
+  const [page, setPage] = useState<BlogApiResponse['pagination']['page']>(1)
+  const [search, setSearch] =
+    useState<BlogApiResponse['params']['search']>(null)
+  const [category, setCategory] =
+    useState<BlogApiResponse['params']['category']>(null)
 
   const currentPage = page > 1 ? page : 1
 
@@ -144,34 +140,36 @@ export default function BlogsPage({
 
   // On states changed
   useEffect(() => {
-    ;(async function () {
-      // Show loading screen
-      setLoading(true)
+    if (router.isReady) {
+      ;(async function () {
+        // Show loading screen
+        setLoading(true)
 
-      // Build query
-      const params = new URLSearchParams()
-      if (page && page > 1) params.set('page', page.toString())
-      if (search) params.set('search', search)
-      if (category) params.set('category', category)
+        const params = new URLSearchParams()
+        if (page && page > 1) params.set('page', page.toString())
+        if (search) params.set('search', search)
+        if (category) params.set('category', category)
+        const paramsString = params.size ? `?${params}` : ''
 
-      // Update URL
-      router.push(`/blog?${params}`, undefined, {
-        shallow: true
-      })
+        // Update URL
+        router.push(`/blog${paramsString}`, undefined, {
+          shallow: true
+        })
 
-      // Make request
-      const response = await fetch(`/api/blog?${params}`)
+        // Make request
+        const response = await fetch(`/api/blog${paramsString}`)
 
-      // Handle response
-      try {
-        setResponse(await response.json())
-      } catch (e) {
-        // Do nothing
-      }
+        // Handle response
+        try {
+          setResponse(await response.json())
+        } catch (e) {
+          // Do nothing
+        }
 
-      // Hide loading screen
-      setLoading(false)
-    })()
+        // Hide loading screen
+        setLoading(false)
+      })()
+    }
   }, [page, search, category])
 
   return (
