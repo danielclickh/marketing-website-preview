@@ -12,13 +12,13 @@ interface Props extends HTMLAttributes<HTMLUListElement> {
 function CategorySelector({ options, className = '', ...props }: Props) {
   return (
     <ul
-      className={`md:flex flex-nowrap overflow-auto md:flex-wrap justify-center gap-2.5 ${className}`}
+      className={`flex-nowrap justify-center gap-2.5 overflow-auto md:flex md:flex-wrap ${className}`}
       {...props}>
-      {options.map((option) => (
+      {options.map((option, index) => (
         <li
-          key={option.text}
+          key={index}
           onClick={option.onClick}
-          className={`mb-2 lg:mb-0 flex items-center text-sm font-medium px-4 h-[36px] whitespace-nowrap rounded-full cursor-pointer transition-colors duration-500 ease-in-out transform border border-primary-600/60 ${
+          className={`mb-2 flex h-[36px] transform cursor-pointer items-center whitespace-nowrap rounded-full border border-primary-600/60 px-4 text-sm font-medium transition-colors duration-500 ease-in-out lg:mb-0 ${
             option.selected
               ? 'bg-primary-300 text-neutral-800'
               : 'text-neutral-0  hover:border-primary-300'
