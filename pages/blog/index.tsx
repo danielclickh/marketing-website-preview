@@ -149,7 +149,7 @@ export default function BlogsPage({
         if (page && page > 1) params.set('page', page.toString())
         if (search) params.set('search', search)
         if (category) params.set('category', category)
-        const paramsString = params.size ? `?${params}` : ''
+        const paramsString = Array.from(params).length ? `?${params}` : ''
 
         // Update URL
         router.push(`/blog${paramsString}`, undefined, {
