@@ -13,6 +13,7 @@ import { useRouter } from 'next/router'
 import { useInitGalaxy } from '../lib/galaxy/galaxy'
 import { GrowthBook, GrowthBookProvider } from '@growthbook/growthbook-react'
 import { Galaxy } from '../lib/galaxy/web/browser'
+import JpOverlay from '../components/JPOverlay/JPOverlay'
 
 const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K'
 const websiteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL
@@ -84,6 +85,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link href='favicon.ico' rel='icon' type='image/x-icon' />
       </Head>
       <GrowthBookProvider growthbook={gb}>
+        <JpOverlay />
         <main
           id='main-site-container'
           className={`${inter.variable} font-inter ${inconsolata.variable}`}>
