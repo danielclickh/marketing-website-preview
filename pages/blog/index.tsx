@@ -116,12 +116,12 @@ export default function BlogsPage({
   }
 
   const backToTop = () => {
-    window.requestAnimationFrame(() =>
-      scrollToContainer.current?.scrollIntoView({ behavior: 'smooth' })
-    )
-    // setTimeout(() => {
-    //   //window.scroll()
-    // }, 100)
+    setTimeout(() => {
+      window.scroll({
+        top: (scrollToContainer?.current?.offsetTop || 0) - 100,
+        behavior: 'smooth'
+      })
+    }, 0)
   }
 
   // Load values from query string
