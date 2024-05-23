@@ -20,6 +20,7 @@ import {
   acceptableRegions,
   computeOptions,
   config,
+  configStaging,
   PricingData,
   providerOptions,
   storageUnitOptionsTiered
@@ -93,7 +94,7 @@ export const PricingCalculator: React.FC<{
   const region = searchParams.get('region') || 'us-east-1'
 
   const tierOptions = useMemo(() => {
-    if (region === 'ap-northeast-1') {
+    if (region === 'ap-northeast-1' || provider === 'azure') {
       // If the region is ap-northeast-1, only include 'Production' in tier options
       return [{ label: 'Production', value: 'Production' }]
     } else {
@@ -261,7 +262,10 @@ export const PricingCalculator: React.FC<{
     }
 
     //update dev to prod on ap-northeast-1
-    if (region === 'ap-northeast-1' && tier === 'Development') {
+    if (
+      (region === 'ap-northeast-1' && tier === 'Development') ||
+      (provider === 'azure' && tier === 'Development')
+    ) {
       router.push(
         {
           query: {
@@ -451,7 +455,11 @@ export const PricingCalculator: React.FC<{
     //Find the right region for pricing
     //We have to check the provider as m3ter returns gcp region names prepended with gcp-XXXX
     const regionToCheckPricing =
-      provider.toLowerCase() === 'gcp' ? `gcp-${region}` : region
+      provider.toLowerCase() === 'gcp'
+        ? `gcp-${region}`
+        : provider.toLowerCase() === 'azure'
+        ? `azure-${region}`
+        : region
 
     const matchingPricingPlans = pricingPlansFromFile.filter(
       (plan) =>
@@ -481,6 +489,7 @@ export const PricingCalculator: React.FC<{
       })
       // Set pricingData with the computed unit prices
       setPricingData({ computeUnitPrice, storageUnitPrice })
+      console.log(region, { computeUnitPrice, storageUnitPrice })
 
       setIsLoading(false)
     } else {

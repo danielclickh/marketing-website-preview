@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 
 export type Tier = 'Development' | 'Production'
-export type Provider = 'aws' | 'gcp'
+export type Provider = 'aws' | 'gcp' | 'azure'
 export interface PricingData {
   computeUnitPrice: number
   storageUnitPrice: number
@@ -99,13 +99,35 @@ export const acceptableRegions = [
     provider: 'gcp',
     region: 'asia-southeast1',
     tier: ['Production', 'Development']
+  },
+
+  {
+    provider: 'azure',
+    region: 'westus3',
+    tier: ['Production']
+  },
+  {
+    provider: 'azure',
+    region: 'eastus2',
+    tier: ['Production']
+  },
+  {
+    provider: 'azure',
+    region: 'germanywestcentral',
+    tier: ['Production']
   }
 ]
 
 export const config = {
-  planId: '01b9a9d2-a36a-4a1d-969b-b24fc756cd64',
-  computeAggregationId: '3797d30c-b13c-480b-9068-baf1e340a589',
-  storageAggregationId: 'b5843a1b-a1bb-403d-a929-3ce8486e00d9'
+  planId: '0f8fc0ba-d098-4b49-94fd-344204ed87c2',
+  computeAggregationId: 'b39b23b9-4016-4016-8050-f473517048ff',
+  storageAggregationId: '680fc216-be2b-4b26-8a3a-3e1f385305dd'
+}
+
+export const configStaging = {
+  planId: 'f0b7690e-9d26-4dbe-940b-1b9be7181cec',
+  computeAggregationId: '79a1bcaf-62e6-4202-bf72-dd0e718e62ab',
+  storageAggregationId: '48f71a43-05cf-4a01-bafc-eb84ef340493'
 }
 
 export const tierOptions: Array<Option<Tier>> = [
@@ -123,7 +145,8 @@ export const tierOptions: Array<Option<Tier>> = [
 
 export const providerOptions: Array<Option<Provider>> = [
   { value: 'aws', label: 'AWS' },
-  { value: 'gcp', label: 'GCP' }
+  { value: 'gcp', label: 'GCP' },
+  { value: 'azure', label: 'Azure' }
 ]
 
 //to calculate vCPU, you divide the GiB by 4
