@@ -1,19 +1,22 @@
-import {SuiTitle} from '../../../components/sui'
-import {findAll, findOne} from '../../../lib/api/strapi'
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { SuiTitle } from '../../../components/sui'
+import { findAll, findOne } from '../../../lib/api/strapi'
 import RecentEvents from '../../../components/RecentEvents'
-import {EventType} from '../../../types/events'
-import {NewsAndEventsData, NewsEventProps} from '../../../types/newsEvents'
+import { EventType } from '../../../types/events'
+import { NewsAndEventsData, NewsEventProps } from '../../../types/newsEvents'
 import NewsItem from '../../../components/NewsItem'
 import Layout from '../../../components/Layout'
-import {GetStaticProps} from 'next'
-import {getCommonProps} from '../../../lib/utils/getCommonProps'
-import {REVALIDATE_SECONDS} from '../../../lib/utils/revalidationConfig'
-import {convertDateToString} from '../../../lib/utils/dateUtils'
-import {CUILink} from '../../../components/ClickUI'
-import {StrapiImage} from '../../../components/StrapiElements'
-import {CalendarIcon} from '@heroicons/react/outline'
+import { GetStaticProps } from 'next'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
+import { convertDateToString } from '../../../lib/utils/dateUtils'
+import { CUILink } from '../../../components/ClickUI'
+import { StrapiImage } from '../../../components/StrapiElements'
+import { CalendarIcon } from '@heroicons/react/outline'
 import EventPost from '../../../components/EventPostList/EventPost'
-import {galaxyOnPage} from "../../../lib/galaxy/galaxy";
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import CategorySelector from '../../../components/CategorySelector'
 
 export const getStaticProps: GetStaticProps<NewsEventProps> =
   async function getStaticProps() {
@@ -134,7 +137,35 @@ export default function News({
   recentEvents,
   seo
 }: NewsEventProps) {
-    galaxyOnPage('newsEventsPage');
+  galaxyOnPage('newsEventsPage')
+
+  const router = useRouter()
+  const { category } = router.query
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(
+    category ? category.toString() : null
+  )
+
+  useEffect(() => {
+    if (category) {
+      setSelectedCategory(category.toString())
+    }
+  }, [category])
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category)
+
+    router.push(
+      {
+        query: { ...router.query, category }
+      },
+      undefined,
+      { shallow: true }
+    )
+  }
+
+  const filteredEvents = selectedCategory
+    ? allEvents.filter((event) => event.category === selectedCategory)
+    : allEvents
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -232,9 +263,41 @@ export default function News({
         <h2 className='mb-10 font-basier text-4xl font-semibold text-neutral-100'>
           {upcomingEventsTitle}
         </h2>
+
         <div>
+          <div className='mb-6'>
+            <CategorySelector
+              options={[
+                {
+                  text: 'Event',
+                  selected: selectedCategory === 'Event',
+                  onClick: () => handleCategoryClick('Event')
+                },
+                {
+                  text: 'Free Training',
+                  selected: selectedCategory === 'Free Training',
+                  onClick: () => handleCategoryClick('Free Training')
+                },
+                {
+                  text: 'Meetup',
+                  selected: selectedCategory === 'Meetup',
+                  onClick: () => handleCategoryClick('Meetup')
+                },
+                {
+                  text: 'Webinar',
+                  selected: selectedCategory === 'Webinar',
+                  onClick: () => handleCategoryClick('Webinar')
+                },
+                {
+                  text: 'On-Demand Webinar',
+                  selected: selectedCategory === 'On-Demand Webinar',
+                  onClick: () => handleCategoryClick('On-Demand Webinar')
+                }
+              ]}
+            />
+          </div>
           <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
-            {allEvents.map((event: EventType) => (
+            {filteredEvents.map((event: EventType) => (
               <EventPost key={event.id} {...event} />
             ))}
           </div>
