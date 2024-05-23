@@ -156,11 +156,11 @@ export default function VideosList({
       <div
         className='container mx-auto max-w-7xl px-8 pt-8 2xl:px-0'
         ref={container}>
-        <div className='flex-col items-center pb-8 lg:flex lg:flex-row lg:justify-between lg:space-x-24'>
+        <div className='mb-20 flex-col items-center'>
           <SuiSearchField
             placeholder='Search by title or keyword...'
             htmlFor='search'
-            className='mb-6 lg:mb-0 lg:flex-1'
+            className='mx-auto mb-6 md:max-w-md lg:mb-8'
             value={search || ''}
             onChange={searchChange}
           />

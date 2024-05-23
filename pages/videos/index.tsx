@@ -51,7 +51,7 @@ export default function VideosPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <SuiTitle
         type='h1'
-        className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:mb-16 lg:pt-20'>
+        className='mx-auto mb-8 pt-10 text-center text-neutral-100 lg:pt-20'>
         {title}
       </SuiTitle>
       <VideosList categories={allCategories} videos={allVideos} />
