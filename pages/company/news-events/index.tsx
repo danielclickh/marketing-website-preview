@@ -152,15 +152,25 @@ export default function News({
   }, [category])
 
   const handleCategoryClick = (category: string) => {
-    setSelectedCategory(category)
-
-    router.push(
-      {
-        query: { ...router.query, category }
-      },
-      undefined,
-      { shallow: true }
-    )
+    if (category === 'View all') {
+      setSelectedCategory(null)
+      router.push(
+        {
+          query: null
+        },
+        undefined,
+        { shallow: true }
+      )
+    } else {
+      setSelectedCategory(category)
+      router.push(
+        {
+          query: { ...router.query, category }
+        },
+        undefined,
+        { shallow: true }
+      )
+    }
   }
 
   const filteredEvents = selectedCategory
@@ -259,43 +269,51 @@ export default function News({
         </div>
       </div>
 
-      <div className='mx-auto max-w-7xl px-4 sm:px-8 2xl:px-0'>
-        <h2 className='mb-10 font-basier text-4xl font-semibold text-neutral-100'>
-          {upcomingEventsTitle}
-        </h2>
+      <div
+        className='mx-auto max-w-7xl px-4 sm:px-8 2xl:px-0'
+        id='upcoming-events'>
+        <div className='flex flex-col justify-between md:flex-row'>
+          <h2 className='mb-10 font-basier text-4xl font-semibold text-neutral-100'>
+            {upcomingEventsTitle}
+          </h2>
+          <CategorySelector
+            className='mb-6 lg:mb-0'
+            options={[
+              {
+                text: 'View all',
+                selected: selectedCategory === null,
+                onClick: () => handleCategoryClick('View all')
+              },
+              {
+                text: 'Event',
+                selected: selectedCategory === 'Event',
+                onClick: () => handleCategoryClick('Event')
+              },
+              {
+                text: 'Free Training',
+                selected: selectedCategory === 'Free Training',
+                onClick: () => handleCategoryClick('Free Training')
+              },
+              {
+                text: 'Meetup',
+                selected: selectedCategory === 'Meetup',
+                onClick: () => handleCategoryClick('Meetup')
+              },
+              {
+                text: 'Webinar',
+                selected: selectedCategory === 'Webinar',
+                onClick: () => handleCategoryClick('Webinar')
+              },
+              {
+                text: 'On-Demand Webinar',
+                selected: selectedCategory === 'On-Demand Webinar',
+                onClick: () => handleCategoryClick('On-Demand Webinar')
+              }
+            ]}
+          />
+        </div>
 
         <div>
-          <div className='mb-6'>
-            <CategorySelector
-              options={[
-                {
-                  text: 'Event',
-                  selected: selectedCategory === 'Event',
-                  onClick: () => handleCategoryClick('Event')
-                },
-                {
-                  text: 'Free Training',
-                  selected: selectedCategory === 'Free Training',
-                  onClick: () => handleCategoryClick('Free Training')
-                },
-                {
-                  text: 'Meetup',
-                  selected: selectedCategory === 'Meetup',
-                  onClick: () => handleCategoryClick('Meetup')
-                },
-                {
-                  text: 'Webinar',
-                  selected: selectedCategory === 'Webinar',
-                  onClick: () => handleCategoryClick('Webinar')
-                },
-                {
-                  text: 'On-Demand Webinar',
-                  selected: selectedCategory === 'On-Demand Webinar',
-                  onClick: () => handleCategoryClick('On-Demand Webinar')
-                }
-              ]}
-            />
-          </div>
           <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
             {filteredEvents.map((event: EventType) => (
               <EventPost key={event.id} {...event} />
