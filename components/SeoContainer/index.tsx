@@ -13,22 +13,29 @@ function SeoContainer({
   siteName,
   path
 }: SeoMetadata) {
-
   // Default social image
   let socialImageUrl = `${siteUrl}/images/social_share.png`
 
   // If image is passed as an object
-  if (image?.[0]?.url) socialImageUrl = siteUrl + image?.[0]?.url;
+  if (image?.[0]?.url) socialImageUrl = siteUrl + image?.[0]?.url
 
   // If the image is passed as a string
-  if (imageUrl) socialImageUrl = imageUrl;
+  if (imageUrl) socialImageUrl = imageUrl
 
-  const canonicalUrl =
-    path === '/blog/forecasting-using-clickhouse'
-      ? 'https://ensembleanalytics.io/blog/forecasting-using-clickhouse'
-      : path === '/blog/clickhouse-linear-regression-machine-learning-functions'
-      ? 'https://ensembleanalytics.io/blog/linear-regression-using-clickhouse'
-      : `${siteUrl}${path}`
+  const canonicalUrl = (() => {
+    const predefinedUrls: { [key: string]: string } = {
+      '/blog/forecasting-using-clickhouse':
+        'https://ensembleanalytics.io/blog/forecasting-using-clickhouse',
+      '/blog/clickhouse-linear-regression-machine-learning-functions':
+        'https://ensembleanalytics.io/blog/linear-regression-using-clickhouse'
+    }
+
+    if (path.startsWith('http')) {
+      return path
+    }
+
+    return predefinedUrls[path] || `${siteUrl}${path}`
+  })()
 
   return (
     <Head>
