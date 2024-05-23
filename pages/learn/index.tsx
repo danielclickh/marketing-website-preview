@@ -227,7 +227,8 @@ const trainingCards: Array<TrainingCardProps> = [
     description:
       'Learn from ClickHouse experts by attending one of our virtual training sessions. Instructors deliver the content live.',
     perks: ['Hands-on lab activities', 'Live Q&A and engaging interactions'],
-    link: 'https://clickhouse.com/company/events/clickhouse-fundamentals'
+    link: '/company/news-events?category=Free+Training#upcoming-events',
+    button: 'See upcoming training'
   },
   {
     icon: <Certificate />,
