@@ -242,7 +242,10 @@ export default function BlogsPage({
       <div
         className='container mx-auto max-w-7xl px-8 pt-8 2xl:px-0'
         ref={scrollToContainer}>
-        <div className='flex-col items-center pb-8 lg:flex lg:flex-row lg:justify-between lg:space-x-24'>
+        <div
+          className={`flex-col items-center pb-8 lg:flex lg:flex-row lg:justify-between lg:space-x-24 ${
+            !response ? '!hidden' : ''
+          }`}>
           <SuiSearchField
             placeholder='Search by title or keyword...'
             htmlFor='search'
