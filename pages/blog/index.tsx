@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import BlogPost from '../../components/BlogPostList/BlogPost'
@@ -14,9 +14,10 @@ import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { BlogApiResponse, BlogProps } from '../../types/blogs'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { fetchBlogs } from '../api/blog'
 
-export const getStaticProps: GetStaticProps<BlogProps> =
-  async function getStaticProps() {
+export const getServerSideProps: GetServerSideProps<BlogProps> =
+  async function getServerSideProps(context) {
     // Current page params
     const { hero, seo } = await findOne('blog', {
       populate: ['hero', 'seo', 'seo.image']
@@ -24,12 +25,16 @@ export const getStaticProps: GetStaticProps<BlogProps> =
 
     const commonProps = await getCommonProps()
 
+    const { page = 1, category = null, search = null } = context.query || {}
+    const initialData = await fetchBlogs({ page, category, search })
+
     seo.path = '/blog'
 
     return {
       props: {
         title: hero.title,
         description: hero.description,
+        initialData,
         seo,
         ...commonProps
       }
@@ -38,6 +43,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
 
 export default function BlogsPage({
   title,
+  initialData,
   seo,
   headerData,
   footerData
@@ -49,12 +55,16 @@ export default function BlogsPage({
   const scrollToContainer = useRef<HTMLDivElement>(null)
   const [loading, setLoading] = useState<boolean>(false)
 
-  const [response, setResponse] = useState<null | BlogApiResponse>(null)
-  const [page, setPage] = useState<BlogApiResponse['pagination']['page']>(1)
-  const [search, setSearch] =
-    useState<BlogApiResponse['params']['search']>(null)
-  const [category, setCategory] =
-    useState<BlogApiResponse['params']['category']>(null)
+  const [response, setResponse] = useState<null | BlogApiResponse>(initialData)
+  const [page, setPage] = useState<BlogApiResponse['pagination']['page']>(
+    response?.pagination?.page || 1
+  )
+  const [search, setSearch] = useState<BlogApiResponse['params']['search']>(
+    response?.params?.search || null
+  )
+  const [category, setCategory] = useState<
+    BlogApiResponse['params']['category']
+  >(response?.params?.category || null)
 
   const currentPage = page > 1 ? page : 1
 
@@ -124,24 +134,15 @@ export default function BlogsPage({
     }, 0)
   }
 
-  // Load values from query string
-  useEffect(() => {
-    if (router.isReady) {
-      const urlCategory = router.query?.category
-      const urlSearch = router.query?.search
-      const urlPage = Number(router.query?.page || '')
-
-      if (typeof urlCategory === 'string' && urlCategory !== category)
-        setCategory(urlCategory)
-      if (typeof urlSearch === 'string' && urlSearch !== search)
-        setSearch(urlSearch)
-      if (!isNaN(urlPage) && urlPage !== page) setPage(urlPage)
-    }
-  }, [router.isReady])
-
   // On states changed
   useEffect(() => {
-    if (router.isReady) {
+    // Condition prevent double loading
+    if (
+      router.isReady &&
+      (page !== response?.pagination?.page ||
+        search !== response?.params?.search ||
+        category !== response?.params?.category)
+    ) {
       ;(async function () {
         // Show loading screen
         setLoading(true)
@@ -301,11 +302,11 @@ export default function BlogsPage({
                 </CUIButton>
                 {response &&
                   pagination(page, response.pagination.pageCount).map(
-                    (item) => {
+                    (item, index) => {
                       const isEllipsis = typeof item === 'string'
                       const isActive = currentPage === item
                       return (
-                        <div className='!hidden md:!inline-block'>
+                        <div key={index} className='!hidden md:!inline-block'>
                           {isEllipsis && <span>{item}</span>}
                           {!isEllipsis && (
                             <CUIButton

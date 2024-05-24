@@ -29,12 +29,30 @@ const baseQuery: Record<string, any> = {
   }
 }
 
-export default async function handler(
-  request: NextApiRequest,
-  response: NextApiResponse
-) {
-  let { page = 1, category = null, search = null } = request.query
-
+export async function fetchBlogs({
+  page = 1,
+  category = null,
+  search = null
+}: {
+  page?:
+    | undefined
+    | null
+    | string
+    | string[]
+    | BlogApiResponse['pagination']['page']
+  category?:
+    | undefined
+    | null
+    | string
+    | string[]
+    | BlogApiResponse['params']['category']
+  search?:
+    | undefined
+    | null
+    | string
+    | string[]
+    | BlogApiResponse['params']['search']
+}): Promise<BlogApiResponse> {
   // Get and validate the paginated page number
   page = Number(page)
   page = isNaN(page) ? 1 : page
@@ -82,7 +100,7 @@ export default async function handler(
     pagination: { pageSize: 15, page: page }
   })
 
-  const responseBody: BlogApiResponse = {
+  return {
     data: {
       featured: featuredBlog[0],
       blogs: data,
@@ -94,6 +112,19 @@ export default async function handler(
     },
     pagination
   }
+}
+
+export default async function handler(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  let { page = 1, category = null, search = null } = request.query
+
+  const responseBody = await fetchBlogs({
+    page,
+    category,
+    search
+  })
 
   response.status(200).json(responseBody)
 }

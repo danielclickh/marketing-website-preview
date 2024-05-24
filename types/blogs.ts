@@ -29,6 +29,7 @@ export interface BlogPostListProps {
 export interface BlogProps extends CommonProps {
   title: string
   description: string
+  initialData: null | BlogApiResponse
 }
 
 export interface BlogApiResponse {
