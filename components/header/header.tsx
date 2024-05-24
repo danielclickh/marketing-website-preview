@@ -68,7 +68,13 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
     //=== Japan specific eyebrow ===//
     const hasCountryCode = document.cookie.includes('countryCode=')
     const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
-    if (!hasCountryCode) {
+
+    if (
+      !hasCountryCode &&
+      !['ru-RU', 'zh-CN', 'zh-TW', 'zh-HK', 'en-US'].includes(
+        navigator.language
+      )
+    ) {
       fetch('https://ipinfo.io?token=33cfa2cb7f422c')
         .then((response) => response.json())
         .then((data) => {
