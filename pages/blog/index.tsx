@@ -183,61 +183,51 @@ export default function BlogsPage({
         )}
       </div>
       {featuredBlog && (
-        <>
+        <div className='section-container'>
           <CUILink
             href={`/blog/${featuredBlog.slug}`}
-            className='section-container mt-2 mb-16 flex flex-col gap-10 hover:no-underline md:flex-row'>
-            <div className='flex flex-col gap-8 rounded-xl hover:shadow-card lg:flex-row-reverse lg:gap-12 xl:gap-24'>
-              {featuredBlog.thumbnailPng && (
-                <StrapiImage
-                  {...featuredBlog.thumbnailPng}
-                  className='h-fit w-full rounded-lg object-cover lg:w-1/2 lg:flex-shrink-0 lg:flex-grow-0'
-                />
-              )}
-              <div className='grid w-full gap-6 border-l-8 border-primary-300 pl-6'>
-                <div className='flex flex-col'>
-                  <div className='font-inconsolata font-medium text-primary-300'>
-                    {featuredBlog.category}
-                  </div>
-                  <SuiTitle type='h2' className=' text-neutral-100'>
-                    {featuredBlog.title}
-                  </SuiTitle>
-                  <div className='my-8 text-neutral-200'>
-                    {featuredBlog.shortDescription}
-                  </div>
+            className='mt-2 mb-16 flex w-full flex-col gap-y-8 rounded-xl hover:no-underline hover:shadow-card lg:flex-row-reverse lg:gap-x-12 xl:gap-x-24'>
+            {featuredBlog.thumbnailPng && (
+              <StrapiImage
+                {...featuredBlog.thumbnailPng}
+                className='h-auto !w-full rounded-lg object-cover lg:!w-1/2 lg:flex-shrink-0 lg:flex-grow-0'
+              />
+            )}
+            <div className='flex w-full flex-col justify-center border-l-8 border-primary-300 pl-6 lg:w-1/2 lg:flex-1'>
+              <div className='font-inconsolata font-medium text-primary-300'>
+                {featuredBlog.category}
+              </div>
+              <SuiTitle type='h2' className=' text-neutral-100'>
+                {featuredBlog.title}
+              </SuiTitle>
+              <div className='my-8 text-neutral-200'>
+                {featuredBlog.shortDescription}
+              </div>
 
-                  <div className='flex flex-row items-center space-x-4'>
-                    {featuredBlog.author.avatarPng && (
-                      <div className='flex aspect-square h-11 w-11'>
-                        <StrapiImage
-                          {...featuredBlog.author.avatarPng}
-                          alt={featuredBlog.author.name}
-                          width={44}
-                          height={44}
-                          className='rounded-full'
-                        />
-                      </div>
-                    )}
-                    <div className='flex'>
-                      <div className='flex flex-col'>
-                        <div className='text-base'>
-                          {featuredBlog.author.name}
-                        </div>
-                        {(featuredBlog.date || featuredBlog.publishedAt) && (
-                          <div className='text-sm text-neutral-300'>
-                            {convertDateToString(
-                              featuredBlog.date || featuredBlog.publishedAt
-                            )}
-                          </div>
-                        )}
-                      </div>
+              <div className='flex flex-row items-center space-x-4'>
+                {featuredBlog.author.avatarPng && (
+                  <StrapiImage
+                    {...featuredBlog.author.avatarPng}
+                    alt={featuredBlog.author.name}
+                    width={44}
+                    height={44}
+                    className='aspect-square !h-11 !w-11 rounded-full'
+                  />
+                )}
+                <div>
+                  <div className='text-base'>{featuredBlog.author.name}</div>
+                  {(featuredBlog.date || featuredBlog.publishedAt) && (
+                    <div className='text-sm text-neutral-300'>
+                      {convertDateToString(
+                        featuredBlog.date || featuredBlog.publishedAt
+                      )}
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
           </CUILink>
-        </>
+        </div>
       )}
 
       <div
