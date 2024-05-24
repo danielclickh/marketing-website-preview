@@ -191,7 +191,7 @@ export default function BlogsPage({
               {featuredBlog.thumbnailPng && (
                 <StrapiImage
                   {...featuredBlog.thumbnailPng}
-                  className='h-fit w-full rounded-lg object-cover lg:w-1/2'
+                  className='h-fit w-full rounded-lg object-cover lg:w-1/2 lg:flex-shrink-0 lg:flex-grow-0'
                 />
               )}
               <div className='grid w-full gap-6 border-l-8 border-primary-300 pl-6'>
@@ -261,15 +261,29 @@ export default function BlogsPage({
         {!loading && !blogs.length && (
           <>
             <p className='mt-12 w-full text-center'>
-              {search ? `No search results for "${search}"` : 'No results'}
-              {category && category in categories
-                ? ` in ${categories[category]}`
-                : ''}
+              {page && (
+                <>
+                  No results on this page,{' '}
+                  <button
+                    className='font-bold text-primary-300 underline'
+                    onClick={() => setPage(1)}>
+                    go to page 1
+                  </button>
+                </>
+              )}
+              {!page && (
+                <>
+                  {search ? `No search results for "${search}"` : 'No results'}
+                  {category && category in categories
+                    ? ` in ${categories[category]}`
+                    : ''}
+                </>
+              )}
             </p>
           </>
         )}
 
-        {!(loading && blogs.length) && (
+        {!loading && !!blogs.length && (
           <>
             <div className='w-full'>
               <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
