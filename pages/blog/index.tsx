@@ -261,7 +261,7 @@ export default function BlogsPage({
         {!loading && !blogs.length && (
           <>
             <p className='mt-12 w-full text-center'>
-              {page && (
+              {currentPage > 1 && (
                 <>
                   No results on this page,{' '}
                   <button
@@ -271,7 +271,7 @@ export default function BlogsPage({
                   </button>
                 </>
               )}
-              {!page && (
+              {currentPage === 1 && (
                 <>
                   {search ? `No search results for "${search}"` : 'No results'}
                   {category && category in categories
