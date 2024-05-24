@@ -72,12 +72,16 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
       fetch('https://ipinfo.io?token=33cfa2cb7f422c')
         .then((response) => response.json())
         .then((data) => {
-          const countryCode = data.country
-          document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
-          if (countryCode === 'JP') {
-            setHeaderBanner(
-              '<a href="https://www.meetup.com/clickhouse-tokyo-user-group/events/300798053/" target="_blank">ClickHouseコミュニティミートアップを東京で開催することをお知らせいたします。</a>'
-            )
+          if (!data.error) {
+            const countryCode = data.country
+            document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
+            if (countryCode === 'JP') {
+              setHeaderBanner(
+                '<a href="https://www.meetup.com/clickhouse-tokyo-user-group/events/300798053/" target="_blank">ClickHouseコミュニティミートアップを東京で開催することをお知らせいたします。</a>'
+              )
+            }
+          } else {
+            document.cookie = `countryCode=Error; expires=${expirationDate.toUTCString()}; path=/`
           }
         })
     } else if (document.cookie.includes('countryCode=JP')) {
