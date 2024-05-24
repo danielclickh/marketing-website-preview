@@ -58,15 +58,39 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
     }
   }
 
+  const [headerBanner, setHeaderBanner] = useState(
+    '<a href="/blog/clickhouse-cloud-is-now-on-azure-in-public-beta?loc=eyebrow">ClickHouse Cloud on Microsoft Azure: Now in Beta</a>'
+  )
+
   useEffect(() => {
     document.addEventListener('scroll', onscroll)
+
+    //=== Japan specific eyebrow ===//
+    const hasCountryCode = document.cookie.includes('countryCode=')
+    const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
+    if (!hasCountryCode) {
+      fetch('https://ipinfo.io?token=33cfa2cb7f422c')
+        .then((response) => response.json())
+        .then((data) => {
+          const countryCode = data.country
+          document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
+          if (countryCode === 'JP') {
+            setHeaderBanner(
+              '<a href="https://www.meetup.com/clickhouse-tokyo-user-group/events/300798053/" target="_blank">ClickHouseコミュニティミートアップを東京で開催することをお知らせいたします。</a>'
+            )
+          }
+        })
+    } else if (document.cookie.includes('countryCode=JP')) {
+      setHeaderBanner(
+        '<a href="https://www.meetup.com/clickhouse-tokyo-user-group/events/300798053/" target="_blank">ClickHouseコミュニティミートアップを東京で開催することをお知らせいたします。</a>'
+      )
+    }
+    //=== Japan specific eyebrow ===//
+
     return () => {
       document.removeEventListener('scroll', onscroll)
     }
   }, [])
-
-  header.banner =
-    '<a href="/blog/clickhouse-cloud-is-now-on-azure-in-public-beta?loc=eyebrow">ClickHouse Cloud on Microsoft Azure: Now in Beta</a>'
 
   return (
     <>
@@ -74,7 +98,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
         className={styles.navBarContainer}
         ref={navBarRef}
         id='nav-container'>
-        <Banner content={header?.banner ?? ''} />
+        <Banner content={headerBanner} />
         <nav className='no-wrap section-container relative flex w-full items-center justify-between py-4'>
           <Link
             href='/'
