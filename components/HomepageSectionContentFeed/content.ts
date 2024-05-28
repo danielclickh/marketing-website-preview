@@ -222,13 +222,7 @@ export function getContent(): Entry[] {
     // Langchain
     {
       featured: false,
-      body: `“We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse.”
-
-
-Ankush, CTO of LangChain
-
-
-[Read blog](/blog/langchain-why-we-choose-clickhouse-to-power-langchain?loc=homepage)`,
+      body: `“We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse.” [Read blog](/blog/langchain-why-we-choose-clickhouse-to-power-langchain?loc=homepage)`,
       logo: LogoLangchain,
       categories: ['ML & GenAI']
     },
