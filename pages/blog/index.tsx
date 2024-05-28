@@ -284,14 +284,9 @@ export default function BlogsPage({
             </div>
 
             {(hasPrevPage || hasNextPage) && (
-              <div className='my-8 flex items-center justify-center gap-3'>
-                <CUIButton
-                  type='primary-dark'
-                  className={`group !border-primary-300/50 ${
-                    !hasPrevPage
-                      ? 'pointer-events-none opacity-40'
-                      : 'hover:!border-primary-400'
-                  }`}
+              <div className='my-8 flex items-center justify-center gap-2'>
+                <PaginationButton
+                  disabled={!hasPrevPage}
                   onClick={() => {
                     if (hasPrevPage) {
                       backToTop()
@@ -303,7 +298,7 @@ export default function BlogsPage({
                     &lt;-
                   </span>
                   Prev
-                </CUIButton>
+                </PaginationButton>
                 {response &&
                   pagination(page, response.pagination.pageCount).map(
                     (item, index) => {
@@ -311,34 +306,26 @@ export default function BlogsPage({
                       const isActive = currentPage === item
                       return (
                         <div key={index} className='!hidden md:!inline-block'>
-                          {isEllipsis && <span>{item}</span>}
+                          {isEllipsis && (
+                            <span className='text-neutral-300'>{item}</span>
+                          )}
                           {!isEllipsis && (
-                            <CUIButton
-                              type={isActive ? 'primary' : 'primary-dark'}
-                              className={
-                                isActive
-                                  ? ''
-                                  : '!border-primary-300/50 hover:!border-primary-400'
-                              }
+                            <PaginationButton
+                              active={isActive}
                               onClick={() => {
                                 backToTop()
                                 setLoading(true)
                                 setPage(item)
                               }}>
                               {item}
-                            </CUIButton>
+                            </PaginationButton>
                           )}
                         </div>
                       )
                     }
                   )}
-                <CUIButton
-                  type='primary-dark'
-                  className={`group !border-primary-300/50 ${
-                    !hasNextPage
-                      ? 'pointer-events-none opacity-40'
-                      : 'hover:!border-primary-400'
-                  }`}
+                <PaginationButton
+                  disabled={!hasNextPage}
                   onClick={() => {
                     if (hasNextPage) {
                       backToTop()
@@ -350,7 +337,7 @@ export default function BlogsPage({
                   <span className='tanslate-x-0 ml-2 inline-block transition-transform group-hover:translate-x-1'>
                     -&gt;
                   </span>
-                </CUIButton>
+                </PaginationButton>
               </div>
             )}
           </>
@@ -361,5 +348,30 @@ export default function BlogsPage({
         <FollowUs />
       </div>
     </Layout>
+  )
+}
+
+interface PaginationButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  active?: boolean
+  disabled?: boolean
+}
+function PaginationButton({
+  active = false,
+  disabled = false,
+  children,
+  className = '',
+  ...props
+}: PaginationButtonProps) {
+  return (
+    <button
+      className={`group rounded border border-transparent px-3 py-1 text-sm transition-colors ${
+        disabled
+          ? 'pointer-events-none opacity-40'
+          : 'hover:border-primary-300/50 hover:text-neutral-100'
+      } ${active ? '!border-primary-300 text-white' : 'text-neutral-200'}`}
+      {...props}>
+      {children}
+    </button>
   )
 }
