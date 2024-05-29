@@ -38,52 +38,54 @@ export default function Pagination({
   const hasNext = current + 1 <= totalPages
 
   return (
-    (hasNext || hasPrev) && (
-      <div className='my-8 flex items-center justify-center gap-2'>
-        <PaginationButton
-          disabled={!hasPrev}
-          onClick={() => {
-            if (hasPrev) {
-              onClick(current - 1)
-            }
-          }}>
-          <span className='tanslate-x-0 mr-2 inline-block transition-transform group-hover:-translate-x-1'>
-            &lt;-
-          </span>
-          Prev
-        </PaginationButton>
-        {generatePaginationNumbers(current, totalPages).map((item, index) => {
-          const isEllipsis = typeof item === 'string'
-          const isActive = current === item
-          return (
-            <div key={index} className='!hidden md:!inline-block'>
-              {isEllipsis && <span className='text-neutral-300'>{item}</span>}
-              {!isEllipsis && (
-                <PaginationButton
-                  active={isActive}
-                  onClick={() => {
-                    onClick(item)
-                  }}>
-                  {item}
-                </PaginationButton>
-              )}
-            </div>
-          )
-        })}
-        <PaginationButton
-          disabled={!hasNext}
-          onClick={() => {
-            if (hasNext) {
-              onClick(current + 1)
-            }
-          }}>
-          Next{' '}
-          <span className='tanslate-x-0 ml-2 inline-block transition-transform group-hover:translate-x-1'>
-            -&gt;
-          </span>
-        </PaginationButton>
-      </div>
-    )
+    <>
+      {(hasNext || hasPrev) && (
+        <div className='my-8 flex items-center justify-center gap-2'>
+          <PaginationButton
+            disabled={!hasPrev}
+            onClick={() => {
+              if (hasPrev) {
+                onClick(current - 1)
+              }
+            }}>
+            <span className='tanslate-x-0 mr-2 inline-block transition-transform group-hover:-translate-x-1'>
+              &lt;-
+            </span>
+            Prev
+          </PaginationButton>
+          {generatePaginationNumbers(current, totalPages).map((item, index) => {
+            const isEllipsis = typeof item === 'string'
+            const isActive = current === item
+            return (
+              <div key={index} className='!hidden md:!inline-block'>
+                {isEllipsis && <span className='text-neutral-300'>{item}</span>}
+                {!isEllipsis && (
+                  <PaginationButton
+                    active={isActive}
+                    onClick={() => {
+                      onClick(item)
+                    }}>
+                    {item}
+                  </PaginationButton>
+                )}
+              </div>
+            )
+          })}
+          <PaginationButton
+            disabled={!hasNext}
+            onClick={() => {
+              if (hasNext) {
+                onClick(current + 1)
+              }
+            }}>
+            Next{' '}
+            <span className='tanslate-x-0 ml-2 inline-block transition-transform group-hover:translate-x-1'>
+              -&gt;
+            </span>
+          </PaginationButton>
+        </div>
+      )}
+    </>
   )
 }
 
