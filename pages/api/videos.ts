@@ -5,7 +5,7 @@ import { VideosApiResponse } from '../../types/videos'
 
 const baseQuery: Record<string, any> = {
   sort: ['VideoDate:DESC', 'publishedAt:DESC'],
-  populate: ['categories', 'RelatedVideos', 'seo', 'seo.image'],
+  populate: ['categories', 'seo', 'seo.image'],
   filters: {
     //$or: getStagingOnlyFilters() // Not used on videos
   }

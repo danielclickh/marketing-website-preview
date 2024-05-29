@@ -1,4 +1,4 @@
-import { GetServerSideProps, InferGetStaticPropsType } from 'next'
+import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import CategorySelector from '../../components/CategorySelector'
@@ -9,11 +9,11 @@ import Layout from '../../components/Layout'
 import { SuiSearchField, SuiTitle } from '../../components/sui'
 import { useDebounce } from '../../hooks'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { VideosApiResponse, VideosProps } from '../../types/videos'
+import { VideosApiResponse, VideosPageProps } from '../../types/videos'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 import { fetchVideos } from '../api/videos'
 
-export const getServerSideProps: GetServerSideProps<VideosProps> =
+export const getServerSideProps: GetServerSideProps<VideosPageProps> =
   async function getServerSideProps(context) {
     const commonProps = await getCommonProps()
 
@@ -41,7 +41,7 @@ export default function VideosPage({
   seo,
   headerData,
   footerData
-}: VideosProps) {
+}: VideosPageProps) {
   galaxyOnPage('videosPage')
 
   const router = useRouter()

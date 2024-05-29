@@ -2,6 +2,11 @@ import { ReactNode } from 'react'
 import { StrapiImageProps } from '../components/StrapiElements/types'
 import { CommonProps } from './homepage'
 
+export interface VideoCategory {
+  id: number
+  CategoryName: string
+}
+
 export interface Video {
   id: number
   Slug: string
@@ -9,7 +14,7 @@ export interface Video {
   Title: null | string
   IntroText: null | string
   Description?: null | string
-  categories: Array<{ CategoryName: string }>
+  categories: Array<VideoCategory>
   RelatedVideos: Array<Video>
   VideoDate?: null | string
   seo: null | {
@@ -20,9 +25,16 @@ export interface Video {
   publishedAt: string
 }
 
-export interface VideosProps extends CommonProps {
+export interface VideosPageProps extends CommonProps {
   title: string
   initialData: null | VideosApiResponse
+}
+
+export interface VideosInnerPageProps extends CommonProps {
+  video: Video
+  prevVideo: null | Video
+  nextVideo: null | Video
+  relatedVideos: Array<Video>
 }
 
 export interface VideosApiResponse {

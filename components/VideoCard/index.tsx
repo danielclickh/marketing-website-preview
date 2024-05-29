@@ -43,9 +43,11 @@ export default function VideoCard({
           </div>
 
           <div className='p-6 font-basier text-xl font-medium leading-tight  text-neutral-100'>
-            <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
-              {categories.map((cat) => cat.CategoryName).join(', ')}
-            </div>
+            {categories && (
+              <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
+                {categories.map((cat) => cat.CategoryName).join(', ')}
+              </div>
+            )}
             <p>{Title}</p>
             {IntroText && (
               <p className='whitespace-pre-wrap pt-4 text-sm'>{IntroText}</p>
