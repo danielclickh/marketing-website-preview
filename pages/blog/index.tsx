@@ -178,9 +178,6 @@ export default function BlogsPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:mb-16 lg:pt-20'>
         <SuiTitle type='h1'>{title}</SuiTitle>
-        {currentPage > 1 && (
-          <p className='text-neutral-300'>Page {currentPage}</p>
-        )}
       </div>
       {featuredBlog && (
         <div className='section-container'>
