@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router'
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import {
   Video,
   VideoCategory,
   VideoCategoryRecord
 } from '../../lib/videos/types'
 import { CUIButton } from '../ClickUI'
+import Pagination from '../Pagination'
 import { SuiSearchField } from '../sui'
 import CategorySelector from '../CategorySelector'
 import VideoCard from '../VideoCard'
@@ -177,46 +178,14 @@ export default function VideosList({
           })}
         </div>
 
-        {(hasPrevPage || hasNextPage) && (
-          <div className='my-8 flex items-center justify-center gap-8'>
-            <CUIButton
-              type='primary-dark'
-              className={`group !border-primary-300/50 ${
-                !hasPrevPage
-                  ? 'pointer-events-none opacity-40'
-                  : 'hover:!border-primary-400'
-              }`}
-              onClick={() => {
-                if (hasPrevPage) {
-                  setPage(page - 1)
-                  backToTop()
-                }
-              }}>
-              <span className='tanslate-x-0 mr-2 inline-block transition-transform group-hover:-translate-x-1'>
-                &lt;-
-              </span>
-              Prev
-            </CUIButton>
-            <CUIButton
-              type='primary-dark'
-              className={`group !border-primary-300/50 ${
-                !hasNextPage
-                  ? 'pointer-events-none opacity-40'
-                  : 'hover:!border-primary-400'
-              }`}
-              onClick={() => {
-                if (hasNextPage) {
-                  setPage(page + 1)
-                  backToTop()
-                }
-              }}>
-              Next{' '}
-              <span className='tanslate-x-0 ml-2 inline-block transition-transform group-hover:translate-x-1'>
-                -&gt;
-              </span>
-            </CUIButton>
-          </div>
-        )}
+        <Pagination
+          current={page + 1}
+          totalPages={totalPages}
+          onClick={(targetPage) => {
+            backToTop()
+            setPage(targetPage - 1)
+          }}
+        />
 
         {!videoList.length && (
           <p className='mt-12 w-full text-center'>

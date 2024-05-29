@@ -20,12 +20,6 @@ export interface BlogPost {
   keywords?: string
 }
 
-export interface BlogPostListProps {
-  blogs: BlogPost[]
-  selectedCategory: string
-  searchText: string
-}
-
 export interface BlogProps extends CommonProps {
   title: string
   description: string
