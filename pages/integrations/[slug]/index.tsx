@@ -152,7 +152,7 @@ export default function IntegrationPage({
             <span>Back to integrations</span>
           </Link>
           <div className='my-5 flex items-center gap-6'>
-            <div className='flex h-20 w-20 items-center justify-center rounded bg-white p-1'>
+            <div className='flex h-20 w-20 flex-shrink-0 items-center justify-center rounded bg-white p-1'>
               <IntegrationLogo
                 image={integration.logo_dark || integration.logo}
                 alt={integration.name}
