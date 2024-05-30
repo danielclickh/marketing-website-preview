@@ -8,27 +8,10 @@ import IntegrationTile from '../../components/IntegrationTile'
 import Layout from '../../components/Layout'
 import { SuiSearchField, SuiTitle } from '../../components/sui'
 import { fetchAll } from '../../lib/api/strapi'
-import { StrapiImageType } from '../../lib/api/strapi/types'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
 import { CommonProps } from '../../types/homepage'
-
-interface Integration {
-  name: string
-  slug: string
-  logo: StrapiImageType
-  logo_dark: StrapiImageType | null
-  category: string
-  website: string | null
-  readiness: string | null
-}
-
-interface IntegrationGroup {
-  label: string
-  description?: string
-  slug: string
-  integrations: Array<Integration>
-}
+import { IntegrationGroup } from '../../types/integrations'
 
 interface IntegrationsPageProps extends CommonProps {
   title: string
@@ -38,8 +21,7 @@ interface IntegrationsPageProps extends CommonProps {
 export async function getStaticProps() {
   const data = await fetchAll('integrations', {
     sort: ['name:ASC'],
-    populate: ['logo', 'logo_dark'],
-    fields: ['name', 'slug', 'category', 'website', 'readiness']
+    populate: ['logo', 'logo_dark']
   })
 
   // Divide the integrations into groups.

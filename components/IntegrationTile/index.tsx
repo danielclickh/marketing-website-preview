@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { StrapiImageType } from '../../lib/api/strapi/types'
+import { Integration } from '../../types/integrations'
 import { CUICard } from '../ClickUI'
 import IntegrationLogo from '../IntegrationLogo'
 import IntegrationSupportPill from '../IntegrationPill'
@@ -11,18 +12,23 @@ export default function IntegrationTile({
   slug,
   logo,
   logo_dark,
-  website,
-  readiness
-}: {
-  name: string
-  slug: string
-  logo: StrapiImageType
-  logo_dark?: StrapiImageType | null
-  website?: string | null
-  readiness?: string | null
-}) {
+  readiness,
+  openInNewWindow = false,
+  docsLink
+}: Pick<
+  Integration,
+  | 'name'
+  | 'slug'
+  | 'logo'
+  | 'logo_dark'
+  | 'readiness'
+  | 'openInNewWindow'
+  | 'docsLink'
+>) {
   return (
-    <Link href={`/integrations/${slug}`}>
+    <Link
+      href={openInNewWindow ? docsLink : `/integrations/${slug}`}
+      target={openInNewWindow ? '_blank' : '_self'}>
       <CUICard>
         <CUICard.Body className='relative bg-neutral-700/50'>
           {readiness && (
@@ -30,7 +36,7 @@ export default function IntegrationTile({
               <IntegrationSupportPill label={readiness} />
             </div>
           )}
-          {website && (
+          {openInNewWindow && (
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='14'

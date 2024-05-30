@@ -17,8 +17,9 @@ import {
   REVALIDATE_SECONDS
 } from '../../../lib/utils/revalidationConfig'
 import { CommonProps, ParamsType } from '../../../types/homepage'
+import { Integration } from '../../../types/integrations'
 
-interface IntegrationProps extends CommonProps {
+interface IntegrationPageProps extends CommonProps {
   seo?: SeoMetadata
   integration: {
     name: string
@@ -36,27 +37,26 @@ interface IntegrationProps extends CommonProps {
     changelog: string | null
     changelogv2: string | null
   }
-  similar: Array<{
-    name: string
-    slug: string
-    logo: StrapiImageType
-    logo_dark: StrapiImageType | null
-    category: string
-    website: string | null
-    readiness: string | null
-  }>
+  similar: Array<Integration>
 }
 
 export async function getStaticPaths() {
   return {
     paths: await getPathsValues('integrations', {
+      filters: {
+        // Integrations with `openInNewWindow` set to true are excluded from the query.
+        // This is because they link off externally. See the IntegrationTile component.
+        openInNewWindow: {
+          $ne: true
+        }
+      },
       fields: ['slug']
     }),
     fallback: NOT_FOUND_FALLBACK
   }
 }
 
-export const getStaticProps: GetStaticProps<IntegrationProps> =
+export const getStaticProps: GetStaticProps<IntegrationPageProps> =
   async function getStaticProps({ params }) {
     const { slug } = params as ParamsType
     const { data } = await findAll('integrations', {
@@ -66,20 +66,6 @@ export const getStaticProps: GetStaticProps<IntegrationProps> =
         }
       },
       populate: ['logo', 'logo_dark'],
-      fields: [
-        'name',
-        'shortDescription',
-        'category',
-        'supportLevel',
-        'website',
-        'readiness',
-        'summary',
-        'summaryv2',
-        'about',
-        'aboutv2',
-        'changelog',
-        'changelogv2'
-      ],
       pagination: { limit: 1 }
     })
     if (!data?.[0]) {
