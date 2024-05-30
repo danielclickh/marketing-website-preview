@@ -1,4 +1,4 @@
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import React from 'react'
 import FollowUs from '../../../components/FollowUs'
@@ -13,98 +13,97 @@ import { ParamsType } from '../../../types/homepage'
 import ResponsiveEmbed from '../../../components/ResponsiveEmbed'
 import { Video, VideosInnerPageProps } from '../../../types/videos'
 
-export const getServerSideProps: GetServerSideProps<VideosInnerPageProps> =
-  async function getServerSideProps(context: GetServerSidePropsContext) {
-    const { slug } = context.params as ParamsType
-    const { data } = await findAll('marketing-videos', {
-      sort: ['VideoDate:DESC', 'publishedAt:DESC'],
-      populate: [
-        'categories',
-        'RelatedVideos',
-        'RelatedVideos.categories',
-        'seo',
-        'seo.image'
-      ],
-      filters: {
-        Slug: {
-          $eq: slug
-        }
-      },
-      pagination: { limit: 1 }
-    })
-
-    if (!data?.[0]) {
-      return {
-        notFound: true
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { slug } = context.params as ParamsType
+  const { data } = await findAll('marketing-videos', {
+    sort: ['VideoDate:DESC', 'publishedAt:DESC'],
+    populate: [
+      'categories',
+      'RelatedVideos',
+      'RelatedVideos.categories',
+      'seo',
+      'seo.image'
+    ],
+    filters: {
+      Slug: {
+        $eq: slug
       }
-    }
+    },
+    pagination: { limit: 1 }
+  })
 
-    const video = data[0] as Video
-
-    // Get the previous video by querying ids less than the current
-    const prevVideoQuery = await findAll('marketing-videos', {
-      sort: ['id:DESC'],
-      populate: ['categories', 'seo', 'seo.image'],
-      filters: {
-        id: {
-          $lt: video.id
-        }
-      },
-      pagination: { limit: 1 }
-    })
-
-    const prevVideo = (prevVideoQuery.data[0] as Video) || null
-
-    // Get the next video by querying ids greater than the current
-    const nextVideoQuery = await findAll('marketing-videos', {
-      sort: ['id:ASC'],
-      populate: ['categories', 'seo', 'seo.image'],
-      filters: {
-        id: {
-          $gt: video.id
-        }
-      },
-      pagination: { limit: 1 }
-    })
-
-    const nextVideo = (nextVideoQuery.data[0] as Video) || null
-
-    // Get or query for related videos
-    let relatedVideos = video.RelatedVideos
-    if (!relatedVideos.length) {
-      const relatedResponse = await findAll('marketing-videos', {
-        sort: ['VideoDate:DESC', 'publishedAt:DESC'],
-        populate: ['categories', 'seo', 'seo.image'],
-        filters: {
-          id: {
-            $ne: video.id
-          },
-          categories: {
-            id: {
-              $in: video.categories ? video.categories.map((cat) => cat.id) : []
-            }
-          }
-        },
-        pagination: { limit: 3 }
-      })
-
-      relatedVideos = relatedResponse.data as Video[]
-    }
-
-    const commonData = await getCommonProps()
-
+  if (!data?.[0]) {
     return {
-      props: {
-        title: video.Title,
-        video,
-        prevVideo,
-        nextVideo,
-        relatedVideos,
-        seo: { ...(video.seo || {}), ...{ path: `/videos/${video.Slug}` } },
-        ...commonData
-      }
+      notFound: true
     }
   }
+
+  const video = data[0] as Video
+
+  // Get the previous video by querying ids less than the current
+  const prevVideoQuery = await findAll('marketing-videos', {
+    sort: ['id:DESC'],
+    populate: ['categories', 'seo', 'seo.image'],
+    filters: {
+      id: {
+        $lt: video.id
+      }
+    },
+    pagination: { limit: 1 }
+  })
+
+  const prevVideo = (prevVideoQuery.data[0] as Video) || null
+
+  // Get the next video by querying ids greater than the current
+  const nextVideoQuery = await findAll('marketing-videos', {
+    sort: ['id:ASC'],
+    populate: ['categories', 'seo', 'seo.image'],
+    filters: {
+      id: {
+        $gt: video.id
+      }
+    },
+    pagination: { limit: 1 }
+  })
+
+  const nextVideo = (nextVideoQuery.data[0] as Video) || null
+
+  // Get or query for related videos
+  let relatedVideos = video.RelatedVideos
+  if (!relatedVideos.length) {
+    const relatedResponse = await findAll('marketing-videos', {
+      sort: ['VideoDate:DESC', 'publishedAt:DESC'],
+      populate: ['categories', 'seo', 'seo.image'],
+      filters: {
+        id: {
+          $ne: video.id
+        },
+        categories: {
+          id: {
+            $in: video.categories ? video.categories.map((cat) => cat.id) : []
+          }
+        }
+      },
+      pagination: { limit: 3 }
+    })
+
+    relatedVideos = relatedResponse.data as Video[]
+  }
+
+  const commonData = await getCommonProps()
+
+  return {
+    props: {
+      title: video.Title,
+      video,
+      prevVideo,
+      nextVideo,
+      relatedVideos,
+      seo: { ...(video.seo || {}), ...{ path: `/videos/${video.Slug}` } },
+      ...commonData
+    }
+  }
+}
 
 export default function VideoPage({
   video,
@@ -114,7 +113,7 @@ export default function VideoPage({
   seo,
   headerData,
   footerData
-}: VideosInnerPageProps) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='container mx-auto my-20 flex max-w-3xl flex-col px-6 2xl:px-0'>
