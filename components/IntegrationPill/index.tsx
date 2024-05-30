@@ -4,7 +4,9 @@ export default function IntegrationSupportPill({ label }: { label: string }) {
   label = label.trim().toLowerCase()
 
   const themes: Record<string, string> = {
+    experimental: 'bg-amber-600 text-white',
     alpha: 'bg-amber-600 text-white',
+    beta: 'bg-amber-800 text-white',
     new: 'bg-primary-500 text-white'
   }
 
