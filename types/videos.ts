@@ -17,11 +17,7 @@ export interface Video {
   categories: Array<VideoCategory>
   RelatedVideos: Array<Video>
   VideoDate?: null | string
-  seo: null | {
-    title?: null | string
-    description?: null | string
-    image?: null | StrapiImageProps
-  }
+  seo?: CommonProps['seo']
   publishedAt: string
 }
 
@@ -31,6 +27,7 @@ export interface VideosPageProps extends CommonProps {
 }
 
 export interface VideosInnerPageProps extends CommonProps {
+  title: string
   video: Video
   prevVideo: null | Video
   nextVideo: null | Video

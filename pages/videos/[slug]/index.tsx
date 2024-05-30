@@ -1,4 +1,4 @@
-import { InferGetStaticPropsType, GetServerSideProps } from 'next'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import Link from 'next/link'
 import React from 'react'
 import FollowUs from '../../../components/FollowUs'
@@ -8,15 +8,14 @@ import { SuiButton, SuiTitle } from '../../../components/sui'
 import VideoCard from '../../../components/VideoCard'
 import { findAll } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import { slugify } from '../../../lib/utils/strings'
 import { ParamsType } from '../../../types/homepage'
 import ResponsiveEmbed from '../../../components/ResponsiveEmbed'
 import { Video, VideosInnerPageProps } from '../../../types/videos'
 
 export const getServerSideProps: GetServerSideProps<VideosInnerPageProps> =
-  async function getServerSideProps({ params }) {
-    const { slug } = params as ParamsType
+  async function getServerSideProps(context: GetServerSidePropsContext) {
+    const { slug } = context.params as ParamsType
     const { data } = await findAll('marketing-videos', {
       sort: ['VideoDate:DESC', 'publishedAt:DESC'],
       populate: [
@@ -54,7 +53,7 @@ export const getServerSideProps: GetServerSideProps<VideosInnerPageProps> =
       pagination: { limit: 1 }
     })
 
-    const prevVideo = prevVideoQuery.data[0] || null
+    const prevVideo = (prevVideoQuery.data[0] as Video) || null
 
     // Get the next video by querying ids greater than the current
     const nextVideoQuery = await findAll('marketing-videos', {
@@ -68,7 +67,7 @@ export const getServerSideProps: GetServerSideProps<VideosInnerPageProps> =
       pagination: { limit: 1 }
     })
 
-    const nextVideo = nextVideoQuery.data[0] || null
+    const nextVideo = (nextVideoQuery.data[0] as Video) || null
 
     // Get or query for related videos
     let relatedVideos = video.RelatedVideos
@@ -96,11 +95,12 @@ export const getServerSideProps: GetServerSideProps<VideosInnerPageProps> =
 
     return {
       props: {
+        title: video.Title,
         video,
         prevVideo,
         nextVideo,
         relatedVideos,
-        seo: { ...video.seo, ...{ path: `/videos/${video.Slug}` } },
+        seo: { ...(video.seo || {}), ...{ path: `/videos/${video.Slug}` } },
         ...commonData
       }
     }
