@@ -40,8 +40,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const video = data[0] as Video
 
-  // Get the previous video by querying ids less than the current
-  const prevVideoQuery = await findAll('marketing-videos', {
+  // Get the next video by querying ids less than the current
+  const nextVideoQuery = await findAll('marketing-videos', {
     sort: ['id:DESC'],
     populate: ['categories', 'seo', 'seo.image'],
     filters: {
@@ -52,10 +52,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     pagination: { limit: 1 }
   })
 
-  const prevVideo = (prevVideoQuery.data[0] as Video) || null
-
-  // Get the next video by querying ids greater than the current
-  const nextVideoQuery = await findAll('marketing-videos', {
+  // Get the previous video by querying ids greater than the current
+  const prevVideoQuery = await findAll('marketing-videos', {
     sort: ['id:ASC'],
     populate: ['categories', 'seo', 'seo.image'],
     filters: {
@@ -66,6 +64,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     pagination: { limit: 1 }
   })
 
+  const prevVideo = (prevVideoQuery.data[0] as Video) || null
   const nextVideo = (nextVideoQuery.data[0] as Video) || null
 
   // Get or query for related videos
