@@ -47,7 +47,8 @@ export async function getStaticProps() {
   const integrationGroups: Array<IntegrationGroup> = [
     {
       label: 'ClickPipes',
-      description: '',
+      description:
+        'ClickPipes is an integration engine that makes ingesting massive volumes of data from a diverse set of sources as simple as clicking a few buttons.',
       slug: 'clickpipes',
       integrations: data.filter((item) => item.category === 'CLICKPIPES')
     },
