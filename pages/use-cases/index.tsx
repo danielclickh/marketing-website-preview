@@ -3,7 +3,6 @@ import 'glider-js/glider.min.css'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
 import AccordionComponent from '../../components/AccordionComponent'
 import { CUIButton, CUICard } from '../../components/ClickUI'
 import GetStartedFree from '../../components/GetStartedFree'
@@ -11,11 +10,9 @@ import Layout from '../../components/Layout'
 import { StrapiImage } from '../../components/StrapiElements'
 import UseCasesComparisons from '../../components/UseCasesComparisons'
 import { findAll, findOne } from '../../lib/api/strapi'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { useCasesPageDataProps } from '../../types/useCasesPage'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
-
-import { Quote } from '../../types/useCasesPage'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { Quote, useCasesPageDataProps } from '../../types/useCasesPage'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
