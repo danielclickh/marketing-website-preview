@@ -1,11 +1,10 @@
 import Link from 'next/link'
 import React from 'react'
-import { StrapiImageType } from '../../lib/api/strapi/types'
 import { Integration } from '../../types/integrations'
 import { CUICard } from '../ClickUI'
 import { ExternalLink } from '../icons/ExternalLink'
-import IntegrationLogo from '../IntegrationLogo'
 import IntegrationSupportPill from '../IntegrationPill'
+import { StrapiImage } from '../StrapiElements'
 import { SuiTitle } from '../sui'
 
 export default function IntegrationTile({
@@ -42,8 +41,9 @@ export default function IntegrationTile({
           )}
           <div className='flex aspect-square flex-col items-center justify-center gap-3 rounded-lg text-center'>
             <div className='aspect-square w-full max-w-[64px]'>
-              <IntegrationLogo
-                image={logo_dark || logo}
+              <StrapiImage
+                {...(logo_dark || logo)}
+                sizes='medium'
                 alt={name}
                 className='aspect-square h-auto w-full object-contain'
               />

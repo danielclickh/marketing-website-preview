@@ -2,12 +2,12 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import React from 'react'
 import Link from 'next/link'
 import GetStartedFree from '../../../components/GetStartedFree'
-import IntegrationLogo from '../../../components/IntegrationLogo'
 import IntegrationPill from '../../../components/IntegrationPill'
 import IntegrationTile from '../../../components/IntegrationTile'
 import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'
 import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
+import { StrapiImage } from '../../../components/StrapiElements'
 import { SuiTitle } from '../../../components/sui'
 import { findAll, getPathsValues } from '../../../lib/api/strapi'
 import { SeoMetadata, StrapiImageType } from '../../../lib/api/strapi/types'
@@ -139,8 +139,9 @@ export default function IntegrationPage({
           </Link>
           <div className='my-5 flex items-center gap-6'>
             <div className='flex h-20 w-20 flex-shrink-0 items-center justify-center rounded bg-white p-1'>
-              <IntegrationLogo
-                image={integration.logo_dark || integration.logo}
+              <StrapiImage
+                {...(integration.logo_dark || integration.logo)}
+                sizes='medium'
                 alt={integration.name}
                 className='aspect-square h-auto w-full object-contain'
               />
@@ -192,7 +193,7 @@ export default function IntegrationPage({
             </SuiTitle>
             <div className='mt-6 grid grid-cols-2 justify-center gap-3 sm:grid-cols-3 md:grid-cols-5'>
               {similar.map((integration) => (
-                <IntegrationTile {...integration} />
+                <IntegrationTile key={integration.slug} {...integration} />
               ))}
             </div>
           </>
