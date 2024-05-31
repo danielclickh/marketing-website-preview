@@ -42,24 +42,52 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   // Get the next video by querying ids less than the current
   const nextVideoQuery = await findAll('marketing-videos', {
-    sort: ['id:DESC'],
+    sort: ['VideoDate:DESC', 'publishedAt:DESC'],
     populate: ['categories', 'seo', 'seo.image'],
     filters: {
-      id: {
-        $lt: video.id
-      }
+      Slug: {
+        $ne: slug
+      },
+      ...(video.VideoDate
+        ? {
+            VideoDate: {
+              $te: video.VideoDate
+            },
+            publishedAt: {
+              $lte: video.publishedAt
+            }
+          }
+        : {
+            publishedAt: {
+              $lte: video.publishedAt
+            }
+          })
     },
     pagination: { limit: 1 }
   })
 
   // Get the previous video by querying ids greater than the current
   const prevVideoQuery = await findAll('marketing-videos', {
-    sort: ['id:ASC'],
+    sort: ['VideoDate:DESC', 'publishedAt:DESC'],
     populate: ['categories', 'seo', 'seo.image'],
     filters: {
-      id: {
-        $gt: video.id
-      }
+      Slug: {
+        $ne: slug
+      },
+      ...(video.VideoDate
+        ? {
+            VideoDate: {
+              $gte: video.VideoDate
+            },
+            publishedAt: {
+              $gte: video.publishedAt
+            }
+          }
+        : {
+            publishedAt: {
+              $gte: video.publishedAt
+            }
+          })
     },
     pagination: { limit: 1 }
   })
