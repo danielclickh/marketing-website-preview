@@ -201,7 +201,7 @@ export default function ClickHouseServerPage({
                     },
                     {
                       logo: '/images/cloud/integrations/upstash.svg',
-                      name: 'Upstash Kafta'
+                      name: 'Upstash Kafka'
                     },
                     {
                       logo: '/images/cloud/integrations/diagram/azure-event-hub.svg',
