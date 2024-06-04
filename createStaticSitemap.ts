@@ -10,6 +10,7 @@ import { getStagingOnlyFilters } from './lib/api/strapi'
 const stagingOnlyFilters = getStagingOnlyFilters()
 
 import { getLexicons } from './lib/lexicons'
+import { Integration } from './types/integrations'
 
 interface Items {
   id?: string
@@ -35,7 +36,8 @@ function generateSiteMap(
   comparisons: Items[],
   richTextPages: Items[],
   videos: Video[],
-  lexicons: Items[]
+  lexicons: Items[],
+  integrations: Integration[]
 ) {
   const siteURL = 'https://clickhouse.com'
 
@@ -133,7 +135,7 @@ function generateSiteMap(
       .map((post) => {
         return `
     <url>
-        <loc>${`${siteURL}/blog/${post.slug}`}</loc>
+        <loc>${siteURL}/blog/${post.slug}</loc>
         <lastmod>${post.updatedAt}</lastmod>
     </url>
     `
@@ -144,7 +146,7 @@ function generateSiteMap(
       .map((post) => {
         return `
     <url>
-        <loc>${`${siteURL}/company/events/${post.slug}`}</loc>
+        <loc>${siteURL}/company/events/${post.slug}</loc>
         <lastmod>${post.updatedAt}</lastmod>
     </url>
     `
@@ -155,7 +157,7 @@ function generateSiteMap(
       .map((post) => {
         return `
     <url>
-        <loc>${`${siteURL}/comparison/${post.slug}`}</loc>
+        <loc>${siteURL}/comparison/${post.slug}</loc>
         <lastmod>${post.updatedAt}</lastmod>
     </url>
     `
@@ -165,7 +167,7 @@ function generateSiteMap(
       .map((post) => {
         return `
     <url>
-        <loc>${`${siteURL}${post.url}`}</loc>
+        <loc>${siteURL}${post.url}</loc>
         <lastmod>${post.updatedAt}</lastmod>
     </url>
     `
@@ -175,7 +177,7 @@ function generateSiteMap(
      .map((post) => {
        return `
     <url>
-        <loc>${`${siteURL}/videos/${post.slug}`}</loc>
+        <loc>${siteURL}/videos/${post.slug}</loc>
     </url>
     `
      })
@@ -185,7 +187,17 @@ function generateSiteMap(
        .map((lexicon) => {
          return `
     <url>
-        <loc>${`${siteURL}/lexicon/${lexicon.slug}`}</loc>
+        <loc>${siteURL}/lexicon/${lexicon.slug}</loc>
+    </url>
+    `
+       })
+       .join('')}
+
+     ${integrations
+       .map((integration) => {
+         return `
+    <url>
+        <loc>${siteURL}/integrations/${integration.slug}</loc>
     </url>
     `
        })
@@ -227,6 +239,25 @@ async function triggerSitemap() {
   }
   const richTextPages = await fetchAll('rich-content-pages', richTextPageParams)
 
+  const integrations = await fetchAll('integrations', {
+    filters: {
+      // Integrations with `openInNewWindow` set to true are excluded from the query.
+      // This is because they link off externally. See the IntegrationTile component.
+      $or: [
+        {
+          openInNewWindow: {
+            $eq: false
+          }
+        },
+        {
+          openInNewWindow: {
+            $null: true
+          }
+        }
+      ]
+    }
+  })
+
   // We generate the XML sitemap with the posts data
   generateSiteMap(
     blogPosts,
@@ -234,7 +265,8 @@ async function triggerSitemap() {
     comparisons,
     richTextPages,
     await getVideos(),
-    getLexicons()
+    getLexicons(),
+    integrations
   )
 }
 
