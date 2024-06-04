@@ -308,6 +308,30 @@ function Sitemap({
                 </Link>
               </p>
             </div>
+            <div className='col-span-full'>
+              <h2
+                id='integrations'
+                className='mb-4 font-basier text-2xl font-semibold text-neutral-100'>
+                <Link
+                  href={`/integrations`}
+                  className='hover:text-primary-300 hover:underline'>
+                  Integrations
+                </Link>
+              </h2>
+              <ul className='mb-2 grid gap-y-0 gap-x-10 xl:grid-cols-4'>
+                {integrations.map((integration) => {
+                  return (
+                    <li key={integration.slug} className='pb-2'>
+                      <Link
+                        href={`/integrations/${integration.slug}`}
+                        className='font text-primary-300 hover:underline'>
+                        {integration.name}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
           </div>
           <HRSeparator className='my-20' />
           <div>
@@ -376,28 +400,6 @@ function Sitemap({
                           href={`/lexicon/${lexicon.slug}`}
                           className='font text-primary-300 hover:underline'>
                           {lexicon.title}{' '}
-                        </Link>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
-              <div>
-                <p className='pb-2 font-semibold'>
-                  <Link
-                    href={`/integrations`}
-                    className='text-white hover:underline'>
-                    Integrations
-                  </Link>
-                </p>
-                <ul className='mb-2'>
-                  {integrations.map((integration) => {
-                    return (
-                      <li key={integration.slug} className='pb-2'>
-                        <Link
-                          href={`/integrations/${integration.slug}`}
-                          className='font text-primary-300 hover:underline'>
-                          {integration.name}
                         </Link>
                       </li>
                     )
