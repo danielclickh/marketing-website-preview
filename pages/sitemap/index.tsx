@@ -95,9 +95,18 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
       filters: {
         // Integrations with `openInNewWindow` set to true are excluded from the query.
         // This is because they link off externally. See the IntegrationTile component.
-        openInNewWindow: {
-          $ne: true
-        }
+        $or: [
+          {
+            openInNewWindow: {
+              $eq: false
+            }
+          },
+          {
+            openInNewWindow: {
+              $null: true
+            }
+          }
+        ]
       }
     })
 
@@ -352,7 +361,13 @@ function Sitemap({
                 </ul>
               </div>
               <div>
-                <p className='pb-2 font-semibold'>Lexicon</p>
+                <p className='pb-2 font-semibold'>
+                  <Link
+                    href={`/lexicon`}
+                    className='text-white hover:underline'>
+                    Lexicon
+                  </Link>
+                </p>
                 <ul className='mb-2'>
                   {lexicons.map((lexicon, index) => {
                     return (
@@ -368,7 +383,13 @@ function Sitemap({
                 </ul>
               </div>
               <div>
-                <p className='pb-2 font-semibold'>Integrations</p>
+                <p className='pb-2 font-semibold'>
+                  <Link
+                    href={`/integrations`}
+                    className='text-white hover:underline'>
+                    Integrations
+                  </Link>
+                </p>
                 <ul className='mb-2'>
                   {integrations.map((integration) => {
                     return (

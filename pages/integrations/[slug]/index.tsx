@@ -46,9 +46,18 @@ export async function getStaticPaths() {
       filters: {
         // Integrations with `openInNewWindow` set to true are excluded from the query.
         // This is because they link off externally. See the IntegrationTile component.
-        openInNewWindow: {
-          $ne: true
-        }
+        $or: [
+          {
+            openInNewWindow: {
+              $eq: false
+            }
+          },
+          {
+            openInNewWindow: {
+              $null: true
+            }
+          }
+        ]
       },
       fields: ['slug']
     }),
