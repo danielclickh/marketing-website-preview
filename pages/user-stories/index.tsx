@@ -287,6 +287,9 @@ function CustomerStoriesPage({
     })
   })
 
+  //Search field
+  const [searchQuery, setSearchQuery] = useState('')
+
   //manage
   useEffect(() => {
     //=== Use Cases ==//
@@ -327,10 +330,13 @@ function CustomerStoriesPage({
     // Set the selected use cases
     setSelectedVerticals(selectedVerticalsObject)
     //=== vertical ==//
-  }, [useCaseParam, migrationParam, verticalParam])
 
-  //Search field
-  const [searchQuery, setSearchQuery] = useState('')
+    //=== Search input ==//
+    if (searchParamInput) {
+      setSearchQuery(searchParamInput)
+    }
+    //=== Search input ==//
+  }, [useCaseParam, migrationParam, verticalParam])
 
   // Event handler to update search query
   const handleSearchInputChange = (
@@ -340,7 +346,6 @@ function CustomerStoriesPage({
     router.push(
       {
         query: {
-          ...router.query,
           search: event.target.value
         }
       },
