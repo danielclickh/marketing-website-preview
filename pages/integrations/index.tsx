@@ -11,7 +11,7 @@ import { fetchAll } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
 import { CommonProps } from '../../types/homepage'
-import { IntegrationGroup } from '../../types/integrations'
+import { Integration, IntegrationGroup } from '../../types/integrations'
 
 interface IntegrationsPageProps extends CommonProps {
   title: string
@@ -19,7 +19,7 @@ interface IntegrationsPageProps extends CommonProps {
 }
 
 export async function getStaticProps() {
-  const data = await fetchAll('integrations', {
+  const data: Integration[] = await fetchAll('integrations', {
     sort: ['name:ASC'],
     populate: ['logo', 'logo_dark']
   })
@@ -103,8 +103,10 @@ export default function IntegrationsPage({
   const [category, setCategory] = useState<string | null>(null)
   const [search, setSearch] = useState<string | null>(null)
 
-  const searchChange = (e: ChangeEvent<HTMLInputElement>) =>
+  const searchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setCategory(null)
     setSearch(e.target.value)
+  }
 
   const groups = (() => {
     let categoryGroups = structuredClone(integrationGroups)
