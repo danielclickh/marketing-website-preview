@@ -92,6 +92,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
     const allVideos = await getVideos()
 
     const integrations: Integration[] = await fetchAll('integrations', {
+      sort: ['name:ASC'],
       filters: {
         // Integrations with `openInNewWindow` set to true are excluded from the query.
         // This is because they link off externally. See the IntegrationTile component.
@@ -318,7 +319,7 @@ function Sitemap({
                   Integrations
                 </Link>
               </h2>
-              <ul className='mb-2 grid gap-y-0 gap-x-10 xl:grid-cols-4'>
+              <ul className='mb-2 gap-y-0 gap-x-10 xl:columns-4'>
                 {integrations.map((integration) => {
                   return (
                     <li key={integration.slug} className='pb-2'>
