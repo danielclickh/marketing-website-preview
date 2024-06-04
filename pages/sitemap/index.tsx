@@ -96,7 +96,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         // Integrations with `openInNewWindow` set to true are excluded from the query.
         // This is because they link off externally. See the IntegrationTile component.
         openInNewWindow: {
-          $neq: true
+          $ne: true
         }
       }
     })
