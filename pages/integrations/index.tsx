@@ -149,6 +149,7 @@ export default function IntegrationsPage({
         text: group.label,
         selected: group.slug === category,
         onClick() {
+          setSearch(null)
           setCategory(group.slug)
         }
       }
