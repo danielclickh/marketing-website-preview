@@ -206,6 +206,7 @@ export default function BlogsPage({
             !response ? '!hidden' : ''
           }`}>
           <SuiSearchField
+            defaultValue={search || ''}
             placeholder='Search by title or keyword...'
             htmlFor='search'
             className='mb-6 lg:mb-0 lg:flex-1'
