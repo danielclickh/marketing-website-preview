@@ -7,6 +7,7 @@ import Markdown from '../../../components/Markdown'
 import { SuiButton, SuiTitle } from '../../../components/sui'
 import VideoCard from '../../../components/VideoCard'
 import { findAll } from '../../../lib/api/strapi'
+import { SeoMetadata } from '../../../lib/api/strapi/types'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { slugify } from '../../../lib/utils/strings'
 import { ParamsType } from '../../../types/homepage'
@@ -119,14 +120,27 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const commonData = await getCommonProps()
 
+  const defaultSeo: SeoMetadata = {
+    path: `/videos/${video.Slug}`,
+    title: video.Title || video.VideoID
+  }
+
+  let seo = {
+    ...defaultSeo,
+    ...(video.seo || {})
+  }
+
+  // Use YT thumbnail as fallback seo image
+  if (!seo.image)
+    seo.imageUrl = `https://img.youtube.com/vi/${video.VideoID}/maxresdefault.jpg`
+
   return {
     props: {
-      title: video.Title,
       video,
       prevVideo,
       nextVideo,
       relatedVideos,
-      seo: { ...(video.seo || {}), ...{ path: `/videos/${video.Slug}` } },
+      seo,
       ...commonData
     }
   }
