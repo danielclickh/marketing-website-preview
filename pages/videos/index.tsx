@@ -148,6 +148,7 @@ export default function VideosPage({
         ref={scrollToContainer}>
         <div className='mb-20 flex-col items-center'>
           <SuiSearchField
+            defaultValue={search || ''}
             placeholder='Search by title or keyword...'
             htmlFor='search'
             className='mx-auto mb-6 md:max-w-md lg:mb-8'
