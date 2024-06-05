@@ -269,7 +269,7 @@ const onDemandCards: Array<OnDemandCardProps> = [
     thumbnail: '/images/learn/od-getting-started.jpg',
     description:
       'Get up and running quickly with ClickHouse! In this course, you’ll learn how to create a new service, how primary keys work in ClickHouse, how to define a table, how to insert data, and how to run queries on your table.',
-    link: 'https://learn.clickhouse.com/visitor_class_catalog/category/106343'
+    link: 'https://learn.clickhouse.com/visitor_catalog_class/show/1328489'
   },
   {
     icon: <DatabasePlus />,
@@ -278,7 +278,7 @@ const onDemandCards: Array<OnDemandCardProps> = [
     thumbnail: '/images/learn/od-data-ingestion.jpg',
     description:
       'In this course, you’ll learn techniques for getting data into your ClickHouse service, including how to insert a CSV/TSV file, how to insert data from another database, and how to use the various functions and table engines for ingesting data.',
-    link: 'https://learn.clickhouse.com/visitor_catalog_class/show/912833/104---Data-Ingestion'
+    link: 'https://learn.clickhouse.com/visitor_catalog_class/show/1328910'
   },
   {
     icon: <Eye />,
@@ -287,7 +287,7 @@ const onDemandCards: Array<OnDemandCardProps> = [
     thumbnail: '/images/learn/od-materialized-views.jpg',
     description:
       'Creating views is an important step in optimizing your OLAP applications. In this course, you’ll learn how to define materialized views, including views that use the SummingMergeTree and AggregatingMergeTree table engines.',
-    link: 'https://learn.clickhouse.com/visitor_catalog_class/show/1043451/Materialized-Views'
+    link: 'https://learn.clickhouse.com/visitor_catalog_class/show/1328927'
   }
 ]
 
