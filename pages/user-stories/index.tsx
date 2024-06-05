@@ -401,6 +401,9 @@ function CustomerStoriesPage({
                     value={selectedUseCases}
                     itemClassName='multiselect-item'
                     onChange={(e) => {
+                      if (searchQuery) {
+                        setSearchQuery('')
+                      }
                       setSelectedUseCases(e.value)
                       const selectedValues = e.value
                         .map((option: UseCaseCategory) => option.code)
@@ -409,7 +412,8 @@ function CustomerStoriesPage({
                         {
                           query: {
                             ...router.query,
-                            useCase: selectedValues
+                            useCase: selectedValues,
+                            search: undefined
                           }
                         },
                         undefined,
@@ -430,6 +434,9 @@ function CustomerStoriesPage({
                     value={selectedMigrations}
                     itemClassName='multiselect-item'
                     onChange={(e) => {
+                      if (searchQuery) {
+                        setSearchQuery('')
+                      }
                       setSelectedMigrations(e.value)
                       const selectedValues = e.value
                         .map((option: UseCaseMigration) => option.code)
@@ -438,7 +445,8 @@ function CustomerStoriesPage({
                         {
                           query: {
                             ...router.query,
-                            migration: selectedValues
+                            migration: selectedValues,
+                            search: undefined
                           }
                         },
                         undefined,
@@ -459,6 +467,9 @@ function CustomerStoriesPage({
                     value={selectedVerticals}
                     itemClassName='multiselect-item'
                     onChange={(e) => {
+                      if (searchQuery) {
+                        setSearchQuery('')
+                      }
                       setSelectedVerticals(e.value)
                       const selectedValues = e.value
                         .map((option: UseCaseVertical) => option.code)
@@ -467,7 +478,8 @@ function CustomerStoriesPage({
                         {
                           query: {
                             ...router.query,
-                            vertical: selectedValues
+                            vertical: selectedValues,
+                            search: undefined
                           }
                         },
                         undefined,
