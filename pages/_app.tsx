@@ -128,8 +128,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             type='text/javascript'
             async
           />
-          {/* Securiti.ai Cookie Banner - first is produciton mode, second is dev */}
-          {is_prod ? (
+          {/* Securiti.ai Cookie Banner - first is produciton mode */}
+          {is_prod && (
             // THIS IS PRODUCTION
             <Script
               defer
@@ -140,25 +140,6 @@ function MyApp({ Component, pageProps }: AppProps) {
               data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
               data-backend-url='https://app.securiti.ai'
               onReady={() => {
-                const cookieSettingsButton = document.querySelector(
-                  '#cookie-settings-button'
-                )
-                cookieSettingsButton?.classList.remove('hidden')
-                cookieSettingsButton?.classList.add('cmp-revoke-consent')
-              }}
-            />
-          ) : (
-            // THIS IS DEV/LOCAL
-            <Script
-              defer
-              data-skip-css='false'
-              data-strict-csp
-              src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader-strict-csp.js'
-              data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
-              data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
-              data-backend-url='https://app.securiti.ai'
-              onReady={() => {
-                console.log('Cookie banner in dev mode')
                 const cookieSettingsButton = document.querySelector(
                   '#cookie-settings-button'
                 )

@@ -63,7 +63,7 @@ export default function HomepageSectionContentFeed({
                 Filter by
               </SuiText>
               <ul className='flex flex-wrap gap-4'>
-                {allCategories.map((category) => {
+                {allCategories.map((category, index) => {
                   const isActive = category === activeCategory
                   let classes =
                     'text-white border-primary-600 hover:border-primary-300'
@@ -71,7 +71,7 @@ export default function HomepageSectionContentFeed({
                     classes =
                       'border-primary-300 bg-primary-300 text-primary-800'
                   return (
-                    <li key={category}>
+                    <li key={index}>
                       <button
                         onClick={() => {
                           setHasChanged(true)
@@ -133,9 +133,10 @@ export default function HomepageSectionContentFeed({
                 {entry.stats && entry.stats.length && (
                   <div
                     className={`grid grid-cols-1 gap-2 ${statsColumnClasses}`}>
-                    {entry.stats.map((stat) => {
+                    {entry.stats.map((stat, index) => {
                       return (
                         <StatBox
+                          key={index}
                           stat={stat.stat}
                           label={stat.label}
                           icon={stat.icon}

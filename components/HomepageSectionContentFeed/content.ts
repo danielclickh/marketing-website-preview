@@ -31,6 +31,7 @@ import LogoVantage from './assets/logo-vantage'
 import LogoVimeo from './assets/logo-vimeo'
 import LogoDidi from './assets/logo-didi'
 import LogoInstacart from './assets/logo-instacart'
+import LogoIBM from './assets/logo-ibm'
 
 export type EntryCategory = string
 
@@ -405,6 +406,13 @@ export function getContent(): Entry[] {
       featured: false,
       body: `"We evaluated more than a dozen different big data systems before settling on ClickHouse. No system comes close to ClickHouse when it comes to the flexibility ClickHouse provides" [Read blog](/blog/clickhouse-powers-dassanas-security-data-lake?loc=homepage)`,
       logo: LogoDassana,
+      categories: ['Fraud & cybersecurity']
+    },
+    // IBM
+    {
+      featured: false,
+      body: `“QRadar Log Insights uses a modern open-source OLAP data warehouse, ClickHouse, which ingests, automatically indexes, searches and analyzes large datasets at sub-second speed. You get near real-time visibility and insights from your ingested data.” <a href="https://www.ibm.com/blog/closing-breach-window-from-data-to-action/?utm_source=clickhouse" target="_blank">Read blog</a>`,
+      logo: LogoIBM,
       categories: ['Fraud & cybersecurity']
     },
 
