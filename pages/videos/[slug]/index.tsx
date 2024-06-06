@@ -22,6 +22,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       'categories',
       'RelatedVideos',
       'RelatedVideos.categories',
+      'RelatedVideos.seo.image',
       'seo',
       'seo.image'
     ],
@@ -128,6 +129,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (video.seo?.title) seo.title = video.seo.title
 
   if (video.seo?.description) seo.description = video.seo.description
+
+  if (video.seo?.image) seo.image = [video.seo.image]
 
   // Use YT thumbnail as fallback seo image
   if (!seo.image)
