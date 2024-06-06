@@ -265,7 +265,7 @@ const onDemandCards: Array<OnDemandCardProps> = [
   {
     icon: <Stairs />,
     title: 'Getting Started',
-    duration: '25 minutes',
+    duration: '60 minutes',
     thumbnail: '/images/learn/od-getting-started.jpg',
     description:
       'Get up and running quickly with ClickHouse! In this course, you’ll learn how to create a new service, how primary keys work in ClickHouse, how to define a table, how to insert data, and how to run queries on your table.',
@@ -274,7 +274,7 @@ const onDemandCards: Array<OnDemandCardProps> = [
   {
     icon: <DatabasePlus />,
     title: 'Data Ingestion',
-    duration: '20 minutes',
+    duration: '60 minutes',
     thumbnail: '/images/learn/od-data-ingestion.jpg',
     description:
       'In this course, you’ll learn techniques for getting data into your ClickHouse service, including how to insert a CSV/TSV file, how to insert data from another database, and how to use the various functions and table engines for ingesting data.',
@@ -283,7 +283,7 @@ const onDemandCards: Array<OnDemandCardProps> = [
   {
     icon: <Eye />,
     title: 'Materialized Views',
-    duration: '25 minutes',
+    duration: '60 minutes',
     thumbnail: '/images/learn/od-materialized-views.jpg',
     description:
       'Creating views is an important step in optimizing your OLAP applications. In this course, you’ll learn how to define materialized views, including views that use the SummingMergeTree and AggregatingMergeTree table engines.',
