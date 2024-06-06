@@ -22,6 +22,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       'categories',
       'RelatedVideos',
       'RelatedVideos.categories',
+      'RelatedVideos.seo.image',
       'seo',
       'seo.image'
     ],
