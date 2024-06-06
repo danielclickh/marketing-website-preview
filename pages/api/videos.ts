@@ -8,6 +8,7 @@ const baseQuery: Record<string, any> = {
   populate: ['categories', 'seo', 'seo.image'],
   filters: {
     //$or: getStagingOnlyFilters() // Not used on videos
+    $or: []
   }
 }
 
@@ -77,9 +78,26 @@ export async function fetchVideos({
 
   // Apply search filters
   if (search) {
-    query.filters.Title = {
-      $containsi: search
-    }
+    // Search title
+    query.filters.$or.push({
+      Title: {
+        $containsi: search
+      }
+    })
+
+    // Search intro text
+    query.filters.$or.push({
+      IntroText: {
+        $containsi: search
+      }
+    })
+
+    // Search description
+    query.filters.$or.push({
+      Description: {
+        $containsi: search
+      }
+    })
   }
 
   // Get paginated blog posts
