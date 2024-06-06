@@ -129,6 +129,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   if (video.seo?.description) seo.description = video.seo.description
 
+  if (video.seo?.image) seo.image = [video.seo.image]
+
   // Use YT thumbnail as fallback seo image
   if (!seo.image)
     seo.imageUrl = `https://img.youtube.com/vi/${video.VideoID}/maxresdefault.jpg`
