@@ -120,15 +120,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const commonData = await getCommonProps()
 
-  const defaultSeo: SeoMetadata = {
+  let seo: SeoMetadata = {
     path: `/videos/${video.Slug}`,
     title: video.Title || video.VideoID
   }
 
-  let seo = {
-    ...defaultSeo,
-    ...(video.seo || {})
-  }
+  if (video.seo?.title) seo.title = video.seo.title
+
+  if (video.seo?.description) seo.description = video.seo.description
 
   // Use YT thumbnail as fallback seo image
   if (!seo.image)
