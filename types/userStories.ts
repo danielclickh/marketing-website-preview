@@ -34,6 +34,7 @@ export interface UserStory {
     createdAt: string
     updatedAt: string
     publishedAt: string
+    SortOrder: number
     User: {
       data: UserData
     }

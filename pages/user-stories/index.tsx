@@ -42,8 +42,6 @@ export const getStaticProps: GetStaticProps<UserStoriesPage> =
 
     const userStories = userStoriesPayload.data
 
-    console.log(userStories)
-
     //get use cases
     const useCases = await fetch(
       `${process.env.STRAPI_API_URL}/api/user-stories-use-cases?sort=Name`,
@@ -199,20 +197,32 @@ function CustomerStoriesPage({
   }
 
   const sortedUserStories = userStories.slice().sort((a, b) => {
-    const dateA = new Date(a.attributes.createdAt)
-    const dateB = new Date(b.attributes.createdAt)
-
-    if (!orderByDate) {
-      // First, sort by highlight status when orderByDate is false
-      if (a.attributes.highlight && !b.attributes.highlight) {
-        return -1
-      } else if (!a.attributes.highlight && b.attributes.highlight) {
-        return 1
-      }
+    // If orderByDate is true, sort only by createdAt
+    if (orderByDate) {
+      const dateA = new Date(a.attributes.createdAt)
+      const dateB = new Date(b.attributes.createdAt)
+      return dateB.getTime() - dateA.getTime() // Descending order by createdAt
     }
 
-    // If orderByDate is true or both are either highlighted or not, sort by createdAt
-    return dateB.getTime() - dateA.getTime() // Descending order by default
+    // First, sort by highlight status
+    if (a.attributes.highlight && !b.attributes.highlight) {
+      return -1
+    } else if (!a.attributes.highlight && b.attributes.highlight) {
+      return 1
+    }
+
+    // If both have the same highlight status, sort by sortOrder
+    const sortOrderA = a.attributes.SortOrder ?? Number.MAX_SAFE_INTEGER
+    const sortOrderB = b.attributes.SortOrder ?? Number.MAX_SAFE_INTEGER
+
+    if (sortOrderA !== sortOrderB) {
+      return sortOrderA - sortOrderB // Ascending order by sortOrder
+    }
+
+    // If both have the same sortOrder, sort by createdAt
+    const dateA = new Date(a.attributes.createdAt)
+    const dateB = new Date(b.attributes.createdAt)
+    return dateB.getTime() - dateA.getTime() // Descending order by createdAt
   })
 
   //state to hold user selected values
