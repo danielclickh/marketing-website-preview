@@ -174,8 +174,8 @@ function CustomerStoriesPage({
   }
 
   const orderByDate = searchParams.get('latest')
-    ? searchParams.get('latest') === 'true'
-    : true
+    ? searchParams.get('latest') === 'false'
+    : false
 
   const useCaseParam = searchParams.get('useCase')
   const migrationParam = searchParams.get('migration')
@@ -565,7 +565,7 @@ function CustomerStoriesPage({
                         <div className='story-title py-2 font-basier text-xl font-semibold'>
                           {story.attributes.Title}
                         </div>
-                        <div className='story-description'>
+                        <div className='story-description text-balance'>
                           {story.attributes.Description}
                         </div>
                         {(story.attributes.ReadBlogLink ||
