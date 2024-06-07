@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps<UserStoriesPage> =
     result.seo.path = '/user-stories'
 
     const userStoriesData = await fetch(
-      `${process.env.STRAPI_API_URL}/api/user-stories?populate=User.logo,useCase,migrations,vertical`,
+      `${process.env.STRAPI_API_URL}/api/user-stories?populate=User.logo,useCase,migrations,vertical&sort[0]=createdAt:desc`,
       {
         headers: {
           Authorization: `Bearer ${process.env.STRAPI_API_KEY}`
@@ -39,18 +39,10 @@ export const getStaticProps: GetStaticProps<UserStoriesPage> =
     )
 
     const userStoriesPayload = await userStoriesData.json()
+
     const userStories = userStoriesPayload.data
-    //make highlighted stories come first
-    userStories.sort(
-      (
-        a: { attributes: { highlight: boolean } },
-        b: { attributes: { highlight: boolean } }
-      ) => {
-        if (a.attributes.highlight && !b.attributes.highlight) return -1
-        if (!a.attributes.highlight && b.attributes.highlight) return 1
-        return 0
-      }
-    )
+
+    console.log(userStories)
 
     //get use cases
     const useCases = await fetch(
@@ -174,7 +166,7 @@ function CustomerStoriesPage({
   }
 
   const orderByDate = searchParams.get('latest')
-    ? searchParams.get('latest') === 'false'
+    ? searchParams.get('latest') === 'true'
     : false
 
   const useCaseParam = searchParams.get('useCase')
@@ -205,15 +197,22 @@ function CustomerStoriesPage({
       { shallow: true }
     )
   }
-  const sortedUserStories = userStories.slice().sort((a, b) => {
-    const dateA = new Date(a.attributes.publishedAt)
-    const dateB = new Date(b.attributes.publishedAt)
 
-    if (orderByDate) {
-      return dateA.getTime() - dateB.getTime() // Ascending order
-    } else {
-      return dateB.getTime() - dateA.getTime() // Descending order
+  const sortedUserStories = userStories.slice().sort((a, b) => {
+    const dateA = new Date(a.attributes.createdAt)
+    const dateB = new Date(b.attributes.createdAt)
+
+    if (!orderByDate) {
+      // First, sort by highlight status when orderByDate is false
+      if (a.attributes.highlight && !b.attributes.highlight) {
+        return -1
+      } else if (!a.attributes.highlight && b.attributes.highlight) {
+        return 1
+      }
     }
+
+    // If orderByDate is true or both are either highlighted or not, sort by createdAt
+    return dateB.getTime() - dateA.getTime() // Descending order by default
   })
 
   //state to hold user selected values
@@ -257,7 +256,7 @@ function CustomerStoriesPage({
       !verticalCodes.length
 
     // Filter by Latest
-    const dateA = new Date(story.attributes.publishedAt)
+    const dateA = new Date(story.attributes.createdAt)
     const dateB = new Date()
     const latestMatch = orderByDate ? dateA.getTime() <= dateB.getTime() : true
 
@@ -519,7 +518,7 @@ function CustomerStoriesPage({
                         story.attributes.highlight
                           ? 'border-primary-300 bg-neutral-700'
                           : 'overflow-hidden border-neutral-700/80'
-                      }  relative min-h-[440px] rounded-[4px] border md:min-h-[400px]`}>
+                      } relative flex  flex-col rounded-[4px] border`}>
                       <div className='story-header bg-primary-300 p-4'>
                         <div className='flex h-[40px] items-center justify-center'>
                           {story.attributes.User.data && (
@@ -545,34 +544,31 @@ function CustomerStoriesPage({
                               }
                               priority={true}
                               loading='eager'
+                              className='max-h-[35px]'
                             />
                           )}
                         </div>
                       </div>
-                      <div className={`p-6`}>
+                      <div className='flex flex-grow flex-col p-6'>
                         <div className='story-categories font-inconsolata text-primary-300'>
                           {story.attributes.useCase.data &&
-                            story.attributes.useCase.data.map(
-                              (useCase, index) => {
-                                return (
-                                  <span key={index}>
-                                    {useCase.attributes.Name}
-                                  </span>
-                                )
-                              }
-                            )}
+                            story.attributes.useCase.data
+                              .map((useCase) => {
+                                return useCase.attributes.Name
+                              })
+                              .join(', ')}
                         </div>
                         <div className='story-title py-2 font-basier text-xl font-semibold'>
                           {story.attributes.Title}
                         </div>
-                        <div className='story-description text-balance'>
+                        <div className='story-description text-balance flex-grow'>
                           {story.attributes.Description}
                         </div>
                         {(story.attributes.ReadBlogLink ||
                           story.attributes.ExternalLink ||
                           story.attributes.WatchVideoLink) && (
-                          <div className='absolute bottom-6 right-6 mt-auto'>
-                            <div className='flex items-center gap-x-6 text-primary-300'>
+                          <div className='mt-auto'>
+                            <div className='mt-6 flex items-center justify-end gap-x-6 text-primary-300'>
                               {story.attributes.ReadBlogLink && (
                                 <Link
                                   href={story.attributes.ReadBlogLink}
