@@ -557,7 +557,7 @@ function CustomerStoriesPage({
                               }
                               priority={true}
                               loading='eager'
-                              className='max-h-[40px]'
+                              className='max-h-[35px]'
                             />
                           )}
                         </div>
