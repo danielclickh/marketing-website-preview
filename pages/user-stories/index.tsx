@@ -273,11 +273,14 @@ function CustomerStoriesPage({
     // Filter by Search Query
     const title = story.attributes.Title.toLowerCase()
     const description = story.attributes.Description?.toLowerCase()
+    const user = story.attributes.User.data.attributes.Name?.toLowerCase()
     const searchLowerCase = searchParamInput
       ? searchParamInput.toLowerCase()
       : ''
     const searchMatch =
-      title.includes(searchLowerCase) || description?.includes(searchLowerCase)
+      title.includes(searchLowerCase) ||
+      description?.includes(searchLowerCase) ||
+      user?.includes(searchLowerCase)
 
     return (
       useCaseMatch &&
