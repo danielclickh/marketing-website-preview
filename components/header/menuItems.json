@@ -92,13 +92,6 @@
 						"href": "https://github.com/ClickHouse/ClickHouse",
 						"galaxyEvent": "topNav.resourcesMenu.communityGithubSelect",
 						"target": "_blank"
-					},
-					{
-						"id": 3,
-						"name": "User stories",
-						"href": "/user-stories",
-						"galaxyEvent": "topNav.resourcesMenu.communityUserStoriesSelect",
-						"target": "_self"
 					}
 				]
 			},
@@ -257,13 +250,6 @@
 				]
 			}
 		]
-	},
-	{
-		"id": 10,
-		"name": "User stories",
-		"href": "/user-stories",
-		"target": "_self",
-		"galaxyEvent": "topNav.navItems.userStoriesSelect"
 	},
 	{
 		"id": 5,
