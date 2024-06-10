@@ -397,7 +397,7 @@ function CustomerStoriesPage({
                 onChange={handleSearchInputChange}
                 value={searchQuery}
               />
-              <div className='flex flex-col items-center justify-center gap-4 xl:flex-row xl:flex-nowrap'>
+              <div className='flex flex-col items-center justify-center gap-4 lg:flex-row lg:flex-nowrap'>
                 <button
                   type='button'
                   className={`${
