@@ -154,14 +154,16 @@ export default function BlogsPage({
         <div className='section-container'>
           <CUILink
             href={`/blog/${featuredBlog.slug}`}
-            className='mt-2 mb-16 flex w-full flex-col gap-y-8 rounded-xl hover:no-underline hover:shadow-card lg:flex-row-reverse lg:gap-x-12 xl:gap-x-24'>
+            className='mb-16 mt-2 flex w-full flex-col gap-y-8 rounded-xl hover:no-underline hover:shadow-card lg:flex-row-reverse lg:gap-x-12 xl:gap-x-24'>
             {featuredBlog.thumbnailPng && (
-              <StrapiImage
-                {...featuredBlog.thumbnailPng}
-                className='h-auto !w-full rounded-lg object-cover lg:!w-1/2 lg:flex-shrink-0 lg:flex-grow-0'
-              />
+              <div className='lg:w-1/2'>
+                <StrapiImage
+                  {...featuredBlog.thumbnailPng}
+                  className='overflow-hidden rounded-lg'
+                />
+              </div>
             )}
-            <div className='flex w-full flex-col justify-center border-l-8 border-primary-300 pl-6 lg:w-1/2 lg:flex-1'>
+            <div className='lg:w-1/2 flex w-full flex-col justify-center border-l-8 border-primary-300 pl-6 lg:flex-1'>
               <div className='font-inconsolata font-medium text-primary-300'>
                 {featuredBlog.category}
               </div>
