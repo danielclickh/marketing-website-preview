@@ -70,7 +70,7 @@ interface LogoData {
     caption: string | null
     width: number
     height: number
-    formats: any // You can specify the type based on the actual structure
+    formats: any
     hash: string
     ext: string
     mime: string
@@ -78,13 +78,13 @@ interface LogoData {
     url: string
     previewUrl: string | null
     provider: string
-    provider_metadata: any // You can specify the type based on the actual structure
+    provider_metadata: any
     createdAt: string
     updatedAt: string
   }
 }
 
-interface UseCase {
+export interface UseCase {
   id: number
   attributes: {
     Name: string
@@ -93,7 +93,7 @@ interface UseCase {
   }
 }
 
-interface Migration {
+export interface Migration {
   id: number
   attributes: {
     Name: string
@@ -102,7 +102,7 @@ interface Migration {
   }
 }
 
-interface Vertical {
+export interface Vertical {
   id: number
   attributes: {
     Name: string

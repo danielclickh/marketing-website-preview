@@ -294,6 +294,9 @@ function CustomerStoriesPage({
   })
 
   useEffect(() => {
+    if (searchParamInput) {
+      setSearchQuery(searchParamInput)
+    }
     //stop flash of unstyled content
     const multiselectTargets = document.querySelectorAll('.multiselect-target')
     multiselectTargets.forEach((item) => {
@@ -395,7 +398,7 @@ function CustomerStoriesPage({
               <SuiSearchField
                 placeholder='Search by company or keyword...'
                 htmlFor='search'
-                className='mb-6 xl:mb-0 xl:min-w-[447px]'
+                className='xl:min-w-[447px] mb-6 xl:mb-0'
                 onChange={handleSearchInputChange}
                 value={searchQuery}
               />
