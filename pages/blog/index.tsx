@@ -163,7 +163,7 @@ export default function BlogsPage({
                 />
               </div>
             )}
-            <div className='lg:w-1/2 flex w-full flex-col justify-center border-l-8 border-primary-300 pl-6 lg:flex-1'>
+            <div className='lg:w-1/2 flex w-full flex-col justify-start border-l-8 border-primary-300 pl-6 lg:flex-1'>
               <div className='font-inconsolata font-medium text-primary-300'>
                 {featuredBlog.category}
               </div>
