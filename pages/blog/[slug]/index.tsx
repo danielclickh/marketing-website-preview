@@ -136,7 +136,7 @@ export default function BlogPage({
                 {category}
               </Link>
             </h4>
-            <h1 className='mt-6 mb-8 font-basier text-4xl font-bold text-neutral-100 '>
+            <h1 className='mb-8 mt-6 font-basier text-4xl font-bold text-neutral-100 '>
               <span className='leading-snug'>{title}</span>
             </h1>
             <div className='flex flex-row items-center justify-center space-x-4 pt-2'>
@@ -174,9 +174,12 @@ export default function BlogPage({
                 </Markdown>
               </>
             )}
-            <Markdown className='rich-text-content leading-6' allowHeaderLink>
-              {content}
-            </Markdown>
+            {content && (
+              <Markdown className='rich-text-content leading-6' allowHeaderLink>
+                {content}
+              </Markdown>
+            )}
+
             {ShowCloudCTAFooter && (
               <>
                 <Markdown
@@ -208,7 +211,7 @@ export default function BlogPage({
       </div>
 
       <div className='flex w-full pb-8 text-neutral-0 '>
-        <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pt-12 pb-8 md:bg-no-repeat 2xl:px-0'>
+        <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pb-8 pt-12 md:bg-no-repeat 2xl:px-0'>
           <div className='flex justify-between pb-8'>
             <SuiTitle
               type='h2'
