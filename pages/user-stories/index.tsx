@@ -273,7 +273,9 @@ function CustomerStoriesPage({
     // Filter by Search Query
     const title = story.attributes.Title.toLowerCase()
     const description = story.attributes.Description?.toLowerCase()
-    const user = story.attributes.User.data.attributes.Name?.toLowerCase()
+    const user = story.attributes.User.data
+      ? story.attributes.User.data.attributes.Name?.toLowerCase()
+      : ''
     const searchLowerCase = searchParamInput
       ? searchParamInput.toLowerCase()
       : ''
@@ -388,7 +390,7 @@ function CustomerStoriesPage({
               workloads and lower costs.
             </p>
           </div>
-          <div className='my-24 mx-auto max-w-7xl px-8 2xl:px-0'>
+          <div className='mx-auto my-24 max-w-7xl px-8 2xl:px-0'>
             <div className='filters mb-6 gap-x-4 xl:flex xl:justify-between'>
               <SuiSearchField
                 placeholder='Search by company or keyword...'
@@ -404,7 +406,7 @@ function CustomerStoriesPage({
                     orderByDate
                       ? 'bg-primary-300 text-black'
                       : 'border-opacity-[0.3] text-white'
-                  } max-h-[42px] w-[162px] rounded-full border border-primary-500 py-2.5 px-4 text-sm font-semibold text-black xl:w-auto`}
+                  } max-h-[42px] w-[162px] rounded-full border border-primary-500 px-4 py-2.5 text-sm font-semibold text-black xl:w-auto`}
                   onClick={toggleOrderByDate}>
                   Latest
                 </button>
@@ -574,7 +576,7 @@ function CustomerStoriesPage({
                         <div className='story-title py-2 font-basier text-xl font-semibold'>
                           {story.attributes.Title}
                         </div>
-                        <div className='story-description text-balance flex-grow'>
+                        <div className='story-description flex-grow text-balance'>
                           {story.attributes.Description}
                         </div>
                         {(story.attributes.ReadBlogLink ||
@@ -613,7 +615,7 @@ function CustomerStoriesPage({
                         )}
                       </div>
                       {story.attributes.highlight && (
-                        <div className='absolute left-1/2 -bottom-2 z-50 -translate-x-1/2 transform bg-half-highlight px-1 text-xs font-bold uppercase'>
+                        <div className='absolute -bottom-2 left-1/2 z-50 -translate-x-1/2 transform bg-half-highlight px-1 text-xs font-bold uppercase'>
                           Highlight
                         </div>
                       )}
@@ -627,7 +629,7 @@ function CustomerStoriesPage({
                   Sorry, no user stories found
                 </div>
                 <ClearFilterButton
-                  className='mt-6 rounded-full border border-primary-600 py-2.5 px-4 text-sm font-semibold hover:border-primary-300'
+                  className='mt-6 rounded-full border border-primary-600 px-4 py-2.5 text-sm font-semibold hover:border-primary-300'
                   onClick={clearAllFilters}
                   disabled={
                     useCaseParam ||
