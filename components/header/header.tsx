@@ -16,7 +16,7 @@ import { Disclosure } from '@headlessui/react'
 import { ChevronRightIcon, MenuIcon, XIcon } from '@heroicons/react/solid'
 import { CUIButton, CUILink } from '../ClickUI'
 import menuItems from './menuItems.json'
-import logoFull from '../../public/logo-full.svg'
+import logoFull from '../../public/logo-pride.svg'
 import { HeaderProps, MenuItem as MenuItemType } from './types'
 import MobileMenuItem from './MobileMenuItem'
 import GlobalMenu from './GlobalMenu'
@@ -58,15 +58,17 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
     }
   }
 
+  const [headerBanner, setHeaderBanner] = useState(
+    '<a href="/blog/clickhouse-cloud-is-now-on-azure-in-public-beta?loc=eyebrow">ClickHouse Cloud on Microsoft Azure: Now in Beta</a>'
+  )
+
   useEffect(() => {
     document.addEventListener('scroll', onscroll)
+
     return () => {
       document.removeEventListener('scroll', onscroll)
     }
   }, [])
-
-  header.banner =
-    '<a href="/launch-week/may-2024?loc=eyebrow">Join us for Launch Week, May 13 - 17</a>'
 
   return (
     <>
@@ -74,7 +76,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
         className={styles.navBarContainer}
         ref={navBarRef}
         id='nav-container'>
-        <Banner content={header?.banner ?? ''} />
+        {/* <Banner content={headerBanner} /> */}
         <nav className='no-wrap section-container relative flex w-full items-center justify-between py-4'>
           <Link
             href='/'

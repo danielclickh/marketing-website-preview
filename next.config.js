@@ -83,7 +83,7 @@ const nextConfig = {
       {
         source: '/slack',
         destination:
-          'https://join.slack.com/t/clickhousedb/shared_invite/zt-2h7k4l3n6-2tm52WOWwaD11OiijTUIkg',
+          'https://join.slack.com/t/clickhousedb/shared_invite/zt-2jcki8m07-jE7W4J9xSppltr88CAswGg',
         permanent: true
       },
       {
@@ -410,6 +410,11 @@ const nextConfig = {
       {
         source: '/launchweek',
         destination: '/launch-week/may-2024',
+        permanent: true
+      },
+      {
+        source: '/cloud/azure-waitlist',
+        destination: '/cloud',
         permanent: true
       }
     ]

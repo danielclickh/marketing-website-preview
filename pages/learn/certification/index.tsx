@@ -1,21 +1,22 @@
-import { CheckCircleIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import React, { useRef, useState } from 'react'
-import { CUICard } from '../../components/ClickUI'
-import Bullseye from '../../components/icons/Bullseye'
-import Clock from '../../components/icons/Clock'
-import Coins from '../../components/icons/Coins'
-import FileDashed from '../../components/icons/FileDashed'
-import Globe from '../../components/icons/Globe'
-import Layout from '../../components/Layout'
-import LogoCarousel from '../../components/LogoCarousel'
-import Markdown from '../../components/Markdown'
-import MarketoForm from '../../components/MarketoForm'
-import { SuiText, SuiTitle } from '../../components/sui'
-import { findOne } from '../../lib/api/strapi'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { LearnProps } from '../../types/learn'
+import Link from 'next/link'
+import React from 'react'
+import { CUIButton, CUICard } from '../../../components/ClickUI'
+import FAQDynamic from '../../../components/FAQDynamic'
+import Bullseye from '../../../components/icons/Bullseye'
+import Clock from '../../../components/icons/Clock'
+import Coins from '../../../components/icons/Coins'
+import FileDashed from '../../../components/icons/FileDashed'
+import Globe from '../../../components/icons/Globe'
+import Layout from '../../../components/Layout'
+import LogoCarousel from '../../../components/LogoCarousel'
+import { SuiText, SuiTitle } from '../../../components/sui'
+import { findOne } from '../../../lib/api/strapi'
+import { galaxyOnClick, galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { LearnProps } from '../../../types/learn'
+import faqs from './faqs.json'
 
 export const getStaticProps: GetStaticProps<LearnProps> =
   async function getStaticProps() {
@@ -106,15 +107,13 @@ export default function CertificationPage({
   customerStories,
   seo
 }: LearnProps) {
-  const formSuccessRef = useRef<HTMLDivElement | null>(null)
-  const [formSuccess, setFormSuccess] = useState(false)
-  const [formLoaded, setFormLoaded] = useState(false)
+  galaxyOnPage('certificationPage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
       <div className='bg-grid'>
-        <div className='section-container flex flex-row flex-wrap items-center justify-between gap-6 py-16 md:py-20 lg:flex-nowrap'>
+        <div className='section-container flex flex-row flex-wrap items-start justify-between gap-6 py-16 md:py-20 lg:flex-nowrap'>
           {/* Content column */}
           <div className='w-full lg:max-w-[600px]'>
             <SuiTitle type='h1' color='white' className='mb-6 md:!text-6xl'>
@@ -126,7 +125,43 @@ export default function CertificationPage({
               ClickHouse Certification exam to validate your ClickHouse
               expertise.
             </SuiText>
-            <div className='mt-8 flex flex-col gap-2 lg:mt-16'>
+            <CUIButton
+              type='primary'
+              size='lg'
+              weight='semibold'
+              href='https://buy.stripe.com/14keYf7q55tn2Jy001'
+              linkClass='w-full max-w-[14rem]'
+              onClick={galaxyOnClick(
+                'certificationPage.hero.purchaseCertification'
+              )}
+              target='_blank'
+              className='mt-8 w-full max-w-[150px]'>
+              Purchase now
+            </CUIButton>
+          </div>
+
+          {/* Form column */}
+          <div className='w-full lg:max-w-[600px]'>
+            <p className='mb-4'>
+              There is no required prerequisite for attempting this exam, but we
+              highly recommend taking the ClickHouse Developer training course -
+              available either{' '}
+              <a
+                href='https://learn.clickhouse.com/visitor_catalog_class/show/1328973'
+                target='_blank'
+                className='text-primary-300'>
+                On-demand
+              </a>{' '}
+              or{' '}
+              <Link
+                href='/events/202406-clickhouse-developer'
+                className='text-primary-300'>
+                Instructor-led
+              </Link>
+              , which covers all the exam objectives listed below.
+            </p>
+
+            <div className='flex flex-col gap-2 '>
               <Feature
                 icon={<Bullseye className='h-auto w-full' />}
                 value='Recommended for ClickHouse experts who handle app creation, data ingestion, modeling, query efficiency, and optimization.'
@@ -148,50 +183,6 @@ export default function CertificationPage({
                 value='English'
               />
             </div>
-          </div>
-
-          {/* Form column */}
-          <div className='w-full lg:max-w-[400px]'>
-            <p className='mt-10 mb-12 text-center lg:mb-6 lg:mt-0'>
-              Share your contact details with us to find out first when the exam
-              is released
-            </p>
-            {!formSuccess && (
-              <MarketoForm
-                formId={'1116'}
-                onLoad={() => setFormLoaded(true)}
-                clearbitTracking={true}
-                onSuccess={() => {
-                  setFormSuccess(true)
-
-                  // Delay needed to allow the ref to update before scrolling
-                  setTimeout(() => {
-                    formSuccessRef.current?.scrollIntoView({
-                      behavior: 'smooth'
-                    })
-                  }, 10)
-
-                  return false // Stops page from reloading
-                }}
-              />
-            )}
-
-            {!formLoaded && <div className='text-center'>Loading form...</div>}
-
-            {formSuccess && (
-              <div
-                ref={formSuccessRef}
-                className='flex flex-wrap justify-center gap-4 text-neutral-0'>
-                <div className='subscribed'>
-                  <div className='success-container text-center'>
-                    <CheckCircleIcon className='mx-auto mb-4 h-16 w-16 stroke-1 text-primary-300' />
-                    <p className='text-xl font-bold'>
-                      Thanks for your interest! We'll be in touch!
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
@@ -333,6 +324,21 @@ export default function CertificationPage({
                   </ul>
                 </CUICard.Body>
               </CUICard>
+              <div className='mx-auto w-full'>
+                <CUIButton
+                  type='primary'
+                  size='lg'
+                  weight='semibold'
+                  href='https://buy.stripe.com/14keYf7q55tn2Jy001'
+                  linkClass='w-full max-w-[14rem]'
+                  onClick={galaxyOnClick(
+                    'certificationPage.objectives.purchaseCertification'
+                  )}
+                  target='_blank'
+                  className='mx-auto w-full max-w-[150px]'>
+                  Purchase now
+                </CUIButton>
+              </div>
             </div>
           </div>
 
@@ -389,6 +395,9 @@ export default function CertificationPage({
             />
           </div>
         </div>
+      </div>
+      <div className='my-24' id='faqs'>
+        <FAQDynamic askUsAnything={false} faqs={faqs} />
       </div>
     </Layout>
   )

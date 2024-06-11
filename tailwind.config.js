@@ -66,7 +66,7 @@ module.exports = {
       fontFamily: {
         inter: 'var(--font-inter), sans-serif',
         inconsolata: 'var(--font-inconsolata)',
-        basier: 'Basier Square'
+        basier: 'Basier Square, Arial, Helvetica, sans-serif'
       },
       colors: {
         rangitoto: '#28281D',

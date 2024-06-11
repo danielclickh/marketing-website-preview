@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { CUIButton } from '../ClickUI'
+import Markdown from '../Markdown'
 import ResponsiveEmbed from '../ResponsiveEmbed'
 import { SuiText, SuiTitle } from '../sui'
 import { getContent, getCategories, EntryCategory, EntryStat } from './content'
@@ -62,7 +63,7 @@ export default function HomepageSectionContentFeed({
                 Filter by
               </SuiText>
               <ul className='flex flex-wrap gap-4'>
-                {allCategories.map((category) => {
+                {allCategories.map((category, index) => {
                   const isActive = category === activeCategory
                   let classes =
                     'text-white border-primary-600 hover:border-primary-300'
@@ -70,7 +71,7 @@ export default function HomepageSectionContentFeed({
                     classes =
                       'border-primary-300 bg-primary-300 text-primary-800'
                   return (
-                    <li key={category}>
+                    <li key={index}>
                       <button
                         onClick={() => {
                           setHasChanged(true)
@@ -111,28 +112,31 @@ export default function HomepageSectionContentFeed({
             isActive && (
               <div
                 key={index}
-                className='mb-11 space-y-8 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8 lg:p-10'>
+                className='flip-selection mb-11 space-y-8 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8 lg:p-10'>
                 {entry.embed && <ResponsiveEmbed html={entry.embed} />}
-                <ReactMarkdown
-                  components={{
-                    a: ({ children, ...props }) => (
-                      <a {...props} className='font-bold underline'>
-                        {children}
-                      </a>
-                    )
-                  }}
-                  className='text-center text-inherit'>
-                  {entry.body}
-                </ReactMarkdown>
+                <div className='text-center text-inherit'>
+                  <Markdown
+                    encloseByDiv={false}
+                    components={{
+                      a: ({ children, ...props }) => (
+                        <a {...props} className='font-bold underline'>
+                          {children}
+                        </a>
+                      )
+                    }}>
+                    {entry.body}
+                  </Markdown>
+                </div>
                 <div className='flex justify-center'>
                   <entry.logo />
                 </div>
                 {entry.stats && entry.stats.length && (
                   <div
                     className={`grid grid-cols-1 gap-2 ${statsColumnClasses}`}>
-                    {entry.stats.map((stat) => {
+                    {entry.stats.map((stat, index) => {
                       return (
                         <StatBox
+                          key={index}
                           stat={stat.stat}
                           label={stat.label}
                           icon={stat.icon}

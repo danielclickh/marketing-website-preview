@@ -12,23 +12,25 @@ type StrapiItem = {
   Description?: null | string
   categories?: Array<{ CategoryName: string }>
   RelatedVideos?: Array<StrapiItem>
+  VideoDate?: null | string
   seo: null | {
     title?: null | string
     description?: null | string
     image?: null | StrapiImageProps
   }
+  publishedAt: string
 }
 
 export async function getVideos(): Promise<Video[]> {
   const response = await findAll('marketing-videos', {
-    sort: ['publishedAt:DESC'],
+    sort: ['VideoDate:DESC', 'publishedAt:DESC'],
     populate: ['categories', 'RelatedVideos', 'seo', 'seo.image']
   })
 
   const data = response.data as Array<StrapiItem>
 
   return data.map((item) => {
-    const thumbnail = `https://img.youtube.com/vi/${item.VideoID}/maxresdefault.jpg`
+    let thumbnail = `https://img.youtube.com/vi/${item.VideoID}/maxresdefault.jpg`
 
     let seo: Video['seo'] = {
       title: item?.seo?.title || `${item.Title} | ClickHouse Videos`,
@@ -36,10 +38,15 @@ export async function getVideos(): Promise<Video[]> {
     }
 
     if (item?.seo?.image) {
-      seo.image = [item?.seo?.image]
+      seo.image = [item.seo.image]
+
+      // Social image overrides thumbnail
+      thumbnail = item.seo.image.url
     } else {
       seo.imageUrl = thumbnail
     }
+
+    const date = item?.VideoDate || item.publishedAt
 
     return {
       id: item.id,
@@ -47,6 +54,7 @@ export async function getVideos(): Promise<Video[]> {
       title: item.Title,
       subTitle: item?.IntroText || null,
       description: item.Description,
+      date,
       thumbnail,
       embed: `<iframe src="https://www.youtube-nocookie.com/embed/${item.VideoID}?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>`,
       categories: item.categories?.map((cat) => cat.CategoryName) || [],

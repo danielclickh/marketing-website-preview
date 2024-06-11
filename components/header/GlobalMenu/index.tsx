@@ -9,6 +9,7 @@ import { SuiText } from '../../sui'
 import Link from 'next/link'
 import { galaxyOnClick } from '../../../lib/galaxy/galaxy'
 import { FullyQualifiedEvent } from '../../../lib/galaxy/client'
+import { ChevronRightIcon } from '@heroicons/react/outline'
 
 const headerMenuItems = menuItems as Array<MenuItemType>
 const GlobalMenu = () => {
@@ -25,7 +26,13 @@ const GlobalMenu = () => {
                   <NavigationMenu.Link
                     className={styles.topLevelNavItem}
                     href={menuItem.href}
-                    onClick={menuItem.galaxyEvent ? galaxyOnClick(menuItem.galaxyEvent as FullyQualifiedEvent): undefined}>
+                    onClick={
+                      menuItem.galaxyEvent
+                        ? galaxyOnClick(
+                            menuItem.galaxyEvent as FullyQualifiedEvent
+                          )
+                        : undefined
+                    }>
                     {menuItem.name}
                   </NavigationMenu.Link>
                 </NavigationMenu.Item>
@@ -84,12 +91,18 @@ const GlobalMenu = () => {
                                       subMenuItem.galaxyEvent as FullyQualifiedEvent
                                     )
                                 }}>
-                                <SuiText
-                                  size='sm'
-                                  className='text-neutral-100 group-hover:text-neutral-0'
-                                  weight='semibold'>
-                                  {subMenuItem.name}
-                                </SuiText>
+                                <div className='flex w-full gap-0.5'>
+                                  <SuiText
+                                    size='sm'
+                                    className='text-neutral-100 group-hover:text-neutral-0'
+                                    weight='semibold'>
+                                    {subMenuItem.name}
+                                  </SuiText>
+                                  <ChevronRightIcon
+                                    height='14'
+                                    className='mt-1 text-neutral-400 transition group-hover:translate-x-1/2 group-hover:text-neutral-0'
+                                  />
+                                </div>
                               </ListItem>
                             </div>
                             <div>

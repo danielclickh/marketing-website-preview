@@ -16,6 +16,7 @@ import Tilt from 'react-parallax-tilt'
 
 import HRSeparator from '../../../components/HRSeparator'
 import {
+  ArrowCircleRightIcon,
   BookOpenIcon,
   CalendarIcon,
   DocumentTextIcon,
@@ -169,9 +170,14 @@ export default function LaunchWeekPage({
                             <h3 className='mb-1 text-lg font-semibold'>
                               {release.blurred ? 'Coming soon' : release.title}
                             </h3>
-                            {release.beta && (
-                              <div className='ml-4 mt-1 flex h-5 w-14 rounded-full bg-primary-300 px-3 text-sm font-normal text-neutral-725'>
-                                beta
+                            {['beta', 'preview'].includes(release.badge) && (
+                              <div
+                                className={`ml-4 mt-1 flex h-5 ${
+                                  release.badge === 'beta' ? 'w-14' : 'w-32'
+                                } rounded-full bg-primary-300 px-3 text-sm font-normal text-neutral-725`}>
+                                {release.badge === 'beta'
+                                  ? 'beta'
+                                  : 'private preview'}
                               </div>
                             )}
                           </div>
@@ -204,6 +210,14 @@ export default function LaunchWeekPage({
                                 href={release.linkVideo}>
                                 <PlayIcon className='mt-1 h-4 w-4' />
                                 <span>Watch video</span>
+                              </Link>
+                            )}
+                            {!release.blurred && release.linkStarted && (
+                              <Link
+                                className='align-center flex gap-2 text-base-color opacity-80 transition-all hover:opacity-100'
+                                href={release.linkStarted}>
+                                <ArrowCircleRightIcon className='mt-1 h-4 w-4' />
+                                <span>Get started</span>
                               </Link>
                             )}
                           </div>

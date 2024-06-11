@@ -227,7 +227,8 @@ const trainingCards: Array<TrainingCardProps> = [
     description:
       'Learn from ClickHouse experts by attending one of our virtual training sessions. Instructors deliver the content live.',
     perks: ['Hands-on lab activities', 'Live Q&A and engaging interactions'],
-    link: 'https://clickhouse.com/company/events/clickhouse-fundamentals'
+    link: '/company/news-events?category=Free+Training#upcoming-events',
+    button: 'See upcoming training'
   },
   {
     icon: <Certificate />,
@@ -264,29 +265,29 @@ const onDemandCards: Array<OnDemandCardProps> = [
   {
     icon: <Stairs />,
     title: 'Getting Started',
-    duration: '25 minutes',
+    duration: '60 minutes',
     thumbnail: '/images/learn/od-getting-started.jpg',
     description:
       'Get up and running quickly with ClickHouse! In this course, you’ll learn how to create a new service, how primary keys work in ClickHouse, how to define a table, how to insert data, and how to run queries on your table.',
-    link: 'https://learn.clickhouse.com/visitor_class_catalog/category/106343'
+    link: 'https://learn.clickhouse.com/visitor_catalog_class/show/1328489'
   },
   {
     icon: <DatabasePlus />,
     title: 'Data Ingestion',
-    duration: '20 minutes',
+    duration: '60 minutes',
     thumbnail: '/images/learn/od-data-ingestion.jpg',
     description:
       'In this course, you’ll learn techniques for getting data into your ClickHouse service, including how to insert a CSV/TSV file, how to insert data from another database, and how to use the various functions and table engines for ingesting data.',
-    link: 'https://learn.clickhouse.com/visitor_catalog_class/show/912833/104---Data-Ingestion'
+    link: 'https://learn.clickhouse.com/visitor_catalog_class/show/1328910'
   },
   {
     icon: <Eye />,
     title: 'Materialized Views',
-    duration: '25 minutes',
+    duration: '60 minutes',
     thumbnail: '/images/learn/od-materialized-views.jpg',
     description:
       'Creating views is an important step in optimizing your OLAP applications. In this course, you’ll learn how to define materialized views, including views that use the SummingMergeTree and AggregatingMergeTree table engines.',
-    link: 'https://learn.clickhouse.com/visitor_catalog_class/show/1043451/Materialized-Views'
+    link: 'https://learn.clickhouse.com/visitor_catalog_class/show/1328927'
   }
 ]
 

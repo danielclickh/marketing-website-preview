@@ -6,6 +6,8 @@ import GCPLogo from './GCPLogo'
 import styles from './ToggleButtons.module.scss'
 
 import { Option, ToggleButtonsProps } from '../../CalculatorTypesOptions'
+import AzureLogo from './AzureLogo'
+import { SuiText } from '../../../sui'
 
 export function ToggleButtonsProviders<T extends string = string>({
   options,
@@ -34,6 +36,17 @@ export function ToggleButtonsProviders<T extends string = string>({
             <AwsLogo />
           ) : option.value === 'gcp' ? (
             <GCPLogo />
+          ) : option.value === 'azure' ? (
+            <div className='relative'>
+              <AzureLogo />
+              <SuiText
+                size='xs'
+                weight='medium'
+                color='secondary'
+                className='absolute -right-10 -top-4 rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
+                Beta
+              </SuiText>
+            </div>
           ) : (
             option.label
           )}

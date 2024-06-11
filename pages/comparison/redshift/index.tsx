@@ -280,7 +280,7 @@ export default function ComparisonPage({
                                       alt='Quote'
                                       className='mb-4'
                                     />{' '}
-                                    <ReactMarkdown
+                                    <Markdown
                                       children={
                                         painpoint.customer.description as string
                                       }
