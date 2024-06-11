@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { findAll, getStagingOnlyFilters } from '../../lib/api/strapi'
+import { findAll } from '../../lib/api/strapi'
 import { slugify } from '../../lib/utils/strings'
 import { VideosApiResponse } from '../../types/videos'
 
@@ -100,9 +100,9 @@ export async function fetchVideos({
   }
 
   // Get paginated blog posts
-  const { data, pagination } = await findAll('marketing-videos', {
+  const { data, pagination } = await findAll('user-stories', {
     ...query,
-    pagination: { pageSize: 15, page: page }
+    pagination: { pageSize: 6, page: page }
   })
 
   return {
