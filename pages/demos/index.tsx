@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps<DemosPageProps> =
     const commonProps = await getCommonProps()
 
     const { data: demos } = await findAll('demos', {
-      sort: ['publishedAt:DESC'],
+      sort: ['SortOrder:ASC', 'publishedAt:DESC'],
       populate: ['Image']
     })
 
