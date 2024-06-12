@@ -10,6 +10,7 @@ import { StrapiImage } from '../../components/StrapiElements'
 import { StrapiImageType } from '../../lib/api/strapi/types'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
 import { CommonProps } from '../../types/homepage'
 
 type Demo = {
@@ -44,7 +45,8 @@ export const getStaticProps: GetStaticProps<DemosPageProps> =
           path: '/demos'
         },
         ...commonProps
-      }
+      },
+      revalidate: REVALIDATE_SECONDS
     }
   }
 
