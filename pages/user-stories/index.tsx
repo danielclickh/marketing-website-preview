@@ -9,7 +9,7 @@ import { MultiSelect } from 'primereact/multiselect'
 import { useEffect, useState } from 'react'
 import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'
-import { SuiSearchField } from '../../components/sui'
+import { SuiSearchField, SuiTitle } from '../../components/sui'
 import { findOne } from '../../lib/api/strapi'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
@@ -410,19 +410,15 @@ function CustomerStoriesPage({
             overlay: 30
           }
         }}>
-        <div className='pt-10'>
-          <div className='container mx-auto flex max-w-7xl flex-col px-4 md:px-8 2xl:px-0'>
-            <div className='mx-auto flex max-w-screen-sm flex-col pt-6 text-center'>
-              <h1 className='font-basier text-5.5xl font-semibold'>
-                User stories
-              </h1>
-            </div>
-            <p className='pt-6 text-center'>
-              Discover how companies are using ClickHouse to speed up their
-              workloads and lower costs.
-            </p>
-          </div>
-          <div className='mx-auto my-24 max-w-7xl px-8 2xl:px-0'>
+        <div className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:pt-20'>
+          <SuiTitle type='h1'>User stories</SuiTitle>
+          <p className='pt-6 text-center'>
+            Discover how companies are using ClickHouse to speed up their
+            workloads and lower costs.
+          </p>
+        </div>
+        <div>
+          <div className='container mx-auto max-w-7xl px-8 pt-8 2xl:px-0'>
             <div className='mx-auto mb-6 md:max-w-md lg:mb-8'>
               <SuiSearchField
                 placeholder='Search by company or keyword...'
@@ -560,7 +556,7 @@ function CustomerStoriesPage({
             </div>
 
             {filteredUserStories.length > 0 ? (
-              <div className='grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3'>
+              <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
                 {filteredUserStories.map((story, index) => {
                   return (
                     <div
