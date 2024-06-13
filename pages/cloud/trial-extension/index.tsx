@@ -8,9 +8,12 @@ import Layout from '../../../components/Layout'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import HRSeparator from '../../../components/HRSeparator'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
-import MarketoForm from '../../../components/MarketoForm'
+import MarketoForm, {
+  SpoofedMarketoObject
+} from '../../../components/MarketoForm'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import { useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -37,10 +40,14 @@ export default function TrialExtensionPage({
   seo
 }: ContactProps) {
   const router = useRouter()
-  const { orgId, email } = router.query
-
   galaxyOnPage('trialExtensionPage')
 
+  const { orgId, email } = router.query
+
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
+  const [marketoForm, setMarketoForm] = useState<SpoofedMarketoObject>()
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <Head>
@@ -58,15 +65,42 @@ export default function TrialExtensionPage({
 
           <div className='container mx-auto flex flex-col bg-opacity-10 px-8 pb-8 pt-14 text-center md:bg-no-repeat 2xl:px-0'>
             <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
+              {!formLoaded && (
+                <div className='text-center'>Loading form...</div>
+              )}
+
+              {formSuccess && (
+                <div ref={formSuccessRef}>
+                  <h3 className='text-center text-2xl font-bold'>
+                    Thank you for your submission!
+                  </h3>
+                  <p className='mt-2 text-center text-neutral-200'>
+                    We will be in touch soon.
+                  </p>
+                </div>
+              )}
               <MarketoForm
                 formId={'1211'}
                 onLoad={(formObject) => {
+                  setFormLoaded(true)
+                  setMarketoForm(formObject)
                   // Set field values
                   formObject.setValues({
                     miscBlankField14: orgId || '',
                     Email: email || '',
                     programmessagefull: `Please extend my trial for org ID ${orgId}`
                   })
+                }}
+                onSuccess={() => {
+                  setFormSuccess(true)
+                  // Delay needed to allow the ref to update before scrolling
+                  setTimeout(() => {
+                    formSuccessRef.current?.scrollIntoView({
+                      behavior: 'smooth'
+                    })
+                  }, 10)
+
+                  return false // Stops page from reloading
                 }}
               />
             </div>
