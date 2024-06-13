@@ -94,6 +94,7 @@
 
 html,
 body {
+  font-family: sans-serif;
   padding: 0;
   margin: 0;
   @apply mx-auto text-neutral-100 leading-normal;
@@ -822,5 +823,23 @@ form.mktoForm#mktoForm_1135 {
     }
 
   }
+}
 
+.multiselect-item {
+  input[type=checkbox] {
+    @apply absolute top-0 left-0 appearance-none p-0 m-0 z-10 outline-none cursor-pointer;
+  }
+  [data-pc-section="root"] {
+    @apply cursor-pointer inline-flex relative select-none w-4 h-4;
+  }
+  [data-pc-section="box"] {
+    @apply flex items-center justify-center border border-neutral-700 w-4 h-4 text-gray-600 rounded-[3px] bg-neutral-750 hover:border-primary-300 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)];
+  }
+  [data-pc-section="trigger"] {
+    padding-top:1px;padding-bottom:1px;
+  }
+  [data-p-highlight="true"]{
+    @apply bg-primary-300 overflow-hidden rounded-[3px] border-none;
+    .p-icon {@apply text-black stroke-1 stroke-current;}
+  }
 }

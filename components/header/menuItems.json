@@ -73,6 +73,13 @@
 				"galaxyEvent": "topNav.resourcesMenu.communityHeaderSelect",
 				"menuItems": [
 					{
+						"id": 10,
+						"name": "User stories",
+						"href": "/user-stories",
+						"galaxyEvent": "topNav.resourcesMenu.userStoriesSelect",
+						"target": "_blank"
+					},
+					{
 						"id": 1,
 						"name": "Join Slack",
 						"href": "/slack",
@@ -92,13 +99,6 @@
 						"href": "https://github.com/ClickHouse/ClickHouse",
 						"galaxyEvent": "topNav.resourcesMenu.communityGithubSelect",
 						"target": "_blank"
-					},
-					{
-						"id": 3,
-						"name": "User stories",
-						"href": "/user-stories",
-						"galaxyEvent": "topNav.resourcesMenu.communityUserStoriesSelect",
-						"target": "_self"
 					}
 				]
 			},

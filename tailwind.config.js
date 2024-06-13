@@ -6,8 +6,10 @@ module.exports = {
   ],
   content: [
     './components/**/*.{js,ts,jsx,tsx}',
-    './pages/**/*.{js,ts,jsx,tsx}'
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './node_modules/primereact/**/*.{js,ts,jsx,tsx}'
   ],
+  safelist: ['py-[6px]', 'py-[1px]'],
   theme: {
     extend: {
       screens: {
@@ -258,6 +260,8 @@ module.exports = {
         focus_size: '100%, 100%'
       },
       backgroundImage: {
+        'half-highlight':
+          'linear-gradient(to bottom, rgba(65,65,65,1) 56%, transparent 56%)',
         snowflakeGradient:
           'linear-gradient(0deg, #FAFF69 30%, rgba(252, 255, 116, 0) 99.99%)',
         homepageFadeLeftLogos:

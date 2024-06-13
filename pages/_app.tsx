@@ -128,7 +128,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             type='text/javascript'
             async
           />
-          {/* Securiti.ai Cookie Banner - first is produciton mode */}
+          {/* Securiti.ai Cookie Banner - first is produciton mode, second is dev */}
           {is_prod && (
             // THIS IS PRODUCTION
             <Script

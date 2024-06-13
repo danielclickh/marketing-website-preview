@@ -1,5 +1,6 @@
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
 import { SuiButton, SuiLink } from '../components/sui'
 import { getCommonProps } from '../lib/utils/getCommonProps'
@@ -18,15 +19,22 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       }
     }
   }
+
 export default function NotFoundPage({
   footerData,
   headerData,
   seo
 }: CommonProps) {
+  const router = useRouter()
+
+  const handleBack = () => {
+    router.back()
+  }
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='grid h-screen items-center overflow-hidden'>
-        <div className='mx-auto flex max-w-screen-sm flex-col divide-y-2 bg-neutral-900 px-8 py-10 md:flex-row md:divide-x-2 md:divide-y-0 md:border md:border-c4/10 md:px-10'>
+        <div className='md:border-c4/10 mx-auto flex max-w-screen-sm flex-col divide-y-2 bg-neutral-900 px-8 py-10 md:flex-row md:divide-x-2 md:divide-y-0 md:border md:px-10'>
           <div className='flex flex-col items-start pb-10 md:pb-0'>
             <p className='text-bold mb-4 text-left text-2xl text-neutral-100'>
               Oops! We can&apos;t find this page...
@@ -36,7 +44,7 @@ export default function NotFoundPage({
               has been moved.
             </p>
             <div className='flex gap-2'>
-              <SuiButton path='/blog' type='secondary' size='sm'>
+              <SuiButton onClick={handleBack} type='secondary' size='sm'>
                 <ArrowLeftIcon className='h-3' />
                 Back
               </SuiButton>
