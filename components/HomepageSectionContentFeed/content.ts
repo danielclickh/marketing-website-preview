@@ -32,6 +32,7 @@ import LogoVimeo from './assets/logo-vimeo'
 import LogoDidi from './assets/logo-didi'
 import LogoInstacart from './assets/logo-instacart'
 import LogoIBM from './assets/logo-ibm'
+import LogoTrip from './assets/logo-trip'
 
 export type EntryCategory = string
 
@@ -124,6 +125,32 @@ export function getContent(): Entry[] {
         {
           icon: IconGauge,
           stat: '4x',
+          label: 'faster queries'
+        }
+      ]
+    },
+
+    // Trip.com
+    {
+      featured: false,
+      body: `Trip.com was using Elasticsearch for their observability data, until they made the switch to ClickHouse. The result? 40GB per second, 30% savings in hardware costs, and queries that are upto 30x faster!
+ [Read blog](/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse)`,
+      logo: LogoTrip,
+      categories: ['Observability'],
+      stats: [
+        {
+          icon: IconStack,
+          stat: '85 Trillion',
+          label: 'rows'
+        },
+        {
+          icon: IconDatabase,
+          stat: '50+ PB',
+          label: 'data storage'
+        },
+        {
+          icon: IconGauge,
+          stat: '30x',
           label: 'faster queries'
         }
       ]
