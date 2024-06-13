@@ -94,6 +94,12 @@
 				"target": "_self"
 			},
 			{
+				"id": 22,
+				"name": "Demos",
+				"href": "/demos",
+				"target": "_self"
+			},
+			{
 				"id": 21,
 				"name": "Site map",
 				"href": "/sitemap",
