@@ -835,10 +835,11 @@ form.mktoForm#mktoForm_1135 {
   [data-pc-section="box"] {
     @apply flex items-center justify-center border border-neutral-700 w-4 h-4 text-gray-600 rounded-[3px] bg-neutral-750 hover:border-primary-300 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)];
   }
+  [data-pc-section="trigger"] {
+    padding-top:1px;padding-bottom:1px;
+  }
   [data-p-highlight="true"]{
     @apply bg-primary-300 overflow-hidden rounded-[3px] border-none;
     .p-icon {@apply text-black stroke-1 stroke-current;}
-
   }
-
 }

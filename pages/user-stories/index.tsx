@@ -22,6 +22,11 @@ import {
 } from '../../types/userStories'
 import ClearFilterButton from '../../components/UserStories/ClearFilterButton'
 
+interface MousePosition {
+  x: number
+  y: number
+}
+
 export const getStaticProps: GetStaticProps<UserStoriesPage> =
   async function getStaticProps() {
     const result = await findOne('use-case', {
@@ -155,6 +160,30 @@ function CustomerStoriesPage({
   galaxyOnPage('userStoriesPage')
   const router = useRouter()
   const searchParams = useSearchParams()
+
+  const [mousePosition, setMousePosition] = useState<MousePosition>({
+    x: 0,
+    y: 0
+  })
+  const [hoveredStoryIndex, setHoveredStoryIndex] = useState<number | null>(
+    null
+  )
+
+  const handleMouseMove = (
+    event: React.MouseEvent<HTMLDivElement>,
+    index: number
+  ) => {
+    const boundingRect = event.currentTarget.getBoundingClientRect()
+    setMousePosition({
+      x: event.clientX - boundingRect.left,
+      y: event.clientY - boundingRect.top
+    })
+    setHoveredStoryIndex(index)
+  }
+
+  const handleMouseLeave = () => {
+    setHoveredStoryIndex(null)
+  }
 
   function findByCode<T extends { code: number }>(
     array: T[],
@@ -394,135 +423,139 @@ function CustomerStoriesPage({
             </p>
           </div>
           <div className='mx-auto my-24 max-w-7xl px-8 2xl:px-0'>
-            <div className='filters mb-6 gap-x-4 xl:flex xl:justify-between'>
+            <div className='mx-auto mb-6 md:max-w-md lg:mb-8'>
               <SuiSearchField
                 placeholder='Search by company or keyword...'
                 htmlFor='search'
-                className='xl:min-w-[447px] mb-6 xl:mb-0'
+                className='mb-6 xl:mb-0 xl:min-w-[447px]'
                 onChange={handleSearchInputChange}
                 value={searchQuery}
               />
-              <div className='flex flex-col items-center justify-center gap-4 lg:flex-row lg:flex-nowrap'>
-                <button
-                  type='button'
-                  className={`${
-                    orderByDate
-                      ? 'bg-primary-300 text-black'
-                      : 'border-opacity-[0.3] text-white'
-                  } max-h-[42px] w-[162px] rounded-full border border-primary-500 px-4 py-2.5 text-sm font-semibold text-black xl:w-auto`}
-                  onClick={toggleOrderByDate}>
-                  Latest
-                </button>
-                <div className='multiselect-target hidden'>
-                  <MultiSelect
-                    value={selectedUseCases}
-                    itemClassName='multiselect-item'
-                    onChange={(e) => {
-                      if (searchQuery) {
-                        setSearchQuery('')
-                      }
-                      setSelectedUseCases(e.value)
-                      const selectedValues = e.value
-                        .map((option: UseCaseCategory) => option.code)
-                        .join(',')
-                      router.push(
-                        {
-                          query: {
-                            ...router.query,
-                            useCase: selectedValues,
-                            search: undefined
-                          }
-                        },
-                        undefined,
-                        { shallow: true }
-                      )
-                    }}
-                    options={UseCaseCategories}
-                    optionLabel='name'
-                    placeholder='Use Case'
-                    maxSelectedLabels={0}
-                    panelHeaderTemplate={<></>}
-                    selectedItemsLabel='Use Case ({0})'
-                    unstyled
+            </div>
+            <div className='mx-auto max-w-5xl'>
+              <div className='filters mb-14 gap-x-4 xl:flex xl:justify-center'>
+                <div className='flex flex-col items-center justify-center gap-4 lg:flex-row lg:flex-nowrap'>
+                  <button
+                    type='button'
+                    className={`${
+                      orderByDate
+                        ? 'bg-primary-300 text-black'
+                        : 'border-opacity-[0.3] text-white'
+                    } max-h-[36px] w-[162px] rounded-full border border-primary-500 px-4 py-[7px] text-sm font-semibold text-black transition-colors duration-500 ease-in-out hover:border-primary-300 xl:w-auto`}
+                    onClick={toggleOrderByDate}>
+                    Latest
+                  </button>
+                  <div className='multiselect-target hidden'>
+                    <MultiSelect
+                      value={selectedUseCases}
+                      itemClassName='multiselect-item'
+                      onChange={(e) => {
+                        if (searchQuery) {
+                          setSearchQuery('')
+                        }
+                        setSelectedUseCases(e.value)
+                        const selectedValues = e.value
+                          .map((option: UseCaseCategory) => option.code)
+                          .join(',')
+                        router.push(
+                          {
+                            query: {
+                              ...router.query,
+                              useCase: selectedValues,
+                              search: undefined
+                            }
+                          },
+                          undefined,
+                          { shallow: true }
+                        )
+                      }}
+                      options={UseCaseCategories}
+                      optionLabel='name'
+                      placeholder='Use Case'
+                      maxSelectedLabels={0}
+                      panelHeaderTemplate={<></>}
+                      selectedItemsLabel='Use Case ({0})'
+                      unstyled
+                    />
+                  </div>
+                  <div className='multiselect-target hidden'>
+                    <MultiSelect
+                      value={selectedMigrations}
+                      itemClassName='multiselect-item'
+                      onChange={(e) => {
+                        if (searchQuery) {
+                          setSearchQuery('')
+                        }
+                        setSelectedMigrations(e.value)
+                        const selectedValues = e.value
+                          .map((option: UseCaseMigration) => option.code)
+                          .join(',')
+                        router.push(
+                          {
+                            query: {
+                              ...router.query,
+                              migration: selectedValues,
+                              search: undefined
+                            }
+                          },
+                          undefined,
+                          { shallow: true }
+                        )
+                      }}
+                      options={UseCaseMigrations}
+                      optionLabel='name'
+                      placeholder='Migration'
+                      maxSelectedLabels={0}
+                      panelHeaderTemplate={<></>}
+                      selectedItemsLabel='Migration ({0})'
+                      unstyled
+                    />
+                  </div>
+                  <div className='multiselect-target hidden'>
+                    <MultiSelect
+                      value={selectedVerticals}
+                      itemClassName='multiselect-item'
+                      onChange={(e) => {
+                        if (searchQuery) {
+                          setSearchQuery('')
+                        }
+                        setSelectedVerticals(e.value)
+                        const selectedValues = e.value
+                          .map((option: UseCaseVertical) => option.code)
+                          .join(',')
+                        router.push(
+                          {
+                            query: {
+                              ...router.query,
+                              vertical: selectedValues,
+                              search: undefined
+                            }
+                          },
+                          undefined,
+                          { shallow: true }
+                        )
+                      }}
+                      options={UseCaseVerticals}
+                      optionLabel='name'
+                      placeholder='Vertical'
+                      maxSelectedLabels={0}
+                      panelHeaderTemplate={<></>}
+                      selectedItemsLabel='Vertical ({0})'
+                      unstyled
+                    />
+                  </div>
+                  <ClearFilterButton
+                    onClick={clearAllFilters}
+                    disabled={
+                      useCaseParam ||
+                      migrationParam ||
+                      searchParamInput ||
+                      verticalParam
+                        ? false
+                        : true
+                    }
                   />
                 </div>
-                <div className='multiselect-target hidden'>
-                  <MultiSelect
-                    value={selectedMigrations}
-                    itemClassName='multiselect-item'
-                    onChange={(e) => {
-                      if (searchQuery) {
-                        setSearchQuery('')
-                      }
-                      setSelectedMigrations(e.value)
-                      const selectedValues = e.value
-                        .map((option: UseCaseMigration) => option.code)
-                        .join(',')
-                      router.push(
-                        {
-                          query: {
-                            ...router.query,
-                            migration: selectedValues,
-                            search: undefined
-                          }
-                        },
-                        undefined,
-                        { shallow: true }
-                      )
-                    }}
-                    options={UseCaseMigrations}
-                    optionLabel='name'
-                    placeholder='Migration'
-                    maxSelectedLabels={0}
-                    panelHeaderTemplate={<></>}
-                    selectedItemsLabel='Migration ({0})'
-                    unstyled
-                  />
-                </div>
-                <div className='multiselect-target hidden'>
-                  <MultiSelect
-                    value={selectedVerticals}
-                    itemClassName='multiselect-item'
-                    onChange={(e) => {
-                      if (searchQuery) {
-                        setSearchQuery('')
-                      }
-                      setSelectedVerticals(e.value)
-                      const selectedValues = e.value
-                        .map((option: UseCaseVertical) => option.code)
-                        .join(',')
-                      router.push(
-                        {
-                          query: {
-                            ...router.query,
-                            vertical: selectedValues,
-                            search: undefined
-                          }
-                        },
-                        undefined,
-                        { shallow: true }
-                      )
-                    }}
-                    options={UseCaseVerticals}
-                    optionLabel='name'
-                    placeholder='Vertical'
-                    maxSelectedLabels={0}
-                    panelHeaderTemplate={<></>}
-                    selectedItemsLabel='Vertical ({0})'
-                    unstyled
-                  />
-                </div>
-                <ClearFilterButton
-                  onClick={clearAllFilters}
-                  disabled={
-                    useCaseParam ||
-                    migrationParam ||
-                    searchParamInput ||
-                    verticalParam
-                      ? false
-                      : true
-                  }
-                />
               </div>
             </div>
 
@@ -532,12 +565,10 @@ function CustomerStoriesPage({
                   return (
                     <div
                       key={index}
-                      className={`${
-                        story.attributes.highlight
-                          ? 'border-primary-300 bg-neutral-700'
-                          : 'overflow-hidden border-neutral-700/80'
-                      } relative flex  flex-col rounded-[4px] border`}>
-                      <div className='story-header bg-primary-300 p-4'>
+                      className={`relative flex flex-col shadow-xl shadow-black/25`}
+                      onMouseMove={(event) => handleMouseMove(event, index)}
+                      onMouseLeave={handleMouseLeave}>
+                      <div className='story-header rounded-t-lg bg-primary-300 p-4'>
                         <div className='flex h-[40px] items-center justify-center'>
                           {story.attributes.User.data && (
                             <Image
@@ -567,7 +598,11 @@ function CustomerStoriesPage({
                           )}
                         </div>
                       </div>
-                      <div className='flex flex-grow flex-col p-6'>
+                      <div
+                        className={`${
+                          story.attributes.highlight &&
+                          'border border-primary-300 bg-neutral-700'
+                        } relative flex flex-grow flex-col overflow-hidden rounded-b-lg border border-t-0 border-neutral-700/80 p-6`}>
                         <div className='story-categories font-inconsolata text-primary-300'>
                           {story.attributes.useCase.data &&
                             story.attributes.useCase.data
@@ -616,9 +651,19 @@ function CustomerStoriesPage({
                             </div>
                           </div>
                         )}
+                        {hoveredStoryIndex === index && (
+                          <div
+                            className='blurred-div pointer-events-none absolute -left-40 -top-24 h-full w-full rounded-full bg-white opacity-[4%] blur-2xl'
+                            style={{
+                              transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
+                              pointerEvents: 'none',
+                              borderRadius: '50%'
+                            }}
+                          />
+                        )}
                       </div>
                       {story.attributes.highlight && (
-                        <div className='absolute -bottom-2 left-1/2 z-50 -translate-x-1/2 transform bg-half-highlight px-1 text-xs font-bold uppercase'>
+                        <div className='absolute -bottom-2 left-1/2 z-50 -translate-x-1/2 transform overflow-visible bg-half-highlight px-1 text-xs font-bold uppercase'>
                           Highlight
                         </div>
                       )}

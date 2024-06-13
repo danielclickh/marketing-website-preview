@@ -9,6 +9,7 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx}',
     './node_modules/primereact/**/*.{js,ts,jsx,tsx}'
   ],
+  safelist: ['py-[6px]', 'py-[1px]'],
   theme: {
     extend: {
       screens: {

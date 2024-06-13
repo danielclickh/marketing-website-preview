@@ -5,7 +5,7 @@ export const Tailwind = {
     root: ({ props }: { props: any }) => ({
       className: classNames(
         'inline-flex cursor-pointer select-none text-white',
-        'border border-primary-600 rounded-full py-2.5 px-4 pr-0 text-sm font-semibold hover:border-primary-300  transform',
+        'border border-primary-600 rounded-full py-[6px] px-4 pr-0 text-sm font-semibold hover:border-primary-300 duration-500 ease-in-out  transform',
         {
           'opacity-60 select-none pointer-events-none cursor-default':
             props.disabled
@@ -13,7 +13,9 @@ export const Tailwind = {
       )
     }),
     labelContainer: ({ props }: { props: any }) => ({
-      className: classNames('overflow-hidden flex flex-auto cursor-pointer ')
+      className: classNames(
+        'overflow-hidden flex flex-auto cursor-pointer py-[1px]'
+      )
     }),
     label: ({ props }: { props: any }) => ({
       className: classNames(
