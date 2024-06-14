@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps<DemosPageProps> =
         demos,
         seo: {
           title: 'ClickHouse Demos',
-          description: '',
+          description: 'Discover demos powered by ClickHouse',
           path: '/demos'
         },
         ...commonProps
@@ -60,10 +60,9 @@ export default function DemosPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:mb-20 lg:pt-20'>
-        <SuiTitle type='h1'>Our Demo Aplications</SuiTitle>
+        <SuiTitle type='h1'>Our Demo Applications</SuiTitle>
         <SuiText className='mt-6 text-lg'>
-          Discover how companies are using ClickHouse to speed up their
-          workloads and lower costs.
+          Discover demos powered by ClickHouse
         </SuiText>
       </div>
       <div className='container mx-auto max-w-7xl px-8 pt-8 2xl:px-0'>
