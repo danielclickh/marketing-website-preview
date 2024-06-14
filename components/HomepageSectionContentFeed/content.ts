@@ -133,7 +133,7 @@ export function getContent(): Entry[] {
     // Trip.com
     {
       featured: false,
-      body: `Trip.com was using Elasticsearch for their observability data, until they made the switch to ClickHouse. The result? 40GB per second, 30% savings in hardware costs, and queries that are upto 30x faster!
+      body: `Trip.com was using Elasticsearch for their observability data until they made the switch to ClickHouse. The result? 40GB per second, 30% savings in costs, and queries that are up to 30x faster!
  [Read blog](/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse)`,
       logo: LogoTrip,
       categories: ['Observability'],
