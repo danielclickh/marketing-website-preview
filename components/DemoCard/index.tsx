@@ -17,16 +17,21 @@ export default function DemoCard(demo: Demo) {
   return (
     <CUICard>
       <CUICard.Body className='min-h-full'>
-        <div className='flex min-h-full flex-col gap-4 p-6'>
+        <div className='flex min-h-full flex-col gap-4 p-4 md:p-6'>
           {demo.Image && (
-            <StrapiImage
-              {...demo.Image}
-              sizes='medium'
-              alt={demo.Title}
-              width={774}
-              height={420}
-              className='mb-12 flex items-center justify-center bg-primary-300 text-lg font-black text-primary-900'
-            />
+            <Link
+              href={demo.Link}
+              target={demo.LinkType}
+              className='mb-6 md:mb-12'>
+              <StrapiImage
+                {...demo.Image}
+                sizes='medium'
+                alt={demo.Title}
+                width={774}
+                height={420}
+                className='flex items-center justify-center bg-primary-300 text-lg font-black text-primary-900'
+              />
+            </Link>
           )}
           <SuiTitle type='h3'>{demo.Title}</SuiTitle>
           <Markdown className='opacity-80'>{demo.Description}</Markdown>
