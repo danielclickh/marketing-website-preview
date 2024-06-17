@@ -1,0 +1,11 @@
+import { StrapiImageType } from '../lib/api/strapi/types'
+
+export type Demo = {
+  id: number
+  Title: string
+  Description: string
+  Link: string
+  LinkType: '_blank' | '_self'
+  Image: null | StrapiImageType
+  GitHubLink: null | string
+}
