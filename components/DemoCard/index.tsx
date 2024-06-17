@@ -47,7 +47,7 @@ export default function DemoCard(demo: Demo) {
                       <Link
                         href={demo.GitHubLink}
                         target='_blank'
-                        className='inline-flex items-center gap-3 text-sm font-medium text-white hover:underline'>
+                        className='inline-flex items-center gap-3 text-sm font-medium text-white transition-opacity hover:opacity-50'>
                         <svg
                           xmlns='http://www.w3.org/2000/svg'
                           width={24}
