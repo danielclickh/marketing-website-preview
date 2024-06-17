@@ -80,7 +80,9 @@ export default function DemoCard(demo: Demo) {
               target={demo.LinkType}
               className='inline-block rounded border border-primary-300/50 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-primary-300'>
               <span className='inline-flex items-center gap-4'>
-                <span className='flex-shrink-0 flex-grow-0'>Open demo</span>
+                <span className='flex-shrink-0 flex-grow-0'>
+                  {demo.LinkText || 'Open demo'}
+                </span>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   width='18'
