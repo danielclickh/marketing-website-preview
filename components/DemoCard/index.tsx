@@ -26,9 +26,9 @@ export default function DemoCard(demo: Demo) {
               href={demo.Link}
               target={demo.LinkType}
               className='mb-6 md:mb-12'
-              onClick={() => {
-                galaxyOnClick(`demoPage.demo.demoId${demo.id}OpenDemoSelect`)
-              }}>
+              onClick={galaxyOnClick(
+                `demoPage.demo.demoId${demo.id}OpenDemoSelect`
+              )}>
               <StrapiImage
                 {...demo.Image}
                 sizes='medium'
@@ -53,11 +53,9 @@ export default function DemoCard(demo: Demo) {
                         href={demo.GitHubLink}
                         target='_blank'
                         className='inline-flex items-center gap-3 text-sm font-medium text-white transition-opacity hover:opacity-50'
-                        onClick={() => {
-                          galaxyOnClick(
-                            `demoPage.demo.demoId${demo.id}GitHubSelect`
-                          )
-                        }}>
+                        onClick={galaxyOnClick(
+                          `demoPage.demo.demoId${demo.id}GitHubSelect`
+                        )}>
                         <svg
                           xmlns='http://www.w3.org/2000/svg'
                           width={24}
@@ -88,9 +86,9 @@ export default function DemoCard(demo: Demo) {
             <Link
               href={demo.Link}
               target={demo.LinkType}
-              onClick={() => {
-                galaxyOnClick(`demoPage.demo.demoId${demo.id}OpenDemoSelect`)
-              }}
+              onClick={galaxyOnClick(
+                `demoPage.demo.demoId${demo.id}OpenDemoSelect`
+              )}
               className='inline-block rounded border border-primary-300/50 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-primary-300'>
               <span className='inline-flex items-center gap-4'>
                 <span className='flex-shrink-0 flex-grow-0'>
