@@ -14,7 +14,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState(false)
 
   return (
-    <header>
+    <header className='relative z-50'>
       {/* Announcement banner */}
       {false && (
         <LinkWithArrow
