@@ -1,7 +1,6 @@
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
-import menuItems from '../../components/header/menuItems.json'
 import HRSeparator from '../../components/HRSeparator'
 import Layout from '../../components/Layout'
 import { fetchAll, findOne, getStagingOnlyFilters } from '../../lib/api/strapi'
@@ -9,7 +8,7 @@ import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { Video } from '../../lib/videos/types'
 import { CommonProps } from '../../types/homepage'
-import { getVideos } from '../../lib/videos/index'
+import { getVideos } from '../../lib/videos'
 import { getLexicons } from '../../lib/lexicons'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 
@@ -20,7 +19,6 @@ interface SitemapProps extends CommonProps {
   onDemandEvents: any[]
   newsEvents: any[]
   pressReleases: any[]
-  menu: any[]
   comparisons: any[]
   lexicons: any[]
   demos: any[]
@@ -91,8 +89,6 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
 
     const allVideos = await getVideos()
 
-    const menu = menuItems
-
     return {
       props: {
         blogPosts,
@@ -102,7 +98,6 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         newsEvents,
         pressReleases,
         comparisons,
-        menu,
         lexicons,
         demos,
         seo: {
@@ -125,18 +120,15 @@ function Sitemap({
   newsEvents,
   pressReleases,
   comparisons,
-  menu,
   lexicons,
   demos
 }: SitemapProps) {
-  const resourcesMenu = menuItems.find((obj) => obj.id === 2)?.menuItems
-
   galaxyOnPage('siteMapPage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div>
-        <h1 className='md:text-5.5xl mx-auto mb-10 pt-10 text-center font-basier text-4xl text-neutral-100 lg:mb-16 lg:pt-20'>
+        <h1 className='mx-auto mb-10 pt-10 text-center font-basier text-4xl text-neutral-100 md:text-5.5xl lg:mb-16 lg:pt-20'>
           Site map
         </h1>
         <div className='mx-auto my-24 max-w-7xl px-4 sm:px-8 2xl:px-0'>
@@ -298,33 +290,6 @@ function Sitemap({
               Resources
             </h2>
             <div className='mb-10 grid gap-10 gap-y-2 xl:grid-cols-4'>
-              {resourcesMenu?.map((item) => (
-                <div key={item.id}>
-                  <p className='pb-2 font-semibold'>
-                    {item.href ? (
-                      <Link href={item.href} className='hover:underline'>
-                        {item.name}
-                      </Link>
-                    ) : (
-                      <>{item.name}</>
-                    )}
-                  </p>
-                  {item.menuItems &&
-                    item.menuItems.map((menuItem: any, index) => (
-                      <div key={index}>
-                        <ul className='mb-2'>
-                          <li>
-                            <Link
-                              href={menuItem.href}
-                              className='font text-primary-300 hover:underline'>
-                              {menuItem.name}{' '}
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    ))}
-                </div>
-              ))}
               <div>
                 <p className='pb-2 font-semibold'>Comparisons</p>
                 <ul className='mb-2'>

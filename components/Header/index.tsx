@@ -7,20 +7,22 @@ import logoFull from '../../public/logo-pride.svg'
 import GitHub from '../icons/GitHub'
 import LinkWithArrow from '../LinkWithArrow'
 import { HeaderProps } from './types'
-import Navigation from './Navigation'
+import Navigation from '../Navigation'
 import { galaxyOnClick } from '../../lib/galaxy/galaxy'
 
-export default function Header({ header, github: { stars } }: HeaderProps) {
+export default function Header({ github: { stars } }: HeaderProps) {
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState(false)
 
   return (
     <header>
       {/* Announcement banner */}
-      <LinkWithArrow
-        href='/blog/clickhouse-cloud-is-now-on-azure-in-public-beta?loc=eyebrow'
-        className='block w-full bg-primary-300 px-4 py-1 text-center text-sm font-medium text-primary-900'>
-        ClickHouse Cloud on Microsoft Azure: Now in Beta
-      </LinkWithArrow>
+      {false && (
+        <LinkWithArrow
+          href='/blog/clickhouse-cloud-is-now-on-azure-in-public-beta?loc=eyebrow'
+          className='block w-full bg-primary-300 px-4 py-1 text-center text-sm font-medium text-primary-900'>
+          ClickHouse Cloud on Microsoft Azure: Now in Beta
+        </LinkWithArrow>
+      )}
 
       {/* Logo, navigtation, CTAs... */}
       <div className='no-wrap section-container relative flex items-center py-4'>
