@@ -1,16 +1,13 @@
 [
 	{
-		"id": 1,
 		"name": "Product",
 		"menuItems": [
 			{
-				"id": 1,
 				"name": "Product",
 				"href": "/clickhouse",
 				"target": "_self",
 				"menuItems": [
 					{
-						"id": 1,
 						"name": "ClickHouse",
 						"description": "Spin up a database server with open-source ClickHouse.",
 						"href": "/clickhouse",
@@ -19,7 +16,6 @@
 						"galaxyEvent": "topNav.productMenu.openSourceSelect"
 					},
 					{
-						"id": 1,
 						"name": "ClickHouse Cloud",
 						"description": "Available on AWS, GCP and Azure in Beta",
 						"href": "/cloud",
@@ -32,32 +28,27 @@
 		]
 	},
 	{
-		"id": 2,
 		"name": "Resources",
 		"menuItems": [
 			{
-				"id": 1,
 				"name": "Support",
 				"href": "/support/program",
 				"target": "_self",
 				"galaxyEvent": "topNav.resourcesMenu.supportHeaderSelect",
 				"menuItems": [
 					{
-						"id": 1,
 						"name": "Open support case",
 						"href": "https://clickhouse.cloud/support",
 						"galaxyEvent": "topNav.resourcesMenu.supportOpenCaseSelect",
 						"target": "_blank"
 					},
 					{
-						"id": 2,
 						"name": "Knowledge base",
 						"href": "https://clickhouse.com/docs/knowledgebase",
 						"galaxyEvent": "topNav.resourcesMenu.supportKBSelect",
 						"target": "_self"
 					},
 					{
-						"id": 3,
 						"name": "Support program",
 						"href": "/support/program",
 						"galaxyEvent": "topNav.resourcesMenu.supportProgramSelect",
@@ -66,35 +57,30 @@
 				]
 			},
 			{
-				"id": 2,
 				"name": "Community",
 				"href": "https://github.com/ClickHouse/ClickHouse",
 				"target": "_blank",
 				"galaxyEvent": "topNav.resourcesMenu.communityHeaderSelect",
 				"menuItems": [
 					{
-						"id": 10,
 						"name": "User stories",
 						"href": "/user-stories",
 						"galaxyEvent": "topNav.resourcesMenu.userStoriesSelect",
 						"target": "_blank"
 					},
 					{
-						"id": 1,
 						"name": "Join Slack",
 						"href": "/slack",
 						"galaxyEvent": "topNav.resourcesMenu.communityJoinSlackSelect",
 						"target": "_blank"
 					},
 					{
-						"id": 2,
 						"name": "Meetups",
 						"href": "https://www.meetup.com/pro/clickhouse/",
 						"galaxyEvent": "topNav.resourcesMenu.communityMeetupsSelect",
 						"target": "_blank"
 					},
 					{
-						"id": 3,
 						"name": "GitHub",
 						"href": "https://github.com/ClickHouse/ClickHouse",
 						"galaxyEvent": "topNav.resourcesMenu.communityGithubSelect",
@@ -103,21 +89,18 @@
 				]
 			},
 			{
-				"id": 3,
 				"name": "Docs",
 				"href": "https://clickhouse.com/docs",
 				"target": "_self",
 				"galaxyEvent": "topNav.resourcesMenu.docsHeaderSelect",
 				"menuItems": [
 					{
-						"id": 1,
 						"name": "Install ClickHouse",
 						"href": "https://clickhouse.com/docs/en/install",
 						"galaxyEvent": "topNav.resourcesMenu.docsInstallClickHouseSelect",
 						"target": "_self"
 					},
 					{
-						"id": 2,
 						"name": "Cloud quick start",
 						"href": "https://clickhouse.com/docs/en/cloud-quick-start",
 						"galaxyEvent": "topNav.resourcesMenu.docsCloudQuickStartSelect",
@@ -147,28 +130,24 @@
 				"galaxyEvent": "topNav.resourcesMenu.learningHeaderSelect",
 				"menuItems": [
 					{
-						"id": 1,
 						"name": "ClickHouse Academy",
 						"href": "/learn",
 						"galaxyEvent": "topNav.resourcesMenu.learningAcademySelect",
 						"target": "_self"
 					},
 					{
-						"id": 2,
 						"name": "Upcoming training",
 						"href": "/company/news-events?category=Free+Training#upcoming-events",
 						"galaxyEvent": "topNav.resourcesMenu.learningUpcomingTrainingSelect",
 						"target": "_self"
 					},
 					{
-						"id": 3,
 						"name": "News and events",
 						"href": "/company/news-events",
 						"galaxyEvent": "topNav.resourcesMenu.learningNewsEventsSelect",
 						"target": "_self"
 					},
 					{
-						"id": 3,
 						"name": "How to videos",
 						"href": "/videos?category=how-to",
 						"galaxyEvent": "topNav.resourcesMenu.learningVideosSelect",
@@ -177,35 +156,30 @@
 				]
 			},
 			{
-				"id": 5,
 				"name": "Blog",
 				"href": "/blog",
 				"target": "_self",
 				"galaxyEvent": "topNav.resourcesMenu.blogHeaderSelect",
 				"menuItems": [
 					{
-						"id": 2,
 						"name": "Engineering",
 						"href": "/blog?category=engineering",
 						"galaxyEvent": "topNav.resourcesMenu.blogEngineeringSelect",
 						"target": "_self"
 					},
 					{
-						"id": 4,
 						"name": "Customer stories",
 						"href": "/blog?category=customer-stories",
 						"galaxyEvent": "topNav.resourcesMenu.blogCustomerStoriesSelect",
 						"target": "_self"
 					},
 					{
-						"id": 1,
 						"name": "Product",
 						"href": "/blog?category=product",
 						"galaxyEvent": "topNav.resourcesMenu.blogProductSelect",
 						"target": "_self"
 					},
 					{
-						"id": 40,
 						"name": "Community",
 						"href": "blog?category=community",
 						"galaxyEvent": "topNav.resourcesMenu.blogCommunitySelect",
@@ -216,39 +190,33 @@
 		]
 	},
 	{
-		"id": 20,
 		"name": "Use cases",
 		"menuItems": [
 			{
-				"id": 1,
 				"name": "Overview",
 				"href": "/use-cases",
 				"target": "_self",
 				"galaxyEvent": "topNav.useCasesMenu.headerSelect",
 				"menuItems": [
 					{
-						"id": 1,
 						"name": "Real-time analytics",
 						"href": "/use-cases/real-time-analytics",
 						"galaxyEvent": "topNav.useCasesMenu.realtimeAnalyticsSelect",
 						"target": "_self"
 					},
 					{
-						"id": 2,
 						"name": "Logs, events, & traces",
 						"href": "/use-cases/logging-and-metrics",
 						"galaxyEvent": "topNav.useCasesMenu.loggingMetricsSelect",
 						"target": "_self"
 					},
 					{
-						"id": 3,
 						"name": "Machine learning & GenAI",
 						"href": "/use-cases/machine-learning-and-data-science",
 						"galaxyEvent": "topNav.useCasesMenu.mlGenAISelect",
 						"target": "_self"
 					},
 					{
-						"id": 4,
 						"name": "Business intelligence",
 						"href": "/use-cases/business-intelligence",
 						"galaxyEvent": "topNav.useCasesMenu.bizIntelSelect",
@@ -259,25 +227,21 @@
 		]
 	},
 	{
-		"id": 5,
 		"name": "Pricing",
 		"menuItems": [
 			{
-				"id": 1,
 				"name": "ClickHouse Cloud Pricing",
 				"href": "/pricing",
 				"target": "_self",
 				"galaxyEvent": "topNav.pricingMenu.headerSelect",
 				"menuItems": [
 					{
-						"id": 1,
 						"name": "Estimate your cost",
 						"href": "/pricing?loc=sub-menu#pricing-calculator",
 						"galaxyEvent": "topNav.pricingMenu.costEstimateSelect",
 						"target": "_self"
 					},
 					{
-						"id": 2,
 						"name": "Dedicated services",
 						"href": "/pricing/contact?loc=menu",
 						"galaxyEvent": "topNav.pricingMenu.dedicatedServiceSelect",
@@ -288,7 +252,6 @@
 		]
 	},
 	{
-		"id": 6,
 		"name": "Contact us",
 		"href": "/company/contact?loc=nav",
 		"target": "_self",

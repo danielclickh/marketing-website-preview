@@ -1,42 +1,23 @@
 import { LinkTarget } from '../../lib/api/strapi/types'
+import { FullyQualifiedEvent } from '../../lib/galaxy/client'
 
-export interface HeaderTopNavItem {
-  id: number
+export type MenuItemTopLevel = {
   name: string
   href?: string
   target?: LinkTarget
-  menuItems: Array<HeaderLinkItem>
-  galaxyEvent?: string
+  menuItems: Array<MenuItemSubLevel>
+  galaxyEvent?: FullyQualifiedEvent
 }
 
-export interface HeaderNavItem {
-  id: number
+export type MenuItemSubLevel = {
   name: string
-  href?: never
-  target?: never
-  menuItems: Array<HeaderTopNavItem>
-  galaxyEvent?: string
-}
-
-export interface HeaderLinkItem {
-  id: number
-  description?: string
   href: string
   target?: LinkTarget
-  name: string
+  description?: string
   icon?: string
-  menuItems?: never
-  galaxyEvent?: string
+  menuItems?: Array<MenuItemSubLevel>
+  galaxyEvent?: FullyQualifiedEvent
 }
-
-export interface RegularNavItem {
-  id: number
-  name: string
-  href: string
-  target: LinkTarget
-}
-
-export type MenuItem = HeaderNavItem | HeaderLinkItem
 
 export interface HeaderData {
   banner: string
