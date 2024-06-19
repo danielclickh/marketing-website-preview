@@ -30,15 +30,17 @@ function TopLevelItem({
   ...props
 }: TopLevelItemProps) {
   return (
-    <div className='group relative'>
+    <div className='group/topLevelItem relative'>
       <MenuLink
         href={href}
         {...props}
-        className={!href ? 'cursor-default' : ''}>
+        className={`group-hover/topLevelItem:text-primary-300 ${
+          !href ? 'cursor-default' : ''
+        }`}>
         {label}
       </MenuLink>
       {!!children && (
-        <div className='pointer-events-none absolute left-1/2 top-full -z-50 w-max -translate-x-1/2 whitespace-nowrap pt-6 opacity-0 shadow transition-opacity delay-75 group-hover:pointer-events-auto group-hover:z-10 group-hover:opacity-100'>
+        <div className='pointer-events-none absolute left-1/2 top-full -z-50 w-max -translate-x-1/2 whitespace-nowrap pt-6 opacity-0 shadow transition-opacity delay-75 group-hover/topLevelItem:pointer-events-auto group-hover/topLevelItem:z-10 group-hover/topLevelItem:opacity-100'>
           <div className='rounded bg-neutral-750'>{children}</div>
         </div>
       )}
