@@ -5,9 +5,9 @@ import { MenuIcon, XIcon } from '@heroicons/react/solid'
 import { CUIButton, CUILink } from '../ClickUI'
 import logoFull from '../../public/logo-pride.svg'
 import GitHub from '../icons/GitHub'
+import LinkWithArrow from '../LinkWithArrow'
 import { HeaderProps } from './types'
-import DesktopNavigation from './DesktopNavigation'
-import Banner from './Banner'
+import Navigation from './Navigation'
 import { galaxyOnClick } from '../../lib/galaxy/galaxy'
 
 export default function Header({ header, github: { stars } }: HeaderProps) {
@@ -16,9 +16,11 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
   return (
     <header>
       {/* Announcement banner */}
-      <Banner href='/blog/clickhouse-cloud-is-now-on-azure-in-public-beta?loc=eyebrow'>
+      <LinkWithArrow
+        href='/blog/clickhouse-cloud-is-now-on-azure-in-public-beta?loc=eyebrow'
+        className='block w-full bg-primary-300 px-4 py-1 text-center text-sm font-medium text-primary-900'>
         ClickHouse Cloud on Microsoft Azure: Now in Beta
-      </Banner>
+      </LinkWithArrow>
 
       {/* Logo, navigtation, CTAs... */}
       <div className='no-wrap section-container relative flex items-center py-4'>
@@ -33,8 +35,10 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
           />
         </Link>
 
-        {/* Navigation */}
-        <DesktopNavigation className='ml-20 hidden md:block' />
+        {/* Mega menu and burger nav */}
+        <div className='md:ml-20'>
+          <Navigation />
+        </div>
 
         {/* Mobile Burger */}
         <button
