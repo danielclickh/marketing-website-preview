@@ -4,118 +4,7 @@ import React, { useRef, useState } from 'react'
 import useClickOutside from '../../hooks/useClickOutside'
 import ClickHouseCloud from '../icons/ClickHouseCloud'
 import LinkWithArrow from '../LinkWithArrow'
-
-interface MenuLinkProps extends LinkProps {
-  className?: string
-  children: React.ReactNode
-}
-
-function MenuLink({ className = '', children, ...props }: MenuLinkProps) {
-  return (
-    <Link
-      {...props}
-      className={`inline-block rounded px-4 py-2 text-sm font-medium transition-colors hover:bg-neutral-700/75 hover:text-primary-300 ${className}`}>
-      {children}
-    </Link>
-  )
-}
-
-interface TopLevelItemProps
-  extends Omit<
-    React.HTMLProps<HTMLDivElement>,
-    'href' | 'onMouseEnter' | 'onMouseLeave' | 'onClick'
-  > {
-  label: string
-  href?: LinkProps['href']
-  children?: React.ReactNode
-  open?: boolean
-  onMouseEnter?: (
-    item: React.Ref<HTMLDivElement>,
-    children: TopLevelItemProps['children'],
-    open: boolean
-  ) => void
-  onMouseLeave?: (
-    item: React.Ref<HTMLDivElement>,
-    children: TopLevelItemProps['children'],
-    open: boolean
-  ) => void
-  onClick?: (
-    item: React.Ref<HTMLDivElement>,
-    children: TopLevelItemProps['children'],
-    open: boolean
-  ) => void
-  onClickOutside?: (
-    item: React.Ref<HTMLDivElement>,
-    children: TopLevelItemProps['children'],
-    open: boolean
-  ) => void
-}
-
-function TopLevelItem({
-  label,
-  href = '',
-  children,
-  className = '',
-  onMouseEnter = (item, children, isOpen) => {},
-  onMouseLeave = (item, children, isOpen) => {},
-  onClick = (item, children, isOpen) => {},
-  onClickOutside = (item, children, isOpen) => {},
-  open = false,
-  ...props
-}: TopLevelItemProps) {
-  const itemRef = useRef<null | HTMLDivElement>(null)
-  const [isOpen, setIsOpen] = useState<boolean>(open)
-
-  const onClickInside = () => {
-    let openVal = isOpen
-    if (children) openVal = !openVal
-    setIsOpen(openVal)
-    onClick(itemRef, children, openVal)
-  }
-
-  useClickOutside(itemRef, () => {
-    setIsOpen(false)
-    onClickOutside(itemRef, children, false)
-  })
-
-  return (
-    <div
-      style={{
-        perspective: '600px'
-      }}
-      className={`relative ${className}`}
-      ref={itemRef}
-      onMouseEnter={() => onMouseEnter(itemRef, children, isOpen)}
-      onMouseLeave={() => onMouseLeave(itemRef, children, isOpen)}
-      onClick={onClickInside}
-      {...props}>
-      <MenuLink
-        href={href}
-        className={`${!href && !children ? 'cursor-default' : ''} ${
-          isOpen ? 'text-primary-300' : ''
-        }`}>
-        {label}
-      </MenuLink>
-      {!!children && (
-        <div
-          className={`pointer-events-none absolute left-1/2 top-full -z-50 w-max origin-[top_center] -translate-x-1/2 whitespace-nowrap pt-6 opacity-0 shadow transition-all ${
-            isOpen
-              ? 'pointer-events-auto z-10 scale-100 opacity-100'
-              : 'scale-90'
-          }`}>
-          <div className='rounded bg-neutral-750'>{children}</div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-export interface NavigationProps extends React.HTMLProps<HTMLElement> {
-  onTopLevelMouseEnter?: TopLevelItemProps['onMouseEnter']
-  onTopLevelMouseLeave?: TopLevelItemProps['onMouseLeave']
-  onTopLevelClick?: TopLevelItemProps['onClick']
-  onTopLevelClickOutside?: TopLevelItemProps['onClickOutside']
-}
+import { MenuLinkProps, TopLevelItemProps, NavigationProps } from './types'
 
 export default function Navigation({
   onTopLevelMouseEnter,
@@ -305,5 +194,74 @@ export default function Navigation({
         </ul>
       </div>
     </nav>
+  )
+}
+
+function MenuLink({ className = '', children, ...props }: MenuLinkProps) {
+  return (
+    <Link
+      {...props}
+      className={`inline-block rounded px-4 py-2 text-sm font-medium transition-colors hover:bg-neutral-700/75 hover:text-primary-300 ${className}`}>
+      {children}
+    </Link>
+  )
+}
+
+function TopLevelItem({
+  label,
+  href = '',
+  children,
+  className = '',
+  onMouseEnter = (item, children, isOpen) => {},
+  onMouseLeave = (item, children, isOpen) => {},
+  onClick = (item, children, isOpen) => {},
+  onClickOutside = (item, children, isOpen) => {},
+  open = false,
+  ...props
+}: TopLevelItemProps) {
+  const itemRef = useRef<null | HTMLDivElement>(null)
+  const [isOpen, setIsOpen] = useState<boolean>(open)
+
+  const onClickInside = () => {
+    let openVal = isOpen
+    if (children) openVal = !openVal
+    setIsOpen(openVal)
+    onClick(itemRef, children, openVal)
+  }
+
+  useClickOutside(itemRef, () => {
+    setIsOpen(false)
+    onClickOutside(itemRef, children, false)
+  })
+
+  return (
+    <div
+      style={{
+        perspective: '600px'
+      }}
+      className={`relative ${className}`}
+      ref={itemRef}
+      onMouseEnter={() => onMouseEnter(itemRef, children, isOpen)}
+      onMouseLeave={() => onMouseLeave(itemRef, children, isOpen)}
+      onClick={onClickInside}
+      {...props}>
+      <MenuLink
+        href={href}
+        className={`${!href && !children ? 'cursor-default' : ''} ${
+          isOpen ? 'text-primary-300' : ''
+        }`}>
+        {label}
+      </MenuLink>
+      {!!children && (
+        <div
+          className={`pointer-events-none absolute left-1/2 top-full -z-50 w-max origin-[top_center] -translate-x-1/2 whitespace-nowrap pt-6 opacity-0 shadow transition-all ${
+            isOpen
+              ? 'pointer-events-auto z-10 scale-100 opacity-100'
+              : 'scale-90'
+          }`}>
+          <div className='rounded bg-neutral-750'>{children}</div>
+        </div>
+      )}
+    </div>
   )
 }
