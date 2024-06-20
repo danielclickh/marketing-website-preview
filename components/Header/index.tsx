@@ -17,7 +17,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
   return (
     <>
       <div
-        className={`fixed inset-0 z-40 bg-neutral-700/70 transition-opacity ${
+        className={`pointer-events-none fixed inset-0 z-40 bg-neutral-700/70 transition-opacity ${
           showBackdrop ? 'opacity-100' : 'opacity-0'
         }`}
       />
@@ -47,12 +47,11 @@ export default function Header({ github: { stars } }: HeaderProps) {
           {/* Mega menu and burger nav */}
           <div className='md:ml-20'>
             <Navigation
-              onTopLevelMouseEnter={(item, children) => {
-                if (children) setShowBackdrop(true)
-                if (!children) setShowBackdrop(false)
+              onTopLevelClick={(item, children, isOpen) => {
+                setShowBackdrop(isOpen)
               }}
-              onTopLevelMouseLeave={() => {
-                setShowBackdrop(false)
+              onTopLevelClickOutside={(item, children, isOpen) => {
+                setShowBackdrop(isOpen)
               }}
             />
           </div>

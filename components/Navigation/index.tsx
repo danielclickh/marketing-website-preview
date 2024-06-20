@@ -1,5 +1,6 @@
 import Link, { LinkProps } from 'next/link'
 import React, { useRef, useState } from 'react'
+import useClickOutside from '../../hooks/useClickOutside'
 import LinkWithArrow from '../LinkWithArrow'
 
 interface MenuLinkProps extends LinkProps {
@@ -20,18 +21,31 @@ function MenuLink({ className = '', children, ...props }: MenuLinkProps) {
 interface TopLevelItemProps
   extends Omit<
     React.HTMLProps<HTMLDivElement>,
-    'href' | 'onMouseEnter' | 'onMouseLeave'
+    'href' | 'onMouseEnter' | 'onMouseLeave' | 'onClick'
   > {
   label: string
   href?: LinkProps['href']
   children?: React.ReactNode
+  open?: boolean
   onMouseEnter?: (
     item: React.Ref<HTMLDivElement>,
-    children: TopLevelItemProps['children']
+    children: TopLevelItemProps['children'],
+    open: boolean
   ) => void
   onMouseLeave?: (
     item: React.Ref<HTMLDivElement>,
-    children: TopLevelItemProps['children']
+    children: TopLevelItemProps['children'],
+    open: boolean
+  ) => void
+  onClick?: (
+    item: React.Ref<HTMLDivElement>,
+    children: TopLevelItemProps['children'],
+    open: boolean
+  ) => void
+  onClickOutside?: (
+    item: React.Ref<HTMLDivElement>,
+    children: TopLevelItemProps['children'],
+    open: boolean
   ) => void
 }
 
@@ -40,27 +54,48 @@ function TopLevelItem({
   href = '',
   children,
   className = '',
-  onMouseEnter = (item, children) => {},
-  onMouseLeave = (item, children) => {},
+  onMouseEnter = (item, children, isOpen) => {},
+  onMouseLeave = (item, children, isOpen) => {},
+  onClick = (item, children, isOpen) => {},
+  onClickOutside = (item, children, isOpen) => {},
+  open = false,
   ...props
 }: TopLevelItemProps) {
   const itemRef = useRef<null | HTMLDivElement>(null)
+  const [isOpen, setIsOpen] = useState<boolean>(open)
+
+  const onClickInside = () => {
+    let openVal = isOpen
+    if (children) openVal = !openVal
+    setIsOpen(openVal)
+    onClick(itemRef, children, openVal)
+  }
+
+  useClickOutside(itemRef, () => {
+    setIsOpen(false)
+    onClickOutside(itemRef, children, false)
+  })
+
   return (
     <div
       className={`group/topLevelItem relative ${className}`}
       ref={itemRef}
-      onMouseEnter={() => onMouseEnter(itemRef, children)}
-      onMouseLeave={() => onMouseLeave(itemRef, children)}
+      onMouseEnter={() => onMouseEnter(itemRef, children, isOpen)}
+      onMouseLeave={() => onMouseLeave(itemRef, children, isOpen)}
+      onClick={onClickInside}
       {...props}>
       <MenuLink
         href={href}
-        className={`group-hover/topLevelItem:text-primary-300 ${
-          !href ? 'cursor-default' : ''
+        className={`${!href && !children ? 'cursor-default' : ''} ${
+          isOpen ? 'text-primary-300' : ''
         }`}>
         {label}
       </MenuLink>
       {!!children && (
-        <div className='pointer-events-none absolute left-1/2 top-full -z-50 w-max -translate-x-1/2 whitespace-nowrap pt-6 opacity-0 shadow transition-opacity delay-75 group-hover/topLevelItem:pointer-events-auto group-hover/topLevelItem:z-10 group-hover/topLevelItem:opacity-100'>
+        <div
+          className={`pointer-events-none absolute left-1/2 top-full -z-50 w-max -translate-x-1/2 whitespace-nowrap pt-6 opacity-0 shadow transition-opacity delay-75 ${
+            isOpen ? 'pointer-events-auto z-10 opacity-100' : ''
+          }`}>
           <div className='rounded bg-neutral-750'>{children}</div>
         </div>
       )}
@@ -71,22 +106,32 @@ function TopLevelItem({
 export interface NavigationProps extends React.HTMLProps<HTMLElement> {
   onTopLevelMouseEnter?: TopLevelItemProps['onMouseEnter']
   onTopLevelMouseLeave?: TopLevelItemProps['onMouseLeave']
+  onTopLevelClick?: TopLevelItemProps['onClick']
+  onTopLevelClickOutside?: TopLevelItemProps['onClickOutside']
 }
 
 export default function Navigation({
   onTopLevelMouseEnter,
   onTopLevelMouseLeave,
+  onTopLevelClick,
+  onTopLevelClickOutside,
   ...props
 }: NavigationProps) {
   const topLevelEvents: Pick<
     TopLevelItemProps,
-    'onMouseEnter' | 'onMouseLeave'
+    'onMouseEnter' | 'onMouseLeave' | 'onClick' | 'onClickOutside'
   > = {
-    onMouseEnter(item, children) {
-      if (onTopLevelMouseEnter) onTopLevelMouseEnter(item, children)
+    onMouseEnter(...args) {
+      if (onTopLevelMouseEnter) onTopLevelMouseEnter(...args)
     },
-    onMouseLeave(item, children) {
-      if (onTopLevelMouseLeave) onTopLevelMouseLeave(item, children)
+    onMouseLeave(...args) {
+      if (onTopLevelMouseLeave) onTopLevelMouseLeave(...args)
+    },
+    onClick(...args) {
+      if (onTopLevelClick) onTopLevelClick(...args)
+    },
+    onClickOutside(...args) {
+      if (onTopLevelClickOutside) onTopLevelClickOutside(...args)
     }
   }
   return (

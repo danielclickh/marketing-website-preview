@@ -45,7 +45,8 @@ function Link({
       className={`${
         disabled ? 'pointer-events-none cursor-not-allowed' : ''
       } ${className}`}
-      target={target}>
+      target={target}
+      {...props}>
       {children}
     </NextLink>
   )
