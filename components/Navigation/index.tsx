@@ -1,5 +1,5 @@
 import Link, { LinkProps } from 'next/link'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import LinkWithArrow from '../LinkWithArrow'
 
 interface MenuLinkProps extends LinkProps {
@@ -17,23 +17,43 @@ function MenuLink({ className = '', children, ...props }: MenuLinkProps) {
   )
 }
 
-interface TopLevelItemProps extends Omit<LinkProps, 'href' | 'className'> {
+interface TopLevelItemProps
+  extends Omit<
+    React.HTMLProps<HTMLDivElement>,
+    'href' | 'onMouseEnter' | 'onMouseLeave'
+  > {
   label: string
   href?: LinkProps['href']
   children?: React.ReactNode
+  onMouseEnter?: (
+    item: React.Ref<HTMLDivElement>,
+    children: TopLevelItemProps['children']
+  ) => void
+  onMouseLeave?: (
+    item: React.Ref<HTMLDivElement>,
+    children: TopLevelItemProps['children']
+  ) => void
 }
 
 function TopLevelItem({
   label,
   href = '',
   children,
+  className = '',
+  onMouseEnter = (item, children) => {},
+  onMouseLeave = (item, children) => {},
   ...props
 }: TopLevelItemProps) {
+  const itemRef = useRef<null | HTMLDivElement>(null)
   return (
-    <div className='group/topLevelItem relative'>
+    <div
+      className={`group/topLevelItem relative ${className}`}
+      ref={itemRef}
+      onMouseEnter={() => onMouseEnter(itemRef, children)}
+      onMouseLeave={() => onMouseLeave(itemRef, children)}
+      {...props}>
       <MenuLink
         href={href}
-        {...props}
         className={`group-hover/topLevelItem:text-primary-300 ${
           !href ? 'cursor-default' : ''
         }`}>
@@ -48,13 +68,33 @@ function TopLevelItem({
   )
 }
 
-export default function Navigation(props: React.HTMLProps<HTMLElement>) {
+export interface NavigationProps extends React.HTMLProps<HTMLElement> {
+  onTopLevelMouseEnter?: TopLevelItemProps['onMouseEnter']
+  onTopLevelMouseLeave?: TopLevelItemProps['onMouseLeave']
+}
+
+export default function Navigation({
+  onTopLevelMouseEnter,
+  onTopLevelMouseLeave,
+  ...props
+}: NavigationProps) {
+  const topLevelEvents: Pick<
+    TopLevelItemProps,
+    'onMouseEnter' | 'onMouseLeave'
+  > = {
+    onMouseEnter(item, children) {
+      if (onTopLevelMouseEnter) onTopLevelMouseEnter(item, children)
+    },
+    onMouseLeave(item, children) {
+      if (onTopLevelMouseLeave) onTopLevelMouseLeave(item, children)
+    }
+  }
   return (
     <nav {...props}>
       <div className='relative'>
         <ul className='flex'>
           <li>
-            <TopLevelItem label='Products'>
+            <TopLevelItem {...topLevelEvents} label='Products'>
               <ul className='grid grid-cols-5 grid-rows-3 p-4'>
                 <li className='col-span-3 row-span-full flex items-center'>
                   <MenuLink href='#' className='block w-full'>
@@ -90,10 +130,10 @@ export default function Navigation(props: React.HTMLProps<HTMLElement>) {
             </TopLevelItem>
           </li>
           <li>
-            <TopLevelItem label='Docs' href='/docs' />
+            <TopLevelItem {...topLevelEvents} label='Docs' href='/docs' />
           </li>
           <li>
-            <TopLevelItem label='Resources'>
+            <TopLevelItem {...topLevelEvents} label='Resources'>
               <ul className='p-4'>
                 <li>
                   <MenuLink href='#' className='block w-full'>
@@ -124,7 +164,7 @@ export default function Navigation(props: React.HTMLProps<HTMLElement>) {
             </TopLevelItem>
           </li>
           <li>
-            <TopLevelItem label='Use cases'>
+            <TopLevelItem {...topLevelEvents} label='Use cases'>
               <ul className='p-4'>
                 <li>
                   <MenuLink href='#' className='block w-full'>
@@ -155,7 +195,7 @@ export default function Navigation(props: React.HTMLProps<HTMLElement>) {
             </TopLevelItem>
           </li>
           <li>
-            <TopLevelItem label='Pricing'>
+            <TopLevelItem {...topLevelEvents} label='Pricing'>
               <ul className='p-4'>
                 <li>
                   <MenuLink href='#' className='block w-full'>
@@ -176,7 +216,11 @@ export default function Navigation(props: React.HTMLProps<HTMLElement>) {
             </TopLevelItem>
           </li>
           <li>
-            <TopLevelItem label='Contact us' href='/company/contact?loc=nav' />
+            <TopLevelItem
+              {...topLevelEvents}
+              label='Contact us'
+              href='/company/contact?loc=nav'
+            />
           </li>
         </ul>
       </div>
