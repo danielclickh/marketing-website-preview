@@ -1,4 +1,4 @@
-import Link, { LinkProps } from 'next/link'
+import Link from 'next/link'
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 import useClickOutside from '../../hooks/useClickOutside'
