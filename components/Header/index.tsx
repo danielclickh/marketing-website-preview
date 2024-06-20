@@ -16,11 +16,13 @@ export default function Header({ github: { stars } }: HeaderProps) {
 
   return (
     <>
+      {/* Mega menu backdrop */}
       <div
         className={`pointer-events-none fixed inset-0 z-40 bg-neutral-700/70 transition-opacity ${
           showBackdrop ? 'opacity-100' : 'opacity-0'
         }`}
       />
+
       <header className='relative z-50 bg-neutral-900'>
         {/* Announcement banner */}
         {false && (

@@ -1,6 +1,8 @@
 import Link, { LinkProps } from 'next/link'
+import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 import useClickOutside from '../../hooks/useClickOutside'
+import ClickHouseCloud from '../icons/ClickHouseCloud'
 import LinkWithArrow from '../LinkWithArrow'
 
 interface MenuLinkProps extends LinkProps {
@@ -78,7 +80,10 @@ function TopLevelItem({
 
   return (
     <div
-      className={`group/topLevelItem relative ${className}`}
+      style={{
+        perspective: '600px'
+      }}
+      className={`relative ${className}`}
       ref={itemRef}
       onMouseEnter={() => onMouseEnter(itemRef, children, isOpen)}
       onMouseLeave={() => onMouseLeave(itemRef, children, isOpen)}
@@ -93,8 +98,10 @@ function TopLevelItem({
       </MenuLink>
       {!!children && (
         <div
-          className={`pointer-events-none absolute left-1/2 top-full -z-50 w-max -translate-x-1/2 whitespace-nowrap pt-6 opacity-0 shadow transition-opacity delay-75 ${
-            isOpen ? 'pointer-events-auto z-10 opacity-100' : ''
+          className={`pointer-events-none absolute left-1/2 top-full -z-50 w-max origin-[top_center] -translate-x-1/2 whitespace-nowrap pt-6 opacity-0 shadow transition-all ${
+            isOpen
+              ? 'pointer-events-auto z-10 scale-100 opacity-100'
+              : 'scale-90'
           }`}>
           <div className='rounded bg-neutral-750'>{children}</div>
         </div>
@@ -142,28 +149,52 @@ export default function Navigation({
             <TopLevelItem {...topLevelEvents} label='Products'>
               <ul className='grid grid-cols-5 grid-rows-3 p-4'>
                 <li className='col-span-3 row-span-full flex items-center'>
-                  <MenuLink href='#' className='block w-full'>
-                    ClickHouse Cloud
-                    <div className='text-xs text-slate-300'>
-                      The best way to use ClickHouse.
-                      <br />
-                      Available on AWS, GCP, and Azure.
-                    </div>
+                  <MenuLink href='#' className='flex w-full items-center gap-4'>
+                    <ClickHouseCloud className='flex-grow-1 flex-shrink-0 text-primary-300' />
+                    <span>
+                      ClickHouse Cloud
+                      <div className='text-xs text-slate-300'>
+                        The best way to use ClickHouse.
+                        <br />
+                        Available on AWS, GCP, and Azure.
+                      </div>
+                    </span>
                   </MenuLink>
                 </li>
                 <li className='col-span-2'>
-                  <MenuLink href='#' className='block w-full'>
-                    ClickHouse
+                  <MenuLink href='#' className='flex w-full items-center gap-3'>
+                    <Image
+                      src='/images/nav/icon-clickhouse.svg'
+                      alt='ClickHouse'
+                      width={24}
+                      height={24}
+                      className='flex-grow-1 flex-shrink-0'
+                    />
+                    <span>ClickHouse</span>
                   </MenuLink>
                 </li>
                 <li className='col-span-2'>
-                  <MenuLink href='#' className='block w-full'>
-                    ClickHouse Local
+                  <MenuLink href='#' className='flex w-full items-center gap-3'>
+                    <Image
+                      src='/images/nav/icon-clickhouse-local.svg'
+                      alt='ClickHouse Local'
+                      width={24}
+                      height={24}
+                      className='flex-grow-1 flex-shrink-0'
+                    />
+                    <span>ClickHouse Local</span>
                   </MenuLink>
                 </li>
                 <li className='col-span-2'>
-                  <MenuLink href='#' className='block w-full'>
-                    chDB
+                  <MenuLink href='#' className='flex w-full items-center gap-3'>
+                    <Image
+                      src='/images/nav/icon-chdb.svg'
+                      alt='chDB'
+                      width={24}
+                      height={24}
+                      className='flex-grow-1 flex-shrink-0'
+                    />
+                    <span>chDB</span>
                   </MenuLink>
                 </li>
               </ul>
@@ -175,7 +206,11 @@ export default function Navigation({
             </TopLevelItem>
           </li>
           <li>
-            <TopLevelItem {...topLevelEvents} label='Docs' href='/docs' />
+            <TopLevelItem
+              {...topLevelEvents}
+              label='Docs'
+              href='https://clickhouse.com/docs'
+            />
           </li>
           <li>
             <TopLevelItem {...topLevelEvents} label='Resources'>
