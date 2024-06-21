@@ -249,7 +249,7 @@ function TopLevelItem({
       </MenuLink>
       {!!children && (
         <div
-          className={`transition-all md-mid:absolute md-mid:left-1/2 md-mid:top-full md-mid:-z-50 md-mid:block md-mid:w-max md-mid:origin-[top_center] md-mid:-translate-x-1/2 md-mid:whitespace-nowrap md-mid:pt-6 md-mid:shadow ${
+          className={`transition-all md-mid:absolute md-mid:-left-12 md-mid:top-full md-mid:-z-50 md-mid:block md-mid:w-max md-mid:min-w-60 md-mid:origin-[top_center] md-mid:whitespace-nowrap md-mid:pt-6 md-mid:shadow ${
             isOpen
               ? 'pointer-events-auto block md-mid:z-10 md-mid:scale-100 md-mid:opacity-100'
               : 'pointer-events-none hidden md-mid:scale-90 md-mid:opacity-0'

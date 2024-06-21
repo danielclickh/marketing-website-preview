@@ -31,7 +31,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
     <>
       {/* Mega menu backdrop */}
       <div
-        className={`pointer-events-none fixed inset-0 z-40 bg-neutral-700/70 transition-opacity ${
+        className={`pointer-events-none fixed inset-0 z-40 hidden bg-neutral-700/70 transition-opacity md-mid:block  ${
           showBackdrop ? 'opacity-100' : 'opacity-0'
         }`}
       />
