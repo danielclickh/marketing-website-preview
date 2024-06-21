@@ -15,16 +15,26 @@ export default function Header({ github: { stars } }: HeaderProps) {
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState<boolean>(false)
   const [showBackdrop, setShowBackdrop] = useState<boolean>(false)
   const [headerHeight, setHeaderHeight] = useState<number>(72)
+  const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   useEffect(() => {
     const resizeHandler = () => {
       if (headerRef.current) setHeaderHeight(headerRef.current.clientHeight)
     }
 
-    window.addEventListener('resize', resizeHandler)
-    resizeHandler()
+    const scrollHandler = () => {
+      setIsScrolled(window.scrollY > 0)
+    }
 
-    return () => window.removeEventListener('resize', resizeHandler)
+    window.addEventListener('resize', resizeHandler)
+    window.addEventListener('scroll', scrollHandler)
+    resizeHandler()
+    scrollHandler()
+
+    return () => {
+      window.removeEventListener('resize', resizeHandler)
+      window.removeEventListener('scroll', scrollHandler)
+    }
   }, [headerRef])
 
   return (
@@ -42,8 +52,14 @@ export default function Header({ github: { stars } }: HeaderProps) {
       <header
         ref={headerRef}
         className={`${
-          burgerMenuIsOpen ? 'bg-neutral-900' : 'bg-neutral-900/80'
-        } fixed top-0 z-50 w-full backdrop-blur md-mid:bg-neutral-900/80`}>
+          burgerMenuIsOpen
+            ? '!bg-neutral-900'
+            : isScrolled
+            ? 'bg-neutral-900/80'
+            : 'bg-neutral-900/10'
+        } ${
+          isScrolled ? 'md-mid:bg-neutral-900/80' : 'md-mid:bg-neutral-900/10'
+        } fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur transition-colors`}>
         {/* Announcement banner */}
         {false && (
           <LinkWithArrow
