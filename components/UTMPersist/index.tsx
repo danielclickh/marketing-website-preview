@@ -56,9 +56,13 @@ const UTMPersist = () => {
       storeUTMsInStorage(utmValues)
     }
 
-    // Check for originalPagePath and store if not present
-    if (!localStorage.getItem('originalPagePath')) {
-      localStorage.setItem('originalPagePath', window.location.pathname)
+    // Check for origPath and store if not present and path does not include '/marketo-forms'
+    const currentPath = window.location.pathname
+    if (
+      !localStorage.getItem('origPath') &&
+      !currentPath.includes('/marketo-forms')
+    ) {
+      localStorage.setItem('origPath', currentPath)
     }
 
     updateLinks()
@@ -114,9 +118,9 @@ export function appendPagePathsToLink(url: string): string {
   urlObject.searchParams.set('pagePath', window.location.pathname)
 
   // Append original page path from local storage if available
-  const originalPagePath = localStorage.getItem('originalPagePath')
-  if (originalPagePath) {
-    urlObject.searchParams.set('originalPagePath', originalPagePath)
+  const origPath = localStorage.getItem('origPath')
+  if (origPath) {
+    urlObject.searchParams.set('origPath', origPath)
   }
 
   return urlObject.toString()
