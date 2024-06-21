@@ -33,10 +33,10 @@ export default function Navigation({
   return (
     <nav {...props}>
       <div className='relative'>
-        <ul className='flex'>
+        <ul className='grid grid-cols-1 md-mid:flex md-mid:flex-row'>
           <li>
             <TopLevelItem {...topLevelEvents} label='Products'>
-              <ul className='grid grid-cols-5 grid-rows-3 p-4'>
+              <ul className='md-mid:grid md-mid:grid-cols-5 md-mid:grid-rows-3 md-mid:p-4'>
                 <li className='col-span-3 row-span-full flex items-center'>
                   <MenuLink href='#' className='flex w-full items-center gap-4'>
                     <ClickHouseCloud className='flex-grow-1 flex-shrink-0 text-primary-300' />
@@ -201,7 +201,7 @@ function MenuLink({ className = '', children, ...props }: MenuLinkProps) {
   return (
     <Link
       {...props}
-      className={`inline-block rounded px-4 py-2 text-sm font-medium transition-colors hover:bg-neutral-700/75 hover:text-primary-300 ${className}`}>
+      className={`block rounded px-4 py-2 text-sm font-medium transition-colors hover:bg-neutral-700/75 hover:text-primary-300 md-mid:inline-block ${className}`}>
       {children}
     </Link>
   )
@@ -236,9 +236,6 @@ function TopLevelItem({
 
   return (
     <div
-      style={{
-        perspective: '600px'
-      }}
       className={`relative ${className}`}
       ref={itemRef}
       onMouseEnter={() => onMouseEnter(itemRef, children, isOpen)}
@@ -254,10 +251,10 @@ function TopLevelItem({
       </MenuLink>
       {!!children && (
         <div
-          className={`pointer-events-none absolute left-1/2 top-full -z-50 w-max origin-[top_center] -translate-x-1/2 whitespace-nowrap pt-6 opacity-0 shadow transition-all ${
+          className={`transition-all md-mid:absolute md-mid:left-1/2 md-mid:top-full md-mid:-z-50 md-mid:block md-mid:w-max md-mid:origin-[top_center] md-mid:-translate-x-1/2 md-mid:whitespace-nowrap md-mid:pt-6 md-mid:shadow ${
             isOpen
-              ? 'pointer-events-auto z-10 scale-100 opacity-100'
-              : 'scale-90'
+              ? 'pointer-events-auto block md-mid:z-10 md-mid:scale-100 md-mid:opacity-100'
+              : 'pointer-events-none hidden md-mid:scale-90 md-mid:opacity-0'
           }`}>
           <div className='rounded bg-neutral-750'>{children}</div>
         </div>

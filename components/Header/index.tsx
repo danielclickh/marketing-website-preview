@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { MenuIcon, XIcon } from '@heroicons/react/solid'
@@ -11,8 +11,21 @@ import Navigation from '../Navigation'
 import { galaxyOnClick } from '../../lib/galaxy/galaxy'
 
 export default function Header({ github: { stars } }: HeaderProps) {
+  const headerRef = useRef<HTMLElement>(null)
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState<boolean>(false)
   const [showBackdrop, setShowBackdrop] = useState<boolean>(false)
+  const [headerHeight, setHeaderHeight] = useState<number>(72)
+
+  useEffect(() => {
+    const resizeHandler = () => {
+      if (headerRef.current) setHeaderHeight(headerRef.current.clientHeight)
+    }
+
+    window.addEventListener('resize', resizeHandler)
+    resizeHandler()
+
+    return () => window.removeEventListener('resize', resizeHandler)
+  }, [headerRef])
 
   return (
     <>
@@ -23,18 +36,25 @@ export default function Header({ github: { stars } }: HeaderProps) {
         }`}
       />
 
-      {/* Announcement banner */}
-      {!false && (
-        <LinkWithArrow
-          href='/blog/clickhouse-cloud-is-now-on-azure-in-public-beta?loc=eyebrow'
-          className='relative z-50 block w-full bg-primary-300 px-4 py-1 text-center text-sm font-medium text-primary-900'>
-          ClickHouse Cloud on Microsoft Azure: Now in Beta
-        </LinkWithArrow>
-      )}
+      {/* Add empty space for fixed header */}
+      <div style={{ height: headerHeight }} />
 
-      <header className='sticky top-0 z-50 bg-neutral-900/80 backdrop-blur'>
+      <header
+        ref={headerRef}
+        className={`${
+          burgerMenuIsOpen ? 'bg-neutral-900' : 'bg-neutral-900/80'
+        } fixed top-0 z-50 w-full backdrop-blur md-mid:bg-neutral-900/80`}>
+        {/* Announcement banner */}
+        {false && (
+          <LinkWithArrow
+            href='/blog/clickhouse-cloud-is-now-on-azure-in-public-beta?loc=eyebrow'
+            className='relative z-50 block w-full bg-primary-300 px-4 py-1 text-center text-sm font-medium text-primary-900'>
+            ClickHouse Cloud on Microsoft Azure: Now in Beta
+          </LinkWithArrow>
+        )}
+
         {/* Logo, navigtation, CTAs... */}
-        <div className='no-wrap section-container relative flex h-[72px] items-center'>
+        <div className='no-wrap section-container relative flex items-center py-4'>
           {/* Logo */}
           <Link href='/' onClick={galaxyOnClick('topNav.logo.select')}>
             <Image
@@ -64,7 +84,16 @@ export default function Header({ github: { stars } }: HeaderProps) {
           </button>
 
           {/* Nav container */}
-          <div className='fixed inset-0 top-[72px] flex flex-1 flex-col bg-neutral-900 p-4 md-mid:relative md-mid:top-0 md-mid:ml-8 md-mid:flex-row md-mid:items-center md-mid:bg-transparent md-mid:p-0 xl:ml-20'>
+          <div
+            style={{
+              top: headerHeight,
+              height: `calc(100dvh - ${headerHeight}px)`
+            }}
+            className={`${
+              burgerMenuIsOpen
+                ? 'pointer-events-auto opacity-100'
+                : 'pointer-events-none opacity-0'
+            } fixed inset-0 flex h-dvh flex-1 flex-col bg-neutral-900 p-4 transition-opacity md-mid:pointer-events-auto md-mid:relative md-mid:!top-0 md-mid:ml-8 md-mid:!h-auto md-mid:flex-row md-mid:items-center md-mid:bg-transparent md-mid:p-0 md-mid:opacity-100 xl:ml-20`}>
             <Navigation
               className='w-full md-mid:w-auto'
               onTopLevelClick={(item, children, isOpen) => {
