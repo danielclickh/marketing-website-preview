@@ -26,7 +26,7 @@ export default function Navigation({
         <ul className='grid grid-cols-1 md-mid:flex md-mid:flex-row'>
           <li>
             <TopLevelItem {...topLevelEvents} label='Products'>
-              <ul className='md-mid:grid md-mid:grid-cols-5 md-mid:grid-rows-3 md-mid:p-4'>
+              <ul className='px-4 md-mid:grid md-mid:grid-cols-5 md-mid:grid-rows-3 md-mid:py-4'>
                 <li className='col-span-3 row-span-full flex items-center'>
                   <MenuLink
                     href='#'
@@ -101,7 +101,7 @@ export default function Navigation({
           </li>
           <li>
             <TopLevelItem {...topLevelEvents} label='Resources'>
-              <ul className='p-4'>
+              <ul className='px-4 md-mid:py-4'>
                 <li>
                   <MenuLink href='#' className='block w-full'>
                     Blog
@@ -132,7 +132,7 @@ export default function Navigation({
           </li>
           <li>
             <TopLevelItem {...topLevelEvents} label='Use cases'>
-              <ul className='p-4'>
+              <ul className='px-4 md-mid:py-4'>
                 <li>
                   <MenuLink href='#' className='block w-full'>
                     Real-time analytics
@@ -163,7 +163,7 @@ export default function Navigation({
           </li>
           <li>
             <TopLevelItem {...topLevelEvents} label='Pricing'>
-              <ul className='p-4'>
+              <ul className='px-4 md-mid:py-4'>
                 <li>
                   <MenuLink href='#' className='block w-full'>
                     ClickHouse Cloud pricing
@@ -199,7 +199,7 @@ function MenuLink({ className = '', children, ...props }: MenuLinkProps) {
   return (
     <Link
       {...props}
-      className={`block rounded px-4 py-2 text-sm font-medium transition-colors hover:bg-neutral-700/75 hover:text-primary-300 md-mid:inline-block ${className}`}>
+      className={`block rounded px-4 py-2.5 text-sm font-medium transition-colors hover:bg-neutral-700/75 hover:text-primary-300 md-mid:inline-block md-mid:py-2 ${className}`}>
       {children}
     </Link>
   )
@@ -217,6 +217,7 @@ function TopLevelItem({
   open = false,
   ...props
 }: TopLevelItemProps) {
+  const hasChildren = !!children
   const itemRef = useRef<null | HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState<boolean>(open)
 
@@ -242,21 +243,48 @@ function TopLevelItem({
       {...props}>
       <MenuLink
         href={href}
-        className={`${!href && !children ? 'cursor-default' : ''} ${
+        className={`${!href && !hasChildren ? 'cursor-default' : ''} ${
           isOpen ? 'text-primary-300' : ''
         }`}>
-        {label}
+        <div className='flex items-center'>
+          <span className='flex-1'>{label}</span>
+          {hasChildren && <MenuChevron isOpen={isOpen} />}
+        </div>
       </MenuLink>
-      {!!children && (
+      {hasChildren && (
         <div
           className={`transition-all md-mid:absolute md-mid:-left-12 md-mid:top-full md-mid:-z-50 md-mid:block md-mid:w-max md-mid:min-w-60 md-mid:origin-[top_center] md-mid:whitespace-nowrap md-mid:pt-6 md-mid:shadow ${
             isOpen
               ? 'pointer-events-auto block md-mid:z-10 md-mid:scale-100 md-mid:opacity-100'
               : 'pointer-events-none hidden md-mid:scale-90 md-mid:opacity-0'
           }`}>
-          <div className='rounded bg-neutral-750'>{children}</div>
+          <div className='md-mid:rounded md-mid:bg-neutral-750'>{children}</div>
         </div>
       )}
     </div>
+  )
+}
+
+function MenuChevron({ isOpen = false }: { isOpen?: boolean }) {
+  return (
+    <span
+      className={`flex w-2.5 flex-shrink-0 flex-grow-0 items-center justify-center transition-all md-mid:hidden ${
+        isOpen ? 'rotate-90' : 'text-neutral-500'
+      }`}>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='6'
+        height='10'
+        fill='none'
+        viewBox='0 0 6 10'>
+        <path
+          stroke='currentColor'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          strokeWidth='1.5'
+          d='m1 9 4-4-4-4'
+        />
+      </svg>
+    </span>
   )
 }
