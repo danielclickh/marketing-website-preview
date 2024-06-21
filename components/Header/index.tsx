@@ -135,7 +135,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
                 className='w-full md-mid:w-auto'
                 linkClass='w-full md-mid:w-auto'
                 onClick={galaxyOnClick('topNav.navItems.getStartedSelect')}>
-                Get started
+                <span id='nav-bar-cta-button'>Get started</span>
               </CUIButton>
             </div>
           </div>
