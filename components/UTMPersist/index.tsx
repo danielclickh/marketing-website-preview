@@ -20,6 +20,7 @@ export const updateLinks = (
     if (link.hostname.includes('.cloud')) {
       link.href = appendUTMsToLink(link.href)
       link.href = appendGalaxySessionIDToLink(link.href)
+      link.href = appendPagePathsToLink(link.href)
       if (experimentId && variationId) {
         link.href = appendExperimentToLink(link.href, experimentId, variationId)
       }
@@ -53,6 +54,11 @@ const UTMPersist = () => {
 
     if (Object.keys(utmValues).length > 0) {
       storeUTMsInStorage(utmValues)
+    }
+
+    // Check for originalPagePath and store if not present
+    if (!localStorage.getItem('originalPagePath')) {
+      localStorage.setItem('originalPagePath', window.location.pathname)
     }
 
     updateLinks()
@@ -95,6 +101,22 @@ export function appendGalaxySessionIDToLink(url: string): string {
   // Append galaxy session id to links that contain ".cloud"
   if (galaxy_id) {
     urlObject.searchParams.set('glxid', galaxy_id)
+  }
+
+  return urlObject.toString()
+}
+
+// Utility function to append page paths to a link
+export function appendPagePathsToLink(url: string): string {
+  const urlObject = new URL(url)
+
+  // Append current page path
+  urlObject.searchParams.set('pagePath', window.location.pathname)
+
+  // Append original page path from local storage if available
+  const originalPagePath = localStorage.getItem('originalPagePath')
+  if (originalPagePath) {
+    urlObject.searchParams.set('originalPagePath', originalPagePath)
   }
 
   return urlObject.toString()
