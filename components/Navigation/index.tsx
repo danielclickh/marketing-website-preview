@@ -31,7 +31,7 @@ export default function Navigation({
                   <MenuLink
                     href='#'
                     className='!flex w-full items-center gap-4'>
-                    <ClickHouseCloud className='flex-grow-1 flex-shrink-0 text-primary-300' />
+                    <ClickHouseCloud className='flex-grow-1 h-auto w-5 flex-shrink-0 stroke-[4] text-primary-300 md-mid:w-auto md-mid:stroke-[1.75]' />
                     <span>
                       ClickHouse Cloud
                       <div className='text-xs text-slate-300'>
@@ -84,10 +84,24 @@ export default function Navigation({
                     <span>chDB</span>
                   </MenuLink>
                 </li>
+                <li className='md-mid:hidden'>
+                  <MenuLink
+                    href='#'
+                    className='!flex w-full items-center gap-3'>
+                    <Image
+                      src='/images/nav/icon-integrations.svg'
+                      alt='chDB'
+                      width={24}
+                      height={24}
+                      className='flex-grow-1 flex-shrink-0'
+                    />
+                    <span>View integrations</span>
+                  </MenuLink>
+                </li>
               </ul>
               <LinkWithArrow
-                href='/integrations?loc=nav'
-                className='block w-full rounded-b bg-primary-300 px-4 py-2 text-center text-sm font-medium text-primary-900'>
+                href='#'
+                className='hidden w-full rounded-b bg-primary-300 px-4 py-2 text-center text-sm font-medium text-primary-900 md-mid:block'>
                 View our integrations
               </LinkWithArrow>
             </TopLevelItem>
