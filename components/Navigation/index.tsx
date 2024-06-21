@@ -7,29 +7,19 @@ import LinkWithArrow from '../LinkWithArrow'
 import { MenuLinkProps, TopLevelItemProps, NavigationProps } from './types'
 
 export default function Navigation({
-  onTopLevelMouseEnter,
-  onTopLevelMouseLeave,
   onTopLevelClick,
   onTopLevelClickOutside,
   ...props
 }: NavigationProps) {
-  const topLevelEvents: Pick<
-    TopLevelItemProps,
-    'onMouseEnter' | 'onMouseLeave' | 'onClick' | 'onClickOutside'
-  > = {
-    onMouseEnter(...args) {
-      if (onTopLevelMouseEnter) onTopLevelMouseEnter(...args)
-    },
-    onMouseLeave(...args) {
-      if (onTopLevelMouseLeave) onTopLevelMouseLeave(...args)
-    },
-    onClick(...args) {
-      if (onTopLevelClick) onTopLevelClick(...args)
-    },
-    onClickOutside(...args) {
-      if (onTopLevelClickOutside) onTopLevelClickOutside(...args)
+  const topLevelEvents: Pick<TopLevelItemProps, 'onClick' | 'onClickOutside'> =
+    {
+      onClick(...args) {
+        if (onTopLevelClick) onTopLevelClick(...args)
+      },
+      onClickOutside(...args) {
+        if (onTopLevelClickOutside) onTopLevelClickOutside(...args)
+      }
     }
-  }
   return (
     <nav {...props}>
       <div className='relative'>
