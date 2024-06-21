@@ -1,10 +1,15 @@
-import Link from 'next/link'
+import Link, { LinkProps } from 'next/link'
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 import useClickOutside from '../../hooks/useClickOutside'
 import ClickHouseCloud from '../icons/ClickHouseCloud'
 import LinkWithArrow from '../LinkWithArrow'
-import { MenuLinkProps, TopLevelItemProps, NavigationProps } from './types'
+import {
+  MenuLinkProps,
+  TopLevelItemProps,
+  NavigationProps,
+  MenuQuoteProps
+} from './types'
 
 export default function Navigation({
   onTopLevelClick,
@@ -101,7 +106,7 @@ export default function Navigation({
               </ul>
               <LinkWithArrow
                 href='#'
-                className='hidden w-full rounded-b bg-primary-300 px-4 py-2 text-center text-sm font-medium text-primary-900 md-mid:block'>
+                className='hidden w-full rounded-b-lg bg-primary-300 px-4 py-2 text-center text-sm font-medium text-primary-900 md-mid:block'>
                 View our integrations
               </LinkWithArrow>
             </TopLevelItem>
@@ -146,31 +151,43 @@ export default function Navigation({
           </li>
           <li>
             <TopLevelItem {...topLevelEvents} label='Use cases'>
-              <ul className='px-4 md-mid:py-4'>
-                <li>
+              <ul className='px-4 md-mid:grid md-mid:grid-cols-5 md-mid:grid-rows-5 md-mid:py-4'>
+                <li className='col-span-2'>
                   <MenuLink href='#' className='block w-full'>
                     Real-time analytics
                   </MenuLink>
                 </li>
-                <li>
+                <li className='col-span-2'>
                   <MenuLink href='#' className='block w-full'>
                     Logs, events and traces
                   </MenuLink>
                 </li>
-                <li>
+                <li className='col-span-2'>
                   <MenuLink href='#' className='block w-full'>
                     Business intelligence
                   </MenuLink>
                 </li>
-                <li>
+                <li className='col-span-2'>
                   <MenuLink href='#' className='block w-full'>
                     Machine learning and GenAI
                   </MenuLink>
                 </li>
-                <li>
+                <li className='col-span-2'>
                   <MenuLink href='#' className='block w-full'>
                     All use cases
                   </MenuLink>
+                </li>
+                <li className='col-span-3 col-start-3 row-span-full'>
+                  <MenuQuote
+                    className='md-mid:max-w-[336px]'
+                    author='Harlow Ward'
+                    jobTitle='CTO, Clearbit'
+                    link={{ href: '#', text: 'View more user stories' }}>
+                    There's that feeling of new tech where everything just feels
+                    like it's going right. Can we get the data in there quick
+                    enough? Yes. Can we query the data in a way that is going to
+                    have a responsive UI? Yes.
+                  </MenuQuote>
                 </li>
               </ul>
             </TopLevelItem>
@@ -272,7 +289,9 @@ function TopLevelItem({
               ? 'pointer-events-auto block md-mid:z-10 md-mid:scale-100 md-mid:opacity-100'
               : 'pointer-events-none hidden md-mid:scale-90 md-mid:opacity-0'
           }`}>
-          <div className='md-mid:rounded md-mid:bg-neutral-750'>{children}</div>
+          <div className='md-mid:rounded-lg md-mid:bg-neutral-750'>
+            {children}
+          </div>
         </div>
       )}
     </div>
@@ -300,5 +319,52 @@ function MenuChevron({ isOpen = false }: { isOpen?: boolean }) {
         />
       </svg>
     </span>
+  )
+}
+
+function MenuQuote({
+  children,
+  author,
+  jobTitle,
+  link,
+  ...props
+}: MenuQuoteProps) {
+  return (
+    <div {...props}>
+      <blockquote
+        className={`${link ? 'rounded-t-md' : 'rounded-md'} bg-white p-4`}>
+        <div className='mb-4 text-wrap text-sm font-bold text-slate-900'>
+          {children}
+        </div>
+        <footer className='flex items-center gap-4'>
+          <span className='flex flex-1 flex-col text-xs text-neutral-500'>
+            <strong className='font-bold'>{author}</strong>
+            {!!jobTitle && (
+              <cite className='font-normal italic'>{jobTitle}</cite>
+            )}
+          </span>
+          <span className='flex aspect-square w-9 flex-shrink-0 flex-grow-0 items-center justify-center bg-slate-950 text-primary-300'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='26'
+              height='21'
+              fill='none'
+              viewBox='0 0 26 21'>
+              <path
+                fill='currentColor'
+                d='M12.7.5v6a14 14 0 0 1-1 5.1 21.6 21.6 0 0 1-6 8.6l-5.5-3c.8-1.4 1.5-2.9 2.2-4.6a18 18 0 0 0 1-6V.5h9.3ZM26 .5v6a14 14 0 0 1-1 5.1 21.5 21.5 0 0 1-6 8.6l-5.5-3c.8-1.4 1.5-2.9 2.2-4.6a18 18 0 0 0 1-6V.5H26Z'
+              />
+            </svg>
+          </span>
+        </footer>
+      </blockquote>
+      {link && (
+        <LinkWithArrow
+          {...link}
+          className='block w-full rounded-b-md bg-primary-300 px-4 py-2 text-left text-sm font-medium text-primary-900'>
+          {link.text}
+        </LinkWithArrow>
+      )}
+    </div>
   )
 }

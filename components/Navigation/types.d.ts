@@ -43,3 +43,14 @@ export interface NavigationProps extends React.HTMLProps<HTMLElement> {
   onTopLevelClick?: TopLevelItemProps['onClick']
   onTopLevelClickOutside?: TopLevelItemProps['onClickOutside']
 }
+
+interface MenuQuoteLinkProps extends LinkProps {
+  text: string
+}
+
+export interface MenuQuoteProps extends React.HTMLProps<HTMLDivElement> {
+  children: React.ReactNode
+  author: string
+  jobTitle?: string
+  link?: MenuQuoteLinkProps
+}
