@@ -151,7 +151,7 @@ export default function Navigation({
           </li>
           <li>
             <TopLevelItem {...topLevelEvents} label='Use cases'>
-              <ul className='px-4 md-mid:grid md-mid:grid-cols-5 md-mid:grid-rows-5 md-mid:py-4'>
+              <ul className='px-4 md-mid:grid md-mid:grid-cols-5 md-mid:grid-rows-5 md-mid:gap-x-4 md-mid:py-4'>
                 <li className='col-span-2'>
                   <MenuLink href='#' className='block w-full'>
                     Real-time analytics
@@ -177,7 +177,7 @@ export default function Navigation({
                     All use cases
                   </MenuLink>
                 </li>
-                <li className='col-span-3 col-start-3 row-span-full'>
+                <li className='col-span-3 col-start-3 row-span-full my-4 md-mid:my-0'>
                   <MenuQuote
                     className='md-mid:max-w-[336px]'
                     author='Harlow Ward'
@@ -332,7 +332,9 @@ function MenuQuote({
   return (
     <div {...props}>
       <blockquote
-        className={`${link ? 'rounded-t-md' : 'rounded-md'} bg-white p-4`}>
+        className={`${
+          link ? 'rounded-t-md' : 'rounded-md'
+        } bg-white px-4 py-3`}>
         <div className='mb-4 text-wrap text-sm font-bold text-slate-900'>
           {children}
         </div>
@@ -343,7 +345,7 @@ function MenuQuote({
               <cite className='font-normal italic'>{jobTitle}</cite>
             )}
           </span>
-          <span className='flex aspect-square w-9 flex-shrink-0 flex-grow-0 items-center justify-center bg-slate-950 text-primary-300'>
+          <span className='flex aspect-square w-[38px] flex-shrink-0 flex-grow-0 items-center justify-center bg-slate-950 text-primary-300'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='26'
