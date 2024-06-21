@@ -38,7 +38,9 @@ export default function Navigation({
             <TopLevelItem {...topLevelEvents} label='Products'>
               <ul className='md-mid:grid md-mid:grid-cols-5 md-mid:grid-rows-3 md-mid:p-4'>
                 <li className='col-span-3 row-span-full flex items-center'>
-                  <MenuLink href='#' className='flex w-full items-center gap-4'>
+                  <MenuLink
+                    href='#'
+                    className='!flex w-full items-center gap-4'>
                     <ClickHouseCloud className='flex-grow-1 flex-shrink-0 text-primary-300' />
                     <span>
                       ClickHouse Cloud
@@ -51,7 +53,9 @@ export default function Navigation({
                   </MenuLink>
                 </li>
                 <li className='col-span-2'>
-                  <MenuLink href='#' className='flex w-full items-center gap-3'>
+                  <MenuLink
+                    href='#'
+                    className='!flex w-full items-center gap-3'>
                     <Image
                       src='/images/nav/icon-clickhouse.svg'
                       alt='ClickHouse'
@@ -63,7 +67,9 @@ export default function Navigation({
                   </MenuLink>
                 </li>
                 <li className='col-span-2'>
-                  <MenuLink href='#' className='flex w-full items-center gap-3'>
+                  <MenuLink
+                    href='#'
+                    className='!flex w-full items-center gap-3'>
                     <Image
                       src='/images/nav/icon-clickhouse-local.svg'
                       alt='ClickHouse Local'
@@ -75,7 +81,9 @@ export default function Navigation({
                   </MenuLink>
                 </li>
                 <li className='col-span-2'>
-                  <MenuLink href='#' className='flex w-full items-center gap-3'>
+                  <MenuLink
+                    href='#'
+                    className='!flex w-full items-center gap-3'>
                     <Image
                       src='/images/nav/icon-chdb.svg'
                       alt='chDB'
