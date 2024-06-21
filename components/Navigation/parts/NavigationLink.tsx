@@ -14,7 +14,7 @@ export default function NavigationLink({
   return (
     <Link
       {...props}
-      className={`block rounded px-4 py-2.5 text-sm font-medium transition-colors hover:bg-neutral-700/75 hover:text-primary-300 md-mid:inline-block md-mid:py-2 ${className}`}>
+      className={`block rounded-lg px-4 py-2.5 text-sm font-medium transition-colors hover:bg-neutral-700/25 hover:text-primary-300 md-mid:inline-block md-mid:py-2 ${className}`}>
       {children}
     </Link>
   )

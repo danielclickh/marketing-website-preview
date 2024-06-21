@@ -39,7 +39,7 @@ export default function Navigation({
               <ul className='px-4 md-mid:grid md-mid:grid-cols-5 md-mid:grid-rows-3 md-mid:py-4'>
                 <li className='col-span-3 row-span-full flex items-center'>
                   <NavigationLink
-                    href='#'
+                    href='/cloud'
                     className='!flex w-full items-center gap-4'>
                     <ClickHouseCloud className='flex-grow-1 h-auto w-5 flex-shrink-0 stroke-[4] text-primary-300 md-mid:w-auto md-mid:stroke-[1.75]' />
                     <span>
@@ -54,7 +54,7 @@ export default function Navigation({
                 </li>
                 <li className='col-span-2'>
                   <NavigationLink
-                    href='#'
+                    href='/clickhouse'
                     className='!flex w-full items-center gap-3'>
                     <Image
                       src='/images/nav/icon-clickhouse.svg'
@@ -127,27 +127,33 @@ export default function Navigation({
             <NavigationItem {...topLevelEvents} label='Resources'>
               <ul className='px-4 md-mid:py-4'>
                 <li>
-                  <NavigationLink href='#' className='block w-full'>
+                  <NavigationLink href='/blog' className='block w-full'>
                     Blog
                   </NavigationLink>
                 </li>
                 <li>
-                  <NavigationLink href='#' className='block w-full'>
+                  <NavigationLink
+                    href='/blog?category=customer-stories'
+                    className='block w-full'>
                     User stories
                   </NavigationLink>
                 </li>
                 <li>
-                  <NavigationLink href='#' className='block w-full'>
+                  <NavigationLink
+                    href='/company/news-events'
+                    className='block w-full'>
                     News and events
                   </NavigationLink>
                 </li>
                 <li>
-                  <NavigationLink href='#' className='block w-full'>
+                  <NavigationLink href='/learn' className='block w-full'>
                     Learning
                   </NavigationLink>
                 </li>
                 <li>
-                  <NavigationLink href='#' className='block w-full'>
+                  <NavigationLink
+                    href='/support/program'
+                    className='block w-full'>
                     Support
                   </NavigationLink>
                 </li>
@@ -158,27 +164,35 @@ export default function Navigation({
             <NavigationItem {...topLevelEvents} label='Use cases'>
               <ul className='px-4 md-mid:grid md-mid:grid-cols-5 md-mid:grid-rows-5 md-mid:gap-x-4 md-mid:py-4'>
                 <li className='col-span-2'>
-                  <NavigationLink href='#' className='block w-full'>
+                  <NavigationLink
+                    href='/use-cases/real-time-analytics'
+                    className='block w-full'>
                     Real-time analytics
                   </NavigationLink>
                 </li>
                 <li className='col-span-2'>
-                  <NavigationLink href='#' className='block w-full'>
+                  <NavigationLink
+                    href='/use-cases/logging-and-metrics'
+                    className='block w-full'>
                     Logs, events and traces
                   </NavigationLink>
                 </li>
                 <li className='col-span-2'>
-                  <NavigationLink href='#' className='block w-full'>
+                  <NavigationLink
+                    href='/use-cases/business-intelligence'
+                    className='block w-full'>
                     Business intelligence
                   </NavigationLink>
                 </li>
                 <li className='col-span-2'>
-                  <NavigationLink href='#' className='block w-full'>
+                  <NavigationLink
+                    href='/use-cases/machine-learning-and-data-science'
+                    className='block w-full'>
                     Machine learning and GenAI
                   </NavigationLink>
                 </li>
                 <li className='col-span-2'>
-                  <NavigationLink href='#' className='block w-full'>
+                  <NavigationLink href='/use-cases' className='block w-full'>
                     All use cases
                   </NavigationLink>
                 </li>
@@ -187,7 +201,10 @@ export default function Navigation({
                     className='md-mid:max-w-[336px]'
                     author='Harlow Ward'
                     jobTitle='CTO, Clearbit'
-                    link={{ href: '#', text: 'View more user stories' }}>
+                    link={{
+                      href: '/blog?category=customer-stories',
+                      text: 'View more user stories'
+                    }}>
                     There's that feeling of new tech where everything just feels
                     like it's going right. Can we get the data in there quick
                     enough? Yes. Can we query the data in a way that is going to
@@ -201,17 +218,21 @@ export default function Navigation({
             <NavigationItem {...topLevelEvents} label='Pricing'>
               <ul className='px-4 md-mid:py-4'>
                 <li>
-                  <NavigationLink href='#' className='block w-full'>
+                  <NavigationLink href='/pricing' className='block w-full'>
                     ClickHouse Cloud pricing
                   </NavigationLink>
                 </li>
                 <li>
-                  <NavigationLink href='#' className='block w-full'>
+                  <NavigationLink
+                    href='/pricing?loc=sub-menu#pricing-calculator'
+                    className='block w-full'>
                     Cost estimator
                   </NavigationLink>
                 </li>
                 <li>
-                  <NavigationLink href='#' className='block w-full'>
+                  <NavigationLink
+                    href='/pricing/contact?loc=menu'
+                    className='block w-full'>
                     Dedicated services
                   </NavigationLink>
                 </li>
