@@ -93,13 +93,13 @@ export default function Header({ github: { stars } }: HeaderProps) {
               burgerMenuIsOpen
                 ? 'pointer-events-auto opacity-100'
                 : 'pointer-events-none opacity-0'
-            } fixed inset-0 flex h-dvh flex-1 flex-col bg-neutral-900 p-4 transition-opacity md-mid:pointer-events-auto md-mid:relative md-mid:!top-0 md-mid:ml-8 md-mid:!h-auto md-mid:flex-row md-mid:items-center md-mid:bg-transparent md-mid:p-0 md-mid:opacity-100 xl:ml-20`}>
+            } fixed inset-0 flex h-dvh flex-1 flex-col overflow-y-auto bg-neutral-900 p-4 transition-opacity md-mid:pointer-events-auto md-mid:relative md-mid:!top-0 md-mid:ml-8 md-mid:!h-auto md-mid:flex-row md-mid:items-center md-mid:overflow-y-visible md-mid:bg-transparent md-mid:p-0 md-mid:opacity-100 xl:ml-20`}>
             <Navigation
               className='w-full md-mid:w-auto'
-              onTopLevelClick={(item, children, isOpen) => {
+              onItemClick={(item, children, isOpen) => {
                 setShowBackdrop(isOpen)
               }}
-              onTopLevelClickOutside={(item, children, isOpen) => {
+              onItemClickOutside={(item, children, isOpen) => {
                 setShowBackdrop(isOpen)
               }}
             />
