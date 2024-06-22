@@ -59,7 +59,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
   }
 
   const [headerBanner, setHeaderBanner] = useState(
-    '<a href="/blog/clickhouse-cloud-is-now-on-azure-in-public-beta?loc=eyebrow">ClickHouse Cloud on Microsoft Azure: Now in Beta</a>'
+    '<a href="/company/contact">Contact us for help migrating from Rockset to ClickHouse Cloud</a>'
   )
 
   useEffect(() => {
@@ -76,7 +76,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
         className={styles.navBarContainer}
         ref={navBarRef}
         id='nav-container'>
-        {/* <Banner content={headerBanner} /> */}
+        <Banner content={headerBanner} />
         <nav className='no-wrap section-container relative flex w-full items-center justify-between py-4'>
           <Link
             href='/'
