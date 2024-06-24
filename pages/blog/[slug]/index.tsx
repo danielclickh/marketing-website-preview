@@ -83,6 +83,13 @@ export const getStaticProps: GetStaticProps<BlogProps> =
 
     const canonical = blog.canonical_url ? blog.canonical_url : `/blog/${slug}`
 
+    //super hacky thing that we will change for CMS override
+    if (
+      slug === 'clickhouse-cloud-is-now-generally-available-on-microsoft-azure'
+    ) {
+      blog.thumbnailPng.url = '/images/clickhouse-msft-dark.png'
+    }
+
     return {
       props: {
         ...blog,
