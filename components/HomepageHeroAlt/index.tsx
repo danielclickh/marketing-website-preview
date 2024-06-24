@@ -7,6 +7,7 @@ import CycleText from '../CycleText'
 import { SuiText, SuiTitle } from '../sui'
 import Typewriter from 'typewriter-effect'
 import styles from './styles.module.scss'
+import Link from 'next/link'
 
 export default function HomepageHeroAlt({
   className = '',
@@ -26,7 +27,7 @@ export default function HomepageHeroAlt({
     <div
       className={`relative overflow-x-hidden border-primary-300 lg:border-t-[38px] ${className}`}
       {...props}>
-      <div className='absolute top-0 left-0 bottom-0 z-10 w-full bg-primary-300 lg:w-1/2'></div>
+      <div className='absolute bottom-0 left-0 top-0 z-10 w-full bg-primary-300 lg:w-1/2'></div>
       <div className='section-container relative z-20 grid lg:grid-cols-2'>
         {/* Text column */}
         <div className='flip-selection relative z-30 bg-primary-300 py-12 text-center text-black lg:py-24 lg:text-left xl:py-32'>
@@ -74,7 +75,7 @@ export default function HomepageHeroAlt({
             )}
           </SuiTitle>
           <div className='lg:inline-block lg:w-auto'>
-            <SuiText className='mt-6 mb-12 w-auto !font-medium lg:!text-[20px]'>
+            <SuiText className='mb-12 mt-6 w-auto !font-medium lg:!text-[20px]'>
               Unlock faster queries without skyrocketing costs.
             </SuiText>
             <div className='flex w-auto flex-wrap gap-4 sm:gap-8 md:flex-nowrap md:gap-6'>
@@ -99,6 +100,31 @@ export default function HomepageHeroAlt({
                 Download open-source
               </CUIButton>
             </div>
+
+            <div className='mt-8 flex items-center rounded-[4px] border border-neutral-950 border-opacity-5 bg-neutral-950/5'>
+              <Link
+                href='/company/contact?loc=homepage-hero-rs'
+                className='group flex items-center'>
+                <div className='flex h-[104px] w-[152px] items-center bg-neutral-950/5'>
+                  <Image
+                    src='/images/rockset-logo.svg'
+                    alt='Rockset'
+                    width={48}
+                    height={48}
+                    className='mx-auto'
+                  />
+                </div>
+                <div className='ml-4 py-4'>
+                  <p className='text-left font-semibold'>
+                    [Rockset] is being discontinued. Migrate to ClickHouse with
+                    limited-time free migration services. Contact us today{' '}
+                    <span className='inline-block pl-0.5 transition group-hover:translate-x-1/2'>
+                      {'->'}
+                    </span>
+                  </p>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -106,7 +132,7 @@ export default function HomepageHeroAlt({
         <div className='relative'>
           {/* Desktop angle separator */}
           <div
-            className={`absolute -top-px -left-px bottom-0 z-20 hidden aspect-[272/608] text-primary-300 lg:block ${styles.angleShadow}`}>
+            className={`absolute -left-px -top-px bottom-0 z-20 hidden aspect-[272/608] text-primary-300 lg:block ${styles.angleShadow}`}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='auto'
@@ -121,7 +147,7 @@ export default function HomepageHeroAlt({
           </div>
 
           {/* Hero image */}
-          <div className='absolute top-0 bottom-0 right-0 z-10 hidden lg:left-10 lg:block xl:left-14 3xl:left-56'>
+          <div className='absolute bottom-0 right-0 top-0 z-10 hidden lg:left-10 lg:block xl:left-14 3xl:left-56'>
             <Image
               src='/images/homepage/home-hero-product-ui.png'
               width={2949}
