@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
+import { galaxyOnClick } from '../../lib/galaxy/galaxy'
 import ClickHouseCloud from '../icons/ClickHouseCloud'
 import LinkWithArrow from '../LinkWithArrow'
 import {
@@ -47,6 +48,9 @@ export default function Navigation({
                 <li className='col-span-3 row-span-full flex items-center'>
                   <NavigationLink
                     href='/cloud'
+                    onClick={() =>
+                      galaxyOnClick('topNav.productMenu.cloudSelect')
+                    }
                     className='!flex w-full items-center gap-4'>
                     <ClickHouseCloud className='flex-grow-1 h-auto w-5 flex-shrink-0 stroke-[4] text-primary-300 md-mid:w-auto md-mid:stroke-[1.75]' />
                     <span>
@@ -62,6 +66,9 @@ export default function Navigation({
                 <li className='col-span-2'>
                   <NavigationLink
                     href='/clickhouse'
+                    onClick={() =>
+                      galaxyOnClick('topNav.productMenu.openSourceSelect')
+                    }
                     className='!flex w-full items-center gap-3'>
                     <Image
                       src='/images/nav/icon-clickhouse.svg'
@@ -75,7 +82,10 @@ export default function Navigation({
                 </li>
                 <li className='col-span-2'>
                   <NavigationLink
-                    href='#'
+                    href='https://clickhouse.com/docs/en/operations/utilities/clickhouse-local'
+                    onClick={() =>
+                      galaxyOnClick('topNav.productMenu.localSelect')
+                    }
                     className='!flex w-full items-center gap-3'>
                     <Image
                       src='/images/nav/icon-clickhouse-local.svg'
@@ -89,7 +99,10 @@ export default function Navigation({
                 </li>
                 <li className='col-span-2'>
                   <NavigationLink
-                    href='#'
+                    href='https://github.com/chdb-io/chdb'
+                    onClick={() =>
+                      galaxyOnClick('topNav.productMenu.chdbSelect')
+                    }
                     className='!flex w-full items-center gap-3'>
                     <Image
                       src='/images/nav/icon-chdb.svg'
@@ -104,7 +117,10 @@ export default function Navigation({
                 <li className='md-mid:hidden'>
                   <NavigationLink
                     href='https://clickhouse.com/docs/en/integrations'
-                    className='!flex w-full items-center gap-3'>
+                    className='!flex w-full items-center gap-3'
+                    onClick={() =>
+                      galaxyOnClick('topNav.productMenu.integrationsSelect')
+                    }>
                     <Image
                       src='/images/nav/icon-integrations.svg'
                       alt='chDB'
@@ -118,6 +134,9 @@ export default function Navigation({
               </ul>
               <LinkWithArrow
                 href='https://clickhouse.com/docs/en/integrations'
+                onClick={() =>
+                  galaxyOnClick('topNav.productMenu.integrationsSelect')
+                }
                 className='hidden w-full rounded-b-lg bg-primary-300 px-4 py-2 text-center text-sm font-medium text-primary-900 md-mid:block'>
                 View our integrations
               </LinkWithArrow>
@@ -127,35 +146,48 @@ export default function Navigation({
             <NavigationItem
               {...topLevelEvents}
               label='Docs'
-              href='https://clickhouse.com/docs'
+              link={{
+                href: 'https://clickhouse.com/docs',
+                onClick() {
+                  galaxyOnClick('topNav.navItems.docsSelect')
+                }
+              }}
             />
           </li>
           <li>
             <NavigationItem {...topLevelEvents} label='Resources'>
               <ul className='relative px-4 md-mid:py-4'>
                 <li>
-                  <NavigationLink href='/blog' className='block w-full'>
+                  <NavigationLink
+                    href='/blog'
+                    onClick={() =>
+                      galaxyOnClick('topNav.resourcesMenu.blogSelect')
+                    }
+                    className='block w-full'>
                     Blog
                   </NavigationLink>
                 </li>
                 <li>
                   <NavigationLink
                     href='/blog?category=customer-stories'
+                    onClick={() =>
+                      galaxyOnClick(
+                        'topNav.resourcesMenu.blogCustomerStoriesSelect'
+                      )
+                    }
                     className='block w-full'>
                     User stories
                   </NavigationLink>
                 </li>
                 <li>
                   <NavigationLink
-                    onClick={(event) => {
-                      event.preventDefault()
+                    onClick={() => {
                       setActiveSubNav(
                         isSubNavActive('news-and-events')
                           ? null
                           : 'news-and-events'
                       )
                     }}
-                    href='/company/news-events'
                     className={`w-full items-center justify-between ${
                       isSubNavActive('news-and-events')
                         ? 'text-primary-300'
@@ -174,6 +206,9 @@ export default function Navigation({
                     <li>
                       <NavigationLink
                         href='/company/news-events?category=Event'
+                        onClick={() =>
+                          galaxyOnClick('topNav.resourcesMenu.blogEventsSelect')
+                        }
                         className='block w-full'>
                         Events
                       </NavigationLink>
@@ -181,6 +216,9 @@ export default function Navigation({
                     <li>
                       <NavigationLink
                         href='https://clickhouse.com/docs/category/changelog'
+                        onClick={() =>
+                          galaxyOnClick('topNav.resourcesMenu.releasesSelect')
+                        }
                         className='block w-full'>
                         Releases
                       </NavigationLink>
@@ -189,13 +227,11 @@ export default function Navigation({
                 </li>
                 <li>
                   <NavigationLink
-                    onClick={(event) => {
-                      event.preventDefault()
+                    onClick={() => {
                       setActiveSubNav(
                         isSubNavActive('learning') ? null : 'learning'
                       )
                     }}
-                    href='/learn'
                     className={`w-full items-center justify-between ${
                       isSubNavActive('learning') ? 'text-primary-300' : ''
                     }`}>
@@ -210,13 +246,21 @@ export default function Navigation({
                   </NavigationLink>
                   <NavigationSubNav isOpen={isSubNavActive('learning')}>
                     <li>
-                      <NavigationLink href='/learn' className='block w-full'>
+                      <NavigationLink
+                        href='/learn'
+                        onClick={() =>
+                          galaxyOnClick('topNav.learnMenu.academySelect')
+                        }
+                        className='block w-full'>
                         ClickHouse Academy
                       </NavigationLink>
                     </li>
                     <li>
                       <NavigationLink
                         href='/company/news-events?category=Free+Training#upcoming-events'
+                        onClick={() =>
+                          galaxyOnClick('topNav.learnMenu.freeTrainingSelect')
+                        }
                         className='block w-full'>
                         Free live training
                       </NavigationLink>
@@ -224,6 +268,9 @@ export default function Navigation({
                     <li>
                       <NavigationLink
                         href='https://clickhouse.com/docs/knowledgebase'
+                        onClick={() =>
+                          galaxyOnClick('topNav.learnMenu.knowledgebaseSelect')
+                        }
                         className='block w-full'>
                         Knowledge base
                       </NavigationLink>
@@ -231,6 +278,9 @@ export default function Navigation({
                     <li>
                       <NavigationLink
                         href='/videos?category=how-to'
+                        onClick={() =>
+                          galaxyOnClick('topNav.learnMenu.howtoVideosSelect')
+                        }
                         className='block w-full'>
                         How to videos
                       </NavigationLink>
@@ -238,6 +288,9 @@ export default function Navigation({
                     <li>
                       <NavigationLink
                         href='/learn/certification'
+                        onClick={() =>
+                          galaxyOnClick('topNav.learnMenu.certificationSelect')
+                        }
                         className='block w-full'>
                         ClickHouse Certification
                       </NavigationLink>
@@ -260,6 +313,11 @@ export default function Navigation({
                 <li className='col-span-2'>
                   <NavigationLink
                     href='/use-cases/real-time-analytics'
+                    onClick={() =>
+                      galaxyOnClick(
+                        'topNav.useCasesMenu.realTimeAnalyticsSelect'
+                      )
+                    }
                     className='block w-full'>
                     Real-time analytics
                   </NavigationLink>
@@ -267,6 +325,11 @@ export default function Navigation({
                 <li className='col-span-2'>
                   <NavigationLink
                     href='/use-cases/logging-and-metrics'
+                    onClick={() =>
+                      galaxyOnClick(
+                        'topNav.useCasesMenu.loggingAndMetricsSelect'
+                      )
+                    }
                     className='block w-full'>
                     Logs, events and traces
                   </NavigationLink>
@@ -274,6 +337,11 @@ export default function Navigation({
                 <li className='col-span-2'>
                   <NavigationLink
                     href='/use-cases/business-intelligence'
+                    onClick={() =>
+                      galaxyOnClick(
+                        'topNav.useCasesMenu.businessIntelligenceSelect'
+                      )
+                    }
                     className='block w-full'>
                     Business intelligence
                   </NavigationLink>
@@ -281,12 +349,20 @@ export default function Navigation({
                 <li className='col-span-2'>
                   <NavigationLink
                     href='/use-cases/machine-learning-and-data-science'
+                    onClick={() =>
+                      galaxyOnClick('topNav.useCasesMenu.machineLearningSelect')
+                    }
                     className='block w-full'>
                     Machine learning and GenAI
                   </NavigationLink>
                 </li>
                 <li className='col-span-2'>
-                  <NavigationLink href='/use-cases' className='block w-full'>
+                  <NavigationLink
+                    href='/use-cases'
+                    onClick={() =>
+                      galaxyOnClick('topNav.useCasesMenu.allUseCasesSelect')
+                    }
+                    className='block w-full'>
                     All use cases
                   </NavigationLink>
                 </li>
@@ -297,7 +373,10 @@ export default function Navigation({
                     jobTitle='CTO, Clearbit'
                     link={{
                       href: '/blog?category=customer-stories',
-                      text: 'View more user stories'
+                      text: 'View more user stories',
+                      onClick() {
+                        galaxyOnClick('topNav.useCasesMenu.clearbitQuoteSelect')
+                      }
                     }}>
                     There's that feeling of new tech where everything just feels
                     like it's going right. Can we get the data in there quick
@@ -312,13 +391,21 @@ export default function Navigation({
             <NavigationItem {...topLevelEvents} label='Pricing'>
               <ul className='px-4 md-mid:py-4'>
                 <li>
-                  <NavigationLink href='/pricing' className='block w-full'>
+                  <NavigationLink
+                    href='/pricing'
+                    onClick={() =>
+                      galaxyOnClick('topNav.pricingMenu.cloudPricingSelect')
+                    }
+                    className='block w-full'>
                     ClickHouse Cloud pricing
                   </NavigationLink>
                 </li>
                 <li>
                   <NavigationLink
                     href='/pricing?loc=sub-menu#pricing-calculator'
+                    onClick={() =>
+                      galaxyOnClick('topNav.pricingMenu.costEstimateSelect')
+                    }
                     className='block w-full'>
                     Cost estimator
                   </NavigationLink>
@@ -326,6 +413,9 @@ export default function Navigation({
                 <li>
                   <NavigationLink
                     href='/pricing/contact?loc=menu'
+                    onClick={() =>
+                      galaxyOnClick('topNav.pricingMenu.dedicatedServiceSelect')
+                    }
                     className='block w-full'>
                     Dedicated services
                   </NavigationLink>
@@ -337,7 +427,12 @@ export default function Navigation({
             <NavigationItem
               {...topLevelEvents}
               label='Contact us'
-              href='/company/contact?loc=nav'
+              link={{
+                href: '/company/contact?loc=nav',
+                onClick() {
+                  galaxyOnClick('topNav.navItems.contactUsSelect')
+                }
+              }}
             />
           </li>
         </ul>

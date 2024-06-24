@@ -1,16 +1,11 @@
-import { LinkProps } from 'next/link'
 import React, { useRef, useState } from 'react'
 import useClickOutside from '../../../hooks/useClickOutside'
 import NavigationChevron from './NavigationChevron'
-import NavigationLink from './NavigationLink'
+import NavigationLink, { NavigationLinkProps } from './NavigationLink'
 
-export interface NavigationItemProps
-  extends Omit<
-    React.HTMLProps<HTMLDivElement>,
-    'href' | 'onMouseEnter' | 'onMouseLeave' | 'onClick'
-  > {
+interface NavigationItemBaseProps
+  extends Omit<React.HTMLProps<HTMLDivElement>, 'href' | 'onClick'> {
   label: string
-  href?: LinkProps['href']
   children?: React.ReactNode
   open?: boolean
   onClick?: (
@@ -25,9 +20,31 @@ export interface NavigationItemProps
   ) => void
 }
 
+interface NavigationItemNoLinkProps extends NavigationItemBaseProps {
+  href?: never
+  link?: never
+  children: React.ReactNode
+}
+
+interface NavigationItemHrefProps extends NavigationItemBaseProps {
+  href: NavigationLinkProps['href']
+  link?: never
+}
+
+interface NavigationItemLinkProps extends NavigationItemBaseProps {
+  link: Omit<NavigationLinkProps, 'children' | 'ref'>
+  href?: never
+}
+
+export type NavigationItemProps =
+  | NavigationItemNoLinkProps
+  | NavigationItemHrefProps
+  | NavigationItemLinkProps
+
 export default function NavigationItem({
   label,
-  href = '',
+  href,
+  link,
   children,
   className = '',
   onClick = (item, children, isOpen) => {},
@@ -58,6 +75,9 @@ export default function NavigationItem({
     onClickOutside(itemRef, children, false)
   })
 
+  const { className: linkClassName, ...linkProps } =
+    link || ({ href } as NavigationItemLinkProps['link'])
+
   return (
     <div
       className={`relative ${className}`}
@@ -66,10 +86,10 @@ export default function NavigationItem({
       {...props}>
       <NavigationLink
         ref={linkRef}
-        href={href}
+        {...linkProps}
         className={`items-center ${
           !href && !hasChildren ? 'cursor-default' : ''
-        } ${isOpen ? 'text-primary-300' : ''}`}>
+        } ${isOpen ? 'text-primary-300' : ''} ${linkClassName}`}>
         <span className='flex-1'>{label}</span>
         {hasChildren && (
           <NavigationChevron
