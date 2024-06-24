@@ -103,7 +103,7 @@ export default function Navigation({
                 </li>
                 <li className='md-mid:hidden'>
                   <NavigationLink
-                    href='#'
+                    href='https://clickhouse.com/docs/en/integrations'
                     className='!flex w-full items-center gap-3'>
                     <Image
                       src='/images/nav/icon-integrations.svg'
@@ -117,7 +117,7 @@ export default function Navigation({
                 </li>
               </ul>
               <LinkWithArrow
-                href='#'
+                href='https://clickhouse.com/docs/en/integrations'
                 className='hidden w-full rounded-b-lg bg-primary-300 px-4 py-2 text-center text-sm font-medium text-primary-900 md-mid:block'>
                 View our integrations
               </LinkWithArrow>
@@ -181,7 +181,9 @@ export default function Navigation({
                       </NavigationLink>
                     </li>
                     <li>
-                      <NavigationLink href='#' className='block w-full'>
+                      <NavigationLink
+                        href='https://clickhouse.com/docs/category/changelog'
+                        className='block w-full'>
                         Releases
                       </NavigationLink>
                     </li>
@@ -212,29 +214,35 @@ export default function Navigation({
                   </NavigationLink>
                   <NavigationSubNav isOpen={isSubNavActive('learning')}>
                     <li>
-                      <NavigationLink
-                        href='/company/news-events?category=Event'
-                        className='block w-full'>
+                      <NavigationLink href='/learn' className='block w-full'>
                         ClickHouse Academy
                       </NavigationLink>
                     </li>
                     <li>
-                      <NavigationLink href='#' className='block w-full'>
+                      <NavigationLink
+                        href='/company/news-events?category=Free+Training#upcoming-events'
+                        className='block w-full'>
                         Free live training
                       </NavigationLink>
                     </li>
                     <li>
-                      <NavigationLink href='#' className='block w-full'>
+                      <NavigationLink
+                        href='https://clickhouse.com/docs/knowledgebase'
+                        className='block w-full'>
                         Knowledge base
                       </NavigationLink>
                     </li>
                     <li>
-                      <NavigationLink href='#' className='block w-full'>
+                      <NavigationLink
+                        href='/videos?category=how-to'
+                        className='block w-full'>
                         How to videos
                       </NavigationLink>
                     </li>
                     <li>
-                      <NavigationLink href='#' className='block w-full'>
+                      <NavigationLink
+                        href='/learn/certification'
+                        className='block w-full'>
                         ClickHouse Certification
                       </NavigationLink>
                     </li>
