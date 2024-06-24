@@ -204,7 +204,7 @@ export default function CloudPage({
         </div>
 
         <div className='bg-shadow-element yellow-shadow flex w-full gap-y-4 pb-12 text-neutral-0 md:gap-y-28'>
-          <div className='container mx-auto flex max-w-7xl flex-col gap-y-48 bg-opacity-10 px-8 pt-24 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
+          <div className='container mx-auto flex max-w-7xl flex-col gap-y-48 bg-opacity-10 px-8 pb-8 pt-24 text-center md:bg-no-repeat 2xl:px-0'>
             {featureBlocks.map((item, index: number) => (
               <div key={index}>
                 <div
@@ -251,7 +251,7 @@ export default function CloudPage({
                 width={72}
                 height={73}
               />
-              <SuiTitle type='h2' className='mt-8 mb-6'>
+              <SuiTitle type='h2' className='mb-6 mt-8'>
                 Powerful integrations
               </SuiTitle>
               <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200'>
@@ -292,7 +292,7 @@ export default function CloudPage({
                           } relative rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
                           key={integration.name}>
                           {integration.badge && (
-                            <div className='absolute -top-2 -right-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
+                            <div className='absolute -right-2 -top-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
                               {integration.badge}
                             </div>
                           )}
@@ -305,7 +305,7 @@ export default function CloudPage({
                           className={`relative z-20 rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
                           key={integration.name}>
                           {integration.badge && (
-                            <div className='absolute -top-2 -right-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
+                            <div className='absolute -right-2 -top-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
                               {integration.badge}
                             </div>
                           )}
@@ -318,7 +318,7 @@ export default function CloudPage({
                   )
                 })}
                 <motion.div
-                  className='absolute top-12 left-8 z-[5] hidden opacity-90 lg:block'
+                  className='absolute left-8 top-12 z-[5] hidden opacity-90 lg:block'
                   initial={{ opacity: 0 }}
                   transition={{
                     ease: 'easeOut',
@@ -357,15 +357,15 @@ export default function CloudPage({
                   alt='ClickHouse'
                   className='relative z-20 mx-auto mt-16 shadow-noOffset shadow-primary-300'
                 />
-                <SuiTitle type='h2' className='mt-8 mb-6 text-center'>
+                <SuiTitle type='h2' className='mb-6 mt-8 text-center'>
                   ClickHouse Cloud
                 </SuiTitle>
                 <div className='mx-auto max-w-3xl text-center leading-normal text-neutral-200'>
                   Experience the power of open-source ClickHouse in a serverless
                   setup. Deploy in seconds, scale seamlessly, and ensure
                   top-tier security with our SOC 2 Type II compliant platform.
-                  Available on AWS, GCP and Azure in Beta. Dive into insights
-                  without the infrastructure hassle!
+                  Available on AWS, GCP and Azure. Dive into insights without
+                  the infrastructure hassle!
                 </div>
                 <CUIButton
                   type='primary'
@@ -379,7 +379,7 @@ export default function CloudPage({
         </div>
 
         <div className='section-container mx-auto mb-24 max-w-[1115px]'>
-          <div className='flex flex-wrap items-center gap-16 rounded-lg bg-primary-300 p-8 text-neutral-900 lg:flex-nowrap lg:py-16 lg:px-16'>
+          <div className='flex flex-wrap items-center gap-16 rounded-lg bg-primary-300 p-8 text-neutral-900 lg:flex-nowrap lg:px-16 lg:py-16'>
             <div className='w-full lg:w-1/3'>
               <Image
                 width={394}
@@ -408,7 +408,7 @@ export default function CloudPage({
               </div>
               <Link
                 href='/cloud/bring-your-own-cloud?loc=cloud-page-component'
-                className='inline-block rounded bg-[#161600] py-3 px-8 text-center font-semibold text-white'>
+                className='inline-block rounded bg-[#161600] px-8 py-3 text-center font-semibold text-white'>
                 Join waitlist
               </Link>
             </div>
@@ -424,7 +424,7 @@ export default function CloudPage({
                 width={72}
                 height={73}
               />
-              <SuiTitle type='h2' className='mt-8 mb-6'>
+              <SuiTitle type='h2' className='mb-6 mt-8'>
                 All in one support
               </SuiTitle>
               <div className='mx-auto max-w-2xl px-4 text-center leading-normal text-neutral-200 md:px-0'>
@@ -433,7 +433,7 @@ export default function CloudPage({
                 service.
               </div>
 
-              <ul className='flex max-w-lg flex-col justify-start gap-2 py-8 px-4 md:px-0'>
+              <ul className='flex max-w-lg flex-col justify-start gap-2 px-4 py-8 md:px-0'>
                 <li>
                   <div className='flex items-center gap-4'>
                     <Image
@@ -512,15 +512,15 @@ export default function CloudPage({
                 width={72}
                 height={72}
               />
-              <SuiTitle type='h2' className='mt-8 mb-6 text-center'>
+              <SuiTitle type='h2' className='mb-6 mt-8 text-center'>
                 ClickHouse Cloud, wherever you&nbsp;are
               </SuiTitle>
               <div className='mx-auto max-w-2xl px-4 text-center leading-normal text-neutral-200 md:px-0'>
                 With the flexibility to choose where and how you deploy.
-                Available on AWS, GCP and Azure in Beta, and through
-                Marketplaces. Manage your services through our ClickHouse Cloud
-                self-serve UI, or by leveraging our APIs and Terraform provider
-                to automate your operations.
+                Available on AWS, GCP and Azure, and through Marketplaces.
+                Manage your services through our ClickHouse Cloud self-serve UI,
+                or by leveraging our APIs and Terraform provider to automate
+                your operations.
               </div>
               <div className='mt-16 flex flex-col space-y-10 md:flex-row md:space-x-10 md:space-y-0'>
                 <CUICard className='w-full max-w-[22.5rem] bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
@@ -531,7 +531,7 @@ export default function CloudPage({
                       height={29}
                       alt='AWS Marketplace'
                     />
-                    <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>
+                    <div className='flex flex-col items-center justify-center gap-2 pb-8 pt-4'>
                       <div className='text-center text-sm text-neutral-200'>
                         Flexible deployment and subscription options available
                         through the AWS Marketplace.
@@ -562,7 +562,7 @@ export default function CloudPage({
                       height={29}
                       alt='Google Cloud'
                     />
-                    <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>
+                    <div className='flex flex-col items-center justify-center gap-2 pb-8 pt-4'>
                       <div className='text-center text-sm text-neutral-200'>
                         Fast procurement, flexible purchasing, and fulfillment
                         available through the GCP Marketplace.
