@@ -59,7 +59,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
   }
 
   const [headerBanner, setHeaderBanner] = useState(
-    '<a href="/blog/clickhouse-cloud-is-now-generally-available-on-microsoft-azure?loc=eyebrow">ClickHouse Cloud now available on Microsfot Azure</a>'
+    '<a href="/blog/clickhouse-cloud-is-now-generally-available-on-microsoft-azure?loc=eyebrow">ClickHouse Cloud now available on Microsoft Azure</a>'
   )
 
   useEffect(() => {
