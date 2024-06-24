@@ -104,8 +104,8 @@ export default function HomepageHeroAlt({
             <div className='mt-8 flex items-center rounded-[4px] border border-neutral-950 border-opacity-5 bg-neutral-950/5'>
               <Link
                 href='/company/contact?loc=homepage-hero-rs'
-                className='group flex items-center'>
-                <div className='flex h-[104px] w-[152px] items-center bg-neutral-950/5'>
+                className='group flex flex-col items-center md:flex-row'>
+                <div className='flex h-[76px] items-center md:h-[104px] md:w-[152px] md:bg-neutral-950/5'>
                   <Image
                     src='/images/rockset-logo.svg'
                     alt='Rockset'
@@ -115,9 +115,10 @@ export default function HomepageHeroAlt({
                   />
                 </div>
                 <div className='ml-4 py-4'>
-                  <p className='text-left font-semibold'>
+                  <p className='pr-2 text-left font-semibold'>
                     [Rockset] is being discontinued. Migrate to ClickHouse with
-                    limited-time free migration services. Contact us today{' '}
+                    limited-time free migration services.
+                    Contact&nbsp;us&nbsp;today{' '}
                     <span className='inline-block pl-0.5 transition group-hover:translate-x-1/2'>
                       {'->'}
                     </span>
