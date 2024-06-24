@@ -83,9 +83,9 @@ export default function Page({
               <div className='mb-16 mr-0 flex-auto lg:mb-0 lg:mr-16 lg:max-w-2xl'>
                 <div className='section_metadata '>
                   <h1 className='mb-8 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
-                    Migrating from{' '}
-                    <span className='text-[#E5C3FF]'>[Rockset]</span> to
-                    ClickHouse
+                    Migrating from <span className='text-[#63C0DD]'>[</span>
+                    <span className='text-[#E5C3FF]'>Rockset</span>
+                    <span className='text-[#63C0DD]'>]</span> to ClickHouse
                   </h1>
                   <h2 className='mb-6 font-basier text-xl font-medium leading-tight text-neutral-200'>
                     [Rockset] is being deprecated. Are you facing the daunting
@@ -95,7 +95,7 @@ export default function Page({
                   <div className='mx-auto mb-6 max-w-2xl text-neutral-200'>
                     <div className='prose prose-neutral'>
                       <p>
-                        ClickHouse and Rocksest are both used to power real-time
+                        ClickHouse and Rockset are both used to power real-time
                         analytics workloads and customer-facing applications.
                         But ClickHouse outshines Rockset in scalability,
                         ingestion throughput, query performance,
@@ -105,7 +105,8 @@ export default function Page({
                       <p>
                         Contact us today to learn more about how ClickHouse
                         compares to Rockset, and how our dedicated experts can
-                        help you transition to ClickHouse.
+                        help you seamlessly transition to ClickHouse with free
+                        migration services.
                       </p>
                     </div>
                   </div>
