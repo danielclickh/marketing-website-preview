@@ -83,6 +83,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
         }
       }
     }
+
     return {
       props: {
         ...page,
