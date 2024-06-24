@@ -585,6 +585,37 @@ export default function CloudPage({
                     </CUIButton>
                   </CUICard.Footer>
                 </CUICard>
+                <CUICard className='w-full max-w-[22.5rem] bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
+                  <CUICard.Body className='flex flex-col items-center justify-center gap-2'>
+                    <Image
+                      src='/images/cloud/ms-marketplace.svg'
+                      width={162}
+                      height={29}
+                      alt='Microsoft Azure Marketplace'
+                    />
+                    <div className='flex flex-col items-center justify-center gap-2 pb-8 pt-4'>
+                      <div className='text-center text-sm text-neutral-200'>
+                        Consolidate billing and streamline your cloud costs with
+                        Azure Marketplace subscriptions.
+                      </div>
+                    </div>
+                  </CUICard.Body>
+                  <CUICard.Footer className='flex w-full items-center '>
+                    <CUIButton
+                      type='secondary'
+                      href='https://azuremarketplace.microsoft.com/en-us/marketplace/apps/clickhouse.clickhouse_cloud?tab=Overview'
+                      linkClass='w-full inline-grid group'
+                      iconRight={
+                        <ChevronRightIcon
+                          height='18'
+                          className='arrow pt-0.5 transition group-hover:translate-x-1/2'
+                        />
+                      }
+                      target='_blank'>
+                      View in Marketplace
+                    </CUIButton>
+                  </CUICard.Footer>
+                </CUICard>
               </div>
             </div>
           </div>
