@@ -37,6 +37,7 @@ export interface EventForm {
   emailLabel: string
   submitButtonLabel: string
   type: 'recordedGatedContent' | 'eventRegistration'
+  SuccessMessage?: string
 }
 export type EventType = {
   id: number
