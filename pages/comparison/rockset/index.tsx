@@ -8,15 +8,16 @@ import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'
 import MarketoForm from '../../../components/MarketoForm'
-import AccordionComponent from '../../../components/RealTimeDiagram/Accordion'
-import Feature from '../../../components/RealTimeDiagram/feature-check'
-import features from '../../use-cases/real-time-analytics/features.json'
-import callouts from '../../use-cases/real-time-analytics/callouts.json'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { CommonProps } from '../../../types/homepage'
+import quotes from '../../use-cases/real-time-analytics/quotes.json'
+import faqs from '../../use-cases/real-time-analytics/faqs.json'
+import Tilt from 'react-parallax-tilt'
 import { SuiButton, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ContactProps } from '../../../types/contact'
 import { Button } from '@clickhouse/click-ui'
+import LogoCarouselItem from '../../../components/LogoCarousel/CarouselItem'
 
 interface DriftAPI {
   startInteraction: (options: { interactionId: number }) => void
@@ -34,7 +35,16 @@ declare var window: DriftWindow
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
     const data = await findOne('contact-us', {
-      populate: ['hero', 'hero.contactForm', 'seo', 'seo.image']
+      populate: [
+        'hero',
+        'hero.contactForm',
+        'seo',
+        'seo.image',
+        'customerStories',
+        'customerStories.*',
+        'customerStories.logos.*',
+        'customerStories.logos.darkLogoPng'
+      ]
     })
 
     const commonProps = await getCommonProps()
@@ -55,6 +65,7 @@ export const getStaticProps: GetStaticProps<ContactProps> =
   }
 
 interface PageProps {
+  customerStories: any
   contactForm: {
     disclaimer: string
   }
@@ -64,6 +75,7 @@ interface PageProps {
 }
 
 export default function Page({
+  customerStories,
   contactForm,
   footerData,
   headerData,
@@ -176,55 +188,44 @@ export default function Page({
           </div>
         </div>
         <HRSeparator className='my-24' />
-        <div className='bg-neutral-725 pb-24'>
-          <div className='relative mx-auto pt-12  md:px-0 md:pt-24'>
-            <div className='mx-auto max-w-7xl'>
-              <div className='flex w-full flex-col items-center pt-6 pb-12'>
+        <div className=' bg-neutral-725 '>
+          <div className='bg-shadow-element-left red-shadow section-container max-w-7xl'>
+            <div className='flex flex-col justify-between py-16 xl:flex-row xl:px-12'>
+              <div className='mb-10 xl:mb-0 xl:min-w-[540px]'>
                 <Image
-                  src='/images/use-cases/logging/icon-how.svg'
-                  alt='System overview'
+                  src='/images/icon-shield.svg'
+                  alt='icon'
+                  className='mx-auto mb-6 xl:mx-0'
                   width={72}
-                  height={73}
+                  height={72}
                 />
-                <SuiTitle type='h2' className='mt-8 text-center'>
-                  Real-time Applications and Dashboards
-                </SuiTitle>
-                <p className='mx-auto mb-12 max-w-3xl px-9 pt-6 text-center text-sm'>
-                  ClickHouse is used across industries to power systems and
-                  applications where real-time analysis, evaluation, and
-                  querying are critical.
+                <h2 className='text-left font-basier text-2xl font-semibold lg:text-4xl xl:max-w-[515px]'>
+                  The real-time database that truly shines at scale. Count on
+                  blazing performance when low latency{' '}
+                  <span className='tilted tilted-yellow'>
+                    <span className='tilted-content leading-8'>really</span>
+                  </span>{' '}
+                  matters.
+                </h2>
+                <p className='mt-6 xl:max-w-[445px]'>
+                  Discover why companies are choosing ClickHouse for their
+                  real-time analytics applications.
                 </p>
-                <div className='mb-12 flex w-full flex-col gap-6 px-8 lg:flex-row lg:px-6 xl:px-0'>
-                  {[10, 20, 30].map((section) => (
-                    <div
-                      key={section}
-                      className='items-center rounded-md border border-neutral-0/30 bg-[rgba(62,62,62,1)] py-4 px-6 text-left lg:w-1/3'>
-                      {features
-                        .filter((feature) => feature.section === section)
-                        .map((feature) => (
-                          <Feature key={feature.id} feature={feature} />
-                        ))}
-                    </div>
-                  ))}
-                </div>
               </div>
-              <AccordionComponent />
-              <div className='mx-auto max-w-5xl px-4 xl:px-0'>
-                <div className='grid justify-between gap-20 pt-20 lg:grid-cols-2'>
-                  {callouts.map((feature) => (
-                    <div key={feature.id} className='px-3'>
-                      <Image
-                        src={feature.icon}
-                        alt={feature.title}
-                        width={32}
-                        height={32}
-                        className='mb-4'
-                      />
-                      <h3 className='mb-4 text-lg font-bold'>
-                        {feature.title}
-                      </h3>
-                      <div className='rich_content text-base text-neutral-200'>
-                        <Markdown children={feature.content} />
+              <div>
+                <div className='flex flex-col gap-y-8 xl:max-w-[610px]'>
+                  {faqs.map((faq) => (
+                    <div
+                      className='flex items-center rounded-md border border-neutral-700/80 bg-neutral-900/80 p-3 pr-6 shadow-xl'
+                      key={faq.id}>
+                      <span className='pl-2 text-center text-lg text-[#B3B6BD]/60'>
+                        0{faq.id}
+                      </span>
+                      <span className='border-r border-neutral-700/80 py-2 pl-4 text-lg'>
+                        &nbsp;
+                      </span>
+                      <div className='pl-6'>
+                        <Markdown children={faq.content} />
                       </div>
                     </div>
                   ))}
@@ -232,99 +233,102 @@ export default function Page({
               </div>
             </div>
           </div>
-        </div>
 
-        <div className='bg-shadow-element-right yellow-shadow '>
-          <div className='section-container mb-24 flex w-full pt-24 text-neutral-0 md:px-8 2xl:px-0 '>
-            <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-right bg-no-repeat py-16 px-4 xl:px-24'>
-              <div className='flex flex-col text-center'>
-                <SuiTitle type='h2' color='white'>
-                  Supporting{' '}
-                  <span className='tilted tilted-yellow'>
-                    <span className='tilted-content'>references</span>
-                  </span>{' '}
-                </SuiTitle>
-                <div className='mx-auto mb-8 mt-6 max-w-2xl text-center text-neutral-300'>
-                  For detailed guides about how to get started with ClickHouse
-                  for real-time analytics workloads, follow along in our blog:
-                </div>
-                <div className='bg-neutral-725 p-8'>
-                  <ol className='list-decimal space-y-2 text-left	text-primary-300'>
-                    <li>
-                      <Link
-                        href='/blog/asynchronous-data-inserts-in-clickhouse'
-                        className='text-primary-300'>
-                        Asynchronous Data Inserts in ClickHouse
-                      </Link>
-                    </li>
-                    <li>
-                      <a
-                        href='/blog/real-time-event-streaming-with-confluent-cloud-clickhouse-and-clickpipes'
-                        className='text-primary-300'>
-                        Real-time event streaming with ClickHouse, Confluent
-                        Cloud and ClickPipes
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href='/blog/building-real-time-applications-with-clickhouse-and-hex-notebook-keeper-engine'
-                        className='text-primary-300'>
-                        Adding Real-Time Analytics to a Supabase Application
-                        With ClickHouse
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href='https://python.langchain.com/docs/integrations/vectorstores/clickhouse'
-                        className='text-primary-300'>
-                        Building Real-time Analytics Apps with ClickHouse and
-                        Hex
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href='/blog/using-materialized-views-in-clickhouse'
-                        className='text-primary-300'>
-                        Using Materialized Views in ClickHouse
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href='/blog/working-with-time-series-data-and-functions-ClickHouse'
-                        className='text-primary-300'>
-                        Working with Time Series Data in ClickHouse
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href='/blog/clickhouse-postgresql-change-data-capture-cdc-part-1'
-                        className='text-primary-300'>
-                        Change Data Capture (CDC) with PostgreSQL and ClickHouse
-                        - Part 1
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href='/blog/clickhouse-postgresql-change-data-capture-cdc-part-2'
-                        className='text-primary-300'>
-                        Change Data Capture (CDC) with PostgreSQL and ClickHouse
-                        - Part 2
-                      </a>
-                    </li>{' '}
-                    <li>
-                      <a
-                        href='/blog/how-cloudflare-processes-hundreds-of-millions-of-rows-per-second-with-clickhouse'
-                        className='text-primary-300'>
-                        How Cloudflare Processes Hundreds of Millions of Rows
-                        per Second with ClickHouse
-                      </a>
-                    </li>
-                  </ol>
+          <div className='clip-inverted-triangle before:-top-40'>
+            <div className='mx-auto max-w-7xl'>
+              <div className='relative z-20 flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
+                <div className='p-10'>
+                  <div className='flex flex-col gap-x-6 gap-y-6 lg:flex-row'>
+                    {quotes.map((quote) => (
+                      <>
+                        <Tilt
+                          tiltEnable={false}
+                          glareEnable={true}
+                          glareMaxOpacity={0.4}
+                          glareColor='rgba(251, 255, 70, 0.08)'
+                          glarePosition='all'
+                          className='flex-1'
+                          key={quote.id}>
+                          {quote.href ? (
+                            <Link href={quote.href} target={quote.target}>
+                              <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
+                                <Image
+                                  src='/images/Quote.svg'
+                                  width={37}
+                                  height={28}
+                                  alt='Quote'
+                                  className='mb-4 block'
+                                />
+                                <Markdown
+                                  className='min-h-auto text-left xl:min-h-[280px]'
+                                  children={quote.content}
+                                />
+                                <Image
+                                  src={quote.logo}
+                                  width={quote.imgWidth}
+                                  height={quote.imgHeight}
+                                  alt={quote.title}
+                                  className='mt-12 xl:mt-auto'
+                                />
+                              </div>
+                            </Link>
+                          ) : (
+                            <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
+                              <Image
+                                src='/images/Quote.svg'
+                                width={37}
+                                height={28}
+                                alt='Quote'
+                                className='mb-4 block'
+                              />
+                              <Markdown
+                                className='min-h-auto text-left xl:min-h-[250px]'
+                                children={quote.content}
+                              />
+                              <Image
+                                src={quote.logo}
+                                width={quote.imgWidth}
+                                height={quote.imgHeight}
+                                alt={quote.title}
+                                className='mt-12 xl:mt-auto'
+                              />
+                            </div>
+                          )}
+                        </Tilt>
+                      </>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
+        <div className='relative z-10 mx-auto bg-primary-300'>
+          <div className='relative z-10 mx-auto max-w-7xl'>
+            <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
+              <div className='flip-selection mx-auto flex flex-col text-center'>
+                <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
+                  Trusted by developers that work with data at{' '}
+                  <span className='tilted tilted-black'>
+                    <span className='tilted-content leading-8'>scale</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-20 md:gap-x-14'>
+              <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
+              <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
+              {/* <LogoCarouselItem
+                logos={customerStories.logos}
+                speedClass1='animate-marqueeLeft5'
+                speedClass2='animate-marqueeLeft6'
+              /> */}
+            </div>
+          </div>
+        </div>
+
+        <div className='bg-shadow-element-right yellow-shadow '>
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
             <GetStartedFree
               href='https://clickhouse.cloud/signUp?loc=real-time-use-case-getstarted-footer'
