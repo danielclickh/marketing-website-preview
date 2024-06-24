@@ -47,7 +47,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
       />
 
       {/* Add empty space for fixed header */}
-      <div style={{ height: headerHeight }} />
+      <div style={{ height: headerHeight + 1 }} />
 
       <header
         ref={headerRef}
