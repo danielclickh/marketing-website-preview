@@ -1,5 +1,4 @@
 import React from 'react'
-import { NavigationLink } from './index'
 
 export interface NavigationSubNavProps extends React.HTMLProps<HTMLDivElement> {
   isOpen: boolean

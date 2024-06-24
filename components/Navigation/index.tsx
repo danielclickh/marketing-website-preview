@@ -145,9 +145,7 @@ export default function Navigation({
                     User stories
                   </NavigationLink>
                 </li>
-                <li
-                  onMouseEnter={() => setActiveSubNav('news-and-events')}
-                  onMouseLeave={() => setActiveSubNav(null)}>
+                <li>
                   <NavigationLink
                     onClick={(event) => {
                       event.preventDefault()
@@ -189,9 +187,7 @@ export default function Navigation({
                     </li>
                   </NavigationSubNav>
                 </li>
-                <li
-                  onMouseEnter={() => setActiveSubNav('learning')}
-                  onMouseLeave={() => setActiveSubNav(null)}>
+                <li>
                   <NavigationLink
                     onClick={(event) => {
                       event.preventDefault()

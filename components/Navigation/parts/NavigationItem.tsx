@@ -37,12 +37,17 @@ export default function NavigationItem({
 }: NavigationItemProps) {
   const hasChildren = !!children
   const itemRef = useRef<null | HTMLDivElement>(null)
+  const linkRef = useRef<null | HTMLAnchorElement>(null)
   const [isOpen, setIsOpen] = useState<boolean>(open)
 
-  const onClickInside = () => {
+  const onClickInside = (event: React.MouseEvent) => {
     let openVal = isOpen
-    if (children && !openVal) {
-      openVal = true
+    if (children) {
+      if (!openVal) {
+        openVal = true
+      } else if (linkRef.current?.contains(event.target as Node)) {
+        openVal = false
+      }
       setIsOpen(openVal)
     }
     onClick(itemRef, children, openVal)
@@ -60,6 +65,7 @@ export default function NavigationItem({
       onClick={onClickInside}
       {...props}>
       <NavigationLink
+        ref={linkRef}
         href={href}
         className={`items-center ${
           !href && !hasChildren ? 'cursor-default' : ''
