@@ -41,8 +41,10 @@ export default function NavigationItem({
 
   const onClickInside = () => {
     let openVal = isOpen
-    if (children) openVal = !openVal
-    setIsOpen(openVal)
+    if (children && !openVal) {
+      openVal = true
+      setIsOpen(openVal)
+    }
     onClick(itemRef, children, openVal)
   }
 
@@ -59,22 +61,25 @@ export default function NavigationItem({
       {...props}>
       <NavigationLink
         href={href}
-        className={`${!href && !hasChildren ? 'cursor-default' : ''} ${
-          isOpen ? 'text-primary-300' : ''
-        }`}>
-        <div className='flex items-center'>
-          <span className='flex-1'>{label}</span>
-          {hasChildren && <NavigationChevron isOpen={isOpen} />}
-        </div>
+        className={`items-center ${
+          !href && !hasChildren ? 'cursor-default' : ''
+        } ${isOpen ? 'text-primary-300' : ''}`}>
+        <span className='flex-1'>{label}</span>
+        {hasChildren && (
+          <NavigationChevron
+            className={`md-mid:hidden ${isOpen ? '' : 'text-neutral-500'}`}
+            direction={isOpen ? 'down' : 'right'}
+          />
+        )}
       </NavigationLink>
       {hasChildren && (
         <div
-          className={`transition-all md-mid:absolute md-mid:-left-12 md-mid:top-full md-mid:-z-50 md-mid:block md-mid:w-max md-mid:min-w-60 md-mid:origin-[top_center] md-mid:whitespace-nowrap md-mid:pt-6 md-mid:shadow ${
+          className={`transition-all md-mid:absolute md-mid:-left-12 md-mid:top-full md-mid:-z-50 md-mid:block md-mid:w-max md-mid:min-w-60 md-mid:origin-[top_center] md-mid:whitespace-nowrap md-mid:pt-6  ${
             isOpen
               ? 'pointer-events-auto block md-mid:z-10 md-mid:scale-100 md-mid:opacity-100'
               : 'pointer-events-none hidden md-mid:scale-90 md-mid:opacity-0'
           }`}>
-          <div className='md-mid:rounded-lg md-mid:bg-neutral-750'>
+          <div className='md-mid:rounded-lg md-mid:bg-neutral-750 md-mid:shadow'>
             {children}
           </div>
         </div>

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import ClickHouseCloud from '../icons/ClickHouseCloud'
 import LinkWithArrow from '../LinkWithArrow'
 import {
@@ -8,6 +8,8 @@ import {
   NavigationLink,
   NavigationQuote
 } from './parts'
+import NavigationChevron from './parts/NavigationChevron'
+import NavigationSubNav from './parts/NavigationSubNav'
 
 export interface NavigationProps extends React.HTMLProps<HTMLElement> {
   onItemClick?: NavigationItemProps['onClick']
@@ -30,6 +32,11 @@ export default function Navigation({
       if (onItemClickOutside) onItemClickOutside(...args)
     }
   }
+
+  const [activeSubNav, setActiveSubNav] = useState<null | string>(null)
+
+  const isSubNavActive = (name: string) => activeSubNav === name
+
   return (
     <nav {...props}>
       <div className='relative'>
@@ -125,7 +132,7 @@ export default function Navigation({
           </li>
           <li>
             <NavigationItem {...topLevelEvents} label='Resources'>
-              <ul className='px-4 md-mid:py-4'>
+              <ul className='relative px-4 md-mid:py-4'>
                 <li>
                   <NavigationLink href='/blog' className='block w-full'>
                     Blog
@@ -138,17 +145,100 @@ export default function Navigation({
                     User stories
                   </NavigationLink>
                 </li>
-                <li>
+                <li
+                  onMouseEnter={() => setActiveSubNav('news-and-events')}
+                  onMouseLeave={() => setActiveSubNav(null)}>
                   <NavigationLink
+                    onClick={(event) => {
+                      event.preventDefault()
+                      setActiveSubNav(
+                        isSubNavActive('news-and-events')
+                          ? null
+                          : 'news-and-events'
+                      )
+                    }}
                     href='/company/news-events'
-                    className='block w-full'>
-                    News and events
+                    className={`w-full items-center justify-between ${
+                      isSubNavActive('news-and-events')
+                        ? 'text-primary-300'
+                        : ''
+                    }`}>
+                    <span>News and events</span>
+                    <NavigationChevron
+                      className={
+                        isSubNavActive('news-and-events')
+                          ? 'rotate-90 text-primary-300 md-mid:rotate-0'
+                          : 'text-neutral-500'
+                      }
+                    />
                   </NavigationLink>
+                  <NavigationSubNav isOpen={isSubNavActive('news-and-events')}>
+                    <li>
+                      <NavigationLink
+                        href='/company/news-events?category=Event'
+                        className='block w-full'>
+                        Events
+                      </NavigationLink>
+                    </li>
+                    <li>
+                      <NavigationLink href='#' className='block w-full'>
+                        Releases
+                      </NavigationLink>
+                    </li>
+                  </NavigationSubNav>
                 </li>
-                <li>
-                  <NavigationLink href='/learn' className='block w-full'>
-                    Learning
+                <li
+                  onMouseEnter={() => setActiveSubNav('learning')}
+                  onMouseLeave={() => setActiveSubNav(null)}>
+                  <NavigationLink
+                    onClick={(event) => {
+                      event.preventDefault()
+                      setActiveSubNav(
+                        isSubNavActive('learning') ? null : 'learning'
+                      )
+                    }}
+                    href='/learn'
+                    className={`w-full items-center justify-between ${
+                      isSubNavActive('learning') ? 'text-primary-300' : ''
+                    }`}>
+                    <span>Learning</span>
+                    <NavigationChevron
+                      className={
+                        isSubNavActive('learning')
+                          ? 'rotate-90 text-primary-300 md-mid:rotate-0'
+                          : 'text-neutral-500'
+                      }
+                    />
                   </NavigationLink>
+                  <NavigationSubNav isOpen={isSubNavActive('learning')}>
+                    <li>
+                      <NavigationLink
+                        href='/company/news-events?category=Event'
+                        className='block w-full'>
+                        ClickHouse Academy
+                      </NavigationLink>
+                    </li>
+                    <li>
+                      <NavigationLink href='#' className='block w-full'>
+                        Free live training
+                      </NavigationLink>
+                    </li>
+                    <li>
+                      <NavigationLink href='#' className='block w-full'>
+                        Knowledge base
+                      </NavigationLink>
+                    </li>
+                    <li>
+                      <NavigationLink href='#' className='block w-full'>
+                        How to videos
+                      </NavigationLink>
+                    </li>
+                    <li>
+                      <NavigationLink href='#' className='block w-full'>
+                        ClickHouse Certification
+                      </NavigationLink>
+                    </li>
+                  </NavigationSubNav>
                 </li>
                 <li>
                   <NavigationLink
