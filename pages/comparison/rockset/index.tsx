@@ -1,14 +1,13 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import { useRef, useState } from 'react'
-import GrowingCommunity from '../../components/GrowingCommunity'
-import HRSeparator from '../../components/HRSeparator'
-import Layout from '../../components/Layout'
-import Markdown from '../../components/Markdown'
-import MarketoForm from '../../components/MarketoForm'
-import { findOne } from '../../lib/api/strapi'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { ContactProps } from '../../types/contact'
+import GrowingCommunity from '../../../components/GrowingCommunity'
+import HRSeparator from '../../../components/HRSeparator'
+import Layout from '../../../components/Layout'
+import MarketoForm from '../../../components/MarketoForm'
+import { findOne } from '../../../lib/api/strapi'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { ContactProps } from '../../../types/contact'
 
 interface DriftAPI {
   startInteraction: (options: { interactionId: number }) => void
@@ -38,7 +37,7 @@ export const getStaticProps: GetStaticProps<ContactProps> =
           title: 'Migrate from Rockset to ClickHouse',
           description:
             "At ClickHouse, we're not going anywhere. Looking for help with your migration? Get in touch!",
-          path: '/migrate-from-rockset'
+          path: '/comparison/rockset'
           // image: [{ url: '/images/air-gapped-og.png' }]
         },
         ...commonProps
