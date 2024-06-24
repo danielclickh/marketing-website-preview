@@ -125,7 +125,8 @@ export default function Page({
                         .
                       </p>
                       <p>
-                        Subscribe to stay informed about ClickHouse Air Gapped
+                        Subscribe to join our Federal community and stay
+                        informed about ClickHouse&nbsp;Air&nbsp;Gapped!
                       </p>
                     </div>
                   </div>
