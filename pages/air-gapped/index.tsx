@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps<ContactProps> =
           title: 'Air Gapped - ClickHouse',
           description: 'ClickHouse Air Gapped',
           path: '/air-gapped',
-          image: [{ url: '/images/air-gapped-og.png' }]
+          image: [{ url: '/images/air-gapped-og-v2.png' }]
         },
         ...commonProps
       }
