@@ -161,7 +161,7 @@ export default function Page({
               {showForm ? (
                 <>
                   <ArrowDownIcon className='ml-24 w-4 pb-8 md:hidden' />
-                  <div className='h-[34rem] w-[30.3125rem] rounded-lg border-neutral-800 bg-neutral-900 p-8 shadow-card'>
+                  <div className='rounded-lg border-neutral-800 bg-neutral-900 p-8 shadow-card md:w-[30.3125rem]'>
                     <SuiTitle type='h4'>
                       Enter your information and we'll contact you to discuss
                       your options when migrating away from [RockSet].
