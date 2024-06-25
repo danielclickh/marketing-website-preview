@@ -149,7 +149,10 @@ export default function Page({
                   {!formLoaded && (
                     <div className='text-center'>Loading form...</div>
                   )}
-                  <h2 className='mb-6 text-lg'>Subscribe today!</h2>
+
+                  {formLoaded && (
+                    <h2 className='mb-6 text-lg'>Subscribe today!</h2>
+                  )}
 
                   {!formSuccess && (
                     <MarketoForm
