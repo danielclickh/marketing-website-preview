@@ -127,7 +127,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
               <CUILink
                 href='https://github.com/ClickHouse/ClickHouse?utm_source=clickhouse&utm_medium=website&utm_campaign=website-nav'
                 target='_blank'
-                className='hidden items-center gap-2 text-sm font-medium hover:text-neutral-400 lg:flex'
+                className='hidden items-center gap-2 text-sm font-medium hover:text-primary-300 lg:flex'
                 onClick={galaxyOnClick('topNav.navItems.githubSelect')}>
                 <GitHub />
                 <span className='hidden lg-mid:inline'>
@@ -142,7 +142,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
               </CUILink>
               <CUILink
                 href='https://clickhouse.cloud/signIn'
-                className='w-full rounded border border-neutral-500 py-3 text-center text-sm font-medium leading-none hover:text-neutral-400 md-mid:hidden md-mid:w-auto md-mid:border-0 md-mid:py-0 lg:inline-block'
+                className='w-full rounded border border-neutral-500 py-3 text-center text-sm font-medium leading-none hover:text-primary-300 md-mid:hidden md-mid:w-auto md-mid:border-0 md-mid:py-0 lg:inline-block'
                 onClick={galaxyOnClick('topNav.navItems.signInSelect')}>
                 Sign in
               </CUILink>

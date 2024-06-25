@@ -88,7 +88,7 @@ export default function NavigationItem({
         ref={linkRef}
         {...linkProps}
         className={`items-center ${
-          !href && !hasChildren ? 'cursor-default' : ''
+          !href && !link && !hasChildren ? 'cursor-default' : ''
         } ${isOpen ? 'text-primary-300' : ''} ${linkClassName}`}>
         <span className='flex-1'>{label}</span>
         {hasChildren && (

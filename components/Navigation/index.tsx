@@ -179,7 +179,13 @@ export default function Navigation({
                     User stories
                   </NavigationLink>
                 </li>
-                <li>
+                <li
+                  onMouseEnter={() => {
+                    setActiveSubNav('news-and-events')
+                  }}
+                  onMouseLeave={() => {
+                    setActiveSubNav(null)
+                  }}>
                   <NavigationLink
                     onClick={() => {
                       setActiveSubNav(
@@ -225,7 +231,13 @@ export default function Navigation({
                     </li>
                   </NavigationSubNav>
                 </li>
-                <li>
+                <li
+                  onMouseEnter={() => {
+                    setActiveSubNav('learning')
+                  }}
+                  onMouseLeave={() => {
+                    setActiveSubNav(null)
+                  }}>
                   <NavigationLink
                     onClick={() => {
                       setActiveSubNav(
