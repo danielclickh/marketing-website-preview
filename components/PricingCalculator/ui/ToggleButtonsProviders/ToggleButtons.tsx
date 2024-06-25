@@ -39,13 +39,6 @@ export function ToggleButtonsProviders<T extends string = string>({
           ) : option.value === 'azure' ? (
             <div className='relative'>
               <AzureLogo />
-              <SuiText
-                size='xs'
-                weight='medium'
-                color='secondary'
-                className='absolute -right-10 -top-4 rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
-                Beta
-              </SuiText>
             </div>
           ) : (
             option.label

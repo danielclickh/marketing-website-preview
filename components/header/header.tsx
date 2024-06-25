@@ -59,7 +59,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
   }
 
   const [headerBanner, setHeaderBanner] = useState(
-    '<a href="/company/contact?loc=eyebrow">Contact us for help migrating from Rockset to ClickHouse Cloud</a>'
+    '<a href="/blog/clickhouse-cloud-launched-microsoft-launched?loc=eyebrow">ClickHouse Cloud now available on Microsoft Azure</a>'
   )
 
   useEffect(() => {
@@ -184,7 +184,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
                                 } h-5 w-5`}
                               />
                             </Disclosure.Button>
-                            <Disclosure.Panel className='text-md mt-2 mb-2 text-neutral-400'>
+                            <Disclosure.Panel className='text-md mb-2 mt-2 text-neutral-400'>
                               <MobileMenuItem
                                 {...menuItem}
                                 close={() => setIsOpen(false)}
@@ -211,7 +211,7 @@ export default function Header({ header, github: { stars } }: HeaderProps) {
             </div>
           </div>
 
-          <div className='grid w-full grid-cols-2 gap-4 py-6 px-5'>
+          <div className='grid w-full grid-cols-2 gap-4 px-5 py-6'>
             <CUIButton
               type='primary'
               href='https://clickhouse.cloud/signUp'
