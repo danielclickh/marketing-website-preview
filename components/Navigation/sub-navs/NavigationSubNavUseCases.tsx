@@ -13,6 +13,8 @@ export default function NavigationSubNavUseCases() {
         There's that feeling of new tech where everything just feels like it's
         going right. Can we get the data in there quick enough? Yes. Can we
         query the data in a way that is going to have a responsive UI? Yes.
+        <br />
+        <br />
       </>
     )
   }
@@ -46,6 +48,9 @@ export default function NavigationSubNavUseCases() {
                   ClickHouse helps us efficiently and reliably analyze logs
                   across trillions of Internet requests to identify malicious
                   traffic and provide customers with rich analytics.
+                  <br />
+                  <br />
+                  <br />
                 </>
               )
             })
@@ -70,6 +75,9 @@ export default function NavigationSubNavUseCases() {
                   With ClickHouse Cloud’s production instance, we are getting
                   sub-second query time along with materialized views. The
                   decision to switch was a no-brainer for us.
+                  <br />
+                  <br />
+                  <br />
                 </>
               )
             })

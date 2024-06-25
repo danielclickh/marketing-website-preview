@@ -92,10 +92,21 @@ export default function NavigationItem({
         } ${isOpen ? 'text-primary-300' : ''} ${linkClassName}`}>
         <span className='flex-1'>{label}</span>
         {hasChildren && (
-          <NavigationChevron
-            className={`md-mid:hidden ${isOpen ? '' : 'text-neutral-500'}`}
-            direction={isOpen ? 'down' : 'right'}
-          />
+          <span className='md-mid:ml-2'>
+            {/* Mobile */}
+            <NavigationChevron
+              className={`md-mid:hidden ${isOpen ? '' : 'text-neutral-500'}`}
+              direction={isOpen ? 'down' : 'right'}
+            />
+
+            {/* Desktop */}
+            <NavigationChevron
+              className={`hidden md-mid:block ${
+                isOpen ? '' : 'text-neutral-500'
+              }`}
+              direction={isOpen ? 'up' : 'down'}
+            />
+          </span>
         )}
       </NavigationLink>
       {hasChildren && (

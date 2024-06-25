@@ -111,9 +111,9 @@ export default function Header({ github: { stars } }: HeaderProps) {
               burgerMenuIsOpen
                 ? 'pointer-events-auto opacity-100'
                 : 'pointer-events-none opacity-0'
-            } fixed inset-0 flex h-dvh flex-1 flex-col overflow-y-auto bg-neutral-900 p-4 transition-opacity md-mid:pointer-events-auto md-mid:relative md-mid:!top-0 md-mid:ml-8 md-mid:!h-auto md-mid:flex-row md-mid:items-center md-mid:overflow-y-visible md-mid:bg-transparent md-mid:p-0 md-mid:opacity-100 xl:ml-20`}>
+            } fixed inset-0 flex h-dvh flex-1 flex-col overflow-y-auto bg-neutral-900 p-4 transition-opacity md-mid:pointer-events-auto md-mid:relative md-mid:!top-0 md-mid:ml-0 md-mid:!h-auto md-mid:flex-row md-mid:items-center md-mid:overflow-y-visible md-mid:bg-transparent md-mid:p-0 md-mid:opacity-100 lg:ml-8 xl:ml-20`}>
             <Navigation
-              className='w-full md-mid:w-auto'
+              className='w-full md-mid:w-auto md-mid:flex-shrink-0'
               onItemClick={(item, children, isOpen) => {
                 setShowBackdrop(isOpen)
               }}
@@ -127,22 +127,20 @@ export default function Header({ github: { stars } }: HeaderProps) {
               <CUILink
                 href='https://github.com/ClickHouse/ClickHouse?utm_source=clickhouse&utm_medium=website&utm_campaign=website-nav'
                 target='_blank'
-                className='hidden items-center gap-2 text-sm font-medium hover:text-primary-300 lg:flex'
+                className='hidden items-center gap-2 text-sm font-medium hover:text-primary-300 lg-mid:flex'
                 onClick={galaxyOnClick('topNav.navItems.githubSelect')}>
                 <GitHub />
-                <span className='hidden lg-mid:inline'>
-                  {Intl.NumberFormat('en', {
-                    notation: 'compact',
-                    minimumFractionDigits: 1,
-                    maximumFractionDigits: 1
-                  })
-                    .format(stars)
-                    .toLowerCase()}
-                </span>
+                {Intl.NumberFormat('en', {
+                  notation: 'compact',
+                  minimumFractionDigits: 1,
+                  maximumFractionDigits: 1
+                })
+                  .format(stars)
+                  .toLowerCase()}
               </CUILink>
               <CUILink
                 href='https://clickhouse.cloud/signIn'
-                className='w-full rounded border border-neutral-500 py-3 text-center text-sm font-medium leading-none hover:text-primary-300 md-mid:hidden md-mid:w-auto md-mid:border-0 md-mid:py-0 lg:inline-block'
+                className='w-full rounded border border-neutral-500 py-3 text-center text-sm font-medium leading-none hover:text-primary-300 md-mid:hidden md-mid:w-auto md-mid:border-0 md-mid:py-0 lg-mid:inline-block'
                 onClick={galaxyOnClick('topNav.navItems.signInSelect')}>
                 Sign in
               </CUILink>
