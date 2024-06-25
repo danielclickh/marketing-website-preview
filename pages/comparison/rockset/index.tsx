@@ -11,7 +11,7 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import quotes from '../../use-cases/real-time-analytics/quotes.json'
 import faqs from '../../use-cases/real-time-analytics/faqs.json'
 import Tilt from 'react-parallax-tilt'
-import { SuiButton, SuiTitle } from '../../../components/sui'
+import { SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { ContactProps } from '../../../types/contact'
 import LogoCarousel from '../../../components/LogoCarousel'
@@ -91,9 +91,9 @@ export default function Page({
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='pb-24'>
-          <div className='mx-auto flex w-full max-w-7xl flex-col px-4 pt-8  sm:pt-8 md:pt-24 2xl:px-0'>
+          <div className='mx-auto flex w-full max-w-7xl flex-col px-4 pt-8 sm:pt-8 md:pt-24 2xl:px-0'>
             <div className='event-container mx-auto block w-full lg:flex lg:items-start lg:justify-between'>
-              <div className='mb-6 mr-0 flex-auto md:mb-16 lg:mb-0 lg:mr-16 lg:max-w-2xl'>
+              <div className='mb-6 mr-0 flex-auto px-2 sm:px-6 md:mb-16 lg:mb-0 lg:mr-16 lg:max-w-2xl xl:px-2'>
                 <div className='section_metadata'>
                   <h1 className='mb-8 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
                     Migrating from <span className='text-[#63C0DD]'>[</span>
@@ -201,7 +201,7 @@ export default function Page({
                   </div>
                 </>
               ) : (
-                <div className='ml-auto w-full lg:max-w-lg'>
+                <div className='mx-auto w-96 pt-8 md:ml-auto md:w-full md:pt-0 lg:max-w-lg lg:pt-4'>
                   <Image
                     src='/images/comparisons/rockset-migration-2.svg'
                     width='485'
