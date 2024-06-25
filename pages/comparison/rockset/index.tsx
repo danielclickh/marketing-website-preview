@@ -23,6 +23,16 @@ interface DriftAPI {
   startInteraction: (options: { interactionId: number }) => void
 }
 
+interface PageProps {
+  customerStories: any
+  contactForm: {
+    disclaimer: string
+  }
+  footerData: ContactProps['footerData']
+  headerData: ContactProps['headerData']
+  seo: ContactProps['seo']
+}
+
 interface DriftWindow extends Window {
   drift: {
     api: DriftAPI
@@ -35,23 +45,26 @@ declare var window: DriftWindow
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
     const data = await findOne('contact-us', {
+      populate: ['hero', 'hero.contactForm', 'seo', 'seo.image']
+    })
+
+    const paramsCustomerStories = {
       populate: [
-        'hero',
-        'hero.contactForm',
-        'seo',
-        'seo.image',
         'customerStories',
         'customerStories.*',
         'customerStories.logos.*',
         'customerStories.logos.darkLogoPng'
       ]
-    })
+    }
+
+    const customerStoriesData = await findOne('homepage', paramsCustomerStories)
 
     const commonProps = await getCommonProps()
 
     return {
       props: {
         ...data.hero,
+        customerStories: customerStoriesData.customerStories,
         seo: {
           title: 'Migrate from Rockset to ClickHouse',
           description:
@@ -63,16 +76,6 @@ export const getStaticProps: GetStaticProps<ContactProps> =
       }
     }
   }
-
-interface PageProps {
-  customerStories: any
-  contactForm: {
-    disclaimer: string
-  }
-  footerData: ContactProps['footerData']
-  headerData: ContactProps['headerData']
-  seo: ContactProps['seo']
-}
 
 export default function Page({
   customerStories,
@@ -86,6 +89,8 @@ export default function Page({
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
   const [showForm, setShowForm] = useState(false)
+
+  console.log(customerStories)
 
   return (
     <>
@@ -131,21 +136,25 @@ export default function Page({
                   <div className='flex gap-8 pt-2'>
                     <CUIButton
                       type='primary'
-                      onClick={() => setShowForm(!showForm)}>
+                      onClick={() => {
+                        setShowForm(!showForm)
+                        galaxyOnClick('rockset.hero.contactSupportSelect')
+                      }}>
                       Get personalized support
                     </CUIButton>
 
                     <CUIButton
                       type='secondary'
                       className='group w-auto'
-                      href='https://clickhouse.com/docs/en/concepts/why-clickhouse-is-so-fast'
+                      target='_blank'
+                      href='https://clickhouse.cloud/signUp?loc=rockset-comparison-hero'
                       iconRight={
                         <ChevronRightIcon
                           height='16'
                           className='pt-0.5 transition group-hover:translate-x-1/2'
                         />
                       }
-                      onClick={galaxyOnClick('rockset.hero.startTrial')}>
+                      onClick={galaxyOnClick('rockset.hero.startTrialSelect')}>
                       Start a 30-day free trial
                     </CUIButton>
                   </div>
@@ -344,11 +353,11 @@ export default function Page({
             <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-20 md:gap-x-14'>
               <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
               <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
-              {/* <LogoCarousel
+              <LogoCarousel
                 logos={customerStories.logos}
                 speedClass1='animate-marqueeLeft5'
                 speedClass2='animate-marqueeLeft6'
-              /> */}
+              />
             </div>
           </div>
         </div>
@@ -356,7 +365,7 @@ export default function Page({
         <div className='bg-shadow-element-right yellow-shadow '>
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
             <GetStartedFree
-              href='https://clickhouse.cloud/signUp?loc=real-time-use-case-getstarted-footer'
+              href='https://clickhouse.cloud/signUp?loc=rockset-comparison-getstarted-footer'
               textBefore='Get started with ClickHouse'
               textSlanted='Cloud'
               textAfter='for free'
