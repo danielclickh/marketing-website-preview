@@ -90,8 +90,6 @@ export default function Page({
   const [formLoaded, setFormLoaded] = useState(false)
   const [showForm, setShowForm] = useState(false)
 
-  console.log(customerStories)
-
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>

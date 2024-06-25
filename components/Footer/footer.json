@@ -202,6 +202,12 @@
 				"target": "_self"
 			},
 			{
+				"id": 24,
+				"name": "Rockset",
+				"href": "/comparison/rockset",
+				"target": "_self"
+			},
+			{
 				"id": 40,
 				"name": "Snowflake",
 				"href": "/comparison/snowflake",
