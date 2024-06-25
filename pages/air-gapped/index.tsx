@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import { useRef, useState } from 'react'
+import AirGappedIcon from '../../components/AirGapped/AirGappedIcon'
 import GrowingCommunity from '../../components/GrowingCommunity'
 import HRSeparator from '../../components/HRSeparator'
 import Layout from '../../components/Layout'
@@ -67,18 +68,29 @@ export default function Page({
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
-        <div className='pt-10'>
-          <div className='mx-auto flex w-full max-w-7xl flex-col px-4 pt-24 sm:px-8 2xl:px-0'>
+        <div className='relative overflow-hidden bg-primary-300 px-4 py-12 pt-14 sm:px-8 md:py-24 2xl:px-0'>
+          <div className='absolute -top-[300px] right-0 hidden lg:block'>
+            <AirGappedIcon className='max-w-[800px]' />
+          </div>
+          <div className='mx-auto max-w-7xl'>
+            <div className='flex items-center'>
+              <div>
+                <h1 className='mb-8 font-basier text-4xl font-semibold leading-tight text-[#1C1B1A] md:text-5.5xl'>
+                  ClickHouse Air Gapped
+                </h1>
+                <h2 className='mb-6 max-w-xl font-basier text-[18px] font-semibold leading-tight text-[#1C1B1A]'>
+                  Real-time data warehouse, documented and configured for high
+                  security, deployable to your air-gapped environment.
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className='mx-auto flex w-full max-w-7xl flex-col px-4 pt-12 sm:px-8 2xl:px-0'>
             <div className='event-container mx-auto block w-full lg:flex lg:items-start lg:justify-between'>
               <div className='mb-16 mr-0 flex-auto lg:mb-0 lg:mr-16 lg:max-w-2xl'>
                 <div className='section_metadata '>
-                  <h1 className='mb-8 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
-                    ClickHouse Air Gapped
-                  </h1>
-                  <h2 className='mb-6 font-basier text-2xl font-semibold leading-tight text-neutral-200'>
-                    Real-time data warehouse, documented and configured for high
-                    security, deployable to your air-gapped environment.
-                  </h2>
                   <div className='mx-auto mb-6 max-w-2xl text-neutral-200'>
                     <div className='prose prose-neutral'>
                       <p>
@@ -94,25 +106,25 @@ export default function Page({
                       <p>Open Source Security</p>
                       <ul>
                         <li>
-                          Vulnerability Management: We continuously scan our
-                          codebase to identify vulnerabilities in existing and
-                          new components. We work with third parties to conduct
-                          penetration tests on our cloud environments and use
-                          the findings to improve our open source code base. We
-                          encourage reports through our Bug Bounty program and
-                          participate in MITRE’s CVE Numbering Authority (CNA)
-                          program to ensure our community stays informed of
-                          fixes.
+                          <strong>Vulnerability Management:</strong> We
+                          continuously scan our codebase to identify
+                          vulnerabilities in existing and new components. We
+                          work with third parties to conduct penetration tests
+                          on our cloud environments and use the findings to
+                          improve our open source code base. We encourage
+                          reports through our Bug Bounty program and participate
+                          in MITRE’s CVE Numbering Authority (CNA) program to
+                          ensure our community stays informed of fixes.
                         </li>
                         <li>
-                          Secure Development: Our developers undergo annual
-                          secure coding training and follow secure software
-                          lifecycle development practices. This includes
-                          ensuring open source submissions are thoroughly
-                          reviewed and tested before being used in our products.
-                          Our security team is involved in reviewing and testing
-                          new features to ensure adherence to highest infosec
-                          standards.
+                          <strong>Secure Development:</strong> Our developers
+                          undergo annual secure coding training and follow
+                          secure software lifecycle development practices. This
+                          includes ensuring open source submissions are
+                          thoroughly reviewed and tested before being used in
+                          our products. Our security team is involved in
+                          reviewing and testing new features to ensure adherence
+                          to highest infosec standards.
                         </li>
                       </ul>
                       <p>
@@ -132,18 +144,13 @@ export default function Page({
                   </div>
                 </div>
               </div>
-              <div className='ml-auto w-full lg:max-w-lg'>
-                <Image
-                  src='/images/air-gapped-og.png'
-                  alt='Air Gapped ClickHouse'
-                  width={1200}
-                  height={630}
-                  className='mb-20 hidden h-auto w-full rounded-lg object-cover lg:block'
-                />
+              <div className='z-10 ml-auto w-full md:-mt-20 lg:max-w-lg'>
                 <div className='w-full rounded-lg border border-neutral-800 bg-neutral-900 p-8 shadow-card duration-300 ease-in-out'>
                   {!formLoaded && (
                     <div className='text-center'>Loading form...</div>
                   )}
+                  <h2 className='mb-6 text-lg'>Subscribe today!</h2>
+
                   {!formSuccess && (
                     <MarketoForm
                       formId='1156'
@@ -163,7 +170,6 @@ export default function Page({
                       }}
                     />
                   )}
-
                   {formSuccess && (
                     <div ref={formSuccessRef} className='text-center'>
                       <h3 className='text-2xl font-bold'>Thank you!</h3>
