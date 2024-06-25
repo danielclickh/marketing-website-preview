@@ -3,21 +3,21 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 import GetStartedFree from '../../../components/GetStartedFree'
-import GrowingCommunity from '../../../components/GrowingCommunity'
 import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'
 import MarketoForm from '../../../components/MarketoForm'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { CommonProps } from '../../../types/homepage'
 import quotes from '../../use-cases/real-time-analytics/quotes.json'
 import faqs from '../../use-cases/real-time-analytics/faqs.json'
 import Tilt from 'react-parallax-tilt'
 import { SuiButton, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { ContactProps } from '../../../types/contact'
-import { Button } from '@clickhouse/click-ui'
-import LogoCarouselItem from '../../../components/LogoCarousel/CarouselItem'
+import LogoCarousel from '../../../components/LogoCarousel'
+import { galaxyOnPage, galaxyOnClick } from '../../../lib/galaxy/galaxy'
+import { ArrowDownIcon, ChevronRightIcon } from '@heroicons/react/outline'
+import { CUIButton } from '../../../components/ClickUI'
 
 interface DriftAPI {
   startInteraction: (options: { interactionId: number }) => void
@@ -81,6 +81,7 @@ export default function Page({
   headerData,
   seo
 }: PageProps) {
+  galaxyOnPage('rocksetMigrationPage')
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
@@ -89,22 +90,27 @@ export default function Page({
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
-        <div className='pt-10'>
-          <div className='mx-auto flex w-full max-w-7xl flex-col px-4 pt-24 sm:px-8 2xl:px-0'>
+        <div className='pb-24'>
+          <div className='mx-auto flex w-full max-w-7xl flex-col px-4 pt-8  sm:pt-8 md:pt-24 2xl:px-0'>
             <div className='event-container mx-auto block w-full lg:flex lg:items-start lg:justify-between'>
-              <div className='mb-16 mr-0 flex-auto lg:mb-0 lg:mr-16 lg:max-w-2xl'>
-                <div className='section_metadata '>
+              <div className='mb-6 mr-0 flex-auto md:mb-16 lg:mb-0 lg:mr-16 lg:max-w-2xl'>
+                <div className='section_metadata'>
                   <h1 className='mb-8 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
                     Migrating from <span className='text-[#63C0DD]'>[</span>
                     <span className='text-[#E5C3FF]'>Rockset</span>
                     <span className='text-[#63C0DD]'>]</span> to ClickHouse
                   </h1>
-                  <h2 className='mb-6 font-basier text-xl font-medium leading-tight text-neutral-200'>
-                    [Rockset] is being deprecated. Are you facing the daunting
+                  <h2 className='font-basier text-xl font-medium leading-tight text-neutral-200'>
+                    Rockset is being deprecated. Are you facing the daunting
                     task of needing to migrate your production workloads before
-                    a rapidly approaching cut-off date? We’re here to help.
+                    a rapidly approaching cut-off date?{' '}
+                    <span className='italic text-neutral-0'>
+                      We’re here to help
+                    </span>
+                    .
                   </h2>
-                  <div className='mx-auto mb-6 max-w-2xl text-neutral-200'>
+                  <HRSeparator className='my-6' />
+                  <div className='mb-6 max-w-2xl text-neutral-200'>
                     <div className='prose prose-neutral'>
                       <p>
                         ClickHouse and Rockset are both used to power real-time
@@ -122,58 +128,78 @@ export default function Page({
                       </p>
                     </div>
                   </div>
-                  <div className='flex pt-8'>
-                    <SuiButton
+                  <div className='flex gap-8 pt-2'>
+                    <CUIButton
                       type='primary'
                       onClick={() => setShowForm(!showForm)}>
                       Get personalized support
-                    </SuiButton>
+                    </CUIButton>
 
-                    <SuiButton type='empty' color='primary'>
+                    <CUIButton
+                      type='secondary'
+                      className='group w-auto'
+                      href='https://clickhouse.com/docs/en/concepts/why-clickhouse-is-so-fast'
+                      iconRight={
+                        <ChevronRightIcon
+                          height='16'
+                          className='pt-0.5 transition group-hover:translate-x-1/2'
+                        />
+                      }
+                      onClick={galaxyOnClick('rockset.hero.startTrial')}>
                       Start a 30-day free trial
-                    </SuiButton>
+                    </CUIButton>
                   </div>
                 </div>
               </div>
               {showForm ? (
-                <div className='rounded-lg border border-neutral-800 bg-neutral-900 p-8 shadow-card duration-300 ease-in-out lg:max-w-lg'>
-                  {!formLoaded && (
-                    <div className='text-center'>Loading form...</div>
-                  )}
-                  {!formSuccess && (
-                    <MarketoForm
-                      formId='1213'
-                      disclaimer={contactForm.disclaimer}
-                      onLoad={(formObject) => {
-                        formObject.addHiddenFields({
-                          formReferrer: window.location.href
-                        })
-                        setFormLoaded(true)
-                      }}
-                      onSuccess={() => {
-                        setFormSuccess(true)
+                <>
+                  <ArrowDownIcon className='ml-24 w-4 pb-8 md:hidden' />
+                  <div className='h-[34rem] w-[30.3125rem] rounded-lg border-neutral-800 bg-neutral-900 p-8 shadow-card'>
+                    <SuiTitle type='h4'>
+                      Enter your information and we'll contact you to discuss
+                      your options when migrating away from [RockSet].
+                    </SuiTitle>
+                    <br />
+                    <div className='delay-1000 duration-300 ease-in-out'>
+                      {!formLoaded && (
+                        <div className='text-center'>Loading form...</div>
+                      )}
+                      {!formSuccess && (
+                        <MarketoForm
+                          formId='1213'
+                          disclaimer={contactForm.disclaimer}
+                          onLoad={(formObject) => {
+                            formObject.addHiddenFields({
+                              formReferrer: window.location.href
+                            })
+                            setFormLoaded(true)
+                          }}
+                          onSuccess={() => {
+                            setFormSuccess(true)
 
-                        // Delay needed to allow the ref to update before scrolling
-                        setTimeout(() => {
-                          formSuccessRef.current?.scrollIntoView({
-                            behavior: 'smooth'
-                          })
-                        }, 10)
+                            // Delay needed to allow the ref to update before scrolling
+                            setTimeout(() => {
+                              formSuccessRef.current?.scrollIntoView({
+                                behavior: 'smooth'
+                              })
+                            }, 10)
 
-                        return false // Stops page from reloading
-                      }}
-                    />
-                  )}
+                            return false // Stops page from reloading
+                          }}
+                        />
+                      )}
 
-                  {formSuccess && (
-                    <div ref={formSuccessRef} className='text-center'>
-                      <h3 className='text-2xl font-bold'>Thank you!</h3>
-                      <p className='mt-2 text-neutral-200'>
-                        We'll be in touch.
-                      </p>
+                      {formSuccess && (
+                        <div ref={formSuccessRef} className='text-center'>
+                          <h3 className='text-2xl font-bold'>Thank you!</h3>
+                          <p className='mt-2 text-neutral-200'>
+                            We'll be in touch.
+                          </p>
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
+                  </div>
+                </>
               ) : (
                 <div className='ml-auto w-full lg:max-w-lg'>
                   <Image
@@ -187,8 +213,7 @@ export default function Page({
             </div>
           </div>
         </div>
-        <HRSeparator className='my-24' />
-        <div className=' bg-neutral-725 '>
+        <div className='bg-neutral-725 '>
           <div className='bg-shadow-element-left red-shadow section-container max-w-7xl'>
             <div className='flex flex-col justify-between py-16 xl:flex-row xl:px-12'>
               <div className='mb-10 xl:mb-0 xl:min-w-[540px]'>
@@ -200,8 +225,8 @@ export default function Page({
                   height={72}
                 />
                 <h2 className='text-left font-basier text-2xl font-semibold lg:text-4xl xl:max-w-[515px]'>
-                  The real-time database that truly shines at scale. Count on
-                  blazing performance when low latency{' '}
+                  ClickHouse is the real-time database that truly shines at
+                  scale. Count on blazing performance when low latency{' '}
                   <span className='tilted tilted-yellow'>
                     <span className='tilted-content leading-8'>really</span>
                   </span>{' '}
@@ -319,7 +344,7 @@ export default function Page({
             <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-20 md:gap-x-14'>
               <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
               <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
-              {/* <LogoCarouselItem
+              {/* <LogoCarousel
                 logos={customerStories.logos}
                 speedClass1='animate-marqueeLeft5'
                 speedClass2='animate-marqueeLeft6'
