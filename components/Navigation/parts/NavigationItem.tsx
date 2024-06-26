@@ -87,7 +87,7 @@ export default function NavigationItem({
       <NavigationLink
         ref={linkRef}
         {...linkProps}
-        className={`items-center ${
+        className={`group/navItem items-center ${
           !href && !link && !hasChildren ? 'cursor-default' : ''
         } ${isOpen ? 'text-primary-300' : ''} ${linkClassName}`}>
         <span className='flex-1'>{label}</span>
@@ -102,7 +102,7 @@ export default function NavigationItem({
             {/* Desktop */}
             <NavigationChevron
               className={`hidden md-mid:block ${
-                isOpen ? '' : 'text-neutral-500'
+                isOpen ? '' : 'text-neutral-500 group-hover/navItem:text-white'
               }`}
               direction={isOpen ? 'up' : 'down'}
             />
