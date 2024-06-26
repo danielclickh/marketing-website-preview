@@ -132,7 +132,7 @@ export default function NavigationSubNavUseCases() {
         {...(quote || defaultQuote)}
         className='col-span-3 col-start-3 row-span-full my-4 md-mid:my-0 md-mid:max-w-[336px]'
         link={{
-          href: '/blog?category=customer-stories',
+          href: '/user-stories',
           text: 'View more user stories',
           onClick() {
             galaxyOnClick('topNav.useCasesMenu.userStoriesQuoteSelect')

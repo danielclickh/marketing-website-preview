@@ -13,11 +13,11 @@ export default function NavigationSubNavProducts() {
           <NavigationLink
             href='/cloud'
             onClick={() => galaxyOnClick('topNav.productMenu.cloudSelect')}
-            className='!flex w-full items-center gap-4'>
+            className='group/chCloud !flex w-full items-center gap-4'>
             <ClickHouseCloud className='flex-grow-1 h-auto w-5 flex-shrink-0 stroke-[4] text-primary-300 md-mid:w-auto md-mid:stroke-[1.75]' />
             <span>
               ClickHouse Cloud
-              <div className='text-xs text-slate-300'>
+              <div className='text-xs text-slate-300 group-hover/chCloud:text-white'>
                 The best way to use ClickHouse.
                 <br />
                 Available on AWS, GCP, and Azure.
