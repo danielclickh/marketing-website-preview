@@ -136,7 +136,7 @@ function Sitemap({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div>
-        <h1 className='md:text-5.5xl mx-auto mb-10 pt-10 text-center font-basier text-4xl text-neutral-100 lg:mb-16 lg:pt-20'>
+        <h1 className='mx-auto mb-10 pt-10 text-center font-basier text-4xl text-neutral-100 md:text-5.5xl lg:mb-16 lg:pt-20'>
           Site map
         </h1>
         <div className='mx-auto my-24 max-w-7xl px-4 sm:px-8 2xl:px-0'>
@@ -339,6 +339,13 @@ function Sitemap({
                       </li>
                     )
                   })}
+                  <li className='pb-2'>
+                    <Link
+                      href={`/comparison/rockset`}
+                      className='font text-primary-300 hover:underline'>
+                      Migrate from Rockset to ClickHouse
+                    </Link>
+                  </li>
                 </ul>
               </div>
               <div>

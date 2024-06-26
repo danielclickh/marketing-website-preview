@@ -123,6 +123,10 @@ function generateSiteMap(
     <url>
       <loc>${siteURL}/real-time-data-warehouse</loc>
     </url>
+
+    <url>
+        <loc>${siteURL}/comparison/rockset</loc>
+    </url>
     <url>
         <loc>${siteURL}/blog</loc>
     </url>
