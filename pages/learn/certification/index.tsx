@@ -203,7 +203,7 @@ export default function CertificationPage({
               or the ClickHouse SQL Console.
             </p>
             <CUIButton
-              type='secondary'
+              type='primary-dark'
               size='lg'
               weight='semibold'
               href='/learn/certification#faqs'
@@ -211,10 +211,8 @@ export default function CertificationPage({
               onClick={galaxyOnClick(
                 'certificationPage.examObjectives.FaqsSelect'
               )}
-              className='group mx-auto mt-8 w-full max-w-[250px] text-black'>
-              <span className='text-black group-hover:text-white'>
-                Frequently asked questions
-              </span>
+              className='group mx-auto mt-8 w-full max-w-[250px]'>
+              <span className=''>Frequently asked questions</span>
             </CUIButton>
           </div>
 
