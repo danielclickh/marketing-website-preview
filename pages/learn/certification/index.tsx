@@ -135,7 +135,7 @@ export default function CertificationPage({
                   'certificationPage.hero.purchaseCertificationBusinessSelect'
                 )}
                 target='_blank'>
-                Purchase as a business
+                Purchase as business
               </CUIButton>
               <CUIButton
                 type='secondary'
