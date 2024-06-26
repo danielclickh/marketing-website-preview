@@ -202,6 +202,20 @@ export default function CertificationPage({
               ClickHouse documentation, and using either the clickhouse-client
               or the ClickHouse SQL Console.
             </p>
+            <CUIButton
+              type='secondary'
+              size='lg'
+              weight='semibold'
+              href='/learn/certification#faqs'
+              linkClass='w-full max-w-[14rem]'
+              onClick={galaxyOnClick(
+                'certificationPage.examObjectives.FaqsSelect'
+              )}
+              className='group mx-auto mt-8 w-full max-w-[250px] text-black'>
+              <span className='text-black group-hover:text-white'>
+                Frequently asked questions
+              </span>
+            </CUIButton>
           </div>
 
           {/* Objectives */}
@@ -225,6 +239,9 @@ export default function CertificationPage({
                         value='Define an efficient primary key given a specific criteria of the types of queries that will be
                       executed on a MergeTree table'
                       />
+                    </li>
+                    <li>
+                      <CheckListItem value='Define and query a Dictionary' />
                     </li>
                   </ul>
                 </CUICard.Body>
@@ -376,7 +393,7 @@ export default function CertificationPage({
           </div>
 
           {/* Logo carousel */}
-          <SuiTitle type='h3' className='mt-28 mb-6 text-center'>
+          <SuiTitle type='h3' className='mb-6 mt-28 text-center'>
             Trusted by the best developers that work with data{' '}
             <span className='tilted tilted-black'>
               <span className='tilted-content text-white'>at scale</span>
