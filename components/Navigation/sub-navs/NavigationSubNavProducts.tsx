@@ -95,7 +95,9 @@ export default function NavigationSubNavProducts() {
       </ul>
       <LinkWithArrow
         href='https://clickhouse.com/docs/en/integrations'
-        onClick={() => galaxyOnClick('topNav.productMenu.integrationsSelect')}
+        onClick={() =>
+          galaxyOnClick('topNav.productMenu.integrationsHighlightSelect')
+        }
         className='hidden w-full rounded-b-lg bg-primary-300 px-4 py-2 text-center text-sm font-medium text-primary-900 md-mid:block'>
         View our integrations
       </LinkWithArrow>
