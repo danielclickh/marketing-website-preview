@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router'
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { MarketoFormObject, MarketoFormsApi } from '../../types/marketo-form'
-import styles from './styles.module.scss'
+import React, { useEffect, useRef, useState } from 'react'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from '../../tailwind.config'
+import { MarketoFormObject, MarketoFormsApi } from '../../types/marketo-form'
+import styles from './styles.module.scss'
+import { getUTMsFromStorage } from '../../components/UTMPersist'
 
 // Get the medium breakpoint from the tailwind config incase the value is changed
 const resolvedConfig = resolveConfig(tailwindConfig as any)
@@ -11,6 +12,10 @@ const formBreakpoint = parseInt(resolvedConfig.theme?.screens?.md || '768px')
 
 const BASE_URL = '//discover.clickhouse.com'
 const MUNCHKIN_ID = '238-FPC-317'
+
+interface QueryObject {
+  [key: string]: string | string[] | undefined
+}
 
 declare global {
   interface Window {
@@ -235,6 +240,43 @@ export default function Page() {
             }
 
             document.querySelector('head')?.appendChild(script)
+          }
+
+          //UTM persistence -
+          /*
+            First we need to check if there's UTMs passed - queryUtmFields - in the URL already. If there are, we can ignore persistence as we only want the latest UTMs that drove a submission.
+          */
+          const utmFieldMapping: Record<string, string> = {
+            utm_campaign: 'utm_campaign__c',
+            utm_content: 'utm_content__c',
+            utm_medium: 'utm_medium__c',
+            utm_source: 'utm_source__c',
+            utm_term: 'utm_term__c',
+            gclid: 'gclid__c'
+          }
+
+          const checkUtmFields = (query: QueryObject): boolean => {
+            return Object.keys(utmFieldMapping).some((field) => field in query)
+          }
+
+          //if no utms are already present in the URL, continue, and check if the form has the values already
+          if (!checkUtmFields(router.query)) {
+            // Fields are prepped, let's check local storage
+            const utmsInStorage = getUTMsFromStorage()
+            if (utmsInStorage) {
+              for (const key in utmsInStorage) {
+                if (utmsInStorage.hasOwnProperty(key)) {
+                  // Get the mapped field name
+                  const mappedField = utmFieldMapping[key]
+                  if (mappedField && typeof utmsInStorage[key] === 'string') {
+                    // Update the form with the value from storage
+                    marketoFormObject.addHiddenFields({
+                      [mappedField]: utmsInStorage[key] as string
+                    })
+                  }
+                }
+              }
+            }
           }
 
           // Send form loaded event
