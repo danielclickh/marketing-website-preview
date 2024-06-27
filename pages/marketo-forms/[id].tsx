@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { MarketoFormObject, MarketoFormsApi } from '../../types/marketo-form'
-import styles from './styles.module.scss'
+import React, { useEffect, useRef, useState } from 'react'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from '../../tailwind.config'
+import { MarketoFormObject, MarketoFormsApi } from '../../types/marketo-form'
+import styles from './styles.module.scss'
 
 // Get the medium breakpoint from the tailwind config incase the value is changed
 const resolvedConfig = resolveConfig(tailwindConfig as any)
