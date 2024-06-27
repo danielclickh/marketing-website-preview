@@ -38,18 +38,6 @@ export default function Navigation({
             </NavigationItem>
           </li>
           <li>
-            <NavigationItem
-              {...topLevelEvents}
-              label='Docs'
-              link={{
-                href: 'https://clickhouse.com/docs',
-                onClick() {
-                  galaxyOnClick('topNav.navItems.docsSelect')
-                }
-              }}
-            />
-          </li>
-          <li>
             <NavigationItem {...topLevelEvents} label='Resources'>
               <NavigationSubNavResources />
             </NavigationItem>
@@ -63,6 +51,18 @@ export default function Navigation({
             <NavigationItem {...topLevelEvents} label='Pricing'>
               <NavigationSubNavPricing />
             </NavigationItem>
+          </li>
+          <li>
+            <NavigationItem
+              {...topLevelEvents}
+              label='Docs'
+              link={{
+                href: 'https://clickhouse.com/docs',
+                onClick() {
+                  galaxyOnClick('topNav.navItems.docsSelect')
+                }
+              }}
+            />
           </li>
           <li>
             <NavigationItem

@@ -5,28 +5,42 @@ import { NavigationLink, NavigationQuote, NavigationQuoteProps } from '../parts'
 export default function NavigationSubNavUseCases() {
   type UseCaseQuote = Omit<NavigationQuoteProps, 'link'>
 
-  const defaultQuote: UseCaseQuote = {
-    author: 'Harlow Ward',
-    jobTitle: 'CTO, Clearbit',
-    children: (
-      <>
-        There's that feeling of new tech where everything just feels like it's
-        going right. Can we get the data in there quick enough? Yes. Can we
-        query the data in a way that is going to have a responsive UI? Yes.
-        <br />
-        <br />
-      </>
-    )
+  const quotes: Record<string, UseCaseQuote> = {
+    lyft: {
+      logo: '/images/nav/logo-lyft.svg',
+      quote:
+        'We needed something to slice and dice real-time data [...]. Using ClickHouse resulted into a lot of performance benefits for us with huge cost savings for the org.'
+    },
+    cloudflare: {
+      logo: '/images/nav/logo-cloudflare.svg',
+      quote:
+        'ClickHouse helps us efficiently and reliably analyze logs across trillions of Internet requests to identify malicious traffic and provide customers with rich analytics.'
+    },
+    adgreetz: {
+      logo: '/images/nav/logo-adgreetz.svg',
+      quote:
+        'With ClickHouse Cloud’s production instance, we are getting sub-second query time along with materialized views, and it costs 6x less. The decision to switch was a no-brainer for us.'
+    },
+    langchain: {
+      logo: '/images/nav/logo-langchain.svg',
+      quote:
+        'ClickHouse allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse.'
+    },
+    instacart: {
+      logo: '/images/nav/logo-instacart.svg',
+      quote:
+        'ClickHouse is widely used across Instacart to power other use-cases such as critical retailer and ads dashboards, calculating results for A/B testing, and machine learning signals.'
+    }
   }
 
-  const [quote, setQuote] = useState<null | NavigationQuoteProps>(null)
+  const [quote, setQuote] = useState<null | UseCaseQuote>(quotes.lyft)
 
   return (
     <div className='px-4 md-mid:grid md-mid:grid-cols-5 md-mid:grid-rows-1 md-mid:gap-x-4 md-mid:py-4'>
       <ul className='col-span-2'>
         <li
           onMouseEnter={() => {
-            setQuote(defaultQuote)
+            setQuote(quotes.lyft)
           }}
           className='col-span-2'>
           <NavigationLink
@@ -40,20 +54,7 @@ export default function NavigationSubNavUseCases() {
         </li>
         <li
           onMouseEnter={() => {
-            setQuote({
-              author: 'Author Name',
-              jobTitle: 'Job Title, Cloudflare',
-              children: (
-                <>
-                  ClickHouse helps us efficiently and reliably analyze logs
-                  across trillions of Internet requests to identify malicious
-                  traffic and provide customers with rich analytics.
-                  <br />
-                  <br />
-                  <br />
-                </>
-              )
-            })
+            setQuote(quotes.cloudflare)
           }}
           className='col-span-2'>
           <NavigationLink
@@ -67,20 +68,7 @@ export default function NavigationSubNavUseCases() {
         </li>
         <li
           onMouseEnter={() => {
-            setQuote({
-              author: 'Author Name',
-              jobTitle: 'Job Title, AdGreetz',
-              children: (
-                <>
-                  With ClickHouse Cloud’s production instance, we are getting
-                  sub-second query time along with materialized views. The
-                  decision to switch was a no-brainer for us.
-                  <br />
-                  <br />
-                  <br />
-                </>
-              )
-            })
+            setQuote(quotes.adgreetz)
           }}
           className='col-span-2'>
           <NavigationLink
@@ -94,18 +82,7 @@ export default function NavigationSubNavUseCases() {
         </li>
         <li
           onMouseEnter={() => {
-            setQuote({
-              author: 'Author Name',
-              jobTitle: 'Job Title, LangChain',
-              children: (
-                <>
-                  We’ve had a positive experience with ClickHouse. It allowed us
-                  to scale LangSmith to production workloads and provide a
-                  service where users can log all of their data. We couldn’t
-                  have accomplished this without ClickHouse.
-                </>
-              )
-            })
+            setQuote(quotes.langchain)
           }}
           className='col-span-2'>
           <NavigationLink
@@ -117,7 +94,11 @@ export default function NavigationSubNavUseCases() {
             Machine learning and GenAI
           </NavigationLink>
         </li>
-        <li className='col-span-2'>
+        <li
+          onMouseEnter={() => {
+            setQuote(quotes.instacart)
+          }}
+          className='col-span-2'>
           <NavigationLink
             href='/use-cases'
             onClick={() =>
@@ -129,8 +110,8 @@ export default function NavigationSubNavUseCases() {
         </li>
       </ul>
       <NavigationQuote
-        {...(quote || defaultQuote)}
-        className='col-span-3 col-start-3 row-span-full my-4 md-mid:my-0 md-mid:max-w-[336px]'
+        {...quote}
+        className='col-span-3 col-start-3 row-span-full my-4 md-mid:my-0 md-mid:max-w-[400px]'
         link={{
           href: '/user-stories',
           text: 'View more user stories',
@@ -138,7 +119,7 @@ export default function NavigationSubNavUseCases() {
             galaxyOnClick('topNav.useCasesMenu.userStoriesQuoteSelect')
           }
         }}>
-        {(quote || defaultQuote).children}
+        {quote?.children}
       </NavigationQuote>
     </div>
   )

@@ -1,20 +1,25 @@
 import Image from 'next/image'
 import React from 'react'
 import { galaxyOnClick } from '../../../lib/galaxy/galaxy'
-import ClickHouseCloud from '../../icons/ClickHouseCloud'
 import LinkWithArrow from '../../LinkWithArrow'
 import { NavigationLink } from '../parts'
 
 export default function NavigationSubNavProducts() {
   return (
     <>
-      <ul className='px-4 md-mid:grid md-mid:grid-cols-5 md-mid:grid-rows-3 md-mid:py-4'>
-        <li className='col-span-3 row-span-full flex items-center'>
+      <ul className='px-4 md-mid:py-4'>
+        <li className='flex items-center'>
           <NavigationLink
             href='/cloud'
             onClick={() => galaxyOnClick('topNav.productMenu.cloudSelect')}
             className='group/chCloud !flex w-full items-center gap-4'>
-            <ClickHouseCloud className='flex-grow-1 h-auto w-5 flex-shrink-0 stroke-[4] text-primary-300 md-mid:w-auto md-mid:stroke-[1.75]' />
+            <Image
+              src='/images/nav/icon-clickhouse-cloud.svg'
+              alt='ClickHouse Cloud'
+              width={24}
+              height={24}
+              className='flex-grow-1 flex-shrink-0'
+            />
             <span>
               ClickHouse Cloud
               <div className='text-xs text-slate-300 group-hover/chCloud:text-white'>
@@ -25,7 +30,7 @@ export default function NavigationSubNavProducts() {
             </span>
           </NavigationLink>
         </li>
-        <li className='col-span-2'>
+        <li>
           <NavigationLink
             href='/clickhouse'
             onClick={() => galaxyOnClick('topNav.productMenu.openSourceSelect')}
@@ -40,7 +45,7 @@ export default function NavigationSubNavProducts() {
             <span>ClickHouse</span>
           </NavigationLink>
         </li>
-        <li className='col-span-2'>
+        <li>
           <NavigationLink
             href='https://clickhouse.com/docs/en/operations/utilities/clickhouse-local'
             onClick={() => galaxyOnClick('topNav.productMenu.localSelect')}
@@ -55,7 +60,7 @@ export default function NavigationSubNavProducts() {
             <span>ClickHouse Local</span>
           </NavigationLink>
         </li>
-        <li className='col-span-2'>
+        <li>
           <NavigationLink
             href='https://github.com/chdb-io/chdb'
             onClick={() => galaxyOnClick('topNav.productMenu.chdbSelect')}

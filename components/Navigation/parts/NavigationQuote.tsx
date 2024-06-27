@@ -1,25 +1,58 @@
+import Image, { ImageProps } from 'next/image'
 import { LinkProps } from 'next/link'
 import React from 'react'
 import LinkWithArrow from '../../LinkWithArrow'
+import Markdown from '../../Markdown'
 
 interface NavigationQuoteLinkProps extends LinkProps {
   text: string
 }
 
-export interface NavigationQuoteProps extends React.HTMLProps<HTMLDivElement> {
-  children: React.ReactNode
-  author?: string
-  jobTitle?: string
+interface NavigationQuoteBaseProps extends React.HTMLProps<HTMLDivElement> {
+  logo?: string | ImageProps | typeof Image
   link?: NavigationQuoteLinkProps
 }
 
+interface NavigationQuoteWithQuote extends NavigationQuoteBaseProps {
+  children?: React.ReactNode
+  quote: string
+}
+
+interface NavigationQuoteWithChildren extends NavigationQuoteBaseProps {
+  children: React.ReactNode
+  quote?: string
+}
+
+export type NavigationQuoteProps =
+  | NavigationQuoteWithQuote
+  | NavigationQuoteWithChildren
+
 export default function NavigationQuote({
   children,
-  author,
-  jobTitle,
+  quote,
+  logo,
   link,
   ...props
 }: NavigationQuoteProps) {
+  const renderLogo = (logo: NavigationQuoteProps['logo']) => {
+    switch (typeof logo) {
+      case 'string':
+        return (
+          <Image
+            src={logo}
+            width={38}
+            height={38}
+            alt='Quote logo'
+            className='h-[38px] w-full object-scale-down object-left'
+          />
+        )
+      case 'object':
+        return <Image {...logo} />
+      default:
+        return <>{logo}</>
+    }
+  }
+
   return (
     <div {...props}>
       <div className='relative flex min-h-full flex-col'>
@@ -27,16 +60,14 @@ export default function NavigationQuote({
           className={`${
             link ? 'rounded-t-md' : 'rounded-md'
           } flex flex-1 flex-col justify-between bg-white px-4 py-3`}>
-          <div className='mb-4 text-wrap text-sm font-bold text-slate-900'>
+          <div className='mb-4 text-wrap text-sm font-semibold text-slate-900'>
+            {!!quote && <Markdown encloseByDiv={false}>{quote}</Markdown>}
             {children}
           </div>
           <footer className='flex items-center gap-4'>
-            {(!!author || !!jobTitle) && (
+            {logo && (
               <span className='flex flex-1 flex-col text-xs text-neutral-500'>
-                {!!author && <strong className='font-bold'>{author}</strong>}
-                {!!jobTitle && (
-                  <cite className='font-normal italic'>{jobTitle}</cite>
-                )}
+                {renderLogo(logo)}
               </span>
             )}
             <span className='flex aspect-square w-[38px] flex-shrink-0 flex-grow-0 items-center justify-center bg-slate-950 text-primary-300'>

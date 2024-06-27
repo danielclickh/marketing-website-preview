@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react'
+import { useResizeListener } from 'primereact/hooks'
+import React, { useEffect, useRef, useState } from 'react'
 import useClickOutside from '../../../hooks/useClickOutside'
 import NavigationChevron from './NavigationChevron'
 import NavigationLink, { NavigationLinkProps } from './NavigationLink'
@@ -55,6 +56,7 @@ export default function NavigationItem({
   const hasChildren = !!children
   const itemRef = useRef<null | HTMLDivElement>(null)
   const linkRef = useRef<null | HTMLAnchorElement>(null)
+  const childrenRef = useRef<null | HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState<boolean>(open)
 
   const onClickInside = (event: React.MouseEvent) => {
@@ -77,6 +79,28 @@ export default function NavigationItem({
 
   const { className: linkClassName, ...linkProps } =
     link || ({ href } as NavigationItemLinkProps['link'])
+
+  useEffect(() => {
+    const resizeHandler = () => {
+      if (childrenRef.current && isOpen) {
+        childrenRef.current.style.left = ''
+
+        const rect = childrenRef.current?.getBoundingClientRect()
+
+        if (rect.right > window.innerWidth) {
+          childrenRef.current.style.left = `${
+            childrenRef.current.offsetLeft -
+            (rect.right - window.innerWidth + 5)
+          }px`
+        }
+      }
+    }
+
+    window.addEventListener('resize', resizeHandler)
+    if (isOpen) resizeHandler()
+
+    return () => window.removeEventListener('resize', resizeHandler)
+  }, [childrenRef, isOpen])
 
   return (
     <div
@@ -111,12 +135,18 @@ export default function NavigationItem({
       </NavigationLink>
       {hasChildren && (
         <div
-          className={`transition-all md-mid:absolute md-mid:-left-12 md-mid:top-full md-mid:-z-50 md-mid:block md-mid:w-max md-mid:min-w-60 md-mid:origin-[top_center] md-mid:whitespace-nowrap md-mid:pt-6  ${
+          ref={childrenRef}
+          className={`md-mid:absolute md-mid:-left-12 md-mid:top-full md-mid:-z-50 md-mid:block md-mid:w-max md-mid:min-w-60 md-mid:whitespace-nowrap md-mid:pt-6 ${
             isOpen
-              ? 'pointer-events-auto block md-mid:z-10 md-mid:scale-100 md-mid:opacity-100'
-              : 'pointer-events-none hidden md-mid:scale-90 md-mid:opacity-0'
+              ? 'pointer-events-auto block md-mid:z-10'
+              : 'pointer-events-none hidden'
           }`}>
-          <div className='md-mid:rounded-lg md-mid:bg-neutral-750 md-mid:shadow'>
+          <div
+            className={`origin-[top_center] transition-all md-mid:rounded-lg md-mid:bg-neutral-750 md-mid:shadow ${
+              isOpen
+                ? 'md-mid:scale-100 md-mid:opacity-100'
+                : 'md-mid:scale-90 md-mid:opacity-0'
+            }`}>
             {children}
           </div>
         </div>
