@@ -56,9 +56,7 @@ export default function NavigationSubNavResources() {
           <li>
             <NavigationLink
               href='/company/news-events?category=Event'
-              onClick={() =>
-                galaxyOnClick('topNav.resourcesMenu.blogEventsSelect')
-              }
+              onClick={() => galaxyOnClick('topNav.resourcesMenu.eventsSelect')}
               className='block w-full'>
               Events
             </NavigationLink>
@@ -150,7 +148,12 @@ export default function NavigationSubNavResources() {
         </NavigationSubNav>
       </li>
       <li>
-        <NavigationLink href='/support/program' className='block w-full'>
+        <NavigationLink
+          href='/support/program'
+          className='block w-full'
+          onClick={() =>
+            galaxyOnClick('topNav.learnMenu.supportProgramSelect')
+          }>
           Support
         </NavigationLink>
       </li>

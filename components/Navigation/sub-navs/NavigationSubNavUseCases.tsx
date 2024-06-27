@@ -73,9 +73,7 @@ export default function NavigationSubNavUseCases() {
           className='col-span-2'>
           <NavigationLink
             href='/use-cases/business-intelligence'
-            onClick={() =>
-              galaxyOnClick('topNav.useCasesMenu.businessIntelligenceSelect')
-            }
+            onClick={() => galaxyOnClick('topNav.useCasesMenu.bizIntelSelect')}
             className='block w-full'>
             Business intelligence
           </NavigationLink>
