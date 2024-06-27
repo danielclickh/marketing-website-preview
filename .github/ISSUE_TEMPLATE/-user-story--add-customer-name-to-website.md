@@ -18,7 +18,7 @@ There are a few areas where these are added:
 *Content*: Google doc of the blog
 *Design:* Link the design request for the social image here please
 
-## (User stories page)[https://clickhouse.com/user-stories]
+## [User stories page](https://clickhouse.com/user-stories)
 *Title:* Some catchy title in a few words
 *Customer name:* ClickHouse
 *Quote or description*: This is used to describe the asset/user story. If quote, add person and title
