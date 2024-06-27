@@ -13,6 +13,7 @@ There are a few areas where these are added:
 *Use case*: Business intelligence / Logs, events, and traces / Real-time analytics / Machine learning & GenAI - List all that apply
 *Migrations*: PostgreSQL / Elasticsearch etc - List all that apply
 *Vertical*: E-commerce & Retail / Financial services etc - List all that apply
+*Cloud service provider (CSP)*: AWS / GCP / Azure - List all that apply
 
 ## Blog
 *Content*: Google doc of the blog
