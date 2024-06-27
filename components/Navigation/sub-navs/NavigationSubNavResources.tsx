@@ -19,7 +19,7 @@ export default function NavigationSubNavResources() {
       </li>
       <li>
         <NavigationLink
-          href='/blog?category=customer-stories'
+          href='/user-stories'
           onClick={() =>
             galaxyOnClick('topNav.resourcesMenu.blogCustomerStoriesSelect')
           }
