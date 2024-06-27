@@ -155,12 +155,12 @@ export default function Page({
                     </CUIButton>
                   </div>
                   <p className='mt-8 text-sm'>
-                    Read our guide about how to{' '}
+                    Read our guide about{' '}
                     <a
                       target='_blank'
                       className='text-primary-300'
                       href='https://clickhouse.com/docs/en/migrations/rockset?loc=comparions'>
-                      migrate from Rockset to ClickHouse
+                      how to migrate from Rockset to ClickHouse
                     </a>
                   </p>
                 </div>
