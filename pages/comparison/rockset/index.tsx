@@ -129,7 +129,7 @@ export default function Page({
                       </p>
                     </div>
                   </div>
-                  <div className='flex gap-8 pt-2'>
+                  <div className='flex flex-col gap-8 pt-2 md:flex-row'>
                     <CUIButton
                       type='primary'
                       onClick={() => {
@@ -140,8 +140,8 @@ export default function Page({
                     </CUIButton>
 
                     <CUIButton
+                      className='w-full'
                       type='secondary'
-                      className='group w-auto'
                       target='_blank'
                       href='https://clickhouse.cloud/signUp?loc=rockset-comparison-hero'
                       iconRight={
@@ -155,12 +155,12 @@ export default function Page({
                     </CUIButton>
                   </div>
                   <p className='mt-8 text-sm'>
-                    Read our guide on{' '}
+                    Read our guide about how to{' '}
                     <a
                       target='_blank'
                       className='text-primary-300'
                       href='https://clickhouse.com/docs/en/migrations/rockset?loc=comparions'>
-                      migrating from Rockset to ClickHouse
+                      migrate from Rockset to ClickHouse
                     </a>
                   </p>
                 </div>
