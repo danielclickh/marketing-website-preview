@@ -154,6 +154,15 @@ export default function Page({
                       Start a 30-day free trial
                     </CUIButton>
                   </div>
+                  <p className='mt-8 text-sm'>
+                    Read our guide on{' '}
+                    <a
+                      target='_blank'
+                      className='text-primary-300'
+                      href='https://clickhouse.com/docs/en/migrations/rockset?loc=comparions'>
+                      migrating from Rockset to ClickHouse
+                    </a>
+                  </p>
                 </div>
               </div>
               {showForm ? (
