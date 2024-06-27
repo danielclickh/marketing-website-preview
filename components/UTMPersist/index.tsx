@@ -127,7 +127,7 @@ export function appendPagePathsToLink(url: string): string {
 }
 
 // Utility function to retrieve UTMs from localStorage
-function getUTMsFromStorage(): UTMs | null {
+export function getUTMsFromStorage(): UTMs | null {
   const utms = localStorage.getItem('ch-utms')
   if (utms) {
     const { data, timestamp } = JSON.parse(utms)
