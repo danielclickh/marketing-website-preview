@@ -125,19 +125,30 @@ export default function CertificationPage({
               ClickHouse Certification exam to validate your ClickHouse
               expertise.
             </SuiText>
-            <CUIButton
-              type='primary'
-              size='lg'
-              weight='semibold'
-              href='https://buy.stripe.com/14keYf7q55tn2Jy001'
-              linkClass='w-full max-w-[14rem]'
-              onClick={galaxyOnClick(
-                'certificationPage.hero.purchaseCertification'
-              )}
-              target='_blank'
-              className='mt-8 w-full max-w-[150px]'>
-              Purchase now
-            </CUIButton>
+            <div className='mt-8 flex flex-col items-start gap-x-6 gap-y-6 md:flex-row md:items-center md:gap-y-0'>
+              <CUIButton
+                type='primary'
+                size='lg'
+                weight='semibold'
+                href='https://buy.stripe.com/14keYf7q55tn2Jy001'
+                onClick={galaxyOnClick(
+                  'certificationPage.hero.purchaseCertificationBusinessSelect'
+                )}
+                target='_blank'>
+                Purchase as business
+              </CUIButton>
+              <CUIButton
+                type='secondary'
+                size='lg'
+                weight='semibold'
+                href='https://buy.stripe.com/3csbM36m1cVPgAo147'
+                onClick={galaxyOnClick(
+                  'certificationPage.hero.purchaseCertificationPersonalSelect'
+                )}
+                target='_blank'>
+                Purchase as individual
+              </CUIButton>
+            </div>
           </div>
 
           {/* Form column */}
