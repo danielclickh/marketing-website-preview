@@ -10,6 +10,7 @@ assignees: clickhouse-adrianfraguela
 There are a few areas where these are added:
 
 ## Metadata
+*Due date:* When do you want this live?
 *Use case*: Business intelligence / Logs, events, and traces / Real-time analytics / Machine learning & GenAI - List all that apply
 *Migrations*: PostgreSQL / Elasticsearch etc - List all that apply
 *Vertical*: E-commerce & Retail / Financial services etc - List all that apply
@@ -17,7 +18,7 @@ There are a few areas where these are added:
 
 ## Blog
 *Content*: Google doc of the blog
-*Design:* Link the design request for the social image here please
+*Design:* Please create the Canva image [here](https://www.canva.com/design/DAGICgtEVKA/edit?utm_content=DAGICgtEVKA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ## [User stories page](https://clickhouse.com/user-stories)
 *Title:* Some catchy title in a few words
