@@ -8,25 +8,31 @@ const SUBNAV_CLOSE_DELAY = 250
 
 export default function NavigationSubNavResources() {
   const [activeSubNav, setActiveSubNav] = useState<null | string>(null)
-  const [closeTimeout, setCloseTimeout] = useState<null | number>(null)
+  const [changeTimeout, setChangeTimeout] = useState<null | number>(null)
 
   const isSubNavActive = (name: string) => activeSubNav === name
 
   const clearTimeout = () => {
-    if (closeTimeout !== null) {
-      window.clearTimeout(closeTimeout)
-      setCloseTimeout(null)
+    if (changeTimeout !== null) {
+      window.clearTimeout(changeTimeout)
+      setChangeTimeout(null)
     }
   }
 
   const openSubNav = (key: string) => {
-    clearTimeout()
-    setActiveSubNav(key)
+    if (activeSubNav) {
+      clearTimeout()
+      setChangeTimeout(
+        window.setTimeout(() => setActiveSubNav(key), SUBNAV_CLOSE_DELAY)
+      )
+    } else {
+      setActiveSubNav(key)
+    }
   }
 
   const closeSubNav = () => {
     clearTimeout()
-    setCloseTimeout(
+    setChangeTimeout(
       window.setTimeout(() => setActiveSubNav(null), SUBNAV_CLOSE_DELAY)
     )
   }
