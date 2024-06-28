@@ -4,12 +4,36 @@ import { NavigationLink } from '../parts'
 import NavigationChevron from '../parts/NavigationChevron'
 import NavigationSubNav from '../parts/NavigationSubNav'
 
+const SUBNAV_CLOSE_DELAY = 250
+
 export default function NavigationSubNavResources() {
   const [activeSubNav, setActiveSubNav] = useState<null | string>(null)
+  const [closeTimeout, setCloseTimeout] = useState<null | number>(null)
+
   const isSubNavActive = (name: string) => activeSubNav === name
+
+  const clearTimeout = () => {
+    if (closeTimeout !== null) {
+      window.clearTimeout(closeTimeout)
+      setCloseTimeout(null)
+    }
+  }
+
+  const openSubNav = (key: string) => {
+    clearTimeout()
+    setActiveSubNav(key)
+  }
+
+  const closeSubNav = () => {
+    clearTimeout()
+    setCloseTimeout(
+      window.setTimeout(() => setActiveSubNav(null), SUBNAV_CLOSE_DELAY)
+    )
+  }
+
   return (
-    <ul className='relative px-4 md-mid:py-4'>
-      <li>
+    <ul onMouseLeave={closeSubNav} className='relative px-4 md-mid:py-4'>
+      <li onMouseEnter={closeSubNav}>
         <NavigationLink
           href='/blog'
           onClick={() => galaxyOnClick('topNav.resourcesMenu.blogSelect')}
@@ -17,7 +41,7 @@ export default function NavigationSubNavResources() {
           Blog
         </NavigationLink>
       </li>
-      <li>
+      <li onMouseEnter={closeSubNav}>
         <NavigationLink
           href='/user-stories'
           onClick={() =>
@@ -29,10 +53,7 @@ export default function NavigationSubNavResources() {
       </li>
       <li
         onMouseEnter={() => {
-          setActiveSubNav('news-and-events')
-        }}
-        onMouseLeave={() => {
-          setActiveSubNav(null)
+          openSubNav('news-and-events')
         }}>
         <NavigationLink
           onClick={() => {
@@ -75,10 +96,7 @@ export default function NavigationSubNavResources() {
       </li>
       <li
         onMouseEnter={() => {
-          setActiveSubNav('learning')
-        }}
-        onMouseLeave={() => {
-          setActiveSubNav(null)
+          openSubNav('learning')
         }}>
         <NavigationLink
           onClick={() => {
@@ -147,7 +165,7 @@ export default function NavigationSubNavResources() {
           </li>
         </NavigationSubNav>
       </li>
-      <li>
+      <li onMouseEnter={closeSubNav}>
         <NavigationLink
           href='/support/program'
           className='block w-full'
