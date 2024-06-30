@@ -83,7 +83,7 @@ const nextConfig = {
       {
         source: '/slack',
         destination:
-          'https://join.slack.com/t/clickhousedb/shared_invite/zt-2jcki8m07-jE7W4J9xSppltr88CAswGg',
+          'https://join.slack.com/t/clickhousedb/shared_invite/zt-2lvb97dus-v9uBEX8_YNYNaM4Gwapuuw',
         permanent: true
       },
       {
