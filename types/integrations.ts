@@ -1,4 +1,5 @@
 import { StrapiImageType } from '../lib/api/strapi/types'
+import { CommonProps } from './homepage'
 
 export interface Integration {
   // Used in /integrations/index.ts
@@ -24,8 +25,14 @@ export interface Integration {
 }
 
 export interface IntegrationGroup {
+  key: string
   label: string
-  description?: string
+  description?: null | string
   slug: string
   integrations: Array<Integration>
+}
+
+export interface IntegrationsPageProps extends CommonProps {
+  title: string
+  integrationGroups: Array<IntegrationGroup>
 }

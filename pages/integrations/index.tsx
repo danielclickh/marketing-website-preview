@@ -1,5 +1,4 @@
 import type { InferGetStaticPropsType } from 'next'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import CategorySelector from '../../components/CategorySelector'
@@ -10,69 +9,66 @@ import { SuiSearchField, SuiTitle } from '../../components/sui'
 import { fetchAll } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
-import { CommonProps } from '../../types/homepage'
-import { Integration, IntegrationGroup } from '../../types/integrations'
+import { slugify } from '../../lib/utils/strings'
+import {
+  Integration,
+  IntegrationGroup,
+  IntegrationsPageProps
+} from '../../types/integrations'
 
-interface IntegrationsPageProps extends CommonProps {
-  title: string
-  integrationGroups: Array<IntegrationGroup>
-}
+const categoryContentMap: Array<
+  Pick<IntegrationGroup, 'key' | 'label' | 'description' | 'slug'>
+> = [
+  {
+    key: 'CLICKPIPES',
+    label: 'ClickPipes',
+    description:
+      'ClickPipes is an integration engine that makes ingesting massive volumes of data from a diverse set of sources as simple as clicking a few buttons.',
+    slug: 'clickpipes'
+  },
+  {
+    key: 'DATA_INGESTION',
+    label: 'Data ingestion',
+    description:
+      'Streamline your data pipelines with ClickHouse! Seamless integrations ensure efficient ingestion, optimizing real-time analytics.',
+    slug: 'data-ingestion'
+  },
+  {
+    key: 'DATA_VISUALIZATION',
+    label: 'Data visualization',
+    description:
+      'Illuminate your data stories! ClickHouse integrations enhance visualization, making insights more vivid & actionable.',
+    slug: 'data-visualization'
+  },
+  {
+    key: 'DATA_TRANSFORMATION',
+    label: 'Data transformation',
+    description: '',
+    slug: 'data-transformation'
+  },
+  {
+    key: 'SQL_CLIENT',
+    label: 'SQL client',
+    description:
+      'Harness the power of SQL with ClickHouse! Integrated clients enable swift queries, delivering instant, precise results.',
+    slug: 'sql-client'
+  },
+  {
+    key: 'LANGUAGE_CLIENT',
+    label: 'Language client',
+    description:
+      "Code in your comfort zone! ClickHouse's language client integrations make data access fluent across multiple programming languages.",
+    slug: 'language-client'
+  }
+]
 
 export async function getStaticProps() {
-  const data: Integration[] = await fetchAll('integrations', {
+  const integrations: Integration[] = await fetchAll('integrations', {
     sort: ['name:ASC'],
     populate: ['logo', 'logo_dark']
   })
 
-  // Divide the integrations into groups.
-  // Groups that have no integrations are removed.
-  const integrationGroups: Array<IntegrationGroup> = [
-    {
-      label: 'ClickPipes',
-      description:
-        'ClickPipes is an integration engine that makes ingesting massive volumes of data from a diverse set of sources as simple as clicking a few buttons.',
-      slug: 'clickpipes',
-      integrations: data.filter((item) => item.category === 'CLICKPIPES')
-    },
-    {
-      label: 'Data ingestion',
-      description:
-        'Streamline your data pipelines with ClickHouse! Seamless integrations ensure efficient ingestion, optimizing real-time analytics.',
-      slug: 'data-ingestion',
-      integrations: data.filter((item) => item.category === 'DATA_INGESTION')
-    },
-    {
-      label: 'Data visualization',
-      description:
-        'Illuminate your data stories! ClickHouse integrations enhance visualization, making insights more vivid & actionable.',
-      slug: 'data-visualization',
-      integrations: data.filter(
-        (item) => item.category === 'DATA_VISUALIZATION'
-      )
-    },
-    {
-      label: 'Data transformation',
-      description: '',
-      slug: 'data-transformation',
-      integrations: data.filter(
-        (item) => item.category === 'DATA_TRANSFORMATION'
-      )
-    },
-    {
-      label: 'SQL client',
-      description:
-        'Harness the power of SQL with ClickHouse! Integrated clients enable swift queries, delivering instant, precise results.',
-      slug: 'sql-client',
-      integrations: data.filter((item) => item.category === 'SQL_CLIENT')
-    },
-    {
-      label: 'Language client',
-      description:
-        "Code in your comfort zone! ClickHouse's language client integrations make data access fluent across multiple programming languages.",
-      slug: 'language-client',
-      integrations: data.filter((item) => item.category === 'LANGUAGE_CLIENT')
-    }
-  ].filter((group) => group.integrations.length)
+  const integrationGroups = groupIntegrations(integrations)
 
   const props: IntegrationsPageProps = {
     title: 'Integrations',
@@ -244,7 +240,7 @@ export default function IntegrationsPage({
         })}
 
         {!groups.length && (
-          <p className='mt-12 mb-20 w-full text-center'>
+          <p className='mb-20 mt-12 w-full text-center'>
             {search ? `No search results for "${search}"` : 'No results'}
             {category && getCategory(category)
               ? ` in ${getCategory(category)?.label}`
@@ -261,4 +257,41 @@ export default function IntegrationsPage({
       </div>
     </Layout>
   )
+}
+
+function groupIntegrations(
+  integrations: Array<Integration>
+): Array<IntegrationGroup> {
+  let groups: Array<IntegrationGroup> = []
+
+  // Merge the content map values
+  categoryContentMap.forEach((category) => {
+    groups.push({
+      ...category,
+      integrations: integrations.filter(
+        (integration) => integration.category === category.key
+      )
+    })
+  })
+
+  // Create groups that don't exist already
+  integrations.forEach((integration) => {
+    const group = groups.find((row) => row.key === integration.category)
+    if (!group) {
+      let label = integration.category.replaceAll('_', ' ').toLocaleLowerCase()
+
+      // Uppercase first char
+      label = label.charAt(0).toLocaleUpperCase() + label.slice(1)
+
+      groups.push({
+        key: integration.category,
+        label: label,
+        slug: slugify(integration.category),
+        integrations: [integration]
+      })
+    }
+  })
+
+  // Groups that have no integrations are removed.
+  return groups.filter((group) => group.integrations.length)
 }
