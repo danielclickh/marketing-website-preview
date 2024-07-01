@@ -103,8 +103,9 @@ export default function HomepageHeroAlt({
 
             <div className='mt-8 flex items-center rounded-[4px] border border-neutral-950 border-opacity-5 bg-neutral-950/5'>
               <Link
-                href='/company/contact?loc=homepage-hero-rs'
-                className='group flex flex-col items-center md:flex-row'>
+                href='/comparison/rockset?loc=homepage-hero-rs'
+                className='group flex flex-col items-center md:flex-row'
+                onClick={galaxyOnClick(`hero.rocksetMessage.ctaSelect`)}>
                 <div className='flex h-[76px] items-center md:h-[104px] md:w-[152px] md:bg-neutral-950/5'>
                   <Image
                     src='/images/rockset-logo.svg'
