@@ -59,6 +59,12 @@ const categoryContentMap: Array<
     description:
       "Code in your comfort zone! ClickHouse's language client integrations make data access fluent across multiple programming languages.",
     slug: 'language-client'
+  },
+  {
+    key: 'AI_ML',
+    label: 'AI/ML',
+    description: '',
+    slug: 'ai-ml'
   }
 ]
 
