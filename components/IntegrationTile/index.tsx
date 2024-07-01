@@ -44,7 +44,6 @@ export default function IntegrationTile({
               {...(logo_dark || logo)}
               sizes='medium'
               alt={name}
-              load='eager'
               className='h-[64px] w-[64px] object-contain'
             />
             <SuiTitle type='h4' className='w-full px-2'>
