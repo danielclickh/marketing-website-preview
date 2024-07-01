@@ -42,7 +42,10 @@ export default function IntegrationTile({
           <div className='flex aspect-square flex-col items-center justify-center gap-3 rounded-lg text-center'>
             <StrapiImage
               {...(logo_dark || logo)}
+              width={64}
+              height={64}
               sizes='medium'
+              loading='eager'
               alt={name}
               className='h-[64px] w-[64px] object-contain'
             />

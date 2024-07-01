@@ -8,6 +8,7 @@ export interface StrapiImageProps extends StrapiImageType {
   sizes?: SizeType
   alt?: string
   className?: string
+  loading?: ImageProps['loading']
 }
 
 export interface NormalImageProps extends ImageProps {
