@@ -25,6 +25,8 @@ export default function IntegrationTile({
   | 'openInNewWindow'
   | 'docsLink'
 >) {
+  const tileLogo = logo_dark || logo
+
   return (
     <Link
       href={openInNewWindow ? docsLink : `/integrations/${slug}`}
@@ -40,9 +42,9 @@ export default function IntegrationTile({
             <ExternalLink className='absolute right-3 top-3 text-primary-300' />
           )}
           <div className='flex aspect-square flex-col items-center justify-center gap-3 rounded-lg text-center'>
-            {(logo_dark || logo) && (
+            {!!tileLogo && (
               <StrapiImage
-                {...(logo_dark || logo)}
+                {...tileLogo}
                 width={64}
                 height={64}
                 sizes='medium'

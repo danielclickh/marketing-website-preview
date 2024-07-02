@@ -129,6 +129,7 @@ export default function IntegrationPage({
   integration,
   similar
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const integrationLogo = integration.logo_dark || integration.logo
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='bg-grid py-12 md:py-20'>
@@ -150,10 +151,10 @@ export default function IntegrationPage({
             <span>Back to integrations</span>
           </Link>
           <div className='my-5 flex items-center gap-6'>
-            {(!!integration.logo_dark || !!integration.logo) && (
+            {!!integrationLogo && (
               <div className='flex h-20 w-20 flex-shrink-0 items-center justify-center'>
                 <StrapiImage
-                  {...(integration.logo_dark || integration.logo)}
+                  {...integrationLogo}
                   sizes='medium'
                   alt={integration.name}
                   className='aspect-square h-auto w-full object-contain'
