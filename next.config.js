@@ -416,6 +416,18 @@ const nextConfig = {
         source: '/cloud/azure-waitlist',
         destination: '/cloud',
         permanent: true
+      },
+      {
+        source: '/blog',
+        has: [
+          {
+            type: 'query',
+            key: 'category',
+            value: 'customer-stories'
+          }
+        ],
+        permanent: true,
+        destination: '/blog?category=user-stories'
       }
     ]
   }
