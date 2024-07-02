@@ -5,7 +5,7 @@ export interface Integration {
   // Used in /integrations/index.ts
   name: string
   slug: string
-  logo: StrapiImageType
+  logo: StrapiImageType | null
   logo_dark: StrapiImageType | null
   category: string
   readiness: string | null

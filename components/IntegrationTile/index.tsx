@@ -40,15 +40,17 @@ export default function IntegrationTile({
             <ExternalLink className='absolute right-3 top-3 text-primary-300' />
           )}
           <div className='flex aspect-square flex-col items-center justify-center gap-3 rounded-lg text-center'>
-            <StrapiImage
-              {...(logo_dark || logo)}
-              width={64}
-              height={64}
-              sizes='medium'
-              loading='eager'
-              alt={name}
-              className='h-[64px] w-[64px] object-contain'
-            />
+            {(logo_dark || logo) && (
+              <StrapiImage
+                {...(logo_dark || logo)}
+                width={64}
+                height={64}
+                sizes='medium'
+                loading='eager'
+                alt={name}
+                className='h-[64px] w-[64px] object-contain'
+              />
+            )}
             <SuiTitle type='h4' className='w-full px-2'>
               {name}
             </SuiTitle>
