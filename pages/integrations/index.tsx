@@ -138,15 +138,8 @@ export default function IntegrationsPage({
     })
   })()
 
-  const categoryList = [
-    {
-      text: 'All',
-      selected: !category,
-      onClick() {
-        setCategory(null)
-      }
-    },
-    ...integrationGroups.map((group) => {
+  const categoryList = integrationGroups
+    .map((group) => {
       return {
         text: group.label,
         selected: group.slug === category,
@@ -156,7 +149,9 @@ export default function IntegrationsPage({
         }
       }
     })
-  ]
+    .sort((a, b) => {
+      return a.text.localeCompare(b.text)
+    })
 
   const getCategory = (categorySlug: string): IntegrationGroup | undefined => {
     return integrationGroups.find((group) => group.slug === categorySlug)
@@ -225,7 +220,18 @@ export default function IntegrationsPage({
             onChange={searchChange}
           />
           <div className='mx-auto max-w-3xl'>
-            <CategorySelector options={categoryList} />
+            <CategorySelector
+              options={[
+                {
+                  text: 'All',
+                  selected: !category,
+                  onClick() {
+                    setCategory(null)
+                  }
+                },
+                ...categoryList
+              ]}
+            />
           </div>
         </div>
 
