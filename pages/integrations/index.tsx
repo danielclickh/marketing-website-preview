@@ -224,7 +224,9 @@ export default function IntegrationsPage({
             value={search || ''}
             onChange={searchChange}
           />
-          <CategorySelector options={categoryList} />
+          <div className='mx-auto max-w-3xl'>
+            <CategorySelector options={categoryList} />
+          </div>
         </div>
 
         {groups.map((group) => {
