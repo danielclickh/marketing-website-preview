@@ -193,7 +193,7 @@
 					{
 						"id": 4,
 						"name": "Customer stories",
-						"href": "/blog?category=customer-stories",
+						"href": "/blog?category=user-stories",
 						"galaxyEvent": "topNav.resourcesMenu.blogCustomerStoriesSelect",
 						"target": "_self"
 					},
