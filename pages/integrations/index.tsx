@@ -71,7 +71,8 @@ const categoryContentMap: Array<
 export async function getStaticProps() {
   const integrations: Integration[] = await fetchAll('integrations', {
     sort: ['name:ASC'],
-    populate: ['logo', 'logo_dark']
+    populate: ['logo', 'logo_dark'],
+    publicationState: 'preview'
   })
 
   const integrationGroups = groupIntegrations(integrations)

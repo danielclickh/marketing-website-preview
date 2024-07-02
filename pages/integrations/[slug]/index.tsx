@@ -59,7 +59,8 @@ export async function getStaticPaths() {
           }
         ]
       },
-      fields: ['slug']
+      fields: ['slug'],
+      publicationState: 'preview'
     }),
     fallback: NOT_FOUND_FALLBACK
   }
@@ -75,7 +76,8 @@ export const getStaticProps: GetStaticProps<IntegrationPageProps> =
         }
       },
       populate: ['logo', 'logo_dark'],
-      pagination: { limit: 1 }
+      pagination: { limit: 1 },
+      publicationState: 'preview'
     })
     if (!data?.[0]) {
       return {
@@ -93,7 +95,8 @@ export const getStaticProps: GetStaticProps<IntegrationPageProps> =
       sort: ['name:ASC'],
       populate: ['logo', 'logo_dark'],
       fields: ['name', 'slug', 'category', 'website', 'readiness'],
-      pagination: { limit: 5 }
+      pagination: { limit: 5 },
+      publicationState: 'preview'
     })
 
     const integration = data[0]
@@ -147,14 +150,16 @@ export default function IntegrationPage({
             <span>Back to integrations</span>
           </Link>
           <div className='my-5 flex items-center gap-6'>
-            <div className='flex h-20 w-20 flex-shrink-0 items-center justify-center'>
-              <StrapiImage
-                {...(integration.logo_dark || integration.logo)}
-                sizes='medium'
-                alt={integration.name}
-                className='aspect-square h-auto w-full object-contain'
-              />
-            </div>
+            {(!!integration.logo_dark || !!integration.logo) && (
+              <div className='flex h-20 w-20 flex-shrink-0 items-center justify-center'>
+                <StrapiImage
+                  {...(integration.logo_dark || integration.logo)}
+                  sizes='medium'
+                  alt={integration.name}
+                  className='aspect-square h-auto w-full object-contain'
+                />
+              </div>
+            )}
             <SuiTitle type='h1'>{integration.name}</SuiTitle>
           </div>
           <div className='flex flex-wrap gap-2'>
