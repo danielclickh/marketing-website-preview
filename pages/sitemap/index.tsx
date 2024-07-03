@@ -150,7 +150,7 @@ function Sitemap({
   comparisons,
   menu,
   lexicons,
-  integrations
+  integrations,
   demos
 }: SitemapProps) {
   const resourcesMenu = menuItems.find((obj) => obj.id === 2)?.menuItems
@@ -323,7 +323,7 @@ function Sitemap({
                   Integrations
                 </Link>
               </h2>
-              <ul className='mb-2 gap-y-0 gap-x-10 xl:columns-4'>
+              <ul className='mb-2 gap-x-10 gap-y-0 xl:columns-4'>
                 {integrations.map((integration) => {
                   return (
                     <li key={integration.slug} className='pb-2'>
