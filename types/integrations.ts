@@ -2,6 +2,8 @@ import { StrapiImageType } from '../lib/api/strapi/types'
 import { CommonProps } from './homepage'
 
 export interface Integration {
+  id: number
+
   // Used in /integrations/index.ts
   name: string
   slug: string

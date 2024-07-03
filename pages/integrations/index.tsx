@@ -290,28 +290,30 @@ function groupIntegrations(
   categoryContentMap.forEach((category) => {
     groups.push({
       ...category,
-      integrations: integrations.filter(
-        (integration) => integration.category === category.key
-      )
+      integrations: []
     })
   })
 
   // Create groups that don't exist already
   integrations.forEach((integration) => {
-    const group = groups.find((row) => row.key === integration.category)
-    if (!group) {
-      let label = integration.category.replaceAll('_', ' ').toLocaleLowerCase()
+    let group = groups.find((row) => row.key === integration.category)
 
-      // Uppercase first char
+    if (!group) {
+      // Create a label from the category key
+      let label = integration.category.replaceAll('_', ' ').toLocaleLowerCase()
       label = label.charAt(0).toLocaleUpperCase() + label.slice(1)
 
-      groups.push({
+      group = {
         key: integration.category,
         label: label,
         slug: slugify(integration.category),
-        integrations: [integration]
-      })
+        integrations: []
+      }
+
+      groups.push(group)
     }
+
+    group.integrations.push(integration)
   })
 
   // Groups that have no integrations are removed.

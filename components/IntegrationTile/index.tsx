@@ -44,29 +44,15 @@ export default function IntegrationTile({
           )}
           <div className='flex aspect-square flex-col items-center justify-center gap-3 rounded-lg text-center'>
             {!!tileLogo && (
-              <>
-                {tileLogo.ext === '.svg' ? (
-                  <StrapiSvg
-                    {...tileLogo}
-                    width={64}
-                    height={64}
-                    sizes='medium'
-                    loading='eager'
-                    alt={name}
-                    className='h-[64px] w-[64px] object-contain'
-                  />
-                ) : (
-                  <StrapiImage
-                    {...tileLogo}
-                    width={64}
-                    height={64}
-                    sizes='medium'
-                    loading='eager'
-                    alt={name}
-                    className='h-[64px] w-[64px] object-contain'
-                  />
-                )}
-              </>
+              <StrapiImage
+                {...tileLogo}
+                width={64}
+                height={64}
+                sizes='medium'
+                loading='eager'
+                alt={name}
+                className='h-[64px] w-[64px] object-contain'
+              />
             )}
             <SuiTitle type='h4' className='w-full px-2'>
               {name}
