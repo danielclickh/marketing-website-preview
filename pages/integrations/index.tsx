@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import CategorySelector from '../../components/CategorySelector'
 import GetStartedFree from '../../components/GetStartedFree'
+import IntegrationsClickPipesPromo from '../../components/IntegrationsClickPipesPromo'
 import IntegrationTile from '../../components/IntegrationTile'
 import Layout from '../../components/Layout'
 import { SuiSearchField, SuiTitle } from '../../components/sui'
@@ -208,6 +209,12 @@ export default function IntegrationsPage({
           <p className='mt-6 text-lg'>
             Connect the tools and services that you love with ClickHouse.
           </p>
+        </div>
+      </div>
+
+      <div className='mb-12 bg-grid pb-12'>
+        <div className='mx-auto max-w-7xl'>
+          <IntegrationsClickPipesPromo />
         </div>
       </div>
 

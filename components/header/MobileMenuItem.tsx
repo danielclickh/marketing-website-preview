@@ -3,6 +3,7 @@ import { SuiLink, SuiText } from '../sui'
 import { HeaderLinkItem, HeaderTopNavItem, MenuItem } from './types'
 import styles from './styles.module.scss'
 import Image from 'next/image'
+import { FullyQualifiedEvent } from '../../lib/galaxy/client'
 
 type Props = MenuItem & {
   close: any
@@ -80,6 +81,24 @@ function MobileMenuItem({
                     </div>
                   </SuiLink>
                 ))}
+                {subitem.name === 'Product' && (
+                  <SuiLink
+                    href='/integrations'
+                    size='sm'
+                    color='secondary'
+                    weight='normal'
+                    className='mt-1 text-center hover:no-underline'
+                    onClick={() => {
+                      window.galaxy.track(
+                        'topNav.productMenu.integrationsSelect' as FullyQualifiedEvent
+                      )
+                    }}>
+                    View 100+ integrations{' '}
+                    <span className='inline-block pl-0.5 transition group-hover:translate-x-1/2'>
+                      {'->'}
+                    </span>
+                  </SuiLink>
+                )}
               </div>
             )
           } else if (subitem?.href) {
