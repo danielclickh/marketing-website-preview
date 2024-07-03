@@ -1,380 +1,695 @@
-import { useState } from 'react'
-import { SuiPanel } from '../../components/sui'
-import { UseCase } from '../../components/use_case'
-import { findAll, findOne } from '../../lib/api/strapi'
-
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import { UseCasesData } from '../../types/useCases'
+import { CirclePlay, CircleXIcon } from 'lucide-react'
 import { GetStaticProps } from 'next'
-import Layout from '../../components/Layout'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
 import Image from 'next/image'
-import { CUIButton } from '../../components/ClickUI'
-import HRSeparator from '../../components/HRSeparator'
-import { CheckIcon } from '@heroicons/react/outline'
-import GiveItAGo from '../../components/GiveItAGo'
-import BlogPost from '../../components/BlogPostList/BlogPost'
-import HomepageCustomerVideos from '../../components/HomepageVideos'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/router'
+import { PrimeReactProvider } from 'primereact/api'
+import { MultiSelect } from 'primereact/multiselect'
+import { useEffect, useState } from 'react'
+import FollowUs from '../../components/FollowUs'
+import Layout from '../../components/Layout'
+import { SuiSearchField, SuiTitle } from '../../components/sui'
+import { findOne } from '../../lib/api/strapi'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { Tailwind } from '../../lib/utils/primereact'
+import {
+  UseCaseCategory,
+  UseCaseMigration,
+  UseCaseVertical,
+  UserStoriesPage
+} from '../../types/userStories'
+import ClearFilterButton from '../../components/UserStories/ClearFilterButton'
 
-export const getStaticProps: GetStaticProps<UseCasesData> =
+interface MousePosition {
+  x: number
+  y: number
+}
+
+export const getStaticProps: GetStaticProps<UserStoriesPage> =
   async function getStaticProps() {
     const result = await findOne('use-case', {
-      populate: [
-        'useCaseItems',
-        'useCaseItems.darkLogoPng',
-        'useCaseItems.lightLogoPng',
-        'useCaseItems.bullets',
-        'useCaseItems.ctaButton',
-        'seo',
-        'seo.image'
-      ]
+      populate: ['useCaseItems', 'useCaseItems.darkLogoPng', 'seo', 'seo.image']
     })
-    result.spotlight = (result.useCaseItems ?? []).shift()
     result.seo.path = '/user-stories'
-    const blogsParams = {
-      filters: {
-        category: {
-          $eqi: 'customer stories'
+
+    const userStoriesData = await fetch(
+      `${process.env.STRAPI_API_URL}/api/user-stories?populate=User.logo,useCase,migrations,vertical&sort[0]=createdAt:desc`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_KEY}`
         }
-      },
-      sort: ['date:DESC', 'publishedAt:DESC'],
-      populate: ['thumbnailPng', 'author'],
-      fields: ['category', 'title', 'slug'],
-      pagination: { limit: 3 }
-    }
-    const { data: customerStories } = await findAll('blog-posts', blogsParams)
+      }
+    )
+
+    const userStoriesPayload = await userStoriesData.json()
+
+    const userStories = userStoriesPayload.data
+
+    //get use cases
+    const useCases = await fetch(
+      `${process.env.STRAPI_API_URL}/api/user-stories-use-cases?sort=Name`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_KEY}`
+        }
+      }
+    )
+    const useCasesPayload = await useCases.json()
+    const UseCaseCategories: UseCaseCategory[] = []
+
+    useCasesPayload.data.forEach((item: any) => {
+      // Check if the category is used in any user story
+      const isUsed = userStories.some(
+        (story: { attributes: { useCase: { data: { id: number }[] } } }) =>
+          story.attributes.useCase.data.some(
+            (useCase) => useCase.id === item.id
+          )
+      )
+      if (isUsed) {
+        UseCaseCategories.push({
+          code: item.id,
+          name: item.attributes.Name
+        })
+      }
+    })
+
+    //get migrations
+    const migrations = await fetch(
+      `${process.env.STRAPI_API_URL}/api/user-stories-migrations?sort=Name`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_KEY}`
+        }
+      }
+    )
+    const migrationsPayload = await migrations.json()
+    const UseCaseMigrations: UseCaseMigration[] = []
+
+    migrationsPayload.data.forEach(
+      (item: { id: number; attributes: { Name: string } }) => {
+        // Check if the migration is used in any user story
+        const isUsed = userStories.some(
+          (story: { attributes: { migrations: { data: { id: number }[] } } }) =>
+            story.attributes.migrations.data.some(
+              (migration: { id: number }) => migration.id === item.id
+            )
+        )
+        if (isUsed) {
+          UseCaseMigrations.push({
+            code: item.id,
+            name: item.attributes.Name
+          })
+        }
+      }
+    )
+
+    //get verticals
+    const verticals = await fetch(
+      `${process.env.STRAPI_API_URL}/api/user-stories-verticals?sort=Name`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_KEY}`
+        }
+      }
+    )
+    const verticalsPayload = await verticals.json()
+    const UseCaseVerticals: UseCaseVertical[] = []
+
+    verticalsPayload.data.forEach(
+      (item: { id: number; attributes: { Name: string } }) => {
+        // Check if the vertical is used in any user story
+        const isUsed = userStories.some(
+          (story: { attributes: { vertical: { data: { id: number }[] } } }) =>
+            story.attributes.vertical.data.some(
+              (vertical: { id: number }) => vertical.id === item.id
+            )
+        )
+        if (isUsed) {
+          UseCaseVerticals.push({
+            code: item.id,
+            name: item.attributes.Name
+          })
+        }
+      }
+    )
+
     const commonProps = await getCommonProps()
     return {
       props: {
         ...result,
-        customerStories,
+        userStories,
+        UseCaseCategories,
+        UseCaseMigrations,
+        UseCaseVerticals,
         ...commonProps
       }
     }
   }
 
-type TestimonialsJson = {
-  id: number
-  logo: string
-  category: string
-  text: string
-  customer: string
-  width: number
-  height: number
-}
-const testimonialsJson: Array<TestimonialsJson> = [
-  {
-    id: 101,
-    logo: '/images/sony.svg',
-    category: 'Analytics',
-    text: 'At Sony Entertainment Television, we ingest tens of millions of CDN records into ClickHouse Cloud and run millions of queries against them daily. This allows our operations team to monitor the delivery of our content in real-time, and analyze/investigate potential issues the moment they arise. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.',
-    customer: 'Sony',
-    width: 80,
-    height: 17
-  },
-  {
-    id: 1,
-    logo: '/images/use-cases/posthog-logo.svg',
-    category: 'Analytics',
-    text: 'ClickHouse Cloud has made it absolutely effortless to use ClickHouse for data analysis while not having to spend any time managing cluster shards/replicas or worrying about provisioning on the storage or cpu side.',
-    customer: 'Posthog',
-    width: 155,
-    height: 30
-  },
-  {
-    id: 2,
-    logo: '/images/use-cases/instabug.svg',
-    category: 'Observability',
-    text: 'At Instabug, we rely on ClickHouse to help power our real-time observability solutions that developers rely on. ClickHouse Cloud reduced our operational overhead and cost of managing ClickHouse ourselves allowing us to focus on our users.',
-    customer: 'Instabug',
-    width: 189,
-    height: 33
-  },
-  {
-    id: 3,
-    logo: '/images/use-cases/rokt.svg',
-    category: 'Analytics',
-    text: 'Rokt has been an eager partner of ClickHouse as we modernize our analytics stack. By offloading operations to the experts our developers are focused on delivering the best experience possible while the business scales. We we are thrilled to see the path ClickHouse is forging.',
-    customer: 'Rokt',
-    width: 115,
-    height: 32
-  },
-  {
-    id: 4,
-    logo: '/images/use-cases/darwinium-logo.png',
-    category: 'Security and Fraud',
-    text: 'Darwinium chose ClickHouse as its database engine of choice because it is fast, flexible, rich in capabilities and cloud-ready. It provides the functionality we need to support real time user journey orchestration for fraud and security teams in global digital businesses.',
-    customer: 'Darwinium',
-    width: 180,
-    height: 34
-  },
-  {
-    id: 5,
-    logo: '/images/use-cases/synq-logo.png',
-    category: 'ClickHouse Cloud',
-    text: 'At Synq we have very high demands of both ingestion and query performance. After a thorough vendor selection process, only ClickHouse Cloud was able to meet those requirements with ease, while providing the powerful preprocessing logic our solution requires.',
-    customer: 'Synq',
-    width: 106,
-    height: 40
-  },
-  {
-    id: 6,
-    logo: '/images/use-cases/adevinta-logo.png',
-    category: 'ClickHouse Cloud',
-    text: "Amazing to have been one of the first users of ClickHouse Serverless Cloud. It's scalable and blazingly fast ClickHouse in the cloud with simple onboarding and excellent support. Great experience.",
-    customer: 'Adevinta',
-    width: 134,
-    height: 30
-  },
-
-  {
-    id: 7,
-    logo: '/images/use-cases/minted-logo.png',
-    category: 'ClickHouse Cloud',
-    text: 'We use ClickHouse Cloud to monitor millions of real-time web performance data points, to ensure we’re getting faster all the time. The platform delivers fast and reliable data management, while also proving to be cost efficient and user-friendly.',
-    customer: 'Minted',
-    width: 123,
-    height: 32
-  },
-  {
-    id: 8,
-    logo: '/images/use-cases/washington-post-logo.svg',
-    category: 'Analytics',
-    text: 'ClickHouse Cloud Private Preview has allowed us to replace a batch analytics pipeline with one that is near-real time and costs less to run without having to manage or scale a ClickHouse cluster ourselves.',
-    customer: 'The Washington Post',
-    width: 206,
-    height: 32
-  },
-  {
-    id: 9,
-    logo: '/images/use-cases/airtory-logo.png',
-    category: 'Analytics',
-    text: 'Airtory needed a fast, scalable and affordable data engine to power our dynamic creatives, and ClickHouse was the perfect solution for this. The ease of the ClickHouse Cloud helped us ramp up quickly and offer powerful insights for our clients into their marketing campaigns giving them a great ROI.',
-    customer: 'Airtory',
-    width: 85,
-    height: 32
-  },
-
-  {
-    id: 10,
-    logo: '/images/use-cases/calibre-logo.svg',
-    category: 'Analytics',
-    text: 'ClickHouse Cloud gave us the confidence to deploy ClickHouse and infinitely have a scalable serverless analytics database.',
-    customer: 'Calibre',
-    width: 144,
-    height: 32
-  },
-  {
-    id: 11,
-    logo: '/images/use-cases/forefront-logo.png',
-    category: 'ClickHouse Cloud',
-    text: "The team truly delivered on the fully managed ClickHouse product I've been looking for. The platform makes it trivial to spin up and connect to a cluster, and removes all concern around managing underlying infrastructure. I would highly recommend this product.",
-    customer: 'Forefront',
-    width: 221,
-    height: 32
-  }
-]
-
 function CustomerStoriesPage({
-  spotlight,
-  useCaseItems,
   seo,
-  customerStories,
+  userStories,
   headerData,
-  footerData
-}: UseCasesData) {
+  footerData,
+  UseCaseCategories,
+  UseCaseMigrations,
+  UseCaseVerticals
+}: UserStoriesPage) {
   galaxyOnPage('userStoriesPage')
-  const [visibleTestimonials, setVisibleTestimonials] = useState(6)
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
-  const loadMore = () => {
-    setVisibleTestimonials((prevValue) => prevValue + 6)
+  const [mousePosition, setMousePosition] = useState<MousePosition>({
+    x: 0,
+    y: 0
+  })
+  const [hoveredStoryIndex, setHoveredStoryIndex] = useState<number | null>(
+    null
+  )
+
+  const handleMouseMove = (
+    event: React.MouseEvent<HTMLDivElement>,
+    index: number
+  ) => {
+    const boundingRect = event.currentTarget.getBoundingClientRect()
+    setMousePosition({
+      x: event.clientX - boundingRect.left,
+      y: event.clientY - boundingRect.top
+    })
+    setHoveredStoryIndex(index)
   }
+
+  const handleMouseLeave = () => {
+    setHoveredStoryIndex(null)
+  }
+
+  function findByCode<T extends { code: number }>(
+    array: T[],
+    code: number
+  ): T | undefined {
+    return array.find((item) => item.code === code)
+  }
+
+  const orderByDate = searchParams.get('latest')
+    ? searchParams.get('latest') === 'true'
+    : false
+
+  const useCaseParam = searchParams.get('useCase')
+  const migrationParam = searchParams.get('migration')
+  const verticalParam = searchParams.get('vertical')
+  const searchParamInput = searchParams.get('search')
+
+  const clearAllFilters = () => {
+    setSearchQuery('')
+    router.push(
+      {
+        query: null
+      },
+      undefined,
+      { shallow: true }
+    )
+  }
+
+  const toggleOrderByDate = () => {
+    router.push(
+      {
+        query: {
+          ...router.query,
+          latest: !orderByDate
+        }
+      },
+      undefined,
+      { shallow: true }
+    )
+  }
+
+  const sortedUserStories = userStories.slice().sort((a, b) => {
+    // If orderByDate is true, sort only by createdAt
+    if (orderByDate) {
+      const dateA = new Date(a.attributes.createdAt)
+      const dateB = new Date(b.attributes.createdAt)
+      return dateB.getTime() - dateA.getTime() // Descending order by createdAt
+    }
+
+    // First, sort by highlight status
+    if (a.attributes.highlight && !b.attributes.highlight) {
+      return -1
+    } else if (!a.attributes.highlight && b.attributes.highlight) {
+      return 1
+    }
+
+    // If both have the same highlight status, sort by sortOrder
+    const sortOrderA = a.attributes.SortOrder ?? Number.MAX_SAFE_INTEGER
+    const sortOrderB = b.attributes.SortOrder ?? Number.MAX_SAFE_INTEGER
+
+    if (sortOrderA !== sortOrderB) {
+      return sortOrderA - sortOrderB // Ascending order by sortOrder
+    }
+
+    // If both have the same sortOrder, sort by createdAt
+    const dateA = new Date(a.attributes.createdAt)
+    const dateB = new Date(b.attributes.createdAt)
+    return dateB.getTime() - dateA.getTime() // Descending order by createdAt
+  })
+
+  //state to hold user selected values
+  const [selectedUseCases, setSelectedUseCases] = useState<UseCaseCategory[]>(
+    []
+  )
+  const [selectedMigrations, setSelectedMigrations] = useState<
+    UseCaseMigration[]
+  >([])
+  const [selectedVerticals, setSelectedVerticals] = useState<UseCaseVertical[]>(
+    []
+  )
+
+  // Filter userStories based on selected parameters
+  const filteredUserStories = sortedUserStories.filter((story) => {
+    // Filter by Use Case
+    const useCaseCodes = selectedUseCases.map((useCase) => useCase.code)
+    const storyUseCaseCodes = story.attributes.useCase.data.map(
+      (useCase) => useCase.id
+    )
+    const useCaseMatch =
+      useCaseCodes.some((code) => storyUseCaseCodes.includes(code)) ||
+      !useCaseCodes.length
+
+    // Filter by Migration
+    const migrationCodes = selectedMigrations.map((migration) => migration.code)
+    const storyMigrationCodes = story.attributes.migrations.data.map(
+      (migration) => migration.id
+    )
+    const migrationMatch =
+      migrationCodes.some((code) => storyMigrationCodes.includes(code)) ||
+      !migrationCodes.length
+
+    // Filter by Vertical
+    const verticalCodes = selectedVerticals.map((vertical) => vertical.code)
+    const storyVerticalCodes = story.attributes.vertical.data.map(
+      (vertical) => vertical.id
+    )
+    const verticalMatch =
+      verticalCodes.some((code) => storyVerticalCodes.includes(code)) ||
+      !verticalCodes.length
+
+    // Filter by Latest
+    const dateA = new Date(story.attributes.createdAt)
+    const dateB = new Date()
+    const latestMatch = orderByDate ? dateA.getTime() <= dateB.getTime() : true
+
+    // Filter by Search Query
+    const title = story.attributes.Title.toLowerCase()
+    const description = story.attributes.Description?.toLowerCase()
+    const user = story.attributes.User.data
+      ? story.attributes.User.data.attributes.Name?.toLowerCase()
+      : ''
+    const searchLowerCase = searchParamInput
+      ? searchParamInput.toLowerCase()
+      : ''
+    const searchMatch =
+      title.includes(searchLowerCase) ||
+      description?.includes(searchLowerCase) ||
+      user?.includes(searchLowerCase)
+
+    return (
+      useCaseMatch &&
+      migrationMatch &&
+      verticalMatch &&
+      latestMatch &&
+      searchMatch
+    )
+  })
+
+  useEffect(() => {
+    if (searchParamInput) {
+      setSearchQuery(searchParamInput)
+    }
+    //stop flash of unstyled content
+    const multiselectTargets = document.querySelectorAll('.multiselect-target')
+    multiselectTargets.forEach((item) => {
+      item.classList.remove('hidden')
+    })
+  })
+
+  //Search field
+  const [searchQuery, setSearchQuery] = useState('')
+
+  //manage
+  useEffect(() => {
+    //=== Use Cases ==//
+    const useCaseCodes = useCaseParam
+      ?.split(',')
+      .map((code) => parseInt(code.trim(), 10))
+    const selectedUseCaseObjects = useCaseCodes
+      ? useCaseCodes
+          .map((code) => findByCode(UseCaseCategories, code))
+          .filter((item): item is UseCaseCategory => item !== undefined)
+      : []
+    // Set the selected use cases
+    setSelectedUseCases(selectedUseCaseObjects)
+    //=== Use Cases ==//
+
+    //=== Migrations ==//
+    const migrationsCodes = migrationParam
+      ?.split(',')
+      .map((code) => parseInt(code.trim(), 10))
+    const selectedMigrationsObject = migrationsCodes
+      ? migrationsCodes
+          .map((code) => findByCode(UseCaseMigrations, code))
+          .filter((item): item is UseCaseMigration => item !== undefined)
+      : []
+    // Set the selected use cases
+    setSelectedMigrations(selectedMigrationsObject)
+    //=== Migrations ==//
+
+    //=== vertical ==//
+    const verticalCodes = verticalParam
+      ?.split(',')
+      .map((code) => parseInt(code.trim(), 10))
+    const selectedVerticalsObject = verticalCodes
+      ? verticalCodes
+          .map((code) => findByCode(UseCaseVerticals, code))
+          .filter((item): item is UseCaseVertical => item !== undefined)
+      : []
+    // Set the selected use cases
+    setSelectedVerticals(selectedVerticalsObject)
+    //=== vertical ==//
+
+    //=== Search input ==//
+    if (searchParamInput) {
+      setSearchQuery(searchParamInput)
+    }
+    //=== Search input ==//
+  }, [useCaseParam, migrationParam, verticalParam])
+
+  // Event handler to update search query
+  const handleSearchInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchQuery(event.target.value)
+    router.push(
+      {
+        query: {
+          search: event.target.value
+        }
+      },
+      undefined,
+      { shallow: true }
+    )
+  }
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='pt-10'>
-        <div className='container mx-auto flex max-w-7xl flex-col px-4 md:px-8 2xl:px-0'>
-          <div className='mx-auto flex max-w-screen-sm flex-col pt-6 text-center'>
-            <h1 className='mb-16 font-basier text-5.5xl font-semibold'>
-              User stories
-            </h1>
-          </div>
-          <div>
-            <div className='grid gap-x-20 lg:grid-cols-2'>
-              <div className='relative text-center lg:text-left xl:max-w-xl'>
-                <div className='relative font-basier text-4xl font-semibold leading-snug'>
-                  <Image
-                    src='/images/Quote.svg'
-                    width={35}
-                    height={35}
-                    alt='Quote'
-                    className='-mt-10 inline-block'
-                  />{' '}
-                  There is that feeling of new tech where everything just feels
-                  like it's going right.
-                </div>
-                <p className='mt-6 text-base text-neutral-200'>
-                  We were using Postgres, but there was a moment in time when we
-                  hit the 64TB database limit and we couldn't read or write fast
-                  enough. We prototyped in ClickHouse Cloud in a week and we
-                  were able to ingest data 5 to 6 times faster than Postgres. We
-                  saved 10x in cost.
-                </p>
-                <div className='mt-12 items-center justify-between xl:flex'>
-                  <div className='flex-0'>
-                    <p className='text-base font-semibold'>Harlow Ward</p>
-                    <p className='font-inconsolata text-base text-primary-300'>
-                      Co-founder and CTO, Clearbit
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className='mt-16 w-full xl:mt-0'>
-                <div className='relative w-full'>
-                  <div className='max-w-full rounded-md bg-primary-300 lg:absolute lg:inset-3 lg:-right-10 lg:-top-3 lg:skew-x-0 lg:transform'></div>
-                  <div className='relative top-0 left-0 aspect-video h-fit w-full rounded-md'>
-                    <HomepageCustomerVideos
-                      videos={[
-                        {
-                          videoId: '863656379',
-                          type: 'vimeo',
-                          vimeoCode: 'ec5de7be6d',
-                          image: '/images/clearbit-tile.png'
+      <PrimeReactProvider
+        value={{
+          unstyled: true,
+          pt: Tailwind,
+          zIndex: {
+            overlay: 30
+          }
+        }}>
+        <div className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:pt-20'>
+          <SuiTitle type='h1'>User stories</SuiTitle>
+          <p className='pt-6 text-center'>
+            Discover how companies are using ClickHouse to speed up their
+            workloads and lower costs.
+          </p>
+        </div>
+        <div>
+          <div className='container mx-auto max-w-7xl px-8 pt-8 2xl:px-0'>
+            <div className='mx-auto mb-6 md:max-w-md lg:mb-8'>
+              <SuiSearchField
+                placeholder='Search by company or keyword...'
+                htmlFor='search'
+                className='mb-6 xl:mb-0 xl:min-w-[447px]'
+                onChange={handleSearchInputChange}
+                value={searchQuery}
+              />
+            </div>
+            <div className='mx-auto max-w-5xl'>
+              <div className='filters mb-14 gap-x-4 xl:flex xl:justify-center'>
+                <div className='flex flex-col items-center justify-center gap-4 lg:flex-row lg:flex-nowrap'>
+                  <button
+                    type='button'
+                    className={`${
+                      orderByDate
+                        ? 'bg-primary-300 text-black'
+                        : 'border-opacity-[0.3] text-white'
+                    } max-h-[36px] w-[162px] rounded-full border border-primary-500 px-4 py-[7px] text-sm font-semibold text-black transition-colors duration-500 ease-in-out hover:border-primary-300 xl:w-auto`}
+                    onClick={toggleOrderByDate}>
+                    Latest
+                  </button>
+                  <div className='multiselect-target hidden'>
+                    <MultiSelect
+                      value={selectedUseCases}
+                      itemClassName='multiselect-item'
+                      onChange={(e) => {
+                        if (searchQuery) {
+                          setSearchQuery('')
                         }
-                      ]}
+                        setSelectedUseCases(e.value)
+                        const selectedValues = e.value
+                          .map((option: UseCaseCategory) => option.code)
+                          .join(',')
+                        router.push(
+                          {
+                            query: {
+                              ...router.query,
+                              useCase: selectedValues,
+                              search: undefined
+                            }
+                          },
+                          undefined,
+                          { shallow: true }
+                        )
+                      }}
+                      options={UseCaseCategories}
+                      optionLabel='name'
+                      placeholder='Use Case'
+                      maxSelectedLabels={0}
+                      panelHeaderTemplate={<></>}
+                      selectedItemsLabel='Use Case ({0})'
+                      unstyled
                     />
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <HRSeparator className='my-16' />
-          <div className='mx-auto mb-6'>
-            <Image
-              src='/images/case-studies-icon.svg'
-              width={72}
-              height={72}
-              alt='Case studies icon'
-              className='mx-auto mb-6'
-            />{' '}
-            <h2 className='text-center font-basier text-3xl font-bold'>
-              Case studies
-            </h2>
-          </div>
-        </div>
-      </div>
-
-      <div className='w-full pb-6 text-neutral-0'>
-        <div className='mx-auto max-w-7xl'>
-          <div className='mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-10 px-4 md:grid-cols-2 md:px-8 2xl:px-0'>
-            {useCaseItems.map((useCase, index) => (
-              <UseCase
-                id={useCase.anchorId}
-                key={`usecase-${index}`}
-                lightLogo={useCase.lightLogoPng}
-                darkLogo={useCase.darkLogoPng}
-                description={useCase.description}
-                bullets={useCase.bullets}
-                path={useCase?.ctaButton?.href}
-                btnText={useCase?.ctaButton?.text}
-                target={useCase?.ctaButton?.target}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-      <HRSeparator className='my-16' />
-      <div className='mx-auto mb-6'>
-        <Image
-          src='/images/what-our-customers-say.svg'
-          width={72}
-          height={72}
-          alt='What our customers say'
-          className='mx-auto mb-6'
-        />{' '}
-        <h2 className='mb-20 text-center font-basier text-3xl font-semibold'>
-          What our customers say
-        </h2>
-      </div>
-      <div className='mx-auto max-w-7xl px-4 pb-24 md:px-8 2xl:px-0'>
-        <div className='bg-shadow-element-center red-shadow grid gap-y-6 gap-x-6 md:grid-cols-2 lg:grid-cols-3'>
-          {testimonialsJson.slice(0, visibleTestimonials).map((testimonial) => (
-            <div
-              className='animate-fade-in relative flex w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:shadow-lg'
-              key={testimonial?.id}>
-              <div className='flex h-full w-full flex-col justify-between space-y-12'>
-                <div className='text-left'>
-                  <Image
-                    src='/images/Quote.svg'
-                    width={35}
-                    height={35}
-                    alt='Quote'
-                    className='mb-4'
-                  />{' '}
-                  <p className='text-base text-neutral-200'>
-                    {testimonial?.text}
-                  </p>
-                </div>
-                <div>
-                  <Image
-                    src={testimonial.logo}
-                    alt={testimonial.category}
-                    width={testimonial.width}
-                    height={testimonial.height}
-                    className='h-8 w-auto'
+                  <div className='multiselect-target hidden'>
+                    <MultiSelect
+                      value={selectedMigrations}
+                      itemClassName='multiselect-item'
+                      onChange={(e) => {
+                        if (searchQuery) {
+                          setSearchQuery('')
+                        }
+                        setSelectedMigrations(e.value)
+                        const selectedValues = e.value
+                          .map((option: UseCaseMigration) => option.code)
+                          .join(',')
+                        router.push(
+                          {
+                            query: {
+                              ...router.query,
+                              migration: selectedValues,
+                              search: undefined
+                            }
+                          },
+                          undefined,
+                          { shallow: true }
+                        )
+                      }}
+                      options={UseCaseMigrations}
+                      optionLabel='name'
+                      placeholder='Migration'
+                      maxSelectedLabels={0}
+                      panelHeaderTemplate={<></>}
+                      selectedItemsLabel='Migration ({0})'
+                      unstyled
+                    />
+                  </div>
+                  <div className='multiselect-target hidden'>
+                    <MultiSelect
+                      value={selectedVerticals}
+                      itemClassName='multiselect-item'
+                      onChange={(e) => {
+                        if (searchQuery) {
+                          setSearchQuery('')
+                        }
+                        setSelectedVerticals(e.value)
+                        const selectedValues = e.value
+                          .map((option: UseCaseVertical) => option.code)
+                          .join(',')
+                        router.push(
+                          {
+                            query: {
+                              ...router.query,
+                              vertical: selectedValues,
+                              search: undefined
+                            }
+                          },
+                          undefined,
+                          { shallow: true }
+                        )
+                      }}
+                      options={UseCaseVerticals}
+                      optionLabel='name'
+                      placeholder='Vertical'
+                      maxSelectedLabels={0}
+                      panelHeaderTemplate={<></>}
+                      selectedItemsLabel='Vertical ({0})'
+                      unstyled
+                    />
+                  </div>
+                  <ClearFilterButton
+                    onClick={clearAllFilters}
+                    disabled={
+                      useCaseParam ||
+                      migrationParam ||
+                      searchParamInput ||
+                      verticalParam
+                        ? false
+                        : true
+                    }
                   />
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-        {visibleTestimonials < testimonialsJson.length && (
-          <div className='mx-auto mt-12'>
-            <CUIButton
-              type='secondary'
-              className='mx-auto w-auto'
-              onClick={loadMore}
-              iconRight=''>
-              View more
-            </CUIButton>
+
+            {filteredUserStories.length > 0 ? (
+              <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
+                {filteredUserStories.map((story, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={`relative flex flex-col shadow-xl shadow-black/25`}
+                      onMouseMove={(event) => handleMouseMove(event, index)}
+                      onMouseLeave={handleMouseLeave}>
+                      <div className='story-header rounded-t-lg bg-primary-300 p-4'>
+                        <div className='flex h-[40px] items-center justify-center'>
+                          {story.attributes.User.data && (
+                            <Image
+                              src={
+                                story.attributes.User.data.attributes.logo.data
+                                  .attributes.url
+                              }
+                              width={
+                                story.attributes.User.data.attributes.logo.data
+                                  .attributes.width
+                              }
+                              height={
+                                story.attributes.User.data.attributes.logo.data
+                                  .attributes.height
+                              }
+                              alt={
+                                story.attributes.User.data.attributes.logo.data
+                                  .attributes.alternativeText
+                                  ? story.attributes.User.data.attributes.logo
+                                      .data.attributes.alternativeText
+                                  : 'Logo'
+                              }
+                              priority={true}
+                              loading='eager'
+                              className='max-h-[35px]'
+                            />
+                          )}
+                        </div>
+                      </div>
+                      <div
+                        className={`${
+                          story.attributes.highlight &&
+                          'border border-primary-300 bg-neutral-700'
+                        } relative flex flex-grow flex-col overflow-hidden rounded-b-lg border border-t-0 border-neutral-700/80 p-6`}>
+                        <div className='story-categories font-inconsolata text-primary-300'>
+                          {story.attributes.useCase.data &&
+                            story.attributes.useCase.data
+                              .map((useCase) => {
+                                return useCase.attributes.Name
+                              })
+                              .join(', ')}
+                        </div>
+                        <div className='story-title py-2 font-basier text-xl font-semibold'>
+                          {story.attributes.Title}
+                        </div>
+                        <div className='story-description flex-grow text-balance'>
+                          {story.attributes.Description}
+                        </div>
+                        {(story.attributes.ReadBlogLink ||
+                          story.attributes.ExternalLink ||
+                          story.attributes.WatchVideoLink) && (
+                          <div className='mt-auto'>
+                            <div className='mt-6 flex items-center justify-end gap-x-6 text-primary-300'>
+                              {story.attributes.ReadBlogLink && (
+                                <Link
+                                  href={story.attributes.ReadBlogLink}
+                                  target='_blank'>
+                                  Read blog
+                                </Link>
+                              )}
+                              {story.attributes.ExternalLink && (
+                                <Link
+                                  href={story.attributes.ExternalLink}
+                                  target='_blank'>
+                                  Read blog
+                                </Link>
+                              )}
+                              {story.attributes.WatchVideoLink && (
+                                <Link
+                                  href={story.attributes.WatchVideoLink}
+                                  target='_blank'
+                                  className='flex items-center gap-x-3'>
+                                  <CirclePlay
+                                    strokeWidth={1.5}
+                                    className='h-5 w-5'
+                                  />
+                                  Watch video
+                                </Link>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                        {hoveredStoryIndex === index && (
+                          <div
+                            className='blurred-div pointer-events-none absolute -left-40 -top-24 h-full w-full rounded-full bg-white opacity-[4%] blur-2xl'
+                            style={{
+                              transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
+                              pointerEvents: 'none',
+                              borderRadius: '50%'
+                            }}
+                          />
+                        )}
+                      </div>
+                      {story.attributes.highlight && (
+                        <div className='absolute -bottom-2 left-1/2 z-50 -translate-x-1/2 transform overflow-visible bg-half-highlight px-1 text-xs font-bold uppercase'>
+                          Highlight
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            ) : (
+              <div className='flex w-full flex-col items-center rounded-md border border-dashed border-primary-700 p-16 text-center'>
+                <div className='flex-grow font-basier text-2xl'>
+                  Sorry, no user stories found
+                </div>
+                <ClearFilterButton
+                  className='mt-6 rounded-full border border-primary-600 px-4 py-2.5 text-sm font-semibold hover:border-primary-300'
+                  onClick={clearAllFilters}
+                  disabled={
+                    useCaseParam ||
+                    migrationParam ||
+                    searchParamInput ||
+                    verticalParam
+                      ? false
+                      : true
+                  }
+                />
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      <HRSeparator />
-      <div className='section-container my-24'>
-        <div className='mx-auto mb-14'>
-          <Image
-            src='/images/use-cases/recent-customer-stories-icon.svg'
-            width={72}
-            height={72}
-            alt='Case studies icon'
-            className='mx-auto mb-6'
-          />{' '}
-          <h2 className='text-center font-basier text-3xl font-bold'>
-            Recent customer stories
-          </h2>
+          <FollowUs />
         </div>
-        <div className='flex w-full flex-col gap-y-6 md:grid md:grid-cols-3 md:gap-x-16 md:gap-y-0 '>
-          {customerStories.map((blog) => (
-            <BlogPost key={blog.id} {...blog} />
-          ))}
-        </div>
-        <CUIButton
-          type='secondary'
-          href='/blog?category=customer-stories'
-          linkClass='mx-auto mt-10 w-fit block'>
-          View all
-        </CUIButton>
-      </div>
-      <HRSeparator />
-      <div className='my-24'>
-        <h2 className='mb-16 text-center font-basier text-4xl font-semibold text-neutral-100'>
-          Ready to give it a go?
-        </h2>
-        <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
-          <GiveItAGo />
-        </div>
-      </div>
+      </PrimeReactProvider>
     </Layout>
   )
 }

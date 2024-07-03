@@ -83,7 +83,7 @@ const nextConfig = {
       {
         source: '/slack',
         destination:
-          'https://join.slack.com/t/clickhousedb/shared_invite/zt-2h7k4l3n6-2tm52WOWwaD11OiijTUIkg',
+          'https://join.slack.com/t/clickhousedb/shared_invite/zt-2lvb97dus-v9uBEX8_YNYNaM4Gwapuuw',
         permanent: true
       },
       {
@@ -416,6 +416,18 @@ const nextConfig = {
         source: '/cloud/azure-waitlist',
         destination: '/cloud',
         permanent: true
+      },
+      {
+        source: '/blog',
+        has: [
+          {
+            type: 'query',
+            key: 'category',
+            value: 'customer-stories'
+          }
+        ],
+        permanent: true,
+        destination: '/blog?category=user-stories'
       }
     ]
   }

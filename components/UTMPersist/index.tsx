@@ -20,6 +20,7 @@ export const updateLinks = (
     if (link.hostname.includes('.cloud')) {
       link.href = appendUTMsToLink(link.href)
       link.href = appendGalaxySessionIDToLink(link.href)
+      link.href = appendPagePathsToLink(link.href)
       if (experimentId && variationId) {
         link.href = appendExperimentToLink(link.href, experimentId, variationId)
       }
@@ -53,6 +54,15 @@ const UTMPersist = () => {
 
     if (Object.keys(utmValues).length > 0) {
       storeUTMsInStorage(utmValues)
+    }
+
+    // Check for origPath and store if not present and path does not include '/marketo-forms'
+    const currentPath = window.location.pathname
+    if (
+      !localStorage.getItem('origPath') &&
+      !currentPath.includes('/marketo-forms')
+    ) {
+      localStorage.setItem('origPath', currentPath)
     }
 
     updateLinks()
@@ -100,8 +110,24 @@ export function appendGalaxySessionIDToLink(url: string): string {
   return urlObject.toString()
 }
 
+// Utility function to append page paths to a link
+export function appendPagePathsToLink(url: string): string {
+  const urlObject = new URL(url)
+
+  // Append current page path
+  urlObject.searchParams.set('pagePath', window.location.pathname)
+
+  // Append original page path from local storage if available
+  const origPath = localStorage.getItem('origPath')
+  if (origPath) {
+    urlObject.searchParams.set('origPath', origPath)
+  }
+
+  return urlObject.toString()
+}
+
 // Utility function to retrieve UTMs from localStorage
-function getUTMsFromStorage(): UTMs | null {
+export function getUTMsFromStorage(): UTMs | null {
   const utms = localStorage.getItem('ch-utms')
   if (utms) {
     const { data, timestamp } = JSON.parse(utms)

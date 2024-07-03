@@ -20,16 +20,26 @@ export interface BlogPost {
   keywords?: string
 }
 
-export interface BlogPostListProps {
-  blogs: BlogPost[]
-  selectedCategory: string
-  searchText: string
-}
-
 export interface BlogProps extends CommonProps {
-  featuredBlog: BlogPost
   title: string
   description: string
-  blogs: Array<BlogPost>
-  categories: string[]
+  initialData: null | BlogApiResponse
+}
+
+export interface BlogApiResponse {
+  data: {
+    featured: BlogPost
+    blogs: Array<BlogPost>
+    categories: Record<string, string>
+  }
+  params: {
+    search: null | string
+    category: null | string
+  }
+  pagination: {
+    page: number
+    pageSize: number
+    pageCount: number
+    total: number
+  }
 }

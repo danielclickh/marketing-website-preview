@@ -1,4 +1,4 @@
-import {GetStaticProps} from 'next'
+import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
@@ -8,17 +8,25 @@ import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'
 import NewsLetter from '../../../components/NewsLetter'
-import {getNewsLetterData} from '../../../components/NewsLetter/getNewsLetterData'
+import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
 import SocialButton from '../../../components/SocialButton'
-import {StrapiImage} from '../../../components/StrapiElements'
-import {SuiButton, SuiText, SuiTitle} from '../../../components/sui'
-import {findAll, findOne, getPathsValues, getStagingOnlyFilters} from '../../../lib/api/strapi'
-import {convertDateToString} from '../../../lib/utils/dateUtils'
-import {getCommonProps} from '../../../lib/utils/getCommonProps'
-import {NOT_FOUND_FALLBACK, REVALIDATE_SECONDS} from '../../../lib/utils/revalidationConfig'
-import {BlogProps} from '../../../types/blog'
-import {ParamsType} from '../../../types/homepage'
-import {galaxyOnPage} from "../../../lib/galaxy/galaxy";
+import { StrapiImage } from '../../../components/StrapiElements'
+import { SuiButton, SuiText, SuiTitle } from '../../../components/sui'
+import {
+  findAll,
+  findOne,
+  getPathsValues,
+  getStagingOnlyFilters
+} from '../../../lib/api/strapi'
+import { convertDateToString } from '../../../lib/utils/dateUtils'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import {
+  NOT_FOUND_FALLBACK,
+  REVALIDATE_SECONDS
+} from '../../../lib/utils/revalidationConfig'
+import { BlogProps } from '../../../types/blog'
+import { ParamsType } from '../../../types/homepage'
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -72,6 +80,16 @@ export const getStaticProps: GetStaticProps<BlogProps> =
     const { data: otherBlogs } = await findAll('blog-posts', blogsParams)
     const commonData = await getCommonProps()
     const newsLetterData = await getNewsLetterData()
+
+    const canonical = blog.canonical_url ? blog.canonical_url : `/blog/${slug}`
+
+    //super hacky thing that we will change for CMS override
+    if (
+      slug === 'clickhouse-cloud-is-now-generally-available-on-microsoft-azure'
+    ) {
+      blog.thumbnailPng.url = '/images/clickhouse-msft-dark.png'
+    }
+
     return {
       props: {
         ...blog,
@@ -83,7 +101,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
           type: 'article',
           siteName: 'ClickHouse',
           image: [blog.thumbnailPng],
-          path: `/blog/${slug}`
+          path: canonical
         },
         newsLetterData,
         ...commonData
@@ -109,7 +127,7 @@ export default function BlogPage({
   CloudCTAHeader,
   seo
 }: BlogProps) {
-  galaxyOnPage('blogPage');
+  galaxyOnPage('blogPage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-10'>
@@ -125,7 +143,7 @@ export default function BlogPage({
                 {category}
               </Link>
             </h4>
-            <h1 className='mt-6 mb-8 font-basier text-4xl font-bold text-neutral-100 '>
+            <h1 className='mb-8 mt-6 font-basier text-4xl font-bold text-neutral-100 '>
               <span className='leading-snug'>{title}</span>
             </h1>
             <div className='flex flex-row items-center justify-center space-x-4 pt-2'>
@@ -163,9 +181,12 @@ export default function BlogPage({
                 </Markdown>
               </>
             )}
-            <Markdown className='rich-text-content leading-6' allowHeaderLink>
-              {content}
-            </Markdown>
+            {content && (
+              <Markdown className='rich-text-content leading-6' allowHeaderLink>
+                {content}
+              </Markdown>
+            )}
+
             {ShowCloudCTAFooter && (
               <>
                 <Markdown
@@ -197,7 +218,7 @@ export default function BlogPage({
       </div>
 
       <div className='flex w-full pb-8 text-neutral-0 '>
-        <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pt-12 pb-8 md:bg-no-repeat 2xl:px-0'>
+        <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pb-8 pt-12 md:bg-no-repeat 2xl:px-0'>
           <div className='flex justify-between pb-8'>
             <SuiTitle
               type='h2'

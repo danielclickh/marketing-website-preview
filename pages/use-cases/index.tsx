@@ -3,7 +3,6 @@ import 'glider-js/glider.min.css'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
 import AccordionComponent from '../../components/AccordionComponent'
 import { CUIButton, CUICard } from '../../components/ClickUI'
 import GetStartedFree from '../../components/GetStartedFree'
@@ -11,11 +10,9 @@ import Layout from '../../components/Layout'
 import { StrapiImage } from '../../components/StrapiElements'
 import UseCasesComparisons from '../../components/UseCasesComparisons'
 import { findAll, findOne } from '../../lib/api/strapi'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { useCasesPageDataProps } from '../../types/useCasesPage'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
-
-import { Quote } from '../../types/useCasesPage'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { Quote, useCasesPageDataProps } from '../../types/useCasesPage'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -94,7 +91,7 @@ function UseCasesPage({
 }: useCasesPageDataProps) {
   galaxyOnPage('useCasesPage')
 
-  const desiredOrderIds = [18, 6, 5, 7, 8, 17, 10, 11, 12, 13] // IDs in the desired order
+  const desiredOrderIds = [18, 9, 5, 7, 8, 17, 21, 4, 19, 10, 11, 12, 13] // IDs in the desired order
   const quotesInDesiredOrder: Array<Quote> = []
 
   // Iterate through the desired order IDs
@@ -289,7 +286,14 @@ function UseCasesPage({
           {quotesInDesiredOrder.map((quote, index) => (
             <div key={index}>
               {quote.quotes.href ? (
-                <Link href={quote.quotes.href}>
+                <Link
+                  href={quote.quotes.href}
+                  target={quote.quotes.href.startsWith('http') ? '_blank' : ''}
+                  rel={
+                    quote.quotes.href.startsWith('http')
+                      ? 'noopener noreferrer'
+                      : ''
+                  }>
                   <div
                     key={index}
                     className='logos-color-swap animate-fade-in mb-6 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover p-4 shadow-card hover:bg-neutral-750'>

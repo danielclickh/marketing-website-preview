@@ -10,6 +10,7 @@ export interface Video {
   title: string
   subTitle?: string
   description: string
+  date: null | string
   thumbnail: string
   socialImage?: string
   embed: string

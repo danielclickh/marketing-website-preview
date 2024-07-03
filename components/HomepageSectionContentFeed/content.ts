@@ -31,6 +31,8 @@ import LogoVantage from './assets/logo-vantage'
 import LogoVimeo from './assets/logo-vimeo'
 import LogoDidi from './assets/logo-didi'
 import LogoInstacart from './assets/logo-instacart'
+import LogoIBM from './assets/logo-ibm'
+import LogoTrip from './assets/logo-trip'
 
 export type EntryCategory = string
 
@@ -123,6 +125,32 @@ export function getContent(): Entry[] {
         {
           icon: IconGauge,
           stat: '4x',
+          label: 'faster queries'
+        }
+      ]
+    },
+
+    // Trip.com
+    {
+      featured: false,
+      body: `Trip.com was using Elasticsearch for their observability data until they made the switch to ClickHouse. The result? 40GB per second, 30% savings in costs, and queries that are up to 30x faster!
+ [Read blog](/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse)`,
+      logo: LogoTrip,
+      categories: ['Observability'],
+      stats: [
+        {
+          icon: IconStack,
+          stat: '85 Trillion',
+          label: 'rows'
+        },
+        {
+          icon: IconDatabase,
+          stat: '50+ PB',
+          label: 'data storage'
+        },
+        {
+          icon: IconGauge,
+          stat: '30x',
           label: 'faster queries'
         }
       ]
@@ -222,13 +250,7 @@ export function getContent(): Entry[] {
     // Langchain
     {
       featured: false,
-      body: `“We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse.”
-
-
-Ankush, CTO of LangChain
-
-
-[Read blog](/blog/langchain-why-we-choose-clickhouse-to-power-langchain?loc=homepage)`,
+      body: `“We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse.” [Read blog](/blog/langchain-why-we-choose-clickhouse-to-power-langchain?loc=homepage)`,
       logo: LogoLangchain,
       categories: ['ML & GenAI']
     },
@@ -411,6 +433,13 @@ Ankush, CTO of LangChain
       featured: false,
       body: `"We evaluated more than a dozen different big data systems before settling on ClickHouse. No system comes close to ClickHouse when it comes to the flexibility ClickHouse provides" [Read blog](/blog/clickhouse-powers-dassanas-security-data-lake?loc=homepage)`,
       logo: LogoDassana,
+      categories: ['Fraud & cybersecurity']
+    },
+    // IBM
+    {
+      featured: false,
+      body: `“QRadar Log Insights uses a modern open-source OLAP data warehouse, ClickHouse, which ingests, automatically indexes, searches and analyzes large datasets at sub-second speed. You get near real-time visibility and insights from your ingested data.” <a href="https://www.ibm.com/blog/closing-breach-window-from-data-to-action/?utm_source=clickhouse" target="_blank">Read blog</a>`,
+      logo: LogoIBM,
       categories: ['Fraud & cybersecurity']
     },
 

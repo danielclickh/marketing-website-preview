@@ -25,6 +25,7 @@ interface SitemapProps extends CommonProps {
   comparisons: any[]
   lexicons: any[]
   integrations: Integration[]
+  demos: any[]
 }
 
 export const getStaticProps: GetStaticProps<SitemapProps> =
@@ -82,6 +83,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
     })
 
     const comparisons = await fetchAll('comparisons', comparisonsParams)
+    const demos = await fetchAll('demos', {})
 
     const newsItems = await newsEventsTest
     const newsEvents = newsItems.newsItems
@@ -125,6 +127,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         menu,
         lexicons,
         integrations,
+        demos,
         seo: {
           title: 'Site map - ClickHouse',
           path: '/sitemap'
@@ -148,6 +151,7 @@ function Sitemap({
   menu,
   lexicons,
   integrations
+  demos
 }: SitemapProps) {
   const resourcesMenu = menuItems.find((obj) => obj.id === 2)?.menuItems
 
@@ -383,6 +387,13 @@ function Sitemap({
                       </li>
                     )
                   })}
+                  <li className='pb-2'>
+                    <Link
+                      href={`/comparison/rockset`}
+                      className='font text-primary-300 hover:underline'>
+                      Migrate from Rockset to ClickHouse
+                    </Link>
+                  </li>
                 </ul>
               </div>
               <div>
@@ -402,6 +413,27 @@ function Sitemap({
                           className='font text-primary-300 hover:underline'>
                           {lexicon.title}{' '}
                         </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+              <div>
+                <Link href='/demos' className='pb-2 font-semibold'>
+                  Demos
+                </Link>
+                <ul className='mb-2 mt-2'>
+                  {demos.map((demo, index) => {
+                    return (
+                      <li key={index} className='pb-2'>
+                        {demo.Link && (
+                          <Link
+                            href={demo.Link}
+                            className='font text-primary-300 hover:underline'
+                            target='_blank'>
+                            {demo.Title}
+                          </Link>
+                        )}
                       </li>
                     )
                   })}

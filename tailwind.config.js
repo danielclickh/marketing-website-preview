@@ -6,8 +6,10 @@ module.exports = {
   ],
   content: [
     './components/**/*.{js,ts,jsx,tsx}',
-    './pages/**/*.{js,ts,jsx,tsx}'
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './node_modules/primereact/**/*.{js,ts,jsx,tsx}'
   ],
+  safelist: ['py-[6px]', 'py-[1px]'],
   theme: {
     extend: {
       screens: {
@@ -65,7 +67,7 @@ module.exports = {
       fontFamily: {
         inter: 'var(--font-inter), sans-serif',
         inconsolata: 'var(--font-inconsolata)',
-        basier: 'Basier Square'
+        basier: 'Basier Square, Arial, Helvetica, sans-serif'
       },
       colors: {
         rangitoto: '#28281D',
@@ -258,6 +260,9 @@ module.exports = {
         focus_size: '100%, 100%'
       },
       backgroundImage: {
+        'air-gapped': 'url("/images/air-gapped.svg")',
+        'half-highlight':
+          'linear-gradient(to bottom, rgba(65,65,65,1) 56%, transparent 56%)',
         snowflakeGradient:
           'linear-gradient(0deg, #FAFF69 30%, rgba(252, 255, 116, 0) 99.99%)',
         homepageFadeLeftLogos:

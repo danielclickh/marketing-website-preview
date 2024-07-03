@@ -144,7 +144,7 @@ function PricingOptions({
     <div className='w-full '>
       <PricingContextProvider value={getDefaultRegion()}>
         {!selectorOnly && (
-          <div className='flex justify-center space-x-6 pt-8 pb-6 '>
+          <div className='flex justify-center space-x-6 pb-6 pt-8 '>
             <div className='flex flex-col'>
               <div className='mx-auto flex flex-row items-start gap-4'>
                 {cloudProviders.map((cloudProvider, parentIndex: number) => (
@@ -231,13 +231,6 @@ function PricingOptions({
                                 parentIndex !== 0 ? '' : ''
                               }`}
                             />
-                            <SuiText
-                              size='xs'
-                              weight='medium'
-                              color='secondary'
-                              className='absolute -top-2 -right-4 rounded-lg bg-neutral-300 px-2.5 text-sm text-neutral-900'>
-                              Beta
-                            </SuiText>
                           </CUIButton>
                         )
                       }

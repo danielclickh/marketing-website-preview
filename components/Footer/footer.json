@@ -7,13 +7,15 @@
 				"id": 15,
 				"name": "ClickHouse",
 				"href": "/clickhouse",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.productMenu.clickHouseSelect"
 			},
 			{
 				"id": 17,
 				"name": "ClickHouse Cloud",
 				"href": "/cloud",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.productMenu.clickHouseCloudSelect"
 			},
 			{
 				"id": 18,
@@ -25,25 +27,29 @@
 				"id": 20,
 				"name": "ClickPipes",
 				"href": "/cloud/clickpipes",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.productMenu.clickpipesSelect"
 			},
 			{
 				"id": 22,
 				"name": "ClickHouse Keeper",
 				"href": "/clickhouse/keeper",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.productMenu.keeperSelect"
 			},
 			{
 				"id": 25,
 				"name": "Download",
 				"href": "https://clickhouse.com/docs/en/install#self-managed-install",
-				"target": "_blank"
+				"target": "_blank",
+				"galaxyEvent": "footerNav.productMenu.downloadSelect"
 			},
 			{
 				"id": 123,
 				"name": "Real-time Data Warehouse",
 				"href": "/real-time-data-warehouse",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.productMenu.realtimeDWSelect"
 			}
 		]
 	},
@@ -55,55 +61,71 @@
 				"id": 16,
 				"name": "Documentation",
 				"href": "https://clickhouse.com/docs",
-				"target": "_blank"
+				"target": "_blank",
+				"galaxyEvent": "footerNav.resourcesMenu.docsSelect"
 			},
 			{
 				"id": 13,
 				"name": "Training",
 				"href": "/learn/",
-				"target": "_blank"
+				"target": "_blank",
+				"galaxyEvent": "footerNav.resourcesMenu.trainingSelect"
 			},
 			{
 				"id": 14,
 				"name": "Support",
 				"href": "/support/program",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.resourcesMenu.supportSelect"
 			},
 			{
 				"id": 18,
 				"name": "Comparison",
 				"href": "https://benchmark.clickhouse.com",
-				"target": "_blank"
+				"target": "_blank",
+				"galaxyEvent": "footerNav.resourcesMenu.benchmarkSelect"
 			},
 			{
 				"id": 19,
 				"name": "Use cases",
 				"href": "/use-cases",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.resourcesMenu.useCasesSelect"
 			},
 			{
 				"id": 20,
 				"name": "Trust Center",
 				"href": "https://trust.clickhouse.com",
-				"target": "_blank"
+				"target": "_blank",
+				"galaxyEvent": "footerNav.resourcesMenu.trustCenterSelect"
 			},
 			{
 				"id": 20,
 				"name": "Videos",
 				"href": "/videos",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.resourcesMenu.videosSelect"
 			},
 			{
 				"id": 21,
 				"name": "Lexicon",
 				"href": "/lexicon",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.resourcesMenu.lexiconSelect"
+			},
+			{
+				"id": 22,
+				"name": "Demos",
+				"href": "/demos",
+				"target": "_self",
+				"galaxyEvent": "footerNav.resourcesMenu.demosSelect"
 			},
 			{
 				"id": 21,
 				"name": "Site map",
 				"href": "/sitemap",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.resourcesMenu.siteMapSelect"
 			}
 		]
 	},
@@ -115,31 +137,36 @@
 				"id": 20,
 				"name": "Blog",
 				"href": "/blog",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.companyMenu.blogSelect"
 			},
 			{
 				"id": 21,
 				"name": "Our story",
 				"href": "/company/our-story",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.companyMenu.ourStorySelect"
 			},
 			{
 				"id": 22,
 				"name": "Careers",
 				"href": "/company/careers",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.companyMenu.careersSelect"
 			},
 			{
 				"id": 23,
 				"name": "Contact us",
 				"href": "/company/contact?loc=footer",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.companyMenu.contactSelect"
 			},
 			{
 				"id": 24,
 				"name": "News and events",
 				"href": "/company/news-events",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.companyMenu.newsEventsSelect"
 			}
 		]
 	},
@@ -151,31 +178,36 @@
 				"id": 20,
 				"name": "GitHub",
 				"href": "https://github.com/ClickHouse/ClickHouse",
-				"target": "_blank"
+				"target": "_blank",
+				"galaxyEvent": "footerNav.communityMenu.gitHubSelect"
 			},
 			{
 				"id": 21,
 				"name": "Slack",
 				"href": "/slack",
-				"target": "_blank"
+				"target": "_blank",
+				"galaxyEvent": "footerNav.communityMenu.slackSelect"
 			},
 			{
 				"id": 22,
 				"name": "Twitter",
 				"href": "https://twitter.com/ClickhouseDB",
-				"target": "_blank"
+				"target": "_blank",
+				"galaxyEvent": "footerNav.communityMenu.twitterSelect"
 			},
 			{
 				"id": 23,
 				"name": "Telegram",
 				"href": "https://telegram.me/clickhouse_en",
-				"target": "_blank"
+				"target": "_blank",
+				"galaxyEvent": "footerNav.communityMenu.telegramSelect"
 			},
 			{
 				"id": 24,
 				"name": "Meetup",
 				"href": "https://www.meetup.com/pro/clickhouse",
-				"target": "_blank"
+				"target": "_blank",
+				"galaxyEvent": "footerNav.communityMenu.meetupSelect"
 			}
 		]
 	},
@@ -187,25 +219,36 @@
 				"id": 30,
 				"name": "BigQuery",
 				"href": "/comparison/bigquery",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.comparisonsMenu.bigQuerySelect"
 			},
 			{
 				"id": 10,
 				"name": "PostgreSQL",
 				"href": "/comparison/postgresql",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.comparisonsMenu.postgresSelect"
 			},
 			{
 				"id": 20,
 				"name": "Redshift",
 				"href": "/comparison/redshift",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.comparisonsMenu.redshiftSelect"
+			},
+			{
+				"id": 24,
+				"name": "Rockset",
+				"href": "/comparison/rockset",
+				"target": "_self",
+				"galaxyEvent": "footerNav.comparisonsMenu.rocksetSelect"
 			},
 			{
 				"id": 40,
 				"name": "Snowflake",
 				"href": "/comparison/snowflake",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.comparisonsMenu.snowflakeSelect"
 			}
 		]
 	}
