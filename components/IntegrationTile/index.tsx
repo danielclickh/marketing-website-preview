@@ -31,8 +31,8 @@ export default function IntegrationTile({
     <Link
       href={openInNewWindow ? docsLink : `/integrations/${slug}`}
       target={openInNewWindow ? '_blank' : '_self'}>
-      <CUICard>
-        <CUICard.Body className='relative bg-neutral-700/50'>
+      <CUICard className='!bg-neutral-700/50'>
+        <CUICard.Body className='relative'>
           {readiness && (
             <div className='absolute -top-2 left-1/2 -translate-x-1/2'>
               <IntegrationSupportPill label={readiness} />
