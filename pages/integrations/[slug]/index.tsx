@@ -206,8 +206,8 @@ export default function IntegrationPage({
               Other integrations
             </SuiTitle>
             <div className='mt-6 grid grid-cols-2 justify-center gap-3 sm:grid-cols-3 md:grid-cols-5'>
-              {similar.map((integration) => (
-                <IntegrationTile key={integration.slug} {...integration} />
+              {similar.map((integration, index) => (
+                <IntegrationTile key={index} {...integration} />
               ))}
             </div>
           </>
