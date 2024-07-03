@@ -94,7 +94,6 @@ export const getStaticProps: GetStaticProps<IntegrationPageProps> =
       },
       sort: ['name:ASC'],
       populate: ['logo', 'logo_dark'],
-      fields: ['name', 'slug', 'category', 'website', 'readiness'],
       pagination: { limit: 5 },
       publicationState: 'preview'
     })
