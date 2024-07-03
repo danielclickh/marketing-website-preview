@@ -69,7 +69,10 @@ const GlobalMenu = () => {
                     </NavigationMenu.Trigger>
                   )}
 
-                  <NavigationMenu.Content className='absolute top-0 left-0 flex w-full flex-col overflow-hidden rounded-md pb-4 data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight sm:w-auto'>
+                  <NavigationMenu.Content
+                    className={`${
+                      menuItem.name === 'Product' ? '' : 'pb-4'
+                    }  absolute left-0 top-0 flex w-full flex-col overflow-hidden rounded-md data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto`}>
                     <div
                       className={`${
                         menuItem.name === 'Product'
@@ -110,36 +113,40 @@ const GlobalMenu = () => {
                                 return (
                                   <div key={deepMenuItem.name}>
                                     {deepMenuItem.icon ? (
-                                      <ListItem
-                                        href={deepMenuItem.href}
-                                        key={deepMenuItem.name}
-                                        className='group mx-auto rounded-none'
-                                        onClick={() => {
-                                          deepMenuItem.galaxyEvent &&
-                                            window.galaxy.track(
-                                              deepMenuItem.galaxyEvent as FullyQualifiedEvent
-                                            )
-                                        }}>
-                                        <div className='flex gap-4'>
-                                          <Image
-                                            src={deepMenuItem.icon}
-                                            alt={deepMenuItem.name}
-                                            width={24}
-                                            height={24}
-                                          />
-                                          <div className='flex flex-col gap-0.5'>
-                                            <SuiText weight='medium' size='sm'>
-                                              {deepMenuItem.name}
-                                            </SuiText>
-                                            <SuiText
-                                              weight='normal'
-                                              size='sm'
-                                              className='text-neutral-300 group-hover:text-neutral-0'>
-                                              {deepMenuItem.description}
-                                            </SuiText>
+                                      <>
+                                        <ListItem
+                                          href={deepMenuItem.href}
+                                          key={deepMenuItem.name}
+                                          className='group mx-auto rounded-none'
+                                          onClick={() => {
+                                            deepMenuItem.galaxyEvent &&
+                                              window.galaxy.track(
+                                                deepMenuItem.galaxyEvent as FullyQualifiedEvent
+                                              )
+                                          }}>
+                                          <div className='flex gap-4'>
+                                            <Image
+                                              src={deepMenuItem.icon}
+                                              alt={deepMenuItem.name}
+                                              width={24}
+                                              height={24}
+                                            />
+                                            <div className='flex flex-col gap-0.5'>
+                                              <SuiText
+                                                weight='medium'
+                                                size='sm'>
+                                                {deepMenuItem.name}
+                                              </SuiText>
+                                              <SuiText
+                                                weight='normal'
+                                                size='sm'
+                                                className='text-neutral-300 group-hover:text-neutral-0'>
+                                                {deepMenuItem.description}
+                                              </SuiText>
+                                            </div>
                                           </div>
-                                        </div>
-                                      </ListItem>
+                                        </ListItem>
+                                      </>
                                     ) : (
                                       <ListItem
                                         href={deepMenuItem.href}
@@ -164,6 +171,28 @@ const GlobalMenu = () => {
                                 )
                               })}
                             </div>
+                            {menuItem.name === 'Product' && (
+                              <ListItem
+                                href='/integrations'
+                                className='group mx-auto mb-0 mt-4 rounded-none border-t border-neutral-700'
+                                onClick={() => {
+                                  window.galaxy.track(
+                                    'topNav.productMenu.integrationsSelect' as FullyQualifiedEvent
+                                  )
+                                }}>
+                                <div className='py-1'>
+                                  <SuiText
+                                    weight='medium'
+                                    size='sm'
+                                    className='text-center text-neutral-300'>
+                                    View 100+ integrations{' '}
+                                    <span className='inline-block pl-0.5 transition group-hover:translate-x-1/2'>
+                                      {'->'}
+                                    </span>
+                                  </SuiText>
+                                </div>
+                              </ListItem>
+                            )}
                           </div>
                         )
                       })}
@@ -175,13 +204,13 @@ const GlobalMenu = () => {
           })}
         </>
 
-        <NavigationMenu.Indicator className='top-full z-[1] flex h-[10px] items-end justify-center overflow-hidden transition-[width,transform_250ms_ease] data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut'>
+        <NavigationMenu.Indicator className='top-full z-[1] flex h-[10px] items-end justify-center overflow-hidden transition-[width,transform_250ms_ease] data-[state=hidden]:animate-fadeOut data-[state=visible]:animate-fadeIn'>
           <div className='relative top-[70%] h-[10px] w-[10px] rotate-[45deg] rounded-tl-[2px] bg-neutral-725 bg-opacity-90 group-hover:bg-neutral-700 group-hover:bg-opacity-40' />
         </NavigationMenu.Indicator>
       </NavigationMenu.List>
 
-      <div className='perspective-[2000px] absolute top-full left-0 flex w-full justify-center'>
-        <NavigationMenu.Viewport className='relative mt-[10px] h-[var(--radix-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-[6px] border border-neutral-700 border-opacity-50 bg-navigation-background transition-[width,_height] duration-300 data-[state=open]:animate-scaleIn data-[state=closed]:animate-scaleOut sm:w-[var(--radix-navigation-menu-viewport-width)]' />
+      <div className='perspective-[2000px] absolute left-0 top-full flex w-full justify-center'>
+        <NavigationMenu.Viewport className='relative mt-[10px] h-[var(--radix-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-[6px] border border-neutral-700 border-opacity-50 bg-navigation-background transition-[width,_height] duration-300 data-[state=closed]:animate-scaleOut data-[state=open]:animate-scaleIn sm:w-[var(--radix-navigation-menu-viewport-width)]' />
       </div>
     </NavigationMenu.Root>
   )
