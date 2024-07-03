@@ -253,8 +253,8 @@ export default function IntegrationsPage({
                 <p className='text-sm'>{group.description}</p>
               )}
               <div className='mt-6 grid grid-cols-2 justify-center gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7'>
-                {group.integrations.map((integration) => (
-                  <IntegrationTile key={integration.slug} {...integration} />
+                {group.integrations.map((integration, index) => (
+                  <IntegrationTile key={index} {...integration} />
                 ))}
               </div>
             </div>
