@@ -36,7 +36,7 @@ export default function IntegrationsClickPipesPromo() {
               Learn more about ClickPipes
             </CUIButton>
           </div>
-          <div className='xl:grid-cols-auto xl:grid-auto-rows-min grid grid-cols-5 gap-6'>
+          <div className='grid grid-cols-5 gap-6 xl:grid-cols-5'>
             <Amazonsimple className='w-full' />
             <KinesisAmazon className='w-full' />
             <Managedkafka className='w-full' />
