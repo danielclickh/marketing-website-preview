@@ -370,7 +370,7 @@ export function getContent(): Entry[] {
     // HIFI
     {
       featured: false,
-      body: `“ClickHouse’s performance exceeds all other column-oriented database management systems. It processes billions of rows and tens of gigabytes of data per server per second”`,
+      body: `“ClickHouse’s performance exceeds all other column-oriented database management systems. It processes billions of rows and tens of gigabytes of data per server per second.” [Read blog](/blog/hifis-migration-from-bigquery-to-clickhouse?loc=homepage)`,
       logo: LogoHifi,
       categories: ['Media & entertainment'],
       stats: [
