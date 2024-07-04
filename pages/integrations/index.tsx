@@ -84,7 +84,8 @@ export async function getStaticProps() {
       title: 'ClickHouse Integrations',
       description:
         'ClickHouse offers over 100 integrations across categories like language clients, data ingestion, SQL clients, and data visualization. Enhance your data workflows effortlessly.',
-      path: '/integrations'
+      path: '/integrations',
+      image: [{ url: '/images/integrations_social_share.png' }]
     },
     integrationGroups,
     ...(await getCommonProps())
