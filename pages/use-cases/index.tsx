@@ -91,6 +91,11 @@ function UseCasesPage({
 }: useCasesPageDataProps) {
   galaxyOnPage('useCasesPage')
 
+  const useCaseOrder = [2, 9, 7, 5]
+  const sortedUseCases = useCaseOrder
+    .map((id) => individualUseCases.find((useCase) => useCase.id === id))
+    .filter((useCase) => useCase)
+
   const desiredOrderIds = [18, 9, 5, 7, 8, 17, 21, 4, 19, 10, 11, 12, 13] // IDs in the desired order
   const quotesInDesiredOrder: Array<Quote> = []
 
@@ -128,7 +133,7 @@ function UseCasesPage({
                 <a
                   href={useCasesPageData.ctaButton.href}
                   target='_blank'
-                  className='inline-block rounded border-primary-300 bg-primary-300 py-3 px-8 font-semibold text-neutral-900 hover:cursor-pointer hover:border-primary-400 hover:bg-primary-400'>
+                  className='inline-block rounded border-primary-300 bg-primary-300 px-8 py-3 font-semibold text-neutral-900 hover:cursor-pointer hover:border-primary-400 hover:bg-primary-400'>
                   {useCasesPageData.ctaButton.text}
                 </a>
               </p>
@@ -138,13 +143,13 @@ function UseCasesPage({
 
         <div className='clip-inverted-triangle-use-cases'>
           <div className='section-container mt-12 flex max-w-6xl flex-col gap-y-6 lg:mt-0'>
-            {individualUseCases.map((useCase, index) => (
+            {sortedUseCases.map((useCase, index) => (
               <div key={index}>
                 <CUICard>
                   <CUICard.Body className='rounded-lg bg-neutral-900'>
                     <div className='flex flex-col items-start justify-between gap-x-6 lg:flex-row'>
                       <div className='relative p-6 lg:w-[560px]'>
-                        {useCase.title === 'Business Intelligence' && (
+                        {useCase?.title === 'Business Intelligence' && (
                           <div className=' absolute right-6 lg:right-0'>
                             <CUIButton
                               type='secondary'
@@ -161,7 +166,7 @@ function UseCasesPage({
                             </CUIButton>
                           </div>
                         )}
-                        {useCase.title === 'Logs, Events, & Traces' && (
+                        {useCase?.title === 'Logs, Events, & Traces' && (
                           <div className=' absolute right-6 lg:right-0'>
                             <CUIButton
                               type='secondary'
@@ -178,7 +183,7 @@ function UseCasesPage({
                             </CUIButton>
                           </div>
                         )}
-                        {useCase.title === 'Machine Learning & GenAI' && (
+                        {useCase?.title === 'Machine Learning & GenAI' && (
                           <div className=' absolute right-6 lg:right-0'>
                             <CUIButton
                               type='secondary'
@@ -195,7 +200,7 @@ function UseCasesPage({
                             </CUIButton>
                           </div>
                         )}
-                        {useCase.title === 'Real-time Analytics' && (
+                        {useCase?.title === 'Real-time Analytics' && (
                           <div className='absolute right-6 lg:right-0'>
                             <CUIButton
                               type='secondary'
@@ -214,59 +219,63 @@ function UseCasesPage({
                         )}
                         <div className='flex flex-col items-start justify-center gap-4'>
                           <div className='mb-1 flex flex-col gap-y-2 font-inconsolata text-base font-medium text-primary-300'>
-                            {useCase.icon && <StrapiImage {...useCase.icon} />}
+                            {useCase?.icon && <StrapiImage {...useCase.icon} />}
                           </div>
                           <div className='font-basier text-xl font-medium leading-tight  text-neutral-100'>
-                            {useCase.title}
+                            {useCase?.title}
                           </div>
                           <div className='text-neutral-20 whitespace-pre-wrap text-sm'>
-                            {useCase.description}
+                            {useCase?.description}
                           </div>
                         </div>
                       </div>
                       <div className='w-full border-t border-t-[#464641] lg:w-[590px] lg:border-t-0'>
                         <div className='hide-scrollbar max-h-64 overflow-hidden'>
-                          {useCase.ClientsUsingUseCase.length > 0 && (
-                            <div className='grid grid-cols-2'>
-                              {useCase.ClientsUsingUseCase.map(
-                                (client, index) => (
-                                  <div
-                                    key={index}
-                                    className={`logos-color-swap flex h-[86px] w-full items-center border-l border-b border-[#464641] last:border-r`}>
-                                    <Link
-                                      href={client.href}
-                                      className='color-swap mx-auto w-full object-contain'>
-                                      <StrapiImage
-                                        {...client.logo}
-                                        className={`${
-                                          client.clientName === 'Lyft'
-                                            ? 'max-w-[60px] lg:max-h-[44px]'
-                                            : client.clientName ===
-                                              'Contentsquare'
-                                            ? 'max-w-[140px] lg:max-w-[160px]'
-                                            : client.clientName ===
-                                              'Highlight.io'
-                                            ? 'max-w-[120px] lg:max-w-[160px]'
-                                            : client.clientName ===
-                                              'Deutsche Bank'
-                                            ? 'max-w-[150px] lg:max-w-[200px]'
-                                            : client.clientName === 'QuickCheck'
-                                            ? 'max-w-[150px] lg:max-w-[210px]'
-                                            : client.clientName === 'Darwinium'
-                                            ? 'max-w-[140px] lg:max-w-[160px]'
-                                            : client.clientName === 'RunReveal'
-                                            ? 'max-w-[140px] lg:max-w-[150px]'
-                                            : 'max-h-[64px] max-w-[120px] lg:max-w-[120px]'
-                                        }
+                          {useCase &&
+                            useCase.ClientsUsingUseCase?.length > 0 && (
+                              <div className='grid grid-cols-2'>
+                                {useCase?.ClientsUsingUseCase.map(
+                                  (client, index) => (
+                                    <div
+                                      key={index}
+                                      className={`logos-color-swap flex h-[86px] w-full items-center border-b border-l border-[#464641] last:border-r`}>
+                                      <Link
+                                        href={client.href}
+                                        className='color-swap mx-auto w-full object-contain'>
+                                        <StrapiImage
+                                          {...client.logo}
+                                          className={`${
+                                            client.clientName === 'Lyft'
+                                              ? 'max-w-[60px] lg:max-h-[44px]'
+                                              : client.clientName ===
+                                                'Contentsquare'
+                                              ? 'max-w-[140px] lg:max-w-[160px]'
+                                              : client.clientName ===
+                                                'Highlight.io'
+                                              ? 'max-w-[120px] lg:max-w-[160px]'
+                                              : client.clientName ===
+                                                'Deutsche Bank'
+                                              ? 'max-w-[150px] lg:max-w-[200px]'
+                                              : client.clientName ===
+                                                'QuickCheck'
+                                              ? 'max-w-[150px] lg:max-w-[210px]'
+                                              : client.clientName ===
+                                                'Darwinium'
+                                              ? 'max-w-[140px] lg:max-w-[160px]'
+                                              : client.clientName ===
+                                                'RunReveal'
+                                              ? 'max-w-[140px] lg:max-w-[150px]'
+                                              : 'max-h-[64px] max-w-[120px] lg:max-w-[120px]'
+                                          }
                                           mx-auto mt-auto
                                             `}
-                                      />
-                                    </Link>
-                                  </div>
-                                )
-                              )}
-                            </div>
-                          )}
+                                        />
+                                      </Link>
+                                    </div>
+                                  )
+                                )}
+                              </div>
+                            )}
                         </div>
                       </div>
                     </div>

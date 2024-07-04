@@ -234,13 +234,6 @@
 						"target": "_self"
 					},
 					{
-						"id": 2,
-						"name": "Logs, events, & traces",
-						"href": "/use-cases/logging-and-metrics",
-						"galaxyEvent": "topNav.useCasesMenu.loggingMetricsSelect",
-						"target": "_self"
-					},
-					{
 						"id": 3,
 						"name": "Machine learning & GenAI",
 						"href": "/use-cases/machine-learning-and-data-science",
@@ -252,6 +245,13 @@
 						"name": "Business intelligence",
 						"href": "/use-cases/business-intelligence",
 						"galaxyEvent": "topNav.useCasesMenu.bizIntelSelect",
+						"target": "_self"
+					},
+					{
+						"id": 2,
+						"name": "Logs, events, & traces",
+						"href": "/use-cases/logging-and-metrics",
+						"galaxyEvent": "topNav.useCasesMenu.loggingMetricsSelect",
 						"target": "_self"
 					}
 				]

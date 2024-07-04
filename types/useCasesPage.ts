@@ -20,6 +20,7 @@ export interface Quote {
 }
 
 export interface UseCaseItem {
+  id: number
   title: string
   description: string
   ClientsUsingUseCase: Array<ClientUsing>
