@@ -82,7 +82,8 @@ export async function getStaticProps() {
     title: 'Integrations',
     seo: {
       title: 'ClickHouse Integrations',
-      description: '',
+      description:
+        'ClickHouse offers over 100 integrations across categories like language clients, data ingestion, SQL clients, and data visualization. Enhance your data workflows effortlessly.',
       path: '/integrations'
     },
     integrationGroups,
