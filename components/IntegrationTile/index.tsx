@@ -33,14 +33,14 @@ export default function IntegrationTile({
       href={openInNewWindow ? docsLink : `/integrations/${slug}`}
       target={openInNewWindow ? '_blank' : '_self'}>
       <CUICard className='!bg-neutral-700/50'>
-        <CUICard.Body className='relative'>
+        <CUICard.Body className='group relative'>
           {readiness && (
             <div className='absolute -top-2 left-1/2 -translate-x-1/2'>
               <IntegrationSupportPill label={readiness} />
             </div>
           )}
           {openInNewWindow && (
-            <ExternalLink className='absolute right-3 top-3 text-primary-300' />
+            <ExternalLink className='absolute right-3 top-3 text-primary-300 opacity-0 transition-opacity  group-hover:opacity-100 group-hover:delay-75 group-hover:ease-in-out' />
           )}
           <div className='flex aspect-square flex-col items-center justify-center gap-3 rounded-lg text-center'>
             {!!tileLogo && (
