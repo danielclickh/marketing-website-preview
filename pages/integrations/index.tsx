@@ -237,6 +237,7 @@ export default function IntegrationsPage({
                   selected: !category,
                   onClick() {
                     setCategory(null)
+                    setSearch(null)
                   }
                 },
                 ...categoryList
