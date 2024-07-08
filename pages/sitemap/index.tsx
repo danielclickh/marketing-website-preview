@@ -9,9 +9,10 @@ import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { Video } from '../../lib/videos/types'
 import { CommonProps } from '../../types/homepage'
-import { getVideos } from '../../lib/videos/index'
+import { getVideos } from '../../lib/videos'
 import { getLexicons } from '../../lib/lexicons'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { Integration } from '../../types/integrations'
 
 interface SitemapProps extends CommonProps {
   blogPosts: any[]
@@ -23,6 +24,7 @@ interface SitemapProps extends CommonProps {
   menu: any[]
   comparisons: any[]
   lexicons: any[]
+  integrations: Integration[]
   demos: any[]
 }
 
@@ -91,6 +93,26 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
 
     const allVideos = await getVideos()
 
+    const integrations: Integration[] = await fetchAll('integrations', {
+      sort: ['name:ASC'],
+      filters: {
+        // Integrations with `openInNewWindow` set to true are excluded from the query.
+        // This is because they link off externally. See the IntegrationTile component.
+        $or: [
+          {
+            openInNewWindow: {
+              $eq: false
+            }
+          },
+          {
+            openInNewWindow: {
+              $null: true
+            }
+          }
+        ]
+      }
+    })
+
     const menu = menuItems
 
     return {
@@ -104,6 +126,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         comparisons,
         menu,
         lexicons,
+        integrations,
         demos,
         seo: {
           title: 'Site map - ClickHouse',
@@ -127,6 +150,7 @@ function Sitemap({
   comparisons,
   menu,
   lexicons,
+  integrations,
   demos
 }: SitemapProps) {
   const resourcesMenu = menuItems.find((obj) => obj.id === 2)?.menuItems
@@ -289,6 +313,30 @@ function Sitemap({
                 </Link>
               </p>
             </div>
+            <div className='col-span-full'>
+              <h2
+                id='integrations'
+                className='mb-4 font-basier text-2xl font-semibold text-neutral-100'>
+                <Link
+                  href={`/integrations`}
+                  className='hover:text-primary-300 hover:underline'>
+                  Integrations
+                </Link>
+              </h2>
+              <ul className='mb-2 gap-x-10 gap-y-0 xl:columns-4'>
+                {integrations.map((integration) => {
+                  return (
+                    <li key={integration.slug} className='pb-2'>
+                      <Link
+                        href={`/integrations/${integration.slug}`}
+                        className='font text-primary-300 hover:underline'>
+                        {integration.name}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
           </div>
           <HRSeparator className='my-20' />
           <div>
@@ -349,7 +397,13 @@ function Sitemap({
                 </ul>
               </div>
               <div>
-                <p className='pb-2 font-semibold'>Lexicon</p>
+                <p className='pb-2 font-semibold'>
+                  <Link
+                    href={`/lexicon`}
+                    className='text-white hover:underline'>
+                    Lexicon
+                  </Link>
+                </p>
                 <ul className='mb-2'>
                   {lexicons.map((lexicon, index) => {
                     return (

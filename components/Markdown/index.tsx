@@ -45,7 +45,7 @@ function Header(props: any) {
   const [isOpen, setIsOpen] = useState(false)
   const onClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.preventDefault()
-    const href = e.currentTarget.href;
+    const href = e.currentTarget.href
     history.pushState({}, '', href)
     navigator.clipboard.writeText(href)
     setIsOpen(true)
@@ -149,7 +149,11 @@ function Markdown({
 
   if (encloseByDiv) {
     props.allowedElements = AllowedElements
+
+    // Automatically allow component elements
+    props.allowedElements.push(...Object.keys(newComponents))
   }
+
   children = sanitizeMarkdown(children)
 
   rehypePlugins = commonPlugIns.concat(rehypePlugins)

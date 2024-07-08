@@ -18,6 +18,12 @@
 				"galaxyEvent": "footerNav.productMenu.clickHouseCloudSelect"
 			},
 			{
+				"id": 18,
+				"name": "Integrations",
+				"href": "/integrations",
+				"target": "_self"
+			},
+			{
 				"id": 20,
 				"name": "ClickPipes",
 				"href": "/cloud/clickpipes",

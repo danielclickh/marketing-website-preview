@@ -12,6 +12,7 @@ function StrapiImageUrl({
   alt = '',
   width,
   height,
+  loading = 'lazy',
   ...props
 }: Omit<StrapiImageProps, 'mime'>) {
   if (typeof url !== 'string') {
@@ -27,6 +28,7 @@ function StrapiImageUrl({
       className={className}
       width={width as number}
       height={height as number}
+      loading={loading}
       unoptimized
     />
   )

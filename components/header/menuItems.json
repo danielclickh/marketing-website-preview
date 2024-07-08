@@ -126,8 +126,7 @@
 					{
 						"id": 3,
 						"name": "Integrations",
-						"href": "https://clickhouse.com/docs/en/integrations",
-						"galaxyEvent": "topNav.resourcesMenu.docsIntegrationsSelect",
+						"href": "/integrations",
 						"target": "_self"
 					},
 					{
