@@ -18,6 +18,7 @@ import {
 } from '../../../lib/utils/revalidationConfig'
 import { CommonProps, ParamsType } from '../../../types/homepage'
 import { Integration } from '../../../types/integrations'
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface IntegrationPageProps extends CommonProps {
   seo?: SeoMetadata
@@ -129,6 +130,7 @@ export default function IntegrationPage({
   similar
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const integrationLogo = integration.logo_dark || integration.logo
+  galaxyOnPage('integrationPage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='bg-grid py-12 md:py-20'>
