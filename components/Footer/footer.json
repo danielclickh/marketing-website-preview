@@ -21,7 +21,8 @@
 				"id": 18,
 				"name": "Integrations",
 				"href": "/integrations",
-				"target": "_self"
+				"target": "_self",
+				"galaxyEvent": "footerNav.productMenu.integrationsSelect"
 			},
 			{
 				"id": 20,
