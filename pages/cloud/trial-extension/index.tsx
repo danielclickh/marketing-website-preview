@@ -55,15 +55,17 @@ export default function TrialExtensionPage({
       </Head>
       <div className='pt-10'>
         <div className='container mx-auto flex flex-col px-8 2xl:px-0'>
-          <div className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:pt-20'>
-            <SuiTitle type='h1'>Extend your ClickHouse Cloud trial</SuiTitle>
+          <div className='mx-auto mb-10 text-center text-neutral-100'>
+            <h1 className='mx-auto text-center font-basier text-4xl text-neutral-100 md:text-5.5xl lg:mb-16 lg:pt-20'>
+              Extend your ClickHouse Cloud trial
+            </h1>
             <div className='mx-auto mt-6 max-w-3xl text-neutral-200'>
               Fill in the form below, and we'll let you know once your trial is
               extended.
             </div>
           </div>
 
-          <div className='container mx-auto flex flex-col bg-opacity-10 px-8 pb-8 pt-14 text-center md:bg-no-repeat 2xl:px-0'>
+          <div className='container mx-auto flex flex-col bg-opacity-10 px-8 pb-8 pt-6 text-center md:bg-no-repeat 2xl:px-0'>
             <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
               {!formLoaded && (
                 <div className='text-center'>Loading form...</div>
