@@ -33,14 +33,17 @@ export default function NavigationSubNavUseCases() {
     }
   }
 
-  const [quote, setQuote] = useState<null | UseCaseQuote>(quotes.lyft)
+  const [quote, setQuote] = useState<null | UseCaseQuote>(null)
 
   return (
-    <div className='px-4 md-mid:grid md-mid:grid-cols-5 md-mid:grid-rows-1 md-mid:gap-x-4 md-mid:py-4'>
+    <div
+      className={`px-4 md-mid:grid-cols-5 md-mid:grid-rows-1 md-mid:gap-x-4 md-mid:py-4 ${
+        quote ? 'md-mid:grid' : ''
+      }`}>
       <ul className='col-span-2'>
         <li
           onMouseEnter={() => {
-            setQuote(quotes.lyft)
+            //setQuote(quotes.lyft)
           }}
           className='col-span-2'>
           <NavigationLink
@@ -54,7 +57,7 @@ export default function NavigationSubNavUseCases() {
         </li>
         <li
           onMouseEnter={() => {
-            setQuote(quotes.cloudflare)
+            //setQuote(quotes.cloudflare)
           }}
           className='col-span-2'>
           <NavigationLink
@@ -68,7 +71,7 @@ export default function NavigationSubNavUseCases() {
         </li>
         <li
           onMouseEnter={() => {
-            setQuote(quotes.adgreetz)
+            //setQuote(quotes.adgreetz)
           }}
           className='col-span-2'>
           <NavigationLink
@@ -80,7 +83,7 @@ export default function NavigationSubNavUseCases() {
         </li>
         <li
           onMouseEnter={() => {
-            setQuote(quotes.langchain)
+            //setQuote(quotes.langchain)
           }}
           className='col-span-2'>
           <NavigationLink
@@ -94,7 +97,7 @@ export default function NavigationSubNavUseCases() {
         </li>
         <li
           onMouseEnter={() => {
-            setQuote(quotes.instacart)
+            //setQuote(quotes.instacart)
           }}
           className='col-span-2'>
           <NavigationLink
@@ -107,18 +110,20 @@ export default function NavigationSubNavUseCases() {
           </NavigationLink>
         </li>
       </ul>
-      <NavigationQuote
-        {...quote}
-        className='col-span-3 col-start-3 row-span-full my-4 md-mid:my-0 md-mid:max-w-[400px]'
-        link={{
-          href: '/user-stories',
-          text: 'View more user stories',
-          onClick() {
-            galaxyOnClick('topNav.useCasesMenu.userStoriesQuoteSelect')
-          }
-        }}>
-        {quote?.children}
-      </NavigationQuote>
+      {!!quote && (
+        <NavigationQuote
+          {...quote}
+          className='col-span-3 col-start-3 row-span-full my-4 md-mid:my-0 md-mid:max-w-[400px]'
+          link={{
+            href: '/user-stories',
+            text: 'View more user stories',
+            onClick() {
+              galaxyOnClick('topNav.useCasesMenu.userStoriesQuoteSelect')
+            }
+          }}>
+          {quote?.children}
+        </NavigationQuote>
+      )}
     </div>
   )
 }
