@@ -77,9 +77,9 @@ export const getStaticProps: GetStaticProps<IntegrationPageProps> =
         }
       },
       populate: ['logo', 'logo_dark'],
-      pagination: { limit: 1 },
-      publicationState: 'preview'
+      pagination: { limit: 1 }
     })
+
     if (!data?.[0]) {
       return {
         notFound: true,
@@ -87,19 +87,39 @@ export const getStaticProps: GetStaticProps<IntegrationPageProps> =
       }
     }
 
-    const similar = await findAll('integrations', {
+    const integration = data[0]
+
+    const similarByCategory = await findAll('integrations', {
       filters: {
         slug: {
           $ne: slug
+        },
+        category: {
+          $eq: integration.category
         }
       },
-      sort: ['name:ASC'],
       populate: ['logo', 'logo_dark'],
-      pagination: { limit: 5 },
-      publicationState: 'preview'
+      pagination: { limit: 5 }
     })
 
-    const integration = data[0]
+    let similar: Array<Integration> = [...similarByCategory.data]
+
+    if (similar.length < 5) {
+      const similarAtRandom = await findAll('integrations', {
+        filters: {
+          slug: {
+            $ne: slug
+          },
+          id: {
+            $notIn: similar.map((item) => item.id)
+          }
+        },
+        populate: ['logo', 'logo_dark'],
+        pagination: { limit: 5 - similar.length }
+      })
+
+      similar = similar.concat(...similarAtRandom.data)
+    }
 
     const seo = integration.seo || {
       title: `Integrating ClickHouse with ${integration.name}`,
@@ -113,7 +133,7 @@ export const getStaticProps: GetStaticProps<IntegrationPageProps> =
     return {
       props: {
         integration,
-        similar: similar.data,
+        similar,
         seo,
         newsLetterData,
         ...commonData
