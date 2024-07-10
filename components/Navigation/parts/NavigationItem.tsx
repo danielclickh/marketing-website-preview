@@ -1,11 +1,13 @@
-import { useResizeListener } from 'primereact/hooks'
 import React, { useEffect, useRef, useState } from 'react'
 import useClickOutside from '../../../hooks/useClickOutside'
 import NavigationChevron from './NavigationChevron'
 import NavigationLink, { NavigationLinkProps } from './NavigationLink'
 
 interface NavigationItemBaseProps
-  extends Omit<React.HTMLProps<HTMLDivElement>, 'href' | 'onClick'> {
+  extends Omit<
+    React.HTMLProps<HTMLDivElement>,
+    'href' | 'onClick' | 'onMouseEnter' | 'onMouseLeave'
+  > {
   label: string
   children?: React.ReactNode
   open?: boolean
