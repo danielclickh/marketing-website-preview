@@ -45,36 +45,7 @@ export default function NavigationSubNavProducts() {
             <span>ClickHouse</span>
           </NavigationLink>
         </li>
-        <li>
-          <NavigationLink
-            href='https://clickhouse.com/docs/en/operations/utilities/clickhouse-local'
-            onClick={() => galaxyOnClick('topNav.productMenu.localSelect')}
-            className='!flex w-full items-center gap-3'>
-            <Image
-              src='/images/nav/icon-clickhouse-local.svg'
-              alt='ClickHouse Local'
-              width={24}
-              height={24}
-              className='flex-grow-1 flex-shrink-0'
-            />
-            <span>ClickHouse Local</span>
-          </NavigationLink>
-        </li>
-        <li>
-          <NavigationLink
-            href='https://github.com/chdb-io/chdb'
-            onClick={() => galaxyOnClick('topNav.productMenu.chdbSelect')}
-            className='!flex w-full items-center gap-3'>
-            <Image
-              src='/images/nav/icon-chdb.svg'
-              alt='chDB'
-              width={24}
-              height={24}
-              className='flex-grow-1 flex-shrink-0'
-            />
-            <span>chDB</span>
-          </NavigationLink>
-        </li>
+
         <li className='md-mid:hidden'>
           <NavigationLink
             href='https://clickhouse.com/docs/en/integrations'
