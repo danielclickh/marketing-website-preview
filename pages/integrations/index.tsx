@@ -1,4 +1,5 @@
 import type { InferGetStaticPropsType } from 'next'
+import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import CategorySelector from '../../components/CategorySelector'
@@ -107,6 +108,7 @@ export default function IntegrationsPage({
   galaxyOnPage('integrationsPage')
 
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   const [category, setCategory] = useState<string | null>(null)
   const [search, setSearch] = useState<string | null>(null)
@@ -165,43 +167,54 @@ export default function IntegrationsPage({
 
   // Load values from query string
   useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search)
-    const urlCategory = queryParams.get('category')
-    const urlSearch = queryParams.get('search')
+    if (router.isReady) {
+      const urlCategory = searchParams.get('category')
+      const urlSearch = searchParams.get('search')
 
-    // Check the url category is valid using the `getCategory` function
-    if (
-      urlCategory &&
-      String(urlCategory).trim().length &&
-      getCategory(String(urlCategory).trim())
-    ) {
-      setCategory(urlCategory)
+      if (urlCategory && getCategory(urlCategory)) setCategory(urlCategory)
+      if (urlSearch) setSearch(urlSearch)
     }
-
-    // Check the search query is not empty
-    if (urlSearch && String(urlSearch).trim().length) {
-      setSearch(urlSearch)
-    }
-  }, [router])
+  }, [router.isReady])
 
   // Update query string values
   useEffect(() => {
-    const queryParams = []
+    if (router.isReady) {
+      let hasChanged = false
+      const newSearchParams = new URLSearchParams(
+        Array.from(searchParams.entries())
+      )
 
-    if (category && getCategory(category)) {
-      queryParams.push(`category=${encodeURIComponent(category)}`)
-    }
+      if (category && getCategory(category)) {
+        if (category !== searchParams.get('category')) {
+          newSearchParams.set('category', category)
+          hasChanged = true
+        }
+      } else {
+        newSearchParams.delete('category')
+        hasChanged = true
+      }
 
-    if (search) {
-      queryParams.push(`search=${encodeURIComponent(search)}`)
-    }
+      if (search) {
+        if (search !== searchParams.get('search')) {
+          newSearchParams.set('search', search)
+          hasChanged = true
+        }
+      } else {
+        newSearchParams.delete('search')
+        hasChanged = true
+      }
 
-    if (queryParams.length) {
-      router.push('/integrations?' + queryParams.join('&'), undefined, {
-        shallow: true
-      })
-    } else {
-      router.push('/integrations', undefined, { shallow: true })
+      if (hasChanged) {
+        const newQueryString = newSearchParams.toString()
+
+        if (newQueryString.length) {
+          router.push(`/integrations?${newQueryString}`, undefined, {
+            shallow: true
+          })
+        } else {
+          router.push('/integrations', undefined, { shallow: true })
+        }
+      }
     }
   }, [category, search])
 
