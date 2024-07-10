@@ -12,14 +12,14 @@ import { fetchAll } from '../../lib/api/strapi'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
-import { slugify } from '../../lib/utils/strings'
+import { upperCaseFirst, slugify } from '../../lib/utils/strings'
 import {
   Integration,
   IntegrationGroup,
   IntegrationsPageProps
 } from '../../types/integrations'
 
-const categoryContentMap: Array<
+export const categoryContentMap: Array<
   Pick<IntegrationGroup, 'key' | 'label' | 'description' | 'slug'>
 > = [
   {
@@ -319,7 +319,7 @@ function groupIntegrations(
     if (!group) {
       // Create a label from the category key
       let label = integration.category.replaceAll('_', ' ').toLocaleLowerCase()
-      label = label.charAt(0).toLocaleUpperCase() + label.slice(1)
+      label = upperCaseFirst(label)
 
       group = {
         key: integration.category,
