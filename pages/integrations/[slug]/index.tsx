@@ -1,7 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import React from 'react'
 import Link from 'next/link'
-import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import IntegrationPill from '../../../components/IntegrationPill'
 import IntegrationTile from '../../../components/IntegrationTile'
@@ -17,11 +16,6 @@ import {
   NOT_FOUND_FALLBACK,
   REVALIDATE_SECONDS
 } from '../../../lib/utils/revalidationConfig'
-import {
-  upperCaseFirst,
-  slugify,
-  upperCaseWords
-} from '../../../lib/utils/strings'
 import { CommonProps, ParamsType } from '../../../types/homepage'
 import { Integration } from '../../../types/integrations'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
@@ -156,10 +150,6 @@ export default function IntegrationPage({
   similar
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const integrationLogo = integration.logo_dark || integration.logo
-  const categorySlug = slugify(integration.category)
-  const categoryLabel = upperCaseWords(
-    integration.category.replaceAll('_', ' ').toLocaleLowerCase()
-  )
   galaxyOnPage('integrationPage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -237,17 +227,10 @@ export default function IntegrationPage({
             <SuiTitle type='h2' className='mt-8 md:mt-16'>
               Other integrations
             </SuiTitle>
-            <div className='my-6 grid grid-cols-2 justify-center gap-3 sm:grid-cols-3 md:grid-cols-5'>
+            <div className='mt-6 grid grid-cols-2 justify-center gap-3 sm:grid-cols-3 md:grid-cols-5'>
               {similar.map((integration, index) => (
                 <IntegrationTile key={index} {...integration} />
               ))}
-            </div>
-            <div className='flex justify-center'>
-              <CUIButton
-                href={`/integrations?category=${categorySlug}`}
-                type='primary-dark'>
-                See all {categoryLabel} integrations
-              </CUIButton>
             </div>
           </>
         )}
