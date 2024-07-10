@@ -9,22 +9,32 @@ import NavigationSubNavUseCases from './sub-navs/NavigationSubNavUseCases'
 export interface NavigationProps extends React.HTMLProps<HTMLElement> {
   onItemClick?: NavigationItemProps['onClick']
   onItemClickOutside?: NavigationItemProps['onClickOutside']
+  onItemEnter?: NavigationItemProps['onMouseEnter']
+  onItemLeave?: NavigationItemProps['onMouseLeave']
 }
 
 export default function Navigation({
   onItemClick,
   onItemClickOutside,
+  onItemEnter,
+  onItemLeave,
   ...props
 }: NavigationProps) {
   const topLevelEvents: Pick<
     NavigationItemProps,
-    'onClick' | 'onClickOutside'
+    'onClick' | 'onClickOutside' | 'onMouseEnter' | 'onMouseLeave'
   > = {
     onClick(...args) {
       if (onItemClick) onItemClick(...args)
     },
     onClickOutside(...args) {
       if (onItemClickOutside) onItemClickOutside(...args)
+    },
+    onMouseEnter(...args) {
+      if (onItemEnter) onItemEnter(...args)
+    },
+    onMouseLeave(...args) {
+      if (onItemLeave) onItemLeave(...args)
     }
   }
 

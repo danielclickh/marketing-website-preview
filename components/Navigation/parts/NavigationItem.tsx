@@ -19,6 +19,16 @@ interface NavigationItemBaseProps
     children: NavigationItemProps['children'],
     open: boolean
   ) => void
+  onMouseEnter?: (
+    item: React.Ref<HTMLDivElement>,
+    children: NavigationItemProps['children'],
+    open: boolean
+  ) => void
+  onMouseLeave?: (
+    item: React.Ref<HTMLDivElement>,
+    children: NavigationItemProps['children'],
+    open: boolean
+  ) => void
 }
 
 interface NavigationItemNoLinkProps extends NavigationItemBaseProps {
@@ -50,6 +60,8 @@ export default function NavigationItem({
   className = '',
   onClick = (item, children, isOpen) => {},
   onClickOutside = (item, children, isOpen) => {},
+  onMouseEnter = (item, children, isOpen) => {},
+  onMouseLeave = (item, children, isOpen) => {},
   open = false,
   ...props
 }: NavigationItemProps) {
@@ -76,6 +88,16 @@ export default function NavigationItem({
     setIsOpen(false)
     onClickOutside(itemRef, children, false)
   })
+
+  const mouseEnter = (event: React.MouseEvent) => {
+    setIsOpen(true)
+    onMouseEnter(itemRef, children, true)
+  }
+
+  const mouseLeave = (event: React.MouseEvent) => {
+    setIsOpen(false)
+    onMouseEnter(itemRef, children, false)
+  }
 
   const { className: linkClassName, ...linkProps } =
     link || ({ href } as NavigationItemLinkProps['link'])
@@ -107,6 +129,8 @@ export default function NavigationItem({
       className={`relative ${className}`}
       ref={itemRef}
       onClick={onClickInside}
+      onMouseEnter={mouseEnter}
+      onMouseLeave={mouseLeave}
       {...props}>
       <NavigationLink
         ref={linkRef}
