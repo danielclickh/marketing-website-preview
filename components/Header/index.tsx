@@ -13,7 +13,6 @@ import { galaxyOnClick } from '../../lib/galaxy/galaxy'
 export default function Header({ github: { stars } }: HeaderProps) {
   const headerRef = useRef<HTMLElement>(null)
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState<boolean>(false)
-  const [showBackdrop, setShowBackdrop] = useState<boolean>(false)
   const [headerHeight, setHeaderHeight] = useState<number>(72)
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
@@ -39,13 +38,6 @@ export default function Header({ github: { stars } }: HeaderProps) {
 
   return (
     <>
-      {/* Mega menu backdrop */}
-      <div
-        className={`pointer-events-none fixed inset-0 z-40 hidden bg-neutral-700/70 transition-opacity md-mid:block  ${
-          showBackdrop ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
-
       {/* Add empty space for fixed header */}
       <div style={{ height: headerHeight + 1 }} />
 
@@ -58,9 +50,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
             ? 'bg-neutral-900/80'
             : 'bg-neutral-900/10'
         } ${
-          isScrolled || showBackdrop
-            ? 'md-mid:bg-neutral-900/80'
-            : 'md-mid:bg-neutral-900/10'
+          isScrolled ? 'md-mid:bg-neutral-900/80' : 'md-mid:bg-neutral-900/10'
         } fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur transition-colors`}>
         {/* Announcement banner */}
         {false && (
@@ -112,15 +102,7 @@ export default function Header({ github: { stars } }: HeaderProps) {
                 ? 'pointer-events-auto opacity-100'
                 : 'pointer-events-none opacity-0'
             } fixed inset-0 flex h-dvh flex-1 flex-col overflow-y-auto bg-neutral-900 p-4 transition-opacity md-mid:pointer-events-auto md-mid:relative md-mid:!top-0 md-mid:ml-0 md-mid:!h-auto md-mid:flex-row md-mid:items-center md-mid:overflow-y-visible md-mid:bg-transparent md-mid:p-0 md-mid:opacity-100 lg:ml-8 xl:ml-20`}>
-            <Navigation
-              className='w-full md-mid:w-auto md-mid:flex-shrink-0'
-              onItemClick={(item, children, isOpen) => {
-                setShowBackdrop(isOpen)
-              }}
-              onItemClickOutside={(item, children, isOpen) => {
-                setShowBackdrop(isOpen)
-              }}
-            />
+            <Navigation className='w-full md-mid:w-auto md-mid:flex-shrink-0' />
 
             {/* CTAs */}
             <div className='mt-auto flex flex-col-reverse flex-nowrap items-center gap-4 md-mid:ml-auto md-mid:mt-0 md-mid:flex-row lg:gap-6'>
