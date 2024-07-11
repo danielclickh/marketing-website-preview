@@ -33,6 +33,7 @@ import LogoDidi from './assets/logo-didi'
 import LogoInstacart from './assets/logo-instacart'
 import LogoIBM from './assets/logo-ibm'
 import LogoTrip from './assets/logo-trip'
+import LogoCorsearch from './assets/logo-corsearch'
 
 export type EntryCategory = string
 
@@ -252,6 +253,13 @@ export function getContent(): Entry[] {
       featured: false,
       body: `“We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse.” [Read blog](/blog/langchain-why-we-choose-clickhouse-to-power-langchain?loc=homepage)`,
       logo: LogoLangchain,
+      categories: ['ML & GenAI']
+    },
+    // Corsearch
+    {
+      featured: false,
+      body: `Corsearch chose ClickHouse as their vector database after evaluating alternatives, including specialized vector DBs. And now, as Chase, their VP of Engineering, explains, “by utilizing expert models and embeddings, we detect substantive changes in web pages and identify connections between pages that share similar characteristics.” [Read blog](/blog/corsearch-replaces-mysql-with-clickhouse-for-content-and-brand-protection?loc=homepage)`,
+      logo: LogoCorsearch,
       categories: ['ML & GenAI']
     },
     // Admixer

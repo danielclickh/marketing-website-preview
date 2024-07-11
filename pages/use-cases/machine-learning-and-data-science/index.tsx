@@ -74,7 +74,7 @@ export default function MLUseCasePage({
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='bg-contain bg-center bg-no-repeat'>
-          <div className='relative z-20 overflow-hidden bg-grid pt-10 pb-20'>
+          <div className='relative z-20 overflow-hidden bg-grid pb-20 pt-10'>
             <div className='absolute z-10 w-full bg-center bg-no-repeat lg:top-64 lg:h-[524px] lg:bg-speed-lines-ml'></div>
             <div className='container relative z-40 mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>
               <div className='flex'>
@@ -189,7 +189,7 @@ export default function MLUseCasePage({
           <div className='section-container max-w-7xl'>
             <div className='relative flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
-                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[490px] md:flex-row lg:h-[360px] xl:h-[320px] '>
+                <div className='flex flex-col gap-x-6 gap-y-6 xl:h-[410px] xl:flex-row '>
                   {quotes.map((quote) => (
                     <Tilt
                       tiltEnable={false}
@@ -217,7 +217,7 @@ export default function MLUseCasePage({
                               width={quote.imgWidth}
                               height={quote.imgHeight}
                               alt={quote.title}
-                              className='mt-12 md:mt-auto'
+                              className='mt-12 inline-block h-auto max-w-[200px] xl:mt-auto'
                             />
                           </div>
                         </Link>
@@ -307,7 +307,7 @@ export default function MLUseCasePage({
 
         <div className='bg-shadow-element-right yellow-shadow '>
           <div className='section-container mb-24 flex w-full pt-24 text-neutral-0 md:px-8 2xl:px-0 '>
-            <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-right bg-no-repeat py-16 px-4 xl:px-24'>
+            <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-right bg-no-repeat px-4 py-16 xl:px-24'>
               <div className='flex flex-col text-center'>
                 <SuiTitle type='h2' color='white'>
                   Supporting{' '}
