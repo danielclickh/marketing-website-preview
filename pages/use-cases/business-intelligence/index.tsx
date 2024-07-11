@@ -1,23 +1,23 @@
-import {GetStaticProps} from 'next'
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import Tilt from 'react-parallax-tilt'
 import AccordionComponent from '../../../components/BusinessIntelligenceDiagram/Accordion'
-import {CUIButton} from '../../../components/ClickUI'
+import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
-import {SuiText, SuiTitle} from '../../../components/sui'
-import {findOne} from '../../../lib/api/strapi'
-import {getCommonProps} from '../../../lib/utils/getCommonProps'
-import {CommonProps} from '../../../types/homepage'
+import { SuiText, SuiTitle } from '../../../components/sui'
+import { findOne } from '../../../lib/api/strapi'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { CommonProps } from '../../../types/homepage'
 import bigNumbers from './big-numbers.json'
 import features from './features.json'
 import quotes from './quotes.json'
 import references from './supporting-references.json'
-import {galaxyOnPage} from "../../../lib/galaxy/galaxy";
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
@@ -58,7 +58,7 @@ export default function RealTimeAnalyticsPage({
   headerData,
   footerData
 }: RealTimeAnalyticsPageProps) {
-  galaxyOnPage('bizIntelUseCasePage');
+  galaxyOnPage('bizIntelUseCasePage')
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
@@ -141,7 +141,7 @@ export default function RealTimeAnalyticsPage({
                 ClickHouse compared to other warehouses
               </h2>
               <div className='py-12'>
-                <div className='mx-auto grid max-w-xl grid-cols-3 justify-between gap-y-10 gap-x-6 text-center md:gap-x-16'>
+                <div className='mx-auto grid max-w-xl grid-cols-3 justify-between gap-x-6 gap-y-10 text-center md:gap-x-16'>
                   {bigNumbers.map((number, index) => {
                     return (
                       <div key={index}>
@@ -192,7 +192,7 @@ export default function RealTimeAnalyticsPage({
           </div>
         </div>
         <div className='bg-neutral-725'>
-          <div className='relative mx-auto pt-12 pb-24 md:px-0 md:pt-24'>
+          <div className='relative mx-auto pb-24 pt-12 md:px-0 md:pt-24'>
             <div className='section-container mx-auto max-w-7xl '>
               <div className='mx-auto max-w-7xl'>
                 <div className='flex w-full flex-col items-center'>
@@ -329,7 +329,7 @@ export default function RealTimeAnalyticsPage({
 
         <div className='bg-shadow-element-right yellow-shadow'>
           <div className='section-container mb-24 flex w-full pt-24 text-neutral-0 md:px-8 2xl:px-0 '>
-            <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-right bg-no-repeat py-16 px-4 xl:px-24'>
+            <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-right bg-no-repeat px-4 py-16 xl:px-24'>
               <div className='flex flex-col text-center'>
                 <SuiTitle type='h2' color='white'>
                   Supporting{' '}

@@ -6,13 +6,13 @@
         "content": "We aggregate the user's history in ClickHouse and use it as a data store for training and inference. Even when reading 10s of millions of rows, the performance was very nice and not the bottleneck when training new models.",
         "href": "/blog/deepls-journey-with-clickhouse",
         "target": "_self",
-        "imgWidth": 122,
-        "imgHeight": 44
+        "imgWidth": 120,
+        "imgHeight": 42
     },
     {
         "id": 20,
         "title": "LangChain",
-        "logo": "/images/langchain-logo-white.svg",
+        "logo": "/images/use-cases/ml-and-ds/langchain-logo-white.svg",
         "content": "We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse.",
         "href": "/blog/langchain-why-we-choose-clickhouse-to-power-langchain?loc=ml-use-case",
         "target": "_self",
@@ -26,7 +26,17 @@
         "content": "We collect tens of thousands of data points from customers' phones and other more traditional sources. ClickHouse is used as a way to process all of these SMS messages and extract valuable information used for the scoring and fraud models.",
         "href": "/blog/how-quickcheck-uses-clickhouse-to-bring-banking-to-the-unbanked",
         "target": "_self",
-        "imgWidth": 258,
-        "imgHeight": 49
+        "imgWidth": 253,
+        "imgHeight": 40
+    },
+    {
+        "id": 40,
+        "logo": "/images/use-cases/ml-and-ds/corsearch-logo.svg",
+        "title": "Corsearch",
+        "content": "By utilizing expert models and embeddings, we detect substantive changes in web pages and identify connections between pages that share similar characteristics.",
+        "href": "/blog/corsearch-replaces-mysql-with-clickhouse-for-content-and-brand-protection",
+        "target": "_self",
+        "imgWidth": 180,
+        "imgHeight": 22
     }
 ]

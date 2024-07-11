@@ -2,7 +2,7 @@
     {
         "id": 10,
         "title": "Cloudflare",
-        "logo": "/images/use-cases/logging/logo-cloudflare.svg",
+        "logo": "/images/use-cases/logging/cloudflare-logo.svg",
         "content": "ClickHouse helps us efficiently and reliably analyze logs across trillions of Internet requests to identify malicious traffic and provide customers with rich analytics.",
         "href": "",
         "target": "",
