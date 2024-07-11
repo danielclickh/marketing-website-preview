@@ -5,6 +5,9 @@ import Image from 'next/image'
 import logoFull from '../../public/logo-full.svg'
 import topLevelFooterMenu from './footer.json'
 
+import { galaxyOnClick } from '../../lib/galaxy/galaxy'
+import { FullyQualifiedEvent } from '../../lib/galaxy/client'
+
 export default function Footer({
   newsletterForm,
   bottomLinks = []
@@ -20,13 +23,20 @@ export default function Footer({
                 <div className='mb-3 text-sm font-semibold text-neutral-0'>
                   {topMenu.title}
                 </div>
-                <div className='flex flex-row flex-wrap gap-y-2 gap-x-4 text-neutral-400 lg:flex-col lg:gap-x-0'>
+                <div className='flex flex-row flex-wrap gap-x-4 gap-y-2 text-neutral-400 lg:flex-col lg:gap-x-0'>
                   {topMenu.items.map((footerLink) => (
                     <CUILink
                       key={footerLink.name}
                       href={footerLink.href}
                       target={footerLink.target}
-                      className='footer w-fit text-sm transition-all hover:text-neutral-0'>
+                      className='footer w-fit text-sm transition-all hover:text-neutral-0'
+                      onClick={
+                        footerLink.galaxyEvent
+                          ? galaxyOnClick(
+                              footerLink.galaxyEvent as FullyQualifiedEvent
+                            )
+                          : undefined
+                      }>
                       {footerLink.name}
                     </CUILink>
                   ))}
@@ -62,7 +72,14 @@ export default function Footer({
                 key={bottomLink.text}
                 href={bottomLink.href}
                 target={bottomLink.target}
-                className={`first:pl-0 bottom-link-${index} whitespace-nowrap hover:text-neutral-0`}>
+                className={`first:pl-0 bottom-link-${index} whitespace-nowrap hover:text-neutral-0`}
+                onClick={() => {
+                  galaxyOnClick(
+                    `footerNav.privacyItems.${bottomLink.text
+                      .replace(/\s+/g, '')
+                      .toLowerCase()}Select`
+                  )
+                }}>
                 {bottomLink.text}
               </CUILink>
             ))}
