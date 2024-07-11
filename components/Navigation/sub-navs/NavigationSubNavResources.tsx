@@ -15,14 +15,6 @@ export default function NavigationSubNavResources() {
     <ul className='relative px-4 md-mid:py-4'>
       <li>
         <NavigationLink
-          href='/blog'
-          onClick={() => galaxyOnClick('topNav.resourcesMenu.blogSelect')}
-          className='block w-full'>
-          Blog
-        </NavigationLink>
-      </li>
-      <li>
-        <NavigationLink
           href='/user-stories'
           onClick={() =>
             galaxyOnClick('topNav.resourcesMenu.blogCustomerStoriesSelect')
@@ -31,51 +23,13 @@ export default function NavigationSubNavResources() {
           User stories
         </NavigationLink>
       </li>
-      <li
-        onMouseEnter={() => {
-          setActiveSubNav('news-and-events')
-        }}
-        onMouseLeave={() => {
-          setActiveSubNav(null)
-        }}>
+      <li>
         <NavigationLink
-          onClick={() => {
-            setActiveSubNav(
-              isSubNavActive('news-and-events') ? null : 'news-and-events'
-            )
-          }}
-          className={`w-full items-center justify-between ${
-            isSubNavActive('news-and-events') ? 'text-primary-300' : ''
-          }`}>
-          <span>News and events</span>
-          <NavigationChevron
-            className={
-              isSubNavActive('news-and-events')
-                ? 'rotate-90 text-primary-300 md-mid:rotate-0'
-                : 'text-neutral-500'
-            }
-          />
+          href='/blog'
+          onClick={() => galaxyOnClick('topNav.resourcesMenu.blogSelect')}
+          className='block w-full'>
+          Blog
         </NavigationLink>
-        <NavigationSubNav isOpen={isSubNavActive('news-and-events')}>
-          <li>
-            <NavigationLink
-              href='/company/news-events?category=Event'
-              onClick={() => galaxyOnClick('topNav.resourcesMenu.eventsSelect')}
-              className='block w-full'>
-              Events
-            </NavigationLink>
-          </li>
-          <li>
-            <NavigationLink
-              href='https://clickhouse.com/docs/category/changelog'
-              onClick={() =>
-                galaxyOnClick('topNav.resourcesMenu.releasesSelect')
-              }
-              className='block w-full'>
-              Releases
-            </NavigationLink>
-          </li>
-        </NavigationSubNav>
       </li>
       <li
         onMouseEnter={() => {
@@ -91,7 +45,7 @@ export default function NavigationSubNavResources() {
           className={`w-full items-center justify-between ${
             isSubNavActive('learning') ? 'text-primary-300' : ''
           }`}>
-          <span>Learning</span>
+          <span>Learning & Certification</span>
           <NavigationChevron
             className={
               isSubNavActive('learning')
@@ -121,26 +75,6 @@ export default function NavigationSubNavResources() {
           </li>
           <li>
             <NavigationLink
-              href='https://clickhouse.com/docs/knowledgebase'
-              onClick={() =>
-                galaxyOnClick('topNav.learnMenu.knowledgebaseSelect')
-              }
-              className='block w-full'>
-              Knowledge base
-            </NavigationLink>
-          </li>
-          <li>
-            <NavigationLink
-              href='/videos?category=how-to'
-              onClick={() =>
-                galaxyOnClick('topNav.learnMenu.howtoVideosSelect')
-              }
-              className='block w-full'>
-              How to videos
-            </NavigationLink>
-          </li>
-          <li>
-            <NavigationLink
               href='/learn/certification'
               onClick={() =>
                 galaxyOnClick('topNav.learnMenu.certificationSelect')
@@ -151,14 +85,98 @@ export default function NavigationSubNavResources() {
           </li>
         </NavigationSubNav>
       </li>
+      <li
+        onMouseEnter={() => {
+          setActiveSubNav('comparisons')
+        }}
+        onMouseLeave={() => {
+          setActiveSubNav(null)
+        }}>
+        <NavigationLink
+          onClick={() => {
+            setActiveSubNav(
+              isSubNavActive('comparisons') ? null : 'comparisons'
+            )
+          }}
+          className={`w-full items-center justify-between ${
+            isSubNavActive('comparisons') ? 'text-primary-300' : ''
+          }`}>
+          <span>Comparisons</span>
+          <NavigationChevron
+            className={
+              isSubNavActive('comparisons')
+                ? 'rotate-90 text-primary-300 md-mid:rotate-0'
+                : 'text-neutral-500'
+            }
+          />
+        </NavigationLink>
+        <NavigationSubNav isOpen={isSubNavActive('comparisons')}>
+          <li>
+            <NavigationLink
+              href='/comparison/bigquery'
+              onClick={() =>
+                galaxyOnClick('topNav.comparisonsMenu.bigQuerySelect')
+              }
+              className='block w-full'>
+              BigQuery
+            </NavigationLink>
+          </li>
+          <li>
+            <NavigationLink
+              href='/comparison/postgresql'
+              onClick={() =>
+                galaxyOnClick('topNav.comparisonsMenu.postgreSqlSelect')
+              }
+              className='block w-full'>
+              PostgreSQL
+            </NavigationLink>
+          </li>
+          <li>
+            <NavigationLink
+              href='/comparison/redshift'
+              onClick={() =>
+                galaxyOnClick('topNav.comparisonsMenu.redshiftSelect')
+              }
+              className='block w-full'>
+              Redshift
+            </NavigationLink>
+          </li>
+          <li>
+            <NavigationLink
+              href='/comparison/rockset'
+              onClick={() =>
+                galaxyOnClick('topNav.comparisonsMenu.rocksetSelect')
+              }
+              className='block w-full'>
+              Rockset
+            </NavigationLink>
+          </li>
+          <li>
+            <NavigationLink
+              href='/comparison/snowflake'
+              onClick={() =>
+                galaxyOnClick('topNav.comparisonsMenu.snowflakeSelect')
+              }
+              className='block w-full'>
+              Snowflake
+            </NavigationLink>
+          </li>
+        </NavigationSubNav>
+      </li>
       <li>
         <NavigationLink
-          href='/support/program'
-          className='block w-full'
-          onClick={() =>
-            galaxyOnClick('topNav.learnMenu.supportProgramSelect')
-          }>
-          Support
+          href='/videos'
+          onClick={() => galaxyOnClick('topNav.resourcesMenu.videosSelect')}
+          className='block w-full'>
+          Videos
+        </NavigationLink>
+      </li>
+      <li>
+        <NavigationLink
+          href='/demos'
+          onClick={() => galaxyOnClick('topNav.resourcesMenu.demosSelect')}
+          className='block w-full'>
+          Demos
         </NavigationLink>
       </li>
     </ul>

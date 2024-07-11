@@ -60,7 +60,7 @@ export default function NavigationSubNavProducts() {
               height={24}
               className='flex-grow-1 flex-shrink-0'
             />
-            <span>View integrations</span>
+            <span>View 100+ integrations</span>
           </NavigationLink>
         </li>
       </ul>
@@ -70,7 +70,7 @@ export default function NavigationSubNavProducts() {
           galaxyOnClick('topNav.productMenu.integrationsHighlightSelect')
         }
         className='hidden w-full rounded-b-lg border-t border-white/5 px-4 py-3 text-center text-sm font-medium transition-colors hover:bg-neutral-700/25 hover:text-primary-300 md-mid:block'>
-        View our integrations
+        View 100+ integrations
       </LinkWithArrow>
     </>
   )

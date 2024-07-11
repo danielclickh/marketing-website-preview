@@ -57,18 +57,19 @@ export default function NavigationSubNavUseCases() {
         </li>
         <li
           onMouseEnter={() => {
-            //setQuote(quotes.cloudflare)
+            //setQuote(quotes.langchain)
           }}
           className='col-span-2'>
           <NavigationLink
-            href='/use-cases/logging-and-metrics'
+            href='/use-cases/machine-learning-and-data-science'
             onClick={() =>
-              galaxyOnClick('topNav.useCasesMenu.loggingAndMetricsSelect')
+              galaxyOnClick('topNav.useCasesMenu.machineLearningSelect')
             }
             className='block w-full'>
-            Logs, events and traces
+            Machine learning and GenAI
           </NavigationLink>
         </li>
+
         <li
           onMouseEnter={() => {
             //setQuote(quotes.adgreetz)
@@ -83,16 +84,16 @@ export default function NavigationSubNavUseCases() {
         </li>
         <li
           onMouseEnter={() => {
-            //setQuote(quotes.langchain)
+            //setQuote(quotes.cloudflare)
           }}
           className='col-span-2'>
           <NavigationLink
-            href='/use-cases/machine-learning-and-data-science'
+            href='/use-cases/logging-and-metrics'
             onClick={() =>
-              galaxyOnClick('topNav.useCasesMenu.machineLearningSelect')
+              galaxyOnClick('topNav.useCasesMenu.loggingAndMetricsSelect')
             }
             className='block w-full'>
-            Machine learning and GenAI
+            Logs, events and traces
           </NavigationLink>
         </li>
         <li
