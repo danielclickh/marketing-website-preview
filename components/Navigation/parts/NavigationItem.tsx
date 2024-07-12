@@ -45,7 +45,7 @@ interface NavigationItemHrefProps extends NavigationItemBaseProps {
 }
 
 interface NavigationItemLinkProps extends NavigationItemBaseProps {
-  link: Omit<NavigationLinkProps, 'children' | 'ref'>
+  link: Omit<NavigationLinkProps, 'children' | 'ref' | 'isHovered'>
   href?: never
 }
 
