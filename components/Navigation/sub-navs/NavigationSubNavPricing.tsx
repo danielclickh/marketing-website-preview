@@ -4,7 +4,7 @@ import { NavigationLink } from '../parts'
 
 export default function NavigationSubNavPricing() {
   return (
-    <ul className='px-4 md-mid:py-4'>
+    <ul className='px-4 md-mid:py-2'>
       <li>
         <NavigationLink
           href='/pricing'

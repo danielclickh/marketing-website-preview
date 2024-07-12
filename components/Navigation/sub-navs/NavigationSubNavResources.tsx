@@ -12,7 +12,7 @@ export default function NavigationSubNavResources() {
   const isSubNavActive = (name: string) => activeSubNav === name
 
   return (
-    <ul className='relative px-4 md-mid:py-4'>
+    <ul className='relative px-4 md-mid:py-2'>
       <li>
         <NavigationLink
           href='/user-stories'

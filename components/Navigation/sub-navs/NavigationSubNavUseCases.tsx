@@ -39,7 +39,7 @@ export default function NavigationSubNavUseCases() {
   return (
     <>
       <div
-        className={`px-4 md-mid:grid-cols-5 md-mid:grid-rows-1 md-mid:gap-x-4 md-mid:py-4 ${
+        className={`px-4 md-mid:grid-cols-5 md-mid:grid-rows-1 md-mid:gap-x-4 md-mid:py-2 ${
           quote ? 'md-mid:grid' : ''
         }`}>
         <ul className='col-span-2'>
@@ -136,7 +136,7 @@ export default function NavigationSubNavUseCases() {
       <LinkWithArrow
         href='/use-cases'
         onClick={() => galaxyOnClick('topNav.useCasesMenu.allUseCasesSelect')}
-        className='hidden w-full rounded-b-lg border-t border-white/5 px-8 py-3 text-sm font-medium transition-colors hover:bg-neutral-700/25 hover:text-primary-300 md-mid:block'>
+        className='hidden w-full rounded-b-lg border-t border-neutral-700 px-6 py-2.5 text-sm font-medium transition-colors hover:bg-neutral-700/25 hover:text-primary-300 md-mid:block'>
         All use cases
       </LinkWithArrow>
     </>

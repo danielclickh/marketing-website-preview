@@ -138,7 +138,7 @@ export default function NavigationItem({
         ref={linkRef}
         {...linkProps}
         isHovered={isOpen}
-        className={`group/navItem items-center ${
+        className={`group/navItem items-center md-mid:!px-4 ${
           !href && !link && !hasChildren ? 'cursor-default' : ''
         } ${hasChildren ? 'md-mid:pointer-events-none' : ''} ${
           isOpen ? 'text-primary-300' : ''
