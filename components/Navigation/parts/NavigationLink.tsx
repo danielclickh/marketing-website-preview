@@ -6,12 +6,12 @@ export interface NavigationLinkProps extends Omit<LinkProps, 'href'> {
   href?: LinkProps['href']
   className?: string
   children: React.ReactNode
-  isHovered: boolean
+  isHovered?: boolean
 }
 
 const NavigationLink = forwardRef<HTMLAnchorElement, NavigationLinkProps>(
   function NavigationLink(
-    { className = '', href = '', children, isHovered, ...props },
+    { className = '', href = '', children, isHovered = false, ...props },
     ref
   ) {
     return (
