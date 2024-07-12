@@ -12,7 +12,7 @@ export default function NavigationSubNavProducts() {
           <NavigationLink
             href='/cloud'
             onClick={() => galaxyOnClick('topNav.productMenu.cloudSelect')}
-            className='group/chCloud !flex w-full items-center gap-4'>
+            className='group/chCloud !flex w-full items-center gap-3'>
             <Image
               src='/images/nav/icon-clickhouse-cloud.svg'
               alt='ClickHouse Cloud'
