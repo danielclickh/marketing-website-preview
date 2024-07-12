@@ -139,7 +139,9 @@ export default function NavigationItem({
         {...linkProps}
         className={`group/navItem items-center ${
           !href && !link && !hasChildren ? 'cursor-default' : ''
-        } ${isOpen ? 'text-primary-300' : ''} ${linkClassName}`}>
+        } ${hasChildren ? 'md-mid:pointer-events-none' : ''} ${
+          isOpen ? 'text-primary-300' : ''
+        } ${linkClassName}`}>
         <span className='flex-1'>{label}</span>
         {hasChildren && (
           <span className='md-mid:ml-2'>
