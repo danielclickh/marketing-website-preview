@@ -76,7 +76,7 @@ export default function NavigationSubNavProducts() {
         onClick={() =>
           galaxyOnClick('topNav.productMenu.integrationsHighlightSelect')
         }
-        className='hidden w-full rounded-b-lg border-t border-neutral-700 px-6 py-2.5 text-sm font-medium transition-colors hover:bg-neutral-700/25 hover:text-primary-300 md-mid:block'>
+        className='hidden w-full rounded-b-lg border-t border-neutral-700 px-[60px] py-2.5 text-sm font-medium transition-colors hover:bg-neutral-700/25 hover:text-primary-300 md-mid:block'>
         View 100+ integrations
       </LinkWithArrow>
     </>
