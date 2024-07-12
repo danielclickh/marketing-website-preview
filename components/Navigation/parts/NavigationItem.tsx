@@ -154,7 +154,7 @@ export default function NavigationItem({
               className={`hidden md-mid:block ${
                 isOpen ? '' : 'text-neutral-500 group-hover/navItem:text-white'
               }`}
-              direction={isOpen ? 'up' : 'down'}
+              direction='down'
             />
           </span>
         )}
