@@ -24,22 +24,30 @@ export default function Footer({
                   {topMenu.title}
                 </div>
                 <div className='flex flex-row flex-wrap gap-x-4 gap-y-2 text-neutral-400 lg:flex-col lg:gap-x-0'>
-                  {topMenu.items.map((footerLink) => (
-                    <CUILink
-                      key={footerLink.name}
-                      href={footerLink.href}
-                      target={footerLink.target}
-                      className='footer w-fit text-sm transition-all hover:text-neutral-0'
-                      onClick={
-                        footerLink.galaxyEvent
-                          ? galaxyOnClick(
-                              footerLink.galaxyEvent as FullyQualifiedEvent
-                            )
-                          : undefined
-                      }>
-                      {footerLink.name}
-                    </CUILink>
-                  ))}
+                  <ul>
+                    {topMenu.items.map((footerLink) => (
+                      <li>
+                        <CUILink
+                          key={footerLink.name}
+                          href={footerLink.href}
+                          target={footerLink.target}
+                          className='footer w-fit text-sm transition-all hover:text-neutral-0'
+                          onClick={
+                            footerLink.galaxyEvent
+                              ? galaxyOnClick(
+                                  footerLink.galaxyEvent as FullyQualifiedEvent
+                                )
+                              : undefined
+                          }>
+                          {topMenu.title === 'Products' ? (
+                            <span>{footerLink.name}</span>
+                          ) : (
+                            <>{footerLink.name}</>
+                          )}
+                        </CUILink>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             ))}

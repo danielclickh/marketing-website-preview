@@ -11,27 +11,6 @@
 				"galaxyEvent": "footerNav.productMenu.clickHouseCloudSelect"
 			},
 			{
-				"id": 20,
-				"name": "- ClickPipes",
-				"href": "/cloud/clickpipes",
-				"target": "_self",
-				"galaxyEvent": "footerNav.productMenu.clickpipesSelect"
-			},
-			{
-				"id": 200,
-				"name": "- Pricing",
-				"href": "/pricing",
-				"target": "_self",
-				"galaxyEvent": "footerNav.productMenu.pricingSelect"
-			},
-			{
-				"id": 300,
-				"name": "- Bring Your Own Cloud",
-				"href": "/cloud/bring-your-own-cloud",
-				"target": "_self",
-				"galaxyEvent": "footerNav.productMenu.byocSelect"
-			},
-			{
 				"id": 15,
 				"name": "ClickHouse",
 				"href": "/clickhouse",
@@ -39,32 +18,25 @@
 				"galaxyEvent": "footerNav.productMenu.clickHouseSelect"
 			},
 			{
-				"id": 25,
-				"name": "- Download",
-				"href": "https://clickhouse.com/docs/en/install#self-managed-install",
-				"target": "_blank",
-				"galaxyEvent": "footerNav.productMenu.downloadSelect"
+				"id": 300,
+				"name": "Bring Your Own Cloud",
+				"href": "/cloud/bring-your-own-cloud",
+				"target": "_self",
+				"galaxyEvent": "footerNav.productMenu.byocSelect"
 			},
 			{
 				"id": 22,
-				"name": "- ClickHouse Keeper",
+				"name": "ClickHouse Keeper",
 				"href": "/clickhouse/keeper",
 				"target": "_self",
 				"galaxyEvent": "footerNav.productMenu.keeperSelect"
 			},
 			{
-				"id": 500,
-				"name": "- ClickHouse Embedded (chdb)",
-				"href": "https://github.com/chdb-io/chdb",
+				"id": 20,
+				"name": "ClickPipes",
+				"href": "/cloud/clickpipes",
 				"target": "_self",
-				"galaxyEvent": "footerNav.productMenu.chdbSelect"
-			},
-			{
-				"id": 600,
-				"name": "- ClickHouse Local",
-				"href": "https://clickhouse.com/docs/en/operations/utilities/clickhouse-local",
-				"target": "_self",
-				"galaxyEvent": "footerNav.productMenu.clickhouseLocalSelect"
+				"galaxyEvent": "footerNav.productMenu.clickpipesSelect"
 			},
 			{
 				"id": 18,
@@ -74,11 +46,25 @@
 				"galaxyEvent": "footerNav.productMenu.integrationsSelect"
 			},
 			{
+				"id": 500,
+				"name": "chDB",
+				"href": "https://github.com/chdb-io/chdb",
+				"target": "_self",
+				"galaxyEvent": "footerNav.productMenu.chdbSelect"
+			},
+			{
 				"id": 400,
 				"name": "Trust center",
 				"href": "https://trust.clickhouse.com",
 				"target": "_blank",
 				"galaxyEvent": "footerNav.productMenu.trustCenterSelect"
+			},
+			{
+				"id": 200,
+				"name": "Pricing",
+				"href": "/pricing",
+				"target": "_self",
+				"galaxyEvent": "footerNav.productMenu.pricingSelect"
 			}
 		]
 	},
