@@ -123,7 +123,7 @@
 			},
 			{
 				"id": 123,
-				"name": "Real-time Data Warehouse",
+				"name": "Real-time data warehouse",
 				"href": "/real-time-data-warehouse",
 				"target": "_self",
 				"galaxyEvent": "footerNav.productMenu.realtimeDWSelect"
