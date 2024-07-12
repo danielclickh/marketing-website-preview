@@ -47,7 +47,7 @@ export default function NavigationSubNavProducts() {
               <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
                 Spin up a database with open-
                 <br />
-                source ClickHouse
+                source ClickHouse.
               </div>
             </span>
           </NavigationLink>
