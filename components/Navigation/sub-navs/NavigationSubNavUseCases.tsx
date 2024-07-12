@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { galaxyOnClick } from '../../../lib/galaxy/galaxy'
+import LinkWithArrow from '../../LinkWithArrow'
 import { NavigationLink, NavigationQuote, NavigationQuoteProps } from '../parts'
 
 export default function NavigationSubNavUseCases() {
@@ -36,95 +37,108 @@ export default function NavigationSubNavUseCases() {
   const [quote, setQuote] = useState<null | UseCaseQuote>(null)
 
   return (
-    <div
-      className={`px-4 md-mid:grid-cols-5 md-mid:grid-rows-1 md-mid:gap-x-4 md-mid:py-4 ${
-        quote ? 'md-mid:grid' : ''
-      }`}>
-      <ul className='col-span-2'>
-        <li
-          onMouseEnter={() => {
-            //setQuote(quotes.lyft)
-          }}
-          className='col-span-2'>
-          <NavigationLink
-            href='/use-cases/real-time-analytics'
-            onClick={() =>
-              galaxyOnClick('topNav.useCasesMenu.realTimeAnalyticsSelect')
-            }
-            className='block w-full'>
-            Real-time analytics
-          </NavigationLink>
-        </li>
-        <li
-          onMouseEnter={() => {
-            //setQuote(quotes.langchain)
-          }}
-          className='col-span-2'>
-          <NavigationLink
-            href='/use-cases/machine-learning-and-data-science'
-            onClick={() =>
-              galaxyOnClick('topNav.useCasesMenu.machineLearningSelect')
-            }
-            className='block w-full'>
-            Machine learning and GenAI
-          </NavigationLink>
-        </li>
+    <>
+      <div
+        className={`px-4 md-mid:grid-cols-5 md-mid:grid-rows-1 md-mid:gap-x-4 md-mid:py-4 ${
+          quote ? 'md-mid:grid' : ''
+        }`}>
+        <ul className='col-span-2'>
+          <li
+            onMouseEnter={() => {
+              //setQuote(quotes.lyft)
+            }}
+            className='col-span-2'>
+            <NavigationLink
+              href='/use-cases/real-time-analytics'
+              onClick={() =>
+                galaxyOnClick('topNav.useCasesMenu.realTimeAnalyticsSelect')
+              }
+              className='block w-full'>
+              Real-time analytics
+            </NavigationLink>
+          </li>
+          <li
+            onMouseEnter={() => {
+              //setQuote(quotes.langchain)
+            }}
+            className='col-span-2'>
+            <NavigationLink
+              href='/use-cases/machine-learning-and-data-science'
+              onClick={() =>
+                galaxyOnClick('topNav.useCasesMenu.machineLearningSelect')
+              }
+              className='block w-full'>
+              Machine learning and GenAI
+            </NavigationLink>
+          </li>
 
-        <li
-          onMouseEnter={() => {
-            //setQuote(quotes.adgreetz)
-          }}
-          className='col-span-2'>
-          <NavigationLink
-            href='/use-cases/business-intelligence'
-            onClick={() => galaxyOnClick('topNav.useCasesMenu.bizIntelSelect')}
-            className='block w-full'>
-            Business intelligence
-          </NavigationLink>
-        </li>
-        <li
-          onMouseEnter={() => {
-            //setQuote(quotes.cloudflare)
-          }}
-          className='col-span-2'>
-          <NavigationLink
-            href='/use-cases/logging-and-metrics'
-            onClick={() =>
-              galaxyOnClick('topNav.useCasesMenu.loggingAndMetricsSelect')
-            }
-            className='block w-full'>
-            Logs, events and traces
-          </NavigationLink>
-        </li>
-        <li
-          onMouseEnter={() => {
-            //setQuote(quotes.instacart)
-          }}
-          className='col-span-2'>
-          <NavigationLink
-            href='/use-cases'
-            onClick={() =>
-              galaxyOnClick('topNav.useCasesMenu.allUseCasesSelect')
-            }
-            className='block w-full'>
-            All use cases
-          </NavigationLink>
-        </li>
-      </ul>
-      {!!quote && (
-        <NavigationQuote
-          {...quote}
-          className='col-span-3 col-start-3 row-span-full my-4 md-mid:my-0 md-mid:max-w-[400px]'
-          link={{
-            href: '/user-stories',
-            text: 'View more user stories',
-            onClick() {
-              galaxyOnClick('topNav.useCasesMenu.userStoriesQuoteSelect')
-            }
-          }}>
-          {quote?.children}
-        </NavigationQuote>
-      )}
-    </div>
+          <li
+            onMouseEnter={() => {
+              //setQuote(quotes.adgreetz)
+            }}
+            className='col-span-2'>
+            <NavigationLink
+              href='/use-cases/business-intelligence'
+              onClick={() =>
+                galaxyOnClick('topNav.useCasesMenu.bizIntelSelect')
+              }
+              className='block w-full'>
+              Business intelligence
+            </NavigationLink>
+          </li>
+          <li
+            onMouseEnter={() => {
+              //setQuote(quotes.cloudflare)
+            }}
+            className='col-span-2'>
+            <NavigationLink
+              href='/use-cases/logging-and-metrics'
+              onClick={() =>
+                galaxyOnClick('topNav.useCasesMenu.loggingAndMetricsSelect')
+              }
+              className='block w-full'>
+              Logs, events and traces
+            </NavigationLink>
+          </li>
+          <li
+            onMouseEnter={() => {
+              //setQuote(quotes.instacart)
+            }}
+            className='col-span-2 md-mid:hidden'>
+            {/* This is the mobile link, the desktop link is futher down */}
+            <NavigationLink
+              href='/use-cases'
+              onClick={() =>
+                galaxyOnClick('topNav.useCasesMenu.allUseCasesSelect')
+              }
+              className='block w-full'>
+              All use cases
+            </NavigationLink>
+          </li>
+        </ul>
+        {!!quote && (
+          <NavigationQuote
+            {...quote}
+            className='col-span-3 col-start-3 row-span-full my-4 md-mid:my-0 md-mid:max-w-[400px]'
+            link={{
+              href: '/user-stories',
+              text: 'View more user stories',
+              onClick() {
+                galaxyOnClick('topNav.useCasesMenu.userStoriesQuoteSelect')
+              }
+            }}>
+            {quote?.children}
+          </NavigationQuote>
+        )}
+      </div>
+
+      {/* This is the desktop link, the mobile link is in the <ul> above */}
+      <LinkWithArrow
+        href='/use-cases'
+        onClick={() => galaxyOnClick('topNav.useCasesMenu.allUseCasesSelect')}
+        className='hidden w-full rounded-b-lg border-t border-white/5 px-4 py-3 text-center text-sm font-medium transition-colors hover:bg-neutral-700/25 hover:text-primary-300 md-mid:block'>
+        All use cases
+      </LinkWithArrow>
+    </>
   )
 }
