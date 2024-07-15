@@ -35,6 +35,11 @@ export default function Page() {
     typeof router.query?.clearbitTracking === 'string' &&
     router.query.clearbitTracking === '1'
 
+  const submitButtonLabel =
+    typeof router.query?.submitButtonLabel === 'string'
+      ? router.query.submitButtonLabel
+      : null
+
   // Referer URL passed from parent
   const referer =
     typeof router.query?.referer === 'string' ? router.query.referer : ''
@@ -212,6 +217,10 @@ export default function Page() {
       // Remove styles unwanted styles on re-render
       window.MktoForms2.onFormRender((marketoFormObject) => {
         removeMarketoStyles(marketoFormObject)
+
+        // Update submit button label from iframe query params
+        if (submitButtonLabel)
+          setSubmitButtonLabel(marketoFormObject, submitButtonLabel)
       })
 
       // Init the marketo JS api
@@ -222,6 +231,10 @@ export default function Page() {
         function (marketoFormObject) {
           // Remove marketo added styles
           removeMarketoStyles(marketoFormObject)
+
+          // Update submit button label from iframe query params
+          if (submitButtonLabel)
+            setSubmitButtonLabel(marketoFormObject, submitButtonLabel)
 
           // Add clearbit tracking script
           if (clearbitTracking) {
@@ -322,6 +335,14 @@ export default function Page() {
       </div>
     </>
   )
+}
+
+function setSubmitButtonLabel(
+  marketoFormObject: MarketoFormObject,
+  label: string
+) {
+  const jqueryElement = marketoFormObject.getFormElem()
+  jqueryElement.find('.mktoButtonRow button[type="submit"]').text(label)
 }
 
 function removeMarketoStyles(marketoFormObject: MarketoFormObject) {
