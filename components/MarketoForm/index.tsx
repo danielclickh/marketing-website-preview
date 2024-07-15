@@ -47,6 +47,7 @@ type MarketoFormProps = {
   formId: string
   disclaimer?: string | false
   clearbitTracking?: boolean
+  submitButtonLabel?: null | string
 
   // Callbacks
   onLoad?: (formObject: SpoofedMarketoObject) => any
@@ -61,7 +62,8 @@ export default function MarketoForm({
   disclaimer = 'By registering, you acknowledge that ClickHouse will process your personal information in accordance with our [Privacy Policy](/legal/privacy-policy).',
   clearbitTracking = false,
   onLoad,
-  onSuccess
+  onSuccess,
+  submitButtonLabel
 }: MarketoFormProps) {
   const router = useRouter()
   const instanceId = useId()
@@ -240,6 +242,7 @@ export default function MarketoForm({
       const params = new URLSearchParams(queryParams.toString())
       params.set('iid', instanceId) // Add our component instance id
       if (clearbitTracking) params.set('clearbitTracking', '1') // Add optional tracking param
+      if (submitButtonLabel) params.set('submitButtonLabel', submitButtonLabel)
       setQueryString(params.toString())
 
       // Listen for messages from the iframe

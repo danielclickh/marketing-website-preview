@@ -50,6 +50,7 @@ function EventsForm({
           <MarketoForm
             formId={'1127'}
             onLoad={() => setFormLoaded(true)}
+            submitButtonLabel={form.submitButtonLabel}
             clearbitTracking={true}
             onSuccess={() => {
               setFormSuccess(true)
