@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps<LoggingProps> =
 
     data.seo.path = '/use-cases/logging-and-metrics'
     data.seo.title =
-      'Logs, Events, & Traces with ClickHouse | ClickHouse for Logging'
+      'Logs, Events, and Traces with ClickHouse | ClickHouse for Logging'
     data.seo.description =
       'ClickHouse is the fastest and most resource-efficient database for real-time analytics, making it the perfect fit for observability use cases.'
     data.seo.image = [{ url: '/images/use-cases/logging/og.png' }]
@@ -79,11 +79,11 @@ export default function ClickHouseServerPage({
               <div className='flex'>
                 <div className='flex-col xl:mt-16 xl:w-7/12'>
                   <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                    <Link href='/use-cases'>Use cases</Link> / Logs, Events, &
-                    Traces
+                    <Link href='/use-cases'>Use cases</Link> / Logs, events, and
+                    traces
                   </h4>
                   <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-2xl lg:text-left'>
-                    Logs, Events, & Traces with ClickHouse
+                    Logs, events, and traces with ClickHouse
                   </h1>
                   <SuiText
                     size='base'

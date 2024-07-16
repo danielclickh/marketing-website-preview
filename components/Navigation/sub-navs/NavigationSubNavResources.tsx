@@ -43,7 +43,7 @@ export default function NavigationSubNavResources() {
           className={`w-full items-center justify-between ${
             isSubNavActive('learning') ? 'text-primary-300' : ''
           }`}>
-          <span>Learning & Certification</span>
+          <span>Learning and Certification</span>
           <NavigationChevron
             className={
               isSubNavActive('learning')

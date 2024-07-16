@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps<MLProps> =
 
     data.seo.path = '/use-cases/machine-learning-and-data-science'
     data.seo.title =
-      'Machine Learning & GenAI with ClickHouse | ClickHouse for ML and data science'
+      'Machine learning and GenAI with ClickHouse | ClickHouse for ML and data science'
     data.seo.description =
       "The ultimate real-time database to power Machine Learning workloads. With ClickHouse, it's easier than ever to unleash GenAI on your analytics data."
     data.seo.image = [{ url: '/images/og-ml-ds.png' }]
@@ -82,10 +82,10 @@ export default function MLUseCasePage({
                   <div className='w-full lg:max-w-xl xl:max-w-full'>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
                       <Link href='/use-cases'>Use cases</Link> / Machine
-                      Learning & GenAI
+                      learning and GenAI
                     </h4>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-lg lg:text-left'>
-                      Machine Learning & GenAI
+                      Machine learning and GenAI
                     </h1>
                     <SuiText
                       size='base'

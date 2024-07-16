@@ -95,7 +95,7 @@ export default function NavigationSubNavUseCases() {
                 'topNav.useCasesMenu.loggingAndMetricsSelect'
               )}
               className='block w-full'>
-              Logs, events and traces
+              Logs, events, and traces
             </NavigationLink>
           </li>
           <li

@@ -244,14 +244,14 @@ function Sitemap({
                 <Link
                   href='/use-cases/logging-and-metrics'
                   className='text-primary-300 hover:underline'>
-                  Logs, events &amp; traces
+                  Logs, events, and traces
                 </Link>
               </p>
               <p className='pb-2'>
                 <Link
                   href='/use-cases/machine-learning-and-data-science'
                   className='text-primary-300 hover:underline'>
-                  Machine Learning &amp; GenAI
+                  Machine learning and GenAI
                 </Link>
               </p>
               <p className='pb-2'>
