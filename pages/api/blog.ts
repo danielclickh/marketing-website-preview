@@ -26,7 +26,7 @@ export async function fetchCategories(): Promise<Record<string, string>> {
     product: 'Product',
     community: 'Community',
     engineering: 'Engineering',
-    'customer-stories': 'Customer stories',
+    'user-stories': 'User stories',
     'company-and-culture': 'Company and culture'
   }
 }
