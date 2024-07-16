@@ -55,9 +55,11 @@ export default function NavigationSubNavProducts() {
 
         <li className='md-mid:hidden'>
           <NavigationLink
-            href='https://clickhouse.com/docs/en/integrations'
+            href='/integrations'
             className='!flex w-full items-center gap-3'
-            onClick={galaxyOnClick('topNav.productMenu.integrationsSelect')}>
+            onClick={galaxyOnClick(
+              'topNav.productMenu.integrationsHighlightSelect'
+            )}>
             <Image
               src='/images/nav/icon-integrations.svg'
               alt='chDB'
@@ -70,7 +72,7 @@ export default function NavigationSubNavProducts() {
         </li>
       </ul>
       <LinkWithArrow
-        href='https://clickhouse.com/docs/en/integrations'
+        href='/integrations'
         onClick={galaxyOnClick(
           'topNav.productMenu.integrationsHighlightSelect'
         )}
