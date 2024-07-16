@@ -83,7 +83,7 @@
 				"id": 13,
 				"name": "Training",
 				"href": "/learn/",
-				"target": "_blank",
+				"target": "_self",
 				"galaxyEvent": "footerNav.resourcesMenu.trainingSelect"
 			},
 			{
