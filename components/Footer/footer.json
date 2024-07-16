@@ -1,15 +1,8 @@
 [
 	{
 		"id": 5,
-		"title": "Product",
+		"title": "Products",
 		"items": [
-			{
-				"id": 15,
-				"name": "ClickHouse",
-				"href": "/clickhouse",
-				"target": "_self",
-				"galaxyEvent": "footerNav.productMenu.clickHouseSelect"
-			},
 			{
 				"id": 17,
 				"name": "ClickHouse Cloud",
@@ -18,18 +11,18 @@
 				"galaxyEvent": "footerNav.productMenu.clickHouseCloudSelect"
 			},
 			{
-				"id": 18,
-				"name": "Integrations",
-				"href": "/integrations",
+				"id": 15,
+				"name": "ClickHouse",
+				"href": "/clickhouse",
 				"target": "_self",
-				"galaxyEvent": "footerNav.productMenu.integrationsSelect"
+				"galaxyEvent": "footerNav.productMenu.clickHouseSelect"
 			},
 			{
-				"id": 20,
-				"name": "ClickPipes",
-				"href": "/cloud/clickpipes",
+				"id": 300,
+				"name": "Bring Your Own Cloud",
+				"href": "/cloud/bring-your-own-cloud",
 				"target": "_self",
-				"galaxyEvent": "footerNav.productMenu.clickpipesSelect"
+				"galaxyEvent": "footerNav.productMenu.byocSelect"
 			},
 			{
 				"id": 22,
@@ -39,18 +32,39 @@
 				"galaxyEvent": "footerNav.productMenu.keeperSelect"
 			},
 			{
-				"id": 25,
-				"name": "Download",
-				"href": "https://clickhouse.com/docs/en/install#self-managed-install",
-				"target": "_blank",
-				"galaxyEvent": "footerNav.productMenu.downloadSelect"
+				"id": 20,
+				"name": "ClickPipes",
+				"href": "/cloud/clickpipes",
+				"target": "_self",
+				"galaxyEvent": "footerNav.productMenu.clickpipesSelect"
 			},
 			{
-				"id": 123,
-				"name": "Real-time Data Warehouse",
-				"href": "/real-time-data-warehouse",
+				"id": 18,
+				"name": "Integrations",
+				"href": "/integrations",
 				"target": "_self",
-				"galaxyEvent": "footerNav.productMenu.realtimeDWSelect"
+				"galaxyEvent": "footerNav.productMenu.integrationsSelect"
+			},
+			{
+				"id": 500,
+				"name": "chDB",
+				"href": "https://github.com/chdb-io/chdb",
+				"target": "_blank",
+				"galaxyEvent": "footerNav.productMenu.chdbSelect"
+			},
+			{
+				"id": 400,
+				"name": "Trust center",
+				"href": "https://trust.clickhouse.com",
+				"target": "_blank",
+				"galaxyEvent": "footerNav.productMenu.trustCenterSelect"
+			},
+			{
+				"id": 200,
+				"name": "Pricing",
+				"href": "/pricing",
+				"target": "_self",
+				"galaxyEvent": "footerNav.productMenu.pricingSelect"
 			}
 		]
 	},
@@ -69,7 +83,7 @@
 				"id": 13,
 				"name": "Training",
 				"href": "/learn/",
-				"target": "_blank",
+				"target": "_self",
 				"galaxyEvent": "footerNav.resourcesMenu.trainingSelect"
 			},
 			{
@@ -81,7 +95,7 @@
 			},
 			{
 				"id": 18,
-				"name": "Comparison",
+				"name": "Benchmarks",
 				"href": "https://benchmark.clickhouse.com",
 				"target": "_blank",
 				"galaxyEvent": "footerNav.resourcesMenu.benchmarkSelect"
@@ -95,24 +109,10 @@
 			},
 			{
 				"id": 20,
-				"name": "Trust Center",
-				"href": "https://trust.clickhouse.com",
-				"target": "_blank",
-				"galaxyEvent": "footerNav.resourcesMenu.trustCenterSelect"
-			},
-			{
-				"id": 20,
 				"name": "Videos",
 				"href": "/videos",
 				"target": "_self",
 				"galaxyEvent": "footerNav.resourcesMenu.videosSelect"
-			},
-			{
-				"id": 21,
-				"name": "Lexicon",
-				"href": "/lexicon",
-				"target": "_self",
-				"galaxyEvent": "footerNav.resourcesMenu.lexiconSelect"
 			},
 			{
 				"id": 22,
@@ -120,6 +120,13 @@
 				"href": "/demos",
 				"target": "_self",
 				"galaxyEvent": "footerNav.resourcesMenu.demosSelect"
+			},
+			{
+				"id": 123,
+				"name": "Real-time data warehouse",
+				"href": "/real-time-data-warehouse",
+				"target": "_self",
+				"galaxyEvent": "footerNav.productMenu.realtimeDWSelect"
 			},
 			{
 				"id": 21,
@@ -191,8 +198,8 @@
 			},
 			{
 				"id": 22,
-				"name": "Twitter",
-				"href": "https://twitter.com/ClickhouseDB",
+				"name": "X",
+				"href": "https://x.com/ClickhouseDB",
 				"target": "_blank",
 				"galaxyEvent": "footerNav.communityMenu.twitterSelect"
 			},

@@ -13,7 +13,7 @@ import {
   StrapiImageType,
   StrapiLink
 } from '../lib/api/strapi/types'
-import { HeaderProps } from '../components/header/types'
+import { HeaderProps } from '../components/Header/types'
 
 export interface Feature {
   id: string

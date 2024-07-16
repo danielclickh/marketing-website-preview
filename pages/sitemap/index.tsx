@@ -1,7 +1,6 @@
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
-import menuItems from '../../components/header/menuItems.json'
 import HRSeparator from '../../components/HRSeparator'
 import Layout from '../../components/Layout'
 import { fetchAll, findOne, getStagingOnlyFilters } from '../../lib/api/strapi'
@@ -12,19 +11,18 @@ import { CommonProps } from '../../types/homepage'
 import { getVideos } from '../../lib/videos'
 import { getLexicons } from '../../lib/lexicons'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
-import { Integration } from '../../types/integrations'
+import { fetchCategories } from '../api/blog'
 
 interface SitemapProps extends CommonProps {
+  blogCategories: Record<string, string>
   blogPosts: any[]
   allEvents: any[]
   allVideos: Video[]
   onDemandEvents: any[]
   newsEvents: any[]
   pressReleases: any[]
-  menu: any[]
   comparisons: any[]
   lexicons: any[]
-  integrations: Integration[]
   demos: any[]
 }
 
@@ -56,6 +54,8 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
       sort: ['localDatetime:DESC'],
       populate: ['category']
     })
+
+    const blogCategories = await fetchCategories()
 
     const comparisonsParams: Record<string, any> = {
       sort: ['publishedAt:DESC'],
@@ -93,30 +93,9 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
 
     const allVideos = await getVideos()
 
-    const integrations: Integration[] = await fetchAll('integrations', {
-      sort: ['name:ASC'],
-      filters: {
-        // Integrations with `openInNewWindow` set to true are excluded from the query.
-        // This is because they link off externally. See the IntegrationTile component.
-        $or: [
-          {
-            openInNewWindow: {
-              $eq: false
-            }
-          },
-          {
-            openInNewWindow: {
-              $null: true
-            }
-          }
-        ]
-      }
-    })
-
-    const menu = menuItems
-
     return {
       props: {
+        blogCategories,
         blogPosts,
         allEvents,
         allVideos,
@@ -124,9 +103,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         newsEvents,
         pressReleases,
         comparisons,
-        menu,
         lexicons,
-        integrations,
         demos,
         seo: {
           title: 'Site map - ClickHouse',
@@ -141,6 +118,7 @@ function Sitemap({
   seo,
   headerData,
   footerData,
+  blogCategories,
   blogPosts,
   allEvents,
   allVideos,
@@ -148,13 +126,9 @@ function Sitemap({
   newsEvents,
   pressReleases,
   comparisons,
-  menu,
   lexicons,
-  integrations,
   demos
 }: SitemapProps) {
-  const resourcesMenu = menuItems.find((obj) => obj.id === 2)?.menuItems
-
   galaxyOnPage('siteMapPage')
 
   return (
@@ -313,30 +287,6 @@ function Sitemap({
                 </Link>
               </p>
             </div>
-            <div className='col-span-full'>
-              <h2
-                id='integrations'
-                className='mb-4 font-basier text-2xl font-semibold text-neutral-100'>
-                <Link
-                  href={`/integrations`}
-                  className='hover:text-primary-300 hover:underline'>
-                  Integrations
-                </Link>
-              </h2>
-              <ul className='mb-2 gap-x-10 gap-y-0 xl:columns-4'>
-                {integrations.map((integration) => {
-                  return (
-                    <li key={integration.slug} className='pb-2'>
-                      <Link
-                        href={`/integrations/${integration.slug}`}
-                        className='font text-primary-300 hover:underline'>
-                        {integration.name}
-                      </Link>
-                    </li>
-                  )
-                })}
-              </ul>
-            </div>
           </div>
           <HRSeparator className='my-20' />
           <div>
@@ -345,100 +295,220 @@ function Sitemap({
               className='mb-6 font-basier text-2xl font-semibold text-neutral-100'>
               Resources
             </h2>
-            <div className='mb-10 grid gap-10 gap-y-2 xl:grid-cols-4'>
-              {resourcesMenu?.map((item) => (
-                <div key={item.id}>
-                  <p className='pb-2 font-semibold'>
-                    {item.href ? (
-                      <Link href={item.href} className='hover:underline'>
-                        {item.name}
-                      </Link>
-                    ) : (
-                      <>{item.name}</>
-                    )}
-                  </p>
-                  {item.menuItems &&
-                    item.menuItems.map((menuItem: any, index) => (
-                      <div key={index}>
-                        <ul className='mb-2'>
-                          <li>
-                            <Link
-                              href={menuItem.href}
-                              className='font text-primary-300 hover:underline'>
-                              {menuItem.name}{' '}
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    ))}
-                </div>
-              ))}
-              <div>
-                <p className='pb-2 font-semibold'>Comparisons</p>
-                <ul className='mb-2'>
-                  {comparisons.map((comparison, index) => {
-                    return (
-                      <li key={index} className='pb-2'>
-                        <Link
-                          href={`/comparison/${comparison.slug}`}
-                          className='font text-primary-300 hover:underline'>
-                          {comparison.Title}{' '}
-                        </Link>
-                      </li>
-                    )
-                  })}
-                  <li className='pb-2'>
-                    <Link
-                      href={`/comparison/rockset`}
-                      className='font text-primary-300 hover:underline'>
-                      Migrate from Rockset to ClickHouse
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <p className='pb-2 font-semibold'>
+            <div className='mb-10 grid gap-10 gap-y-4 xl:grid-cols-4'>
+              <ul className='space-y-2'>
+                <li>
                   <Link
-                    href={`/lexicon`}
-                    className='text-white hover:underline'>
-                    Lexicon
+                    href='/support/program'
+                    className='font-semibold hover:underline'>
+                    Support
                   </Link>
-                </p>
-                <ul className='mb-2'>
-                  {lexicons.map((lexicon, index) => {
-                    return (
-                      <li key={index} className='pb-2'>
+                </li>
+                <li>
+                  <Link
+                    href='https://clickhouse.cloud/support'
+                    className='font text-primary-300 hover:underline'>
+                    Open support case
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='https://clickhouse.com/docs/knowledgebase'
+                    className='font text-primary-300 hover:underline'>
+                    Knowledge base
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='/support/program'
+                    className='font text-primary-300 hover:underline'>
+                    Support program
+                  </Link>
+                </li>
+              </ul>
+
+              <ul className='space-y-2'>
+                <li>
+                  <Link
+                    href='https://github.com/ClickHouse/ClickHouse'
+                    className='font-semibold hover:underline'>
+                    Community
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='/user-stories'
+                    className='font text-primary-300 hover:underline'>
+                    User stories
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='https://clickhouse.com/slack'
+                    className='font text-primary-300 hover:underline'>
+                    Join Slack
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='https://www.meetup.com/pro/clickhouse/'
+                    className='font text-primary-300 hover:underline'>
+                    Meetups
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='https://github.com/ClickHouse/ClickHouse'
+                    className='font text-primary-300 hover:underline'>
+                    GitHub
+                  </Link>
+                </li>
+              </ul>
+
+              <ul className='space-y-2'>
+                <li>
+                  <Link
+                    href='https://clickhouse.com/docs'
+                    className='font-semibold hover:underline'>
+                    Docs
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='https://clickhouse.com/docs/en/install'
+                    className='font text-primary-300 hover:underline'>
+                    Install ClickHouse
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='https://clickhouse.com/docs/en/cloud-quick-start'
+                    className='font text-primary-300 hover:underline'>
+                    Cloud quick start
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='https://clickhouse.com/docs/en/integrations'
+                    className='font text-primary-300 hover:underline'>
+                    Integrations
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='https://clickhouse.com/docs/category/changelog'
+                    className='font text-primary-300 hover:underline'>
+                    Changelog
+                  </Link>
+                </li>
+              </ul>
+
+              <ul className='space-y-2'>
+                <li>
+                  <Link href='/learn' className='font-semibold hover:underline'>
+                    Learning
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='/learn'
+                    className='font text-primary-300 hover:underline'>
+                    ClickHouse Academy
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='/company/news-events?category=Free+Training#upcoming-events'
+                    className='font text-primary-300 hover:underline'>
+                    Upcoming training
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='/company/news-events'
+                    className='font text-primary-300 hover:underline'>
+                    News and events
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='/videos?category=how-to'
+                    className='font text-primary-300 hover:underline'>
+                    How to videos
+                  </Link>
+                </li>
+              </ul>
+
+              <ul className='space-y-2'>
+                <li>
+                  <Link href='/blog' className='font-semibold hover:underline'>
+                    Blog
+                  </Link>
+                </li>
+                {Object.entries(blogCategories).map(([slug, label]) => {
+                  return (
+                    <li key={slug}>
+                      <Link
+                        href={`/blog?category=${slug}`}
+                        className='font text-primary-300 hover:underline'>
+                        {label}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+
+              <ul className='space-y-2'>
+                <li className='font-semibold'>Comparisons</li>
+                {comparisons.map((comparison, index) => {
+                  return (
+                    <li key={index}>
+                      <Link
+                        href={`/comparison/${comparison.slug}`}
+                        className='font text-primary-300 hover:underline'>
+                        {comparison.Title}{' '}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+
+              <ul className='space-y-2'>
+                <li className='font-semibold'>Lexicon</li>
+                {lexicons.map((lexicon, index) => {
+                  return (
+                    <li key={index}>
+                      <Link
+                        href={`/lexicon/${lexicon.slug}`}
+                        className='font text-primary-300 hover:underline'>
+                        {lexicon.title}{' '}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+
+              <ul className='space-y-2'>
+                <li>
+                  <Link href='/demos' className='font-semibold hover:underline'>
+                    Demos
+                  </Link>
+                </li>
+                {demos.map((demo, index) => {
+                  return (
+                    <li key={index}>
+                      {demo.Link && (
                         <Link
-                          href={`/lexicon/${lexicon.slug}`}
-                          className='font text-primary-300 hover:underline'>
-                          {lexicon.title}{' '}
+                          href={demo.Link}
+                          className='font text-primary-300 hover:underline'
+                          target='_blank'>
+                          {demo.Title}
                         </Link>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
-              <div>
-                <Link href='/demos' className='pb-2 font-semibold'>
-                  Demos
-                </Link>
-                <ul className='mb-2 mt-2'>
-                  {demos.map((demo, index) => {
-                    return (
-                      <li key={index} className='pb-2'>
-                        {demo.Link && (
-                          <Link
-                            href={demo.Link}
-                            className='font text-primary-300 hover:underline'
-                            target='_blank'>
-                            {demo.Title}
-                          </Link>
-                        )}
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
+                      )}
+                    </li>
+                  )
+                })}
+              </ul>
             </div>
           </div>
           <HRSeparator className='my-20' />

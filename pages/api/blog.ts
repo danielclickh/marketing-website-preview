@@ -2,14 +2,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { findAll, getStagingOnlyFilters } from '../../lib/api/strapi'
 import { BlogApiResponse } from '../../types/blogs'
 
-const categories: Record<string, string> = {
-  product: 'Product',
-  community: 'Community',
-  engineering: 'Engineering',
-  'user-stories': 'User stories',
-  'company-and-culture': 'Company and culture'
-}
-
 const baseQuery: Record<string, any> = {
   sort: ['date:DESC', 'publishedAt:DESC'],
   populate: ['author', 'author.avatarPng', 'thumbnailPng'],
@@ -26,6 +18,16 @@ const baseQuery: Record<string, any> = {
   ],
   filters: {
     $or: getStagingOnlyFilters()
+  }
+}
+
+export async function fetchCategories(): Promise<Record<string, string>> {
+  return {
+    product: 'Product',
+    community: 'Community',
+    engineering: 'Engineering',
+    'user-stories': 'User stories',
+    'company-and-culture': 'Company and culture'
   }
 }
 
@@ -57,6 +59,8 @@ export async function fetchBlogs({
   page = Number(page)
   page = isNaN(page) ? 1 : page
   page = page < 1 ? 1 : page
+
+  const categories = await fetchCategories()
 
   // Validate the category param
   category = category ? String(category) : null

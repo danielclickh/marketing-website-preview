@@ -9,6 +9,7 @@ export interface SubLevelFooterMenu {
   href: string
   target: LinkTarget
   name: string
+  items?: Array<SubLevelFooterMenu>
 }
 export interface TopLevelFooterMenu {
   id: number
