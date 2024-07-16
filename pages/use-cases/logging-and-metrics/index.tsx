@@ -74,15 +74,15 @@ export default function ClickHouseServerPage({
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='bg-contain bg-center bg-no-repeat'>
           <div className='relative z-20 overflow-hidden bg-grid pt-10'>
-            <div className='lg:h-[524px] absolute z-10 w-full bg-center bg-no-repeat lg:top-40 lg:bg-speed-lines-ml'></div>
-            <div className='lg:min-h-[630px] container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 2xl:px-0'>
+            <div className='absolute z-10 w-full bg-center bg-no-repeat lg:top-40 lg:h-[524px] lg:bg-speed-lines-ml'></div>
+            <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>
               <div className='flex'>
-                <div className='xl:w-7/12 flex-col xl:mt-16'>
+                <div className='flex-col xl:mt-16 xl:w-7/12'>
                   <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                    <Link href='/use-cases'>Use cases</Link> / Logging &amp;
-                    metrics
+                    <Link href='/use-cases'>Use cases</Link> / Logs, Events, &
+                    Traces
                   </h4>
-                  <h1 className='md:text-5.5xl mb-6 text-center font-basier text-4xl font-semibold leading-tight lg:max-w-2xl lg:text-left'>
+                  <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-2xl lg:text-left'>
                     Logs, Events, & Traces with ClickHouse
                   </h1>
                   <SuiText
@@ -123,7 +123,7 @@ export default function ClickHouseServerPage({
                     </CUIButton>
                   </div>
                 </div>
-                <div className='md:w-4/12 relative z-20 mx-auto mt-4 hidden md:flex'>
+                <div className='relative z-20 mx-auto mt-4 hidden md:flex md:w-4/12'>
                   <Image
                     src='/images/use-cases/logging/logging-use-cases-hero.svg'
                     alt='Open source ClickHouse'
@@ -172,7 +172,7 @@ export default function ClickHouseServerPage({
           <div className='section-container max-w-7xl'>
             <div className='relative flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
-                <div className='md:h-[400px] flex flex-col gap-x-6 gap-y-6 md:flex-row'>
+                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[400px] md:flex-row'>
                   {quotes.map((quote) => (
                     <Tilt
                       tiltEnable={false}
@@ -184,7 +184,7 @@ export default function ClickHouseServerPage({
                       key={quote.id}>
                       {quote.href ? (
                         <Link href={quote.href} target={quote.target}>
-                          <div className='animate-fade-in hover:bg-neutral-725/90 relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:shadow-lg'>
+                          <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
                             <Image
                               src='/images/Quote.svg'
                               width={37}
@@ -205,7 +205,7 @@ export default function ClickHouseServerPage({
                           </div>
                         </Link>
                       ) : (
-                        <div className='animate-fade-in hover:bg-neutral-800/90 relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:shadow-lg'>
+                        <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
                           <Image
                             src='/images/Quote.svg'
                             width={37}

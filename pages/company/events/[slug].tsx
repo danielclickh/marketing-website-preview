@@ -12,6 +12,7 @@ import { EventProps, EventType } from '../../../types/events'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import EventPost from '../../../components/EventPostList/EventPost'
 import Link from 'next/link'
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<EventProps> =
   async function getStaticProps({ params }) {
@@ -83,6 +84,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
         }
       }
     }
+
     return {
       props: {
         ...page,
@@ -116,6 +118,8 @@ function EventPage({
   lightFeatureImagePng,
   seo
 }: EventProps) {
+  galaxyOnPage('eventPage')
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='flex flex-col'>

@@ -268,6 +268,7 @@ module.exports = {
         focus_size: '100%, 100%'
       },
       backgroundImage: {
+        'air-gapped': 'url("/images/air-gapped.svg")',
         'half-highlight':
           'linear-gradient(to bottom, rgba(65,65,65,1) 56%, transparent 56%)',
         snowflakeGradient:

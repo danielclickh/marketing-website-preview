@@ -88,9 +88,9 @@
             }
         ],
         "quote": "We simply don’t want the hassle of trying to figure out in advance how many BQ slots to purchase - what a headache!",
-        "customerLogo": "/images/HIFI-logo.svg",
-        "customerLogoWidth": 82,
-        "customerLogoHeight": 30
+        "customerLogo": "/images/block-logo-white.svg",
+        "customerLogoWidth": 200,
+        "customerLogoHeight": 40
     },
     {
         "href": "/comparison/redshift",

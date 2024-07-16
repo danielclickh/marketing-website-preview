@@ -123,7 +123,7 @@ export default function ComparisonPage({
                     )}
                   </div>
                 </div>
-                <div className='rich_content mt-4 mb-12 text-center text-base text-neutral-0 md:text-left'>
+                <div className='rich_content mb-12 mt-4 text-center text-base text-neutral-0 md:text-left'>
                   <Markdown
                     children={comparison.HeroDescription}
                     className='text-lg'
@@ -331,7 +331,7 @@ export default function ComparisonPage({
           />
         </div>
       </div>
-      <HRSeparator className='my-16 lg:mt-12 lg:mb-24' />
+      <HRSeparator className='my-16 lg:mb-24 lg:mt-12' />
       <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
         {comparison.Content.map((content, index) => {
           return (
@@ -467,7 +467,7 @@ export async function getStaticPaths() {
   }
 
   // Define an array of slugs to exclude
-  const excludedSlugs = ['snowflake', 'redshift']
+  const excludedSlugs = ['snowflake', 'redshift', 'rockset']
 
   const allPaths = await getPathsValues('comparisons', params)
 

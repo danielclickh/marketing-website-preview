@@ -2,6 +2,7 @@ import { CheckCircleIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 import CopyUrlButton from '../CopyUrlButton'
+import Markdown from '../Markdown'
 import MarketoForm from '../MarketoForm'
 import SocialButton from '../SocialButton'
 import { SuiPanel } from '../sui/client'
@@ -49,6 +50,7 @@ function EventsForm({
           <MarketoForm
             formId={'1127'}
             onLoad={() => setFormLoaded(true)}
+            submitButtonLabel={form.submitButtonLabel}
             clearbitTracking={true}
             onSuccess={() => {
               setFormSuccess(true)
@@ -70,18 +72,23 @@ function EventsForm({
           <div className='subscribed' ref={formSuccessRef}>
             <div className='success-container text-center'>
               <CheckCircleIcon className='mx-auto mb-4 h-16 w-16 stroke-1 text-primary-300' />
-              <p className='mb-12 px-10 text-xl font-bold'>
-                {form.type === 'recordedGatedContent' ? (
-                  <>Thanks for registering! </>
-                ) : submitButtonLabel === 'Request your spot' ? (
-                  <>
-                    Thanks for your interest, we'll be in touch to let you know
-                    if a space is available
-                  </>
-                ) : (
-                  <>You've been successfully registered. See you there!</>
-                )}
-              </p>
+              {form.SuccessMessage && (
+                <Markdown>{form.SuccessMessage}</Markdown>
+              )}
+              {!form.SuccessMessage && (
+                <p className='mb-12 px-10 text-xl font-bold'>
+                  {form.type === 'recordedGatedContent' ? (
+                    <>Thanks for registering! </>
+                  ) : submitButtonLabel === 'Request your spot' ? (
+                    <>
+                      Thanks for your interest, we'll be in touch to let you
+                      know if a space is available
+                    </>
+                  ) : (
+                    <>You've been successfully registered. See you there!</>
+                  )}
+                </p>
+              )}
               {form.type === 'recordedGatedContent' && (
                 <div className='my-10' id='custom-video-container-player'>
                   <p className='mb-4'>Watch the recording below</p>
@@ -103,7 +110,7 @@ function EventsForm({
                 {form.type == 'recordedGatedContent' ? (
                   <>Share the recording</>
                 ) : (
-                  <>Share the event</>
+                  <>Share</>
                 )}
               </p>
               <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>

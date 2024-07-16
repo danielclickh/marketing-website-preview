@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router'
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { MarketoFormObject, MarketoFormsApi } from '../../types/marketo-form'
-import styles from './styles.module.scss'
+import React, { useEffect, useRef, useState } from 'react'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from '../../tailwind.config'
+import { MarketoFormObject, MarketoFormsApi } from '../../types/marketo-form'
+import styles from './styles.module.scss'
+import { getUTMsFromStorage } from '../../components/UTMPersist'
 
 // Get the medium breakpoint from the tailwind config incase the value is changed
 const resolvedConfig = resolveConfig(tailwindConfig as any)
@@ -11,6 +12,10 @@ const formBreakpoint = parseInt(resolvedConfig.theme?.screens?.md || '768px')
 
 const BASE_URL = '//discover.clickhouse.com'
 const MUNCHKIN_ID = '238-FPC-317'
+
+interface QueryObject {
+  [key: string]: string | string[] | undefined
+}
 
 declare global {
   interface Window {
@@ -29,6 +34,11 @@ export default function Page() {
   const clearbitTracking =
     typeof router.query?.clearbitTracking === 'string' &&
     router.query.clearbitTracking === '1'
+
+  const submitButtonLabel =
+    typeof router.query?.submitButtonLabel === 'string'
+      ? router.query.submitButtonLabel
+      : null
 
   // Referer URL passed from parent
   const referer =
@@ -207,6 +217,10 @@ export default function Page() {
       // Remove styles unwanted styles on re-render
       window.MktoForms2.onFormRender((marketoFormObject) => {
         removeMarketoStyles(marketoFormObject)
+
+        // Update submit button label from iframe query params
+        if (submitButtonLabel)
+          setSubmitButtonLabel(marketoFormObject, submitButtonLabel)
       })
 
       // Init the marketo JS api
@@ -217,6 +231,10 @@ export default function Page() {
         function (marketoFormObject) {
           // Remove marketo added styles
           removeMarketoStyles(marketoFormObject)
+
+          // Update submit button label from iframe query params
+          if (submitButtonLabel)
+            setSubmitButtonLabel(marketoFormObject, submitButtonLabel)
 
           // Add clearbit tracking script
           if (clearbitTracking) {
@@ -235,6 +253,43 @@ export default function Page() {
             }
 
             document.querySelector('head')?.appendChild(script)
+          }
+
+          //UTM persistence -
+          /*
+            First we need to check if there's UTMs passed - queryUtmFields - in the URL already. If there are, we can ignore persistence as we only want the latest UTMs that drove a submission.
+          */
+          const utmFieldMapping: Record<string, string> = {
+            utm_campaign: 'utm_campaign__c',
+            utm_content: 'utm_content__c',
+            utm_medium: 'utm_medium__c',
+            utm_source: 'utm_source__c',
+            utm_term: 'utm_term__c',
+            gclid: 'gclid__c'
+          }
+
+          const checkUtmFields = (query: QueryObject): boolean => {
+            return Object.keys(utmFieldMapping).some((field) => field in query)
+          }
+
+          //if no utms are already present in the URL, continue, and check if the form has the values already
+          if (!checkUtmFields(router.query)) {
+            // Fields are prepped, let's check local storage
+            const utmsInStorage = getUTMsFromStorage()
+            if (utmsInStorage) {
+              for (const key in utmsInStorage) {
+                if (utmsInStorage.hasOwnProperty(key)) {
+                  // Get the mapped field name
+                  const mappedField = utmFieldMapping[key]
+                  if (mappedField && typeof utmsInStorage[key] === 'string') {
+                    // Update the form with the value from storage
+                    marketoFormObject.addHiddenFields({
+                      [mappedField]: utmsInStorage[key] as string
+                    })
+                  }
+                }
+              }
+            }
           }
 
           // Send form loaded event
@@ -280,6 +335,14 @@ export default function Page() {
       </div>
     </>
   )
+}
+
+function setSubmitButtonLabel(
+  marketoFormObject: MarketoFormObject,
+  label: string
+) {
+  const jqueryElement = marketoFormObject.getFormElem()
+  jqueryElement.find('.mktoButtonRow button[type="submit"]').text(label)
 }
 
 function removeMarketoStyles(marketoFormObject: MarketoFormObject) {

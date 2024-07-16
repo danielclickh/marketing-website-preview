@@ -49,7 +49,7 @@ const deployData: Array<DeployData> = [
     img: '/cloud.svg',
     btnText: 'Start free trial',
     description:
-      'Available on AWS, GCP, and through their respective Marketplaces. Azure coming soon.',
+      'Available on AWS, GCP, Azure and through their respective Marketplaces.',
     href: 'https://clickhouse.cloud/signUp?loc=home-deploy-your-way',
     target: '_blank',
     btnType: 'primary',
@@ -72,7 +72,7 @@ export default function HomepageSectionDeploy({
           width={73}
           height={72}
         />
-        <SuiTitle type='h2' className='mx-auto mt-8 mb-6 max-w-3xl text-center'>
+        <SuiTitle type='h2' className='mx-auto mb-6 mt-8 max-w-3xl text-center'>
           Deploy your way
         </SuiTitle>
         <div className='mx-auto max-w-screen-sm text-center leading-normal text-neutral-200'>
@@ -91,7 +91,7 @@ export default function HomepageSectionDeploy({
                   width={64}
                   height={64}
                 />
-                <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-8'>
+                <div className='flex flex-col items-center justify-center gap-2 pb-8 pt-4'>
                   <div className='cursor-pointer text-center text-xl font-semibold leading-tight text-neutral-0'>
                     {deploy.title}
                   </div>
