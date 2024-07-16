@@ -8,7 +8,7 @@ export default function NavigationSubNavPricing() {
       <li>
         <NavigationLink
           href='/pricing'
-          onClick={() => galaxyOnClick('topNav.pricingMenu.cloudPricingSelect')}
+          onClick={galaxyOnClick('topNav.pricingMenu.cloudPricingSelect')}
           className='block w-full'>
           ClickHouse Cloud pricing
         </NavigationLink>
@@ -16,7 +16,7 @@ export default function NavigationSubNavPricing() {
       <li>
         <NavigationLink
           href='/pricing?loc=sub-menu#pricing-calculator'
-          onClick={() => galaxyOnClick('topNav.pricingMenu.costEstimateSelect')}
+          onClick={galaxyOnClick('topNav.pricingMenu.costEstimateSelect')}
           className='block w-full'>
           Cost estimator
         </NavigationLink>
@@ -24,9 +24,7 @@ export default function NavigationSubNavPricing() {
       <li>
         <NavigationLink
           href='/pricing/contact?loc=menu'
-          onClick={() =>
-            galaxyOnClick('topNav.pricingMenu.dedicatedServiceSelect')
-          }
+          onClick={galaxyOnClick('topNav.pricingMenu.dedicatedServiceSelect')}
           className='block w-full'>
           Dedicated services
         </NavigationLink>

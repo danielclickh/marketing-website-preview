@@ -11,7 +11,7 @@ export default function NavigationSubNavProducts() {
         <li className='flex items-center'>
           <NavigationLink
             href='/cloud'
-            onClick={() => galaxyOnClick('topNav.productMenu.cloudSelect')}
+            onClick={galaxyOnClick('topNav.productMenu.cloudSelect')}
             className='group/nav-with-icon !flex w-full items-center gap-3'>
             <Image
               src='/images/nav/icon-clickhouse-cloud.svg'
@@ -33,7 +33,7 @@ export default function NavigationSubNavProducts() {
         <li>
           <NavigationLink
             href='/clickhouse'
-            onClick={() => galaxyOnClick('topNav.productMenu.openSourceSelect')}
+            onClick={galaxyOnClick('topNav.productMenu.openSourceSelect')}
             className='group/nav-with-icon !flex w-full items-center gap-3'>
             <Image
               src='/images/nav/icon-clickhouse.svg'
@@ -57,9 +57,7 @@ export default function NavigationSubNavProducts() {
           <NavigationLink
             href='https://clickhouse.com/docs/en/integrations'
             className='!flex w-full items-center gap-3'
-            onClick={() =>
-              galaxyOnClick('topNav.productMenu.integrationsSelect')
-            }>
+            onClick={galaxyOnClick('topNav.productMenu.integrationsSelect')}>
             <Image
               src='/images/nav/icon-integrations.svg'
               alt='chDB'
@@ -73,9 +71,9 @@ export default function NavigationSubNavProducts() {
       </ul>
       <LinkWithArrow
         href='https://clickhouse.com/docs/en/integrations'
-        onClick={() =>
-          galaxyOnClick('topNav.productMenu.integrationsHighlightSelect')
-        }
+        onClick={galaxyOnClick(
+          'topNav.productMenu.integrationsHighlightSelect'
+        )}
         className='hidden w-full rounded-b-lg border-t border-neutral-700 px-[60px] py-2.5 text-sm font-medium transition-colors hover:bg-neutral-700/25 hover:text-primary-300 md-mid:block'>
         View 100+ integrations
       </LinkWithArrow>

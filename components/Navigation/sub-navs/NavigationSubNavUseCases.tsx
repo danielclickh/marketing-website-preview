@@ -50,9 +50,9 @@ export default function NavigationSubNavUseCases() {
             className='col-span-2'>
             <NavigationLink
               href='/use-cases/real-time-analytics'
-              onClick={() =>
-                galaxyOnClick('topNav.useCasesMenu.realTimeAnalyticsSelect')
-              }
+              onClick={galaxyOnClick(
+                'topNav.useCasesMenu.realTimeAnalyticsSelect'
+              )}
               className='block w-full'>
               Real-time analytics
             </NavigationLink>
@@ -64,9 +64,9 @@ export default function NavigationSubNavUseCases() {
             className='col-span-2'>
             <NavigationLink
               href='/use-cases/machine-learning-and-data-science'
-              onClick={() =>
-                galaxyOnClick('topNav.useCasesMenu.machineLearningSelect')
-              }
+              onClick={galaxyOnClick(
+                'topNav.useCasesMenu.machineLearningSelect'
+              )}
               className='block w-full'>
               Machine learning and GenAI
             </NavigationLink>
@@ -79,9 +79,7 @@ export default function NavigationSubNavUseCases() {
             className='col-span-2'>
             <NavigationLink
               href='/use-cases/business-intelligence'
-              onClick={() =>
-                galaxyOnClick('topNav.useCasesMenu.bizIntelSelect')
-              }
+              onClick={galaxyOnClick('topNav.useCasesMenu.bizIntelSelect')}
               className='block w-full'>
               Business intelligence
             </NavigationLink>
@@ -93,9 +91,9 @@ export default function NavigationSubNavUseCases() {
             className='col-span-2'>
             <NavigationLink
               href='/use-cases/logging-and-metrics'
-              onClick={() =>
-                galaxyOnClick('topNav.useCasesMenu.loggingAndMetricsSelect')
-              }
+              onClick={galaxyOnClick(
+                'topNav.useCasesMenu.loggingAndMetricsSelect'
+              )}
               className='block w-full'>
               Logs, events and traces
             </NavigationLink>
@@ -108,9 +106,7 @@ export default function NavigationSubNavUseCases() {
             {/* This is the mobile link, the desktop link is futher down */}
             <NavigationLink
               href='/use-cases'
-              onClick={() =>
-                galaxyOnClick('topNav.useCasesMenu.allUseCasesSelect')
-              }
+              onClick={galaxyOnClick('topNav.useCasesMenu.allUseCasesSelect')}
               className='block w-full'>
               All use cases
             </NavigationLink>
@@ -123,9 +119,9 @@ export default function NavigationSubNavUseCases() {
             link={{
               href: '/user-stories',
               text: 'View more user stories',
-              onClick() {
-                galaxyOnClick('topNav.useCasesMenu.userStoriesQuoteSelect')
-              }
+              onClick: galaxyOnClick(
+                'topNav.useCasesMenu.userStoriesQuoteSelect'
+              )
             }}>
             {quote?.children}
           </NavigationQuote>
@@ -135,7 +131,7 @@ export default function NavigationSubNavUseCases() {
       {/* This is the desktop link, the mobile link is in the <ul> above */}
       <LinkWithArrow
         href='/use-cases'
-        onClick={() => galaxyOnClick('topNav.useCasesMenu.allUseCasesSelect')}
+        onClick={galaxyOnClick('topNav.useCasesMenu.allUseCasesSelect')}
         className='hidden w-full rounded-b-lg border-t border-neutral-700 px-6 py-2.5 text-sm font-medium transition-colors hover:bg-neutral-700/25 hover:text-primary-300 md-mid:block'>
         All use cases
       </LinkWithArrow>

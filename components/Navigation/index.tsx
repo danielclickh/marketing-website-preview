@@ -58,9 +58,7 @@ export default function Navigation({
               label='Docs'
               link={{
                 href: 'https://clickhouse.com/docs',
-                onClick() {
-                  galaxyOnClick('topNav.navItems.docsSelect')
-                }
+                onClick: galaxyOnClick('topNav.navItems.docsSelect')
               }}
             />
           </li>
@@ -75,9 +73,7 @@ export default function Navigation({
               label='Pricing'
               link={{
                 href: '/pricing',
-                onClick() {
-                  galaxyOnClick('topNav.navItems.pricingSelect')
-                }
+                onClick: galaxyOnClick('topNav.navItems.pricingSelect')
               }}
             />
           </li>
@@ -87,9 +83,7 @@ export default function Navigation({
               label='Contact us'
               link={{
                 href: '/company/contact?loc=nav',
-                onClick() {
-                  galaxyOnClick('topNav.navItems.contactUsSelect')
-                }
+                onClick: galaxyOnClick('topNav.navItems.contactUsSelect')
               }}
             />
           </li>
