@@ -16,9 +16,7 @@ export default function NavigationSubNavResources() {
       <li>
         <NavigationLink
           href='/user-stories'
-          onClick={galaxyOnClick(
-            'topNav.resourcesMenu.blogCustomerStoriesSelect'
-          )}
+          onClick={galaxyOnClick('topNav.resourcesMenu.userStoriesSelect')}
           className='block w-full'>
           User stories
         </NavigationLink>
