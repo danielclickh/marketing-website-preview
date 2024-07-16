@@ -149,7 +149,7 @@ function UseCasesPage({
                   <CUICard.Body className='rounded-lg bg-neutral-900'>
                     <div className='flex flex-col items-start justify-between gap-x-6 lg:flex-row'>
                       <div className='relative p-6 lg:w-[560px]'>
-                        {useCase?.title === 'Business Intelligence' && (
+                        {useCase?.title === 'Business intelligence' && (
                           <div className=' absolute right-6 lg:right-0'>
                             <CUIButton
                               type='secondary'
@@ -166,7 +166,7 @@ function UseCasesPage({
                             </CUIButton>
                           </div>
                         )}
-                        {useCase?.title === 'Logs, Events, & Traces' && (
+                        {useCase?.title === 'Logs, events, and traces' && (
                           <div className=' absolute right-6 lg:right-0'>
                             <CUIButton
                               type='secondary'
@@ -183,7 +183,7 @@ function UseCasesPage({
                             </CUIButton>
                           </div>
                         )}
-                        {useCase?.title === 'Machine Learning & GenAI' && (
+                        {useCase?.title === 'Machine learning and GenAI' && (
                           <div className=' absolute right-6 lg:right-0'>
                             <CUIButton
                               type='secondary'
@@ -200,7 +200,7 @@ function UseCasesPage({
                             </CUIButton>
                           </div>
                         )}
-                        {useCase?.title === 'Real-time Analytics' && (
+                        {useCase?.title === 'Real-time analytics' && (
                           <div className='absolute right-6 lg:right-0'>
                             <CUIButton
                               type='secondary'

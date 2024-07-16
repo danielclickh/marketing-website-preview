@@ -78,10 +78,10 @@ export default function RealTimeAnalyticsPage({
                   <div className='w-full lg:max-w-xl xl:max-w-full'>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
                       <Link href='/use-cases'>Use cases</Link> / Business
-                      Intelligence
+                      intelligence
                     </h4>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-xl lg:text-left'>
-                      Business Intelligence with ClickHouse
+                      Business intelligence with ClickHouse
                     </h1>
                     <SuiText
                       size='base'

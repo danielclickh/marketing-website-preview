@@ -1,25 +1,25 @@
-import {GetStaticProps} from 'next'
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import Tilt from 'react-parallax-tilt'
-import {CUIButton} from '../../../components/ClickUI'
+import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
 import AccordionComponent from '../../../components/RealTimeDiagram/Accordion'
 import Feature from '../../../components/RealTimeDiagram/feature-check'
-import {SuiText, SuiTitle} from '../../../components/sui'
-import {findOne} from '../../../lib/api/strapi'
-import {getCommonProps} from '../../../lib/utils/getCommonProps'
-import {CommonProps} from '../../../types/homepage'
+import { SuiText, SuiTitle } from '../../../components/sui'
+import { findOne } from '../../../lib/api/strapi'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { CommonProps } from '../../../types/homepage'
 import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import faqs from './faqs.json'
 import features from './features.json'
 import quotes from './quotes.json'
-import {galaxyOnPage} from "../../../lib/galaxy/galaxy";
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
@@ -60,7 +60,7 @@ export default function RealTimeAnalyticsPage({
   headerData,
   footerData
 }: RealTimeAnalyticsPageProps) {
-  galaxyOnPage('realTimeUseCasePage');
+  galaxyOnPage('realTimeUseCasePage')
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
@@ -80,10 +80,10 @@ export default function RealTimeAnalyticsPage({
                   <div className='w-full lg:max-w-xl xl:max-w-full'>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
                       <Link href='/use-cases'>Use cases</Link> / Real-time
-                      Analytics
+                      analytics
                     </h4>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-xl lg:text-left'>
-                      Real-time Analytics with ClickHouse
+                      Real-time analytics with ClickHouse
                     </h1>
                     <SuiText
                       size='base'
@@ -298,7 +298,7 @@ export default function RealTimeAnalyticsPage({
         <div className='bg-neutral-725 pb-24'>
           <div className='relative mx-auto pt-12  md:px-0 md:pt-24'>
             <div className='mx-auto max-w-7xl'>
-              <div className='flex w-full flex-col items-center pt-6 pb-12'>
+              <div className='flex w-full flex-col items-center pb-12 pt-6'>
                 <Image
                   src='/images/use-cases/logging/icon-how.svg'
                   alt='System overview'
@@ -317,7 +317,7 @@ export default function RealTimeAnalyticsPage({
                   {[10, 20, 30].map((section) => (
                     <div
                       key={section}
-                      className='items-center rounded-md border border-neutral-0/30 bg-[rgba(62,62,62,1)] py-4 px-6 text-left lg:w-1/3'>
+                      className='items-center rounded-md border border-neutral-0/30 bg-[rgba(62,62,62,1)] px-6 py-4 text-left lg:w-1/3'>
                       {features
                         .filter((feature) => feature.section === section)
                         .map((feature) => (
@@ -355,7 +355,7 @@ export default function RealTimeAnalyticsPage({
 
         <div className='bg-shadow-element-right yellow-shadow '>
           <div className='section-container mb-24 flex w-full pt-24 text-neutral-0 md:px-8 2xl:px-0 '>
-            <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-right bg-no-repeat py-16 px-4 xl:px-24'>
+            <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-right bg-no-repeat px-4 py-16 xl:px-24'>
               <div className='flex flex-col text-center'>
                 <SuiTitle type='h2' color='white'>
                   Supporting{' '}
