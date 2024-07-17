@@ -428,6 +428,11 @@ const nextConfig = {
         ],
         permanent: true,
         destination: '/blog?category=user-stories'
+      },
+      {
+        source: '/media',
+        destination: 'https://brandfolder.com/clickhouse/media-kit',
+        permanent: true
       }
     ]
   }
