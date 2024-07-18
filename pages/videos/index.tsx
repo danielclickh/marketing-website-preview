@@ -71,6 +71,7 @@ export default function VideosPage({
     text: label,
     onClick: () => {
       setPage(1)
+      setSearch(null)
       setCategory(slug)
     },
     selected: category === slug
