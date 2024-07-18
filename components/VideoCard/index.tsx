@@ -52,13 +52,6 @@ export default function VideoCard({
                 }
               />
             </div>
-
-            <div className='absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center'>
-              <VideoPlayButton
-                invert={true}
-                className='transition-all group-hover:scale-125'
-              />
-            </div>
           </div>
 
           <div className='p-6 font-basier text-xl font-medium leading-tight  text-neutral-100'>
