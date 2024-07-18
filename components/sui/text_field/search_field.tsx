@@ -12,6 +12,7 @@ interface TextFieldProps extends HTMLAttributes<HTMLInputElement> {
   value?: string
   error?: string
   required?: boolean
+  inputRef?: React.Ref<HTMLInputElement>
 }
 
 export function SuiSearchField({
@@ -21,6 +22,7 @@ export function SuiSearchField({
   type = 'text',
   error = '',
   required = false,
+  inputRef,
   ...props
 }: TextFieldProps) {
   return (
@@ -29,13 +31,13 @@ export function SuiSearchField({
         {label && (
           <label
             htmlFor={htmlFor}
-            className='block text-xs font-medium text-neutral-300 pb-1'>
+            className='block pb-1 text-xs font-medium text-neutral-300'>
             {label}
             {!required && <span className='text-c4'></span>}
           </label>
         )}
-        <div className='flex mt-1 relative'>
-          <div className='absolute left-0 top-0 bottom-0 w-9 grid place-items-center z-10'>
+        <div className='relative mt-1 flex'>
+          <div className='absolute bottom-0 left-0 top-0 z-10 grid w-9 place-items-center'>
             <SearchIcon width='14' height='14' />
           </div>
           <input
@@ -43,16 +45,17 @@ export function SuiSearchField({
             id={htmlFor}
             className={`${styles.textCommon} ${styles.search}`}
             required={required}
+            ref={inputRef}
             {...props}
           />
           {type === 'password' && (
-            <EyeIcon className='w-4 relative -top-7 left-80 md:left-96 text-gray-400' />
+            <EyeIcon className='relative -top-7 left-80 w-4 text-gray-400 md:left-96' />
           )}
         </div>
       </div>
       {error.length > 0 ? (
         <p
-          className={`mt-1 transition-opacity ease-in-out text-red-500 text-xs min-h-[1rem] ${
+          className={`mt-1 min-h-[1rem] text-xs text-red-500 transition-opacity ease-in-out ${
             error.length == 0 ? 'opacity-0' : 'opacity-100'
           }`}>
           {error}
