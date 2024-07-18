@@ -1,8 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 import VideoPlayButton from '../../public/images/VideoPlayButton'
 import { Video } from '../../types/videos'
 import { CUICard } from '../ClickUI'
+
+import fallbackTumbnail from './fallback.png'
 
 export default function VideoCard({
   Slug,
@@ -12,6 +15,7 @@ export default function VideoCard({
   IntroText,
   seo
 }: Video) {
+  const [displayFallback, setDisplayFallback] = useState<boolean>(false)
   let thumbnail = `https://img.youtube.com/vi/${VideoID}/maxresdefault.jpg`
 
   if (seo?.image) {
@@ -26,18 +30,26 @@ export default function VideoCard({
         <CUICard.Body>
           <div className='relative overflow-hidden rounded-t-lg'>
             <div className='absolute h-full w-full bg-black/[0.65] opacity-0 transition group-hover:opacity-100'></div>
-            <Image
-              src={thumbnail}
-              alt={Title || ''}
-              width={774}
-              height={420}
-              className='flex items-center justify-center bg-primary-300 text-lg font-black text-primary-900'
-            />
 
-            <div className='absolute top-0 left-0 flex h-full w-full items-center justify-center'>
-              <VideoPlayButton
-                invert={true}
-                className='transition-all group-hover:scale-125'
+            <div className='relative aspect-[774/420] bg-primary-300'>
+              <Image
+                src={thumbnail}
+                alt={Title || ''}
+                width={774}
+                height={420}
+                onError={() => setDisplayFallback(true)}
+                className={'absolute z-0 h-full origin-top-left object-cover'}
+              />
+              <Image
+                src={fallbackTumbnail}
+                alt={Title || ''}
+                width={774}
+                height={420}
+                className={
+                  displayFallback
+                    ? 'absolute z-10 h-full object-cover'
+                    : 'hidden'
+                }
               />
             </div>
           </div>

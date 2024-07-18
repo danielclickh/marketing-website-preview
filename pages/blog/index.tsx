@@ -54,6 +54,9 @@ export default function BlogsPage({
   const router = useRouter()
 
   const scrollToContainer = useRef<HTMLDivElement>(null)
+
+  const inputRef = useRef<null | HTMLInputElement>(null)
+
   const [loading, setLoading] = useState<boolean>(false)
 
   const [response, setResponse] = useState<null | BlogApiResponse>(initialData)
@@ -86,7 +89,11 @@ export default function BlogsPage({
     text: 'View All',
     onClick: () => {
       setPage(1)
+      setSearch(null)
       setCategory(null)
+      if (inputRef.current) {
+        inputRef.current.value = ''
+      }
     },
     selected: !category
   })
@@ -163,7 +170,7 @@ export default function BlogsPage({
                 />
               </div>
             )}
-            <div className='lg:w-1/2 flex w-full flex-col justify-start border-l-8 border-primary-300 pl-6 lg:flex-1'>
+            <div className='flex w-full flex-col justify-start border-l-8 border-primary-300 pl-6 lg:w-1/2 lg:flex-1'>
               <div className='font-inconsolata font-medium text-primary-300'>
                 {featuredBlog.category}
               </div>
@@ -213,6 +220,7 @@ export default function BlogsPage({
             htmlFor='search'
             className='mb-6 lg:mb-0 lg:flex-1'
             onChange={useDebounce(onSearchChange, 500)}
+            inputRef={inputRef}
           />
           <CategorySelector options={categoryList} />
         </div>
