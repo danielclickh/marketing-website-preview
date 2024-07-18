@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { PrimeReactProvider } from 'primereact/api'
 import { MultiSelect } from 'primereact/multiselect'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'
 import { SuiSearchField, SuiTitle } from '../../components/sui'
@@ -201,8 +201,15 @@ function CustomerStoriesPage({
   const verticalParam = searchParams.get('vertical')
   const searchParamInput = searchParams.get('search')
 
-  const clearAllFilters = () => {
+  const inputRef = useRef<null | HTMLInputElement>(null)
+
+  const clearSearchField = () => {
     setSearchQuery('')
+    if (inputRef.current) inputRef.current.value = ''
+  }
+
+  const clearAllFilters = () => {
+    clearSearchField()
     router.push(
       {
         query: null
@@ -425,7 +432,8 @@ function CustomerStoriesPage({
                 htmlFor='search'
                 className='mb-6 xl:mb-0 xl:min-w-[447px]'
                 onChange={handleSearchInputChange}
-                value={searchQuery}
+                defaultValue={searchQuery}
+                inputRef={inputRef}
               />
             </div>
             <div className='mx-auto max-w-5xl'>
@@ -447,7 +455,7 @@ function CustomerStoriesPage({
                       itemClassName='multiselect-item'
                       onChange={(e) => {
                         if (searchQuery) {
-                          setSearchQuery('')
+                          clearSearchField()
                         }
                         setSelectedUseCases(e.value)
                         const selectedValues = e.value
@@ -480,7 +488,7 @@ function CustomerStoriesPage({
                       itemClassName='multiselect-item'
                       onChange={(e) => {
                         if (searchQuery) {
-                          setSearchQuery('')
+                          clearSearchField()
                         }
                         setSelectedMigrations(e.value)
                         const selectedValues = e.value
@@ -513,7 +521,7 @@ function CustomerStoriesPage({
                       itemClassName='multiselect-item'
                       onChange={(e) => {
                         if (searchQuery) {
-                          setSearchQuery('')
+                          clearSearchField()
                         }
                         setSelectedVerticals(e.value)
                         const selectedValues = e.value

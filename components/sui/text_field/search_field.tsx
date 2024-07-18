@@ -12,7 +12,7 @@ interface TextFieldProps extends HTMLAttributes<HTMLInputElement> {
   value?: string
   error?: string
   required?: boolean
-  inputRef?: React.Ref<HTMLInputElement>
+  inputRef?: null | React.Ref<HTMLInputElement>
 }
 
 export function SuiSearchField({
