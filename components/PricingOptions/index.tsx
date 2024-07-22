@@ -248,22 +248,7 @@ function PricingOptions({
               regionList={regionList}
               onChange={updateRegionParam}
             />
-            <Link
-              href='#pricing-calculator'
-              onClick={(e) => {
-                const calculatorElement =
-                  document.getElementById('pricing-calculator')
-                if (calculatorElement) {
-                  e.preventDefault()
-                  calculatorElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                  })
-                }
-              }}
-              className='mt-4 flex h-10 items-center justify-center gap-1 rounded border border-primary-600 bg-transparent px-4 text-sm text-neutral-0 transition-all hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl'>
-              Estimate your monthly cost ↓
-            </Link>
+            <p className='mt-4 text-right'>line of text</p>
           </div>
         ) : (
           <PricingSelector
@@ -278,7 +263,7 @@ function PricingOptions({
               <div className='plans_container grid min-h-[940px] grid-cols-1 gap-8 lg:grid-cols-3'>
                 {plans.map((plan, index) => (
                   <div
-                    className='relative mx-auto w-full max-w-sm rounded-lg border border-t-4 border-neutral-700/80 border-t-primary bg-neutral-900/50 shadow-card-xl'
+                    className={`relative mx-auto w-full max-w-sm rounded-lg border border-t-4 border-neutral-700/80 border-t-primary bg-neutral-900/50 shadow-card-xl`}
                     key={`plan-${plan.name}`}>
                     <div className='card_content flex h-full flex-col justify-between'>
                       <div className='border-b border-neutral-725 p-6'>
@@ -288,10 +273,102 @@ function PricingOptions({
                         <div className='text-normal text-center text-sm text-neutral-300 md:h-auto md:min-h-[40px]'>
                           {plan.description}
                         </div>
-                        <PlanPricing
-                          isFirst={index === 0}
-                          text={plan.pricingMain}
-                        />
+                        <div
+                          className={`${plan.name === 'Dedicated' && 'mb-14'}`}>
+                          <PlanPricing
+                            isFirst={index === 0}
+                            text={plan.pricingMain}
+                          />
+                        </div>
+
+                        {plan.name === 'Development' &&
+                          router.query.region !== 'ap-northeast-1' &&
+                          router.query.provider !== 'azure' && (
+                            <>
+                              <CUIButton
+                                weight='medium'
+                                onClick={() => {
+                                  const calculatorElement =
+                                    document.getElementById(
+                                      'pricing-calculator'
+                                    )
+                                  if (calculatorElement) {
+                                    calculatorElement.scrollIntoView({
+                                      behavior: 'smooth',
+                                      block: 'start'
+                                    })
+                                    router.push(
+                                      {
+                                        query: {
+                                          ...router.query,
+                                          tier: 'Development'
+                                        }
+                                      },
+                                      undefined,
+                                      { shallow: true }
+                                    )
+                                  } else {
+                                    router.push(
+                                      {
+                                        hash: 'pricing-calculator',
+                                        query: {
+                                          ...router.query,
+                                          tier: 'Development'
+                                        }
+                                      },
+                                      undefined,
+                                      { shallow: true }
+                                    )
+                                  }
+                                }}
+                                className='stroked_button_wrapper button_wrapper mt-4 w-full'
+                                type='secondary'>
+                                Estimate your monthly cost ↓
+                              </CUIButton>
+                            </>
+                          )}
+                        {plan.name === 'Production' && (
+                          <>
+                            <CUIButton
+                              onClick={() => {
+                                const calculatorElement =
+                                  document.getElementById('pricing-calculator')
+                                if (calculatorElement) {
+                                  calculatorElement.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                  })
+                                  router.push(
+                                    {
+                                      query: {
+                                        ...router.query,
+                                        tier: 'Production'
+                                      }
+                                    },
+                                    undefined,
+                                    { shallow: true }
+                                  )
+                                } else {
+                                  router.push(
+                                    {
+                                      hash: 'pricing-calculator',
+                                      query: {
+                                        ...router.query,
+                                        tier: 'Production'
+                                      }
+                                    },
+                                    undefined,
+                                    { shallow: true }
+                                  )
+                                }
+                              }}
+                              weight='medium'
+                              className='stroked_button_wrapper button_wrapper mt-4 w-full'
+                              type='secondary'>
+                              Estimate your monthly cost ↓
+                            </CUIButton>
+                          </>
+                        )}
                       </div>
                       <div className='flex-auto justify-between p-6'>
                         <div className='flex flex-col gap-5'>
@@ -345,96 +422,6 @@ function PricingOptions({
                         )}
                         {plan.actionButton && (
                           <>
-                            {plan.name === 'Development' &&
-                              router.query.region !== 'ap-northeast-1' &&
-                              router.query.provider !== 'azure' && (
-                                <>
-                                  <CUIButton
-                                    weight='medium'
-                                    onClick={() => {
-                                      const calculatorElement =
-                                        document.getElementById(
-                                          'pricing-calculator'
-                                        )
-                                      if (calculatorElement) {
-                                        calculatorElement.scrollIntoView({
-                                          behavior: 'smooth',
-                                          block: 'start'
-                                        })
-                                        router.push(
-                                          {
-                                            query: {
-                                              ...router.query,
-                                              tier: 'Development'
-                                            }
-                                          },
-                                          undefined,
-                                          { shallow: true }
-                                        )
-                                      } else {
-                                        router.push(
-                                          {
-                                            hash: 'pricing-calculator',
-                                            query: {
-                                              ...router.query,
-                                              tier: 'Development'
-                                            }
-                                          },
-                                          undefined,
-                                          { shallow: true }
-                                        )
-                                      }
-                                    }}
-                                    className='stroked_button_wrapper button_wrapper mb-4 w-full'
-                                    type='secondary'>
-                                    Estimate your monthly cost ↓
-                                  </CUIButton>
-                                </>
-                              )}
-                            {plan.name === 'Production' && (
-                              <>
-                                <CUIButton
-                                  onClick={() => {
-                                    const calculatorElement =
-                                      document.getElementById(
-                                        'pricing-calculator'
-                                      )
-                                    if (calculatorElement) {
-                                      calculatorElement.scrollIntoView({
-                                        behavior: 'smooth',
-                                        block: 'start'
-                                      })
-                                      router.push(
-                                        {
-                                          query: {
-                                            ...router.query,
-                                            tier: 'Production'
-                                          }
-                                        },
-                                        undefined,
-                                        { shallow: true }
-                                      )
-                                    } else {
-                                      router.push(
-                                        {
-                                          hash: 'pricing-calculator',
-                                          query: {
-                                            ...router.query,
-                                            tier: 'Production'
-                                          }
-                                        },
-                                        undefined,
-                                        { shallow: true }
-                                      )
-                                    }
-                                  }}
-                                  weight='medium'
-                                  className='stroked_button_wrapper button_wrapper mb-4 w-full'
-                                  type='secondary'>
-                                  Estimate your monthly cost ↓
-                                </CUIButton>
-                              </>
-                            )}
                             <PricingButton
                               isFirst={true}
                               isLast={index !== plans.length - 1}
