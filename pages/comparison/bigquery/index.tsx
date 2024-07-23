@@ -7,6 +7,7 @@ import { CUIButton, CUICard } from '../../../components/ClickUI'
 import ComparisonTable from '../../../components/ComparisonTable'
 import HomepageSectionTrustedByAlt from '../../../components/HomepageSectionTrustedByAlt'
 import MarketoForm from '../../../components/MarketoForm'
+import MoreComparisons from '../../../components/MoreComparisons'
 import { StrapiImage } from '../../../components/StrapiElements'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findAll, findOne } from '../../../lib/api/strapi'
@@ -25,6 +26,9 @@ import chartLatency from './chart-latency.svg'
 import chartCosts from './chart-costs.svg'
 import logoBlock from './logo-block.png'
 import logoMux from './logo-mux.svg'
+import logoPostgress from './logo-postgress.svg'
+import logoRedshift from './logo-redshift.svg'
+import logoSnowflake from './logo-snowflake.svg'
 
 export interface BigQueryPageProps extends ComparisonProps {
   customerStories: HomepageCustomerStories
@@ -559,6 +563,27 @@ export default function BigQueryPage({
           </div>
         </div>
       </div>
+
+      {/* More comparisons */}
+      <MoreComparisons
+        comparisons={[
+          {
+            name: 'Postgress',
+            link: '/comparison/postgresql',
+            logo: logoPostgress
+          },
+          {
+            name: 'Redshift',
+            link: '/comparison/redshift',
+            logo: logoRedshift
+          },
+          {
+            name: 'Snowflake',
+            link: '/comparison/snowflake',
+            logo: logoSnowflake
+          }
+        ]}
+      />
     </Layout>
   )
 }
