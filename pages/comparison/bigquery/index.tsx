@@ -10,6 +10,7 @@ import MarketoForm from '../../../components/MarketoForm'
 import MoreComparisons from '../../../components/MoreComparisons'
 import { StrapiImage } from '../../../components/StrapiElements'
 import { SuiText, SuiTitle } from '../../../components/sui'
+import { useClickOutside } from '../../../hooks'
 import { findAll, findOne } from '../../../lib/api/strapi'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
@@ -103,8 +104,19 @@ export default function BigQueryPage({
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
 
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const modalInnerRef = useRef<HTMLDivElement | null>(null)
+  const modalFormSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [modalFormSuccess, setModalFormSuccess] = useState(false)
+  const [modalFormLoaded, setModalFormLoaded] = useState(false)
+
+  useClickOutside(modalInnerRef, () => {
+    setIsModalOpen(false)
+  })
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      {/* Hero */}
       <div className='container mx-auto my-16 flex max-w-7xl flex-col items-center gap-x-6 px-8 md:flex-row 2xl:px-0'>
         <div className='mx-auto grid max-w-[800px] grid-cols-1 gap-6 text-center lg:mx-0 lg:text-left'>
           <div>
@@ -136,9 +148,9 @@ export default function BigQueryPage({
               type='primary'
               size='lg'
               weight='semibold'
-              href='#'
               linkClass='flex-1 w-full'
-              className='w-full'>
+              className='w-full flex-1'
+              onClick={() => setIsModalOpen(true)}>
               Get personalized support
             </CUIButton>
             <CUIButton
@@ -166,6 +178,8 @@ export default function BigQueryPage({
           className='mx-auto hidden lg:block'
         />
       </div>
+
+      {/* Table */}
       <div className='container mx-auto my-16 max-w-7xl px-8 2xl:px-0'>
         <ComparisonTable
           columns={[
@@ -562,6 +576,82 @@ export default function BigQueryPage({
           }
         ]}
       />
+
+      {/* Modal */}
+      <div
+        className={`fixed inset-0 z-50 flex overflow-auto bg-[#323232] bg-opacity-50 transition-opacity ${
+          isModalOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
+        }`}>
+        <div className='m-auto p-4'>
+          <div
+            className='relative w-full max-w-3xl rounded-lg bg-[#323232] p-8 shadow-2xl'
+            ref={modalInnerRef}>
+            <button
+              className='absolute right-4 top-4 opacity-60 transition-opacity hover:opacity-80'
+              type='button'
+              onClick={() => setIsModalOpen(false)}>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'>
+                <path d='M18 6 6 18' />
+                <path d='m6 6 12 12' />
+              </svg>
+            </button>
+
+            <SuiTitle type='h3'>Get personalized support</SuiTitle>
+            <SuiText size='sm' className='mb-6 mt-4'>
+              We have helped many of our customers migrate from BigQuery to
+              ClickHouse. Please leave your details below and we will reach out
+              with availability shortly to learn about how we can assist you on
+              this journey.
+            </SuiText>
+            <>
+              {!formSuccess && (
+                <MarketoForm
+                  formId={'1156'}
+                  clearbitTracking={true}
+                  onLoad={() => {
+                    setModalFormLoaded(true)
+                  }}
+                  onSuccess={() => {
+                    setModalFormSuccess(true)
+                    // Delay needed to allow the ref to update before scrolling
+                    setTimeout(() => {
+                      modalFormSuccessRef.current?.scrollIntoView({
+                        behavior: 'smooth'
+                      })
+                    }, 10)
+
+                    return false // Stops page from reloading
+                  }}
+                />
+              )}
+
+              {!modalFormLoaded && (
+                <div className='text-center'>Loading form...</div>
+              )}
+
+              {modalFormSuccess && (
+                <div ref={modalFormSuccessRef}>
+                  <h3 className='text-center text-2xl font-bold'>
+                    Thank you for your submission!
+                  </h3>
+                  <p className='mt-2 text-center text-neutral-200'>
+                    We will be in touch soon.
+                  </p>
+                </div>
+              )}
+            </>
+          </div>
+        </div>
+      </div>
     </Layout>
   )
 }
