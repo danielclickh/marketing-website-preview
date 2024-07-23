@@ -30,15 +30,18 @@ export default function MoreComparisons({
         <div className='flex flex-wrap justify-center'>
           {comparisons.map(({ name, logo, link }, index) => {
             return (
-              <div className='max-w-md space-y-4 p-4 text-center' key={index}>
+              <div
+                className='w-full max-w-sm space-y-4 p-4 text-center'
+                key={index}>
                 <Link className='block' href={link}>
                   <CUICard>
-                    <div className='flex w-full items-center justify-center gap-8 px-16 py-8'>
+                    <div className='flex w-full items-center justify-center gap-8 p-8'>
                       <Image
                         src={logoClickhouse}
                         alt='ClickHouse'
                         width={75}
                         height={76}
+                        className='h-[76px] w-[75px] flex-shrink flex-grow-0 object-scale-down object-center'
                       />
                       <strong className='text-4xl font-bold text-primary-300'>
                         vs
@@ -48,7 +51,7 @@ export default function MoreComparisons({
                         alt={name}
                         width={75}
                         height={76}
-                        className='h-[76px] w-[75px] object-scale-down object-center'
+                        className='h-[76px] w-[75px] flex-shrink flex-grow-0 object-scale-down object-center'
                       />
                     </div>
                   </CUICard>
