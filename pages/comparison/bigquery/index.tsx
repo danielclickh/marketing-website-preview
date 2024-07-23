@@ -148,8 +148,7 @@ export default function BigQueryPage({
               type='primary'
               size='lg'
               weight='semibold'
-              linkClass='flex-1 w-full'
-              className='w-full flex-1'
+              className='w-full sm:flex-1'
               onClick={() => setIsModalOpen(true)}>
               Get personalized support
             </CUIButton>
