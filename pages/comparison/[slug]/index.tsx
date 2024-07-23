@@ -467,7 +467,7 @@ export async function getStaticPaths() {
   }
 
   // Define an array of slugs to exclude
-  const excludedSlugs = ['snowflake', 'redshift', 'rockset']
+  const excludedSlugs = ['snowflake', 'redshift', 'rockset', 'bigquery']
 
   const allPaths = await getPathsValues('comparisons', params)
 
