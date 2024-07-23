@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { CUIButton } from '../../../components/ClickUI'
+import { CUIButton, CUICard } from '../../../components/ClickUI'
 import ComparisonTable from '../../../components/ComparisonTable'
 import HomepageSectionTrustedByAlt from '../../../components/HomepageSectionTrustedByAlt'
 import { SuiText, SuiTitle } from '../../../components/sui'
@@ -14,6 +14,13 @@ import Layout from '../../../components/Layout'
 import { HomepageCustomerStories } from '../../../types/homepage'
 import logos from './logos.png'
 import iconDevelopers from './icon-developers.svg'
+import iconQuote from './icon-quote.svg'
+import iconGuage from './icon-guage.svg'
+import iconHandCoins from './icon-hand-coins.svg'
+import chartLatency from './chart-latency.svg'
+import chartCosts from './chart-costs.svg'
+import logoBlock from './logo-block.png'
+import logoMux from './logo-mux.svg'
 
 export interface BigQueryPageProps extends ComparisonProps {
   customerStories: HomepageCustomerStories
@@ -240,11 +247,143 @@ export default function BigQueryPage({
         heading='Trusted by'
         customerStories={customerStories}
       />
-      <div className='container mx-auto my-16 max-w-7xl px-8 2xl:px-0'>
-        <div className='flex flex-col items-center gap-6 text-center'>
+      <div className='container mx-auto my-16 max-w-7xl space-y-8 px-8 2xl:px-0'>
+        <div className='mb-16 flex flex-col items-center gap-6 text-center'>
           <Image src={iconDevelopers} alt='Icon' width={72} height={72} />
           <SuiTitle type='h2'>Why developers choose ClickHouse</SuiTitle>
         </div>
+        <CUICard className='!block space-y-8 p-8 md:space-y-10 md:p-10'>
+          <Image src={iconGuage} alt='Icon' width={36} height={24} />
+          <div className='flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between'>
+            <div className='grid grid-cols-1 gap-6 lg:max-w-2xl'>
+              <SuiTitle type='h2'>BigQuery’s Query Latency</SuiTitle>
+              <SuiText>
+                Achieving sub-second query response times and supporting highly
+                concurrent workloads can be painful in BigQuery, if not
+                impossible.
+              </SuiText>
+              <SuiText>
+                ClickHouse is purpose-built for real-time, large-volume, data
+                analytics. It’s the fastest and most resource-efficient database
+                for analytics and is designed to serve queries with high
+                concurrency without enforcing limits on the number of parallel
+                queries.
+              </SuiText>
+              <SuiText>
+                Whether you’re aggregating large volumes of data in real-time,
+                interactively slicing and dicing on the fly, or powering
+                customer-facing dashboards, ClickHouse ensures blazing speed.
+              </SuiText>
+            </div>
+            <Image
+              src={chartLatency}
+              alt='Latency when querying 1 billion rows'
+              width={342}
+              height={305}
+              className='mx-auto flex-shrink flex-grow-0 lg:mx-0'
+            />
+          </div>
+          <CUICard className='gap-6 bg-[#323232] p-6 lg:flex-row lg:items-stretch lg:pr-10'>
+            <div className='flex items-center gap-6 lg:max-w-3xl'>
+              <Image
+                src={iconQuote}
+                alt='Quote'
+                width={36}
+                height={28}
+                className='flex-shrink-0 flex-grow-0 self-start'
+              />
+              <div className='grid grid-cols-1 gap-6'>
+                <SuiText>
+                  We needed a solution that could scale, but also provide
+                  end-user facing analytics capabilities with low latency and
+                  high throughput.{' '}
+                  <Link href='#' className='text-primary-300'>
+                    Read blog
+                  </Link>
+                </SuiText>
+              </div>
+            </div>
+            <Image
+              src={logoBlock}
+              alt='Block logo'
+              width={61}
+              height={86}
+              className='ml-auto flex-shrink flex-grow-0'
+            />
+          </CUICard>
+        </CUICard>
+        <CUICard className='!block space-y-8 p-8 md:space-y-10 md:p-10'>
+          <Image src={iconHandCoins} alt='Icon' width={38} height={30} />
+          <div className='flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between'>
+            <div className='grid grid-cols-1 gap-6 lg:max-w-2xl'>
+              <SuiTitle type='h2'>BigQuery’s High Cost</SuiTitle>
+              <SuiText>
+                BigQuery’s pricing model can lead companies to artificially
+                constrain usage or access to data, leading to lower ROI.
+              </SuiText>
+              <SuiText>
+                ClickHouse is designed to manage huge volumes of data
+                efficiently. Its efficient management of resources helps to
+                maximize its cost-effectiveness. ClickHouse was designed from
+                the ground up for best-in-class resource utilization.
+              </SuiText>
+              <SuiText>
+                For example, Prefect reduced costs by 33%{' '}
+                <Link href='#' className='text-primary-300'>
+                  moving from BigQuery to ClickHouse
+                </Link>
+                , and{' '}
+                <Link href='#' className='text-primary-300'>
+                  Juspay
+                </Link>{' '}
+                reduced its operating expenses by 10x after migrating its
+                analytics workloads from BigQuery to ClickHouse.
+              </SuiText>
+            </div>
+            <Image
+              src={chartCosts}
+              alt='Cost for querying 1 billion rows'
+              width={336}
+              height={273}
+              className='mx-auto flex-shrink flex-grow-0 lg:mx-0'
+            />
+          </div>
+          <CUICard className='gap-6 bg-[#323232] p-6 lg:flex-row lg:items-stretch lg:pr-10'>
+            <div className='flex items-center gap-6 lg:max-w-3xl'>
+              <Image
+                src={iconQuote}
+                alt='Quote'
+                width={36}
+                height={28}
+                className='flex-shrink-0 flex-grow-0 self-start'
+              />
+              <div className='grid grid-cols-1 gap-6'>
+                <SuiText>
+                  [BigQuery] discourages data usage. Instead of encouraging
+                  analysts to query the database in any and all ways they can
+                  imagine you’ll end up worrying about needing to limit them and
+                  come up with processes for controlling the volume of data
+                  being used.
+                </SuiText>
+                <SuiText>
+                  We simply don’t want the hassle of trying to figure out in
+                  advance of how many BigQuery slots to purchase - what a
+                  headache!.{' '}
+                  <Link href='#' className='text-primary-300'>
+                    Read blog
+                  </Link>
+                </SuiText>
+              </div>
+            </div>
+            <Image
+              src={logoMux}
+              alt='Mux logo'
+              width={128}
+              height={40}
+              className='ml-auto flex-shrink flex-grow-0'
+            />
+          </CUICard>
+        </CUICard>
       </div>
     </Layout>
   )
