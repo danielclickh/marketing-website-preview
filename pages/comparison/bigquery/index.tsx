@@ -580,7 +580,7 @@ export default function BigQueryPage({
       {/* Modal */}
       <div
         className={`fixed inset-0 z-50 flex overflow-auto bg-[#323232] bg-opacity-50 transition-opacity ${
-          isModalOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
+          isModalOpen ? '' : 'pointer-events-none opacity-0'
         }`}>
         <div className='m-auto p-4'>
           <div
