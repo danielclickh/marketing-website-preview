@@ -13,6 +13,7 @@ import { ComparisonPage, ComparisonProps } from '../../../types/comparisons'
 import Layout from '../../../components/Layout'
 import { HomepageCustomerStories } from '../../../types/homepage'
 import logos from './logos.png'
+import iconDevelopers from './icon-developers.svg'
 
 export interface BigQueryPageProps extends ComparisonProps {
   customerStories: HomepageCustomerStories
@@ -112,8 +113,8 @@ export default function BigQueryPage({
   galaxyOnPage(`${comparison.slug}ComparisonPage`)
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='container mx-auto my-16 flex max-w-7xl items-center px-8 2xl:px-0'>
-        <div className='grid max-w-[800px] grid-cols-1 gap-6'>
+      <div className='container mx-auto my-16 flex max-w-7xl flex-col items-center gap-x-6 px-8 md:flex-row 2xl:px-0'>
+        <div className='mx-auto grid max-w-[800px] grid-cols-1 gap-6 text-center lg:mx-0 lg:text-left'>
           <div>
             <span className='inline-block rounded-full border border-primary-500 bg-primary-700 px-4 py-1 text-xs text-primary-300'>
               Comparisons
@@ -122,14 +123,23 @@ export default function BigQueryPage({
           <SuiTitle type='h1' weight='bold'>
             ClickHouse <span className='text-primary-300'>vs</span> BigQuery
           </SuiTitle>
-          <SuiText className='text-xl'>
+
+          <Image
+            src={logos}
+            alt='ClickHouse vs BigQuery'
+            width={240}
+            height={245}
+            className='mx-auto lg:hidden'
+          />
+
+          <SuiText className='sm:text-xl'>
             BigQuery handles ad-hoc queries and smaller data volumes
             effectively, but scaling turns cost and performance management into
             a significant challenge. Read more below to learn about how
             ClickHouse and BigQuery compare in cost, performance, and with
             supported features.
           </SuiText>
-          <div className='mt-6 flex max-w-[523px] gap-4'>
+          <div className='mt-6 flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
             <CUIButton
               type='primary'
               size='lg'
@@ -161,7 +171,7 @@ export default function BigQueryPage({
           alt='ClickHouse vs BigQuery'
           width={240}
           height={245}
-          className='mx-auto'
+          className='mx-auto hidden lg:block'
         />
       </div>
       <div className='container mx-auto my-16 max-w-7xl px-8 2xl:px-0'>
@@ -230,6 +240,12 @@ export default function BigQueryPage({
         heading='Trusted by'
         customerStories={customerStories}
       />
+      <div className='container mx-auto my-16 max-w-7xl px-8 2xl:px-0'>
+        <div className='flex flex-col items-center gap-6 text-center'>
+          <Image src={iconDevelopers} alt='Icon' width={72} height={72} />
+          <SuiTitle type='h2'>Why developers choose ClickHouse</SuiTitle>
+        </div>
+      </div>
     </Layout>
   )
 }
