@@ -1,9 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useRef, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+import BlogPost from '../../../components/BlogPostList/BlogPost'
 import { CUIButton, CUICard } from '../../../components/ClickUI'
 import ComparisonTable from '../../../components/ComparisonTable'
 import HomepageSectionTrustedByAlt from '../../../components/HomepageSectionTrustedByAlt'
+import MarketoForm from '../../../components/MarketoForm'
+import { StrapiImage } from '../../../components/StrapiElements'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findAll, findOne } from '../../../lib/api/strapi'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
@@ -33,7 +37,17 @@ export async function getStaticProps() {
         $eq: 'bigquery'
       }
     },
-    populate: ['seo']
+    populate: [
+      'seo',
+      'Content',
+      'Content.customContent',
+      'Content.customContent.Image',
+      'Content.RelatedBlogs',
+      'Content.RelatedBlogs.blog_posts',
+      'Content.RelatedBlogs.blog_posts.*',
+      'Content.RelatedBlogs.blog_posts.author',
+      'Content.RelatedBlogs.blog_posts.thumbnailPng'
+    ]
   })
 
   if (!data?.[0]) {
@@ -118,6 +132,11 @@ export default function BigQueryPage({
   customerStories
 }: BigQueryPageProps) {
   galaxyOnPage(`${comparison.slug}ComparisonPage`)
+
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='container mx-auto my-16 flex max-w-7xl flex-col items-center gap-x-6 px-8 md:flex-row 2xl:px-0'>
@@ -242,16 +261,20 @@ export default function BigQueryPage({
           ]}
         />
       </div>
+
       <HomepageSectionTrustedByAlt
         className='!my-24'
         heading='Trusted by'
         customerStories={customerStories}
       />
+
       <div className='container mx-auto my-16 max-w-7xl space-y-8 px-8 2xl:px-0'>
         <div className='mb-16 flex flex-col items-center gap-6 text-center'>
           <Image src={iconDevelopers} alt='Icon' width={72} height={72} />
           <SuiTitle type='h2'>Why developers choose ClickHouse</SuiTitle>
         </div>
+
+        {/* Latency */}
         <CUICard className='!block space-y-8 p-8 md:space-y-10 md:p-10'>
           <Image src={iconGuage} alt='Icon' width={36} height={24} />
           <div className='flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between'>
@@ -312,6 +335,8 @@ export default function BigQueryPage({
             />
           </CUICard>
         </CUICard>
+
+        {/* Costs */}
         <CUICard className='!block space-y-8 p-8 md:space-y-10 md:p-10'>
           <Image src={iconHandCoins} alt='Icon' width={38} height={30} />
           <div className='flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between'>
@@ -386,6 +411,7 @@ export default function BigQueryPage({
         </CUICard>
       </div>
 
+      {/* Roadmap */}
       <div className='my-16 bg-neutral-700 py-16'>
         <div className='section-container'>
           <div className='relative rounded border-t-4 border-primary-300 bg-neutral-750 p-8 text-center lg:p-10'>
@@ -403,6 +429,133 @@ export default function BigQueryPage({
               </Link>
               .
             </SuiText>
+          </div>
+        </div>
+      </div>
+
+      {/* Related content */}
+      <div className='container mx-auto my-16 max-w-7xl px-8 2xl:px-0'>
+        {comparison.Content.map((content, index) => {
+          return (
+            <div key={index} className='mx-auto mb-10 max-w-7xl'>
+              <div className='mb-16 text-center'>
+                <SuiTitle type='h2'>{content.SectionTitle}</SuiTitle>
+                {content.Description && (
+                  <div className='rich_content mt-4 text-center'>
+                    <ReactMarkdown children={content.Description} />
+                  </div>
+                )}
+              </div>
+
+              <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
+                {content.customContent.length > 0 && (
+                  <>
+                    {content.customContent?.map((custom, index) => {
+                      if (!custom.href) {
+                        return null
+                      }
+                      return (
+                        <Link
+                          key={index}
+                          href={custom.href}
+                          target='_blank'
+                          className={` hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline`}>
+                          <CUICard className='h-full'>
+                            <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
+                              {custom.Image && (
+                                <StrapiImage
+                                  {...custom.Image}
+                                  sizes='medium'
+                                  alt={custom.Image.alternativeText}
+                                  className='w-full rounded-t-lg xl:h-52 xl:object-cover'
+                                  width={100}
+                                  height={100}
+                                />
+                              )}
+                              <div className='flex flex-col items-start justify-center gap-2 px-6 pt-6'>
+                                <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
+                                  {custom.Category}
+                                </div>
+                                <div className='cursor-pointer font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                                  {custom.Title}
+                                </div>
+                              </div>
+                            </CUICard.Body>
+                            <CUICard.Footer className='flex w-full items-center p-6 text-sm text-neutral-300'>
+                              {custom.Footer}
+                            </CUICard.Footer>
+                          </CUICard>
+                        </Link>
+                      )
+                    })}
+                  </>
+                )}
+
+                {content.RelatedBlogs.length > 0 && (
+                  <>
+                    {content.RelatedBlogs.flatMap((custom) =>
+                      custom.blog_posts.map((blog) => (
+                        <BlogPost key={blog.id} {...blog} />
+                      ))
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      <div className='mx-auto mb-24 max-w-7xl px-4 md:px-8 2xl:px-0'>
+        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto  flex  flex-col items-center'>
+          <Image
+            src='/images/migration.svg'
+            height={72}
+            width={72}
+            alt='Migrations'
+            className='mb-4 lg:mb-6'
+          />
+          <SuiTitle type='h2' className='mb-12 text-center lg:mb-16'>
+            Contact us for help with your migration
+          </SuiTitle>
+          <div className='mx-auto max-w-lg'>
+            <>
+              {!formSuccess && (
+                <MarketoForm
+                  formId={'1156'}
+                  clearbitTracking={true}
+                  onLoad={() => {
+                    setFormLoaded(true)
+                  }}
+                  onSuccess={() => {
+                    setFormSuccess(true)
+                    // Delay needed to allow the ref to update before scrolling
+                    setTimeout(() => {
+                      formSuccessRef.current?.scrollIntoView({
+                        behavior: 'smooth'
+                      })
+                    }, 10)
+
+                    return false // Stops page from reloading
+                  }}
+                />
+              )}
+
+              {!formLoaded && (
+                <div className='text-center'>Loading form...</div>
+              )}
+
+              {formSuccess && (
+                <div ref={formSuccessRef}>
+                  <h3 className='text-center text-2xl font-bold'>
+                    Thank you for your submission!
+                  </h3>
+                  <p className='mt-2 text-center text-neutral-200'>
+                    We will be in touch soon.
+                  </p>
+                </div>
+              )}
+            </>
           </div>
         </div>
       </div>
