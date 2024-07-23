@@ -1,10 +1,11 @@
 import React, { useRef, useState, useEffect, createRef } from 'react'
+import Markdown from '../Markdown'
 
 type Cell = string | React.ReactNode
 
 type Column = {
   heading: Cell
-  width?: number
+  width?: string | number
   highlight?: boolean
   rowIcon?: React.ReactNode
 }
@@ -21,6 +22,7 @@ interface RowItemProps {
 }
 
 function RowItem({ heading, value, icon }: RowItemProps) {
+  const valueIsString = typeof value === 'string'
   return (
     <div className='flex items-center gap-4'>
       {!!icon && <div className='w-4 flex-shrink-0 flex-grow-0'>{icon}</div>}
@@ -28,7 +30,10 @@ function RowItem({ heading, value, icon }: RowItemProps) {
         <div className='text-sm font-bold uppercase text-[#B3B6BD] lg:hidden'>
           {heading}
         </div>
-        <div className='font-medium'>{value}</div>
+        <div className='grid grid-cols-1 gap-3 font-medium'>
+          {valueIsString && <Markdown encloseByDiv={false}>{value}</Markdown>}
+          {!valueIsString && value}
+        </div>
       </div>
     </div>
   )
@@ -153,7 +158,7 @@ export default function ComparisonTable({
                     return (
                       <td
                         key={columnIndex}
-                        valign='top'
+                        valign='middle'
                         className='border-b border-neutral-700 px-6 py-4 lg:px-8'>
                         <RowItem
                           heading={heading}
