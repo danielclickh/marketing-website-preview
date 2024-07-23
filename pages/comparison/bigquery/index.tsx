@@ -168,7 +168,7 @@ export default function BigQueryPage({
           </div>
           <SuiText className='text-sm'>
             Read our comprehensive guide about{' '}
-            <Link href='#' className='text-primary-300'>
+            <Link href='#' className='text-primary-300 hover:underline'>
               migrating from ClickHouse to BigQuery
             </Link>
           </SuiText>
@@ -297,7 +297,7 @@ export default function BigQueryPage({
                   We needed a solution that could scale, but also provide
                   end-user facing analytics capabilities with low latency and
                   high throughput.{' '}
-                  <Link href='#' className='text-primary-300'>
+                  <Link href='#' className='text-primary-300 hover:underline'>
                     Read blog
                   </Link>
                 </SuiText>
@@ -329,11 +329,11 @@ export default function BigQueryPage({
               </SuiText>
               <SuiText>
                 For example, Prefect reduced costs by 33%{' '}
-                <Link href='#' className='text-primary-300'>
+                <Link href='#' className='text-primary-300 hover:underline'>
                   moving from BigQuery to ClickHouse
                 </Link>
                 , and{' '}
-                <Link href='#' className='text-primary-300'>
+                <Link href='#' className='text-primary-300 hover:underline'>
                   Juspay
                 </Link>{' '}
                 reduced its operating expenses by 10x after migrating its
@@ -369,7 +369,7 @@ export default function BigQueryPage({
                   We simply don’t want the hassle of trying to figure out in
                   advance of how many BigQuery slots to purchase - what a
                   headache!.{' '}
-                  <Link href='#' className='text-primary-300'>
+                  <Link href='#' className='text-primary-300 hover:underline'>
                     Read blog
                   </Link>
                 </SuiText>
@@ -384,6 +384,27 @@ export default function BigQueryPage({
             />
           </CUICard>
         </CUICard>
+      </div>
+
+      <div className='my-16 bg-neutral-700 py-16'>
+        <div className='section-container'>
+          <div className='relative rounded border-t-4 border-primary-300 bg-neutral-750 p-8 text-center lg:p-10'>
+            <SuiTitle type='h3' weight='bold' className='mb-4'>
+              When not to migrate from BigQuery to ClickHouse Cloud{' '}
+              <span className='text-primary-300'>yet</span>?
+            </SuiTitle>
+            <SuiText>
+              When you need multi-statement transactions or extensive joins over
+              highly normalized tables.
+              <br />
+              Both are on our{' '}
+              <Link href='#' className='text-primary-300 hover:underline'>
+                roadmap for 2024
+              </Link>
+              .
+            </SuiText>
+          </div>
+        </div>
       </div>
     </Layout>
   )
