@@ -24,6 +24,8 @@ import iconGuage from './icon-guage.svg'
 import iconHandCoins from './icon-hand-coins.svg'
 import chartLatency from './chart-latency.svg'
 import chartCosts from './chart-costs.svg'
+import logoClickhouse from '../../../public/logo-full.svg'
+import logoBigquery from './logo-bigquery.svg'
 import logoBlock from './logo-block.png'
 import logoMux from './logo-mux.svg'
 import logoPostgress from './logo-postgress.svg'
@@ -86,46 +88,6 @@ export async function getStaticProps() {
     props,
     revalidate: REVALIDATE_SECONDS
   }
-}
-
-function YesIcon() {
-  return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      className='text-primary'
-      width='16'
-      height='16'
-      fill='none'
-      viewBox='0 0 16 16'>
-      <path
-        stroke='currentColor'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        strokeWidth='2'
-        d='M13.3337 4.33331 6.00033 11.6666 2.66699 8.33331'
-      />
-    </svg>
-  )
-}
-
-function NoIcon() {
-  return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      className='text-[#FFBABA]'
-      width='24'
-      height='24'
-      fill='none'
-      viewBox='0 0 24 24'>
-      <path
-        stroke='currentColor'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        strokeWidth='1.5'
-        d='m8 8 8 8m0-8-8 8'
-      />
-    </svg>
-  )
 }
 
 export default function BigQueryPage({
@@ -208,13 +170,29 @@ export default function BigQueryPage({
         <ComparisonTable
           columns={[
             {
-              heading: 'ClickHouse',
+              heading: (
+                <Image
+                  src={logoClickhouse}
+                  alt='ClickHouse'
+                  width={149}
+                  height={44}
+                  className='mx-auto -mb-2 -mt-1'
+                />
+              ),
               width: '45%',
               rowIcon: <YesIcon />,
               highlight: true
             },
             {
-              heading: 'BigQuery',
+              heading: (
+                <Image
+                  src={logoBigquery}
+                  alt='BigQuery'
+                  width={131}
+                  height={44}
+                  className='mx-auto -mb-2 -mt-1'
+                />
+              ),
               width: '35%',
               rowIcon: <NoIcon />
             }
@@ -585,5 +563,45 @@ export default function BigQueryPage({
         ]}
       />
     </Layout>
+  )
+}
+
+function YesIcon() {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      className='text-primary'
+      width='16'
+      height='16'
+      fill='none'
+      viewBox='0 0 16 16'>
+      <path
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+        d='M13.3337 4.33331 6.00033 11.6666 2.66699 8.33331'
+      />
+    </svg>
+  )
+}
+
+function NoIcon() {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      className='text-[#FFBABA]'
+      width='24'
+      height='24'
+      fill='none'
+      viewBox='0 0 24 24'>
+      <path
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='1.5'
+        d='m8 8 8 8m0-8-8 8'
+      />
+    </svg>
   )
 }
