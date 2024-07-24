@@ -319,7 +319,9 @@ export default function BigQueryPage({
                   We needed a solution that could scale, but also provide
                   end-user facing analytics capabilities with low latency and
                   high throughput.{' '}
-                  <Link href='#' className='text-primary-300 hover:underline'>
+                  <Link
+                    href='/blog/hifis-migration-from-bigquery-to-clickhouse?loc=bigquery-comparison-page'
+                    className='text-primary-300 hover:underline'>
                     Read blog
                   </Link>
                 </SuiText>
@@ -392,7 +394,7 @@ export default function BigQueryPage({
                 <SuiText>
                   We simply don’t want the hassle of trying to figure out in
                   advance of how many BigQuery slots to purchase - what a
-                  headache!.{' '}
+                  headache{' '}
                   <Link href='#' className='text-primary-300 hover:underline'>
                     Read blog
                   </Link>
