@@ -308,7 +308,7 @@ export default function BigQueryPage({
             />
           </div>
           <CUICard className='gap-6 !bg-[#323232] p-6 lg:flex-row lg:items-stretch lg:pr-10'>
-            <div className='flex items-center gap-6 lg:max-w-3xl'>
+            <div className='flex items-center gap-6 self-stretch lg:max-w-3xl'>
               <Image
                 src={iconQuote}
                 alt='Quote'
@@ -380,8 +380,8 @@ export default function BigQueryPage({
               className='mx-auto flex-shrink flex-grow-0 lg:mx-0'
             />
           </div>
-          <CUICard className='gap-6 !bg-[#323232] p-6 lg:flex-row lg:items-stretch lg:pr-10'>
-            <div className='flex flex-col items-start gap-6 md:flex-row md:items-center lg:max-w-3xl'>
+          <CUICard className='gap-6 !bg-[#323232] p-6 lg:flex-row lg:pr-10'>
+            <div className='flex items-center gap-6 self-stretch lg:max-w-3xl'>
               <Image
                 src={iconQuote}
                 alt='Quote'
