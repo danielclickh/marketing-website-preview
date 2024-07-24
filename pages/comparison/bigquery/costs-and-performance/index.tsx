@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import React, { useRef, useState } from 'react'
 import { CUIButton, CUICard } from '../../../../components/ClickUI'
 import Footer from '../../../../components/Footer'
+import HomepageSectionTrustedByAlt from '../../../../components/HomepageSectionTrustedByAlt'
 import MarketoForm from '../../../../components/MarketoForm'
 import SeoContainer from '../../../../components/SeoContainer'
 import { SuiText, SuiTitle } from '../../../../components/sui'
@@ -140,6 +141,39 @@ export default function BigQueryCostsAndPerformancePage({
           </>
         )}
 
+        <HomepageSectionTrustedByAlt
+          className='!my-24'
+          heading='Trusted by'
+          customerStories={customerStories}
+        />
+
+        <div className='section-container my-24'>
+          <div className='space-y-6 rounded-lg bg-primary-300 px-6 py-10 text-center text-primary-900'>
+            <SuiTitle type='h2'>Get started for free</SuiTitle>
+            <SuiText>
+              We’ll get you started on a 30 day trial and $300 credits to spend
+              at your own pace.
+            </SuiText>
+            <div className='flex flex-col justify-center gap-4 sm:flex-row'>
+              <CUIButton
+                type='primary-dark'
+                size='lg'
+                weight='semibold'
+                onClick={() => setIsModalOpen(true)}>
+                Get personalized support
+              </CUIButton>
+              <CUIButton
+                type='secondary-dark'
+                size='lg'
+                weight='semibold'
+                href='#'
+                className='w-full !border !border-primary-900 !text-primary-900 hover:!text-white sm:w-auto'>
+                Start free trial
+              </CUIButton>
+            </div>
+          </div>
+        </div>
+
         {/* Modal */}
         <div
           className={`fixed inset-0 z-50 flex overflow-auto bg-[#323232] bg-opacity-50 transition-opacity ${
@@ -147,7 +181,7 @@ export default function BigQueryCostsAndPerformancePage({
           }`}>
           <div className='m-auto p-4'>
             <div
-              className='relative w-full max-w-3xl rounded-lg bg-[#323232] p-8 shadow-2xl'
+              className='relative w-full max-w-2xl rounded-lg bg-[#323232] p-8 shadow-2xl'
               ref={modalInnerRef}>
               <button
                 className='absolute right-4 top-4 opacity-60 transition-opacity hover:opacity-80'
@@ -178,7 +212,7 @@ export default function BigQueryCostsAndPerformancePage({
               <>
                 {!modalFormSuccess && (
                   <MarketoForm
-                    formId={'1156'}
+                    formId={'1237'}
                     clearbitTracking={true}
                     onLoad={() => {
                       setModalFormLoaded(true)
