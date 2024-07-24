@@ -4,3 +4,9 @@
   left: calc(0px - var(--angle-width));
 }
 
+.quotesMask {
+  @screen sm {
+    mask-image: linear-gradient(90deg, transparent 0%, #000 2rem, #000 calc(100% - 2rem), transparent 100%);
+  }
+}
+
