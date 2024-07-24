@@ -1,0 +1,435 @@
+import Image, { ImageProps } from 'next/image'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import React, { useRef, useState } from 'react'
+import { CUIButton, CUICard } from '../../../../components/ClickUI'
+import Footer from '../../../../components/Footer'
+import MarketoForm from '../../../../components/MarketoForm'
+import SeoContainer from '../../../../components/SeoContainer'
+import { SuiText, SuiTitle } from '../../../../components/sui'
+import { useClickOutside } from '../../../../hooks'
+import { findAll, findOne } from '../../../../lib/api/strapi'
+import { galaxyOnPage } from '../../../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../../../lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '../../../../lib/utils/revalidationConfig'
+import logoFull from '../../../../public/logo-full.svg'
+import { ComparisonPage, ComparisonProps } from '../../../../types/comparisons'
+import { HomepageCustomerStories } from '../../../../types/homepage'
+import styles from './styles.module.scss'
+import bgArrows from './bg-arrows.png'
+import chartCostsQuering from './chart-costs-querying.svg'
+import chartCostsStoring from './chart-costs-storing.svg'
+import chartPerformanceTableScan from './chart-performance-table-scan.svg'
+import chartPerformanceIndexSupport from './chart-performance-index-support.svg'
+
+export interface BigQueryCostsAndPerformancePageProps extends ComparisonProps {
+  customerStories: HomepageCustomerStories
+}
+
+export async function getStaticProps() {
+  const { data }: { data: ComparisonPage[] } = await findAll('comparisons', {
+    filters: {
+      slug: {
+        $eq: 'bigquery'
+      }
+    },
+    populate: [
+      'seo',
+      'Content',
+      'Content.customContent',
+      'Content.customContent.Image',
+      'Content.RelatedBlogs',
+      'Content.RelatedBlogs.blog_posts',
+      'Content.RelatedBlogs.blog_posts.*',
+      'Content.RelatedBlogs.blog_posts.author',
+      'Content.RelatedBlogs.blog_posts.thumbnailPng'
+    ]
+  })
+
+  if (!data?.[0]) {
+    return {
+      notFound: true,
+      revalidate: REVALIDATE_SECONDS
+    }
+  }
+
+  const { customerStories } = await findOne('homepage', {
+    populate: [
+      'customerStories',
+      'customerStories.*',
+      'customerStories.logos.*',
+      'customerStories.logos.darkLogoPng'
+    ]
+  })
+
+  const comparison = data[0]
+
+  const seo = comparison.seo
+  if (seo) seo.path = `/comparison/${comparison.slug}/costs-and-performance`
+
+  const props: BigQueryCostsAndPerformancePageProps = {
+    comparison,
+    customerStories,
+    seo,
+    ...(await getCommonProps())
+  }
+
+  return {
+    props,
+    revalidate: REVALIDATE_SECONDS
+  }
+}
+
+export default function BigQueryCostsAndPerformancePage({
+  footerData,
+  seo,
+  comparison,
+  customerStories
+}: BigQueryCostsAndPerformancePageProps) {
+  galaxyOnPage(`${comparison.slug}CostsAndPerformanceComparisonPage`)
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const modalInnerRef = useRef<HTMLDivElement | null>(null)
+  const modalFormSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [modalFormSuccess, setModalFormSuccess] = useState(false)
+  const [modalFormLoaded, setModalFormLoaded] = useState(false)
+
+  useClickOutside(modalInnerRef, () => {
+    setIsModalOpen(false)
+  })
+
+  const searchParams = useSearchParams()
+  const [test, setTest] = useState<string | null>(searchParams.get('test'))
+
+  const isPerformanceTest = test === 'performance'
+  const isCostsTest = !isPerformanceTest
+
+  return (
+    <div>
+      {seo && <SeoContainer {...seo} />}
+      <div className='readable-content relative'>
+        {/* Logo */}
+        <div className='absolute left-0 right-0 top-0 z-50'>
+          <div className='no-wrap section-container relative flex items-center py-4'>
+            <Image
+              src={logoFull}
+              priority
+              width='135'
+              height='40'
+              alt='ClickHouse logo'
+            />
+            <button
+              className='ml-auto text-primary-900 opacity-80 hover:opacity-90'
+              onClick={() => setTest(isCostsTest ? 'performance' : 'costs')}>
+              Switch to {isCostsTest ? 'performance' : 'costs'}
+            </button>
+          </div>
+        </div>
+
+        {isCostsTest && (
+          <>
+            <HeroCosts onSupportClick={() => setIsModalOpen(true)} />
+            <IntroGraphsCosts />
+          </>
+        )}
+
+        {isPerformanceTest && (
+          <>
+            <HeroPerformance onSupportClick={() => setIsModalOpen(true)} />
+            <IntroGraphsPerformance />
+          </>
+        )}
+
+        {/* Modal */}
+        <div
+          className={`fixed inset-0 z-50 flex overflow-auto bg-[#323232] bg-opacity-50 transition-opacity ${
+            isModalOpen ? '' : 'pointer-events-none opacity-0'
+          }`}>
+          <div className='m-auto p-4'>
+            <div
+              className='relative w-full max-w-3xl rounded-lg bg-[#323232] p-8 shadow-2xl'
+              ref={modalInnerRef}>
+              <button
+                className='absolute right-4 top-4 opacity-60 transition-opacity hover:opacity-80'
+                type='button'
+                onClick={() => setIsModalOpen(false)}>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='24'
+                  height='24'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'>
+                  <path d='M18 6 6 18' />
+                  <path d='m6 6 12 12' />
+                </svg>
+              </button>
+
+              <SuiTitle type='h3'>Get personalized support</SuiTitle>
+              <SuiText size='sm' className='mb-6 mt-4'>
+                We have helped many of our customers migrate from BigQuery to
+                ClickHouse. Please leave your details below and we will reach
+                out with availability shortly to learn about how we can assist
+                you on this journey.
+              </SuiText>
+              <>
+                {!modalFormSuccess && (
+                  <MarketoForm
+                    formId={'1156'}
+                    clearbitTracking={true}
+                    onLoad={() => {
+                      setModalFormLoaded(true)
+                    }}
+                    onSuccess={() => {
+                      setModalFormSuccess(true)
+                      // Delay needed to allow the ref to update before scrolling
+                      setTimeout(() => {
+                        modalFormSuccessRef.current?.scrollIntoView({
+                          behavior: 'smooth'
+                        })
+                      }, 10)
+
+                      return false // Stops page from reloading
+                    }}
+                  />
+                )}
+
+                {!modalFormLoaded && (
+                  <div className='text-center'>Loading form...</div>
+                )}
+
+                {modalFormSuccess && (
+                  <div ref={modalFormSuccessRef}>
+                    <h3 className='text-center text-2xl font-bold'>
+                      Thank you for your submission!
+                    </h3>
+                    <p className='mt-2 text-center text-neutral-200'>
+                      We will be in touch soon.
+                    </p>
+                  </div>
+                )}
+              </>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Footer {...footerData} />
+    </div>
+  )
+}
+
+type HeroProps = {
+  children: React.ReactNode
+  onSupportClick: () => void
+  stats?: Array<{ stat: string; label: string }>
+}
+
+function Hero({
+  children,
+  onSupportClick,
+  stats = [
+    {
+      stat: '100x',
+      label: 'More cost effective querying'
+    },
+    {
+      stat: '2x+',
+      label: 'Reduction in storage cost'
+    },
+    {
+      stat: '95%',
+      label: 'Faster querying speeds'
+    }
+  ]
+}: HeroProps) {
+  return (
+    <div className='relative overflow-hidden'>
+      <Image
+        src={bgArrows}
+        alt='Arrows background image'
+        width={2880}
+        height={1970}
+        className='pointer-events-none absolute inset-0 z-0 h-full w-full object-cover object-center'
+      />
+
+      <div className='container mx-auto flex max-w-7xl flex-col gap-x-6 px-8 md:flex-row 2xl:px-0'>
+        <div className='relative z-10 mx-auto grid max-w-[750px] grid-cols-1 gap-6 py-24 text-center lg:mx-0 lg:text-left'>
+          {children}
+
+          <div className='mt-6 flex flex-col gap-4 sm:mx-auto sm:flex-row lg:mx-0'>
+            <CUIButton
+              type='primary'
+              size='lg'
+              weight='semibold'
+              onClick={onSupportClick}>
+              Get personalized support
+            </CUIButton>
+            <CUIButton type='secondary' size='lg' weight='semibold' href='#'>
+              Start free trial
+            </CUIButton>
+          </div>
+        </div>
+
+        <div className='relative ml-auto w-full max-w-[300px] py-24'>
+          <div
+            className={`absolute bottom-0 top-0 z-0 w-dvw bg-primary-300 ${styles.angledBackground}`}
+          />
+          <div className='relative z-10'>
+            <p className='mb-4 text-right text-sm font-semibold uppercase tracking-wider text-primary-900'>
+              migrating to ClickHouse
+              <br />
+              can lead to:
+            </p>
+            <ul className='space-y-3'>
+              {stats.map(({ stat, label }, index) => {
+                return (
+                  <li
+                    key={index}
+                    className='grid grid-cols-1 rounded bg-primary-900 py-4 text-center text-white'>
+                    <span className='text-4xl font-bold text-primary-300'>
+                      {stat}
+                    </span>
+                    <span>{label}</span>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function HeroCosts({ onSupportClick }: Omit<HeroProps, 'children'>) {
+  return (
+    <Hero onSupportClick={onSupportClick}>
+      <SuiTitle type='h1'>
+        Are your BigQuery costs
+        <br />
+        <span className='text-primary-300'>out of control</span> ?
+      </SuiTitle>
+      <SuiText className='sm:text-xl'>
+        BigQuery handles ad-hoc queries and smaller data volumes effectively,
+        but scaling turns performance and cost management into a significant
+        challenge.
+      </SuiText>
+      <SuiText className='sm:text-xl'>
+        Migrate to ClickHouse for improved cost-efficiency and blazing-fast
+        performance.
+      </SuiText>
+    </Hero>
+  )
+}
+
+function HeroPerformance({ onSupportClick }: Omit<HeroProps, 'children'>) {
+  return (
+    <Hero onSupportClick={onSupportClick}>
+      <SuiTitle type='h1'>
+        Is BigQuery <span className='text-primary-300'>struggling</span> <br />
+        to scale?
+      </SuiTitle>
+      <SuiText className='sm:text-xl'>
+        BigQuery handles ad-hoc queries and smaller data volumes effectively,
+        but scaling turns performance and cost management into a significant
+        challenge.
+      </SuiText>
+      <SuiText className='sm:text-xl'>
+        Migrate to ClickHouse for blazing-fast performance and improved
+        cost-efficiency.
+      </SuiText>
+    </Hero>
+  )
+}
+
+type IntroChartsProps = {
+  children: React.ReactNode
+  charts: Array<Omit<ImageProps, 'className'>>
+}
+
+function IntroCharts({ children, charts }: IntroChartsProps) {
+  return (
+    <div className='container mx-auto -mt-12 max-w-7xl gap-x-6 px-8 md:flex-row 2xl:px-0'>
+      <CUICard className='gap-6 !bg-neutral-700 p-6 sm:gap-10 sm:p-10'>
+        <CUICard.Body className='max-w-[800px] space-y-6 text-center'>
+          {children}
+        </CUICard.Body>
+        <CUICard.Footer className='flex flex-col items-center gap-6 sm:gap-10 md:flex-row md:items-end md:justify-center'>
+          {charts.map((chart, index) => {
+            return (
+              <div key={index}>
+                <Image {...chart} />
+              </div>
+            )
+          })}
+        </CUICard.Footer>
+      </CUICard>
+    </div>
+  )
+}
+
+function IntroGraphsCosts() {
+  return (
+    <IntroCharts
+      charts={[
+        {
+          src: chartCostsQuering,
+          alt: 'Querying 1 billion rows',
+          width: 503,
+          height: 346
+        },
+        {
+          src: chartCostsStoring,
+          alt: 'Storing 1 billions row',
+          width: 501,
+          height: 327
+        }
+      ]}>
+      <SuiTitle type='h2'>
+        Improve your cost efficiency with ClickHouse. And achieve better
+        performance, too.
+      </SuiTitle>
+      <SuiText>
+        Our parallelized query execution engine, best-in-class compression
+        rates, and column-oriented design deliver unparalleled performance at
+        scale so that you can focus on insights and forget worrying about
+        infrastructure.
+      </SuiText>
+    </IntroCharts>
+  )
+}
+
+function IntroGraphsPerformance() {
+  return (
+    <IntroCharts
+      charts={[
+        {
+          src: chartPerformanceTableScan,
+          alt: 'Querying 1 billion rows full table scan',
+          width: 501,
+          height: 346
+        },
+        {
+          src: chartPerformanceIndexSupport,
+          alt: 'Storing 1 billions row with index support',
+          width: 503,
+          height: 346
+        }
+      ]}>
+      <SuiTitle type='h2'>
+        Achieve better performance with ClickHouse. And improve your
+        cost-efficiency, too.
+      </SuiTitle>
+      <SuiText>
+        BigQuery is a traditional data warehouse that’s optimized for ad-hoc and
+        infrequent queries. Their pricing model - which charges for BigQuery
+        “slots” - is calculated based on the amount of data scanned to perform a
+        query. This can become exorbitantly expensive for analytics workloads,
+        particularly where applications invoke queries and concurrency is high.
+      </SuiText>
+    </IntroCharts>
+  )
+}
