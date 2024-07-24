@@ -133,7 +133,7 @@ export default function BigQueryCostsAndPerformancePage({
               alt='ClickHouse logo'
             />
             <button
-              className='ml-auto text-primary-900 opacity-80 hover:opacity-90'
+              className='ml-auto text-white opacity-80 hover:opacity-90 lg:text-primary-900'
               onClick={() => setTest(isCostsTest ? 'performance' : 'costs')}>
               Switch to {isCostsTest ? 'performance' : 'costs'}
             </button>
@@ -463,8 +463,8 @@ function Hero({
         className='pointer-events-none absolute inset-0 z-0 h-full w-full object-cover object-center'
       />
 
-      <div className='container mx-auto flex max-w-7xl flex-col gap-x-6 px-8 md:flex-row 2xl:px-0'>
-        <div className='relative z-10 mx-auto grid max-w-[750px] grid-cols-1 gap-6 py-24 text-center lg:mx-0 lg:text-left'>
+      <div className='container mx-auto flex max-w-7xl flex-col gap-x-10 px-8 lg:flex-row 2xl:px-0'>
+        <div className='relative z-10 mx-auto grid max-w-[750px] grid-cols-1 gap-6 pb-10 pt-24 text-center lg:mx-0 lg:pb-24 lg:text-left'>
           {children}
 
           <div className='mt-6 flex flex-col gap-4 sm:mx-auto sm:flex-row lg:mx-0'>
@@ -475,18 +475,23 @@ function Hero({
               onClick={onSupportClick}>
               Get personalized support
             </CUIButton>
-            <CUIButton type='secondary' size='lg' weight='semibold' href='#'>
+            <CUIButton
+              type='secondary'
+              size='lg'
+              weight='semibold'
+              href='#'
+              className='w-full lg:w-auto'>
               Start free trial
             </CUIButton>
           </div>
         </div>
 
-        <div className='relative ml-auto w-full max-w-[300px] py-24'>
+        <div className='relative ml-auto w-full rounded-lg bg-primary-300 p-6 lg:max-w-[300px] lg:bg-transparent lg:px-0 lg:py-24'>
           <div
-            className={`absolute bottom-0 top-0 z-0 w-dvw bg-primary-300 ${styles.angledBackground}`}
+            className={`absolute bottom-0 top-0 z-0 hidden w-dvw bg-primary-300 md:translate-x-24 lg:block xl:translate-x-0 ${styles.angledBackground}`}
           />
           <div className='relative z-10'>
-            <p className='mb-4 text-right text-sm font-semibold uppercase tracking-wider text-primary-900'>
+            <p className='mb-4 text-center text-sm font-semibold uppercase tracking-wider text-primary-900 lg:text-right'>
               migrating to ClickHouse
               <br />
               can lead to:
@@ -560,7 +565,7 @@ type IntroChartsProps = {
 
 function IntroCharts({ children, charts }: IntroChartsProps) {
   return (
-    <div className='container mx-auto -mt-12 max-w-7xl gap-x-6 px-8 md:flex-row 2xl:px-0'>
+    <div className='container mx-auto mt-10 max-w-7xl gap-x-6 px-8 md:flex-row lg:-mt-12 2xl:px-0'>
       <CUICard className='gap-6 !bg-neutral-700 p-6 sm:gap-10 sm:p-10'>
         <CUICard.Body className='max-w-[800px] space-y-6 text-center'>
           {children}
@@ -653,7 +658,7 @@ function Quotes({ quotes }: QuotesProps) {
   const [swiperInstance, setSwiperInstance] = useState<null | SwiperClass>(null)
 
   return (
-    <div className='group/quotes relative mb-12 mt-24 xl:my-24'>
+    <div className='group/quotes relative my-10 xl:my-24'>
       <div className='section-container relative z-0'>
         <Swiper
           onInit={(instance: SwiperClass) => setSwiperInstance(instance)}
