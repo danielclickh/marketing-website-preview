@@ -612,7 +612,7 @@ export default function BigQueryPage({
               this journey.
             </SuiText>
             <>
-              {!formSuccess && (
+              {!modalFormSuccess && (
                 <MarketoForm
                   formId={'1156'}
                   clearbitTracking={true}
