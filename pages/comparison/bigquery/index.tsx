@@ -587,7 +587,7 @@ export default function BigQueryPage({
         }`}>
         <div className='m-auto p-4'>
           <div
-            className='relative w-full max-w-3xl rounded-lg bg-[#323232] p-8 shadow-2xl'
+            className='relative w-full max-w-2xl rounded-lg bg-[#323232] p-8 shadow-2xl'
             ref={modalInnerRef}>
             <button
               className='absolute right-4 top-4 opacity-60 transition-opacity hover:opacity-80'
