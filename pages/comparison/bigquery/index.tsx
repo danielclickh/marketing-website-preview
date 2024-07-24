@@ -168,7 +168,7 @@ export default function BigQueryPage({
           <SuiText className='text-sm'>
             Read our comprehensive guide about{' '}
             <Link
-              href={`https://clickhouse.com/docs/en/migrations/bigquery?loc=${locTracking}-hero`}
+              href={`/docs/en/migrations/bigquery?loc=${locTracking}-hero`}
               target='_blank'
               className='text-primary-300 hover:underline'>
               migrating from ClickHouse to BigQuery
@@ -401,7 +401,9 @@ export default function BigQueryPage({
                   We simply don’t want the hassle of trying to figure out in
                   advance of how many BigQuery slots to purchase - what a
                   headache!{' '}
-                  <Link href='#' className='text-primary-300 hover:underline'>
+                  <Link
+                    href={`/blog/hifis-migration-from-bigquery-to-clickhouse?loc=${locTracking}`}
+                    className='text-primary-300 hover:underline'>
                     Read blog
                   </Link>
                 </SuiText>
@@ -625,7 +627,7 @@ export default function BigQueryPage({
             <>
               {!modalFormSuccess && (
                 <MarketoForm
-                  formId={'1156'}
+                  formId={'1237'}
                   clearbitTracking={true}
                   onLoad={() => {
                     setModalFormLoaded(true)
