@@ -114,6 +114,8 @@ export default function BigQueryPage({
     setIsModalOpen(false)
   })
 
+  const locTracking = 'bigquery-comparison-page'
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
@@ -156,7 +158,7 @@ export default function BigQueryPage({
               type='secondary'
               size='lg'
               weight='semibold'
-              href='https://clickhouse.cloud/signUp?loc=bigquery-comparison-page-hero'
+              href={`https://clickhouse.cloud/signUp?loc=${locTracking}-hero`}
               target='_blank'
               linkClass='flex-1 w-full'
               className='w-full'>
@@ -166,7 +168,7 @@ export default function BigQueryPage({
           <SuiText className='text-sm'>
             Read our comprehensive guide about{' '}
             <Link
-              href='https://clickhouse.com/docs/en/migrations/bigquery?loc=bigquery-comparison-page-hero'
+              href={`https://clickhouse.com/docs/en/migrations/bigquery?loc=${locTracking}-hero`}
               target='_blank'
               className='text-primary-300 hover:underline'>
               migrating from ClickHouse to BigQuery
@@ -320,7 +322,7 @@ export default function BigQueryPage({
                   end-user facing analytics capabilities with low latency and
                   high throughput.{' '}
                   <Link
-                    href='/blog/hifis-migration-from-bigquery-to-clickhouse?loc=bigquery-comparison-page'
+                    href={`/blog/hifis-migration-from-bigquery-to-clickhouse?loc=${locTracking}`}
                     className='text-primary-300 hover:underline'>
                     Read blog
                   </Link>
@@ -332,7 +334,7 @@ export default function BigQueryPage({
               alt='Block logo'
               width={61}
               height={86}
-              className='ml-auto flex-shrink flex-grow-0'
+              className='flex-shrink flex-grow-0 lg:ml-auto'
             />
           </CUICard>
         </CUICard>
@@ -355,11 +357,15 @@ export default function BigQueryPage({
               </SuiText>
               <SuiText>
                 For example, Prefect reduced costs by 33%{' '}
-                <Link href='#' className='text-primary-300 hover:underline'>
+                <Link
+                  href={`/blog/prefect-event-driven-workflow-orchestration-powered-by-clickhouse?loc=${locTracking}`}
+                  className='text-primary-300 hover:underline'>
                   moving from BigQuery to ClickHouse
                 </Link>
                 , and{' '}
-                <Link href='#' className='text-primary-300 hover:underline'>
+                <Link
+                  href={`/blog/juspay-analyzes-payment-transactions-in-real-time-with-clickhouse?loc=${locTracking}`}
+                  className='text-primary-300 hover:underline'>
                   Juspay
                 </Link>{' '}
                 reduced its operating expenses by 10x after migrating its
@@ -375,7 +381,7 @@ export default function BigQueryPage({
             />
           </div>
           <CUICard className='gap-6 !bg-[#323232] p-6 lg:flex-row lg:items-stretch lg:pr-10'>
-            <div className='flex items-center gap-6 lg:max-w-3xl'>
+            <div className='flex flex-col items-start gap-6 md:flex-row md:items-center lg:max-w-3xl'>
               <Image
                 src={iconQuote}
                 alt='Quote'
@@ -394,7 +400,7 @@ export default function BigQueryPage({
                 <SuiText>
                   We simply don’t want the hassle of trying to figure out in
                   advance of how many BigQuery slots to purchase - what a
-                  headache{' '}
+                  headache!{' '}
                   <Link href='#' className='text-primary-300 hover:underline'>
                     Read blog
                   </Link>
@@ -402,11 +408,11 @@ export default function BigQueryPage({
               </div>
             </div>
             <Image
-              src={logoMux}
-              alt='Mux logo'
-              width={128}
-              height={40}
-              className='ml-auto flex-shrink flex-grow-0'
+              src={logoBlock}
+              alt='Block logo'
+              width={61}
+              height={86}
+              className='flex-shrink flex-grow-0 lg:ml-auto'
             />
           </CUICard>
         </CUICard>
@@ -424,11 +430,7 @@ export default function BigQueryPage({
               When you need multi-statement transactions or extensive joins over
               highly normalized tables.
               <br />
-              Both are on our{' '}
-              <Link href='#' className='text-primary-300 hover:underline'>
-                roadmap for 2024
-              </Link>
-              .
+              Both are on our roadmap for 2024.
             </SuiText>
           </div>
         </div>
@@ -458,7 +460,7 @@ export default function BigQueryPage({
                       return (
                         <Link
                           key={index}
-                          href={custom.href}
+                          href={`${custom.href}?loc=${locTracking}`}
                           target='_blank'
                           className={` hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline`}>
                           <CUICard className='h-full'>
@@ -495,9 +497,12 @@ export default function BigQueryPage({
                 {content.RelatedBlogs.length > 0 && (
                   <>
                     {content.RelatedBlogs.flatMap((custom) =>
-                      custom.blog_posts.map((blog) => (
-                        <BlogPost key={blog.id} {...blog} />
-                      ))
+                      custom.blog_posts.map((blog) => {
+                        const urlWithLoc = `${blog.slug}?loc=${locTracking}`
+                        return (
+                          <BlogPost key={blog.id} {...blog} slug={urlWithLoc} />
+                        )
+                      })
                     )}
                   </>
                 )}
@@ -566,17 +571,17 @@ export default function BigQueryPage({
         comparisons={[
           {
             name: 'Postgress',
-            link: '/comparison/postgresql',
+            link: `/comparison/postgresql?loc=${locTracking}`,
             logo: logoPostgress
           },
           {
             name: 'Redshift',
-            link: '/comparison/redshift',
+            link: `/comparison/redshift?loc=${locTracking}`,
             logo: logoRedshift
           },
           {
             name: 'Snowflake',
-            link: '/comparison/snowflake',
+            link: `/comparison/snowflake?loc=${locTracking}`,
             logo: logoSnowflake
           }
         ]}
