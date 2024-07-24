@@ -156,7 +156,8 @@ export default function BigQueryPage({
               type='secondary'
               size='lg'
               weight='semibold'
-              href='#'
+              href='https://clickhouse.cloud/signUp?loc=bigquery-comparison-page-hero'
+              target='_blank'
               linkClass='flex-1 w-full'
               className='w-full'>
               Start a free 30-day trial
@@ -164,7 +165,10 @@ export default function BigQueryPage({
           </div>
           <SuiText className='text-sm'>
             Read our comprehensive guide about{' '}
-            <Link href='#' className='text-primary-300 hover:underline'>
+            <Link
+              href='https://clickhouse.com/docs/en/migrations/bigquery?loc=bigquery-comparison-page-hero'
+              target='_blank'
+              className='text-primary-300 hover:underline'>
               migrating from ClickHouse to BigQuery
             </Link>
           </SuiText>
@@ -517,7 +521,7 @@ export default function BigQueryPage({
             <>
               {!formSuccess && (
                 <MarketoForm
-                  formId={'1156'}
+                  formId={'1237'}
                   clearbitTracking={true}
                   onLoad={() => {
                     setFormLoaded(true)
