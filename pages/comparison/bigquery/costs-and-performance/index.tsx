@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import React, { useRef, useState } from 'react'
 import { CUIButton, CUICard } from '../../../../components/ClickUI'
 import Footer from '../../../../components/Footer'
+import HomepageSectionTrustedByAlt from '../../../../components/HomepageSectionTrustedByAlt'
 import MarketoForm from '../../../../components/MarketoForm'
 import SeoContainer from '../../../../components/SeoContainer'
 import { SuiText, SuiTitle } from '../../../../components/sui'
@@ -19,8 +20,15 @@ import styles from './styles.module.scss'
 import bgArrows from './bg-arrows.png'
 import chartCostsQuering from './chart-costs-querying.svg'
 import chartCostsStoring from './chart-costs-storing.svg'
+import chartCostsLoading from './chart-costs-loading.svg'
+import chartCostsQueryingSpeed from './chart-costs-querying-speed.svg'
+
 import chartPerformanceTableScan from './chart-performance-table-scan.svg'
 import chartPerformanceIndexSupport from './chart-performance-index-support.svg'
+
+import logoGcs from './logo-gcs.svg'
+import logoAws from './logo-aws.svg'
+import logoAzure from './logo-azure.svg'
 
 export interface BigQueryCostsAndPerformancePageProps extends ComparisonProps {
   customerStories: HomepageCustomerStories
@@ -130,6 +138,61 @@ export default function BigQueryCostsAndPerformancePage({
           <>
             <HeroCosts onSupportClick={() => setIsModalOpen(true)} />
             <IntroGraphsCosts />
+            <div className='bg-neutral-750 py-16 lg:py-24'>
+              <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between lg:gap-10'>
+                <div className='space-y-4 border-l-4 border-primary-300 pl-6 lg:max-w-[615px]'>
+                  <SuiTitle type='h3' className='text-2xl'>
+                    Juspay{' '}
+                    <span className='tilted tilted-yellow'>
+                      <span className='tilted-content'>cut costs by 90%</span>
+                    </span>{' '}
+                    after <br /> migrating to ClickHouse.
+                  </SuiTitle>
+                  <SuiText className='opacity-80'>
+                    BigQuery is a traditional data warehouse that’s optimized
+                    for ad-hoc and infrequent queries. Their pricing model -
+                    which charges for BigQuery “slots” - is calculated based on
+                    the amount of data scanned to perform a query. This can
+                    become exorbitantly expensive for analytics workloads,
+                    particularly where applications invoke queries and
+                    concurrency is high.
+                  </SuiText>
+                </div>
+                <Image
+                  src={chartCostsLoading}
+                  alt='Loading 1 billion rows'
+                  width={501}
+                  height={337}
+                  className='order-first mx-auto lg:order-last lg:mx-0'
+                />
+              </div>
+            </div>
+            <div className='my-16 lg:my-24'>
+              <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between lg:gap-10'>
+                <div className='space-y-4 border-l-4 border-primary-300 pl-6 lg:max-w-[615px]'>
+                  <SuiTitle type='h3' className='text-2xl'>
+                    ClickHouse is purpose-built to power your most
+                    data-intensive applications
+                  </SuiTitle>
+                  <SuiText className='opacity-80'>
+                    BigQuery is a traditional data warehouse that’s optimized
+                    for ad-hoc and infrequent queries. Their pricing model -
+                    which charges for BigQuery “slots” - is calculated based on
+                    the amount of data scanned to perform a query. This can
+                    become exorbitantly expensive for analytics workloads,
+                    particularly where applications invoke queries and
+                    concurrency is high.
+                  </SuiText>
+                </div>
+                <Image
+                  src={chartCostsQueryingSpeed}
+                  alt='Querying 1 billion rows'
+                  width={501}
+                  height={347}
+                  className='order-first mx-auto lg:mx-0'
+                />
+              </div>
+            </div>
           </>
         )}
 
@@ -140,6 +203,88 @@ export default function BigQueryCostsAndPerformancePage({
           </>
         )}
 
+        <div className='bg-neutral-750 py-16 lg:py-24'>
+          <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between lg:gap-10'>
+            <div className='space-y-4 border-l-4 border-primary-300 pl-6 lg:max-w-[565px]'>
+              <SuiTitle type='h3' className='text-2xl'>
+                We’re cloud agnostic. <br />
+                And built on open source.
+              </SuiTitle>
+              <SuiText className='opacity-80'>
+                With ClickHouse, you have the ultimate flexibility to choose
+                where and how you deploy. ClickHouse is available on AWS, GCP,
+                and Azure, as well as through their Marketplaces. You can manage
+                your services through our ClickHouse Cloud self-serve UI, or by
+                leveraging our APIs and Terraform provider to automate your
+                operations. Or, deploy and run open-source ClickHouse and join
+                our community of thousands more!
+              </SuiText>
+            </div>
+            <div className='order-first flex gap-6 lg:order-last'>
+              <CUICard className='w-full max-w-40 p-5'>
+                <Image
+                  src={logoGcs}
+                  alt='Google Cloud Storage'
+                  width={128}
+                  height={115}
+                  className='aspect-square object-scale-down object-center'
+                />
+              </CUICard>
+              <CUICard className='w-full max-w-40 p-5'>
+                <Image
+                  src={logoAws}
+                  alt='Amazon Web Services'
+                  width={120}
+                  height={73}
+                  className='aspect-square object-scale-down object-center'
+                />
+              </CUICard>
+              <CUICard className='w-full max-w-40 p-5'>
+                <Image
+                  src={logoAzure}
+                  alt='Microsoft Azure'
+                  width={120}
+                  height={121}
+                  className='aspect-square object-scale-down object-center'
+                />
+              </CUICard>
+            </div>
+          </div>
+        </div>
+
+        <HomepageSectionTrustedByAlt
+          className='!my-24'
+          heading='Trusted by'
+          customerStories={customerStories}
+        />
+
+        <div className='section-container my-24'>
+          <div className='space-y-6 rounded-lg bg-primary-300 px-6 py-10 text-center text-primary-900'>
+            <SuiTitle type='h2'>Get started for free</SuiTitle>
+            <SuiText>
+              We’ll get you started on a 30 day trial and $300 credits to spend
+              at your own pace.
+            </SuiText>
+            <div className='flex flex-col justify-center gap-4 sm:flex-row'>
+              <CUIButton
+                type='primary-dark'
+                size='lg'
+                weight='semibold'
+                onClick={() => setIsModalOpen(true)}>
+                Get personalized support
+              </CUIButton>
+              <CUIButton
+                type='secondary-dark'
+                size='lg'
+                weight='semibold'
+                href='#'
+                className='w-full !border !border-primary-900 !text-primary-900 hover:!text-white sm:w-auto'>
+                Start free trial
+              </CUIButton>
+            </div>
+          </div>
+        </div>
+
         {/* Modal */}
         <div
           className={`fixed inset-0 z-50 flex overflow-auto bg-[#323232] bg-opacity-50 transition-opacity ${
@@ -147,7 +292,7 @@ export default function BigQueryCostsAndPerformancePage({
           }`}>
           <div className='m-auto p-4'>
             <div
-              className='relative w-full max-w-3xl rounded-lg bg-[#323232] p-8 shadow-2xl'
+              className='relative w-full max-w-2xl rounded-lg bg-[#323232] p-8 shadow-2xl'
               ref={modalInnerRef}>
               <button
                 className='absolute right-4 top-4 opacity-60 transition-opacity hover:opacity-80'
@@ -178,7 +323,7 @@ export default function BigQueryCostsAndPerformancePage({
               <>
                 {!modalFormSuccess && (
                   <MarketoForm
-                    formId={'1156'}
+                    formId={'1237'}
                     clearbitTracking={true}
                     onLoad={() => {
                       setModalFormLoaded(true)
