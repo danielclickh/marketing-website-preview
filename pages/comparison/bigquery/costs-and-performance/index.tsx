@@ -1,6 +1,6 @@
 import Image, { ImageProps } from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperClass } from 'swiper/types'
 import { CUIButton, CUICard } from '../../../../components/ClickUI'
@@ -126,6 +126,14 @@ export default function BigQueryCostsAndPerformancePage({
   const [modalFormSuccess, setModalFormSuccess] = useState(false)
   const [modalFormLoaded, setModalFormLoaded] = useState(false)
   const [marketoForm, setMarketoForm] = useState<SpoofedMarketoObject>()
+
+  // Reset modal form on modal close
+  useEffect(() => {
+    if (!isModalOpen && modalFormSuccess) {
+      setModalFormSuccess(false)
+      setModalFormLoaded(false)
+    }
+  }, [isModalOpen])
 
   useClickOutside(modalInnerRef, () => {
     setIsModalOpen(false)

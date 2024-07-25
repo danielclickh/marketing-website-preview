@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
 import { CUIButton, CUICard } from '../../../components/ClickUI'
@@ -110,6 +110,14 @@ export default function BigQueryPage({
   const modalFormSuccessRef = useRef<HTMLDivElement | null>(null)
   const [modalFormSuccess, setModalFormSuccess] = useState(false)
   const [modalFormLoaded, setModalFormLoaded] = useState(false)
+
+  // Reset modal form on modal close
+  useEffect(() => {
+    if (!isModalOpen && modalFormSuccess) {
+      setModalFormSuccess(false)
+      setModalFormLoaded(false)
+    }
+  }, [isModalOpen])
 
   useClickOutside(modalInnerRef, () => {
     setIsModalOpen(false)
