@@ -32,7 +32,7 @@ import logoPostgress from './logo-postgress.svg'
 import logoRedshift from './logo-redshift.svg'
 import logoSnowflake from './logo-snowflake.svg'
 import { galaxyOnClick } from '../../../lib/galaxy/galaxy'
-
+import { SpoofedMarketoObject } from '../../../components/MarketoForm'
 export interface BigQueryPageProps extends ComparisonProps {
   customerStories: HomepageCustomerStories
 }
@@ -103,6 +103,7 @@ export default function BigQueryPage({
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
+  const [marketoForm, setMarketoForm] = useState<SpoofedMarketoObject>()
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const modalInnerRef = useRef<HTMLDivElement | null>(null)
@@ -547,8 +548,11 @@ export default function BigQueryPage({
                 <MarketoForm
                   formId={'1237'}
                   clearbitTracking={true}
-                  onLoad={() => {
+                  onLoad={(formObject) => {
                     setFormLoaded(true)
+                    setMarketoForm(formObject)
+                    // Set field values
+                    formObject.addHiddenFields({ miscBlankField17: 'organic' })
                   }}
                   onSuccess={() => {
                     setFormSuccess(true)
@@ -644,8 +648,11 @@ export default function BigQueryPage({
                 <MarketoForm
                   formId={'1237'}
                   clearbitTracking={true}
-                  onLoad={() => {
+                  onLoad={(formObject) => {
                     setModalFormLoaded(true)
+                    setMarketoForm(formObject)
+                    // Set field values
+                    formObject.addHiddenFields({ miscBlankField17: 'organic' })
                   }}
                   onSuccess={() => {
                     setModalFormSuccess(true)
