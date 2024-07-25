@@ -2,7 +2,7 @@ import { MinusIcon } from '@heroicons/react/outline'
 import { CheckIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { slugify } from '../../lib/utils/strings'
 import { CloudProviderType } from '../../types/cloud'
 import {
@@ -13,7 +13,7 @@ import {
 import { CUIButton, CUILink } from '../ClickUI'
 import Markdown from '../Markdown'
 import { StrapiImage } from '../StrapiElements'
-import { SuiText } from '../sui'
+import { SuiText, SuiTitle } from '../sui'
 import PlanPricing from './PlanPricing'
 import PricingButton from './PricingButton'
 import { PricingContextProvider } from './PricingContext'
@@ -21,6 +21,9 @@ import styles from './PricingOptions.module.scss'
 import PricingSelector from './PricingSelector'
 import ShowPricing from './ShowPricing'
 import { RegionPricingWithIcon } from './types'
+import { galaxyOnClick } from '../../lib/galaxy/galaxy'
+import MarketoForm from '../../components/MarketoForm'
+import { useClickOutside } from '../../hooks'
 
 function PricingOptions({
   pricingByRegion,
@@ -47,6 +50,17 @@ function PricingOptions({
   const [provider, setProvider] = useState(
     router.query.provider ? 'gcp' : 'aws'
   )
+
+  //modal and form
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const modalInnerRef = useRef<HTMLDivElement | null>(null)
+  const modalFormSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [modalFormSuccess, setModalFormSuccess] = useState(false)
+  const [modalFormLoaded, setModalFormLoaded] = useState(false)
+
+  useClickOutside(modalInnerRef, () => {
+    setIsModalOpen(false)
+  })
 
   const regionList: RegionPricingWithIcon[] = useMemo(() => {
     const orderedRegions = pricingByRegion
@@ -243,27 +257,24 @@ function PricingOptions({
         )}
 
         {!selectorOnly ? (
-          <div className='center_content relative z-10 mx-auto mb-24 max-w-[344px]'>
+          <div className='center_content relative z-10 mx-auto mb-16 max-w-[344px]'>
             <PricingSelector
               regionList={regionList}
               onChange={updateRegionParam}
             />
-            <Link
-              href='#pricing-calculator'
-              onClick={(e) => {
-                const calculatorElement =
-                  document.getElementById('pricing-calculator')
-                if (calculatorElement) {
-                  e.preventDefault()
-                  calculatorElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                  })
-                }
-              }}
-              className='mt-4 flex h-10 items-center justify-center gap-1 rounded border border-primary-600 bg-transparent px-4 text-sm text-neutral-0 transition-all hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl'>
-              Estimate your monthly cost ↓
-            </Link>
+            <p className='mt-4 text-center text-sm'>
+              Can't find your region?{' '}
+              <span
+                className='text-primary-300 hover:cursor-pointer'
+                onClick={() => {
+                  setIsModalOpen(true)
+                  galaxyOnClick(
+                    `pricingPage.regionRequest.requestRegionSelect`
+                  )()
+                }}>
+                Request it
+              </span>
+            </p>
           </div>
         ) : (
           <PricingSelector
@@ -275,10 +286,10 @@ function PricingOptions({
         {!selectorOnly && (
           <>
             {plans.length > 0 && (
-              <div className='plans_container grid min-h-[940px] grid-cols-1 gap-8 lg:grid-cols-3'>
+              <div className='flex min-h-[940px] flex-col items-stretch justify-center gap-12 md:flex-row'>
                 {plans.map((plan, index) => (
                   <div
-                    className='relative mx-auto w-full max-w-sm rounded-lg border border-t-4 border-neutral-700/80 border-t-primary bg-neutral-900/50 shadow-card-xl'
+                    className={`relative w-full rounded-lg border border-t-4 border-neutral-700/80 border-t-primary bg-neutral-900/50 shadow-card-xl md:max-w-sm`}
                     key={`plan-${plan.name}`}>
                     <div className='card_content flex h-full flex-col justify-between'>
                       <div className='border-b border-neutral-725 p-6'>
@@ -288,10 +299,113 @@ function PricingOptions({
                         <div className='text-normal text-center text-sm text-neutral-300 md:h-auto md:min-h-[40px]'>
                           {plan.description}
                         </div>
-                        <PlanPricing
-                          isFirst={index === 0}
-                          text={plan.pricingMain}
-                        />
+                        <div>
+                          <PlanPricing
+                            isFirst={index === 0}
+                            text={plan.pricingMain}
+                            name={plan.name}
+                          />
+                        </div>
+
+                        {plan.name === 'Development' &&
+                          router.query.region !== 'ap-northeast-1' &&
+                          router.query.provider !== 'azure' && (
+                            <>
+                              <CUIButton
+                                weight='medium'
+                                onClick={() => {
+                                  const calculatorElement =
+                                    document.getElementById(
+                                      'pricing-calculator'
+                                    )
+                                  if (calculatorElement) {
+                                    calculatorElement.scrollIntoView({
+                                      behavior: 'smooth',
+                                      block: 'start'
+                                    })
+                                    router.push(
+                                      {
+                                        query: {
+                                          ...router.query,
+                                          tier: 'Development'
+                                        }
+                                      },
+                                      undefined,
+                                      { shallow: true }
+                                    )
+                                  } else {
+                                    router.push(
+                                      {
+                                        hash: 'pricing-calculator',
+                                        query: {
+                                          ...router.query,
+                                          tier: 'Development'
+                                        }
+                                      },
+                                      undefined,
+                                      { shallow: true }
+                                    )
+                                  }
+                                }}
+                                className='stroked_button_wrapper button_wrapper mt-4 w-full'
+                                type='secondary'>
+                                Estimate your monthly cost ↓
+                              </CUIButton>
+                            </>
+                          )}
+                        {plan.name === 'Production' && (
+                          <>
+                            <CUIButton
+                              onClick={() => {
+                                const calculatorElement =
+                                  document.getElementById('pricing-calculator')
+                                if (calculatorElement) {
+                                  calculatorElement.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                  })
+                                  router.push(
+                                    {
+                                      query: {
+                                        ...router.query,
+                                        tier: 'Production'
+                                      }
+                                    },
+                                    undefined,
+                                    { shallow: true }
+                                  )
+                                } else {
+                                  router.push(
+                                    {
+                                      hash: 'pricing-calculator',
+                                      query: {
+                                        ...router.query,
+                                        tier: 'Production'
+                                      }
+                                    },
+                                    undefined,
+                                    { shallow: true }
+                                  )
+                                }
+                              }}
+                              weight='medium'
+                              className='stroked_button_wrapper button_wrapper mt-4 w-full'
+                              type='secondary'>
+                              Estimate your monthly cost ↓
+                            </CUIButton>
+                          </>
+                        )}
+                        {plan.name === 'Dedicated' && (
+                          <>
+                            <CUIButton
+                              href={`/pricing/contact?loc=pricing-enterprise-${provider}`}
+                              weight='medium'
+                              className='stroked_button_wrapper button_wrapper mt-4 w-full'
+                              type='secondary'>
+                              Contact us
+                            </CUIButton>
+                          </>
+                        )}
                       </div>
                       <div className='flex-auto justify-between p-6'>
                         <div className='flex flex-col gap-5'>
@@ -345,96 +459,6 @@ function PricingOptions({
                         )}
                         {plan.actionButton && (
                           <>
-                            {plan.name === 'Development' &&
-                              router.query.region !== 'ap-northeast-1' &&
-                              router.query.provider !== 'azure' && (
-                                <>
-                                  <CUIButton
-                                    weight='medium'
-                                    onClick={() => {
-                                      const calculatorElement =
-                                        document.getElementById(
-                                          'pricing-calculator'
-                                        )
-                                      if (calculatorElement) {
-                                        calculatorElement.scrollIntoView({
-                                          behavior: 'smooth',
-                                          block: 'start'
-                                        })
-                                        router.push(
-                                          {
-                                            query: {
-                                              ...router.query,
-                                              tier: 'Development'
-                                            }
-                                          },
-                                          undefined,
-                                          { shallow: true }
-                                        )
-                                      } else {
-                                        router.push(
-                                          {
-                                            hash: 'pricing-calculator',
-                                            query: {
-                                              ...router.query,
-                                              tier: 'Development'
-                                            }
-                                          },
-                                          undefined,
-                                          { shallow: true }
-                                        )
-                                      }
-                                    }}
-                                    className='stroked_button_wrapper button_wrapper mb-4 w-full'
-                                    type='secondary'>
-                                    Estimate your monthly cost ↓
-                                  </CUIButton>
-                                </>
-                              )}
-                            {plan.name === 'Production' && (
-                              <>
-                                <CUIButton
-                                  onClick={() => {
-                                    const calculatorElement =
-                                      document.getElementById(
-                                        'pricing-calculator'
-                                      )
-                                    if (calculatorElement) {
-                                      calculatorElement.scrollIntoView({
-                                        behavior: 'smooth',
-                                        block: 'start'
-                                      })
-                                      router.push(
-                                        {
-                                          query: {
-                                            ...router.query,
-                                            tier: 'Production'
-                                          }
-                                        },
-                                        undefined,
-                                        { shallow: true }
-                                      )
-                                    } else {
-                                      router.push(
-                                        {
-                                          hash: 'pricing-calculator',
-                                          query: {
-                                            ...router.query,
-                                            tier: 'Production'
-                                          }
-                                        },
-                                        undefined,
-                                        { shallow: true }
-                                      )
-                                    }
-                                  }}
-                                  weight='medium'
-                                  className='stroked_button_wrapper button_wrapper mb-4 w-full'
-                                  type='secondary'>
-                                  Estimate your monthly cost ↓
-                                </CUIButton>
-                              </>
-                            )}
                             <PricingButton
                               isFirst={true}
                               isLast={index !== plans.length - 1}
@@ -480,6 +504,82 @@ function PricingOptions({
           </div>
         </>
       )}
+      <div
+        className={`fixed inset-0 z-50 flex overflow-auto bg-[#323232] bg-opacity-50 transition-opacity ${
+          isModalOpen ? '' : 'pointer-events-none opacity-0'
+        }`}>
+        <div className='m-auto p-4'>
+          <div
+            className='relative w-full max-w-2xl rounded-lg bg-[#323232] p-8 shadow-2xl'
+            ref={modalInnerRef}>
+            <button
+              className='absolute right-4 top-4 opacity-60 transition-opacity hover:opacity-80'
+              type='button'
+              onClick={() => setIsModalOpen(false)}>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'>
+                <path d='M18 6 6 18' />
+                <path d='m6 6 12 12' />
+              </svg>
+            </button>
+
+            <SuiTitle type='h3'>Request a new Cloud region</SuiTitle>
+            <SuiText size='sm' className='mb-6 mt-4'>
+              We’re adding new Cloud regions all of the time, please select the
+              region that you would like us to support below. We will add you to
+              the wait list and be in contact if we look to add it in the
+              future.
+            </SuiText>
+            <>
+              {!modalFormSuccess && (
+                <MarketoForm
+                  formId={'1241'}
+                  clearbitTracking={true}
+                  onLoad={() => {
+                    setModalFormLoaded(true)
+                  }}
+                  onSuccess={() => {
+                    setModalFormSuccess(true)
+                    // Delay needed to allow the ref to update before scrolling
+                    setTimeout(() => {
+                      modalFormSuccessRef.current?.scrollIntoView({
+                        behavior: 'smooth'
+                      })
+                    }, 10)
+
+                    return false // Stops page from reloading
+                  }}
+                />
+              )}
+
+              {!modalFormLoaded && (
+                <div className='text-center'>Loading form...</div>
+              )}
+
+              {modalFormSuccess && (
+                <div ref={modalFormSuccessRef}>
+                  <SuiTitle type='h3' className='text-center'>
+                    {' '}
+                    Thank you for your submission!
+                  </SuiTitle>
+
+                  <p className='mt-2 text-center text-neutral-200'>
+                    We will be in touch soon.
+                  </p>
+                </div>
+              )}
+            </>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
