@@ -585,9 +585,9 @@ export default function BigQueryPage({
 
               {formSuccess && (
                 <div ref={formSuccessRef}>
-                  <h3 className='text-center text-2xl font-bold'>
+                  <SuiTitle type='h3' className='text-center'>
                     Thank you for your submission!
-                  </h3>
+                  </SuiTitle>
                   <p className='mt-2 text-center text-neutral-200'>
                     We will be in touch soon.
                   </p>
@@ -688,9 +688,9 @@ export default function BigQueryPage({
 
               {modalFormSuccess && (
                 <div ref={modalFormSuccessRef}>
-                  <h3 className='text-center text-2xl font-bold'>
+                  <SuiTitle type='h3' className='text-center'>
                     Thank you for your submission!
-                  </h3>
+                  </SuiTitle>
                   <p className='mt-2 text-center text-neutral-200'>
                     We will be in touch soon.
                   </p>
