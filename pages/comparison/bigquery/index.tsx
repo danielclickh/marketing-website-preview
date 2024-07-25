@@ -28,10 +28,10 @@ import chartCosts from './chart-costs.svg'
 import logoClickhouse from '../../../public/logo-full.svg'
 import logoBigquery from './logo-bigquery.svg'
 import logoBlock from './logo-block.png'
-import logoMux from './logo-mux.svg'
 import logoPostgress from './logo-postgress.svg'
 import logoRedshift from './logo-redshift.svg'
 import logoSnowflake from './logo-snowflake.svg'
+import { galaxyOnClick } from '../../../lib/galaxy/galaxy'
 
 export interface BigQueryPageProps extends ComparisonProps {
   customerStories: HomepageCustomerStories
@@ -151,7 +151,12 @@ export default function BigQueryPage({
               size='lg'
               weight='semibold'
               className='w-full sm:flex-1'
-              onClick={() => setIsModalOpen(true)}>
+              onClick={() => {
+                galaxyOnClick(
+                  `${comparison.slug}ComparisonPage.heroCta.personalizedSupportSelect`
+                )()
+                setIsModalOpen(true)
+              }}>
               Get personalized support
             </CUIButton>
             <CUIButton
@@ -161,7 +166,12 @@ export default function BigQueryPage({
               href={`https://clickhouse.cloud/signUp?loc=${locTracking}-hero`}
               target='_blank'
               linkClass='flex-1 w-full'
-              className='w-full'>
+              className='w-full'
+              onClick={() =>
+                galaxyOnClick(
+                  `${comparison.slug}ComparisonPage.heroCta.startTrialSelect`
+                )()
+              }>
               Start a free 30-day trial
             </CUIButton>
           </div>
@@ -170,7 +180,12 @@ export default function BigQueryPage({
             <Link
               href={`/docs/en/migrations/bigquery?loc=${locTracking}-hero`}
               target='_blank'
-              className='text-primary-300 hover:underline'>
+              className='text-primary-300 hover:underline'
+              onClick={() =>
+                galaxyOnClick(
+                  `${comparison.slug}ComparisonPage.heroCta.migrationDocSelect`
+                )()
+              }>
               migrating from ClickHouse to BigQuery
             </Link>
           </SuiText>
