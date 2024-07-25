@@ -489,7 +489,6 @@ export const PricingCalculator: React.FC<{
       })
       // Set pricingData with the computed unit prices
       setPricingData({ computeUnitPrice, storageUnitPrice })
-      console.log(region, { computeUnitPrice, storageUnitPrice })
 
       setIsLoading(false)
     } else {
