@@ -151,16 +151,19 @@ export default function BigQueryPerformancePage({
   const gb = useGrowthBook()
 
   if (gb?.ready) {
+    const testTarget = document.querySelector('#test-target')
+
     setTimeout(() => {
       updateLinks(
-        'mktg-bigquery-paid-pages',
-        gb.getFeatureValue('mktg-bigquery-pages', 0).toString(),
+        'mktg-bigquery-performance ',
+        gb.getFeatureValue('mktg-bigquery-performance-hero', 0).toString(),
         '.readable-content'
       )
+      testTarget?.classList.remove('hidden')
     }, 100)
   }
 
-  const pageLayout = useFeatureValue('mktg-bigquery-pages', 0)
+  const pageLayout = useFeatureValue('mktg-bigquery-performance-hero', 0)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const modalInnerRef = useRef<HTMLDivElement | null>(null)
@@ -173,7 +176,6 @@ export default function BigQueryPerformancePage({
   const [test, setTest] = useState<string | null>(searchParams.get('test'))
 
   const isPerformanceTest = test === 'performance'
-  const isCostsTest = !isPerformanceTest
 
   return (
     <div>
@@ -191,130 +193,135 @@ export default function BigQueryPerformancePage({
             />
           </div>
         </div>
-
-        <StatsHeroWithForm
-          content={
-            <>
-              <SuiTitle type='h1'>
-                Is BigQuery facing
-                <br />
-                <span className='text-primary-300'>scalability issues</span>?
-              </SuiTitle>
-              <SuiText className='sm:text-xl'>
-                BigQuery handles ad-hoc queries and smaller data volumes
-                effectively, but scaling turns performance and cost management
-                into a significant challenge.
-              </SuiText>
-            </>
-          }
-          form={
-            <>
-              <SuiText className='mb-8 text-balance text-xl'>
-                <strong>We offer free migration support</strong>
-                <br />
-                Upgrade to ClickHouse for improved performance and
-                cost-efficiency leaving BigQuery behind.
-              </SuiText>
-              <LeadForm
-                hiddenFields={{
-                  miscBlankField17: 'paid',
-                  miscBlankField16: pageLayout
-                }}
-              />
-            </>
-          }
-          statsLabel='Migrating to ClickHouse can lead to:'
-          stats={[
-            {
-              icon: {
-                src: iconBullseye,
-                alt: 'Faster',
-                width: 26,
-                height: 26
-              },
-              stat: 'Up to 100x faster querying'
-            },
-            {
-              icon: {
-                src: iconSpeedometer,
-                alt: 'Performance',
-                width: 28,
-                height: 20
-              },
-              stat: '2x+ increase in storage performance'
-            },
-            {
-              icon: {
-                src: iconCoins,
-                alt: 'Speeds',
-                width: 30,
-                height: 22
-              },
-              stat: '95% faster query speeds'
-            }
-          ]}
-        />
-
-        <StatsHero
-          content={
-            <>
-              <SuiTitle type='h1'>
-                Is BigQuery <span className='text-primary-300'>struggling</span>{' '}
-                <br />
-                to scale?
-              </SuiTitle>
-              <SuiText className='sm:text-xl'>
-                BigQuery handles ad-hoc queries and smaller data volumes
-                effectively, but scaling turns performance and cost management
-                into a significant challenge.
-              </SuiText>
-              <SuiText className='sm:text-xl'>
-                Migrate to ClickHouse for blazing-fast performance and improved
-                cost-efficiency.
-              </SuiText>
-            </>
-          }
-          primaryCta={{
-            onClick() {
-              setIsModalOpen(true)
-              galaxyOnClick(
-                `BigQueryPerformanceComparisonPage.heroCta.costsPersonalizedSupportSelect`
-              )()
-            },
-            text: 'Get personalized support'
-          }}
-          secondaryCta={{
-            onClick() {
-              galaxyOnClick(
-                `BigQueryPerformanceComparisonPage.heroCta.costsStartTrialSelect`
-              )()
-            },
-            target: '_blank',
-            href: `https://clickhouse.cloud/signUp?loc=${locTracking}-hero`,
-            text: 'Start free trial'
-          }}
-          statsLabel={
-            <>
-              migrating to ClickHouse
-              <br />
-              can lead to:
-            </>
-          }
-          stats={[
-            {
-              stat: '100x',
-              label: 'More cost effective querying'
-            },
-            {
-              stat: '2x+',
-              label: 'Reduction in storage cost'
-            },
-            {
-              stat: '95%',
-              label: 'Faster querying speeds'
-            }
-          ]}
-        />
+        <div className='hidden' id='test-target'>
+          {pageLayout === 0 && (
+            <StatsHero
+              content={
+                <>
+                  <SuiTitle type='h1'>
+                    Is BigQuery{' '}
+                    <span className='text-primary-300'>struggling</span> <br />
+                    to scale?
+                  </SuiTitle>
+                  <SuiText className='sm:text-xl'>
+                    BigQuery handles ad-hoc queries and smaller data volumes
+                    effectively, but scaling turns performance and cost
+                    management into a significant challenge.
+                  </SuiText>
+                  <SuiText className='sm:text-xl'>
+                    Migrate to ClickHouse for blazing-fast performance and
+                    improved cost-efficiency.
+                  </SuiText>
+                </>
+              }
+              primaryCta={{
+                onClick() {
+                  setIsModalOpen(true)
+                  galaxyOnClick(
+                    `BigQueryPerformanceComparisonPage.heroCta.costsPersonalizedSupportSelect`
+                  )()
+                },
+                text: 'Get personalized support'
+              }}
+              secondaryCta={{
+                onClick() {
+                  galaxyOnClick(
+                    `BigQueryPerformanceComparisonPage.heroCta.costsStartTrialSelect`
+                  )()
+                },
+                target: '_blank',
+                href: `https://clickhouse.cloud/signUp?loc=${locTracking}-hero`,
+                text: 'Start free trial'
+              }}
+              statsLabel={
+                <>
+                  migrating to ClickHouse
+                  <br />
+                  can lead to:
+                </>
+              }
+              stats={[
+                {
+                  stat: '100x',
+                  label: 'More cost effective querying'
+                },
+                {
+                  stat: '2x+',
+                  label: 'Reduction in storage cost'
+                },
+                {
+                  stat: '95%',
+                  label: 'Faster querying speeds'
+                }
+              ]}
+            />
+          )}
+          {pageLayout === 1 && (
+            <StatsHeroWithForm
+              content={
+                <>
+                  <SuiTitle type='h1'>
+                    Is BigQuery facing
+                    <br />
+                    <span className='text-primary-300'>scalability issues</span>
+                    ?
+                  </SuiTitle>
+                  <SuiText className='sm:text-xl'>
+                    BigQuery handles ad-hoc queries and smaller data volumes
+                    effectively, but scaling turns performance and cost
+                    management into a significant challenge.
+                  </SuiText>
+                </>
+              }
+              form={
+                <>
+                  <SuiText className='mb-8 text-balance text-xl'>
+                    <strong>We offer free migration support</strong>
+                    <br />
+                    Upgrade to ClickHouse for improved performance and
+                    cost-efficiency leaving BigQuery behind.
+                  </SuiText>
+                  <LeadForm
+                    hiddenFields={{
+                      miscBlankField17: 'paid',
+                      miscBlankField16: pageLayout
+                    }}
+                  />
+                </>
+              }
+              statsLabel='Migrating to ClickHouse can lead to:'
+              stats={[
+                {
+                  icon: {
+                    src: iconBullseye,
+                    alt: 'Faster',
+                    width: 26,
+                    height: 26
+                  },
+                  stat: 'Up to 100x faster querying'
+                },
+                {
+                  icon: {
+                    src: iconSpeedometer,
+                    alt: 'Performance',
+                    width: 28,
+                    height: 20
+                  },
+                  stat: '2x+ increase in storage performance'
+                },
+                {
+                  icon: {
+                    src: iconCoins,
+                    alt: 'Speeds',
+                    width: 30,
+                    height: 22
+                  },
+                  stat: '95% faster query speeds'
+                }
+              ]}
+            />
+          )}
+        </div>
 
         <div className='container mx-auto mt-10 max-w-7xl gap-x-6 px-8 md:flex-row lg:-mt-12 2xl:px-0'>
           <CUICard className='gap-6 !bg-neutral-700 p-6 sm:gap-10 sm:p-10'>
