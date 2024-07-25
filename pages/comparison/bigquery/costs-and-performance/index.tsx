@@ -457,7 +457,8 @@ export default function BigQueryCostsAndPerformancePage({
                       setMarketoForm(formObject)
                       // Set field values
                       formObject.addHiddenFields({
-                        miscBlankField17: 'paid'
+                        miscBlankField17: 'paid',
+                        miscBlankField16: pageLayout
                       })
                     }}
                     onSuccess={() => {
