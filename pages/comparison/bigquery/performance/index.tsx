@@ -147,10 +147,8 @@ export default function BigQueryPerformancePage({
   comparison,
   customerStories
 }: BigQueryPerformancePageProps) {
-  galaxyOnPage(`${comparison.slug}PerformanceComparisonPage`)
-
   const gb = useGrowthBook()
-
+  galaxyOnPage(`${comparison.slug}PerformanceComparisonPage`)
   if (gb?.ready) {
     const testTarget = document.querySelector('#test-target')
 
@@ -226,10 +224,10 @@ export default function BigQueryPerformancePage({
                 }
                 primaryCta={{
                   onClick() {
-                    setModalFormLocValue('HERO_CTA_LOC_VAL_HERE')
+                    setModalFormLocValue(`hero-cta-perf-variant${pageLayout}`)
                     setIsModalOpen(true)
                     galaxyOnClick(
-                      `bigQueryPerformanceComparisonPage.heroVariant0Cta.perfPersonalizedSupportSelect`
+                      `bigQueryPerformanceComparisonPage.heroCtaVariant${pageLayout}.perfPersonalizedSupportSelect`
                     )()
                   },
                   text: 'Get personalized support'
@@ -237,7 +235,7 @@ export default function BigQueryPerformancePage({
                 secondaryCta={{
                   onClick() {
                     galaxyOnClick(
-                      `bigQueryPerformanceComparisonPage.heroVariant0Cta.perfStartTrialSelect`
+                      `bigQueryPerformanceComparisonPage.heroCtaVariant${pageLayout}.perfStartTrialSelect`
                     )()
                   },
                   target: '_blank',
@@ -518,10 +516,10 @@ export default function BigQueryPerformancePage({
                 size='lg'
                 weight='semibold'
                 onClick={() => {
-                  setModalFormLocValue('FOOTER_CTA_LOC_VAL_HERE')
+                  setModalFormLocValue(`footer-cta-perf-variant${pageLayout}`)
                   setIsModalOpen(true)
                   galaxyOnClick(
-                    `bigQueryPerformanceComparisonPage.footerCta.perfPersonalizedSupportSelect`
+                    `bigQueryPerformanceComparisonPage.footerCtaVariant${pageLayout}.perfPersonalizedSupportSelect`
                   )()
                 }}>
                 Get personalized support
@@ -532,7 +530,7 @@ export default function BigQueryPerformancePage({
                 weight='semibold'
                 onClick={() => {
                   galaxyOnClick(
-                    `bigQueryPerformanceComparisonPage.footerCta.perfStartTrialSelect`
+                    `bigQueryPerformanceComparisonPage.footerCtaVariant${pageLayout}.perfStartTrialSelect`
                   )()
                 }}
                 href={`https://clickhouse.cloud/signUp?loc=${locTracking}-paid-footer-variant1`}
