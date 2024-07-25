@@ -8,6 +8,7 @@ import MarketoForm from '../../../../components/MarketoForm'
 import QuotesCarousel from '../../../../components/QuotesCarousel'
 import SeoContainer from '../../../../components/SeoContainer'
 import StatsHero from '../../../../components/StatsHero'
+import StatsHeroWithForm from '../../../../components/StatsHeroWithForm'
 import { SuiText, SuiTitle } from '../../../../components/sui'
 import { useClickOutside } from '../../../../hooks'
 import { findAll, findOne } from '../../../../lib/api/strapi'
@@ -26,6 +27,9 @@ import logoAws from './logo-aws.svg'
 import logoAzure from './logo-azure.svg'
 import logoAdevinta from './logo-adevinta.svg'
 import logoBlock from './logo-block.png'
+import iconBullseye from './icon-bullseye.svg'
+import iconSpeedometer from './icon-speedometer.svg'
+import iconCoins from './icon-coins.svg'
 import { useFeatureValue, useGrowthBook } from '@growthbook/growthbook-react'
 import { updateLinks } from '../../../../components/UTMPersist'
 
@@ -89,6 +93,53 @@ export async function getStaticProps() {
   }
 }
 
+function LeadForm({ hiddenFields }: { hiddenFields: Record<any, any> }) {
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
+  return (
+    <>
+      {!formSuccess && (
+        <MarketoForm
+          formId={'1237'}
+          clearbitTracking={true}
+          onLoad={(formObject) => {
+            setFormLoaded(true)
+
+            // Set field values
+            formObject.addHiddenFields(hiddenFields)
+          }}
+          onSuccess={() => {
+            setFormSuccess(true)
+
+            // Delay needed to allow the ref to update before scrolling
+            setTimeout(() => {
+              formSuccessRef.current?.scrollIntoView({
+                behavior: 'smooth'
+              })
+            }, 10)
+
+            return false // Stops page from reloading
+          }}
+        />
+      )}
+
+      {!formLoaded && <div className='text-center'>Loading form...</div>}
+
+      {formSuccess && (
+        <div ref={formSuccessRef}>
+          <h3 className='text-center text-2xl font-bold'>
+            Thank you for your submission!
+          </h3>
+          <p className='mt-2 text-center text-neutral-200'>
+            We will be in touch soon.
+          </p>
+        </div>
+      )}
+    </>
+  )
+}
+
 export default function BigQueryCostsPage({
   footerData,
   seo,
@@ -113,27 +164,10 @@ export default function BigQueryCostsPage({
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const modalInnerRef = useRef<HTMLDivElement | null>(null)
-  const modalFormSuccessRef = useRef<HTMLDivElement | null>(null)
-  const [modalFormSuccess, setModalFormSuccess] = useState(false)
-  const [modalFormLoaded, setModalFormLoaded] = useState(false)
-
-  // Reset modal form on modal close
-  useEffect(() => {
-    if (!isModalOpen && modalFormSuccess) {
-      setModalFormSuccess(false)
-      setModalFormLoaded(false)
-    }
-  }, [isModalOpen])
 
   useClickOutside(modalInnerRef, () => {
     setIsModalOpen(false)
   })
-
-  const searchParams = useSearchParams()
-  const [test, setTest] = useState<string | null>(searchParams.get('test'))
-
-  const isPerformanceTest = test === 'performance'
-  const isCostsTest = !isPerformanceTest
 
   return (
     <div>
@@ -151,6 +185,69 @@ export default function BigQueryCostsPage({
             />
           </div>
         </div>
+
+        <StatsHeroWithForm
+          content={
+            <>
+              <SuiTitle type='h1'>
+                BigQuery costs
+                <br />
+                <span className='text-primary-300'>out of control</span>?
+              </SuiTitle>
+              <SuiText className='sm:text-xl'>
+                BigQuery handles ad-hoc queries and smaller data volumes
+                effectively, but scaling turns performance and cost management
+                into a significant challenge.
+              </SuiText>
+            </>
+          }
+          form={
+            <>
+              <SuiText className='mb-8 text-balance text-xl'>
+                <strong>We offer free migration support</strong>
+                <br />
+                Upgrade to ClickHouse for improved performance and
+                cost-efficiency leaving BigQuery behind.
+              </SuiText>
+              <LeadForm
+                hiddenFields={{
+                  miscBlankField17: 'paid',
+                  miscBlankField16: pageLayout
+                }}
+              />
+            </>
+          }
+          statsLabel='Migrating to ClickHouse can lead to:'
+          stats={[
+            {
+              icon: {
+                src: iconBullseye,
+                alt: 'Faster',
+                width: 26,
+                height: 26
+              },
+              stat: 'Up to 100x faster querying'
+            },
+            {
+              icon: {
+                src: iconSpeedometer,
+                alt: 'Performance',
+                width: 28,
+                height: 20
+              },
+              stat: '2x+ increase in storage performance'
+            },
+            {
+              icon: {
+                src: iconCoins,
+                alt: 'Speeds',
+                width: 30,
+                height: 22
+              },
+              stat: '95% faster query speeds'
+            }
+          ]}
+        />
 
         <StatsHero
           content={
@@ -452,49 +549,14 @@ export default function BigQueryCostsPage({
                 out with availability shortly to learn about how we can assist
                 you on this journey.
               </SuiText>
-              <>
-                {!modalFormSuccess && (
-                  <MarketoForm
-                    formId={'1237'}
-                    clearbitTracking={true}
-                    onLoad={(formObject) => {
-                      setModalFormLoaded(true)
-
-                      // Set field values
-                      formObject.addHiddenFields({
-                        miscBlankField17: 'paid',
-                        miscBlankField16: pageLayout
-                      })
-                    }}
-                    onSuccess={() => {
-                      setModalFormSuccess(true)
-                      // Delay needed to allow the ref to update before scrolling
-                      setTimeout(() => {
-                        modalFormSuccessRef.current?.scrollIntoView({
-                          behavior: 'smooth'
-                        })
-                      }, 10)
-
-                      return false // Stops page from reloading
-                    }}
-                  />
-                )}
-
-                {!modalFormLoaded && (
-                  <div className='text-center'>Loading form...</div>
-                )}
-
-                {modalFormSuccess && (
-                  <div ref={modalFormSuccessRef}>
-                    <h3 className='text-center text-2xl font-bold'>
-                      Thank you for your submission!
-                    </h3>
-                    <p className='mt-2 text-center text-neutral-200'>
-                      We will be in touch soon.
-                    </p>
-                  </div>
-                )}
-              </>
+              {isModalOpen && (
+                <LeadForm
+                  hiddenFields={{
+                    miscBlankField17: 'paid',
+                    miscBlankField16: pageLayout
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
