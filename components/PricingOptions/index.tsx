@@ -262,7 +262,7 @@ function PricingOptions({
               regionList={regionList}
               onChange={updateRegionParam}
             />
-            <p className='mt-4 text-right text-sm'>
+            <p className='mt-4 text-center text-sm'>
               Can't find your region?{' '}
               <span
                 className='text-primary-300 hover:cursor-pointer'
@@ -566,9 +566,11 @@ function PricingOptions({
 
               {modalFormSuccess && (
                 <div ref={modalFormSuccessRef}>
-                  <h3 className='text-center text-2xl font-bold'>
+                  <SuiTitle type='h3' className='text-center'>
+                    {' '}
                     Thank you for your submission!
-                  </h3>
+                  </SuiTitle>
+
                   <p className='mt-2 text-center text-neutral-200'>
                     We will be in touch soon.
                   </p>
