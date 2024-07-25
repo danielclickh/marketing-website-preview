@@ -167,6 +167,9 @@ export default function BigQueryPerformancePage({
   const pageLayout = useFeatureValue('mktg-bigquery-performance-hero', 0)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalFormLocValue, setModalFormLocValue] = useState<null | string>(
+    null
+  )
 
   const modalInnerRef = useRef<HTMLDivElement | null>(null)
 
@@ -223,6 +226,7 @@ export default function BigQueryPerformancePage({
                 }
                 primaryCta={{
                   onClick() {
+                    setModalFormLocValue('HERO_CTA_LOC_VAL_HERE')
                     setIsModalOpen(true)
                     galaxyOnClick(
                       `bigQueryPerformanceComparisonPage.heroVariant0Cta.perfPersonalizedSupportSelect`
@@ -514,6 +518,7 @@ export default function BigQueryPerformancePage({
                 size='lg'
                 weight='semibold'
                 onClick={() => {
+                  setModalFormLocValue('FOOTER_CTA_LOC_VAL_HERE')
                   setIsModalOpen(true)
                   galaxyOnClick(
                     `bigQueryPerformanceComparisonPage.footerCta.perfPersonalizedSupportSelect`
@@ -580,7 +585,7 @@ export default function BigQueryPerformancePage({
                     hiddenFields={{
                       miscBlankField17: 'paid',
                       miscBlankField16: pageLayout,
-                      loc__c: `paid-performance-modal-variant${pageLayout}`
+                      loc__c: modalFormLocValue
                     }}
                   />
                 </>
