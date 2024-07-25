@@ -116,27 +116,23 @@ export default function Page() {
     }
   }
 
-  function sendResizeEvent() {
-    // Timeout allows a repaint to happen before we get the values
-    setTimeout(() => {
-      sendEventToParent('onResize', {
-        width: formRef.current?.offsetWidth || window.innerWidth,
-        height: formRef.current?.offsetHeight || window.innerHeight,
-        scrollHeight: document.documentElement.scrollHeight
-      })
-    }, 100)
-  }
-
   const resizeObserver = useMemo(() => {
-    return new ResizeObserver(() => {
-      console.log('Resized innit')
-      sendResizeEvent()
-    })
-  }, [])
+    if (typeof window !== 'undefined') {
+      return new ResizeObserver(() => {
+        sendEventToParent('onResize', {
+          width: window.innerWidth,
+          height: window.innerHeight,
+          scrollHeight: document.documentElement.scrollHeight
+        })
+      })
+    }
+
+    return null
+  }, [window])
 
   const resizeRef = useCallback(
-    (node: HTMLElement) => {
-      if (node) resizeObserver.observe(node)
+    (node: HTMLDivElement) => {
+      if (node && resizeObserver) resizeObserver.observe(node)
     },
     [resizeObserver]
   )
@@ -178,7 +174,6 @@ export default function Page() {
             formRef.current.classList.remove('allow-columns')
           }
         }
-        sendResizeEvent()
       }
       window.addEventListener('resize', resize)
       resize()
@@ -189,29 +184,9 @@ export default function Page() {
       script.onload = () => (window.MktoForms2 ? setScriptLoaded(true) : null)
       document.body.appendChild(script)
 
-      // We have to do this because marketo does validation on different
-      // events but it doesn't trigger the `onValidation` hook
-      const catchInputEvents = (event: Event) => {
-        const target = event.target as HTMLInputElement
-        if (['INPUT', 'SELECT', 'TEXTAREA'].includes(target.tagName)) {
-          sendResizeEvent()
-        }
-      }
-
-      // document.body.addEventListener('keyup', catchInputEvents, true)
-      // document.body.addEventListener('input', catchInputEvents, true)
-      // document.body.addEventListener('change', catchInputEvents, true)
-      // document.body.addEventListener('focus', catchInputEvents, true)
-      // document.body.addEventListener('blur', catchInputEvents, true)
-
       // Clean up on unmount
       return () => {
         window.removeEventListener('resize', resize)
-        // document.body.removeEventListener('keyup', catchInputEvents, true)
-        // document.body.removeEventListener('input', catchInputEvents, true)
-        // document.body.removeEventListener('change', catchInputEvents, true)
-        // document.body.removeEventListener('focus', catchInputEvents, true)
-        // document.body.removeEventListener('blur', catchInputEvents, true)
         script.remove()
       }
     }
@@ -308,24 +283,20 @@ export default function Page() {
 
           // Send form loaded event
           sendEventToParent('onLoad')
-          sendResizeEvent()
 
           // Send validation event
           marketoFormObject.onValidate((isValid) => {
             sendEventToParent('onValidate', isValid)
-            sendResizeEvent()
           })
 
           // Send submit event
           marketoFormObject.onSubmit(() => {
             sendEventToParent('onSubmit')
-            sendResizeEvent()
           })
 
           // Prevent redirection
           marketoFormObject.onSuccess((values, redirect) => {
             sendEventToParent('onSuccess', { values, redirect })
-            sendResizeEvent()
             return false
           })
 
