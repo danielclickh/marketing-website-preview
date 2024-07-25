@@ -116,19 +116,9 @@ export default function Page() {
     }
   }
 
-  const resizeObserver = useMemo(() => {
-    if (typeof window !== 'undefined') {
-      return new ResizeObserver(() => {
-        sendEventToParent('onResize', {
-          width: window.innerWidth,
-          height: window.innerHeight,
-          scrollHeight: document.documentElement.scrollHeight
-        })
-      })
-    }
-
-    return null
-  }, [window])
+  const [resizeObserver, setResizeObserver] = useState<null | ResizeObserver>(
+    null
+  )
 
   const resizeRef = useCallback(
     (node: HTMLDivElement) => {
@@ -160,6 +150,19 @@ export default function Page() {
         cookieBanner.style.display = 'none'
       }
     }, 500)
+
+    const observer = new ResizeObserver(() => {
+      sendEventToParent('onResize', {
+        width: document.documentElement.offsetWidth,
+        height: document.documentElement.offsetHeight,
+        scrollHeight: document.documentElement.scrollHeight
+      })
+    })
+    setResizeObserver(observer)
+
+    return () => {
+      observer.disconnect()
+    }
   }, [])
 
   // 3. Load external script and attach resize event
