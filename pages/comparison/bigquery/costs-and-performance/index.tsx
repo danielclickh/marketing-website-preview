@@ -35,7 +35,7 @@ import logoAzure from './logo-azure.svg'
 import logoAdevinta from './logo-adevinta.svg'
 import logoBlock from './logo-block.png'
 import logoPerfect from './logo-perfect.svg'
-
+import { SpoofedMarketoObject } from '../../../../components/MarketoForm'
 const locTracking = 'bigquery-comparison-page'
 
 export interface BigQueryCostsAndPerformancePageProps extends ComparisonProps {
@@ -109,6 +109,7 @@ export default function BigQueryCostsAndPerformancePage({
   const modalFormSuccessRef = useRef<HTMLDivElement | null>(null)
   const [modalFormSuccess, setModalFormSuccess] = useState(false)
   const [modalFormLoaded, setModalFormLoaded] = useState(false)
+  const [marketoForm, setMarketoForm] = useState<SpoofedMarketoObject>()
 
   useClickOutside(modalInnerRef, () => {
     setIsModalOpen(false)
@@ -148,12 +149,12 @@ export default function BigQueryCostsAndPerformancePage({
               onSupportClick={() => {
                 setIsModalOpen(true)
                 galaxyOnClick(
-                  `bigqueryCostsAndPerformanceComparisonPage.heroCta.personalizedSupportSelect`
+                  `bigqueryCostsAndPerformanceComparisonPage.heroCta.costsPersonalizedSupportSelect`
                 )()
               }}
               onTrialClick={() => {
                 galaxyOnClick(
-                  `bigqueryCostsAndPerformanceComparisonPage.heroCta.startTrialSelect`
+                  `bigqueryCostsAndPerformanceComparisonPage.heroCta.costsStartTrialSelect`
                 )()
               }}
             />
@@ -223,12 +224,12 @@ export default function BigQueryCostsAndPerformancePage({
               onSupportClick={() => {
                 setIsModalOpen(true)
                 galaxyOnClick(
-                  `bigqueryCostsAndPerformanceComparisonPage.heroCta.personalizedSupportSelect`
+                  `bigqueryCostsAndPerformanceComparisonPage.heroCta.perfPersonalizedSupportSelect`
                 )()
               }}
               onTrialClick={() => {
                 galaxyOnClick(
-                  `bigqueryCostsAndPerformanceComparisonPage.heroCta.startTrialSelect`
+                  `bigqueryCostsAndPerformanceComparisonPage.heroCta.perfStartTrialSelect`
                 )()
               }}
             />
@@ -364,12 +365,12 @@ export default function BigQueryCostsAndPerformancePage({
 
                   if (isPerformanceTest) {
                     galaxyOnClick(
-                      `bigqueryCostsAndPerformanceComparisonPage.footerCta.personalizedSupportSelect`
+                      `bigqueryCostsAndPerformanceComparisonPage.footerCta.perfPersonalizedSupportSelect`
                     )()
                   }
                   if (isCostsTest) {
                     galaxyOnClick(
-                      `bigqueryCostsAndPerformanceComparisonPage.footerCta.personalizedSupportSelect`
+                      `bigqueryCostsAndPerformanceComparisonPage.footerCta.costsPersonalizedSupportSelect`
                     )()
                   }
                 }}>
@@ -382,16 +383,17 @@ export default function BigQueryCostsAndPerformancePage({
                 onClick={() => {
                   if (isPerformanceTest) {
                     galaxyOnClick(
-                      `bigqueryCostsAndPerformanceComparisonPage.footerCta.startTrialSelect`
+                      `bigqueryCostsAndPerformanceComparisonPage.footerCta.perfStartTrialSelect`
                     )()
                   }
                   if (isCostsTest) {
                     galaxyOnClick(
-                      `bigqueryCostsAndPerformanceComparisonPage.footerCta.startTrialSelect`
+                      `bigqueryCostsAndPerformanceComparisonPage.footerCta.costsStartTrialSelect`
                     )()
                   }
                 }}
                 href={`https://clickhouse.cloud/signUp?loc=${locTracking}-footer`}
+                target='_blank'
                 className='w-full !border !border-primary-900 !text-primary-900 hover:!text-white sm:w-auto'>
                 Start free trial
               </CUIButton>
@@ -439,8 +441,13 @@ export default function BigQueryCostsAndPerformancePage({
                   <MarketoForm
                     formId={'1237'}
                     clearbitTracking={true}
-                    onLoad={() => {
+                    onLoad={(formObject) => {
                       setModalFormLoaded(true)
+                      setMarketoForm(formObject)
+                      // Set field values
+                      formObject.addHiddenFields({
+                        miscBlankField17: 'paid'
+                      })
                     }}
                     onSuccess={() => {
                       setModalFormSuccess(true)
