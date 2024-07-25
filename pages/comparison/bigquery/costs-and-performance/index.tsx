@@ -12,7 +12,7 @@ import SeoContainer from '../../../../components/SeoContainer'
 import { SuiText, SuiTitle } from '../../../../components/sui'
 import { useClickOutside } from '../../../../hooks'
 import { findAll, findOne } from '../../../../lib/api/strapi'
-import { galaxyOnPage } from '../../../../lib/galaxy/galaxy'
+import { galaxyOnClick, galaxyOnPage } from '../../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../../lib/utils/revalidationConfig'
 import logoFull from '../../../../public/logo-full.svg'
@@ -142,7 +142,15 @@ export default function BigQueryCostsAndPerformancePage({
 
         {isCostsTest && (
           <>
-            <HeroCosts onSupportClick={() => setIsModalOpen(true)} />
+            <HeroCosts
+              onSupportClick={() => {
+                setIsModalOpen(true)
+                galaxyOnClick('performance.Event.Name')()
+              }}
+              onTrialClick={() => {
+                galaxyOnClick('performance.Event.Name')()
+              }}
+            />
             <IntroGraphsCosts />
             <QuotesCosts />
             <div className='bg-neutral-750 py-16 lg:py-24'>
@@ -205,7 +213,15 @@ export default function BigQueryCostsAndPerformancePage({
 
         {isPerformanceTest && (
           <>
-            <HeroPerformance onSupportClick={() => setIsModalOpen(true)} />
+            <HeroPerformance
+              onSupportClick={() => {
+                setIsModalOpen(true)
+                galaxyOnClick('performance.Event.Name')()
+              }}
+              onTrialClick={() => {
+                galaxyOnClick('performance.Event.Name')()
+              }}
+            />
             <IntroGraphsPerformance />
             <QuotesPerformance />
             <div className='bg-neutral-750 py-16 lg:py-24'>
@@ -333,7 +349,12 @@ export default function BigQueryCostsAndPerformancePage({
                 type='primary-dark'
                 size='lg'
                 weight='semibold'
-                onClick={() => setIsModalOpen(true)}>
+                onClick={() => {
+                  setIsModalOpen(true)
+                  if (isPerformanceTest)
+                    galaxyOnClick('performance.Event.Name')()
+                  if (isCostsTest) galaxyOnClick('costs.Event.Name')()
+                }}>
                 Get personalized support
               </CUIButton>
               <CUIButton
@@ -341,6 +362,11 @@ export default function BigQueryCostsAndPerformancePage({
                 size='lg'
                 weight='semibold'
                 href='#'
+                onClick={() => {
+                  if (isPerformanceTest)
+                    galaxyOnClick('performance.Event.Name')()
+                  if (isCostsTest) galaxyOnClick('costs.Event.Name')()
+                }}
                 className='w-full !border !border-primary-900 !text-primary-900 hover:!text-white sm:w-auto'>
                 Start free trial
               </CUIButton>
@@ -432,12 +458,14 @@ export default function BigQueryCostsAndPerformancePage({
 type HeroProps = {
   children: React.ReactNode
   onSupportClick: () => void
+  onTrialClick: () => void
   stats?: Array<{ stat: string; label: string }>
 }
 
 function Hero({
   children,
   onSupportClick,
+  onTrialClick,
   stats = [
     {
       stat: '100x',
@@ -480,6 +508,7 @@ function Hero({
               size='lg'
               weight='semibold'
               href='#'
+              onClick={onTrialClick}
               className='w-full lg:w-auto'>
               Start free trial
             </CUIButton>
@@ -517,9 +546,12 @@ function Hero({
   )
 }
 
-function HeroCosts({ onSupportClick }: Omit<HeroProps, 'children'>) {
+function HeroCosts({
+  onSupportClick,
+  onTrialClick
+}: Omit<HeroProps, 'children'>) {
   return (
-    <Hero onSupportClick={onSupportClick}>
+    <Hero onSupportClick={onSupportClick} onTrialClick={onTrialClick}>
       <SuiTitle type='h1'>
         Are your BigQuery costs
         <br />
@@ -538,9 +570,12 @@ function HeroCosts({ onSupportClick }: Omit<HeroProps, 'children'>) {
   )
 }
 
-function HeroPerformance({ onSupportClick }: Omit<HeroProps, 'children'>) {
+function HeroPerformance({
+  onSupportClick,
+  onTrialClick
+}: Omit<HeroProps, 'children'>) {
   return (
-    <Hero onSupportClick={onSupportClick}>
+    <Hero onSupportClick={onSupportClick} onTrialClick={onTrialClick}>
       <SuiTitle type='h1'>
         Is BigQuery <span className='text-primary-300'>struggling</span> <br />
         to scale?
