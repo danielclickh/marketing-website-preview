@@ -20,9 +20,9 @@ export default function QuotesCarousel({ quotes }: QuotesCarousel) {
   let quotesArray = quotes
 
   // Duplicate quotes if there is not enough to be a carousel
-  if (quotesArray.length <= 2) {
-    quotesArray = [...quotesArray, ...quotesArray]
-  }
+  // if (quotesArray.length <= 2) {
+  //   quotesArray = [...quotesArray, ...quotesArray]
+  // }
 
   return (
     <div className='group/quotes relative my-10 xl:my-24'>
@@ -65,7 +65,7 @@ export default function QuotesCarousel({ quotes }: QuotesCarousel) {
         </Swiper>
       </div>
       <div className='pointer-events-none z-10 mt-10 flex justify-center gap-10 xl:absolute xl:left-0 xl:right-0 xl:top-1/2 xl:mt-0 xl:-translate-y-1/2 xl:justify-between xl:px-4 2xl:px-12'>
-        <button
+        {/* <button
           className='pointer-events-auto opacity-40 transition-opacity hover:!opacity-90 group-hover/quotes:opacity-70'
           onClick={() => swiperInstance?.slidePrev()}>
           <svg
@@ -94,7 +94,7 @@ export default function QuotesCarousel({ quotes }: QuotesCarousel) {
               d='m13.06 13.06-10 10a1.5 1.5 0 0 1-2.12-2.12L9.87 12 .94 3.06A1.5 1.5 0 0 1 3.06.94l10 10a1.5 1.5 0 0 1 0 2.12Z'
             />
           </svg>
-        </button>
+        </button> */}
       </div>
     </div>
   )

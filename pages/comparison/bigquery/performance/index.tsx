@@ -79,7 +79,13 @@ export async function getStaticProps() {
   const comparison = data[0]
 
   const seo = comparison.seo
-  if (seo) seo.path = `/comparison/${comparison.slug}/performance`
+  if (seo) {
+    seo.title =
+      'ClickHouse vs BigQuery - Migrate to ClickHouse for blazing-fast performance and improved cost-efficiency'
+    seo.description =
+      'BigQuery handles ad-hoc queries and smaller data volumes effectively, but scaling turns performance and cost management into a significant challenge.'
+    seo.path = `/comparison/${comparison.slug}/performance`
+  }
 
   const props: BigQueryPerformancePageProps = {
     comparison,
