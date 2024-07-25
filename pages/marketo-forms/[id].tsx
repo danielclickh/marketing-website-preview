@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from '../../tailwind.config'
 import { MarketoFormObject, MarketoFormsApi } from '../../types/marketo-form'
@@ -120,12 +120,26 @@ export default function Page() {
     // Timeout allows a repaint to happen before we get the values
     setTimeout(() => {
       sendEventToParent('onResize', {
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: formRef.current?.offsetWidth || window.innerWidth,
+        height: formRef.current?.offsetHeight || window.innerHeight,
         scrollHeight: document.documentElement.scrollHeight
       })
     }, 100)
   }
+
+  const resizeObserver = useMemo(() => {
+    return new ResizeObserver(() => {
+      console.log('Resized innit')
+      sendResizeEvent()
+    })
+  }, [])
+
+  const resizeRef = useCallback(
+    (node: HTMLElement) => {
+      if (node) resizeObserver.observe(node)
+    },
+    [resizeObserver]
+  )
 
   // 1. Watch for when router is ready
   useEffect(() => {
@@ -184,20 +198,20 @@ export default function Page() {
         }
       }
 
-      document.body.addEventListener('keyup', catchInputEvents, true)
-      document.body.addEventListener('input', catchInputEvents, true)
-      document.body.addEventListener('change', catchInputEvents, true)
-      document.body.addEventListener('focus', catchInputEvents, true)
-      document.body.addEventListener('blur', catchInputEvents, true)
+      // document.body.addEventListener('keyup', catchInputEvents, true)
+      // document.body.addEventListener('input', catchInputEvents, true)
+      // document.body.addEventListener('change', catchInputEvents, true)
+      // document.body.addEventListener('focus', catchInputEvents, true)
+      // document.body.addEventListener('blur', catchInputEvents, true)
 
       // Clean up on unmount
       return () => {
         window.removeEventListener('resize', resize)
-        document.body.removeEventListener('keyup', catchInputEvents, true)
-        document.body.removeEventListener('input', catchInputEvents, true)
-        document.body.removeEventListener('change', catchInputEvents, true)
-        document.body.removeEventListener('focus', catchInputEvents, true)
-        document.body.removeEventListener('blur', catchInputEvents, true)
+        // document.body.removeEventListener('keyup', catchInputEvents, true)
+        // document.body.removeEventListener('input', catchInputEvents, true)
+        // document.body.removeEventListener('change', catchInputEvents, true)
+        // document.body.removeEventListener('focus', catchInputEvents, true)
+        // document.body.removeEventListener('blur', catchInputEvents, true)
         script.remove()
       }
     }
@@ -330,7 +344,7 @@ export default function Page() {
 
   return (
     <>
-      <div className={styles.marketoFormContainerV2}>
+      <div ref={resizeRef} className={styles.marketoFormContainerV2}>
         <form className='mktoForm' id={`mktoForm_${formId}`} ref={formRef} />
       </div>
     </>
