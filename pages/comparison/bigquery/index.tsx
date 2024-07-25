@@ -560,7 +560,10 @@ export default function BigQueryPage({
                     setFormLoaded(true)
                     setMarketoForm(formObject)
                     // Set field values
-                    formObject.addHiddenFields({ miscBlankField17: 'organic' })
+                    formObject.addHiddenFields({
+                      miscBlankField17: 'organic',
+                      loc__c: 'footer'
+                    })
                   }}
                   onSuccess={() => {
                     setFormSuccess(true)
@@ -660,7 +663,10 @@ export default function BigQueryPage({
                     setModalFormLoaded(true)
                     setMarketoForm(formObject)
                     // Set field values
-                    formObject.addHiddenFields({ miscBlankField17: 'organic' })
+                    formObject.addHiddenFields({
+                      miscBlankField17: 'organic',
+                      loc__c: 'modal'
+                    })
                   }}
                   onSuccess={() => {
                     setModalFormSuccess(true)
