@@ -166,6 +166,9 @@ export default function BigQueryCostsPage({
   const pageLayout = useFeatureValue('mktg-bigquery-costs-hero', 0)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalFormLocValue, setModalFormLocValue] = useState<null | string>(
+    null
+  )
   const modalInnerRef = useRef<HTMLDivElement | null>(null)
 
   useClickOutside(modalInnerRef, () => {
@@ -214,8 +217,9 @@ export default function BigQueryCostsPage({
                 primaryCta={{
                   onClick() {
                     setIsModalOpen(true)
+                    setModalFormLocValue(`hero-cta-cost-variant${pageLayout}`)
                     galaxyOnClick(
-                      `bigqueryCostsComparisonPage.heroCta.costsPersonalizedSupportSelect`
+                      `bigqueryCostsComparisonPage.heroCtaVariant${pageLayout}.costsPersonalizedSupportSelect`
                     )()
                   },
                   text: 'Get personalized support'
@@ -223,11 +227,11 @@ export default function BigQueryCostsPage({
                 secondaryCta={{
                   onClick() {
                     galaxyOnClick(
-                      `bigqueryCostsComparisonPage.heroCta.costsStartTrialSelect`
+                      `bigqueryCostsComparisonPage.heroCtaVariant${pageLayout}.costsStartTrialSelect`
                     )()
                   },
                   target: '_blank',
-                  href: `https://clickhouse.cloud/signUp?loc=${locTracking}-hero`,
+                  href: `https://clickhouse.cloud/signUp?loc=${locTracking}-paid-costs-hero-variant${pageLayout}`,
                   text: 'Start free trial'
                 }}
                 statsLabel={
@@ -283,7 +287,8 @@ export default function BigQueryCostsPage({
                     <LeadForm
                       hiddenFields={{
                         miscBlankField17: 'paid',
-                        miscBlankField16: pageLayout
+                        miscBlankField16: pageLayout,
+                        loc__c: `hero-costs-variant${pageLayout}`
                       }}
                     />
                   </>
@@ -504,8 +509,9 @@ export default function BigQueryCostsPage({
                 weight='semibold'
                 onClick={() => {
                   setIsModalOpen(true)
+                  setModalFormLocValue(`footer-cta-costs-variant${pageLayout}`)
                   galaxyOnClick(
-                    `bigqueryCostsComparisonPage.footerCta.costsPersonalizedSupportSelect`
+                    `bigqueryCostsComparisonPage.footerCtaVariant${pageLayout}.costsPersonalizedSupportSelect`
                   )()
                 }}>
                 Get personalized support
@@ -516,10 +522,10 @@ export default function BigQueryCostsPage({
                 weight='semibold'
                 onClick={() => {
                   galaxyOnClick(
-                    `bigqueryCostsComparisonPage.footerCta.costsStartTrialSelect`
+                    `bigqueryCostsComparisonPage.footerCtaVariant${pageLayout}.costsStartTrialSelect`
                   )()
                 }}
-                href={`https://clickhouse.cloud/signUp?loc=${locTracking}-footer`}
+                href={`https://clickhouse.cloud/signUp?loc=${locTracking}-paid-footer-costs-variant${pageLayout}`}
                 target='_blank'
                 className='w-full !border !border-primary-900 !text-primary-900 hover:!text-white sm:w-auto'>
                 Start free trial
@@ -567,7 +573,8 @@ export default function BigQueryCostsPage({
                 <LeadForm
                   hiddenFields={{
                     miscBlankField17: 'paid',
-                    miscBlankField16: pageLayout
+                    miscBlankField16: pageLayout,
+                    loc__c: modalFormLocValue
                   }}
                 />
               )}
