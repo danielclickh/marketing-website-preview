@@ -1,3 +1,4 @@
+import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import resolveConfig from 'tailwindcss/resolveConfig'
@@ -25,44 +26,43 @@ declare global {
 
 export default function Page() {
   const router = useRouter()
-  const formId = typeof router.query?.id === 'string' ? router.query.id : ''
 
-  // Component ID passed from parent
-  const instanceId =
-    typeof router.query?.iid === 'string' ? router.query.iid : ''
-
-  const clearbitTracking =
-    typeof router.query?.clearbitTracking === 'string' &&
-    router.query.clearbitTracking === '1'
-
-  const submitButtonLabel =
-    typeof router.query?.submitButtonLabel === 'string'
-      ? router.query.submitButtonLabel
-      : null
-
-  // Referer URL passed from parent
-  const referer =
-    typeof router.query?.referer === 'string' ? router.query.referer : ''
+  const [formId, setFormId] = useState<string>('')
+  const [instanceId, setInstanceId] = useState<null | string>(null)
+  const [clearbitTracking, setClearbitTracking] = useState<boolean>(false)
+  const [submitButtonLabel, setSubmitButtonLabel] = useState<null | string>(
+    null
+  )
+  const [referer, setReferer] = useState<null | string>(null)
 
   // Prefix events so the parent can identify events from multiple forms iframes
-  const instanceEventPrefix = ['mkto', instanceId, formId]
-    .filter((val) => !!val)
-    .join('-')
+  const instanceEventPrefix = () => {
+    return ['mkto', instanceId, formId].filter((val) => !!val).join('-')
+  }
 
   const formRef = useRef<HTMLFormElement>(null)
   const [scriptLoaded, setScriptLoaded] = useState(false)
   const [routerReady, setRouterReady] = useState(false)
 
   function sendEventToParent(eventName: string, data: any = null) {
+    console.log({ formId, eventName, data })
     if (window?.parent) {
       window.parent.postMessage({
-        type: `${instanceEventPrefix}-${eventName}`,
+        type: `${instanceEventPrefix()}-${eventName}`,
         data: data
       })
       return true
     }
 
     return false
+  }
+
+  function sendResizeEvent() {
+    sendEventToParent('onResize', {
+      width: document.documentElement.offsetWidth,
+      height: document.documentElement.offsetHeight,
+      scrollHeight: document.documentElement.scrollHeight
+    })
   }
 
   function recieveEventFromParent({ data }: MessageEvent) {
@@ -72,41 +72,41 @@ export default function Page() {
 
       switch (eventType) {
         // Trigger events
-        case `${instanceEventPrefix}-submit`:
+        case `${instanceEventPrefix()}-submit`:
           window.MktoForms2?.getForm(formId)?.submit()
           break
-        case `${instanceEventPrefix}-setValues`:
+        case `${instanceEventPrefix()}-setValues`:
           window.MktoForms2?.getForm(formId)?.setValues(eventData)
           break
-        case `${instanceEventPrefix}-addHiddenFields`:
+        case `${instanceEventPrefix()}-addHiddenFields`:
           window.MktoForms2?.getForm(formId)?.addHiddenFields(eventData)
           break
-        case `${instanceEventPrefix}-showErrorMessage`:
+        case `${instanceEventPrefix()}-showErrorMessage`:
           window.MktoForms2?.getForm(formId)?.showErrorMessage(eventData)
           break
 
         // Getter events
-        case `${instanceEventPrefix}-validate`:
+        case `${instanceEventPrefix()}-validate`:
           sendEventToParent(
             'validate',
             window.MktoForms2?.getForm(formId)?.validate()
           )
           break
-        case `${instanceEventPrefix}-getValues`:
+        case `${instanceEventPrefix()}-getValues`:
           sendEventToParent(
             'getValues',
             window.MktoForms2?.getForm(formId)?.getValues()
           )
           break
 
-        case `${instanceEventPrefix}-submittable`:
+        case `${instanceEventPrefix()}-submittable`:
           sendEventToParent(
             'submittable',
             window.MktoForms2?.getForm(formId)?.submittable(eventData)
           )
           break
 
-        case `${instanceEventPrefix}-allFieldsFilled`:
+        case `${instanceEventPrefix()}-allFieldsFilled`:
           sendEventToParent(
             'allFieldsFilled',
             window.MktoForms2?.getForm(formId)?.allFieldsFilled()
@@ -150,26 +150,20 @@ export default function Page() {
         cookieBanner.style.display = 'none'
       }
     }, 500)
-
-    const observer = new ResizeObserver(() => {
-      sendEventToParent('onResize', {
-        width: document.documentElement.offsetWidth,
-        height: document.documentElement.offsetHeight,
-        scrollHeight: document.documentElement.scrollHeight
-      })
-    })
-    setResizeObserver(observer)
-
-    return () => {
-      observer.disconnect()
-    }
   }, [])
 
-  // 3. Load external script and attach resize event
+  // 3. Get query params and load external scripts
   useEffect(() => {
     if (routerReady) {
-      // Resize events
-      const resize = () => {
+      // Component options from iframe query string
+      setFormId(router.query.id as string)
+      setInstanceId((router.query?.iid as string) || '')
+      setClearbitTracking(router.query?.clearbitTracking === '1')
+      setSubmitButtonLabel((router.query?.submitButtonLabel as string) || null)
+      setReferer((router.query?.referer as string) || null)
+
+      // Add column classes classes
+      const addColumnClasses = () => {
         if (formRef.current) {
           if (window.parent.innerWidth >= formBreakpoint) {
             formRef.current.classList.add('allow-columns')
@@ -178,8 +172,8 @@ export default function Page() {
           }
         }
       }
-      window.addEventListener('resize', resize)
-      resize()
+      window.addEventListener('resize', addColumnClasses)
+      addColumnClasses()
 
       // Add marketo script
       const script = document.createElement('script')
@@ -189,7 +183,7 @@ export default function Page() {
 
       // Clean up on unmount
       return () => {
-        window.removeEventListener('resize', resize)
+        window.removeEventListener('resize', addColumnClasses)
         script.remove()
       }
     }
@@ -197,13 +191,24 @@ export default function Page() {
 
   // 4. Call Marketo JS API
   useEffect(() => {
+    // Watch the dom for resizing
+    const observer = new ResizeObserver(() => {
+      sendEventToParent('onResize', {
+        width: document.documentElement.offsetWidth,
+        height: document.documentElement.offsetHeight,
+        scrollHeight: document.documentElement.scrollHeight
+      })
+    })
+    setResizeObserver(observer)
+
+    // Handle Marketo form creation
     if (routerReady && scriptLoaded) {
       // Empty form contents in case of rerender
       if (formRef.current) formRef.current.innerHTML = ''
 
       // Fixes marketo referrer issue for SPAs
       window.MktoForms2.whenReady((marketoFormObject) => {
-        fixMarketoReferer(marketoFormObject, referer)
+        fixMarketoReferer(marketoFormObject, referer || '')
       })
 
       // Remove styles unwanted styles on re-render
@@ -212,7 +217,7 @@ export default function Page() {
 
         // Update submit button label from iframe query params
         if (submitButtonLabel)
-          setSubmitButtonLabel(marketoFormObject, submitButtonLabel)
+          setMarketoSubmitButtonLabel(marketoFormObject, submitButtonLabel)
       })
 
       // Init the marketo JS api
@@ -226,7 +231,7 @@ export default function Page() {
 
           // Update submit button label from iframe query params
           if (submitButtonLabel)
-            setSubmitButtonLabel(marketoFormObject, submitButtonLabel)
+            setMarketoSubmitButtonLabel(marketoFormObject, submitButtonLabel)
 
           // Add clearbit tracking script
           if (clearbitTracking) {
@@ -311,10 +316,19 @@ export default function Page() {
       // Clean-up on unmount
       return () => {
         if (formRef.current) formRef.current.innerHTML = ''
+        observer.disconnect()
         window.removeEventListener('message', recieveEventFromParent)
       }
     }
-  }, [routerReady, scriptLoaded])
+  }, [
+    routerReady,
+    scriptLoaded,
+    formId,
+    instanceId,
+    clearbitTracking,
+    submitButtonLabel,
+    referer
+  ])
 
   return (
     <>
@@ -325,7 +339,7 @@ export default function Page() {
   )
 }
 
-function setSubmitButtonLabel(
+function setMarketoSubmitButtonLabel(
   marketoFormObject: MarketoFormObject,
   label: string
 ) {
