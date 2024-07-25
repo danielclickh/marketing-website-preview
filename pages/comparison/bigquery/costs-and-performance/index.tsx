@@ -36,6 +36,8 @@ import logoAdevinta from './logo-adevinta.svg'
 import logoBlock from './logo-block.png'
 import logoPerfect from './logo-perfect.svg'
 import { SpoofedMarketoObject } from '../../../../components/MarketoForm'
+import { useFeatureValue, useGrowthBook } from '@growthbook/growthbook-react'
+import { updateLinks } from '../../../../components/UTMPersist'
 const locTracking = 'bigquery-comparison-page'
 
 export interface BigQueryCostsAndPerformancePageProps extends ComparisonProps {
@@ -104,6 +106,20 @@ export default function BigQueryCostsAndPerformancePage({
 }: BigQueryCostsAndPerformancePageProps) {
   galaxyOnPage(`${comparison.slug}CostsAndPerformanceComparisonPage`)
 
+  const gb = useGrowthBook()
+
+  if (gb?.ready) {
+    setTimeout(() => {
+      updateLinks(
+        'mktg-bigquery-paid-pages',
+        gb.getFeatureValue('mktg-bigquery-pages', 0).toString(),
+        '.readable-content'
+      )
+    }, 100)
+  }
+
+  const pageLayout = useFeatureValue('mktg-bigquery-pages', 0)
+
   const [isModalOpen, setIsModalOpen] = useState(false)
   const modalInnerRef = useRef<HTMLDivElement | null>(null)
   const modalFormSuccessRef = useRef<HTMLDivElement | null>(null)
@@ -135,15 +151,10 @@ export default function BigQueryCostsAndPerformancePage({
               height='40'
               alt='ClickHouse logo'
             />
-            <button
-              className='ml-auto text-white opacity-80 hover:opacity-90 lg:text-primary-900'
-              onClick={() => setTest(isCostsTest ? 'performance' : 'costs')}>
-              Switch to {isCostsTest ? 'performance' : 'costs'}
-            </button>
           </div>
         </div>
 
-        {isCostsTest && (
+        {gb?.ready && pageLayout === 0 && (
           <>
             <HeroCosts
               onSupportClick={() => {
@@ -218,7 +229,7 @@ export default function BigQueryCostsAndPerformancePage({
           </>
         )}
 
-        {isPerformanceTest && (
+        {gb?.ready && pageLayout === 1 && (
           <>
             <HeroPerformance
               onSupportClick={() => {
