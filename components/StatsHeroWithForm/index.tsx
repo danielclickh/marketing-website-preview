@@ -19,14 +19,6 @@ export default function StatsHeroWithForm({
 }: StatsHeroProps) {
   return (
     <div className='relative overflow-hidden'>
-      <Image
-        src={bgArrows}
-        alt='Arrows background image'
-        width={2880}
-        height={1970}
-        className='pointer-events-none absolute inset-0 z-0 h-full w-full object-cover object-center'
-      />
-
       <div className='container mx-auto flex max-w-7xl flex-col gap-x-10 px-8 lg:flex-row 2xl:px-0'>
         <div className='relative z-10 mx-auto flex max-w-xl flex-col gap-6 pb-16 pt-24 text-center lg:mx-0 lg:pb-24 lg:text-left'>
           {content}
