@@ -151,16 +151,19 @@ export default function BigQueryCostsPage({
   const gb = useGrowthBook()
 
   if (gb?.ready) {
+    const testTarget = document.querySelector('#test-target')
+
     setTimeout(() => {
       updateLinks(
-        'mktg-bigquery-paid-pages',
-        gb.getFeatureValue('mktg-bigquery-pages', 0).toString(),
+        'mktg-bigquery-costs',
+        gb.getFeatureValue('mktg-bigquery-costs-hero', 0).toString(),
         '.readable-content'
       )
+      testTarget?.classList.remove('hidden')
     }, 100)
   }
 
-  const pageLayout = useFeatureValue('mktg-bigquery-pages', 0)
+  const pageLayout = useFeatureValue('mktg-bigquery-costs-hero', 0)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const modalInnerRef = useRef<HTMLDivElement | null>(null)
@@ -172,6 +175,7 @@ export default function BigQueryCostsPage({
   return (
     <div>
       {seo && <SeoContainer {...seo} />}
+      {pageLayout}
       <div className='readable-content relative'>
         {/* Logo */}
         <div className='absolute left-0 right-0 top-0 z-50'>
