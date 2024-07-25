@@ -402,12 +402,13 @@ export default function BigQueryPerformancePage({
                 applications
               </SuiTitle>
               <SuiText className='opacity-80'>
-                BigQuery is a traditional data warehouse that’s optimized for
-                ad-hoc and infrequent queries. Their pricing model - which
-                charges for BigQuery “slots” - is calculated based on the amount
-                of data scanned to perform a query. This can become exorbitantly
-                expensive for analytics workloads, particularly where
-                applications invoke queries and concurrency is high.
+                Our parallelized query execution engine, best-in-class
+                compression rates, and column-oriented design deliver
+                unparalleled performance at scale so that you can focus on
+                insights and forget worrying about infrastructure. Whether
+                you’re performing live analysis to drive business outcomes or
+                building interactive user-facing applications, ClickHouse
+                delivers the unparalleled speed-to-insight you can depend on.
               </SuiText>
             </div>
             <Image
@@ -430,12 +431,12 @@ export default function BigQueryPerformancePage({
                 after <br /> migrating to ClickHouse.
               </SuiTitle>
               <SuiText className='opacity-80'>
-                BigQuery is a traditional data warehouse that’s optimized for
-                ad-hoc and infrequent queries. Their pricing model - which
-                charges for BigQuery “slots” - is calculated based on the amount
-                of data scanned to perform a query. This can become exorbitantly
-                expensive for analytics workloads, particularly where
-                applications invoke queries and concurrency is high.
+                BigQuery’s pricing model can lead companies to artificially
+                constrain usage or access to data, leading to lower ROI.
+                ClickHouse is designed to manage huge volumes of data
+                efficiently. Its efficient management of resources helps to
+                maximize its cost-effectiveness. ClickHouse was designed from
+                the ground up for best-in-class resource utilization.
               </SuiText>
             </div>
             <Image
