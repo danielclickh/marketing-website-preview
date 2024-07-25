@@ -36,6 +36,8 @@ import logoAdevinta from './logo-adevinta.svg'
 import logoBlock from './logo-block.png'
 import logoPerfect from './logo-perfect.svg'
 
+const locTracking = 'bigquery-comparison-page'
+
 export interface BigQueryCostsAndPerformancePageProps extends ComparisonProps {
   customerStories: HomepageCustomerStories
 }
@@ -145,10 +147,14 @@ export default function BigQueryCostsAndPerformancePage({
             <HeroCosts
               onSupportClick={() => {
                 setIsModalOpen(true)
-                galaxyOnClick('performance.Event.Name')()
+                galaxyOnClick(
+                  `bigqueryCostsAndPerformanceComparisonPage.heroCta.personalizedSupportSelect`
+                )()
               }}
               onTrialClick={() => {
-                galaxyOnClick('performance.Event.Name')()
+                galaxyOnClick(
+                  `bigqueryCostsAndPerformanceComparisonPage.heroCta.startTrialSelect`
+                )()
               }}
             />
             <IntroGraphsCosts />
@@ -217,9 +223,14 @@ export default function BigQueryCostsAndPerformancePage({
               onSupportClick={() => {
                 setIsModalOpen(true)
                 galaxyOnClick('performance.Event.Name')()
+                galaxyOnClick(
+                  `bigqueryCostsAndPerformanceComparisonPage.heroCta.personalizedSupportSelect`
+                )()
               }}
               onTrialClick={() => {
-                galaxyOnClick('performance.Event.Name')()
+                galaxyOnClick(
+                  `bigqueryCostsAndPerformanceComparisonPage.heroCta.startTrialSelect`
+                )()
               }}
             />
             <IntroGraphsPerformance />
@@ -351,9 +362,17 @@ export default function BigQueryCostsAndPerformancePage({
                 weight='semibold'
                 onClick={() => {
                   setIsModalOpen(true)
-                  if (isPerformanceTest)
-                    galaxyOnClick('performance.Event.Name')()
-                  if (isCostsTest) galaxyOnClick('costs.Event.Name')()
+
+                  if (isPerformanceTest) {
+                    galaxyOnClick(
+                      `bigqueryCostsAndPerformanceComparisonPage.footerCta.personalizedSupportSelect`
+                    )()
+                  }
+                  if (isCostsTest) {
+                    galaxyOnClick(
+                      `bigqueryCostsAndPerformanceComparisonPage.footerCta.personalizedSupportSelect`
+                    )()
+                  }
                 }}>
                 Get personalized support
               </CUIButton>
@@ -361,12 +380,19 @@ export default function BigQueryCostsAndPerformancePage({
                 type='secondary-dark'
                 size='lg'
                 weight='semibold'
-                href='#'
                 onClick={() => {
-                  if (isPerformanceTest)
-                    galaxyOnClick('performance.Event.Name')()
-                  if (isCostsTest) galaxyOnClick('costs.Event.Name')()
+                  if (isPerformanceTest) {
+                    galaxyOnClick(
+                      `bigqueryCostsAndPerformanceComparisonPage.footerCta.startTrialSelect`
+                    )()
+                  }
+                  if (isCostsTest) {
+                    galaxyOnClick(
+                      `bigqueryCostsAndPerformanceComparisonPage.footerCta.startTrialSelect`
+                    )()
+                  }
                 }}
+                href={`https://clickhouse.cloud/signUp?loc=${locTracking}-footer`}
                 className='w-full !border !border-primary-900 !text-primary-900 hover:!text-white sm:w-auto'>
                 Start free trial
               </CUIButton>
@@ -507,8 +533,9 @@ function Hero({
               type='secondary'
               size='lg'
               weight='semibold'
-              href='#'
               onClick={onTrialClick}
+              target='_blank'
+              href={`https://clickhouse.cloud/signUp?loc=${locTracking}-hero`}
               className='w-full lg:w-auto'>
               Start free trial
             </CUIButton>
@@ -555,7 +582,7 @@ function HeroCosts({
       <SuiTitle type='h1'>
         Are your BigQuery costs
         <br />
-        <span className='text-primary-300'>out of control</span> ?
+        <span className='text-primary-300'>out of control</span>?
       </SuiTitle>
       <SuiText className='sm:text-xl'>
         BigQuery handles ad-hoc queries and smaller data volumes effectively,
