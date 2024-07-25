@@ -257,7 +257,7 @@ function PricingOptions({
         )}
 
         {!selectorOnly ? (
-          <div className='center_content relative z-10 mx-auto mb-24 max-w-[344px]'>
+          <div className='center_content relative z-10 mx-auto mb-16 max-w-[344px]'>
             <PricingSelector
               regionList={regionList}
               onChange={updateRegionParam}
@@ -286,10 +286,10 @@ function PricingOptions({
         {!selectorOnly && (
           <>
             {plans.length > 0 && (
-              <div className='plans_container grid min-h-[940px] grid-cols-1 gap-8 lg:grid-cols-3'>
+              <div className='flex min-h-[940px] flex-col items-stretch justify-center gap-12 md:flex-row'>
                 {plans.map((plan, index) => (
                   <div
-                    className={`relative mx-auto w-full max-w-sm rounded-lg border border-t-4 border-neutral-700/80 border-t-primary bg-neutral-900/50 shadow-card-xl`}
+                    className={`relative w-full rounded-lg border border-t-4 border-neutral-700/80 border-t-primary bg-neutral-900/50 shadow-card-xl md:max-w-sm`}
                     key={`plan-${plan.name}`}>
                     <div className='card_content flex h-full flex-col justify-between'>
                       <div className='border-b border-neutral-725 p-6'>
@@ -299,11 +299,11 @@ function PricingOptions({
                         <div className='text-normal text-center text-sm text-neutral-300 md:h-auto md:min-h-[40px]'>
                           {plan.description}
                         </div>
-                        <div
-                          className={`${plan.name === 'Dedicated' && 'mb-14'}`}>
+                        <div>
                           <PlanPricing
                             isFirst={index === 0}
                             text={plan.pricingMain}
+                            name={plan.name}
                           />
                         </div>
 
@@ -392,6 +392,17 @@ function PricingOptions({
                               className='stroked_button_wrapper button_wrapper mt-4 w-full'
                               type='secondary'>
                               Estimate your monthly cost ↓
+                            </CUIButton>
+                          </>
+                        )}
+                        {plan.name === 'Dedicated' && (
+                          <>
+                            <CUIButton
+                              href={`/pricing/contact?loc=pricing-enterprise-${provider}`}
+                              weight='medium'
+                              className='stroked_button_wrapper button_wrapper mt-4 w-full'
+                              type='secondary'>
+                              Contact us
                             </CUIButton>
                           </>
                         )}

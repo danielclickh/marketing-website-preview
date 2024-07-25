@@ -4,20 +4,19 @@ import { usePricing } from './PricingContext'
 interface PlanPricingProps {
   isFirst: boolean
   text: string
+  name: string
 }
 
-const PlanPricing: React.FC<PlanPricingProps> = ({ isFirst, text }) => {
+const PlanPricing: React.FC<PlanPricingProps> = ({ isFirst, text, name }) => {
   const { selectedRegion } = usePricing()
-
   const renderPricing = (): string | undefined => {
-    if (isFirst) {
-      if (
-        (selectedRegion?.regionSlug === 'ap-northeast-1' &&
-          !selectedRegion.hasDevService) ||
-        selectedRegion?.cloudProvider === 'azure'
-      ) {
-        return 'Not available'
-      }
+    if (
+      selectedRegion?.regionSlug === 'ap-northeast-1' &&
+      name === 'Development'
+    ) {
+      return 'Not available'
+    }
+    if (name === 'Development') {
       return selectedRegion?.devStoragePricing?.devPriceUSD
     }
 
