@@ -35,6 +35,9 @@ import logoAzure from './logo-azure.svg'
 import logoAdevinta from './logo-adevinta.svg'
 import logoBlock from './logo-block.png'
 import logoPerfect from './logo-perfect.svg'
+import { galaxyOnClick } from '../../../../lib/galaxy/galaxy'
+
+const locTracking = 'bigquery-comparison-page'
 
 export interface BigQueryCostsAndPerformancePageProps extends ComparisonProps {
   customerStories: HomepageCustomerStories
@@ -333,14 +336,26 @@ export default function BigQueryCostsAndPerformancePage({
                 type='primary-dark'
                 size='lg'
                 weight='semibold'
-                onClick={() => setIsModalOpen(true)}>
+                onClick={() => {
+                  setIsModalOpen(true)
+                  if (window)
+                    galaxyOnClick(
+                      `bigqueryCostsAndPerformanceComparisonPage.footerCta.personalizedSupportSelect`
+                    )()
+                }}>
                 Get personalized support
               </CUIButton>
               <CUIButton
                 type='secondary-dark'
                 size='lg'
                 weight='semibold'
-                href='#'
+                href={`https://clickhouse.cloud/signUp?loc=${locTracking}-footer`}
+                onClick={() => {
+                  if (window)
+                    galaxyOnClick(
+                      `bigqueryCostsAndPerformanceComparisonPage.footerCta.startTrialSelect`
+                    )()
+                }}
                 className='w-full !border !border-primary-900 !text-primary-900 hover:!text-white sm:w-auto'>
                 Start free trial
               </CUIButton>
@@ -472,14 +487,27 @@ function Hero({
               type='primary'
               size='lg'
               weight='semibold'
-              onClick={onSupportClick}>
+              onClick={() => {
+                onSupportClick()
+                if (window)
+                  galaxyOnClick(
+                    `bigqueryCostsAndPerformanceComparisonPage.heroCta.personalizedSupportSelect`
+                  )()
+              }}>
               Get personalized support
             </CUIButton>
             <CUIButton
               type='secondary'
               size='lg'
               weight='semibold'
-              href='#'
+              target='_blank'
+              href={`https://clickhouse.cloud/signUp?loc=${locTracking}-hero`}
+              onClick={() => {
+                if (window)
+                  galaxyOnClick(
+                    `bigqueryCostsAndPerformanceComparisonPage.heroCta.startTrialSelect`
+                  )()
+              }}
               className='w-full lg:w-auto'>
               Start free trial
             </CUIButton>
@@ -523,7 +551,7 @@ function HeroCosts({ onSupportClick }: Omit<HeroProps, 'children'>) {
       <SuiTitle type='h1'>
         Are your BigQuery costs
         <br />
-        <span className='text-primary-300'>out of control</span> ?
+        <span className='text-primary-300'>out of control</span>?
       </SuiTitle>
       <SuiText className='sm:text-xl'>
         BigQuery handles ad-hoc queries and smaller data volumes effectively,
