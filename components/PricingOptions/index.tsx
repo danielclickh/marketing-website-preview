@@ -268,7 +268,9 @@ function PricingOptions({
                 className='text-primary-300 hover:cursor-pointer'
                 onClick={() => {
                   setIsModalOpen(true)
-                  galaxyOnClick(`pricingPage.regionRequest.requestRegionSelect`)
+                  galaxyOnClick(
+                    `pricingPage.regionRequest.requestRegionSelect`
+                  )()
                 }}>
                 Request it
               </span>
