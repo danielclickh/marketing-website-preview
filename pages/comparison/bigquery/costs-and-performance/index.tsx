@@ -222,7 +222,6 @@ export default function BigQueryCostsAndPerformancePage({
             <HeroPerformance
               onSupportClick={() => {
                 setIsModalOpen(true)
-                galaxyOnClick('performance.Event.Name')()
                 galaxyOnClick(
                   `bigqueryCostsAndPerformanceComparisonPage.heroCta.personalizedSupportSelect`
                 )()
