@@ -12,6 +12,7 @@ import {
 } from '../../types/pricing'
 import { CUIButton, CUILink } from '../ClickUI'
 import Markdown from '../Markdown'
+import Modal from '../Modal'
 import { StrapiImage } from '../StrapiElements'
 import { SuiText, SuiTitle } from '../sui'
 import PlanPricing from './PlanPricing'
@@ -504,82 +505,52 @@ function PricingOptions({
           </div>
         </>
       )}
-      <div
-        className={`fixed inset-0 z-50 flex overflow-auto bg-[#323232] bg-opacity-50 transition-opacity ${
-          isModalOpen ? '' : 'pointer-events-none opacity-0'
-        }`}>
-        <div className='m-auto p-4'>
-          <div
-            className='relative w-full max-w-2xl rounded-lg bg-[#323232] p-8 shadow-2xl'
-            ref={modalInnerRef}>
-            <button
-              className='absolute right-4 top-4 opacity-60 transition-opacity hover:opacity-80'
-              type='button'
-              onClick={() => setIsModalOpen(false)}>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='24'
-                height='24'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'>
-                <path d='M18 6 6 18' />
-                <path d='m6 6 12 12' />
-              </svg>
-            </button>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        innerRef={modalInnerRef}>
+        <SuiTitle type='h3'>Request a new Cloud region</SuiTitle>
+        <SuiText size='sm' className='mb-6 mt-4'>
+          We’re adding new Cloud regions all of the time, please select the
+          region that you would like us to support below. We will add you to the
+          wait list and be in contact if we look to add it in the future.
+        </SuiText>
+        {!modalFormSuccess && (
+          <MarketoForm
+            formId={'1241'}
+            clearbitTracking={true}
+            onLoad={() => {
+              setModalFormLoaded(true)
+            }}
+            onSuccess={() => {
+              setModalFormSuccess(true)
+              // Delay needed to allow the ref to update before scrolling
+              setTimeout(() => {
+                modalFormSuccessRef.current?.scrollIntoView({
+                  behavior: 'smooth'
+                })
+              }, 10)
 
-            <SuiTitle type='h3'>Request a new Cloud region</SuiTitle>
-            <SuiText size='sm' className='mb-6 mt-4'>
-              We’re adding new Cloud regions all of the time, please select the
-              region that you would like us to support below. We will add you to
-              the wait list and be in contact if we look to add it in the
-              future.
-            </SuiText>
-            <>
-              {!modalFormSuccess && (
-                <MarketoForm
-                  formId={'1241'}
-                  clearbitTracking={true}
-                  onLoad={() => {
-                    setModalFormLoaded(true)
-                  }}
-                  onSuccess={() => {
-                    setModalFormSuccess(true)
-                    // Delay needed to allow the ref to update before scrolling
-                    setTimeout(() => {
-                      modalFormSuccessRef.current?.scrollIntoView({
-                        behavior: 'smooth'
-                      })
-                    }, 10)
+              return false // Stops page from reloading
+            }}
+          />
+        )}
 
-                    return false // Stops page from reloading
-                  }}
-                />
-              )}
+        {!modalFormLoaded && <div className='text-center'>Loading form...</div>}
 
-              {!modalFormLoaded && (
-                <div className='text-center'>Loading form...</div>
-              )}
+        {modalFormSuccess && (
+          <div ref={modalFormSuccessRef}>
+            <SuiTitle type='h3' className='text-center'>
+              {' '}
+              Thank you for your submission!
+            </SuiTitle>
 
-              {modalFormSuccess && (
-                <div ref={modalFormSuccessRef}>
-                  <SuiTitle type='h3' className='text-center'>
-                    {' '}
-                    Thank you for your submission!
-                  </SuiTitle>
-
-                  <p className='mt-2 text-center text-neutral-200'>
-                    We will be in touch soon.
-                  </p>
-                </div>
-              )}
-            </>
+            <p className='mt-2 text-center text-neutral-200'>
+              We will be in touch soon.
+            </p>
           </div>
-        </div>
-      </div>
+        )}
+      </Modal>
     </div>
   )
 }
