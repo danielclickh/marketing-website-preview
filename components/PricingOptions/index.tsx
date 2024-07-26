@@ -1,6 +1,7 @@
 import { MinusIcon } from '@heroicons/react/outline'
 import { CheckIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { slugify } from '../../lib/utils/strings'
@@ -51,6 +52,9 @@ function PricingOptions({
     router.query.provider ? 'gcp' : 'aws'
   )
 
+  const searchParams = useSearchParams()
+  const modalSearchParam = searchParams.get('modal')
+
   //modal and form
   const [isModalOpen, setIsModalOpen] = useState(false)
   const modalInnerRef = useRef<HTMLDivElement | null>(null)
@@ -58,6 +62,14 @@ function PricingOptions({
   const [modalFormSuccess, setModalFormSuccess] = useState(false)
   const [modalFormLoaded, setModalFormLoaded] = useState(false)
 
+  // Open modal based on query param
+  useEffect(() => {
+    if (modalSearchParam === 'open') {
+      setIsModalOpen(true)
+    }
+  }, [modalSearchParam])
+
+  // Close modal when clicking outside the inner ref
   useClickOutside(modalInnerRef, () => {
     setIsModalOpen(false)
   })
