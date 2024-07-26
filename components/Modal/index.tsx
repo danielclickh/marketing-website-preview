@@ -26,7 +26,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
   return (
     <div
       ref={ref}
-      className={`fixed inset-0 z-50 flex overflow-auto bg-[#323232] bg-opacity-50 transition-opacity ${
+      className={`fixed left-0 right-0 top-0 z-50 flex h-dvh overflow-auto bg-[#323232] bg-opacity-50 transition-opacity ${
         isOpen ? '' : 'pointer-events-none opacity-0'
       }`}>
       <div className='m-auto p-4'>
