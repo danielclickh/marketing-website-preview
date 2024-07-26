@@ -1,8 +1,7 @@
 import { MinusIcon } from '@heroicons/react/outline'
 import { CheckIcon } from '@heroicons/react/solid'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { slugify } from '../../lib/utils/strings'
 import { CloudProviderType } from '../../types/cloud'
 import {
@@ -21,9 +20,6 @@ import styles from './PricingOptions.module.scss'
 import PricingSelector from './PricingSelector'
 import ShowPricing from './ShowPricing'
 import { RegionPricingWithIcon } from './types'
-import { galaxyOnClick } from '../../lib/galaxy/galaxy'
-import MarketoForm from '../../components/MarketoForm'
-import { useClickOutside } from '../../hooks'
 
 function PricingOptions({
   pricingByRegion,
@@ -34,7 +30,8 @@ function PricingOptions({
   storageCostDev,
   computeCostDev,
   storageCostProd,
-  computeCostProd
+  computeCostProd,
+  afterPricingSelector
 }: {
   pricingByRegion: Array<RegionPricing>
   pricingPlans: Array<PricingPlanData>
@@ -45,22 +42,12 @@ function PricingOptions({
   computeCostDev?: number
   storageCostProd?: number
   computeCostProd?: number
+  afterPricingSelector?: React.ReactNode
 }) {
   const router = useRouter()
   const [provider, setProvider] = useState(
     router.query.provider ? 'gcp' : 'aws'
   )
-
-  //modal and form
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const modalInnerRef = useRef<HTMLDivElement | null>(null)
-  const modalFormSuccessRef = useRef<HTMLDivElement | null>(null)
-  const [modalFormSuccess, setModalFormSuccess] = useState(false)
-  const [modalFormLoaded, setModalFormLoaded] = useState(false)
-
-  useClickOutside(modalInnerRef, () => {
-    setIsModalOpen(false)
-  })
 
   const regionList: RegionPricingWithIcon[] = useMemo(() => {
     const orderedRegions = pricingByRegion
@@ -262,19 +249,7 @@ function PricingOptions({
               regionList={regionList}
               onChange={updateRegionParam}
             />
-            <p className='mt-4 text-center text-sm'>
-              Can't find your region?{' '}
-              <span
-                className='text-primary-300 hover:cursor-pointer'
-                onClick={() => {
-                  setIsModalOpen(true)
-                  galaxyOnClick(
-                    `pricingPage.regionRequest.requestRegionSelect`
-                  )()
-                }}>
-                Request it
-              </span>
-            </p>
+            {afterPricingSelector}
           </div>
         ) : (
           <PricingSelector
@@ -504,82 +479,6 @@ function PricingOptions({
           </div>
         </>
       )}
-      <div
-        className={`fixed inset-0 z-50 flex overflow-auto bg-[#323232] bg-opacity-50 transition-opacity ${
-          isModalOpen ? '' : 'pointer-events-none opacity-0'
-        }`}>
-        <div className='m-auto p-4'>
-          <div
-            className='relative w-full max-w-2xl rounded-lg bg-[#323232] p-8 shadow-2xl'
-            ref={modalInnerRef}>
-            <button
-              className='absolute right-4 top-4 opacity-60 transition-opacity hover:opacity-80'
-              type='button'
-              onClick={() => setIsModalOpen(false)}>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='24'
-                height='24'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'>
-                <path d='M18 6 6 18' />
-                <path d='m6 6 12 12' />
-              </svg>
-            </button>
-
-            <SuiTitle type='h3'>Request a new Cloud region</SuiTitle>
-            <SuiText size='sm' className='mb-6 mt-4'>
-              We’re adding new Cloud regions all of the time, please select the
-              region that you would like us to support below. We will add you to
-              the wait list and be in contact if we look to add it in the
-              future.
-            </SuiText>
-            <>
-              {!modalFormSuccess && (
-                <MarketoForm
-                  formId={'1241'}
-                  clearbitTracking={true}
-                  onLoad={() => {
-                    setModalFormLoaded(true)
-                  }}
-                  onSuccess={() => {
-                    setModalFormSuccess(true)
-                    // Delay needed to allow the ref to update before scrolling
-                    setTimeout(() => {
-                      modalFormSuccessRef.current?.scrollIntoView({
-                        behavior: 'smooth'
-                      })
-                    }, 10)
-
-                    return false // Stops page from reloading
-                  }}
-                />
-              )}
-
-              {!modalFormLoaded && (
-                <div className='text-center'>Loading form...</div>
-              )}
-
-              {modalFormSuccess && (
-                <div ref={modalFormSuccessRef}>
-                  <SuiTitle type='h3' className='text-center'>
-                    {' '}
-                    Thank you for your submission!
-                  </SuiTitle>
-
-                  <p className='mt-2 text-center text-neutral-200'>
-                    We will be in touch soon.
-                  </p>
-                </div>
-              )}
-            </>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
