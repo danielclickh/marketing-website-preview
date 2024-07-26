@@ -354,12 +354,14 @@ export default function BigQueryCostsPage({
                 alt='Querying 1 billion rows'
                 width={503}
                 height={346}
+                className='h-auto w-full max-w-full flex-1'
               />
               <Image
                 src={chartCostsStoring}
                 alt='Storing 1 billions row'
                 width={501}
                 height={327}
+                className='h-auto w-full max-w-full flex-1'
               />
             </CUICard.Footer>
           </CUICard>
@@ -391,7 +393,7 @@ export default function BigQueryCostsPage({
         />
 
         <div className='bg-neutral-750 py-16 lg:py-24'>
-          <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between lg:gap-10'>
+          <div className='section-container flex flex-col gap-16 lg:min-h-96 lg:flex-row lg:items-center lg:justify-between lg:gap-10'>
             <div className='space-y-4 border-l-4 border-primary-300 pl-6 lg:max-w-[615px]'>
               <SuiTitle type='h3' className='text-2xl'>
                 Juspay{' '}
@@ -420,20 +422,20 @@ export default function BigQueryCostsPage({
         </div>
 
         <div className='my-16 lg:my-24'>
-          <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between lg:gap-10'>
+          <div className='section-container flex flex-col gap-16 lg:min-h-96 lg:flex-row lg:items-center lg:justify-between lg:gap-10'>
             <div className='space-y-4 border-l-4 border-primary-300 pl-6 lg:max-w-[615px]'>
               <SuiTitle type='h3' className='text-2xl'>
                 ClickHouse is purpose-built to power your most data-intensive
                 applications
               </SuiTitle>
               <SuiText className='opacity-80'>
-                Our parallelized query execution engine, best-in-class
-                compression rates, and column-oriented design deliver
-                unparalleled performance at scale so that you can focus on
-                insights and forget worrying about infrastructure. Whether
-                you’re performing live analysis to drive business outcomes or
-                building interactive user-facing applications, ClickHouse
-                delivers the unparalleled speed-to-insight you can depend on.
+                Achieving sub-second query response times and supporting highly
+                concurrent workloads can be painful in BigQuery, if not
+                impossible. ClickHouse is purpose-built for real-time,
+                large-volume, data analytics. It’s the fastest and most
+                resource-efficient database for analytics and is designed to
+                serve queries with high concurrency without enforcing limits on
+                the number of parallel queries.
               </SuiText>
             </div>
             <Image
@@ -447,7 +449,7 @@ export default function BigQueryCostsPage({
         </div>
 
         <div className='bg-neutral-750 py-16 lg:py-24'>
-          <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between lg:gap-10'>
+          <div className='section-container flex flex-col gap-16 lg:min-h-96 lg:flex-row lg:items-center lg:justify-between lg:gap-10'>
             <div className='space-y-4 border-l-4 border-primary-300 pl-6 lg:max-w-[565px]'>
               <SuiTitle type='h3' className='text-2xl'>
                 We’re cloud agnostic. <br />

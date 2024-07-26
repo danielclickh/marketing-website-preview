@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import Link, { LinkProps } from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
@@ -9,13 +9,18 @@ import HomepageSectionTrustedByAlt from '../../../components/HomepageSectionTrus
 import MarketoForm from '../../../components/MarketoForm'
 import MoreComparisons from '../../../components/MoreComparisons'
 import { StrapiImage } from '../../../components/StrapiElements'
+import { StrapiImageProps } from '../../../components/StrapiElements/types'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { useClickOutside } from '../../../hooks'
 import { findAll, findOne } from '../../../lib/api/strapi'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
-import { ComparisonPage, ComparisonProps } from '../../../types/comparisons'
+import {
+  ComparisonPage,
+  ComparisonProps,
+  RepeatableContent
+} from '../../../types/comparisons'
 import Layout from '../../../components/Layout'
 import { HomepageCustomerStories } from '../../../types/homepage'
 import logos from './logos.png'
@@ -32,7 +37,9 @@ import logoPostgress from './logo-postgress.svg'
 import logoRedshift from './logo-redshift.svg'
 import logoSnowflake from './logo-snowflake.svg'
 import { galaxyOnClick } from '../../../lib/galaxy/galaxy'
-import { SpoofedMarketoObject } from '../../../components/MarketoForm'
+
+const locTracking = 'bigquery-comparison-page'
+
 export interface BigQueryPageProps extends ComparisonProps {
   customerStories: HomepageCustomerStories
 }
@@ -103,7 +110,6 @@ export default function BigQueryPage({
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
-  const [marketoForm, setMarketoForm] = useState<SpoofedMarketoObject>()
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const modalInnerRef = useRef<HTMLDivElement | null>(null)
@@ -122,8 +128,6 @@ export default function BigQueryPage({
   useClickOutside(modalInnerRef, () => {
     setIsModalOpen(false)
   })
-
-  const locTracking = 'bigquery-comparison-page'
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -453,7 +457,7 @@ export default function BigQueryPage({
               <span className='text-primary-300'>yet</span>?
             </SuiTitle>
             <SuiText>
-              When you need multi-statement transactions or extensive joins over
+              If you need multi-statement transactions or extensive joins over
               highly normalized tables.
               <br />
               Both are on our roadmap for 2024.
@@ -477,61 +481,21 @@ export default function BigQueryPage({
               </div>
 
               <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
-                {content.customContent.length > 0 && (
-                  <>
-                    {content.customContent?.map((custom, index) => {
-                      if (!custom.href) {
-                        return null
-                      }
-                      return (
-                        <Link
-                          key={index}
-                          href={`${custom.href}?loc=${locTracking}`}
-                          target='_blank'
-                          className={` hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline`}>
-                          <CUICard className='h-full'>
-                            <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
-                              {custom.Image && (
-                                <StrapiImage
-                                  {...custom.Image}
-                                  sizes='medium'
-                                  alt={custom.Image.alternativeText}
-                                  className='w-full rounded-t-lg xl:h-52 xl:object-cover'
-                                  width={100}
-                                  height={100}
-                                />
-                              )}
-                              <div className='flex flex-col items-start justify-center gap-2 px-6 pt-6'>
-                                <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
-                                  {custom.Category}
-                                </div>
-                                <div className='cursor-pointer font-basier text-xl font-medium leading-tight  text-neutral-100'>
-                                  {custom.Title}
-                                </div>
-                              </div>
-                            </CUICard.Body>
-                            <CUICard.Footer className='flex w-full items-center p-6 text-sm text-neutral-300'>
-                              {custom.Footer}
-                            </CUICard.Footer>
-                          </CUICard>
-                        </Link>
-                      )
-                    })}
-                  </>
-                )}
-
-                {content.RelatedBlogs.length > 0 && (
-                  <>
-                    {content.RelatedBlogs.flatMap((custom) =>
-                      custom.blog_posts.map((blog) => {
-                        const urlWithLoc = `${blog.slug}?loc=${locTracking}`
-                        return (
-                          <BlogPost key={blog.id} {...blog} slug={urlWithLoc} />
-                        )
-                      })
-                    )}
-                  </>
-                )}
+                {combineRenderedContent(
+                  content.customContent,
+                  content.RelatedBlogs
+                ).map((card, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={`
+                      ${index > 1 ? 'hidden md:block' : ''}
+                      ${index > 2 ? 'lg:hidden' : ''}
+                    `}>
+                      {card}
+                    </div>
+                  )
+                })}
               </div>
             </div>
           )
@@ -558,7 +522,7 @@ export default function BigQueryPage({
                   clearbitTracking={true}
                   onLoad={(formObject) => {
                     setFormLoaded(true)
-                    setMarketoForm(formObject)
+
                     // Set field values
                     formObject.addHiddenFields({
                       miscBlankField17: 'organic',
@@ -661,7 +625,7 @@ export default function BigQueryPage({
                   clearbitTracking={true}
                   onLoad={(formObject) => {
                     setModalFormLoaded(true)
-                    setMarketoForm(formObject)
+
                     // Set field values
                     formObject.addHiddenFields({
                       miscBlankField17: 'organic',
@@ -742,4 +706,83 @@ function NoIcon() {
       />
     </svg>
   )
+}
+
+function CustomContentCard({
+  href,
+  category,
+  title,
+  footer,
+  image
+}: {
+  href: LinkProps['href']
+  category: string
+  title: string
+  footer: string
+  image?: Omit<
+    StrapiImageProps,
+    'sizes' | 'alt' | 'className' | 'width' | 'height'
+  >
+}) {
+  return (
+    <Link
+      href={href}
+      target='_blank'
+      className={` hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline`}>
+      <CUICard className='h-full'>
+        <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
+          {image && (
+            <StrapiImage
+              {...image}
+              sizes='medium'
+              alt={image.alternativeText}
+              className='w-full rounded-t-lg xl:h-52 xl:object-cover'
+              width={100}
+              height={100}
+            />
+          )}
+          <div className='flex flex-col items-start justify-center gap-2 px-6 pt-6'>
+            <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
+              {category}
+            </div>
+            <div className='cursor-pointer font-basier text-xl font-medium leading-tight  text-neutral-100'>
+              {title}
+            </div>
+          </div>
+        </CUICard.Body>
+        <CUICard.Footer className='flex w-full items-center p-6 text-sm text-neutral-300'>
+          {footer}
+        </CUICard.Footer>
+      </CUICard>
+    </Link>
+  )
+}
+
+function combineRenderedContent(
+  custom: RepeatableContent['customContent'],
+  related: RepeatableContent['RelatedBlogs']
+) {
+  const customRendered = custom
+    .filter((content) => !!content.href)
+    .map((custom, index) => {
+      return (
+        <CustomContentCard
+          key={index}
+          href={`${custom.href}?loc=${locTracking}`}
+          image={custom.Image}
+          category={custom.Category}
+          title={custom.Title}
+          footer={custom.Footer}
+        />
+      )
+    })
+
+  const relatedRendered = related.flatMap((custom) => {
+    return custom.blog_posts.map((blog) => {
+      const urlWithLoc = `${blog.slug}?loc=${locTracking}`
+      return <BlogPost key={blog.id} {...blog} slug={urlWithLoc} />
+    })
+  })
+
+  return [...customRendered, ...relatedRendered]
 }

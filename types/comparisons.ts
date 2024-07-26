@@ -15,7 +15,7 @@ interface Painpoint {
   }
 }
 
-interface RepeatableContent {
+export interface RepeatableContent {
   SectionTitle: string
   Category: string
   Footer: string

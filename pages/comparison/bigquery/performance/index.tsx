@@ -349,13 +349,13 @@ export default function BigQueryPerformancePage({
                 Achieve better performance with ClickHouse. And improve your
                 cost-efficiency, too.
               </SuiTitle>
-              <SuiText>
-                BigQuery is a traditional data warehouse that’s optimized for
-                ad-hoc and infrequent queries. Their pricing model - which
-                charges for BigQuery “slots” - is calculated based on the amount
-                of data scanned to perform a query. This can become exorbitantly
-                expensive for analytics workloads, particularly where
-                applications invoke queries and concurrency is high.
+              <SuiText className='lg:px-6'>
+                Achieving sub-second query response times and supporting highly
+                concurrent workloads can be painful in BigQuery, if not
+                impossible. ClickHouse is purpose-built for real-time,
+                large-volume, data analytics and is designed to serve queries
+                with high concurrency without enforcing limits on the number of
+                parallel queries.
               </SuiText>
             </CUICard.Body>
             <CUICard.Footer className='flex flex-col items-center gap-6 sm:gap-10 md:flex-row md:items-end md:justify-center'>
@@ -364,12 +364,14 @@ export default function BigQueryPerformancePage({
                 alt='Querying 1 billion rows full table scan'
                 width={501}
                 height={346}
+                className='h-auto w-full flex-1'
               />
               <Image
                 src={chartPerformanceIndexSupport}
                 alt='Storing 1 billions row with index support'
                 width={503}
                 height={346}
+                className='h-auto w-full max-w-full flex-1'
               />
             </CUICard.Footer>
           </CUICard>
@@ -401,7 +403,36 @@ export default function BigQueryPerformancePage({
         />
 
         <div className='bg-neutral-750 py-16 lg:py-24'>
-          <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between lg:gap-10'>
+          <div className='section-container flex flex-col gap-16 lg:min-h-96 lg:flex-row lg:items-center lg:justify-between lg:gap-10'>
+            <div className='space-y-4 border-l-4 border-primary-300 pl-6 lg:max-w-[615px]'>
+              <SuiTitle type='h3' className='text-2xl'>
+                Juspay{' '}
+                <span className='tilted tilted-sm tilted-yellow'>
+                  <span className='tilted-content'>cut costs by 90%</span>
+                </span>{' '}
+                after <br /> migrating to ClickHouse.
+              </SuiTitle>
+              <SuiText className='opacity-80'>
+                BigQuery is a traditional data warehouse that’s optimized for
+                ad-hoc and infrequent queries. Their pricing model - which
+                charges for BigQuery “slots” - is calculated based on the amount
+                of data scanned to perform a query. This can become exorbitantly
+                expensive for analytics workloads, particularly where
+                applications invoke queries and concurrency is high.
+              </SuiText>
+            </div>
+            <Image
+              src={chartPerformanceQuerying}
+              alt='Querying 1 billion rows'
+              width={501}
+              height={326}
+              className='order-first mx-auto lg:order-last lg:mx-0'
+            />
+          </div>
+        </div>
+
+        <div className='my-16 lg:my-24'>
+          <div className='section-container flex flex-col gap-16 lg:min-h-96 lg:flex-row lg:items-center lg:justify-between lg:gap-10'>
             <div className='space-y-4 border-l-4 border-primary-300 pl-6 lg:max-w-[615px]'>
               <SuiTitle type='h3' className='text-2xl'>
                 ClickHouse is purpose-built to power your most data-intensive
@@ -422,41 +453,13 @@ export default function BigQueryPerformancePage({
               alt='Storing 1 billion rows'
               width={501}
               height={346}
-              className='order-first mx-auto lg:order-last lg:mx-0'
-            />
-          </div>
-        </div>
-        <div className='my-16 lg:my-24'>
-          <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between lg:gap-10'>
-            <div className='space-y-4 border-l-4 border-primary-300 pl-6 lg:max-w-[615px]'>
-              <SuiTitle type='h3' className='text-2xl'>
-                Juspay{' '}
-                <span className='tilted tilted-sm tilted-yellow'>
-                  <span className='tilted-content'>cut costs by 90%</span>
-                </span>{' '}
-                after <br /> migrating to ClickHouse.
-              </SuiTitle>
-              <SuiText className='opacity-80'>
-                BigQuery’s pricing model can lead companies to artificially
-                constrain usage or access to data, leading to lower ROI.
-                ClickHouse is designed to manage huge volumes of data
-                efficiently. Its efficient management of resources helps to
-                maximize its cost-effectiveness. ClickHouse was designed from
-                the ground up for best-in-class resource utilization.
-              </SuiText>
-            </div>
-            <Image
-              src={chartPerformanceQuerying}
-              alt='Querying 1 billion rows'
-              width={501}
-              height={326}
               className='order-first mx-auto lg:mx-0'
             />
           </div>
         </div>
 
         <div className='bg-neutral-750 py-16 lg:py-24'>
-          <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between lg:gap-10'>
+          <div className='section-container flex flex-col gap-16 lg:min-h-96 lg:flex-row lg:items-center lg:justify-between lg:gap-10'>
             <div className='space-y-4 border-l-4 border-primary-300 pl-6 lg:max-w-[565px]'>
               <SuiTitle type='h3' className='text-2xl'>
                 We’re cloud agnostic. <br />
