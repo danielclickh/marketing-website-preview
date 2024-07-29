@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import React, { useRef, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+import React, { useEffect, useRef, useState } from 'react'
 import { CUIButton } from '../../components/ClickUI'
 import Layout from '../../components/Layout'
 import Markdown from '../../components/Markdown'
@@ -99,11 +100,20 @@ function PricingPage({
   galaxyOnPage('pricingPage')
 
   //modal and form
+  const searchParams = useSearchParams()
+  const modalSearchParam = searchParams.get('modal')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const modalInnerRef = useRef<HTMLDivElement | null>(null)
   const modalFormSuccessRef = useRef<HTMLDivElement | null>(null)
   const [modalFormSuccess, setModalFormSuccess] = useState(false)
   const [modalFormLoaded, setModalFormLoaded] = useState(false)
+
+  // Open modal based on query param
+  useEffect(() => {
+    if (modalSearchParam === 'open') {
+      setIsModalOpen(true)
+    }
+  }, [modalSearchParam])
 
   useClickOutside(modalInnerRef, () => {
     setIsModalOpen(false)
