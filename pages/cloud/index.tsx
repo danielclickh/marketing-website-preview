@@ -66,7 +66,10 @@ export default function CloudPage({
   const [windowWidth, setWindowWidth] = useState(0)
   const { ctaButton } = hero
   const integrationsRef = useRef(null)
-  const isInView = useInView(integrationsRef)
+  const isInView = useInView(integrationsRef, {
+    amount: 'some',
+    once: true
+  })
 
   galaxyOnPage('productCloudPage')
   useEffect(() => {
@@ -261,7 +264,9 @@ export default function CloudPage({
                 .
               </div>
 
-              <div className='relative z-20 mx-auto mt-16 md:max-w-[552px]'>
+              <div
+                className='relative z-20 mx-auto mt-16 md:max-w-[552px]'
+                ref={integrationsRef}>
                 <AnimatedIntegrationLogos
                   play={isInView && windowWidth > 768}
                 />
@@ -276,9 +281,7 @@ export default function CloudPage({
                 <SuiTitle type='h2' className='mb-6 text-center'>
                   ClickPipes
                 </SuiTitle>
-                <div
-                  className='mx-auto max-w-3xl text-center leading-normal text-neutral-200'
-                  ref={integrationsRef}>
+                <div className='mx-auto max-w-3xl text-center leading-normal text-neutral-200'>
                   ClickPipes is a managed integration service that makes
                   ingesting data from a diverse set of sources as simple as
                   clicking a few buttons, offering the easiest and most
