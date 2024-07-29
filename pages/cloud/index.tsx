@@ -265,18 +265,12 @@ export default function CloudPage({
                 <AnimatedIntegrationLogos
                   play={isInView && windowWidth > 768}
                 />
-                <motion.div
-                  className='absolute left-8 top-12 z-[5] hidden opacity-90 lg:block'
-                  initial={{ opacity: 0 }}
-                  transition={{
-                    ease: 'easeOut',
-                    duration: 6
-                  }}
-                  whileInView={{
-                    opacity: 1
-                  }}>
+                <div
+                  className={`absolute -top-1 left-1/2 z-[5] hidden -translate-x-1/2 transition-opacity delay-1000 duration-1000 lg:block ${
+                    isInView ? '' : 'opacity-0'
+                  }`}>
                   <Lines />
-                </motion.div>
+                </div>
               </div>
               <div className='relative z-20 mt-28 w-full pb-24'>
                 <SuiTitle type='h2' className='mb-6 text-center'>
