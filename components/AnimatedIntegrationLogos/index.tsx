@@ -27,7 +27,7 @@ export default function AnimatedIntegrationLogos({ play }: { play: boolean }) {
           <SuiText size='xs'>
             Fast, simple and cost effective Postgres replication using PeerDB.{' '}
             <Link
-              href='https://clickhouse.com/blog/clickhouse-welcomes-peerdb-adding-the-fastest-postgres-cdc-to-the-fastest-olap-database'
+              href='/blog/clickhouse-welcomes-peerdb-adding-the-fastest-postgres-cdc-to-the-fastest-olap-database'
               className='text-primary-300 hover:underline'>
               <div className='absolute inset-0 transition-colors hover:bg-white/5' />
               Learn more
