@@ -78,12 +78,14 @@ export const PricingCalculator: React.FC<{
   pricingPlans: PricingPlanData[]
   meteredPricing: MeteredPricing
   hero: any
+  afterPricingSelector?: React.ReactNode
 }> = ({
   pricingByRegion,
   cloudProviders,
   pricingPlans,
   meteredPricing,
-  hero
+  hero,
+  afterPricingSelector
 }) => {
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -634,6 +636,7 @@ export const PricingCalculator: React.FC<{
           cloudProviders={cloudProviders}
           pricingPlans={pricingPlans}
           meteredPricing={meteredPricing}
+          afterPricingSelector={afterPricingSelector}
         />
       )}
       <HRSeparator className='mt-10 max-w-[384px] pb-10 ' />
