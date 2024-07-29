@@ -80,8 +80,8 @@ export default function AnimatedIntegrationLogos({ play }: { play: boolean }) {
       />
       <Tile
         logo={{
-          src: '/images/cloud/integrations/Tableau.svg',
-          alt: 'tableau'
+          src: '/images/cloud/integrations/tableau.svg',
+          alt: 'Tableau'
         }}
         fade={play}
       />
