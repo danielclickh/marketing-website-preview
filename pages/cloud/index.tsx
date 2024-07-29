@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-
+import AnimatedIntegrationLogos from '../../components/AnimatedIntegrationLogos'
 import { SuiText, SuiTitle } from '../../components/sui'
 import CloudProviders from '../../components/CloudProviders'
-
 import { findOne } from '../../lib/api/strapi'
 import BulletPoint from '../../components/BulletPoint'
 import { CloudData } from '../../types/cloud'
@@ -12,7 +11,6 @@ import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { CUIButton, CUICard } from '../../components/ClickUI'
 import Image from 'next/image'
 import HRSeparator from '../../components/HRSeparator'
-import integrations from './integrations.json'
 import features from './features.json'
 import featureBlocks from './feature_blocks.json'
 import { ChevronRightIcon } from '@heroicons/react/solid'
@@ -20,13 +18,8 @@ import GetStartedFree from '../../components/GetStartedFree'
 import LogoCarousel from '../../components/LogoCarousel'
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
-import ClickPipesIntegrationImage from '../../components/ClickPipesAnimation/ClickPipesIntegrationImage'
 import Lines from '../../components/ClickPipesAnimation/Lines'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
-
-function getRandomDelay(min: number, max: number): number {
-  return Math.random() * (max - min) + min
-}
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -268,55 +261,10 @@ export default function CloudPage({
                 .
               </div>
 
-              <div className='relative z-20 mx-auto mt-16 flex flex-wrap justify-center gap-6 md:max-w-[552px]'>
-                {integrations.map((integration) => {
-                  const shouldAnimate = isInView && windowWidth > 768
-                  return (
-                    <>
-                      {shouldAnimate ? (
-                        <motion.div
-                          transition={{
-                            duration: 1,
-                            delay: getRandomDelay(0.2, 1),
-                            ease: [0, 0.71, 0.2, 1.01]
-                          }}
-                          animate={
-                            isInView
-                              ? integration.fadeOnLoad
-                                ? { opacity: 0.1 }
-                                : { opacity: 1 }
-                              : ''
-                          }
-                          className={`${
-                            integration.fadeOnLoad ? 'z-10' : 'z-20'
-                          } relative rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
-                          key={integration.name}>
-                          {integration.badge && (
-                            <div className='absolute -right-2 -top-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
-                              {integration.badge}
-                            </div>
-                          )}
-                          <ClickPipesIntegrationImage
-                            integration={integration}
-                          />
-                        </motion.div>
-                      ) : (
-                        <div
-                          className={`relative z-20 rounded-md border border-[#414141]/80 bg-neutral-900 p-4 hover:bg-neutral-800`}
-                          key={integration.name}>
-                          {integration.badge && (
-                            <div className='absolute -right-2 -top-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
-                              {integration.badge}
-                            </div>
-                          )}
-                          <ClickPipesIntegrationImage
-                            integration={integration}
-                          />
-                        </div>
-                      )}
-                    </>
-                  )
-                })}
+              <div className='relative z-20 mx-auto mt-16 md:max-w-[552px]'>
+                <AnimatedIntegrationLogos
+                  play={isInView && windowWidth > 768}
+                />
                 <motion.div
                   className='absolute left-8 top-12 z-[5] hidden opacity-90 lg:block'
                   initial={{ opacity: 0 }}
