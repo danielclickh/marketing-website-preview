@@ -53,11 +53,11 @@ export default function Header({ github: { stars } }: HeaderProps) {
           isScrolled ? 'md-mid:bg-neutral-900/80' : 'md-mid:bg-neutral-900/10'
         } fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur transition-colors`}>
         {/* Announcement banner */}
-        {false && (
+        {true && (
           <LinkWithArrow
-            href='/blog/clickhouse-cloud-is-now-on-azure-in-public-beta?loc=eyebrow'
+            href='/blog/clickhouse-welcomes-peerdb-adding-the-fastest-postgres-cdc-to-the-fastest-olap-database?loc=eyebrow'
             className='relative z-50 block w-full bg-primary-300 px-4 py-1 text-center text-sm font-medium text-primary-900'>
-            ClickHouse Cloud on Microsoft Azure: Now in Beta
+            Ingest your Postgres data in minutes - ClickHouse joins forces with PeerDB
           </LinkWithArrow>
         )}
 
