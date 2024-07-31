@@ -31,6 +31,7 @@ import iconHandCoins from './icon-hand-coins.svg'
 import chartLatency from './chart-latency.svg'
 import chartCosts from './chart-costs.svg'
 import logoClickhouse from '../../../public/logo-full.svg'
+import logoAdevinta from './logoAdevinta.svg'
 import logoBigquery from './logo-bigquery.svg'
 import logoBlock from './logo-block.png'
 import logoPostgress from './logo-postgress.svg'
@@ -308,7 +309,7 @@ export default function BigQueryPage({
           <Image src={iconGuage} alt='Icon' width={36} height={24} />
           <div className='flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between'>
             <div className='grid grid-cols-1 gap-6 lg:max-w-2xl'>
-              <SuiTitle type='h2'>BigQuery’s Query Latency</SuiTitle>
+              <SuiTitle type='h2'>BigQuery’s query latency</SuiTitle>
               <SuiText>
                 Achieving sub-second query response times and supporting highly
                 concurrent workloads can be painful in BigQuery, if not
@@ -336,7 +337,7 @@ export default function BigQueryPage({
             />
           </div>
           <CUICard className='gap-6 !bg-[#323232] p-6 lg:flex-row lg:items-stretch lg:pr-10'>
-            <div className='flex items-center gap-6 self-stretch lg:max-w-3xl'>
+            <div className='flex flex-col items-center gap-6 self-stretch sm:flex-row lg:max-w-3xl'>
               <Image
                 src={iconQuote}
                 alt='Quote'
@@ -350,7 +351,7 @@ export default function BigQueryPage({
                   end-user facing analytics capabilities with low latency and
                   high throughput.{' '}
                   <Link
-                    href={`/blog/hifis-migration-from-bigquery-to-clickhouse?loc=${locTracking}`}
+                    href={`/blog/serving-real-time-analytics-across-marketplaces-at-adevinta?loc=${locTracking}`}
                     className='text-primary-300 hover:underline'>
                     Read blog
                   </Link>
@@ -358,11 +359,11 @@ export default function BigQueryPage({
               </div>
             </div>
             <Image
-              src={logoBlock}
-              alt='Block logo'
-              width={61}
-              height={86}
-              className='flex-shrink flex-grow-0 lg:ml-auto'
+              src={logoAdevinta}
+              alt='Adevinta logo'
+              width={110}
+              height={25}
+              className='mr-auto flex-shrink flex-grow-0 lg:ml-auto lg:mr-0'
             />
           </CUICard>
         </CUICard>
@@ -372,7 +373,7 @@ export default function BigQueryPage({
           <Image src={iconHandCoins} alt='Icon' width={38} height={30} />
           <div className='flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between'>
             <div className='grid grid-cols-1 gap-6 lg:max-w-2xl'>
-              <SuiTitle type='h2'>BigQuery’s High Cost</SuiTitle>
+              <SuiTitle type='h2'>BigQuery’s high cost</SuiTitle>
               <SuiText>
                 BigQuery’s pricing model can lead companies to artificially
                 constrain usage or access to data, leading to lower ROI.
@@ -409,7 +410,7 @@ export default function BigQueryPage({
             />
           </div>
           <CUICard className='gap-6 !bg-[#323232] p-6 lg:flex-row lg:pr-10'>
-            <div className='flex items-center gap-6 self-stretch lg:max-w-3xl'>
+            <div className='flex flex-col items-center gap-6 self-stretch sm:flex-row lg:max-w-3xl'>
               <Image
                 src={iconQuote}
                 alt='Quote'
@@ -442,7 +443,7 @@ export default function BigQueryPage({
               alt='Block logo'
               width={61}
               height={86}
-              className='flex-shrink flex-grow-0 lg:ml-auto'
+              className='mr-auto flex-shrink flex-grow-0 lg:ml-auto lg:mr-0'
             />
           </CUICard>
         </CUICard>

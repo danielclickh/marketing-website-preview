@@ -1,10 +1,12 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { CUIButton, CUICard } from '../../../../components/ClickUI'
 import Footer from '../../../../components/Footer'
 import HomepageSectionTrustedByAlt from '../../../../components/HomepageSectionTrustedByAlt'
 import MarketoForm from '../../../../components/MarketoForm'
+import Nbsp from '../../../../components/Nbsp'
 import QuotesCarousel from '../../../../components/QuotesCarousel'
 import SeoContainer from '../../../../components/SeoContainer'
 import StatsHero from '../../../../components/StatsHero'
@@ -26,7 +28,7 @@ import logoGcs from './logo-gcs.svg'
 import logoAws from './logo-aws.svg'
 import logoAzure from './logo-azure.svg'
 import logoAdevinta from './logo-adevinta.svg'
-import logoBlock from './logo-block.png'
+import logoPerfect from './logo-perfect.svg'
 import iconBullseye from './icon-bullseye.svg'
 import iconSpeedometer from './icon-speedometer.svg'
 import iconCoins from './icon-coins.svg'
@@ -370,8 +372,19 @@ export default function BigQueryCostsPage({
         <QuotesCarousel
           quotes={[
             {
-              quote:
-                'We needed a solution that could scale, but also provide end-user facing analytics capabilities with low latency and high throughput.”',
+              quote: (
+                <>
+                  "In comparison, BigQuery was 2x more expensive due to its
+                  pricing model that charges based on bytes scanned"{' '}
+                  <Link
+                    href={`/blog/serving-real-time-analytics-across-marketplaces-at-adevinta?loc=${locTracking}`}
+                    className='text-primary-300 hover:underline'>
+                    Read
+                    <Nbsp />
+                    blog
+                  </Link>
+                </>
+              ),
               logo: {
                 src: logoAdevinta,
                 alt: 'Adevinta',
@@ -380,13 +393,26 @@ export default function BigQueryCostsPage({
               }
             },
             {
-              quote:
-                'We needed a solution that could scale, but also provide end-user facing analytics capabilities with low latency and high throughput.',
+              quote: (
+                <>
+                  “We have saved costs, savings not to be sniffed at, but that
+                  was not the driving factor. This was a qualitative step. We
+                  just could not do the things we wanted until we had ClickHouse
+                  and that is why we’re so excited about it.”{' '}
+                  <Link
+                    href={`/blog/prefect-event-driven-workflow-orchestration-powered-by-clickhouse?loc=${locTracking}`}
+                    className='text-primary-300 hover:underline'>
+                    Read
+                    <Nbsp />
+                    blog
+                  </Link>
+                </>
+              ),
               logo: {
-                src: logoBlock,
-                alt: 'Block',
-                width: 200,
-                height: 40
+                src: logoPerfect,
+                alt: 'Perfect',
+                width: 212,
+                height: 59
               }
             }
           ]}
