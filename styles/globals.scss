@@ -355,13 +355,20 @@ body {
 
 .tilted {
   @apply relative whitespace-nowrap;
+
   &:before {
     content: "";
     @apply absolute inset-0 -skew-y-3;
   }
+
+  &.tilted-sm:before {
+    @apply -skew-y-1;
+  }
+
   .tilted-content {
     @apply relative p-2;
   }
+
   &.non-tilted-md::before {
     @screen md {
       @apply skew-y-0;
