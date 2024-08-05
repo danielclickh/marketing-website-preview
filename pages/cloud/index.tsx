@@ -394,7 +394,7 @@ export default function CloudPage({
                 <Link
                   href='/cloud/bring-your-own-cloud'
                   className='inline-block rounded-full border border-neutral-900 px-5 py-2  font-semibold uppercase'>
-                  Coming soon
+                  Private Preview
                 </Link>
               </div>
               <div className='flip-selection'>
