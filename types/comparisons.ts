@@ -15,7 +15,7 @@ interface Painpoint {
   }
 }
 
-interface RepeatableContent {
+export interface RepeatableContent {
   SectionTitle: string
   Category: string
   Footer: string
@@ -42,7 +42,7 @@ export interface BigNumber {
   Text: string
 }
 
-interface ComparisonPage {
+export interface ComparisonPage {
   Title: string
   image: StrapiImageType
   HeroDescription: string
@@ -63,7 +63,8 @@ interface ComparisonPage {
   ]
   Content: [RepeatableContent]
   BigNumbers: [BigNumber]
-  slug?: string
+  slug: string
+  seo: CommonProps['seo']
 }
 
 export interface ComparisonProps extends CommonProps {

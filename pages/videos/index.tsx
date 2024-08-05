@@ -47,6 +47,9 @@ export default function VideosPage({
   const router = useRouter()
 
   const scrollToContainer = useRef<HTMLDivElement>(null)
+
+  const inputRef = useRef<null | HTMLInputElement>(null)
+
   const [loading, setLoading] = useState<boolean>(false)
 
   const [response, setResponse] = useState<null | VideosApiResponse>(
@@ -80,7 +83,11 @@ export default function VideosPage({
     text: 'View All',
     onClick: () => {
       setPage(1)
+      setSearch(null)
       setCategory(null)
+      if (inputRef.current) {
+        inputRef.current.value = ''
+      }
     },
     selected: !category
   })
@@ -153,6 +160,7 @@ export default function VideosPage({
             htmlFor='search'
             className='mx-auto mb-6 md:max-w-md lg:mb-8'
             onChange={useDebounce(onSearchChange, 500)}
+            inputRef={inputRef}
           />
           <CategorySelector options={categoryList} />
         </div>

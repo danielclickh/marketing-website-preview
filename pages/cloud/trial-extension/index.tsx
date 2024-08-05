@@ -63,6 +63,12 @@ export default function TrialExtensionPage({
               Fill in the form below, and we'll let you know once your trial is
               extended.
             </div>
+            {!orgId && (
+              <div className='mx-auto mt-6 max-w-3xl text-neutral-200'>
+                Your organization ID can be found on clickhouse.cloud on the
+                Admin page.
+              </div>
+            )}
           </div>
 
           <div className='container mx-auto flex flex-col bg-opacity-10 px-8 pb-8 pt-6 text-center md:bg-no-repeat 2xl:px-0'>
@@ -91,7 +97,11 @@ export default function TrialExtensionPage({
                     formObject.setValues({
                       miscBlankField14: orgId || '',
                       Email: email || '',
-                      programmessagefull: `Please extend my trial for org ID ${orgId}`
+                      programmessagefull: `${
+                        orgId
+                          ? `Please extend my trial for organization ID: ${orgId}`
+                          : 'Please extend my trial'
+                      }`
                     })
                   }}
                   onSuccess={() => {

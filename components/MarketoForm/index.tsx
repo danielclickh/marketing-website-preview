@@ -176,8 +176,7 @@ export default function MarketoForm({
       switch (eventType) {
         case `${instanceEventPrefix}-onResize`:
           const height = eventData?.height
-          const scrollHeight = eventData?.scrollHeight
-          setIframeHeight(scrollHeight || height)
+          setIframeHeight(height)
           break
         case `${instanceEventPrefix}-onLoad`:
           setFormLoaded(true)

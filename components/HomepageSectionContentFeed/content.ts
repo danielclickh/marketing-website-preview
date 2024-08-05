@@ -61,12 +61,19 @@ export function getCategories(): EntryCategory[] {
 
 export function getContent(): Entry[] {
   return [
+    // Langchain
+    {
+      featured: false,
+      body: `“We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse.” [Read blog](/blog/langchain-why-we-choose-clickhouse-to-power-langchain?loc=homepage)`,
+      logo: LogoLangchain,
+      categories: ['Real-time analytics']
+    },
     // Cloudflare
     {
       featured: true,
       body: `“ClickHouse helps us efficiently and reliably analyze logs across trillions of Internet requests to identify malicious traffic and provide customers with rich analytics.” [Read blog](https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/)`,
       logo: LogoCloudflare,
-      categories: ['Observability'],
+      categories: ['Real-time analytics'],
       stats: [
         {
           icon: IconFrame,
@@ -91,7 +98,7 @@ export function getContent(): Entry[] {
       featured: false,
       body: `“At Sony LIV, we ingest tens of millions of video streaming events into ClickHouse Cloud and run queries to generate complex dashboards for analysis. This allows our operations team to monitor, alert & troubleshoot the QOS and QOE of our customers in real-time. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.”`,
       logo: LogoSony,
-      categories: ['Observability'],
+      categories: ['Business intelligence'],
       stats: [
         {
           icon: IconStack,
@@ -183,7 +190,7 @@ export function getContent(): Entry[] {
       featured: true,
       body: `“We needed something to slice and dice real-time data, like rides and driver hours across cities and regions where Lyft runs. Using ClickHouse resulted into a lot of performance benefits for us with huge cost savings for the org.” [Read blog](https://eng.lyft.com/druid-deprecation-and-clickhouse-adoption-at-lyft-120af37651fd)`,
       logo: LogoLyft,
-      categories: ['Real-time analytics'],
+      categories: ['Business intelligence'],
       embed: `<iframe src="https://player.vimeo.com/video/903236689?h=62b37e3795&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&autoplay=0" frameBorder='0' allow='autoplay; fullscreen; picture-in-picture'></iframe>`,
       stats: [
         {
@@ -248,13 +255,7 @@ export function getContent(): Entry[] {
         }
       ]
     },
-    // Langchain
-    {
-      featured: false,
-      body: `“We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse.” [Read blog](/blog/langchain-why-we-choose-clickhouse-to-power-langchain?loc=homepage)`,
-      logo: LogoLangchain,
-      categories: ['ML & GenAI']
-    },
+
     // Corsearch
     {
       featured: false,
@@ -315,7 +316,7 @@ export function getContent(): Entry[] {
       featured: false,
       body: `"With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud. We got several seconds query time and no materialized views. With ClickHouse Cloud’s production instance, we are getting sub-second query time along with materialized views. The decision to switch was a no-brainer for us.” [Read blog](/blog/adgreetz-processes-millions-of-daily-ad-impressions?loc=homepage)`,
       logo: LogoAdgreetz,
-      categories: ['Business intelligence', 'Marketing & sales'],
+      categories: ['Marketing & sales'],
       stats: [
         {
           icon: IconHandCoins,
@@ -441,13 +442,6 @@ export function getContent(): Entry[] {
       featured: false,
       body: `"We evaluated more than a dozen different big data systems before settling on ClickHouse. No system comes close to ClickHouse when it comes to the flexibility ClickHouse provides" [Read blog](/blog/clickhouse-powers-dassanas-security-data-lake?loc=homepage)`,
       logo: LogoDassana,
-      categories: ['Fraud & cybersecurity']
-    },
-    // IBM
-    {
-      featured: false,
-      body: `“QRadar Log Insights uses a modern open-source OLAP data warehouse, ClickHouse, which ingests, automatically indexes, searches and analyzes large datasets at sub-second speed. You get near real-time visibility and insights from your ingested data.” <a href="https://www.ibm.com/blog/closing-breach-window-from-data-to-action/?utm_source=clickhouse" target="_blank">Read blog</a>`,
-      logo: LogoIBM,
       categories: ['Fraud & cybersecurity']
     },
 

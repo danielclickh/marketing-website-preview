@@ -1,16 +1,25 @@
-import {GetStaticProps} from 'next'
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import React from 'react'
-import {CUIButton} from '../../components/ClickUI'
+import { useSearchParams } from 'next/navigation'
+import React, { useEffect, useRef, useState } from 'react'
+import { CUIButton } from '../../components/ClickUI'
 import Layout from '../../components/Layout'
 import Markdown from '../../components/Markdown'
-import {PricingCalculator} from '../../components/PricingCalculator'
-import {SuiTitle} from '../../components/sui'
-import {findAll, findOne} from '../../lib/api/strapi'
-import {getCommonProps} from '../../lib/utils/getCommonProps'
-import {PricingData, PricingPageProps, PricingPlanData, RegionPricing} from '../../types/pricing'
+import MarketoForm from '../../components/MarketoForm'
+import Modal from '../../components/Modal'
+import { PricingCalculator } from '../../components/PricingCalculator'
+import { SuiText, SuiTitle } from '../../components/sui'
+import { useClickOutside } from '../../hooks'
+import { findAll, findOne } from '../../lib/api/strapi'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import {
+  PricingData,
+  PricingPageProps,
+  PricingPlanData,
+  RegionPricing
+} from '../../types/pricing'
 import philosophy from './philosophy.json'
-import {galaxyOnPage} from "../../lib/galaxy/galaxy";
+import { galaxyOnClick, galaxyOnPage } from '../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<PricingPageProps> =
   async function getStaticProps() {
@@ -88,8 +97,27 @@ function PricingPage({
   headerData,
   footerData
 }: PricingPageProps) {
+  galaxyOnPage('pricingPage')
 
-    galaxyOnPage('pricingPage');
+  //modal and form
+  const searchParams = useSearchParams()
+  const modalSearchParam = searchParams.get('modal')
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const modalInnerRef = useRef<HTMLDivElement | null>(null)
+  const modalFormSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [modalFormSuccess, setModalFormSuccess] = useState(false)
+  const [modalFormLoaded, setModalFormLoaded] = useState(false)
+
+  // Open modal based on query param
+  useEffect(() => {
+    if (modalSearchParam === 'open') {
+      setIsModalOpen(true)
+    }
+  }, [modalSearchParam])
+
+  useClickOutside(modalInnerRef, () => {
+    setIsModalOpen(false)
+  })
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -118,11 +146,26 @@ function PricingPage({
                   pricingByRegion={pricingByRegion}
                   cloudProviders={cloudProviders}
                   pricingPlans={pricingPlans}
+                  afterPricingSelector={
+                    <p className='mt-4 text-center text-sm'>
+                      Can't find your region?{' '}
+                      <span
+                        className='text-primary-300 hover:cursor-pointer'
+                        onClick={() => {
+                          setIsModalOpen(true)
+                          galaxyOnClick(
+                            `pricingPage.regionRequest.requestRegionSelect`
+                          )()
+                        }}>
+                        Request it
+                      </span>
+                    </p>
+                  }
                 />
               )}
             </div>
           </div>
-          <div className='clip-inverted-triangle bg-shadow-element pt-10 pb-60'></div>
+          <div className='clip-inverted-triangle bg-shadow-element pb-60 pt-10'></div>
           <div className='philosophy -mt-1 bg-primary-300 text-neutral-900'>
             <div className='flip-selection mx-auto max-w-7xl px-4 pb-16 sm:px-8 2xl:px-0'>
               <SuiTitle
@@ -159,7 +202,7 @@ function PricingPage({
           <div className='section-container bg-shadow-element my-24'>
             <div className='relative mx-auto flex w-full flex-col items-center gap-x-4 rounded-xl border border-neutral-725/80 bg-neutral-750/50 px-4 py-10 text-neutral-0 md:py-16'>
               <SuiTitle type='h2'>{contactSection.title}</SuiTitle>
-              <div className='mt-3 mb-6 max-w-screen-md text-center text-neutral-200'>
+              <div className='mb-6 mt-3 max-w-screen-md text-center text-neutral-200'>
                 {contactSection.subtitle}
               </div>
               <CUIButton
@@ -172,6 +215,53 @@ function PricingPage({
           </div>
         )}
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        innerRef={modalInnerRef}>
+        <SuiTitle type='h3'>Request a new Cloud region</SuiTitle>
+        <SuiText size='sm' className='mb-6 mt-4'>
+          We’re adding new Cloud regions all of the time, please select the
+          region that you would like us to support below. We will add you to the
+          wait list and be in contact if we look to add it in the future.
+        </SuiText>
+        {!modalFormSuccess && (
+          <MarketoForm
+            formId={'1241'}
+            clearbitTracking={true}
+            onLoad={() => {
+              setModalFormLoaded(true)
+            }}
+            onSuccess={() => {
+              setModalFormSuccess(true)
+              // Delay needed to allow the ref to update before scrolling
+              setTimeout(() => {
+                modalFormSuccessRef.current?.scrollIntoView({
+                  behavior: 'smooth'
+                })
+              }, 10)
+
+              return false // Stops page from reloading
+            }}
+          />
+        )}
+
+        {!modalFormLoaded && <div className='text-center'>Loading form...</div>}
+
+        {modalFormSuccess && (
+          <div ref={modalFormSuccessRef}>
+            <SuiTitle type='h3' className='text-center'>
+              {' '}
+              Thank you for your submission!
+            </SuiTitle>
+
+            <p className='mt-2 text-center text-neutral-200'>
+              We will be in touch soon.
+            </p>
+          </div>
+        )}
+      </Modal>
     </Layout>
   )
 }
