@@ -10,6 +10,7 @@ import Layout from '../../../components/Layout'
 import AccordionComponent from '../../../components/MLDiagram/Accordion'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
+import QuoteCard from '../../../components/QuoteCard'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
@@ -17,7 +18,6 @@ import { CommonProps } from '../../../types/homepage'
 import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import features from './features.json'
-import quotes from './quotes.json'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface MLProps extends CommonProps {
@@ -190,60 +190,46 @@ export default function MLUseCasePage({
             <div className='relative flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
                 <div className='flex flex-col gap-x-6 gap-y-6 xl:h-[410px] xl:flex-row '>
-                  {quotes.map((quote) => (
-                    <Tilt
-                      tiltEnable={false}
-                      glareEnable={true}
-                      glareMaxOpacity={0.4}
-                      glareColor='rgba(251, 255, 70, 0.08)'
-                      glarePosition='all'
-                      className='flex-1'
-                      key={quote.id}>
-                      {quote.href ? (
-                        <Link href={quote.href} target={quote.target}>
-                          <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
-                            <Image
-                              src='/images/Quote.svg'
-                              width={37}
-                              height={28}
-                              alt='Quote'
-                              className='mb-4 block'
-                            />
-                            <SuiText color='secondary' className='text-left'>
-                              "{quote.content}"
-                            </SuiText>
-                            <Image
-                              src={quote.logo}
-                              width={quote.imgWidth}
-                              height={quote.imgHeight}
-                              alt={quote.title}
-                              className='mt-12 inline-block h-auto max-w-[200px] xl:mt-auto'
-                            />
-                          </div>
-                        </Link>
-                      ) : (
-                        <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
-                          <Image
-                            src='/images/Quote.svg'
-                            width={37}
-                            height={28}
-                            alt='Quote'
-                            className='mb-4 block'
-                          />
-                          <SuiText color='secondary' className='text-left'>
-                            "{quote.content}"
-                          </SuiText>
-                          <Image
-                            src={quote.logo}
-                            width={quote.imgWidth}
-                            height={quote.imgHeight}
-                            alt={quote.title}
-                            className='mt-12 md:mt-auto'
-                          />
-                        </div>
-                      )}
-                    </Tilt>
-                  ))}
+                  <QuoteCard
+                    content={`"We aggregate the user's history in ClickHouse and use it as a data store for training and inference. Even when reading 10s of millions of rows, the performance was very nice and not the bottleneck when training new models."`}
+                    link='/blog/deepls-journey-with-clickhouse'
+                    logo={{
+                      src: '/images/use-cases/ml-and-ds/DeepL_logo.svg',
+                      width: 120,
+                      height: 42,
+                      alt: 'DeepL'
+                    }}
+                  />
+                  <QuoteCard
+                    content={`"We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse."`}
+                    link='/blog/langchain-why-we-choose-clickhouse-to-power-langchain?loc=ml-use-case'
+                    logo={{
+                      src: '/images/use-cases/ml-and-ds/langchain-logo-white.svg',
+                      width: 240,
+                      height: 43,
+                      alt: 'LangChain'
+                    }}
+                  />
+                  <QuoteCard
+                    content={`"We collect tens of thousands of data points from customers' phones and other more traditional sources. ClickHouse is used as a way to process all of these SMS messages and extract valuable information used for the scoring and fraud models."`}
+                    link='/blog/how-quickcheck-uses-clickhouse-to-bring-banking-to-the-unbanked'
+                    logo={{
+                      src: '/images/use-cases/ml-and-ds/QuickCheck.svg',
+                      width: 253,
+                      height: 40,
+                      alt: 'QuickCheck'
+                    }}
+                  />
+                  <QuoteCard
+                    content={`"By utilizing expert models and embeddings, we detect substantive changes in web pages and identify connections between pages that share similar characteristics."`}
+                    link='/blog/corsearch-replaces-mysql-with-clickhouse-for-content-and-brand-protection'
+                    logo={{
+                      src: '/images/use-cases/ml-and-ds/corsearch-logo.svg',
+                      width: 180,
+                      height: 22,
+                      alt: 'Corsearch'
+                    }}
+                  />
                 </div>
               </div>
             </div>

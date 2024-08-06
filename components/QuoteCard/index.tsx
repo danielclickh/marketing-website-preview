@@ -27,16 +27,20 @@ function Quote({ content, logo }: QuoteProps) {
           <>content</>
         )}
       </SuiText>
-      <Image {...logo} className='mt-12 md:mt-auto' />
+      <Image
+        {...logo}
+        className='mt-12 inline-block h-auto max-w-[200px] xl:mt-auto'
+      />
     </div>
   )
 }
 
 export interface QuoteCardProps extends QuoteProps {
-  link?: LinkProps
+  link?: string | LinkProps
 }
 
 export default function QuoteCard({ link, ...quote }: QuoteCardProps) {
+  if (typeof link === 'string') link = { href: link }
   return (
     <Tilt
       tiltEnable={false}
