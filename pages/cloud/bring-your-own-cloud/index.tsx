@@ -46,11 +46,12 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                 />
 
                 <h1 className='mb-5 mt-12 text-center font-basier text-3xl font-bold !leading-snug lg:text-left lg:text-4xl xl:text-[56px]'>
-                  Bring Your Own Cloud is in Private Preview
+                  Bring Your Own Cloud is in Private Preview on AWS
                 </h1>
                 <p className='text-center text-[20px] leading-[180%] lg:text-left'>
                   A fully managed ClickHouse Cloud service, deployed in your own
-                  AWS account. SOC 2 and ISO 27001 certified.
+                  AWS account. SOC 2 and ISO 27001 aligned. Join the waitlist
+                  for additional cloud providers.
                 </p>
               </div>
 
