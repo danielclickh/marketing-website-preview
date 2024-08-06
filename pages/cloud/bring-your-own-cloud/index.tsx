@@ -43,7 +43,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                   height={208}
                   src='/images/cloud/bring-your-own-cloud/hero.svg'
                   alt='Bring your own cloud graphic'
-                  className='mx-auto lg:mx-0'
+                  className='mx-auto'
                 />
 
                 <h1 className='mb-5 mt-12 text-center font-basier text-3xl font-bold !leading-snug lg:text-left lg:text-4xl xl:text-[56px]'>
