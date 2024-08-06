@@ -34,6 +34,7 @@ import LogoInstacart from './assets/logo-instacart'
 import LogoIBM from './assets/logo-ibm'
 import LogoTrip from './assets/logo-trip'
 import LogoCorsearch from './assets/logo-corsearch'
+import LogoCognitiv from './assets/logo-cognitiv'
 
 export type EntryCategory = string
 
@@ -256,6 +257,13 @@ export function getContent(): Entry[] {
       ]
     },
 
+    // Cognitiv
+    {
+      featured: false,
+      body: `Cognitiv uses ClickHouse to power their ML offline feature store for its blazing speed and resource efficiency. “ClickHouse was able to efficiently process queries that previously had taken hours or even days to complete. This was hugely valuable for Cognitiv’s data team, allowing them to rapidly iterate and refine their machine learning models.” [Read blog](/blog/transforming-ad-tech-how-cognitiv-uses-clickhouse-to-build-better-machine-learning-models?loc=homepage)`,
+      logo: LogoCognitiv,
+      categories: ['ML & GenAI']
+    },
     // Corsearch
     {
       featured: false,
