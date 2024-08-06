@@ -37,7 +37,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
           <div className='section-container mx-auto 2xl:max-w-[92rem]'>
             <div className='flex flex-wrap items-center justify-center gap-12 lg:flex-nowrap lg:gap-16'>
               {/* Content column */}
-              <div className='flip-selection w-full text-neutral-900 lg:w-1/2'>
+              <div className='flip-selection w-full text-neutral-900 lg:w-1/2 2xl:w-auto 2xl:flex-shrink-0'>
                 <Image
                   width={469}
                   height={208}
@@ -47,7 +47,8 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                 />
 
                 <h1 className='mb-5 mt-12 text-center font-basier text-3xl font-bold !leading-snug lg:text-left lg:text-4xl xl:text-[56px]'>
-                  Bring Your Own Cloud is in Private Preview on AWS
+                  Bring Your Own Cloud is in
+                  <br className='hidden 2xl:block' /> Private Preview on AWS
                 </h1>
                 <p className='text-center text-[20px] leading-[180%] lg:text-left 2xl:max-w-[578px]'>
                   A fully managed ClickHouse Cloud service, deployed in your own
