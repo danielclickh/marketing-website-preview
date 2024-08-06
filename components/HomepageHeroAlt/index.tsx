@@ -1,28 +1,14 @@
 import Image from 'next/image'
-import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
-import { galaxyOnClick } from '../../lib/galaxy/galaxy'
+import React from 'react'
 import { CUIButton } from '../ClickUI'
 import CycleText from '../CycleText'
 import { SuiText, SuiTitle } from '../sui'
-import Typewriter from 'typewriter-effect'
 import styles from './styles.module.scss'
-import Link from 'next/link'
 
 export default function HomepageHeroAlt({
   className = '',
   ...props
 }: React.HTMLProps<HTMLDivElement>) {
-  const router = useRouter()
-
-  const [isTypewritter, setIsTypewritter] = useState(false)
-
-  useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search)
-    if (queryParams.has('typewriter')) {
-      setIsTypewritter(true)
-    }
-  }, [router])
   return (
     <div
       className={`relative overflow-x-hidden border-primary-300 lg:border-t-[38px] ${className}`}
@@ -40,39 +26,19 @@ export default function HomepageHeroAlt({
             </span>{' '}
             <br />
             data warehouse for <br />
-            {!isTypewritter && (
-              <CycleText
-                pauseDelay={2000}
-                phraseClasses='justify-center lg:justify-start'
-                phrases={[
-                  'analytics',
-                  'observability',
-                  'ML & GenAI',
-                  'business intelligence',
-                  'financial services',
-                  'fraud & cybersecurity',
-                  'gaming'
-                ]}
-              />
-            )}
-            {isTypewritter && (
-              <Typewriter
-                options={{
-                  strings: [
-                    'analytics',
-                    'observability',
-                    'ML & GenAI',
-                    'business intelligence',
-                    'financial services',
-                    'fraud & cybersecurity',
-                    'gaming'
-                  ],
-                  cursor: '_',
-                  autoStart: true,
-                  loop: true
-                }}
-              />
-            )}
+            <CycleText
+              pauseDelay={2000}
+              phraseClasses='justify-center lg:justify-start'
+              phrases={[
+                'analytics',
+                'observability',
+                'ML & GenAI',
+                'business intelligence',
+                'financial services',
+                'fraud & cybersecurity',
+                'gaming'
+              ]}
+            />
           </SuiTitle>
           <div className='lg:inline-block lg:w-auto'>
             <SuiText className='mb-12 mt-6 w-auto !font-medium lg:!text-[20px]'>
@@ -107,16 +73,17 @@ export default function HomepageHeroAlt({
         <div className='relative'>
           {/* Desktop angle separator */}
           <div
-            className={`absolute -left-px -top-px bottom-0 z-20 hidden aspect-[272/608] text-primary-300 lg:block ${styles.angleShadow}`}>
+            className={`absolute bottom-0 left-0 top-0 z-20 hidden aspect-[272/608] text-primary-300 lg:block ${styles.angleShadow}`}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
-              width='auto'
-              height='100%'
+              width='272'
+              height='608'
               fill='none'
-              viewBox='0 0 272 608'>
+              viewBox='0 0 272 608'
+              className='h-full w-auto'>
               <path
                 fill='currentColor'
-                d='M272 .00966757 0 0v607.989h1.7469c28.0458.006 52.8287-18.248 61.1401-45.034L227.52 32.3775C233.493 13.129 251.3.0097294 271.453.00966921L272 .00966757Z'
+                d='M272 0 0 0 v608 a64 64 0 0 0 61 -45 L227 32 A46 46 0 0 1 272 0 Z'
               />
             </svg>
           </div>
