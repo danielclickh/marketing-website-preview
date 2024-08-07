@@ -171,14 +171,15 @@ export default function ClickHouseServerPage({
           <div className='section-container max-w-7xl'>
             <div className='relative flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
-                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[400px] md:flex-row'>
+                <div className='flex flex-col gap-x-6 gap-y-6 md:flex-row'>
                   <QuoteCard
-                    content={`"ClickHouse helps us efficiently and reliably analyze logs across trillions of Internet requests to identify malicious traffic and provide customers with rich analytics."`}
+                    content={`"Trip.com was using Elasticsearch for their observability data until they made the switch to ClickHouse. The result? 40GB per second, 30% savings in costs, and queries that are up to 30x faster!"`}
+                    link='/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse'
                     logo={{
-                      src: '/images/use-cases/logging/cloudflare-logo.svg',
-                      width: 102,
-                      height: 34,
-                      alt: 'Cloudflare'
+                      src: '/images/use-cases/logging/tripdotcom.svg',
+                      width: 135,
+                      height: 33,
+                      alt: 'Trip.com'
                     }}
                   />
                   <QuoteCard
@@ -189,15 +190,6 @@ export default function ClickHouseServerPage({
                       width: 110,
                       height: 30,
                       alt: 'didi'
-                    }}
-                  />
-                  <QuoteCard
-                    content={`"At Sony Entertainment Television, we ingest tens of millions of CDN records into ClickHouse Cloud and run millions of queries against them daily. This allows our operations team to monitor the delivery of our content in real-time, and analyze/investigate potential issues the moment they arise. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services."`}
-                    logo={{
-                      src: '/images/sony.svg',
-                      width: 80,
-                      height: 17,
-                      alt: 'Sony'
                     }}
                   />
                 </div>
