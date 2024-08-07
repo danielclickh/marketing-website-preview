@@ -20,7 +20,7 @@ function Quote({ content, logo }: QuoteProps) {
         alt='Quote'
         className='mb-4 block'
       />
-      <SuiText color='secondary' className='text-left'>
+      <SuiText color='secondary' className='mb-8 text-left'>
         {typeof content === 'string' ? (
           <Markdown children={content} />
         ) : (
@@ -29,7 +29,7 @@ function Quote({ content, logo }: QuoteProps) {
       </SuiText>
       <Image
         {...logo}
-        className='mt-12 inline-block h-auto max-w-[200px] xl:mt-auto'
+        className='inline-block h-auto max-w-[200px] xl:mt-auto'
       />
     </div>
   )
