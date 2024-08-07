@@ -200,13 +200,13 @@ export default function MLUseCasePage({
                     }}
                   />
                   <QuoteCard
-                    content={`"We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse."`}
-                    link='/blog/langchain-why-we-choose-clickhouse-to-power-langchain?loc=ml-use-case'
+                    content={`"ClickHouse was able to efficiently process queries that previously had taken hours or even days to complete. This was hugely valuable for Cognitiv’s data team, allowing them to rapidly iterate and refine their machine learning models."`}
+                    link='/blog/transforming-ad-tech-how-cognitiv-uses-clickhouse-to-build-better-machine-learning-models?loc=ml-use-case'
                     logo={{
-                      src: '/images/use-cases/ml-and-ds/langchain-logo-white.svg',
-                      width: 240,
-                      height: 43,
-                      alt: 'LangChain'
+                      src: '/images/use-cases/ml-and-ds/cognitiv-logo-white.svg',
+                      width: 245,
+                      height: 39,
+                      alt: 'Cognitiv'
                     }}
                   />
                   <QuoteCard
