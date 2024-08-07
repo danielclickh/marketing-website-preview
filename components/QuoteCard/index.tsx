@@ -27,10 +27,7 @@ function Quote({ content, logo }: QuoteProps) {
           <>content</>
         )}
       </SuiText>
-      <Image
-        {...logo}
-        className='inline-block h-auto max-w-[200px] xl:mt-auto'
-      />
+      <Image {...logo} className='mt-auto inline-block h-auto max-w-[200px]' />
     </div>
   )
 }
