@@ -9,13 +9,13 @@ import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
+import QuoteCard from '../../../components/QuoteCard'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
 import bigNumbers from './big-numbers.json'
 import features from './features.json'
-import quotes from './quotes.json'
 import references from './supporting-references.json'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
@@ -229,60 +229,36 @@ export default function RealTimeAnalyticsPage({
                     What our customers say
                   </h2>
                   <div className='flex flex-col gap-x-6 gap-y-6 md:h-[390px] md:flex-row'>
-                    {quotes.map((quote) => (
-                      <Tilt
-                        tiltEnable={false}
-                        glareEnable={true}
-                        glareMaxOpacity={0.4}
-                        glareColor='rgba(251, 255, 70, 0.08)'
-                        glarePosition='all'
-                        className='flex-1'
-                        key={quote.id}>
-                        {quote.href ? (
-                          <Link href={quote.href} target={quote.target}>
-                            <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
-                              <Image
-                                src='/images/Quote.svg'
-                                width={37}
-                                height={28}
-                                alt='Quote'
-                                className='mb-4 block'
-                              />
-                              <SuiText color='secondary' className='text-left'>
-                                <Markdown children={quote.content} />
-                              </SuiText>
-                              <Image
-                                src={quote.logo}
-                                width={quote.imgWidth}
-                                height={quote.imgHeight}
-                                alt={quote.title}
-                                className='mt-12 md:mt-auto'
-                              />
-                            </div>
-                          </Link>
-                        ) : (
-                          <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
-                            <Image
-                              src='/images/Quote.svg'
-                              width={37}
-                              height={28}
-                              alt='Quote'
-                              className='mb-4 block'
-                            />
-                            <SuiText color='secondary' className='text-left'>
-                              "{quote.content}"
-                            </SuiText>
-                            <Image
-                              src={quote.logo}
-                              width={quote.imgWidth}
-                              height={quote.imgHeight}
-                              alt={quote.title}
-                              className='mt-12 md:mt-auto'
-                            />
-                          </div>
-                        )}
-                      </Tilt>
-                    ))}
+                    <QuoteCard
+                      content={`"With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud. We got several seconds query time and no materialized views. With ClickHouse Cloud's production instance, we are getting sub-second query time along with materialized views. The decision to switch was a no-brainer for us."`}
+                      link='/blog/adgreetz-processes-millions-of-daily-ad-impressions'
+                      logo={{
+                        src: '/images/use-cases/business-intelligence/adgreetz-logo.svg',
+                        width: 187,
+                        height: 35,
+                        alt: 'Adgreetz'
+                      }}
+                    />
+                    <QuoteCard
+                      content={`"We used MySQL before, and sometimes the warehouse took two to three hours to generate a report, sometimes causing alerts in the system. It was a pain… When we tested how much time the same reports would take with ClickHouse, people were amazed. We ran the same data, and in a blink of an eye, we had the results."`}
+                      link='/blog/ongages-strategic-shift-to-clickhouse-for-real-time-email-marketing'
+                      logo={{
+                        src: '/images/use-cases/business-intelligence/ongage-logo.svg',
+                        width: 128,
+                        height: 35,
+                        alt: 'ongage'
+                      }}
+                    />
+                    <QuoteCard
+                      content={`"With dbt execution orchestrated in various intervals, we can also leverage ClickHouse for internal BI use cases. We’ve found this setup very practical, as we can flexibly create new analytical views of our customer data without moving it from our production operational systems."`}
+                      link='/blog/building-a-unified-data-platform-with-clickhouse'
+                      logo={{
+                        src: '/images/use-cases/business-intelligence/synq-logo.svg',
+                        width: 116,
+                        height: 43,
+                        alt: 'synq'
+                      }}
+                    />
                   </div>
                 </div>
               </div>
