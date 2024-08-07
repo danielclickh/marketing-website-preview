@@ -36,7 +36,14 @@ function Quote({ content, logo }: QuoteProps) {
 }
 
 export interface QuoteCardProps extends QuoteProps {
-  link?: string | LinkProps
+  link?:
+    | string
+    | (Omit<
+        React.AnchorHTMLAttributes<HTMLAnchorElement>,
+        keyof LinkProps | 'children'
+      > &
+        LinkProps &
+        React.RefAttributes<HTMLAnchorElement>)
 }
 
 export default function QuoteCard({ link, ...quote }: QuoteCardProps) {
