@@ -227,12 +227,13 @@ export default function RealTimeAnalyticsPage({
                       }}
                     />
                     <QuoteCard
-                      content={`"At Lyft, **we ingest tens of millions of rows and execute millions of read queries in ClickHouse daily with volume continuing to increase**. On a monthly basis, this means reading and writing more than 25TB of data."`}
+                      content={`"We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse."`}
+                      link='/blog/langchain-why-we-choose-clickhouse-to-power-langchain'
                       logo={{
-                        src: '/images/use-cases/real-time-analytics/lyft-logo.svg',
-                        width: 64,
-                        height: 45,
-                        alt: 'Lyft'
+                        src: '/images/use-cases/ml-and-ds/langchain-logo-white.svg',
+                        width: 240,
+                        height: 43,
+                        alt: 'LangChain'
                       }}
                     />
                     <QuoteCard
