@@ -1,19 +1,19 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import AccordionComponent from '../../../components/LoggingDiagram/Accordion'
 import LogoCarousel from '../../../components/LogoCarousel'
+import QuoteCard from '../../../components/QuoteCard'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
 import features from './features.json'
-import quotes from './quotes.json'
 import callouts from './callouts.json'
 import Markdown from '../../../components/Markdown'
 import { CUIButton } from '../../../components/ClickUI'
@@ -173,60 +173,34 @@ export default function ClickHouseServerPage({
             <div className='relative flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
                 <div className='flex flex-col gap-x-6 gap-y-6 md:h-[400px] md:flex-row'>
-                  {quotes.map((quote) => (
-                    <Tilt
-                      tiltEnable={false}
-                      glareEnable={true}
-                      glareMaxOpacity={0.4}
-                      glareColor='rgba(251, 255, 70, 0.08)'
-                      glarePosition='all'
-                      className='flex-1'
-                      key={quote.id}>
-                      {quote.href ? (
-                        <Link href={quote.href} target={quote.target}>
-                          <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
-                            <Image
-                              src='/images/Quote.svg'
-                              width={37}
-                              height={28}
-                              alt='Quote'
-                              className='mb-4 block'
-                            />
-                            <SuiText color='secondary' className='text-left'>
-                              {quote.content}
-                            </SuiText>
-                            <Image
-                              src={quote.logo}
-                              width={quote.imgWidth}
-                              height={quote.imgHeight}
-                              alt={quote.title}
-                              className='mt-12 md:mt-auto'
-                            />
-                          </div>
-                        </Link>
-                      ) : (
-                        <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
-                          <Image
-                            src='/images/Quote.svg'
-                            width={37}
-                            height={28}
-                            alt='Quote'
-                            className='mb-4 block'
-                          />
-                          <SuiText color='secondary' className='text-left'>
-                            {quote.content}
-                          </SuiText>
-                          <Image
-                            src={quote.logo}
-                            width={quote.imgWidth}
-                            height={quote.imgHeight}
-                            alt={quote.title}
-                            className='mt-12 md:mt-auto'
-                          />
-                        </div>
-                      )}
-                    </Tilt>
-                  ))}
+                  <QuoteCard
+                    content={`"ClickHouse helps us efficiently and reliably analyze logs across trillions of Internet requests to identify malicious traffic and provide customers with rich analytics."`}
+                    logo={{
+                      src: '/images/use-cases/logging/cloudflare-logo.svg',
+                      width: 102,
+                      height: 34,
+                      alt: 'Cloudflare'
+                    }}
+                  />
+                  <QuoteCard
+                    content={`"Migrating logs from Elasticsearch to ClickHouse has not only significantly reduced storage costs but also provided us with a faster querying experience."`}
+                    link='/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system'
+                    logo={{
+                      src: '/images/didi-logo-white.svg',
+                      width: 110,
+                      height: 30,
+                      alt: 'didi'
+                    }}
+                  />
+                  <QuoteCard
+                    content={`"At Sony Entertainment Television, we ingest tens of millions of CDN records into ClickHouse Cloud and run millions of queries against them daily. This allows our operations team to monitor the delivery of our content in real-time, and analyze/investigate potential issues the moment they arise. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services."`}
+                    logo={{
+                      src: '/images/sony.svg',
+                      width: 80,
+                      height: 17,
+                      alt: 'Sony'
+                    }}
+                  />
                 </div>
               </div>
             </div>
