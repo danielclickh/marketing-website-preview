@@ -171,7 +171,7 @@ export default function ClickHouseServerPage({
           <div className='section-container max-w-7xl'>
             <div className='relative flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
-                <div className='flex flex-col gap-x-6 gap-y-6 md:flex-row'>
+                <div className='flex flex-col gap-x-6 gap-y-6 lg:flex-row'>
                   <QuoteCard
                     content={`"Trip.com was using Elasticsearch for their observability data until they made the switch to ClickHouse. The result? 40GB per second, 30% savings in costs, and queries that are up to 30x faster!"`}
                     link='/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse'
