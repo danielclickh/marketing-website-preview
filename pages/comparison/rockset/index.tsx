@@ -1,16 +1,14 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
-import { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import GetStartedFree from '../../../components/GetStartedFree'
 import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'
 import MarketoForm from '../../../components/MarketoForm'
+import QuoteCard from '../../../components/QuoteCard'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import quotes from '../../use-cases/real-time-analytics/quotes.json'
 import faqs from '../../use-cases/real-time-analytics/faqs.json'
-import Tilt from 'react-parallax-tilt'
 import { SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { ContactProps } from '../../../types/contact'
@@ -278,64 +276,47 @@ export default function Page({
               <div className='relative z-20 flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
                 <div className='p-10'>
                   <div className='flex flex-col gap-x-6 gap-y-6 lg:flex-row'>
-                    {quotes.map((quote) => (
-                      <>
-                        <Tilt
-                          tiltEnable={false}
-                          glareEnable={true}
-                          glareMaxOpacity={0.4}
-                          glareColor='rgba(251, 255, 70, 0.08)'
-                          glarePosition='all'
-                          className='flex-1'
-                          key={quote.id}>
-                          {quote.href ? (
-                            <Link href={quote.href} target={quote.target}>
-                              <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
-                                <Image
-                                  src='/images/Quote.svg'
-                                  width={37}
-                                  height={28}
-                                  alt='Quote'
-                                  className='mb-4 block'
-                                />
-                                <Markdown
-                                  className='min-h-auto text-left xl:min-h-[280px]'
-                                  children={quote.content}
-                                />
-                                <Image
-                                  src={quote.logo}
-                                  width={quote.imgWidth}
-                                  height={quote.imgHeight}
-                                  alt={quote.title}
-                                  className='mt-12 xl:mt-auto'
-                                />
-                              </div>
-                            </Link>
-                          ) : (
-                            <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
-                              <Image
-                                src='/images/Quote.svg'
-                                width={37}
-                                height={28}
-                                alt='Quote'
-                                className='mb-4 block'
-                              />
-                              <Markdown
-                                className='min-h-auto text-left xl:min-h-[250px]'
-                                children={quote.content}
-                              />
-                              <Image
-                                src={quote.logo}
-                                width={quote.imgWidth}
-                                height={quote.imgHeight}
-                                alt={quote.title}
-                                className='mt-12 xl:mt-auto'
-                              />
-                            </div>
-                          )}
-                        </Tilt>
-                      </>
-                    ))}
+                    <QuoteCard
+                      content={`"This year we actually exceeded a thousand active replicas. That's **processing hundreds of millions of inserted rows every second**, which actually corresponds to quite a significantly larger number of events because we've been using a lot of sampling."`}
+                      logo={{
+                        src: '/images/use-cases/real-time-analytics/cloudflare-logo.svg',
+                        width: 123,
+                        height: 41,
+                        alt: 'Cloudflare'
+                      }}
+                    />
+                    <QuoteCard
+                      content={`"We have multiple clusters deployed on our hardware with hundreds of hosts. Our main cluster is now geo-replicated, and we designate some replicas for read-heavy operations and others for write-heavy operations. Many of our tables are quite large, **with trillions and trillions of rows, as well as tens of columns.**"`}
+                      link='/blog/how-clickhouse-powers-ahrefs-the-worlds-most-active-web-crawler'
+                      logo={{
+                        src: '/images/use-cases/real-time-analytics/ahrefs-logo.svg',
+                        width: 123,
+                        height: 32,
+                        alt: 'ahrefs'
+                      }}
+                    />
+                    <QuoteCard
+                      content={`"At Lyft, **we ingest tens of millions of rows and execute millions of read queries in ClickHouse daily with volume continuing to increase**. On a monthly basis, this means reading and writing more than 25TB of data."`}
+                      logo={{
+                        src: '/images/use-cases/real-time-analytics/lyft-logo.svg',
+                        width: 64,
+                        height: 45,
+                        alt: 'Lyft'
+                      }}
+                    />
+                    <QuoteCard
+                      content={`"In the post-evaluation of each database against our criteria (with metrics ranging from query performance to cost), **ClickHouse emerged as the unrivaled frontrunner.** It excelled across the board, even astonishingly so in certain domains, and proved more cost-efficient."`}
+                      link={{
+                        href: 'https://medium.com/vimeo-engineering-blog/clickhouse-is-in-the-house-413862c8ac28',
+                        target: '_blank'
+                      }}
+                      logo={{
+                        src: '/images/use-cases/real-time-analytics/vimeo-logo.svg',
+                        width: 140,
+                        height: 30,
+                        alt: 'Vimeo'
+                      }}
+                    />
                   </div>
                 </div>
               </div>
