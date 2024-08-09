@@ -2,20 +2,19 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
-import Tilt from 'react-parallax-tilt'
 import AccordionComponent from '../../../components/BusinessIntelligenceDiagram/Accordion'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
+import QuoteCard from '../../../components/QuoteCard'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
 import bigNumbers from './big-numbers.json'
 import features from './features.json'
-import quotes from './quotes.json'
 import references from './supporting-references.json'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
@@ -228,61 +227,35 @@ export default function RealTimeAnalyticsPage({
                   <h2 className='mb-10 text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
                     What our customers say
                   </h2>
-                  <div className='flex flex-col gap-x-6 gap-y-6 md:h-[390px] md:flex-row'>
-                    {quotes.map((quote) => (
-                      <Tilt
-                        tiltEnable={false}
-                        glareEnable={true}
-                        glareMaxOpacity={0.4}
-                        glareColor='rgba(251, 255, 70, 0.08)'
-                        glarePosition='all'
-                        className='flex-1'
-                        key={quote.id}>
-                        {quote.href ? (
-                          <Link href={quote.href} target={quote.target}>
-                            <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
-                              <Image
-                                src='/images/Quote.svg'
-                                width={37}
-                                height={28}
-                                alt='Quote'
-                                className='mb-4 block'
-                              />
-                              <SuiText color='secondary' className='text-left'>
-                                <Markdown children={quote.content} />
-                              </SuiText>
-                              <Image
-                                src={quote.logo}
-                                width={quote.imgWidth}
-                                height={quote.imgHeight}
-                                alt={quote.title}
-                                className='mt-12 md:mt-auto'
-                              />
-                            </div>
-                          </Link>
-                        ) : (
-                          <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
-                            <Image
-                              src='/images/Quote.svg'
-                              width={37}
-                              height={28}
-                              alt='Quote'
-                              className='mb-4 block'
-                            />
-                            <SuiText color='secondary' className='text-left'>
-                              "{quote.content}"
-                            </SuiText>
-                            <Image
-                              src={quote.logo}
-                              width={quote.imgWidth}
-                              height={quote.imgHeight}
-                              alt={quote.title}
-                              className='mt-12 md:mt-auto'
-                            />
-                          </div>
-                        )}
-                      </Tilt>
-                    ))}
+                  <div className='flex flex-col gap-x-6 gap-y-6 lg:flex-row'>
+                    <QuoteCard
+                      content={`"At Lyft, **we ingest tens of millions of rows and execute millions of read queries in ClickHouse daily with volume continuing to increase**. On a monthly basis, this means reading and writing more than 25TB of data."`}
+                      logo={{
+                        src: '/images/use-cases/real-time-analytics/lyft-logo.svg',
+                        width: 64,
+                        height: 45,
+                        alt: 'Lyft'
+                      }}
+                    />
+                    <QuoteCard
+                      content={`“At Sony LIV, we ingest tens of millions of video streaming events into ClickHouse Cloud and run queries to generate complex dashboards for analysis. This allows our operations team to monitor, alert & troubleshoot the QOS and QOE of our customers in real-time. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.”`}
+                      logo={{
+                        src: '/images/sony.svg',
+                        width: 80,
+                        height: 17,
+                        alt: 'Sony'
+                      }}
+                    />
+                    <QuoteCard
+                      content={`"With dbt execution orchestrated in various intervals, we can also leverage ClickHouse for internal BI use cases. We’ve found this setup very practical, as we can flexibly create new analytical views of our customer data without moving it from our production operational systems."`}
+                      link='/blog/building-a-unified-data-platform-with-clickhouse'
+                      logo={{
+                        src: '/images/use-cases/business-intelligence/synq-logo.svg',
+                        width: 116,
+                        height: 43,
+                        alt: 'synq'
+                      }}
+                    />
                   </div>
                 </div>
               </div>

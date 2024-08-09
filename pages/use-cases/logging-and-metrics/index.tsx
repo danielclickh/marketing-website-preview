@@ -1,19 +1,18 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
-import Tilt from 'react-parallax-tilt'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import AccordionComponent from '../../../components/LoggingDiagram/Accordion'
 import LogoCarousel from '../../../components/LogoCarousel'
+import QuoteCard from '../../../components/QuoteCard'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
 import features from './features.json'
-import quotes from './quotes.json'
 import callouts from './callouts.json'
 import Markdown from '../../../components/Markdown'
 import { CUIButton } from '../../../components/ClickUI'
@@ -172,61 +171,27 @@ export default function ClickHouseServerPage({
           <div className='section-container max-w-7xl'>
             <div className='relative flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
               <div className='p-10'>
-                <div className='flex flex-col gap-x-6 gap-y-6 md:h-[400px] md:flex-row'>
-                  {quotes.map((quote) => (
-                    <Tilt
-                      tiltEnable={false}
-                      glareEnable={true}
-                      glareMaxOpacity={0.4}
-                      glareColor='rgba(251, 255, 70, 0.08)'
-                      glarePosition='all'
-                      className='flex-1'
-                      key={quote.id}>
-                      {quote.href ? (
-                        <Link href={quote.href} target={quote.target}>
-                          <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
-                            <Image
-                              src='/images/Quote.svg'
-                              width={37}
-                              height={28}
-                              alt='Quote'
-                              className='mb-4 block'
-                            />
-                            <SuiText color='secondary' className='text-left'>
-                              {quote.content}
-                            </SuiText>
-                            <Image
-                              src={quote.logo}
-                              width={quote.imgWidth}
-                              height={quote.imgHeight}
-                              alt={quote.title}
-                              className='mt-12 md:mt-auto'
-                            />
-                          </div>
-                        </Link>
-                      ) : (
-                        <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
-                          <Image
-                            src='/images/Quote.svg'
-                            width={37}
-                            height={28}
-                            alt='Quote'
-                            className='mb-4 block'
-                          />
-                          <SuiText color='secondary' className='text-left'>
-                            {quote.content}
-                          </SuiText>
-                          <Image
-                            src={quote.logo}
-                            width={quote.imgWidth}
-                            height={quote.imgHeight}
-                            alt={quote.title}
-                            className='mt-12 md:mt-auto'
-                          />
-                        </div>
-                      )}
-                    </Tilt>
-                  ))}
+                <div className='flex flex-col gap-x-6 gap-y-6 lg:flex-row'>
+                  <QuoteCard
+                    content={`"Trip.com was using Elasticsearch for their observability data until they made the switch to ClickHouse. The result? 40GB per second, 30% savings in costs, and queries that are up to 30x faster!"`}
+                    link='/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse'
+                    logo={{
+                      src: '/images/use-cases/logging/tripdotcom.svg',
+                      width: 135,
+                      height: 33,
+                      alt: 'Trip.com'
+                    }}
+                  />
+                  <QuoteCard
+                    content={`"Migrating logs from Elasticsearch to ClickHouse has not only significantly reduced storage costs but also provided us with a faster querying experience."`}
+                    link='/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system'
+                    logo={{
+                      src: '/images/didi-logo-white.svg',
+                      width: 110,
+                      height: 30,
+                      alt: 'didi'
+                    }}
+                  />
                 </div>
               </div>
             </div>
