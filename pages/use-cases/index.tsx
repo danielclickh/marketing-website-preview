@@ -156,6 +156,7 @@ function UseCasesPage({
         <div className='clip-inverted-triangle-use-cases'>
           <div className='section-container mt-12 flex max-w-6xl flex-col gap-y-6 lg:mt-0'>
             {sortedUseCases.map((useCase, index) => {
+              // Limit the number of logos to a maximum of 6
               const useCaseLogos = (useCase?.ClientsUsingUseCase || []).slice(
                 0,
                 6
