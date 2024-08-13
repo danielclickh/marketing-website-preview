@@ -73,7 +73,7 @@ export default function HomepageHeroAlt({
         <div className='relative'>
           {/* Desktop angle separator */}
           <div
-            className={`absolute bottom-0 left-0 top-0 z-20 hidden aspect-[272/608] text-primary-300 lg:block ${styles.angleShadow}`}>
+            className={`absolute -left-1 bottom-0 top-0 z-20 hidden aspect-[272/608] text-primary-300 lg:block ${styles.angleShadow}`}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='272'
