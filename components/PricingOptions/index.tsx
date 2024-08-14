@@ -261,33 +261,77 @@ function PricingOptions({
         {!selectorOnly && (
           <>
             {plans.length > 0 && (
-              <div className='flex min-h-[940px] flex-col items-stretch justify-center gap-12 md:flex-row'>
+              <div className='-my-6 flex flex-wrap items-stretch justify-center'>
                 {plans.map((plan, index) => (
                   <div
-                    className={`relative w-full rounded-lg border border-t-4 border-neutral-700/80 border-t-primary bg-neutral-900/50 shadow-card-xl md:max-w-sm`}
-                    key={`plan-${plan.name}`}>
-                    <div className='card_content flex h-full flex-col justify-between'>
-                      <div className='border-b border-neutral-725 p-6'>
-                        <h2 className='mb-1 text-center text-2.75xl font-semibold'>
-                          {plan.name}
-                        </h2>
-                        <div className='text-normal text-center text-sm text-neutral-300 md:h-auto md:min-h-[40px]'>
-                          {plan.description}
-                        </div>
-                        <div>
-                          <PlanPricing
-                            isFirst={index === 0}
-                            text={plan.pricingMain}
-                            name={plan.name}
-                          />
-                        </div>
+                    key={`plan-${plan.name}`}
+                    className='w-full p-6 md:w-1/2 lg:w-1/3'>
+                    <div className='relative flex min-h-full items-stretch rounded-lg border border-t-4 border-neutral-700/80 border-t-primary bg-neutral-900/50 shadow-card-xl'>
+                      <div className='card_content flex w-full flex-col justify-between'>
+                        <div className='border-b border-neutral-725 p-6'>
+                          <h2 className='mb-1 text-center text-2.75xl font-semibold'>
+                            {plan.name}
+                          </h2>
+                          <div className='text-normal text-center text-sm text-neutral-300 md:h-auto md:min-h-[40px]'>
+                            {plan.description}
+                          </div>
+                          <div>
+                            <PlanPricing
+                              isFirst={index === 0}
+                              text={plan.pricingMain}
+                              name={plan.name}
+                            />
+                          </div>
 
-                        {plan.name === 'Development' &&
-                          router.query.region !== 'ap-northeast-1' &&
-                          router.query.provider !== 'azure' && (
+                          {plan.name === 'Development' &&
+                            router.query.region !== 'ap-northeast-1' &&
+                            router.query.provider !== 'azure' && (
+                              <>
+                                <CUIButton
+                                  weight='medium'
+                                  onClick={() => {
+                                    const calculatorElement =
+                                      document.getElementById(
+                                        'pricing-calculator'
+                                      )
+                                    if (calculatorElement) {
+                                      calculatorElement.scrollIntoView({
+                                        behavior: 'smooth',
+                                        block: 'start'
+                                      })
+                                      router.push(
+                                        {
+                                          query: {
+                                            ...router.query,
+                                            tier: 'Development'
+                                          }
+                                        },
+                                        undefined,
+                                        { shallow: true }
+                                      )
+                                    } else {
+                                      router.push(
+                                        {
+                                          hash: 'pricing-calculator',
+                                          query: {
+                                            ...router.query,
+                                            tier: 'Development'
+                                          }
+                                        },
+                                        undefined,
+                                        { shallow: true }
+                                      )
+                                    }
+                                  }}
+                                  className='stroked_button_wrapper button_wrapper mt-4 w-full'
+                                  type='secondary'>
+                                  Estimate your monthly cost ↓
+                                </CUIButton>
+                              </>
+                            )}
+                          {plan.name === 'Production' && (
                             <>
                               <CUIButton
-                                weight='medium'
                                 onClick={() => {
                                   const calculatorElement =
                                     document.getElementById(
@@ -302,7 +346,7 @@ function PricingOptions({
                                       {
                                         query: {
                                           ...router.query,
-                                          tier: 'Development'
+                                          tier: 'Production'
                                         }
                                       },
                                       undefined,
@@ -314,7 +358,7 @@ function PricingOptions({
                                         hash: 'pricing-calculator',
                                         query: {
                                           ...router.query,
-                                          tier: 'Development'
+                                          tier: 'Production'
                                         }
                                       },
                                       undefined,
@@ -322,127 +366,89 @@ function PricingOptions({
                                     )
                                   }
                                 }}
+                                weight='medium'
                                 className='stroked_button_wrapper button_wrapper mt-4 w-full'
                                 type='secondary'>
                                 Estimate your monthly cost ↓
                               </CUIButton>
                             </>
                           )}
-                        {plan.name === 'Production' && (
-                          <>
-                            <CUIButton
-                              onClick={() => {
-                                const calculatorElement =
-                                  document.getElementById('pricing-calculator')
-                                if (calculatorElement) {
-                                  calculatorElement.scrollIntoView({
-                                    behavior: 'smooth',
-                                    block: 'start'
-                                  })
-                                  router.push(
-                                    {
-                                      query: {
-                                        ...router.query,
-                                        tier: 'Production'
-                                      }
-                                    },
-                                    undefined,
-                                    { shallow: true }
-                                  )
-                                } else {
-                                  router.push(
-                                    {
-                                      hash: 'pricing-calculator',
-                                      query: {
-                                        ...router.query,
-                                        tier: 'Production'
-                                      }
-                                    },
-                                    undefined,
-                                    { shallow: true }
-                                  )
-                                }
-                              }}
-                              weight='medium'
-                              className='stroked_button_wrapper button_wrapper mt-4 w-full'
-                              type='secondary'>
-                              Estimate your monthly cost ↓
-                            </CUIButton>
-                          </>
-                        )}
-                        {plan.name === 'Dedicated' && (
-                          <>
-                            <CUIButton
-                              href={`/pricing/contact?loc=pricing-enterprise-${provider}`}
-                              weight='medium'
-                              className='stroked_button_wrapper button_wrapper mt-4 w-full'
-                              type='secondary'>
-                              Contact us
-                            </CUIButton>
-                          </>
-                        )}
-                      </div>
-                      <div className='flex-auto justify-between p-6'>
-                        <div className='flex flex-col gap-5'>
-                          {(plan.items ?? []).map((item, planIndex: number) => (
-                            <div
-                              className='row flex items-center justify-start gap-4 text-sm'
-                              key={`plan-bullet-${planIndex}`}>
-                              {item.isBulleted && (
-                                <CheckIcon className='h-4 w-4' />
-                              )}
-                              <div className='item_text'>
-                                <Markdown className=' max-w-xs !text-neutral-0'>
-                                  {item.description}
-                                </Markdown>
-                              </div>
-                            </div>
-                          ))}
-                          {plan.items_disabled.map(
-                            (itemDisabled, planIndex: number) => (
-                              <div
-                                className='row_not_included flex items-center justify-start gap-4 text-sm text-neutral-300'
-                                key={`plan-disabled-bullet-${planIndex}`}>
-                                <MinusIcon className='h-4 w-4' />
-                                <div className='item_text'>
-                                  <Markdown className='!text-neutral-300'>
-                                    {itemDisabled.description}
-                                  </Markdown>
-                                </div>
-                              </div>
-                            )
+                          {plan.name === 'Dedicated' && (
+                            <>
+                              <CUIButton
+                                href={`/pricing/contact?loc=pricing-enterprise-${provider}`}
+                                weight='medium'
+                                className='stroked_button_wrapper button_wrapper mt-4 w-full'
+                                type='secondary'>
+                                Contact us
+                              </CUIButton>
+                            </>
                           )}
                         </div>
-                      </div>
+                        <div className='flex-auto justify-between p-6'>
+                          <div className='flex flex-col gap-5'>
+                            {(plan.items ?? []).map(
+                              (item, planIndex: number) => (
+                                <div
+                                  className='row flex items-center justify-start gap-4 text-sm'
+                                  key={`plan-bullet-${planIndex}`}>
+                                  {item.isBulleted && (
+                                    <CheckIcon className='h-4 w-4' />
+                                  )}
+                                  <div className='item_text'>
+                                    <Markdown className=' max-w-xs !text-neutral-0'>
+                                      {item.description}
+                                    </Markdown>
+                                  </div>
+                                </div>
+                              )
+                            )}
+                            {plan.items_disabled.map(
+                              (itemDisabled, planIndex: number) => (
+                                <div
+                                  className='row_not_included flex items-center justify-start gap-4 text-sm text-neutral-300'
+                                  key={`plan-disabled-bullet-${planIndex}`}>
+                                  <MinusIcon className='h-4 w-4' />
+                                  <div className='item_text'>
+                                    <Markdown className='!text-neutral-300'>
+                                      {itemDisabled.description}
+                                    </Markdown>
+                                  </div>
+                                </div>
+                              )
+                            )}
+                          </div>
+                        </div>
 
-                      <div className='p-6 pt-0'>
-                        {index !== plans.length - 1 && (
-                          <ShowPricing
-                            tier={plan.name}
-                            storagePricing={
-                              plan.name === 'Development'
-                                ? storageCostDev
-                                : storageCostProd
-                            }
-                            computePricing={
-                              plan.name === 'Development'
-                                ? computeCostDev
-                                : computeCostProd
-                            }
-                            isFirst={index === 0}
-                          />
-                        )}
-                        {plan.actionButton && (
-                          <>
-                            <PricingButton
-                              isFirst={true}
-                              isLast={index !== plans.length - 1}
-                              path={plan.actionButton.link}
-                              btnText={plan.actionButton.text}
-                              index={index}
+                        <div className='p-6 pt-0'>
+                          {index !== plans.length - 1 && (
+                            <ShowPricing
+                              tier={plan.name}
+                              storagePricing={
+                                plan.name === 'Development'
+                                  ? storageCostDev
+                                  : storageCostProd
+                              }
+                              computePricing={
+                                plan.name === 'Development'
+                                  ? computeCostDev
+                                  : computeCostProd
+                              }
+                              isFirst={index === 0}
                             />
-                          </>
-                        )}
+                          )}
+                          {plan.actionButton && (
+                            <>
+                              <PricingButton
+                                isFirst={true}
+                                isLast={index !== plans.length - 1}
+                                path={plan.actionButton.link}
+                                btnText={plan.actionButton.text}
+                                index={index}
+                              />
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
