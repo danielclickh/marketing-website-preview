@@ -261,7 +261,7 @@ function PricingOptions({
         {!selectorOnly && (
           <>
             {plans.length > 0 && (
-              <div className='flex flex-col items-stretch justify-center gap-12 md:flex-row'>
+              <div className='flex flex-col items-stretch justify-center gap-12 lg:flex-row'>
                 {plans.map((plan, index) => (
                   <div
                     className={`relative w-full rounded-lg border border-t-4 border-neutral-700/80 border-t-primary bg-neutral-900/50 shadow-card-xl md:max-w-sm`}
