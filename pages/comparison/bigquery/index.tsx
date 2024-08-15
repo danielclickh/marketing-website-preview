@@ -486,16 +486,7 @@ export default function BigQueryPage({
                   content.customContent,
                   content.RelatedBlogs
                 ).map((card, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className={`
-                      ${index > 1 ? 'hidden md:block' : ''}
-                      ${index > 2 ? 'lg:hidden' : ''}
-                    `}>
-                      {card}
-                    </div>
-                  )
+                  return <div key={index}>{card}</div>
                 })}
               </div>
             </div>
