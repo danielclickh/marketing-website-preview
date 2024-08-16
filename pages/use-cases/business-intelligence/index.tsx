@@ -238,15 +238,6 @@ export default function RealTimeAnalyticsPage({
                       }}
                     />
                     <QuoteCard
-                      content={`“At Sony LIV, we ingest tens of millions of video streaming events into ClickHouse Cloud and run queries to generate complex dashboards for analysis. This allows our operations team to monitor, alert & troubleshoot the QOS and QOE of our customers in real-time. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.”`}
-                      logo={{
-                        src: '/images/sony.svg',
-                        width: 80,
-                        height: 17,
-                        alt: 'Sony'
-                      }}
-                    />
-                    <QuoteCard
                       content={`"With dbt execution orchestrated in various intervals, we can also leverage ClickHouse for internal BI use cases. We’ve found this setup very practical, as we can flexibly create new analytical views of our customer data without moving it from our production operational systems."`}
                       link='/blog/building-a-unified-data-platform-with-clickhouse'
                       logo={{
