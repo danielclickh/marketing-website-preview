@@ -173,6 +173,15 @@ export default function ClickHouseServerPage({
               <div className='p-10'>
                 <div className='flex flex-col gap-x-6 gap-y-6 lg:flex-row'>
                   <QuoteCard
+                    content={`“At Sony LIV, we ingest tens of millions of video streaming events into ClickHouse Cloud and run queries to generate complex dashboards for analysis. This allows our operations team to monitor, alert & troubleshoot the QOS and QOE of our customers in real-time. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.”`}
+                    logo={{
+                      src: '/images/sony.svg',
+                      width: 80,
+                      height: 17,
+                      alt: 'Sony'
+                    }}
+                  />
+                  <QuoteCard
                     content={`"Trip.com was using Elasticsearch for their observability data until they made the switch to ClickHouse. The result? 40GB per second, 30% savings in costs, and queries that are up to 30x faster!"`}
                     link='/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse'
                     logo={{

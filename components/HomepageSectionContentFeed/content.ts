@@ -99,7 +99,7 @@ export function getContent(): Entry[] {
       featured: false,
       body: `“At Sony LIV, we ingest tens of millions of video streaming events into ClickHouse Cloud and run queries to generate complex dashboards for analysis. This allows our operations team to monitor, alert & troubleshoot the QOS and QOE of our customers in real-time. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.”`,
       logo: LogoSony,
-      categories: ['Business intelligence'],
+      categories: ['Observability'],
       stats: [
         {
           icon: IconStack,
