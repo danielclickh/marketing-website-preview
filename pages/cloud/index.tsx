@@ -159,7 +159,7 @@ export default function CloudPage({
                 <span className='tilted-content leading-8'>scale</span>
               </span>
             </div>
-            <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center md:gap-x-14'>
+            <div className='relative z-10 flex flex-wrap place-items-center items-center justify-center gap-6 self-center md:gap-x-14'>
               <div className='absolute left-0 z-10 h-full bg-cloudFadeLeftLogos p-10 lg:pr-20'></div>
               <div className='absolute right-0 z-10 h-full bg-cloudFadeRightLogos p-10 lg:pl-20'></div>
               <LogoCarousel
