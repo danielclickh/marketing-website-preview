@@ -232,7 +232,7 @@ export default function CertificationPage({
             <div className='flex flex-col gap-6 rounded bg-primary-800/95 p-6 text-white'>
               <CUICard>
                 <CUICard.Body className='p-6'>
-                  <p className='mb-4 font-basier text-[20px]'>Modeling Data</p>
+                  <p className='mb-4 font-basier text-[20px]'>Modeling data</p>
                   <ul className='flex flex-col gap-2'>
                     <li>
                       <CheckListItem value='Create a new database' />
@@ -257,7 +257,7 @@ export default function CertificationPage({
               </CUICard>
               <CUICard>
                 <CUICard.Body className='p-6'>
-                  <p className='mb-4 font-basier text-[20px]'>Inserting Data</p>
+                  <p className='mb-4 font-basier text-[20px]'>Inserting data</p>
                   <ul className='flex flex-col gap-2'>
                     <li>
                       <CheckListItem value='Insert a local file into a table' />
@@ -279,7 +279,7 @@ export default function CertificationPage({
               </CUICard>
               <CUICard>
                 <CUICard.Body className='p-6'>
-                  <p className='mb-4 font-basier text-[20px]'>Analyzing Data</p>
+                  <p className='mb-4 font-basier text-[20px]'>Analyzing data</p>
                   <ul className='flex flex-col gap-2'>
                     <li>
                       <CheckListItem value='Write a query that satisfies a given criteria' />
@@ -308,7 +308,7 @@ export default function CertificationPage({
               <CUICard>
                 <CUICard.Body className='p-6'>
                   <p className='mb-4 font-basier text-[20px]'>
-                    Optimizing Query Performance
+                    Optimizing query performance
                   </p>
                   <ul className='flex flex-col gap-2'>
                     <li>
@@ -332,7 +332,7 @@ export default function CertificationPage({
               <CUICard>
                 <CUICard.Body className='p-6'>
                   <p className='mb-4 font-basier text-[20px]'>
-                    Deduplication and Mutations
+                    Deduplication and mutations
                   </p>
                   <ul className='flex flex-col gap-2'>
                     <li>

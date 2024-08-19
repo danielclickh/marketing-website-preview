@@ -27,7 +27,7 @@ const AccordionComponent = () => {
           height={73}
         />
         <SuiTitle type='h2' className='mt-8 text-center'>
-          ClickHouse for Real-time Analytics
+          ClickHouse for real-time analytics
         </SuiTitle>
         <p className='mx-auto mb-10 max-w-4xl px-9 pt-6 text-center'>
           Whether you’re building user-facing dashboards, instantly responsive
@@ -126,7 +126,7 @@ const AccordionContent = forwardRef<
 >(({ children, className, ...props }, forwardedRef) => (
   <Accordion.Content
     className={classNames(
-      'hide-scrollbar group relative z-10 mb-2 -mt-4 rounded-b-md border border-jet group-data-[state=open]:pb-20 xl:overflow-hidden xl:overflow-y-scroll',
+      'hide-scrollbar group relative z-10 -mt-4 mb-2 rounded-b-md border border-jet group-data-[state=open]:pb-20 xl:overflow-hidden xl:overflow-y-scroll',
       className
     )}
     {...props}

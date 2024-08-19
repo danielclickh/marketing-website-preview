@@ -475,10 +475,10 @@ function CustomerStoriesPage({
                       }}
                       options={UseCaseCategories}
                       optionLabel='name'
-                      placeholder='Use Case'
+                      placeholder='Use case'
                       maxSelectedLabels={0}
                       panelHeaderTemplate={<></>}
-                      selectedItemsLabel='Use Case ({0})'
+                      selectedItemsLabel='Use case ({0})'
                       unstyled
                     />
                   </div>

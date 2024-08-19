@@ -50,7 +50,7 @@ export default function ClickHouseServerPage({
               <div className='flex justify-between'>
                 <div className='flex-col text-center lg:mt-16 lg:max-w-xl lg:text-left'>
                   <h4 className='mb-4 text-base font-semibold text-primary-300'>
-                    <Link href='/cloud'>Cloud</Link> / Data Ingestion
+                    <Link href='/cloud'>Cloud</Link> / Data ingestion
                   </h4>
                   <h1 className='relative mb-3 mt-4 inline-block font-basier text-4xl font-semibold leading-tight md:mt-0 md:text-5.5xl'>
                     ClickPipes
@@ -128,7 +128,7 @@ export default function ClickHouseServerPage({
             </h2>
           </div>
           <div className='container mx-auto flex max-w-4xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8  2xl:px-0'>
-            <div className='grid grid-cols-1 gap-y-10 gap-x-8 space-y-4 md:grid-cols-2 md:space-y-0'>
+            <div className='grid grid-cols-1 gap-x-8 gap-y-10 space-y-4 md:grid-cols-2 md:space-y-0'>
               {features.map((feature) => (
                 <div className='col' key={feature.id}>
                   <div className='flex flex-col items-center gap-4 text-center'>
@@ -157,7 +157,7 @@ export default function ClickHouseServerPage({
             <div className='relative rounded-lg border-t-2 border-neutral-700/80 border-primary-300 bg-neutral-900 shadow-lg'>
               <div className='px-6 py-8 lg:p-10'>
                 <div className='text-center'>
-                  <SuiTitle type='h2'>Available Connectors</SuiTitle>
+                  <SuiTitle type='h2'>Available connectors</SuiTitle>
                   <SuiText className='mx-auto mt-6 max-w-[844px] opacity-70'>
                     ClickPipes is an integration engine that simplifies data
                     ingestion from a variety of sources, including new
@@ -166,7 +166,7 @@ export default function ClickHouseServerPage({
                     latency, ideal for demanding workloads.
                   </SuiText>
                 </div>
-                <div className='-mx-2 mt-8 -mb-3 flex max-w-[1040px] flex-wrap items-stretch justify-center sm:-mx-3 lg:mx-auto'>
+                <div className='-mx-2 -mb-3 mt-8 flex max-w-[1040px] flex-wrap items-stretch justify-center sm:-mx-3 lg:mx-auto'>
                   {[
                     {
                       logo: '/images/cloud/integrations/amazon_s3.svg',
@@ -214,7 +214,7 @@ export default function ClickHouseServerPage({
                   ].map(({ logo, name, badge }) => {
                     return (
                       <div className='w-1/2 p-2 sm:p-3 md:w-1/3 lg:w-1/4'>
-                        <div className='relative flex h-full flex-col items-center rounded-sm bg-neutral-700/70 px-4 pt-8 pb-6'>
+                        <div className='relative flex h-full flex-col items-center rounded-sm bg-neutral-700/70 px-4 pb-6 pt-8'>
                           <Image
                             src={logo}
                             width={56}
@@ -228,7 +228,7 @@ export default function ClickHouseServerPage({
                             {name}
                           </SuiTitle>
                           {badge && (
-                            <span className='absolute top-3 right-3 rounded-full bg-warning-800 px-3 py-1 text-xs font-normal text-warning-200'>
+                            <span className='absolute right-3 top-3 rounded-full bg-warning-800 px-3 py-1 text-xs font-normal text-warning-200'>
                               {badge}
                             </span>
                           )}
@@ -254,7 +254,7 @@ export default function ClickHouseServerPage({
               />
               <SuiTitle
                 type='h2'
-                className='mt-8 mb-4 px-8 text-center md:px-0'>
+                className='mb-4 mt-8 px-8 text-center md:px-0'>
                 More connectors coming soon
               </SuiTitle>
               <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200 md:pb-16'>
@@ -262,7 +262,7 @@ export default function ClickHouseServerPage({
                 <Link
                   href='/company/contact?loc=clickpipes'
                   className='text-primary-300'>
-                  Contact Us
+                  contact us
                 </Link>{' '}
                 today.
               </div>

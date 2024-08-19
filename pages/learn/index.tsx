@@ -213,7 +213,7 @@ const trainingCards: Array<TrainingCardProps> = [
   {
     icon: <UserList />,
     badge: 'Free',
-    title: 'Free On-demand Training',
+    title: 'Free on-demand training',
     button: 'Browse catalog',
     description:
       'Learn at your own pace. ClickHouse Academy provides free, on-demand, self-paced training.',
@@ -223,7 +223,7 @@ const trainingCards: Array<TrainingCardProps> = [
   {
     icon: <Webcam />,
     badge: 'Free',
-    title: 'Free Live Training',
+    title: 'Free live training',
     description:
       'Learn from ClickHouse experts by attending one of our virtual training sessions. Instructors deliver the content live.',
     perks: ['Hands-on lab activities', 'Live Q&A and engaging interactions'],
@@ -246,16 +246,16 @@ const trainingCards: Array<TrainingCardProps> = [
 
 const certificationCards: Array<CertificationCardProps> = [
   {
-    title: 'Career Growth',
+    title: 'Career growth',
     description: 'Let companies know you can provide a competitive advantage.'
   },
   {
-    title: 'Industry Recognition',
+    title: 'Industry recognition',
     description:
       'Passing one of our hands-on, performance-based exams proves you not only understand ClickHouse, but also have the skills to build real-world solutions with ClickHouse.'
   },
   {
-    title: 'Improved Results',
+    title: 'Improved results',
     description:
       'ClickHouse is simple to get started, but the deeper you dive into it the more you realize how powerful and complex it is. The more you understand about ClickHouse, the more you will get out of ClickHouse!'
   }
@@ -304,7 +304,7 @@ export default function LearnPage({
       {/* Hero */}
       <div className='relative bg-grid py-16 text-center md:py-20'>
         <SuiTitle type='h1' color='white' className='mb-6 md:!text-6xl'>
-          ClickHouse Training
+          ClickHouse training
         </SuiTitle>
         <SuiText color='secondary'>
           Become a ClickHouse expert with our free official ClickHouse training.
@@ -334,7 +334,7 @@ export default function LearnPage({
           <div className='max-w-lg px-2'>
             <UserListSquare />
             <SuiTitle type='h2' className='my-6'>
-              Free Instructor-led Training
+              Free instructor-led training
             </SuiTitle>
             <p className='my-6'>
               Our live, online training events are a great way to get started on
@@ -388,7 +388,7 @@ export default function LearnPage({
             alt={'ClickHouse Certified Developer'}
             width={417}
             height={363}
-            className='pointer-events-none absolute right-0 -top-20 max-w-[130px] rotate-[15deg] md:-top-40 md:max-w-[210px]'
+            className='pointer-events-none absolute -top-20 right-0 max-w-[130px] rotate-[15deg] md:-top-40 md:max-w-[210px]'
           />
 
           {/* Intro */}
@@ -477,7 +477,7 @@ export default function LearnPage({
       {/* Logo carousel */}
       <div className='relative bg-white/10'>
         <div className='clip-inverted-triangle-simplified absolute inset-0 z-0 bg-primary-300 md:-top-20' />
-        <div className='section-container relative z-10 pt-28 pb-6 text-primary-800 md:pt-24 md:pb-20'>
+        <div className='section-container relative z-10 pb-6 pt-28 text-primary-800 md:pb-20 md:pt-24'>
           <SuiTitle type='h3' className='mb-6 text-center'>
             Trusted by the best developers that work with data{' '}
             <span className='tilted tilted-black'>
