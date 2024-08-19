@@ -17,7 +17,7 @@ export default function IntegrationsClickPipesPromo() {
       <div className='rounded-lg border border-neutral-700/80 bg-neutral-700/50 p-6 lg:p-10'>
         <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
           <div className='lg:max-w-[640px]'>
-            <h3 className='font-basier text-3xl font-semibold'>
+            <h3 className='text-balance font-basier text-3xl font-semibold'>
               Managed integration pipelines for ClickHouse Cloud.
             </h3>
             <p className='my-4 text-[#B3B6BD]'>
