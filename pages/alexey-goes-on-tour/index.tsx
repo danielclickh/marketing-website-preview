@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next'
-import Link from 'next/link'
+import Link, { LinkProps } from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import { CUICard } from '../../components/ClickUI'
 import EventPost from '../../components/EventPostList/EventPost'
@@ -9,92 +9,13 @@ import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
 import { findAll } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { EventType } from '../../types/events'
+import { CommonProps } from '../../types/homepage'
 import banner from './banner.jpg'
 import Image from 'next/image'
-import { CountryItem, PageProps, ScheduleItem } from './types'
 
-const COUNTRIES: Array<CountryItem> = ['USA', 'EUROPE', 'ASIA']
-
-// Automatically ordered by date
-const SCHEDULE: Array<ScheduleItem> = [
-  {
-    date: new Date('2024-08-25'),
-    emoji: '🇨🇳',
-    heading: 'Guangzhou, China',
-    subHeading: 'Meetup',
-    link: {
-      label: 'Register for this event',
-      href: 'https://mp.weixin.qq.com/s/GSvo-7xUoVzCsuUvlLTpCw',
-      target: '_blank'
-    }
-  },
-  {
-    date: new Date('2024-08-27'),
-    emoji: '🇨🇳',
-    heading: 'Guangzhou, China',
-    subHeading: 'VLDB Talk',
-    link: {
-      label: 'View schedule',
-      href: 'https://vldb.org/2024/?program-schedule',
-      target: '_blank'
-    }
-  },
-  {
-    date: new Date('2024-09-05'),
-    emoji: '🇺🇸',
-    heading: 'San Francisco, CA',
-    subHeading: 'Cloudflare Meetup',
-    link: {
-      label: 'Register for this event',
-      href: 'https://www.meetup.com/clickhouse-silicon-valley-meetup-group/events/302540575',
-      target: '_blank'
-    }
-  },
-  {
-    date: new Date('2024-09-09'),
-    emoji: '🇺🇸',
-    heading: 'Raleigh, NC',
-    subHeading: 'Deutsche Bank Meetup',
-    link: {
-      label: 'Register for this event',
-      href: 'https://www.meetup.com/clickhouse-nc-meetup-group/events/302557230',
-      target: '_blank'
-    }
-  },
-  {
-    date: new Date('2024-09-10'),
-    emoji: '🇺🇸',
-    heading: 'New York, NY',
-    subHeading: 'Rokt Meetup',
-    link: {
-      label: 'Register for this event',
-      href: 'https://www.meetup.com/clickhouse-new-york-user-group/events/302575342',
-      target: '_blank'
-    }
-  },
-  {
-    date: new Date('2024-09-12'),
-    emoji: '🇺🇸',
-    heading: 'Chicago, IL',
-    subHeading: 'Fireside Chat - Jump Capital',
-    link: {
-      label: 'Register for this event',
-      href: 'https://lu.ma/43tvmrfw',
-      target: '_blank'
-    }
-  },
-  {
-    date: new Date('2024-09-18'),
-    emoji: '🇵🇱',
-    heading: 'Warsaw, Poland',
-    subHeading: 'Warsaw, Poland',
-    link: {
-      label: 'Register for this event',
-      href: 'https://aws.amazon.com/events/cloud-days/warsaw/',
-      target: '_blank'
-    }
-  }
-].sort((a, b) => a.date.valueOf() - b.date.valueOf())
+interface PageProps extends CommonProps {
+  recentEvents: Array<EventType>
+}
 
 export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps() {
@@ -126,9 +47,6 @@ export default function HomePage({
   headerData,
   recentEvents
 }: PageProps) {
-  const currentDate = new Date()
-  currentDate.setHours(0) // Set time to start of day
-
   const [timelineCoords, setTimelineCoords] = useState<null | {
     top: number
     right: number
@@ -138,32 +56,26 @@ export default function HomePage({
   const timelineContainerRef = useRef<HTMLDivElement | null>(null)
   const timelineLineRef = useRef<HTMLDivElement | null>(null)
   const timelineDotRefs = useRef<Array<HTMLSpanElement | null>>([])
-
-  const firstActiveItemIndex = SCHEDULE.findIndex((item) => {
-    item.date.setHours(0) // Set time to start of day
-    return item.date >= currentDate
-  })
+  const timelineFirstDotRef = useRef<HTMLSpanElement | null>(null)
+  const timelineLastDotRef = useRef<HTMLSpanElement | null>(null)
 
   useEffect(() => {
     const calculateLinePosition = () => {
       if (
         timelineContainerRef.current &&
         timelineLineRef.current &&
-        timelineDotRefs.current
+        timelineFirstDotRef.current &&
+        timelineLastDotRef.current
       ) {
         const container = timelineContainerRef.current
         const line = timelineLineRef.current
-        const first = timelineDotRefs.current.at(0)
-        const last = timelineDotRefs.current.at(-1)
-
-        if (!first || !last) return
+        const first = timelineFirstDotRef.current
+        const last = timelineLastDotRef.current
 
         const containerRect = container.getBoundingClientRect()
         const lineRect = line.getBoundingClientRect()
         const firstRect = first.getBoundingClientRect()
         const lastRect = last.getBoundingClientRect()
-
-        const is2xl = window.innerWidth >= 1536
 
         const round = (value: number) => parseFloat(value.toFixed(2))
         setTimelineCoords({
@@ -193,7 +105,12 @@ export default function HomePage({
     return () => {
       window.removeEventListener('resize', calculateLinePosition)
     }
-  }, [timelineContainerRef, timelineLineRef, timelineDotRefs])
+  }, [
+    timelineContainerRef,
+    timelineLineRef,
+    timelineFirstDotRef,
+    timelineLastDotRef
+  ])
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -233,7 +150,7 @@ export default function HomePage({
 
       {/* Locations strip */}
       <div className='space-x-6 border-y border-neutral-600 bg-neutral-700 py-1 text-center font-bold'>
-        {COUNTRIES.map((item, index) => {
+        {['USA', 'EUROPE', 'ASIA'].map((item, index) => {
           return (
             <>
               {index !== 0 && <span>&bull;</span>}
@@ -258,78 +175,102 @@ export default function HomePage({
             }}
             className='absolute z-0 w-px bg-white/30'
           />
-          <ol className='relative z-10 space-y-16'>
-            {SCHEDULE.map((item, index) => {
-              item.date.setHours(23, 59, 59) // Set time to end of day
-              const expired = item.date < currentDate
-              const active = index === firstActiveItemIndex
-              const last = index + 1 === SCHEDULE.length
-              return (
-                <li
-                  key={index}
-                  className={`flex flex-wrap items-center gap-4 sm:flex-nowrap ${
-                    expired ? 'pointer-events-none opacity-50' : ''
-                  }`}>
-                  {/* Date */}
-                  <div className='relative flex-shrink-0 flex-grow-0 pr-6 font-basier text-3xl font-black leading-none sm:w-44 sm:text-right'>
-                    <div className='absolute -bottom-4 right-0 [text-shadow:_-3px_-3px_8px_rgb(0_0_0_/_0.7)]'>
-                      {item.emoji}
-                    </div>
-                    {item.date
-                      .toLocaleDateString('en-US', { weekday: 'short' })
-                      .toLocaleUpperCase()}
-                    <br />
-                    {item.date
-                      .toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric'
-                      })
-                      .toLocaleUpperCase()}
-                  </div>
-
-                  {/* Dot */}
-                  <div className='order-first flex-shrink-0 flex-grow-0 sm:order-none'>
-                    <span
-                      ref={(el: HTMLSpanElement) =>
-                        (timelineDotRefs.current[index] = el)
-                      }>
-                      <span
-                        className={`block aspect-square w-2 rounded-full ${
-                          active
-                            ? 'border-white bg-black'
-                            : 'border-black bg-white'
-                        } ${
-                          active || last ? 'scale-[1.75] border' : 'border-2'
-                        }`}
-                      />
-                    </span>
-                  </div>
-
-                  {/* Card */}
-                  <div className='relative ml-5 w-full sm:ml-0 sm:w-96'>
-                    <CUICard>
-                      <CUICard.Body className='flex flex-col px-6 py-5 sm:flex-row sm:items-center sm:justify-between'>
-                        <div>
-                          <strong className='text-sm'>{item.heading}</strong>
-                          <br />
-                          <small className='text-xs'>{item.subHeading}</small>
-                        </div>
-                        <div>
-                          <Link
-                            href={item.link.href}
-                            target={item.link.target || '_self'}
-                            className='text-xs text-primary-300 hover:underline'>
-                            <span className='absolute inset-0' />
-                            {item.link.label}
-                          </Link>
-                        </div>
-                      </CUICard.Body>
-                    </CUICard>
-                  </div>
-                </li>
-              )
-            })}
-          </ol>
+          <div className='relative z-10 space-y-16'>
+            <TimelineItem
+              heading='Guangzhou, China'
+              subHeading='Meetup'
+              link={{
+                label: 'Register for this event',
+                href: 'https://mp.weixin.qq.com/s/GSvo-7xUoVzCsuUvlLTpCw',
+                target: '_blank'
+              }}
+              emoji='🇨🇳'
+              weekday='SUN'
+              month='AUG'
+              day={25}
+              active={true}
+              dotRef={timelineFirstDotRef}
+            />
+            <TimelineItem
+              heading='Guangzhou, China'
+              subHeading='VLDB Talk'
+              link={{
+                label: 'View schedule',
+                href: 'https://vldb.org/2024/?program-schedule',
+                target: '_blank'
+              }}
+              emoji='🇨🇳'
+              weekday='TUE'
+              month='AUG'
+              day={27}
+            />
+            <TimelineItem
+              heading='San Francisco, CA'
+              subHeading='Cloudflare Meetup'
+              link={{
+                label: 'Register for this event',
+                href: 'https://www.meetup.com/clickhouse-silicon-valley-meetup-group/events/302540575',
+                target: '_blank'
+              }}
+              emoji='🇺🇸'
+              weekday='THU'
+              month='SEP'
+              day={5}
+            />
+            <TimelineItem
+              heading='Raleigh, NC'
+              subHeading='Deutsche Bank Meetup'
+              link={{
+                label: 'Register for this event',
+                href: 'https://www.meetup.com/clickhouse-nc-meetup-group/events/302557230',
+                target: '_blank'
+              }}
+              emoji='🇺🇸'
+              weekday='MON'
+              month='SEP'
+              day={9}
+            />
+            <TimelineItem
+              heading='New York, NY'
+              subHeading='Rokt Meetup'
+              link={{
+                label: 'Register for this event',
+                href: 'https://www.meetup.com/clickhouse-new-york-user-group/events/302575342',
+                target: '_blank'
+              }}
+              emoji='🇺🇸'
+              weekday='THU'
+              month='SEP'
+              day={5}
+            />
+            <TimelineItem
+              heading='Chicago, IL'
+              subHeading='Fireside Chat - Jump Capital'
+              link={{
+                label: 'Register for this event',
+                href: 'https://lu.ma/43tvmrfw',
+                target: '_blank'
+              }}
+              emoji='🇺🇸'
+              weekday='THU'
+              month='SEP'
+              day={12}
+            />
+            <TimelineItem
+              heading='Warsaw, Poland'
+              subHeading='Warsaw, Poland'
+              link={{
+                label: 'Register for this event',
+                href: 'https://aws.amazon.com/events/cloud-days/warsaw/',
+                target: '_blank'
+              }}
+              emoji='🇵🇱'
+              weekday='WED'
+              month='SEP'
+              day={18}
+              dotRef={timelineLastDotRef}
+            />
+          </div>
         </div>
       </div>
 
@@ -375,5 +316,97 @@ export default function HomePage({
         </div>
       </div>
     </Layout>
+  )
+}
+
+function TimelineItem({
+  heading,
+  subHeading,
+  link,
+  emoji,
+  weekday,
+  month,
+  day,
+  dotRef,
+  disabled,
+  active,
+  bigDot
+}: {
+  heading: string
+  subHeading: string
+  link: {
+    label: string
+    href: LinkProps['href']
+    target?: React.AnchorHTMLAttributes<HTMLAnchorElement>['target']
+  }
+  emoji: string
+  weekday: 'MON' | 'TUE' | 'WED' | 'THU' | 'FRI' | 'SAT' | 'SUN'
+  month:
+    | 'JAN'
+    | 'FEB '
+    | 'MAR'
+    | 'APR'
+    | 'MAY'
+    | 'JUN'
+    | 'JUL'
+    | 'AUG'
+    | 'SEP'
+    | 'OCT'
+    | 'NOV'
+    | 'DEC'
+  day: number
+  dotRef?: React.Ref<HTMLSpanElement>
+  disabled?: boolean
+  active?: boolean
+  bigDot?: boolean
+}) {
+  return (
+    <div
+      className={`flex flex-wrap items-center gap-4 sm:flex-nowrap ${
+        disabled ? 'pointer-events-none opacity-50' : ''
+      }`}>
+      {/* Date */}
+      <div className='relative flex-shrink-0 flex-grow-0 pr-6 font-basier text-3xl font-black leading-none sm:w-44 sm:text-right'>
+        <div className='absolute -bottom-4 right-0 [text-shadow:_-3px_-3px_8px_rgb(0_0_0_/_0.7)]'>
+          {emoji}
+        </div>
+        {weekday}
+        <br />
+        {month} {day}
+      </div>
+
+      {/* Dot */}
+      <div className='order-first flex-shrink-0 flex-grow-0 sm:order-none'>
+        <span ref={dotRef}>
+          <span
+            className={`block aspect-square w-2 rounded-full ${
+              active ? 'border-white bg-black' : 'border-black bg-white'
+            } ${active || bigDot ? 'scale-[1.75] border' : 'border-2'}`}
+          />
+        </span>
+      </div>
+
+      {/* Card */}
+      <div className='relative ml-5 w-full sm:ml-0 sm:w-96'>
+        <CUICard>
+          <CUICard.Body className='flex flex-col px-6 py-5 sm:flex-row sm:items-center sm:justify-between'>
+            <div>
+              <strong className='text-sm'>{heading}</strong>
+              <br />
+              <small className='text-xs'>{subHeading}</small>
+            </div>
+            <div>
+              <Link
+                href={link.href}
+                target={link.target || '_self'}
+                className='text-xs text-primary-300 hover:underline'>
+                <span className='absolute inset-0' />
+                {link.label}
+              </Link>
+            </div>
+          </CUICard.Body>
+        </CUICard>
+      </div>
+    </div>
   )
 }
