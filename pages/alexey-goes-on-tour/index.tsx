@@ -245,9 +245,9 @@ export default function HomePage({
                 target: '_blank'
               }}
               emoji='🇺🇸'
-              weekday='THU'
+              weekday='TUE'
               month='SEP'
-              day={5}
+              day={10}
             />
             <TimelineItem
               heading='Chicago, IL'
