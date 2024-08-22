@@ -15,18 +15,8 @@ import { CountryItem, PageProps, ScheduleItem } from './types'
 
 const COUNTRIES: Array<CountryItem> = ['USA', 'EUROPE', 'ASIA']
 
+// Automatically ordered by date
 const SCHEDULE: Array<ScheduleItem> = [
-  {
-    date: new Date('2023-11-04'),
-    emoji: '🇨🇳',
-    heading: 'Expired example',
-    subHeading: 'Sub-title',
-    link: {
-      label: 'Register for this event',
-      href: '#',
-      target: '_blank'
-    }
-  },
   {
     date: new Date('2024-08-25'),
     emoji: '🇨🇳',
@@ -104,7 +94,7 @@ const SCHEDULE: Array<ScheduleItem> = [
       target: '_blank'
     }
   }
-]
+].sort((a, b) => a.date.valueOf() - b.date.valueOf())
 
 export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps() {
@@ -136,6 +126,9 @@ export default function HomePage({
   headerData,
   recentEvents
 }: PageProps) {
+  const currentDate = new Date()
+  currentDate.setHours(0) // Set time to start of day
+
   const [timelineCoords, setTimelineCoords] = useState<null | {
     top: number
     right: number
@@ -145,6 +138,11 @@ export default function HomePage({
   const timelineContainerRef = useRef<HTMLDivElement | null>(null)
   const timelineLineRef = useRef<HTMLDivElement | null>(null)
   const timelineDotRefs = useRef<Array<HTMLSpanElement | null>>([])
+
+  const firstActiveItemIndex = SCHEDULE.findIndex((item) => {
+    item.date.setHours(0) // Set time to start of day
+    return item.date >= currentDate
+  })
 
   useEffect(() => {
     const calculateLinePosition = () => {
@@ -246,7 +244,9 @@ export default function HomePage({
       </div>
 
       {/* Timeline */}
-      <div className='section-container mx-auto my-24 flex'>
+      <div
+        className='section-container bg-shadow-element yellow-shadow mx-auto my-24 flex'
+        style={{ '--top-side': '100%' }}>
         <div className='relative mx-auto w-auto' ref={timelineContainerRef}>
           <div
             ref={timelineLineRef}
@@ -260,7 +260,10 @@ export default function HomePage({
           />
           <ol className='relative z-10 space-y-16'>
             {SCHEDULE.map((item, index) => {
-              const expired = item.date < new Date()
+              item.date.setHours(23, 59, 59) // Set time to end of day
+              const expired = item.date < currentDate
+              const active = index === firstActiveItemIndex
+              const last = index + 1 === SCHEDULE.length
               return (
                 <li
                   key={index}
@@ -290,7 +293,15 @@ export default function HomePage({
                       ref={(el: HTMLSpanElement) =>
                         (timelineDotRefs.current[index] = el)
                       }>
-                      <span className='block aspect-square w-2 rounded-full border-2 border-black bg-white' />
+                      <span
+                        className={`block aspect-square w-2 rounded-full ${
+                          active
+                            ? 'border-white bg-black'
+                            : 'border-black bg-white'
+                        } ${
+                          active || last ? 'scale-[1.75] border' : 'border-2'
+                        }`}
+                      />
                     </span>
                   </div>
 

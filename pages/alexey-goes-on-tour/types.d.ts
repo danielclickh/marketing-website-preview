@@ -8,7 +8,7 @@ export interface ScheduleItem {
   heading: string
   subHeading: string
   link: {
-    label: string | React.ReactNode
+    label: string
     href: LinkProps['href']
     target?: React.AnchorHTMLAttributes<HTMLAnchorElement>['target']
   }
