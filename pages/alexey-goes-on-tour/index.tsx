@@ -264,7 +264,7 @@ export default function HomePage({
             />
             <TimelineItem
               heading='Warsaw, Poland'
-              subHeading='Warsaw, Poland'
+              subHeading='AWS Cloud Day'
               link={{
                 label: 'Register for this event',
                 href: 'https://aws.amazon.com/events/cloud-days/warsaw/',
