@@ -1,5 +1,7 @@
 import { GetStaticProps } from 'next'
-import React from 'react'
+import Link from 'next/link'
+import React, { useEffect, useRef, useState } from 'react'
+import { CUICard } from '../../components/ClickUI'
 import EventPost from '../../components/EventPostList/EventPost'
 import GetStartedFree from '../../components/GetStartedFree'
 import Layout from '../../components/Layout'
@@ -7,21 +9,109 @@ import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
 import { findAll } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { EventType } from '../../types/events'
-import { CommonProps } from '../../types/homepage'
 import banner from './banner.jpg'
 import Image from 'next/image'
+import { CountryItem, PageProps, ScheduleItem } from './types'
 
-interface Props extends CommonProps {
-  recentEvents: Array<EventType>
-}
+const COUNTRIES: Array<CountryItem> = ['USA', 'EUROPE', 'ASIA']
 
-export const getStaticProps: GetStaticProps<Props> =
+const SCHEDULE: Array<ScheduleItem> = [
+  {
+    date: new Date('2023-11-04'),
+    emoji: '🇨🇳',
+    heading: 'Expired example',
+    subHeading: 'Sub-title',
+    link: {
+      label: 'Register for this event',
+      href: '#',
+      target: '_blank'
+    }
+  },
+  {
+    date: new Date('2024-08-25'),
+    emoji: '🇨🇳',
+    heading: 'Guangzhou, China',
+    subHeading: 'Meetup',
+    link: {
+      label: 'Register for this event',
+      href: '#',
+      target: '_blank'
+    }
+  },
+  {
+    date: new Date('2024-08-27'),
+    emoji: '🇨🇳',
+    heading: 'Guangzhou, China',
+    subHeading: 'VLDB Talk',
+    link: {
+      label: 'View schedule',
+      href: '#',
+      target: '_blank'
+    }
+  },
+  {
+    date: new Date('2024-09-05'),
+    emoji: '🇺🇸',
+    heading: 'San Francisco, CA',
+    subHeading: 'Cloudflare Meetup',
+    link: {
+      label: 'Register for this event',
+      href: '#',
+      target: '_blank'
+    }
+  },
+  {
+    date: new Date('2024-09-09'),
+    emoji: '🇺🇸',
+    heading: 'Raleigh, NC',
+    subHeading: 'Deutsche Bank Meetup',
+    link: {
+      label: 'Register for this event',
+      href: '#',
+      target: '_blank'
+    }
+  },
+  {
+    date: new Date('2024-09-10'),
+    emoji: '🇺🇸',
+    heading: 'New York, NY',
+    subHeading: 'Ramp Meetup',
+    link: {
+      label: 'Register for this event',
+      href: '#',
+      target: '_blank'
+    }
+  },
+  {
+    date: new Date('2024-09-12'),
+    emoji: '🇺🇸',
+    heading: 'Chicago, IL',
+    subHeading: 'Fireside Chat - Jump Capital',
+    link: {
+      label: 'Register for this event',
+      href: '#',
+      target: '_blank'
+    }
+  },
+  {
+    date: new Date('2024-09-18'),
+    emoji: '🇵🇱',
+    heading: 'Warsaw, Poland',
+    subHeading: 'Warsaw, Poland',
+    link: {
+      label: 'Register for this event',
+      href: '#',
+      target: '_blank'
+    }
+  }
+]
+
+export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
 
-    const { data: recentEvents }: { data: Array<EventType> } = await findAll(
-      'events',
-      {
+    const { data: recentEvents }: { data: PageProps['recentEvents'] } =
+      await findAll('events', {
         filters: {
           localDatetime: {
             $gte: new Date().toISOString()
@@ -30,8 +120,7 @@ export const getStaticProps: GetStaticProps<Props> =
         sort: ['localDatetime:ASC'],
         populate: ['thumbnailPng', 'location'],
         pagination: { limit: 3 }
-      }
-    )
+      })
 
     return {
       props: {
@@ -46,7 +135,68 @@ export default function HomePage({
   footerData,
   headerData,
   recentEvents
-}: Props) {
+}: PageProps) {
+  const [timelineCoords, setTimelineCoords] = useState<null | {
+    top: number
+    right: number
+    bottom: number
+    left: number
+  }>(null)
+  const timelineContainerRef = useRef<HTMLDivElement | null>(null)
+  const timelineLineRef = useRef<HTMLDivElement | null>(null)
+  const timelineDotRefs = useRef<Array<HTMLSpanElement | null>>([])
+
+  useEffect(() => {
+    const calculateLinePosition = () => {
+      if (
+        timelineContainerRef.current &&
+        timelineLineRef.current &&
+        timelineDotRefs.current
+      ) {
+        const container = timelineContainerRef.current
+        const line = timelineLineRef.current
+        const first = timelineDotRefs.current.at(0)
+        const last = timelineDotRefs.current.at(-1)
+
+        if (!first || !last) return
+
+        const containerRect = container.getBoundingClientRect()
+        const lineRect = line.getBoundingClientRect()
+        const firstRect = first.getBoundingClientRect()
+        const lastRect = last.getBoundingClientRect()
+
+        const is2xl = window.innerWidth >= 1536
+
+        const round = (value: number) => parseFloat(value.toFixed(2))
+        setTimelineCoords({
+          top: round(firstRect.top - containerRect.top + firstRect.height / 2),
+          left: round(
+            firstRect.left -
+              containerRect.left +
+              firstRect.width / 2 -
+              lineRect.width / 2
+          ),
+          bottom: round(
+            containerRect.bottom - lastRect.bottom + lastRect.height / 2
+          ),
+          right: round(
+            containerRect.right -
+              lastRect.right +
+              lastRect.width / 2 -
+              lineRect.width / 2
+          )
+        })
+      }
+    }
+
+    window.addEventListener('resize', calculateLinePosition)
+    calculateLinePosition()
+
+    return () => {
+      window.removeEventListener('resize', calculateLinePosition)
+    }
+  }, [timelineContainerRef, timelineLineRef, timelineDotRefs])
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Page banner */}
@@ -58,16 +208,20 @@ export default function HomePage({
           alt='Alexey'
           className='absolute left-0 top-0 z-0 h-full w-full object-cover opacity-30'
         />
-        <div className='section-container relative z-10 mx-auto max-w-5xl space-y-10 py-24 text-center'>
+        <div className='section-container relative z-10 mx-auto max-w-5xl py-24 text-center'>
           <SuiText
             size='sm'
             weight='medium'
             className='inline-block rounded-full bg-primary-300 px-8 py-1 text-primary-900'>
             Upcoming tour
           </SuiText>
-          <SuiTitle type='h1' className='text-balance lg:text-wrap'>
-            Alexey, ClickHouse creator and CTO, goes on tour!
-          </SuiTitle>
+          <h1 className='mb-16 mt-8 text-balance font-basier text-4xl font-bold leading-none md:text-6.5xl'>
+            Alexey goes on tour!
+            <br />
+            <small className='text-3xl font-normal'>
+              ClickHouse co-founder and CTO
+            </small>
+          </h1>
           <SuiText
             size='lg'
             className='text-balance md:px-16 lg:text-wrap lg:px-32'>
@@ -81,7 +235,7 @@ export default function HomePage({
 
       {/* Locations strip */}
       <div className='space-x-6 border-y border-neutral-600 bg-neutral-700 py-1 text-center font-bold'>
-        {['USA', 'EUROPE', 'ASIA'].map((item, index) => {
+        {COUNTRIES.map((item, index) => {
           return (
             <>
               {index !== 0 && <span>&bull;</span>}
@@ -92,8 +246,80 @@ export default function HomePage({
       </div>
 
       {/* Timeline */}
-      <div className='section-container mx-auto my-24 text-center'>
-        [INSERT DATES]
+      <div className='section-container mx-auto my-24 flex'>
+        <div className='relative mx-auto w-auto' ref={timelineContainerRef}>
+          <div
+            ref={timelineLineRef}
+            style={{
+              top: timelineCoords?.top || 0,
+              right: timelineCoords?.right || 0,
+              bottom: timelineCoords?.bottom || 0,
+              left: timelineCoords?.left || 0
+            }}
+            className='absolute z-0 w-px bg-white/30'
+          />
+          <ol className='relative z-10 space-y-16'>
+            {SCHEDULE.map((item, index) => {
+              const expired = item.date < new Date()
+              return (
+                <li
+                  key={index}
+                  className={`flex flex-wrap items-center gap-4 sm:flex-nowrap ${
+                    expired ? 'pointer-events-none opacity-50' : ''
+                  }`}>
+                  {/* Date */}
+                  <div className='relative flex-shrink-0 flex-grow-0 pr-6 font-basier text-3xl font-black leading-none sm:w-44 sm:text-right'>
+                    <div className='absolute -bottom-4 right-0 [text-shadow:_-3px_-3px_8px_rgb(0_0_0_/_0.7)]'>
+                      {item.emoji}
+                    </div>
+                    {item.date
+                      .toLocaleDateString('en-US', { weekday: 'short' })
+                      .toLocaleUpperCase()}
+                    <br />
+                    {item.date
+                      .toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric'
+                      })
+                      .toLocaleUpperCase()}
+                  </div>
+
+                  {/* Dot */}
+                  <div className='order-first flex-shrink-0 flex-grow-0 sm:order-none'>
+                    <span
+                      ref={(el: HTMLSpanElement) =>
+                        (timelineDotRefs.current[index] = el)
+                      }>
+                      <span className='block aspect-square w-2 rounded-full border-2 border-black bg-white' />
+                    </span>
+                  </div>
+
+                  {/* Card */}
+                  <div className='relative ml-5 w-full sm:ml-0 sm:w-96'>
+                    <CUICard>
+                      <CUICard.Body className='flex flex-col px-6 py-5 sm:flex-row sm:items-center sm:justify-between'>
+                        <div>
+                          <strong className='text-sm'>{item.heading}</strong>
+                          <br />
+                          <small className='text-xs'>{item.subHeading}</small>
+                        </div>
+                        <div>
+                          <Link
+                            href={item.link.href}
+                            target={item.link.target || '_self'}
+                            className='text-xs text-primary-300 hover:underline'>
+                            <span className='absolute inset-0' />
+                            {item.link.label}
+                          </Link>
+                        </div>
+                      </CUICard.Body>
+                    </CUICard>
+                  </div>
+                </li>
+              )
+            })}
+          </ol>
+        </div>
       </div>
 
       {/* Get started */}
