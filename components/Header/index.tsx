@@ -55,9 +55,9 @@ export default function Header({ github: { stars } }: HeaderProps) {
         {/* Announcement banner */}
         {true && (
           <LinkWithArrow
-            href='/blog/clickhouse-welcomes-peerdb-adding-the-fastest-postgres-cdc-to-the-fastest-olap-database?loc=eyebrow'
+            href='/alexey-goes-on-tour?loc=eyebrow'
             className='relative z-50 block w-full bg-primary-300 px-4 py-1 text-center text-sm font-medium text-primary-900'>
-            Ingest your Postgres data in minutes - ClickHouse joins forces with PeerDB
+            ClickHouse CTO, Alexey Milovidov, is coming to a city near you!
           </LinkWithArrow>
         )}
 
