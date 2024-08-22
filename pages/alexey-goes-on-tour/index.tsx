@@ -35,6 +35,13 @@ export const getStaticProps: GetStaticProps<PageProps> =
 
     return {
       props: {
+        seo: {
+          title: 'Alexey goes on tour! ClickHouse co-founder and CTO',
+          description:
+            'From August 25th to September 18th, Alexey Milovidov will embark on a 6-city international tour delivering a series of tech talks. Join these in-person events to hear him speak and ask questions. Space is limited, so register below.',
+          path: '/alexy-goes-on-tour',
+          image: [{ url: '/images/social-alexey-tour.png' }]
+        },
         recentEvents,
         ...commonProps
       }
@@ -55,7 +62,6 @@ export default function HomePage({
   }>(null)
   const timelineContainerRef = useRef<HTMLDivElement | null>(null)
   const timelineLineRef = useRef<HTMLDivElement | null>(null)
-  const timelineDotRefs = useRef<Array<HTMLSpanElement | null>>([])
   const timelineFirstDotRef = useRef<HTMLSpanElement | null>(null)
   const timelineLastDotRef = useRef<HTMLSpanElement | null>(null)
 
@@ -141,7 +147,7 @@ export default function HomePage({
             size='lg'
             className='text-balance md:px-16 lg:text-wrap lg:px-32'>
             From August 25th to September 18th, Alexey Milovidov will embark on
-            a 7-city international tour delivering a series of tech talks. Join
+            a 6-city international tour delivering a series of tech talks. Join
             these in-person events to hear him speak and ask questions. Space is
             limited, so register below.
           </SuiText>
