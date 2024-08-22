@@ -24,8 +24,7 @@ const SCHEDULE: Array<ScheduleItem> = [
     subHeading: 'Meetup',
     link: {
       label: 'Register for this event',
-      href: '#',
-      target: '_blank'
+      href: '/company/events/202408-apj-guangzhou-meetup'
     }
   },
   {
@@ -46,8 +45,7 @@ const SCHEDULE: Array<ScheduleItem> = [
     subHeading: 'Cloudflare Meetup',
     link: {
       label: 'Register for this event',
-      href: '#',
-      target: '_blank'
+      href: '/company/events/202409-cloudflare-meetup'
     }
   },
   {
@@ -57,8 +55,7 @@ const SCHEDULE: Array<ScheduleItem> = [
     subHeading: 'Deutsche Bank Meetup',
     link: {
       label: 'Register for this event',
-      href: '#',
-      target: '_blank'
+      href: '/company/events/202409-raleigh-meetup'
     }
   },
   {
@@ -79,8 +76,7 @@ const SCHEDULE: Array<ScheduleItem> = [
     subHeading: 'Fireside Chat - Jump Capital',
     link: {
       label: 'Register for this event',
-      href: '#',
-      target: '_blank'
+      href: '/company/events/202409-jump-trading-meetup'
     }
   },
   {
@@ -246,7 +242,7 @@ export default function HomePage({
       {/* Timeline */}
       <div
         className='section-container bg-shadow-element yellow-shadow mx-auto my-24 flex'
-        style={{ '--top-side': '100%' }}>
+        style={{ '--top-side': '100%' } as React.CSSProperties}>
         <div className='relative mx-auto w-auto' ref={timelineContainerRef}>
           <div
             ref={timelineLineRef}
