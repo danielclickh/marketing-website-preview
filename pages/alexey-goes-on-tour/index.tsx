@@ -24,7 +24,8 @@ const SCHEDULE: Array<ScheduleItem> = [
     subHeading: 'Meetup',
     link: {
       label: 'Register for this event',
-      href: '/company/events/202408-apj-guangzhou-meetup'
+      href: 'https://mp.weixin.qq.com/s/GSvo-7xUoVzCsuUvlLTpCw',
+      target: '_blank'
     }
   },
   {
@@ -34,7 +35,7 @@ const SCHEDULE: Array<ScheduleItem> = [
     subHeading: 'VLDB Talk',
     link: {
       label: 'View schedule',
-      href: '#',
+      href: 'https://vldb.org/2024/?program-schedule',
       target: '_blank'
     }
   },
@@ -45,7 +46,8 @@ const SCHEDULE: Array<ScheduleItem> = [
     subHeading: 'Cloudflare Meetup',
     link: {
       label: 'Register for this event',
-      href: '/company/events/202409-cloudflare-meetup'
+      href: 'https://www.meetup.com/clickhouse-silicon-valley-meetup-group/events/302540575',
+      target: '_blank'
     }
   },
   {
@@ -55,17 +57,18 @@ const SCHEDULE: Array<ScheduleItem> = [
     subHeading: 'Deutsche Bank Meetup',
     link: {
       label: 'Register for this event',
-      href: '/company/events/202409-raleigh-meetup'
+      href: 'https://www.meetup.com/clickhouse-nc-meetup-group/events/302557230',
+      target: '_blank'
     }
   },
   {
     date: new Date('2024-09-10'),
     emoji: '🇺🇸',
     heading: 'New York, NY',
-    subHeading: 'Ramp Meetup',
+    subHeading: 'Rokt Meetup',
     link: {
       label: 'Register for this event',
-      href: '#',
+      href: 'https://www.meetup.com/clickhouse-new-york-user-group/events/302575342',
       target: '_blank'
     }
   },
@@ -76,7 +79,8 @@ const SCHEDULE: Array<ScheduleItem> = [
     subHeading: 'Fireside Chat - Jump Capital',
     link: {
       label: 'Register for this event',
-      href: '/company/events/202409-jump-trading-meetup'
+      href: 'https://lu.ma/43tvmrfw',
+      target: '_blank'
     }
   },
   {
@@ -86,7 +90,7 @@ const SCHEDULE: Array<ScheduleItem> = [
     subHeading: 'Warsaw, Poland',
     link: {
       label: 'Register for this event',
-      href: '#',
+      href: 'https://aws.amazon.com/events/cloud-days/warsaw/',
       target: '_blank'
     }
   }
