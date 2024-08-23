@@ -228,7 +228,7 @@ export default function HomePage({
               subHeading='Deutsche Bank Meetup'
               link={{
                 label: 'Register for this event',
-                href: 'https://www.meetup.com/clickhouse-nc-meetup-group/events/302557230',
+                href: 'https://www.meetup.com/triangletechtalks/events/302723486/',
                 target: '_blank'
               }}
               emoji='🇺🇸'
