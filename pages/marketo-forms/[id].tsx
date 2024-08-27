@@ -33,6 +33,7 @@ export default function Page() {
   const [submitButtonLabel, setSubmitButtonLabel] = useState<null | string>(
     null
   )
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark')
   const [referer, setReferer] = useState<null | string>(null)
 
   // Prefix events so the parent can identify events from multiple forms iframes
@@ -161,6 +162,10 @@ export default function Page() {
       setClearbitTracking(router.query?.clearbitTracking === '1')
       setSubmitButtonLabel((router.query?.submitButtonLabel as string) || null)
       setReferer((router.query?.referer as string) || null)
+
+      if (router.query?.theme === 'dark' || router.query?.theme === 'light') {
+        setTheme(router.query.theme)
+      }
 
       // Add column classes classes
       const addColumnClasses = () => {
@@ -333,7 +338,11 @@ export default function Page() {
   return (
     <>
       <div ref={resizeRef} className={styles.marketoFormContainerV2}>
-        <form className='mktoForm' id={`mktoForm_${formId}`} ref={formRef} />
+        <form
+          className={`mktoForm theme-${theme}`}
+          id={`mktoForm_${formId}`}
+          ref={formRef}
+        />
       </div>
     </>
   )

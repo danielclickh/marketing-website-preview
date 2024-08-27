@@ -48,6 +48,7 @@ type MarketoFormProps = {
   disclaimer?: string | false
   clearbitTracking?: boolean
   submitButtonLabel?: null | string
+  theme?: 'dark' | 'light'
 
   // Callbacks
   onLoad?: (formObject: SpoofedMarketoObject) => any
@@ -63,7 +64,8 @@ export default function MarketoForm({
   clearbitTracking = false,
   onLoad,
   onSuccess,
-  submitButtonLabel
+  submitButtonLabel,
+  theme = 'dark'
 }: MarketoFormProps) {
   const router = useRouter()
   const instanceId = useId()
@@ -242,6 +244,7 @@ export default function MarketoForm({
       params.set('iid', instanceId) // Add our component instance id
       if (clearbitTracking) params.set('clearbitTracking', '1') // Add optional tracking param
       if (submitButtonLabel) params.set('submitButtonLabel', submitButtonLabel)
+      if (theme) params.set('theme', theme)
       setQueryString(params.toString())
 
       // Listen for messages from the iframe
@@ -268,8 +271,13 @@ export default function MarketoForm({
       )}
 
       {formLoaded && !formSuccess && disclaimer && disclaimer.length && (
-        <div className='disclaimer-text mt-3 text-center text-sm font-medium text-neutral-200'>
-          <Markdown>{disclaimer}</Markdown>
+        <div className='disclaimer-text mt-3 text-center text-sm font-medium'>
+          <Markdown
+            className={
+              theme === 'light' ? '!text-primary-900' : '!text-neutral-200'
+            }>
+            {disclaimer}
+          </Markdown>
         </div>
       )}
     </>
