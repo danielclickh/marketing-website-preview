@@ -245,7 +245,9 @@ export default function Page({
                     yourself a favor and put your name on the waitlist now
                     (that’s all it takes). We will be releasing tickets in
                     waves.{' '}
-                    <Link href='#faqs' className='underline'>
+                    <Link
+                      href='#faqs'
+                      className='underline transition-opacity hover:opacity-70'>
                       For more info, check the FAQs below.
                     </Link>
                   </SuiText>
