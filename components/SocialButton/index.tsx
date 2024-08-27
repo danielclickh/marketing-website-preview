@@ -1,12 +1,14 @@
 import React from 'react'
 import { SuiButton } from '../sui/client'
+import { ButtonProps } from '../sui/SuiButton'
 
 interface Props {
   type: string
   title: string
+  className?: ButtonProps['className']
 }
 
-function SocialButton({ type, title }: Props) {
+function SocialButton({ type, title, className = '' }: Props) {
   const onClick = () => {
     const escapedUrl = encodeURIComponent(window.location.href)
     let shareUrl = ''
@@ -36,7 +38,7 @@ function SocialButton({ type, title }: Props) {
   return (
     <SuiButton
       type='custom'
-      className='border border-neutral-700 bg-neutral-800 hover:bg-primary-300 hover:text-neutral-800 shadow'
+      className={`border border-neutral-700 bg-neutral-800 shadow hover:bg-primary-300 hover:text-neutral-800 ${className}`}
       onClick={onClick}>
       {type === 'y_combinator' && (
         <svg
