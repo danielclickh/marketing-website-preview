@@ -73,43 +73,25 @@ export default function Page({
   const heroImageTextRef = useRef<HTMLImageElement | null>(null)
 
   useEffect(() => {
-    const mouseMoveHandler = (event: MouseEvent) => {
-      if (heroImageTextureRef.current) {
-        const elementCenterX =
-          heroImageTextureRef.current.offsetLeft +
-          heroImageTextureRef.current.clientWidth / 2
-        const elementCenterY =
-          heroImageTextureRef.current.offsetTop +
-          heroImageTextureRef.current.clientHeight / 2
-
-        // Calculate the cursors pos from the center of the element
-        const offsetX = event.clientX - elementCenterX
-        const offsetY = event.clientY - elementCenterY
-
-        // Lock offset to a min/max of -50px to +50px
-        const translateX = clamp(offsetX / 50, -50, 50)
-        const translateY = clamp(offsetY / 50, -50, 50)
-
-        heroImageTextureRef.current.style.transform = `translate(${translateX}px, ${translateY}px)`
-      }
-    }
     const scrollHanlder = () => {
       const scrollTop = window.scrollY
       if (heroImageRef.current) {
         // Prevent negative offset
         const translateY = Math.max(0, scrollTop / 3)
-
         heroImageRef.current.style.transform = `translateY(${translateY}px)`
+      }
+
+      if (heroImageTextureRef.current) {
+        // Prevent negative offset
+        const translateY = Math.max(0, scrollTop / 6)
+        heroImageTextureRef.current.style.transform = `translateY(${translateY}px)`
       }
     }
 
     scrollHanlder()
-
-    window.addEventListener('mousemove', mouseMoveHandler)
     window.addEventListener('scroll', scrollHanlder)
 
     return () => {
-      window.removeEventListener('mousemove', mouseMoveHandler)
       window.removeEventListener('scroll', scrollHanlder)
     }
   }, [heroImageRef, heroImageTextureRef, heroImageTextRef])
