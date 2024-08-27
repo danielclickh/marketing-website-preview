@@ -68,7 +68,6 @@ export default function AnimatedIntegrationLogos({ play }: { play: boolean }) {
           src: '/images/cloud/integrations/amazon_s3.svg',
           alt: 'Amazon S3'
         }}
-        badge='Beta'
         fade={false}
       />
 
@@ -143,7 +142,6 @@ export default function AnimatedIntegrationLogos({ play }: { play: boolean }) {
           src: '/images/cloud/integrations/diagram/aws-kinesis.svg',
           alt: 'AWS Kinesis'
         }}
-        badge='Beta'
         fade={false}
       />
       <Tile
