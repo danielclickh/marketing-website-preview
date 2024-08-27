@@ -1,31 +1,18 @@
 import { GetStaticProps } from 'next'
-import Image from 'next/image'
 import { useRef, useState } from 'react'
-import AirGappedIcon from '../../../components/AirGapped/AirGappedIcon'
-import GrowingCommunity from '../../../components/GrowingCommunity'
-import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
-import Markdown from '../../../components/Markdown'
 import MarketoForm from '../../../components/MarketoForm'
+import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { ContactProps } from '../../../types/contact'
+import { CommonProps } from '../../../types/homepage'
+import Image from 'next/image'
+import imageHero from './hero.png'
+import imageTexture from './texture.png'
+import imageTicket from './ticket.png'
 
-interface DriftAPI {
-  startInteraction: (options: { interactionId: number }) => void
-}
-
-interface DriftWindow extends Window {
-  drift: {
-    api: DriftAPI
-  }
-}
-
-// Tell TypeScript that when we reference `window`, we mean the extended type with `drift` on it
-declare var window: DriftWindow
-
-export const getStaticProps: GetStaticProps<ContactProps> =
+export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
     const data = await findOne('contact-us', {
       populate: ['hero', 'hero.contactForm', 'seo', 'seo.image']
@@ -40,29 +27,15 @@ export const getStaticProps: GetStaticProps<ContactProps> =
           title: 'House Party with The Chainsmokers',
           description:
             "Hey, you! Yes, you — the one who’s ready to take a break from all the conference sessions and tech talk. We know you’ve been soaking in all the brilliance (and sales pitches) of AWS re:Invent, but now it’s time to let loose, have fun, and show off the dance moves you've been hiding.",
-          path: '/houseparty/vegas-2024',
-          image: [{ url: '/images/air-gapped-og-v2.png' }]
+          path: '/houseparty/vegas-2024'
+          //image: [{ url: '' }]
         },
         ...commonProps
       }
     }
   }
 
-interface PageProps {
-  contactForm: {
-    disclaimer: string
-  }
-  footerData: ContactProps['footerData']
-  headerData: ContactProps['headerData']
-  seo: ContactProps['seo']
-}
-
-export default function Page({
-  contactForm,
-  footerData,
-  headerData,
-  seo
-}: PageProps) {
+export default function Page({ footerData, headerData, seo }: CommonProps) {
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
@@ -72,42 +45,50 @@ export default function Page({
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
-        <div className='relative overflow-hidden bg-primary-300 px-4 py-12 pt-14 sm:px-8 md:py-24 2xl:px-0'>
-          <div className='mx-auto max-w-7xl'>
-            <div className='flex items-center'>
-              <div>
-                <h1 className='mb-8 font-basier text-4xl font-semibold leading-tight text-[#1C1B1A] md:text-5.5xl'>
-                  House Party with The Chainsmokers
-                </h1>
-                <h2 className='mb-6 max-w-xl font-basier text-[18px] font-semibold leading-tight text-[#1C1B1A]'>
-                  Tuesday, December 3, 2024
-                  <br /> 9:00 PM - 12:00 AM PST | Las Vegas
-                </h2>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div className='mx-auto flex w-full max-w-7xl flex-col px-4 pt-12 sm:px-8 2xl:px-0'>
-            <div className='event-container mx-auto block w-full lg:flex lg:items-start lg:justify-between'>
-              <div className='mb-16 mr-0 flex-auto lg:mb-0 lg:mr-16 lg:max-w-2xl'>
-                <div className='section_metadata '>
-                  <div className='mx-auto mb-6 max-w-2xl text-neutral-200'>
-                    <div className='prose prose-neutral'>
-                      <p>
-                        Hey, you! Yes, you — the one who’s ready to take a break
-                        from all the conference sessions and tech talk. We know
-                        you’ve been soaking in all the brilliance (and sales
-                        pitches) of AWS re:Invent, but now it’s time to let
-                        loose, have fun, and show off the dance moves you've
-                        been hiding. 
-                      </p>
-                    </div>
-                  </div>
+        <div className='relative bg-[#EFEFEF]'>
+          {/* Background texture */}
+          <Image
+            src={imageTexture}
+            width={1966}
+            height={4096}
+            alt=''
+            className='pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-40'
+          />
+
+          <div className='relative z-10 text-primary-900'>
+            {/* Hero image */}
+            <Image
+              src={imageHero}
+              width={3000}
+              height={825}
+              alt='ClickHouse house party with the Chainsmokers!'
+              className='block h-auto w-full'
+            />
+
+            {/* Form section */}
+            <div className='py-20'>
+              <div className='section-container flex flex-col gap-20 lg:flex-row'>
+                <div className='space-y-6'>
+                  <SuiTitle
+                    type='h2'
+                    weight='bold'
+                    className='md:!text-[3.5rem]'>
+                    ClickHouse + Chainsmokers + Vegas = an epic House Party
+                  </SuiTitle>
+                  <SuiText className='text-xl font-semibold'>
+                    Hey, you! Yes, you — the one who’s ready to take a break
+                    from all the conference sessions and tech talk. We know
+                    you’ve been soaking in all the brilliance (and sales
+                    pitches) of AWS re:Invent, but now it’s time to let loose,
+                    have fun, and show off the dance moves you've been hiding.
+                  </SuiText>
+                  <SuiText className='text-xl font-semibold'>
+                    Tuesday, December 3, 2024
+                    <br />
+                    9:00 PM - 12:00 AM PST | Las Vegas
+                  </SuiText>
                 </div>
-              </div>
-              <div className='z-10 ml-auto w-full md:-mt-20 lg:max-w-lg'>
-                <div className='w-full rounded-lg border border-neutral-800 bg-neutral-900 p-8 shadow-card duration-300 ease-in-out'>
+                <div className='w-full flex-shrink-0 rounded-lg bg-[#D6D6D6] bg-opacity-50 p-8 lg:max-w-lg'>
                   {!formLoaded && (
                     <div className='text-center'>Loading form...</div>
                   )}
@@ -115,7 +96,7 @@ export default function Page({
                   {!formSuccess && (
                     <MarketoForm
                       formId='1258'
-                      disclaimer={contactForm.disclaimer}
+                      theme='light'
                       onLoad={() => setFormLoaded(true)}
                       onSuccess={() => {
                         setFormSuccess(true)
@@ -145,10 +126,54 @@ export default function Page({
                 </div>
               </div>
             </div>
+
+            {/* What's going on */}
+            <div className='py-20'>
+              <div className='section-container flex flex-col gap-20 lg:flex-row'>
+                <div>
+                  <Image
+                    src={imageTicket}
+                    width={1073}
+                    height={825}
+                    alt=''
+                    className='origin-bottom-right lg:scale-150'
+                  />
+                </div>
+                <div className='max-w-[600px] space-y-6'>
+                  <SuiTitle type='h3'>What’s going on</SuiTitle>
+                  <SuiText className='!mt-0'>
+                    ClickHouse is super excited to bring{' '}
+                    <strong>The Chainsmokers</strong> to the party. Picture
+                    this: you, a killer DJ set, and a room full of fellow
+                    ClickHouse users who are just as ready to party as you are.
+                    It’s not just “any” DJ set though.
+                  </SuiText>
+                  <SuiText>
+                    We are a bunch of high-speed database, real-time data
+                    warehouse enthusiasts…and so are you. No pretentious vibes
+                    here, just a place where you can kick back, relax, and
+                    dance. It’s the perfect place to hit pause on the conference
+                    hustle and just enjoy yourself.
+                  </SuiText>
+                  <SuiTitle type='h3'>How to get tickets</SuiTitle>
+                  <SuiText className='!mt-0'>
+                    We know you don’t want to miss this, and we don’t want you
+                    to either. But here’s the catch —{' '}
+                    <strong>tickets are extremely limited</strong>. So, do
+                    yourself a favor and put your name on the waitlist now
+                    (that’s all it takes). We will be releasing tickets in
+                    waves. For more info, check the FAQs below.
+                  </SuiText>
+                  <SuiText>
+                    Trust us, future you will be thanking present you for making
+                    this happen. Prepare to make some memories, start a few
+                    dance battles, and take a #SELFIE. See you there!
+                  </SuiText>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <HRSeparator className='my-24' />
-        <GrowingCommunity />
       </Layout>
     </>
   )
