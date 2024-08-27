@@ -1,6 +1,7 @@
+import { clamp } from 'lodash'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import CopyUrlButton from '../../../components/CopyUrlButton'
 import EventPost from '../../../components/EventPostList/EventPost'
 import Layout from '../../../components/Layout'
@@ -13,7 +14,10 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { EventType } from '../../../types/events'
 import { CommonProps } from '../../../types/homepage'
 import Image from 'next/image'
-import imageHero from './hero.png'
+import styles from './styles.module.scss'
+import imageHeroImage from './hero-image.jpg'
+import imageHeroText from './hero-text.png'
+import imageHeroTexture from './hero-texture.png'
 import imageTexture from './texture.png'
 import imageTicket from './ticket.png'
 
@@ -58,11 +62,57 @@ export default function Page({
   seo,
   recentEvents
 }: PageProps) {
+  galaxyOnPage('reinvent2024AncillaryPage')
+
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
 
-  galaxyOnPage('reinvent2024AncillaryPage')
+  const heroImageRef = useRef<HTMLImageElement | null>(null)
+  const heroImageTextureRef = useRef<HTMLImageElement | null>(null)
+  const heroImageTextRef = useRef<HTMLImageElement | null>(null)
+
+  useEffect(() => {
+    const mouseMoveHandler = (event: MouseEvent) => {
+      if (heroImageTextureRef.current) {
+        const elementCenterX =
+          heroImageTextureRef.current.offsetLeft +
+          heroImageTextureRef.current.clientWidth / 2
+        const elementCenterY =
+          heroImageTextureRef.current.offsetTop +
+          heroImageTextureRef.current.clientHeight / 2
+
+        // Calculate the cursors pos from the center of the element
+        const offsetX = event.clientX - elementCenterX
+        const offsetY = event.clientY - elementCenterY
+
+        // Lock offset to a min/max of -50px to +50px
+        const translateX = clamp(offsetX / 50, -50, 50)
+        const translateY = clamp(offsetY / 50, -50, 50)
+
+        heroImageTextureRef.current.style.transform = `translate(${translateX}px, ${translateY}px)`
+      }
+    }
+    const scrollHanlder = () => {
+      const scrollTop = window.scrollY
+      if (heroImageRef.current) {
+        // Prevent negative offset
+        const translateY = Math.max(0, scrollTop / 3)
+
+        heroImageRef.current.style.transform = `translateY(${translateY}px)`
+      }
+    }
+
+    scrollHanlder()
+
+    window.addEventListener('mousemove', mouseMoveHandler)
+    window.addEventListener('scroll', scrollHanlder)
+
+    return () => {
+      window.removeEventListener('mousemove', mouseMoveHandler)
+      window.removeEventListener('scroll', scrollHanlder)
+    }
+  }, [heroImageRef, heroImageTextureRef, heroImageTextRef])
 
   return (
     <>
@@ -79,13 +129,33 @@ export default function Page({
 
           <div className='relative z-10 text-primary-900'>
             {/* Hero image */}
-            <Image
-              src={imageHero}
-              width={3000}
-              height={825}
-              alt='ClickHouse house party with the Chainsmokers!'
-              className='block aspect-[2000/825] h-auto w-full origin-top object-cover lg:aspect-auto'
-            />
+            <div
+              className={`relative aspect-[2000/825] overflow-hidden lg:aspect-[3000/825] ${styles.heroMask}`}>
+              <Image
+                ref={heroImageRef}
+                src={imageHeroImage}
+                width={3000}
+                height={825}
+                alt=''
+                className='absolute block h-full w-full object-cover'
+              />
+              <Image
+                ref={heroImageTextureRef}
+                src={imageHeroTexture}
+                width={3000}
+                height={825}
+                alt=''
+                className='absolute block h-full w-full object-cover'
+              />
+              <Image
+                ref={heroImageTextRef}
+                src={imageHeroText}
+                width={3000}
+                height={825}
+                alt='ClickHouse house party with the Chainsmokers!'
+                className='absolute block h-full w-full object-cover'
+              />
+            </div>
 
             {/* Form section */}
             <div className='py-10 lg:py-20'>
