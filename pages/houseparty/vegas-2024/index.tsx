@@ -244,7 +244,10 @@ export default function Page({
                     <strong>tickets are extremely limited</strong>. So, do
                     yourself a favor and put your name on the waitlist now
                     (that’s all it takes). We will be releasing tickets in
-                    waves. For more info, check the FAQs below.
+                    waves.{' '}
+                    <Link href='#faqs' className='underline'>
+                      For more info, check the FAQs below.
+                    </Link>
                   </SuiText>
                   <SuiText>
                     Trust us, future you will be thanking present you for making
@@ -256,7 +259,7 @@ export default function Page({
             </div>
 
             {/* FAQs */}
-            <div className='relative py-10 lg:py-20'>
+            <div className='relative py-10 lg:py-20' id='faqs'>
               <div className='bg-shadow-element yellow-shadow align-shadow-right absolute right-0 h-full w-1/2 -translate-y-1/4' />
               <div className='section-container relative z-10'>
                 <SuiTitle type='h2' className='text-center'>
