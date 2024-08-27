@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next'
+import Link from 'next/link'
 import { useRef, useState } from 'react'
 import Layout from '../../../components/Layout'
 import MarketoForm from '../../../components/MarketoForm'
@@ -90,13 +91,28 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
                 </div>
                 <div className='w-full flex-shrink-0 rounded-lg bg-[#D6D6D6] bg-opacity-50 p-8 lg:max-w-lg'>
                   {!formLoaded && (
-                    <div className='text-center'>Loading form...</div>
+                    <div className='flex min-h-[640px] items-center justify-center text-center'>
+                      Loading form...
+                    </div>
                   )}
 
                   {!formSuccess && (
                     <MarketoForm
                       formId='1258'
                       theme='light'
+                      disclaimer={
+                        <>
+                          By registering, you acknowledge that ClickHouse will
+                          process your personal information in accordance with
+                          our{' '}
+                          <Link
+                            href='/legal/privacy-policy'
+                            className='underline'>
+                            Privacy Policy
+                          </Link>
+                          .
+                        </>
+                      }
                       onLoad={() => setFormLoaded(true)}
                       onSuccess={() => {
                         setFormSuccess(true)
