@@ -206,7 +206,7 @@ export default function ClickHouseServerPage({
                       logo: '/images/cloud/integrations/warpstream.svg',
                       name: 'WarpStream'
                     }
-                  ].map(({ logo, name, badge }) => {
+                  ].map(({ logo, name }) => {
                     return (
                       <div className='w-1/2 p-2 sm:p-3 md:w-1/3 lg:w-1/4'>
                         <div className='relative flex h-full flex-col items-center rounded-sm bg-neutral-700/70 px-4 pb-6 pt-8'>
@@ -222,11 +222,6 @@ export default function ClickHouseServerPage({
                             className='!my-auto text-center !text-base'>
                             {name}
                           </SuiTitle>
-                          {badge && (
-                            <span className='absolute right-3 top-3 rounded-full bg-warning-800 px-3 py-1 text-xs font-normal text-warning-200'>
-                              {badge}
-                            </span>
-                          )}
                         </div>
                       </div>
                     )
