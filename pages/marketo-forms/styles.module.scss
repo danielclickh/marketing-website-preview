@@ -440,6 +440,17 @@
         }
       }
 
+      // Houseparty specific styles (Marketo ID 1258)
+      //
+      &#mktoForm_1258 {
+
+        .mktoButtonRow {
+          button.mktoButton {
+            background-color: #EBFF00;
+          }
+        }
+      }
+
     }
   }
 }
