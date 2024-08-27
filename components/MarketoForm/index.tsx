@@ -45,7 +45,7 @@ interface MarketoObjectController extends SpoofedMarketoObject {
 
 type MarketoFormProps = {
   formId: string
-  disclaimer?: string | false
+  disclaimer?: string | false | React.ReactNode
   clearbitTracking?: boolean
   submitButtonLabel?: null | string
   theme?: 'dark' | 'light'
@@ -270,14 +270,20 @@ export default function MarketoForm({
         />
       )}
 
-      {formLoaded && !formSuccess && disclaimer && disclaimer.length && (
-        <div className='disclaimer-text mt-3 text-center text-sm font-medium'>
-          <Markdown
-            className={
-              theme === 'light' ? '!text-primary-900' : '!text-neutral-200'
-            }>
-            {disclaimer}
-          </Markdown>
+      {formLoaded && !formSuccess && !!disclaimer && (
+        <div
+          className={`disclaimer-text mt-3 text-center text-sm font-medium ${
+            theme === 'light' ? 'text-primary-900' : 'text-neutral-200'
+          }`}>
+          {typeof disclaimer !== 'string' && disclaimer}
+          {typeof disclaimer === 'string' && (
+            <Markdown
+              className={
+                theme === 'light' ? '!text-primary-900' : '!text-neutral-200'
+              }>
+              {disclaimer}
+            </Markdown>
+          )}
         </div>
       )}
     </>
