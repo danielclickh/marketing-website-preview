@@ -8,6 +8,7 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import Image from 'next/image'
 import FollowUs from '../../../components/FollowUs'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import Markdown from '../../../components/Markdown'
 
 const careerImgs = [
   { id: 2, url: '/images/careers/Meeting.png', alt: 'Meeting' },
@@ -68,7 +69,7 @@ const values = [
     icon: '/images/careers/icons/trust.svg',
     title: 'Trust',
     content:
-      'We work together to make collaboration a strength across timezone differences, languages, and cultures. While we’re in different places, we all have the same goals, and we trust each other to do the work needed to achieve them.'
+      'We work together to make collaboration a strength across timezone differences, languages, and cultures. While we’re in different places, we all have the same goals, and we trust each other to do the work needed to achieve them. [Learn about](/company/careers#protect-against-recruitment-scams) protecting yourself against recruitment scams.'
   }
 ]
 
@@ -93,8 +94,7 @@ export default function CareersPage({
   footerData,
   headerData
 }: CareersData) {
-
-  galaxyOnPage('careersPage');
+  galaxyOnPage('careersPage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -107,13 +107,19 @@ export default function CareersPage({
                 <h1 className='mb-4 font-basier text-4xl font-semibold leading-tight text-neutral-800 md:text-5.5xl'>
                   Become part of our team
                 </h1>
-                <p className='max-w-3xl text-neutral-800'>
+                <p className='max-w-4xl text-neutral-800'>
                   We are a globally diverse and distributed team, united behind
                   a common goal of creating industry-leading, real-time
                   analytics. Here, you will have an opportunity to solve some of
                   the most cutting edge technical challenges and have direct
                   ownership of your work and vision. If you are a contributor by
-                  nature, a thinker as well as a doer - we’ll definitely click!
+                  nature, a thinker as well as a doer - we’ll definitely click!{' '}
+                  <a
+                    href='/company/careers#protect-against-recruitment-scams'
+                    className='font-semibold'>
+                    Learn about
+                  </a>{' '}
+                  protecting yourself against recruitment scams .
                 </p>
               </div>
             </div>
@@ -150,9 +156,10 @@ export default function CareersPage({
                       <h4 className='mb-3 font-inter font-bold'>
                         {value.title}
                       </h4>
-                      <p className='font-inter text-sm font-light leading-relaxed text-neutral-200'>
-                        {value.content}
-                      </p>
+                      <Markdown
+                        children={value.content}
+                        className='font-inter text-sm font-light leading-relaxed text-neutral-200'
+                      />
                     </div>
                   </div>
                 </div>
@@ -170,6 +177,15 @@ export default function CareersPage({
           <CareersFilter />
         </div>
       </div>
+
+      <div
+        className='mx-auto my-16 max-w-7xl px-8 2xl:px-0'
+        id='protect-against-recruitment-scams'>
+        <h2 className='mb-6 font-basier text-4xl text-neutral-100'>
+          Protecting yourself against recruitment scams
+        </h2>
+      </div>
+
       <FollowUs />
     </Layout>
   )
