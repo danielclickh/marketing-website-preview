@@ -233,7 +233,7 @@ export default function Page({
                         </svg>
                         <SuiTitle type='h3' className='text-xl font-bold'>
                           You’ve been successfully <br />
-                          added to the wait list!
+                          added to the waitlist!
                         </SuiTitle>
                         <SuiText weight='bold' className='mb-4 mt-12'>
                           Share the event
