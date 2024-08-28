@@ -107,19 +107,13 @@ export default function CareersPage({
                 <h1 className='mb-4 font-basier text-4xl font-semibold leading-tight text-neutral-800 md:text-5.5xl'>
                   Become part of our team
                 </h1>
-                <p className='max-w-4xl text-neutral-800'>
+                <p className='max-w-3xl text-neutral-800'>
                   We are a globally diverse and distributed team, united behind
                   a common goal of creating industry-leading, real-time
                   analytics. Here, you will have an opportunity to solve some of
                   the most cutting edge technical challenges and have direct
                   ownership of your work and vision. If you are a contributor by
-                  nature, a thinker as well as a doer - we’ll definitely click!{' '}
-                  <a
-                    href='/company/careers#protect-against-recruitment-scams'
-                    className='font-semibold'>
-                    Learn about
-                  </a>{' '}
-                  protecting yourself against recruitment scams .
+                  nature, a thinker as well as a doer - we’ll definitely click!
                 </p>
               </div>
             </div>
