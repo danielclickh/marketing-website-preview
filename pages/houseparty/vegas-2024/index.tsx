@@ -112,7 +112,7 @@ export default function Page({
           <div className='relative z-10 text-primary-900'>
             {/* Hero image */}
             <div
-              className={`relative aspect-[2000/825] overflow-hidden lg:aspect-[3000/825] ${styles.heroMask}`}>
+              className={`relative aspect-[2000/825] overflow-hidden lg:aspect-auto lg:h-[420px] ${styles.heroMask}`}>
               <Image
                 ref={heroImageRef}
                 src={imageHeroImage}
@@ -135,7 +135,7 @@ export default function Page({
                 width={3000}
                 height={825}
                 alt='ClickHouse house party with the Chainsmokers!'
-                className='absolute block h-full w-full object-cover'
+                className='absolute block h-full w-full object-cover lg:object-scale-down'
               />
             </div>
 
