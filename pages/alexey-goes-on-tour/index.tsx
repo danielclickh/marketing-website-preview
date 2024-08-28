@@ -197,7 +197,7 @@ export default function HomePage({
               weekday='SUN'
               month='AUG'
               day={25}
-              active={true}
+              disabled={true}
               dotRef={timelineFirstDotRef}
             />
             <TimelineItem
@@ -211,6 +211,7 @@ export default function HomePage({
               emoji='🇨🇳'
               weekday='TUE'
               month='AUG'
+              disabled={true}
               day={27}
             />
             <TimelineItem
