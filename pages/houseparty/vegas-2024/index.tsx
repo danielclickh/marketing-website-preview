@@ -149,14 +149,14 @@ export default function Page({
                     className='md:!text-[3.5rem]'>
                     ClickHouse + Chainsmokers + Vegas = an epic House Party
                   </SuiTitle>
-                  <SuiText className='text-xl font-semibold'>
+                  <SuiText className='font-semibold lg:text-xl'>
                     Hey, you! Yes, you — the one who’s ready to take a break
                     from all the conference sessions and tech talk. We know
                     you’ve been soaking in all the brilliance (and sales
                     pitches) of AWS re:Invent, but now it’s time to let loose,
                     have fun, and show off the dance moves you've been hiding.
                   </SuiText>
-                  <SuiText className='text-xl font-semibold'>
+                  <SuiText className='font-semibold lg:text-xl'>
                     Tuesday, December 3, 2024
                     <br />
                     9:00 PM - 12:00 AM PST | Las Vegas
