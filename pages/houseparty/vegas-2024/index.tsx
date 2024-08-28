@@ -241,7 +241,7 @@ export default function Page({
                         <div className='mx-auto flex max-w-80 flex-wrap justify-center gap-4 text-neutral-0'>
                           <CopyUrlButton className='!px-3' />
                           {[
-                            'y_combinator',
+                            //'y_combinator',
                             'twitter',
                             'facebook',
                             'linkedin'
