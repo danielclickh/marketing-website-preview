@@ -69,7 +69,7 @@ const values = [
     icon: '/images/careers/icons/trust.svg',
     title: 'Trust',
     content:
-      'We work together to make collaboration a strength across timezone differences, languages, and cultures. While we’re in different places, we all have the same goals, and we trust each other to do the work needed to achieve them. [Learn about](/company/careers#protect-against-recruitment-scams) protecting yourself against recruitment scams.'
+      'We work together to make collaboration a strength across timezone differences, languages, and cultures. While we’re in different places, we all have the same goals, and we trust each other to do the work needed to achieve them.'
   }
 ]
 
