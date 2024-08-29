@@ -198,7 +198,7 @@ export default function Page({
                         formId='1258'
                         theme='light'
                         disclaimer={
-                          <>
+                          <p className='text-xs'>
                             By registering, you acknowledge that ClickHouse will
                             process your personal information in accordance with
                             our{' '}
@@ -208,7 +208,7 @@ export default function Page({
                               Privacy Policy
                             </Link>
                             .
-                          </>
+                          </p>
                         }
                         onLoad={() => setFormLoaded(true)}
                         onSuccess={() => {

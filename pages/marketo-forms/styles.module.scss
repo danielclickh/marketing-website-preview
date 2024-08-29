@@ -81,6 +81,8 @@
           }
         }
 
+
+
         &.mktoRequiredField label.mktoLabel .mktoAsterix {
           @apply inline;
         }
@@ -393,6 +395,13 @@
         }
       }
 
+
+      //chainsmokers specific styles
+      &#mktoForm_1258 {
+        label.mktoLabel {
+          @apply text-sm;
+        }
+      }
 
       // Newsletter specific styles (Marketo ID 1122)
       //
