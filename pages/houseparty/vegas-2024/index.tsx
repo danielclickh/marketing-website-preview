@@ -178,9 +178,8 @@ export default function Page({
                     have fun, and show off the dance moves you've been hiding.
                   </SuiText>
                   <SuiText className='font-semibold lg:text-xl'>
-                    Tuesday, December 3, 2024
-                    <br />
-                    9:00 PM - 12:00 AM PST | Las Vegas
+                    Tuesday, December 3
+                    <br />9 p.m. - 12 a.m. PT | Las Vegas
                   </SuiText>
                 </div>
                 <div
