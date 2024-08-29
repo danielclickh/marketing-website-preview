@@ -20,6 +20,8 @@ import imageHeroText from './hero-text.png'
 import imageHeroTexture from './hero-texture.png'
 import imageTexture from './texture.png'
 import imageTicket from './ticket.png'
+import { CUIButton } from '../../../components/ClickUI'
+import { ChevronRightIcon } from 'lucide-react'
 
 interface PageProps extends CommonProps {
   recentEvents: Array<EventType>
@@ -141,6 +143,21 @@ export default function Page({
                 className='absolute block h-full w-full object-cover lg:object-scale-down'
               />
             </div>
+            <div className='w-full md:hidden'>
+              <CUIButton
+                type='primary'
+                className='group mx-auto mt-4 w-auto md:mt-0'
+                target='_self'
+                href='/houseparty/vegas-2024#register'
+                iconRight={
+                  <ChevronRightIcon
+                    height='18'
+                    className='pt-0.5 transition group-hover:translate-x-1/2'
+                  />
+                }>
+                Join the waitlist
+              </CUIButton>
+            </div>
 
             {/* Form section */}
             <div className='py-10 lg:py-20'>
@@ -165,7 +182,9 @@ export default function Page({
                     9:00 PM - 12:00 AM PST | Las Vegas
                   </SuiText>
                 </div>
-                <div className='w-full flex-shrink-0 lg:min-h-[640px] lg:max-w-lg'>
+                <div
+                  className='w-full flex-shrink-0 lg:min-h-[640px] lg:max-w-lg'
+                  id='register'>
                   <div className='rounded-lg bg-[#D6D6D6] bg-opacity-50 p-4 lg:p-8'>
                     {!formLoaded && (
                       <div className='flex items-center justify-center text-center'>
@@ -263,7 +282,6 @@ export default function Page({
                 </div>
               </div>
             </div>
-
             {/* What's going on */}
             <div className='py-10 lg:py-20'>
               <div className='section-container flex flex-col gap-10 lg:flex-row lg:gap-20'>
@@ -314,7 +332,6 @@ export default function Page({
                 </div>
               </div>
             </div>
-
             {/* FAQs */}
             <div className='relative py-10 lg:py-20' id='faqs'>
               <div className='bg-shadow-element yellow-shadow align-shadow-right absolute right-0 h-full w-1/2 -translate-y-1/4' />
