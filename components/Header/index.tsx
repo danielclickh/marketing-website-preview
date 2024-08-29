@@ -59,7 +59,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
             className={`relative z-50 block w-full bg-primary-300 px-4 py-1 text-center text-sm font-medium text-primary-900 ${
               eyebrow?.className || ''
             }`}>
-            We're having a house party with The Chainsmokers - Join the waitlist
+            Going to re:Invent this December? Come and party with us
           </LinkWithArrow>
         )}
 

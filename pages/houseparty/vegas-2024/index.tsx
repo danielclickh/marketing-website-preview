@@ -22,6 +22,7 @@ import imageTexture from './texture.png'
 import imageTicket from './ticket.png'
 import { CUIButton } from '../../../components/ClickUI'
 import { ChevronRightIcon } from 'lucide-react'
+import faqs from './faqs.json'
 
 interface PageProps extends CommonProps {
   recentEvents: Array<EventType>
@@ -257,6 +258,10 @@ export default function Page({
                           You’ve been successfully <br />
                           added to the waitlist!
                         </SuiTitle>
+                        <p>
+                          We'll be notifying you via email so please check your
+                          emails (including spam folders) periodically.
+                        </p>
                         <SuiText weight='bold' className='mb-4 mt-12'>
                           Share the event
                         </SuiText>
@@ -341,72 +346,13 @@ export default function Page({
                 </SuiTitle>
 
                 <div className='mt-10 space-y-2.5'>
-                  <FaqAccordion question='When will I find out if I’m in?'>
-                    <SuiText className='max-w-3xl'>
-                      We are rolling tickets out in waves weekly. There is
-                      limited space in the venue and the waitlist is already
-                      filling up quickly. As we will get confirmation of
-                      attendance we will release tickets in waves weekly
-                      starting September 10th. Keep an eye on your favorite
-                      social channel for the tickets.
-                    </SuiText>
-                  </FaqAccordion>
-                  <FaqAccordion question='What should I wear?'>
-                    <SuiText className='max-w-3xl'>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Adipisci doloribus et ex impedit ipsum natus ratione
-                      voluptate. Amet dicta dignissimos distinctio id incidunt
-                      modi nesciunt numquam quo reiciendis voluptatibus. Amet!
-                    </SuiText>
-                  </FaqAccordion>
-                  <FaqAccordion question='Will there be food and drinks provided?'>
-                    <SuiText className='max-w-3xl'>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Adipisci doloribus et ex impedit ipsum natus ratione
-                      voluptate. Amet dicta dignissimos distinctio id incidunt
-                      modi nesciunt numquam quo reiciendis voluptatibus. Amet!
-                    </SuiText>
-                  </FaqAccordion>
-                  <FaqAccordion question='Can I bring a friend (or two, or three?)'>
-                    <SuiText className='max-w-3xl'>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Adipisci doloribus et ex impedit ipsum natus ratione
-                      voluptate. Amet dicta dignissimos distinctio id incidunt
-                      modi nesciunt numquam quo reiciendis voluptatibus. Amet!
-                    </SuiText>
-                  </FaqAccordion>
-                  <FaqAccordion question='Why is ClickHouse doing this?'>
-                    <SuiText className='max-w-3xl'>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Adipisci doloribus et ex impedit ipsum natus ratione
-                      voluptate. Amet dicta dignissimos distinctio id incidunt
-                      modi nesciunt numquam quo reiciendis voluptatibus. Amet!
-                    </SuiText>
-                  </FaqAccordion>
-                  <FaqAccordion question='Is a party at a club in Vegas during a tech conference safe?'>
-                    <SuiText className='max-w-3xl'>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Adipisci doloribus et ex impedit ipsum natus ratione
-                      voluptate. Amet dicta dignissimos distinctio id incidunt
-                      modi nesciunt numquam quo reiciendis voluptatibus. Amet!
-                    </SuiText>
-                  </FaqAccordion>
-                  <FaqAccordion question='Do I know The Chainsmokers?'>
-                    <SuiText className='max-w-3xl'>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Adipisci doloribus et ex impedit ipsum natus ratione
-                      voluptate. Amet dicta dignissimos distinctio id incidunt
-                      modi nesciunt numquam quo reiciendis voluptatibus. Amet!
-                    </SuiText>
-                  </FaqAccordion>
-                  <FaqAccordion question='What should I wear?'>
-                    <SuiText className='max-w-3xl'>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Adipisci doloribus et ex impedit ipsum natus ratione
-                      voluptate. Amet dicta dignissimos distinctio id incidunt
-                      modi nesciunt numquam quo reiciendis voluptatibus. Amet!
-                    </SuiText>
-                  </FaqAccordion>
+                  {faqs.map((faq, index) => {
+                    return (
+                      <FaqAccordion key={index} question={faq.title}>
+                        <SuiText className='max-w-3xl'>{faq.content}</SuiText>
+                      </FaqAccordion>
+                    )
+                  })}
                 </div>
               </div>
             </div>
