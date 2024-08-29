@@ -10,7 +10,7 @@ import { HeaderProps } from './types'
 import Navigation from '../Navigation'
 import { galaxyOnClick } from '../../lib/galaxy/galaxy'
 
-export default function Header({ github: { stars } }: HeaderProps) {
+export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const headerRef = useRef<HTMLElement>(null)
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState<boolean>(false)
   const [headerHeight, setHeaderHeight] = useState<number>(72)
@@ -56,7 +56,9 @@ export default function Header({ github: { stars } }: HeaderProps) {
         {true && (
           <LinkWithArrow
             href='/alexey-goes-on-tour?loc=eyebrow'
-            className='relative z-50 block w-full bg-primary-300 px-4 py-1 text-center text-sm font-medium text-primary-900'>
+            className={`relative z-50 block w-full bg-primary-300 px-4 py-1 text-center text-sm font-medium text-primary-900 ${
+              eyebrow?.className || ''
+            }`}>
             ClickHouse CTO, Alexey Milovidov, is coming to a city near you!
           </LinkWithArrow>
         )}

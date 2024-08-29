@@ -98,7 +98,10 @@ export default function Page({
 
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <Layout
+        footerData={footerData}
+        seo={seo}
+        headerData={{ eyebrow: { className: '!bg-[#EBFF00]' }, ...headerData }}>
         <div className='relative bg-[#EFEFEF]'>
           {/* Background texture */}
           <Image
