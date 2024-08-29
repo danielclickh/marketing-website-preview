@@ -2,6 +2,7 @@ import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import resolveConfig from 'tailwindcss/resolveConfig'
+import { slugify } from '../../lib/utils/strings'
 import tailwindConfig from '../../tailwind.config'
 import { MarketoFormObject, MarketoFormsApi } from '../../types/marketo-form'
 import styles from './styles.module.scss'
@@ -35,6 +36,7 @@ export default function Page() {
   )
   const [theme, setTheme] = useState<'light' | 'dark'>('dark')
   const [referer, setReferer] = useState<null | string>(null)
+  const [refererClass, setRefererClass] = useState<string>('')
 
   // Prefix events so the parent can identify events from multiple forms iframes
   const instanceEventPrefix = () => {
@@ -46,7 +48,6 @@ export default function Page() {
   const [routerReady, setRouterReady] = useState(false)
 
   function sendEventToParent(eventName: string, data: any = null) {
-    console.log({ formId, eventName, data })
     if (window?.parent) {
       window.parent.postMessage({
         type: `${instanceEventPrefix()}-${eventName}`,
@@ -206,6 +207,8 @@ export default function Page() {
     })
     setResizeObserver(observer)
 
+    setRefererClass(`referer-${slugify(getRefererPath(referer, 'unknown'))}`)
+
     // Handle Marketo form creation
     if (routerReady && scriptLoaded) {
       // Empty form contents in case of rerender
@@ -213,7 +216,7 @@ export default function Page() {
 
       // Fixes marketo referrer issue for SPAs
       window.MktoForms2.whenReady((marketoFormObject) => {
-        fixMarketoReferer(marketoFormObject, referer || '')
+        fixMarketoReferer(marketoFormObject, referer)
       })
 
       // Remove styles unwanted styles on re-render
@@ -339,7 +342,7 @@ export default function Page() {
     <>
       <div ref={resizeRef} className={styles.marketoFormContainerV2}>
         <form
-          className={`mktoForm theme-${theme}`}
+          className={`mktoForm theme-${theme} ${refererClass}`}
           id={`mktoForm_${formId}`}
           ref={formRef}
         />
@@ -389,20 +392,39 @@ function removeMarketoStyles(marketoFormObject: MarketoFormObject) {
   }
 }
 
+function getReferer(value: null | string = null) {
+  if (value && value.length) return value
+  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    return window.location !== window.parent.location
+      ? document.referrer
+      : document.location.href
+  }
+  return ''
+}
+
+function getRefererPath(
+  value: null | string = null,
+  defaultValue: any = null
+): string | any {
+  const fixed = getReferer(value)
+  if (!fixed.length) return defaultValue
+  try {
+    return new URL(fixed).pathname
+  } catch (e) {}
+  return defaultValue
+}
+
 // @link https://blog.teknkl.com/fix-forms-20-referrer-cached-single-page-application/
 function fixMarketoReferer(
   marketoFormObject: MarketoFormObject,
-  referer?: string
+  referer?: null | string
 ) {
   const nativeGetValues = marketoFormObject.getValues
   marketoFormObject.onSubmit(function (submittingForm) {
     submittingForm.getValues = function () {
       const values = nativeGetValues()
       Object.defineProperty(values, '_mktoReferrer', {
-        value:
-          referer || window.location !== window.parent.location
-            ? document.referrer
-            : document.location.href,
+        value: getReferer(referer),
         enumerable: true
       })
       return values

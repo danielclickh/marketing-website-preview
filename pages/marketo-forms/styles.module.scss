@@ -449,16 +449,17 @@
         }
       }
 
-      // Houseparty specific styles (Marketo ID 1258)
+      // Houseparty yellow buttons (all forms)
+      //
+      &.referer-houseparty-vegas-2024 {
+        .mktoButtonRow button.mktoButton {
+          background-color: #EBFF00 !important;
+        }
+      }
+
+      // Houseparty inline checkboxes (Marketo ID 1258)
       //
       &#mktoForm_1258 {
-
-        .mktoButtonRow {
-          button.mktoButton {
-            background-color: #EBFF00;
-          }
-        }
-
         .mktoFormRow:nth-child(8), .mktoFormRow:nth-child(9) {
           .mktoFieldWrap {
             @apply flex-row items-center;
