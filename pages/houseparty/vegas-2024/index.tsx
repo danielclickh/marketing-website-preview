@@ -395,34 +395,6 @@ export default function Page({
             </div>
           </div>
         </div>
-
-        {/* Related content */}
-        <div className='section-container py-10 lg:py-20'>
-          <div className='flex justify-between'>
-            <h3 className='mb-10 font-basier text-4xl'>Upcoming events</h3>
-            <SuiButton
-              path='/company/news-event'
-              type='empty'
-              color='primary'
-              className='font-base hidden border border-primary-300/50 md:inline-block'>
-              View all events
-            </SuiButton>
-          </div>
-          <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
-            {recentEvents.map((event: EventType) => (
-              <EventPost key={event.id} {...event} />
-            ))}
-          </div>
-          <div className='mt-8 text-center md:hidden'>
-            <SuiButton
-              path='/company/news-event'
-              type='empty'
-              color='primary'
-              className='font-base border border-primary-300/50'>
-              View all events
-            </SuiButton>
-          </div>
-        </div>
       </Layout>
     </>
   )
