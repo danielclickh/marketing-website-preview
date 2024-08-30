@@ -1,109 +1,137 @@
 import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import { useRef, useState } from 'react'
-import AirGappedIcon from '../../../components/AirGapped/AirGappedIcon'
-import GrowingCommunity from '../../../components/GrowingCommunity'
-import HRSeparator from '../../../components/HRSeparator'
+import React, { useEffect, useRef } from 'react'
+import Tilt from 'react-parallax-tilt'
+import CopyUrlButton from '../../../components/CopyUrlButton'
 import Layout from '../../../components/Layout'
-import Markdown from '../../../components/Markdown'
-import MarketoForm from '../../../components/MarketoForm'
-import { findOne } from '../../../lib/api/strapi'
+import SocialButton from '../../../components/SocialButton'
+import { SuiText, SuiTitle } from '../../../components/sui'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { ContactProps } from '../../../types/contact'
+import { CommonProps } from '../../../types/homepage'
+import Image from 'next/image'
+import imageHeroImage from './hero-image.jpg'
+import imageHeroText from './hero-text.png'
+import imageHeroTexture from './hero-texture.png'
+import imageTexture from './texture.png'
+import imageTicket from './ticket.png'
+import styles from './styles.module.scss'
 
-interface DriftAPI {
-  startInteraction: (options: { interactionId: number }) => void
-}
+interface PageProps extends CommonProps {}
 
-interface DriftWindow extends Window {
-  drift: {
-    api: DriftAPI
-  }
-}
-
-// Tell TypeScript that when we reference `window`, we mean the extended type with `drift` on it
-declare var window: DriftWindow
-
-export const getStaticProps: GetStaticProps<ContactProps> =
+export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps() {
-    const data = await findOne('contact-us', {
-      populate: ['hero', 'hero.contactForm', 'seo', 'seo.image']
-    })
-
     const commonProps = await getCommonProps()
 
     return {
       props: {
-        ...data.hero,
         seo: {
           title: "I'm going to the House Party with The Chainsmokers",
           description:
             "Hey, you! Yes, you — the one who’s ready to take a break from all the conference sessions and tech talk. We know you’ve been soaking in all the brilliance (and sales pitches) of AWS re:Invent, but now it’s time to let loose, have fun, and show off the dance moves you've been hiding.",
-          path: '/houseparty/vvegas-2024/ticket',
-          image: [{ url: '/images/air-gapped-og-v2.png' }]
+          path: '/houseparty/vegas-2024/ticket',
+          image: [{ url: '/images/social-houseparty-vegas-2024.png' }]
         },
         ...commonProps
       }
     }
   }
 
-interface PageProps {
-  contactForm: {
-    disclaimer: string
-  }
-  footerData: ContactProps['footerData']
-  headerData: ContactProps['headerData']
-  seo: ContactProps['seo']
-}
+export default function Page({ footerData, headerData, seo }: PageProps) {
+  galaxyOnPage('reinvent2024AncillaryTicketPage')
 
-export default function Page({
-  contactForm,
-  footerData,
-  headerData,
-  seo
-}: PageProps) {
-  const formSuccessRef = useRef<HTMLDivElement | null>(null)
-  const [formSuccess, setFormSuccess] = useState(false)
-  const [formLoaded, setFormLoaded] = useState(false)
+  const heroImageRef = useRef<HTMLImageElement | null>(null)
+  const heroImageTextureRef = useRef<HTMLImageElement | null>(null)
+  const heroImageTextRef = useRef<HTMLImageElement | null>(null)
 
-  galaxyOnPage('reinvent2024AncillaryPage')
+  useEffect(() => {
+    const scrollHanlder = () => {
+      const scrollTop = window.scrollY
+      if (heroImageRef.current) {
+        // Prevent negative offset
+        const translateY = Math.max(0, scrollTop / 3)
+        heroImageRef.current.style.transform = `translateY(${translateY}px)`
+      }
+
+      if (heroImageTextureRef.current) {
+        // Prevent negative offset
+        const translateY = Math.max(0, scrollTop / 6)
+        heroImageTextureRef.current.style.transform = `translateY(${translateY}px)`
+      }
+    }
+
+    scrollHanlder()
+    window.addEventListener('scroll', scrollHanlder)
+
+    return () => {
+      window.removeEventListener('scroll', scrollHanlder)
+    }
+  }, [heroImageRef, heroImageTextureRef, heroImageTextRef])
 
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
-        <div className='relative overflow-hidden bg-primary-300 px-4 py-12 pt-14 sm:px-8 md:py-24 2xl:px-0'>
-          <div className='mx-auto max-w-7xl'>
-            <div className='flex items-center'>
-              <div>
-                <h1 className='mb-8 font-basier text-4xl font-semibold leading-tight text-[#1C1B1A] md:text-5.5xl'>
-                  House Party with The Chainsmokers
-                </h1>
-                <h2 className='mb-6 max-w-xl font-basier text-[18px] font-semibold leading-tight text-[#1C1B1A]'>
-                  Tuesday, December 3, 2024
-                  <br /> 9:00 PM - 12:00 AM PST | Las Vegas
-                </h2>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div className='mx-auto flex w-full max-w-7xl flex-col px-4 pt-12 sm:px-8 2xl:px-0'>
-            <div className='event-container mx-auto block w-full lg:flex lg:items-start lg:justify-between'>
-              <div className='mb-16 mr-0 flex-auto lg:mb-0 lg:mr-16 lg:max-w-2xl'>
-                <div className='section_metadata '>
-                  <div className='mx-auto mb-6 max-w-2xl text-neutral-200'>
-                    <div className='prose prose-neutral'>
-                      <p>Share!</p>
-                    </div>
-                  </div>
+      <Layout
+        footerData={footerData}
+        seo={seo}
+        headerData={{ eyebrow: { className: '!bg-[#EBFF00]' }, ...headerData }}>
+        <div className='relative overflow-hidden'>
+          <Image
+            ref={heroImageRef}
+            src={imageHeroImage}
+            width={3000}
+            height={825}
+            alt=''
+            className='absolute block h-full w-full object-cover'
+          />
+          <Image
+            ref={heroImageTextureRef}
+            src={imageHeroTexture}
+            width={3000}
+            height={825}
+            alt=''
+            className='absolute block h-full w-full object-cover'
+          />
+          <div className='relative z-10 flex py-24 lg:min-h-[700px]'>
+            <div className='m-auto space-y-10 px-6 text-center'>
+              <Tilt
+                className={`${styles.ticketMask}`}
+                glareEnable={true}
+                glareMaxOpacity={0.5}
+                glarePosition='all'
+                tiltMaxAngleX={10}
+                tiltMaxAngleY={10}
+                gyroscope={true}>
+                <Image
+                  src={imageTicket}
+                  width={1465}
+                  height={682}
+                  alt='Ticket'
+                  className='h-auto w-full max-w-2xl'
+                />
+              </Tilt>
+              <div className='text-white'>
+                <SuiText weight='bold' className='mb-4 mt-12'>
+                  Share your ticket
+                </SuiText>
+                <div className='mx-auto flex max-w-80 flex-wrap justify-center gap-4 text-neutral-0'>
+                  <CopyUrlButton className='!px-3' />
+                  {[
+                    //'y_combinator',
+                    'twitter',
+                    'facebook',
+                    'linkedin'
+                  ].map((social) => (
+                    <SocialButton
+                      key={social}
+                      type={social}
+                      title='ClickHouse + Chainsmokers + Vegas = an epic House Party'
+                      className='!px-3'
+                    />
+                  ))}
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <HRSeparator className='my-24' />
-        <GrowingCommunity />
       </Layout>
     </>
   )

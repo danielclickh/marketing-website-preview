@@ -1,13 +1,11 @@
-import { clamp } from 'lodash'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import CopyUrlButton from '../../../components/CopyUrlButton'
-import EventPost from '../../../components/EventPostList/EventPost'
 import Layout from '../../../components/Layout'
 import MarketoForm from '../../../components/MarketoForm'
 import SocialButton from '../../../components/SocialButton'
-import { SuiButton, SuiText, SuiTitle } from '../../../components/sui'
+import { SuiText, SuiTitle } from '../../../components/sui'
 import { findAll } from '../../../lib/api/strapi'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
@@ -19,7 +17,7 @@ import imageHeroImage from './hero-image.jpg'
 import imageHeroText from './hero-text.png'
 import imageHeroTexture from './hero-texture.png'
 import imageTexture from './texture.png'
-import imageTicket from './ticket.png'
+import imageTicketBlob from './ticket-blob.png'
 import { CUIButton } from '../../../components/ClickUI'
 import { ChevronRightIcon } from 'lucide-react'
 import faqs from './faqs.json'
@@ -147,7 +145,7 @@ export default function Page({
             <div className='w-full md:hidden'>
               <CUIButton
                 type='primary'
-                className='group mx-auto mt-4 w-auto md:mt-0'
+                className='group mx-auto mt-4 w-auto !bg-[#EBFF00] md:mt-0'
                 target='_self'
                 href='/houseparty/vegas-2024#register'
                 iconRight={
@@ -291,7 +289,7 @@ export default function Page({
               <div className='section-container flex flex-col gap-10 lg:flex-row lg:gap-20'>
                 <div>
                   <Image
-                    src={imageTicket}
+                    src={imageTicketBlob}
                     width={1073}
                     height={825}
                     alt=''
