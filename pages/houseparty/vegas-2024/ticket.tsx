@@ -110,7 +110,7 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
               width={3000}
               height={825}
               alt=''
-              className='absolute block h-full w-full object-cover'
+              className='absolute block h-full w-full object-cover opacity-50'
             />
             <Image
               ref={heroImageTextureRef}
@@ -144,7 +144,9 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
                     ))}
                   </div>
                 </div>
-                <SuiText size='sm' className='mb-4 mt-10 text-center opacity-70'>
+                <SuiText
+                  size='sm'
+                  className='mb-4 mt-10 text-center opacity-80'>
                   This is not an official ticket. You will receive it nearer the
                   event.
                 </SuiText>
