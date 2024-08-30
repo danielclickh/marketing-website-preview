@@ -121,7 +121,7 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
               className='absolute block h-full w-full object-cover'
             />
             <div className='relative z-10 flex pb-24 pt-16 lg:min-h-[700px]'>
-              <div className='m-auto space-y-10 px-6 text-center'>
+              <div className='m-auto px-6 text-center'>
                 <div className='text-white'>
                   <SuiText
                     weight='bold'
@@ -145,7 +145,7 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
                   </div>
                 </div>
                 <Tilt
-                  className={styles.ticketMask}
+                  className={`${styles.ticketMask} mb-4 mt-10`}
                   glareEnable={true}
                   glareMaxOpacity={0.5}
                   glarePosition='all'
@@ -160,6 +160,10 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
                     className='h-auto w-full max-w-2xl'
                   />
                 </Tilt>
+                <SuiText size='sm' className='text-center opacity-70'>
+                  This is not an official ticket. You will receive it nearer the
+                  event.
+                </SuiText>
               </div>
             </div>
           </div>
