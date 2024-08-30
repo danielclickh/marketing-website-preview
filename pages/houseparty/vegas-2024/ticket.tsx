@@ -1,5 +1,7 @@
 import { GetStaticProps } from 'next'
-import React, { useEffect, useRef } from 'react'
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/router'
+import React, { useEffect, useRef, useState } from 'react'
 import Tilt from 'react-parallax-tilt'
 import CopyUrlButton from '../../../components/CopyUrlButton'
 import Layout from '../../../components/Layout'
@@ -37,6 +39,11 @@ export const getStaticProps: GetStaticProps<PageProps> =
 export default function Page({ footerData, headerData, seo }: PageProps) {
   galaxyOnPage('reinvent2024AncillaryTicketPage')
 
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const [loading, setLoading] = useState<boolean>(true)
+
   const heroImageRef = useRef<HTMLImageElement | null>(null)
   const heroImageTextureRef = useRef<HTMLImageElement | null>(null)
   const heroImageTextRef = useRef<HTMLImageElement | null>(null)
@@ -65,71 +72,97 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
     }
   }, [heroImageRef, heroImageTextureRef, heroImageTextRef])
 
+  useEffect(() => {
+    ;(async function () {
+      if (router.isReady) {
+        const authedUrl = searchParams.has('granted')
+        const authedStorage = localStorage.getItem('houseparty-vegas-2024')
+        if (authedUrl || authedStorage) {
+          // Save auth for accessing without query string
+          if (!authedStorage) localStorage.setItem('houseparty-vegas-2024', '1')
+
+          // Removes the query string from the address bar, for sharing purposes
+          if (authedUrl) await router.push(router.pathname)
+
+          setLoading(false)
+        } else {
+          // Not authed, go to landing page
+          await router.push('/houseparty/vegas-2024')
+        }
+      }
+    })()
+  }, [router])
+
   return (
     <>
       <Layout
         footerData={footerData}
         seo={seo}
         headerData={{ eyebrow: { className: '!bg-[#EBFF00]' }, ...headerData }}>
-        <div className='relative overflow-hidden'>
-          <Image
-            ref={heroImageRef}
-            src={imageHeroImage}
-            width={3000}
-            height={825}
-            alt=''
-            className='absolute block h-full w-full object-cover'
-          />
-          <Image
-            ref={heroImageTextureRef}
-            src={imageHeroTexture}
-            width={3000}
-            height={825}
-            alt=''
-            className='absolute block h-full w-full object-cover'
-          />
-          <div className='relative z-10 flex py-24 lg:min-h-[700px]'>
-            <div className='m-auto space-y-10 px-6 text-center'>
-              <Tilt
-                className={`${styles.ticketMask}`}
-                glareEnable={true}
-                glareMaxOpacity={0.5}
-                glarePosition='all'
-                tiltMaxAngleX={10}
-                tiltMaxAngleY={10}
-                gyroscope={true}>
-                <Image
-                  src={imageTicket}
-                  width={1465}
-                  height={682}
-                  alt='Ticket'
-                  className='h-auto w-full max-w-2xl'
-                />
-              </Tilt>
-              <div className='text-white'>
-                <SuiText weight='bold' className='mb-4 mt-12'>
-                  Share your ticket
-                </SuiText>
-                <div className='mx-auto flex max-w-80 flex-wrap justify-center gap-4 text-neutral-0'>
-                  <CopyUrlButton className='!px-3' />
-                  {[
-                    //'y_combinator',
-                    'twitter',
-                    'facebook',
-                    'linkedin'
-                  ].map((social) => (
-                    <SocialButton
-                      key={social}
-                      type={social}
-                      title='ClickHouse + Chainsmokers + Vegas = an epic House Party'
-                      className='!px-3'
-                    />
-                  ))}
+        {loading && (
+          <div className='py-24 text-center'>Preparing your VIP ticket...</div>
+        )}
+        {!loading && (
+          <div className='relative overflow-hidden'>
+            <Image
+              ref={heroImageRef}
+              src={imageHeroImage}
+              width={3000}
+              height={825}
+              alt=''
+              className='absolute block h-full w-full object-cover'
+            />
+            <Image
+              ref={heroImageTextureRef}
+              src={imageHeroTexture}
+              width={3000}
+              height={825}
+              alt=''
+              className='absolute block h-full w-full object-cover'
+            />
+            <div className='relative z-10 flex py-24 lg:min-h-[700px]'>
+              <div className='m-auto space-y-10 px-6 text-center'>
+                <Tilt
+                  className={`${styles.ticketMask}`}
+                  glareEnable={true}
+                  glareMaxOpacity={0.5}
+                  glarePosition='all'
+                  tiltMaxAngleX={10}
+                  tiltMaxAngleY={10}
+                  gyroscope={true}>
+                  <Image
+                    src={imageTicket}
+                    width={1465}
+                    height={682}
+                    alt='Ticket'
+                    className='h-auto w-full max-w-2xl'
+                  />
+                </Tilt>
+                <div className='text-white'>
+                  <SuiText weight='bold' className='mb-4 mt-12'>
+                    Share your ticket
+                  </SuiText>
+                  <div className='mx-auto flex max-w-80 flex-wrap justify-center gap-4 text-neutral-0'>
+                    <CopyUrlButton className='!px-3' />
+                    {[
+                      //'y_combinator',
+                      'twitter',
+                      'facebook',
+                      'linkedin'
+                    ].map((social) => (
+                      <SocialButton
+                        key={social}
+                        type={social}
+                        title='ClickHouse + Chainsmokers + Vegas = an epic House Party'
+                        className='!px-3'
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </Layout>
     </>
   )
