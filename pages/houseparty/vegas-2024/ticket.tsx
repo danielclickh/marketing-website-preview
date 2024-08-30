@@ -144,8 +144,12 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
                     ))}
                   </div>
                 </div>
+                <SuiText size='sm' className='mb-4 mt-10 text-center opacity-70'>
+                  This is not an official ticket. You will receive it nearer the
+                  event.
+                </SuiText>
                 <Tilt
-                  className={`${styles.ticketMask} mb-4 mt-10`}
+                  className={`${styles.ticketMask}`}
                   glareEnable={true}
                   glareMaxOpacity={0.5}
                   glarePosition='all'
@@ -160,10 +164,6 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
                     className='h-auto w-full max-w-2xl'
                   />
                 </Tilt>
-                <SuiText size='sm' className='text-center opacity-70'>
-                  This is not an official ticket. You will receive it nearer the
-                  event.
-                </SuiText>
               </div>
             </div>
           </div>
