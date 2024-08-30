@@ -120,30 +120,15 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
               alt=''
               className='absolute block h-full w-full object-cover'
             />
-            <div className='relative z-10 flex py-24 lg:min-h-[700px]'>
+            <div className='relative z-10 flex pb-24 pt-16 lg:min-h-[700px]'>
               <div className='m-auto space-y-10 px-6 text-center'>
-                <Tilt
-                  className={`${styles.ticketMask}`}
-                  glareEnable={true}
-                  glareMaxOpacity={0.5}
-                  glarePosition='all'
-                  tiltMaxAngleX={10}
-                  tiltMaxAngleY={10}
-                  gyroscope={true}>
-                  <Image
-                    src={imageTicket}
-                    width={1465}
-                    height={682}
-                    alt='Ticket'
-                    className='h-auto w-full max-w-2xl'
-                  />
-                </Tilt>
                 <div className='text-white'>
-                  <SuiText weight='bold' className='mb-4 mt-12'>
+                  <SuiText
+                    weight='bold'
+                    className='mb-4 select-none drop-shadow-[0_0_10px_rgb(0_0_0)]'>
                     Share your ticket
                   </SuiText>
                   <div className='mx-auto flex max-w-80 flex-wrap justify-center gap-4 text-neutral-0'>
-                    <CopyUrlButton className='!px-3' />
                     {[
                       //'y_combinator',
                       'twitter',
@@ -159,6 +144,22 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
                     ))}
                   </div>
                 </div>
+                <Tilt
+                  className={styles.ticketMask}
+                  glareEnable={true}
+                  glareMaxOpacity={0.5}
+                  glarePosition='all'
+                  tiltMaxAngleX={10}
+                  tiltMaxAngleY={10}
+                  gyroscope={true}>
+                  <Image
+                    src={imageTicket}
+                    width={1465}
+                    height={682}
+                    alt='Ticket'
+                    className='h-auto w-full max-w-2xl'
+                  />
+                </Tilt>
               </div>
             </div>
           </div>
