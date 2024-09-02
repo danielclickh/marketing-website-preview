@@ -12,6 +12,10 @@
         "content": "Yes. You do. I almost guarantee that if you hit up their discography on your favorite streaming service. You will know at least 2 or 3."
     },
     {
+        "title": "Will there be food and drinks?",
+        "content": "We’ve got you covered with a selection of drinks from an open bar throughout the evening. There is no food at the venue so…you know…get dinner first."
+    },
+    {
         "title": "Can I bring a friend (or two, or three)?",
         "content": "You can request an extra +1 ticket. It’s never fun to go to a party alone. We wouldn’t want anyone to miss out on the fun because, well, FOMO is real. Do note, you will be responsible for ensuring your +1 has read the Code of Conduct."
     },
@@ -21,6 +25,6 @@
     },
     {
         "title": "Is a party at a club in Vegas during a tech conference safe?",
-        "content": "To be serious for a moment. A Code of Conduct governs the evening and we are working closely with venue staff and security. Please ensure you are familiar with the Code of Conduct and prepared to report issues should they arise."
+        "content": "To be serious for a moment. A Code of Conduct governs the evening and we are working closely with venue staff and security. Please ensure you are familiar with the [Code of Conduct](/events-code-of-conduct) and prepared to report issues should they arise."
     }
 ]

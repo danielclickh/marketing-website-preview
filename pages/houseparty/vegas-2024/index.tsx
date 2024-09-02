@@ -21,6 +21,7 @@ import imageTicketBlob from './ticket-blob.png'
 import { CUIButton } from '../../../components/ClickUI'
 import { ChevronRightIcon } from 'lucide-react'
 import faqs from './faqs.json'
+import Markdown from '../../../components/Markdown'
 
 interface PageProps extends CommonProps {
   recentEvents: Array<EventType>
@@ -359,7 +360,9 @@ export default function Page({
                   {faqs.map((faq, index) => {
                     return (
                       <FaqAccordion key={index} question={faq.title}>
-                        <SuiText className='max-w-3xl'>{faq.content}</SuiText>
+                        <SuiText className='max-w-3xl'>
+                          <Markdown children={faq.content} />
+                        </SuiText>
                       </FaqAccordion>
                     )
                   })}
