@@ -166,18 +166,22 @@ export default function Page({
                     type='h2'
                     weight='bold'
                     className='md:!text-[3.5rem]'>
-                    ClickHouse + Chainsmokers + Vegas = an epic House Party
+                    You + ClickHouse + Las Vegas + One Epic Night = House Party
                   </SuiTitle>
-                  <SuiText className='font-semibold lg:text-xl'>
-                    Hey, you! Yes, you — the one who’s ready to take a break
-                    from all the conference sessions and tech talk. We know
-                    you’ve been soaking in all the brilliance (and sales
-                    pitches) of AWS re:Invent, but now it’s time to let loose,
-                    have fun, and show off the dance moves you've been hiding.
-                  </SuiText>
                   <SuiText className='font-semibold lg:text-xl'>
                     Tuesday, December 3
                     <br />9 p.m. - 12 a.m. PT | Las Vegas
+                  </SuiText>
+                  <SuiText className='font-semibold lg:text-xl'>
+                    Hey, you! Yes, you—the one who’s ready to take a break from
+                    all the conference sessions and tech talk. We know you’ve
+                    been soaking in all the brilliance (and sales pitches) of
+                    AWS re:Invent, but now it’s time to let loose, have some
+                    fun, and maybe show off those dance moves you've been
+                    hiding.
+                  </SuiText>
+                  <SuiText className='font-semibold lg:text-xl'>
+                    Welcome to the House Party!
                   </SuiText>
                 </div>
                 <div
@@ -297,22 +301,29 @@ export default function Page({
                   />
                 </div>
                 <div className='max-w-[600px] space-y-6'>
-                  <SuiTitle type='h3'>What’s going on</SuiTitle>
+                  <SuiTitle type='h3'>What’s going down</SuiTitle>
                   <SuiText className='!mt-0'>
-                    ClickHouse is super excited to bring{' '}
-                    <strong>The Chainsmokers</strong> to the party. Picture
-                    this: you, a killer DJ set, and a room full of fellow
-                    ClickHouse users who are just as ready to party as you are.
-                    It’s not just “any” DJ set though.
+                    Picture this: You, a killer DJ set, and a room full of
+                    fellow ClickHouse users and re:Invent attendees who are just
+                    as ready to party as you are. It’s not just “any” DJ set
+                    though. ClickHouse is super excited to bring the
+                    Chainsmokers to the party.
                   </SuiText>
                   <SuiText>
-                    We are a bunch of high-speed database, real-time data
-                    warehouse enthusiasts…and so are you. No pretentious vibes
-                    here, just a place where you can kick back, relax, and
-                    dance. It’s the perfect place to hit pause on the conference
-                    hustle and just enjoy yourself.
+                    No, we aren’t kidding. That’s for real. The Chainsmokers! In
+                    Vegas! At re:Invent! Told you it was a House Party.
                   </SuiText>
-                  <SuiTitle type='h3'>How to get tickets</SuiTitle>
+                  <SuiTitle type='h3'>The Where and When</SuiTitle>
+                  <SuiText className='!mt-0'>
+                    So, here’s the deal: It’s all happening on Tuesday, December
+                    3, 2024 from 9pm - 12am PST in a location disclosed when you
+                    receive your ticket. We are a bunch of high-speed database,
+                    real-time data warehouse enthusiasts…and so are you. No
+                    pretentious vibes here, just a place where you can kick
+                    back, relax, and dance. It’s the perfect place to hit pause
+                    on the conference hustle and just enjoy yourself.
+                  </SuiText>
+                  <SuiTitle type='h3'>Your ticket to fun</SuiTitle>
                   <SuiText className='!mt-0'>
                     We know you don’t want to miss this, and we don’t want you
                     to either. But here’s the catch —{' '}
