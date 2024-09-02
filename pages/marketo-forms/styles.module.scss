@@ -73,11 +73,16 @@
         // Label
         //
         label.mktoLabel {
-          @apply flex flex-row-reverse justify-end w-auto text-xs font-medium pb-1 mb-1;
+          gap: 0.5ch;
+          @apply flex flex-row justify-start w-auto text-xs font-medium pb-1 mb-1;
+
+          a {
+            @apply underline;
+          }
 
           .mktoAsterix {
             float: none !important;
-            @apply text-c4 hidden align-super;
+            @apply text-c4 hidden align-super order-last;
           }
         }
 
