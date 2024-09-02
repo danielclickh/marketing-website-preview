@@ -198,6 +198,13 @@
 			},
 			{
 				"id": 22,
+				"name": "LinkedIn",
+				"href": "https://www.linkedin.com/company/clickhouseinc",
+				"target": "_blank",
+				"galaxyEvent": "footerNav.communityMenu.linkedInSelect"
+			},
+			{
+				"id": 22,
 				"name": "X",
 				"href": "https://x.com/ClickhouseDB",
 				"target": "_blank",
