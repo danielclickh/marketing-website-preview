@@ -55,11 +55,11 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
         {/* Announcement banner */}
         {true && (
           <LinkWithArrow
-            href='/houseparty/vegas-2024?loc=eyebrow'
+            href='/alexey-goes-on-tour?loc=eyebrow'
             className={`relative z-50 block w-full bg-primary-300 px-4 py-1 text-center text-sm font-medium text-primary-900 ${
               eyebrow?.className || ''
             }`}>
-            Going to re:Invent this December? Come and party with us
+            ClickHouse CTO, Alexey Milovidov, is coming to a city near you!
           </LinkWithArrow>
         )}
 

@@ -401,13 +401,6 @@
       }
 
 
-      //chainsmokers specific styles
-      &#mktoForm_1258 {
-        label.mktoLabel {
-          @apply text-sm;
-        }
-      }
-
       // Newsletter specific styles (Marketo ID 1122)
       //
       &#mktoForm_1122 {
@@ -466,7 +459,10 @@
       // Houseparty inline checkboxes (Marketo ID 1258)
       //
       &#mktoForm_1258 {
-        .mktoFormRow:nth-child(8), .mktoFormRow:nth-child(9) {
+        label.mktoLabel {
+          @apply text-sm;
+        }
+        .mktoFormRow:nth-child(9), .mktoFormRow:nth-child(11) {
           .mktoFieldWrap {
             @apply flex-row items-center;
 

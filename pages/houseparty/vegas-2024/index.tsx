@@ -309,6 +309,7 @@ export default function Page({
                     though. ClickHouse is super excited to bring the
                     Chainsmokers to the party.
                   </SuiText>
+
                   <SuiText>
                     No, we aren’t kidding. That’s for real. The Chainsmokers! In
                     Vegas! At re:Invent! Told you it was a House Party.
@@ -316,26 +317,27 @@ export default function Page({
                   <SuiTitle type='h3'>The Where and When</SuiTitle>
                   <SuiText className='!mt-0'>
                     So, here’s the deal: It’s all happening on Tuesday, December
-                    3, 2024 from 9pm - 12am PST in a location disclosed when you
-                    receive your ticket. We are a bunch of high-speed database,
-                    real-time data warehouse enthusiasts…and so are you. No
-                    pretentious vibes here, just a place where you can kick
-                    back, relax, and dance. It’s the perfect place to hit pause
-                    on the conference hustle and just enjoy yourself.
+                    3, 2024 from 9 p.m. - 12 a.m. PT in a location disclosed
+                    when you receive your ticket. We are a bunch of high-speed
+                    database, real-time data warehouse enthusiasts…and so are
+                    you. No pretentious vibes here, just a place where you can
+                    kick back, relax, and dance. It’s the perfect place to hit
+                    pause on the conference hustle and just enjoy yourself.
                   </SuiText>
                   <SuiTitle type='h3'>Your ticket to fun</SuiTitle>
                   <SuiText className='!mt-0'>
                     We know you don’t want to miss this, and we don’t want you
-                    to either. But here’s the catch —{' '}
+                    to either. But here’s the catch—{' '}
                     <strong>tickets are extremely limited</strong>. So, do
                     yourself a favor and put your name on the waitlist now
-                    (that’s all it takes). We will be releasing tickets in
-                    waves.{' '}
+                    (that’s all it takes). We will be releasing tickets in waves
+                    (check the{' '}
                     <Link
                       href='#faqs'
                       className='underline transition-opacity hover:opacity-70'>
-                      For more info, check the FAQs below.
-                    </Link>
+                      FAQs
+                    </Link>{' '}
+                    below).
                   </SuiText>
                   <SuiText>
                     Trust us, future you will be thanking present you for making
