@@ -264,7 +264,7 @@ export default function Page({
                           We'll be notifying you via email so please check your
                           emails (including spam folders) periodically.
                         </p>
-                        <SuiText weight='bold' className='mb-4 mt-12'>
+                        {/* <SuiText weight='bold' className='mb-4 mt-12'>
                           Share the event
                         </SuiText>
                         <div className='mx-auto flex max-w-80 flex-wrap justify-center gap-4 text-neutral-0'>
@@ -282,7 +282,7 @@ export default function Page({
                               className='!px-3'
                             />
                           ))}
-                        </div>
+                        </div> */}
                       </div>
                     )}
                   </div>
