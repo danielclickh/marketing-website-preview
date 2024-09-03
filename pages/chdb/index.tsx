@@ -90,14 +90,14 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
               has you covered.
             </SuiText>
           </div>
-          <div className='grid grid-cols-1 gap-10 lg:grid-cols-3'>
+          <div className='mx-auto grid max-w-4xl grid-cols-1 lg:grid-cols-3'>
             <div>
               <Image
                 src={imageDbEngineConnection}
                 width={271}
                 height={168}
                 alt=''
-                className='mx-auto aspect-[4/3] w-full max-w-72 object-scale-down object-center'
+                className='mx-auto aspect-[4/3] w-full object-scale-down object-center'
               />
               <SuiText size='lg' className='text-center font-mono'>
                 ClickHouse
@@ -109,7 +109,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
                 width={253}
                 height={177}
                 alt=''
-                className='mx-auto aspect-[4/3] w-full max-w-72 object-scale-down object-center'
+                className='mx-auto aspect-[4/3] w-full object-scale-down object-center'
               />
               <SuiText size='lg' className='text-center font-mono'>
                 chDB: ClickHouse In-Process
@@ -121,7 +121,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
                 width={231}
                 height={155}
                 alt=''
-                className='mx-auto aspect-[4/3] w-full max-w-72 object-scale-down object-center'
+                className='mx-auto aspect-[4/3] w-full object-scale-down object-center'
               />
               <SuiText size='lg' className='text-center font-mono'>
                 ClickHouse Local
@@ -146,7 +146,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
               Install chDB for macOS and Linux
             </div>
           </div>
-          <div className='relative mx-auto mt-8 w-full max-w-4xl space-y-8'>
+          <div className='relative mx-auto mt-8 w-full max-w-4xl space-y-4'>
             <SuiCodeblock className='show-copy-paste'>
               <>
                 pip install <span className='text-primary-300'>chdb</span>
@@ -251,7 +251,15 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
       </div>
 
       {/* Features */}
-      <div className='bg-shadow-element yellow-shadow my-48'>
+      <div
+        className='bg-shadow-element yellow-shadow shadow-circle my-48'
+        style={
+          {
+            '--top-side': '0',
+            '--right-side': '50%',
+            '--left-side': 'auto'
+          } as CSSProperties
+        }>
         <div className='section-container space-y-48'>
           <FeatureSection
             image={{
@@ -306,13 +314,13 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
 
       {/* FAQs */}
       <div
-        className='bg-shadow-element relative mx-auto mb-20 max-w-7xl px-4 md:px-8 lg:flex lg:justify-between lg:gap-x-12 2xl:px-0'
+        className='bg-shadow-element relative mx-auto mb-20 max-w-7xl px-4 md:px-8 lg:flex lg:items-center lg:justify-between lg:gap-x-12 2xl:px-0'
         style={
           {
             '--top-side': '224px'
           } as CSSProperties
         }>
-        <div className='pb-10 text-center'>
+        <div className='pb-10 text-center lg:text-left'>
           <Image
             src='/faq-icon.svg'
             alt='FAQ Icon'
@@ -320,10 +328,10 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             height={72}
             className='mx-auto lg:mx-0'
           />
-          <SuiTitle type='h2' className='my-6 lg:text-left'>
+          <SuiTitle type='h2' className='my-6'>
             What is chDB used for?
           </SuiTitle>
-          <div className='mx-auto max-w-md text-neutral-200 lg:text-left'>
+          <div className='mx-auto max-w-md text-neutral-200'>
             Wherever you need us, we’re there. We love to engage in thoughtful
             conversation with the ClickHouse community and are always on-hand to
             answer your questions.
@@ -487,7 +495,7 @@ function TickItem({
   className?: React.HTMLProps<HTMLDivElement>['className']
 }) {
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
+    <div className={`flex items-center gap-4 ${className}`}>
       <div className='flex-shrink-0 flex-grow-0'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
