@@ -286,6 +286,7 @@
       //
       .mktoButtonWrap {
         margin-left: 0 !important;
+
       }
       .mktoButton {
         // Base
@@ -296,6 +297,13 @@
 
         // Hover state
         @apply hover:bg-primary-400;
+      }
+
+      .mktoButtonRow {
+        .mktoError {
+          @apply text-red-700 text-center w-full mb-2;
+          color: #FF9898;
+        }
       }
 
     }
