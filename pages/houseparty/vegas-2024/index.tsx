@@ -172,7 +172,8 @@ export default function Page({
                   </SuiTitle>
                   <SuiText className='font-semibold lg:text-xl'>
                     Tuesday, December 3
-                    <br />9 p.m. - 12 a.m. PT | Las Vegas
+                    <br />
+                    9:00 PM - 12:00 AM PT | Las Vegas
                   </SuiText>
                   <SuiText className='font-semibold lg:text-xl'>
                     Hey, you! Yes, you—the one who’s ready to take a break from
@@ -257,7 +258,7 @@ export default function Page({
                             d='M42.67 26.68 29.33 40l-8-8'
                           />
                         </svg>
-                        <SuiTitle type='h3' className='text-xl font-bold'>
+                        <SuiTitle type='h3' className='mb-3 text-xl font-bold'>
                           You’ve been successfully <br />
                           added to the waitlist!
                         </SuiTitle>
