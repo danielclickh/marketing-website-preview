@@ -167,7 +167,8 @@ export default function Page({
                     type='h2'
                     weight='bold'
                     className='md:!text-[3.5rem]'>
-                    You + ClickHouse + Las Vegas + One Epic Night = House Party
+                    You + ClickHouse + The&nbsp;Chainsmokers + One Epic Night =
+                    House Party
                   </SuiTitle>
                   <SuiText className='font-semibold lg:text-xl'>
                     Tuesday, December 3

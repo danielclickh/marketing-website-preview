@@ -100,7 +100,7 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
         seo={seo}
         headerData={{ eyebrow: { className: '!bg-[#EBFF00]' }, ...headerData }}>
         {loading && (
-          <div className='py-24 text-center'>Preparing your VIP ticket...</div>
+          <div className='py-24 text-center'>Preparing your ticket...</div>
         )}
         {!loading && (
           <div className='relative overflow-hidden'>
