@@ -225,9 +225,6 @@ function EventPage({
                     formId='1274'
                     disclaimer={`By registering, you acknowledge that ClickHouse will process your personal information in accordance with our [Privacy Policy](/legal/privacy-policy).`}
                     onLoad={() => setFormLoaded(true)}
-                    onValidate={() => {
-                      console.log('hello')
-                    }}
                     onSuccess={() => {
                       setFormSuccess(true)
 
