@@ -1,6 +1,6 @@
 import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
-import { CSSProperties } from 'react'
+import { CSSProperties, useState } from 'react'
 import { CUIButton, CUICard, CUILink } from '../../components/ClickUI'
 import Markdown from '../../components/Markdown'
 import { SuiCodeblock, SuiText, SuiTitle } from '../../components/sui'
@@ -321,12 +321,12 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             className='mx-auto lg:mx-0'
           />
           <SuiTitle type='h2' className='my-6 lg:text-left'>
-            FAQs
+            What is chDB used for?
           </SuiTitle>
           <div className='mx-auto max-w-md text-neutral-200 lg:text-left'>
             Wherever you need us, we’re there. We love to engage in thoughtful
             conversation with the ClickHouse community and are always on-hand to
-            answer your questions.{' '}
+            answer your questions.
           </div>
           <CUILink
             href='/support/program/'
@@ -336,7 +336,32 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             <ExternalLinkIcon className='h-4 w-4' />
           </CUILink>
         </div>
-        <div></div>
+        <div className='flex w-full flex-col gap-6 rounded-2xl lg:max-w-screen-sm'>
+          <FaqAccordion
+            number='01'
+            question='Testing your queries in CI without having to spin up a CH server'>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto
+            aut deleniti est facere labore praesentium reprehenderit sequi
+            vitae! Adipisci architecto atque deleniti eaque modi mollitia
+            praesentium quam quasi repellat sint!
+          </FaqAccordion>
+          <FaqAccordion
+            number='02'
+            question='Building self-contained prototypes/PoCs'>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto
+            aut deleniti est facere labore praesentium reprehenderit sequi
+            vitae! Adipisci architecto atque deleniti eaque modi mollitia
+            praesentium quam quasi repellat sint!
+          </FaqAccordion>
+          <FaqAccordion
+            number='03'
+            question='Jupyter notebooks without a CH Server running'>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto
+            aut deleniti est facere labore praesentium reprehenderit sequi
+            vitae! Adipisci architecto atque deleniti eaque modi mollitia
+            praesentium quam quasi repellat sint!
+          </FaqAccordion>
+        </div>
       </div>
 
       {/* Get started */}
@@ -360,6 +385,52 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
         </div>
       </div>
     </Layout>
+  )
+}
+
+function FaqAccordion({
+  number,
+  question,
+  children,
+  open = false
+}: {
+  number: string | number
+  question: string | React.ReactNode
+  children: React.ReactNode
+  open?: boolean
+}) {
+  const [isOpen, setIsOpen] = useState(open)
+  return (
+    <div className='relative rounded border border-jet bg-neutral-900/50 transition-colors hover:bg-neutral-750 hover:bg-opacity-40'>
+      <button
+        className={`text-md flex w-full px-6 py-4 text-left transition-colors ${
+          isOpen ? 'text-white' : 'text-white/80 hover:text-white'
+        }`}
+        onClick={() => setIsOpen((old) => !old)}>
+        <span className='-ml-6 mr-6 flex w-12 flex-shrink-0 flex-grow-0 items-center justify-center border-r border-neutral-700/80 text-center text-neutral-300/60'>
+          <span>{number}</span>
+        </span>
+        <span className='flex-1'>{question}</span>
+        <span className='relative my-auto ml-auto block h-4 w-4 flex-shrink-0 flex-grow-0'>
+          <span
+            className={`absolute left-0 top-1/2 block h-0.5 w-full -translate-y-1/2 rounded bg-white transition-all duration-300 ${
+              isOpen ? '-rotate-90 opacity-0' : ''
+            }`}></span>
+          <span
+            className={`absolute left-0 top-1/2 block h-0.5 w-full -translate-y-1/2 rounded bg-white transition-all duration-300 ${
+              isOpen ? '' : 'rotate-90'
+            }`}></span>
+        </span>
+      </button>
+      <div className='-ml-px'>
+        <div
+          className={`-mt-4 mb-4 ml-12 border-l border-neutral-700/80 px-6 pt-4 text-sm text-neutral-200 ${
+            isOpen ? 'block' : 'hidden'
+          }`}>
+          {children}
+        </div>
+      </div>
+    </div>
   )
 }
 
