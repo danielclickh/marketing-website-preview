@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps<PageProps> =
           description:
             "Hey, you! Yes, you — the one who’s ready to take a break from all the conference sessions and tech talk. We know you’ve been soaking in all the brilliance (and sales pitches) of AWS re:Invent, but now it’s time to let loose, have fun, and show off the dance moves you've been hiding.",
           path: '/houseparty/vegas-2024/ticket',
-          image: [{ url: '/images/social-houseparty-vegas-2024.png' }]
+          image: [{ url: '/images/social-houseparty-vegas-2024-ticket.png' }]
         },
         ...commonProps
       }
