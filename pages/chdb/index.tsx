@@ -64,7 +64,11 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
               <TickItem>Blazing fast SQL engine</TickItem>
               <TickItem>Seamless data integration</TickItem>
               <TickItem>Supports 80+ data formats</TickItem>
-              <CUIButton type='primary' size='lg' weight='semibold'>
+              <CUIButton
+                type='primary'
+                size='lg'
+                weight='semibold'
+                className='!px-8'>
                 Try it today
               </CUIButton>
             </div>
@@ -78,9 +82,9 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
       {/* Ecosystem */}
       <div className='bg-neutral-725 py-20'>
         <div className='section-container'>
-          <div className='mx-auto max-w-3xl text-center'>
+          <div className='mx-auto mb-10 max-w-3xl space-y-6 text-center'>
             <SuiTitle type='h2'>chDB and the ClickHouse ecosystem</SuiTitle>
-            <SuiText>
+            <SuiText className='opacity-70'>
               Whether you're developing locally, running in-process analytics
               embedded in your app, or scaling production workloads, ClickHouse
               has you covered.
@@ -93,7 +97,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
                 width={271}
                 height={168}
                 alt=''
-                className='aspect-square w-full object-scale-down object-center'
+                className='mx-auto aspect-[4/3] w-full max-w-72 object-scale-down object-center'
               />
               <SuiText size='lg' className='text-center font-mono'>
                 ClickHouse
@@ -105,7 +109,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
                 width={253}
                 height={177}
                 alt=''
-                className='aspect-square w-full object-scale-down object-center'
+                className='mx-auto aspect-[4/3] w-full max-w-72 object-scale-down object-center'
               />
               <SuiText size='lg' className='text-center font-mono'>
                 chDB: ClickHouse In-Process
@@ -117,7 +121,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
                 width={231}
                 height={155}
                 alt=''
-                className='aspect-square w-full object-scale-down object-center'
+                className='mx-auto aspect-[4/3] w-full max-w-72 object-scale-down object-center'
               />
               <SuiText size='lg' className='text-center font-mono'>
                 ClickHouse Local
@@ -128,8 +132,8 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
       </div>
 
       {/* Install */}
-      <div className='mx-auto mb-24 flex w-full max-w-7xl px-4 text-neutral-0 xl:px-0'>
-        <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-click-grid bg-[length:547px_360px] bg-right bg-no-repeat p-6 md:p-10 lg:p-12 xl:p-16'>
+      <div className='section-container my-20'>
+        <div className='rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-click-grid bg-[length:547px_360px] bg-right bg-no-repeat p-6 md:p-10 lg:p-12 xl:p-16'>
           <div className='flex flex-col text-center'>
             <SuiTitle type='h2' color='white'>
               Start using{' '}
@@ -138,36 +142,43 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
               </span>{' '}
               in minutes
             </SuiTitle>
-            <div className='mb-8 mt-6 text-center text-neutral-300'>
+            <div className='mt-6 text-center text-neutral-300'>
               Install chDB for macOS and Linux
             </div>
           </div>
-          <SuiCodeblock className='show-copy-paste w-full self-center overflow-hidden md:w-full'>
-            <Markdown ignoreAnchor>pip install chdb</Markdown>
-          </SuiCodeblock>
-          <div className='relative'>
-            <SuiCodeblock className='show-copy-paste w-full self-center overflow-hidden md:w-full'>
-              <Markdown ignoreAnchor>
-                query = "select count() FROM
-                s3('s3://datasets-documentation/hackernews/hacknernews.json.gz')"
-                chdb.query(query, 'DataFrame')
-              </Markdown>
+          <div className='relative mx-auto mt-8 w-full max-w-4xl space-y-8'>
+            <SuiCodeblock className='show-copy-paste'>
+              <>
+                pip install <span className='text-primary-300'>chdb</span>
+              </>
+            </SuiCodeblock>
+            <SuiCodeblock className='show-copy-paste'>
+              <>
+                query = "
+                <span className='text-[#90BDF2]'>
+                  select count() FROM
+                  s3('s3://datasets-documentation/hackernews/hacknernews.json.gz')
+                </span>
+                "<br />
+                chdb.query(query,
+                <span className='text-[#90BDF2]'>'DataFrame'</span>)
+              </>
             </SuiCodeblock>
             <Image
               src={imageSampleQuery}
               width={185}
               height={32}
               alt='Sample Query'
-              className='absolute bottom-0 right-0 -rotate-[14deg]'
+              className='pointer-events-none absolute -right-6 bottom-0 -rotate-[14deg]'
             />
           </div>
         </div>
       </div>
 
       {/* Bindings */}
-      <div className='bg-neutral-725 py-20'>
+      <div className='border-t-2 border-primary-300 bg-neutral-725 py-20'>
         <div className='section-container'>
-          <div className='grid grid-cols-1 gap-6 lg:grid-cols-3'>
+          <div className='grid grid-cols-1 gap-8 lg:grid-cols-3'>
             <IconCard
               icon={{
                 src: iconBook,
@@ -175,8 +186,12 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
                 height: 33,
                 alt: 'Book icon'
               }}>
-              <SuiTitle type='h3'>Open-source library</SuiTitle>
-              <SuiText size='sm'>
+              <SuiTitle type='h3' className='!text-2xl'>
+                Open-source
+                <br />
+                library
+              </SuiTitle>
+              <SuiText size='sm' className='text-balance opacity-70'>
                 chDB is an open-source library, allowing you to customize and
                 extend your database to fit your needs. Benefit from a vibrant
                 community that keeps you updated with the latest innovations and
@@ -185,40 +200,46 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             </IconCard>
             <IconCard
               icon={{
-                src: iconBook,
+                src: iconList,
                 width: 32,
                 height: 33,
-                alt: 'Book icon'
+                alt: 'List icon'
               }}>
-              <SuiTitle type='h3'>Open-source library</SuiTitle>
-              <SuiText size='sm'>
-                chDB is an open-source library, allowing you to customize and
-                extend your database to fit your needs. Benefit from a vibrant
-                community that keeps you updated with the latest innovations and
-                security practices.
+              <SuiTitle type='h3' className='!text-2xl'>
+                Query objects
+                <br />
+                directly
+              </SuiTitle>
+              <SuiText size='sm' className='text-balance opacity-70'>
+                With chDB, you can query native objects in the programming
+                language of choice directly. This direct access reduces latency
+                and simplifies data processing, enabling faster operations.
               </SuiText>
             </IconCard>
             <IconCard
               icon={{
-                src: iconBook,
+                src: iconFile,
                 width: 32,
                 height: 33,
-                alt: 'Book icon'
+                alt: 'File icon'
               }}>
-              <SuiTitle type='h3'>Open-source library</SuiTitle>
-              <SuiText size='sm'>
-                chDB is an open-source library, allowing you to customize and
-                extend your database to fit your needs. Benefit from a vibrant
-                community that keeps you updated with the latest innovations and
-                security practices.
+              <SuiTitle type='h3' className='!text-2xl'>
+                Supports Python
+                <br />
+                DB API 2.0
+              </SuiTitle>
+              <SuiText size='sm' className='text-balance opacity-70'>
+                chDB supports Python DB API 2.0, ensuring seamless integration
+                with your Python applications. Enjoy consistency, reliability,
+                and ease of use with familiar libraries and tools.
               </SuiText>
             </IconCard>
           </div>
           <div className='mt-20'>
-            <SuiText size='sm' className='text-center'>
+            <SuiText size='sm' className='mb-8 text-center opacity-70'>
               chDB supports bindings for many programming languages, including:
             </SuiText>
-            <div className='flex items-center justify-center gap-6'>
+            <div className='flex items-center justify-center gap-12'>
               <Image src={logoBun} width={56} height={50} alt='Bun' />
               <Image src={logoNode} width={81} height={50} alt='node' />
               <Image src={logoRust} width={96} height={37} alt='Rust' />
@@ -230,8 +251,8 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
       </div>
 
       {/* Features */}
-      <div className='bg-shadow-element yellow-shadow flex w-full gap-y-4 pb-12 text-neutral-0 md:gap-y-28'>
-        <div className='container mx-auto flex max-w-7xl flex-col gap-y-48 bg-opacity-10 px-8 pb-8 pt-24 text-center md:bg-no-repeat 2xl:px-0'>
+      <div className='bg-shadow-element yellow-shadow my-48'>
+        <div className='section-container space-y-48'>
           <FeatureSection
             image={{
               src: imageEmbedded,
@@ -239,41 +260,46 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
               height: 230,
               alt: 'Embedded'
             }}>
-            <SuiTitle type='h3' className='mb-4 !text-4xl' weight='semibold'>
+            <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
               Embedded. No need to install or run ClickHouse services
             </SuiTitle>
-            <TickItem>Blazing fast SQL engine</TickItem>
-            <TickItem>Blazing fast SQL engine</TickItem>
-            <TickItem>Blazing fast SQL engine</TickItem>
+            <TickItem>Streamline deployment with no additional setup</TickItem>
+            <TickItem>Reduce system complexity and resource usage</TickItem>
+            <TickItem>Ideal for lightweight and embedded applications</TickItem>
           </FeatureSection>
           <FeatureSection
             flip={true}
             image={{
-              src: imageEmbedded,
-              width: 435,
-              height: 230,
-              alt: 'Embedded'
+              src: imageMinimizedCopying,
+              width: 400,
+              height: 194,
+              alt: 'Minimized Copying'
             }}>
-            <SuiTitle type='h3' className='mb-4 !text-4xl' weight='semibold'>
-              Embedded. No need to install or run ClickHouse services
+            <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
+              Minimized data copying from
+              <br /> C++ to Python
             </SuiTitle>
-            <TickItem>Blazing fast SQL engine</TickItem>
-            <TickItem>Blazing fast SQL engine</TickItem>
-            <TickItem>Blazing fast SQL engine</TickItem>
+            <TickItem>Enhance performance with direct memory access</TickItem>
+            <TickItem>Reduce overhead and latency in data processing</TickItem>
+            <TickItem>Achieve faster data handling and analysis</TickItem>
           </FeatureSection>
           <FeatureSection
             image={{
-              src: imageEmbedded,
-              width: 435,
-              height: 230,
-              alt: 'Embedded'
+              src: imageInputOutput,
+              width: 357,
+              height: 160,
+              alt: 'Input Output'
             }}>
-            <SuiTitle type='h3' className='mb-4 !text-4xl' weight='semibold'>
-              Embedded. No need to install or run ClickHouse services
+            <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
+              Input and output support
+              <br /> Parquet, CSV, JSON, Arrow,
+              <br /> ORC and 80+ more formats
             </SuiTitle>
-            <TickItem>Blazing fast SQL engine</TickItem>
-            <TickItem>Blazing fast SQL engine</TickItem>
-            <TickItem>Blazing fast SQL engine</TickItem>
+            <TickItem>Easily integrate with diverse data sources</TickItem>
+            <TickItem>Simplify data interchange and interoperability</TickItem>
+            <TickItem>
+              Ensure compatibility with a wide range of data formats
+            </TickItem>
           </FeatureSection>
         </div>
       </div>
@@ -345,10 +371,12 @@ function IconCard({
   children: React.ReactNode
 }) {
   return (
-    <CUICard className='border-t-4 border-t-primary-300 p-8'>
-      <div className='mx-auto flex aspect-square w-12 rounded-sm border-neutral-700 bg-black/80'>
-        <Image {...icon} className='m-auto' />
-      </div>
+    <CUICard className='relative space-y-4 overflow-hidden p-8 text-center lg:p-14'>
+      <div className='absolute left-0 right-0 top-0 h-1 bg-primary-300' />
+      <Image
+        {...icon}
+        className='mx-auto aspect-square w-[72px] rounded border border-jet bg-black/40 object-scale-down object-center shadow-sm'
+      />
       {children}
     </CUICard>
   )
@@ -369,7 +397,7 @@ function FeatureSection({
         flip ? 'md:flex-row-reverse' : 'md:flex-row'
       } justify-center`}>
       <div className='mb-12 flex flex-col md:mb-0 md:w-1/2 md:text-left'>
-        <div className='border-yellow-200 md:border-l-4 md:pl-8 '>
+        <div className='space-y-4 border-yellow-200 md:border-l-4 md:pl-8'>
           {children}
         </div>
       </div>
