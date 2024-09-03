@@ -226,29 +226,8 @@ function EventPage({
                     disclaimer={`By registering, you acknowledge that ClickHouse will process your personal information in accordance with our [Privacy Policy](/legal/privacy-policy).`}
                     onLoad={(form) => {
                       setFormLoaded(true)
-                      form.onValidate(async () => {
-                        const vals = await form.vals()
-                        if (vals?.Email) {
-                          const lowerEmail = vals.Email.toLowerCase()
-                          //filthy but works for now
-                          if (
-                            lowerEmail.includes('@googlemail.com') ||
-                            lowerEmail.includes('@gmail.com') ||
-                            lowerEmail.includes('@hotmail.com') ||
-                            lowerEmail.includes('@yahoo.com') ||
-                            lowerEmail.includes('@outlook.com') ||
-                            lowerEmail.includes('@live.com') ||
-                            lowerEmail.includes('@icloud.com')
-                          ) {
-                            form.submittable(false)
-                            form.showErrorMessage(
-                              'Please enter a business email to continue.'
-                            )
-                          } else {
-                            form.submittable(true)
-                          }
-                        }
-                      })
+
+                      // Email validation @ /pages/marketo-forms/[id].tsx
                     }}
                     onSuccess={() => {
                       setFormSuccess(true)
