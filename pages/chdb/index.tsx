@@ -1,6 +1,7 @@
 import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
-import { CSSProperties, useState } from 'react'
+import Link from 'next/link'
+import { CSSProperties, useEffect, useState } from 'react'
 import { CUIButton, CUICard, CUILink } from '../../components/ClickUI'
 import Markdown from '../../components/Markdown'
 import { SuiCodeblock, SuiText, SuiTitle } from '../../components/sui'
@@ -28,6 +29,10 @@ import imageInputOutput from './input-output.svg'
 import imageMinimizedCopying from './minimized-copying.svg'
 
 import imageSampleQuery from './sample-query.svg'
+
+import graphPanel from './graph-panel.svg'
+import graphLinesChdb from './graph-lines-chdb.svg'
+import graphLinesPandas from './graph-lines-pandas.svg'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -312,6 +317,30 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
         </div>
       </div>
 
+      <div className='section-container my-48'>
+        <div className='mx-auto max-w-3xl space-y-6 text-center'>
+          <SuiTitle type='h2'>
+            chDB regularly outperforms DuckDB,
+            <br className='hidden lg:block' /> Pandas, and Polars in benchmark
+            queries
+          </SuiTitle>
+          <SuiText className='opacity-70'>
+            With chDB, you have the benefit of ClickHouse's blazing speed,
+            in-process.
+          </SuiText>
+        </div>
+        <BenchmarkGraph />
+        <div>
+          <SuiText className='text-center'>
+            For more details, check out our{' '}
+            <Link href='#' className='text-primary-300 hover:underline'>
+              full benchmark results
+            </Link>
+            .
+          </SuiText>
+        </div>
+      </div>
+
       {/* FAQs */}
       <div
         className='bg-shadow-element relative mx-auto mb-20 max-w-7xl px-4 md:px-8 lg:flex lg:items-center lg:justify-between lg:gap-x-12 2xl:px-0'
@@ -393,6 +422,104 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
         </div>
       </div>
     </Layout>
+  )
+}
+
+function Checkbox({
+  color,
+  checked = false,
+  onChange = (checked) => {},
+  children
+}: {
+  color: CSSProperties['backgroundColor']
+  checked: boolean
+  onChange: (checked: boolean) => void
+  children: React.ReactNode
+}) {
+  const [isChecked, setIsChecked] = useState<boolean>(checked)
+
+  useEffect(() => {
+    onChange(isChecked)
+  }, [isChecked])
+  return (
+    <button
+      className='group/checkbox flex items-center gap-4'
+      onClick={() => setIsChecked((old) => !old)}>
+      <span
+        className='relative aspect-square w-6 flex-shrink-0 flex-grow-0'
+        style={{ backgroundColor: color }}>
+        <span
+          className={`absolute inset-1 flex items-center justify-center rounded border transition-colors ${
+            isChecked ? 'border-black bg-black' : 'border-[#B3B6BD] bg-white'
+          }`}>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='8'
+            height='7'
+            fill='none'
+            viewBox='0 0 8 7'>
+            <path
+              stroke='#fff'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth='2'
+              d='M6.67 1.8 3 5.48 1.33 3.81'
+            />
+          </svg>
+        </span>
+      </span>
+      <span className='-my-0.5 -ml-2 rounded px-2 py-0.5 transition-colors group-hover/checkbox:bg-white/10'>
+        {children}
+      </span>
+    </button>
+  )
+}
+
+function BenchmarkGraph() {
+  const [isChdb, setChdb] = useState(false)
+  const [isPandas, setPandas] = useState(true)
+  return (
+    <div className='relative mx-auto my-6 aspect-[1080/408] max-w-[1080px]'>
+      <div className='absolute -top-6 right-6 z-20 space-y-3'>
+        <Checkbox
+          color='#FCFF74'
+          checked={isChdb}
+          onChange={(val) => setChdb(val)}>
+          chDB
+        </Checkbox>
+        <Checkbox
+          color='#00CC96'
+          checked={isPandas}
+          onChange={(val) => setPandas(val)}>
+          Pandas
+        </Checkbox>
+      </div>
+      <Image
+        src={graphPanel}
+        width={1080}
+        height={408}
+        alt='Graph panel'
+        className='absolute inset-0'
+      />
+      <Image
+        src={graphLinesChdb}
+        width={926}
+        height={197}
+        alt='Graph chDB'
+        className={`absolute bottom-[10.75%] left-[10.27%] h-[48.28%] w-[85.74%] object-none transition-all ${
+          !isChdb ? '!h-0' : ''
+        }`}
+      />
+      <Image
+        src={graphLinesPandas}
+        width={926}
+        height={286}
+        alt='Graph Pandas'
+        className={`absolute bottom-[10.75%] left-[10.64%] h-[70.09%] w-[85.74%] object-none transition-all ${
+          !isPandas ? '!h-0' : ''
+        }`}
+      />
+    </div>
   )
 }
 
