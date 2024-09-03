@@ -320,7 +320,7 @@ export default function Page({
                   <SuiTitle type='h3'>The Where and When</SuiTitle>
                   <SuiText className='!mt-0'>
                     So, here’s the deal: It’s all happening on Tuesday, December
-                    3, 2024 from 9 p.m. - 12 a.m. PT in a location disclosed
+                    3, 2024 from 9:00 PM - 12:00 AM PT in a location disclosed
                     when you receive your ticket. We are a bunch of high-speed
                     database, real-time data warehouse enthusiasts…and so are
                     you. No pretentious vibes here, just a place where you can
