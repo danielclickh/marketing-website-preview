@@ -52,28 +52,6 @@ export default function NavigationSubNavProducts() {
             </span>
           </NavigationLink>
         </li>
-        {/* <li>
-          <NavigationLink
-            href='/chdb'
-            onClick={galaxyOnClick('topNav.productMenu.chdbSelect')}
-            className='group/nav-with-icon !flex w-full items-center gap-3'>
-            <Image
-              src='/images/nav/icon-chdb.svg'
-              alt='ClickHouse'
-              width={24}
-              height={24}
-              className='flex-grow-1 flex-shrink-0'
-            />
-            <span>
-              chDB
-              <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
-                Lorem ipsum dolor sit amet,
-                <br />
-                consectetur adipisicing elit.
-              </div>
-            </span>
-          </NavigationLink>
-        </li> */}
 
         <li className='md-mid:hidden'>
           <NavigationLink
