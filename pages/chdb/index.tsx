@@ -34,6 +34,7 @@ import graphLinesChdb from './graph-lines-chdb.svg'
 import graphLinesDuckdb from './graph-lines-duckdb.svg'
 import graphLinesPandas from './graph-lines-pandas.svg'
 import graphLinesPolars from './graph-lines-polars.svg'
+import { galaxyOnPage, galaxyOnClick } from '../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -51,6 +52,8 @@ export const getStaticProps: GetStaticProps<CommonProps> =
   }
 
 export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
+  galaxyOnPage('chdbPage')
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
@@ -74,7 +77,10 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
                 type='primary'
                 size='lg'
                 weight='semibold'
-                className='!px-8'>
+                className='mt-6 !px-8'
+                href='https://github.com/chdb-io/chdb'
+                target='_blank'
+                onClick={galaxyOnClick('chdbPage.heroCta.tryItSelect')}>
                 Try it today
               </CUIButton>
             </div>
@@ -153,12 +159,16 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             </div>
           </div>
           <div className='relative mx-auto mt-8 w-full max-w-4xl space-y-4'>
-            <SuiCodeblock className='show-copy-paste overflow-auto text-wrap'>
+            <SuiCodeblock
+              className='show-copy-paste overflow-auto text-wrap'
+              galaxyEvent='chdbPage.startUsingChdb.pipInstallCopy'>
               <>
                 pip install <span className='text-primary-300'>chdb</span>
               </>
             </SuiCodeblock>
-            <SuiCodeblock className='show-copy-paste overflow-auto text-wrap'>
+            <SuiCodeblock
+              className='show-copy-paste overflow-auto text-wrap'
+              galaxyEvent='chdbPage.startUsingChdb.sampleQueryCopy'>
               <>
                 query = "
                 <span className='text-[#90BDF2]'>
@@ -334,7 +344,13 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
         <div>
           <SuiText className='text-center'>
             For more details, check out our{' '}
-            <Link href='#' className='text-primary-300 hover:underline'>
+            <Link
+              href='https://benchmark.clickhouse.com/'
+              target='_blank'
+              className='text-primary-300 hover:underline'
+              onClick={galaxyOnClick(
+                'chdbPage.comparionsTable.benchmarkSelect'
+              )}>
               full benchmark results
             </Link>
             .
@@ -367,7 +383,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             answer your questions.
           </div>
           <CUILink
-            href='/support/program/'
+            href='/slack'
             target='_self'
             className='mt-6 flex items-center justify-center gap-4 text-primary lg:justify-start'>
             <span>Ask us anything</span>{' '}
@@ -377,28 +393,16 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
         <div className='flex w-full flex-col gap-6 rounded-2xl lg:max-w-screen-sm'>
           <FaqAccordion
             number='01'
-            question='Testing your queries in CI without having to spin up a CH server'>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto
-            aut deleniti est facere labore praesentium reprehenderit sequi
-            vitae! Adipisci architecto atque deleniti eaque modi mollitia
-            praesentium quam quasi repellat sint!
-          </FaqAccordion>
+            question='Testing your queries in CI without having to spin up a CH server'
+          />
           <FaqAccordion
             number='02'
-            question='Building self-contained prototypes/PoCs'>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto
-            aut deleniti est facere labore praesentium reprehenderit sequi
-            vitae! Adipisci architecto atque deleniti eaque modi mollitia
-            praesentium quam quasi repellat sint!
-          </FaqAccordion>
+            question='Building self-contained prototypes/PoCs'
+          />
           <FaqAccordion
             number='03'
-            question='Jupyter notebooks without a CH Server running'>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto
-            aut deleniti est facere labore praesentium reprehenderit sequi
-            vitae! Adipisci architecto atque deleniti eaque modi mollitia
-            praesentium quam quasi repellat sint!
-          </FaqAccordion>
+            question='Jupyter notebooks without a CH Server running'
+          />
         </div>
       </div>
 
@@ -417,7 +421,8 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             type='primary-dark'
             size='lg'
             className='group mx-auto mt-8'
-            href='https://clickhouse.cloud/signUp'>
+            target='_blank'
+            href='https://clickhouse.cloud/signUp?loc=chdbPageFooterCta'>
             Create a free account
           </CUIButton>
         </div>
@@ -478,34 +483,62 @@ function Checkbox({
 
 function BenchmarkGraph() {
   const [isChdb, setIsChdb] = useState(true)
-  const [isDuckdb, setIsDuckdb] = useState(true)
+  const [isDuckdb, setIsDuckdb] = useState(false)
   const [isPandas, setIsPandas] = useState(true)
-  const [isPolars, setIsPolars] = useState(true)
+  const [isPolars, setIsPolars] = useState(false)
   return (
     <div className='relative mx-auto my-6 max-w-[1080px]'>
       <div className='z-20 mb-6 flex flex-wrap justify-center gap-4 lg:absolute lg:-top-8 lg:right-6 lg:block lg:space-y-3'>
         <Checkbox
           color='#FCFF74'
           checked={isChdb}
-          onChange={(val) => setIsChdb(val)}>
+          onChange={(val) => {
+            setIsChdb(val)
+            if (val) {
+              galaxyOnClick('chdbPage.comparionsTable.chdbCheck')()
+            } else {
+              galaxyOnClick('chdbPage.comparionsTable.chdbUncheck')()
+            }
+          }}>
           chDB
         </Checkbox>
         <Checkbox
           color='#636EFA'
           checked={isDuckdb}
-          onChange={(val) => setIsDuckdb(val)}>
+          onChange={(val) => {
+            setIsDuckdb(val)
+            if (val) {
+              galaxyOnClick('chdbPage.comparionsTable.duckDbCheck')
+            } else {
+              galaxyOnClick('chdbPage.comparionsTable.duckDbUncheck')
+            }
+          }}>
           DuckDB
         </Checkbox>
         <Checkbox
           color='#00CC96'
           checked={isPandas}
-          onChange={(val) => setIsPandas(val)}>
+          onChange={(val) => {
+            setIsPandas(val)
+            if (val) {
+              galaxyOnClick('chdbPage.comparionsTable.pandasCheck')
+            } else {
+              galaxyOnClick('chdbPage.comparionsTable.pandasUncheck')
+            }
+          }}>
           Pandas
         </Checkbox>
         <Checkbox
           color='#AB63FA'
           checked={isPolars}
-          onChange={(val) => setIsPolars(val)}>
+          onChange={(val) => {
+            setIsPolars(val)
+            if (val) {
+              galaxyOnClick('chdbPage.comparionsTable.polarsCheck')
+            } else {
+              galaxyOnClick('chdbPage.comparionsTable.polarsUncheck')
+            }
+          }}>
           Polars
         </Checkbox>
       </div>
@@ -565,14 +598,14 @@ function FaqAccordion({
   open = false
 }: {
   number: string | number
-  question: string | React.ReactNode
-  children: React.ReactNode
+  question?: string | React.ReactNode
+  children?: React.ReactNode
   open?: boolean
 }) {
   const [isOpen, setIsOpen] = useState(open)
   return (
     <div className='relative rounded border border-jet bg-neutral-900/50 transition-colors hover:bg-neutral-750 hover:bg-opacity-40'>
-      <button
+      <div
         className={`text-md flex w-full px-6 py-4 text-left transition-colors ${
           isOpen ? 'text-white' : 'text-white/80 hover:text-white'
         }`}
@@ -581,25 +614,29 @@ function FaqAccordion({
           <span>{number}</span>
         </span>
         <span className='flex-1'>{question}</span>
-        <span className='relative my-auto ml-auto block h-4 w-4 flex-shrink-0 flex-grow-0'>
-          <span
-            className={`absolute left-0 top-1/2 block h-0.5 w-full -translate-y-1/2 rounded bg-white transition-all duration-300 ${
-              isOpen ? '-rotate-90 opacity-0' : ''
-            }`}></span>
-          <span
-            className={`absolute left-0 top-1/2 block h-0.5 w-full -translate-y-1/2 rounded bg-white transition-all duration-300 ${
-              isOpen ? '' : 'rotate-90'
-            }`}></span>
-        </span>
-      </button>
-      <div className='-ml-px'>
-        <div
-          className={`-mt-4 mb-4 ml-12 border-l border-neutral-700/80 px-6 pt-4 text-sm text-neutral-200 ${
-            isOpen ? 'block' : 'hidden'
-          }`}>
-          {children}
-        </div>
+        {children && (
+          <span className='relative my-auto ml-auto block h-4 w-4 flex-shrink-0 flex-grow-0'>
+            <span
+              className={`absolute left-0 top-1/2 block h-0.5 w-full -translate-y-1/2 rounded bg-white transition-all duration-300 ${
+                isOpen ? '-rotate-90 opacity-0' : ''
+              }`}></span>
+            <span
+              className={`absolute left-0 top-1/2 block h-0.5 w-full -translate-y-1/2 rounded bg-white transition-all duration-300 ${
+                isOpen ? '' : 'rotate-90'
+              }`}></span>
+          </span>
+        )}
       </div>
+      {children && (
+        <div className='-ml-px'>
+          <div
+            className={`-mt-4 mb-4 ml-12 border-l border-neutral-700/80 px-6 pt-4 text-sm text-neutral-200 ${
+              isOpen ? 'block' : 'hidden'
+            }`}>
+            {children}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
