@@ -55,12 +55,12 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <div className='relative my-20'>
+      <div className='relative my-10 lg:mb-20'>
         <div className='absolute bottom-0 left-0 z-0 aspect-[1512/524] w-full bg-contain bg-center bg-no-repeat lg:bg-speed-lines' />
         <div className='section-container relative z-10 lg:py-20'>
           <div className='flex flex-col items-center gap-10 lg:flex-row'>
             <div className='flex-1 space-y-6'>
-              <SuiTitle type='h1' className='!text-5xl'>
+              <SuiTitle type='h1' className='lg:!text-5xl'>
                 chDB - fast, reliable, and scalable in-process database
               </SuiTitle>
               <SuiText className='text-balance'>
@@ -79,7 +79,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
                 Try it today
               </CUIButton>
             </div>
-            <div className='hidden flex-shrink-0 flex-grow-0 lg:block'>
+            <div className='hidden flex-shrink-0 flex-grow-0 lg:block lg:w-1/2 xl:w-auto'>
               <Image src={imageHero} width={573} height={344} alt='hero' />
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
                 width={271}
                 height={168}
                 alt=''
-                className='mx-auto aspect-[4/3] w-full object-scale-down object-center'
+                className='mx-auto aspect-[4/3] w-full max-w-72 object-scale-down object-center'
               />
               <SuiText size='lg' className='text-center font-mono'>
                 ClickHouse
@@ -116,7 +116,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
                 width={253}
                 height={177}
                 alt=''
-                className='mx-auto aspect-[4/3] w-full object-scale-down object-center'
+                className='mx-auto aspect-[4/3] w-full max-w-72 object-scale-down object-center'
               />
               <SuiText size='lg' className='text-center font-mono'>
                 chDB: ClickHouse In-Process
@@ -128,7 +128,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
                 width={231}
                 height={155}
                 alt=''
-                className='mx-auto aspect-[4/3] w-full object-scale-down object-center'
+                className='mx-auto aspect-[4/3] w-full max-w-72 object-scale-down object-center'
               />
               <SuiText size='lg' className='text-center font-mono'>
                 ClickHouse Local
@@ -154,12 +154,12 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             </div>
           </div>
           <div className='relative mx-auto mt-8 w-full max-w-4xl space-y-4'>
-            <SuiCodeblock className='show-copy-paste'>
+            <SuiCodeblock className='show-copy-paste overflow-auto text-wrap'>
               <>
                 pip install <span className='text-primary-300'>chdb</span>
               </>
             </SuiCodeblock>
-            <SuiCodeblock className='show-copy-paste'>
+            <SuiCodeblock className='show-copy-paste overflow-auto text-wrap'>
               <>
                 query = "
                 <span className='text-[#90BDF2]'>
@@ -246,7 +246,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             <SuiText size='sm' className='mb-8 text-center opacity-70'>
               chDB supports bindings for many programming languages, including:
             </SuiText>
-            <div className='flex items-center justify-center gap-12'>
+            <div className='flex flex-wrap items-center justify-center gap-x-12 gap-y-8'>
               <Image src={logoBun} width={56} height={50} alt='Bun' />
               <Image src={logoNode} width={81} height={50} alt='node' />
               <Image src={logoRust} width={96} height={37} alt='Rust' />
@@ -259,7 +259,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
 
       {/* Features */}
       <div
-        className='bg-shadow-element yellow-shadow shadow-circle my-48'
+        className='bg-shadow-element yellow-shadow shadow-circle my-24 lg:my-48'
         style={
           {
             '--top-side': '0',
@@ -267,7 +267,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             '--left-side': 'auto'
           } as CSSProperties
         }>
-        <div className='section-container space-y-48'>
+        <div className='section-container space-y-24 lg:space-y-48'>
           <FeatureSection
             image={{
               src: imageEmbedded,
@@ -319,7 +319,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
         </div>
       </div>
 
-      <div className='section-container my-48'>
+      <div className='section-container my-24 lg:my-48'>
         <div className='mx-auto max-w-3xl space-y-6 text-center'>
           <SuiTitle type='h2'>
             chDB regularly outperforms DuckDB,
