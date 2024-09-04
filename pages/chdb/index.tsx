@@ -32,7 +32,9 @@ import imageSampleQuery from './sample-query.svg'
 
 import graphPanel from './graph-panel.svg'
 import graphLinesChdb from './graph-lines-chdb.svg'
+import graphLinesDuckdb from './graph-lines-duckdb.svg'
 import graphLinesPandas from './graph-lines-pandas.svg'
+import graphLinesPolars from './graph-lines-polars.svg'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -476,49 +478,83 @@ function Checkbox({
 }
 
 function BenchmarkGraph() {
-  const [isChdb, setChdb] = useState(false)
-  const [isPandas, setPandas] = useState(true)
+  const [isChdb, setIsChdb] = useState(true)
+  const [isDuckdb, setIsDuckdb] = useState(true)
+  const [isPandas, setIsPandas] = useState(true)
+  const [isPolars, setIsPolars] = useState(true)
   return (
-    <div className='relative mx-auto my-6 aspect-[1080/408] max-w-[1080px]'>
-      <div className='absolute -top-6 right-6 z-20 space-y-3'>
+    <div className='relative mx-auto my-6 max-w-[1080px]'>
+      <div className='z-20 mb-6 flex flex-wrap justify-center gap-4 lg:absolute lg:-top-8 lg:right-6 lg:block lg:space-y-3'>
         <Checkbox
           color='#FCFF74'
           checked={isChdb}
-          onChange={(val) => setChdb(val)}>
+          onChange={(val) => setIsChdb(val)}>
           chDB
+        </Checkbox>
+        <Checkbox
+          color='#636EFA'
+          checked={isDuckdb}
+          onChange={(val) => setIsDuckdb(val)}>
+          DuckDB
         </Checkbox>
         <Checkbox
           color='#00CC96'
           checked={isPandas}
-          onChange={(val) => setPandas(val)}>
+          onChange={(val) => setIsPandas(val)}>
           Pandas
         </Checkbox>
+        <Checkbox
+          color='#AB63FA'
+          checked={isPolars}
+          onChange={(val) => setIsPolars(val)}>
+          Polars
+        </Checkbox>
       </div>
-      <Image
-        src={graphPanel}
-        width={1080}
-        height={408}
-        alt='Graph panel'
-        className='absolute inset-0'
-      />
-      <Image
-        src={graphLinesChdb}
-        width={926}
-        height={197}
-        alt='Graph chDB'
-        className={`absolute bottom-[10.75%] left-[10.27%] h-[48.28%] w-[85.74%] object-none transition-all ${
-          !isChdb ? '!h-0' : ''
-        }`}
-      />
-      <Image
-        src={graphLinesPandas}
-        width={926}
-        height={286}
-        alt='Graph Pandas'
-        className={`absolute bottom-[10.75%] left-[10.64%] h-[70.09%] w-[85.74%] object-none transition-all ${
-          !isPandas ? '!h-0' : ''
-        }`}
-      />
+      <div className='relative aspect-[1080/408]'>
+        <Image
+          src={graphPanel}
+          width={1080}
+          height={408}
+          alt='Graph panel'
+          className='absolute inset-0'
+        />
+        <Image
+          src={graphLinesChdb}
+          width={926}
+          height={197}
+          alt='Graph chDB'
+          className={`absolute bottom-[10.75%] left-[9.97%] h-[48.28%] w-[85.74%] object-cover transition-all ${
+            !isChdb ? '!h-0' : ''
+          }`}
+        />
+        <Image
+          src={graphLinesDuckdb}
+          width={926}
+          height={203}
+          alt='Graph DuckDB'
+          className={`absolute bottom-[10.75%] left-[10.27%] h-[49.75%] w-[85.74%] object-cover transition-all ${
+            !isDuckdb ? '!h-0' : ''
+          }`}
+        />
+        <Image
+          src={graphLinesPandas}
+          width={926}
+          height={286}
+          alt='Graph Pandas'
+          className={`absolute bottom-[10.75%] left-[10.64%] h-[70.09%] w-[85.74%] object-cover transition-all ${
+            !isPandas ? '!h-0' : ''
+          }`}
+        />
+        <Image
+          src={graphLinesPolars}
+          width={926}
+          height={272}
+          alt='Graph Polars'
+          className={`absolute bottom-[10.75%] left-[11.01%] h-[66.66%] w-[85.74%] object-cover transition-all ${
+            !isPolars ? '!h-0' : ''
+          }`}
+        />
+      </div>
     </div>
   )
 }
