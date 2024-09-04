@@ -317,7 +317,7 @@ export default function Page({
                     No, we aren’t kidding. That’s for real. The Chainsmokers! In
                     Vegas! At re:Invent! Told you it was a House Party.
                   </SuiText>
-                  <SuiTitle type='h3'>The Where and When</SuiTitle>
+                  <SuiTitle type='h3'>The where and when</SuiTitle>
                   <SuiText className='!mt-0'>
                     So, here’s the deal: It’s all happening on Tuesday, December
                     3, 2024 from 9:00 PM - 12:00 AM PT in a location disclosed
