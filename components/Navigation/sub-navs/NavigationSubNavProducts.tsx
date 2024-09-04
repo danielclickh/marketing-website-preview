@@ -52,7 +52,7 @@ export default function NavigationSubNavProducts() {
             </span>
           </NavigationLink>
         </li>
-        <li>
+        {/* <li>
           <NavigationLink
             href='/chdb'
             onClick={galaxyOnClick('topNav.productMenu.chdbSelect')}
@@ -73,7 +73,7 @@ export default function NavigationSubNavProducts() {
               </div>
             </span>
           </NavigationLink>
-        </li>
+        </li> */}
 
         <li className='md-mid:hidden'>
           <NavigationLink
