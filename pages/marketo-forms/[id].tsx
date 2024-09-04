@@ -316,6 +316,34 @@ export default function Page() {
             return false
           })
 
+          // Handle custom email validation
+          if (formId === '1274') {
+            marketoFormObject.onValidate(() => {
+              const vals = marketoFormObject.vals()
+              if (vals && vals?.Email) {
+                const lowerEmail = vals.Email.toLowerCase()
+                //filthy but works for now
+                if (
+                  lowerEmail.includes('@googlemail.com') ||
+                  lowerEmail.includes('@gmail.com') ||
+                  lowerEmail.includes('@hotmail.com') ||
+                  lowerEmail.includes('@yahoo.com') ||
+                  lowerEmail.includes('@outlook.com') ||
+                  lowerEmail.includes('@live.com') ||
+                  lowerEmail.includes('@icloud.com')
+                ) {
+                  marketoFormObject.showErrorMessage(
+                    'Please enter a business email to continue.',
+                    marketoFormObject.getFormElem().find('#Email')
+                  )
+                  marketoFormObject.submittable(false)
+                } else {
+                  marketoFormObject.submittable(true)
+                }
+              }
+            })
+          }
+
           // Listen for events from the parent
           window.addEventListener('message', recieveEventFromParent)
         }
