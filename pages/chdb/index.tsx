@@ -424,7 +424,10 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             size='lg'
             className='group mx-auto mt-8'
             target='_blank'
-            href='https://clickhouse.cloud/signUp?loc=chdbPageFooterCta'>
+            href='https://clickhouse.cloud/signUp?loc=chdbPageFooterCta'
+            onClick={galaxyOnClick(
+              'chdbPage.footerCta.createFreeAccountSelect'
+            )}>
             Create a free account
           </CUIButton>
         </div>
