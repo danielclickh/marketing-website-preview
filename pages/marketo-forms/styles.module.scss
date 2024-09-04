@@ -479,8 +479,7 @@
 
         .mktoFormRow:nth-child(11) {
           .mktoFieldWrap {
-            @apply flex-wrap flex-row;
-
+            @apply flex-row items-center;
 
             label.mktoLabel {
               @apply mb-0 pb-0;
