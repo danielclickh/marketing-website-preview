@@ -1,7 +1,7 @@
 import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
-import { CSSProperties, useEffect, useState } from 'react'
+import { CSSProperties, useEffect, useRef, useState } from 'react'
 import { CUIButton, CUICard, CUILink } from '../../components/ClickUI'
 import { SuiCodeblock, SuiText, SuiTitle } from '../../components/sui'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
@@ -442,11 +442,18 @@ function Checkbox({
   onChange: (checked: boolean) => void
   children: React.ReactNode
 }) {
+  const mountedRef = useRef<boolean>(false)
   const [isChecked, setIsChecked] = useState<boolean>(checked)
 
   useEffect(() => {
-    onChange(isChecked)
+    if (mountedRef.current) {
+      onChange(isChecked)
+    }
   }, [isChecked])
+
+  useEffect(() => {
+    mountedRef.current = true
+  }, [])
   return (
     <button
       className='group/checkbox flex items-center gap-4'
@@ -508,9 +515,9 @@ function BenchmarkGraph() {
           onChange={(val) => {
             setIsDuckdb(val)
             if (val) {
-              galaxyOnClick('chdbPage.comparionsTable.duckDbCheck')
+              galaxyOnClick('chdbPage.comparionsTable.duckDbCheck')()
             } else {
-              galaxyOnClick('chdbPage.comparionsTable.duckDbUncheck')
+              galaxyOnClick('chdbPage.comparionsTable.duckDbUncheck')()
             }
           }}>
           DuckDB
@@ -521,9 +528,9 @@ function BenchmarkGraph() {
           onChange={(val) => {
             setIsPandas(val)
             if (val) {
-              galaxyOnClick('chdbPage.comparionsTable.pandasCheck')
+              galaxyOnClick('chdbPage.comparionsTable.pandasCheck')()
             } else {
-              galaxyOnClick('chdbPage.comparionsTable.pandasUncheck')
+              galaxyOnClick('chdbPage.comparionsTable.pandasUncheck')()
             }
           }}>
           Pandas
@@ -534,9 +541,9 @@ function BenchmarkGraph() {
           onChange={(val) => {
             setIsPolars(val)
             if (val) {
-              galaxyOnClick('chdbPage.comparionsTable.polarsCheck')
+              galaxyOnClick('chdbPage.comparionsTable.polarsCheck')()
             } else {
-              galaxyOnClick('chdbPage.comparionsTable.polarsUncheck')
+              galaxyOnClick('chdbPage.comparionsTable.polarsUncheck')()
             }
           }}>
           Polars
