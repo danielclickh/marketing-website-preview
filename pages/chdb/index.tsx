@@ -42,9 +42,11 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title: 'chDB',
-          description: '',
-          path: '/chdb'
+          title: 'chDB - a fast, reliable, and scalable in-process database',
+          description:
+            'Experience the power of ClickHouse, in-process. With unparalleled performance, reliability, and scalability for any data-intensive application.',
+          path: '/chdb',
+          image: [{ url: '/images/chdb-social.png' }]
         },
         ...commonProps
       }
