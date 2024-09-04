@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
             $gte: new Date().toISOString()
           },
           slug: {
-            $notContains: 'clickhouse-fundamentals'
+            $notContains: '202410-apj-power-lunch'
           }
         },
         sort: ['localDatetime:ASC'],
@@ -93,7 +93,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
           image: [data[0].thumbnailPng],
           type: 'website',
           siteName: 'ClickHouse',
-          path: `/company/events/clickhouse-fundamentals`
+          path: `/company/events/202410-apj-power-lunch`
         },
         recentEvents,
         ...commonProps
@@ -136,7 +136,7 @@ function EventPage({
                   / {category}
                 </h4>
                 <h1
-                  className='mb-8 font-basier text-4xl font-semibold leading-tight md:text-5.5xl
+                  className='mb-8 font-basier text-4xl font-semibold leading-tight md:text-5xl md:leading-normal
             '>
                   {title}
                 </h1>
@@ -146,36 +146,7 @@ function EventPage({
                   </div>
                 )}
               </div>
-              {hostedBy && (
-                <div className='hosted_by mb-16'>
-                  <h3 className='mb-7 text-xl font-bold'>{hostedBy.title}</h3>
-                  <div className='grid grid-cols-1 flex-wrap gap-3 sm:grid-cols-2'>
-                    {hostedBy.hosts.map((host) => (
-                      <div
-                        className='flex gap-5'
-                        key={`${host.name}-${host.role}`}>
-                        {host.avatarPng && (
-                          <StrapiImage
-                            {...host.avatarPng}
-                            alt={host.avatarPng.caption}
-                            width={64}
-                            height={64}
-                            className='h-11 w-11 rounded-full'
-                          />
-                        )}
-                        <div className='flex flex-col'>
-                          <p className='mb-1 text-base font-medium'>
-                            {host.name}
-                          </p>
-                          <p className='flex-auto text-sm font-medium text-neutral-300'>
-                            {host.role}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+
               {agenda && (
                 <div className='agenda'>
                   <SuiTitle type='h2' className='mb-7'>
