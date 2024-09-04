@@ -240,7 +240,8 @@ export async function getStaticPaths() {
   const excludedSlugs = [
     'clickhouse-workshop',
     'clickhouse-fundamentals',
-    '202410-apj-power-lunch'
+    '202410-apj-power-lunch',
+    '202410-apj-singapore-inperson-training'
   ]
   // Filter out the paths with the excluded slugs
   const paths = allPaths.filter((path) => {
