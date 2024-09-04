@@ -578,7 +578,7 @@ function FaqAccordion({
           isOpen ? 'text-white' : 'text-white/80 hover:text-white'
         }`}
         onClick={() => setIsOpen((old) => !old)}>
-        <span className='-ml-6 mr-6 flex w-12 flex-shrink-0 flex-grow-0 items-center justify-center border-r border-neutral-700/80 text-center text-neutral-300/60'>
+        <span className='-ml-6 mr-6 flex w-12 flex-shrink-0 flex-grow-0 items-center justify-center self-stretch border-r border-neutral-700/80 text-center text-neutral-300/60'>
           <span>{number}</span>
         </span>
         <span className='flex-1'>{question}</span>
