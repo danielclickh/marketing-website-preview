@@ -2,7 +2,7 @@ import { ArrowRightIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import { HTMLAttributes } from 'react'
 
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   size?: 'lg' | 'base' | 'sm'
   type: 'primary' | 'secondary' | 'danger' | 'custom' | 'dark'
   iconRight?: boolean

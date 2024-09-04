@@ -7,6 +7,400 @@
       // "@apply space-y-5;" doesn't work because Marketo wraps hidden fields in a div producing extra spacing.
       // Spacing is added to the .mktoFormCol class
 
+      // Resets
+      //
+      //
+
+      &, * {
+        float: none !important;
+      }
+
+      .mktoClear, .mktoOffset, .mktoGutter {
+        @apply hidden;
+      }
+
+      // Empty placehoders
+      //
+      .mktoPlaceholder {
+        display: none;
+      }
+
+      // Basic layout
+      //
+      //
+      .mktoFormRow, .mktoButtonRow {
+        @apply flex flex-wrap;
+        @apply md:gap-8;
+
+        > * {
+          @apply flex-shrink-0 w-full max-w-full;
+        }
+
+        .mktoFormCol {
+          @apply flex-grow flex-shrink basis-full max-w-full mb-6;
+          @apply md:basis-0;
+        }
+
+        // Field groups
+        fieldset.mktoFormCol {}
+      }
+
+      // By default, on smaller screens we break columns onto new lines.
+      // Adding this class to the will disable this behaviour.
+      &.allow-columns {
+        .mktoFormRow, .mktoButtonRow {
+          @apply gap-8;
+
+          .mktoFormCol {
+            @apply basis-0;
+          }
+        }
+      }
+
+      // Field sets
+      //
+      //
+      legend {
+        @apply mb-4 pb-2 border-b border-b-primary-300/30 w-full;
+      }
+
+      // Fields
+      //
+      //
+      .mktoFieldWrap {
+        @apply relative h-full flex flex-col justify-items-start;
+
+        // Label
+        //
+        label.mktoLabel {
+          gap: 0.5ch;
+          @apply flex flex-row justify-start w-auto text-xs font-medium pb-1 mb-1;
+
+          a {
+            @apply underline;
+          }
+
+          .mktoAsterix {
+            float: none !important;
+            @apply text-c4 hidden align-super order-last;
+          }
+        }
+
+
+
+        &.mktoRequiredField label.mktoLabel .mktoAsterix {
+          @apply inline;
+        }
+
+        // Field error message - default
+        //
+        .mktoError {
+          @apply hidden;
+          position: relative !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: auto !important;
+          bottom: auto !important;
+
+          .mktoErrorArrowWrap {
+            @apply hidden;
+          }
+
+          .mktoErrorMsg {
+            @apply block mt-1 text-xs min-h-[1rem];
+          }
+        }
+
+        // Field error message - show
+        //
+        .mktoInvalid ~ .mktoError {
+          @apply block;
+        }
+
+        // Input instructions
+        .mktoInstruction {
+          @apply text-sm;
+
+          &:empty {
+            @apply hidden;
+          }
+        }
+
+        // General field styles
+        //
+        input:not([type="checkbox"]):not([type="radio"]),
+        textarea,
+        select {
+          width: 100% !important;
+          @apply border shadow-input appearance-none cursor-text mt-1 px-3 py-2 relative resize-none rounded-md sm:text-sm text-left w-full transition-[border] duration-300 ease-in;
+        }
+
+        // Dropdowns
+        //
+        select {
+          @apply cursor-default;
+
+          background: {
+            image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            position: right 0.5rem center;
+            repeat: no-repeat;
+            size: 1.5em 1.5em;
+          };
+        }
+
+        // Dates
+        //
+        input[type="date"] {
+          padding-right: calc(1.5em + .75rem) !important; // Add error padding by default on marketo date fields to prevent issue on Chrome.
+        }
+
+        // Checkboxes
+        //
+        .mktoCheckboxList {
+          width: 100% !important;
+          @apply flex flex-row flex-wrap items-center justify-start;
+
+          input {
+            @apply appearance-none border w-4 h-4 rounded mr-2;
+
+            &:checked {
+              background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+            }
+
+            & + label {
+              @apply block min-h-[1rem];
+              width: calc(100% - 1.5rem); // 100% minus the width and margin of the input
+            }
+          }
+
+        }
+
+        // Radios
+        //
+        .mktoRadioList {
+          width: 100% !important;
+          @apply flex flex-row flex-wrap items-center justify-start;
+
+          input {
+            @apply appearance-none border w-4 h-4 rounded-full mr-2;
+
+            &:checked {
+              background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+            }
+
+            & + label {
+              @apply block min-h-[1rem];
+              width: calc(100% - 1.5rem); // 100% minus the width and margin of the input
+            }
+          }
+        }
+
+        // HTML message
+        //
+        .mktoHtmlText {
+          width: 100% !important;
+        }
+
+      }
+
+      // Buttons
+      //
+      //
+      .mktoButtonWrap {
+        margin-left: 0 !important;
+      }
+
+      .mktoButton {
+        @apply w-full py-2.5 px-6 text-sm font-semibold text-center rounded-lg duration-300 whitespace-nowrap transition-colors;
+      }
+
+      // ======
+      // DARK THEME
+      // ======
+
+      &.theme-dark {
+        .mktoFieldWrap {
+
+          // Label
+          //
+          label.mktoLabel {
+            @apply text-neutral-300;
+          }
+
+          // Field error message - default
+          //
+          .mktoError {
+            .mktoErrorMsg {
+              @apply text-danger-200;
+            }
+          }
+
+          // Input instructions
+          .mktoInstruction {
+            @apply text-neutral-300;
+          }
+
+          // General field styles
+          //
+          input:not([type="checkbox"]):not([type="radio"]),
+          textarea,
+          select {
+            @apply bg-neutral-725 border-neutral-700 placeholder-neutral-400 text-neutral-0;
+            @apply focus:bg-slate-900 focus:border-primary-300 focus:outline-none;
+
+            // Error state
+            &.mktoInvalid:not(:focus) {
+              @apply border-danger-200;
+            }
+          }
+
+          // Dropdowns
+          //
+          select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+          }
+
+          // Checkboxes
+          //
+          .mktoCheckboxList {
+            input {
+              @apply bg-neutral-725 border-neutral-700;
+              @apply checked:border-primary-300;
+
+              &:checked {
+                background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+              }
+            }
+
+            // Error state
+            &.mktoInvalid input:not(:checked) {
+              @apply border-danger-200;
+            }
+          }
+
+          // Radios
+          //
+          .mktoRadioList {
+            input {
+              @apply bg-neutral-725 border-neutral-700;
+              @apply checked:border-primary-300;
+
+              &:checked {
+                background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+              }
+            }
+
+            // Error state
+            &.mktoInvalid input:not(:checked) {
+              @apply border-danger-200;
+            }
+          }
+
+        }
+
+        // Buttons
+        //
+        //
+        .mktoButton {
+          @apply bg-primary-300 text-primary-900;
+          @apply hover:bg-primary-400;
+        }
+      }
+
+      // ======
+      // LIGHT THEME
+      // ======
+
+      &.theme-light {
+        .mktoFieldWrap {
+
+          // Label
+          //
+          label.mktoLabel {
+            @apply text-primary-900;
+          }
+
+          // Field error message - default
+          //
+          .mktoError {
+            .mktoErrorMsg {
+              @apply text-danger-600;
+            }
+          }
+
+          // Input instructions
+          .mktoInstruction {
+            @apply text-neutral-300;
+          }
+
+          // General field styles
+          //
+          input:not([type="checkbox"]):not([type="radio"]),
+          textarea,
+          select {
+            @apply bg-white border-neutral-200 placeholder-neutral-200 text-primary-900;
+            @apply focus:border-primary-400 focus:outline-none;
+
+            // Error state
+            &.mktoInvalid:not(:focus) {
+              @apply border-danger-600;
+            }
+          }
+
+          // Dropdowns
+          //
+          select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+          }
+
+          // Checkboxes
+          //
+          .mktoCheckboxList {
+            input {
+              @apply bg-white border-neutral-200;
+              @apply checked:border-primary-400;
+
+              &:checked {
+                background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23161517' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+              }
+            }
+
+            // Error state
+            &.mktoInvalid input:not(:checked) {
+              @apply border-danger-600;
+            }
+          }
+
+          // Radios
+          //
+          .mktoRadioList {
+            input {
+              @apply bg-white border-neutral-200;
+              @apply checked:border-primary-400;
+
+              &:checked {
+                background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23161517' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+              }
+            }
+
+            // Error state
+            &.mktoInvalid input:not(:checked) {
+              @apply border-danger-600;
+            }
+          }
+
+        }
+
+        // Buttons
+        //
+        //
+        .mktoButton {
+          @apply bg-primary-300 text-primary-900;
+          @apply hover:bg-primary-400;
+        }
+      }
+
+
       // Newsletter specific styles (Marketo ID 1122)
       //
       &#mktoForm_1122 {
@@ -53,257 +447,52 @@
         }
       }
 
-      // Resets
+      // Houseparty yellow buttons (all forms)
       //
-      //
-
-      &, * {
-        float: none !important;
-      }
-
-      .mktoClear, .mktoOffset, .mktoGutter {
-        @apply hidden;
-      }
-
-      // Empty placehoders
-      //
-      .mktoPlaceholder {
-        display: none;
-      }
-
-      // Basic layout
-      //
-      //
-      .mktoFormRow, .mktoButtonRow {
-        @apply flex flex-wrap;
-        @apply md:gap-8;
-
-        > * {
-          @apply flex-shrink-0 w-full max-w-full;
-        }
-
-        .mktoFormCol {
-          @apply flex-grow flex-shrink basis-full max-w-full mb-6;
-          @apply md:basis-0;
-        }
-
-        // Field groups
-        fieldset.mktoFormCol {
-
+      &.referer-houseparty-vegas-2024,
+      &.referer-houseparty-vegas-2024-ticket {
+        .mktoButtonRow button.mktoButton {
+          background-color: #EBFF00 !important;
         }
       }
 
-      // By default, on smaller screens we break columns onto new lines.
-      // Adding this class to the will disable this behaviour.
-      &.allow-columns {
-        .mktoFormRow, .mktoButtonRow {
-          @apply gap-8;
-
-          .mktoFormCol {
-            @apply basis-0;
-          }
-        }
-      }
-
-      // Field sets
+      // Houseparty inline checkboxes (Marketo ID 1258)
       //
-      //
-      legend {
-        @apply mb-4 pb-2 border-b border-b-primary-300/30 w-full;
-      }
-
-      // Fields
-      //
-      //
-      .mktoFieldWrap {
-        @apply relative h-full flex flex-col justify-items-start;
-
-        // Label
-        //
+      &#mktoForm_1258 {
         label.mktoLabel {
-          @apply flex flex-row-reverse justify-end w-auto text-xs font-medium text-neutral-300 pb-1 mb-1;
-
-          .mktoAsterix {
-            float: none !important;
-            @apply text-c4 hidden align-super;
-          }
+          @apply text-sm;
         }
+        .mktoFormRow:nth-child(9) {
+          .mktoFieldWrap {
+            @apply flex-row items-center;
 
-        &.mktoRequiredField label.mktoLabel .mktoAsterix {
-          @apply inline;
-        }
-
-        // Field error message - default
-        //
-        .mktoError {
-          @apply hidden;
-          position: relative !important;
-          top: 0 !important;
-          left: 0 !important;
-          right: auto !important;
-          bottom: auto !important;
-
-          .mktoErrorArrowWrap {
-            @apply hidden;
-          }
-
-          .mktoErrorMsg {
-            @apply block mt-1 text-danger-200 text-xs min-h-[1rem];
-          }
-        }
-
-        // Field error message - show
-        //
-        .mktoInvalid ~ .mktoError {
-          @apply block;
-        }
-
-        // Input instructions
-        .mktoInstruction {
-          //@extend .form-text;
-          @apply text-neutral-300 text-sm;
-
-          &:empty {
-            @apply hidden;
-          }
-        }
-
-        // General field styles
-        //
-        input:not([type="checkbox"]):not([type="radio"]),
-        textarea,
-        select {
-          width: 100% !important;
-
-          // Base
-          @apply appearance-none cursor-text mt-1 px-3 py-2 relative resize-none rounded-md sm:text-sm text-left w-full transition-[border] duration-300 ease-in;
-
-          // Default state
-          @apply bg-neutral-725 border border-neutral-700 placeholder-neutral-400 shadow-input text-neutral-0;
-
-          // Focus state
-          @apply focus:bg-slate-900 focus:border-primary-300 focus:outline-none;
-
-          // Error state
-          &.mktoInvalid:not(:focus) {
-            @apply border-danger-200;
-          }
-        }
-
-        // Dropdowns
-        //
-        select {
-          @apply cursor-default;
-
-          background: {
-            image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-            position: right 0.5rem center;
-            repeat: no-repeat;
-            size: 1.5em 1.5em;
-          };
-        }
-
-        // Dates
-        //
-        input[type="date"] {
-          padding-right: calc(1.5em + .75rem) !important; // Add error padding by default on marketo date fields to prevent issue on Chrome.
-        }
-
-        // Checkboxes
-        //
-        .mktoCheckboxList {
-          width: 100% !important;
-          @apply flex flex-row flex-wrap items-center justify-start;
-
-          input {
-
-            // Structure
-            @apply appearance-none w-4 h-4 rounded mr-2;
-
-            // Default state
-            @apply bg-neutral-725 border border-neutral-700;
-
-            // Checked state
-            @apply checked:border-primary-300;
-            &:checked {
-              background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+            label.mktoLabel {
+              @apply mb-0 pb-0;
             }
 
-            & + label {
-              @apply block min-h-[1rem];
-              width: calc(100% - 1.5rem); // 100% minus the width and margin of the input
+            .mktoCheckboxList {
+              @apply order-first flex-shrink-0 flex-grow-0;
+              width: auto !important;
+            }
+          }
+        }
+
+        .mktoFormRow:nth-child(11) {
+          .mktoFieldWrap {
+            @apply flex-row items-center;
+
+            label.mktoLabel {
+              @apply mb-0 pb-0;
+            }
+
+            .mktoCheckboxList {
+              @apply order-first flex-shrink-0 flex-grow-0;
+              width: auto !important;
             }
           }
 
-          // Error state
-          &.mktoInvalid input:not(:checked) {
-            @apply border-danger-200;
-          }
         }
 
-        // Radios
-        //
-        .mktoRadioList {
-          width: 100% !important;
-          @apply flex flex-row flex-wrap items-center justify-start;
-
-          input {
-
-            // Structure
-            @apply appearance-none w-4 h-4 rounded-full mr-2;
-
-            // Default state
-            @apply bg-neutral-725 border border-neutral-700;
-
-            // Checked state
-            @apply checked:border-primary-300;
-            &:checked {
-              background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
-            }
-
-            & + label {
-              @apply block min-h-[1rem];
-              width: calc(100% - 1.5rem); // 100% minus the width and margin of the input
-            }
-          }
-
-          // Error state
-          &.mktoInvalid input:not(:checked) {
-            @apply border-danger-200;
-          }
-        }
-
-        // HTML message
-        //
-        .mktoHtmlText {
-          width: 100% !important;
-        }
-
-      }
-
-      // Buttons
-      //
-      //
-      .mktoButtonWrap {
-        margin-left: 0 !important;
-
-      }
-      .mktoButton {
-        // Base
-        @apply w-full py-2.5 px-6 text-sm font-semibold text-center rounded-lg duration-300 whitespace-nowrap transition-colors;
-
-        // Default state
-        @apply bg-primary-300 text-primary-900;
-
-        // Hover state
-        @apply hover:bg-primary-400;
-      }
-
-      .mktoButtonRow {
-        .mktoError {
-          @apply text-red-700 text-center w-full mb-2;
-          color: #FF9898;
-        }
       }
 
     }
