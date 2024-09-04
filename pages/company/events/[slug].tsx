@@ -237,7 +237,11 @@ export async function getStaticPaths() {
   }
   const allPaths = await getPathsValues('events', params)
   // Define an array of slugs to exclude
-  const excludedSlugs = ['clickhouse-workshop', 'clickhouse-fundamentals']
+  const excludedSlugs = [
+    'clickhouse-workshop',
+    'clickhouse-fundamentals',
+    '202410-apj-power-lunch'
+  ]
   // Filter out the paths with the excluded slugs
   const paths = allPaths.filter((path) => {
     const slug = path.params.slug

@@ -10,7 +10,8 @@ export interface MarketoFormObject {
     callback: (response: any, redirect: string) => void | false
   ) => void
   setValues(values: Record<string, any>): void
-  getValues(): object
+  getValues(): Record<string, any>
+  vals(values?: Record<string, any>): Record<string, any> | void
   addHiddenFields(values: Record<string, any>): void
   showErrorMessage(message: string, element?: JQuery): void
 }
