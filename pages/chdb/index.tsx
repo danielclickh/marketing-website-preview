@@ -278,7 +278,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             '--left-side': 'auto'
           } as CSSProperties
         }>
-        <div className='section-container space-y-24 lg:space-y-36'>
+        <div className='section-container space-y-16 lg:space-y-28 lg:pt-6'>
           <FeatureSection
             image={{
               src: imageEmbedded,
@@ -293,6 +293,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             <TickItem>Reduce system complexity and resource usage</TickItem>
             <TickItem>Ideal for lightweight and embedded applications</TickItem>
           </FeatureSection>
+          <hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />
           <FeatureSection
             flip={true}
             image={{
@@ -309,6 +310,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             <TickItem>Reduce overhead and latency in data processing</TickItem>
             <TickItem>Achieve faster data handling and analysis</TickItem>
           </FeatureSection>
+          <hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />
           <FeatureSection
             image={{
               src: imageInputOutput,
@@ -440,12 +442,14 @@ function Checkbox({
   color,
   checked = false,
   onChange = (checked) => {},
-  children
+  children,
+  disabled = false
 }: {
   color: CSSProperties['backgroundColor']
   checked: boolean
   onChange: (checked: boolean) => void
   children: React.ReactNode
+  disabled?: boolean
 }) {
   const mountedRef = useRef<boolean>(false)
   const [isChecked, setIsChecked] = useState<boolean>(checked)
@@ -461,8 +465,12 @@ function Checkbox({
   }, [])
   return (
     <button
-      className='group/checkbox flex items-center gap-4'
-      onClick={() => setIsChecked((old) => !old)}>
+      className={`group/checkbox flex items-center gap-4 ${
+        disabled ? 'pointer-events-none' : ''
+      }`}
+      onClick={() => {
+        if (!disabled) setIsChecked((old) => !old)
+      }}>
       <span
         className='relative aspect-square w-6 flex-shrink-0 flex-grow-0'
         style={{ backgroundColor: color }}>
@@ -504,6 +512,7 @@ function BenchmarkGraph() {
         <Checkbox
           color='#FCFF74'
           checked={isChdb}
+          disabled={true}
           onChange={(val) => {
             setIsChdb(val)
             if (val) {
