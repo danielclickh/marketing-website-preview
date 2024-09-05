@@ -80,7 +80,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
                 size='lg'
                 weight='semibold'
                 className='mt-6 !px-8'
-                href='https://github.com/chdb-io/chdb'
+                href='https://clickhouse.com/docs/en/chdb'
                 target='_blank'
                 onClick={galaxyOnClick('chdbPage.heroCta.tryItSelect')}>
                 Try it today
@@ -270,7 +270,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
 
       {/* Features */}
       <div
-        className='bg-shadow-element yellow-shadow shadow-circle my-24 lg:my-48'
+        className='bg-shadow-element yellow-shadow shadow-circle my-24'
         style={
           {
             '--top-side': '0',
@@ -278,12 +278,12 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             '--left-side': 'auto'
           } as CSSProperties
         }>
-        <div className='section-container space-y-24 lg:space-y-48'>
+        <div className='section-container space-y-24 lg:space-y-36'>
           <FeatureSection
             image={{
               src: imageEmbedded,
-              width: 435,
-              height: 230,
+              width: 522,
+              height: 275,
               alt: 'Embedded'
             }}>
             <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
@@ -386,7 +386,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
           </div>
           <CUILink
             href='/slack'
-            target='_self'
+            target='_blank'
             className='mt-6 flex items-center justify-center gap-4 text-primary lg:justify-start'>
             <span>Ask us anything</span>{' '}
             <ExternalLinkIcon className='h-4 w-4' />
