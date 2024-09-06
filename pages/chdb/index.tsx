@@ -507,7 +507,7 @@ function BenchmarkGraph() {
   const [isPandas, setIsPandas] = useState(true)
   const [isPolars, setIsPolars] = useState(false)
   return (
-    <div className='relative mx-auto my-6 max-w-[1080px]'>
+    <div className='relative mx-auto my-6 max-w-[1090px]'>
       <div className='z-20 mb-6 flex flex-wrap justify-center gap-4 lg:absolute lg:-top-8 lg:right-6 lg:block lg:space-y-3'>
         <Checkbox
           color='#FCFF74'
@@ -566,8 +566,8 @@ function BenchmarkGraph() {
       <div className='relative aspect-[1080/408]'>
         <Image
           src={graphPanel}
-          width={1080}
-          height={408}
+          width={1090}
+          height={417}
           alt='Graph panel'
           className='absolute inset-0'
         />
@@ -576,7 +576,7 @@ function BenchmarkGraph() {
           width={926}
           height={197}
           alt='Graph chDB'
-          className={`absolute bottom-[10.75%] left-[9.97%] h-[48.28%] w-[85.74%] object-cover transition-all ${
+          className={`absolute bottom-[11.4%] left-[10.47%] h-[47.24%] w-[84.95%] object-cover transition-all ${
             !isChdb ? '!h-0' : ''
           }`}
         />
@@ -585,7 +585,7 @@ function BenchmarkGraph() {
           width={926}
           height={203}
           alt='Graph DuckDB'
-          className={`absolute bottom-[10.75%] left-[10.27%] h-[49.75%] w-[85.74%] object-cover transition-all ${
+          className={`absolute bottom-[11.4%] left-[10.77%] h-[48.68%] w-[84.95%] object-cover transition-all ${
             !isDuckdb ? '!h-0' : ''
           }`}
         />
@@ -594,7 +594,7 @@ function BenchmarkGraph() {
           width={926}
           height={286}
           alt='Graph Pandas'
-          className={`absolute bottom-[10.75%] left-[10.64%] h-[70.09%] w-[85.74%] object-cover transition-all ${
+          className={`absolute bottom-[11.4%] left-[11.14%] h-[68.58%] w-[84.95%] object-cover transition-all ${
             !isPandas ? '!h-0' : ''
           }`}
         />
@@ -603,7 +603,7 @@ function BenchmarkGraph() {
           width={926}
           height={272}
           alt='Graph Polars'
-          className={`absolute bottom-[10.75%] left-[11.01%] h-[66.66%] w-[85.74%] object-cover transition-all ${
+          className={`absolute bottom-[11.4%] left-[11.51%] h-[65.22%] w-[84.95%] object-cover transition-all ${
             !isPolars ? '!h-0' : ''
           }`}
         />
