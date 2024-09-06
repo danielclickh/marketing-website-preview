@@ -258,11 +258,36 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
               chDB supports bindings for many programming languages, including:
             </SuiText>
             <div className='flex flex-wrap items-center justify-center gap-x-12 gap-y-8'>
-              <Image src={logoBun} width={56} height={50} alt='Bun' />
-              <Image src={logoNode} width={81} height={50} alt='node' />
-              <Image src={logoRust} width={96} height={37} alt='Rust' />
-              <Image src={logoGo} width={73} height={28} alt='GO' />
-              <Image src={logoPython} width={50} height={51} alt='Python' />
+              <Link
+                href='https://clickhouse.com/docs/en/chdb/install/bun'
+                target='_blank'
+                prefetch={false}>
+                <Image src={logoBun} width={56} height={50} alt='Bun' />
+              </Link>
+              <Link
+                href='https://clickhouse.com/docs/en/chdb/install/nodejs'
+                target='_blank'
+                prefetch={false}>
+                <Image src={logoNode} width={81} height={50} alt='node' />
+              </Link>
+              <Link
+                href='https://clickhouse.com/docs/en/chdb/install/rust'
+                target='_blank'
+                prefetch={false}>
+                <Image src={logoRust} width={96} height={37} alt='Rust' />
+              </Link>
+              <Link
+                href='https://clickhouse.com/docs/en/chdb/install/go'
+                target='_blank'
+                prefetch={false}>
+                <Image src={logoGo} width={73} height={28} alt='GO' />
+              </Link>
+              <Link
+                href='https://clickhouse.com/docs/en/chdb/install/python'
+                target='_blank'
+                prefetch={false}>
+                <Image src={logoPython} width={50} height={51} alt='Python' />
+              </Link>
             </div>
           </div>
         </div>
