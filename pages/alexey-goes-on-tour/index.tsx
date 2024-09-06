@@ -226,6 +226,7 @@ export default function HomePage({
               weekday='THU'
               month='SEP'
               day={5}
+              disabled={true}
             />
             <TimelineItem
               heading='Raleigh, NC'
