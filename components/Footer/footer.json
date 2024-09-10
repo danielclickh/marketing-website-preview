@@ -49,7 +49,7 @@
 				"id": 500,
 				"name": "chDB",
 				"href": "/chdb",
-				"target": "_blank",
+				"target": "_self",
 				"galaxyEvent": "footerNav.productMenu.chdbSelect"
 			},
 			{
