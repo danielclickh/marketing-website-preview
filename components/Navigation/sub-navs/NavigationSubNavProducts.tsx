@@ -59,14 +59,14 @@ export default function NavigationSubNavProducts() {
             onClick={galaxyOnClick('topNav.productMenu.byocSelect')}
             className='group/nav-with-icon !flex w-full items-center gap-3'>
             <Image
-              src='/images/nav/icon-clickhouse-cloud.svg'
-              alt='ClickHouse Cloud'
+              src='/images/nav/icon-byoc.svg'
+              alt='ClickHouse BYOC'
               width={24}
               height={24}
               className='flex-grow-1 flex-shrink-0'
             />
             <span>
-              Bring Your Own Cloud
+              Bring Your Own Cloud (soon)
               <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
                 A fully managed ClickHouse Cloud service,
                 <br /> deployed in your own AWS account.
