@@ -168,6 +168,13 @@ function Sitemap({
               </p>
               <p className='pb-2'>
                 <Link
+                  href={`/chdb?loc=sitemap`}
+                  className='text-primary-300 hover:underline'>
+                  chDB
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
                   href={`/clickhouse/keeper?loc=sitemap`}
                   className='text-primary-300 hover:underline'>
                   ClickHouse Keeper

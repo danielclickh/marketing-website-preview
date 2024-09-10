@@ -48,7 +48,7 @@
 			{
 				"id": 500,
 				"name": "chDB",
-				"href": "https://github.com/chdb-io/chdb",
+				"href": "/chdb",
 				"target": "_blank",
 				"galaxyEvent": "footerNav.productMenu.chdbSelect"
 			},
