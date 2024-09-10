@@ -139,7 +139,7 @@ export default function Page({
                 src={imageHeroText}
                 width={3000}
                 height={825}
-                alt='ClickHouse house party with the Chainsmokers!'
+                alt='ClickHouse house party with The Chainsmokers!'
                 className='absolute block h-full w-full object-cover lg:object-scale-down'
               />
             </div>
