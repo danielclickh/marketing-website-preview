@@ -20,6 +20,7 @@ import {
 } from '../../types/pricing'
 import philosophy from './philosophy.json'
 import { galaxyOnClick, galaxyOnPage } from '../../lib/galaxy/galaxy'
+import Link from 'next/link'
 
 export const getStaticProps: GetStaticProps<PricingPageProps> =
   async function getStaticProps() {
@@ -198,8 +199,46 @@ function PricingPage({
             </div>
           </div>
         </div>
+
+        <div className='section-container mx-auto mb-24 max-w-[1115px]'>
+          <div className='mt-24 flex flex-wrap items-center gap-16 rounded-lg bg-primary-300 p-8 text-neutral-900 lg:flex-nowrap lg:px-16 lg:py-16'>
+            <div className='w-full lg:w-1/3'>
+              <Image
+                width={394}
+                height={168}
+                src='/images/cloud/byoc-aws.svg'
+                alt={'Bring your own cloud AWS'}
+              />
+            </div>
+            <div className='w-full lg:w-2/3'>
+              <div className='flip-selection mb-6 flex flex-wrap items-center gap-8'>
+                <SuiTitle type='h2'>Bring Your Own Cloud</SuiTitle>
+                <Link
+                  href='/cloud/bring-your-own-cloud'
+                  className='inline-block rounded-full border border-neutral-900 px-5 py-2  font-semibold uppercase'>
+                  Private Preview
+                </Link>
+              </div>
+              <div className='flip-selection'>
+                <SuiText className='mb-6 leading-relaxed '>
+                  Do you have strict data residency and compliance requirements
+                  that make typical SaaS offerings a nonstarter? Our Bring Your
+                  Own Cloud deployment model allows you to experience the
+                  advantages of ClickHouse Cloud within your own Virtual Private
+                  Cloud (VPC).
+                </SuiText>
+              </div>
+              <Link
+                href='/cloud/bring-your-own-cloud?loc=cloud-page-component'
+                className='inline-block rounded bg-[#161600] px-8 py-3 text-center font-semibold text-white'>
+                Join waitlist
+              </Link>
+            </div>
+          </div>
+        </div>
+
         {contactSection && (
-          <div className='section-container bg-shadow-element my-24'>
+          <div className='section-container bg-shadow-element mt-20 mb-24 max-w-[1115px]'>
             <div className='relative mx-auto flex w-full flex-col items-center gap-x-4 rounded-xl border border-neutral-725/80 bg-neutral-750/50 px-4 py-10 text-neutral-0 md:py-16'>
               <SuiTitle type='h2'>{contactSection.title}</SuiTitle>
               <div className='mb-6 mt-3 max-w-screen-md text-center text-neutral-200'>
