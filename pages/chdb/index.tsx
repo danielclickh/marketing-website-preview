@@ -370,7 +370,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
           </SuiText>
         </div>
         <BenchmarkGraph />
-        <div>
+        {/* <div>
           <SuiText className='text-center'>
             For more details, check out our{' '}
             <Link
@@ -384,7 +384,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             </Link>
             .
           </SuiText>
-        </div>
+        </div> */}
       </div>
 
       {/* FAQs */}
