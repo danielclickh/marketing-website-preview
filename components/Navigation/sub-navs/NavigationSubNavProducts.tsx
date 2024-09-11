@@ -7,8 +7,8 @@ import { NavigationLink } from '../parts'
 export default function NavigationSubNavProducts() {
   return (
     <>
-      <ul className='md-mid:py-2'>
-        <li className='flex items-center px-4'>
+      <ul className='px-4 md-mid:py-2'>
+        <li className='flex items-center'>
           <NavigationLink
             href='/cloud'
             onClick={galaxyOnClick('topNav.productMenu.cloudSelect')}
@@ -30,7 +30,7 @@ export default function NavigationSubNavProducts() {
             </span>
           </NavigationLink>
         </li>
-        <li className='mb-2 flex items-center px-4'>
+        <li className='flex items-center'>
           <NavigationLink
             href='/cloud/bring-your-own-cloud'
             onClick={galaxyOnClick('topNav.productMenu.byocSelect')}
@@ -51,11 +51,11 @@ export default function NavigationSubNavProducts() {
             </span>
           </NavigationLink>
         </li>
-        <li className='border-t border-neutral-700 px-4'>
+        <li>
           <NavigationLink
             href='/clickhouse'
             onClick={galaxyOnClick('topNav.productMenu.openSourceSelect')}
-            className='group/nav-with-icon mt-2 !flex w-full items-center gap-3'>
+            className='group/nav-with-icon !flex w-full items-center gap-3'>
             <Image
               src='/images/nav/icon-clickhouse.svg'
               alt='ClickHouse'
