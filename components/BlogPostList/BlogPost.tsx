@@ -20,6 +20,7 @@ export default function BlogPost({
 
   return (
     <Link
+      prefetch={false}
       href={`/blog/${slug}`}
       className={` hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1 blog-post-card-${slug} hover:no-underline category-${category
         .split(' ')
