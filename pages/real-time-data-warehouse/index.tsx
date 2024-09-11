@@ -196,7 +196,7 @@ export default function Page({
         />
 
         {/* Why use RT data warehouse */}
-        <div className='my-24 mx-auto px-4 xl:flex xl:max-w-[970px] xl:items-start xl:gap-12 xl:px-0 2xl:block 2xl:max-w-none'>
+        <div className='mx-auto my-24 px-4 xl:flex xl:max-w-[970px] xl:items-start xl:gap-12 xl:px-0 2xl:block 2xl:max-w-none'>
           <div className='mx-auto mb-12 flex max-w-[830px] flex-1 flex-col items-center gap-6 text-center xl:sticky xl:top-24 xl:mb-0 xl:items-start xl:text-left 2xl:relative 2xl:top-0 2xl:mb-12 2xl:items-center 2xl:text-center'>
             <SuiTitle type='h2'>What is a real-time data warehouse?</SuiTitle>
             <SuiText className='max-w-[600px] opacity-70 xl:max-w-none 2xl:max-w-[600px]'>
@@ -236,7 +236,7 @@ export default function Page({
             {/* Items container */}
             <div
               style={{ paddingBottom: timelineExternalResourceHeight }}
-              className='section-container grid grid-cols-1 gap-16 pr-0 pl-8 sm:pl-32 md:pl-44 xl:pl-36 2xl:grid-cols-3 2xl:pl-0'>
+              className='section-container grid grid-cols-1 gap-16 pl-8 pr-0 sm:pl-32 md:pl-44 xl:pl-36 2xl:grid-cols-3 2xl:pl-0'>
               <div className='relative flex flex-col'>
                 <TimelineCard
                   ref={(el: HTMLSpanElement) =>
@@ -345,7 +345,7 @@ export default function Page({
                 />
                 <div
                   ref={timelineExternalResourcesRef}
-                  className='absolute top-full left-0 right-0'>
+                  className='absolute left-0 right-0 top-full'>
                   <div>
                     <div className='mx-auto h-10 w-px bg-neutral-600'></div>
                   </div>
@@ -474,7 +474,7 @@ export default function Page({
           <div className='section-container mt-16 grid max-w-[1000px] grid-cols-1 gap-8 lg:grid-cols-2'>
             <QuoteCard
               alternative='Snowflake'
-              quote={`With Snowflake, we were using the standard plan, small compute, which **cost nearly six times more** than ClickHouse Cloud. We got several seconds query time and no materialized views. 
+              quote={`With Snowflake, we were using the standard plan, small compute, which **cost nearly six times more** than ClickHouse Cloud. We got several seconds query time and no materialized views.
 
 With ClickHouse Cloud's production instance, we are getting **sub-second query time** along with materialized views. The decision to switch was a no-brainer for us.`}
               logo={
@@ -533,17 +533,17 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
           </SuiTitle>
           <div className='section-container mt-16 grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6'>
             <IndustryCard
-              title='Financial Services'
+              title='Financial services'
               text='Trading and market analytics, fraud detection, risk monitoring, blockchain, and more.'
               icon='/images/real-time-data-warehouse/icon-money.svg'
             />
             <IndustryCard
-              title='E-Commerce and Retail'
+              title='E-Commerce and retail'
               text='Real-time inventory monitoring and overall tracking for online businesses.'
               icon='/images/real-time-data-warehouse/icon-retail.svg'
             />
             <IndustryCard
-              title='Marketing and Sales'
+              title='Marketing and sales'
               text='Data store for Adtech, web analytics, SEO, and much more.'
               icon='/images/real-time-data-warehouse/icon-marketing.svg'
             />
@@ -553,7 +553,7 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
               icon='/images/real-time-data-warehouse/icon-technology.svg'
             />
             <IndustryCard
-              title='Media and Entertainment'
+              title='Media and entertainment'
               text='Assess the performance of videos, assets, and other media in real‑time.'
               icon='/images/real-time-data-warehouse/icon-media.svg'
             />
@@ -730,7 +730,7 @@ function YesNoTable({
       {/* Desktop table */}
       <div className='relative hidden pb-3 md:block'>
         <div
-          className={`pointer-events-none absolute left-0 top-0 right-0 bottom-0 rounded-lg border-2 border-primary-300 shadow-noOffset-sm shadow-primary-300/40 ${
+          className={`pointer-events-none absolute bottom-0 left-0 right-0 top-0 rounded-lg border-2 border-primary-300 shadow-noOffset-sm shadow-primary-300/40 ${
             highlightOffset === null ? 'opacity-0' : 'opacity-100'
           } transition-opacity`}
           style={{ left: highlightOffset || 0 }}></div>
@@ -742,7 +742,7 @@ function YesNoTable({
                 {noHeading}
               </th>
               <th
-                className='w-[46%] border-b border-neutral-700 py-6 px-6 text-xl font-semibold'
+                className='w-[46%] border-b border-neutral-700 px-6 py-6 text-xl font-semibold'
                 ref={yesColRef}>
                 {yesHeading}
               </th>
@@ -769,7 +769,7 @@ function YesNoTable({
                   </td>
                   <td
                     valign='top'
-                    className='border-b border-neutral-700 py-4 px-6 lg:px-8'>
+                    className='border-b border-neutral-700 px-6 py-4 lg:px-8'>
                     <ItemYes>
                       <div className='text-sm font-bold uppercase text-[#B3B6BD] lg:hidden'>
                         {label}
@@ -812,21 +812,21 @@ const TimelineCard = forwardRef(function TimelineCard(
     <>
       {/* Floating label */}
       <span
-        className={`relative pl-4 font-bold leading-tight text-primary-300 sm:absolute sm:-left-32 sm:w-24 sm:px-4 sm:text-center md:-left-44 md:w-36 xl:-left-36 xl:w-28 xl:pl-0 xl:pr-8 2xl:left-1/2 2xl:-top-20 2xl:w-full 2xl:-translate-x-1/2 2xl:px-0 ${
+        className={`relative pl-4 font-bold leading-tight text-primary-300 sm:absolute sm:-left-32 sm:w-24 sm:px-4 sm:text-center md:-left-44 md:w-36 xl:-left-36 xl:w-28 xl:pl-0 xl:pr-8 2xl:-top-20 2xl:left-1/2 2xl:w-full 2xl:-translate-x-1/2 2xl:px-0 ${
           active ? '-top-1.5 sm:top-4' : '-top-1.5'
         }`}>
         {!active && <>{label}</>}
         {active && (
           <>
             <span className='md:hidden'>{label}</span>
-            <span className='tilted tilted-yellow -my-2 hidden py-2 px-3 md:inline-block'>
+            <span className='tilted tilted-yellow -my-2 hidden px-3 py-2 md:inline-block'>
               <span className='tilted-content'>{label}</span>
             </span>
           </>
         )}
         <span
           ref={ref}
-          className={`absolute -left-4 top-1/2 h-3 w-3 -translate-y-1/2 -translate-x-1/2 rounded-full sm:left-auto sm:-right-3 2xl:left-1/2 2xl:top-12 ${
+          className={`absolute -left-4 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full sm:-right-3 sm:left-auto 2xl:left-1/2 2xl:top-12 ${
             active
               ? 'bg-neutral-800 ring-4 ring-primary-300 ring-offset-0 2xl:bg-primary-300 2xl:ring-0'
               : 'bg-primary-300'
@@ -921,8 +921,7 @@ function QuoteCard({
       <div className='mt-auto flex flex-col justify-between gap-6 sm:flex-row sm:items-center'>
         {logo}
         <span className='order-first font-mono text-primary-300 sm:order-last sm:text-right'>
-          Alternative to{' '}
-          <br className='hidden sm:block' />
+          Alternative to <br className='hidden sm:block' />
           {alternative}
         </span>
       </div>
