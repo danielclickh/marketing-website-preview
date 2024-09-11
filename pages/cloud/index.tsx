@@ -20,6 +20,7 @@ import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import Lines from '../../components/ClickPipesAnimation/Lines'
 import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { BYOCSection } from '../../components/BYOCSection'
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -323,42 +324,7 @@ export default function CloudPage({
           </div>
         </div>
 
-        <div className='section-container mx-auto mb-24 max-w-[1115px]'>
-          <div className='flex flex-wrap items-center gap-16 rounded-lg bg-primary-300 p-8 text-neutral-900 lg:flex-nowrap lg:px-16 lg:py-16'>
-            <div className='w-full lg:w-1/3'>
-              <Image
-                width={394}
-                height={168}
-                src='/images/cloud/byoc-aws.svg'
-                alt={'Bring your own cloud AWS'}
-              />
-            </div>
-            <div className='w-full lg:w-2/3'>
-              <div className='flip-selection mb-6 flex flex-wrap items-center gap-8'>
-                <SuiTitle type='h2'>Bring Your Own Cloud</SuiTitle>
-                <Link
-                  href='/cloud/bring-your-own-cloud'
-                  className='inline-block rounded-full border border-neutral-900 px-5 py-2  font-semibold uppercase'>
-                  Private Preview
-                </Link>
-              </div>
-              <div className='flip-selection'>
-                <SuiText className='mb-6 leading-relaxed '>
-                  Do you have strict data residency and compliance requirements
-                  that make typical SaaS offerings a nonstarter? Our Bring Your
-                  Own Cloud deployment model allows you to experience the
-                  advantages of ClickHouse Cloud within your own Virtual Private
-                  Cloud (VPC).
-                </SuiText>
-              </div>
-              <Link
-                href='/cloud/bring-your-own-cloud?loc=cloud-page-component'
-                className='inline-block rounded bg-[#161600] px-8 py-3 text-center font-semibold text-white'>
-                Join waitlist
-              </Link>
-            </div>
-          </div>
-        </div>
+        <BYOCSection loc='cloud-page-component' />
 
         <div className='relative flex flex-col gap-y-28 '>
           <div className='section-container bg-shadow-element-right red-shadow flex w-full flex-col items-center justify-between self-center'>

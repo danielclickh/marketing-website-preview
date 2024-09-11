@@ -20,6 +20,8 @@ import {
 } from '../../types/pricing'
 import philosophy from './philosophy.json'
 import { galaxyOnClick, galaxyOnPage } from '../../lib/galaxy/galaxy'
+import Link from 'next/link'
+import { BYOCSection } from '../../components/BYOCSection'
 
 export const getStaticProps: GetStaticProps<PricingPageProps> =
   async function getStaticProps() {
@@ -198,8 +200,11 @@ function PricingPage({
             </div>
           </div>
         </div>
+
+        <BYOCSection loc='pricing-page-component' />
+
         {contactSection && (
-          <div className='section-container bg-shadow-element my-24'>
+          <div className='section-container bg-shadow-element mt-20 mb-24 max-w-[1115px]'>
             <div className='relative mx-auto flex w-full flex-col items-center gap-x-4 rounded-xl border border-neutral-725/80 bg-neutral-750/50 px-4 py-10 text-neutral-0 md:py-16'>
               <SuiTitle type='h2'>{contactSection.title}</SuiTitle>
               <div className='mb-6 mt-3 max-w-screen-md text-center text-neutral-200'>
