@@ -25,7 +25,7 @@ export function BYOCSection({ loc }: BYOCSectionProps) {
           <div className='flip-selection mb-6 flex flex-wrap items-center gap-8'>
             <SuiTitle type='h2'>Bring Your Own Cloud</SuiTitle>
             <Link
-              href='/cloud/bring-your-own-cloud'
+              href={`/cloud/bring-your-own-cloud?loc=${loc}`}
               className='inline-block rounded-full border border-neutral-900 px-5 py-2  font-semibold uppercase'>
               Private Preview
             </Link>
