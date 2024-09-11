@@ -66,7 +66,10 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
         {/* Logo, navigtation, CTAs... */}
         <div className='no-wrap section-container relative flex items-center py-4'>
           {/* Logo */}
-          <Link href='/' onClick={galaxyOnClick('topNav.logo.select')}>
+          <Link
+            href='/'
+            prefetch={false}
+            onClick={galaxyOnClick('topNav.logo.select')}>
             <Image
               src={logoFull}
               priority
