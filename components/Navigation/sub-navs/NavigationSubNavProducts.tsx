@@ -7,8 +7,8 @@ import { NavigationLink } from '../parts'
 export default function NavigationSubNavProducts() {
   return (
     <>
-      <ul className='px-4 md-mid:py-2'>
-        <li className='flex items-center'>
+      <ul className='md-mid:py-2'>
+        <li className='flex items-center px-4'>
           <NavigationLink
             href='/cloud'
             onClick={galaxyOnClick('topNav.productMenu.cloudSelect')}
@@ -30,30 +30,7 @@ export default function NavigationSubNavProducts() {
             </span>
           </NavigationLink>
         </li>
-
-        <li>
-          <NavigationLink
-            href='/clickhouse'
-            onClick={galaxyOnClick('topNav.productMenu.openSourceSelect')}
-            className='group/nav-with-icon !flex w-full items-center gap-3'>
-            <Image
-              src='/images/nav/icon-clickhouse.svg'
-              alt='ClickHouse'
-              width={24}
-              height={24}
-              className='flex-grow-1 flex-shrink-0'
-            />
-            <span>
-              ClickHouse
-              <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
-                Spin up a database with open-
-                <br />
-                source ClickHouse.
-              </div>
-            </span>
-          </NavigationLink>
-        </li>
-        <li className='flex items-center'>
+        <li className='mb-2 flex items-center px-4'>
           <NavigationLink
             href='/cloud/bring-your-own-cloud'
             onClick={galaxyOnClick('topNav.productMenu.byocSelect')}
@@ -74,6 +51,29 @@ export default function NavigationSubNavProducts() {
             </span>
           </NavigationLink>
         </li>
+        <li className='border-t border-neutral-700 px-4'>
+          <NavigationLink
+            href='/clickhouse'
+            onClick={galaxyOnClick('topNav.productMenu.openSourceSelect')}
+            className='group/nav-with-icon mt-2 !flex w-full items-center gap-3'>
+            <Image
+              src='/images/nav/icon-clickhouse.svg'
+              alt='ClickHouse'
+              width={24}
+              height={24}
+              className='flex-grow-1 flex-shrink-0'
+            />
+            <span>
+              ClickHouse
+              <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
+                Spin up a database with open-
+                <br />
+                source ClickHouse.
+              </div>
+            </span>
+          </NavigationLink>
+        </li>
+
         <li className='md-mid:hidden'>
           <NavigationLink
             href='/integrations'
