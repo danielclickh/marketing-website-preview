@@ -50,10 +50,9 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                   Bring Your Own Cloud is in
                   <br className='hidden 2xl:block' /> Private Preview on AWS
                 </h1>
-                <p className='text-center text-[20px] leading-[180%] lg:text-left 2xl:max-w-[578px]'>
+                <p className='text-center text-[20px] leading-[180%] lg:text-left 2xl:max-w-[678px]'>
                   A fully managed ClickHouse Cloud service, deployed in your own
-                  AWS account. SOC 2 and ISO 27001 aligned. Join the waitlist
-                  for additional cloud providers.
+                  AWS account. SOC 2 and ISO 27001 aligned. Join the waitlist.
                 </p>
               </div>
 
