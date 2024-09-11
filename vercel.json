@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/checkInstallScript",
-      "schedule": "0 * * * *"
+      "schedule": "*/10 * * * *"
     }
   ]
 }
