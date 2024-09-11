@@ -2,12 +2,12 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
-import Tilt from 'react-parallax-tilt'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
+import QuoteCard from '../../../components/QuoteCard'
 import AccordionComponent from '../../../components/RealTimeDiagram/Accordion'
 import Feature from '../../../components/RealTimeDiagram/feature-check'
 import { SuiText, SuiTitle } from '../../../components/sui'
@@ -18,7 +18,6 @@ import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import faqs from './faqs.json'
 import features from './features.json'
-import quotes from './quotes.json'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
@@ -208,62 +207,48 @@ export default function RealTimeAnalyticsPage({
               <div className='relative z-20 flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
                 <div className='p-10'>
                   <div className='flex flex-col gap-x-6 gap-y-6 lg:flex-row'>
-                    {quotes.map((quote) => (
-                      <Tilt
-                        tiltEnable={false}
-                        glareEnable={true}
-                        glareMaxOpacity={0.4}
-                        glareColor='rgba(251, 255, 70, 0.08)'
-                        glarePosition='all'
-                        className='flex-1'
-                        key={quote.id}>
-                        {quote.href ? (
-                          <Link href={quote.href} target={quote.target}>
-                            <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
-                              <Image
-                                src='/images/Quote.svg'
-                                width={37}
-                                height={28}
-                                alt='Quote'
-                                className='mb-4 block'
-                              />
-                              <Markdown
-                                className='min-h-auto text-left xl:min-h-[280px]'
-                                children={quote.content}
-                              />
-                              <Image
-                                src={quote.logo}
-                                width={quote.imgWidth}
-                                height={quote.imgHeight}
-                                alt={quote.title}
-                                className='mt-12 xl:mt-auto'
-                              />
-                            </div>
-                          </Link>
-                        ) : (
-                          <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-800/90 hover:shadow-lg'>
-                            <Image
-                              src='/images/Quote.svg'
-                              width={37}
-                              height={28}
-                              alt='Quote'
-                              className='mb-4 block'
-                            />
-                            <Markdown
-                              className='min-h-auto text-left xl:min-h-[250px]'
-                              children={quote.content}
-                            />
-                            <Image
-                              src={quote.logo}
-                              width={quote.imgWidth}
-                              height={quote.imgHeight}
-                              alt={quote.title}
-                              className='mt-12 xl:mt-auto'
-                            />
-                          </div>
-                        )}
-                      </Tilt>
-                    ))}
+                    <QuoteCard
+                      content={`"This year we actually exceeded a thousand active replicas. That's **processing hundreds of millions of inserted rows every second**, which actually corresponds to quite a significantly larger number of events because we've been using a lot of sampling."`}
+                      logo={{
+                        src: '/images/use-cases/real-time-analytics/cloudflare-logo.svg',
+                        width: 123,
+                        height: 41,
+                        alt: 'Cloudflare'
+                      }}
+                    />
+                    <QuoteCard
+                      content={`"We have multiple clusters deployed on our hardware with hundreds of hosts. Our main cluster is now geo-replicated, and we designate some replicas for read-heavy operations and others for write-heavy operations. Many of our tables are quite large, **with trillions and trillions of rows, as well as tens of columns.**"`}
+                      link='/blog/how-clickhouse-powers-ahrefs-the-worlds-most-active-web-crawler'
+                      logo={{
+                        src: '/images/use-cases/real-time-analytics/ahrefs-logo.svg',
+                        width: 123,
+                        height: 32,
+                        alt: 'ahrefs'
+                      }}
+                    />
+                    <QuoteCard
+                      content={`"We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse."`}
+                      link='/blog/langchain-why-we-choose-clickhouse-to-power-langchain'
+                      logo={{
+                        src: '/images/use-cases/ml-and-ds/langchain-logo-white.svg',
+                        width: 240,
+                        height: 43,
+                        alt: 'LangChain'
+                      }}
+                    />
+                    <QuoteCard
+                      content={`"In the post-evaluation of each database against our criteria (with metrics ranging from query performance to cost), **ClickHouse emerged as the unrivaled frontrunner.** It excelled across the board, even astonishingly so in certain domains, and proved more cost-efficient."`}
+                      link={{
+                        href: 'https://medium.com/vimeo-engineering-blog/clickhouse-is-in-the-house-413862c8ac28',
+                        target: '_blank'
+                      }}
+                      logo={{
+                        src: '/images/use-cases/real-time-analytics/vimeo-logo.svg',
+                        width: 140,
+                        height: 30,
+                        alt: 'Vimeo'
+                      }}
+                    />
                   </div>
                 </div>
               </div>

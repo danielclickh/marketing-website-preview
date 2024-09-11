@@ -28,3 +28,7 @@ There are a few areas where these are added:
 
 ## Homepage carousel
 *Add to carousel:* true/false
+
+## Social
+**Are the social media posts in the doc, reviewed and approved?** Yes/No
+

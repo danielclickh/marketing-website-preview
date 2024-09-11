@@ -8,11 +8,14 @@ import React, {
 } from 'react'
 import styles from './styles.module.scss'
 import * as Tooltip from '@radix-ui/react-tooltip'
+import { FullyQualifiedEvent } from '../../../lib/galaxy/client'
+import { galaxyOnClick } from '../../../lib/galaxy/galaxy'
 
 export interface CodeblockProps extends HTMLAttributes<HTMLPreElement> {
   bgColor?: string | undefined
   children: ReactElement
   showCopy?: boolean
+  galaxyEvent?: FullyQualifiedEvent
 }
 
 export const SuiCodeblock: FunctionComponent<CodeblockProps> = ({
@@ -20,6 +23,7 @@ export const SuiCodeblock: FunctionComponent<CodeblockProps> = ({
   children,
   className = '',
   showCopy = true,
+  galaxyEvent,
   ...CodeblockProps
 }) => {
   const ref = useRef<HTMLPreElement>(null)
@@ -27,6 +31,11 @@ export const SuiCodeblock: FunctionComponent<CodeblockProps> = ({
   const onClick = () => {
     if (ref.current) {
       navigator.clipboard.writeText(ref.current.innerText)
+
+      if (galaxyEvent && window.galaxy) {
+        galaxyOnClick(galaxyEvent)()
+      }
+
       setIsOpen(true)
       setTimeout(() => {
         setIsOpen(false)

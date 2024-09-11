@@ -28,6 +28,7 @@ import logoGcs from './logo-gcs.svg'
 import logoAws from './logo-aws.svg'
 import logoAzure from './logo-azure.svg'
 import logoAdevinta from './logo-adevinta.svg'
+import logoCoinhall from './logo-coinhall.svg'
 import logoPerfect from './logo-perfect.svg'
 import iconBullseye from './icon-bullseye.svg'
 import iconSpeedometer from './icon-speedometer.svg'
@@ -395,10 +396,10 @@ export default function BigQueryCostsPage({
             {
               quote: (
                 <>
-                  “We have saved costs, savings not to be sniffed at, but that
+                  "We have saved costs, savings not to be sniffed at, but that
                   was not the driving factor. This was a qualitative step. We
                   just could not do the things we wanted until we had ClickHouse
-                  and that is why we’re so excited about it.”{' '}
+                  and that is why we’re so excited about it."{' '}
                   <Link
                     href={`/blog/prefect-event-driven-workflow-orchestration-powered-by-clickhouse?loc=${locTracking}`}
                     className='text-primary-300 hover:underline'>
@@ -413,6 +414,31 @@ export default function BigQueryCostsPage({
                 alt: 'Perfect',
                 width: 212,
                 height: 59
+              }
+            },
+            {
+              quote: (
+                <>
+                  "At Coinhall, managing vast amounts of blockchain data
+                  efficiently is crucial for our consumer-facing trading
+                  platform. Initially, we used BigQuery, but as our data grew,
+                  so did its costs and performance issues. ClickHouse
+                  significantly outperformed other databases we tested and
+                  delivered at 40x cost savings."{' '}
+                  <Link
+                    href={`/blog/trade-secrets-how-coinhall-uses-clickhouse-to-power-its-blockchain-data-platform?loc=${locTracking}`}
+                    className='text-primary-300 hover:underline'>
+                    Read
+                    <Nbsp />
+                    blog
+                  </Link>
+                </>
+              ),
+              logo: {
+                src: logoCoinhall,
+                alt: 'Coinhall',
+                width: 203,
+                height: 30
               }
             }
           ]}

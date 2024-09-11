@@ -284,7 +284,7 @@ export default function BigQueryPage({
             {
               heading: 'World class\ninteroperability',
               values: [
-                'Native support fo reading data in over **90 file formats** from most data sources which makes it easy to analyze data regardless of its shape and location. ',
+                'Native support for reading data in over **90 file formats** from most data sources which makes it easy to analyze data regardless of its shape and location. ',
                 'Limited interoperability. Supports only 5 file formats and 19 data sources.'
               ]
             }
@@ -486,16 +486,7 @@ export default function BigQueryPage({
                   content.customContent,
                   content.RelatedBlogs
                 ).map((card, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className={`
-                      ${index > 1 ? 'hidden md:block' : ''}
-                      ${index > 2 ? 'lg:hidden' : ''}
-                    `}>
-                      {card}
-                    </div>
-                  )
+                  return <div key={index}>{card}</div>
                 })}
               </div>
             </div>

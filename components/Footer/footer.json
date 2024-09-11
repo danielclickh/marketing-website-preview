@@ -48,8 +48,8 @@
 			{
 				"id": 500,
 				"name": "chDB",
-				"href": "https://github.com/chdb-io/chdb",
-				"target": "_blank",
+				"href": "/chdb",
+				"target": "_self",
 				"galaxyEvent": "footerNav.productMenu.chdbSelect"
 			},
 			{
@@ -195,6 +195,13 @@
 				"href": "/slack",
 				"target": "_blank",
 				"galaxyEvent": "footerNav.communityMenu.slackSelect"
+			},
+			{
+				"id": 22,
+				"name": "LinkedIn",
+				"href": "https://www.linkedin.com/company/clickhouseinc",
+				"target": "_blank",
+				"galaxyEvent": "footerNav.communityMenu.linkedInSelect"
 			},
 			{
 				"id": 22,

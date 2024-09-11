@@ -742,7 +742,7 @@ export const PricingCalculator: React.FC<{
                   id='computeSizeDevTooltipTrigger'
                   marginBottom={true}
                   helpText='Development services do not auto-scale'
-                  tooltip='Deployment services have a fixed size of 16 GiB RAM, 2 vCPUs and cannot be edited'>
+                  tooltip='Development services have a fixed size of 16 GiB RAM, 2 vCPUs and cannot be edited'>
                   <NumericSelect
                     id='computeMinSize'
                     options={computeOptions.filter((option) => {

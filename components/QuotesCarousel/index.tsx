@@ -18,7 +18,7 @@ export interface QuotesCarousel {
 export default function QuotesCarousel({ quotes }: QuotesCarousel) {
   const [swiperInstance, setSwiperInstance] = useState<null | SwiperClass>(null)
 
-  const hasNav = quotes.length > 2
+  const hasNav = quotes.length > 3
 
   return (
     <div className='group/quotes relative my-10 xl:my-24'>
@@ -28,7 +28,7 @@ export default function QuotesCarousel({ quotes }: QuotesCarousel) {
           spaceBetween={32}
           breakpoints={{
             1024: {
-              slidesPerView: 2
+              slidesPerView: 3
             }
           }}
           loop={true}
@@ -52,7 +52,7 @@ export default function QuotesCarousel({ quotes }: QuotesCarousel) {
                       )}
                       {!quoteIsString && quote}
                     </div>
-                    {logo && <Image {...logo} className='mt-auto' />}
+                    {logo && <Image {...logo} className='mt-6 lg:mt-auto' />}
                   </div>
                 </CUICard>
               </SwiperSlide>
