@@ -291,7 +291,7 @@ export default function RealTimeAnalyticsPage({
                   height={73}
                 />
                 <SuiTitle type='h2' className='mt-8 text-center'>
-                  Real-time Applications and Dashboards
+                  Real-time applications and dashboards
                 </SuiTitle>
                 <p className='mx-auto mb-12 max-w-3xl px-9 pt-6 text-center text-sm'>
                   ClickHouse is used across industries to power systems and

@@ -6,7 +6,7 @@
     },
     {
         "id": 20,
-        "title": "Data Transformations",
+        "title": "Data transformations",
         "content": "Materialized Views in ClickHouse make data transformations - common pillars in business intelligence or analytics workflows - seamless. Automatically triggered when new data is inserted into source tables, these SQL-based views are used to easily extract, aggregate, and modify data as it arrives. Leveraging Materialized Views means there is no need to build and manage bespoke data transformation pipelines yourself.<br /><br />Our extensive suite of integrations makes it easy to use the tools and services you already rely on directly with Clickhouse. For example, with ClickHouse's DBT integration, you can effortlessly migrate your existing DBT jobs to run on ClickHouse."
     },
     {
@@ -16,7 +16,7 @@
     },
     {
         "id": 10,
-        "title": "Data Ingestion",
+        "title": "Data ingestion",
         "content": "For bulk data loads between ClickHouse and a traditional data warehouse, companies commonly leverage an object store such as S3 as the intermediary, ingesting data into ClickHouse via the S3 (or corresponding alternative) table engine. Generally, Parquet files are used, as ClickHouse's unparalleled Parquet reading performance allows data to be loaded at hundreds of millions of files per second."
     }
 ]

@@ -43,7 +43,7 @@ export default function SupportProgram(props: any) {
                   alt='Cloud'
                   className='mx-auto mb-4'
                 />
-                <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-4'>
+                <div className='flex flex-col items-center justify-center gap-2 pb-4 pt-4'>
                   <div className='cursor-pointer text-xl font-semibold leading-tight'>
                     New support case via
                   </div>
@@ -70,7 +70,7 @@ export default function SupportProgram(props: any) {
                   className='mx-auto mb-4'
                 />
 
-                <div className='flex flex-col items-center justify-center gap-2 pt-4 pb-4'>
+                <div className='flex flex-col items-center justify-center gap-2 pb-4 pt-4'>
                   <div className='cursor-pointer text-xl font-semibold leading-tight'>
                     Email us at
                   </div>
@@ -115,7 +115,7 @@ export default function SupportProgram(props: any) {
         </div>
       </div>
       <div className='section-container bg-shadow-element yellow-shadow shadow-z-low container mx-auto flex flex-col items-center pt-6'>
-        <div className='pt-16 pb-8 text-center'>
+        <div className='pb-8 pt-16 text-center'>
           <Image
             src='/images/support-program/support-details-icon.svg'
             alt='Support Details'
@@ -144,7 +144,7 @@ export default function SupportProgram(props: any) {
                   </th>
                   <th className='border border-neutral-700 bg-neutral-750 p-0'>
                     <div className='p-3 text-neutral-100'>
-                      Monthly "Pay as you Go" or Annual
+                      Monthly "pay as you go" or annual
                     </div>
                   </th>
                 </tr>
@@ -157,7 +157,7 @@ export default function SupportProgram(props: any) {
                   <td className='border-r border-r-neutral-700 bg-neutral-750 p-4 '>
                     <p>
                       <a href='https://clickhouse.cloud/learn'>
-                        On-Demand training included
+                        On-demand training included
                       </a>
                     </p>
                     <p>
@@ -167,7 +167,7 @@ export default function SupportProgram(props: any) {
                   <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
                     <p>
                       <a href='https://clickhouse.cloud/learn'>
-                        On-Demand training included
+                        On-demand training included
                       </a>
                     </p>
                     <p>
@@ -179,7 +179,7 @@ export default function SupportProgram(props: any) {
                   <td className='w-64 border border-neutral-700 bg-neutral-750 px-3 text-left text-neutral-100'>
                     <strong>Support</strong>
                   </td>
-                  <td className='border-r border-l border-r-neutral-700 border-l-neutral-700 bg-neutral-750 p-4'>
+                  <td className='border-l border-r border-l-neutral-700 border-r-neutral-700 bg-neutral-750 p-4'>
                     <ul>
                       <li>Unlimited support cases </li>
                       <li>
@@ -208,7 +208,7 @@ export default function SupportProgram(props: any) {
                 </tr>
                 <tr>
                   <td className='w-64 border border-neutral-700 bg-neutral-750 px-3 text-left text-neutral-100'>
-                    <strong>Expert Sessions</strong>
+                    <strong>Expert sessions</strong>
                   </td>
                   <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
                     Unlimited live Expert Sessions (short consultative guidance
@@ -223,7 +223,7 @@ export default function SupportProgram(props: any) {
                 </tr>
                 <tr>
                   <td className='w-64 border border-neutral-700 bg-neutral-750 px-3 text-left text-neutral-100'>
-                    <strong>Professional Services</strong>
+                    <strong>Professional services</strong>
                   </td>
                   <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
                     ClickHouse Cloud consultancy packages available for purchase{' '}

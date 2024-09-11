@@ -8,7 +8,7 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { KeeperData } from '../../../types/keeper'
 import features from './features.json'
 import replacements from './replacements.json'
-import {galaxyOnPage} from "../../../lib/galaxy/galaxy";
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<KeeperData> =
   async function getStaticProps() {
@@ -25,8 +25,7 @@ export default function KeeperPage({
   footerData,
   platforms
 }: KeeperData) {
-
-  galaxyOnPage('keeperPage');
+  galaxyOnPage('keeperPage')
 
   const seoData = {
     path: '/clickhouse/keeper',
@@ -66,7 +65,7 @@ export default function KeeperPage({
                     <a
                       href='https://github.com/ClickHouse/ClickHouse?utm_source=clickhouse&utm_medium=website&utm_campaign=clickhouse-keeper'
                       target='_blank'
-                      className='flex items-center gap-2 rounded-md bg-primary-300 py-3 px-8 hover:cursor-pointer hover:bg-primary-400 hover:shadow-xl'>
+                      className='flex items-center gap-2 rounded-md bg-primary-300 px-8 py-3 hover:cursor-pointer hover:bg-primary-400 hover:shadow-xl'>
                       <Image
                         alt='Twitter icon'
                         src='/images/github-logo.svg'
@@ -81,7 +80,7 @@ export default function KeeperPage({
                     <Link
                       href='/blog/clickhouse-keeper-a-zookeeper-alternative-written-in-cpp?loc=keeper-hero'
                       target='_self'
-                      className='flex items-center gap-2 rounded-md border border-primary-600 bg-transparent py-3 px-8 text-neutral-0 hover:cursor-pointer hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl'>
+                      className='flex items-center gap-2 rounded-md border border-primary-600 bg-transparent px-8 py-3 text-neutral-0 hover:cursor-pointer hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl'>
                       <p className='text-sm font-semibold text-neutral-0'>
                         Read the blog
                       </p>
@@ -171,7 +170,7 @@ export default function KeeperPage({
             </div>
             <div className='pb-24 pt-16'>
               <div className='flex flex-col gap-8 md:flex-row'>
-                <div className='rounded-lg bg-primary-300 p-8 pt-6 pb-12 text-black md:w-1/2'>
+                <div className='rounded-lg bg-primary-300 p-8 pb-12 pt-6 text-black md:w-1/2'>
                   <Image
                     src='/images/icon-checkmark-circle.svg'
                     width={48}
@@ -228,7 +227,7 @@ export default function KeeperPage({
                   <div className='mx-auto mt-10 flex flex-col gap-10 md:flex-row md:gap-16'>
                     <div className='md:w-1/2'>
                       <h3 className='mb-4 font-inconsolata text-lg text-primary-300'>
-                        ZooKeeper Implementation
+                        ZooKeeper implementation
                       </h3>
                       <p className='text-base'>
                         ZooKeeper is implemented in Java and its coordination
@@ -238,7 +237,7 @@ export default function KeeperPage({
                     </div>
                     <div className='md:w-1/2'>
                       <h3 className='mb-4 font-inconsolata text-lg text-primary-300'>
-                        ClickHouse Keeper Implementation
+                        ClickHouse Keeper implementation
                       </h3>
                       <p className='text-base'>
                         Unlike ZooKeeper, ClickHouse Keeper is written in C++

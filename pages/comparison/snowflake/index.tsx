@@ -159,12 +159,12 @@ export default function SnowflakePage({
           </div>
 
           <div className='clip-inverted-triangle -mt-16 xl:-mt-28'>
-            <div className='relative z-40 mx-auto mt-4 max-w-4xl pt-20 pb-0 lg:mt-12'>
+            <div className='relative z-40 mx-auto mt-4 max-w-4xl pb-0 pt-20 lg:mt-12'>
               <div className='mx-auto mb-12 flex items-center gap-4 px-4 md:px-0'>
                 {BigNumbers.map((stat: BigNumber, index: number) => (
                   <div
                     key={index}
-                    className='w-1/3 rounded-md border border-white/40 bg-[#363531] py-6 px-3 shadow-lg'>
+                    className='w-1/3 rounded-md border border-white/40 bg-[#363531] px-3 py-6 shadow-lg'>
                     <h3 className='mb-2 text-center font-basier text-2xl font-bold leading-none text-primary-300 lg:text-[69px]'>
                       {stat.Number}
                     </h3>
@@ -244,7 +244,7 @@ export default function SnowflakePage({
               <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
                 <div className='flip-selection mx-auto flex flex-col pt-30 text-center'>
                   <h2 className='mb-8 font-basier text-4xl font-semibold text-primary-800'>
-                    Executive Summary
+                    Executive summary
                   </h2>
                   <div className='relative max-w-4xl text-left text-neutral-800'>
                     <p>
@@ -284,7 +284,7 @@ export default function SnowflakePage({
                       storage. Finally, this expense analysis is projected and
                       compared for a production environment and workload.
                     </p>
-                    <div className='absolute left-0 bottom-0 z-20 h-[220px] w-full bg-snowflakeGradient lg:h-[100px] '></div>
+                    <div className='absolute bottom-0 left-0 z-20 h-[220px] w-full bg-snowflakeGradient lg:h-[100px] '></div>
                   </div>
                   <div className='relative z-40 -mt-30 lg:-mt-20'>
                     <div className='mx-auto max-w-xl rounded-lg bg-neutral-900 p-5 text-white lg:p-10'>

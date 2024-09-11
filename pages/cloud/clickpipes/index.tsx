@@ -50,7 +50,7 @@ export default function ClickHouseServerPage({
               <div className='flex justify-between'>
                 <div className='flex-col text-center lg:mt-16 lg:max-w-xl lg:text-left'>
                   <h4 className='mb-4 text-base font-semibold text-primary-300'>
-                    <Link href='/cloud'>Cloud</Link> / Data Ingestion
+                    <Link href='/cloud'>Cloud</Link> / Data ingestion
                   </h4>
                   <h1 className='relative mb-3 mt-4 inline-block font-basier text-4xl font-semibold leading-tight md:mt-0 md:text-5.5xl'>
                     ClickPipes
@@ -101,12 +101,14 @@ export default function ClickHouseServerPage({
                     logo3={{
                       src: '/images/cloud/integrations/amazon_s3.svg',
                       alt: 'Amazon S3',
-                      active: false
+                      active: false,
+                      badge: 'Beta'
                     }}
                     logo4={{
                       src: '/images/cloud/integrations/diagram/aws-kinesis.svg',
                       alt: 'AWS Kinesis',
-                      active: false
+                      active: false,
+                      badge: 'Beta'
                     }}
                   />
                 </div>
@@ -155,7 +157,7 @@ export default function ClickHouseServerPage({
             <div className='relative rounded-lg border-t-2 border-neutral-700/80 border-primary-300 bg-neutral-900 shadow-lg'>
               <div className='px-6 py-8 lg:p-10'>
                 <div className='text-center'>
-                  <SuiTitle type='h2'>Available Connectors</SuiTitle>
+                  <SuiTitle type='h2'>Available connectors</SuiTitle>
                   <SuiText className='mx-auto mt-6 max-w-[844px] opacity-70'>
                     ClickPipes is an integration engine that simplifies data
                     ingestion from a variety of sources, including new
@@ -168,11 +170,13 @@ export default function ClickHouseServerPage({
                   {[
                     {
                       logo: '/images/cloud/integrations/amazon_s3.svg',
-                      name: 'Amazon S3'
+                      name: 'Amazon S3',
+                      badge: 'Beta'
                     },
                     {
                       logo: '/images/cloud/integrations/diagram/aws-kinesis.svg',
-                      name: 'Amazon Kinesis'
+                      name: 'Amazon Kinesis',
+                      badge: 'Beta'
                     },
                     {
                       logo: '/images/cloud/integrations/diagram/aws-msk.svg',
@@ -184,7 +188,8 @@ export default function ClickHouseServerPage({
                     },
                     {
                       logo: '/images/cloud/integrations/google-cloud-storage.svg',
-                      name: 'Google Cloud Storage'
+                      name: 'Google Cloud Storage',
+                      badge: 'Beta'
                     },
                     {
                       logo: '/images/cloud/integrations/kafka.svg',
@@ -206,7 +211,7 @@ export default function ClickHouseServerPage({
                       logo: '/images/cloud/integrations/warpstream.svg',
                       name: 'WarpStream'
                     }
-                  ].map(({ logo, name }) => {
+                  ].map(({ logo, name, badge }) => {
                     return (
                       <div className='w-1/2 p-2 sm:p-3 md:w-1/3 lg:w-1/4'>
                         <div className='relative flex h-full flex-col items-center rounded-sm bg-neutral-700/70 px-4 pb-6 pt-8'>
@@ -222,6 +227,11 @@ export default function ClickHouseServerPage({
                             className='!my-auto text-center !text-base'>
                             {name}
                           </SuiTitle>
+                          {badge && (
+                            <span className='absolute right-3 top-3 rounded-full bg-warning-800 px-3 py-1 text-xs font-normal text-warning-200'>
+                              {badge}
+                            </span>
+                          )}
                         </div>
                       </div>
                     )
@@ -252,7 +262,7 @@ export default function ClickHouseServerPage({
                 <Link
                   href='/company/contact?loc=clickpipes'
                   className='text-primary-300'>
-                  Contact Us
+                  contact us
                 </Link>{' '}
                 today.
               </div>
