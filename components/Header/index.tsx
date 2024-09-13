@@ -62,10 +62,11 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
               )
             }
           } else {
+            console.log(data)
             document.cookie = `countryCode=Error; expires=${expirationDate.toUTCString()}; path=/`
           }
         })
-    } else if (document.cookie.includes('countryCode=JP')) {
+    } else if (document.cookie.includes('countryCode=GB')) {
       setHeaderBannerText('Come and join us at our London Meetup on Sep 17')
       setHeaderBannerUrl(
         'https://www.meetup.com/clickhouse-london-user-group/events/302977267'
