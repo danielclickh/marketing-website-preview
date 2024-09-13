@@ -17,10 +17,10 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    'ClickHouse CTO, Alexey Milovidov, is coming to a city near you!'
+    'Going to Confluent Current in Austin? Come to our Happy Hour on Sep 17'
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/alexey-goes-on-tour?loc=eyebrow'
+    'https://www.meetup.com/clickhouse-austin-user-group/events/302558689'
   )
 
   useEffect(() => {

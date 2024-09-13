@@ -12,7 +12,10 @@ export default function LinkWithArrow({
   ...props
 }: Props) {
   return (
-    <Link {...props} className={`group/linkWithArrow ${className}`}>
+    <Link
+      {...props}
+      className={`group/linkWithArrow ${className}`}
+      target='_blank'>
       {children}
       <Nbsp />
       <span className='relative whitespace-nowrap'>
