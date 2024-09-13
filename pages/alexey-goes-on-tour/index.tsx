@@ -268,6 +268,7 @@ export default function HomePage({
               weekday='THU'
               month='SEP'
               day={12}
+              disabled={true}
             />
             <TimelineItem
               heading='Warsaw, Poland'
