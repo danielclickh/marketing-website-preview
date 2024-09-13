@@ -31,6 +31,7 @@ export default function Footer({
                           key={footerLink.name}
                           href={footerLink.href}
                           target={footerLink.target}
+                          prefetch={false}
                           className='footer w-fit text-sm transition-all hover:text-neutral-0'
                           onClick={
                             footerLink.galaxyEvent
@@ -80,6 +81,7 @@ export default function Footer({
                 key={bottomLink.text}
                 href={bottomLink.href}
                 target={bottomLink.target}
+                prefetch={false}
                 className={`first:pl-0 bottom-link-${index} whitespace-nowrap hover:text-neutral-0`}
                 onClick={() => {
                   galaxyOnClick(
