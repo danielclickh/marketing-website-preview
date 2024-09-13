@@ -16,6 +16,13 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const [headerHeight, setHeaderHeight] = useState<number>(72)
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
+  const [headerBannerText, setHeaderBannerText] = useState(
+    'ClickHouse CTO, Alexey Milovidov, is coming to a city near you!'
+  )
+  const [headerBannerUrl, setHeaderBannerUrl] = useState(
+    '/alexey-goes-on-tour?loc=eyebrow'
+  )
+
   useEffect(() => {
     const resizeHandler = () => {
       if (headerRef.current) setHeaderHeight(headerRef.current.clientHeight)
@@ -29,6 +36,42 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
     window.addEventListener('scroll', scrollHandler)
     resizeHandler()
     scrollHandler()
+
+    //=== Country specific eyebrow ===//
+    const hasCountryCode = document.cookie.includes('countryCode=')
+    const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
+
+    if (
+      !hasCountryCode &&
+      !['ru-RU', 'zh-CN', 'zh-TW', 'zh-HK', 'en-US'].includes(
+        navigator.language
+      )
+    ) {
+      fetch('https://ipinfo.io?token=33cfa2cb7f422c')
+        .then((response) => response.json())
+        .then((data) => {
+          if (!data.error) {
+            const countryCode = data.country
+            document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
+            if (countryCode === 'GB') {
+              setHeaderBannerText(
+                'Come and join us at our London Meetup on Sep 17'
+              )
+              setHeaderBannerUrl(
+                'https://www.meetup.com/clickhouse-london-user-group/events/302977267'
+              )
+            }
+          } else {
+            document.cookie = `countryCode=Error; expires=${expirationDate.toUTCString()}; path=/`
+          }
+        })
+    } else if (document.cookie.includes('countryCode=JP')) {
+      setHeaderBannerText('Come and join us at our London Meetup on Sep 17')
+      setHeaderBannerUrl(
+        'https://www.meetup.com/clickhouse-london-user-group/events/302977267'
+      )
+    }
+    //=== Country specific eyebrow ===//
 
     return () => {
       window.removeEventListener('resize', resizeHandler)
@@ -55,11 +98,11 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
         {/* Announcement banner */}
         {true && (
           <LinkWithArrow
-            href='/alexey-goes-on-tour?loc=eyebrow'
+            href={headerBannerUrl}
             className={`relative z-50 block w-full bg-primary-300 px-4 py-1 text-center text-sm font-medium text-primary-900 ${
               eyebrow?.className || ''
             }`}>
-            ClickHouse CTO, Alexey Milovidov, is coming to a city near you!
+            {headerBannerText}
           </LinkWithArrow>
         )}
 
