@@ -280,7 +280,7 @@ export default function Page({
                             <SocialButton
                               key={social}
                               type={social}
-                              title='ClickHouse + Chainsmokers + Vegas = an epic House Party'
+                              title='ClickHouse + The Chainsmokers + Vegas = an epic House Party'
                               className='!px-3'
                             />
                           ))}
@@ -309,7 +309,7 @@ export default function Page({
                     Picture this: You, a killer DJ set, and a room full of
                     fellow ClickHouse users and re:Invent attendees who are just
                     as ready to party as you are. It’s not just “any” DJ set
-                    though. ClickHouse is super excited to bring the
+                    though. ClickHouse is super excited to bring The
                     Chainsmokers to the party.
                   </SuiText>
 
