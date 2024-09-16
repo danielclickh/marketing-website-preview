@@ -101,8 +101,11 @@ export default function NavigationItem({
     onMouseEnter(itemRef, children, false)
   }
 
-  const { className: linkClassName, ...linkProps } =
-    link || ({ href } as NavigationItemLinkProps['link'])
+  const {
+    className: linkClassName,
+    onClick: linkOnClick,
+    ...linkProps
+  } = link || ({ href } as NavigationItemLinkProps['link'])
 
   useEffect(() => {
     const resizeHandler = () => {
@@ -136,6 +139,10 @@ export default function NavigationItem({
       {...props}>
       <NavigationLink
         ref={linkRef}
+        onClick={(event) => {
+          event.preventDefault()
+          if (linkOnClick) linkOnClick(event)
+        }}
         {...linkProps}
         isHovered={isOpen}
         className={`group/navItem items-center md-mid:!px-4 ${
