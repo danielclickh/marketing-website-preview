@@ -12,7 +12,7 @@ export default function NavigationSubNavProducts() {
           <NavigationLink
             href='/cloud'
             onClick={galaxyOnClick('topNav.productMenu.cloudSelect')}
-            className='group/nav-with-icon !flex w-full items-center gap-3'>
+            className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
             <Image
               src='/images/nav/icon-clickhouse-cloud.svg'
               alt='ClickHouse Cloud'
@@ -34,7 +34,7 @@ export default function NavigationSubNavProducts() {
           <NavigationLink
             href='/cloud/bring-your-own-cloud'
             onClick={galaxyOnClick('topNav.productMenu.byocSelect')}
-            className='group/nav-with-icon !flex w-full items-center gap-3'>
+            className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
             <Image
               src='/images/nav/icon-byoc.svg'
               alt='ClickHouse BYOC'
@@ -55,7 +55,7 @@ export default function NavigationSubNavProducts() {
           <NavigationLink
             href='/clickhouse'
             onClick={galaxyOnClick('topNav.productMenu.openSourceSelect')}
-            className='group/nav-with-icon !flex w-full items-center gap-3'>
+            className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
             <Image
               src='/images/nav/icon-clickhouse.svg'
               alt='ClickHouse'
