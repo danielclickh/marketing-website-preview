@@ -99,6 +99,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
         {/* Announcement banner */}
         {true && (
           <LinkWithArrow
+            prefetch={false}
             href={headerBannerUrl}
             className={`relative z-50 block w-full bg-primary-300 px-4 py-1 text-center text-sm font-medium text-primary-900 ${
               eyebrow?.className || ''

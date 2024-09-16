@@ -93,6 +93,7 @@ export default function NavigationSubNavProducts() {
         </li>
       </ul>
       <LinkWithArrow
+        prefetch={false}
         href='/integrations'
         onClick={galaxyOnClick(
           'topNav.productMenu.integrationsHighlightSelect'

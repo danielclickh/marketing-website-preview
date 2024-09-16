@@ -130,6 +130,7 @@ export default function NavigationSubNavUseCases() {
 
       {/* This is the desktop link, the mobile link is in the <ul> above */}
       <LinkWithArrow
+        prefetch={false}
         href='/use-cases'
         onClick={galaxyOnClick('topNav.useCasesMenu.allUseCasesSelect')}
         className='hidden w-full rounded-b-lg border-t border-neutral-700 px-6 py-2.5 text-sm font-medium transition-colors hover:bg-neutral-700/25 hover:text-primary-300 md-mid:block'>
