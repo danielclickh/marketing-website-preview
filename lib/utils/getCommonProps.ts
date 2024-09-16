@@ -15,7 +15,7 @@ export async function getCommonProps(): Promise<Props> {
   const footerData = await getFooterData()
   const getStartedData = await getGetStartedData()
 
-  let stars = githubStars?.stars || 36719
+  let stars = githubStars ? githubStars?.stars : 36719
 
   if (process.env.NEXT_IS_PROD === 'true') {
     if (!githubStars || !('stars' in githubStars)) {
