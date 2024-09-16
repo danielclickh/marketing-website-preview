@@ -1,20 +1,19 @@
 import { GetStaticProps } from 'next'
+import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
 import Tilt from 'react-parallax-tilt'
-import CopyUrlButton from '../../../components/CopyUrlButton'
 import Layout from '../../../components/Layout'
-import SocialButton from '../../../components/SocialButton'
-import { SuiText, SuiTitle } from '../../../components/sui'
+import SocialButtonWithText from '../../../components/SocialButtonWithText'
+import { SuiText } from '../../../components/sui'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
-import Image from 'next/image'
 import imageHeroImage from './hero-image.jpg'
 import imageHeroTexture from './hero-texture.png'
-import imageTicket from './ticket.png'
 import styles from './styles.module.scss'
+import imageTicket from './ticket.png'
 
 interface PageProps extends CommonProps {}
 
@@ -25,7 +24,7 @@ export const getStaticProps: GetStaticProps<PageProps> =
     return {
       props: {
         seo: {
-          title: "I'm going to the House Party with The Chainsmokers",
+          title: "I'm going to the [Click]House Party with The Chainsmokers",
           description:
             "Hey, you! Yes, you — the one who’s ready to take a break from all the conference sessions and tech talk. We know you’ve been soaking in all the brilliance (and sales pitches) of AWS re:Invent, but now it’s time to let loose, have fun, and show off the dance moves you've been hiding.",
           path: '/houseparty/vegas-2024/ticket',
@@ -126,19 +125,16 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
                   <SuiText
                     weight='bold'
                     className='mb-4 select-none drop-shadow-[0_0_10px_rgb(0_0_0)]'>
-                    Share your ticket
+                    Use the buttons below to let your networks know that you are
+                    attending!
                   </SuiText>
                   <div className='mx-auto flex max-w-80 flex-wrap justify-center gap-4 text-neutral-0'>
-                    {[
-                      //'y_combinator',
-                      'twitter',
-                      'facebook',
-                      'linkedin'
-                    ].map((social) => (
-                      <SocialButton
+                    {['twitter', 'linkedin'].map((social) => (
+                      <SocialButtonWithText
                         key={social}
                         type={social}
-                        title='ClickHouse + Chainsmokers + Vegas = an epic House Party'
+                        url='https://clickhou.se/houseparty2024'
+                        title={`Just grabbed my ticket to the [Click]House Party during re:Invent in Vegas—who's joining me for an epic night?`}
                         className='!px-3'
                       />
                     ))}
