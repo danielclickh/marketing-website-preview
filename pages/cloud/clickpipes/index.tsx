@@ -170,13 +170,11 @@ export default function ClickHouseServerPage({
                   {[
                     {
                       logo: '/images/cloud/integrations/amazon_s3.svg',
-                      name: 'Amazon S3',
-                      badge: 'Beta'
+                      name: 'Amazon S3'
                     },
                     {
                       logo: '/images/cloud/integrations/diagram/aws-kinesis.svg',
-                      name: 'Amazon Kinesis',
-                      badge: 'Beta'
+                      name: 'Amazon Kinesis'
                     },
                     {
                       logo: '/images/cloud/integrations/diagram/aws-msk.svg',
@@ -188,8 +186,7 @@ export default function ClickHouseServerPage({
                     },
                     {
                       logo: '/images/cloud/integrations/google-cloud-storage.svg',
-                      name: 'Google Cloud Storage',
-                      badge: 'Beta'
+                      name: 'Google Cloud Storage'
                     },
                     {
                       logo: '/images/cloud/integrations/kafka.svg',
