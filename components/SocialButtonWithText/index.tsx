@@ -29,7 +29,7 @@ function SocialButtonWithText({ type, title, className = '', url }: Props) {
         break
 
       case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?text=${title}%0A%0AThanks%20@ClickHouseDB%0A%0A${escapedUrl}`
+        shareUrl = `https://x.com/intent/post?text=${title}%0A%0AThanks%20@ClickHouseDB%0A%0A${escapedUrl}`
         break
 
       case 'linkedin':
