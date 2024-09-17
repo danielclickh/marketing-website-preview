@@ -37,42 +37,42 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
     resizeHandler()
     scrollHandler()
 
-    //=== Country specific eyebrow ===//
-    const hasCountryCode = document.cookie.includes('countryCode=')
-    const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
+    // //=== Country specific eyebrow ===//
+    // const hasCountryCode = document.cookie.includes('countryCode=')
+    // const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
 
-    if (
-      !hasCountryCode &&
-      !['ru-RU', 'zh-CN', 'zh-TW', 'zh-HK', 'en-US'].includes(
-        navigator.language
-      )
-    ) {
-      fetch('https://ipinfo.io?token=33cfa2cb7f422c')
-        .then((response) => response.json())
-        .then((data) => {
-          if (!data.error) {
-            const countryCode = data.country
-            document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
-            if (countryCode === 'GB') {
-              setHeaderBannerText(
-                'Come and join us at our London Meetup on Sep 17'
-              )
-              setHeaderBannerUrl(
-                'https://www.meetup.com/clickhouse-london-user-group/events/302977267'
-              )
-            }
-          } else {
-            console.log(data)
-            document.cookie = `countryCode=Error; expires=${expirationDate.toUTCString()}; path=/`
-          }
-        })
-    } else if (document.cookie.includes('countryCode=GB')) {
-      setHeaderBannerText('Come and join us at our London Meetup on Sep 17')
-      setHeaderBannerUrl(
-        'https://www.meetup.com/clickhouse-london-user-group/events/302977267'
-      )
-    }
-    //=== Country specific eyebrow ===//
+    // if (
+    //   !hasCountryCode &&
+    //   !['ru-RU', 'zh-CN', 'zh-TW', 'zh-HK', 'en-US'].includes(
+    //     navigator.language
+    //   )
+    // ) {
+    //   fetch('https://ipinfo.io?token=33cfa2cb7f422c')
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       if (!data.error) {
+    //         const countryCode = data.country
+    //         document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
+    //         if (countryCode === 'GB') {
+    //           setHeaderBannerText(
+    //             'Come and join us at our London Meetup on Sep 17'
+    //           )
+    //           setHeaderBannerUrl(
+    //             'https://www.meetup.com/clickhouse-london-user-group/events/302977267'
+    //           )
+    //         }
+    //       } else {
+    //         console.log(data)
+    //         document.cookie = `countryCode=Error; expires=${expirationDate.toUTCString()}; path=/`
+    //       }
+    //     })
+    // } else if (document.cookie.includes('countryCode=GB')) {
+    //   setHeaderBannerText('Come and join us at our London Meetup on Sep 17')
+    //   setHeaderBannerUrl(
+    //     'https://www.meetup.com/clickhouse-london-user-group/events/302977267'
+    //   )
+    // }
+    // //=== Country specific eyebrow ===//
 
     return () => {
       window.removeEventListener('resize', resizeHandler)
