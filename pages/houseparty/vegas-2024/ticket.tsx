@@ -143,7 +143,7 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
                 <SuiText
                   size='sm'
                   className='mb-4 mt-10 text-center opacity-80'>
-                  This is not an official ticket. You will receive it nearer the
+                  This is not an official ticket. You will receive it before the
                   event.
                 </SuiText>
                 <Tilt
