@@ -27,7 +27,7 @@ export default function Footer({
                   <ul>
                     {topMenu.items.map((footerLink) => (
                       <li>
-                        <CUILink
+                        <a
                           key={footerLink.name}
                           href={footerLink.href}
                           target={footerLink.target}
@@ -44,7 +44,7 @@ export default function Footer({
                           ) : (
                             <>{footerLink.name}</>
                           )}
-                        </CUILink>
+                        </a>
                       </li>
                     ))}
                   </ul>
@@ -76,7 +76,7 @@ export default function Footer({
           </div>
           <div className='bottom_links flex flex-wrap items-center justify-center gap-4'>
             {bottomLinks.map((bottomLink, index) => (
-              <CUILink
+              <a
                 key={bottomLink.text}
                 href={bottomLink.href}
                 target={bottomLink.target}
@@ -89,7 +89,7 @@ export default function Footer({
                   )
                 }}>
                 {bottomLink.text}
-              </CUILink>
+              </a>
             ))}
             <button
               id='cookie-settings-button'
