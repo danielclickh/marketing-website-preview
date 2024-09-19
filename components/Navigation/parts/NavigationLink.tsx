@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { LinkProps } from 'next/link'
+import Link, { LinkProps } from 'next/link'
 import React from 'react'
 
 export interface NavigationLinkProps extends Omit<LinkProps, 'href'> {
@@ -11,19 +11,27 @@ export interface NavigationLinkProps extends Omit<LinkProps, 'href'> {
 
 const NavigationLink = forwardRef<HTMLAnchorElement, NavigationLinkProps>(
   function NavigationLink(
-    { className = '', href = '', children, isHovered = false, ...props },
+    {
+      className = '',
+      href = '',
+      children,
+      isHovered = false,
+      prefetch = false,
+      ...props
+    },
     ref
   ) {
     return (
-      <a
+      <Link
         ref={ref}
-        href={href || ''} // Ensure href is a string
+        href={href} // Ensure href is a string
+        prefetch={prefetch}
         {...props}
         className={`flex flex-wrap rounded-lg px-2 py-2.5 text-sm font-medium transition-colors hover:bg-neutral-700/25 hover:text-primary-300 md-mid:inline-flex ${className} ${
           isHovered ? 'bg-neutral-700/25 text-primary-300' : ''
         }`}>
         {children}
-      </a>
+      </Link>
     )
   }
 )
