@@ -63,7 +63,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
 
         document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
         setHeaderBannerText(
-          'Tanya & Tyler go on speaking tour Down Under. Join us at DataEngBytes and more'
+          'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
         )
         setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
       } else {
@@ -77,7 +77,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
 
               if (['AU', 'NZ', 'SG'].includes(countryCode)) {
                 setHeaderBannerText(
-                  'Tanya & Tyler go on speaking tour Down Under. Join us at DataEngBytes and more'
+                  'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
                 )
                 setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
               }
@@ -92,7 +92,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
       document.cookie.includes('countryCode=SG')
     ) {
       setHeaderBannerText(
-        'Tanya & Tyler go on speaking tour Down Under. Join us at DataEngBytes and more'
+        'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
       )
       setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
     }
