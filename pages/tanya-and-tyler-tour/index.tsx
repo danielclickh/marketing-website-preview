@@ -142,7 +142,7 @@ export default function HomePage({
               className='text-balance md:px-16 lg:text-wrap lg:px-32'>
               From September 24th, Tanya and Tyler will embark on a 5-city tour
               across Australia, New Zealand, and Singapore delivering a series
-              of tech talks. Join these in-person events to hear him speak and
+              of tech talks. Join these in-person events to hear them speak and
               ask questions. Space is limited, so register below.
             </SuiText>
           </div>
