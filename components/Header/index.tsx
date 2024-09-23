@@ -17,10 +17,10 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    'Going to Confluent Current in Austin? Come to our Happy Hour on Sep 17'
+    'Going to re:Invent this December? Come party with us and The Chainsmokers'
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    'https://www.meetup.com/clickhouse-austin-user-group/events/302558689'
+    '/houseparty/vegas-2024?loc=eyebrow'
   )
 
   useEffect(() => {
@@ -97,7 +97,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
           isScrolled ? 'md-mid:bg-neutral-900/80' : 'md-mid:bg-neutral-900/10'
         } fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur transition-colors`}>
         {/* Announcement banner */}
-        {/* {true && (
+        {true && (
           <LinkWithArrow
             prefetch={false}
             href={headerBannerUrl}
@@ -106,7 +106,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
             }`}>
             {headerBannerText}
           </LinkWithArrow>
-        )} */}
+        )}
 
         {/* Logo, navigtation, CTAs... */}
         <div className='no-wrap section-container relative flex items-center py-4'>
