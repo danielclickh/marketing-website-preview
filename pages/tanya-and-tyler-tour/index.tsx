@@ -140,10 +140,11 @@ export default function HomePage({
             <SuiText
               size='lg'
               className='text-balance md:px-16 lg:text-wrap lg:px-32'>
-              From September 24th, Tanya and Tyler will embark on a 5-city tour
-              across Australia, New Zealand, and Singapore delivering a series
-              of tech talks. Join these in-person events to hear them speak and
-              ask questions. Space is limited, so register below.
+              From September 24, Tanya Bragin (VP Product & Marketing) and Tyler
+              Hannan (Sr Director Developer Relations) will embark on a 5-city
+              tour across Australia, New Zealand, and Singapore delivering a
+              series of tech talks. Join these in-person events to hear them
+              speak and ask questions. Space is limited, so register below.
             </SuiText>
           </div>
         </div>
