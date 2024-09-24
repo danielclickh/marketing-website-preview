@@ -67,7 +67,6 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
         )
         setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
       } else {
-        // If navigator.language doesn't match, make the IP-based API call
         fetch('https://ipinfo.io?token=33cfa2cb7f422c')
           .then((response) => response.json())
           .then((data) => {
