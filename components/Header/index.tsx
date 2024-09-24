@@ -43,7 +43,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
 
     if (!hasCountryCode) {
       // List of languages we want to exclude (e.g. US, China, Russia, etc.)
-      const excludedLanguages = ['ru-RU', 'zh-CN', 'zh-TW', 'zh-HK', 'en-US']
+      const excludedLanguages = ['ru-RU', 'zh-CN', 'zh-TW', 'zh-HK']
 
       // List of languages that correspond to Australia, New Zealand, and Singapore
       const targetLanguages = ['en-AU', 'en-NZ', 'en-SG', 'zh-SG', 'ms-SG']
