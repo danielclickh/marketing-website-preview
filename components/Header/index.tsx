@@ -42,8 +42,8 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
     const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
 
     if (!hasCountryCode) {
-      // List of languages we want to exclude (e.g. US, China, Russia, etc.)
-      const excludedLanguages = ['ru-RU', 'zh-CN', 'zh-TW', 'zh-HK', 'en-US']
+      // List of languages we want to exclude (e.g. China, Russia, etc.)
+      const excludedLanguages = ['ru-RU', 'zh-CN', 'zh-TW', 'zh-HK']
 
       // List of languages that correspond to Australia, New Zealand, and Singapore
       const targetLanguages = ['en-AU', 'en-NZ', 'en-SG', 'zh-SG', 'ms-SG']
@@ -67,7 +67,6 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
         )
         setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
       } else {
-        // If navigator.language doesn't match, make the IP-based API call
         fetch('https://ipinfo.io?token=33cfa2cb7f422c')
           .then((response) => response.json())
           .then((data) => {
