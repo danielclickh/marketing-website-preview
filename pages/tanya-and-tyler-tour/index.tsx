@@ -179,6 +179,7 @@ export default function HomePage({
               month='SEP'
               day={24}
               dotRef={timelineFirstDotRef}
+              disabled={true}
             />
             <TimelineItem
               heading='DataEngBytes - Perth'
