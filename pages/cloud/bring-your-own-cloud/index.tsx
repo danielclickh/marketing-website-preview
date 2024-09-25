@@ -37,7 +37,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
           <div className='section-container mx-auto 2xl:max-w-[92rem]'>
             <div className='flex flex-wrap items-center justify-center gap-12 lg:flex-nowrap lg:gap-16'>
               {/* Content column */}
-              <div className='flip-selection w-full text-neutral-900 lg:w-1/2 2xl:w-auto 2xl:flex-shrink-0'>
+              <div className='flip-selection w-full text-neutral-900 lg:w-1/2'>
                 <Image
                   width={469}
                   height={208}
@@ -47,12 +47,16 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                 />
 
                 <h1 className='mb-5 mt-12 text-center font-basier text-3xl font-bold !leading-snug lg:text-left lg:text-4xl xl:text-[56px]'>
-                  Bring Your Own Cloud is in
-                  <br className='hidden 2xl:block' /> Private Preview on AWS
+                  Bring Your Own Cloud is in Private Preview on AWS
                 </h1>
                 <p className='text-center text-[20px] leading-[180%] lg:text-left 2xl:max-w-[678px]'>
-                  A fully managed ClickHouse Cloud service, deployed in your own
-                  AWS account. SOC 2 and ISO 27001 aligned. Join the waitlist.
+                  A fully managed ClickHouse Cloud service deployed in your own
+                  AWS&nbsp;account.
+                </p>
+                <p className='mt-5 text-center text-[20px] leading-[180%] lg:text-left 2xl:max-w-[678px]'>
+                  Designed for large-scale deployments, with personalized
+                  support and onboarding. SOC 2 and ISO 27001 aligned. Join the
+                  waitlist&nbsp;today.
                 </p>
               </div>
 
@@ -116,7 +120,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
         {/* BYOC on AWS */}
         <div className='my-16 lg:my-24'>
           <div className='section-container mx-auto'>
-            <div className='mx-auto max-w-[800px] text-center'>
+            <div className='mx-auto max-w-[710px] text-center'>
               <Image
                 width={72}
                 height={72}
@@ -136,7 +140,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
               </p>
               <p className='mb-10 text-neutral-200'>
                 No regulatory headaches. No operational complexity. All the
-                benefits of cloud.
+                benefits of cloud, tailored for large-scale deployments.
               </p>
             </div>
 
