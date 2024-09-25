@@ -558,7 +558,7 @@ export default function BigQueryPage({
       <MoreComparisons
         comparisons={[
           {
-            name: 'Postgress',
+            name: 'PostgreSQL',
             link: `/comparison/postgresql?loc=${locTracking}`,
             logo: logoPostgress
           },
