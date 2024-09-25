@@ -47,13 +47,13 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                 />
 
                 <h1 className='mb-5 mt-12 text-center font-basier text-3xl font-bold !leading-snug lg:text-left lg:text-4xl xl:text-[56px]'>
-                  A fully managed ClickHouse Cloud service deployed in your own
-                  AWS account.
+                  Bring Your Own Cloud is in Private Preview on AWS
                 </h1>
                 <p className='text-center text-[20px] leading-[180%] lg:text-left 2xl:max-w-[678px]'>
-                  Designed for large-scale deployments, with personalized
-                  support and onboarding. SOC 2 and ISO 27001 aligned. Join the
-                  waitlist today.
+                  A fully managed ClickHouse Cloud service deployed in your own
+                  AWS account. Designed for large-scale deployments, with
+                  personalized support and onboarding. SOC 2 and ISO 27001
+                  aligned. Join the waitlist&nbsp;today.
                 </p>
               </div>
 
