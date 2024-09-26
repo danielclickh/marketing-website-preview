@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
@@ -15,21 +15,16 @@ import { SuiButton, SuiText, SuiTitle } from '../../../components/sui'
 import {
   findAll,
   findOne,
-  getPathsValues,
   getStagingOnlyFilters
 } from '../../../lib/api/strapi'
 import { convertDateToString } from '../../../lib/utils/dateUtils'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import {
-  NOT_FOUND_FALLBACK,
-  REVALIDATE_SECONDS
-} from '../../../lib/utils/revalidationConfig'
 import { BlogProps } from '../../../types/blog'
 import { ParamsType } from '../../../types/homepage'
 import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
-export const getStaticProps: GetStaticProps<BlogProps> =
-  async function getStaticProps({ params }) {
+export const getServerSideProps: GetServerSideProps<BlogProps> =
+  async function getServerSideProps({ params }) {
     const stagingOnlyFilters = getStagingOnlyFilters()
     const { slug } = params as ParamsType
     const { data } = await findAll('blog-posts', {
@@ -44,8 +39,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
     })
     if (!data?.[0]) {
       return {
-        notFound: true,
-        revalidate: REVALIDATE_SECONDS
+        notFound: true
       }
     }
 
@@ -105,8 +99,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         },
         newsLetterData,
         ...commonData
-      },
-      revalidate: REVALIDATE_SECONDS
+      }
     }
   }
 
@@ -245,16 +238,4 @@ export default function BlogPage({
       <FollowUs />
     </Layout>
   )
-}
-
-export async function getStaticPaths() {
-  const params = {
-    fields: ['slug']
-  }
-  const paths = await getPathsValues('blog-posts', params)
-
-  return {
-    paths,
-    fallback: NOT_FOUND_FALLBACK
-  }
 }
