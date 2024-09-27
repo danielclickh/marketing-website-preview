@@ -193,6 +193,7 @@ export default function HomePage({
               weekday='FRI'
               month='SEP'
               day={27}
+              disabled={true}
             />
             <TimelineItem
               heading='DataEngBytes - Melbourne'
