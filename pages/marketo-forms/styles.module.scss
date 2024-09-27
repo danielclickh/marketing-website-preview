@@ -462,6 +462,11 @@
         label.mktoLabel {
           @apply text-sm;
         }
+
+        ::placeholder {
+          @apply text-neutral-600 text-sm
+        }
+
         .mktoFormRow:nth-child(9) {
           .mktoFieldWrap {
             @apply flex-row items-center;
