@@ -64,10 +64,10 @@ export const getStaticProps: GetStaticProps<ContactProps> =
         ...data.hero,
         customerStories: customerStoriesData.customerStories,
         seo: {
-          title: 'Migrate from Rockset to ClickHouse',
+          title: 'Migrate from DoubleCloud to ClickHouse',
           description:
             "At ClickHouse, we're not going anywhere. Looking for help with your migration? Get in touch!",
-          path: '/comparison/rockset'
+          path: '/comparison/doublecloud'
           // image: [{ url: '/images/air-gapped-og.png' }]
         },
         ...commonProps
@@ -82,7 +82,7 @@ export default function Page({
   headerData,
   seo
 }: PageProps) {
-  galaxyOnPage('rocksetMigrationPage')
+  galaxyOnPage('doubleCloudMigrationPage')
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
@@ -97,12 +97,12 @@ export default function Page({
               <div className='mb-6 mr-0 flex-auto px-2 sm:px-6 md:mb-16 lg:mb-0 lg:mr-16 lg:max-w-2xl xl:px-2'>
                 <div className='section_metadata'>
                   <h1 className='mb-8 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
-                    Migrating from <span className='text-[#63C0DD]'>[</span>
-                    <span className='text-[#E5C3FF]'>Rockset</span>
-                    <span className='text-[#63C0DD]'>]</span> to ClickHouse
+                    Migrating from{' '}
+                    <span className='text-[#03cea4]'>DoubleCloud</span> to
+                    ClickHouse
                   </h1>
                   <h2 className='font-basier text-xl font-medium leading-tight text-neutral-200'>
-                    Rockset is being deprecated. Are you facing the daunting
+                    DoubleCloud is winding down. Are you facing the daunting
                     task of needing to migrate your production workloads before
                     a rapidly approaching cut-off date?{' '}
                     <span className='italic text-neutral-0'>
@@ -114,16 +114,16 @@ export default function Page({
                   <div className='mb-6 max-w-2xl text-neutral-200'>
                     <div className='prose prose-neutral'>
                       <p>
-                        ClickHouse and Rockset are both used to power real-time
-                        analytics workloads and customer-facing applications.
-                        But ClickHouse outshines Rockset in scalability,
+                        ClickHouse is used to power real-time analytics
+                        workloads and customer-facing applications. But
+                        ClickHouse outshines DoubleCloud in scalability,
                         ingestion throughput, query performance,
                         cost-efficiency, and much more.
                       </p>
 
                       <p>
                         Contact us today for your free migration services from
-                        Rockset to ClickHouse.
+                        DoubleCloud to ClickHouse.
                       </p>
                     </div>
                   </div>
@@ -132,7 +132,7 @@ export default function Page({
                       type='primary'
                       onClick={() => {
                         setShowForm(!showForm)
-                        galaxyOnClick('rockset.hero.contactSupportSelect')
+                        galaxyOnClick('doublecloud.hero.contactSupportSelect')
                       }}>
                       Get personalized support
                     </CUIButton>
@@ -141,26 +141,19 @@ export default function Page({
                       className='w-full'
                       type='secondary'
                       target='_blank'
-                      href='https://clickhouse.cloud/signUp?loc=rockset-comparison-hero'
+                      href='https://clickhouse.cloud/signUp?loc=doublecloud-comparison-hero'
                       iconRight={
                         <ChevronRightIcon
                           height='16'
                           className='pt-0.5 transition group-hover:translate-x-1/2'
                         />
                       }
-                      onClick={galaxyOnClick('rockset.hero.startTrialSelect')}>
+                      onClick={galaxyOnClick(
+                        'doublecloud.hero.startTrialSelect'
+                      )}>
                       Start a 30-day free trial
                     </CUIButton>
                   </div>
-                  <p className='mt-8 text-sm'>
-                    Read our guide about{' '}
-                    <a
-                      target='_blank'
-                      className='text-primary-300'
-                      href='https://clickhouse.com/docs/en/migrations/rockset?loc=comparions'>
-                      how to migrate from Rockset to ClickHouse
-                    </a>
-                  </p>
                 </div>
               </div>
               {showForm ? (
@@ -169,7 +162,7 @@ export default function Page({
                   <div className='rounded-lg border-neutral-800 bg-neutral-900 p-8 shadow-card md:w-[30.3125rem]'>
                     <SuiTitle type='h4'>
                       Enter your information and we'll contact you to discuss
-                      your options when migrating away from Rockset.
+                      your options when migrating away from DoubleCloud.
                     </SuiTitle>
                     <br />
                     <div className='delay-1000 duration-300 ease-in-out'>
@@ -215,10 +208,10 @@ export default function Page({
               ) : (
                 <div className='mx-auto w-96 pt-8 md:ml-auto md:w-full md:pt-0 lg:max-w-lg lg:pt-4'>
                   <Image
-                    src='/images/comparisons/rockset-migration-2.svg'
+                    src='/images/comparisons/dc-migration.svg'
                     width='485'
                     height='448'
-                    alt='Rockset to ClickHouse migration'
+                    alt='DoubleCloud to ClickHouse migration'
                   />
                 </div>
               )}
@@ -351,7 +344,7 @@ export default function Page({
         <div className='bg-shadow-element-right yellow-shadow '>
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
             <GetStartedFree
-              href='https://clickhouse.cloud/signUp?loc=rockset-comparison-getstarted-footer'
+              href='https://clickhouse.cloud/signUp?loc=doublecloud-comparison-getstarted-footer'
               textBefore='Get started with ClickHouse'
               textSlanted='Cloud'
               textAfter='for free'
