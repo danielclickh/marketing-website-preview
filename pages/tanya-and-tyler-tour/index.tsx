@@ -207,6 +207,7 @@ export default function HomePage({
               weekday='TUE'
               month='OCT'
               day={1}
+              disabled={true}
             />
             <TimelineItem
               heading='DataEngBytes - Auckland'
