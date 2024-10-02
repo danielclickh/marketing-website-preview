@@ -70,7 +70,7 @@ export default function HomepageHeroAlt({
           </div>
           <div className='mt-8 flex items-center rounded-[4px] border border-neutral-950 border-opacity-5 bg-neutral-950/5'>
             <Link
-              href='/company/contact?loc=homepage-hero-rs'
+              href='/company/contact?loc=homepage-hero-dc'
               className='group flex flex-col items-center md:flex-row'>
               <div className='flex h-[76px] items-center md:h-[104px] md:w-[152px] md:bg-neutral-950/5'>
                 <Image
