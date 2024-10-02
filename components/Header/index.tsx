@@ -38,63 +38,63 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
     scrollHandler()
 
     //=== Country specific eyebrow ===//
-    const hasCountryCode = document.cookie.includes('countryCode=')
-    const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
+    // const hasCountryCode = document.cookie.includes('countryCode=')
+    // const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
 
-    if (!hasCountryCode) {
-      // List of languages we want to exclude (e.g. China, Russia, etc.)
-      const excludedLanguages = ['ru-RU', 'zh-CN', 'zh-TW', 'zh-HK']
+    // if (!hasCountryCode) {
+    //   // List of languages we want to exclude (e.g. China, Russia, etc.)
+    //   const excludedLanguages = ['ru-RU', 'zh-CN', 'zh-TW', 'zh-HK']
 
-      // List of languages that correspond to Australia, New Zealand, and Singapore
-      const targetLanguages = ['en-AU', 'en-NZ', 'en-SG', 'zh-SG', 'ms-SG']
+    //   // List of languages that correspond to Australia, New Zealand, and Singapore
+    //   const targetLanguages = ['en-AU', 'en-NZ', 'en-SG', 'zh-SG', 'ms-SG']
 
-      if (excludedLanguages.includes(navigator.language)) {
-        return
-      } else if (targetLanguages.includes(navigator.language)) {
-        // If navigator.language matches target regions (AU, NZ, SG), set the country code
-        let countryCode
-        if (navigator.language === 'en-AU') {
-          countryCode = 'AU'
-        } else if (navigator.language === 'en-NZ') {
-          countryCode = 'NZ'
-        } else if (['en-SG', 'zh-SG', 'ms-SG'].includes(navigator.language)) {
-          countryCode = 'SG'
-        }
+    //   if (excludedLanguages.includes(navigator.language)) {
+    //     return
+    //   } else if (targetLanguages.includes(navigator.language)) {
+    //     // If navigator.language matches target regions (AU, NZ, SG), set the country code
+    //     let countryCode
+    //     if (navigator.language === 'en-AU') {
+    //       countryCode = 'AU'
+    //     } else if (navigator.language === 'en-NZ') {
+    //       countryCode = 'NZ'
+    //     } else if (['en-SG', 'zh-SG', 'ms-SG'].includes(navigator.language)) {
+    //       countryCode = 'SG'
+    //     }
 
-        document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
-        setHeaderBannerText(
-          'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
-        )
-        setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
-      } else {
-        fetch('https://ipinfo.io?token=33cfa2cb7f422c')
-          .then((response) => response.json())
-          .then((data) => {
-            if (!data.error) {
-              const countryCode = data.country
-              document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
+    //     document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
+    //     setHeaderBannerText(
+    //       'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
+    //     )
+    //     setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
+    //   } else {
+    //     fetch('https://ipinfo.io?token=33cfa2cb7f422c')
+    //       .then((response) => response.json())
+    //       .then((data) => {
+    //         if (!data.error) {
+    //           const countryCode = data.country
+    //           document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
 
-              if (['AU', 'NZ', 'SG'].includes(countryCode)) {
-                setHeaderBannerText(
-                  'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
-                )
-                setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
-              }
-            } else {
-              document.cookie = `countryCode=Error; expires=${expirationDate.toUTCString()}; path=/`
-            }
-          })
-      }
-    } else if (
-      document.cookie.includes('countryCode=AU') ||
-      document.cookie.includes('countryCode=NZ') ||
-      document.cookie.includes('countryCode=SG')
-    ) {
-      setHeaderBannerText(
-        'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
-      )
-      setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
-    }
+    //           if (['AU', 'NZ', 'SG'].includes(countryCode)) {
+    //             setHeaderBannerText(
+    //               'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
+    //             )
+    //             setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
+    //           }
+    //         } else {
+    //           document.cookie = `countryCode=Error; expires=${expirationDate.toUTCString()}; path=/`
+    //         }
+    //       })
+    //   }
+    // } else if (
+    //   document.cookie.includes('countryCode=AU') ||
+    //   document.cookie.includes('countryCode=NZ') ||
+    //   document.cookie.includes('countryCode=SG')
+    // ) {
+    //   setHeaderBannerText(
+    //     'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
+    //   )
+    //   setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
+    // }
     //=== Country specific eyebrow ===//
 
     return () => {
