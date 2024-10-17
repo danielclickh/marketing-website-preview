@@ -15,12 +15,17 @@ export async function getCommonProps(): Promise<Props> {
   const footerData = await getFooterData()
   const getStartedData = await getGetStartedData()
 
-  let stars = githubStars ? githubStars?.stars : 36719
+  // Set default fallback
+  let stars = 36719
 
-  if (process.env.NEXT_IS_PROD === 'true') {
-    if (!githubStars || !('stars' in githubStars)) {
-      throw new Error('Failed to get GitHub stars.')
-    }
+  if (
+    typeof githubStars === 'object' &&
+    'stars' in githubStars &&
+    typeof githubStars.stars === 'number'
+  ) {
+    stars = githubStars.stars
+  } else if (process.env.NEXT_IS_PROD === 'true') {
+    throw new Error('Failed to get GitHub stars.')
   }
 
   return {
