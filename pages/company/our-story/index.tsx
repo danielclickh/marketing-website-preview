@@ -1,18 +1,18 @@
-import {SuiText, SuiTitle} from '../../../components/sui'
-import {Person} from '../../../components/person_area'
-import {findOne} from '../../../lib/api/strapi'
-import {StrapiImage} from '../../../components/StrapiElements'
+import { SuiText, SuiTitle } from '../../../components/sui'
+import { Person } from '../../../components/person_area'
+import { findOne } from '../../../lib/api/strapi'
+import { StrapiImage } from '../../../components/StrapiElements'
 import founders from './founders.json'
 import investors from './investors.json'
-import {OurStoryData} from '../../../types/ourStory'
+import { OurStoryData } from '../../../types/ourStory'
 import Layout from '../../../components/Layout'
-import {GetStaticProps} from 'next'
-import {getCommonProps} from '../../../lib/utils/getCommonProps'
+import { GetStaticProps } from 'next'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import Image from 'next/image'
-import {ChevronRightIcon} from '@heroicons/react/solid'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 import styles from './styles.module.scss'
-import {CUIButton} from '../../../components/ClickUI'
-import {galaxyOnPage} from '../../../lib/galaxy/galaxy'
+import { CUIButton } from '../../../components/ClickUI'
+import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<OurStoryData> =
   async function getStaticProps() {
@@ -52,8 +52,7 @@ export default function OurStoryPage({
   headerData,
   seo
 }: OurStoryData) {
-
-  galaxyOnPage('ourStoryPage');
+  galaxyOnPage('ourStoryPage')
 
   return (
     <>
@@ -66,7 +65,7 @@ export default function OurStoryPage({
                   Who we are
                 </h1>
                 <p className='max-w-3xl text-neutral-200'>
-                  ClickHouse launched in 2012 with the vision of being the
+                  Work on ClickHouse began in 2009 with the vision of being the
                   fastest OLAP database on earth. We are the creators of the
                   popular open-source column-oriented database management system
                   which allows users to generate analytical reports using SQL
@@ -162,7 +161,7 @@ While we’re in different places, we all have the same goals, and we trust each
           </div>
         </div>
 
-        <div className='w-full bg-neutral-725 pt-16 pb-24'>
+        <div className='w-full bg-neutral-725 pb-24 pt-16'>
           <div className='section-container container mx-auto flex flex-col'>
             <SuiTitle
               type='h2'
@@ -185,7 +184,7 @@ While we’re in different places, we all have the same goals, and we trust each
             </div>
           </div>
         </div>
-        <div className='w-full pt-16 pb-24'>
+        <div className='w-full pb-24 pt-16'>
           <div className='section-container container mx-auto flex flex-col'>
             <SuiTitle
               type='h2'
@@ -194,7 +193,7 @@ While we’re in different places, we all have the same goals, and we trust each
               Our investors
             </SuiTitle>
 
-            <div className='investor grid grid-cols-1 flex-wrap justify-evenly gap-2 min-[340px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-6'>
+            <div className='investor min-[340px]:grid-cols-2 grid grid-cols-1 flex-wrap justify-evenly gap-2 md:grid-cols-3 lg:grid-cols-6'>
               {investors.map((investor) => (
                 <Person
                   small
