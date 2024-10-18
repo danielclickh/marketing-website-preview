@@ -2,7 +2,7 @@
 name: "[User story] Add CUSTOMER NAME to website"
 about: Adding a new user story to the website? This is your template!
 title: ''
-labels: user-story
+labels: user-story, website
 assignees: clickhouse-adrianfraguela
 
 ---
