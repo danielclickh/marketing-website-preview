@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "title": "ClickHouseが他社のデータベースよりも優れている点は？",
+    "content": "ClickHouseは従来のデータウェアハウスやデータベースよりも高速です。通常は大規模なデータベースに対するリアルタイムのクエリを手頃なコストで実装するために使用されますが、CDWHやOLTPデータベースなどの既存のインフラに「スピードレイヤ」を追加して機能拡張するためにも使用されます。",
+    "event": "homePage.faqSection.whyClickhouseExpand"
+  },
+  {
+    "id": "2",
+    "title": "OLAPとは？",
+    "content": "OLAPはOnline Analytical Processing（オンライン分析処理）の略で、OLTP（Online Transaction Processing）と対比した用語です。OLAPデータベースは大規模なデータセットを使用した分析処理を、OLTPよりもはるかに高速に実行できます。",
+    "event": "homePage.faqSection.olapOverviewExpand"
+  },
+  {
+    "id": "3",
+    "title": "ClickHouseが大規模なデータを処理する仕組みは？",
+    "content": "ClickHouseは高度な圧縮技術を使用して大量のデータをすばやく処理します。また、クエリをベクトル化して実行することでCPU効率を最大化します。",
+    "event": "homePage.faqSection.largeDataExpand"
+  },
+  {
+    "id": "4",
+    "title": "ClickHouseがデータを可視化および分析する仕組みは？",
+    "content": "ClickHouseはBIやデータ分析ツールなど多くのクライアントやドライバに対するコネクタをサポートしています。ClickHouseインテグレーションの一覧を、こちらのページでご覧ください。 ",
+    "event": "homePage.faqSection.dataVizAnalysisExpand"
+  },
+  {
+    "id": "5",
+    "title": "ClickHouseの費用は？",
+    "content": "セルフマネージドのClickHouseの場合、費用はコンピューターやデータストレージなどのリソース、およびClickHouseの管理に必要な人員の数によって変わります。[ClickHouse Cloud](https://clickhouse.cloud/signUp?loc=homepage-faq-accordion)であれば月々50ドルと非常に手頃な価格で始められます。",
+    "event": "homePage.faqSection.clickhouseCostExpand"
+  }
+]
