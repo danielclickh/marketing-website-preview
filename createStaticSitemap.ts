@@ -136,6 +136,9 @@ function generateSiteMap(
         <loc>${siteURL}/comparison/rockset</loc>
     </url>
     <url>
+        <loc>${siteURL}/comparison/doublecloud</loc>
+    </url>
+    <url>
         <loc>${siteURL}/blog</loc>
     </url>
     ${blogPosts

@@ -122,8 +122,8 @@ export default function Page({
                       </p>
 
                       <p>
-                        Contact us today for your free migration services from
-                        DoubleCloud to ClickHouse.
+                        Contact us today for free migration services, plus
+                        additional trial credits for qualified migrations.
                       </p>
                     </div>
                   </div>

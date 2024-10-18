@@ -115,6 +115,16 @@ export default function NavigationSubNavResources() {
           </li>
           <li>
             <NavigationLink
+              href='/comparison/doublecloud'
+              onClick={galaxyOnClick(
+                'topNav.comparisonsMenu.doubleCloudSelect'
+              )}
+              className='block w-full'>
+              DoubleCloud
+            </NavigationLink>
+          </li>
+          <li>
+            <NavigationLink
               href='/comparison/postgresql'
               onClick={galaxyOnClick('topNav.comparisonsMenu.postgreSqlSelect')}
               className='block w-full'>

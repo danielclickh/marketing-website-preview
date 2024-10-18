@@ -238,6 +238,13 @@
 				"galaxyEvent": "footerNav.comparisonsMenu.bigQuerySelect"
 			},
 			{
+				"id": 50,
+				"name": "DoubleCloud",
+				"href": "/comparison/doublecloud",
+				"target": "_self",
+				"galaxyEvent": "footerNav.comparisonsMenu.doubleCloudSelect"
+			},
+			{
 				"id": 10,
 				"name": "PostgreSQL",
 				"href": "/comparison/postgresql",
