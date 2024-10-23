@@ -103,7 +103,7 @@ LangSmith lets users understand what’s going on in their LLM applications and 
 
 When working with LLM applications, there are invariably many moving pieces with chained API calls and decision flows. This makes it challenging to understand what's going on under the hood, with users needing to debug infinite agent loops or cases with excessive token use. Seeing an obvious need here, LangSmith started as an observability tool to help developers diagnose and resolve these issues by giving clear visibility and debugging information at each step of an LLM sequence.
 
-\> We wanted something that was architecturally simple to deploy and didn’t make our infrastructure more complicated. We looked at Druid and Pinot, but these required dedicated services for ingestion, connected to queuing services such as Kafka, rather than simply accepting INSERT statements. We were keen to avoid this architectural complexity,
+> We wanted something that was architecturally simple to deploy and didn’t make our infrastructure more complicated. We looked at Druid and Pinot, but these required dedicated services for ingestion, connected to queuing services such as Kafka, rather than simply accepting INSERT statements. We were keen to avoid this architectural complexity,
 
 Learn more about how LangChain uses ClickHouse for the [observability user case](https://clickhouse.com/blog/langchain-why-we-choose-clickhouse-to-power-langchain).
 
