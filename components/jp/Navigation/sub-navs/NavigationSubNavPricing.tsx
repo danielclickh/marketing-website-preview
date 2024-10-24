@@ -1,5 +1,5 @@
 import React from 'react'
-import { galaxyOnClick } from '../../../lib/galaxy/galaxy'
+import { galaxyOnClick } from '../../../../lib/galaxy/galaxy'
 import { NavigationLink } from '../parts'
 
 export default function NavigationSubNavPricing() {

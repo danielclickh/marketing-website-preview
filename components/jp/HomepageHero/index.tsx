@@ -20,7 +20,7 @@ export default function HomepageHeroAlt({
         <div className='flip-selection relative z-30 bg-primary-300 py-12 text-center text-black lg:py-20 lg:text-left'>
           <SuiTitle
             type='h1'
-            className='!text-[2rem] md:!text-[2.5rem] xl:!text-[3rem]'>
+            className='!text-[2rem] md:!text-[2.5rem] xl:!text-[2.85rem]'>
             <span className='tilted tilted-black'>
               <span className='tilted-content text-white'>リアルタイム</span>
             </span>{' '}
