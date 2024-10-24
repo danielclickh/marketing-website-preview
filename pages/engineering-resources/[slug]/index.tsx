@@ -13,8 +13,8 @@ import SocialButton from '../../../components/SocialButton'
 import { SuiButton, SuiPanel, SuiText, SuiTitle } from '../../../components/sui'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
-import { getLexicon, getLexicons } from '../../../lib/lexicons'
-import { Lexicon } from '../../../lib/lexicons/types'
+import { getEngineeringResource, getEngineeringResources } from '../../../lib/engineering-resources'
+import { EngineeringResource } from '../../../lib/engineering-resources/types'
 import { slugify } from '../../../lib/utils/strings'
 import { CommonProps, NewsLetterData } from '../../../types/homepage'
 
@@ -23,21 +23,21 @@ type MoreLikeThisItem = {
   title: string
 }
 
-interface LexiconPageProps extends CommonProps {
-  lexicon: Lexicon
+interface EngineeringResourcesPageProps extends CommonProps {
+  engResource: EngineeringResource
   moreLikeThis: Array<MoreLikeThisItem>
   newsLetterData: NewsLetterData
 }
 
-interface LexiconPageParams extends ParsedUrlQuery {
+interface EngineeringResourcesPageParams extends ParsedUrlQuery {
   slug: string
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: getLexicons().map((lexicon) => {
+    paths: getEngineeringResources().map((engResource) => {
       return {
-        params: { slug: lexicon.slug }
+        params: { slug: engResource.slug }
       }
     }),
     fallback: 'blocking'
@@ -45,14 +45,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const { slug } = context.params as LexiconPageParams
+  const { slug } = context.params as EngineeringResourcesPageParams
   const newsLetterData = await getNewsLetterData()
 
-  const lexicon = getLexicon(slug)
+  const engResource = getEngineeringResource(slug)
 
-  if (lexicon) {
-    const moreLikeThis = getLexicons()
-      .filter((item) => item.slug !== lexicon.slug)
+  if (engResource) {
+    const moreLikeThis = getEngineeringResources()
+      .filter((item) => item.slug !== engResource.slug)
       .map((item) => {
         return {
           link: `/engineering-resources/${item.slug}`,
@@ -61,13 +61,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
       })
       .slice(0, 3) // Limit number of items to 3
 
-    const props: LexiconPageProps = {
-      lexicon,
+    const props: EngineeringResourcesPageProps = {
+      engResource: engResource,
       moreLikeThis,
       seo: {
-        title: `${lexicon.title} | ClickHouse Engineering Resources`,
-        description: lexicon.excerpt,
-        path: `/engineering-resources/${lexicon.slug}`
+        title: `${engResource.title} | ClickHouse Engineering Resources`,
+        description: engResource.excerpt,
+        path: `/engineering-resources/${engResource.slug}`
       },
       newsLetterData,
       ...(await getCommonProps())
@@ -86,7 +86,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 export default function Page({
-  lexicon,
+  engResource,
   moreLikeThis,
   seo,
   headerData,
@@ -103,13 +103,13 @@ export default function Page({
                 <Link href='/engineering-resources' className='text-primary-300'>
                   Engineering Resources
                 </Link>{' '}
-                / <strong>{lexicon.title}</strong>
+                / <strong>{engResource.title}</strong>
               </h4>
               <SuiTitle type='h1' className='text-balance my-6 md:!text-5xl'>
-                {lexicon.title}
+                {engResource.title}
               </SuiTitle>
               <Markdown className='rich-text-content leading-6' allowHeaderLink>
-                {lexicon.body}
+                {engResource.body}
               </Markdown>
               <HRSeparator className='my-8' />
               <div className='mb-10 flex flex-col items-center justify-between gap-4 md:flex-row'>
@@ -120,10 +120,10 @@ export default function Page({
                 </div>
                 <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
                   <CopyUrlButton />
-                  <SocialButton type='y_combinator' title={lexicon.title} />
-                  <SocialButton type='twitter' title={lexicon.title} />
-                  <SocialButton type='facebook' title={lexicon.title} />
-                  <SocialButton type='linkedin' title={lexicon.title} />
+                  <SocialButton type='y_combinator' title={engResource.title} />
+                  <SocialButton type='twitter' title={engResource.title} />
+                  <SocialButton type='facebook' title={engResource.title} />
+                  <SocialButton type='linkedin' title={engResource.title} />
                 </div>
               </div>
             </div>
@@ -131,7 +131,7 @@ export default function Page({
               {moreLikeThis.length > 0 && (
                 <div className='mb-8 '>
                   <h3 className='mb-6 text-lg font-bold'>More like this</h3>
-                  {(moreLikeThis as LexiconPageProps['moreLikeThis']).map(
+                  {(moreLikeThis as EngineeringResourcesPageProps['moreLikeThis']).map(
                     (item) => (
                       <Link
                         href={item.link}

@@ -29,13 +29,13 @@ Organizations can discover insights about their customers by aggregating and ana
 
 The diagram below shows what a typical batch analytics system would look like from the perspective of an individual event:
 
-![](/images/lexicon/0_rta.png)
+![](/images/engineering-resources/0_rta.png)
 
 You can see that there’s quite a big gap from when the event happens until we process and gain some insight from it. Traditionally, this was the only means of data analysis, and we’d need to create artificial time boundaries to process the data in batches. For example, we might process all the data collected at the end of a day. This worked for many use cases, but for others, it’s sub-optimal because we’re working with stale data, and it doesn’t allow us to react to the data quickly enough.
 
 By contrast, in real-time analytics systems, we react to an event as soon as it happens, as shown in the following diagram:
 
-![](/images/lexicon/1_rta.png)
+![](/images/engineering-resources/1_rta.png)
 
 We can now derive insights from events almost as soon as they’re generated. But why is this useful?
 
@@ -71,7 +71,7 @@ This use case stretches across industries: healthcare, digital banking, financia
 
 [Instacart](https://www.instacart.com/) is North America's leading online grocery company, with millions of active customers and shoppers. It uses ClickHouse as part of [Yoda, its fraud detection platform](https://tech.instacart.com/real-time-fraud-detection-with-yoda-and-clickhouse-bd08e9dbe3f4). In addition to the general types of fraud described above, it also tries to detect collusion between customers and shoppers.
 
-![](/images/lexicon/2_rta.png)
+![](/images/engineering-resources/2_rta.png)
 
 They identified the following characteristics of ClickHouse that enable real-time fraud detection:
 
@@ -87,7 +87,7 @@ Time-sensitive decision-making refers to situations where users or organizations
 
 Coinhall provides its users with real-time insights into price movements over time via a candlestick chart, which shows the open, high, low, and close prices for each trading period. They needed to be able to run these types of queries quickly and with a large number of concurrent users.
 
-![](/images/lexicon/3_rta.png)
+![](/images/engineering-resources/3_rta.png)
 
 > In terms of performance, ClickHouse was the clear winner, executing candlestick queries in 20 milliseconds, compared to 400 milliseconds or more for the other databases. It ran latest-price queries in 8 milliseconds, outpacing the next-best performance (SingleStore) which came in at 45 milliseconds. Finally, it handled ASOF JOIN queries in 50 milliseconds, while Snowflake took 20 minutes and Rockset timed out.
 
@@ -157,7 +157,7 @@ Real-time databases must ingest hundreds of thousands or millions of records per
 
 You can see the architecture of ClickHouse Cloud in the following diagram:
 
-![](/images/lexicon/4_rta.png)
+![](/images/engineering-resources/4_rta.png)
 
 ClickHouse has the characteristics needed in a real-time analytics system, described earlier in this article.
 
@@ -199,7 +199,7 @@ Let’s go through each of these steps in a bit more detail.
 
 ClickPipes is an integration engine that makes ingesting massive volumes of data from diverse sources as simple as clicking a few buttons. It supports a variety of sources, both for streaming and static data.
 
-![](/images/lexicon/5_rta.png)
+![](/images/engineering-resources/5_rta.png)
 
 You’ll likely want to use it to ingest data from Confluent Cloud or one of the other streaming data platforms. You’ll have to populate your credentials and select the topic you want to ingest. ClickPipes will then infer a table schema by sampling some of the messages in the chosen topic before creating a table and ingesting the data into it.
 

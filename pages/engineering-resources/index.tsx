@@ -4,24 +4,24 @@ import {useRouter} from 'next/router'
 import React, {ChangeEvent, useEffect, useState} from 'react'
 import Layout from '../../components/Layout'
 import {SuiSearchField, SuiTitle} from '../../components/sui'
-import {getLexicons} from '../../lib/lexicons'
-import {Lexicon} from '../../lib/lexicons/types'
+import {getEngineeringResources} from '../../lib/engineering-resources'
+import {EngineeringResource} from '../../lib/engineering-resources/types'
 import {getCommonProps} from '../../lib/utils/getCommonProps'
 import {CommonProps} from '../../types/homepage'
 import {galaxyOnPage} from '../../lib/galaxy/galaxy'
 
-interface LexiconProps extends CommonProps {
-  lexiconItems: Lexicon[]
+interface EngineeringResourcesProps extends CommonProps {
+  engResourcesItems: EngineeringResource[]
 }
 
-export const getStaticProps: GetStaticProps<LexiconProps> =
+export const getStaticProps: GetStaticProps<EngineeringResourcesProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
-    const lexiconItems = getLexicons()
+    const engResourcesItems = getEngineeringResources()
 
     return {
       props: {
-        lexiconItems,
+        engResourcesItems: engResourcesItems,
         seo: {
           title: 'Engineering Resources - ClickHouse',
           path: '/engineering-resources'
@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps<LexiconProps> =
     }
   }
 
-function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
+function Sitemap({ seo, headerData, footerData, engResourcesItems: engResourcesItems }: EngineeringResourcesProps) {
 
   const router = useRouter()
   const [search, setSearch] = useState<string | null>(null)
@@ -42,7 +42,7 @@ function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
 
     // Filter items by search term
     if (search) {
-      lexiconItems = lexiconItems.filter(item => {
+      engResourcesItems = engResourcesItems.filter(item => {
         const searchTerm = search.trim().toLowerCase()
         const inTitle = item.title.toLowerCase().includes(searchTerm)
         const inExcerpt = item.excerpt.toLowerCase().includes(searchTerm)
@@ -52,7 +52,7 @@ function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
       })
     }
 
-    return lexiconItems
+    return engResourcesItems
   })()
 
   // Load values from query string

@@ -60,7 +60,7 @@ The CommonRoom app contains various real-time dashboards and visualizations that
 
 An example of a page in CommonRoom is shown below:
 
-![](/images/lexicon/0_dataviz.jpg)
+![](/images/engineering-resources/0_dataviz.jpg)
 
 ### adsb.exposed 
 
@@ -70,7 +70,7 @@ ADS-B (Automatic Dependent Surveillance-Broadcast) is a radio protocol that broa
    
 Below is an example visualization from the application showing [helicopters flying over the River Thames in London:](https://adsb.exposed/?zoom=12&lat=51.5079&lng=359.8960&query=e18e8c8d6a1db73c63953798ad8919a9)  
 
-![](/images/lexicon/1_dataviz.png)
+![](/images/engineering-resources/1_dataviz.png)
 
 ### CryptoHouse
 
@@ -78,7 +78,7 @@ Below is an example visualization from the application showing [helicopters flyi
 
 Users can utilize SQL to query continuously updated data, courtesy of [Goldsky](https://goldsky.com/). In addition to viewing results in table format, users can also generate charts. Below is an example of a chart that shows the number of Solana transactions, grouped by day and status:  
 
-![](/images/lexicon/2_dataviz.png)
+![](/images/engineering-resources/2_dataviz.png)
 
 ### Juspay
 
@@ -86,17 +86,17 @@ Juspay is an Indian fintech company that [uses ClickHouse to power A/B testing a
 
 For monitoring and A/B testing, they use a combination of Kafka, ClickHouse, and Grafana. They monitor active logs and perform transformations in Kafka, before transferring data to ClickHouse. You can see an example of one of their Grafana dashboards below:
 
-![](/images/lexicon/3_dataviz.png)
+![](/images/engineering-resources/3_dataviz.png)
 
 They also provide real-time dashboards to their merchants so that they can track their transactions and monitor their success or failure in real time. An example of one such dashboard is shown below:
 
-![](/images/lexicon/4_dataviz.png)
+![](/images/engineering-resources/4_dataviz.png)
 
 ## Real-time data visualization architecture
 
 The data used in real-time data visualizations will start their life on a streaming data platform like Apache Kafka or Redpanda. That data might be transformed or augmented by a stream processor before being transported to a real-time database.
 
-![](/images/lexicon/5_dataviz.png)
+![](/images/engineering-resources/5_dataviz.png)
 
 Now that the data’s in the database, how does it get to the visualization? That’s what we’ll learn about in the next section
 
@@ -110,13 +110,13 @@ Push-based means that as data arrives in our real-time analytics system, it’s 
 
 With both of these technologies, you create a subscription from the client and receive new events as they become available. These events can then be included in the visualization.
 
-![](/images/lexicon/6_dataviz.png)
+![](/images/engineering-resources/6_dataviz.png)
 
 ### Pull-based data transfer
 
 Conversely, pull-based means polling a server for data, usually on a fixed interval. For example, we might ask for new data every second, so we’d call an API or send a query to execute every tick. We’d use an HTTP client or programming language client for this technique.
 
-![](/images/lexicon/7_dataviz.png)
+![](/images/engineering-resources/7_dataviz.png)
 
 This was traditionally done using APIs like JDBC if you used Java and ODBC for other programming languages. Indeed, many analytics platforms still require you to use one of these APIs to connect to your database.
 
