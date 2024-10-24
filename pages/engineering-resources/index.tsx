@@ -23,8 +23,8 @@ export const getStaticProps: GetStaticProps<LexiconProps> =
       props: {
         lexiconItems,
         seo: {
-          title: 'Lexicon - ClickHouse',
-          path: '/lexicon'
+          title: 'Engineering Resources - ClickHouse',
+          path: '/engineering-resources'
         },
         ...commonProps
       }
@@ -75,9 +75,9 @@ function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
     }
 
     if (queryParams.length) {
-      router.push('/lexicon?' + queryParams.join('&'), undefined, { shallow: true })
+      router.push('/engineering-resources?' + queryParams.join('&'), undefined, { shallow: true })
     } else {
-      router.push('/lexicon', undefined, { shallow: true })
+      router.push('/engineering-resources', undefined, { shallow: true })
     }
   }, [search])
 
@@ -88,7 +88,7 @@ function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
       <div className="bg-grid">
         <div className="section-container py-16 md:py-20">
           <SuiTitle type="h1" color="white" className="mb-12 md:!text-6xl">
-            ClickHouse Lexicon
+            ClickHouse Engineering Resources
           </SuiTitle>
 
           <SuiSearchField
@@ -107,7 +107,7 @@ function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
                 <div className="w-full md:w-1/3 mb-4 md:mb-0">
                   <SuiTitle type="h2" className="!text-xl">
                     <Link
-                      href={`/lexicon/${item.slug}`}
+                      href={`/engineering-resources/${item.slug}`}
                       className="text-primary-300 hover:underline">
                       {item.title}
                     </Link>

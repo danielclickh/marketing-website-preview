@@ -55,7 +55,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       .filter((item) => item.slug !== lexicon.slug)
       .map((item) => {
         return {
-          link: `/lexicon/${item.slug}`,
+          link: `/engineering-resources/${item.slug}`,
           title: item.title
         } as MoreLikeThisItem
       })
@@ -65,9 +65,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
       lexicon,
       moreLikeThis,
       seo: {
-        title: `${lexicon.title} | ClickHouse Lexicon`,
+        title: `${lexicon.title} | ClickHouse Engineering Resources`,
         description: lexicon.excerpt,
-        path: `/lexicon/${lexicon.slug}`
+        path: `/engineering-resources/${lexicon.slug}`
       },
       newsLetterData,
       ...(await getCommonProps())
@@ -100,8 +100,8 @@ export default function Page({
           <div className='flex-row items-start gap-16 lg:flex'>
             <div className='flex-shrink flex-grow'>
               <h4 className='text-base font-semibold'>
-                <Link href='/lexicon' className='text-primary-300'>
-                  Lexicon
+                <Link href='/engineering-resources' className='text-primary-300'>
+                  Engineering Resources
                 </Link>{' '}
                 / <strong>{lexicon.title}</strong>
               </h4>

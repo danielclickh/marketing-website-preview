@@ -197,7 +197,7 @@ function generateSiteMap(
        .map((lexicon) => {
          return `
     <url>
-        <loc>${siteURL}/lexicon/${lexicon.slug}</loc>
+        <loc>${siteURL}/engineering-resources/${lexicon.slug}</loc>
     </url>
     `
        })

@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const lexiconDirectory = path.join(process.cwd(), 'lexicon-data');
+const lexiconDirectory = path.join(process.cwd(), 'engineering-resources-data');
 
 export function getLexicons(): Lexicon[] {
   console.log(lexiconDirectory)

@@ -486,7 +486,7 @@ function Sitemap({
                   return (
                     <li key={index}>
                       <Link
-                        href={`/lexicon/${lexicon.slug}`}
+                        href={`/engineering-resources/${lexicon.slug}`}
                         className='font text-primary-300 hover:underline'>
                         {lexicon.title}{' '}
                       </Link>
