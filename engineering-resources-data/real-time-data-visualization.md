@@ -14,7 +14,7 @@ This guide will explore real-time data visualization, learn why it’s essential
 
 We want to get insights as soon as the data is available. If I upload a video to YouTube, I want to know if anyone’s watching it and for how long they’re watching as soon as possible. I don’t want to wait until tomorrow when the batch job runs and populates the analytics database.
 
-Real-time data visualization goes hand in hand with real-time analytics. We can’t generate real-time visualizations if we don’t have the infrastructure to ingest streaming data quickly, serve queries on it with low latency, and do so at scale.
+Real-time data visualization goes hand in hand with [real-time analytics](/engineering-resources/what-is-real-time-analytics). We can’t generate real-time visualizations if we don’t have the infrastructure to ingest streaming data quickly, serve queries on it with low latency, and do so at scale.
 
 Without **speedy ingestion**, our visualizations are based on stale data. Without **low-latency queries**, dashboards take too long to load and update, and without **scale**, we can’t have as many visualizations as we’d like on our dashboards.
 
@@ -112,6 +112,8 @@ With both of these technologies, you create a subscription from the client and r
 
 ![](/images/engineering-resources/6_dataviz.png)
 
+ClickHouse doesn’t currently support this approach.
+
 ### Pull-based data transfer
 
 Conversely, pull-based means polling a server for data, usually on a fixed interval. For example, we might ask for new data every second, so we’d call an API or send a query to execute every tick. We’d use an HTTP client or programming language client for this technique.
@@ -147,7 +149,7 @@ This category emerged in the late 2010s, making it easy for data scientists to s
 * [**Mesop**](https://google.github.io/mesop/) originated from Google and was designed for users building AI web applications. It offers a declarative approach to UI design, a range of pre-built components, and streamlined deployment options, enabling developers to focus on AI logic rather than frontend complexities.  
 * [**Gradio**](https://www.gradio.app/) enables users to quickly create and share interactive machine-learning demos through user-friendly web interfaces. Gradio apps can be served as web pages or embedded into Python notebooks. Gradio also offers permanent hosting options through Hugging Face Spaces.
 
-### Visualization libraries
+### Python Visualization libraries
 
 Low-code tools provide the container for real-time dashboards, but we’ll need to use a visualization library to actually visualize the data. The Python ecosystem has many such libraries, so we’ll focus on a few of our favorites.
 
@@ -156,3 +158,11 @@ Low-code tools provide the container for real-time dashboards, but we’ll need 
 * [**Bokeh**](https://docs.bokeh.org/en/latest/) lets users create interactive visualizations for modern web browsers. It helps you create anything from simple plots to complex dashboards with streaming datasets. 
 
 We also want to give a special shout-out to [**Perspective**](https://perspective.finos.org/), a library we recently discovered. It’s designed for large streaming datasets, making it a [perfect choice for real-time data visualization](https://clickhouse.com/blog/streaming-real-time-visualizations-clickhouse-apache-arrow-perpsective).
+
+### JavaScript Visualization libraries
+
+There are also a variety of visualization libraries available if you’re creating front-end applications using JavaScript. Below are some of our favorites:
+
+* [**Apache Echarts**](https://echarts.apache.org/en/feature.html) is an open-source JavaScript visualization library optimized for both web and mobile. It’s compatible with most modern web browsers, including IE9/10/11, Chrome, Firefox, and Safari.  
+* [**Tremor**](https://tremor.so/) provides a set of open-source, accessible components for dashboards and charts. It’s designed for React v18.2.0+ and requires Tailwind CSS v3.4+.  
+* [**plotly**](https://plotly.com/javascript/) is an interactive, open-source, and browser-based graphing library. It ships with over 30 chart types, including scientific charts, 3D graphs, statistical charts, SVG maps, financial charts, and more. It’s also available for Python users.
