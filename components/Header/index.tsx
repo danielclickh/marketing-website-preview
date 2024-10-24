@@ -17,10 +17,10 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    'DoubleCloud is winding down. Migrate to ClickHouse with limited-time free migration services. Contact us today'
+    'Going to re:Invent this December? Come party with us and The Chainsmokers'
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/comparison/doublecloud?loc=eyebrow'
+    '/houseparty/vegas-2024?loc=eyebrow'
   )
 
   useEffect(() => {

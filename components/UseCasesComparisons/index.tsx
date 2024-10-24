@@ -7,6 +7,7 @@ export default function UseCasesComparisons() {
   return (
     <>
       <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
+        <a id='comparisons' />
         <div
           className={`flex flex-col items-start justify-between gap-10 lg:flex-row`}>
           <div
@@ -62,7 +63,7 @@ export default function UseCasesComparisons() {
                                 alt={`${stat.bigStat} ${stat.smallText}`}
                                 width={stat.iconWidth}
                                 height={stat.iconHeight}
-                                className='mx-auto pt-4 pb-1'
+                                className='mx-auto pb-1 pt-4'
                               />
                               <h3 className='font-basier text-3xl font-semibold'>
                                 {stat.bigStat}
