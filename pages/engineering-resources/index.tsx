@@ -1,14 +1,14 @@
-import {GetStaticProps} from 'next'
+import { GetStaticProps } from 'next'
 import Link from 'next/link'
-import {useRouter} from 'next/router'
-import React, {ChangeEvent, useEffect, useState} from 'react'
+import { useRouter } from 'next/router'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
-import {SuiSearchField, SuiTitle} from '../../components/sui'
-import {getEngineeringResources} from '../../lib/engineering-resources'
-import {EngineeringResource} from '../../lib/engineering-resources/types'
-import {getCommonProps} from '../../lib/utils/getCommonProps'
-import {CommonProps} from '../../types/homepage'
-import {galaxyOnPage} from '../../lib/galaxy/galaxy'
+import { SuiSearchField, SuiTitle } from '../../components/sui'
+import { getEngineeringResources } from '../../lib/engineering-resources'
+import { EngineeringResource } from '../../lib/engineering-resources/types'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { CommonProps } from '../../types/homepage'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 
 interface EngineeringResourcesProps extends CommonProps {
   engResourcesItems: EngineeringResource[]
@@ -31,18 +31,22 @@ export const getStaticProps: GetStaticProps<EngineeringResourcesProps> =
     }
   }
 
-function Sitemap({ seo, headerData, footerData, engResourcesItems: engResourcesItems }: EngineeringResourcesProps) {
-
+function Sitemap({
+  seo,
+  headerData,
+  footerData,
+  engResourcesItems: engResourcesItems
+}: EngineeringResourcesProps) {
   const router = useRouter()
   const [search, setSearch] = useState<string | null>(null)
 
-  const searchChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
+  const searchChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setSearch(e.target.value)
 
   const items = (() => {
-
     // Filter items by search term
     if (search) {
-      engResourcesItems = engResourcesItems.filter(item => {
+      engResourcesItems = engResourcesItems.filter((item) => {
         const searchTerm = search.trim().toLowerCase()
         const inTitle = item.title.toLowerCase().includes(searchTerm)
         const inExcerpt = item.excerpt.toLowerCase().includes(searchTerm)
@@ -75,57 +79,60 @@ function Sitemap({ seo, headerData, footerData, engResourcesItems: engResourcesI
     }
 
     if (queryParams.length) {
-      router.push('/engineering-resources?' + queryParams.join('&'), undefined, { shallow: true })
+      router.push(
+        '/engineering-resources?' + queryParams.join('&'),
+        undefined,
+        { shallow: true }
+      )
     } else {
       router.push('/engineering-resources', undefined, { shallow: true })
     }
   }, [search])
 
-  galaxyOnPage('lexiconPage');
+  useGalaxyOnPage('lexiconPage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className="bg-grid">
-        <div className="section-container py-16 md:py-20">
-          <SuiTitle type="h1" color="white" className="mb-12 md:!text-6xl">
+      <div className='bg-grid'>
+        <div className='section-container py-16 md:py-20'>
+          <SuiTitle type='h1' color='white' className='mb-12 md:!text-6xl'>
             ClickHouse Engineering Resources
           </SuiTitle>
 
           <SuiSearchField
-            placeholder="Search by title or keyword..."
-            htmlFor="search"
-            className="max-w-[300px]"
+            placeholder='Search by title or keyword...'
+            htmlFor='search'
+            className='max-w-[300px]'
             value={search || ''}
-            onChange={searchChange} />
+            onChange={searchChange}
+          />
 
-          <hr className="border-0 h-[1px] bg-white bg-opacity-40 my-6" />
-
+          <hr className='my-6 h-[1px] border-0 bg-white bg-opacity-40' />
 
           {items.map((item) => {
             return (
-              <div className="flex flex-wrap md:flex-nowrap items-center justify-between my-10" key={item.slug}>
-                <div className="w-full md:w-1/3 mb-4 md:mb-0">
-                  <SuiTitle type="h2" className="!text-xl">
+              <div
+                className='my-10 flex flex-wrap items-center justify-between md:flex-nowrap'
+                key={item.slug}>
+                <div className='mb-4 w-full md:mb-0 md:w-1/3'>
+                  <SuiTitle type='h2' className='!text-xl'>
                     <Link
                       href={`/engineering-resources/${item.slug}`}
-                      className="text-primary-300 hover:underline">
+                      className='text-primary-300 hover:underline'>
                       {item.title}
                     </Link>
                   </SuiTitle>
                 </div>
-                <div className="w-full md:w-2/3">
-                  {item.excerpt}
-                </div>
+                <div className='w-full md:w-2/3'>{item.excerpt}</div>
               </div>
             )
           })}
 
           {!items.length && (
-            <p className="text-center mt-12">
+            <p className='mt-12 text-center'>
               {search ? `No search results for "${search}"` : 'No results'}
             </p>
           )}
-
         </div>
       </div>
     </Layout>
