@@ -21,6 +21,7 @@ export const updateLinks = (
       link.href = appendUTMsToLink(link.href)
       link.href = appendGalaxySessionIDToLink(link.href)
       link.href = appendPagePathsToLink(link.href)
+      link.href = appendGoogleAnalyticsCookieToLink(link.href)
       if (experimentId && variationId) {
         link.href = appendExperimentToLink(link.href, experimentId, variationId)
       }
@@ -82,6 +83,28 @@ const UTMPersist = () => {
 }
 
 export default React.memo(UTMPersist)
+
+export function appendGoogleAnalyticsCookieToLink(url: string): string {
+  const urlObject = new URL(url)
+
+  // Get all cookies in the format "cookieName=cookieValue; ..."
+  const cookies = document.cookie.split(';')
+
+  // Loop through each cookie
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].trim()
+
+    // Check if the cookie starts with "_ga="
+    if (cookie.startsWith('_ga=')) {
+      // Return the value part, which is everything after "_ga="
+      const cookieValue = cookie.substring(4)
+      urlObject.searchParams.set('_ga', cookieValue)
+      break
+    }
+  }
+
+  return urlObject.toString()
+}
 
 // Utility function to append UTMs to a link
 export function appendUTMsToLink(url: string): string {
