@@ -4,34 +4,34 @@ import {useRouter} from 'next/router'
 import React, {ChangeEvent, useEffect, useState} from 'react'
 import Layout from '../../components/Layout'
 import {SuiSearchField, SuiTitle} from '../../components/sui'
-import {getLexicons} from '../../lib/lexicons'
-import {Lexicon} from '../../lib/lexicons/types'
+import {getEngineeringResources} from '../../lib/engineering-resources'
+import {EngineeringResource} from '../../lib/engineering-resources/types'
 import {getCommonProps} from '../../lib/utils/getCommonProps'
 import {CommonProps} from '../../types/homepage'
 import {galaxyOnPage} from '../../lib/galaxy/galaxy'
 
-interface LexiconProps extends CommonProps {
-  lexiconItems: Lexicon[]
+interface EngineeringResourcesProps extends CommonProps {
+  engResourcesItems: EngineeringResource[]
 }
 
-export const getStaticProps: GetStaticProps<LexiconProps> =
+export const getStaticProps: GetStaticProps<EngineeringResourcesProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
-    const lexiconItems = getLexicons()
+    const engResourcesItems = getEngineeringResources()
 
     return {
       props: {
-        lexiconItems,
+        engResourcesItems: engResourcesItems,
         seo: {
-          title: 'Lexicon - ClickHouse',
-          path: '/lexicon'
+          title: 'Engineering Resources - ClickHouse',
+          path: '/engineering-resources'
         },
         ...commonProps
       }
     }
   }
 
-function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
+function Sitemap({ seo, headerData, footerData, engResourcesItems: engResourcesItems }: EngineeringResourcesProps) {
 
   const router = useRouter()
   const [search, setSearch] = useState<string | null>(null)
@@ -42,7 +42,7 @@ function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
 
     // Filter items by search term
     if (search) {
-      lexiconItems = lexiconItems.filter(item => {
+      engResourcesItems = engResourcesItems.filter(item => {
         const searchTerm = search.trim().toLowerCase()
         const inTitle = item.title.toLowerCase().includes(searchTerm)
         const inExcerpt = item.excerpt.toLowerCase().includes(searchTerm)
@@ -52,7 +52,7 @@ function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
       })
     }
 
-    return lexiconItems
+    return engResourcesItems
   })()
 
   // Load values from query string
@@ -75,9 +75,9 @@ function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
     }
 
     if (queryParams.length) {
-      router.push('/lexicon?' + queryParams.join('&'), undefined, { shallow: true })
+      router.push('/engineering-resources?' + queryParams.join('&'), undefined, { shallow: true })
     } else {
-      router.push('/lexicon', undefined, { shallow: true })
+      router.push('/engineering-resources', undefined, { shallow: true })
     }
   }, [search])
 
@@ -88,7 +88,7 @@ function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
       <div className="bg-grid">
         <div className="section-container py-16 md:py-20">
           <SuiTitle type="h1" color="white" className="mb-12 md:!text-6xl">
-            ClickHouse Lexicon
+            ClickHouse Engineering Resources
           </SuiTitle>
 
           <SuiSearchField
@@ -107,7 +107,7 @@ function Sitemap({ seo, headerData, footerData, lexiconItems }: LexiconProps) {
                 <div className="w-full md:w-1/3 mb-4 md:mb-0">
                   <SuiTitle type="h2" className="!text-xl">
                     <Link
-                      href={`/lexicon/${item.slug}`}
+                      href={`/engineering-resources/${item.slug}`}
                       className="text-primary-300 hover:underline">
                       {item.title}
                     </Link>
