@@ -1,4 +1,4 @@
-export interface Lexicon {
+export interface EngineeringResource {
   slug: string,
   title: string,
   excerpt: string,

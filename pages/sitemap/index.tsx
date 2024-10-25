@@ -9,8 +9,8 @@ import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { Video } from '../../lib/videos/types'
 import { CommonProps } from '../../types/homepage'
 import { getVideos } from '../../lib/videos'
-import { getLexicons } from '../../lib/lexicons'
-import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
+import { getEngineeringResources } from '../../lib/engineering-resources'
+import { galaxyOnPage } from '../../lib/galaxy/galaxy'
 import { fetchCategories } from '../api/blog'
 
 interface SitemapProps extends CommonProps {
@@ -22,7 +22,7 @@ interface SitemapProps extends CommonProps {
   newsEvents: any[]
   pressReleases: any[]
   comparisons: any[]
-  lexicons: any[]
+  engResources: any[]
   demos: any[]
 }
 
@@ -89,7 +89,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
     const newsEvents = newsItems.newsItems
     const pressReleases = newsItems.pressReleases
 
-    const lexicons = getLexicons()
+    const engResources = getEngineeringResources()
 
     const allVideos = await getVideos()
 
@@ -103,7 +103,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         newsEvents,
         pressReleases,
         comparisons,
-        lexicons,
+        engResources,
         demos,
         seo: {
           title: 'Site map - ClickHouse',
@@ -126,10 +126,10 @@ function Sitemap({
   newsEvents,
   pressReleases,
   comparisons,
-  lexicons,
+  engResources,
   demos
 }: SitemapProps) {
-  useGalaxyOnPage('siteMapPage')
+  galaxyOnPage('siteMapPage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -481,14 +481,14 @@ function Sitemap({
               </ul>
 
               <ul className='space-y-2'>
-                <li className='font-semibold'>Lexicon</li>
-                {lexicons.map((lexicon, index) => {
+                <li className='font-semibold'>Engineering Resources</li>
+                {engResources.map((engResource, index) => {
                   return (
                     <li key={index}>
                       <Link
-                        href={`/lexicon/${lexicon.slug}`}
+                        href={`/engineering-resources/${engResource.slug}`}
                         className='font text-primary-300 hover:underline'>
-                        {lexicon.title}{' '}
+                        {engResource.title}{' '}
                       </Link>
                     </li>
                   )

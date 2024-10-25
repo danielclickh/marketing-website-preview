@@ -132,6 +132,16 @@ const nextConfig = {
         permanent: true
       },
       {
+        source: '/lexicon',
+        destination: '/engineering-resources',
+        permanent: true
+      },
+      {
+        source: '/lexicon/:path*',
+        destination: '/engineering-resources/:path*',
+        permanent: true
+      },
+      {
         source: '/company/events/v23-2-release-webinar',
         destination: 'https://www.youtube.com/watch?v=2o0vRMMIrkY',
         permanent: true
