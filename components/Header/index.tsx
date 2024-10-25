@@ -8,7 +8,7 @@ import GitHub from '../icons/GitHub'
 import LinkWithArrow from '../LinkWithArrow'
 import { HeaderProps } from './types'
 import Navigation from '../Navigation'
-import { galaxyOnClick } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 
 export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const headerRef = useRef<HTMLElement>(null)
@@ -137,7 +137,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
           <Link
             href='/'
             prefetch={false}
-            onClick={galaxyOnClick('topNav.logo.select')}>
+            onClick={useGalaxyOnClick('topNav.logo.select')}>
             <Image
               src={logoFull}
               priority
@@ -183,7 +183,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
                 href='https://github.com/ClickHouse/ClickHouse?utm_source=clickhouse&utm_medium=website&utm_campaign=website-nav'
                 target='_blank'
                 className='hidden items-center gap-2 text-sm font-medium hover:text-primary-300 lg-mid:flex'
-                onClick={galaxyOnClick('topNav.navItems.githubSelect')}>
+                onClick={useGalaxyOnClick('topNav.navItems.githubSelect')}>
                 <GitHub />
                 {Intl.NumberFormat('en', {
                   notation: 'compact',
@@ -196,7 +196,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
               <CUILink
                 href='https://clickhouse.cloud/signIn'
                 className='w-full rounded border border-neutral-500 py-3 text-center text-sm font-medium leading-none hover:text-primary-300 md-mid:hidden md-mid:w-auto md-mid:border-0 md-mid:py-0 lg-mid:inline-block'
-                onClick={galaxyOnClick('topNav.navItems.signInSelect')}>
+                onClick={useGalaxyOnClick('topNav.navItems.signInSelect')}>
                 Sign in
               </CUILink>
               <CUIButton
@@ -205,7 +205,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
                 href='https://clickhouse.cloud/signUp?loc=nav-get-started'
                 className={`w-full md-mid:w-auto  ${eyebrow?.className || ''}`}
                 linkClass='w-full md-mid:w-auto'
-                onClick={galaxyOnClick('topNav.navItems.getStartedSelect')}>
+                onClick={useGalaxyOnClick('topNav.navItems.getStartedSelect')}>
                 <span id='nav-bar-cta-button'>Get started</span>
               </CUIButton>
             </div>

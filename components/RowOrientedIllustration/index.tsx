@@ -738,7 +738,6 @@ function RowOrientedIllustration({ className }: Props): JSX.Element {
         height='0'
         rx='2'
         fill='#FAFF69'>
-        //update
         <animate
           dur='1ms'
           fill='freeze'

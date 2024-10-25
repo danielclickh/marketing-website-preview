@@ -11,7 +11,7 @@ import { SuiText } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CUIButton } from '../../../components/ClickUI'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import Tilt from 'react-parallax-tilt'
 
 import HRSeparator from '../../../components/HRSeparator'
@@ -80,7 +80,7 @@ export default function LaunchWeekPage({
   headerData,
   footerData
 }: EventProps) {
-  galaxyOnPage('launchWeekMayPage')
+  useGalaxyOnPage('launchWeekMayPage')
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
@@ -94,7 +94,7 @@ export default function LaunchWeekPage({
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='bg-contain bg-center bg-no-repeat'>
           <div className='relative z-20 overflow-hidden bg-calendar bg-cover bg-top bg-no-repeat pt-14'>
-            <div className='container mx-auto flex-col px-4 pt-10 pb-16 lg:w-1/2'>
+            <div className='container mx-auto flex-col px-4 pb-16 pt-10 lg:w-1/2'>
               <div className='mb-6 flex justify-center'>
                 <h4 className='w-full max-w-[8rem] rounded-full border border-base-color py-1 text-center text-base font-medium'>
                   May 2024
@@ -136,7 +136,7 @@ export default function LaunchWeekPage({
             {releases.map((release) => (
               <>
                 <div className='mb-12 flex flex-col justify-center md:flex md:flex-row'>
-                  <div className='flex justify-start gap-4 pt-4 pb-4'>
+                  <div className='flex justify-start gap-4 pb-4 pt-4'>
                     <div className='flex'>
                       <CalendarIcon className='h-12 w-12 stroke-1 text-neutral-200' />
                     </div>
@@ -157,7 +157,7 @@ export default function LaunchWeekPage({
                     className='h-full'>
                     <div className='relative mx-auto flex h-auto w-full rounded-lg border border-neutral-700/80 bg-neutral-900 bg-opacity-30 p-4 shadow-card'>
                       {release.blurred && (
-                        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform text-lg font-semibold'>
+                        <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform text-lg font-semibold'>
                           Coming soon
                         </div>
                       )}

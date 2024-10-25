@@ -1,7 +1,7 @@
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import React from 'react'
-import { galaxyOnClick } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import { CUIButton } from '../ClickUI'
 import ColumnOrientedIllustration from '../ColumnOrientedIllustration'
 import RowOrientedIllustration from '../RowOrientedIllustration'
@@ -65,7 +65,7 @@ export default function HomepageSectionFast({
               className='pt-0.5 transition group-hover:translate-x-1/2'
             />
           }
-          onClick={galaxyOnClick('homePage.whyClickHouse.viewDocsSelect')}>
+          onClick={useGalaxyOnClick('homePage.whyClickHouse.viewDocsSelect')}>
           Read more in the docs
         </CUIButton>
       </div>

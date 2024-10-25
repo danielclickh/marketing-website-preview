@@ -18,7 +18,7 @@ import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import faqs from './faqs.json'
 import features from './features.json'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
@@ -59,7 +59,7 @@ export default function RealTimeAnalyticsPage({
   headerData,
   footerData
 }: RealTimeAnalyticsPageProps) {
-  galaxyOnPage('realTimeUseCasePage')
+  useGalaxyOnPage('realTimeUseCasePage')
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
@@ -193,7 +193,7 @@ export default function RealTimeAnalyticsPage({
                         &nbsp;
                       </span>
                       <div className='pl-6'>
-                        <Markdown children={faq.content} />
+                        <Markdown>{faq.content}</Markdown>
                       </div>
                     </div>
                   ))}
@@ -328,7 +328,7 @@ export default function RealTimeAnalyticsPage({
                         {feature.title}
                       </h3>
                       <div className='rich_content text-base text-neutral-200'>
-                        <Markdown children={feature.content} />
+                        <Markdown>{feature.content}</Markdown>
                       </div>
                     </div>
                   ))}
@@ -362,66 +362,58 @@ export default function RealTimeAnalyticsPage({
                       </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         href='/blog/real-time-event-streaming-with-confluent-cloud-clickhouse-and-clickpipes'
                         className='text-primary-300'>
                         Real-time event streaming with ClickHouse, Confluent
                         Cloud and ClickPipes
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         href='/blog/building-real-time-applications-with-clickhouse-and-hex-notebook-keeper-engine'
                         className='text-primary-300'>
                         Adding Real-Time Analytics to a Supabase Application
                         With ClickHouse
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        href='https://python.langchain.com/docs/integrations/vectorstores/clickhouse'
-                        className='text-primary-300'>
-                        Building Real-time Analytics Apps with ClickHouse and
-                        Hex
-                      </a>
-                    </li>
-                    <li>
-                      <a
+                      <Link
                         href='/blog/using-materialized-views-in-clickhouse'
                         className='text-primary-300'>
                         Using Materialized Views in ClickHouse
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         href='/blog/working-with-time-series-data-and-functions-ClickHouse'
                         className='text-primary-300'>
                         Working with Time Series Data in ClickHouse
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         href='/blog/clickhouse-postgresql-change-data-capture-cdc-part-1'
                         className='text-primary-300'>
                         Change Data Capture (CDC) with PostgreSQL and ClickHouse
                         - Part 1
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         href='/blog/clickhouse-postgresql-change-data-capture-cdc-part-2'
                         className='text-primary-300'>
                         Change Data Capture (CDC) with PostgreSQL and ClickHouse
                         - Part 2
-                      </a>
+                      </Link>
                     </li>{' '}
                     <li>
-                      <a
+                      <Link
                         href='/blog/how-cloudflare-processes-hundreds-of-millions-of-rows-per-second-with-clickhouse'
                         className='text-primary-300'>
                         How Cloudflare Processes Hundreds of Millions of Rows
                         per Second with ClickHouse
-                      </a>
+                      </Link>
                     </li>
                   </ol>
                 </div>

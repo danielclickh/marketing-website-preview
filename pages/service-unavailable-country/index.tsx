@@ -56,7 +56,7 @@ function ServiceUnavailableCountryPage({
           color='bg-neutral-950'
           shadow
           isRounded
-          className='mx-auto mt-16 mb-44 max-w-screen-sm px-6 py-10 text-center'>
+          className='mx-auto mb-44 mt-16 max-w-screen-sm px-6 py-10 text-center'>
           <div className='flex flex-col'>
             <SuiTitle type='h1' className='mb-3'>
               {title}
@@ -94,10 +94,9 @@ function ServiceUnavailableCountryPage({
 
               {formSuccess && (
                 <div ref={formSuccessRef}>
-                  <ReactMarkdown
-                    className='text-center'
-                    children='Thank you for submitting the form'
-                  />
+                  <ReactMarkdown className='text-center'>
+                    Thank you for submitting the form
+                  </ReactMarkdown>
                 </div>
               )}
             </>

@@ -14,7 +14,10 @@ import StatsHeroWithForm from '../../../../components/StatsHeroWithForm'
 import { SuiText, SuiTitle } from '../../../../components/sui'
 import { useClickOutside } from '../../../../hooks'
 import { findAll, findOne } from '../../../../lib/api/strapi'
-import { galaxyOnClick, galaxyOnPage } from '../../../../lib/galaxy/galaxy'
+import {
+  useGalaxyOnClick,
+  useGalaxyOnPage
+} from '../../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../../lib/utils/revalidationConfig'
 import logoFull from '../../../../public/logo-full.svg'
@@ -157,7 +160,7 @@ export default function BigQueryPerformancePage({
   customerStories
 }: BigQueryPerformancePageProps) {
   const gb = useGrowthBook()
-  galaxyOnPage(`${comparison.slug}PerformanceComparisonPage`)
+  useGalaxyOnPage(`${comparison.slug}PerformanceComparisonPage`)
   if (gb?.ready) {
     const testTarget = document.querySelector('#test-target')
 
@@ -183,6 +186,19 @@ export default function BigQueryPerformancePage({
   useClickOutside(modalInnerRef, () => {
     setIsModalOpen(false)
   })
+
+  const handleHeroCtaClick = useGalaxyOnClick(
+    `bigQueryPerformanceComparisonPage.heroCtaVariant${pageLayout}.perfPersonalizedSupportSelect`
+  )
+  const handleHeroSecondaryCtaClick = useGalaxyOnClick(
+    `bigQueryPerformanceComparisonPage.heroCtaVariant${pageLayout}.perfStartTrialSelect`
+  )
+  const handleFooterCtaClick = useGalaxyOnClick(
+    `bigQueryPerformanceComparisonPage.footerCtaVariant${pageLayout}.perfPersonalizedSupportSelect`
+  )
+  const handleFooterSecondaryCtaClick = useGalaxyOnClick(
+    `bigQueryPerformanceComparisonPage.footerCtaVariant${pageLayout}.perfStartTrialSelect`
+  )
 
   return (
     <div>
@@ -235,17 +251,13 @@ export default function BigQueryPerformancePage({
                   onClick() {
                     setModalFormLocValue(`hero-cta-perf-variant${pageLayout}`)
                     setIsModalOpen(true)
-                    galaxyOnClick(
-                      `bigQueryPerformanceComparisonPage.heroCtaVariant${pageLayout}.perfPersonalizedSupportSelect`
-                    )()
+                    handleHeroCtaClick()
                   },
                   text: 'Get personalized support'
                 }}
                 secondaryCta={{
                   onClick() {
-                    galaxyOnClick(
-                      `bigQueryPerformanceComparisonPage.heroCtaVariant${pageLayout}.perfStartTrialSelect`
-                    )()
+                    handleHeroSecondaryCtaClick()
                   },
                   target: '_blank',
                   href: `https://clickhouse.cloud/signUp?loc=${locTracking}-paid-perf-hero-variant${pageLayout}`,
@@ -581,9 +593,7 @@ export default function BigQueryPerformancePage({
                 onClick={() => {
                   setModalFormLocValue(`footer-cta-perf-variant${pageLayout}`)
                   setIsModalOpen(true)
-                  galaxyOnClick(
-                    `bigQueryPerformanceComparisonPage.footerCtaVariant${pageLayout}.perfPersonalizedSupportSelect`
-                  )()
+                  handleFooterCtaClick()
                 }}>
                 Get personalized support
               </CUIButton>
@@ -592,9 +602,7 @@ export default function BigQueryPerformancePage({
                 size='lg'
                 weight='semibold'
                 onClick={() => {
-                  galaxyOnClick(
-                    `bigQueryPerformanceComparisonPage.footerCtaVariant${pageLayout}.perfStartTrialSelect`
-                  )()
+                  handleFooterSecondaryCtaClick()
                 }}
                 href={`https://clickhouse.cloud/signUp?loc=${locTracking}-paid-footer-perf-variant${pageLayout}`}
                 target='_blank'

@@ -21,7 +21,7 @@ import { convertDateToString } from '../../../lib/utils/dateUtils'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { BlogProps } from '../../../types/blog'
 import { ParamsType } from '../../../types/homepage'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 export const getServerSideProps: GetServerSideProps<BlogProps> =
   async function getServerSideProps({ params }) {
@@ -120,7 +120,7 @@ export default function BlogPage({
   CloudCTAHeader,
   seo
 }: BlogProps) {
-  galaxyOnPage('blogPage')
+  useGalaxyOnPage('blogPage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-10'>

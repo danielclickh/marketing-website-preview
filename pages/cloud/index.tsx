@@ -19,7 +19,7 @@ import LogoCarousel from '../../components/LogoCarousel'
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import Lines from '../../components/ClickPipesAnimation/Lines'
-import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { BYOCSection } from '../../components/BYOCSection'
 
 export const getStaticProps: GetStaticProps<CloudData> =
@@ -72,7 +72,7 @@ export default function CloudPage({
     once: true
   })
 
-  galaxyOnPage('productCloudPage')
+  useGalaxyOnPage('productCloudPage')
   useEffect(() => {
     setWindowWidth(window.innerWidth)
     const handleResize = () => {

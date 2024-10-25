@@ -2,7 +2,7 @@ import { ChevronRightIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import React, { CSSProperties } from 'react'
 import { FullyQualifiedEvent } from '../../lib/galaxy/client'
-import { galaxyOnClick } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import { CUIButton, CUICard } from '../ClickUI'
 import { SuiTitle } from '../sui'
 
@@ -112,7 +112,8 @@ export default function HomepageSectionDeploy({
                     />
                   }
                   target={deploy.target}
-                  onClick={galaxyOnClick(deploy.event)}>
+                  // eslint-disable-next-line react-hooks/rules-of-hooks
+                  onClick={useGalaxyOnClick(deploy.event)}>
                   {deploy.btnText}
                 </CUIButton>
               </CUICard.Footer>

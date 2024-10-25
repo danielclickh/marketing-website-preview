@@ -14,7 +14,7 @@ import MarketoForm from '../../../components/MarketoForm'
 import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
 import { StrapiImage } from '../../../components/StrapiElements'
 import { findAll, getPathsValues } from '../../../lib/api/strapi'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import {
   NOT_FOUND_FALLBACK,
@@ -95,7 +95,7 @@ export default function ComparisonPage({
   seo,
   comparison
 }: ComparisonProps) {
-  galaxyOnPage(`${comparison.slug}ComparisonPage`)
+  useGalaxyOnPage(`${comparison.slug}ComparisonPage`)
   const formSuccessRef1 = useRef<HTMLDivElement | null>(null)
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
@@ -124,10 +124,9 @@ export default function ComparisonPage({
                   </div>
                 </div>
                 <div className='rich_content mb-12 mt-4 text-center text-base text-neutral-0 md:text-left'>
-                  <Markdown
-                    children={comparison.HeroDescription}
-                    className='text-lg'
-                  />
+                  <Markdown className='text-lg'>
+                    {comparison.HeroDescription}
+                  </Markdown>
                 </div>
 
                 {comparison.BigNumbers && (
@@ -227,7 +226,7 @@ export default function ComparisonPage({
                               {painpoint.Title}
                             </h3>
                             <div className='rich_content  text-neutral-0'>
-                              <Markdown children={painpoint.Description} />
+                              <Markdown>{painpoint.Description}</Markdown>
                             </div>
                           </div>
                           {painpoint.customer && (
@@ -242,11 +241,9 @@ export default function ComparisonPage({
                                       alt='Quote'
                                       className='mb-4'
                                     />{' '}
-                                    <ReactMarkdown
-                                      children={
-                                        painpoint.customer.description as string
-                                      }
-                                    />
+                                    <ReactMarkdown>
+                                      {painpoint.customer.description as string}
+                                    </ReactMarkdown>
                                     {painpoint.customer.logo && (
                                       <StrapiImage
                                         {...painpoint.customer.logo}
@@ -297,7 +294,9 @@ export default function ComparisonPage({
                           />
                         )}
                         <div className='rich-content-comparisons  text-neutral-0'>
-                          <ReactMarkdown children={testimonial.Description} />
+                          <ReactMarkdown>
+                            {testimonial.Description}
+                          </ReactMarkdown>
                         </div>
                       </div>
                     </div>
@@ -341,7 +340,7 @@ export default function ComparisonPage({
               </h3>
               {content.Description && (
                 <div className='rich_content mb-6'>
-                  <ReactMarkdown children={content.Description} />
+                  <ReactMarkdown>{content.Description}</ReactMarkdown>
                 </div>
               )}
 

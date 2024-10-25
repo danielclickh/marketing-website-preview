@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import EventsForm from './EventsForm'
 import { EventsContainerProps } from './types'
 
@@ -10,14 +10,25 @@ function EventsContainer({
   featuredImage
 }: EventsContainerProps) {
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [eventEnded, setEventEnded] = useState(false)
+
+  useEffect(() => {
+    const checkEventEnded = () => {
+      const hasEnded = new Date(localDatetime).valueOf() < Date.now()
+      setEventEnded(hasEnded)
+    }
+
+    checkEventEnded()
+    // Optionally, you can set up an interval to periodically check if the event has ended
+    // const intervalId = setInterval(checkEventEnded, 60000) // Check every minute
+
+    // return () => clearInterval(intervalId)
+  }, [localDatetime])
+
   const onSubmit = () => {
     setIsSubmitted(true)
-    setTimeout(() => {
-      window.scrollTo(0, 0)
-    }, 0)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
-
-  const eventEnded = new Date(localDatetime).valueOf() < Date.now()
 
   return (
     <div className='mx-auto flex w-full max-w-7xl flex-col px-4 pb-16 pt-24 sm:px-8 2xl:px-0'>
@@ -31,6 +42,7 @@ function EventsContainer({
           form={form}
           featuredImage={featuredImage}
           recordedVimeoUrl={recordedVimeoUrl}
+          eventEnded={eventEnded}
         />
       </div>
     </div>

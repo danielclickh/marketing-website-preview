@@ -1,3 +1,4 @@
+import React from 'react'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { Person } from '../../../components/person_area'
 import { findOne } from '../../../lib/api/strapi'
@@ -12,7 +13,7 @@ import Image from 'next/image'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import styles from './styles.module.scss'
 import { CUIButton } from '../../../components/ClickUI'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<OurStoryData> =
   async function getStaticProps() {
@@ -52,7 +53,7 @@ export default function OurStoryPage({
   headerData,
   seo
 }: OurStoryData) {
-  galaxyOnPage('ourStoryPage')
+  useGalaxyOnPage('ourStoryPage')
 
   return (
     <>

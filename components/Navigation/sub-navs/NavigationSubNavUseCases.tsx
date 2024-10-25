@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { galaxyOnClick } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
 import LinkWithArrow from '../../LinkWithArrow'
 import { NavigationLink, NavigationQuote, NavigationQuoteProps } from '../parts'
 
@@ -36,6 +36,10 @@ export default function NavigationSubNavUseCases() {
 
   const [quote, setQuote] = useState<null | UseCaseQuote>(null)
 
+  const handleUserStoriesQuoteSelect = useGalaxyOnClick(
+    'topNav.useCasesMenu.userStoriesQuoteSelect'
+  )
+
   return (
     <>
       <div
@@ -50,7 +54,7 @@ export default function NavigationSubNavUseCases() {
             className='col-span-2'>
             <NavigationLink
               href='/use-cases/real-time-analytics'
-              onClick={galaxyOnClick(
+              onClick={useGalaxyOnClick(
                 'topNav.useCasesMenu.realTimeAnalyticsSelect'
               )}
               className='block w-full'>
@@ -64,7 +68,7 @@ export default function NavigationSubNavUseCases() {
             className='col-span-2'>
             <NavigationLink
               href='/use-cases/machine-learning-and-data-science'
-              onClick={galaxyOnClick(
+              onClick={useGalaxyOnClick(
                 'topNav.useCasesMenu.machineLearningSelect'
               )}
               className='block w-full'>
@@ -79,7 +83,7 @@ export default function NavigationSubNavUseCases() {
             className='col-span-2'>
             <NavigationLink
               href='/use-cases/business-intelligence'
-              onClick={galaxyOnClick('topNav.useCasesMenu.bizIntelSelect')}
+              onClick={useGalaxyOnClick('topNav.useCasesMenu.bizIntelSelect')}
               className='block w-full'>
               Business intelligence
             </NavigationLink>
@@ -91,7 +95,7 @@ export default function NavigationSubNavUseCases() {
             className='col-span-2'>
             <NavigationLink
               href='/use-cases/logging-and-metrics'
-              onClick={galaxyOnClick(
+              onClick={useGalaxyOnClick(
                 'topNav.useCasesMenu.loggingAndMetricsSelect'
               )}
               className='block w-full'>
@@ -106,7 +110,9 @@ export default function NavigationSubNavUseCases() {
             {/* This is the mobile link, the desktop link is futher down */}
             <NavigationLink
               href='/use-cases'
-              onClick={galaxyOnClick('topNav.useCasesMenu.allUseCasesSelect')}
+              onClick={useGalaxyOnClick(
+                'topNav.useCasesMenu.allUseCasesSelect'
+              )}
               className='block w-full'>
               All use cases
             </NavigationLink>
@@ -119,9 +125,7 @@ export default function NavigationSubNavUseCases() {
             link={{
               href: '/user-stories',
               text: 'View more user stories',
-              onClick: galaxyOnClick(
-                'topNav.useCasesMenu.userStoriesQuoteSelect'
-              )
+              onClick: handleUserStoriesQuoteSelect
             }}>
             {quote?.children}
           </NavigationQuote>
@@ -132,7 +136,7 @@ export default function NavigationSubNavUseCases() {
       <LinkWithArrow
         prefetch={false}
         href='/use-cases'
-        onClick={galaxyOnClick('topNav.useCasesMenu.allUseCasesSelect')}
+        onClick={useGalaxyOnClick('topNav.useCasesMenu.allUseCasesSelect')}
         className='hidden w-full rounded-b-lg border-t border-neutral-700 px-6 py-2.5 text-sm font-medium transition-colors hover:bg-neutral-700/25 hover:text-primary-300 md-mid:block'>
         All use cases
       </LinkWithArrow>

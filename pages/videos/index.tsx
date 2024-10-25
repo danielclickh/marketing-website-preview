@@ -10,7 +10,7 @@ import { SuiSearchField, SuiTitle } from '../../components/sui'
 import { useDebounce } from '../../hooks'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { VideosApiResponse, VideosPageProps } from '../../types/videos'
-import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { fetchVideos } from '../api/videos'
 
 export const getServerSideProps: GetServerSideProps<VideosPageProps> =
@@ -42,7 +42,7 @@ export default function VideosPage({
   headerData,
   footerData
 }: VideosPageProps) {
-  galaxyOnPage('videosPage')
+  useGalaxyOnPage('videosPage')
 
   const router = useRouter()
 

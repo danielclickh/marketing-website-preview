@@ -18,7 +18,7 @@ import { SuiText, SuiTitle } from '../../components/sui'
 import { findOne } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { LearnProps } from '../../types/learn'
-import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<LearnProps> =
   async function getStaticProps() {
@@ -79,9 +79,9 @@ function TrainingCard(props: TrainingCardProps) {
         <p className='text-sm'>{props.description}</p>
       </CUICard.Body>
       <CUICard.Footer className='relative z-10'>
-        {props.perks.map((perk) => {
+        {props.perks.map((perk, index) => {
           return (
-            <div className='mt-2 flex items-start gap-2'>
+            <div key={index} className='mt-2 flex items-start gap-2'>
               <Certificate
                 style={{ width: '20px', height: 'auto' }}
                 className='mt-1 flex-shrink-0 flex-grow-0 text-primary'
@@ -297,7 +297,7 @@ export default function LearnPage({
   customerStories,
   seo
 }: LearnProps) {
-  galaxyOnPage('learnPage')
+  useGalaxyOnPage('learnPage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>

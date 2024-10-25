@@ -7,7 +7,7 @@ import { ContactProps } from '../../../types/contact'
 import Layout from '../../../components/Layout'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import HRSeparator from '../../../components/HRSeparator'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import MarketoForm, {
   SpoofedMarketoObject
 } from '../../../components/MarketoForm'
@@ -40,7 +40,7 @@ export default function TrialExtensionPage({
   seo
 }: ContactProps) {
   const router = useRouter()
-  galaxyOnPage('trialExtensionPage')
+  useGalaxyOnPage('trialExtensionPage')
 
   const { orgId, email } = router.query
 

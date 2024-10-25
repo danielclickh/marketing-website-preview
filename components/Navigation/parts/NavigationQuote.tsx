@@ -47,7 +47,7 @@ export default function NavigationQuote({
           />
         )
       case 'object':
-        return <Image {...logo} />
+        return <Image {...logo} alt='Quote logo' />
       default:
         return <>{logo}</>
     }
