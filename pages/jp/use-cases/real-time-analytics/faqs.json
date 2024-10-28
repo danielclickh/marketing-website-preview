@@ -1,18 +1,18 @@
 [
   {
     "id": 1,
-    "content": "<span class='text-white'>Best-in-class query performance</span> <span class='text-[#8D8D8D]'>that your mission-critical and time-sensitive applications can depend on.</span>"
+    "content": "トップクラスのクエリパフォーマンス。ミッションクリティカルで遅延の許されないアプリケーションにも安心してお使いいただけます。"
   },
   {
     "id": 2,
-    "content": "<span class='text-white'>Built for continuous ingest</span> <span class='text-[#8D8D8D]'>with native integrations and managed pipelines for your favorite streaming sources.</span>"
+    "content": "ネイティブなインテグレーションと管理されたパイプラインを備え、、お望みのストリーミングソースからの継続的なインジェストが可能です。"
   },
   {
     "id": 3,
-    "content": "<span class='text-white'>High query concurrency</span> <span class='text-[#8D8D8D]'>so you can build interactive apps your users love without worrying about responsiveness at scale.</span>"
+    "content": "クエリ同時実行数も十分です。規模が拡大した後のレスポンスを心配することなく対話型のアプリを作成できます。"
   },
   {
     "id": 4,
-    "content": "<span class='text-white'>Use the tools you love</span> <span class='text-[#8D8D8D]'>through our extensive ecosystem of integrations, including popular products like Tableau, Metabase, DBT, and many more.</span>"
+    "content": "豊富なインテグレーションをご用意。Tableau、Metabase、DBTなど、人気の高いツールを選んでご利用いただけます。"
   }
 ]

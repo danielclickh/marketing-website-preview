@@ -3,13 +3,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 import { CUIButton } from '../../../../components/ClickUI'
-import GetStartedFree from '../../../../components/GetStartedFree'
-import Layout from '../../../../components/Layout'
+import GetStartedFree from '../../../../components/jp/GetStartedFree'
+import Layout from '../../../../components/jp/Layout'
 import LogoCarousel from '../../../../components/LogoCarousel'
 import Markdown from '../../../../components/Markdown'
 import QuoteCard from '../../../../components/QuoteCard'
-import AccordionComponent from '../../../../components/RealTimeDiagram/Accordion'
-import Feature from '../../../../components/RealTimeDiagram/feature-check'
+import AccordionComponent from '../../../../components/jp/RealTimeDiagram/Accordion'
+import Feature from '../../../../components/jp/RealTimeDiagram/feature-check'
 import { SuiText, SuiTitle } from '../../../../components/sui'
 import { findOne } from '../../../../lib/api/strapi'
 import { getCommonProps } from '../../../../lib/utils/getCommonProps'
@@ -40,9 +40,9 @@ export const getStaticProps: GetStaticProps<RealTimeAnalyticsPageProps> =
     const data = await findOne('homepage', params)
 
     data.seo.path = '/use-cases/real-time-analytics'
-    data.seo.title = 'Real-time Analytics with ClickHouse'
+    data.seo.title = 'ClickHouseによるリアルタイム分析'
     data.seo.description =
-      'Ingest millions of rows per second. Handle the most heavily concurrent workloads. All without compromising query speed.'
+      '1 秒あたり数百万行を取り込み、最も負荷の高い同時ワークロードを処理します。クエリ速度を犠牲にすることなくすべてを実現します。'
 
     const commonProps = await getCommonProps()
     return {
@@ -78,20 +78,18 @@ export default function RealTimeAnalyticsPage({
                 <div className='flex-col xl:mt-16'>
                   <div className='w-full lg:max-w-xl xl:max-w-full'>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                      <Link href='/use-cases'>Use cases</Link> / Real-time
-                      analytics
+                      <Link href='/jp/use-cases'>すべてのユースケース</Link> /
+                      リアルタイム分析
                     </h4>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-xl lg:text-left'>
-                      Real-time analytics with ClickHouse
+                      ClickHouseによるリアルタイム分析
                     </h1>
                     <SuiText
                       size='base'
                       color='secondary'
                       className='mt-6 text-center md:pr-16 lg:text-left'>
                       <p className='mb-6 max-w-2xl font-normal'>
-                        Ingest millions of rows per second. Handle the most
-                        heavily concurrent workloads. All&nbsp;without
-                        compromising query speed.
+                        毎秒数百万行のデータをインジェストしても、同時実行処理の負荷がどれほど高くても、クエリの速度が低下しない
                       </p>
                     </SuiText>
                   </div>
@@ -126,7 +124,7 @@ export default function RealTimeAnalyticsPage({
                         target='_blank'
                         linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                         className='w-full'>
-                        Get started today
+                        開始する
                       </CUIButton>
                       <CUIButton
                         type='secondary'
@@ -136,7 +134,7 @@ export default function RealTimeAnalyticsPage({
                         target='_self'
                         linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
                         className='w-full'>
-                        Contact sales
+                        お問合せ
                       </CUIButton>
                     </div>
                   </div>
@@ -168,16 +166,10 @@ export default function RealTimeAnalyticsPage({
                   height={72}
                 />
                 <h2 className='text-left font-basier text-2xl font-semibold lg:text-4xl xl:max-w-[515px]'>
-                  The real-time database that truly shines at scale. Count on
-                  blazing performance when low latency{' '}
-                  <span className='tilted tilted-yellow'>
-                    <span className='tilted-content leading-8'>really</span>
-                  </span>{' '}
-                  matters.
+                  スケールで真価を発揮するリアルタイムデータベース。低遅延が重要な時に、驚異的なパフォーマンスを実現できます。
                 </h2>
                 <p className='mt-6 xl:max-w-[445px]'>
-                  Discover why companies are choosing ClickHouse for their
-                  real-time analytics applications.
+                  多くの企業がリアルタイム分析アプリケーションにClickHouseを選ぶ理由をご覧ください。
                 </p>
               </div>
               <div>
@@ -261,10 +253,7 @@ export default function RealTimeAnalyticsPage({
             <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
               <div className='flip-selection mx-auto flex flex-col text-center'>
                 <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
-                  Trusted by developers that work with data at{' '}
-                  <span className='tilted tilted-black'>
-                    <span className='tilted-content leading-8'>scale</span>
-                  </span>
+                  大規模なデータを扱う開発者から信頼をいただいています。
                 </div>
               </div>
             </div>
@@ -291,12 +280,10 @@ export default function RealTimeAnalyticsPage({
                   height={73}
                 />
                 <SuiTitle type='h2' className='mt-8 text-center'>
-                  Real-time applications and dashboards
+                  リアルタイムアプリケーションとダッシュボード
                 </SuiTitle>
                 <p className='mx-auto mb-12 max-w-3xl px-9 pt-6 text-center text-sm'>
-                  ClickHouse is used across industries to power systems and
-                  applications where real-time analysis, evaluation, and
-                  querying are critical.
+                  ClickHouseは、リアルタイム分析、評価、クエリが重要なシステムやアプリケーションを支えるために、様々な業界で使用されています。
                 </p>
                 <div className='mb-12 flex w-full flex-col gap-6 px-8 lg:flex-row lg:px-6 xl:px-0'>
                   {[10, 20, 30].map((section) => (
@@ -343,14 +330,10 @@ export default function RealTimeAnalyticsPage({
             <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-right bg-no-repeat px-4 py-16 xl:px-24'>
               <div className='flex flex-col text-center'>
                 <SuiTitle type='h2' color='white'>
-                  Supporting{' '}
-                  <span className='tilted tilted-yellow'>
-                    <span className='tilted-content'>references</span>
-                  </span>{' '}
+                  サポートリファレンス
                 </SuiTitle>
                 <div className='mx-auto mb-8 mt-6 max-w-2xl text-center text-neutral-300'>
-                  For detailed guides about how to get started with ClickHouse
-                  for real-time analytics workloads, follow along in our blog:
+                  ClickHouseによる以下のブログに、ClickHouseをリアルタイムデータ分析処理に導入する方法について詳しく説明されています。
                 </div>
                 <div className='bg-neutral-725 p-8'>
                   <ol className='list-decimal space-y-2 text-left	text-primary-300'>
@@ -430,12 +413,7 @@ export default function RealTimeAnalyticsPage({
           </div>
 
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
-            <GetStartedFree
-              href='https://clickhouse.cloud/signUp?loc=real-time-use-case-getstarted-footer'
-              textBefore='Get started with ClickHouse'
-              textSlanted='Cloud'
-              textAfter='for free'
-            />
+            <GetStartedFree href='https://clickhouse.cloud/signUp?loc=real-time-use-case-getstarted-footer' />
           </div>
         </div>
       </Layout>

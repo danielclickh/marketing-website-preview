@@ -1,26 +1,26 @@
 [
     {
         "id": 10,
-        "title": "Data Ingestion",
-        "content": "For bulk data loads between ClickHouse and a traditional data warehouse, companies commonly leverage an object store such as S3 as the intermediary, ingesting data into ClickHouse via the S3 (or corresponding alternative) table engine. Generally, Parquet files are used, as ClickHouse’s unparalleled Parquet reading performance allows data to be loaded at hundreds of millions of files per second.",
+        "title": "データインジェスト",
+        "content": "ClickHouseと他のデータウェアハウスとの間で大量データをロードするために、多くの企業がS3などのオブジェクトを介在させて使用し、S3（または同等の）テーブルエンジンを経由してClickHouseにデータをインジェストしています。一般的にParquetファイルが使用され、ClickHouseではParquetの読み取りパフォーマンスが抜群に高く、秒間何億ファイルものデータをロードすることができます。",
         "icon": "/images/use-cases/ml-and-ds/tools.svg"
     },
     {
         "id": 20,
-        "title": "Data Transformations",
-        "content": "Materialized Views in ClickHouse make data transformations - common pillars in business intelligence or analytics workflows - seamless. Automatically triggered when new data is inserted into source tables, these SQL-based views are used to easily extract, aggregate, and modify data as it arrives. Leveraging Materialized Views means there is no need to build and manage bespoke data transformation pipelines yourself.\n\nOur extensive suite of integrations makes it easy to use the tools and services you already rely on directly with Clickhouse. For example, with ClickHouse's DBT integration, you can effortlessly migrate your existing DBT jobs to run on ClickHouse.",
+        "title": "データの変換",
+        "content": "マテリアライズドビューは、ビジネスインテリジェンスや分析処理でのシームレスなデータの変換に欠かせない機能です。ソーステーブルに新しいデータが取り込まれるとSQLベースのビューが自動的にトリガーされ、取り込んだデータを簡単に抽出、集計、変更することができます。このマテリアライズドビューを活用することで、データ変換パイプラインを自前で構築する必要がありません。\n\n拡大中のインテグレーションライブラリから、使い慣れたツールやサービスをClickhouseでそのまま使用できます。たとえばClickHouseのDBT統合を使用し、既存のDBTジョブをClickHouseで実行することも簡単にできます。",
         "icon": "/images/use-cases/logging/ingest.svg"
     },
     {
         "id": 30,
-        "title": "Querying",
-        "content": "With ClickHouse, you can query data directly from object stores like S3 and GCS, or from data lakes with formats such as Iceberg, Delta Lake, and Hudi.\n\nQueries on Materialized Views are exceptionally fast, as their summarized results are automatically stored in new tables. This ensures that applications that rely on these queries are even more responsive, no matter how many petabytes of data are being analyzed. While other database providers hide valuable accelerating features behind higher pricing tiers or additional charges, Clickhouse Cloud offers these out of the box.\n\nThe ClickHouse Query Cache is available for further enhanced responsiveness and reduced resource consumption, and is best suited for frequently used and expensive queries. Additional tuning through indexes and projections provides additional optimizations to ensure ultimate performance, every time.",
+        "title": "クエリの実行",
+        "content": "S3やGCSなどのオブジェクトストアのほか、Iceberg、Delta Lake、Hudiなどのフォーマットされたデータレイクからデータを直接クエリできます。\n\nマテリアライズドビューでクエリを実行すると、集計された結果が新しいテーブルに自動的に保存されるため、驚くほど速度が上がります。これを使用してアプリケーションを構築すれば、レスポンスがさらに上がり、ペタバイト規模のデータを分析する場合でも速度が低下しません。これほど価値の高い機能を使用しても、ClickHouseなら他のプロバイダーのように価格帯が上がることも、追加料金が適用されることもありません。\n\nClickHouseのクエリキャッシュ機能を使用すれば、レスポンスがより一層高まると同時に、リソースの消費も減らせます。これは頻繁に使用される高コストのクエリに最適です。また、インデックスやプロジェクションの機能を使用した追加の調整により、パフォーマンスを極限まで常に高めることができます。",
         "icon": "/images/use-cases/logging/manage.svg"
     },
     {
         "id": 40,
-        "title": "Integrations",
-        "content": "Leveraging the tools and frameworks you love with ClickHouse is easy with our extensive ecosystem of integrations. Whether your go-to is Tableau, Looker, or another tool that supports the MySQL interface - ClickHouse has you covered.\n\nUnlike traditional databases, ClickHouse supports a REST interface, allowing web developers to build lightweight applications on ClickHouse without the need to integrate with complex binary protocols. Flexible RBAC and quota controls mean read-only tables can be exposed publicly for client-side fetching of data.\n\nClickHouse is relied on by companies all over the world to unlock value from data as soon as it arrives, powering live dashboards and business intelligence workflows across a wide range of industries, from financial services to gaming, e-commerce, and many more.",
+        "title": "インテグレーション",
+        "content": "Tableau、Looker、あるいはMySQLインターフェース対応ツールなど、使い慣れたツールやフレームワークを簡単に使用できるよう、ClickHouseには広範なインテグレーションを集めたエコシステムが用意されています。\n\n従来のデータベースとは異なり、RESTインターフェースをサポートし、複雑なバイナリプロトコルとの統合なしに、軽量なウェブアプリケーションをClickHouse上で開発することができます。柔軟なRBACとクオータ管理により、読み取り専用テーブルを公開してクライアント側でデータを取得することも可能です。 \n\nClickHouseは、データをすばやく取り込み、リアルタイムのダッシュボードやビジネスインテリジェンスのワークフローに活用できるため、金融サービス、ゲーム、Eコマースなど、世界中でさまざまな分野の企業に利用されています。",
         "icon": "/images/use-cases/ml-and-ds/tools.svg"
     }
 ]

@@ -2,21 +2,21 @@
   {
     "id": 10,
     "icon": "/images/use-cases/logging/ingest.svg",
-    "content": "**Best-in-class ingestion rates** built to handle continuous streams of data so you can rely on the most up-to-date information to fuel accurate predictions and results."
+    "content": "最高クラスのデータ取り込み速度を実現しており、継続的なデータストリームを処理するように設計されています。これにより、最新の情報に基づいて正確な予測と結果を生み出すことができます。"
   },
   {
     "id": 20,
     "icon": "/images/use-cases/logging/gauge-light.svg",
-    "content": "**Unparalleled query performance at scale**. Query billions of rows in milliseconds. Reduce iteration times and maximize efficiency with your data."
+    "content": "スケールにおける圧倒的なクエリ性能。数十億行のデータをミリ秒単位でクエリできます。イテレーション時間を減らして最大限に効率を高めます。"
   },
   {
     "id": 30,
     "icon": "/images/use-cases/logging/trend-up-light.svg",
-    "content": "**Powerful automatic scaling** that's designed to handle unpredictable workloads. Focus on machine learning without worrying about your infrastructure."
+    "content": "予測不可能なワークロードに対応する強力な自動スケーリング。インフラを気にせず、機械学習に集中できます。"
   },
   {
     "id": 40,
     "icon": "/images/use-cases/ml-and-ds/native-support.svg",
-    "content": "Available as an **in-process OLAP SQL engine for Python**. Leverage the full power of ClickHouse, directly in your Python code with [chDB](/blog/welcome-chdb-to-clickhouse)."
+    "content": "Python向けのインプロセスOLAP SQLエンジンとして利用可能です。Pythonコード内でClickHouseのすべてのパワーを利用できるChDBでダイレクトに活用できます。"
   }
 ]

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import AccordionComponent from '../../../components/AccordionComponent'
 import { CUIButton, CUICard } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
-import Layout from '../../../components/Layout'
+import Layout from '../../../components/jp/Layout'
 import { StrapiImage } from '../../../components/StrapiElements'
 import UseCasesComparisons from '../../../components/UseCasesComparisons'
 import { findAll, findOne } from '../../../lib/api/strapi'
@@ -118,11 +118,10 @@ function UseCasesPage({
 
   const getUseCaseLink = (useCaseTitle: string | undefined | null) => {
     const map: Record<string, string> = {
-      'Business intelligence': '/use-cases/business-intelligence',
-      'Logs, events, and traces': '/use-cases/logging-and-metrics',
-      'Machine learning and GenAI':
-        '/use-cases/machine-learning-and-data-science',
-      'Real-time analytics': '/use-cases/real-time-analytics'
+      ビジネスインテリジェンス: '/use-cases/business-intelligence',
+      'ログ、イベント、トレース': '/use-cases/logging-and-metrics',
+      '機械学習 & 生成AI': '/use-cases/machine-learning-and-data-science',
+      リアルタイム分析: '/use-cases/real-time-analytics'
     }
 
     return useCaseTitle ? map?.[useCaseTitle] || null : null
@@ -182,7 +181,7 @@ function UseCasesPage({
                                     className='pt-0.5 transition group-hover:translate-x-1/2'
                                   />
                                 }>
-                                Learn more
+                                詳しく見る
                               </CUIButton>
                             </div>
                           )}

@@ -4,9 +4,9 @@ import Link from 'next/link'
 import React, { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { CUIButton } from '../../../../components/ClickUI'
-import GetStartedFree from '../../../../components/GetStartedFree'
-import Layout from '../../../../components/Layout'
-import AccordionComponent from '../../../../components/MLDiagram/Accordion'
+import GetStartedFree from '../../../../components/jp/GetStartedFree'
+import Layout from '../../../../components/jp/Layout'
+import AccordionComponent from '../../../../components/jp/MLDiagram/Accordion'
 import LogoCarousel from '../../../../components/LogoCarousel'
 import Markdown from '../../../../components/Markdown'
 import QuoteCard from '../../../../components/QuoteCard'
@@ -38,11 +38,11 @@ export const getStaticProps: GetStaticProps<MLProps> =
 
     const data = await findOne('homepage', params)
 
-    data.seo.path = '/use-cases/machine-learning-and-data-science'
+    data.seo.path = '/jp/use-cases/machine-learning-and-data-science'
     data.seo.title =
-      'Machine learning and GenAI with ClickHouse | ClickHouse for ML and data science'
+      'ClickHouse による機械学習と GenAI | ML とデータ サイエンスのための ClickHouse'
     data.seo.description =
-      "The ultimate real-time database to power Machine Learning workloads. With ClickHouse, it's easier than ever to unleash GenAI on your analytics data."
+      '機械学習ワークロードを強化する究極のリアルタイム データベース。ClickHouse を使用すると、分析データに GenAI を活用することがこれまで以上に簡単になります。'
     data.seo.image = [{ url: '/images/og-ml-ds.png' }]
 
     const commonProps = await getCommonProps()
@@ -80,20 +80,18 @@ export default function MLUseCasePage({
                 <div className='flex-col xl:mt-16'>
                   <div className='w-full lg:max-w-xl xl:max-w-full'>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                      <Link href='/use-cases'>Use cases</Link> / Machine
-                      learning and GenAI
+                      <Link href='/use-cases'>すべてのユースケース</Link> /
+                      機械学習と生成AI
                     </h4>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-lg lg:text-left'>
-                      Machine learning and GenAI
+                      機械学習と生成AI
                     </h1>
                     <SuiText
                       size='base'
                       color='secondary'
                       className='mt-6 text-center md:pr-16 lg:text-left'>
                       <p className='mb-6 font-normal'>
-                        The ultimate real-time database to power Machine
-                        Learning workloads. With ClickHouse, it's easier than
-                        ever to unleash GenAI on your analytics data.
+                        機械学習ワークロードを支える究極のリアルタイムデータベース。ClickHouseを使えば、生成AIのデータ分析能力を簡単にどこまでも引き出せます。
                       </p>
                     </SuiText>
                   </div>
@@ -128,7 +126,7 @@ export default function MLUseCasePage({
                         target='_blank'
                         linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                         className='w-full'>
-                        Get started today
+                        開始する
                       </CUIButton>
                       <CUIButton
                         type='secondary'
@@ -138,7 +136,7 @@ export default function MLUseCasePage({
                         target='_self'
                         linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
                         className='w-full'>
-                        Contact sales
+                        お問合せ
                       </CUIButton>
                     </div>
                   </div>
@@ -161,8 +159,7 @@ export default function MLUseCasePage({
         <div className='bg-neutral-725 text-neutral-0'>
           <div className='container mx-auto max-w-5xl px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
             <h2 className='text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
-              Find out why companies are using ClickHouse to power their AI
-              workloads.
+              次のような理由により、AIワークロードの強化にClickHouseが利用されています。
             </h2>
           </div>
           <div className='mx-auto flex max-w-6xl flex-col gap-5 pb-24 md:flex-row'>
@@ -242,10 +239,7 @@ export default function MLUseCasePage({
             <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
               <div className='flip-selection mx-auto flex flex-col text-center'>
                 <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
-                  Trusted by developers that work with data at{' '}
-                  <span className='tilted tilted-black'>
-                    <span className='tilted-content leading-8'>scale</span>
-                  </span>
+                  大規模なデータを扱う開発者から信頼をいただいています。
                 </div>
               </div>
             </div>
@@ -295,14 +289,10 @@ export default function MLUseCasePage({
             <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-right bg-no-repeat px-4 py-16 xl:px-24'>
               <div className='flex flex-col text-center'>
                 <SuiTitle type='h2' color='white'>
-                  Supporting{' '}
-                  <span className='tilted tilted-yellow'>
-                    <span className='tilted-content'>references</span>
-                  </span>{' '}
+                  サポートリファレンス
                 </SuiTitle>
                 <div className='mx-auto mb-8 mt-6 max-w-2xl text-center text-neutral-300'>
-                  For detailed guides about how to get started with ClickHouse
-                  for ML, follow along in our blog:
+                  ClickHouseによる以下のブログに、機械学習のためにClickhouseを導入する方法について詳しく説明されています。
                 </div>
                 <div className='bg-neutral-725 p-8'>
                   <ol className='list-decimal space-y-2 text-left	text-primary-300'>
@@ -403,12 +393,7 @@ export default function MLUseCasePage({
           </div>
 
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
-            <GetStartedFree
-              href='https://clickhouse.cloud/signUp?loc=ml-and-ds-use-case-getstarted-footer'
-              textBefore='Get started with ClickHouse'
-              textSlanted='Cloud'
-              textAfter='for free'
-            />
+            <GetStartedFree href='https://clickhouse.cloud/signUp?loc=ml-and-ds-use-case-getstarted-footer' />
           </div>
         </div>
       </Layout>

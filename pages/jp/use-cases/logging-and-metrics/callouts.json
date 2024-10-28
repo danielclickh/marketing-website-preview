@@ -1,26 +1,26 @@
 [
     {
         "id": 10,
-        "title": "Ingest data seamlessly",
-        "content": "ClickHouse is designed to handle huge volumes of continuous streams of ingest data, supporting ingestion rates of gigabytes per second. Seamlessly connect your external data sources to ClickHouse Cloud with [ClickPipes](/cloud/clickpipes).",
+        "title": "データインジェストをシームレスに",
+        "content": "ClickHouseは、膨大な量の継続的なデータストリームを処理するために設計されており、毎秒数ギガバイトのインジェストをサポートしています。[ClickPipes](/cloud/clickpipes)を使用すれば、外部データソースをClickHouse Cloudにシームレスに接続できます。",
         "icon": "/images/use-cases/logging/ingest.svg"
     },
     {
         "id": 20,
-        "title": "Leverage resources efficiency",
-        "content": "ClickHouse is purpose-built to deliver the most efficient utilization of resources, which results in significant cost savings. Unlike other JVM-based solutions, ClickHouse can exploit the full resources of a machine and scale both horizontally and vertically to systems with hundreds of cores and petabytes of storage.",
+        "title": "リソースの効率的な使用",
+        "content": "ClickHouseにはリソースの使用を効率化することでコストを大幅に削減させるという重要な目的があります。JVMベースのソリューションとは異なり、ClickHouseではマシンのリソースを最大限に活用できるほか、システムを水平と垂直の両方向に拡張し、数百のCPUコアとペタバイト規模のストレージを追加することが可能です。",
         "icon": "/images/use-cases/logging/media-library-folder.svg"
     },
     {
         "id": 30,
-        "title": "Manage data flexibly",
-        "content": "ClickHouse’s column-oriented design delivers best-in-class compression ratios, reducing storage burden and further accelerating query performance. [Flexible storage policies](https://clickhouse.com/docs/en/integrations/s3) and [MergeTree table engines](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/mergetree#table_engine-mergetree-multiple-volumes) allow data to reside on local disks for defined periods before migrating to object storage, creating “hot” and “cold” tiers to balance query performance and storage efficiency.",
+        "title": "データを柔軟に管理",
+        "content": "カラム指向デザインによるトップクラスの圧縮率がストレージの負荷を削減し、クエリパフォーマンスをより一層加速させます。ストレージにポリシーを柔軟に適用できるほか、MergeTreeのテーブルエンジンも用意されているため、データを一定期間ローカルディスクに保存してからオブジェクトストレージに移行する、つまりデータをホットとコールドの層に分けることで、パフォーマンスとストレージ効率のバランスを取りながらクエリを実行することが可能です。 ",
         "icon": "/images/use-cases/logging/manage.svg"
     },
     {
         "id": 40,
-        "title": "Unlock your real-time analytics",
-        "content": "ClickHouse is designed from the ground up to power the most intensive real-time workloads. Combine our extensive suite of aggregation and analytical functions with optimizations to further accelerate queries and ensure blazingly-fast data analysis for critical workloads.",
+        "title": "リアルタイム分析",
+        "content": "ClickHouseはどれほど負荷が高くてもリアルタイムで処理を実行できるように設計されています。集計関数と分析関数が豊富に用意されているため、クエリがさらに加速し、遅延の許されない重要なデータ分析処理を超高速で処理できます。",
         "icon": "/images/use-cases/logging/realtime.svg"
     }
 ]

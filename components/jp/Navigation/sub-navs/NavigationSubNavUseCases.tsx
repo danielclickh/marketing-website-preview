@@ -49,7 +49,7 @@ export default function NavigationSubNavUseCases() {
             }}
             className='col-span-2'>
             <NavigationLink
-              href='/use-cases/real-time-analytics'
+              href='/jp/use-cases/real-time-analytics'
               onClick={galaxyOnClick(
                 'topNav.useCasesMenu.realTimeAnalyticsSelect'
               )}
@@ -63,7 +63,7 @@ export default function NavigationSubNavUseCases() {
             }}
             className='col-span-2'>
             <NavigationLink
-              href='/use-cases/machine-learning-and-data-science'
+              href='/jp/use-cases/machine-learning-and-data-science'
               onClick={galaxyOnClick(
                 'topNav.useCasesMenu.machineLearningSelect'
               )}
@@ -78,7 +78,7 @@ export default function NavigationSubNavUseCases() {
             }}
             className='col-span-2'>
             <NavigationLink
-              href='/use-cases/business-intelligence'
+              href='/jp/use-cases/business-intelligence'
               onClick={galaxyOnClick('topNav.useCasesMenu.bizIntelSelect')}
               className='block w-full'>
               ビジネスインテリジェンス
@@ -90,7 +90,7 @@ export default function NavigationSubNavUseCases() {
             }}
             className='col-span-2'>
             <NavigationLink
-              href='/use-cases/logging-and-metrics'
+              href='/jp/use-cases/logging-and-metrics'
               onClick={galaxyOnClick(
                 'topNav.useCasesMenu.loggingAndMetricsSelect'
               )}
@@ -105,7 +105,7 @@ export default function NavigationSubNavUseCases() {
             className='col-span-2 md-mid:hidden'>
             {/* This is the mobile link, the desktop link is futher down */}
             <NavigationLink
-              href='/use-cases'
+              href='/jp/use-cases'
               onClick={galaxyOnClick('topNav.useCasesMenu.allUseCasesSelect')}
               className='block w-full'>
               すべてのユースケース
@@ -131,7 +131,7 @@ export default function NavigationSubNavUseCases() {
       {/* This is the desktop link, the mobile link is in the <ul> above */}
       <LinkWithArrow
         prefetch={false}
-        href='/use-cases'
+        href='/jp/use-cases'
         onClick={galaxyOnClick('topNav.useCasesMenu.allUseCasesSelect')}
         className='hidden w-full rounded-b-lg border-t border-neutral-700 px-6 py-2.5 text-sm font-medium transition-colors hover:bg-neutral-700/25 hover:text-primary-300 md-mid:block'>
         すべてのユースケース

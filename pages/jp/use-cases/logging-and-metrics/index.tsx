@@ -3,9 +3,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
-import GetStartedFree from '../../../../components/GetStartedFree'
-import Layout from '../../../../components/Layout'
-import AccordionComponent from '../../../../components/LoggingDiagram/Accordion'
+import GetStartedFree from '../../../../components/jp/GetStartedFree'
+import Layout from '../../../../components/jp/Layout'
+import AccordionComponent from '../../../../components/jp/LoggingDiagram/Accordion'
 import LogoCarousel from '../../../../components/LogoCarousel'
 import QuoteCard from '../../../../components/QuoteCard'
 import { SuiText, SuiTitle } from '../../../../components/sui'
@@ -78,25 +78,21 @@ export default function ClickHouseServerPage({
               <div className='flex'>
                 <div className='flex-col xl:mt-16 xl:w-7/12'>
                   <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                    <Link href='/use-cases'>Use cases</Link> / Logs, events, and
-                    traces
+                    <Link href='/use-cases'>すべてのユースケース</Link> /
+                    ログ、イベント、トレース
                   </h4>
                   <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-2xl lg:text-left'>
-                    Logs, events, and traces with ClickHouse
+                    ClickHouseによるログ、イベント、トレース
                   </h1>
                   <SuiText
                     size='base'
                     color='secondary'
                     className='mt-6 text-center md:pr-16 lg:text-left'>
                     <p className='mb-6'>
-                      Transform your logs, events, and traces with
-                      industry-leading compression ratios, sub-second query
-                      response times, powerful aggregation functions, and an
-                      extensive suite of integrations.
+                      業界最高水準の圧縮率、ミリ秒単位のクエリ応答時間、パワフルな集計関数、幅広い統合スイートを活用して、ログ、イベント、トレースを変換します。
                     </p>
                     <p className='mb-6'>
-                      ClickHouse provides the cost-efficiency and blazing speed
-                      you need to power observability platforms at any scale.
+                      ClickHouseは、あらゆるスケールのオブザーバビリティプラットフォームを支えるために必要なコスト効率と驚異的な速度を提供します。
                     </p>
                   </SuiText>
                   <div className='relative z-40 mt-6 flex gap-6'>
@@ -108,7 +104,7 @@ export default function ClickHouseServerPage({
                       target='_blank'
                       linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                       className='w-full'>
-                      Get started today
+                      開始する
                     </CUIButton>
                     <CUIButton
                       type='secondary'
@@ -118,7 +114,7 @@ export default function ClickHouseServerPage({
                       target='_self'
                       linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
                       className='w-full'>
-                      Contact sales
+                      お問合せ
                     </CUIButton>
                   </div>
                 </div>
@@ -140,12 +136,7 @@ export default function ClickHouseServerPage({
         <div className='bg-neutral-725 text-neutral-0'>
           <div className='container mx-auto max-w-5xl px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
             <h2 className='text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
-              Discover why companies are choosing ClickHouse as their blazing
-              fast SQL-based{' '}
-              <span className='tilted tilted-yellow'>
-                <span className='tilted-content'>observability</span>
-              </span>{' '}
-              store
+              なぜ多くの企業が驚異的に高速なSQLベースのオブザーバビリティストレージとしてClickHouseを選んでいるのか
             </h2>
           </div>
           <div className='mx-auto flex max-w-5xl flex-col gap-10 pb-24 md:flex-row'>
@@ -214,10 +205,7 @@ export default function ClickHouseServerPage({
             <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
               <div className='flip-selection mx-auto flex flex-col text-center'>
                 <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
-                  Trusted by developers that work with data at{' '}
-                  <span className='tilted tilted-black'>
-                    <span className='tilted-content leading-8'>scale</span>
-                  </span>
+                  大規模なデータを扱う開発者から信頼をいただいています。
                 </div>
               </div>
             </div>
@@ -267,15 +255,10 @@ export default function ClickHouseServerPage({
             <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-right bg-no-repeat px-4 py-16 xl:px-24'>
               <div className='flex flex-col text-center'>
                 <SuiTitle type='h2' color='white'>
-                  Supporting{' '}
-                  <span className='tilted tilted-yellow'>
-                    <span className='tilted-content'>references</span>
-                  </span>{' '}
+                  サポートリファレンス
                 </SuiTitle>
                 <div className='mx-auto mb-8 mt-6 max-w-2xl text-left text-neutral-300'>
-                  For much more detailed guides about how to get started
-                  building an observability solution with ClickHouse, follow
-                  along in our blog:
+                  ClickHouseによる以下のブログに、オブザーバビリティソリューションのためにClickhouseを導入する方法について詳しく説明されています。
                 </div>
                 <div className='bg-neutral-725 p-8'>
                   <ol className='list-decimal space-y-2 text-left text-primary-300	'>
@@ -339,12 +322,7 @@ export default function ClickHouseServerPage({
             </div>
           </div>
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
-            <GetStartedFree
-              href='https://clickhouse.cloud/signUp?loc=logging-use-case-getstarted-footer'
-              textBefore='Get started with ClickHouse'
-              textSlanted='Cloud'
-              textAfter='for free'
-            />
+            <GetStartedFree href='https://clickhouse.cloud/signUp?loc=logging-use-case-getstarted-footer' />
           </div>
         </div>
       </Layout>

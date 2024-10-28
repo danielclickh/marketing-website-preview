@@ -1,0 +1,17 @@
+[
+    {
+        "id": 10,
+        "title": "データ収集",
+        "content": "ClickHouseを使用してオブザーバビリティを実装する場合、業界標準へと成長したOpenTelemetryをシームレスにインテグレーションし、使用ClickHouseでも社内のオブザーバビリティプラットフォームにClickHouse Cloudを使用し、OpenTelemetryのコンポーネント（OTel ClickHouseのコレクターやエクスプローラーなど）を導入しています。"
+    },
+    {
+        "id": 20,
+        "title": "ClickHouse",
+        "content": "ClickHouse is relied on at scale to power real-time observability platforms that process billions of new events every day.<br /><br />In these systems, features like [Materialized Views](https://clickhouse.com/docs/en/guides/developer/cascading-materialized-views) are often leveraged to transform data at insert time, which supports common tasks like extracting structure from unstructured logs.<br /><br />ClickHouse is built from the ground up to leverage resources as efficiently as possible, combining best-in-class compression ratios with flexible tuning controls that help you balance query performance and storage utilization effectively. <br /><br />ClickHouse supports a wide range of aggregation and analytical functions that make real-time data exploration simple and powerful."
+    },
+    {
+        "id": 30,
+        "title": "UI、アラート、レポート",
+        "content": "拡大中のインテグレーションエコシステムから、GrafanaやSupersetなどの可視化ツールを使用することができます。<br /><br />オブザーバビリティの実装には[ClickHouse-Grafana](https://clickhouse.com/docs/en/integrations/grafana)がよく使用されます。パワフルなダッシュボードで基盤データをアドホックに探索できるほか、アラートなどの優れたユーティリティ機能も使用できます。"
+    }
+]

@@ -1,22 +1,22 @@
 [
     {
         "id": 10,
-        "content": "Create user-facing dashboards and applications with instant responsiveness"
+        "content": "即時にレスポンスが得られるユーザー向けのダッシュボードやアプリケーションを作成できる"
     },
     {
         "id": 20,
-        "content": "Drive well-informed business decisions with the most up-to-date data"
+        "content": "常に最新のデータに基づいてビジネス上の判断を下せる"
     },
     {
         "id": 30,
-        "content": "Run SQL-based analytics effortlessly on your most diverse, high-cardinality datasets"
+        "content": "多様でカーディナリティが高いデータセットに対して、SQLベースの分析を簡単に実行できる"
     },
     {
         "id": 40,
-        "content": "Seamlessly integrate static or streaming data from a wide range of sources"
+        "content": "静的データやストリーミングデータを広範なソースからシームレスに統合できる"
     },
     {
         "id": 50,
-        "content": "Use your favorite visualization tools like Grafana, Tableau, Superset, and more"
+        "content": "Grafana、Tableau、Supersetなどの使い慣れた可視化ツールを使用できる"
     }
 ]
