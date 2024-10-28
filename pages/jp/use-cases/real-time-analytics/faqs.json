@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "content": "<span class='text-white'>Best-in-class query performance</span> <span class='text-[#8D8D8D]'>that your mission-critical and time-sensitive applications can depend on.</span>"
+  },
+  {
+    "id": 2,
+    "content": "<span class='text-white'>Built for continuous ingest</span> <span class='text-[#8D8D8D]'>with native integrations and managed pipelines for your favorite streaming sources.</span>"
+  },
+  {
+    "id": 3,
+    "content": "<span class='text-white'>High query concurrency</span> <span class='text-[#8D8D8D]'>so you can build interactive apps your users love without worrying about responsiveness at scale.</span>"
+  },
+  {
+    "id": 4,
+    "content": "<span class='text-white'>Use the tools you love</span> <span class='text-[#8D8D8D]'>through our extensive ecosystem of integrations, including popular products like Tableau, Metabase, DBT, and many more.</span>"
+  }
+]

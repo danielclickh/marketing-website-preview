@@ -272,7 +272,7 @@ export default function CloudPage({
                   <CUIButton
                     type='secondary'
                     className='group mx-auto w-auto !bg-neutral-800 text-center'
-                    href='/cloud/clickpipes'>
+                    href='/jp/cloud/clickpipes'>
                     詳しく見る
                   </CUIButton>
                 </div>
