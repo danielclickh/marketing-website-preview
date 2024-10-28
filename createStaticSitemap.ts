@@ -9,7 +9,7 @@ dotenv.config()
 import { getStagingOnlyFilters } from './lib/api/strapi'
 const stagingOnlyFilters = getStagingOnlyFilters()
 
-import { getLexicons } from './lib/lexicons'
+import { getEngineeringResources } from './lib/engineering-resources'
 import { Integration } from './types/integrations'
 
 interface Items {
@@ -36,7 +36,7 @@ function generateSiteMap(
   comparisons: Items[],
   richTextPages: Items[],
   videos: Video[],
-  lexicons: Items[],
+  engResources: Items[],
   integrations: Integration[]
 ) {
   const siteURL = 'https://clickhouse.com'
@@ -193,11 +193,11 @@ function generateSiteMap(
      })
      .join('')}
 
-     ${lexicons
-       .map((lexicon) => {
+     ${engResources
+       .map((engResource) => {
          return `
     <url>
-        <loc>${siteURL}/lexicon/${lexicon.slug}</loc>
+        <loc>${siteURL}/engineering-resources/${engResource.slug}</loc>
     </url>
     `
        })
@@ -275,7 +275,7 @@ async function triggerSitemap() {
     comparisons,
     richTextPages,
     await getVideos(),
-    getLexicons(),
+    getEngineeringResources(),
     integrations
   )
 }
