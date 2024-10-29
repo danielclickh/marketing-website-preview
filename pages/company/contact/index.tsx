@@ -8,7 +8,7 @@ import { ContactProps } from '../../../types/contact'
 import Layout from '../../../components/Layout'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import HRSeparator from '../../../components/HRSeparator'
-import {galaxyOnPage} from "../../../lib/galaxy/galaxy";
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -34,8 +34,7 @@ export default function ContactPage({
   headerData,
   seo
 }: ContactProps) {
-
-    galaxyOnPage('contactPage');
+  useGalaxyOnPage('contactPage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -47,7 +46,7 @@ export default function ContactPage({
             </SuiTitle>
             <div className='max-w-3xl text-neutral-200'>{description}</div>
           </div>
-          <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pt-14 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
+          <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pb-8 pt-14 text-center md:bg-no-repeat 2xl:px-0'>
             <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
               <ContactForm />
             </div>

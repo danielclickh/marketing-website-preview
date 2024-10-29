@@ -7,7 +7,7 @@ import MarketoForm from '../../../components/MarketoForm'
 import SocialButton from '../../../components/SocialButton'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findAll } from '../../../lib/api/strapi'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { EventType } from '../../../types/events'
 import { CommonProps } from '../../../types/homepage'
@@ -64,7 +64,7 @@ export default function Page({
   seo,
   recentEvents
 }: PageProps) {
-  galaxyOnPage('reinvent2024AncillaryPage')
+  useGalaxyOnPage('reinvent2024AncillaryPage')
 
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
@@ -363,7 +363,7 @@ export default function Page({
                     return (
                       <FaqAccordion key={index} question={faq.title}>
                         <SuiText className='max-w-3xl'>
-                          <Markdown children={faq.content} />
+                          <Markdown>{faq.content}</Markdown>
                         </SuiText>
                       </FaqAccordion>
                     )

@@ -7,7 +7,7 @@ import GetStartedFree from '../../components/GetStartedFree'
 import Layout from '../../components/Layout'
 import { SuiButton, SuiText } from '../../components/sui'
 import { findAll } from '../../lib/api/strapi'
-import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { EventType } from '../../types/events'
 import { CommonProps } from '../../types/homepage'
@@ -63,7 +63,7 @@ export default function HomePage({
   const timelineFirstDotRef = useRef<HTMLSpanElement | null>(null)
   const timelineLastDotRef = useRef<HTMLSpanElement | null>(null)
 
-  galaxyOnPage('tanyaTylerTourPage')
+  useGalaxyOnPage('tanyaTylerTourPage')
 
   useEffect(() => {
     const calculateLinePosition = () => {

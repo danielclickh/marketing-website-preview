@@ -6,7 +6,7 @@ import { SuiTitle } from '../sui'
 import styles from './styles.module.scss'
 import ReactMarkdown from 'react-markdown'
 import { CSSProperties } from 'react'
-import { galaxyOnClick } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import { FullyQualifiedEvent } from '../../lib/galaxy/client/index'
 
 const style = {
@@ -28,6 +28,10 @@ export default function FAQDynamic({
     event: string
   }[]
 }) {
+  const handleAskAnythingClick = useGalaxyOnClick(
+    'homePage.faqSection.askAnythingSelect'
+  )
+
   return (
     <div
       className='bg-shadow-element relative mx-auto mb-20 max-w-7xl px-4 md:px-8 lg:flex lg:justify-between lg:gap-x-12 2xl:px-0'
@@ -51,7 +55,7 @@ export default function FAQDynamic({
             href='/support/program/'
             target='_self'
             className='mt-6 flex items-center justify-center gap-4 text-primary lg:justify-start'
-            onClick={galaxyOnClick('homePage.faqSection.askAnythingSelect')}>
+            onClick={handleAskAnythingClick}>
             <span>Ask us anything</span>{' '}
             <ExternalLinkIcon className='h-4 w-4' />
           </CUILink>
@@ -65,7 +69,9 @@ export default function FAQDynamic({
             key={`faq-${index}`}>
             {({ open }) => (
               <>
-                <div onClick={galaxyOnClick(faq.event as FullyQualifiedEvent)}>
+                <div
+                  // eslint-disable-next-line react-hooks/rules-of-hooks
+                  onClick={useGalaxyOnClick(faq.event as FullyQualifiedEvent)}>
                   <Disclosure.Button className='relative z-10 grid w-full grid-cols-[1fr_1rem] items-center justify-between gap-x-6 rounded-lg p-4 pl-20 pr-6 text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none'>
                     <span className='text-md'>{faq.title}</span>
                     <span className={styles.plusMinus} data-active={open} />
@@ -81,10 +87,10 @@ export default function FAQDynamic({
                   leaveFrom='max-h-fit opacity-100'
                   leaveTo='max-h-0 opacity-0'>
                   <Disclosure.Panel
-                    className={`home-faqs pl-20 pr-4 pb-4 text-sm text-neutral-200 transition-opacity duration-100 ${
+                    className={`home-faqs pb-4 pl-20 pr-4 text-sm text-neutral-200 transition-opacity duration-100 ${
                       open ? 'opacity-100' : 'opacity-0'
                     }`}>
-                    <ReactMarkdown children={faq.content} />
+                    <ReactMarkdown>{faq.content}</ReactMarkdown>
                   </Disclosure.Panel>
                 </Transition>
               </>

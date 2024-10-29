@@ -9,7 +9,7 @@ import React, {
 import styles from './styles.module.scss'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { FullyQualifiedEvent } from '../../../lib/galaxy/client'
-import { galaxyOnClick } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
 
 export interface CodeblockProps extends HTMLAttributes<HTMLPreElement> {
   bgColor?: string | undefined
@@ -28,12 +28,14 @@ export const SuiCodeblock: FunctionComponent<CodeblockProps> = ({
 }) => {
   const ref = useRef<HTMLPreElement>(null)
   const [isOpen, setIsOpen] = useState(false)
-  const onClick = () => {
+  const galaxyOnClick = useGalaxyOnClick(galaxyEvent || 'default.event.name')
+
+  const useOnClick = () => {
     if (ref.current) {
       navigator.clipboard.writeText(ref.current.innerText)
 
       if (galaxyEvent && window.galaxy) {
-        galaxyOnClick(galaxyEvent)()
+        galaxyOnClick()
       }
 
       setIsOpen(true)
@@ -55,7 +57,7 @@ export const SuiCodeblock: FunctionComponent<CodeblockProps> = ({
               <Tooltip.Trigger asChild>
                 <button
                   className={`${styles.copyBtn} codeblock-copy-btn hidden md:block`}
-                  onClick={onClick}>
+                  onClick={useOnClick}>
                   <DuplicateIcon className='h-4 w-4' />
                 </button>
               </Tooltip.Trigger>

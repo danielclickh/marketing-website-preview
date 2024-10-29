@@ -13,7 +13,7 @@ import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
-import { galaxyOnClick, galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnClick, useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { LearnProps } from '../../../types/learn'
 import faqs from './faqs.json'
@@ -107,7 +107,7 @@ export default function CertificationPage({
   customerStories,
   seo
 }: LearnProps) {
-  galaxyOnPage('certificationPage')
+  useGalaxyOnPage('certificationPage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -131,7 +131,7 @@ export default function CertificationPage({
                 size='lg'
                 weight='semibold'
                 href='https://buy.stripe.com/14keYf7q55tn2Jy001'
-                onClick={galaxyOnClick(
+                onClick={useGalaxyOnClick(
                   'certificationPage.hero.purchaseCertificationBusinessSelect'
                 )}
                 target='_blank'>
@@ -142,7 +142,7 @@ export default function CertificationPage({
                 size='lg'
                 weight='semibold'
                 href='https://buy.stripe.com/3csbM36m1cVPgAo147'
-                onClick={galaxyOnClick(
+                onClick={useGalaxyOnClick(
                   'certificationPage.hero.purchaseCertificationPersonalSelect'
                 )}
                 target='_blank'>
@@ -219,7 +219,7 @@ export default function CertificationPage({
               weight='semibold'
               href='/learn/certification#faqs'
               linkClass='w-full max-w-[14rem]'
-              onClick={galaxyOnClick(
+              onClick={useGalaxyOnClick(
                 'certificationPage.examObjectives.FaqsSelect'
               )}
               className='group mx-auto mt-8 w-full max-w-[250px]'>
@@ -357,7 +357,7 @@ export default function CertificationPage({
                   weight='semibold'
                   href='https://buy.stripe.com/14keYf7q55tn2Jy001'
                   linkClass='w-full max-w-[14rem]'
-                  onClick={galaxyOnClick(
+                  onClick={useGalaxyOnClick(
                     'certificationPage.objectives.purchaseCertification'
                   )}
                   target='_blank'

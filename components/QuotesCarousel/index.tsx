@@ -52,7 +52,13 @@ export default function QuotesCarousel({ quotes }: QuotesCarousel) {
                       )}
                       {!quoteIsString && quote}
                     </div>
-                    {logo && <Image {...logo} className='mt-6 lg:mt-auto' />}
+                    {logo && (
+                      <Image
+                        {...logo}
+                        className='mt-6 lg:mt-auto'
+                        alt='Quote'
+                      />
+                    )}
                   </div>
                 </CUICard>
               </SwiperSlide>

@@ -11,7 +11,7 @@ import {
 import { getCommonProps } from '../lib/utils/getCommonProps'
 import { CatAllParamsType, RichContentPageProps } from '../types/homepage'
 import SupportProgram from '../components/SupportProgram'
-import {galaxyOnPage} from "../lib/galaxy/galaxy";
+import { useGalaxyOnPage } from '../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<RichContentPageProps> =
   async function getStaticProps({ params }) {
@@ -80,20 +80,20 @@ export default function RichContentPage({
       'legal/agreements/data-processing-addendum',
       'legal/agreements/terms-of-service/archive/202210',
       'legal/agreements/terms-of-service/archive/202308'
-    ].includes(slug);
+    ].includes(slug)
 
   const galaxyEventPrefixMap: Record<string, string> = {
-      'support/program': 'supportProgramPage',
-      'legal/agreements/terms-of-service': 'termsOfServicePage',
-      'legal/agreements/data-processing-addendum': 'dataProcessingAddendumPage',
-      'legal/agreements/terms-of-service/archive/202210': 'termsOfServiceArchiveOct2022Page',
-      'legal/agreements/terms-of-service/archive/202308': 'termsOfServiceArchiveAug2023Page',
-  };
-  const galaxyEventPrefix = galaxyEventPrefixMap[slug ?? ''];
-
-  if (galaxyEventPrefix) {
-      galaxyOnPage(galaxyEventPrefix, [slug]);
+    'support/program': 'supportProgramPage',
+    'legal/agreements/terms-of-service': 'termsOfServicePage',
+    'legal/agreements/data-processing-addendum': 'dataProcessingAddendumPage',
+    'legal/agreements/terms-of-service/archive/202210':
+      'termsOfServiceArchiveOct2022Page',
+    'legal/agreements/terms-of-service/archive/202308':
+      'termsOfServiceArchiveAug2023Page'
   }
+  const galaxyEventPrefix = galaxyEventPrefixMap[slug ?? ''] || ''
+
+  useGalaxyOnPage(galaxyEventPrefix, [slug])
 
   const pageBody = (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -114,14 +114,14 @@ export default function RichContentPage({
         <div className='rich-content-page'>
           {slug === 'legal/agreements/terms-of-service' ? (
             <>
-              <h1 className='container mx-auto flex max-w-screen-lg items-center justify-center py-16 px-0 text-center font-basier text-5xl font-bold'>
+              <h1 className='container mx-auto flex max-w-screen-lg items-center justify-center px-0 py-16 text-center font-basier text-5xl font-bold'>
                 {title}
               </h1>
             </>
           ) : (
             <SuiTitle
               type='h1'
-              className='container mx-auto flex max-w-screen-lg items-center justify-center py-16 px-0 text-center font-bold'>
+              className='container mx-auto flex max-w-screen-lg items-center justify-center px-0 py-16 text-center font-bold'>
               {title}
             </SuiTitle>
           )}

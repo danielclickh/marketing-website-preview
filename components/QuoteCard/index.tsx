@@ -22,12 +22,16 @@ function Quote({ content, logo }: QuoteProps) {
       />
       <SuiText color='secondary' className='mb-8 text-left'>
         {typeof content === 'string' ? (
-          <Markdown children={content} />
+          <Markdown>{content}</Markdown>
         ) : (
           <>content</>
         )}
       </SuiText>
-      <Image {...logo} className='mt-auto inline-block h-auto max-w-[200px]' />
+      <Image
+        {...logo}
+        className='mt-auto inline-block h-auto max-w-[200px]'
+        alt='Quote'
+      />
     </div>
   )
 }

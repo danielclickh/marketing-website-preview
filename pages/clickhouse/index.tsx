@@ -1,17 +1,17 @@
-import {SuiButton, SuiText, SuiTitle} from '../../components/sui'
-import {findOne} from '../../lib/api/strapi'
-import {StrapiPicture} from '../../components/StrapiElements'
+import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
+import { findOne } from '../../lib/api/strapi'
+import { StrapiPicture } from '../../components/StrapiElements'
 import BulletPoint from '../../components/BulletPoint'
 import GetStarted from '../../components/GetStarted'
-import {ClickhouseData} from '../../types/clickhouse'
+import { ClickhouseData } from '../../types/clickhouse'
 import features from './features.json'
 import Image from 'next/image'
-import {GetStaticProps} from 'next'
+import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
-import {getCommonProps} from '../../lib/utils/getCommonProps'
-import {CUIButton, CUICard} from '../../components/ClickUI'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { CUIButton, CUICard } from '../../components/ClickUI'
 import HRSeparator from '../../components/HRSeparator'
-import {galaxyOnPage} from "../../lib/galaxy/galaxy";
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<ClickhouseData> =
   async function getStaticProps() {
@@ -50,7 +50,7 @@ export default function ClickHouseServerPage({
   headerData,
   footerData
 }: ClickhouseData) {
-  galaxyOnPage('productOpenSourcePage');
+  useGalaxyOnPage('productOpenSourcePage')
 
   const { description, mainButton, secondaryButton, gitButton } = hero
   return (
@@ -167,7 +167,7 @@ export default function ClickHouseServerPage({
                 width={72}
                 height={72}
               />
-              <SuiTitle type='h2' className='mt-8 mb-6'>
+              <SuiTitle type='h2' className='mb-6 mt-8'>
                 Hardware efficient
               </SuiTitle>
               <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200 md:pb-16'>
@@ -181,7 +181,7 @@ export default function ClickHouseServerPage({
               <div className='mx-auto mt-10 grid grid-cols-1 content-baseline gap-10 px-4 md:mt-0 md:grid-cols-3 md:px-0'>
                 <CUICard
                   title='Strives for CPU efficiency'
-                  className='py-6 px-4'>
+                  className='px-4 py-6'>
                   <p className='font-inconsolata text-primary-300'>
                     Vectorization
                   </p>
@@ -201,7 +201,7 @@ export default function ClickHouseServerPage({
 
                 <CUICard
                   title='Strives for CPU efficiency'
-                  className='py-6 px-4'>
+                  className='px-4 py-6'>
                   <p className='font-inconsolata text-primary-300'>Locality</p>
                   <h3 className='mb-6 px-2 text-center font-basier text-2xl font-semibold leading-tight md:text-2xl xl:px-4'>
                     Optimizes disk access
@@ -219,7 +219,7 @@ export default function ClickHouseServerPage({
 
                 <CUICard
                   title='Strives for CPU efficiency'
-                  className='py-6 px-4'>
+                  className='px-4 py-6'>
                   <p className='font-inconsolata text-primary-300'>
                     Throughput
                   </p>
@@ -291,7 +291,7 @@ export default function ClickHouseServerPage({
               width={72}
               height={72}
             />
-            <SuiTitle type='h2' className='mt-8 mb-6'>
+            <SuiTitle type='h2' className='mb-6 mt-8'>
               {features5.second_title}
             </SuiTitle>
             <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200 md:pb-10'>

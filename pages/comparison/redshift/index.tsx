@@ -15,7 +15,7 @@ import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterD
 import ResponsiveEmbed from '../../../components/ResponsiveEmbed'
 import { StrapiImage } from '../../../components/StrapiElements'
 import { findAll } from '../../../lib/api/strapi'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import { ComparisonProps } from '../../../types/comparisons'
@@ -92,7 +92,7 @@ export default function ComparisonPage({
   seo,
   comparison
 }: ComparisonProps) {
-  galaxyOnPage('redshiftComparisonPage')
+  useGalaxyOnPage('redshiftComparisonPage')
   const formSuccessRef1 = useRef<HTMLDivElement | null>(null)
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
@@ -119,11 +119,10 @@ export default function ComparisonPage({
                     )}
                   </div>
                 </div>
-                <div className='rich_content mt-4 mb-12 text-center text-base text-neutral-0 md:text-left'>
-                  <Markdown
-                    children={comparison.HeroDescription}
-                    className='text-lg'
-                  />
+                <div className='rich_content mb-12 mt-4 text-center text-base text-neutral-0 md:text-left'>
+                  <Markdown className='text-lg'>
+                    {comparison.HeroDescription}
+                  </Markdown>
                 </div>
 
                 {comparison.BigNumbers && (
@@ -199,7 +198,7 @@ export default function ComparisonPage({
           </div>
         </div>
         <div className='clip-inverted-triangle -mt-16 xl:-mt-28'>
-          <div className='relative z-40 mx-auto mt-4 max-w-4xl pt-20 pb-0 lg:mt-6'>
+          <div className='relative z-40 mx-auto mt-4 max-w-4xl pb-0 pt-20 lg:mt-6'>
             <div className='mx-auto flex items-center gap-4 px-4 md:px-0'>
               <div className='container mx-auto max-w-4xl border-none px-6  2xl:px-0'>
                 <div className='overflow-hidden rounded-xl'>
@@ -265,7 +264,7 @@ export default function ComparisonPage({
                               {painpoint.Title}
                             </h3>
                             <div className='rich_content  text-neutral-0'>
-                              <Markdown children={painpoint.Description} />
+                              <Markdown>{painpoint.Description}</Markdown>
                             </div>
                           </div>
                           {painpoint.customer && (
@@ -280,11 +279,9 @@ export default function ComparisonPage({
                                       alt='Quote'
                                       className='mb-4'
                                     />{' '}
-                                    <Markdown
-                                      children={
-                                        painpoint.customer.description as string
-                                      }
-                                    />
+                                    <Markdown>
+                                      {painpoint.customer.description as string}
+                                    </Markdown>
                                     {painpoint.customer.logo && (
                                       <StrapiImage
                                         {...painpoint.customer.logo}
@@ -335,7 +332,9 @@ export default function ComparisonPage({
                           />
                         )}
                         <div className='rich-content-comparisons  text-neutral-0'>
-                          <ReactMarkdown children={testimonial.Description} />
+                          <ReactMarkdown>
+                            {testimonial.Description}
+                          </ReactMarkdown>
                         </div>
                       </div>
                     </div>
@@ -356,7 +355,7 @@ export default function ComparisonPage({
               </h3>
               {content.Description && (
                 <div className='rich_content mb-6'>
-                  <ReactMarkdown children={content.Description} />
+                  <ReactMarkdown>{content.Description}</ReactMarkdown>
                 </div>
               )}
               <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>

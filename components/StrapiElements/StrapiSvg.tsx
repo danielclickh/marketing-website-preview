@@ -33,7 +33,6 @@ export default function StrapiSvg({
 
     return (
       <Markdown
-        children={svgString}
         encloseByDiv={false}
         components={{
           svg: ({ node, ...params }) => {
@@ -46,8 +45,9 @@ export default function StrapiSvg({
               />
             )
           }
-        }}
-      />
+        }}>
+        {svgString}
+      </Markdown>
     )
   } catch (e) {
     console.log('Error fetching svg', `${strapiApiUrl}${url}`)

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { galaxyOnClick } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
 import { NavigationLink } from '../parts'
 import NavigationChevron from '../parts/NavigationChevron'
 import NavigationSubNav from '../parts/NavigationSubNav'
@@ -16,7 +16,7 @@ export default function NavigationSubNavResources() {
       <li>
         <NavigationLink
           href='/user-stories'
-          onClick={galaxyOnClick('topNav.resourcesMenu.userStoriesSelect')}
+          onClick={useGalaxyOnClick('topNav.resourcesMenu.userStoriesSelect')}
           className='block w-full'>
           User stories
         </NavigationLink>
@@ -24,7 +24,7 @@ export default function NavigationSubNavResources() {
       <li>
         <NavigationLink
           href='/blog'
-          onClick={galaxyOnClick('topNav.resourcesMenu.blogSelect')}
+          onClick={useGalaxyOnClick('topNav.resourcesMenu.blogSelect')}
           className='block w-full'>
           Blog
         </NavigationLink>
@@ -56,7 +56,7 @@ export default function NavigationSubNavResources() {
           <li>
             <NavigationLink
               href='/learn'
-              onClick={galaxyOnClick('topNav.learnMenu.academySelect')}
+              onClick={useGalaxyOnClick('topNav.learnMenu.academySelect')}
               className='block w-full'>
               ClickHouse Academy
             </NavigationLink>
@@ -64,7 +64,7 @@ export default function NavigationSubNavResources() {
           <li>
             <NavigationLink
               href='/company/news-events?category=Free+Training#upcoming-events'
-              onClick={galaxyOnClick('topNav.learnMenu.freeTrainingSelect')}
+              onClick={useGalaxyOnClick('topNav.learnMenu.freeTrainingSelect')}
               className='block w-full'>
               Free live training
             </NavigationLink>
@@ -72,7 +72,7 @@ export default function NavigationSubNavResources() {
           <li>
             <NavigationLink
               href='/learn/certification'
-              onClick={galaxyOnClick('topNav.learnMenu.certificationSelect')}
+              onClick={useGalaxyOnClick('topNav.learnMenu.certificationSelect')}
               className='block w-full'>
               ClickHouse Certification
             </NavigationLink>
@@ -108,7 +108,9 @@ export default function NavigationSubNavResources() {
           <li>
             <NavigationLink
               href='/comparison/bigquery'
-              onClick={galaxyOnClick('topNav.comparisonsMenu.bigQuerySelect')}
+              onClick={useGalaxyOnClick(
+                'topNav.comparisonsMenu.bigQuerySelect'
+              )}
               className='block w-full'>
               BigQuery
             </NavigationLink>
@@ -116,7 +118,7 @@ export default function NavigationSubNavResources() {
           <li>
             <NavigationLink
               href='/comparison/doublecloud'
-              onClick={galaxyOnClick(
+              onClick={useGalaxyOnClick(
                 'topNav.comparisonsMenu.doubleCloudSelect'
               )}
               className='block w-full'>
@@ -126,7 +128,9 @@ export default function NavigationSubNavResources() {
           <li>
             <NavigationLink
               href='/comparison/postgresql'
-              onClick={galaxyOnClick('topNav.comparisonsMenu.postgreSqlSelect')}
+              onClick={useGalaxyOnClick(
+                'topNav.comparisonsMenu.postgreSqlSelect'
+              )}
               className='block w-full'>
               PostgreSQL
             </NavigationLink>
@@ -134,7 +138,9 @@ export default function NavigationSubNavResources() {
           <li>
             <NavigationLink
               href='/comparison/redshift'
-              onClick={galaxyOnClick('topNav.comparisonsMenu.redshiftSelect')}
+              onClick={useGalaxyOnClick(
+                'topNav.comparisonsMenu.redshiftSelect'
+              )}
               className='block w-full'>
               Redshift
             </NavigationLink>
@@ -142,7 +148,7 @@ export default function NavigationSubNavResources() {
           <li>
             <NavigationLink
               href='/comparison/rockset'
-              onClick={galaxyOnClick('topNav.comparisonsMenu.rocksetSelect')}
+              onClick={useGalaxyOnClick('topNav.comparisonsMenu.rocksetSelect')}
               className='block w-full'>
               Rockset
             </NavigationLink>
@@ -150,7 +156,9 @@ export default function NavigationSubNavResources() {
           <li>
             <NavigationLink
               href='/comparison/snowflake'
-              onClick={galaxyOnClick('topNav.comparisonsMenu.snowflakeSelect')}
+              onClick={useGalaxyOnClick(
+                'topNav.comparisonsMenu.snowflakeSelect'
+              )}
               className='block w-full'>
               Snowflake
             </NavigationLink>
@@ -160,7 +168,7 @@ export default function NavigationSubNavResources() {
       <li>
         <NavigationLink
           href='/videos'
-          onClick={galaxyOnClick('topNav.resourcesMenu.videosSelect')}
+          onClick={useGalaxyOnClick('topNav.resourcesMenu.videosSelect')}
           className='block w-full'>
           Videos
         </NavigationLink>
@@ -168,7 +176,7 @@ export default function NavigationSubNavResources() {
       <li>
         <NavigationLink
           href='/demos'
-          onClick={galaxyOnClick('topNav.resourcesMenu.demosSelect')}
+          onClick={useGalaxyOnClick('topNav.resourcesMenu.demosSelect')}
           className='block w-full'>
           Demos
         </NavigationLink>

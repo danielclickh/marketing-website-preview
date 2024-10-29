@@ -68,7 +68,7 @@ export const useInitGalaxy = (): void => {
  *
  * @param event name of the load event sent to galaxy
  */
-export const galaxyOnLoad = (event: FullyQualifiedEvent): void => {
+export const useGalaxyOnLoad = (event: FullyQualifiedEvent): void => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -95,7 +95,7 @@ export const galaxyOnLoad = (event: FullyQualifiedEvent): void => {
  * @param event name of the focus event sent to galaxy
  * @param depsArray used to trigger a rerender of the component that will re-run the useEffect
  */
-export const galaxyOnFocus = (event: FullyQualifiedEvent, depsArray: Array<unknown>): void => {
+export const useGalaxyOnFocus = (event: FullyQualifiedEvent, depsArray: Array<unknown>): void => {
   const listener = (): void => {
     window.galaxy.track(event, { interaction: 'trigger' });
   }
@@ -114,7 +114,7 @@ export const galaxyOnFocus = (event: FullyQualifiedEvent, depsArray: Array<unkno
  * @param event name of the blur events sent to galaxy
  * @param depsArray used to trigger a rerender of the component that will re-run the useEffect
  */
-export const galaxyOnBlur = (event: FullyQualifiedEvent, depsArray: Array<unknown>): void => {
+export const useGalaxyOnBlur = (event: FullyQualifiedEvent, depsArray: Array<unknown>): void => {
   const listener = (): void => {
     window.galaxy.track(event, { interaction: 'trigger' });
   }
@@ -134,13 +134,13 @@ export const galaxyOnBlur = (event: FullyQualifiedEvent, depsArray: Array<unknow
  * @param depsArray used to trigger a rerender of the component that will re-run the useEffect
  *
  */
-export const galaxyOnPage = (prefix: string, depsArray: Array<unknown> = []): void => {
-  galaxyOnLoad(`${prefix}.window.load`);
-  galaxyOnBlur(`${prefix}.window.blur`, depsArray);
-  galaxyOnFocus(`${prefix}.window.focus`, depsArray);
+export const useGalaxyOnPage = (prefix: string, depsArray: Array<unknown> = []): void => {
+  useGalaxyOnLoad(`${prefix}.window.load`);
+  useGalaxyOnBlur(`${prefix}.window.blur`, depsArray);
+  useGalaxyOnFocus(`${prefix}.window.focus`, depsArray);
 }
 
-export const galaxyOnClick = (event: FullyQualifiedEvent): () => void => {
+export const useGalaxyOnClick = (event: FullyQualifiedEvent): () => void => {
   return () => {
     window.galaxy.track(event, { interaction: 'click' });
   };

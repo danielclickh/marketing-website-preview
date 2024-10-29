@@ -1,3 +1,4 @@
+import React from 'react'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import { CUICard } from '../../components/ClickUI'
@@ -9,7 +10,7 @@ import { SuiTitle } from '../../components/sui'
 import { findAll, findOne } from '../../lib/api/strapi'
 import { StrapiImage } from '../../components/StrapiElements'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
 import { CommonProps } from '../../types/homepage'
 import { Demo } from '../../types/demos'
@@ -60,7 +61,7 @@ export default function DemosPage({
   headerData,
   footerData
 }: DemosPageProps) {
-  galaxyOnPage('demosPage')
+  useGalaxyOnPage('demosPage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:mb-20 lg:pt-20'>

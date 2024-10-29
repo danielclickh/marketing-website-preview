@@ -4,7 +4,7 @@ import { GettingStartedData } from './types'
 import { CUILink } from '../ClickUI'
 import styles from './GetStarted.module.scss'
 import Link from 'next/link'
-import { galaxyOnClick } from '../../lib/galaxy/galaxy';
+import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 export default function FetchGetStarted({ platforms }: GettingStartedData) {
   return (
     <div
@@ -34,7 +34,9 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             href='https://clickhouse.com/docs/en/integrations/sql-clients/clickhouse-client-local'
             target='_self'
             className='underline hover:text-neutral-0'
-            onClick={galaxyOnClick('homePage.installSection.windowsInstallSelect')}>
+            onClick={useGalaxyOnClick(
+              'homePage.installSection.windowsInstallSelect'
+            )}>
             Windows
           </CUILink>
           ,{' '}
@@ -42,7 +44,9 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             href='https://hub.docker.com/r/clickhouse/clickhouse-server/'
             target='_self'
             className='underline hover:text-neutral-0'
-            onClick={galaxyOnClick('homePage.installSection.dockerInstallSelect')}>
+            onClick={useGalaxyOnClick(
+              'homePage.installSection.dockerInstallSelect'
+            )}>
             Docker
           </CUILink>{' '}
           or see other{' '}
@@ -50,7 +54,9 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             href='https://clickhouse.com/docs/en/install'
             target='_self'
             className='underline hover:text-neutral-0'
-            onClick={galaxyOnClick('homePage.installSection.otherOptionsSelect')}>
+            onClick={useGalaxyOnClick(
+              'homePage.installSection.otherOptionsSelect'
+            )}>
             install options.
           </CUILink>
           <p className='mt-5'>

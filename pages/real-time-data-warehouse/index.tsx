@@ -254,18 +254,21 @@ export default function Page({
                   ]}
                   logos={[
                     <Image
+                      key='teradata'
                       src='/images/real-time-data-warehouse/teradata.svg'
                       alt='Teradata'
                       width={108}
                       height={21}
                     />,
                     <Image
+                      key='oracle'
                       src='/images/real-time-data-warehouse/oracle.svg'
                       alt='Oracle'
                       width={109}
                       height={15}
                     />,
                     <Image
+                      key='ibm'
                       src='/images/real-time-data-warehouse/ibm.svg'
                       alt='IBM'
                       width={51}
@@ -297,18 +300,21 @@ export default function Page({
                   ]}
                   logos={[
                     <Image
+                      key='snowflake'
                       src='/images/real-time-data-warehouse/snowflake.svg'
                       alt='Snowflake'
                       width={109}
                       height={27}
                     />,
                     <Image
+                      key='google-bigquery'
                       src='/images/real-time-data-warehouse/google-bigquery.svg'
                       alt='Google BigQuery'
                       width={88}
                       height={30}
                     />,
                     <Image
+                      key='amazon-redshift'
                       src='/images/real-time-data-warehouse/amazon-redshift.svg'
                       alt='Amazon Redshift'
                       width={76}
@@ -336,6 +342,7 @@ export default function Page({
                   ]}
                   logos={[
                     <Image
+                      key='clickhouse'
                       src='/images/real-time-data-warehouse/clickhouse.svg'
                       alt='ClickHouse'
                       width={136}
@@ -358,18 +365,21 @@ export default function Page({
                     </SuiText>
                     <div className='flex flex-wrap items-center justify-evenly gap-3'>
                       <Image
+                        key='databricks'
                         src='/images/real-time-data-warehouse/databricks.svg'
                         alt='Databricks'
                         width={105}
                         height={25}
                       />
                       <Image
+                        key='snowflake'
                         src='/images/real-time-data-warehouse/snowflake.svg'
                         alt='Snowflake'
                         width={109}
                         height={27}
                       />
                       <Image
+                        key='amazon-athena'
                         src='/images/real-time-data-warehouse/amazon-athena.svg'
                         alt='Amazon Athena'
                         width={78}
@@ -696,7 +706,9 @@ function YesNoTable({
           <ul>
             {rows.map(({ label, no }) => {
               return (
-                <li className='mt-4 border-t border-neutral-700 pt-4'>
+                <li
+                  key={label}
+                  className='mt-4 border-t border-neutral-700 pt-4'>
                   <ItemNo>
                     <div className='text-sm font-bold uppercase text-[#B3B6BD]'>
                       {label}
@@ -713,7 +725,9 @@ function YesNoTable({
           <ul>
             {rows.map(({ label, yes }) => {
               return (
-                <li className='mt-4 border-t border-neutral-700 pt-4'>
+                <li
+                  key={label}
+                  className='mt-4 border-t border-neutral-700 pt-4'>
                   <ItemYes>
                     <div className='text-sm font-bold uppercase text-[#B3B6BD]'>
                       {label}
@@ -908,7 +922,6 @@ function QuoteCard({
         />
       </svg>
       <Markdown
-        children={quote}
         className='md:mb- font-medium'
         components={{
           strong: ({ children, className, ...props }) => (
@@ -916,8 +929,9 @@ function QuoteCard({
               {children}
             </strong>
           )
-        }}
-      />
+        }}>
+        {quote}
+      </Markdown>
       <div className='mt-auto flex flex-col justify-between gap-6 sm:flex-row sm:items-center'>
         {logo}
         <span className='order-first font-mono text-primary-300 sm:order-last sm:text-right'>

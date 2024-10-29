@@ -10,7 +10,7 @@ import { Video } from '../../lib/videos/types'
 import { CommonProps } from '../../types/homepage'
 import { getVideos } from '../../lib/videos'
 import { getEngineeringResources } from '../../lib/engineering-resources'
-import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { fetchCategories } from '../api/blog'
 
 interface SitemapProps extends CommonProps {
@@ -129,7 +129,7 @@ function Sitemap({
   engResources,
   demos
 }: SitemapProps) {
-  galaxyOnPage('siteMapPage')
+  useGalaxyOnPage('siteMapPage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>

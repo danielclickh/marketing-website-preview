@@ -249,6 +249,7 @@ function Tile({ badge, logo, fade = false }: TileProps) {
           {...logo}
           width={72}
           height={72}
+          alt={logo.alt}
           className='max-h-[36px] min-h-[36px] w-[36px] object-scale-down'
         />
       </TileContainer>

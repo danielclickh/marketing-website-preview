@@ -97,9 +97,11 @@ export default function ComparisonTable({
               }>
               <h3 className='mb-6 text-xl font-semibold'>{column.heading}</h3>
               <ul>
-                {rows.map(({ heading, values }) => {
+                {rows.map(({ heading, values }, rowIndex) => {
                   return (
-                    <li className='mt-4 border-t border-neutral-700 pt-4'>
+                    <li
+                      key={rowIndex}
+                      className='mt-4 border-t border-neutral-700 pt-4'>
                       <RowItem
                         heading={heading}
                         value={values[columnIndex]}

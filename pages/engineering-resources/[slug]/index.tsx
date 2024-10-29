@@ -13,9 +13,11 @@ import SocialButton from '../../../components/SocialButton'
 import { SuiButton, SuiPanel, SuiText, SuiTitle } from '../../../components/sui'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
-import { getEngineeringResource, getEngineeringResources } from '../../../lib/engineering-resources'
+import {
+  getEngineeringResource,
+  getEngineeringResources
+} from '../../../lib/engineering-resources'
 import { EngineeringResource } from '../../../lib/engineering-resources/types'
-import { slugify } from '../../../lib/utils/strings'
 import { CommonProps, NewsLetterData } from '../../../types/homepage'
 
 type MoreLikeThisItem = {
@@ -100,12 +102,14 @@ export default function Page({
           <div className='flex-row items-start gap-16 lg:flex'>
             <div className='flex-shrink flex-grow'>
               <h4 className='text-base font-semibold'>
-                <Link href='/engineering-resources' className='text-primary-300'>
+                <Link
+                  href='/engineering-resources'
+                  className='text-primary-300'>
                   Engineering Resources
                 </Link>{' '}
                 / <strong>{engResource.title}</strong>
               </h4>
-              <SuiTitle type='h1' className='text-balance my-6 md:!text-5xl'>
+              <SuiTitle type='h1' className='my-6 text-balance md:!text-5xl'>
                 {engResource.title}
               </SuiTitle>
               <Markdown className='rich-text-content leading-6' allowHeaderLink>
@@ -131,38 +135,38 @@ export default function Page({
               {moreLikeThis.length > 0 && (
                 <div className='mb-8 '>
                   <h3 className='mb-6 text-lg font-bold'>More like this</h3>
-                  {(moreLikeThis as EngineeringResourcesPageProps['moreLikeThis']).map(
-                    (item) => (
-                      <Link
-                        href={item.link}
-                        className='mb-4 block w-full'
-                        key={item.link}>
-                        <SuiButton
-                          type='empty'
-                          color='primary'
-                          className='font-base block w-full border border-neutral-700 hover:translate-y-0 hover:border-primary-400/40 hover:no-underline'>
-                          <div className='flex w-full flex-row items-center gap-6'>
-                            <div className='flex-shrink flex-grow basis-0 text-left'>
-                              {item.title}
-                            </div>
-                            <div className='flex-shrink-0 flex-grow-0'>
-                              <svg
-                                xmlns='http://www.w3.org/2000/svg'
-                                width='16'
-                                height='16'
-                                fill='currentColor'
-                                viewBox='0 0 16 16'>
-                                <path
-                                  fillRule='evenodd'
-                                  d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'
-                                />
-                              </svg>
-                            </div>
+                  {(
+                    moreLikeThis as EngineeringResourcesPageProps['moreLikeThis']
+                  ).map((item) => (
+                    <Link
+                      href={item.link}
+                      className='mb-4 block w-full'
+                      key={item.link}>
+                      <SuiButton
+                        type='empty'
+                        color='primary'
+                        className='font-base block w-full border border-neutral-700 hover:translate-y-0 hover:border-primary-400/40 hover:no-underline'>
+                        <div className='flex w-full flex-row items-center gap-6'>
+                          <div className='flex-shrink flex-grow basis-0 text-left'>
+                            {item.title}
                           </div>
-                        </SuiButton>
-                      </Link>
-                    )
-                  )}
+                          <div className='flex-shrink-0 flex-grow-0'>
+                            <svg
+                              xmlns='http://www.w3.org/2000/svg'
+                              width='16'
+                              height='16'
+                              fill='currentColor'
+                              viewBox='0 0 16 16'>
+                              <path
+                                fillRule='evenodd'
+                                d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </SuiButton>
+                    </Link>
+                  ))}
                   <HRSeparator className='mt-8' />
                 </div>
               )}

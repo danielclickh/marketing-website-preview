@@ -7,7 +7,7 @@ import Layout from '../../../components/Layout'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import Image from 'next/image'
 import FollowUs from '../../../components/FollowUs'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import Markdown from '../../../components/Markdown'
 
 const careerImgs = [
@@ -94,7 +94,7 @@ export default function CareersPage({
   footerData,
   headerData
 }: CareersData) {
-  galaxyOnPage('careersPage')
+  useGalaxyOnPage('careersPage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -150,10 +150,9 @@ export default function CareersPage({
                       <h4 className='mb-3 font-inter font-bold'>
                         {value.title}
                       </h4>
-                      <Markdown
-                        children={value.content}
-                        className='font-inter text-sm font-light leading-relaxed text-neutral-200'
-                      />
+                      <Markdown className='font-inter text-sm font-light leading-relaxed text-neutral-200'>
+                        {value.content}
+                      </Markdown>
                     </div>
                   </div>
                 </div>
@@ -179,62 +178,45 @@ export default function CareersPage({
           <h2 className='mb-6 font-basier text-4xl text-neutral-100'>
             Protecting yourself against recruitment scams
           </h2>
-          <Markdown
-            children={`
+          <Markdown>
+            {`
+ClickHouse is committed to ethical recruitment practices. This information helps our candidates protect themselves against recruitment scams.
 
-ClickHouse is committed to ethical recruitment practices and this information was prepared to help our candidates protect themselves against recruitment scams.
+Unfortunately, recruitment scams are common. Scammers often impersonate representatives of prominent companies like ClickHouse to take advantage of job seekers.
 
-Unfortunately, recruitment scams are very common. In those scams, the perpetrators try to take advantage of job seekers by pretending to represent prominent companies, such as ClickHouse.
+## What is a recruitment scam?
 
-**What is a recruitment scam?**
+Recruitment scams are fraudulent schemes where scammers pose as recruiters or employers, offering attractive job opportunities that require upfront payments or personal information. They may:
 
-Recruitment scams are a form of fraud where scam artists posing as recruiters or employers offer attractive employment opportunities that require the job seeker to pay them money in advance or disclose personal information. Scammers claiming to be representatives of ClickHouse or another company pretend to recruit potential employees. Scammers often ask for money from applicants under the appearance of helping to secure work permits and visas, travel expenses and/or out of pocket expenses.
+- Ask for money to secure work permits, visas, or cover travel expenses
+- Use fake websites, unsolicited emails, calls, or texts
+- Request personal data or money to "finalize" the application process
+- Conduct fraudulent interviews or send fake offer letters
 
-Scammers may use fake websites, unsolicited emails, calls or texts claiming to be from the company. The scam communication normally requests personal data and may ultimately request the forwarding of money on the pretext that this is to finalize the “application process” or “employment opportunity”. Unsuspecting applicants may be invited to participate in fraudulent interviews, be asked to fill-out fraudulent employment paperwork, and/or receive fake offer letters.
+**Note: ClickHouse will never ask for money from candidates during any stage of the recruitment process.**
 
-Please note that ClickHouse will never ask for money from candidates during any stage of the recruitment process.
+## Tips to avoid becoming a victim
 
-**Tips to avoid becoming victim to a recruitment scam**
+- Be cautious: Don't open attachments or click links in suspicious emails
+- Do your own typing: Use a search engine to look up websites instead of clicking on links
+- Don't respond to requests for personal or financial information
+- Use and regularly update security software
+- Report suspicious emails, calls, or texts to law enforcement
 
-Any solicitation should be researched before you provide personal information.
+## How to identify scams
 
+Common signs of recruitment scams include:
 
+- Advertisements in various media for false job openings
+- Job postings with mobile phone numbers instead of office numbers
+- Requests to send applications to illegitimate email addresses or fax numbers
+- Urgent requests for fund transfers or electronic payments
+- Vague or oddly worded job descriptions
+- Requests for sensitive personal information (e.g., birth date, social security number, bank details)
 
-<ul style="list-style: disc">
-
-<li><strong>Be cautious</strong>: Refrain from immediately opening attachments or clicking on links in emails, unless the source looks trust-worthy.
-
-<li><strong>Do your own typing</strong>: Use a search engine to look up a website rather than clicking on and following a suspicious link.
-
-<li><strong>Don’t respond</strong>: Refrain from responding to any emails or calls that request personal or financial information.
-
-<li><strong>Use security software</strong> and update it regularly.
-
-<li><strong>Report</strong>: File a report with law enforcement on any suspicious emails, calls or texts you may receive.</li></ul>
-
-By making you aware of these fraudulent schemes, we hope to keep you from being victimized, and ultimately to stop these schemes from being perpetrated against others.
-
-**How to identify scams**
-
-Here is a list to help you identify what scams typically look like:
-
-
-<ul style="list-style: disc">
-
-<li>Scammers use the Internet, local newspapers, or other print materials to advertise false job openings.
-
-<li>Job openings display mobile-phone numbers rather than office numbers
-
-<li>Applicants receive a request to send their application or CV to an illegitimate email address or fax number.
-
-<li>Requests are sent to applicants, asking them to transfer funds to a bank account or send money electronically to cover processing and/or immigration fees, insisting on urgency.
-
-<li>The job descriptions in the job posting are vague, inexistent, or the wording seems odd.
-
-<li>Requests are made to obtain your personal data or information, such as your date of birth, social security number, national insurance number, bank. account information, passport information or any number appearing on your identity documents.</li></ul>
-
-Scams usually involve the use of illegitimate email addresses created to lead you to believe the communication is originating from ClickHouse and authorized by ClickHouse. `}
-          />
+Scammers often use fake email addresses designed to appear as if they're from ClickHouse. Stay vigilant and verify all communication through official channels.
+            `}
+          </Markdown>
         </div>
       </div>
 

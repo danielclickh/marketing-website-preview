@@ -7,8 +7,8 @@ import faqList from './faqList.json'
 import styles from './styles.module.scss'
 import ReactMarkdown from 'react-markdown'
 import { CSSProperties } from 'react'
-import { galaxyOnClick } from '../../lib/galaxy/galaxy';
-import { FullyQualifiedEvent } from '../../lib/galaxy/client/index';
+import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
+import { FullyQualifiedEvent } from '../../lib/galaxy/client/index'
 
 const style = {
   '--top-side': '224px'
@@ -17,7 +17,7 @@ const style = {
 export default function FAQ() {
   return (
     <div
-      className='relative bg-shadow-element max-w-7xl mx-auto px-4 md:px-8 2xl:px-0 lg:flex lg:gap-x-12 lg:justify-between mb-20'
+      className='bg-shadow-element relative mx-auto mb-20 max-w-7xl px-4 md:px-8 lg:flex lg:justify-between lg:gap-x-12 2xl:px-0'
       style={style}>
       <div className='pb-10 text-center'>
         <Image
@@ -30,7 +30,7 @@ export default function FAQ() {
         <SuiTitle type='h2' className='my-6 lg:text-left'>
           FAQs
         </SuiTitle>
-        <div className='max-w-md mx-auto text-neutral-200 lg:text-left'>
+        <div className='mx-auto max-w-md text-neutral-200 lg:text-left'>
           Wherever you need us, we’re there. We love to engage in thoughtful
           conversation with the ClickHouse community and are always on-hand to
           answer your questions.{' '}
@@ -38,9 +38,9 @@ export default function FAQ() {
         <CUILink
           href='/support/program/'
           target='_self'
-          className='flex gap-4 text-primary items-center mt-6 justify-center lg:justify-start'
-          onClick={galaxyOnClick('homePage.faqSection.askAnythingSelect')}>
-          <span>Ask us anything</span> <ExternalLinkIcon className='w-4 h-4' />
+          className='mt-6 flex items-center justify-center gap-4 text-primary lg:justify-start'
+          onClick={useGalaxyOnClick('homePage.faqSection.askAnythingSelect')}>
+          <span>Ask us anything</span> <ExternalLinkIcon className='h-4 w-4' />
         </CUILink>
       </div>
       <div className={styles.accordionContainer}>
@@ -51,8 +51,10 @@ export default function FAQ() {
             key={`faq-${index}`}>
             {({ open }) => (
               <>
-                <div onClick={galaxyOnClick(faq.event as FullyQualifiedEvent)}>
-                  <Disclosure.Button className='relative z-10 grid grid-cols-[1fr_1rem] p-4 pr-6 pl-20 gap-x-6 w-full justify-between items-center rounded-lg text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none'>
+                <div
+                  // eslint-disable-next-line react-hooks/rules-of-hooks
+                  onClick={useGalaxyOnClick(faq.event as FullyQualifiedEvent)}>
+                  <Disclosure.Button className='relative z-10 grid w-full grid-cols-[1fr_1rem] items-center justify-between gap-x-6 rounded-lg p-4 pl-20 pr-6 text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none'>
                     <span className='text-md'>{faq.title}</span>
                     <span className={styles.plusMinus} data-active={open} />
                   </Disclosure.Button>
@@ -67,10 +69,10 @@ export default function FAQ() {
                   leaveFrom='max-h-fit opacity-100'
                   leaveTo='max-h-0 opacity-0'>
                   <Disclosure.Panel
-                    className={`transition-opacity duration-100 text-sm pl-20 pr-4 pb-4 text-neutral-200 home-faqs ${
+                    className={`home-faqs pb-4 pl-20 pr-4 text-sm text-neutral-200 transition-opacity duration-100 ${
                       open ? 'opacity-100' : 'opacity-0'
                     }`}>
-                    <ReactMarkdown children={faq.content} />
+                    <ReactMarkdown>{faq.content}</ReactMarkdown>
                   </Disclosure.Panel>
                 </Transition>
               </>

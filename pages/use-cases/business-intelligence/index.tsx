@@ -16,7 +16,7 @@ import { CommonProps } from '../../../types/homepage'
 import bigNumbers from './big-numbers.json'
 import features from './features.json'
 import references from './supporting-references.json'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
@@ -57,7 +57,7 @@ export default function RealTimeAnalyticsPage({
   headerData,
   footerData
 }: RealTimeAnalyticsPageProps) {
-  galaxyOnPage('bizIntelUseCasePage')
+  useGalaxyOnPage('bizIntelUseCasePage')
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
@@ -153,10 +153,9 @@ export default function RealTimeAnalyticsPage({
                           {number.content}
                         </p>
                         {number.readmore && (
-                          <Markdown
-                            className='text-center text-base'
-                            children={number.readmore}
-                          />
+                          <Markdown className='text-center text-base'>
+                            {number.readmore}
+                          </Markdown>
                         )}
                       </div>
                     )
@@ -211,7 +210,7 @@ export default function RealTimeAnalyticsPage({
                           {feature.title}
                         </h3>
                         <div className='rich_content text-base text-neutral-200'>
-                          <Markdown children={feature.content} />
+                          <Markdown>{feature.content}</Markdown>
                         </div>
                       </div>
                     ))}

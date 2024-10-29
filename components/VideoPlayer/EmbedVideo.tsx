@@ -9,7 +9,7 @@ function EmbedVideo({ videoId, provider, ...videoOptions }: EmbededProps) {
     if (ref.current) {
       const player = new Plyr(ref.current, videoOptions)
     }
-  }, [])
+  }, [videoOptions])
 
   return (
     <div

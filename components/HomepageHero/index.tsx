@@ -1,5 +1,5 @@
 import { ChevronRightIcon } from '@heroicons/react/solid'
-import { galaxyOnClick } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import { HomepageHero as HomepageHeroContent } from '../../types/homepage'
 import { CUIButton, CUILink } from '../ClickUI'
 import { SuiTitle } from '../sui'
@@ -27,7 +27,7 @@ export default function HomepageHero({
               of rows in milliseconds
             </SuiTitle>
             <div className='mx-auto flex max-w-md flex-col items-center md:max-w-2xl'>
-              <div className='mt-6 mb-10 text-center text-lg text-neutral-0 md:text-xl md:leading-relaxed'>
+              <div className='mb-10 mt-6 text-center text-lg text-neutral-0 md:text-xl md:leading-relaxed'>
                 ClickHouse is the fastest and most resource efficient
                 open-source database for real-time apps and analytics.
               </div>
@@ -39,7 +39,7 @@ export default function HomepageHero({
                   weight='semibold'
                   href={hero.ctaButton.href}
                   linkClass='w-full max-w-[14rem]'
-                  onClick={galaxyOnClick('homePage.hero.startTrial')}
+                  onClick={useGalaxyOnClick('homePage.hero.startTrial')}
                   className='w-full'>
                   Start free trial
                 </CUIButton>
@@ -49,7 +49,7 @@ export default function HomepageHero({
                   size='lg'
                   href='https://clickhouse.com/docs/en/intro'
                   linkClass='w-full max-w-[14rem]'
-                  onClick={galaxyOnClick('homePage.hero.viewDocsSelect')}
+                  onClick={useGalaxyOnClick('homePage.hero.viewDocsSelect')}
                   className='w-full'>
                   View documentation
                 </CUIButton>
@@ -58,7 +58,7 @@ export default function HomepageHero({
                 href='#getting_started'
                 target='_self'
                 className='arrow-link mt-5 hidden items-center gap-1 whitespace-nowrap text-neutral-200 hover:text-neutral-0 md:flex'
-                onClick={galaxyOnClick('homePage.hero.openSourceSelect')}>
+                onClick={useGalaxyOnClick('homePage.hero.openSourceSelect')}>
                 Or download open-source ClickHouse{' '}
                 <ChevronRightIcon height='18' className='arrow pt-0.5' />
               </CUILink>

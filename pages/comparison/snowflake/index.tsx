@@ -15,7 +15,7 @@ import { StrapiImage } from '../../../components/StrapiElements'
 import { findAll, findOne } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { BigNumber, ComparisonProps } from '../../../types/comparisons'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface SnowflakePageProps extends ComparisonProps {
   customerStories: any
@@ -108,7 +108,7 @@ export default function SnowflakePage({
     HeroDescription: heroDescription,
     BigNumbers: BigNumbers
   } = comparison.data[0]
-  galaxyOnPage('snowflakeComparisonPage')
+  useGalaxyOnPage('snowflakeComparisonPage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage'>
@@ -130,7 +130,7 @@ export default function SnowflakePage({
                   </div>
                 </div>
                 <div className='rich_content mt-8 w-full text-center text-base text-neutral-200 lg:max-w-xl lg:text-left'>
-                  <Markdown children={heroDescription} />
+                  <Markdown>{heroDescription}</Markdown>
                 </div>
               </div>
               <div className='mb-6 hidden lg:mb-0 lg:block lg:max-w-[400px] xl:max-w-[575px]'>
@@ -378,7 +378,7 @@ export default function SnowflakePage({
                 </h3>
                 {content.Description && (
                   <div className='rich_content mb-6'>
-                    <ReactMarkdown children={content.Description} />
+                    <ReactMarkdown>{content.Description}</ReactMarkdown>
                   </div>
                 )}
                 <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>

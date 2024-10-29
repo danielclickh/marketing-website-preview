@@ -13,7 +13,7 @@ import { StrapiImageProps } from '../../../components/StrapiElements/types'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { useClickOutside } from '../../../hooks'
 import { findAll, findOne } from '../../../lib/api/strapi'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import {
@@ -37,7 +37,7 @@ import logoBlock from './logo-block.png'
 import logoPostgress from './logo-postgress.svg'
 import logoRedshift from './logo-redshift.svg'
 import logoSnowflake from './logo-snowflake.svg'
-import { galaxyOnClick } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
 
 const locTracking = 'bigquery-comparison-page'
 
@@ -106,7 +106,7 @@ export default function BigQueryPage({
   comparison,
   customerStories
 }: BigQueryPageProps) {
-  galaxyOnPage(`${comparison.slug}ComparisonPage`)
+  useGalaxyOnPage(`${comparison.slug}ComparisonPage`)
 
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
@@ -129,6 +129,21 @@ export default function BigQueryPage({
   useClickOutside(modalInnerRef, () => {
     setIsModalOpen(false)
   })
+
+  // At the top of your component, add this:
+  const handlePersonalizedSupportClick = useGalaxyOnClick(
+    `${comparison.slug}ComparisonPage.heroCta.personalizedSupportSelect`
+  )
+
+  // Then in the JSX, replace the onClick with:
+  const handleStartTrialClick = useGalaxyOnClick(
+    `${comparison.slug}ComparisonPage.heroCta.startTrialSelect`
+  )
+
+  // At the top of your component, add this:
+  const handleMigrationDocClick = useGalaxyOnClick(
+    `${comparison.slug}ComparisonPage.heroCta.migrationDocSelect`
+  )
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -166,9 +181,7 @@ export default function BigQueryPage({
               weight='semibold'
               className='w-full sm:flex-1'
               onClick={() => {
-                galaxyOnClick(
-                  `${comparison.slug}ComparisonPage.heroCta.personalizedSupportSelect`
-                )()
+                handlePersonalizedSupportClick()
                 setIsModalOpen(true)
               }}>
               Get personalized support
@@ -181,11 +194,7 @@ export default function BigQueryPage({
               target='_blank'
               linkClass='flex-1 w-full'
               className='w-full'
-              onClick={() =>
-                galaxyOnClick(
-                  `${comparison.slug}ComparisonPage.heroCta.startTrialSelect`
-                )()
-              }>
+              onClick={handleStartTrialClick}>
               Start a free 30-day trial
             </CUIButton>
           </div>
@@ -195,11 +204,7 @@ export default function BigQueryPage({
               href={`https://clickhouse.com/docs/en/migrations/bigquery?loc=${locTracking}-hero`}
               target='_blank'
               className='text-primary-300 hover:underline'
-              onClick={() =>
-                galaxyOnClick(
-                  `${comparison.slug}ComparisonPage.heroCta.migrationDocSelect`
-                )()
-              }>
+              onClick={handleMigrationDocClick}>
               migrating from ClickHouse to BigQuery
             </Link>
           </SuiText>
@@ -476,7 +481,7 @@ export default function BigQueryPage({
                 <SuiTitle type='h2'>{content.SectionTitle}</SuiTitle>
                 {content.Description && (
                   <div className='rich_content mt-4 text-center'>
-                    <ReactMarkdown children={content.Description} />
+                    <ReactMarkdown>{content.Description}</ReactMarkdown>
                   </div>
                 )}
               </div>

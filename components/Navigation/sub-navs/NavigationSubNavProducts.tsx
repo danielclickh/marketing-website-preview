@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import { galaxyOnClick } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
 import LinkWithArrow from '../../LinkWithArrow'
 import { NavigationLink } from '../parts'
 
@@ -11,7 +11,7 @@ export default function NavigationSubNavProducts() {
         <li className='flex items-center'>
           <NavigationLink
             href='/cloud'
-            onClick={galaxyOnClick('topNav.productMenu.cloudSelect')}
+            onClick={useGalaxyOnClick('topNav.productMenu.cloudSelect')}
             className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
             <Image
               src='/images/nav/icon-clickhouse-cloud.svg'
@@ -33,7 +33,7 @@ export default function NavigationSubNavProducts() {
         <li className='flex items-center'>
           <NavigationLink
             href='/cloud/bring-your-own-cloud'
-            onClick={galaxyOnClick('topNav.productMenu.byocSelect')}
+            onClick={useGalaxyOnClick('topNav.productMenu.byocSelect')}
             className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
             <Image
               src='/images/nav/icon-byoc.svg'
@@ -54,7 +54,7 @@ export default function NavigationSubNavProducts() {
         <li>
           <NavigationLink
             href='/clickhouse'
-            onClick={galaxyOnClick('topNav.productMenu.openSourceSelect')}
+            onClick={useGalaxyOnClick('topNav.productMenu.openSourceSelect')}
             className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
             <Image
               src='/images/nav/icon-clickhouse.svg'
@@ -78,7 +78,7 @@ export default function NavigationSubNavProducts() {
           <NavigationLink
             href='/integrations'
             className='!flex w-full items-center gap-3'
-            onClick={galaxyOnClick(
+            onClick={useGalaxyOnClick(
               'topNav.productMenu.integrationsHighlightSelect'
             )}>
             <Image
@@ -95,7 +95,7 @@ export default function NavigationSubNavProducts() {
       <LinkWithArrow
         prefetch={false}
         href='/integrations'
-        onClick={galaxyOnClick(
+        onClick={useGalaxyOnClick(
           'topNav.productMenu.integrationsHighlightSelect'
         )}
         className='hidden w-full rounded-b-lg border-t border-neutral-700 px-[60px] py-2.5 text-sm font-medium transition-colors hover:bg-neutral-700/25 hover:text-primary-300 md-mid:block'>

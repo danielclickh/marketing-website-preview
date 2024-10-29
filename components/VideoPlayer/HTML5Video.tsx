@@ -9,7 +9,8 @@ function HTML5Video({ provider, sources, ...videoOptions }: HTML5Props) {
     if (ref.current) {
       const player = new Plyr(ref.current, videoOptions)
     }
-  }, [])
+  }, [videoOptions])
+
   return (
     <video
       ref={ref}
@@ -18,7 +19,7 @@ function HTML5Video({ provider, sources, ...videoOptions }: HTML5Props) {
       controls
       data-poster='/path/to/poster.jpg'>
       {sources.map((source, index) => (
-        <source src={source.path} type={source.type} />
+        <source key={index} src={source.path} type={source.type} />
       ))}
     </video>
   )
