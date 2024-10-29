@@ -53,7 +53,7 @@ export default function NavigationSubNavProducts() {
         </li> */}
         <li>
           <NavigationLink
-            href='/clickhouse'
+            href='/jp/clickhouse'
             onClick={galaxyOnClick('topNav.productMenu.openSourceSelect')}
             className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
             <Image
