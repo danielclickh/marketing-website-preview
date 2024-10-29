@@ -7,7 +7,7 @@ import Tilt from 'react-parallax-tilt'
 import Layout from '../../../components/Layout'
 import SocialButtonWithText from '../../../components/SocialButtonWithText'
 import { SuiText } from '../../../components/sui'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
 import imageHeroImage from './hero-image.jpg'
@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps<PageProps> =
   }
 
 export default function Page({ footerData, headerData, seo }: PageProps) {
-  galaxyOnPage('reinvent2024AncillaryTicketPage')
+  useGalaxyOnPage('reinvent2024AncillaryTicketPage')
 
   const router = useRouter()
   const searchParams = useSearchParams()

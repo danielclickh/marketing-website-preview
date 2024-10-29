@@ -13,7 +13,7 @@ import { SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
 import { ContactProps } from '../../../types/contact'
 import LogoCarousel from '../../../components/LogoCarousel'
-import { galaxyOnPage, galaxyOnClick } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage, useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
 import { ArrowDownIcon, ChevronRightIcon } from '@heroicons/react/outline'
 import { CUIButton } from '../../../components/ClickUI'
 
@@ -82,11 +82,15 @@ export default function Page({
   headerData,
   seo
 }: PageProps) {
-  galaxyOnPage('rocksetMigrationPage')
+  useGalaxyOnPage('rocksetMigrationPage')
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
   const [showForm, setShowForm] = useState(false)
+
+  const handleContactSupportClick = useGalaxyOnClick(
+    'rockset.hero.contactSupportSelect'
+  )
 
   return (
     <>
@@ -132,7 +136,7 @@ export default function Page({
                       type='primary'
                       onClick={() => {
                         setShowForm(!showForm)
-                        galaxyOnClick('rockset.hero.contactSupportSelect')
+                        handleContactSupportClick()
                       }}>
                       Get personalized support
                     </CUIButton>
@@ -148,7 +152,9 @@ export default function Page({
                           className='pt-0.5 transition group-hover:translate-x-1/2'
                         />
                       }
-                      onClick={galaxyOnClick('rockset.hero.startTrialSelect')}>
+                      onClick={useGalaxyOnClick(
+                        'rockset.hero.startTrialSelect'
+                      )}>
                       Start a 30-day free trial
                     </CUIButton>
                   </div>
@@ -262,7 +268,7 @@ export default function Page({
                         &nbsp;
                       </span>
                       <div className='pl-6'>
-                        <Markdown children={faq.content} />
+                        <Markdown>{faq.content}</Markdown>
                       </div>
                     </div>
                   ))}

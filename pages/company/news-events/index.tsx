@@ -15,7 +15,7 @@ import { CUILink } from '../../../components/ClickUI'
 import { StrapiImage } from '../../../components/StrapiElements'
 import { CalendarIcon } from '@heroicons/react/outline'
 import EventPost from '../../../components/EventPostList/EventPost'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import CategorySelector from '../../../components/CategorySelector'
 
 export const getStaticProps: GetStaticProps<NewsEventProps> =
@@ -137,7 +137,7 @@ export default function News({
   recentEvents,
   seo
 }: NewsEventProps) {
-  galaxyOnPage('newsEventsPage')
+  useGalaxyOnPage('newsEventsPage')
 
   const router = useRouter()
   const { category } = router.query
@@ -188,7 +188,7 @@ export default function News({
             <div>
               <CUILink
                 href={`/company/events/${featuredEvent.slug}`}
-                className='section-container group mt-2 mb-16 flex flex-col gap-10 hover:no-underline md:flex-row'>
+                className='section-container group mb-16 mt-2 flex flex-col gap-10 hover:no-underline md:flex-row'>
                 <div className='flex flex-col gap-8 rounded-xl lg:flex-row-reverse lg:gap-12 xl:gap-24'>
                   {featuredEvent.thumbnailPng && (
                     <StrapiImage
@@ -202,7 +202,7 @@ export default function News({
                         <SuiTitle type='h2' className='text-neutral-100'>
                           {featuredEvent.title}
                         </SuiTitle>
-                        <div className='mt-8 mb-8 font-normal text-neutral-200'>
+                        <div className='mb-8 mt-8 font-normal text-neutral-200'>
                           {featuredEvent.shortDescription}
                         </div>
 
@@ -254,7 +254,7 @@ export default function News({
                         </div>
                       </div>
                       <div className='mt-8'>
-                        <div className='mt-4 inline-block rounded bg-primary-300 py-2 px-6 font-semibold transition hover:bg-primary-400 group-hover:bg-primary-400 md:mt-0'>
+                        <div className='mt-4 inline-block rounded bg-primary-300 px-6 py-2 font-semibold transition hover:bg-primary-400 group-hover:bg-primary-400 md:mt-0'>
                           <span className='flex items-center justify-center gap-2 text-base text-black'>
                             Register
                           </span>

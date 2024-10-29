@@ -11,7 +11,7 @@ import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'
 import { SuiSearchField, SuiTitle } from '../../components/sui'
 import { findOne } from '../../lib/api/strapi'
-import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { Tailwind } from '../../lib/utils/primereact'
 import {
@@ -157,7 +157,7 @@ function CustomerStoriesPage({
   UseCaseMigrations,
   UseCaseVerticals
 }: UserStoriesPage) {
-  galaxyOnPage('userStoriesPage')
+  useGalaxyOnPage('userStoriesPage')
   const router = useRouter()
   const searchParams = useSearchParams()
 

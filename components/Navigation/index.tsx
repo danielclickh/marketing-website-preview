@@ -1,5 +1,5 @@
 import React from 'react'
-import { galaxyOnClick } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import { NavigationItem, NavigationItemProps } from './parts'
 import NavigationSubNavPricing from './sub-navs/NavigationSubNavPricing'
 import NavigationSubNavProducts from './sub-navs/NavigationSubNavProducts'
@@ -58,7 +58,7 @@ export default function Navigation({
               label='Docs'
               link={{
                 href: 'https://clickhouse.com/docs',
-                onClick: galaxyOnClick('topNav.navItems.docsSelect')
+                onClick: useGalaxyOnClick('topNav.navItems.docsSelect')
               }}
             />
           </li>
@@ -73,7 +73,7 @@ export default function Navigation({
               label='Pricing'
               link={{
                 href: '/pricing',
-                onClick: galaxyOnClick('topNav.navItems.pricingSelect')
+                onClick: useGalaxyOnClick('topNav.navItems.pricingSelect')
               }}
             />
           </li>
@@ -83,7 +83,7 @@ export default function Navigation({
               label='Contact us'
               link={{
                 href: '/company/contact?loc=nav',
-                onClick: galaxyOnClick('topNav.navItems.contactUsSelect')
+                onClick: useGalaxyOnClick('topNav.navItems.contactUsSelect')
               }}
             />
           </li>

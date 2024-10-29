@@ -10,7 +10,7 @@ import Layout from '../../components/Layout'
 import { StrapiImage } from '../../components/StrapiElements'
 import UseCasesComparisons from '../../components/UseCasesComparisons'
 import { findAll, findOne } from '../../lib/api/strapi'
-import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { Quote, useCasesPageDataProps } from '../../types/useCasesPage'
 
@@ -89,7 +89,7 @@ function UseCasesPage({
   individualUseCases,
   quotes
 }: useCasesPageDataProps) {
-  galaxyOnPage('useCasesPage')
+  useGalaxyOnPage('useCasesPage')
 
   const useCaseOrder = [2, 9, 7, 5]
   const sortedUseCases = useCaseOrder

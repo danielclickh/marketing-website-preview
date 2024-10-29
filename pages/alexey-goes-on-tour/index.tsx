@@ -12,7 +12,7 @@ import { EventType } from '../../types/events'
 import { CommonProps } from '../../types/homepage'
 import banner from './banner.jpg'
 import Image from 'next/image'
-import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 
 interface PageProps extends CommonProps {
   recentEvents: Array<EventType>
@@ -66,7 +66,7 @@ export default function HomePage({
   const timelineFirstDotRef = useRef<HTMLSpanElement | null>(null)
   const timelineLastDotRef = useRef<HTMLSpanElement | null>(null)
 
-  galaxyOnPage('alexeyTourPage')
+  useGalaxyOnPage('alexeyTourPage')
 
   useEffect(() => {
     const calculateLinePosition = () => {

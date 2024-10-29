@@ -9,7 +9,7 @@ import IntegrationTile from '../../components/IntegrationTile'
 import Layout from '../../components/Layout'
 import { SuiSearchField, SuiTitle } from '../../components/sui'
 import { fetchAll } from '../../lib/api/strapi'
-import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
 import { upperCaseFirst, slugify } from '../../lib/utils/strings'
@@ -105,7 +105,7 @@ export default function IntegrationsPage({
   headerData,
   footerData
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  galaxyOnPage('integrationsPage')
+  useGalaxyOnPage('integrationsPage')
 
   const router = useRouter()
   const searchParams = useSearchParams()

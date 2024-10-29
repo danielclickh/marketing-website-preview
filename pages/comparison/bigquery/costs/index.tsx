@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { CUIButton, CUICard } from '../../../../components/ClickUI'
 import Footer from '../../../../components/Footer'
 import HomepageSectionTrustedByAlt from '../../../../components/HomepageSectionTrustedByAlt'
@@ -14,7 +14,10 @@ import StatsHeroWithForm from '../../../../components/StatsHeroWithForm'
 import { SuiText, SuiTitle } from '../../../../components/sui'
 import { useClickOutside } from '../../../../hooks'
 import { findAll, findOne } from '../../../../lib/api/strapi'
-import { galaxyOnClick, galaxyOnPage } from '../../../../lib/galaxy/galaxy'
+import {
+  useGalaxyOnClick,
+  useGalaxyOnPage
+} from '../../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../../lib/utils/revalidationConfig'
 import logoFull from '../../../../public/logo-full.svg'
@@ -155,7 +158,7 @@ export default function BigQueryCostsPage({
   comparison,
   customerStories
 }: BigQueryCostsPageProps) {
-  galaxyOnPage(`${comparison.slug}CostsComparisonPage`)
+  useGalaxyOnPage(`${comparison.slug}CostsComparisonPage`)
 
   const gb = useGrowthBook()
 
@@ -183,6 +186,14 @@ export default function BigQueryCostsPage({
   useClickOutside(modalInnerRef, () => {
     setIsModalOpen(false)
   })
+
+  const galaxyOnClickHeroStart = useGalaxyOnClick(
+    `bigqueryCostsComparisonPage.heroCtaVariant${pageLayout}.costsStartTrialSelect`
+  )
+
+  const handleHeroCtaClick = useCallback(() => {
+    galaxyOnClickHeroStart()
+  }, [galaxyOnClickHeroStart])
 
   return (
     <div>
@@ -227,18 +238,12 @@ export default function BigQueryCostsPage({
                   onClick() {
                     setIsModalOpen(true)
                     setModalFormLocValue(`hero-cta-cost-variant${pageLayout}`)
-                    galaxyOnClick(
-                      `bigqueryCostsComparisonPage.heroCtaVariant${pageLayout}.costsPersonalizedSupportSelect`
-                    )()
+                    handleHeroCtaClick()
                   },
                   text: 'Get personalized support'
                 }}
                 secondaryCta={{
-                  onClick() {
-                    galaxyOnClick(
-                      `bigqueryCostsComparisonPage.heroCtaVariant${pageLayout}.costsStartTrialSelect`
-                    )()
-                  },
+                  onClick: galaxyOnClickHeroStart,
                   target: '_blank',
                   href: `https://clickhouse.cloud/signUp?loc=${locTracking}-paid-costs-hero-variant${pageLayout}`,
                   text: 'Start free trial'
@@ -570,9 +575,7 @@ export default function BigQueryCostsPage({
                 onClick={() => {
                   setIsModalOpen(true)
                   setModalFormLocValue(`footer-cta-costs-variant${pageLayout}`)
-                  galaxyOnClick(
-                    `bigqueryCostsComparisonPage.footerCtaVariant${pageLayout}.costsPersonalizedSupportSelect`
-                  )()
+                  handleHeroCtaClick()
                 }}>
                 Get personalized support
               </CUIButton>
@@ -581,9 +584,7 @@ export default function BigQueryCostsPage({
                 size='lg'
                 weight='semibold'
                 onClick={() => {
-                  galaxyOnClick(
-                    `bigqueryCostsComparisonPage.footerCtaVariant${pageLayout}.costsStartTrialSelect`
-                  )()
+                  galaxyOnClickHeroStart()
                 }}
                 href={`https://clickhouse.cloud/signUp?loc=${locTracking}-paid-footer-costs-variant${pageLayout}`}
                 target='_blank'

@@ -1,4 +1,4 @@
-import { galaxyOnClick } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import { CUIButton } from '../ClickUI'
 import Amazonsimple from './logos/Amazonsimple'
 import Azureeventhub from './logos/Azureeventhub'
@@ -12,6 +12,10 @@ import Upstash from './logos/Upstash'
 import Warpstream from './logos/Warpstream'
 
 export default function IntegrationsClickPipesPromo() {
+  const handleGalaxyClick = useGalaxyOnClick(
+    'integrations.clickpipesPromoSection.learnClickpipesSelect'
+  )
+
   return (
     <div className='px-8 2xl:px-0'>
       <div className='rounded-lg border border-neutral-700/80 bg-neutral-700/50 p-6 lg:p-10'>
@@ -28,11 +32,7 @@ export default function IntegrationsClickPipesPromo() {
             <CUIButton
               href='/cloud/clickpipes'
               type='primary'
-              onClick={() => {
-                galaxyOnClick(
-                  'integrations.clickpipesPromoSection.learnClickpipesSelect'
-                )
-              }}>
+              onClick={handleGalaxyClick}>
               Learn more about ClickPipes
             </CUIButton>
           </div>

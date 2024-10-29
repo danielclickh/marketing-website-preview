@@ -14,7 +14,7 @@ import { findOne } from '../../lib/api/strapi'
 import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { BlogApiResponse, BlogProps } from '../../types/blogs'
-import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { fetchBlogs } from '../api/blog'
 
 export const getServerSideProps: GetServerSideProps<BlogProps> =
@@ -49,7 +49,7 @@ export default function BlogsPage({
   headerData,
   footerData
 }: BlogProps) {
-  galaxyOnPage('blogListPage')
+  useGalaxyOnPage('blogListPage')
 
   const router = useRouter()
 

@@ -37,6 +37,7 @@ export default function StatsHeroWithForm({
                           <Image
                             {...icon}
                             className='h-8 w-8 object-scale-down object-center'
+                            alt='stat image'
                           />
                         </div>
                         <div className='flex flex-1 items-center pl-4 text-lg'>

@@ -34,7 +34,7 @@ import graphLinesChdb from './graph-lines-chdb.svg'
 import graphLinesDuckdb from './graph-lines-duckdb.svg'
 import graphLinesPandas from './graph-lines-pandas.svg'
 import graphLinesPolars from './graph-lines-polars.svg'
-import { galaxyOnPage, galaxyOnClick } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnPage, useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -54,7 +54,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
   }
 
 export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
-  galaxyOnPage('chdbPage')
+  useGalaxyOnPage('chdbPage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -82,7 +82,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
                 className='mt-6 !px-8'
                 href='https://clickhouse.com/docs/en/chdb'
                 target='_blank'
-                onClick={galaxyOnClick('chdbPage.heroCta.tryItSelect')}>
+                onClick={useGalaxyOnClick('chdbPage.heroCta.tryItSelect')}>
                 Try it today
               </CUIButton>
             </div>
@@ -374,10 +374,10 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
           <SuiText className='text-center'>
             For more details, check out our{' '}
             <Link
-              href='https://benchmark.clickhouse.com/#eyJzeXN0ZW0iOnsiQWxsb3lEQiI6dHJ1ZSwiQXRoZW5hIChwYXJ0aXRpb25lZCkiOnRydWUsIkF0aGVuYSAoc2luZ2xlKSI6dHJ1ZSwiQXVyb3JhIGZvciBNeVNRTCI6dHJ1ZSwiQXVyb3JhIGZvciBQb3N0Z3JlU1FMIjp0cnVlLCJCeUNvbml0eSI6dHJ1ZSwiQnl0ZUhvdXNlIjp0cnVlLCJjaERCIChEYXRhRnJhbWUpIjp0cnVlLCJjaERCIChQYXJxdWV0LCBwYXJ0aXRpb25lZCkiOnRydWUsImNoREIiOnRydWUsIkNpdHVzIjp0cnVlLCJDbGlja0hvdXNlIENsb3VkIChhd3MpIjp0cnVlLCJDbGlja0hvdXNlIENsb3VkIChhd3MpIFBhcmFsbGVsIFJlcGxpY2FzIE9OIjp0cnVlLCJDbGlja0hvdXNlIENsb3VkIChBenVyZSkiOnRydWUsIkNsaWNrSG91c2UgQ2xvdWQgKEF6dXJlKSBQYXJhbGxlbCBSZXBsaWNhIE9OIjp0cnVlLCJDbGlja0hvdXNlIENsb3VkIChBenVyZSkgUGFyYWxsZWwgUmVwbGljYXMgT04iOnRydWUsIkNsaWNrSG91c2UgQ2xvdWQgKGdjcCkiOnRydWUsIkNsaWNrSG91c2UgQ2xvdWQgKGdjcCkgUGFyYWxsZWwgUmVwbGljYXMgT04iOnRydWUsIkNsaWNrSG91c2UgKGRhdGEgbGFrZSwgcGFydGl0aW9uZWQpIjp0cnVlLCJDbGlja0hvdXNlIChkYXRhIGxha2UsIHNpbmdsZSkiOnRydWUsIkNsaWNrSG91c2UgKFBhcnF1ZXQsIHBhcnRpdGlvbmVkKSI6dHJ1ZSwiQ2xpY2tIb3VzZSAoUGFycXVldCwgc2luZ2xlKSI6dHJ1ZSwiQ2xpY2tIb3VzZSAod2ViKSI6dHJ1ZSwiQ2xpY2tIb3VzZSI6dHJ1ZSwiQ2xpY2tIb3VzZSAodHVuZWQpIjp0cnVlLCJDbGlja0hvdXNlICh0dW5lZCwgbWVtb3J5KSI6dHJ1ZSwiQ2xvdWRiZXJyeSI6dHJ1ZSwiQ3JhdGVEQiI6dHJ1ZSwiQ3J1bmNoeSBCcmlkZ2UgZm9yIEFuYWx5dGljcyAoUGFycXVldCkiOnRydWUsIkRhdGFiZW5kIjp0cnVlLCJEYXRhRnVzaW9uIChQYXJxdWV0LCBwYXJ0aXRpb25lZCkiOnRydWUsIkRhdGFGdXNpb24gKFBhcnF1ZXQsIHNpbmdsZSkiOnRydWUsIkFwYWNoZSBEb3JpcyI6dHJ1ZSwiRHJ1aWQiOnRydWUsIkR1Y2tEQiAoRGF0YUZyYW1lKSI6dHJ1ZSwiRHVja0RCIChQYXJxdWV0LCBwYXJ0aXRpb25lZCkiOnRydWUsIkR1Y2tEQiI6dHJ1ZSwiRWxhc3RpY3NlYXJjaCI6dHJ1ZSwiRWxhc3RpY3NlYXJjaCAodHVuZWQpIjpmYWxzZSwiR2xhcmVEQiI6dHJ1ZSwiR3JlZW5wbHVtIjp0cnVlLCJIZWF2eUFJIjp0cnVlLCJIeWRyYSI6dHJ1ZSwiSW5mb2JyaWdodCI6dHJ1ZSwiS2luZXRpY2EiOnRydWUsIk1hcmlhREIgQ29sdW1uU3RvcmUiOnRydWUsIk1hcmlhREIiOmZhbHNlLCJNb25ldERCIjp0cnVlLCJNb25nb0RCIjp0cnVlLCJNb3RoZXJkdWNrIjp0cnVlLCJNeVNRTCAoTXlJU0FNKSI6dHJ1ZSwiTXlTUUwiOnRydWUsIk94bGEiOnRydWUsIlBhbmRhcyAoRGF0YUZyYW1lKSI6dHJ1ZSwiUGFyYWRlREIgKFBhcnF1ZXQsIHBhcnRpdGlvbmVkKSI6dHJ1ZSwiUGFyYWRlREIgKFBhcnF1ZXQsIHNpbmdsZSkiOnRydWUsIlBpbm90Ijp0cnVlLCJQb2xhcnMgKERhdGFGcmFtZSkiOnRydWUsIlBvc3RncmVTUUwgKHR1bmVkKSI6ZmFsc2UsIlBvc3RncmVTUUwiOnRydWUsIlF1ZXN0REIgKHBhcnRpdGlvbmVkKSI6dHJ1ZSwiUXVlc3REQiI6dHJ1ZSwiUmVkc2hpZnQiOnRydWUsIlNpbmdsZVN0b3JlIjp0cnVlLCJTbm93Zmxha2UiOnRydWUsIlNRTGl0ZSI6dHJ1ZSwiU3RhclJvY2tzIjp0cnVlLCJUYWJsZXNwYWNlIjp0cnVlLCJUZW1ibyBPTEFQIChjb2x1bW5hcikiOnRydWUsIlRpbWVzY2FsZURCIChjb21wcmVzc2lvbikiOnRydWUsIlRpbWVzY2FsZURCIjp0cnVlLCJVbWJyYSI6dHJ1ZX0sInR5cGUiOnsiQyI6ZmFsc2UsImNvbHVtbi1vcmllbnRlZCI6ZmFsc2UsIlBvc3RncmVTUUwgY29tcGF0aWJsZSI6ZmFsc2UsIm1hbmFnZWQiOmZhbHNlLCJnY3AiOmZhbHNlLCJzdGF0ZWxlc3MiOmZhbHNlLCJKYXZhIjpmYWxzZSwiQysrIjpmYWxzZSwiTXlTUUwgY29tcGF0aWJsZSI6ZmFsc2UsInJvdy1vcmllbnRlZCI6ZmFsc2UsIkNsaWNrSG91c2UgZGVyaXZhdGl2ZSI6ZmFsc2UsImVtYmVkZGVkIjpmYWxzZSwic2VydmVybGVzcyI6ZmFsc2UsImRhdGFmcmFtZSI6dHJ1ZSwiYXdzIjpmYWxzZSwicGFyYWxsZWwgcmVwbGljYXMiOmZhbHNlLCJBenVyZSI6ZmFsc2UsImFuYWx5dGljYWwiOmZhbHNlLCJSdXN0IjpmYWxzZSwic2VhcmNoIjpmYWxzZSwiZG9jdW1lbnQiOmZhbHNlLCJzb21ld2hhdCBQb3N0Z3JlU1FMIGNvbXBhdGlibGUiOmZhbHNlLCJ0aW1lLXNlcmllcyI6ZmFsc2V9LCJtYWNoaW5lIjp7IjE2IHZDUFUgMTI4R0IiOnRydWUsIjggdkNQVSA2NEdCIjp0cnVlLCJzZXJ2ZXJsZXNzIjp0cnVlLCIxNmFjdSI6dHJ1ZSwiYzZhLjR4bGFyZ2UsIDUwMGdiIGdwMiI6dHJ1ZSwiTCI6dHJ1ZSwiTSI6dHJ1ZSwiUyI6dHJ1ZSwiWFMiOnRydWUsImM2YS5tZXRhbCwgNTAwZ2IgZ3AyIjp0cnVlLCIxOTJHQiI6dHJ1ZSwiMjRHQiI6dHJ1ZSwiMzYwR0IiOnRydWUsIjQ4R0IiOnRydWUsIjcyMEdCIjp0cnVlLCI5NkdCIjp0cnVlLCIxNDMwR0IiOnRydWUsImRldiI6dHJ1ZSwiNzA4R0IiOnRydWUsImM1bi40eGxhcmdlLCA1MDBnYiBncDIiOnRydWUsIkFuYWx5dGljcy0yNTZHQiAoNjQgdkNvcmVzLCAyNTYgR0IpIjp0cnVlLCJjNS40eGxhcmdlLCA1MDBnYiBncDIiOnRydWUsImM2YS40eGxhcmdlLCAxNTAwZ2IgZ3AyIjp0cnVlLCJjbG91ZCI6dHJ1ZSwiZGMyLjh4bGFyZ2UiOnRydWUsInJhMy4xNnhsYXJnZSI6dHJ1ZSwicmEzLjR4bGFyZ2UiOnRydWUsInJhMy54bHBsdXMiOnRydWUsIlMyIjp0cnVlLCJTMjQiOnRydWUsIjJYTCI6dHJ1ZSwiM1hMIjp0cnVlLCI0WEwiOnRydWUsIlhMIjp0cnVlLCJMMSAtIDE2Q1BVIDMyR0IiOnRydWUsImM2YS40eGxhcmdlLCA1MDBnYiBncDMiOnRydWV9LCJjbHVzdGVyX3NpemUiOnsiMSI6dHJ1ZSwiMiI6dHJ1ZSwiNCI6dHJ1ZSwiOCI6dHJ1ZSwiMTYiOnRydWUsIjMyIjp0cnVlLCI2NCI6dHJ1ZSwiMTI4Ijp0cnVlLCJzZXJ2ZXJsZXNzIjp0cnVlLCJkZWRpY2F0ZWQiOnRydWV9LCJtZXRyaWMiOiJob3QiLCJxdWVyaWVzIjpbdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZV19'
+              href='https://benchmark.clickhouse.com/#eyJzeXN0ZW0iOnsiQWxsb3lEQiI6dHJ1ZSwiQXRoZW5hIChwYXJ0aXRpb25lZCkiOnRydWUsIkF0aGVuYSAoc2luZ2xlKSI6dHJ1ZSwiQXVyb3JhIGZvciBNeVNRTCI6dHJ1ZSwiQXVyb3JhIGZvciBQb3N0Z3JlU1FMIjp0cnVlLCJCeUNvbml0eSI6dHJ1ZSwiQnl0ZUhvdXNlIjp0cnVlLCJjaERCIChEYXRhRnJhbWUpIjp0cnVlLCJjaERCIChQYXJxdWV0LCBwYXJ0aXRpb25lZCkiOnRydWUsImNoREIiOnRydWUsIkNpdHVzIjp0cnVlLCJDbGlja0hvdXNlIENsb3VkIChhd3MpIjp0cnVlLCJDbGlja0hvdXNlIENsb3VkIChhd3MpIFBhcmFsbGVsIFJlcGxpY2FzIE9OIjp0cnVlLCJDbGlja0hvdXNlIENsb3VkIChBenVyZSkiOnRydWUsIkNsaWNrSG91c2UgQ2xvdWQgKEF6dXJlKSBQYXJhbGxlbCBSZXBsaWNhIE9OIjp0cnVlLCJDbGlja0hvdXNlIENsb3VkIChBenVyZSkgUGFyYWxsZWwgUmVwbGljYXMgT04iOnRydWUsIkNsaWNrSG91c2UgQ2xvdWQgKGdjcCkiOnRydWUsIkNsaWNrSG91c2UgQ2xvdWQgKGdjcCkgUGFyYWxsZWwgUmVwbGljYXMgT04iOnRydWUsIkNsaWNrSG91c2UgKGRhdGEgbGFrZSwgcGFydGl0aW9uZWQpIjp0cnVlLCJDbGlja0hvdXNlIChkYXRhIGxha2UsIHNpbmdsZSkiOnRydWUsIkNsaWNrSG91c2UgKFBhcnF1ZXQsIHBhcnRpdGlvbmVkKSI6dHJ1ZSwiQ2xpY2tIb3VzZSAoUGFycXVldCwgc2luZ2xlKSI6dHJ1ZSwiQ2xpY2tIb3VzZSAod2ViKSI6dHJ1ZSwiQ2xpY2tIb3VzZSI6dHJ1ZSwiQ2xpY2tIb3VzZSAodHVuZWQpIjp0cnVlLCJDbGlja0hvdXNlICh0dW5lZCwgbWVtb3J5KSI6dHJ1ZSwiQ2xvdWRiZXJyeSI6dHJ1ZSwiQ3JhdGVEQiI6dHJ1ZSwiQ3J1bmNoeSBCcmlkZ2UgZm9yIEFuYWx5dGljcyAoUGFycXVldCkiOnRydWUsIkRhdGFiZW5kIjp0cnVlLCJEYXRhRnVzaW9uIChQYXJxdWV0LCBwYXJ0aXRpb25lZCkiOnRydWUsIkRhdGFGdXNpb24gKFBhcnF1ZXQsIHNpbmdsZSkiOnRydWUsIkFwYWNoZSBEb3JpcyI6dHJ1ZSwiRHJ1aWQiOnRydWUsIkR1Y2tEQiAoRGF0YUZyYW1lKSI6dHJ1ZSwiRHVja0RCIChQYXJxdWV0LCBwYXJ0aXRpb25lZCkiOnRydWUsIkR1Y2tEQiI6dHJ1ZSwiRWxhc3RpY3NlYXJjaCI6dHJ1ZSwiRWxhc3RpY3NlYXJjaCAodHVuZWQpIjpmYWxzZSwiR2xhcmVEQiI6dHJ1ZSwiR3JlZW5wbHVtIjp0cnVlLCJIZWF2eUFJIjp0cnVlLCJIeWRyYSI6dHJ1ZSwiSW5mb2JyaWdodCI6dHJ1ZSwiS2luZXRpY2EiOnRydWUsIk1hcmlhREIgQ29sdW1uU3RvcmUiOnRydWUsIk1hcmlhREIiOmZhbHNlLCJNb25ldERCIjp0cnVlLCJNb25nb0RCIjp0cnVlLCJNb3RoZXJkdWNrIjp0cnVlLCJNeVNRTCAoTXlJU0FNKSI6dHJ1ZSwiTXlTUUwiOnRydWUsIk94bGEiOnRydWUsIlBhbmRhcyAoRGF0YUZyYW1lKSI6dHJ1ZSwiUGFyYWRlREIgKFBhcnF1ZXQsIHBhcnRpdGlvbmVkKSI6dHJ1ZSwiUGFyYWRlREIgKFBhcnF1ZXQsIHNpbmdsZSkiOnRydWUsIlBpbm90Ijp0cnVlLCJQb2xhcnMgKERhdGFGcmFtZSkiOnRydWUsIlBvc3RncmVTUUwgKHR1bmVkKSI6ZmFsc2UsIlBvc3RncmVTUUwiOnRydWUsIlF1ZXN0REIgKHBhcnRpdGlvbmVkKSI6dHJ1ZSwiUXVlc3REQiI6dHJ1ZSwiUmVkc2hpZnQiOnRydWUsIlNpbmdsZVN0b3JlIjp0cnVlLCJTbm93Zmxha2UiOnRydWUsIlNRTGl0ZSI6dHJ1ZSwiU3RhclJvY2tzIjp0cnVlLCJUYWJsZXNwYWNlIjp0cnVlLCJUZW1ibyBPTEFQIChjb2x1bW5hcikiOnRydWUsIlRpbWVzY2FsZURCIChjb21wcmVzc2lvbikiOnRydWUsIlRpbWVzY2FsZURCIjp0cnVlLCJVbWJyYSI6dHJ1ZX0sInR5cGUiOnsiQyI6ZmFsc2UsImNvbHVtbi1vcmllbnRlZCI6ZmFsc2UsIlBvc3RncmVTUUwgY29tcGF0aWJsZSI6ZmFsc2UsIm1hbmFnZWQiOmZhbHNlLCJnY3AiOmZhbHNlLCJzdGF0ZWxlc3MiOmZhbHNlLCJKYXZhIjpmYWxzZSwiQysrIjpmYWxzZSwiTXlTUUwgY29tcGF0aWJsZSI6ZmFsc2UsInJvdy1vcmllbnRlZCI6ZmFsc2UsIkNsaWNrSG91c2UgZGVyaXZhdGl2ZSI6ZmFsc2UsImVtYmVkZGVkIjpmYWxzZSwic2VydmVybGVzcyI6ZmFsc2UsImRhdGFmcmFtZSI6dHJ1ZSwiYXdzIjpmYWxzZSwicGFyYWxsZWwgcmVwbGljYXMiOmZhbHNlLCJBenVyZSI6ZmFsc2UsImFuYWx5dGljYWwiOmZhbHNlLCJSdXN0IjpmYWxzZSwic2VhcmNoIjpmYWxzZSwiZG9jdW1lbnQiOmZhbHNlLCJzb21ld2hhdCBQb3N0Z3JlU1FMIGNvbXBhdGlibGUiOmZhbHNlLCJ0aW1lLXNlcmllcyI6ZmFsc2V9LCJtYWNoaW5lIjp7IjE2IHZDUFUgMTI4R0IiOnRydWUsIjggdkNQVSA2NEdCIjp0cnVlLCJzZXJ2ZXJsZXNzIjp0cnVlLCIxNmFjdSI6dHJ1ZSwiYzZhLjR4bGFyZ2UsIDUwMGdiIGdwMiI6dHJ1ZSwiTCI6dHJ1ZSwiTSI6dHJ1ZSwiUyI6dHJ1ZSwiWFMiOnRydWUsImM2YS5tZXRhbCwgNTAwZ2IgZ3AyIjp0cnVlLCIxOTJHQiI6dHJ1ZSwiMjRHQiI6dHJ1ZSwiMzYwR0IiOnRydWUsIjQ4R0IiOnRydWUsIjcyMEdCIjp0cnVlLCI5NkdCIjp0cnVlLCIxNDMwR0IiOnRydWUsImRldiI6dHJ1ZSwiNzA4R0IiOnRydWUsImM1bi40eGxhcmdlLCA1MDBnYiBncDIiOnRydWUsIkFuYWx5dGljcy0yNTZHQiAoNjQgdkNvcmVzLCAyNTYgR0IpIjp0cnVlLCJjNS40eGxhcmdlLCA1MDBnYiBncDIiOnRydWUsImM2YS40eGxhcmdlLCAxNTAwZ2IgZ3AyIjp0cnVlLCJjbG91ZCI6dHJ1ZSwiZGMyLjh4bGFyZ2UiOnRydWUsInJhMy4xNnhsYXJnZSI6dHJ1ZSwicmEzLjR4bGFyZ2UiOnRydWUsInJhMy54bHBsdXMiOnRydWUsIlMyIjp0cnVlLCJTMjQiOnRydWUsIjJYTCI6dHJ1ZSwiM1hMIjp0cnVlLCI0WEwiOnRydWUsIlhMIjp0cnVlLCJMMSAtIDE2Q1BVIDMyR0IiOnRydWUsImM2YS40eGxhcmdlLCA1MDBnYiBncDMiOnRydWV9LCJjbHVzdGVyX3NpemUiOnsiMSI6dHJ1ZSwiMiI6dHJ1ZSwiNCI6dHJ1ZSwiOCI6dHJ1ZSwiMTYiOnRydWUsIjMyIjp0cnVlLCI2NCI6dHJ1ZSwiMTI4Ijp0cnVlLCJzZXJ2ZXJsZXNzIjp0cnVlLCJkZWRpY2F0ZWQiOnRydWV9LCJtZXRyaWMiOiJob3QiLCJxdWVyaWVzIjpbdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZV19'
               target='_blank'
               className='text-primary-300 hover:underline'
-              onClick={galaxyOnClick(
+              onClick={useGalaxyOnClick(
                 'chdbPage.comparionsTable.benchmarkSelect'
               )}>
               full benchmark results
@@ -452,7 +452,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
             className='group mx-auto mt-8'
             target='_blank'
             href='https://clickhouse.cloud/signUp?loc=chdbPageFooterCta'
-            onClick={galaxyOnClick(
+            onClick={useGalaxyOnClick(
               'chdbPage.footerCta.createFreeAccountSelect'
             )}>
             Create a free account
@@ -531,6 +531,30 @@ function BenchmarkGraph() {
   const [isDuckdb, setIsDuckdb] = useState(false)
   const [isPandas, setIsPandas] = useState(true)
   const [isPolars, setIsPolars] = useState(false)
+
+  const chdbCheckGalaxy = useGalaxyOnClick('chdbPage.comparionsTable.chdbCheck')
+  const chdbUncheckGalaxy = useGalaxyOnClick(
+    'chdbPage.comparionsTable.chdbUncheck'
+  )
+  const duckdbCheckGalaxy = useGalaxyOnClick(
+    'chdbPage.comparionsTable.duckDbCheck'
+  )
+  const duckdbUncheckGalaxy = useGalaxyOnClick(
+    'chdbPage.comparionsTable.duckDbUncheck'
+  )
+  const pandasCheckGalaxy = useGalaxyOnClick(
+    'chdbPage.comparionsTable.pandasCheck'
+  )
+  const pandasUncheckGalaxy = useGalaxyOnClick(
+    'chdbPage.comparionsTable.pandasUncheck'
+  )
+  const polarsCheckGalaxy = useGalaxyOnClick(
+    'chdbPage.comparionsTable.polarsCheck'
+  )
+  const polarsUncheckGalaxy = useGalaxyOnClick(
+    'chdbPage.comparionsTable.polarsUnCheck'
+  )
+
   return (
     <div className='relative mx-auto my-6 max-w-[1090px]'>
       <div className='z-20 mb-6 flex flex-wrap justify-center gap-4 lg:absolute lg:-top-8 lg:right-6 lg:block lg:space-y-3'>
@@ -541,9 +565,9 @@ function BenchmarkGraph() {
           onChange={(val) => {
             setIsChdb(val)
             if (val) {
-              galaxyOnClick('chdbPage.comparionsTable.chdbCheck')()
+              chdbCheckGalaxy()
             } else {
-              galaxyOnClick('chdbPage.comparionsTable.chdbUncheck')()
+              chdbUncheckGalaxy()
             }
           }}>
           chDB
@@ -554,9 +578,9 @@ function BenchmarkGraph() {
           onChange={(val) => {
             setIsDuckdb(val)
             if (val) {
-              galaxyOnClick('chdbPage.comparionsTable.duckDbCheck')()
+              duckdbCheckGalaxy()
             } else {
-              galaxyOnClick('chdbPage.comparionsTable.duckDbUncheck')()
+              duckdbUncheckGalaxy()
             }
           }}>
           DuckDB
@@ -567,9 +591,9 @@ function BenchmarkGraph() {
           onChange={(val) => {
             setIsPandas(val)
             if (val) {
-              galaxyOnClick('chdbPage.comparionsTable.pandasCheck')()
+              pandasCheckGalaxy()
             } else {
-              galaxyOnClick('chdbPage.comparionsTable.pandasUncheck')()
+              pandasUncheckGalaxy()
             }
           }}>
           Pandas
@@ -580,9 +604,9 @@ function BenchmarkGraph() {
           onChange={(val) => {
             setIsPolars(val)
             if (val) {
-              galaxyOnClick('chdbPage.comparionsTable.polarsCheck')()
+              polarsCheckGalaxy()
             } else {
-              galaxyOnClick('chdbPage.comparionsTable.polarsUncheck')()
+              polarsUncheckGalaxy()
             }
           }}>
           Polars
@@ -700,6 +724,7 @@ function IconCard({
       <Image
         {...icon}
         className='mx-auto aspect-square w-[72px] rounded border border-jet bg-black/40 object-scale-down object-center shadow-sm'
+        alt='icon image'
       />
       {children}
     </CUICard>
@@ -726,7 +751,7 @@ function FeatureSection({
         </div>
       </div>
       <div className='flex items-center justify-center md:w-1/2'>
-        <Image {...image} />
+        <Image {...image} alt={image.alt || ''} />
       </div>
     </div>
   )
