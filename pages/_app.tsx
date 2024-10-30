@@ -2,7 +2,7 @@ import '../styles/globals.scss'
 import '../styles/highlightjs.scss'
 import '../styles/securiti-cookie-banner.scss'
 import '../styles/securiti-overrides.scss'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Inconsolata, Inter } from 'next/font/google'
 import { SnackbarContextProvider } from '../components/sui'
 import { AppProps } from 'next/app'
@@ -13,6 +13,8 @@ import { useRouter } from 'next/router'
 import { useInitGalaxy } from '../lib/galaxy/galaxy'
 import { GrowthBook, GrowthBookProvider } from '@growthbook/growthbook-react'
 import { Galaxy } from '../lib/galaxy/web/browser'
+import { Switch, Text, ThemeName, ClickUIProvider, Title } from '@clickhouse/click-ui'
+
 
 const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K'
 const websiteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL
@@ -58,6 +60,8 @@ function updateGrowthBookURL() {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [theme, setTheme] = useState<ThemeName>('dark')
+
   const router = useRouter()
   useInitGalaxy()
 
@@ -78,6 +82,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+    <ClickUIProvider theme={theme}>
       <Head>
         <base href='/' />
         <meta content='width=device-width, initial-scale=1' name='viewport' />
@@ -150,6 +155,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           )}
         </>
       )}
+    </ClickUIProvider>
     </>
   )
 }

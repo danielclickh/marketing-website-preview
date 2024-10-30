@@ -8,6 +8,7 @@ import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'
 import NewsLetter from '../../../components/NewsLetter'
+import ReadingProgress from '../../../components/ReadingProgress'
 import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
 import SocialButton from '../../../components/SocialButton'
 import { StrapiImage } from '../../../components/StrapiElements'
@@ -108,6 +109,7 @@ export default function BlogPage({
   author,
   content,
   category,
+  readingTime,
   otherBlogs,
   date,
   publishedAt,
@@ -121,8 +123,10 @@ export default function BlogPage({
   seo
 }: BlogProps) {
   useGalaxyOnPage('blogPage')
+  const target = React.createRef<HTMLDivElement>();
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <ReadingProgress target={target} />
       <div className='pt-10'>
         <div className='container mx-auto flex max-w-3xl flex-col px-6 2xl:px-0'>
           <div className='mx-auto flex flex-col pt-6 text-center'>
@@ -155,8 +159,9 @@ export default function BlogPage({
                     {author.name}
                   </SuiText>
                   <SuiText size='sm' weight='normal' color='secondary'>
-                    {convertDateToString(date || publishedAt)}
+                    {convertDateToString(date || publishedAt)} -  {readingTime} minutes read
                   </SuiText>
+
                 </div>
               </div>
             </div>
@@ -171,20 +176,27 @@ export default function BlogPage({
                   className='rich-text-content mb-8 leading-6'
                   allowHeaderLink>
                   {CloudCTAHeader}
+
                 </Markdown>
               </>
             )}
             {content && (
-              <Markdown className='rich-text-content leading-6' allowHeaderLink>
-                {content}
-              </Markdown>
+   
+                
+                <div ref={target}>
+                  <Markdown className='rich-text-content leading-6' allowHeaderLink>
+                    {content}
+                  </Markdown>
+                </div>
+
+
             )}
 
             {ShowCloudCTAFooter && (
               <>
                 <Markdown
                   className='rich-text-content mt-8 leading-6'
-                  allowHeaderLink>
+                  allowHeaderLink >
                   {CloudCTAFooter}
                 </Markdown>
               </>
