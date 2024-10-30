@@ -109,7 +109,7 @@ export default function BlogPage({
   author,
   content,
   category,
-  reading_time,
+  readingTime,
   otherBlogs,
   date,
   publishedAt,
@@ -159,7 +159,7 @@ export default function BlogPage({
                     {author.name}
                   </SuiText>
                   <SuiText size='sm' weight='normal' color='secondary'>
-                    {convertDateToString(date || publishedAt)} -  {reading_time} minutes read
+                    {convertDateToString(date || publishedAt)} -  {readingTime} minutes read
                   </SuiText>
 
                 </div>

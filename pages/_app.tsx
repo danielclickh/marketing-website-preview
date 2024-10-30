@@ -81,6 +81,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
+    <>
     <ClickUIProvider theme={theme}>
       <Head>
         <base href='/' />
@@ -155,6 +156,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </>
       )}
     </ClickUIProvider>
+    </>
   )
 }
 
