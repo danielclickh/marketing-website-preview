@@ -184,7 +184,7 @@ body {
   }
 
   .code-with-play {
-    @apply text-neutral-0 flex relative whitespace-pre-wrap rounded-lg bg-noised;
+    @apply text-neutral-0 flex whitespace-pre-wrap rounded-lg bg-noised;
     padding: 24px;
 
     .code {
@@ -252,7 +252,8 @@ body {
     code {
       @apply box-border mb-9 w-full;
       padding: 20px;
-      @apply text-neutral-0 rounded-lg whitespace-pre-wrap block bg-noised;
+      position: inherit;
+      @apply text-neutral-0 rounded-lg whitespace-pre-wrap block;
 
       @apply border border-solid border-c3 break-words;
 
