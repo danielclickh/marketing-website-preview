@@ -1,1 +1,1 @@
-export * from './NumericSelect';
+export * from './NumericSelect'

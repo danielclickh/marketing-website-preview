@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { findAll, getStagingOnlyFilters } from '../../lib/api/strapi'
+import { findAll } from '../../lib/api/strapi'
 import { slugify } from '../../lib/utils/strings'
 import { VideosApiResponse } from '../../types/videos'
 

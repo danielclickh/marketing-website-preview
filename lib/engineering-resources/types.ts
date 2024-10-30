@@ -1,6 +1,6 @@
 export interface EngineeringResource {
-  slug: string,
-  title: string,
-  excerpt: string,
-  body: string,
+  slug: string
+  title: string
+  excerpt: string
+  body: string
 }

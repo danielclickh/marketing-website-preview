@@ -1,1 +1,1 @@
-export { SuiCard } from './basic_card';
+export { SuiCard } from './basic_card'

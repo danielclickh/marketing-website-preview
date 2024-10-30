@@ -1,15 +1,15 @@
-import { GalaxyClient, Level } from './client';
+import { GalaxyClient, Level } from './client'
 
-const logLevels = ['info', 'log', 'warn', 'debug', 'error'] as const;
-type LogLevels = (typeof logLevels)[number];
+const logLevels = ['info', 'log', 'warn', 'debug', 'error'] as const
+type LogLevels = (typeof logLevels)[number]
 
 type LogFns = {
-  info: (...data: any[]) => void;
-  log: (...data: any[]) => void;
-  error: (...data: any[]) => void;
-  warn: (...data: any[]) => void;
-  debug: (...data: any[]) => void;
-};
+  info: (...data: any[]) => void
+  log: (...data: any[]) => void
+  error: (...data: any[]) => void
+  warn: (...data: any[]) => void
+  debug: (...data: any[]) => void
+}
 
 export let logFns: LogFns = {
   info: console.info,
@@ -17,7 +17,7 @@ export let logFns: LogFns = {
   error: console.error,
   warn: console.warn,
   debug: console.debug
-};
+}
 
 /**
  * Enqueues message in Galaxy service.
@@ -40,20 +40,20 @@ export function enableGalaxyLogging(client: GalaxyClient): void {
     error: console.error,
     warn: console.warn,
     debug: console.debug
-  };
+  }
 
   const wrap = (level: LogLevels) => {
     console[level] = function (...args: unknown[]) {
-      const originalFn = logFns[level];
-      originalFn.apply(console, args);
+      const originalFn = logFns[level]
+      originalFn.apply(console, args)
 
       try {
-        client.log(level.toUpperCase() as Level, ...args);
+        client.log(level.toUpperCase() as Level, ...args)
       } catch (error) {
-        logFns.error('Could not log to galaxy', args);
+        logFns.error('Could not log to galaxy', args)
       }
-    };
-  };
+    }
+  }
 
-  logLevels.forEach(wrap);
+  logLevels.forEach(wrap)
 }

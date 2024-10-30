@@ -1,8 +1,6 @@
-import { useRouter } from 'next/router'
-
 import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
-
+import { useRouter } from 'next/router'
 import { SelectProps } from '../../CalculatorTypesOptions'
 
 export const Select: React.FC<SelectProps> = ({

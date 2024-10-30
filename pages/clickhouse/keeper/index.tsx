@@ -4,11 +4,11 @@ import Link from 'next/link'
 import GetStarted from '../../../components/GetStarted'
 import Layout from '../../../components/Layout'
 import { SuiText } from '../../../components/sui'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { KeeperData } from '../../../types/keeper'
 import features from './features.json'
 import replacements from './replacements.json'
-import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<KeeperData> =
   async function getStaticProps() {

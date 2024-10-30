@@ -1,1 +1,1 @@
-export { UseCase } from './use_case';
+export { UseCase } from './use_case'

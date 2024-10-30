@@ -1,13 +1,10 @@
-import React, { ReactElement } from 'react'
 import { useRouter } from 'next/router'
+import React from 'react'
+import { ToggleButtonsProps } from '../../CalculatorTypesOptions'
 import AwsLogo from './AwsLogo'
-import GCPLogo from './GCPLogo'
-
-import styles from './ToggleButtons.module.scss'
-
-import { Option, ToggleButtonsProps } from '../../CalculatorTypesOptions'
 import AzureLogo from './AzureLogo'
-import { SuiText } from '../../../sui'
+import GCPLogo from './GCPLogo'
+import styles from './ToggleButtons.module.scss'
 
 export function ToggleButtonsProviders<T extends string = string>({
   options,

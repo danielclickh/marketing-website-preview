@@ -121,8 +121,7 @@ export default function RichContentPage({
           ) : (
             <SuiTitle
               type='h1'
-              className='container mx-auto flex max-w-screen-lg items-center justify-center px-0 py-16 text-center font-bold'
-            >
+              className='container mx-auto flex max-w-screen-lg items-center justify-center px-0 py-16 text-center font-bold'>
               {title}
             </SuiTitle>
           )}
@@ -140,8 +139,7 @@ export default function RichContentPage({
                     leftContent && rightContent
                       ? 'mb-16 flex flex-col items-start justify-center gap-x-[5%] md:grid md:grid-cols-2'
                       : 'mb-16'
-                  }
-                >
+                  }>
                   {leftContent && (
                     <Markdown className='rich-text-content show-anchor w-full'>
                       {leftContent}
@@ -178,8 +176,7 @@ export default function RichContentPage({
               el.addEventListener('selectstart', function () {
                 return false
               })
-          }}
-        >
+          }}>
           {pageBody}
         </div>
         <div className='hidden text-black print:block'>

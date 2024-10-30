@@ -86,8 +86,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GrowthBookProvider growthbook={gb}>
         <main
           id='main-site-container'
-          className={`${inter.variable} font-inter ${inconsolata.variable}`}
-        >
+          className={`${inter.variable} font-inter ${inconsolata.variable}`}>
           <SnackbarContextProvider>
             <div className='flex min-h-screen flex-col'>
               <Component {...pageProps} />

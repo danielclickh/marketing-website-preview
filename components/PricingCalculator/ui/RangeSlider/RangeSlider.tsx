@@ -1,6 +1,5 @@
-import { useRouter } from 'next/router'
 import * as Slider from '@radix-ui/react-slider'
-
+import { useRouter } from 'next/router'
 import { RangeSliderProps } from '../../CalculatorTypesOptions'
 
 export const RangeSlider: React.FC<RangeSliderProps> = ({ value }) => {
@@ -40,7 +39,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = ({ value }) => {
                 <div className='h-full w-full bg-primary-300'></div>
               </div>
             </div>
-            <div className='hours rounded-[4px] bg-primary-300 py-1 px-3 text-center text-xs font-bold text-black'>
+            <div className='hours rounded-[4px] bg-primary-300 px-3 py-1 text-center text-xs font-bold text-black'>
               {value}h
             </div>
           </div>
