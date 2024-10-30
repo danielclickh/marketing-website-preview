@@ -20,7 +20,7 @@ const CUICard: CardComponent = ({
     glarePosition='all'
     className='h-full'>
     <div
-      className={`cui-card h-full flex flex-col justify-between items-center rounded-lg border border-neutral-700/80 bg-neutral-900/50 shadow-card hover:shadow-lg ${className}`}
+      className={`cui-card flex h-full flex-col items-center justify-between rounded-lg border border-neutral-700/80 bg-neutral-900/50 shadow-card hover:shadow-lg ${className}`}
       {...props}>
       {children}
     </div>

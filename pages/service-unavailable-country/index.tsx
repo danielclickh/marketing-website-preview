@@ -1,16 +1,13 @@
-import React, { useRef, useState } from 'react'
-import { findOne } from '../../lib/api/strapi'
-import ServiceUnavailableForm from '../../components/ServiceUnavailableForm'
-import GetStarted from '../../components/GetStarted'
-import { SuiPanel, SuiText, SuiTitle } from '../../components/sui'
-import { StrapiImage } from '../../components/StrapiElements'
-import Markdown from '../../components/Markdown'
 import { GetStaticProps } from 'next'
+import React, { useRef, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+import GetStarted from '../../components/GetStarted'
 import Layout from '../../components/Layout'
+import MarketoForm from '../../components/MarketoForm'
+import { SuiPanel, SuiText, SuiTitle } from '../../components/sui'
+import { findOne } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { ServiceProps } from '../../types/serviceUnavailablePage'
-import MarketoForm from '../../components/MarketoForm'
-import ReactMarkdown from 'react-markdown'
 
 export const getStaticProps: GetStaticProps<ServiceProps> =
   async function getStaticProps() {

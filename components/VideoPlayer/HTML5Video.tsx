@@ -1,6 +1,6 @@
+import Plyr from 'plyr'
 import React, { useEffect, useRef } from 'react'
 import { HTML5Props } from './types'
-import Plyr from 'plyr'
 
 function HTML5Video({ provider, sources, ...videoOptions }: HTML5Props) {
   const ref = useRef<HTMLVideoElement>(null)

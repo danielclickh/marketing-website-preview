@@ -1,7 +1,7 @@
-import { SuiText } from '../sui'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 import { NewsItemProps } from '../../types/newsEvents'
 import { CUIButton } from '../ClickUI'
-import { ChevronRightIcon } from '@heroicons/react/solid'
+import { SuiText } from '../sui'
 
 export default function NewsItem({
   source,
@@ -13,7 +13,7 @@ export default function NewsItem({
   return (
     <div className='flex flex-col'>
       <div>
-        <p className='font-inconsolata text-primary-300 mb-2'>
+        <p className='mb-2 font-inconsolata text-primary-300'>
           {source} • {date}
         </p>
         <SuiText size='lg' weight='bold' className='!text-xl text-neutral-100'>
@@ -23,13 +23,13 @@ export default function NewsItem({
         <div className='mt-6 inline-block'>
           <CUIButton
             type='secondary'
-            className='w-auto group'
+            className='group w-auto'
             href={ctaButton.href}
             target={ctaButton.target}
             iconRight={
               <ChevronRightIcon
                 height='16'
-                className='group-hover:translate-x-1/2 pt-0.5 transition'
+                className='pt-0.5 transition group-hover:translate-x-1/2'
               />
             }>
             {ctaButton.text}

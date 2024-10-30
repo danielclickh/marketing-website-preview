@@ -12,19 +12,19 @@ function TwitterCard({
 }: TwitterCardProps) {
   return (
     <div
-      className={`flex flex-col bg-noised border border-rangitoto hover:border-primary hover:shadow-click-twitter p-6 pt-4 gap-8 rounded ${className}`}
+      className={`bg-noised flex flex-col gap-8 rounded border border-rangitoto p-6 pt-4 hover:border-primary hover:shadow-click-twitter ${className}`}
       {...props}>
-      <div className='w-full flex gap-4 items-center'>
+      <div className='flex w-full items-center gap-4'>
         <Image
           src={src}
           alt={`Avatar for ${twitterId}`}
-          className='w-16 h-16 aspect-square rounded-full'
+          className='aspect-square h-16 w-16 rounded-full'
         />
-        <div className='flex flex-col text-ellipsis overflow-hidden whitespace-nowrap'>
-          <div className='text-ellipsis overflow-hidden' title={name}>
+        <div className='flex flex-col overflow-hidden text-ellipsis whitespace-nowrap'>
+          <div className='overflow-hidden text-ellipsis' title={name}>
             {name}
           </div>
-          <div className='text-ellipsis overflow-hidden' title={twitterId}>
+          <div className='overflow-hidden text-ellipsis' title={twitterId}>
             {twitterId}
           </div>
         </div>

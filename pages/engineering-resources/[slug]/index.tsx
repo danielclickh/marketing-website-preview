@@ -11,13 +11,13 @@ import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterD
 import NewsLetterForm from '../../../components/NewsLetter/NewsLetterForm'
 import SocialButton from '../../../components/SocialButton'
 import { SuiButton, SuiPanel, SuiText, SuiTitle } from '../../../components/sui'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import {
   getEngineeringResource,
   getEngineeringResources
 } from '../../../lib/engineering-resources'
 import { EngineeringResource } from '../../../lib/engineering-resources/types'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import { CommonProps, NewsLetterData } from '../../../types/homepage'
 
 type MoreLikeThisItem = {

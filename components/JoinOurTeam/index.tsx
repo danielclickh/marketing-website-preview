@@ -1,12 +1,11 @@
 import { ArrowRightIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-import SocialIcon from '../SocialIcon'
 
 function JoinOurTeam() {
   return (
-    <div className='bg-primary-300 text-neutral py-16 flip-selection text-center px-8'>
-      <div className='max-w-4xl mx-auto'>
-        <div className='mb-4 font-bold text-3xl'>
+    <div className='flip-selection bg-primary-300 px-8 py-16 text-center text-neutral'>
+      <div className='mx-auto max-w-4xl'>
+        <div className='mb-4 text-3xl font-bold'>
           Interested in joining our team?
         </div>
         <p className='text-base'>
@@ -15,8 +14,8 @@ function JoinOurTeam() {
           company’s success, this is the place for you.
         </p>
         <Link href='/company/careers'>
-          <div className='mt-4 text-white bg-black rounded py-2 px-6 font-base inline-block'>
-            <span className='flex justify-center items-center gap-2'>
+          <div className='font-base mt-4 inline-block rounded bg-black px-6 py-2 text-white'>
+            <span className='flex items-center justify-center gap-2'>
               View careers
               <ArrowRightIcon className='w-4' />
             </span>

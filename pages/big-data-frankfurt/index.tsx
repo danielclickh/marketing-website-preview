@@ -1,15 +1,12 @@
-import { SuiTitle } from '../../components/sui'
-
-import { findOne } from '../../lib/api/strapi'
-import GrowingCommunity from '../../components/GrowingCommunity'
-import ContactForm from '../../components/ContactForm'
-import Markdown from '../../components/Markdown'
 import { GetStaticProps } from 'next'
-import { ContactProps } from '../../types/contact'
-import Layout from '../../components/Layout'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
+import ContactForm from '../../components/ContactForm'
+import GrowingCommunity from '../../components/GrowingCommunity'
 import HRSeparator from '../../components/HRSeparator'
-import { useState } from 'react'
+import Layout from '../../components/Layout'
+import { SuiTitle } from '../../components/sui'
+import { findOne } from '../../lib/api/strapi'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { ContactProps } from '../../types/contact'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -57,7 +54,7 @@ export default function ContactPage({
               </p>
             </div>
           </div>
-          <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pt-14 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
+          <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pb-8 pt-14 text-center md:bg-no-repeat 2xl:px-0'>
             <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
               <ContactForm />
             </div>

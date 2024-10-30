@@ -1,6 +1,6 @@
-import { CUIButton, CUICard } from '../../components/ClickUI'
-import Image from 'next/image'
 import { ChevronRightIcon } from '@heroicons/react/solid'
+import Image from 'next/image'
+import { CUIButton, CUICard } from '../../components/ClickUI'
 
 type DeployData = {
   title: string

@@ -1,10 +1,9 @@
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import { BaseStrapiImage } from '../../lib/api/strapi/types'
-import { StrapiPicture } from '../StrapiElements'
-import { SuiButton, SuiPanel, SuiText } from '../sui'
 import { CheckIcon } from '@heroicons/react/outline'
-import { CUIButton } from '../../components/ClickUI'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
+import { CUIButton } from '../../components/ClickUI'
+import { BaseStrapiImage } from '../../lib/api/strapi/types'
+import { SuiPanel, SuiText } from '../sui'
 
 type TestimonialProps = {
   id: string
@@ -35,7 +34,7 @@ export function UseCase(props: TestimonialProps) {
       padding='xl'
       className='border-l-4 border-l-primary-300'>
       <div
-        className='flex flex-col justify-start align-top items-between h-full'
+        className='items-between flex h-full flex-col justify-start align-top'
         id={id}>
         <div className='flex-auto'>
           <Image
@@ -45,7 +44,7 @@ export function UseCase(props: TestimonialProps) {
             height={darkLogo.height ? darkLogo.height : 63}
             className='pb-7'
           />
-          <p className='mb-5 text-neutral-100 font-semibold text-xl leading-7 font-basier'>
+          <p className='mb-5 font-basier text-xl font-semibold leading-7 text-neutral-100'>
             {' '}
             {description}
           </p>
@@ -54,7 +53,7 @@ export function UseCase(props: TestimonialProps) {
               <li
                 className='grid grid-cols-[1.25rem_1fr] items-start gap-x-4'
                 key={bullet.text}>
-                <CheckIcon className='w-6 h-6 text-c6 stroke-1' />
+                <CheckIcon className='h-6 w-6 stroke-1 text-c6' />
                 <SuiText size='base' weight='medium'>
                   {bullet.text}
                 </SuiText>
@@ -72,7 +71,7 @@ export function UseCase(props: TestimonialProps) {
             iconRight={
               <ChevronRightIcon
                 height='18'
-                className='group-hover:translate-x-1/2 pt-0.5 transition'
+                className='pt-0.5 transition group-hover:translate-x-1/2'
               />
             }>
             {btnText}

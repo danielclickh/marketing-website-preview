@@ -1,4 +1,5 @@
 import { DuplicateIcon } from '@heroicons/react/outline'
+import * as Tooltip from '@radix-ui/react-tooltip'
 import React, {
   FunctionComponent,
   HTMLAttributes,
@@ -6,10 +7,9 @@ import React, {
   useRef,
   useState
 } from 'react'
-import styles from './styles.module.scss'
-import * as Tooltip from '@radix-ui/react-tooltip'
 import { FullyQualifiedEvent } from '../../../lib/galaxy/client'
 import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
+import styles from './styles.module.scss'
 
 export interface CodeblockProps extends HTMLAttributes<HTMLPreElement> {
   bgColor?: string | undefined

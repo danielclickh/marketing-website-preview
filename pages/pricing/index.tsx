@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
+import { BYOCSection } from '../../components/BYOCSection'
 import { CUIButton } from '../../components/ClickUI'
 import Layout from '../../components/Layout'
 import Markdown from '../../components/Markdown'
@@ -11,6 +12,7 @@ import { PricingCalculator } from '../../components/PricingCalculator'
 import { SuiText, SuiTitle } from '../../components/sui'
 import { useClickOutside } from '../../hooks'
 import { findAll, findOne } from '../../lib/api/strapi'
+import { useGalaxyOnClick, useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import {
   PricingData,
@@ -19,9 +21,6 @@ import {
   RegionPricing
 } from '../../types/pricing'
 import philosophy from './philosophy.json'
-import { useGalaxyOnClick, useGalaxyOnPage } from '../../lib/galaxy/galaxy'
-import Link from 'next/link'
-import { BYOCSection } from '../../components/BYOCSection'
 
 export const getStaticProps: GetStaticProps<PricingPageProps> =
   async function getStaticProps() {

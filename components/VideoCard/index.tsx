@@ -1,10 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import VideoPlayButton from '../../public/images/VideoPlayButton'
 import { Video } from '../../types/videos'
 import { CUICard } from '../ClickUI'
-
 import fallbackTumbnail from './fallback.png'
 
 export default function VideoCard({

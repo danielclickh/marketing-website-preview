@@ -2,17 +2,15 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
-import ClickPipesAnimation from '../../../components/ClickPipesAnimation'
 import ClickPipesAnimationV2 from '../../../components/ClickPipesAnimation/ClickPipesAnimationV2'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import { SuiText, SuiTitle } from '../../../components/sui'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ClickPipesData } from '../../../types/clickpipes'
 import features from './features.json'
-import integrations from './integrations.json'
-import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<ClickPipesData> =
   async function getStaticProps() {

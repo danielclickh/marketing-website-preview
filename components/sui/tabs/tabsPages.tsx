@@ -20,7 +20,7 @@ export function SuiTabsPages(props: TabProps) {
         <select
           id='tabs'
           name='tabs'
-          className='block w-full pl-3 py-2 text-base border-c2 focus:outline-none focus:ring-c6 focus:border-c6 sm:text-sm rounded-md'
+          className='block w-full rounded-md border-c2 py-2 pl-3 text-base focus:border-c6 focus:outline-none focus:ring-c6 sm:text-sm'
           defaultValue={
             // @ts-ignore
             props.tabs.find((tab) => tab.id == props.activeTab).name
@@ -41,11 +41,11 @@ export function SuiTabsPages(props: TabProps) {
                 ${
                   tab.id == props.activeTab
                     ? 'border-c6 text-neutral-0'
-                    : 'border-transparent text-c4 hover:text-neutral-0 hover:border-c4'
+                    : 'border-transparent text-c4 hover:border-c4 hover:text-neutral-0'
                 }
                 tab-${index}    
-                  whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm
-                )`}
+                  ) whitespace-nowrap border-b-2 px-1 py-4 text-sm
+                font-medium`}
                 aria-current={tab.current ? 'page' : undefined}>
                 {tab.name}
               </Link>

@@ -1,6 +1,6 @@
+import 'glider-js/glider.min.css'
 import React, { ReactNode } from 'react'
 import Glider from 'react-glider'
-import 'glider-js/glider.min.css'
 
 const CompanyImages = ({ children }: { children: ReactNode }) => {
   return (

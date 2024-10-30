@@ -1,4 +1,4 @@
-import { CirclePlay, CircleXIcon } from 'lucide-react'
+import { CirclePlay } from 'lucide-react'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from 'react'
 import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'
 import { SuiSearchField, SuiTitle } from '../../components/sui'
+import ClearFilterButton from '../../components/UserStories/ClearFilterButton'
 import { findOne } from '../../lib/api/strapi'
 import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
@@ -20,7 +21,6 @@ import {
   UseCaseVertical,
   UserStoriesPage
 } from '../../types/userStories'
-import ClearFilterButton from '../../components/UserStories/ClearFilterButton'
 
 interface MousePosition {
   x: number

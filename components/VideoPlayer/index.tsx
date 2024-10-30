@@ -1,8 +1,8 @@
-import React from 'react'
 import 'plyr/dist/plyr.css'
+import React from 'react'
+import EmbedVideo from './EmbedVideo'
 import HTML5Video from './HTML5Video'
 import { Props } from './types'
-import EmbedVideo from './EmbedVideo'
 
 const VideoPlayer = ({
   videoId = 'yWtFb9LJs3o',

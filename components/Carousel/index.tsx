@@ -1,8 +1,8 @@
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import 'glider-js/glider.min.css'
 import React, { ReactNode, useState } from 'react'
 import Glider from 'react-glider'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import styles from './Carousel.module.scss'
-import 'glider-js/glider.min.css'
 
 const Carousel = ({ children }: { children: ReactNode }) => {
   const [showDiv, setShowDiv] = useState(false)
@@ -26,8 +26,8 @@ const Carousel = ({ children }: { children: ReactNode }) => {
         draggable
         slidesToScroll={1}
         itemWidth={320}
-        iconLeft={<ChevronLeftIcon className='h-16 w-auto -ml-5' />}
-        iconRight={<ChevronRightIcon className='h-16 w-auto -ml-5' />}
+        iconLeft={<ChevronLeftIcon className='-ml-5 h-16 w-auto' />}
+        iconRight={<ChevronRightIcon className='-ml-5 h-16 w-auto' />}
         rewind
         responsive={[
           {

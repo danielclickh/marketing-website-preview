@@ -8,33 +8,32 @@ import {
 import pricingPlansFromFile from '../../public/pricingFile.json'
 import {
   CloudProviderType,
+  MeteredPricing,
   PricingPlanData,
   RegionPricing
 } from '../../types/pricing'
+import HRSeparator from '../HRSeparator'
+import Markdown from '../Markdown'
 import { FormControl } from '../PricingCalculator/ui/FormControl'
 import { NumericSelect } from '../PricingCalculator/ui/NumericSelect'
 import { RangeSlider } from '../PricingCalculator/ui/RangeSlider'
 import { ToggleButtons } from '../PricingCalculator/ui/ToggleButtons'
 import PricingOptions from '../PricingOptions'
+import { SuiTitle } from '../sui'
 import {
   acceptableRegions,
   computeOptions,
   config,
-  configStaging,
   PricingData,
   providerOptions,
   storageUnitOptionsTiered
 } from './CalculatorTypesOptions'
 import styles from './CostCalculator.module.scss'
 import CTAButtons from './CTAButtons'
+import RadioGroupComponent from './ui/Radio/Radio'
 import { Select } from './ui/Select'
 import { Text } from './ui/Text'
-import RadioGroupComponent from './ui/Radio/Radio'
 import { ToggleButtonsProviders } from './ui/ToggleButtonsProviders'
-import { MeteredPricing } from '../../types/pricing'
-import HRSeparator from '../HRSeparator'
-import Markdown from '../Markdown'
-import { SuiTitle } from '../sui'
 
 function convertStorageToGB(
   size: number,

@@ -1,7 +1,7 @@
 import { ClockIcon } from '@heroicons/react/outline'
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import React from 'react'
-import { GetStaticProps } from 'next'
 import { CUIButton, CUICard } from '../../components/ClickUI'
 import Certificate from '../../components/icons/Certificate'
 import CertificateSquare from '../../components/icons/CertificateSquare'
@@ -16,9 +16,9 @@ import Layout from '../../components/Layout'
 import LogoCarousel from '../../components/LogoCarousel'
 import { SuiText, SuiTitle } from '../../components/sui'
 import { findOne } from '../../lib/api/strapi'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { LearnProps } from '../../types/learn'
-import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<LearnProps> =
   async function getStaticProps() {

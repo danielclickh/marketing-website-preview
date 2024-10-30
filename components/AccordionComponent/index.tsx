@@ -1,12 +1,8 @@
 import { Disclosure, Transition } from '@headlessui/react'
-import { ExternalLinkIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
 import { CSSProperties } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { StrapiImageType } from '../../lib/api/strapi/types'
-import { CUILink } from '../ClickUI'
-import FAQ from '../FAQ'
-import { StrapiImage } from '../StrapiElements'
 import { SuiTitle } from '../sui'
 import styles from './styles.module.scss'
 
@@ -68,7 +64,7 @@ export default function AccordionComponent({
                 <Disclosure.Button
                   className={`${
                     numbered && styles.numbered
-                  } relative z-10 grid w-full grid-cols-[1fr_1rem] items-center justify-between gap-x-6 rounded-lg p-4 pr-6 pl-20 text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none`}>
+                  } relative z-10 grid w-full grid-cols-[1fr_1rem] items-center justify-between gap-x-6 rounded-lg p-4 pl-20 pr-6 text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none`}>
                   {!numbered && (
                     <div className='absolute left-0 w-16 border-r border-neutral-700/80 text-left text-neutral-300/60'>
                       <Image
@@ -93,7 +89,7 @@ export default function AccordionComponent({
                   leaveFrom='max-h-fit opacity-100'
                   leaveTo='max-h-0 opacity-0'>
                   <Disclosure.Panel
-                    className={`home-faqs pl-20 pr-4 pb-4 text-sm text-neutral-200 transition-opacity duration-100 ${
+                    className={`home-faqs pb-4 pl-20 pr-4 text-sm text-neutral-200 transition-opacity duration-100 ${
                       open ? 'opacity-100' : 'opacity-0'
                     }`}>
                     <div className=''>

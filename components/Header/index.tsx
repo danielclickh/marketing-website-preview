@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { MenuIcon, XIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MenuIcon, XIcon } from '@heroicons/react/solid'
-import { CUIButton, CUILink } from '../ClickUI'
+import React, { useEffect, useRef, useState } from 'react'
+import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import logoFull from '../../public/logo-full.svg'
+import { CUIButton, CUILink } from '../ClickUI'
 import GitHub from '../icons/GitHub'
 import LinkWithArrow from '../LinkWithArrow'
-import { HeaderProps } from './types'
 import Navigation from '../Navigation'
-import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
+import { HeaderProps } from './types'
 
 export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const headerRef = useRef<HTMLElement>(null)

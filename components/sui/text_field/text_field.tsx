@@ -28,7 +28,7 @@ export function SuiTextField({
         {label && (
           <label
             htmlFor={htmlFor}
-            className='block text-xs font-medium text-neutral-300 pb-1'>
+            className='block pb-1 text-xs font-medium text-neutral-300'>
             {label}
             {!required && <span className='text-c4'></span>}
           </label>
@@ -42,12 +42,12 @@ export function SuiTextField({
             {...props}
           />
           {type === 'password' && (
-            <EyeIcon className='w-4 relative -top-7 left-80 md:left-96 text-gray-400' />
+            <EyeIcon className='relative -top-7 left-80 w-4 text-gray-400 md:left-96' />
           )}
         </div>
       </div>
       <p
-        className={`mt-1 transition-opacity ease-in-out text-danger-200 text-xs min-h-[1rem] ${
+        className={`mt-1 min-h-[1rem] text-xs text-danger-200 transition-opacity ease-in-out ${
           error.length == 0 ? 'opacity-0' : 'opacity-100'
         }`}>
         {error}

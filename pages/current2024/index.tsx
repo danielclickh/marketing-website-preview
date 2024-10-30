@@ -1,13 +1,12 @@
-import { findOne } from '../../lib/api/strapi'
-import GrowingCommunity from '../../components/GrowingCommunity'
-import Markdown from '../../components/Markdown'
 import { GetStaticProps } from 'next'
-import { ContactProps } from '../../types/contact'
-import Layout from '../../components/Layout'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import HRSeparator from '../../components/HRSeparator'
-import MarketoForm from '../../components/MarketoForm'
 import { useRef, useState } from 'react'
+import GrowingCommunity from '../../components/GrowingCommunity'
+import HRSeparator from '../../components/HRSeparator'
+import Layout from '../../components/Layout'
+import MarketoForm from '../../components/MarketoForm'
+import { findOne } from '../../lib/api/strapi'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { ContactProps } from '../../types/contact'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {

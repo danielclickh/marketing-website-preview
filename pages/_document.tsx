@@ -1,4 +1,4 @@
-import { Main, Head, NextScript, Html } from 'next/document'
+import { Head, Html, Main, NextScript } from 'next/document'
 const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K'
 
 export default function BaseLayout() {

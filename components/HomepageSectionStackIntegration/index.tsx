@@ -24,7 +24,7 @@ export default function HomepageSectionStackIntegration({
       {/* Graph */}
       <div className='section-container flex justify-center'>
         <div className='relative'>
-          <div className='absolute top-[2.19%] left-[33.55%] bottom-[39.56%] right-[33.05%] z-10 animate-pulse rounded-lg shadow-stackIntegrationGraphicSmall lg:shadow-stackIntegrationGraphic'></div>
+          <div className='absolute bottom-[39.56%] left-[33.55%] right-[33.05%] top-[2.19%] z-10 animate-pulse rounded-lg shadow-stackIntegrationGraphicSmall lg:shadow-stackIntegrationGraphic'></div>
           <Image
             src='/images/homepage/stack-integration-graph.svg'
             alt='Stack integration graph'

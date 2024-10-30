@@ -3,6 +3,6 @@
   "rules": {
     "indent": "off",
     "react/no-unescaped-entities": 0,
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/exhaustive-deps": "off",
   }
 }

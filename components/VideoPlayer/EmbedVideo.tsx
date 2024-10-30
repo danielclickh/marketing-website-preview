@@ -1,6 +1,6 @@
+import Plyr from 'plyr'
 import React, { useEffect, useRef } from 'react'
 import { EmbededProps } from './types'
-import Plyr from 'plyr'
 
 function EmbedVideo({ videoId, provider, ...videoOptions }: EmbededProps) {
   const ref = useRef<HTMLDivElement>(null)

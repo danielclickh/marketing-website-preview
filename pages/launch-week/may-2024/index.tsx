@@ -1,20 +1,3 @@
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useEffect } from 'react'
-import { EventProps, EventType } from '../../../types/events'
-import { findAll } from '../../../lib/api/strapi'
-import GetStartedFree from '../../../components/GetStartedFree'
-import Layout from '../../../components/Layout'
-import EventPost from '../../../components/EventPostList/EventPost'
-import { SuiText } from '../../../components/sui'
-import { findOne } from '../../../lib/api/strapi'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { CUIButton } from '../../../components/ClickUI'
-import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
-import Tilt from 'react-parallax-tilt'
-
-import HRSeparator from '../../../components/HRSeparator'
 import {
   ArrowCircleRightIcon,
   BookOpenIcon,
@@ -22,6 +5,21 @@ import {
   DocumentTextIcon,
   PlayIcon
 } from '@heroicons/react/outline'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect } from 'react'
+import Tilt from 'react-parallax-tilt'
+import { CUIButton } from '../../../components/ClickUI'
+import EventPost from '../../../components/EventPostList/EventPost'
+import GetStartedFree from '../../../components/GetStartedFree'
+import HRSeparator from '../../../components/HRSeparator'
+import Layout from '../../../components/Layout'
+import { SuiText } from '../../../components/sui'
+import { findAll, findOne } from '../../../lib/api/strapi'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { EventProps, EventType } from '../../../types/events'
 import releases from './releases.json'
 
 export const getStaticProps: GetStaticProps = async () => {
