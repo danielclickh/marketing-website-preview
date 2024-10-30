@@ -2,18 +2,17 @@ import { ParsedUrlQuery } from 'querystring'
 import { ReactNode } from 'react'
 import { FooterData } from '../components/Footer/types'
 import { GettingStartedPlatform } from '../components/GetStarted/types'
-
-export type Props = {
-  children: ReactNode
-}
-
+import { HeaderProps } from '../components/Header/types'
 import {
   SeoMetadata,
   StrapiButton,
   StrapiImageType,
   StrapiLink
 } from '../lib/api/strapi/types'
-import { HeaderProps } from '../components/Header/types'
+
+export type Props = {
+  children: ReactNode
+}
 
 export interface Feature {
   id: string

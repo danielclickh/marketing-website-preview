@@ -1,9 +1,7 @@
-import { ReactNode } from 'react'
-import { StrapiImageType } from '../lib/api/strapi/types'
-import { CommonProps } from './homepage'
-import { SeoMetadata } from '../lib/api/strapi/types'
+import { SeoMetadata, StrapiImageType } from '../lib/api/strapi/types'
+import { BlogPost as BlogPostType } from '../types/blogs'
 import { HomepageCustomerStories } from '../types/homepage'
-import { BlogPost as BlogPostType, BlogProps } from '../types/blogs'
+import { CommonProps } from './homepage'
 
 interface Painpoint {
   Title: string

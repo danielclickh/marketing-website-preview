@@ -1,6 +1,5 @@
-import { SeoMetadata } from '../lib/api/strapi/types'
-import { CommonProps, NewsLetterData } from './homepage'
 import { BlogPost } from './blogs'
+import { CommonProps, NewsLetterData } from './homepage'
 
 export interface BlogProps extends BlogPost, CommonProps {
   content: string

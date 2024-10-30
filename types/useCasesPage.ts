@@ -1,5 +1,5 @@
-import { CommonProps } from './homepage'
 import { StrapiImageType } from '../lib/api/strapi/types'
+import { CommonProps } from './homepage'
 
 export interface ClientUsing {
   logo: StrapiImageType
