@@ -105,9 +105,10 @@ export default function MLUseCasePage({
                           key={checkpoint.id}>
                           <Image
                             src='/images/cloud/check.svg'
-                            width={32}
-                            height={33}
-                            alt='Icon'
+                            width='0'
+                            height='0'
+                            alt='Machine learning feature icon'
+                            className='w-8'
                           />
                           <SuiText
                             size='base'

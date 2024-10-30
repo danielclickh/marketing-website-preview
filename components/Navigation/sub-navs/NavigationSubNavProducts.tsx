@@ -16,9 +16,9 @@ export default function NavigationSubNavProducts() {
             <Image
               src='/images/nav/icon-clickhouse-cloud.svg'
               alt='ClickHouse Cloud'
-              width={24}
-              height={24}
-              className='flex-grow-1 flex-shrink-0'
+              width='0'
+              height='0'
+              className='flex-grow-1 h-auto w-6 flex-shrink-0'
             />
             <span>
               ClickHouse Cloud
@@ -38,9 +38,9 @@ export default function NavigationSubNavProducts() {
             <Image
               src='/images/nav/icon-byoc.svg'
               alt='ClickHouse BYOC'
-              width={24}
-              height={24}
-              className='flex-grow-1 flex-shrink-0'
+              width='0'
+              height='0'
+              className='flex-grow-1 h-auto w-6 flex-shrink-0'
             />
             <span>
               Bring Your Own Cloud (Private Preview)
@@ -59,9 +59,9 @@ export default function NavigationSubNavProducts() {
             <Image
               src='/images/nav/icon-clickhouse.svg'
               alt='ClickHouse'
-              width={24}
-              height={24}
-              className='flex-grow-1 flex-shrink-0'
+              width='0'
+              height='0'
+              className='flex-grow-1 h-auto w-6 flex-shrink-0'
             />
             <span>
               ClickHouse

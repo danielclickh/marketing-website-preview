@@ -103,9 +103,10 @@ export default function RealTimeAnalyticsPage({
                           key={checkpoint.id}>
                           <Image
                             src='/images/cloud/check.svg'
-                            width={32}
-                            height={33}
+                            width='0'
+                            height='0'
                             alt='Icon'
+                            className='w-8'
                           />
                           <SuiText
                             size='base'
