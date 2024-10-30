@@ -72,9 +72,19 @@ const UTMPersist = () => {
       updateLinks()
     }
 
+    const pollGoogleAnalyticsCookie = continuouslyCheckGoogleAnalyticsCookie({
+      intervalTimeout: 750, // Check every 750 millisecond(s)
+      stopAfter: 30000, // Stop checking after 30 second(s)
+      callback() {
+        updateLinks()
+      }
+    })
+
+    pollGoogleAnalyticsCookie.start()
     router.events.on('routeChangeComplete', handleRouteChange)
 
     return () => {
+      pollGoogleAnalyticsCookie.stop()
       router.events.off('routeChangeComplete', handleRouteChange)
     }
   }, [])
@@ -84,9 +94,7 @@ const UTMPersist = () => {
 
 export default React.memo(UTMPersist)
 
-export function appendGoogleAnalyticsCookieToLink(url: string): string {
-  const urlObject = new URL(url)
-
+export function getGoogleAnalyticsCookie(): null | string {
   // Get all cookies in the format "cookieName=cookieValue; ..."
   const cookies = document.cookie.split(';')
 
@@ -97,12 +105,62 @@ export function appendGoogleAnalyticsCookieToLink(url: string): string {
     // Check if the cookie starts with "_ga="
     if (cookie.startsWith('_ga=')) {
       // Return the value part, which is everything after "_ga="
-      const cookieValue = cookie.substring(4)
-      urlObject.searchParams.set('_ga', cookieValue)
-      break
+      return cookie.substring(4)
     }
   }
 
+  return null
+}
+
+export function continuouslyCheckGoogleAnalyticsCookie({
+  callback,
+  intervalTimeout = 1000,
+  stopAfter = 10000
+}: {
+  callback?: Function
+  intervalTimeout?: number
+  stopAfter?: false | number
+} = {}) {
+  let intervalId: number | null = null
+
+  const stop = () => {
+    if (intervalId) {
+      window.clearInterval(intervalId)
+      intervalId = null
+    }
+  }
+
+  const start = () => {
+    const startedAt = Date.now()
+
+    intervalId = window.setInterval(() => {
+      const now = Date.now()
+
+      // If the ga cookie returns a value, stop the loop.
+      // Or stop after 5 seconds if no value has been returned.
+      if (
+        getGoogleAnalyticsCookie() ||
+        (stopAfter !== false && now - startedAt >= stopAfter)
+      ) {
+        stop()
+        if (callback) callback()
+      }
+    }, intervalTimeout)
+  }
+
+  return {
+    start,
+    stop
+  }
+}
+
+export function appendGoogleAnalyticsCookieToLink(url: string): string {
+  const cookieValue = getGoogleAnalyticsCookie()
+
+  if (!cookieValue) return url
+
+  const urlObject = new URL(url)
+  urlObject.searchParams.set('_ga', cookieValue)
   return urlObject.toString()
 }
 
