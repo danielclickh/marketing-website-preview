@@ -10,8 +10,7 @@ import { SuiText, SuiTitle } from '../../../../components/sui'
 import { getCommonProps } from '../../../../lib/utils/getCommonProps'
 import { ClickPipesData } from '../../../../types/clickpipes'
 import features from './features.json'
-import integrations from './integrations.json'
-import { galaxyOnLoad, galaxyOnPage } from '../../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<ClickPipesData> =
   async function getStaticProps() {
@@ -39,7 +38,7 @@ export default function ClickHouseServerPage({
   headerData,
   footerData
 }: ClickPipesData) {
-  galaxyOnPage('clickPipesPage')
+  useGalaxyOnPage('clickPipesPage')
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -136,7 +135,7 @@ export default function ClickHouseServerPage({
                         {feature.title}
                       </h4>
                       <div className='px-10 font-inter text-sm font-light leading-relaxed text-neutral-200'>
-                        <ReactMarkdown children={feature.content} />
+                        <ReactMarkdown>{feature.content}</ReactMarkdown>
                       </div>
                     </div>
                   </div>
@@ -201,7 +200,9 @@ export default function ClickHouseServerPage({
                     }
                   ].map(({ logo, name }) => {
                     return (
-                      <div className='w-1/2 p-2 sm:p-3 md:w-1/3 lg:w-1/4'>
+                      <div
+                        key={name}
+                        className='w-1/2 p-2 sm:p-3 md:w-1/3 lg:w-1/4'>
                         <div className='relative flex h-full flex-col items-center rounded-sm bg-neutral-700/70 px-4 pb-6 pt-8'>
                           <Image
                             src={logo}

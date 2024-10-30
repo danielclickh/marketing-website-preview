@@ -63,7 +63,7 @@ const AccordionComponent = () => {
                       <>{item.title}</>
                     </AccordionTrigger>
                     <AccordionContent>
-                      <Markdown children={item.content} />
+                      <Markdown>{item.content}</Markdown>
                     </AccordionContent>
                   </AccordionItem>
                 ))}
@@ -85,6 +85,7 @@ const AccordionItem = forwardRef<HTMLDivElement, Accordion.AccordionItemProps>(
     </div>
   )
 )
+AccordionItem.displayName = 'AccordionItem'
 
 const AccordionTrigger = forwardRef<
   HTMLButtonElement,
@@ -112,6 +113,7 @@ const AccordionTrigger = forwardRef<
     </Accordion.Trigger>
   </Accordion.Header>
 ))
+AccordionTrigger.displayName = 'AccordionTrigger'
 
 const AccordionContent = forwardRef<
   HTMLDivElement,
@@ -129,5 +131,6 @@ const AccordionContent = forwardRef<
     </div>
   </Accordion.Content>
 ))
+AccordionContent.displayName = 'AccordionContent'
 
 export default AccordionComponent

@@ -16,7 +16,7 @@ import features from './features.json'
 import callouts from './callouts.json'
 import Markdown from '../../../../components/Markdown'
 import { CUIButton } from '../../../../components/ClickUI'
-import { galaxyOnPage } from '../../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../../lib/galaxy/galaxy'
 
 interface LoggingProps extends CommonProps {
   customerStories: any
@@ -59,7 +59,7 @@ export default function ClickHouseServerPage({
   headerData,
   footerData
 }: LoggingProps) {
-  galaxyOnPage('logsMetricsUseCasePage')
+  useGalaxyOnPage('logsMetricsUseCasePage')
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
@@ -151,7 +151,7 @@ export default function ClickHouseServerPage({
                     className='mx-auto h-11 w-auto'
                   />
                   <div className='rich_content px-12 pt-4 text-lg text-neutral-200'>
-                    <ReactMarkdown children={feature.content} />
+                    <ReactMarkdown>{feature.content}</ReactMarkdown>
                   </div>
                 </div>
               )
@@ -240,7 +240,7 @@ export default function ClickHouseServerPage({
                         {feature.title}
                       </h3>
                       <div className='rich_content text-base text-neutral-200'>
-                        <Markdown children={feature.content} />
+                        <Markdown>{feature.content}</Markdown>
                       </div>
                     </div>
                   ))}

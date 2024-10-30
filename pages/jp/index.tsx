@@ -12,7 +12,7 @@ import HRSeparator from '../../components/HRSeparator'
 import JoinCommunity from '../../components/jp/JoinCommunity'
 import Layout from '../../components/jp/Layout'
 import { findOne } from '../../lib/api/strapi'
-import { galaxyOnPage } from '../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { HomePageProps } from '../../types/homepage'
 
@@ -50,7 +50,7 @@ export default function HomePage({
   customerStories,
   platforms
 }: HomePageProps) {
-  galaxyOnPage('homePage')
+  useGalaxyOnPage('homePage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>

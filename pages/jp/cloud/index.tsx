@@ -16,9 +16,9 @@ import featureBlocks from './feature_blocks.json'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import GetStartedFree from '../../../components/jp/GetStartedFree'
 import LogoCarousel from '../../../components/LogoCarousel'
-import { motion, useInView } from 'framer-motion'
+import { useInView } from 'framer-motion'
 import Lines from '../../../components/ClickPipesAnimation/Lines'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -70,7 +70,7 @@ export default function CloudPage({
     once: true
   })
 
-  galaxyOnPage('productCloudPage')
+  useGalaxyOnPage('productCloudPage')
   useEffect(() => {
     setWindowWidth(window.innerWidth)
     const handleResize = () => {

@@ -17,7 +17,7 @@ import { CommonProps } from '../../../../types/homepage'
 import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import features from './features.json'
-import { galaxyOnPage } from '../../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../../lib/galaxy/galaxy'
 
 interface MLProps extends CommonProps {
   customerStories: any
@@ -60,7 +60,7 @@ export default function MLUseCasePage({
   headerData,
   footerData
 }: MLProps) {
-  galaxyOnPage('mlAIUseCasePage')
+  useGalaxyOnPage('mlAIUseCasePage')
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
     if (container) {
@@ -174,7 +174,7 @@ export default function MLUseCasePage({
                     className='mx-auto h-11 w-auto'
                   />
                   <div className='rich_content px-3 pt-4 text-base text-neutral-200'>
-                    <ReactMarkdown children={feature.content} />
+                    <ReactMarkdown>{feature.content}</ReactMarkdown>
                   </div>
                 </div>
               )
@@ -274,7 +274,7 @@ export default function MLUseCasePage({
                         {feature.title}
                       </h3>
                       <div className='rich_content text-base text-neutral-200'>
-                        <Markdown children={feature.content} />
+                        <Markdown>{feature.content}</Markdown>
                       </div>
                     </div>
                   ))}

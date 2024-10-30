@@ -11,7 +11,7 @@ import Layout from '../../../components/jp/Layout'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CUIButton, CUICard } from '../../../components/ClickUI'
 import HRSeparator from '../../../components/HRSeparator'
-import { galaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<ClickhouseData> =
   async function getStaticProps() {
@@ -50,7 +50,7 @@ export default function ClickHouseServerPage({
   headerData,
   footerData
 }: ClickhouseData) {
-  galaxyOnPage('productOpenSourcePage')
+  useGalaxyOnPage('productOpenSourcePage')
 
   const { mainButton, secondaryButton, gitButton } = hero
   return (

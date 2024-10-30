@@ -4,7 +4,7 @@ import Image from 'next/image'
 import logoFull from '../../../public/logo-full.svg'
 import topLevelFooterMenu from './footer.json'
 
-import { galaxyOnClick } from '../../../lib/galaxy/galaxy'
+import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
 import { FullyQualifiedEvent } from '../../../lib/galaxy/client'
 
 export default function Footer({
@@ -25,15 +25,15 @@ export default function Footer({
                 <div className='flex flex-row flex-wrap gap-x-4 gap-y-2 text-neutral-400 lg:flex-col lg:gap-x-0'>
                   <ul>
                     {topMenu.items.map((footerLink) => (
-                      <li>
+                      <li key={footerLink.name}>
                         <a
-                          key={footerLink.name}
                           href={footerLink.href}
                           target={footerLink.target}
                           className='footer w-fit text-sm transition-all hover:text-neutral-0'
                           onClick={
                             footerLink.galaxyEvent
-                              ? galaxyOnClick(
+                              ? // eslint-disable-next-line react-hooks/rules-of-hooks
+                                useGalaxyOnClick(
                                   footerLink.galaxyEvent as FullyQualifiedEvent
                                 )
                               : undefined
@@ -81,7 +81,8 @@ export default function Footer({
                 target={bottomLink.target}
                 className={`first:pl-0 bottom-link-${index} whitespace-nowrap hover:text-neutral-0`}
                 onClick={() => {
-                  galaxyOnClick(
+                  // eslint-disable-next-line react-hooks/rules-of-hooks
+                  useGalaxyOnClick(
                     `footerNav.privacyItems.${bottomLink.text
                       .replace(/\s+/g, '')
                       .toLowerCase()}Select`

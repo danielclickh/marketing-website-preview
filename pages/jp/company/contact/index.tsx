@@ -1,4 +1,4 @@
-import { SuiText, SuiTitle } from '../../../../components/sui'
+import { SuiTitle } from '../../../../components/sui'
 
 import { findOne } from '../../../../lib/api/strapi'
 import GrowingCommunity from '../../../../components/GrowingCommunity'
@@ -8,7 +8,7 @@ import { ContactProps } from '../../../../types/contact'
 import Layout from '../../../../components/jp/Layout'
 import { getCommonProps } from '../../../../lib/utils/getCommonProps'
 import HRSeparator from '../../../../components/HRSeparator'
-import { galaxyOnPage } from '../../../../lib/galaxy/galaxy'
+import { useGalaxyOnPage } from '../../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -34,7 +34,7 @@ export default function ContactPage({
   headerData,
   seo
 }: ContactProps) {
-  galaxyOnPage('contactPage')
+  useGalaxyOnPage('contactPage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
