@@ -72,6 +72,13 @@ const UTMPersist = () => {
       updateLinks()
     }
 
+    const handleMessageEvent = (event: MessageEvent<any>) => {
+      // Securiti.ai cookies accepted event
+      if (event.data.message === 'consent_given') {
+        updateLinks()
+      }
+    }
+
     const pollGoogleAnalyticsCookie = continuouslyCheckGoogleAnalyticsCookie({
       intervalTimeout: 750, // Check every 750 millisecond(s)
       stopAfter: 30000, // Stop checking after 30 second(s)
@@ -82,10 +89,12 @@ const UTMPersist = () => {
 
     pollGoogleAnalyticsCookie.start()
     router.events.on('routeChangeComplete', handleRouteChange)
+    window.addEventListener('message', handleMessageEvent)
 
     return () => {
       pollGoogleAnalyticsCookie.stop()
       router.events.off('routeChangeComplete', handleRouteChange)
+      window.removeEventListener('message', handleMessageEvent)
     }
   }, [])
 
