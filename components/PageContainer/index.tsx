@@ -1,5 +1,5 @@
-import React, { ReactNode, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import React, { ReactNode, useEffect } from 'react'
 
 function PageContainer({ children }: { children: ReactNode }) {
   const pathname = usePathname()
