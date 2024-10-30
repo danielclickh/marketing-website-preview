@@ -119,7 +119,6 @@ interface Props extends ReactMarkdownOptions {
   encloseByDiv?: boolean
   ignoreAnchor?: boolean
   allowHeaderLink?: boolean
-  ref: React.RefObject<HTMLElement> | null
 }
 
 const getIgnoreAnchor = () => ({
@@ -135,7 +134,6 @@ function Markdown({
   rehypePlugins = [],
   remarkPlugins = [],
   allowHeaderLink = false,
-  ref,
   ...props
 }: Props) {
   const newComponents = getDefaultComponents({

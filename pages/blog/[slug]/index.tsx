@@ -174,7 +174,7 @@ export default function BlogPage({
               <>
                 <Markdown
                   className='rich-text-content mb-8 leading-6'
-                  allowHeaderLink ref={null}>
+                  allowHeaderLink>
                   {CloudCTAHeader}
 
                 </Markdown>
@@ -184,7 +184,7 @@ export default function BlogPage({
    
                 
                 <div ref={target}>
-                  <Markdown className='rich-text-content leading-6' allowHeaderLink ref={target}>
+                  <Markdown className='rich-text-content leading-6' allowHeaderLink>
                     {content}
                   </Markdown>
                 </div>
@@ -196,7 +196,7 @@ export default function BlogPage({
               <>
                 <Markdown
                   className='rich-text-content mt-8 leading-6'
-                  allowHeaderLink ref={null}>
+                  allowHeaderLink >
                   {CloudCTAFooter}
                 </Markdown>
               </>
