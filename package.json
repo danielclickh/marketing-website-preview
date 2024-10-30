@@ -11,8 +11,7 @@
     "create-githubstars-file": "ts-node  -O '{\"module\": \"commonjs\"}' getGitHubStars",
     "deploy": "yarn download-cms-data && yarn create-githubstars-file && yarn create-static-sitemap && yarn create-pricing-file && next build",
     "lint": "next lint",
-    "export": "next export",
-    "prepare": "husky"
+    "export": "next export"
   },
   "dependencies": {
     "@floating-ui/react": "0.22.0",

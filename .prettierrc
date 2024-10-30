@@ -8,8 +8,5 @@
   "trailingComma": "none",
   "rubySingleQuote": false,
   "rubyToProc": true,
-  "importOrder": ["^components/(.*)$", "^[./]" ],
-  "importOrderSeparation": true, 
-  "importOrderSortSpecifiers": true,
   "plugins": ["prettier-plugin-organize-imports"]
 }
