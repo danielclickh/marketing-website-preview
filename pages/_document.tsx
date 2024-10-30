@@ -16,7 +16,8 @@ export default function BaseLayout() {
               src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
               height='0'
               width='0'
-              style={{ display: 'none', visibility: 'hidden' }}></iframe>
+              style={{ display: 'none', visibility: 'hidden' }}
+            ></iframe>
           </noscript>
         ) : (
           // THIS IS DEV/LOCAL
@@ -25,7 +26,8 @@ export default function BaseLayout() {
               src={`https://www.googletagmanager.com/ns.html?id=${gtmId}&gtm_auth=BzKh0v8t1wje2QxxRxIGzA&gtm_preview=env-74&gtm_cookies_win=x`}
               height='0'
               width='0'
-              style={{ display: 'none', visibility: 'hidden' }}></iframe>
+              style={{ display: 'none', visibility: 'hidden' }}
+            ></iframe>
           </noscript>
         )}
       </body>

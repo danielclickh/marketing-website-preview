@@ -57,7 +57,8 @@ export default function NotFoundPage({
           <div className='flex flex-col items-start justify-center gap-2 pt-10 md:pl-8 md:pt-0'>
             <SuiLink
               href='https://docs.clickhouse.com'
-              className='hover:text-c6'>
+              className='hover:text-c6'
+            >
               Documentation
             </SuiLink>
 
