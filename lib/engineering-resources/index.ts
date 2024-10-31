@@ -31,6 +31,7 @@ export function getEngineeringResources(): EngineeringResource[] {
             title: data.title,
             slug,
             excerpt: data.excerpt,
+            image: data.image ? data.image: '',
             body: content,
           } as EngineeringResource;
         } catch (error) {
