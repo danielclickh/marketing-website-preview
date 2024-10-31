@@ -17,6 +17,7 @@ export function getEngineeringResources(): EngineeringResource[] {
     const engineeringResources = fileNames
       .filter(fileName => fileName.endsWith('.md'))
       .map(fileName => {
+        console.log(fileName)
         try {
           const filePath = path.join(engResourcesDirectory, fileName);
           const fileContents = fs.readFileSync(filePath, 'utf8');
@@ -31,6 +32,7 @@ export function getEngineeringResources(): EngineeringResource[] {
             title: data.title,
             slug,
             excerpt: data.excerpt,
+            image: data.image ? data.image: '',
             body: content,
           } as EngineeringResource;
         } catch (error) {
