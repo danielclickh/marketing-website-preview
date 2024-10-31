@@ -10,5 +10,5 @@ export interface BlogProps extends BlogPost, CommonProps {
   ShowCloudCTAFooter: boolean | null
   CloudCTAFooter: string
   CloudCTAHeader: string
-  readingTime: number
+  reading_time: number
 }
