@@ -21,6 +21,7 @@ export const updateLinks = (
       link.href = appendUTMsToLink(link.href)
       link.href = appendGalaxySessionIDToLink(link.href)
       link.href = appendPagePathsToLink(link.href)
+      link.href = appendGoogleAnalyticsCookieToLink(link.href)
       if (experimentId && variationId) {
         link.href = appendExperimentToLink(link.href, experimentId, variationId)
       }
@@ -71,10 +72,29 @@ const UTMPersist = () => {
       updateLinks()
     }
 
+    const handleMessageEvent = (event: MessageEvent<any>) => {
+      // Securiti.ai cookies accepted event
+      if (event.data.message === 'consent_given') {
+        updateLinks()
+      }
+    }
+
+    const pollGoogleAnalyticsCookie = continuouslyCheckGoogleAnalyticsCookie({
+      intervalTimeout: 750, // Check every 750 millisecond(s)
+      stopAfter: 30000, // Stop checking after 30 second(s)
+      callback() {
+        updateLinks()
+      }
+    })
+
+    pollGoogleAnalyticsCookie.start()
     router.events.on('routeChangeComplete', handleRouteChange)
+    window.addEventListener('message', handleMessageEvent)
 
     return () => {
+      pollGoogleAnalyticsCookie.stop()
       router.events.off('routeChangeComplete', handleRouteChange)
+      window.removeEventListener('message', handleMessageEvent)
     }
   }, [])
 
@@ -82,6 +102,76 @@ const UTMPersist = () => {
 }
 
 export default React.memo(UTMPersist)
+
+export function getGoogleAnalyticsCookie(): null | string {
+  // Get all cookies in the format "cookieName=cookieValue; ..."
+  const cookies = document.cookie.split(';')
+
+  // Loop through each cookie
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].trim()
+
+    // Check if the cookie starts with "_ga="
+    if (cookie.startsWith('_ga=')) {
+      // Return the value part, which is everything after "_ga="
+      return cookie.substring(4)
+    }
+  }
+
+  return null
+}
+
+export function continuouslyCheckGoogleAnalyticsCookie({
+  callback,
+  intervalTimeout = 1000,
+  stopAfter = 10000
+}: {
+  callback?: Function
+  intervalTimeout?: number
+  stopAfter?: false | number
+} = {}) {
+  let intervalId: number | null = null
+
+  const stop = () => {
+    if (intervalId) {
+      window.clearInterval(intervalId)
+      intervalId = null
+    }
+  }
+
+  const start = () => {
+    const startedAt = Date.now()
+
+    intervalId = window.setInterval(() => {
+      const now = Date.now()
+
+      // If the ga cookie returns a value, stop the loop.
+      // Or stop after 5 seconds if no value has been returned.
+      if (
+        getGoogleAnalyticsCookie() ||
+        (stopAfter !== false && now - startedAt >= stopAfter)
+      ) {
+        stop()
+        if (callback) callback()
+      }
+    }, intervalTimeout)
+  }
+
+  return {
+    start,
+    stop
+  }
+}
+
+export function appendGoogleAnalyticsCookieToLink(url: string): string {
+  const cookieValue = getGoogleAnalyticsCookie()
+
+  if (!cookieValue) return url
+
+  const urlObject = new URL(url)
+  urlObject.searchParams.set('_ga', cookieValue)
+  return urlObject.toString()
+}
 
 // Utility function to append UTMs to a link
 export function appendUTMsToLink(url: string): string {
