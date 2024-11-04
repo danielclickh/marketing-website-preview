@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 import { useRouter } from 'next/router'
+import React from 'react'
 
 type RadioGroupComponentProps = {
   value: string

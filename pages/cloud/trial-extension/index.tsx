@@ -1,19 +1,17 @@
-import { SuiText, SuiTitle } from '../../../components/sui'
-import { findOne } from '../../../lib/api/strapi'
-import GrowingCommunity from '../../../components/GrowingCommunity'
-import ContactForm from '../../../components/ContactForm'
 import { GetStaticProps } from 'next'
-import { ContactProps } from '../../../types/contact'
-import Layout from '../../../components/Layout'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useRef, useState } from 'react'
+import GrowingCommunity from '../../../components/GrowingCommunity'
 import HRSeparator from '../../../components/HRSeparator'
-import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
+import Layout from '../../../components/Layout'
 import MarketoForm, {
   SpoofedMarketoObject
 } from '../../../components/MarketoForm'
-import { useRouter } from 'next/router'
-import Head from 'next/head'
-import { useRef, useState } from 'react'
+import { findOne } from '../../../lib/api/strapi'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { ContactProps } from '../../../types/contact'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {

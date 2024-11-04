@@ -1,13 +1,12 @@
-import { findOne } from '../../../lib/api/strapi'
-import GrowingCommunity from '../../../components/GrowingCommunity'
-import Markdown from '../../../components/Markdown'
 import { GetStaticProps } from 'next'
-import { ContactProps } from '../../../types/contact'
-import Layout from '../../../components/Layout'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import HRSeparator from '../../../components/HRSeparator'
-import MarketoForm from '../../../components/MarketoForm'
 import { useRef, useState } from 'react'
+import GrowingCommunity from '../../../components/GrowingCommunity'
+import HRSeparator from '../../../components/HRSeparator'
+import Layout from '../../../components/Layout'
+import MarketoForm from '../../../components/MarketoForm'
+import { findOne } from '../../../lib/api/strapi'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { ContactProps } from '../../../types/contact'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -67,7 +66,7 @@ export default function ContactPage({
                 can help.
               </div>
             </div>
-            <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 pt-14 pb-8 text-center md:bg-no-repeat 2xl:px-0'>
+            <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 pb-8 pt-14 text-center md:bg-no-repeat 2xl:px-0'>
               <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
                 {!formSuccess && (
                   <MarketoForm

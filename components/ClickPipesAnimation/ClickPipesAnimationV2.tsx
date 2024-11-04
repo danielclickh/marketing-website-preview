@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import ClickPipesIntegrationImage from './ClickPipesIntegrationImage'
 
 type LogoItemProps = {
   src: string
@@ -22,7 +21,7 @@ function LogoItem({ src, alt, active, badge }: LogoItemProps) {
         active ? 'ring-primary-300' : 'ring-[#414141]/80 grayscale'
       }`}>
       {badge && (
-        <div className='absolute -top-2 -right-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
+        <div className='absolute -right-2 -top-2 rounded-full bg-primary-300 px-3 text-xs font-normal text-neutral-725'>
           {badge}
         </div>
       )}

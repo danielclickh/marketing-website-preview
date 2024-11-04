@@ -12,7 +12,7 @@ import {
 import { CUIButton, CUILink } from '../ClickUI'
 import Markdown from '../Markdown'
 import { StrapiImage } from '../StrapiElements'
-import { SuiText, SuiTitle } from '../sui'
+import { SuiText } from '../sui'
 import PlanPricing from './PlanPricing'
 import PricingButton from './PricingButton'
 import { PricingContextProvider } from './PricingContext'

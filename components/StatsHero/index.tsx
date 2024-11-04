@@ -1,7 +1,7 @@
 import React from 'react'
+import { CUIButton } from '../ClickUI'
 import { ButtonProps } from '../ClickUI/Button/types'
 import styles from './styles.module.scss'
-import { CUIButton } from '../ClickUI'
 
 interface CtaBaseProps {
   text: string

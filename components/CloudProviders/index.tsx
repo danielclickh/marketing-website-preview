@@ -1,9 +1,8 @@
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { CloudProviderType } from '../../types/pricing'
 import { StrapiImage } from '../StrapiElements'
-import { SuiText } from '../sui'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 function CloudProviders({
   cloudProviders
@@ -14,7 +13,7 @@ function CloudProviders({
   const path = router.asPath
 
   return (
-    <div className='flex justify-center space-x-6 pt-8 pb-6 md:justify-start'>
+    <div className='flex justify-center space-x-6 pb-6 pt-8 md:justify-start'>
       {cloudProviders.map((cloudProvider, parentIndex: number) => (
         <div className='flex flex-col space-y-2' key={parentIndex}>
           <div className='flex flex-row items-start gap-6'>

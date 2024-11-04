@@ -14,7 +14,7 @@ export default function IntegrationSupportPill({ label }: { label: string }) {
 
   return (
     <span
-      className={`inline-block rounded-full py-1 px-4 text-sm font-medium capitalize leading-none tracking-wide ${colorTheme}`}>
+      className={`inline-block rounded-full px-4 py-1 text-sm font-medium capitalize leading-none tracking-wide ${colorTheme}`}>
       {label}
     </span>
   )

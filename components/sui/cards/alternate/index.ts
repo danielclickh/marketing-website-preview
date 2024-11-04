@@ -1,1 +1,1 @@
-export { SuiAlternateCard } from './alternate_card';
+export { SuiAlternateCard } from './alternate_card'

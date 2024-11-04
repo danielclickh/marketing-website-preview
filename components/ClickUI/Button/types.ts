@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { ReactElement } from 'react-markdown/lib/react-markdown'
 import { LinkProps } from '../Link/types'
 

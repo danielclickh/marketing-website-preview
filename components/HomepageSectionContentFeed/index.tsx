@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
 import { CUIButton } from '../ClickUI'
 import Markdown from '../Markdown'
 import ResponsiveEmbed from '../ResponsiveEmbed'
 import { SuiText, SuiTitle } from '../sui'
-import { getContent, getCategories, EntryCategory, EntryStat } from './content'
+import { EntryCategory, EntryStat, getCategories, getContent } from './content'
 
 function StatBox(props: EntryStat) {
   return (
-    <div className='flex flex-col items-center justify-center gap-1 rounded bg-neutral-750 py-4 px-2 text-center text-white'>
+    <div className='flex flex-col items-center justify-center gap-1 rounded bg-neutral-750 px-2 py-4 text-center text-white'>
       <div className='flex aspect-square w-10 items-center justify-center'>
         <props.icon />
       </div>
@@ -45,7 +44,7 @@ export default function HomepageSectionContentFeed({
       {/* Text & filters column */}
       <div className='relative w-full flex-shrink-0 flex-grow-0 lg:w-2/5'>
         <div className='sticky top-20'>
-          <SuiTitle type='h2' className='text-balance mb-4 xl:pr-12'>
+          <SuiTitle type='h2' className='mb-4 text-balance xl:pr-12'>
             Build real-time data products that scale
           </SuiTitle>
           <SuiText
@@ -59,7 +58,7 @@ export default function HomepageSectionContentFeed({
               <SuiText
                 weight='bold'
                 size='sm'
-                className='mt-12 mb-4 uppercase tracking-[0.0875rem] text-primary-300'>
+                className='mb-4 mt-12 uppercase tracking-[0.0875rem] text-primary-300'>
                 Filter by
               </SuiText>
               <ul className='flex flex-wrap gap-4'>

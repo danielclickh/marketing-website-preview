@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import { BlogPost as BlogPostType } from '../../types/blogs'
 import { convertDateToString } from '../../lib/utils/dateUtils'
-import { StrapiImage } from '../StrapiElements'
+import { BlogPost as BlogPostType } from '../../types/blogs'
 import { CUICard } from '../ClickUI'
+import { StrapiImage } from '../StrapiElements'
 
 export default function BlogPost({
   thumbnailPng,

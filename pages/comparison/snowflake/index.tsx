@@ -13,9 +13,9 @@ import Markdown from '../../../components/Markdown'
 import MarketoForm from '../../../components/MarketoForm'
 import { StrapiImage } from '../../../components/StrapiElements'
 import { findAll, findOne } from '../../../lib/api/strapi'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { BigNumber, ComparisonProps } from '../../../types/comparisons'
-import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface SnowflakePageProps extends ComparisonProps {
   customerStories: any

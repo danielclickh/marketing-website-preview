@@ -10,7 +10,7 @@
     "create-pricing-file": "ts-node  -O '{\"module\": \"commonjs\"}' createPricingFile",
     "create-githubstars-file": "ts-node  -O '{\"module\": \"commonjs\"}' getGitHubStars",
     "deploy": "yarn download-cms-data && yarn create-githubstars-file && yarn create-static-sitemap && yarn create-pricing-file && next build",
-    "lint": "next lint",
+    "lint": "next lint && yarn prettier */*.ts --check",
     "export": "next export"
   },
   "dependencies": {
@@ -36,6 +36,7 @@
     "next": "^14.2.10",
     "next-password-protect": "^1.8.0",
     "plyr": "^3.7.8",
+    "prettier-plugin-organize-imports": "^4.1.0",
     "primereact": "^10.6.4",
     "qs": "^6.11.0",
     "react": "^18.2.0",

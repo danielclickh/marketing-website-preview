@@ -1,7 +1,6 @@
 import React from 'react'
 import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import { NavigationItem, NavigationItemProps } from './parts'
-import NavigationSubNavPricing from './sub-navs/NavigationSubNavPricing'
 import NavigationSubNavProducts from './sub-navs/NavigationSubNavProducts'
 import NavigationSubNavResources from './sub-navs/NavigationSubNavResources'
 import NavigationSubNavUseCases from './sub-navs/NavigationSubNavUseCases'

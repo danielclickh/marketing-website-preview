@@ -18,11 +18,11 @@ import {
   findOne,
   getStagingOnlyFilters
 } from '../../../lib/api/strapi'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { convertDateToString } from '../../../lib/utils/dateUtils'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { BlogProps } from '../../../types/blog'
 import { ParamsType } from '../../../types/homepage'
-import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 export const getServerSideProps: GetServerSideProps<BlogProps> =
   async function getServerSideProps({ params }) {

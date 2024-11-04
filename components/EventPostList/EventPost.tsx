@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import { EventType } from '../../types/events'
-import { convertDateToString } from '../../lib/utils/dateUtils'
-import { StrapiImage } from '../StrapiElements'
-import { CUICard } from '../ClickUI'
 import { CalendarIcon } from '@heroicons/react/outline'
+import Link from 'next/link'
+import { convertDateToString } from '../../lib/utils/dateUtils'
+import { EventType } from '../../types/events'
+import { CUICard } from '../ClickUI'
+import { StrapiImage } from '../StrapiElements'
 
 export default function EventPost({
   thumbnailPng,

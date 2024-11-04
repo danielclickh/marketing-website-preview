@@ -16,5 +16,5 @@ export interface EventsFormProps {
   featuredImage?: StrapiImage
   form: EventForm
   recordedVimeoUrl?: string
-  eventEnded: boolean;
+  eventEnded: boolean
 }

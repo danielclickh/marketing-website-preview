@@ -18,7 +18,7 @@ export default function GetStartedFree({
   textDescription = "We'll get you started on a 30 day trial and $300 credits to spend at your own pace."
 }: Props) {
   return (
-    <div className='flip-selection w-full rounded-lg bg-primary-300 py-16 px-4 text-neutral-0'>
+    <div className='flip-selection w-full rounded-lg bg-primary-300 px-4 py-16 text-neutral-0'>
       <div className='container mx-auto flex flex-col 2xl:px-0'>
         <div className='mx-auto flex flex-col text-center'>
           <SuiTitle type='h2' color='text-default' className='mb-6 '>

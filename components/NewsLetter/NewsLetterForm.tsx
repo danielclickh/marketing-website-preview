@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-import Markdown from '../Markdown'
 import MarketoForm from '../MarketoForm'
 
 function NewsLetterForm() {

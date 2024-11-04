@@ -1,5 +1,7 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
+import React, { forwardRef, useEffect, useRef, useState } from 'react'
+import { CUIButton } from '../../components/ClickUI'
 import HomepageSectionTrustedByAlt from '../../components/HomepageSectionTrustedByAlt'
 import HRSeparator from '../../components/HRSeparator'
 import Layout from '../../components/Layout'
@@ -8,8 +10,6 @@ import RealTimeDataWarehouseAnimation from '../../components/RealTimeDataWarehou
 import { SuiText, SuiTitle } from '../../components/sui'
 import { findOne } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import React, { forwardRef, useEffect, useRef, useState } from 'react'
-import { CUIButton } from '../../components/ClickUI'
 import { HomePageProps } from '../../types/homepage'
 
 export const getStaticProps: GetStaticProps = async function getStaticProps() {

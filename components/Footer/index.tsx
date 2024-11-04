@@ -1,12 +1,10 @@
-import NewsLetterForm from '../NewsLetter/NewsLetterForm'
-import { FooterData } from './types'
-import { CUILink } from '../ClickUI'
 import Image from 'next/image'
-import logoFull from '../../public/logo-full.svg'
-import topLevelFooterMenu from './footer.json'
-
-import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import { FullyQualifiedEvent } from '../../lib/galaxy/client'
+import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
+import logoFull from '../../public/logo-full.svg'
+import NewsLetterForm from '../NewsLetter/NewsLetterForm'
+import topLevelFooterMenu from './footer.json'
+import { FooterData } from './types'
 
 export default function Footer({
   newsletterForm,

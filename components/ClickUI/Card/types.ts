@@ -1,6 +1,5 @@
 import { StaticImageData } from 'next/image'
 import { HTMLAttributes, ReactNode } from 'react'
-import { LinkProps } from '../Link/types'
 
 export interface BasicCardProps extends HTMLAttributes<HTMLDivElement> {
   title: string

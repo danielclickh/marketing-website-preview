@@ -12,13 +12,13 @@ import AccordionComponent from '../../../components/RealTimeDiagram/Accordion'
 import Feature from '../../../components/RealTimeDiagram/feature-check'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
 import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import faqs from './faqs.json'
 import features from './features.json'
-import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
@@ -103,9 +103,10 @@ export default function RealTimeAnalyticsPage({
                           key={checkpoint.id}>
                           <Image
                             src='/images/cloud/check.svg'
-                            width={32}
-                            height={33}
+                            width='0'
+                            height='0'
                             alt='Icon'
+                            className='w-8'
                           />
                           <SuiText
                             size='base'

@@ -3,15 +3,15 @@ import React from 'react'
 import Layout from '../components/Layout'
 import Markdown from '../components/Markdown'
 import { SuiTitle } from '../components/sui'
+import SupportProgram from '../components/SupportProgram'
 import { findAll, getPathsValues } from '../lib/api/strapi'
+import { useGalaxyOnPage } from '../lib/galaxy/galaxy'
+import { getCommonProps } from '../lib/utils/getCommonProps'
 import {
   NOT_FOUND_FALLBACK,
   REVALIDATE_SECONDS
 } from '../lib/utils/revalidationConfig'
-import { getCommonProps } from '../lib/utils/getCommonProps'
 import { CatAllParamsType, RichContentPageProps } from '../types/homepage'
-import SupportProgram from '../components/SupportProgram'
-import { useGalaxyOnPage } from '../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<RichContentPageProps> =
   async function getStaticProps({ params }) {

@@ -1,17 +1,19 @@
 import { ReactNode } from 'react'
 
 interface ResponsiveEmbedBaseProps {
-    ratio?: string,
+  ratio?: string
 }
 
 interface ResponsiveEmebedHtmlProps extends ResponsiveEmbedBaseProps {
-    html: string,
-    children?: never,
+  html: string
+  children?: never
 }
 
 interface ResponsiveEmebedChildrenProps extends ResponsiveEmbedBaseProps {
-    html?: never,
-    children: ReactNode,
+  html?: never
+  children: ReactNode
 }
 
-export type ResponsiveEmbedProps = ResponsiveEmebedHtmlProps | ResponsiveEmebedChildrenProps
+export type ResponsiveEmbedProps =
+  | ResponsiveEmebedHtmlProps
+  | ResponsiveEmebedChildrenProps

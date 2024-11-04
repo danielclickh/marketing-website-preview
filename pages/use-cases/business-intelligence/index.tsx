@@ -11,12 +11,12 @@ import Markdown from '../../../components/Markdown'
 import QuoteCard from '../../../components/QuoteCard'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
 import bigNumbers from './big-numbers.json'
 import features from './features.json'
 import references from './supporting-references.json'
-import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any

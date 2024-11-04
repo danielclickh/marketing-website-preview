@@ -1,8 +1,8 @@
-import { SuiText } from '../../typography'
-import SuiButton from '../../SuiButton'
-import { SuiPanel } from '../../panel'
 import { ArrowRightIcon } from '@heroicons/react/solid'
 import { ReactNode } from 'react'
+import { SuiPanel } from '../../panel'
+import SuiButton from '../../SuiButton'
+import { SuiText } from '../../typography'
 
 type CardProps = {
   title: string
@@ -50,8 +50,8 @@ export function SuiCard(props: CardProps) {
       padding='lg'
       color={color}
       isRounded
-      className={`flex h-full shadow-card hover:shadow-card-3xl duration-300 ${className}`}>
-      <div className='flex flex-col justify-between h-full'>
+      className={`hover:shadow-card-3xl flex h-full shadow-card duration-300 ${className}`}>
+      <div className='flex h-full flex-col justify-between'>
         <div>
           {pretitle && (
             <SuiText
@@ -64,14 +64,14 @@ export function SuiCard(props: CardProps) {
           )}
           {icon && (
             <div
-              className={`bg-c2 w-12 h-12 grid place-items-center rounded-lg mb-4 ${line}`}>
+              className={`mb-4 grid h-12 w-12 place-items-center rounded-lg bg-c2 ${line}`}>
               {icon}
             </div>
           )}
           <SuiText size='lg' weight='bold' className={headerAlign}>
             {title}
           </SuiText>
-          <div className={`bg-c6 h-1 w-16 rounded-md flex ${line} mt-4 mb-6`} />
+          <div className={`flex h-1 w-16 rounded-md bg-c6 ${line} mb-6 mt-4`} />
           <SuiText size='sm' weight='normal' color='secondary'>
             {description}
           </SuiText>

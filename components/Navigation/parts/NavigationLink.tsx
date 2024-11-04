@@ -1,6 +1,5 @@
-import { forwardRef } from 'react'
 import Link, { LinkProps } from 'next/link'
-import React from 'react'
+import React, { forwardRef } from 'react'
 
 export interface NavigationLinkProps extends Omit<LinkProps, 'href'> {
   href?: string // Restrict href to be a string

@@ -79,7 +79,7 @@ export default function CycleText({
       style={{ backfaceVisibility: 'hidden', transform: 'translateZ(0)' }}>
       <div
         ref={listElement}
-        className='ease-[cubic-bezier(0.09, 0.24, 0.09, 1)] absolute top-0 left-0 right-0 flex -translate-y-full flex-col duration-[2000ms]'>
+        className='ease-[cubic-bezier(0.09, 0.24, 0.09, 1)] absolute left-0 right-0 top-0 flex -translate-y-full flex-col duration-[2000ms]'>
         {[...phrases, ...phrases].map((phrase, index) => {
           return (
             <div

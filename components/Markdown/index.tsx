@@ -1,18 +1,17 @@
+import * as Tooltip from '@radix-ui/react-tooltip'
 import React, { MouseEventHandler, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import {
   PluggableList,
   ReactMarkdownOptions
 } from 'react-markdown/lib/react-markdown'
-import rehypeRaw from 'rehype-raw'
 import rehypeHighlight from 'rehype-highlight'
-import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
 import rehypeSlug from 'rehype-slug-custom-id'
-
+import remarkGfm from 'remark-gfm'
+import { CUILink } from '../ClickUI'
 import { SuiTitle } from '../sui'
 import { AllowedElements, HighLightOptions, sanitizeMarkdown } from './utils'
-import { CUILink } from '../ClickUI'
-import * as Tooltip from '@radix-ui/react-tooltip'
 
 function StrapiImage({ src, width, height, alt, ...props }: any) {
   return (

@@ -7,8 +7,8 @@ interface Props {
 function ColumnOrientedIllustration({ className }: Props): JSX.Element {
   return (
     <svg
-      width='556'
-      height='269'
+      width='100%'
+      height='100%'
       viewBox='0 0 556 269'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'

@@ -2,8 +2,8 @@ import { ChevronRightIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
-import ReactMarkdown from 'react-markdown'
+import React from 'react'
+import Tilt from 'react-parallax-tilt'
 import { CUIButton, CUICard } from '../../components/ClickUI'
 import ContactForm from '../../components/ContactForm'
 import HRSeparator from '../../components/HRSeparator'
@@ -12,7 +12,6 @@ import LogoCarousel from '../../components/LogoCarousel'
 import { findOne } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { CommonProps } from '../../types/homepage'
-import Tilt from 'react-parallax-tilt'
 
 interface MonitoramaProps extends CommonProps {
   customerStories: any
@@ -94,7 +93,7 @@ export default function MonitoramaPage({
                     />
                   </div>
                 </div>
-                <div className='rich_content mt-16 mb-12 text-center text-base text-neutral-200 lg:max-w-md lg:text-left'>
+                <div className='rich_content mb-12 mt-16 text-center text-base text-neutral-200 lg:max-w-md lg:text-left'>
                   ClickHouse can help you with your observability use cases and
                   real-time data analytics.
                 </div>
@@ -271,7 +270,7 @@ export default function MonitoramaPage({
                   </div>
                 </CUICard.Body>
                 <CUICard.Footer className='flex w-full items-center p-6 text-sm text-neutral-300'>
-                  <div className='absolute left-0 bottom-0 z-50 h-20 w-full overflow-hidden rounded-b-lg border border-neutral-700/80 bg-neutral-900'>
+                  <div className='absolute bottom-0 left-0 z-50 h-20 w-full overflow-hidden rounded-b-lg border border-neutral-700/80 bg-neutral-900'>
                     <div className='flex w-full justify-between'>
                       <div className='h-20'>
                         <Image
@@ -337,7 +336,7 @@ export default function MonitoramaPage({
                   </div>
                 </CUICard.Body>
                 <CUICard.Footer className='flex w-full items-center p-6 text-sm text-neutral-300'>
-                  <div className='absolute left-0 bottom-0 z-50 h-20 w-full overflow-hidden rounded-b-lg border border-neutral-700/80 bg-neutral-900'>
+                  <div className='absolute bottom-0 left-0 z-50 h-20 w-full overflow-hidden rounded-b-lg border border-neutral-700/80 bg-neutral-900'>
                     <div className='flex w-full'>
                       <div className='flex h-20 w-1/3 items-center justify-center'>
                         <Image

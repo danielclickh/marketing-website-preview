@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { BlogPostListProps } from './types'
-import { SuiSearchField } from '../sui/client'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import CategorySelector from '../CategorySelector'
+import { SuiSearchField } from '../sui/client'
+import { BlogPostListProps } from './types'
 
 function BlogPostList({ categories, children }: BlogPostListProps) {
   const router = useRouter()
@@ -99,12 +99,12 @@ function BlogPostList({ categories, children }: BlogPostListProps) {
   }, [])
 
   return (
-    <div className='max-w-7xl container mx-auto px-8 2xl:px-0 pt-8'>
-      <div className='flex-col lg:flex lg:flex-row lg:justify-between items-center pb-8 lg:space-x-24'>
+    <div className='container mx-auto max-w-7xl px-8 pt-8 2xl:px-0'>
+      <div className='flex-col items-center pb-8 lg:flex lg:flex-row lg:justify-between lg:space-x-24'>
         <SuiSearchField
           placeholder='Search by title or keyword...'
           htmlFor='search'
-          className='lg:flex-1 mb-6 lg:mb-0'
+          className='mb-6 lg:mb-0 lg:flex-1'
           onChange={onChange}
         />
         <CategorySelector options={categoryList} />

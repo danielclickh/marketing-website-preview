@@ -11,10 +11,10 @@ import { StrapiImage } from '../../components/StrapiElements'
 import { SuiSearchField, SuiTitle } from '../../components/sui'
 import { useDebounce } from '../../hooks'
 import { findOne } from '../../lib/api/strapi'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { convertDateToString } from '../../lib/utils/dateUtils'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { BlogApiResponse, BlogProps } from '../../types/blogs'
-import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { fetchBlogs } from '../api/blog'
 
 export const getServerSideProps: GetServerSideProps<BlogProps> =

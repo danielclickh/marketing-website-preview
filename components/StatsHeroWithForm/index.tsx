@@ -1,7 +1,6 @@
 import Image, { ImageProps } from 'next/image'
 import React from 'react'
 import { CUICard } from '../ClickUI'
-import bgArrows from './bg-arrows.png'
 import styles from './styles.module.scss'
 
 export interface StatsHeroProps {

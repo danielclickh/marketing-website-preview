@@ -12,7 +12,7 @@ import { fetchAll } from '../../lib/api/strapi'
 import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
-import { upperCaseFirst, slugify } from '../../lib/utils/strings'
+import { slugify, upperCaseFirst } from '../../lib/utils/strings'
 import {
   Integration,
   IntegrationGroup,

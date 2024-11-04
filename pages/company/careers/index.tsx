@@ -1,14 +1,14 @@
-import { findOne } from '../../../lib/api/strapi'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
 import CareersFilter from '../../../components/CareersFilter'
 import CompanyImages from '../../../components/CompanyImages'
-import { CareersData } from '../../../types/careers'
-import { GetStaticProps } from 'next'
-import Layout from '../../../components/Layout'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import Image from 'next/image'
 import FollowUs from '../../../components/FollowUs'
-import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
+import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'
+import { findOne } from '../../../lib/api/strapi'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { CareersData } from '../../../types/careers'
 
 const careerImgs = [
   { id: 2, url: '/images/careers/Meeting.png', alt: 'Meeting' },

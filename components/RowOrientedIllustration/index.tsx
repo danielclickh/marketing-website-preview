@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import Paths from './Paths'
 
 interface Props {
@@ -8,8 +8,8 @@ interface Props {
 function RowOrientedIllustration({ className }: Props): JSX.Element {
   return (
     <svg
-      width='fill'
-      height='fill'
+      width='100%'
+      height='100%'
       viewBox='0 0 556 269'
       fill='none'
       className={className}>
