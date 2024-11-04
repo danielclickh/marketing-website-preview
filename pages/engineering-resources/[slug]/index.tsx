@@ -10,14 +10,14 @@ import Markdown from '../../../components/Markdown'
 import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
 import NewsLetterForm from '../../../components/NewsLetter/NewsLetterForm'
 import SocialButton from '../../../components/SocialButton'
-import { SuiButton, SuiPanel, SuiText, SuiTitle } from '../../../components/sui'
+import { SuiButton, SuiImage, SuiPanel, SuiText, SuiTitle } from '../../../components/sui'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import {
   getEngineeringResource,
   getEngineeringResources
 } from '../../../lib/engineering-resources'
 import { EngineeringResource } from '../../../lib/engineering-resources/types'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import { CommonProps, NewsLetterData } from '../../../types/homepage'
 
 type MoreLikeThisItem = {
@@ -112,6 +112,9 @@ export default function Page({
               <SuiTitle type='h1' className='my-6 text-balance md:!text-5xl'>
                 {engResource.title}
               </SuiTitle>
+              {
+                engResource.image !== '' && <img src={engResource.image}></img>
+              }
               <Markdown className='rich-text-content leading-6' allowHeaderLink>
                 {engResource.body}
               </Markdown>
