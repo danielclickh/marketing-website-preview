@@ -12,6 +12,7 @@ import ReadingProgress from '../../../components/ReadingProgress'
 import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
 import SocialButton from '../../../components/SocialButton'
 import { StrapiImage } from '../../../components/StrapiElements'
+import TableOfContents from '../../../components/TableOfContents'
 import { SuiButton, SuiText, SuiTitle } from '../../../components/sui'
 import {
   findAll,
@@ -120,16 +121,18 @@ export default function BlogPage({
   ShowCloudCTAFooter,
   CloudCTAFooter,
   CloudCTAHeader,
-  seo
+  seo,
+  table_contents_headers
 }: BlogProps) {
   useGalaxyOnPage('blogPage')
-  const target = React.createRef<HTMLDivElement>();
+  const contentRef = React.createRef<HTMLDivElement>();
+  const footerRef = React.createRef<HTMLDivElement>()
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <ReadingProgress target={target} />
-      <div className='pt-10'>
+      <div className='relative'>
+        <ReadingProgress target={contentRef} />
         <div className='container mx-auto flex max-w-3xl flex-col px-6 2xl:px-0'>
-          <div className='mx-auto flex flex-col pt-6 text-center'>
+          <div className='flex flex-col pt-20 text-left'>
             <h4 className='text-base font-semibold text-primary-300'>
               <Link href='/blog'>Blog</Link> /{' '}
               <Link
@@ -143,7 +146,7 @@ export default function BlogPage({
             <h1 className='mb-8 mt-6 font-basier text-4xl font-bold text-neutral-100 '>
               <span className='leading-snug'>{title}</span>
             </h1>
-            <div className='flex flex-row items-center justify-center space-x-4 pt-2'>
+            <div className='flex flex-row items-center space-x-4 pt-2'>
               <div className='flex aspect-square h-11 w-11'>
                 <StrapiImage
                   {...author.avatarPng}
@@ -167,7 +170,9 @@ export default function BlogPage({
             </div>
           </div>
         </div>
-
+        <div className='hidden absolute h-full z-50 transition-opacity duration-500 xl:block pr-10 right-0'>
+          <TableOfContents contentRef={contentRef} footerRef={footerRef} headersSelector={table_contents_headers}/>
+        </div>       
         <div className='container mx-auto flex max-w-3xl px-6 pt-20 2xl:px-0'>
           <div className='flex w-full flex-col pb-20'>
             {ShowCloudCTAHeader && (
@@ -176,20 +181,17 @@ export default function BlogPage({
                   className='rich-text-content mb-8 leading-6'
                   allowHeaderLink>
                   {CloudCTAHeader}
-
                 </Markdown>
               </>
             )}
             {content && (
-   
-                
-                <div ref={target}>
-                  <Markdown className='rich-text-content leading-6' allowHeaderLink>
-                    {content}
-                  </Markdown>
-                </div>
-
-
+              <div className='flex flex-col lg:flex-row'>
+              <div ref={contentRef}>
+                <Markdown className='rich-text-content leading-6' allowHeaderLink>
+                  {content}
+                </Markdown>
+              </div>
+            </div>
             )}
 
             {ShowCloudCTAFooter && (
@@ -219,10 +221,11 @@ export default function BlogPage({
             </div>
             <NewsLetter {...newsLetterData} />
           </div>
+          
         </div>
       </div>
 
-      <div className='flex w-full pb-8 text-neutral-0 '>
+      <div className='flex w-full pb-8 text-neutral-0' ref={footerRef}>
         <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pb-8 pt-12 md:bg-no-repeat 2xl:px-0'>
           <div className='flex justify-between pb-8'>
             <SuiTitle
