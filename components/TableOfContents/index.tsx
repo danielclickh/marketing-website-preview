@@ -82,7 +82,7 @@ export default function TableOfContents({ contentRef, footerRef, headersSelector
     }, [activeId])
 
     return headings.length === 0 ? null : (
-        <nav ref={navRef} className={`sticky top-30 mt-20 rounded-lg bg-white/5 p-4 transition-opacity duration-300 max-w-[300px] max-h-[calc(100vh-160px)] overflow-y-auto ${isVisible ? 'opacity-100' : 'opacity-0'
+        <nav ref={navRef} className={`sticky top-30 mt-20 rounded-lg bg-white/5 p-4 transition-opacity duration-300 max-w-[280px] max-h-[calc(100vh-160px)] overflow-y-auto ${isVisible ? 'opacity-100' : 'opacity-0'
             }`}>
             <ul className="space-y-2 text-base">
                 {headings.map((heading) => (

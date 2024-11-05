@@ -24,6 +24,7 @@ import { convertDateToString } from '../../../lib/utils/dateUtils'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { BlogProps } from '../../../types/blog'
 import { ParamsType } from '../../../types/homepage'
+import { ArrowLeftIcon } from '@heroicons/react/solid'
 
 export const getServerSideProps: GetServerSideProps<BlogProps> =
   async function getServerSideProps({ params }) {
@@ -131,9 +132,17 @@ export default function BlogPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='relative'>
         <ReadingProgress target={contentRef} />
-        <div className='container mx-auto flex max-w-3xl flex-col px-6 2xl:px-0'>
-          <div className='flex flex-col pt-20 text-left'>
-            <h4 className='text-base font-semibold text-primary-300'>
+        <div className='section-container mx-auto flex flex-col xl:flex-row xl:pt-20'>
+          <div className='2xl:pr-8 lg:pl-0 pt-10 block'>
+          <Link href='/blog'>
+            <button className='flex items-center text-base font-semibold mr-8'>
+              <ArrowLeftIcon className='w-4 mr-2' />
+              Back
+            </button>
+          </Link>
+          </div>
+          <div className='flex flex-col pt-10 text-left xl:pl-4 lg:pr-[180px]'>
+            <h4 className='text-base font-semibold text-primary-300 '>
               <Link href='/blog'>Blog</Link> /{' '}
               <Link
                 href={`/blog?category=${category
@@ -164,17 +173,16 @@ export default function BlogPage({
                   <SuiText size='sm' weight='normal' color='secondary'>
                     {convertDateToString(date || publishedAt)} -  {reading_time} minutes read
                   </SuiText>
-
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className='hidden absolute h-full z-50 transition-opacity duration-500 xl:block pr-10 right-0'>
-          <TableOfContents contentRef={contentRef} footerRef={footerRef} headersSelector={table_contents_headers}/>
-        </div>       
-        <div className='container mx-auto flex max-w-3xl px-6 pt-20 2xl:px-0'>
-          <div className='flex w-full flex-col pb-20'>
+        <div className='hidden absolute h-full z-50 transition-opacity duration-500 xl:block pr-10 2xl:pr-30 right-0'>
+          <TableOfContents contentRef={contentRef} footerRef={footerRef} headersSelector={table_contents_headers} />
+        </div>
+        <div className='section-container mx-auto flex xl:pr-40 pt-20 xl:pl-32'>
+          <div className='flex w-full flex-col pb-20 xl:pl-4 lg:pr-[180px]'>
             {ShowCloudCTAHeader && (
               <>
                 <Markdown
@@ -186,12 +194,12 @@ export default function BlogPage({
             )}
             {content && (
               <div className='flex flex-col lg:flex-row'>
-              <div ref={contentRef}>
-                <Markdown className='rich-text-content leading-6' allowHeaderLink>
-                  {content}
-                </Markdown>
+                <div ref={contentRef}>
+                  <Markdown className='rich-text-content leading-6' allowHeaderLink>
+                    {content}
+                  </Markdown>
+                </div>
               </div>
-            </div>
             )}
 
             {ShowCloudCTAFooter && (
@@ -221,12 +229,11 @@ export default function BlogPage({
             </div>
             <NewsLetter {...newsLetterData} />
           </div>
-          
         </div>
       </div>
 
       <div className='flex w-full pb-8 text-neutral-0' ref={footerRef}>
-        <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pb-8 pt-12 md:bg-no-repeat 2xl:px-0'>
+        <div className='section-container mx-auto flex flex-col bg-opacity-10 px-8 pb-8 pt-12 md:bg-no-repeat 2xl:px-0'>
           <div className='flex justify-between pb-8'>
             <SuiTitle
               type='h2'
