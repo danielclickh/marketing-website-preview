@@ -149,7 +149,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
           </Link>
 
           {/* Mobile region selector */}
-          <HeaderRegionSelector className='ml-auto mr-4 md-mid:hidden' />
+          <HeaderRegionSelector className='z-10 ml-auto mr-4 md-mid:hidden' />
 
           {/* Mobile Burger */}
           <button
