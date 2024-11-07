@@ -5,20 +5,20 @@ import React, { useEffect } from 'react'
 import { CUIButton } from '../../../../components/ClickUI'
 import GetStartedFree from '../../../../components/jp/GetStartedFree'
 import Layout from '../../../../components/jp/Layout'
+import AccordionComponent from '../../../../components/jp/RealTimeDiagram/Accordion'
+import Feature from '../../../../components/jp/RealTimeDiagram/feature-check'
 import LogoCarousel from '../../../../components/LogoCarousel'
 import Markdown from '../../../../components/Markdown'
 import QuoteCard from '../../../../components/QuoteCard'
-import AccordionComponent from '../../../../components/jp/RealTimeDiagram/Accordion'
-import Feature from '../../../../components/jp/RealTimeDiagram/feature-check'
 import { SuiText, SuiTitle } from '../../../../components/sui'
 import { findOne } from '../../../../lib/api/strapi'
+import { useGalaxyOnPage } from '../../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../../types/homepage'
 import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import faqs from './faqs.json'
 import features from './features.json'
-import { useGalaxyOnPage } from '../../../../lib/galaxy/galaxy'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
@@ -166,7 +166,11 @@ export default function RealTimeAnalyticsPage({
                   height={72}
                 />
                 <h2 className='text-left font-basier text-2xl font-semibold lg:text-4xl xl:max-w-[515px]'>
-                  スケールで真価を発揮するリアルタイムデータベース。低遅延が重要な時に、驚異的なパフォーマンスを実現できます。
+                  スケールで真価を発揮するリアルタイムデータベース。低遅延が
+                  <span className='tilted tilted-yellow'>
+                    <span className='tilted-content leading-8'>本当に</span>
+                  </span>{' '}
+                  重要な時に、驚異的なパフォーマンスを実現できます。
                 </h2>
                 <p className='mt-6 xl:max-w-[445px]'>
                   多くの企業がリアルタイム分析アプリケーションにClickHouseを選ぶ理由をご覧ください。
@@ -253,7 +257,10 @@ export default function RealTimeAnalyticsPage({
             <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
               <div className='flip-selection mx-auto flex flex-col text-center'>
                 <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
-                  大規模なデータを扱う開発者から信頼をいただいています。
+                  <span className='tilted tilted-black'>
+                    <span className='tilted-content leading-8'>大規模</span>
+                  </span>
+                  なデータを扱う開発者から信頼をいただいています。
                 </div>
               </div>
             </div>

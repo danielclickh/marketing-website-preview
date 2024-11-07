@@ -2,7 +2,7 @@
     {
         "id": 10,
         "title": "データインジェスト",
-        "content": "Access to live data is vital for real-time analytics. With [ClickPipes](/cloud/clickpipes), available exclusively in ClickHouse Cloud, we provide a turn-key integration engine that makes ingesting large volumes of data effortless. Select an incoming data source and format, tune your schema, and let your pipeline run.<br /><br />Our extensive library of [table engines](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family) supports ingesting data from a wide range of formats and sources. From Kafka topics to S3 buckets, OLTP databases, and more - we have you covered, no matter where your data lives. <br /><br /> With ClickHouse, there's no need to worry about managing complex ingest pipelines. Unlike other OLAP databases which require you to batch inserts for high throughput, ClickHouse is equally comfortable with smaller payloads. [Asynchronous inserts](https://clickhouse.com/docs/en/optimize/asynchronous-inserts) in ClickHouse automatically batch small inserts for you, ensuring writes are performed optimally."
+        "content": "リアルタイム分析ではデータの「鮮度」が非常に重要です。ClickHouse Cloud限定の[ClickPipes](/cloud/clickpipes)を使用すると、わずかな手間でインテグレーションを設定できます。取り込むデータのソースとフォーマットを選択し、スキーマを調整するだけで、パイプラインによる統合が可能になり、莫大なデータを簡単にインジェストすることができます。"
     },
     {
         "id": 20,

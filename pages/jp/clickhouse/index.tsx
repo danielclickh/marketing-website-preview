@@ -1,17 +1,17 @@
-import { SuiButton, SuiText, SuiTitle } from '../../../components/sui'
-import { findOne } from '../../../lib/api/strapi'
-import { StrapiPicture } from '../../../components/StrapiElements'
-import BulletPoint from '../../../components/BulletPoint'
-import GetStarted from '../../../components/jp/GetStarted'
-import { ClickhouseData } from '../../../types/clickhouse'
-import features from './features.json'
-import Image from 'next/image'
 import { GetStaticProps } from 'next'
-import Layout from '../../../components/jp/Layout'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import Image from 'next/image'
+import BulletPoint from '../../../components/BulletPoint'
 import { CUIButton, CUICard } from '../../../components/ClickUI'
 import HRSeparator from '../../../components/HRSeparator'
+import GetStarted from '../../../components/jp/GetStarted'
+import Layout from '../../../components/jp/Layout'
+import { StrapiPicture } from '../../../components/StrapiElements'
+import { SuiButton, SuiText, SuiTitle } from '../../../components/sui'
+import { findOne } from '../../../lib/api/strapi'
 import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { ClickhouseData } from '../../../types/clickhouse'
+import features from './features.json'
 
 export const getStaticProps: GetStaticProps<ClickhouseData> =
   async function getStaticProps() {
@@ -62,11 +62,10 @@ export default function ClickHouseServerPage({
               <div className='flex'>
                 <div className='flex-col text-center md:mt-16 md:w-7/12 md:text-left'>
                   <h1 className='mb-6 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
-                    The{' '}
                     <span className='tilted tilted-yellow'>
-                      <span className='tilted-content'>fastest</span>
+                      <span className='tilted-content'>超高速</span>
                     </span>{' '}
-                    超高速オープンソース分析用データベース
+                    オープンソース分析用データベース
                   </h1>
                   <SuiText
                     size='base'
