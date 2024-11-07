@@ -8,10 +8,41 @@ import {
 import rehypeHighlight from 'rehype-highlight'
 import rehypeRaw from 'rehype-raw'
 import rehypeSlug from 'rehype-slug-custom-id'
+import { CodeBlock } from "@clickhouse/click-ui"
+
 import remarkGfm from 'remark-gfm'
 import { CUILink } from '../ClickUI'
 import { SuiTitle } from '../sui'
 import { AllowedElements, HighLightOptions, sanitizeMarkdown } from './utils'
+
+function CodeViewer({ node, inline, className, type, language, children, ...props }: any) {
+
+  if (type === 'click-ui') {
+
+    const codeContent = (Array.isArray(children)
+      ? children
+        .map(child => typeof child === 'object' ? child.props?.children || '' : child)
+        .join('')
+      : children.toString())
+      .trim()
+
+    return (
+        <CodeBlock
+          className="mb-9"
+          language={language}
+          onCopy={function Da() { }}
+          onCopyError={function Da() { }}
+          showLineNumbers
+          wrapLines
+        >
+          {codeContent}
+        </CodeBlock>
+    )
+  }
+  return (
+    <code className={`${className} border border-solid border-c3 break-words mb-9`} {...props}>{children}</code>
+  );
+}
 
 function StrapiImage({ src, width, height, alt, ...props }: any) {
   return (
@@ -110,7 +141,8 @@ function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
     ),
     h6: (props: any) => (
       <Header type='h6' allowHeaderLink={allowHeaderLink} {...props} />
-    )
+    ),
+    code: CodeViewer
   }
 }
 

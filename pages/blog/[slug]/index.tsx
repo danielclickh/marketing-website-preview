@@ -131,8 +131,10 @@ export default function BlogPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='relative'>
+        <div style={{ position: 'relative', zIndex: 50 }}>
         <ReadingProgress target={contentRef} />
-        <div className='section-container mx-auto flex flex-col xl:flex-row xl:pt-20'>
+        </div>
+      <div className='section-container mx-auto flex flex-col xl:flex-row xl:pt-20'>
           <div className='2xl:pr-8 lg:pl-0 pt-10 block'>
           <Link href='/blog'>
             <button className='flex items-center text-base font-semibold mr-8'>
