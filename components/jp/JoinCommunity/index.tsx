@@ -12,7 +12,7 @@ function JoinCommunity({ github: { stars } }: Props) {
     <div className='section-container flex w-full flex-col items-center justify-between gap-8 pb-16 md:flex-row md:px-8 md:pb-16 2xl:px-0'>
       <div className='flex max-w-xl flex-col items-start gap-10'>
         <SuiTitle type='h2' className='w-full text-center md:text-left'>
-          10万人を超える開発者が使うClickHouseユーザーに参加しよう
+          10万人以上の開発者が使うClickHouseユーザーに参加しよう
         </SuiTitle>
         <div className='mx-auto flex flex-wrap gap-6 md:mx-0'>
           <div className='mx-auto flex gap-6'>
@@ -51,7 +51,7 @@ function JoinCommunity({ github: { stars } }: Props) {
         <div className='absolute left-14 mr-auto pt-14 text-left font-basier text-5xl leading-none md:relative md:left-auto md:pt-0 md:text-7.5xl'>
           36k+
           <span className='absolute left-0 top-full text-xl leading-snug text-primary-300 md:text-2.75xl'>
-            の数
+            PR
           </span>
         </div>
         <div className='absolute right-30 pt-32 font-basier text-5xl leading-none md:relative md:right-auto md:pt-0 md:text-7.5xl'>
