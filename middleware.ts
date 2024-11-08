@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { slugify } from './lib/utils/strings'
 
 export const config = {
   matcher: [
@@ -45,15 +46,32 @@ const i18nRedirectionMap: Record<string, Record<string, string>> = {
 }
 
 export function middleware(request: NextRequest) {
-  const debug = request.nextUrl.searchParams.get('debug') === 'geo-redirects'
+  const debugResponse = (data: any) => {
+    if (request.nextUrl.searchParams.get('debug') === 'geo-redirects') {
+      return NextResponse.json(data)
+    }
+  }
 
   // Get the country code from the request's geo data (ISO 3166-1 alpha-2 format)
   // Note: geo data is only available on Vercel deployment; defaults to 'unknown' otherwise
-  const countryCode = request.geo?.country || 'unknown'
+  const countryCode =
+    request.geo?.country ||
+    request.nextUrl.searchParams.get('country') ||
+    'unknown'
 
   // Key for the redirect cookie to avoid multiple redirects for the same user session
-  const redirectCookieKey = `geo-redirect-${countryCode}`
+  const redirectCookieKey = `geo-redirect-${countryCode}_${
+    slugify(request.nextUrl.pathname) || 'home'
+  }`
   const hasRedirectCookie = request.cookies.has(redirectCookieKey)
+
+  let response: null | NextResponse<any> = null
+
+  let debugData: Record<string, any> = {
+    countryCode,
+    redirectCookieKey,
+    hasRedirectCookie
+  }
 
   // Check if there are redirections set up for the user’s country and if they haven’t been redirected yet
   if (i18nRedirectionMap.hasOwnProperty(countryCode) && !hasRedirectCookie) {
@@ -66,33 +84,31 @@ export function middleware(request: NextRequest) {
       const destination = redirects[request.nextUrl.pathname]
 
       // Create the target destination url
-      const destinationUrl = new URL(destination, request.url)
+      const destinationUrl = new URL(destination, request.nextUrl)
+
+      // Preserve search params
+      request.nextUrl.searchParams.forEach((value, key) => {
+        destinationUrl.searchParams.set(key, value)
+      })
+
+      // Add debug data
+      debugData = {
+        ...debugData,
+        ...{
+          destination,
+          destinationUrl
+        }
+      }
 
       // Create a redirect response
-      const response = NextResponse.redirect(destinationUrl)
+      response = NextResponse.redirect(destinationUrl)
 
       // Set a session cookie to avoid repeat redirections during the same session
       response.cookies.set(redirectCookieKey, Date.now().toString())
-
-      if (debug)
-        return NextResponse.json({
-          countryCode,
-          redirectCookieKey,
-          hasRedirectCookie,
-          redirects,
-          destination,
-          destinationUrl
-        })
-
-      // Return the response to complete the redirection
-      return response
     }
   }
 
-  if (debug)
-    return NextResponse.json({
-      countryCode,
-      redirectCookieKey,
-      hasRedirectCookie
-    })
+  response = debugResponse(debugData) || response
+
+  if (response) return response
 }
