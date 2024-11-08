@@ -45,6 +45,8 @@ const i18nRedirectionMap: Record<string, Record<string, string>> = {
 }
 
 export function middleware(request: NextRequest) {
+  const debug = request.nextUrl.searchParams.get('debug') === 'geo-redirects'
+
   // Get the country code from the request's geo data (ISO 3166-1 alpha-2 format)
   // Note: geo data is only available on Vercel deployment; defaults to 'unknown' otherwise
   const countryCode = request.geo?.country || 'unknown'
@@ -63,14 +65,34 @@ export function middleware(request: NextRequest) {
       // Get the destination URL for redirection
       const destination = redirects[request.nextUrl.pathname]
 
-      // Create a redirect response to the target destination
-      const response = NextResponse.redirect(new URL(destination, request.url))
+      // Create the target destination url
+      const destinationUrl = new URL(destination, request.url)
+
+      // Create a redirect response
+      const response = NextResponse.redirect(destinationUrl)
 
       // Set a session cookie to avoid repeat redirections during the same session
       response.cookies.set(redirectCookieKey, Date.now().toString())
+
+      if (debug)
+        return NextResponse.json({
+          countryCode,
+          redirectCookieKey,
+          hasRedirectCookie,
+          redirects,
+          destination,
+          destinationUrl
+        })
 
       // Return the response to complete the redirection
       return response
     }
   }
+
+  if (debug)
+    return NextResponse.json({
+      countryCode,
+      redirectCookieKey,
+      hasRedirectCookie
+    })
 }
