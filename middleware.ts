@@ -2,6 +2,11 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { slugify } from './lib/utils/strings'
 
+// When set to true, users will be redirected only once per session on their first visit to a redirected page.
+// A session cookie will be set, preventing further redirects if they revisit the origin path.
+// When set to false, users will be redirected every time they visit a redirected page.
+const PREVENT_ACCESS_TO_ORIGIN = false
+
 export const config = {
   matcher: [
     // Matches all request paths except for the following:
@@ -63,7 +68,8 @@ export function middleware(request: NextRequest) {
   const redirectCookieKey = `geo-redirect-${countryCode}_${
     slugify(request.nextUrl.pathname) || 'home'
   }`
-  const hasRedirectCookie = request.cookies.has(redirectCookieKey)
+  const hasRedirectCookie =
+    PREVENT_ACCESS_TO_ORIGIN && request.cookies.has(redirectCookieKey)
 
   let response: null | NextResponse<any> = null
 
@@ -104,7 +110,9 @@ export function middleware(request: NextRequest) {
       response = NextResponse.redirect(destinationUrl)
 
       // Set a session cookie to avoid repeat redirections during the same session
-      response.cookies.set(redirectCookieKey, Date.now().toString())
+      if (PREVENT_ACCESS_TO_ORIGIN) {
+        response.cookies.set(redirectCookieKey, Date.now().toString())
+      }
     }
   }
 
