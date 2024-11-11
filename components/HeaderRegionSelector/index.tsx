@@ -67,18 +67,18 @@ export default function HeaderRegionSelector({
         className={`absolute right-0 top-full origin-top-right pt-4 transition ${
           isOpen ? '' : 'pointer-events-none scale-90 opacity-0'
         }`}>
-        <ul className='relative min-w-28 space-y-4 rounded-lg bg-white p-4 text-sm text-primary-900 shadow transition-all'>
+        <ul className='relative min-w-44 rounded-lg bg-neutral-750 p-4 text-sm text-white shadow transition-all'>
           <li>
             <Link
               href='/'
-              className='block w-full transition-colors hover:text-primary-500'>
+              className='block w-full rounded-lg px-2 py-2.5 transition-colors hover:bg-neutral-700/25 hover:text-primary-300'>
               English
             </Link>
           </li>
           <li>
             <Link
               href='/jp'
-              className='block w-full transition-colors hover:text-primary-500'>
+              className='block w-full rounded-lg px-2 py-2.5 transition-colors hover:bg-neutral-700/25 hover:text-primary-300'>
               Japanese
             </Link>
           </li>
