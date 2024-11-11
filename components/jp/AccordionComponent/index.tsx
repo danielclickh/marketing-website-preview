@@ -2,8 +2,8 @@ import { Disclosure, Transition } from '@headlessui/react'
 import Image from 'next/image'
 import { CSSProperties } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { StrapiImageType } from '../../lib/api/strapi/types'
-import { SuiTitle } from '../sui'
+import { StrapiImageType } from '../../../lib/api/strapi/types'
+import { SuiTitle } from '../../sui'
 import styles from './styles.module.scss'
 
 const style = {
@@ -14,8 +14,7 @@ interface Item {
   name?: string
   description?: string
   href?: string
-  icon?: StrapiImageType
-  iconNative?: string
+  icon?: StrapiImageType | string
 }
 
 interface AccordionComponentProps {
@@ -68,23 +67,17 @@ export default function AccordionComponent({
                   } relative z-10 grid w-full grid-cols-[1fr_1rem] items-center justify-between gap-x-6 rounded-lg p-4 pl-20 pr-6 text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none`}>
                   {!numbered && (
                     <div className='absolute left-0 w-16 border-r border-neutral-700/80 text-left text-neutral-300/60'>
-                      {faq.iconNative ? (
-                        <Image
-                          src={faq.iconNative}
-                          width={32}
-                          height={32}
-                          alt={faq.name as string}
-                          className='mx-auto'
-                        />
-                      ) : (
-                        <Image
-                          src={faq.icon?.url as string}
-                          width={32}
-                          height={32}
-                          alt={faq.name as string}
-                          className='mx-auto'
-                        />
-                      )}
+                      <Image
+                        src={
+                          typeof faq.icon === 'string'
+                            ? faq.icon
+                            : faq.icon?.url || '/faq-icon.svg'
+                        }
+                        width={32}
+                        height={32}
+                        alt={faq.name as string}
+                        className='mx-auto'
+                      />
                     </div>
                   )}
                   <span className='text-md'>{faq.name}</span>

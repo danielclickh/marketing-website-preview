@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import AccordionComponent from '../../../components/AccordionComponent'
 import { CUIButton, CUICard } from '../../../components/ClickUI'
-import GetStartedFree from '../../../components/GetStartedFree'
+import GetStartedFree from '../../../components/jp/GetStartedFree'
 import Layout from '../../../components/jp/Layout'
 import { StrapiImage } from '../../../components/StrapiElements'
 import UseCasesComparisons from '../../../components/UseCasesComparisons'
@@ -13,6 +13,7 @@ import { findAll, findOne } from '../../../lib/api/strapi'
 import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { Quote, useCasesPageDataProps } from '../../../types/useCasesPage'
+import jpIndustries from './industries.json'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -134,18 +135,17 @@ function UseCasesPage({
           <div className='mx-auto max-w-3xl'>
             <div className='mx-auto text-center md:mr-0 '>
               <h1 className='mb-6 font-basier text-4xl font-semibold text-neutral-200 md:text-5.5xl md:leading-tight'>
-                {useCasesPageData.Title}
+                ユースケース
               </h1>
               <p className='mx-auto mb-12 max-w-2xl text-xl leading-[175%] text-neutral-200'>
-                Unlock faster queries and the ability to handle greater
-                concurrency. No&nbsp;matter how much data you’re working with.
+                より高速なクエリとより優れた同時実行性の実現。データ量が多くても対応可能です。
               </p>
               <p>
                 <a
                   href={useCasesPageData.ctaButton.href}
                   target='_blank'
                   className='inline-block rounded border-primary-300 bg-primary-300 px-8 py-3 font-semibold text-neutral-900 hover:cursor-pointer hover:border-primary-400 hover:bg-primary-400'>
-                  {useCasesPageData.ctaButton.text}
+                  クラウドの無料トライアルを始める
                 </a>
               </p>
             </div>
@@ -395,10 +395,10 @@ function UseCasesPage({
         <div className='mx-auto max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
           <AccordionComponent
             numbered={false}
-            items={useCasesPageData.Industries}
-            title='Industries'
+            items={jpIndustries}
+            title='業界'
             icon='/images/industries-icon.svg'
-            description='Wherever you need us, we’re there. We love to engage in thoughtful conversation with the ClickHouse community and are always on-hand to answer your questions. '
+            description='必要な場所に、私たちはいます。ClickHouseコミュニティとの意見交換を大切にしており、いつでもご質問にお答えできるよう準備しています。'
           />
 
           <GetStartedFree href='https://clickhouse.cloud/signUp?loc=use-cases-get-started-footer' />
