@@ -1,12 +1,12 @@
 [
     {
         "title": "あらゆるフォーマットのデータを分析可能",
-        "content": "ClickHouse provides support for 70+ [file formats](https://clickhouse.com/docs/en/sql-reference/formats) - from Parquet to JSON, CSV, TSV, and many more. For local files, [clickhouse-local](/blog/extracting-converting-querying-local-files-with-sql-clickhouse-local) provides a powerful and portable tool to query, convert and transform data on your local machine, too.",
+        "content": "Parquet、JSON、CSV、TSVなど、70を超える[ファイルフォーマット](https://clickhouse.com/docs/en/sql-reference/formats)をサポート。ローカルファイルについては、[clickhouse-local](/blog/extracting-converting-querying-local-files-with-sql-clickhouse-local)を使用することで、ローカルマシン上でデータをクエリ、コンバート、変換することができます。",
         "icon": "/images/analyze-icon.svg"
     },
     {
         "title": "使い慣れたツールと統合",
-        "content": "Our vibrant and growing ecosystem of integrations makes it easy to leverage the tools and frameworks you already love - from MySQL-compatible tools, to popular visualization products like Tableau, as well as language clients, dbt, [and many more](https://clickhouse.com/docs/en/integrations).",
+        "content": "MySQL互換ツール、Tableauなどの主要な可視化製品、言語クライアント、dbtなど、[多様なツールやフレームワーク](https://clickhouse.com/docs/en/integrations)をClickHouseでそのまま使用できるように、インテグレーションのエコシステムを急拡大させています。",
         "icon": "/images/tools-icon.svg"
     },
     {

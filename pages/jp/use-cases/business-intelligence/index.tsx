@@ -2,8 +2,8 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
-import AccordionComponent from '../../../../components/jp/BusinessIntelligenceDiagram/Accordion'
 import { CUIButton } from '../../../../components/ClickUI'
+import AccordionComponent from '../../../../components/jp/BusinessIntelligenceDiagram/Accordion'
 import GetStartedFree from '../../../../components/jp/GetStartedFree'
 import Layout from '../../../../components/jp/Layout'
 import LogoCarousel from '../../../../components/LogoCarousel'
@@ -11,12 +11,12 @@ import Markdown from '../../../../components/Markdown'
 import QuoteCard from '../../../../components/QuoteCard'
 import { SuiText, SuiTitle } from '../../../../components/sui'
 import { findOne } from '../../../../lib/api/strapi'
+import { useGalaxyOnPage } from '../../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../../types/homepage'
 import bigNumbers from './big-numbers.json'
 import features from './features.json'
 import references from './supporting-references.json'
-import { useGalaxyOnPage } from '../../../../lib/galaxy/galaxy'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
@@ -280,7 +280,10 @@ export default function RealTimeAnalyticsPage({
             <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-right bg-no-repeat px-4 py-16 xl:px-24'>
               <div className='flex flex-col text-center'>
                 <SuiTitle type='h2' color='white'>
-                  サポートリファレンス
+                  サポート
+                  <span className='tilted tilted-yellow'>
+                    <span className='tilted-content'>リファレンス</span>
+                  </span>
                 </SuiTitle>
                 <div className='mx-auto mb-8 mt-6 max-w-2xl text-center text-neutral-300'>
                   ClickHouseによる以下のブログに、ビジネスインテリジェンスのためにClickhouseを導入する方法について詳しく説明されています。

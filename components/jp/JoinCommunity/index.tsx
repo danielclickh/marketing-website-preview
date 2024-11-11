@@ -12,7 +12,10 @@ function JoinCommunity({ github: { stars } }: Props) {
     <div className='section-container flex w-full flex-col items-center justify-between gap-8 pb-16 md:flex-row md:px-8 md:pb-16 2xl:px-0'>
       <div className='flex max-w-xl flex-col items-start gap-10'>
         <SuiTitle type='h2' className='w-full text-center md:text-left'>
-          10万人以上の開発者が使うClickHouseユーザーに参加しよう
+          <span className='tilted tilted-yellow'>
+            <span className='tilted-content'>10万人以上の</span>
+          </span>{' '}
+          開発者が使うClickHouseユーザーに参加しよう
         </SuiTitle>
         <div className='mx-auto flex flex-wrap gap-6 md:mx-0'>
           <div className='mx-auto flex gap-6'>

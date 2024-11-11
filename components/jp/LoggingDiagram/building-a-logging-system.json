@@ -7,7 +7,7 @@
     {
         "id": 20,
         "title": "ClickHouse",
-        "content": "ClickHouse is relied on at scale to power real-time observability platforms that process billions of new events every day.<br /><br />In these systems, features like [Materialized Views](https://clickhouse.com/docs/en/guides/developer/cascading-materialized-views) are often leveraged to transform data at insert time, which supports common tasks like extracting structure from unstructured logs.<br /><br />ClickHouse is built from the ground up to leverage resources as efficiently as possible, combining best-in-class compression ratios with flexible tuning controls that help you balance query performance and storage utilization effectively. <br /><br />ClickHouse supports a wide range of aggregation and analytical functions that make real-time data exploration simple and powerful."
+        "content": "ClickHouseは１日あたり数十億もの新しいイベントを処理するリアルタイムオブザーバビリティプラットフォームで使用されています。<br /><br />[マテリアライズドビュー](https://clickhouse.com/docs/en/guides/developer/cascading-materialized-views)などの機能を使用し、データの取り込み時に変換することで、構造化されていないログから構造化データを抽出するタスクを実行できます。<br /><br />ClickHouseはリソースを最大限に活用できるようデザインされています。トップクラスの圧縮率を誇り、制御を柔軟に調整できるため、パフォーマンスとストレージ使用効率を同時にバランス良く改善できます。<br /><br />広範な集計および分析機能をサポートし、データ探索をリアルタイムに、シンプルかつパワフルに実行できます。"
     },
     {
         "id": 30,

@@ -12,12 +12,12 @@ import Markdown from '../../../../components/Markdown'
 import QuoteCard from '../../../../components/QuoteCard'
 import { SuiText, SuiTitle } from '../../../../components/sui'
 import { findOne } from '../../../../lib/api/strapi'
+import { useGalaxyOnPage } from '../../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../../types/homepage'
 import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import features from './features.json'
-import { useGalaxyOnPage } from '../../../../lib/galaxy/galaxy'
 
 interface MLProps extends CommonProps {
   customerStories: any
@@ -289,7 +289,10 @@ export default function MLUseCasePage({
             <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-right bg-no-repeat px-4 py-16 xl:px-24'>
               <div className='flex flex-col text-center'>
                 <SuiTitle type='h2' color='white'>
-                  サポートリファレンス
+                  サポート{' '}
+                  <span className='tilted tilted-yellow'>
+                    <span className='tilted-content'>リファレンス</span>
+                  </span>
                 </SuiTitle>
                 <div className='mx-auto mb-8 mt-6 max-w-2xl text-center text-neutral-300'>
                   ClickHouseによる以下のブログに、機械学習のためにClickhouseを導入する方法について詳しく説明されています。
