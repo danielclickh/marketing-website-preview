@@ -17,10 +17,10 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    'Join us at KubeCon, Nov 12-15 at booth A7!'
+    'Join us at Ignite in Chicago, Nov 19-21'
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/company/events/202411-amer-kubecon?loc=eyebrow'
+    '/company/events/202411-amer-microsoft-ignite?loc=eyebrow'
   )
 
   useEffect(() => {
