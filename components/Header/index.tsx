@@ -17,7 +17,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    'Join us at Ignite in Chicago, Nov 19-21'
+    'Join us at Microsoft Ignite in Chicago, Nov 19-21'
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
     '/company/events/202411-amer-microsoft-ignite?loc=eyebrow'
