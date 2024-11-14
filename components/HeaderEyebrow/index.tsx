@@ -1,5 +1,4 @@
 import { MouseEvent, useEffect, useState } from 'react'
-import { slugify } from '../../lib/utils/strings'
 import LinkWithArrow from '../LinkWithArrow'
 
 export interface HeaderEyebrowProps {
@@ -11,6 +10,14 @@ export interface HeaderEyebrowProps {
   onHide?: () => void
 }
 
+async function hashString(input: string) {
+  const encoder = new TextEncoder()
+  const data = encoder.encode(input)
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+  const hashArray = Array.from(new Uint8Array(hashBuffer))
+  return hashArray.map((byte) => byte.toString(16).padStart(2, '0')).join('')
+}
+
 export default function HeaderEyebrow({
   text,
   link,
@@ -19,14 +26,21 @@ export default function HeaderEyebrow({
   onShow,
   onHide
 }: HeaderEyebrowProps) {
-  const storageKey = slugify(`header eyebrow ${text}`)
-
+  const [storageKey, setStorageKey] = useState('')
   const [isVisible, setIsVisible] = useState<boolean>(false)
 
-  // Set initial visible state on component mount
+  // Create a hashed storage key of the text and link
+  useEffect(() => {
+    ;(async () => {
+      const keyLinkHash = await hashString(`${text} ${link}`)
+      setStorageKey(`header-eyebrow-${keyLinkHash}`)
+    })()
+  }, [text, link])
+
+  // Set initial visible state
   useEffect(() => {
     setIsVisible(!dismissible || !window.sessionStorage.getItem(storageKey))
-  }, [])
+  }, [dismissible, storageKey])
 
   // Event handlers for visibility change
   useEffect(() => {
