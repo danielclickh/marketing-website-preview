@@ -169,7 +169,7 @@ export function appendGoogleAnalyticsCookieToLink(url: string): string {
   if (!cookieValue) return url
 
   const urlObject = new URL(url)
-  urlObject.searchParams.set('_ga', cookieValue)
+  urlObject.searchParams.set('utm_ga', cookieValue)
   return urlObject.toString()
 }
 
