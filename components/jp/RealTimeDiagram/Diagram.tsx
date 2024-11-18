@@ -1,4 +1,4 @@
-import RealTimeDiagram from '../../../pages/use-cases/real-time-analytics/RealTimeDiagram'
+import RealTimeDiagram from '../../../pages/jp/use-cases/real-time-analytics/RealTimeDiagram'
 interface DiagramProps {
   className?: string
   sectionId?: number

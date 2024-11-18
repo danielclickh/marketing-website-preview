@@ -3,9 +3,9 @@ import Image from 'next/image'
 import React from 'react'
 import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
 import { CUIButton } from '../../ClickUI'
-import ColumnOrientedIllustration from '../../ColumnOrientedIllustration'
-import RowOrientedIllustration from '../../RowOrientedIllustration'
 import { SuiText, SuiTitle } from '../../sui'
+import ColumnOrientedIllustration from '../ColumnOrientedIllustration'
+import RowOrientedIllustration from '../RowOrientedIllustration'
 
 export default function HomepageSectionFast({
   className = '',

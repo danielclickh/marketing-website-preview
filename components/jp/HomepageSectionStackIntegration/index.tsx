@@ -25,7 +25,7 @@ export default function HomepageSectionStackIntegration({
         <div className='relative'>
           <div className='absolute bottom-[39.56%] left-[33.55%] right-[33.05%] top-[2.19%] z-10 animate-pulse rounded-lg shadow-stackIntegrationGraphicSmall lg:shadow-stackIntegrationGraphic'></div>
           <Image
-            src='/images/homepage/stack-integration-graph.svg'
+            src='/images/homepage/stack-integration-graph-jp.svg'
             alt='Stack integration graph'
             width={1198}
             height={547}
