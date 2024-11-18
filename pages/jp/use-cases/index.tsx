@@ -14,6 +14,7 @@ import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { Quote, useCasesPageDataProps } from '../../../types/useCasesPage'
 import jpIndustries from './industries.json'
+import useCasesJP from './use-cases.json'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -154,27 +155,27 @@ function UseCasesPage({
 
         <div className='clip-inverted-triangle-use-cases'>
           <div className='section-container mt-12 flex max-w-6xl flex-col gap-y-6 lg:mt-0'>
-            {sortedUseCases.map((useCase, index) => {
+            {useCasesJP.map((useCase, index) => {
               // Limit the number of logos to a maximum of 6
-              const useCaseLogos = (useCase?.ClientsUsingUseCase || []).slice(
-                0,
-                6
-              )
-              const totalUseCaseLogos = useCaseLogos.length
-              const useCaseLink = getUseCaseLink(useCase?.title)
+              // const useCaseLogos = (useCase?.ClientsUsingUseCase || []).slice(
+              //   0,
+              //   6
+              // )
+              // const totalUseCaseLogos = useCaseLogos.length
+              // const useCaseLink = getUseCaseLink(useCase?.title)
               return (
                 <div key={index}>
                   <CUICard>
                     <CUICard.Body className='rounded-lg bg-neutral-900'>
                       <div className='flex flex-col justify-between gap-x-6 lg:flex-row'>
                         <div className='relative p-6 lg:w-[560px]'>
-                          {useCaseLink && (
+                          {useCase.link && (
                             <div className='absolute right-6 lg:right-0'>
                               <CUIButton
                                 type='secondary'
                                 size='sm'
                                 className='group mx-auto'
-                                href={useCaseLink}
+                                href={useCase.link}
                                 iconRight={
                                   <ChevronRightIcon
                                     height='18'
@@ -188,135 +189,47 @@ function UseCasesPage({
                           <div className='flex flex-col items-start justify-center gap-4'>
                             <div className='mb-1 flex flex-col gap-y-2 font-inconsolata text-base font-medium text-primary-300'>
                               {useCase?.icon && (
-                                <StrapiImage {...useCase.icon} />
+                                <Image
+                                  src={useCase.icon}
+                                  alt={useCase.title}
+                                  width={0}
+                                  height={0}
+                                  className='h-8 w-8'
+                                />
                               )}
                             </div>
                             <div className='font-basier text-xl font-medium leading-tight  text-neutral-100'>
                               {useCase?.title}
                             </div>
                             <div className='text-neutral-20 whitespace-pre-wrap text-sm'>
-                              {useCase?.description}
+                              <div
+                                dangerouslySetInnerHTML={{
+                                  __html: useCase?.description
+                                }}
+                              />
                             </div>
                           </div>
                         </div>
                         <div
-                          className={`-mb-px grid w-full border-t border-t-[#464641] lg:w-[590px] lg:border-t-0 ${
-                            totalUseCaseLogos > 3
-                              ? 'grid-cols-2 grid-rows-3'
-                              : 'grid-cols-2 grid-rows-2'
-                          }`}>
-                          {useCaseLogos.map((client, index) => {
-                            const position = index + 1
-                            let cellClasses: string[] = []
-
-                            // 6 items
-                            if (totalUseCaseLogos >= 6) {
-                              if (position === 2) {
-                                cellClasses.push('lg:rounded-tr-lg')
-                              }
-
-                              if (position === 5) {
-                                cellClasses.push(
-                                  'rounded-bl-lg lg:rounded-bl-none'
-                                )
-                              }
-
-                              if (position === 6) {
-                                cellClasses.push('rounded-br-lg')
-                              }
-                            }
-
-                            // 5 items
-                            else if (totalUseCaseLogos === 5) {
-                              if (position === 2) {
-                                cellClasses.push('lg:rounded-tr-lg')
-                              }
-
-                              if (position === 5) {
-                                cellClasses.push(
-                                  'rounded-b-lg col-span-full lg:rounded-bl-none'
-                                )
-                              }
-                            }
-
-                            // 4 items
-                            else if (totalUseCaseLogos === 4) {
-                              if (position === 2) {
-                                cellClasses.push('lg:rounded-tr-lg row-span-2')
-                              }
-
-                              if (position === 4) {
-                                cellClasses.push(
-                                  'rounded-b-lg col-span-full lg:rounded-bl-none'
-                                )
-                              }
-                            }
-
-                            // 3 items
-                            else if (totalUseCaseLogos === 3) {
-                              if (position === 2) {
-                                cellClasses.push('lg:rounded-tr-lg')
-                              }
-
-                              if (position === 3) {
-                                cellClasses.push(
-                                  'rounded-b-lg col-span-full lg:rounded-bl-none'
-                                )
-                              }
-                            }
-
-                            // 2 items
-                            else if (totalUseCaseLogos === 2) {
-                              if (position === 1) {
-                                cellClasses.push(
-                                  'row-span-full rounded-bl-lg lg:rounded-bl-none'
-                                )
-                              }
-
-                              if (position === 2) {
-                                cellClasses.push(
-                                  'row-span-full rounded-br-lg lg:rounded-tr-lg'
-                                )
-                              }
-                            }
-
-                            // 1 item
-                            else if (totalUseCaseLogos === 1) {
-                              cellClasses.push(
-                                'row-span-full col-span-full rounded-b-lg lg:rounded-bl-none lg:rounded-tr-lg'
-                              )
-                            }
-
+                          className={`grid w-full grid-cols-2 grid-rows-3 border-t border-t-[#464641] lg:w-[590px] lg:border-t-0`}>
+                          {useCase.logos.map((logo, index) => {
                             return (
                               <div
                                 key={index}
-                                className={`min-h-[86px] w-full border-b border-l border-[#464641] ring-inset transition-all hover:z-10 hover:bg-white/10 hover:ring-[1px] hover:ring-primary-300 ${cellClasses.join(
-                                  ' '
-                                )}`}>
+                                className={`min-h-[86px] w-full border-b border-l border-[#464641] ring-inset transition-all hover:z-10 hover:bg-white/10 hover:ring-[1px] hover:ring-primary-300`}>
                                 <Link
-                                  href={client.href}
+                                  href={
+                                    logo.link
+                                      ? logo.link
+                                      : 'https://clickhouse.com'
+                                  }
                                   className='mx-auto flex min-h-full w-full brightness-0 invert hover:brightness-100 hover:invert-0'>
-                                  <StrapiImage
-                                    {...client.logo}
-                                    className={`${
-                                      client.clientName === 'Lyft'
-                                        ? 'max-w-[60px] lg:max-h-[44px]'
-                                        : client.clientName === 'Contentsquare'
-                                        ? 'max-w-[140px] lg:max-w-[160px]'
-                                        : client.clientName === 'Highlight.io'
-                                        ? 'max-w-[120px] lg:max-w-[160px]'
-                                        : client.clientName === 'Deutsche Bank'
-                                        ? 'max-w-[150px] lg:max-w-[200px]'
-                                        : client.clientName === 'QuickCheck'
-                                        ? 'max-w-[150px] lg:max-w-[210px]'
-                                        : client.clientName === 'Darwinium'
-                                        ? 'max-w-[140px] lg:max-w-[160px]'
-                                        : client.clientName === 'RunReveal'
-                                        ? 'max-w-[140px] lg:max-w-[150px]'
-                                        : 'max-h-[64px] max-w-[120px] lg:max-w-[120px]'
-                                    }
-                                        m-auto object-scale-down
-                                          `}
+                                  <Image
+                                    src={logo.logo}
+                                    alt={logo.name}
+                                    height={0}
+                                    width={0}
+                                    className='mx-auto mt-4 flex h-10 w-auto'
                                   />
                                 </Link>
                               </div>

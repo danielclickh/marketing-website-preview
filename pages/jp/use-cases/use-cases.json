@@ -1,0 +1,39 @@
+[
+  {
+    "title": "Real-time analytics",
+		"description": "Power interactive applications and dashboards that analyze and aggregate large amounts of data on the fly. Run complex internal analytics in milliseconds, not minutes or hours.<br /><br />Relied on by companies all over the world to process tens of billions of new events per day.",
+		"icon": "/images/jp/use-cases/eventdriven.svg",
+		"link": "/use-cases/real-time-analytics",
+		"logos": [{
+			"name": "Vimeo",
+			"logo": "/images/jp/use-cases/vimeo.svg",
+			"link": "https://medium.com/vimeo-engineering-blog/clickhouse-is-in-the-house-413862c8ac28"
+		}, 
+		{
+			"name": "CloudFlare",
+			"logo": "/images/jp/use-cases/cloudflare.svg",
+			"link": "https://clickhouse.com"
+		},
+		{
+			"name": "ContentSquare",
+			"logo": "/images/jp/use-cases/contentsquare.svg",
+			"link": "/blog/contentsquare-migration-from-elasticsearch-to-clickhouse"
+		},
+		{
+			"name": "Highlight",
+			"logo": "/images/jp/use-cases/highlight.svg",
+			"link": "/blog/overview-of-highlightio"
+		},
+		{
+			"name": "Block",
+			"logo": "/images/jp/use-cases/block.svg",
+			"link": "/blog/hifis-migration-from-bigquery-to-clickhouse"
+		},
+		{
+			"name": "Resmo",
+			"logo": "/images/jp/use-cases/resmo.svg",
+			"link": "/blog/how-we-used-clickhouse-to-store-opentelemetry-traces"
+		}
+	]
+}
+]
