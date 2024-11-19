@@ -35,6 +35,11 @@
     "imgSrc": "/socials/telegram.svg"
   },
   {
+    "name": "Bluesky",
+    "href": "https://bsky.app/profile/clickhouse.comn",
+    "imgSrc": "/socials/bluesky.svg"
+  },
+  {
     "name": "Meetup",
     "href": "https://www.meetup.com/pro/clickhouse",
     "imgSrc": "/socials/meetup.svg"

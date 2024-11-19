@@ -212,13 +212,20 @@
 			},
 			{
 				"id": 23,
+				"name": "Bluesky",
+				"href": "https://bsky.app/profile/clickhouse.com",
+				"target": "_blank",
+				"galaxyEvent": "footerNav.communityMenu.blueSkySelect"
+			},		
+			{
+				"id": 24,
 				"name": "Telegram",
 				"href": "https://telegram.me/clickhouse_en",
 				"target": "_blank",
 				"galaxyEvent": "footerNav.communityMenu.telegramSelect"
 			},
 			{
-				"id": 24,
+				"id": 25,
 				"name": "Meetup",
 				"href": "https://www.meetup.com/pro/clickhouse",
 				"target": "_blank",
