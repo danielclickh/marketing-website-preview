@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
-import MarketoForm, { SpoofedMarketoObject } from '../../MarketoForm'
 import { useRouter } from 'next/router'
+import { useEffect, useRef, useState } from 'react'
+import MarketoForm, { SpoofedMarketoObject } from '../../MarketoForm'
 
 function ContactForm() {
   const router = useRouter()
@@ -50,7 +49,7 @@ Compute: ${memory}`)
     <>
       {!formSuccess && (
         <MarketoForm
-          formId={'1124'}
+          formId={'1294'}
           clearbitTracking={true}
           onLoad={(formObject) => {
             setFormLoaded(true)
@@ -70,15 +69,17 @@ Compute: ${memory}`)
         />
       )}
 
-      {!formLoaded && <div className='text-center'>Loading form...</div>}
+      {!formLoaded && (
+        <div className='text-center'>フォームを読み込んでいます...</div>
+      )}
 
       {formSuccess && (
         <div ref={formSuccessRef}>
           <h3 className='text-center text-2xl font-bold'>
-            Thank you for your submission!
+            ご提出いただきありがとうございます!
           </h3>
           <p className='mt-2 text-center text-neutral-200'>
-            We will be in touch soon.
+            すぐにご連絡させていただきます。
           </p>
         </div>
       )}

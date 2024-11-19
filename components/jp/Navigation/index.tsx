@@ -1,7 +1,6 @@
 import React from 'react'
 import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
 import { NavigationItem, NavigationItemProps } from './parts'
-import NavigationSubNavPricing from './sub-navs/NavigationSubNavPricing'
 import NavigationSubNavProducts from './sub-navs/NavigationSubNavProducts'
 import NavigationSubNavResources from './sub-navs/NavigationSubNavResources'
 import NavigationSubNavUseCases from './sub-navs/NavigationSubNavUseCases'
@@ -82,7 +81,7 @@ export default function Navigation({
               {...topLevelEvents}
               label='お問合せ'
               link={{
-                href: '/company/contact?loc=nav',
+                href: '/jp/company/contact?loc=nav',
                 onClick: useGalaxyOnClick('topNav.navItems.contactUsSelect')
               }}
             />

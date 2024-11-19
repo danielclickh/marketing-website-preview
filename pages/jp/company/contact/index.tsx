@@ -1,14 +1,14 @@
 import { SuiTitle } from '../../../../components/sui'
 
-import { findOne } from '../../../../lib/api/strapi'
-import GrowingCommunity from '../../../../components/GrowingCommunity'
-import ContactForm from '../../../../components/jp/ContactForm'
 import { GetStaticProps } from 'next'
-import { ContactProps } from '../../../../types/contact'
-import Layout from '../../../../components/jp/Layout'
-import { getCommonProps } from '../../../../lib/utils/getCommonProps'
 import HRSeparator from '../../../../components/HRSeparator'
+import ContactForm from '../../../../components/jp/ContactForm'
+import GrowingCommunity from '../../../../components/jp/GrowingCommunity'
+import Layout from '../../../../components/jp/Layout'
+import { findOne } from '../../../../lib/api/strapi'
 import { useGalaxyOnPage } from '../../../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../../../lib/utils/getCommonProps'
+import { ContactProps } from '../../../../types/contact'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
