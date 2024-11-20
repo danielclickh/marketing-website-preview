@@ -6,11 +6,11 @@ export default function PostgresCdcAnimation() {
     <div className='pointer-events-none grid w-[507px] select-none grid-cols-1 grid-rows-1'>
       <div className='relative z-10 col-start-1 row-start-1'>
         <div className='mx-auto flex max-w-max gap-4 border border-neutral-700 bg-neutral-900/80 p-4'>
-          <Badge label='insert' theme='yellow' glowDelay={300} />
-          <Badge label='insert' theme='yellow' glowDelay={600} />
-          <Badge label='update' theme='blue' glowDelay={900} />
-          <Badge label='delete' theme='red' glowDelay={1200} />
-          <Badge label='add col' theme='yellow' glowDelay={1500} />
+          <Badge label='insert' theme='yellow' glowDelay={150} />
+          <Badge label='insert' theme='yellow' glowDelay={350} />
+          <Badge label='update' theme='blue' glowDelay={550} />
+          <Badge label='delete' theme='red' glowDelay={750} />
+          <Badge label='add col' theme='yellow' glowDelay={950} />
         </div>
       </div>
 
@@ -38,18 +38,8 @@ export default function PostgresCdcAnimation() {
               stroke='#FAFF69'
               strokeWidth='2'
               d='M0 1h355'
-              stroke-dasharray='355'
-              stroke-dashoffset='355'>
-              <animate
-                attributeName='stroke-dashoffset'
-                from='355'
-                to='0'
-                dur='3.5s'
-                repeatCount='indefinite'
-                values='355; 0; -355'
-                keyTimes='0; 0.5; 1'
-              />
-            </path>
+              className={styles.animatedLine}
+            />
           </svg>
         </div>
 
@@ -95,16 +85,19 @@ function Badge({
   glowInterval = 3500,
   glowDelay = 0
 }: BadgeProps) {
+  const cssVars = {
+    '--glow-interval': `${glowInterval}ms`,
+    '--glow-delay': `${glowDelay}ms`
+  } as React.CSSProperties
   return (
     <div className='relative'>
       <div
-        className={`absolute inset-0 z-0 rounded border opacity-0 blur brightness-150 saturate-200 ${badgeThemes[theme]} ${styles.animate}`}
-        style={
-          {
-            '--glow-interval': `${glowInterval}ms`,
-            '--glow-delay': `${glowDelay}ms`
-          } as React.CSSProperties
-        }
+        className={`absolute inset-0 z-0 rounded border opacity-0 blur brightness-150 saturate-200 ${badgeThemes[theme]} ${styles.animatedBadge}`}
+        style={cssVars}
+      />
+      <div
+        className={`absolute inset-0 z-0 rounded border opacity-0 blur-sm brightness-150 saturate-200 ${badgeThemes[theme]} ${styles.animatedBadge}`}
+        style={cssVars}
       />
       <div
         className={`relative z-10 h-[88px] w-9 rounded border font-mono uppercase ${badgeThemes[theme]}`}>
