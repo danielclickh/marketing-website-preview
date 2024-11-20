@@ -1,5 +1,9 @@
-.animatedBadge {
+.animatedBadgeGlow {
   animation: fadeInOut var(--glow-interval) linear var(--glow-delay) infinite;
+}
+
+.animatedBadge {
+  animation: fadeSaturation var(--glow-interval) linear var(--glow-delay) infinite;
 }
 
 .animatedLine {
@@ -24,10 +28,28 @@
   0% {
     opacity: 0;
   }
-  5% {
+  10% {
     opacity: 1;
   }
-  25% {
+  20% {
+    opacity: 1;
+  }
+  30% {
     opacity: 0;
+  }
+}
+
+@keyframes fadeSaturation {
+  0% {
+    filter: brightness(1) saturate(1);
+  }
+  10% {
+    filter: unquote("brightness(var(--glow-amount)) saturate(var(--glow-amount))"); // Using unquote to fix issue with compiler
+  }
+  20% {
+    filter: unquote("brightness(var(--glow-amount)) saturate(var(--glow-amount))"); // Using unquote to fix issue with compiler
+  }
+  30% {
+    filter: brightness(1) saturate(1);
   }
 }
