@@ -49,17 +49,14 @@ export default function ClickHouseServerPage({
           <div className='relative overflow-x-hidden bg-grid pt-10'>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 2xl:px-0'>
               <div className='flex items-center justify-between'>
-                <div className='flex-col text-center lg:mt-16 lg:max-w-xl lg:text-left'>
+                <div className='flex-col space-y-6 text-center lg:mt-16 lg:max-w-xl lg:text-left'>
                   <h4 className='mb-4 text-base font-semibold text-primary-300'>
                     <Link href='/cloud'>Cloud</Link> / Data ingestion
                   </h4>
-                  <h1 className='relative mb-3 mt-4 inline-block font-basier text-4xl font-semibold leading-tight md:mt-0 md:text-5.5xl'>
+                  <h1 className='font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
                     ClickPipes
                   </h1>
-                  <SuiText
-                    size='base'
-                    color='secondary'
-                    className='mt-6 text-neutral-200 md:pr-16'>
+                  <SuiText size='lg' className='text-neutral-200'>
                     An integration engine that makes ingesting massive volumes
                     of data from a diverse set of sources as simple as clicking
                     a few buttons. Only available in ClickHouse Cloud.

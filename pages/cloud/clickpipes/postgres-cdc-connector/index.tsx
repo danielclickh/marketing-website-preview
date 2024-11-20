@@ -51,17 +51,17 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         <div className='section-container relative z-10 lg:py-20'>
           <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
             <div className='flex-1 space-y-6 lg:max-w-2xl'>
-              <h4 className='mb-4 text-base font-semibold text-primary-300'>
+              <h4 className='text-base font-semibold text-primary-300'>
                 <Link href='/cloud'>Cloud</Link> / Data ingestion
               </h4>
               <SuiTitle type='h1' className='lg:!text-4xl'>
                 Postgres CDC connector in ClickPipes is now in Private Preview
               </SuiTitle>
-              <SuiText size='lg'>
+              <SuiText size='lg' className='text-neutral-200'>
                 Replicate your Postgres data to ClickHouse Cloud in just a few
                 clicks for blazing fast analytics.
               </SuiText>
-              <SuiText size='lg'>
+              <SuiText size='lg' className='text-neutral-200'>
                 Eliminates the need for external ETL tools that are expensive,
                 slow and not purpose built for Postgres. Join the waitlist now.
               </SuiText>
