@@ -16,6 +16,7 @@ import { getCommonProps } from '../../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../../types/homepage'
 import imageAddPostgresSource from './add-postgres-source.png'
 import imageCustomizeIncomingData from './customize-incoming-data.png'
+import dots from './dots.png'
 import imageEditPipeInPlace from './edit-pipe-in-place.png'
 import iconFast from './icon-fast.svg'
 import iconMaximize from './icon-maximize.svg'
@@ -297,7 +298,21 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       </div>
 
       {/* Footer form */}
-      <div className='my-20 bg-neutral-700 py-20'>
+      <div className='relative my-20 bg-neutral-700 py-20'>
+        <Image
+          src={dots}
+          width={612 / 2}
+          height={400 / 2}
+          alt='Dots'
+          className='pointer-events-none absolute left-0 top-0'
+        />
+        <Image
+          src={dots}
+          width={612 / 2}
+          height={400 / 2}
+          alt='Dots'
+          className='pointer-events-none absolute bottom-0 right-0 rotate-180'
+        />
         <div className='section-container'>
           <div className='mx-auto w-full lg:max-w-xl'>
             <CUICard className='bg-neutral-900/80'>
@@ -380,7 +395,7 @@ function FeatureSection({
 }) {
   return (
     <div
-      className={`flex flex-col items-center gap-x-24 ${
+      className={`flex flex-col items-center gap-x-16 ${
         flip ? 'md:flex-row-reverse' : 'md:flex-row'
       } justify-center`}>
       <div className='mb-12 flex flex-col md:mb-0 md:w-1/2 md:text-left'>
