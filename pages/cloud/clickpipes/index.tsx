@@ -89,7 +89,7 @@ export default function ClickHouseServerPage({
                   <LogoAnnouncementLink
                     mode='dark'
                     className='mt-8'
-                    href='/cloud/clickpipes-postgres-cdc-connector?loc=clickpipes-hero'
+                    href='/cloud/clickpipes/postgres-cdc-connector?loc=clickpipes-hero'
                     logo={{
                       src: '/images/cloud/integrations/postgres.svg',
                       alt: 'Postgres',

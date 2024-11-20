@@ -58,7 +58,7 @@ export default function IntegrationsClickPipesPromo() {
         <LogoAnnouncementLink
           mode='dark'
           className='mt-8'
-          href='/cloud/clickpipes-postgres-cdc-connector?loc=integrations-promo'
+          href='/cloud/clickpipes/postgres-cdc-connector?loc=integrations-promo'
           logo={{
             src: '/images/cloud/integrations/postgres.svg',
             alt: 'Postgres',

@@ -28,7 +28,7 @@ export default function AnimatedIntegrationLogos({ play }: { play: boolean }) {
           <SuiText size='xs'>
             Fast, simple and cost effective Postgres replication.{' '}
             <Link
-              href='/cloud/clickpipes-postgres-cdc-connector?loc=cloud-integrations'
+              href='/cloud/clickpipes/postgres-cdc-connector?loc=cloud-integrations'
               className='text-primary-300 hover:underline'>
               <div className='absolute inset-0 transition-colors hover:bg-white/5' />
               Learn more

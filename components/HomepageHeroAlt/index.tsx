@@ -69,7 +69,7 @@ export default function HomepageHeroAlt({
             </div>
             <LogoAnnouncementLink
               className='mt-8'
-              href='/cloud/clickpipes-postgres-cdc-connector?loc=homepage-hero'
+              href='/cloud/clickpipes/postgres-cdc-connector?loc=homepage-hero'
               logo={{
                 src: '/images/cloud/integrations/postgres.svg',
                 alt: 'Postgres',

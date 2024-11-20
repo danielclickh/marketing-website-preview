@@ -2,14 +2,17 @@ import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import React, { CSSProperties } from 'react'
-import { CUIButton, CUICard } from '../../../components/ClickUI'
-import Layout from '../../../components/Layout'
-import PostgresCdcWaitlistForm from '../../../components/PostgresCdcWaitlistForm'
-import QuoteCard from '../../../components/QuoteCard'
-import { SuiText, SuiTitle } from '../../../components/sui'
-import { useGalaxyOnClick, useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { CommonProps } from '../../../types/homepage'
+import { CUIButton, CUICard } from '../../../../components/ClickUI'
+import Layout from '../../../../components/Layout'
+import PostgresCdcWaitlistForm from '../../../../components/PostgresCdcWaitlistForm'
+import QuoteCard from '../../../../components/QuoteCard'
+import { SuiText, SuiTitle } from '../../../../components/sui'
+import {
+  useGalaxyOnClick,
+  useGalaxyOnPage
+} from '../../../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../../../lib/utils/getCommonProps'
+import { CommonProps } from '../../../../types/homepage'
 import imageAddPostgresSource from './add-postgres-source.png'
 import imageCustomizeIncomingData from './customize-incoming-data.png'
 import imageEditPipeInPlace from './edit-pipe-in-place.png'
@@ -31,7 +34,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
             'Postgres CDC connector in ClickPipes is now in Private Preview',
           description:
             'Replicate your Postgres data to ClickHouse Cloud in just a few clicks for blazing fast analytics.',
-          path: '/cloud/clickpipes/postgres'
+          path: '/cloud/clickpipes/postgres-cdc-connector'
         },
         ...commonProps
       }
