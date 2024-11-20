@@ -19,15 +19,16 @@ export default function AnimatedIntegrationLogos({ play }: { play: boolean }) {
         expand={play}>
         <div className='absolute inset-0 flex flex-col justify-between p-4'>
           <Image
-            src='/images/cloud/integrations/postgres-peerdb.svg'
-            width={132}
-            height={44}
-            alt='Postgres + PeerDB'
+            src='/images/cloud/integrations/postgres.svg'
+            width={70}
+            height={70}
+            alt='Postgres'
+            className='mx-auto'
           />
           <SuiText size='xs'>
-            Fast, simple and cost effective Postgres replication using PeerDB.{' '}
+            Fast, simple and cost effective Postgres replication.{' '}
             <Link
-              href='/blog/clickhouse-welcomes-peerdb-adding-the-fastest-postgres-cdc-to-the-fastest-olap-database'
+              href='/cloud/clickpipes-postgres-cdc-connector?loc=cloud-integrations'
               className='text-primary-300 hover:underline'>
               <div className='absolute inset-0 transition-colors hover:bg-white/5' />
               Learn more
