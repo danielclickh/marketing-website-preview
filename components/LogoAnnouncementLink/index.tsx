@@ -41,7 +41,7 @@ export default function LogoAnnouncementLink({
         <Image {...logo} />
       </div>
       <div className='flex flex-1 items-center p-4'>
-        <p className={`text-left font-semibold ${theme.text}`}>{children}</p>
+        <p className={`text-left ${theme.text}`}>{children}</p>
       </div>
     </Link>
   )

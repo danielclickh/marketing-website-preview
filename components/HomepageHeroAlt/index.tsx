@@ -68,7 +68,7 @@ export default function HomepageHeroAlt({
               </CUIButton>
             </div>
             <LogoAnnouncementLink
-              className='mt-8'
+              className='mt-8 font-semibold'
               href='/cloud/clickpipes/postgres-cdc-connector?loc=homepage-hero'
               logo={{
                 src: '/images/cloud/integrations/postgres.svg',
