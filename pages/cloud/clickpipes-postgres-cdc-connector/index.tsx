@@ -1,10 +1,10 @@
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
-import React, { CSSProperties, useRef, useState } from 'react'
+import React, { CSSProperties } from 'react'
 import { CUIButton, CUICard } from '../../../components/ClickUI'
 import Layout from '../../../components/Layout'
-import MarketoForm from '../../../components/MarketoForm'
+import PostgresCdcWaitlistForm from '../../../components/PostgresCdcWaitlistForm'
 import QuoteCard from '../../../components/QuoteCard'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { useGalaxyOnClick, useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
@@ -72,7 +72,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
             <div className='w-full lg:max-w-lg'>
               <CUICard>
                 <CUICard.Body className='p-4 lg:p-6'>
-                  <WaitlistForm />
+                  <PostgresCdcWaitlistForm />
                 </CUICard.Body>
               </CUICard>
             </div>
@@ -304,7 +304,14 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
           <div className='mx-auto w-full lg:max-w-xl'>
             <CUICard className='bg-neutral-900/80'>
               <CUICard.Body className='p-4 lg:p-6'>
-                <WaitlistForm />
+                <div className='mb-4 space-y-4 text-center lg:mb-6'>
+                  <SuiTitle type='h2'>Get early access</SuiTitle>
+                  <SuiText className='opacity-70'>
+                    Join the waitlist to get access to the Postgres CDC
+                    connector
+                  </SuiText>
+                </div>
+                <PostgresCdcWaitlistForm />
               </CUICard.Body>
             </CUICard>
           </div>
@@ -417,41 +424,5 @@ function TickItem({
       </div>
       <div className='flex-1'>{children}</div>
     </div>
-  )
-}
-
-function WaitlistForm() {
-  const [formLoaded, setFormLoaded] = useState(false)
-  const [formSuccess, setFormSuccess] = useState(false)
-  const formSuccessRef = useRef<HTMLDivElement>(null)
-  return (
-    <>
-      <MarketoForm
-        formId='1293'
-        onLoad={() => setFormLoaded(true)}
-        onSuccess={() => {
-          setFormSuccess(true)
-          // Delay needed to allow the ref to update before scrolling
-          setTimeout(() => {
-            formSuccessRef.current?.scrollIntoView({
-              behavior: 'smooth'
-            })
-          }, 10)
-
-          return false // Stops page from reloading
-        }}
-      />
-      {!formLoaded && <div className='text-center'>Loading form...</div>}
-      {formSuccess && (
-        <div ref={formSuccessRef}>
-          <h3 className='text-center text-2xl font-bold'>
-            Thank you for your submission!
-          </h3>
-          <p className='mt-2 text-center text-neutral-200'>
-            We will be in touch soon.
-          </p>
-        </div>
-      )}
-    </>
   )
 }
