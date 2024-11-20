@@ -1,0 +1,48 @@
+import Image, { ImageProps } from 'next/image'
+import Link, { LinkProps } from 'next/link'
+
+type Modes = 'light' | 'dark'
+
+export interface LogoAnnouncementLinkProps extends LinkProps {
+  children: React.ReactNode
+  logo: ImageProps
+  className?: string
+  mode?: Modes
+}
+
+const modeThemes: Record<Modes, { link: string; logo: string; text: string }> =
+  {
+    light: {
+      link: 'border-neutral-950/5 bg-neutral-950/5',
+      logo: 'bg-neutral-950/5',
+      text: ''
+    },
+    dark: {
+      link: 'bg-neutral-900/60 border-white/10',
+      logo: 'bg-white/10',
+      text: 'text-white/70'
+    }
+  }
+
+export default function LogoAnnouncementLink({
+  logo,
+  children,
+  className = '',
+  mode = 'light',
+  ...link
+}: LogoAnnouncementLinkProps) {
+  const theme = modeThemes[mode]
+  return (
+    <Link
+      {...link}
+      className={`group flex flex-col rounded-[4px] border shadow-sm md:flex-row ${theme.link} ${className}`}>
+      <div
+        className={`flex flex-shrink-0 flex-grow-0 items-center justify-center p-4 md:py-0 ${theme.logo}`}>
+        <Image {...logo} />
+      </div>
+      <div className='p-4'>
+        <p className={`text-left font-semibold ${theme.text}`}>{children}</p>
+      </div>
+    </Link>
+  )
+}
