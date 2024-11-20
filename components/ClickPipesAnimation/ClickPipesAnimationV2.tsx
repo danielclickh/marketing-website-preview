@@ -7,12 +7,7 @@ type LogoItemProps = {
   badge?: string
 }
 
-interface Props extends React.HTMLProps<HTMLDivElement> {
-  logo1: LogoItemProps
-  logo2: LogoItemProps
-  logo3: LogoItemProps
-  logo4: LogoItemProps
-}
+interface Props extends React.HTMLProps<HTMLDivElement> {}
 
 function LogoItem({ src, alt, active, badge }: LogoItemProps) {
   return (
@@ -36,89 +31,161 @@ function LogoItem({ src, alt, active, badge }: LogoItemProps) {
   )
 }
 
-export default function ClickPipesAnimationV2({
-  logo1,
-  logo2,
-  logo3,
-  logo4,
-  ...props
-}: Props) {
+export default function ClickPipesAnimationV2({ ...props }: Props) {
   return (
     <div {...props}>
       <div className='relative flex items-center'>
         {/* Logos */}
-        <ul className='flex flex-shrink-0 flex-grow-0 flex-col gap-4'>
+        <ul className='grid grid-cols-3 grid-rows-4 gap-4'>
+          {/* Row 1 */}
           <li>
-            <LogoItem {...logo1} />
+            <LogoItem
+              src='/images/cloud/integrations/kafka.svg'
+              alt='Kafka'
+              active={true}
+            />
           </li>
           <li>
-            <LogoItem {...logo2} />
+            <LogoItem
+              src='/images/cloud/integrations/amazon_s3.svg'
+              alt='AWS S3'
+              active={true}
+            />
           </li>
           <li>
-            <LogoItem {...logo3} />
+            <LogoItem
+              src='/images/cloud/integrations/postgres.svg'
+              alt='Postgres CDC'
+              active={true}
+              badge='New'
+            />
+          </li>
+          {/* Row 2 */}
+          <li>
+            <LogoItem
+              src='/images/cloud/integrations/diagram/confluent-logos-idXfleyO4U-1.svg'
+              alt='Confluent'
+              active={true}
+            />
           </li>
           <li>
-            <LogoItem {...logo4} />
+            <LogoItem
+              src='/images/cloud/integrations/diagram/azure-event-hub.svg'
+              alt='Azure Event Hubs'
+              active={true}
+            />
+          </li>
+          <li>
+            <LogoItem
+              src='/images/cloud/integrations/google-cloud-storage.svg'
+              alt='Google Cloud Storage'
+              active={true}
+            />
+          </li>
+          {/* Row 3 */}
+          <li>
+            <LogoItem
+              src='/images/cloud/integrations/diagram/aws-msk.svg'
+              alt='AWS MSK'
+              active={true}
+            />
+          </li>
+          <li>
+            <LogoItem
+              src='/images/cloud/integrations/redpanda.svg'
+              alt='RedPanda'
+              active={true}
+            />
+          </li>
+          <li>
+            <LogoItem
+              src='/logos/iceberg.svg'
+              alt='Iceberg'
+              active={false}
+              badge='Soon'
+            />
+          </li>
+          {/* Row 4 */}
+          <li>
+            <LogoItem
+              src='/images/cloud/integrations/diagram/aws-kinesis.svg'
+              alt='AWS Kinesis'
+              active={true}
+            />
+          </li>
+          <li>
+            <LogoItem
+              src='/images/cloud/integrations/warpstream.svg'
+              alt='Warpstream'
+              active={true}
+            />
+          </li>
+          <li>
+            <LogoItem
+              src='/logos/deltaLake.svg'
+              alt='Delta Lake'
+              active={false}
+              badge='Soon'
+            />
           </li>
         </ul>
 
         {/* Lines */}
-        <div className='flex-shrink-0 flex-grow-0'>
+        <div className='-ml-[176px] flex-shrink-0 flex-grow-0'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            width='284'
+            width='316'
             height='269'
-            viewBox='0 0 284 269'>
+            viewBox='0 0 316 269'>
             <g fill='none' fillRule='evenodd' strokeWidth='3'>
               <g stroke='#524D4D'>
-                <path d='M0 267.5h199.5c3.313 0 6-2.686 6-6V138c0-3.314 2.686-6 6-6H284' />
-                <path d='M0 178.5h199.5c3.313 0 6-2.686 6-6v-35c0-3.314 2.686-6 6-6H284' />
-                <path d='M0 89.5h199.5c3.314 0 6 2.686 6 6v30c0 3.314 2.686 6 6 6H284' />
-                <path d='M0 1.5h199.5c3.314 0 6 2.6863 6 6v118c0 3.314 2.686 6 6 6H284' />
+                <path d='M1 267h229.5a6 6 0 0 0 6-6V137.5a6 6 0 0 1 6-6H315' />
+                <path d='M1 178h229.5a6 6 0 0 0 6-6v-35a6 6 0 0 1 6-6H315' />
+                <path d='M1 89h229.5a6 6 0 0 1 6 6v30a6 6 0 0 0 6 6H315' />
+                <path d='M1 1h229.5a6 6 0 0 1 6 6v118a6 6 0 0 0 6 6H315' />
               </g>
               <g stroke='#FAFF69'>
-                {logo4.active && (
-                  <path d='M0 267.5h199.5c3.313 0 6-2.686 6-6V138c0-3.314 2.686-6 6-6H284'>
-                    <animate
-                      dur='4s'
-                      attributeName='stroke-dasharray'
-                      repeatCount='indefinite'
-                      values='0,0,0,0,0,621; 0,0,0,621,311,0; 0,0,221,311,0,0; 0,621,0,621,0,0;'
-                    />
-                  </path>
-                )}
-                {logo3.active && (
-                  <path d='M0 178.5h199.5c3.313 0 6-2.686 6-6v-35c0-3.314 2.686-6 6-6H284'>
-                    <animate
-                      dur='3s'
-                      attributeName='stroke-dasharray'
-                      repeatCount='indefinite'
-                      begin='0.5s;op.end+2.5s'
-                      values='0,0,0,0,0,621; 0,0,0,311.25,311.25,0; 0,0,155.625,466.875,0,0; 0,311.25,0,311.25,0,0'
-                    />
-                  </path>
-                )}
-                {logo2.active && (
-                  <path d='M0 89.5h199.5c3.314 0 6 2.686 6 6v30c0 3.314 2.686 6 6 6H284'>
-                    <animate
-                      dur='2.5s'
-                      attributeName='stroke-dasharray'
-                      repeatCount='indefinite'
-                      begin='0.5s;op.end+2.5s'
-                      values='0,0,0,0,0,621; 0,0,0,311.25,311.25,0; 0,0,155.625,466.875,0,0; 0,311.25,0,311.25,0,0'
-                    />
-                  </path>
-                )}
-                {logo1.active && (
-                  <path d='M0 1.5h199.5c3.314 0 6 2.6863 6 6v118c0 3.314 2.686 6 6 6H284'>
-                    <animate
-                      dur='3.5s'
-                      attributeName='stroke-dasharray'
-                      repeatCount='indefinite'
-                      values='0,0,0,0,0,621; 0,0,0,621,311,0; 0,0,221,311,0,0; 0,621,0,621,0,0;'
-                    />
-                  </path>
-                )}
+                {/* Row 1 line */}
+                <path d='M1 267h229.5a6 6 0 0 0 6-6V137.5a6 6 0 0 1 6-6H315'>
+                  <animate
+                    dur='3.5s'
+                    attributeName='stroke-dasharray'
+                    repeatCount='indefinite'
+                    values='0,0,0,0,0,621; 0,0,0,621,311,0; 0,0,221,311,0,0; 0,621,0,621,0,0;'
+                  />
+                </path>
+
+                {/* Row 2 line */}
+                <path d='M1 178h229.5a6 6 0 0 0 6-6v-35a6 6 0 0 1 6-6H315'>
+                  <animate
+                    dur='2.5s'
+                    attributeName='stroke-dasharray'
+                    repeatCount='indefinite'
+                    begin='0.5s;op.end+2.5s'
+                    values='0,0,0,0,0,621; 0,0,0,311.25,311.25,0; 0,0,155.625,466.875,0,0; 0,311.25,0,311.25,0,0'
+                  />
+                </path>
+
+                {/* Row 3 line */}
+                <path d='M1 89h229.5a6 6 0 0 1 6 6v30a6 6 0 0 0 6 6H315'>
+                  <animate
+                    dur='3s'
+                    attributeName='stroke-dasharray'
+                    repeatCount='indefinite'
+                    begin='0.5s;op.end+2.5s'
+                    values='0,0,0,0,0,621; 0,0,0,311.25,311.25,0; 0,0,155.625,466.875,0,0; 0,311.25,0,311.25,0,0'
+                  />
+                </path>
+
+                {/* Row 4 line */}
+                <path d='M1 1h229.5a6 6 0 0 1 6 6v118a6 6 0 0 0 6 6H315'>
+                  <animate
+                    dur='4s'
+                    attributeName='stroke-dasharray'
+                    repeatCount='indefinite'
+                    values='0,0,0,0,0,621; 0,0,0,621,311,0; 0,0,221,311,0,0; 0,621,0,621,0,0;'
+                  />
+                </path>
               </g>
             </g>
           </svg>

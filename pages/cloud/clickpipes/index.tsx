@@ -48,7 +48,7 @@ export default function ClickHouseServerPage({
         <div className='bg-contain bg-center bg-no-repeat'>
           <div className='relative overflow-x-hidden bg-grid pt-10'>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 2xl:px-0'>
-              <div className='flex justify-between'>
+              <div className='flex items-center justify-between'>
                 <div className='flex-col text-center lg:mt-16 lg:max-w-xl lg:text-left'>
                   <h4 className='mb-4 text-base font-semibold text-primary-300'>
                     <Link href='/cloud'>Cloud</Link> / Data ingestion
@@ -62,7 +62,7 @@ export default function ClickHouseServerPage({
                     className='mt-6 text-neutral-200 md:pr-16'>
                     An integration engine that makes ingesting massive volumes
                     of data from a diverse set of sources as simple as clicking
-                    a few buttons.
+                    a few buttons. Only available in ClickHouse Cloud.
                   </SuiText>
                   <div className='mt-8 flex flex-col items-center justify-center gap-6 sm:flex-row lg:justify-start'>
                     <CUIButton
@@ -104,30 +104,7 @@ export default function ClickHouseServerPage({
                   </LogoAnnouncementLink>
                 </div>
                 <div className='mx-6 mt-6 hidden lg:block'>
-                  <ClickPipesAnimationV2
-                    logo1={{
-                      src: '/images/cloud/integrations/diagram/confluent-logos-idXfleyO4U-1.svg',
-                      alt: 'Confluent',
-                      active: true
-                    }}
-                    logo2={{
-                      src: '/images/cloud/integrations/kafka.svg',
-                      alt: 'Kafka',
-                      active: true
-                    }}
-                    logo3={{
-                      src: '/images/cloud/integrations/amazon_s3.svg',
-                      alt: 'Amazon S3',
-                      active: false,
-                      badge: 'Beta'
-                    }}
-                    logo4={{
-                      src: '/images/cloud/integrations/diagram/aws-kinesis.svg',
-                      alt: 'AWS Kinesis',
-                      active: false,
-                      badge: 'Beta'
-                    }}
-                  />
+                  <ClickPipesAnimationV2 />
                 </div>
               </div>
             </div>
