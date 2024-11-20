@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React, { CSSProperties } from 'react'
 import { CUIButton, CUICard } from '../../../../components/ClickUI'
 import Layout from '../../../../components/Layout'
+import PostgresCdcAnimation from '../../../../components/PostgresCdcAnimation'
 import PostgresCdcWaitlistForm from '../../../../components/PostgresCdcWaitlistForm'
 import QuoteCard from '../../../../components/QuoteCard'
 import { SuiText, SuiTitle } from '../../../../components/sui'
@@ -22,7 +23,6 @@ import iconParty from './icon-party.svg'
 import iconPeerdb from './icon-peerdb.svg'
 import iconStars from './icon-stars.svg'
 import imageMonitorPipe from './monitor-pipe.png'
-import postgresCdcGraphic from './postgres-cdc-graphic.svg'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -65,12 +65,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 Eliminates the need for external ETL tools that are expensive,
                 slow and not purpose built for Postgres. Join the waitlist now.
               </SuiText>
-              <Image
-                src={postgresCdcGraphic}
-                width={507}
-                height={120}
-                alt='Postgres CDC'
-              />
+              <PostgresCdcAnimation />
             </div>
             <div className='w-full lg:max-w-lg'>
               <CUICard>

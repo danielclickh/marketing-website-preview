@@ -1,0 +1,15 @@
+.animate {
+  animation: fadeInOut var(--glow-interval) linear var(--glow-delay) infinite;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+}
