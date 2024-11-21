@@ -6,7 +6,7 @@ index: 2
 ---
 
 In this guide, we’ll explore columnar databases, column stores, column-oriented databases, column-wise databases, or “insert your favorite acronym”\!
-How do they differ from row-based databases? What are they good at?  What are the advantages of using a column store?
+git staHow do they differ from row-based databases? What are they good at?  What are the advantages of using a column store?
 
 We’ll answer these questions and more, but first, a brief history lesson.
 
@@ -20,7 +20,7 @@ By 1999, MonetDB had implemented the ideas from the DSM paper and showcased thei
 
 The authors emphasized that their early intuitions about the importance of vertical fragmentation in improving memory access were later validated through experimentation and detailed performance modeling. Their work demonstrated that a database architecture meticulously designed around memory access considerations can yield substantial performance improvements, even in the face of a widening gap between CPU and memory speeds.
 
-In the years since then, further research has identified <tom to add />
+In the years since then, further innovations, such as [vectorized processing](https://www.cidrdb.org/cidr2005/papers/P19.pdf) and data compression techniques, have made column-based stores even more useful for large-scale analytical processing.
 
 ## Row-based vs. column-based
 
