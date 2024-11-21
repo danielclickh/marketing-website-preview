@@ -23,6 +23,8 @@ import iconMaximize from './icon-maximize.svg'
 import iconParty from './icon-party.svg'
 import iconPeerdb from './icon-peerdb.svg'
 import iconStars from './icon-stars.svg'
+import logoDaisychain from './logo-daisychain.svg'
+import logoSpoton from './logo-spoton.svg'
 import imageMonitorPipe from './monitor-pipe.png'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
@@ -187,12 +189,12 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10'>
             <QuoteCard
               className='bg-neutral-900/80'
-              content={`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`}
+              content={`PeerDB has been a game-changer for us, effortlessly migrating tens of terabytes from our Postgres warehouse into ClickHouse and keeping millions of daily orders synced with just seconds of latency. We're really excited about PeerDB's native integration into ClickHouse Cloud via ClickPipes and all of the opportunities it opens up for us.`}
               logo={{
-                src: '/images/use-cases/real-time-analytics/cloudflare-logo.svg',
-                width: 123,
-                height: 41,
-                alt: 'Cloudflare'
+                src: logoSpoton,
+                width: 156,
+                height: 48,
+                alt: 'SpotOn'
               }}
             />
             <QuoteCard
@@ -207,12 +209,12 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
             />
             <QuoteCard
               className='bg-neutral-900/80'
-              content={`Lectus elementum torquent magna sollicitudin augue dignissim taciti venenatis rhoncus. Cras vestibulum urna molestie quam accumsan. Dapibus sagittis ad eleifend sociosqu aliquet bibendum ad. `}
+              content={`Clickpipes helps us reliably keep data from Postgres in sync with Clickhouse, while we rapidly improve our product. Clickhouse and Postgres are the peanut butter and chocolate of databases (they go well together!) and Clickpipes makes it easy to build that architechture at a fast-moving startup.`}
               logo={{
-                src: '/images/use-cases/real-time-analytics/cloudflare-logo.svg',
-                width: 123,
-                height: 41,
-                alt: 'Cloudflare'
+                src: logoDaisychain,
+                width: 211,
+                height: 42,
+                alt: 'Daisychain'
               }}
             />
           </div>
