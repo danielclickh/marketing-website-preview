@@ -4,8 +4,8 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import logoFull from '../../public/logo-full.svg'
+import AnnouncementBar from '../AnnouncementBar'
 import { CUIButton, CUILink } from '../ClickUI'
-import HeaderEyebrow from '../HeaderEyebrow'
 import GitHub from '../icons/GitHub'
 import Navigation from '../Navigation'
 import { HeaderProps } from './types'
@@ -120,7 +120,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
           isScrolled ? 'md-mid:bg-neutral-900/80' : 'md-mid:bg-neutral-900/10'
         } fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur transition-colors`}>
         {/* Announcement banner */}
-        <HeaderEyebrow
+        <AnnouncementBar
           link={headerBannerUrl}
           text={headerBannerText}
           dismissible={true}

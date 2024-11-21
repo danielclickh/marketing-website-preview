@@ -1,3 +1,4 @@
+import { IconButton } from '@clickhouse/click-ui'
 import { MouseEvent, useEffect, useState } from 'react'
 import LinkWithArrow from '../LinkWithArrow'
 
@@ -56,32 +57,23 @@ export default function HeaderEyebrow({
 
   return (
     <div
-      className={`relative z-50 flex bg-primary-300 text-primary-900 transition ${
+      className={`relative z-50 flex items-center bg-primary-300 text-primary-900 transition ${
         isVisible ? 'max-h-max' : 'max-h-0 overflow-hidden opacity-0'
-      }`}>
+      } ${className}`}>
       <LinkWithArrow
         prefetch={false}
         href={link}
-        className={`block w-full flex-1 px-4 py-1 text-center text-sm font-medium ${className}`}>
+        className='block w-full flex-1 px-4 py-1 text-center text-sm font-medium'>
         {text}
       </LinkWithArrow>
       {dismissible && (
-        <button
+        <IconButton
+          icon='cross'
+          size='sm'
+          type='primary'
+          className='m-1 !text-inherit hover:!bg-primary-900/10'
           onClick={handleClick}
-          className='m-1 flex aspect-square w-6 items-center justify-center rounded transition-colors hover:bg-primary-900/10'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            className='h-auto w-4'
-            fill='none'
-            stroke='currentColor'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='2'
-            viewBox='0 0 24 24'>
-            <path d='M18 6 6 18M6 6l12 12' />
-          </svg>
-          <span className='sr-only'>Dismiss notice</span>
-        </button>
+        />
       )}
     </div>
   )
