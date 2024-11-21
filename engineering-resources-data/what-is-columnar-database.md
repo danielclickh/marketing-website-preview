@@ -5,8 +5,8 @@ excerpt: "In this guide, we’ll explore columnar databases. How do they differ 
 index: 2
 ---
 
-In this guide, we’ll explore columnar databases, column stores, column-oriented databases, column-wise databases, or “insert your favorite acronym”\!
-git staHow do they differ from row-based databases? What are they good at?  What are the advantages of using a column store?
+In this guide, we’ll explore columnar databases, column stores, column-oriented databases, column-wise databases, or “insert your favorite acronym” 
+How do they differ from row-based databases? What are they good at?  What are the advantages of using a column store?
 
 We’ll answer these questions and more, but first, a brief history lesson.
 
