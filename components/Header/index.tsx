@@ -1,12 +1,12 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import logoFull from '../../public/logo-full.svg'
+import AnnouncementBar from '../AnnouncementBar'
 import { CUIButton, CUILink } from '../ClickUI'
 import GitHub from '../icons/GitHub'
-import LinkWithArrow from '../LinkWithArrow'
 import Navigation from '../Navigation'
 import { HeaderProps } from './types'
 
@@ -17,21 +17,21 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    'Join us at Microsoft Ignite in Chicago, Nov 19-21. Booth 614!'
+    'Interested in migrating from Postgres to ClickHouse? Join our free online training, Nov 27!'
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/company/events/202411-amer-microsoft-ignite?loc=eyebrow'
+    '/company/events/202411-emea-postgres-to-clickhouse-migration?loc=eyebrow'
   )
 
+  const resizeHandler = () => {
+    if (headerRef.current) setHeaderHeight(headerRef.current.clientHeight)
+  }
+
+  const scrollHandler = () => {
+    setIsScrolled(window.scrollY > 0)
+  }
+
   useEffect(() => {
-    const resizeHandler = () => {
-      if (headerRef.current) setHeaderHeight(headerRef.current.clientHeight)
-    }
-
-    const scrollHandler = () => {
-      setIsScrolled(window.scrollY > 0)
-    }
-
     window.addEventListener('resize', resizeHandler)
     window.addEventListener('scroll', scrollHandler)
     resizeHandler()
@@ -120,16 +120,14 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
           isScrolled ? 'md-mid:bg-neutral-900/80' : 'md-mid:bg-neutral-900/10'
         } fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur transition-colors`}>
         {/* Announcement banner */}
-        {true && (
-          <LinkWithArrow
-            prefetch={false}
-            href={headerBannerUrl}
-            className={`relative z-50 block w-full bg-primary-300 px-4 py-1 text-center text-sm font-medium text-primary-900 ${
-              eyebrow?.className || ''
-            }`}>
-            {headerBannerText}
-          </LinkWithArrow>
-        )}
+        <AnnouncementBar
+          link={headerBannerUrl}
+          text={headerBannerText}
+          dismissible={true}
+          onShow={resizeHandler}
+          onHide={resizeHandler}
+          className={eyebrow?.className || ''}
+        />
 
         {/* Logo, navigtation, CTAs... */}
         <div className='no-wrap section-container relative flex items-center py-4'>

@@ -1,4 +1,3 @@
-import React from 'react'
 import SocialIcon from '../SocialIcon'
 import { SuiTitle } from '../sui'
 
@@ -22,8 +21,8 @@ function JoinCommunity({ github: { stars } }: Props) {
           <div className='mx-auto flex gap-6'>
             <SocialIcon
               name='Twitter'
-              href='https://twitter.com/ClickhouseDB'
-              imgSrc='/socials/twitter.svg'
+              href='https://x.com/ClickhouseDB'
+              imgSrc='/socials/x.svg'
             />
             <SocialIcon
               name='Slack'
