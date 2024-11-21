@@ -35,6 +35,7 @@ export function getEngineeringResources(): EngineeringResource[] {
             slug,
             excerpt: data.excerpt,
             image: data.image ? data.image : '',
+            index: data.index ?? 9999, // Add index property with default value -1
             body: content
           } as EngineeringResource
         } catch (error) {
@@ -46,6 +47,7 @@ export function getEngineeringResources(): EngineeringResource[] {
         (engResource): engResource is EngineeringResource =>
           engResource !== null
       )
+      .sort((a, b) => a.index - b.index) // Sort by the 'index' property
 
     return engineeringResources
   } catch (error) {
@@ -53,6 +55,7 @@ export function getEngineeringResources(): EngineeringResource[] {
     return []
   }
 }
+
 
 export function getEngineeringResource(
   slug: string
