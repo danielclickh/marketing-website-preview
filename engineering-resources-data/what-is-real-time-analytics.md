@@ -136,6 +136,8 @@ The system must maintain quick query responses at all times. This should hold ev
 
 Real-time analytics systems are often user-facing and must handle many concurrent queries. It’s common for these systems to support tens or hundreds of thousands of queries per second.
 
+These characteristics are typically seen in [column databases](https://clickhouse.com/engineering-resources/what-is-columnar-database) like ClickHouse.
+
 ## Data sources for real-time analytics
 
 Real-time analytics systems are based on events, typically managed by a streaming data platform. These systems act as the source of truth for event data and can handle a high volume and concurrency of data being produced and consumed. The events are stored durably and consumed by downstream systems.
@@ -146,7 +148,7 @@ In addition to working with real-time data, we must support slower-changing data
 
 ## What is a real-time analytics database?
 
-At the heart of any real-time analytics system is a database that ingests data quickly and serves low-latency queries at scale. These databases are a subset of Online Analytics Processing (OLAP) databases but have some notable differences.
+At the heart of any real-time analytics system is a database that ingests data quickly and serves low-latency queries at scale. These databases are a subset of [Online Analytics Processing (OLAP) databases](https://clickhouse.com/engineering-resources/oltp-vs-olap) but have some notable differences.
 
 Traditional OLAP databases were designed for batch analytics, which we learned about earlier. They were used for internal-facing use cases where having data refreshed every day or, at best, every hour was sufficient. This approach doesn’t work for user-facing applications with expected sub-second query response time.
 
