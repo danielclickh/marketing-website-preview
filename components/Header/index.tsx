@@ -1,7 +1,7 @@
 import { MenuIcon, XIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import logoFull from '../../public/logo-full.svg'
 import { CUIButton, CUILink } from '../ClickUI'
@@ -17,10 +17,10 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    'Join us at Microsoft Ignite in Chicago, Nov 19-21. Booth 614!'
+    'Interested in migrating from Postgres to ClickHouse? Join our free online training, Nov 27!'
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/company/events/202411-amer-microsoft-ignite?loc=eyebrow'
+    '/company/events/202411-emea-postgres-to-clickhouse-migration?loc=eyebrow'
   )
 
   useEffect(() => {
