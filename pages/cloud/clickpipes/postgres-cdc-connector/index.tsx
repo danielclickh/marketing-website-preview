@@ -51,7 +51,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       <div className='relative my-10 lg:mb-20'>
         <div className='section-container relative z-10 lg:py-20'>
           <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
-            <div className='flex-1 space-y-6 lg:max-w-2xl'>
+            <div className='w-full flex-1 space-y-6 lg:max-w-2xl'>
               <h4 className='text-base font-semibold text-primary-300'>
                 <Link href='/cloud'>Cloud</Link> / Data ingestion
               </h4>
