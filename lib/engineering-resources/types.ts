@@ -4,4 +4,5 @@ export interface EngineeringResource {
   title: string
   excerpt: string
   body: string
+  index: number
 }
