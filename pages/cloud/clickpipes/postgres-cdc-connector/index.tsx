@@ -25,6 +25,7 @@ import iconPeerdb from './icon-peerdb.svg'
 import iconStars from './icon-stars.svg'
 import logoDaisychain from './logo-daisychain.svg'
 import logoSpoton from './logo-spoton.svg'
+import LogoVueling from './logo-vueling.svg'
 import imageMonitorPipe from './monitor-pipe.png'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
@@ -199,12 +200,12 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
             />
             <QuoteCard
               className='bg-neutral-900/80'
-              content={`Mattis sapien ullamcorper vivamus viverra ultrices curabitur in. Rhoncus arcu aenean himenaeos nec dolor auctor scelerisque nascetur.`}
+              content={`We already reduced our Postgres to ClickHouse snapshot times from 10+ hours down to 15 minutes with PeerDB. Combining ClickHouse’s powerful analytics natively with PeerDB’s real-time data capture capabilities will greatly simplify our data processing workflows. This integration will enable us to build analytical applications faster, giving us a competitive edge in the market.`}
               logo={{
-                src: '/images/use-cases/real-time-analytics/cloudflare-logo.svg',
-                width: 123,
-                height: 41,
-                alt: 'Cloudflare'
+                src: LogoVueling,
+                width: 140,
+                height: 44,
+                alt: 'Vueling'
               }}
             />
             <QuoteCard
