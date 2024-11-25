@@ -62,6 +62,7 @@ export default function HomepageHeroAlt({
                 size='lg'
                 href='https://clickhouse.com/docs/en/getting-started/quick-start'
                 target='_blank'
+                prefetch={false}
                 linkClass='w-full'
                 className='w-full !border-black !text-black !transition-all hover:!text-white'>
                 Download open-source

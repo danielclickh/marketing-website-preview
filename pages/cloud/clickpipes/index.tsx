@@ -78,6 +78,7 @@ export default function ClickHouseServerPage({
                       size='lg'
                       href='https://clickhouse.com/docs/en/integrations/clickpipes'
                       target='_blank'
+                      prefetch={false}
                       linkClass='w-full max-w-[14rem]'
                       className='w-full'>
                       View documentation

@@ -33,6 +33,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
           <CUILink
             href='https://clickhouse.com/docs/en/integrations/sql-clients/clickhouse-client-local'
             target='_self'
+            prefetch={false}
             className='underline hover:text-neutral-0'
             onClick={useGalaxyOnClick(
               'homePage.installSection.windowsInstallSelect'
@@ -53,6 +54,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
           <CUILink
             href='https://clickhouse.com/docs/en/install'
             target='_self'
+            prefetch={false}
             className='underline hover:text-neutral-0'
             onClick={useGalaxyOnClick(
               'homePage.installSection.otherOptionsSelect'

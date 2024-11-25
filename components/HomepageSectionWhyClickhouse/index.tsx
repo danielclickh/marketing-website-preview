@@ -37,6 +37,7 @@ function FeatureCard({
     <Link
       href={link}
       target={target}
+      prefetch={false}
       className='group flex items-center gap-4 rounded-lg bg-primary-300 px-4 py-6 text-primary-900 sm:flex-col sm:gap-4 sm:px-2 sm:text-center'>
       {icon}
       <SuiTitle type='h3' color='inherit' className='flex-1'>

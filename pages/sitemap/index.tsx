@@ -1,6 +1,5 @@
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
-import React from 'react'
 import HRSeparator from '../../components/HRSeparator'
 import Layout from '../../components/Layout'
 import { fetchAll, findOne, getStagingOnlyFilters } from '../../lib/api/strapi'
@@ -383,6 +382,7 @@ function Sitemap({
                 <li>
                   <Link
                     href='https://clickhouse.com/docs/en/install'
+                    prefetch={false}
                     className='font text-primary-300 hover:underline'>
                     Install ClickHouse
                   </Link>
@@ -390,6 +390,7 @@ function Sitemap({
                 <li>
                   <Link
                     href='https://clickhouse.com/docs/en/cloud-quick-start'
+                    prefetch={false}
                     className='font text-primary-300 hover:underline'>
                     Cloud quick start
                   </Link>
@@ -397,6 +398,7 @@ function Sitemap({
                 <li>
                   <Link
                     href='https://clickhouse.com/docs/en/integrations'
+                    prefetch={false}
                     className='font text-primary-300 hover:underline'>
                     Integrations
                   </Link>
