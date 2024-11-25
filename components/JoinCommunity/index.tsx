@@ -27,6 +27,7 @@ function JoinCommunity({ github: { stars } }: Props) {
             <SocialIcon
               name='Slack'
               href='/slack'
+              prefetch={false}
               imgSrc='/socials/slack.svg'
             />
           </div>
