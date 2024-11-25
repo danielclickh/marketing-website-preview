@@ -428,6 +428,11 @@ const nextConfig = {
         permanent: true
       },
       {
+        source: '/cloud/clickpipes-postgres-cdc-connector',
+        destination: '/cloud/clickpipes/postgres-cdc-connector',
+        permanent: true
+      },
+      {
         source: '/blog',
         has: [
           {

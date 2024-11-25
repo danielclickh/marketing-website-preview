@@ -8,11 +8,13 @@ import { SuiText } from '../sui'
 interface QuoteProps {
   content: React.ReactNode | string
   logo: Omit<ImageProps, 'className'>
+  className?: string
 }
 
-function Quote({ content, logo }: QuoteProps) {
+function Quote({ content, logo, className = '' }: QuoteProps) {
   return (
-    <div className='animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card hover:bg-neutral-725/90 hover:shadow-lg'>
+    <div
+      className={`animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card ${className}`}>
       <Image
         src='/images/Quote.svg'
         width={37}
@@ -47,23 +49,32 @@ export interface QuoteCardProps extends QuoteProps {
         React.RefAttributes<HTMLAnchorElement>)
 }
 
-export default function QuoteCard({ link, ...quote }: QuoteCardProps) {
+export default function QuoteCard({
+  link,
+  className = '',
+  ...quote
+}: QuoteCardProps) {
   if (typeof link === 'string') link = { href: link }
   return (
-    <Tilt
-      tiltEnable={false}
-      glareEnable={true}
-      glareMaxOpacity={0.4}
-      glareColor='rgba(251, 255, 70, 0.08)'
-      glarePosition='all'
-      className='flex-1'>
+    <>
       {link ? (
-        <Link {...link}>
-          <Quote {...quote} />
-        </Link>
+        <Tilt
+          tiltEnable={false}
+          glareEnable={true}
+          glareMaxOpacity={0.4}
+          glareColor='rgba(251, 255, 70, 0.08)'
+          glarePosition='all'
+          className='flex-1'>
+          <Link {...link}>
+            <Quote
+              className={`hover:bg-neutral-725/90 hover:shadow-lg ${className}`}
+              {...quote}
+            />
+          </Link>
+        </Tilt>
       ) : (
-        <Quote {...quote} />
+        <Quote className={className} {...quote} />
       )}
-    </Tilt>
+    </>
   )
 }

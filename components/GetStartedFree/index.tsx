@@ -27,7 +27,9 @@ export default function GetStartedFree({
               <>
                 {' '}
                 <span className='tilted tilted-black'>
-                  <span className='tilted-content'>{textSlanted}</span>
+                  <span className='tilted-content text-white'>
+                    {textSlanted}
+                  </span>
                 </span>{' '}
               </>
             )}
