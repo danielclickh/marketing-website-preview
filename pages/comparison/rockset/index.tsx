@@ -1,7 +1,8 @@
 import { ArrowDownIcon, ChevronRightIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import React, { useRef, useState } from 'react'
+import Link from 'next/link'
+import { useRef, useState } from 'react'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import HRSeparator from '../../../components/HRSeparator'
@@ -160,12 +161,13 @@ export default function Page({
                   </div>
                   <p className='mt-8 text-sm'>
                     Read our guide about{' '}
-                    <a
+                    <Link
                       target='_blank'
                       className='text-primary-300'
-                      href='https://clickhouse.com/docs/en/migrations/rockset?loc=comparions'>
+                      href='https://clickhouse.com/docs/en/migrations/rockset?loc=comparions'
+                      prefetch={false}>
                       how to migrate from Rockset to ClickHouse
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>

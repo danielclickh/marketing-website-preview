@@ -77,6 +77,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
                 className='mt-6 !px-8'
                 href='https://clickhouse.com/docs/en/chdb'
                 target='_blank'
+                prefetch={false}
                 onClick={useGalaxyOnClick('chdbPage.heroCta.tryItSelect')}>
                 Try it today
               </CUIButton>

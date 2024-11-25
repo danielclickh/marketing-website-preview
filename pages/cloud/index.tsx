@@ -19,8 +19,8 @@ import { findOne } from '../../lib/api/strapi'
 import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { CloudData } from '../../types/cloud'
-import features from './features.json'
 import featureBlocks from './feature_blocks.json'
+import features from './features.json'
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -257,11 +257,13 @@ export default function CloudPage({
                 data visualization, and language clients. Now with support for
                 the MySQL interface so you can connect to any of your favorite
                 MySQL-compatible{' '}
-                <a
+                <Link
                   href='https://clickhouse.com/docs/en/integrations/data-visualization'
-                  className='text-primary-300'>
+                  className='text-primary-300'
+                  prefetch={false}
+                  target='_blank'>
                   data tools
-                </a>
+                </Link>
                 .
               </div>
 

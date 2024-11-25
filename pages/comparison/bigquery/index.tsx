@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link, { LinkProps } from 'next/link'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
 import { CUIButton, CUICard } from '../../../components/ClickUI'
@@ -202,6 +202,7 @@ export default function BigQueryPage({
             <Link
               href={`https://clickhouse.com/docs/en/migrations/bigquery?loc=${locTracking}-hero`}
               target='_blank'
+              prefetch={false}
               className='text-primary-300 hover:underline'
               onClick={handleMigrationDocClick}>
               migrating from ClickHouse to BigQuery
