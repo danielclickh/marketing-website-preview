@@ -10,7 +10,12 @@ function FollowUs() {
           href='https://twitter.com/ClickhouseDB'
           imgSrc='/socials/twitter.svg'
         />
-        <SocialIcon name='Slack' href='/slack' imgSrc='/socials/slack.svg' />
+        <SocialIcon
+          name='Slack'
+          href='/slack'
+          imgSrc='/socials/slack.svg'
+          prefetch={false}
+        />
         <SocialIcon
           name='GitHub'
           href='https://github.com/ClickHouse/ClickHouse'

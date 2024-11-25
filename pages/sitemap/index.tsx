@@ -351,6 +351,7 @@ function Sitemap({
                 <li>
                   <Link
                     href='https://clickhouse.com/slack'
+                    prefetch={false}
                     className='font text-primary-300 hover:underline'>
                     Join Slack
                   </Link>
