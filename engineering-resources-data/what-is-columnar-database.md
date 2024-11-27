@@ -1,5 +1,5 @@
 ---
-title: 'What is a columnar database?'
+title: 'Columnar databases explained'
 slug: 'what-is-columnar-database'
 excerpt: "In this guide, we’ll explore columnar databases. How do they differ from row-based databases? What are they good at?  What are the advantages of using a column store?"
 index: 2
