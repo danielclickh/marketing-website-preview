@@ -44,7 +44,7 @@ export default function ContactPage({
             <SuiTitle type='h1' className='mb-4'>
               Vector Search Index: Coming Soon
             </SuiTitle>
-            <div className='max-w-3xl text-neutral-200'>
+            <div className='mx-auto max-w-3xl text-neutral-200'>
               Do you want to do vector search over many embeddings, and a linear
               scan is too slow? We have been working on a vector search index,
               which is nearly ready for private preview. If you'd like to be
