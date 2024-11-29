@@ -6,9 +6,9 @@ function FollowUs() {
       <div className='mb-4 mt-8 font-bold'>Follow us</div>
       <div className='mb-12 flex flex-wrap justify-center gap-6'>
         <SocialIcon
-          name='Twitter'
-          href='https://twitter.com/ClickhouseDB'
-          imgSrc='/socials/twitter.svg'
+          name='X'
+          href='https://x.com/ClickhouseDB'
+          imgSrc='/socials/x.svg'
         />
         <SocialIcon
           name='Slack'
