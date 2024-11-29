@@ -20,7 +20,7 @@ function JoinCommunity({ github: { stars } }: Props) {
         <div className='mx-auto flex flex-wrap gap-6 md:mx-0'>
           <div className='mx-auto flex gap-6'>
             <SocialIcon
-              name='Twitter'
+              name='X'
               href='https://x.com/ClickhouseDB'
               imgSrc='/socials/x.svg'
             />
