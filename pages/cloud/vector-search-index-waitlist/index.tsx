@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title: 'Cloud Vector Search Index Waitlist',
+          title: 'Join The Cloud Vector Search Waitlist',
           description: '',
           path: '/cloud/vector-search-index-waitlist'
         },
@@ -41,7 +41,7 @@ export default function ContactPage({
         <div className='container mx-auto flex flex-col px-8 2xl:px-0'>
           <div className='mx-auto flex flex-col pt-6 text-center'>
             <SuiTitle type='h1' className='mb-4'>
-              Join The Waitlist
+              Join The Vector Search Waitlist
             </SuiTitle>
             {/*<div className='max-w-3xl text-neutral-200'>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
