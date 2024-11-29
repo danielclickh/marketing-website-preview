@@ -15,8 +15,9 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title: 'Join The Cloud Vector Search Waitlist',
-          description: '',
+          title: 'Vector Search Index: Coming Soon',
+          description:
+            "Do you want to do vector search over many embeddings, and a linear scan is too slow? We have been working on a vector search index, which is nearly ready for private preview. If you'd like to be notified when it's ready, join the waitlist now.",
           path: '/cloud/vector-search-index-waitlist'
         },
         ...commonProps
@@ -41,14 +42,14 @@ export default function ContactPage({
         <div className='container mx-auto flex flex-col px-8 2xl:px-0'>
           <div className='mx-auto flex flex-col pt-6 text-center'>
             <SuiTitle type='h1' className='mb-4'>
-              Join The Vector Search Waitlist
+              Vector Search Index: Coming Soon
             </SuiTitle>
-            {/*<div className='max-w-3xl text-neutral-200'>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Asperiores aut ducimus nam nobis nulla obcaecati odio quibusdam
-              repellendus totam. Ducimus eaque excepturi fuga illum incidunt
-              labore nisi rem suscipit tenetur.
-            </div>*/}
+            <div className='max-w-3xl text-neutral-200'>
+              Do you want to do vector search over many embeddings, and a linear
+              scan is too slow? We have been working on a vector search index,
+              which is nearly ready for private preview. If you'd like to be
+              notified when it's ready, join the waitlist now.
+            </div>
           </div>
           <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pb-8 pt-14 text-center md:bg-no-repeat 2xl:px-0'>
             <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
