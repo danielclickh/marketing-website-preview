@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { CUIButton } from '../../../components/ClickUI'
 import Layout from '../../../components/Layout'
 import MarketoForm from '../../../components/MarketoForm'
@@ -47,7 +47,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                 />
 
                 <h1 className='mb-5 mt-12 text-center font-basier text-3xl font-bold !leading-snug lg:text-left lg:text-4xl xl:text-[56px]'>
-                  Bring Your Own Cloud is in Private Preview on AWS
+                  Bring Your Own Cloud is in Beta on AWS
                 </h1>
                 <p className='text-center text-[20px] leading-[180%] lg:text-left 2xl:max-w-[678px]'>
                   A fully managed ClickHouse Cloud service deployed in your own

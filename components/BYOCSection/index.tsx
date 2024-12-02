@@ -1,7 +1,6 @@
 import { ChevronRightIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import { CUIButton } from '../ClickUI'
 import { SuiText, SuiTitle } from '../sui'
 
@@ -27,7 +26,7 @@ export function BYOCSection({ loc }: BYOCSectionProps) {
             <Link
               href={`/cloud/bring-your-own-cloud?loc=${loc}`}
               className='inline-block rounded-full border border-neutral-900 px-5 py-2  font-semibold uppercase'>
-              Private Preview
+              Beta
             </Link>
           </div>
           <div className='flip-selection'>
