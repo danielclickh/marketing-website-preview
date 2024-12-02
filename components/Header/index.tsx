@@ -17,10 +17,10 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    'Postgres CDC connector for ClickPipes is now in Private Preview. Read more'
+    `Visit us this week at re:Invent, booth 1737, and see what we’ll be announcing!`
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/blog/postgres-cdc-connector-clickpipes-private-preview?loc=eyebrow'
+    '/blog/reinvent-2024-product-announcements?loc=eyebrow'
   )
 
   const resizeHandler = () => {
