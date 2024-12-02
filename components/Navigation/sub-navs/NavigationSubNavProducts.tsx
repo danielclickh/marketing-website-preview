@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import React from 'react'
 import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
 import LinkWithArrow from '../../LinkWithArrow'
 import { NavigationLink } from '../parts'
@@ -43,7 +42,7 @@ export default function NavigationSubNavProducts() {
               className='flex-grow-1 h-auto w-6 flex-shrink-0'
             />
             <span>
-              Bring Your Own Cloud (Private Preview)
+              Bring Your Own Cloud (Beta)
               <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
                 A fully managed ClickHouse Cloud service,
                 <br /> deployed in your own AWS account.
