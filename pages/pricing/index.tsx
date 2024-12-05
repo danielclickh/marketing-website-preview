@@ -4,12 +4,13 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import ByocPricingCard from '../../components/ByocPricingCard'
-import { CUIButton } from '../../components/ClickUI'
+import { CUIButton, CUICard } from '../../components/ClickUI'
 import Layout from '../../components/Layout'
 import LinkWithArrow from '../../components/LinkWithArrow'
 import Markdown from '../../components/Markdown'
 import MarketoForm from '../../components/MarketoForm'
 import Modal from '../../components/Modal'
+import PocContactForm from '../../components/PocContactForm'
 import { PricingCalculator } from '../../components/PricingCalculator'
 import { SuiText, SuiTitle } from '../../components/sui'
 import { useClickOutside } from '../../hooks'
@@ -101,6 +102,7 @@ export default function PricingPage({
   footerData
 }: PricingPageProps) {
   useGalaxyOnPage('pricingPage')
+  const pocFormRef = useRef<HTMLDivElement | null>(null)
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pricing h-full text-neutral-0'>
@@ -130,6 +132,27 @@ export default function PricingPage({
                   afterPricingTable={
                     <>
                       <ByocPricingCard />
+                      <div className='mx-6 mt-6'>
+                        <div className='rounded bg-neutral-700 px-3 py-5 text-center text-white'>
+                          <SuiText size='sm'>
+                            Need help with your proof of concept?{' '}
+                            <br className='sm:hidden' />
+                            <Link
+                              href='#poc-contact'
+                              className='text-primary-300 hover:underline'
+                              onClick={(event) => {
+                                if (pocFormRef.current) {
+                                  event.preventDefault()
+                                  pocFormRef.current.scrollIntoView({
+                                    behavior: 'smooth'
+                                  })
+                                }
+                              }}>
+                              Contact us
+                            </Link>
+                          </SuiText>
+                        </div>
+                      </div>
                       <div className='mt-12 space-y-6 text-center'>
                         <SuiText size='sm'>
                           Or download the forever-free{' '}
@@ -186,6 +209,30 @@ export default function PricingPage({
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className='relative bg-neutral-700 py-20'
+          id='poc-contact'
+          ref={pocFormRef}>
+          <div className='section-container'>
+            <div className='mx-auto w-full lg:max-w-xl'>
+              <CUICard className='overflow-hidden bg-neutral-900/80'>
+                <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
+                <CUICard.Body className='p-4 lg:p-6'>
+                  <div className='mb-4 space-y-4 text-center lg:mb-6'>
+                    <SuiTitle type='h2' className='!text-2xl'>
+                      Need help with your ClickHouse Cloud PoC?
+                    </SuiTitle>
+                    <SuiText className='opacity-70'>
+                      Contact our team of experts
+                    </SuiText>
+                  </div>
+                  <PocContactForm />
+                </CUICard.Body>
+              </CUICard>
             </div>
           </div>
         </div>
