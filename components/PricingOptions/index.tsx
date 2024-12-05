@@ -423,7 +423,7 @@ function PricingOptions({
                         <div className='p-6 pt-0'>
                           {plan.name !== 'Dedicated' && (
                             <ShowPricing
-                              isFirst={false}
+                              isFirst={plan.name === 'Development'}
                               tier={plan.name}
                               storagePricing={
                                 plan.name === 'Development'
@@ -440,7 +440,7 @@ function PricingOptions({
                           {plan.actionButton && (
                             <>
                               <PricingButton
-                                isFirst={false}
+                                isFirst={plan.name === 'Development'}
                                 isLast={index !== plans.length - 1}
                                 path={plan.actionButton.link}
                                 btnText={plan.actionButton.text}
