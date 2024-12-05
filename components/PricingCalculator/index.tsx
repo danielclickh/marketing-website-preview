@@ -8,12 +8,10 @@ import {
 import pricingPlansFromFile from '../../public/pricingFile.json'
 import {
   CloudProviderType,
-  MeteredPricing,
   PricingPlanData,
   RegionPricing
 } from '../../types/pricing'
 import HRSeparator from '../HRSeparator'
-import Markdown from '../Markdown'
 import { FormControl } from '../PricingCalculator/ui/FormControl'
 import { NumericSelect } from '../PricingCalculator/ui/NumericSelect'
 import { RangeSlider } from '../PricingCalculator/ui/RangeSlider'
@@ -75,16 +73,14 @@ export const PricingCalculator: React.FC<{
   pricingByRegion: RegionPricing[]
   cloudProviders: CloudProviderType[]
   pricingPlans: PricingPlanData[]
-  meteredPricing: MeteredPricing
-  hero: any
   afterPricingSelector?: React.ReactNode
+  afterPricingTable?: React.ReactNode
 }> = ({
   pricingByRegion,
   cloudProviders,
   pricingPlans,
-  meteredPricing,
-  hero,
-  afterPricingSelector
+  afterPricingSelector,
+  afterPricingTable
 }) => {
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -625,7 +621,7 @@ export const PricingCalculator: React.FC<{
 
   return (
     <div>
-      {meteredPricing && pricingByRegion.length > 0 && (
+      {pricingByRegion.length > 0 && (
         <PricingOptions
           computeCostDev={computePricingDev}
           storageCostDev={storagePricingDev}
@@ -634,16 +630,11 @@ export const PricingCalculator: React.FC<{
           pricingByRegion={pricingByRegion}
           cloudProviders={cloudProviders}
           pricingPlans={pricingPlans}
-          meteredPricing={meteredPricing}
           afterPricingSelector={afterPricingSelector}
+          afterPricingTable={afterPricingTable}
         />
       )}
       <HRSeparator className='mt-10 max-w-[384px] pb-10 ' />
-      <div className='mb-44 text-center'>
-        <Markdown className={styles.richTextLink}>
-          {hero.openSourceLink}
-        </Markdown>
-      </div>
       <div id='pricing-calculator'>
         <SuiTitle type='h2' className='pb-16 text-center'>
           Estimate your monthly&nbsp;cost

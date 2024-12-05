@@ -4,15 +4,10 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
 import { slugify } from '../../lib/utils/strings'
 import { CloudProviderType } from '../../types/cloud'
-import {
-  MeteredPricing,
-  PricingPlanData,
-  RegionPricing
-} from '../../types/pricing'
-import { CUIButton, CUILink } from '../ClickUI'
+import { PricingPlanData, RegionPricing } from '../../types/pricing'
+import { CUIButton } from '../ClickUI'
 import Markdown from '../Markdown'
 import { StrapiImage } from '../StrapiElements'
-import { SuiText } from '../sui'
 import PlanPricing from './PlanPricing'
 import PricingButton from './PricingButton'
 import { PricingContextProvider } from './PricingContext'
@@ -25,24 +20,24 @@ function PricingOptions({
   pricingByRegion,
   pricingPlans,
   cloudProviders,
-  meteredPricing,
   selectorOnly,
   storageCostDev,
   computeCostDev,
   storageCostProd,
   computeCostProd,
-  afterPricingSelector
+  afterPricingSelector,
+  afterPricingTable
 }: {
   pricingByRegion: Array<RegionPricing>
   pricingPlans: Array<PricingPlanData>
   cloudProviders: Array<CloudProviderType>
-  meteredPricing?: MeteredPricing
   selectorOnly?: boolean
   storageCostDev?: number
   computeCostDev?: number
   storageCostProd?: number
   computeCostProd?: number
   afterPricingSelector?: React.ReactNode
+  afterPricingTable?: React.ReactNode
 }) {
   const router = useRouter()
   const [provider, setProvider] = useState(
@@ -244,11 +239,13 @@ function PricingOptions({
         )}
 
         {!selectorOnly ? (
-          <div className='center_content relative z-10 mx-auto mb-16 max-w-[344px]'>
-            <PricingSelector
-              regionList={regionList}
-              onChange={updateRegionParam}
-            />
+          <div className='mb-16'>
+            <div className='center_content relative z-10 mx-auto max-w-[344px]'>
+              <PricingSelector
+                regionList={regionList}
+                onChange={updateRegionParam}
+              />
+            </div>
             {afterPricingSelector}
           </div>
         ) : (
@@ -455,36 +452,10 @@ function PricingOptions({
                 ))}
               </div>
             )}
+            {afterPricingTable}
           </>
         )}
       </PricingContextProvider>
-      {!selectorOnly && meteredPricing && (
-        <>
-          <div className='pricing_footer_note mx-auto mt-8 max-w-screen-sm text-center'>
-            <Markdown
-              className={`${styles.richTextLink} ${
-                provider === 'gcp' ? styles.gcpTextLink : ''
-              }`}>
-              {meteredPricing.footerNote}
-            </Markdown>
-          </div>
-          <div className='flex items-center justify-center gap-2 pt-6'>
-            <SuiText size='sm' color='secondary' className='text-center'>
-              Learn more about our partnerships with{' '}
-              <CUILink href='/partners/aws' className='text-primary-300'>
-                AWS
-              </CUILink>{' '}
-              and{' '}
-              <CUILink
-                href='/blog/clickhouse-cloud-on-google-cloud-platform-gcp-is-generally-available'
-                className='text-primary-300'>
-                GCP
-              </CUILink>
-              .
-            </SuiText>
-          </div>
-        </>
-      )}
     </div>
   )
 }
