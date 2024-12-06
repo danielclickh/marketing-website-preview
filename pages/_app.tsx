@@ -100,7 +100,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <UTMPersist />
         </GrowthBookProvider>
         {/* GTM - Prod/Env environments */}
-        {is_prod && router.pathname !== '/marketo-forms/[id]' && (
+        {router.pathname !== '/marketo-forms/[id]' && (
           <>
             <Script
               id='gtm-gtag'
