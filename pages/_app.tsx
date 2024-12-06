@@ -103,10 +103,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         {is_prod && router.pathname !== '/marketo-forms/[id]' && (
           <>
             <Script
+              id='gtm-gtag'
               async
               src={`https://www.googletagmanager.com/gtag/js?id=${gtmId}`}
             />
             <Script
+              id='gtm-init'
               dangerouslySetInnerHTML={{
                 __html: `
                 window.dataLayer = window.dataLayer || [];
