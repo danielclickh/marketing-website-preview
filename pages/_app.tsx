@@ -100,32 +100,21 @@ function MyApp({ Component, pageProps }: AppProps) {
           <UTMPersist />
         </GrowthBookProvider>
         {/* GTM - Prod/Env environments */}
-        {router.pathname !== '/marketo-forms/[id]' && (
+        {is_prod && router.pathname !== '/marketo-forms/[id]' && (
           <>
-            {is_prod ? (
-              // THIS IS PRODUCTION
-              <Script id='google-tag-manager' strategy='lazyOnload'>
-                {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl+ '&gtm_auth=BzKh0v8t1wje2QxxRxIGzA';f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer', '${gtmId}');
-          `}
-              </Script>
-            ) : (
-              // THIS IS DEV/LOCAL
-              <Script id='google-tag-manager' strategy='lazyOnload'>
-                {`
-            <!-- Google Tag Manager -->
-           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl+ '&gtm_auth=BzKh0v8t1wje2QxxRxIGzA&gtm_preview=env-74&gtm_cookies_win=x';f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${gtmId}');
-          `}
-              </Script>
-            )}
+            <Script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${gtmId}`}
+            />
+            <Script
+              dangerouslySetInnerHTML={{
+                __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gtmId}');`
+              }}
+            />
             <Script
               id='stripmkttok-script'
               src='https://discover.clickhouse.com/js/stripmkttok.js'
@@ -133,25 +122,22 @@ function MyApp({ Component, pageProps }: AppProps) {
               async
             />
             {/* Securiti.ai Cookie Banner - first is produciton mode, second is dev */}
-            {is_prod && (
-              // THIS IS PRODUCTION
-              <Script
-                defer
-                data-strict-csp
-                data-skip-css='false'
-                src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader-strict-csp.js'
-                data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
-                data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
-                data-backend-url='https://app.securiti.ai'
-                onReady={() => {
-                  const cookieSettingsButton = document.querySelector(
-                    '#cookie-settings-button'
-                  )
-                  cookieSettingsButton?.classList.remove('hidden')
-                  cookieSettingsButton?.classList.add('cmp-revoke-consent')
-                }}
-              />
-            )}
+            <Script
+              defer
+              data-strict-csp
+              data-skip-css='false'
+              src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader-strict-csp.js'
+              data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
+              data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
+              data-backend-url='https://app.securiti.ai'
+              onReady={() => {
+                const cookieSettingsButton = document.querySelector(
+                  '#cookie-settings-button'
+                )
+                cookieSettingsButton?.classList.remove('hidden')
+                cookieSettingsButton?.classList.add('cmp-revoke-consent')
+              }}
+            />
           </>
         )}
       </ClickUIProvider>
