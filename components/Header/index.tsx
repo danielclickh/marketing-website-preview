@@ -17,10 +17,10 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    `Visit us this week at re:Invent, booth 1737, and see what we’ll be announcing!`
+    `Join our San Francisco meetup on Dec 12 to hear from our CTO Alexey Milovidov!`
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/blog/reinvent-2024-product-announcements?loc=eyebrow'
+    'https://www.meetup.com/clickhouse-silicon-valley-meetup-group/events/304286951?loc=eyebrow'
   )
 
   const resizeHandler = () => {
