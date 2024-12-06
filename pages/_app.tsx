@@ -1,20 +1,19 @@
+import { ClickUIProvider, ThemeName } from '@clickhouse/click-ui'
+import { GrowthBook, GrowthBookProvider } from '@growthbook/growthbook-react'
+import { AppProps } from 'next/app'
+import { Inconsolata, Inter } from 'next/font/google'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import Script from 'next/script'
+import { useEffect, useState } from 'react'
+import { SnackbarContextProvider } from '../components/sui'
+import UTMPersist, { onExperimentViewed } from '../components/UTMPersist'
+import { useInitGalaxy } from '../lib/galaxy/galaxy'
+import { Galaxy } from '../lib/galaxy/web/browser'
 import '../styles/globals.scss'
 import '../styles/highlightjs.scss'
 import '../styles/securiti-cookie-banner.scss'
 import '../styles/securiti-overrides.scss'
-import React, { useEffect, useState } from 'react'
-import { Inconsolata, Inter } from 'next/font/google'
-import { SnackbarContextProvider } from '../components/sui'
-import { AppProps } from 'next/app'
-import Script from 'next/script'
-import UTMPersist, { onExperimentViewed } from '../components/UTMPersist'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useInitGalaxy } from '../lib/galaxy/galaxy'
-import { GrowthBook, GrowthBookProvider } from '@growthbook/growthbook-react'
-import { Galaxy } from '../lib/galaxy/web/browser'
-import { Switch, Text, ThemeName, ClickUIProvider, Title } from '@clickhouse/click-ui'
-
 
 const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K'
 const websiteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL
@@ -82,42 +81,42 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-    <ClickUIProvider theme={theme}>
-      <Head>
-        <base href='/' />
-        <meta content='width=device-width, initial-scale=1' name='viewport' />
-        <link href='favicon.ico' rel='icon' type='image/x-icon' />
-      </Head>
-      <GrowthBookProvider growthbook={gb}>
-        <main
-          id='main-site-container'
-          className={`${inter.variable} font-inter ${inconsolata.variable}`}>
-          <SnackbarContextProvider>
-            <div className='flex min-h-screen flex-col'>
-              <Component {...pageProps} />
-            </div>
-          </SnackbarContextProvider>
-        </main>
-        <UTMPersist />
-      </GrowthBookProvider>
-      {/* GTM - Prod/Env environments */}
-      {router.pathname !== '/marketo-forms/[id]' && (
-        <>
-          {is_prod ? (
-            // THIS IS PRODUCTION
-            <Script id='google-tag-manager' strategy='lazyOnload'>
-              {`
+      <ClickUIProvider theme={theme}>
+        <Head>
+          <base href='/' />
+          <meta content='width=device-width, initial-scale=1' name='viewport' />
+          <link href='favicon.ico' rel='icon' type='image/x-icon' />
+        </Head>
+        <GrowthBookProvider growthbook={gb}>
+          <main
+            id='main-site-container'
+            className={`${inter.variable} font-inter ${inconsolata.variable}`}>
+            <SnackbarContextProvider>
+              <div className='flex min-h-screen flex-col'>
+                <Component {...pageProps} />
+              </div>
+            </SnackbarContextProvider>
+          </main>
+          <UTMPersist />
+        </GrowthBookProvider>
+        {/* GTM - Prod/Env environments */}
+        {router.pathname !== '/marketo-forms/[id]' && (
+          <>
+            {is_prod ? (
+              // THIS IS PRODUCTION
+              <Script id='google-tag-manager' strategy='lazyOnload'>
+                {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl+ '&gtm_auth=BzKh0v8t1wje2QxxRxIGzA';f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer', '${gtmId}');
           `}
-            </Script>
-          ) : (
-            // THIS IS DEV/LOCAL
-            <Script id='google-tag-manager' strategy='lazyOnload'>
-              {`
+              </Script>
+            ) : (
+              // THIS IS DEV/LOCAL
+              <Script id='google-tag-manager' strategy='lazyOnload'>
+                {`
             <!-- Google Tag Manager -->
            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -125,37 +124,37 @@ function MyApp({ Component, pageProps }: AppProps) {
             'https://www.googletagmanager.com/gtm.js?id='+i+dl+ '&gtm_auth=BzKh0v8t1wje2QxxRxIGzA&gtm_preview=env-74&gtm_cookies_win=x';f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','${gtmId}');
           `}
-            </Script>
-          )}
-          <Script
-            id='stripmkttok-script'
-            src='https://discover.clickhouse.com/js/stripmkttok.js'
-            type='text/javascript'
-            async
-          />
-          {/* Securiti.ai Cookie Banner - first is produciton mode, second is dev */}
-          {is_prod && (
-            // THIS IS PRODUCTION
+              </Script>
+            )}
             <Script
-              defer
-              data-strict-csp
-              data-skip-css='false'
-              src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader-strict-csp.js'
-              data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
-              data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
-              data-backend-url='https://app.securiti.ai'
-              onReady={() => {
-                const cookieSettingsButton = document.querySelector(
-                  '#cookie-settings-button'
-                )
-                cookieSettingsButton?.classList.remove('hidden')
-                cookieSettingsButton?.classList.add('cmp-revoke-consent')
-              }}
+              id='stripmkttok-script'
+              src='https://discover.clickhouse.com/js/stripmkttok.js'
+              type='text/javascript'
+              async
             />
-          )}
-        </>
-      )}
-    </ClickUIProvider>
+            {/* Securiti.ai Cookie Banner - first is produciton mode, second is dev */}
+            {is_prod && (
+              // THIS IS PRODUCTION
+              <Script
+                defer
+                data-strict-csp
+                data-skip-css='false'
+                src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader-strict-csp.js'
+                data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
+                data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
+                data-backend-url='https://app.securiti.ai'
+                onReady={() => {
+                  const cookieSettingsButton = document.querySelector(
+                    '#cookie-settings-button'
+                  )
+                  cookieSettingsButton?.classList.remove('hidden')
+                  cookieSettingsButton?.classList.add('cmp-revoke-consent')
+                }}
+              />
+            )}
+          </>
+        )}
+      </ClickUIProvider>
     </>
   )
 }
