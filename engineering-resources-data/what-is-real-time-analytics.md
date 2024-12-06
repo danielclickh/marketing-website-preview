@@ -80,7 +80,7 @@ They identified the following characteristics of ClickHouse that enable real-tim
 
 > ClickHouse is designed and optimized explicitly for analytical queries. This fits perfectly with the needs of applications where data is continuously analyzed for patterns that might indicate fraud.
 
-Learn more about how Instacart use ClickHouse for the [fraud detection use case](https://clickhouse.com/videos/real-time-fraud-detection-with-yoda-and-clickhouse) in the video recording and [blog post](https://tech.instacart.com/real-time-fraud-detection-with-yoda-and-clickhouse-bd08e9dbe3f4).
+➡️ Learn more about how Instacart use ClickHouse for the [fraud detection use case](https://clickhouse.com/videos/real-time-fraud-detection-with-yoda-and-clickhouse) in the video recording and [blog post](https://tech.instacart.com/real-time-fraud-detection-with-yoda-and-clickhouse-bd08e9dbe3f4).
 
 ### Time-sensitive decision making
 
@@ -92,7 +92,7 @@ Coinhall provides its users with real-time insights into price movements over ti
 
 > In terms of performance, ClickHouse was the clear winner, executing candlestick queries in 20 milliseconds, compared to 400 milliseconds or more for the other databases. It ran latest-price queries in 8 milliseconds, outpacing the next-best performance (SingleStore) which came in at 45 milliseconds. Finally, it handled ASOF JOIN queries in 50 milliseconds, while Snowflake took 20 minutes and Rockset timed out.
 
-Learn more about how Coinhall uses ClickHouse for the [time-sensitive decision making use case](https://clickhouse.com/blog/trade-secrets-how-coinhall-uses-clickhouse-to-power-its-blockchain-data-platform).
+➡️ Learn more about how Coinhall uses ClickHouse for the [time-sensitive decision making use case](https://clickhouse.com/blog/trade-secrets-how-coinhall-uses-clickhouse-to-power-its-blockchain-data-platform).
 
 ### Observability
 
@@ -106,7 +106,7 @@ When working with LLM applications, there are invariably many moving pieces with
 
 > We wanted something that was architecturally simple to deploy and didn’t make our infrastructure more complicated. We looked at Druid and Pinot, but these required dedicated services for ingestion, connected to queuing services such as Kafka, rather than simply accepting INSERT statements. We were keen to avoid this architectural complexity,
 
-Learn more about how LangChain uses ClickHouse for the [observability user case](https://clickhouse.com/blog/langchain-why-we-choose-clickhouse-to-power-langchain).
+➡️ Learn more about how LangChain uses ClickHouse for the [observability user case](https://clickhouse.com/blog/langchain-why-we-choose-clickhouse-to-power-langchain).
 
 There are also many other use cases, including:
 
