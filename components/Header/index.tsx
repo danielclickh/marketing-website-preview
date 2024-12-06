@@ -17,7 +17,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    `Join our San Francisco meetup on Dec 12 to hear from our CTO Alexey Milovidov!`
+    `Join us for our San Francisco meetup on Dec. 12 to hear from our CTO, Alexey Milovidov!`
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
     'https://www.meetup.com/clickhouse-silicon-valley-meetup-group/events/304286951?loc=eyebrow'
