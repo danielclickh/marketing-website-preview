@@ -1,21 +1,22 @@
+import { ArrowDownIcon, ChevronRightIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import React, { useRef, useState } from 'react'
+import Link from 'next/link'
+import { useRef, useState } from 'react'
+import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
+import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
 import MarketoForm from '../../../components/MarketoForm'
 import QuoteCard from '../../../components/QuoteCard'
-import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import faqs from '../../use-cases/real-time-analytics/faqs.json'
 import { SuiTitle } from '../../../components/sui'
 import { findOne } from '../../../lib/api/strapi'
+import { useGalaxyOnClick, useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ContactProps } from '../../../types/contact'
-import LogoCarousel from '../../../components/LogoCarousel'
-import { useGalaxyOnPage, useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
-import { ArrowDownIcon, ChevronRightIcon } from '@heroicons/react/outline'
-import { CUIButton } from '../../../components/ClickUI'
+import faqs from '../../use-cases/real-time-analytics/faqs.json'
 
 interface DriftAPI {
   startInteraction: (options: { interactionId: number }) => void
@@ -160,12 +161,13 @@ export default function Page({
                   </div>
                   <p className='mt-8 text-sm'>
                     Read our guide about{' '}
-                    <a
+                    <Link
                       target='_blank'
                       className='text-primary-300'
-                      href='https://clickhouse.com/docs/en/migrations/rockset?loc=comparions'>
+                      href='https://clickhouse.com/docs/en/migrations/rockset?loc=comparions'
+                      prefetch={false}>
                       how to migrate from Rockset to ClickHouse
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>

@@ -1,19 +1,16 @@
-import React from 'react'
 import { GetStaticProps } from 'next'
-import Link from 'next/link'
-import { CUICard } from '../../components/ClickUI'
+import React from 'react'
 import DemoCard from '../../components/DemoCard'
 import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'
 import Markdown from '../../components/Markdown'
 import { SuiTitle } from '../../components/sui'
 import { findAll, findOne } from '../../lib/api/strapi'
-import { StrapiImage } from '../../components/StrapiElements'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
-import { CommonProps } from '../../types/homepage'
 import { Demo } from '../../types/demos'
+import { CommonProps } from '../../types/homepage'
 
 interface DemosPageProps extends CommonProps {
   title: null | string

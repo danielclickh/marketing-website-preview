@@ -1,5 +1,5 @@
-import * as Tooltip from '@radix-ui/react-tooltip'
 import { InformationCircleIcon } from '@heroicons/react/outline'
+import * as Tooltip from '@radix-ui/react-tooltip'
 
 const TooltipInfo = ({ content }: { content: string }) => {
   return (

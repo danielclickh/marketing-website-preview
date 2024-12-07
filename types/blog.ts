@@ -1,6 +1,5 @@
-import { SeoMetadata } from '../lib/api/strapi/types'
-import { CommonProps, NewsLetterData } from './homepage'
 import { BlogPost } from './blogs'
+import { CommonProps, NewsLetterData } from './homepage'
 
 export interface BlogProps extends BlogPost, CommonProps {
   content: string
@@ -10,4 +9,6 @@ export interface BlogProps extends BlogPost, CommonProps {
   ShowCloudCTAFooter: boolean | null
   CloudCTAFooter: string
   CloudCTAHeader: string
+  reading_time: number
+  table_contents_headers: string
 }

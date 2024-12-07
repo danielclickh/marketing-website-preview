@@ -1,6 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import React from 'react'
 import Link from 'next/link'
+import React from 'react'
 import GetStartedFree from '../../../components/GetStartedFree'
 import IntegrationPill from '../../../components/IntegrationPill'
 import IntegrationTile from '../../../components/IntegrationTile'
@@ -11,6 +11,7 @@ import { StrapiImage } from '../../../components/StrapiElements'
 import { SuiTitle } from '../../../components/sui'
 import { findAll, getPathsValues } from '../../../lib/api/strapi'
 import { SeoMetadata, StrapiImageType } from '../../../lib/api/strapi/types'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import {
   NOT_FOUND_FALLBACK,
@@ -18,7 +19,6 @@ import {
 } from '../../../lib/utils/revalidationConfig'
 import { CommonProps, ParamsType } from '../../../types/homepage'
 import { Integration } from '../../../types/integrations'
-import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 
 interface IntegrationPageProps extends CommonProps {
   seo?: SeoMetadata

@@ -1,10 +1,10 @@
-import { SuiTitle, SuiText } from '../sui'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
-import HRSeparator from '../HRSeparator'
-import ArrowsDown from './arrowsDown'
 import { CUICard, CUILink } from '../ClickUI'
-import { ChevronRightIcon } from '@heroicons/react/solid'
+import HRSeparator from '../HRSeparator'
+import { SuiText, SuiTitle } from '../sui'
+import ArrowsDown from './arrowsDown'
 
 export default function SupportProgram(props: any) {
   return (

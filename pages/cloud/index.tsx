@@ -1,26 +1,26 @@
+import { ChevronRightIcon } from '@heroicons/react/solid'
+import { useInView } from 'framer-motion'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import AnimatedIntegrationLogos from '../../components/AnimatedIntegrationLogos'
-import { SuiText, SuiTitle } from '../../components/sui'
-import CloudProviders from '../../components/CloudProviders'
-import { findOne } from '../../lib/api/strapi'
 import BulletPoint from '../../components/BulletPoint'
-import { CloudData } from '../../types/cloud'
-import { GetStaticProps } from 'next'
-import Layout from '../../components/Layout'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { CUIButton, CUICard } from '../../components/ClickUI'
-import Image from 'next/image'
-import HRSeparator from '../../components/HRSeparator'
-import features from './features.json'
-import featureBlocks from './feature_blocks.json'
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import GetStartedFree from '../../components/GetStartedFree'
-import LogoCarousel from '../../components/LogoCarousel'
-import Link from 'next/link'
-import { motion, useInView } from 'framer-motion'
-import Lines from '../../components/ClickPipesAnimation/Lines'
-import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { BYOCSection } from '../../components/BYOCSection'
+import Lines from '../../components/ClickPipesAnimation/Lines'
+import { CUIButton, CUICard } from '../../components/ClickUI'
+import CloudProviders from '../../components/CloudProviders'
+import GetStartedFree from '../../components/GetStartedFree'
+import HRSeparator from '../../components/HRSeparator'
+import Layout from '../../components/Layout'
+import LogoCarousel from '../../components/LogoCarousel'
+import { SuiText, SuiTitle } from '../../components/sui'
+import { findOne } from '../../lib/api/strapi'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../lib/utils/getCommonProps'
+import { CloudData } from '../../types/cloud'
+import featureBlocks from './feature_blocks.json'
+import features from './features.json'
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -257,11 +257,13 @@ export default function CloudPage({
                 data visualization, and language clients. Now with support for
                 the MySQL interface so you can connect to any of your favorite
                 MySQL-compatible{' '}
-                <a
+                <Link
                   href='https://clickhouse.com/docs/en/integrations/data-visualization'
-                  className='text-primary-300'>
+                  className='text-primary-300'
+                  prefetch={false}
+                  target='_blank'>
                   data tools
-                </a>
+                </Link>
                 .
               </div>
 

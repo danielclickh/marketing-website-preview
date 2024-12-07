@@ -1,5 +1,5 @@
-import { StrapiImageProps } from './types'
 import Markdown from '../Markdown'
+import { StrapiImageProps } from './types'
 
 const strapiApiUrl =
   process.env.STRAPI_API_URL ?? 'https://cms.clickhouse.com:1337'

@@ -16,7 +16,7 @@ export function SuiImage(props: ImageProps) {
         alt={alt}
         width={width}
         height={height}
-        className='shadow-lg rounded-lg max-w-xl'
+        className='max-w-xl rounded-lg shadow-lg'
       />
     </>
   )

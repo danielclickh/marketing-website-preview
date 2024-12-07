@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
-import TooltipInfo from '../Tooltip/tooltip'
-
 import { ToggleButtonsProps } from '../../CalculatorTypesOptions'
+import TooltipInfo from '../Tooltip/tooltip'
 
 export function ToggleButtons<T extends string = string>({
   options,

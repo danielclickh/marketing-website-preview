@@ -1,9 +1,12 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import ByocPricingCard from '../../components/ByocPricingCard'
 import { CUIButton } from '../../components/ClickUI'
 import Layout from '../../components/Layout'
+import LinkWithArrow from '../../components/LinkWithArrow'
 import Markdown from '../../components/Markdown'
 import MarketoForm from '../../components/MarketoForm'
 import Modal from '../../components/Modal'
@@ -11,6 +14,7 @@ import { PricingCalculator } from '../../components/PricingCalculator'
 import { SuiText, SuiTitle } from '../../components/sui'
 import { useClickOutside } from '../../hooks'
 import { findAll, findOne } from '../../lib/api/strapi'
+import { useGalaxyOnClick, useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import {
   PricingData,
@@ -19,9 +23,6 @@ import {
   RegionPricing
 } from '../../types/pricing'
 import philosophy from './philosophy.json'
-import { useGalaxyOnClick, useGalaxyOnPage } from '../../lib/galaxy/galaxy'
-import Link from 'next/link'
-import { BYOCSection } from '../../components/BYOCSection'
 
 export const getStaticProps: GetStaticProps<PricingPageProps> =
   async function getStaticProps() {
@@ -88,7 +89,7 @@ export const getStaticProps: GetStaticProps<PricingPageProps> =
     }
   }
 
-function PricingPage({
+export default function PricingPage({
   hero,
   contactSection,
   meteredPricing,
@@ -100,30 +101,6 @@ function PricingPage({
   footerData
 }: PricingPageProps) {
   useGalaxyOnPage('pricingPage')
-  const handleRegionRequestClick = useGalaxyOnClick(
-    'pricingPage.regionRequest.requestRegionSelect'
-  )
-
-  //modal and form
-  const searchParams = useSearchParams()
-  const modalSearchParam = searchParams.get('modal')
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const modalInnerRef = useRef<HTMLDivElement | null>(null)
-  const modalFormSuccessRef = useRef<HTMLDivElement | null>(null)
-  const [modalFormSuccess, setModalFormSuccess] = useState(false)
-  const [modalFormLoaded, setModalFormLoaded] = useState(false)
-
-  // Open modal based on query param
-  useEffect(() => {
-    if (modalSearchParam === 'open') {
-      setIsModalOpen(true)
-    }
-  }, [modalSearchParam])
-
-  useClickOutside(modalInnerRef, () => {
-    setIsModalOpen(false)
-  })
-
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pricing h-full text-neutral-0'>
@@ -146,23 +123,34 @@ function PricingPage({
             <div className='mx-auto max-w-7xl px-4 sm:px-8 xl:px-0'>
               {pricingByRegion.length > 0 && (
                 <PricingCalculator
-                  hero={hero}
-                  meteredPricing={meteredPricing}
                   pricingByRegion={pricingByRegion}
                   cloudProviders={cloudProviders}
                   pricingPlans={pricingPlans}
-                  afterPricingSelector={
-                    <p className='mt-4 text-center text-sm'>
-                      Can't find your region?{' '}
-                      <span
-                        className='text-primary-300 hover:cursor-pointer'
-                        onClick={() => {
-                          setIsModalOpen(true)
-                          handleRegionRequestClick()
-                        }}>
-                        Request it
-                      </span>
-                    </p>
+                  afterPricingSelector={<RegionRequest />}
+                  afterPricingTable={
+                    <>
+                      <ByocPricingCard />
+                      <div className='mt-12 space-y-6 text-center'>
+                        <SuiText size='sm'>
+                          Or download the forever-free{' '}
+                          <LinkWithArrow
+                            href='https://clickhouse.com/docs/en/quick-start'
+                            className='text-primary-300 underline'>
+                            open source distribution of ClickHouse
+                          </LinkWithArrow>
+                        </SuiText>
+                        <SuiText size='sm'>
+                          For more information about our billing and pricing
+                          please refer to our{' '}
+                          <Link
+                            href='https://clickhouse.com/docs/en/manage/billing/#faqs'
+                            className='text-primary-300 underline'>
+                            Billing & Pricing FAQ
+                          </Link>
+                          .
+                        </SuiText>
+                      </div>
+                    </>
                   }
                 />
               )}
@@ -202,8 +190,6 @@ function PricingPage({
           </div>
         </div>
 
-        <BYOCSection loc='pricing-page-component' />
-
         {contactSection && (
           <div className='section-container bg-shadow-element mb-24 mt-20 max-w-[1115px]'>
             <div className='relative mx-auto flex w-full flex-col items-center gap-x-4 rounded-xl border border-neutral-725/80 bg-neutral-750/50 px-4 py-10 text-neutral-0 md:py-16'>
@@ -221,6 +207,48 @@ function PricingPage({
           </div>
         )}
       </div>
+    </Layout>
+  )
+}
+
+function RegionRequest() {
+  //modal and form
+  const searchParams = useSearchParams()
+  const modalSearchParam = searchParams.get('modal')
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const modalInnerRef = useRef<HTMLDivElement | null>(null)
+  const modalFormSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [modalFormSuccess, setModalFormSuccess] = useState(false)
+  const [modalFormLoaded, setModalFormLoaded] = useState(false)
+
+  // Open modal based on query param
+  useEffect(() => {
+    if (modalSearchParam === 'open') {
+      setIsModalOpen(true)
+    }
+  }, [modalSearchParam])
+
+  useClickOutside(modalInnerRef, () => {
+    setIsModalOpen(false)
+  })
+
+  const handleRegionRequestClick = useGalaxyOnClick(
+    'pricingPage.regionRequest.requestRegionSelect'
+  )
+
+  return (
+    <>
+      <p className='mt-4 text-center text-sm'>
+        Can't find your region?{' '}
+        <span
+          className='text-primary-300 hover:cursor-pointer'
+          onClick={() => {
+            setIsModalOpen(true)
+            handleRegionRequestClick()
+          }}>
+          Request it
+        </span>
+      </p>
 
       <Modal
         isOpen={isModalOpen}
@@ -268,8 +296,6 @@ function PricingPage({
           </div>
         )}
       </Modal>
-    </Layout>
+    </>
   )
 }
-
-export default PricingPage

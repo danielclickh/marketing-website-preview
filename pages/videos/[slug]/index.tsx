@@ -4,6 +4,7 @@ import React from 'react'
 import FollowUs from '../../../components/FollowUs'
 import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'
+import ResponsiveEmbed from '../../../components/ResponsiveEmbed'
 import { SuiButton, SuiTitle } from '../../../components/sui'
 import VideoCard from '../../../components/VideoCard'
 import { findAll } from '../../../lib/api/strapi'
@@ -11,8 +12,7 @@ import { SeoMetadata } from '../../../lib/api/strapi/types'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { slugify } from '../../../lib/utils/strings'
 import { ParamsType } from '../../../types/homepage'
-import ResponsiveEmbed from '../../../components/ResponsiveEmbed'
-import { Video, VideosInnerPageProps } from '../../../types/videos'
+import { Video } from '../../../types/videos'
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { slug } = context.params as ParamsType
@@ -179,7 +179,7 @@ export default function VideoPage({
         </div>
       </div>
 
-      <div className='container mx-auto mt-20 mb-10 max-w-4xl px-6 2xl:px-0'>
+      <div className='container mx-auto mb-10 mt-20 max-w-4xl px-6 2xl:px-0'>
         <ResponsiveEmbed>
           <iframe
             src={`https://www.youtube-nocookie.com/embed/${video.VideoID}?rel=0&autoplay=1`}
@@ -189,7 +189,7 @@ export default function VideoPage({
         </ResponsiveEmbed>
       </div>
 
-      <div className='container mx-auto mt-10 mb-20 max-w-3xl px-6 2xl:px-0'>
+      <div className='container mx-auto mb-20 mt-10 max-w-3xl px-6 2xl:px-0'>
         <div className='mb-10 grid w-full grid-cols-1 gap-8 md:grid-cols-2'>
           {prevVideo && (
             <div>
@@ -269,7 +269,7 @@ export default function VideoPage({
 
       {!!relatedVideos.length && (
         <div className='my-20 flex w-full pb-8 text-neutral-0'>
-          <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pt-12 pb-8 md:bg-no-repeat 2xl:px-0'>
+          <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pb-8 pt-12 md:bg-no-repeat 2xl:px-0'>
             <div className='flex justify-between pb-8'>
               <SuiTitle
                 type='h2'

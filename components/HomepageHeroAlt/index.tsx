@@ -1,8 +1,8 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 import { CUIButton } from '../ClickUI'
 import CycleText from '../CycleText'
+import LogoAnnouncementLink from '../LogoAnnouncementLink'
 import { SuiText, SuiTitle } from '../sui'
 import styles from './styles.module.scss'
 
@@ -62,11 +62,27 @@ export default function HomepageHeroAlt({
                 size='lg'
                 href='https://clickhouse.com/docs/en/getting-started/quick-start'
                 target='_blank'
+                prefetch={false}
                 linkClass='w-full'
                 className='w-full !border-black !text-black !transition-all hover:!text-white'>
                 Download open-source
               </CUIButton>
             </div>
+            <LogoAnnouncementLink
+              className='mt-8 font-semibold'
+              href='/cloud/clickpipes/postgres-cdc-connector?loc=homepage-hero'
+              logo={{
+                src: '/images/cloud/integrations/postgres.svg',
+                alt: 'Postgres',
+                width: 48,
+                height: 49
+              }}>
+              Blazing-fast Postgres to ClickHouse CDC with our new ClickPipe
+              connector — now in Private Preview. Learn&nbsp;more{' '}
+              <span className='inline-block pl-0.5 transition group-hover:translate-x-1/2'>
+                {'->'}
+              </span>
+            </LogoAnnouncementLink>
           </div>
         </div>
 

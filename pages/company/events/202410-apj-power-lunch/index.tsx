@@ -1,18 +1,16 @@
 import { GetStaticProps } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
 import EventPost from '../../../../components/EventPostList/EventPost'
-import EventsContainerMarketo from '../../../../components/EventsContainer-Marketo'
 import Layout from '../../../../components/Layout'
 import Markdown from '../../../../components/Markdown'
-import { StrapiImage } from '../../../../components/StrapiElements'
+import MarketoForm from '../../../../components/MarketoForm'
 import { SuiText, SuiTitle } from '../../../../components/sui'
 import { findAll } from '../../../../lib/api/strapi'
 import { getCommonProps } from '../../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../../lib/utils/revalidationConfig'
 import { EventProps, EventType } from '../../../../types/events'
-import MarketoForm from '../../../../components/MarketoForm'
-import Image from 'next/image'
 
 export const getStaticProps: GetStaticProps<EventProps> =
   async function getStaticProps() {

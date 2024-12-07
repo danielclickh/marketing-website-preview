@@ -34,7 +34,7 @@ export default function NotFoundPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='grid h-screen items-center overflow-hidden'>
-        <div className='md:border-c4/10 mx-auto flex max-w-screen-sm flex-col divide-y-2 bg-neutral-900 px-8 py-10 md:flex-row md:divide-x-2 md:divide-y-0 md:border md:px-10'>
+        <div className='mx-auto flex max-w-screen-sm flex-col divide-y-2 bg-neutral-900 px-8 py-10 md:flex-row md:divide-x-2 md:divide-y-0 md:border md:border-c4/10 md:px-10'>
           <div className='flex flex-col items-start pb-10 md:pb-0'>
             <p className='text-bold mb-4 text-left text-2xl text-neutral-100'>
               Oops! We can&apos;t find this page...

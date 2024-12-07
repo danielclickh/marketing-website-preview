@@ -1,4 +1,3 @@
-import { CheckCircleIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import React, { ReactNode } from 'react'
 import { SuiText } from '../sui/client'

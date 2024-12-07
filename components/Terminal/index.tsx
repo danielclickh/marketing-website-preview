@@ -19,7 +19,7 @@ function Terminal({
   const currentStyle = { '--totalCount': totalCount, ...style }
   return (
     <div
-      className={`relative bg-neutral-900 rounded text-left ${className} text-neutral-0`}
+      className={`relative rounded bg-neutral-900 text-left ${className} text-neutral-0`}
       style={currentStyle}
       {...props}>
       {(showControls || title) && (
@@ -43,7 +43,7 @@ function Terminal({
           {title}
         </div>
       )}
-      <div className={`${type === 'terminal' ? 'px-4' : 'px-6'} pt-4 pb-8`}>
+      <div className={`${type === 'terminal' ? 'px-4' : 'px-6'} pb-8 pt-4`}>
         <span
           className={`${styles.terminalData} terminal-data`}
           data-type={type}>

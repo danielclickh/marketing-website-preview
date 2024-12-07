@@ -6,9 +6,9 @@ import Layout from '../../components/Layout'
 import { SuiSearchField, SuiTitle } from '../../components/sui'
 import { getEngineeringResources } from '../../lib/engineering-resources'
 import { EngineeringResource } from '../../lib/engineering-resources/types'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { CommonProps } from '../../types/homepage'
-import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 
 interface EngineeringResourcesProps extends CommonProps {
   engResourcesItems: EngineeringResource[]

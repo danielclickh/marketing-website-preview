@@ -1,30 +1,29 @@
-import { useEffect } from 'react';
-import { Galaxy } from './web/browser';
-import { GalaxyClient, FullyQualifiedEvent } from './client/index';
-import { useRouter } from 'next/router';
-import { add } from 'lodash';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { FullyQualifiedEvent, GalaxyClient } from './client/index'
+import { Galaxy } from './web/browser'
 
-type FetchOptions = Record<string, unknown>;
+type FetchOptions = Record<string, unknown>
 
 export interface HttpClient {
-  post(apiPath: string, bodyRequest: FetchOptions): Promise<Response>;
+  post(apiPath: string, bodyRequest: FetchOptions): Promise<Response>
 }
 export interface ErrorHandler {
-  captureException: (exception: unknown) => void;
+  captureException: (exception: unknown) => void
 }
 
 export type GalaxyOptions = {
-  httpClient: HttpClient;
-  errorHandler?: ErrorHandler;
-  replaceConsoleLog?: boolean;
-  application: string;
-  tags?: Array<string>;
-  apiHost: string;
-  getUserId: () => string | null;
-  getSessionId?: () => string;
-  getContext?: () => Record<string, unknown>;
-};
+  httpClient: HttpClient
+  errorHandler?: ErrorHandler
+  replaceConsoleLog?: boolean
+  application: string
+  tags?: Array<string>
+  apiHost: string
+  getUserId: () => string | null
+  getSessionId?: () => string
+  getContext?: () => Record<string, unknown>
+}
 
 declare global {
   interface Window {
@@ -36,32 +35,36 @@ export const useInitGalaxy = (): void => {
   useEffect(() => {
     const galaxyOptions: GalaxyOptions = {
       httpClient: {
-        post: async (url: string, requestBody: Record<string, unknown>): Promise<Response> => {
+        post: async (
+          url: string,
+          requestBody: Record<string, unknown>
+        ): Promise<Response> => {
           return fetch(url, {
             method: 'POST',
             body: JSON.stringify(requestBody)
-          });
+          })
         }
       },
       errorHandler: {
         captureException(exception: unknown): void {
-          console.error(exception);
+          console.error(exception)
         }
       },
       replaceConsoleLog: false,
       application: 'MARKETING_WEBSITE',
-      apiHost: process.env.NEXT_PUBLIC_GALAXY_API_ENDPOINT ?? 'http://localhost:3000',
+      apiHost:
+        process.env.NEXT_PUBLIC_GALAXY_API_ENDPOINT ?? 'http://localhost:3000',
       getUserId: () => null
-    };
+    }
 
-    const [galaxy, stopGalaxy] = Galaxy.init(galaxyOptions);
-    window.galaxy = galaxy;
+    const [galaxy, stopGalaxy] = Galaxy.init(galaxyOptions)
+    window.galaxy = galaxy
 
     return () => {
-      void stopGalaxy();
-    };
-  }, []);
-};
+      void stopGalaxy()
+    }
+  }, [])
+}
 
 /**
  * Instrument galaxy onLoad event for this page. Should be used on page components.
@@ -69,25 +72,25 @@ export const useInitGalaxy = (): void => {
  * @param event name of the load event sent to galaxy
  */
 export const useGalaxyOnLoad = (event: FullyQualifiedEvent): void => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
-  const searchParamsStr = searchParams.toString();
+  const searchParamsStr = searchParams.toString()
 
   const loadListener = (): void => {
     if (window.galaxy) {
-      window.galaxy.track(event, { interaction: 'trigger' });
+      window.galaxy.track(event, { interaction: 'trigger' })
     } else {
-      setTimeout(loadListener, 500);
+      setTimeout(loadListener, 500)
     }
   }
 
   useEffect(() => {
     if (router.isReady) {
-      loadListener();
+      loadListener()
     }
-  }, [router.pathname, searchParamsStr, router.isReady]);
-};
+  }, [router.pathname, searchParamsStr, router.isReady])
+}
 
 /**
  * Instrument galaxy onFocus event for this page. Should be used on page components.
@@ -95,18 +98,21 @@ export const useGalaxyOnLoad = (event: FullyQualifiedEvent): void => {
  * @param event name of the focus event sent to galaxy
  * @param depsArray used to trigger a rerender of the component that will re-run the useEffect
  */
-export const useGalaxyOnFocus = (event: FullyQualifiedEvent, depsArray: Array<unknown>): void => {
+export const useGalaxyOnFocus = (
+  event: FullyQualifiedEvent,
+  depsArray: Array<unknown>
+): void => {
   const listener = (): void => {
-    window.galaxy.track(event, { interaction: 'trigger' });
+    window.galaxy.track(event, { interaction: 'trigger' })
   }
 
   useEffect(() => {
-    window.addEventListener('focus', listener);
+    window.addEventListener('focus', listener)
     return () => {
-      window.removeEventListener('focus', listener);
-    };
+      window.removeEventListener('focus', listener)
+    }
   }, depsArray)
-};
+}
 
 /**
  * Instrument galaxy onBlur event for this page. Should be used on page components.
@@ -114,18 +120,21 @@ export const useGalaxyOnFocus = (event: FullyQualifiedEvent, depsArray: Array<un
  * @param event name of the blur events sent to galaxy
  * @param depsArray used to trigger a rerender of the component that will re-run the useEffect
  */
-export const useGalaxyOnBlur = (event: FullyQualifiedEvent, depsArray: Array<unknown>): void => {
+export const useGalaxyOnBlur = (
+  event: FullyQualifiedEvent,
+  depsArray: Array<unknown>
+): void => {
   const listener = (): void => {
-    window.galaxy.track(event, { interaction: 'trigger' });
+    window.galaxy.track(event, { interaction: 'trigger' })
   }
 
   useEffect(() => {
-    window.addEventListener('blur', listener);
+    window.addEventListener('blur', listener)
     return () => {
-      window.removeEventListener('blur', listener);
-    };
+      window.removeEventListener('blur', listener)
+    }
   }, depsArray)
-};
+}
 
 /**
  * Instrument galaxy for this page for load, blur and focus events.
@@ -134,15 +143,17 @@ export const useGalaxyOnBlur = (event: FullyQualifiedEvent, depsArray: Array<unk
  * @param depsArray used to trigger a rerender of the component that will re-run the useEffect
  *
  */
-export const useGalaxyOnPage = (prefix: string, depsArray: Array<unknown> = []): void => {
-  useGalaxyOnLoad(`${prefix}.window.load`);
-  useGalaxyOnBlur(`${prefix}.window.blur`, depsArray);
-  useGalaxyOnFocus(`${prefix}.window.focus`, depsArray);
+export const useGalaxyOnPage = (
+  prefix: string,
+  depsArray: Array<unknown> = []
+): void => {
+  useGalaxyOnLoad(`${prefix}.window.load`)
+  useGalaxyOnBlur(`${prefix}.window.blur`, depsArray)
+  useGalaxyOnFocus(`${prefix}.window.focus`, depsArray)
 }
 
-export const useGalaxyOnClick = (event: FullyQualifiedEvent): () => void => {
+export const useGalaxyOnClick = (event: FullyQualifiedEvent): (() => void) => {
   return () => {
-    window.galaxy.track(event, { interaction: 'click' });
-  };
+    window.galaxy.track(event, { interaction: 'click' })
+  }
 }
-

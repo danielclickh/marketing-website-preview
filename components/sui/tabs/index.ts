@@ -1,2 +1,2 @@
-export { SuiTabsPages } from './tabsPages'
 export { SuiTabs } from './tabs'
+export { SuiTabsPages } from './tabsPages'

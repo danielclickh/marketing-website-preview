@@ -18,20 +18,20 @@ export function Person(props: PersonProps) {
       className={`flex w-full flex-col items-center text-center md:max-w-xs ${className}`}>
       {avatar && (
         <div
-          className={`${small ? 'w-32 h-32' : 'w-40 h-40'} aspect-square mb-6`}>
+          className={`${small ? 'h-32 w-32' : 'h-40 w-40'} mb-6 aspect-square`}>
           <Image
             alt={name}
             src={avatar}
             width={small ? 130 : 160}
             height={small ? 130 : 160}
-            className='h-full object-cover object-center rounded-full'
+            className='h-full rounded-full object-cover object-center'
           />
         </div>
       )}
 
       <div
         className={`text-left ${
-          personType === 'founder' && 'border-l-primary-300 border-l-4 pl-4'
+          personType === 'founder' && 'border-l-4 border-l-primary-300 pl-4'
         }`}>
         <SuiText size='base' weight='bold' className='mb-1'>
           {name}

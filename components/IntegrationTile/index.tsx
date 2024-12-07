@@ -5,7 +5,6 @@ import { CUICard } from '../ClickUI'
 import { ExternalLink } from '../icons/ExternalLink'
 import IntegrationSupportPill from '../IntegrationPill'
 import { StrapiImage } from '../StrapiElements'
-import StrapiSvg from '../StrapiElements/StrapiSvg'
 import { SuiTitle } from '../sui'
 
 export default function IntegrationTile({

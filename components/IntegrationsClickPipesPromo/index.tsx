@@ -1,5 +1,7 @@
+import Image from 'next/image'
 import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import { CUIButton } from '../ClickUI'
+import LogoAnnouncementLink from '../LogoAnnouncementLink'
 import Amazonsimple from './logos/Amazonsimple'
 import Azureeventhub from './logos/Azureeventhub'
 import ConfluentCloud from './logos/ConfluentCloud'
@@ -8,7 +10,6 @@ import Kafka from './logos/Kafka'
 import KinesisAmazon from './logos/KinesisAmazon'
 import Managedkafka from './logos/Managedkafka'
 import Redpanda from './logos/Redpanda'
-import Upstash from './logos/Upstash'
 import Warpstream from './logos/Warpstream'
 
 export default function IntegrationsClickPipesPromo() {
@@ -42,13 +43,34 @@ export default function IntegrationsClickPipesPromo() {
             <Managedkafka className='w-full' />
             <ConfluentCloud className='w-full' />
             <Googlestorage className='w-full' />
-            <Redpanda className='w-full' />
+            <Image
+              src='/images/cloud/integrations/postgres.svg'
+              alt='Postgres'
+              width={64}
+              height={64}
+            />
             <Kafka className='w-full' />
-            <Upstash className='w-full' />
             <Azureeventhub className='w-full' />
+            <Redpanda className='w-full' />
             <Warpstream className='w-full' />
           </div>
         </div>
+        <LogoAnnouncementLink
+          mode='dark'
+          className='mt-8'
+          href='/cloud/clickpipes/postgres-cdc-connector?loc=integrations-promo'
+          logo={{
+            src: '/images/cloud/integrations/postgres.svg',
+            alt: 'Postgres',
+            width: 48,
+            height: 49
+          }}>
+          Blazing-fast Postgres to ClickHouse CDC with our new ClickPipe
+          connector — now in Private Preview.{' '}
+          <span className='text-primary-300 group-hover:underline'>
+            Learn&nbsp;more
+          </span>
+        </LogoAnnouncementLink>
       </div>
     </div>
   )

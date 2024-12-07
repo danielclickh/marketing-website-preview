@@ -1,5 +1,3 @@
-import { ReactNode } from 'react'
-import { StrapiImageProps } from '../components/StrapiElements/types'
 import { CommonProps } from './homepage'
 
 export interface VideoCategory {

@@ -1,5 +1,5 @@
-import { ReactElement } from 'react'
 import { Tab } from '@headlessui/react'
+import { ReactElement } from 'react'
 import { SuiText } from '../typography'
 import { colorCalculator } from '../typography/calculator'
 
@@ -27,9 +27,9 @@ export const SuiTabs = ({ ...TabProps }: TabProps) => {
   return (
     <Tab.Group>
       <Tab.List
-        className={`flex space-x-8 w-full pr-10 text-base ${
+        className={`flex w-full space-x-8 pr-10 text-base ${
           borderColor ? borderColor : 'border-c2'
-        } focus:outline-none sm:text-sm rounded-t-md border-b`}>
+        } rounded-t-md border-b focus:outline-none sm:text-sm`}>
         <nav className='-mb-px flex space-x-8' aria-label='Tabs'>
           {tabs.map((tab: any) => (
             <Tab
@@ -39,7 +39,7 @@ export const SuiTabs = ({ ...TabProps }: TabProps) => {
                   ? `border-c6 ${colorCalculator(
                       color ?? '',
                       'text-neutral-0'
-                    )} focus:outline-none whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`
+                    )} whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium focus:outline-none`
                   : `border-transparent ${colorCalculator(
                       activeColor ?? '',
                       'text-neutral-0'
@@ -48,7 +48,7 @@ export const SuiTabs = ({ ...TabProps }: TabProps) => {
                       'text-neutral-0'
                     )} hover:${
                       hoverBorderColor ? hoverBorderColor : 'border-c4/20'
-                    } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`
+                    } whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium`
               }>
               {tab.name}
             </Tab>

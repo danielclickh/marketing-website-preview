@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { StrapiImageType } from '../lib/api/strapi/types'
-import { CommonProps, NewsLetterData } from './homepage'
+import { CommonProps } from './homepage'
 
 export interface BlogPost {
   id: number

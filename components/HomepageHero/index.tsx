@@ -48,6 +48,8 @@ export default function HomepageHero({
                   weight='semibold'
                   size='lg'
                   href='https://clickhouse.com/docs/en/intro'
+                  target='_blank'
+                  prefetch={false}
                   linkClass='w-full max-w-[14rem]'
                   onClick={useGalaxyOnClick('homePage.hero.viewDocsSelect')}
                   className='w-full'>

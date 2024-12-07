@@ -1,9 +1,9 @@
 import { InformationCircleIcon } from '@heroicons/react/outline'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import React, { useRef, useState } from 'react'
-import { usePricing } from './PricingContext'
 import { calculateStorageCost } from '../../lib/m3ter/costs'
 import { calculateComputeMargin } from '../PricingCalculator/CalculatorTypesOptions'
+import { usePricing } from './PricingContext'
 function InfoTooltip({ content }: { content: string }) {
   const triggerRef = useRef(null)
   return (
@@ -58,7 +58,7 @@ function Info({ unit, content }: { unit: string; content: string }) {
             ? 'w-100 relative mt-2 shrink grow whitespace-normal rounded bg-neutral-700 p-2 lg:hidden'
             : 'hidden'
         }>
-        <div className='invisible absolute top-0 left-1/2 h-2 w-2 -translate-y-1/2 -translate-x-1/2 bg-inherit before:visible before:absolute before:h-2 before:w-2 before:rotate-45 before:bg-inherit before:content-[""]'></div>
+        <div className='invisible absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 bg-inherit before:visible before:absolute before:h-2 before:w-2 before:rotate-45 before:bg-inherit before:content-[""]'></div>
         {content}
       </div>
     </div>

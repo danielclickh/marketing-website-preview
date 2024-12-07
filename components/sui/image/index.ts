@@ -1,1 +1,1 @@
-export { SuiImage } from './image';
+export { SuiImage } from './image'

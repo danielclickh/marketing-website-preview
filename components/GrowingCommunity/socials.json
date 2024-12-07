@@ -16,8 +16,8 @@
   },
   {
     "name": "Twitter",
-    "href": "https://twitter.com/ClickhouseDB",
-    "imgSrc": "/socials/twitter.svg"
+    "href": "https://x.com/ClickhouseDB",
+    "imgSrc": "/socials/x.svg"
   },
   {
     "name": "YouTube",
@@ -33,6 +33,11 @@
     "name": "Telegram",
     "href": "https://telegram.me/clickhouse_en",
     "imgSrc": "/socials/telegram.svg"
+  },
+  {
+    "name": "Bluesky",
+    "href": "https://bsky.app/profile/clickhouse.comn",
+    "imgSrc": "/socials/bluesky.svg"
   },
   {
     "name": "Meetup",

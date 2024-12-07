@@ -1,10 +1,10 @@
+import { ChevronRightIcon } from '@heroicons/react/solid'
 import React, { ChangeEvent, useMemo, useState } from 'react'
 import useSWR from 'swr'
 import CategorySelector from '../CategorySelector'
-import { SuiSearchField, SuiText, SuiLink } from '../sui/client'
-import { JobType, PositionType } from './types'
-import { ChevronRightIcon } from '@heroicons/react/solid'
 import { CUIButton } from '../ClickUI'
+import { SuiLink, SuiSearchField, SuiText } from '../sui/client'
+import { JobType, PositionType } from './types'
 
 type DepartmentType = [name: string, jobs: JobType[]]
 const convertMapToArray = (obj: any) => {
@@ -157,7 +157,7 @@ function CareersFilter() {
                   {jobs.map((job: JobType, index: number) => (
                     <div
                       key={job.url}
-                      className='border-t border-neutral-700 py-6 px-4 hover:bg-neutral-725 '>
+                      className='border-t border-neutral-700 px-4 py-6 hover:bg-neutral-725 '>
                       <SuiLink
                         href={job.url}
                         className={`job-${index} items-center justify-between hover:no-underline md:flex`}>

@@ -1,9 +1,9 @@
-import React, { HTMLAttributes } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { SuiText, SuiTitle } from '../../typography'
+import React, { HTMLAttributes } from 'react'
 import { StrapiImageType } from '../../../../lib/api/strapi/types'
 import { StrapiImage } from '../../../StrapiElements'
+import { SuiText, SuiTitle } from '../../typography'
 
 interface Props extends HTMLAttributes<HTMLAnchorElement> {
   url: string
@@ -31,14 +31,14 @@ function SuiRecentCard({
       className={`recent-card-${title.replace(
         ' ',
         '-'
-      )} flex flex-col transition group hover:scale-105 hover:no-underline relative  ${className}`}
+      )} group relative flex flex-col transition hover:scale-105 hover:no-underline  ${className}`}
       {...props}>
       {thumbnailPng ? (
         <StrapiImage
           {...thumbnailPng}
           sizes='medium'
           alt={title}
-          className='rounded-sm h-52 object-cover object-center mb-3 shadow-md'
+          className='mb-3 h-52 rounded-sm object-cover object-center shadow-md'
         />
       ) : (
         <Image
@@ -46,7 +46,7 @@ function SuiRecentCard({
           alt='Release webinar'
           width='328'
           height='214'
-          className='rounded-lg h-52 w-auto md:h-auto object-cover object-center mb-3 shadow-md md:w-full aspect-[3/2]'
+          className='mb-3 aspect-[3/2] h-52 w-auto rounded-lg object-cover object-center shadow-md md:h-auto md:w-full'
         />
       )}
 

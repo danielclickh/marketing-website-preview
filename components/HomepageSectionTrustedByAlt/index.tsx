@@ -1,5 +1,8 @@
 import Link from 'next/link'
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import 'swiper/css'
+import { FreeMode } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperClass } from 'swiper/types'
 import {
   HomepageCustomerStories,
@@ -8,10 +11,6 @@ import {
 import { StrapiImage } from '../StrapiElements'
 import { SuiText } from '../sui'
 import styles from './styles.module.scss'
-
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { FreeMode } from 'swiper/modules'
-import 'swiper/css'
 
 interface Props extends React.HTMLProps<HTMLDivElement> {
   customerStories: HomepageCustomerStories
@@ -106,7 +105,7 @@ export default function HomepageSectionTrustedByAlt({
         </div>
         <button
           onClick={goPrev}
-          className='group/button absolute top-0 left-0 bottom-0 z-10 hidden w-24 appearance-none items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100 sm:flex'>
+          className='group/button absolute bottom-0 left-0 top-0 z-10 hidden w-24 appearance-none items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100 sm:flex'>
           <svg
             className='transition-transform sm:group-hover/button:-translate-x-1'
             xmlns='http://www.w3.org/2000/svg'
@@ -122,7 +121,7 @@ export default function HomepageSectionTrustedByAlt({
         </button>
         <button
           onClick={goNext}
-          className='group/button absolute top-0 right-0 bottom-0 z-10 hidden w-24 appearance-none items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100 sm:flex'>
+          className='group/button absolute bottom-0 right-0 top-0 z-10 hidden w-24 appearance-none items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100 sm:flex'>
           <svg
             className='transition-transform sm:group-hover/button:translate-x-1'
             xmlns='http://www.w3.org/2000/svg'

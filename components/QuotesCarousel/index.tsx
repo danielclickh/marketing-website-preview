@@ -1,12 +1,11 @@
 import Image, { ImageProps } from 'next/image'
-import Link from 'next/link'
 import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperClass } from 'swiper/types'
-import styles from './styles.module.scss'
-import iconQuote from './icon-quote.svg'
 import { CUICard } from '../ClickUI'
 import Markdown from '../Markdown'
+import iconQuote from './icon-quote.svg'
+import styles from './styles.module.scss'
 
 export interface QuotesCarousel {
   quotes: Array<{

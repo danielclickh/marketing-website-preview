@@ -20,7 +20,7 @@ export function FeatureItem(props: FeatureItemProps) {
     <div className='flex w-full gap-x-4'>
       <div className='flex w-1/5 items-start'>
         <div
-          className={`flex w-16 h-16 ${colorPalette} rounded-lg shadow-md justify-center items-center`}>
+          className={`flex h-16 w-16 ${colorPalette} items-center justify-center rounded-lg shadow-md`}>
           <StrapiImage {...icon} className='feature-icon' />
         </div>
       </div>

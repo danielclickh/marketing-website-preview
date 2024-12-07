@@ -6,10 +6,10 @@ function HomePageTerminal() {
   const [animationCompleted, setAnimationCompleted] = useState(false)
   return (
     <div
-      className='relative border bg-neutral-900 shadow-codeblock border-neutral-700/80 rounded-xl text-left flex flex-col -mt-[100px] text-neutral-0'
+      className='relative -mt-[100px] flex flex-col rounded-xl border border-neutral-700/80 bg-neutral-900 text-left text-neutral-0 shadow-codeblock'
       style={style}>
       <div className='p-8'>
-        <div className='block whitespace-pre-wrap font-inconsolata w-full relative'>
+        <div className='relative block w-full whitespace-pre-wrap font-inconsolata'>
           <p
             className={`line terminal-type leading-7 ${
               animationCompleted ? 'active' : ''

@@ -26,18 +26,21 @@ function FeatureCard({
   icon,
   title,
   link,
-  target
+  target,
+  prefetch
 }: {
   icon: React.ReactNode
   title: React.ReactNode | string
   link: string
   target?: React.HTMLAttributeAnchorTarget
+  prefetch?: boolean
 }) {
   return (
     <Link
       href={link}
       target={target}
-      className='group flex items-center gap-4 rounded-lg bg-primary-300 py-6 px-4 text-primary-900 sm:flex-col sm:gap-4 sm:px-2 sm:text-center'>
+      prefetch={prefetch}
+      className='group flex items-center gap-4 rounded-lg bg-primary-300 px-4 py-6 text-primary-900 sm:flex-col sm:gap-4 sm:px-2 sm:text-center'>
       {icon}
       <SuiTitle type='h3' color='inherit' className='flex-1'>
         {title}
@@ -63,7 +66,7 @@ export default function HomepageSectionWhyClickhouse({
       <div className='section-container'>
         <div className='relative flex flex-col gap-8 overflow-clip rounded bg-neutral-750 p-8 lg:p-16'>
           {/* Gradient */}
-          <div className='absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-primary-300 to-transparent'></div>
+          <div className='absolute left-0 right-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-primary-300 to-transparent'></div>
 
           {/* Intro text */}
           <div className='flex justify-center'>
@@ -247,6 +250,8 @@ export default function HomepageSectionWhyClickhouse({
                 </>
               }
               link='https://clickhouse.com/docs/en/concepts/why-clickhouse-is-so-fast'
+              target='_blank'
+              prefetch={false}
             />
             <FeatureCard
               icon={
@@ -301,6 +306,7 @@ export default function HomepageSectionWhyClickhouse({
               }
               link='https://clickhouse.com/docs/en/integrations'
               target='_blank'
+              prefetch={false}
             />
           </div>
 

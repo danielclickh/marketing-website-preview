@@ -1,18 +1,18 @@
 import { GetStaticProps } from 'next'
+import Image from 'next/image'
 import Link, { LinkProps } from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import { CUICard } from '../../components/ClickUI'
 import EventPost from '../../components/EventPostList/EventPost'
 import GetStartedFree from '../../components/GetStartedFree'
 import Layout from '../../components/Layout'
-import { SuiButton, SuiText, SuiTitle } from '../../components/sui'
+import { SuiButton, SuiText } from '../../components/sui'
 import { findAll } from '../../lib/api/strapi'
+import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { EventType } from '../../types/events'
 import { CommonProps } from '../../types/homepage'
 import banner from './banner.jpg'
-import Image from 'next/image'
-import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 
 interface PageProps extends CommonProps {
   recentEvents: Array<EventType>

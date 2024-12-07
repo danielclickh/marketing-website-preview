@@ -39,7 +39,7 @@ export const SuiHorizontalDivide = ({ ...HorizontalDivideProps }) => {
     <hr
       className={`flex w-full ${sizeCalculator(size)} ${colorCalculator(
         color
-      )} border-t-0 border-b`}
+      )} border-b border-t-0`}
     />
   )
 }

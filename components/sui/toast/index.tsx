@@ -26,7 +26,7 @@ export function SnackbarContextProvider({ children }: { children: ReactNode }) {
   const openSnackBar = (message: string, type?: 'success' | 'error') => {
     const cookieBanner = document.querySelector('#onetrust-banner-sdk')
     ref.current = cookieBanner
-      ? {height: `${cookieBanner.clientHeight + 40}px`}
+      ? { height: `${cookieBanner.clientHeight + 40}px` }
       : {}
 
     setMessage(message)

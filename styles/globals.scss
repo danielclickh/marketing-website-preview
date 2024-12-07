@@ -184,7 +184,7 @@ body {
   }
 
   .code-with-play {
-    @apply text-neutral-0 flex relative whitespace-pre-wrap rounded-lg bg-noised;
+    @apply text-neutral-0 flex whitespace-pre-wrap rounded-lg bg-noised;
     padding: 24px;
 
     .code {
@@ -242,19 +242,21 @@ body {
   }
 
   :not(pre) code {
-    @apply bg-neutral-725 text-neutral-0 font-inconsolata border border-solid inline-block px-1;
-    border: 1px solid #414141;
+    // @apply bg-neutral-725 text-neutral-0 font-inconsolata border border-solid inline-block px-1;
+    // border: 1px solid #414141;
     margin-bottom: 2px;
     border-radius: 4px;
   }
 
   pre {
     code {
-      @apply box-border mb-9 w-full;
+      // @apply box-border mb-9 w-full;
       padding: 20px;
-      @apply text-neutral-0 rounded-lg whitespace-pre-wrap block bg-noised;
 
-      @apply border border-solid border-c3 break-words;
+      position: inherit;
+      @apply text-neutral-0 rounded-lg whitespace-pre-wrap block;
+
+      // @apply border border-solid border-c3 break-words;
 
       &.ignore-default-color {
         @apply bg-transparent border-transparent text-inherit;

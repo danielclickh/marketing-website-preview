@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { SuiText, SuiTitle } from '../sui'
@@ -129,6 +128,7 @@ export default function HomepageSectionDeployAlt({
           {/* Local */}
           <Link
             href='https://clickhouse.com/docs/en/operations/utilities/clickhouse-local'
+            prefetch={false}
             className='group flex flex-col items-center justify-center gap-6 rounded-lg bg-neutral-750 p-8 text-center text-white'>
             <svg
               className='text-primary-300'

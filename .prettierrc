@@ -1,11 +1,10 @@
 {
-  "jsxBracketSameLine": true,
+  "bracketSameLine": true,
   "jsxSingleQuote": true,
   "parser": "typescript",
   "printWidth": 80,
   "semi": false,
   "singleQuote": true,
   "trailingComma": "none",
-  "rubySingleQuote": false,
-  "rubyToProc": true
+  "plugins": ["prettier-plugin-organize-imports"]
 }

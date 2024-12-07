@@ -1,40 +1,35 @@
 import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
+import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import { CSSProperties, useEffect, useRef, useState } from 'react'
 import { CUIButton, CUICard, CUILink } from '../../components/ClickUI'
+import Layout from '../../components/Layout'
 import { SuiCodeblock, SuiText, SuiTitle } from '../../components/sui'
+import { useGalaxyOnClick, useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { CommonProps } from '../../types/homepage'
-import Layout from '../../components/Layout'
-import Image, { ImageProps } from 'next/image'
-
+import imageDbEngineCli from './db-engine-cli.svg'
+import imageDbEngineConnection from './db-engine-connection.svg'
+import imageDbEngineProcess from './db-engine-process.svg'
+import imageEmbedded from './embedded.svg'
+import graphLinesChdb from './graph-lines-chdb.svg'
+import graphLinesDuckdb from './graph-lines-duckdb.svg'
+import graphLinesPandas from './graph-lines-pandas.svg'
+import graphLinesPolars from './graph-lines-polars.svg'
+import graphPanel from './graph-panel.svg'
+import imageHero from './hero.svg'
 import iconBook from './icon-book-open-text.svg'
 import iconFile from './icon-file-py.svg'
 import iconList from './icon-list-magnifying-glass.svg'
-
+import imageInputOutput from './input-output.svg'
 import logoBun from './logo-bun.svg'
 import logoGo from './logo-go.svg'
 import logoNode from './logo-node.svg'
 import logoPython from './logo-python.svg'
 import logoRust from './logo-rust.svg'
-
-import imageHero from './hero.svg'
-import imageDbEngineCli from './db-engine-cli.svg'
-import imageDbEngineConnection from './db-engine-connection.svg'
-import imageDbEngineProcess from './db-engine-process.svg'
-import imageEmbedded from './embedded.svg'
-import imageInputOutput from './input-output.svg'
 import imageMinimizedCopying from './minimized-copying.svg'
-
 import imageSampleQuery from './sample-query.svg'
-
-import graphPanel from './graph-panel.svg'
-import graphLinesChdb from './graph-lines-chdb.svg'
-import graphLinesDuckdb from './graph-lines-duckdb.svg'
-import graphLinesPandas from './graph-lines-pandas.svg'
-import graphLinesPolars from './graph-lines-polars.svg'
-import { useGalaxyOnPage, useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -82,6 +77,7 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
                 className='mt-6 !px-8'
                 href='https://clickhouse.com/docs/en/chdb'
                 target='_blank'
+                prefetch={false}
                 onClick={useGalaxyOnClick('chdbPage.heroCta.tryItSelect')}>
                 Try it today
               </CUIButton>

@@ -11,8 +11,8 @@ function NewsLetter({
 }: NewsLetterData) {
   return (
     <SuiPanel color='bg-c4/10' padding='lg' isRounded>
-      <div className='flex flex-col md:flex-row justify-between md:items-start py-2'>
-        <div className='flex flex-col w-full md:w-1/2'>
+      <div className='flex flex-col justify-between py-2 md:flex-row md:items-start'>
+        <div className='flex w-full flex-col md:w-1/2'>
           <SuiTitle type='h3' className='mb-2.5'>
             {title}
           </SuiTitle>

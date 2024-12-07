@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from '../Link'
 import styles from './styles.module.scss'
-import { ButtonProps, ButtonLinkProps } from './types'
+import { ButtonLinkProps, ButtonProps } from './types'
 
 function ButtonLink({ href, children, linkClass, ...props }: ButtonLinkProps) {
   if (!href) {

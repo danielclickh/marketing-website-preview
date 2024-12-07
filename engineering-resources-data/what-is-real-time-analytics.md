@@ -2,6 +2,7 @@
 title: 'What is real-time analytics?'
 slug: 'what-is-real-time-analytics'
 excerpt: "In this guide, we'll learn all about real-time analytics - how does it compare to batch analytics, what are its main characteristics, use cases, and more."
+index: 3
 ---
 
 Real-time analytics refers to data processing that delivers insights to end users and customers as soon as the data is generated. It differs from traditional or batch analytics, where data is collected in batches and processed, often a long time after it was generated.
@@ -79,7 +80,7 @@ They identified the following characteristics of ClickHouse that enable real-tim
 
 > ClickHouse is designed and optimized explicitly for analytical queries. This fits perfectly with the needs of applications where data is continuously analyzed for patterns that might indicate fraud.
 
-Learn more about how Instacart use ClickHouse for the [fraud detection use case](https://clickhouse.com/videos/real-time-fraud-detection-with-yoda-and-clickhouse) in the video recording and [blog post](https://tech.instacart.com/real-time-fraud-detection-with-yoda-and-clickhouse-bd08e9dbe3f4).
+➡️ Learn more about how Instacart use ClickHouse for the [fraud detection use case](https://clickhouse.com/videos/real-time-fraud-detection-with-yoda-and-clickhouse) in the video recording and [blog post](https://tech.instacart.com/real-time-fraud-detection-with-yoda-and-clickhouse-bd08e9dbe3f4).
 
 ### Time-sensitive decision making
 
@@ -91,7 +92,7 @@ Coinhall provides its users with real-time insights into price movements over ti
 
 > In terms of performance, ClickHouse was the clear winner, executing candlestick queries in 20 milliseconds, compared to 400 milliseconds or more for the other databases. It ran latest-price queries in 8 milliseconds, outpacing the next-best performance (SingleStore) which came in at 45 milliseconds. Finally, it handled ASOF JOIN queries in 50 milliseconds, while Snowflake took 20 minutes and Rockset timed out.
 
-Learn more about how Coinhall uses ClickHouse for the [time-sensitive decision making use case](https://clickhouse.com/blog/trade-secrets-how-coinhall-uses-clickhouse-to-power-its-blockchain-data-platform).
+➡️ Learn more about how Coinhall uses ClickHouse for the [time-sensitive decision making use case](https://clickhouse.com/blog/trade-secrets-how-coinhall-uses-clickhouse-to-power-its-blockchain-data-platform).
 
 ### Observability
 
@@ -105,7 +106,7 @@ When working with LLM applications, there are invariably many moving pieces with
 
 > We wanted something that was architecturally simple to deploy and didn’t make our infrastructure more complicated. We looked at Druid and Pinot, but these required dedicated services for ingestion, connected to queuing services such as Kafka, rather than simply accepting INSERT statements. We were keen to avoid this architectural complexity,
 
-Learn more about how LangChain uses ClickHouse for the [observability user case](https://clickhouse.com/blog/langchain-why-we-choose-clickhouse-to-power-langchain).
+➡️ Learn more about how LangChain uses ClickHouse for the [observability user case](https://clickhouse.com/blog/langchain-why-we-choose-clickhouse-to-power-langchain).
 
 There are also many other use cases, including:
 
@@ -135,6 +136,8 @@ The system must maintain quick query responses at all times. This should hold ev
 
 Real-time analytics systems are often user-facing and must handle many concurrent queries. It’s common for these systems to support tens or hundreds of thousands of queries per second.
 
+These characteristics are typically seen in [column databases](https://clickhouse.com/engineering-resources/what-is-columnar-database) like ClickHouse.
+
 ## Data sources for real-time analytics
 
 Real-time analytics systems are based on events, typically managed by a streaming data platform. These systems act as the source of truth for event data and can handle a high volume and concurrency of data being produced and consumed. The events are stored durably and consumed by downstream systems.
@@ -145,7 +148,7 @@ In addition to working with real-time data, we must support slower-changing data
 
 ## What is a real-time analytics database?
 
-At the heart of any real-time analytics system is a database that ingests data quickly and serves low-latency queries at scale. These databases are a subset of Online Analytics Processing (OLAP) databases but have some notable differences.
+At the heart of any real-time analytics system is a database that ingests data quickly and serves low-latency queries at scale. These databases are a subset of [Online Analytics Processing (OLAP) databases](https://clickhouse.com/engineering-resources/oltp-vs-olap) but have some notable differences.
 
 Traditional OLAP databases were designed for batch analytics, which we learned about earlier. They were used for internal-facing use cases where having data refreshed every day or, at best, every hour was sufficient. This approach doesn’t work for user-facing applications with expected sub-second query response time.
 
