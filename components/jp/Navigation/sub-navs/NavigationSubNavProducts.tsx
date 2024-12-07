@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { useGalaxyOnClick } from '../../../../lib/galaxy/galaxy'
+import LinkWithArrow from '../../../LinkWithArrow'
 import { NavigationLink } from '../parts'
 
 export default function NavigationSubNavProducts() {
@@ -69,7 +70,34 @@ export default function NavigationSubNavProducts() {
             </span>
           </NavigationLink>
         </li>
+
+        <li className='md-mid:hidden'>
+          <NavigationLink
+            href='/jp/integrations'
+            className='!flex w-full items-center gap-3'
+            onClick={useGalaxyOnClick(
+              'topNav.productMenu.integrationsHighlightSelect'
+            )}>
+            <Image
+              src='/images/nav/icon-integrations.svg'
+              alt='integrations'
+              width={24}
+              height={24}
+              className='flex-grow-1 flex-shrink-0'
+            />
+            <span>100を超えるインテグレーションを紹介します。</span>
+          </NavigationLink>
+        </li>
       </ul>
+      <LinkWithArrow
+        prefetch={false}
+        href='/jp/integrations'
+        onClick={useGalaxyOnClick(
+          'topNav.productMenu.integrationsHighlightSelect'
+        )}
+        className='hidden w-full rounded-b-lg border-t border-neutral-700 px-[60px] py-2.5 text-sm font-medium transition-colors hover:bg-neutral-700/25 hover:text-primary-300 md-mid:block'>
+        100を超えるインテグレーションを紹介します。
+      </LinkWithArrow>
     </>
   )
 }

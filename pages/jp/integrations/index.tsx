@@ -2,22 +2,22 @@ import type { InferGetStaticPropsType } from 'next'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { ChangeEvent, useEffect, useState } from 'react'
-import CategorySelector from '../../components/CategorySelector'
-import GetStartedFree from '../../components/GetStartedFree'
-import IntegrationsClickPipesPromo from '../../components/IntegrationsClickPipesPromo'
-import IntegrationTile from '../../components/IntegrationTile'
-import Layout from '../../components/Layout'
-import { SuiSearchField, SuiTitle } from '../../components/sui'
-import { fetchAll } from '../../lib/api/strapi'
-import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
-import { slugify, upperCaseFirst } from '../../lib/utils/strings'
+import CategorySelector from '../../../components/CategorySelector'
+import IntegrationTile from '../../../components/IntegrationTile'
+import GetStartedFree from '../../../components/jp/GetStartedFree'
+import IntegrationsClickPipesPromo from '../../../components/jp/IntegrationsClickPipesPromo'
+import Layout from '../../../components/jp/Layout'
+import { SuiSearchField, SuiTitle } from '../../../components/sui'
+import { fetchAll } from '../../../lib/api/strapi'
+import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
+import { getCommonProps } from '../../../lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
+import { slugify, upperCaseFirst } from '../../../lib/utils/strings'
 import {
   Integration,
   IntegrationGroup,
   IntegrationsPageProps
-} from '../../types/integrations'
+} from '../../../types/integrations'
 
 export const categoryContentMap: Array<
   Pick<IntegrationGroup, 'key' | 'label' | 'description' | 'slug'>
@@ -26,21 +26,21 @@ export const categoryContentMap: Array<
     key: 'CLICKPIPES',
     label: 'ClickPipes',
     description:
-      'ClickPipes is an integration engine that makes ingesting massive volumes of data from a diverse set of sources as simple as clicking a few buttons.',
+      'ClickPipesは膨大な量のデータをさまざまなソースから、ボタンを数回クリックするだけで簡単に取り込むためのインテグレーションエンジンです。',
     slug: 'clickpipes'
   },
   {
     key: 'DATA_INGESTION',
-    label: 'Data ingestion',
+    label: 'データインジェスト',
     description:
-      'Streamline your data pipelines with ClickHouse! Seamless integrations ensure efficient ingestion, optimizing real-time analytics.',
+      'データパイプラインをClickHouseで合理化！シームレスな統合によりインジェストの効率化とリアルタイム分析の最適化が実現。',
     slug: 'data-ingestion'
   },
   {
     key: 'DATA_VISUALIZATION',
-    label: 'Data visualization',
+    label: 'データ可視化',
     description:
-      'Illuminate your data stories! ClickHouse integrations enhance visualization, making insights more vivid & actionable.',
+      'データストーリーを明確に伝えよう！ClickHouseのインテグレーション機能は、可視化を強化し、インサイトがより明確でアクショナブルになります。',
     slug: 'data-visualization'
   },
   {
@@ -51,16 +51,16 @@ export const categoryContentMap: Array<
   },
   {
     key: 'SQL_CLIENT',
-    label: 'SQL client',
+    label: 'SQLクライアント',
     description:
-      'Harness the power of SQL with ClickHouse! Integrated clients enable swift queries, delivering instant, precise results.',
+      'ClickHouseでSQLの力を活用しよう！インテグレーションクライアントは迅速なクエリを可能にし、即座に正確な結果を提供します。',
     slug: 'sql-client'
   },
   {
     key: 'LANGUAGE_CLIENT',
-    label: 'Language client',
+    label: '言語クライアント',
     description:
-      "Code in your comfort zone! ClickHouse's language client integrations make data access fluent across multiple programming languages.",
+      '快適な環境でコーディング！ClickHouseの多言語クライアントのサポートにより、さまざまなプログラミング言語でスムーズにデータにアクセスできます。',
     slug: 'language-client'
   },
   {
@@ -68,6 +68,24 @@ export const categoryContentMap: Array<
     label: 'AI/ML',
     description: '',
     slug: 'ai-ml'
+  },
+  {
+    key: 'DATA_MANAGEMENT',
+    label: 'データ管理',
+    description: '',
+    slug: 'data-management'
+  },
+  {
+    key: 'DATA_INTEGRATION',
+    label: 'データ統合',
+    description: '',
+    slug: 'data-integration'
+  },
+  {
+    key: 'SECURITY_GOVERNANCE',
+    label: 'セキュリティガバナンス',
+    description: '',
+    slug: 'security_governance'
   }
 ]
 
@@ -80,11 +98,11 @@ export async function getStaticProps() {
   const integrationGroups = groupIntegrations(integrations)
 
   const props: IntegrationsPageProps = {
-    title: 'Integrations',
+    title: 'インテグレーション',
     seo: {
-      title: 'ClickHouse Integrations',
+      title: 'インテグレーション',
       description:
-        'ClickHouse offers over 100 integrations across categories like language clients, data ingestion, SQL clients, and data visualization. Enhance your data workflows effortlessly.',
+        'ClickHouse は、言語クライアント、データ取り込み、SQL クライアント、データ視覚化などのカテゴリにわたって 100 を超える統合を提供します。データ ワークフローを簡単に強化できます。',
       path: '/integrations',
       image: [{ url: '/images/integrations_social_share.png' }]
     },
@@ -224,7 +242,7 @@ export default function IntegrationsPage({
         <div className='container mx-auto max-w-7xl px-8 2xl:px-0'>
           <SuiTitle type='h1'>{title}</SuiTitle>
           <p className='mt-6 text-lg'>
-            Connect the tools and services that you love with ClickHouse.
+            お気に入りのツールやサービスがClickHouseでつながります。
           </p>
         </div>
       </div>
@@ -238,7 +256,7 @@ export default function IntegrationsPage({
       <div className='container mx-auto mb-20 max-w-7xl space-y-20 px-8 2xl:px-0'>
         <div className='flex-col items-center'>
           <SuiSearchField
-            placeholder='Search by integration...'
+            placeholder='インテグレーションを検索...'
             htmlFor='search'
             className='mx-auto mb-6 md:max-w-md lg:mb-8'
             value={search || ''}
@@ -248,7 +266,7 @@ export default function IntegrationsPage({
             <CategorySelector
               options={[
                 {
-                  text: 'All',
+                  text: 'すべて',
                   selected: !category,
                   onClick() {
                     setCategory(null)
@@ -288,12 +306,7 @@ export default function IntegrationsPage({
           </p>
         )}
 
-        <GetStartedFree
-          href='https://clickhouse.cloud/signUp?loc=integrations'
-          textBefore='Get started with ClickHouse'
-          textSlanted='Cloud'
-          textAfter='for free'
-        />
+        <GetStartedFree href='https://clickhouse.cloud/signUp?loc=integrations' />
       </div>
     </Layout>
   )
