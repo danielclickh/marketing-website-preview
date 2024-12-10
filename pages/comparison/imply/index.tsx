@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { useRef, useState } from 'react'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
-import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
@@ -104,16 +103,6 @@ export default function Page({
                     Migrating from <span className='text-[#0D7DE0]'>Imply</span>{' '}
                     to ClickHouse
                   </h1>
-                  <h2 className='font-basier text-xl font-medium leading-tight text-neutral-200'>
-                    Imply is winding down operations in the Asia-Pacific region.
-                    Are you facing the daunting task of needing to migrate your
-                    production workloads before their cut-off date?{' '}
-                    <span className='italic text-neutral-0'>
-                      We’re here to help
-                    </span>
-                    .
-                  </h2>
-                  <HRSeparator className='my-6' />
                   <div className='mb-6 max-w-2xl text-neutral-200'>
                     <div className='prose prose-neutral'>
                       <p>
