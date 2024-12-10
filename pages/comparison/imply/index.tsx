@@ -100,7 +100,7 @@ export default function Page({
             <div className='event-container mx-auto block w-full lg:flex lg:items-start lg:justify-between'>
               <div className='mb-6 mr-0 flex-auto px-2 sm:px-6 md:mb-16 lg:mb-0 lg:mr-16 lg:max-w-2xl xl:px-2'>
                 <div className='section_metadata'>
-                  <h1 className='mb-8 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
+                  <h1 className='mb-8 text-balance font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
                     Migrating from <span className='text-[#0D7DE0]'>Imply</span>{' '}
                     to ClickHouse
                   </h1>
