@@ -151,7 +151,7 @@ export default function Page({
                   <div className='rounded-lg border-neutral-800 bg-neutral-900 p-8 shadow-card md:w-[30.3125rem]'>
                     <SuiTitle type='h4'>
                       Enter your information and we'll contact you to discuss
-                      your options when migrating away from DoubleCloud.
+                      your options when migrating away from Imply.
                     </SuiTitle>
                     <br />
                     <div className='delay-1000 duration-300 ease-in-out'>
