@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import AccordionComponent from '../../../components/BusinessIntelligenceDiagram/Accordion'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
@@ -226,7 +226,7 @@ export default function RealTimeAnalyticsPage({
                   <h2 className='mb-10 text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
                     What our customers say
                   </h2>
-                  <div className='flex flex-col gap-x-6 gap-y-6 lg:flex-row'>
+                  <div className='space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0'>
                     <QuoteCard
                       content={`"At Lyft, **we ingest tens of millions of rows and execute millions of read queries in ClickHouse daily with volume continuing to increase**. On a monthly basis, this means reading and writing more than 25TB of data."`}
                       logo={{
