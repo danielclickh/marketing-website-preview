@@ -1,11 +1,9 @@
 import { ArrowDownIcon, ChevronRightIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRef, useState } from 'react'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
-import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
@@ -17,6 +15,7 @@ import { useGalaxyOnClick, useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ContactProps } from '../../../types/contact'
 import faqs from '../../use-cases/real-time-analytics/faqs.json'
+import ebayLogo from './ebay.svg'
 
 interface DriftAPI {
   startInteraction: (options: { interactionId: number }) => void
@@ -65,10 +64,10 @@ export const getStaticProps: GetStaticProps<ContactProps> =
         ...data.hero,
         customerStories: customerStoriesData.customerStories,
         seo: {
-          title: 'Migrate from Rockset to ClickHouse',
+          title: 'Migrate from Imply to ClickHouse',
           description:
             "At ClickHouse, we're not going anywhere. Looking for help with your migration? Get in touch!",
-          path: '/comparison/rockset'
+          path: '/comparison/imply'
           // image: [{ url: '/images/air-gapped-og.png' }]
         },
         ...commonProps
@@ -83,14 +82,13 @@ export default function Page({
   headerData,
   seo
 }: PageProps) {
-  useGalaxyOnPage('rocksetMigrationPage')
+  useGalaxyOnPage('implyMigrationPage')
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
   const [showForm, setShowForm] = useState(false)
-
   const handleContactSupportClick = useGalaxyOnClick(
-    'rockset.hero.contactSupportSelect'
+    'imply.hero.contactSupportSelect'
   )
 
   return (
@@ -101,34 +99,22 @@ export default function Page({
             <div className='event-container mx-auto block w-full lg:flex lg:items-start lg:justify-between'>
               <div className='mb-6 mr-0 flex-auto px-2 sm:px-6 md:mb-16 lg:mb-0 lg:mr-16 lg:max-w-2xl xl:px-2'>
                 <div className='section_metadata'>
-                  <h1 className='mb-8 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
-                    Migrating from <span className='text-[#63C0DD]'>[</span>
-                    <span className='text-[#E5C3FF]'>Rockset</span>
-                    <span className='text-[#63C0DD]'>]</span> to ClickHouse
+                  <h1 className='mb-8 text-balance font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
+                    Migrating from <span className='text-[#0D7DE0]'>Imply</span>{' '}
+                    to ClickHouse
                   </h1>
-                  <h2 className='font-basier text-xl font-medium leading-tight text-neutral-200'>
-                    Rockset is being deprecated. Are you facing the daunting
-                    task of needing to migrate your production workloads before
-                    a rapidly approaching cut-off date?{' '}
-                    <span className='italic text-neutral-0'>
-                      We’re here to help
-                    </span>
-                    .
-                  </h2>
-                  <HRSeparator className='my-6' />
                   <div className='mb-6 max-w-2xl text-neutral-200'>
                     <div className='prose prose-neutral'>
                       <p>
-                        ClickHouse and Rockset are both used to power real-time
-                        analytics workloads and customer-facing applications.
-                        But ClickHouse outshines Rockset in scalability,
-                        ingestion throughput, query performance,
-                        cost-efficiency, and much more.
+                        ClickHouse is the fastest database for analytics, and
+                        outshines Imply and Druid with faster query performance,
+                        superior efficiency - which translates to cost savings -
+                        ease of operations, and much more.
                       </p>
 
                       <p>
-                        Contact us today for your free migration services from
-                        Rockset to ClickHouse.
+                        Contact us today for free migration services from Imply
+                        to ClickHouse.
                       </p>
                     </div>
                   </div>
@@ -146,29 +132,17 @@ export default function Page({
                       className='w-full'
                       type='secondary'
                       target='_blank'
-                      href='https://clickhouse.cloud/signUp?loc=rockset-comparison-hero'
+                      href='https://clickhouse.cloud/signUp?loc=imply-comparison-hero'
                       iconRight={
                         <ChevronRightIcon
                           height='16'
                           className='pt-0.5 transition group-hover:translate-x-1/2'
                         />
                       }
-                      onClick={useGalaxyOnClick(
-                        'rockset.hero.startTrialSelect'
-                      )}>
+                      onClick={useGalaxyOnClick('imply.hero.startTrialSelect')}>
                       Start a 30-day free trial
                     </CUIButton>
                   </div>
-                  <p className='mt-8 text-sm'>
-                    Read our guide about{' '}
-                    <Link
-                      target='_blank'
-                      className='text-primary-300'
-                      href='https://clickhouse.com/docs/en/migrations/rockset?loc=comparions'
-                      prefetch={false}>
-                      how to migrate from Rockset to ClickHouse
-                    </Link>
-                  </p>
                 </div>
               </div>
               {showForm ? (
@@ -177,7 +151,7 @@ export default function Page({
                   <div className='rounded-lg border-neutral-800 bg-neutral-900 p-8 shadow-card md:w-[30.3125rem]'>
                     <SuiTitle type='h4'>
                       Enter your information and we'll contact you to discuss
-                      your options when migrating away from Rockset.
+                      your options when migrating away from DoubleCloud.
                     </SuiTitle>
                     <br />
                     <div className='delay-1000 duration-300 ease-in-out'>
@@ -223,10 +197,10 @@ export default function Page({
               ) : (
                 <div className='mx-auto w-96 pt-8 md:ml-auto md:w-full md:pt-0 lg:max-w-lg lg:pt-4'>
                   <Image
-                    src='/images/comparisons/rockset-migration-2.svg'
+                    src='/images/comparisons/imply-migration.svg'
                     width='485'
                     height='448'
-                    alt='Rockset to ClickHouse migration'
+                    alt='Imply to ClickHouse migration'
                   />
                 </div>
               )}
@@ -283,9 +257,15 @@ export default function Page({
             <div className='mx-auto max-w-7xl'>
               <div className='relative z-20 flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
                 <div className='p-10'>
-                  <div className='space-y-6 lg:grid lg:grid-cols-4 lg:gap-6 lg:space-y-0'>
+                  <div className='space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0'>
                     <QuoteCard
-                      content={`"This year we actually exceeded a thousand active replicas. That's **processing hundreds of millions of inserted rows every second**, which actually corresponds to quite a significantly larger number of events because we've been using a lot of sampling."`}
+                      content={`"Druid has already been deployed in similar environments with over 100B events/day, so we were confident it could work, but after testing on sampled data we couldn’t justify the hardware costs of hundreds of nodes... 
+                      
+ClickHouse has a much simpler system design - all the nodes in a cluster have equal functionality and use only ZooKeeper for coordination. We built a small cluster of several nodes to start kicking the tires, and found the performance to be quite impressive."`}
+                      link={{
+                        href: 'https://blog.cloudflare.com/how-cloudflare-analyzes-1m-dns-queries-per-second/',
+                        target: '_blank'
+                      }}
                       logo={{
                         src: '/images/use-cases/real-time-analytics/cloudflare-logo.svg',
                         width: 123,
@@ -294,35 +274,18 @@ export default function Page({
                       }}
                     />
                     <QuoteCard
-                      content={`"We have multiple clusters deployed on our hardware with hundreds of hosts. Our main cluster is now geo-replicated, and we designate some replicas for read-heavy operations and others for write-heavy operations. Many of our tables are quite large, **with trillions and trillions of rows, as well as tens of columns.**"`}
-                      link='/blog/how-clickhouse-powers-ahrefs-the-worlds-most-active-web-crawler'
-                      logo={{
-                        src: '/images/use-cases/real-time-analytics/ahrefs-logo.svg',
-                        width: 123,
-                        height: 32,
-                        alt: 'ahrefs'
-                      }}
-                    />
-                    <QuoteCard
-                      content={`"At Lyft, **we ingest tens of millions of rows and execute millions of read queries in ClickHouse daily with volume continuing to increase**. On a monthly basis, this means reading and writing more than 25TB of data."`}
-                      logo={{
-                        src: '/images/use-cases/real-time-analytics/lyft-logo.svg',
-                        width: 64,
-                        height: 45,
-                        alt: 'Lyft'
-                      }}
-                    />
-                    <QuoteCard
-                      content={`"In the post-evaluation of each database against our criteria (with metrics ranging from query performance to cost), **ClickHouse emerged as the unrivaled frontrunner.** It excelled across the board, even astonishingly so in certain domains, and proved more cost-efficient."`}
+                      content={`"We’ve run OLAP on Druid for years, but as our platform has scaled and as traffic has increased on OLAP, we sought new solutions to reduce the cost of maintaining Druid and occasional availability challenges.
+
+We explored ClickHouse late last year and, based on documentation and extensive benchmarking tests, it seemed to fit our events use-case well and yielded impressive numbers... We also did a cost comparison of infrastructure footprint and storage, which showed that we could cut back on our existing infrastructure used for Druid by over 90 percent."`}
                       link={{
-                        href: 'https://medium.com/vimeo-engineering-blog/clickhouse-is-in-the-house-413862c8ac28',
+                        href: 'https://innovation.ebayinc.com/tech/engineering/ou-online-analytical-processing/',
                         target: '_blank'
                       }}
                       logo={{
-                        src: '/images/use-cases/real-time-analytics/vimeo-logo.svg',
-                        width: 140,
-                        height: 30,
-                        alt: 'Vimeo'
+                        src: ebayLogo,
+                        width: 85,
+                        height: 34,
+                        alt: 'eBay'
                       }}
                     />
                   </div>
@@ -359,7 +322,7 @@ export default function Page({
         <div className='bg-shadow-element-right yellow-shadow '>
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
             <GetStartedFree
-              href='https://clickhouse.cloud/signUp?loc=rockset-comparison-getstarted-footer'
+              href='https://clickhouse.cloud/signUp?loc=imply-comparison-getstarted-footer'
               textBefore='Get started with ClickHouse'
               textSlanted='Cloud'
               textAfter='for free'
