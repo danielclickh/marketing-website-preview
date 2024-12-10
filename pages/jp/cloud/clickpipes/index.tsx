@@ -7,10 +7,10 @@ import { CUIButton } from '../../../../components/ClickUI'
 import GetStartedFree from '../../../../components/jp/GetStartedFree'
 import Layout from '../../../../components/jp/Layout'
 import { SuiText, SuiTitle } from '../../../../components/sui'
+import { useGalaxyOnPage } from '../../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../../lib/utils/getCommonProps'
 import { ClickPipesData } from '../../../../types/clickpipes'
 import features from './features.json'
-import { useGalaxyOnPage } from '../../../../lib/galaxy/galaxy'
 
 export const getStaticProps: GetStaticProps<ClickPipesData> =
   async function getStaticProps() {
@@ -83,30 +83,7 @@ export default function ClickHouseServerPage({
                   </div>
                 </div>
                 <div className='mx-6 mt-6 hidden lg:block'>
-                  <ClickPipesAnimationV2
-                    logo1={{
-                      src: '/images/cloud/integrations/diagram/confluent-logos-idXfleyO4U-1.svg',
-                      alt: 'Confluent',
-                      active: true
-                    }}
-                    logo2={{
-                      src: '/images/cloud/integrations/kafka.svg',
-                      alt: 'Kafka',
-                      active: true
-                    }}
-                    logo3={{
-                      src: '/images/cloud/integrations/amazon_s3.svg',
-                      alt: 'Amazon S3',
-                      active: false,
-                      badge: 'Beta'
-                    }}
-                    logo4={{
-                      src: '/images/cloud/integrations/diagram/aws-kinesis.svg',
-                      alt: 'AWS Kinesis',
-                      active: false,
-                      badge: 'Beta'
-                    }}
-                  />
+                  <ClickPipesAnimationV2 />
                 </div>
               </div>
             </div>
