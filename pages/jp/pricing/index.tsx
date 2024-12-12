@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import ByocPricingCard from '../../../components/ByocPricingCard'
 import { CUIButton } from '../../../components/ClickUI'
-import Layout from '../../../components/Layout'
+import Layout from '../../../components/jp/Layout'
 import LinkWithArrow from '../../../components/LinkWithArrow'
 import Markdown from '../../../components/Markdown'
 import MarketoForm from '../../../components/MarketoForm'
@@ -64,7 +64,7 @@ export const getStaticProps: GetStaticProps<PricingPageProps> =
     ] = await Promise.all([pricingPromise, pricingByRegionPromise, plansProps])
 
     const commonProps = await getCommonProps()
-    seo.path = '/pricing'
+    seo.path = '/jp/pricing'
     const {
       hero: { cloudProviders }
     } = await findOne('cloud', {
@@ -110,10 +110,10 @@ export default function PricingPage({
               <div className='hero'>
                 <div className='flex flex-col items-center'>
                   <SuiTitle type='h1' color='white' className='md:!text-5.5xl'>
-                    {hero.title} jp
+                    価格設定
                   </SuiTitle>
                   <div className='mt-6 text-neutral-200'>
-                    {hero.description}
+                    あらゆるユーザー、組織、ユースケースに対応するオプション。
                   </div>
                 </div>
               </div>
