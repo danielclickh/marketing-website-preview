@@ -226,11 +226,11 @@ export default function IntegrationsPage({
         const newQueryString = newSearchParams.toString()
 
         if (newQueryString.length) {
-          router.push(`/integrations?${newQueryString}`, undefined, {
+          router.push(`/jp/integrations?${newQueryString}`, undefined, {
             shallow: true
           })
         } else {
-          router.push('/integrations', undefined, { shallow: true })
+          router.push('/jp/integrations', undefined, { shallow: true })
         }
       }
     }
