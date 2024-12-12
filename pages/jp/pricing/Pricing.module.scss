@@ -1,0 +1,11 @@
+.richTextLink {
+  @apply text-neutral-200 text-center text-sm;
+
+  :global a {
+    @apply text-primary-300 #{!important};
+
+    strong {
+      @apply font-semibold;
+    }
+  }
+}

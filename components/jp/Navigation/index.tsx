@@ -71,7 +71,7 @@ export default function Navigation({
               {...topLevelEvents}
               label='料金'
               link={{
-                href: '/pricing',
+                href: '/jp/pricing',
                 onClick: useGalaxyOnClick('topNav.navItems.pricingSelect')
               }}
             />

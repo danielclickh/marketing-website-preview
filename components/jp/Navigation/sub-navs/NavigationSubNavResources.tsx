@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useGalaxyOnClick } from '../../../../lib/galaxy/galaxy'
 import { NavigationLink } from '../parts'
 import NavigationChevron from '../parts/NavigationChevron'
@@ -15,69 +15,11 @@ export default function NavigationSubNavResources() {
     <ul className='relative px-4 md-mid:py-2'>
       <li>
         <NavigationLink
-          href='/user-stories'
-          onClick={useGalaxyOnClick('topNav.resourcesMenu.userStoriesSelect')}
-          className='block w-full'>
-          ユーザーストーリー
-        </NavigationLink>
-      </li>
-      <li>
-        <NavigationLink
           href='/blog'
           onClick={useGalaxyOnClick('topNav.resourcesMenu.blogSelect')}
           className='block w-full'>
           ブログ
         </NavigationLink>
-      </li>
-      <li
-        onMouseEnter={() => {
-          setActiveSubNav('learning')
-        }}
-        onMouseLeave={() => {
-          setActiveSubNav(null)
-        }}>
-        <NavigationLink
-          onClick={() => {
-            setActiveSubNav(isSubNavActive('learning') ? null : 'learning')
-          }}
-          className={`w-full items-center justify-between ${
-            isSubNavActive('learning') ? 'text-primary-300' : ''
-          }`}>
-          <span>学習と認定</span>
-          <NavigationChevron
-            className={
-              isSubNavActive('learning')
-                ? 'rotate-90 text-primary-300 md-mid:rotate-0'
-                : 'text-neutral-500'
-            }
-          />
-        </NavigationLink>
-        <NavigationSubNav isOpen={isSubNavActive('learning')}>
-          <li>
-            <NavigationLink
-              href='/learn'
-              onClick={useGalaxyOnClick('topNav.learnMenu.academySelect')}
-              className='block w-full'>
-              ClickHouse Academy
-            </NavigationLink>
-          </li>
-          <li>
-            <NavigationLink
-              href='/company/news-events?category=Free+Training#upcoming-events'
-              onClick={useGalaxyOnClick('topNav.learnMenu.freeTrainingSelect')}
-              className='block w-full'>
-              無料のライブトレーニング
-            </NavigationLink>
-          </li>
-          <li>
-            <NavigationLink
-              href='/learn/certification'
-              onClick={useGalaxyOnClick('topNav.learnMenu.certificationSelect')}
-              className='block w-full'>
-              ClickHouse Certification
-            </NavigationLink>
-          </li>
-        </NavigationSubNav>
       </li>
       <li
         onMouseEnter={() => {
@@ -107,7 +49,7 @@ export default function NavigationSubNavResources() {
         <NavigationSubNav isOpen={isSubNavActive('comparisons')}>
           <li>
             <NavigationLink
-              href='/comparison/bigquery'
+              href='/jp/comparison/bigquery'
               onClick={useGalaxyOnClick(
                 'topNav.comparisonsMenu.bigQuerySelect'
               )}
@@ -117,7 +59,7 @@ export default function NavigationSubNavResources() {
           </li>
           <li>
             <NavigationLink
-              href='/comparison/postgresql'
+              href='/jp/comparison/postgresql'
               onClick={useGalaxyOnClick(
                 'topNav.comparisonsMenu.postgreSqlSelect'
               )}
@@ -127,7 +69,7 @@ export default function NavigationSubNavResources() {
           </li>
           <li>
             <NavigationLink
-              href='/comparison/redshift'
+              href='/jp/comparison/redshift'
               onClick={useGalaxyOnClick(
                 'topNav.comparisonsMenu.redshiftSelect'
               )}
@@ -137,15 +79,7 @@ export default function NavigationSubNavResources() {
           </li>
           <li>
             <NavigationLink
-              href='/comparison/rockset'
-              onClick={useGalaxyOnClick('topNav.comparisonsMenu.rocksetSelect')}
-              className='block w-full'>
-              Rockset
-            </NavigationLink>
-          </li>
-          <li>
-            <NavigationLink
-              href='/comparison/snowflake'
+              href='/jp/comparison/snowflake'
               onClick={useGalaxyOnClick(
                 'topNav.comparisonsMenu.snowflakeSelect'
               )}
@@ -154,22 +88,6 @@ export default function NavigationSubNavResources() {
             </NavigationLink>
           </li>
         </NavigationSubNav>
-      </li>
-      <li>
-        <NavigationLink
-          href='/videos'
-          onClick={useGalaxyOnClick('topNav.resourcesMenu.videosSelect')}
-          className='block w-full'>
-          ビデオ
-        </NavigationLink>
-      </li>
-      <li>
-        <NavigationLink
-          href='/demos'
-          onClick={useGalaxyOnClick('topNav.resourcesMenu.demosSelect')}
-          className='block w-full'>
-          デモ
-        </NavigationLink>
       </li>
     </ul>
   )

@@ -17,13 +17,7 @@
 				"target": "_self",
 				"galaxyEvent": "footerNav.productMenu.clickHouseSelect"
 			},
-			{
-				"id": 22,
-				"name": "ClickHouse Keeper",
-				"href": "/clickhouse/keeper",
-				"target": "_self",
-				"galaxyEvent": "footerNav.productMenu.keeperSelect"
-			},
+			
 			{
 				"id": 20,
 				"name": "ClickPipes",
@@ -34,16 +28,9 @@
 			{
 				"id": 18,
 				"name": "統合",
-				"href": "/integrations",
+				"href": "/jp/integrations",
 				"target": "_self",
 				"galaxyEvent": "footerNav.productMenu.integrationsSelect"
-			},
-			{
-				"id": 500,
-				"name": "chDB",
-				"href": "/chdb",
-				"target": "_self",
-				"galaxyEvent": "footerNav.productMenu.chdbSelect"
 			},
 			{
 				"id": 400,
@@ -55,7 +42,7 @@
 			{
 				"id": 200,
 				"name": "料金",
-				"href": "/pricing",
+				"href": "/jp/pricing",
 				"target": "_self",
 				"galaxyEvent": "footerNav.productMenu.pricingSelect"
 			}
@@ -73,20 +60,6 @@
 				"galaxyEvent": "footerNav.resourcesMenu.docsSelect"
 			},
 			{
-				"id": 13,
-				"name": "トレーニング",
-				"href": "/learn/",
-				"target": "_self",
-				"galaxyEvent": "footerNav.resourcesMenu.trainingSelect"
-			},
-			{
-				"id": 14,
-				"name": "サポート",
-				"href": "/support/program",
-				"target": "_self",
-				"galaxyEvent": "footerNav.resourcesMenu.supportSelect"
-			},
-			{
 				"id": 18,
 				"name": "ベンチマーク",
 				"href": "https://benchmark.clickhouse.com",
@@ -99,27 +72,6 @@
 				"href": "/use-cases",
 				"target": "_self",
 				"galaxyEvent": "footerNav.resourcesMenu.useCasesSelect"
-			},
-			{
-				"id": 20,
-				"name": "ビデオ",
-				"href": "/videos",
-				"target": "_self",
-				"galaxyEvent": "footerNav.resourcesMenu.videosSelect"
-			},
-			{
-				"id": 22,
-				"name": "デモ",
-				"href": "/demos",
-				"target": "_self",
-				"galaxyEvent": "footerNav.resourcesMenu.demosSelect"
-			},
-			{
-				"id": 123,
-				"name": "リアルタイムデータウェアハウス",
-				"href": "/real-time-data-warehouse",
-				"target": "_self",
-				"galaxyEvent": "footerNav.productMenu.realtimeDWSelect"
 			},
 			{
 				"id": 21,
@@ -137,37 +89,24 @@
 			{
 				"id": 20,
 				"name": "ブログ",
-				"href": "/blog",
+				"href": "/jp/blog",
 				"target": "_self",
 				"galaxyEvent": "footerNav.companyMenu.blogSelect"
 			},
 			{
 				"id": 21,
 				"name": "ClickHouseについて",
-				"href": "/company/our-story",
+				"href": "/jp/company/our-story",
 				"target": "_self",
 				"galaxyEvent": "footerNav.companyMenu.ourStorySelect"
 			},
-			{
-				"id": 22,
-				"name": "採用情報",
-				"href": "/company/careers",
-				"target": "_self",
-				"galaxyEvent": "footerNav.companyMenu.careersSelect"
-			},
+			
 			{
 				"id": 23,
 				"name": "お問合せ",
-				"href": "/company/contact?loc=footer",
+				"href": "/jp/company/contact?loc=footer",
 				"target": "_self",
 				"galaxyEvent": "footerNav.companyMenu.contactSelect"
-			},
-			{
-				"id": 24,
-				"name": "ニュース & イベント",
-				"href": "/company/news-events",
-				"target": "_self",
-				"galaxyEvent": "footerNav.companyMenu.newsEventsSelect"
 			}
 		]
 	},
@@ -226,35 +165,28 @@
 			{
 				"id": 30,
 				"name": "BigQuery",
-				"href": "/comparison/bigquery",
+				"href": "/jp/comparison/bigquery",
 				"target": "_self",
 				"galaxyEvent": "footerNav.comparisonsMenu.bigQuerySelect"
 			},
 			{
 				"id": 10,
 				"name": "PostgreSQL",
-				"href": "/comparison/postgresql",
+				"href": "/jp/comparison/postgresql",
 				"target": "_self",
 				"galaxyEvent": "footerNav.comparisonsMenu.postgresSelect"
 			},
 			{
 				"id": 20,
 				"name": "Redshift",
-				"href": "/comparison/redshift",
+				"href": "/jp/comparison/redshift",
 				"target": "_self",
 				"galaxyEvent": "footerNav.comparisonsMenu.redshiftSelect"
 			},
 			{
-				"id": 24,
-				"name": "Rockset",
-				"href": "/comparison/rockset",
-				"target": "_self",
-				"galaxyEvent": "footerNav.comparisonsMenu.rocksetSelect"
-			},
-			{
 				"id": 40,
 				"name": "Snowflake",
-				"href": "/comparison/snowflake",
+				"href": "/jp/comparison/snowflake",
 				"target": "_self",
 				"galaxyEvent": "footerNav.comparisonsMenu.snowflakeSelect"
 			}
