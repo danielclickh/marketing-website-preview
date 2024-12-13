@@ -15,7 +15,7 @@ export default function NavigationSubNavResources() {
     <ul className='relative px-4 md-mid:py-2'>
       <li>
         <NavigationLink
-          href='/blog'
+          href='/jp/blog'
           onClick={useGalaxyOnClick('topNav.resourcesMenu.blogSelect')}
           className='block w-full'>
           ブログ
