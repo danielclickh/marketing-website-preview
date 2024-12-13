@@ -2,6 +2,7 @@
 const path = require('path')
 const strapiApiUrl =
   process.env.STRAPI_API_URL ?? 'https://cms.clickhouse-dev.com:1337'
+//process.env.STRAPI_API_URL ?? 'http://localhost:1337'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   sassOptions: {

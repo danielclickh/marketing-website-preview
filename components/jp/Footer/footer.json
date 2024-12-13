@@ -74,6 +74,20 @@
 				"galaxyEvent": "footerNav.resourcesMenu.useCasesSelect"
 			},
 			{
+				"id": 20,
+				"name": "ビデオ",
+				"href": "/jp/videos",
+				"target": "_self",
+				"galaxyEvent": "footerNav.resourcesMenu.videosSelect"
+			},
+			{
+				"id": 22,
+				"name": "デモ",
+				"href": "/jp/demos",
+				"target": "_self",
+				"galaxyEvent": "footerNav.resourcesMenu.demosSelect"
+			},
+			{
 				"id": 21,
 				"name": "サイトマップ",
 				"href": "/sitemap",

@@ -89,6 +89,22 @@ export default function NavigationSubNavResources() {
           </li>
         </NavigationSubNav>
       </li>
+      <li>
+        <NavigationLink
+          href='/jp/videos'
+          onClick={useGalaxyOnClick('topNav.resourcesMenu.videosSelect')}
+          className='block w-full'>
+          ビデオ
+        </NavigationLink>
+      </li>
+      <li>
+        <NavigationLink
+          href='/jp/demos'
+          onClick={useGalaxyOnClick('topNav.resourcesMenu.demosSelect')}
+          className='block w-full'>
+          デモ
+        </NavigationLink>
+      </li>
     </ul>
   )
 }
