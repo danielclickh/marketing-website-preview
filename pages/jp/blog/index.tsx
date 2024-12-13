@@ -21,8 +21,12 @@ export const getServerSideProps: GetServerSideProps<BlogProps> =
 
     const commonProps = await getCommonProps()
 
-    const { page = 1, category = null, search = null } = context.query || {}
-    const initialData = await fetchBlogs({ page, category, search })
+    const { page = 1, search = null } = context.query || {}
+    const initialData = await fetchBlogs({
+      page,
+      category: 'community',
+      search
+    })
 
     seo.path = '/jp/blog'
 
