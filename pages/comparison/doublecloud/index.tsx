@@ -1,7 +1,7 @@
 import { ArrowDownIcon, ChevronRightIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import HRSeparator from '../../../components/HRSeparator'
@@ -271,7 +271,7 @@ export default function Page({
             <div className='mx-auto max-w-7xl'>
               <div className='relative z-20 flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
                 <div className='p-10'>
-                  <div className='flex flex-col gap-x-6 gap-y-6 lg:flex-row'>
+                  <div className='space-y-6 lg:grid lg:grid-cols-4 lg:gap-6 lg:space-y-0'>
                     <QuoteCard
                       content={`"This year we actually exceeded a thousand active replicas. That's **processing hundreds of millions of inserted rows every second**, which actually corresponds to quite a significantly larger number of events because we've been using a lot of sampling."`}
                       logo={{
