@@ -64,7 +64,10 @@ export default function DemosPage({
       <div className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:mb-20 lg:pt-20'>
         <SuiTitle type='h1'>デモ</SuiTitle>
         {!!description && (
-          <Markdown className='mt-6 text-lg'>{description}</Markdown>
+          <Markdown className='mt-6 text-lg'>
+            ClickHouse
+            のスピードとスケーラビリティを紹介するオープンソースのデモ
+          </Markdown>
         )}
       </div>
       <div className='container mx-auto max-w-7xl px-8 pt-8 2xl:px-0'>
