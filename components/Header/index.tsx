@@ -17,10 +17,10 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    `ClickHouse announces strategic collaboration agreement with AWS`
+    `Join our release call on Thursday, Dec 19th, to learn what's new in ClickHouse v24.12`
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/blog/clickhouse-announces-strategic-collaboration-agreement-with-aws-to-advance-real-time-data-analytics-and-generative-ai-innovation?loc=eyebrow'
+    '/company/events/v24-12-community-release-call?loc=eyebrow'
   )
 
   const resizeHandler = () => {
