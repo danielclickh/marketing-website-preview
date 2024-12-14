@@ -8,7 +8,6 @@ import BlogPost from '../../../../components/BlogPostList/BlogPost'
 import { CUICard } from '../../../../components/ClickUI'
 import HRSeparator from '../../../../components/HRSeparator'
 import LogoCarousel from '../../../../components/LogoCarousel'
-import Markdown from '../../../../components/Markdown'
 import MarketoForm from '../../../../components/MarketoForm'
 import { getNewsLetterData } from '../../../../components/NewsLetter/getNewsLetterData'
 import ResponsiveEmbed from '../../../../components/ResponsiveEmbed'
@@ -120,9 +119,12 @@ export default function ComparisonPage({
                   </div>
                 </div>
                 <div className='rich_content mb-12 mt-4 text-center text-base text-neutral-0 md:text-left'>
-                  <Markdown className='text-lg'>
-                    {comparison.HeroDescription}
-                  </Markdown>
+                  <p className='mb-6 text-lg'>
+                    同時実行可能数が少ない、クエリの速度が遅いなど、Redshiftの課題でお困りではありませんか。コスト効果の高いソリューションをお探しでしょうか。
+                    <br />
+                    <br />
+                    多くのお客様がRedshiftからClickHouseに移行して分析処理を行う理由についてご説明します。
+                  </p>
                 </div>
 
                 {comparison.BigNumbers && (
@@ -134,16 +136,20 @@ export default function ComparisonPage({
                     glarePosition='all'
                     className='mb-12 h-full'>
                     <div className='cui-card flex flex-col items-stretch gap-y-5 rounded-lg border border-neutral-700/80 bg-neutral-900/50 p-3 shadow-card hover:shadow-lg lg:flex-row lg:divide-x lg:divide-neutral-700/80'>
-                      {comparison.BigNumbers.map((bigNumber, index) => {
-                        return (
-                          <div className='flex-1 p-3 text-center' key={index}>
-                            <p className='mb-2 text-5xl'>{bigNumber.Number}</p>
-                            <p className='text-md text-primary-300'>
-                              {bigNumber.Text}
-                            </p>
-                          </div>
-                        )
-                      })}
+                      <div className='flex-1 p-3 text-center' key={1}>
+                        <p className='mb-2 text-5xl'>75%</p>
+                        <p className='text-md text-primary-300'>コスト削減</p>
+                      </div>
+                      <div className='flex-1 p-3 text-center' key={1}>
+                        <p className='mb-2 text-5xl'>5倍</p>
+                        <p className='text-md text-primary-300'>
+                          クエリパフォーマンス
+                        </p>
+                      </div>
+                      <div className='flex-1 p-3 text-center' key={1}>
+                        <p className='mb-2 text-5xl'>20倍</p>
+                        <p className='text-md text-primary-300'>同時実行数</p>
+                      </div>
                     </div>
                   </Tilt>
                 )}
@@ -152,13 +158,14 @@ export default function ComparisonPage({
                 <div className='mb-12 lg:mb-0'>
                   <div className='lg:max-w-lg'>
                     <h3 className='mb-6 text-center font-basier text-xl font-light text-neutral-0'>
-                      {comparison.formTitle}
+                      すぐにお問合せください
                     </h3>
                     <>
                       {!formSuccess && (
                         <MarketoForm
                           formId={'1156'}
                           clearbitTracking={true}
+                          disclaimer='登録することで、ClickHouseがお客さまの個人情報をプライバシーポリシーに従って処理することに同意したと見なされます。'
                           onLoad={() => {
                             setFormLoaded(true)
                           }}
@@ -177,16 +184,18 @@ export default function ComparisonPage({
                       )}
 
                       {!formLoaded && (
-                        <div className='text-center'>Loading form...</div>
+                        <div className='text-center'>
+                          フォームを読み込んでいます...
+                        </div>
                       )}
 
                       {formSuccess && (
                         <div ref={formSuccessRef1}>
                           <h3 className='text-center text-2xl font-bold'>
-                            Thank you for your submission!
+                            ご応募ありがとうございました！
                           </h3>
                           <p className='mt-2 text-center text-neutral-200'>
-                            We will be in touch soon.
+                            すぐにご連絡させていただきます。
                           </p>
                         </div>
                       )}
@@ -224,10 +233,7 @@ export default function ComparisonPage({
       <div className='bg-primary-300 py-6'>
         <div className='mx-auto'>
           <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-6 text-center font-basier text-xl font-semibold leading-normal text-neutral-900 md:px-0'>
-            Trusted by developers that work with data at{' '}
-            <span className='tilted tilted-black'>
-              <span className='tilted-content leading-8'>scale</span>
-            </span>
+            ClickHouseは多くのお客さまから信頼を獲得しています
           </div>
           <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-16 md:gap-x-14'>
             <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
@@ -250,53 +256,193 @@ export default function ComparisonPage({
               />
             )}
             <h2 className='text-center font-basier text-3xl font-semibold'>
-              {comparison.painpointsTitle}
+              開発者が ClickHouse を選択する理由は何ですか?
             </h2>
             <div className='mt-10 lg:mt-20'>
               <div className='grid grid-cols-1 gap-8'>
-                {comparison.painpoint.map((painpoint, index) => {
-                  return (
-                    <CUICard key={index} className='p-6'>
-                      <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
-                        <div className='flex flex-col items-start gap-10 lg:flex-row'>
-                          <div className='w-full lg:w-2/3'>
-                            <h3 className='mb-4 flex-grow text-center font-basier text-3xl font-semibold leading-tight text-neutral-100 lg:text-left'>
-                              {painpoint.Title}
-                            </h3>
-                            <div className='rich_content  text-neutral-0'>
-                              <Markdown>{painpoint.Description}</Markdown>
-                            </div>
-                          </div>
-                          {painpoint.customer && (
-                            <div className='h-full w-full lg:w-1/3'>
-                              <CUICard className='p-6'>
-                                <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
-                                  <div className='rich_content  text-neutral-0'>
-                                    <Image
-                                      src='/images/Quote.svg'
-                                      width={37}
-                                      height={28}
-                                      alt='Quote'
-                                      className='mb-4'
-                                    />{' '}
-                                    <Markdown>
-                                      {painpoint.customer.description as string}
-                                    </Markdown>
-                                    {painpoint.customer.logo && (
-                                      <StrapiImage
-                                        {...painpoint.customer.logo}
-                                      />
-                                    )}
-                                  </div>
-                                </CUICard.Body>
-                              </CUICard>
-                            </div>
-                          )}
+                <CUICard key={1} className='p-6'>
+                  <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
+                    <div className='flex flex-col items-start gap-10 lg:flex-row'>
+                      <div className='w-full lg:w-2/3'>
+                        <h3 className='mb-4 flex-grow text-center font-basier text-3xl font-semibold leading-tight text-neutral-100 lg:text-left'>
+                          Redshiftはパフォーマンスが低い
+                        </h3>
+                        <div className='rich_content  text-neutral-0'>
+                          <p>
+                            同時可能数が非常に少ないため、顧客向けアプリケーション（大量の並列処理が必要）の作成がかなり困難です。Redshiftの場合、同時可能数はすべてのキュー全体でも最大50しかありません。
+                          </p>
+                          <p>
+                            ClickHouseは非常に高速でリソース効率の高い、分析に適したデータベースです。
+                            同時可能数のレベルが高いため、多数のユーザーによるデータのアクセスやクエリを効率的に処理できます。パワフルなパフォーマンスと拡張性で、同時ユーザーの数が非常に多い場合でも分析処理を高速に実行できます。
+                          </p>
+                          <p>
+                            世界中で多くの企業がClickHouseを使用し、インタラクティブでアドホックな高機能アプリケーションを構築して分析結果をユーザーに表示しています。
+                          </p>
                         </div>
-                      </CUICard.Body>
-                    </CUICard>
-                  )
-                })}
+                      </div>
+
+                      <div className='h-full w-full lg:w-1/3'>
+                        <CUICard className='p-6'>
+                          <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
+                            <div className='rich_content  text-neutral-0'>
+                              <Image
+                                src='/images/Quote.svg'
+                                width={37}
+                                height={28}
+                                alt='Quote'
+                                className='mb-4'
+                              />{' '}
+                              <p>
+                                "As data size grew, we faced performance and
+                                cost challenges with AWS Redshift. Switching to
+                                ClickHouse improved our query performance by 20
+                                times and greatly cut costs."
+                              </p>
+                              <p>
+                                <Link
+                                  target='_blank'
+                                  href='https://juicefs.com/en/blog/user-stories/read-write-separation'>
+                                  Read blog
+                                </Link>
+                              </p>
+                              <p>Tao Ma, Data Engineering Lead, Jerry</p>
+                              {/* {painpoint.customer.logo && (
+                                <StrapiImage {...painpoint.customer.logo} />
+                              )} */}
+                            </div>
+                          </CUICard.Body>
+                        </CUICard>
+                      </div>
+                    </div>
+                  </CUICard.Body>
+                </CUICard>
+
+                <CUICard key={2} className='p-6'>
+                  <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
+                    <div className='flex flex-col items-start gap-10 lg:flex-row'>
+                      <div className='w-full lg:w-2/3'>
+                        <h3 className='mb-4 flex-grow text-center font-basier text-3xl font-semibold leading-tight text-neutral-100 lg:text-left'>
+                          Redshiftはクエリの遅延が大きい
+                        </h3>
+                        <div className='rich_content  text-neutral-0'>
+                          <p>
+                            Amazon
+                            Redshiftのクエリ遅延が大きいことには多くの理由があります。それらは主にデータガバナンス、管理全般、クエリ最適化などの要因に分類されますが、テーブルデザインが最適でないことも大きな原因の1つです。
+                          </p>
+                          <p>
+                            ClickHouseはリアルタイム分析で他を圧倒するパフォーマンスを発揮します。
+                            多くの企業から、分析処理をRedshiftからClickHouseに移行したことでクエリ速度が5倍以上改善したと報告されています。
+                          </p>
+                          <p>
+                            大容量データを集計する、詳細な分析をインタラクティブにオンザフライで実行するなどを、ClickHouseであれば瞬時に処理できます。
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className='h-full w-full lg:w-1/3'>
+                        <CUICard className='p-6'>
+                          <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
+                            <div className='rich_content  text-neutral-0'>
+                              <Image
+                                src='/images/Quote.svg'
+                                width={37}
+                                height={28}
+                                alt='Quote'
+                                className='mb-4'
+                              />{' '}
+                              <p>
+                                "You can see that ClickHouse outperforms
+                                Redshift easily…. The performance of ClickHouse
+                                was consistent in returning results, with some
+                                spikes possibly related to the network storage.
+                                They also tested the performance of ClickHouse
+                                with different levels of concurrency, which
+                                showed predictable growth and a maximum query
+                                time of six seconds"
+                              </p>
+                              <p>
+                                <Link
+                                  target='_blank'
+                                  href='/blog/nyc-meetup-report-real-time-slicing-and-dicing-reporting-with-clickhouse?loc=redshift'>
+                                  Read blog
+                                </Link>
+                              </p>
+                              <p>Vadim Semenov</p>
+                              <Image
+                                src='/logos/rokt.svg'
+                                alt='Rokt'
+                                height={28}
+                                width={101}
+                              />
+                              {/* {painpoint.customer.logo && (
+                                <StrapiImage {...painpoint.customer.logo} />
+                              )} */}
+                            </div>
+                          </CUICard.Body>
+                        </CUICard>
+                      </div>
+                    </div>
+                  </CUICard.Body>
+                </CUICard>
+
+                <CUICard key={2} className='p-6'>
+                  <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
+                    <div className='flex flex-col items-start gap-10 lg:flex-row'>
+                      <div className='w-full lg:w-2/3'>
+                        <h3 className='mb-4 flex-grow text-center font-basier text-3xl font-semibold leading-tight text-neutral-100 lg:text-left'>
+                          Redshiftはコストの負担が大きい
+                        </h3>
+                        <div className='rich_content  text-neutral-0'>
+                          <p>
+                            クエリ実行計画、インデックス化の戦略、およびデータベース設定パラメーターを最適化するために高度な専門知識が要求されます。また、パフォーマンスのボトルネックを解決するために監視を続ける必要があります。
+                          </p>
+                          <p>
+                            ClickHouseのリソース管理機能を使用すると、コスト効果が大幅に向上します。
+                            ClickHouseはリソースの使用効率を最高水準まで高めるようにデザインされています。
+                          </p>
+                          <p>
+                            ClickHouseからRedshiftに移行したお客様から、コストを75%も削減できたとお聞きしています。また、Roktによるベンチマーク分析結果から、ClickHouseの費用がRedshiftよりも3倍低いとの報告もありました。
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className='h-full w-full lg:w-1/3'>
+                        <CUICard className='p-6'>
+                          <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
+                            <div className='rich_content  text-neutral-0'>
+                              <Image
+                                src='/images/Quote.svg'
+                                width={37}
+                                height={28}
+                                alt='Quote'
+                                className='mb-4'
+                              />{' '}
+                              <p>
+                                "Moving over to ClickHouse we were basically
+                                able to cut that (Redshift) bill in half."
+                              </p>
+                              <p>
+                                <Link target='_blank' href='/videos/vantage'>
+                                  Watch
+                                </Link>
+                              </p>
+                              <p>Brooke McKim, Co-founder and CTO, Vantage</p>
+                              <Image
+                                src='/logos/vantage.svg'
+                                alt='Vantage'
+                                height={28}
+                                width={101}
+                              />
+                              {/* {painpoint.customer.logo && (
+                                <StrapiImage {...painpoint.customer.logo} />
+                              )} */}
+                            </div>
+                          </CUICard.Body>
+                        </CUICard>
+                      </div>
+                    </div>
+                  </CUICard.Body>
+                </CUICard>
               </div>
             </div>
           </div>
@@ -426,7 +572,7 @@ export default function ComparisonPage({
             className='mb-4 fill-none'
           />
           <h2 className='mb-12 text-center font-basier text-xl font-semibold lg:mb-16'>
-            Contact us for help with your migration
+            すぐにお問合せください
           </h2>
           <div className='mx-auto max-w-lg'>
             <>
@@ -445,23 +591,23 @@ export default function ComparisonPage({
                         behavior: 'smooth'
                       })
                     }, 10)
-
                     return false // Stops page from reloading
                   }}
+                  disclaimer='登録することで、ClickHouseがお客さまの個人情報をプライバシーポリシーに従って処理することに同意したと見なされます。'
                 />
               )}
 
               {!formLoaded && (
-                <div className='text-center'>Loading form...</div>
+                <div className='text-center'>フォームを読み込んでいます...</div>
               )}
 
               {formSuccess && (
                 <div ref={formSuccessRef}>
                   <h3 className='text-center text-2xl font-bold'>
-                    Thank you for your submission!
+                    ご応募ありがとうございました！
                   </h3>
                   <p className='mt-2 text-center text-neutral-200'>
-                    We will be in touch soon.
+                    すぐにご連絡させていただきます。
                   </p>
                 </div>
               )}

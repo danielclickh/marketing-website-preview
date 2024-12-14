@@ -515,16 +515,16 @@ export default function BigQueryPage({
               )}
 
               {!formLoaded && (
-                <div className='text-center'>Loading form...</div>
+                <div className='text-center'>フォームを読み込んでいます...</div>
               )}
 
               {formSuccess && (
                 <div ref={formSuccessRef}>
                   <SuiTitle type='h3' className='text-center'>
-                    Thank you for your submission!
+                    ご応募ありがとうございました！
                   </SuiTitle>
                   <p className='mt-2 text-center text-neutral-200'>
-                    We will be in touch soon.
+                    すぐにご連絡させていただきます。
                   </p>
                 </div>
               )}

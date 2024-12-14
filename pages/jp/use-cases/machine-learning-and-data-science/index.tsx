@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { CUIButton } from '../../../../components/ClickUI'
 import GetStartedFree from '../../../../components/jp/GetStartedFree'
@@ -80,7 +80,7 @@ export default function MLUseCasePage({
                 <div className='flex-col xl:mt-16'>
                   <div className='w-full lg:max-w-xl xl:max-w-full'>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                      <Link href='/use-cases'>すべてのユースケース</Link> /
+                      <Link href='/jp/use-cases'>すべてのユースケース</Link> /
                       機械学習と生成AI
                     </h4>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-lg lg:text-left'>
@@ -132,7 +132,7 @@ export default function MLUseCasePage({
                         type='secondary'
                         size='lg'
                         weight='semibold'
-                        href='/company/contact?loc=use-case-ml-and-ds'
+                        href='/jp/company/contact?loc=use-case-ml-and-ds'
                         target='_self'
                         linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
                         className='w-full'>

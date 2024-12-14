@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { findAll, getStagingOnlyFilters } from '../../lib/api/strapi'
-import { BlogApiResponse } from '../../types/blogs'
+import { findAll, getStagingOnlyFilters } from '../../../lib/api/strapi'
+import { BlogApiResponse } from '../../../types/blogs'
 
 const baseQuery: Record<string, any> = {
   sort: ['date:DESC', 'publishedAt:DESC'],
@@ -18,7 +18,7 @@ const baseQuery: Record<string, any> = {
   ],
   filters: {
     $and: [
-      { category: { $ne: 'japanese' } },
+      { category: { $eq: 'japanese' } },  // Only include japanese category
       { $or: getStagingOnlyFilters() }
     ]
   }

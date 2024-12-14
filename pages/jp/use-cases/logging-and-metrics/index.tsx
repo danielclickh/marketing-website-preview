@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { CUIButton } from '../../../../components/ClickUI'
 import GetStartedFree from '../../../../components/jp/GetStartedFree'
@@ -78,7 +78,7 @@ export default function ClickHouseServerPage({
               <div className='flex'>
                 <div className='flex-col xl:mt-16 xl:w-7/12'>
                   <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                    <Link href='/use-cases'>すべてのユースケース</Link> /
+                    <Link href='/jp/use-cases'>すべてのユースケース</Link> /
                     ログ、イベント、トレース
                   </h4>
                   <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-2xl lg:text-left'>
@@ -110,7 +110,7 @@ export default function ClickHouseServerPage({
                       type='secondary'
                       size='lg'
                       weight='semibold'
-                      href='/company/contact?loc=use-case-ml-and-ds'
+                      href='/jp/company/contact?loc=use-case-ml-and-ds'
                       target='_self'
                       linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
                       className='w-full'>

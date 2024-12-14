@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { CUIButton } from '../../../../components/ClickUI'
 import AccordionComponent from '../../../../components/jp/BusinessIntelligenceDiagram/Accordion'
 import GetStartedFree from '../../../../components/jp/GetStartedFree'
@@ -107,7 +107,7 @@ export default function RealTimeAnalyticsPage({
                         type='secondary'
                         size='lg'
                         weight='semibold'
-                        href='/company/contact?loc=use-case-business-intelligence'
+                        href='/jp/company/contact?loc=use-case-business-intelligence'
                         target='_self'
                         linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
                         className='w-full'>
