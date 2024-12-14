@@ -36,6 +36,7 @@ export const getStaticProps: GetStaticProps<DemosPageProps> =
 
     if (!seo?.title) seo.title = title
     seo.path = '/jp/demos'
+    seo.title = 'ClickHouse デモ'
 
     return {
       props: {

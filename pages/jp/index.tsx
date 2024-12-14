@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next'
+import HRSeparator from '../../components/HRSeparator'
 import FAQ from '../../components/jp/FAQ'
 import GetStarted from '../../components/jp/GetStarted'
 import HomepageHero from '../../components/jp/HomepageHero'
@@ -8,7 +9,6 @@ import HomepageSectionFast from '../../components/jp/HomepageSectionFast'
 import HomepageSectionStackIntegration from '../../components/jp/HomepageSectionStackIntegration'
 import HomepageSectionTrustedBy from '../../components/jp/HomepageSectionTrustedBy'
 import HomepageSectionWhyClickhouse from '../../components/jp/HomepageSectionWhyClickhouse'
-import HRSeparator from '../../components/HRSeparator'
 import JoinCommunity from '../../components/jp/JoinCommunity'
 import Layout from '../../components/jp/Layout'
 import { findOne } from '../../lib/api/strapi'
@@ -34,6 +34,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
     const commonProps = await getCommonProps()
     const data = await findOne('homepage', params)
     data.seo.path = ''
+    data.seo.title = '高速オープンソース OLAP DBMS - ClickHouse'
     return {
       props: {
         ...data,

@@ -37,9 +37,8 @@ export const getStaticProps: GetStaticProps<LoggingProps> =
 
     const data = await findOne('homepage', params)
 
-    data.seo.path = '/use-cases/logging-and-metrics'
-    data.seo.title =
-      'Logs, events, and traces with ClickHouse | ClickHouse for logging'
+    data.seo.path = '/jp/use-cases/logging-and-metrics'
+    data.seo.title = 'ClickHouseによるログ、イベント、トレース'
     data.seo.description =
       'ClickHouse is the fastest and most resource-efficient database for real-time analytics, making it the perfect fit for observability use cases.'
     data.seo.image = [{ url: '/images/use-cases/logging/og.png' }]
@@ -164,6 +163,7 @@ export default function ClickHouseServerPage({
               <div className='p-10'>
                 <div className='flex flex-col gap-x-6 gap-y-6 lg:flex-row'>
                   <QuoteCard
+                    className='flex-1'
                     content={`“At Sony LIV, we ingest tens of millions of video streaming events into ClickHouse Cloud and run queries to generate complex dashboards for analysis. This allows our operations team to monitor, alert & troubleshoot the QOS and QOE of our customers in real-time. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.”`}
                     logo={{
                       src: '/images/sony.svg',
@@ -173,6 +173,7 @@ export default function ClickHouseServerPage({
                     }}
                   />
                   <QuoteCard
+                    className='flex-1'
                     content={`"Trip.com was using Elasticsearch for their observability data until they made the switch to ClickHouse. The result? 40GB per second, 30% savings in costs, and queries that are up to 30x faster!"`}
                     link='/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse'
                     logo={{
@@ -183,6 +184,7 @@ export default function ClickHouseServerPage({
                     }}
                   />
                   <QuoteCard
+                    className='flex-1'
                     content={`"Migrating logs from Elasticsearch to ClickHouse has not only significantly reduced storage costs but also provided us with a faster querying experience."`}
                     link='/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system'
                     logo={{
@@ -260,7 +262,7 @@ export default function ClickHouseServerPage({
                     <span className='tilted-content'>リファレンス</span>
                   </span>
                 </SuiTitle>
-                <div className='mx-auto mb-8 mt-6 max-w-2xl text-left text-neutral-300'>
+                <div className='mx-auto mb-8 mt-6 max-w-2xl text-center text-neutral-300'>
                   ClickHouseによる以下のブログに、オブザーバビリティソリューションのためにClickhouseを導入する方法について詳しく説明されています。
                 </div>
                 <div className='bg-neutral-725 p-8'>

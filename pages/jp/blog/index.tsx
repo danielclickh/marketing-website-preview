@@ -28,6 +28,7 @@ export const getServerSideProps: GetServerSideProps<BlogProps> =
     const initialData = await fetchBlogs({ page, category, search })
 
     seo.path = '/jp/blog'
+    seo.title = 'ClickHouse ブログ'
 
     return {
       props: {

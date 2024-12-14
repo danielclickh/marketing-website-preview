@@ -51,6 +51,7 @@ Compute: ${memory}`)
         <MarketoForm
           formId={'1294'}
           clearbitTracking={true}
+          disclaimer='登録することで、ClickHouseがお客さまの個人情報をプライバシーポリシーに従って処理することに同意したと見なされます。'
           onLoad={(formObject) => {
             setFormLoaded(true)
             setMarketoForm(formObject)

@@ -18,6 +18,7 @@ export const getStaticProps: GetStaticProps<ContactProps> =
 
     const commonProps = await getCommonProps()
     data.seo.path = '/company/contact'
+    data.seo.title = 'ClickHouse お問合せ'
     return {
       props: {
         ...data.hero,
@@ -50,7 +51,7 @@ export default function ContactPage({
           </div>
           <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pb-8 pt-14 text-center md:bg-no-repeat 2xl:px-0'>
             <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
-              <ContactForm />
+              <ContactForm disclaimer='saf' />
             </div>
           </div>
         </div>

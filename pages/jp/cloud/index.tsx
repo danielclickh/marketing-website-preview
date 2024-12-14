@@ -6,9 +6,9 @@ import { useEffect, useRef, useState } from 'react'
 import BulletPoint from '../../../components/BulletPoint'
 import Lines from '../../../components/ClickPipesAnimation/Lines'
 import { CUIButton, CUICard } from '../../../components/ClickUI'
-import CloudProviders from '../../../components/CloudProviders'
 import HRSeparator from '../../../components/HRSeparator'
 import AnimatedIntegrationLogos from '../../../components/jp/AnimatedIntegrationLogos'
+import CloudProviders from '../../../components/jp/CloudProviders'
 import GetStartedFree from '../../../components/jp/GetStartedFree'
 import Layout from '../../../components/jp/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
@@ -45,7 +45,8 @@ export const getStaticProps: GetStaticProps<CloudData> =
       ]
     }
     const data = await findOne('cloud', params)
-    data.seo.path = '/cloud'
+    data.seo.path = '/jp/cloud'
+    data.seo.title = 'ClickHouse Cloud が日本で登場'
     const commonProps = await getCommonProps()
     return {
       props: {
