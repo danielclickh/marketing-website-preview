@@ -57,7 +57,7 @@ export default function NavigationSubNavResources() {
               BigQuery
             </NavigationLink>
           </li>
-          <li>
+          {/* <li>
             <NavigationLink
               href='/jp/comparison/postgresql'
               onClick={useGalaxyOnClick(
@@ -66,7 +66,7 @@ export default function NavigationSubNavResources() {
               className='block w-full'>
               PostgreSQL
             </NavigationLink>
-          </li>
+          </li> */}
           <li>
             <NavigationLink
               href='/jp/comparison/redshift'

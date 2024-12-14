@@ -87,7 +87,7 @@ export default function ClickHouseServerPage({
                         すぐに開始する
                       </CUIButton>
                     )}
-                    {secondaryButton && (
+                    {/* {secondaryButton && (
                       <CUIButton
                         type='secondary'
                         size='lg'
@@ -98,7 +98,7 @@ export default function ClickHouseServerPage({
                         className='w-full'>
                         概要ビデオを見る
                       </CUIButton>
-                    )}
+                    )} */}
                     {!secondaryButton && gitButton?.text && (
                       <SuiButton
                         type='secondary'

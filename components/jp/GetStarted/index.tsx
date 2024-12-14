@@ -1,10 +1,10 @@
-import Markdown from '../../Markdown'
-import { SuiCodeblock, SuiTitle } from '../../sui'
-import { GettingStartedData } from './types'
-import { CUILink } from '../../ClickUI'
-import styles from './GetStarted.module.scss'
 import Link from 'next/link'
 import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
+import { CUILink } from '../../ClickUI'
+import Markdown from '../../Markdown'
+import { SuiCodeblock, SuiTitle } from '../../sui'
+import styles from './GetStarted.module.scss'
+import { GettingStartedData } from './types'
 export default function FetchGetStarted({ platforms }: GettingStartedData) {
   return (
     <div
