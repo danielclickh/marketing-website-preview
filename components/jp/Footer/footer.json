@@ -184,13 +184,6 @@
 				"galaxyEvent": "footerNav.comparisonsMenu.bigQuerySelect"
 			},
 			{
-				"id": 10,
-				"name": "PostgreSQL",
-				"href": "/jp/comparison/postgresql",
-				"target": "_self",
-				"galaxyEvent": "footerNav.comparisonsMenu.postgresSelect"
-			},
-			{
 				"id": 20,
 				"name": "Redshift",
 				"href": "/jp/comparison/redshift",

@@ -5,17 +5,16 @@ import { useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import BlogPost from '../../../../components/BlogPostList/BlogPost'
 import { CUIButton, CUICard } from '../../../../components/ClickUI'
-import GetStarted from '../../../../components/GetStarted'
 import HRSeparator from '../../../../components/HRSeparator'
+import GetStarted from '../../../../components/jp/GetStarted'
 import Layout from '../../../../components/Layout'
 import LogoCarousel from '../../../../components/LogoCarousel'
-import Markdown from '../../../../components/Markdown'
 import MarketoForm from '../../../../components/MarketoForm'
 import { StrapiImage } from '../../../../components/StrapiElements'
 import { findAll, findOne } from '../../../../lib/api/strapi'
 import { useGalaxyOnPage } from '../../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../../lib/utils/getCommonProps'
-import { BigNumber, ComparisonProps } from '../../../../types/comparisons'
+import { ComparisonProps } from '../../../../types/comparisons'
 
 interface SnowflakePageProps extends ComparisonProps {
   customerStories: any
@@ -118,19 +117,24 @@ export default function SnowflakePage({
               <div>
                 <div className='items-center'>
                   <div className='w-full lg:max-w-xl'>
-                    <h4 className='mb-2 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                      Comparisons
-                    </h4>
+                    <span className='mb-2 inline-block rounded-full border border-primary-500 bg-primary-700 px-4 py-1 text-xs text-primary-300'>
+                      比較情報
+                    </span>
                     <h1 className='mb-4 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 lg:text-left lg:text-5xl xl:text-5.5xl '>
                       {comparisonTitle}
                     </h1>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-neutral-0/60 lg:text-left'>
-                      For real-time analytics
+                      リアルタイム分析での比較
                     </h4>
                   </div>
                 </div>
                 <div className='rich_content mt-8 w-full text-center text-base text-neutral-200 lg:max-w-xl lg:text-left'>
-                  <Markdown>{heroDescription}</Markdown>
+                  <p>
+                    ClickHouseは大規模なデータの分析と探索をリアルタイムで処理するようにデザインされています。Snowflakeは長期的なレポート作成やアドホックデータ分析を効率的に実行するためのデータウェアハウスです。リアルタイム分析の処理ではClickHouseの方が高速かつコストも低く抑えられます。
+                  </p>
+                  <p>
+                    リアルタイム分析におけるClickHouseとSnowflakeの比較について、ClickHouseが行ったベンチマーク調査を基に解説します。Snowflakeの増え続けるコストから解放され、ClickHouseでデータ戦略を一新しましょう。
+                  </p>
                 </div>
               </div>
               <div className='mb-6 hidden lg:mb-0 lg:block lg:max-w-[400px] xl:max-w-[575px]'>
@@ -150,29 +154,49 @@ export default function SnowflakePage({
         <div className='relative pt-12 lg:pt-0'>
           <div className='mx-auto flex flex-col text-center'>
             <div className='mx-auto w-fit max-w-[850px] px-4 pb-4 pt-2 text-center font-basier text-2xl font-semibold  text-white md:px-0 lg:mb-8 lg:text-4xl'>
-              ClickHouse performance compared to Snowflake for{' '}
+              ClickHouseの
               <span className='tilted tilted-yellow leading-relaxed'>
-                <span className='tilted-content'>real-time</span>
+                <span className='tilted-content'>のリアルタイム</span>
               </span>{' '}
-              analytics
+              分析におけるSnowflakeとの性能比較
             </div>
           </div>
 
           <div className='clip-inverted-triangle -mt-16 xl:-mt-28'>
             <div className='relative z-40 mx-auto mt-4 max-w-4xl pb-0 pt-20 lg:mt-12'>
               <div className='mx-auto mb-12 flex items-center gap-4 px-4 md:px-0'>
-                {BigNumbers.map((stat: BigNumber, index: number) => (
-                  <div
-                    key={index}
-                    className='w-1/3 rounded-md border border-white/40 bg-[#363531] px-3 py-6 shadow-lg'>
-                    <h3 className='mb-2 text-center font-basier text-2xl font-bold leading-none text-primary-300 lg:text-[69px]'>
-                      {stat.Number}
-                    </h3>
-                    <p className='min-h-[30px] text-center font-basier text-sm font-bold leading-none lg:text-base'>
-                      {stat.Text}
-                    </p>
-                  </div>
-                ))}
+                <div
+                  key={1}
+                  className='w-1/3 rounded-md border border-white/40 bg-[#363531] px-3 py-6 shadow-lg'>
+                  <h3 className='mb-2 text-center font-basier text-2xl font-bold leading-none text-primary-300 lg:text-[69px]'>
+                    2倍
+                  </h3>
+                  <p className='min-h-[30px] text-center font-basier text-sm font-bold leading-none lg:text-base'>
+                    クエリ速度
+                  </p>
+                </div>
+
+                <div
+                  key={2}
+                  className='w-1/3 rounded-md border border-white/40 bg-[#363531] px-3 py-6 shadow-lg'>
+                  <h3 className='mb-2 text-center font-basier text-2xl font-bold leading-none text-primary-300 lg:text-[69px]'>
+                    38%
+                  </h3>
+                  <p className='min-h-[30px] text-center font-basier text-sm font-bold leading-none lg:text-base'>
+                    圧縮効率
+                  </p>
+                </div>
+
+                <div
+                  key={3}
+                  className='w-1/3 rounded-md border border-white/40 bg-[#363531] px-3 py-6 shadow-lg'>
+                  <h3 className='mb-2 text-center font-basier text-2xl font-bold leading-none text-primary-300 lg:text-[69px]'>
+                    3-5倍
+                  </h3>
+                  <p className='min-h-[30px] text-center font-basier text-sm font-bold leading-none lg:text-base'>
+                    コスト削減
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -198,7 +222,7 @@ export default function SnowflakePage({
                   </h3>
                   <p className='min-h-[30px] pb-6 text-sm text-primary-300 lg:min-h-fit lg:text-base'>
                     <Link href='/blog/adgreetz-processes-millions-of-daily-ad-impressions'>
-                      Read more
+                      詳しく見る
                     </Link>
                   </p>
                   <Image
@@ -226,7 +250,7 @@ export default function SnowflakePage({
                     </h3>
                     <p className='min-h-[30px] pb-6 text-sm text-primary-300 lg:min-h-fit lg:text-base'>
                       <Link href='/blog/harnessing-the-power-of-materialized-views-and-clickhouse-for-high-performance-analytics-at-inigo'>
-                        Read more
+                        詳しく見る
                       </Link>
                     </p>
                   </div>
@@ -293,10 +317,10 @@ export default function SnowflakePage({
                           <p
                             className='mb-4 text-2xl font-bold lg:text-3xl'
                             ref={formSuccessRef}>
-                            Ready to learn more?
+                            詳細をご覧ください
                           </p>
                           <p className='mb-6'>
-                            Access the PDF executive summary.
+                            エグゼクティブサマリー（PDF）をお届けします
                           </p>
                         </>
                       )}
@@ -304,6 +328,7 @@ export default function SnowflakePage({
                         <MarketoForm
                           formId='1073'
                           clearbitTracking={true}
+                          disclaimer='登録することで、ClickHouseがお客さまの個人情報をプライバシーポリシーに従って処理することに同意したと見なされます。'
                           onLoad={() => setFormLoaded(true)}
                           onSuccess={() => {
                             setFormSuccess(true)
@@ -321,13 +346,15 @@ export default function SnowflakePage({
                       )}
 
                       {!formLoaded && (
-                        <div className='text-center'>Loading form...</div>
+                        <div className='text-center'>
+                          フォームを読み込んでいます...
+                        </div>
                       )}
 
                       {formSuccess && (
                         <div className='text-center'>
                           <h3 className='text-2xl font-bold'>
-                            Thank you for your submission!
+                            ご応募ありがとうございました！
                           </h3>
                           <CUIButton
                             type='primary'
@@ -347,10 +374,7 @@ export default function SnowflakePage({
                     </div>
                   </div>
                   <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
-                    Trusted by developers that work with data at{' '}
-                    <span className='tilted tilted-black'>
-                      <span className='tilted-content leading-8'>scale</span>
-                    </span>
+                    大規模なデータを扱う開発者から信頼をいただいています。
                   </div>
                 </div>
               </div>
@@ -373,9 +397,7 @@ export default function SnowflakePage({
           {comparison.data[0].Content.map((content: any, index: number) => {
             return (
               <div key={index} className='mx-auto mb-10 max-w-7xl'>
-                <h3 className='mb-4 text-2xl font-semibold'>
-                  {content.SectionTitle}
-                </h3>
+                <h3 className='mb-4 text-2xl font-semibold'>関連コンテンツ</h3>
                 {content.Description && (
                   <div className='rich_content mb-6'>
                     <ReactMarkdown>{content.Description}</ReactMarkdown>
