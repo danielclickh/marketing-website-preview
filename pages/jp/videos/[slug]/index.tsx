@@ -161,7 +161,7 @@ export default function VideoPage({
       <div className='container mx-auto my-20 flex max-w-3xl flex-col px-6 2xl:px-0'>
         <div className='mx-auto flex flex-col text-center'>
           <h4 className='text-base font-semibold text-primary-300'>
-            <Link href='/videos'>Videos</Link>
+            <Link href='/jp/videos'>ビデオ</Link>
             {video.categories?.[0] && ` / `}
             {video.categories?.[0] && (
               <Link
@@ -238,7 +238,7 @@ export default function VideoPage({
                   className='font-base block w-full border border-primary-300/50 hover:translate-y-0 hover:border-primary-400 hover:no-underline'>
                   <div className='flex w-full flex-row items-center gap-6'>
                     <div className='flex-shrink flex-grow basis-0 truncate text-left'>
-                      <strong className='block font-bold'>Next video</strong>
+                      <strong className='block font-bold'>次のビデオ</strong>
                       <span className='block truncate font-normal'>
                         {nextVideo.Title}
                       </span>
@@ -278,7 +278,7 @@ export default function VideoPage({
                 type='h2'
                 className='!text-3xl text-neutral-100'
                 weight='semibold'>
-                Recent videos
+                最近の動画
               </SuiTitle>
 
               <SuiButton
@@ -286,7 +286,7 @@ export default function VideoPage({
                 type='empty'
                 color='primary'
                 className='font-base border border-primary-300/50'>
-                View all Videos
+                すべてのビデオを見る
               </SuiButton>
             </div>
             <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>

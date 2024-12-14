@@ -216,20 +216,20 @@ function UseCasesPage({
                             return (
                               <div
                                 key={index}
-                                className={`min-h-[86px] w-full border-b border-l border-[#464641] ring-inset transition-all hover:z-10 hover:bg-white/10 hover:ring-[1px] hover:ring-primary-300`}>
+                                className={`flex min-h-[86px] w-full justify-center border-b border-l border-[#464641] align-middle ring-inset transition-all hover:z-10 hover:bg-white/10 hover:ring-[1px] hover:ring-primary-300`}>
                                 <Link
                                   href={
                                     logo.link
                                       ? logo.link
                                       : 'https://clickhouse.com'
                                   }
-                                  className='mx-auto flex min-h-full w-full brightness-0 invert hover:brightness-100 hover:invert-0'>
+                                  className='flex items-center justify-center align-middle brightness-0  invert hover:brightness-100 hover:invert-0'>
                                   <Image
                                     src={logo.logo}
                                     alt={logo.name}
                                     height={0}
                                     width={0}
-                                    className='mx-auto mt-4 flex h-10 w-auto'
+                                    className='max-h-10 w-auto max-w-36'
                                   />
                                 </Link>
                               </div>
