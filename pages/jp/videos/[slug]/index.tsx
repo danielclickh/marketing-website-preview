@@ -121,7 +121,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const commonData = await getCommonProps()
 
   let seo: SeoMetadata = {
-    path: `/videos/${video.Slug}`,
+    path: `/jp/videos/${video.Slug}`,
     title: video.Title || video.VideoID
   }
 
@@ -192,7 +192,9 @@ export default function VideoPage({
         <div className='mb-10 grid w-full grid-cols-1 gap-8 md:grid-cols-2'>
           {prevVideo && (
             <div>
-              <Link href={`/videos/${prevVideo.Slug}`} className='block w-full'>
+              <Link
+                href={`/jp/videos/${prevVideo.Slug}`}
+                className='block w-full'>
                 <SuiButton
                   type='empty'
                   color='primary'
@@ -227,7 +229,9 @@ export default function VideoPage({
           {!prevVideo && <div></div>}
           {nextVideo && (
             <div>
-              <Link href={`/videos/${nextVideo.Slug}`} className='block w-full'>
+              <Link
+                href={`/jp/videos/${nextVideo.Slug}`}
+                className='block w-full'>
                 <SuiButton
                   type='empty'
                   color='primary'
@@ -278,7 +282,7 @@ export default function VideoPage({
               </SuiTitle>
 
               <SuiButton
-                path='/videos'
+                path='/jp/videos'
                 type='empty'
                 color='primary'
                 className='font-base border border-primary-300/50'>
