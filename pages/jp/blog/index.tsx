@@ -129,7 +129,7 @@ export default function BlogsPage({
         })
 
         // Make request
-        const response = await fetch(`/api/blog-js${paramsString}`)
+        const response = await fetch(`/api/jp/blog${paramsString}`)
 
         // Handle response
         try {
@@ -207,24 +207,24 @@ export default function BlogsPage({
             !response ? '!hidden' : ''
           }`}></div>
 
-        {loading && <p className='mt-12 w-full text-center'>Loading...</p>}
+        {loading && <p className='mt-12 w-full text-center'>読み込み中...</p>}
 
         {!loading && !blogs.length && (
           <>
             <p className='mt-12 w-full text-center'>
               {currentPage > 1 && (
                 <>
-                  No results on this page,{' '}
+                  このページには結果がありません,{' '}
                   <button
                     className='font-bold text-primary-300 underline'
                     onClick={() => setPage(1)}>
-                    go to page 1
+                    1ページ目へ
                   </button>
                 </>
               )}
               {currentPage === 1 && (
                 <>
-                  {search ? `No search results for "${search}"` : 'No results'}
+                  {search ? `"${search}" の検索結果はありません` : '結果なし'}
                   {category && category in categories
                     ? ` in ${categories[category]}`
                     : ''}

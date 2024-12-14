@@ -4,9 +4,9 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import CategorySelector from '../../../components/CategorySelector'
 import FollowUs from '../../../components/FollowUs'
 import Layout from '../../../components/jp/Layout'
+import VideoCard from '../../../components/jp/VideoCard'
 import Pagination from '../../../components/Pagination'
 import { SuiSearchField, SuiTitle } from '../../../components/sui'
-import VideoCard from '../../../components/VideoCard'
 import { useDebounce } from '../../../hooks'
 import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
@@ -25,9 +25,9 @@ export const getServerSideProps: GetServerSideProps<VideosPageProps> =
         title: 'ビデオ',
         initialData,
         seo: {
-          title: 'ClickHouse Videos | ClickHouse How to videos',
+          title: 'ClickHouse ビデオ | ClickHouse ハウツー ビデオ',
           description:
-            'Discover a rich collection of customer testimonials, informative how-to tutorials, and engaging Meetup recordings. Elevate your data analytics game with our diverse video library.\n',
+            '豊富な顧客の声、有益なチュートリアル、魅力的なMeetupの録画をご覧ください。当社の多様なビデオライブラリでデータ分析のレベルを高めましょう。',
           path: '/jp/videos'
         },
         ...commonProps
@@ -80,7 +80,7 @@ export default function VideosPage({
   }))
 
   categoryList.unshift({
-    text: 'View All',
+    text: 'すべて表示',
     onClick: () => {
       setPage(1)
       setSearch(null)
@@ -156,7 +156,7 @@ export default function VideosPage({
         <div className='mb-20 flex-col items-center'>
           <SuiSearchField
             defaultValue={search || ''}
-            placeholder='Search by title or keyword...'
+            placeholder='タイトルまたはキーワードで検索...'
             htmlFor='search'
             className='mx-auto mb-6 md:max-w-md lg:mb-8'
             onChange={useDebounce(onSearchChange, 500)}
@@ -165,18 +165,18 @@ export default function VideosPage({
           <CategorySelector options={categoryList} />
         </div>
 
-        {loading && <p className='mt-12 w-full text-center'>Loading...</p>}
+        {loading && <p className='mt-12 w-full text-center'>読み込み中...</p>}
 
         {!loading && !videos.length && (
           <>
             <p className='mt-12 w-full text-center'>
               {currentPage > 1 && (
                 <>
-                  No results on this page,{' '}
+                  このページには結果がありません,{' '}
                   <button
                     className='font-bold text-primary-300 underline'
                     onClick={() => setPage(1)}>
-                    go to page 1
+                    1ページ目へ
                   </button>
                 </>
               )}
