@@ -17,7 +17,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    `Join our release call on Dec 18th to learn what's new in ClickHouse v24.12`
+    `Join our release call on Thursday, Dec 19th to learn what's new in ClickHouse v24.12`
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
     '/company/events/v24-12-community-release-call?loc=eyebrow'
