@@ -6,7 +6,7 @@ import BlogPost from '../../../../components/BlogPostList/BlogPost'
 import CopyUrlButton from '../../../../components/CopyUrlButton'
 import FollowUs from '../../../../components/FollowUs'
 import HRSeparator from '../../../../components/HRSeparator'
-import Layout from '../../../../components/Layout'
+import Layout from '../../../../components/jp/Layout'
 import Markdown from '../../../../components/Markdown'
 import NewsLetter from '../../../../components/NewsLetter'
 import { getNewsLetterData } from '../../../../components/NewsLetter/getNewsLetterData'
@@ -141,20 +141,13 @@ export default function BlogPage({
             <Link href='/jp/blog'>
               <button className='mr-8 flex items-center text-base font-semibold'>
                 <ArrowLeftIcon className='mr-2 w-4' />
-                Back
+                戻る
               </button>
             </Link>
           </div>
           <div className='flex flex-col pt-10 text-left lg:pr-[180px] xl:pl-4'>
             <h4 className='text-base font-semibold text-primary-300 '>
-              <Link href='/jp/blog'>Blog</Link> /{' '}
-              <Link
-                href={`/jp/blog?category=${category
-                  .split(' ')
-                  .join('-')
-                  .toLowerCase()}`}>
-                {category}
-              </Link>
+              <Link href='/jp/blog'>ブログ</Link>
             </h4>
             <h1 className='mb-8 mt-6 font-basier text-4xl font-bold text-neutral-100 '>
               <span className='leading-snug'>{title}</span>
@@ -176,7 +169,7 @@ export default function BlogPage({
                   </SuiText>
                   <SuiText size='sm' weight='normal' color='secondary'>
                     {convertDateToString(date || publishedAt)} - {reading_time}{' '}
-                    minutes read
+                    分で読める
                   </SuiText>
                 </div>
               </div>
@@ -226,7 +219,7 @@ export default function BlogPage({
             <div className='mb-10 flex flex-col items-center justify-between gap-4 md:flex-row'>
               <div className='flex'>
                 <SuiText size='sm' weight='medium' color='primary'>
-                  Share this post
+                  この投稿を共有する
                 </SuiText>
               </div>
               <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>

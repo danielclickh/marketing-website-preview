@@ -1,9 +1,9 @@
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
-import BlogPost from '../../../components/BlogPostList/BlogPost'
 import { CUILink } from '../../../components/ClickUI'
 import FollowUs from '../../../components/FollowUs'
+import BlogPost from '../../../components/jp/BlogPostList/BlogPost'
 import Layout from '../../../components/jp/Layout'
 import Pagination from '../../../components/Pagination'
 import { StrapiImage } from '../../../components/StrapiElements'
@@ -164,9 +164,6 @@ export default function BlogsPage({
               </div>
             )}
             <div className='flex w-full flex-col justify-start border-l-8 border-primary-300 pl-6 lg:w-1/2 lg:flex-1'>
-              <div className='font-inconsolata font-medium text-primary-300'>
-                {featuredBlog.category}
-              </div>
               <SuiTitle type='h2' className=' text-neutral-100'>
                 {featuredBlog.title}
               </SuiTitle>
