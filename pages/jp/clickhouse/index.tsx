@@ -87,18 +87,18 @@ export default function ClickHouseServerPage({
                         すぐに開始する
                       </CUIButton>
                     )}
-                    {/* {secondaryButton && (
+                    {secondaryButton && (
                       <CUIButton
                         type='secondary'
                         size='lg'
                         weight='semibold'
-                        href={secondaryButton.href}
+                        href='/jp/videos/clickhouse-intro-japanese'
                         target={secondaryButton.target}
                         linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                         className='w-full'>
                         概要ビデオを見る
                       </CUIButton>
-                    )} */}
+                    )}
                     {!secondaryButton && gitButton?.text && (
                       <SuiButton
                         type='secondary'

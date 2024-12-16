@@ -201,9 +201,7 @@ export default function VideoPage({
                   className='font-base block w-full border border-primary-300/50 hover:translate-y-0 hover:border-primary-400 hover:no-underline'>
                   <div className='flex w-full flex-row-reverse items-center gap-6'>
                     <div className='flex-shrink flex-grow basis-0 truncate text-left'>
-                      <strong className='block font-bold'>
-                        Previous video
-                      </strong>
+                      <strong className='block font-bold'>前のビデオ</strong>
                       <span className='block truncate font-normal'>
                         {prevVideo.Title}
                       </span>
