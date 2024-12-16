@@ -144,6 +144,7 @@ export default function PricingPage({
                           please refer to our{' '}
                           <Link
                             href='https://clickhouse.com/docs/en/manage/billing/#faqs'
+                            target='_blank'
                             className='text-primary-300 underline'>
                             Billing & Pricing FAQ
                           </Link>

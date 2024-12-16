@@ -302,6 +302,7 @@ export default function MLUseCasePage({
                     <li>
                       <Link
                         href='/blog/vector-search-clickhouse-p1'
+                        target='_blank'
                         className='text-primary-300'>
                         Vector Search with ClickHouse - Part 1
                       </Link>
@@ -309,6 +310,7 @@ export default function MLUseCasePage({
                     <li>
                       <Link
                         href='/blog/vector-search-clickhouse-p2'
+                        target='_blank'
                         className='text-primary-300'>
                         Vector Search with ClickHouse - Part 2
                       </Link>
@@ -349,6 +351,7 @@ export default function MLUseCasePage({
                     <li>
                       <Link
                         href='/blog/query-analyze-hugging-face-datasets-with-clickhouse'
+                        target='_blank'
                         className='text-primary-300'>
                         Analyzing Hugging Face datasets with ClickHouse
                       </Link>
@@ -356,6 +359,7 @@ export default function MLUseCasePage({
                     <li>
                       <Link
                         href='/blog/clickhouse-open-ai-user-defined-functions-udfs'
+                        target='_blank'
                         className='text-primary-300'>
                         Using ClickHouse UDFs to integrate with OpenAI models
                       </Link>
@@ -363,6 +367,7 @@ export default function MLUseCasePage({
                     <li>
                       <Link
                         href='/blog/forecasting-using-clickhouse'
+                        target='_blank'
                         className='text-primary-300'>
                         Forecasting Using ClickHouse Machine Learning Functions
                       </Link>
@@ -370,6 +375,7 @@ export default function MLUseCasePage({
                     <li>
                       <Link
                         href='/blog/helicones-migration-from-postgres-to-clickhouse-for-advanced-llm-monitoring'
+                        target='_blank'
                         className='text-primary-300'>
                         Helicone's Migration from Postgres to ClickHouse for
                         Advanced LLM Monitoring
@@ -378,6 +384,7 @@ export default function MLUseCasePage({
                     <li>
                       <Link
                         href='/blog/clickHouse-and-the-machine-learning-data-layer'
+                        target='_blank'
                         className='text-primary-300'>
                         ClickHouse and the Machine Learning Data Layer
                       </Link>
@@ -385,6 +392,7 @@ export default function MLUseCasePage({
                     <li>
                       <Link
                         href='/blog/powering-featurestores-with-clickhouse'
+                        target='_blank'
                         className='text-primary-300'>
                         Powering Feature Stores with ClickHouse
                       </Link>

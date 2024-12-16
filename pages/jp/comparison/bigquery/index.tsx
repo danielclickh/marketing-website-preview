@@ -348,6 +348,7 @@ export default function BigQueryPage({
                   high throughput.{' '}
                   <Link
                     href={`/blog/serving-real-time-analytics-across-marketplaces-at-adevinta?loc=${locTracking}`}
+                    target='_blank'
                     className='text-primary-300 hover:underline'>
                     Read blog
                   </Link>
@@ -411,6 +412,7 @@ export default function BigQueryPage({
                   headache!{' '}
                   <Link
                     href={`/blog/hifis-migration-from-bigquery-to-clickhouse?loc=${locTracking}`}
+                    target='_blank'
                     className='text-primary-300 hover:underline'>
                     Read blog
                   </Link>

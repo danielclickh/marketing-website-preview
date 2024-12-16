@@ -221,7 +221,9 @@ export default function SnowflakePage({
                     for us.”
                   </h3>
                   <p className='min-h-[30px] pb-6 text-sm text-primary-300 lg:min-h-fit lg:text-base'>
-                    <Link href='/blog/adgreetz-processes-millions-of-daily-ad-impressions'>
+                    <Link
+                      href='/blog/adgreetz-processes-millions-of-daily-ad-impressions'
+                      target='_blank'>
                       詳しく見る
                     </Link>
                   </p>
@@ -249,7 +251,9 @@ export default function SnowflakePage({
                       unit economics.”
                     </h3>
                     <p className='min-h-[30px] pb-6 text-sm text-primary-300 lg:min-h-fit lg:text-base'>
-                      <Link href='/blog/harnessing-the-power-of-materialized-views-and-clickhouse-for-high-performance-analytics-at-inigo'>
+                      <Link
+                        href='/blog/harnessing-the-power-of-materialized-views-and-clickhouse-for-high-performance-analytics-at-inigo'
+                        target='_blank'>
                         詳しく見る
                       </Link>
                     </p>

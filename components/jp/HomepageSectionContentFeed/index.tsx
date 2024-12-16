@@ -3,7 +3,7 @@ import { CUIButton } from '../../ClickUI'
 import Markdown from '../../Markdown'
 import ResponsiveEmbed from '../../ResponsiveEmbed'
 import { SuiText, SuiTitle } from '../../sui'
-import { getContent, getCategories, EntryCategory, EntryStat } from './content'
+import { EntryCategory, EntryStat, getCategories, getContent } from './content'
 
 function StatBox(props: EntryStat) {
   return (
@@ -154,7 +154,7 @@ export default function HomepageSectionContentFeed({
             type='secondary'
             weight='semibold'
             size='lg'
-            href='/use-cases'>
+            href='/jp/use-cases'>
             すべてのユースケース
           </CUIButton>
         </div>

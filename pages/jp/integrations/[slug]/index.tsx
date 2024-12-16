@@ -156,7 +156,7 @@ export default function IntegrationPage({
       <div className='bg-grid py-12 md:py-20'>
         <div className='section-container max-w-[800px]'>
           <Link
-            href={'/integrations'}
+            href={'/jp/integrations'}
             className='flex items-center gap-2 font-bold text-primary-300'>
             <svg
               xmlns='http://www.w3.org/2000/svg'

@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { MenuIcon, XIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MenuIcon, XIcon } from '@heroicons/react/solid'
-import { CUIButton, CUILink } from '../../ClickUI'
+import { useEffect, useRef, useState } from 'react'
+import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
 import logoFull from '../../../public/logo-full.svg'
+import { CUIButton, CUILink } from '../../ClickUI'
 import HeaderRegionSelector from '../../HeaderRegionSelector'
 import GitHub from '../../icons/GitHub'
 import LinkWithArrow from '../../LinkWithArrow'
-import { HeaderProps } from './types'
 import Navigation from '../Navigation'
-import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
+import { HeaderProps } from './types'
 
 export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const headerRef = useRef<HTMLElement>(null)
@@ -202,12 +202,14 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
               </CUILink>
               <CUILink
                 href='https://clickhouse.cloud/signIn'
+                target='_blank'
                 className='w-full rounded border border-neutral-500 py-3 text-center text-sm font-medium leading-none hover:text-primary-300 md-mid:hidden md-mid:w-auto md-mid:border-0 md-mid:py-0 lg-mid:inline-block'
                 onClick={useGalaxyOnClick('topNav.navItems.signInSelect')}>
                 サインイン
               </CUILink>
               <CUIButton
                 type='primary'
+                target='_blank'
                 weight='medium'
                 href='https://clickhouse.cloud/signUp?loc=nav-get-started'
                 className={`w-full md-mid:w-auto  ${eyebrow?.className || ''}`}

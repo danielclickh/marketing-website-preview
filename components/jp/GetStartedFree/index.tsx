@@ -41,6 +41,7 @@ export default function GetStartedFree({
             <CUIButton
               type='primary-dark'
               size='lg'
+              target='_blank'
               className='group mx-auto mt-8'
               href={href}
               iconRight={

@@ -468,7 +468,7 @@ export default function ComparisonPage({
                 <div
                   className='animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover p-6 shadow-card hover:bg-neutral-750'
                   key={index}>
-                  <Link href={testimonial.href}>
+                  <Link href={testimonial.href} target='_blank'>
                     <div className='flex h-full w-full flex-col justify-between space-y-12'>
                       <div className='text-left'>
                         {testimonial.logo && (

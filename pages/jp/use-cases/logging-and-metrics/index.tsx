@@ -270,6 +270,7 @@ export default function ClickHouseServerPage({
                     <li>
                       <Link
                         href='/blog/storing-log-data-in-clickhouse-fluent-bit-vector-open-telemetry'
+                        target='_blank'
                         className='text-primary-300'>
                         Building an Observability Solution with ClickHouse -
                         Part 1 - Logs
@@ -278,6 +279,7 @@ export default function ClickHouseServerPage({
                     <li>
                       <Link
                         href='https://clickhouse.com/docs/knowledgebase/use-clickhouse-for-log-analytics'
+                        target='_blank'
                         className='text-primary-300'>
                         Docs: Using ClickHouse for log analytics
                       </Link>
@@ -285,6 +287,7 @@ export default function ClickHouseServerPage({
                     <li>
                       <Link
                         href='/blog/nginx-logs-to-clickhouse-fluent-bit'
+                        target='_blank'
                         className='text-primary-300'>
                         Sending Nginx logs to ClickHouse with Fluent Bit
                       </Link>
@@ -292,6 +295,7 @@ export default function ClickHouseServerPage({
                     <li>
                       <Link
                         href='/blog/working-with-time-series-data-and-functions-ClickHouse'
+                        target='_blank'
                         className='text-primary-300'>
                         Working with Time Series Data in ClickHouse
                       </Link>
@@ -308,6 +312,7 @@ export default function ClickHouseServerPage({
                     <li>
                       <Link
                         href='/blog/helicones-migration-from-postgres-to-clickhouse-for-advanced-llm-monitoring'
+                        target='_blank'
                         className='text-primary-300'>
                         Helicone's Migration from Postgres to ClickHouse for
                         Advanced LLM Monitoring
@@ -316,6 +321,7 @@ export default function ClickHouseServerPage({
                     <li>
                       <Link
                         href='/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse'
+                        target='_blank'
                         className='text-primary-300'>
                         How trip.com migrated from Elasticsearch and built a
                         50PB logging solution with ClickHouse

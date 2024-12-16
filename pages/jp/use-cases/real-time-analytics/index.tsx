@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { CUIButton } from '../../../../components/ClickUI'
 import GetStartedFree from '../../../../components/jp/GetStartedFree'
 import Layout from '../../../../components/jp/Layout'
@@ -347,6 +347,7 @@ export default function RealTimeAnalyticsPage({
                     <li>
                       <Link
                         href='/blog/asynchronous-data-inserts-in-clickhouse'
+                        target='_blank'
                         className='text-primary-300'>
                         Asynchronous Data Inserts in ClickHouse
                       </Link>
@@ -354,6 +355,7 @@ export default function RealTimeAnalyticsPage({
                     <li>
                       <Link
                         href='/blog/real-time-event-streaming-with-confluent-cloud-clickhouse-and-clickpipes'
+                        target='_blank'
                         className='text-primary-300'>
                         Real-time event streaming with ClickHouse, Confluent
                         Cloud and ClickPipes
@@ -362,6 +364,7 @@ export default function RealTimeAnalyticsPage({
                     <li>
                       <Link
                         href='/blog/building-real-time-applications-with-clickhouse-and-hex-notebook-keeper-engine'
+                        target='_blank'
                         className='text-primary-300'>
                         Adding Real-Time Analytics to a Supabase Application
                         With ClickHouse
@@ -370,6 +373,7 @@ export default function RealTimeAnalyticsPage({
                     <li>
                       <Link
                         href='https://python.langchain.com/docs/integrations/vectorstores/clickhouse'
+                        target='_blank'
                         className='text-primary-300'>
                         Building Real-time Analytics Apps with ClickHouse and
                         Hex
@@ -378,6 +382,7 @@ export default function RealTimeAnalyticsPage({
                     <li>
                       <Link
                         href='/blog/using-materialized-views-in-clickhouse'
+                        target='_blank'
                         className='text-primary-300'>
                         Using Materialized Views in ClickHouse
                       </Link>
@@ -385,6 +390,7 @@ export default function RealTimeAnalyticsPage({
                     <li>
                       <Link
                         href='/blog/working-with-time-series-data-and-functions-ClickHouse'
+                        target='_blank'
                         className='text-primary-300'>
                         Working with Time Series Data in ClickHouse
                       </Link>
@@ -392,6 +398,7 @@ export default function RealTimeAnalyticsPage({
                     <li>
                       <Link
                         href='/blog/clickhouse-postgresql-change-data-capture-cdc-part-1'
+                        target='_blank'
                         className='text-primary-300'>
                         Change Data Capture (CDC) with PostgreSQL and ClickHouse
                         - Part 1
@@ -400,6 +407,7 @@ export default function RealTimeAnalyticsPage({
                     <li>
                       <Link
                         href='/blog/clickhouse-postgresql-change-data-capture-cdc-part-2'
+                        target='_blank'
                         className='text-primary-300'>
                         Change Data Capture (CDC) with PostgreSQL and ClickHouse
                         - Part 2
@@ -408,6 +416,7 @@ export default function RealTimeAnalyticsPage({
                     <li>
                       <Link
                         href='/blog/how-cloudflare-processes-hundreds-of-millions-of-rows-per-second-with-clickhouse'
+                        target='_blank'
                         className='text-primary-300'>
                         How Cloudflare Processes Hundreds of Millions of Rows
                         per Second with ClickHouse

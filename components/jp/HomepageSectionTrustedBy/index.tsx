@@ -1,5 +1,4 @@
-import Link from 'next/link'
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import type { Swiper as SwiperClass } from 'swiper/types'
 import {
   HomepageCustomerStories,
@@ -9,9 +8,9 @@ import { StrapiImage } from '../../StrapiElements'
 import { SuiText } from '../../sui'
 import styles from './styles.module.scss'
 
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { FreeMode } from 'swiper/modules'
 import 'swiper/css'
+import { FreeMode } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 interface Props extends React.HTMLProps<HTMLDivElement> {
   customerStories: HomepageCustomerStories
@@ -201,16 +200,7 @@ function CarouselRow({
                   ? `calc(${customer.darkLogoPng.width}px * var(--logo-scale, 1))`
                   : 'auto'
               }}>
-              {customer.href ? (
-                <Link href={customer.href} className='inline'>
-                  <StrapiImage
-                    {...customer.darkLogoPng}
-                    className='max-w-full'
-                  />
-                </Link>
-              ) : (
-                <StrapiImage {...customer.darkLogoPng} className='max-w-full' />
-              )}
+              <StrapiImage {...customer.darkLogoPng} className='max-w-full' />
             </div>
           </SwiperSlide>
         )

@@ -221,7 +221,7 @@ function UseCasesPage({
                                   href={
                                     logo.link
                                       ? logo.link
-                                      : 'https://clickhouse.com'
+                                      : 'https://clickhouse.com/jp/'
                                   }
                                   className='flex items-center justify-center align-middle brightness-0  invert hover:brightness-100 hover:invert-0'>
                                   <Image

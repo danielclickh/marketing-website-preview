@@ -48,7 +48,7 @@ export default function ClickHouseServerPage({
               <div className='flex justify-between'>
                 <div className='flex-col text-center lg:mt-16 lg:max-w-xl lg:text-left'>
                   <h4 className='mb-4 text-base font-semibold text-primary-300'>
-                    <Link href='/cloud'>クラウド</Link> / データインジェスト
+                    <Link href='/jp/cloud'>クラウド</Link> / データインジェスト
                   </h4>
                   <h1 className='relative mb-3 mt-4 inline-block font-basier text-4xl font-semibold leading-tight md:mt-0 md:text-5.5xl'>
                     ClickPipes
@@ -221,7 +221,7 @@ export default function ClickHouseServerPage({
               <div className='mx-auto max-w-2xl text-center leading-normal text-neutral-200 md:pb-16'>
                 詳細については、{' '}
                 <Link
-                  href='/company/contact?loc=clickpipes'
+                  href='/jp/company/contact?loc=clickpipes'
                   className='text-primary-300'>
                   Clickhouse にお問い合わせください
                 </Link>

@@ -165,7 +165,7 @@ export default function VideoPage({
             {video.categories?.[0] && ` / `}
             {video.categories?.[0] && (
               <Link
-                href={`/videos?category=${slugify(
+                href={`/jp/videos?category=${slugify(
                   video.categories?.[0]?.CategoryName
                 )}`}>
                 {video.categories?.[0]?.CategoryName}

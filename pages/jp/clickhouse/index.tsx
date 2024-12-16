@@ -80,7 +80,7 @@ export default function ClickHouseServerPage({
                         type='primary'
                         size='lg'
                         weight='semibold'
-                        href={mainButton.href}
+                        href='/jp/clickhouse#getting_started'
                         target={mainButton.target}
                         linkClass='w-full mx-auto md:mx-0 max-w-[14rem] md:max-w-[12rem]'
                         className='w-full'>

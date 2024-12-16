@@ -29,6 +29,7 @@ export default function AnimatedIntegrationLogos({ play }: { play: boolean }) {
             レプリケ3ーション。{' '}
             <Link
               href='/blog/clickhouse-welcomes-peerdb-adding-the-fastest-postgres-cdc-to-the-fastest-olap-database'
+              target='_blank'
               className='text-primary-300 hover:underline'>
               <div className='absolute inset-0 transition-colors hover:bg-white/5' />
               詳しく見る
