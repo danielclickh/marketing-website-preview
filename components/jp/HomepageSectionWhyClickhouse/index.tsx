@@ -175,7 +175,7 @@ export default function HomepageSectionWhyClickhouse({
                 </svg>
               }
               title={<>オープンソース</>}
-              link='/clickhouse'
+              link='/jp/clickhouse'
             />
             <FeatureCard
               icon={
@@ -224,6 +224,7 @@ export default function HomepageSectionWhyClickhouse({
                 </svg>
               }
               title={<>リソース最適化</>}
+              target='_blank'
               link='https://clickhouse.com/docs/en/concepts/why-clickhouse-is-so-fast'
             />
             <FeatureCard
@@ -245,6 +246,7 @@ export default function HomepageSectionWhyClickhouse({
                 </svg>
               }
               title={<>実証済の拡張性</>}
+              target='_blank'
               link='/user-stories'
             />
             <FeatureCard

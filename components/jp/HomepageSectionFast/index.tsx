@@ -59,6 +59,7 @@ export default function HomepageSectionFast({
               className='pt-0.5 transition group-hover:translate-x-1/2'
             />
           }
+          target='_blank'
           onClick={useGalaxyOnClick('homePage.whyClickHouse.viewDocsSelect')}>
           ドキュメントで詳しく読む
         </CUIButton>
