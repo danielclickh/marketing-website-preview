@@ -59,6 +59,8 @@ export default function CTAButtons({
   useEffect(() => {
     if (tier === 'Production') {
       setAvailabilityZones(3)
+    } else {
+      setAvailabilityZones(2)
     }
   }, [tier])
 
