@@ -17,7 +17,7 @@ export default function NavigationSubNavProducts() {
               alt='ClickHouse Cloud'
               width={24}
               height={24}
-              className='flex-grow-1 flex-shrink-0'
+              className='flex-shrink-0 flex-grow-0'
             />
             <span>
               ClickHouse Cloud
@@ -60,7 +60,7 @@ export default function NavigationSubNavProducts() {
               alt='ClickHouse'
               width={24}
               height={24}
-              className='flex-grow-1 flex-shrink-0'
+              className='flex-shrink-0 flex-grow-0'
             />
             <span>
               ClickHouse
@@ -74,7 +74,7 @@ export default function NavigationSubNavProducts() {
         <li className='md-mid:hidden'>
           <NavigationLink
             href='/jp/integrations'
-            className='!flex w-full items-center gap-3'
+            className='!flex w-full !flex-nowrap items-center gap-3'
             onClick={useGalaxyOnClick(
               'topNav.productMenu.integrationsHighlightSelect'
             )}>
@@ -83,7 +83,7 @@ export default function NavigationSubNavProducts() {
               alt='integrations'
               width={24}
               height={24}
-              className='flex-grow-1 flex-shrink-0'
+              className='flex-shrink-0 flex-grow-0'
             />
             <span>100を超えるインテグレーションを紹介します。</span>
           </NavigationLink>
