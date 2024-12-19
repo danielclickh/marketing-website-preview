@@ -54,12 +54,11 @@ export default function Navigation({
           <li>
             <NavigationItem
               {...topLevelEvents}
-              target='_blank'
               label='Docs'
               link={{
                 href: 'https://clickhouse.com/docs',
                 onClick: useGalaxyOnClick('topNav.navItems.docsSelect'),
-                prefetch: false
+                target: '_blank'
               }}
             />
           </li>
