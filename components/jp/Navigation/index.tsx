@@ -55,6 +55,7 @@ export default function Navigation({
             <NavigationItem
               {...topLevelEvents}
               label='ドキュメント'
+              target='_blank'
               link={{
                 href: 'https://clickhouse.com/docs',
                 prefetch: false,
