@@ -1,4 +1,4 @@
 export interface HeaderProps {
-  github: { stars: number }
+  github: { gh_stars: number }
   eyebrow?: { className?: string }
 }

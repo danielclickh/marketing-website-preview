@@ -16,14 +16,14 @@ export async function getCommonProps(): Promise<Props> {
   const getStartedData = await getGetStartedData()
 
   // Set default fallback
-  let stars = 36719
+  let gh_stars = 36719
 
   if (
     typeof githubStars === 'object' &&
     'stars' in githubStars &&
     typeof githubStars.stars === 'number'
   ) {
-    stars = githubStars.stars
+    gh_stars = githubStars.stars
   } else if (process.env.NEXT_IS_PROD === 'true') {
     throw new Error('Failed to get GitHub stars.')
   }
@@ -33,7 +33,7 @@ export async function getCommonProps(): Promise<Props> {
     platforms: getStartedData.platforms,
     headerData: {
       github: {
-        stars
+        gh_stars
       }
     }
   }
