@@ -3,6 +3,7 @@ import { StrapiImageProps } from './types'
 
 const strapiApiUrl =
   process.env.STRAPI_API_URL ?? 'https://cms.clickhouse.com:1337'
+//process.env.STRAPI_API_URL ?? 'http://localhost:1337'
 
 export default function StrapiSvg({
   id,

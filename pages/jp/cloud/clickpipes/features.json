@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "icon": "/images/cloud/clickpipes/icon-onboarding.svg",
+    "title": "直感的にすばやく設定できる",
+    "content": "取り込むデータのソースとフォーマットを選択し、スキーマを調整するだけで、新しいインジェストパイプラインを簡単に設定して実行できます。"
+  },
+  {
+    "id": 2,
+    "icon": "/images/cloud/clickpipes/icon-streaming.svg",
+    "title": "継続的なインジェストの管理",
+    "content": "継続的なインジェストのパイプラインを管理できます。パイプラインだけ設定して、後はClickPipesにおまかせください。"
+  },
+  {
+    "id": 3,
+    "icon": "/images/cloud/clickpipes/icon-scale.svg",
+    "title": "スピードとスケール",
+    "content": "スケーラビリティに優れており、データ量が増加しようと、システム要件がどれほど拡大しようと、簡単に対応できます。"
+  },
+  {
+    "id": 4,
+    "icon": "/images/cloud/clickpipes/icon-simple.svg",
+    "title": "リアルタイム分析を最適化",
+    "content": "ClickHouseの知識と経験を存分に詰め込んだリアルタイムデータ管理システム。ClickPipesなら複雑なリアルタイムのインジェストでもパフォーマンスを簡単に最適化できます。"
+  }
+]

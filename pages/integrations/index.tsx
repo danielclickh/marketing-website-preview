@@ -1,7 +1,7 @@
 import type { InferGetStaticPropsType } from 'next'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import CategorySelector from '../../components/CategorySelector'
 import GetStartedFree from '../../components/GetStartedFree'
 import IntegrationsClickPipesPromo from '../../components/IntegrationsClickPipesPromo'

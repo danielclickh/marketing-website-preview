@@ -6,6 +6,7 @@ import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import logoFull from '../../public/logo-full.svg'
 import AnnouncementBar from '../AnnouncementBar'
 import { CUIButton, CUILink } from '../ClickUI'
+import HeaderRegionSelector from '../HeaderRegionSelector'
 import GitHub from '../icons/GitHub'
 import Navigation from '../Navigation'
 import { HeaderProps } from './types'
@@ -145,9 +146,12 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
             />
           </Link>
 
+          {/* Mobile region selector */}
+          <HeaderRegionSelector className='z-10 ml-auto mr-4 md-mid:hidden' />
+
           {/* Mobile Burger */}
           <button
-            className='ml-auto inline-flex items-center justify-center rounded-md bg-slate p-2 text-neutral-200 hover:text-neutral-0 focus:outline-none md-mid:hidden'
+            className='inline-flex items-center justify-center rounded-md bg-slate p-2 text-neutral-200 hover:text-neutral-0 focus:outline-none md-mid:hidden'
             onClick={() => setBurgerMenuIsOpen(!burgerMenuIsOpen)}>
             {burgerMenuIsOpen ? (
               <>
@@ -177,6 +181,9 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
 
             {/* CTAs */}
             <div className='mt-auto flex flex-col-reverse flex-nowrap items-center gap-4 md-mid:ml-auto md-mid:mt-0 md-mid:flex-row lg:gap-6'>
+              {/* Desktop region selector */}
+              <HeaderRegionSelector className='hidden md-mid:block' />
+
               <CUILink
                 href='https://github.com/ClickHouse/ClickHouse?utm_source=clickhouse&utm_medium=website&utm_campaign=website-nav'
                 target='_blank'

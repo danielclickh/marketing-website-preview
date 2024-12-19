@@ -1,0 +1,14 @@
+[
+  {
+    "id": 3,
+    "header": "Pay only for what you use",
+    "content": "We automatically scale up and down compute resources based on your workload \n<br>\n<br>\nWe scale storage and compute separately, due to our flexible architecture\n<br>\n<br>\nWe automatically scale unused resources down to zero so that you don’t pay for idle services",
+    "image": "/images/pricing/money.svg"
+  },
+  {
+    "id": 4,
+    "header": "Control and transparency",
+    "content": "Identify key usage drivers using our metered pricing dimensions\n<br>\n<br>\nReserve compute resources to meet the needs of the most demanding workloads\n<br>\n<br>\nSet compute autoscaling limits to prevent runaway queries from unexpected bills",
+    "image": "/images/pricing/control.svg"
+  }
+]
