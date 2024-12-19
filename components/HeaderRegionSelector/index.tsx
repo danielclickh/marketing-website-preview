@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
 import { useClickOutside } from '../../hooks'
-import { NavigationItem, NavigationLink } from '../Navigation/parts'
 
 export interface HeaderRegionSelectorProps {
   className?: React.HTMLProps<HTMLDivElement>['className']
@@ -51,8 +50,8 @@ export default function HeaderRegionSelector({
           height='10'
           fill='none'
           viewBox='0 0 6 10'
-          className={`flex w-2.5 flex-shrink-0 flex-grow-0 origin-center items-center justify-center transition-all ${
-            isOpen ? '-rotate-90' : 'rotate-90 opacity-50'
+          className={`flex w-2.5 flex-shrink-0 flex-grow-0 origin-center rotate-90 items-center justify-center transition-all ${
+            isOpen ? '' : 'opacity-50'
           }`}>
           <path
             stroke='currentColor'
