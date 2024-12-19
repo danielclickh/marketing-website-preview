@@ -57,7 +57,8 @@ export default function Navigation({
               label='Docs'
               link={{
                 href: 'https://clickhouse.com/docs',
-                onClick: useGalaxyOnClick('topNav.navItems.docsSelect')
+                onClick: useGalaxyOnClick('topNav.navItems.docsSelect'),
+                prefetch: false
               }}
             />
           </li>

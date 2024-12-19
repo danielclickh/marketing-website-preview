@@ -3,10 +3,10 @@ import { SuiTitle } from '../../sui'
 
 interface Props {
   github: {
-    gh_stars: number
+    stars: number
   }
 }
-function JoinCommunity({ github: { gh_stars } }: Props) {
+function JoinCommunity({ github: { stars } }: Props) {
   return (
     <div className='section-container flex w-full flex-col items-center justify-between gap-8 pb-16 md:flex-row md:px-8 md:pb-16 2xl:px-0'>
       <div className='flex max-w-xl flex-col items-start gap-10'>
@@ -57,7 +57,14 @@ function JoinCommunity({ github: { gh_stars } }: Props) {
           </span>
         </div>
         <div className='absolute right-30 pt-32 font-basier text-5xl leading-none md:relative md:right-auto md:pt-0 md:text-7.5xl'>
-          38.3k +
+          {Intl.NumberFormat('en', {
+            notation: 'compact',
+            minimumFractionDigits: 1,
+            maximumFractionDigits: 1
+          })
+            .format(stars)
+            .toLowerCase()}{' '}
+          +
           <span className='absolute left-0 top-full text-xl leading-snug text-primary-300 md:text-2.75xl'>
             の数
           </span>
