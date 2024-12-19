@@ -1,6 +1,6 @@
 [
     {
-        "href": "/comparison/snowflake",
+        "href": "/jp/comparison/snowflake",
         "title": "Snowflake",
         "quote": "With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud.",
         "stats": [
@@ -31,7 +31,7 @@
         "customerLogoHeight": 30
     },
     {
-        "href": "/comparison/postgresql",
+        "href": "/jp/comparison/postgresql",
         "title": "PostgreSQL",
         "stats": [
             {
@@ -62,7 +62,7 @@
         "customerLogoHeight": 34
     },
     {
-        "href": "/comparison/bigquery",
+        "href": "/jp/comparison/bigquery",
         "title": "BigQuery",
         "stats": [
             {
@@ -93,7 +93,7 @@
         "customerLogoHeight": 40
     },
     {
-        "href": "/comparison/redshift",
+        "href": "/jp/comparison/redshift",
         "title": "Redshift",
         "stats": [
             {

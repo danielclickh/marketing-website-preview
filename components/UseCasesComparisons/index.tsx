@@ -14,16 +14,20 @@ export default function UseCasesComparisons() {
             id='comparisons-left'
             className={`lg:sticky lg:top-[34%] xl:max-w-[426px]`}>
             <h2 className='mb-4 font-basier text-5.5xl font-semibold text-white'>
-              比較
+              Comparisons
             </h2>
             <p className='mb-6 text-base text-[#DFDFDF]'>
-              ClickHouseは、リアルタイムデータと履歴データの両方を扱うワークロードにおいて、優れたパフォーマンスを発揮します。
+              ClickHouse excels at powering workloads that operate on both
+              real-time and historical data.
             </p>
             <p className='mb-6 text-base text-[#DFDFDF]'>
-              一方で、従来のデータウェアハウスやトランザクションデータベースは、スケールの大きな分析ワークロードに対応するためのパフォーマンスとコスト効率に欠けています。
+              In contrast, traditional warehouses and transactional databases
+              lack the performance and cost efficiency that makes them viable
+              for analytic workloads at scale.
             </p>
             <p className='mb-6 text-base text-[#DFDFDF]'>
-              ClickHouseなら、圧倒的なパフォーマンスとデータの可視性を、コストを抑えつつ実現できます。
+              With ClickHouse, you’ll have unrivaled performance and visibility
+              into your data at a fraction of the cost.
             </p>
           </div>
           <div
