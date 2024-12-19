@@ -10,7 +10,7 @@ import GitHub from '../icons/GitHub'
 import Navigation from '../Navigation'
 import { HeaderProps } from './types'
 
-export default function Header({ github: { gh_stars }, eyebrow }: HeaderProps) {
+export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
   const headerRef = useRef<HTMLElement>(null)
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState<boolean>(false)
   const [headerHeight, setHeaderHeight] = useState<number>(72)
@@ -189,14 +189,13 @@ export default function Header({ github: { gh_stars }, eyebrow }: HeaderProps) {
                 className='hidden items-center gap-2 text-sm font-medium hover:text-primary-300 lg-mid:flex'
                 onClick={useGalaxyOnClick('topNav.navItems.githubSelect')}>
                 <GitHub />
-                {/* {Intl.NumberFormat('en', {
+                {Intl.NumberFormat('en', {
                   notation: 'compact',
                   minimumFractionDigits: 1,
                   maximumFractionDigits: 1
                 })
-                  .format(gh_stars)
-                  .toLowerCase()} */}
-                38.3k
+                  .format(stars)
+                  .toLowerCase()}
               </CUILink>
               <CUILink
                 href='https://clickhouse.cloud/signIn'
