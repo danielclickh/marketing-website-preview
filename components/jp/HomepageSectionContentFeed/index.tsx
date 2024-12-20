@@ -50,7 +50,8 @@ export default function HomepageSectionContentFeed({
           <SuiText
             size='lg'
             className='text-balance opacity-70 xl:text-[1.25rem]'>
-            Sony、Lyft、Cisco、GitLab、Twilioなど多くの企業が、拡張性に優れ、効率的で使いやすいClickHouse
+            Sony、Lyft、Cisco、GitLab
+            など多くの企業が、拡張性に優れ、効率的で使いやすいClickHouse
             Cloudを選んでいます。
           </SuiText>
           {allCategories.length && (

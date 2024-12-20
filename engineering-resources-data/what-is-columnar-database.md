@@ -224,7 +224,7 @@ In addition, row-based stores like Postgres have columnar add-ons via Citus or T
 
 Yes, [ClickHouse is a column database](https://clickhouse.com/docs/en/intro). It is available as [open-source software](https://github.com/ClickHouse/ClickHouse) and a [cloud offering](https://clickhouse.com/cloud) and is the [fastest](https://clickhouse.com/docs/en/concepts/why-clickhouse-is-so-fast) and most resource-efficient real-time data warehouse and open-source database.
 
-ClickHouse Cloud is used by Sony, Lyft, Cisco, GitLab, Twilio, and many others. 
+ClickHouse Cloud is used by Sony, Lyft, Cisco, GitLab, and many others. 
 
 You can learn more about the problems that ClickHouse solves in the [user stories](https://clickhouse.com/user-stories) section.
 
