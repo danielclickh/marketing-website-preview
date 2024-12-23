@@ -47,6 +47,10 @@ const nextConfig = {
   async rewrites() {
     return [
       {
+        source: '/docs/:path*',
+        destination: 'https://clickhouse.com/docs/:path*'
+      },
+      {
         source: '/events/:slug',
         destination: '/company/events/:slug'
       },
