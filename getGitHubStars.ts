@@ -23,16 +23,25 @@ function generateStars(stars: number) {
 async function triggerGitHubFile() {
   log('Starting to build GitHub file')
 
-  let stars = 320177
+  let stars = 38000
 
-  const gitHubStars = await fetch(
-    'https://api.github.com/repos/ClickHouse/ClickHouse'
-  )
+  try {
+    const gitHubStars = await fetch(
+      'https://api.github.com/repos/ClickHouse/ClickHouse'
+    )
 
-  const res = await gitHubStars.json()
+    const res = await gitHubStars.json()
 
-  // We generate the JSON pricing file with the pricings data
-  generateStars(res.watchers_count)
+    if (res && typeof res.watchers_count === 'number') {
+      stars = res.watchers_count
+    } else {
+      warn('Invalid response from GitHub API, using fallback value')
+    }
+  } catch (error) {
+    warn(`Error fetching GitHub stars: ${error}`)
+    // Will use fallback value
+  }
+  generateStars(stars)
 }
 
 triggerGitHubFile()

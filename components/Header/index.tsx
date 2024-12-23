@@ -10,7 +10,10 @@ import GitHub from '../icons/GitHub'
 import Navigation from '../Navigation'
 import { HeaderProps } from './types'
 
-export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
+export default function Header({
+  github = { stars: 38000 },
+  eyebrow
+}: HeaderProps) {
   const headerRef = useRef<HTMLElement>(null)
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState<boolean>(false)
   const [headerHeight, setHeaderHeight] = useState<number>(72)
@@ -194,7 +197,7 @@ export default function Header({ github: { stars }, eyebrow }: HeaderProps) {
                   minimumFractionDigits: 1,
                   maximumFractionDigits: 1
                 })
-                  .format(stars)
+                  .format(github?.stars ?? 38000)
                   .toLowerCase()}
               </CUILink>
               <CUILink
