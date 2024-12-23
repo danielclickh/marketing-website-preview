@@ -45,28 +45,40 @@ const nextConfig = {
     ]
   },
   async rewrites() {
-    return [
-      {
-        source: '/docs/:path*',
-        destination: 'https://clickhouse.com/docs/:path*'
-      },
-      {
-        source: '/events/:slug',
-        destination: '/company/events/:slug'
-      },
-      {
-        source: '/en/:path*',
-        destination: '/:path*'
-      },
-      {
-        source: '/api/:path*',
-        destination: `${strapiApiUrl}/api/:path*`
-      },
-      {
-        source: '/uploads/:path*',
-        destination: `${strapiApiUrl}/uploads/:path*`
-      }
-    ]
+    // @link https://nextjs.org/docs/13/pages/api-reference/next-config-js/rewrites
+    return {
+      // These rewrites are checked after headers/redirects
+      // and before all files including _next/public files which
+      // allows overriding page files
+      beforeFiles: [
+        // This rewrite fixes an issue with the <Link> component
+        {
+          source: '/docs/:path*',
+          destination: 'https://clickhouse.com/docs/:path*'
+        }
+      ],
+
+      // These rewrites are checked after both pages/public files
+      // and dynamic routes are checked
+      fallback: [
+        {
+          source: '/events/:slug',
+          destination: '/company/events/:slug'
+        },
+        {
+          source: '/en/:path*',
+          destination: '/:path*'
+        },
+        {
+          source: '/api/:path*',
+          destination: `${strapiApiUrl}/api/:path*`
+        },
+        {
+          source: '/uploads/:path*',
+          destination: `${strapiApiUrl}/uploads/:path*`
+        }
+      ]
+    }
   },
   async redirects() {
     return [
