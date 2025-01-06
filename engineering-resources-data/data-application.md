@@ -1,7 +1,7 @@
 ---
 title: 'What is a data application?'
 slug: 'data-application'
-excerpt: "In this guide, we'll learn all about data applications."
+excerpt: "In this guide, we'll learn all about data applications - what are they, what are the main components, and why would you want to create one?"
 index: 7
 ---
 
