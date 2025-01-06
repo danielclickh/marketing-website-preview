@@ -1,5 +1,6 @@
 import { ClickUIProvider, ThemeName } from '@clickhouse/click-ui'
 import { GrowthBook, GrowthBookProvider } from '@growthbook/growthbook-react'
+import { GoogleTagManager } from '@next/third-parties/google'
 import { AppProps } from 'next/app'
 import { Inconsolata, Inter } from 'next/font/google'
 import Head from 'next/head'
@@ -15,15 +16,8 @@ import '../styles/highlightjs.scss'
 import '../styles/securiti-cookie-banner.scss'
 import '../styles/securiti-overrides.scss'
 
-const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K'
-const websiteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL
-let is_prod = false
-
-if (websiteUrl === 'https://clickhouse.com') {
-  is_prod = true
-} else {
-  is_prod = false
-}
+//const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K';
+const gtmId = 'GTM-WKSRXS8S' // Hardcoded for testing
 
 const inter = Inter({
   subsets: [],
@@ -102,21 +96,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         {/* GTM - Prod/Env environments */}
         {router.pathname !== '/marketo-forms/[id]' && (
           <>
-            <Script
-              id='gtm-gtag'
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${gtmId}`}
-            />
-            <Script
-              id='gtm-init'
-              dangerouslySetInnerHTML={{
-                __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${gtmId}');`
-              }}
-            />
+            <GoogleTagManager gtmId={gtmId} />
             <Script
               id='stripmkttok-script'
               src='https://discover.clickhouse.com/js/stripmkttok.js'
