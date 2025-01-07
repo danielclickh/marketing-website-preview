@@ -19,6 +19,12 @@ const nextConfig = {
         hostname: 'img.youtube.com',
         port: '',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'cms.clickhouse-dev.com',
+        port: '1337',
+        pathname: '/uploads/**'
       }
     ]
   },
@@ -55,6 +61,10 @@ const nextConfig = {
         {
           source: '/docs/:path*',
           destination: 'https://clickhouse.com/docs/:path*'
+        },
+        {
+          source: '/uploads/:path*',
+          destination: `${strapiApiUrl}/uploads/:path*`
         }
       ],
 
@@ -72,10 +82,6 @@ const nextConfig = {
         {
           source: '/api/:path*',
           destination: `${strapiApiUrl}/api/:path*`
-        },
-        {
-          source: '/uploads/:path*',
-          destination: `${strapiApiUrl}/uploads/:path*`
         }
       ]
     }
