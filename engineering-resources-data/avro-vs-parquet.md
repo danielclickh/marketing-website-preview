@@ -60,14 +60,18 @@ By choosing Avro over text-based formats like JSON, organizations can ensure bet
 
 ### Working with Avro in Python
 
-Let’s look at how to work with Avro in Python. [fastavro](https://fastavro.readthedocs.io/en/latest/) is a popular library for doing this. We can create an Avro file with 1 million records by running the following code:
+Let’s look at how to work with Avro in Python. [fastavro](https://fastavro.readthedocs.io/en/latest/) is a popular library for doing this. 
+We're going to use the faker library to create a 1 million row Avro file:
 
 <pre><code type='click-ui' language='bash'>
-pip install fastavro
+pip install fastavro faker
 </code></pre>
 
 <pre><code type='click-ui' language='python'>
 import fastavro
+from faker import Faker
+
+fake = Faker()
 
 schema = {
     "type": "record",
@@ -167,7 +171,11 @@ pip install pandas fastparquet
 
 <pre><code type='click-ui' language='python'>
 import pandas as pd
-records = [
+from faker import Faker
+
+fake = Faker()
+
+records = [
   {
     "name": fake.name(),
     "age": fake.random_int(min=18, max=80),
