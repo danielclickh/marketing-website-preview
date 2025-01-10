@@ -145,7 +145,7 @@ Apache Parquet is the ideal choice when working with large-scale analytical data
 #### Data Storage and Analytics
 
 * Large-scale data warehousing and data lakes  
-* Long-term data storage ("data at rest")  
+* Long-term data storage ("data at rest")
 * Business intelligence and analytical processing  
 * Complex queries requiring column-specific access
 
@@ -153,9 +153,7 @@ Apache Parquet is the ideal choice when working with large-scale analytical data
 
 * Batch processing of records in ETL workflows  
 * Aggregation of multiple records into single Parquet files  
-* Kafka Connect integration for record batching  
-* Time-based or record-count-based aggregation of streaming data
-
+* Kafka Connect used for time-based or record-count-based aggregation of streaming data
 
 The format's columnar structure and compression capabilities make it particularly efficient for organizations that need to store and analyze large datasets cost-effectively.
 
