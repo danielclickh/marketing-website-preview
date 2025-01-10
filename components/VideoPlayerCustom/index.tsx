@@ -2,12 +2,6 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import VideoPlayButton from '../../public/images/VideoPlayButton'
 
-declare global {
-  interface Window {
-    dataLayer: any[] // You can specify the dataLayer type if you know it
-  }
-}
-
 interface Video {
   videoId: string
   vimeoCode?: string
