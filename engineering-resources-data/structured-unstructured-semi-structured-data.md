@@ -31,7 +31,6 @@ Structured data appears in many everyday business operations and systems. Financ
 
 Let's look at a sample sales data table to illustrate how structured data maintains consistent columns across all records. 
 
-```
 | sale_date  | product_id | product_name      | quantity | unit_price | total_amount |
 |------------|------------|-------------------|----------|------------|--------------|
 | 2024-01-15 | P001       | Gaming Monitor    | 2        | 299.99     | 599.98       |
@@ -39,7 +38,6 @@ Let's look at a sample sales data table to illustrate how structured data mainta
 | 2024-01-16 | P001       | Gaming Monitor    | 1        | 299.99     | 299.99       |
 | 2024-01-16 | P003       | Mechanical Keyboard| 3        | 129.99     | 389.97       |
 | 2024-01-17 | P002       | Wireless Mouse    | 4        | 49.99      | 199.96       |
-```
 
 In this example, every record follows the same structure with identical columns, making it easy to calculate total sales for each product, find the most popular items by quantity, analyze sales trends by date, and compare unit prices across products. The predictable nature of structured data makes it ideal for business operations that demand precise record-keeping and fast analysis.
 
