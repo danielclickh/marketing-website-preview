@@ -55,7 +55,7 @@ Human-generated unstructured data includes everyday communications like emails, 
 
 Machine-generated unstructured data presents its own set of challenges and opportunities. CCTV systems continuously generate video footage, while satellites produce vast amounts of imagery data used in everything from weather forecasting to urban planning. IoT devices and sensors contribute to this data deluge, generating continuous streams of readings and measurements. System log files, while somewhat structured in format, often contain unstructured text within their entries, making them a hybrid case that requires specialized processing.
 
-### Working with Unstructured Data
+### Working with unstructured data
 
 Unstructured data requires specialized processing to extract meaningful insights. While it doesn't naturally fit into traditional organizational schemes, modern techniques help us discover patterns and derive value from various content forms- text, images, audio, or other media types. The approach varies significantly depending on the data type, with each requiring its specialized tools and techniques.
 
