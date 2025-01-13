@@ -110,7 +110,10 @@ CREATE TABLE reddit
 (
    subreddit LowCardinality(String),
    subreddit_id LowCardinality(String),
-   subreddit_type Enum('public' = 1, 'restricted' = 2, 'user' = 3, 'archived' = 4, 'gold_restricted' = 5, 'private' = 6),
+   subreddit_type Enum(
+    'public' = 1, 'restricted' = 2, 'user' = 3, 
+    'archived' = 4, 'gold_restricted' = 5, 'private' = 6
+   ),
    author LowCardinality(String),
    body String CODEC(ZSTD(6)),
    created_date Date DEFAULT toDate(created_utc),
@@ -124,7 +127,10 @@ CREATE TABLE reddit
    controversiality UInt8,
    gilded UInt8,
    collapsed_because_crowd_control UInt8,
-   collapsed_reason Enum('' = 0, 'comment score below threshold' = 1, 'may be sensitive content' = 2, 'potentially toxic' = 3, 'potentially toxic content' = 4),
+   collapsed_reason Enum(
+     '' = 0, 'comment score below threshold' = 1, 'may be sensitive content' = 2, 
+     'potentially toxic' = 3, 'potentially toxic content' = 4
+  ),
    distinguished Enum('' = 0, 'moderator' = 1, 'admin' = 2, 'special' = 3),
    removal_reason Enum('' = 0, 'legal' = 1),
    author_created_utc DateTime,
@@ -189,7 +195,9 @@ CREATE TABLE hackernews
     `vector` Array(Float32),
     `node_info` Tuple(start Nullable(UInt64), end Nullable(UInt64)),
     `metadata` String,
-    `type` Enum8('story' = 1, 'comment' = 2, 'poll' = 3, 'pollopt' = 4, 'job' = 5),
+    `type` Enum8(
+        'story' = 1, 'comment' = 2, 'poll' = 3, 'pollopt' = 4, 'job' = 5
+    ),
     `by` LowCardinality(String),
     `time` DateTime,
     `title` String,
