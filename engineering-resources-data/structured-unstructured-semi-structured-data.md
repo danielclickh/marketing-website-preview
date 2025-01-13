@@ -183,7 +183,7 @@ FROM reddit;
 
 While ClickHouse is primarily designed for analytical workloads, it can be essential in managing unstructured data. Text content can be stored in String columns and, when combined with modern embedding techniques, can become part of an effective retrieval system.
 
-For example, we recently created a [Hacker News/StackOverflow chatbot](https://clickhouse.com/blog/building-hackernews-stackoverflow-chatbot-with-llamaindex-and-clickhouse%20) and stored embeddings for each Hacker News record alongside the text content:
+For example, we recently created a [Hacker News/StackOverflow chatbot](https://clickhouse.com/blog/building-hackernews-stackoverflow-chatbot-with-llamaindex-and-clickhouse) and stored embeddings for each Hacker News record alongside the text content:
 
 ```sql
 CREATE TABLE hackernews
