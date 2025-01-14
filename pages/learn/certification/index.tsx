@@ -175,9 +175,6 @@ export default function CertificationPage({
               </Link>{' '}
               to register for the next Instructor-led ClickHouse Developer
               training.
-              <br />
-              <br />
-              Thanks for your help!
             </p>
 
             <div className='flex flex-col gap-2 '>
