@@ -1,6 +1,6 @@
 import { CheckCircleIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import CopyUrlButton from '../CopyUrlButton'

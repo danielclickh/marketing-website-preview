@@ -1,5 +1,5 @@
 import { ChevronRightIcon } from '@heroicons/react/solid'
-import React, { ChangeEvent, useMemo, useState } from 'react'
+import { ChangeEvent, useMemo, useState } from 'react'
 import useSWR from 'swr'
 import CategorySelector from '../CategorySelector'
 import { CUIButton } from '../ClickUI'

@@ -1,11 +1,11 @@
-import NewsLetterForm from '../../NewsLetter/NewsLetterForm'
-import { FooterData } from './types'
 import Image from 'next/image'
 import logoFull from '../../../public/logo-full.svg'
+import NewsLetterForm from '../../NewsLetter/NewsLetterForm'
 import topLevelFooterMenu from './footer.json'
+import { FooterData } from './types'
 
-import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
 import { FullyQualifiedEvent } from '../../../lib/galaxy/client'
+import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
 
 export default function Footer({
   newsletterForm,

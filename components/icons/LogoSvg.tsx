@@ -1,4 +1,4 @@
-import React, { HtmlHTMLAttributes } from 'react'
+import { HtmlHTMLAttributes } from 'react'
 
 function LogoSvg(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
   return (

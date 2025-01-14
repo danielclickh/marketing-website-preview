@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactNode, useState } from 'react'
+import { ChangeEvent, ReactNode, useState } from 'react'
 import { submitWorkatoForm } from '../../lib/api/workato'
 import { validateEmail } from '../../lib/form'
 import { SuiButton, SuiTextField, useSnackbar } from '../sui/client'

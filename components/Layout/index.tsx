@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { SeoMetadata } from '../../lib/api/strapi/types'
 import Footer from '../Footer'
 import { FooterData } from '../Footer/types'

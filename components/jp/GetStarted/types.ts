@@ -1,5 +1,3 @@
-import { StrapiButton } from '../../../lib/api/strapi/types'
-
 export interface GettingStartedPlatform {
   id: number
   name: string

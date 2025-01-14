@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import React from 'react'
 import { SeoMetadata } from '../../lib/api/strapi/types'
 
 const siteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL ?? 'https://clickhouse.com'

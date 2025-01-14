@@ -1,6 +1,6 @@
 import { DuplicateIcon } from '@heroicons/react/outline'
 import * as Tooltip from '@radix-ui/react-tooltip'
-import React, {
+import {
   FunctionComponent,
   HTMLAttributes,
   ReactElement,

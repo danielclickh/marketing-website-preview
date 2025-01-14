@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react'
+import { HTMLAttributes } from 'react'
 
 function Mobile(props: HTMLAttributes<HTMLOrSVGElement>) {
   return (

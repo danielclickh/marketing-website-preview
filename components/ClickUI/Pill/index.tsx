@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react'
+import { HTMLAttributes } from 'react'
 
 function Pill({ children, className, ...props }: HTMLAttributes<HTMLElement>) {
   return (

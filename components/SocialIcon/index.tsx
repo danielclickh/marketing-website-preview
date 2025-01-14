@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import React from 'react'
 import { CUILink } from '../ClickUI'
 import { LinkProps } from '../ClickUI/Link/types'
 

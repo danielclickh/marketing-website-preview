@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from 'react'
+import { CSSProperties, useState } from 'react'
 
 const style = { '--totalCount': 264 } as CSSProperties
 
