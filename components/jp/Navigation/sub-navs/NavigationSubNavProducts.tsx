@@ -42,7 +42,7 @@ export default function NavigationSubNavProducts() {
               className='flex-grow-1 flex-shrink-0'
             />
             <span>
-              Bring Your Own Cloud (Private Preview)
+              Bring Your Own Cloud
               <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
                 A fully managed ClickHouse Cloud service,
                 <br /> deployed in your own AWS account.

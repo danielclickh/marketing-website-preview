@@ -17,9 +17,6 @@ export default function ByocPricingCard() {
                 type='h3'
                 className='mb-3 flex flex-col gap-3 !text-2.75xl font-semibold sm:block'>
                 Bring your own cloud
-                <small className='order-first block w-max rounded-full bg-neutral-300 px-3 py-1 align-middle text-xs font-normal leading-none text-neutral-900 sm:ml-3 sm:inline-block'>
-                  BETA
-                </small>
               </SuiTitle>
               <SuiText size='sm' className='leading-relaxed'>
                 Do you have strict data residency and compliance requirements

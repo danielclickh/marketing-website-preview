@@ -1,6 +1,5 @@
 import { ChevronRightIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
-import Link from 'next/link'
 import { CUIButton } from '../ClickUI'
 import { SuiText, SuiTitle } from '../sui'
 
@@ -23,11 +22,6 @@ export function BYOCSection({ loc }: BYOCSectionProps) {
         <div className='w-full lg:w-2/3'>
           <div className='flip-selection mb-6 flex flex-wrap items-center gap-8'>
             <SuiTitle type='h2'>Bring Your Own Cloud</SuiTitle>
-            <Link
-              href={`/cloud/bring-your-own-cloud?loc=${loc}`}
-              className='inline-block rounded-full border border-neutral-900 px-5 py-2  font-semibold uppercase'>
-              Beta
-            </Link>
           </div>
           <div className='flip-selection'>
             <SuiText className='mb-6 leading-relaxed '>
