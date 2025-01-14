@@ -1,6 +1,5 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
-import React from 'react'
 import FollowUs from '../../../components/FollowUs'
 import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'

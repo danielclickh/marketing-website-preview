@@ -1,7 +1,6 @@
 import { ExternalLinkIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import React from 'react'
 import Layout from '../../../components/Layout'
 import { SuiButton, SuiCard, SuiText, SuiTitle } from '../../../components/sui'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'

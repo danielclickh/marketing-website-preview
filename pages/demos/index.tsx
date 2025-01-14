@@ -1,5 +1,4 @@
 import { GetStaticProps } from 'next'
-import React from 'react'
 import DemoCard from '../../components/DemoCard'
 import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'

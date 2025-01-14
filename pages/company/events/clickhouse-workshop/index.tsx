@@ -1,6 +1,5 @@
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
-import React from 'react'
 import EventPost from '../../../../components/EventPostList/EventPost'
 import EventsContainerMarketo from '../../../../components/EventsContainer-Marketo'
 import Layout from '../../../../components/Layout'

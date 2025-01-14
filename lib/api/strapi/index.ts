@@ -13,7 +13,7 @@ export function fetch(uri: string, init: any = {}) {
 
 const strapiApiUrl =
   process.env.STRAPI_API_URL ?? 'https://cms.clickhouse-dev.com:1337'
-  //process.env.STRAPI_API_URL ?? 'http://localhost:1337'
+//process.env.STRAPI_API_URL ?? 'http://localhost:1337'
 const url = `${strapiApiUrl}/api/`
 
 const stagingOnlyFilter =
@@ -178,7 +178,7 @@ export async function findOne(pathName: string, params: Record<string, any>) {
   const response = await fetch(
     `${url}${pathName}${newParamString.length > 0 ? `?${newParamString}` : ''}`
   )
-  
+
   const { data } = await response.json()
   return await convertStrapiObject(data)
 }

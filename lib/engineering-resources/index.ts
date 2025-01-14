@@ -56,7 +56,6 @@ export function getEngineeringResources(): EngineeringResource[] {
   }
 }
 
-
 export function getEngineeringResource(
   slug: string
 ): EngineeringResource | null {

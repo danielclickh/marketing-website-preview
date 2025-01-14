@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import EventPost from '../../../../components/EventPostList/EventPost'
 import Layout from '../../../../components/Layout'
 import Markdown from '../../../../components/Markdown'
