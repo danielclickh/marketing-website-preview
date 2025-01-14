@@ -1,7 +1,6 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import { CUIButton, CUICard } from '../../../components/ClickUI'
 import FAQDynamic from '../../../components/FAQDynamic'
 import Bullseye from '../../../components/icons/Bullseye'
@@ -163,13 +162,22 @@ export default function CertificationPage({
                 className='text-primary-300'>
                 On-demand
               </a>{' '}
-              or{' '}
+              or Instructor-led, which covers all the exam objectives listed
+              below.
+            </p>
+
+            <p className='mb-4'>
+              Check out our{' '}
               <Link
-                href='/events/202406-clickhouse-developer'
-                className='text-primary-300'>
-                Instructor-led
-              </Link>
-              , which covers all the exam objectives listed below.
+                className='text-primary-300'
+                href='/company/news-events?category=Free+Training#upcoming-events'>
+                Live Events page
+              </Link>{' '}
+              to register for the next Instructor-led ClickHouse Developer
+              training.
+              <br />
+              <br />
+              Thanks for your help!
             </p>
 
             <div className='flex flex-col gap-2 '>
