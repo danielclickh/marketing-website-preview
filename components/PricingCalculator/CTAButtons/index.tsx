@@ -140,7 +140,7 @@ export default function CTAButtons({
             type='primary'
             size='lg'
             weight='semibold'
-            href='https://clickhouse.cloud/signUp?loc=pricing-calculator'
+            href='https://console.clickhouse.cloud/signUp?loc=pricing-calculator'
             linkClass='w-full'
             target='_blank'
             onClick={() => {
@@ -181,7 +181,7 @@ export default function CTAButtons({
               type='secondary'
               size='lg'
               weight='semibold'
-              href='https://clickhouse.cloud/signUp?loc=pricing-calculator-custom'
+              href='https://console.clickhouse.cloud/signUp?loc=pricing-calculator-custom'
               linkClass='w-full'
               target='_blank'
               className='w-full'>

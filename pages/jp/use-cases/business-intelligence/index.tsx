@@ -97,7 +97,7 @@ export default function RealTimeAnalyticsPage({
                         type='primary'
                         size='lg'
                         weight='semibold'
-                        href='https://clickhouse.cloud/signUp?loc=use-case-business-intelligence'
+                        href='https://console.clickhouse.cloud/signUp?loc=use-case-business-intelligence'
                         target='_blank'
                         linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                         className='w-full'>
@@ -308,7 +308,7 @@ export default function RealTimeAnalyticsPage({
             </div>
           </div>
           <div className='section-container pb-24 text-neutral-0 md:px-8 2xl:px-0'>
-            <GetStartedFree href='https://clickhouse.cloud/signUp?loc=real-time-use-case-getstarted-footer' />
+            <GetStartedFree href='https://console.clickhouse.cloud/signUp?loc=real-time-use-case-getstarted-footer' />
           </div>
         </div>
       </Layout>

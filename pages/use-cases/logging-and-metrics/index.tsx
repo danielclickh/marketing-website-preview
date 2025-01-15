@@ -104,7 +104,7 @@ export default function ClickHouseServerPage({
                       type='primary'
                       size='lg'
                       weight='semibold'
-                      href='https://clickhouse.cloud/signUp?loc=use-case-logging'
+                      href='https://console.clickhouse.cloud/signUp?loc=use-case-logging'
                       target='_blank'
                       linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                       className='w-full'>
@@ -340,7 +340,7 @@ export default function ClickHouseServerPage({
           </div>
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
             <GetStartedFree
-              href='https://clickhouse.cloud/signUp?loc=logging-use-case-getstarted-footer'
+              href='https://console.clickhouse.cloud/signUp?loc=logging-use-case-getstarted-footer'
               textBefore='Get started with ClickHouse'
               textSlanted='Cloud'
               textAfter='for free'

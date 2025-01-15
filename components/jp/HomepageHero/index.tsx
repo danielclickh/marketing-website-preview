@@ -50,7 +50,7 @@ export default function HomepageHeroAlt({
                 type='primary-dark'
                 size='lg'
                 weight='semibold'
-                href='https://clickhouse.cloud/signUp?loc=hero'
+                href='https://console.clickhouse.cloud/signUp?loc=hero'
                 target='_blank'
                 linkClass='w-full'
                 className='w-full'>

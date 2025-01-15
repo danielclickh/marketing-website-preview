@@ -289,7 +289,7 @@ export default function IntegrationsPage({
         )}
 
         <GetStartedFree
-          href='https://clickhouse.cloud/signUp?loc=integrations'
+          href='https://console.clickhouse.cloud/signUp?loc=integrations'
           textBefore='Get started with ClickHouse'
           textSlanted='Cloud'
           textAfter='for free'

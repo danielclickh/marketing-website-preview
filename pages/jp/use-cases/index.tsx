@@ -314,7 +314,7 @@ function UseCasesPage({
             description='必要な場所に、私たちはいます。ClickHouseコミュニティとの意見交換を大切にしており、いつでもご質問にお答えできるよう準備しています。'
           />
 
-          <GetStartedFree href='https://clickhouse.cloud/signUp?loc=use-cases-get-started-footer' />
+          <GetStartedFree href='https://console.clickhouse.cloud/signUp?loc=use-cases-get-started-footer' />
         </div>
       </div>
     </Layout>

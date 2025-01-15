@@ -26,7 +26,7 @@
   {
     "id": "5",
     "title": "ClickHouseの費用は？",
-    "content": "セルフマネージドのClickHouseの場合、費用はコンピューターやデータストレージなどのリソース、およびClickHouseの管理に必要な人員の数によって変わります。[ClickHouse Cloud](https://clickhouse.cloud/signUp?loc=homepage-faq-accordion)であれば月々50ドルと非常に手頃な価格で始められます。",
+    "content": "セルフマネージドのClickHouseの場合、費用はコンピューターやデータストレージなどのリソース、およびClickHouseの管理に必要な人員の数によって変わります。[ClickHouse Cloud](https://console.clickhouse.cloud/signUp?loc=homepage-faq-accordion)であれば月々50ドルと非常に手頃な価格で始められます。",
     "event": "homePage.faqSection.clickhouseCostExpand"
   }
 ]

@@ -116,7 +116,7 @@ export default function CloudPage({
                           type='primary'
                           size='lg'
                           weight='semibold'
-                          href='https://clickhouse.cloud/signUp?loc=cloud-page-hero-button'
+                          href='https://console.clickhouse.cloud/signUp?loc=cloud-page-hero-button'
                           target={ctaButton.target}
                           linkClass='w-full max-w-[12rem]'
                           className='w-full'>
@@ -318,7 +318,7 @@ export default function CloudPage({
                 <CUIButton
                   type='primary'
                   className='mx-auto mt-11'
-                  href='https://clickhouse.cloud/signUp?loc=clickpipes-cloud-page-get-started'>
+                  href='https://console.clickhouse.cloud/signUp?loc=clickpipes-cloud-page-get-started'>
                   Get Started
                 </CUIButton>
               </div>
@@ -535,7 +535,7 @@ export default function CloudPage({
         </div>
 
         <div className='section-container pb-16 md:px-8 2xl:px-0 '>
-          <GetStartedFree href='https://clickhouse.cloud/signUp?loc=cloud-page-get-started-footer' />
+          <GetStartedFree href='https://console.clickhouse.cloud/signUp?loc=cloud-page-get-started-footer' />
         </div>
       </Layout>
     </>

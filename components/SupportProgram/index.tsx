@@ -31,7 +31,7 @@ export default function SupportProgram(props: any) {
 
         <div className='mx-auto grid max-w-3xl gap-x-10 px-4 pb-12 text-center sm:px-8 md:grid-cols-2 2xl:px-0 '>
           <Link
-            href='https://clickhouse.cloud/support'
+            href='https://console.clickhouse.cloud/support'
             target='_blank'
             className='mb-8 hover:no-underline md:mb-0'>
             <CUICard className='group flex w-full bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
@@ -156,7 +156,7 @@ export default function SupportProgram(props: any) {
                   </td>
                   <td className='border-r border-r-neutral-700 bg-neutral-750 p-4 '>
                     <p>
-                      <a href='https://clickhouse.cloud/learn'>
+                      <a href='https://console.clickhouse.cloud/learn'>
                         On-demand training included
                       </a>
                     </p>
@@ -166,7 +166,7 @@ export default function SupportProgram(props: any) {
                   </td>
                   <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
                     <p>
-                      <a href='https://clickhouse.cloud/learn'>
+                      <a href='https://console.clickhouse.cloud/learn'>
                         On-demand training included
                       </a>
                     </p>

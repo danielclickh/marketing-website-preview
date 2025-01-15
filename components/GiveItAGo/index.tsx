@@ -37,7 +37,7 @@ const deployData: Array<DeployData> = [
     btnText: 'Start free trial',
     description:
       'Available on AWS, GCP, Azure and through their respective Marketplaces.',
-    href: 'https://clickhouse.cloud/signUp?loc=deploy-your-way',
+    href: 'https://console.clickhouse.cloud/signUp?loc=deploy-your-way',
     target: '_blank',
     btnType: 'primary'
   }
