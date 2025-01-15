@@ -1,7 +1,7 @@
 ---
 title: 'Build a dashboard in Python with ClickHouse and Streamlit'
 slug: 'python-dashboard-streamlit'
-excerpt: "This guide is all about real-time data visualization. We'll explore how it differs from normal visualization, see some examples, and learn about the tools we can use."
+excerpt: "In this guide, you'll learn how to build a Python dashboard using ClickHouse and Streamlit. We'll create a real-world example that visualizes Bluesky social media data, walking through everything from basic setup to interactive visualizations. Perfect for data scientists and analysts who want to share their insights through custom dashboards."
 index: 10
 ---
 
