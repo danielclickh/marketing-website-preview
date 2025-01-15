@@ -122,7 +122,7 @@ export default function MLUseCasePage({
                         type='primary'
                         size='lg'
                         weight='semibold'
-                        href='https://clickhouse.cloud/signUp?loc=use-case-ml-and-ds'
+                        href='https://console.clickhouse.cloud/signUp?loc=use-case-ml-and-ds'
                         target='_blank'
                         linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                         className='w-full'>
@@ -404,7 +404,7 @@ export default function MLUseCasePage({
           </div>
 
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
-            <GetStartedFree href='https://clickhouse.cloud/signUp?loc=ml-and-ds-use-case-getstarted-footer' />
+            <GetStartedFree href='https://console.clickhouse.cloud/signUp?loc=ml-and-ds-use-case-getstarted-footer' />
           </div>
         </div>
       </Layout>

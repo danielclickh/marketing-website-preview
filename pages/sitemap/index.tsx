@@ -312,7 +312,7 @@ function Sitemap({
                 </li>
                 <li>
                   <Link
-                    href='https://clickhouse.cloud/support'
+                    href='https://console.clickhouse.cloud/support'
                     className='font text-primary-300 hover:underline'>
                     Open support case
                   </Link>

@@ -189,7 +189,7 @@ export default function BigQueryPage({
               type='secondary'
               size='lg'
               weight='semibold'
-              href={`https://clickhouse.cloud/signUp?loc=${locTracking}-hero`}
+              href={`https://console.clickhouse.cloud/signUp?loc=${locTracking}-hero`}
               target='_blank'
               linkClass='flex-1 w-full'
               className='w-full'

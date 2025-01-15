@@ -353,7 +353,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
             size='lg'
             className='group mx-auto mt-8'
             target='_blank'
-            href='https://clickhouse.cloud/signUp?loc=postgresCdcPageFooterCta'
+            href='https://console.clickhouse.cloud/signUp?loc=postgresCdcPageFooterCta'
             onClick={useGalaxyOnClick(
               'postgresCdcPage.footerCta.createFreeAccountSelect'
             )}>

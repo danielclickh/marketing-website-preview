@@ -402,7 +402,7 @@ function UseCasesPage({
             description='Wherever you need us, we’re there. We love to engage in thoughtful conversation with the ClickHouse community and are always on-hand to answer your questions. '
           />
 
-          <GetStartedFree href='https://clickhouse.cloud/signUp?loc=use-cases-get-started-footer' />
+          <GetStartedFree href='https://console.clickhouse.cloud/signUp?loc=use-cases-get-started-footer' />
         </div>
       </div>
     </Layout>

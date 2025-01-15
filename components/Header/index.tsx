@@ -201,7 +201,7 @@ export default function Header({
                   .toLowerCase()}
               </CUILink>
               <CUILink
-                href='https://clickhouse.cloud/signIn'
+                href='https://console.clickhouse.cloud/signIn'
                 className='w-full rounded border border-neutral-500 py-3 text-center text-sm font-medium leading-none hover:text-primary-300 md-mid:hidden md-mid:w-auto md-mid:border-0 md-mid:py-0 lg-mid:inline-block'
                 onClick={useGalaxyOnClick('topNav.navItems.signInSelect')}>
                 Sign in
@@ -209,7 +209,7 @@ export default function Header({
               <CUIButton
                 type='primary'
                 weight='medium'
-                href='https://clickhouse.cloud/signUp?loc=nav-get-started'
+                href='https://console.clickhouse.cloud/signUp?loc=nav-get-started'
                 className={`w-full md-mid:w-auto  ${eyebrow?.className || ''}`}
                 linkClass='w-full md-mid:w-auto'
                 onClick={useGalaxyOnClick('topNav.navItems.getStartedSelect')}>
