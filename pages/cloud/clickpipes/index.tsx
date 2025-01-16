@@ -66,7 +66,7 @@ export default function ClickHouseServerPage({
                       type='primary'
                       size='lg'
                       weight='semibold'
-                      href='https://clickhouse.cloud/signUp?loc=clickpipes-hero-button'
+                      href='https://console.clickhouse.cloud/signUp?loc=clickpipes-hero-button'
                       target='_blank'
                       linkClass='w-full mx-auto md:mx-0 max-w-[14rem] md:max-w-[12rem]'
                       className='w-full'>
@@ -235,7 +235,7 @@ export default function ClickHouseServerPage({
                   </SuiText>
                   <CUIButton
                     type='primary'
-                    href='https://clickhouse.cloud/signUp?loc=clickpipes-free-trial-connectors'
+                    href='https://console.clickhouse.cloud/signUp?loc=clickpipes-free-trial-connectors'
                     target='_blank'
                     className='mx-auto'>
                     Start a free trial
@@ -275,7 +275,7 @@ export default function ClickHouseServerPage({
 
         <div className='section-container my-12 pb-16 md:px-8 2xl:px-0 '>
           <GetStartedFree
-            href='https://clickhouse.cloud/signUp?loc=clickpipes-getstarted-footer'
+            href='https://console.clickhouse.cloud/signUp?loc=clickpipes-getstarted-footer'
             textBefore='Try ClickPipes in ClickHouse'
             textSlanted='Cloud'
             textAfter='for free'

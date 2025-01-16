@@ -259,7 +259,7 @@ export default function BigQueryPerformancePage({
                     handleHeroSecondaryCtaClick()
                   },
                   target: '_blank',
-                  href: `https://clickhouse.cloud/signUp?loc=${locTracking}-paid-perf-hero-variant${pageLayout}`,
+                  href: `https://console.clickhouse.cloud/signUp?loc=${locTracking}-paid-perf-hero-variant${pageLayout}`,
                   text: 'Start free trial'
                 }}
                 statsLabel={
@@ -603,7 +603,7 @@ export default function BigQueryPerformancePage({
                 onClick={() => {
                   handleFooterSecondaryCtaClick()
                 }}
-                href={`https://clickhouse.cloud/signUp?loc=${locTracking}-paid-footer-perf-variant${pageLayout}`}
+                href={`https://console.clickhouse.cloud/signUp?loc=${locTracking}-paid-footer-perf-variant${pageLayout}`}
                 target='_blank'
                 className='w-full !border !border-primary-900 !text-primary-900 hover:!text-white sm:w-auto'>
                 Start free trial

@@ -26,7 +26,7 @@
   {
     "id": "5",
     "title": "How much does ClickHouse cost?",
-    "content": "Self-managed ClickHouse is dependent on the cost of your compute and data storage resources, as well as headcount necessary to manage the ClickHouse deployment. For the most affordable way to run ClickHouse, use [ClickHouse Cloud](https://clickhouse.cloud/signUp?loc=homepage-faq-accordion), which starts at $50/month.",
+    "content": "Self-managed ClickHouse is dependent on the cost of your compute and data storage resources, as well as headcount necessary to manage the ClickHouse deployment. For the most affordable way to run ClickHouse, use [ClickHouse Cloud](https://console.clickhouse.cloud/signUp?loc=homepage-faq-accordion), which starts at $50/month.",
     "event": "homePage.faqSection.clickhouseCostExpand"
   }
 ]

@@ -159,7 +159,7 @@ export default function Page({
                  * The mobile button can be found below.
                  */}
                 <CUIButton
-                  href='https://clickhouse.cloud/signUp?loc=rt-page-hero'
+                  href='https://console.clickhouse.cloud/signUp?loc=rt-page-hero'
                   target='_blank'
                   type='primary-dark'
                   size='lg'
@@ -177,7 +177,7 @@ export default function Page({
                  * The desktop button can be found above.
                  */}
                 <CUIButton
-                  href='https://clickhouse.cloud/signUp?loc=rt-page-hero'
+                  href='https://console.clickhouse.cloud/signUp?loc=rt-page-hero'
                   target='_blank'
                   type='primary-dark'
                   size='lg'
@@ -463,7 +463,7 @@ export default function Page({
             />
           </div>
           <CUIButton
-            href='https://clickhouse.cloud/signUp?loc=rt-page-what-is-rt'
+            href='https://console.clickhouse.cloud/signUp?loc=rt-page-what-is-rt'
             target='_blank'
             type='primary'
             size='lg'
@@ -574,7 +574,7 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
             />
           </div>
           <CUIButton
-            href='https://clickhouse.cloud/signUp?loc=rt-page-industries'
+            href='https://console.clickhouse.cloud/signUp?loc=rt-page-industries'
             target='_blank'
             type='primary'
             size='lg'

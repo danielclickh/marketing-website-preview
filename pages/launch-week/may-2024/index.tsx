@@ -118,7 +118,7 @@ export default function LaunchWeekPage({
                   type='primary'
                   size='lg'
                   weight='semibold'
-                  href='https://clickhouse.cloud/signUp?loc=launch-week-may2024'
+                  href='https://console.clickhouse.cloud/signUp?loc=launch-week-may2024'
                   target='_blank'
                   linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                   className='w-full'>
@@ -249,7 +249,7 @@ export default function LaunchWeekPage({
         <HRSeparator className='my-24' />
 
         <div className='section-container md:px-8 2xl:px-0 '>
-          <GetStartedFree href='https://clickhouse.cloud/signUp?loc=cloud-page-get-started-footer' />
+          <GetStartedFree href='https://console.clickhouse.cloud/signUp?loc=cloud-page-get-started-footer' />
         </div>
 
         <HRSeparator className='my-24' />

@@ -144,7 +144,7 @@ export default function Page({
                       className='w-full'
                       type='secondary'
                       target='_blank'
-                      href='https://clickhouse.cloud/signUp?loc=doublecloud-comparison-hero'
+                      href='https://console.clickhouse.cloud/signUp?loc=doublecloud-comparison-hero'
                       iconRight={
                         <ChevronRightIcon
                           height='16'
@@ -347,7 +347,7 @@ export default function Page({
         <div className='bg-shadow-element-right yellow-shadow '>
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
             <GetStartedFree
-              href='https://clickhouse.cloud/signUp?loc=doublecloud-comparison-getstarted-footer'
+              href='https://console.clickhouse.cloud/signUp?loc=doublecloud-comparison-getstarted-footer'
               textBefore='Get started with ClickHouse'
               textSlanted='Cloud'
               textAfter='for free'

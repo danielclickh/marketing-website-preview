@@ -182,7 +182,7 @@ ClickHouse is designed to handle high concurrency workloads. It is frequently us
 
 Hopefully, you’re excited to [add real-time analytics functionality to your application](https://clickhouse.com/blog/adding-analytics-to-an-application-with-clickhouse-query-endpoints). Let’s have a look at how to do that.
 
-The first step is to navigate to [clickhouse.cloud](https://clickhouse.cloud/) and create an account for your 30-day free trial. Once you’ve done that, create a service in the cloud and region of your choice. Initializing the service will take a few minutes, but then we’re ready to import some data. 
+The first step is to navigate to [clickhouse.cloud](https://console.clickhouse.cloud/) and create an account for your 30-day free trial. Once you’ve done that, create a service in the cloud and region of your choice. Initializing the service will take a few minutes, but then we’re ready to import some data. 
 
 You can also watch the following video to see the steps described above:
 
