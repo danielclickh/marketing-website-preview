@@ -1,5 +1,3 @@
-import isEqual from 'lodash/isEqual'
-
 if (!process.env.NEXT_IS_PROD) {
   require('dotenv').config({ path: './.env.local' })
 }
@@ -91,28 +89,37 @@ export const getPricingsByPlan = async (
   return allPricings
 }
 
-export const getRelevantPricing = async (
-  planId: string,
-  cloudProvider: string,
-  region: string,
-  instanceTier: string
+export const getPricingsByPlanTemplate = async (
+  planTemplateId: string
 ): Promise<Array<Pricing>> => {
-  const allPricings = await getPricingsByPlan(planId)
+  const token = await getToken()
+  let allPricings: Array<Pricing> = []
 
-  const segment = {
-    cloudProvider,
-    region,
-    instanceTier
-  }
-  console.log('segment', segment)
-  console.log(
-    'allPricings',
-    allPricings.filter(
-      (pricing: any) => pricing.segment && isEqual(pricing.segment, segment)
-    )
-  )
+  let nextToken = null
 
-  return allPricings.filter(
-    (pricing: any) => pricing.segment && isEqual(pricing.segment, segment)
-  )
+  do {
+    const url = buildUrl('/pricings', {
+      planTemplateId,
+      ...(nextToken && { nextToken }) // Include nextToken only if it is truthy
+    })
+
+    const res = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+
+    if (res.ok) {
+      const responseData = await res.json()
+      allPricings = allPricings.concat(responseData.data)
+      nextToken = responseData.nextToken
+    } else {
+      console.log(url, res.statusText)
+      // Handle error here if needed
+      return []
+    }
+  } while (nextToken)
+
+  return allPricings
 }

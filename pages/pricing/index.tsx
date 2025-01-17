@@ -1,32 +1,29 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import ByocPricingCard from '../../components/ByocPricingCard'
 import { CUIButton, CUICard } from '../../components/ClickUI'
 import Layout from '../../components/Layout'
-import LinkWithArrow from '../../components/LinkWithArrow'
 import Markdown from '../../components/Markdown'
 import MarketoForm from '../../components/MarketoForm'
 import Modal from '../../components/Modal'
 import PocContactForm from '../../components/PocContactForm'
-import { PricingCalculator } from '../../components/PricingCalculator'
+import PricingV2 from '../../components/PricingV2'
 import { SuiText, SuiTitle } from '../../components/sui'
 import { useClickOutside } from '../../hooks'
-import { findAll, findOne } from '../../lib/api/strapi'
+import {
+  findOne,
+  getPricingV2Computes,
+  getPricingV2Plans,
+  getPricingV2Providers
+} from '../../lib/api/strapi'
 import { useGalaxyOnClick, useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import {
-  PricingData,
-  PricingPageProps,
-  PricingPlanData,
-  RegionPricing
-} from '../../types/pricing'
+import { PricingData, PricingPageProps } from '../../types/pricing'
 import philosophy from './philosophy.json'
 
-export const getStaticProps: GetStaticProps<PricingPageProps> =
-  async function getStaticProps() {
+export const getServerSideProps: GetServerSideProps<PricingPageProps> =
+  async function getServerSideProps({ query }) {
     const pricingPromise: Promise<PricingData> = findOne('pricing', {
       populate: [
         'hero',
@@ -39,42 +36,28 @@ export const getStaticProps: GetStaticProps<PricingPageProps> =
         'seo.image'
       ]
     })
-    const pricingByRegionPromise: Promise<{ data: Array<RegionPricing> }> =
-      findAll('pricing-per-regions', {
-        populate: [
-          'regionFlagPNG',
-          'storagePricing',
-          'computePricing',
-          'devStoragePricing',
-          'devComputePricing'
-        ],
-        fields: ['cloudProvider', 'region', 'hasDevService']
-      })
-    const plansProps: Promise<{ data: Array<PricingPlanData> }> = findAll(
-      'pricing-plans',
-      {
-        populate: ['actionButton', 'items', 'items_disabled'],
-        fields: ['name', 'description', 'pricingMain', 'cloudProvider']
-      }
-    )
+
+    const commonPropsPromise = getCommonProps()
+
+    const plansPromise = getPricingV2Plans()
+    const providersPromise = getPricingV2Providers()
+    const computesPromise = getPricingV2Computes()
 
     const [
       { hero, contactSection, meteredPricing, seo },
-      { data: pricingByRegion },
-      { data: pricingPlans }
-    ] = await Promise.all([pricingPromise, pricingByRegionPromise, plansProps])
+      commonProps,
+      plans,
+      providers,
+      computes
+    ] = await Promise.all([
+      pricingPromise,
+      commonPropsPromise,
+      plansPromise,
+      providersPromise,
+      computesPromise
+    ])
 
-    const commonProps = await getCommonProps()
     seo.path = '/pricing'
-    const {
-      hero: { cloudProviders }
-    } = await findOne('cloud', {
-      populate: [
-        'hero.cloudProviders',
-        'hero.cloudProviders.darkProviderPngs',
-        'hero.cloudProviders.lightProviderPngs'
-      ]
-    })
 
     return {
       props: {
@@ -82,9 +65,10 @@ export const getStaticProps: GetStaticProps<PricingPageProps> =
         contactSection,
         meteredPricing,
         seo,
-        pricingByRegion,
-        pricingPlans,
-        cloudProviders,
+        plans,
+        providers,
+        computes,
+        requestParams: query,
         ...commonProps
       }
     }
@@ -93,11 +77,11 @@ export const getStaticProps: GetStaticProps<PricingPageProps> =
 export default function PricingPage({
   hero,
   contactSection,
-  meteredPricing,
-  pricingByRegion,
-  pricingPlans,
   seo,
-  cloudProviders,
+  plans,
+  providers,
+  computes,
+  requestParams,
   headerData,
   footerData
 }: PricingPageProps) {
@@ -123,60 +107,12 @@ export default function PricingPage({
           </div>
           <div className='pb-16'>
             <div className='mx-auto max-w-7xl px-4 sm:px-8 xl:px-0'>
-              {pricingByRegion.length > 0 && (
-                <PricingCalculator
-                  pricingByRegion={pricingByRegion}
-                  cloudProviders={cloudProviders}
-                  pricingPlans={pricingPlans}
-                  afterPricingSelector={<RegionRequest />}
-                  afterPricingTable={
-                    <>
-                      <ByocPricingCard />
-                      <div className='mx-6 mt-6'>
-                        <div className='rounded bg-neutral-700 px-3 py-5 text-center text-white'>
-                          <SuiText size='sm'>
-                            Need help with your proof of concept?{' '}
-                            <br className='sm:hidden' />
-                            <Link
-                              href='#poc-contact'
-                              className='text-primary-300 hover:underline'
-                              onClick={(event) => {
-                                if (pocFormRef.current) {
-                                  event.preventDefault()
-                                  pocFormRef.current.scrollIntoView({
-                                    behavior: 'smooth'
-                                  })
-                                }
-                              }}>
-                              Contact us
-                            </Link>
-                          </SuiText>
-                        </div>
-                      </div>
-                      <div className='mt-12 space-y-6 text-center'>
-                        <SuiText size='sm'>
-                          Or download the forever-free{' '}
-                          <LinkWithArrow
-                            href='https://clickhouse.com/docs/en/quick-start'
-                            className='text-primary-300 underline'>
-                            open source distribution of ClickHouse
-                          </LinkWithArrow>
-                        </SuiText>
-                        <SuiText size='sm'>
-                          For more information about our billing and pricing
-                          please refer to our{' '}
-                          <Link
-                            href='https://clickhouse.com/docs/en/manage/billing/#faqs'
-                            className='text-primary-300 underline'>
-                            Billing & Pricing FAQ
-                          </Link>
-                          .
-                        </SuiText>
-                      </div>
-                    </>
-                  }
-                />
-              )}
+              <PricingV2
+                requestParams={requestParams}
+                plans={plans}
+                providers={providers}
+                computes={computes}
+              />
             </div>
           </div>
           <div className='clip-inverted-triangle bg-shadow-element pb-60 pt-10'></div>

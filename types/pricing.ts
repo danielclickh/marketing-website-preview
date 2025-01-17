@@ -1,4 +1,11 @@
-import { SeoMetadata, StrapiImageType } from '../lib/api/strapi/types'
+import { ParsedUrlQuery } from 'querystring'
+import {
+  PricingV2EntryCompute,
+  PricingV2EntryPlan,
+  PricingV2EntryProvider,
+  SeoMetadata,
+  StrapiImageType
+} from '../lib/api/strapi/types'
 import { CommonProps } from './homepage'
 
 interface PricingDimension {
@@ -88,7 +95,8 @@ export interface PricingPageProps extends CommonProps {
   hero: PricingHero
   meteredPricing: MeteredPricing
   contactSection: PricingContactSection
-  pricingByRegion: Array<RegionPricing>
-  pricingPlans: Array<PricingPlanData>
-  cloudProviders: Array<CloudProviderType>
+  plans: Array<PricingV2EntryPlan>
+  providers: Array<PricingV2EntryProvider>
+  computes: Array<PricingV2EntryCompute>
+  requestParams: ParsedUrlQuery | undefined
 }
