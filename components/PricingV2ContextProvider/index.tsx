@@ -172,9 +172,13 @@ export default function PricingV2ContextProvider({
   onChange,
   children
 }: PricingV2ContextProviderProps) {
-  const [plans, setPlans] = useState<Array<PricingV2EntryPlan>>([])
-  const [providers, setProviders] = useState<Array<PricingV2EntryProvider>>([])
-  const [computes, setComputes] = useState<Array<PricingV2EntryCompute>>([])
+  const [plans, setPlans] = useState<Array<PricingV2EntryPlan>>(data.plans)
+  const [providers, setProviders] = useState<Array<PricingV2EntryProvider>>(
+    data.providers
+  )
+  const [computes, setComputes] = useState<Array<PricingV2EntryCompute>>(
+    data.computes
+  )
 
   const [plan, setPlan] = useState<ContextPlan>(startingValues?.plan ?? null)
   const [provider, setProvider] = useState<ContextProvider>(
@@ -308,12 +312,6 @@ export default function PricingV2ContextProvider({
       .filter((val) => val !== null)
       .reduce((total, current) => total + current, 0)
   }, [computeMaxPrice, storagePrice, replicas])
-
-  useEffect(() => {
-    setPlans(data.plans)
-    setProviders(data.providers)
-    setComputes(data.computes)
-  }, [data])
 
   useEffect(() => {
     if (onChange) {

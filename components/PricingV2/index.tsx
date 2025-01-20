@@ -1,4 +1,4 @@
-import { debounce } from 'lodash'
+import { throttle } from 'lodash'
 import { useRouter } from 'next/router'
 import { ParsedUrlQuery } from 'querystring'
 import { useCallback } from 'react'
@@ -37,7 +37,7 @@ export default function PricingV2({
   const cleanUrlParam = (param: string | string[] | undefined) => {
     if (Array.isArray(param)) param = param[0]
     if (!param) return null
-    if (param.match(/\d/)) return Number(param)
+    if (param.match(/^\d+$/)) return Number(param)
     param = decodeURI(param).trim()
     if (param.toLowerCase() === 'true') return true
     if (param.toLowerCase() === 'false') return false
@@ -72,19 +72,30 @@ export default function PricingV2({
 
   // Update URL when pricing values have changed
   const onChangeHandler = useCallback(
-    debounce((values: Values) => {
-      // router.replace(
-      //   {
-      //     query: {
-      //       ...router.query,
-      //       ...Object.fromEntries(
-      //         Object.entries(values).filter(([key, value]) => value !== null)
-      //       )
-      //     }
-      //   },
-      //   undefined,
-      //   { shallow: true, scroll: false }
-      // )
+    throttle((values: Values) => {
+      let queryChanged = false
+      let modifiedQuery = { ...router.query }
+
+      Object.entries(values).forEach(([key, value]) => {
+        if (value !== null) {
+          if (value !== modifiedQuery[key]) {
+            queryChanged = true
+            modifiedQuery[key] = value.toString()
+          }
+        } else {
+          delete modifiedQuery[key]
+        }
+      })
+
+      if (queryChanged) {
+        router.replace(
+          {
+            query: modifiedQuery
+          },
+          undefined,
+          { shallow: true, scroll: false }
+        )
+      }
     }, 200),
     [router]
   )
