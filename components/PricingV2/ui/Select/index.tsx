@@ -2,7 +2,7 @@ import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { useMemo } from 'react'
 
-export type Option = { value: any; label: string }
+export type Option = { value: any; label: string | React.ReactNode }
 export type Options = Array<Option>
 
 export interface SelectProps {
@@ -19,7 +19,7 @@ export default function Select({ options, value, onChange }: SelectProps) {
   return (
     <Listbox value={value} onChange={onChange} as='div' className=''>
       <div className='relative'>
-        <Listbox.Button className='relative w-full cursor-default rounded-[4px] border border-neutral-700 bg-neutral-750 py-2 pl-3 pr-10 text-left shadow-input hover:cursor-pointer hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl focus:outline-none disabled:cursor-auto data-[headlessui-state=open]:rounded-b-none data-[headlessui-state=open]:border-primary-300 sm:text-sm'>
+        <Listbox.Button className='relative h-10 w-full cursor-default rounded-[4px] border border-neutral-700 bg-neutral-725 pl-3 pr-10 text-left shadow-input transition-colors hover:cursor-pointer hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl focus:outline-none disabled:cursor-auto data-[headlessui-state=open]:rounded-b-none data-[headlessui-state=open]:border-primary-300 sm:text-sm'>
           <span className='flex gap-3 truncate'>
             {selectedOption ? selectedOption.label : ''}
           </span>
@@ -27,7 +27,7 @@ export default function Select({ options, value, onChange }: SelectProps) {
             <ChevronDownIcon className='h-5 w-5 text-c4' aria-hidden='true' />
           </span>
         </Listbox.Button>
-        <Listbox.Options className='absolute z-10 -mt-1 w-full overflow-auto rounded-md rounded-t-none border border-t-0 border-primary-300 bg-neutral-725 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+        <Listbox.Options className='absolute z-10 -mt-1 max-h-72 w-full overflow-auto rounded-md rounded-t-none border border-t-0 border-primary-300 bg-neutral-725 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
           {options.map((item, index) => (
             <Listbox.Option
               key={item.value}

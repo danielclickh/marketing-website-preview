@@ -4,11 +4,16 @@ import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
 export interface LabelProps {
   children: React.ReactNode
   tooltip?: string
+  className?: string
 }
 
-export default function Label({ children, tooltip }: LabelProps) {
+export default function Label({
+  children,
+  tooltip,
+  className = ''
+}: LabelProps) {
   return (
-    <div className='mb-2 flex items-center gap-x-3'>
+    <div className={`mb-2 flex items-center gap-x-3 ${className}`}>
       <label className='block text-xs font-bold text-[#B3B6BD]'>
         {children}
       </label>

@@ -1,9 +1,13 @@
 import { GetServerSideProps } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
+import ByocPricingCard from '../../components/ByocPricingCard'
 import { CUIButton, CUICard } from '../../components/ClickUI'
+import HRSeparator from '../../components/HRSeparator'
 import Layout from '../../components/Layout'
+import LinkWithArrow from '../../components/LinkWithArrow'
 import Markdown from '../../components/Markdown'
 import MarketoForm from '../../components/MarketoForm'
 import Modal from '../../components/Modal'
@@ -90,30 +94,83 @@ export default function PricingPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pricing h-full text-neutral-0'>
-        <div className='bg-grid'>
-          <div className='mx-auto max-w-7xl px-4 pt-16 sm:px-8 2xl:px-0'>
-            {hero && (
-              <div className='hero'>
-                <div className='flex flex-col items-center'>
-                  <SuiTitle type='h1' color='white' className='md:!text-5.5xl'>
-                    {hero.title}
-                  </SuiTitle>
-                  <div className='mt-6 text-neutral-200'>
-                    {hero.description}
+        <div className='pt-16'>
+          <div className='mx-auto max-w-7xl px-4 sm:px-8 xl:px-0'>
+            <PricingV2
+              requestParams={requestParams}
+              plans={plans}
+              providers={providers}
+              computes={computes}
+              beforeTable={
+                <>
+                  {hero && (
+                    <div className='flex flex-col items-center'>
+                      <SuiTitle
+                        type='h1'
+                        color='white'
+                        className='md:!text-5.5xl'>
+                        {hero.title}
+                      </SuiTitle>
+                      <div className='mt-6 text-neutral-200'>
+                        {hero.description}
+                      </div>
+                    </div>
+                  )}
+                </>
+              }
+              afterTable={
+                <>
+                  <div className='mt-8 space-y-8'>
+                    <SuiText size='sm' className='text-center'>
+                      For more information about our billing and pricing please
+                      refer to our{' '}
+                      <Link
+                        href='https://clickhouse.com/docs/en/manage/billing/#faqs'
+                        className='text-primary-300 underline'>
+                        Billing & Pricing FAQ
+                      </Link>
+                      .
+                    </SuiText>
+                    <ByocPricingCard />
+                    <SuiText size='sm' className='text-center'>
+                      Or download the forever-free{' '}
+                      <LinkWithArrow
+                        href='https://clickhouse.com/docs/en/quick-start'
+                        className='text-primary-300 underline'>
+                        open source distribution of ClickHouse
+                      </LinkWithArrow>
+                    </SuiText>
+                    <div className='mx-6 mt-6'>
+                      <div className='rounded bg-neutral-700 px-3 py-5 text-center text-white'>
+                        <SuiText size='sm'>
+                          Need help with your proof of concept?{' '}
+                          <br className='sm:hidden' />
+                          <Link
+                            href='#poc-contact'
+                            className='text-primary-300 hover:underline'
+                            onClick={(event) => {
+                              if (pocFormRef.current) {
+                                event.preventDefault()
+                                pocFormRef.current.scrollIntoView({
+                                  behavior: 'smooth'
+                                })
+                              }
+                            }}>
+                            Contact us
+                          </Link>
+                        </SuiText>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            )}
-          </div>
-          <div className='pb-16'>
-            <div className='mx-auto max-w-7xl px-4 sm:px-8 xl:px-0'>
-              <PricingV2
-                requestParams={requestParams}
-                plans={plans}
-                providers={providers}
-                computes={computes}
-              />
-            </div>
+                  <HRSeparator className='my-12' />
+                </>
+              }
+              beforeEstimator={
+                <SuiTitle type='h2' className='my-12 text-center'>
+                  Estimate your monthly&nbsp;cost
+                </SuiTitle>
+              }
+            />
           </div>
           <div className='clip-inverted-triangle bg-shadow-element pb-60 pt-10'></div>
           <div className='philosophy -mt-1 bg-primary-300 text-neutral-900'>

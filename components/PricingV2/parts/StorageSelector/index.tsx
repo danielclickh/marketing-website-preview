@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import Label from '../../ui/Label'
 import Radios from '../../ui/Radios'
@@ -51,6 +51,10 @@ export default function StorageSelector() {
     [setStorageSize]
   )
 
+  const compressionApplied = useMemo(() => {
+    return !storageCompressed && storageSize && storageUnit
+  }, [storageCompressed, storageSize, storageUnit])
+
   useEffect(() => {
     const validated = validateStorageSize(storageSize)
     if (storageSize !== validated) setStorageSize(validated)
@@ -72,7 +76,7 @@ export default function StorageSelector() {
         <div className='col-span-2 md:col-span-1'>
           <Label>Storage Volume</Label>
           <input
-            className='relative w-full cursor-text rounded-[4px] border border-neutral-700 bg-neutral-750 py-2 pl-3 pr-10 text-left shadow-input focus:outline-none sm:text-sm md:max-w-[112px]'
+            className='relative h-10 w-full cursor-text rounded-[4px] border border-neutral-700 bg-neutral-725 px-3 text-left shadow-input focus:outline-none sm:text-sm md:max-w-[112px]'
             type='number'
             min={0}
             defaultValue={storageSize || 0}
@@ -101,11 +105,11 @@ export default function StorageSelector() {
       </div>
       <div
         className={` ${
-          !storageCompressed ? 'text-[#66FF73]' : 'text-white'
+          compressionApplied ? 'text-[#66FF73]' : 'text-white'
         } mb-10 mt-3 text-xs `}>
-        {!storageCompressed && storageSize && storageUnit ? (
+        {compressionApplied ? (
           <p>
-            {parseFloat((storageSize / 10).toFixed(1))}
+            {parseFloat((storageSize! / 10).toFixed(1))}
             {STORAGE_UNITS.find((item) => item.value === storageUnit)?.label ??
               storageUnit}{' '}
             after compression

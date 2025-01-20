@@ -107,7 +107,7 @@ async function createPricingV2File() {
 }
 
 async function triggerPricingFile() {
-  await Promise.all([/*createPricingV1File(),*/ createPricingV2File()])
+  await Promise.all([createPricingV1File(), createPricingV2File()])
 }
 
 triggerPricingFile()

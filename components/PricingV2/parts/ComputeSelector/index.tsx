@@ -73,6 +73,47 @@ export default function ComputeSelector() {
     })
   }, [computes])
 
+  const activePackage = useMemo(() => {
+    // No active packages if the customizer is open
+    if (customizing) return undefined
+
+    return packages.find((item) => {
+      const matchingReplicas = replicas === item.replicas
+      const matchingMinCompute =
+        !item.minimumCompute ||
+        (item.minimumCompute && item.minimumCompute.size === computeMinSize)
+      const matchingMaxCompute =
+        !item.maximumCompute ||
+        (item.maximumCompute && item.maximumCompute.size === computeMaxSize)
+      return matchingReplicas && matchingMinCompute && matchingMaxCompute
+    })
+  }, [plan, packages, customizing, computeMinSize, computeMaxSize, replicas])
+
+  // Stop customzing if plan doesn't allow it
+  useEffect(() => {
+    if (!isCusomizable && customizing) setCustomizing(false)
+  }, [isCusomizable])
+
+  // Set the default package if not customizing and no active package
+  useEffect(() => {
+    if (!customizing && !activePackage) {
+      const firstPackage = packages.at(0)
+
+      if (firstPackage?.minimumCompute?.size) {
+        setComputeMinSize(firstPackage.minimumCompute.size)
+      }
+
+      if (firstPackage?.maximumCompute?.size) {
+        setComputeMaxSize(firstPackage.maximumCompute.size)
+      }
+
+      if (firstPackage?.replicas) {
+        setReplicas(firstPackage.replicas)
+      }
+    }
+  }, [customizing, activePackage])
+
+  // Ensure the max size is always >= min size
   useEffect(() => {
     if (
       computeMinSize !== null &&
@@ -83,6 +124,7 @@ export default function ComputeSelector() {
     }
   }, [computeMinSize])
 
+  // Ensure the min size is always <= max size
   useEffect(() => {
     if (
       computeMinSize !== null &&
@@ -101,21 +143,13 @@ export default function ComputeSelector() {
 
           {/* Packages */}
           {packages.length > 0 && (
-            <div className='grid grid-cols-2 flex-col gap-4 lg:flex-row'>
-              {packages.map((resource, index) => {
-                const isActive =
-                  !customizing &&
-                  replicas === resource.replicas &&
-                  (!resource.minimumCompute ||
-                    (resource.minimumCompute &&
-                      resource.minimumCompute.size === computeMinSize)) &&
-                  (!resource.maximumCompute ||
-                    (resource.maximumCompute &&
-                      resource.maximumCompute.size === computeMaxSize))
+            <div className='grid flex-col gap-4 sm:grid-cols-2 lg:flex-row'>
+              {packages.map((item, index) => {
+                const isActive = item === activePackage
                 return (
                   <button
                     key={index}
-                    className={`flex flex-1 flex-col rounded-[4px] border border-neutral-700 bg-neutral-750 px-3 py-2 text-left shadow-input transition-colors focus:outline-none ${
+                    className={`flex flex-1 flex-col justify-center rounded-[4px] border border-neutral-700 bg-neutral-750 px-3 py-2 text-left text-sm shadow-input transition-colors focus:outline-none ${
                       isActive
                         ? 'border-primary'
                         : 'hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl'
@@ -123,16 +157,20 @@ export default function ComputeSelector() {
                     onClick={(event) => {
                       event.preventDefault()
                       setCustomizing(false)
-                      setReplicas(resource.replicas)
-                      if (resource.minimumCompute)
-                        setComputeMinSize(resource.minimumCompute.size)
-                      if (resource.maximumCompute)
-                        setComputeMaxSize(resource.maximumCompute.size)
+                      setReplicas(item.replicas)
+
+                      if (item.minimumCompute) {
+                        setComputeMinSize(item.minimumCompute.size)
+                      }
+
+                      if (item.maximumCompute) {
+                        setComputeMaxSize(item.maximumCompute.size)
+                      }
                     }}>
-                    <span className='font-medium'>{resource.name}</span>
-                    {resource.description && (
-                      <small className='opacity-70'>
-                        {resource.description}
+                    <span className='font-medium'>{item.name}</span>
+                    {item.description && (
+                      <small className='whitespace-pre-wrap opacity-70'>
+                        {item.description}
                       </small>
                     )}
                   </button>
@@ -144,19 +182,24 @@ export default function ComputeSelector() {
           {/* Customizer */}
           {isCusomizable && (
             <div
-              className={`mt-4 rounded border ${
-                customizing ? 'border-primary' : ''
+              className={`mt-4 flex flex-1 flex-col justify-center rounded-[4px] border border-neutral-700 bg-neutral-750 text-center text-sm shadow-input transition-colors focus:outline-none ${
+                customizing
+                  ? 'border-primary'
+                  : 'hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl'
               }`}>
               <button
-                className='block w-full p-4 text-left'
+                className='flex w-full flex-col px-4 py-2 text-left'
                 onClick={(event) => {
                   event.preventDefault()
                   if (!customizing) setCustomizing(true)
                 }}>
-                Customize
+                <span>Custom</span>
+                <small className='opacity-70'>
+                  Customize the size of your service
+                </small>
               </button>
               <div
-                className={`space-y-8 p-4 pt-0 ${
+                className={`space-y-8 p-4 pt-3 ${
                   customizing ? 'block' : 'hidden'
                 }`}>
                 <div>
@@ -213,8 +256,10 @@ export default function ComputeSelector() {
                 customizablePlans.map((item) => {
                   return (
                     <button
-                      className='inline text-primary hover:underline'
-                      onClick={() => setPlan(item.slug)}>
+                      className='text-primary hover:underline'
+                      onClick={() => {
+                        setPlan(item.slug)
+                      }}>
                       {item.name}
                     </button>
                   )

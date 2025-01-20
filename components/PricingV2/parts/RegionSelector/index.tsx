@@ -1,9 +1,18 @@
 import { useCallback, useEffect, useMemo } from 'react'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
+import { StrapiImage } from '../../../StrapiElements'
 import Label from '../../ui/Label'
 import Select, { Options } from '../../ui/Select'
 
-export default function RegionSelector() {
+export interface RegionSelectorProps {
+  displayLabel?: boolean
+  className?: string
+}
+
+export default function RegionSelector({
+  displayLabel,
+  className = ''
+}: RegionSelectorProps) {
   const { providers, provider, region, setRegion } = usePricingV2Context()
 
   const regionOptions: Options = useMemo(() => {
@@ -14,7 +23,14 @@ export default function RegionSelector() {
     return providerEntry.regions.map((item) => {
       return {
         value: item.key,
-        label: item.label || item.key
+        label: (
+          <>
+            {item.icon && (
+              <StrapiImage {...item.icon} alt={item.label || item.key} />
+            )}
+            {item.label || item.key}
+          </>
+        )
       }
     })
   }, [providers, provider])
@@ -38,8 +54,8 @@ export default function RegionSelector() {
   return (
     <>
       {regionOptions.length > 0 && (
-        <div>
-          <Label>Region</Label>
+        <div className={className}>
+          {displayLabel && <Label>Region</Label>}
           <Select
             options={regionOptions}
             value={region}
