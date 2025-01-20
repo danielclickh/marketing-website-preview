@@ -19,7 +19,7 @@ export default function Radios({ options, value, onChange }: RadiosProps) {
         aria-label='Is your data compressed?'>
         {options.map((item, index) => {
           return (
-            <div key={item.value} className='flex items-center gap-2'>
+            <div key={item.value} className='flex items-center'>
               <RadioGroup.Item
                 value={item.value}
                 id={`pricing-radio-${index}`}
@@ -29,7 +29,7 @@ export default function Radios({ options, value, onChange }: RadiosProps) {
                 />
               </RadioGroup.Item>
               <label
-                className='cursor-pointer text-sm leading-none text-white'
+                className='cursor-pointer pl-2 text-sm leading-none text-white'
                 htmlFor={`pricing-radio-${index}`}>
                 {item.label}
               </label>
