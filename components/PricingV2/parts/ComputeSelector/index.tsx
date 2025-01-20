@@ -253,9 +253,10 @@ export default function ComputeSelector() {
               To increase or customize the size of your service with additional
               RAM and CPU, or to add more replicas for redundancy, switch to{' '}
               {formatComponentsList(
-                customizablePlans.map((item) => {
+                customizablePlans.map((item, index) => {
                   return (
                     <button
+                      key={index}
                       className='text-primary hover:underline'
                       onClick={() => {
                         setPlan(item.slug)

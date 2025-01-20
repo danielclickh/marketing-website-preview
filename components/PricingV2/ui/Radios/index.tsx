@@ -1,5 +1,4 @@
 import * as RadioGroup from '@radix-ui/react-radio-group'
-import { useId } from 'react'
 
 export type Option = { value: any; label: string | React.ReactNode }
 export type Options = Array<Option>
@@ -19,12 +18,11 @@ export default function Radios({ options, value, onChange }: RadiosProps) {
         onValueChange={onChange}
         aria-label='Is your data compressed?'>
         {options.map((item, index) => {
-          const id = useId()
           return (
             <div key={item.value} className='flex items-center gap-2'>
               <RadioGroup.Item
                 value={item.value}
-                id={id}
+                id={`pricing-radio-${index}`}
                 className='aspect-square w-4 cursor-pointer overflow-hidden rounded-full border border-neutral-700 bg-neutral-750 outline-none hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl'>
                 <RadioGroup.Indicator
                   className={`relative flex h-full w-full items-center justify-center bg-primary-300 after:absolute after:inset-[4px] after:block after:rounded-full after:bg-neutral-750 after:content-['']`}
@@ -32,7 +30,7 @@ export default function Radios({ options, value, onChange }: RadiosProps) {
               </RadioGroup.Item>
               <label
                 className='cursor-pointer text-sm leading-none text-white'
-                htmlFor={id}>
+                htmlFor={`pricing-radio-${index}`}>
                 {item.label}
               </label>
             </div>

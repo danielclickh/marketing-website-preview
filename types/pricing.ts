@@ -100,3 +100,12 @@ export interface PricingPageProps extends CommonProps {
   computes: Array<PricingV2EntryCompute>
   requestParams: ParsedUrlQuery | undefined
 }
+
+export interface JpPricingPageProps extends CommonProps {
+  hero: PricingHero
+  meteredPricing: MeteredPricing
+  contactSection: PricingContactSection
+  pricingByRegion: Array<RegionPricing>
+  pricingPlans: Array<PricingPlanData>
+  cloudProviders: Array<CloudProviderType>
+}

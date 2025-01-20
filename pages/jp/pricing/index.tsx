@@ -17,14 +17,14 @@ import { findAll, findOne } from '../../../lib/api/strapi'
 import { useGalaxyOnClick, useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import {
+  JpPricingPageProps,
   PricingData,
-  PricingPageProps,
   PricingPlanData,
   RegionPricing
 } from '../../../types/pricing'
 import philosophy from './philosophy.json'
 
-export const getStaticProps: GetStaticProps<PricingPageProps> =
+export const getStaticProps: GetStaticProps<JpPricingPageProps> =
   async function getStaticProps() {
     const pricingPromise: Promise<PricingData> = findOne('pricing', {
       populate: [
@@ -99,7 +99,7 @@ export default function PricingPage({
   cloudProviders,
   headerData,
   footerData
-}: PricingPageProps) {
+}: JpPricingPageProps) {
   useGalaxyOnPage('pricingPage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
