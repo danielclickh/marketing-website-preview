@@ -113,16 +113,28 @@ export default function PricingPage({
               afterTable={
                 <>
                   <div className='mt-8 space-y-8'>
-                    <SuiText size='sm' className='text-center'>
-                      For more information about our billing and pricing please
-                      refer to our{' '}
-                      <Link
-                        href='https://clickhouse.com/docs/en/manage/billing/#faqs'
-                        className='text-primary-300 underline'>
-                        Billing & Pricing FAQ
-                      </Link>
-                      .
-                    </SuiText>
+                    <div className='space-y-4 text-center'>
+                      <SuiText size='sm'>
+                        Data transfer for public internet egress starting at{' '}
+                        <strong>$0.123 / GB</strong>, inter region egress
+                        starting at <strong>$0.12 / GB</strong>.
+                      </SuiText>
+                      <SuiText size='sm'>
+                        ClickPipes rates starting at{' '}
+                        <strong>$0.123 / hr</strong> for ingested data,{' '}
+                        <strong>$0.023 / hr</strong> for compute.
+                      </SuiText>
+                      <SuiText size='sm'>
+                        For more information about our billing and pricing
+                        please refer to our{' '}
+                        <Link
+                          href='https://clickhouse.com/docs/en/manage/billing/#faqs'
+                          className='text-primary-300 underline'>
+                          Billing & Pricing FAQ
+                        </Link>
+                        .
+                      </SuiText>
+                    </div>
                     <ByocPricingCard />
                     <SuiText size='sm' className='text-center'>
                       Or download the forever-free{' '}
