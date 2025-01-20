@@ -73,7 +73,9 @@ const TableColumn = memo(function TableColumn({
                   <li
                     key={perkIndex}
                     className='row flex items-center justify-start gap-4 text-sm'>
-                    {perkIcons[perk.icon]}
+                    <span className='flex-shrink-0 flex-grow-0'>
+                      {perkIcons[perk.icon]}
+                    </span>
                     {!perk.tooltip && <PerkContent />}
                     {perk.tooltip && (
                       <Tooltip.Provider
