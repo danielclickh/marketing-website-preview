@@ -110,7 +110,8 @@ export default function PricingPage({
               plans={plans}
               providers={providers}
               computes={computes}
-              afterTable={
+              afterTableFilters={<RegionRequest />}
+              inbetweenContent={
                 <>
                   <div className='mt-8 space-y-8'>
                     <div className='space-y-4 text-center'>
@@ -167,12 +168,10 @@ export default function PricingPage({
                     </div>
                   </div>
                   <HRSeparator className='my-12' />
+                  <SuiTitle type='h2' className='my-12 text-center'>
+                    Estimate your monthly&nbsp;cost
+                  </SuiTitle>
                 </>
-              }
-              beforeEstimator={
-                <SuiTitle type='h2' className='my-12 text-center'>
-                  Estimate your monthly&nbsp;cost
-                </SuiTitle>
               }
             />
           </div>
@@ -282,15 +281,15 @@ function RegionRequest() {
 
   return (
     <>
-      <p className='mt-4 text-center text-sm'>
-        Can't find your region?{' '}
+      <p className='text-center'>
+        Or{' '}
         <span
           className='text-primary-300 hover:cursor-pointer'
           onClick={() => {
             setIsModalOpen(true)
             handleRegionRequestClick()
           }}>
-          Request it
+          request another region
         </span>
       </p>
 

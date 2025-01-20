@@ -142,14 +142,22 @@ const TableColumn = memo(function TableColumn({
   )
 })
 
-export default function Table() {
+export default function Table({
+  beforeFilters,
+  afterFilters
+}: {
+  beforeFilters?: React.ReactNode
+  afterFilters?: React.ReactNode
+}) {
   const { plans, setPlan, computeUnitPrice, storageUnitPrice } =
     usePricingV2Context()
   return (
     <div id='pricing-table'>
-      <div className='mb-12 flex flex-wrap items-center justify-center gap-8'>
+      <div className='mb-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-6'>
+        {beforeFilters}
         <ProviderSelector displayLabel={false} />
         <RegionSelector displayLabel={false} className='w-full max-w-80' />
+        {afterFilters}
       </div>
       <div className='flex flex-col lg:flex-row'>
         {plans.map((item, index) => {

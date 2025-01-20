@@ -187,7 +187,7 @@ export default function Estimator() {
     <div
       id='pricing-calculator' // Used for scrolling into view and sharing
       className='mx-auto max-w-5xl px-4 sm:px-8 xl:px-0'>
-      <div className='flex flex-col lg:-mx-6 lg:flex-row lg:items-start'>
+      <div className='flex flex-col lg:-mx-6 lg:flex-row lg:items-start lg:justify-center'>
         {/* Form */}
         <div className='w-full space-y-8 lg:w-1/2 lg:px-6'>
           <PlanSelector />

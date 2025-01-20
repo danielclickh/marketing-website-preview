@@ -18,10 +18,9 @@ export interface PricingV2Props {
 
   requestParams?: ParsedUrlQuery
 
-  beforeTable?: React.ReactNode
-  afterTable?: React.ReactNode
-  beforeEstimator?: React.ReactNode
-  afterEstimator?: React.ReactNode
+  beforeTableFilters?: React.ReactNode
+  afterTableFilters?: React.ReactNode
+  inbetweenContent?: React.ReactNode
 }
 
 export default function PricingV2({
@@ -29,10 +28,9 @@ export default function PricingV2({
   providers,
   computes,
   requestParams,
-  beforeTable,
-  afterTable,
-  beforeEstimator,
-  afterEstimator
+  beforeTableFilters,
+  afterTableFilters,
+  inbetweenContent
 }: PricingV2Props) {
   const router = useRouter()
 
@@ -96,12 +94,12 @@ export default function PricingV2({
       data={{ plans, providers, computes }}
       startingValues={startingValues}
       onChange={onChangeHandler}>
-      {beforeTable}
-      <Table />
-      {afterTable}
-      {beforeEstimator}
+      <Table
+        beforeFilters={beforeTableFilters}
+        afterFilters={afterTableFilters}
+      />
+      {inbetweenContent}
       <Estimator />
-      {afterEstimator}
     </PricingV2ContextProvider>
   )
 }
