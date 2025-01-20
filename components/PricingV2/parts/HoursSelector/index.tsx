@@ -11,6 +11,12 @@ export default function HoursSelector() {
   const [isAlwaysOn, setIsAlwaysOn] = useState<Checkbox.CheckedState>(false)
 
   useEffect(() => {
+    // Set default value
+    if (hours === null) {
+      setHours(8)
+    }
+
+    // Toggle always on checkbox
     if (hours === 24 && !isAlwaysOn) {
       setIsAlwaysOn(true)
     } else if (hours !== 24 && isAlwaysOn) {
@@ -19,10 +25,11 @@ export default function HoursSelector() {
   }, [hours])
 
   useEffect(() => {
+    // Set hours based on always on checkbox
     if (isAlwaysOn && hours !== 24) {
       setHours(24)
     } else if (!isAlwaysOn && hours === 24) {
-      setHours(0)
+      setHours(8)
     }
   }, [isAlwaysOn])
 
@@ -52,7 +59,12 @@ export default function HoursSelector() {
         </div>
       </div>
       <div className={`transition-opacity ${isAlwaysOn ? 'opacity-30' : ''}`}>
-        <Range min={0} max={24} value={hours || 0} onChange={setHours} />
+        <Range
+          min={0}
+          max={24}
+          value={hours !== null ? hours : 8}
+          onChange={setHours}
+        />
       </div>
     </div>
   )

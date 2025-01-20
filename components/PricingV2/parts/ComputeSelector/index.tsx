@@ -111,7 +111,7 @@ export default function ComputeSelector() {
         setReplicas(firstPackage.replicas)
       }
     }
-  }, [customizing, activePackage])
+  }, [customizing, packages, activePackage])
 
   // Ensure the max size is always >= min size
   useEffect(() => {

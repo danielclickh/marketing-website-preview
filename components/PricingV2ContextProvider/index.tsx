@@ -251,8 +251,8 @@ export default function PricingV2ContextProvider({
     // Divide `computeMinSize` by 8 because 1 unit is equal to a compute size of 8
     const computeMinHoursPerMonth =
       (computeMinSize / 8) * hours * AVG_DAYS_PER_MONTH
-    return computeUnitPrice * computeMinHoursPerMonth
-  }, [hours, computeMinSize, computeUnitPrice])
+    return computeUnitPrice * computeMinHoursPerMonth * (replicas || 1)
+  }, [hours, computeMinSize, computeUnitPrice, replicas])
 
   // Calculate the maximum compute price
   const computeMaxPrice: ContextComputeMaxPrice = useMemo(() => {
@@ -263,8 +263,8 @@ export default function PricingV2ContextProvider({
     // Divide `computeMaxSize` by 8 because 1 unit is equal to a compute size of 8
     const computeMaxHoursPerMonth =
       (computeMaxSize / 8) * hours * AVG_DAYS_PER_MONTH
-    return computeUnitPrice * computeMaxHoursPerMonth
-  }, [hours, computeMaxSize, computeUnitPrice])
+    return computeUnitPrice * computeMaxHoursPerMonth * (replicas || 1)
+  }, [hours, computeMaxSize, computeUnitPrice, replicas])
 
   // Calculate the storage price
   const storagePrice: ContextStoragePrice = useMemo(() => {
@@ -297,20 +297,16 @@ export default function PricingV2ContextProvider({
 
   // Calculate the minimum total price (min compute & min storage combined)
   const totalMinPrice: ContextTotalMinPrice = useMemo(() => {
-    const combinedMins = [computeMinPrice, storagePrice]
+    return [computeMinPrice, storagePrice]
       .filter((val) => val !== null)
       .reduce((total, current) => total + current, 0)
-
-    return combinedMins * (replicas || 1)
   }, [computeMinPrice, storagePrice, replicas])
 
   // Calculate the maximum total price (max compute & max storage combined)
   const totalMaxPrice: ContextTotalMaxPrice = useMemo(() => {
-    const combinedMaxs = [computeMaxPrice, storagePrice]
+    return [computeMaxPrice, storagePrice]
       .filter((val) => val !== null)
       .reduce((total, current) => total + current, 0)
-
-    return combinedMaxs * (replicas || 1)
   }, [computeMaxPrice, storagePrice, replicas])
 
   useEffect(() => {

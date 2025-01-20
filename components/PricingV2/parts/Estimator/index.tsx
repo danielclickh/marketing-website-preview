@@ -201,27 +201,26 @@ export default function Estimator() {
         {/* Results */}
         <div className='w-full lg:w-1/2 lg:px-6'>
           <div className='rounded-lg border border-primary-300 bg-slate-900 p-8'>
-            {displayPrice && (
-              <>
-                <p className='mb-4 text-center font-inconsolata text-lg text-primary-300'>
-                  Average price per month
-                </p>
-                <p
-                  ref={priceRef}
-                  className='mb-2 w-full overflow-hidden whitespace-nowrap text-center font-basier font-bold text-white'>
-                  {[...new Set([totalMinPrice, totalMaxPrice])]
-                    .filter((val) => val !== null)
-                    .map((price, priceIndex, allPrices) => {
-                      return (
-                        <Fragment key={priceIndex}>
-                          <PriceUsd price={price} />
-                          {priceIndex < allPrices.length - 1 && ' - '}
-                        </Fragment>
-                      )
-                    })}
-                </p>
-              </>
-            )}
+            {displayPrice && <></>}
+            <p className='mb-4 text-center font-inconsolata text-lg text-primary-300'>
+              Average price per month
+            </p>
+            <p
+              ref={priceRef}
+              className='mb-2 w-full overflow-hidden whitespace-nowrap text-center font-basier font-bold text-white'>
+              {!displayPrice && <PriceUsd price={0.0} />}
+              {displayPrice &&
+                [...new Set([totalMinPrice, totalMaxPrice])]
+                  .filter((val) => val !== null)
+                  .map((price, priceIndex, allPrices) => {
+                    return (
+                      <Fragment key={priceIndex}>
+                        <PriceUsd price={price} />
+                        {priceIndex < allPrices.length - 1 && ' - '}
+                      </Fragment>
+                    )
+                  })}
+            </p>
 
             {/* Promote free trial */}
             <div className={promoteContact ? 'hidden' : 'space-y-4'}>
@@ -261,17 +260,15 @@ export default function Estimator() {
             {/* Price list */}
             <ul className='mt-4 space-y-4'>
               {/* Storage price */}
-              {storagePrice && (
-                <li className='flex items-center gap-x-2'>
-                  <CheckIcon className='h-4 w-4 text-primary-300' />
-                  <PriceUsd price={storagePrice} /> for storage{' '}
-                  <TooltipInfo
-                    content={`Storage cost for ${storageSize}${storageUnit?.toUpperCase()} ${
-                      storageCompressed ? 'uncompressed' : 'compressed'
-                    }`}
-                  />
-                </li>
-              )}
+              <li className='flex items-center gap-x-2'>
+                <CheckIcon className='h-4 w-4 text-primary-300' />
+                <PriceUsd price={storagePrice || 0.0} /> for storage{' '}
+                <TooltipInfo
+                  content={`Storage cost for ${storageSize}${storageUnit?.toUpperCase()} ${
+                    storageCompressed ? 'uncompressed' : 'compressed'
+                  }`}
+                />
+              </li>
 
               {/* Min/max compute costs */}
               {!!computeMinPrice &&

@@ -96,28 +96,20 @@ export default function PricingPage({
       <div className='pricing h-full text-neutral-0'>
         <div className='pt-16'>
           <div className='mx-auto max-w-7xl px-4 sm:px-8 xl:px-0'>
+            {hero && (
+              <div className='mb-16 flex flex-col items-center'>
+                <SuiTitle type='h1' color='white' className='md:!text-5.5xl'>
+                  {hero.title}
+                </SuiTitle>
+                <div className='mt-6 text-neutral-200'>{hero.description}</div>
+              </div>
+            )}
+
             <PricingV2
               requestParams={requestParams}
               plans={plans}
               providers={providers}
               computes={computes}
-              beforeTable={
-                <>
-                  {hero && (
-                    <div className='flex flex-col items-center'>
-                      <SuiTitle
-                        type='h1'
-                        color='white'
-                        className='md:!text-5.5xl'>
-                        {hero.title}
-                      </SuiTitle>
-                      <div className='mt-6 text-neutral-200'>
-                        {hero.description}
-                      </div>
-                    </div>
-                  )}
-                </>
-              }
               afterTable={
                 <>
                   <div className='mt-8 space-y-8'>

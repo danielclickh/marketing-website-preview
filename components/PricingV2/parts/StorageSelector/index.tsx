@@ -11,13 +11,16 @@ const STORAGE_UNITS: Array<{ value: any; label: string }> = [
 ]
 
 const STORAGE_COMPRESSED: Array<{ value: boolean; label: string }> = [
-  { value: true, label: 'Yes' },
-  { value: false, label: 'No' }
+  { value: false, label: 'No' },
+  { value: true, label: 'Yes' }
 ]
 
 const validateStorageSize = (value: number | null) => {
-  if (value === null || value < 0) return 0
-  return Math.min(value, 9999)
+  // Set 500 as the default value
+  if (value === null) return 500
+
+  // Limit value to 0-9999
+  return Math.max(Math.min(value, 9999), 0)
 }
 
 const validateStorageUnit = (value: string | null) => {
