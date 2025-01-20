@@ -199,12 +199,12 @@ export default function Estimator() {
         </div>
 
         {/* Results */}
-        <div className='w-full lg:w-1/2 lg:px-6'>
+        <div className='w-full lg:w-1/2 lg:max-w-md lg:px-6'>
           <div className='rounded-lg border border-primary-300 bg-slate-900 p-8'>
-            <p className='mb-4 text-center font-inconsolata text-lg text-primary-300'>
+            <p className='text-center font-inconsolata text-lg text-primary-300'>
               Average price per month
             </p>
-            <div className='mb-2 flex min-h-20 items-center'>
+            <div className='mb-4 flex min-h-20 items-center'>
               <p
                 ref={priceRef}
                 className='w-full overflow-hidden whitespace-nowrap text-center font-basier font-bold text-white'>
@@ -319,7 +319,7 @@ export default function Estimator() {
               </li>
             </ul>
 
-            <p className='mt-4 text-sm opacity-70'>
+            <p className='mt-4 text-xs opacity-70'>
               ClickPipes, data transfer costs and costs incurred by scheduled
               backups are not included and will be added to the pricing
               calculator in a future update.
