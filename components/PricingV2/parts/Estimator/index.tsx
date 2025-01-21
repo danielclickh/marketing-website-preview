@@ -280,15 +280,25 @@ export default function Estimator() {
                     <li className='flex items-center gap-x-2'>
                       <CheckIcon className='h-4 w-4 text-primary-300' />
                       <PriceUsd price={computeMinPrice} /> minimum compute cost
+                      <TooltipInfo
+                        content={`Minimim compute cost = ${
+                          computeMinSize / 8
+                        } compute unit * ${hours}h per day * 30 days * ${replicas} replica(s)\n\n1 compute unit = 8 GiB RAM, 2 vCPU = $0.2987 / hour`}
+                      />
                     </li>
                     <li className='flex items-center gap-x-2'>
                       <CheckIcon className='h-4 w-4 text-primary-300' />
                       <PriceUsd price={computeMaxPrice} /> minimum compute cost
+                      <TooltipInfo
+                        content={`Minimim compute cost = ${
+                          computeMaxSize / 8
+                        } compute unit * ${hours}h per day * 30 days * ${replicas} replica(s)\n\n1 compute unit = 8 GiB RAM, 2 vCPU = $0.2987 / hour`}
+                      />
                     </li>
                   </>
                 )}
 
-              {/* Compute costs */}
+              {/* Fixed compute costs */}
               {!!computeMinPrice &&
                 !!computeMaxPrice &&
                 computeMinPrice === computeMaxPrice && (
@@ -296,6 +306,11 @@ export default function Estimator() {
                     <li className='flex items-center gap-x-2'>
                       <CheckIcon className='h-4 w-4 text-primary-300' />
                       <PriceUsd price={computeMinPrice} /> compute cost
+                      <TooltipInfo
+                        content={`Compute cost = ${
+                          computeMinSize / 8
+                        } compute unit * ${hours}h per day * 30 days * ${replicas} replica(s)\n\n1 compute unit = 8 GiB RAM, 2 vCPU = $0.2987 / hour`}
+                      />
                     </li>
                   </>
                 )}
