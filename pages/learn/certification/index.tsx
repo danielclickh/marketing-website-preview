@@ -32,7 +32,8 @@ export const getStaticProps: GetStaticProps<LearnProps> =
       props: {
         seo: {
           title: 'ClickHouse Certification | ClickHouse',
-          description: '',
+          description:
+            'Elevate your career to industry-leading heights by passing our official ClickHouse Certification exam.',
           path: '/learn/certification',
           imageUrl:
             'https://clickhouse.com/images/clickhouse-certification-og.png'

@@ -51,7 +51,8 @@ export const getStaticProps: GetStaticProps<RichContentPageProps> =
         slug: slug.join('/'),
         ...commonProps,
         seo: {
-          title: page.title,
+          title: page.seo?.title,
+          description: page.seo?.description,
           type: 'website',
           siteName: 'ClickHouse',
           path: `/${slug.join('/')}`
