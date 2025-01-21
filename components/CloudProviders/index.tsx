@@ -52,7 +52,7 @@ function CloudProviders({
                     <StrapiImage
                       key={`${cloudProvider.title}-${index}`}
                       {...darkIconPng}
-                      className={`h-10 w-auto `}
+                      className={'h-10 w-auto '}
                     />
                   </Link>
                 )}

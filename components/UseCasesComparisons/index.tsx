@@ -9,10 +9,12 @@ export default function UseCasesComparisons() {
       <div className='mx-auto max-w-7xl px-4 py-24 md:px-8 2xl:px-0'>
         <a id='comparisons' />
         <div
-          className={`flex flex-col items-start justify-between gap-10 lg:flex-row`}>
+          className={
+            'flex flex-col items-start justify-between gap-10 lg:flex-row'
+          }>
           <div
             id='comparisons-left'
-            className={`lg:sticky lg:top-[34%] xl:max-w-[426px]`}>
+            className={'lg:sticky lg:top-[34%] xl:max-w-[426px]'}>
             <h2 className='mb-4 font-basier text-5.5xl font-semibold text-white'>
               Comparisons
             </h2>
@@ -81,7 +83,7 @@ export default function UseCasesComparisons() {
                     </p>
                     <Image
                       src={comparison.customerLogo}
-                      alt={`Logo`}
+                      alt={'Logo'}
                       width={comparison.customerLogoWidth}
                       height={comparison.customerLogoHeight}
                       className='mt-4'

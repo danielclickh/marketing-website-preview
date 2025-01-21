@@ -74,7 +74,7 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
         individualUseCases,
         quotes,
         seo: {
-          title: `すべてのユースケース | ClickHouse`,
+          title: 'すべてのユースケース | ClickHouse',
           description: useCasesPageData.Description,
           path: '/jp/use-cases'
         },
@@ -211,12 +211,16 @@ function UseCasesPage({
                           </div>
                         </div>
                         <div
-                          className={`grid w-full grid-cols-2 grid-rows-3 border-t border-t-[#464641] lg:w-[590px] lg:border-t-0`}>
+                          className={
+                            'grid w-full grid-cols-2 grid-rows-3 border-t border-t-[#464641] lg:w-[590px] lg:border-t-0'
+                          }>
                           {useCase.logos.map((logo, index) => {
                             return (
                               <div
                                 key={index}
-                                className={`flex min-h-[86px] w-full justify-center border-b border-l border-[#464641] align-middle ring-inset transition-all hover:z-10 hover:bg-white/10 hover:ring-[1px] hover:ring-primary-300`}>
+                                className={
+                                  'flex min-h-[86px] w-full justify-center border-b border-l border-[#464641] align-middle ring-inset transition-all hover:z-10 hover:bg-white/10 hover:ring-[1px] hover:ring-primary-300'
+                                }>
                                 <Link
                                   href={
                                     logo.link

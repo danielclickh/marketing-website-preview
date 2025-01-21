@@ -134,7 +134,9 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
                         key={social}
                         type={social}
                         url='https://clickhou.se/houseparty2024'
-                        title={`Just grabbed my ticket to the [Click]House Party during re:Invent in Vegas—who's joining me for an epic night?`}
+                        title={
+                          "Just grabbed my ticket to the [Click]House Party during re:Invent in Vegas—who's joining me for an epic night?"
+                        }
                         className='!px-3'
                       />
                     ))}

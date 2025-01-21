@@ -498,7 +498,9 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
             />
             <QuoteCard
               alternative='Redshift'
-              quote={`We were on Redshift for about a year and a half, but found the operational overhead and performance wasn't getting it done. Moving over to ClickHouse we were basically able to **cut that (Redshift) bill in half**. That 30 second query now takes **under a second**, and every page loads just faster.`}
+              quote={
+                "We were on Redshift for about a year and a half, but found the operational overhead and performance wasn't getting it done. Moving over to ClickHouse we were basically able to **cut that (Redshift) bill in half**. That 30 second query now takes **under a second**, and every page loads just faster."
+              }
               logo={
                 <Image
                   src='/images/real-time-data-warehouse/vantage.svg'
@@ -510,7 +512,9 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
             />
             <QuoteCard
               alternative='BigQuery'
-              quote={`It [BigQuery] **discourages data usage**. Instead of encouraging analysts to query the database in any and all ways they can imagine you’ll end up worrying about needing to limit them and come up with processes for controlling the volume of data being used. We simply don’t want the hassle of trying to figure out in advance of how many BQ slots to purchase - what a headache!`}
+              quote={
+                'It [BigQuery] **discourages data usage**. Instead of encouraging analysts to query the database in any and all ways they can imagine you’ll end up worrying about needing to limit them and come up with processes for controlling the volume of data being used. We simply don’t want the hassle of trying to figure out in advance of how many BQ slots to purchase - what a headache!'
+              }
               logo={
                 <Image
                   src='/images/real-time-data-warehouse/hifi.svg'
@@ -523,7 +527,9 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
             <QuoteCard
               className='hidden lg:flex'
               alternative='RedShift'
-              quote={`You can see that **ClickHouse outperforms Redshift** easily... The performance of ClickHouse was consistent in returning results, with some spikes possibly related to the network storage. They also tested the performance of ClickHouse with different levels of concurrency, which showed predictable growth and a maximum query time of six seconds.`}
+              quote={
+                'You can see that **ClickHouse outperforms Redshift** easily... The performance of ClickHouse was consistent in returning results, with some spikes possibly related to the network storage. They also tested the performance of ClickHouse with different levels of concurrency, which showed predictable growth and a maximum query time of six seconds.'
+              }
               logo={
                 <Image
                   src='/images/real-time-data-warehouse/rokt.svg'

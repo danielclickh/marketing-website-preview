@@ -190,7 +190,9 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10'>
             <QuoteCard
               className='bg-neutral-900/80'
-              content={`PeerDB has been a game-changer for us, effortlessly migrating tens of terabytes from our Postgres warehouse into ClickHouse and keeping millions of daily orders synced with just seconds of latency. We're really excited about PeerDB's native integration into ClickHouse Cloud via ClickPipes and all of the opportunities it opens up for us.`}
+              content={
+                "PeerDB has been a game-changer for us, effortlessly migrating tens of terabytes from our Postgres warehouse into ClickHouse and keeping millions of daily orders synced with just seconds of latency. We're really excited about PeerDB's native integration into ClickHouse Cloud via ClickPipes and all of the opportunities it opens up for us."
+              }
               logo={{
                 src: logoSpoton,
                 width: 156,
@@ -200,7 +202,9 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
             />
             <QuoteCard
               className='bg-neutral-900/80'
-              content={`We already reduced our Postgres to ClickHouse snapshot times from 10+ hours down to 15 minutes with PeerDB. Combining ClickHouse’s powerful analytics natively with PeerDB’s real-time data capture capabilities will greatly simplify our data processing workflows. This integration will enable us to build analytical applications faster, giving us a competitive edge in the market.`}
+              content={
+                'We already reduced our Postgres to ClickHouse snapshot times from 10+ hours down to 15 minutes with PeerDB. Combining ClickHouse’s powerful analytics natively with PeerDB’s real-time data capture capabilities will greatly simplify our data processing workflows. This integration will enable us to build analytical applications faster, giving us a competitive edge in the market.'
+              }
               logo={{
                 src: LogoVueling,
                 width: 140,
@@ -210,7 +214,9 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
             />
             <QuoteCard
               className='bg-neutral-900/80'
-              content={`Clickpipes helps us reliably keep data from Postgres in sync with Clickhouse, while we rapidly improve our product. Clickhouse and Postgres are the peanut butter and chocolate of databases (they go well together!) and Clickpipes makes it easy to build that architechture at a fast-moving startup.`}
+              content={
+                'Clickpipes helps us reliably keep data from Postgres in sync with Clickhouse, while we rapidly improve our product. Clickhouse and Postgres are the peanut butter and chocolate of databases (they go well together!) and Clickpipes makes it easy to build that architechture at a fast-moving startup.'
+              }
               logo={{
                 src: logoDaisychain,
                 width: 211,

@@ -34,7 +34,7 @@ export default function ByocPricingCard() {
           </div>
           <div className='flex flex-col p-6'>
             <CUIButton
-              href={`/cloud/bring-your-own-cloud?loc=pricing-page-component`}
+              href={'/cloud/bring-your-own-cloud?loc=pricing-page-component'}
               weight='medium'
               className='w-full'
               linkClass='my-auto'

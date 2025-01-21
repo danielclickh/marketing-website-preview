@@ -162,7 +162,7 @@ export default function VideoPage({
         <div className='mx-auto flex flex-col text-center'>
           <h4 className='text-base font-semibold text-primary-300'>
             <Link href='/jp/videos'>ビデオ</Link>
-            {video.categories?.[0] && ` / `}
+            {video.categories?.[0] && ' / '}
             {video.categories?.[0] && (
               <Link
                 href={`/jp/videos?category=${slugify(

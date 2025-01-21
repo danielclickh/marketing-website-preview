@@ -90,7 +90,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
           image: [data[0].thumbnailPng],
           type: 'website',
           siteName: 'ClickHouse',
-          path: `/company/events/clickhouse-workshop`
+          path: '/company/events/clickhouse-workshop'
         },
         recentEvents,
         ...commonProps
