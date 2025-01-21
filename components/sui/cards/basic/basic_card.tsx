@@ -37,14 +37,14 @@ export function SuiCard(props: CardProps) {
     direction === 'left'
       ? 'mr-auto'
       : direction === 'right'
-      ? 'ml-auto'
-      : 'mx-auto'
+        ? 'ml-auto'
+        : 'mx-auto'
   const headerAlign =
     direction === 'left'
       ? 'text-left'
       : direction === 'right'
-      ? 'text-right'
-      : 'text-center'
+        ? 'text-right'
+        : 'text-center'
   return (
     <SuiPanel
       padding='lg'

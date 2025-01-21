@@ -203,10 +203,10 @@ function EventsForm({
                 typeof email === 'undefined'
                   ? undefined
                   : email.length === 0
-                  ? 'E-mail address cannot be empty'
-                  : validateEmail(email)
-                  ? ''
-                  : 'Invalid E-mail address'
+                    ? 'E-mail address cannot be empty'
+                    : validateEmail(email)
+                      ? ''
+                      : 'Invalid E-mail address'
               }
             />
             <SuiButton

@@ -10,7 +10,8 @@
     "create-pricing-file": "ts-node  -O '{\"module\": \"commonjs\"}' createPricingFile",
     "create-githubstars-file": "ts-node  -O '{\"module\": \"commonjs\"}' getGitHubStars",
     "deploy": "yarn download-cms-data && yarn create-githubstars-file && yarn create-static-sitemap && yarn create-pricing-file && next build",
-    "lint": "next lint && yarn prettier */*.ts --check",
+    "lint": "next lint && yarn prettier \"**/*.{ts,tsx}\" --check",
+    "format": "yarn prettier \"**/*.{ts,tsx}\" --write",
     "export": "next export"
   },
   "dependencies": {
@@ -77,7 +78,7 @@
     "eslint": "8.14.0",
     "eslint-config-next": "^14.1.2",
     "postcss": "^8.4.38",
-    "prettier": "^2.8.8",
+    "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "server-only": "^0.0.1",
     "styled-components": "^6.1.11",
