@@ -26,7 +26,11 @@ export default function RegionSelector({
         label: (
           <>
             {item.icon && (
-              <StrapiImage {...item.icon} alt={item.label || item.key} />
+              <StrapiImage
+                {...item.icon}
+                className='h-auto w-8'
+                alt={item.label || item.key}
+              />
             )}
             {item.label || item.key}
           </>

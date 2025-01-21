@@ -35,7 +35,7 @@ export default function Select({ options, value, onChange }: SelectProps) {
               className='hover:bg-neutral-700'>
               {({ selected }) => (
                 <span
-                  className={`relative flex w-full cursor-pointer gap-3 truncate rounded-lg py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm ${
+                  className={`relative flex w-full cursor-pointer items-center gap-3 truncate rounded-lg px-3 py-2 text-left focus:outline-none sm:text-sm ${
                     selected ? 'font-bold text-primary-300' : 'font-normal'
                   }`}>
                   {item.label}
