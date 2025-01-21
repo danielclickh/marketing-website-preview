@@ -32,7 +32,7 @@ export default function PlanSelector() {
           return (
             <button
               key={index}
-              className={`flex flex-1 flex-col justify-center rounded-[4px] border border-neutral-700 bg-neutral-750 px-3 py-2 text-center text-center text-sm shadow-input transition-colors focus:outline-none ${
+              className={`block flex-1 rounded-[4px] border border-neutral-700 bg-neutral-750 px-3 py-2 text-center text-sm shadow-input transition-colors focus:outline-none ${
                 isActive
                   ? 'border-primary'
                   : 'hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl'
