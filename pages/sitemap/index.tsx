@@ -146,42 +146,42 @@ function Sitemap({
               </h2>
               <p className='pb-2'>
                 <Link
-                  href={`/clickhouse`}
+                  href={'/clickhouse'}
                   className=' text-primary-300 hover:underline'>
                   ClickHouse
                 </Link>
               </p>
               <p className='pb-2'>
                 <Link
-                  href={`/cloud?loc=sitemap`}
+                  href={'/cloud?loc=sitemap'}
                   className='text-primary-300 hover:underline'>
                   ClickHouse Cloud
                 </Link>
               </p>
               <p className='pb-2'>
                 <Link
-                  href={`/cloud/clickpipes?loc=sitemap`}
+                  href={'/cloud/clickpipes?loc=sitemap'}
                   className='text-primary-300 hover:underline'>
                   ClickPipes
                 </Link>
               </p>
               <p className='pb-2'>
                 <Link
-                  href={`/chdb?loc=sitemap`}
+                  href={'/chdb?loc=sitemap'}
                   className='text-primary-300 hover:underline'>
                   chDB
                 </Link>
               </p>
               <p className='pb-2'>
                 <Link
-                  href={`/clickhouse/keeper?loc=sitemap`}
+                  href={'/clickhouse/keeper?loc=sitemap'}
                   className='text-primary-300 hover:underline'>
                   ClickHouse Keeper
                 </Link>
               </p>
               <p className='pb-2'>
                 <Link
-                  href={`/real-time-data-warehouse?loc=sitemap`}
+                  href={'/real-time-data-warehouse?loc=sitemap'}
                   className='text-primary-300 hover:underline'>
                   Real-time Data Warehouse
                 </Link>
@@ -195,35 +195,35 @@ function Sitemap({
               </h2>
               <p className='pb-2'>
                 <Link
-                  href={`/blog`}
+                  href={'/blog'}
                   className=' text-primary-300 hover:underline'>
                   Blog
                 </Link>
               </p>
               <p className='pb-2'>
                 <Link
-                  href={`/company/our-story`}
+                  href={'/company/our-story'}
                   className='text-primary-300 hover:underline'>
                   Our story
                 </Link>
               </p>
               <p className='pb-2'>
                 <Link
-                  href={`/company/careers`}
+                  href={'/company/careers'}
                   className='text-primary-300 hover:underline'>
                   Careers
                 </Link>
               </p>
               <p className='pb-2'>
                 <Link
-                  href={`/company/contact`}
+                  href={'/company/contact'}
                   className='text-primary-300 hover:underline'>
                   Contact us
                 </Link>
               </p>
               <p className='pb-2'>
                 <Link
-                  href={`/company/news-events`}
+                  href={'/company/news-events'}
                   className='text-primary-300 hover:underline'>
                   News and events
                 </Link>
@@ -234,7 +234,7 @@ function Sitemap({
                 id='use-cases'
                 className='mb-4 font-basier text-2xl font-semibold text-neutral-100'>
                 <Link
-                  href={`/use-cases`}
+                  href={'/use-cases'}
                   className='hover:text-primary-300 hover:underline'>
                   Use cases
                 </Link>
@@ -269,7 +269,7 @@ function Sitemap({
               </p>
               <p className='pb-2'>
                 <Link
-                  href={`/user-stories`}
+                  href={'/user-stories'}
                   className='text-primary-300 hover:underline'>
                   User stories
                 </Link>
@@ -280,14 +280,14 @@ function Sitemap({
                 id='Pricing'
                 className='mb-4 font-basier text-2xl font-semibold text-neutral-100'>
                 <Link
-                  href={`/pricing`}
+                  href={'/pricing'}
                   className='hover:text-primary-300 hover:underline'>
                   Pricing
                 </Link>
               </h2>
               <p className='pb-2'>
                 <Link
-                  href={`/pricing`}
+                  href={'/pricing'}
                   className='text-primary-300 hover:underline'>
                   Pricing
                 </Link>

@@ -1,6 +1,5 @@
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
-import React from 'react'
 import { FullyQualifiedEvent } from '../../lib/galaxy/client/index'
 import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import { CUIButton, CUICard } from '../ClickUI'

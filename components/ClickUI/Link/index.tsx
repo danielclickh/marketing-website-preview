@@ -1,5 +1,5 @@
 import NextLink from 'next/link'
-import React, { MouseEventHandler } from 'react'
+import { MouseEventHandler } from 'react'
 import { LinkProps } from './types'
 
 function Link({

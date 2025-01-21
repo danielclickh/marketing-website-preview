@@ -455,8 +455,8 @@ export const PricingCalculator: React.FC<{
       provider.toLowerCase() === 'gcp'
         ? `gcp-${region}`
         : provider.toLowerCase() === 'azure'
-        ? `azure-${region}`
-        : region
+          ? `azure-${region}`
+          : region
 
     const matchingPricingPlans = pricingPlansFromFile.filter(
       (plan) =>
@@ -872,14 +872,17 @@ export const PricingCalculator: React.FC<{
                               priceRangeTextSize && priceRangeTextSize <= 15
                                 ? 'text-[30px] leading-[54px] md:text-[50px] md:leading-[84px]'
                                 : priceRangeTextSize && priceRangeTextSize <= 23
-                                ? 'text-[30px] leading-[54px] md:text-[32px] md:leading-[66px]'
-                                : priceRangeTextSize && priceRangeTextSize <= 24
-                                ? 'text-[30px] leading-[54px] md:text-[35px] md:leading-[69px]'
-                                : priceRangeTextSize && priceRangeTextSize <= 25
-                                ? 'text-[30px] leading-[54px] md:text-[30px] md:leading-[64px]'
-                                : priceRangeTextSize && priceRangeTextSize <= 30
-                                ? 'text-[30px] leading-[54px] md:text-[28px] md:leading-[62px]'
-                                : 'text-[30px] leading-[54px] md:text-[50px] md:leading-[84px]'
+                                  ? 'text-[30px] leading-[54px] md:text-[32px] md:leading-[66px]'
+                                  : priceRangeTextSize &&
+                                      priceRangeTextSize <= 24
+                                    ? 'text-[30px] leading-[54px] md:text-[35px] md:leading-[69px]'
+                                    : priceRangeTextSize &&
+                                        priceRangeTextSize <= 25
+                                      ? 'text-[30px] leading-[54px] md:text-[30px] md:leading-[64px]'
+                                      : priceRangeTextSize &&
+                                          priceRangeTextSize <= 30
+                                        ? 'text-[30px] leading-[54px] md:text-[28px] md:leading-[62px]'
+                                        : 'text-[30px] leading-[54px] md:text-[50px] md:leading-[84px]'
                             } mb-2 break-words font-basier font-bold  text-white`}
                             id='price-range'>
                             $

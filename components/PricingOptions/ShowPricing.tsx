@@ -1,6 +1,6 @@
 import { InformationCircleIcon } from '@heroicons/react/outline'
 import * as Tooltip from '@radix-ui/react-tooltip'
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { calculateStorageCost } from '../../lib/m3ter/costs'
 import { calculateComputeMargin } from '../PricingCalculator/CalculatorTypesOptions'
 import { usePricing } from './PricingContext'

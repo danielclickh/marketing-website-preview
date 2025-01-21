@@ -569,7 +569,9 @@ function CustomerStoriesPage({
                   return (
                     <div
                       key={index}
-                      className={`relative flex flex-col shadow-xl shadow-black/25`}
+                      className={
+                        'relative flex flex-col shadow-xl shadow-black/25'
+                      }
                       onMouseMove={(event) => handleMouseMove(event, index)}
                       onMouseLeave={handleMouseLeave}>
                       <div className='story-header rounded-t-lg bg-primary-300 p-4'>

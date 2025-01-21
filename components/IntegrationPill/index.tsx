@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function IntegrationSupportPill({ label }: { label: string }) {
   label = label.trim().toLowerCase()
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
 import { NavigationLink } from '../parts'
 import NavigationChevron from '../parts/NavigationChevron'

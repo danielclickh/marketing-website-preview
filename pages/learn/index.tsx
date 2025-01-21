@@ -1,7 +1,6 @@
 import { ClockIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import React from 'react'
 import { CUIButton, CUICard } from '../../components/ClickUI'
 import Certificate from '../../components/icons/Certificate'
 import CertificateSquare from '../../components/icons/CertificateSquare'

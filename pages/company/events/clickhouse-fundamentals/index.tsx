@@ -1,6 +1,5 @@
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
-import React from 'react'
 import EventPost from '../../../../components/EventPostList/EventPost'
 import EventsContainerMarketo from '../../../../components/EventsContainer-Marketo'
 import Layout from '../../../../components/Layout'
@@ -91,7 +90,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
           image: [data[0].thumbnailPng],
           type: 'website',
           siteName: 'ClickHouse',
-          path: `/company/events/clickhouse-fundamentals`
+          path: '/company/events/clickhouse-fundamentals'
         },
         recentEvents,
         ...commonProps

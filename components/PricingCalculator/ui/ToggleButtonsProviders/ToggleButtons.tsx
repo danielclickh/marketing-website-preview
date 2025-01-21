@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import React from 'react'
 import { ToggleButtonsProps } from '../../CalculatorTypesOptions'
 import AwsLogo from './AwsLogo'
 import AzureLogo from './AzureLogo'

@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import BlogPost from '../../components/BlogPostList/BlogPost'
 import CategorySelector from '../../components/CategorySelector'
 import { CUILink } from '../../components/ClickUI'

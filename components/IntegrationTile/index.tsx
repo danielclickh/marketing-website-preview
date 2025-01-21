@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import React from 'react'
 import { Integration } from '../../types/integrations'
 import { CUICard } from '../ClickUI'
 import { ExternalLink } from '../icons/ExternalLink'

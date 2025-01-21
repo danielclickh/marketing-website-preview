@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
 import { CloudProviderType } from '../../types/pricing'
 import { StrapiImage } from '../StrapiElements'
 
@@ -53,7 +52,7 @@ function CloudProviders({
                     <StrapiImage
                       key={`${cloudProvider.title}-${index}`}
                       {...darkIconPng}
-                      className={`h-10 w-auto `}
+                      className={'h-10 w-auto '}
                     />
                   </Link>
                 )}

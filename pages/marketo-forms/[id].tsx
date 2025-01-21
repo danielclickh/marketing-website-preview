@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import { getUTMsFromStorage } from '../../components/UTMPersist'
 import { slugify } from '../../lib/utils/strings'

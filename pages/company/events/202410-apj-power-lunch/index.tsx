@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import EventPost from '../../../../components/EventPostList/EventPost'
 import Layout from '../../../../components/Layout'
 import Markdown from '../../../../components/Markdown'
@@ -91,7 +91,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
           image: [data[0].thumbnailPng],
           type: 'website',
           siteName: 'ClickHouse',
-          path: `/company/events/202410-apj-power-lunch`
+          path: '/company/events/202410-apj-power-lunch'
         },
         recentEvents,
         ...commonProps
@@ -192,7 +192,9 @@ function EventPage({
                 {!formSuccess && (
                   <MarketoForm
                     formId='1274'
-                    disclaimer={`By registering, you acknowledge that ClickHouse will process your personal information in accordance with our [Privacy Policy](/legal/privacy-policy).`}
+                    disclaimer={
+                      'By registering, you acknowledge that ClickHouse will process your personal information in accordance with our [Privacy Policy](/legal/privacy-policy).'
+                    }
                     onLoad={(form) => {
                       setFormLoaded(true)
 

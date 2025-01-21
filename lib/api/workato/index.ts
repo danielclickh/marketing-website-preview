@@ -81,11 +81,14 @@ function getMarketoCookie(): string | undefined {
   }
 
   try {
-    const cookieMap = document.cookie.split('; ').reduce((prev, item) => {
-      const splitItem: string[] = item.split('=')
-      prev[splitItem[0]] = splitItem[1]
-      return prev
-    }, {} as Record<string, string>)
+    const cookieMap = document.cookie.split('; ').reduce(
+      (prev, item) => {
+        const splitItem: string[] = item.split('=')
+        prev[splitItem[0]] = splitItem[1]
+        return prev
+      },
+      {} as Record<string, string>
+    )
     return cookieMap['_mkto_trk']
   } catch (e) {
     console.error(e)

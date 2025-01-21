@@ -1,7 +1,7 @@
 import { useFeatureValue, useGrowthBook } from '@growthbook/growthbook-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useCallback, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { CUIButton, CUICard } from '../../../../components/ClickUI'
 import Footer from '../../../../components/Footer'
 import HomepageSectionTrustedByAlt from '../../../../components/HomepageSectionTrustedByAlt'

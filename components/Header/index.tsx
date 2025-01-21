@@ -20,7 +20,7 @@ export default function Header({
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    `Join our release call on Thursday, Dec 19th, to learn what's new in ClickHouse v24.12`
+    "Join our release call on Thursday, Dec 19th, to learn what's new in ClickHouse v24.12"
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
     '/company/events/v24-12-community-release-call?loc=eyebrow'
@@ -117,8 +117,8 @@ export default function Header({
           burgerMenuIsOpen
             ? '!bg-neutral-900'
             : isScrolled
-            ? 'bg-neutral-900/80'
-            : 'bg-neutral-900/10'
+              ? 'bg-neutral-900/80'
+              : 'bg-neutral-900/10'
         } ${
           isScrolled ? 'md-mid:bg-neutral-900/80' : 'md-mid:bg-neutral-900/10'
         } fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur transition-colors`}>

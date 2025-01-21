@@ -20,8 +20,8 @@ const generatePaginationNumbers = (
     ...(end < totalPages - 1
       ? [ellipsis, totalPages]
       : end < totalPages
-      ? [totalPages]
-      : [])
+        ? [totalPages]
+        : [])
   ]
 }
 

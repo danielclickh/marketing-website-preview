@@ -1,9 +1,9 @@
 import dotenv from 'dotenv'
-import { fetchAll } from './lib/api/strapi'
-import { Video } from './lib/videos/types'
-import { getVideos } from './lib/videos'
 import fs from 'fs'
 import path from 'path'
+import { fetchAll } from './lib/api/strapi'
+import { getVideos } from './lib/videos'
+import { Video } from './lib/videos/types'
 dotenv.config()
 
 import { getStagingOnlyFilters } from './lib/api/strapi'

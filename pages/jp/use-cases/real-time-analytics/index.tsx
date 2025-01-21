@@ -97,7 +97,7 @@ export default function RealTimeAnalyticsPage({
                     {checkpoints.map((checkpoint) => {
                       return (
                         <div
-                          className={`item-center flex space-x-4 pb-2`}
+                          className={'item-center flex space-x-4 pb-2'}
                           key={checkpoint.id}>
                           <Image
                             src='/images/cloud/check.svg'
@@ -204,7 +204,9 @@ export default function RealTimeAnalyticsPage({
                 <div className='p-10'>
                   <div className='flex flex-col gap-x-6 gap-y-6 lg:flex-row'>
                     <QuoteCard
-                      content={`"This year we actually exceeded a thousand active replicas. That's **processing hundreds of millions of inserted rows every second**, which actually corresponds to quite a significantly larger number of events because we've been using a lot of sampling."`}
+                      content={
+                        '"This year we actually exceeded a thousand active replicas. That\'s **processing hundreds of millions of inserted rows every second**, which actually corresponds to quite a significantly larger number of events because we\'ve been using a lot of sampling."'
+                      }
                       logo={{
                         src: '/images/use-cases/real-time-analytics/cloudflare-logo.svg',
                         width: 123,
@@ -213,7 +215,9 @@ export default function RealTimeAnalyticsPage({
                       }}
                     />
                     <QuoteCard
-                      content={`"We have multiple clusters deployed on our hardware with hundreds of hosts. Our main cluster is now geo-replicated, and we designate some replicas for read-heavy operations and others for write-heavy operations. Many of our tables are quite large, **with trillions and trillions of rows, as well as tens of columns.**"`}
+                      content={
+                        '"We have multiple clusters deployed on our hardware with hundreds of hosts. Our main cluster is now geo-replicated, and we designate some replicas for read-heavy operations and others for write-heavy operations. Many of our tables are quite large, **with trillions and trillions of rows, as well as tens of columns.**"'
+                      }
                       link='/blog/how-clickhouse-powers-ahrefs-the-worlds-most-active-web-crawler'
                       logo={{
                         src: '/images/use-cases/real-time-analytics/ahrefs-logo.svg',
@@ -223,7 +227,9 @@ export default function RealTimeAnalyticsPage({
                       }}
                     />
                     <QuoteCard
-                      content={`"We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse."`}
+                      content={
+                        '"We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse."'
+                      }
                       link='/blog/langchain-why-we-choose-clickhouse-to-power-langchain'
                       logo={{
                         src: '/images/use-cases/ml-and-ds/langchain-logo-white.svg',
@@ -233,7 +239,9 @@ export default function RealTimeAnalyticsPage({
                       }}
                     />
                     <QuoteCard
-                      content={`"In the post-evaluation of each database against our criteria (with metrics ranging from query performance to cost), **ClickHouse emerged as the unrivaled frontrunner.** It excelled across the board, even astonishingly so in certain domains, and proved more cost-efficient."`}
+                      content={
+                        '"In the post-evaluation of each database against our criteria (with metrics ranging from query performance to cost), **ClickHouse emerged as the unrivaled frontrunner.** It excelled across the board, even astonishingly so in certain domains, and proved more cost-efficient."'
+                      }
                       link={{
                         href: 'https://medium.com/vimeo-engineering-blog/clickhouse-is-in-the-house-413862c8ac28',
                         target: '_blank'

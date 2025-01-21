@@ -8,7 +8,7 @@ export default function Feature({
 }) {
   return (
     <div
-      className={`item-center flex space-x-4 pb-2 last:pb-0`}
+      className={'item-center flex space-x-4 pb-2 last:pb-0'}
       key={feature.id}>
       <Image src='/images/cloud/check.svg' width={32} height={33} alt='Icon' />
       <SuiText

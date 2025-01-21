@@ -64,14 +64,14 @@ export function getContent(): Entry[] {
     // Langchain
     {
       featured: false,
-      body: `“We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse.” [Read blog](/blog/langchain-why-we-choose-clickhouse-to-power-langchain?loc=homepage)`,
+      body: '“We’ve had a positive experience with ClickHouse. It allowed us to scale LangSmith to production workloads and provide a service where users can log all of their data. We couldn’t have accomplished this without ClickHouse.” [Read blog](/blog/langchain-why-we-choose-clickhouse-to-power-langchain?loc=homepage)',
       logo: LogoLangchain,
       categories: ['Real-time analytics']
     },
     // Cloudflare
     {
       featured: true,
-      body: `“ClickHouse helps us efficiently and reliably analyze logs across trillions of Internet requests to identify malicious traffic and provide customers with rich analytics.” [Read blog](https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/)`,
+      body: '“ClickHouse helps us efficiently and reliably analyze logs across trillions of Internet requests to identify malicious traffic and provide customers with rich analytics.” [Read blog](https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/)',
       logo: LogoCloudflare,
       categories: ['Real-time analytics'],
       stats: [
@@ -96,7 +96,7 @@ export function getContent(): Entry[] {
     // Sony
     {
       featured: false,
-      body: `“At Sony LIV, we ingest tens of millions of video streaming events into ClickHouse Cloud and run queries to generate complex dashboards for analysis. This allows our operations team to monitor, alert & troubleshoot the QOS and QOE of our customers in real-time. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.”`,
+      body: '“At Sony LIV, we ingest tens of millions of video streaming events into ClickHouse Cloud and run queries to generate complex dashboards for analysis. This allows our operations team to monitor, alert & troubleshoot the QOS and QOE of our customers in real-time. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.”',
       logo: LogoSony,
       categories: ['Observability'],
       stats: [
@@ -116,7 +116,7 @@ export function getContent(): Entry[] {
     // Didi
     {
       featured: false,
-      body: `“Migrating logs from Elasticsearch to ClickHouse has not only significantly reduced storage costs but also provided us with a faster querying experience.” [Read blog](/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system)`,
+      body: '“Migrating logs from Elasticsearch to ClickHouse has not only significantly reduced storage costs but also provided us with a faster querying experience.” [Read blog](/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system)',
       logo: LogoDidi,
       categories: ['Observability'],
       stats: [
@@ -167,10 +167,11 @@ export function getContent(): Entry[] {
     // Clearbit
     {
       featured: false,
-      body: `“There's that feeling of new tech where everything just feels like it's going right. Can we get the data in there quick enough? Yes. Can we query the data in a way that is going to have a responsive UI? Yes. Is the cost gonna kill us? No.”`,
+      body: "“There's that feeling of new tech where everything just feels like it's going right. Can we get the data in there quick enough? Yes. Can we query the data in a way that is going to have a responsive UI? Yes. Is the cost gonna kill us? No.”",
       logo: LogoClearbit,
       categories: ['Real-time analytics'],
-      embed: `<iframe src="https://player.vimeo.com/video/863656379?h=ec5de7be6d&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&autoplay=0" frameBorder='0' allow='autoplay; fullscreen; picture-in-picture'></iframe>`,
+      embed:
+        "<iframe src=\"https://player.vimeo.com/video/863656379?h=ec5de7be6d&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&autoplay=0\" frameBorder='0' allow='autoplay; fullscreen; picture-in-picture'></iframe>",
       stats: [
         {
           icon: IconGauge,
@@ -188,10 +189,11 @@ export function getContent(): Entry[] {
     // Lyft
     {
       featured: true,
-      body: `“We needed something to slice and dice real-time data, like rides and driver hours across cities and regions where Lyft runs. Using ClickHouse resulted into a lot of performance benefits for us with huge cost savings for the org.” [Read blog](https://eng.lyft.com/druid-deprecation-and-clickhouse-adoption-at-lyft-120af37651fd)`,
+      body: '“We needed something to slice and dice real-time data, like rides and driver hours across cities and regions where Lyft runs. Using ClickHouse resulted into a lot of performance benefits for us with huge cost savings for the org.” [Read blog](https://eng.lyft.com/druid-deprecation-and-clickhouse-adoption-at-lyft-120af37651fd)',
       logo: LogoLyft,
       categories: ['Business intelligence'],
-      embed: `<iframe src="https://player.vimeo.com/video/903236689?h=62b37e3795&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&autoplay=0" frameBorder='0' allow='autoplay; fullscreen; picture-in-picture'></iframe>`,
+      embed:
+        "<iframe src=\"https://player.vimeo.com/video/903236689?h=62b37e3795&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&autoplay=0\" frameBorder='0' allow='autoplay; fullscreen; picture-in-picture'></iframe>",
       stats: [
         {
           icon: IconStack,
@@ -214,7 +216,7 @@ export function getContent(): Entry[] {
     // Vantage
     {
       featured: false,
-      body: `“Moving over to ClickHouse we were able to cut that (Redshift) bill in half … That 30 second query now takes a couple seconds or under a second under a second … every page loads just faster”`,
+      body: '“Moving over to ClickHouse we were able to cut that (Redshift) bill in half … That 30 second query now takes a couple seconds or under a second under a second … every page loads just faster”',
       logo: LogoVantage,
       categories: ['Real-time analytics'],
       stats: [
@@ -234,7 +236,7 @@ export function getContent(): Entry[] {
     // Vimeo
     {
       featured: true,
-      body: `“In the post-evaluation of each database against our criteria (with metrics ranging from query performance to cost), ClickHouse emerged as the unrivalled frontrunner. It excelled across the board, even astonishingly so in certain domains, and proved more cost-efficient.” [Read blog](https://medium.com/vimeo-engineering-blog/clickhouse-is-in-the-house-413862c8ac28)`,
+      body: '“In the post-evaluation of each database against our criteria (with metrics ranging from query performance to cost), ClickHouse emerged as the unrivalled frontrunner. It excelled across the board, even astonishingly so in certain domains, and proved more cost-efficient.” [Read blog](https://medium.com/vimeo-engineering-blog/clickhouse-is-in-the-house-413862c8ac28)',
       logo: LogoVimeo,
       categories: ['Media & entertainment'],
       stats: [
@@ -259,21 +261,21 @@ export function getContent(): Entry[] {
     // Cognitiv
     {
       featured: false,
-      body: `Cognitiv uses ClickHouse to power their ML offline feature store for its blazing speed and resource efficiency. “ClickHouse was able to efficiently process queries that previously had taken hours or even days to complete. This was hugely valuable for Cognitiv’s data team, allowing them to rapidly iterate and refine their machine learning models.” [Read blog](/blog/transforming-ad-tech-how-cognitiv-uses-clickhouse-to-build-better-machine-learning-models?loc=homepage)`,
+      body: 'Cognitiv uses ClickHouse to power their ML offline feature store for its blazing speed and resource efficiency. “ClickHouse was able to efficiently process queries that previously had taken hours or even days to complete. This was hugely valuable for Cognitiv’s data team, allowing them to rapidly iterate and refine their machine learning models.” [Read blog](/blog/transforming-ad-tech-how-cognitiv-uses-clickhouse-to-build-better-machine-learning-models?loc=homepage)',
       logo: LogoCognitiv,
       categories: ['ML & GenAI']
     },
     // Corsearch
     {
       featured: false,
-      body: `Corsearch chose ClickHouse as their vector database after evaluating alternatives, including specialized vector DBs. And now, as Chase, their VP of Engineering, explains, “by utilizing expert models and embeddings, we detect substantive changes in web pages and identify connections between pages that share similar characteristics.” [Read blog](/blog/corsearch-replaces-mysql-with-clickhouse-for-content-and-brand-protection?loc=homepage)`,
+      body: 'Corsearch chose ClickHouse as their vector database after evaluating alternatives, including specialized vector DBs. And now, as Chase, their VP of Engineering, explains, “by utilizing expert models and embeddings, we detect substantive changes in web pages and identify connections between pages that share similar characteristics.” [Read blog](/blog/corsearch-replaces-mysql-with-clickhouse-for-content-and-brand-protection?loc=homepage)',
       logo: LogoCorsearch,
       categories: ['ML & GenAI']
     },
     // Admixer
     {
       featured: false,
-      body: `“ClickHouse was perfect as Big Data Storage for our ML models.” [Read blog](/blog/admixer-aggregates-over-1-billion-unique-users-a-day-using-clickhouse?loc=homepage)`,
+      body: '“ClickHouse was perfect as Big Data Storage for our ML models.” [Read blog](/blog/admixer-aggregates-over-1-billion-unique-users-a-day-using-clickhouse?loc=homepage)',
       logo: LogoAdmixer,
       categories: ['ML & GenAI'],
       stats: [
@@ -293,7 +295,7 @@ export function getContent(): Entry[] {
     // QuickCheck
     {
       featured: false,
-      body: `"We collect tens of thousands of data points from customers’ phones and other more traditional sources. ClickHouse is used as a way to process all of these SMS messages and extract valuable information used for the scoring and fraud models." [Read blog](/blog/how-quickcheck-uses-clickhouse-to-bring-banking-to-the-unbanked?loc=homepage)`,
+      body: '"We collect tens of thousands of data points from customers’ phones and other more traditional sources. ClickHouse is used as a way to process all of these SMS messages and extract valuable information used for the scoring and fraud models." [Read blog](/blog/how-quickcheck-uses-clickhouse-to-bring-banking-to-the-unbanked?loc=homepage)',
       logo: LogoQuickcheck,
       categories: ['Financial services'],
       stats: [
@@ -313,7 +315,7 @@ export function getContent(): Entry[] {
     // Ongage
     {
       featured: false,
-      body: `"When we tested how much time the same reports would take with ClickHouse, people were amazed. We ran the same data, and in a blink of an eye, we had the results." [Read blog](/blog/ongages-strategic-shift-to-clickhouse-for-real-time-email-marketing?loc=homepage)`,
+      body: '"When we tested how much time the same reports would take with ClickHouse, people were amazed. We ran the same data, and in a blink of an eye, we had the results." [Read blog](/blog/ongages-strategic-shift-to-clickhouse-for-real-time-email-marketing?loc=homepage)',
       logo: LogoOngage,
       categories: ['Marketing & sales']
     },
@@ -321,7 +323,7 @@ export function getContent(): Entry[] {
     // AdGreetz
     {
       featured: false,
-      body: `"With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud. We got several seconds query time and no materialized views. With ClickHouse Cloud’s production instance, we are getting sub-second query time along with materialized views. The decision to switch was a no-brainer for us.” [Read blog](/blog/adgreetz-processes-millions-of-daily-ad-impressions?loc=homepage)`,
+      body: '"With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud. We got several seconds query time and no materialized views. With ClickHouse Cloud’s production instance, we are getting sub-second query time along with materialized views. The decision to switch was a no-brainer for us.” [Read blog](/blog/adgreetz-processes-millions-of-daily-ad-impressions?loc=homepage)',
       logo: LogoAdgreetz,
       categories: ['Marketing & sales'],
       stats: [
@@ -341,7 +343,7 @@ export function getContent(): Entry[] {
     // Juspay
     {
       featured: false,
-      body: `“ClickHouse solves most of our problems very efficiently at a small fraction of the price in terms of infrastructure. This is a far better advantage for us in our books” [Read blog](/blog/juspay-analyzes-payment-transactions-in-real-time-with-clickhouse?loc=homepage)`,
+      body: '“ClickHouse solves most of our problems very efficiently at a small fraction of the price in terms of infrastructure. This is a far better advantage for us in our books” [Read blog](/blog/juspay-analyzes-payment-transactions-in-real-time-with-clickhouse?loc=homepage)',
       logo: LogoJuspay,
       categories: ['Financial services'],
       stats: [
@@ -354,14 +356,14 @@ export function getContent(): Entry[] {
     },
     {
       featured: false,
-      body: `“ClickHouse is a fast and highly performant analytical database, widely used across Instacart to power other use-cases such as critical retailer and ads dashboards, calculating results for A/B testing, and machine learning signals.” <a href="https://tech.instacart.com/real-time-fraud-detection-with-yoda-and-clickhouse-bd08e9dbe3f4?utm_source=clickhouse" target="_blank">Read blog</a>`,
+      body: '“ClickHouse is a fast and highly performant analytical database, widely used across Instacart to power other use-cases such as critical retailer and ads dashboards, calculating results for A/B testing, and machine learning signals.” <a href="https://tech.instacart.com/real-time-fraud-detection-with-yoda-and-clickhouse-bd08e9dbe3f4?utm_source=clickhouse" target="_blank">Read blog</a>',
       logo: LogoInstacart,
       categories: ['E-commerce & retail']
     },
     // Contentsquare
     {
       featured: false,
-      body: `“Moving from Elasticsearch to ClickHouse was a long journey, but this is one of the best tech decisions we ever took.” [Read blog](/blog/contentsquare-migration-from-elasticsearch-to-clickhouse?loc=homepage)`,
+      body: '“Moving from Elasticsearch to ClickHouse was a long journey, but this is one of the best tech decisions we ever took.” [Read blog](/blog/contentsquare-migration-from-elasticsearch-to-clickhouse?loc=homepage)',
       logo: LogoContentsquare,
       categories: ['E-commerce & retail'],
       stats: [
@@ -386,7 +388,7 @@ export function getContent(): Entry[] {
     // HIFI
     {
       featured: false,
-      body: `“ClickHouse’s performance exceeds all other column-oriented database management systems. It processes billions of rows and tens of gigabytes of data per server per second.” [Read blog](/blog/hifis-migration-from-bigquery-to-clickhouse?loc=homepage)`,
+      body: '“ClickHouse’s performance exceeds all other column-oriented database management systems. It processes billions of rows and tens of gigabytes of data per server per second.” [Read blog](/blog/hifis-migration-from-bigquery-to-clickhouse?loc=homepage)',
       logo: LogoHifi,
       categories: ['Media & entertainment'],
       stats: [
@@ -406,7 +408,7 @@ export function getContent(): Entry[] {
     // DeepL
     {
       featured: false,
-      body: `"We aggregate the user’s history in ClickHouse and use it as a data store for training and inference. Even when reading 10s of millions of rows, the performance was very nice and not the bottleneck when training new models." [Read blog](/blog/deepls-journey-with-clickhouse?loc=homepage)`,
+      body: '"We aggregate the user’s history in ClickHouse and use it as a data store for training and inference. Even when reading 10s of millions of rows, the performance was very nice and not the bottleneck when training new models." [Read blog](/blog/deepls-journey-with-clickhouse?loc=homepage)',
       logo: LogoDeepl,
       categories: ['ML & GenAI']
     },
@@ -414,7 +416,7 @@ export function getContent(): Entry[] {
     // DENIC
     {
       featured: false,
-      body: `"After Testing Hadoop and Spark, We Chose ClickHouse" [Read blog](/blog/denic-improves-query-times-by-10x-with-clickhouse?loc=homepage)`,
+      body: '"After Testing Hadoop and Spark, We Chose ClickHouse" [Read blog](/blog/denic-improves-query-times-by-10x-with-clickhouse?loc=homepage)',
       logo: LogoDenic,
       categories: ['ML & GenAI']
     },
@@ -422,7 +424,7 @@ export function getContent(): Entry[] {
     // Synq
     {
       featured: false,
-      body: `“With dbt execution orchestrated in various intervals, we can also leverage ClickHouse for internal BI use cases. We’ve found this setup very practical, as we can flexibly create new analytical views of our customer data without moving it from our production operational systems.” [Read blog](/blog/building-a-unified-data-platform-with-clickhouse?loc=homepage)`,
+      body: '“With dbt execution orchestrated in various intervals, we can also leverage ClickHouse for internal BI use cases. We’ve found this setup very practical, as we can flexibly create new analytical views of our customer data without moving it from our production operational systems.” [Read blog](/blog/building-a-unified-data-platform-with-clickhouse?loc=homepage)',
       logo: LogoSynq,
       categories: ['Business intelligence']
     },
@@ -431,7 +433,7 @@ export function getContent(): Entry[] {
     // Minted
     {
       featured: false,
-      body: `“We use Clickhouse Cloud to monitor millions of real-time web performance data points, to ensure we’re getting faster all the time. The platform delivers fast and reliable data management, while also proving to be cost efficient and user-friendly.”`,
+      body: '“We use Clickhouse Cloud to monitor millions of real-time web performance data points, to ensure we’re getting faster all the time. The platform delivers fast and reliable data management, while also proving to be cost efficient and user-friendly.”',
       logo: LogoMinted,
       categories: ['E-commerce & retail']
     },
@@ -439,7 +441,7 @@ export function getContent(): Entry[] {
     // Darwinium
     {
       featured: false,
-      body: `“With ClickHouse, the data pipeline logic is simplified, and is only dealing with the “streaming” aspect of the write as opposed to all of these complexities. ClickHouse thus enables a simpler write design pattern just like any other new age data lake systems like Hudi etc. but with a more simplistic developer experience.” [Read blog](/blog/fast-feature-rich-and-mutable-clickhouse-powers-darwiniums-security-and-fraud-analytics-use-cases?loc=homepage)`,
+      body: '“With ClickHouse, the data pipeline logic is simplified, and is only dealing with the “streaming” aspect of the write as opposed to all of these complexities. ClickHouse thus enables a simpler write design pattern just like any other new age data lake systems like Hudi etc. but with a more simplistic developer experience.” [Read blog](/blog/fast-feature-rich-and-mutable-clickhouse-powers-darwiniums-security-and-fraud-analytics-use-cases?loc=homepage)',
       logo: LogoDarwinium,
       categories: ['Fraud & cybersecurity']
     },
@@ -447,7 +449,7 @@ export function getContent(): Entry[] {
     // Dassana
     {
       featured: false,
-      body: `"We evaluated more than a dozen different big data systems before settling on ClickHouse. No system comes close to ClickHouse when it comes to the flexibility ClickHouse provides" [Read blog](/blog/clickhouse-powers-dassanas-security-data-lake?loc=homepage)`,
+      body: '"We evaluated more than a dozen different big data systems before settling on ClickHouse. No system comes close to ClickHouse when it comes to the flexibility ClickHouse provides" [Read blog](/blog/clickhouse-powers-dassanas-security-data-lake?loc=homepage)',
       logo: LogoDassana,
       categories: ['Fraud & cybersecurity']
     },
@@ -455,7 +457,7 @@ export function getContent(): Entry[] {
     // ExitLag
     {
       featured: false,
-      body: `“The benefits were immediate, with faster data processing and accurate analytics that allowed me to make strategic decisions with confidence. ClickHouse opened new horizons for the growth and success of my company, raising our executive vision to levels never reached before.” [Read blog](/blog/boosting-game-performance-exitlag-quest-for-a-better-data-management-system?loc=homepage)`,
+      body: '“The benefits were immediate, with faster data processing and accurate analytics that allowed me to make strategic decisions with confidence. ClickHouse opened new horizons for the growth and success of my company, raising our executive vision to levels never reached before.” [Read blog](/blog/boosting-game-performance-exitlag-quest-for-a-better-data-management-system?loc=homepage)',
       logo: LogoExitlag,
       categories: ['Gaming']
     }

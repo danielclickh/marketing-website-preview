@@ -1,4 +1,3 @@
-import React from 'react'
 import { CUIButton } from '../ClickUI'
 import { usePricing } from './PricingContext'
 

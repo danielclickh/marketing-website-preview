@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import CategorySelector from '../CategorySelector'
 import { SuiSearchField } from '../sui/client'
 import { BlogPostListProps } from './types'

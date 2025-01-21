@@ -1,10 +1,10 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { SeoMetadata } from '../../../lib/api/strapi/types'
+import { HeaderProps } from '../../Header/types'
+import SeoContainer from '../../SeoContainer'
 import Footer from '../Footer'
 import { FooterData } from '../Footer/types'
 import Header from '../Header'
-import SeoContainer from '../../SeoContainer'
-import { HeaderProps } from '../../Header/types'
 interface Props {
   children: ReactNode
   footerData: FooterData

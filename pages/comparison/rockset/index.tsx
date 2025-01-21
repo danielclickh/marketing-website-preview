@@ -285,7 +285,9 @@ export default function Page({
                 <div className='p-10'>
                   <div className='space-y-6 lg:grid lg:grid-cols-4 lg:gap-6 lg:space-y-0'>
                     <QuoteCard
-                      content={`"This year we actually exceeded a thousand active replicas. That's **processing hundreds of millions of inserted rows every second**, which actually corresponds to quite a significantly larger number of events because we've been using a lot of sampling."`}
+                      content={
+                        '"This year we actually exceeded a thousand active replicas. That\'s **processing hundreds of millions of inserted rows every second**, which actually corresponds to quite a significantly larger number of events because we\'ve been using a lot of sampling."'
+                      }
                       logo={{
                         src: '/images/use-cases/real-time-analytics/cloudflare-logo.svg',
                         width: 123,
@@ -294,7 +296,9 @@ export default function Page({
                       }}
                     />
                     <QuoteCard
-                      content={`"We have multiple clusters deployed on our hardware with hundreds of hosts. Our main cluster is now geo-replicated, and we designate some replicas for read-heavy operations and others for write-heavy operations. Many of our tables are quite large, **with trillions and trillions of rows, as well as tens of columns.**"`}
+                      content={
+                        '"We have multiple clusters deployed on our hardware with hundreds of hosts. Our main cluster is now geo-replicated, and we designate some replicas for read-heavy operations and others for write-heavy operations. Many of our tables are quite large, **with trillions and trillions of rows, as well as tens of columns.**"'
+                      }
                       link='/blog/how-clickhouse-powers-ahrefs-the-worlds-most-active-web-crawler'
                       logo={{
                         src: '/images/use-cases/real-time-analytics/ahrefs-logo.svg',
@@ -304,7 +308,9 @@ export default function Page({
                       }}
                     />
                     <QuoteCard
-                      content={`"At Lyft, **we ingest tens of millions of rows and execute millions of read queries in ClickHouse daily with volume continuing to increase**. On a monthly basis, this means reading and writing more than 25TB of data."`}
+                      content={
+                        '"At Lyft, **we ingest tens of millions of rows and execute millions of read queries in ClickHouse daily with volume continuing to increase**. On a monthly basis, this means reading and writing more than 25TB of data."'
+                      }
                       logo={{
                         src: '/images/use-cases/real-time-analytics/lyft-logo.svg',
                         width: 64,
@@ -313,7 +319,9 @@ export default function Page({
                       }}
                     />
                     <QuoteCard
-                      content={`"In the post-evaluation of each database against our criteria (with metrics ranging from query performance to cost), **ClickHouse emerged as the unrivaled frontrunner.** It excelled across the board, even astonishingly so in certain domains, and proved more cost-efficient."`}
+                      content={
+                        '"In the post-evaluation of each database against our criteria (with metrics ranging from query performance to cost), **ClickHouse emerged as the unrivaled frontrunner.** It excelled across the board, even astonishingly so in certain domains, and proved more cost-efficient."'
+                      }
                       link={{
                         href: 'https://medium.com/vimeo-engineering-blog/clickhouse-is-in-the-house-413862c8ac28',
                         target: '_blank'

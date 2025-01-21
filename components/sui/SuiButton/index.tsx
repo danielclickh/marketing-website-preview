@@ -53,8 +53,8 @@ const colorCalculator = ({
         textColor === 'warning'
           ? 'text-c7'
           : textColor === 'danger'
-          ? 'text-alerts-danger-text'
-          : 'text-inherit'
+            ? 'text-alerts-danger-text'
+            : 'text-inherit'
       }`
     case 'custom':
       return 'custom-btn'

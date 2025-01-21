@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import CategorySelector from '../../components/CategorySelector'
 import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'

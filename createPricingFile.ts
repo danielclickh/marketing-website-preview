@@ -1,11 +1,10 @@
 import fs from 'fs'
 import path from 'path'
-import { getPricingsByPlan } from './lib/m3ter/m3ter-api'
-import { acceptableRegions } from './components/PricingCalculator/CalculatorTypesOptions'
 import {
-  config,
-  configStaging
+  acceptableRegions,
+  config
 } from './components/PricingCalculator/CalculatorTypesOptions'
+import { getPricingsByPlan } from './lib/m3ter/m3ter-api'
 
 function log(message: string) {
   console.log(`[${new Date().toTimeString()}] ${message}`)

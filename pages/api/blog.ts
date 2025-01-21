@@ -17,10 +17,7 @@ const baseQuery: Record<string, any> = {
     'StagingOnly'
   ],
   filters: {
-    $and: [
-      { category: { $ne: 'japanese' } },
-      { $or: getStagingOnlyFilters() }
-    ]
+    $and: [{ category: { $ne: 'japanese' } }, { $or: getStagingOnlyFilters() }]
   }
 }
 
