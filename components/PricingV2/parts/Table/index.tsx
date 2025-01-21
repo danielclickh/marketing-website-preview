@@ -122,7 +122,7 @@ const TableColumn = memo(function TableColumn({
               <div className='space-y-2'>
                 <p className='text-sm font-bold'>Compute</p>
                 <div className='whitespace-nowrap text-2.75xl font-semibold'>
-                  <PriceUsd price={computeUnitPrice} />
+                  <PriceUsd price={computeUnitPrice} decimalPlaces={4} />
                 </div>
                 <div className='flex flex-wrap items-center gap-2 text-[14px] text-[#DFDFDF]'>
                   <span>Per unit / hr</span>
