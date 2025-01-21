@@ -1,4 +1,3 @@
-import { useCallback, useEffect } from 'react'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import { StrapiImage } from '../../../StrapiElements'
 import Label from '../../ui/Label'
@@ -13,23 +12,6 @@ export default function ProviderSelector({
   className = ''
 }: ProviderSelectorProps) {
   const { providers, provider, setProvider } = usePricingV2Context()
-
-  const validateProvider = useCallback(
-    (value: null | string) => {
-      if (!value || !providers.find((item) => item.slug === value)) {
-        return providers.at(0)?.slug || null
-      }
-
-      return value
-    },
-    [providers]
-  )
-
-  useEffect(() => {
-    const validated = validateProvider(provider)
-    if (provider !== validated) setProvider(validated)
-  }, [provider, validateProvider])
-
   return (
     <div className={className}>
       {displayLabel && <Label>Cloud provider</Label>}

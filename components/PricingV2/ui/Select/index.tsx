@@ -1,6 +1,6 @@
 import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
-import { useMemo } from 'react'
+import { memo, useMemo } from 'react'
 
 export type Option = { value: any; label: string | React.ReactNode }
 export type Options = Array<Option>
@@ -11,7 +11,7 @@ export interface SelectProps {
   onChange: (value: any) => void
 }
 
-export default function Select({ options, value, onChange }: SelectProps) {
+const Select = memo(function Select({ options, value, onChange }: SelectProps) {
   const selectedOption = useMemo(() => {
     return options.find((option) => option.value === value)
   }, [options, value])
@@ -47,4 +47,6 @@ export default function Select({ options, value, onChange }: SelectProps) {
       </div>
     </Listbox>
   )
-}
+})
+
+export default Select

@@ -1,38 +1,11 @@
 import { CheckIcon } from '@heroicons/react/solid'
-import * as Checkbox from '@radix-ui/react-checkbox'
-import { useEffect, useId, useState } from 'react'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import Label from '../../ui/Label'
 import Range from '../../ui/Range'
 
 export default function HoursSelector() {
   const { hours, setHours } = usePricingV2Context()
-  const checkboxId = useId()
-  const [isAlwaysOn, setIsAlwaysOn] = useState<Checkbox.CheckedState>(false)
-
-  useEffect(() => {
-    // Set default value
-    if (hours === null) {
-      setHours(8)
-    }
-
-    // Toggle always on checkbox
-    if (hours === 24 && !isAlwaysOn) {
-      setIsAlwaysOn(true)
-    } else if (hours !== 24 && isAlwaysOn) {
-      setIsAlwaysOn(false)
-    }
-  }, [hours])
-
-  useEffect(() => {
-    // Set hours based on always on checkbox
-    if (isAlwaysOn && hours !== 24) {
-      setHours(24)
-    } else if (!isAlwaysOn && hours === 24) {
-      setHours(8)
-    }
-  }, [isAlwaysOn])
-
+  const isAlwaysOn = hours && hours >= 24
   return (
     <div>
       <div className='mb-2 flex items-center justify-between'>
@@ -42,20 +15,26 @@ export default function HoursSelector() {
           Active hours per day
         </Label>
         <div className='flex flex-shrink-0 flex-grow-0 items-center gap-2'>
-          <Checkbox.Root
-            id={checkboxId}
-            checked={isAlwaysOn}
-            onCheckedChange={setIsAlwaysOn}
-            className='aspect-square w-4 cursor-pointer overflow-hidden rounded-sm border border-neutral-700 bg-neutral-750 outline-none hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl'>
-            <Checkbox.Indicator className='relative flex h-full w-full items-center justify-center bg-primary-300'>
-              <CheckIcon className='h-4 w-4 text-neutral-750' />
-            </Checkbox.Indicator>
-          </Checkbox.Root>
-          <label
-            htmlFor={checkboxId}
-            className='cursor-pointer text-sm leading-none text-white'>
-            Always on
-          </label>
+          <button
+            className='group/always-on inline-flex cursor-pointer items-center gap-2'
+            onClick={(event) => {
+              event.preventDefault()
+              setHours(isAlwaysOn ? 8 : 24)
+            }}>
+            <span
+              className={`flex aspect-square w-4 overflow-hidden rounded-sm border border-neutral-700 ${
+                isAlwaysOn
+                  ? 'bg-primary-300'
+                  : 'bg-neutral-750 outline-none group-hover/always-on:border-primary-500 group-hover/always-on:bg-neutral-725/80'
+              }`}>
+              <CheckIcon
+                className={`h-4 w-4 text-neutral-750 transition-opacity ${
+                  !isAlwaysOn ? 'opacity-0' : ''
+                }`}
+              />
+            </span>
+            <span className='text-sm leading-none text-white'>Always on</span>
+          </button>
         </div>
       </div>
       <div className={`transition-opacity ${isAlwaysOn ? 'opacity-30' : ''}`}>

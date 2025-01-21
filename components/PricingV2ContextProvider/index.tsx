@@ -2,6 +2,7 @@ import {
   createContext,
   Dispatch,
   SetStateAction,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -64,13 +65,13 @@ export interface Context {
 
   // Form values
   plan: ContextPlan
-  setPlan: Dispatch<SetStateAction<ContextPlan>>
+  setPlan: (value: ContextPlan) => void
   provider: ContextProvider
-  setProvider: Dispatch<SetStateAction<ContextProvider>>
+  setProvider: (value: ContextProvider) => void
   region: ContextRegion
-  setRegion: Dispatch<SetStateAction<ContextRegion>>
+  setRegion: (value: ContextRegion) => void
   hours: ContextHours
-  setHours: Dispatch<SetStateAction<ContextHours>>
+  setHours: (value: ContextHours) => void
   computeMinSize: ContextComputeMinSize
   setComputeMinSize: Dispatch<SetStateAction<ContextComputeMinSize>>
   computeMaxSize: ContextComputeMaxSize
@@ -84,7 +85,9 @@ export interface Context {
   storageCompressed: ContextStorageCompressed
   setStorageCompressed: Dispatch<SetStateAction<ContextStorageCompressed>>
 
-  // Calculated results
+  // Dynamic context
+  planEntry: undefined | PricingV2EntryPlan
+  providerEntry: undefined | PricingV2EntryProvider
   computeUnitPrice: ContextComputeUnitPrice
   storageUnitPrice: ContextStorageUnitPrice
   computeMinPrice: ContextComputeMinPrice
@@ -141,7 +144,9 @@ const PricingV2Context = createContext<Context>({
   storageCompressed: null,
   setStorageCompressed: () => {},
 
-  // Calculated results
+  // Dynamic context
+  planEntry: undefined,
+  providerEntry: undefined,
   computeUnitPrice: null,
   storageUnitPrice: null,
   computeMinPrice: null,
@@ -180,7 +185,7 @@ export default function PricingV2ContextProvider({
     data.computes
   )
 
-  const [plan, setPlan] = useState<ContextPlan>(startingValues?.plan ?? null)
+  const [plan, setPlan] = useState<ContextPlan>(null)
   const [provider, setProvider] = useState<ContextProvider>(
     startingValues?.provider ?? null
   )
@@ -209,6 +214,18 @@ export default function PricingV2ContextProvider({
     useState<ContextStorageCompressed>(
       startingValues?.storageCompressed ?? null
     )
+
+  // Get the provider strapi entry
+  const providerEntry = useMemo(() => {
+    return providers
+      ? providers.find((item) => item.slug === provider)
+      : undefined
+  }, [providers, provider])
+
+  // Get the plan strapi entry
+  const planEntry = useMemo(() => {
+    return plan ? plans.find((item) => item.slug === plan) : undefined
+  }, [plans, plan])
 
   // Find the pricing data for the combined plan, privder and region values
   const pricingData = useMemo(() => {
@@ -313,6 +330,7 @@ export default function PricingV2ContextProvider({
       .reduce((total, current) => total + current, 0)
   }, [computeMaxPrice, storagePrice, replicas])
 
+  // Fire onChange callback
   useEffect(() => {
     if (onChange) {
       onChange({
@@ -341,6 +359,74 @@ export default function PricingV2ContextProvider({
     storageCompressed
   ])
 
+  const validatePlan = useCallback(
+    (value: ContextPlan) => {
+      if (!value || !plans.find((item) => item.slug === value)) {
+        value =
+          plans.find((item) => item.featured)?.slug || plans.at(0)?.slug || null
+      }
+
+      return setPlan(value)
+    },
+    [setPlan, plans]
+  )
+
+  const validateProvider = useCallback(
+    (value: ContextProvider) => {
+      if (!value || !providers.find((item) => item.slug === value)) {
+        value = providers.at(0)?.slug || null
+      }
+
+      return setProvider(value)
+    },
+    [setProvider, providers]
+  )
+
+  const validateRegion = useCallback(
+    (value: ContextRegion) => {
+      if (!providerEntry) {
+        value = null
+      } else if (
+        !value ||
+        !providerEntry.regions.find((item) => item.key === value)
+      ) {
+        value = providerEntry.regions.at(0)?.key || null
+      }
+
+      return setRegion(value)
+    },
+    [setRegion, providerEntry]
+  )
+
+  const validateHours = useCallback(
+    (value: ContextHours) => {
+      if (value === null) value = 8
+
+      // Constrain hours to 0-24
+      value = Math.min(24, Math.max(0, value))
+
+      return setHours(value)
+    },
+    [setHours]
+  )
+
+  // Set starting values
+  useEffect(() => {
+    validatePlan(startingValues?.plan || null)
+  }, [validatePlan])
+
+  useEffect(() => {
+    validateProvider(startingValues?.provider || null)
+  }, [validateProvider])
+
+  useEffect(() => {
+    validateRegion(startingValues?.region || null)
+  }, [validateRegion])
+
+  useEffect(() => {
+    validateHours(startingValues?.hours || null)
+  }, [validateHours])
+
   return (
     <PricingV2Context.Provider
       value={{
@@ -354,13 +440,13 @@ export default function PricingV2ContextProvider({
 
         // Form values
         plan,
-        setPlan,
+        setPlan: validatePlan,
         provider,
-        setProvider,
+        setProvider: validateProvider,
         region,
-        setRegion,
+        setRegion: validateRegion,
         hours,
-        setHours,
+        setHours: validateHours,
         computeMinSize,
         setComputeMinSize,
         computeMaxSize,
@@ -374,7 +460,9 @@ export default function PricingV2ContextProvider({
         storageCompressed,
         setStorageCompressed,
 
-        // Computed results
+        // Dynamic context
+        planEntry,
+        providerEntry,
         computeUnitPrice,
         storageUnitPrice,
         computeMinPrice,
