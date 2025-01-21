@@ -1,16 +1,17 @@
 import { ShareIcon } from '@heroicons/react/outline'
 import { CheckIcon, XIcon } from '@heroicons/react/solid'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, {
   Fragment,
   useCallback,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState
 } from 'react'
 import { CUIButton } from '../../../ClickUI'
+import HRSeparator from '../../../HRSeparator'
 import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import PriceUsd from '../../ui/PriceUsd'
@@ -44,7 +45,7 @@ export default function Estimator() {
   const priceRef = useRef<null | HTMLParagraphElement>(null)
 
   // Dynamically resize the price font size
-  useLayoutEffect(() => {
+  useEffect(() => {
     const priceEl = priceRef.current
     if (priceEl) {
       const resize = () => {
@@ -200,7 +201,7 @@ export default function Estimator() {
 
         {/* Results */}
         <div className='w-full lg:w-1/2 lg:max-w-md lg:px-6'>
-          <div className='rounded-lg border border-primary-300 bg-slate-900 p-8'>
+          <div className='rounded-lg border border-primary-300 bg-slate-900 p-7'>
             <p className='text-center font-inconsolata text-lg text-primary-300'>
               Average price per month
             </p>
@@ -259,7 +260,7 @@ export default function Estimator() {
             </div>
 
             {/* Price list */}
-            <ul className='mt-4 space-y-4'>
+            <ul className='mt-5 space-y-4 text-sm'>
               {/* Storage price */}
               <li className='flex items-center gap-x-2'>
                 <CheckIcon className='h-4 w-4 text-primary-300' />
@@ -319,10 +320,18 @@ export default function Estimator() {
               </li>
             </ul>
 
-            <p className='mt-4 text-xs opacity-70'>
-              ClickPipes, data transfer costs and costs incurred by scheduled
-              backups are not included and will be added to the pricing
-              calculator in a future update.
+            <HRSeparator className='my-4' />
+
+            <p className='mt-4 text-xs text-slate-300'>
+              ClickPipes and data transfer costs are not included. Most
+              customers won’t see a significant increase in their monthly bill
+              from these additional usage dimensions.{' '}
+              <Link
+                href='/docs/en/cloud/manage/jan-2025-faq/pricing-dimensions'
+                target='_blank'
+                className='whitespace-nowrap text-primary-300 hover:underline'>
+                See full pricing
+              </Link>
             </p>
           </div>
         </div>

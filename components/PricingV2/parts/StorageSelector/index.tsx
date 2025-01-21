@@ -1,3 +1,4 @@
+import { CheckIcon } from '@heroicons/react/solid'
 import React, { useCallback, useEffect, useMemo } from 'react'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import Label from '../../ui/Label'
@@ -75,9 +76,9 @@ export default function StorageSelector() {
 
   return (
     <div>
-      <div className='grid grid-cols-4 gap-6'>
+      <div className='grid grid-cols-4 gap-3'>
         <div className='col-span-2 md:col-span-1'>
-          <Label>Storage Volume</Label>
+          <Label>Data volume</Label>
           <input
             className='relative h-10 w-full cursor-text rounded-[4px] border border-neutral-700 bg-neutral-725 px-3 text-left shadow-input focus:outline-none sm:text-sm md:max-w-[112px]'
             type='number'
@@ -87,15 +88,14 @@ export default function StorageSelector() {
             onChange={onStorageSizeChange}
           />
         </div>
-        <div className='col-span-2 md:col-span-1'>
-          <Label>Storage Unit</Label>
+        <div className='col-span-2 flex flex-col justify-end md:col-span-1'>
           <Select
             options={STORAGE_UNITS}
             value={storageUnit}
             onChange={(value) => setStorageUnit(value)}
           />
         </div>
-        <div className='col-span-4 mb-4 md:col-span-2'>
+        <div className='col-span-4 md:col-span-2 md:pl-2'>
           <Label tooltip='If your data is not compressed, ClickHouse will apply up to 10x compression.'>
             Is your data compressed?
           </Label>
@@ -106,12 +106,10 @@ export default function StorageSelector() {
           />
         </div>
       </div>
-      <div
-        className={` ${
-          compressionApplied ? 'text-[#66FF73]' : 'text-white'
-        } mb-10 mt-3 text-xs `}>
+      <div className='mt-3 text-xs text-slate-300'>
         {compressionApplied ? (
-          <p>
+          <p className='flex items-center gap-x-2'>
+            <CheckIcon className='h-4 w-4' />
             {parseFloat((storageSize! / 10).toFixed(1))}
             {STORAGE_UNITS.find((item) => item.value === storageUnit)?.label ??
               storageUnit}{' '}

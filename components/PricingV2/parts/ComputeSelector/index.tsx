@@ -167,9 +167,9 @@ export default function ComputeSelector() {
                         setComputeMaxSize(item.maximumCompute.size)
                       }
                     }}>
-                    <span className='font-medium'>{item.name}</span>
+                    <span className='font-bold'>{item.name}</span>
                     {item.description && (
-                      <small className='whitespace-pre-wrap opacity-70'>
+                      <small className='mt-2 whitespace-pre-wrap text-sm text-slate-300'>
                         {item.description}
                       </small>
                     )}
@@ -193,8 +193,8 @@ export default function ComputeSelector() {
                   event.preventDefault()
                   if (!customizing) setCustomizing(true)
                 }}>
-                <span>Custom</span>
-                <small className='opacity-70'>
+                <span className='font-bold'>Custom</span>
+                <small className='mt-2 text-sm text-slate-300'>
                   Customize the size of your service
                 </small>
               </button>
@@ -203,7 +203,7 @@ export default function ComputeSelector() {
                   customizing ? 'block' : 'hidden'
                 }`}>
                 <div>
-                  <Label>Minimum compute size</Label>
+                  <Label>Minimum size</Label>
                   <Select
                     options={computeOptions}
                     value={computeMinSize}
@@ -211,7 +211,7 @@ export default function ComputeSelector() {
                   />
                 </div>
                 <div>
-                  <Label>Maximum compute size</Label>
+                  <Label>Maximum size</Label>
                   <Select
                     options={computeOptions}
                     value={computeMaxSize}
@@ -219,7 +219,7 @@ export default function ComputeSelector() {
                   />
                 </div>
                 <div>
-                  <Label>Replicas</Label>
+                  <Label>Number of replicas</Label>
                   <Select
                     options={REPLICAS}
                     value={replicas}

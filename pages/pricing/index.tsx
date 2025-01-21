@@ -114,16 +114,19 @@ export default function PricingPage({
               inbetweenContent={
                 <>
                   <div className='mt-8 space-y-8'>
-                    <div className='space-y-4 text-center'>
+                    <div className='space-y-4 text-center text-slate-300'>
                       <SuiText size='sm'>
                         Data transfer for public internet egress starting at{' '}
-                        <strong>$0.123 / GB</strong>, inter region egress
-                        starting at <strong>$0.12 / GB</strong>.
+                        <strong className='text-white'>$0.123 / GB</strong>,
+                        inter region egress starting at{' '}
+                        <strong className='text-white'>$0.12 / GB</strong>.
                       </SuiText>
                       <SuiText size='sm'>
-                        ClickPipes rates starting at{' '}
-                        <strong>$0.123 / hr</strong> for ingested data,{' '}
-                        <strong>$0.023 / hr</strong> for compute.
+                        ClickPipes rates are{' '}
+                        <strong className='text-white'>$0.04 / GB</strong> for
+                        ingested data,{' '}
+                        <strong className='text-white'>$0.20 / hr</strong> per
+                        compute unit.
                       </SuiText>
                       <SuiText size='sm'>
                         For more information about our billing and pricing
@@ -137,7 +140,7 @@ export default function PricingPage({
                       </SuiText>
                     </div>
                     <ByocPricingCard />
-                    <SuiText size='sm' className='text-center'>
+                    <SuiText size='sm' className='text-center text-slate-300'>
                       Or download the forever-free{' '}
                       <LinkWithArrow
                         href='https://clickhouse.com/docs/en/quick-start'
