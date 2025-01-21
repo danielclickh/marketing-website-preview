@@ -29,6 +29,14 @@ export default function NavigationSubNavResources() {
           Blog
         </NavigationLink>
       </li>
+      <li>
+        <NavigationLink
+          href='/company/news-events'
+          onClick={useGalaxyOnClick('topNav.resourcesMenu.eventsSelect')}
+          className='block w-full'>
+          Events
+        </NavigationLink>
+      </li>
       <li
         onMouseEnter={() => {
           setActiveSubNav('learning')
@@ -117,16 +125,6 @@ export default function NavigationSubNavResources() {
           </li>
           <li>
             <NavigationLink
-              href='/comparison/doublecloud'
-              onClick={useGalaxyOnClick(
-                'topNav.comparisonsMenu.doubleCloudSelect'
-              )}
-              className='block w-full'>
-              DoubleCloud
-            </NavigationLink>
-          </li>
-          <li>
-            <NavigationLink
               href='/comparison/postgresql'
               onClick={useGalaxyOnClick(
                 'topNav.comparisonsMenu.postgreSqlSelect'
@@ -143,14 +141,6 @@ export default function NavigationSubNavResources() {
               )}
               className='block w-full'>
               Redshift
-            </NavigationLink>
-          </li>
-          <li>
-            <NavigationLink
-              href='/comparison/rockset'
-              onClick={useGalaxyOnClick('topNav.comparisonsMenu.rocksetSelect')}
-              className='block w-full'>
-              Rockset
             </NavigationLink>
           </li>
           <li>
