@@ -83,18 +83,21 @@ export default function PricingV2({
             modifiedQuery[key] = value.toString()
           }
         } else {
+          queryChanged = true
           delete modifiedQuery[key]
         }
       })
 
+      // Store values in the URL
       if (queryChanged) {
-        router.replace(
-          {
-            query: modifiedQuery
-          },
-          undefined,
-          { shallow: true, scroll: false }
-        )
+        const newUrl = new URL(window.location.toString())
+        Object.entries(modifiedQuery).forEach(([key, value]) => {
+          newUrl.searchParams.set(key, value?.toString() || '')
+        })
+
+        // We use the native API because of a bug where the nextjs
+        // `router.replace(...)` causes all iframes on the page to reload
+        window.history.replaceState(null, '', newUrl.toString())
       }
     }, 200),
     [router]
