@@ -2,20 +2,14 @@ import { ShareIcon } from '@heroicons/react/outline'
 import { CheckIcon, XIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, {
-  Fragment,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { CUIButton } from '../../../ClickUI'
 import HRSeparator from '../../../HRSeparator'
 import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import PriceUsd from '../../ui/PriceUsd'
 import ComputeSelector from '../ComputeSelector'
+import DisplayPrice from '../DisplayPrice'
 import HoursSelector from '../HoursSelector'
 import PlanSelector from '../PlanSelector'
 import ProviderSelector from '../ProviderSelector'
@@ -43,53 +37,6 @@ export default function Estimator() {
     totalMinPrice,
     totalMaxPrice
   } = usePricingV2Context()
-
-  const priceRef = useRef<null | HTMLParagraphElement>(null)
-
-  // Dynamically resize the price font size
-  useEffect(() => {
-    const priceEl = priceRef.current
-    if (priceEl) {
-      const resize = () => {
-        const minFontSize = 14 // pixels
-        const maxFontSize = 50 // pixels
-
-        let low = minFontSize
-        let high = maxFontSize
-        let fontSize
-
-        while (low <= high) {
-          fontSize = Math.floor((low + high) / 2)
-          priceEl.style.fontSize = `${fontSize}px`
-
-          if (priceEl.scrollWidth > priceEl.clientWidth) {
-            high = fontSize - 1 // Text is too wide, decrease size
-          } else {
-            low = fontSize + 1 // Text fits, try increasing size
-          }
-        }
-
-        priceEl.style.fontSize = `${high}px`
-      }
-
-      resize()
-
-      window.addEventListener('resize', resize)
-      window.addEventListener('orientationchange', resize)
-
-      return () => {
-        window.removeEventListener('resize', resize)
-        window.removeEventListener('orientationchange', resize)
-      }
-    }
-  }, [priceRef, totalMinPrice, totalMaxPrice])
-
-  const displayPrice = useMemo(() => {
-    return !!(
-      (totalMinPrice && totalMinPrice > 0.01) ||
-      (totalMaxPrice && totalMaxPrice > 0.01)
-    )
-  }, [totalMinPrice, totalMaxPrice])
 
   // Promote contact if min price is over $5000
   const promoteContact = !!(totalMinPrice && totalMinPrice > 5000)
@@ -211,21 +158,8 @@ export default function Estimator() {
               Average price per month
             </p>
             <div className='mb-4 flex min-h-20 items-center'>
-              <p
-                ref={priceRef}
-                className='w-full overflow-hidden whitespace-nowrap text-center font-basier font-bold text-white'>
-                {!displayPrice && <PriceUsd price={0.0} />}
-                {displayPrice &&
-                  [...new Set([totalMinPrice, totalMaxPrice])]
-                    .filter((val) => val !== null)
-                    .map((price, priceIndex, allPrices) => {
-                      return (
-                        <Fragment key={priceIndex}>
-                          <PriceUsd price={price} decimalPlaces={0} />
-                          {priceIndex < allPrices.length - 1 && ' - '}
-                        </Fragment>
-                      )
-                    })}
+              <p className='w-full overflow-hidden whitespace-nowrap text-center font-basier font-bold text-white'>
+                <DisplayPrice />
               </p>
             </div>
 
