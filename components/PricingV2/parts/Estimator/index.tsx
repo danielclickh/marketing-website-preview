@@ -35,6 +35,8 @@ export default function Estimator() {
     storageUnit,
     storageSize,
     storageCompressed,
+    computeUnitPrice,
+    storageUnitPrice,
     computeMinPrice,
     computeMaxPrice,
     storagePrice,
@@ -168,7 +170,10 @@ export default function Estimator() {
     shareUrl.hash = 'pricing-calculator'
 
     window.navigator.clipboard.writeText(shareUrl.toString()).catch((err) => {
-      alert('Failed to copy url. Please copy from the input below.')
+      window.prompt(
+        'Failed to copy url. Please copy from the input below.',
+        shareUrl.toString()
+      )
       console.error('Error copying to clipboard:', err)
     })
   }, [
@@ -216,7 +221,7 @@ export default function Estimator() {
                     .map((price, priceIndex, allPrices) => {
                       return (
                         <Fragment key={priceIndex}>
-                          <PriceUsd price={price} />
+                          <PriceUsd price={price} decimalPlaces={0} />
                           {priceIndex < allPrices.length - 1 && ' - '}
                         </Fragment>
                       )
@@ -266,9 +271,23 @@ export default function Estimator() {
                 <CheckIcon className='h-4 w-4 text-primary-300' />
                 <PriceUsd price={storagePrice || 0.0} /> for storage{' '}
                 <TooltipInfo
-                  content={`Storage cost for ${storageSize}${storageUnit?.toUpperCase()} ${
-                    storageCompressed ? 'uncompressed' : 'compressed'
-                  }`}
+                  content={
+                    <>
+                      Storage cost for {storageSize}{' '}
+                      {storageUnit?.toUpperCase()}{' '}
+                      {storageCompressed
+                        ? 'uncompressed data'
+                        : 'compressed data'}
+                      <br />
+                      <br />
+                      {storageUnitPrice && (
+                        <>
+                          1 TB compressed data ={' '}
+                          <PriceUsd price={storageUnitPrice} /> per month
+                        </>
+                      )}
+                    </>
+                  }
                 />
               </li>
 
@@ -281,18 +300,48 @@ export default function Estimator() {
                       <CheckIcon className='h-4 w-4 text-primary-300' />
                       <PriceUsd price={computeMinPrice} /> minimum compute cost
                       <TooltipInfo
-                        content={`Minimim compute cost = ${
-                          computeMinSize / 8
-                        } compute unit * ${hours}h per day * 30 days * ${replicas} replica(s)\n\n1 compute unit = 8 GiB RAM, 2 vCPU = $0.2987 / hour`}
+                        content={
+                          <>
+                            Minimum ompute cost = {computeMinSize! / 8} compute
+                            unit * {hours}h per day * 30 days * {replicas}{' '}
+                            replica(s)
+                            {computeUnitPrice && (
+                              <>
+                                <br />
+                                <br />1 compute unit = 8 GiB RAM, 2 vCPU ={' '}
+                                <PriceUsd
+                                  price={computeUnitPrice}
+                                  decimalPlaces={3}
+                                />{' '}
+                                / hour
+                              </>
+                            )}
+                          </>
+                        }
                       />
                     </li>
                     <li className='flex items-center gap-x-2'>
                       <CheckIcon className='h-4 w-4 text-primary-300' />
-                      <PriceUsd price={computeMaxPrice} /> minimum compute cost
+                      <PriceUsd price={computeMaxPrice} /> maximum compute cost
                       <TooltipInfo
-                        content={`Minimim compute cost = ${
-                          computeMaxSize / 8
-                        } compute unit * ${hours}h per day * 30 days * ${replicas} replica(s)\n\n1 compute unit = 8 GiB RAM, 2 vCPU = $0.2987 / hour`}
+                        content={
+                          <>
+                            Maximum compute cost = {computeMaxSize! / 8} compute
+                            unit * {hours}h per day * 30 days * {replicas}{' '}
+                            replica(s)
+                            {computeUnitPrice && (
+                              <>
+                                <br />
+                                <br />1 compute unit = 8 GiB RAM, 2 vCPU ={' '}
+                                <PriceUsd
+                                  price={computeUnitPrice}
+                                  decimalPlaces={3}
+                                />{' '}
+                                / hour
+                              </>
+                            )}
+                          </>
+                        }
                       />
                     </li>
                   </>
@@ -307,9 +356,23 @@ export default function Estimator() {
                       <CheckIcon className='h-4 w-4 text-primary-300' />
                       <PriceUsd price={computeMinPrice} /> compute cost
                       <TooltipInfo
-                        content={`Compute cost = ${
-                          computeMinSize / 8
-                        } compute unit * ${hours}h per day * 30 days * ${replicas} replica(s)\n\n1 compute unit = 8 GiB RAM, 2 vCPU = $0.2987 / hour`}
+                        content={
+                          <>
+                            Compute cost = {computeMinSize! / 8} compute unit *{' '}
+                            {hours}h per day * 30 days * {replicas} replica(s)
+                            {computeUnitPrice && (
+                              <>
+                                <br />
+                                <br />1 compute unit = 8 GiB RAM, 2 vCPU ={' '}
+                                <PriceUsd
+                                  price={computeUnitPrice}
+                                  decimalPlaces={3}
+                                />{' '}
+                                / hour
+                              </>
+                            )}
+                          </>
+                        }
                       />
                     </li>
                   </>
