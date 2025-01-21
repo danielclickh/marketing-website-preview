@@ -33,7 +33,7 @@ export default function Estimator() {
               Average price per month
             </p>
             <div className='mb-4 flex min-h-20 items-center'>
-              <p className='w-full overflow-hidden whitespace-nowrap text-center font-basier font-bold text-white'>
+              <p className='w-full text-center font-basier font-bold text-white'>
                 <DisplayPrice />
               </p>
             </div>
