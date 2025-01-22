@@ -83,6 +83,8 @@ export interface PricingV2EntryProvider {
   logo: StrapiImageType
   order: null | number
   regions: Array<PricingV2ComponentRegion>
+  internetEgress: null | number
+  interRegionEgress: null | number
 }
 
 export interface PricingV2EntryPackage {

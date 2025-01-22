@@ -11,7 +11,7 @@ import HRSeparator from '../../../HRSeparator'
 import { MarkdownMemoized } from '../../../Markdown'
 import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
 import { Context, usePricingV2Context } from '../../../PricingV2ContextProvider'
-import { SuiTitle } from '../../../sui'
+import { SuiText, SuiTitle } from '../../../sui'
 import PriceUsd from '../../ui/PriceUsd'
 import ProviderSelector from '../ProviderSelector'
 import RegionSelector from '../RegionSelector'
@@ -167,6 +167,7 @@ export default function Table({
     plans,
     setPlan,
     provider,
+    providerEntry,
     region,
     getPlanPricingData,
     getPlanPricingConfig
@@ -234,6 +235,30 @@ export default function Table({
             </Fragment>
           )
         })}
+      </div>
+
+      <div className='my-8 space-y-4 text-center text-slate-300'>
+        {providerEntry?.internetEgress && providerEntry?.interRegionEgress && (
+          <SuiText size='sm'>
+            Data transfer for public internet egress starting at{' '}
+            <strong className='text-white'>
+              <PriceUsd
+                price={providerEntry.internetEgress}
+                decimalPlaces='auto'
+              />{' '}
+              / GB
+            </strong>
+            , inter region egress starting at{' '}
+            <strong className='text-white'>
+              <PriceUsd
+                price={providerEntry.interRegionEgress}
+                decimalPlaces='auto'
+              />{' '}
+              / GB
+            </strong>
+            .
+          </SuiText>
+        )}
       </div>
     </div>
   )

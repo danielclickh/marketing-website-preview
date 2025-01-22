@@ -113,14 +113,8 @@ export default function PricingPage({
               afterTableFilters={<RegionRequest />}
               inbetweenContent={
                 <>
-                  <div className='mt-8 space-y-8'>
+                  <div className='-mt-4 space-y-8'>
                     <div className='space-y-4 text-center text-slate-300'>
-                      <SuiText size='sm'>
-                        Data transfer for public internet egress starting at{' '}
-                        <strong className='text-white'>$0.123 / GB</strong>,
-                        inter region egress starting at{' '}
-                        <strong className='text-white'>$0.12 / GB</strong>.
-                      </SuiText>
                       <SuiText size='sm'>
                         ClickPipes rates are{' '}
                         <strong className='text-white'>$0.04 / GB</strong> for

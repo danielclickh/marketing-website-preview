@@ -1,9 +1,13 @@
 export interface PriceUsdProps {
   price: number
-  decimalPlaces?: number
+  decimalPlaces?: number | 'auto'
 }
 
 export default function PriceUsd({ price, decimalPlaces = 2 }: PriceUsdProps) {
+  if (decimalPlaces === 'auto') {
+    decimalPlaces =
+      price.toString().split('.')[1]?.length ?? price.toString().length
+  }
   return (
     <>
       {price
