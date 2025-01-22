@@ -158,7 +158,7 @@ function EventPage({
                     {host.avatarPng && (
                       <StrapiImage
                         {...host.avatarPng}
-                        alt={host.avatarPng.caption}
+                        alt={host.avatarPng.caption ?? host.name}
                         width={64}
                         height={64}
                         className='h-11 w-11 rounded-full'
