@@ -438,20 +438,30 @@ export default function PricingV2ContextProvider({
           plans.find((item) => item.featured)?.slug || plans.at(0)?.slug || null
       }
 
-      setPlan(value)
+      if (value !== plan) {
+        setPlan(value)
+      }
     },
-    [setPlan, plans]
+    [setPlan, plan, plans]
   )
 
   const validateProvider = useCallback(
     (value: ContextProvider) => {
+      let providerEntry = providers.find((item) => item.slug === value)
       if (!value || !providers.find((item) => item.slug === value)) {
-        value = providers.at(0)?.slug || null
+        providerEntry = providers.at(0)
+        value = providerEntry?.slug || null
       }
 
-      setProvider(value)
+      if (value !== provider) {
+        setProvider(value)
+
+        // Set default provider region
+        const providerDefaultRegion = providerEntry?.regions.at(0)
+        if (providerDefaultRegion) setRegion(providerDefaultRegion.key)
+      }
     },
-    [setProvider, providers]
+    [setProvider, provider, providers, setRegion]
   )
 
   const validateRegion = useCallback(
@@ -465,9 +475,11 @@ export default function PricingV2ContextProvider({
         value = providerEntry.regions.at(0)?.key || null
       }
 
-      setRegion(value)
+      if (value !== region) {
+        setRegion(value)
+      }
     },
-    [setRegion, providerEntry]
+    [setRegion, region, providerEntry]
   )
 
   const validateHours = useCallback(
@@ -478,9 +490,11 @@ export default function PricingV2ContextProvider({
       // Constrain hours to 0-24
       value = Math.min(24, Math.max(0, value))
 
-      setHours(value)
+      if (value !== hours) {
+        setHours(value)
+      }
     },
-    [setHours]
+    [setHours, hours]
   )
 
   const validateCompute = useCallback(
@@ -550,9 +564,15 @@ export default function PricingV2ContextProvider({
         }
       }
 
-      setComputeMinSize(minValue)
-      setComputeMaxSize(maxValue)
-      setReplicas(replicasValue)
+      if (minValue !== computeMinSize) {
+        setComputeMinSize(minValue)
+      }
+      if (maxValue !== computeMaxSize) {
+        setComputeMaxSize(maxValue)
+      }
+      if (replicasValue !== replicas) {
+        setReplicas(replicasValue)
+      }
     },
     [
       setComputeMinSize,
@@ -595,9 +615,11 @@ export default function PricingV2ContextProvider({
       // Constrain value to 0-9999
       value = Math.max(Math.min(value, 9999), 0)
 
-      setStorageSize(value)
+      if (value !== storageSize) {
+        setStorageSize(value)
+      }
     },
-    [setStorageSize]
+    [setStorageSize, storageSize]
   )
 
   const validateStorageUnit = useCallback(
@@ -606,26 +628,26 @@ export default function PricingV2ContextProvider({
         value = 'gb'
       }
 
-      setStorageUnit(value)
+      if (value !== storageUnit) {
+        setStorageUnit(value)
+      }
     },
-    [setStorageUnit]
+    [setStorageUnit, storageUnit]
   )
 
   const validateStorageCompressed = useCallback(
     (value: ContextStorageCompressed) => {
-      setStorageCompressed(!!value)
+      value = !!value
+      if (value !== storageCompressed) {
+        setStorageCompressed(value)
+      }
     },
-    [setStorageCompressed]
+    [setStorageCompressed, storageCompressed]
   )
 
   // -----------------------------------
   // Value dependant states
   // -----------------------------------
-
-  // Set region to default when provider is changed
-  useEffect(() => {
-    if (provider) validateRegion(null)
-  }, [provider])
 
   // Set default compute values when plan has changed
   useEffect(() => {
