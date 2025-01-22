@@ -34,6 +34,19 @@ export default function PricingV2({
 }: PricingV2Props) {
   const router = useRouter()
 
+  const defaultValues: Values = {
+    plan: 'basic',
+    provider: 'aws',
+    region: 'us-east-1',
+    hours: 8,
+    computeMinSize: 8,
+    computeMaxSize: 8,
+    replicas: 1,
+    storageUnit: 'gb',
+    storageSize: 500,
+    storageCompressed: false
+  }
+
   const cleanUrlParam = (param: string | string[] | undefined) => {
     if (Array.isArray(param)) param = param[0]
     if (!param) return null
@@ -55,19 +68,36 @@ export default function PricingV2({
   const urlStorageSize = cleanUrlParam(requestParams?.storageSize)
   const urlStorageCompressed = cleanUrlParam(requestParams?.storageCompressed)
 
+  // Combine URL and default values
   const startingValues: Values = {
-    plan: urlPlan?.toString() || null,
-    provider: urlProvider?.toString() || null,
-    region: urlRegion?.toString() || null,
-    hours: typeof urlHours === 'number' ? urlHours : null,
+    plan: urlPlan?.toString() || defaultValues.plan,
+    provider: urlProvider?.toString() || defaultValues.provider,
+    region: urlRegion?.toString() || defaultValues.region,
+    hours: typeof urlHours === 'number' ? urlHours : defaultValues.hours,
     computeMinSize:
-      typeof urlComputeMinSize === 'number' ? urlComputeMinSize : null,
+      typeof urlComputeMinSize === 'number'
+        ? urlComputeMinSize
+        : defaultValues.computeMinSize,
     computeMaxSize:
-      typeof urlComputeMaxSize === 'number' ? urlComputeMaxSize : null,
-    replicas: typeof urlReplicas === 'number' ? urlReplicas : null,
-    storageUnit: urlStorageUnit?.toString() || null,
-    storageSize: typeof urlStorageSize === 'number' ? urlStorageSize : null,
-    storageCompressed: !!urlStorageCompressed
+      typeof urlComputeMaxSize === 'number'
+        ? urlComputeMaxSize
+        : defaultValues.computeMaxSize,
+    replicas:
+      typeof urlReplicas === 'number' ? urlReplicas : defaultValues.replicas,
+    storageUnit:
+      urlStorageUnit === 'gb' ||
+      urlStorageUnit === 'tb' ||
+      urlStorageUnit === 'pb'
+        ? urlStorageUnit
+        : defaultValues.storageUnit,
+    storageSize:
+      typeof urlStorageSize === 'number'
+        ? urlStorageSize
+        : defaultValues.storageSize,
+    storageCompressed:
+      typeof urlStorageCompressed === 'boolean'
+        ? urlStorageCompressed
+        : defaultValues.storageCompressed
   }
 
   // Update URL when pricing values have changed
@@ -91,16 +121,18 @@ export default function PricingV2({
       // Store values in the URL
       if (queryChanged) {
         const newUrl = new URL(window.location.toString())
-        Object.entries(modifiedQuery).forEach(([key, value]) => {
-          newUrl.searchParams.set(key, value?.toString() || '')
-        })
+        Object.entries(modifiedQuery)
+          .reverse()
+          .forEach(([key, value]) => {
+            newUrl.searchParams.set(key, value?.toString() || '')
+          })
 
         // We use the native API because of a bug where the nextjs
         // `router.replace(...)` causes all iframes on the page to reload
         window.history.replaceState(null, '', newUrl.toString())
       }
     }, 200),
-    [router]
+    [router.query]
   )
 
   return (

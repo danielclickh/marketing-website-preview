@@ -137,7 +137,7 @@ export default function EstimatorCtas() {
 
       {/* Promote contact us */}
       <div className={promoteContact ? 'space-y-4' : 'hidden'}>
-        <p className='mb-8 text-center text-base text-[#B3B6BD]'>
+        <p className='-mt-4 mb-8 text-center text-base text-[#B3B6BD]'>
           You’re eligible for custom terms.
           <br />
           Contact us for more details.

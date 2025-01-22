@@ -1,31 +1,9 @@
-import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
+import { Fragment, useCallback, useEffect, useRef } from 'react'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import PriceUsd from '../../ui/PriceUsd'
 
 export default function DisplayPrice() {
-  const { totalMinPrice, totalMaxPrice } = usePricingV2Context()
-
-  const [prices, setPrices] = useState<Array<number>>([])
-
-  useEffect(() => {
-    const isValid = !!(
-      (totalMinPrice && totalMinPrice > 1) ||
-      (totalMaxPrice && totalMaxPrice > 1)
-    )
-
-    // Set default to zero
-    if (!isValid) {
-      setPrices([0])
-      return
-    }
-
-    // De-dupe and remove empties
-    const cleaned = [...new Set([totalMinPrice, totalMaxPrice])].filter(
-      (val) => val !== null
-    )
-
-    setPrices(cleaned)
-  }, [totalMinPrice, totalMaxPrice])
+  const { totalPriceRange } = usePricingV2Context()
 
   const priceRef = useRef<null | HTMLParagraphElement>(null)
 
@@ -69,13 +47,13 @@ export default function DisplayPrice() {
   useEffect(() => {
     const timer = window.setTimeout(resize, 100)
     return () => window.clearTimeout(timer)
-  }, [prices])
+  }, [totalPriceRange])
 
   return (
     <span
       ref={priceRef}
       className='block w-full overflow-hidden whitespace-nowrap'>
-      {prices.map((price, priceIndex, allPrices) => {
+      {totalPriceRange.map((price, priceIndex, allPrices) => {
         return (
           <Fragment key={priceIndex}>
             <PriceUsd price={price} decimalPlaces={0} />

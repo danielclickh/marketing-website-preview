@@ -18,22 +18,20 @@ import { aggregationIds } from '../PricingV2/config'
 
 const AVG_DAYS_PER_MONTH = 30.41
 
-type PricingFile = Record<
-  string,
-  Array<{
+export type PricingFileItem = Array<{
+  id: string
+  aggregationId: string
+  description: string
+  region: string
+  cloudProvider: string
+  pricingBands: Array<{
     id: string
-    aggregationId: string
-    description: string
-    region: string
-    cloudProvider: string
-    pricingBands: Array<{
-      id: string
-      lowerLimit: number
-      fixedPrice: number
-      unitPrice: number
-    }>
+    lowerLimit: number
+    fixedPrice: number
+    unitPrice: number
   }>
->
+}>
+export type PricingFile = Record<string, PricingFileItem>
 
 export type ContextPlan = null | string
 export type ContextProvider = null | string
@@ -42,7 +40,7 @@ export type ContextHours = null | number
 export type ContextComputeMinSize = null | number
 export type ContextComputeMaxSize = null | number
 export type ContextReplicas = null | number
-export type ContextStorageUnit = null | string
+export type ContextStorageUnit = null | 'gb' | 'tb' | 'pb'
 export type ContextStorageSize = null | number
 export type ContextStorageCompressed = null | boolean
 
@@ -53,8 +51,12 @@ export type ContextComputeMaxPrice = null | number
 export type ContextStoragePrice = null | number
 export type ContextTotalMinPrice = null | number
 export type ContextTotalMaxPrice = null | number
+export type ContextTotalPriceRange = [number] | [number, number]
 
 export interface Context {
+  // Helper functions
+  getPlanPricingData: (value: string) => undefined | PricingFileItem
+
   // Data sources
   plans: Array<PricingV2EntryPlan>
   setPlans: Dispatch<SetStateAction<Array<PricingV2EntryPlan>>>
@@ -63,7 +65,7 @@ export interface Context {
   computes: Array<PricingV2EntryCompute>
   setComputes: Dispatch<SetStateAction<Array<PricingV2EntryCompute>>>
 
-  // Form values
+  // User values
   plan: ContextPlan
   setPlan: (value: ContextPlan) => void
   provider: ContextProvider
@@ -72,20 +74,27 @@ export interface Context {
   setRegion: (value: ContextRegion) => void
   hours: ContextHours
   setHours: (value: ContextHours) => void
+
+  setCompute: (
+    min: ContextComputeMinSize,
+    max: ContextComputeMaxSize,
+    replicas: ContextReplicas
+  ) => void
   computeMinSize: ContextComputeMinSize
-  setComputeMinSize: Dispatch<SetStateAction<ContextComputeMinSize>>
+  setComputeMinSize: (value: ContextComputeMinSize) => void
   computeMaxSize: ContextComputeMaxSize
-  setComputeMaxSize: Dispatch<SetStateAction<ContextComputeMaxSize>>
+  setComputeMaxSize: (value: ContextComputeMaxSize) => void
   replicas: ContextReplicas
-  setReplicas: Dispatch<SetStateAction<ContextReplicas>>
+  setReplicas: (value: ContextReplicas) => void
+
   storageUnit: ContextStorageUnit
   setStorageUnit: Dispatch<SetStateAction<ContextStorageUnit>>
   storageSize: ContextStorageSize
-  setStorageSize: Dispatch<SetStateAction<ContextStorageSize>>
+  setStorageSize: (value: ContextStorageSize) => void
   storageCompressed: ContextStorageCompressed
-  setStorageCompressed: Dispatch<SetStateAction<ContextStorageCompressed>>
+  setStorageCompressed: (value: ContextStorageCompressed) => void
 
-  // Dynamic context
+  // Computed values
   planEntry: undefined | PricingV2EntryPlan
   providerEntry: undefined | PricingV2EntryProvider
   computeUnitPrice: ContextComputeUnitPrice
@@ -95,6 +104,7 @@ export interface Context {
   storagePrice: ContextStoragePrice
   totalMinPrice: ContextTotalMinPrice
   totalMaxPrice: ContextTotalMaxPrice
+  totalPriceRange: ContextTotalPriceRange
 }
 
 export type Data = Pick<Context, 'plans' | 'providers' | 'computes'>
@@ -114,6 +124,9 @@ export type Values = Pick<
 >
 
 const PricingV2Context = createContext<Context>({
+  // Helper functions
+  getPlanPricingData: () => undefined,
+
   // Data sources
   plans: [],
   setPlans: () => {},
@@ -122,7 +135,7 @@ const PricingV2Context = createContext<Context>({
   computes: [],
   setComputes: () => {},
 
-  // Form values
+  // User values
   plan: null,
   setPlan: () => {},
   provider: null,
@@ -131,12 +144,15 @@ const PricingV2Context = createContext<Context>({
   setRegion: () => {},
   hours: null,
   setHours: () => {},
+
+  setCompute: () => {},
   computeMinSize: null,
   setComputeMinSize: () => {},
   computeMaxSize: null,
   setComputeMaxSize: () => {},
   replicas: null,
   setReplicas: () => {},
+
   storageUnit: null,
   setStorageUnit: () => {},
   storageSize: null,
@@ -144,7 +160,7 @@ const PricingV2Context = createContext<Context>({
   storageCompressed: null,
   setStorageCompressed: () => {},
 
-  // Dynamic context
+  // Computed values
   planEntry: undefined,
   providerEntry: undefined,
   computeUnitPrice: null,
@@ -153,7 +169,8 @@ const PricingV2Context = createContext<Context>({
   computeMaxPrice: null,
   storagePrice: null,
   totalMinPrice: null,
-  totalMaxPrice: null
+  totalMaxPrice: null,
+  totalPriceRange: [0]
 })
 
 export function usePricingV2Context() {
@@ -215,6 +232,17 @@ export default function PricingV2ContextProvider({
       startingValues?.storageCompressed ?? null
     )
 
+  // -----------------------------------
+  // Computed values
+  // -----------------------------------
+
+  const getPlanPricingData = (planKey: string) =>
+    (pricingFile as PricingFile)[planKey]
+
+  // -----------------------------------
+  // Computed values
+  // -----------------------------------
+
   // Get the provider strapi entry
   const providerEntry = useMemo(() => {
     return providers
@@ -231,7 +259,7 @@ export default function PricingV2ContextProvider({
   const pricingData = useMemo(() => {
     if (!plan || !provider || !region || !(plan in pricingFile)) return null
 
-    return (pricingFile as PricingFile)[plan].filter((result) => {
+    return getPlanPricingData(plan).filter((result) => {
       return (
         result.cloudProvider?.toLowerCase() === provider &&
         result.region?.toLowerCase() === region
@@ -330,6 +358,37 @@ export default function PricingV2ContextProvider({
       .reduce((total, current) => total + current, 0)
   }, [computeMaxPrice, storagePrice, replicas])
 
+  const totalPriceRange: ContextTotalPriceRange = useMemo(() => {
+    const isValid = !!(
+      (totalMinPrice && totalMinPrice > 1) ||
+      (totalMaxPrice && totalMaxPrice > 1)
+    )
+
+    // Set default to zero
+    if (!isValid) {
+      return [0]
+    }
+
+    // De-dupe and remove empties
+    const cleaned = [...new Set([totalMinPrice, totalMaxPrice])].filter(
+      (val) => val !== null
+    )
+
+    // This pleases typescript
+    switch (cleaned.length) {
+      case 2:
+        return [cleaned[0], cleaned[1]]
+      case 1:
+        return [cleaned[0]]
+      default:
+        return [0]
+    }
+  }, [totalMinPrice, totalMaxPrice])
+
+  // -----------------------------------
+  // Provider callbacks
+  // -----------------------------------
+
   // Fire onChange callback
   useEffect(() => {
     if (onChange) {
@@ -359,6 +418,10 @@ export default function PricingV2ContextProvider({
     storageCompressed
   ])
 
+  // -----------------------------------
+  // Value validators
+  // -----------------------------------
+
   const validatePlan = useCallback(
     (value: ContextPlan) => {
       if (!value || !plans.find((item) => item.slug === value)) {
@@ -366,7 +429,7 @@ export default function PricingV2ContextProvider({
           plans.find((item) => item.featured)?.slug || plans.at(0)?.slug || null
       }
 
-      return setPlan(value)
+      setPlan(value)
     },
     [setPlan, plans]
   )
@@ -377,7 +440,7 @@ export default function PricingV2ContextProvider({
         value = providers.at(0)?.slug || null
       }
 
-      return setProvider(value)
+      setProvider(value)
     },
     [setProvider, providers]
   )
@@ -393,43 +456,198 @@ export default function PricingV2ContextProvider({
         value = providerEntry.regions.at(0)?.key || null
       }
 
-      return setRegion(value)
+      setRegion(value)
     },
     [setRegion, providerEntry]
   )
 
   const validateHours = useCallback(
     (value: ContextHours) => {
+      // Set hours default value
       if (value === null) value = 8
 
       // Constrain hours to 0-24
       value = Math.min(24, Math.max(0, value))
 
-      return setHours(value)
+      setHours(value)
     },
     [setHours]
   )
 
-  // Set starting values
+  const validateCompute = useCallback(
+    (
+      minValue: ContextComputeMinSize,
+      maxValue: ContextComputeMaxSize,
+      replicasValue: ContextReplicas
+    ) => {
+      const useFirstPackage = () => {
+        if (planEntry) {
+          minValue = planEntry.packages.at(0)?.minimumCompute?.size || null
+          maxValue = planEntry.packages.at(0)?.maximumCompute?.size || null
+          replicasValue = planEntry.packages.at(0)?.replicas || null
+        }
+      }
+
+      // If all values are null, use the first package
+      if (minValue === null && maxValue === null && replicasValue === null) {
+        useFirstPackage()
+      }
+
+      // If one or the other min/max values are null
+      if (minValue !== null && maxValue === null) maxValue = minValue
+      if (minValue === null && maxValue !== null) minValue = maxValue
+
+      // Get default values
+      if (minValue === null || maxValue === null) {
+        const sizes = computes.map((compute) => compute.size)
+        if (minValue === null) minValue = sizes[0]
+        if (maxValue === null) maxValue = sizes[sizes.length - 1]
+      }
+
+      // If min value has changed, ensure max value is always greater than or equal to
+      if (minValue !== computeMinSize && minValue > maxValue) {
+        maxValue = minValue
+      }
+
+      // If max value has changed, ensure min value is always less than or equal to
+      else if (maxValue !== computeMaxSize && minValue > maxValue) {
+        minValue = maxValue
+      }
+
+      // Sanity check if neither value has changed
+      else if (minValue > maxValue) {
+        maxValue = minValue
+      }
+
+      // Set replicas default value
+      if (replicasValue === null) replicasValue = 1
+
+      // Constrain replicas to 1-25
+      replicasValue = Math.min(25, Math.max(1, replicasValue))
+
+      // Ensure values match a package for non-customizable plans
+      if (planEntry && !planEntry.customizable) {
+        const packageExists = planEntry.packages.find((item) => {
+          return (
+            item.minimumCompute?.size === minValue &&
+            item.maximumCompute?.size === maxValue &&
+            item.replicas === replicasValue
+          )
+        })
+
+        // If not a valid package, set values to the first available package
+        if (!packageExists) {
+          useFirstPackage()
+        }
+      }
+
+      setComputeMinSize(minValue)
+      setComputeMaxSize(maxValue)
+      setReplicas(replicasValue)
+    },
+    [
+      setComputeMinSize,
+      setComputeMaxSize,
+      setReplicas,
+      computes,
+      planEntry,
+      computeMinSize,
+      computeMaxSize,
+      replicas
+    ]
+  )
+
+  const validateComputeMinSize = useCallback(
+    (value: ContextComputeMinSize) => {
+      validateCompute(value, computeMaxSize, replicas)
+    },
+    [validateCompute, computeMaxSize, replicas]
+  )
+
+  const validateComputeMaxSize = useCallback(
+    (value: ContextComputeMaxSize) => {
+      validateCompute(computeMinSize, value, replicas)
+    },
+    [validateCompute, computeMinSize, replicas]
+  )
+
+  const validateReplicas = useCallback(
+    (value: ContextReplicas) => {
+      validateCompute(computeMinSize, computeMaxSize, value)
+    },
+    [validateCompute, computeMinSize, computeMaxSize]
+  )
+
+  const validateStorageSize = useCallback(
+    (value: ContextStorageSize) => {
+      // Set 500 as the default value
+      if (value === null) value = 500
+
+      // Constrain value to 0-9999
+      value = Math.max(Math.min(value, 9999), 0)
+
+      setStorageSize(value)
+    },
+    [setStorageSize]
+  )
+
+  const validateStorageUnit = useCallback(
+    (value: ContextStorageUnit) => {
+      if (!value || !['gb', 'pb', 'tb'].includes(value)) {
+        value = 'gb'
+      }
+
+      setStorageUnit(value)
+    },
+    [setStorageUnit]
+  )
+
+  const validateStorageCompressed = useCallback(
+    (value: ContextStorageCompressed) => {
+      setStorageCompressed(!!value)
+    },
+    [setStorageCompressed]
+  )
+
+  // -----------------------------------
+  // Value dependant states
+  // -----------------------------------
+
+  // Set region to default when provider is changed
   useEffect(() => {
-    validatePlan(startingValues?.plan || null)
-  }, [validatePlan])
+    if (provider) validateRegion(null)
+  }, [provider])
+
+  // Set default compute values when plan has changed
+  useEffect(() => {
+    if (plan) validateCompute(null, null, null)
+  }, [plan])
+
+  // -----------------------------------
+  // On mount
+  // -----------------------------------
 
   useEffect(() => {
-    validateProvider(startingValues?.provider || null)
-  }, [validateProvider])
-
-  useEffect(() => {
-    validateRegion(startingValues?.region || null)
-  }, [validateRegion])
-
-  useEffect(() => {
-    validateHours(startingValues?.hours || null)
-  }, [validateHours])
+    validatePlan(startingValues?.plan ?? null)
+    validateProvider(startingValues?.provider ?? null)
+    validateRegion(startingValues?.region ?? null)
+    validateHours(startingValues?.hours ?? null)
+    validateCompute(
+      startingValues?.computeMinSize ?? null,
+      startingValues?.computeMaxSize ?? null,
+      startingValues?.replicas ?? null
+    )
+    validateStorageSize(startingValues?.storageSize ?? null)
+    validateStorageUnit(startingValues?.storageUnit ?? null)
+    validateStorageCompressed(startingValues?.storageCompressed ?? null)
+  }, [])
 
   return (
     <PricingV2Context.Provider
       value={{
+        // Helper functions
+        getPlanPricingData,
+
         // Data sources
         plans,
         setPlans,
@@ -438,7 +656,7 @@ export default function PricingV2ContextProvider({
         computes,
         setComputes,
 
-        // Form values
+        // User values
         plan,
         setPlan: validatePlan,
         provider,
@@ -447,20 +665,23 @@ export default function PricingV2ContextProvider({
         setRegion: validateRegion,
         hours,
         setHours: validateHours,
+
+        setCompute: validateCompute,
         computeMinSize,
-        setComputeMinSize,
+        setComputeMinSize: validateComputeMinSize,
         computeMaxSize,
-        setComputeMaxSize,
+        setComputeMaxSize: validateComputeMaxSize,
         replicas,
-        setReplicas,
+        setReplicas: validateReplicas,
+
         storageUnit,
         setStorageUnit,
         storageSize,
-        setStorageSize,
+        setStorageSize: validateStorageSize,
         storageCompressed,
-        setStorageCompressed,
+        setStorageCompressed: validateStorageCompressed,
 
-        // Dynamic context
+        // Computed values
         planEntry,
         providerEntry,
         computeUnitPrice,
@@ -469,7 +690,8 @@ export default function PricingV2ContextProvider({
         computeMaxPrice,
         storagePrice,
         totalMinPrice,
-        totalMaxPrice
+        totalMaxPrice,
+        totalPriceRange
       }}>
       {children}
     </PricingV2Context.Provider>

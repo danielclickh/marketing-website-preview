@@ -1,3 +1,5 @@
+import { memo } from 'react'
+import { PricingV2EntryProvider } from '../../../../lib/api/strapi/types'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import { StrapiImage } from '../../../StrapiElements'
 import Label from '../../ui/Label'
@@ -6,6 +8,14 @@ export interface ProviderSelectorProps {
   displayLabel?: boolean
   className?: string
 }
+
+const ProviderLogo = memo(function ProviderLogo({
+  logo
+}: {
+  logo: PricingV2EntryProvider['logo']
+}) {
+  return <StrapiImage {...logo} />
+})
 
 export default function ProviderSelector({
   displayLabel = true,
@@ -30,7 +40,7 @@ export default function ProviderSelector({
                 event.preventDefault()
                 setProvider(item.slug)
               }}>
-              <StrapiImage {...item.logo} />
+              <ProviderLogo logo={item.logo} />
             </button>
           )
         })}

@@ -1,17 +1,21 @@
 import { MinusIcon } from '@heroicons/react/outline'
 import { CheckIcon } from '@heroicons/react/solid'
 import * as Tooltip from '@radix-ui/react-tooltip'
-import React, { Fragment, memo } from 'react'
+import React, { Fragment, memo, useCallback } from 'react'
 import {
   PricingV2ComponentPerk,
   PricingV2EntryPlan
 } from '../../../../lib/api/strapi/types'
 import { CUIButton, CUICard } from '../../../ClickUI'
 import HRSeparator from '../../../HRSeparator'
-import Markdown from '../../../Markdown'
+import { MarkdownMemoized } from '../../../Markdown'
 import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
-import { Context, usePricingV2Context } from '../../../PricingV2ContextProvider'
+import {
+  PricingFileItem,
+  usePricingV2Context
+} from '../../../PricingV2ContextProvider'
 import { SuiTitle } from '../../../sui'
+import { aggregationIds } from '../../config'
 import PriceUsd from '../../ui/PriceUsd'
 import ProviderSelector from '../ProviderSelector'
 import RegionSelector from '../RegionSelector'
@@ -22,17 +26,60 @@ const perkIcons: Record<PricingV2ComponentPerk['icon'], React.ReactNode> = {
   Dash: <MinusIcon className='h-4 w-4' />
 }
 
+const PerkItem = memo(function PerkItem({
+  text,
+  icon,
+  tooltip
+}: PricingV2ComponentPerk) {
+  const PerkContent = () => (
+    <MarkdownMemoized className='!text-white'>{text}</MarkdownMemoized>
+  )
+  return (
+    <li className='row flex items-center justify-start gap-4 text-sm'>
+      <span className='flex-shrink-0 flex-grow-0'>{perkIcons[icon]}</span>
+      {!tooltip && <PerkContent />}
+      {tooltip && (
+        <Tooltip.Provider delayDuration={0} disableHoverableContent={false}>
+          <Tooltip.Root>
+            <Tooltip.Trigger>
+              <PerkContent />
+            </Tooltip.Trigger>
+            <Tooltip.Portal>
+              <Tooltip.Content
+                side='top'
+                align='start'
+                className='max-w-[300px] whitespace-pre-wrap rounded-[4px] bg-neutral-725 px-[15px] py-[10px] text-sm leading-normal will-change-[transform,opacity]'
+                sideOffset={5}>
+                {tooltip}
+                <Tooltip.Arrow className='fill-neutral-725' />
+              </Tooltip.Content>
+            </Tooltip.Portal>
+          </Tooltip.Root>
+        </Tooltip.Provider>
+      )}
+    </li>
+  )
+})
+
 const TableColumn = memo(function TableColumn({
   item,
-  computeUnitPrice,
-  storageUnitPrice,
+  providerRegionPricingData,
   onEstimateCostClick
 }: {
   item: PricingV2EntryPlan
-  computeUnitPrice: Context['computeUnitPrice']
-  storageUnitPrice: Context['storageUnitPrice']
+  providerRegionPricingData: undefined | PricingFileItem
   onEstimateCostClick: () => void
 }) {
+  const computeUnitPrice =
+    providerRegionPricingData
+      ?.find((result) => result.aggregationId === aggregationIds.compute)
+      ?.pricingBands.at(0)?.unitPrice || null
+
+  const storageUnitPrice =
+    providerRegionPricingData
+      ?.find((result) => result.aggregationId === aggregationIds.storage)
+      ?.pricingBands.at(0)?.unitPrice || null
+
   return (
     <div className='flex-1 basis-0 p-4'>
       <CUICard
@@ -46,7 +93,7 @@ const TableColumn = memo(function TableColumn({
           </SuiTitle>
           {item.description && (
             <div className='text-normal text-center text-sm text-neutral-300'>
-              <Markdown>{item.description}</Markdown>
+              <MarkdownMemoized>{item.description}</MarkdownMemoized>
             </div>
           )}
           <CUIButton
@@ -68,37 +115,14 @@ const TableColumn = memo(function TableColumn({
           {item.perks.length > 0 && (
             <ul className='space-y-5'>
               {item.perks.map((perk, perkIndex) => {
-                const PerkContent = () => <Markdown>{perk.text}</Markdown>
                 return (
-                  <li
-                    key={perkIndex}
-                    className='row flex items-center justify-start gap-4 text-sm'>
-                    <span className='flex-shrink-0 flex-grow-0'>
-                      {perkIcons[perk.icon]}
-                    </span>
-                    {!perk.tooltip && <PerkContent />}
-                    {perk.tooltip && (
-                      <Tooltip.Provider
-                        delayDuration={0}
-                        disableHoverableContent={false}>
-                        <Tooltip.Root>
-                          <Tooltip.Trigger>
-                            <PerkContent />
-                          </Tooltip.Trigger>
-                          <Tooltip.Portal>
-                            <Tooltip.Content
-                              side='top'
-                              align='start'
-                              className='max-w-[300px] whitespace-pre-wrap rounded-[4px] bg-neutral-725 px-[15px] py-[10px] text-sm leading-normal will-change-[transform,opacity]'
-                              sideOffset={5}>
-                              {perk.tooltip}
-                              <Tooltip.Arrow className='fill-neutral-725' />
-                            </Tooltip.Content>
-                          </Tooltip.Portal>
-                        </Tooltip.Root>
-                      </Tooltip.Provider>
-                    )}
-                  </li>
+                  <Fragment key={perkIndex}>
+                    <PerkItem
+                      text={perk.text}
+                      icon={perk.icon}
+                      tooltip={perk.tooltip}
+                    />
+                  </Fragment>
                 )
               })}
             </ul>
@@ -151,8 +175,23 @@ export default function Table({
   beforeFilters?: React.ReactNode
   afterFilters?: React.ReactNode
 }) {
-  const { plans, setPlan, computeUnitPrice, storageUnitPrice } =
+  const { plans, setPlan, provider, region, getPlanPricingData } =
     usePricingV2Context()
+
+  const pricingData = useCallback(
+    (planSlug: string) => {
+      if (!planSlug || !provider || !region) return undefined
+
+      return getPlanPricingData(planSlug)?.filter((result) => {
+        return (
+          result.cloudProvider?.toLowerCase() === provider &&
+          result.region?.toLowerCase() === region
+        )
+      })
+    },
+    [getPlanPricingData, provider, region]
+  )
+
   return (
     <div id='pricing-table'>
       <div className='mb-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-6'>
@@ -167,8 +206,7 @@ export default function Table({
             <Fragment key={index}>
               <TableColumn
                 item={item}
-                computeUnitPrice={computeUnitPrice}
-                storageUnitPrice={storageUnitPrice}
+                providerRegionPricingData={pricingData(item.slug)}
                 onEstimateCostClick={() => {
                   setPlan(item.slug)
                 }}

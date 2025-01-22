@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import Label from '../../ui/Label'
 import Select, { Options } from '../../ui/Select'
@@ -30,10 +30,11 @@ function formatComponentsList(components: Array<React.ReactNode>) {
 
 export default function ComputeSelector() {
   const {
-    computes,
     plans,
-    plan,
+    computes,
+    planEntry,
     setPlan,
+    setCompute,
     computeMinSize,
     setComputeMinSize,
     computeMaxSize,
@@ -49,20 +50,12 @@ export default function ComputeSelector() {
   }, [plans])
 
   const isCusomizable = useMemo(() => {
-    const planEntry = plans.find((item) => item.slug === plan)
-    if (!planEntry) return false
-    return planEntry.customizable
-  }, [plans, plan])
+    return planEntry?.customizable ?? false
+  }, [planEntry])
 
   const packages = useMemo(() => {
-    const planEntry = plans.find((item) => item.slug === plan)
-    if (!planEntry) return []
-
-    // Ensure the resource has usable values
-    return planEntry.packages.filter(
-      (item) => item.minimumCompute || item.maximumCompute
-    )
-  }, [plans, plan])
+    return planEntry?.packages || []
+  }, [planEntry])
 
   const computeOptions: Options = useMemo(() => {
     return computes.map((item) => {
@@ -73,67 +66,17 @@ export default function ComputeSelector() {
     })
   }, [computes])
 
+  // Find the package that matches the user values
   const activePackage = useMemo(() => {
-    // No active packages if the customizer is open
-    if (customizing) return undefined
-
     return packages.find((item) => {
-      const matchingReplicas = replicas === item.replicas
-      const matchingMinCompute =
-        !item.minimumCompute ||
-        (item.minimumCompute && item.minimumCompute.size === computeMinSize)
-      const matchingMaxCompute =
-        !item.maximumCompute ||
-        (item.maximumCompute && item.maximumCompute.size === computeMaxSize)
-      return matchingReplicas && matchingMinCompute && matchingMaxCompute
+      const matchingMinCompute = item?.minimumCompute?.size === computeMinSize
+      const matchingMaxCompute = item?.maximumCompute?.size === computeMaxSize
+      const matchingReplicas = item.replicas === replicas
+      return matchingMinCompute && matchingMaxCompute && matchingReplicas
     })
-  }, [plan, packages, customizing, computeMinSize, computeMaxSize, replicas])
+  }, [packages, customizing, computeMinSize, computeMaxSize, replicas])
 
-  // Stop customzing if plan doesn't allow it
-  useEffect(() => {
-    if (!isCusomizable && customizing) setCustomizing(false)
-  }, [isCusomizable])
-
-  // Set the default package if not customizing and no active package
-  useEffect(() => {
-    if (!customizing && !activePackage) {
-      const firstPackage = packages.at(0)
-
-      if (firstPackage?.minimumCompute?.size) {
-        setComputeMinSize(firstPackage.minimumCompute.size)
-      }
-
-      if (firstPackage?.maximumCompute?.size) {
-        setComputeMaxSize(firstPackage.maximumCompute.size)
-      }
-
-      if (firstPackage?.replicas) {
-        setReplicas(firstPackage.replicas)
-      }
-    }
-  }, [customizing, packages, activePackage])
-
-  // Ensure the max size is always >= min size
-  useEffect(() => {
-    if (
-      computeMinSize !== null &&
-      computeMaxSize !== null &&
-      computeMinSize > computeMaxSize
-    ) {
-      setComputeMaxSize(computeMinSize)
-    }
-  }, [computeMinSize])
-
-  // Ensure the min size is always <= max size
-  useEffect(() => {
-    if (
-      computeMinSize !== null &&
-      computeMaxSize !== null &&
-      computeMinSize > computeMaxSize
-    ) {
-      setComputeMinSize(computeMaxSize)
-    }
-  }, [computeMaxSize])
+  const isCustomizing = isCusomizable && (customizing || !activePackage)
 
   return (
     <>
@@ -145,7 +88,7 @@ export default function ComputeSelector() {
           {packages.length > 0 && (
             <div className='grid flex-col gap-4 sm:grid-cols-2 lg:flex-row'>
               {packages.map((item, index) => {
-                const isActive = item === activePackage
+                const isActive = !isCustomizing && item === activePackage
                 return (
                   <button
                     key={index}
@@ -157,15 +100,11 @@ export default function ComputeSelector() {
                     onClick={(event) => {
                       event.preventDefault()
                       setCustomizing(false)
-                      setReplicas(item.replicas)
-
-                      if (item.minimumCompute) {
-                        setComputeMinSize(item.minimumCompute.size)
-                      }
-
-                      if (item.maximumCompute) {
-                        setComputeMaxSize(item.maximumCompute.size)
-                      }
+                      setCompute(
+                        item.minimumCompute?.size ?? null,
+                        item.maximumCompute?.size ?? null,
+                        item.replicas
+                      )
                     }}>
                     <span className='font-bold'>{item.name}</span>
                     {item.description && (
@@ -183,7 +122,7 @@ export default function ComputeSelector() {
           {isCusomizable && (
             <div
               className={`mt-4 flex flex-1 flex-col justify-center rounded-[4px] border border-neutral-700 bg-neutral-750 text-center text-sm shadow-input transition-colors focus:outline-none ${
-                customizing
+                isCustomizing
                   ? 'border-primary'
                   : 'hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl'
               }`}>
@@ -191,7 +130,7 @@ export default function ComputeSelector() {
                 className='flex w-full flex-col px-4 py-2 text-left'
                 onClick={(event) => {
                   event.preventDefault()
-                  if (!customizing) setCustomizing(true)
+                  if (!isCustomizing) setCustomizing(true)
                 }}>
                 <span className='font-bold'>Custom</span>
                 <small className='mt-2 text-sm text-slate-300'>
@@ -200,7 +139,7 @@ export default function ComputeSelector() {
               </button>
               <div
                 className={`space-y-8 p-4 pt-3 ${
-                  customizing ? 'block' : 'hidden'
+                  isCustomizing ? 'block' : 'hidden'
                 }`}>
                 <div>
                   <Label>Minimum size</Label>

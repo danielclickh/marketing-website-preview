@@ -1,40 +1,9 @@
 import { CheckIcon } from '@heroicons/react/solid'
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { useCallback } from 'react'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import Label from '../../ui/Label'
 import Radios from '../../ui/Radios'
 import Select from '../../ui/Select'
-
-const STORAGE_UNITS: Array<{ value: any; label: string }> = [
-  { value: 'gb', label: 'GB' },
-  { value: 'tb', label: 'TB' },
-  { value: 'pb', label: 'PB' }
-]
-
-const STORAGE_COMPRESSED: Array<{ value: boolean; label: string }> = [
-  { value: false, label: 'No' },
-  { value: true, label: 'Yes' }
-]
-
-const validateStorageSize = (value: number | null) => {
-  // Set 500 as the default value
-  if (value === null) return 500
-
-  // Limit value to 0-9999
-  return Math.max(Math.min(value, 9999), 0)
-}
-
-const validateStorageUnit = (value: string | null) => {
-  if (!value || !STORAGE_UNITS.find((item) => item.value === value)) {
-    return STORAGE_UNITS.at(0)?.value || null
-  }
-  return value
-}
-
-const validateStorageCompressed = (value: boolean | null) => {
-  if (value === null) return STORAGE_COMPRESSED[0].value
-  return value
-}
 
 export default function StorageSelector() {
   const {
@@ -55,24 +24,21 @@ export default function StorageSelector() {
     [setStorageSize]
   )
 
-  const compressionApplied = useMemo(() => {
-    return !storageCompressed && storageSize && storageUnit
-  }, [storageCompressed, storageSize, storageUnit])
+  const onStorageUnitChange = useCallback(
+    (value: any) => {
+      setStorageUnit(value)
+    },
+    [setStorageUnit]
+  )
 
-  useEffect(() => {
-    const validated = validateStorageSize(storageSize)
-    if (storageSize !== validated) setStorageSize(validated)
-  }, [storageSize])
+  const onStorageCompressedChange = useCallback(
+    (value: any) => {
+      setStorageCompressed(value)
+    },
+    [setStorageCompressed]
+  )
 
-  useEffect(() => {
-    const validated = validateStorageUnit(storageUnit)
-    if (storageUnit !== validated) setStorageUnit(validated)
-  }, [storageUnit])
-
-  useEffect(() => {
-    const validated = validateStorageCompressed(storageCompressed)
-    if (storageCompressed !== validated) setStorageCompressed(validated)
-  }, [storageCompressed])
+  const compressionApplied = !storageCompressed && storageSize && storageUnit
 
   return (
     <div>
@@ -90,9 +56,13 @@ export default function StorageSelector() {
         </div>
         <div className='col-span-2 flex flex-col justify-end md:col-span-1'>
           <Select
-            options={STORAGE_UNITS}
+            options={[
+              { value: 'gb', label: 'GB' },
+              { value: 'tb', label: 'TB' },
+              { value: 'pb', label: 'PB' }
+            ]}
             value={storageUnit}
-            onChange={(value) => setStorageUnit(value)}
+            onChange={onStorageUnitChange}
           />
         </div>
         <div className='col-span-4 md:col-span-2 md:pl-2'>
@@ -100,9 +70,12 @@ export default function StorageSelector() {
             Is your data compressed?
           </Label>
           <Radios
-            options={STORAGE_COMPRESSED}
+            options={[
+              { value: false, label: 'No' },
+              { value: true, label: 'Yes' }
+            ]}
             value={storageCompressed}
-            onChange={(value) => setStorageCompressed(value)}
+            onChange={onStorageCompressedChange}
           />
         </div>
       </div>
@@ -111,9 +84,7 @@ export default function StorageSelector() {
           <p className='flex items-center gap-x-2'>
             <CheckIcon className='h-4 w-4' />
             {parseFloat((storageSize! / 10).toFixed(1))}
-            {STORAGE_UNITS.find((item) => item.value === storageUnit)?.label ??
-              storageUnit}{' '}
-            after compression
+            {storageUnit?.toLocaleUpperCase()} after compression
           </p>
         ) : (
           <p>No compression applied</p>

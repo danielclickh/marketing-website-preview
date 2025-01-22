@@ -20,7 +20,7 @@ export default function PriceList() {
   } = usePricingV2Context()
 
   return (
-    <ul className='mt-5 space-y-4 text-sm'>
+    <ul className='mt-5 space-y-4 text-sm font-medium'>
       {/* Storage price */}
       <li className='flex items-center gap-x-2'>
         <CheckIcon className='h-4 w-4 text-primary-300' />
