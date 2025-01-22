@@ -10,7 +10,7 @@ export default function SupportProgram(props: any) {
   return (
     <div>
       <div className='bg-grid'>
-        <div className='relative mx-auto max-w-3xl px-4 pb-24 pt-28 text-center sm:px-8 2xl:px-0'>
+        <div className='relative mx-auto max-w-3xl px-4 pb-24 pt-28 text-center sm:px-8 md:px-16 2xl:px-0'>
           <SuiTitle type='h1' className='mb-6 md:!text-6xl'>
             {props.title}
           </SuiTitle>
@@ -25,7 +25,7 @@ export default function SupportProgram(props: any) {
             Here at ClickHouse, best-in-class support comes with your Cloud
             subscription. Our Support Services team follows the same vision as
             our product, bringing you unparalleled performance, ease of use, and
-            exceptionally fast, high-quality results.
+            exceptionally fast, high-quality results. Read more in our <Link className='font-semibold text-primary-300 group-hover:underline' href="/blog/clickhouse-support-services-fast-simple-friendly">blog</Link>.
           </SuiText>
         </div>
 
@@ -139,12 +139,12 @@ export default function SupportProgram(props: any) {
               <thead>
                 <tr>
                   <th></th>
-                  <th className='border border-neutral-700 bg-neutral-750 p-0'>
+                  <th className='border border-neutral-700 bg-neutral-750 p-0 max-w-72'>
                     <div className='p-3  text-neutral-100'>Trial</div>
                   </th>
-                  <th className='border border-neutral-700 bg-neutral-750 p-0'>
+                  <th className='border border-neutral-700 bg-neutral-750 p-0 max-w-72'>
                     <div className='p-3 text-neutral-100'>
-                      Monthly "pay as you go" or annual
+                      ClickHouse Cloud monthly "pay as you go" or annual
                     </div>
                   </th>
                 </tr>
@@ -181,28 +181,17 @@ export default function SupportProgram(props: any) {
                   </td>
                   <td className='border-l border-r border-l-neutral-700 border-r-neutral-700 bg-neutral-750 p-4'>
                     <ul>
-                      <li>Unlimited support cases </li>
-                      <li>
-                        Business day support only (Monday-Friday)
-                        <ul className='ml-4 text-sm text-neutral-400'>
-                          <li>1 Business day</li>
-                        </ul>{' '}
-                      </li>
-                      <li>Office hours</li>
+                      <li>Unlimited support cases</li>
+                      <li>Business day support only</li>
                     </ul>
                   </td>
                   <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
                     <ul>
                       <li>Unlimited support cases</li>
                       <li>
-                        24x7 support{' '}
-                        <ul className='ml-4 text-sm text-neutral-400'>
-                          <li>Sev-1: 1 hour 24x7</li>
-                          <li> Sev-2: 4 business hours</li>
-                          <li>Sev-3: 1 business day</li>
-                        </ul>
+                        24x7 support for Sev-1
                       </li>
-                      <li>Office hours</li>
+                      <li>Business Day support for Sev-2 and Sev-3</li>
                     </ul>
                   </td>
                 </tr>
@@ -211,29 +200,37 @@ export default function SupportProgram(props: any) {
                     <strong>Expert sessions</strong>
                   </td>
                   <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
-                    Unlimited live Expert Sessions (short consultative guidance
-                    sessions)
-                    <br />
-                    Access to on-demand Expert Sessions included
+                    1 live Expert Session included for <br />
+                    virtual consultative support guidance
                   </td>
                   <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
-                    Unlimited live Expert Sessions <br />
-                    Access to on-demand Expert Sessions included
+                  Unlimited live Expert Sessions for virtual <br />consultative support guidance
+                  </td>
+                </tr>
+                <tr>
+                  <td className='w-64 border border-neutral-700 bg-neutral-750 px-3 text-left text-neutral-100'>
+                    <strong>TAM Architect</strong>
+                  </td>
+                  <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
+                    Not available 
+                  </td>
+                  <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
+                    Available as an additional purchase<br /> for Support
                   </td>
                 </tr>
                 <tr>
                   <td className='w-64 border border-neutral-700 bg-neutral-750 px-3 text-left text-neutral-100'>
                     <strong>Professional services</strong>
                   </td>
-                  <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
+                  <td className='border-r border-r-neutral-700  bg-neutral-750 p-4 max-w-72'>
                     ClickHouse Cloud consultancy packages available for purchase{' '}
                     <br />
                     SOW available for purchase <br />
                     &nbsp;&nbsp;&nbsp;&nbsp; Virtual + additional T&amp;E for
                     onsite
                   </td>
-                  <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
-                    ClickHouse Cloud quickstart package available for purchase{' '}
+                  <td className='border-r border-r-neutral-700  bg-neutral-750 p-4 max-w-72'>
+                  ClickHouse Cloud consultancy packages available for purchase{' '}
                     <br />
                     SOW available for purchase <br />
                     &nbsp;&nbsp;&nbsp;&nbsp; Virtual + additional T&amp;E for
@@ -248,113 +245,137 @@ export default function SupportProgram(props: any) {
       <HRSeparator className='my-30' />
       <div className='section-container bg-shadow-element align-shadow-left shadow-z-low container mx-auto flex flex-col items-center'>
         <h2
-          className='mb-10 text-4xl font-semibold
-          '>
+          className='mb-10 text-4xl font-semibold'>
           Severity classification
         </h2>
 
         <div className='mx-auto grid max-w-5xl grid-cols-1 rounded-lg border border-neutral-700 bg-neutral-800 md:grid-cols-4'>
           <div className='p-6 pb-0 md:border-b md:border-b-neutral-700 md:pb-6'>
-            <span className='text-xl font-bold'>Severity 1</span>
+            <span className='text-xl font-bold'>Severity 1 ("Sev-1")</span>
             <br />
             <span className='font-inconsolata text-base text-primary-300'>
               Critical business impact
             </span>
           </div>
           <div className='col-span-3 border-b border-b-neutral-700 p-6 text-neutral-200'>
-            A Severity Level 1 issue is a critical production error within the
-            software that severely impacts the Customer’s use of the software
-            for production purposes, such as the loss of production data or
-            where production systems are not functioning and no work-around
-            exists. ClickHouse will respond to Severity Level 1 issues within
-            one hour during Normal Business Hours, and use continuous efforts
-            during applicable Normal Business Hours to provide a resolution for
-            any Level 1 issues as soon as is commercially reasonable.
+          A Severity Level 1 issue is a critical production error within the Software or ClickHouse Cloud that severely impacts the Customer's use of the Software or ClickHouse Cloud for production purposes, such as the loss of production data or where production systems are not functioning and no work-around exists. ClickHouse will respond to Severity Level 1 issues within one hour during Normal Business Hours, and implement continuous follow-the-sun case management during applicable Normal Business Hours to provide a workaround or resolution for any Level 1 issues as soon as is commercially reasonable.
           </div>
           <div className='p-6 pb-0 md:border-b md:border-b-neutral-700 md:pb-6'>
-            <span className='text-xl font-bold'>Severity 2</span>
+            <span className='text-xl font-bold'>Severity 2 ("Sev-2")</span>
             <br />{' '}
             <span className='font-inconsolata text-base text-primary-300'>
               Major business impact
             </span>
           </div>
           <div className='col-span-3 border-b border-b-neutral-700 p-6  text-neutral-200'>
-            A Severity Level 2 issue is an error within the software where the
-            customer’s system is functioning for production purposes but in a
-            reduced capacity, such as a problem that is causing significant
-            impact to portions of the customer’s business operations and
-            productivity, or where the software is exposed to potential loss or
-            interruption of service. ClickHouse will respond to Severity Level 2
-            issues within four hours during Normal Business Hours, and use
-            continuous efforts during the Normal Business Hours to provide a
-            resolution for any Severity Level 2 issues.
+          A Severity Level 2 issue is an error within the Software or ClickHouse Cloud where the Customer's system is functioning for production purposes but in a reduced capacity, such as a problem that is causing significant impact to portions of the Customer's business operations and productivity, or where the system is exposed to potential loss or interruption of service. ClickHouse will respond to Severity Level 2 issues within four hours during Normal Business Hours, and use reasonable efforts to provide a workaround or resolution for any Severity Level 2 issues.
           </div>
-          <div className='p-6 pb-0 md:border-b md:border-b-neutral-700 md:pb-6'>
-            <span className='text-xl font-bold'>Severity 3</span>
+          <div className='p-6 pb-0 md:pb-6'>
+            <span className='text-xl font-bold'>Severity 3 ("Sev-3")</span>
             <br />{' '}
             <span className='font-inconsolata text-base text-primary-300'>
               Minor business impact or general questions
             </span>
           </div>
           <div className='col-span-3 p-6  text-neutral-200'>
-            A Severity Level 3 issue is a medium-to-low impact error that
-            involves partial and/or non-critical loss of functionality for
-            production purposes or development purposes, such as a problem that
-            impairs some operations but allows the customer’s operations to
-            continue to function. Errors for which there is limited or no loss
-            or functionality or impact to the customer’s operation and for which
-            there is an easy work-around qualify as Severity Level 3. General
-            questions are also Severity Level 3 issues. ClickHouse will respond
-            to Severity Level 3 issues within one Business Day during Normal
-            Business Hours, and use reasonable efforts to provide a resolution
-            for any Severity Level 3 issues in time for an upcoming release of
-            the software. All inbound production email cases shall have an
-            initial status of Severity Level 3.
+          A Severity Level 3 issue is a medium-to-low impact error that involves partial and/or non-critical loss of functionality for production purposes or development purposes, such as a problem that impairs some operations but allows the Customer's operations to continue to function. Errors for which there is limited or no loss or functionality or impact to the Customer's operation and for which there is an easy workaround qualify as Severity Level 3. General questions are also Severity Level 3 issues. ClickHouse will respond to Severity Level 3 issues within one Business Day during Normal Business Hours, and use reasonable efforts to provide a resolution for any Severity Level 3 issues in a subsequent release of the Software or ClickHouse Cloud, as applicable. All inbound production email cases shall have an initial status of Severity Level 3.
           </div>
         </div>
       </div>
       <HRSeparator className='my-30' />
-      <div className='section-container container mx-auto flex flex-col items-center '>
+      <div className='section-container container mx-auto flex flex-col items-center'>
         <h2
           className='mb-4 text-center text-4xl font-semibold
           '>
-          Service level agreements (“SLA”)
+          Service level agreements ("SLA")
         </h2>
-        <p className='mb-20 text-center text-base text-neutral-200'>
+        <p className='mb-12 text-center text-base text-neutral-200'>
           Classification of severity levels for issues reported and response
-          times
+          times.
         </p>
-        <div className='mx-auto w-full max-w-5xl items-center justify-evenly text-center md:flex md:space-x-20'>
-          <div className='mb-10 rounded-lg border border-neutral-700 bg-neutral-900/50 p-6 md:mb-0 md:w-1/3'>
-            <p className='mb-2 font-inconsolata text-primary-300'>Urgent</p>
-            <p className='mb-16 text-2xl font-semibold'>Severity 1</p>
-            <p className='mb-2 text-base font-bold'>1 hour SLA</p>
-            <p className='text-base font-light text-neutral-200'>
-              24 h / 7 days / 365 days / year
-            </p>
+        <div className='overflow-x-auto grid max-w-5xl grid-cols-1 mx-auto w-full horiz rounded-lg border border-neutral-700 bg-neutral-800 border-b-neutral-700 text-neutral-200'>
+        <table className='relative z-20 mx-auto text-neutral-200 w-full'>
+              <thead>
+                <tr>
+                  <th className='border-r border-neutral-700 p-0'>
+                    <p className='p-3 text-neutral-100 border-b border-neutral-700'>Severity Level</p>
+                  </th>
+                  <th className='border-r border-neutral-700 hover:bg-neutral-750 p-0 border-b'>
+                    <p className='p-3 text-neutral-100'>Trial</p>
+                  </th>
+                  <th className='border-r border-neutral-700 hover:bg-neutral-750 p-0 border-b'>
+                    <p className='p-3 text-neutral-100'>Basic</p>
+                  </th>
+                  <th className='border-r border-neutral-700 hover:bg-neutral-750 p-0 border-b'>
+                    <p className='p-3 text-neutral-100'>Scale</p>
+                  </th>
+                  <th className='border-neutral-700 p-0 border-b'>
+                    <p className='p-3 text-neutral-100'>Enterprise</p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className='w-full text-center'>
+                  <td className='border-r border-neutral-700 p-0'>
+                    <p className='p-3 text-neutral-100 font-semibold'>Severity 1</p>
+                  </td>
+                  <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
+                    <p className='p-3'>Not available</p>
+                  </td>
+                  <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
+                    <p className='p-3 0'>Not available</p>
+                  </td>
+                  <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
+                    <p className='p-3 '>1 hour 24x7</p>
+                  </td>
+                  <td className=' border-neutral-700 hover:bg-neutral-750 p-0'>
+                    <p className='p-3 '>30 minute 24x7</p>
+                  </td>
+                </tr>
+
+                <tr className='text-center'>
+                  <td className='border-r border-neutral-700 p-0'>
+                    <p className='p-3 text-neutral-100 font-semibold'>Severity 2</p>
+                  </td>
+                  <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
+                    <p className='p-3 '>Not available</p>
+                  </td>
+                  <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
+                    <p className='p-3 '>Not available</p>
+                  </td>
+                  <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
+                    <p className='p-3 '>4 business hours</p>
+                  </td>
+                  <td className=' border-neutral-700 hover:bg-neutral-750 p-0'>
+                    <p className='p-3 '>2 business hours</p>
+                  </td>
+                </tr>
+
+                <tr className='text-center'>
+                  <td className='border-r border-neutral-700 p-0'>
+                    <p className='p-3 text-neutral-100 font-semibold'>Severity 3</p>
+                  </td>
+                  <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
+                    <p className='p-3 '>1 business day</p>
+                  </td>
+                  <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
+                    <p className='p-3 '>1 business day</p>
+                  </td>
+                  <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
+                    <p className='p-3 '>1 business day</p>
+                  </td>
+                  <td className='border-neutral-700 hover:bg-neutral-750 p-0'>
+                    <p className='p-3 '>1 business day</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div className='mb-10 rounded-lg border border-neutral-700 bg-neutral-900/50 p-6 md:mb-0 md:w-1/3'>
-            <p className='mb-2 font-inconsolata text-primary-300'>
-              High priority
-            </p>
-            <p className='mb-16 text-2xl font-semibold'>Severity 2</p>
-            <p className='mb-2 text-base font-bold'>4 hour SLA</p>
-            <p className='text-base font-light text-neutral-200'>
-              Business hours only
-            </p>
-          </div>
-          <div className='mb-10 rounded-lg border border-neutral-700 bg-neutral-900/50 p-6 md:mb-0 md:w-1/3'>
-            <p className='mb-2 font-inconsolata text-primary-300'>
-              Normal priority
-            </p>
-            <p className='mb-16 text-2xl font-semibold'>Severity 3</p>
-            <p className='mb-2 text-base font-bold'> 1 business day SLA</p>
-            <p className='text-base font-light text-neutral-200'>
-              Business hours only
-            </p>
-          </div>
-        </div>
+          <SuiText size='sm' color='muted' className='mt-6 text-center flex justify-end'>
+            (*) Business hours are Monday 00:00 UTC to Saturday 00:00 UTC
+            </SuiText>
       </div>
+
       <HRSeparator className='my-30' />
       <div className='section-container bg-shadow-element yellow-shadow align-shadow-right container mx-auto mb-30 flex  flex-col items-center'>
         <h2
@@ -367,41 +388,10 @@ export default function SupportProgram(props: any) {
             <div className='w-full rounded-lg border border-neutral-700 bg-neutral-900/50 p-6'>
               <div className='grid items-center md:grid-cols-4'>
                 <div className='md:col-span-1'>
-                  <div className='text-xl font-bold'>Level 1 / L1 </div>
+                  <div className='text-xl font-bold'>Level 5 / L5</div>
                 </div>
                 <div className='text-base text-neutral-200 md:col-span-3'>
-                  ClickHouse front-line team identifying and/or routing new
-                  cases, inquiries, or questions
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='mx-auto text-center'>
-            <ArrowsDown />
-          </div>
-          <div>
-            <div className='w-full rounded-lg border border-neutral-700 bg-neutral-900/50 p-6'>
-              <div className='grid items-center md:grid-cols-4'>
-                <div className='md:col-span-1'>
-                  <div className='text-xl font-bold'>Level 2 / L2</div>
-                </div>
-                <div className='text-base text-neutral-200 md:col-span-3'>
-                  ClickHouse Support Services team first touch
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='mx-auto text-center'>
-            <ArrowsDown />
-          </div>
-          <div>
-            <div className='w-full rounded-lg border border-neutral-700 bg-neutral-900/50 p-6'>
-              <div className='grid items-center md:grid-cols-4'>
-                <div className='md:col-span-1'>
-                  <div className='text-xl font-bold'>Level 3 / L3</div>
-                </div>
-                <div className='text-base text-neutral-200 md:col-span-3'>
-                  ClickHouse Support Services escalation status
+                  Escalation to ClickHouse Executive Leadership
                 </div>
               </div>
             </div>
@@ -428,10 +418,41 @@ export default function SupportProgram(props: any) {
             <div className='w-full rounded-lg border border-neutral-700 bg-neutral-900/50 p-6'>
               <div className='grid items-center md:grid-cols-4'>
                 <div className='md:col-span-1'>
-                  <div className='text-xl font-bold'>Level 5 / L5</div>
+                  <div className='text-xl font-bold'>Level 3 / L3</div>
                 </div>
                 <div className='text-base text-neutral-200 md:col-span-3'>
-                  Escalation to ClickHouse Executive Leadership
+                  ClickHouse Support Services escalation status
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='mx-auto text-center'>
+            <ArrowsDown />
+          </div>
+          <div>
+            <div className='w-full rounded-lg border border-neutral-700 bg-neutral-900/50 p-6'>
+              <div className='grid items-center md:grid-cols-4'>
+                <div className='md:col-span-1'>
+                  <div className='text-xl font-bold'>Level 2 / L2</div>
+                </div>
+                <div className='text-base text-neutral-200 md:col-span-3'>
+                  ClickHouse Support Services team first touch
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='mx-auto text-center'>
+            <ArrowsDown />
+          </div>
+          <div>
+            <div className='w-full rounded-lg border border-neutral-700 bg-neutral-900/50 p-6'>
+              <div className='grid items-center md:grid-cols-4'>
+                <div className='md:col-span-1'>
+                  <div className='text-xl font-bold'>Level 1 / L1 </div>
+                </div>
+                <div className='text-base text-neutral-200 md:col-span-3'>
+                  ClickHouse first-line team answering or routing new
+                  cases, inquiries, or questions
                 </div>
               </div>
             </div>
