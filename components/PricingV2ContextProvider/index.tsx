@@ -89,7 +89,7 @@ export interface Context {
   setReplicas: (value: ContextReplicas) => void
 
   storageUnit: ContextStorageUnit
-  setStorageUnit: Dispatch<SetStateAction<ContextStorageUnit>>
+  setStorageUnit: (value: ContextStorageUnit) => void
   storageSize: ContextStorageSize
   setStorageSize: (value: ContextStorageSize) => void
   storageCompressed: ContextStorageCompressed
@@ -431,246 +431,260 @@ export default function PricingV2ContextProvider({
   // Value validators
   // -----------------------------------
 
-  const validatePlan = useCallback(
-    (value: ContextPlan) => {
-      if (!value || !plans.find((item) => item.slug === value)) {
-        value =
-          plans.find((item) => item.featured)?.slug || plans.at(0)?.slug || null
+  const validateAndSetValues = useCallback(
+    (newValues: Partial<Values>) => {
+      let newPlanEntry = planEntry
+      let newProviderEntry = providerEntry
+
+      let {
+        plan: newPlan,
+        provider: newProvider,
+        region: newRegion,
+        hours: newHours,
+        computeMinSize: newComputeMinSize,
+        computeMaxSize: newComputeMaxSize,
+        replicas: newReplicas,
+        storageUnit: newStorageUnit,
+        storageSize: newStorageSize,
+        storageCompressed: newStorageCompressed
+      } = newValues
+
+      // Validate plan
+      if (newPlan !== undefined) {
+        newPlanEntry = plans.find((item) => item.slug === newPlan)
+        if (!newPlan || !newPlanEntry) {
+          newPlanEntry =
+            plans.find((item) => item.featured) || plans.at(0) || undefined
+          newPlan = newPlanEntry?.slug || null
+        }
+
+        // Force new compute values when the provider changes
+        if (newPlan !== plan) {
+          newComputeMinSize = null
+          newComputeMaxSize = null
+          newReplicas = null
+        }
       }
 
-      if (value !== plan) {
-        setPlan(value)
+      // Validate provider
+      if (newProvider !== undefined) {
+        newProviderEntry = providers.find((item) => item.slug === newProvider)
+        if (!newProvider || !newProviderEntry) {
+          newProviderEntry = providers.at(0)
+          newProvider = newProviderEntry?.slug || null
+        }
+
+        // Force new region when the provider changes
+        if (newProvider !== provider) {
+          newRegion = null
+        }
       }
-    },
-    [setPlan, plan, plans]
-  )
 
-  const validateProvider = useCallback(
-    (value: ContextProvider) => {
-      let providerEntry = providers.find((item) => item.slug === value)
-      if (!value || !providers.find((item) => item.slug === value)) {
-        providerEntry = providers.at(0)
-        value = providerEntry?.slug || null
+      // Validate region
+      if (newRegion !== undefined) {
+        if (!newProviderEntry) {
+          newRegion = null
+        } else if (
+          !newRegion ||
+          (newProviderEntry &&
+            !newProviderEntry.regions.find((item) => item.key === newRegion))
+        ) {
+          newRegion = newProviderEntry.regions.at(0)?.key || null
+        }
       }
 
-      if (value !== provider) {
-        setProvider(value)
+      // Validate hours
+      if (newHours !== undefined) {
+        // Set hours default value
+        if (newHours === null) newHours = 8
 
-        // Set default provider region
-        const providerDefaultRegion = providerEntry?.regions.at(0)
-        if (providerDefaultRegion) setRegion(providerDefaultRegion.key)
+        // Constrain hours to 0-24
+        newHours = Math.min(24, Math.max(0, newHours))
       }
-    },
-    [setProvider, provider, providers, setRegion]
-  )
 
-  const validateRegion = useCallback(
-    (value: ContextRegion) => {
-      if (!providerEntry) {
-        value = null
-      } else if (
-        !value ||
-        !providerEntry.regions.find((item) => item.key === value)
+      // Validate compute
+      if (
+        newComputeMinSize !== undefined ||
+        newComputeMaxSize !== undefined ||
+        newReplicas !== undefined
       ) {
-        value = providerEntry.regions.at(0)?.key || null
-      }
+        const firstComputePackage = () => {
+          if (newPlanEntry) {
+            newComputeMinSize =
+              newPlanEntry.packages.at(0)?.minimumCompute?.size || null
+            newComputeMaxSize =
+              newPlanEntry.packages.at(0)?.maximumCompute?.size || null
+            newReplicas = newPlanEntry.packages.at(0)?.replicas || null
+          }
+        }
 
-      if (value !== region) {
-        setRegion(value)
-      }
-    },
-    [setRegion, region, providerEntry]
-  )
+        // Undefined to null
+        if (newComputeMinSize === undefined) newComputeMinSize = null
+        if (newComputeMaxSize === undefined) newComputeMaxSize = null
+        if (newReplicas === undefined) newReplicas = null
 
-  const validateHours = useCallback(
-    (value: ContextHours) => {
-      // Set hours default value
-      if (value === null) value = 8
+        // If all values are null, use the first package
+        if (
+          newComputeMinSize === null &&
+          newComputeMaxSize === null &&
+          newReplicas === null
+        ) {
+          firstComputePackage()
+        }
 
-      // Constrain hours to 0-24
-      value = Math.min(24, Math.max(0, value))
+        // If one or the other min/max values are null
+        if (newComputeMinSize !== null && newComputeMaxSize === null)
+          newComputeMaxSize = newComputeMinSize
+        if (newComputeMinSize === null && newComputeMaxSize !== null)
+          newComputeMinSize = newComputeMaxSize
 
-      if (value !== hours) {
-        setHours(value)
-      }
-    },
-    [setHours, hours]
-  )
+        // Get default values
+        if (newComputeMinSize === null || newComputeMaxSize === null) {
+          const sizes = computes.map((compute) => compute.size)
+          if (newComputeMinSize === null) newComputeMinSize = sizes[0]
+          if (newComputeMaxSize === null)
+            newComputeMaxSize = sizes[sizes.length - 1]
+        }
 
-  const validateCompute = useCallback(
-    (
-      minValue: ContextComputeMinSize,
-      maxValue: ContextComputeMaxSize,
-      replicasValue: ContextReplicas
-    ) => {
-      const firstPackage = () => {
-        if (planEntry) {
-          minValue = planEntry.packages.at(0)?.minimumCompute?.size || null
-          maxValue = planEntry.packages.at(0)?.maximumCompute?.size || null
-          replicasValue = planEntry.packages.at(0)?.replicas || null
+        // If min value has changed, ensure max value is always greater than or equal to
+        if (
+          newComputeMinSize !== computeMinSize &&
+          newComputeMinSize > newComputeMaxSize
+        ) {
+          newComputeMaxSize = newComputeMinSize
+        }
+
+        // If max value has changed, ensure min value is always less than or equal to
+        else if (
+          newComputeMaxSize !== computeMaxSize &&
+          newComputeMinSize > newComputeMaxSize
+        ) {
+          newComputeMinSize = newComputeMaxSize
+        }
+
+        // Sanity check if neither value has changed
+        else if (newComputeMinSize > newComputeMaxSize) {
+          newComputeMaxSize = newComputeMinSize
+        }
+
+        // Set replicas default value
+        if (newReplicas === null) newReplicas = 1
+
+        // Constrain replicas to 1-25
+        newReplicas = Math.min(25, Math.max(1, newReplicas))
+
+        // Ensure values match a package for non-customizable plans
+        if (planEntry && !planEntry.customizable) {
+          const packageExists = planEntry.packages.find((item) => {
+            return (
+              item.minimumCompute?.size === newComputeMinSize &&
+              item.maximumCompute?.size === newComputeMaxSize &&
+              item.replicas === newReplicas
+            )
+          })
+
+          // If not a valid package, set values to the first available package
+          if (!packageExists) {
+            firstComputePackage()
+          }
         }
       }
 
-      // If all values are null, use the first package
-      if (minValue === null && maxValue === null && replicasValue === null) {
-        firstPackage()
+      // Validate storage size
+      if (newStorageSize !== undefined) {
+        // Set 500 as the default value
+        if (newStorageSize === null) newStorageSize = 500
+
+        // Constrain value to 0-9999
+        newStorageSize = Math.max(Math.min(newStorageSize, 9999), 0)
       }
 
-      // If one or the other min/max values are null
-      if (minValue !== null && maxValue === null) maxValue = minValue
-      if (minValue === null && maxValue !== null) minValue = maxValue
-
-      // Get default values
-      if (minValue === null || maxValue === null) {
-        const sizes = computes.map((compute) => compute.size)
-        if (minValue === null) minValue = sizes[0]
-        if (maxValue === null) maxValue = sizes[sizes.length - 1]
-      }
-
-      // If min value has changed, ensure max value is always greater than or equal to
-      if (minValue !== computeMinSize && minValue > maxValue) {
-        maxValue = minValue
-      }
-
-      // If max value has changed, ensure min value is always less than or equal to
-      else if (maxValue !== computeMaxSize && minValue > maxValue) {
-        minValue = maxValue
-      }
-
-      // Sanity check if neither value has changed
-      else if (minValue > maxValue) {
-        maxValue = minValue
-      }
-
-      // Set replicas default value
-      if (replicasValue === null) replicasValue = 1
-
-      // Constrain replicas to 1-25
-      replicasValue = Math.min(25, Math.max(1, replicasValue))
-
-      // Ensure values match a package for non-customizable plans
-      if (planEntry && !planEntry.customizable) {
-        const packageExists = planEntry.packages.find((item) => {
-          return (
-            item.minimumCompute?.size === minValue &&
-            item.maximumCompute?.size === maxValue &&
-            item.replicas === replicasValue
-          )
-        })
-
-        // If not a valid package, set values to the first available package
-        if (!packageExists) {
-          firstPackage()
+      // Validate storage unit
+      if (newStorageUnit !== undefined) {
+        if (!newStorageUnit || !['gb', 'pb', 'tb'].includes(newStorageUnit)) {
+          newStorageUnit = 'gb'
         }
       }
 
-      if (minValue !== computeMinSize) {
-        setComputeMinSize(minValue)
+      // Validate storage compressed
+      if (newStorageCompressed !== undefined) {
+        newStorageCompressed = !!newStorageCompressed
       }
-      if (maxValue !== computeMaxSize) {
-        setComputeMaxSize(maxValue)
+
+      if (newPlan !== undefined && newPlan !== plan) {
+        setPlan(newPlan)
       }
-      if (replicasValue !== replicas) {
-        setReplicas(replicasValue)
+
+      if (newProvider !== undefined && newProvider !== provider) {
+        setProvider(newProvider)
+      }
+
+      if (newRegion !== undefined && newRegion !== region) {
+        setRegion(newRegion)
+      }
+
+      if (newHours !== undefined && newHours !== hours) {
+        setHours(newHours)
+      }
+
+      if (
+        newComputeMinSize !== undefined &&
+        newComputeMinSize !== computeMinSize
+      ) {
+        setComputeMinSize(newComputeMinSize)
+      }
+
+      if (
+        newComputeMaxSize !== undefined &&
+        newComputeMaxSize !== computeMaxSize
+      ) {
+        setComputeMaxSize(newComputeMaxSize)
+      }
+
+      if (newReplicas !== undefined && newReplicas !== replicas) {
+        setReplicas(newReplicas)
+      }
+
+      if (newStorageUnit !== undefined && newStorageUnit !== storageUnit) {
+        setStorageUnit(newStorageUnit)
+      }
+
+      if (newStorageSize !== undefined && newStorageSize !== storageSize) {
+        setStorageSize(newStorageSize)
+      }
+
+      if (
+        newStorageCompressed !== undefined &&
+        newStorageCompressed !== storageCompressed
+      ) {
+        setStorageCompressed(newStorageCompressed)
       }
     },
     [
-      setComputeMinSize,
-      setComputeMaxSize,
-      setReplicas,
-      computes,
       planEntry,
+      providerEntry,
+
+      plans,
+      providers,
+      plan,
+      provider,
+      region,
+      hours,
       computeMinSize,
       computeMaxSize,
-      replicas
+      replicas,
+      storageUnit,
+      storageSize,
+      storageCompressed
     ]
   )
-
-  const validateComputeMinSize = useCallback(
-    (value: ContextComputeMinSize) => {
-      validateCompute(value, computeMaxSize, replicas)
-    },
-    [validateCompute, computeMaxSize, replicas]
-  )
-
-  const validateComputeMaxSize = useCallback(
-    (value: ContextComputeMaxSize) => {
-      validateCompute(computeMinSize, value, replicas)
-    },
-    [validateCompute, computeMinSize, replicas]
-  )
-
-  const validateReplicas = useCallback(
-    (value: ContextReplicas) => {
-      validateCompute(computeMinSize, computeMaxSize, value)
-    },
-    [validateCompute, computeMinSize, computeMaxSize]
-  )
-
-  const validateStorageSize = useCallback(
-    (value: ContextStorageSize) => {
-      // Set 500 as the default value
-      if (value === null) value = 500
-
-      // Constrain value to 0-9999
-      value = Math.max(Math.min(value, 9999), 0)
-
-      if (value !== storageSize) {
-        setStorageSize(value)
-      }
-    },
-    [setStorageSize, storageSize]
-  )
-
-  const validateStorageUnit = useCallback(
-    (value: ContextStorageUnit) => {
-      if (!value || !['gb', 'pb', 'tb'].includes(value)) {
-        value = 'gb'
-      }
-
-      if (value !== storageUnit) {
-        setStorageUnit(value)
-      }
-    },
-    [setStorageUnit, storageUnit]
-  )
-
-  const validateStorageCompressed = useCallback(
-    (value: ContextStorageCompressed) => {
-      value = !!value
-      if (value !== storageCompressed) {
-        setStorageCompressed(value)
-      }
-    },
-    [setStorageCompressed, storageCompressed]
-  )
-
-  // -----------------------------------
-  // Value dependant states
-  // -----------------------------------
-
-  // Set default compute values when plan has changed
-  useEffect(() => {
-    if (plan) validateCompute(null, null, null)
-  }, [plan])
 
   // -----------------------------------
   // On mount
   // -----------------------------------
 
   useEffect(() => {
-    validatePlan(startingValues?.plan ?? null)
-    validateProvider(startingValues?.provider ?? null)
-    validateRegion(startingValues?.region ?? null)
-    validateHours(startingValues?.hours ?? null)
-    validateCompute(
-      startingValues?.computeMinSize ?? null,
-      startingValues?.computeMaxSize ?? null,
-      startingValues?.replicas ?? null
-    )
-    validateStorageSize(startingValues?.storageSize ?? null)
-    validateStorageUnit(startingValues?.storageUnit ?? null)
-    validateStorageCompressed(startingValues?.storageCompressed ?? null)
+    if (startingValues) validateAndSetValues(startingValues)
   }, [])
 
   return (
@@ -690,28 +704,32 @@ export default function PricingV2ContextProvider({
 
         // User values
         plan,
-        setPlan: validatePlan,
+        setPlan: (plan) => validateAndSetValues({ plan }),
         provider,
-        setProvider: validateProvider,
+        setProvider: (provider) => validateAndSetValues({ provider }),
         region,
-        setRegion: validateRegion,
+        setRegion: (region) => validateAndSetValues({ region }),
         hours,
-        setHours: validateHours,
+        setHours: (hours) => validateAndSetValues({ hours }),
 
-        setCompute: validateCompute,
+        setCompute: (computeMinSize, computeMaxSize, replicas) =>
+          validateAndSetValues({ computeMinSize, computeMaxSize, replicas }),
         computeMinSize,
-        setComputeMinSize: validateComputeMinSize,
+        setComputeMinSize: (computeMinSize) =>
+          validateAndSetValues({ computeMinSize }),
         computeMaxSize,
-        setComputeMaxSize: validateComputeMaxSize,
+        setComputeMaxSize: (computeMaxSize) =>
+          validateAndSetValues({ computeMaxSize }),
         replicas,
-        setReplicas: validateReplicas,
+        setReplicas: (replicas) => validateAndSetValues({ replicas }),
 
         storageUnit,
-        setStorageUnit,
+        setStorageUnit: (storageUnit) => validateAndSetValues({ storageUnit }),
         storageSize,
-        setStorageSize: validateStorageSize,
+        setStorageSize: (storageSize) => validateAndSetValues({ storageSize }),
         storageCompressed,
-        setStorageCompressed: validateStorageCompressed,
+        setStorageCompressed: (storageCompressed) =>
+          validateAndSetValues({ storageCompressed }),
 
         // Computed values
         planEntry,
