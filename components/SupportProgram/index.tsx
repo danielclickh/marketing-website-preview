@@ -56,10 +56,7 @@ export default function SupportProgram(props: any) {
             </CUICard>
           </Link>
 
-          <Link
-            href='mailto:support@clickhouse.com'
-            target='_blank'
-            className='hover:no-underline'>
+         
             <CUICard className='group flex w-full bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
               <CUICard.Body className='flex flex-col items-center justify-center'>
                 <Image
@@ -81,7 +78,7 @@ export default function SupportProgram(props: any) {
                 </div>
               </CUICard.Body>
             </CUICard>
-          </Link>
+          
         </div>
         <div>
           <svg
