@@ -480,7 +480,7 @@ export default function PricingV2ContextProvider({
       maxValue: ContextComputeMaxSize,
       replicasValue: ContextReplicas
     ) => {
-      const useFirstPackage = () => {
+      const firstPackage = () => {
         if (planEntry) {
           minValue = planEntry.packages.at(0)?.minimumCompute?.size || null
           maxValue = planEntry.packages.at(0)?.maximumCompute?.size || null
@@ -490,7 +490,7 @@ export default function PricingV2ContextProvider({
 
       // If all values are null, use the first package
       if (minValue === null && maxValue === null && replicasValue === null) {
-        useFirstPackage()
+        firstPackage()
       }
 
       // If one or the other min/max values are null
@@ -537,7 +537,7 @@ export default function PricingV2ContextProvider({
 
         // If not a valid package, set values to the first available package
         if (!packageExists) {
-          useFirstPackage()
+          firstPackage()
         }
       }
 
