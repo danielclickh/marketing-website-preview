@@ -10,12 +10,8 @@ import { CUIButton, CUICard } from '../../../ClickUI'
 import HRSeparator from '../../../HRSeparator'
 import { MarkdownMemoized } from '../../../Markdown'
 import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
-import {
-  PricingFileItem,
-  usePricingV2Context
-} from '../../../PricingV2ContextProvider'
+import { Context, usePricingV2Context } from '../../../PricingV2ContextProvider'
 import { SuiTitle } from '../../../sui'
-import { aggregationIds } from '../../config'
 import PriceUsd from '../../ui/PriceUsd'
 import ProviderSelector from '../ProviderSelector'
 import RegionSelector from '../RegionSelector'
@@ -63,23 +59,15 @@ const PerkItem = memo(function PerkItem({
 
 const TableColumn = memo(function TableColumn({
   item,
-  providerRegionPricingData,
+  computeUnitPrice,
+  storageUnitPrice,
   onEstimateCostClick
 }: {
   item: PricingV2EntryPlan
-  providerRegionPricingData: undefined | PricingFileItem
+  computeUnitPrice: Context['computeUnitPrice']
+  storageUnitPrice: Context['storageUnitPrice']
   onEstimateCostClick: () => void
 }) {
-  const computeUnitPrice =
-    providerRegionPricingData
-      ?.find((result) => result.aggregationId === aggregationIds.compute)
-      ?.pricingBands.at(0)?.unitPrice || null
-
-  const storageUnitPrice =
-    providerRegionPricingData
-      ?.find((result) => result.aggregationId === aggregationIds.storage)
-      ?.pricingBands.at(0)?.unitPrice || null
-
   return (
     <div className='flex-1 basis-0 p-4'>
       <CUICard
@@ -175,21 +163,51 @@ export default function Table({
   beforeFilters?: React.ReactNode
   afterFilters?: React.ReactNode
 }) {
-  const { plans, setPlan, provider, region, getPlanPricingData } =
-    usePricingV2Context()
+  const {
+    plans,
+    setPlan,
+    provider,
+    region,
+    getPlanPricingData,
+    getPlanPricingConfig
+  } = usePricingV2Context()
 
-  const pricingData = useCallback(
+  const getPricingData = useCallback(
     (planSlug: string) => {
       if (!planSlug || !provider || !region) return undefined
 
-      return getPlanPricingData(planSlug)?.filter((result) => {
+      const pricingConfig = getPlanPricingConfig(planSlug)
+
+      const computeAggregationIds = pricingConfig?.aggregationIds?.compute || []
+      const storageAggregationIds = pricingConfig?.aggregationIds?.storage || []
+
+      const pricingData = getPlanPricingData(planSlug)?.filter((result) => {
         return (
           result.cloudProvider?.toLowerCase() === provider &&
           result.region?.toLowerCase() === region
         )
       })
+
+      const computeUnitPrice =
+        pricingData
+          ?.find((result) =>
+            computeAggregationIds.includes(result.aggregationId)
+          )
+          ?.pricingBands.at(0)?.unitPrice || null
+
+      const storageUnitPrice =
+        pricingData
+          ?.find((result) =>
+            storageAggregationIds.includes(result.aggregationId)
+          )
+          ?.pricingBands.at(0)?.unitPrice || null
+
+      return {
+        computeUnitPrice,
+        storageUnitPrice
+      }
     },
-    [getPlanPricingData, provider, region]
+    [getPlanPricingData, getPlanPricingConfig, provider, region]
   )
 
   return (
@@ -202,11 +220,13 @@ export default function Table({
       </div>
       <div className='flex flex-col lg:flex-row'>
         {plans.map((item, index) => {
+          const planPricingData = getPricingData(item.slug)
           return (
             <Fragment key={index}>
               <TableColumn
                 item={item}
-                providerRegionPricingData={pricingData(item.slug)}
+                computeUnitPrice={planPricingData?.computeUnitPrice || null}
+                storageUnitPrice={planPricingData?.storageUnitPrice || null}
                 onEstimateCostClick={() => {
                   setPlan(item.slug)
                 }}

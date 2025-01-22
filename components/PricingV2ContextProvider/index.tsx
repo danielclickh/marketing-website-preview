@@ -14,7 +14,7 @@ import {
   PricingV2EntryProvider
 } from '../../lib/api/strapi/types'
 import pricingFile from '../../public/pricingV2File.json'
-import { aggregationIds } from '../PricingV2/config'
+import config, { PlanConfig } from '../PricingV2/config'
 
 const AVG_DAYS_PER_MONTH = 30.41
 
@@ -56,6 +56,7 @@ export type ContextTotalPriceRange = [number] | [number, number]
 export interface Context {
   // Helper functions
   getPlanPricingData: (value: string) => undefined | PricingFileItem
+  getPlanPricingConfig: (value: string) => undefined | PlanConfig
 
   // Data sources
   plans: Array<PricingV2EntryPlan>
@@ -126,6 +127,7 @@ export type Values = Pick<
 const PricingV2Context = createContext<Context>({
   // Helper functions
   getPlanPricingData: () => undefined,
+  getPlanPricingConfig: () => undefined,
 
   // Data sources
   plans: [],
@@ -233,11 +235,16 @@ export default function PricingV2ContextProvider({
     )
 
   // -----------------------------------
-  // Computed values
+  // Helper functions
   // -----------------------------------
 
-  const getPlanPricingData = (planKey: string) =>
-    (pricingFile as PricingFile)[planKey]
+  const getPlanPricingData = (planKey: string) => {
+    return (pricingFile as PricingFile)[planKey]
+  }
+
+  const getPlanPricingConfig = (planKey: string) => {
+    return config.plans[planKey]
+  }
 
   // -----------------------------------
   // Computed values
@@ -269,27 +276,29 @@ export default function PricingV2ContextProvider({
 
   // Get the compute unit price from pricing file
   const computeUnitPrice: ContextComputeUnitPrice = useMemo(() => {
-    if (pricingData) {
-      return (
-        pricingData
-          .find((result) => result.aggregationId === aggregationIds.compute)
-          ?.pricingBands.at(0)?.unitPrice || null
-      )
-    }
-    return null
-  }, [pricingData])
+    if (!pricingData || !plan || !(plan in config.plans)) return null
+
+    const aggregationIds = getPlanPricingConfig(plan).aggregationIds.compute
+
+    return (
+      pricingData
+        .find((result) => aggregationIds.includes(result.aggregationId))
+        ?.pricingBands.at(0)?.unitPrice || null
+    )
+  }, [pricingData, plan])
 
   // Get the storage unit price from pricing file
   const storageUnitPrice: ContextStorageUnitPrice = useMemo(() => {
-    if (pricingData) {
-      return (
-        pricingData
-          .find((result) => result.aggregationId === aggregationIds.storage)
-          ?.pricingBands.at(0)?.unitPrice || null
-      )
-    }
-    return null
-  }, [pricingData])
+    if (!pricingData || !plan || !(plan in config.plans)) return null
+
+    const aggregationIds = getPlanPricingConfig(plan).aggregationIds.storage
+
+    return (
+      pricingData
+        .find((result) => aggregationIds.includes(result.aggregationId))
+        ?.pricingBands.at(0)?.unitPrice || null
+    )
+  }, [pricingData, plan])
 
   // Calculate the minimum compute price
   const computeMinPrice: ContextComputeMinPrice = useMemo(() => {
@@ -647,6 +656,7 @@ export default function PricingV2ContextProvider({
       value={{
         // Helper functions
         getPlanPricingData,
+        getPlanPricingConfig,
 
         // Data sources
         plans,

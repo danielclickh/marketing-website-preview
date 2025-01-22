@@ -4,7 +4,7 @@ import {
   acceptableRegions,
   config
 } from './components/PricingCalculator/CalculatorTypesOptions'
-import { aggregationIds, planIds } from './components/PricingV2/config'
+import pricingV2Config from './components/PricingV2/config'
 import {
   getPricingsByPlan,
   getPricingsByPlanTemplate,
@@ -37,7 +37,8 @@ function cleanPricing(data: Array<Pricing>) {
     description: item?.description,
     instanceTier: item?.segment?.instanceTier,
     region: item?.segment?.region,
-    cloudProvider: item?.segment?.cloudProvider
+    cloudProvider: item?.segment?.cloudProvider,
+    profile: item?.segment?.profile
   }))
 }
 
@@ -78,30 +79,61 @@ async function createPricingV1File() {
 async function createPricingV2File() {
   log('Starting to build pricing V2 file.')
 
-  const basicPromise = getPricingsByPlanTemplate(planIds.basic)
-  const scalePromise = getPricingsByPlanTemplate(planIds.scale)
-  const enterprisePromise = getPricingsByPlanTemplate(planIds.enterprise)
+  const {
+    basic: basicConfig,
+    scale: scaleConfig,
+    enterprise: enterpriseConfig
+  } = pricingV2Config.plans
 
+  // Initiate the api requests
+  const basicPromise = getPricingsByPlanTemplate(basicConfig.planTemplateId)
+  const scalePromise = getPricingsByPlanTemplate(scaleConfig.planTemplateId)
+  const enterprisePromise = getPricingsByPlanTemplate(
+    enterpriseConfig.planTemplateId
+  )
+
+  // Wait for the requests to complete
   let [basic, scale, enterprise] = await Promise.all([
     basicPromise,
     scalePromise,
     enterprisePromise
   ])
 
-  const allowedIds = Object.values(aggregationIds)
+  basic = cleanPricing(basic).filter((result) => {
+    return (
+      result.aggregationId &&
+      [
+        ...basicConfig.aggregationIds.compute,
+        ...basicConfig.aggregationIds.storage
+      ].includes(result.aggregationId)
+    )
+  })
 
-  basic = cleanPricing(basic).filter(
-    (result) =>
-      result.aggregationId && allowedIds.includes(result.aggregationId)
-  )
-  scale = cleanPricing(scale).filter(
-    (result) =>
-      result.aggregationId && allowedIds.includes(result.aggregationId)
-  )
-  enterprise = cleanPricing(enterprise).filter(
-    (result) =>
-      result.aggregationId && allowedIds.includes(result.aggregationId)
-  )
+  scale = cleanPricing(scale).filter((result) => {
+    return (
+      result.aggregationId &&
+      [
+        ...scaleConfig.aggregationIds.compute,
+        ...scaleConfig.aggregationIds.storage
+      ].includes(result.aggregationId)
+    )
+  })
+
+  enterprise = cleanPricing(enterprise).filter((result) => {
+    if (!result.aggregationId) return false
+
+    // Enterprise compute data is filtered by profile
+    if (
+      result.profile === 'v1-default' &&
+      enterpriseConfig.aggregationIds.compute.includes(result.aggregationId)
+    ) {
+      return true
+    }
+
+    return enterpriseConfig.aggregationIds.storage.includes(
+      result.aggregationId
+    )
+  })
 
   generatePricingFile('pricingV2File.json', { basic, scale, enterprise })
 }
