@@ -128,7 +128,7 @@ export default function PriceList() {
           </>
         )}
 
-      {!!replicas && replicas < 2 && (
+      {(!replicas || replicas < 2) && (
         <li className='flex items-center gap-x-2'>
           <XIcon className='h-4 w-4 text-red-200' />
           Not fault tolerant
@@ -136,10 +136,12 @@ export default function PriceList() {
         </li>
       )}
 
-      <li className='flex items-center gap-x-2'>
-        <CheckIcon className='h-4 w-4 text-primary-300' />
-        Includes 3 availability zones
-      </li>
+      {replicas && replicas >= 2 && (
+        <li className='flex items-center gap-x-2'>
+          <CheckIcon className='h-4 w-4 text-primary-300' />
+          Includes {Math.min(replicas, 3)} availability zones
+        </li>
+      )}
 
       <li className='flex items-center gap-x-2'>
         <CheckIcon className='h-4 w-4 text-primary-300' />

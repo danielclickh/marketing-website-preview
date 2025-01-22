@@ -124,10 +124,9 @@ async function createPricingV2File() {
 
     // Enterprise compute data is filtered by profile
     if (
-      result.profile === 'v1-default' &&
       enterpriseConfig.aggregationIds.compute.includes(result.aggregationId)
     ) {
-      return true
+      return result.profile === 'v1-default'
     }
 
     return enterpriseConfig.aggregationIds.storage.includes(
