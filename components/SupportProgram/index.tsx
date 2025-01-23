@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { CUICard, CUILink } from '../ClickUI'
 import HRSeparator from '../HRSeparator'
 import { SuiText, SuiTitle } from '../sui'
-import ArrowsDown from './arrowsDown'
+import ArrowsUp from './arrowsUp'
 
 export default function SupportProgram(props: any) {
   return (
@@ -449,7 +449,7 @@ export default function SupportProgram(props: any) {
             </div>
           </div>
           <div className='mx-auto text-center'>
-            <ArrowsDown />
+            <ArrowsUp />
           </div>
           <div>
             <div className='w-full rounded-lg border border-neutral-700 bg-neutral-900/50 p-6'>
@@ -464,7 +464,7 @@ export default function SupportProgram(props: any) {
             </div>
           </div>
           <div className='mx-auto text-center'>
-            <ArrowsDown />
+            <ArrowsUp />
           </div>
           <div>
             <div className='w-full rounded-lg border border-neutral-700 bg-neutral-900/50 p-6'>
@@ -479,7 +479,7 @@ export default function SupportProgram(props: any) {
             </div>
           </div>
           <div className='mx-auto text-center'>
-            <ArrowsDown />
+            <ArrowsUp />
           </div>
           <div>
             <div className='w-full rounded-lg border border-neutral-700 bg-neutral-900/50 p-6'>
@@ -494,7 +494,7 @@ export default function SupportProgram(props: any) {
             </div>
           </div>
           <div className='mx-auto text-center'>
-            <ArrowsDown />
+            <ArrowsUp />
           </div>
           <div>
             <div className='w-full rounded-lg border border-neutral-700 bg-neutral-900/50 p-6'>
