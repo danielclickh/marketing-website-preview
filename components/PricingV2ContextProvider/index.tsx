@@ -456,8 +456,11 @@ export default function PricingV2ContextProvider({
           newPlan = newPlanEntry?.slug || null
         }
 
-        // Force new compute values when the provider changes
-        if (newPlan !== plan) {
+        // Force new compute values when the plan changes and customizablilty has changed
+        if (
+          newPlan !== plan &&
+          planEntry?.customizable !== newPlanEntry?.customizable
+        ) {
           newComputeMinSize = null
           newComputeMaxSize = null
           newReplicas = null
