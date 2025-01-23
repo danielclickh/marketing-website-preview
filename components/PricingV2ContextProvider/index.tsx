@@ -597,19 +597,53 @@ export default function PricingV2ContextProvider({
         }
       }
 
-      // Validate storage size
-      if (newStorageSize !== undefined) {
+      // Validate storage
+      if (newStorageUnit !== undefined || newStorageSize !== undefined) {
+        // If a value is undefined, use the current value
+        if (newStorageUnit === undefined) newStorageUnit = storageUnit
+        if (newStorageSize === undefined) newStorageSize = storageSize
+
+        if (!newStorageUnit || !['gb', 'pb', 'tb'].includes(newStorageUnit)) {
+          newStorageUnit = 'gb'
+        }
+
         // Set 500 as the default value
         if (newStorageSize === null) newStorageSize = 500
 
         // Constrain value to 0-9999
         newStorageSize = Math.max(Math.min(newStorageSize, 9999), 0)
-      }
 
-      // Validate storage unit
-      if (newStorageUnit !== undefined) {
-        if (!newStorageUnit || !['gb', 'pb', 'tb'].includes(newStorageUnit)) {
-          newStorageUnit = 'gb'
+        // Apply plan storage restriciton
+        if (newPlanEntry?.maxStorageCapacity) {
+          let newStorageSizeInGb = newStorageSize
+
+          // maxStorageCapacity is in gigabytes, convert user values to gb
+          switch (newStorageUnit) {
+            case 'tb':
+              newStorageSizeInGb = newStorageSizeInGb * 1024
+              break
+            case 'pb':
+              newStorageSizeInGb = newStorageSizeInGb * 2048
+              break
+          }
+
+          // If storage size is greater than max, use max value
+          newStorageSizeInGb = Math.min(
+            newStorageSizeInGb,
+            newPlanEntry.maxStorageCapacity
+          )
+
+          // Transform new value for the UI
+          if (newStorageSizeInGb < 9999) {
+            newStorageSize = newStorageSizeInGb
+            newStorageUnit = 'gb'
+          } else if (newStorageSizeInGb > 9999 * 1024) {
+            newStorageSize = newStorageSizeInGb * 2048
+            newStorageUnit = 'pb'
+          } else {
+            newStorageSize = newStorageSizeInGb * 1024
+            newStorageUnit = 'tb'
+          }
         }
       }
 

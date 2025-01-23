@@ -1,61 +1,15 @@
-import { MinusIcon } from '@heroicons/react/outline'
-import { CheckIcon } from '@heroicons/react/solid'
-import * as Tooltip from '@radix-ui/react-tooltip'
 import React, { Fragment, memo, useCallback } from 'react'
-import {
-  PricingV2ComponentPerk,
-  PricingV2EntryPlan
-} from '../../../../lib/api/strapi/types'
+import { PricingV2EntryPlan } from '../../../../lib/api/strapi/types'
 import { CUIButton, CUICard } from '../../../ClickUI'
 import HRSeparator from '../../../HRSeparator'
 import { MarkdownMemoized } from '../../../Markdown'
 import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
 import { Context, usePricingV2Context } from '../../../PricingV2ContextProvider'
 import { SuiText, SuiTitle } from '../../../sui'
+import PerkItem from '../../ui/PerkItem'
 import PriceUsd from '../../ui/PriceUsd'
 import ProviderSelector from '../ProviderSelector'
 import RegionSelector from '../RegionSelector'
-
-const perkIcons: Record<PricingV2ComponentPerk['icon'], React.ReactNode> = {
-  None: <></>,
-  Tick: <CheckIcon className='h-4 w-4' />,
-  Dash: <MinusIcon className='h-4 w-4' />
-}
-
-const PerkItem = memo(function PerkItem({
-  text,
-  icon,
-  tooltip
-}: PricingV2ComponentPerk) {
-  const PerkContent = () => (
-    <MarkdownMemoized className='!text-white'>{text}</MarkdownMemoized>
-  )
-  return (
-    <li className='row flex items-center justify-start gap-4 text-sm'>
-      <span className='flex-shrink-0 flex-grow-0'>{perkIcons[icon]}</span>
-      {!tooltip && <PerkContent />}
-      {tooltip && (
-        <Tooltip.Provider delayDuration={0} disableHoverableContent={false}>
-          <Tooltip.Root>
-            <Tooltip.Trigger>
-              <PerkContent />
-            </Tooltip.Trigger>
-            <Tooltip.Portal>
-              <Tooltip.Content
-                side='top'
-                align='start'
-                className='max-w-[300px] whitespace-pre-wrap rounded-[4px] bg-neutral-725 px-[15px] py-[10px] text-sm leading-normal will-change-[transform,opacity]'
-                sideOffset={5}>
-                {tooltip}
-                <Tooltip.Arrow className='fill-neutral-725' />
-              </Tooltip.Content>
-            </Tooltip.Portal>
-          </Tooltip.Root>
-        </Tooltip.Provider>
-      )}
-    </li>
-  )
-})
 
 const TableColumn = memo(function TableColumn({
   item,
@@ -104,13 +58,13 @@ const TableColumn = memo(function TableColumn({
             <ul className='space-y-5'>
               {item.perks.map((perk, perkIndex) => {
                 return (
-                  <Fragment key={perkIndex}>
+                  <li key={perkIndex}>
                     <PerkItem
                       text={perk.text}
                       icon={perk.icon}
                       tooltip={perk.tooltip}
                     />
-                  </Fragment>
+                  </li>
                 )
               })}
             </ul>

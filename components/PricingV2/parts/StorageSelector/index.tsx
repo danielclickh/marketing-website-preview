@@ -1,12 +1,13 @@
 import { CheckIcon } from '@heroicons/react/solid'
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import Label from '../../ui/Label'
 import Radios from '../../ui/Radios'
-import Select from '../../ui/Select'
+import Select, { Option } from '../../ui/Select'
 
 export default function StorageSelector() {
   const {
+    planEntry,
     storageUnit,
     setStorageUnit,
     storageSize,
@@ -38,6 +39,42 @@ export default function StorageSelector() {
     [setStorageCompressed]
   )
 
+  const storageUnits = useMemo(() => {
+    let gbOption: Option = { value: 'gb', label: 'GB' }
+    let tbOption: Option = { value: 'tb', label: 'TB' }
+    let pbOption: Option = { value: 'pb', label: 'PB' }
+
+    if (planEntry?.maxStorageCapacity) {
+      if (planEntry.maxStorageCapacity < 1024) {
+        tbOption.disabled = true
+        pbOption.disabled = true
+      } else if (planEntry.maxStorageCapacity < 2048) {
+        pbOption.disabled = true
+      }
+    }
+
+    return [gbOption, tbOption, pbOption]
+  }, [planEntry])
+
+  const sizeMax = useMemo(() => {
+    let max = 9999
+    if (planEntry?.maxStorageCapacity) {
+      switch (storageUnit) {
+        case 'gb':
+          max = planEntry.maxStorageCapacity
+          break
+        case 'tb':
+          max = planEntry.maxStorageCapacity / 1024
+          break
+        case 'pb':
+          max = planEntry.maxStorageCapacity / 2048
+          break
+      }
+    }
+
+    return Math.min(max, 9999)
+  }, [planEntry, storageUnit])
+
   const compressionApplied = !storageCompressed && storageSize && storageUnit
 
   return (
@@ -49,18 +86,15 @@ export default function StorageSelector() {
             className='relative h-10 w-full cursor-text rounded-[4px] border border-neutral-700 bg-neutral-725 px-3 text-left shadow-input focus:outline-none sm:text-sm md:max-w-[112px]'
             type='number'
             min={0}
+            max={sizeMax}
             defaultValue={storageSize || 0}
-            maxLength={4}
+            maxLength={sizeMax.toString().length}
             onChange={onStorageSizeChange}
           />
         </div>
         <div className='col-span-2 flex flex-col justify-end md:col-span-1'>
           <Select
-            options={[
-              { value: 'gb', label: 'GB' },
-              { value: 'tb', label: 'TB' },
-              { value: 'pb', label: 'PB' }
-            ]}
+            options={storageUnits}
             value={storageUnit}
             onChange={onStorageUnitChange}
           />

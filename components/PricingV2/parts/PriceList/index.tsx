@@ -1,10 +1,12 @@
 import { CheckIcon, XIcon } from '@heroicons/react/solid'
 import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
+import PerkItem from '../../ui/PerkItem'
 import PriceUsd from '../../ui/PriceUsd'
 
 export default function PriceList() {
   const {
+    planEntry,
     hours,
     computeMinSize,
     computeMaxSize,
@@ -143,11 +145,22 @@ export default function PriceList() {
         </li>
       )}
 
-      <li className='flex items-center gap-x-2'>
-        <CheckIcon className='h-4 w-4 text-primary-300' />
-        Includes 2 backups
-        <TooltipInfo content='1 backup every 24h, 2 day retention period. Customized schedules backups are available in the Scale and Enterprise plans.' />
-      </li>
+      {planEntry?.priceList && planEntry.priceList.length > 0 && (
+        <ul className='space-y-5'>
+          {planEntry.priceList.map((perk, perkIndex) => {
+            return (
+              <li key={perkIndex}>
+                <PerkItem
+                  iconClassName='text-primary-300 -mr-2'
+                  text={perk.text}
+                  icon={perk.icon}
+                  tooltip={perk.tooltip}
+                />
+              </li>
+            )
+          })}
+        </ul>
+      )}
     </ul>
   )
 }

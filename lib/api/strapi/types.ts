@@ -75,6 +75,8 @@ export interface PricingV2EntryPlan {
   perks: Array<PricingV2ComponentPerk>
   description: null | string
   featured: boolean
+  priceList: Array<PricingV2ComponentPerk>
+  maxStorageCapacity: null | number
 }
 
 export interface PricingV2EntryProvider {

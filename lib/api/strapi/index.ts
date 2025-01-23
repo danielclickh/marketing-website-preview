@@ -202,7 +202,8 @@ export async function getPricingV2Plans() {
       'packages',
       'packages.minimumCompute',
       'packages.maximumCompute',
-      'perks'
+      'perks',
+      'priceList'
     ],
     fields: [
       'name',
@@ -210,7 +211,8 @@ export async function getPricingV2Plans() {
       'customizable',
       'order',
       'description',
-      'featured'
+      'featured',
+      'maxStorageCapacity'
     ],
     sort: ['order:asc', 'name:asc']
   })) as Array<PricingV2EntryPlan>

@@ -2,7 +2,11 @@ import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { memo, useMemo } from 'react'
 
-export type Option = { value: any; label: string | React.ReactNode }
+export type Option = {
+  value: any
+  label: string | React.ReactNode
+  disabled?: boolean
+}
 export type Options = Array<Option>
 
 export interface SelectProps {
@@ -14,17 +18,19 @@ export interface SelectProps {
 type SelectOptionProps = {
   label: Option['label']
   selected: boolean
+  disabled?: boolean
 }
 
 const SelectOption = memo(function SelectOption({
   label,
-  selected
+  selected,
+  disabled
 }: SelectOptionProps) {
   return (
     <span
-      className={`relative flex w-full cursor-pointer items-center gap-3 truncate rounded-lg px-3 py-2 text-left focus:outline-none sm:text-sm ${
+      className={`relative flex w-full items-center gap-3 truncate rounded-lg px-3 py-2 text-left focus:outline-none sm:text-sm ${
         selected ? 'font-bold text-primary-300' : 'font-normal'
-      }`}>
+      } ${disabled ? 'opacity-60' : 'cursor-pointer'}`}>
       {label}
     </span>
   )
@@ -51,9 +57,14 @@ const Select = memo(function Select({ options, value, onChange }: SelectProps) {
             <Listbox.Option
               key={item.value}
               value={item.value}
+              disabled={item.disabled}
               className='hover:bg-neutral-700'>
-              {({ selected }) => (
-                <SelectOption label={item.label} selected={selected} />
+              {({ selected, disabled }) => (
+                <SelectOption
+                  label={item.label}
+                  selected={selected}
+                  disabled={disabled}
+                />
               )}
             </Listbox.Option>
           ))}
