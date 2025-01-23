@@ -508,18 +508,18 @@ export default function PricingV2ContextProvider({
       ) {
         const firstComputePackage = () => {
           if (newPlanEntry) {
-            newComputeMinSize =
-              newPlanEntry.packages.at(0)?.minimumCompute?.size || null
-            newComputeMaxSize =
-              newPlanEntry.packages.at(0)?.maximumCompute?.size || null
-            newReplicas = newPlanEntry.packages.at(0)?.replicas || null
+            const first = newPlanEntry.packages.at(0)
+
+            newComputeMinSize = first?.minimumCompute?.size || null
+            newComputeMaxSize = first?.maximumCompute?.size || null
+            newReplicas = first?.replicas || null
           }
         }
 
-        // Undefined to null
-        if (newComputeMinSize === undefined) newComputeMinSize = null
-        if (newComputeMaxSize === undefined) newComputeMaxSize = null
-        if (newReplicas === undefined) newReplicas = null
+        // If a value is undefined, use the current value
+        if (newComputeMinSize === undefined) newComputeMinSize = computeMinSize
+        if (newComputeMaxSize === undefined) newComputeMaxSize = computeMaxSize
+        if (newReplicas === undefined) newReplicas = replicas
 
         // If all values are null, use the first package
         if (
@@ -530,18 +530,24 @@ export default function PricingV2ContextProvider({
           firstComputePackage()
         }
 
-        // If one or the other min/max values are null
-        if (newComputeMinSize !== null && newComputeMaxSize === null)
-          newComputeMaxSize = newComputeMinSize
-        if (newComputeMinSize === null && newComputeMaxSize !== null)
+        // Min value is null, set it to match max
+        if (newComputeMinSize === null && newComputeMaxSize !== null) {
           newComputeMinSize = newComputeMaxSize
+        }
 
-        // Get default values
-        if (newComputeMinSize === null || newComputeMaxSize === null) {
-          const sizes = computes.map((compute) => compute.size)
-          if (newComputeMinSize === null) newComputeMinSize = sizes[0]
-          if (newComputeMaxSize === null)
-            newComputeMaxSize = sizes[sizes.length - 1]
+        // Max value is null, set it to match min
+        if (newComputeMinSize !== null && newComputeMaxSize === null) {
+          newComputeMaxSize = newComputeMinSize
+        }
+
+        // Min size is still null, default to first compute size
+        if (newComputeMinSize === null) {
+          newComputeMinSize = computes[0].size
+        }
+
+        // Max size is still null, default to last compute size
+        if (newComputeMaxSize === null) {
+          newComputeMaxSize = computes[computes.length - 1].size
         }
 
         // If min value has changed, ensure max value is always greater than or equal to
