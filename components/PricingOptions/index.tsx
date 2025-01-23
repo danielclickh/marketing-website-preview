@@ -156,7 +156,12 @@ function PricingOptions({
                               onClick={() => {
                                 setProvider('aws')
                                 router.push(
-                                  '/pricing?provider=aws',
+                                  {
+                                    query: {
+                                      ...router.query,
+                                      provider: 'aws'
+                                    }
+                                  },
                                   undefined,
                                   {
                                     shallow: true
@@ -183,7 +188,12 @@ function PricingOptions({
                               onClick={() => {
                                 setProvider('gcp')
                                 router.push(
-                                  '/pricing?provider=gcp',
+                                  {
+                                    query: {
+                                      ...router.query,
+                                      provider: 'gcp'
+                                    }
+                                  },
                                   undefined,
                                   {
                                     shallow: true
@@ -210,7 +220,12 @@ function PricingOptions({
                             onClick={() => {
                               setProvider('azure')
                               router.push(
-                                '/pricing?provider=azure',
+                                {
+                                  query: {
+                                    ...router.query,
+                                    provider: 'azure'
+                                  }
+                                },
                                 undefined,
                                 {
                                   shallow: true

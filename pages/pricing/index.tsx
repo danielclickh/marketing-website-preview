@@ -12,10 +12,10 @@ import Markdown from '../../components/Markdown'
 import MarketoForm from '../../components/MarketoForm'
 import Modal from '../../components/Modal'
 import PocContactForm from '../../components/PocContactForm'
-import PricingV2 from '../../components/PricingV2'
 import { SuiText, SuiTitle } from '../../components/sui'
 import { useClickOutside } from '../../hooks'
 import {
+  findAll,
   findOne,
   getPricingV2Computes,
   getPricingV2Plans,
@@ -23,12 +23,36 @@ import {
 } from '../../lib/api/strapi'
 import { useGalaxyOnClick, useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { PricingData, PricingPageProps } from '../../types/pricing'
+import {
+  PricingData,
+  PricingPageProps,
+  PricingPagePropsV1,
+  PricingPagePropsV2,
+  PricingPlanData,
+  RegionPricing
+} from '../../types/pricing'
 import philosophy from './philosophy.json'
+
+import dynamic from 'next/dynamic'
+
+// Lazy load prizing components
+const PricingV1 = dynamic(() => import('../../components/PricingCalculator'), {
+  loading: () => <p className='my-10 text-center'>Loading pricing...</p>,
+  ssr: true
+})
+
+const PricingV2 = dynamic(() => import('../../components/PricingV2'), {
+  loading: () => <p className='my-10 text-center'>Loading pricing...</p>,
+  ssr: true
+})
 
 export const getServerSideProps: GetServerSideProps<PricingPageProps> =
   async function getServerSideProps({ query }) {
-    const pricingPromise: Promise<PricingData> = findOne('pricing', {
+    const displayOldPricing = ['1', 'true', 'yes'].includes(
+      query?.legacy?.toString().toLowerCase() || 'no'
+    )
+
+    const pagePromise: Promise<PricingData> = findOne('pricing', {
       populate: [
         'hero',
         'meteredPricing',
@@ -43,6 +67,70 @@ export const getServerSideProps: GetServerSideProps<PricingPageProps> =
 
     const commonPropsPromise = getCommonProps()
 
+    // Old (V1) pricing
+    if (displayOldPricing) {
+      const pricingByRegionPromise: Promise<{ data: Array<RegionPricing> }> =
+        findAll('pricing-per-regions', {
+          populate: [
+            'regionFlagPNG',
+            'storagePricing',
+            'computePricing',
+            'devStoragePricing',
+            'devComputePricing'
+          ],
+          fields: ['cloudProvider', 'region', 'hasDevService']
+        })
+      const plansProps: Promise<{ data: Array<PricingPlanData> }> = findAll(
+        'pricing-plans',
+        {
+          populate: ['actionButton', 'items', 'items_disabled'],
+          fields: ['name', 'description', 'pricingMain', 'cloudProvider']
+        }
+      )
+
+      const cloudPromise = findOne('cloud', {
+        populate: [
+          'hero.cloudProviders',
+          'hero.cloudProviders.darkProviderPngs',
+          'hero.cloudProviders.lightProviderPngs'
+        ]
+      })
+
+      const [
+        { hero, contactSection, meteredPricing, seo },
+        commonProps,
+        { data: pricingByRegion },
+        { data: pricingPlans },
+        {
+          hero: { cloudProviders }
+        }
+      ] = await Promise.all([
+        pagePromise,
+        commonPropsPromise,
+        pricingByRegionPromise,
+        plansProps,
+        cloudPromise
+      ])
+
+      seo.path = '/pricing'
+
+      return {
+        props: {
+          hero,
+          contactSection,
+          meteredPricing,
+          seo,
+          displayOldPricing: true,
+          pricingByRegion,
+          pricingPlans,
+          cloudProviders,
+          requestParams: query,
+          ...commonProps
+        } as PricingPagePropsV1
+      }
+    }
+
+    // New (V2) pricing
     const plansPromise = getPricingV2Plans()
     const providersPromise = getPricingV2Providers()
     const computesPromise = getPricingV2Computes()
@@ -54,7 +142,7 @@ export const getServerSideProps: GetServerSideProps<PricingPageProps> =
       providers,
       computes
     ] = await Promise.all([
-      pricingPromise,
+      pagePromise,
       commonPropsPromise,
       plansPromise,
       providersPromise,
@@ -69,12 +157,13 @@ export const getServerSideProps: GetServerSideProps<PricingPageProps> =
         contactSection,
         meteredPricing,
         seo,
+        displayOldPricing: false,
         plans,
         providers,
         computes,
         requestParams: query,
         ...commonProps
-      }
+      } as PricingPagePropsV2
     }
   }
 
@@ -82,6 +171,10 @@ export default function PricingPage({
   hero,
   contactSection,
   seo,
+  displayOldPricing,
+  pricingByRegion,
+  pricingPlans,
+  cloudProviders,
   plans,
   providers,
   computes,
@@ -91,6 +184,7 @@ export default function PricingPage({
 }: PricingPageProps) {
   useGalaxyOnPage('pricingPage')
   const pocFormRef = useRef<HTMLDivElement | null>(null)
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pricing h-full text-neutral-0'>
@@ -105,43 +199,19 @@ export default function PricingPage({
               </div>
             )}
 
-            <PricingV2
-              requestParams={requestParams}
-              plans={plans}
-              providers={providers}
-              computes={computes}
-              afterTableFilters={<RegionRequest />}
-              inbetweenContent={
-                <>
-                  <div className='-mt-4 space-y-8'>
-                    <div className='space-y-4 text-center text-slate-300'>
-                      <SuiText size='sm'>
-                        ClickPipes rates are{' '}
-                        <strong className='text-white'>$0.04 / GB</strong> for
-                        ingested data,{' '}
-                        <strong className='text-white'>$0.20 / hr</strong> per
-                        compute unit.
-                      </SuiText>
-                      <SuiText size='sm'>
-                        For more information about our billing and pricing
-                        please refer to our{' '}
-                        <Link
-                          href='https://clickhouse.com/docs/en/manage/billing/#faqs'
-                          className='text-primary-300 underline'>
-                          Billing & Pricing FAQ
-                        </Link>
-                        .
-                      </SuiText>
-                    </div>
+            {displayOldPricing && (
+              <PricingV1
+                pricingByRegion={pricingByRegion}
+                cloudProviders={cloudProviders}
+                pricingPlans={pricingPlans}
+                afterPricingSelector={
+                  <div className='mt-4'>
+                    <RegionRequest />
+                  </div>
+                }
+                afterPricingTable={
+                  <>
                     <ByocPricingCard />
-                    <SuiText size='sm' className='text-center text-slate-300'>
-                      Or download the forever-free{' '}
-                      <LinkWithArrow
-                        href='https://clickhouse.com/docs/en/quick-start'
-                        className='text-primary-300 underline'>
-                        open source distribution of ClickHouse
-                      </LinkWithArrow>
-                    </SuiText>
                     <div className='mx-6 mt-6'>
                       <div className='rounded bg-neutral-700 px-3 py-5 text-center text-white'>
                         <SuiText size='sm'>
@@ -163,14 +233,99 @@ export default function PricingPage({
                         </SuiText>
                       </div>
                     </div>
-                  </div>
-                  <HRSeparator className='my-24' />
-                  <SuiTitle type='h2' className='my-12 text-center'>
-                    Estimate your monthly&nbsp;cost
-                  </SuiTitle>
-                </>
-              }
-            />
+                    <div className='mt-12 space-y-6 text-center'>
+                      <SuiText size='sm'>
+                        Or download the forever-free{' '}
+                        <LinkWithArrow
+                          href='https://clickhouse.com/docs/en/quick-start'
+                          className='text-primary-300 underline'>
+                          open source distribution of ClickHouse
+                        </LinkWithArrow>
+                      </SuiText>
+                      <SuiText size='sm'>
+                        For more information about our billing and pricing
+                        please refer to our{' '}
+                        <Link
+                          href='https://clickhouse.com/docs/en/manage/billing/#faqs'
+                          className='text-primary-300 underline'>
+                          Billing & Pricing FAQ
+                        </Link>
+                        .
+                      </SuiText>
+                    </div>
+                  </>
+                }
+              />
+            )}
+
+            {!displayOldPricing && (
+              <PricingV2
+                requestParams={requestParams}
+                plans={plans}
+                providers={providers}
+                computes={computes}
+                afterTableFilters={<RegionRequest />}
+                inbetweenContent={
+                  <>
+                    <div className='-mt-4 space-y-8'>
+                      <div className='space-y-4 text-center text-slate-300'>
+                        <SuiText size='sm'>
+                          ClickPipes rates are{' '}
+                          <strong className='text-white'>$0.04 / GB</strong> for
+                          ingested data,{' '}
+                          <strong className='text-white'>$0.20 / hr</strong> per
+                          compute unit.
+                        </SuiText>
+                        <SuiText size='sm'>
+                          For more information about our billing and pricing
+                          please refer to our{' '}
+                          <Link
+                            href='https://clickhouse.com/docs/en/manage/billing/#faqs'
+                            className='text-primary-300 underline'>
+                            Billing & Pricing FAQ
+                          </Link>
+                          .
+                        </SuiText>
+                      </div>
+                      <ByocPricingCard />
+                      <SuiText size='sm' className='text-center text-slate-300'>
+                        Or download the forever-free{' '}
+                        <LinkWithArrow
+                          href='https://clickhouse.com/docs/en/quick-start'
+                          className='text-primary-300 underline'>
+                          open source distribution of ClickHouse
+                        </LinkWithArrow>
+                      </SuiText>
+                      <div className='mx-6 mt-6'>
+                        <div className='rounded bg-neutral-700 px-3 py-5 text-center text-white'>
+                          <SuiText size='sm'>
+                            Need help with your proof of concept?{' '}
+                            <br className='sm:hidden' />
+                            <Link
+                              href='#poc-contact'
+                              className='text-primary-300 hover:underline'
+                              onClick={(event) => {
+                                if (pocFormRef.current) {
+                                  event.preventDefault()
+                                  pocFormRef.current.scrollIntoView({
+                                    behavior: 'smooth'
+                                  })
+                                }
+                              }}>
+                              Contact us
+                            </Link>
+                          </SuiText>
+                        </div>
+                      </div>
+                    </div>
+                    <HRSeparator className='my-24' />
+                    <SuiTitle type='h2' className='my-12 text-center'>
+                      Estimate your monthly&nbsp;cost
+                    </SuiTitle>
+                  </>
+                }
+              />
+            )}
           </div>
           <div className='clip-inverted-triangle bg-shadow-element pb-60 pt-10'></div>
           <div className='philosophy -mt-1 bg-primary-300 text-neutral-900'>
