@@ -104,7 +104,7 @@ export default function SupportProgram(props: any) {
             <div className='flip-selection mx-auto max-w-3xl px-8 text-center text-base'>
               <p className='mb-4 '>
                 Please note that only Subscription or Cloud Trial customers have
-                Support response time targets on support incidents. If you are
+                initial response time targets on support incidents. If you are
                 not currently a ClickHouse Cloud customer – while we will try to
                 answer your question, we’d encourage you to go instead to our
                 community resources:
@@ -137,7 +137,7 @@ export default function SupportProgram(props: any) {
             ClickHouse Cloud support details
           </h2>
           <p className='pb-16 pt-2 text-base mx-auto text-neutral-200 max-w-3xl'>
-            ClickHouse includes Support Services for all users and customers of
+            ClickHouse includes support services for all users and customers of
             ClickHouse Cloud. Our ClickHouse Support Services Policy can be
             found{' '}
             <Link
@@ -211,11 +211,11 @@ export default function SupportProgram(props: any) {
                     <strong>Expert sessions</strong>
                   </td>
                   <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
-                    1 live Expert Session included for <br />
+                    1 live expert session included for <br />
                     virtual consultative support guidance
                   </td>
                   <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
-                    Unlimited live Expert Sessions for virtual <br />
+                    Unlimited live expert sessions for virtual <br />
                     consultative support guidance
                   </td>
                 </tr>
@@ -325,10 +325,8 @@ export default function SupportProgram(props: any) {
       </div>
       <HRSeparator className='my-30' />
       <div className='section-container container mx-auto flex flex-col items-center'>
-        <h2
-          className='mb-4 text-center text-4xl font-semibold
-          '>
-          Support response times
+        <h2 className='mb-4 text-center text-4xl font-semibold'>
+          Initial response times
         </h2>
         <p className='mb-12 text-center text-base text-neutral-200'>
           Classification of severity levels for issues reported and response
