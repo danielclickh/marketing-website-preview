@@ -10,7 +10,7 @@ export default function SupportProgram(props: any) {
   return (
     <div>
       <div className='bg-grid'>
-        <div className='relative mx-auto max-w-3xl px-4 pb-24 pt-28 text-center sm:px-8 md:px-16 2xl:px-0'>
+        <div className='relative mx-auto max-w-4xl px-4 pb-24 pt-28 text-center sm:px-8 md:px-16 2xl:px-0'>
           <SuiTitle type='h1' className='mb-6 md:!text-6xl'>
             {props.title}
           </SuiTitle>
@@ -62,27 +62,32 @@ export default function SupportProgram(props: any) {
             </CUICard>
           </Link>
 
-          <CUICard className='group flex w-full bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
-            <CUICard.Body className='flex flex-col items-center justify-center'>
-              <Image
-                src='/images/support-program/envelope-thin.svg'
-                height={35}
-                width={49}
-                alt='Email'
-                className='mx-auto mb-4'
-              />
+          <Link
+            href='mailto:support@clickhouse.com'
+            target='_blank'
+            className='hover:no-underline'>
+            <CUICard className='group flex w-full bg-click-grid bg-[length:359px_261px] bg-right bg-no-repeat p-8'>
+              <CUICard.Body className='flex flex-col items-center justify-center'>
+                <Image
+                  src='/images/support-program/envelope-thin.svg'
+                  height={35}
+                  width={49}
+                  alt='Email'
+                  className='mx-auto mb-4'
+                />
 
-              <div className='flex flex-col items-center justify-center gap-2 pb-4 pt-4'>
-                <div className='cursor-pointer text-xl font-semibold leading-tight'>
-                  Email us at
-                </div>
+                <div className='flex flex-col items-center justify-center gap-2 pb-4 pt-4'>
+                  <div className='cursor-pointer text-xl font-semibold leading-tight'>
+                    Email us at
+                  </div>
 
-                <div className='font-semibold text-primary-300 group-hover:underline'>
-                  support@clickhouse.com
+                  <div className='font-semibold text-primary-300 group-hover:underline'>
+                    support@clickhouse.com
+                  </div>
                 </div>
-              </div>
-            </CUICard.Body>
-          </CUICard>
+              </CUICard.Body>
+            </CUICard>
+          </Link>
         </div>
         <div>
           <svg
@@ -98,11 +103,11 @@ export default function SupportProgram(props: any) {
           <div className='bg-primary-300 pb-16 pt-10 text-neutral-800 md:pt-0'>
             <div className='flip-selection mx-auto max-w-3xl px-8 text-center text-base'>
               <p className='mb-4 '>
-                Please note that only Subscription customers have a Service
-                Level Agreement on support incidents. If you are not currently a
-                ClickHouse Cloud customer – while we will try to answer your
-                question, we’d encourage you to go instead to our community
-                resources:
+                Please note that only Subscription or Cloud Trial customers have
+                Support response time targets on support incidents. If you are
+                not currently a ClickHouse Cloud customer – while we will try to
+                answer your question, we’d encourage you to go instead to our
+                community resources:
               </p>
               <CUILink
                 href='/slack'
@@ -131,9 +136,16 @@ export default function SupportProgram(props: any) {
           '>
             ClickHouse Cloud support details
           </h2>
-          <p className='pb-16 pt-2 text-base text-neutral-200'>
+          <p className='pb-16 pt-2 text-base mx-auto text-neutral-200 max-w-3xl'>
             ClickHouse includes Support Services for all users and customers of
-            ClickHouse Cloud.
+            ClickHouse Cloud. Our ClickHouse Support Services Policy can be
+            found{' '}
+            <Link
+              href='/legal/support-services-policy'
+              className='font-semibold text-primary-300 group-hover:underline'>
+              here
+            </Link>
+            .
           </p>
           <div className='support-program-rich-content relative z-20'>
             <table className='relative z-20 border-b border-b-neutral-700 text-neutral-200'>
@@ -316,7 +328,7 @@ export default function SupportProgram(props: any) {
         <h2
           className='mb-4 text-center text-4xl font-semibold
           '>
-          Service level agreements ("SLA")
+          Support response times
         </h2>
         <p className='mb-12 text-center text-base text-neutral-200'>
           Classification of severity levels for issues reported and response
@@ -328,7 +340,7 @@ export default function SupportProgram(props: any) {
               <tr>
                 <th className='border-r border-neutral-700 p-0'>
                   <p className='p-3 text-neutral-100 border-b border-neutral-700'>
-                    Severity Level
+                    Severity level
                   </p>
                 </th>
                 <th className='border-r border-neutral-700 hover:bg-neutral-750 p-0 border-b'>
