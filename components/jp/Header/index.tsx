@@ -118,8 +118,8 @@ export default function Header({
           burgerMenuIsOpen
             ? '!bg-neutral-900'
             : isScrolled
-            ? 'bg-neutral-900/80'
-            : 'bg-neutral-900/10'
+              ? 'bg-neutral-900/80'
+              : 'bg-neutral-900/10'
         } ${
           isScrolled ? 'md-mid:bg-neutral-900/80' : 'md-mid:bg-neutral-900/10'
         } fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur transition-colors`}>
@@ -204,7 +204,7 @@ export default function Header({
                   .toLowerCase()}
               </CUILink>
               <CUILink
-                href='https://clickhouse.cloud/signIn'
+                href='https://console.clickhouse.cloud/signIn'
                 target='_blank'
                 className='w-full rounded border border-neutral-500 py-3 text-center text-sm font-medium leading-none hover:text-primary-300 md-mid:hidden md-mid:w-auto md-mid:border-0 md-mid:py-0 lg-mid:inline-block'
                 onClick={useGalaxyOnClick('topNav.navItems.signInSelect')}>
@@ -214,7 +214,7 @@ export default function Header({
                 type='primary'
                 target='_blank'
                 weight='medium'
-                href='https://clickhouse.cloud/signUp?loc=nav-get-started'
+                href='https://console.clickhouse.cloud/signUp?loc=nav-get-started'
                 className={`w-full md-mid:w-auto  ${eyebrow?.className || ''}`}
                 linkClass='w-full md-mid:w-auto'
                 onClick={useGalaxyOnClick('topNav.navItems.getStartedSelect')}>

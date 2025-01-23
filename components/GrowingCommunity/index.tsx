@@ -1,4 +1,3 @@
-import React from 'react'
 import SocialIcon from '../SocialIcon'
 import { SuiTitle } from '../sui'
 import socials from './socials.json'

@@ -236,7 +236,7 @@ export default function IntegrationPage({
         )}
       </div>
       <div className='section-container my-16 md:my-32'>
-        <GetStartedFree href='https://clickhouse.cloud/signUp?loc=integrations' />
+        <GetStartedFree href='https://console.clickhouse.cloud/signUp?loc=integrations' />
       </div>
     </Layout>
   )

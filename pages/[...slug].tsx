@@ -1,5 +1,4 @@
 import { GetStaticProps } from 'next'
-import React from 'react'
 import Layout from '../components/Layout'
 import Markdown from '../components/Markdown'
 import { SuiTitle } from '../components/sui'
@@ -30,7 +29,10 @@ export const getStaticProps: GetStaticProps<RichContentPageProps> =
             }
           }
         ]
-      }
+      },
+      populate: [
+        'seo'
+      ]
     })
     const page = data[0]
 
@@ -52,7 +54,8 @@ export const getStaticProps: GetStaticProps<RichContentPageProps> =
         slug: slug.join('/'),
         ...commonProps,
         seo: {
-          title: page.title,
+          title: page.seo?.title ?? page.title,
+          description: page.seo?.description ?? page.title,
           type: 'website',
           siteName: 'ClickHouse',
           path: `/${slug.join('/')}`

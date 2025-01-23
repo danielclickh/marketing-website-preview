@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react'
+import { HTMLAttributes } from 'react'
 
 function HRSeparator({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (

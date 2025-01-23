@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
@@ -101,7 +101,7 @@ export default function MLUseCasePage({
                     {checkpoints.map((checkpoint) => {
                       return (
                         <div
-                          className={`item-center flex space-x-4 pb-2`}
+                          className={'item-center flex space-x-4 pb-2'}
                           key={checkpoint.id}>
                           <Image
                             src='/images/cloud/check.svg'
@@ -125,7 +125,7 @@ export default function MLUseCasePage({
                         type='primary'
                         size='lg'
                         weight='semibold'
-                        href='https://clickhouse.cloud/signUp?loc=use-case-ml-and-ds'
+                        href='https://console.clickhouse.cloud/signUp?loc=use-case-ml-and-ds'
                         target='_blank'
                         linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                         className='w-full'>
@@ -191,7 +191,9 @@ export default function MLUseCasePage({
               <div className='p-10'>
                 <div className='flex flex-col gap-x-6 gap-y-6 lg:flex-row'>
                   <QuoteCard
-                    content={`"We aggregate the user's history in ClickHouse and use it as a data store for training and inference. Even when reading 10s of millions of rows, the performance was very nice and not the bottleneck when training new models."`}
+                    content={
+                      '"We aggregate the user\'s history in ClickHouse and use it as a data store for training and inference. Even when reading 10s of millions of rows, the performance was very nice and not the bottleneck when training new models."'
+                    }
                     link='/blog/deepls-journey-with-clickhouse'
                     logo={{
                       src: '/images/use-cases/ml-and-ds/DeepL_logo.svg',
@@ -201,7 +203,9 @@ export default function MLUseCasePage({
                     }}
                   />
                   <QuoteCard
-                    content={`"ClickHouse was able to efficiently process queries that previously had taken hours or even days to complete. This was hugely valuable for Cognitiv’s data team, allowing them to rapidly iterate and refine their machine learning models."`}
+                    content={
+                      '"ClickHouse was able to efficiently process queries that previously had taken hours or even days to complete. This was hugely valuable for Cognitiv’s data team, allowing them to rapidly iterate and refine their machine learning models."'
+                    }
                     link='/blog/transforming-ad-tech-how-cognitiv-uses-clickhouse-to-build-better-machine-learning-models?loc=ml-use-case'
                     logo={{
                       src: '/images/use-cases/ml-and-ds/cognitiv-logo-white.svg',
@@ -211,7 +215,9 @@ export default function MLUseCasePage({
                     }}
                   />
                   <QuoteCard
-                    content={`"We collect tens of thousands of data points from customers' phones and other more traditional sources. ClickHouse is used as a way to process all of these SMS messages and extract valuable information used for the scoring and fraud models."`}
+                    content={
+                      '"We collect tens of thousands of data points from customers\' phones and other more traditional sources. ClickHouse is used as a way to process all of these SMS messages and extract valuable information used for the scoring and fraud models."'
+                    }
                     link='/blog/how-quickcheck-uses-clickhouse-to-bring-banking-to-the-unbanked'
                     logo={{
                       src: '/images/use-cases/ml-and-ds/QuickCheck.svg',
@@ -221,7 +227,9 @@ export default function MLUseCasePage({
                     }}
                   />
                   <QuoteCard
-                    content={`"By utilizing expert models and embeddings, we detect substantive changes in web pages and identify connections between pages that share similar characteristics."`}
+                    content={
+                      '"By utilizing expert models and embeddings, we detect substantive changes in web pages and identify connections between pages that share similar characteristics."'
+                    }
                     link='/blog/corsearch-replaces-mysql-with-clickhouse-for-content-and-brand-protection'
                     logo={{
                       src: '/images/use-cases/ml-and-ds/corsearch-logo.svg',
@@ -405,7 +413,7 @@ export default function MLUseCasePage({
 
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
             <GetStartedFree
-              href='https://clickhouse.cloud/signUp?loc=ml-and-ds-use-case-getstarted-footer'
+              href='https://console.clickhouse.cloud/signUp?loc=ml-and-ds-use-case-getstarted-footer'
               textBefore='Get started with ClickHouse'
               textSlanted='Cloud'
               textAfter='for free'

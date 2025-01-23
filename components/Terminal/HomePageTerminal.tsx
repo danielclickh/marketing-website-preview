@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from 'react'
+import { CSSProperties, useState } from 'react'
 
 const style = { '--totalCount': 264 } as CSSProperties
 
@@ -56,14 +56,14 @@ function HomePageTerminal() {
             {' youtube\n'}
             <span className='constant'>WHERE</span>{' '}
             <span className='bracket-level-1'>(</span>
-            <span className='constant'>month</span> {`>=`}{' '}
+            <span className='constant'>month</span> {'>='}{' '}
             <span className='keyword'>'</span>
             <span className='string'>2020-08-01</span>
             <span className='keyword'>'</span>
             <span className='bracket-level-1'>)</span>{' '}
             <span className='constant'>AND</span>{' '}
             <span className='bracket-level-1'>(</span>
-            <span className='constant'>month</span> {`<=`}{' '}
+            <span className='constant'>month</span> {'<='}{' '}
             <span className='keyword'>'</span>
             <span className='string'>2021-08-01</span>
             <span className='keyword'>'</span>

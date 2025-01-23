@@ -1,6 +1,6 @@
 import { CheckCircleIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import CopyUrlButton from '../CopyUrlButton'
 import Markdown from '../Markdown'
 import MarketoForm from '../MarketoForm'

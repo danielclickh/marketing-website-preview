@@ -1,6 +1,5 @@
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
-import React from 'react'
 import EventPost from '../../../components/EventPostList/EventPost'
 import EventsContainer from '../../../components/EventsContainer'
 import Layout from '../../../components/Layout'
@@ -159,7 +158,7 @@ function EventPage({
                     {host.avatarPng && (
                       <StrapiImage
                         {...host.avatarPng}
-                        alt={host.avatarPng.caption}
+                        alt={host.avatarPng.caption ?? host.name}
                         width={64}
                         height={64}
                         className='h-11 w-11 rounded-full'

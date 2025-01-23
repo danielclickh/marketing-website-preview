@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react'
+import { HTMLAttributes } from 'react'
 
 function LaptopSvg(props: HTMLAttributes<HTMLOrSVGElement>) {
   return (

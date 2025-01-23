@@ -276,7 +276,7 @@ export default function HomepageSectionWhyClickhouse({
           <SuiText className='text-center lg:mt-8'>
             すぐに始めましょう。試してみてください
             <Link
-              href='https://clickhouse.cloud/signUp?loc=why-clickhouse'
+              href='https://console.clickhouse.cloud/signUp?loc=why-clickhouse'
               target='_blank'
               className='group whitespace-nowrap font-bold text-primary-300'>
               クラウドの無料トライアル

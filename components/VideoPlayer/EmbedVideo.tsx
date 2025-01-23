@@ -1,5 +1,5 @@
 import Plyr from 'plyr'
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { EmbededProps } from './types'
 
 function EmbedVideo({ videoId, provider, ...videoOptions }: EmbededProps) {

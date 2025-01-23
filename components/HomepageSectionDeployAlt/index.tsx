@@ -58,7 +58,7 @@ export default function HomepageSectionDeployAlt({
         <div className='mx-auto grid w-full max-w-[800px] grid-cols-1 gap-6 md:grid-cols-2'>
           {/* Cloud */}
           <Link
-            href='https://clickhouse.cloud/signUp?loc=home-deploy-your-way'
+            href='https://console.clickhouse.cloud/signUp?loc=home-deploy-your-way'
             target='_blank'
             className='group col-span-full flex flex-col items-center justify-center gap-6 rounded-lg bg-neutral-750 p-8 text-center text-white'>
             <svg

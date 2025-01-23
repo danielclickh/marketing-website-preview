@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { HTMLAttributes } from 'react'
+import { HTMLAttributes } from 'react'
 import { StrapiImageType } from '../../../../lib/api/strapi/types'
 import { StrapiImage } from '../../../StrapiElements'
 import { SuiText, SuiTitle } from '../../typography'

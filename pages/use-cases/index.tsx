@@ -303,18 +303,22 @@ function UseCasesPage({
                                       client.clientName === 'Lyft'
                                         ? 'max-w-[60px] lg:max-h-[44px]'
                                         : client.clientName === 'Contentsquare'
-                                        ? 'max-w-[140px] lg:max-w-[160px]'
-                                        : client.clientName === 'Highlight.io'
-                                        ? 'max-w-[120px] lg:max-w-[160px]'
-                                        : client.clientName === 'Deutsche Bank'
-                                        ? 'max-w-[150px] lg:max-w-[200px]'
-                                        : client.clientName === 'QuickCheck'
-                                        ? 'max-w-[150px] lg:max-w-[210px]'
-                                        : client.clientName === 'Darwinium'
-                                        ? 'max-w-[140px] lg:max-w-[160px]'
-                                        : client.clientName === 'RunReveal'
-                                        ? 'max-w-[140px] lg:max-w-[150px]'
-                                        : 'max-h-[64px] max-w-[120px] lg:max-w-[120px]'
+                                          ? 'max-w-[140px] lg:max-w-[160px]'
+                                          : client.clientName === 'Highlight.io'
+                                            ? 'max-w-[120px] lg:max-w-[160px]'
+                                            : client.clientName ===
+                                                'Deutsche Bank'
+                                              ? 'max-w-[150px] lg:max-w-[200px]'
+                                              : client.clientName ===
+                                                  'QuickCheck'
+                                                ? 'max-w-[150px] lg:max-w-[210px]'
+                                                : client.clientName ===
+                                                    'Darwinium'
+                                                  ? 'max-w-[140px] lg:max-w-[160px]'
+                                                  : client.clientName ===
+                                                      'RunReveal'
+                                                    ? 'max-w-[140px] lg:max-w-[150px]'
+                                                    : 'max-h-[64px] max-w-[120px] lg:max-w-[120px]'
                                     }
                                         m-auto object-scale-down
                                           `}
@@ -402,7 +406,7 @@ function UseCasesPage({
             description='Wherever you need us, we’re there. We love to engage in thoughtful conversation with the ClickHouse community and are always on-hand to answer your questions. '
           />
 
-          <GetStartedFree href='https://clickhouse.cloud/signUp?loc=use-cases-get-started-footer' />
+          <GetStartedFree href='https://console.clickhouse.cloud/signUp?loc=use-cases-get-started-footer' />
         </div>
       </div>
     </Layout>

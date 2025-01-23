@@ -338,7 +338,7 @@ const nextConfig = {
       {
         source: '/try',
         destination:
-          'https://clickhouse.cloud/signUp?utm_medium=video&utm_source=clickhouse&utm_campaign=testimonials',
+          'https://console.clickhouse.cloud/signUp?utm_medium=video&utm_source=clickhouse&utm_campaign=testimonials',
         permanent: true
       },
       {

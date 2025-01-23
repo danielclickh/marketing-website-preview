@@ -104,7 +104,7 @@ export default function ClickHouseServerPage({
                       type='primary'
                       size='lg'
                       weight='semibold'
-                      href='https://clickhouse.cloud/signUp?loc=use-case-logging'
+                      href='https://console.clickhouse.cloud/signUp?loc=use-case-logging'
                       target='_blank'
                       linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                       className='w-full'>
@@ -173,7 +173,9 @@ export default function ClickHouseServerPage({
               <div className='p-10'>
                 <div className='space-y-6 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0'>
                   <QuoteCard
-                    content={`“At Sony LIV, we ingest tens of millions of video streaming events into ClickHouse Cloud and run queries to generate complex dashboards for analysis. This allows our operations team to monitor, alert & troubleshoot the QOS and QOE of our customers in real-time. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.”`}
+                    content={
+                      '“At Sony LIV, we ingest tens of millions of video streaming events into ClickHouse Cloud and run queries to generate complex dashboards for analysis. This allows our operations team to monitor, alert & troubleshoot the QOS and QOE of our customers in real-time. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.”'
+                    }
                     logo={{
                       src: '/images/sony.svg',
                       width: 80,
@@ -182,7 +184,9 @@ export default function ClickHouseServerPage({
                     }}
                   />
                   <QuoteCard
-                    content={`"Trip.com was using Elasticsearch for their observability data until they made the switch to ClickHouse. The result? 40GB per second, 30% savings in costs, and queries that are up to 30x faster!"`}
+                    content={
+                      '"Trip.com was using Elasticsearch for their observability data until they made the switch to ClickHouse. The result? 40GB per second, 30% savings in costs, and queries that are up to 30x faster!"'
+                    }
                     link='/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse'
                     logo={{
                       src: '/images/use-cases/logging/tripdotcom.svg',
@@ -192,7 +196,9 @@ export default function ClickHouseServerPage({
                     }}
                   />
                   <QuoteCard
-                    content={`"Migrating logs from Elasticsearch to ClickHouse has not only significantly reduced storage costs but also provided us with a faster querying experience."`}
+                    content={
+                      '"Migrating logs from Elasticsearch to ClickHouse has not only significantly reduced storage costs but also provided us with a faster querying experience."'
+                    }
                     link='/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system'
                     logo={{
                       src: '/images/didi-logo-white.svg',
@@ -340,7 +346,7 @@ export default function ClickHouseServerPage({
           </div>
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
             <GetStartedFree
-              href='https://clickhouse.cloud/signUp?loc=logging-use-case-getstarted-footer'
+              href='https://console.clickhouse.cloud/signUp?loc=logging-use-case-getstarted-footer'
               textBefore='Get started with ClickHouse'
               textSlanted='Cloud'
               textAfter='for free'

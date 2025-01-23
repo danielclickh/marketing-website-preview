@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
-dotenv.config()
 import generateRssFeed from './lib/api/rss'
 import { fetchAll, getStagingOnlyFilters } from './lib/api/strapi'
+dotenv.config()
 
 function log(message: string) {
   console.log(`[${new Date().toTimeString()}] ${message}`)

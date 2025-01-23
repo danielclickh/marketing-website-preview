@@ -1,5 +1,4 @@
 import { DuplicateIcon } from '@heroicons/react/outline'
-import React from 'react'
 import { SuiButton } from '../sui/client'
 import { ButtonProps } from '../sui/SuiButton'
 

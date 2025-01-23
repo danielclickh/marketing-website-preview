@@ -1,4 +1,4 @@
-import React, { HtmlHTMLAttributes } from 'react'
+import { HtmlHTMLAttributes } from 'react'
 
 export default function Clock(props: HtmlHTMLAttributes<HTMLOrSVGElement>) {
   return (

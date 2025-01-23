@@ -291,7 +291,7 @@ export default function HomePage({
       {/* Get started */}
       <div className='section-container mx-auto my-24'>
         <GetStartedFree
-          href='https://clickhouse.cloud/signUp?loc=alexey-goes-on-tour'
+          href='https://console.clickhouse.cloud/signUp?loc=alexey-goes-on-tour'
           textBefore='Get started with ClickHouse'
           textSlanted='Cloud'
           textAfter='for free'

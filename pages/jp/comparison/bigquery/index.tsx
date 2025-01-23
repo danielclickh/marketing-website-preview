@@ -188,7 +188,7 @@ export default function BigQueryPage({
               type='secondary'
               size='lg'
               weight='semibold'
-              href={`https://clickhouse.cloud/signUp?loc=${locTracking}-hero`}
+              href={`https://console.clickhouse.cloud/signUp?loc=${locTracking}-hero`}
               target='_blank'
               linkClass='flex-1 w-full'
               className='w-full'
@@ -698,7 +698,9 @@ function CustomContentCard({
     <Link
       href={href}
       target='_blank'
-      className={` hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline`}>
+      className={
+        ' hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline'
+      }>
       <CUICard className='h-full'>
         <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
           {image && (

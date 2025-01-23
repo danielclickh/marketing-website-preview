@@ -306,7 +306,7 @@ export default function IntegrationsPage({
           </p>
         )}
 
-        <GetStartedFree href='https://clickhouse.cloud/signUp?loc=integrations' />
+        <GetStartedFree href='https://console.clickhouse.cloud/signUp?loc=integrations' />
       </div>
     </Layout>
   )

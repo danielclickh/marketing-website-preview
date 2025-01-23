@@ -314,7 +314,7 @@ export default function HomepageSectionWhyClickhouse({
           <SuiText className='text-center lg:mt-8'>
             Get started in a few minutes with a{' '}
             <Link
-              href='https://clickhouse.cloud/signUp?loc=why-clickhouse'
+              href='https://console.clickhouse.cloud/signUp?loc=why-clickhouse'
               target='_blank'
               className='group whitespace-nowrap font-bold text-primary-300'>
               free cloud trial{' '}

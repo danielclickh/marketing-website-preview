@@ -1,7 +1,6 @@
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import React from 'react'
 import { CUIButton } from '../../../components/ClickUI'
 import Layout from '../../../components/Layout'
 import { Person } from '../../../components/person_area'

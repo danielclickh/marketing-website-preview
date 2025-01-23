@@ -1,3 +1,4 @@
+import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
@@ -8,8 +9,8 @@ import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'
 import NewsLetter from '../../../components/NewsLetter'
-import ReadingProgress from '../../../components/ReadingProgress'
 import { getNewsLetterData } from '../../../components/NewsLetter/getNewsLetterData'
+import ReadingProgress from '../../../components/ReadingProgress'
 import SocialButton from '../../../components/SocialButton'
 import { StrapiImage } from '../../../components/StrapiElements'
 import TableOfContents from '../../../components/TableOfContents'
@@ -24,7 +25,6 @@ import { convertDateToString } from '../../../lib/utils/dateUtils'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { BlogProps } from '../../../types/blog'
 import { ParamsType } from '../../../types/homepage'
-import { ArrowLeftIcon } from '@heroicons/react/solid'
 
 export const getServerSideProps: GetServerSideProps<BlogProps> =
   async function getServerSideProps({ params }) {
@@ -126,24 +126,24 @@ export default function BlogPage({
   table_contents_headers
 }: BlogProps) {
   useGalaxyOnPage('blogPage')
-  const contentRef = React.createRef<HTMLDivElement>();
+  const contentRef = React.createRef<HTMLDivElement>()
   const footerRef = React.createRef<HTMLDivElement>()
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='relative'>
         <div style={{ position: 'relative', zIndex: 50 }}>
-        <ReadingProgress target={contentRef} />
+          <ReadingProgress target={contentRef} />
         </div>
-      <div className='section-container mx-auto flex flex-col xl:flex-row xl:pt-20'>
-          <div className='2xl:pr-8 lg:pl-0 pt-10 block'>
-          <Link href='/blog'>
-            <button className='flex items-center text-base font-semibold mr-8'>
-              <ArrowLeftIcon className='w-4 mr-2' />
-              Back
-            </button>
-          </Link>
+        <div className='section-container mx-auto flex flex-col xl:flex-row xl:pt-20'>
+          <div className='block pt-10 lg:pl-0 2xl:pr-8'>
+            <Link href='/blog'>
+              <button className='mr-8 flex items-center text-base font-semibold'>
+                <ArrowLeftIcon className='mr-2 w-4' />
+                Back
+              </button>
+            </Link>
           </div>
-          <div className='flex flex-col pt-10 text-left xl:pl-4 lg:pr-[180px]'>
+          <div className='flex flex-col pt-10 text-left lg:pr-[180px] xl:pl-4'>
             <h4 className='text-base font-semibold text-primary-300 '>
               <Link href='/blog'>Blog</Link> /{' '}
               <Link
@@ -173,18 +173,23 @@ export default function BlogPage({
                     {author.name}
                   </SuiText>
                   <SuiText size='sm' weight='normal' color='secondary'>
-                    {convertDateToString(date || publishedAt)} -  {reading_time} minutes read
+                    {convertDateToString(date || publishedAt)} - {reading_time}{' '}
+                    minutes read
                   </SuiText>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className='hidden absolute h-full z-50 transition-opacity duration-500 xl:block pr-10 2xl:pr-30 right-0'>
-          <TableOfContents contentRef={contentRef} footerRef={footerRef} headersSelector={table_contents_headers} />
+        <div className='absolute right-0 z-50 hidden h-full pr-10 transition-opacity duration-500 xl:block 2xl:pr-30'>
+          <TableOfContents
+            contentRef={contentRef}
+            footerRef={footerRef}
+            headersSelector={table_contents_headers}
+          />
         </div>
-        <div className='section-container mx-auto flex xl:pr-40 pt-20 xl:pl-32'>
-          <div className='flex w-full flex-col pb-20 xl:pl-4 lg:pr-[180px]'>
+        <div className='section-container mx-auto flex pt-20 xl:pl-32 xl:pr-40'>
+          <div className='flex w-full flex-col pb-20 lg:pr-[180px] xl:pl-4'>
             {ShowCloudCTAHeader && (
               <>
                 <Markdown
@@ -197,7 +202,9 @@ export default function BlogPage({
             {content && (
               <div className='flex flex-col lg:flex-row'>
                 <div ref={contentRef}>
-                  <Markdown className='rich-text-content leading-6' allowHeaderLink>
+                  <Markdown
+                    className='rich-text-content leading-6'
+                    allowHeaderLink>
                     {content}
                   </Markdown>
                 </div>
@@ -208,7 +215,7 @@ export default function BlogPage({
               <>
                 <Markdown
                   className='rich-text-content mt-8 leading-6'
-                  allowHeaderLink >
+                  allowHeaderLink>
                   {CloudCTAFooter}
                 </Markdown>
               </>

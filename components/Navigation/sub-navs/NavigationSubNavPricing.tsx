@@ -1,4 +1,3 @@
-import React from 'react'
 import { useGalaxyOnClick } from '../../../lib/galaxy/galaxy'
 import { NavigationLink } from '../parts'
 

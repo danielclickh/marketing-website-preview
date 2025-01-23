@@ -1,6 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import 'glider-js/glider.min.css'
-import React, { ReactNode, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import Glider from 'react-glider'
 import styles from './Carousel.module.scss'
 

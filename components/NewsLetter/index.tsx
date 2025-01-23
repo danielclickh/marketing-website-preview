@@ -1,4 +1,3 @@
-import React from 'react'
 import { NewsLetterData } from '../../types/homepage'
 import { SuiPanel, SuiText, SuiTitle } from '../sui'
 import NewsLetterForm from './NewsLetterForm'

@@ -2,7 +2,6 @@ import { ChevronRightIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import Tilt from 'react-parallax-tilt'
 import { CUIButton, CUICard } from '../../components/ClickUI'
 import ContactForm from '../../components/ContactForm'
@@ -486,7 +485,9 @@ export default function MonitoramaPage({
             <Link
               href='/blog/storing-log-data-in-clickhouse-fluent-bit-vector-open-telemetry'
               target='_blank'
-              className={` hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline`}>
+              className={
+                ' hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline'
+              }>
               <CUICard className='h-full'>
                 <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
                   <Image
@@ -514,7 +515,9 @@ export default function MonitoramaPage({
             <Link
               href='/blog/storing-traces-and-spans-open-telemetry-in-clickhouse'
               target='_blank'
-              className={` hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline`}>
+              className={
+                ' hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline'
+              }>
               <CUICard className='h-full'>
                 <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
                   <Image
@@ -542,7 +545,9 @@ export default function MonitoramaPage({
             <Link
               href='/blog/overview-of-highlightio'
               target='_blank'
-              className={` hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline`}>
+              className={
+                ' hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline'
+              }>
               <CUICard className='h-full'>
                 <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
                   <Image
@@ -570,7 +575,9 @@ export default function MonitoramaPage({
             <Link
               href='https://tech.ebayinc.com/engineering/ou-online-analytical-processing/'
               target='_blank'
-              className={` hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline`}>
+              className={
+                ' hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline'
+              }>
               <CUICard className='h-full'>
                 <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
                   <Image

@@ -70,7 +70,7 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
 
     const seo = comparison.seo
 
-    seo.path = `/comparison/redshift`
+    seo.path = '/comparison/redshift'
 
     const commonData = await getCommonProps()
     const newsLetterData = await getNewsLetterData()
@@ -516,7 +516,9 @@ export default function ComparisonPage({
                           key={index}
                           href={custom.href}
                           target='_blank'
-                          className={` hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline`}>
+                          className={
+                            ' hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline'
+                          }>
                           <CUICard className='h-full'>
                             <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
                               {custom.Image && (
