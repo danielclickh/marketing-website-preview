@@ -37,7 +37,13 @@ export default function HoursSelector() {
           </button>
         </div>
       </div>
-      <div className={`transition-opacity ${isAlwaysOn ? 'opacity-30' : ''}`}>
+      <div
+        className={`transition-opacity ${
+          isAlwaysOn
+            ? /* Translate class fixes a clipping bug in Safari */
+              'translate-x-0 opacity-30'
+            : ''
+        }`}>
         <Range
           min={0}
           max={24}
