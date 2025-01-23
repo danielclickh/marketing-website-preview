@@ -1,6 +1,7 @@
-import { useMemo } from 'react'
+import { memo, useMemo } from 'react'
+import { PricingV2ComponentRegion } from '../../../../lib/api/strapi/types'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
-import { StrapiImage } from '../../../StrapiElements'
+import { StrapiImageUrl } from '../../../StrapiElements'
 import Label from '../../ui/Label'
 import Select, { Options } from '../../ui/Select'
 
@@ -8,6 +9,25 @@ export interface RegionSelectorProps {
   displayLabel?: boolean
   className?: string
 }
+
+const RegionLabel = memo(function RegionLabel({
+  key,
+  label,
+  icon
+}: PricingV2ComponentRegion) {
+  return (
+    <>
+      {icon && (
+        <StrapiImageUrl
+          {...icon}
+          className='h-auto w-8 flex-shrink-0 flex-grow-0'
+          alt={label || key}
+        />
+      )}
+      {label || key}
+    </>
+  )
+})
 
 export default function RegionSelector({
   displayLabel,
@@ -21,18 +41,7 @@ export default function RegionSelector({
     return providerEntry.regions.map((item) => {
       return {
         value: item.key,
-        label: (
-          <>
-            {item.icon && (
-              <StrapiImage
-                {...item.icon}
-                className='h-auto w-8'
-                alt={item.label || item.key}
-              />
-            )}
-            {item.label || item.key}
-          </>
-        )
+        label: <RegionLabel {...item} />
       }
     })
   }, [providerEntry])
