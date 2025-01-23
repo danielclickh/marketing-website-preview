@@ -42,7 +42,7 @@ export const getStaticProps: GetStaticProps<RealTimeAnalyticsPageProps> =
     data.seo.path = '/use-cases/real-time-analytics'
     data.seo.title = 'Real-time Analytics with ClickHouse'
     data.seo.description =
-      'Ingest millions of rows per second. Handle the most heavily concurrent workloads. All without compromising query speed.'
+      'Learn about Real-time Analytics and how companies are using ClickHouse for their real-time analytics applications.'
 
     const commonProps = await getCommonProps()
     return {

@@ -30,9 +30,7 @@ export const getStaticProps: GetStaticProps<RichContentPageProps> =
           }
         ]
       },
-      populate: [
-        'seo'
-      ]
+      populate: ['seo']
     })
     const page = data[0]
 
