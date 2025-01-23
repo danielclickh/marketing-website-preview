@@ -330,27 +330,25 @@ export default function PricingV2ContextProvider({
       return null
     }
 
-    // Unit price is based on tarabytes, convert it to gigabytes
-    const pricePerGb = storageUnitPrice / 1024
-
-    let usage = storageSize
+    // Unit price is in terabytes so we need to convert usage accordingly
+    let usageInTb = storageSize
 
     // Convert usage values into gigabytes
     switch (storageUnit) {
-      case 'tb':
-        usage = usage * 1024
+      case 'gb':
+        usageInTb = storageSize / 1024 // 1 TB = 1024 GB
         break
       case 'pb':
-        usage = usage * 2048
+        usageInTb = storageSize * 1024 // 1 PB = 1024 TB
         break
     }
 
     // If the storage isn't already compressed, apply standard 10x compression
     if (!storageCompressed) {
-      usage = usage / 10
+      usageInTb = usageInTb / 10
     }
 
-    return usage * pricePerGb
+    return usageInTb * storageUnitPrice
   }, [storageSize, storageUnit, storageCompressed, storageUnitPrice])
 
   // Calculate the minimum total price (min compute & min storage combined)
