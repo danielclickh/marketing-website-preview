@@ -34,17 +34,13 @@ export default function Range({
           <Slider.Range className='absolute h-full rounded-full bg-primary-300 ' />
         </Slider.Track>
         <Slider.Thumb className='block h-5 w-5 rounded-full border-4 border-neutral-800 bg-primary-300  focus:outline-none'>
-          <div className='absolute inset-0 -right-[70px] flex items-center justify-center'>
-            <div className='triangle relative'>
-              <div className='absolute -left-[3px] -top-[3px] h-[6px] w-[6px] rotate-45 transform bg-transparent'>
-                <div className='h-full w-full bg-primary-300'></div>
-              </div>
-            </div>
-            <div className='rounded-[4px] bg-primary-300 px-3 py-1 text-center text-xs font-bold text-black'>
+          <div className='absolute left-full top-1/2 flex -translate-y-1/2 translate-x-2 items-center justify-center rounded bg-primary-300 px-3 py-1 text-center text-xs font-bold text-black'>
+            <div className='absolute left-0 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rotate-45 transform bg-primary-300' />
+            <span>
               {thumbPrefix}
               {value}
               {thumbSuffix}
-            </div>
+            </span>
           </div>
         </Slider.Thumb>
       </Slider.Root>
