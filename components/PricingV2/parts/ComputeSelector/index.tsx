@@ -163,6 +163,7 @@ export default function ComputeSelector() {
                     options={REPLICAS}
                     value={replicas}
                     onChange={setReplicas}
+                    maxHeight={275}
                   />
                 </div>
               </div>

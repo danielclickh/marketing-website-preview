@@ -13,6 +13,7 @@ export interface SelectProps {
   options: Options
   value: any
   onChange: (value: any) => void
+  maxHeight?: number
 }
 
 type SelectOptionProps = {
@@ -36,7 +37,12 @@ const SelectOption = memo(function SelectOption({
   )
 })
 
-const Select = memo(function Select({ options, value, onChange }: SelectProps) {
+const Select = memo(function Select({
+  options,
+  value,
+  onChange,
+  maxHeight
+}: SelectProps) {
   const selectedOption = useMemo(() => {
     return options.find((option) => option.value === value)
   }, [options, value])
@@ -52,7 +58,9 @@ const Select = memo(function Select({ options, value, onChange }: SelectProps) {
             <ChevronDownIcon className='h-5 w-5 text-c4' aria-hidden='true' />
           </span>
         </Listbox.Button>
-        <Listbox.Options className='absolute z-50 -mt-1 max-h-72 w-full overflow-auto rounded-md rounded-t-none border border-t-0 border-primary-300 bg-neutral-725 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+        <Listbox.Options
+          style={{ maxHeight }}
+          className='absolute z-50 -mt-1 w-full overflow-auto rounded-md rounded-t-none border border-t-0 border-primary-300 bg-neutral-725 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
           {options.map((item, index) => (
             <Listbox.Option
               key={item.value}
