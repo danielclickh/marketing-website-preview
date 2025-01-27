@@ -2,7 +2,7 @@ import Image from 'next/image'
 import StrapiSvg from './StrapiSvg'
 import { StrapiImageProps, StrapiPicProps } from './types'
 
-function StrapiImageUrl({
+export function StrapiImageUrl({
   id,
   url,
   sizes,

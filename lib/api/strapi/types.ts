@@ -56,3 +56,55 @@ export interface SeoMetadata {
   siteName?: string
   path: string
 }
+
+// ------
+// Pricing V2
+// ------
+
+export interface PricingV2EntryCompute {
+  name: string
+  size: number
+}
+
+export interface PricingV2EntryPlan {
+  name: string
+  slug: string
+  customizable: boolean
+  packages: Array<PricingV2EntryPackage>
+  order: null | number
+  perks: Array<PricingV2ComponentPerk>
+  description: null | string
+  featured: boolean
+  priceList: Array<PricingV2ComponentPerk>
+  maxStorageCapacity: null | number
+}
+
+export interface PricingV2EntryProvider {
+  name: string
+  slug: string
+  logo: StrapiImageType
+  order: null | number
+  regions: Array<PricingV2ComponentRegion>
+  internetEgress: null | number
+  interRegionEgress: null | number
+}
+
+export interface PricingV2EntryPackage {
+  name: string
+  minimumCompute: null | PricingV2EntryCompute
+  maximumCompute: null | PricingV2EntryCompute
+  replicas: number
+  description: null | string
+}
+
+export interface PricingV2ComponentPerk {
+  text: string
+  icon: 'None' | 'Tick' | 'Dash'
+  tooltip: null | string
+}
+
+export interface PricingV2ComponentRegion {
+  key: string
+  label: null | string
+  icon: null | StrapiImageType
+}

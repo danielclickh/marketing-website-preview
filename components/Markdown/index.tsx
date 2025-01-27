@@ -1,6 +1,6 @@
 import { CodeBlock } from '@clickhouse/click-ui'
 import * as Tooltip from '@radix-ui/react-tooltip'
-import { MouseEventHandler, useState } from 'react'
+import { memo, MouseEventHandler, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import {
   PluggableList,
@@ -221,5 +221,7 @@ function Markdown({
     </ReactMarkdown>
   )
 }
+
+export const MarkdownMemoized = memo(Markdown)
 
 export default Markdown

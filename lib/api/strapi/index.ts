@@ -1,5 +1,10 @@
 import _fetch from 'cross-fetch'
 import { stringify } from 'qs'
+import {
+  PricingV2EntryCompute,
+  PricingV2EntryPlan,
+  PricingV2EntryProvider
+} from './types'
 
 export function fetch(uri: string, init: any = {}) {
   if (process?.env?.STRAPI_API_KEY) {
@@ -189,4 +194,41 @@ export async function findHeader(requestString: string) {
   })
 
   return headerData.seo
+}
+
+export async function getPricingV2Plans() {
+  return (await fetchAll('pricing-v2-plans', {
+    populate: [
+      'packages',
+      'packages.minimumCompute',
+      'packages.maximumCompute',
+      'perks',
+      'priceList'
+    ],
+    fields: [
+      'name',
+      'slug',
+      'customizable',
+      'order',
+      'description',
+      'featured',
+      'maxStorageCapacity'
+    ],
+    sort: ['order:asc', 'name:asc']
+  })) as Array<PricingV2EntryPlan>
+}
+
+export async function getPricingV2Providers() {
+  return (await fetchAll('pricing-v2-providers', {
+    populate: ['logo', 'regions', 'regions.icon'],
+    fields: ['name', 'slug', 'order', 'internetEgress', 'interRegionEgress'],
+    sort: ['order:asc', 'name:asc']
+  })) as Array<PricingV2EntryProvider>
+}
+
+export async function getPricingV2Computes() {
+  return (await fetchAll('pricing-v2-computes', {
+    fields: ['name', 'size'],
+    sort: ['size:asc']
+  })) as Array<PricingV2EntryCompute>
 }
