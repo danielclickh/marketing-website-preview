@@ -30,7 +30,7 @@ const RegionLabel = memo(function RegionLabel({
 })
 
 export default function RegionSelector({
-  displayLabel,
+  displayLabel = true,
   className = ''
 }: RegionSelectorProps) {
   const { providerEntry, region, setRegion } = usePricingV2Context()
