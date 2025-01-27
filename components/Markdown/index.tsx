@@ -9,11 +9,11 @@ import {
 import rehypeHighlight from 'rehype-highlight'
 import rehypeRaw from 'rehype-raw'
 import rehypeSlug from 'rehype-slug-custom-id'
-
 import remarkGfm from 'remark-gfm'
 import { CUILink } from '../ClickUI'
 import { SuiTitle } from '../sui'
 import { AllowedElements, HighLightOptions, sanitizeMarkdown } from './utils'
+import StrapiImage from '../StrapiImage'
 
 function CodeViewer({
   node,
@@ -56,19 +56,6 @@ function CodeViewer({
   )
 }
 
-function StrapiImage({ src, width, height, alt, ...props }: any) {
-  return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={src}
-      width={width}
-      height={height}
-      alt={alt ?? 'Markdown Image'}
-      className='h-auto w-auto max-w-full'
-      {...props}
-    />
-  )
-}
 const commonPlugIns: PluggableList = [
   rehypeRaw,
   [
