@@ -318,7 +318,7 @@ export default function PricingPage({
                         </div>
                       </div>
                     </div>
-                    <HRSeparator className='my-24' />
+                    <HRSeparator className='my-16 lg:my-24' />
                     <SuiTitle type='h2' className='my-12 text-center'>
                       Estimate your monthly&nbsp;cost
                     </SuiTitle>
