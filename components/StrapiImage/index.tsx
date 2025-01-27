@@ -10,7 +10,7 @@ export default function StrapiImage({ src, width, height, alt, ...props }: any) 
   }, [])
 
   return (
-    isClient &&
+    isClient?
     <>
       <Zoom classDialog="custom-zoom">
         <img
@@ -35,6 +35,6 @@ export default function StrapiImage({ src, width, height, alt, ...props }: any) 
         display: none
       }
     `}</style>
-    </>
-  );
+    </>: null
+  )
 }
