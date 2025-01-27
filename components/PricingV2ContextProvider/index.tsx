@@ -458,6 +458,7 @@ export default function PricingV2ContextProvider({
 
         // Force new compute values when the plan changes and customizablilty has changed
         if (
+          plan &&
           newPlan !== plan &&
           planEntry?.customizable !== newPlanEntry?.customizable
         ) {
@@ -581,8 +582,8 @@ export default function PricingV2ContextProvider({
         newReplicas = Math.min(25, Math.max(1, newReplicas))
 
         // Ensure values match a package for non-customizable plans
-        if (planEntry && !planEntry.customizable) {
-          const packageExists = planEntry.packages.find((item) => {
+        if (newPlanEntry && !newPlanEntry.customizable) {
+          const packageExists = newPlanEntry.packages.find((item) => {
             return (
               item.minimumCompute?.size === newComputeMinSize &&
               item.maximumCompute?.size === newComputeMaxSize &&
@@ -598,7 +599,11 @@ export default function PricingV2ContextProvider({
       }
 
       // Validate storage
-      if (newStorageUnit !== undefined || newStorageSize !== undefined) {
+      if (
+        newStorageUnit !== undefined ||
+        newStorageSize !== undefined ||
+        newPlanEntry?.maxStorageCapacity
+      ) {
         // If a value is undefined, use the current value
         if (newStorageUnit === undefined) newStorageUnit = storageUnit
         if (newStorageSize === undefined) newStorageSize = storageSize
