@@ -16,7 +16,7 @@ import {
 import pricingFile from '../../public/pricingV2File.json'
 import config, { PlanConfig } from '../PricingV2/config'
 
-const AVG_DAYS_PER_MONTH = 30.41
+const AVG_DAYS_PER_MONTH = 30.5
 
 export type PricingFileItem = Array<{
   id: string
