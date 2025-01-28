@@ -9,7 +9,7 @@ OpenTelemetry (OTel) is a critical open-source framework designed to standardize
 
 You'll learn about the types of telemetry data OTel handles, how it simplifies monitoring and debugging, and its tools, including the OpenTelemetry Collector and language-specific SDKs for code instrumentation. The page also highlights OTel's flexibility and vendor-neutral approach and how its integration with platforms like ClickHouse enhances data analysis for large-scale systems. It provides a clear and structured look at how OpenTelemetry supports reliable, efficient software performance and observability.
 
-## What is OpenTelemetry (Otel)?
+## What is OpenTelemetry (OTel)?
 
 OpenTelemetry (OTel) is the de facto industry standard for instrumenting, generating, collecting, and exporting telemetry data—metrics, logs, and traces. Like physical engineering standards have revolutionized mass production and global supply chains, OpenTelemetry aims to standardize how we gather and analyze data about our software systems.
 
