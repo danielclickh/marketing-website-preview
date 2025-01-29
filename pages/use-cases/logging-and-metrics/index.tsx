@@ -339,6 +339,13 @@ export default function ClickHouseServerPage({
                         50PB logging solution with ClickHouse
                       </Link>
                     </li>
+                    <li>
+                      <Link
+                        href='/blog/building-a-logging-platform-with-clickhouse-and-saving-millions-over-datadog'
+                        className='text-primary-300'>
+                        How we Built a 19 PiB Logging Platform with ClickHouse and Saved Millions
+                      </Link>
+                    </li>
                   </ol>
                 </div>
               </div>
