@@ -401,6 +401,13 @@ const nextConfig = {
         permanent: true
       },
       {
+        source:
+          '/blog/bluesky-json-bench-clickhouse-vs-mongodb-elasticsearch-duckdb-postgresql',
+        destination:
+          '/blog/json-bench-clickhouse-vs-mongodb-elasticsearch-duckdb-postgresql',
+        permanent: true
+      },
+      {
         source: '/reinvent-2023',
         destination: '/company/contact',
         permanent: true
