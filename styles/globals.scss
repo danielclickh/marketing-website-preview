@@ -251,7 +251,7 @@ body {
   pre {
     code {
       // @apply box-border mb-9 w-full;
-      padding: 20px;
+      padding: 10px;
 
       position: inherit;
       @apply text-neutral-0 rounded-lg whitespace-pre-wrap block;
@@ -264,9 +264,9 @@ body {
       font-family: monospace, ui-sans-serif;
       word-break: break-all;
     }
-    div {
-      @apply overflow-auto whitespace-pre-wrap;
-    }
+    // div {
+    //   @apply overflow-auto whitespace-pre-wrap;
+    // }
   }
   .pre-whitespace {
     @apply whitespace-pre;
