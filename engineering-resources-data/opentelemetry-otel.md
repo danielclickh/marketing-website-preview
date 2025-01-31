@@ -100,3 +100,5 @@ This integration showcases the practical application of OpenTelemetry with Click
 ![Otel image 1](/images/engineering-resources/1_otel.png)
   
 ➡️ Read [ClickHouse and OpenTelemetry](https://clickhouse.com/blog/clickhouse-and-open-telemtry)
+
+➡️ Read [How we Built a 19 PiB Logging Platform with ClickHouse and Saved Millions](https://clickhouse.com/blog/building-a-logging-platform-with-clickhouse-and-saving-millions-over-datadog#choosing-opentelemetry-otel)
