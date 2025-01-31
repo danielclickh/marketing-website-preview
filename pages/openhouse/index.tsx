@@ -117,7 +117,12 @@ export default function Page({ seo, footerData }: CommonProps) {
                 />
               </Link>
               <div className='flex gap-4'>
-                <OpenHouseButton href='#' variant='light' size='sm'>
+                <OpenHouseButton
+                  href='https://sessionize.com/clickhouse-user-conference-2025/'
+                  target='_blank'
+                  variant='light'
+                  size='sm'
+                  className='hidden sm:inline-block'>
                   Apply to speak
                 </OpenHouseButton>
                 <OpenHouseButton
@@ -250,10 +255,12 @@ export default function Page({ seo, footerData }: CommonProps) {
         </div>
 
         {/* Table */}
-        <section className='py-20 bg-neutral-950'>
-          <div className='max-w-6xl mx-auto px-6 lg:px-12 text-center'>
-            <h2 className='text-4xl mb-20'>What’s happening at Open House?</h2>
-            <div className='divide-y-2 divide-ch-yellow'>
+        <section className={`py-20 bg-neutral-950 ${styles.dotBackground}`}>
+          <div className='max-w-6xl mx-auto px-6 lg:px-12'>
+            <h2 className='text-4xl mb-14 lg:mb-20 text-center'>
+              What’s happening at Open House?
+            </h2>
+            <div className='lg:divide-y-2 divide-ch-yellow'>
               {(
                 [
                   {
@@ -309,14 +316,14 @@ export default function Page({ seo, footerData }: CommonProps) {
                 return (
                   <div
                     key={rowIndex}
-                    className='grid grid-cols-[repeat(15,_minmax(0,_1fr))] divide-x-2 divide-white'>
-                    <div className='col-span-2 flex items-center justify-center py-6'>
+                    className='space-y-6 lg:space-y-0 py-6 lg:py-0 lg:grid grid-cols-[repeat(15,_minmax(0,_1fr))] lg:divide-x-2 divide-white'>
+                    <div className='col-span-2 lg:flex items-center justify-center lg:py-8 lg:pr-2'>
                       <Image {...row.icon} />
                     </div>
-                    <div className='col-span-5 text-center flex items-center justify-center uppercase font-bold text-2xl py-6'>
+                    <div className='col-span-5 lg:px-2 lg:text-center lg:flex items-center justify-center uppercase font-bold text-2xl lg:py-8'>
                       {row.title}
                     </div>
-                    <div className='col-span-8 flex items-center py-6'>
+                    <div className='col-span-8 lg:flex items-center text-left lg:py-8 text-lg lg:pl-8'>
                       {row.description}
                     </div>
                   </div>
@@ -327,6 +334,39 @@ export default function Page({ seo, footerData }: CommonProps) {
         </section>
 
         {/* Agenda */}
+        <section className='relative py-20 bg-ch-yellow text-black'>
+          <div
+            className={`bg-ch-yellow h-8 absolute -top-8 left-0 right-0 ${styles.textureMaskTop}`}
+          />
+          <div className='max-w-6xl mx-auto px-6 lg:px-12'>
+            <h2 className='text-4xl mb-10 text-center'>Agenda at a glance</h2>
+            <div className='space-y-6 lg:space-y-0 lg:grid grid-cols-2 gap-6'>
+              <div className='bg-white py-10 px-12'>
+                <h3 className={`text-4xl ${sohneBreit.className}`}>
+                  <small className='uppercase font-bold text-2xl'>MAY 28</small>
+                  <br />
+                  Workshop
+                </h3>
+              </div>
+              <div className='bg-white py-10 px-12'>
+                <h3 className={`text-4xl ${sohneBreit.className}`}>
+                  <small className='uppercase font-bold text-2xl'>MAY 29</small>
+                  <br />
+                  Conference
+                </h3>
+              </div>
+            </div>
+            <div className='mt-10 text-center'>
+              <OpenHouseButton
+                href='/openhouse/register'
+                variant='dark'
+                size='lg'
+                className='min-w-48'>
+                Register
+              </OpenHouseButton>
+            </div>
+          </div>
+        </section>
 
         {/* Speakers */}
 
