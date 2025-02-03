@@ -220,16 +220,21 @@ export default function Page({ seo, footerData }: CommonProps) {
         {/* Gallery */}
         <div
           className={`bg-white text-black group/container relative ${styles.imageGallery}`}>
-          <div className='gallery-container py-24'>
+          <div className='gallery-container py-0 sm:py-5 lg:py-24'>
             <Swiper
-              slidesPerView='auto'
-              spaceBetween={20}
+              slidesPerView={1.25}
+              spaceBetween={10}
               centeredSlides={true}
               loop={true}
-              loopAddBlankSlides={true}
-              loopPreventsSliding={true}
-              allowTouchMove={true}
-              onInit={setGallerySwiperInstance}>
+              onInit={setGallerySwiperInstance}
+              breakpoints={{
+                700: {
+                  loopAddBlankSlides: true,
+                  loopPreventsSliding: true,
+                  slidesPerView: 'auto',
+                  spaceBetween: 20
+                }
+              }}>
               {Array(12)
                 .fill([
                   {
@@ -263,7 +268,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                     <SwiperSlide
                       key={imageIndex}
                       style={{ maxWidth: image.width }}>
-                      <Image {...image} className='w-3/4 md:w-full h-auto' />
+                      <Image {...image} className='w-full h-auto' />
                     </SwiperSlide>
                   )
                 })}
@@ -381,12 +386,11 @@ export default function Page({ seo, footerData }: CommonProps) {
                 <h3 className={`text-4xl ${sohneBreit.className}`}>
                   <small className='uppercase font-bold text-2xl'>MAY 28</small>
                   <br />
-                  Workshop
+                  Training
                 </h3>
                 <p>
-                  Join us for a free "Developer Fast Track"
-                  <br />
-                  hands-on training.
+                  Start your journey to becoming a ClickHouse Certified
+                  Developer with this free, hands-on training.
                 </p>
                 <p>
                   <strong>We'll cover:</strong>
@@ -453,7 +457,7 @@ export default function Page({ seo, footerData }: CommonProps) {
           <div
             className={`bg-white h-8 absolute -bottom-8 left-0 right-0 z-20 ${styles.textureMaskBottom}`}
           />
-          <div className='max-w-6xl mx-auto px-6 lg:px-12'>
+          <div className='max-w-[1413px] mx-auto px-6'>
             <h2 className='text-4xl text-center mb-4'>Speakers</h2>
             <p className='text-2xl text-center mb-10'>
               We have an exciting line-up of speakers, and more announcements on
@@ -588,9 +592,9 @@ export default function Page({ seo, footerData }: CommonProps) {
         <section className='relative py-20 bg-white text-black'>
           <div className='max-w-6xl mx-auto px-6 lg:px-12'>
             <h2 className='text-4xl text-center mb-4'>FAQs</h2>
-            <AccordionItem handle='What is Open House 2025 by ClickHouse?'>
+            <AccordionItem handle='What is OPEN HOUSE 2025 by ClickHouse?'>
               <p className='max-w-3xl'>
-                Open House 2025 is the first ever ClickHouse User Conference! It
+                OPEN HOUSE 2025 is the first ever ClickHouse User Conference! It
                 is a premier one-day event for ClickHouse users, contributors,
                 enthusiasts, and customers, hosted in the heart of San Francisco
                 on 29 May. For those unable to join in person, the event will be
@@ -600,34 +604,69 @@ export default function Page({ seo, footerData }: CommonProps) {
             </AccordionItem>
             <AccordionItem handle='Where will the event be live-streamed?'>
               <p className='max-w-3xl'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Consequuntur debitis dignissimos eos facilis in ipsa ipsam,
-                iusto maiores, pariatur perferendis porro quae quibusdam quo
-                quos sunt tenetur veniam voluptatem voluptatum!
+                We plan to stream selected sessions to New York City, London,
+                and Singapore. More details on the exact timing and location of
+                these live streaming events are upcoming.
               </p>
             </AccordionItem>
             <AccordionItem handle='What can I expect from the agenda?'>
               <p className='max-w-3xl'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Consequuntur debitis dignissimos eos facilis in ipsa ipsam,
-                iusto maiores, pariatur perferendis porro quae quibusdam quo
-                quos sunt tenetur veniam voluptatem voluptatum!
+                At a glance the agenda and initial speaker lineup is above, and
+                we’ll be announcing more details as the event shapes up. It will
+                include:
               </p>
+              <ul className='pl-8 list-disc mt-4'>
+                <li>Insights from company founders</li>
+                <li>
+                  In-depth technical sessions from builders and practitioners
+                </li>
+                <li>ClickHouse users sharing their stories</li>
+                <li>Demos and AMA</li>
+              </ul>
             </AccordionItem>
             <AccordionItem handle='Will you be offering in-person training?'>
               <p className='max-w-3xl'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Consequuntur debitis dignissimos eos facilis in ipsa ipsam,
-                iusto maiores, pariatur perferendis porro quae quibusdam quo
-                quos sunt tenetur veniam voluptatem voluptatum!
+                Yes, in-person training will be offered on an optional basis in
+                San Francisco on May 28 2025, the day before the main event. We
+                are offering free hands-on training on 28 May, the day before
+                Open House, to equip attendees with practical skills for
+                deploying and optimizing ClickHouse in production. Whether
+                you’re just starting with ClickHouse or refining an advanced
+                deployment, this training will empower you with the tools and
+                techniques to unlock the full potential of your data.
               </p>
             </AccordionItem>
             <AccordionItem handle='Will there be a CFP process for speakers?'>
               <p className='max-w-3xl'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Consequuntur debitis dignissimos eos facilis in ipsa ipsam,
-                iusto maiores, pariatur perferendis porro quae quibusdam quo
-                quos sunt tenetur veniam voluptatem voluptatum!
+                Yes! Please apply to be a speaker here.
+              </p>
+            </AccordionItem>
+            <AccordionItem handle='Are you accepting sponsorships for the event?'>
+              <p className='max-w-3xl'>
+                We do not plan to have a formal sponsor expo at this event, but
+                if you’d like to collaborate with us on this event, please share
+                your ideas with the organizers at{' '}
+                <Link
+                  href='mailto:openhouse@clickhouse.com'
+                  className='underline hover:decoration-2'>
+                  openhouse@clickhouse.com
+                </Link>
+              </p>
+            </AccordionItem>
+            <AccordionItem handle='Will you have a code of conduct?'>
+              <p className='max-w-3xl'>
+                Yes. ClickHouse is committed to providing a safe and
+                harassment-free experience for participants at all of our
+                events.
+              </p>
+              <p className='max-w-3xl'>
+                All attendees are required to comply with the{' '}
+                <Link
+                  href='/events-code-of-conduct'
+                  className='underline hover:decoration-2'>
+                  Code of Conduct
+                </Link>
+                .
               </p>
             </AccordionItem>
           </div>

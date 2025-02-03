@@ -49,6 +49,12 @@
       align-items: center;
     }
 
+    .swiper-slide {
+      @media (max-width: 700px) {
+          max-width: none !important;
+      }
+    }
+
   }
 
   @media (hover: hover) {
