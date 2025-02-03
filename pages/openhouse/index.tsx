@@ -8,9 +8,9 @@ import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperClass } from 'swiper/types'
 import Footer from '../../components/Footer'
+import OpenHouseHeader from '../../components/OpenHouseHeader'
 import SeoContainer from '../../components/SeoContainer'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import logoFull from '../../public/logo-full.svg'
 import { CommonProps } from '../../types/homepage'
 import imageGallery1 from './assets/gallery-1.jpg'
 import imageGallery2 from './assets/gallery-2.jpg'
@@ -110,46 +110,32 @@ export const getStaticProps: GetStaticProps<CommonProps> =
 export default function Page({ seo, footerData }: CommonProps) {
   const [gallerySwiperInstance, setGallerySwiperInstance] =
     useState<SwiperClass | null>(null)
+
   return (
     <>
       {seo && <SeoContainer {...seo} />}
       <div className={`readable-content ${sohne.className}`}>
         {/* Header */}
-        <header className='fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur-sm bg-black/80'>
-          <div className='max-w-6xl mx-auto px-6 lg:px-12 py-4'>
-            <div className='h-10 flex items-center justify-between'>
-              <Link href='/' prefetch={false}>
-                <Image
-                  src={logoFull}
-                  priority
-                  width='135'
-                  height='40'
-                  alt='ClickHouse logo'
-                />
-              </Link>
-              <div className='flex gap-4'>
-                <OpenHouseButton
-                  href='https://sessionize.com/clickhouse-user-conference-2025/'
-                  target='_blank'
-                  variant='light'
-                  size='sm'
-                  className='hidden sm:inline-block'>
-                  Apply to speak
-                </OpenHouseButton>
-                <OpenHouseButton
-                  href='/openhouse/register'
-                  variant='primary'
-                  size='sm'>
-                  Register
-                </OpenHouseButton>
-              </div>
-            </div>
-          </div>
-        </header>
+        <OpenHouseHeader>
+          <OpenHouseButton
+            href='https://sessionize.com/clickhouse-user-conference-2025/'
+            target='_blank'
+            variant='light'
+            size='sm'
+            className='hidden sm:inline-block'>
+            Apply to speak
+          </OpenHouseButton>
+          <OpenHouseButton
+            href='/openhouse/register'
+            variant='primary'
+            size='sm'>
+            Register
+          </OpenHouseButton>
+        </OpenHouseHeader>
 
         {/* Hero */}
-        <section className='bg-black overflow-hidden relative pt-16'>
-          <div className='relative max-w-6xl mx-auto px-6 lg:px-12'>
+        <section className='bg-black overflow-hidden relative'>
+          <div className='relative max-w-6xl mx-auto px-6 lg:px-12 pt-16'>
             <div
               className={`absolute left-1/2 gradient-mask-to-b-[rgba(0,0,0,1)_0%,rgba(0,0,0,0.2)_70%] md:gradient-mask-to-r-[rgba(0,0,0,1)_0%,rgba(0,0,0,0.2)_70%] -translate-x-1/2 top-0 bottom-0 ${styles.gridBackground} bg-blend-luminosity mix-blend-luminosity opacity-50 w-dvw`}
             />

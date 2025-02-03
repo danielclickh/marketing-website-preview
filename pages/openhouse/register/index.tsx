@@ -9,12 +9,12 @@ import CopyUrlButton from '../../../components/CopyUrlButton'
 import EventPost from '../../../components/EventPostList/EventPost'
 import Footer from '../../../components/Footer'
 import MarketoForm from '../../../components/MarketoForm'
+import OpenHouseHeader from '../../../components/OpenHouseHeader'
 import SeoContainer from '../../../components/SeoContainer'
 import SocialButton from '../../../components/SocialButton'
 import { SuiButton } from '../../../components/sui'
 import { findAll } from '../../../lib/api/strapi'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import logoFull from '../../../public/logo-full.svg'
 import { EventType } from '../../../types/events'
 import { CommonProps } from '../../../types/homepage'
 import imageOpenhouseLogo from '../assets/logo.svg'
@@ -142,37 +142,22 @@ export default function Page({
       <div
         className={`readable-content ${sohne.className} bg-neutral-950 ${styles.dotBackground}`}>
         {/* Header */}
-        <header className='fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur-sm bg-black/80'>
-          <div className='max-w-6xl mx-auto px-6 lg:px-12 py-4'>
-            <div className='h-10 flex items-center justify-between'>
-              <Link href='/' prefetch={false}>
-                <Image
-                  src={logoFull}
-                  priority
-                  width='135'
-                  height='40'
-                  alt='ClickHouse logo'
-                />
-              </Link>
-              <div className='flex gap-4'>
-                <OpenHouseButton
-                  href='https://sessionize.com/clickhouse-user-conference-2025/'
-                  target='_blank'
-                  variant='light'
-                  size='sm'
-                  className='hidden sm:inline-block'>
-                  Apply to speak
-                </OpenHouseButton>
-                <OpenHouseButton
-                  href='/openhouse/register'
-                  variant='primary'
-                  size='sm'>
-                  Register
-                </OpenHouseButton>
-              </div>
-            </div>
-          </div>
-        </header>
+        <OpenHouseHeader>
+          <OpenHouseButton
+            href='https://sessionize.com/clickhouse-user-conference-2025/'
+            target='_blank'
+            variant='light'
+            size='sm'
+            className='hidden sm:inline-block'>
+            Apply to speak
+          </OpenHouseButton>
+          <OpenHouseButton
+            href='/openhouse/register'
+            variant='primary'
+            size='sm'>
+            Register
+          </OpenHouseButton>
+        </OpenHouseHeader>
 
         {/* Form */}
         <section className='my-20'>
@@ -192,7 +177,7 @@ export default function Page({
                   <>
                     <h1 className='text-3xl mb-4'>Register</h1>
                     <MarketoForm
-                      formId='1317'
+                      formId='1314'
                       clearbitTracking={true}
                       onLoad={() => setFormLoaded(true)}
                       onSuccess={() => {
