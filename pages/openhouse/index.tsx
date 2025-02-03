@@ -2,10 +2,11 @@ import { GetStaticProps } from 'next'
 import localFont from 'next/font/local'
 import Image, { ImageProps } from 'next/image'
 import Link, { LinkProps } from 'next/link'
-import { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import Ticker from 'react-ticker'
 import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import type { Swiper as SwiperClass } from 'swiper/types'
 import Footer from '../../components/Footer'
 import SeoContainer from '../../components/SeoContainer'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
@@ -107,6 +108,8 @@ export const getStaticProps: GetStaticProps<CommonProps> =
   }
 
 export default function Page({ seo, footerData }: CommonProps) {
+  const [gallerySwiperInstance, setGallerySwiperInstance] =
+    useState<SwiperClass | null>(null)
   return (
     <>
       {seo && <SeoContainer {...seo} />}
@@ -215,51 +218,91 @@ export default function Page({ seo, footerData }: CommonProps) {
         </div>
 
         {/* Gallery */}
-        <div className='py-24 bg-white'>
-          <Swiper
-            slidesPerView='auto'
-            spaceBetween={20}
-            centeredSlides={true}
-            loop={true}
-            loopAddBlankSlides={false}
-            loopPreventsSliding={true}
-            allowTouchMove={true}
-            className={styles.centerImageGallery}>
-            {(
-              [
-                {
-                  src: imageGallery1,
-                  alt: 'Photo 1',
-                  width: 874 / 2,
-                  height: 960 / 2
-                },
-                {
-                  src: imageGallery2,
-                  alt: 'Photo 2',
-                  width: 558 / 2,
-                  height: 880 / 2
-                },
-                {
-                  src: imageGallery3,
-                  alt: 'Photo 3',
-                  width: 762 / 2,
-                  height: 960 / 2
-                },
-                {
-                  src: imageGallery4,
-                  alt: 'Photo 4',
-                  width: 656 / 2,
-                  height: 880 / 2
-                }
-              ] satisfies Array<ImageProps>
-            ).map((image, imageIndex) => {
-              return (
-                <SwiperSlide key={imageIndex} style={{ width: image.width }}>
-                  <Image {...image} className='w-full h-auto' />
-                </SwiperSlide>
-              )
-            })}
-          </Swiper>
+        <div
+          className={`bg-white text-black group/container relative ${styles.imageGallery}`}>
+          <div className='gallery-container py-24'>
+            <Swiper
+              slidesPerView='auto'
+              spaceBetween={20}
+              centeredSlides={true}
+              loop={true}
+              loopAddBlankSlides={true}
+              loopPreventsSliding={true}
+              allowTouchMove={true}
+              onInit={setGallerySwiperInstance}>
+              {Array(12)
+                .fill([
+                  {
+                    src: imageGallery1,
+                    alt: 'Photo 1',
+                    width: 874 / 2,
+                    height: 960 / 2
+                  },
+                  {
+                    src: imageGallery2,
+                    alt: 'Photo 2',
+                    width: 558 / 2,
+                    height: 880 / 2
+                  },
+                  {
+                    src: imageGallery3,
+                    alt: 'Photo 3',
+                    width: 762 / 2,
+                    height: 960 / 2
+                  },
+                  {
+                    src: imageGallery4,
+                    alt: 'Photo 4',
+                    width: 656 / 2,
+                    height: 880 / 2
+                  }
+                ] satisfies Array<ImageProps>)
+                .flat()
+                .map((image, imageIndex) => {
+                  return (
+                    <SwiperSlide
+                      key={imageIndex}
+                      style={{ maxWidth: image.width }}>
+                      <Image {...image} className='w-3/4 md:w-full h-auto' />
+                    </SwiperSlide>
+                  )
+                })}
+            </Swiper>
+          </div>
+          <button
+            onClick={() => gallerySwiperInstance?.slidePrev()}
+            className='group/button absolute bottom-0 left-0 top-0 z-10 hidden w-24 appearance-none items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100 sm:flex'>
+            <span className='bg-ch-yellow flex items-center justify-center w-16 text-black rounded-full aspect-square'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='23'
+                height='15'
+                fill='none'
+                viewBox='0 0 23 15'>
+                <path
+                  fill='currentColor'
+                  d='M7.22354.204545 8.87127 1.84517 4.54599 6.16335H22.4082v2.40057H4.54599l4.32528 4.32528-1.64773 1.6335L.0644531 7.36364 7.22354.204545Z'
+                />
+              </svg>
+            </span>
+          </button>
+          <button
+            onClick={() => gallerySwiperInstance?.slideNext()}
+            className='group/button absolute bottom-0 right-0 top-0 z-10 hidden w-24 appearance-none items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100 sm:flex'>
+            <span className='bg-ch-yellow flex items-center justify-center w-16 text-black rounded-full aspect-square'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='15'
+                fill='none'
+                viewBox='0 0 24 15'>
+                <path
+                  fill='currentColor'
+                  d='m15.8751 14.7955-1.6477-1.6407 4.3252-4.31815H.69043V6.43608H18.5526L14.2274 2.1108 15.8751.477273l7.1591 7.159087-7.1591 7.15914Z'
+                />
+              </svg>
+            </span>
+          </button>
         </div>
 
         {/* Table */}
@@ -647,9 +690,9 @@ interface OpenHouseButtonProps
 }
 
 const openHouseButtonVariantClasses: Record<OpenHouseButtonVariants, string> = {
-  light: 'bg-white text-neutral-750',
-  dark: 'bg-neutral-750 text-white',
-  primary: 'bg-ch-yellow text-neutral-750'
+  light: 'bg-white text-neutral-750 hover:bg-neutral-200',
+  dark: 'bg-neutral-750 text-white hover:bg-black',
+  primary: 'bg-ch-yellow text-neutral-750 hover:bg-ch-yellow-600'
 }
 
 const openHouseButtonSizeClasses: Record<OpenHouseButtonSizes, string> = {

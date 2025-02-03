@@ -301,9 +301,9 @@ interface OpenHouseButtonProps
 }
 
 const openHouseButtonVariantClasses: Record<OpenHouseButtonVariants, string> = {
-  light: 'bg-white text-neutral-750',
-  dark: 'bg-neutral-750 text-white',
-  primary: 'bg-ch-yellow text-neutral-750'
+  light: 'bg-white text-neutral-750 hover:bg-neutral-200',
+  dark: 'bg-neutral-750 text-white hover:bg-black',
+  primary: 'bg-ch-yellow text-neutral-750 hover:bg-ch-yellow-600'
 }
 
 const openHouseButtonSizeClasses: Record<OpenHouseButtonSizes, string> = {
