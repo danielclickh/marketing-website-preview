@@ -1,5 +1,5 @@
 import { CalendarIcon } from '@heroicons/react/outline'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import CategorySelector from '../../../components/CategorySelector'
@@ -10,16 +10,19 @@ import NewsItem from '../../../components/NewsItem'
 import RecentEvents from '../../../components/RecentEvents'
 import { StrapiImage } from '../../../components/StrapiElements'
 import { SuiTitle } from '../../../components/sui'
-import { findAll, findOne } from '../../../lib/api/strapi'
+import {
+  findAll,
+  findOne,
+  getStagingOnlyFilters
+} from '../../../lib/api/strapi'
 import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { convertDateToString } from '../../../lib/utils/dateUtils'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import { EventType } from '../../../types/events'
 import { NewsAndEventsData, NewsEventProps } from '../../../types/newsEvents'
 
-export const getStaticProps: GetStaticProps<NewsEventProps> =
-  async function getStaticProps() {
+export const getServerSideProps: GetServerSideProps<NewsEventProps> =
+  async function getServerSideProps() {
     const newsEvents: Promise<NewsAndEventsData> = findOne('news-and-event', {
       populate: [
         'hero',
@@ -34,9 +37,16 @@ export const getStaticProps: GetStaticProps<NewsEventProps> =
 
     const events: Promise<{ data: EventType[] }> = findAll('events', {
       filters: {
-        localDatetime: {
-          $gte: new Date().toISOString()
-        }
+        $and: [
+          {
+            localDatetime: {
+              $gte: new Date().toISOString()
+            }
+          },
+          {
+            $or: getStagingOnlyFilters()
+          }
+        ]
       },
       sort: ['localDatetime:ASC'],
       populate: [
@@ -77,9 +87,16 @@ export const getStaticProps: GetStaticProps<NewsEventProps> =
     }
 
     const filters: Record<string, any> = {
-      localDatetime: {
-        $lt: new Date().toISOString()
-      }
+      $and: [
+        {
+          localDatetime: {
+            $lt: new Date().toISOString()
+          }
+        },
+        {
+          $or: getStagingOnlyFilters()
+        }
+      ]
     }
     const { data: recentEvents }: { data: EventType[] } = await findAll(
       'events',
@@ -107,7 +124,7 @@ export const getStaticProps: GetStaticProps<NewsEventProps> =
       props: {
         title,
         description,
-        featuredEvent,
+        featuredEvent: featuredEvent || null,
         newsItems,
         latestNewsTitle,
         upcomingEventsTitle,
@@ -117,8 +134,7 @@ export const getStaticProps: GetStaticProps<NewsEventProps> =
         recentEvents,
         seo,
         ...commonProps
-      },
-      revalidate: REVALIDATE_SECONDS
+      }
     }
   }
 

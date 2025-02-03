@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import EventPost from '../../../components/EventPostList/EventPost'
 import EventsContainer from '../../../components/EventsContainer'
@@ -6,21 +6,27 @@ import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'
 import { StrapiImage } from '../../../components/StrapiElements'
 import { SuiText, SuiTitle } from '../../../components/sui'
-import { findAll, getPathsValues } from '../../../lib/api/strapi'
+import { findAll, getStagingOnlyFilters } from '../../../lib/api/strapi'
 import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
 import { EventProps, EventType } from '../../../types/events'
 import { ParamsType } from '../../../types/homepage'
 
-export const getStaticProps: GetStaticProps<EventProps> =
-  async function getStaticProps({ params }) {
+export const getServerSideProps: GetServerSideProps<EventProps> =
+  async function getServerSideProps({ params }) {
     const { slug } = params as ParamsType
     const { data } = await findAll('events', {
       filters: {
-        slug: {
-          $eq: slug
-        }
+        $and: [
+          {
+            slug: {
+              $eq: slug
+            }
+          },
+          {
+            $or: getStagingOnlyFilters()
+          }
+        ]
       },
       sort: ['localDatetime:DESC'],
       populate: [
@@ -41,12 +47,21 @@ export const getStaticProps: GetStaticProps<EventProps> =
       'events',
       {
         filters: {
-          localDatetime: {
-            $gte: new Date().toISOString()
-          },
-          slug: {
-            $notContains: slug
-          }
+          $and: [
+            {
+              localDatetime: {
+                $gte: new Date().toISOString()
+              }
+            },
+            {
+              slug: {
+                $notContains: slug
+              }
+            },
+            {
+              $or: getStagingOnlyFilters()
+            }
+          ]
         },
         sort: ['localDatetime:ASC'],
         populate: [
@@ -69,8 +84,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
     const page = data[0]
     if (!page) {
       return {
-        notFound: true,
-        revalidate: REVALIDATE_SECONDS
+        notFound: true
       }
     }
 
@@ -97,8 +111,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
         },
         recentEvents,
         ...commonProps
-      },
-      revalidate: REVALIDATE_SECONDS
+      }
     }
   }
 
@@ -214,44 +227,6 @@ function EventPage({
       </div>
     </Layout>
   )
-}
-
-export async function getStaticPaths() {
-  const params = {
-    fields: ['slug'],
-    filters: {
-      $or: [
-        {
-          eventVideoUrl: {
-            $null: true
-          }
-        },
-        {
-          eventVideoUrl: {
-            $eq: ''
-          }
-        }
-      ]
-    }
-  }
-  const allPaths = await getPathsValues('events', params)
-  // Define an array of slugs to exclude
-  const excludedSlugs = [
-    'clickhouse-workshop',
-    'clickhouse-fundamentals',
-    '202410-apj-power-lunch',
-    '202410-apj-singapore-inperson-training'
-  ]
-  // Filter out the paths with the excluded slugs
-  const paths = allPaths.filter((path) => {
-    const slug = path.params.slug
-    return !excludedSlugs.includes(slug)
-  })
-
-  return {
-    paths,
-    fallback: 'blocking'
-  }
 }
 
 export default EventPage
