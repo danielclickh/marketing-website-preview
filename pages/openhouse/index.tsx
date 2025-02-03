@@ -674,7 +674,7 @@ function OpenHouseButton({
   )
 }
 
-export interface AccordionItemProps {
+interface AccordionItemProps {
   handle: string
   children: React.ReactNode
   open?: boolean
