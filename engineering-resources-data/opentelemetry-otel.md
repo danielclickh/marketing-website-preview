@@ -21,7 +21,7 @@ As a complex system catering to a broad array of stakeholders, OpenTelemetry's u
 
 ## What is telemetry data?
 
-Now that we’ve defined OTel, it's crucial to understand telemetry data and why it's vital for the observability of modern software systems. Telemetry, in the context of software, refers to the generation and collection of data about a system that will help developers optimize performance, troubleshoot issues, and ensure system health.
+Now that we’ve defined OTel, it's crucial to understand [telemetry data](https://clickhouse.com/engineering-resources/telemetry-data) and why it's vital for the observability of modern software systems. Telemetry, in the context of software, refers to the generation and collection of data about a system that will help developers optimize performance, troubleshoot issues, and ensure system health.
 
 There are three main types of telemetry data: metrics, traces, and logs. Each type serves different observability needs and provides unique insights into your systems.
 
@@ -50,6 +50,8 @@ For example, a cloud storage service might log every file access request to moni
 OpenTelemetry supports structured logging, enhancing the ability to efficiently analyze and interpret large volumes of log data. Logs are essential for detailed diagnostics, security monitoring, and compliance, and they serve as a critical component of post-incident analysis and auditing.
 
 Combining metrics, traces, and logs offers a holistic view of system performance and health. OpenTelemetry's standardized approach simplifies the collection and analysis of these data types, enhancing observability across your technology stack. This integration allows teams to correlate data from different sources, providing deeper insights and more actionable intelligence to optimize systems effectively.
+
+➡️ Read more about [telemetry data](https://clickhouse.com/engineering-resources/telemetry-data)
 
 ## Why does OTel matter?
 
