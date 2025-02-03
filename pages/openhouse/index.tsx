@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next'
 import localFont from 'next/font/local'
 import Image, { ImageProps } from 'next/image'
 import Link, { LinkProps } from 'next/link'
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Ticker from 'react-ticker'
 import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -334,7 +334,7 @@ export default function Page({ seo, footerData }: CommonProps) {
           <div className='max-w-6xl mx-auto px-6 lg:px-12'>
             <h2 className='text-4xl mb-10 text-center'>Agenda at a glance</h2>
             <div className='space-y-6 lg:space-y-0 lg:grid grid-cols-2 gap-6'>
-              <div className='bg-white py-10 px-12 space-y-6 text-lg'>
+              <div className='bg-white py-8 px-6 lg:py-10 lg:px-12 space-y-6 lg:text-lg'>
                 <h3 className={`text-4xl ${sohneBreit.className}`}>
                   <small className='uppercase font-bold text-2xl'>MAY 28</small>
                   <br />
@@ -361,7 +361,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                   Open to conference registrants only.
                 </p>
               </div>
-              <div className='bg-white py-10 px-12 text-lg space-y-3'>
+              <div className='bg-white py-8 px-6 lg:py-10 lg:px-12 lg:text-lg space-y-3'>
                 <h3 className={`text-4xl mb-6 ${sohneBreit.className}`}>
                   <small className='uppercase font-bold text-2xl'>MAY 29</small>
                   <br />
@@ -503,8 +503,8 @@ export default function Page({ seo, footerData }: CommonProps) {
         <section
           className={`relative pt-24 pb-20 lg:min-h-[700px] flex bg-[#2F3032] text-black bg-blend-screen ${styles.patternBackground}`}>
           <div className='max-w-6xl mx-auto my-auto w-full px-6 lg:px-12'>
-            <div className='space-y-6 lg:space-y-0 lg:grid grid-cols-2 gap-6'>
-              <div className='bg-white py-10 px-12 space-y-8 text-lg'>
+            <div className='space-y-6 md:space-y-0 md:grid grid-cols-2 gap-6'>
+              <div className='bg-white py-8 px-6 lg:py-10 lg:px-12 space-y-8 text-lg'>
                 <h3 className={`text-4xl ${sohneBreit.className}`}>
                   Open House
                 </h3>
@@ -525,7 +525,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                   </OpenHouseButton>
                 </p>
               </div>
-              <div className='bg-white py-10 px-12 space-y-8 text-lg'>
+              <div className='bg-white py-8 px-6 lg:py-10 lg:px-12 space-y-8 text-lg'>
                 <h3 className={`text-4xl mb-6 ${sohneBreit.className}`}>
                   Watch Parties
                 </h3>
@@ -542,8 +542,92 @@ export default function Page({ seo, footerData }: CommonProps) {
         </section>
 
         {/* FAQs */}
+        <section className='relative py-20 bg-white text-black'>
+          <div className='max-w-6xl mx-auto px-6 lg:px-12'>
+            <h2 className='text-4xl text-center mb-4'>FAQs</h2>
+            <AccordionItem handle='What is Open House 2025 by ClickHouse?'>
+              <p className='max-w-3xl'>
+                Open House 2025 is the first ever ClickHouse User Conference! It
+                is a premier one-day event for ClickHouse users, contributors,
+                enthusiasts, and customers, hosted in the heart of San Francisco
+                on 29 May. For those unable to join in person, the event will be
+                streamed to multiple locations worldwide, ensuring everyone can
+                be part of this global gathering.
+              </p>
+            </AccordionItem>
+            <AccordionItem handle='Where will the event be live-streamed?'>
+              <p className='max-w-3xl'>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Consequuntur debitis dignissimos eos facilis in ipsa ipsam,
+                iusto maiores, pariatur perferendis porro quae quibusdam quo
+                quos sunt tenetur veniam voluptatem voluptatum!
+              </p>
+            </AccordionItem>
+            <AccordionItem handle='What can I expect from the agenda?'>
+              <p className='max-w-3xl'>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Consequuntur debitis dignissimos eos facilis in ipsa ipsam,
+                iusto maiores, pariatur perferendis porro quae quibusdam quo
+                quos sunt tenetur veniam voluptatem voluptatum!
+              </p>
+            </AccordionItem>
+            <AccordionItem handle='Will you be offering in-person training?'>
+              <p className='max-w-3xl'>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Consequuntur debitis dignissimos eos facilis in ipsa ipsam,
+                iusto maiores, pariatur perferendis porro quae quibusdam quo
+                quos sunt tenetur veniam voluptatem voluptatum!
+              </p>
+            </AccordionItem>
+            <AccordionItem handle='Will there be a CFP process for speakers?'>
+              <p className='max-w-3xl'>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Consequuntur debitis dignissimos eos facilis in ipsa ipsam,
+                iusto maiores, pariatur perferendis porro quae quibusdam quo
+                quos sunt tenetur veniam voluptatem voluptatum!
+              </p>
+            </AccordionItem>
+          </div>
+        </section>
 
         {/* Get in touch */}
+        <section className='relative pb-20 bg-white text-black'>
+          <div className='max-w-6xl mx-auto px-6 lg:px-12'>
+            <div className='bg-ch-teal rounded p-8 lg:py-16 lg:px-14 text-white flex flex-col lg:flex-row items-center gap-y-10 gap-x-20'>
+              <div className='w-full lg:w-auto'>
+                <h2 className='text-4xl mb-4'>Get in touch</h2>
+                <p className='text-lg'>
+                  For questions about the event or general inquiries,
+                  <br />
+                  please reach out to{' '}
+                  <Link
+                    href='mailto:openhouse@clickhouse.com'
+                    target='_blank'
+                    className='underline hover:decoration-2'>
+                    openhouse@clickhouse.com
+                  </Link>
+                </p>
+              </div>
+              <div className='flex flex-col sm:flex-row gap-4 items-center flex-1 w-full lg:w-auto'>
+                <OpenHouseButton
+                  href='https://sessionize.com/clickhouse-user-conference-2025/'
+                  target='_blank'
+                  variant='light'
+                  size='lg'
+                  className='flex-1 w-full sm:w-auto'>
+                  Apply to speak
+                </OpenHouseButton>
+                <OpenHouseButton
+                  href='/openhouse/register'
+                  variant='primary'
+                  size='lg'
+                  className='flex-1 w-full sm:w-auto'>
+                  Register
+                </OpenHouseButton>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
       <Footer {...footerData} />
     </>
@@ -587,5 +671,50 @@ function OpenHouseButton({
       className={`inline-block rounded text-center transition-colors ${sohneBreit.className} ${openHouseButtonVariantClasses[variant]} ${openHouseButtonSizeClasses[size]} ${className}`}>
       {children}
     </Link>
+  )
+}
+
+export interface AccordionItemProps {
+  handle: string
+  children: React.ReactNode
+  open?: boolean
+  className?: React.HTMLProps<HTMLDivElement>['className']
+  id?: React.HTMLProps<HTMLDivElement>['id']
+}
+
+function AccordionItem({
+  handle,
+  children,
+  open = false,
+  className = '',
+  id
+}: AccordionItemProps) {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  // Sync local state with prop
+  useEffect(() => {
+    setIsOpen(open)
+  }, [open])
+
+  return (
+    <div className={`border-b-2 border-black ${className}`}>
+      <button
+        onClick={() => setIsOpen((old) => !old)}
+        className='flex w-full items-center gap-4 py-4 text-left text-lg'>
+        <span className='flex-1 text-xl'>{handle}</span>
+        <span className='relative ml-auto block aspect-square w-10 flex-shrink-0 flex-grow-0 p-3 transition-colors lg:w-12 lg:p-4'>
+          <span
+            className={`absolute left-1/2 top-1/2 block h-0.5 w-4 -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 ${isOpen ? '-rotate-90' : ''}`}>
+            <span
+              className={`absolute inset-0 bg-black transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`}
+            />
+            <span className='absolute inset-0 rotate-90 bg-black' />
+          </span>
+        </span>
+      </button>
+      <div className={`-mt-4 pb-6 ${isOpen ? 'block' : 'hidden'}`}>
+        {children}
+      </div>
+    </div>
   )
 }
