@@ -20,6 +20,14 @@ import imageIconFaq from './assets/icon-faq.svg'
 import imageIconMegaphone from './assets/icon-megaphone.svg'
 import imageIconNetwork from './assets/icon-network.svg'
 import imageOpenhouseLogo from './assets/logo.svg'
+import imageAaronKatz from './assets/speaker-aaron-katz.png'
+import imageAlexyMilovidov from './assets/speaker-alexey-milovidov.png'
+import imageMarkNeedham from './assets/speaker-mark-needham.png'
+import imageRobertSchulze from './assets/speaker-robert-schulze.png'
+import imageRopaTangirala from './assets/speaker-roopa-tangirala.png'
+import imageTanyaBragin from './assets/speaker-tanya-bragin.png'
+import imageYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
+import imageZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
 import styles from './styles.module.scss'
 
 const sohne = localFont({
@@ -104,7 +112,7 @@ export default function Page({ seo, footerData }: CommonProps) {
       {seo && <SeoContainer {...seo} />}
       <div className={`readable-content ${sohne.className}`}>
         {/* Header */}
-        <header className='fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur-sm bg-neutral-900/80'>
+        <header className='fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur-sm bg-black/80'>
           <div className='max-w-6xl mx-auto px-6 lg:px-12 py-4'>
             <div className='h-10 flex items-center justify-between'>
               <Link href='/' prefetch={false}>
@@ -260,65 +268,50 @@ export default function Page({ seo, footerData }: CommonProps) {
             <h2 className='text-4xl mb-14 lg:mb-20 text-center'>
               What’s happening at Open House?
             </h2>
-            <div className='lg:divide-y-2 divide-ch-yellow'>
+            <div className='divide-y-2 divide-ch-yellow'>
               {(
                 [
                   {
                     title: 'News & roadmap',
                     description:
                       'Hear from company founders and product leaders about latest company and product news and the future of ClickHouse.',
-                    icon: {
-                      src: imageIconMegaphone,
-                      alt: 'Megaphone Icon',
-                      width: 75,
-                      height: 75
-                    }
+                    icon: imageIconMegaphone
                   },
                   {
                     title: 'Technical track',
                     description:
                       'Dive deep into the newest features for real-time analytics, data warehousing, observability, and AI/ML use cases.',
-                    icon: {
-                      src: imageIconBinary,
-                      alt: 'Binary Icon',
-                      width: 75,
-                      height: 75
-                    }
+                    icon: imageIconBinary
                   },
                   {
                     title: 'Networking',
                     description:
                       'Hear talks and see demos from other users and network during breakfast, lunch, and evening reception.',
-                    icon: {
-                      src: imageIconNetwork,
-                      alt: 'Networking Icon',
-                      width: 75,
-                      height: 75
-                    }
+                    icon: imageIconNetwork
                   },
                   {
                     title: 'Ask me anything',
                     description:
                       'ClickHouse experts from core database developers to support around every day to answer questions in a dedicated AMA area.',
-                    icon: {
-                      src: imageIconFaq,
-                      alt: 'FAQ Icon',
-                      width: 75,
-                      height: 75
-                    }
+                    icon: imageIconFaq
                   }
                 ] satisfies Array<{
                   title: string
                   description: string
-                  icon: ImageProps
+                  icon: Pick<ImageProps, 'src'>
                 }>
               ).map((row, rowIndex) => {
                 return (
                   <div
                     key={rowIndex}
                     className='space-y-6 lg:space-y-0 py-6 lg:py-0 lg:grid grid-cols-[repeat(15,_minmax(0,_1fr))] lg:divide-x-2 divide-white'>
-                    <div className='col-span-2 lg:flex items-center justify-center lg:py-8 lg:pr-2'>
-                      <Image {...row.icon} />
+                    <div className='col-span-2 sm:float-start sm:mr-4 lg:mr-0 lg:float-none lg:flex items-center justify-center lg:py-8 lg:pr-2'>
+                      <Image
+                        src={row.icon}
+                        width={75}
+                        height={75}
+                        alt={row.title}
+                      />
                     </div>
                     <div className='col-span-5 lg:px-2 lg:text-center lg:flex items-center justify-center uppercase font-bold text-2xl lg:py-8'>
                       {row.title}
@@ -341,19 +334,63 @@ export default function Page({ seo, footerData }: CommonProps) {
           <div className='max-w-6xl mx-auto px-6 lg:px-12'>
             <h2 className='text-4xl mb-10 text-center'>Agenda at a glance</h2>
             <div className='space-y-6 lg:space-y-0 lg:grid grid-cols-2 gap-6'>
-              <div className='bg-white py-10 px-12'>
+              <div className='bg-white py-10 px-12 space-y-6 text-lg'>
                 <h3 className={`text-4xl ${sohneBreit.className}`}>
                   <small className='uppercase font-bold text-2xl'>MAY 28</small>
                   <br />
                   Workshop
                 </h3>
+                <p>
+                  Join us for a free "Developer Fast Track"
+                  <br />
+                  hands-on training.
+                </p>
+                <p>
+                  <strong>We'll cover:</strong>
+                </p>
+                <ul className='!mt-0 pl-8 list-disc'>
+                  <li>Module 1: Getting Started with ClickHouse</li>
+                  <li>Module 2: ClickHouse Architecture</li>
+                  <li>Module 3: Modeling Data</li>
+                  <li>Module 4: Inserting Data</li>
+                  <li>Module 5: Analyzing Data</li>
+                </ul>
+                <p>
+                  This will be a full-day event with limited seats.
+                  <br />
+                  Open to conference registrants only.
+                </p>
               </div>
-              <div className='bg-white py-10 px-12'>
-                <h3 className={`text-4xl ${sohneBreit.className}`}>
+              <div className='bg-white py-10 px-12 text-lg space-y-3'>
+                <h3 className={`text-4xl mb-6 ${sohneBreit.className}`}>
                   <small className='uppercase font-bold text-2xl'>MAY 29</small>
                   <br />
                   Conference
                 </h3>
+                <p>
+                  <strong>Sessions:</strong>
+                </p>
+                <ul className='!mt-0 pl-8 list-disc'>
+                  <li>Opening keynote with ClickHouse founders</li>
+                  <li>Roadmap session with product leaders</li>
+                  <li>In-depth customer talks from our largest users</li>
+                  <li>Technical feature deep dives from our engineers</li>
+                </ul>
+                <p>
+                  <strong>Breakouts:</strong>
+                </p>
+                <ul className='!mt-0 pl-8 list-disc'>
+                  <li>Use Case & Integration Demos</li>
+                  <li>“Built on ClickHouse” showcase</li>
+                  <li>AMA Booth</li>
+                </ul>
+                <p>
+                  <strong>Networking:</strong>
+                </p>
+                <ul className='!mt-0 pl-8 list-disc'>
+                  <li>Catered breakfast & lunch</li>
+                  <li>Evening networking reception</li>
+                </ul>
               </div>
             </div>
             <div className='mt-10 text-center'>
@@ -369,8 +406,140 @@ export default function Page({ seo, footerData }: CommonProps) {
         </section>
 
         {/* Speakers */}
+        <section className='relative py-20 bg-white text-black'>
+          <div
+            className={`bg-white h-8 absolute -bottom-8 left-0 right-0 z-20 ${styles.textureMaskBottom}`}
+          />
+          <div className='max-w-6xl mx-auto px-6 lg:px-12'>
+            <h2 className='text-4xl text-center mb-4'>Speakers</h2>
+            <p className='text-2xl text-center mb-10'>
+              We have an exciting line-up of speakers, and more announcements on
+              the way
+            </p>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8'>
+              {(
+                [
+                  {
+                    name: 'Aaron Katz',
+                    title: 'Founder, CEO',
+                    image: imageAaronKatz
+                  },
+                  {
+                    name: 'Tanya Bragin',
+                    title: 'VP Product & Marketing',
+                    image: imageTanyaBragin
+                  },
+                  {
+                    name: 'Alexy Milovidov',
+                    title: 'Founder, CTO',
+                    image: imageAlexyMilovidov
+                  },
+                  {
+                    name: 'Roopa Tangirala',
+                    title: 'VP, Engineering',
+                    image: imageRopaTangirala
+                  },
+                  {
+                    name: 'Mark Needham',
+                    title: 'Principal PME',
+                    image: imageMarkNeedham
+                  },
+                  {
+                    name: 'Robert Schulze',
+                    title: 'Core Engineering Lead',
+                    image: imageRobertSchulze
+                  },
+                  {
+                    name: 'Zoe Steinkamp',
+                    title: 'Senior Developer Advocate',
+                    image: imageZoeSteinkamp
+                  },
+                  {
+                    name: 'Yury Izrailevsky',
+                    title: 'Founder, President',
+                    image: imageYuryIzrailevsky
+                  }
+                ] satisfies Array<{
+                  name: string
+                  title: string
+                  image: ImageProps['src']
+                }>
+              ).map((profile, profileIndex) => {
+                return (
+                  <div key={profileIndex}>
+                    <div className='relative -mx-3 mb-4'>
+                      <div
+                        className={`absolute top-5 left-3 right-3 bottom-0 bg-[#EFEFEF] ${styles.gridBackgroundSmall}`}
+                      />
+                      <Image
+                        src={profile.image}
+                        alt={profile.name}
+                        width={353}
+                        height={505}
+                        className='w-full h-auto max-w-none relative z-10'
+                      />
+                    </div>
+                    <h3 className='text-2xl'>{profile.name}</h3>
+                    <p className='text-lg'>{profile.title}</p>
+                  </div>
+                )
+              })}
+            </div>
+
+            <div className='mt-14 text-center'>
+              <OpenHouseButton
+                href='https://sessionize.com/clickhouse-user-conference-2025/'
+                target='_blank'
+                variant='dark'
+                size='lg'
+                className='min-w-48'>
+                Apply to speak
+              </OpenHouseButton>
+            </div>
+          </div>
+        </section>
 
         {/* CTAs */}
+        <section
+          className={`relative pt-24 pb-20 lg:min-h-[700px] flex bg-[#2F3032] text-black bg-blend-screen ${styles.patternBackground}`}>
+          <div className='max-w-6xl mx-auto my-auto w-full px-6 lg:px-12'>
+            <div className='space-y-6 lg:space-y-0 lg:grid grid-cols-2 gap-6'>
+              <div className='bg-white py-10 px-12 space-y-8 text-lg'>
+                <h3 className={`text-4xl ${sohneBreit.className}`}>
+                  Open House
+                </h3>
+                <p>
+                  The Pearl
+                  <br />
+                  San Francisco, California
+                  <br />
+                  FREE
+                </p>
+                <p>
+                  <OpenHouseButton
+                    href='/openhouse/register'
+                    variant='primary'
+                    size='lg'
+                    className='min-w-48 border border-black'>
+                    Register
+                  </OpenHouseButton>
+                </p>
+              </div>
+              <div className='bg-white py-10 px-12 space-y-8 text-lg'>
+                <h3 className={`text-4xl mb-6 ${sohneBreit.className}`}>
+                  Watch Parties
+                </h3>
+                <p>
+                  Can’t make it to San Francisco? We’ll be hosting watch parties
+                  in select cities worldwide.
+                </p>
+                <p>
+                  <strong>Stay tuned for more information.</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* FAQs */}
 
@@ -384,7 +553,9 @@ export default function Page({ seo, footerData }: CommonProps) {
 type OpenHouseButtonVariants = 'light' | 'dark' | 'primary'
 type OpenHouseButtonSizes = 'sm' | 'md' | 'lg'
 
-interface OpenHouseButtonProps extends LinkProps {
+interface OpenHouseButtonProps
+  extends LinkProps,
+    Omit<React.HTMLProps<HTMLAnchorElement>, keyof LinkProps | 'size' | 'ref'> {
   children: React.ReactNode
   variant?: OpenHouseButtonVariants
   size?: OpenHouseButtonSizes
