@@ -326,7 +326,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                       image: imageTanyaBragin
                     },
                     {
-                      name: 'Alexy Milovidov',
+                      name: 'Alexey Milovidov',
                       title: 'Founder, CTO',
                       image: imageAlexyMilovidov
                     },
