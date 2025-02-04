@@ -1,10 +1,11 @@
 import { GetStaticProps } from 'next'
+import Link from 'next/link'
 import { useRef, useState } from 'react'
-import GrowingCommunity from '../../../components/GrowingCommunity'
-import HRSeparator from '../../../components/HRSeparator'
+import { CUICard } from '../../../components/ClickUI'
+import DotsContainer from '../../../components/DotsContainer'
 import Layout from '../../../components/Layout'
 import MarketoForm from '../../../components/MarketoForm'
-import { SuiTitle } from '../../../components/sui'
+import { SuiText, SuiTitle } from '../../../components/sui'
 import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
@@ -38,39 +39,51 @@ export default function ContactPage({
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='pt-10'>
-        <div className='container mx-auto flex flex-col px-8 2xl:px-0'>
-          <div className='mx-auto flex flex-col pt-6 text-center'>
-            <SuiTitle type='h1' className='mb-4'>
-              Data Lakehouse Private Preview
+      <DotsContainer>
+        <div className='mx-auto w-full lg:max-w-xl'>
+          <div className='text-center mb-16'>
+            <SuiTitle type='h1' className='text-[28px] md:text-4xl'>
+              ClickHouse as the query engine for your data lakehouse
             </SuiTitle>
-            <div className='mx-auto max-w-3xl text-neutral-200'>
-              ClickHouse Data Lakehouse capabilities are now in Private Preview!
-              To express interest and participate, please answer the following
-              questions and provide your email address
-            </div>
           </div>
-          <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 pb-8 pt-14 text-center md:bg-no-repeat 2xl:px-0'>
-            <div className='w-full space-y-5 self-center text-left md:max-w-screen-sm'>
+          <CUICard className='bg-neutral-900/80'>
+            <CUICard.Body className='p-4 lg:p-6'>
               {!formSuccess && (
-                <MarketoForm
-                  formId={'1315'}
-                  clearbitTracking={true}
-                  onLoad={() => {
-                    setFormLoaded(true)
-                  }}
-                  onSuccess={() => {
-                    setFormSuccess(true)
-                    // Delay needed to allow the ref to update before scrolling
-                    setTimeout(() => {
-                      formSuccessRef.current?.scrollIntoView({
-                        behavior: 'smooth'
-                      })
-                    }, 10)
+                <>
+                  <div className='mb-8 mt-4 space-y-4 text-center lg:mb-12 lg:mt-4'>
+                    <SuiTitle type='h2' className='text-2xl'>
+                      Join the waitlist
+                    </SuiTitle>
+                    <SuiText className='opacity-70'>
+                      ClickHouse lakehouse capabilities are coming to Private
+                      Preview! To join the waitlist, simply answer the questions
+                      below.{' '}
+                      <Link
+                        href='#'
+                        className='text-primary-300 hover:underline'>
+                        Read more
+                      </Link>
+                    </SuiText>
+                  </div>
+                  <MarketoForm
+                    formId={'1315'}
+                    clearbitTracking={true}
+                    onLoad={() => {
+                      setFormLoaded(true)
+                    }}
+                    onSuccess={() => {
+                      setFormSuccess(true)
+                      // Delay needed to allow the ref to update before scrolling
+                      setTimeout(() => {
+                        formSuccessRef.current?.scrollIntoView({
+                          behavior: 'smooth'
+                        })
+                      }, 10)
 
-                    return false // Stops page from reloading
-                  }}
-                />
+                      return false // Stops page from reloading
+                    }}
+                  />
+                </>
               )}
 
               {!formLoaded && (
@@ -78,21 +91,44 @@ export default function ContactPage({
               )}
 
               {formSuccess && (
-                <div ref={formSuccessRef}>
-                  <h3 className='text-center text-2xl font-bold'>
-                    Thank you for your submission!
+                <div
+                  ref={formSuccessRef}
+                  className='flex flex-col items-center py-10 lg:py-20'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='52'
+                    height='52'
+                    fill='none'
+                    viewBox='0 0 52 52'>
+                    <path
+                      stroke='#CCFFD0'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth='3'
+                      d='M26 50v0A24 24 0 0 1 2 26v0A24 24 0 0 1 26 2v0a24 24 0 0 1 24 24v0a24 24 0 0 1-24 24Z'
+                      clipRule='evenodd'
+                    />
+                    <path
+                      stroke='#CCFFD0'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth='3'
+                      d='M36.7 20.7 23.3 34l-8-8'
+                    />
+                  </svg>
+                  <h3 className='text-center text-2xl font-bold mt-8 mb-4'>
+                    You’ve been added to the waitlist!
                   </h3>
                   <p className='mt-2 text-center text-neutral-200'>
-                    We will be in touch soon.
+                    Thank you for your interest in ClickHouse’s data lakehouse
+                    capabilities. We’ll be in touch soon.
                   </p>
                 </div>
               )}
-            </div>
-          </div>
+            </CUICard.Body>
+          </CUICard>
         </div>
-      </div>
-      <HRSeparator className='my-24' />
-      <GrowingCommunity />
+      </DotsContainer>
     </Layout>
   )
 }
