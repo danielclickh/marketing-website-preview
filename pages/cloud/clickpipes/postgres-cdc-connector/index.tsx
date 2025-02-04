@@ -3,6 +3,7 @@ import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import React, { CSSProperties } from 'react'
 import { CUIButton, CUICard } from '../../../../components/ClickUI'
+import DotsContainer from '../../../../components/DotsContainer'
 import Layout from '../../../../components/Layout'
 import PostgresCdcAnimation from '../../../../components/PostgresCdcAnimation'
 import PostgresCdcWaitlistForm from '../../../../components/PostgresCdcWaitlistForm'
@@ -16,7 +17,6 @@ import { getCommonProps } from '../../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../../types/homepage'
 import imageAddPostgresSource from './add-postgres-source.png'
 import imageCustomizeIncomingData from './customize-incoming-data.png'
-import dots from './dots.png'
 import imageEditPipeInPlace from './edit-pipe-in-place.png'
 import iconFast from './icon-fast.svg'
 import iconMaximize from './icon-maximize.svg'
@@ -307,38 +307,21 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       </div>
 
       {/* Footer form */}
-      <div className='relative my-20 bg-neutral-700 py-20'>
-        <Image
-          src={dots}
-          width={612 / 2}
-          height={400 / 2}
-          alt='Dots'
-          className='pointer-events-none absolute left-0 top-0'
-        />
-        <Image
-          src={dots}
-          width={612 / 2}
-          height={400 / 2}
-          alt='Dots'
-          className='pointer-events-none absolute bottom-0 right-0 rotate-180'
-        />
-        <div className='section-container'>
-          <div className='mx-auto w-full lg:max-w-xl'>
-            <CUICard className='bg-neutral-900/80'>
-              <CUICard.Body className='p-4 lg:p-6'>
-                <div className='mb-4 space-y-4 text-center lg:mb-6'>
-                  <SuiTitle type='h2'>Get early access</SuiTitle>
-                  <SuiText className='opacity-70'>
-                    Join the waitlist to get access to the Postgres CDC
-                    connector
-                  </SuiText>
-                </div>
-                <PostgresCdcWaitlistForm />
-              </CUICard.Body>
-            </CUICard>
-          </div>
+      <DotsContainer className='my-20'>
+        <div className='mb-4 space-y-4 text-center lg:mb-6'>
+          <SuiTitle type='h2'>Get early access</SuiTitle>
+          <SuiText className='opacity-70'>
+            Join the waitlist to get access to the Postgres CDC connector
+          </SuiText>
         </div>
-      </div>
+        <div className='mx-auto w-full lg:max-w-xl'>
+          <CUICard className='bg-neutral-900/80'>
+            <CUICard.Body className='p-4 lg:p-6'>
+              <PostgresCdcWaitlistForm />
+            </CUICard.Body>
+          </CUICard>
+        </div>
+      </DotsContainer>
 
       {/* Get started */}
       <div className='section-container my-20 md:px-8 2xl:px-0'>
