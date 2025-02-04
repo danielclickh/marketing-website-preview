@@ -531,9 +531,9 @@ export default function Page({ seo, footerData }: CommonProps) {
           <section className='relative py-20 bg-white text-black'>
             <div className='max-w-6xl mx-auto px-6 lg:px-12'>
               <h2 className='text-4xl text-center mb-4'>FAQs</h2>
-              <OpenHouseAccordionItem handle='What is OPEN HOUSE 2025 by ClickHouse?'>
+              <OpenHouseAccordionItem handle='What is Open House 2025 by ClickHouse?'>
                 <p className='max-w-3xl'>
-                  OPEN HOUSE 2025 is the first ever ClickHouse User Conference!
+                  Open House 2025 is the first ever ClickHouse User Conference!
                   It is a premier one-day event for ClickHouse users,
                   contributors, enthusiasts, and customers, hosted in the heart
                   of San Francisco on 29 May. For those unable to join in
@@ -579,7 +579,14 @@ export default function Page({ seo, footerData }: CommonProps) {
               </OpenHouseAccordionItem>
               <OpenHouseAccordionItem handle='Will there be a CFP process for speakers?'>
                 <p className='max-w-3xl'>
-                  Yes! Please apply to be a speaker here.
+                  Yes! Please apply to be a speaker{' '}
+                  <Link
+                    href='https://sessionize.com/clickhouse-user-conference-2025/'
+                    target='_blank'
+                    className='underline hover:decoration-2'>
+                    here
+                  </Link>
+                  .
                 </p>
               </OpenHouseAccordionItem>
               <OpenHouseAccordionItem handle='Are you accepting sponsorships for the event?'>
@@ -589,6 +596,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                   share your ideas with the organizers at{' '}
                   <Link
                     href='mailto:openhouse@clickhouse.com'
+                    target='_blank'
                     className='underline hover:decoration-2'>
                     openhouse@clickhouse.com
                   </Link>
@@ -598,10 +606,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                 <p className='max-w-3xl'>
                   Yes. ClickHouse is committed to providing a safe and
                   harassment-free experience for participants at all of our
-                  events.
-                </p>
-                <p className='max-w-3xl'>
-                  All attendees are required to comply with the{' '}
+                  events. All attendees are required to comply with the{' '}
                   <Link
                     href='/events-code-of-conduct'
                     className='underline hover:decoration-2'>
