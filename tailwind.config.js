@@ -1,8 +1,8 @@
 module.exports = {
   darkMode: 'class',
   plugins: [
-    require('@tailwindcss/typography')
-    // ...
+    require('@tailwindcss/typography'),
+    require('./lib/tailwind/gradient-masks')
   ],
   content: [
     './components/**/*.{js,ts,jsx,tsx}',
@@ -82,6 +82,40 @@ module.exports = {
         'base-color': '#FBFF46',
         'eerie-black': '#1A1918',
         jet: '#343434',
+
+        // Generated from:
+        // @link https://www.tailwindshades.com/#color=64.70588235294119%2C100%2C50&step-up=8&step-down=11&hue-shift=0&name=ch-yellow&base-stop=5&v=1&overrides=e30%3D
+        'ch-yellow': {
+          DEFAULT: '#EBFF00',
+          50: '#F9FFB8',
+          100: '#F8FFA3',
+          200: '#F5FF7A',
+          300: '#F1FF52',
+          400: '#EEFF29',
+          500: '#EBFF00',
+          600: '#B7C700',
+          700: '#848F00',
+          800: '#505700',
+          900: '#1C1F00',
+          950: '#020300'
+        },
+
+        // Generated from:
+        // @link https://www.tailwindshades.com/#color=167.21311475409837%2C100%2C11.96078431372549&step-up=7&step-down=3&hue-shift=0&name=ch-teal&base-stop=6&v=1&overrides=e30%3D
+        'ch-teal': {
+          DEFAULT: '#003D30',
+          50: '#02FFC9',
+          100: '#00F0BC',
+          200: '#00CCA0',
+          300: '#00A884',
+          400: '#008468',
+          500: '#00614C',
+          600: '#003D30',
+          700: '#002E24',
+          800: '#001E18',
+          900: '#000F0C',
+          950: '#000706'
+        },
         primary: {
           DEFAULT: '#FBFF46',
           50: '#FFFFE8',

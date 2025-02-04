@@ -447,12 +447,23 @@
         }
       }
 
-      // Houseparty yellow buttons (all forms)
+      // New CH yellow buttons
       //
+      &.referer-openhouse,
+      &.referer-openhouse-register,
       &.referer-houseparty-vegas-2024,
       &.referer-houseparty-vegas-2024-ticket {
         .mktoButtonRow button.mktoButton {
           background-color: #EBFF00 !important;
+        }
+      }
+
+      // Open House (Marketo ID 1314)
+      //
+      &#mktoForm_1314 {
+        .mktoButtonRow button.mktoButton {
+          width: auto !important;
+          border-radius: 0.25rem !important;
         }
       }
 
