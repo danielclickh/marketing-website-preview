@@ -157,7 +157,7 @@ This challenge led Twitter to establish what has become the standard observabili
 
    The best visualization solutions integrate with various data sources and provide flexible ways to explore and understand system behavior, from high-level overviews to detailed debugging sessions. Many observability vendors offer end-to-end solutions that include all these components, from collection agents and data aggregators to storage and presentation GUIs. However, organizations increasingly choose to build custom pipelines using best-of-breed tools for each component, allowing them to tailor solutions to their specific needs while maintaining control over costs and capabilities.
 
-### Leveraging out-of-the-box observability solutions
+### Out-of-the-box observability solutions
 
 For small teams lacking expertise in observability, using an out-of-the-box solution can be highly beneficial. These solutions simplify the process by providing pre-configured tools that allow you to visualize and understand what's happening in your system without needing deep technical knowledge. This approach can be an excellent starting point, enabling you to focus on learning and gradually deciding whether to continue with the solution or explore more customized options as your understanding of observability grows.
 
