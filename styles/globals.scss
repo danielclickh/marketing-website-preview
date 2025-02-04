@@ -884,9 +884,13 @@ form.mktoForm#mktoForm_1315 {
         @apply hover:border-neutral-600;
         @apply checked:border-primary;
         background-position: center left 0.5rem;
-        flex-basis: calc(50% - 0.5rem);
+        flex-basis: 100%;
         flex-grow: 0;
         flex-shrink: 1;
+
+        @media (min-width: 420px) {
+          flex-basis: calc(50% - 0.5rem);
+        }
 
         &[value="Other"] {
           background-image: url('/marketo-inputs/1315-other.svg');
