@@ -43,7 +43,8 @@ export const getStaticProps: GetStaticProps<CommonProps> =
         seo: {
           title:
             'Open House User Conference - Free conference in San Francisco, CA. Watch parties hosted world-wide.',
-          path: '/openhouse'
+          path: '/openhouse',
+          image: [{ url: '/images/social-open-house.png' }]
         },
         ...commonProps
       }

@@ -61,7 +61,8 @@ export const getStaticProps: GetStaticProps<RegisterPageProps> =
         seo: {
           title:
             'Open House User Conference - Free conference in San Francisco, CA. Watch parties hosted world-wide.',
-          path: '/openhouse/register'
+          path: '/openhouse/register',
+          image: [{ url: '/images/social-open-house.png' }]
         },
         recentEvents,
         ...commonProps
