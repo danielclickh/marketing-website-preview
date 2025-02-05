@@ -227,7 +227,7 @@ export default function BigQueryPage({
           </SuiText>
         </div>
 
-        <div className='mx-auto max-w-5xl px-4 grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8'>
+        <div className='mx-auto max-w-5xl px-4 grid grid-cols-1 lg:grid-cols-3 gap-6 pt-8'>
           <div className='flex gap-2 items-start w-[314px]'>
             <Image src={iconCheck} alt='Check' width={24} height={24} />
             <SuiText className='sm:text-lg'>Free migration services</SuiText>
@@ -245,12 +245,12 @@ export default function BigQueryPage({
             </SuiText>
           </div>
         </div>
-        <div className='pt-8 flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
+        <div className='pt-8 flex flex-col w-full px-4 sm:px-0 mx-auto sm:flex-row justify-center'>
           <CUIButton
             type='primary'
             size='lg'
             weight='semibold'
-            className='w-full sm:flex-1'
+            className='flex w-full sm:max-w-60'
             onClick={() => {
               handlePersonalizedSupportClick()
               setIsModalOpen(true)
