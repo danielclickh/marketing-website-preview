@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { SuiText } from '../../sui'
@@ -22,19 +21,14 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   prefetch
 }) => {
   const sharedClassName =
-    'group flex items-center gap-4 w-60 rounded-lg bg-primary-300 px-4 py-6 text-primary-900 sm:flex-col sm:gap-4 sm:px-2 text-center'
+    'group flex items-center gap-2 md:w-1/4 lg:w-60 rounded-lg bg-primary-300 px-4 py-4 text-primary-900 flex-col sm:gap-2 sm:px-2 text-center'
 
   const content = (
     <>
-      <Image
-        src={icon}
-        alt={description ? description : 'ClickHouse'}
-        width={32}
-        height={32}
-      />
-      <h2 className='text-4xl font-bold'>{title}</h2>
+      {icon}
+      <h2 className='text-4xl font-bold py-0'>{title}</h2>
       {description && (
-        <div className={descriptionFullWidth ? 'w-full' : 'w-36'}>
+        <div className={descriptionFullWidth ? 'w-full' : 'md:w-36'}>
           <SuiText color='inherit' size='sm'>
             {description}
           </SuiText>

@@ -5,7 +5,6 @@ import ReactMarkdown from 'react-markdown'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
 import FeatureCard from '../../../components/Cards/FeatureCard'
 import { CUIButton, CUICard } from '../../../components/ClickUI'
-import ComparisonTable from '../../../components/ComparisonTable'
 import HomepageSectionTrustedByAlt from '../../../components/HomepageSectionTrustedByAlt'
 import Layout from '../../../components/Layout'
 import MarketoForm from '../../../components/MarketoForm'
@@ -18,7 +17,6 @@ import { findAll, findOne } from '../../../lib/api/strapi'
 import { useGalaxyOnClick, useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '../../../lib/utils/revalidationConfig'
-import logoClickhouse from '../../../public/logo-full.svg'
 import {
   ComparisonPage,
   ComparisonProps,
@@ -28,6 +26,7 @@ import { HomepageCustomerStories } from '../../../types/homepage'
 import logos from './bigquery-to-aws.svg'
 import chartCosts from './chart-costs.svg'
 import chartLatency from './chart-latency.svg'
+import iconCheck from './icon-check-yellow.svg'
 import iconCoinDark from './icon-coins-dark.svg'
 import iconDevelopers from './icon-developers.svg'
 import iconGuageDark from './icon-guage-dark.svg'
@@ -36,13 +35,12 @@ import iconHandCoins from './icon-hand-coins.svg'
 import iconQuote from './icon-quote.svg'
 import iconRowDark from './icon-row-dark.svg'
 import iconStorageDark from './icon-storage-dark.svg'
-import logoBigquery from './logo-bigquery.svg'
 import logoBlock from './logo-block.png'
 import logoPostgress from './logo-postgress.svg'
 import logoRedshift from './logo-redshift.svg'
 import logoSnowflake from './logo-snowflake.svg'
 import logoAdevinta from './logoAdevinta.svg'
-const locTracking = 'bigquery-comparison-page'
+const locTracking = 'bigquery-to-clickhouse-on-aws-page'
 
 export interface BigQueryPageProps extends ComparisonProps {
   customerStories: HomepageCustomerStories
@@ -50,11 +48,6 @@ export interface BigQueryPageProps extends ComparisonProps {
 
 export async function getStaticProps() {
   const { data }: { data: ComparisonPage[] } = await findAll('comparisons', {
-    filters: {
-      slug: {
-        $eq: 'bigquery'
-      }
-    },
     populate: [
       'seo',
       'Content',
@@ -87,7 +80,7 @@ export async function getStaticProps() {
   const comparison = data[0]
 
   const seo = comparison.seo
-  if (seo) seo.path = `/comparison/${comparison.slug}`
+  if (seo) seo.path = `/campaign/${comparison.slug}`
 
   const props: BigQueryPageProps = {
     comparison,
@@ -156,9 +149,9 @@ export default function BigQueryPage({
           <Image
             src={logos}
             alt='ClickHouse vs BigQuery'
-            width={240}
-            height={245}
-            className='mx-auto hidden lg:block'
+            width={458}
+            height={118}
+            className='mx-auto'
           />
 
           <SuiTitle type='h1' weight='bold'>
@@ -167,7 +160,7 @@ export default function BigQueryPage({
             BigQuery <span className='text-primary-300'>to</span> ClickHouse
           </SuiTitle>
 
-          <SuiText className='sm:text-xl'>
+          <SuiText className='sm:text-lg pt-4'>
             BigQuery handles ad-hoc queries and smaller data volumes
             effectively, but scaling turns cost and performance management into
             a significant challenge. By migrating to ClickHouse from BigQuery,
@@ -175,14 +168,14 @@ export default function BigQueryPage({
           </SuiText>
         </div>
 
-        <div className='flex gap-4'>
+        <div className='flex flex-col md:flex-row gap-6 pt-8'>
           <FeatureCard
             icon={
               <Image
                 src={iconGuageDark}
                 alt='ClickHouse'
-                width={149}
-                height={44}
+                width={32}
+                height={32}
               />
             }
             title='95%'
@@ -193,8 +186,8 @@ export default function BigQueryPage({
               <Image
                 src={iconStorageDark}
                 alt='ClickHouse'
-                width={149}
-                height={44}
+                width={32}
+                height={32}
               />
             }
             title='60%'
@@ -205,8 +198,8 @@ export default function BigQueryPage({
               <Image
                 src={iconRowDark}
                 alt='ClickHouse'
-                width={149}
-                height={44}
+                width={32}
+                height={32}
               />
             }
             title='1300+'
@@ -218,15 +211,41 @@ export default function BigQueryPage({
               <Image
                 src={iconCoinDark}
                 alt='ClickHouse'
-                width={149}
-                height={44}
+                width={32}
+                height={32}
               />
             }
             title='Up to 100x'
             description='More cost effective solution'
           />
         </div>
-        <div className='mt-6 flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
+
+        <div className='mx-auto max-w-[800px] grid-cols-1 grid-flow-col gap-6 text-center pt-8'>
+          <SuiText className='sm:text-lg text-neutral-200'>
+            If you are considering a migration from BigQuery to ClickHouse on
+            AWS we are providing a limited offer whereby you can benefit from:
+          </SuiText>
+        </div>
+
+        <div className='mx-auto max-w-5xl px-4 grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8'>
+          <div className='flex gap-2 items-start w-[314px]'>
+            <Image src={iconCheck} alt='Check' width={24} height={24} />
+            <SuiText className='sm:text-lg'>Free migration services</SuiText>
+          </div>
+          <div className='flex gap-2 items-start w-[314px]'>
+            <Image src={iconCheck} alt='Check' width={24} height={24} />
+            <SuiText className='sm:text-lg'>
+              Discount on your ClickHouse Cloud subscriptions
+            </SuiText>
+          </div>
+          <div className='flex gap-2 items-start w-[314px]'>
+            <Image src={iconCheck} alt='Check' width={24} height={24} />
+            <SuiText className='sm:text-lg'>
+              Free startup credits on AWS
+            </SuiText>
+          </div>
+        </div>
+        <div className='pt-8 flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
           <CUIButton
             type='primary'
             size='lg'
@@ -241,89 +260,11 @@ export default function BigQueryPage({
         </div>
       </div>
 
-      {/* Table */}
-      <div className='container mx-auto my-16 max-w-7xl px-8 2xl:px-0'>
-        <ComparisonTable
-          columns={[
-            {
-              heading: (
-                <Image
-                  src={logoClickhouse}
-                  alt='ClickHouse'
-                  width={149}
-                  height={44}
-                  className='mx-auto -mb-2 -mt-1'
-                />
-              ),
-              width: '45%',
-              rowIcon: <YesIcon />,
-              highlight: true
-            },
-            {
-              heading: (
-                <Image
-                  src={logoBigquery}
-                  alt='BigQuery'
-                  width={131}
-                  height={44}
-                  className='mx-auto -mb-2 -mt-1'
-                />
-              ),
-              width: '35%',
-              rowIcon: <NoIcon />
-            }
-          ]}
-          rows={[
-            {
-              heading: 'Fast and efficient',
-              values: [
-                'Up to **95% faster** querying speeds and 60% less storage space required.',
-                'Slower querying speeds and requires more storage.'
-              ]
-            },
-            {
-              heading: 'Cost-effective',
-              values: [
-                'Up to **100x** more cost-effective.',
-                'More costly for BigQuery for analytics workloads.'
-              ]
-            },
-            {
-              heading: 'Modern SQL',
-              values: [
-                'Standard SQL enhanced with numerous **extensions and improvements** (e.g. lambda functions and higher-order functions), that make analytical tasks very user-friendly.',
-                'Support for only standard SQL can make analytics more complex.'
-              ]
-            },
-            {
-              heading: 'Easy data analytics',
-              values: [
-                '**150+ pre-built aggregation functions** plus powerful aggregation combinators, fully vectorized and parallelized.\n\n**1300+ data processing functions** for domains like mathematics, geo, machine learning, time series, and more.',
-                'Requires writing more complex SQL due to its limited set of aggregate and regular data processing functions.'
-              ]
-            },
-            {
-              heading: 'Rich data type support',
-              values: [
-                'Advanced data types like JSON, maps, and arrays plus over **80 array functions** for modeling and solving a wide range of problems simply and intuitively.',
-                'Support for limited number of data types including only 8 array functions.'
-              ]
-            },
-            {
-              heading: 'World class\ninteroperability',
-              values: [
-                'Native support for reading data in over **90 file formats** from most data sources which makes it easy to analyze data regardless of its shape and location. ',
-                'Limited interoperability. Supports only 5 file formats and 19 data sources.'
-              ]
-            }
-          ]}
-        />
-      </div>
-
       <HomepageSectionTrustedByAlt
-        className='!my-24'
+        className='!my-24 bg-neutral-725 p-8'
         heading='Trusted by'
         customerStories={customerStories}
+        numberOfRows={1}
       />
 
       <div className='container mx-auto my-16 max-w-7xl space-y-8 px-8 2xl:px-0'>
@@ -685,46 +626,6 @@ export default function BigQueryPage({
         </div>
       </div>
     </Layout>
-  )
-}
-
-function YesIcon() {
-  return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      className='text-primary'
-      width='16'
-      height='16'
-      fill='none'
-      viewBox='0 0 16 16'>
-      <path
-        stroke='currentColor'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        strokeWidth='2'
-        d='M13.3337 4.33331 6.00033 11.6666 2.66699 8.33331'
-      />
-    </svg>
-  )
-}
-
-function NoIcon() {
-  return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      className='text-[#FFBABA]'
-      width='24'
-      height='24'
-      fill='none'
-      viewBox='0 0 24 24'>
-      <path
-        stroke='currentColor'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        strokeWidth='1.5'
-        d='m8 8 8 8m0-8-8 8'
-      />
-    </svg>
   )
 }
 
