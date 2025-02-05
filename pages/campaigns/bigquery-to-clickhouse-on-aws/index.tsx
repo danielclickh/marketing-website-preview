@@ -102,7 +102,7 @@ export default function BigQueryPage({
   comparison,
   customerStories
 }: BigQueryPageProps) {
-  useGalaxyOnPage(`${comparison.slug}ComparisonPage`)
+  useGalaxyOnPage(`BigQueryToClickhouseOnAwsPage`)
 
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
@@ -128,17 +128,17 @@ export default function BigQueryPage({
 
   // At the top of your component, add this:
   const handlePersonalizedSupportClick = useGalaxyOnClick(
-    `${comparison.slug}ComparisonPage.heroCta.personalizedSupportSelect`
+    `BigQueryToClickhouseOnAwsPage.heroCta.personalizedSupportSelect`
   )
 
   // Then in the JSX, replace the onClick with:
   const handleStartTrialClick = useGalaxyOnClick(
-    `${comparison.slug}ComparisonPage.heroCta.startTrialSelect`
+    `BigQueryToClickhouseOnAwsPage.heroCta.startTrialSelect`
   )
 
   // At the top of your component, add this:
   const handleMigrationDocClick = useGalaxyOnClick(
-    `${comparison.slug}ComparisonPage.heroCta.migrationDocSelect`
+    `BigQueryToClickhouseOnAwsPage.heroCta.migrationDocSelect`
   )
 
   return (
