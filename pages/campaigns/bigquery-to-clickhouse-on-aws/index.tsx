@@ -54,7 +54,6 @@ export async function getStaticProps() {
       }
     },
     populate: [
-      'seo',
       'Content',
       'Content.customContent',
       'Content.customContent.Image',
@@ -84,13 +83,15 @@ export async function getStaticProps() {
 
   const comparison = data[0]
 
-  const seo = comparison.seo
-  if (seo) seo.path = `/campaign/${comparison.slug}`
-
   const props: BigQueryPageProps = {
     comparison,
     customerStories,
-    seo,
+    seo: {
+      title: 'Migrate from BigQuery to ClickHouse',
+      description:
+        'BigQuery handles ad-hoc queries and smaller data volumes effectively, but scaling turns cost and performance management into a significant challenge.',
+      path: '/campaigns/bigquery-to-clickhouse-on-aws'
+    },
     ...(await getCommonProps())
   }
 
