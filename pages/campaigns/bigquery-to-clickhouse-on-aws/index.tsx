@@ -48,6 +48,11 @@ export interface BigQueryPageProps extends ComparisonProps {
 
 export async function getStaticProps() {
   const { data }: { data: ComparisonPage[] } = await findAll('comparisons', {
+    filters: {
+      id: {
+        $eq: 7
+      }
+    },
     populate: [
       'seo',
       'Content',
