@@ -9,6 +9,7 @@ interface FeatureCardProps {
   link?: string
   target?: React.HTMLAttributeAnchorTarget
   prefetch?: boolean
+  className?: string
 }
 
 const FeatureCard: React.FC<FeatureCardProps> = ({
@@ -18,10 +19,10 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   descriptionFullWidth = false,
   link,
   target,
-  prefetch
+  prefetch,
+  className = ''
 }) => {
-  const sharedClassName =
-    'group flex items-center gap-2 md:w-1/4 lg:w-60 rounded-lg bg-primary-300 px-4 py-4 text-primary-900 flex-col sm:gap-2 sm:px-2 text-center'
+  const sharedClassName = `group flex items-center gap-2 md:w-1/4 lg:w-60 rounded-lg bg-primary-300 px-4 py-4 text-primary-900 flex-col sm:gap-2 sm:px-2 text-center ${className}`
 
   const content = (
     <>

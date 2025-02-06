@@ -29,11 +29,11 @@ import chartLatency from './chart-latency.svg'
 import iconCheck from './icon-check-yellow.svg'
 import iconCoinDark from './icon-coins-dark.svg'
 import iconDevelopers from './icon-developers.svg'
+import iconFx from './icon-fx.svg'
 import iconGuageDark from './icon-guage-dark.svg'
 import iconGuage from './icon-guage.svg'
 import iconHandCoins from './icon-hand-coins.svg'
 import iconQuote from './icon-quote.svg'
-import iconRowDark from './icon-row-dark.svg'
 import iconStorageDark from './icon-storage-dark.svg'
 import logoBlock from './logo-block.png'
 import logoPostgress from './logo-postgress.svg'
@@ -145,14 +145,17 @@ export default function BigQueryPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
       <div className='container mx-auto my-16 flex max-w-7xl flex-col items-center gap-x-6 px-8 2xl:px-0'>
-        <div className='mx-auto max-w-[800px] grid-cols-1 grid-flow-col gap-6 text-center'>
-          <Image
-            src={logos}
-            alt='ClickHouse vs BigQuery'
-            width={458}
-            height={118}
-            className='mx-auto'
-          />
+        <div className='mx-auto max-w-[800px] space-y-6 text-center'>
+          <div className='w-full max-w-max mx-auto relative'>
+            <div className='absolute bottom-0 left-[53.59%] right-[0.24%] top-0 z-0 animate-pulse rounded-2xl shadow-stackIntegrationGraphicSmall lg:shadow-stackIntegrationGraphic' />
+            <Image
+              src={logos}
+              alt='ClickHouse vs BigQuery'
+              width={402.5}
+              height={91}
+              className='relative z-10'
+            />
+          </div>
 
           <SuiTitle type='h1' weight='bold'>
             Migrate from
@@ -160,7 +163,7 @@ export default function BigQueryPage({
             BigQuery <span className='text-primary-300'>to</span> ClickHouse
           </SuiTitle>
 
-          <SuiText className='sm:text-lg pt-4'>
+          <SuiText weight='medium' className='sm:text-lg'>
             BigQuery handles ad-hoc queries and smaller data volumes
             effectively, but scaling turns cost and performance management into
             a significant challenge. By migrating to ClickHouse from BigQuery,
@@ -168,8 +171,9 @@ export default function BigQueryPage({
           </SuiText>
         </div>
 
-        <div className='flex flex-col md:flex-row gap-6 pt-8'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-8'>
           <FeatureCard
+            className='!w-full'
             icon={
               <Image
                 src={iconGuageDark}
@@ -182,6 +186,7 @@ export default function BigQueryPage({
             description='Faster querying speeds'
           />
           <FeatureCard
+            className='!w-full'
             icon={
               <Image
                 src={iconStorageDark}
@@ -194,19 +199,16 @@ export default function BigQueryPage({
             description='Less storage space required'
           />
           <FeatureCard
+            className='!w-full'
             icon={
-              <Image
-                src={iconRowDark}
-                alt='ClickHouse'
-                width={32}
-                height={32}
-              />
+              <Image src={iconFx} alt='ClickHouse' width={32} height={32} />
             }
             title='1300+'
             description='Data functions for math, geo, ML, time series, and more'
             descriptionFullWidth
           />
           <FeatureCard
+            className='!w-full'
             icon={
               <Image
                 src={iconCoinDark}
@@ -220,29 +222,33 @@ export default function BigQueryPage({
           />
         </div>
 
-        <div className='mx-auto max-w-[800px] grid-cols-1 grid-flow-col gap-6 text-center pt-8'>
-          <SuiText className='sm:text-lg text-neutral-200'>
+        <div className='mx-auto max-w-[800px] my-8'>
+          <SuiText
+            weight='medium'
+            className='sm:text-center sm:text-lg text-neutral-200'>
             If you are considering a migration from BigQuery to ClickHouse on
             AWS we are providing a limited offer whereby you can benefit from:
           </SuiText>
         </div>
 
-        <div className='mx-auto max-w-5xl px-4 grid grid-cols-1 lg:grid-cols-3 gap-6 pt-8'>
-          <div className='flex gap-2 items-start w-[314px]'>
-            <Image src={iconCheck} alt='Check' width={24} height={24} />
-            <SuiText className='sm:text-lg'>Free migration services</SuiText>
-          </div>
-          <div className='flex gap-2 items-start w-[314px]'>
-            <Image src={iconCheck} alt='Check' width={24} height={24} />
-            <SuiText className='sm:text-lg'>
-              Discount on your ClickHouse Cloud subscriptions
-            </SuiText>
-          </div>
-          <div className='flex gap-2 items-start w-[314px]'>
-            <Image src={iconCheck} alt='Check' width={24} height={24} />
-            <SuiText className='sm:text-lg'>
-              Free startup credits on AWS
-            </SuiText>
+        <div className='w-full sm:px-4'>
+          <div className='-m-3 flex flex-wrap items-start justify-center'>
+            <div className='p-3 flex gap-3 items-center w-full md:max-w-[314px] md:basis-1/2 lg:basis-1/3 text-balance'>
+              <Image src={iconCheck} alt='Check' width={24} height={24} />
+              <SuiText className='sm:text-lg'>Free migration services</SuiText>
+            </div>
+            <div className='p-3 flex gap-3 items-center w-full md:max-w-[314px] md:basis-1/2 lg:basis-1/3 text-balance'>
+              <Image src={iconCheck} alt='Check' width={24} height={24} />
+              <SuiText className='sm:text-lg'>
+                Discount on your ClickHouse Cloud subscriptions
+              </SuiText>
+            </div>
+            <div className='p-3 flex gap-3 items-center w-full md:max-w-[314px] md:basis-1/2 lg:basis-1/3 text-balance'>
+              <Image src={iconCheck} alt='Check' width={24} height={24} />
+              <SuiText className='sm:text-lg'>
+                Free startup credits on AWS
+              </SuiText>
+            </div>
           </div>
         </div>
         <div className='pt-8 flex flex-col w-full px-4 sm:px-0 mx-auto sm:flex-row justify-center'>
@@ -261,7 +267,7 @@ export default function BigQueryPage({
       </div>
 
       <HomepageSectionTrustedByAlt
-        className='!my-24 bg-neutral-725 p-8'
+        className='!my-24 bg-neutral-700/80 py-8'
         heading='Trusted by'
         customerStories={customerStories}
         numberOfRows={1}
@@ -430,7 +436,14 @@ export default function BigQueryPage({
               If you need multi-statement transactions or extensive joins over
               highly normalized tables.
               <br />
-              Both are on our roadmap for 2024.
+              Both are on our{' '}
+              <Link
+                href='https://github.com/ClickHouse/ClickHouse/issues/58392'
+                target='_blank'
+                className='text-primary-300 hover:underline'>
+                roadmap for 2024
+              </Link>
+              .
             </SuiText>
           </div>
         </div>
