@@ -237,7 +237,7 @@ export default function BigQueryPage({
           </SuiText>
         </div>
 
-        <div className='w-full sm:px-4'>
+        <div className='w-full sm:px-4 my-4'>
           <div className='-m-3 flex flex-wrap items-start justify-center'>
             <div className='p-3 flex gap-3 items-center w-full md:max-w-[314px] md:basis-1/2 lg:basis-1/3 text-balance'>
               <Image src={iconCheck} alt='Check' width={24} height={24} />
@@ -257,7 +257,7 @@ export default function BigQueryPage({
             </div>
           </div>
         </div>
-        <div className='pt-8 flex flex-col w-full px-4 sm:px-0 mx-auto sm:flex-row justify-center'>
+        <div className='flex flex-col w-full px-4 sm:px-0 mx-auto sm:flex-row justify-center'>
           <CUIButton
             type='primary'
             size='lg'
