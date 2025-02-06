@@ -99,7 +99,7 @@ By implementing effective log monitoring, organizations can maintain reliable se
 
 ## Log monitoring tools
 
-Organizations often begin their logging journey with out-of-the-box monitoring solutions. These tools provide immediate value through pre-built dashboards and visualizations, ready-to-use alerting systems, and built-in integrations with standard services. With quick setup, deployment times, and managed infrastructure, they offer a streamlined path to system observability.
+Organizations often begin their logging journey with out-of-the-box monitoring solutions. These tools provide immediate value through pre-built dashboards and visualizations, ready-to-use alerting systems, and built-in integrations with standard services. With quick setup, deployment times, and managed infrastructure, they offer a streamlined path to system [observability](https://clickhouse.com/engineering-resources/observability).
 
 Popular solutions include Datadog, Splunk, Graylog, New Relic, and Sumo Logic. These tools serve as excellent starting points for organizations beginning their observability journey, offering robust functionality without the need to build and maintain custom infrastructure.
 
