@@ -336,10 +336,10 @@ export default function PricingV2ContextProvider({
     // Convert usage values into gigabytes
     switch (storageUnit) {
       case 'gb':
-        usageInTb = storageSize / 1024 // 1 TB = 1024 GB
+        usageInTb = storageSize / 1000 // 1 TB = 1024 GB
         break
       case 'pb':
-        usageInTb = storageSize * 1024 // 1 PB = 1024 TB
+        usageInTb = storageSize * 1000 // 1 PB = 1024 TB
         break
     }
 

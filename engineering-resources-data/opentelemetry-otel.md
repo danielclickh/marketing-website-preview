@@ -5,7 +5,7 @@ excerpt: "In this guide, we’ll explore OpenTelemetry (OTel), a framework for c
 index: 12
 ---
 
-OpenTelemetry (OTel) is a critical open-source framework designed to standardize the way telemetry data—metrics, logs, and traces—is collected, processed, and exported in modern software systems. This guide provides an overview of OpenTelemetry's purpose, key components, and role in improving observability across complex infrastructures, such as microservices and cloud environments.
+OpenTelemetry (OTel) is a critical open-source framework designed to standardize the way telemetry data — metrics, logs, and traces—is collected, processed, and exported in modern software systems. This guide provides an overview of OpenTelemetry's purpose, key components, and role in improving [observability](https://clickhouse.com/engineering-resources/observability) across complex infrastructures, such as microservices and cloud environments.
 
 You'll learn about the types of telemetry data OTel handles, how it simplifies monitoring and debugging, and its tools, including the OpenTelemetry Collector and language-specific SDKs for code instrumentation. The page also highlights OTel's flexibility and vendor-neutral approach and how its integration with platforms like ClickHouse enhances data analysis for large-scale systems. It provides a clear and structured look at how OpenTelemetry supports reliable, efficient software performance and observability.
 

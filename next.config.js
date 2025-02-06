@@ -175,6 +175,11 @@ const nextConfig = {
         permanent: true
       },
       {
+        source: '/company/events/202505-global-open-house',
+        destination: '/openhouse',
+        permanent: true
+      },
+      {
         source: '/company/events/v21-10-release-webinar',
         destination: 'https://www.youtube.com/watch?v=b9MeoOtAivQ',
         permanent: true
