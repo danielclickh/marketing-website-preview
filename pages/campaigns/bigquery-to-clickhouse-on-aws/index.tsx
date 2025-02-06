@@ -150,7 +150,7 @@ export default function BigQueryPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <div className='container mx-auto my-16 flex max-w-7xl flex-col items-center gap-x-6 px-8 2xl:px-0'>
+      <div className='container mx-auto my-16 flex max-w-7xl flex-col items-center px-8 2xl:px-0'>
         <div className='mx-auto max-w-[800px] space-y-6 text-center'>
           <div className='w-full max-w-max mx-auto relative'>
             <div className='absolute bottom-0 left-[53.59%] right-[0.24%] top-0 z-0 animate-pulse rounded-2xl shadow-stackIntegrationGraphicSmall lg:shadow-stackIntegrationGraphic' />
@@ -177,7 +177,7 @@ export default function BigQueryPage({
           </SuiText>
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-8'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 mb-8 max-w-[1030px]'>
           <FeatureCard
             className='!w-full'
             icon={
@@ -228,7 +228,7 @@ export default function BigQueryPage({
           />
         </div>
 
-        <div className='mx-auto max-w-[800px] my-8'>
+        <div className='mx-auto max-w-[800px]'>
           <SuiText
             weight='medium'
             className='sm:text-center sm:text-lg text-neutral-200'>
@@ -237,7 +237,7 @@ export default function BigQueryPage({
           </SuiText>
         </div>
 
-        <div className='w-full sm:px-4 my-4'>
+        <div className='w-full sm:px-4 my-12'>
           <div className='-m-3 flex flex-wrap items-start justify-center'>
             <div className='p-3 flex gap-3 items-center w-full md:max-w-[314px] md:basis-1/2 lg:basis-1/3 text-balance'>
               <Image src={iconCheck} alt='Check' width={24} height={24} />
