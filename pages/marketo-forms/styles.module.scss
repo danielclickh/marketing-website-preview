@@ -30,14 +30,14 @@
       //
       .mktoFormRow, .mktoButtonRow {
         @apply flex flex-wrap;
-        @apply md:gap-8;
+        @apply md:gap-4;
 
         > * {
           @apply flex-shrink-0 w-full max-w-full;
         }
 
         .mktoFormCol {
-          @apply flex-grow flex-shrink basis-full max-w-full mb-6;
+          @apply flex-grow flex-shrink basis-full max-w-full mb-8;
           @apply md:basis-0;
         }
 
@@ -49,7 +49,7 @@
       // Adding this class to the will disable this behaviour.
       &.allow-columns {
         .mktoFormRow, .mktoButtonRow {
-          @apply gap-8;
+          @apply gap-4;
 
           .mktoFormCol {
             @apply basis-0;
