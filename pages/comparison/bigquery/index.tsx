@@ -466,7 +466,14 @@ export default function BigQueryPage({
               If you need multi-statement transactions or extensive joins over
               highly normalized tables.
               <br />
-              Both are on our roadmap for 2024.
+              Both are on our{' '}
+              <Link
+                href='https://github.com/ClickHouse/ClickHouse/issues/74046'
+                target='_blank'
+                className='text-primary-300 hover:underline'>
+                roadmap for 2025
+              </Link>
+              .
             </SuiText>
           </div>
         </div>

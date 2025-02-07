@@ -157,8 +157,8 @@ export default function BigQueryPage({
             <Image
               src={logos}
               alt='ClickHouse vs BigQuery'
-              width={402.5}
-              height={91}
+              width={402}
+              height={90}
               className='relative z-10'
             />
           </div>
@@ -444,10 +444,10 @@ export default function BigQueryPage({
               <br />
               Both are on our{' '}
               <Link
-                href='https://github.com/ClickHouse/ClickHouse/issues/58392'
+                href='https://github.com/ClickHouse/ClickHouse/issues/74046'
                 target='_blank'
                 className='text-primary-300 hover:underline'>
-                roadmap for 2024
+                roadmap for 2025
               </Link>
               .
             </SuiText>
