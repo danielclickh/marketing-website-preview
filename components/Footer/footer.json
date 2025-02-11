@@ -170,11 +170,18 @@
 				"galaxyEvent": "footerNav.companyMenu.contactSelect"
 			},
 			{
-				"id": 24,
+				"id": 26,
 				"name": "News and events",
 				"href": "/company/news-events",
 				"target": "_self",
 				"galaxyEvent": "footerNav.companyMenu.newsEventsSelect"
+			},
+			{
+				"id": 27,
+				"name": "Media",
+				"href": "/media",
+				"target": "_blank",
+				"galaxyEvent": "footerNav.companyMenu.mediaSelect"
 			}
 		]
 	},
