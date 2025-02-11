@@ -21,7 +21,7 @@ export default function Header({
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    'Join us for our ClickHouse Cloud Live Update call, 8am PST / 11am EST, February 13th. Learn more'
+    'Learn about compute-compute separation and more on our ClickHouse Cloud call on Thu, Feb 13, at 8 AM PST'
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
     '/company/events/202502-cloud-update-live?loc=eyebrow'
