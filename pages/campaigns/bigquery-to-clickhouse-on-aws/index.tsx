@@ -252,7 +252,7 @@ export default function BigQueryPage({
             <div className='p-3 flex gap-3 items-center w-full md:max-w-[314px] md:basis-1/2 lg:basis-1/3 text-balance'>
               <Image src={iconCheck} alt='Check' width={24} height={24} />
               <SuiText className='sm:text-lg'>
-                Free startup credits on AWS
+                Promotional Credits on AWS
               </SuiText>
             </div>
           </div>
