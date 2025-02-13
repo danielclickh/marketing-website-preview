@@ -21,10 +21,10 @@ export default function Header({
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    'Learn about compute-compute separation and more on our ClickHouse Cloud call on Thu, Feb 13, at 8 AM PST'
+    'Join us at Open House, the ClickHouse user conference, May 28-29 in San Francisco.'
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/company/events/202502-cloud-update-live?loc=eyebrow'
+    '/openhouse?loc=eyebrow'
   )
 
   const resizeHandler = () => {
