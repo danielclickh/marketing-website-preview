@@ -1,16 +1,11 @@
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import 'swiper/css'
-import { FreeMode } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import type { Swiper as SwiperClass } from 'swiper/types'
 import {
   HomepageCustomerStories,
   HomepageCustomerStoryLogo
 } from '../../types/homepage'
+import LogoCarouselV2, { LogoItem } from '../LogoCarouselV2'
 import { StrapiImage } from '../StrapiElements'
-import { SuiText } from '../sui'
-import styles from './styles.module.scss'
 
 interface Props extends React.HTMLProps<HTMLDivElement> {
   customerStories: HomepageCustomerStories
@@ -29,192 +24,32 @@ export default function HomepageSectionTrustedByAlt({
   numberOfRows = 2,
   ...props
 }: Props) {
-  const [logoScale, setLogoScale] = useState(1)
-  const [swiperInstances, setSwiperInstances] = useState<
-    Record<number, SwiperClass>
-  >({})
-
-  // Modify logo records, replacing SVG sources
   const logos = structuredClone(customerStories.logos).map(replaceCustomerLogo)
 
-  // Split logos array into X number of groups/rows
-  const logoRows: Array<Array<HomepageCustomerStoryLogo>> = []
-  for (let i = numberOfRows; i > 0; i--) {
-    logoRows.push(logos.splice(0, Math.ceil(logos.length / i)))
-  }
-
-  // Trigger all carousel to go back
-  const goPrev = () => {
-    Object.values(swiperInstances).forEach((instance) => {
-      instance.slidePrev()
-    })
-  }
-
-  // Trigger all carousel to go forward
-  const goNext = () => {
-    Object.values(swiperInstances).forEach((instance) => {
-      instance.slideNext()
-    })
-  }
-
-  useEffect(() => {
-    // Scale logos down on smaller devices, else set to the default scale
-    const resizeListener = () =>
-      window.innerWidth < 640 ? setLogoScale(0.7) : setLogoScale(1)
-
-    // Resize on mount
-    resizeListener()
-
-    // Bind event listeners
-    window.addEventListener('resize', resizeListener)
-    return () => window.removeEventListener('resize', resizeListener)
-  }, [])
+  const mappedForComponent: Array<LogoItem> = logos.map((story) => {
+    return {
+      src: story.darkLogoPng.url,
+      alt: story.darkLogoPng.alternativeText,
+      width: story.darkLogoPng.width || 150,
+      height: story.darkLogoPng.height || 70,
+      link: story.href
+        ? {
+            href: story.href
+          }
+        : undefined,
+      component: <StrapiImage {...story.darkLogoPng} />
+    }
+  })
 
   return (
-    <div className={`my-16 text-primary-300 ${className}`} {...props}>
-      <SuiText
-        weight='bold'
-        size='sm'
-        className='mb-10 text-center uppercase tracking-[0.0875rem]'>
-        {heading}
-      </SuiText>
-      <div
-        className={`group/container relative ${styles.maskCarousel}`}
-        style={{ '--logo-scale': logoScale } as React.CSSProperties}>
-        <div className='carousel-container -my-2 text-black sm:-my-3'>
-          {logoRows.map((logoRow, index) => {
-            return (
-              <CarouselRow
-                key={index}
-                logos={logoRow}
-                invertLogos={invertLogos}
-                initialSlide={
-                  Array.isArray(initialSlide)
-                    ? initialSlide?.[index] || 0
-                    : initialSlide
-                }
-                onInit={(newInstance) => {
-                  setSwiperInstances((prevState) => {
-                    prevState[index] = newInstance
-                    return prevState
-                  })
-                }}
-              />
-            )
-          })}
-        </div>
-        <button
-          onClick={goPrev}
-          className='group/button absolute bottom-0 left-0 top-0 z-10 hidden w-24 appearance-none items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100 sm:flex'>
-          <svg
-            className='transition-transform sm:group-hover/button:-translate-x-1'
-            xmlns='http://www.w3.org/2000/svg'
-            width='23'
-            height='15'
-            fill='none'
-            viewBox='0 0 23 15'>
-            <path
-              fill='currentColor'
-              d='M7.22354.204545 8.87127 1.84517 4.54599 6.16335H22.4082v2.40057H4.54599l4.32528 4.32528-1.64773 1.6335L.0644531 7.36364 7.22354.204545Z'
-            />
-          </svg>
-        </button>
-        <button
-          onClick={goNext}
-          className='group/button absolute bottom-0 right-0 top-0 z-10 hidden w-24 appearance-none items-center justify-center opacity-0 transition-opacity group-hover/container:opacity-100 sm:flex'>
-          <svg
-            className='transition-transform sm:group-hover/button:translate-x-1'
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='15'
-            fill='none'
-            viewBox='0 0 24 15'>
-            <path
-              fill='currentColor'
-              d='m15.8751 14.7955-1.6477-1.6407 4.3252-4.31815H.69043V6.43608H18.5526L14.2274 2.1108 15.8751.477273l7.1591 7.159087-7.1591 7.15914Z'
-            />
-          </svg>
-        </button>
-      </div>
-    </div>
-  )
-}
-
-function CarouselRow({
-  logos,
-  onInit = () => {},
-  invertLogos = true,
-  initialSlide = 1
-}: {
-  logos: Array<HomepageCustomerStoryLogo>
-  onInit?: (swiper: SwiperClass) => void
-  invertLogos?: boolean
-  initialSlide?: number
-}) {
-  return (
-    <Swiper
-      onSwiper={onInit}
-      modules={[FreeMode]}
-      slidesPerView={'auto'}
-      slidesPerGroup={1}
-      spaceBetween={32}
-      speed={600}
-      centeredSlides={true}
-      centeredSlidesBounds={true}
-      loop={true}
-      loopAddBlankSlides={false}
-      loopPreventsSliding={true}
-      allowTouchMove={true}
-      touchEventsTarget={'container'}
+    <LogoCarouselV2
+      logos={mappedForComponent}
+      invert={invertLogos}
+      heading={heading}
       initialSlide={initialSlide}
-      freeMode={{
-        enabled: true,
-        sticky: false
-      }}
-      breakpoints={{
-        500: {
-          slidesPerGroup: 2,
-          spaceBetween: 64,
-          speed: 1200,
-          allowTouchMove: false,
-          freeMode: false
-        },
-        800: {
-          slidesPerGroup: 3,
-          spaceBetween: 64,
-          speed: 1200,
-          allowTouchMove: false,
-          freeMode: false
-        }
-      }}
-      className={styles.customSwiperStyles}>
-      {logos.map((customer, index) => {
-        return (
-          <SwiperSlide key={index} className='!w-auto'>
-            <div
-              className={`inline-block py-2 sm:py-3 ${
-                invertLogos ? 'opacity-90 grayscale invert' : ''
-              }`}
-              style={{
-                width: customer.darkLogoPng?.width
-                  ? `calc(${customer.darkLogoPng.width}px * var(--logo-scale, 1))`
-                  : 'auto'
-              }}>
-              {customer.href ? (
-                <Link href={customer.href} className='inline'>
-                  <StrapiImage
-                    {...customer.darkLogoPng}
-                    className='max-w-full'
-                  />
-                </Link>
-              ) : (
-                <StrapiImage {...customer.darkLogoPng} className='max-w-full' />
-              )}
-            </div>
-          </SwiperSlide>
-        )
-      })}
-    </Swiper>
+      numberOfRows={numberOfRows}
+      {...props}
+    />
   )
 }
 
