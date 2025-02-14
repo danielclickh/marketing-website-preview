@@ -4,7 +4,6 @@ import Link from 'next/link'
 import React, { CSSProperties } from 'react'
 import { CUIButton, CUICard } from '../../../../components/ClickUI'
 import Layout from '../../../../components/Layout'
-import LogoCarouselV2 from '../../../../components/LogoCarouselV2'
 import PostgresCdcAnimation from '../../../../components/PostgresCdcAnimation'
 import QuoteCard from '../../../../components/QuoteCard'
 import { SuiText, SuiTitle } from '../../../../components/sui'
@@ -64,6 +63,69 @@ export const getStaticProps: GetStaticProps<CommonProps> =
 export default function Page({ headerData, footerData, seo }: CommonProps) {
   useGalaxyOnPage('postgresCdcPage')
 
+  const logos: Array<ImageProps> = [
+    {
+      src: logoSellerFetchPng,
+      width: 201 / 2,
+      height: 115 / 2,
+      alt: 'Seller Fetch'
+    },
+    {
+      src: logoSpotonPng,
+      width: 313 / 2,
+      height: 95 / 2,
+      alt: 'SpotOn'
+    },
+    {
+      src: logoVuelingPng,
+      width: 247 / 2,
+      height: 81 / 2,
+      alt: 'Vueling'
+    },
+    {
+      src: logoBlacksmithPng,
+      width: 417 / 2,
+      height: 53 / 2,
+      alt: 'Blacksmith'
+    },
+    {
+      src: logoUnifyPng,
+      width: 233 / 2,
+      height: 65 / 2,
+      alt: 'Unify'
+    },
+    {
+      src: logoSyntagePng,
+      width: 321 / 2,
+      height: 79 / 2,
+      alt: 'Syntage'
+    },
+    {
+      src: LogoDaisychainPng,
+      width: 394 / 2,
+      height: 77 / 2,
+      alt: 'Daisychain'
+    },
+    {
+      src: logoAdoraPng,
+      width: 277 / 2,
+      height: 69 / 2,
+      alt: 'Adora'
+    },
+    {
+      src: LogoVapiPng,
+      width: 211 / 2,
+      height: 61 / 2,
+      alt: 'Vapi'
+    },
+    {
+      src: logoAutoNationPng,
+      width: 377 / 2,
+      height: 81 / 2,
+      alt: 'AutoNation'
+    }
+  ]
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
@@ -101,83 +163,38 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       </div>
 
       {/* Trusted by */}
-      <LogoCarouselV2
-        numberOfRows={1}
-        initialSlide={5}
-        heading='Our postgres CDC connector is already Trusted by'
-        logos={[
-          {
-            src: logoSellerFetchPng,
-            width: 201 / 2,
-            height: 115 / 2,
-            alt: 'Seller Fetch',
-            className: 'opacity-75'
-          },
-          {
-            src: logoSpotonPng,
-            width: 313 / 2,
-            height: 95 / 2,
-            alt: 'SpotOn',
-            className: 'opacity-75'
-          },
-          {
-            src: logoVuelingPng,
-            width: 247 / 2,
-            height: 81 / 2,
-            alt: 'Vueling',
-            className: 'opacity-75'
-          },
-          {
-            src: logoBlacksmithPng,
-            width: 417 / 2,
-            height: 53 / 2,
-            alt: 'Blacksmith',
-            className: 'opacity-75'
-          },
-          {
-            src: logoUnifyPng,
-            width: 233 / 2,
-            height: 65 / 2,
-            alt: 'Unify',
-            className: 'opacity-75'
-          },
-          {
-            src: logoSyntagePng,
-            width: 321 / 2,
-            height: 79 / 2,
-            alt: 'Syntage',
-            className: 'opacity-75'
-          },
-          {
-            src: LogoDaisychainPng,
-            width: 394 / 2,
-            height: 77 / 2,
-            alt: 'Daisychain',
-            className: 'opacity-75'
-          },
-          {
-            src: logoAdoraPng,
-            width: 277 / 2,
-            height: 69 / 2,
-            alt: 'Adora',
-            className: 'opacity-75'
-          },
-          {
-            src: LogoVapiPng,
-            width: 211 / 2,
-            height: 61 / 2,
-            alt: 'Vapi',
-            className: 'opacity-75'
-          },
-          {
-            src: logoAutoNationPng,
-            width: 377 / 2,
-            height: 81 / 2,
-            alt: 'AutoNation',
-            className: 'opacity-75'
-          }
-        ]}
-      />
+      <SuiText
+        weight='bold'
+        size='sm'
+        className='mb-8 text-primary-300 text-center uppercase tracking-[0.0875rem]'>
+        Our postgres CDC connector is already Trusted by
+      </SuiText>
+      <div className='mask-logos-carousel'>
+        <div className='pause-hover hide-scrollbar relative flex overflow-hidden'>
+          <div className='flex items-center whitespace-nowrap animate-marqueeLeft'>
+            {logos.map((logo, logoIndex) => {
+              return (
+                <div
+                  key={logoIndex}
+                  className='flex-shrink-0 flex-grow-0 w-max px-6'>
+                  <Image {...logo} className='opacity-75' />
+                </div>
+              )
+            })}
+          </div>
+          <div className='flex items-center whitespace-nowrap animate-marqueeLeft'>
+            {logos.map((logo, logoIndex) => {
+              return (
+                <div
+                  key={logoIndex}
+                  className='flex-shrink-0 flex-grow-0 w-max px-6'>
+                  <Image {...logo} className='opacity-75' />
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
 
       {/* Cards */}
       <div className='section-container mt-20 mb-16'>
