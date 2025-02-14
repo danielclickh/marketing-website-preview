@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import { CUIButton } from '../ClickUI'
 import CycleText from '../CycleText'
+import LogoAnnouncementLink from '../LogoAnnouncementLink'
 import { SuiText, SuiTitle } from '../sui'
 import styles from './styles.module.scss'
 
@@ -67,6 +68,21 @@ export default function HomepageHeroAlt({
                 Download open-source
               </CUIButton>
             </div>
+            <LogoAnnouncementLink
+              className='mt-8'
+              href='/cloud/clickpipes/postgres-cdc-connector?loc=homepage-hero'
+              logo={{
+                src: '/images/cloud/integrations/postgres.svg',
+                alt: 'Postgres',
+                width: 48,
+                height: 49
+              }}>
+              Blazing-fast Postgres to ClickHouse CDC with our new ClickPipe
+              connector — now in Private Beta.{' '}
+              <span className='underline group-hover:decoration-2'>
+                Learn&nbsp;more
+              </span>
+            </LogoAnnouncementLink>
           </div>
         </div>
 

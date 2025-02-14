@@ -3,17 +3,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import ClickPipesAnimationV2 from '../../../components/ClickPipesAnimation/ClickPipesAnimationV2'
-import { CUIButton, CUICard } from '../../../components/ClickUI'
+import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import LogoAnnouncementLink from '../../../components/LogoAnnouncementLink'
-import PostgresCdcWaitlistForm from '../../../components/PostgresCdcWaitlistForm'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ClickPipesData } from '../../../types/clickpipes'
 import features from './features.json'
-import postgresCdcGraphic from './postgres-cdc.svg'
 
 export const getStaticProps: GetStaticProps<ClickPipesData> =
   async function getStaticProps() {
@@ -95,7 +93,7 @@ export default function ClickHouseServerPage({
                       height: 49
                     }}>
                     Blazing-fast Postgres to ClickHouse CDC with our new
-                    ClickPipe connector — now in Private Preview.{' '}
+                    ClickPipe connector — now in Private Beta.{' '}
                     <span className='text-primary-300 group-hover:underline'>
                       Learn&nbsp;more
                     </span>
@@ -247,33 +245,7 @@ export default function ClickHouseServerPage({
         </div>
         <div className='bg-primary-300 py-12'></div>
 
-        {/* Postgres CDC form */}
-        <div className='section-container my-20'>
-          <div className='mx-auto w-full lg:max-w-xl'>
-            <div className='mb-4 space-y-4 text-center md:-mx-4 lg:mb-6'>
-              <Image
-                src={postgresCdcGraphic}
-                alt='Postgres CDC'
-                width={492}
-                height={120}
-                className='mx-auto'
-              />
-              <SuiTitle type='h2'>Postgres CDC is in Private Preview</SuiTitle>
-              <SuiText className='opacity-70'>
-                Stream your Postgres data into ClickHouse Cloud to bridge the
-                gap between transactional and analytical workloads — blazing
-                fast with our new ClickPipes Postgres CDC connector!
-              </SuiText>
-            </div>
-            <CUICard className='bg-neutral-900/80'>
-              <CUICard.Body className='p-4 lg:p-6'>
-                <PostgresCdcWaitlistForm />
-              </CUICard.Body>
-            </CUICard>
-          </div>
-        </div>
-
-        <div className='section-container my-12 pb-16 md:px-8 2xl:px-0 '>
+        <div className='section-container my-28 md:px-8 2xl:px-0 '>
           <GetStartedFree
             href='https://console.clickhouse.cloud/signUp?loc=clickpipes-getstarted-footer'
             textBefore='Try ClickPipes in ClickHouse'
