@@ -37,7 +37,7 @@ export default function HomepageSectionTrustedByAlt({
             href: story.href
           }
         : undefined,
-      component: <StrapiImage {...story.darkLogoPng} />
+      component: <StrapiImage {...story.darkLogoPng} className='max-w-full' />
     }
   })
 

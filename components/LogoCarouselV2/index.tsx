@@ -1,6 +1,6 @@
 import Image, { ImageProps } from 'next/image'
 import Link, { LinkProps } from 'next/link'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import 'swiper/css'
 import { FreeMode } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -38,19 +38,27 @@ export default function LogoCarouselV2({
     Record<number, SwiperClass>
   >({})
 
-  const minLogosPerRow = 15
-  if (logos.length < numberOfRows * minLogosPerRow) {
-    const repeatCount = Math.ceil(
-      (numberOfRows * minLogosPerRow) / logos.length
-    )
-    logos = Array(repeatCount).fill(logos).flat()
-  }
-
   // Split logos array into X number of groups/rows
-  const logoRows: Array<LogoCarouselV2Props['logos']> = []
-  for (let i = numberOfRows; i > 0; i--) {
-    logoRows.push(logos.splice(0, Math.ceil(logos.length / i)))
-  }
+  const logoRows = useMemo(() => {
+    const result: Array<LogoCarouselV2Props['logos']> = []
+
+    const minLogosPerRow = 15
+    let logosArray = logos
+    if (logosArray.length < numberOfRows * minLogosPerRow) {
+      const repeatCount = Math.ceil(
+        (numberOfRows * minLogosPerRow) / logosArray.length
+      )
+      if (repeatCount) {
+        logosArray = Array(repeatCount).fill(logosArray).flat()
+      }
+    }
+
+    for (let i = numberOfRows; i > 0; i--) {
+      result.push(logosArray.splice(0, Math.ceil(logosArray.length / i)))
+    }
+
+    return result
+  }, [logos, numberOfRows])
 
   // Trigger all carousel to go back
   const goPrev = useCallback(() => {
