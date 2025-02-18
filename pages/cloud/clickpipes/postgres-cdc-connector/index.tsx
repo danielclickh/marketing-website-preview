@@ -34,6 +34,7 @@ import logoAdoraPng from './assets/logo-adora.png'
 import logoBlacksmithPng from './assets/logo-blacksmith.png'
 import logoDaisychainPng from './assets/logo-dailsychain.png'
 import logoNeon from './assets/logo-neon.svg'
+import logoOttimate from './assets/logo-ottimate.svg'
 import logoSellerFetchPng from './assets/logo-seller-fetch.png'
 import logoSpotonPng from './assets/logo-spoton.png'
 import logoSyntagePng from './assets/logo-syntage.png'
@@ -122,6 +123,12 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       width: 102,
       height: 28,
       alt: 'Neon'
+    },
+    {
+      src: logoOttimate,
+      width: 204.68,
+      height: 29.25,
+      alt: 'Ottimate'
     }
   ]
 
@@ -287,13 +294,9 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 Powered by PeerDB
               </SuiTitle>
               <SuiText className='text-balance text-white/70'>
-                The connector is powered by{' '}
-                <Link href='#' className='text-primary hover:underline'>
-                  PeerDB
-                </Link>
-                , a leading open-source Postgres CDC provider, which ClickHouse
-                acquired a few months ago. Since PeerDB is open source, there’s
-                no vendor lock-in!
+                The connector is powered by PeerDB, a leading open-source
+                Postgres CDC provider, which ClickHouse acquired a few months
+                ago. Since PeerDB is open source, there’s no vendor lock-in!
               </SuiText>
             </IconCard>
           </div>
