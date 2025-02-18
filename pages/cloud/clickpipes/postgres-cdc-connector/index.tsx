@@ -135,7 +135,14 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <div className='relative my-20 lg:my-24'>
+      <div
+        className='relative bg-shadow-element yellow-shadow shadow-circle my-20 lg:my-24'
+        style={
+          {
+            '--top-side': '130%',
+            '--left-side': '80%'
+          } as CSSProperties
+        }>
         <div className='section-container relative z-10'>
           <div className='w-full mx-auto space-y-6 lg:max-w-4xl text-center'>
             <div className='flex justify-center mb-10'>
@@ -304,68 +311,77 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       </div>
 
       {/* Data sources */}
-      <div className='section-container mt-16 mb-20'>
-        <SuiText
-          weight='bold'
-          size='sm'
-          className='mb-8 text-primary-300 text-center uppercase tracking-[0.0875rem]'>
-          supports a wide range of Postgres data sources
-        </SuiText>
-        <div className='flex justify-center items-center gap-8 md:gap-10 lg:gap-16 flex-wrap'>
-          <Image
-            src={imageDataSource1}
-            alt='Data source 1'
-            width={145 / 3}
-            height={145 / 3}
-          />
-          <Image
-            src={imageDataSource2}
-            alt='Data source 2'
-            width={118 / 3}
-            height={119 / 3}
-          />
-          <Image
-            src={imageDataSource3}
-            alt='Data source 3'
-            width={119 / 3}
-            height={119 / 3}
-          />
-          <Image
-            src={imageDataSource4}
-            alt='Data source 4'
-            width={128 / 3}
-            height={132 / 3}
-          />
-          <Image
-            src={imageDataSource5}
-            alt='Data source 5'
-            width={99 / 3}
-            height={132 / 3}
-          />
-          <Image
-            src={imageDataSource6}
-            alt='Data source 6'
-            width={145 / 3}
-            height={145 / 3}
-          />
-          <Image
-            src={imageDataSource7}
-            alt='Data source 7'
-            width={130 / 3}
-            height={126 / 3}
-          />
-          <Image
-            src={imageDataSource8}
-            alt='Data source 8'
-            width={152 / 3}
-            height={138 / 3}
-          />
-          <Image
-            src={imageDataSource9}
-            alt='Data source 9'
-            width={139 / 3}
-            height={126 / 3}
-          />
+      <div
+        className='bg-shadow-element yellow-shadow shadow-circle mt-16 pb-20'
+        style={
+          {
+            '--top-side': '200%',
+            '--left-side': '50%'
+          } as CSSProperties
+        }>
+        <div className='section-container'>
+          <SuiText
+            weight='bold'
+            size='sm'
+            className='mb-8 text-primary-300 text-center uppercase tracking-[0.0875rem]'>
+            supports a wide range of Postgres data sources
+          </SuiText>
+          <div className='flex justify-center items-center gap-8 md:gap-10 lg:gap-16 flex-wrap'>
+            <Image
+              src={imageDataSource1}
+              alt='Data source 1'
+              width={145 / 3}
+              height={145 / 3}
+            />
+            <Image
+              src={imageDataSource2}
+              alt='Data source 2'
+              width={118 / 3}
+              height={119 / 3}
+            />
+            <Image
+              src={imageDataSource3}
+              alt='Data source 3'
+              width={119 / 3}
+              height={119 / 3}
+            />
+            <Image
+              src={imageDataSource4}
+              alt='Data source 4'
+              width={128 / 3}
+              height={132 / 3}
+            />
+            <Image
+              src={imageDataSource5}
+              alt='Data source 5'
+              width={99 / 3}
+              height={132 / 3}
+            />
+            <Image
+              src={imageDataSource6}
+              alt='Data source 6'
+              width={145 / 3}
+              height={145 / 3}
+            />
+            <Image
+              src={imageDataSource7}
+              alt='Data source 7'
+              width={130 / 3}
+              height={126 / 3}
+            />
+            <Image
+              src={imageDataSource8}
+              alt='Data source 8'
+              width={152 / 3}
+              height={138 / 3}
+            />
+            <Image
+              src={imageDataSource9}
+              alt='Data source 9'
+              width={139 / 3}
+              height={126 / 3}
+            />
+          </div>
         </div>
       </div>
 
@@ -417,15 +433,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       </div>
 
       {/* Features */}
-      <div
-        className='bg-shadow-element yellow-shadow shadow-circle my-24'
-        style={
-          {
-            '--top-side': '0',
-            '--right-side': '50%',
-            '--left-side': 'auto'
-          } as CSSProperties
-        }>
+      <div className='bg-shadow-element yellow-shadow shadow-circle my-24'>
         <div className='section-container relative z-10 space-y-16 lg:space-y-28 lg:pt-6'>
           <FeatureSection
             image={{
@@ -500,7 +508,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       </div>
 
       {/* Get started */}
-      <div className='section-container my-20 md:px-8 2xl:px-0'>
+      <div className='section-container my-20 lg:my-28 md:px-8 2xl:px-0'>
         <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
           <SuiTitle type='h2' color='text-default'>
             Get started with ClickHouse{' '}
