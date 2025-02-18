@@ -31,17 +31,16 @@ import iconParty from './assets/icon-party.svg'
 import iconPeerdb from './assets/icon-peerdb.svg'
 import iconStars from './assets/icon-stars.svg'
 import logoAdoraPng from './assets/logo-adora.png'
-import logoAutoNationPng from './assets/logo-auto-nation.png'
 import logoBlacksmithPng from './assets/logo-blacksmith.png'
-import LogoDaisychainPng from './assets/logo-dailsychain.png'
+import logoDaisychainPng from './assets/logo-dailsychain.png'
+import logoNeon from './assets/logo-neon.svg'
 import logoSellerFetchPng from './assets/logo-seller-fetch.png'
 import logoSpotonPng from './assets/logo-spoton.png'
-import logoSpoton from './assets/logo-spoton.svg'
 import logoSyntagePng from './assets/logo-syntage.png'
 import logoUnifyPng from './assets/logo-unify.png'
-import LogoVapiPng from './assets/logo-vapi.png'
+import logoVapiPng from './assets/logo-vapi.png'
 import logoVuelingPng from './assets/logo-vueling.png'
-import LogoVueling from './assets/logo-vueling.svg'
+import logoVueling from './assets/logo-vueling.svg'
 import imageMonitorPipe from './assets/monitor-pipe.png'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
@@ -101,7 +100,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       alt: 'Syntage'
     },
     {
-      src: LogoDaisychainPng,
+      src: logoDaisychainPng,
       width: 394 / 2,
       height: 77 / 2,
       alt: 'Daisychain'
@@ -113,16 +112,16 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       alt: 'Adora'
     },
     {
-      src: LogoVapiPng,
+      src: logoVapiPng,
       width: 211 / 2,
       height: 61 / 2,
       alt: 'Vapi'
     },
     {
-      src: logoAutoNationPng,
-      width: 377 / 2,
-      height: 81 / 2,
-      alt: 'AutoNation'
+      src: logoNeon,
+      width: 102,
+      height: 28,
+      alt: 'Neon'
     }
   ]
 
@@ -145,7 +144,13 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               Replicate your Postgres data to ClickHouse Cloud in just a few
               clicks for blazing fast analytics. Eliminates the need for
               external ETL tools that are expensive, slow and not purpose built
-              for Postgres.
+              for Postgres.{' '}
+              <Link
+                href='/docs/en/integrations/clickpipes/postgres'
+                className='text-primary-300 hover:underline'>
+                Learn more
+              </Link>
+              .
             </SuiText>
             <CUIButton
               type='primary'
@@ -371,25 +376,13 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
             <QuoteCard
               className='bg-neutral-900/80'
               content={
-                "PeerDB has been a game-changer for us, effortlessly migrating tens of terabytes from our Postgres warehouse into ClickHouse and keeping millions of daily orders synced with just seconds of latency. We're really excited about PeerDB's native integration into ClickHouse Cloud via ClickPipes and all of the opportunities it opens up for us."
+                'ClickPipes for Postgres has made it incredibly easy for us to keep our billing data in Postgres synchronized with ClickHouse for efficient analytics. The CDC experience is blazing fast, ensuring data freshness within seconds while minimizing the load on our production Postgres database. An invaluable solution for seamlessly integrating Postgres with ClickHouse!'
               }
               logo={{
-                src: logoSpoton,
-                width: 156,
-                height: 48,
-                alt: 'SpotOn'
-              }}
-            />
-            <QuoteCard
-              className='bg-neutral-900/80'
-              content={
-                'We already reduced our Postgres to ClickHouse snapshot times from 10+ hours down to 15 minutes with PeerDB. Combining ClickHouse’s powerful analytics natively with PeerDB’s real-time data capture capabilities will greatly simplify our data processing workflows. This integration will enable us to build analytical applications faster, giving us a competitive edge in the market.'
-              }
-              logo={{
-                src: LogoVueling,
-                width: 140,
-                height: 44,
-                alt: 'Vueling'
+                src: logoNeon,
+                width: 102 * 1.2,
+                height: 28 * 1.2,
+                alt: 'Neon'
               }}
             />
             <QuoteCard
@@ -402,6 +395,18 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 width: 321 / 2,
                 height: 79 / 2,
                 alt: 'Syntage'
+              }}
+            />
+            <QuoteCard
+              className='bg-neutral-900/80'
+              content={
+                'We already reduced our Postgres to ClickHouse snapshot times from 10+ hours down to 15 minutes with PeerDB. Combining ClickHouse’s powerful analytics natively with PeerDB’s real-time data capture capabilities will greatly simplify our data processing workflows. This integration will enable us to build analytical applications faster, giving us a competitive edge in the market.'
+              }
+              logo={{
+                src: logoVueling,
+                width: 140,
+                height: 44,
+                alt: 'Vueling'
               }}
             />
           </div>
