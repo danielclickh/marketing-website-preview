@@ -49,7 +49,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title: 'Postgres CDC connector in ClickPipes is now in Private Beta',
+          title: 'Postgres CDC connector in ClickPipes is now in Public Beta',
           description:
             'Replicate your Postgres data to ClickHouse Cloud in just a few clicks for blazing fast analytics.',
           path: '/cloud/clickpipes/postgres-cdc-connector'

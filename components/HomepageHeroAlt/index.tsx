@@ -78,7 +78,7 @@ export default function HomepageHeroAlt({
                 height: 49
               }}>
               Blazing-fast Postgres to ClickHouse CDC with our new ClickPipe
-              connector — now in Private Beta.{' '}
+              connector — now in Public Beta.{' '}
               <span className='underline group-hover:decoration-2'>
                 Learn&nbsp;more
               </span>

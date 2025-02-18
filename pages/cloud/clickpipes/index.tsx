@@ -93,7 +93,7 @@ export default function ClickHouseServerPage({
                       height: 49
                     }}>
                     Blazing-fast Postgres to ClickHouse CDC with our new
-                    ClickPipe connector — now in Private Beta.{' '}
+                    ClickPipe connector — now in Public Beta.{' '}
                     <span className='text-primary-300 group-hover:underline'>
                       Learn&nbsp;more
                     </span>
