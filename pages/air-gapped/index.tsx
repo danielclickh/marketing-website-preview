@@ -9,19 +9,6 @@ import { findOne } from '../../lib/api/strapi'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
 import { ContactProps } from '../../types/contact'
 
-interface DriftAPI {
-  startInteraction: (options: { interactionId: number }) => void
-}
-
-interface DriftWindow extends Window {
-  drift: {
-    api: DriftAPI
-  }
-}
-
-// Tell TypeScript that when we reference `window`, we mean the extended type with `drift` on it
-declare var window: DriftWindow
-
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
     const data = await findOne('contact-us', {
