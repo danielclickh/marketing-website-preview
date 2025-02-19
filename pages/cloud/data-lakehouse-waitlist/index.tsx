@@ -59,7 +59,7 @@ export default function ContactPage({
                       Preview! To join the waitlist, simply answer the questions
                       below.{' '}
                       <Link
-                        href='#'
+                        href='/blog/climbing-the-iceberg-with-clickhouse'
                         className='text-primary-300 hover:underline'>
                         Read more
                       </Link>
