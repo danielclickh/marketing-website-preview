@@ -54,10 +54,12 @@ export default function ContactPage({
                     <SuiTitle type='h2' className='text-2xl'>
                       Join the waitlist
                     </SuiTitle>
-                    <SuiText className='opacity-70'>
-                      ClickHouse lakehouse capabilities are coming to Private
-                      Preview! To join the waitlist, simply answer the questions
-                      below.{' '}
+                    <SuiText>
+                      <span className='opacity-70'>
+                        ClickHouse lakehouse capabilities are coming to Private
+                        Preview! To join the waitlist, simply answer the
+                        questions below.
+                      </span>{' '}
                       <Link
                         href='/blog/climbing-the-iceberg-with-clickhouse'
                         className='text-primary-300 hover:underline'>
