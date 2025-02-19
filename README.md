@@ -63,6 +63,43 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ---
 
+## Tailwind Gradient Masks
+
+A custom Tailwind plugin has been created to apply CSS gradient masks using Tailwind utilities.
+
+Use the `.gradient-mask-*` utilities in combination with the [gradient colour stop position](https://v3.tailwindcss.com/docs/gradient-color-stops#specifying-stop-positions) utilities to give an element a linear gradient mask.
+
+### Examples
+
+```html
+<div class="h-14 gradient-mask-to-t"></div>
+<div class="h-14 gradient-mask-to-r from-10% to-50%"></div>
+<div class="h-14 gradient-mask-to-b from-40% via-70% to-100%"></div>
+```
+
+### Directions
+
+- **Top:** `gradient-mask-to-t`
+- **Top Right:** `gradient-mask-to-tr`
+- **Right:** `gradient-mask-to-r`
+- **Bottom Right:** `gradient-mask-to-br`
+- **Bottom:** `gradient-mask-to-b`
+- **Bottom Left:** `gradient-mask-to-bl`
+- **Left:** `gradient-mask-to-l`
+- **Top Left:** `gradient-mask-to-tl`
+
+### Arbitrary Values
+
+If you need to use a one-off `mask-image` value that doesn’t make sense to include in your theme, use square brackets to generate a property on the fly using any arbitrary value.
+
+```html
+<div class="gradient-mask-to-t-[rgba(0,0,0,0)_0%,rgba(0,0,0,1)_10%,rgba(0,0,0,1)_90%,rgba(0,0,0,0)_100%]">
+    <!-- ... -->
+</div>
+```
+
+---
+
 ## Marketo Forms
 
 Marketo forms don't play nice with React, especially when using the NextJS router or if there are multiple instances on a single page. To address this, we have a `/marketo-forms/[id]` route, which is then embedded as an iframe. This allows for multiple instances and the use of the NextJS router. However, there are some considerations when using the [Marketo JS API](https://developers.marketo.com/javascript-api/forms/api-reference/), which we'll discuss in more detail below.

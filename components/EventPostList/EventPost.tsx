@@ -20,7 +20,7 @@ export default function EventPost({
         .split(' ')
         .join('-')
         .toLowerCase()}`}>
-      <CUICard className='h-full'>
+      <CUICard className='h-full backdrop-blur-sm'>
         <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
           {thumbnailPng && (
             <StrapiImage
