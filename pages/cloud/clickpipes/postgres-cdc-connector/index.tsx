@@ -6,7 +6,6 @@ import { CUIButton, CUICard } from '../../../../components/ClickUI'
 import DotsContainer from '../../../../components/DotsContainer'
 import Layout from '../../../../components/Layout'
 import PostgresCdcAnimation from '../../../../components/PostgresCdcAnimation'
-import PostgresCdcWaitlistForm from '../../../../components/PostgresCdcWaitlistForm'
 import QuoteCard from '../../../../components/QuoteCard'
 import { SuiText, SuiTitle } from '../../../../components/sui'
 import {
@@ -15,18 +14,36 @@ import {
 } from '../../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../../types/homepage'
-import imageAddPostgresSource from './add-postgres-source.png'
-import imageCustomizeIncomingData from './customize-incoming-data.png'
-import imageEditPipeInPlace from './edit-pipe-in-place.png'
-import iconFast from './icon-fast.svg'
-import iconMaximize from './icon-maximize.svg'
-import iconParty from './icon-party.svg'
-import iconPeerdb from './icon-peerdb.svg'
-import iconStars from './icon-stars.svg'
-import logoDaisychain from './logo-daisychain.svg'
-import logoSpoton from './logo-spoton.svg'
-import LogoVueling from './logo-vueling.svg'
-import imageMonitorPipe from './monitor-pipe.png'
+import imageAddPostgresSource from './assets/add-postgres-source.png'
+import imageCustomizeIncomingData from './assets/customize-incoming-data.png'
+import imageDataSource1 from './assets/data-source-logo-1.png'
+import imageDataSource2 from './assets/data-source-logo-2.png'
+import imageDataSource3 from './assets/data-source-logo-3.png'
+import imageDataSource4 from './assets/data-source-logo-4.png'
+import imageDataSource5 from './assets/data-source-logo-5.png'
+import imageDataSource6 from './assets/data-source-logo-6.png'
+import imageDataSource7 from './assets/data-source-logo-7.png'
+import imageDataSource8 from './assets/data-source-logo-8.png'
+import imageDataSource9 from './assets/data-source-logo-9.png'
+import imageEditPipeInPlace from './assets/edit-pipe-in-place.png'
+import iconFast from './assets/icon-fast.svg'
+import iconMaximize from './assets/icon-maximize.svg'
+import iconParty from './assets/icon-party.svg'
+import iconPeerdb from './assets/icon-peerdb.svg'
+import iconStars from './assets/icon-stars.svg'
+import logoAdoraPng from './assets/logo-adora.png'
+import logoBlacksmithPng from './assets/logo-blacksmith.png'
+import logoDaisychainPng from './assets/logo-dailsychain.png'
+import logoNeon from './assets/logo-neon.svg'
+import logoOttimate from './assets/logo-ottimate.svg'
+import logoSellerFetchPng from './assets/logo-seller-fetch.png'
+import logoSpotonPng from './assets/logo-spoton.png'
+import logoSyntagePng from './assets/logo-syntage.png'
+import logoUnifyPng from './assets/logo-unify.png'
+import logoVapiPng from './assets/logo-vapi.png'
+import logoVuelingPng from './assets/logo-vueling.png'
+import logoVueling from './assets/logo-vueling.svg'
+import imageMonitorPipe from './assets/monitor-pipe.png'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -34,8 +51,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title:
-            'Postgres CDC connector in ClickPipes is now in Private Preview',
+          title: 'Postgres CDC connector in ClickPipes is now in Public Beta',
           description:
             'Replicate your Postgres data to ClickHouse Cloud in just a few clicks for blazing fast analytics.',
           path: '/cloud/clickpipes/postgres-cdc-connector'
@@ -48,42 +64,160 @@ export const getStaticProps: GetStaticProps<CommonProps> =
 export default function Page({ headerData, footerData, seo }: CommonProps) {
   useGalaxyOnPage('postgresCdcPage')
 
+  const logos: Array<ImageProps> = [
+    {
+      src: logoSellerFetchPng,
+      width: 201 / 2,
+      height: 115 / 2,
+      alt: 'Seller Fetch'
+    },
+    {
+      src: logoSpotonPng,
+      width: 313 / 2,
+      height: 95 / 2,
+      alt: 'SpotOn'
+    },
+    {
+      src: logoVuelingPng,
+      width: 247 / 2,
+      height: 81 / 2,
+      alt: 'Vueling'
+    },
+    {
+      src: logoBlacksmithPng,
+      width: 417 / 2,
+      height: 53 / 2,
+      alt: 'Blacksmith'
+    },
+    {
+      src: logoUnifyPng,
+      width: 233 / 2,
+      height: 65 / 2,
+      alt: 'Unify'
+    },
+    {
+      src: logoSyntagePng,
+      width: 321 / 2,
+      height: 79 / 2,
+      alt: 'Syntage'
+    },
+    {
+      src: logoDaisychainPng,
+      width: 394 / 2,
+      height: 77 / 2,
+      alt: 'Daisychain'
+    },
+    {
+      src: logoAdoraPng,
+      width: 277 / 2,
+      height: 69 / 2,
+      alt: 'Adora'
+    },
+    {
+      src: logoVapiPng,
+      width: 211 / 2,
+      height: 61 / 2,
+      alt: 'Vapi'
+    },
+    {
+      src: logoNeon,
+      width: 102,
+      height: 28,
+      alt: 'Neon'
+    },
+    {
+      src: logoOttimate,
+      width: 204.68,
+      height: 29.25,
+      alt: 'Ottimate'
+    }
+  ]
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <div className='relative my-10 lg:mb-20'>
-        <div className='section-container relative z-10 lg:py-20'>
-          <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
-            <div className='w-full flex-1 space-y-6 lg:max-w-2xl'>
-              <h4 className='text-base font-semibold text-primary-300'>
-                <Link href='/cloud'>Cloud</Link> / Data ingestion
-              </h4>
-              <SuiTitle type='h1' className='lg:!text-4xl'>
-                Postgres CDC connector in ClickPipes is now in Private Preview
-              </SuiTitle>
-              <SuiText size='lg' className='text-neutral-200'>
-                Replicate your Postgres data to ClickHouse Cloud in just a few
-                clicks for blazing fast analytics.
-              </SuiText>
-              <SuiText size='lg' className='text-neutral-200'>
-                Eliminates the need for external ETL tools that are expensive,
-                slow and not purpose built for Postgres. Join the waitlist now.
-              </SuiText>
+      <div
+        className='relative bg-shadow-element yellow-shadow shadow-circle my-20 lg:my-24'
+        style={
+          {
+            '--top-side': '130%',
+            '--left-side': '80%'
+          } as CSSProperties
+        }>
+        <div className='section-container relative z-10'>
+          <div className='w-full mx-auto space-y-6 lg:max-w-4xl text-center'>
+            <div className='flex justify-center mb-10'>
               <PostgresCdcAnimation />
             </div>
-            <div className='w-full lg:max-w-lg'>
-              <CUICard>
-                <CUICard.Body className='p-4 lg:p-6'>
-                  <PostgresCdcWaitlistForm />
-                </CUICard.Body>
-              </CUICard>
-            </div>
+            <SuiTitle type='h1'>
+              <span className='tilted tilted-yellow'>
+                <span className='tilted-content'>Postgres CDC</span>
+              </span>{' '}
+              connector is now in Public Beta
+            </SuiTitle>
+            <SuiText size='lg' className='text-neutral-200'>
+              Replicate your Postgres data to ClickHouse Cloud in just a few
+              clicks for blazing fast analytics. Eliminates the need for
+              external ETL tools that are expensive, slow and not purpose built
+              for Postgres.{' '}
+              <Link
+                href='/docs/en/integrations/clickpipes/postgres'
+                className='text-primary-300 hover:underline'>
+                Learn more
+              </Link>
+              .
+            </SuiText>
+            <CUIButton
+              type='primary'
+              size='lg'
+              className='group mx-auto mt-8 px-10'
+              target='_blank'
+              href='https://console.clickhouse.cloud/signUp?loc=postgresCdcPageHeroCta'
+              onClick={useGalaxyOnClick(
+                'postgresCdcPage.heroCta.startFreeCloudTrialSelect'
+              )}>
+              Start a free cloud trial
+            </CUIButton>
+          </div>
+        </div>
+      </div>
+
+      {/* Trusted by */}
+      <SuiText
+        weight='bold'
+        size='sm'
+        className='mb-8 text-primary-300 text-center uppercase tracking-[0.0875rem]'>
+        Our postgres CDC connector is already Trusted by
+      </SuiText>
+      <div className='mask-logos-carousel'>
+        <div className='pause-hover hide-scrollbar relative flex overflow-hidden'>
+          <div className='flex items-center whitespace-nowrap animate-marqueeLeft'>
+            {logos.map((logo, logoIndex) => {
+              return (
+                <div
+                  key={logoIndex}
+                  className='flex-shrink-0 flex-grow-0 w-max px-6'>
+                  <Image {...logo} className='opacity-75' />
+                </div>
+              )
+            })}
+          </div>
+          <div className='flex items-center whitespace-nowrap animate-marqueeLeft'>
+            {logos.map((logo, logoIndex) => {
+              return (
+                <div
+                  key={logoIndex}
+                  className='flex-shrink-0 flex-grow-0 w-max px-6'>
+                  <Image {...logo} className='opacity-75' />
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>
 
       {/* Cards */}
-      <div className='section-container my-20'>
+      <div className='section-container mt-20 mb-16'>
         <div className='-mx-4 flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'>
           <div className='p-4 lg:w-1/3'>
             <IconCard
@@ -168,15 +302,86 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 Powered by PeerDB
               </SuiTitle>
               <SuiText className='text-balance text-white/70'>
-                The connector is powered by{' '}
-                <Link href='#' className='text-primary hover:underline'>
-                  PeerDB
-                </Link>
-                , a leading open-source Postgres CDC provider, which ClickHouse
-                acquired a few months ago. Since PeerDB is open source, there’s
-                no vendor lock-in!
+                The connector is powered by PeerDB, a leading open-source
+                Postgres CDC provider, which ClickHouse acquired a few months
+                ago. Since PeerDB is open source, there’s no vendor lock-in!
               </SuiText>
             </IconCard>
+          </div>
+        </div>
+      </div>
+
+      {/* Data sources */}
+      <div
+        className='bg-shadow-element yellow-shadow shadow-circle mt-16 pb-20'
+        style={
+          {
+            '--top-side': '200%',
+            '--left-side': '50%'
+          } as CSSProperties
+        }>
+        <div className='section-container'>
+          <SuiText
+            weight='bold'
+            size='sm'
+            className='mb-8 text-primary-300 text-center uppercase tracking-[0.0875rem]'>
+            supports a wide range of Postgres data sources
+          </SuiText>
+          <div className='flex justify-center items-center gap-8 md:gap-10 lg:gap-16 flex-wrap'>
+            <Image
+              src={imageDataSource1}
+              alt='Data source 1'
+              width={145 / 3}
+              height={145 / 3}
+            />
+            <Image
+              src={imageDataSource2}
+              alt='Data source 2'
+              width={118 / 3}
+              height={119 / 3}
+            />
+            <Image
+              src={imageDataSource3}
+              alt='Data source 3'
+              width={119 / 3}
+              height={119 / 3}
+            />
+            <Image
+              src={imageDataSource4}
+              alt='Data source 4'
+              width={128 / 3}
+              height={132 / 3}
+            />
+            <Image
+              src={imageDataSource5}
+              alt='Data source 5'
+              width={99 / 3}
+              height={132 / 3}
+            />
+            <Image
+              src={imageDataSource6}
+              alt='Data source 6'
+              width={145 / 3}
+              height={145 / 3}
+            />
+            <Image
+              src={imageDataSource7}
+              alt='Data source 7'
+              width={130 / 3}
+              height={126 / 3}
+            />
+            <Image
+              src={imageDataSource8}
+              alt='Data source 8'
+              width={152 / 3}
+              height={138 / 3}
+            />
+            <Image
+              src={imageDataSource9}
+              alt='Data source 9'
+              width={139 / 3}
+              height={126 / 3}
+            />
           </div>
         </div>
       </div>
@@ -191,13 +396,25 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
             <QuoteCard
               className='bg-neutral-900/80'
               content={
-                "PeerDB has been a game-changer for us, effortlessly migrating tens of terabytes from our Postgres warehouse into ClickHouse and keeping millions of daily orders synced with just seconds of latency. We're really excited about PeerDB's native integration into ClickHouse Cloud via ClickPipes and all of the opportunities it opens up for us."
+                'ClickPipes for Postgres has made it incredibly easy for us to keep our billing data in Postgres synchronized with ClickHouse for efficient analytics. The CDC experience is blazing fast, ensuring data freshness within seconds while minimizing the load on our production Postgres database. An invaluable solution for seamlessly integrating Postgres with ClickHouse!'
               }
               logo={{
-                src: logoSpoton,
-                width: 156,
-                height: 48,
-                alt: 'SpotOn'
+                src: logoNeon,
+                width: 102 * 1.2,
+                height: 28 * 1.2,
+                alt: 'Neon'
+              }}
+            />
+            <QuoteCard
+              className='bg-neutral-900/80'
+              content={
+                'We are having an amazing experience using the Postgres CDC connector in ClickPipes. We seamlessly moved our 30TB Aurora database to ClickHouse Cloud and are continuously keeping it in sync. We did not expect any ETL tool to handle our load, especially after a bitter experience in the past. However, we were pleasantly surprised by how reliable and performant ClickPipes has been for us.'
+              }
+              logo={{
+                src: logoSyntagePng,
+                width: 321 / 2,
+                height: 79 / 2,
+                alt: 'Syntage'
               }}
             />
             <QuoteCard
@@ -206,22 +423,10 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 'We already reduced our Postgres to ClickHouse snapshot times from 10+ hours down to 15 minutes with PeerDB. Combining ClickHouse’s powerful analytics natively with PeerDB’s real-time data capture capabilities will greatly simplify our data processing workflows. This integration will enable us to build analytical applications faster, giving us a competitive edge in the market.'
               }
               logo={{
-                src: LogoVueling,
+                src: logoVueling,
                 width: 140,
                 height: 44,
                 alt: 'Vueling'
-              }}
-            />
-            <QuoteCard
-              className='bg-neutral-900/80'
-              content={
-                'Clickpipes helps us reliably keep data from Postgres in sync with Clickhouse, while we rapidly improve our product. Clickhouse and Postgres are the peanut butter and chocolate of databases (they go well together!) and Clickpipes makes it easy to build that architechture at a fast-moving startup.'
-              }
-              logo={{
-                src: logoDaisychain,
-                width: 211,
-                height: 42,
-                alt: 'Daisychain'
               }}
             />
           </div>
@@ -229,15 +434,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       </div>
 
       {/* Features */}
-      <div
-        className='bg-shadow-element yellow-shadow shadow-circle my-24'
-        style={
-          {
-            '--top-side': '0',
-            '--right-side': '50%',
-            '--left-side': 'auto'
-          } as CSSProperties
-        }>
+      <div className='bg-shadow-element yellow-shadow shadow-circle my-24'>
         <div className='section-container relative z-10 space-y-16 lg:space-y-28 lg:pt-6'>
           <FeatureSection
             image={{
@@ -249,6 +446,11 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
             <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
               Easily add your Postgres source
             </SuiTitle>
+            <TickItem>
+              In ClickHouse Cloud, go to Data Sources --&gt; Set up a{' '}
+              <br className='hidden md:block' />
+              ClickPipe, and select Postgres CDC
+            </TickItem>
             <TickItem>
               Postgres can be running anywhere - cloud or on-prem
             </TickItem>
@@ -306,25 +508,8 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         </div>
       </div>
 
-      {/* Footer form */}
-      <DotsContainer className='my-20'>
-        <div className='mb-4 space-y-4 text-center lg:mb-6'>
-          <SuiTitle type='h2'>Get early access</SuiTitle>
-          <SuiText className='opacity-70'>
-            Join the waitlist to get access to the Postgres CDC connector
-          </SuiText>
-        </div>
-        <div className='mx-auto w-full lg:max-w-xl'>
-          <CUICard className='bg-neutral-900/80'>
-            <CUICard.Body className='p-4 lg:p-6'>
-              <PostgresCdcWaitlistForm />
-            </CUICard.Body>
-          </CUICard>
-        </div>
-      </DotsContainer>
-
       {/* Get started */}
-      <div className='section-container my-20 md:px-8 2xl:px-0'>
+      <div className='section-container my-20 lg:my-28 md:px-8 2xl:px-0'>
         <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
           <SuiTitle type='h2' color='text-default'>
             Get started with ClickHouse{' '}

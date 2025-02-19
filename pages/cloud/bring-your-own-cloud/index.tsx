@@ -147,7 +147,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
             <Image
               width={1020}
               height={738}
-              src='/images/cloud/bring-your-own-cloud/diagram.svg'
+              src='/images/cloud/bring-your-own-cloud/diagram.png'
               alt={'BYOC on AWS diagram'}
               className='mx-auto mt-20'
             />

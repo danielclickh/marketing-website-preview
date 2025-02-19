@@ -5,7 +5,7 @@ excerpt: "In this guide, we’ll explore OpenTelemetry (OTel), a framework for c
 index: 12
 ---
 
-OpenTelemetry (OTel) is a critical open-source framework designed to standardize the way telemetry data—metrics, logs, and traces—is collected, processed, and exported in modern software systems. This guide provides an overview of OpenTelemetry's purpose, key components, and role in improving observability across complex infrastructures, such as microservices and cloud environments.
+OpenTelemetry (OTel) is a critical open-source framework designed to standardize the way telemetry data — metrics, logs, and traces—is collected, processed, and exported in modern software systems. This guide provides an overview of OpenTelemetry's purpose, key components, and role in improving [observability](https://clickhouse.com/engineering-resources/observability) across complex infrastructures, such as microservices and cloud environments.
 
 You'll learn about the types of telemetry data OTel handles, how it simplifies monitoring and debugging, and its tools, including the OpenTelemetry Collector and language-specific SDKs for code instrumentation. The page also highlights OTel's flexibility and vendor-neutral approach and how its integration with platforms like ClickHouse enhances data analysis for large-scale systems. It provides a clear and structured look at how OpenTelemetry supports reliable, efficient software performance and observability.
 
@@ -21,7 +21,7 @@ As a complex system catering to a broad array of stakeholders, OpenTelemetry's u
 
 ## What is telemetry data?
 
-Now that we’ve defined OTel, it's crucial to understand telemetry data and why it's vital for the observability of modern software systems. Telemetry, in the context of software, refers to the generation and collection of data about a system that will help developers optimize performance, troubleshoot issues, and ensure system health.
+Now that we’ve defined OTel, it's crucial to understand [telemetry data](https://clickhouse.com/engineering-resources/telemetry-data) and why it's vital for the observability of modern software systems. Telemetry, in the context of software, refers to the generation and collection of data about a system that will help developers optimize performance, troubleshoot issues, and ensure system health.
 
 There are three main types of telemetry data: metrics, traces, and logs. Each type serves different observability needs and provides unique insights into your systems.
 
@@ -50,6 +50,8 @@ For example, a cloud storage service might log every file access request to moni
 OpenTelemetry supports structured logging, enhancing the ability to efficiently analyze and interpret large volumes of log data. Logs are essential for detailed diagnostics, security monitoring, and compliance, and they serve as a critical component of post-incident analysis and auditing.
 
 Combining metrics, traces, and logs offers a holistic view of system performance and health. OpenTelemetry's standardized approach simplifies the collection and analysis of these data types, enhancing observability across your technology stack. This integration allows teams to correlate data from different sources, providing deeper insights and more actionable intelligence to optimize systems effectively.
+
+➡️ Read more about [telemetry data](https://clickhouse.com/engineering-resources/telemetry-data)
 
 ## Why does OTel matter?
 
@@ -100,3 +102,5 @@ This integration showcases the practical application of OpenTelemetry with Click
 ![Otel image 1](/images/engineering-resources/1_otel.png)
   
 ➡️ Read [ClickHouse and OpenTelemetry](https://clickhouse.com/blog/clickhouse-and-open-telemtry)
+
+➡️ Read [How we Built a 19 PiB Logging Platform with ClickHouse and Saved Millions](https://clickhouse.com/blog/building-a-logging-platform-with-clickhouse-and-saving-millions-over-datadog#choosing-opentelemetry-otel)

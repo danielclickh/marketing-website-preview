@@ -2,7 +2,7 @@ import { IconButton } from '@clickhouse/click-ui'
 import { MouseEvent, useEffect, useState } from 'react'
 import LinkWithArrow from '../LinkWithArrow'
 
-export interface HeaderEyebrowProps {
+export interface AnnouncementBarProps {
   text: string
   link: string
   dismissible?: boolean
@@ -19,14 +19,14 @@ async function hashString(input: string) {
   return hashArray.map((byte) => byte.toString(16).padStart(2, '0')).join('')
 }
 
-export default function HeaderEyebrow({
+export default function AnnouncementBar({
   text,
   link,
   className = '',
   dismissible = false,
   onShow,
   onHide
-}: HeaderEyebrowProps) {
+}: AnnouncementBarProps) {
   const [storageKey, setStorageKey] = useState('')
   const [isVisible, setIsVisible] = useState<boolean>(false)
 
