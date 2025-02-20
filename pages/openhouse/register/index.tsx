@@ -44,8 +44,6 @@ export const getStaticProps: GetStaticProps<RegisterPageProps> =
         'agenda',
         'agenda.items',
         'location',
-        'darkFeatureImagePng',
-        'lightFeatureImagePng',
         'form'
       ],
       pagination: { limit: 3 }

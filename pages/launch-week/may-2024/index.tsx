@@ -55,8 +55,6 @@ export const getStaticProps: GetStaticProps = async () => {
         'agenda',
         'agenda.items',
         'location',
-        'darkFeatureImagePng',
-        'lightFeatureImagePng',
         'form'
       ],
       pagination: { limit: 3 }

@@ -7,7 +7,8 @@ import SocialButton from '../SocialButton'
 import { SuiPanel } from '../sui'
 import { EventsContainerProps } from './types'
 
-interface MarketoEventsContainerProps extends EventsContainerProps {
+interface MarketoEventsContainerProps
+  extends Pick<EventsContainerProps, 'children' | 'featuredImage'> {
   mktoFormId: string
 }
 

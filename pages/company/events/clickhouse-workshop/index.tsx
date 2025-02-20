@@ -28,8 +28,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
         'agenda',
         'agenda.items',
         'location',
-        'darkFeatureImagePng',
-        'lightFeatureImagePng',
+        'thumbnailPng',
         'form'
       ]
     })
@@ -54,8 +53,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
           'agenda',
           'agenda.items',
           'location',
-          'darkFeatureImagePng',
-          'lightFeatureImagePng',
+          'thumbnailPng',
           'form'
         ],
         pagination: { limit: 3 }
@@ -111,18 +109,15 @@ function EventPage({
   footerData,
   headerData,
   recentEvents,
-  lightFeatureImagePng,
+  thumbnailPng,
   seo
 }: EventProps) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='flex flex-col'>
         <EventsContainerMarketo
-          localDatetime={localDatetime}
-          form={form}
           mktoFormId={'1086'}
-          recordedVimeoUrl={recordedVimeoUrl}
-          featuredImage={lightFeatureImagePng}>
+          featuredImage={thumbnailPng}>
           <div className='section_metadata mb-20'>
             <h4 className='mb-2 text-base font-semibold text-primary-300'>
               <Link

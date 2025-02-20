@@ -57,8 +57,6 @@ export const getServerSideProps: GetServerSideProps<NewsEventProps> =
         'agenda',
         'agenda.items',
         'location',
-        'darkFeatureImagePng',
-        'lightFeatureImagePng',
         'form'
       ]
     })
@@ -111,8 +109,6 @@ export const getServerSideProps: GetServerSideProps<NewsEventProps> =
           'agenda',
           'agenda.items',
           'location',
-          'darkFeatureImagePng',
-          'lightFeatureImagePng',
           'form'
         ],
         pagination: { limit: 3 }
