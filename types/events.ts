@@ -55,7 +55,6 @@ export type EventType = {
   agenda: EventAgenda | null
   form: EventForm | null
   recordedVimeoUrl: string | null
-  keywords: string | null
 }
 
 export interface EventProps extends EventType, CommonProps {
