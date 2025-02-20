@@ -92,9 +92,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                     May 28-29, 2025
                   </h2>
                   <p className='text-xl leading-loose mb-4'>
-                    Free conference in San Francisco, CA
-                    <br />
-                    Watch parties hosted world-wide.
+                    Free conference in San Francisco, CA.
                   </p>
                   <OpenHouseButton
                     href='/openhouse/register'
@@ -398,9 +396,9 @@ export default function Page({ seo, footerData }: CommonProps) {
           {/* CTAs */}
           <section
             className={`relative pt-24 pb-20 lg:min-h-[700px] flex bg-[#2F3032] text-black bg-blend-screen ${styles.patternBackground}`}>
-            <div className='max-w-6xl mx-auto my-auto w-full px-6 lg:px-12'>
-              <div className='space-y-6 md:space-y-0 md:grid grid-cols-2 gap-6'>
-                <div className='bg-white py-8 px-6 lg:py-10 lg:px-12 space-y-8 text-lg'>
+            <div className='max-w-xl mx-auto my-auto w-full px-6 lg:px-12'>
+              <div className='space-y-6 md:space-y-0 md:grid grid-cols-1 gap-6'>
+                <div className='bg-white py-8 px-6 lg:py-10 lg:px-12 space-y-8 text-lg text-center'>
                   <FontSohneBreit>
                     <h3 className='text-4xl'>Open House</h3>
                   </FontSohneBreit>
@@ -421,18 +419,6 @@ export default function Page({ seo, footerData }: CommonProps) {
                     </OpenHouseButton>
                   </p>
                 </div>
-                <div className='bg-white py-8 px-6 lg:py-10 lg:px-12 space-y-8 text-lg'>
-                  <FontSohneBreit>
-                    <h3 className='text-4xl'>Watch Parties</h3>
-                  </FontSohneBreit>
-                  <p>
-                    Can’t make it to San Francisco? We’ll be hosting watch
-                    parties in select cities worldwide.
-                  </p>
-                  <p>
-                    <strong>Stay tuned for more information.</strong>
-                  </p>
-                </div>
               </div>
             </div>
           </section>
@@ -450,13 +436,6 @@ export default function Page({ seo, footerData }: CommonProps) {
                   person, the event will be streamed to multiple locations
                   worldwide, ensuring everyone can be part of this global
                   gathering.
-                </p>
-              </OpenHouseAccordionItem>
-              <OpenHouseAccordionItem handle='Where will the event be live-streamed?'>
-                <p className='max-w-3xl'>
-                  We plan to stream selected sessions to New York City, London,
-                  and Singapore. More details on the exact timing and location
-                  of these live streaming events are upcoming.
                 </p>
               </OpenHouseAccordionItem>
               <OpenHouseAccordionItem handle='What can I expect from the agenda?'>
