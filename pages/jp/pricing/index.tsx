@@ -115,7 +115,7 @@ export const getServerSideProps: GetServerSideProps<PricingPageProps> =
         cloudPromise
       ])
 
-      seo.path = '/pricing'
+      seo.path = '/jp/pricing'
 
       return {
         props: {
@@ -152,7 +152,7 @@ export const getServerSideProps: GetServerSideProps<PricingPageProps> =
       computesPromise
     ])
 
-    seo.path = '/pricing'
+    seo.path = '/jp/pricing'
 
     return {
       props: {
@@ -185,7 +185,7 @@ export default function PricingPage({
   headerData,
   footerData
 }: PricingPageProps) {
-  useGalaxyOnPage('pricingPage')
+  useGalaxyOnPage('jpPricingPage')
   const pocFormRef = useRef<HTMLDivElement | null>(null)
 
   return (
