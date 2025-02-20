@@ -17,10 +17,6 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { ContactProps } from '../../../types/contact'
 import faqs from '../../use-cases/real-time-analytics/faqs.json'
 
-interface DriftAPI {
-  startInteraction: (options: { interactionId: number }) => void
-}
-
 interface PageProps {
   customerStories: any
   contactForm: {
@@ -30,15 +26,6 @@ interface PageProps {
   headerData: ContactProps['headerData']
   seo: ContactProps['seo']
 }
-
-interface DriftWindow extends Window {
-  drift: {
-    api: DriftAPI
-  }
-}
-
-// Tell TypeScript that when we reference `window`, we mean the extended type with `drift` on it
-declare var window: DriftWindow
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
