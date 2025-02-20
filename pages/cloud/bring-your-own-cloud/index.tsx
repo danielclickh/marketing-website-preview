@@ -97,7 +97,7 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                   <div ref={formSuccessRef} className='text-center'>
                     <h3 className='text-2xl font-bold'>Thank you!</h3>
                     <p className='mt-2 text-neutral-200'>
-                      We'll be in touch as soon as BYOC becomes available.
+                      We'll be in touch shortly.
                     </p>
                     <div className='mt-6 flex w-full flex-col items-center justify-center gap-6 md:flex-row'>
                       <CUIButton
