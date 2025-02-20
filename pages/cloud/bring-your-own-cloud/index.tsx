@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps = async function getStaticProps() {
       seo: {
         title: 'Bring Your Own Cloud - ClickHouse',
         description:
-          'Join the waitlist for Bring Your Own Cloud. A fully managed ClickHouse Cloud service, deployed in your own AWS account.',
+          'Request access for Bring Your Own Cloud. A fully managed ClickHouse Cloud service, deployed in your own AWS account.',
         path: '/cloud/bring-your-own-cloud',
         image: [{ url: '/images/cloud/bring-your-own-cloud/byoc-og-image.png' }]
       },
@@ -55,8 +55,8 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
                 </p>
                 <p className='mt-5 text-center text-[20px] leading-[180%] lg:text-left 2xl:max-w-[678px]'>
                   Designed for large-scale deployments, with personalized
-                  support and onboarding. SOC 2 and ISO 27001 aligned. Join the
-                  waitlist&nbsp;today.
+                  support and onboarding. SOC 2 and ISO 27001 aligned. Request
+                  access today.
                 </p>
               </div>
 

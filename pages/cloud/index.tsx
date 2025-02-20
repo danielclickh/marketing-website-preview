@@ -129,7 +129,7 @@ export default function CloudPage({
                     </div>
                   </div>
                   <p className='mt-3 text-sm'>
-                    Join the waitlist for{' '}
+                    Request access for{' '}
                     <Link
                       href='/cloud/bring-your-own-cloud'
                       className='text-primary-300'>
