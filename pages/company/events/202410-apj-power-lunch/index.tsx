@@ -29,8 +29,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
         'agenda',
         'agenda.items',
         'location',
-        'darkFeatureImagePng',
-        'lightFeatureImagePng',
+        'thumbnailPng',
         'form'
       ]
     })
@@ -55,8 +54,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
           'agenda',
           'agenda.items',
           'location',
-          'darkFeatureImagePng',
-          'lightFeatureImagePng',
+          'thumbnailPng',
           'form'
         ],
         pagination: { limit: 3 }
@@ -112,7 +110,7 @@ function EventPage({
   footerData,
   headerData,
   recentEvents,
-  lightFeatureImagePng,
+  thumbnailPng,
   seo
 }: EventProps) {
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
@@ -175,9 +173,9 @@ function EventPage({
               )}
             </div>
             <div className='ml-auto w-full lg:max-w-lg'>
-              {lightFeatureImagePng && (
+              {thumbnailPng && (
                 <Image
-                  src={lightFeatureImagePng.url}
+                  src={thumbnailPng.url}
                   width={512}
                   height={293}
                   alt='Featured image'

@@ -14,8 +14,6 @@ function EventsForm({
   form,
   recordedVimeoUrl = ''
 }: EventsFormProps) {
-  const { submitButtonLabel } = form
-
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
@@ -50,7 +48,7 @@ function EventsForm({
           <MarketoForm
             formId={'1127'}
             onLoad={() => setFormLoaded(true)}
-            submitButtonLabel={form.submitButtonLabel}
+            submitButtonLabel={form?.submitButtonLabel}
             clearbitTracking={true}
             onSuccess={() => {
               setFormSuccess(true)
@@ -72,14 +70,14 @@ function EventsForm({
           <div className='subscribed' ref={formSuccessRef}>
             <div className='success-container text-center'>
               <CheckCircleIcon className='mx-auto mb-4 h-16 w-16 stroke-1 text-primary-300' />
-              {form.SuccessMessage && (
+              {form?.SuccessMessage && (
                 <Markdown>{form.SuccessMessage}</Markdown>
               )}
-              {!form.SuccessMessage && (
+              {!form?.SuccessMessage && (
                 <p className='mb-12 px-10 text-xl font-bold'>
-                  {form.type === 'recordedGatedContent' ? (
+                  {form?.type === 'recordedGatedContent' ? (
                     <>Thanks for registering! </>
-                  ) : submitButtonLabel === 'Request your spot' ? (
+                  ) : form?.submitButtonLabel === 'Request your spot' ? (
                     <>
                       Thanks for your interest, we'll be in touch to let you
                       know if a space is available
@@ -89,7 +87,7 @@ function EventsForm({
                   )}
                 </p>
               )}
-              {form.type === 'recordedGatedContent' && (
+              {form?.type === 'recordedGatedContent' && recordedVimeoUrl && (
                 <div className='my-10' id='custom-video-container-player'>
                   <p className='mb-4'>Watch the recording below</p>
                   <VideoPlayerCustom
@@ -107,7 +105,7 @@ function EventsForm({
               )}
 
               <p className='mb-2 px-10 text-base font-semibold text-neutral-300'>
-                {form.type == 'recordedGatedContent' ? (
+                {form?.type == 'recordedGatedContent' && recordedVimeoUrl ? (
                   <>Share the recording</>
                 ) : (
                   <>Share</>
