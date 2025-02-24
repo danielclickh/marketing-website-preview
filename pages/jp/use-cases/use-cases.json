@@ -118,7 +118,7 @@
 	"logos": [{
 		"name": "SONY",
 		"logo": "/images/jp/use-cases/logs/sony-2.svg",
-		"link": "/use-cases/logging-and-metrics"
+		"link": "/jp/use-cases/logging-and-metrics"
 	}, 
 	{
 		"name": "eBay",

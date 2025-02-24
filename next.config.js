@@ -50,6 +50,7 @@ const nextConfig = {
       }
     ]
   },
+  // @ts-ignore
   async rewrites() {
     // @link https://nextjs.org/docs/13/pages/api-reference/next-config-js/rewrites
     return {
@@ -332,7 +333,17 @@ const nextConfig = {
       },
       {
         source: '/use-cases/logging',
-        destination: '/use-cases/logging-and-metrics',
+        destination: '/use-cases/observability',
+        permanent: true
+      },
+      {
+        source: '/use-cases/logging-and-metrics',
+        destination: '/use-cases/observability',
+        permanent: true
+      },
+      {
+        source: '/use-cases/business-intelligence',
+        destination: '/use-cases/data-warehousing',
         permanent: true
       },
       {
