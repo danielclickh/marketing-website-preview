@@ -33,7 +33,7 @@ function CodeViewer({
                 : children.toString()
         ).trim()
         return (
-            <div className="p-2 bg-[#282828]">
+            <div className="bg-[#282828] mb-9">
                 <CodeBlock
                     language={language}
                     onCopy={function Da() { }}
