@@ -118,8 +118,8 @@ function UseCasesPage({
 
   const getUseCaseLink = (useCaseTitle: string | undefined | null) => {
     const map: Record<string, string> = {
-      'Business intelligence': '/use-cases/business-intelligence',
-      'Logs, events, and traces': '/use-cases/logging-and-metrics',
+      'Data warehousing': '/use-cases/data-warehousing',
+      Observability: '/use-cases/observability',
       'Machine learning and GenAI':
         '/use-cases/machine-learning-and-data-science',
       'Real-time analytics': '/use-cases/real-time-analytics'

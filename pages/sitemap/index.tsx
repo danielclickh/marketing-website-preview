@@ -248,9 +248,9 @@ function Sitemap({
               </p>
               <p className='pb-2'>
                 <Link
-                  href='/use-cases/logging-and-metrics'
+                  href='/use-cases/observability'
                   className='text-primary-300 hover:underline'>
-                  Logs, events, and traces
+                  Observability
                 </Link>
               </p>
               <p className='pb-2'>
@@ -262,9 +262,9 @@ function Sitemap({
               </p>
               <p className='pb-2'>
                 <Link
-                  href='/use-cases/business-intelligence'
+                  href='/use-cases/data-warehousing'
                   className='text-primary-300 hover:underline'>
-                  Business intelligence
+                  Data warehousing
                 </Link>
               </p>
               <p className='pb-2'>

@@ -37,8 +37,8 @@ export const getStaticProps: GetStaticProps<RealTimeAnalyticsPageProps> =
 
     const data = await findOne('homepage', params)
 
-    data.seo.path = '/use-cases/business-intelligence'
-    data.seo.title = 'Business Intelligence with ClickHouse'
+    data.seo.path = '/use-cases/data-warehousing'
+    data.seo.title = 'Data warehousing with ClickHouse'
     data.seo.description =
       'Say goodbye to loading spinners and lengthy report wait times. For Business Intelligence, ClickHouse unlocks faster queries at a fraction of the cost.'
 
@@ -76,11 +76,11 @@ export default function RealTimeAnalyticsPage({
                 <div className='flex-col items-center xl:mt-16'>
                   <div className='w-full lg:max-w-xl xl:max-w-full'>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                      <Link href='/use-cases'>Use cases</Link> / Business
-                      intelligence
+                      <Link href='/use-cases'>Use cases</Link> / Data
+                      warehousing
                     </h4>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-xl lg:text-left'>
-                      Business intelligence with ClickHouse
+                      Data warehousing with ClickHouse
                     </h1>
                     <SuiText
                       size='base'
@@ -88,8 +88,8 @@ export default function RealTimeAnalyticsPage({
                       className='mt-6 text-center md:pr-16 lg:text-left'>
                       <p className='mb-12 max-w-2xl text-xl font-normal leading-[175%]'>
                         Say goodbye to loading spinners and lengthy report wait
-                        times. For&nbsp;Business Intelligence, ClickHouse
-                        unlocks faster queries at a fraction of the cost.
+                        times. For&nbsp;Data warehousing, ClickHouse unlocks
+                        faster queries at a fraction of the cost.
                       </p>
                     </SuiText>
                   </div>
@@ -99,7 +99,7 @@ export default function RealTimeAnalyticsPage({
                         type='primary'
                         size='lg'
                         weight='semibold'
-                        href='https://console.clickhouse.cloud/signUp?loc=use-case-business-intelligence'
+                        href='https://console.clickhouse.cloud/signUp?loc=use-case-data-warehousing'
                         target='_blank'
                         linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
                         className='w-full'>
@@ -109,7 +109,7 @@ export default function RealTimeAnalyticsPage({
                         type='secondary'
                         size='lg'
                         weight='semibold'
-                        href='/company/contact?loc=use-case-business-intelligence'
+                        href='/company/contact?loc=use-case-data-warehousing'
                         target='_self'
                         linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
                         className='w-full'>
