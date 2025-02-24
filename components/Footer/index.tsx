@@ -71,8 +71,8 @@ export default function Footer({
             href='https://github.com/ClickHouse/ClickHouse'
             target='_blank'
             iconLeft={<GitHub />}
-            linkClass='flex justify-end'
-            className='bg-neutral-0 text-neutral-900 mt-6'>
+            linkClass='flex justify-end w-full'
+            className='bg-neutral-0 text-neutral-900 mt-6 w-full md:w-fit'>
             Star us on Github
           </CUIButton>
         </div>
