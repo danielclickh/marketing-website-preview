@@ -2,6 +2,8 @@ import Image from 'next/image'
 import { FullyQualifiedEvent } from '../../lib/galaxy/client'
 import { useGalaxyOnClick } from '../../lib/galaxy/galaxy'
 import logoFull from '../../public/logo-full.svg'
+import { CUIButton } from '../ClickUI'
+import GitHub from '../icons/GitHub'
 import NewsLetterForm from '../NewsLetter/NewsLetterForm'
 import topLevelFooterMenu from './footer.json'
 import { FooterData } from './types'
@@ -63,6 +65,16 @@ export default function Footer({
             {newsletterForm?.description}
           </div>
           <NewsLetterForm />
+          <CUIButton
+            type='secondary'
+            weight='semibold'
+            href='https://github.com/ClickHouse/ClickHouse'
+            target='_blank'
+            iconLeft={<GitHub />}
+            linkClass='flex justify-end'
+            className='bg-neutral-0 text-neutral-900 mt-6'>
+            Star us on Github
+          </CUIButton>
         </div>
       </div>
       <div className='section-container w-full border-t border-neutral-400 opacity-10 shadow-footer-line' />
