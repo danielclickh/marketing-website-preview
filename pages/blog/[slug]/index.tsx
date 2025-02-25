@@ -131,7 +131,7 @@ export default function BlogPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='relative'>
-        <div style={{ position: 'relative'}}>
+        <div style={{ position: 'relative' }}>
           <ReadingProgress target={contentRef} />
         </div>
         <div className='section-container mx-auto flex flex-col xl:flex-row xl:pt-20'>
@@ -229,11 +229,15 @@ export default function BlogPage({
               </div>
               <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
                 <CopyUrlButton />
-                {['y_combinator', 'twitter', 'facebook', 'linkedin'].map(
-                  (social) => (
-                    <SocialButton key={social} type={social} title={title} />
-                  )
-                )}
+                {[
+                  'y_combinator',
+                  'twitter',
+                  'bluesky',
+                  'facebook',
+                  'linkedin'
+                ].map((social) => (
+                  <SocialButton key={social} type={social} title={title} />
+                ))}
               </div>
             </div>
             <NewsLetter {...newsLetterData} />
