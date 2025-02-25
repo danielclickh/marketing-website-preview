@@ -1,4 +1,4 @@
-import GamingDiagram from '../../../pages/industries/gaming/gamingDiagram'
+import GamingDiagram from '../gamingDiagram'
 interface DiagramProps {
   className?: string
   sectionId?: number

@@ -3,10 +3,10 @@ import * as Accordion from '@radix-ui/react-accordion'
 import classNames from 'classnames'
 import Image from 'next/image'
 import { forwardRef, useRef, useState } from 'react'
-import Markdown from '../../Markdown'
-import { SuiTitle } from '../../sui'
-import accordionItems from './accordion-items.json'
+import Markdown from '../../../Markdown'
+import { SuiTitle } from '../../../sui'
 import Diagram from './Diagram'
+import accordionItems from './accordion-items.json'
 
 const GamingAccordionComponent = () => {
   const [activeItem, setActiveItem] = useState('item-0')
