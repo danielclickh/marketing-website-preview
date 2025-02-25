@@ -11,8 +11,8 @@ function FollowUs() {
           imgSrc='/socials/x.svg'
         />
         <SocialIcon
-          key='Blue Sky'
-          name='Blue Sky'
+          key='Bluesky'
+          name='Bluesky'
           href='https://bsky.app/profile/clickhouse.com'
           imgSrc='/socials/bluesky.svg'
         />
