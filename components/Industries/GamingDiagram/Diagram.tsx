@@ -1,11 +1,11 @@
-import RealTimeDiagram from '../../../pages/use-cases/real-time-analytics/RealTimeDiagram'
+import GamingDiagram from '../../../pages/industries/gaming/gamingDiagram'
 interface DiagramProps {
   className?: string
   sectionId?: number
 }
 
 const Diagram: React.FC<DiagramProps> = ({ className, sectionId }) => {
-  const sections = [{ id: 10, component: RealTimeDiagram }]
+  const sections = [{ id: 10, component: GamingDiagram }]
 
   return (
     <div className={className}>

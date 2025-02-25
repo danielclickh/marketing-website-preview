@@ -16,7 +16,7 @@ import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../types/homepage'
 import callouts from './callouts.json'
-import checkpoints from './checkpoints'
+import checkpoints from './checkpoints.json'
 import faqs from './faqs.json'
 import features from './features.json'
 
@@ -101,7 +101,7 @@ export default function GamingIndustryPage({
                       </p>
                     </SuiText>
                   </div>
-                  <div className='lg:max-w-2xl xl:max-w-full'>
+                  <div className='lg:max-w-2xl'>
                     {checkpoints.map((checkpoint) => {
                       return (
                         <div
@@ -114,13 +114,7 @@ export default function GamingIndustryPage({
                             alt='Icon'
                             className='w-8'
                           />
-                          <SuiText
-                            size='base'
-                            weight='normal'
-                            color='secondary'
-                            className='flex items-center'>
-                            <p>{checkpoint.content}</p>
-                          </SuiText>
+                          <Markdown>{checkpoint.content}</Markdown>
                         </div>
                       )
                     })}
@@ -148,12 +142,12 @@ export default function GamingIndustryPage({
                     </div>
                   </div>
                 </div>
-                <div className='relative z-30 mx-auto hidden md:w-4/12 lg:flex lg:w-[400px] xl:w-[525px]'>
+                <div className='relative z-30 mx-auto hidden md:w-4/12 lg:flex align-middle justify-center items-center lg:w-[400px] xl:w-[525px]'>
                   <Image
-                    src='/images/use-cases/real-time-analytics/real-time-analytics-hero.svg'
+                    src='/images/industries/gaming/gaming-hero.png'
                     alt='ClickHouse'
-                    width={509}
-                    height={397}
+                    width={960}
+                    height={800}
                     className='h-auto w-full '
                     priority
                   />
@@ -211,15 +205,15 @@ export default function GamingIndustryPage({
             <div className='mx-auto max-w-7xl'>
               <div className='relative z-20 flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
                 <div className='p-10'>
-                  <div className='space-y-6 lg:grid lg:grid-cols-4 lg:gap-6 lg:space-y-0'>
+                  <div className='space-y-6 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0'>
                     <QuoteCard
                       content={
                         '"The modern game company is a data company. The ability to blend high-performance analytics with player data lets companies like Azur Games focus on their specialty—the user experience. We can focus on ours—delivering the fastest real-time data warehouse."'
                       }
                       logo={{
-                        src: '/images/use-cases/real-time-analytics/cloudflare-logo.svg',
+                        src: '/images/industries/gaming/logo-azur.svg',
                         width: 123,
-                        height: 41,
+                        height: 40,
                         alt: 'Azur Games'
                       }}
                     />
@@ -227,11 +221,10 @@ export default function GamingIndustryPage({
                       content={
                         '"With ClickHouse, we can quickly process billions of lines of data in a short time, giving us the speed and scale we need to optimize routes and enhance the gaming experience for our users."'
                       }
-                      link='/blog/how-clickhouse-powers-ahrefs-the-worlds-most-active-web-crawler'
                       logo={{
-                        src: '/images/use-cases/real-time-analytics/ahrefs-logo.svg',
-                        width: 123,
-                        height: 32,
+                        src: '/images/industries/gaming/logo-exitlag.svg',
+                        width: 175,
+                        height: 40,
                         alt: 'ExitLag'
                       }}
                     />
@@ -239,11 +232,10 @@ export default function GamingIndustryPage({
                       content={
                         '"ClickHouse is our main real-time OLAP tool. We process around 100 million safety-related events per day, and ClickHouse enables us to act fast."'
                       }
-                      link='/blog/langchain-why-we-choose-clickhouse-to-power-langchain'
                       logo={{
-                        src: '/images/use-cases/ml-and-ds/langchain-logo-white.svg',
-                        width: 240,
-                        height: 43,
+                        src: '/images/industries/gaming/logo-roblox.svg',
+                        width: 231,
+                        height: 40,
                         alt: 'Roblox'
                       }}
                     />

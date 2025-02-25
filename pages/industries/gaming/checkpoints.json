@@ -1,0 +1,22 @@
+[
+  {
+    "id": 10,
+    "content": "<span className='font-bold'>Power in-game analytics and player insights</span> with instant responsiveness, enabling real-time segmentation and A/B testing based on in-game behavior to optimize player engagement."
+  },
+  {
+    "id": 20,
+    "content": "<span className='font-bold'>Optimize monetization and drive ad decisions</span> with real-time event data, dynamically adjusting player cohorts based on user behavior to enable personalized offers and custom in-game experiences." 
+  },
+  {
+    "id": 30,
+    "content": "<span className='font-bold'>Game Performance Monitoring (GPM)</span> - track game performance, logs, and telemetry in real time with crash analytics and performance tracking."
+  },
+  {
+    "id": 40,
+    "content": "<span className='font-bold'>Effortlessly handle the high-cardinality, high-concurrency workloads</span> needed to power real-time leaderboards, live game state tracking, telemetry processing, and dynamic player segmentation."
+  },
+  {
+    "id": 50,
+    "content": "<span className='font-bold'>Store every user interaction</span> with 100% event fidelity, thanks to at least 10x compression while reducing infrastructure costs and enabling deep historical analysis."
+  }
+]
