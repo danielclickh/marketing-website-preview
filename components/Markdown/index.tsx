@@ -13,7 +13,7 @@ import remarkGfm from 'remark-gfm'
 import { CUILink } from '../ClickUI'
 import { SuiTitle } from '../sui'
 import { AllowedElements, HighLightOptions, sanitizeMarkdown } from './utils'
-import StrapiImage from '../StrapiImage'
+import BlogImage from '../BlogImage'
 
 function CodeViewer({
   node,
@@ -122,7 +122,7 @@ interface DefaultComponentProps {
 
 function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
   return {
-    img: StrapiImage,
+    img: BlogImage,
     h1: (props: any) => (
       <Header type='h1' allowHeaderLink={allowHeaderLink} {...props} />
     ),
