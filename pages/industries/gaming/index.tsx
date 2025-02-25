@@ -6,10 +6,10 @@ import { CUIButton } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import GamingAccordionComponent from '../../../components/Industries/Gaming/Accordion/Accordion'
 import callouts from '../../../components/Industries/Gaming/callouts.json'
-import checkpoints from '../../../components/Industries/Gaming/checkpoints.json'
 import faqs from '../../../components/Industries/Gaming/faqs.json'
 import Feature from '../../../components/Industries/Gaming/feature-check'
 import features from '../../../components/Industries/Gaming/features.json'
+import heroCheckItems from '../../../components/Industries/Gaming/hero-check-items.json'
 import Layout from '../../../components/Layout'
 import LogoCarousel from '../../../components/LogoCarousel'
 import Markdown from '../../../components/Markdown'
@@ -102,11 +102,11 @@ export default function GamingIndustryPage({
                     </SuiText>
                   </div>
                   <div className='lg:max-w-2xl'>
-                    {checkpoints.map((checkpoint) => {
+                    {heroCheckItems.map((item) => {
                       return (
                         <div
                           className={'item-center flex space-x-4 pb-2'}
-                          key={checkpoint.id}>
+                          key={item.id}>
                           <Image
                             src='/images/cloud/check.svg'
                             width='0'
@@ -114,7 +114,7 @@ export default function GamingIndustryPage({
                             alt='Icon'
                             className='w-8'
                           />
-                          <Markdown>{checkpoint.content}</Markdown>
+                          <Markdown>{item.content}</Markdown>
                         </div>
                       )
                     })}
@@ -303,7 +303,7 @@ export default function GamingIndustryPage({
                 </div>
               </div>
               <GamingAccordionComponent />
-              <div className='mx-auto max-w-5xl px-4 xl:px-0'>
+              <div className='mx-auto max-w-5xl px-4 xl:px-0 xl:pr-2'>
                 <div className='grid justify-between gap-20 pt-20 lg:grid-cols-2'>
                   {callouts.map((feature) => (
                     <div key={feature.id} className='px-3'>
@@ -317,6 +317,7 @@ export default function GamingIndustryPage({
                       <h3 className='mb-4 text-lg font-bold'>
                         {feature.title}
                       </h3>
+
                       <div className='rich_content text-base text-neutral-200'>
                         <Markdown>{feature.content}</Markdown>
                       </div>
