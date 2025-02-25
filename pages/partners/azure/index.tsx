@@ -21,7 +21,6 @@ import {
   PricingV2ComponentRegion,
   PricingV2EntryProvider
 } from '../../../lib/api/strapi/types'
-import { FullyQualifiedEvent } from '../../../lib/galaxy/client'
 import { useGalaxyOnClick, useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { BlogApiResponse } from '../../../types/blogs'
@@ -696,20 +695,17 @@ function TickItem({
 function FaqItem({
   title,
   content,
-  event,
   children
 }: {
   title: string
   content?: string
-  event?: FullyQualifiedEvent
   children?: React.ReactNode
 }) {
-  const clickHandeler = event ? useGalaxyOnClick(event) : () => {}
   return (
     <Disclosure as='div' className={styles.accordion}>
       {({ open }) => (
         <>
-          <div onClick={clickHandeler}>
+          <div>
             <Disclosure.Button className='relative z-10 grid w-full grid-cols-[1fr_1rem] items-center justify-between gap-x-6 rounded-lg p-4 pl-20 pr-6 text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none'>
               <span className='text-md'>{title}</span>
               <span className={styles.plusMinus} data-active={open} />
