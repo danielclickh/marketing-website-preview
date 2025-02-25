@@ -50,6 +50,7 @@ const nextConfig = {
       }
     ]
   },
+  // @ts-ignore
   async rewrites() {
     // @link https://nextjs.org/docs/13/pages/api-reference/next-config-js/rewrites
     return {
@@ -172,6 +173,11 @@ const nextConfig = {
       {
         source: '/company/events/v22-12-release-webinar',
         destination: 'https://www.youtube.com/watch?v=sREupr6uc2k',
+        permanent: true
+      },
+      {
+        source: '/company/events/202505-global-open-house',
+        destination: '/openhouse',
         permanent: true
       },
       {
@@ -327,7 +333,17 @@ const nextConfig = {
       },
       {
         source: '/use-cases/logging',
-        destination: '/use-cases/logging-and-metrics',
+        destination: '/use-cases/observability',
+        permanent: true
+      },
+      {
+        source: '/use-cases/logging-and-metrics',
+        destination: '/use-cases/observability',
+        permanent: true
+      },
+      {
+        source: '/use-cases/business-intelligence',
+        destination: '/use-cases/data-warehousing',
         permanent: true
       },
       {
@@ -398,6 +414,13 @@ const nextConfig = {
           '/blog/optimizing-your-customer-facing-analytics-experience-with-cumul-io-and-clickhouse',
         destination:
           '/blog/optimizing-your-customer-facing-analytics-experience-with-luzmo-and-clickhouse',
+        permanent: true
+      },
+      {
+        source:
+          '/blog/bluesky-json-bench-clickhouse-vs-mongodb-elasticsearch-duckdb-postgresql',
+        destination:
+          '/blog/json-bench-clickhouse-vs-mongodb-elasticsearch-duckdb-postgresql',
         permanent: true
       },
       {

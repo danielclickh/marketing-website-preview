@@ -30,14 +30,14 @@
       //
       .mktoFormRow, .mktoButtonRow {
         @apply flex flex-wrap;
-        @apply md:gap-8;
+        @apply md:gap-4;
 
         > * {
           @apply flex-shrink-0 w-full max-w-full;
         }
 
         .mktoFormCol {
-          @apply flex-grow flex-shrink basis-full max-w-full mb-6;
+          @apply flex-grow flex-shrink basis-full max-w-full mb-8;
           @apply md:basis-0;
         }
 
@@ -49,7 +49,7 @@
       // Adding this class to the will disable this behaviour.
       &.allow-columns {
         .mktoFormRow, .mktoButtonRow {
-          @apply gap-8;
+          @apply gap-4;
 
           .mktoFormCol {
             @apply basis-0;
@@ -447,12 +447,23 @@
         }
       }
 
-      // Houseparty yellow buttons (all forms)
+      // New CH yellow buttons
       //
+      &.referer-openhouse,
+      &.referer-openhouse-register,
       &.referer-houseparty-vegas-2024,
       &.referer-houseparty-vegas-2024-ticket {
         .mktoButtonRow button.mktoButton {
           background-color: #EBFF00 !important;
+        }
+      }
+
+      // Open House (Marketo ID 1314)
+      //
+      &#mktoForm_1314 {
+        .mktoButtonRow button.mktoButton {
+          width: auto !important;
+          border-radius: 0.25rem !important;
         }
       }
 

@@ -12,10 +12,6 @@ import {
   RegionPricing
 } from '../../types/pricing'
 import HRSeparator from '../HRSeparator'
-import { FormControl } from '../PricingCalculator/ui/FormControl'
-import { NumericSelect } from '../PricingCalculator/ui/NumericSelect'
-import { RangeSlider } from '../PricingCalculator/ui/RangeSlider'
-import { ToggleButtons } from '../PricingCalculator/ui/ToggleButtons'
 import PricingOptions from '../PricingOptions'
 import { SuiTitle } from '../sui'
 import {
@@ -28,9 +24,13 @@ import {
 } from './CalculatorTypesOptions'
 import styles from './CostCalculator.module.scss'
 import CTAButtons from './CTAButtons'
+import { FormControl } from './ui/FormControl'
+import { NumericSelect } from './ui/NumericSelect'
 import RadioGroupComponent from './ui/Radio/Radio'
+import { RangeSlider } from './ui/RangeSlider'
 import { Select } from './ui/Select'
 import { Text } from './ui/Text'
+import { ToggleButtons } from './ui/ToggleButtons'
 import { ToggleButtonsProviders } from './ui/ToggleButtonsProviders'
 
 function convertStorageToGB(
@@ -69,7 +69,7 @@ function humanReadableStorage(
   }
 }
 
-export const PricingCalculator: React.FC<{
+const PricingCalculator: React.FC<{
   pricingByRegion: RegionPricing[]
   cloudProviders: CloudProviderType[]
   pricingPlans: PricingPlanData[]
@@ -966,3 +966,5 @@ export const PricingCalculator: React.FC<{
     </div>
   )
 }
+
+export default PricingCalculator

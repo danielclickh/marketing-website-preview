@@ -38,7 +38,7 @@ function Button({
         onClick={() => {
           onClick && onClick()
         }}>
-        {iconLeft}
+        <span className='pr-1'>{iconLeft}</span>
         <span className='flex items-center whitespace-nowrap'>{children}</span>
         {iconRight}
       </button>

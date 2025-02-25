@@ -4,17 +4,13 @@ import { EventForm } from '../../types/events'
 
 export interface EventsContainerProps {
   children: ReactNode
-  localDatetime: string
-  form: EventForm
-  recordedVimeoUrl?: string
+  form?: EventForm | null
+  recordedVimeoUrl?: string | null
   featuredImage?: StrapiImage
 }
 
 export interface EventsFormProps {
-  submitted: boolean
-  onSubmit: () => void
   featuredImage?: StrapiImage
-  form: EventForm
-  recordedVimeoUrl?: string
-  eventEnded: boolean
+  form?: EventForm | null
+  recordedVimeoUrl?: string | null
 }

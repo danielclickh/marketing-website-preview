@@ -114,7 +114,7 @@ function generateSiteMap(
         <loc>${siteURL}/use-cases</loc>
     </url>
     <url>
-        <loc>${siteURL}/use-cases/logging-and-metrics</loc>
+        <loc>${siteURL}/use-cases/observability</loc>
     </url>
     <url>
         <loc>${siteURL}/use-cases/machine-learning-and-data-science</loc>
@@ -123,7 +123,7 @@ function generateSiteMap(
         <loc>${siteURL}/use-cases/real-time-analytics</loc>
     </url>
     <url>
-        <loc>${siteURL}/use-cases/business-intelligence</loc>
+        <loc>${siteURL}/use-cases/observability</loc>
     </url>
     <url>
         <loc>${siteURL}/user-stories</loc>

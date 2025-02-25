@@ -43,7 +43,7 @@ export function BYOCSection({ loc }: BYOCSectionProps) {
                 className='pt-0.5 transition group-hover:translate-x-1/2'
               />
             }>
-            Join waitlist
+            Request access
           </CUIButton>
         </div>
       </div>

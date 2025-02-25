@@ -28,7 +28,6 @@ export interface EventAgenda {
 export interface EventLocation {
   city: string
   country: string
-  address: string
 }
 
 export interface EventForm {
@@ -42,26 +41,20 @@ export interface EventForm {
 export type EventType = {
   id: number
   title: string
-  slug?: string
-  shortDescription: string
-  description: string
-  richDescription: string
-  localDatetime: string
-  datetimeAndTimezoneString: string
-  viewMoreDetailsText: string
+  slug: string
   category: string
-  thumbnailPng: StrapiImageType
-  hostedBy: EventHostedBy
-  agenda?: EventAgenda
-  location: EventLocation
-  darkFeatureImagePng: StrapiImageType
-  lightFeatureImagePng: StrapiImageType
-  eventEnded: boolean
-  eventVideoUrl: string
-  form: EventForm
+  localDatetime: string
   featured: boolean
-  recordedVimeoUrl?: string
-  keywords?: string
+  StagingOnly?: boolean | null
+  location: EventLocation
+  thumbnailPng: StrapiImageType
+  eventVideoUrl: string | null
+  shortDescription: string | null
+  richDescription: string | null
+  hostedBy: EventHostedBy | null
+  agenda: EventAgenda | null
+  form: EventForm | null
+  recordedVimeoUrl: string | null
 }
 
 export interface EventProps extends EventType, CommonProps {

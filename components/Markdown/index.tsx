@@ -1,6 +1,6 @@
-import { CodeBlock } from '@clickhouse/click-ui'
+import CodeViewer from '../CodeViewer'
 import * as Tooltip from '@radix-ui/react-tooltip'
-import { MouseEventHandler, useState } from 'react'
+import { memo, MouseEventHandler, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import {
   PluggableList,
@@ -15,46 +15,6 @@ import { SuiTitle } from '../sui'
 import { AllowedElements, HighLightOptions, sanitizeMarkdown } from './utils'
 import BlogImage from '../BlogImage'
 
-function CodeViewer({
-  node,
-  inline,
-  className,
-  type,
-  language,
-  children,
-  ...props
-}: any) {
-  if (type === 'click-ui') {
-    const codeContent = (
-      Array.isArray(children)
-        ? children
-            .map((child) =>
-              typeof child === 'object' ? child.props?.children || '' : child
-            )
-            .join('')
-        : children.toString()
-    ).trim()
-
-    return (
-      <CodeBlock
-        className='mb-9'
-        language={language}
-        onCopy={function Da() {}}
-        onCopyError={function Da() {}}
-        showLineNumbers
-        wrapLines>
-        {codeContent}
-      </CodeBlock>
-    )
-  }
-  return (
-    <code
-      className={`${className} mb-9 break-words border border-solid border-c3`}
-      {...props}>
-      {children}
-    </code>
-  )
-}
 
 const commonPlugIns: PluggableList = [
   rehypeRaw,
@@ -208,5 +168,7 @@ function Markdown({
     </ReactMarkdown>
   )
 }
+
+export const MarkdownMemoized = memo(Markdown)
 
 export default Markdown

@@ -11,7 +11,7 @@ There are a few areas where these are added:
 
 ## Metadata
 *Due date:* When do you want this live?
-*Use case*: Business intelligence / Logs, events, and traces / Real-time analytics / Machine learning & GenAI - List all that apply
+*Use case*: Data warehousing / Observability / Real-time analytics / Machine learning & GenAI - List all that apply
 *Migrations*: PostgreSQL / Elasticsearch etc - List all that apply
 *Vertical*: E-commerce & Retail / Financial services etc - List all that apply
 *Cloud service provider (CSP)*: AWS / GCP / Azure - List all that apply

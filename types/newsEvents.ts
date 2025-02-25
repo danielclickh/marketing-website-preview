@@ -37,7 +37,7 @@ export interface NewsItemProps {
 export interface NewsEventProps extends CommonProps {
   title: string
   description: string
-  featuredEvent?: EventType
+  featuredEvent: EventType | null
   newsItems: Array<NewsItem>
   latestNewsTitle: string
   upcomingEventsTitle: string
