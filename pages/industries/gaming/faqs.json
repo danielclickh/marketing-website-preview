@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "content": "<span class='font-bold text-white'>Real-time insights without the lag.</span> <span class='text-[#8D8D8D]'>Blazing-fast query performance ensures smooth, low-latency analytics for in-game events, player insights, and ad tech—when every millisecond counts.</span>"
+  },
+  {
+    "id": 2,
+    "content": "<span class='font-bold text-white'>Built for high-speed event ingestion</span> <span class='text-[#8D8D8D]'>process millions of in-game events per second with native support for streaming sources like Kafka, Kinesis and Pub/Sub.</span>"
+  },
+  {
+    "id": 4,
+    "content": "<span class='font-bold text-white'>Powerful domain-specific functions - </span> <span class='text-[#8D8D8D]'>SQL functions designed for event-driven data, help you analyze player behavior, optimize game mechanics, and improve ad performance.</span>"
+  },
+  {
+    "id": 5,
+    "content": "<span class='font-bold text-white'>High query concurrency - </span> <span class='text-[#8D8D8D]'>Designed for player-facing analytics, ClickHouse effortlessly supports massive-scale concurrency for real-time leaderboards, player dashboards, in-game ads, and live telemetry. Unlike traditional data warehouses that struggle with high user loads, ClickHouse ensures instant responsiveness even under heavy concurrent queries, making it the ideal choice for interactive, player-facing experiences.</span>"
+  },
+  {
+    "id": 6,
+    "content": "<span class='font-bold text-white'>Native support for OpenTelemetry (OTel) - </span> <span class='text-[#8D8D8D]'>Capture and analyze logs, traces, and in-game performance data in real time. With ClickHouse’s native integration with the OpenTelemetry Collector, developers can efficiently monitor player experience, detect anomalies, and perform crash analytics, ensuring seamless gameplay with low-latency telemetry queries.</span>"
+  },
+  {
+    "id": 7,
+    "content": "<span class='font-bold text-white'>Secure by design, built for compliance - </span> <span class='text-[#8D8D8D]'>Protect sensitive player data with Customer Managed Encryption Keys (CMEK), support for BYOC deployments, fine-grained access controls, and built-in compliance features like GDPR-ready TTLs and lightweight deletes.</span>"
+  }
+]

@@ -1,0 +1,62 @@
+[
+    {
+        "id": 10,
+        "content": "Player Retention & Churn Prediction",
+        "section": 10
+    },
+    {
+        "id": 20,
+        "content": "Real-Time Ad Tech & Marketing",
+        "section": 10
+    },
+    {
+        "id": 30,
+        "content": "Critical KPI monitoring on metrics such as concurrent users",
+        "section": 10
+    },
+    {
+        "id": 40,
+        "content": "Personalized In-Game Content and A/B testing with user segmentation",
+        "section": 10
+    },
+    {
+        "id": 50,
+        "content": "Real-Time Leaderboards & Rankings",
+        "section": 20
+    },
+    {
+        "id": 60,
+        "content": "Player Behavior Analytics and experience segmentation",
+        "section": 20
+    },
+    {
+        "id": 70,
+        "content": "Live In-Game Event Processing",
+        "section": 20
+    },
+    {
+        "id": 80,
+        "content": "Trust & Safety Monitoring",
+        "section": 20
+    },
+    {
+        "id": 110,
+        "content": "Fraud Detection & Anti-Cheat Analytics",
+        "section": 30
+    },
+    {
+        "id": 120,
+        "content": "Crash Analytics & Performance Debugging",
+        "section": 30
+    },
+    {
+        "id": 130,
+        "content": "Log, Key Performance Indicators (KPIs) & Application Monitoring",
+        "section": 30
+    },
+    {
+        "id": 140,
+        "content": "Network Optimization & Routing",
+        "section": 30
+    }
+]
