@@ -3,6 +3,7 @@ import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRef, useState } from 'react'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
 import ClickHousePartnerLogo from '../../../components/ClickHousePartnerLogo'
 import { CUIButton, CUILink } from '../../../components/ClickUI'
@@ -12,8 +13,9 @@ import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import LinedIconCard from '../../../components/LinedIconCard'
 import Markdown from '../../../components/Markdown'
+import MarketoForm from '../../../components/MarketoForm'
 import QuoteCard from '../../../components/QuoteCard'
-import { SuiButton, SuiText, SuiTitle } from '../../../components/sui'
+import { SuiText, SuiTitle } from '../../../components/sui'
 import { fetchAll, findOne } from '../../../lib/api/strapi'
 import {
   PricingV2ComponentRegion,
@@ -25,11 +27,11 @@ import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { BlogApiResponse } from '../../../types/blogs'
 import { CommonProps, HomepageCustomerStories } from '../../../types/homepage'
 import { fetchBlogs } from '../../api/blog'
-import logoNeon from '../../cloud/clickpipes/postgres-cdc-connector/assets/logo-neon.svg'
-import logoSyntagePng from '../../cloud/clickpipes/postgres-cdc-connector/assets/logo-syntage.png'
-import logoVueling from '../../cloud/clickpipes/postgres-cdc-connector/assets/logo-vueling.svg'
 import azureLogo from './assets/azure-logo.svg'
 import iconCode from './assets/icon-code.svg'
+import logoAstronomer from './assets/logo-astronomer.svg'
+import logoBaxenergy from './assets/logo-baxenergy.svg'
+import logoMicrosoft from './assets/logo-microsoft.svg'
 
 interface PageProps extends CommonProps {
   customerStories: HomepageCustomerStories
@@ -100,6 +102,10 @@ export default function Page({
   regions
 }: PageProps) {
   useGalaxyOnPage('azurePartnersPage')
+
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -242,10 +248,10 @@ export default function Page({
                   "Our data platform handles massive volumes of real-time events, and ClickHouse has been instrumental in delivering lightning-fast analytics. With ClickHouse Cloud on Azure, we can deploy and scale effortlessly on Azure's reliable, secure, and scalable infrastructure."
                 }
                 logo={{
-                  src: logoNeon,
-                  width: 102 * 1.2,
-                  height: 28 * 1.2,
-                  alt: 'Neon'
+                  src: logoAstronomer,
+                  width: 200,
+                  height: 22,
+                  alt: 'Astronomer'
                 }}
               />
             </div>
@@ -256,10 +262,10 @@ export default function Page({
                   'With ClickHouse Cloud generally available on Microsoft Azure, enterprise and digital-native companies alike can take advantage of its breadth of use cases on one of the most open and flexible cloud platforms. Mutual customers and partners can now benefit from real-time analytics and business intelligence solutions to gain valuable insights from their data in new ways.'
                 }
                 logo={{
-                  src: logoSyntagePng,
-                  width: 321 / 2,
-                  height: 79 / 2,
-                  alt: 'Syntage'
+                  src: logoMicrosoft,
+                  width: 200,
+                  height: 53,
+                  alt: 'Microsoft'
                 }}
               />
             </div>
@@ -270,10 +276,10 @@ export default function Page({
                   'ClickHouse Cloud on Microsoft Azure supports us in conducting advanced analysis on large volumes of data from various renewable energy sources. By generating actionable insights, creating detailed reports, and developing custom dashboards, we empower our customers to achieve better performance and scale their operations effectively. We have been pleasantly surprised by the remarkable speed and flexibility of ClickHouse, and their team has provided us with exceptional dedicated support.'
                 }
                 logo={{
-                  src: logoVueling,
-                  width: 140,
-                  height: 44,
-                  alt: 'Vueling'
+                  src: logoBaxenergy,
+                  width: 174,
+                  height: 41,
+                  alt: 'Baxenergy'
                 }}
               />
             </div>
@@ -322,11 +328,127 @@ export default function Page({
             </div>
           </div>
         </div>
-        <div className='mt-16 -mb-10'>
+        <div className='mt-10 -mb-16 lg:mt-16 lg:-mb-10'>
           <HomepageSectionTrustedByAlt
             heading='Trusted by'
             customerStories={customerStories}
           />
+        </div>
+      </div>
+
+      {/* Checklist */}
+      <div className='my-20 lg:my-24 section-container'>
+        <div className='text-center space-y-4'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='72'
+            height='73'
+            fill='none'
+            viewBox='0 0 72 73'
+            className='inline-block mb-6'>
+            <rect
+              width='70'
+              height='70'
+              x='1'
+              y='1.35'
+              stroke='#FF7575'
+              stroke-width='2'
+              rx='16'
+            />
+            <path
+              fill='#FF7575'
+              d='M37 19.61a16.73 16.73 0 1 0 0 33.47 16.73 16.73 0 0 0 0-33.47Zm5.98 21.33a7.53 7.53 0 0 0 0-9.19l5.13-5.12a14.73 14.73 0 0 1 0 19.43l-5.13-5.12Zm-11.56-4.6a5.58 5.58 0 1 1 11.16 0 5.58 5.58 0 0 1-11.16 0Zm15.3-11.1-5.13 5.12a7.53 7.53 0 0 0-9.18 0l-5.13-5.12a14.73 14.73 0 0 1 19.44 0Zm-20.83 1.39 5.13 5.12a7.53 7.53 0 0 0 0 9.19l-5.13 5.12a14.73 14.73 0 0 1 0-19.43Zm1.4 20.82 5.12-5.12a7.53 7.53 0 0 0 9.18 0l5.13 5.12a14.73 14.73 0 0 1-19.43 0Z'
+            />
+          </svg>
+          <h2 className='text-[1.75rem] lg:text-4xl leading-[1.3] font-semibold'>
+            Seamless Azure marketplace Integration
+          </h2>
+          <p className='text-white/70 max-w-xl mx-auto'>
+            ClickHouse is fully integrated into the Azure Marketplace, enabling
+            you to:
+          </p>
+        </div>
+        <div className='max-w-3xl mx-auto bg-neutral-700/50 border border-neutral-700 divide-y divide-neutral-700 md:divide-y-0 shadow-sm md:shadow-none md:border-none md:space-y-4 md:py-6 md:px-8 rounded mt-10'>
+          <TickItem
+            title='Effortless Deployment'
+            description='Set up ClickHouse on Azure in just one click.'
+            className='p-3 md:p-0'
+          />
+          <TickItem
+            title='Customizable Pricing'
+            description='Select deployment options that fit your needs.'
+            className='p-3 md:p-0'
+          />
+          <TickItem
+            title='Dedicated Support'
+            description='Get expert assistance from ClickHouse and Azure teams.'
+            className='p-3 md:p-0'
+          />
+        </div>
+        <div className='flex justify-center mt-10'>
+          <CUIButton
+            type='secondary'
+            size='lg'
+            weight='semibold'
+            href='https://azuremarketplace.microsoft.com/en-us/marketplace/apps/clickhouse.clickhouse_cloud?tab=overview'
+            target='_blank'
+            onClick={useGalaxyOnClick(
+              'azurePartnersPage.checklist.goToAzureMarketPlace'
+            )}>
+            Go to Azure Marketplace
+            <ExternalLinkIcon className='h-4 w-4 ml-3 inline-block' />
+          </CUIButton>
+        </div>
+      </div>
+
+      {/* Form */}
+      <div className='my-20 lg:my-24'>
+        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto flex flex-col items-center'>
+          <Image
+            src='/images/migration.svg'
+            height={72}
+            width={72}
+            alt='Migrations'
+            className='mb-4 fill-none'
+          />
+          <h2 className='text-[1.75rem] lg:text-4xl leading-[1.3] font-semibold mb-10 lg:mb-16'>
+            Contact us for help with your migration
+          </h2>
+          <div className='mx-auto max-w-lg'>
+            {!formSuccess && (
+              <MarketoForm
+                formId={'1124'}
+                clearbitTracking={true}
+                onLoad={() => {
+                  setFormLoaded(true)
+                }}
+                onSuccess={() => {
+                  setFormSuccess(true)
+                  // Delay needed to allow the ref to update before scrolling
+                  setTimeout(() => {
+                    formSuccessRef.current?.scrollIntoView({
+                      behavior: 'smooth'
+                    })
+                  }, 10)
+
+                  return false // Stops page from reloading
+                }}
+              />
+            )}
+
+            {!formLoaded && <div className='text-center'>Loading form...</div>}
+
+            {formSuccess && (
+              <div ref={formSuccessRef}>
+                <h3 className='text-center text-2xl font-bold'>
+                  Thank you for your submission!
+                </h3>
+                <p className='mt-2 text-center text-neutral-200'>
+                  We will be in touch soon.
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -354,7 +476,6 @@ export default function Page({
       </div>
 
       {/* FAQs */}
-
       <div className='bg-shadow-element relative mx-auto mb-20 max-w-7xl px-4 md:px-8 lg:flex lg:justify-between lg:gap-x-12 2xl:px-0'>
         <div className='pb-10 text-center'>
           <div className='lg:sticky lg:top-32'>
@@ -517,13 +638,12 @@ export default function Page({
             Latest news
           </SuiTitle>
 
-          <SuiButton
-            path='/blog?category=product&search=azure'
-            type='empty'
-            color='primary'
-            className='font-base border border-primary-300/50	'>
+          <CUIButton
+            type='secondary'
+            href='/blog?category=product&search=azure'
+            weight='semibold'>
             View all posts
-          </SuiButton>
+          </CUIButton>
         </div>
         <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
           {blogs.slice(0, 3).map((blog) => (
@@ -532,6 +652,44 @@ export default function Page({
         </div>
       </div>
     </Layout>
+  )
+}
+
+function TickItem({
+  title,
+  description,
+  className = ''
+}: {
+  title: string
+  description: string
+  className?: React.HTMLProps<HTMLDivElement>['className']
+}) {
+  return (
+    <div className={`flex items-center gap-4 ${className}`}>
+      <div className='flex-shrink-0 flex-grow-0 hidden md:block'>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='25'
+          height='18'
+          fill='none'
+          viewBox='0 0 25 18'>
+          <path
+            stroke='#FCFF74'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth='2'
+            d='M23.32 1.67 8.65 16.33 2 9.67'
+          />
+        </svg>
+      </div>
+      <div className='flex-1 flex flex-col md:flex-row md:gap-2'>
+        <strong>
+          {title}
+          <span className='hidden md:inline'>:</span>
+        </strong>
+        <span className='text-xs md:text-base'>{description}</span>
+      </div>
+    </div>
   )
 }
 
@@ -546,11 +704,12 @@ function FaqItem({
   event?: FullyQualifiedEvent
   children?: React.ReactNode
 }) {
+  const clickHandeler = event ? useGalaxyOnClick(event) : () => {}
   return (
     <Disclosure as='div' className={styles.accordion}>
       {({ open }) => (
         <>
-          <div onClick={event ? useGalaxyOnClick(event) : () => {}}>
+          <div onClick={clickHandeler}>
             <Disclosure.Button className='relative z-10 grid w-full grid-cols-[1fr_1rem] items-center justify-between gap-x-6 rounded-lg p-4 pl-20 pr-6 text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none'>
               <span className='text-md'>{title}</span>
               <span className={styles.plusMinus} data-active={open} />
