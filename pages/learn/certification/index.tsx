@@ -216,8 +216,7 @@ export default function CertificationPage({
               To be fully prepared to pass the ClickHouse Certified Developer
               exam, candidates should be able to successfully complete the
               following tasks on a ClickHouse service, given access to the
-              ClickHouse documentation, and using either the clickhouse-client
-              or the ClickHouse SQL Console.
+              ClickHouse documentation, and using the clickhouse-client.
             </p>
             <CUIButton
               type='primary-dark'
