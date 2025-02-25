@@ -274,7 +274,8 @@ export default function PricingPage({
                           <strong className='text-white'>$0.04 / GB</strong> for
                           ingested data,{' '}
                           <strong className='text-white'>$0.20 / hr</strong> per
-                          compute unit.
+                          compute unit. Does not include Postgres ClickPipes,
+                          currently in Beta.
                         </SuiText>
                         <SuiText size='sm'>
                           For more information about our billing and pricing
