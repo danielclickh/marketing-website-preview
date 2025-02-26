@@ -41,7 +41,7 @@ export default function HomepageHeroAlt({
             />
           </SuiTitle>
           <div className='lg:inline-block lg:w-auto'>
-            <SuiText className='mb-12 mt-6 w-auto !font-medium lg:!text-[20px]'>
+            <SuiText className='mb-6 mt-8 w-auto !font-medium lg:!text-[20px]'>
               Unlock faster queries without skyrocketing costs.
             </SuiText>
             <div className='flex w-auto flex-wrap gap-4 sm:gap-8 md:flex-nowrap md:gap-6'>
@@ -68,16 +68,16 @@ export default function HomepageHeroAlt({
               </CUIButton>
             </div>
             <LogoAnnouncementLink
-              className='mt-8'
-              href='/cloud/clickpipes/postgres-cdc-connector?loc=homepage-hero'
+              className='mt-6'
+              href='/openhouse?loc=homepage-hero'
               logo={{
-                src: '/images/cloud/integrations/postgres.svg',
-                alt: 'Postgres',
-                width: 48,
-                height: 49
+                src: '/images/open-house-black.svg',
+                alt: 'Open House, ClickHouse user event',
+                width: 80,
+                height: 41
               }}>
-              Blazing-fast Postgres to ClickHouse CDC with our new ClickPipe
-              connector — now in Public Beta.{' '}
+              Join us at Open House, the ClickHouse user conference, May 28-29
+              in San Francisco.{' '}
               <span className='underline group-hover:decoration-2'>
                 Learn&nbsp;more
               </span>
