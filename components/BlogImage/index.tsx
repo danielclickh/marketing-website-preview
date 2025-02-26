@@ -5,7 +5,7 @@ import 'react-medium-image-zoom/dist/styles.css'
 
 export default function BlogImage({ src, size, width, height, alt, ...props }: any) {
   const [isClient, setIsClient] = useState(false)
-  const [smallSrc, setSmallSrc] = useState()
+  const [smallSrc, setSmallSrc] = useState<string>()
 
   function getPath(src: string) {
     try {
@@ -17,8 +17,8 @@ export default function BlogImage({ src, size, width, height, alt, ...props }: a
 
   const fetchImageDetails = async () => {
     try {
+      const cleanSrc = getPath(src)
       if (size) {
-        const cleanSrc = getPath(src)
         const response = await fetch(`/api/image?url=${encodeURIComponent(cleanSrc)}`);
         const data = await response.json();
         if (data.formats[size]) {
@@ -27,7 +27,7 @@ export default function BlogImage({ src, size, width, height, alt, ...props }: a
           setSmallSrc(data.url)
         }
       } else {
-        setSmallSrc(src)
+        setSmallSrc(cleanSrc)
       }
     } catch (error) {
       console.error("Error fetching image details:", error);
