@@ -197,9 +197,8 @@ export default function Page({
                 </h3>
                 <p className='text-balance text-white/70'>
                   Apply your Microsoft Azure Consumption Commitment (MACC)
-                  commitment towards the purchase of ClickHouse Cloud through
-                  the Azure marketplace, leveraging existing budget and
-                  simplifying procurement.
+                  towards the purchase of ClickHouse Cloud, leveraging existing
+                  budget and simplifying procurement.
                 </p>
               </LinedIconCard>
             </div>
