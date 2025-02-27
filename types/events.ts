@@ -37,6 +37,7 @@ export interface EventForm {
   submitButtonLabel: string
   type: 'recordedGatedContent' | 'eventRegistration'
   SuccessMessage?: string
+  stripeBuyButtonId?: `buy_btn_${string}`
 }
 export type EventType = {
   id: number

@@ -1,10 +1,12 @@
 import { CheckCircleIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
 import { useRef, useState } from 'react'
+import { CUICard } from '../ClickUI'
 import CopyUrlButton from '../CopyUrlButton'
 import Markdown from '../Markdown'
 import MarketoForm from '../MarketoForm'
 import SocialButton from '../SocialButton'
+import StripeBuyButton from '../StripeBuyButton'
 import { SuiPanel } from '../sui/client'
 import VideoPlayerCustom from '../VideoPlayerCustom'
 import { EventsFormProps } from './types'
@@ -86,6 +88,15 @@ function EventsForm({
                     <>You've been successfully registered. See you there!</>
                   )}
                 </p>
+              )}
+              {form?.stripeBuyButtonId && (
+                <div className={!form?.SuccessMessage ? 'mt-4 mb-10' : 'my-10'}>
+                  <CUICard>
+                    <CUICard.Body className='p-4'>
+                      <StripeBuyButton id={form.stripeBuyButtonId} />
+                    </CUICard.Body>
+                  </CUICard>
+                </div>
               )}
               {form?.type === 'recordedGatedContent' && recordedVimeoUrl && (
                 <div className='my-10' id='custom-video-container-player'>
