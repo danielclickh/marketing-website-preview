@@ -92,10 +92,10 @@ export default function GamingIndustryPage({
                         analytics. Process millions of in-game events per second
                         without compromising query speed.
                       </p>
+                      <p className='mb-6 max-w-2xl font-bold'>
+                        The real-time database that never lags.
+                      </p>
                       <p className='mb-6 max-w-2xl font-normal'>
-                        <span className='font-bold'>
-                          The real-time database that never lags.
-                        </span>{' '}
                         Count on blazing performance when low latency really
                         matters.
                       </p>
@@ -169,7 +169,8 @@ export default function GamingIndustryPage({
                   height={72}
                 />
                 <h2 className='text-left font-basier text-2xl font-semibold lg:text-4xl xl:max-w-[515px]'>
-                  Track every in-game event. Analyze player behavior in{' '}
+                  Track every in-game event with 100% event fidelity. Analyze
+                  player behavior in{' '}
                   <span className='tilted tilted-yellow'>
                     <span className='tilted-content leading-8'>real time</span>
                   </span>
