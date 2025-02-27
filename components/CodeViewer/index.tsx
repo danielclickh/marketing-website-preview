@@ -48,7 +48,8 @@ function CodeViewer({
     }
     return (
         <code
-            className={`${className} mb-9 break-words border border-solid border-c3`}
+            className={`${className} mb-9 border border-solid border-c3`}
+            style={{wordBreak: 'break-word'}}
             {...props}>
             {children}
         </code>
