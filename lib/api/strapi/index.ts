@@ -232,3 +232,21 @@ export async function getPricingV2Computes() {
     sort: ['size:asc']
   })) as Array<PricingV2EntryCompute>
 }
+
+export async function findImageDetails(imageUrl: string, ) {
+  const pathName = 'upload/files'
+  const newParamString = stringify(
+    {
+      'filters[url][$eq]': imageUrl
+    },
+    {
+      encodeValuesOnly: true
+    }
+  )
+  const response = await fetch(
+    `${url}${pathName}${newParamString.length > 0 ? `?${newParamString}` : ''}`
+  )
+  const data  = await response.json()
+  const imageDetails = data.length > 0 ? data[0] : null
+  return imageDetails
+}
