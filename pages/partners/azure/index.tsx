@@ -3,18 +3,19 @@ import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import BlogPost from '../../../components/BlogPostList/BlogPost'
 import ClickHousePartnerLogo from '../../../components/ClickHousePartnerLogo'
 import { CUIButton, CUILink } from '../../../components/ClickUI'
 import styles from '../../../components/FAQ/styles.module.scss'
-import HomepageSectionTrustedByAlt from '../../../components/HomepageSectionTrustedByAlt'
+import { replaceCustomerLogo } from '../../../components/HomepageSectionTrustedByAlt'
 import HRSeparator from '../../../components/HRSeparator'
 import Layout from '../../../components/Layout'
 import LinedIconCard from '../../../components/LinedIconCard'
 import Markdown from '../../../components/Markdown'
 import MarketoForm from '../../../components/MarketoForm'
 import QuoteCard from '../../../components/QuoteCard'
+import { StrapiImage } from '../../../components/StrapiElements'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { fetchAll, findOne } from '../../../lib/api/strapi'
 import {
@@ -106,6 +107,10 @@ export default function Page({
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
 
+  const customerLogos = structuredClone(customerStories.logos).map(
+    replaceCustomerLogo
+  )
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
@@ -157,7 +162,7 @@ export default function Page({
 
       {/* Why? */}
       <div className='py-16 lg:py-20 bg-white/5'>
-        <div className='section-container'>
+        <div className='section-container px-6 lg:px-0'>
           {/* Intro */}
           <div className='mb-10 lg:mb-16 space-y-6 text-center'>
             <Image
@@ -238,48 +243,50 @@ export default function Page({
             className='mb-10 lg:mb-16 text-center !text-primary-900'>
             What our customers are saying
           </SuiTitle>
-          <div className='-mx-4 flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'>
-            <div className='p-4 lg:w-1/3'>
-              <QuoteCard
-                className='!bg-neutral-900'
-                content={
-                  "Our data platform handles massive volumes of real-time events, and ClickHouse has been instrumental in delivering lightning-fast analytics. With ClickHouse Cloud on Azure, we can deploy and scale effortlessly on Azure's reliable, secure, and scalable infrastructure."
-                }
-                logo={{
-                  src: logoAstronomer,
-                  width: 200,
-                  height: 22,
-                  alt: 'Astronomer'
-                }}
-              />
-            </div>
-            <div className='p-4 lg:w-1/3'>
-              <QuoteCard
-                className='!bg-neutral-900'
-                content={
-                  'With ClickHouse Cloud generally available on Microsoft Azure, enterprise and digital-native companies alike can take advantage of its breadth of use cases on one of the most open and flexible cloud platforms. Mutual customers and partners can now benefit from real-time analytics and business intelligence solutions to gain valuable insights from their data in new ways.'
-                }
-                logo={{
-                  src: logoMicrosoft,
-                  width: 200,
-                  height: 53,
-                  alt: 'Microsoft'
-                }}
-              />
-            </div>
-            <div className='p-4 lg:w-1/3'>
-              <QuoteCard
-                className='!bg-neutral-900'
-                content={
-                  'ClickHouse Cloud on Microsoft Azure supports us in conducting advanced analysis on large volumes of data from various renewable energy sources. By generating actionable insights, creating detailed reports, and developing custom dashboards, we empower our customers to achieve better performance and scale their operations effectively. We have been pleasantly surprised by the remarkable speed and flexibility of ClickHouse, and their team has provided us with exceptional dedicated support.'
-                }
-                logo={{
-                  src: logoBaxenergy,
-                  width: 174,
-                  height: 41,
-                  alt: 'Baxenergy'
-                }}
-              />
+          <div className='overflow-x-auto hide-scrollbar -mx-4 sm:-mx-8 lg:mx-0 px-6 sm:px-8 lg:px-0 lg:overflow-x-visible'>
+            <div className='-mx-2 lg:-mx-4 flex flex-row lg:flex-wrap lg:justify-center'>
+              <div className='p-2 lg:p-4 lg:w-1/3 min-w-64 w-[90vw] max-w-md lg:max-w-none lg:min-w-none flex-shrink-0 flex-grow-0 lg:flex-1'>
+                <QuoteCard
+                  className='!bg-neutral-900'
+                  content={
+                    "Our data platform handles massive volumes of real-time events, and ClickHouse has been instrumental in delivering lightning-fast analytics. With ClickHouse Cloud on Azure, we can deploy and scale effortlessly on Azure's reliable, secure, and scalable infrastructure."
+                  }
+                  logo={{
+                    src: logoAstronomer,
+                    width: 200,
+                    height: 22,
+                    alt: 'Astronomer'
+                  }}
+                />
+              </div>
+              <div className='p-2 lg:p-4 lg:w-1/3 min-w-64 w-[90vw] max-w-md lg:max-w-none lg:min-w-none flex-shrink-0 flex-grow-0 lg:flex-1'>
+                <QuoteCard
+                  className='!bg-neutral-900'
+                  content={
+                    'With ClickHouse Cloud generally available on Microsoft Azure, enterprise and digital-native companies alike can take advantage of its breadth of use cases on one of the most open and flexible cloud platforms. Mutual customers and partners can now benefit from real-time analytics and business intelligence solutions to gain valuable insights from their data in new ways.'
+                  }
+                  logo={{
+                    src: logoMicrosoft,
+                    width: 200,
+                    height: 53,
+                    alt: 'Microsoft'
+                  }}
+                />
+              </div>
+              <div className='p-2 lg:p-4 lg:w-1/3 min-w-64 w-[90vw] max-w-md lg:max-w-none lg:min-w-none flex-shrink-0 flex-grow-0 lg:flex-1'>
+                <QuoteCard
+                  className='!bg-neutral-900'
+                  content={
+                    'ClickHouse Cloud on Microsoft Azure supports us in conducting advanced analysis on large volumes of data from various renewable energy sources. By generating actionable insights, creating detailed reports, and developing custom dashboards, we empower our customers to achieve better performance and scale their operations effectively. We have been pleasantly surprised by the remarkable speed and flexibility of ClickHouse, and their team has provided us with exceptional dedicated support.'
+                  }
+                  logo={{
+                    src: logoBaxenergy,
+                    width: 174,
+                    height: 41,
+                    alt: 'Baxenergy'
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -287,7 +294,7 @@ export default function Page({
 
       {/* Features */}
       <div className='py-16 lg:py-20 bg-white/5'>
-        <div className='section-container'>
+        <div className='section-container px-6 lg:px-0'>
           <div className='-mx-4 flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'>
             <div className='p-4 lg:w-1/3'>
               <LinedIconCard icon='book'>
@@ -326,11 +333,40 @@ export default function Page({
             </div>
           </div>
         </div>
-        <div className='mt-10 -mb-16 lg:mt-16 lg:-mb-10'>
-          <HomepageSectionTrustedByAlt
-            heading='Trusted by'
-            customerStories={customerStories}
-          />
+        <div className='mt-10 lg:mt-16'>
+          {/* Trusted by */}
+          <SuiText
+            weight='bold'
+            size='sm'
+            className='mb-8 text-primary-300 text-center uppercase tracking-[0.0875rem]'>
+            Trusted by
+          </SuiText>
+          <div className='mask-logos-carousel opacity-90 grayscale invert'>
+            <div className='pause-hover hide-scrollbar relative flex overflow-hidden'>
+              <div className='flex items-center whitespace-nowrap animate-marqueeLeft5'>
+                {customerLogos.map((logo, logoIndex) => {
+                  return (
+                    <div
+                      key={logoIndex}
+                      className='flex-shrink-0 flex-grow-0 w-max px-6'>
+                      <StrapiImage {...logo.darkLogoPng} />
+                    </div>
+                  )
+                })}
+              </div>
+              <div className='flex items-center whitespace-nowrap animate-marqueeLeft5'>
+                {customerLogos.map((logo, logoIndex) => {
+                  return (
+                    <div
+                      key={logoIndex}
+                      className='flex-shrink-0 flex-grow-0 w-max px-6'>
+                      <StrapiImage {...logo.darkLogoPng} />
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -401,7 +437,7 @@ export default function Page({
 
       {/* Form */}
       <div className='my-20 lg:my-24'>
-        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto flex flex-col items-center'>
+        <div className='section-container px-6 bg-shadow-element red-shadow align-shadow-left container mx-auto flex flex-col items-center'>
           <Image
             src='/images/migration.svg'
             height={72}
@@ -409,7 +445,7 @@ export default function Page({
             alt='Migrations'
             className='mb-4 fill-none'
           />
-          <h2 className='text-[1.75rem] lg:text-4xl leading-[1.3] font-semibold mb-10 lg:mb-16'>
+          <h2 className='text-[1.75rem] text-center lg:text-4xl leading-[1.3] font-semibold mb-10 lg:mb-16'>
             Contact us for help with your migration
           </h2>
           <div className='mx-auto max-w-lg'>
@@ -451,7 +487,7 @@ export default function Page({
       </div>
 
       {/* Get started */}
-      <div className='section-container my-20 lg:my-28 md:px-8 2xl:px-0'>
+      <div className='section-container px-6 my-20 lg:my-28 md:px-8 2xl:px-0'>
         <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
           <SuiTitle type='h2' color='text-default'>
             Get started with ClickHouse Cloud and Azure
@@ -505,7 +541,7 @@ export default function Page({
             </CUILink>
           </div>
         </div>
-        <div className={styles.accordionContainer}>
+        <div className={`${styles.accordionContainer} !gap-3 lg:!gap-6`}>
           <FaqItem title='What are the options to purchase ClickHouse on Azure?'>
             <p>
               You can sign up for ClickHouse Cloud directly, or you can sign up
