@@ -3,8 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { CUIButton } from '../../../components/ClickUI'
+import GamingDiagramAndAccordion from '../../../components/GamingDiagramAndAccordion'
 import GetStartedFree from '../../../components/GetStartedFree'
-import GamingAccordionComponent from '../../../components/Industries/Gaming/Accordion/Accordion'
 import callouts from '../../../components/Industries/Gaming/callouts.json'
 import faqs from '../../../components/Industries/Gaming/faqs.json'
 import Feature from '../../../components/Industries/Gaming/feature-check'
@@ -273,6 +273,7 @@ export default function GamingIndustryPage({
 
         <div className='bg-neutral-725 pb-24'>
           <div className='relative mx-auto pt-12  md:px-0 md:pt-24'>
+            {/* Features */}
             <div className='mx-auto max-w-7xl'>
               <div className='flex w-full flex-col items-center pb-12 pt-6'>
                 <Image
@@ -303,7 +304,37 @@ export default function GamingIndustryPage({
                   ))}
                 </div>
               </div>
-              <GamingAccordionComponent />
+
+              {/* Diagram */}
+              <div className='rounded-xl border border-neutral-700/80 bg-neutral-900/50 p-6'>
+                <div className='flex w-full flex-col items-center pt-6'>
+                  <Image
+                    src='/images/use-cases/logging/icon-how.svg'
+                    alt='System overview'
+                    width={72}
+                    height={73}
+                  />
+                  <SuiTitle type='h2' className='mt-8 text-center'>
+                    ClickHouse for gaming analytics
+                  </SuiTitle>
+                  <p className='mx-auto mb-10 max-w-4xl px-9 pt-6 text-center'>
+                    ClickHouse is purpose-built for powering real-time analytics
+                    at massive scale. Track in-game events, ad performance, or
+                    player behavior with instant insights and low latency—all
+                    while keeping infrastructure simple.
+                  </p>
+                  <p className='mx-auto mb-12 max-w-3xl px-9 text-center'>
+                    Our parallelized query execution engine, best-in-class
+                    compression, and column-oriented design ensure that even the
+                    most demanding gaming workloads run effortlessly at scale.
+                  </p>
+                </div>
+                <div className='mx-auto pb-12 md:px-12'>
+                  <GamingDiagramAndAccordion />
+                </div>
+              </div>
+
+              {/* Callouts */}
               <div className='mx-auto max-w-5xl px-4 xl:px-0 xl:pr-2'>
                 <div className='grid justify-between gap-20 pt-20 lg:grid-cols-2'>
                   {callouts.map((feature) => (
