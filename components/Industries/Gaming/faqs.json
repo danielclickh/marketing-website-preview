@@ -9,18 +9,14 @@
   },
   {
     "id": 3,
-    "content": "<span class='font-bold text-white'>Powerful domain-specific functions - </span> <span class='text-[#8D8D8D]'>SQL functions designed for event-driven data, help you analyze player behavior, optimize game mechanics, and improve ad performance.</span>"
-  },
-  {
-    "id": 4,
     "content": "<span class='font-bold text-white'>High query concurrency, zero slowdown. </span> <span class='text-[#8D8D8D]'>ClickHouse powers real-time leaderboards, player dashboards, in-game ads, and live telemetry—handling massive user loads with instant responsiveness, unlike traditional data warehouses.</span>"
   },
   {
-    "id": 5,
+    "id": 4,
     "content": "<span class='font-bold text-white'>Native support for OpenTelemetry (OTel) - </span> <span class='text-[#8D8D8D]'>Capture logs, traces, and performance data in real time. Enable low-latency telemetry for monitoring player experience, game crashes and  detecting anomalies.</span>"
   },
   {
-    "id": 6,
+    "id": 5,
     "content": "<span class='font-bold text-white'>Secure by design, built for compliance - </span> <span class='text-[#8D8D8D]'>Safeguard player data with CMEK, BYOC support, fine-grained access controls, and built-in GDPR-compliant TTLs and deletes.</span>"
   }
 ]
