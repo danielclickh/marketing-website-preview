@@ -204,6 +204,9 @@ export default function GamingIndustryPage({
                 <div className='p-10'>
                   <div className='space-y-6 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0'>
                     <QuoteCard
+                      link={
+                        '/blog/migrating-to-clickhouse-cloud-in-just-three-months-with-no-downtime-a-120-terabyte-data-journey-and-its-benefits'
+                      }
                       content={
                         '"The modern game company is a data company. The ability to blend high-performance analytics with player data lets companies like Azur Games focus on their specialty—the user experience. We can focus on ours—delivering the fastest real-time data warehouse."'
                       }
@@ -218,6 +221,9 @@ export default function GamingIndustryPage({
                       content={
                         '"With ClickHouse, we can quickly process billions of lines of data in a short time, giving us the speed and scale we need to optimize routes and enhance the gaming experience for our users."'
                       }
+                      link={
+                        'https://clickhouse.com/blog/boosting-game-performance-exitlag-quest-for-a-better-data-management-system'
+                      }
                       logo={{
                         src: '/images/industries/gaming/logo-exitlag.svg',
                         width: 175,
@@ -229,6 +235,7 @@ export default function GamingIndustryPage({
                       content={
                         '"ClickHouse is our main real-time OLAP tool. We process around 100 million safety-related events per day, and ClickHouse enables us to act fast."'
                       }
+                      link={'/videos/clickhouse-at-roblox-safety'}
                       logo={{
                         src: '/images/industries/gaming/logo-roblox.svg',
                         width: 231,
@@ -375,25 +382,10 @@ export default function GamingIndustryPage({
                   <ol className='list-decimal space-y-2 text-left	text-primary-300'>
                     <li>
                       <Link
-                        href='/blog/asynchronous-data-inserts-in-clickhouse'
-                        className='text-primary-300'>
-                        Asynchronous Data Inserts in ClickHouse
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
                         href='/blog/real-time-event-streaming-with-confluent-cloud-clickhouse-and-clickpipes'
                         className='text-primary-300'>
                         Real-time event streaming with ClickHouse, Confluent
                         Cloud and ClickPipes
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href='/blog/building-real-time-applications-with-clickhouse-and-hex-notebook-keeper-engine'
-                        className='text-primary-300'>
-                        Adding Real-Time Analytics to a Supabase Application
-                        With ClickHouse
                       </Link>
                     </li>
                     <li>
@@ -412,26 +404,18 @@ export default function GamingIndustryPage({
                     </li>
                     <li>
                       <Link
-                        href='/blog/clickhouse-postgresql-change-data-capture-cdc-part-1'
+                        href='/blog/boosting-game-performance-exitlag-quest-for-a-better-data-management-system'
                         className='text-primary-300'>
-                        Change Data Capture (CDC) with PostgreSQL and ClickHouse
-                        - Part 1
+                        Boosting Game Performance: ExitLag's Quest for a Better
+                        Data Management System
                       </Link>
                     </li>
                     <li>
                       <Link
-                        href='/blog/clickhouse-postgresql-change-data-capture-cdc-part-2'
+                        href='/blog/migrating-to-clickhouse-cloud-in-just-three-months-with-no-downtime-a-120-terabyte-data-journey-and-its-benefits'
                         className='text-primary-300'>
-                        Change Data Capture (CDC) with PostgreSQL and ClickHouse
-                        - Part 2
-                      </Link>
-                    </li>{' '}
-                    <li>
-                      <Link
-                        href='/blog/how-cloudflare-processes-hundreds-of-millions-of-rows-per-second-with-clickhouse'
-                        className='text-primary-300'>
-                        How Cloudflare Processes Hundreds of Millions of Rows
-                        per Second with ClickHouse
+                        How Azur Games migrated to 120TB to ClickHouse Cloud in
+                        just three months
                       </Link>
                     </li>
                   </ol>
