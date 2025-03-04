@@ -383,7 +383,7 @@ export default function GamingIndustryPage({
                     <li>
                       <Link
                         href='/blog/real-time-event-streaming-with-confluent-cloud-clickhouse-and-clickpipes'
-                        className='text-primary-300'>
+                        className='text-primary-300 hover:underline'>
                         Real-time event streaming with ClickHouse, Confluent
                         Cloud and ClickPipes
                       </Link>
@@ -391,21 +391,21 @@ export default function GamingIndustryPage({
                     <li>
                       <Link
                         href='/blog/using-materialized-views-in-clickhouse'
-                        className='text-primary-300'>
+                        className='text-primary-300 hover:underline'>
                         Using Materialized Views in ClickHouse
                       </Link>
                     </li>
                     <li>
                       <Link
                         href='/blog/working-with-time-series-data-and-functions-ClickHouse'
-                        className='text-primary-300'>
+                        className='text-primary-300 hover:underline'>
                         Working with Time Series Data in ClickHouse
                       </Link>
                     </li>
                     <li>
                       <Link
                         href='/blog/boosting-game-performance-exitlag-quest-for-a-better-data-management-system'
-                        className='text-primary-300'>
+                        className='text-primary-300 hover:underline'>
                         Boosting Game Performance: ExitLag's Quest for a Better
                         Data Management System
                       </Link>
@@ -413,7 +413,7 @@ export default function GamingIndustryPage({
                     <li>
                       <Link
                         href='/blog/migrating-to-clickhouse-cloud-in-just-three-months-with-no-downtime-a-120-terabyte-data-journey-and-its-benefits'
-                        className='text-primary-300'>
+                        className='text-primary-300 hover:underline'>
                         How Azur Games migrated to 120TB to ClickHouse Cloud in
                         just three months
                       </Link>
