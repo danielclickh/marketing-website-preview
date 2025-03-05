@@ -81,7 +81,7 @@ export default function GamingIndustryPage({
                       Industries / Gaming
                     </h4>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-xl lg:text-left'>
-                      The database for Gaming Analytics and Telemetry
+                      The database for gaming analytics and telemetry
                     </h1>
                     <SuiText
                       size='base'
@@ -138,12 +138,12 @@ export default function GamingIndustryPage({
                     </div>
                   </div>
                 </div>
-                <div className='relative z-30 mx-auto hidden md:w-4/12 lg:flex align-middle justify-center items-center lg:w-[400px] xl:w-[525px]'>
+                <div className='relative z-30 mx-auto hidden lg:flex align-middle justify-center items-center'>
                   <Image
-                    src='/images/industries/gaming/gaming-hero.png'
+                    src='/images/industries/gaming/gaming-controller-2.png'
                     alt='ClickHouse'
-                    width={960}
-                    height={800}
+                    width={602}
+                    height={473}
                     className='h-auto w-full '
                     priority
                   />
