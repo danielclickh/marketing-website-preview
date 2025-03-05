@@ -79,23 +79,38 @@ export async function fetchBlogs({
 
   // Excluded featured blog from query
   if (featuredBlog[0]) {
-    query.filters.slug = {
-      $ne: featuredBlog[0].slug
-    }
+    query.filters.$and.push({
+      slug: {
+        $ne: featuredBlog[0].slug
+      }
+    })
   }
 
   // Apply category filters
   if (category) {
-    query.filters.category = {
-      $eq: categories[category]
-    }
+    query.filters.$and.push({
+      category: {
+        $eq: categories[category]
+      }
+    })
   }
 
   // Apply search filters
   if (search) {
-    query.filters.title = {
-      $containsi: search
-    }
+    query.filters.$and.push({
+      $or: [
+        {
+          title: {
+            $containsi: search
+          }
+        },
+        {
+          content: {
+            $containsi: search
+          }
+        }
+      ]
+    })
   }
 
   // Get paginated blog posts
