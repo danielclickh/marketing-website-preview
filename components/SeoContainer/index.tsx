@@ -24,9 +24,9 @@ function SeoContainer({
   const canonicalUrl = (() => {
     const predefinedUrls: { [key: string]: string } = {
       '/blog/forecasting-using-clickhouse':
-        'https://ensembleanalytics.io/blog/forecasting-using-clickhouse',
+        'https://benjaminwootton.com/insights/forecasting-using-clickhouse',
       '/blog/clickhouse-linear-regression-machine-learning-functions':
-        'https://ensembleanalytics.io/blog/linear-regression-using-clickhouse'
+        'https://benjaminwootton.com/insights/linear-regression-using-clickhouse'
     }
 
     if (path.startsWith('http')) {
