@@ -17,11 +17,7 @@ import MarketoForm from '../../../components/MarketoForm'
 import QuoteCard from '../../../components/QuoteCard'
 import { StrapiImage } from '../../../components/StrapiElements'
 import { SuiText, SuiTitle } from '../../../components/sui'
-import { fetchAll, findOne } from '../../../lib/api/strapi'
-import {
-  PricingV2ComponentRegion,
-  PricingV2EntryProvider
-} from '../../../lib/api/strapi/types'
+import { findOne } from '../../../lib/api/strapi'
 import { useGalaxyOnClick, useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
 import { BlogApiResponse } from '../../../types/blogs'
@@ -36,7 +32,6 @@ import logoMicrosoft from './assets/logo-microsoft.svg'
 interface PageProps extends CommonProps {
   customerStories: HomepageCustomerStories
   blogs: BlogApiResponse['data']['blogs']
-  regions: undefined | Array<PricingV2ComponentRegion>
 }
 
 export const getStaticProps: GetStaticProps<PageProps> =
@@ -53,29 +48,13 @@ export const getStaticProps: GetStaticProps<PageProps> =
 
     const blogPromise = fetchBlogs({ category: 'product', search: 'azure' })
 
-    const providersPromise = fetchAll('pricing-v2-providers', {
-      filters: {
-        slug: {
-          $eq: 'azure'
-        }
-      },
-      populate: ['regions'],
-      sort: ['order:asc', 'name:asc']
-    }) as Promise<Array<Pick<PricingV2EntryProvider, 'regions'>>>
-
     const [
       commonProps,
       { customerStories },
       {
         data: { blogs }
-      },
-      [{ regions }]
-    ] = await Promise.all([
-      commonPromise,
-      homePromise,
-      blogPromise,
-      providersPromise
-    ])
+      }
+    ] = await Promise.all([commonPromise, homePromise, blogPromise])
 
     return {
       props: {
@@ -87,7 +66,6 @@ export const getStaticProps: GetStaticProps<PageProps> =
         },
         customerStories,
         blogs,
-        regions,
         ...commonProps
       }
     }
@@ -98,8 +76,7 @@ export default function Page({
   headerData,
   footerData,
   customerStories,
-  blogs,
-  regions
+  blogs
 }: PageProps) {
   useGalaxyOnPage('azurePartnersPage')
 
@@ -574,24 +551,18 @@ export default function Page({
               .
             </p>
           </FaqItem>
-          {regions && (
-            <FaqItem title='Which Azure regions are supported?'>
-              <ul className='pl-4 list-disc mb-4 space-y-4'>
-                {regions.map((region, regionIndex) => {
-                  return <li key={regionIndex}>{region.label || region.key}</li>
-                })}
-              </ul>
-              <p>
-                Need to deploy to a region not currently listed?{' '}
-                <Link
-                  href='/pricing?modal=open'
-                  className='text-primary-300 hover:underline'>
-                  Submit a request
-                </Link>
-                .
-              </p>
-            </FaqItem>
-          )}
+
+          <FaqItem title='Which Azure regions are supported?'>
+            <p>
+              All supported Azure regions can be found{' '}
+              <Link
+                href='https://clickhouse.com/docs/cloud/reference/supported-regions#azure-regions'
+                className='text-primary-300 hover:underline'>
+                here
+              </Link>
+              .
+            </p>
+          </FaqItem>
 
           <FaqItem title='How does the performance of ClickHouse on Azure compare to other CSPs ClickHouse supports?'>
             <p>
