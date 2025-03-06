@@ -33,7 +33,7 @@ export default function TableOfContents({
       ([entry]) => {
         setIsVisible(!entry.isIntersecting)
       },
-      { threshold: 0 }
+      { threshold: 0.15 }
     )
 
     footerObserver.observe(footerRef.current)
