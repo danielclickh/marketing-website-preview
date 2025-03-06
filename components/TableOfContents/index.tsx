@@ -33,7 +33,7 @@ export default function TableOfContents({
       ([entry]) => {
         setIsVisible(!entry.isIntersecting)
       },
-      { threshold: 0.5 }
+      { threshold: 0 }
     )
 
     footerObserver.observe(footerRef.current)
@@ -64,7 +64,7 @@ export default function TableOfContents({
     }
 
     const observer = new IntersectionObserver(callback, {
-      rootMargin: '-100px 0px -40% 0px'
+      rootMargin: '-100px 0px -60% 0px'
     })
 
     elements.forEach((element) => observer.observe(element))
