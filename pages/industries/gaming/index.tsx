@@ -208,7 +208,7 @@ export default function GamingIndustryPage({
                         '/blog/migrating-to-clickhouse-cloud-in-just-three-months-with-no-downtime-a-120-terabyte-data-journey-and-its-benefits'
                       }
                       content={
-                        '"The modern game company is a data company. The ability to blend high-performance analytics with player data lets companies like Azur Games focus on their specialty—the user experience. We can focus on ours—delivering the fastest real-time data warehouse."'
+                        '"The main benefit is saving employee time, which can now be spent on more exciting and strategic tasks. One of our administrators has about 60% of their time freed up, and our ETL engineer now saves 40% of their time."'
                       }
                       logo={{
                         src: '/images/industries/gaming/logo-azur.svg',

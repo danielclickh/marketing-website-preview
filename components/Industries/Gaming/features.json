@@ -1,18 +1,18 @@
 [
     {
         "id": 10,
-        "content": "Customer Intelligence",
+        "content": "Customer intelligence",
         "section": 10,
         "title": true
     },
     {
         "id": 10,
-        "content": "Player Retention & Churn Prediction",
+        "content": "Player retention and churn prediction",
         "section": 10
     },
     {
         "id": 20,
-        "content": "Real-Time Ad Tech & Marketing",
+        "content": "Real-time ad tech and marketing",
         "section": 10
     },
     {
@@ -22,59 +22,59 @@
     },
     {
         "id": 40,
-        "content": "Personalized In-Game Content and A/B testing with user segmentation",
+        "content": "Personalized in-game content and A/B testing with user segmentation",
         "section": 10
     },
     {
         "id": 45,
-        "content": "Real-Time in-game Analytics",
+        "content": "Real-time in-game analytics",
         "section": 20,
         "title": true
     },
     {
         "id": 50,
-        "content": "Real-Time Leaderboards & Rankings",
+        "content": "Real-time leaderboards and rankings",
         "section": 20
     },
     {
         "id": 60,
-        "content": "Player Behavior Analytics and experience segmentation",
+        "content": "Player behavior analytics and experience segmentation",
         "section": 20
     },
     {
         "id": 70,
-        "content": "Live In-Game Event Processing",
+        "content": "Live in-game event processing",
         "section": 20
     },
     {
         "id": 80,
-        "content": "Trust & Safety Monitoring",
+        "content": "Trust & safety monitoring",
         "section": 20
     },
     {
         "id": 90,
-        "content": "Security and Operations",
+        "content": "Security and operations",
         "section": 30,
         "title": true
     },
     {
         "id": 110,
-        "content": "Fraud Detection & Anti-Cheat Analytics",
+        "content": "Fraud detection and anti-cheat analytics",
         "section": 30
     },
     {
         "id": 120,
-        "content": "Crash Analytics & Performance Debugging",
+        "content": "Crash analytics and performance debugging",
         "section": 30
     },
     {
         "id": 130,
-        "content": "Log, Key Performance Indicators (KPIs) & Application Monitoring",
+        "content": "Log, key performance indicators (KPIs) and application monitoring",
         "section": 30
     },
     {
         "id": 140,
-        "content": "Network Optimization & Routing",
+        "content": "Network optimization and routing",
         "section": 30
     }
 ]
