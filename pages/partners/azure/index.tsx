@@ -139,7 +139,7 @@ export default function Page({
 
       {/* Why? */}
       <div className='py-16 lg:py-20 bg-white/5'>
-        <div className='section-container px-6 lg:px-0'>
+        <div className='section-container px-6'>
           {/* Intro */}
           <div className='mb-10 lg:mb-16 space-y-6 text-center'>
             <Image
@@ -271,7 +271,7 @@ export default function Page({
 
       {/* Features */}
       <div className='py-16 lg:py-20 bg-white/5'>
-        <div className='section-container px-6 lg:px-0'>
+        <div className='section-container px-6'>
           <div className='-mx-4 flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'>
             <div className='p-4 lg:w-1/3'>
               <LinedIconCard icon='book'>
