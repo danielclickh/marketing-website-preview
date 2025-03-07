@@ -3,9 +3,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import ByocPricingCard from '../../../components/ByocPricingCard'
 import { CUIButton, CUICard } from '../../../components/ClickUI'
 import HRSeparator from '../../../components/HRSeparator'
+import ByocPricingCard from '../../../components/jp/ByocPricingCard'
 import Layout from '../../../components/Layout'
 import Markdown from '../../../components/Markdown'
 import MarketoForm from '../../../components/MarketoForm'
@@ -402,15 +402,15 @@ export default function PricingPage({
         {contactSection && (
           <div className='section-container bg-shadow-element mb-24 mt-20 max-w-[1115px]'>
             <div className='relative mx-auto flex w-full flex-col items-center gap-x-4 rounded-xl border border-neutral-725/80 bg-neutral-750/50 px-4 py-10 text-neutral-0 md:py-16'>
-              <SuiTitle type='h2'>{contactSection.title}</SuiTitle>
+              <SuiTitle type='h2'>ほかにも質問がありますか?</SuiTitle>
               <div className='mb-6 mt-3 max-w-screen-md text-center text-neutral-200'>
-                {contactSection.subtitle}
+                複雑なセットアップや料金に関してさらに質問がありますか？ClickHouseの料金に関するサポートや詳細情報については、当社の営業チームにお問合わせください。
               </div>
               <CUIButton
                 type='primary'
                 weight='medium'
                 href={contactSection.contactButton.link}>
-                {contactSection.contactButton.text}
+                営業へのお問合わせ
               </CUIButton>
             </div>
           </div>
