@@ -14,13 +14,13 @@ interface QuoteProps {
 function Quote({ content, logo, className = '' }: QuoteProps) {
   return (
     <div
-      className={`animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-6 px-4 text-center shadow-card ${className}`}>
+      className={`animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-4 text-center shadow-card ${className}`}>
       <Image
         src='/images/Quote.svg'
         width={37}
         height={28}
         alt='Quote'
-        className='mb-4 block'
+        className='mb-4 mt-2 block'
       />
       <SuiText color='secondary' className='mb-8 text-left'>
         {typeof content === 'string' ? (

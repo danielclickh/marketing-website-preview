@@ -2,9 +2,9 @@ import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import React, { CSSProperties } from 'react'
-import { CUIButton, CUICard } from '../../../../components/ClickUI'
-import DotsContainer from '../../../../components/DotsContainer'
+import { CUIButton } from '../../../../components/ClickUI'
 import Layout from '../../../../components/Layout'
+import LinedIconCard from '../../../../components/LinedIconCard'
 import PostgresCdcAnimation from '../../../../components/PostgresCdcAnimation'
 import QuoteCard from '../../../../components/QuoteCard'
 import { SuiText, SuiTitle } from '../../../../components/sui'
@@ -26,11 +26,6 @@ import imageDataSource7 from './assets/data-source-logo-7.png'
 import imageDataSource8 from './assets/data-source-logo-8.png'
 import imageDataSource9 from './assets/data-source-logo-9.png'
 import imageEditPipeInPlace from './assets/edit-pipe-in-place.png'
-import iconFast from './assets/icon-fast.svg'
-import iconMaximize from './assets/icon-maximize.svg'
-import iconParty from './assets/icon-party.svg'
-import iconPeerdb from './assets/icon-peerdb.svg'
-import iconStars from './assets/icon-stars.svg'
 import logoAdoraPng from './assets/logo-adora.png'
 import logoBlacksmithPng from './assets/logo-blacksmith.png'
 import logoDaisychainPng from './assets/logo-dailsychain.png'
@@ -220,93 +215,39 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       <div className='section-container mt-20 mb-16'>
         <div className='-mx-4 flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'>
           <div className='p-4 lg:w-1/3'>
-            <IconCard
-              icon={{
-                src: iconFast,
-                width: 32,
-                height: 32,
-                alt: 'Fast icon'
-              }}>
-              <SuiTitle type='h3' className='!text-2xl'>
-                Blazing-fast
-              </SuiTitle>
-              <SuiText className='text-balance text-white/70'>
-                Achieve 10x faster initial loads with parallel snapshotting,
-                transferring TBs in hours, and experience continuous replication
-                latency of just a few seconds.
-              </SuiText>
-            </IconCard>
+            <LinedIconCard
+              icon='guage'
+              title='Blazing-fast'
+              text='Achieve 10x faster initial loads with parallel snapshotting, transferring TBs in hours, and experience continuous replication latency of just a few seconds.'
+            />
           </div>
           <div className='p-4 lg:w-1/3'>
-            <IconCard
-              icon={{
-                src: iconStars,
-                width: 32,
-                height: 32,
-                alt: 'Stars icon'
-              }}>
-              <SuiTitle type='h3' className='!text-2xl'>
-                Simple
-              </SuiTitle>
-              <SuiText className='text-balance text-white/70'>
-                Easily replicate your Postgres databases to ClickHouse Cloud in
-                just a few clicks and few minutes!
-              </SuiText>
-            </IconCard>
+            <LinedIconCard
+              icon='sparkles'
+              title='Simple'
+              text='Easily replicate your Postgres databases to ClickHouse Cloud in just a few clicks and few minutes!'
+            />
           </div>
           <div className='p-4 lg:w-1/3'>
-            <IconCard
-              icon={{
-                src: iconMaximize,
-                width: 32,
-                height: 32,
-                alt: 'Maximize icon'
-              }}>
-              <SuiTitle type='h3' className='!text-2xl'>
-                Flexible
-              </SuiTitle>
-              <SuiText className='text-balance text-white/70'>
-                Connect any Postgres database, hosted or on-prem, including RDS,
-                Azure Flexible Server, CloudSQL, Supabase, Neon, Crunchy Bridge,
-                Tembo, and more.
-              </SuiText>
-            </IconCard>
+            <LinedIconCard
+              icon='maximize'
+              title='Flexible'
+              text='Connect any Postgres database, hosted or on-prem, including RDS, Azure Flexible Server, CloudSQL, Supabase, Neon, Crunchy Bridge, Tembo, and more.'
+            />
           </div>
           <div className='p-4 lg:w-1/3'>
-            <IconCard
-              icon={{
-                src: iconParty,
-                width: 32,
-                height: 32,
-                alt: 'Party icon'
-              }}>
-              <SuiTitle type='h3' className='!text-2xl'>
-                Feature rich
-              </SuiTitle>
-              <SuiText className='text-balance text-white/70'>
-                This connector is purpose-built for Postgres and ClickHouse,
-                supporting features like schema changes, partitioned tables,
-                TOAST columns, customizable ordering keys, and more.
-              </SuiText>
-            </IconCard>
+            <LinedIconCard
+              icon='tada'
+              title='Feature rich'
+              text='This connector is purpose-built for Postgres and ClickHouse, supporting features like schema changes, partitioned tables, TOAST columns, customizable ordering keys, and more.'
+            />
           </div>
           <div className='p-4 lg:w-1/3'>
-            <IconCard
-              icon={{
-                src: iconPeerdb,
-                width: 32,
-                height: 32,
-                alt: 'PeerDB icon'
-              }}>
-              <SuiTitle type='h3' className='!text-2xl'>
-                Powered by PeerDB
-              </SuiTitle>
-              <SuiText className='text-balance text-white/70'>
-                The connector is powered by PeerDB, a leading open-source
-                Postgres CDC provider, which ClickHouse acquired a few months
-                ago. Since PeerDB is open source, there’s no vendor lock-in!
-              </SuiText>
-            </IconCard>
+            <LinedIconCard
+              icon='peerdb'
+              title='Powered by PeerDB'
+              text='The connector is powered by PeerDB, a leading open-source Postgres CDC provider, which ClickHouse acquired a few months ago. Since PeerDB is open source, there’s no vendor lock-in!'
+            />
           </div>
         </div>
       </div>
@@ -536,28 +477,6 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         </div>
       </div>
     </Layout>
-  )
-}
-
-function IconCard({
-  icon,
-  children
-}: {
-  icon: ImageProps
-  children: React.ReactNode
-}) {
-  return (
-    <CUICard className='relative overflow-hidden p-8'>
-      <div className='absolute left-0 right-0 top-0 h-1 bg-primary-300' />
-      <CUICard.Body className='space-y-4 text-center'>
-        <Image
-          {...icon}
-          className='mx-auto aspect-square w-[72px] rounded border border-jet bg-black/40 object-scale-down object-center shadow-sm'
-          alt='icon image'
-        />
-        {children}
-      </CUICard.Body>
-    </CUICard>
   )
 }
 
