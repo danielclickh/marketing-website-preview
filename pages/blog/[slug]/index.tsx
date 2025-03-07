@@ -181,7 +181,7 @@ export default function BlogPage({
             </div>
           </div>
         </div>
-        <div className='absolute right-0 z-50 hidden h-full pr-10 transition-opacity duration-500 xl:block 2xl:pr-30'>
+        <div className='absolute right-0 z-0 hidden h-full pr-10 transition-opacity duration-500 xl:block 2xl:pr-30'>
           <TableOfContents
             contentRef={contentRef}
             footerRef={footerRef}
