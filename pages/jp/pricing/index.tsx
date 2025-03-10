@@ -3,11 +3,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import ByocPricingCard from '../../../components/ByocPricingCard'
 import { CUIButton, CUICard } from '../../../components/ClickUI'
 import HRSeparator from '../../../components/HRSeparator'
+import ByocPricingCard from '../../../components/jp/ByocPricingCard'
 import Layout from '../../../components/Layout'
-import LinkWithArrow from '../../../components/LinkWithArrow'
 import Markdown from '../../../components/Markdown'
 import MarketoForm from '../../../components/MarketoForm'
 import Modal from '../../../components/Modal'
@@ -39,13 +38,15 @@ import dynamic from 'next/dynamic'
 const PricingV1 = dynamic(
   () => import('../../../components/PricingCalculator'),
   {
-    loading: () => <p className='my-10 text-center'>Loading pricing...</p>,
+    loading: () => (
+      <p className='my-10 text-center'>価格を読み込んでいます...</p>
+    ),
     ssr: true
   }
 )
 
 const PricingV2 = dynamic(() => import('../../../components/PricingV2'), {
-  loading: () => <p className='my-10 text-center'>Loading pricing...</p>,
+  loading: () => <p className='my-10 text-center'>価格を読み込んでいます...</p>,
   ssr: true
 })
 
@@ -196,11 +197,10 @@ export default function PricingPage({
             {hero && (
               <div className='mb-16 flex flex-col items-center'>
                 <SuiTitle type='h1' color='white' className='md:!text-5.5xl'>
-                  価格設定
+                  料金表
                 </SuiTitle>
                 <div className='mt-6 text-neutral-200'>
-                  {' '}
-                  あらゆるユーザー、組織、ユースケースに対応するオプション。
+                  どのユーザー、組織、ユースケースにも対応できる選択肢をご紹介します。
                 </div>
               </div>
             )}
@@ -221,7 +221,7 @@ export default function PricingPage({
                     <div className='mx-6 mt-6'>
                       <div className='rounded bg-neutral-700 px-3 py-5 text-center text-white'>
                         <SuiText size='sm'>
-                          Need help with your proof of concept?{' '}
+                          POC(検証作業)のサポートが必要ですか？{' '}
                           <br className='sm:hidden' />
                           <Link
                             href='#poc-contact'
@@ -234,29 +234,29 @@ export default function PricingPage({
                                 })
                               }
                             }}>
-                            Contact us
+                            お問合せ
                           </Link>
                         </SuiText>
                       </div>
                     </div>
                     <div className='mt-12 space-y-6 text-center'>
                       <SuiText size='sm'>
-                        Or download the forever-free{' '}
-                        <LinkWithArrow
+                        またはいつまでも無料の
+                        <Link
                           href='https://clickhouse.com/docs/en/quick-start'
                           className='text-primary-300 underline'>
-                          open source distribution of ClickHouse
-                        </LinkWithArrow>
+                          ClickHouseオープンソースディストリビューション
+                        </Link>
+                        をダウンロード
                       </SuiText>
                       <SuiText size='sm'>
-                        For more information about our billing and pricing
-                        please refer to our{' '}
+                        請求と料金の詳細については、{' '}
                         <Link
                           href='https://clickhouse.com/docs/en/manage/billing/#faqs'
                           className='text-primary-300 underline'>
-                          Billing & Pricing FAQ
+                          請求と料金に関するFAQ
                         </Link>
-                        .
+                        をご覧ください。
                       </SuiText>
                     </div>
                   </>
@@ -276,42 +276,44 @@ export default function PricingPage({
                     <div className='-mt-4 space-y-8'>
                       <div className='space-y-4 text-center text-slate-300'>
                         <SuiText size='sm'>
-                          ClickPipes rates are{' '}
-                          <strong className='text-white'>$0.04 / GB</strong> for
-                          ingested data,{' '}
-                          <strong className='text-white'>$0.20 / hr</strong> per
-                          compute unit. Does not include{' '}
+                          ClickPipesのレートは、取り込みデータは
+                          <strong className='text-white'>$0.04 / GB</strong>
+                          、コンピューティングユニットあたり
+                          <strong className='text-white'>
+                            $0.20 / 時
+                          </strong>{' '}
+                          です。現在ベータ版の
                           <Link
                             href='/cloud/clickpipes/postgres-cdc-connector'
                             className='text-primary-300 underline'>
                             Postgres ClickPipes
                           </Link>
-                          , currently in Beta.
+                          は含まれません。
                         </SuiText>
                         <SuiText size='sm'>
-                          For more information about our billing and pricing
-                          please refer to our{' '}
+                          請求と料金の詳細については、{' '}
                           <Link
                             href='https://clickhouse.com/docs/en/manage/billing/#faqs'
                             className='text-primary-300 underline'>
-                            Billing & Pricing FAQ
+                            請求と料金に関するFAQ
                           </Link>
-                          .
+                          をご覧ください。 .
                         </SuiText>
                       </div>
                       <ByocPricingCard />
                       <SuiText size='sm' className='text-center text-slate-300'>
-                        Or download the forever-free{' '}
-                        <LinkWithArrow
+                        またはいつまでも無料の{' '}
+                        <Link
                           href='https://clickhouse.com/docs/en/quick-start'
                           className='text-primary-300 underline'>
-                          open source distribution of ClickHouse
-                        </LinkWithArrow>
+                          ClickHouseオープンソースディストリビューション
+                        </Link>
+                        をダウンロード
                       </SuiText>
                       <div className='mx-6 mt-6'>
                         <div className='rounded bg-neutral-700 px-3 py-5 text-center text-white'>
                           <SuiText size='sm'>
-                            Need help with your proof of concept?{' '}
+                            POC(検証作業)のサポートが必要ですか？{' '}
                             <br className='sm:hidden' />
                             <Link
                               href='#poc-contact'
@@ -324,7 +326,7 @@ export default function PricingPage({
                                   })
                                 }
                               }}>
-                              Contact us
+                              お問合せ
                             </Link>
                           </SuiText>
                         </div>
@@ -332,7 +334,7 @@ export default function PricingPage({
                     </div>
                     <HRSeparator className='my-16 lg:my-24' />
                     <SuiTitle type='h2' className='my-12 text-center'>
-                      Estimate your monthly&nbsp;cost
+                      毎月のコストを見積もる
                     </SuiTitle>
                   </>
                 }
@@ -345,7 +347,7 @@ export default function PricingPage({
               <SuiTitle
                 type='h2'
                 className='pb-16 text-center text-neutral-900'>
-                Pricing philosophy
+                料金に関する理念
               </SuiTitle>
               <div className='columns_wrapper flex flex-col gap-x-36 gap-y-16 lg:flex-row lg:items-start lg:justify-center'>
                 {philosophy.map((column) => (
@@ -384,10 +386,10 @@ export default function PricingPage({
                 <CUICard.Body className='p-4 lg:p-6'>
                   <div className='mb-4 space-y-4 text-center lg:mb-6'>
                     <SuiTitle type='h2' className='!text-2xl'>
-                      Need help with your ClickHouse Cloud PoC?
+                      ClickHouse CloudのPOC(検証作業)のサポートが必要ですか？
                     </SuiTitle>
                     <SuiText className='opacity-70'>
-                      Contact our team of experts
+                      専門家チームへのお問合わせ
                     </SuiText>
                   </div>
                   <PocContactForm />
@@ -400,15 +402,15 @@ export default function PricingPage({
         {contactSection && (
           <div className='section-container bg-shadow-element mb-24 mt-20 max-w-[1115px]'>
             <div className='relative mx-auto flex w-full flex-col items-center gap-x-4 rounded-xl border border-neutral-725/80 bg-neutral-750/50 px-4 py-10 text-neutral-0 md:py-16'>
-              <SuiTitle type='h2'>{contactSection.title}</SuiTitle>
+              <SuiTitle type='h2'>ほかにも質問がありますか?</SuiTitle>
               <div className='mb-6 mt-3 max-w-screen-md text-center text-neutral-200'>
-                {contactSection.subtitle}
+                複雑なセットアップや料金に関してさらに質問がありますか？ClickHouseの料金に関するサポートや詳細情報については、当社の営業チームにお問合わせください。
               </div>
               <CUIButton
                 type='primary'
                 weight='medium'
                 href={contactSection.contactButton.link}>
-                {contactSection.contactButton.text}
+                営業へのお問合わせ
               </CUIButton>
             </div>
           </div>
