@@ -140,10 +140,10 @@ export default function GamingIndustryPage({
                 </div>
                 <div className='relative z-30 mx-auto hidden lg:flex align-middle justify-center items-center'>
                   <Image
-                    src='/images/industries/gaming/gaming-controller-2.png'
-                    alt='ClickHouse'
-                    width={602}
-                    height={473}
+                    src='/images/industries/gaming/gaming-controller_fnl.png'
+                    alt='ClickHouse Gaming'
+                    width={738}
+                    height={528}
                     className='h-auto w-full '
                     priority
                   />
