@@ -1,5 +1,5 @@
 ---
-title: 'SIEM (Security Information and Event Management)'
+title: 'Security Information and Event Management (SIEM)'
 slug: 'siem'
 excerpt: "In this guide, we'll explore SIEM (Security Information and Event Management) - the central security system that collects, analyzes, and responds to security threats across your organization's entire infrastructure."
 index: 15
