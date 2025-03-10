@@ -23,7 +23,7 @@ Logs can be generated and captured in various formats. Raw logs are often simple
 192.168.1.1 - - [22/Jan/2025:12:00:00 +0000] "GET /index.html HTTP/1.1" 200 612 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
 ```
 
-Structured logging has become increasingly popular, especially with modern applications. This approach formats logs in a machine-readable structure, most commonly JSON. A JSON log entry might include clearly labeled fields for timestamp, severity level, message, and any relevant metadata. This structured format makes logs easier to parse, search, and analyze programmatically. An example of this type of log message is shown below:
+[Structured logging](https://clickhouse.com/engineering-resources/structured-logging) has become increasingly popular, especially with modern applications. This approach formats logs in a machine-readable structure, most commonly JSON. A JSON log entry might include clearly labeled fields for timestamp, severity level, message, and any relevant metadata. This structured format makes logs easier to parse, search, and analyze programmatically. An example of this type of log message is shown below:
 
 ```json
 {
@@ -69,7 +69,7 @@ The combination of both system and application logs provides a comprehensive vie
 
 Log monitoring involves continuously capturing and observing log data to identify anomalies, issues, or patterns that require attention. While log monitoring could, at its most basic level, mean simply logging into a server and reviewing log files manually, modern systems require a far more sophisticated approach.
 
-The complexity of today's systems has made traditional manual log monitoring impractical for several reasons. First, the rise of microservice architectures means applications generate an enormous volume of logs across numerous services and containers. Second, modern infrastructure treats servers as "cattle rather than pets," \- meaning servers are regularly created and destroyed rather than carefully maintained individual machines. Furthermore, with the growing adoption of serverless architectures, there might not even be a persistent server to access in the traditional sense.
+The complexity of today's systems has made traditional manual log monitoring impractical for several reasons. First, the rise of microservice architectures means applications generate an enormous volume of logs across numerous services and containers. Second, modern infrastructure treats servers as "cattle rather than pets," - meaning servers are regularly created and destroyed rather than carefully maintained individual machines. Furthermore, with the growing adoption of serverless architectures, there might not even be a persistent server to access in the traditional sense.
 
 These challenges have led to the development of comprehensive log management systems that automatically collect, process, and analyze logged data from across the entire infrastructure. Modern log monitoring involves systematically gathering logs from all sources, centralizing them in a single system, and implementing automated tools to help identify and respond to issues immediately.
 

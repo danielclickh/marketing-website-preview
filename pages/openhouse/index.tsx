@@ -218,7 +218,7 @@ export default function Page({ seo, footerData }: CommonProps) {
             <div
               className={`bg-ch-yellow h-8 absolute -top-8 left-0 right-0 ${styles.textureMaskTop}`}
             />
-            <div className='max-w-6xl mx-auto px-6 lg:px-12'>
+            <div className='max-w-6xl mx-auto px-6 lg:px-12' id='agenda'>
               <h2 className='text-4xl mb-10 text-center'>Agenda at a glance</h2>
               <div className='space-y-6 lg:space-y-0 lg:grid grid-cols-2 gap-6'>
                 <div className='bg-white py-8 px-6 lg:py-10 lg:px-12 space-y-6 lg:text-lg'>

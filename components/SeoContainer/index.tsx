@@ -62,6 +62,9 @@ function SeoContainer({
         <meta name='twitter:description' content={description} />
       )}
       <meta name='twitter:image' content={socialImageUrl} />
+
+      <link rel='alternate' hrefLang='en' href='https://clickhouse.com' />
+      <link rel='alternate' hrefLang='ja' href='https://clickhouse.com/jp' />
     </Head>
   )
 }
