@@ -23,7 +23,7 @@ Logs can be generated and captured in various formats. Raw logs are often simple
 192.168.1.1 - - [22/Jan/2025:12:00:00 +0000] "GET /index.html HTTP/1.1" 200 612 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
 ```
 
-Structured logging has become increasingly popular, especially with modern applications. This approach formats logs in a machine-readable structure, most commonly JSON. A JSON log entry might include clearly labeled fields for timestamp, severity level, message, and any relevant metadata. This structured format makes logs easier to parse, search, and analyze programmatically. An example of this type of log message is shown below:
+[Structured logging](https://clickhouse.com/engineering-resources/structured-logging) has become increasingly popular, especially with modern applications. This approach formats logs in a machine-readable structure, most commonly JSON. A JSON log entry might include clearly labeled fields for timestamp, severity level, message, and any relevant metadata. This structured format makes logs easier to parse, search, and analyze programmatically. An example of this type of log message is shown below:
 
 ```json
 {

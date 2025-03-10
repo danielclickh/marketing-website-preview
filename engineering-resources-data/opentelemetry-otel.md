@@ -47,7 +47,7 @@ OpenTelemetry's tracing tools provide insights into how requests are processed a
 
 For example, a cloud storage service might log every file access request to monitor for unauthorized access attempts. These logs are crucial for security audits and ensure that compliance standards regarding data access are met.
 
-OpenTelemetry supports structured logging, enhancing the ability to efficiently analyze and interpret large volumes of log data. Logs are essential for detailed diagnostics, security monitoring, and compliance, and they serve as a critical component of post-incident analysis and auditing.
+OpenTelemetry supports [structured logging](https://clickhouse.com/engineering-resources/structured-logging), enhancing the ability to efficiently analyze and interpret large volumes of log data. Logs are essential for detailed diagnostics, security monitoring, and compliance, and they serve as a critical component of post-incident analysis and auditing.
 
 Combining metrics, traces, and logs offers a holistic view of system performance and health. OpenTelemetry's standardized approach simplifies the collection and analysis of these data types, enhancing observability across your technology stack. This integration allows teams to correlate data from different sources, providing deeper insights and more actionable intelligence to optimize systems effectively.
 
