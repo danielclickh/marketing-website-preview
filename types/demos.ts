@@ -9,4 +9,6 @@ export type Demo = {
   LinkType: '_blank' | '_self'
   Image: null | StrapiImageType
   GitHubLink: null | string
+  External: boolean
+  Content: string
 }
