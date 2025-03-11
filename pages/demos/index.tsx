@@ -1,13 +1,12 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import DemoCard from '../../components/DemoCard'
 import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'
 import Markdown from '../../components/Markdown'
 import { SuiTitle } from '../../components/sui'
-import { findAll, findOne } from '../../lib/api/strapi'
+import { findAll, findOne, getStagingOnlyFilters } from '../../lib/api/strapi'
 import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '../../lib/utils/revalidationConfig'
 import { Demo } from '../../types/demos'
 import { CommonProps } from '../../types/homepage'
 
@@ -17,10 +16,10 @@ interface DemosPageProps extends CommonProps {
   demos: Demo[]
 }
 
-export const getStaticProps: GetStaticProps<DemosPageProps> =
-  async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps<DemosPageProps> =
+  async function getServerSideProps({ params }) {
     const commonProps = await getCommonProps()
-
+    const stagingOnlyFilters = getStagingOnlyFilters()
     const {
       Title: title,
       Description: description,
@@ -29,7 +28,12 @@ export const getStaticProps: GetStaticProps<DemosPageProps> =
       populate: ['SEO', 'SEO.image']
     })
 
+    const filters: Record<string, any> = {
+      $or: stagingOnlyFilters
+    }
+
     const { data: demos } = await findAll('demos', {
+      filters,
       sort: ['SortOrder:ASC', 'publishedAt:DESC'],
       populate: ['Image']
     })
@@ -44,8 +48,7 @@ export const getStaticProps: GetStaticProps<DemosPageProps> =
         demos,
         seo,
         ...commonProps
-      },
-      revalidate: REVALIDATE_SECONDS
+      }
     }
   }
 
