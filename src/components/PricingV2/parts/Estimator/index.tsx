@@ -1,4 +1,5 @@
 import HRSeparator from '../../../HRSeparator'
+import FieldGroupAccordion from '../../ui/FieldGroupAccordion'
 import ComputeSelector from '../ComputeSelector'
 import DisplayPrice from '../DisplayPrice'
 import EstimatorCtas from '../EstimatorCtas'
@@ -15,15 +16,26 @@ export default function Estimator() {
     <div
       id='pricing-calculator' // Used for scrolling into view and sharing
       className='mx-auto max-w-5xl px-4 sm:px-8 xl:px-0'>
+      {/* Provider/Region selectors */}
+      <div className='mb-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-6'>
+        <ProviderSelector displayLabel={false} />
+        <RegionSelector displayLabel={false} className='w-full max-w-80' />
+      </div>
+
       <div className='flex flex-col gap-y-8 lg:-mx-6 lg:flex-row lg:items-start lg:justify-center'>
         {/* Form */}
         <div className='w-full space-y-8 lg:w-1/2 lg:pr-6'>
           <PlanSelector />
-          <ProviderSelector />
-          <RegionSelector />
-          <HoursSelector />
-          <ComputeSelector />
-          <StorageSelector />
+          <FieldGroupAccordion
+            title='Storage and compute'
+            removable={true}
+            onRemove={() => {}}>
+            <div className='space-y-8'>
+              <ComputeSelector />
+              <StorageSelector />
+              <HoursSelector />
+            </div>
+          </FieldGroupAccordion>
         </div>
 
         {/* Results */}

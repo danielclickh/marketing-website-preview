@@ -1,0 +1,123 @@
+import { useCallback, useEffect, useState } from 'react'
+
+export interface FieldGroupAccordionBaseProps {
+  title: string | React.ReactNode
+  children: React.ReactNode
+  open?: boolean
+  onOpen?: () => void
+  onClose?: () => void
+}
+
+export interface FieldGroupAccordionStaticProps
+  extends FieldGroupAccordionBaseProps {
+  removable?: false
+  onRemove?: never
+}
+
+export interface FieldGroupAccordionRemovableProps
+  extends FieldGroupAccordionBaseProps {
+  removable: true
+  onRemove: () => void
+}
+
+export type FieldGroupAccordionProps =
+  | FieldGroupAccordionStaticProps
+  | FieldGroupAccordionRemovableProps
+
+export default function FieldGroupAccordion({
+  title,
+  children,
+  open = true,
+  onOpen,
+  onClose,
+  removable,
+  onRemove
+}: FieldGroupAccordionProps) {
+  const [isOpen, setIsOpen] = useState(open)
+
+  const handleRemove = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault()
+      if (removable && onRemove) {
+        onRemove()
+      }
+    },
+    [removable, onRemove]
+  )
+
+  const handleToggle = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault()
+      setIsOpen((old) => !old)
+    },
+    [removable, onRemove]
+  )
+
+  // Fire open/close callbacks
+  useEffect(() => {
+    if (onOpen && isOpen) {
+      onOpen()
+    }
+    if (onClose && !isOpen) {
+      onClose()
+    }
+  }, [isOpen])
+
+  // Sync prop and local state
+  useEffect(() => {
+    if (typeof open === 'boolean' && open !== isOpen) {
+      setIsOpen(open)
+    }
+  }, [open])
+
+  return (
+    <div className='block flex-1 rounded-lg border border-neutral-700 text-sm shadow-input transition-colors focus:outline-none hover:border-neutral-600'>
+      <div className='flex'>
+        <button
+          onClick={handleToggle}
+          className='flex-1 group/handle flex items-center text-left gap-2 p-4'>
+          <span className='inline-flex aspect-square items-center justify-center w-5 rounded flex-shrink-0 flex-grow-0 transition-colors group-hover/handle:bg-white/10'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='10'
+              height='5'
+              fill='none'
+              viewBox='0 0 10 5'
+              className={`transition-transform ${isOpen ? '' : '-rotate-90'}`}>
+              <path
+                stroke='#fff'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='1.5'
+                d='M1.67.83 5 4.17 8.33.83'
+              />
+            </svg>
+          </span>
+          {title}
+        </button>
+        {removable && (
+          <button
+            onClick={handleRemove}
+            className='flex-grow-0 flex-shrink-0 group/handle flex items-center text-left gap-2 p-4'>
+            <span className='sr-only'>Remove</span>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='8'
+              height='8'
+              fill='none'
+              viewBox='0 0 8 8'>
+              <path
+                stroke='#fff'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='1.5'
+                d='m1.33 1.33 5.34 5.34m0-5.34L1.33 6.67'
+              />
+            </svg>
+          </button>
+        )}
+      </div>
+      <div className={isOpen ? 'p-4' : 'hidden'}>{children}</div>
+    </div>
+  )
+}
