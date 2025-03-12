@@ -124,7 +124,7 @@ export default function DemoPage({
           <div className='flex w-full flex-col pb-20 lg:pr-[180px] xl:pl-4'>
             {Content && (
               <div className='flex flex-col lg:flex-row'>
-                <div ref={contentRef}>
+                <div ref={contentRef} className='w-full'>
                   <Markdown
                     className='rich-text-content leading-6'
                     allowHeaderLink>
