@@ -212,6 +212,8 @@ const LineChart = (props: {
     }
   }
 
+  const bottomPadding = series.length > 1 ? '64px' : '24px'
+
   const options = {
     animation: false,
     title: {
@@ -227,7 +229,7 @@ const LineChart = (props: {
     grid: {
       left: '24px',
       right: '24px',
-      bottom: '64px',
+      bottom: bottomPadding,
       top: '24px'
     },
     xAxis: {
@@ -278,7 +280,7 @@ const LineChart = (props: {
         color: '#FAFF69',
         fontWeight: 'bold',
         fontSize: 16,
-        lineHeight: 24
+        lineHeight: 16
       },
       backgroundColor: '#302e32',
       borderWidth: 0,

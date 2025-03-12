@@ -106,21 +106,27 @@ export default function HeatMap(props: {
     )
   }, [props.data, props.config])
 
+  const longestYLabelLength = Math.max(
+    ...yValues.map((label) => String(label).length),
+    0
+  )
+  const leftPadding = longestYLabelLength * 8
+
   const options = {
     title: {
       text: props.config.title,
       textStyle: {
         width: '100%',
-        fontSize: 20,
+        fontSize: 16,
         color: '#808691',
         fontWeight: 'normal'
       },
       left: 'center'
     },
     grid: {
-      left: '80px',
-      right: '24px',
-      bottom: '32px',
+      left: `${leftPadding}px`,
+      right: '16px',
+      bottom: '36px',
       top: '32px'
     },
     xAxis: {

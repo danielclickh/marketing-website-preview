@@ -87,7 +87,7 @@ export default function Pie(props: {
       text: props.config.title,
       textStyle: {
         width: '100%',
-        fontSize: 20,
+        fontSize: 16,
         color: '#808691',
         fontWeight: 'normal'
       },
@@ -97,8 +97,8 @@ export default function Pie(props: {
     grid: {
       left: '80px',
       right: '24px',
-      bottom: '32px',
-      top: '32px'
+      bottom: '24px',
+      top: '24px'
     },
     tooltip: {
       trigger: 'item',
@@ -123,7 +123,6 @@ export default function Pie(props: {
               fontSize: 14
             },
             icon: 'circle',
-            backgroundColor: '#3F3F3F',
             borderRadius: 5,
             borderWidth: 1,
             borderColor: '#626262',
@@ -136,7 +135,7 @@ export default function Pie(props: {
         type: 'pie',
         radius: ['50%', '90%'],
         avoidLabelOverlap: true,
-        center: ['45%', '50%'],
+        center: ['45%', '55%'],
         label: {
           show: false
         },

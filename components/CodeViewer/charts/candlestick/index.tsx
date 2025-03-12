@@ -148,7 +148,7 @@ const CandleStickChart = (props: {
       text: props.config.title,
       textStyle: {
         width: '100%',
-        fontSize: 20,
+        fontSize: 16,
         color: '#808691',
         fontWeight: 'normal'
       },
@@ -156,8 +156,8 @@ const CandleStickChart = (props: {
     },
     animation: false,
     grid: {
-      left: '80px',
-      right: '24px',
+      left: '36px',
+      right: '16x',
       bottom: '24px',
       top: '24px'
     },

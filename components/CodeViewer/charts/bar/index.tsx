@@ -172,12 +172,18 @@ export default function Bar(props: {
     }
   }
 
+  const longestLabelLength = props.horizontal
+    ? Math.max(...xAxis.map((label) => String(label).length), 0)
+    : 0
+  const leftPadding = props.horizontal
+    ? Math.max(48, longestLabelLength * 7) // Estimate width based on character count
+    : 24
   const options = {
     title: {
       text: props.config.title,
       textStyle: {
         width: '100%',
-        fontSize: 20,
+        fontSize: 16,
         color: '#808691',
         fontWeight: 'normal'
       },
@@ -185,10 +191,10 @@ export default function Bar(props: {
     },
     animation: false,
     grid: {
-      left: '80px',
+      left: props.horizontal ? `${leftPadding}px` : '24px',
       right: '24px',
-      bottom: '32px',
-      top: '32px'
+      bottom: '64px',
+      top: '24px'
     },
     tooltip: {
       trigger: 'item',
@@ -206,15 +212,14 @@ export default function Bar(props: {
     legend:
       windowWidth >= 1536 && series_col
         ? {
-            top: '5%',
+            bottom: '0%',
             right: '0px',
-            orient: 'vertical',
+            orient: 'horizontal',
             textStyle: {
               color: '#FFFFFFF',
               fontSize: 14
             },
             icon: 'circle',
-            backgroundColor: '#3F3F3F',
             borderRadius: 5,
             borderWidth: 1,
             borderColor: '#626262',
