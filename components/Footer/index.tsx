@@ -6,6 +6,7 @@ import { CUIButton } from '../ClickUI'
 import GitHub from '../icons/GitHub'
 import NewsLetterForm from '../NewsLetter/NewsLetterForm'
 import topLevelFooterMenu from './footer.json'
+import FooterLink from './footerLink'
 import { FooterData } from './types'
 
 export default function Footer({
@@ -18,39 +19,52 @@ export default function Footer({
       <div className='section-container mx-auto w-full justify-between gap-8 pb-11 md:flex lg:gap-10'>
         <div className='flex w-full flex-col'>
           <div className='sitemap flex flex-col gap-y-8 lg:flex-row lg:gap-x-3'>
-            {topLevelFooterMenu.map((topMenu) => (
-              <div key={topMenu.title} className='flex flex-col lg:w-4/12'>
-                <div className='mb-3 text-sm font-semibold text-neutral-0'>
-                  {topMenu.title}
-                </div>
-                <div className='flex flex-row flex-wrap gap-x-4 gap-y-2 text-neutral-400 lg:flex-col lg:gap-x-0'>
-                  <ul>
-                    {topMenu.items.map((footerLink) => (
-                      <li key={footerLink.name}>
-                        <a
-                          href={footerLink.href}
-                          target={footerLink.target}
-                          className='footer w-fit text-sm transition-all hover:text-neutral-0'
-                          onClick={
-                            footerLink.galaxyEvent
-                              ? // eslint-disable-next-line react-hooks/rules-of-hooks
-                                useGalaxyOnClick(
-                                  footerLink.galaxyEvent as FullyQualifiedEvent
-                                )
-                              : undefined
-                          }>
-                          {topMenu.title === 'Products' ? (
-                            <span>{footerLink.name}</span>
-                          ) : (
-                            <>{footerLink.name}</>
-                          )}
-                        </a>
+            {topLevelFooterMenu.map((topMenu) => {
+              if (topMenu.title === 'Partners') {
+                return null // Skip rendering Partners separately
+              }
+
+              return (
+                <div key={topMenu.title} className='flex flex-col lg:w-4/12'>
+                  <h3 className='mb-4 font-inter text-sm font-bold text-neutral-100'>
+                    {topMenu.title}
+                  </h3>
+                  <ul className='flex flex-col gap-2'>
+                    {topMenu.items.map((item) => (
+                      <li key={item.id}>
+                        <FooterLink
+                          {...item}
+                          text={item.name}
+                          galaxyEvent={
+                            `footer.nav.${item.name.toLowerCase()}` as FullyQualifiedEvent
+                          }
+                        />
                       </li>
                     ))}
+                    {topMenu.title === 'Comparisons' && (
+                      <>
+                        <h3 className='mt-8 mb-4 font-inter text-sm font-bold text-neutral-100'>
+                          Partners
+                        </h3>
+                        {topLevelFooterMenu
+                          .find((m) => m.title === 'Partners')
+                          ?.items.map((item) => (
+                            <li key={item.id}>
+                              <FooterLink
+                                {...item}
+                                text={item.name}
+                                galaxyEvent={
+                                  `footer.nav.${item.name.toLowerCase()}` as FullyQualifiedEvent
+                                }
+                              />
+                            </li>
+                          ))}
+                      </>
+                    )}
                   </ul>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
         <div className='flex flex-col pt-12 md:w-fit md:pt-0'>

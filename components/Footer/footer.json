@@ -273,5 +273,25 @@
 				"galaxyEvent": "footerNav.comparisonsMenu.snowflakeSelect"
 			}
 		]
+	},
+	{
+		"id": 83,
+		"title": "Partners",
+		"items": [
+			{
+				"id": 84,
+				"name": "AWS",
+				"href": "/partners/aws",
+				"target": "_self",
+				"galaxyEvent": "footerNav.partnersMenu.awsSelect"
+			},
+			{
+				"id": 85,
+				"name": "Azure",
+				"href": "/partners/azure",
+				"target": "_self",
+				"galaxyEvent": "footerNav.partnersMenu.azureSelect"
+			}
+		]
 	}
 ]
