@@ -112,7 +112,7 @@ export default function HeatMap(props: {
   )
   const leftPadding = longestYLabelLength * 8
 
-  const options = {
+  const options:any = {
     title: {
       text: props.config.title,
       textStyle: {

@@ -1,5 +1,6 @@
 'use client'
-import ReactECharts from 'echarts-for-react'
+import ReactECharts, { EChartsOption } from 'echarts-for-react'
+import type { XAXisOption, YAXisOption } from 'echarts/types/dist/shared'
 import isEqual from 'lodash/isEqual'
 import { useEffect, useMemo, useState } from 'react'
 import { ChartConfig, Column } from '../../types'
@@ -127,7 +128,7 @@ export default function Bar(props: {
     []
   )
 
-  const series = useMemo(() => {
+  const series:any = useMemo(() => {
     const mappedColors: { [key: string]: string } = {}
     return Object.values(values).map((series, i) => {
       let color = colors[i % colors.length]
@@ -178,7 +179,7 @@ export default function Bar(props: {
   const leftPadding = props.horizontal
     ? Math.max(48, longestLabelLength * 7) // Estimate width based on character count
     : 24
-  const options = {
+  const options: EChartsOption = {
     title: {
       text: props.config.title,
       textStyle: {
@@ -206,9 +207,12 @@ export default function Bar(props: {
       },
       backgroundColor: '#181818',
       borderWidth: 0,
-      valueFormatter: (value: number) => roundToDynamicPrecision(value)
+      valueFormatter: (value: any) =>
+        roundToDynamicPrecision(value as number).toString()
     },
-    xAxis: props.horizontal ? numberAxis : categoryAxis,
+    xAxis: props.horizontal
+      ? (numberAxis as XAXisOption)
+      : (categoryAxis as XAXisOption),
     legend:
       windowWidth >= 1536 && series_col
         ? {
@@ -225,8 +229,10 @@ export default function Bar(props: {
             borderColor: '#626262',
             padding: 10
           }
-        : null,
-    yAxis: props.horizontal ? categoryAxis : numberAxis,
+        : undefined,
+    yAxis: props.horizontal
+      ? (categoryAxis as YAXisOption)
+      : (numberAxis as YAXisOption),
     series: series
   }
 

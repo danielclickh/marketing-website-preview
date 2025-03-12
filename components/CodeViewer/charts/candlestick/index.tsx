@@ -143,7 +143,7 @@ const CandleStickChart = (props: {
     return initialValues
   }, [props.data, props.config])
 
-  const options = {
+  const options:any = {
     title: {
       text: props.config.title,
       textStyle: {

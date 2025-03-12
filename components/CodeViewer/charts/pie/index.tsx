@@ -82,7 +82,7 @@ export default function Pie(props: {
     return <></>
   }
 
-  const options = {
+  const options:any = {
     title: {
       text: props.config.title,
       textStyle: {
