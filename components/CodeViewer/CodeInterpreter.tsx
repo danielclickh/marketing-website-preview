@@ -1,14 +1,16 @@
-
-
-import { useState, useEffect } from "react";
-import { parse } from 'json5';
-import CodeResults from "./CodeResults";
-import { createClient as createWebClient } from '@clickhouse/client-web';
-import short from 'short-uuid';
-import { QueryParameter, QueryResponse, QueryResults } from "./types";
-import { Button, CodeBlock, Icon, Tooltip } from '@clickhouse/click-ui'
-
-
+import { Button, Icon, RadioGroup, Tooltip } from '@clickhouse/click-ui'
+import { createClient as createWebClient } from '@clickhouse/client-web'
+import { parse } from 'json5'
+import { useEffect, useState } from 'react'
+import short from 'short-uuid'
+import CodeResults, { DefaultView } from './CodeResults'
+import {
+  ChartConfig,
+  ChartType,
+  QueryParameter,
+  QueryResponse,
+  QueryResults
+} from './types'
 
 interface Props {
   queryString: string
@@ -17,64 +19,86 @@ interface Props {
   runnable: boolean
   play_link: string
   run: boolean
+  view: DefaultView
+  chart?: { type: ChartType; config?: ChartConfig }
 }
 
-function CodeInterpreter({ queryString, clickhouseUrl, clickhouseUser, runnable, play_link, run }: Props) {
-
-  const [results, setResults] = useState<any>(null);
-  const [showResultPanel, setShowResultPanel] = useState<boolean>(false);
+function CodeInterpreter({
+  queryString,
+  clickhouseUrl,
+  clickhouseUser,
+  runnable,
+  play_link,
+  run,
+  view,
+  chart
+}: Props) {
+  const [results, setResults] = useState<any>(null)
+  const [showResultsPanel, setShowResultsPanel] = useState<boolean>(false)
   const [queryRunning, setQueryRunning] = useState<boolean>(false)
+  const [currentView, setCurrentView] = useState<DefaultView>(view)
 
   const clickhouse_web = createWebClient({
     url: clickhouseUrl || process.env.NEXT_PUBLIC_CLICKHOUSE_HOST,
-    username: clickhouseUser || process.env.NEXT_PUBLIC_CLICKHOUSE_QUERY_USERNAME,
+    username:
+      clickhouseUser || process.env.NEXT_PUBLIC_CLICKHOUSE_QUERY_USERNAME,
     password: process.env.NEXT_PUBLIC_CLICKHOUSE_QUERY_PASSWORD || '',
     clickhouse_settings: {
       allow_experimental_analyzer: 1,
       result_overflow_mode: 'break',
-      read_overflow_mode: 'break',
+      read_overflow_mode: 'break'
     }
-  });
+  })
 
   function generateId(): string {
-    return short.generate().toUpperCase().slice(0, 27);
+    return short.generate().toUpperCase().slice(0, 27)
   }
 
-  async function query(query: string, query_id: string, params: Array<QueryParameter>): Promise<QueryResponse> {
+  async function query(
+    query: string,
+    query_id: string,
+    params: Array<QueryParameter>
+  ): Promise<QueryResponse> {
     if (!query) {
-      return { error: 'Query not provided', status: 400, query_id: query_id };
+      return { error: 'Query not provided', status: 400, query_id: query_id }
     }
-    query = query.replace(/;$/, '').trim();
+    query = query.replace(/;$/, '').trim()
 
-    const query_params: { [key: string]: string } = {};
+    const query_params: { [key: string]: string } = {}
     params.forEach((param) => {
       if (param.type && /^(Array|Map|Tuple|Nested)/.test(param.type)) {
         try {
-          query_params[param.name] = parse(param.value);
+          query_params[param.name] = parse(param.value)
         } catch (e) {
           // just send and let clickhouse error
-          query_params[param.name] = param.value;
+          query_params[param.name] = param.value
         }
       } else {
-        query_params[param.name] = param.value;
+        query_params[param.name] = param.value
       }
-    });
+    })
 
     try {
       const res = await clickhouse_web.query({
         query: query,
         query_id: query_id,
         query_params: query_params
-      });
-      const json = await res.json() as QueryResults;
+      })
+      const json = (await res.json()) as QueryResults
       if (json.exception) {
-        console.error("Error while running query", json.exception);
-        return { query: query, status: 500, response: json, query_id: query_id, error: json.exception }
+        console.error('Error while running query', json.exception)
+        return {
+          query: query,
+          status: 500,
+          response: json,
+          query_id: query_id,
+          error: json.exception
+        }
       }
-      return { query: query, status: 200, response: json, query_id: query_id };
+      return { query: query, status: 200, response: json, query_id: query_id }
     } catch (error) {
-      console.error("Error while running query", error);
-      return { error: error, status: 500, query_id: query_id };
+      console.error('Error while running query', error)
+      return { error: error, status: 500, query_id: query_id }
     }
   }
 
@@ -85,97 +109,138 @@ function CodeInterpreter({ queryString, clickhouseUrl, clickhouseUser, runnable,
   }, [run])
 
   const handleRunQuery = async () => {
-    const query_run_id = generateId();
+    const query_run_id = generateId()
     setResults({})
-    setQueryRunning(true);
-    setShowResultPanel(true)
-    const res = await query(queryString, query_run_id, []);
-    setQueryRunning(false);
-    setResults({ response: res.response, query_id: res.query_id, error: res.error });
+    setQueryRunning(true)
+    setShowResultsPanel(true)
+
+    const res = await query(queryString, query_run_id, [])
+    setQueryRunning(false)
+    setResults({
+      response: res.response,
+      query_id: res.query_id,
+      error: res.error
+    })
   }
 
   const closeResultPanel = (event: any) => {
     event.preventDefault()
-    setShowResultPanel(false)
+    setShowResultsPanel(false)
   }
 
-  const openResultPanel = (event: any) => {
+  const openTableResultPanel = (event: any) => {
     event.preventDefault()
-    setShowResultPanel(true)
+    setShowResultsPanel(true)
   }
 
-  const hideResultButton = () => {
+  const hideTableResultButton = () => {
     if (results) {
-      return (showResultPanel?
+      const show_results = showResultsPanel ? (
         <Tooltip>
           <Tooltip.Trigger>
-            <Button iconLeft="chevron-down" onClick={closeResultPanel} type='empty'></Button>
+            <Button
+              iconLeft='chevron-down'
+              onClick={closeResultPanel}
+              type='empty'></Button>
           </Tooltip.Trigger>
-          <Tooltip.Content side="bottom">
-            Close the results
-          </Tooltip.Content>
-        </Tooltip>:<Tooltip>
+          <Tooltip.Content side='bottom'>Close the results</Tooltip.Content>
+        </Tooltip>
+      ) : (
+        <Tooltip>
           <Tooltip.Trigger>
-            <Button iconLeft="chevron-up" onClick={openResultPanel} type='empty'></Button>
+            <Button
+              iconLeft='chevron-up'
+              onClick={openTableResultPanel}
+              type='empty'></Button>
           </Tooltip.Trigger>
-          <Tooltip.Content side="bottom">
-            Close the results
-          </Tooltip.Content>
-        </Tooltip>)
-    }
-  }
+          <Tooltip.Content side='bottom'>Close the results</Tooltip.Content>
+        </Tooltip>
+      )
 
-    const runButton = () => {
-      if (runnable) {
-        return (
-          <div className="flex justify-between h-[40px]">
-            <div className='flex items-center'>
-              {hideResultButton()}
-            </div>
-            <div className='flex items-center'>
-              <div className='m-1'>
-                <Tooltip>
-                  <Tooltip.Trigger>
-                    <Button iconLeft="play" onClick={handleRunQuery} type='primary' loading={queryRunning}></Button>
-                  </Tooltip.Trigger>
-                  <Tooltip.Content side="bottom">
-                    Run the query
-                  </Tooltip.Content>
-                </Tooltip>
-              </div>
-              {play_link &&
-                <Tooltip>
-                  <Tooltip.Trigger>
-                    <a href={play_link} target='_blank' rel='noreferrer'>
-                      <Icon height=""
-                        className="flex items-center p-[0.365rem]"
-                        name="popout"
-                        size="md"
-                        // state="neutral"
-                        color="white"
-                      />
-                    </a>
-                  </Tooltip.Trigger>
-                  <Tooltip.Content side="bottom">
-                    Open in Play
-                  </Tooltip.Content>
-                </Tooltip>
-              }
-            </div>
-          </div>
-        )
-      }
-
-    }
-
-    return (
-      <>
-        {runButton()}
-        <div className="flex flex-col-reverse divide-y-4 divide-y-reverse divide-gray-200 border-t-1">
-          {showResultPanel && <CodeResults results={results} queryRunning={queryRunning} />}
+      return (
+        <div className='flex'>
+          {show_results}
+          {chart && (
+            <RadioGroup orientation='horizontal' value={currentView}>
+              <RadioGroup.Item
+                label='Table'
+                onClick={(): void => {
+                  setCurrentView(DefaultView.Table)
+                }}
+                value={DefaultView.Table}
+              />
+              <RadioGroup.Item
+                label='Chart'
+                onClick={(): void => {
+                  setCurrentView(DefaultView.Chart)
+                }}
+                value={DefaultView.Chart}
+              />
+            </RadioGroup>
+          )}
         </div>
-      </>
-    )
+      )
+
+      return show_results
+    }
   }
 
-  export default CodeInterpreter
+  const runButton = () => {
+    if (runnable) {
+      return (
+        <div className='flex justify-between h-[40px]'>
+          <div className='flex items-center'>{hideTableResultButton()}</div>
+          <div className='flex items-center'>
+            <div className='m-1'>
+              <Tooltip>
+                <Tooltip.Trigger>
+                  <Button
+                    iconLeft='play'
+                    onClick={handleRunQuery}
+                    type='primary'
+                    loading={queryRunning}></Button>
+                </Tooltip.Trigger>
+                <Tooltip.Content side='bottom'>Run the query</Tooltip.Content>
+              </Tooltip>
+            </div>
+            {play_link && (
+              <Tooltip>
+                <Tooltip.Trigger>
+                  <a href={play_link} target='_blank' rel='noreferrer'>
+                    <Icon
+                      height=''
+                      className='flex items-center p-[0.365rem]'
+                      name='popout'
+                      size='md'
+                      // state="neutral"
+                      color='white'
+                    />
+                  </a>
+                </Tooltip.Trigger>
+                <Tooltip.Content side='bottom'>Open in Play</Tooltip.Content>
+              </Tooltip>
+            )}
+          </div>
+        </div>
+      )
+    }
+  }
+
+  return (
+    <>
+      {runButton()}
+      <div className='flex flex-col-reverse divide-y-4 divide-y-reverse divide-gray-200 border-t-1'>
+        {showResultsPanel && (
+          <CodeResults
+            results={results}
+            queryRunning={queryRunning}
+            chart={chart}
+            view={currentView}
+          />
+        )}
+      </div>
+    </>
+  )
+}
+
+export default CodeInterpreter

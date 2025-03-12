@@ -32,6 +32,8 @@
     "@segment/snippet": "^4.15.3",
     "@slack/web-api": "^6.10.0",
     "classnames": "^2.3.2",
+    "echarts": "^5.6.0",
+    "echarts-for-react": "^3.0.3",
     "feed": "^4.2.2",
     "framer-motion": "^10.16.4",
     "gray-matter": "^4.0.3",
