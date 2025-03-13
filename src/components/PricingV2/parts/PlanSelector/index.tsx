@@ -2,7 +2,7 @@ import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import Label from '../../ui/Label'
 
 export default function PlanSelector() {
-  const { plans, plan, setPlan } = usePricingV2Context()
+  const { setValues, plans, plan } = usePricingV2Context()
   return (
     <div>
       <Label>Plan</Label>
@@ -19,7 +19,7 @@ export default function PlanSelector() {
               }`}
               onClick={(event) => {
                 event.preventDefault()
-                setPlan(item.slug)
+                setValues({ plan: item.slug })
               }}>
               {item.name}
             </button>

@@ -37,7 +37,7 @@ export default function RegionSelector({
   displayLabel = true,
   className = ''
 }: RegionSelectorProps) {
-  const { providerEntry, region, setRegion } = usePricingV2Context()
+  const { setValues, providerEntry, region } = usePricingV2Context()
 
   const regionOptions: Options = useMemo(() => {
     if (!providerEntry) return []
@@ -57,7 +57,11 @@ export default function RegionSelector({
       {regionOptions.length > 0 && (
         <div className={className}>
           {displayLabel && <Label>Region</Label>}
-          <Select options={regionOptions} value={region} onChange={setRegion} />
+          <Select
+            options={regionOptions}
+            value={region}
+            onChange={(value) => setValues({ region: value })}
+          />
         </div>
       )}
     </>

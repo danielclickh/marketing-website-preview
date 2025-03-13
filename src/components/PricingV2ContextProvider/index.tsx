@@ -1,10 +1,3 @@
-import pricingFile from '../../../public/pricingV2File.json'
-import config, { PlanConfig } from '../PricingV2/config'
-import {
-  PricingV2EntryCompute,
-  PricingV2EntryPlan,
-  PricingV2EntryProvider
-} from '@/lib/api/strapi/types'
 import {
   createContext,
   Dispatch,
@@ -15,6 +8,14 @@ import {
   useMemo,
   useState
 } from 'react'
+import {
+  PricingV2EntryCompute,
+  PricingV2EntryPlan,
+  PricingV2EntryProvider,
+  PricingV2EntryUseCase
+} from '@/lib/api/strapi/types'
+import pricingFile from '../../../public/pricingV2File.json'
+import config, { PlanConfig } from '../PricingV2/config'
 
 const AVG_DAYS_PER_MONTH = 30.5
 
@@ -36,6 +37,7 @@ export type PricingFile = Record<string, PricingFileItem>
 export type ContextPlan = null | string
 export type ContextProvider = null | string
 export type ContextRegion = null | string
+export type ContextUseCase = null | string
 export type ContextHours = null | number
 export type ContextComputeMinSize = null | number
 export type ContextComputeMaxSize = null | number
@@ -55,6 +57,7 @@ export type ContextTotalPriceRange = [number] | [number, number]
 
 export interface Context {
   // Helper functions
+  setValues: (values: Partial<Values>) => void
   getPlanPricingData: (value: string) => undefined | PricingFileItem
   getPlanPricingConfig: (value: string) => undefined | PlanConfig
 
@@ -68,36 +71,21 @@ export interface Context {
 
   // User values
   plan: ContextPlan
-  setPlan: (value: ContextPlan) => void
   provider: ContextProvider
-  setProvider: (value: ContextProvider) => void
   region: ContextRegion
-  setRegion: (value: ContextRegion) => void
+  useCase: ContextUseCase
   hours: ContextHours
-  setHours: (value: ContextHours) => void
-
-  setCompute: (
-    min: ContextComputeMinSize,
-    max: ContextComputeMaxSize,
-    replicas: ContextReplicas
-  ) => void
   computeMinSize: ContextComputeMinSize
-  setComputeMinSize: (value: ContextComputeMinSize) => void
   computeMaxSize: ContextComputeMaxSize
-  setComputeMaxSize: (value: ContextComputeMaxSize) => void
   replicas: ContextReplicas
-  setReplicas: (value: ContextReplicas) => void
-
   storageUnit: ContextStorageUnit
-  setStorageUnit: (value: ContextStorageUnit) => void
   storageSize: ContextStorageSize
-  setStorageSize: (value: ContextStorageSize) => void
   storageCompressed: ContextStorageCompressed
-  setStorageCompressed: (value: ContextStorageCompressed) => void
 
   // Computed values
   planEntry: undefined | PricingV2EntryPlan
   providerEntry: undefined | PricingV2EntryProvider
+  useCaseEntry: undefined | PricingV2EntryUseCase
   computeUnitPrice: ContextComputeUnitPrice
   storageUnitPrice: ContextStorageUnitPrice
   computeMinPrice: ContextComputeMinPrice
@@ -115,6 +103,7 @@ export type Values = Pick<
   | 'plan'
   | 'provider'
   | 'region'
+  | 'useCase'
   | 'hours'
   | 'computeMinSize'
   | 'computeMaxSize'
@@ -126,6 +115,7 @@ export type Values = Pick<
 
 const PricingV2Context = createContext<Context>({
   // Helper functions
+  setValues: () => null,
   getPlanPricingData: () => undefined,
   getPlanPricingConfig: () => undefined,
 
@@ -139,32 +129,21 @@ const PricingV2Context = createContext<Context>({
 
   // User values
   plan: null,
-  setPlan: () => {},
   provider: null,
-  setProvider: () => {},
   region: null,
-  setRegion: () => {},
+  useCase: null,
   hours: null,
-  setHours: () => {},
-
-  setCompute: () => {},
   computeMinSize: null,
-  setComputeMinSize: () => {},
   computeMaxSize: null,
-  setComputeMaxSize: () => {},
   replicas: null,
-  setReplicas: () => {},
-
   storageUnit: null,
-  setStorageUnit: () => {},
   storageSize: null,
-  setStorageSize: () => {},
   storageCompressed: null,
-  setStorageCompressed: () => {},
 
   // Computed values
   planEntry: undefined,
   providerEntry: undefined,
+  useCaseEntry: undefined,
   computeUnitPrice: null,
   storageUnitPrice: null,
   computeMinPrice: null,
@@ -210,6 +189,9 @@ export default function PricingV2ContextProvider({
   )
   const [region, setRegion] = useState<ContextRegion>(
     startingValues?.region ?? null
+  )
+  const [useCase, setUseCase] = useState<ContextUseCase>(
+    startingValues?.useCase ?? null
   )
   const [hours, setHours] = useState<ContextHours>(
     startingValues?.hours ?? null
@@ -261,6 +243,13 @@ export default function PricingV2ContextProvider({
   const planEntry = useMemo(() => {
     return plan ? plans.find((item) => item.slug === plan) : undefined
   }, [plans, plan])
+
+  // Get the useCase strapi entry
+  const useCaseEntry = useMemo(() => {
+    return planEntry && useCase
+      ? planEntry.useCases.find((item) => item.slug === useCase)
+      : undefined
+  }, [planEntry, useCase])
 
   // Find the pricing data for the combined plan, privder and region values
   const pricingData = useMemo(() => {
@@ -403,6 +392,7 @@ export default function PricingV2ContextProvider({
         plan,
         provider,
         region,
+        useCase,
         hours,
         computeMinSize,
         computeMaxSize,
@@ -416,6 +406,7 @@ export default function PricingV2ContextProvider({
     plan,
     provider,
     region,
+    useCase,
     hours,
     computeMinSize,
     computeMaxSize,
@@ -429,15 +420,17 @@ export default function PricingV2ContextProvider({
   // Value validators
   // -----------------------------------
 
-  const validateAndSetValues = useCallback(
+  const setValues = useCallback(
     (newValues: Partial<Values>) => {
       let newPlanEntry = planEntry
       let newProviderEntry = providerEntry
+      let newUseCaseEntry = useCaseEntry
 
       let {
         plan: newPlan,
         provider: newProvider,
         region: newRegion,
+        useCase: newUseCase,
         hours: newHours,
         computeMinSize: newComputeMinSize,
         computeMaxSize: newComputeMaxSize,
@@ -450,13 +443,14 @@ export default function PricingV2ContextProvider({
       // Validate plan
       if (newPlan !== undefined) {
         newPlanEntry = plans.find((item) => item.slug === newPlan)
+
         if (!newPlan || !newPlanEntry) {
           newPlanEntry =
             plans.find((item) => item.featured) || plans.at(0) || undefined
           newPlan = newPlanEntry?.slug || null
         }
 
-        // Force new compute values when the plan changes and customizablilty has changed
+        // Force new compute values when the plan and customizablilty changed
         if (
           plan &&
           newPlan !== plan &&
@@ -482,6 +476,18 @@ export default function PricingV2ContextProvider({
         }
       }
 
+      // Validate use case
+      if (newUseCase !== undefined) {
+        newUseCaseEntry = newPlanEntry?.useCases.find(
+          (item) => item.slug === newUseCase
+        )
+
+        if (!newUseCase || !newUseCaseEntry) {
+          newUseCaseEntry = undefined
+          newUseCase = null
+        }
+      }
+
       // Validate region
       if (newRegion !== undefined) {
         if (!newProviderEntry) {
@@ -495,28 +501,24 @@ export default function PricingV2ContextProvider({
         }
       }
 
-      // Validate hours
-      if (newHours !== undefined) {
-        // Set hours default value
-        if (newHours === null) newHours = 8
-
-        // Constrain hours to 0-24
-        newHours = Math.min(24, Math.max(0, newHours))
-      }
-
       // Validate compute
       if (
         newComputeMinSize !== undefined ||
         newComputeMaxSize !== undefined ||
         newReplicas !== undefined
       ) {
-        const firstComputePackage = () => {
-          if (newPlanEntry) {
+        const applyUseCaseOrFirstPackage = () => {
+          if (newUseCaseEntry) {
+            newComputeMinSize = newUseCaseEntry?.minimumCompute?.size || null
+            newComputeMaxSize = newUseCaseEntry?.maximumCompute?.size || null
+            newReplicas = newUseCaseEntry.replicas
+            newHours = newUseCaseEntry.activeHours
+          } else if (newPlanEntry) {
             const first = newPlanEntry.packages.at(0)
-
             newComputeMinSize = first?.minimumCompute?.size || null
             newComputeMaxSize = first?.maximumCompute?.size || null
             newReplicas = first?.replicas || null
+            newHours = first?.activeHours || newHours
           }
         }
 
@@ -531,7 +533,7 @@ export default function PricingV2ContextProvider({
           newComputeMaxSize === null &&
           newReplicas === null
         ) {
-          firstComputePackage()
+          applyUseCaseOrFirstPackage()
         }
 
         // Min value is null, set it to match max
@@ -593,9 +595,18 @@ export default function PricingV2ContextProvider({
 
           // If not a valid package, set values to the first available package
           if (!packageExists) {
-            firstComputePackage()
+            applyUseCaseOrFirstPackage()
           }
         }
+      }
+
+      // Validate hours
+      if (newHours !== undefined) {
+        // Set hours default value
+        if (newHours === null) newHours = 8
+
+        // Constrain hours to 0-24
+        newHours = Math.min(24, Math.max(0, newHours))
       }
 
       // Validate storage
@@ -657,16 +668,27 @@ export default function PricingV2ContextProvider({
         newStorageCompressed = !!newStorageCompressed
       }
 
-      if (newPlan !== undefined && newPlan !== plan) {
-        setPlan(newPlan)
+      if (newPlanEntry !== undefined && newPlanEntry !== planEntry) {
+        setPlan(newPlanEntry.slug)
       }
 
-      if (newProvider !== undefined && newProvider !== provider) {
-        setProvider(newProvider)
+      if (
+        newProviderEntry !== undefined &&
+        newProviderEntry !== providerEntry
+      ) {
+        setProvider(newProviderEntry.slug)
+      }
+
+      if (newUseCaseEntry !== undefined && newUseCaseEntry !== useCaseEntry) {
+        setUseCase(newUseCaseEntry.slug)
       }
 
       if (newRegion !== undefined && newRegion !== region) {
         setRegion(newRegion)
+      }
+
+      if (newUseCase !== undefined && newUseCase !== useCase) {
+        setUseCase(newUseCase)
       }
 
       if (newHours !== undefined && newHours !== hours) {
@@ -715,6 +737,7 @@ export default function PricingV2ContextProvider({
       plan,
       provider,
       region,
+      useCase,
       hours,
       computeMinSize,
       computeMaxSize,
@@ -730,13 +753,14 @@ export default function PricingV2ContextProvider({
   // -----------------------------------
 
   useEffect(() => {
-    if (startingValues) validateAndSetValues(startingValues)
+    if (startingValues) setValues(startingValues)
   }, [])
 
   return (
     <PricingV2Context.Provider
       value={{
         // Helper functions
+        setValues,
         getPlanPricingData,
         getPlanPricingConfig,
 
@@ -750,36 +774,21 @@ export default function PricingV2ContextProvider({
 
         // User values
         plan,
-        setPlan: (plan) => validateAndSetValues({ plan }),
         provider,
-        setProvider: (provider) => validateAndSetValues({ provider }),
         region,
-        setRegion: (region) => validateAndSetValues({ region }),
+        useCase,
         hours,
-        setHours: (hours) => validateAndSetValues({ hours }),
-
-        setCompute: (computeMinSize, computeMaxSize, replicas) =>
-          validateAndSetValues({ computeMinSize, computeMaxSize, replicas }),
         computeMinSize,
-        setComputeMinSize: (computeMinSize) =>
-          validateAndSetValues({ computeMinSize }),
         computeMaxSize,
-        setComputeMaxSize: (computeMaxSize) =>
-          validateAndSetValues({ computeMaxSize }),
         replicas,
-        setReplicas: (replicas) => validateAndSetValues({ replicas }),
-
         storageUnit,
-        setStorageUnit: (storageUnit) => validateAndSetValues({ storageUnit }),
         storageSize,
-        setStorageSize: (storageSize) => validateAndSetValues({ storageSize }),
         storageCompressed,
-        setStorageCompressed: (storageCompressed) =>
-          validateAndSetValues({ storageCompressed }),
 
         // Computed values
         planEntry,
         providerEntry,
+        useCaseEntry,
         computeUnitPrice,
         storageUnitPrice,
         computeMinPrice,
@@ -790,6 +799,25 @@ export default function PricingV2ContextProvider({
         totalPriceRange
       }}>
       {children}
+      <pre>
+        {JSON.stringify(
+          {
+            plan,
+            provider,
+            region,
+            useCase,
+            hours,
+            computeMinSize,
+            computeMaxSize,
+            replicas,
+            storageUnit,
+            storageSize,
+            storageCompressed
+          },
+          null,
+          2
+        )}
+      </pre>
     </PricingV2Context.Provider>
   )
 }

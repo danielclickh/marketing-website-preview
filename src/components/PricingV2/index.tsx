@@ -47,6 +47,7 @@ export default function PricingV2({
   const urlPlan = cleanUrlParam(requestParams?.plan)
   const urlProvider = cleanUrlParam(requestParams?.provider)
   const urlRegion = cleanUrlParam(requestParams?.region)
+  const urlUseCase = cleanUrlParam(requestParams?.useCase)
   const urlHours = cleanUrlParam(requestParams?.hours)
   const urlComputeMinSize = cleanUrlParam(requestParams?.computeMinSize)
   const urlComputeMaxSize = cleanUrlParam(requestParams?.computeMaxSize)
@@ -60,6 +61,7 @@ export default function PricingV2({
     plan: urlPlan?.toString() || null,
     provider: urlProvider?.toString() || null,
     region: urlRegion?.toString() || null,
+    useCase: urlUseCase?.toString() || null,
     hours: typeof urlHours === 'number' ? urlHours : null,
     computeMinSize:
       typeof urlComputeMinSize === 'number' ? urlComputeMinSize : null,

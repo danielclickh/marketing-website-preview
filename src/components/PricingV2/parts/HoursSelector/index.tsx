@@ -4,7 +4,7 @@ import Range from '../../ui/Range'
 import { CheckIcon } from '@heroicons/react/solid'
 
 export default function HoursSelector() {
-  const { hours, setHours } = usePricingV2Context()
+  const { setValues, hours } = usePricingV2Context()
   const isAlwaysOn = hours && hours >= 24
   return (
     <div>
@@ -19,7 +19,7 @@ export default function HoursSelector() {
             className='group/always-on inline-flex cursor-pointer items-center gap-2'
             onClick={(event) => {
               event.preventDefault()
-              setHours(isAlwaysOn ? 8 : 24)
+              setValues({ hours: isAlwaysOn ? 8 : 24 })
             }}>
             <span
               className={`flex aspect-square w-4 overflow-hidden rounded-sm border border-neutral-700 ${
@@ -48,7 +48,7 @@ export default function HoursSelector() {
           min={0}
           max={24}
           value={hours !== null ? hours : 8}
-          onChange={setHours}
+          onChange={(value) => setValues({ hours: value })}
         />
       </div>
     </div>

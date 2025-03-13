@@ -202,6 +202,9 @@ export async function getPricingV2Plans() {
       'packages',
       'packages.minimumCompute',
       'packages.maximumCompute',
+      'useCases',
+      'useCases.minimumCompute',
+      'useCases.maximumCompute',
       'perks',
       'priceList'
     ],

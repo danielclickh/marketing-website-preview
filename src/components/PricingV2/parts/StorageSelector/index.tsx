@@ -6,37 +6,30 @@ import { CheckIcon } from '@heroicons/react/solid'
 import React, { useCallback, useMemo } from 'react'
 
 export default function StorageSelector() {
-  const {
-    planEntry,
-    storageUnit,
-    setStorageUnit,
-    storageSize,
-    setStorageSize,
-    storageCompressed,
-    setStorageCompressed
-  } = usePricingV2Context()
+  const { setValues, planEntry, storageUnit, storageSize, storageCompressed } =
+    usePricingV2Context()
 
   const onStorageSizeChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = event.target.value || '0'
       const truncatedValue = Number(inputValue.slice(0, 4)) // Truncate to 4 characters
-      setStorageSize(truncatedValue)
+      setValues({ storageSize: truncatedValue })
     },
-    [setStorageSize]
+    [setValues]
   )
 
   const onStorageUnitChange = useCallback(
     (value: any) => {
-      setStorageUnit(value)
+      setValues({ storageUnit: value })
     },
-    [setStorageUnit]
+    [setValues]
   )
 
   const onStorageCompressedChange = useCallback(
     (value: any) => {
-      setStorageCompressed(value)
+      setValues({ storageCompressed: value })
     },
-    [setStorageCompressed]
+    [setValues]
   )
 
   const storageUnits = useMemo(() => {
@@ -115,7 +108,7 @@ export default function StorageSelector() {
       </div>
       <div className='mt-3 text-xs text-slate-300'>
         {compressionApplied ? (
-          <p className='flex items-center gap-x-2'>
+          <p className='flex items-center gap-x-2 text-[#CCFFD0]'>
             <CheckIcon className='h-4 w-4' />
             {parseFloat((storageSize! / 10).toFixed(1))}
             {storageUnit?.toLocaleUpperCase()} after compression

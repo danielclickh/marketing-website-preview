@@ -77,6 +77,9 @@ export interface PricingV2EntryPlan {
   featured: boolean
   priceList: Array<PricingV2ComponentPerk>
   maxStorageCapacity: null | number
+  allowDataSources: boolean
+  allowDataTransfers: boolean
+  useCases: Array<PricingV2EntryUseCase>
 }
 
 export interface PricingV2EntryProvider {
@@ -95,6 +98,17 @@ export interface PricingV2EntryPackage {
   maximumCompute: null | PricingV2EntryCompute
   replicas: number
   description: null | string
+  activeHours: null | number
+}
+
+export interface PricingV2EntryUseCase {
+  name: string
+  slug: string
+  minimumCompute: null | PricingV2EntryCompute
+  maximumCompute: null | PricingV2EntryCompute
+  replicas: number
+  description: null | string
+  activeHours: number
 }
 
 export interface PricingV2ComponentPerk {

@@ -21,7 +21,7 @@ export default function ProviderSelector({
   displayLabel = true,
   className = ''
 }: ProviderSelectorProps) {
-  const { providers, provider, setProvider } = usePricingV2Context()
+  const { setValues, providers, provider } = usePricingV2Context()
   return (
     <div className={className}>
       {displayLabel && <Label>Cloud provider</Label>}
@@ -38,7 +38,7 @@ export default function ProviderSelector({
               }`}
               onClick={(event) => {
                 event.preventDefault()
-                setProvider(item.slug)
+                setValues({ provider: item.slug })
               }}>
               <ProviderLogo logo={item.logo} />
             </button>

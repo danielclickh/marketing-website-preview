@@ -76,7 +76,7 @@ export default function FieldGroupAccordion({
         <button
           onClick={handleToggle}
           className='flex-1 group/handle flex items-center text-left gap-2 p-4'>
-          <span className='inline-flex aspect-square items-center justify-center w-5 rounded flex-shrink-0 flex-grow-0 transition-colors group-hover/handle:bg-white/10'>
+          <span className='inline-flex items-center justify-center w-5 aspect-square rounded flex-shrink-0 flex-grow-0 transition-colors group-hover/handle:bg-white/10'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='10'
@@ -98,7 +98,7 @@ export default function FieldGroupAccordion({
         {removable && (
           <button
             onClick={handleRemove}
-            className='flex-grow-0 flex-shrink-0 group/handle flex items-center text-left gap-2 p-4'>
+            className='flex-grow-0 flex-shrink-0 group/remove flex items-center justify-center gap-2 w-6 aspect-square rounded transition-colors hover:bg-white/10 m-4'>
             <span className='sr-only'>Remove</span>
             <svg
               xmlns='http://www.w3.org/2000/svg'

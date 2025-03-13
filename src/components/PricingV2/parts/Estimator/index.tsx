@@ -3,7 +3,6 @@ import FieldGroupAccordion from '../../ui/FieldGroupAccordion'
 import ComputeSelector from '../ComputeSelector'
 import DisplayPrice from '../DisplayPrice'
 import EstimatorCtas from '../EstimatorCtas'
-import HoursSelector from '../HoursSelector'
 import PlanSelector from '../PlanSelector'
 import PriceList from '../PriceList'
 import ProviderSelector from '../ProviderSelector'
@@ -15,7 +14,7 @@ export default function Estimator() {
   return (
     <div
       id='pricing-calculator' // Used for scrolling into view and sharing
-      className='mx-auto max-w-5xl px-4 sm:px-8 xl:px-0'>
+      className='mx-auto max-w-6xl px-4 sm:px-8 xl:px-0'>
       {/* Provider/Region selectors */}
       <div className='mb-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-6'>
         <ProviderSelector displayLabel={false} />
@@ -26,14 +25,10 @@ export default function Estimator() {
         {/* Form */}
         <div className='w-full space-y-8 lg:w-1/2 lg:pr-6'>
           <PlanSelector />
-          <FieldGroupAccordion
-            title='Storage and compute'
-            removable={true}
-            onRemove={() => {}}>
+          <FieldGroupAccordion title='Storage and compute'>
             <div className='space-y-8'>
-              <ComputeSelector />
               <StorageSelector />
-              <HoursSelector />
+              <ComputeSelector />
             </div>
           </FieldGroupAccordion>
         </div>
