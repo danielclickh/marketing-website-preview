@@ -177,7 +177,6 @@ export default function ComputeSelector() {
                   })
                 )}
               </div>
-              <HoursSelector />
             </>
           )}
 
@@ -204,6 +203,8 @@ export default function ComputeSelector() {
               />
             </>
           )}
+
+          <HoursSelector />
 
           {/* Customizer */}
           {canCustomize && (
@@ -236,6 +237,7 @@ export default function ComputeSelector() {
               )}
 
               <HoursSelector />
+
               <div className='grid sm:grid-cols-2 gap-4 mt-8'>
                 <div>
                   <Label>Minimum size</Label>

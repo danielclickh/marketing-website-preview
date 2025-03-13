@@ -503,6 +503,7 @@ export default function PricingV2ContextProvider({
 
       // Validate compute
       if (
+        newPlanEntry ||
         newComputeMinSize !== undefined ||
         newComputeMaxSize !== undefined ||
         newReplicas !== undefined
@@ -518,7 +519,7 @@ export default function PricingV2ContextProvider({
             newComputeMinSize = first?.minimumCompute?.size || null
             newComputeMaxSize = first?.maximumCompute?.size || null
             newReplicas = first?.replicas || null
-            newHours = first?.activeHours || newHours
+            newHours = first?.activeHours || newHours || hours
           }
         }
 

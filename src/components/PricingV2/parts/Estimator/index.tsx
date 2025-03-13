@@ -1,16 +1,41 @@
-import HRSeparator from '../../../HRSeparator'
+import Link from 'next/link'
+import { Fragment, useMemo, useState } from 'react'
+import HRSeparator from '@/components/HRSeparator'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import ComputeSelector from '../../fields/ComputeSelector'
+import PlanSelector from '../../fields/PlanSelector'
+import ProviderSelector from '../../fields/ProviderSelector'
+import RegionSelector from '../../fields/RegionSelector'
+import StorageSelector from '../../fields/StorageSelector'
 import FieldGroupAccordion from '../../ui/FieldGroupAccordion'
-import ComputeSelector from '../ComputeSelector'
 import DisplayPrice from '../DisplayPrice'
 import EstimatorCtas from '../EstimatorCtas'
-import PlanSelector from '../PlanSelector'
 import PriceList from '../PriceList'
-import ProviderSelector from '../ProviderSelector'
-import RegionSelector from '../RegionSelector'
-import StorageSelector from '../StorageSelector'
-import Link from 'next/link'
 
 export default function Estimator() {
+  const { planEntry } = usePricingV2Context()
+
+  const [computeOpen, setComputeOpen] = useState(true)
+  const [backupsOpen, setBackupsOpen] = useState(false)
+  const [dataSourcesOpen, setDataSourcesOpen] = useState(false)
+  const [dataTransferOpen, setDataTransfersOpen] = useState(false)
+
+  const [displayOrder, setDisplayOrder] = useState<
+    Array<'backups' | 'dataSources' | 'dataTransfer'>
+  >([])
+
+  const displayBackups = useMemo(() => {
+    return displayOrder.includes('backups') && planEntry?.allowBackups
+  }, [planEntry, displayOrder])
+
+  const displayDataSources = useMemo(() => {
+    return displayOrder.includes('dataSources') && planEntry?.allowDataSources
+  }, [planEntry, displayOrder])
+
+  const displayDataTransfer = useMemo(() => {
+    return displayOrder.includes('dataTransfer') && planEntry?.allowDataTransfer
+  }, [planEntry, displayOrder])
+
   return (
     <div
       id='pricing-calculator' // Used for scrolling into view and sharing
@@ -23,14 +48,110 @@ export default function Estimator() {
 
       <div className='flex flex-col gap-y-8 lg:-mx-6 lg:flex-row lg:items-start lg:justify-center'>
         {/* Form */}
-        <div className='w-full space-y-8 lg:w-1/2 lg:pr-6'>
+        <div className='w-full space-y-6 lg:w-1/2 lg:pr-6'>
           <PlanSelector />
-          <FieldGroupAccordion title='Storage and compute'>
+          <FieldGroupAccordion
+            title='Storage and compute'
+            open={computeOpen}
+            onOpenClose={setComputeOpen}>
             <div className='space-y-8'>
               <StorageSelector />
               <ComputeSelector />
             </div>
           </FieldGroupAccordion>
+
+          {displayOrder.map((item, index) => {
+            const removeItem = () =>
+              setDisplayOrder((old) => old.filter((el) => el !== item))
+            return (
+              <Fragment key={index}>
+                {item === 'backups' && displayBackups && (
+                  <FieldGroupAccordion
+                    title='Backups'
+                    removable={true}
+                    onRemove={removeItem}
+                    open={backupsOpen}
+                    onOpenClose={setBackupsOpen}>
+                    <div className='space-y-8'>Backups...</div>
+                  </FieldGroupAccordion>
+                )}
+                {item === 'dataSources' && displayDataSources && (
+                  <FieldGroupAccordion
+                    title='ClickPipes'
+                    removable={true}
+                    onRemove={removeItem}
+                    open={dataSourcesOpen}
+                    onOpenClose={setDataSourcesOpen}>
+                    <div className='space-y-8'>ClickPipes...</div>
+                  </FieldGroupAccordion>
+                )}
+                {item === 'dataTransfer' && displayDataTransfer && (
+                  <FieldGroupAccordion
+                    title='Data transfer'
+                    removable={true}
+                    onRemove={removeItem}
+                    open={dataTransferOpen}
+                    onOpenClose={setDataTransfersOpen}>
+                    <div className='space-y-8'>Data transfer...</div>
+                  </FieldGroupAccordion>
+                )}
+              </Fragment>
+            )
+          })}
+
+          <div className='m-6 gap-x-8 gap-y-6 flex flex-wrap items-center justify-start'>
+            {planEntry?.allowBackups && !displayBackups && (
+              <button
+                className='text-sm text-primary-300 hover:underline'
+                onClick={(event) => {
+                  event.preventDefault()
+                  // Open backups
+                  setDisplayOrder((old) => [...old, 'backups'])
+
+                  // Close others
+                  setComputeOpen(false)
+                  setBackupsOpen(true)
+                  setDataSourcesOpen(false)
+                  setDataTransfersOpen(false)
+                }}>
+                Add backups
+              </button>
+            )}
+            {planEntry?.allowDataSources && !displayDataSources && (
+              <button
+                className='text-sm text-primary-300 hover:underline'
+                onClick={(event) => {
+                  event.preventDefault()
+                  // Open data sources
+                  setDisplayOrder((old) => [...old, 'dataSources'])
+
+                  // Close others
+                  setComputeOpen(false)
+                  setBackupsOpen(false)
+                  setDataSourcesOpen(true)
+                  setDataTransfersOpen(false)
+                }}>
+                Add data sources (ClickPipes)
+              </button>
+            )}
+            {planEntry?.allowDataTransfer && !displayDataTransfer && (
+              <button
+                className='text-sm text-primary-300 hover:underline'
+                onClick={(event) => {
+                  event.preventDefault()
+                  // Open data transfer
+                  setDisplayOrder((old) => [...old, 'dataTransfer'])
+
+                  // Close others
+                  setComputeOpen(false)
+                  setBackupsOpen(false)
+                  setDataSourcesOpen(false)
+                  setDataTransfersOpen(true)
+                }}>
+                Add data transfer
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Results */}

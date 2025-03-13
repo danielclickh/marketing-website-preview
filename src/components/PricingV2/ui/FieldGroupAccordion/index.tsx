@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import HRSeparator from '../../../HRSeparator'
 
 export interface FieldGroupAccordionBaseProps {
   title: string | React.ReactNode
@@ -6,6 +7,7 @@ export interface FieldGroupAccordionBaseProps {
   open?: boolean
   onOpen?: () => void
   onClose?: () => void
+  onOpenClose?: (open: boolean) => void
 }
 
 export interface FieldGroupAccordionStaticProps
@@ -30,6 +32,7 @@ export default function FieldGroupAccordion({
   open = true,
   onOpen,
   onClose,
+  onOpenClose,
   removable,
   onRemove
 }: FieldGroupAccordionProps) {
@@ -55,6 +58,9 @@ export default function FieldGroupAccordion({
 
   // Fire open/close callbacks
   useEffect(() => {
+    if (onOpenClose) {
+      onOpenClose(isOpen)
+    }
     if (onOpen && isOpen) {
       onOpen()
     }
@@ -117,7 +123,10 @@ export default function FieldGroupAccordion({
           </button>
         )}
       </div>
-      <div className={isOpen ? 'p-4' : 'hidden'}>{children}</div>
+      <div className={isOpen ? 'p-4' : 'hidden'}>
+        <HRSeparator className='-mt-4 mb-4' />
+        {children}
+      </div>
     </div>
   )
 }

@@ -78,7 +78,8 @@ export interface PricingV2EntryPlan {
   priceList: Array<PricingV2ComponentPerk>
   maxStorageCapacity: null | number
   allowDataSources: boolean
-  allowDataTransfers: boolean
+  allowDataTransfer: boolean
+  allowBackups: boolean
   useCases: Array<PricingV2EntryUseCase>
 }
 

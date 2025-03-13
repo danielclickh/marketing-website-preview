@@ -215,7 +215,10 @@ export async function getPricingV2Plans() {
       'order',
       'description',
       'featured',
-      'maxStorageCapacity'
+      'maxStorageCapacity',
+      'allowDataSources',
+      'allowDataTransfer',
+      'allowBackups'
     ],
     sort: ['order:asc', 'name:asc']
   })) as Array<PricingV2EntryPlan>
