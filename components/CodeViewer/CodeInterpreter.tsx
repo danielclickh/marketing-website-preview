@@ -11,6 +11,7 @@ import {
   QueryResponse,
   QueryResults
 } from './types'
+import { formatBytes, formatReadableRows, roundByScale } from './utils'
 
 interface Props {
   queryString: string
@@ -21,6 +22,8 @@ interface Props {
   run: boolean
   view: DefaultView
   chart?: { type: ChartType; config?: ChartConfig }
+  settings: string
+  show_statistics: boolean
 }
 
 function CodeInterpreter({
@@ -31,19 +34,23 @@ function CodeInterpreter({
   play_link,
   run,
   view,
-  chart
+  chart,
+  settings,
+  show_statistics
 }: Props) {
   const [results, setResults] = useState<any>(null)
   const [showResultsPanel, setShowResultsPanel] = useState<boolean>(false)
   const [queryRunning, setQueryRunning] = useState<boolean>(false)
   const [currentView, setCurrentView] = useState<DefaultView>(view)
 
+  const clickhouse_settings = JSON.parse(settings)
   const clickhouse_web = createWebClient({
     url: clickhouseUrl || process.env.NEXT_PUBLIC_CLICKHOUSE_HOST,
     username:
       clickhouseUser || process.env.NEXT_PUBLIC_CLICKHOUSE_QUERY_USERNAME,
     password: process.env.NEXT_PUBLIC_CLICKHOUSE_QUERY_PASSWORD || '',
     clickhouse_settings: {
+      ...clickhouse_settings,
       allow_experimental_analyzer: 1,
       result_overflow_mode: 'break',
       read_overflow_mode: 'break'
@@ -158,7 +165,7 @@ function CodeInterpreter({
       )
 
       return (
-        <div className='flex'>
+        <div className='flex items-end '>
           {show_results}
           {chart && (
             <RadioGroup orientation='horizontal' value={currentView}>
@@ -177,6 +184,11 @@ function CodeInterpreter({
                 value={DefaultView.Chart}
               />
             </RadioGroup>
+          )}
+          {show_statistics && results?.response?.statistics && (
+            <div className='flex text-xs italic h-full mb-[4px] ml-[16px]'>
+              {`Read ${formatReadableRows(results.response.statistics.rows_read)} rows and ${formatBytes(results.response.statistics.bytes_read)} bytes in ${roundByScale(results.response.statistics.elapsed)} seconds`}
+            </div>
           )}
         </div>
       )

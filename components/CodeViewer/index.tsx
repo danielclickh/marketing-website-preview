@@ -1,5 +1,6 @@
 import { CodeBlock } from '@clickhouse/click-ui'
 import CodeInterpreter from './CodeInterpreter'
+import { DefaultView } from './CodeResults'
 import { ChartConfig, ChartType } from './types'
 import { base64Decode } from './utils'
 
@@ -17,6 +18,8 @@ function CodeViewer({
   play_link,
   view = 'table',
   chart_config = '',
+  clickhouse_settings = '{}',
+  show_statistics = false,
   children,
   ...props
 }: any) {
@@ -64,8 +67,10 @@ function CodeViewer({
           queryString={codeContent}
           clickhouseUrl={clickhouse_url}
           clickhouseUser={clickhouse_user}
-          view={view}
+          view={chart ? view : DefaultView.Table}
           chart={chart}
+          settings={clickhouse_settings}
+          show_statistics={show_statistics}
         />
       </div>
     )
