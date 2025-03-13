@@ -204,40 +204,40 @@ export default function ComputeSelector() {
             </>
           )}
 
+          <HRSeparator className='mt-6 mb-4' />
+
+          {/* Use Case heading and reset button */}
+          {canCustomize && useCaseEntry && (
+            <div className='mb-6 flex items-center justify-between'>
+              <SuiText weight='bold'>
+                Suggested configuration based on your use case
+              </SuiText>
+              {useCaseHasChanged && (
+                <button
+                  className='opacity-75 transition-colors hover:opacity-100'
+                  onClick={(event) => {
+                    event.preventDefault()
+                    setValues({
+                      useCase: useCaseEntry?.slug,
+                      computeMinSize:
+                        useCaseEntry?.minimumCompute?.size || null,
+                      computeMaxSize:
+                        useCaseEntry?.maximumCompute?.size || null,
+                      replicas: useCaseEntry?.replicas,
+                      hours: useCaseEntry?.activeHours
+                    })
+                  }}>
+                  Reset
+                </button>
+              )}
+            </div>
+          )}
+
           <HoursSelector />
 
           {/* Customizer */}
           {canCustomize && (
             <>
-              <HRSeparator className='mt-6 mb-4' />
-              {useCaseEntry && (
-                <div className='mb-6 flex items-center justify-between'>
-                  <SuiText weight='bold'>
-                    Suggested configuration based on your use case
-                  </SuiText>
-                  {useCaseHasChanged && (
-                    <button
-                      className='opacity-75 transition-colors hover:opacity-100'
-                      onClick={(event) => {
-                        event.preventDefault()
-                        setValues({
-                          useCase: useCaseEntry?.slug,
-                          computeMinSize:
-                            useCaseEntry?.minimumCompute?.size || null,
-                          computeMaxSize:
-                            useCaseEntry?.maximumCompute?.size || null,
-                          replicas: useCaseEntry?.replicas,
-                          hours: useCaseEntry?.activeHours
-                        })
-                      }}>
-                      Reset
-                    </button>
-                  )}
-                </div>
-              )}
-
-              <HoursSelector />
-
               <div className='grid sm:grid-cols-2 gap-4 mt-8'>
                 <div>
                   <Label>Minimum size</Label>

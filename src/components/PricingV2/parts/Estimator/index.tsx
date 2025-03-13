@@ -15,15 +15,18 @@ import PriceList from '../PriceList'
 export default function Estimator() {
   const { planEntry } = usePricingV2Context()
 
+  // Tracks the accordion "open" states. Allows us to open and close programatically.
   const [computeOpen, setComputeOpen] = useState(true)
   const [backupsOpen, setBackupsOpen] = useState(false)
   const [dataSourcesOpen, setDataSourcesOpen] = useState(false)
   const [dataTransferOpen, setDataTransfersOpen] = useState(false)
 
+  // Determins the order to display the accordions
   const [displayOrder, setDisplayOrder] = useState<
     Array<'backups' | 'dataSources' | 'dataTransfer'>
   >([])
 
+  // If the
   const displayBackups = useMemo(() => {
     return displayOrder.includes('backups') && planEntry?.allowBackups
   }, [planEntry, displayOrder])
@@ -99,7 +102,7 @@ export default function Estimator() {
             )
           })}
 
-          <div className='m-6 gap-x-8 gap-y-6 flex flex-wrap items-center justify-start'>
+          <div className='my-6 mx-4 gap-x-8 gap-y-6 flex flex-wrap items-center justify-start'>
             {planEntry?.allowBackups && !displayBackups && (
               <button
                 className='text-sm text-primary-300 hover:underline'
@@ -155,7 +158,7 @@ export default function Estimator() {
         </div>
 
         {/* Results */}
-        <div className='w-full lg:w-1/2 lg:max-w-md lg:px-6'>
+        <div className='w-full lg:w-1/2 lg:max-w-md lg:px-6 sticky top-32'>
           <div className='rounded-lg border border-primary-300 bg-slate-900 p-7'>
             <p className='text-center font-inconsolata text-lg text-primary-300'>
               Average price per month
