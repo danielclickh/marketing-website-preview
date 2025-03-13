@@ -87,7 +87,7 @@ export default function DemoCard(demo: Demo) {
               </>
             )}
             <Link
-              href={demo.Link}
+              href={demo.External ? demo.Link : `/demos/${demo.Link}`}
               target={demo.LinkType}
               onClick={handleImageClick}
               className='inline-block rounded border border-primary-300/50 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-primary-300'>
