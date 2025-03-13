@@ -214,7 +214,7 @@ const LineChart = (props: {
 
   const bottomPadding = series.length > 1 ? '64px' : '24px'
 
-  const options:any = {
+  const options: any = {
     animation: false,
     title: {
       text: props.config.title,
@@ -228,7 +228,7 @@ const LineChart = (props: {
     },
     grid: {
       left: '24px',
-      right: '24px',
+      right: '8px',
       bottom: bottomPadding,
       top: '24px'
     },

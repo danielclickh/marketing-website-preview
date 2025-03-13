@@ -1,3 +1,6 @@
+import { filesize } from 'filesize'
+import numeral from 'numeral'
+
 export function roundToDynamicPrecision(num: number) {
   const validNum = Number(num)
   if (isNaN(validNum)) return 0
@@ -43,4 +46,13 @@ export function base64Decode(base64: string): string {
   const utf8Bytes = Uint8Array.from(binaryString, (char) => char.charCodeAt(0))
   const decodedText = new TextDecoder().decode(utf8Bytes)
   return decodedText
+}
+
+export function formatReadableRows(rows: number): string {
+  if (rows < 1000) return rows.toString() // Return as is if less than 1,000
+  return numeral(rows).format('0.[0]a') // Converts to K, M, B with one decimal if needed
+}
+
+export function formatBytes(bytes: number): string {
+  return filesize(bytes, { base: 2, standard: 'jedec', spacer: '' })
 }

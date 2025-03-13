@@ -79,7 +79,6 @@ export function getValueOfCell(
 function CodeResults(props: ResultsProps) {
   const response = props.results?.response
   const error = props.results?.error
-
   const gridRef = useRef<HTMLDivElement | null>(null)
 
   const cellValue = useCallback(
@@ -262,6 +261,11 @@ function CodeResults(props: ResultsProps) {
       </>
     )
   }
+  const height_table = props.chart
+    ? 300
+    : Math.min(Math.ceil(((response?.rows || 0) + 1) * 33), 300)
+
+  console.log(response)
 
   return (
     <>
@@ -280,7 +284,9 @@ function CodeResults(props: ResultsProps) {
           </p>
         </div>
       ) : (
-        <div className='h-[300px] w-full'>{results}</div>
+        <div className={`w-full`} style={{ height: `${height_table}px` }}>
+          {results}
+        </div>
       )}
     </>
   )
