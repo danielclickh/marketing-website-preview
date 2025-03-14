@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useState } from 'react'
 import HRSeparator from '../../../HRSeparator'
 
@@ -123,10 +124,20 @@ export default function FieldGroupAccordion({
           </button>
         )}
       </div>
-      <div className={isOpen ? 'p-4' : 'hidden'}>
-        <HRSeparator className='-mt-4 mb-4' />
-        {children}
-      </div>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0, y: -16 }}
+            animate={{ opacity: 1, height: 'auto', y: 0 }}
+            exit={{ opacity: 0, height: 0, y: -16 }}
+            transition={{ type: 'spring', bounce: 0, duration: 0.5 }}>
+            <div className='p-4'>
+              <HRSeparator className='-mt-4 mb-4' />
+              {children}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

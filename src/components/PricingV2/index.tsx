@@ -56,8 +56,15 @@ export default function PricingV2({
   const urlStorageSize = cleanUrlParam(requestParams?.storageSize)
   const urlStorageCompressed = cleanUrlParam(requestParams?.storageCompressed)
 
+  const urlBackupFrequency = cleanUrlParam(requestParams?.backupFrequency)
+  const urlBackupRetention = cleanUrlParam(requestParams?.backupRetention)
+  const urlFullBackupUnit = cleanUrlParam(requestParams?.fullBackupUnit)
+  const urlFullBackupSize = cleanUrlParam(requestParams?.fullBackupSize)
+  const urlDataSources = cleanUrlParam(requestParams?.dataSources)
+  const urlDataTransfers = cleanUrlParam(requestParams?.dataTransfers)
+
   // Combine URL and default values
-  const startingValues: Values = {
+  const startingValues: Partial<Values> = {
     plan: urlPlan?.toString() || null,
     provider: urlProvider?.toString() || null,
     region: urlRegion?.toString() || null,

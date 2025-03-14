@@ -1,26 +1,21 @@
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
+import { CheckIcon } from '@heroicons/react/solid'
+import { useCallback, useMemo } from 'react'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import DataSize, { Value } from '../../ui/DataSize'
 import Label from '../../ui/Label'
 import Radios from '../../ui/Radios'
-import Select, { Option } from '../../ui/Select'
-import { CheckIcon } from '@heroicons/react/solid'
-import React, { useCallback, useMemo } from 'react'
 
 export default function StorageSelector() {
   const { setValues, planEntry, storageUnit, storageSize, storageCompressed } =
     usePricingV2Context()
 
-  const onStorageSizeChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const inputValue = event.target.value || '0'
-      const truncatedValue = Number(inputValue.slice(0, 4)) // Truncate to 4 characters
-      setValues({ storageSize: truncatedValue })
-    },
-    [setValues]
-  )
+  const maxSotrageSize = useMemo(() => {
+    return planEntry?.maxStorageCapacity
+  }, [planEntry])
 
-  const onStorageUnitChange = useCallback(
-    (value: any) => {
-      setValues({ storageUnit: value })
+  const onStorageSizeChange = useCallback(
+    ({ size, unit }: Value) => {
+      setValues({ storageUnit: unit, storageSize: size })
     },
     [setValues]
   )
@@ -32,67 +27,21 @@ export default function StorageSelector() {
     [setValues]
   )
 
-  const storageUnits = useMemo(() => {
-    let gbOption: Option = { value: 'gb', label: 'GB' }
-    let tbOption: Option = { value: 'tb', label: 'TB' }
-    let pbOption: Option = { value: 'pb', label: 'PB' }
-
-    if (planEntry?.maxStorageCapacity) {
-      if (planEntry.maxStorageCapacity < 1024) {
-        tbOption.disabled = true
-        pbOption.disabled = true
-      } else if (planEntry.maxStorageCapacity < 2048) {
-        pbOption.disabled = true
-      }
-    }
-
-    return [gbOption, tbOption, pbOption]
-  }, [planEntry])
-
-  const sizeMax = useMemo(() => {
-    let max = 9999
-    if (planEntry?.maxStorageCapacity) {
-      switch (storageUnit) {
-        case 'gb':
-          max = planEntry.maxStorageCapacity
-          break
-        case 'tb':
-          max = planEntry.maxStorageCapacity / 1024
-          break
-        case 'pb':
-          max = planEntry.maxStorageCapacity / 2048
-          break
-      }
-    }
-
-    return Math.min(max, 9999)
-  }, [planEntry, storageUnit])
-
   const compressionApplied = !storageCompressed && storageSize && storageUnit
 
   return (
     <div>
-      <div className='grid grid-cols-4 gap-3'>
-        <div className='col-span-2 md:col-span-1'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6'>
+        <div className=''>
           <Label>Data volume</Label>
-          <input
-            className='relative h-10 w-full cursor-text rounded-[4px] border border-neutral-700 bg-neutral-725 px-3 text-left shadow-input focus:outline-none sm:text-sm md:max-w-[112px]'
-            type='number'
-            min={0}
-            max={sizeMax}
-            defaultValue={storageSize || 0}
-            maxLength={sizeMax.toString().length}
+          <DataSize
+            maxGb={maxSotrageSize}
+            sizeValue={storageSize}
+            unitValue={storageUnit}
             onChange={onStorageSizeChange}
           />
         </div>
-        <div className='col-span-2 flex flex-col justify-end md:col-span-1'>
-          <Select
-            options={storageUnits}
-            value={storageUnit}
-            onChange={onStorageUnitChange}
-          />
-        </div>
-        <div className='col-span-4 md:col-span-2 md:pl-2'>
+        <div className=''>
           <Label tooltip='If your data is not compressed, ClickHouse will apply up to 10x compression.'>
             Is your data compressed?
           </Label>

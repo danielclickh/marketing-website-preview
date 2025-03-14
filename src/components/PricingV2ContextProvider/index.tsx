@@ -34,6 +34,9 @@ export type PricingFileItem = Array<{
 }>
 export type PricingFile = Record<string, PricingFileItem>
 
+export type StorageUnits = 'gb' | 'tb' | 'pb'
+
+// User values
 export type ContextPlan = null | string
 export type ContextProvider = null | string
 export type ContextRegion = null | string
@@ -42,10 +45,37 @@ export type ContextHours = null | number
 export type ContextComputeMinSize = null | number
 export type ContextComputeMaxSize = null | number
 export type ContextReplicas = null | number
-export type ContextStorageUnit = null | 'gb' | 'tb' | 'pb'
+export type ContextStorageUnit = null | StorageUnits
 export type ContextStorageSize = null | number
 export type ContextStorageCompressed = null | boolean
+export type ContextBackupFrequency = null | 'daily' | 'weekly' | 'monthly'
+export type ContextBackupRetention = null | number
+export type ContextFullBackupUnit = null | StorageUnits
+export type ContextFullBackupSize = null | number
+export type ContextIncrementalBackupUnit = null | StorageUnits
+export type ContextIncrementalBackupSize = null | number
+export type ContextDataSources = null | Array<{
+  source: string
+  instances: number
+  dataIngestedUnit?: StorageUnits
+  dataIngestedSize?: number
+}>
+export type ContextDataTransfers = null | Array<
+  | {
+      type: 'internet'
+      unit: StorageUnits
+      size: number
+      region: never
+    }
+  | {
+      type: 'inter-region'
+      unit: StorageUnits
+      size: number
+      region: string
+    }
+>
 
+// Computed values
 export type ContextComputeUnitPrice = null | number
 export type ContextStorageUnitPrice = null | number
 export type ContextComputeMinPrice = null | number
@@ -55,11 +85,73 @@ export type ContextTotalMinPrice = null | number
 export type ContextTotalMaxPrice = null | number
 export type ContextTotalPriceRange = [number] | [number, number]
 
+// -----------------------------------
+// Helper functions
+// -----------------------------------
+
+function getPlanPricingData(planKey: string) {
+  return (pricingFile as PricingFile)[planKey]
+}
+
+function getPlanPricingConfig(planKey: string) {
+  return config.plans[planKey]
+}
+
+function validateDataSize(
+  size: number,
+  unit: StorageUnits,
+  maxGb?: number | null
+) {
+  let sizeInGb = size
+
+  // Convert the size to GB based on the selected unit
+  switch (unit) {
+    case 'tb':
+      sizeInGb = size * 1000 // 1 TB = 1000 GB
+      break
+    case 'pb':
+      sizeInGb = size * 1000 * 1000 // 1 PB = 1000000 GB
+      break
+  }
+
+  // If maxGb is provided, ensure the size doesn't exceed the maximum allowed
+  if (maxGb && sizeInGb > maxGb) {
+    sizeInGb = maxGb
+  }
+
+  // Determine the best unit based on the size in GB
+  let newSize = sizeInGb
+  let newUnit: StorageUnits = 'gb'
+
+  // GB value >= 1 PB? Convert to PB
+  if (sizeInGb >= 1000 * 1000) {
+    newSize = sizeInGb / 1000 / 1000
+    newUnit = 'pb'
+  }
+
+  // GB value >= 1 TB? Convert to TB
+  else if (sizeInGb >= 1000) {
+    newSize = sizeInGb / 1000
+    newUnit = 'tb'
+  }
+
+  return {
+    size: newSize,
+    unit: newUnit
+  }
+}
+
+// Full context object
 export interface Context {
   // Helper functions
   setValues: (values: Partial<Values>) => void
   getPlanPricingData: (value: string) => undefined | PricingFileItem
   getPlanPricingConfig: (value: string) => undefined | PlanConfig
+  validateDataSize: (
+    size: number,
+    unit: StorageUnits,
+    maxGb?: number | null
+  ) => { size: number; unit: StorageUnits }
 
   // Data sources
   plans: Array<PricingV2EntryPlan>
@@ -81,6 +173,14 @@ export interface Context {
   storageUnit: ContextStorageUnit
   storageSize: ContextStorageSize
   storageCompressed: ContextStorageCompressed
+  backupFrequency: ContextBackupFrequency
+  backupRetention: ContextBackupRetention
+  fullBackupUnit: ContextFullBackupUnit
+  fullBackupSize: ContextFullBackupSize
+  incrementalBackupUnit: ContextIncrementalBackupUnit
+  incrementalBackupSize: ContextIncrementalBackupSize
+  dataSources: ContextDataSources
+  dataTransfers: ContextDataTransfers
 
   // Computed values
   planEntry: undefined | PricingV2EntryPlan
@@ -111,13 +211,22 @@ export type Values = Pick<
   | 'storageUnit'
   | 'storageSize'
   | 'storageCompressed'
+  | 'backupFrequency'
+  | 'backupRetention'
+  | 'fullBackupUnit'
+  | 'fullBackupSize'
+  | 'incrementalBackupUnit'
+  | 'incrementalBackupSize'
+  | 'dataSources'
+  | 'dataTransfers'
 >
 
 const PricingV2Context = createContext<Context>({
   // Helper functions
   setValues: () => null,
-  getPlanPricingData: () => undefined,
-  getPlanPricingConfig: () => undefined,
+  getPlanPricingData,
+  getPlanPricingConfig,
+  validateDataSize,
 
   // Data sources
   plans: [],
@@ -139,6 +248,14 @@ const PricingV2Context = createContext<Context>({
   storageUnit: null,
   storageSize: null,
   storageCompressed: null,
+  backupFrequency: null,
+  backupRetention: null,
+  fullBackupUnit: null,
+  fullBackupSize: null,
+  incrementalBackupUnit: null,
+  incrementalBackupSize: null,
+  dataSources: null,
+  dataTransfers: null,
 
   // Computed values
   planEntry: undefined,
@@ -175,6 +292,7 @@ export default function PricingV2ContextProvider({
   onChange,
   children
 }: PricingV2ContextProviderProps) {
+  // Data sources
   const [plans, setPlans] = useState<Array<PricingV2EntryPlan>>(data.plans)
   const [providers, setProviders] = useState<Array<PricingV2EntryProvider>>(
     data.providers
@@ -183,6 +301,7 @@ export default function PricingV2ContextProvider({
     data.computes
   )
 
+  // User values
   const [plan, setPlan] = useState<ContextPlan>(null)
   const [provider, setProvider] = useState<ContextProvider>(
     startingValues?.provider ?? null
@@ -215,18 +334,30 @@ export default function PricingV2ContextProvider({
     useState<ContextStorageCompressed>(
       startingValues?.storageCompressed ?? null
     )
-
-  // -----------------------------------
-  // Helper functions
-  // -----------------------------------
-
-  const getPlanPricingData = (planKey: string) => {
-    return (pricingFile as PricingFile)[planKey]
-  }
-
-  const getPlanPricingConfig = (planKey: string) => {
-    return config.plans[planKey]
-  }
+  const [backupFrequency, setBackupFrequency] =
+    useState<ContextBackupFrequency>(startingValues?.backupFrequency ?? null)
+  const [backupRetention, setBackupRetention] =
+    useState<ContextBackupRetention>(startingValues?.backupRetention ?? null)
+  const [fullBackupUnit, setFullBackupUnit] = useState<ContextFullBackupUnit>(
+    startingValues?.fullBackupUnit ?? null
+  )
+  const [fullBackupSize, setFullBackupSize] = useState<ContextFullBackupSize>(
+    startingValues?.fullBackupSize ?? null
+  )
+  const [incrementalBackupUnit, setIncrementalBackupUnit] =
+    useState<ContextIncrementalBackupUnit>(
+      startingValues?.incrementalBackupUnit ?? null
+    )
+  const [incrementalBackupSize, setIncrementalBackupSize] =
+    useState<ContextIncrementalBackupSize>(
+      startingValues?.incrementalBackupSize ?? null
+    )
+  const [dataSources, setDataSources] = useState<ContextDataSources>(
+    startingValues?.dataSources ?? null
+  )
+  const [dataTransfers, setDataTransfers] = useState<ContextDataTransfers>(
+    startingValues?.dataTransfers ?? null
+  )
 
   // -----------------------------------
   // Computed values
@@ -325,10 +456,10 @@ export default function PricingV2ContextProvider({
     // Convert usage values into gigabytes
     switch (storageUnit) {
       case 'gb':
-        usageInTb = storageSize / 1000 // 1 TB = 1024 GB
+        usageInTb = storageSize / 1000
         break
       case 'pb':
-        usageInTb = storageSize * 1000 // 1 PB = 1024 TB
+        usageInTb = storageSize * 1000
         break
     }
 
@@ -399,7 +530,15 @@ export default function PricingV2ContextProvider({
         replicas,
         storageUnit,
         storageSize,
-        storageCompressed
+        storageCompressed,
+        backupFrequency,
+        backupRetention,
+        fullBackupUnit,
+        fullBackupSize,
+        incrementalBackupUnit,
+        incrementalBackupSize,
+        dataSources,
+        dataTransfers
       })
     }
   }, [
@@ -413,7 +552,15 @@ export default function PricingV2ContextProvider({
     replicas,
     storageUnit,
     storageSize,
-    storageCompressed
+    storageCompressed,
+    backupFrequency,
+    backupRetention,
+    fullBackupUnit,
+    fullBackupSize,
+    incrementalBackupUnit,
+    incrementalBackupSize,
+    dataSources,
+    dataTransfers
   ])
 
   // -----------------------------------
@@ -437,7 +584,15 @@ export default function PricingV2ContextProvider({
         replicas: newReplicas,
         storageUnit: newStorageUnit,
         storageSize: newStorageSize,
-        storageCompressed: newStorageCompressed
+        storageCompressed: newStorageCompressed,
+        backupFrequency: newBackupFrequency,
+        backupRetention: newBackupRetention,
+        fullBackupUnit: newFullBackupUnit,
+        fullBackupSize: newFullBackupSize,
+        incrementalBackupUnit: newIncrementalBackupUnit,
+        incrementalBackupSize: newIncrementalBackupSize,
+        dataSources: newDataSources,
+        dataTransfers: newDataTransfers
       } = newValues
 
       // Validate plan
@@ -620,6 +775,7 @@ export default function PricingV2ContextProvider({
         if (newStorageUnit === undefined) newStorageUnit = storageUnit
         if (newStorageSize === undefined) newStorageSize = storageSize
 
+        // Set the default storage unit
         if (!newStorageUnit || !['gb', 'pb', 'tb'].includes(newStorageUnit)) {
           newStorageUnit = 'gb'
         }
@@ -627,41 +783,15 @@ export default function PricingV2ContextProvider({
         // Set 500 as the default value
         if (newStorageSize === null) newStorageSize = 500
 
-        // Constrain value to 0-9999
-        newStorageSize = Math.max(Math.min(newStorageSize, 9999), 0)
-
         // Apply plan storage restriciton
-        if (newPlanEntry?.maxStorageCapacity) {
-          let newStorageSizeInGb = newStorageSize
+        const validatedStorage = validateDataSize(
+          newStorageSize,
+          newStorageUnit,
+          newPlanEntry?.maxStorageCapacity
+        )
 
-          // maxStorageCapacity is in gigabytes, convert user values to gb
-          switch (newStorageUnit) {
-            case 'tb':
-              newStorageSizeInGb = newStorageSizeInGb * 1024
-              break
-            case 'pb':
-              newStorageSizeInGb = newStorageSizeInGb * 2048
-              break
-          }
-
-          // If storage size is greater than max, use max value
-          newStorageSizeInGb = Math.min(
-            newStorageSizeInGb,
-            newPlanEntry.maxStorageCapacity
-          )
-
-          // Transform new value for the UI
-          if (newStorageSizeInGb < 9999) {
-            newStorageSize = newStorageSizeInGb
-            newStorageUnit = 'gb'
-          } else if (newStorageSizeInGb > 9999 * 1024) {
-            newStorageSize = newStorageSizeInGb * 2048
-            newStorageUnit = 'pb'
-          } else {
-            newStorageSize = newStorageSizeInGb * 1024
-            newStorageUnit = 'tb'
-          }
-        }
+        newStorageSize = validatedStorage.size
+        newStorageUnit = validatedStorage.unit
       }
 
       // Validate storage compressed
@@ -728,6 +858,13 @@ export default function PricingV2ContextProvider({
       ) {
         setStorageCompressed(newStorageCompressed)
       }
+
+      if (
+        newBackupFrequency !== undefined &&
+        newBackupFrequency !== backupFrequency
+      ) {
+        setBackupFrequency(newBackupFrequency)
+      }
     },
     [
       planEntry,
@@ -745,7 +882,15 @@ export default function PricingV2ContextProvider({
       replicas,
       storageUnit,
       storageSize,
-      storageCompressed
+      storageCompressed,
+      backupFrequency,
+      backupRetention,
+      fullBackupUnit,
+      fullBackupSize,
+      incrementalBackupUnit,
+      incrementalBackupSize,
+      dataSources,
+      dataTransfers
     ]
   )
 
@@ -764,6 +909,7 @@ export default function PricingV2ContextProvider({
         setValues,
         getPlanPricingData,
         getPlanPricingConfig,
+        validateDataSize,
 
         // Data sources
         plans,
@@ -785,6 +931,14 @@ export default function PricingV2ContextProvider({
         storageUnit,
         storageSize,
         storageCompressed,
+        backupFrequency,
+        backupRetention,
+        fullBackupUnit,
+        fullBackupSize,
+        incrementalBackupUnit,
+        incrementalBackupSize,
+        dataSources,
+        dataTransfers,
 
         // Computed values
         planEntry,
@@ -813,7 +967,15 @@ export default function PricingV2ContextProvider({
             replicas,
             storageUnit,
             storageSize,
-            storageCompressed
+            storageCompressed,
+            backupFrequency,
+            backupRetention,
+            fullBackupUnit,
+            fullBackupSize,
+            incrementalBackupUnit,
+            incrementalBackupSize,
+            dataSources,
+            dataTransfers
           },
           null,
           2

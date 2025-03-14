@@ -1,8 +1,11 @@
 import Link from 'next/link'
-import { Fragment, useMemo, useState } from 'react'
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
 import HRSeparator from '@/components/HRSeparator'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import BackupsSelector from '../../fields/BackupsSelector'
 import ComputeSelector from '../../fields/ComputeSelector'
+import DataSourcesSelector from '../../fields/DataSourcesSelector'
+import DataTransferSelector from '../../fields/DataTransferSelector'
 import PlanSelector from '../../fields/PlanSelector'
 import ProviderSelector from '../../fields/ProviderSelector'
 import RegionSelector from '../../fields/RegionSelector'
@@ -11,6 +14,8 @@ import FieldGroupAccordion from '../../ui/FieldGroupAccordion'
 import DisplayPrice from '../DisplayPrice'
 import EstimatorCtas from '../EstimatorCtas'
 import PriceList from '../PriceList'
+
+type Addons = 'backups' | 'dataSources' | 'dataTransfer'
 
 export default function Estimator() {
   const { planEntry } = usePricingV2Context()
@@ -22,22 +27,50 @@ export default function Estimator() {
   const [dataTransferOpen, setDataTransfersOpen] = useState(false)
 
   // Determins the order to display the accordions
-  const [displayOrder, setDisplayOrder] = useState<
-    Array<'backups' | 'dataSources' | 'dataTransfer'>
-  >([])
+  const [addonDisplayOrder, setAddonDisplayOrder] = useState<Array<Addons>>([])
 
-  // If the
+  const addAddon = useCallback(
+    (addon: Addons) => {
+      setAddonDisplayOrder((old) => [
+        ...old.filter((el) => el !== addon),
+        addon
+      ])
+    },
+    [setAddonDisplayOrder]
+  )
+
+  const removeAddon = useCallback(
+    (addon: Addons) => {
+      setAddonDisplayOrder((old) => old.filter((el) => el !== addon))
+    },
+    [setAddonDisplayOrder]
+  )
+
+  // Backups are allowed and user added
   const displayBackups = useMemo(() => {
-    return displayOrder.includes('backups') && planEntry?.allowBackups
-  }, [planEntry, displayOrder])
+    return addonDisplayOrder.includes('backups') && planEntry?.allowBackups
+  }, [planEntry, addonDisplayOrder])
 
+  // Data sources are allowed and user added
   const displayDataSources = useMemo(() => {
-    return displayOrder.includes('dataSources') && planEntry?.allowDataSources
-  }, [planEntry, displayOrder])
+    return (
+      addonDisplayOrder.includes('dataSources') && planEntry?.allowDataSources
+    )
+  }, [planEntry, addonDisplayOrder])
 
+  // Data transfers are allowed and user added
   const displayDataTransfer = useMemo(() => {
-    return displayOrder.includes('dataTransfer') && planEntry?.allowDataTransfer
-  }, [planEntry, displayOrder])
+    return (
+      addonDisplayOrder.includes('dataTransfer') && planEntry?.allowDataTransfer
+    )
+  }, [planEntry, addonDisplayOrder])
+
+  // Open compute when no addons added
+  useEffect(() => {
+    if (!addonDisplayOrder.length && !computeOpen) {
+      setComputeOpen(true)
+    }
+  }, [addonDisplayOrder])
 
   return (
     <div
@@ -49,9 +82,9 @@ export default function Estimator() {
         <RegionSelector displayLabel={false} className='w-full max-w-80' />
       </div>
 
-      <div className='flex flex-col gap-y-8 lg:-mx-6 lg:flex-row lg:items-start lg:justify-center'>
+      <div className='flex flex-col gap-y-8 gap-x-12 lg:-mx-6 lg:flex-row lg:items-start lg:justify-center'>
         {/* Form */}
-        <div className='w-full space-y-6 lg:w-1/2 lg:pr-6'>
+        <div className='w-full space-y-6 lg:w-1/2'>
           <PlanSelector />
           <FieldGroupAccordion
             title='Storage and compute'
@@ -63,39 +96,43 @@ export default function Estimator() {
             </div>
           </FieldGroupAccordion>
 
-          {displayOrder.map((item, index) => {
-            const removeItem = () =>
-              setDisplayOrder((old) => old.filter((el) => el !== item))
+          {addonDisplayOrder.map((item, index) => {
             return (
               <Fragment key={index}>
                 {item === 'backups' && displayBackups && (
                   <FieldGroupAccordion
                     title='Backups'
                     removable={true}
-                    onRemove={removeItem}
+                    onRemove={() => removeAddon('backups')}
                     open={backupsOpen}
                     onOpenClose={setBackupsOpen}>
-                    <div className='space-y-8'>Backups...</div>
+                    <div className='space-y-8'>
+                      <BackupsSelector />
+                    </div>
                   </FieldGroupAccordion>
                 )}
                 {item === 'dataSources' && displayDataSources && (
                   <FieldGroupAccordion
                     title='ClickPipes'
                     removable={true}
-                    onRemove={removeItem}
+                    onRemove={() => removeAddon('dataSources')}
                     open={dataSourcesOpen}
                     onOpenClose={setDataSourcesOpen}>
-                    <div className='space-y-8'>ClickPipes...</div>
+                    <div className='space-y-8'>
+                      <DataSourcesSelector />
+                    </div>
                   </FieldGroupAccordion>
                 )}
                 {item === 'dataTransfer' && displayDataTransfer && (
                   <FieldGroupAccordion
                     title='Data transfer'
                     removable={true}
-                    onRemove={removeItem}
+                    onRemove={() => removeAddon('dataTransfer')}
                     open={dataTransferOpen}
                     onOpenClose={setDataTransfersOpen}>
-                    <div className='space-y-8'>Data transfer...</div>
+                    <div className='space-y-8'>
+                      <DataTransferSelector />
+                    </div>
                   </FieldGroupAccordion>
                 )}
               </Fragment>
@@ -108,10 +145,10 @@ export default function Estimator() {
                 className='text-sm text-primary-300 hover:underline'
                 onClick={(event) => {
                   event.preventDefault()
-                  // Open backups
-                  setDisplayOrder((old) => [...old, 'backups'])
+                  // Add backups
+                  addAddon('backups')
 
-                  // Close others
+                  // Set accordion open states
                   setComputeOpen(false)
                   setBackupsOpen(true)
                   setDataSourcesOpen(false)
@@ -125,10 +162,10 @@ export default function Estimator() {
                 className='text-sm text-primary-300 hover:underline'
                 onClick={(event) => {
                   event.preventDefault()
-                  // Open data sources
-                  setDisplayOrder((old) => [...old, 'dataSources'])
+                  // Add data sources
+                  addAddon('dataSources')
 
-                  // Close others
+                  // Set accordion open states
                   setComputeOpen(false)
                   setBackupsOpen(false)
                   setDataSourcesOpen(true)
@@ -142,10 +179,10 @@ export default function Estimator() {
                 className='text-sm text-primary-300 hover:underline'
                 onClick={(event) => {
                   event.preventDefault()
-                  // Open data transfer
-                  setDisplayOrder((old) => [...old, 'dataTransfer'])
+                  // Add data transfer
+                  addAddon('dataTransfer')
 
-                  // Close others
+                  // Set accordion open states
                   setComputeOpen(false)
                   setBackupsOpen(false)
                   setDataSourcesOpen(false)
@@ -158,7 +195,7 @@ export default function Estimator() {
         </div>
 
         {/* Results */}
-        <div className='w-full lg:w-1/2 lg:max-w-md lg:px-6 sticky top-32'>
+        <div className='w-full lg:w-1/2 lg:max-w-md sticky top-32'>
           <div className='rounded-lg border border-primary-300 bg-slate-900 p-7'>
             <p className='text-center font-inconsolata text-lg text-primary-300'>
               Average price per month
