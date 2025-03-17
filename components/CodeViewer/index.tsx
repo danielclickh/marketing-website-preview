@@ -53,11 +53,13 @@ function CodeViewer({
     return (
       <div className='bg-[#282828] mb-9'>
         <CodeBlock
+          style={{ wordBreak: 'break-word' }}
           language={language}
           onCopy={function Da() {}}
           onCopyError={function Da() {}}
           showLineNumbers={showLineNumbers}
-          wrapLines>
+          wrapLines
+          >
           {codeContent}
         </CodeBlock>
         <CodeInterpreter
