@@ -1,7 +1,5 @@
 import {
   createContext,
-  Dispatch,
-  SetStateAction,
   useCallback,
   useContext,
   useEffect,
@@ -10,84 +8,49 @@ import {
 } from 'react'
 import {
   PricingV2EntryCompute,
+  PricingV2EntryDataSource,
   PricingV2EntryPlan,
-  PricingV2EntryProvider,
-  PricingV2EntryUseCase
+  PricingV2EntryProvider
 } from '@/lib/api/strapi/types'
 import pricingFile from '../../../public/pricingV2File.json'
-import config, { PlanConfig } from '../PricingV2/config'
+import config from '../PricingV2/config'
+import {
+  Context,
+  ContextBackupFrequency,
+  ContextBackupRetention,
+  ContextClickpipes,
+  ContextComputeMaxPrice,
+  ContextComputeMaxSize,
+  ContextComputeMinPrice,
+  ContextComputeMinSize,
+  ContextComputeUnitPrice,
+  ContextEstimateBackupSize,
+  ContextFullBackupSize,
+  ContextFullBackupUnit,
+  ContextHours,
+  ContextIncrementalBackupSize,
+  ContextIncrementalBackupUnit,
+  ContextPlan,
+  ContextProvider,
+  ContextRegion,
+  ContextReplicas,
+  ContextStorageCompressed,
+  ContextStoragePrice,
+  ContextStorageSize,
+  ContextStorageUnit,
+  ContextStorageUnitPrice,
+  ContextTotalMaxPrice,
+  ContextTotalMinPrice,
+  ContextTotalPriceRange,
+  ContextTransfers,
+  ContextUseCase,
+  Data,
+  PricingFile,
+  StorageUnits,
+  Values
+} from '../PricingV2/types'
 
 const AVG_DAYS_PER_MONTH = 30.5
-
-export type PricingFileItem = Array<{
-  id: string
-  aggregationId: string
-  description: string
-  region: string
-  cloudProvider: string
-  pricingBands: Array<{
-    id: string
-    lowerLimit: number
-    fixedPrice: number
-    unitPrice: number
-  }>
-}>
-export type PricingFile = Record<string, PricingFileItem>
-
-export type StorageUnits = 'gb' | 'tb' | 'pb'
-
-// User values
-export type ContextPlan = null | string
-export type ContextProvider = null | string
-export type ContextRegion = null | string
-export type ContextUseCase = null | string
-export type ContextHours = null | number
-export type ContextComputeMinSize = null | number
-export type ContextComputeMaxSize = null | number
-export type ContextReplicas = null | number
-export type ContextStorageUnit = null | StorageUnits
-export type ContextStorageSize = null | number
-export type ContextStorageCompressed = null | boolean
-export type ContextBackupFrequency = null | 'daily' | 'weekly' | 'monthly'
-export type ContextBackupRetention = null | number
-export type ContextFullBackupUnit = null | StorageUnits
-export type ContextFullBackupSize = null | number
-export type ContextIncrementalBackupUnit = null | StorageUnits
-export type ContextIncrementalBackupSize = null | number
-export type ContextDataSources = null | Array<{
-  source: string
-  instances: number
-  dataIngestedUnit?: StorageUnits
-  dataIngestedSize?: number
-}>
-export type ContextDataTransfers = null | Array<
-  | {
-      type: 'internet'
-      unit: StorageUnits
-      size: number
-      region: never
-    }
-  | {
-      type: 'inter-region'
-      unit: StorageUnits
-      size: number
-      region: string
-    }
->
-
-// Computed values
-export type ContextComputeUnitPrice = null | number
-export type ContextStorageUnitPrice = null | number
-export type ContextComputeMinPrice = null | number
-export type ContextComputeMaxPrice = null | number
-export type ContextStoragePrice = null | number
-export type ContextTotalMinPrice = null | number
-export type ContextTotalMaxPrice = null | number
-export type ContextTotalPriceRange = [number] | [number, number]
-
-// -----------------------------------
-// Helper functions
-// -----------------------------------
 
 function getPlanPricingData(planKey: string) {
   return (pricingFile as PricingFile)[planKey]
@@ -141,86 +104,6 @@ function validateDataSize(
   }
 }
 
-// Full context object
-export interface Context {
-  // Helper functions
-  setValues: (values: Partial<Values>) => void
-  getPlanPricingData: (value: string) => undefined | PricingFileItem
-  getPlanPricingConfig: (value: string) => undefined | PlanConfig
-  validateDataSize: (
-    size: number,
-    unit: StorageUnits,
-    maxGb?: number | null
-  ) => { size: number; unit: StorageUnits }
-
-  // Data sources
-  plans: Array<PricingV2EntryPlan>
-  setPlans: Dispatch<SetStateAction<Array<PricingV2EntryPlan>>>
-  providers: Array<PricingV2EntryProvider>
-  setProviders: Dispatch<SetStateAction<Array<PricingV2EntryProvider>>>
-  computes: Array<PricingV2EntryCompute>
-  setComputes: Dispatch<SetStateAction<Array<PricingV2EntryCompute>>>
-
-  // User values
-  plan: ContextPlan
-  provider: ContextProvider
-  region: ContextRegion
-  useCase: ContextUseCase
-  hours: ContextHours
-  computeMinSize: ContextComputeMinSize
-  computeMaxSize: ContextComputeMaxSize
-  replicas: ContextReplicas
-  storageUnit: ContextStorageUnit
-  storageSize: ContextStorageSize
-  storageCompressed: ContextStorageCompressed
-  backupFrequency: ContextBackupFrequency
-  backupRetention: ContextBackupRetention
-  fullBackupUnit: ContextFullBackupUnit
-  fullBackupSize: ContextFullBackupSize
-  incrementalBackupUnit: ContextIncrementalBackupUnit
-  incrementalBackupSize: ContextIncrementalBackupSize
-  dataSources: ContextDataSources
-  dataTransfers: ContextDataTransfers
-
-  // Computed values
-  planEntry: undefined | PricingV2EntryPlan
-  providerEntry: undefined | PricingV2EntryProvider
-  useCaseEntry: undefined | PricingV2EntryUseCase
-  computeUnitPrice: ContextComputeUnitPrice
-  storageUnitPrice: ContextStorageUnitPrice
-  computeMinPrice: ContextComputeMinPrice
-  computeMaxPrice: ContextComputeMaxPrice
-  storagePrice: ContextStoragePrice
-  totalMinPrice: ContextTotalMinPrice
-  totalMaxPrice: ContextTotalMaxPrice
-  totalPriceRange: ContextTotalPriceRange
-}
-
-export type Data = Pick<Context, 'plans' | 'providers' | 'computes'>
-
-export type Values = Pick<
-  Context,
-  | 'plan'
-  | 'provider'
-  | 'region'
-  | 'useCase'
-  | 'hours'
-  | 'computeMinSize'
-  | 'computeMaxSize'
-  | 'replicas'
-  | 'storageUnit'
-  | 'storageSize'
-  | 'storageCompressed'
-  | 'backupFrequency'
-  | 'backupRetention'
-  | 'fullBackupUnit'
-  | 'fullBackupSize'
-  | 'incrementalBackupUnit'
-  | 'incrementalBackupSize'
-  | 'dataSources'
-  | 'dataTransfers'
->
-
 const PricingV2Context = createContext<Context>({
   // Helper functions
   setValues: () => null,
@@ -235,6 +118,8 @@ const PricingV2Context = createContext<Context>({
   setProviders: () => {},
   computes: [],
   setComputes: () => {},
+  dataSources: [],
+  setDataSources: () => {},
 
   // User values
   plan: null,
@@ -250,12 +135,13 @@ const PricingV2Context = createContext<Context>({
   storageCompressed: null,
   backupFrequency: null,
   backupRetention: null,
+  estimateBackupSize: null,
   fullBackupUnit: null,
   fullBackupSize: null,
   incrementalBackupUnit: null,
   incrementalBackupSize: null,
-  dataSources: null,
-  dataTransfers: null,
+  clickpipes: null,
+  transfers: null,
 
   // Computed values
   planEntry: undefined,
@@ -300,6 +186,9 @@ export default function PricingV2ContextProvider({
   const [computes, setComputes] = useState<Array<PricingV2EntryCompute>>(
     data.computes
   )
+  const [dataSources, setDataSources] = useState<
+    Array<PricingV2EntryDataSource>
+  >(data.dataSources)
 
   // User values
   const [plan, setPlan] = useState<ContextPlan>(null)
@@ -338,6 +227,11 @@ export default function PricingV2ContextProvider({
     useState<ContextBackupFrequency>(startingValues?.backupFrequency ?? null)
   const [backupRetention, setBackupRetention] =
     useState<ContextBackupRetention>(startingValues?.backupRetention ?? null)
+
+  const [estimateBackupSize, setEstimateBackupSize] =
+    useState<ContextEstimateBackupSize>(
+      startingValues?.estimateBackupSize ?? null
+    )
   const [fullBackupUnit, setFullBackupUnit] = useState<ContextFullBackupUnit>(
     startingValues?.fullBackupUnit ?? null
   )
@@ -352,11 +246,11 @@ export default function PricingV2ContextProvider({
     useState<ContextIncrementalBackupSize>(
       startingValues?.incrementalBackupSize ?? null
     )
-  const [dataSources, setDataSources] = useState<ContextDataSources>(
-    startingValues?.dataSources ?? null
+  const [clickpipes, setClickpipes] = useState<ContextClickpipes>(
+    startingValues?.clickpipes ?? null
   )
-  const [dataTransfers, setDataTransfers] = useState<ContextDataTransfers>(
-    startingValues?.dataTransfers ?? null
+  const [transfers, setTransfers] = useState<ContextTransfers>(
+    startingValues?.transfers ?? null
   )
 
   // -----------------------------------
@@ -533,12 +427,13 @@ export default function PricingV2ContextProvider({
         storageCompressed,
         backupFrequency,
         backupRetention,
+        estimateBackupSize,
         fullBackupUnit,
         fullBackupSize,
         incrementalBackupUnit,
         incrementalBackupSize,
-        dataSources,
-        dataTransfers
+        clickpipes,
+        transfers
       })
     }
   }, [
@@ -553,14 +448,15 @@ export default function PricingV2ContextProvider({
     storageUnit,
     storageSize,
     storageCompressed,
+    estimateBackupSize,
     backupFrequency,
     backupRetention,
     fullBackupUnit,
     fullBackupSize,
     incrementalBackupUnit,
     incrementalBackupSize,
-    dataSources,
-    dataTransfers
+    clickpipes,
+    transfers
   ])
 
   // -----------------------------------
@@ -587,12 +483,13 @@ export default function PricingV2ContextProvider({
         storageCompressed: newStorageCompressed,
         backupFrequency: newBackupFrequency,
         backupRetention: newBackupRetention,
+        estimateBackupSize: newEstimateBackupSize,
         fullBackupUnit: newFullBackupUnit,
         fullBackupSize: newFullBackupSize,
         incrementalBackupUnit: newIncrementalBackupUnit,
         incrementalBackupSize: newIncrementalBackupSize,
-        dataSources: newDataSources,
-        dataTransfers: newDataTransfers
+        clickpipes: newDataSources,
+        transfers: newDataTransfers
       } = newValues
 
       // Validate plan
@@ -799,6 +696,25 @@ export default function PricingV2ContextProvider({
         newStorageCompressed = !!newStorageCompressed
       }
 
+      // Validate backup frequency (in hours)
+      if (newBackupFrequency !== undefined) {
+        if (
+          newBackupFrequency !== null &&
+          ![6, 8, 12, 16, 20, 24, 36, 48].includes(newBackupFrequency)
+        ) {
+          newBackupRetention = null
+        }
+      }
+
+      // Limit backup retention to 1-30 days
+      if (newBackupRetention !== undefined) {
+        if (newBackupRetention !== null) {
+          newBackupRetention = Math.max(1, Math.min(30, newBackupRetention))
+        } else {
+          newBackupRetention = null
+        }
+      }
+
       if (newPlanEntry !== undefined && newPlanEntry !== planEntry) {
         setPlan(newPlanEntry.slug)
       }
@@ -865,6 +781,48 @@ export default function PricingV2ContextProvider({
       ) {
         setBackupFrequency(newBackupFrequency)
       }
+
+      if (
+        newBackupRetention !== undefined &&
+        newBackupRetention !== backupRetention
+      ) {
+        setBackupRetention(newBackupRetention)
+      }
+
+      if (
+        newEstimateBackupSize !== undefined &&
+        newEstimateBackupSize !== estimateBackupSize
+      ) {
+        setEstimateBackupSize(newEstimateBackupSize)
+      }
+
+      if (
+        newFullBackupUnit !== undefined &&
+        newFullBackupUnit !== fullBackupUnit
+      ) {
+        setFullBackupUnit(newFullBackupUnit)
+      }
+
+      if (
+        newFullBackupSize !== undefined &&
+        newFullBackupSize !== fullBackupSize
+      ) {
+        setFullBackupSize(newFullBackupSize)
+      }
+
+      if (
+        newIncrementalBackupUnit !== undefined &&
+        newIncrementalBackupUnit !== incrementalBackupUnit
+      ) {
+        setIncrementalBackupUnit(newIncrementalBackupUnit)
+      }
+
+      if (
+        newIncrementalBackupSize !== undefined &&
+        newIncrementalBackupSize !== incrementalBackupSize
+      ) {
+        setIncrementalBackupSize(newIncrementalBackupSize)
+      }
     },
     [
       planEntry,
@@ -885,12 +843,13 @@ export default function PricingV2ContextProvider({
       storageCompressed,
       backupFrequency,
       backupRetention,
+      estimateBackupSize,
       fullBackupUnit,
       fullBackupSize,
       incrementalBackupUnit,
       incrementalBackupSize,
-      dataSources,
-      dataTransfers
+      clickpipes,
+      transfers
     ]
   )
 
@@ -918,6 +877,8 @@ export default function PricingV2ContextProvider({
         setProviders,
         computes,
         setComputes,
+        dataSources,
+        setDataSources,
 
         // User values
         plan,
@@ -933,12 +894,13 @@ export default function PricingV2ContextProvider({
         storageCompressed,
         backupFrequency,
         backupRetention,
+        estimateBackupSize,
         fullBackupUnit,
         fullBackupSize,
         incrementalBackupUnit,
         incrementalBackupSize,
-        dataSources,
-        dataTransfers,
+        clickpipes,
+        transfers,
 
         // Computed values
         planEntry,
@@ -970,12 +932,13 @@ export default function PricingV2ContextProvider({
             storageCompressed,
             backupFrequency,
             backupRetention,
+            estimateBackupSize,
             fullBackupUnit,
             fullBackupSize,
             incrementalBackupUnit,
             incrementalBackupSize,
-            dataSources,
-            dataTransfers
+            clickpipes,
+            transfers
           },
           null,
           2

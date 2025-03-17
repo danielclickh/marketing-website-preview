@@ -1,5 +1,6 @@
 import {
   PricingV2EntryCompute,
+  PricingV2EntryDataSource,
   PricingV2EntryPlan,
   PricingV2EntryProvider
 } from './types'
@@ -237,6 +238,21 @@ export async function getPricingV2Computes() {
     fields: ['name', 'size'],
     sort: ['size:asc']
   })) as Array<PricingV2EntryCompute>
+}
+
+export async function getPricingV2DataSources() {
+  return (await fetchAll('pricing-v2-data-sources', {
+    populate: ['logo'],
+    fields: [
+      'name',
+      'slug',
+      'order',
+      'dataIngested',
+      'excludeFromCalculations',
+      'excludeFromCalculationsLabel'
+    ],
+    sort: ['order:asc', 'name:asc']
+  })) as Array<PricingV2EntryDataSource>
 }
 
 export async function findImageDetails(imageUrl: string) {

@@ -14,6 +14,7 @@ import {
   findAll,
   findOne,
   getPricingV2Computes,
+  getPricingV2DataSources,
   getPricingV2Plans,
   getPricingV2Providers
 } from '@/lib/api/strapi'
@@ -133,19 +134,22 @@ export const getServerSideProps: GetServerSideProps<PricingPageProps> =
     const plansPromise = getPricingV2Plans()
     const providersPromise = getPricingV2Providers()
     const computesPromise = getPricingV2Computes()
+    const dataSourcesPromise = getPricingV2DataSources()
 
     const [
       { hero, contactSection, meteredPricing, seo },
       commonProps,
       plans,
       providers,
-      computes
+      computes,
+      dataSources
     ] = await Promise.all([
       pagePromise,
       commonPropsPromise,
       plansPromise,
       providersPromise,
-      computesPromise
+      computesPromise,
+      dataSourcesPromise
     ])
 
     seo.path = '/pricing'
@@ -160,6 +164,7 @@ export const getServerSideProps: GetServerSideProps<PricingPageProps> =
         plans,
         providers,
         computes,
+        dataSources,
         requestParams: query,
         ...commonProps
       } as PricingPagePropsV2
@@ -177,6 +182,7 @@ export default function PricingPage({
   plans,
   providers,
   computes,
+  dataSources,
   requestParams,
   headerData,
   footerData
@@ -263,6 +269,7 @@ export default function PricingPage({
                 plans={plans}
                 providers={providers}
                 computes={computes}
+                dataSources={dataSources}
                 afterTableFilters={<RegionRequest />}
                 inbetweenContent={
                   <>

@@ -3,6 +3,7 @@ import Estimator from './parts/Estimator'
 import Table from './parts/Table'
 import {
   PricingV2EntryCompute,
+  PricingV2EntryDataSource,
   PricingV2EntryPlan,
   PricingV2EntryProvider
 } from '@/lib/api/strapi/types'
@@ -15,6 +16,7 @@ export interface PricingV2Props {
   plans: Array<PricingV2EntryPlan>
   providers: Array<PricingV2EntryProvider>
   computes: Array<PricingV2EntryCompute>
+  dataSources: Array<PricingV2EntryDataSource>
 
   requestParams?: ParsedUrlQuery
 
@@ -27,6 +29,7 @@ export default function PricingV2({
   plans,
   providers,
   computes,
+  dataSources,
   requestParams,
   beforeTableFilters,
   afterTableFilters,
@@ -60,8 +63,8 @@ export default function PricingV2({
   const urlBackupRetention = cleanUrlParam(requestParams?.backupRetention)
   const urlFullBackupUnit = cleanUrlParam(requestParams?.fullBackupUnit)
   const urlFullBackupSize = cleanUrlParam(requestParams?.fullBackupSize)
-  const urlDataSources = cleanUrlParam(requestParams?.dataSources)
-  const urlDataTransfers = cleanUrlParam(requestParams?.dataTransfers)
+  // const urlDataSources = cleanUrlParam(requestParams?.clickpipes)
+  // const urlDataTransfers = cleanUrlParam(requestParams?.dataTransfers)
 
   // Combine URL and default values
   const startingValues: Partial<Values> = {
@@ -83,47 +86,38 @@ export default function PricingV2({
         : null,
     storageSize: typeof urlStorageSize === 'number' ? urlStorageSize : null,
     storageCompressed:
-      typeof urlStorageCompressed === 'boolean' ? urlStorageCompressed : null
+      typeof urlStorageCompressed === 'boolean' ? urlStorageCompressed : null,
+    backupFrequency:
+      typeof urlBackupFrequency === 'number' ? urlBackupFrequency : null,
+    backupRetention:
+      typeof urlBackupRetention === 'number' ? urlBackupRetention : null
   }
 
   // Update URL when pricing values have changed
   const onChangeHandler = useCallback(
     throttle((values: Values) => {
-      let queryChanged = false
-      let modifiedQuery = { ...router.query }
+      const newUrl = new URL(window.location.toString())
 
-      Object.entries(values).forEach(([key, value]) => {
-        if (value !== null) {
-          if (value !== modifiedQuery[key]) {
-            queryChanged = true
-            modifiedQuery[key] = value.toString()
-          }
-        } else {
-          queryChanged = true
-          delete modifiedQuery[key]
-        }
-      })
-
-      // Store values in the URL
-      if (queryChanged) {
-        const newUrl = new URL(window.location.toString())
-        Object.entries(modifiedQuery)
-          .reverse()
-          .forEach(([key, value]) => {
+      Object.entries(values)
+        .reverse()
+        .forEach(([key, value]) => {
+          if (value !== null) {
             newUrl.searchParams.set(key, value?.toString() || '')
-          })
+          } else {
+            newUrl.searchParams.delete(key)
+          }
+        })
 
-        // We use the native API because of a bug where the nextjs
-        // `router.replace(...)` causes all iframes on the page to reload
-        window.history.replaceState(null, '', newUrl.toString())
-      }
+      // We use the native API because of a bug where the nextjs
+      // `router.replace(...)` causes all iframes on the page to reload
+      window.history.replaceState(null, '', newUrl.toString())
     }, 200),
     [router.query]
   )
 
   return (
     <PricingV2ContextProvider
-      data={{ plans, providers, computes }}
+      data={{ plans, providers, computes, dataSources }}
       startingValues={startingValues}
       onChange={onChangeHandler}>
       <Table

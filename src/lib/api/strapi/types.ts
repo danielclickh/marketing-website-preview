@@ -112,6 +112,15 @@ export interface PricingV2EntryUseCase {
   activeHours: number
 }
 
+export interface PricingV2EntryDataSource {
+  name: string
+  slug: string
+  icon: StrapiImageType
+  dataIngested: boolean
+  excludeFromCalculations: boolean
+  excludeFromCalculationsLabel: null | string
+}
+
 export interface PricingV2ComponentPerk {
   text: string
   icon: 'None' | 'Tick' | 'Dash'

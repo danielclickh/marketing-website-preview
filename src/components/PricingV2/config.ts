@@ -1,15 +1,6 @@
-export type PlanConfig = {
-  planTemplateId: string
-  aggregationIds: {
-    compute: Array<string>
-    storage: Array<string>
-  }
-}
-export type Config = {
-  plans: Record<string, PlanConfig>
-}
+import { PricingConfig } from './types'
 
-const config: Config = {
+const config: PricingConfig = {
   plans: {
     basic: {
       planTemplateId: 'c84c5422-f679-48b4-9910-4265b285795f',

@@ -1,6 +1,7 @@
 import { CommonProps } from './homepage'
 import {
   PricingV2EntryCompute,
+  PricingV2EntryDataSource,
   PricingV2EntryPlan,
   PricingV2EntryProvider,
   SeoMetadata,
@@ -104,6 +105,7 @@ export interface PricingPagePropsV1 extends PricingPageBase {
   plans: never
   providers: never
   computes: never
+  dataSources: never
   pricingByRegion: Array<RegionPricing>
   pricingPlans: Array<PricingPlanData>
   cloudProviders: Array<CloudProviderType>
@@ -114,6 +116,7 @@ export interface PricingPagePropsV2 extends PricingPageBase {
   plans: Array<PricingV2EntryPlan>
   providers: Array<PricingV2EntryProvider>
   computes: Array<PricingV2EntryCompute>
+  dataSources: Array<PricingV2EntryDataSource>
   pricingByRegion: never
   pricingPlans: never
   cloudProviders: never

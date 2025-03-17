@@ -18,7 +18,8 @@ import PriceList from '../PriceList'
 type Addons = 'backups' | 'dataSources' | 'dataTransfer'
 
 export default function Estimator() {
-  const { planEntry } = usePricingV2Context()
+  const { setValues, planEntry, backupFrequency, backupRetention } =
+    usePricingV2Context()
 
   // Tracks the accordion "open" states. Allows us to open and close programatically.
   const [computeOpen, setComputeOpen] = useState(true)
@@ -65,6 +66,14 @@ export default function Estimator() {
     )
   }, [planEntry, addonDisplayOrder])
 
+  // Sync backup accordion with context values
+  useEffect(() => {
+    if (backupFrequency && backupRetention) {
+      addAddon('backups')
+      setBackupsOpen(true)
+    }
+  }, [backupFrequency, backupRetention])
+
   // Open compute when no addons added
   useEffect(() => {
     if (!addonDisplayOrder.length && !computeOpen) {
@@ -103,7 +112,16 @@ export default function Estimator() {
                   <FieldGroupAccordion
                     title='Backups'
                     removable={true}
-                    onRemove={() => removeAddon('backups')}
+                    onRemove={() => {
+                      // Remove from UI
+                      removeAddon('backups')
+
+                      // Reset context values
+                      setValues({
+                        backupFrequency: null,
+                        backupRetention: null
+                      })
+                    }}
                     open={backupsOpen}
                     onOpenClose={setBackupsOpen}>
                     <div className='space-y-8'>
@@ -145,12 +163,14 @@ export default function Estimator() {
                 className='text-sm text-primary-300 hover:underline'
                 onClick={(event) => {
                   event.preventDefault()
-                  // Add backups
-                  addAddon('backups')
+                  // Setting default values add's the backups accordion to the UI
+                  setValues({
+                    backupFrequency: 24,
+                    backupRetention: 1
+                  })
 
-                  // Set accordion open states
+                  // Close other accordions
                   setComputeOpen(false)
-                  setBackupsOpen(true)
                   setDataSourcesOpen(false)
                   setDataTransfersOpen(false)
                 }}>
