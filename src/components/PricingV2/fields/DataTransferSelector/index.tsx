@@ -119,8 +119,8 @@ export default function DataTransferSelector() {
                 return (
                   <>
                     <div key={transferIndex} className='flex gap-2 items-end'>
-                      <div className='grid grid-cols-1 lg:grid-cols-12 gap-6'>
-                        <div className='lg:col-span-5'>
+                      <div className='flex-1 grid grid-cols-1 md:grid-cols-2 gap-6'>
+                        <div>
                           {item.type === 'public-internet' && (
                             <Label>Public internet egress</Label>
                           )}
@@ -139,26 +139,26 @@ export default function DataTransferSelector() {
                             }}
                           />
                         </div>
-                        <div className='lg:col-span-7'>
-                          {item.type === 'inter-region' &&
-                            providerEntry?.regions &&
-                            providerEntry.regions.length > 0 && (
-                              <>
-                                <Label>Region</Label>
-                                <ProviderRegion
-                                  value={
-                                    item.region || providerEntry.regions[0].key
-                                  }
-                                  onChange={(value) => {
-                                    createOrUpdateTransfer(transferIndex, {
-                                      ...item,
-                                      region: value
-                                    })
-                                  }}
-                                />
-                              </>
-                            )}
-                        </div>
+                        {item.type === 'inter-region' &&
+                          providerEntry?.regions &&
+                          providerEntry.regions.length > 0 && (
+                            <div>
+                              <Label>Region</Label>
+                              <ProviderRegion
+                                value={
+                                  item.region ||
+                                  providerEntry.regions?.[0]?.key ||
+                                  null
+                                }
+                                onChange={(value) => {
+                                  createOrUpdateTransfer(transferIndex, {
+                                    ...item,
+                                    region: value
+                                  })
+                                }}
+                              />
+                            </div>
+                          )}
                       </div>
                       <div className='h-10 flex items-center flex-grow-0 flex-shrink-0'>
                         <button

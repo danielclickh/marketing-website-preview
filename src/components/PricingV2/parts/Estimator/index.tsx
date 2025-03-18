@@ -150,7 +150,15 @@ export default function Estimator() {
                   <FieldGroupAccordion
                     title='Data transfer'
                     removable={true}
-                    onRemove={() => removeAddon('dataTransfer')}
+                    onRemove={() => {
+                      // Remove from UI
+                      removeAddon('dataTransfer')
+
+                      // Reset data transfer context values
+                      setValues({
+                        transfers: null
+                      })
+                    }}
                     open={dataTransferOpen}
                     onOpenClose={setDataTransfersOpen}>
                     <div className='space-y-8'>
