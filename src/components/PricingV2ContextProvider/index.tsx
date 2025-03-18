@@ -190,7 +190,10 @@ export default function PricingV2ContextProvider({
     Array<PricingV2EntryDataSource>
   >(data.dataSources)
 
+  // -----------------------------------
   // User values
+  // -----------------------------------
+
   const [plan, setPlan] = useState<ContextPlan>(null)
   const [provider, setProvider] = useState<ContextProvider>(
     startingValues?.provider ?? null
@@ -460,7 +463,7 @@ export default function PricingV2ContextProvider({
   ])
 
   // -----------------------------------
-  // Value validators
+  // Context setter
   // -----------------------------------
 
   const setValues = useCallback(
@@ -488,8 +491,8 @@ export default function PricingV2ContextProvider({
         fullBackupSize: newFullBackupSize,
         incrementalBackupUnit: newIncrementalBackupUnit,
         incrementalBackupSize: newIncrementalBackupSize,
-        clickpipes: newDataSources,
-        transfers: newDataTransfers
+        clickpipes: newClickpipes,
+        transfers: newTransfers
       } = newValues
 
       // Validate plan
@@ -823,6 +826,10 @@ export default function PricingV2ContextProvider({
       ) {
         setIncrementalBackupSize(newIncrementalBackupSize)
       }
+
+      if (newTransfers !== undefined && newTransfers !== transfers) {
+        setTransfers(newTransfers)
+      }
     },
     [
       planEntry,
@@ -854,7 +861,7 @@ export default function PricingV2ContextProvider({
   )
 
   // -----------------------------------
-  // On mount
+  // Initialize states on mount
   // -----------------------------------
 
   useEffect(() => {

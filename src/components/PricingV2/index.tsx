@@ -1,16 +1,17 @@
-import PricingV2ContextProvider, { Values } from '../PricingV2ContextProvider'
-import Estimator from './parts/Estimator'
-import Table from './parts/Table'
+import { throttle } from 'lodash'
+import { useRouter } from 'next/router'
+import { ParsedUrlQuery } from 'querystring'
+import { useCallback } from 'react'
 import {
   PricingV2EntryCompute,
   PricingV2EntryDataSource,
   PricingV2EntryPlan,
   PricingV2EntryProvider
 } from '@/lib/api/strapi/types'
-import { throttle } from 'lodash'
-import { useRouter } from 'next/router'
-import { ParsedUrlQuery } from 'querystring'
-import { useCallback } from 'react'
+import PricingV2ContextProvider from '../PricingV2ContextProvider'
+import Estimator from './parts/Estimator'
+import Table from './parts/Table'
+import { Values } from './types'
 
 export interface PricingV2Props {
   plans: Array<PricingV2EntryPlan>
@@ -59,6 +60,7 @@ export default function PricingV2({
   const urlStorageSize = cleanUrlParam(requestParams?.storageSize)
   const urlStorageCompressed = cleanUrlParam(requestParams?.storageCompressed)
 
+  const urlEstimateBackupSize = cleanUrlParam(requestParams?.estimateBackupSize)
   const urlBackupFrequency = cleanUrlParam(requestParams?.backupFrequency)
   const urlBackupRetention = cleanUrlParam(requestParams?.backupRetention)
   const urlFullBackupUnit = cleanUrlParam(requestParams?.fullBackupUnit)
@@ -87,6 +89,8 @@ export default function PricingV2({
     storageSize: typeof urlStorageSize === 'number' ? urlStorageSize : null,
     storageCompressed:
       typeof urlStorageCompressed === 'boolean' ? urlStorageCompressed : null,
+    estimateBackupSize:
+      typeof urlEstimateBackupSize === 'boolean' ? urlEstimateBackupSize : null,
     backupFrequency:
       typeof urlBackupFrequency === 'number' ? urlBackupFrequency : null,
     backupRetention:

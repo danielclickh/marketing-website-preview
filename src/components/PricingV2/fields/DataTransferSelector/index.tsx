@@ -1,3 +1,243 @@
+import { ExternalLinkIcon } from '@heroicons/react/outline'
+import Link from 'next/link'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import HRSeparator from '../../../HRSeparator'
+import { usePricingV2Context } from '../../../PricingV2ContextProvider'
+import { Transfer } from '../../types'
+import DataSize from '../../ui/DataSize'
+import Label from '../../ui/Label'
+import ProviderRegion from '../../ui/ProviderRegion'
+
 export default function DataTransferSelector() {
-  return <>Data transfer...</>
+  const { setValues, providerEntry, transfers } = usePricingV2Context()
+
+  const [localTransfers, setLocalTransfers] = useState<Array<Transfer>>([])
+
+  const maxPublicInternets = 1
+  const maxInterRegions = 10
+
+  const {
+    publicInternet: totalPublicInternets,
+    interRegion: totalInterRegions
+  } = useMemo(() => {
+    let publicInternet = 0
+    let interRegion = 0
+    localTransfers.forEach((item) => {
+      switch (item.type) {
+        case 'public-internet':
+          publicInternet++
+          break
+        case 'inter-region':
+          interRegion++
+          break
+      }
+    })
+
+    return { publicInternet, interRegion }
+  }, [localTransfers])
+
+  const canAddPublicInternet = totalPublicInternets < maxPublicInternets
+  const canAddInterRegion = totalInterRegions < maxInterRegions
+
+  // Set starting values on mount
+  useEffect(() => {
+    if (transfers) {
+      setLocalTransfers(transfers)
+    }
+  }, [])
+
+  useEffect(() => {
+    setValues({ transfers: localTransfers })
+  }, [localTransfers])
+
+  const createOrUpdateTransfer = useCallback(
+    (index: number, transfer: Transfer) => {
+      setLocalTransfers((old) => {
+        const newValue = [...old]
+        newValue[index] = transfer
+        return newValue
+      })
+    },
+    [setLocalTransfers]
+  )
+
+  const removeTransfer = useCallback(
+    (index: number) => {
+      setLocalTransfers((old) => {
+        const newValue = [...old]
+        if (newValue.hasOwnProperty(index)) {
+          newValue.splice(index, 1)
+        }
+        return newValue
+      })
+    },
+    [setLocalTransfers]
+  )
+
+  return (
+    <>
+      {/* Fix inter-region egress */}
+      {!providerEntry?.isDynamicInterRegionEgress && (
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+          <div>
+            <Label>Public internet egress</Label>
+            <DataSize
+              sizeValue={localTransfers[0]?.size || 0}
+              unitValue={localTransfers[0]?.unit || 'gb'}
+              onChange={(value) => {
+                createOrUpdateTransfer(0, {
+                  type: 'public-internet',
+                  size: value.size || 0,
+                  unit: value.unit || 'gb'
+                })
+              }}
+            />
+          </div>
+          <div>
+            <Label>Inter-region egress</Label>
+            <DataSize
+              sizeValue={localTransfers[1]?.size || 0}
+              unitValue={localTransfers[1]?.unit || 'gb'}
+              onChange={(value) => {
+                createOrUpdateTransfer(1, {
+                  type: 'inter-region',
+                  size: value.size || 0,
+                  unit: value.unit || 'gb'
+                })
+              }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Dynamic inter-region egress */}
+      {providerEntry?.isDynamicInterRegionEgress && (
+        <>
+          {localTransfers.length > 0 && (
+            <div className='space-y-4'>
+              {localTransfers.map((item, transferIndex) => {
+                return (
+                  <>
+                    <div key={transferIndex} className='flex gap-2 items-end'>
+                      <div className='grid grid-cols-1 lg:grid-cols-12 gap-6'>
+                        <div className='lg:col-span-5'>
+                          {item.type === 'public-internet' && (
+                            <Label>Public internet egress</Label>
+                          )}
+                          {item.type === 'inter-region' && (
+                            <Label>Inter-region egress</Label>
+                          )}
+                          <DataSize
+                            sizeValue={item.size}
+                            unitValue={item.unit}
+                            onChange={(value) => {
+                              createOrUpdateTransfer(transferIndex, {
+                                ...item,
+                                size: value.size || 0,
+                                unit: value.unit || 'gb'
+                              })
+                            }}
+                          />
+                        </div>
+                        <div className='lg:col-span-7'>
+                          {item.type === 'inter-region' &&
+                            providerEntry?.regions &&
+                            providerEntry.regions.length > 0 && (
+                              <>
+                                <Label>Region</Label>
+                                <ProviderRegion
+                                  value={
+                                    item.region || providerEntry.regions[0].key
+                                  }
+                                  onChange={(value) => {
+                                    createOrUpdateTransfer(transferIndex, {
+                                      ...item,
+                                      region: value
+                                    })
+                                  }}
+                                />
+                              </>
+                            )}
+                        </div>
+                      </div>
+                      <div className='h-10 flex items-center flex-grow-0 flex-shrink-0'>
+                        <button
+                          onClick={(event) => {
+                            event.preventDefault()
+                            removeTransfer(transferIndex)
+                          }}
+                          className='flex items-center justify-center w-8 aspect-square rounded transition-colors hover:bg-white/10'>
+                          <span className='sr-only'>Remove</span>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            width='16'
+                            height='16'
+                            fill='none'
+                            viewBox='0 0 16 16'>
+                            <path
+                              stroke='#FFBABA'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              strokeWidth='1.5'
+                              d='M12 4v8.5c0 .83-.68 1.5-1.51 1.5h-5C4.66 14 4 13.34 4 12.5V4m9 0H3m3.67-2h2.66m0 4.67v4.67m-2.66 0V6.67'
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    <HRSeparator />
+                  </>
+                )
+              })}
+            </div>
+          )}
+
+          {(canAddPublicInternet || canAddInterRegion) && (
+            <div className='flex gap-3 flex-wrap'>
+              {canAddPublicInternet && (
+                <button
+                  onClick={(event) => {
+                    event.preventDefault()
+                    createOrUpdateTransfer(localTransfers.length, {
+                      type: 'public-internet',
+                      size: 0,
+                      unit: 'gb'
+                    })
+                  }}
+                  className='px-3 py-1 rounded border border-neutral-700 bg-neutral-725 transition-colors hover:border-neutral-600 active:bg-neutral-800'>
+                  Add public internet egress
+                </button>
+              )}
+              {canAddInterRegion && (
+                <button
+                  onClick={(event) => {
+                    event.preventDefault()
+                    createOrUpdateTransfer(localTransfers.length, {
+                      type: 'inter-region',
+                      size: 0,
+                      unit: 'gb'
+                    })
+                  }}
+                  className='px-3 py-1 rounded border border-neutral-700 bg-neutral-725 transition-colors hover:border-neutral-600 active:bg-neutral-800'>
+                  Add inter-region egress
+                </button>
+              )}
+            </div>
+          )}
+        </>
+      )}
+
+      {/* Helper text */}
+      <p className='text-sm'>
+        For details on data transfer and billing, visit our{' '}
+        <Link
+          href='/docs/cloud/manage/network-data-transfer'
+          target='_blank'
+          title='Opens in a new tab'
+          className='text-primary-300 hover:underline'>
+          data transfer docs <ExternalLinkIcon className='h-4 w-4 inline' />
+        </Link>
+      </p>
+    </>
+  )
 }

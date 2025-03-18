@@ -36,6 +36,20 @@ export type PricingFileItem = Array<{
 
 export type PricingFile = Record<string, PricingFileItem>
 
+export type ClickPipe = {
+  source: string
+  instances: number
+  dataIngestedUnit?: StorageUnits
+  dataIngestedSize?: number
+}
+
+export type Transfer = {
+  type: 'inter-region' | 'public-internet'
+  unit: StorageUnits
+  size: number
+  region?: string | null
+}
+
 // User values
 export type ContextPlan = null | string
 export type ContextProvider = null | string
@@ -55,26 +69,8 @@ export type ContextFullBackupUnit = null | StorageUnits
 export type ContextFullBackupSize = null | number
 export type ContextIncrementalBackupUnit = null | StorageUnits
 export type ContextIncrementalBackupSize = null | number
-export type ContextClickpipes = null | Array<{
-  source: string
-  instances: number
-  dataIngestedUnit?: StorageUnits
-  dataIngestedSize?: number
-}>
-export type ContextTransfers = null | Array<
-  | {
-      type: 'internet'
-      unit: StorageUnits
-      size: number
-      region: never
-    }
-  | {
-      type: 'inter-region'
-      unit: StorageUnits
-      size: number
-      region: string
-    }
->
+export type ContextClickpipes = null | Array<ClickPipe>
+export type ContextTransfers = null | Array<Transfer>
 
 // Computed values
 export type ContextComputeUnitPrice = null | number

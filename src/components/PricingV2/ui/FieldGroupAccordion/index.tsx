@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useCallback, useEffect, useState } from 'react'
 import HRSeparator from '../../../HRSeparator'
 
@@ -105,7 +105,7 @@ export default function FieldGroupAccordion({
         {removable && (
           <button
             onClick={handleRemove}
-            className='flex-grow-0 flex-shrink-0 group/remove flex items-center justify-center gap-2 w-6 aspect-square rounded transition-colors hover:bg-white/10 m-4'>
+            className='flex-grow-0 flex-shrink-0 group/remove flex items-center justify-center w-6 aspect-square rounded transition-colors hover:bg-white/10 m-4'>
             <span className='sr-only'>Remove</span>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -124,20 +124,20 @@ export default function FieldGroupAccordion({
           </button>
         )}
       </div>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, height: 0, y: -16 }}
-            animate={{ opacity: 1, height: 'auto', y: 0 }}
-            exit={{ opacity: 0, height: 0, y: -16 }}
-            transition={{ type: 'spring', bounce: 0, duration: 0.5 }}>
-            <div className='p-4'>
-              <HRSeparator className='-mt-4 mb-4' />
-              {children}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div
+        variants={{
+          closed: { opacity: 0, height: 0, y: -16 },
+          open: { opacity: 1, height: 'auto', y: 0 }
+        }}
+        initial='closed'
+        animate={open ? 'open' : 'closed'}
+        transition={{ type: 'spring', bounce: 0, duration: 0.5 }}
+        className={open ? '' : 'pointer-events-none'}>
+        <div className='p-4'>
+          <HRSeparator className='-mt-4 mb-4' />
+          {children}
+        </div>
+      </motion.div>
     </div>
   )
 }

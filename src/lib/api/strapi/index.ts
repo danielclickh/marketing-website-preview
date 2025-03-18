@@ -228,7 +228,14 @@ export async function getPricingV2Plans() {
 export async function getPricingV2Providers() {
   return (await fetchAll('pricing-v2-providers', {
     populate: ['logo', 'regions', 'regions.icon'],
-    fields: ['name', 'slug', 'order', 'internetEgress', 'interRegionEgress'],
+    fields: [
+      'name',
+      'slug',
+      'order',
+      'internetEgress',
+      'interRegionEgress',
+      'isDynamicInterRegionEgress'
+    ],
     sort: ['order:asc', 'name:asc']
   })) as Array<PricingV2EntryProvider>
 }

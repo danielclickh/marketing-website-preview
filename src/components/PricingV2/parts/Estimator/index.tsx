@@ -68,7 +68,7 @@ export default function Estimator() {
 
   // Sync backup accordion with context values
   useEffect(() => {
-    if (backupFrequency && backupRetention) {
+    if (backupFrequency && backupRetention && !backupsOpen) {
       addAddon('backups')
       setBackupsOpen(true)
     }
@@ -116,10 +116,15 @@ export default function Estimator() {
                       // Remove from UI
                       removeAddon('backups')
 
-                      // Reset context values
+                      // Reset backup context values
                       setValues({
                         backupFrequency: null,
-                        backupRetention: null
+                        backupRetention: null,
+                        estimateBackupSize: true,
+                        fullBackupUnit: null,
+                        fullBackupSize: null,
+                        incrementalBackupUnit: null,
+                        incrementalBackupSize: null
                       })
                     }}
                     open={backupsOpen}
@@ -163,7 +168,11 @@ export default function Estimator() {
                 className='text-sm text-primary-300 hover:underline'
                 onClick={(event) => {
                   event.preventDefault()
-                  // Setting default values add's the backups accordion to the UI
+
+                  // Add backups to UI
+                  addAddon('backups')
+
+                  // Setting default values
                   setValues({
                     backupFrequency: 24,
                     backupRetention: 1

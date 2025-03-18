@@ -91,6 +91,7 @@ export interface PricingV2EntryProvider {
   regions: Array<PricingV2ComponentRegion>
   internetEgress: null | number
   interRegionEgress: null | number
+  isDynamicInterRegionEgress: null | boolean
 }
 
 export interface PricingV2EntryPackage {

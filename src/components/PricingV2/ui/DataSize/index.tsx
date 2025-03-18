@@ -1,8 +1,6 @@
 import { useCallback, useMemo } from 'react'
-import {
-  StorageUnits,
-  usePricingV2Context
-} from '../../../PricingV2ContextProvider'
+import { usePricingV2Context } from '../../../PricingV2ContextProvider'
+import { StorageUnits } from '../../types'
 import Select, { Option } from '../Select'
 
 export type Value = { size: null | number; unit: null | StorageUnits }
@@ -12,13 +10,15 @@ export interface DataSizeProps {
   sizeValue?: Value['size']
   unitValue?: Value['unit']
   onChange: (value: Value) => void
+  className?: string
 }
 
 export default function DataSize({
   sizeValue,
   unitValue,
   maxGb,
-  onChange
+  onChange,
+  className = ''
 }: DataSizeProps) {
   const { validateDataSize } = usePricingV2Context()
 
@@ -56,7 +56,7 @@ export default function DataSize({
     return [gbOption, tbOption, pbOption]
   }, [maxGb])
 
-  const setValues = useCallback(
+  const setLocalValues = useCallback(
     (values: { size?: null | number; unit?: null | StorageUnits }) => {
       const newValues = validateDataSize(
         values?.size ?? sizeValue ?? 0,
@@ -70,24 +70,25 @@ export default function DataSize({
   )
 
   return (
-    <div className='grid grid-cols-2 lg:grid-cols-3 gap-4'>
+    <div className={`grid grid-cols-2 lg:grid-cols-3 gap-2 ${className}`}>
       <input
         className='relative lg:col-span-2 h-10 w-full cursor-text rounded border border-neutral-700 bg-neutral-725 px-3 text-left shadow-input focus:outline-none'
         type='number'
         min={0}
         max={maxInput}
+        step={1}
         value={sizeValue?.toString() || '0'}
         maxLength={maxSizeChars}
         onChange={(event) => {
           const inputValue = event.target.value || '0'
-          setValues({ size: Number(inputValue) })
+          setLocalValues({ size: Math.round(Number(inputValue)) })
         }}
       />
       <div className='flex flex-col justify-end'>
         <Select
           options={units}
           value={unitValue}
-          onChange={(value) => setValues({ unit: value })}
+          onChange={(value) => setLocalValues({ unit: value })}
         />
       </div>
     </div>
