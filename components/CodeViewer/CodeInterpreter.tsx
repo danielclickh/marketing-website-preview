@@ -13,6 +13,7 @@ import {
 } from './types'
 import { formatBytes, formatReadableRows, roundByScale } from './utils'
 import { useRouter } from 'next/router'
+import { getGoogleAnalyticsUserIdFromBrowserCookie } from '../../lib/utils/google'
 
 
 interface Props {
@@ -68,7 +69,8 @@ function CodeInterpreter({
   async function query(
     query: string,
     query_id: string,
-    params: Array<QueryParameter>
+    params: Array<QueryParameter>,
+    runManually: boolean
   ): Promise<QueryResponse> {
     if (!query) {
       return { error: 'Query not provided', status: 400, query_id: query_id }
@@ -90,19 +92,26 @@ function CodeInterpreter({
     })
 
     try {
-      // Inject current path as query comment
+      // Inject metadata as log comment
       const currentPath = router.asPath
-      let log_comment = ''
-      if (currentPath) {
-        const jsonPath = JSON.stringify({'url.path': currentPath})
-        log_comment = `${jsonPath}`
+      let jsonLogComment: Record<string, any> = {}
+      if (typeof window !== "undefined") {
+        let gaId = getGoogleAnalyticsUserIdFromBrowserCookie('_ga')
+        if (gaId) {
+          jsonLogComment['ga_id'] = gaId
+        }
       }
+      if (currentPath) {
+        jsonLogComment['url_path'] = currentPath
+      }
+      jsonLogComment['auto_run'] = !runManually
+
       const res = await clickhouse_web.query({
         query: query,
         query_id: query_id,
         query_params: query_params,
         clickhouse_settings: {
-          log_comment: log_comment,
+          log_comment: JSON.stringify(jsonLogComment),
         }
       })
       const json = (await res.json()) as QueryResults
@@ -136,7 +145,7 @@ function CodeInterpreter({
     setQueryRunning(true)
     setShowResultsPanel(true)
 
-    const res = await query(queryString, query_run_id, [])
+    const res = await query(queryString, query_run_id, [], runManually)
     setQueryRunning(false)
     setResults({
       response: res.response,
