@@ -92,14 +92,18 @@ function CodeInterpreter({
     try {
       // Inject current path as query comment
       const currentPath = router.asPath
+      let log_comment = ''
       if (currentPath) {
         const jsonPath = JSON.stringify({'url.path': currentPath})
-        query = `-- ${jsonPath} \n${query}`
+        log_comment = `${jsonPath}`
       }
       const res = await clickhouse_web.query({
         query: query,
         query_id: query_id,
-        query_params: query_params
+        query_params: query_params,
+        clickhouse_settings: {
+          log_comment: log_comment,
+        }
       })
       const json = (await res.json()) as QueryResults
       if (json.exception) {
