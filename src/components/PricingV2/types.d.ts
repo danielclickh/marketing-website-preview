@@ -80,7 +80,7 @@ export type ContextComputeMaxPrice = null | number
 export type ContextStoragePrice = null | number
 export type ContextTotalMinPrice = null | number
 export type ContextTotalMaxPrice = null | number
-export type ContextTotalPriceRange = [number] | [number, number]
+export type ContextTotalPriceRange = null | [number] | [number, number]
 
 // Full context object
 export interface Context {

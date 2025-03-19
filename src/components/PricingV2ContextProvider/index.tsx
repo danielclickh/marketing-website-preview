@@ -154,7 +154,7 @@ const PricingV2Context = createContext<Context>({
   storagePrice: null,
   totalMinPrice: null,
   totalMaxPrice: null,
-  totalPriceRange: [0]
+  totalPriceRange: null
 })
 
 export function usePricingV2Context() {
@@ -390,7 +390,7 @@ export default function PricingV2ContextProvider({
 
     // Set default to zero
     if (!isValid) {
-      return [0]
+      return null
     }
 
     // De-dupe and remove empties
@@ -405,7 +405,7 @@ export default function PricingV2ContextProvider({
       case 1:
         return [cleaned[0]]
       default:
-        return [0]
+        return null
     }
   }, [totalMinPrice, totalMaxPrice])
 

@@ -53,14 +53,16 @@ export default function DisplayPrice() {
     <span
       ref={priceRef}
       className='block w-full overflow-hidden whitespace-nowrap'>
-      {totalPriceRange.map((price, priceIndex, allPrices) => {
-        return (
-          <Fragment key={priceIndex}>
-            <PriceUsd price={price} decimalPlaces={0} />
-            {priceIndex < allPrices.length - 1 && ' - '}
-          </Fragment>
-        )
-      })}
+      {!totalPriceRange && '--'}
+      {totalPriceRange &&
+        totalPriceRange.map((price, priceIndex, allPrices) => {
+          return (
+            <Fragment key={priceIndex}>
+              <PriceUsd price={price} decimalPlaces={0} />
+              {priceIndex < allPrices.length - 1 && ' - '}
+            </Fragment>
+          )
+        })}
     </span>
   )
 }
