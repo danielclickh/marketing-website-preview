@@ -25,6 +25,8 @@ function getSupportedColumns(columns: Column[]): {
       .filter(
         (col) =>
           nonNullType(col.type).includes('String') ||
+          nonNullType(col.type).startsWith("Enum") || 
+          nonNullType(col.type).startsWith("LowCardinality") ||
           nonNullType(col.type).includes('Date')
       )
       .map((col) => col.name),
@@ -32,6 +34,8 @@ function getSupportedColumns(columns: Column[]): {
       .filter(
         (col) =>
           nonNullType(col.type).includes('String') ||
+          nonNullType(col.type).startsWith("Enum") || 
+          nonNullType(col.type).startsWith("LowCardinality") ||
           nonNullType(col.type).includes('Date')
       )
       .map((col) => col.name),

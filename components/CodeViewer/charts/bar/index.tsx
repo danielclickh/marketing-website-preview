@@ -33,7 +33,11 @@ function getSupportedColumns(columns: Column[]): {
       )
       .map((col) => col.name),
     series: columns
-      .filter((col) => col.type.includes('String'))
+      .filter((col) => 
+        nonNullType(col.type).includes("String") ||
+        nonNullType(col.type).startsWith("Enum") || 
+        nonNullType(col.type).startsWith("LowCardinality")
+    )
       .map((col) => col.name)
   }
 }
