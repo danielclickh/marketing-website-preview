@@ -265,8 +265,6 @@ function CodeResults(props: ResultsProps) {
     ? 300
     : Math.min(Math.ceil(((response?.rows || 0) + 1) * 33), 300)
 
-  console.log(response)
-
   return (
     <>
       {error ? (
