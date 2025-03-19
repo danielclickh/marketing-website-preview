@@ -830,6 +830,10 @@ export default function PricingV2ContextProvider({
       if (newTransfers !== undefined && newTransfers !== transfers) {
         setTransfers(newTransfers)
       }
+
+      if (newClickpipes !== undefined && newClickpipes !== clickpipes) {
+        setClickpipes(newClickpipes)
+      }
     },
     [
       planEntry,

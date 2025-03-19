@@ -138,7 +138,15 @@ export default function Estimator() {
                   <FieldGroupAccordion
                     title='ClickPipes'
                     removable={true}
-                    onRemove={() => removeAddon('dataSources')}
+                    onRemove={() => {
+                      // Remove from UI
+                      removeAddon('dataSources')
+
+                      // Reset data transfer context values
+                      setValues({
+                        clickpipes: null
+                      })
+                    }}
                     open={dataSourcesOpen}
                     onOpenClose={setDataSourcesOpen}>
                     <div className='space-y-8'>
@@ -216,8 +224,20 @@ export default function Estimator() {
                 className='text-sm text-primary-300 hover:underline'
                 onClick={(event) => {
                   event.preventDefault()
-                  // Add data transfer
+
+                  // Add data transfer to UI
                   addAddon('dataTransfer')
+
+                  // Setting default values
+                  setValues({
+                    transfers: [
+                      {
+                        type: 'public-internet',
+                        size: 0,
+                        unit: 'gb'
+                      }
+                    ]
+                  })
 
                   // Set accordion open states
                   setComputeOpen(false)

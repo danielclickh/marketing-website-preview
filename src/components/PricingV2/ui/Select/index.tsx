@@ -2,11 +2,14 @@ import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { isEqual } from 'lodash'
 import { memo, useMemo } from 'react'
+import { StrapiImageType } from '../../../../lib/api/strapi/types'
+import { StrapiImageUrl } from '../../../StrapiElements'
 
 export type Option = {
   value: any
   label: string | React.ReactNode
   disabled?: boolean
+  icon?: StrapiImageType | null
 }
 export type Options = Array<Option>
 
@@ -22,18 +25,26 @@ type SelectOptionProps = {
   label: Option['label']
   selected: boolean
   disabled?: boolean
+  icon?: Option['icon']
 }
 
 const SelectOption = memo(function SelectOption({
   label,
   selected,
-  disabled
+  disabled,
+  icon
 }: SelectOptionProps) {
   return (
     <span
       className={`relative flex w-full items-center gap-3 truncate rounded-lg px-3 py-2 text-left focus:outline-none sm:text-sm ${
         selected ? 'font-bold text-primary-300' : 'font-normal'
       } ${disabled ? 'opacity-60' : 'cursor-pointer'}`}>
+      {icon && (
+        <StrapiImageUrl
+          {...icon}
+          className='h-auto w-8 flex-shrink-0 flex-grow-0'
+        />
+      )}
       {label}
     </span>
   )
@@ -59,7 +70,18 @@ const Select = memo(function Select({
       <div className='relative'>
         <Listbox.Button className='relative h-10 w-full cursor-default rounded-[4px] border border-neutral-700 bg-neutral-725 pl-3 pr-10 text-left shadow-input transition-colors hover:cursor-pointer hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl focus:outline-none disabled:cursor-auto data-[headlessui-state=open]:rounded-b-none data-[headlessui-state=open]:border-primary-300 sm:text-sm'>
           <span className='flex items-center gap-3 truncate'>
-            {selectedOption ? selectedOption.label : placeholder}
+            {selectedOption && (
+              <>
+                {selectedOption.icon && (
+                  <StrapiImageUrl
+                    {...selectedOption.icon}
+                    className='h-auto w-8 flex-shrink-0 flex-grow-0'
+                  />
+                )}
+                {selectedOption.label}
+              </>
+            )}
+            {!selectedOption && placeholder}
           </span>
           <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
             <ChevronDownIcon className='h-5 w-5 text-c4' aria-hidden='true' />
@@ -79,6 +101,7 @@ const Select = memo(function Select({
                   label={item.label}
                   selected={selected}
                   disabled={disabled}
+                  icon={item.icon}
                 />
               )}
             </Listbox.Option>

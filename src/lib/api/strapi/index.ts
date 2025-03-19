@@ -249,7 +249,7 @@ export async function getPricingV2Computes() {
 
 export async function getPricingV2DataSources() {
   return (await fetchAll('pricing-v2-data-sources', {
-    populate: ['logo'],
+    populate: ['icon'],
     fields: [
       'name',
       'slug',

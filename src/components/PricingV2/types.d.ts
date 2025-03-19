@@ -39,8 +39,8 @@ export type PricingFile = Record<string, PricingFileItem>
 export type ClickPipe = {
   source: string
   instances: number
-  dataIngestedUnit?: StorageUnits
-  dataIngestedSize?: number
+  dataIngestedUnit?: StorageUnits | null
+  dataIngestedSize?: number | null
 }
 
 export type Transfer = {

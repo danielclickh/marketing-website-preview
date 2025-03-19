@@ -1,6 +1,7 @@
+import { useMemo } from 'react'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import Label from '../../ui/Label'
-import ProviderRegion from '../../ui/ProviderRegion'
+import Select, { Options } from '../../ui/Select'
 
 export interface RegionSelectorProps {
   displayLabel?: boolean
@@ -13,12 +14,25 @@ export default function RegionSelector({
 }: RegionSelectorProps) {
   const { setValues, providerEntry, region } = usePricingV2Context()
 
+  const regionOptions: Options = useMemo(() => {
+    if (!providerEntry) return []
+
+    return providerEntry.regions.map((item) => {
+      return {
+        value: item.key,
+        label: item.label || item.key,
+        icon: item.icon
+      }
+    })
+  }, [providerEntry])
+
   return (
     <>
       {providerEntry?.regions && providerEntry.regions.length > 0 && (
         <div className={className}>
           {displayLabel && <Label>Region</Label>}
-          <ProviderRegion
+          <Select
+            options={regionOptions}
             value={region}
             onChange={(value) => setValues({ region: value })}
           />
