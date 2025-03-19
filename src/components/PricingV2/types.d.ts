@@ -1,14 +1,13 @@
 import {
-  PricingV2EntryCompute,
-  PricingV2EntryDataSource,
-  PricingV2EntryPlan,
-  PricingV2EntryProvider,
-  PricingV2EntryUseCase
+  PricingV2,
+  PricingV2ComponentPackage,
+  PricingV2ComponentPlan,
+  PricingV2ComponentProvider
 } from '@/lib/api/strapi/types'
 
 export type StorageUnits = 'gb' | 'tb' | 'pb'
 
-export type PlanConfig = {
+export type MeterPlanConfig = {
   planTemplateId: string
   aggregationIds: {
     compute: Array<string>
@@ -16,8 +15,8 @@ export type PlanConfig = {
   }
 }
 
-export type PricingConfig = {
-  plans: Record<string, PlanConfig>
+export type MeterConfig = {
+  plans: Record<string, MeterPlanConfig>
 }
 
 export type PricingFileItem = Array<{
@@ -95,14 +94,7 @@ export interface Context {
   ) => { size: number; unit: StorageUnits }
 
   // Data sources
-  plans: Array<PricingV2EntryPlan>
-  setPlans: Dispatch<SetStateAction<Array<PricingV2EntryPlan>>>
-  providers: Array<PricingV2EntryProvider>
-  setProviders: Dispatch<SetStateAction<Array<PricingV2EntryProvider>>>
-  computes: Array<PricingV2EntryCompute>
-  setComputes: Dispatch<SetStateAction<Array<PricingV2EntryCompute>>>
-  dataSources: Array<PricingV2EntryDataSource>
-  setDataSources: Dispatch<SetStateAction<Array<PricingV2EntryDataSource>>>
+  sourceData: PricingV2
 
   // User values
   plan: ContextPlan
@@ -127,9 +119,9 @@ export interface Context {
   transfers: ContextTransfers
 
   // Computed values
-  planEntry: undefined | PricingV2EntryPlan
-  providerEntry: undefined | PricingV2EntryProvider
-  useCaseEntry: undefined | PricingV2EntryUseCase
+  planEntry: undefined | PricingV2ComponentPlan
+  providerEntry: undefined | PricingV2ComponentProvider
+  useCaseEntry: undefined | PricingV2ComponentPackage
   computeUnitPrice: ContextComputeUnitPrice
   storageUnitPrice: ContextStorageUnitPrice
   computeMinPrice: ContextComputeMinPrice
@@ -140,10 +132,7 @@ export interface Context {
   totalPriceRange: ContextTotalPriceRange
 }
 
-export type Data = Pick<
-  Context,
-  'plans' | 'providers' | 'computes' | 'dataSources'
->
+export type Data = Context['sourceData']
 
 export type Values = Pick<
   Context,

@@ -61,6 +61,57 @@ export interface SeoMetadata {
 // Pricing V2
 // ------
 
+export interface PricingV2ComponentPlan {
+  name: string
+  slug: string
+  description: null | string
+  perks: Array<PricingV2ComponentPerk>
+  featured: boolean
+  maxStorageCapacity: null | number
+  allowDataSources: boolean
+  allowDataTransfer: boolean
+  allowBackups: boolean
+  priceList: Array<PricingV2ComponentPerk>
+  packages: Array<PricingV2ComponentPackage>
+  customizable: boolean
+}
+
+export interface PricingV2ComponentProvider {
+  name: string
+  slug: string
+  logo: StrapiImageType
+  regions: Array<PricingV2ComponentRegion>
+  internetEgress: number
+  interRegionEgress: number
+  isDynamicInterRegionEgress: boolean
+}
+
+export interface PricingV2ComponentPackage {
+  name: string
+  slug: string
+  computeMinimum: number
+  computeMaximum: number
+  replicas: number
+  description: null | string
+  activeHours: null | number
+}
+
+export interface PricingV2ComponentDataSource {
+  name: string
+  slug: string
+  icon: StrapiImageType | null
+  ingestsData: boolean
+  excludeFromCalculations: boolean
+  excludeFromCalculationsLabel: null | string
+}
+
+export interface PricingV2 {
+  plans: Array<PricingV2ComponentPlan>
+  providers: Array<PricingV2ComponentProvider>
+  useCases: Array<PricingV2ComponentPackage>
+  dataSources: Array<PricingV2ComponentDataSource>
+}
+
 export interface PricingV2EntryCompute {
   name: string
   size: number

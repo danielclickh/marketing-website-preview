@@ -68,7 +68,7 @@ const Select = memo(function Select({
   return (
     <Listbox value={value} onChange={onChange} as='div'>
       <div className='relative'>
-        <Listbox.Button className='relative h-10 w-full cursor-default rounded-[4px] border border-neutral-700 bg-neutral-725 pl-3 pr-10 text-left shadow-input transition-colors hover:cursor-pointer hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl focus:outline-none disabled:cursor-auto data-[headlessui-state=open]:rounded-b-none data-[headlessui-state=open]:border-primary-300 sm:text-sm'>
+        <Listbox.Button className='relative h-10 w-full cursor-default rounded-[4px] border border-neutral-700 bg-neutral-725 pl-3 pr-7 text-left shadow-input transition-colors hover:cursor-pointer hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl focus:outline-none disabled:cursor-auto data-[headlessui-state=open]:rounded-b-none data-[headlessui-state=open]:border-primary-300 sm:text-sm'>
           <span className='flex items-center gap-3 truncate'>
             {selectedOption && (
               <>

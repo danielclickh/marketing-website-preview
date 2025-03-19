@@ -3,6 +3,7 @@ import { PricingV2EntryUseCase } from '@/lib/api/strapi/types'
 import HRSeparator from '../../../HRSeparator'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import { SuiText } from '../../../sui'
+import * as config from '../../config'
 import Label from '../../ui/Label'
 import Select, { Options } from '../../ui/Select'
 import HoursSelector from '../HoursSelector'
@@ -11,6 +12,11 @@ import HoursSelector from '../HoursSelector'
 const REPLICAS: Options = Array.from({ length: 25 }, (_, i) => ({
   value: i + 1,
   label: (i + 1).toString()
+}))
+
+const COMPUTES: Options = config.computes.map((size) => ({
+  value: size,
+  label: `${size} GiB RAM, ${size / 4} vCPUs`
 }))
 
 function formatComponentsList(components: Array<React.ReactNode>) {
@@ -35,8 +41,7 @@ function formatComponentsList(components: Array<React.ReactNode>) {
 export default function ComputeSelector() {
   const {
     setValues,
-    plans,
-    computes,
+    sourceData,
     planEntry,
     useCaseEntry,
     hours,
@@ -46,8 +51,8 @@ export default function ComputeSelector() {
   } = usePricingV2Context()
 
   const customizablePlans = useMemo(() => {
-    return plans.filter((item) => item.customizable)
-  }, [plans])
+    return sourceData.plans.filter((item) => item.customizable)
+  }, [sourceData])
 
   const isCusomizable = useMemo(() => {
     return planEntry?.customizable ?? false
@@ -58,17 +63,8 @@ export default function ComputeSelector() {
   }, [planEntry])
 
   const useCases = useMemo(() => {
-    return planEntry?.useCases || []
-  }, [planEntry])
-
-  const computeOptions: Options = useMemo(() => {
-    return computes.map((item) => {
-      return {
-        value: item.size,
-        label: item.name
-      }
-    })
-  }, [computes])
+    return sourceData.useCases
+  }, [sourceData])
 
   const useCaseOptions: Options = useMemo(() => {
     return useCases.map((item) => {
@@ -82,8 +78,8 @@ export default function ComputeSelector() {
   // Find the package that matches the user values
   const activePackage = useMemo(() => {
     return packages.find((item) => {
-      const matchingMinCompute = item?.minimumCompute?.size === computeMinSize
-      const matchingMaxCompute = item?.maximumCompute?.size === computeMaxSize
+      const matchingMinCompute = item?.computeMinimum === computeMinSize
+      const matchingMaxCompute = item?.computeMaximum === computeMaxSize
       const matchingReplicas = item.replicas === replicas
       return matchingMinCompute && matchingMaxCompute && matchingReplicas
     })
@@ -92,10 +88,8 @@ export default function ComputeSelector() {
   // Find the use case that matches the user values
   const useCaseHasChanged = useMemo(() => {
     if (!useCaseEntry) return false
-    const matchingMinCompute =
-      useCaseEntry?.minimumCompute?.size === computeMinSize
-    const matchingMaxCompute =
-      useCaseEntry?.maximumCompute?.size === computeMaxSize
+    const matchingMinCompute = useCaseEntry?.computeMinimum === computeMinSize
+    const matchingMaxCompute = useCaseEntry?.computeMaximum === computeMaxSize
     const matchingReplicas = useCaseEntry.replicas === replicas
     const matchingHours = useCaseEntry.activeHours === hours
     return (
@@ -134,8 +128,8 @@ export default function ComputeSelector() {
                       onClick={(event) => {
                         event.preventDefault()
                         setValues({
-                          computeMinSize: item.minimumCompute?.size ?? null,
-                          computeMaxSize: item.maximumCompute?.size ?? null,
+                          computeMinSize: item.computeMinimum ?? null,
+                          computeMaxSize: item.computeMaximum ?? null,
                           replicas: item.replicas,
                           hours: /\d+/.test(`${item.activeHours}`)
                             ? item.activeHours
@@ -194,8 +188,8 @@ export default function ComputeSelector() {
                   )
                   setValues({
                     useCase: useCaseObject?.slug,
-                    computeMinSize: useCaseObject?.minimumCompute?.size || null,
-                    computeMaxSize: useCaseObject?.maximumCompute?.size || null,
+                    computeMinSize: useCaseObject?.computeMinimum || null,
+                    computeMaxSize: useCaseObject?.computeMaximum || null,
                     replicas: useCaseObject?.replicas,
                     hours: useCaseObject?.activeHours
                   })
@@ -219,10 +213,8 @@ export default function ComputeSelector() {
                     event.preventDefault()
                     setValues({
                       useCase: useCaseEntry?.slug,
-                      computeMinSize:
-                        useCaseEntry?.minimumCompute?.size || null,
-                      computeMaxSize:
-                        useCaseEntry?.maximumCompute?.size || null,
+                      computeMinSize: useCaseEntry?.computeMinimum || null,
+                      computeMaxSize: useCaseEntry?.computeMaximum || null,
                       replicas: useCaseEntry?.replicas,
                       hours: useCaseEntry?.activeHours
                     })
@@ -242,17 +234,19 @@ export default function ComputeSelector() {
                 <div>
                   <Label>Minimum size</Label>
                   <Select
-                    options={computeOptions}
+                    options={COMPUTES}
                     value={computeMinSize}
                     onChange={(value) => setValues({ computeMinSize: value })}
+                    maxHeight={275}
                   />
                 </div>
                 <div>
                   <Label>Maximum size</Label>
                   <Select
-                    options={computeOptions}
+                    options={COMPUTES}
                     value={computeMaxSize}
                     onChange={(value) => setValues({ computeMaxSize: value })}
+                    maxHeight={275}
                   />
                 </div>
                 <div>

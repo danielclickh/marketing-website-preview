@@ -1,13 +1,14 @@
 import React, { Fragment, memo, useCallback } from 'react'
-import { PricingV2EntryPlan } from '@/lib/api/strapi/types'
+import { PricingV2ComponentPlan } from '@/lib/api/strapi/types'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
 import { MarkdownMemoized } from '@/components/Markdown'
 import TooltipInfo from '@/components/PricingCalculator/ui/Tooltip/tooltip'
-import { Context, usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import { SuiText, SuiTitle } from '@/components/sui'
 import ProviderSelector from '../../fields/ProviderSelector'
 import RegionSelector from '../../fields/RegionSelector'
+import { Context } from '../../types'
 import PerkItem from '../../ui/PerkItem'
 import PriceUsd from '../../ui/PriceUsd'
 
@@ -17,7 +18,7 @@ const TableColumn = memo(function TableColumn({
   storageUnitPrice,
   onEstimateCostClick
 }: {
-  item: PricingV2EntryPlan
+  item: PricingV2ComponentPlan
   computeUnitPrice: Context['computeUnitPrice']
   storageUnitPrice: Context['storageUnitPrice']
   onEstimateCostClick: () => void
@@ -118,8 +119,8 @@ export default function Table({
   afterFilters?: React.ReactNode
 }) {
   const {
-    plans,
-    setPlan,
+    sourceData,
+    setValues,
     provider,
     providerEntry,
     region,
@@ -174,7 +175,7 @@ export default function Table({
         {afterFilters}
       </div>
       <div className='flex flex-col lg:flex-row'>
-        {plans.map((item, index) => {
+        {sourceData.plans.map((item, index) => {
           const planPricingData = getPricingData(item.slug)
           return (
             <Fragment key={index}>
@@ -183,7 +184,7 @@ export default function Table({
                 computeUnitPrice={planPricingData?.computeUnitPrice || null}
                 storageUnitPrice={planPricingData?.storageUnitPrice || null}
                 onEstimateCostClick={() => {
-                  setPlan(item.slug)
+                  setValues({ plan: item.slug })
                 }}
               />
             </Fragment>

@@ -12,11 +12,11 @@ const INSTANCES = Array.from({ length: 10 }, (_, i) => ({
 }))
 
 export default function DataSourcesSelector() {
-  const { setValues, dataSources, clickpipes } = usePricingV2Context()
+  const { setValues, sourceData, clickpipes } = usePricingV2Context()
 
   // Format data sources for select field, disabling already used values
   const sourceOptions: Options = useMemo(() => {
-    return dataSources.map((source) => {
+    return sourceData.dataSources.map((source) => {
       return {
         icon: source.icon,
         value: source.slug,
@@ -24,7 +24,7 @@ export default function DataSourcesSelector() {
         disabled: !!clickpipes?.find((pipe) => pipe.source === source.slug)
       }
     })
-  }, [dataSources, clickpipes])
+  }, [sourceData, clickpipes])
 
   // Find the first option that isn't disabled
   const nextAvailableOption = useMemo(() => {
@@ -33,9 +33,9 @@ export default function DataSourcesSelector() {
 
   const findSourceBySlug = useCallback(
     (slug: string) => {
-      return dataSources.find((source) => source.slug === slug)
+      return sourceData.dataSources.find((source) => source.slug === slug)
     },
-    [dataSources]
+    [sourceData]
   )
 
   // Define the maximum of data sources allowed
@@ -116,7 +116,7 @@ export default function DataSourcesSelector() {
                             maxHeight={275}
                           />
                         </div>
-                        {sourceEntry?.dataIngested && (
+                        {sourceEntry?.ingestsData && (
                           <div className='md:col-span-2'>
                             <Label>Data ingested / month</Label>
                             <DataSize

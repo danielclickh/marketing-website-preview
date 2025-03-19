@@ -2,35 +2,22 @@ import { throttle } from 'lodash'
 import { useRouter } from 'next/router'
 import { ParsedUrlQuery } from 'querystring'
 import { useCallback } from 'react'
-import {
-  PricingV2EntryCompute,
-  PricingV2EntryDataSource,
-  PricingV2EntryPlan,
-  PricingV2EntryProvider
-} from '@/lib/api/strapi/types'
-import PricingV2ContextProvider from '../PricingV2ContextProvider'
+import type { PricingV2 } from '@/lib/api/strapi/types'
+import PricingV2ContextProvider from '@/components/PricingV2ContextProvider'
 import Estimator from './parts/Estimator'
 import Table from './parts/Table'
 import { Values } from './types'
 
 export interface PricingV2Props {
-  plans: Array<PricingV2EntryPlan>
-  providers: Array<PricingV2EntryProvider>
-  computes: Array<PricingV2EntryCompute>
-  dataSources: Array<PricingV2EntryDataSource>
-
+  data: PricingV2
   requestParams?: ParsedUrlQuery
-
   beforeTableFilters?: React.ReactNode
   afterTableFilters?: React.ReactNode
   inbetweenContent?: React.ReactNode
 }
 
 export default function PricingV2({
-  plans,
-  providers,
-  computes,
-  dataSources,
+  data,
   requestParams,
   beforeTableFilters,
   afterTableFilters,
@@ -121,7 +108,7 @@ export default function PricingV2({
 
   return (
     <PricingV2ContextProvider
-      data={{ plans, providers, computes, dataSources }}
+      sourceData={data}
       startingValues={startingValues}
       onChange={onChangeHandler}>
       <Table

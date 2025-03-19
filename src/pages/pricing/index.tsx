@@ -1,5 +1,8 @@
-import { useClickOutside } from '../../hooks'
-import philosophy from './philosophy.json'
+import { GetServerSideProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
 import ByocPricingCard from '@/components/ByocPricingCard'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
@@ -10,14 +13,8 @@ import MarketoForm from '@/components/MarketoForm'
 import Modal from '@/components/Modal'
 import PocContactForm from '@/components/PocContactForm'
 import { SuiText, SuiTitle } from '@/components/sui'
-import {
-  findAll,
-  findOne,
-  getPricingV2Computes,
-  getPricingV2DataSources,
-  getPricingV2Plans,
-  getPricingV2Providers
-} from '@/lib/api/strapi'
+import { useClickOutside } from '@/hooks'
+import { findAll, findOne, getPricingV2 } from '@/lib/api/strapi'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import {
@@ -28,12 +25,9 @@ import {
   PricingPlanData,
   RegionPricing
 } from '@/types/pricing'
-import { GetServerSideProps } from 'next'
+import philosophy from './philosophy.json'
+
 import dynamic from 'next/dynamic'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
 
 // Lazy load prizing components
 const PricingV1 = dynamic(() => import('@/components/PricingCalculator'), {
@@ -131,26 +125,13 @@ export const getServerSideProps: GetServerSideProps<PricingPageProps> =
     }
 
     // New (V2) pricing
-    const plansPromise = getPricingV2Plans()
-    const providersPromise = getPricingV2Providers()
-    const computesPromise = getPricingV2Computes()
-    const dataSourcesPromise = getPricingV2DataSources()
+    const pricingDataPromise = getPricingV2()
 
     const [
       { hero, contactSection, meteredPricing, seo },
       commonProps,
-      plans,
-      providers,
-      computes,
-      dataSources
-    ] = await Promise.all([
-      pagePromise,
-      commonPropsPromise,
-      plansPromise,
-      providersPromise,
-      computesPromise,
-      dataSourcesPromise
-    ])
+      pricingData
+    ] = await Promise.all([pagePromise, commonPropsPromise, pricingDataPromise])
 
     seo.path = '/pricing'
 
@@ -161,10 +142,7 @@ export const getServerSideProps: GetServerSideProps<PricingPageProps> =
         meteredPricing,
         seo,
         displayOldPricing: false,
-        plans,
-        providers,
-        computes,
-        dataSources,
+        pricingData,
         requestParams: query,
         ...commonProps
       } as PricingPagePropsV2
@@ -179,10 +157,7 @@ export default function PricingPage({
   pricingByRegion,
   pricingPlans,
   cloudProviders,
-  plans,
-  providers,
-  computes,
-  dataSources,
+  pricingData,
   requestParams,
   headerData,
   footerData
@@ -265,11 +240,8 @@ export default function PricingPage({
 
             {!displayOldPricing && (
               <PricingV2
+                data={pricingData}
                 requestParams={requestParams}
-                plans={plans}
-                providers={providers}
-                computes={computes}
-                dataSources={dataSources}
                 afterTableFilters={<RegionRequest />}
                 inbetweenContent={
                   <>

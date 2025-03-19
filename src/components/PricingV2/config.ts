@@ -1,6 +1,13 @@
-import { PricingConfig } from './types'
+import { MeterConfig } from './types'
 
-const config: PricingConfig = {
+export const averageDaysPerMonth = 30.5
+
+// Must be divisible by 4
+export const computes = [
+  8, 12, 16, 24, 28, 36, 48, 60, 80, 100, 128, 168, 216, 276, 356
+]
+
+export const meter: MeterConfig = {
   plans: {
     basic: {
       planTemplateId: 'c84c5422-f679-48b4-9910-4265b285795f',
@@ -30,4 +37,24 @@ const config: PricingConfig = {
   }
 }
 
-export default config
+// Finds the closet compute value
+// @example input: 220, output: 216
+// @example input: 700, output: 356
+export function findClosestCompute(input: number) {
+  // If the value exists, return it
+  if (computes.includes(input)) return input
+
+  let closest = computes[0]
+  let minDifference = Math.abs(input - computes[0])
+
+  for (let i = 1; i < computes.length; i++) {
+    const difference = Math.abs(input - computes[i])
+
+    if (difference < minDifference) {
+      closest = computes[i]
+      minDifference = difference
+    }
+  }
+
+  return closest
+}

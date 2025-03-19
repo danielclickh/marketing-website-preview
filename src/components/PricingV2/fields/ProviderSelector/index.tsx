@@ -21,12 +21,12 @@ export default function ProviderSelector({
   displayLabel = true,
   className = ''
 }: ProviderSelectorProps) {
-  const { setValues, providers, provider } = usePricingV2Context()
+  const { setValues, sourceData, provider } = usePricingV2Context()
   return (
     <div className={className}>
       {displayLabel && <Label>Cloud provider</Label>}
       <div className='flex justify-start gap-3'>
-        {providers.map((item, index) => {
+        {sourceData.providers.map((item, index) => {
           const isActive = provider === item.slug
           return (
             <button

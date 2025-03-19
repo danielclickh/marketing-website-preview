@@ -1,11 +1,6 @@
-import {
-  PricingV2EntryCompute,
-  PricingV2EntryDataSource,
-  PricingV2EntryPlan,
-  PricingV2EntryProvider
-} from './types'
 import _fetch from 'cross-fetch'
 import { stringify } from 'qs'
+import { PricingV2 } from './types'
 
 export function fetch(uri: string, init: any = {}) {
   if (process?.env?.STRAPI_API_KEY) {
@@ -197,69 +192,23 @@ export async function findHeader(requestString: string) {
   return headerData.seo
 }
 
-export async function getPricingV2Plans() {
-  return (await fetchAll('pricing-v2-plans', {
+export async function getPricingV2() {
+  const response = await findOne('pricing-v2', {
     populate: [
-      'packages',
-      'packages.minimumCompute',
-      'packages.maximumCompute',
-      'useCases',
-      'useCases.minimumCompute',
-      'useCases.maximumCompute',
-      'perks',
-      'priceList'
-    ],
-    fields: [
-      'name',
-      'slug',
-      'customizable',
-      'order',
-      'description',
-      'featured',
-      'maxStorageCapacity',
-      'allowDataSources',
-      'allowDataTransfer',
-      'allowBackups'
-    ],
-    sort: ['order:asc', 'name:asc']
-  })) as Array<PricingV2EntryPlan>
-}
-
-export async function getPricingV2Providers() {
-  return (await fetchAll('pricing-v2-providers', {
-    populate: ['logo', 'regions', 'regions.icon'],
-    fields: [
-      'name',
-      'slug',
-      'order',
-      'internetEgress',
-      'interRegionEgress',
-      'isDynamicInterRegionEgress'
-    ],
-    sort: ['order:asc', 'name:asc']
-  })) as Array<PricingV2EntryProvider>
-}
-
-export async function getPricingV2Computes() {
-  return (await fetchAll('pricing-v2-computes', {
-    fields: ['name', 'size'],
-    sort: ['size:asc']
-  })) as Array<PricingV2EntryCompute>
-}
-
-export async function getPricingV2DataSources() {
-  return (await fetchAll('pricing-v2-data-sources', {
-    populate: ['icon'],
-    fields: [
-      'name',
-      'slug',
-      'order',
-      'dataIngested',
-      'excludeFromCalculations',
-      'excludeFromCalculationsLabel'
-    ],
-    sort: ['order:asc', 'name:asc']
-  })) as Array<PricingV2EntryDataSource>
+      'plans.*',
+      'plans.perks.*',
+      'plans.priceList.*',
+      'plans.packages.*',
+      'providers.*',
+      'providers.logo.*',
+      'providers.regions.*',
+      'providers.regions.icon.*',
+      'useCases.*',
+      'dataSources.*',
+      'dataSources.icon.*'
+    ]
+  })
+  return response as PricingV2
 }
 
 export async function findImageDetails(imageUrl: string) {

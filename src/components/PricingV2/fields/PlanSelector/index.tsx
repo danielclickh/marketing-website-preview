@@ -2,12 +2,12 @@ import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import Label from '../../ui/Label'
 
 export default function PlanSelector() {
-  const { setValues, plans, plan } = usePricingV2Context()
+  const { setValues, sourceData, plan } = usePricingV2Context()
   return (
     <div>
       <Label>Plan</Label>
       <div className='flex gap-3'>
-        {plans.map((item, index) => {
+        {sourceData.plans.map((item, index) => {
           const isActive = plan === item.slug
           return (
             <button

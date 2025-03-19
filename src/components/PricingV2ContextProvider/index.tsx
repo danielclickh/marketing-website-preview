@@ -6,14 +6,8 @@ import {
   useMemo,
   useState
 } from 'react'
-import {
-  PricingV2EntryCompute,
-  PricingV2EntryDataSource,
-  PricingV2EntryPlan,
-  PricingV2EntryProvider
-} from '@/lib/api/strapi/types'
 import pricingFile from '../../../public/pricingV2File.json'
-import config from '../PricingV2/config'
+import * as config from '../PricingV2/config'
 import {
   Context,
   ContextBackupFrequency,
@@ -50,14 +44,12 @@ import {
   Values
 } from '../PricingV2/types'
 
-const AVG_DAYS_PER_MONTH = 30.5
-
 function getPlanPricingData(planKey: string) {
   return (pricingFile as PricingFile)[planKey]
 }
 
 function getPlanPricingConfig(planKey: string) {
-  return config.plans[planKey]
+  return config.meter.plans[planKey]
 }
 
 function validateDataSize(
@@ -111,15 +103,13 @@ const PricingV2Context = createContext<Context>({
   getPlanPricingConfig,
   validateDataSize,
 
-  // Data sources
-  plans: [],
-  setPlans: () => {},
-  providers: [],
-  setProviders: () => {},
-  computes: [],
-  setComputes: () => {},
-  dataSources: [],
-  setDataSources: () => {},
+  // Initial source data
+  sourceData: {
+    plans: [],
+    providers: [],
+    useCases: [],
+    dataSources: []
+  },
 
   // User values
   plan: null,
@@ -166,30 +156,18 @@ export function usePricingV2Context() {
 }
 
 export interface PricingV2ContextProviderProps {
-  data: Data
+  sourceData: Data
   startingValues?: Partial<Values>
   onChange?: (values: Values) => void
   children: React.ReactNode
 }
 
 export default function PricingV2ContextProvider({
-  data,
+  sourceData,
   startingValues,
   onChange,
   children
 }: PricingV2ContextProviderProps) {
-  // Data sources
-  const [plans, setPlans] = useState<Array<PricingV2EntryPlan>>(data.plans)
-  const [providers, setProviders] = useState<Array<PricingV2EntryProvider>>(
-    data.providers
-  )
-  const [computes, setComputes] = useState<Array<PricingV2EntryCompute>>(
-    data.computes
-  )
-  const [dataSources, setDataSources] = useState<
-    Array<PricingV2EntryDataSource>
-  >(data.dataSources)
-
   // -----------------------------------
   // User values
   // -----------------------------------
@@ -262,22 +240,18 @@ export default function PricingV2ContextProvider({
 
   // Get the provider strapi entry
   const providerEntry = useMemo(() => {
-    return providers
-      ? providers.find((item) => item.slug === provider)
-      : undefined
-  }, [providers, provider])
+    return sourceData.providers.find((item) => item.slug === provider)
+  }, [sourceData, provider])
 
   // Get the plan strapi entry
   const planEntry = useMemo(() => {
-    return plan ? plans.find((item) => item.slug === plan) : undefined
-  }, [plans, plan])
+    return sourceData.plans.find((item) => item.slug === plan)
+  }, [sourceData, plan])
 
   // Get the useCase strapi entry
   const useCaseEntry = useMemo(() => {
-    return planEntry && useCase
-      ? planEntry.useCases.find((item) => item.slug === useCase)
-      : undefined
-  }, [planEntry, useCase])
+    return sourceData.useCases.find((item) => item.slug === useCase)
+  }, [sourceData, useCase])
 
   // Find the pricing data for the combined plan, privder and region values
   const pricingData = useMemo(() => {
@@ -293,7 +267,7 @@ export default function PricingV2ContextProvider({
 
   // Get the compute unit price from pricing file
   const computeUnitPrice: ContextComputeUnitPrice = useMemo(() => {
-    if (!pricingData || !plan || !(plan in config.plans)) return null
+    if (!pricingData || !plan || !(plan in config.meter.plans)) return null
 
     const aggregationIds = getPlanPricingConfig(plan).aggregationIds.compute
 
@@ -306,7 +280,7 @@ export default function PricingV2ContextProvider({
 
   // Get the storage unit price from pricing file
   const storageUnitPrice: ContextStorageUnitPrice = useMemo(() => {
-    if (!pricingData || !plan || !(plan in config.plans)) return null
+    if (!pricingData || !plan || !(plan in config.meter.plans)) return null
 
     const aggregationIds = getPlanPricingConfig(plan).aggregationIds.storage
 
@@ -325,7 +299,7 @@ export default function PricingV2ContextProvider({
 
     // Divide `computeMinSize` by 8 because 1 unit is equal to a compute size of 8
     const computeMinHoursPerMonth =
-      (computeMinSize / 8) * hours * AVG_DAYS_PER_MONTH
+      (computeMinSize / 8) * hours * config.averageDaysPerMonth
     return computeUnitPrice * computeMinHoursPerMonth * (replicas || 1)
   }, [hours, computeMinSize, computeUnitPrice, replicas])
 
@@ -337,7 +311,7 @@ export default function PricingV2ContextProvider({
 
     // Divide `computeMaxSize` by 8 because 1 unit is equal to a compute size of 8
     const computeMaxHoursPerMonth =
-      (computeMaxSize / 8) * hours * AVG_DAYS_PER_MONTH
+      (computeMaxSize / 8) * hours * config.averageDaysPerMonth
     return computeUnitPrice * computeMaxHoursPerMonth * (replicas || 1)
   }, [hours, computeMaxSize, computeUnitPrice, replicas])
 
@@ -497,11 +471,13 @@ export default function PricingV2ContextProvider({
 
       // Validate plan
       if (newPlan !== undefined) {
-        newPlanEntry = plans.find((item) => item.slug === newPlan)
+        newPlanEntry = sourceData.plans.find((item) => item.slug === newPlan)
 
         if (!newPlan || !newPlanEntry) {
           newPlanEntry =
-            plans.find((item) => item.featured) || plans.at(0) || undefined
+            sourceData.plans.find((item) => item.featured) ||
+            sourceData.plans.at(0) ||
+            undefined
           newPlan = newPlanEntry?.slug || null
         }
 
@@ -519,9 +495,11 @@ export default function PricingV2ContextProvider({
 
       // Validate provider
       if (newProvider !== undefined) {
-        newProviderEntry = providers.find((item) => item.slug === newProvider)
+        newProviderEntry = sourceData.providers.find(
+          (item) => item.slug === newProvider
+        )
         if (!newProvider || !newProviderEntry) {
-          newProviderEntry = providers.at(0)
+          newProviderEntry = sourceData.providers.at(0)
           newProvider = newProviderEntry?.slug || null
         }
 
@@ -533,7 +511,7 @@ export default function PricingV2ContextProvider({
 
       // Validate use case
       if (newUseCase !== undefined) {
-        newUseCaseEntry = newPlanEntry?.useCases.find(
+        newUseCaseEntry = sourceData.useCases.find(
           (item) => item.slug === newUseCase
         )
 
@@ -565,14 +543,14 @@ export default function PricingV2ContextProvider({
       ) {
         const applyUseCaseOrFirstPackage = () => {
           if (newUseCaseEntry) {
-            newComputeMinSize = newUseCaseEntry?.minimumCompute?.size || null
-            newComputeMaxSize = newUseCaseEntry?.maximumCompute?.size || null
+            newComputeMinSize = newUseCaseEntry?.computeMinimum || null
+            newComputeMaxSize = newUseCaseEntry?.computeMaximum || null
             newReplicas = newUseCaseEntry.replicas
             newHours = newUseCaseEntry.activeHours
           } else if (newPlanEntry) {
             const first = newPlanEntry.packages.at(0)
-            newComputeMinSize = first?.minimumCompute?.size || null
-            newComputeMaxSize = first?.maximumCompute?.size || null
+            newComputeMinSize = first?.computeMinimum || null
+            newComputeMaxSize = first?.computeMaximum || null
             newReplicas = first?.replicas || null
             newHours = first?.activeHours || newHours || hours
           }
@@ -604,13 +582,17 @@ export default function PricingV2ContextProvider({
 
         // Min size is still null, default to first compute size
         if (newComputeMinSize === null) {
-          newComputeMinSize = computes[0].size
+          newComputeMinSize = config.computes[0]
         }
 
         // Max size is still null, default to last compute size
         if (newComputeMaxSize === null) {
-          newComputeMaxSize = computes[computes.length - 1].size
+          newComputeMaxSize = config.computes[config.computes.length - 1]
         }
+
+        // Ensure the compute value exists in the config array
+        newComputeMinSize = config.findClosestCompute(newComputeMinSize)
+        newComputeMaxSize = config.findClosestCompute(newComputeMaxSize)
 
         // If min value has changed, ensure max value is always greater than or equal to
         if (
@@ -643,8 +625,8 @@ export default function PricingV2ContextProvider({
         if (newPlanEntry && !newPlanEntry.customizable) {
           const packageExists = newPlanEntry.packages.find((item) => {
             return (
-              item.minimumCompute?.size === newComputeMinSize &&
-              item.maximumCompute?.size === newComputeMaxSize &&
+              item.computeMinimum === newComputeMinSize &&
+              item.computeMaximum === newComputeMaxSize &&
               item.replicas === newReplicas
             )
           })
@@ -836,11 +818,11 @@ export default function PricingV2ContextProvider({
       }
     },
     [
+      sourceData,
+
       planEntry,
       providerEntry,
 
-      plans,
-      providers,
       plan,
       provider,
       region,
@@ -875,21 +857,14 @@ export default function PricingV2ContextProvider({
   return (
     <PricingV2Context.Provider
       value={{
+        // CMS data
+        sourceData,
+
         // Helper functions
         setValues,
         getPlanPricingData,
         getPlanPricingConfig,
         validateDataSize,
-
-        // Data sources
-        plans,
-        setPlans,
-        providers,
-        setProviders,
-        computes,
-        setComputes,
-        dataSources,
-        setDataSources,
 
         // User values
         plan,
