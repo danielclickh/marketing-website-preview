@@ -26,10 +26,10 @@ export default function Footer({
 
               return (
                 <div key={topMenu.title} className='flex flex-col lg:w-4/12'>
-                  <h3 className='mb-4 font-inter text-sm font-bold text-neutral-100'>
+                  <h3 className='mb-3 font-inter text-sm font-semibold text-neutral-100'>
                     {topMenu.title}
                   </h3>
-                  <ul className='flex flex-col gap-2'>
+                  <ul className='flex flex-col'>
                     {topMenu.items.map((item) => (
                       <li key={item.id}>
                         <FooterLink

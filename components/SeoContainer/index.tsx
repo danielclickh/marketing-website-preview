@@ -36,10 +36,20 @@ function SeoContainer({
     return predefinedUrls[path] || `${siteUrl}${path}`
   })()
 
+  const canonicalUrlJP = (() => {
+    if (path.startsWith('http')) {
+      return path
+    }
+
+    return `${siteUrl}/jp${path}`
+  })()
+
   return (
     <Head>
       {title.length > 0 && <title>{title}</title>}
       <link rel='canonical' href={canonicalUrl} key='canonical' />
+      <link rel='alternate' hrefLang='en' href={canonicalUrl} />
+      <link rel='alternate' hrefLang='ja' href={canonicalUrlJP} />
 
       {description.length > 0 && (
         <meta name='description' content={description} />
@@ -62,9 +72,6 @@ function SeoContainer({
         <meta name='twitter:description' content={description} />
       )}
       <meta name='twitter:image' content={socialImageUrl} />
-
-      <link rel='alternate' hrefLang='en' href='https://clickhouse.com' />
-      <link rel='alternate' hrefLang='ja' href='https://clickhouse.com/jp' />
     </Head>
   )
 }
