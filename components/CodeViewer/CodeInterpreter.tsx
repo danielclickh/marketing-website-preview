@@ -12,6 +12,8 @@ import {
   QueryResults
 } from './types'
 import { formatBytes, formatReadableRows, roundByScale } from './utils'
+import { useRouter } from 'next/router'
+
 
 interface Props {
   queryString: string
@@ -42,6 +44,8 @@ function CodeInterpreter({
   const [showResultsPanel, setShowResultsPanel] = useState<boolean>(false)
   const [queryRunning, setQueryRunning] = useState<boolean>(false)
   const [currentView, setCurrentView] = useState<DefaultView>(view)
+  const [runByUser, setRunByUser] = useState<boolean>(false)
+  const router = useRouter()
 
   const clickhouse_settings = JSON.parse(settings)
   const clickhouse_web = createWebClient({
@@ -86,6 +90,12 @@ function CodeInterpreter({
     })
 
     try {
+      // Inject current path as query comment
+      const currentPath = router.asPath
+      if (currentPath) {
+        const jsonPath = JSON.stringify({'url.path': currentPath})
+        query = `-- ${jsonPath} \n${query}`
+      }
       const res = await clickhouse_web.query({
         query: query,
         query_id: query_id,
@@ -111,11 +121,12 @@ function CodeInterpreter({
 
   useEffect(() => {
     if (run) {
-      handleRunQuery()
+      handleRunQuery(false)
     }
   }, [run])
 
-  const handleRunQuery = async () => {
+  const handleRunQuery = async (runManually: boolean) => {
+
     const query_run_id = generateId()
     setResults({})
     setQueryRunning(true)
@@ -128,6 +139,7 @@ function CodeInterpreter({
       query_id: res.query_id,
       error: res.error
     })
+    setRunByUser(runManually)
   }
 
   const closeResultPanel = (event: any) => {
@@ -138,6 +150,16 @@ function CodeInterpreter({
   const openTableResultPanel = (event: any) => {
     event.preventDefault()
     setShowResultsPanel(true)
+  }
+
+  const runBy = () => {
+    if (runByUser) {
+      return 'Executed by user.'
+    } else {
+      if (run) {
+        return 'Executed on load.'
+      }
+    }
   }
 
   const hideTableResultButton = () => {
@@ -186,8 +208,8 @@ function CodeInterpreter({
             </RadioGroup>
           )}
           {show_statistics && results?.response?.statistics && (
-            <div className='flex text-xs italic h-full mb-[4px] ml-[16px]'>
-              {`Read ${formatReadableRows(results.response.statistics.rows_read)} rows and ${formatBytes(results.response.statistics.bytes_read)} bytes in ${roundByScale(results.response.statistics.elapsed)} seconds`}
+            <div className='flex text-xs italic h-full mb-[4px] ml-[8px]'>
+              {`${runBy()} Read ${formatReadableRows(results.response.statistics.rows_read)} rows and ${formatBytes(results.response.statistics.bytes_read)} in ${roundByScale(results.response.statistics.elapsed)} seconds`}
             </div>
           )}
         </div>
@@ -208,7 +230,7 @@ function CodeInterpreter({
                 <Tooltip.Trigger>
                   <Button
                     iconLeft='play'
-                    onClick={handleRunQuery}
+                    onClick={() => {handleRunQuery(true)}}
                     type='primary'
                     loading={queryRunning}></Button>
                 </Tooltip.Trigger>
