@@ -74,6 +74,9 @@ export type ContextStorageUnitPrice = null | number
 export type ContextComputeMinPrice = null | number
 export type ContextComputeMaxPrice = null | number
 export type ContextStoragePrice = null | number
+export type ContextBackupsPrice = null | number
+export type ContextClickpipesPrice = null | number
+export type ContextTransfersPrice = null | number
 export type ContextTotalMinPrice = null | number
 export type ContextTotalMaxPrice = null | number
 export type ContextTotalPriceRange = null | [number] | [number, number]
@@ -116,6 +119,9 @@ export interface Context {
   computeMinPrice: ContextComputeMinPrice
   computeMaxPrice: ContextComputeMaxPrice
   storagePrice: ContextStoragePrice
+  backupsPrice: ContextBackupsPrice
+  clickpipesPrice: ContextClickpipesPrice
+  transfersPrice: ContextTransfersPrice
   totalMinPrice: ContextTotalMinPrice
   totalMaxPrice: ContextTotalMaxPrice
   totalPriceRange: ContextTotalPriceRange

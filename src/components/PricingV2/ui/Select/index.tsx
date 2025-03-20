@@ -42,7 +42,7 @@ const SelectOption = memo(function SelectOption({
       {icon && (
         <StrapiImageUrl
           {...icon}
-          className='h-auto w-8 flex-shrink-0 flex-grow-0'
+          className='!h-6 !w-8 object-scale-down object-center flex-shrink-0 flex-grow-0'
         />
       )}
       {label}
@@ -75,7 +75,7 @@ const Select = memo(function Select({
                 {selectedOption.icon && (
                   <StrapiImageUrl
                     {...selectedOption.icon}
-                    className='h-auto w-8 flex-shrink-0 flex-grow-0'
+                    className='!h-6 !w-8 object-scale-down object-center flex-shrink-0 flex-grow-0'
                   />
                 )}
                 {selectedOption.label}

@@ -15,8 +15,7 @@ export default function EstimatorCtas() {
     computeMinSize,
     computeMaxSize,
     replicas,
-    storageUnit,
-    storageSize,
+    storage,
     storageCompressed,
     totalMinPrice
   } = usePricingV2Context()
@@ -35,8 +34,7 @@ export default function EstimatorCtas() {
           provider: provider,
           region: region,
           hours: hours,
-          storageVolume: storageSize,
-          storageUnit: storageUnit,
+          storage: storage,
           storageCompressed: storageCompressed,
           minimumCompute: computeMinSize,
           maximumCompute: computeMaxSize,
@@ -52,8 +50,7 @@ export default function EstimatorCtas() {
       computeMinSize,
       computeMaxSize,
       replicas,
-      storageUnit,
-      storageSize,
+      storage,
       storageCompressed
     ]
   )
@@ -73,8 +70,7 @@ export default function EstimatorCtas() {
         provider: provider,
         region: region,
         hours: hours,
-        storageVolume: storageSize,
-        storageUnit: storageUnit,
+        storage: storage,
         storageCompressed: storageCompressed,
         minimumCompute: computeMinSize,
         maximumCompute: computeMaxSize,
@@ -89,8 +85,7 @@ export default function EstimatorCtas() {
     computeMinSize,
     computeMaxSize,
     replicas,
-    storageUnit,
-    storageSize,
+    storage,
     storageCompressed
   ])
 
@@ -106,18 +101,7 @@ export default function EstimatorCtas() {
       )
       console.error('Error copying to clipboard:', err)
     })
-  }, [
-    plan,
-    provider,
-    region,
-    hours,
-    computeMinSize,
-    computeMaxSize,
-    replicas,
-    storageUnit,
-    storageSize,
-    storageCompressed
-  ])
+  }, [])
   return (
     <>
       {/* Promote free trial */}

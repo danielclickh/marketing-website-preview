@@ -1,6 +1,4 @@
-import Link from 'next/link'
 import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
-import HRSeparator from '@/components/HRSeparator'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import BackupsSelector from '../../fields/BackupsSelector'
 import ComputeSelector from '../../fields/ComputeSelector'
@@ -286,20 +284,6 @@ export default function Estimator() {
             </div>
             <EstimatorCtas />
             <PriceList />
-
-            <HRSeparator className='my-4' />
-
-            <p className='mt-4 text-xs text-slate-300'>
-              ClickPipes and data transfer costs are not included. Most
-              customers won’t see a significant increase in their monthly bill
-              from these additional usage dimensions.{' '}
-              <Link
-                href='/docs/en/cloud/manage/jan-2025-faq/pricing-dimensions'
-                target='_blank'
-                className='whitespace-nowrap text-primary-300 hover:underline'>
-                See full pricing
-              </Link>
-            </p>
           </div>
         </div>
       </div>

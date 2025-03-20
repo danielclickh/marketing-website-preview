@@ -6,14 +6,21 @@ import {
   useMemo,
   useState
 } from 'react'
-import { humanReadableTo } from '@/lib/utils/memory'
+import {
+  bytesTo,
+  humanReadableTo,
+  humanReadableToBytes
+} from '@/lib/utils/memory'
 import pricingFile from '../../../public/pricingV2File.json'
 import * as config from '../PricingV2/config'
+import { averageDaysPerMonth } from '../PricingV2/config'
 import {
   Context,
   ContextBackupFrequency,
   ContextBackupRetention,
+  ContextBackupsPrice,
   ContextClickpipes,
+  ContextClickpipesPrice,
   ContextComputeMaxPrice,
   ContextComputeMaxSize,
   ContextComputeMinPrice,
@@ -35,6 +42,7 @@ import {
   ContextTotalMinPrice,
   ContextTotalPriceRange,
   ContextTransfers,
+  ContextTransfersPrice,
   ContextUseCase,
   Data,
   PricingFile,
@@ -86,11 +94,16 @@ const PricingV2Context = createContext<Context>({
   planEntry: undefined,
   providerEntry: undefined,
   useCaseEntry: undefined,
+
   computeUnitPrice: null,
   storageUnitPrice: null,
   computeMinPrice: null,
   computeMaxPrice: null,
   storagePrice: null,
+  backupsPrice: null,
+  clickpipesPrice: null,
+  transfersPrice: null,
+
   totalMinPrice: null,
   totalMaxPrice: null,
   totalPriceRange: null
@@ -272,19 +285,100 @@ export default function PricingV2ContextProvider({
     return usageInTb * storageUnitPrice
   }, [storage, storageCompressed, storageUnitPrice])
 
+  const backupsPrice: ContextBackupsPrice = useMemo(() => {
+    if (!storageUnitPrice || !backupFrequency || !backupRetention) return null
+
+    const hoursInMonth = averageDaysPerMonth * 24
+    const estimatedBackupsPerMonth = Math.floor(hoursInMonth / backupFrequency)
+
+    let usageInBytes = 0
+
+    // Add user defined values
+    if (!estimateBackup) {
+      usageInBytes += fullBackup ? humanReadableToBytes(fullBackup) : 0
+      usageInBytes += incrementalBackup
+        ? humanReadableToBytes(incrementalBackup)
+        : 0
+    }
+
+    // Esitmate backup
+    if (estimateBackup && storage) {
+      const storageBytes = humanReadableToBytes(storage)
+
+      // Storage with 1% increase
+      usageInBytes = storageBytes
+        ? storageBytes + (storageBytes / 100) * estimatedBackupsPerMonth
+        : 0
+
+      // If the storage isn't already compressed, apply standard 10x compression
+      if (!storageCompressed) {
+        usageInBytes = usageInBytes / 10
+      }
+    }
+
+    // Unit price is in terabytes so we need to convert usage accordingly
+    let usageInTb = bytesTo(usageInBytes, 'TB')
+
+    // Bail if converting value failed
+    if (!usageInTb) return null
+
+    return usageInTb * storageUnitPrice
+  }, [
+    storage,
+    storageCompressed,
+    storageUnitPrice,
+    backupFrequency,
+    backupRetention,
+    estimateBackup,
+    fullBackup,
+    incrementalBackup
+  ])
+
+  const clickpipesPrice: ContextClickpipesPrice = useMemo(() => {
+    return null
+  }, [])
+
+  const transfersPrice: ContextTransfersPrice = useMemo(() => {
+    return null
+  }, [])
+
   // Calculate the minimum total price (min compute & min storage combined)
   const totalMinPrice: ContextTotalMinPrice = useMemo(() => {
-    return [computeMinPrice, storagePrice]
+    return [
+      computeMinPrice,
+      storagePrice,
+      backupsPrice,
+      clickpipesPrice,
+      transfersPrice
+    ]
       .filter((val) => val !== null)
       .reduce((total, current) => total + current, 0)
-  }, [computeMinPrice, storagePrice, replicas])
+  }, [
+    computeMinPrice,
+    storagePrice,
+    backupsPrice,
+    clickpipesPrice,
+    transfersPrice
+  ])
 
   // Calculate the maximum total price (max compute & max storage combined)
   const totalMaxPrice: ContextTotalMaxPrice = useMemo(() => {
-    return [computeMaxPrice, storagePrice]
+    return [
+      computeMaxPrice,
+      storagePrice,
+      backupsPrice,
+      clickpipesPrice,
+      transfersPrice
+    ]
       .filter((val) => val !== null)
       .reduce((total, current) => total + current, 0)
-  }, [computeMaxPrice, storagePrice, replicas])
+  }, [
+    computeMaxPrice,
+    storagePrice,
+    backupsPrice,
+    clickpipesPrice,
+    transfersPrice
+  ])
 
   const totalPriceRange: ContextTotalPriceRange = useMemo(() => {
     const isValid = !!(
@@ -861,6 +955,9 @@ export default function PricingV2ContextProvider({
         computeMinPrice,
         computeMaxPrice,
         storagePrice,
+        backupsPrice,
+        clickpipesPrice,
+        transfersPrice,
         totalMinPrice,
         totalMaxPrice,
         totalPriceRange
