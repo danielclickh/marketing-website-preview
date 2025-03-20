@@ -189,21 +189,25 @@ export default function PricingV2ContextProvider({
   // -----------------------------------
 
   // Get the provider strapi entry
+  //
   const providerEntry = useMemo(() => {
     return sourceData.providers.find((item) => item.slug === provider)
   }, [sourceData, provider])
 
   // Get the plan strapi entry
+  //
   const planEntry = useMemo(() => {
     return sourceData.plans.find((item) => item.slug === plan)
   }, [sourceData, plan])
 
   // Get the useCase strapi entry
+  //
   const useCaseEntry = useMemo(() => {
     return sourceData.useCases.find((item) => item.slug === useCase)
   }, [sourceData, useCase])
 
   // Find the pricing data for the combined plan, privder and region values
+  //
   const pricingData = useMemo(() => {
     if (!plan || !provider || !region || !(plan in pricingFile)) return null
 
@@ -216,6 +220,7 @@ export default function PricingV2ContextProvider({
   }, [plan, provider, region])
 
   // Get the compute unit price from pricing file
+  //
   const computeUnitPrice: ContextComputeUnitPrice = useMemo(() => {
     if (!pricingData || !plan || !(plan in config.meter.plans)) return null
 
@@ -229,6 +234,7 @@ export default function PricingV2ContextProvider({
   }, [pricingData, plan])
 
   // Get the storage unit price from pricing file
+  //
   const storageUnitPrice: ContextStorageUnitPrice = useMemo(() => {
     if (!pricingData || !plan || !(plan in config.meter.plans)) return null
 
@@ -242,6 +248,7 @@ export default function PricingV2ContextProvider({
   }, [pricingData, plan])
 
   // Calculate the minimum compute price
+  //
   const computeMinPrice: ContextComputeMinPrice = useMemo(() => {
     if (!computeUnitPrice || hours === null || computeMinSize === null) {
       return null
@@ -254,6 +261,7 @@ export default function PricingV2ContextProvider({
   }, [hours, computeMinSize, computeUnitPrice, replicas])
 
   // Calculate the maximum compute price
+  //
   const computeMaxPrice: ContextComputeMaxPrice = useMemo(() => {
     if (!computeUnitPrice || hours === null || computeMaxSize === null) {
       return null
@@ -266,6 +274,7 @@ export default function PricingV2ContextProvider({
   }, [hours, computeMaxSize, computeUnitPrice, replicas])
 
   // Calculate the storage price
+  //
   const storagePrice: ContextStoragePrice = useMemo(() => {
     if (!storage || !storageUnitPrice) {
       return null
@@ -285,6 +294,8 @@ export default function PricingV2ContextProvider({
     return usageInTb * storageUnitPrice
   }, [storage, storageCompressed, storageUnitPrice])
 
+  // Calculate the price of backups
+  //
   const backupsPrice: ContextBackupsPrice = useMemo(() => {
     if (!storageUnitPrice || !backupFrequency || !backupRetention) return null
 
@@ -334,10 +345,62 @@ export default function PricingV2ContextProvider({
     incrementalBackup
   ])
 
+  // Calculate the price of clickpipes
+  //
   const clickpipesPrice: ContextClickpipesPrice = useMemo(() => {
-    return null
-  }, [])
+    if (!clickpipes?.length) return null
 
+    const {
+      computeUnit,
+      computeUsdPerHour,
+      replicaComputeUsdPerHour,
+      ingestedUsdPerHour
+    } = config.clickpipePircingDimentions
+
+    let dailyCost = 0
+
+    clickpipes.forEach(({ source, dataIngested, instances }) => {
+      const sourceEntry = sourceData.dataSources.find(
+        (item) => item.slug === source
+      )
+
+      let pipeIncuredCost = false
+
+      // Make sure the clickpipe shouldn't be excluded (e.g. free for public beta)
+      if (sourceEntry && !sourceEntry.excludeFromCalculations) {
+        // If the source entry allows data streaming/ingestion
+        if (sourceEntry.ingestsData) {
+          // Double-check the user has given a valid value
+          const dataIngestedInGb = dataIngested
+            ? humanReadableTo(dataIngested, 'GB')
+            : null
+          if (dataIngestedInGb) {
+            dailyCost +=
+              computeUnit * computeUsdPerHour * 24 +
+              ingestedUsdPerHour * dataIngestedInGb
+
+            pipeIncuredCost = true
+          }
+        }
+
+        // Else it must be object storage
+        else {
+          dailyCost += computeUnit * computeUsdPerHour * 24
+          pipeIncuredCost = true
+        }
+      }
+
+      // Apply cost for replicas
+      if (pipeIncuredCost) {
+        dailyCost += instances * replicaComputeUsdPerHour * 24
+      }
+    })
+
+    return dailyCost * config.averageDaysPerMonth
+  }, [clickpipes, sourceData])
+
+  // Calculate the price of data transfee
+  //
   const transfersPrice: ContextTransfersPrice = useMemo(() => {
     return null
   }, [])

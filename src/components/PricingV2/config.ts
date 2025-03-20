@@ -8,7 +8,16 @@ export const computes = [
 ]
 
 // In hours
+// @link https://clickhouse.com/docs/cloud/manage/backups/configurable-backups
 export const backupIntervals = [6, 8, 12, 16, 20, 24, 36, 48]
+
+// @link https://clickhouse.com/docs/cloud/manage/jan-2025-faq/pricing-dimensions#what-are-the-clickpipes-public-prices
+export const clickpipePircingDimentions = {
+  computeUnit: 0.25,
+  computeUsdPerHour: 0.2,
+  replicaComputeUsdPerHour: 0.05,
+  ingestedUsdPerHour: 0.04
+}
 
 export const meter: MeterConfig = {
   plans: {
