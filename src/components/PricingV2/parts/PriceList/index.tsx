@@ -135,7 +135,7 @@ export default function PriceList() {
         )}
 
       {/* Backups price */}
-      {backupsPrice && (
+      {!!backupsPrice && (
         <li className='flex items-center gap-x-2'>
           <CheckIcon className='h-4 w-4 text-primary-300' />
           <PriceUsd price={backupsPrice || 0.0} /> for backups{' '}
@@ -161,7 +161,7 @@ export default function PriceList() {
       )}
 
       {/* Clickpipes/data sources price */}
-      {clickpipesPrice && (
+      {!!clickpipesPrice && (
         <li className='flex items-center gap-x-2'>
           <CheckIcon className='h-4 w-4 text-primary-300' />
           <PriceUsd price={clickpipesPrice || 0.0} /> for ClickPipes
@@ -169,7 +169,7 @@ export default function PriceList() {
       )}
 
       {/* Data transfers price */}
-      {transfersPrice && (
+      {!!transfersPrice && (
         <li className='flex items-center gap-x-2'>
           <CheckIcon className='h-4 w-4 text-primary-300' />
           <PriceUsd price={transfersPrice || 0.0} /> for data transfer
