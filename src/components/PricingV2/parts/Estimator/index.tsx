@@ -191,7 +191,12 @@ export default function Estimator() {
                   // Setting default values
                   setValues({
                     backupFrequency: 24,
-                    backupRetention: 1
+                    backupRetention: 1,
+                    estimateBackupSize: true,
+                    fullBackupUnit: null,
+                    fullBackupSize: null,
+                    incrementalBackupUnit: null,
+                    incrementalBackupSize: null
                   })
 
                   // Close other accordions
