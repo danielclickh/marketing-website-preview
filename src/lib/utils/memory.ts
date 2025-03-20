@@ -70,12 +70,7 @@ export function bytesTo(
       ? BIBYTE_UNITS
       : BYTE_UNITS
 
-  const exponent = Math.min(
-    Math.floor(
-      binary ? Math.log(bytes) / Math.log(1024) : Math.log10(bytes) / 3
-    ),
-    UNITS.length - 1
-  )
+  const exponent = UNITS.indexOf(unit)
 
   bytes /= (binary ? 1024 : 1000) ** exponent
 
