@@ -364,35 +364,35 @@ export default function PricingV2ContextProvider({
         (item) => item.slug === source
       )
 
-      let pipeIncuredCost = false
+      const replicaCost = instances * replicaComputeUsdPerHour * 24
+      let ingestCost = 0
+      let computeCost = 0
 
       // Make sure the clickpipe shouldn't be excluded (e.g. free for public beta)
       if (sourceEntry && !sourceEntry.excludeFromCalculations) {
         // If the source entry allows data streaming/ingestion
         if (sourceEntry.ingestsData) {
-          // Double-check the user has given a valid value
+          // Calculations are based on gigabytes so we need to conver the users value accordingly
           const dataIngestedInGb = dataIngested
             ? humanReadableTo(dataIngested, 'GB')
             : null
+
           if (dataIngestedInGb) {
-            dailyCost +=
+            ingestCost =
               computeUnit * computeUsdPerHour * 24 +
               ingestedUsdPerHour * dataIngestedInGb
-
-            pipeIncuredCost = true
           }
         }
 
         // Else it must be object storage
         else {
-          dailyCost += computeUnit * computeUsdPerHour * 24
-          pipeIncuredCost = true
+          computeCost = computeUnit * computeUsdPerHour * 24
         }
       }
 
       // Apply cost for replicas
-      if (pipeIncuredCost) {
-        dailyCost += instances * replicaComputeUsdPerHour * 24
+      if (ingestCost || computeCost) {
+        dailyCost += ingestCost + computeCost + replicaCost
       }
     })
 
