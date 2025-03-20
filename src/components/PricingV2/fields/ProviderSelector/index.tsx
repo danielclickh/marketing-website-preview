@@ -1,8 +1,8 @@
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
-import { StrapiImage } from '../../../StrapiElements'
-import Label from '../../ui/Label'
-import { PricingV2EntryProvider } from '@/lib/api/strapi/types'
 import { memo } from 'react'
+import { PricingV2ComponentProvider } from '@/lib/api/strapi/types'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import { StrapiImage } from '@/components/StrapiElements'
+import Label from '../../ui/Label'
 
 export interface ProviderSelectorProps {
   displayLabel?: boolean
@@ -12,7 +12,7 @@ export interface ProviderSelectorProps {
 const ProviderLogo = memo(function ProviderLogo({
   logo
 }: {
-  logo: PricingV2EntryProvider['logo']
+  logo: PricingV2ComponentProvider['logo']
 }) {
   return <StrapiImage {...logo} />
 })

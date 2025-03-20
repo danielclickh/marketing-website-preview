@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
-import { PricingV2EntryUseCase } from '@/lib/api/strapi/types'
-import HRSeparator from '../../../HRSeparator'
+import { PricingV2ComponentPackage } from '@/lib/api/strapi/types'
+import HRSeparator from '@/components/HRSeparator'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
-import { SuiText } from '../../../sui'
+import { SuiText } from '@/components/sui'
 import * as config from '../../config'
 import Label from '../../ui/Label'
 import Select, { Options } from '../../ui/Select'
@@ -182,7 +182,7 @@ export default function ComputeSelector() {
                 options={useCaseOptions}
                 value={useCaseEntry?.slug}
                 placeholder='Select use case'
-                onChange={(useCaseSlug: PricingV2EntryUseCase['slug']) => {
+                onChange={(useCaseSlug: PricingV2ComponentPackage['slug']) => {
                   const useCaseObject = useCases.find(
                     (item) => item.slug === useCaseSlug
                   )
