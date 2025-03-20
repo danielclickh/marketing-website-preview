@@ -18,8 +18,14 @@ import PriceList from '../PriceList'
 type Addons = 'backups' | 'dataSources' | 'dataTransfer'
 
 export default function Estimator() {
-  const { setValues, planEntry, backupFrequency, backupRetention } =
-    usePricingV2Context()
+  const {
+    setValues,
+    planEntry,
+    backupFrequency,
+    backupRetention,
+    clickpipes,
+    transfers
+  } = usePricingV2Context()
 
   // Tracks the accordion "open" states. Allows us to open and close programatically.
   const [computeOpen, setComputeOpen] = useState(true)
@@ -66,13 +72,29 @@ export default function Estimator() {
     )
   }, [planEntry, addonDisplayOrder])
 
-  // Sync backup accordion with context values
+  // Ensure backups accordion is pressent in UI when context values change
   useEffect(() => {
     if (backupFrequency && backupRetention && !backupsOpen) {
       addAddon('backups')
       setBackupsOpen(true)
     }
   }, [backupFrequency, backupRetention])
+
+  // Ensure dataSources accordion is pressent in UI when context values change
+  useEffect(() => {
+    if (!!clickpipes?.length && !dataSourcesOpen) {
+      addAddon('dataSources')
+      setDataSourcesOpen(true)
+    }
+  }, [clickpipes])
+
+  // Ensure dataTransfer accordion is pressent in UI when context values change
+  useEffect(() => {
+    if (!!transfers?.length && !dataTransferOpen) {
+      addAddon('dataTransfer')
+      setDataTransfersOpen(true)
+    }
+  }, [transfers])
 
   // Open compute when no addons added
   useEffect(() => {
