@@ -1,14 +1,13 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   BYTE_UNITS,
-  bytesTo,
+  bytesToHumanReadable,
   humanReadableToBytes
 } from '../../../../lib/utils/memory'
 import Select, { Options } from '../Select'
 
 export type Value = {
-  size: null | number
-  unit: null | string
+  bytes: null | number
   formatted: null | string
 }
 
@@ -20,31 +19,6 @@ export interface DataSizeProps {
   className?: string
 }
 
-const valueParts = (
-  formattedValue: string | null,
-  defaultValue: any = null
-) => {
-  if (!formattedValue) return defaultValue
-
-  const pattern = new RegExp(
-    `^([\-\+]?(?:\\d+(?:\\.\\d+)?))(${BYTE_UNITS.join('|')})$`,
-    'i'
-  )
-
-  // If is a match, return example: [ "-2.75GB", "-2.75", "GB" ]
-  const matches = formattedValue.trim().match(pattern)
-
-  if (!matches) return defaultValue
-
-  const value = Number(matches[1])
-  const unit = matches[2]
-
-  return {
-    value,
-    unit
-  }
-}
-
 export default function DataSize({
   min,
   max,
@@ -52,46 +26,35 @@ export default function DataSize({
   onChange,
   className = ''
 }: DataSizeProps) {
-  const [inputValue, setInputValue] = useState<number | null>(null)
-  const [unitValue, setUnitValue] = useState<string | null>(null)
+  const [bytesValue, setBytesValue] = useState<number | null>(null)
 
-  const formattedValue = useMemo(() => {
-    return inputValue && unitValue ? `${inputValue}${unitValue}` : null
-  }, [inputValue, unitValue])
-
+  // Get the minimum value in bytes
   const minBytes: number | null = useMemo(() => {
     return min ? humanReadableToBytes(min) : null
   }, [min])
 
+  // Get the maximum value in bytes
   const maxBytes: number | null = useMemo(() => {
     return max ? humanReadableToBytes(max) : null
   }, [max])
 
-  const valueBytes = useMemo(() => {
-    return formattedValue ? humanReadableToBytes(formattedValue) : null
-  }, [formattedValue])
-
-  useEffect(() => {
-    if (value) {
-      const parts = valueParts(value)
-      if (parts) {
-        setInputValue(Math.round(parts.value))
-        setUnitValue(parts.unit)
+  // All-in-one validator and setter
+  const validateAndSetBytesValue = useCallback(
+    (bytes: number | null) => {
+      if (bytes === null) {
+        setBytesValue(null)
+      } else if (minBytes && bytes < minBytes) {
+        setBytesValue(minBytes)
+      } else if (maxBytes && bytes > maxBytes) {
+        setBytesValue(maxBytes)
+      } else {
+        setBytesValue(bytes)
       }
-    }
-  }, [value])
+    },
+    [minBytes, maxBytes, setBytesValue]
+  )
 
-  // Validate value
-  useEffect(() => {
-    if (unitValue && valueBytes && minBytes && valueBytes < minBytes) {
-      setInputValue(bytesTo(minBytes, unitValue))
-    }
-
-    if (unitValue && valueBytes && maxBytes && valueBytes > maxBytes) {
-      setInputValue(bytesTo(maxBytes, unitValue))
-    }
-  }, [minBytes, maxBytes, valueBytes, unitValue])
-
+  // Create filtered options list, removing units outside the min/max range
   const units: Options = useMemo(() => {
     let options = BYTE_UNITS
 
@@ -117,15 +80,78 @@ export default function DataSize({
     })
   }, [minBytes, maxBytes])
 
+  // Generate human readable value
+  const formattedValue = useMemo(() => {
+    return bytesValue ? bytesToHumanReadable(bytesValue) : null
+  }, [bytesValue])
+
+  // Get the corrisponding input values for the byteValue
+  const { value: inputValue, unit: unitValue } = useMemo(() => {
+    const defaultValue = {
+      value: 0,
+      unit: units?.[0]?.value || null
+    }
+
+    if (!formattedValue) return defaultValue
+
+    const pattern = new RegExp(
+      `^([\-\+]?(?:\\d+(?:\\.\\d+)?))(${BYTE_UNITS.join('|')})$`,
+      'i'
+    )
+
+    // If is a match, return example: [ "-2.75GB", "-2.75", "GB" ]
+    const matches = formattedValue.trim().match(pattern)
+
+    if (!matches) return defaultValue
+
+    const value = Number(matches[1])
+    const unit = matches[2]
+
+    return {
+      value,
+      unit
+    }
+  }, [formattedValue, units])
+
+  // Sync prop with local state
+  useEffect(() => {
+    validateAndSetBytesValue(value ? humanReadableToBytes(value) : null)
+  }, [value])
+
+  // Fire on change callback
   useEffect(() => {
     if (onChange) {
       onChange({
-        size: inputValue,
-        unit: unitValue,
+        bytes: bytesValue,
         formatted: formattedValue
       })
     }
-  }, [inputValue, unitValue, formattedValue])
+  }, [bytesValue, formattedValue])
+
+  // Update bytesValue on input change
+  const handleInputChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const userValue = Math.round(Number(event.target.value || '0'))
+      validateAndSetBytesValue(
+        unitValue && userValue
+          ? humanReadableToBytes(`${userValue}${unitValue}`)
+          : null
+      )
+    },
+    [validateAndSetBytesValue, unitValue]
+  )
+
+  // Update bytesValue on select change
+  const handleSelectChange = useCallback(
+    (userValue: string) => {
+      validateAndSetBytesValue(
+        userValue && inputValue
+          ? humanReadableToBytes(`${inputValue}${userValue}`)
+          : null
+      )
+    },
+    [validateAndSetBytesValue, inputValue]
+  )
 
   return (
     <div className={`grid grid-cols-2 lg:grid-cols-3 gap-2 ${className}`}>
@@ -135,16 +161,13 @@ export default function DataSize({
         min={0}
         step={1}
         value={inputValue?.toString() || '0'}
-        onChange={(event) => {
-          const inputValue = event.target.value || '0'
-          setInputValue(Math.round(Number(inputValue)))
-        }}
+        onChange={handleInputChange}
       />
       <div className='flex flex-col justify-end'>
         <Select
           options={units}
-          value={unitValue || units?.[0]?.value}
-          onChange={setUnitValue}
+          value={unitValue}
+          onChange={handleSelectChange}
         />
       </div>
     </div>
