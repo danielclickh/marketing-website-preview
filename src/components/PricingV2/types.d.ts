@@ -5,7 +5,9 @@ import {
   PricingV2ComponentProvider
 } from '@/lib/api/strapi/types'
 
-export type StorageUnits = 'gb' | 'tb' | 'pb'
+export type StorageUnits = 'B' | 'KB' | 'MB' | 'GB' | 'TB' | 'PB' | 'EB' | 'ZB'
+
+export type StorageValue = `${number}${StorageUnits}`
 
 export type MeterPlanConfig = {
   planTemplateId: string
@@ -38,14 +40,12 @@ export type PricingFile = Record<string, PricingFileItem>
 export type ClickPipe = {
   source: string
   instances: number
-  dataIngestedUnit?: StorageUnits | null
-  dataIngestedSize?: number | null
+  dataIngested?: null | string | StorageValue
 }
 
 export type Transfer = {
   type: 'inter-region' | 'public-internet'
-  unit: StorageUnits
-  size: number
+  value: null | string | StorageValue
   region?: string | null
 }
 
@@ -58,16 +58,13 @@ export type ContextHours = null | number
 export type ContextComputeMinSize = null | number
 export type ContextComputeMaxSize = null | number
 export type ContextReplicas = null | number
-export type ContextStorageUnit = null | StorageUnits
-export type ContextStorageSize = null | number
+export type ContextStorage = null | string | StorageValue
 export type ContextStorageCompressed = null | boolean
 export type ContextBackupFrequency = null | number
 export type ContextBackupRetention = null | number
-export type ContextEstimateBackupSize = null | boolean
-export type ContextFullBackupUnit = null | StorageUnits
-export type ContextFullBackupSize = null | number
-export type ContextIncrementalBackupUnit = null | StorageUnits
-export type ContextIncrementalBackupSize = null | number
+export type ContextEstimateBackup = null | boolean
+export type ContextFullBackup = null | string | StorageValue
+export type ContextIncrementalBackup = null | string | StorageValue
 export type ContextClickpipes = null | Array<ClickPipe>
 export type ContextTransfers = null | Array<Transfer>
 
@@ -87,11 +84,6 @@ export interface Context {
   setValues: (values: Partial<Values>) => void
   getPlanPricingData: (value: string) => undefined | PricingFileItem
   getPlanPricingConfig: (value: string) => undefined | PlanConfig
-  validateDataSize: (
-    size: number,
-    unit: StorageUnits,
-    maxGb?: number | null
-  ) => { size: number; unit: StorageUnits }
 
   // Data sources
   sourceData: PricingV2
@@ -105,16 +97,13 @@ export interface Context {
   computeMinSize: ContextComputeMinSize
   computeMaxSize: ContextComputeMaxSize
   replicas: ContextReplicas
-  storageUnit: ContextStorageUnit
-  storageSize: ContextStorageSize
+  storage: ContextStorage
   storageCompressed: ContextStorageCompressed
   backupFrequency: ContextBackupFrequency
   backupRetention: ContextBackupRetention
-  estimateBackupSize: ContextEstimateBackupSize
-  fullBackupUnit: ContextFullBackupUnit
-  fullBackupSize: ContextFullBackupSize
-  incrementalBackupUnit: ContextIncrementalBackupUnit
-  incrementalBackupSize: ContextIncrementalBackupSize
+  estimateBackup: ContextEstimateBackup
+  fullBackup: ContextFullBackup
+  incrementalBackup: ContextIncremental
   clickpipes: ContextClickpipes
   transfers: ContextTransfers
 
@@ -144,16 +133,13 @@ export type Values = Pick<
   | 'computeMinSize'
   | 'computeMaxSize'
   | 'replicas'
-  | 'storageUnit'
-  | 'storageSize'
+  | 'storage'
   | 'storageCompressed'
   | 'backupFrequency'
   | 'backupRetention'
-  | 'estimateBackupSize'
-  | 'fullBackupUnit'
-  | 'fullBackupSize'
-  | 'incrementalBackupUnit'
-  | 'incrementalBackupSize'
+  | 'estimateBackup'
+  | 'fullBackup'
+  | 'incrementalBackup'
   | 'clickpipes'
   | 'transfers'
 >

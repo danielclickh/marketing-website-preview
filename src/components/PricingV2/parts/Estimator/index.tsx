@@ -120,11 +120,9 @@ export default function Estimator() {
                       setValues({
                         backupFrequency: null,
                         backupRetention: null,
-                        estimateBackupSize: true,
-                        fullBackupUnit: null,
-                        fullBackupSize: null,
-                        incrementalBackupUnit: null,
-                        incrementalBackupSize: null
+                        estimateBackup: true,
+                        fullBackup: null,
+                        incrementalBackup: null
                       })
                     }}
                     open={backupsOpen}
@@ -192,11 +190,9 @@ export default function Estimator() {
                   setValues({
                     backupFrequency: 24,
                     backupRetention: 1,
-                    estimateBackupSize: true,
-                    fullBackupUnit: null,
-                    fullBackupSize: null,
-                    incrementalBackupUnit: null,
-                    incrementalBackupSize: null
+                    estimateBackup: true,
+                    fullBackup: null,
+                    incrementalBackup: null
                   })
 
                   // Close other accordions
@@ -238,8 +234,7 @@ export default function Estimator() {
                     transfers: [
                       {
                         type: 'public-internet',
-                        size: 0,
-                        unit: 'gb'
+                        value: null
                       }
                     ]
                   })

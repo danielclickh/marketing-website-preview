@@ -1,5 +1,6 @@
 import { throttle } from 'lodash'
 import { useRouter } from 'next/router'
+import { parse, ParsedQs, stringify } from 'qs'
 import { ParsedUrlQuery } from 'querystring'
 import { useCallback } from 'react'
 import type { PricingV2 } from '@/lib/api/strapi/types'
@@ -25,35 +26,49 @@ export default function PricingV2({
 }: PricingV2Props) {
   const router = useRouter()
 
-  const cleanUrlParam = (param: string | string[] | undefined) => {
-    if (Array.isArray(param)) param = param[0]
+  function cleanUrlParams(
+    param: string | string[] | ParsedQs | ParsedQs[] | undefined
+  ): any {
     if (!param) return null
+
+    if (Array.isArray(param)) {
+      return param.map((param) => cleanUrlParams(param))
+    }
+
+    if (typeof param === 'object') {
+      return Object.fromEntries(
+        Object.entries(param).map(([key, value]) => {
+          return [key, cleanUrlParams(value)]
+        })
+      )
+    }
+
     if (param.match(/^\d+$/)) return Number(param)
-    param = decodeURI(param).trim()
     if (param.toLowerCase() === 'true') return true
     if (param.toLowerCase() === 'false') return false
+
     return param
   }
 
-  const urlPlan = cleanUrlParam(requestParams?.plan)
-  const urlProvider = cleanUrlParam(requestParams?.provider)
-  const urlRegion = cleanUrlParam(requestParams?.region)
-  const urlUseCase = cleanUrlParam(requestParams?.useCase)
-  const urlHours = cleanUrlParam(requestParams?.hours)
-  const urlComputeMinSize = cleanUrlParam(requestParams?.computeMinSize)
-  const urlComputeMaxSize = cleanUrlParam(requestParams?.computeMaxSize)
-  const urlReplicas = cleanUrlParam(requestParams?.replicas)
-  const urlStorageUnit = cleanUrlParam(requestParams?.storageUnit)
-  const urlStorageSize = cleanUrlParam(requestParams?.storageSize)
-  const urlStorageCompressed = cleanUrlParam(requestParams?.storageCompressed)
-
-  const urlEstimateBackupSize = cleanUrlParam(requestParams?.estimateBackupSize)
-  const urlBackupFrequency = cleanUrlParam(requestParams?.backupFrequency)
-  const urlBackupRetention = cleanUrlParam(requestParams?.backupRetention)
-  const urlFullBackupUnit = cleanUrlParam(requestParams?.fullBackupUnit)
-  const urlFullBackupSize = cleanUrlParam(requestParams?.fullBackupSize)
-  // const urlDataSources = cleanUrlParam(requestParams?.clickpipes)
-  // const urlDataTransfers = cleanUrlParam(requestParams?.dataTransfers)
+  const {
+    plan: urlPlan,
+    provider: urlProvider,
+    region: urlRegion,
+    useCase: urlUseCase,
+    hours: urlHours,
+    computeMinSize: urlComputeMinSize,
+    computeMaxSize: urlComputeMaxSize,
+    replicas: urlReplicas,
+    storage: urlStorage,
+    storageCompressed: urlStorageCompressed,
+    estimateBackup: urlEstimateBackup,
+    backupFrequency: urlBackupFrequency,
+    backupRetention: urlBackupRetention,
+    fullBackup: urlFullBackup,
+    incrementalBackup: urlIncrementalBackup,
+    clickpipes: urlClickpipes,
+    transfers: urlTransfers
+  } = cleanUrlParams(parse(stringify(requestParams)))
 
   // Combine URL and default values
   const startingValues: Partial<Values> = {
@@ -67,21 +82,19 @@ export default function PricingV2({
     computeMaxSize:
       typeof urlComputeMaxSize === 'number' ? urlComputeMaxSize : null,
     replicas: typeof urlReplicas === 'number' ? urlReplicas : null,
-    storageUnit:
-      urlStorageUnit === 'gb' ||
-      urlStorageUnit === 'tb' ||
-      urlStorageUnit === 'pb'
-        ? urlStorageUnit
-        : null,
-    storageSize: typeof urlStorageSize === 'number' ? urlStorageSize : null,
+    storage: urlStorage?.toString() || null,
     storageCompressed:
       typeof urlStorageCompressed === 'boolean' ? urlStorageCompressed : null,
-    estimateBackupSize:
-      typeof urlEstimateBackupSize === 'boolean' ? urlEstimateBackupSize : null,
+    estimateBackup:
+      typeof urlEstimateBackup === 'boolean' ? urlEstimateBackup : null,
     backupFrequency:
       typeof urlBackupFrequency === 'number' ? urlBackupFrequency : null,
     backupRetention:
-      typeof urlBackupRetention === 'number' ? urlBackupRetention : null
+      typeof urlBackupRetention === 'number' ? urlBackupRetention : null,
+    fullBackup: urlFullBackup?.toString() || null,
+    incrementalBackup: urlIncrementalBackup?.toString() || null,
+    clickpipes: Array.isArray(urlClickpipes) ? urlClickpipes : null,
+    transfers: Array.isArray(urlTransfers) ? urlTransfers : null
   }
 
   // Update URL when pricing values have changed
@@ -89,15 +102,13 @@ export default function PricingV2({
     throttle((values: Values) => {
       const newUrl = new URL(window.location.toString())
 
-      Object.entries(values)
-        .reverse()
-        .forEach(([key, value]) => {
-          if (value !== null) {
-            newUrl.searchParams.set(key, value?.toString() || '')
-          } else {
-            newUrl.searchParams.delete(key)
-          }
-        })
+      newUrl.search = stringify(
+        { ...newUrl.searchParams, ...values },
+        {
+          skipNulls: true,
+          encodeValuesOnly: true
+        }
+      )
 
       // We use the native API because of a bug where the nextjs
       // `router.replace(...)` causes all iframes on the page to reload

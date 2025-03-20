@@ -7,6 +7,9 @@ export const computes = [
   8, 12, 16, 24, 28, 36, 48, 60, 80, 100, 128, 168, 216, 276, 356
 ]
 
+// In hours
+export const backupIntervals = [6, 8, 12, 16, 20, 24, 36, 48]
+
 export const meter: MeterConfig = {
   plans: {
     basic: {

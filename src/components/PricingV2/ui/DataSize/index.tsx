@@ -1,73 +1,131 @@
-import { useCallback, useMemo } from 'react'
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
-import { StorageUnits } from '../../types'
-import Select, { Option } from '../Select'
+import { useEffect, useMemo, useState } from 'react'
+import {
+  BYTE_UNITS,
+  bytesTo,
+  humanReadableToBytes
+} from '../../../../lib/utils/memory'
+import Select, { Options } from '../Select'
 
-export type Value = { size: null | number; unit: null | StorageUnits }
+export type Value = {
+  size: null | number
+  unit: null | string
+  formatted: null | string
+}
 
 export interface DataSizeProps {
-  maxGb?: number | null
-  sizeValue?: Value['size']
-  unitValue?: Value['unit']
+  min?: string | null
+  max?: string | null
+  value?: string | null
   onChange: (value: Value) => void
   className?: string
 }
 
+const valueParts = (
+  formattedValue: string | null,
+  defaultValue: any = null
+) => {
+  if (!formattedValue) return defaultValue
+
+  const pattern = new RegExp(
+    `^([\-\+]?(?:\\d+(?:\\.\\d+)?))(${BYTE_UNITS.join('|')})$`,
+    'i'
+  )
+
+  // If is a match, return example: [ "-2.75GB", "-2.75", "GB" ]
+  const matches = formattedValue.trim().match(pattern)
+
+  if (!matches) return defaultValue
+
+  const value = Number(matches[1])
+  const unit = matches[2]
+
+  return {
+    value,
+    unit
+  }
+}
+
 export default function DataSize({
-  sizeValue,
-  unitValue,
-  maxGb,
+  min,
+  max,
+  value,
   onChange,
   className = ''
 }: DataSizeProps) {
-  const { validateDataSize } = usePricingV2Context()
+  const [inputValue, setInputValue] = useState<number | null>(null)
+  const [unitValue, setUnitValue] = useState<string | null>(null)
 
-  // Calculate the maximum input value
-  const maxInput: number | undefined = useMemo(() => {
-    if (!maxGb) return undefined
+  const formattedValue = useMemo(() => {
+    return inputValue && unitValue ? `${inputValue}${unitValue}` : null
+  }, [inputValue, unitValue])
 
-    if (unitValue === 'pb') {
-      return maxGb / 1000000 // 1,000,000 GB = 1 PB
-    } else if (unitValue === 'tb') {
-      return maxGb / 1000 // 1,000 GB = 1 TB
-    }
+  const minBytes: number | null = useMemo(() => {
+    return min ? humanReadableToBytes(min) : null
+  }, [min])
 
-    return maxGb // 1 GB = 1 GB
-  }, [maxGb, unitValue])
+  const maxBytes: number | null = useMemo(() => {
+    return max ? humanReadableToBytes(max) : null
+  }, [max])
 
-  const maxSizeChars = useMemo(() => {
-    return maxInput?.toString().length || undefined
-  }, [maxInput])
+  const valueBytes = useMemo(() => {
+    return formattedValue ? humanReadableToBytes(formattedValue) : null
+  }, [formattedValue])
 
-  const units = useMemo(() => {
-    let gbOption: Option = { value: 'gb', label: 'GB' }
-    let tbOption: Option = { value: 'tb', label: 'TB' }
-    let pbOption: Option = { value: 'pb', label: 'PB' }
-
-    if (maxGb) {
-      if (maxGb < 1000) {
-        tbOption.disabled = true
-        pbOption.disabled = true
-      } else if (maxGb < 1000000) {
-        pbOption.disabled = true
+  useEffect(() => {
+    if (value) {
+      const parts = valueParts(value)
+      if (parts) {
+        setInputValue(Math.round(parts.value))
+        setUnitValue(parts.unit)
       }
     }
+  }, [value])
 
-    return [gbOption, tbOption, pbOption]
-  }, [maxGb])
+  // Validate value
+  useEffect(() => {
+    if (unitValue && valueBytes && minBytes && valueBytes < minBytes) {
+      setInputValue(bytesTo(minBytes, unitValue))
+    }
 
-  const setLocalValues = useCallback(
-    (values: { size?: null | number; unit?: null | StorageUnits }) => {
-      const newValues = validateDataSize(
-        values?.size ?? sizeValue ?? 0,
-        values?.unit ?? unitValue ?? 'gb',
-        maxGb
+    if (unitValue && valueBytes && maxBytes && valueBytes > maxBytes) {
+      setInputValue(bytesTo(maxBytes, unitValue))
+    }
+  }, [minBytes, maxBytes, valueBytes, unitValue])
+
+  const units: Options = useMemo(() => {
+    let options = BYTE_UNITS
+
+    // Remove units below the minimum
+    if (minBytes) {
+      options = options.filter(
+        (unit) => humanReadableToBytes(`1${unit}`) >= minBytes
       )
+    }
 
-      onChange(newValues)
-    },
-    [validateDataSize, maxGb, unitValue, sizeValue]
-  )
+    // Remove units above the maximum
+    if (maxBytes) {
+      options = options.filter(
+        (unit) => humanReadableToBytes(`1${unit}`) <= maxBytes
+      )
+    }
+
+    return options.map((unit) => {
+      return {
+        value: unit,
+        label: unit
+      }
+    })
+  }, [minBytes, maxBytes])
+
+  useEffect(() => {
+    if (onChange) {
+      onChange({
+        size: inputValue,
+        unit: unitValue,
+        formatted: formattedValue
+      })
+    }
+  }, [inputValue, unitValue, formattedValue])
 
   return (
     <div className={`grid grid-cols-2 lg:grid-cols-3 gap-2 ${className}`}>
@@ -75,20 +133,18 @@ export default function DataSize({
         className='relative lg:col-span-2 h-10 w-full cursor-text rounded border border-neutral-700 bg-neutral-725 px-3 text-left shadow-input focus:outline-none'
         type='number'
         min={0}
-        max={maxInput}
         step={1}
-        value={sizeValue?.toString() || '0'}
-        maxLength={maxSizeChars}
+        value={inputValue?.toString() || '0'}
         onChange={(event) => {
           const inputValue = event.target.value || '0'
-          setLocalValues({ size: Math.round(Number(inputValue)) })
+          setInputValue(Math.round(Number(inputValue)))
         }}
       />
       <div className='flex flex-col justify-end'>
         <Select
           options={units}
-          value={unitValue}
-          onChange={(value) => setLocalValues({ unit: value })}
+          value={unitValue || units?.[0]?.value}
+          onChange={setUnitValue}
         />
       </div>
     </div>

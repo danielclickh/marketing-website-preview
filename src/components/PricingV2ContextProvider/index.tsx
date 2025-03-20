@@ -6,6 +6,7 @@ import {
   useMemo,
   useState
 } from 'react'
+import { humanReadableTo } from '@/lib/utils/memory'
 import pricingFile from '../../../public/pricingV2File.json'
 import * as config from '../PricingV2/config'
 import {
@@ -18,20 +19,17 @@ import {
   ContextComputeMinPrice,
   ContextComputeMinSize,
   ContextComputeUnitPrice,
-  ContextEstimateBackupSize,
-  ContextFullBackupSize,
-  ContextFullBackupUnit,
+  ContextEstimateBackup,
+  ContextFullBackup,
   ContextHours,
-  ContextIncrementalBackupSize,
-  ContextIncrementalBackupUnit,
+  ContextIncrementalBackup,
   ContextPlan,
   ContextProvider,
   ContextRegion,
   ContextReplicas,
+  ContextStorage,
   ContextStorageCompressed,
   ContextStoragePrice,
-  ContextStorageSize,
-  ContextStorageUnit,
   ContextStorageUnitPrice,
   ContextTotalMaxPrice,
   ContextTotalMinPrice,
@@ -40,7 +38,6 @@ import {
   ContextUseCase,
   Data,
   PricingFile,
-  StorageUnits,
   Values
 } from '../PricingV2/types'
 
@@ -52,56 +49,11 @@ function getPlanPricingConfig(planKey: string) {
   return config.meter.plans[planKey]
 }
 
-function validateDataSize(
-  size: number,
-  unit: StorageUnits,
-  maxGb?: number | null
-) {
-  let sizeInGb = size
-
-  // Convert the size to GB based on the selected unit
-  switch (unit) {
-    case 'tb':
-      sizeInGb = size * 1000 // 1 TB = 1000 GB
-      break
-    case 'pb':
-      sizeInGb = size * 1000 * 1000 // 1 PB = 1000000 GB
-      break
-  }
-
-  // If maxGb is provided, ensure the size doesn't exceed the maximum allowed
-  if (maxGb && sizeInGb > maxGb) {
-    sizeInGb = maxGb
-  }
-
-  // Determine the best unit based on the size in GB
-  let newSize = sizeInGb
-  let newUnit: StorageUnits = 'gb'
-
-  // GB value >= 1 PB? Convert to PB
-  if (sizeInGb >= 1000 * 1000) {
-    newSize = sizeInGb / 1000 / 1000
-    newUnit = 'pb'
-  }
-
-  // GB value >= 1 TB? Convert to TB
-  else if (sizeInGb >= 1000) {
-    newSize = sizeInGb / 1000
-    newUnit = 'tb'
-  }
-
-  return {
-    size: newSize,
-    unit: newUnit
-  }
-}
-
 const PricingV2Context = createContext<Context>({
   // Helper functions
   setValues: () => null,
   getPlanPricingData,
   getPlanPricingConfig,
-  validateDataSize,
 
   // Initial source data
   sourceData: {
@@ -120,16 +72,13 @@ const PricingV2Context = createContext<Context>({
   computeMinSize: null,
   computeMaxSize: null,
   replicas: null,
-  storageUnit: null,
-  storageSize: null,
+  storage: null,
   storageCompressed: null,
   backupFrequency: null,
   backupRetention: null,
-  estimateBackupSize: null,
-  fullBackupUnit: null,
-  fullBackupSize: null,
-  incrementalBackupUnit: null,
-  incrementalBackupSize: null,
+  estimateBackup: null,
+  fullBackup: null,
+  incrementalBackup: null,
   clickpipes: null,
   transfers: null,
 
@@ -194,11 +143,8 @@ export default function PricingV2ContextProvider({
   const [replicas, setReplicas] = useState<ContextReplicas>(
     startingValues?.replicas ?? null
   )
-  const [storageUnit, setStorageUnit] = useState<ContextStorageUnit>(
-    startingValues?.storageUnit ?? null
-  )
-  const [storageSize, setStorageSize] = useState<ContextStorageSize>(
-    startingValues?.storageSize ?? null
+  const [storage, setStorage] = useState<ContextStorage>(
+    startingValues?.storage ?? null
   )
   const [storageCompressed, setStorageCompressed] =
     useState<ContextStorageCompressed>(
@@ -208,24 +154,15 @@ export default function PricingV2ContextProvider({
     useState<ContextBackupFrequency>(startingValues?.backupFrequency ?? null)
   const [backupRetention, setBackupRetention] =
     useState<ContextBackupRetention>(startingValues?.backupRetention ?? null)
-
-  const [estimateBackupSize, setEstimateBackupSize] =
-    useState<ContextEstimateBackupSize>(
-      startingValues?.estimateBackupSize ?? null
-    )
-  const [fullBackupUnit, setFullBackupUnit] = useState<ContextFullBackupUnit>(
-    startingValues?.fullBackupUnit ?? null
+  const [estimateBackup, setEstimateBackup] = useState<ContextEstimateBackup>(
+    startingValues?.estimateBackup ?? null
   )
-  const [fullBackupSize, setFullBackupSize] = useState<ContextFullBackupSize>(
-    startingValues?.fullBackupSize ?? null
+  const [fullBackup, setFullBackup] = useState<ContextFullBackup>(
+    startingValues?.fullBackup ?? null
   )
-  const [incrementalBackupUnit, setIncrementalBackupUnit] =
-    useState<ContextIncrementalBackupUnit>(
-      startingValues?.incrementalBackupUnit ?? null
-    )
-  const [incrementalBackupSize, setIncrementalBackupSize] =
-    useState<ContextIncrementalBackupSize>(
-      startingValues?.incrementalBackupSize ?? null
+  const [incrementalBackup, setIncrementalBackup] =
+    useState<ContextIncrementalBackup>(
+      startingValues?.incrementalBackup ?? null
     )
   const [clickpipes, setClickpipes] = useState<ContextClickpipes>(
     startingValues?.clickpipes ?? null
@@ -317,22 +254,15 @@ export default function PricingV2ContextProvider({
 
   // Calculate the storage price
   const storagePrice: ContextStoragePrice = useMemo(() => {
-    if (!storageUnitPrice || !storageSize || !storageUnit) {
+    if (!storage || !storageUnitPrice) {
       return null
     }
 
     // Unit price is in terabytes so we need to convert usage accordingly
-    let usageInTb = storageSize
+    let usageInTb = humanReadableTo(storage, 'TB')
 
-    // Convert usage values into gigabytes
-    switch (storageUnit) {
-      case 'gb':
-        usageInTb = storageSize / 1000
-        break
-      case 'pb':
-        usageInTb = storageSize * 1000
-        break
-    }
+    // Bail if converting value failed
+    if (!usageInTb) return null
 
     // If the storage isn't already compressed, apply standard 10x compression
     if (!storageCompressed) {
@@ -340,7 +270,7 @@ export default function PricingV2ContextProvider({
     }
 
     return usageInTb * storageUnitPrice
-  }, [storageSize, storageUnit, storageCompressed, storageUnitPrice])
+  }, [storage, storageCompressed, storageUnitPrice])
 
   // Calculate the minimum total price (min compute & min storage combined)
   const totalMinPrice: ContextTotalMinPrice = useMemo(() => {
@@ -399,16 +329,13 @@ export default function PricingV2ContextProvider({
         computeMinSize,
         computeMaxSize,
         replicas,
-        storageUnit,
-        storageSize,
+        storage,
         storageCompressed,
         backupFrequency,
         backupRetention,
-        estimateBackupSize,
-        fullBackupUnit,
-        fullBackupSize,
-        incrementalBackupUnit,
-        incrementalBackupSize,
+        estimateBackup,
+        fullBackup,
+        incrementalBackup,
         clickpipes,
         transfers
       })
@@ -422,16 +349,13 @@ export default function PricingV2ContextProvider({
     computeMinSize,
     computeMaxSize,
     replicas,
-    storageUnit,
-    storageSize,
+    storage,
     storageCompressed,
-    estimateBackupSize,
+    estimateBackup,
     backupFrequency,
     backupRetention,
-    fullBackupUnit,
-    fullBackupSize,
-    incrementalBackupUnit,
-    incrementalBackupSize,
+    fullBackup,
+    incrementalBackup,
     clickpipes,
     transfers
   ])
@@ -455,16 +379,13 @@ export default function PricingV2ContextProvider({
         computeMinSize: newComputeMinSize,
         computeMaxSize: newComputeMaxSize,
         replicas: newReplicas,
-        storageUnit: newStorageUnit,
-        storageSize: newStorageSize,
+        storage: newStorage,
         storageCompressed: newStorageCompressed,
         backupFrequency: newBackupFrequency,
         backupRetention: newBackupRetention,
-        estimateBackupSize: newEstimateBackupSize,
-        fullBackupUnit: newFullBackupUnit,
-        fullBackupSize: newFullBackupSize,
-        incrementalBackupUnit: newIncrementalBackupUnit,
-        incrementalBackupSize: newIncrementalBackupSize,
+        estimateBackup: newEstimateBackupSize,
+        fullBackup: newFullBackup,
+        incrementalBackup: newIncrementalBackup,
         clickpipes: newClickpipes,
         transfers: newTransfers
       } = newValues
@@ -648,32 +569,15 @@ export default function PricingV2ContextProvider({
       }
 
       // Validate storage
-      if (
-        newStorageUnit !== undefined ||
-        newStorageSize !== undefined ||
-        newPlanEntry?.maxStorageCapacity
-      ) {
-        // If a value is undefined, use the current value
-        if (newStorageUnit === undefined) newStorageUnit = storageUnit
-        if (newStorageSize === undefined) newStorageSize = storageSize
+      if (newStorage !== undefined || newPlanEntry?.maxStorageCapacity) {
+        if (!newStorage) newStorage = storage
 
-        // Set the default storage unit
-        if (!newStorageUnit || !['gb', 'pb', 'tb'].includes(newStorageUnit)) {
-          newStorageUnit = 'gb'
+        if (newStorage && newPlanEntry?.maxStorageCapacity) {
+          const storageInGb = humanReadableTo(newStorage, 'GB')
+          if (storageInGb > newPlanEntry.maxStorageCapacity) {
+            newStorage = `${newPlanEntry.maxStorageCapacity}GB`
+          }
         }
-
-        // Set 500 as the default value
-        if (newStorageSize === null) newStorageSize = 500
-
-        // Apply plan storage restriciton
-        const validatedStorage = validateDataSize(
-          newStorageSize,
-          newStorageUnit,
-          newPlanEntry?.maxStorageCapacity
-        )
-
-        newStorageSize = validatedStorage.size
-        newStorageUnit = validatedStorage.unit
       }
 
       // Validate storage compressed
@@ -685,9 +589,38 @@ export default function PricingV2ContextProvider({
       if (newBackupFrequency !== undefined) {
         if (
           newBackupFrequency !== null &&
-          ![6, 8, 12, 16, 20, 24, 36, 48].includes(newBackupFrequency)
+          !config.backupIntervals.includes(newBackupFrequency)
         ) {
           newBackupRetention = null
+        }
+      }
+
+      // Validate full backup
+      if (newFullBackup !== undefined) {
+        const fullBackupInPB = newFullBackup
+          ? humanReadableTo(newFullBackup, 'PB')
+          : null
+        if (!fullBackupInPB) {
+          newFullBackup = null
+        } else if (fullBackupInPB > 999) {
+          newFullBackup = '999PB'
+        } else if (fullBackupInPB < 0) {
+          newFullBackup = null
+        }
+      }
+
+      // Validate incremental backup
+      if (newIncrementalBackup !== undefined) {
+        const incrementalBackupInPB = newIncrementalBackup
+          ? humanReadableTo(newIncrementalBackup, 'PB')
+          : null
+        if (!incrementalBackupInPB) {
+          newIncrementalBackup = null
+        }
+        if (incrementalBackupInPB > 999) {
+          newIncrementalBackup = '999PB'
+        } else if (incrementalBackupInPB < 0) {
+          newIncrementalBackup = null
         }
       }
 
@@ -697,6 +630,65 @@ export default function PricingV2ContextProvider({
           newBackupRetention = Math.max(1, Math.min(30, newBackupRetention))
         } else {
           newBackupRetention = null
+        }
+      }
+
+      // Validate clickpipes
+      if (newClickpipes !== undefined) {
+        if (!Array.isArray(newClickpipes)) {
+          newClickpipes = null
+        } else {
+          newClickpipes
+            .map((item) => {
+              let isValid = true
+
+              // Check clickpipe source exists in source data
+              const source = sourceData.dataSources.find(
+                (source) => source.slug === item.source
+              )
+
+              if (!source) {
+                isValid = false
+              } else {
+                // Validate ingested data value
+                const dataIngestedInPB = item.dataIngested
+                  ? humanReadableTo(item.dataIngested, 'PB')
+                  : null
+                if (!dataIngestedInPB) {
+                  item.dataIngested = null
+                } else if (dataIngestedInPB > 999) {
+                  item.dataIngested = '999PB'
+                } else if (dataIngestedInPB < 0) {
+                  item.dataIngested = null
+                }
+              }
+
+              return isValid ? item : null
+            })
+            .filter((item) => !!item)
+        }
+      }
+
+      // Validate transfers
+      if (newTransfers !== undefined) {
+        if (!Array.isArray(newTransfers)) {
+          newTransfers = null
+        } else {
+          newTransfers.map((item) => {
+            // Validate ingested data value
+            const valueInPB = item.value
+              ? humanReadableTo(item.value, 'PB')
+              : null
+            if (!valueInPB) {
+              item.value = null
+            } else if (valueInPB > 999) {
+              item.value = '999PB'
+            } else if (valueInPB < 0) {
+              item.value = null
+            }
+
+            return item
+          })
         }
       }
 
@@ -745,12 +737,8 @@ export default function PricingV2ContextProvider({
         setReplicas(newReplicas)
       }
 
-      if (newStorageUnit !== undefined && newStorageUnit !== storageUnit) {
-        setStorageUnit(newStorageUnit)
-      }
-
-      if (newStorageSize !== undefined && newStorageSize !== storageSize) {
-        setStorageSize(newStorageSize)
+      if (newStorage !== undefined && newStorage !== storage) {
+        setStorage(newStorage)
       }
 
       if (
@@ -776,37 +764,20 @@ export default function PricingV2ContextProvider({
 
       if (
         newEstimateBackupSize !== undefined &&
-        newEstimateBackupSize !== estimateBackupSize
+        newEstimateBackupSize !== estimateBackup
       ) {
-        setEstimateBackupSize(newEstimateBackupSize)
+        setEstimateBackup(newEstimateBackupSize)
+      }
+
+      if (newFullBackup !== undefined && newFullBackup !== fullBackup) {
+        setFullBackup(newFullBackup)
       }
 
       if (
-        newFullBackupUnit !== undefined &&
-        newFullBackupUnit !== fullBackupUnit
+        newIncrementalBackup !== undefined &&
+        newIncrementalBackup !== incrementalBackup
       ) {
-        setFullBackupUnit(newFullBackupUnit)
-      }
-
-      if (
-        newFullBackupSize !== undefined &&
-        newFullBackupSize !== fullBackupSize
-      ) {
-        setFullBackupSize(newFullBackupSize)
-      }
-
-      if (
-        newIncrementalBackupUnit !== undefined &&
-        newIncrementalBackupUnit !== incrementalBackupUnit
-      ) {
-        setIncrementalBackupUnit(newIncrementalBackupUnit)
-      }
-
-      if (
-        newIncrementalBackupSize !== undefined &&
-        newIncrementalBackupSize !== incrementalBackupSize
-      ) {
-        setIncrementalBackupSize(newIncrementalBackupSize)
+        setIncrementalBackup(newIncrementalBackup)
       }
 
       if (newTransfers !== undefined && newTransfers !== transfers) {
@@ -831,16 +802,13 @@ export default function PricingV2ContextProvider({
       computeMinSize,
       computeMaxSize,
       replicas,
-      storageUnit,
-      storageSize,
+      storage,
       storageCompressed,
       backupFrequency,
       backupRetention,
-      estimateBackupSize,
-      fullBackupUnit,
-      fullBackupSize,
-      incrementalBackupUnit,
-      incrementalBackupSize,
+      estimateBackup,
+      fullBackup,
+      incrementalBackup,
       clickpipes,
       transfers
     ]
@@ -864,7 +832,6 @@ export default function PricingV2ContextProvider({
         setValues,
         getPlanPricingData,
         getPlanPricingConfig,
-        validateDataSize,
 
         // User values
         plan,
@@ -875,16 +842,13 @@ export default function PricingV2ContextProvider({
         computeMinSize,
         computeMaxSize,
         replicas,
-        storageUnit,
-        storageSize,
+        storage,
         storageCompressed,
         backupFrequency,
         backupRetention,
-        estimateBackupSize,
-        fullBackupUnit,
-        fullBackupSize,
-        incrementalBackupUnit,
-        incrementalBackupSize,
+        estimateBackup,
+        fullBackup,
+        incrementalBackup,
         clickpipes,
         transfers,
 
@@ -913,16 +877,13 @@ export default function PricingV2ContextProvider({
             computeMinSize,
             computeMaxSize,
             replicas,
-            storageUnit,
-            storageSize,
+            storage,
             storageCompressed,
             backupFrequency,
             backupRetention,
-            estimateBackupSize,
-            fullBackupUnit,
-            fullBackupSize,
-            incrementalBackupUnit,
-            incrementalBackupSize,
+            estimateBackup,
+            fullBackup,
+            incrementalBackup,
             clickpipes,
             transfers
           },

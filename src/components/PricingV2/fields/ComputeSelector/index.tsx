@@ -4,6 +4,7 @@ import HRSeparator from '@/components/HRSeparator'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import { SuiText } from '@/components/sui'
 import * as config from '../../config'
+import { findClosestCompute } from '../../config'
 import Label from '../../ui/Label'
 import Select, { Options } from '../../ui/Select'
 import HoursSelector from '../HoursSelector'
@@ -88,8 +89,10 @@ export default function ComputeSelector() {
   // Find the use case that matches the user values
   const useCaseHasChanged = useMemo(() => {
     if (!useCaseEntry) return false
-    const matchingMinCompute = useCaseEntry?.computeMinimum === computeMinSize
-    const matchingMaxCompute = useCaseEntry?.computeMaximum === computeMaxSize
+    const matchingMinCompute =
+      findClosestCompute(useCaseEntry.computeMinimum) === computeMinSize
+    const matchingMaxCompute =
+      findClosestCompute(useCaseEntry.computeMaximum) === computeMaxSize
     const matchingReplicas = useCaseEntry.replicas === replicas
     const matchingHours = useCaseEntry.activeHours === hours
     return (
@@ -175,7 +178,7 @@ export default function ComputeSelector() {
           )}
 
           {/* Use cases */}
-          {hasUseCases && (
+          {hasUseCases && !packages?.length && (
             <>
               <Label>What's your use case?</Label>
               <Select

@@ -105,7 +105,7 @@ export interface PricingV2ComponentPackage {
   computeMaximum: number
   replicas: number
   description: null | string
-  activeHours: null | number
+  activeHours: number
 }
 
 export interface PricingV2ComponentDataSource {

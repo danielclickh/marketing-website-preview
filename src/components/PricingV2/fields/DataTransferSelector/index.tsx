@@ -94,13 +94,13 @@ export default function DataTransferSelector() {
           <div>
             <Label>Public internet egress</Label>
             <DataSize
-              sizeValue={transfers?.[0]?.size || 0}
-              unitValue={transfers?.[0]?.unit || 'gb'}
+              min='1GB'
+              max='999PB'
+              value={transfers?.[0]?.value}
               onChange={(value) => {
                 createOrUpdateTransfer(0, {
                   type: 'public-internet',
-                  size: value.size || 0,
-                  unit: value.unit || 'gb'
+                  value: value.formatted
                 })
               }}
             />
@@ -108,13 +108,13 @@ export default function DataTransferSelector() {
           <div>
             <Label>Inter-region egress</Label>
             <DataSize
-              sizeValue={transfers?.[1]?.size || 0}
-              unitValue={transfers?.[1]?.unit || 'gb'}
+              min='1GB'
+              max='999PB'
+              value={transfers?.[1]?.value}
               onChange={(value) => {
                 createOrUpdateTransfer(1, {
                   type: 'inter-region',
-                  size: value.size || 0,
-                  unit: value.unit || 'gb'
+                  value: value.formatted
                 })
               }}
             />
@@ -140,13 +140,13 @@ export default function DataTransferSelector() {
                             <Label>Inter-region egress</Label>
                           )}
                           <DataSize
-                            sizeValue={item.size}
-                            unitValue={item.unit}
+                            min='1GB'
+                            max='999PB'
+                            value={item.value}
                             onChange={(value) => {
                               createOrUpdateTransfer(transferIndex, {
                                 ...item,
-                                size: value.size || 0,
-                                unit: value.unit || 'gb'
+                                value: value.formatted
                               })
                             }}
                           />
@@ -213,8 +213,7 @@ export default function DataTransferSelector() {
                     event.preventDefault()
                     createOrUpdateTransfer(transfers?.length || 0, {
                       type: 'public-internet',
-                      size: 0,
-                      unit: 'gb'
+                      value: null
                     })
                   }}
                   className='px-3 py-1 rounded border border-neutral-700 bg-neutral-725 transition-colors hover:border-neutral-600 active:bg-neutral-800'>
@@ -228,8 +227,7 @@ export default function DataTransferSelector() {
                     event.preventDefault()
                     createOrUpdateTransfer(transfers?.length || 0, {
                       type: 'inter-region',
-                      size: 0,
-                      unit: 'gb',
+                      value: null,
                       region: nextAvailableOption?.value || null
                     })
                   }}

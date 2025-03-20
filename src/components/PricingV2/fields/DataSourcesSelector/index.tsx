@@ -120,13 +120,13 @@ export default function DataSourcesSelector() {
                           <div className='md:col-span-2'>
                             <Label>Data ingested / month</Label>
                             <DataSize
-                              sizeValue={item.dataIngestedSize || 0}
-                              unitValue={item.dataIngestedUnit || 'gb'}
+                              min='1GB'
+                              max='999PB'
+                              value={item.dataIngested}
                               onChange={(value) => {
                                 createOrUpdateClickpipe(clickpipeIndex, {
                                   ...item,
-                                  dataIngestedSize: value.size,
-                                  dataIngestedUnit: value.unit
+                                  dataIngested: value.formatted
                                 })
                               }}
                             />

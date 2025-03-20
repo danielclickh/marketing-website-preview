@@ -1,6 +1,6 @@
-const BYTE_UNITS = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+export const BYTE_UNITS = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
 
-const BIBYTE_UNITS = [
+export const BIBYTE_UNITS = [
   'B',
   'KiB',
   'MiB',
@@ -12,7 +12,7 @@ const BIBYTE_UNITS = [
   'YiB'
 ]
 
-const BIT_UNITS = [
+export const BIT_UNITS = [
   'b',
   'kbit',
   'Mbit',
@@ -24,7 +24,7 @@ const BIT_UNITS = [
   'Ybit'
 ]
 
-const BIBIT_UNITS = [
+export const BIBIT_UNITS = [
   'b',
   'kibit',
   'Mibit',
@@ -36,12 +36,14 @@ const BIBIT_UNITS = [
   'Yibit'
 ]
 
-const COMBINED_UNITS = [
+export const COMBINED_UNITS = [
   ...BYTE_UNITS,
   ...BIBYTE_UNITS,
   ...BIT_UNITS,
   ...BIBIT_UNITS
 ]
+
+const combinedUnitsType = [...COMBINED_UNITS] as const
 
 type BytesToHumanReadableOptions = {
   bits?: boolean
@@ -52,20 +54,43 @@ type BytesToHumanReadableOptions = {
   maximumFractionDigits?: number
 }
 
+// Convert bytes to a specific unit
+export function bytesTo(
+  bytes: number,
+  unit: (typeof combinedUnitsType)[number]
+) {
+  const binary = [...BIBIT_UNITS, ...BIBYTE_UNITS].includes(unit)
+  const bits = [...BIT_UNITS, ...BIBIT_UNITS].includes(unit)
+
+  const UNITS = bits
+    ? binary
+      ? BIBIT_UNITS
+      : BIT_UNITS
+    : binary
+      ? BIBYTE_UNITS
+      : BYTE_UNITS
+
+  const exponent = Math.min(
+    Math.floor(
+      binary ? Math.log(bytes) / Math.log(1024) : Math.log10(bytes) / 3
+    ),
+    UNITS.length - 1
+  )
+
+  bytes /= (binary ? 1024 : 1000) ** exponent
+
+  return bytes
+}
+
+// Convert bytes to a human-readable string
 export function bytesToHumanReadable(
   number: number,
   options: BytesToHumanReadableOptions = {}
 ) {
-  if (!Number.isFinite(number)) {
-    throw new TypeError(
-      `Expected a finite number, got ${typeof number}: ${number}`
-    )
-  }
-
   const {
     bits = false,
     binary = false,
-    seperator = ' ',
+    seperator = '',
     locale,
     ...localeOptions
   } = options
@@ -93,23 +118,29 @@ export function bytesToHumanReadable(
   )
 }
 
+// Convert a human-readable string to bytes
 export function humanReadableToBytes(
   humanReadable: string,
   defaultValue: any = null
 ) {
   // Match positive and negative numbers including decimals with preceeding unit
   const pattern = new RegExp(
-    `^([\-\+]?(?:\\d+(?:\\.\\d+)?))(${COMBINED_UNITS.join('|')})$`
+    `^([\-\+]?(?:\\d+(?:\\.\\d+)?))(${COMBINED_UNITS.join('|')})$`,
+    'i'
   )
 
   // If is a match, return example: [ "-2.75GB", "-2.75", "GB" ]
-  const matches = humanReadable.trim().match(pattern)
+  const matches = String(humanReadable).trim().match(pattern)
 
   if (matches) {
     const value = Number(matches[1])
     const unit = matches[2]
-    const binary = [...BIBIT_UNITS, ...BIBYTE_UNITS].includes(unit)
-    const bits = [...BIT_UNITS, ...BIBIT_UNITS].includes(unit)
+    const binary = !![...BIBIT_UNITS, ...BIBYTE_UNITS].find((item) => {
+      return item.toLowerCase() === unit.toLowerCase()
+    })?.length
+    const bits = !![...BIT_UNITS, ...BIBIT_UNITS].find((item) => {
+      return item.toLowerCase() === unit.toLowerCase()
+    })?.length
 
     const UNITS = bits
       ? binary
@@ -119,17 +150,24 @@ export function humanReadableToBytes(
         ? BIBYTE_UNITS
         : BYTE_UNITS
 
-    const unitIndex = UNITS.indexOf(unit)
+    const unitIndex = UNITS.findIndex((item) => {
+      return item.toLowerCase() === unit.toLowerCase()
+    })
 
-    if (unitIndex === -1) {
-      throw new Error(
-        `Invalid unit: ${unit}. Expected one of: ${COMBINED_UNITS.join(', ')}`
-      )
+    if (unitIndex !== -1) {
+      return value * Math.pow(binary ? 1024 : 1000, unitIndex)
     }
-
-    const factor = binary ? 1024 : 1000
-    return value * Math.pow(factor, unitIndex)
   }
 
   return defaultValue
+}
+
+// Convert a human-readable string to a specific unit
+export function humanReadableTo(
+  humanReadable: string,
+  unit: (typeof combinedUnitsType)[number],
+  defaultValue: any = null
+) {
+  const bytes = humanReadableToBytes(humanReadable, defaultValue)
+  return typeof bytes === 'number' ? bytesTo(bytes, unit) : bytes
 }
