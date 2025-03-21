@@ -297,7 +297,11 @@ export default function PricingV2ContextProvider({
   // Calculate the price of backups
   //
   const backupsPrice: ContextBackupsPrice = useMemo(() => {
-    if (!storageUnitPrice || !backupFrequency || !backupRetention) return null
+    if (!planEntry || !storageUnitPrice || !backupFrequency || !backupRetention)
+      return null
+
+    // No pricing needed for plans that don't allow backups
+    if (!planEntry.allowBackups) return null
 
     const hoursInMonth = averageDaysPerMonth * 24
     const estimatedBackupsPerMonth = Math.floor(hoursInMonth / backupFrequency)
@@ -335,6 +339,7 @@ export default function PricingV2ContextProvider({
 
     return usageInTb * storageUnitPrice
   }, [
+    planEntry,
     storage,
     storageCompressed,
     storageUnitPrice,
@@ -348,7 +353,10 @@ export default function PricingV2ContextProvider({
   // Calculate the price of clickpipes
   //
   const clickpipesPrice: ContextClickpipesPrice = useMemo(() => {
-    if (!clickpipes?.length) return null
+    if (!planEntry || !clickpipes?.length) return null
+
+    // No pricing needed for plans that don't allow data sources/clickpipes
+    if (!planEntry.allowDataSources) return null
 
     const {
       computeUnit,
@@ -397,13 +405,18 @@ export default function PricingV2ContextProvider({
     })
 
     return dailyCost * config.averageDaysPerMonth
-  }, [clickpipes, sourceData])
+  }, [planEntry, clickpipes, sourceData])
 
   // Calculate the price of data transfee
   //
   const transfersPrice: ContextTransfersPrice = useMemo(() => {
+    if (!planEntry) return null
+
+    // No pricing needed for plans that don't allow data transfer
+    if (!planEntry.allowDataTransfer) return null
+
     return null
-  }, [])
+  }, [planEntry])
 
   // Calculate the minimum total price (min compute & min storage combined)
   const totalMinPrice: ContextTotalMinPrice = useMemo(() => {
