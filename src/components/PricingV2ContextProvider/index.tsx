@@ -571,16 +571,29 @@ export default function PricingV2ContextProvider({
             undefined
           newPlan = newPlanEntry?.slug || null
         }
+      }
 
-        // Force new compute values when the plan and customizablilty changed
-        if (
-          plan &&
-          newPlan !== plan &&
-          planEntry?.customizable !== newPlanEntry?.customizable
-        ) {
+      // Reset some values when chaning plan
+      if (plan && newPlan !== plan) {
+        // Reset compute if customizability changes
+        if (planEntry?.customizable !== newPlanEntry?.customizable) {
           newComputeMinSize = null
           newComputeMaxSize = null
           newReplicas = null
+        }
+
+        // Reset use cases
+        if (newPlanEntry?.packages?.length) {
+          newUseCase = null
+          newUseCaseEntry = undefined
+        }
+
+        // Reset backups if plan does not allow it
+        if (!newPlanEntry?.allowBackups) {
+          newBackupFrequency = null
+          newBackupRetention = null
+          newFullBackup = null
+          newIncrementalBackup = null
         }
       }
 
@@ -600,18 +613,6 @@ export default function PricingV2ContextProvider({
         }
       }
 
-      // Validate use case
-      if (newUseCase !== undefined) {
-        newUseCaseEntry = sourceData.useCases.find(
-          (item) => item.slug === newUseCase
-        )
-
-        if (!newUseCase || !newUseCaseEntry) {
-          newUseCaseEntry = undefined
-          newUseCase = null
-        }
-      }
-
       // Validate region
       if (newRegion !== undefined) {
         if (!newProviderEntry) {
@@ -625,6 +626,20 @@ export default function PricingV2ContextProvider({
         }
       }
 
+      // Validate use case
+      if (newUseCase !== undefined) {
+        // Esnure user value exists in source data
+        newUseCaseEntry = sourceData.useCases.find(
+          (item) => item.slug === newUseCase
+        )
+
+        // Failed to find in source data so reset both values
+        if (!newUseCase || !newUseCaseEntry) {
+          newUseCaseEntry = undefined
+          newUseCase = null
+        }
+      }
+
       // Validate compute
       if (
         newPlanEntry ||
@@ -634,16 +649,20 @@ export default function PricingV2ContextProvider({
       ) {
         const applyUseCaseOrFirstPackage = () => {
           if (newUseCaseEntry) {
-            newComputeMinSize = newUseCaseEntry?.computeMinimum || null
-            newComputeMaxSize = newUseCaseEntry?.computeMaximum || null
+            newComputeMinSize = newUseCaseEntry.computeMinimum
+            newComputeMaxSize = newUseCaseEntry.computeMaximum
             newReplicas = newUseCaseEntry.replicas
-            newHours = newUseCaseEntry.activeHours
+            newHours = newUseCaseEntry.activeHours || newHours || hours
           } else if (newPlanEntry) {
             const first = newPlanEntry.packages.at(0)
             newComputeMinSize = first?.computeMinimum || null
             newComputeMaxSize = first?.computeMaximum || null
             newReplicas = first?.replicas || null
-            newHours = first?.activeHours || newHours || hours
+
+            // Only override hours if it's been set in the source data
+            if (typeof first?.activeHours === 'number') {
+              newHours = first?.activeHours
+            }
           }
         }
 
@@ -671,39 +690,35 @@ export default function PricingV2ContextProvider({
           newComputeMaxSize = newComputeMinSize
         }
 
-        // Min size is still null, default to first compute size
-        if (newComputeMinSize === null) {
-          newComputeMinSize = config.computes[0]
-        }
-
-        // Max size is still null, default to last compute size
-        if (newComputeMaxSize === null) {
-          newComputeMaxSize = config.computes[config.computes.length - 1]
-        }
-
         // Ensure the compute value exists in the config array
-        newComputeMinSize = config.findClosestCompute(newComputeMinSize)
-        newComputeMaxSize = config.findClosestCompute(newComputeMaxSize)
+        newComputeMinSize = newComputeMinSize
+          ? config.findClosestCompute(newComputeMinSize)
+          : null
+        newComputeMaxSize = newComputeMaxSize
+          ? config.findClosestCompute(newComputeMaxSize)
+          : null
 
-        // If min value has changed, ensure max value is always greater than or equal to
-        if (
-          newComputeMinSize !== computeMinSize &&
-          newComputeMinSize > newComputeMaxSize
-        ) {
-          newComputeMaxSize = newComputeMinSize
-        }
+        if (newComputeMinSize !== null && newComputeMaxSize !== null) {
+          // If min value has changed, ensure max value is always greater than or equal to
+          if (
+            newComputeMinSize !== computeMinSize &&
+            newComputeMinSize > newComputeMaxSize
+          ) {
+            newComputeMaxSize = newComputeMinSize
+          }
 
-        // If max value has changed, ensure min value is always less than or equal to
-        else if (
-          newComputeMaxSize !== computeMaxSize &&
-          newComputeMinSize > newComputeMaxSize
-        ) {
-          newComputeMinSize = newComputeMaxSize
-        }
+          // If max value has changed, ensure min value is always less than or equal to
+          else if (
+            newComputeMaxSize !== computeMaxSize &&
+            newComputeMinSize > newComputeMaxSize
+          ) {
+            newComputeMinSize = newComputeMaxSize
+          }
 
-        // Sanity check if neither value has changed
-        else if (newComputeMinSize > newComputeMaxSize) {
-          newComputeMaxSize = newComputeMinSize
+          // Sanity check if neither value has changed
+          else if (newComputeMinSize > newComputeMaxSize) {
+            newComputeMaxSize = newComputeMinSize
+          }
         }
 
         // Set replicas default value
@@ -844,21 +859,27 @@ export default function PricingV2ContextProvider({
         if (!Array.isArray(newTransfers)) {
           newTransfers = null
         } else {
-          newTransfers.map((item) => {
-            // Validate ingested data value
-            const valueInPB = item.value
-              ? humanReadableTo(item.value, 'PB')
-              : null
-            if (!valueInPB) {
-              item.value = null
-            } else if (valueInPB > 999) {
-              item.value = '999PB'
-            } else if (valueInPB < 0) {
-              item.value = null
-            }
+          newTransfers
+            .map((item) => {
+              // Make sure the user didn't give us an invalid type
+              if (!['inter-region', 'public-internet'].includes(item.type))
+                return null
 
-            return item
-          })
+              // Validate ingested data value
+              const valueInPB = item.value
+                ? humanReadableTo(item.value, 'PB')
+                : null
+              if (!valueInPB) {
+                item.value = null
+              } else if (valueInPB > 999) {
+                item.value = '999PB'
+              } else if (valueInPB < 0) {
+                item.value = null
+              }
+
+              return item
+            })
+            .filter((item) => !!item)
         }
       }
 
