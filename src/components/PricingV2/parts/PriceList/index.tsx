@@ -139,7 +139,7 @@ export default function PriceList() {
         <li className='flex items-center gap-x-2'>
           <CheckIcon className='h-4 w-4 text-primary-300' />
           <PriceUsd price={backupsPrice || 0.0} /> for backups{' '}
-          <TooltipInfo
+          {/*<TooltipInfo
             content={
               <>
                 Storage cost for {storage}{' '}
@@ -156,7 +156,7 @@ export default function PriceList() {
                 )}
               </>
             }
-          />
+          />*/}
         </li>
       )}
 
