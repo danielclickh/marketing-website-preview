@@ -1026,7 +1026,7 @@ export default function PricingV2ContextProvider({
         totalPriceRange
       }}>
       {children}
-      <pre>
+      {/*<pre>
         {JSON.stringify(
           {
             plan,
@@ -1050,7 +1050,7 @@ export default function PricingV2ContextProvider({
           null,
           2
         )}
-      </pre>
+      </pre>*/}
     </PricingV2Context.Provider>
   )
 }
