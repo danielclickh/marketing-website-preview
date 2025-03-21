@@ -634,7 +634,7 @@ export default function PricingV2ContextProvider({
         )
 
         // Failed to find in source data so reset both values
-        if (!newUseCase || !newUseCaseEntry) {
+        if (!newUseCaseEntry) {
           newUseCaseEntry = undefined
           newUseCase = null
         }
@@ -670,6 +670,8 @@ export default function PricingV2ContextProvider({
         if (newComputeMinSize === undefined) newComputeMinSize = computeMinSize
         if (newComputeMaxSize === undefined) newComputeMaxSize = computeMaxSize
         if (newReplicas === undefined) newReplicas = replicas
+
+        console.log({ newComputeMinSize, newComputeMaxSize, newReplicas })
 
         // If all values are null, use the first package
         if (
@@ -721,11 +723,16 @@ export default function PricingV2ContextProvider({
           }
         }
 
-        // Set replicas default value
-        if (newReplicas === null) newReplicas = 1
+        // We don't need replicas if there are no compute values
+        if (newComputeMinSize === null && newComputeMaxSize === null) {
+          newReplicas = null
+        } else {
+          // Set replicas default value
+          if (newReplicas === null) newReplicas = 1
 
-        // Constrain replicas to 1-25
-        newReplicas = Math.min(25, Math.max(1, newReplicas))
+          // Constrain replicas to 1-25
+          newReplicas = Math.min(25, Math.max(1, newReplicas))
+        }
 
         // Ensure values match a package for non-customizable plans
         if (newPlanEntry && !newPlanEntry.customizable) {
