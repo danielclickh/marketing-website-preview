@@ -8,6 +8,7 @@ import {
 } from 'react'
 import {
   bytesTo,
+  bytesToHumanReadable,
   humanReadableTo,
   humanReadableToBytes
 } from '@/lib/utils/memory'
@@ -613,7 +614,7 @@ export default function PricingV2ContextProvider({
         storageCompressed: newStorageCompressed,
         backupFrequency: newBackupFrequency,
         backupRetention: newBackupRetention,
-        estimateBackup: newEstimateBackupSize,
+        estimateBackup: newEstimateBackup,
         fullBackup: newFullBackup,
         incrementalBackup: newIncrementalBackup,
         clickpipes: newClickpipes,
@@ -867,8 +868,35 @@ export default function PricingV2ContextProvider({
         }
       }
 
+      // Set default backup values if estimating
+      if (newEstimateBackup) {
+        // Set default values
+        let storageBytes = humanReadableToBytes(newStorage ?? storage ?? '1GB')
+
+        // Sanity check, ensure storage value is valid
+        if (storageBytes) {
+          // Apply standard 10x compression
+          if (!(newStorageCompressed ?? storageCompressed)) {
+            storageBytes /= 10
+          }
+
+          // Set default incremental value
+          if (newFullBackup === undefined && !fullBackup) {
+            newFullBackup = bytesToHumanReadable(storageBytes)
+          }
+
+          // Set default incremental value
+          if (newIncrementalBackup === undefined && !incrementalBackup) {
+            newIncrementalBackup = bytesToHumanReadable(storageBytes / 100)
+          }
+        }
+      }
+
       // Validate full backup
-      if (newFullBackup !== undefined) {
+      if (newFullBackup !== undefined || newEstimateBackup) {
+        // Set default values
+        newFullBackup = newFullBackup ?? newStorage ?? storage ?? '1GB'
+
         const fullBackupInPB = newFullBackup
           ? humanReadableTo(newFullBackup, 'PB')
           : null
@@ -882,7 +910,7 @@ export default function PricingV2ContextProvider({
       }
 
       // Validate incremental backup
-      if (newIncrementalBackup !== undefined) {
+      if (newIncrementalBackup !== undefined || newEstimateBackup) {
         const incrementalBackupInPB = newIncrementalBackup
           ? humanReadableTo(newIncrementalBackup, 'PB')
           : null
@@ -1041,10 +1069,10 @@ export default function PricingV2ContextProvider({
       }
 
       if (
-        newEstimateBackupSize !== undefined &&
-        newEstimateBackupSize !== estimateBackup
+        newEstimateBackup !== undefined &&
+        newEstimateBackup !== estimateBackup
       ) {
-        setEstimateBackup(newEstimateBackupSize)
+        setEstimateBackup(newEstimateBackup)
       }
 
       if (newFullBackup !== undefined && newFullBackup !== fullBackup) {
@@ -1148,7 +1176,7 @@ export default function PricingV2ContextProvider({
         totalPriceRange
       }}>
       {children}
-      <pre>
+      {/*<pre>
         {JSON.stringify(
           {
             plan,
@@ -1183,7 +1211,7 @@ export default function PricingV2ContextProvider({
           null,
           2
         )}
-      </pre>
+      </pre>*/}
     </PricingV2Context.Provider>
   )
 }

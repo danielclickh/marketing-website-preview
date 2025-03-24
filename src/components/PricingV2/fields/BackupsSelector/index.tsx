@@ -72,9 +72,7 @@ export default function BackupsSelector() {
       storageBytes /= 10
     }
 
-    return bytesToHumanReadable(
-      Math.round((storageBytes / 100) * estimatedBackupsPerMonth)
-    )
+    return bytesToHumanReadable(storageBytes / 100)
   }, [estimatedBackupsPerMonth, storage, storageCompressed])
 
   const estimatedBackupSizeFormatted = useMemo(() => {
@@ -96,7 +94,9 @@ export default function BackupsSelector() {
       fullBytes /= 10
     }
 
-    return bytesToHumanReadable(fullBytes + incrementalBytes)
+    return bytesToHumanReadable(
+      fullBytes + incrementalBytes * estimatedBackupsPerMonth
+    )
   }, [estimatedBackupsPerMonth, esitmatedIncrementalBackupSize, storage])
 
   return (
@@ -156,7 +156,7 @@ export default function BackupsSelector() {
               <DataSize
                 min='1GB'
                 max='999PB'
-                value={fullBackup ?? storage ?? '1GB'}
+                value={fullBackup}
                 onChange={(value) => setValues({ fullBackup: value.formatted })}
               />
             </div>
@@ -165,9 +165,7 @@ export default function BackupsSelector() {
               <DataSize
                 min='1GB'
                 max='999PB'
-                value={
-                  incrementalBackup ?? esitmatedIncrementalBackupSize ?? '1GB'
-                }
+                value={incrementalBackup}
                 onChange={(value) =>
                   setValues({ incrementalBackup: value.formatted })
                 }
