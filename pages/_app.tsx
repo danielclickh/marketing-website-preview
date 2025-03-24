@@ -6,6 +6,7 @@ import { Inconsolata, Inter } from 'next/font/google'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
+import { useReportWebVitals } from 'next/web-vitals'
 import { useEffect, useState } from 'react'
 import { SnackbarContextProvider } from '../components/sui'
 import UTMPersist, { onExperimentViewed } from '../components/UTMPersist'
@@ -15,7 +16,6 @@ import '../styles/globals.scss'
 import '../styles/highlightjs.scss'
 import '../styles/securiti-cookie-banner.scss'
 import '../styles/securiti-overrides.scss'
-import { useReportWebVitals } from 'next/web-vitals'
 
 //const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K';
 const gtmId = 'GTM-WKSRXS8S' // Hardcoded for testing
@@ -60,13 +60,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   useInitGalaxy()
 
   useReportWebVitals((metric) => {
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', metric.name, {
-        value: Math.round(
-          metric.name === 'CLS' ? metric.value * 1000 : metric.value
-        ), // values must be integers
-        event_label: metric.id, // id unique to current page load
-        non_interaction: true, // avoids affecting bounce rate.
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({
+        event: 'web_vitals',
+        webVitalsData: metric
       })
     }
   })
