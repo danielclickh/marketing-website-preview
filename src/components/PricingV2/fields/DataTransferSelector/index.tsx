@@ -89,7 +89,7 @@ export default function DataTransferSelector() {
   return (
     <>
       {/* Fix inter-region egress */}
-      {!providerEntry?.isDynamicInterRegionEgress && (
+      {!providerEntry?.useDestinationInterRegionEgress && (
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
           <div>
             <Label>Public internet egress</Label>
@@ -123,7 +123,7 @@ export default function DataTransferSelector() {
       )}
 
       {/* Dynamic inter-region egress */}
-      {providerEntry?.isDynamicInterRegionEgress && (
+      {providerEntry?.useDestinationInterRegionEgress && (
         <>
           {transfers && transfers.length > 0 && (
             <div className='space-y-4'>

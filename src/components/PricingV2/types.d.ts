@@ -1,8 +1,8 @@
 import {
   PricingV2,
-  PricingV2ComponentPackage,
   PricingV2ComponentPlan,
-  PricingV2ComponentProvider
+  PricingV2ComponentProvider,
+  PricingV2ComponentUseCase
 } from '@/lib/api/strapi/types'
 
 export type StorageUnits = 'B' | 'KB' | 'MB' | 'GB' | 'TB' | 'PB' | 'EB' | 'ZB'
@@ -113,7 +113,7 @@ export interface Context {
   // Computed values
   planEntry: undefined | PricingV2ComponentPlan
   providerEntry: undefined | PricingV2ComponentProvider
-  useCaseEntry: undefined | PricingV2ComponentPackage
+  useCaseEntry: undefined | PricingV2ComponentUseCase
   computeUnitPrice: ContextComputeUnitPrice
   storageUnitPrice: ContextStorageUnitPrice
   computeMinPrice: ContextComputeMinPrice

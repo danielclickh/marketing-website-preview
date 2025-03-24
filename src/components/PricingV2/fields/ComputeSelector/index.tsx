@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { PricingV2ComponentPackage } from '@/lib/api/strapi/types'
+import { humanReadableTo } from '@/lib/utils/memory'
 import HRSeparator from '@/components/HRSeparator'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import { SuiText } from '@/components/sui'
@@ -45,6 +46,7 @@ export default function ComputeSelector() {
     sourceData,
     planEntry,
     useCaseEntry,
+    storage,
     hours,
     computeMinSize,
     computeMaxSize,
@@ -89,12 +91,19 @@ export default function ComputeSelector() {
   // Find the use case that matches the user values
   const useCaseHasChanged = useMemo(() => {
     if (!useCaseEntry) return false
+
+    const storageInGb = storage ? humanReadableTo(storage, 'GB') : null
+    if (!storageInGb) return false
+
+    const storageRatio = storageInGb / useCaseEntry.ratio
+
     const matchingMinCompute =
-      findClosestCompute(useCaseEntry.computeMinimum) === computeMinSize
+      findClosestCompute((80 / storageRatio) * 100) === computeMinSize
     const matchingMaxCompute =
-      findClosestCompute(useCaseEntry.computeMaximum) === computeMaxSize
+      findClosestCompute((120 / storageRatio) * 100) === computeMaxSize
     const matchingReplicas = useCaseEntry.replicas === replicas
     const matchingHours = useCaseEntry.activeHours === hours
+
     return (
       !matchingMinCompute ||
       !matchingMaxCompute ||
@@ -191,10 +200,10 @@ export default function ComputeSelector() {
                   )
                   setValues({
                     useCase: useCaseObject?.slug,
-                    computeMinSize: useCaseObject?.computeMinimum || null,
-                    computeMaxSize: useCaseObject?.computeMaximum || null,
-                    replicas: useCaseObject?.replicas,
-                    hours: useCaseObject?.activeHours
+                    computeMinSize: null,
+                    computeMaxSize: null,
+                    replicas: null,
+                    hours: null
                   })
                 }}
               />
@@ -216,10 +225,10 @@ export default function ComputeSelector() {
                     event.preventDefault()
                     setValues({
                       useCase: useCaseEntry?.slug,
-                      computeMinSize: useCaseEntry?.computeMinimum || null,
-                      computeMaxSize: useCaseEntry?.computeMaximum || null,
-                      replicas: useCaseEntry?.replicas,
-                      hours: useCaseEntry?.activeHours
+                      computeMinSize: null,
+                      computeMaxSize: null,
+                      replicas: null,
+                      hours: null
                     })
                   }}>
                   Reset

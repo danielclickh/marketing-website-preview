@@ -71,6 +71,8 @@ export interface PricingV2ComponentRegion {
   key: string
   label: null | string
   icon: null | StrapiImageType
+  internetEgress: number
+  interRegionEgress: number
 }
 
 export interface PricingV2ComponentPlan {
@@ -93,9 +95,7 @@ export interface PricingV2ComponentProvider {
   slug: string
   logo: StrapiImageType
   regions: Array<PricingV2ComponentRegion>
-  internetEgress: number
-  interRegionEgress: number
-  isDynamicInterRegionEgress: boolean
+  useDestinationInterRegionEgress: boolean
 }
 
 export interface PricingV2ComponentPackage {
@@ -106,6 +106,14 @@ export interface PricingV2ComponentPackage {
   replicas: number
   description: null | string
   activeHours: number
+}
+
+export interface PricingV2ComponentUseCase {
+  name: string
+  slug: string
+  activeHours: number
+  ratio: number
+  replicas: number
 }
 
 export interface PricingV2ComponentDataSource {
@@ -120,6 +128,6 @@ export interface PricingV2ComponentDataSource {
 export interface PricingV2 {
   plans: Array<PricingV2ComponentPlan>
   providers: Array<PricingV2ComponentProvider>
-  useCases: Array<PricingV2ComponentPackage>
+  useCases: Array<PricingV2ComponentUseCase>
   dataSources: Array<PricingV2ComponentDataSource>
 }

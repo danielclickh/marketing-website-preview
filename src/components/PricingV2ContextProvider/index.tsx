@@ -194,6 +194,12 @@ export default function PricingV2ContextProvider({
     return sourceData.providers.find((item) => item.slug === provider)
   }, [sourceData, provider])
 
+  // Get the region strapi entry
+  //
+  const regionEntry = useMemo(() => {
+    return providerEntry?.regions?.find((item) => item.key === region)
+  }, [providerEntry, region])
+
   // Get the plan strapi entry
   //
   const planEntry = useMemo(() => {
@@ -372,30 +378,32 @@ export default function PricingV2ContextProvider({
         (item) => item.slug === source
       )
 
+      // Skip clickpipe if it's invalid or is excluded from calculations (e.g. free for public beta)
+      if (!sourceEntry || sourceEntry.excludeFromCalculations) {
+        return
+      }
+
       const replicaCost = instances * replicaComputeUsdPerHour * 24
       let ingestCost = 0
       let computeCost = 0
 
-      // Make sure the clickpipe shouldn't be excluded (e.g. free for public beta)
-      if (sourceEntry && !sourceEntry.excludeFromCalculations) {
-        // If the source entry allows data streaming/ingestion
-        if (sourceEntry.ingestsData) {
-          // Calculations are based on gigabytes so we need to conver the users value accordingly
-          const dataIngestedInGb = dataIngested
-            ? humanReadableTo(dataIngested, 'GB')
-            : null
+      // If the source entry allows data streaming/ingestion
+      if (sourceEntry.ingestsData) {
+        // Calculations are based on gigabytes so we need to conver the users value accordingly
+        const dataIngestedInGb = dataIngested
+          ? humanReadableTo(dataIngested, 'GB')
+          : null
 
-          if (dataIngestedInGb) {
-            ingestCost =
-              computeUnit * computeUsdPerHour * 24 +
-              ingestedUsdPerHour * dataIngestedInGb
-          }
+        if (dataIngestedInGb) {
+          ingestCost =
+            computeUnit * computeUsdPerHour * 24 +
+            ingestedUsdPerHour * dataIngestedInGb
         }
+      }
 
-        // Else it must be object storage
-        else {
-          computeCost = computeUnit * computeUsdPerHour * 24
-        }
+      // Else it must be object storage
+      else {
+        computeCost = computeUnit * computeUsdPerHour * 24
       }
 
       // Apply cost for replicas
@@ -407,16 +415,58 @@ export default function PricingV2ContextProvider({
     return dailyCost * config.averageDaysPerMonth
   }, [planEntry, clickpipes, sourceData])
 
-  // Calculate the price of data transfee
+  // Calculate the price of data transfer
   //
   const transfersPrice: ContextTransfersPrice = useMemo(() => {
-    if (!planEntry) return null
+    if (!planEntry || !providerEntry || !regionEntry) return null
 
     // No pricing needed for plans that don't allow data transfer
     if (!planEntry.allowDataTransfer) return null
 
-    return null
-  }, [planEntry])
+    let transferCost = 0
+
+    transfers?.forEach((transfer) => {
+      // Skip if user hasn't provided a value
+      if (!transfer.value) return
+
+      // Ensure transfer usage is in GB
+      const usageInGb = humanReadableTo(transfer.value, 'GB')
+
+      // Skip if users value is invalid
+      if (!usageInGb) return
+
+      switch (transfer.type) {
+        case 'inter-region':
+          // Use costs from destination region
+          if (providerEntry.useDestinationInterRegionEgress) {
+            // Get the region config from provider
+            const sourceRegion = providerEntry.regions.find(
+              (item) => item.key === transfer.region
+            )
+
+            // Skip transfer if it uses an invalid region OR if it's the same as the compute region (we assume no costs for same region transfers)
+            if (!sourceRegion || sourceRegion.key === regionEntry.key) {
+              return
+            }
+
+            // Add inter-region destination transfer cost
+            transferCost += usageInGb * sourceRegion.interRegionEgress
+          }
+
+          // Use the cost from the compute region
+          else {
+            // Add inter-region transfer cost
+            transferCost += usageInGb * regionEntry.interRegionEgress
+          }
+          break
+        case 'public-internet':
+          transferCost += usageInGb * regionEntry.internetEgress
+          break
+      }
+    })
+
+    return transferCost
+  }, [planEntry, providerEntry, regionEntry, transfers])
 
   // Calculate the minimum total price (min compute & min storage combined)
   const totalMinPrice: ContextTotalMinPrice = useMemo(() => {
@@ -647,13 +697,8 @@ export default function PricingV2ContextProvider({
         newComputeMaxSize !== undefined ||
         newReplicas !== undefined
       ) {
-        const applyUseCaseOrFirstPackage = () => {
-          if (newUseCaseEntry) {
-            newComputeMinSize = newUseCaseEntry.computeMinimum
-            newComputeMaxSize = newUseCaseEntry.computeMaximum
-            newReplicas = newUseCaseEntry.replicas
-            newHours = newUseCaseEntry.activeHours || newHours || hours
-          } else if (newPlanEntry) {
+        const applyFirstPackage = () => {
+          if (newPlanEntry) {
             const first = newPlanEntry.packages.at(0)
             newComputeMinSize = first?.computeMinimum || null
             newComputeMaxSize = first?.computeMaximum || null
@@ -663,6 +708,33 @@ export default function PricingV2ContextProvider({
             if (typeof first?.activeHours === 'number') {
               newHours = first?.activeHours
             }
+          } else {
+            newComputeMinSize = config.computes[0]
+            newComputeMaxSize = config.computes[config.computes.length - 1]
+            newReplicas = 1
+          }
+        }
+
+        const applyUseCaseOrFirstPackage = () => {
+          if (newUseCaseEntry) {
+            const storageValue = newStorage || storage
+            const storageInGb = storageValue
+              ? humanReadableTo(storageValue, 'GB')
+              : null
+            if (storageInGb) {
+              // E.g. 100
+              const storageRatioGb = storageInGb / newUseCaseEntry.ratio
+
+              // Set raw estimated computes (values get matched to actual compute values further down)
+              newComputeMinSize = storageRatioGb - storageRatioGb * 0.2
+              newComputeMaxSize = storageRatioGb + storageRatioGb * 0.2
+
+              // Set the recommended hours and replicas
+              newReplicas = newUseCaseEntry.replicas
+              newHours = newUseCaseEntry.activeHours
+            }
+          } else {
+            applyFirstPackage()
           }
         }
 
@@ -670,8 +742,6 @@ export default function PricingV2ContextProvider({
         if (newComputeMinSize === undefined) newComputeMinSize = computeMinSize
         if (newComputeMaxSize === undefined) newComputeMaxSize = computeMaxSize
         if (newReplicas === undefined) newReplicas = replicas
-
-        console.log({ newComputeMinSize, newComputeMaxSize, newReplicas })
 
         // If all values are null, use the first package
         if (
@@ -690,6 +760,22 @@ export default function PricingV2ContextProvider({
         // Max value is null, set it to match min
         if (newComputeMinSize !== null && newComputeMaxSize === null) {
           newComputeMaxSize = newComputeMinSize
+        }
+
+        // Ensure values match a package for non-customizable plans
+        if (newPlanEntry && !newPlanEntry.customizable) {
+          const packageExists = newPlanEntry.packages.find((item) => {
+            return (
+              item.computeMinimum === newComputeMinSize &&
+              item.computeMaximum === newComputeMaxSize &&
+              item.replicas === newReplicas
+            )
+          })
+
+          // If not a valid package, set values to the first available package
+          if (!packageExists) {
+            applyFirstPackage()
+          }
         }
 
         // Ensure the compute value exists in the config array
@@ -732,22 +818,6 @@ export default function PricingV2ContextProvider({
 
           // Constrain replicas to 1-25
           newReplicas = Math.min(25, Math.max(1, newReplicas))
-        }
-
-        // Ensure values match a package for non-customizable plans
-        if (newPlanEntry && !newPlanEntry.customizable) {
-          const packageExists = newPlanEntry.packages.find((item) => {
-            return (
-              item.computeMinimum === newComputeMinSize &&
-              item.computeMaximum === newComputeMaxSize &&
-              item.replicas === newReplicas
-            )
-          })
-
-          // If not a valid package, set values to the first available package
-          if (!packageExists) {
-            applyUseCaseOrFirstPackage()
-          }
         }
       }
 
@@ -1067,7 +1137,7 @@ export default function PricingV2ContextProvider({
         totalPriceRange
       }}>
       {children}
-      {/*<pre>
+      <pre>
         {JSON.stringify(
           {
             plan,
@@ -1086,12 +1156,22 @@ export default function PricingV2ContextProvider({
             fullBackup,
             incrementalBackup,
             clickpipes,
-            transfers
+            transfers,
+            prices: {
+              computeMaxPrice,
+              storagePrice,
+              backupsPrice,
+              clickpipesPrice,
+              transfersPrice,
+              totalMinPrice,
+              totalMaxPrice,
+              totalPriceRange
+            }
           },
           null,
           2
         )}
-      </pre>*/}
+      </pre>
     </PricingV2Context.Provider>
   )
 }
