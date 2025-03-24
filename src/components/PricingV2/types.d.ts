@@ -88,6 +88,17 @@ export interface Context {
   setValues: (values: Partial<Values>) => void
   getPlanPricingData: (value: string) => undefined | PricingFileItem
   getPlanPricingConfig: (value: string) => undefined | PlanConfig
+  getUseCaseCompute: (
+    storage: ContextStorage,
+    useCase: PricingV2ComponentUseCase
+  ) =>
+    | undefined
+    | {
+        computeMinSize: number
+        computeMaxSize: number
+        replicas: number
+        hours: number
+      }
 
   // Data sources
   sourceData: PricingV2

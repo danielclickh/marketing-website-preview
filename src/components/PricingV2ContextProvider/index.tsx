@@ -6,6 +6,7 @@ import {
   useMemo,
   useState
 } from 'react'
+import { PricingV2ComponentUseCase } from '../../lib/api/strapi/types'
 import {
   bytesTo,
   bytesToHumanReadable,
@@ -57,11 +58,42 @@ function getPlanPricingConfig(planKey: string) {
   return config.meter.plans[planKey]
 }
 
+function getUseCaseCompute(
+  storage: ContextStorage,
+  useCase: PricingV2ComponentUseCase
+) {
+  if (!storage || !useCase) return
+
+  const storageInGb = humanReadableTo(storage, 'GB')
+
+  // Sanity check
+  if (!storageInGb) return
+
+  // E.g. 100
+  const storageRatioGb = storageInGb / useCase.ratio
+
+  // Set raw estimated computes (values get matched to actual compute values further down)
+  const computeMinSize = storageRatioGb - storageRatioGb * 0.2
+  const computeMaxSize = storageRatioGb + storageRatioGb * 0.2
+
+  // Set the recommended hours and replicas
+  const replicas = useCase.replicas
+  const hours = useCase.activeHours
+
+  return {
+    computeMinSize,
+    computeMaxSize,
+    replicas,
+    hours
+  }
+}
+
 const PricingV2Context = createContext<Context>({
   // Helper functions
   setValues: () => null,
   getPlanPricingData,
   getPlanPricingConfig,
+  getUseCaseCompute,
 
   // Initial source data
   sourceData: {
@@ -718,23 +750,18 @@ export default function PricingV2ContextProvider({
         newStorageCompressed = !!newStorageCompressed
       }
 
-      // Apply use case recommended compute values
-      if (newUseCaseEntry) {
-        const storageValue = newStorage || storage
-        const storageInGb = storageValue
-          ? humanReadableTo(storageValue, 'GB')
-          : null
-        if (storageInGb) {
-          // E.g. 100
-          const storageRatioGb = storageInGb / newUseCaseEntry.ratio
+      // When use case or storage changes, apply use case recommended compute values
+      if ((newUseCase && newUseCaseEntry) || (newStorage && newUseCaseEntry)) {
+        const useCaseCompute = getUseCaseCompute(
+          newStorage || storage,
+          newUseCaseEntry
+        )
 
-          // Set raw estimated computes (values get matched to actual compute values further down)
-          newComputeMinSize = storageRatioGb - storageRatioGb * 0.2
-          newComputeMaxSize = storageRatioGb + storageRatioGb * 0.2
-
-          // Set the recommended hours and replicas
-          newReplicas = newUseCaseEntry.replicas
-          newHours = newUseCaseEntry.activeHours
+        if (useCaseCompute) {
+          newComputeMinSize = useCaseCompute.computeMinSize
+          newComputeMaxSize = useCaseCompute.computeMaxSize
+          newReplicas = useCaseCompute.replicas
+          newHours = useCaseCompute.hours
         }
       }
 
@@ -1135,6 +1162,7 @@ export default function PricingV2ContextProvider({
         setValues,
         getPlanPricingData,
         getPlanPricingConfig,
+        getUseCaseCompute,
 
         // User values
         plan,

@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import { PricingV2ComponentPackage } from '@/lib/api/strapi/types'
-import { humanReadableTo } from '@/lib/utils/memory'
 import HRSeparator from '@/components/HRSeparator'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import { SuiText } from '@/components/sui'
@@ -42,6 +41,7 @@ function formatComponentsList(components: Array<React.ReactNode>) {
 
 export default function ComputeSelector() {
   const {
+    getUseCaseCompute,
     setValues,
     sourceData,
     planEntry,
@@ -90,19 +90,18 @@ export default function ComputeSelector() {
 
   // Find the use case that matches the user values
   const useCaseHasChanged = useMemo(() => {
-    if (!useCaseEntry) return false
+    if (!useCaseEntry || !storage) return false
 
-    const storageInGb = storage ? humanReadableTo(storage, 'GB') : null
-    if (!storageInGb) return false
+    const useCaseCompute = getUseCaseCompute(storage, useCaseEntry)
 
-    const storageRatio = storageInGb / useCaseEntry.ratio
+    if (!useCaseCompute) return false
 
     const matchingMinCompute =
-      findClosestCompute((80 / storageRatio) * 100) === computeMinSize
+      findClosestCompute(useCaseCompute.computeMinSize) === computeMinSize
     const matchingMaxCompute =
-      findClosestCompute((120 / storageRatio) * 100) === computeMaxSize
-    const matchingReplicas = useCaseEntry.replicas === replicas
-    const matchingHours = useCaseEntry.activeHours === hours
+      findClosestCompute(useCaseCompute.computeMaxSize) === computeMaxSize
+    const matchingReplicas = useCaseCompute.replicas === replicas
+    const matchingHours = useCaseCompute.hours === hours
 
     return (
       !matchingMinCompute ||
@@ -199,11 +198,7 @@ export default function ComputeSelector() {
                     (item) => item.slug === useCaseSlug
                   )
                   setValues({
-                    useCase: useCaseObject?.slug,
-                    computeMinSize: null,
-                    computeMaxSize: null,
-                    replicas: null,
-                    hours: null
+                    useCase: useCaseObject?.slug
                   })
                 }}
               />
@@ -214,26 +209,20 @@ export default function ComputeSelector() {
 
           {/* Use Case heading and reset button */}
           {canCustomize && useCaseEntry && (
-            <div className='mb-6 flex items-center justify-between'>
+            <div className='mb-6 flex items-center gap-3'>
               <SuiText weight='bold'>
                 Suggested configuration based on your use case
               </SuiText>
-              {useCaseHasChanged && (
-                <button
-                  className='opacity-75 transition-colors hover:opacity-100'
-                  onClick={(event) => {
-                    event.preventDefault()
-                    setValues({
-                      useCase: useCaseEntry?.slug,
-                      computeMinSize: null,
-                      computeMaxSize: null,
-                      replicas: null,
-                      hours: null
-                    })
-                  }}>
-                  Reset
-                </button>
-              )}
+              <button
+                className={`rounded px-2 py-1 text-primary-300 transition hover:bg-white/10 ${useCaseHasChanged ? '' : 'opacity-0'}`}
+                onClick={(event) => {
+                  event.preventDefault()
+                  setValues({
+                    useCase: useCaseEntry?.slug
+                  })
+                }}>
+                Reset
+              </button>
             </div>
           )}
 
