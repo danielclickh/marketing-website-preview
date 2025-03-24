@@ -61,16 +61,43 @@ export default function BackupsSelector() {
     return Math.floor(hoursInMonth / backupFrequency)
   }, [backupFrequency])
 
-  const estimatedBackupSizeFormatted = useMemo(() => {
+  const esitmatedIncrementalBackupSize = useMemo(() => {
     if (!estimatedBackupsPerMonth || !storage) return null
-    const storageBytes = humanReadableToBytes(storage)
+    let storageBytes = humanReadableToBytes(storage)
 
     if (!storageBytes) return null
 
+    // Apply standard 10x compression
+    if (!storageCompressed) {
+      storageBytes /= 10
+    }
+
     return bytesToHumanReadable(
-      storageBytes + (storageBytes / 100) * estimatedBackupsPerMonth
+      Math.round((storageBytes / 100) * estimatedBackupsPerMonth)
     )
-  }, [estimatedBackupsPerMonth, storage])
+  }, [estimatedBackupsPerMonth, storage, storageCompressed])
+
+  const estimatedBackupSizeFormatted = useMemo(() => {
+    if (
+      !estimatedBackupsPerMonth ||
+      !storage ||
+      !esitmatedIncrementalBackupSize
+    )
+      return null
+    let fullBytes = humanReadableToBytes(storage)
+    const incrementalBytes = humanReadableToBytes(
+      esitmatedIncrementalBackupSize
+    )
+
+    if (!fullBytes || !incrementalBytes) return null
+
+    // Apply standard 10x compression
+    if (!storageCompressed) {
+      fullBytes /= 10
+    }
+
+    return bytesToHumanReadable(fullBytes + incrementalBytes)
+  }, [estimatedBackupsPerMonth, esitmatedIncrementalBackupSize, storage])
 
   return (
     <>
@@ -129,9 +156,7 @@ export default function BackupsSelector() {
               <DataSize
                 min='1GB'
                 max='999PB'
-                value={
-                  fullBackup || estimatedBackupSizeFormatted || storage || '1GB'
-                }
+                value={fullBackup ?? storage ?? '1GB'}
                 onChange={(value) => setValues({ fullBackup: value.formatted })}
               />
             </div>
@@ -141,10 +166,7 @@ export default function BackupsSelector() {
                 min='1GB'
                 max='999PB'
                 value={
-                  incrementalBackup ||
-                  estimatedBackupSizeFormatted ||
-                  storage ||
-                  '1GB'
+                  incrementalBackup ?? esitmatedIncrementalBackupSize ?? '1GB'
                 }
                 onChange={(value) =>
                   setValues({ incrementalBackup: value.formatted })

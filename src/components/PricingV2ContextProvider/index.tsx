@@ -13,7 +13,6 @@ import {
 } from '@/lib/utils/memory'
 import pricingFile from '../../../public/pricingV2File.json'
 import * as config from '../PricingV2/config'
-import { averageDaysPerMonth } from '../PricingV2/config'
 import {
   Context,
   ContextBackupFrequency,
@@ -310,41 +309,51 @@ export default function PricingV2ContextProvider({
     // No pricing needed for plans that don't allow backups
     if (!planEntry.allowBackups) return null
 
-    const hoursInMonth = averageDaysPerMonth * 24
-    const estimatedBackupsPerMonth = Math.floor(hoursInMonth / backupFrequency)
+    //
+    const hoursPerMonth = config.averageDaysPerMonth * 24
+    const visibleBackups = (24 / backupFrequency) * backupRetention + 1
+    const fullBackupsPerDay = visibleBackups / 7
+    const incrementalBackupsPerDay = visibleBackups - fullBackupsPerDay
 
-    let usageInBytes = 0
+    let fullBackupsBytes = 0
+    let incrementalBackupsBytes = 0
 
     // Add user defined values
     if (!estimateBackup) {
-      usageInBytes += fullBackup ? humanReadableToBytes(fullBackup) : 0
-      usageInBytes += incrementalBackup
+      fullBackupsBytes = fullBackup ? humanReadableToBytes(fullBackup) : 0
+      incrementalBackupsBytes = incrementalBackup
         ? humanReadableToBytes(incrementalBackup)
         : 0
     }
 
     // Esitmate backup
     if (estimateBackup && storage) {
-      const storageBytes = humanReadableToBytes(storage)
+      fullBackupsBytes = humanReadableToBytes(storage) || 0
 
-      // Storage with 1% increase
-      usageInBytes = storageBytes
-        ? storageBytes + (storageBytes / 100) * estimatedBackupsPerMonth
-        : 0
-
-      // If the storage isn't already compressed, apply standard 10x compression
-      if (!storageCompressed) {
-        usageInBytes = usageInBytes / 10
+      // Apply 10x compression
+      if (!storageCompressed && fullBackupsBytes) {
+        fullBackupsBytes /= 10
       }
+
+      // Assume incrementals are 1% of storage
+      incrementalBackupsBytes = fullBackupsBytes / 100
     }
 
-    // Unit price is in terabytes so we need to convert usage accordingly
-    let usageInTb = bytesTo(usageInBytes, 'TB')
+    const fullBackupsInGb = bytesTo(fullBackupsBytes, 'GB') || 0
+    const incrementalBackupsInGb = bytesTo(incrementalBackupsBytes, 'GB') || 0
 
-    // Bail if converting value failed
-    if (!usageInTb) return null
+    // The below calculations were provided by Aashish Kohli
+    const gbMinutesPerDay =
+      (fullBackupsPerDay * fullBackupsInGb +
+        incrementalBackupsPerDay * incrementalBackupsInGb) *
+      60 *
+      24
+    const gbMinutesPerHour = gbMinutesPerDay / 24
+    const gbMinutesPerMonth = gbMinutesPerHour * hoursPerMonth
+    const tbMinutesPerMonth = gbMinutesPerMonth / 1000
+    const tbMonthPerMonth = tbMinutesPerMonth / (hoursPerMonth * 60)
 
-    return usageInTb * storageUnitPrice
+    return tbMonthPerMonth * storageUnitPrice
   }, [
     planEntry,
     storage,
@@ -1160,6 +1169,7 @@ export default function PricingV2ContextProvider({
             clickpipes,
             transfers,
             prices: {
+              storageUnitPrice,
               computeMaxPrice,
               storagePrice,
               backupsPrice,
