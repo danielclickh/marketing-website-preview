@@ -701,6 +701,43 @@ export default function PricingV2ContextProvider({
         }
       }
 
+      // Validate storage
+      if (newStorage !== undefined || newPlanEntry?.maxStorageCapacity) {
+        if (!newStorage) newStorage = storage
+
+        if (newStorage && newPlanEntry?.maxStorageCapacity) {
+          const storageInGb = humanReadableTo(newStorage, 'GB')
+          if (storageInGb > newPlanEntry.maxStorageCapacity) {
+            newStorage = `${newPlanEntry.maxStorageCapacity}GB`
+          }
+        }
+      }
+
+      // Validate storage compressed
+      if (newStorageCompressed !== undefined) {
+        newStorageCompressed = !!newStorageCompressed
+      }
+
+      // Apply use case recommended compute values
+      if (newUseCaseEntry) {
+        const storageValue = newStorage || storage
+        const storageInGb = storageValue
+          ? humanReadableTo(storageValue, 'GB')
+          : null
+        if (storageInGb) {
+          // E.g. 100
+          const storageRatioGb = storageInGb / newUseCaseEntry.ratio
+
+          // Set raw estimated computes (values get matched to actual compute values further down)
+          newComputeMinSize = storageRatioGb - storageRatioGb * 0.2
+          newComputeMaxSize = storageRatioGb + storageRatioGb * 0.2
+
+          // Set the recommended hours and replicas
+          newReplicas = newUseCaseEntry.replicas
+          newHours = newUseCaseEntry.activeHours
+        }
+      }
+
       // Validate compute
       if (
         newPlanEntry ||
@@ -726,29 +763,6 @@ export default function PricingV2ContextProvider({
           }
         }
 
-        const applyUseCaseOrFirstPackage = () => {
-          if (newUseCaseEntry) {
-            const storageValue = newStorage || storage
-            const storageInGb = storageValue
-              ? humanReadableTo(storageValue, 'GB')
-              : null
-            if (storageInGb) {
-              // E.g. 100
-              const storageRatioGb = storageInGb / newUseCaseEntry.ratio
-
-              // Set raw estimated computes (values get matched to actual compute values further down)
-              newComputeMinSize = storageRatioGb - storageRatioGb * 0.2
-              newComputeMaxSize = storageRatioGb + storageRatioGb * 0.2
-
-              // Set the recommended hours and replicas
-              newReplicas = newUseCaseEntry.replicas
-              newHours = newUseCaseEntry.activeHours
-            }
-          } else {
-            applyFirstPackage()
-          }
-        }
-
         // If a value is undefined, use the current value
         if (newComputeMinSize === undefined) newComputeMinSize = computeMinSize
         if (newComputeMaxSize === undefined) newComputeMaxSize = computeMaxSize
@@ -760,7 +774,7 @@ export default function PricingV2ContextProvider({
           newComputeMaxSize === null &&
           newReplicas === null
         ) {
-          applyUseCaseOrFirstPackage()
+          applyFirstPackage()
         }
 
         // Min value is null, set it to match max
@@ -839,23 +853,6 @@ export default function PricingV2ContextProvider({
 
         // Constrain hours to 0-24
         newHours = Math.min(24, Math.max(0, newHours))
-      }
-
-      // Validate storage
-      if (newStorage !== undefined || newPlanEntry?.maxStorageCapacity) {
-        if (!newStorage) newStorage = storage
-
-        if (newStorage && newPlanEntry?.maxStorageCapacity) {
-          const storageInGb = humanReadableTo(newStorage, 'GB')
-          if (storageInGb > newPlanEntry.maxStorageCapacity) {
-            newStorage = `${newPlanEntry.maxStorageCapacity}GB`
-          }
-        }
-      }
-
-      // Validate storage compressed
-      if (newStorageCompressed !== undefined) {
-        newStorageCompressed = !!newStorageCompressed
       }
 
       // Validate backup frequency (in hours)
