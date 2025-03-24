@@ -175,7 +175,7 @@ function CodeResults(props: ResultsProps) {
     const textAlign = columnType && isNumeric(columnType) ? "right" : "left";
     const value = cellValue(rowIndex, columnIndex);
 
-    if (isNumeric(columnType)) {
+    if (isNumeric(columnType) && response && response.data.length > 1) {
       const ratio = value ? 100 * Number(value) / Number(extreme[columnName].max) : 100;
       const bgColor = rowIndex === selectedCell.row? "lch(15.8 0 0)" : "#1f201b";
       const background = `linear-gradient(to right, #35372f 0%, #35372f ${ratio}%, ${bgColor} ${ratio}%, ${bgColor} 100%)`
