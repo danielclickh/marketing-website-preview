@@ -93,6 +93,7 @@ const PricingV2Context = createContext<Context>({
   // Computed values
   planEntry: undefined,
   providerEntry: undefined,
+  regionEntry: undefined,
   useCaseEntry: undefined,
 
   computeUnitPrice: null,
@@ -1123,6 +1124,7 @@ export default function PricingV2ContextProvider({
         // Computed values
         planEntry,
         providerEntry,
+        regionEntry,
         useCaseEntry,
         computeUnitPrice,
         storageUnitPrice,

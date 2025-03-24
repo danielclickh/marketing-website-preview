@@ -2,6 +2,7 @@ import {
   PricingV2,
   PricingV2ComponentPlan,
   PricingV2ComponentProvider,
+  PricingV2ComponentRegion,
   PricingV2ComponentUseCase
 } from '@/lib/api/strapi/types'
 
@@ -113,6 +114,7 @@ export interface Context {
   // Computed values
   planEntry: undefined | PricingV2ComponentPlan
   providerEntry: undefined | PricingV2ComponentProvider
+  regionEntry: undefined | PricingV2ComponentRegion
   useCaseEntry: undefined | PricingV2ComponentUseCase
   computeUnitPrice: ContextComputeUnitPrice
   storageUnitPrice: ContextStorageUnitPrice

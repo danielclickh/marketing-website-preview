@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useCallback } from 'react'
+import React, { Fragment, memo, useCallback, useMemo } from 'react'
 import { PricingV2ComponentPlan } from '@/lib/api/strapi/types'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
@@ -166,6 +166,18 @@ export default function Table({
     [getPlanPricingData, getPlanPricingConfig, provider, region]
   )
 
+  const minPublicInternetEgress = useMemo(() => {
+    if (!providerEntry) return null
+    return Math.min(...providerEntry.regions.map((item) => item.internetEgress))
+  }, [providerEntry])
+
+  const minInterRegionEgress = useMemo(() => {
+    if (!providerEntry) return null
+    return Math.min(
+      ...providerEntry.regions.map((item) => item.interRegionEgress)
+    )
+  }, [providerEntry])
+
   return (
     <div id='pricing-table'>
       <div className='mb-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-6'>
@@ -193,23 +205,17 @@ export default function Table({
       </div>
 
       <div className='my-8 space-y-4 text-center text-slate-300'>
-        {providerEntry?.internetEgress && providerEntry?.interRegionEgress && (
+        {minPublicInternetEgress && minInterRegionEgress && (
           <SuiText size='sm'>
             Data transfer for public internet egress starting at{' '}
             <strong className='text-white'>
-              <PriceUsd
-                price={providerEntry.internetEgress}
-                decimalPlaces='auto'
-              />{' '}
+              <PriceUsd price={minPublicInternetEgress} decimalPlaces='auto' />{' '}
               / GB
             </strong>
             , inter region egress starting at{' '}
             <strong className='text-white'>
-              <PriceUsd
-                price={providerEntry.interRegionEgress}
-                decimalPlaces='auto'
-              />{' '}
-              / GB
+              <PriceUsd price={minInterRegionEgress} decimalPlaces='auto' /> /
+              GB
             </strong>
             .
           </SuiText>
