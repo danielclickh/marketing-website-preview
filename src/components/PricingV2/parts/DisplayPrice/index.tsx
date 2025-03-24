@@ -1,9 +1,10 @@
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
+import { Fragment, useCallback, useEffect, useMemo, useRef } from 'react'
+import { humanReadableTo } from '@/lib/utils/memory'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import PriceUsd from '../../ui/PriceUsd'
-import { Fragment, useCallback, useEffect, useRef } from 'react'
 
 export default function DisplayPrice() {
-  const { totalPriceRange } = usePricingV2Context()
+  const { totalPriceRange, storage, storageCompressed } = usePricingV2Context()
 
   const priceRef = useRef<null | HTMLParagraphElement>(null)
 
@@ -31,6 +32,21 @@ export default function DisplayPrice() {
     priceEl.style.fontSize = `${high}px`
   }, [priceRef])
 
+  // If storage (compressed) is over 1PB, display custom quote CTA
+  const displayCustomQuoteCta = useMemo(() => {
+    if (!storage) return false
+
+    let storageInPb = humanReadableTo(storage, 'PB')
+    if (!storageInPb) return false
+
+    // Apply standard compression
+    if (!storageCompressed) {
+      storageInPb /= 10
+    }
+
+    return storageInPb > 1
+  }, [storage, storageCompressed])
+
   // Attach resize events on mount
   useEffect(() => {
     window.addEventListener('resize', resize)
@@ -47,14 +63,16 @@ export default function DisplayPrice() {
   useEffect(() => {
     const timer = window.setTimeout(resize, 100)
     return () => window.clearTimeout(timer)
-  }, [totalPriceRange])
+  }, [totalPriceRange, displayCustomQuoteCta])
 
   return (
     <span
       ref={priceRef}
       className='block w-full overflow-hidden whitespace-nowrap'>
-      {!totalPriceRange && '--'}
-      {totalPriceRange &&
+      {displayCustomQuoteCta && <>Contact sales</>}
+      {!displayCustomQuoteCta && !totalPriceRange && '--'}
+      {!displayCustomQuoteCta &&
+        totalPriceRange &&
         totalPriceRange.map((price, priceIndex, allPrices) => {
           return (
             <Fragment key={priceIndex}>
