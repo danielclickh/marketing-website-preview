@@ -60,14 +60,18 @@ function getPlanPricingConfig(planKey: string) {
 
 function getUseCaseCompute(
   storage: ContextStorage,
+  storageCompressed: boolean,
   useCase: PricingV2ComponentUseCase
 ) {
   if (!storage || !useCase) return
 
-  const storageInGb = humanReadableTo(storage, 'GB')
+  let storageInGb = humanReadableTo(storage, 'GB')
 
   // Sanity check
   if (!storageInGb) return
+
+  // Apply 10x compression
+  if (!storageCompressed) storageInGb /= 10
 
   // E.g. 100
   const storageRatioGb = storageInGb / useCase.ratio
@@ -751,9 +755,13 @@ export default function PricingV2ContextProvider({
       }
 
       // When use case or storage changes, apply use case recommended compute values
-      if ((newUseCase && newUseCaseEntry) || (newStorage && newUseCaseEntry)) {
+      if (
+        newUseCaseEntry &&
+        (newUseCase || newStorage || newStorageCompressed !== undefined)
+      ) {
         const useCaseCompute = getUseCaseCompute(
           newStorage || storage,
+          newStorageCompressed ?? storageCompressed ?? false,
           newUseCaseEntry
         )
 

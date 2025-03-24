@@ -90,6 +90,7 @@ export interface Context {
   getPlanPricingConfig: (value: string) => undefined | PlanConfig
   getUseCaseCompute: (
     storage: ContextStorage,
+    storageCompressed: boolean,
     useCase: PricingV2ComponentUseCase
   ) =>
     | undefined

@@ -47,6 +47,7 @@ export default function ComputeSelector() {
     planEntry,
     useCaseEntry,
     storage,
+    storageCompressed,
     hours,
     computeMinSize,
     computeMaxSize,
@@ -92,7 +93,11 @@ export default function ComputeSelector() {
   const useCaseHasChanged = useMemo(() => {
     if (!useCaseEntry || !storage) return false
 
-    const useCaseCompute = getUseCaseCompute(storage, useCaseEntry)
+    const useCaseCompute = getUseCaseCompute(
+      storage,
+      storageCompressed ?? false,
+      useCaseEntry
+    )
 
     if (!useCaseCompute) return false
 
