@@ -11,12 +11,25 @@ export type Value = {
   formatted: null | string
 }
 
+type UiSplit = '7/3' | '1/1'
+
 export interface DataSizeProps {
   min?: string | null
   max?: string | null
   value?: string | null
   onChange: (value: Value) => void
   className?: string
+  uiSplit?: UiSplit
+}
+
+const inputWidth: Record<UiSplit, string> = {
+  '7/3': 'w-1/2 lg:w-2/3',
+  '1/1': 'w-1/2'
+}
+
+const selectWidth: Record<UiSplit, string> = {
+  '7/3': 'w-1/2 lg:w-1/3',
+  '1/1': 'w-1/2'
 }
 
 export default function DataSize({
@@ -24,7 +37,8 @@ export default function DataSize({
   max,
   value,
   onChange,
-  className = ''
+  className = '',
+  uiSplit = '7/3'
 }: DataSizeProps) {
   const [bytesValue, setBytesValue] = useState<number | null>(null)
 
@@ -154,16 +168,16 @@ export default function DataSize({
   )
 
   return (
-    <div className={`grid grid-cols-2 lg:grid-cols-3 gap-2 ${className}`}>
+    <div className={`flex gap-2 ${className}`}>
       <input
-        className='relative lg:col-span-2 h-10 w-full cursor-text rounded border border-neutral-700 bg-neutral-725 px-3 text-left shadow-input focus:outline-none'
+        className={`${inputWidth[uiSplit]} relative h-10 cursor-text rounded border border-neutral-700 bg-neutral-725 px-3 text-left shadow-input focus:outline-none`}
         type='number'
         min={0}
         step={1}
         value={inputValue?.toString() || '0'}
         onChange={handleInputChange}
       />
-      <div className='flex flex-col justify-end'>
+      <div className={`${selectWidth[uiSplit]} flex flex-col justify-end`}>
         <Select
           options={units}
           value={unitValue}

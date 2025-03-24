@@ -120,6 +120,7 @@ export default function DataSourcesSelector() {
                           <div className='md:col-span-2'>
                             <Label>Data ingested / month</Label>
                             <DataSize
+                              uiSplit='1/1'
                               min='1GB'
                               max='999PB'
                               value={item.dataIngested}
