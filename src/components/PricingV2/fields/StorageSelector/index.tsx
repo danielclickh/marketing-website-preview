@@ -39,9 +39,9 @@ export default function StorageSelector() {
         <div className=''>
           <Label>Data volume</Label>
           <DataSize
-            min='1GB'
+            min='0GB'
             max={maxSotrageSize ? `${maxSotrageSize}GB` : '999PB'}
-            value={storage || '500GB'}
+            value={storage || '0GB'}
             onChange={onStorageSizeChange}
           />
         </div>

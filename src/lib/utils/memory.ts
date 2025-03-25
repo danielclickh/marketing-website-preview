@@ -166,3 +166,32 @@ export function humanReadableTo(
   const bytes = humanReadableToBytes(humanReadable, defaultValue)
   return typeof bytes === 'number' ? bytesTo(bytes, unit) : bytes
 }
+
+type HumanReadablePartsReturnType<T> = T extends null
+  ? null
+  : { value: number; unit: string }
+
+export function humanReadableParts<
+  T extends { value: number; unit: string } | null
+>(
+  humanReadable: string,
+  defaultValue: T = null as T
+): HumanReadablePartsReturnType<T> {
+  const pattern = new RegExp(
+    `^([\-\+]?(?:\\d+(?:\\.\\d+)?))(${BYTE_UNITS.join('|')})$`,
+    'i'
+  )
+
+  // If is a match, return example: [ "-2.75GB", "-2.75", "GB" ]
+  const matches = humanReadable.trim().match(pattern)
+
+  if (!matches) return defaultValue as HumanReadablePartsReturnType<T>
+
+  const value = Number(matches[1])
+  const unit = matches[2]
+
+  return {
+    value,
+    unit
+  } as HumanReadablePartsReturnType<T>
+}

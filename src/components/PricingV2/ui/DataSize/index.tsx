@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   BYTE_UNITS,
   bytesToHumanReadable,
+  humanReadableParts,
   humanReadableToBytes
 } from '../../../../lib/utils/memory'
 import Select, { Options } from '../Select'
@@ -70,29 +71,48 @@ export default function DataSize({
 
   // Create filtered options list, removing units outside the min/max range
   const units: Options = useMemo(() => {
-    let options = BYTE_UNITS
+    let options: Options = []
 
-    // Remove units below the minimum
-    if (minBytes) {
-      options = options.filter(
-        (unit) => humanReadableToBytes(`1${unit}`) >= minBytes
-      )
-    }
+    const minParts = min ? humanReadableParts(min) : null
+    const maxParts = max ? humanReadableParts(max) : null
 
-    // Remove units above the maximum
-    if (maxBytes) {
-      options = options.filter(
-        (unit) => humanReadableToBytes(`1${unit}`) <= maxBytes
-      )
-    }
+    // If the min value is zero (e.g. 0GB)
+    const minBytesLower =
+      minParts?.unit && minParts.value === 0
+        ? humanReadableToBytes(`1${minParts.unit}`)
+        : null
 
-    return options.map((unit) => {
-      return {
-        value: unit,
-        label: unit
+    // If the max value is zero (e.g. 0TB)
+    const maxBytesUpper =
+      maxParts?.unit && maxParts.value === 0
+        ? humanReadableToBytes(`1${maxParts.unit}`)
+        : null
+
+    BYTE_UNITS.forEach((unit) => {
+      let passesMinimum = false
+      let passesMaximum = false
+
+      const oneUnitBytes = humanReadableToBytes(`1${unit}`)
+
+      if (minBytes !== null || minBytesLower !== null) {
+        passesMinimum =
+          oneUnitBytes >= (minBytesLower !== null ? minBytesLower : minBytes)
+      }
+
+      if (maxBytes !== null || maxBytesUpper !== null) {
+        passesMaximum =
+          oneUnitBytes <= (maxBytesUpper !== null ? maxBytesUpper : maxBytes)
+      }
+
+      if (passesMinimum && passesMaximum) {
+        options.push({
+          value: unit,
+          label: unit
+        })
       }
     })
-  }, [minBytes, maxBytes])
+    return options
+  }, [min, max, minBytes, maxBytes])
 
   // Generate human readable value
   const formattedValue = useMemo(() => {
@@ -108,23 +128,7 @@ export default function DataSize({
 
     if (!formattedValue) return defaultValue
 
-    const pattern = new RegExp(
-      `^([\-\+]?(?:\\d+(?:\\.\\d+)?))(${BYTE_UNITS.join('|')})$`,
-      'i'
-    )
-
-    // If is a match, return example: [ "-2.75GB", "-2.75", "GB" ]
-    const matches = formattedValue.trim().match(pattern)
-
-    if (!matches) return defaultValue
-
-    const value = Number(matches[1])
-    const unit = matches[2]
-
-    return {
-      value,
-      unit
-    }
+    return humanReadableParts(formattedValue, defaultValue)
   }, [formattedValue, units])
 
   // Sync prop with local state
