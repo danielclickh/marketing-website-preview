@@ -65,6 +65,10 @@ function getUseCaseCompute(
 ) {
   if (!storage || !useCase) return
 
+  // Get the recommended hours and replicas
+  const replicas = useCase.replicas
+  const hours = useCase.activeHours
+
   let storageInGb = humanReadableTo(storage, 'GB')
 
   // Sanity check
@@ -77,12 +81,12 @@ function getUseCaseCompute(
   const storageRatioGb = storageInGb / useCase.ratio
 
   // Set raw estimated computes (values get matched to actual compute values further down)
-  const computeMinSize = storageRatioGb - storageRatioGb * 0.2
-  const computeMaxSize = storageRatioGb + storageRatioGb * 0.2
-
-  // Set the recommended hours and replicas
-  const replicas = useCase.replicas
-  const hours = useCase.activeHours
+  const computeMinSize = Math.floor(
+    (storageRatioGb - storageRatioGb * 0.2) / replicas
+  )
+  const computeMaxSize = Math.ceil(
+    (storageRatioGb + storageRatioGb * 0.2) / replicas
+  )
 
   return {
     computeMinSize,
