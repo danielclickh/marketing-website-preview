@@ -190,7 +190,7 @@ export default function Bar(props: {
     ? Math.max(48, longestLabelLength * 7) // Estimate width based on character count
     : 24
 
-  const bottomPadding = series.length > 1 ? '48px' : '24px'
+  const bottomPadding = series.length > 1 ? '48px' : '12px'
   const options: EChartsOption = {
     title: {
       text: props.config.title,

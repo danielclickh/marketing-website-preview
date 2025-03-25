@@ -220,7 +220,7 @@ const LineChart = (props: {
     }
   }
 
-  const bottomPadding = series.length > 1 ? '48px' : '24px'
+  const bottomPadding = series.length > 1 ? '48px' : '12px'
 
   const options: any = {
     animation: false,
