@@ -843,12 +843,14 @@ export default function PricingV2ContextProvider({
         }
 
         // Ensure the compute value exists in the config array
-        newComputeMinSize = newComputeMinSize
-          ? config.findClosestCompute(newComputeMinSize)
-          : null
-        newComputeMaxSize = newComputeMaxSize
-          ? config.findClosestCompute(newComputeMaxSize)
-          : null
+        newComputeMinSize =
+          typeof newComputeMinSize === 'number'
+            ? config.findClosestCompute(newComputeMinSize)
+            : null
+        newComputeMaxSize =
+          typeof newComputeMaxSize === 'number'
+            ? config.findClosestCompute(newComputeMaxSize)
+            : null
 
         if (newComputeMinSize !== null && newComputeMaxSize !== null) {
           // If min value has changed, ensure max value is always greater than or equal to
