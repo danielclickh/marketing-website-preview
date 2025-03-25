@@ -111,7 +111,8 @@ const Chart = (props: {
         hasBorder
         orientation='vertical'
         padding='md'
-        radii='sm'>
+        radii='sm'
+        >
         {chart}
       </Panel>
     </div>
