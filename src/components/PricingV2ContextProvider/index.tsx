@@ -65,10 +65,6 @@ function getUseCaseCompute(
 ) {
   if (!storage || !useCase) return
 
-  // Get the recommended hours and replicas
-  const replicas = useCase.replicas
-  const hours = useCase.activeHours
-
   let storageInGb = humanReadableTo(storage, 'GB')
 
   // Sanity check
@@ -80,19 +76,37 @@ function getUseCaseCompute(
   // E.g. 100
   const storageRatioGb = storageInGb / useCase.ratio
 
-  // Set raw estimated computes (values get matched to actual compute values further down)
-  const computeMinSize = Math.floor(
-    (storageRatioGb - storageRatioGb * 0.2) / replicas
-  )
-  const computeMaxSize = Math.ceil(
-    (storageRatioGb + storageRatioGb * 0.2) / replicas
-  )
+  // Ensure computes are sorted low to high
+  const sortedComputes = [...config.computes].sort((a, b) => a - b)
+  const maxCompute = sortedComputes[sortedComputes.length - 1]
+
+  // Ideal compute sizes
+  const idealComputeMinSize = Math.floor(storageRatioGb - storageRatioGb * 0.2)
+  const idealComputeMaxSize = Math.ceil(storageRatioGb + storageRatioGb * 0.2)
+
+  // Recommended replicas for this use case
+  let replicas = useCase.replicas
+
+  // Start by calculating the compute values based on the recommended number of replicas for the use case
+  let computeMinSize = idealComputeMinSize / replicas
+  let computeMaxSize = idealComputeMaxSize / replicas
+
+  // Looks like values are maxed, let's increase the replicas
+  while (
+    computeMinSize >= maxCompute &&
+    computeMaxSize > maxCompute &&
+    replicas < 25
+  ) {
+    replicas += 1
+    computeMinSize = idealComputeMinSize / replicas
+    computeMaxSize = idealComputeMaxSize / replicas
+  }
 
   return {
     computeMinSize,
     computeMaxSize,
     replicas,
-    hours
+    hours: useCase.activeHours
   }
 }
 
