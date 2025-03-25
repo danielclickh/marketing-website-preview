@@ -119,14 +119,18 @@ const LineChart = (props: {
 
   const colors = useMemo(
     () => [
-      '#FAFF69',
+      '#faff69',
       '#FC74FF',
-      '#74ACFF',
-      '#74FFD5',
-      '#FF7C74',
-      '#74FF9B',
-      '#FFE074',
-      '#CF4B4B'
+      '#66ff73',
+      '#6df8e1',
+      '#33e4ff',
+      '#6d9bf3',
+      '#cc66ff',
+      '#fb63d6',
+      '#fdcf33',
+      '#fd9050',
+      '#fd7575',
+      '#b3b6bd'
     ],
     []
   )
@@ -231,14 +235,16 @@ const LineChart = (props: {
       left: 'center'
     },
     grid: {
-      left: '24px',
+      left: '8px',
       right: '8px',
       bottom: bottomPadding,
-      top: '24px'
+      top: '24px',
+      containLabel: true
     },
     xAxis: {
       show: true,
       type: 'category',
+      boundaryGap: false,
       data: xAxis,
       nameLocation: 'middle',
       min: 0,
@@ -328,7 +334,7 @@ const LineChart = (props: {
 
   return (
     <div
-      className='h-full w-full justify-between flex flex-col'
+      className='h-full justify-between flex flex-col'
       onMouseMove={onMouseOver}
       onMouseOut={onMouseOut}>
       <EChartsReact

@@ -20,7 +20,9 @@ function getSupportedColumns(columns: Column[]): {
           nonNullType(col.type).startsWith('Date') ||
           nonNullType(col.type).includes('String') ||
           nonNullType(col.type).startsWith('UInt') ||
-          nonNullType(col.type).startsWith('Int')
+          nonNullType(col.type).startsWith('Int')  ||
+          nonNullType(col.type).startsWith("Enum") || 
+          nonNullType(col.type).startsWith("LowCardinality")
       )
       .map((col) => col.name),
     yaxis: columns
@@ -120,14 +122,18 @@ export default function Bar(props: {
 
   const colors = useMemo(
     () => [
-      '#FAFF69',
+      '#faff69',
       '#FC74FF',
-      '#74ACFF',
-      '#74FFD5',
-      '#FF7C74',
-      '#74FF9B',
-      '#FFE074',
-      '#CF4B4B'
+      '#66ff73',
+      '#6df8e1',
+      '#33e4ff',
+      '#6d9bf3',
+      '#cc66ff',
+      '#fb63d6',
+      '#fdcf33',
+      '#fd9050',
+      '#fd7575',
+      '#b3b6bd'
     ],
     []
   )
@@ -196,10 +202,11 @@ export default function Bar(props: {
     },
     animation: false,
     grid: {
-      left: props.horizontal ? `${leftPadding}px` : '24px',
-      right: '24px',
+      left: '8px',
+      right: '8px',
       bottom: '64px',
-      top: '24px'
+      top: '24px',
+      containLabel: true
     },
     tooltip: {
       trigger: 'item',

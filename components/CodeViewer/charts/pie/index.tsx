@@ -137,7 +137,7 @@ export default function Pie(props: {
         type: 'pie',
         radius: ['50%', '90%'],
         avoidLabelOverlap: true,
-        center: ['45%', '55%'],
+        center: ['50%', '55%'],
         label: {
           show: false
         },
@@ -152,14 +152,18 @@ export default function Pie(props: {
         z: 2,
         itemStyle: {},
         color: [
+          '#faff69',
           '#FC74FF',
-          '#FAFF69',
-          '#74ACFF',
-          '#74FFD5',
-          '#FF7C74',
-          '#74FF9B',
-          '#FFE074',
-          '#CF4B4B'
+          '#66ff73',
+          '#6df8e1',
+          '#33e4ff',
+          '#6d9bf3',
+          '#cc66ff',
+          '#fb63d6',
+          '#fdcf33',
+          '#fd9050',
+          '#fd7575',
+          '#b3b6bd'
         ],
         data: data
       }

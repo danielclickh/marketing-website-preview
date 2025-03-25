@@ -11,7 +11,7 @@ import {
   QueryResponse,
   QueryResults
 } from './types'
-import { formatBytes, formatReadableRows, roundByScale } from './utils'
+import { formatBytes, formatReadableRows, roundToDynamicPrecision } from './utils'
 import { useRouter } from 'next/router'
 import { getGoogleAnalyticsUserIdFromBrowserCookie } from '../../lib/utils/google'
 
@@ -221,14 +221,12 @@ function CodeInterpreter({
             </RadioGroup>
           )}
           {show_statistics && results?.response?.statistics && (
-            <div className='flex text-xs italic h-full mb-[4px] ml-[8px]'>
-              {`${runBy()} Read ${formatReadableRows(results.response.statistics.rows_read)} rows and ${formatBytes(results.response.statistics.bytes_read)} in ${roundByScale(results.response.statistics.elapsed)} seconds`}
+            <div className={`flex text-xs italic h-full mb-[4px] ${chart ? 'ml-[8px]' : ''}`}>
+              {`${runBy()} Read ${formatReadableRows(results.response.statistics.rows_read)} rows and ${formatBytes(results.response.statistics.bytes_read)} in ${roundToDynamicPrecision(results.response.statistics.elapsed)} seconds`}
             </div>
           )}
         </div>
       )
-
-      return show_results
     }
   }
 
