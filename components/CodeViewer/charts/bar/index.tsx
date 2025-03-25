@@ -189,6 +189,8 @@ export default function Bar(props: {
   const leftPadding = props.horizontal
     ? Math.max(48, longestLabelLength * 7) // Estimate width based on character count
     : 24
+
+  const bottomPadding = series.length > 1 ? '48px' : '24px'
   const options: EChartsOption = {
     title: {
       text: props.config.title,
@@ -204,7 +206,7 @@ export default function Bar(props: {
     grid: {
       left: '8px',
       right: '8px',
-      bottom: '64px',
+      bottom: bottomPadding,
       top: '24px',
       containLabel: true
     },
