@@ -107,11 +107,11 @@ export default function DemoPage({
               </button>
             </Link>
           </div>
-          <div className='flex w-full flex-col pt-2 items-center lg:pr-80'>
+          {/* <div className='flex w-full flex-col pt-2 items-center lg:pr-80'>
             <h1 className='flex mb-8 mt-6 font-basier text-4xl font-bold text-neutral-100 '>
               <span className='leading-snug'>{Title}</span>
             </h1>
-          </div>
+          </div> */}
         </div>
         <div className='absolute right-0 z-0 hidden h-full pr-10 transition-opacity duration-500 xl:block 2xl:pr-30'>
           <TableOfContents
@@ -120,7 +120,7 @@ export default function DemoPage({
             headersSelector={'h1, h2, h3'}
           />
         </div>
-        <div className='section-container mx-auto flex pt-20 xl:pl-32 xl:pr-40'>
+        <div className='section-container mx-auto flex xl:pl-32 xl:pr-40'>
           <div className='flex w-full flex-col pb-20 lg:pr-[180px] xl:pl-4'>
             {Content && (
               <div className='flex flex-col lg:flex-row'>
