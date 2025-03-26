@@ -72,9 +72,11 @@ export default function DemosPage({
       <div className='container mx-auto max-w-7xl px-8 pt-8 2xl:px-0'>
         <div className='w-full'>
           <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2'>
-            {demos.map((demo) => (
-              <DemoCard key={demo.id} {...demo} />
-            ))}
+            {demos
+              .filter((demo) => demo.ListOnDemos)
+              .map((demo) => (
+                <DemoCard key={demo.id} {...demo} />
+              ))}
           </div>
         </div>
       </div>

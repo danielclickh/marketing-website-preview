@@ -30,7 +30,7 @@ export default function DemoCard(demo: Demo) {
         <div className='flex min-h-full flex-col gap-4 p-4 md:p-6'>
           {demo.Image && (
             <Link
-              href={demo.Link}
+              href={demo.External ? demo.Link : `/demos/${demo.Link}`}
               target={demo.LinkType}
               className='mb-6 md:mb-12'
               onClick={handleImageClick}>

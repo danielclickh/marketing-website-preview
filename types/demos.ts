@@ -11,4 +11,5 @@ export type Demo = {
   GitHubLink: null | string
   External: boolean
   Content: string
+  ListOnDemos: boolean
 }
