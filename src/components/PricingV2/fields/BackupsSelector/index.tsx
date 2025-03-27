@@ -154,7 +154,7 @@ export default function BackupsSelector() {
             <div>
               <Label>Full backup</Label>
               <DataSize
-                min='1GB'
+                min='0GB'
                 max='999PB'
                 value={fullBackup}
                 onChange={(value) => setValues({ fullBackup: value.formatted })}
@@ -163,7 +163,7 @@ export default function BackupsSelector() {
             <div>
               <Label>Incremental backup</Label>
               <DataSize
-                min='1GB'
+                min='0GB'
                 max='999PB'
                 value={incrementalBackup}
                 onChange={(value) =>

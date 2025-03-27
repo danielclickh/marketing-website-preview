@@ -920,10 +920,10 @@ export default function PricingV2ContextProvider({
         }
       }
 
-      // Set default backup values if estimating
-      if (newEstimateBackup) {
+      // Set default backup values
+      if (newEstimateBackup !== undefined) {
         // Set default values
-        let storageBytes = humanReadableToBytes(newStorage ?? storage ?? '1GB')
+        let storageBytes = humanReadableToBytes(newStorage ?? storage ?? '0GB')
 
         // Sanity check, ensure storage value is valid
         if (storageBytes) {
@@ -947,7 +947,7 @@ export default function PricingV2ContextProvider({
       // Validate full backup
       if (newFullBackup !== undefined || newEstimateBackup) {
         // Set default values
-        newFullBackup = newFullBackup ?? newStorage ?? storage ?? '1GB'
+        newFullBackup = newFullBackup ?? newStorage ?? storage ?? null
 
         const fullBackupInPB = newFullBackup
           ? humanReadableTo(newFullBackup, 'PB')
