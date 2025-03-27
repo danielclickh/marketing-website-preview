@@ -92,7 +92,7 @@ export default function DataTransferSelector() {
       {!providerEntry?.useDestinationInterRegionEgress && (
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
           <div>
-            <Label>Public internet egress</Label>
+            <Label>Public internet egress / month</Label>
             <DataSize
               min='1GB'
               max='999PB'
@@ -106,7 +106,7 @@ export default function DataTransferSelector() {
             />
           </div>
           <div>
-            <Label>Inter-region egress</Label>
+            <Label>Inter-region egress / month</Label>
             <DataSize
               min='1GB'
               max='999PB'
@@ -134,10 +134,10 @@ export default function DataTransferSelector() {
                       <div className='flex-1 grid grid-cols-1 md:grid-cols-2 gap-6'>
                         <div>
                           {item.type === 'public-internet' && (
-                            <Label>Public internet egress</Label>
+                            <Label>Public internet egress / month</Label>
                           )}
                           {item.type === 'inter-region' && (
-                            <Label>Inter-region egress</Label>
+                            <Label>Inter-region egress / month</Label>
                           )}
                           <DataSize
                             min='1GB'
