@@ -166,7 +166,7 @@ export default function DataSize({
         type='number'
         min={0}
         step={1}
-        value={inputValue?.toString() || '0'}
+        value={inputValue ? inputValue.toString() : ''}
         onChange={handleInputChange}
       />
       <div className={`${selectWidth[uiSplit]} flex flex-col justify-end`}>
