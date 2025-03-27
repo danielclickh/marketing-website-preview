@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo } from 'react'
 import {
   BYTE_UNITS,
   bytesToHumanReadable,
@@ -41,8 +41,6 @@ export default function DataSize({
   className = '',
   uiSplit = '7/3'
 }: DataSizeProps) {
-  const [bytesValue, setBytesValue] = useState<number | null>(null)
-
   // Get the minimum value in bytes
   const minBytes: number | null = useMemo(() => {
     return min ? humanReadableToBytes(min) : null
@@ -54,19 +52,19 @@ export default function DataSize({
   }, [max])
 
   // All-in-one validator and setter
-  const validateAndSetBytesValue = useCallback(
+  const validateBytesValue = useCallback(
     (bytes: number | null) => {
       if (bytes === null) {
-        setBytesValue(null)
+        return null
       } else if (minBytes && bytes < minBytes) {
-        setBytesValue(minBytes)
+        return minBytes
       } else if (maxBytes && bytes > maxBytes) {
-        setBytesValue(maxBytes)
-      } else {
-        setBytesValue(bytes)
+        return maxBytes
       }
+
+      return bytes
     },
-    [minBytes, maxBytes, setBytesValue]
+    [minBytes, maxBytes]
   )
 
   // Create filtered options list, removing units outside the min/max range
@@ -114,11 +112,6 @@ export default function DataSize({
     return options
   }, [min, max, minBytes, maxBytes])
 
-  // Generate human readable value
-  const formattedValue = useMemo(() => {
-    return bytesValue ? bytesToHumanReadable(bytesValue) : null
-  }, [bytesValue])
-
   // Get the corrisponding input values for the byteValue
   const { value: inputValue, unit: unitValue } = useMemo(() => {
     const defaultValue = {
@@ -126,49 +119,44 @@ export default function DataSize({
       unit: units?.[0]?.value || null
     }
 
-    if (!formattedValue) return defaultValue
+    if (!value) return defaultValue
 
-    return humanReadableParts(formattedValue, defaultValue)
-  }, [formattedValue, units])
+    return humanReadableParts(value, defaultValue)
+  }, [value, units])
 
-  // Sync prop with local state
-  useEffect(() => {
-    validateAndSetBytesValue(value ? humanReadableToBytes(value) : null)
-  }, [value])
-
-  // Fire on change callback
-  useEffect(() => {
-    if (onChange) {
-      onChange({
-        bytes: bytesValue,
-        formatted: formattedValue
-      })
-    }
-  }, [bytesValue, formattedValue])
+  // Send value up to parent
+  const handleOnChange = useCallback(
+    (bytes: number | null) => {
+      if (onChange) {
+        onChange({
+          bytes: bytes,
+          formatted: bytes ? bytesToHumanReadable(bytes) : null
+        })
+      }
+    },
+    [onChange]
+  )
 
   // Update bytesValue on input change
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const userValue = Math.round(Number(event.target.value || '0'))
-      validateAndSetBytesValue(
-        unitValue && userValue
-          ? humanReadableToBytes(`${userValue}${unitValue}`)
-          : null
-      )
+
+      const bytesValue = humanReadableToBytes(`${userValue}${unitValue}`)
+      const validatedValue = validateBytesValue(bytesValue)
+      handleOnChange(validatedValue)
     },
-    [validateAndSetBytesValue, unitValue]
+    [unitValue, validateBytesValue, handleOnChange]
   )
 
   // Update bytesValue on select change
   const handleSelectChange = useCallback(
     (userValue: string) => {
-      validateAndSetBytesValue(
-        userValue && inputValue
-          ? humanReadableToBytes(`${inputValue}${userValue}`)
-          : null
-      )
+      const bytesValue = humanReadableToBytes(`${inputValue}${userValue}`)
+      const validatedValue = validateBytesValue(bytesValue)
+      handleOnChange(validatedValue)
     },
-    [validateAndSetBytesValue, inputValue]
+    [inputValue, validateBytesValue, handleOnChange]
   )
 
   return (
