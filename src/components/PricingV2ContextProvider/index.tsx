@@ -778,7 +778,7 @@ export default function PricingV2ContextProvider({
         (newUseCase || newStorage || newStorageCompressed !== undefined)
       ) {
         const useCaseCompute = getUseCaseCompute(
-          newStorage || storage,
+          newStorage || storage || '10TB', // Default storage so we can display somewhat relevant values to the user
           newStorageCompressed ?? storageCompressed ?? false,
           newUseCaseEntry
         )
@@ -788,6 +788,11 @@ export default function PricingV2ContextProvider({
           newComputeMaxSize = useCaseCompute.computeMaxSize
           newReplicas = useCaseCompute.replicas
           newHours = useCaseCompute.hours
+        } else {
+          newComputeMinSize = config.computes[0]
+          newComputeMaxSize = config.computes[config.computes.length - 1]
+          newReplicas = newUseCaseEntry.replicas
+          newHours = newUseCaseEntry.activeHours
         }
       }
 
