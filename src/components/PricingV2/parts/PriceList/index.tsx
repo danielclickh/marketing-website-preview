@@ -1,8 +1,9 @@
-import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
+import { CheckIcon, XIcon } from '@heroicons/react/solid'
+import { useCallback } from 'react'
+import TooltipInfo from '@/components/PricingCalculator/ui/Tooltip/tooltip'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import PerkItem from '../../ui/PerkItem'
 import PriceUsd from '../../ui/PriceUsd'
-import { CheckIcon, XIcon } from '@heroicons/react/solid'
 
 export default function PriceList() {
   const {
@@ -23,10 +24,14 @@ export default function PriceList() {
     transfersPrice
   } = usePricingV2Context()
 
+  const canDisplayPrice = useCallback((value: number) => {
+    return Math.round(value * 100) / 100 >= 0.01
+  }, [])
+
   return (
     <ul className='mt-5 space-y-4 text-sm font-medium'>
       {/* Storage price */}
-      {!!storagePrice && (
+      {!!storagePrice && canDisplayPrice(storagePrice) && (
         <li className='flex items-center gap-x-2'>
           <CheckIcon className='h-4 w-4 text-primary-300' />
           <PriceUsd price={storagePrice} /> for storage{' '}
@@ -137,7 +142,7 @@ export default function PriceList() {
         )}
 
       {/* Backups price */}
-      {!!backupsPrice && (
+      {!!backupsPrice && canDisplayPrice(backupsPrice) && (
         <li className='flex items-center gap-x-2'>
           <CheckIcon className='h-4 w-4 text-primary-300' />
           <PriceUsd price={backupsPrice} /> for backups{' '}
@@ -163,18 +168,18 @@ export default function PriceList() {
       )}
 
       {/* Clickpipes/data sources price */}
-      {!!clickpipesPrice && (
+      {!!clickpipesPrice && canDisplayPrice(clickpipesPrice) && (
         <li className='flex items-center gap-x-2'>
           <CheckIcon className='h-4 w-4 text-primary-300' />
-          <PriceUsd price={clickpipesPrice || 0.0} /> for ClickPipes
+          <PriceUsd price={clickpipesPrice} /> for ClickPipes
         </li>
       )}
 
       {/* Data transfers price */}
-      {!!transfersPrice && (
+      {!!transfersPrice && canDisplayPrice(transfersPrice) && (
         <li className='flex items-center gap-x-2'>
           <CheckIcon className='h-4 w-4 text-primary-300' />
-          <PriceUsd price={transfersPrice || 0.0} /> for data transfer
+          <PriceUsd price={transfersPrice} /> for data transfer
         </li>
       )}
 
