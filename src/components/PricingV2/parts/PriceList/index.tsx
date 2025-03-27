@@ -26,28 +26,30 @@ export default function PriceList() {
   return (
     <ul className='mt-5 space-y-4 text-sm font-medium'>
       {/* Storage price */}
-      <li className='flex items-center gap-x-2'>
-        <CheckIcon className='h-4 w-4 text-primary-300' />
-        <PriceUsd price={storagePrice || 0.0} /> for storage{' '}
-        <TooltipInfo
-          content={
-            <>
-              Storage cost for {storage}{' '}
-              {storageCompressed ? 'uncompressed data' : 'compressed data'}
-              {storageUnitPrice && (
-                <>
-                  <br />
-                  <br />
-                  1 TB compressed data = <PriceUsd
-                    price={storageUnitPrice}
-                  />{' '}
-                  per month
-                </>
-              )}
-            </>
-          }
-        />
-      </li>
+      {!!storagePrice && (
+        <li className='flex items-center gap-x-2'>
+          <CheckIcon className='h-4 w-4 text-primary-300' />
+          <PriceUsd price={storagePrice} /> for storage{' '}
+          <TooltipInfo
+            content={
+              <>
+                Storage cost for {storage}{' '}
+                {storageCompressed ? 'uncompressed data' : 'compressed data'}
+                {storageUnitPrice && (
+                  <>
+                    <br />
+                    <br />
+                    1 TB compressed data = <PriceUsd
+                      price={storageUnitPrice}
+                    />{' '}
+                    per month
+                  </>
+                )}
+              </>
+            }
+          />
+        </li>
+      )}
 
       {/* Min/max compute costs */}
       {!!computeMinPrice &&
@@ -138,7 +140,7 @@ export default function PriceList() {
       {!!backupsPrice && (
         <li className='flex items-center gap-x-2'>
           <CheckIcon className='h-4 w-4 text-primary-300' />
-          <PriceUsd price={backupsPrice || 0.0} /> for backups{' '}
+          <PriceUsd price={backupsPrice} /> for backups{' '}
           {/*<TooltipInfo
             content={
               <>
@@ -177,7 +179,7 @@ export default function PriceList() {
       )}
 
       {/* Not fault-tolerant */}
-      {(!replicas || replicas < 2) && (
+      {replicas && replicas < 2 && (
         <li className='flex items-center gap-x-2'>
           <XIcon className='h-4 w-4 text-red-200' />
           Not fault tolerant
