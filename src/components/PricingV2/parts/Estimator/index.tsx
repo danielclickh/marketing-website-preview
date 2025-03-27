@@ -51,23 +51,31 @@ export default function Estimator() {
     [setAddonDisplayOrder]
   )
 
+  useEffect(() => {
+    if (!planEntry?.allowBackups) {
+      removeAddon('backups')
+    }
+    if (!planEntry?.allowDataSources) {
+      removeAddon('dataSources')
+    }
+    if (!planEntry?.allowDataTransfer) {
+      removeAddon('dataTransfer')
+    }
+  }, [planEntry])
+
   // Backups are allowed and user added
   const displayBackups = useMemo(() => {
-    return addonDisplayOrder.includes('backups') && planEntry?.allowBackups
+    return addonDisplayOrder.includes('backups')
   }, [planEntry, addonDisplayOrder])
 
   // Data sources are allowed and user added
   const displayDataSources = useMemo(() => {
-    return (
-      addonDisplayOrder.includes('dataSources') && planEntry?.allowDataSources
-    )
+    return addonDisplayOrder.includes('dataSources')
   }, [planEntry, addonDisplayOrder])
 
   // Data transfers are allowed and user added
   const displayDataTransfer = useMemo(() => {
-    return (
-      addonDisplayOrder.includes('dataTransfer') && planEntry?.allowDataTransfer
-    )
+    return addonDisplayOrder.includes('dataTransfer')
   }, [planEntry, addonDisplayOrder])
 
   // Ensure backups accordion is pressent in UI when context values change
