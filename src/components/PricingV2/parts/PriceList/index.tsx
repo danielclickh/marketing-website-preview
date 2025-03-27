@@ -29,7 +29,7 @@ export default function PriceList() {
   }, [])
 
   return (
-    <ul className='mt-5 space-y-4 text-sm font-medium'>
+    <ul className='mt-5 space-y-4 text-sm font-medium empty:hidden'>
       {/* Storage price */}
       {!!storagePrice && canDisplayPrice(storagePrice) && (
         <li className='flex items-center gap-x-2'>
