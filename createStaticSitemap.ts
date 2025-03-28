@@ -141,6 +141,9 @@ function generateSiteMap(
     <url>
         <loc>${siteURL}/blog</loc>
     </url>
+    <url>
+        <loc>${siteURL}/industries/gaming</loc>
+    </url>
     ${blogPosts
       .map((post) => {
         return `
