@@ -81,25 +81,26 @@ function getUseCaseCompute(
   const maxCompute = sortedComputes[sortedComputes.length - 1]
 
   // Ideal compute sizes
-  const idealComputeMinSize = Math.floor(storageRatioGb - storageRatioGb * 0.2)
-  const idealComputeMaxSize = Math.ceil(storageRatioGb + storageRatioGb * 0.2)
+  const idealComputeMinSize = storageRatioGb - storageRatioGb * 0.2
+  const idealComputeMaxSize = storageRatioGb + storageRatioGb * 0.2
 
   // Recommended replicas for this use case
   let replicas = useCase.replicas
 
-  // Start by calculating the compute values based on the recommended number of replicas for the use case
-  let computeMinSize = idealComputeMinSize / replicas
-  let computeMaxSize = idealComputeMaxSize / replicas
+  // Start by using the ideal compute values
+  let computeMinSize = idealComputeMinSize
+  let computeMaxSize = idealComputeMaxSize
 
-  // Looks like values are maxed, let's increase the replicas
+  // If the ideal values are greater than the max compute value
+  // Calculate based on the recommended number of replicas
   while (
     computeMinSize >= maxCompute &&
     computeMaxSize > maxCompute &&
     replicas < 25
   ) {
-    replicas += 1
     computeMinSize = idealComputeMinSize / replicas
     computeMaxSize = idealComputeMaxSize / replicas
+    replicas += 1
   }
 
   return {
