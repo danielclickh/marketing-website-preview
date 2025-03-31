@@ -536,6 +536,9 @@ export default function PricingV2ContextProvider({
 
   // Calculate the minimum total price (min compute & min storage combined)
   const totalMinPrice: ContextTotalMinPrice = useMemo(() => {
+    // Don't calculate unless we have a compute min price
+    if (computeMinPrice === null) return 0
+
     return [
       computeMinPrice,
       storagePrice,
@@ -555,6 +558,9 @@ export default function PricingV2ContextProvider({
 
   // Calculate the maximum total price (max compute & max storage combined)
   const totalMaxPrice: ContextTotalMaxPrice = useMemo(() => {
+    // Don't calculate unless we have a compute max price
+    if (computeMaxPrice === null) return 0
+
     return [
       computeMaxPrice,
       storagePrice,
