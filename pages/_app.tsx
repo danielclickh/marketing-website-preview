@@ -103,21 +103,28 @@ function MyApp({ Component, pageProps }: AppProps) {
           </main>
           <UTMPersist />
         </GrowthBookProvider>
-        {/* GTM - Prod/Env environments */}
+
+        {/* Exclude tracking from marketo iframe routes */}
         {router.pathname !== '/marketo-forms/[id]' && (
           <>
+            {/* GTM */}
+            <GoogleTagManager gtmId={gtmId} />
+
+            {/* Scarf tracking pixel - Explicityly instructed not to be managed through GTM */}
             <img
               referrerPolicy='no-referrer-when-downgrade'
               src='https://static.scarf.sh/a.png?x-pxid=e6377503-591b-4886-9398-e69c7fee0b91'
             />
-            <GoogleTagManager gtmId={gtmId} />
+
+            {/* Cleans marketo email tracking tokens */}
             <Script
               id='stripmkttok-script'
               src='https://discover.clickhouse.com/js/stripmkttok.js'
               type='text/javascript'
               async
             />
-            {/* Securiti.ai Cookie Banner - first is produciton mode, second is dev */}
+
+            {/* Securiti.ai Cookie Banner */}
             <Script
               defer
               data-strict-csp
