@@ -54,6 +54,9 @@ export const getServerSideProps: GetServerSideProps<DemoProps> =
         Link: {
           $ne: link
         },
+        ListOnDemos: {
+          $eq: true
+        },
         $or: stagingOnlyFilters
       }
     }
@@ -176,9 +179,10 @@ export default function DemoPage({
             </SuiButton>
           </div>
           <div className='grid grid-cols-1 justify-center gap-8 lg:grid-cols-3'>
-            {otherDemos.map((demo) => (
-              <DemoCard key={demo.id} {...demo} />
-            ))}
+            {otherDemos
+              .map((demo) => (
+                <DemoCard key={demo.id} {...demo} />
+              ))}
           </div>
         </div>
       </div>
