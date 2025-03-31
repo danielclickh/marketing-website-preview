@@ -106,6 +106,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         {/* GTM - Prod/Env environments */}
         {router.pathname !== '/marketo-forms/[id]' && (
           <>
+            <img
+              referrerPolicy='no-referrer-when-downgrade'
+              src='https://static.scarf.sh/a.png?x-pxid=e6377503-591b-4886-9398-e69c7fee0b91'
+            />
             <GoogleTagManager gtmId={gtmId} />
             <Script
               id='stripmkttok-script'
