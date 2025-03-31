@@ -17,7 +17,8 @@ export interface BlogPost {
   publishedAt: string
   slug?: string
   date?: string
-  keywords?: string
+  keywords?: string,
+  ListOnBlogs?: boolean
 }
 
 export interface BlogProps extends CommonProps {

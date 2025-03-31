@@ -14,7 +14,8 @@ const baseQuery: Record<string, any> = {
     'publishedAt',
     'slug',
     'date',
-    'StagingOnly'
+    'StagingOnly',
+    'ListOnBlogs'
   ],
   filters: {
     $and: [{ category: { $ne: 'japanese' } }, { $or: getStagingOnlyFilters() }]
