@@ -256,7 +256,7 @@ export default function BlogsPage({
           <>
             <div className='w-full'>
               <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
-                {blogs.map((blog) => (
+                {blogs.filter((blog) => {return blog.ListOnBlogs === null || blog.ListOnBlogs === true}).map((blog) => (
                   <BlogPost key={blog.id} {...blog} />
                 ))}
               </div>
