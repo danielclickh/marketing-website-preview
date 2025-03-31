@@ -114,6 +114,7 @@ export interface PricingV2ComponentUseCase {
   activeHours: number
   ratio: number
   replicas: number
+  description: null | string
 }
 
 export interface PricingV2ComponentDataSource {

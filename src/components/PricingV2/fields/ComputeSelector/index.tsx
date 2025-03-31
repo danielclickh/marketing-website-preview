@@ -187,6 +187,11 @@ export default function ComputeSelector() {
                   })
                 )}
               </div>
+
+              {/* Active hours */}
+              <div className='mt-6'>
+                <HoursSelector />
+              </div>
             </>
           )}
 
@@ -210,28 +215,34 @@ export default function ComputeSelector() {
             </>
           )}
 
-          <HRSeparator className='mt-6 mb-4' />
-
           {/* Use Case heading and reset button */}
           {canCustomize && useCaseEntry && (
-            <div className='mb-6 flex items-center gap-3'>
-              <SuiText weight='bold'>
-                Suggested configuration based on your use case
-              </SuiText>
-              <button
-                className={`rounded px-2 py-1 text-primary-300 transition hover:bg-white/10 ${useCaseHasChanged ? '' : 'opacity-0'}`}
-                onClick={(event) => {
-                  event.preventDefault()
-                  setValues({
-                    useCase: useCaseEntry?.slug
-                  })
-                }}>
-                Reset
-              </button>
-            </div>
+            <>
+              <HRSeparator className='mt-6 mb-4' />
+              <div className='mb-6 flex items-center gap-3'>
+                <div>
+                  <SuiText weight='bold'>
+                    Suggested configuration based on your use case
+                  </SuiText>
+                  {useCaseEntry.description && (
+                    <SuiText size='sm' className='opacity-70 mt-2'>
+                      {useCaseEntry.description}
+                    </SuiText>
+                  )}
+                </div>
+                <button
+                  className={`rounded px-2 py-1 text-primary-300 transition hover:bg-white/10 ${useCaseHasChanged ? '' : 'opacity-0'}`}
+                  onClick={(event) => {
+                    event.preventDefault()
+                    setValues({
+                      useCase: useCaseEntry?.slug
+                    })
+                  }}>
+                  Reset
+                </button>
+              </div>
+            </>
           )}
-
-          <HoursSelector />
 
           {/* Customizer */}
           {canCustomize && (
@@ -280,6 +291,11 @@ export default function ComputeSelector() {
                   )}
                 </div>
               )}
+
+              {/* Active hours */}
+              <div className='mt-6'>
+                <HoursSelector />
+              </div>
             </>
           )}
         </div>
