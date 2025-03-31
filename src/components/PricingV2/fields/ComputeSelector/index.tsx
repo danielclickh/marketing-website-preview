@@ -220,16 +220,9 @@ export default function ComputeSelector() {
             <>
               <HRSeparator className='mt-6 mb-4' />
               <div className='mb-6 flex items-center gap-3'>
-                <div>
-                  <SuiText weight='bold'>
-                    Suggested configuration based on your use case
-                  </SuiText>
-                  {useCaseEntry.description && (
-                    <SuiText size='sm' className='opacity-70 mt-2'>
-                      {useCaseEntry.description}
-                    </SuiText>
-                  )}
-                </div>
+                <SuiText weight='bold'>
+                  Suggested configuration based on your use case
+                </SuiText>
                 <button
                   className={`rounded px-2 py-1 text-primary-300 transition hover:bg-white/10 ${useCaseHasChanged ? '' : 'opacity-0'}`}
                   onClick={(event) => {
@@ -241,6 +234,12 @@ export default function ComputeSelector() {
                   Reset
                 </button>
               </div>
+
+              {useCaseEntry.description && (
+                <SuiText size='sm' className='opacity-70 -mt-5 mb-6'>
+                  {useCaseEntry.description}
+                </SuiText>
+              )}
             </>
           )}
 
