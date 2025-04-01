@@ -118,6 +118,8 @@ export default function ComparisonPage({
                     {comparison.image && (
                       <StrapiImage
                         {...comparison.image}
+                        loading='eager'
+                        priority
                         className='mx-auto lg:mx-0'
                       />
                     )}

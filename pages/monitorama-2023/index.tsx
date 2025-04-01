@@ -89,6 +89,8 @@ export default function MonitoramaPage({
                       className='mx-auto w-1/3 lg:mx-0 lg:w-auto'
                       width={378}
                       height={52}
+                      loading='eager'
+                      priority
                     />
                   </div>
                 </div>

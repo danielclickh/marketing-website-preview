@@ -127,6 +127,7 @@ export default function ClickHouseServerPage({
                     width={488}
                     height={318}
                     className='h-auto w-full min-w-[54rem]'
+                    loading='eager'
                     priority
                   />
                 </div>

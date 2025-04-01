@@ -83,7 +83,14 @@ export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
               </CUIButton>
             </div>
             <div className='hidden flex-shrink-0 flex-grow-0 lg:block lg:w-1/2 xl:w-auto'>
-              <Image src={imageHero} width={573} height={344} alt='hero' />
+              <Image
+                src={imageHero}
+                width={573}
+                height={344}
+                loading='eager'
+                priority
+                alt='hero'
+              />
             </div>
           </div>
         </div>

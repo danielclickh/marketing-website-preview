@@ -213,6 +213,8 @@ export default function Page({
                     src='/images/comparisons/rockset-migration-2.svg'
                     width='485'
                     height='448'
+                    loading='eager'
+                    priority
                     alt='Rockset to ClickHouse migration'
                   />
                 </div>

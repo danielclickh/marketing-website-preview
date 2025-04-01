@@ -7,7 +7,7 @@ import { CUILink } from '../../components/ClickUI'
 import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'
 import Pagination from '../../components/Pagination'
-import { StrapiImage } from '../../components/StrapiElements'
+import { StrapiImage, StrapiImageUrl } from '../../components/StrapiElements'
 import { SuiSearchField, SuiTitle } from '../../components/sui'
 import { useDebounce } from '../../hooks'
 import { findOne } from '../../lib/api/strapi'
@@ -164,8 +164,12 @@ export default function BlogsPage({
             className='mb-16 mt-2 flex w-full flex-col gap-y-8 rounded-xl hover:no-underline hover:shadow-card lg:flex-row-reverse lg:gap-x-12 xl:gap-x-24'>
             {featuredBlog.thumbnailPng && (
               <div className='lg:w-1/2'>
-                <StrapiImage
+                <StrapiImageUrl
                   {...featuredBlog.thumbnailPng}
+                  loading='eager'
+                  priority
+                  width={640}
+                  height={640}
                   className='overflow-hidden rounded-lg'
                 />
               </div>
@@ -256,9 +260,15 @@ export default function BlogsPage({
           <>
             <div className='w-full'>
               <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
-                {blogs.filter((blog) => {return blog.ListOnBlogs === null || blog.ListOnBlogs === true}).map((blog) => (
-                  <BlogPost key={blog.id} {...blog} />
-                ))}
+                {blogs
+                  .filter((blog) => {
+                    return (
+                      blog.ListOnBlogs === null || blog.ListOnBlogs === true
+                    )
+                  })
+                  .map((blog) => (
+                    <BlogPost key={blog.id} {...blog} />
+                  ))}
               </div>
             </div>
 

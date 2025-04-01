@@ -8,7 +8,7 @@ import EventPost from '../../../components/EventPostList/EventPost'
 import Layout from '../../../components/Layout'
 import NewsItem from '../../../components/NewsItem'
 import RecentEvents from '../../../components/RecentEvents'
-import { StrapiImage } from '../../../components/StrapiElements'
+import { StrapiImageUrl } from '../../../components/StrapiElements'
 import { SuiTitle } from '../../../components/sui'
 import {
   findAll,
@@ -203,8 +203,11 @@ export default function News({
                 className='section-container group mb-16 mt-2 flex flex-col gap-10 hover:no-underline md:flex-row'>
                 <div className='flex flex-col gap-8 rounded-xl lg:flex-row-reverse lg:gap-12 xl:gap-24'>
                   {featuredEvent.thumbnailPng && (
-                    <StrapiImage
+                    <StrapiImageUrl
                       {...featuredEvent.thumbnailPng}
+                      loading='eager'
+                      width={640}
+                      height={640}
                       className='h-fit w-full rounded-lg object-cover lg:w-1/2'
                     />
                   )}
