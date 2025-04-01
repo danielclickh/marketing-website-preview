@@ -2,6 +2,10 @@ import Image from 'next/image'
 import StrapiSvg from './StrapiSvg'
 import { StrapiImageProps, StrapiPicProps } from './types'
 
+interface StrapiImageUrlProps extends Omit<StrapiImageProps, 'mime'> {
+  priority?: boolean
+}
+
 export function StrapiImageUrl({
   id,
   url,
@@ -12,12 +16,9 @@ export function StrapiImageUrl({
   width,
   height,
   loading = 'lazy',
+  priority,
   ...props
-}: Omit<StrapiImageProps, 'mime'>) {
-  if (typeof url !== 'string') {
-    return null
-  }
-
+}: StrapiImageUrlProps) {
   const src = sizes && formats && formats[sizes] ? formats[sizes].url : url
 
   return (
@@ -28,6 +29,7 @@ export function StrapiImageUrl({
       width={width as number}
       height={height as number}
       loading={loading}
+      priority={priority}
       unoptimized
     />
   )
