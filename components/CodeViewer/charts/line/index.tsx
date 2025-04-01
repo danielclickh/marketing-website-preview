@@ -248,7 +248,10 @@ const LineChart = (props: {
       data: xAxis,
       nameLocation: 'middle',
       min: 0,
-      max: xAxis.length - 1
+      max: xAxis.length - 1,
+      axisLabel: {
+        hideOverlap: true
+      }
     },
     yAxis: {
       type: 'value',

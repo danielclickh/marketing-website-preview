@@ -170,7 +170,10 @@ export default function Bar(props: {
   const categoryAxis = {
     show: true,
     type: 'category',
-    data: xAxis
+    data: xAxis,
+    axisLabel: {
+      hideOverlap: true
+    }
   }
 
   const numberAxis = {
@@ -180,6 +183,9 @@ export default function Bar(props: {
         color: '#808691',
         opacity: 0.3
       }
+    },
+    axisLabel: {
+      hideOverlap: true
     }
   }
 
