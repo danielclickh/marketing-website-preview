@@ -190,7 +190,7 @@ export default function Page({
         </div>
 
         <HomepageSectionTrustedByAlt
-          invertLogos={false}
+          invertLogos={true}
           className='!my-0 bg-primary-300 pb-16 text-primary-800'
           customerStories={customerStories}
         />
