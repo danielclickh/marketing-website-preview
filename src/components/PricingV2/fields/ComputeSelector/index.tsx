@@ -219,21 +219,25 @@ export default function ComputeSelector() {
           {canCustomize && useCaseEntry && (
             <>
               <HRSeparator className='mt-6 mb-4' />
-              <div className='mb-6 flex items-center gap-3'>
-                <SuiText weight='bold'>
-                  Suggested configuration based on your use case
-                </SuiText>
-                <button
-                  className={`rounded px-2 py-1 text-primary-300 transition hover:bg-white/10 ${useCaseHasChanged ? '' : 'opacity-0'}`}
-                  onClick={(event) => {
-                    event.preventDefault()
-                    setValues({
-                      useCase: useCaseEntry?.slug
-                    })
-                  }}>
-                  Reset
-                </button>
-              </div>
+              {(useCaseEntry.title || useCaseEntry.enableReset) && (
+                <div className='mb-6 flex items-center gap-3'>
+                  {useCaseEntry.title && (
+                    <SuiText weight='bold'>{useCaseEntry.title}</SuiText>
+                  )}
+                  {useCaseEntry.enableReset && (
+                    <button
+                      className={`rounded px-2 py-1 text-primary-300 transition hover:bg-white/10 ${useCaseEntry.title ? '' : 'ml-auto'} ${useCaseHasChanged ? '' : 'opacity-0'}`}
+                      onClick={(event) => {
+                        event.preventDefault()
+                        setValues({
+                          useCase: useCaseEntry?.slug
+                        })
+                      }}>
+                      Reset
+                    </button>
+                  )}
+                </div>
+              )}
 
               {useCaseEntry.description && (
                 <SuiText size='sm' className='opacity-70 -mt-5 mb-6'>

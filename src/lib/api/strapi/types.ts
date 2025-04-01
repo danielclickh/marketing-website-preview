@@ -115,6 +115,8 @@ export interface PricingV2ComponentUseCase {
   ratio: number
   replicas: number
   description: null | string
+  title: null | string
+  enableReset: boolean
 }
 
 export interface PricingV2ComponentDataSource {
