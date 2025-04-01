@@ -509,9 +509,11 @@ function Sitemap({
                     <li key={index}>
                       {demo.Link && (
                         <Link
-                          href={demo.Link}
-                          className='font text-primary-300 hover:underline'
-                          target='_blank'>
+                          href={
+                            demo.External ? demo.Link : `/demos/${demo.Link}`
+                          }
+                          target={demo.LinkType}
+                          className='font text-primary-300 hover:underline'>
                           {demo.Title}
                         </Link>
                       )}
