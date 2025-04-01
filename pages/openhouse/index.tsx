@@ -1,8 +1,6 @@
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
-import { Fragment } from 'react'
-import Ticker from 'react-ticker'
 import 'swiper/css'
 import FontSohne from '../../components/FontSohne'
 import FontSohneBreit from '../../components/FontSohneBreit'
@@ -105,38 +103,6 @@ export default function Page({ seo, footerData }: CommonProps) {
               </div>
             </div>
           </section>
-
-          {/* Ticker tape */}
-          <div className='bg-ch-teal py-3 lg:py-6'>
-            <Ticker>
-              {() => (
-                <div className='text-lg lg:text-2xl font-bold flex items-center flex-nowrap w-max'>
-                  {[
-                    'Hands-on training',
-                    'Product roadmap',
-                    'Case studies',
-                    'Tech talks',
-                    'AMA booth',
-                    'Hands-on training',
-                    'Product'
-                  ].map((word, wordIndex) => {
-                    return (
-                      <Fragment key={wordIndex}>
-                        <span className='text-ch-yellow mx-6 inline-block flex-grow-0 flex-shrink-0'>
-                          •
-                        </span>
-                        <span
-                          key={wordIndex}
-                          className='block white-space-nowrap flex-grow-0 flex-shrink-0'>
-                          {word}
-                        </span>
-                      </Fragment>
-                    )
-                  })}
-                </div>
-              )}
-            </Ticker>
-          </div>
 
           {/* Gallery */}
           <div className='bg-white hidden md:flex relative px-2 md:py-10 lg:py-18 xl:py-24 justify-center'>
@@ -510,7 +476,7 @@ export default function Page({ seo, footerData }: CommonProps) {
           {/* Get in touch */}
           <section className='relative pb-20 bg-white text-black'>
             <div className='max-w-6xl mx-auto px-6 lg:px-12'>
-              <div className='bg-ch-teal rounded p-8 lg:py-16 lg:px-14 text-white flex flex-col lg:flex-row items-center gap-y-10 gap-x-20'>
+              <div className='bg-neutral-900 rounded p-8 lg:py-16 lg:px-14 text-white flex flex-col lg:flex-row items-center gap-y-10 gap-x-20'>
                 <div className='w-full lg:w-auto'>
                   <h2 className='text-4xl mb-4'>Get in touch</h2>
                   <p className='text-lg'>
