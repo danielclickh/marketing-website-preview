@@ -121,10 +121,11 @@ export default function EstimatorCtas() {
 
       {/* Promote contact us */}
       <div className={promoteContact ? 'space-y-4' : 'hidden'}>
-        <p className='-mt-4 mb-8 text-center text-base text-[#B3B6BD]'>
-          You’re eligible for custom terms.
+        <p className='-mt-4 mb-8 text-center text-base font-bold text-white'>
+          You’re eligible for custom terms{' '}
+          <span className='text-xl inline-block ml-1 -mr-1'>🎉</span>
           <br />
-          Contact us for more details.
+          Contact us for more details
         </p>
         <PricingButton type='primary' onClick={contactButtonHandler}>
           Get a custom quote

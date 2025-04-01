@@ -1,10 +1,10 @@
-import { Fragment, useCallback, useEffect, useMemo, useRef } from 'react'
-import { humanReadableTo } from '@/lib/utils/memory'
+import { Fragment, useCallback, useEffect, useRef } from 'react'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import PriceUsd from '../../ui/PriceUsd'
 
 export default function DisplayPrice() {
-  const { totalPriceRange, storage, storageCompressed } = usePricingV2Context()
+  const { totalMinPrice, totalPriceRange, storage, storageCompressed } =
+    usePricingV2Context()
 
   const priceRef = useRef<null | HTMLParagraphElement>(null)
 
@@ -32,20 +32,8 @@ export default function DisplayPrice() {
     priceEl.style.fontSize = `${high}px`
   }, [priceRef])
 
-  // If storage (compressed) is over 1PB, display custom quote CTA
-  const displayCustomQuoteCta = useMemo(() => {
-    if (!storage) return false
-
-    let storageInPb = humanReadableTo(storage, 'PB')
-    if (!storageInPb) return false
-
-    // Apply standard compression
-    if (!storageCompressed) {
-      storageInPb /= 10
-    }
-
-    return storageInPb > 1
-  }, [storage, storageCompressed])
+  // Promote contact if min price is over $5000
+  const promoteContact = !!(totalMinPrice && totalMinPrice > 5000)
 
   // Attach resize events on mount
   useEffect(() => {
@@ -63,15 +51,15 @@ export default function DisplayPrice() {
   useEffect(() => {
     const timer = window.setTimeout(resize, 100)
     return () => window.clearTimeout(timer)
-  }, [totalPriceRange, displayCustomQuoteCta])
+  }, [totalPriceRange, promoteContact])
 
   return (
     <span
       ref={priceRef}
       className='block w-full overflow-hidden whitespace-nowrap'>
-      {displayCustomQuoteCta && <>Contact sales</>}
-      {!displayCustomQuoteCta && !totalPriceRange && '--'}
-      {!displayCustomQuoteCta &&
+      {promoteContact && <>Contact sales</>}
+      {!promoteContact && !totalPriceRange && '--'}
+      {!promoteContact &&
         totalPriceRange &&
         totalPriceRange.map((price, priceIndex, allPrices) => {
           return (
