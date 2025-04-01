@@ -115,7 +115,7 @@ export default function DataSize({
   // Get the corrisponding input values for the byteValue
   const { value: inputValue, unit: unitValue } = useMemo(() => {
     const defaultValue = {
-      value: 0,
+      value: null,
       unit: units?.[0]?.value || null
     }
 
@@ -140,11 +140,14 @@ export default function DataSize({
   // Update bytesValue on input change
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const userValue = Math.round(Number(event.target.value || '0'))
-
-      const bytesValue = humanReadableToBytes(`${userValue}${unitValue}`)
-      const validatedValue = validateBytesValue(bytesValue)
-      handleOnChange(validatedValue)
+      if (!event.target.value.trim().length) {
+        handleOnChange(null)
+      } else {
+        const userValue = Math.round(Number(event.target.value || '0'))
+        const bytesValue = humanReadableToBytes(`${userValue}${unitValue}`)
+        const validatedValue = validateBytesValue(bytesValue)
+        handleOnChange(validatedValue)
+      }
     },
     [unitValue, validateBytesValue, handleOnChange]
   )

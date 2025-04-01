@@ -763,14 +763,10 @@ export default function PricingV2ContextProvider({
       }
 
       // Validate storage
-      if (newStorage !== undefined || newPlanEntry?.maxStorageCapacity) {
-        if (!newStorage) newStorage = storage
-
-        if (newStorage && newPlanEntry?.maxStorageCapacity) {
-          const storageInGb = humanReadableTo(newStorage, 'GB')
-          if (storageInGb > newPlanEntry.maxStorageCapacity) {
-            newStorage = `${newPlanEntry.maxStorageCapacity}GB`
-          }
+      if (newStorage && newPlanEntry?.maxStorageCapacity) {
+        const storageInGb = humanReadableTo(newStorage, 'GB')
+        if (storageInGb > newPlanEntry.maxStorageCapacity) {
+          newStorage = `${newPlanEntry.maxStorageCapacity}GB`
         }
       }
 

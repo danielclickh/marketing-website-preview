@@ -172,7 +172,7 @@ type HumanReadablePartsReturnType<T> = T extends null
   : { value: number; unit: string }
 
 export function humanReadableParts<
-  T extends { value: number; unit: string } | null
+  T extends { value: number | null; unit: string | null } | null
 >(
   humanReadable: string,
   defaultValue: T = null as T
