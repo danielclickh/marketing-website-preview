@@ -220,7 +220,8 @@ export default function ComputeSelector() {
             <>
               <HRSeparator className='mt-6 mb-4' />
               {(useCaseEntry.title || useCaseEntry.enableReset) && (
-                <div className='mb-6 flex items-center gap-3'>
+                <div
+                  className={`flex items-center gap-3 ${useCaseEntry.description ? 'mb-2' : 'mb-6'}`}>
                   {useCaseEntry.title && (
                     <SuiText weight='bold'>{useCaseEntry.title}</SuiText>
                   )}
@@ -240,7 +241,7 @@ export default function ComputeSelector() {
               )}
 
               {useCaseEntry.description && (
-                <SuiText size='sm' className='opacity-70 -mt-5 mb-6'>
+                <SuiText size='sm' className='opacity-70 mb-6'>
                   {useCaseEntry.description}
                 </SuiText>
               )}
