@@ -181,6 +181,7 @@ function CodeInterpreter({
         <Tooltip>
           <Tooltip.Trigger>
             <Button
+              className='h-full m-auto'
               iconLeft='chevron-down'
               onClick={closeResultPanel}
               type='empty'></Button>
@@ -191,22 +192,26 @@ function CodeInterpreter({
         <Tooltip>
           <Tooltip.Trigger>
             <Button
+              className='h-full m-auto'
               iconLeft='chevron-up'
               onClick={openTableResultPanel}
               type='empty'></Button>
           </Tooltip.Trigger>
-          <Tooltip.Content side='bottom'>Close the results</Tooltip.Content>
+          <Tooltip.Content side='bottom'>Open the results</Tooltip.Content>
         </Tooltip>
       )
 
       return (
-        <div className='flex items-end '>
+        <div className='flex items-end whitespace-pre-wrap'>
           {show_results}
           {chart && (
-            <RadioGroup orientation='horizontal' value={currentView}>
+            <div className='my-auto w-[80px] sm:w-[140px]'>
+            <RadioGroup
+              orientation='vertical'
+              value={currentView}>
               <RadioGroup.Item
-                label='Table'
-                onClick={(): void => {
+              label='Table'
+              onClick={(): void => {
                   setCurrentView(DefaultView.Table)
                 }}
                 value={DefaultView.Table}
@@ -219,12 +224,9 @@ function CodeInterpreter({
                 value={DefaultView.Chart}
               />
             </RadioGroup>
-          )}
-          {show_statistics && results?.response?.statistics && (
-            <div className={`flex text-xs italic h-full mb-[4px] ${chart ? 'ml-[8px]' : ''}`}>
-              {`${runBy()} Read ${formatReadableRows(results.response.statistics.rows_read)} rows and ${formatBytes(results.response.statistics.bytes_read)} in ${roundToDynamicPrecision(results.response.statistics.elapsed)} seconds`}
             </div>
           )}
+          
         </div>
       )
     }
@@ -233,8 +235,18 @@ function CodeInterpreter({
   const runButton = () => {
     if (runnable) {
       return (
-        <div className='flex justify-between h-[40px]'>
+        <div className='flex justify-between'>
+          <div className='flex items-center'>
           <div className='flex items-center'>{hideTableResultButton()}</div>
+          <div className='flex items-center'>
+          {show_statistics && results?.response?.statistics && (
+            <div className={`whitespace-pre-wrap text-xs mx-auto italic ${chart ? 'ml-[8px]' : ''}`}>
+              {`${runBy()} Read ${formatReadableRows(results.response.statistics.rows_read)} rows and ${formatBytes(results.response.statistics.bytes_read)} in ${roundToDynamicPrecision(results.response.statistics.elapsed)} seconds`}
+            </div>
+          )}
+          </div>
+          </div>
+          
           <div className='flex items-center'>
             <div className='m-1'>
               <Tooltip>

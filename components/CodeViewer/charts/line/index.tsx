@@ -220,7 +220,7 @@ const LineChart = (props: {
     }
   }
 
-  const bottomPadding = series.length > 1 ? '48px' : '12px'
+  const bottomPadding = windowWidth >= 1536 && series.length > 1 ? '48px' : '12px'
 
   const options: any = {
     animation: false,
@@ -238,7 +238,7 @@ const LineChart = (props: {
       left: '8px',
       right: '8px',
       bottom: bottomPadding,
-      top: '24px',
+      top: '36px',
       containLabel: true
     },
     xAxis: {
@@ -248,7 +248,10 @@ const LineChart = (props: {
       data: xAxis,
       nameLocation: 'middle',
       min: 0,
-      max: xAxis.length - 1
+      max: xAxis.length - 1,
+      axisLabel: {
+        hideOverlap: true
+      }
     },
     yAxis: {
       type: 'value',
