@@ -31,7 +31,13 @@ export default function CustomerStoryCard({
       <CUICard.Header>
         <div className='rounded-t-lg bg-primary-300 p-4'>
           <div className='flex h-[40px] items-center justify-center'>
-            {logo && <StrapiImageUrl {...logo} className='max-h-[35px]' />}
+            {logo && (
+              <StrapiImageUrl
+                {...logo}
+                loading='eager'
+                className='max-h-[35px]'
+              />
+            )}
           </div>
         </div>
       </CUICard.Header>
