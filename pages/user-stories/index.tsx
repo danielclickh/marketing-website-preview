@@ -1,13 +1,11 @@
-import { CirclePlay } from 'lucide-react'
 import { GetStaticProps } from 'next'
-import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { PrimeReactProvider } from 'primereact/api'
 import { MultiSelect } from 'primereact/multiselect'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
+import CustomerStoryCard from '../../components/CustomerStoryCard'
 import FollowUs from '../../components/FollowUs'
 import Layout from '../../components/Layout'
-import { StrapiImage } from '../../components/StrapiElements'
 import { SuiSearchField, SuiTitle } from '../../components/sui'
 import ClearFilterButton from '../../components/UserStories/ClearFilterButton'
 import { fetchAll, findOne } from '../../lib/api/strapi'
@@ -90,7 +88,7 @@ export const getStaticProps: GetStaticProps<UserStoriesPage> =
     }
   }
 
-function CustomerStoriesPage({
+export default function CustomerStoriesPage({
   seo,
   stories,
   headerData,
@@ -118,6 +116,7 @@ function CustomerStoriesPage({
     Array<CloudProvider['slug']>
   >([])
 
+  // Build use cases multi-select options array
   const useCaseOptions = useMemo(() => {
     return Object.entries(categories)
       .map(([id, name]) => {
@@ -131,6 +130,7 @@ function CustomerStoriesPage({
       })
   }, [categories])
 
+  // Build migrations multi-select options array
   const migrationOptions = useMemo(() => {
     return Object.entries(migrations)
       .map(([id, name]) => {
@@ -144,6 +144,7 @@ function CustomerStoriesPage({
       })
   }, [migrations])
 
+  // Build verticals multi-select options array
   const verticalOptions = useMemo(() => {
     return Object.entries(verticals)
       .map(([id, name]) => {
@@ -157,6 +158,7 @@ function CustomerStoriesPage({
       })
   }, [verticals])
 
+  // Build cloud providers multi-select options array
   const cloudProvidersOptions = useMemo(() => {
     return Object.entries(cloudProviders)
       .map(([slug, name]) => {
@@ -445,75 +447,20 @@ function CustomerStoriesPage({
               <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
                 {filteredAndSortedStories.map((story, index) => {
                   return (
-                    <div
-                      key={index}
-                      className='relative flex flex-col shadow-xl shadow-black/25'>
-                      <div className='story-header rounded-t-lg bg-primary-300 p-4'>
-                        <div className='flex h-[40px] items-center justify-center'>
-                          {story.User && (
-                            <StrapiImage
-                              {...story.User.logo}
-                              className='max-h-[35px]'
-                            />
-                          )}
-                        </div>
-                      </div>
-                      <div
-                        className={`${
-                          story.highlight &&
-                          'border border-primary-300 bg-neutral-700'
-                        } relative flex flex-grow flex-col overflow-hidden rounded-b-lg border border-t-0 border-neutral-700/80 p-6`}>
-                        <div className='story-categories font-inconsolata text-primary-300'>
-                          {story.useCase &&
-                            story.useCase
-                              .map((useCase) => {
-                                return useCase.Name
-                              })
-                              .join(', ')}
-                        </div>
-                        <div className='story-title py-2 font-basier text-xl font-semibold'>
-                          {story.Title}
-                        </div>
-                        <div className='story-description flex-grow text-balance'>
-                          {story.Description}
-                        </div>
-                        {(story.ReadBlogLink ||
-                          story.ExternalLink ||
-                          story.WatchVideoLink) && (
-                          <div className='mt-auto'>
-                            <div className='mt-6 flex items-center justify-end gap-x-6 text-primary-300'>
-                              {story.ReadBlogLink && (
-                                <Link href={story.ReadBlogLink} target='_blank'>
-                                  Read blog
-                                </Link>
-                              )}
-                              {story.ExternalLink && (
-                                <Link href={story.ExternalLink} target='_blank'>
-                                  Read blog
-                                </Link>
-                              )}
-                              {story.WatchVideoLink && (
-                                <Link
-                                  href={story.WatchVideoLink}
-                                  target='_blank'
-                                  className='flex items-center gap-x-3'>
-                                  <CirclePlay
-                                    strokeWidth={1.5}
-                                    className='h-5 w-5'
-                                  />
-                                  Watch video
-                                </Link>
-                              )}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                      {story.highlight && (
-                        <div className='absolute -bottom-2 left-1/2 z-50 -translate-x-1/2 transform overflow-visible bg-half-highlight px-1 text-xs font-bold uppercase'>
-                          Highlight
-                        </div>
-                      )}
-                    </div>
+                    <Fragment key={index}>
+                      <CustomerStoryCard
+                        logo={story.User.logo}
+                        title={story.Title}
+                        description={story.Description}
+                        highlight={story.highlight}
+                        categories={story.useCase.map((useCase) => {
+                          return useCase.Name
+                        })}
+                        blogLink={story.ReadBlogLink}
+                        externalLink={story.ExternalLink}
+                        videoLink={story.WatchVideoLink}
+                      />
+                    </Fragment>
                   )
                 })}
               </div>
@@ -536,5 +483,3 @@ function CustomerStoriesPage({
     </Layout>
   )
 }
-
-export default CustomerStoriesPage
