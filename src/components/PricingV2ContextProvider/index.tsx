@@ -78,6 +78,7 @@ function getUseCaseCompute(
 
   // Ensure computes are sorted low to high
   const sortedComputes = [...config.computes].sort((a, b) => a - b)
+  const minCompute = sortedComputes[0]
   const maxCompute = sortedComputes[sortedComputes.length - 1]
 
   // Ideal compute sizes
@@ -91,8 +92,20 @@ function getUseCaseCompute(
   let computeMinSize = idealComputeMinSize
   let computeMaxSize = idealComputeMaxSize
 
-  // If the ideal values are greater than the max compute value
-  // Calculate based on the recommended number of replicas
+  // If the compute values are less than the minimum
+  // decrease the number of replicas and increase the compute size
+  while (
+    computeMinSize <= maxCompute &&
+    computeMaxSize < maxCompute &&
+    replicas > 2
+  ) {
+    computeMinSize = idealComputeMinSize * replicas
+    computeMaxSize = idealComputeMaxSize * replicas
+    replicas -= 1
+  }
+
+  // If the compute values are less than the maximum
+  // increase the number of replicas and decrease the compute size
   while (
     computeMinSize >= maxCompute &&
     computeMaxSize > maxCompute &&
