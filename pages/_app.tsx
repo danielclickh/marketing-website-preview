@@ -110,12 +110,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             {/* GTM */}
             <GoogleTagManager gtmId={gtmId} />
 
-            {/* Scarf tracking pixel - Explicitly instructed not to be managed through GTM */}
-            <img
-              referrerPolicy='no-referrer-when-downgrade'
-              src='https://static.scarf.sh/a.png?x-pxid=e6377503-591b-4886-9398-e69c7fee0b91'
-            />
-
             {/* Cleans marketo email tracking tokens */}
             <Script
               id='stripmkttok-script'
