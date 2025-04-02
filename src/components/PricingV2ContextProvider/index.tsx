@@ -803,12 +803,15 @@ export default function PricingV2ContextProvider({
           newComputeMinSize = useCaseCompute.computeMinSize
           newComputeMaxSize = useCaseCompute.computeMaxSize
           newReplicas = useCaseCompute.replicas
-          newHours = useCaseCompute.hours
+
+          // Apply recommended hours only when newly selected usecase
+          if (newUseCaseEntry && newUseCase) {
+            newHours = useCaseCompute.hours
+          }
         } else {
           newComputeMinSize = config.computes[0]
           newComputeMaxSize = config.computes[config.computes.length - 1]
           newReplicas = newUseCaseEntry.replicas
-          newHours = newUseCaseEntry.activeHours
         }
       }
 
