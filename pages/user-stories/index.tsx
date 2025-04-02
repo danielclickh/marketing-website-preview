@@ -67,11 +67,11 @@ export const getStaticProps: GetStaticProps<UserStoriesPage> =
         }
       })
 
-      story.cloudProvider?.forEach((cloudProvider) => {
-        if (!cloudProviders.hasOwnProperty(cloudProvider.slug)) {
-          cloudProviders[cloudProvider.slug] = cloudProvider.name
+      if (story.cloudProvider) {
+        if (!cloudProviders.hasOwnProperty(story.cloudProvider.slug)) {
+          cloudProviders[story.cloudProvider.slug] = story.cloudProvider.name
         }
-      })
+      }
     })
 
     page.seo.path = '/user-stories'
@@ -211,7 +211,6 @@ function CustomerStoriesPage({
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <pre>{JSON.stringify(useCaseOptions, null, 2)}</pre>
       <PrimeReactProvider
         value={{
           unstyled: true,

@@ -25,7 +25,7 @@ export interface UserStory {
   useCase: UseCase[]
   migrations: Migration[]
   vertical: Vertical[]
-  cloudProvider: CloudProvider[]
+  cloudProvider: null | CloudProvider
 }
 
 interface UserData {
