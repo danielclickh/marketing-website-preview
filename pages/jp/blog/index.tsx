@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
+import Avatars from '../../../components/Avatars'
 import { CUILink } from '../../../components/ClickUI'
 import FollowUs from '../../../components/FollowUs'
 import BlogPost from '../../../components/jp/BlogPostList/BlogPost'
@@ -173,12 +174,12 @@ export default function BlogsPage({
 
               <div className='flex flex-row items-center space-x-4'>
                 {featuredBlog.author.avatarPng && (
-                  <StrapiImage
-                    {...featuredBlog.author.avatarPng}
-                    alt={featuredBlog.author.name}
-                    width={44}
-                    height={44}
-                    className='aspect-square !h-11 !w-11 rounded-full'
+                  <Avatars
+                    avatars={
+                      Array.isArray(featuredBlog.author.avatarPng)
+                        ? featuredBlog.author.avatarPng
+                        : [featuredBlog.author.avatarPng]
+                    }
                   />
                 )}
                 <div>
