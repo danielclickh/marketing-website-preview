@@ -103,6 +103,7 @@ function CustomerStoriesPage({
   useGalaxyOnPage('userStoriesPage')
   const searchParams = useSearchParams()
 
+  const [search, setSearch] = useState('')
   const [orderByLatest, setOrderByLatest] = useState(false)
   const [filterByUseCases, setFilterByUseCases] = useState<
     Array<UseCase['id']>
@@ -214,6 +215,14 @@ function CustomerStoriesPage({
     filterByCloudProviders
   ])
 
+  // Handle search input change event
+  const handleSearchInput = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSearch(event.target.value)
+    },
+    [setSearch]
+  )
+
   // Handle sorting click event
   const handleLatestClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -225,11 +234,13 @@ function CustomerStoriesPage({
 
   // Handle clear filters click event
   const handleClearFiltersClick = useCallback(() => {
+    setSearch('')
     setFilterByUseCases([])
     setFilterByMigrations([])
     setFilterByVerticals([])
     setFilterByCloudProviders([])
   }, [
+    setSearch,
     setFilterByUseCases,
     setFilterByMigrations,
     setFilterByVerticals,
@@ -241,6 +252,17 @@ function CustomerStoriesPage({
 
     // Filtering
     modified = modified.filter((story) => {
+      // Filter by search
+      const title = story.Title.toLowerCase()
+      const description = story.Description?.toLowerCase()
+      const user = story.User.Name?.toLowerCase()
+      const searchLowerCase = search.trim().toLocaleLowerCase()
+      const searchMatch =
+        !searchLowerCase.length ||
+        title.includes(searchLowerCase) ||
+        description?.includes(searchLowerCase) ||
+        user?.includes(searchLowerCase)
+
       const useCaseMatch =
         !filterByUseCases.length ||
         story.useCase.find((entry) => filterByUseCases.includes(entry.id))
@@ -253,7 +275,18 @@ function CustomerStoriesPage({
         !filterByMigrations.length ||
         story.migrations.find((entry) => filterByMigrations.includes(entry.id))
 
-      return useCaseMatch && verticalMatch && migrationMatch
+      const cloudProvidersMatch =
+        !filterByCloudProviders.length ||
+        (story.cloudProvider?.slug &&
+          filterByCloudProviders.includes(story.cloudProvider.slug))
+
+      return (
+        searchMatch &&
+        useCaseMatch &&
+        verticalMatch &&
+        migrationMatch &&
+        cloudProvidersMatch
+      )
     })
 
     // Sorting
@@ -284,12 +317,20 @@ function CustomerStoriesPage({
     return modified
   }, [
     stories,
+    search,
     orderByLatest,
     filterByUseCases,
     filterByVerticals,
     filterByMigrations,
     filterByCloudProviders
   ])
+
+  const hasFilters =
+    search.trim().length ||
+    filterByUseCases.length ||
+    filterByMigrations.length ||
+    filterByVerticals.length ||
+    filterByCloudProviders.length
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -315,7 +356,7 @@ function CustomerStoriesPage({
                 placeholder='Search by company or keyword...'
                 htmlFor='search'
                 className='mb-6 xl:mb-0 xl:min-w-[447px]'
-                onChange={console.log}
+                onChange={handleSearchInput}
                 defaultValue=''
               />
             </div>
@@ -377,9 +418,24 @@ function CustomerStoriesPage({
                       unstyled
                     />
                   </div>
+                  <div className='multiselect-target'>
+                    <MultiSelect
+                      value={filterByCloudProviders}
+                      itemClassName='multiselect-item'
+                      onChange={(event) => {
+                        setFilterByCloudProviders(event.value)
+                      }}
+                      options={cloudProvidersOptions}
+                      placeholder='Provider'
+                      maxSelectedLabels={0}
+                      panelHeaderTemplate={<></>}
+                      selectedItemsLabel='Provider ({0})'
+                      unstyled
+                    />
+                  </div>
                   <ClearFilterButton
                     onClick={handleClearFiltersClick}
-                    disabled={false}
+                    disabled={!hasFilters}
                   />
                 </div>
               </div>
@@ -469,7 +525,7 @@ function CustomerStoriesPage({
                 <ClearFilterButton
                   className='mt-6 rounded-full border border-primary-600 px-4 py-2.5 text-sm font-semibold hover:border-primary-300'
                   onClick={handleClearFiltersClick}
-                  disabled={false}
+                  disabled={!hasFilters}
                 />
               </div>
             )}
