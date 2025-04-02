@@ -120,34 +120,35 @@ export default function BackupsSelector() {
           />
         </div>
 
-        <div className='md:col-span-2'>
-          <Label tooltip='If you’re already a ClickHouse user, you can get this info from your service’s Backups page. '>
-            Do you know the size of your full and incremental backup?
-          </Label>
-          <Radios
-            options={[
-              { value: false, label: 'No' },
-              { value: true, label: 'Yes' }
-            ]}
-            value={!estimateBackup}
-            onChange={(value) => {
-              // Invert value before storing
-              setValues({ estimateBackup: !value })
-            }}
-          />
-          {estimateBackup &&
-            estimatedBackupsPerMonth &&
-            estimatedBackupSizeFormatted &&
-            storage && (
-              <p className='text-sm mt-4'>
-                You will have {estimatedBackupsPerMonth} backups with an
-                estimated total size of {estimatedBackupSizeFormatted}. This is
-                based on a storage volume of {storage} of{' '}
-                {storageCompressed ? 'compressed' : 'uncompressed'} data,
-                expected to grow or change by 1% between backups.
-              </p>
-            )}
-        </div>
+        {storage && (
+          <div className='md:col-span-2'>
+            <Label tooltip='If you’re already a ClickHouse user, you can get this info from your service’s Backups page. '>
+              Do you know the size of your full and incremental backup?
+            </Label>
+            <Radios
+              options={[
+                { value: false, label: 'No' },
+                { value: true, label: 'Yes' }
+              ]}
+              value={!estimateBackup}
+              onChange={(value) => {
+                // Invert value before storing
+                setValues({ estimateBackup: !value })
+              }}
+            />
+            {estimateBackup &&
+              estimatedBackupsPerMonth &&
+              estimatedBackupSizeFormatted && (
+                <p className='text-sm mt-4'>
+                  You will have {estimatedBackupsPerMonth} backups with an
+                  estimated total size of {estimatedBackupSizeFormatted}. This
+                  is based on a storage volume of {storage} of{' '}
+                  {storageCompressed ? 'compressed' : 'uncompressed'} data,
+                  expected to grow or change by 1% between backups.
+                </p>
+              )}
+          </div>
+        )}
 
         {!estimateBackup && (
           <>

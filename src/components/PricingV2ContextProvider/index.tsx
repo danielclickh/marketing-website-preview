@@ -955,6 +955,11 @@ export default function PricingV2ContextProvider({
         }
       }
 
+      // Disable estimated backups if the user hasn't provided a storage value
+      if (!newStorage && !storage) {
+        newEstimateBackup = false
+      }
+
       // Set default backup values
       if (newEstimateBackup !== undefined) {
         // Set default values
