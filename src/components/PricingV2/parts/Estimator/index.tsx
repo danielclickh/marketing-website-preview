@@ -81,13 +81,6 @@ export default function Estimator() {
     return addonDisplayOrder.includes('dataTransfer')
   }, [addonDisplayOrder])
 
-  // Conditionally show/hide the addon buttons (Add backups, Add data sources, Add data transfer)
-  const displayAddonButtons =
-    (storage && (computeMinSize || computeMaxSize)) ||
-    displayBackups ||
-    displayDataSources ||
-    displayDataTransfer
-
   // Ensure backups accordion is pressent in UI when context values change
   useEffect(() => {
     if (backupFrequency && backupRetention && !backupsOpen) {
@@ -214,8 +207,7 @@ export default function Estimator() {
             )
           })}
 
-          <div
-            className={`my-6 mx-4 gap-x-8 gap-y-6 flex flex-wrap items-center justify-start ${displayAddonButtons ? '' : 'hidden'}`}>
+          <div className='my-6 mx-4 gap-x-8 gap-y-6 flex flex-wrap items-center justify-start'>
             {planEntry?.allowBackups && !displayBackups && (
               <button
                 className='text-sm text-primary-300 hover:underline'
