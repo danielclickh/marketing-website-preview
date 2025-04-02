@@ -172,6 +172,14 @@ export default function CustomerStoriesPage({
       })
   }, [cloudProviders])
 
+  // Flag used for disabling 'Clear filters' button
+  const hasFilters =
+    search.trim().length ||
+    filterByUseCases.length ||
+    filterByMigrations.length ||
+    filterByVerticals.length ||
+    filterByCloudProviders.length
+
   // Store values in the URL
   useEffect(() => {
     const newUrl = new URL(window.location.toString())
@@ -327,13 +335,6 @@ export default function CustomerStoriesPage({
     filterByCloudProviders
   ])
 
-  const hasFilters =
-    search.trim().length ||
-    filterByUseCases.length ||
-    filterByMigrations.length ||
-    filterByVerticals.length ||
-    filterByCloudProviders.length
-
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <PrimeReactProvider
@@ -359,7 +360,7 @@ export default function CustomerStoriesPage({
                 htmlFor='search'
                 className='mb-6 xl:mb-0 xl:min-w-[447px]'
                 onChange={handleSearchInput}
-                defaultValue=''
+                value={search}
               />
             </div>
             <div className='mx-auto max-w-5xl'>
