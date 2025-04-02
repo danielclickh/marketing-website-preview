@@ -153,18 +153,7 @@ function CustomerStoriesPage({
     })
   }, [cloudProviders])
 
-  const filteredAndSortedStories = useMemo(() => {
-    return stories
-  }, [stories])
-
-  const handleLatestClick = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault()
-      setOrderByLatest((old) => !old)
-    },
-    [setOrderByLatest]
-  )
-
+  // Store values in the URL
   useEffect(() => {
     const newUrl = new URL(window.location.toString())
 
@@ -209,6 +198,58 @@ function CustomerStoriesPage({
     filterByCloudProviders
   ])
 
+  // Handle sorting click event
+  const handleLatestClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault()
+      setOrderByLatest((old) => !old)
+    },
+    [setOrderByLatest]
+  )
+
+  // Handle clear filters click event
+  const handleClearFiltersClick = useCallback(() => {
+    setFilterByUseCases([])
+    setFilterByMigrations([])
+    setFilterByVerticals([])
+    setFilterByCloudProviders([])
+  }, [
+    setFilterByUseCases,
+    setFilterByMigrations,
+    setFilterByVerticals,
+    setFilterByCloudProviders
+  ])
+
+  const filteredAndSortedStories = useMemo(() => {
+    let modified = [...stories]
+
+    modified.sort((a, b) => {
+      // If NOT sorting by latest
+      if (!orderByLatest) {
+        // Bring highlighted to the top
+        if (a.highlight && !b.highlight) {
+          return -1
+        } else if (!a.highlight && b.highlight) {
+          return 1
+        }
+
+        // If both have the same highlight status, sort by sortOrder
+        const sortOrderA = a.SortOrder ?? Number.MAX_SAFE_INTEGER
+        const sortOrderB = b.SortOrder ?? Number.MAX_SAFE_INTEGER
+
+        // Ascending order by sortOrder
+        if (sortOrderA !== sortOrderB) {
+          return sortOrderA - sortOrderB
+        }
+      }
+
+      // Fall back to latest (decending order)
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    })
+
+    return modified
+  }, [stories, orderByLatest])
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <PrimeReactProvider
@@ -250,13 +291,14 @@ function CustomerStoriesPage({
                     onClick={handleLatestClick}>
                     Latest
                   </button>
-                  <div className='multiselect-target hidden'>
+                  <div className='multiselect-target'>
                     <MultiSelect
-                      value={[]}
+                      value={filterByUseCases}
                       itemClassName='multiselect-item'
-                      onChange={console.log}
+                      onChange={(event) => {
+                        setFilterByUseCases(event.value)
+                      }}
                       options={useCaseOptions}
-                      optionLabel='name'
                       placeholder='Use case'
                       maxSelectedLabels={0}
                       panelHeaderTemplate={<></>}
@@ -264,13 +306,14 @@ function CustomerStoriesPage({
                       unstyled
                     />
                   </div>
-                  <div className='multiselect-target hidden'>
+                  <div className='multiselect-target'>
                     <MultiSelect
-                      value={null}
+                      value={filterByMigrations}
                       itemClassName='multiselect-item'
-                      onChange={console.log}
+                      onChange={(event) => {
+                        setFilterByMigrations(event.value)
+                      }}
                       options={migrationOptions}
-                      optionLabel='name'
                       placeholder='Migration'
                       maxSelectedLabels={0}
                       panelHeaderTemplate={<></>}
@@ -278,13 +321,14 @@ function CustomerStoriesPage({
                       unstyled
                     />
                   </div>
-                  <div className='multiselect-target hidden'>
+                  <div className='multiselect-target'>
                     <MultiSelect
-                      value={null}
+                      value={filterByVerticals}
                       itemClassName='multiselect-item'
-                      onChange={console.log}
+                      onChange={(event) => {
+                        setFilterByVerticals(event.value)
+                      }}
                       options={verticalOptions}
-                      optionLabel='name'
                       placeholder='Vertical'
                       maxSelectedLabels={0}
                       panelHeaderTemplate={<></>}
@@ -292,7 +336,10 @@ function CustomerStoriesPage({
                       unstyled
                     />
                   </div>
-                  <ClearFilterButton onClick={console.log} disabled={false} />
+                  <ClearFilterButton
+                    onClick={handleClearFiltersClick}
+                    disabled={false}
+                  />
                 </div>
               </div>
             </div>
