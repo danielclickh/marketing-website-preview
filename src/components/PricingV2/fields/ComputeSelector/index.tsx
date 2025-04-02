@@ -253,23 +253,42 @@ export default function ComputeSelector() {
             <>
               <div className='grid sm:grid-cols-2 gap-4 mt-8'>
                 <div>
-                  <Label>Minimum size</Label>
+                  {replicas === 1 && <Label>Compute per replica</Label>}
+                  {replicas !== 1 && <Label>Minimum compute per replica</Label>}
                   <Select
-                    options={COMPUTES}
+                    options={
+                      replicas === 1
+                        ? COMPUTES.filter((option) => option.value <= 12)
+                        : COMPUTES
+                    }
                     value={computeMinSize}
                     onChange={(value) => setValues({ computeMinSize: value })}
                     maxHeight={275}
                   />
                 </div>
+
                 <div>
-                  <Label>Maximum size</Label>
-                  <Select
-                    options={COMPUTES}
-                    value={computeMaxSize}
-                    onChange={(value) => setValues({ computeMaxSize: value })}
-                    maxHeight={275}
-                  />
+                  {replicas === 1 && (
+                    <div className='text-sm mt-6'>
+                      Single-replica services are limited to 8 GiB and 12 GiB
+                      RAM.
+                    </div>
+                  )}
+                  {replicas !== 1 && (
+                    <>
+                      <Label>Maximum compute per replica</Label>
+                      <Select
+                        options={COMPUTES}
+                        value={computeMaxSize}
+                        onChange={(value) =>
+                          setValues({ computeMaxSize: value })
+                        }
+                        maxHeight={275}
+                      />
+                    </>
+                  )}
                 </div>
+
                 <div>
                   <Label>Number of replicas</Label>
                   <Select

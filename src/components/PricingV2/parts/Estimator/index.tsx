@@ -18,6 +18,8 @@ type Addons = 'backups' | 'dataSources' | 'dataTransfer'
 export default function Estimator() {
   const {
     setValues,
+    storage,
+    replicas,
     planEntry,
     backupFrequency,
     backupRetention,

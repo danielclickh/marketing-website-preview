@@ -851,6 +851,17 @@ export default function PricingV2ContextProvider({
           applyFirstPackage()
         }
 
+        // Enforce limits if a single replica
+        if (newReplicas === 1) {
+          // Limit to a max 12 compute size
+          if (newComputeMinSize && newComputeMinSize > 12) {
+            newComputeMinSize = 12
+          }
+
+          // Max value should match min (no range allowed)
+          newComputeMaxSize = newComputeMinSize
+        }
+
         // Min value is null, set it to match max
         if (newComputeMinSize === null && newComputeMaxSize !== null) {
           newComputeMinSize = newComputeMaxSize
