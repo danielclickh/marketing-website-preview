@@ -269,7 +269,7 @@ export default function ComputeSelector() {
 
                 <div>
                   {replicas === 1 && (
-                    <div className='text-sm mt-6'>
+                    <div className='text-sm sm:mt-6'>
                       Single-replica services are limited to 8 GiB and 12 GiB
                       RAM.
                     </div>
