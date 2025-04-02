@@ -2,6 +2,7 @@ import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
+import Avatars from '../../../../components/Avatars'
 import BlogPost from '../../../../components/BlogPostList/BlogPost'
 import CopyUrlButton from '../../../../components/CopyUrlButton'
 import FollowUs from '../../../../components/FollowUs'
@@ -12,7 +13,6 @@ import NewsLetter from '../../../../components/NewsLetter'
 import { getNewsLetterData } from '../../../../components/NewsLetter/getNewsLetterData'
 import ReadingProgress from '../../../../components/ReadingProgress'
 import SocialButton from '../../../../components/SocialButton'
-import { StrapiImage } from '../../../../components/StrapiElements'
 import { SuiButton, SuiText, SuiTitle } from '../../../../components/sui'
 import TableOfContents from '../../../../components/TableOfContents'
 import {
@@ -153,15 +153,13 @@ export default function BlogPage({
               <span className='leading-snug'>{title}</span>
             </h1>
             <div className='flex flex-row items-center space-x-4 pt-2'>
-              <div className='flex aspect-square h-11 w-11'>
-                <StrapiImage
-                  {...author.avatarPng}
-                  alt='author avatar'
-                  width={44}
-                  height={44}
-                  className='h-11 w-11 rounded-full'
-                />
-              </div>
+              <Avatars
+                avatars={
+                  Array.isArray(author.avatarPng)
+                    ? author.avatarPng
+                    : [author.avatarPng]
+                }
+              />
               <div className='flex'>
                 <div className='flex flex-col items-start'>
                   <SuiText size='base' weight='normal'>

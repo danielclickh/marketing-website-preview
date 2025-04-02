@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import Avatars from '../../components/Avatars'
 import BlogPost from '../../components/BlogPostList/BlogPost'
 import CategorySelector from '../../components/CategorySelector'
 import { CUILink } from '../../components/ClickUI'
@@ -183,12 +184,12 @@ export default function BlogsPage({
 
               <div className='flex flex-row items-center space-x-4'>
                 {featuredBlog.author.avatarPng && (
-                  <StrapiImage
-                    {...featuredBlog.author.avatarPng}
-                    alt={featuredBlog.author.name}
-                    width={44}
-                    height={44}
-                    className='aspect-square !h-11 !w-11 rounded-full'
+                  <Avatars
+                    avatars={
+                      Array.isArray(featuredBlog.author.avatarPng)
+                        ? featuredBlog.author.avatarPng
+                        : [featuredBlog.author.avatarPng]
+                    }
                   />
                 )}
                 <div>
@@ -256,9 +257,15 @@ export default function BlogsPage({
           <>
             <div className='w-full'>
               <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
-                {blogs.filter((blog) => {return blog.ListOnBlogs === null || blog.ListOnBlogs === true}).map((blog) => (
-                  <BlogPost key={blog.id} {...blog} />
-                ))}
+                {blogs
+                  .filter((blog) => {
+                    return (
+                      blog.ListOnBlogs === null || blog.ListOnBlogs === true
+                    )
+                  })
+                  .map((blog) => (
+                    <BlogPost key={blog.id} {...blog} />
+                  ))}
               </div>
             </div>
 
