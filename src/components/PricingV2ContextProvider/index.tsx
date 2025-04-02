@@ -95,8 +95,8 @@ function getUseCaseCompute(
   // If the compute values are less than the minimum
   // decrease the number of replicas and increase the compute size
   while (
-    computeMinSize <= maxCompute &&
-    computeMaxSize < maxCompute &&
+    computeMinSize < minCompute &&
+    computeMaxSize <= minCompute &&
     replicas > 2
   ) {
     computeMinSize = idealComputeMinSize * replicas
