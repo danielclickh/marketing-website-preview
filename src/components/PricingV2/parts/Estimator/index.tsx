@@ -19,7 +19,8 @@ export default function Estimator() {
   const {
     setValues,
     storage,
-    replicas,
+    computeMinSize,
+    computeMaxSize,
     planEntry,
     backupFrequency,
     backupRetention,
@@ -68,17 +69,24 @@ export default function Estimator() {
   // Backups are allowed and user added
   const displayBackups = useMemo(() => {
     return addonDisplayOrder.includes('backups')
-  }, [planEntry, addonDisplayOrder])
+  }, [addonDisplayOrder])
 
   // Data sources are allowed and user added
   const displayDataSources = useMemo(() => {
     return addonDisplayOrder.includes('dataSources')
-  }, [planEntry, addonDisplayOrder])
+  }, [addonDisplayOrder])
 
   // Data transfers are allowed and user added
   const displayDataTransfer = useMemo(() => {
     return addonDisplayOrder.includes('dataTransfer')
-  }, [planEntry, addonDisplayOrder])
+  }, [addonDisplayOrder])
+
+  // Conditionally show/hide the addon buttons (Add backups, Add data sources, Add data transfer)
+  const displayAddonButtons =
+    (storage && (computeMinSize || computeMaxSize)) ||
+    displayBackups ||
+    displayDataSources ||
+    displayDataTransfer
 
   // Ensure backups accordion is pressent in UI when context values change
   useEffect(() => {
@@ -206,7 +214,8 @@ export default function Estimator() {
             )
           })}
 
-          <div className='my-6 mx-4 gap-x-8 gap-y-6 flex flex-wrap items-center justify-start'>
+          <div
+            className={`my-6 mx-4 gap-x-8 gap-y-6 flex flex-wrap items-center justify-start ${displayAddonButtons ? '' : 'hidden'}`}>
             {planEntry?.allowBackups && !displayBackups && (
               <button
                 className='text-sm text-primary-300 hover:underline'
