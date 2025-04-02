@@ -21,10 +21,10 @@ export default function Header({
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   const [headerBannerText, setHeaderBannerText] = useState(
-    'ClickHouse acquires HyperDX: The future of open-source observability'
+    'Join us at Open House, the ClickHouse user conference, May 28-29 in San Francisco.'
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/blog/clickhouse-acquires-hyperdx-the-future-of-open-source-observability?loc=eyebrow'
+    '/openhouse?loc=eyebrow'
   )
 
   const resizeHandler = () => {
