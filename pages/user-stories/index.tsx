@@ -120,7 +120,7 @@ function CustomerStoriesPage({
   const useCaseOptions = useMemo(() => {
     return Object.entries(categories).map(([id, name]) => {
       return {
-        value: id,
+        value: Number(id),
         label: name
       }
     })
@@ -129,7 +129,7 @@ function CustomerStoriesPage({
   const migrationOptions = useMemo(() => {
     return Object.entries(migrations).map(([id, name]) => {
       return {
-        value: id,
+        value: Number(id),
         label: name
       }
     })
@@ -138,7 +138,7 @@ function CustomerStoriesPage({
   const verticalOptions = useMemo(() => {
     return Object.entries(verticals).map(([id, name]) => {
       return {
-        value: id,
+        value: Number(id),
         label: name
       }
     })
@@ -223,6 +223,24 @@ function CustomerStoriesPage({
   const filteredAndSortedStories = useMemo(() => {
     let modified = [...stories]
 
+    // Filtering
+    modified = modified.filter((story) => {
+      const useCaseMatch =
+        !filterByUseCases.length ||
+        story.useCase.find((entry) => filterByUseCases.includes(entry.id))
+
+      const verticalMatch =
+        !filterByVerticals.length ||
+        story.vertical.find((entry) => filterByVerticals.includes(entry.id))
+
+      const migrationMatch =
+        !filterByMigrations.length ||
+        story.migrations.find((entry) => filterByMigrations.includes(entry.id))
+
+      return useCaseMatch && verticalMatch && migrationMatch
+    })
+
+    // Sorting
     modified.sort((a, b) => {
       // If NOT sorting by latest
       if (!orderByLatest) {
@@ -248,7 +266,14 @@ function CustomerStoriesPage({
     })
 
     return modified
-  }, [stories, orderByLatest])
+  }, [
+    stories,
+    orderByLatest,
+    filterByUseCases,
+    filterByVerticals,
+    filterByMigrations,
+    filterByCloudProviders
+  ])
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -427,7 +452,7 @@ function CustomerStoriesPage({
                 </div>
                 <ClearFilterButton
                   className='mt-6 rounded-full border border-primary-600 px-4 py-2.5 text-sm font-semibold hover:border-primary-300'
-                  onClick={console.log}
+                  onClick={handleClearFiltersClick}
                   disabled={false}
                 />
               </div>
