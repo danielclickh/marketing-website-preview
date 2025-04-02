@@ -180,9 +180,57 @@ export default function CustomerStoriesPage({
     filterByVerticals.length ||
     filterByCloudProviders.length
 
+  // Read values from the URL
+  useEffect(() => {
+    const urlUseCases = searchParams
+      .get('useCase')
+      ?.split(',')
+      .map((value) => Number(value.trim()))
+      .filter((value) => useCaseOptions.find((item) => item.value === value))
+
+    const urlMigrations = searchParams
+      .get('migration')
+      ?.split(',')
+      .map((value) => Number(value.trim()))
+      .filter((value) => migrationOptions.find((item) => item.value === value))
+
+    const urlVerticals = searchParams
+      .get('vertical')
+      ?.split(',')
+      .map((value) => Number(value.trim()))
+      .filter((value) => verticalOptions.find((item) => item.value === value))
+
+    const urlCloudProviders = searchParams
+      .get('cloudProvider')
+      ?.split(',')
+      .map((value) => value.trim())
+      .filter((value) =>
+        cloudProvidersOptions.find((item) => item.value === value)
+      )
+
+    setOrderByLatest(searchParams.get('latest') === 'true')
+    setSearch(searchParams.get('search')?.trim() || '')
+    setFilterByUseCases(urlUseCases || [])
+    setFilterByMigrations(urlMigrations || [])
+    setFilterByVerticals(urlVerticals || [])
+    setFilterByCloudProviders(urlCloudProviders || [])
+  }, [
+    searchParams,
+    useCaseOptions,
+    migrationOptions,
+    verticalOptions,
+    cloudProvidersOptions
+  ])
+
   // Store values in the URL
   useEffect(() => {
     const newUrl = new URL(window.location.toString())
+
+    if (search.trim().length) {
+      newUrl.searchParams.set('search', search.trim())
+    } else {
+      newUrl.searchParams.delete('search')
+    }
 
     if (orderByLatest) {
       newUrl.searchParams.set('latest', 'true')
@@ -218,6 +266,7 @@ export default function CustomerStoriesPage({
     // `router.replace(...)` causes all iframes on the page to reload
     window.history.replaceState(null, '', newUrl.toString())
   }, [
+    search,
     orderByLatest,
     filterByUseCases,
     filterByMigrations,
