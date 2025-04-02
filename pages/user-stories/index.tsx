@@ -118,39 +118,55 @@ function CustomerStoriesPage({
   >([])
 
   const useCaseOptions = useMemo(() => {
-    return Object.entries(categories).map(([id, name]) => {
-      return {
-        value: Number(id),
-        label: name
-      }
-    })
+    return Object.entries(categories)
+      .map(([id, name]) => {
+        return {
+          value: Number(id),
+          label: name
+        }
+      })
+      .sort((a, b) => {
+        return a.label.localeCompare(b.label)
+      })
   }, [categories])
 
   const migrationOptions = useMemo(() => {
-    return Object.entries(migrations).map(([id, name]) => {
-      return {
-        value: Number(id),
-        label: name
-      }
-    })
+    return Object.entries(migrations)
+      .map(([id, name]) => {
+        return {
+          value: Number(id),
+          label: name
+        }
+      })
+      .sort((a, b) => {
+        return a.label.localeCompare(b.label)
+      })
   }, [migrations])
 
   const verticalOptions = useMemo(() => {
-    return Object.entries(verticals).map(([id, name]) => {
-      return {
-        value: Number(id),
-        label: name
-      }
-    })
+    return Object.entries(verticals)
+      .map(([id, name]) => {
+        return {
+          value: Number(id),
+          label: name
+        }
+      })
+      .sort((a, b) => {
+        return a.label.localeCompare(b.label)
+      })
   }, [verticals])
 
   const cloudProvidersOptions = useMemo(() => {
-    return Object.entries(cloudProviders).map(([slug, name]) => {
-      return {
-        value: slug,
-        label: name
-      }
-    })
+    return Object.entries(cloudProviders)
+      .map(([slug, name]) => {
+        return {
+          value: slug,
+          label: name
+        }
+      })
+      .sort((a, b) => {
+        return a.label.localeCompare(b.label)
+      })
   }, [cloudProviders])
 
   // Store values in the URL
