@@ -60,7 +60,7 @@ export default function StorageSelector() {
         </div>
       </div>
       <div className='mt-3 text-xs text-slate-300'>
-        {!storageCompressed ? (
+        {!storageCompressed && (
           <>
             {storage && (
               <p className='flex items-center gap-x-2 text-[#CCFFD0]'>
@@ -70,8 +70,6 @@ export default function StorageSelector() {
               </p>
             )}
           </>
-        ) : (
-          <p>No compression applied</p>
         )}
       </div>
     </div>
