@@ -2,6 +2,7 @@ import { resolveHref } from 'next/dist/client/resolve-href'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { useEffect, useId, useRef, useState } from 'react'
+import LazyLoad from '../LazyLoad'
 import Markdown from '../Markdown'
 
 type SpoofedMarketoValuesObject = Record<string, any>
@@ -259,15 +260,17 @@ export default function MarketoForm({
   return (
     <>
       {mountIframe && (
-        <iframe
-          ref={iframeRef}
-          src={resolveHref(router, `/marketo-forms/${formId}?${queryString}`)}
-          height={iframeHeight < 24 ? 24 : iframeHeight}
-          scrolling='no' // Deprecated but still hides scrollbars
-          className={`w-full !bg-transparent transition-opacity ${
-            formLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
-        />
+        <LazyLoad>
+          <iframe
+            ref={iframeRef}
+            src={resolveHref(router, `/marketo-forms/${formId}?${queryString}`)}
+            height={iframeHeight < 24 ? 24 : iframeHeight}
+            scrolling='no' // Deprecated but still hides scrollbars
+            className={`w-full !bg-transparent transition-opacity ${
+              formLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        </LazyLoad>
       )}
 
       {formLoaded && !formSuccess && !!disclaimer && (
