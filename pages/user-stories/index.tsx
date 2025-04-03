@@ -425,66 +425,74 @@ export default function CustomerStoriesPage({
                     onClick={handleLatestClick}>
                     Latest
                   </button>
-                  <div className='multiselect-target'>
-                    <MultiSelect
-                      value={filterByUseCases}
-                      itemClassName='multiselect-item'
-                      onChange={(event) => {
-                        setFilterByUseCases(event.value)
-                      }}
-                      options={useCaseOptions}
-                      placeholder='Use case'
-                      maxSelectedLabels={0}
-                      panelHeaderTemplate={<></>}
-                      selectedItemsLabel='Use case ({0})'
-                      unstyled
-                    />
-                  </div>
-                  <div className='multiselect-target'>
-                    <MultiSelect
-                      value={filterByMigrations}
-                      itemClassName='multiselect-item'
-                      onChange={(event) => {
-                        setFilterByMigrations(event.value)
-                      }}
-                      options={migrationOptions}
-                      placeholder='Migration'
-                      maxSelectedLabels={0}
-                      panelHeaderTemplate={<></>}
-                      selectedItemsLabel='Migration ({0})'
-                      unstyled
-                    />
-                  </div>
-                  <div className='multiselect-target'>
-                    <MultiSelect
-                      value={filterByVerticals}
-                      itemClassName='multiselect-item'
-                      onChange={(event) => {
-                        setFilterByVerticals(event.value)
-                      }}
-                      options={verticalOptions}
-                      placeholder='Vertical'
-                      maxSelectedLabels={0}
-                      panelHeaderTemplate={<></>}
-                      selectedItemsLabel='Vertical ({0})'
-                      unstyled
-                    />
-                  </div>
-                  <div className='multiselect-target'>
-                    <MultiSelect
-                      value={filterByCloudProviders}
-                      itemClassName='multiselect-item'
-                      onChange={(event) => {
-                        setFilterByCloudProviders(event.value)
-                      }}
-                      options={cloudProvidersOptions}
-                      placeholder='Provider'
-                      maxSelectedLabels={0}
-                      panelHeaderTemplate={<></>}
-                      selectedItemsLabel='Provider ({0})'
-                      unstyled
-                    />
-                  </div>
+                  {useCaseOptions.length > 0 && (
+                    <div className='multiselect-target'>
+                      <MultiSelect
+                        value={filterByUseCases}
+                        itemClassName='multiselect-item'
+                        onChange={(event) => {
+                          setFilterByUseCases(event.value)
+                        }}
+                        options={useCaseOptions}
+                        placeholder='Use case'
+                        maxSelectedLabels={0}
+                        panelHeaderTemplate={<></>}
+                        selectedItemsLabel='Use case ({0})'
+                        unstyled
+                      />
+                    </div>
+                  )}
+                  {migrationOptions.length > 0 && (
+                    <div className='multiselect-target'>
+                      <MultiSelect
+                        value={filterByMigrations}
+                        itemClassName='multiselect-item'
+                        onChange={(event) => {
+                          setFilterByMigrations(event.value)
+                        }}
+                        options={migrationOptions}
+                        placeholder='Migration'
+                        maxSelectedLabels={0}
+                        panelHeaderTemplate={<></>}
+                        selectedItemsLabel='Migration ({0})'
+                        unstyled
+                      />
+                    </div>
+                  )}
+                  {verticalOptions.length > 0 && (
+                    <div className='multiselect-target'>
+                      <MultiSelect
+                        value={filterByVerticals}
+                        itemClassName='multiselect-item'
+                        onChange={(event) => {
+                          setFilterByVerticals(event.value)
+                        }}
+                        options={verticalOptions}
+                        placeholder='Vertical'
+                        maxSelectedLabels={0}
+                        panelHeaderTemplate={<></>}
+                        selectedItemsLabel='Vertical ({0})'
+                        unstyled
+                      />
+                    </div>
+                  )}
+                  {cloudProvidersOptions.length > 0 && (
+                    <div className='multiselect-target'>
+                      <MultiSelect
+                        value={filterByCloudProviders}
+                        itemClassName='multiselect-item'
+                        onChange={(event) => {
+                          setFilterByCloudProviders(event.value)
+                        }}
+                        options={cloudProvidersOptions}
+                        placeholder='Provider'
+                        maxSelectedLabels={0}
+                        panelHeaderTemplate={<></>}
+                        selectedItemsLabel='Provider ({0})'
+                        unstyled
+                      />
+                    </div>
+                  )}
                   <ClearFilterButton
                     onClick={handleClearFiltersClick}
                     disabled={!hasFilters}
