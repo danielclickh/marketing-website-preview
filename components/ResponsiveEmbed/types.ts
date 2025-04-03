@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 
 interface ResponsiveEmbedBaseProps {
   ratio?: string
+  lazyLoad?: boolean
 }
 
 interface ResponsiveEmebedHtmlProps extends ResponsiveEmbedBaseProps {
