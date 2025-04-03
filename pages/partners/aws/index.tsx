@@ -64,6 +64,8 @@ function PartnersPage({ seo, headerData, footerData }: CommonProps) {
               width='240'
               height='240'
               alt='aws partner'
+              loading='eager'
+              priority
             />
             <div className='flex max-w-screen-md flex-col items-center md:items-start'>
               <SuiTitle

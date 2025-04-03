@@ -201,6 +201,8 @@ export default function Page({
                     src='/images/comparisons/dc-migration.svg'
                     width='485'
                     height='448'
+                    loading='eager'
+                    priority
                     alt='DoubleCloud to ClickHouse migration'
                   />
                 </div>

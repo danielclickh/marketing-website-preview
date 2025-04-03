@@ -151,6 +151,7 @@ export default function MLUseCasePage({
                     width={326}
                     height={316}
                     className='h-auto w-full '
+                    loading='eager'
                     priority
                   />
                 </div>

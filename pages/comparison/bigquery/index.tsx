@@ -163,6 +163,8 @@ export default function BigQueryPage({
             alt='ClickHouse vs BigQuery'
             width={240}
             height={245}
+            loading='eager'
+            priority
             className='mx-auto lg:hidden'
           />
 
@@ -214,6 +216,8 @@ export default function BigQueryPage({
           alt='ClickHouse vs BigQuery'
           width={240}
           height={245}
+          loading='eager'
+          priority
           className='mx-auto hidden lg:block'
         />
       </div>

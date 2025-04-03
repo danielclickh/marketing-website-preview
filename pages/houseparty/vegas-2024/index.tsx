@@ -121,6 +121,8 @@ export default function Page({
                 src={imageHeroImage}
                 width={3000}
                 height={825}
+                priority
+                loading='eager'
                 alt=''
                 className='absolute block h-full w-full object-cover'
               />
@@ -129,6 +131,8 @@ export default function Page({
                 src={imageHeroTexture}
                 width={3000}
                 height={825}
+                loading='eager'
+                priority
                 alt=''
                 className='absolute block h-full w-full object-cover'
               />
@@ -137,6 +141,8 @@ export default function Page({
                 src={imageHeroText}
                 width={3000}
                 height={825}
+                loading='eager'
+                priority
                 alt='ClickHouse house party with The Chainsmokers!'
                 className='absolute block h-full w-full object-cover lg:object-scale-down'
               />

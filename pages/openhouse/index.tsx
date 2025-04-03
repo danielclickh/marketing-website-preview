@@ -83,6 +83,8 @@ export default function Page({ seo, footerData }: CommonProps) {
                     alt='Open House By ClickHouse'
                     width={590}
                     height={289}
+                    loading='eager'
+                    priority
                   />
                 </div>
                 <div className='md:self-center flex-shrink-0 flex-grow-0 text-center md:text-left'>

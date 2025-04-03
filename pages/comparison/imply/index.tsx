@@ -187,6 +187,8 @@ export default function Page({
                     src='/images/comparisons/imply-migration.svg'
                     width='485'
                     height='448'
+                    loading='eager'
+                    priority
                     alt='Imply to ClickHouse migration'
                   />
                 </div>

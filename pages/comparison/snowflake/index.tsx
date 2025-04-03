@@ -138,6 +138,8 @@ export default function SnowflakePage({
                   {comparison.data[0].image && (
                     <StrapiImage
                       {...comparison.data[0].image}
+                      loading='eager'
+                      priority
                       className='mx-auto lg:mx-0'
                     />
                   )}

@@ -109,6 +109,8 @@ export default function Page({
                   alt='Open House By ClickHouse'
                   width={326}
                   height={160}
+                  loading='eager'
+                  priority
                   className='my-20'
                 />
               </Link>

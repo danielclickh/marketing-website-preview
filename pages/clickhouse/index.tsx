@@ -121,8 +121,10 @@ export default function ClickHouseServerPage({
                   <Image
                     src='/images/clickhouse/oss_hero_image.png'
                     alt='Open source ClickHouse'
-                    width={1294}
-                    height={812}
+                    loading='eager'
+                    priority
+                    width={870}
+                    height={555}
                     className='h-auto w-full min-w-[54rem]'
                   />
                 </div>

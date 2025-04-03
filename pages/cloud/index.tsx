@@ -142,8 +142,8 @@ export default function CloudPage({
                     src='/images/cloud/cloud_hero_image.png'
                     alt='ClickHouse Cloud'
                     loading='eager'
-                    width={1262}
-                    height={523}
+                    width={960}
+                    height={516}
                     className='h-auto w-full min-w-[60rem]'
                     priority={true}
                   />

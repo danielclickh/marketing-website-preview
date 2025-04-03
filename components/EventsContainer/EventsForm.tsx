@@ -35,6 +35,8 @@ function EventsForm({
           src={featuredImage.url}
           width={512}
           height={293}
+          loading='eager'
+          priority
           alt='Featured image'
           className='mb-20 hidden h-auto w-full rounded-lg object-cover lg:block'
         />

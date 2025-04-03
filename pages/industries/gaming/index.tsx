@@ -144,7 +144,8 @@ export default function GamingIndustryPage({
                     alt='ClickHouse Gaming'
                     width={738}
                     height={528}
-                    className='h-auto w-full '
+                    className='h-auto w-full'
+                    loading='eager'
                     priority
                   />
                 </div>

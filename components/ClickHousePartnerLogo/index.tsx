@@ -54,6 +54,8 @@ function Tile({
           alt={alt}
           width={100}
           height={100}
+          loading='eager'
+          priority
           className='absolute w-full h-full object-scale-down object-center'
         />
       </div>

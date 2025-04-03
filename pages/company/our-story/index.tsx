@@ -87,6 +87,8 @@ export default function OurStoryPage({
                     src='/images/team-who-we-are.png'
                     width='751'
                     height='406'
+                    loading='eager'
+                    priority
                     alt='Who we are'
                     className='mx-auto'
                   />

@@ -149,6 +149,7 @@ export default function RealTimeAnalyticsPage({
                     width={509}
                     height={397}
                     className='h-auto w-full '
+                    loading='eager'
                     priority
                   />
                 </div>
