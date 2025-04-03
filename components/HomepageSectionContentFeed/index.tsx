@@ -53,7 +53,7 @@ export default function HomepageSectionContentFeed({
             Sony, Lyft, Cisco, GitLab and many more choose ClickHouse Cloud for
             its scale, efficiency, and ease of use.
           </SuiText>
-          {allCategories.length && (
+          {allCategories.length > 0 && (
             <>
               <SuiText
                 weight='bold'
