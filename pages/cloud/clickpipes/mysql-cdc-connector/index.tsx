@@ -82,7 +82,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         </div>
       </div>
 
-      {/* Cards */}
+      {/* Cards  */}
       <div className='relative z-10 bg-neutral-700 py-20'>
         <div className='section-container'>
           <div className='-mx-4 flex flex-col lg:flex-row lg:flex-wrap lg:justify-center lg:max-w-4xl lg:mx-auto'>
