@@ -953,9 +953,8 @@ export default function PricingV2ContextProvider({
       }
 
       // Set default backup values
-      if (newEstimateBackup !== undefined) {
-        // Set default values
-        let storageBytes = humanReadableToBytes(newStorage ?? storage ?? '0GB')
+      if (newStorage) {
+        let storageBytes = humanReadableToBytes(newStorage)
 
         // Sanity check, ensure storage value is valid
         if (storageBytes) {
