@@ -4,7 +4,8 @@ import { parse, ParsedQs, stringify } from 'qs'
 import { ParsedUrlQuery } from 'querystring'
 import { useCallback } from 'react'
 import type { PricingV2 } from '@/lib/api/strapi/types'
-import PricingV2ContextProvider from '@/components/PricingV2ContextProvider'
+import HRSeparator from '@/components/HRSeparator'
+import PricingV2ContextProvider from '../PricingV2ContextProvider'
 import Estimator from './parts/Estimator'
 import Table from './parts/Table'
 import { Values } from './types'
@@ -15,6 +16,7 @@ export interface PricingV2Props {
   beforeTableFilters?: React.ReactNode
   afterTableFilters?: React.ReactNode
   inbetweenContent?: React.ReactNode
+  beforeEstimator?: React.ReactNode
 }
 
 export default function PricingV2({
@@ -22,7 +24,8 @@ export default function PricingV2({
   requestParams,
   beforeTableFilters,
   afterTableFilters,
-  inbetweenContent
+  inbetweenContent,
+  beforeEstimator
 }: PricingV2Props) {
   const router = useRouter()
 
@@ -127,7 +130,8 @@ export default function PricingV2({
         afterFilters={afterTableFilters}
       />
       {inbetweenContent}
-      <Estimator />
+      {inbetweenContent && <HRSeparator className='my-16 lg:my-24' />}
+      <Estimator before={beforeEstimator} />
     </PricingV2ContextProvider>
   )
 }

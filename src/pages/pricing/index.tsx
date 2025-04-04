@@ -5,7 +5,6 @@ import { useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import ByocPricingCard from '@/components/ByocPricingCard'
 import { CUIButton, CUICard } from '@/components/ClickUI'
-import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import Markdown from '@/components/Markdown'
@@ -302,11 +301,12 @@ export default function PricingPage({
                         </div>
                       </div>
                     </div>
-                    <HRSeparator className='my-16 lg:my-24' />
-                    <SuiTitle type='h2' className='my-12 text-center'>
-                      Estimate your monthly&nbsp;cost
-                    </SuiTitle>
                   </>
+                }
+                beforeEstimator={
+                  <SuiTitle type='h2' className='my-12 text-center'>
+                    Estimate your monthly&nbsp;cost
+                  </SuiTitle>
                 }
               />
             )}

@@ -15,7 +15,11 @@ import PriceList from '../PriceList'
 
 type Addons = 'backups' | 'dataSources' | 'dataTransfer'
 
-export default function Estimator() {
+export interface EstimatorProps {
+  before?: React.ReactNode
+}
+
+export default function Estimator({ before }: EstimatorProps) {
   const {
     setValues,
     storage,
@@ -116,6 +120,8 @@ export default function Estimator() {
     <div
       id='pricing-calculator' // Used for scrolling into view and sharing
       className='mx-auto max-w-6xl px-4 sm:px-8 xl:px-0'>
+      {before}
+
       {/* Provider/Region selectors */}
       <div className='mb-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-6'>
         <ProviderSelector displayLabel={false} />
