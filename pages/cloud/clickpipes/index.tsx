@@ -3,12 +3,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import CdcAnimation from '../../../components/CdcAnimation'
+import CdcWaitlistForm from '../../../components/CdcWaitlistForm'
 import ClickPipesAnimationV2 from '../../../components/ClickPipesAnimation/ClickPipesAnimationV2'
 import { CUIButton, CUICard } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import LogoAnnouncementLink from '../../../components/LogoAnnouncementLink'
-import PostgresCdcWaitlistForm from '../../../components/PostgresCdcWaitlistForm'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
@@ -281,7 +281,7 @@ export default function ClickHouseServerPage({
             </div>
             <CUICard className='bg-neutral-900/80'>
               <CUICard.Body className='p-4 lg:p-6'>
-                <PostgresCdcWaitlistForm />
+                <CdcWaitlistForm formId='1365' />
               </CUICard.Body>
             </CUICard>
           </div>

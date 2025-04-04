@@ -3,11 +3,11 @@ import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import React, { CSSProperties } from 'react'
 import CdcAnimation from '../../../../components/CdcAnimation'
+import CdcWaitlistForm from '../../../../components/CdcWaitlistForm'
 import { CUIButton, CUICard } from '../../../../components/ClickUI'
 import DotsContainer from '../../../../components/DotsContainer'
 import Layout from '../../../../components/Layout'
 import LinedIconCard from '../../../../components/LinedIconCard'
-import PostgresCdcWaitlistForm from '../../../../components/PostgresCdcWaitlistForm'
 import { SuiText, SuiTitle } from '../../../../components/sui'
 import {
   useGalaxyOnClick,
@@ -74,7 +74,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
             <div className='w-full lg:max-w-lg'>
               <CUICard>
                 <CUICard.Body className='p-4 lg:p-6'>
-                  <PostgresCdcWaitlistForm />
+                  <CdcWaitlistForm formId='1365' />
                 </CUICard.Body>
               </CUICard>
             </div>
@@ -214,7 +214,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         <div className='mx-auto w-full lg:max-w-xl'>
           <CUICard className='bg-neutral-900/80'>
             <CUICard.Body className='p-4 lg:p-6'>
-              <PostgresCdcWaitlistForm />
+              <CdcWaitlistForm formId='1365' />
             </CUICard.Body>
           </CUICard>
         </div>
