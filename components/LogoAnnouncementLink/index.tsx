@@ -19,7 +19,7 @@ const modeThemes: Record<Modes, { link: string; logo: string; text: string }> =
     },
     dark: {
       link: 'bg-neutral-900/60 border-white/10',
-      logo: 'bg-white/10',
+      logo: 'bg-neutral-700/60',
       text: 'text-white/70'
     }
   }

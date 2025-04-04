@@ -2,11 +2,13 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
+import CdcAnimation from '../../../components/CdcAnimation'
 import ClickPipesAnimationV2 from '../../../components/ClickPipesAnimation/ClickPipesAnimationV2'
-import { CUIButton } from '../../../components/ClickUI'
+import { CUIButton, CUICard } from '../../../components/ClickUI'
 import GetStartedFree from '../../../components/GetStartedFree'
 import Layout from '../../../components/Layout'
 import LogoAnnouncementLink from '../../../components/LogoAnnouncementLink'
+import PostgresCdcWaitlistForm from '../../../components/PostgresCdcWaitlistForm'
 import { SuiText, SuiTitle } from '../../../components/sui'
 import { useGalaxyOnPage } from '../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../lib/utils/getCommonProps'
@@ -85,15 +87,15 @@ export default function ClickHouseServerPage({
                   <LogoAnnouncementLink
                     mode='dark'
                     className='mt-8'
-                    href='/cloud/clickpipes/postgres-cdc-connector?loc=clickpipes-hero'
+                    href='/cloud/clickpipes/mysql-cdc-connector?loc=clickpipes-hero'
                     logo={{
-                      src: '/images/cloud/integrations/postgres.svg',
-                      alt: 'Postgres',
+                      src: '/images/cloud/integrations/mysql.svg',
+                      alt: 'MySQL',
                       width: 48,
                       height: 49
                     }}>
-                    Blazing-fast Postgres to ClickHouse CDC with our new
-                    ClickPipe connector — now in Public Beta.{' '}
+                    Blazing-fast MySQL to ClickHouse CDC with our new ClickPipe
+                    connector — now in Public Beta.{' '}
                     <span className='text-primary-300 group-hover:underline'>
                       Learn&nbsp;more
                     </span>
@@ -173,7 +175,7 @@ export default function ClickHouseServerPage({
                     {
                       logo: '/images/cloud/integrations/postgres.svg',
                       name: 'Postgres CDC',
-                      badge: 'New'
+                      badge: 'Beta'
                     },
                     {
                       logo: '/images/cloud/integrations/diagram/aws-kinesis.svg',
@@ -188,12 +190,21 @@ export default function ClickHouseServerPage({
                       name: 'Google Cloud Storage'
                     },
                     {
-                      logo: '/images/cloud/integrations/redpanda.svg',
-                      name: 'RedPanda'
+                      logo: '/images/cloud/integrations/mysql.svg',
+                      name: 'MySQL CDC',
+                      badge: 'New'
                     },
                     {
                       logo: '/images/cloud/integrations/diagram/azure-event-hub.svg',
                       name: 'Azure Event Hubs'
+                    },
+                    {
+                      logo: '/images/cloud/integrations/digitalocean.svg',
+                      name: 'DigitalOcean'
+                    },
+                    {
+                      logo: '/images/cloud/integrations/redpanda.svg',
+                      name: 'RedPanda'
                     },
                     {
                       logo: '/images/cloud/integrations/warpstream.svg',
@@ -244,6 +255,37 @@ export default function ClickHouseServerPage({
           </div>
         </div>
         <div className='bg-primary-300 py-12'></div>
+
+        {/* Mysql CDC form */}
+        <div className='section-container my-20'>
+          <div className='mx-auto w-full lg:max-w-xl'>
+            <div className='mb-4 space-y-4 text-center md:-mx-4 lg:mb-6'>
+              <div className='flex justify-center mb-10'>
+                <CdcAnimation
+                  logo={
+                    <Image
+                      src='/images/cloud/integrations/mysql.svg'
+                      width={64}
+                      height={64}
+                      alt='MySQL'
+                    />
+                  }
+                />
+              </div>
+              <SuiTitle type='h2'>MySQL CDC is in Private Preview</SuiTitle>
+              <SuiText className='opacity-70'>
+                Stream your MySQL data into ClickHouse Cloud to bridge the gap
+                between transactional and analytical workloads — blazing fast
+                with our new ClickPipes MySQL CDC connector!
+              </SuiText>
+            </div>
+            <CUICard className='bg-neutral-900/80'>
+              <CUICard.Body className='p-4 lg:p-6'>
+                <PostgresCdcWaitlistForm />
+              </CUICard.Body>
+            </CUICard>
+          </div>
+        </div>
 
         <div className='section-container my-28 md:px-8 2xl:px-0 '>
           <GetStartedFree
