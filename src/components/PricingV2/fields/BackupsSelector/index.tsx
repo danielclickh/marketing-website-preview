@@ -136,11 +136,6 @@ export default function BackupsSelector() {
               setValues({ estimateBackup: !value })
             }}
           />
-          {!storage && (
-            <div className='mt-4'>
-              <StorageSelector />
-            </div>
-          )}
           {storage &&
             estimateBackup &&
             estimatedBackupsPerMonth &&
@@ -154,6 +149,12 @@ export default function BackupsSelector() {
               </p>
             )}
         </div>
+
+        {!storage && estimateBackup && (
+          <div className='md:col-span-2'>
+            <StorageSelector />
+          </div>
+        )}
 
         {!estimateBackup && (
           <>
