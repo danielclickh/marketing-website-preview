@@ -1,10 +1,9 @@
-import { Fragment, useCallback, useEffect, useRef } from 'react'
+import { Fragment, useCallback, useEffect, useMemo, useRef } from 'react'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import PriceUsd from '../../ui/PriceUsd'
 
 export default function DisplayPrice() {
-  const { totalMinPrice, totalPriceRange, storage, storageCompressed } =
-    usePricingV2Context()
+  const { totalMinPrice, totalPriceRange } = usePricingV2Context()
 
   const priceRef = useRef<null | HTMLParagraphElement>(null)
 
@@ -53,18 +52,28 @@ export default function DisplayPrice() {
     return () => window.clearTimeout(timer)
   }, [totalPriceRange, promoteContact])
 
+  const isValidPrice = useMemo(() => {
+    return (
+      totalPriceRange && totalPriceRange.filter((value) => value > 0).length > 0
+    )
+  }, [totalPriceRange])
+
   return (
     <span
       ref={priceRef}
       className='block w-full overflow-hidden whitespace-nowrap'>
       {promoteContact && <>Contact sales</>}
-      {!promoteContact && !totalPriceRange && '--'}
+      {!promoteContact && !isValidPrice && '--'}
       {!promoteContact &&
+        isValidPrice &&
         totalPriceRange &&
         totalPriceRange.map((price, priceIndex, allPrices) => {
           return (
             <Fragment key={priceIndex}>
-              <PriceUsd price={price} decimalPlaces={0} />
+              <PriceUsd
+                price={price}
+                decimalPlaces={allPrices.length === 1 && price < 1 ? 2 : 0}
+              />
               {priceIndex < allPrices.length - 1 && ' - '}
             </Fragment>
           )

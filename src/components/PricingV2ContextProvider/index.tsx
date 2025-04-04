@@ -351,7 +351,8 @@ export default function PricingV2ContextProvider({
   // Calculate the storage price
   //
   const storagePrice: ContextStoragePrice = useMemo(() => {
-    if (!storage || !storageUnitPrice) {
+    // Prevent storage calculation if no computeMinPrice
+    if (!storage || !storageUnitPrice || !computeMinPrice) {
       return null
     }
 
@@ -367,7 +368,7 @@ export default function PricingV2ContextProvider({
     }
 
     return usageInTb * storageUnitPrice
-  }, [storage, storageCompressed, storageUnitPrice])
+  }, [storage, storageCompressed, storageUnitPrice, computeMinPrice])
 
   // Calculate the price of backups
   //
@@ -549,9 +550,6 @@ export default function PricingV2ContextProvider({
 
   // Calculate the minimum total price (min compute & min storage combined)
   const totalMinPrice: ContextTotalMinPrice = useMemo(() => {
-    // Don't calculate unless we have a compute min price
-    if (computeMinPrice === null) return 0
-
     return [
       computeMinPrice,
       storagePrice,
@@ -571,9 +569,6 @@ export default function PricingV2ContextProvider({
 
   // Calculate the maximum total price (max compute & max storage combined)
   const totalMaxPrice: ContextTotalMaxPrice = useMemo(() => {
-    // Don't calculate unless we have a compute max price
-    if (computeMaxPrice === null) return 0
-
     return [
       computeMaxPrice,
       storagePrice,
@@ -592,16 +587,6 @@ export default function PricingV2ContextProvider({
   ])
 
   const totalPriceRange: ContextTotalPriceRange = useMemo(() => {
-    const isValid = !!(
-      (totalMinPrice && totalMinPrice > 1) ||
-      (totalMaxPrice && totalMaxPrice > 1)
-    )
-
-    // Set default to zero
-    if (!isValid) {
-      return null
-    }
-
     // De-dupe and remove empties
     const cleaned = [...new Set([totalMinPrice, totalMaxPrice])].filter(
       (val) => val !== null
@@ -953,14 +938,6 @@ export default function PricingV2ContextProvider({
         ) {
           newBackupRetention = null
         }
-      }
-
-      // Disable estimated backups if the user hasn't provided a storage value
-      if (
-        (newStorage !== undefined && !newStorage) ||
-        (newStorage === undefined && !storage)
-      ) {
-        newEstimateBackup = false
       }
 
       // Set default backup values
