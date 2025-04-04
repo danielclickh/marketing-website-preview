@@ -5,11 +5,16 @@ import {
   humanReadableToBytes
 } from '@/lib/utils/memory'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import { ContextStorageCameFrom } from '../../types'
 import DataSize, { Value } from '../../ui/DataSize'
 import Label from '../../ui/Label'
 import Radios from '../../ui/Radios'
 
-export default function StorageSelector() {
+export interface StorageSelectorProps {
+  cameFrom?: ContextStorageCameFrom
+}
+
+export default function StorageSelector({ cameFrom }: StorageSelectorProps) {
   const { setValues, planEntry, storage, storageCompressed } =
     usePricingV2Context()
 
@@ -20,17 +25,18 @@ export default function StorageSelector() {
   const onStorageSizeChange = useCallback(
     ({ formatted }: Value) => {
       setValues({
-        storage: formatted
+        storage: formatted,
+        storageCameFrom: cameFrom
       })
     },
-    [setValues]
+    [setValues, cameFrom]
   )
 
   const onStorageCompressedChange = useCallback(
     (value: any) => {
-      setValues({ storageCompressed: value })
+      setValues({ storageCompressed: value, storageCameFrom: cameFrom })
     },
-    [setValues]
+    [setValues, cameFrom]
   )
 
   return (

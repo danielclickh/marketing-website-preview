@@ -47,6 +47,7 @@ const retentionOptions = generateRetentionOptions(30, 'day', 'days')
 export default function BackupsSelector() {
   const {
     setValues,
+    storageCameFrom,
     storage,
     storageCompressed,
     backupFrequency,
@@ -136,6 +137,12 @@ export default function BackupsSelector() {
               setValues({ estimateBackup: !value })
             }}
           />
+          {estimateBackup &&
+            (!storageCameFrom || storageCameFrom === 'backups') && (
+              <div className='mt-4'>
+                <StorageSelector cameFrom='backups' />
+              </div>
+            )}
           {storage &&
             estimateBackup &&
             estimatedBackupsPerMonth &&
@@ -149,12 +156,6 @@ export default function BackupsSelector() {
               </p>
             )}
         </div>
-
-        {!storage && estimateBackup && (
-          <div className='md:col-span-2'>
-            <StorageSelector />
-          </div>
-        )}
 
         {!estimateBackup && (
           <>

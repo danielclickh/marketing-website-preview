@@ -50,6 +50,9 @@ export type Transfer = {
   region?: string | null
 }
 
+// Ad-hoc
+export type ContextStorageCameFrom = null | 'compute' | 'backups'
+
 // User values
 export type ContextPlan = null | string
 export type ContextProvider = null | string
@@ -85,7 +88,7 @@ export type ContextTotalPriceRange = null | [number] | [number, number]
 // Full context object
 export interface Context {
   // Helper functions
-  setValues: (values: Partial<Values>) => void
+  setValues: (values: Partial<Values & Adhoc>) => void
   getPlanPricingData: (value: string) => undefined | PricingFileItem
   getPlanPricingConfig: (value: string) => undefined | PlanConfig
   getUseCaseCompute: (
@@ -104,6 +107,9 @@ export interface Context {
   // Data sources
   sourceData: PricingV2
 
+  // Ad-hoc
+  storageCameFrom: ContextStorageCameFrom
+
   // User values
   plan: ContextPlan
   provider: ContextProvider
@@ -119,7 +125,7 @@ export interface Context {
   backupRetention: ContextBackupRetention
   estimateBackup: ContextEstimateBackup
   fullBackup: ContextFullBackup
-  incrementalBackup: ContextIncremental
+  incrementalBackup: ContextIncrementalBackup
   clickpipes: ContextClickpipes
   transfers: ContextTransfers
 
@@ -142,6 +148,8 @@ export interface Context {
 }
 
 export type Data = Context['sourceData']
+
+export type Adhoc = Pick<Context, 'storageCameFrom'>
 
 export type Values = Pick<
   Context,

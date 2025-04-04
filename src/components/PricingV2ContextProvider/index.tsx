@@ -16,6 +16,7 @@ import {
 import pricingFile from '../../../public/pricingV2File.json'
 import * as config from '../PricingV2/config'
 import {
+  Adhoc,
   Context,
   ContextBackupFrequency,
   ContextBackupRetention,
@@ -36,6 +37,7 @@ import {
   ContextRegion,
   ContextReplicas,
   ContextStorage,
+  ContextStorageCameFrom,
   ContextStorageCompressed,
   ContextStoragePrice,
   ContextStorageUnitPrice,
@@ -139,6 +141,9 @@ const PricingV2Context = createContext<Context>({
     dataSources: []
   },
 
+  // Ad-hoc
+  storageCameFrom: null,
+
   // User values
   plan: null,
   provider: null,
@@ -199,6 +204,12 @@ export default function PricingV2ContextProvider({
   onChange,
   children
 }: PricingV2ContextProviderProps) {
+  // -----------------------------------
+  // Ad-hoc
+  // -----------------------------------
+  const [storageCameFrom, setStorageCameFrom] =
+    useState<ContextStorageCameFrom>(null)
+
   // -----------------------------------
   // User values
   // -----------------------------------
@@ -655,12 +666,13 @@ export default function PricingV2ContextProvider({
   // -----------------------------------
 
   const setValues = useCallback(
-    (newValues: Partial<Values>) => {
+    (newValues: Partial<Values & Adhoc>) => {
       let newPlanEntry = planEntry
       let newProviderEntry = providerEntry
       let newUseCaseEntry = useCaseEntry
 
       let {
+        storageCameFrom: newStorageCameFrom,
         plan: newPlan,
         provider: newProvider,
         region: newRegion,
@@ -1070,6 +1082,10 @@ export default function PricingV2ContextProvider({
         }
       }
 
+      if (newStorageCameFrom !== undefined) {
+        setStorageCameFrom(newStorageCameFrom)
+      }
+
       if (newPlanEntry !== undefined && newPlanEntry !== planEntry) {
         setPlan(newPlanEntry.slug)
       }
@@ -1172,6 +1188,8 @@ export default function PricingV2ContextProvider({
       planEntry,
       providerEntry,
 
+      storageCameFrom,
+
       plan,
       provider,
       region,
@@ -1211,6 +1229,9 @@ export default function PricingV2ContextProvider({
         getPlanPricingData,
         getPlanPricingConfig,
         getUseCaseCompute,
+
+        // Ad-hoc
+        storageCameFrom,
 
         // User values
         plan,

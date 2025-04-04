@@ -131,7 +131,7 @@ export default function Estimator() {
             open={computeOpen}
             onOpenClose={setComputeOpen}>
             <div className='space-y-8'>
-              <StorageSelector />
+              <StorageSelector cameFrom='compute' />
               <ComputeSelector />
             </div>
           </FieldGroupAccordion>
