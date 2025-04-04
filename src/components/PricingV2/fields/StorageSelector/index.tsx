@@ -59,19 +59,17 @@ export default function StorageSelector() {
           />
         </div>
       </div>
-      <div className='mt-3 text-xs text-slate-300'>
-        {!storageCompressed && (
-          <>
-            {storage && (
-              <p className='flex items-center gap-x-2 text-[#CCFFD0]'>
-                <CheckIcon className='h-4 w-4' />
-                {bytesToHumanReadable(humanReadableToBytes(storage) / 10)} after
-                compression
-              </p>
-            )}
-          </>
-        )}
-      </div>
+      {!storageCompressed && (
+        <>
+          {storage && (
+            <p className='flex items-center gap-x-2 text-[#CCFFD0] text-xs mt-3'>
+              <CheckIcon className='h-4 w-4' />
+              {bytesToHumanReadable(humanReadableToBytes(storage) / 10)} after
+              compression
+            </p>
+          )}
+        </>
+      )}
     </div>
   )
 }
