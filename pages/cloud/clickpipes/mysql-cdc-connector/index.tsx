@@ -15,7 +15,7 @@ import {
 } from '../../../../lib/galaxy/galaxy'
 import { getCommonProps } from '../../../../lib/utils/getCommonProps'
 import { CommonProps } from '../../../../types/homepage'
-import imageAddPostgresSource from './assets/add-mysql-source.png'
+import imageAddMysqlSource from './assets/add-mysql-source.png'
 import imageCustomizeIncomingData from './assets/customize-incoming-data.png'
 import imageEditPipeInPlace from './assets/edit-pipe-in-place.png'
 import imageMonitorPipe from './assets/monitor-pipe.png'
@@ -85,40 +85,37 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       {/* Cards */}
       <div className='relative z-10 bg-neutral-700 py-20'>
         <div className='section-container'>
-          <div className='-mx-4 flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'>
-            <div className='p-4 lg:w-1/3'>
+          <div className='-mx-4 flex flex-col lg:flex-row lg:flex-wrap lg:justify-center lg:max-w-4xl lg:mx-auto'>
+            <div className='p-4 lg:w-1/2'>
               <LinedIconCard
                 icon='guage'
                 title='Blazing-fast'
                 text='Achieve 10x faster initial loads with parallel snapshotting, transferring TBs in hours, and experience continuous replication latency of just a few seconds.'
+                className='bg-neutral-900/80'
               />
             </div>
-            <div className='p-4 lg:w-1/3'>
+            <div className='p-4 lg:w-1/2'>
               <LinedIconCard
                 icon='sparkles'
                 title='Simple'
-                text='Easily replicate your Postgres databases to ClickHouse Cloud in just a few clicks and few minutes!'
+                text='Easily replicate your MySQL databases to ClickHouse Cloud in just a few clicks and few minutes!'
+                className='bg-neutral-900/80'
               />
             </div>
-            <div className='p-4 lg:w-1/3'>
+            <div className='p-4 lg:w-1/2'>
               <LinedIconCard
                 icon='maximize'
                 title='Flexible'
-                text='Connect any Postgres database, hosted or on-prem, including RDS, Azure Flexible Server, CloudSQL, Supabase, Neon, Crunchy Bridge, Tembo, and more.'
+                text='Connect any MySQL database, hosted or on-prem, including RDS, Azure Flexible Server, CloudSQL, Supabase, Neon, Crunchy Bridge, Tembo, and more.'
+                className='bg-neutral-900/80'
               />
             </div>
-            <div className='p-4 lg:w-1/3'>
+            <div className='p-4 lg:w-1/2'>
               <LinedIconCard
                 icon='tada'
                 title='Feature rich'
-                text='This connector is purpose-built for Postgres and ClickHouse, supporting features like schema changes, partitioned tables, TOAST columns, customizable ordering keys, and more.'
-              />
-            </div>
-            <div className='p-4 lg:w-1/3'>
-              <LinedIconCard
-                icon='peerdb'
-                title='Powered by PeerDB'
-                text='The connector is powered by PeerDB, a leading open-source Postgres CDC provider, which ClickHouse acquired a few months ago. Since PeerDB is open source, there’s no vendor lock-in!'
+                text='This connector is purpose-built for MySQL and ClickHouse, supporting features like X, Y, Z.'
+                className='bg-neutral-900/80'
               />
             </div>
           </div>
@@ -138,7 +135,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         <div className='section-container relative z-10 space-y-16 lg:space-y-28 lg:pt-6'>
           <FeatureSection
             image={{
-              src: imageAddPostgresSource,
+              src: imageAddMysqlSource,
               width: 1036 / 2,
               height: 777 / 2,
               alt: 'Add MySQL Source'

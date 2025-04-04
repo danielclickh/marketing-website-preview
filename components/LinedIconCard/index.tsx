@@ -29,6 +29,7 @@ type Icon = Icons | Omit<ImageProps, 'width' | 'height'>
 
 interface BaseLinedIconCard {
   icon: Icon
+  className?: string
   link?:
     | string
     | Omit<
@@ -88,10 +89,11 @@ export default function LinedIconCard({
   children,
   title,
   text,
-  link
+  link,
+  className = ''
 }: LinedIconCardProps) {
   return (
-    <CUICard className='relative overflow-hidden p-8'>
+    <CUICard className={`relative overflow-hidden p-8 ${className}`}>
       <div className='absolute left-0 right-0 top-0 h-1 bg-primary-300' />
       <CUICard.Body className='space-y-4 text-center'>
         {typeof icon === 'object' && <Icon {...icon} />}
