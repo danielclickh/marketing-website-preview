@@ -52,9 +52,11 @@ export default function DisplayPrice() {
     return () => window.clearTimeout(timer)
   }, [totalPriceRange, promoteContact])
 
-  const isValidPrice = useMemo(() => {
+  const isValidPriceRange = useMemo(() => {
     return (
-      totalPriceRange && totalPriceRange.filter((value) => value > 0).length > 0
+      totalPriceRange &&
+      totalPriceRange.filter((value) => Number(value.toFixed(2)) >= 0.01)
+        .length > 0
     )
   }, [totalPriceRange])
 
@@ -63,9 +65,9 @@ export default function DisplayPrice() {
       ref={priceRef}
       className='block w-full overflow-hidden whitespace-nowrap'>
       {promoteContact && <>Contact sales</>}
-      {!promoteContact && !isValidPrice && '--'}
+      {!promoteContact && !isValidPriceRange && '--'}
       {!promoteContact &&
-        isValidPrice &&
+        isValidPriceRange &&
         totalPriceRange &&
         totalPriceRange.map((price, priceIndex, allPrices) => {
           return (
