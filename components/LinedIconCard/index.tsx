@@ -1,4 +1,3 @@
-import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 import Image, { ImageProps } from 'next/image'
 import Link, { LinkProps } from 'next/link'
 import React from 'react'
@@ -6,6 +5,7 @@ import { CUICard } from '../ClickUI'
 import { SuiText, SuiTitle } from '../sui'
 import book from './assets/book.svg'
 import cloudTick from './assets/cloud-tick.svg'
+import enterprise from './assets/enterprise.svg'
 import filePy from './assets/file-py.svg'
 import guage from './assets/guage.svg'
 import listSearch from './assets/list-search.svg'
@@ -14,16 +14,20 @@ import peerdb from './assets/peerdb.svg'
 import sparkles from './assets/sparkles.svg'
 import tada from './assets/tada.svg'
 
-type Icons =
-  | 'guage'
-  | 'sparkles'
-  | 'maximize'
-  | 'tada'
-  | 'cloud-tick'
-  | 'peerdb'
-  | 'book'
-  | 'list-search'
-  | 'file-py'
+const icons = {
+  guage,
+  sparkles,
+  maximize,
+  tada,
+  'cloud-tick': cloudTick,
+  peerdb,
+  book,
+  'list-search': listSearch,
+  'file-py': filePy,
+  enterprise
+}
+
+type Icons = keyof typeof icons
 
 type Icon = Icons | Omit<ImageProps, 'width' | 'height'>
 
@@ -60,18 +64,6 @@ export type LinedIconCardProps =
   | LinedIconCardChildren
   | LinedIconCardTitle
   | LinedIconCardText
-
-const icons: Record<Icons, StaticImport> = {
-  guage,
-  sparkles,
-  maximize,
-  tada,
-  'cloud-tick': cloudTick,
-  peerdb,
-  book,
-  'list-search': listSearch,
-  'file-py': filePy
-}
 
 function Icon(props: Omit<ImageProps, 'width' | 'height' | 'className'>) {
   return (

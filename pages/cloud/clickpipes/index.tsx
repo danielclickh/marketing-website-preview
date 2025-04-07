@@ -95,7 +95,7 @@ export default function ClickHouseServerPage({
                       height: 49
                     }}>
                     Blazing-fast MySQL to ClickHouse CDC with our new ClickPipe
-                    connector — now in Public Beta.{' '}
+                    connector — now in Private Preview.{' '}
                     <span className='text-primary-300 group-hover:underline'>
                       Learn&nbsp;more
                     </span>
@@ -263,12 +263,14 @@ export default function ClickHouseServerPage({
               <div className='flex justify-center mb-10'>
                 <CdcAnimation
                   logo={
-                    <Image
-                      src='/images/cloud/integrations/mysql.svg'
-                      width={64}
-                      height={64}
-                      alt='MySQL'
-                    />
+                    <div className='aspect-square flex items-center justify-center border border-neutral-700 rounded-lg p-3 -mr-4'>
+                      <Image
+                        src='/images/cloud/integrations/mysql.svg'
+                        width={64}
+                        height={64}
+                        alt='MySQL'
+                      />
+                    </div>
                   }
                 />
               </div>

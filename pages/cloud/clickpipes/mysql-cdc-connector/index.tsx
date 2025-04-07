@@ -45,7 +45,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       <div className='relative my-10 lg:mb-20'>
         <div className='section-container relative z-10 lg:py-20'>
           <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
-            <div className='w-full flex-1 space-y-6 lg:max-w-2xl'>
+            <div className='w-full flex-1 space-y-6 lg:max-w-2xl lg:pr-8'>
               <h4 className='text-base font-semibold text-primary-300'>
                 <Link href='/cloud'>Cloud</Link> / Data ingestion
               </h4>
@@ -53,21 +53,23 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 MySQL CDC connector in ClickPipes is now in Private Preview
               </SuiTitle>
               <SuiText size='lg' className='text-neutral-200'>
-                Replicate your MySQL data to ClickHouse Cloud in just a few
-                clicks for blazing fast analytics.
+                Seamlessly replicate your MySQL data to ClickHouse Cloud with
+                just a few clicks. Get real-time analytics without the
+                complexity or cost of external ETL tools.
               </SuiText>
               <SuiText size='lg' className='text-neutral-200'>
-                Eliminates the need for external ETL tools that are expensive,
-                slow and not purpose built for MySQL. Join the waitlist now.
+                Join the waitlist today!
               </SuiText>
               <CdcAnimation
                 logo={
-                  <Image
-                    src='/images/cloud/integrations/mysql.svg'
-                    width={64}
-                    height={64}
-                    alt='MySQL'
-                  />
+                  <div className='aspect-square flex items-center justify-center border border-neutral-700 rounded-lg p-3 -mr-4'>
+                    <Image
+                      src='/images/cloud/integrations/mysql.svg'
+                      width={64}
+                      height={64}
+                      alt='MySQL'
+                    />
+                  </div>
                 }
               />
             </div>
@@ -90,23 +92,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               <LinedIconCard
                 icon='guage'
                 title='Blazing-fast'
-                text='Achieve 10x faster initial loads with parallel snapshotting, transferring TBs in hours, and experience continuous replication latency of just a few seconds.'
-                className='bg-neutral-900/80'
-              />
-            </div>
-            <div className='p-4 lg:w-1/2'>
-              <LinedIconCard
-                icon='sparkles'
-                title='Simple'
-                text='Easily replicate your MySQL databases to ClickHouse Cloud in just a few clicks and few minutes!'
-                className='bg-neutral-900/80'
-              />
-            </div>
-            <div className='p-4 lg:w-1/2'>
-              <LinedIconCard
-                icon='maximize'
-                title='Flexible'
-                text='Connect any MySQL database, hosted or on-prem, including RDS, Azure Flexible Server, CloudSQL, Supabase, Neon, Crunchy Bridge, Tembo, and more.'
+                text='Blazing-fast performance with few seconds CDC latency on ClickHouse. Optimized with chunking, parallel ingest through replicas, and future-ready for parallel snapshotting.'
                 className='bg-neutral-900/80'
               />
             </div>
@@ -114,7 +100,23 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               <LinedIconCard
                 icon='tada'
                 title='Feature rich'
-                text='This connector is purpose-built for MySQL and ClickHouse, supporting features like X, Y, Z.'
+                text='Designed specifically for MySQL and ClickHouse, with support for schema changes, rich data types incl. vectors, POS and GTID replication, edit pipes, parallel ingest via replicas and more.'
+                className='bg-neutral-900/80'
+              />
+            </div>
+            <div className='p-4 lg:w-1/2'>
+              <LinedIconCard
+                icon='sparkles'
+                title='Simple'
+                text='Easily replicate your MySQL databases to ClickHouse Cloud in just a few clicks and few minutes. Skip complex pipelines with multiple moving parts and failure points.'
+                className='bg-neutral-900/80'
+              />
+            </div>
+            <div className='p-4 lg:w-1/2'>
+              <LinedIconCard
+                icon='enterprise'
+                title='Enterprise-grade'
+                text='Built to support enterprise-grade workloads with TBs of data, fully secured through SSH tunneling, Private Link, and IP-based access controls.'
                 className='bg-neutral-900/80'
               />
             </div>
@@ -147,6 +149,9 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               MySQL can be running anywhere - cloud or on-prem
             </TickItem>
             <TickItem>Secure the connection with SSH tunneling</TickItem>
+            <TickItem>
+              Multiple replication modes: one-time, CDC, or both.
+            </TickItem>
           </FeatureSection>
           <hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />
           <FeatureSection
@@ -175,9 +180,11 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
             <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
               Monitor your pipe
             </SuiTitle>
-            <TickItem>Number of rows per table / GB ingested</TickItem>
-            <TickItem>Native MySQL metrics, including slot size</TickItem>
-            <TickItem>Alerts for potential issues</TickItem>
+            <TickItem>
+              Track throughput (rows or GB ingested) and latency over time
+            </TickItem>
+            <TickItem>Detailed table-level metrics</TickItem>
+            <TickItem>Inbuilt logging for full visibility</TickItem>
           </FeatureSection>
           <hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />
           <FeatureSection
@@ -202,14 +209,14 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
 
       {/* Footer form */}
       <DotsContainer className='my-20'>
-        <div className='mb-4 space-y-4 text-center lg:mb-6'>
-          <SuiTitle type='h2'>Get early access</SuiTitle>
-          <SuiText className='opacity-70'>
-            Join the waitlist to get access to the MySQL CDC connector
-          </SuiText>
-        </div>
         <div className='mx-auto w-full lg:max-w-xl'>
           <CUICard className='bg-neutral-900/80'>
+            <div className='my-4 space-y-4 text-center lg:mt-6 lg:mb-4'>
+              <SuiTitle type='h2'>Get early access</SuiTitle>
+              <SuiText className='opacity-70'>
+                Join the waitlist to get access to the MySQL CDC connector
+              </SuiText>
+            </div>
             <CUICard.Body className='p-4 lg:p-6'>
               <CdcWaitlistForm formId='1365' />
             </CUICard.Body>

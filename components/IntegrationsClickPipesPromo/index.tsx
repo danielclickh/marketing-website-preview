@@ -81,7 +81,7 @@ export default function IntegrationsClickPipesPromo() {
             height: 49
           }}>
           Blazing-fast MySQL to ClickHouse CDC with our new ClickPipe connector
-          — now in Public Beta.{' '}
+          — now in Private Preview.{' '}
           <span className='text-primary-300 group-hover:underline'>
             Learn&nbsp;more
           </span>
