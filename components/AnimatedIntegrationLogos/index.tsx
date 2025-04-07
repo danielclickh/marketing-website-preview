@@ -115,8 +115,8 @@ export default function AnimatedIntegrationLogos({ play }: { play: boolean }) {
       />
       <Tile
         logo={{
-          src: '/images/cloud/integrations/mysql.svg',
-          alt: 'MySQL'
+          src: '/images/cloud/integrations/go.svg',
+          alt: 'Go Lang'
         }}
         fade={play}
       />
@@ -166,12 +166,13 @@ export default function AnimatedIntegrationLogos({ play }: { play: boolean }) {
       />
 
       {/* Row 4 */}
+
       <Tile
         logo={{
-          src: '/images/cloud/integrations/go.svg',
-          alt: 'Go Lang'
+          src: '/images/cloud/integrations/mysql.svg',
+          alt: 'MySQL'
         }}
-        fade={play}
+        fade={false}
       />
       <Tile
         logo={{

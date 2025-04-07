@@ -11,25 +11,34 @@ export default function Lines({ className = '', ...props }: LinesProps) {
         height='755'
         viewBox='0 0 540 755'>
         <g fill='none' fillRule='evenodd' strokeWidth='2'>
+          {/* Transparent square shape to retain SVG size when copying into editor  */}
+          <path fill='none' d='M0 0h540v755H0z' />
+
+          {/* Static lines */}
           <g stroke='#000'>
-            <path d='M269.9 755V252h147.5v-89.63M261.1 755V273h-33.5V68.5' />
-            <path d='M252.3 755V287H130.96v-30.3' />
-            <path d='M243.5 755V308.5H82.74V162.37M278.7 755V298.5h43v-39' />
-            <path d='M287.5 755V383.5h130v-29' />
-            <path d='M296.5 755V395.35h208.66V68.5' />
+            <path d='M270.16 755.5v-503h141.95v-89.63M261.36 755.5v-482h-33.5V69' />
+            <path d='M252.56 755.5v-468H131.22v-30.3' />
+            <path d='M243.76 755.5V309H34.86V68.92m244.1 686.58V299l37.6-.58v-39' />
+            <path d='M287.76 755.5V384h124.35v-32.63' />
+            <path d='M296.76 755.5V395.85h208.66V69m-271 686.5V395.85H34.85v-44.48' />
           </g>
+
+          {/* Animated lines */}
           <g stroke='#FAFF69'>
             <AnimatedPath
               duration='3s'
-              d='M269.9 755V252h147.5v-89.63M261.1 755V273h-33.5V68.5'
+              d='M270.16 755.5v-503h141.95v-89.63M261.36 755.5v-482h-33.5V69'
             />
-            <AnimatedPath duration='3s' d='M252.3 755V287H130.96v-30.3' />
+            <AnimatedPath duration='4s' d='M252.56 755.5v-468H131.22v-30.3' />
+            <AnimatedPath
+              duration='5s'
+              d='M243.76 755.5V309H34.86V68.92m244.1 686.58V299l37.6-.58v-39'
+            />
+            <AnimatedPath duration='3s' d='M287.76 755.5V384h124.35v-32.63' />
             <AnimatedPath
               duration='4s'
-              d='M243.5 755V308.5H82.74V162.37M278.7 755V298.5h43v-39'
+              d='M296.76 755.5V395.85h208.66V69m-271 686.5V395.85H34.85v-44.48'
             />
-            <AnimatedPath duration='4s' d='M287.5 755V383.5h130v-29' />
-            <AnimatedPath duration='3s' d='M296.5 755V395.35h208.66V68.5' />
           </g>
         </g>
       </svg>
