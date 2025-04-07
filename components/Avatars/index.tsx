@@ -7,7 +7,9 @@ export interface AvatarsProps {
 
 export default function Avatars({ avatars }: AvatarsProps) {
   // Covers an edge case where Strapi would return nothing
-  avatars = avatars.filter((avatar) => !!avatar?.id)
+  avatars = Array.isArray(avatars)
+    ? avatars.filter((avatar) => !!avatar?.id)
+    : []
   return (
     <>
       {avatars.length > 0 && (
