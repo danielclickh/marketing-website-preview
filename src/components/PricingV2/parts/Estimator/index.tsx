@@ -228,8 +228,8 @@ export default function Estimator({ before }: EstimatorProps) {
                     backupFrequency: 24,
                     backupRetention: 1,
                     estimateBackup: true,
-                    fullBackup: null,
-                    incrementalBackup: null
+                    fullBackup: undefined,
+                    incrementalBackup: undefined
                   })
 
                   // Close other accordions

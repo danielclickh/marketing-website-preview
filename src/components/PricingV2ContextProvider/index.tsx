@@ -952,6 +952,15 @@ export default function PricingV2ContextProvider({
         }
       }
 
+      // Limit backup retention to 1-30 days
+      if (newBackupRetention !== undefined) {
+        if (newBackupRetention !== null) {
+          newBackupRetention = Math.max(1, Math.min(30, newBackupRetention))
+        } else {
+          newBackupRetention = null
+        }
+      }
+
       // Set default backup values
       if (newStorage) {
         let storageBytes = humanReadableToBytes(newStorage)
@@ -964,19 +973,19 @@ export default function PricingV2ContextProvider({
           }
 
           // Set default incremental value
-          if (newFullBackup === undefined && !fullBackup) {
+          if (newFullBackup === undefined) {
             newFullBackup = bytesToHumanReadable(storageBytes)
           }
 
           // Set default incremental value
-          if (newIncrementalBackup === undefined && !incrementalBackup) {
+          if (newIncrementalBackup === undefined) {
             newIncrementalBackup = bytesToHumanReadable(storageBytes / 100)
           }
         }
       }
 
       // Validate full backup
-      if (newFullBackup !== undefined || newEstimateBackup) {
+      if (newFullBackup !== undefined) {
         // Set default values
         newFullBackup = newFullBackup ?? newStorage ?? storage ?? null
 
@@ -993,7 +1002,7 @@ export default function PricingV2ContextProvider({
       }
 
       // Validate incremental backup
-      if (newIncrementalBackup !== undefined || newEstimateBackup) {
+      if (newIncrementalBackup !== undefined) {
         const incrementalBackupInPB = newIncrementalBackup
           ? humanReadableTo(newIncrementalBackup, 'PB')
           : null
@@ -1004,15 +1013,6 @@ export default function PricingV2ContextProvider({
           newIncrementalBackup = '999PB'
         } else if (incrementalBackupInPB < 0) {
           newIncrementalBackup = null
-        }
-      }
-
-      // Limit backup retention to 1-30 days
-      if (newBackupRetention !== undefined) {
-        if (newBackupRetention !== null) {
-          newBackupRetention = Math.max(1, Math.min(30, newBackupRetention))
-        } else {
-          newBackupRetention = null
         }
       }
 
