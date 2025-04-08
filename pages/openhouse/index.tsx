@@ -66,14 +66,6 @@ export default function Page({ seo, footerData }: CommonProps) {
           {/* Header */}
           <OpenHouseHeader>
             <OpenHouseButton
-              href='https://sessionize.com/clickhouse-user-conference-2025/'
-              target='_blank'
-              variant='light'
-              size='sm'
-              className='hidden sm:inline-block'>
-              Apply to speak
-            </OpenHouseButton>
-            <OpenHouseButton
               href='/openhouse/register'
               variant='primary'
               size='sm'>
@@ -431,14 +423,6 @@ export default function Page({ seo, footerData }: CommonProps) {
 
               <div className='mt-14 flex flex-col-reverse md:flex-row justify-center gap-4'>
                 <OpenHouseButton
-                  href='https://sessionize.com/clickhouse-user-conference-2025/'
-                  target='_blank'
-                  variant='light'
-                  size='lg'
-                  className='min-w-48 border !border-neutral-750 hover:!text-white hover:!bg-neutral-750'>
-                  Apply to speak
-                </OpenHouseButton>
-                <OpenHouseButton
                   href='#'
                   onClick={(event) => {
                     event.preventDefault()
@@ -587,14 +571,6 @@ export default function Page({ seo, footerData }: CommonProps) {
                   </p>
                 </div>
                 <div className='flex flex-col sm:flex-row gap-4 items-center flex-1 w-full lg:w-auto'>
-                  <OpenHouseButton
-                    href='https://sessionize.com/clickhouse-user-conference-2025/'
-                    target='_blank'
-                    variant='light'
-                    size='lg'
-                    className='flex-1 w-full sm:w-auto'>
-                    Apply to speak
-                  </OpenHouseButton>
                   <OpenHouseButton
                     href='/openhouse/register'
                     variant='primary'
