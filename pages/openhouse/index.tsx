@@ -570,12 +570,12 @@ export default function Page({ seo, footerData }: CommonProps) {
                     </Link>
                   </p>
                 </div>
-                <div className='flex flex-col sm:flex-row gap-4 items-center flex-1 w-full lg:w-auto'>
+                <div className='flex-1 w-full lg:w-auto text-center'>
                   <OpenHouseButton
                     href='/openhouse/register'
                     variant='primary'
                     size='lg'
-                    className='flex-1 w-full sm:w-auto'>
+                    className='flex-1 w-full sm:mx-auto sm:w-auto sm:min-w-48'>
                     Register
                   </OpenHouseButton>
                 </div>
