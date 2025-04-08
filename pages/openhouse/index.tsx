@@ -1,6 +1,8 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
+import { Fragment, useState } from 'react'
 import 'swiper/css'
 import FontSohne from '../../components/FontSohne'
 import FontSohneBreit from '../../components/FontSohneBreit'
@@ -55,6 +57,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
   }
 
 export default function Page({ seo, footerData }: CommonProps) {
+  const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
   return (
     <>
       {seo && <SeoContainer {...seo} />}
@@ -288,7 +291,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                 We have an exciting line-up of speakers, and more announcements
                 on the way
               </p>
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 -mx-2 -my-4'>
                 {(
                   [
                     {
@@ -388,31 +391,64 @@ export default function Page({ seo, footerData }: CommonProps) {
                   }>
                 ).map((profile, profileIndex) => {
                   return (
-                    <div key={profileIndex}>
-                      <div className='group/speaker relative mb-4 bg-[#EFEFEF]'>
-                        <Image
-                          src={profile.image}
-                          alt={profile.name}
-                          width={353}
-                          height={505}
-                          className='w-full h-auto max-w-none relative z-10 transition grayscale group-hover/speaker:grayscale-0'
-                        />
-                      </div>
-                      <h3 className='text-2xl'>{profile.name}</h3>
-                      <p className='text-lg'>{profile.title}</p>
-                    </div>
+                    <Fragment key={profileIndex}>
+                      <AnimatePresence>
+                        {(displayAllSpeakers || profileIndex < 8) && (
+                          <motion.div
+                            variants={{
+                              closed: { opacity: 0, height: 0 },
+                              open: { opacity: 1, height: 'auto' }
+                            }}
+                            initial='closed'
+                            animate='open'
+                            exit='closed'
+                            transition={{
+                              type: 'spring',
+                              bounce: 0,
+                              duration: 0.5
+                            }}
+                            className='group/speaker'>
+                            <div className='px-2 py-4'>
+                              <div className='relative aspect-square mb-4 bg-[#EFEFEF]'>
+                                <Image
+                                  src={profile.image}
+                                  alt={profile.name}
+                                  width={353}
+                                  height={505}
+                                  className='w-full h-full max-w-none absolute inset-0 z-10 transition grayscale group-hover/speaker:grayscale-0'
+                                />
+                              </div>
+                              <h3 className='text-2xl'>{profile.name}</h3>
+                              <p className='text-lg'>{profile.title}</p>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </Fragment>
                   )
                 })}
               </div>
 
-              <div className='mt-14 text-center'>
+              <div className='mt-14 flex flex-col-reverse md:flex-row justify-center gap-4'>
                 <OpenHouseButton
                   href='https://sessionize.com/clickhouse-user-conference-2025/'
                   target='_blank'
+                  variant='light'
+                  size='lg'
+                  className='min-w-48 border !border-neutral-750 hover:!text-white hover:!bg-neutral-750'>
+                  Apply to speak
+                </OpenHouseButton>
+                <OpenHouseButton
+                  href='#'
+                  onClick={(event) => {
+                    event.preventDefault()
+                    setDisplayAllSpeakers((old) => !old)
+                  }}
                   variant='dark'
                   size='lg'
                   className='min-w-48'>
-                  Apply to speak
+                  {!displayAllSpeakers && 'View all speakers'}
+                  {displayAllSpeakers && 'Collapse all speakers'}
                 </OpenHouseButton>
               </div>
             </div>
